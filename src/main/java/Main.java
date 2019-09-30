@@ -16,42 +16,115 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSol
 import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
 import com.google.gson.Gson;
+import org.apache.commons.cli.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
-    private static final String SRC_PATH = "/Users/efritz/Downloads/test/Java"; // TODO - prompt
-
     private static int nextId = 1;
     private static Map<Range, DefinitionMeta> defs = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
+        Arguments arguments = parseArguments(args);
+
+        try {
+            index(arguments);
+        } finally {
+            if (arguments.mustClose) {
+                arguments.printer.close();
+            }
+        }
+    }
+
+    private static Arguments parseArguments(String[] args) throws FileNotFoundException{
+        Options options = new Options();
+        // TODO - version
+        // TODO - description (lsif-java is an LSIF indexer for Java.)
+
+        Option debugOption = new Option("", "debug", false, "Display debug information.");
+        options.addOption(debugOption);
+
+        Option verboseOption = new Option("", "verbose", false, "Display verbose information.");
+        options.addOption(verboseOption);
+
+        Option projectRootOption = new Option("", "projectRoot", true, "Specifies the project root. Defaults to the current working directory.");
+        options.addOption(projectRootOption);
+
+        Option noContentsOption = new Option("", "noContents", false, "File contents will not be embedded into the dump.");
+        options.addOption(noContentsOption);
+
+        Option outOption = new Option("", "out", true, "The output file the dump is save to.");
+        options.addOption(outOption);
+
+        Option stdoutOption = new Option("", "stdout", false, "Writes the dump to stdout.");
+        options.addOption(stdoutOption);
+
+        CommandLineParser parser = new DefaultParser();
+        HelpFormatter formatter = new HelpFormatter();
+        CommandLine cmd;
+
+        try {
+            cmd = parser.parse(options, args);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+            formatter.printHelp("utility-name", options);
+            System.exit(1);
+            return null;
+        }
+
+        boolean debug = cmd.hasOption("debug");
+        boolean verbose = cmd.hasOption("verbose");
+        String projectRoot = cmd.getOptionValue("projectRoot", ".");
+        boolean noContents = cmd.hasOption("noContents");
+        String outFile = cmd.getOptionValue("out");
+        boolean stdout = cmd.hasOption("stdout");
+
+        if (outFile == null && !stdout) {
+            System.err.println("either an output file using --out or --stdout must be specified");
+            System.exit(1);
+        }
+
+        if (stdout && (verbose || debug)) {
+            System.err.println("debug and verbose options cannot be enabled with --stdout");
+            System.exit(1);
+        }
+
+        return new Arguments(
+                projectRoot,
+                noContents,
+                stdout ? new PrintWriter(System.out) : new PrintWriter(new File(outFile)),
+                !stdout
+        );
+    }
+
+    private static void index(Arguments arguments) throws IOException {
         emitVertex("metadata", Map.of(
                 "version", "0.4.0",
                 "positionEncoding", "utf-16",
-                "projectRoot", SRC_PATH
+                "projectRoot", arguments.projectRoot
         ));
 
         String projectId = emitVertex("project", Map.of("kind", "java"));
 
-        List<String> files = Files.walk(Paths.get(SRC_PATH))
+        List<String> files = Files.walk(Paths.get(arguments.projectRoot))
                 .map(x -> x.toString())
                 .filter(f -> f.endsWith(".java"))
                 .collect(Collectors.toList());
 
         for (String pathname : files) {
-            emitDocument(pathname, projectId);
+            emitDocument(arguments.projectRoot, pathname, projectId);
         }
     }
 
-    private static void emitDocument(String pathname, String projectId) throws FileNotFoundException {
-        final JavaSymbolSolver symbolSolver = new JavaSymbolSolver(getTypeSolver());
+    private static void emitDocument(String projectRoot, String pathname, String projectId) throws FileNotFoundException {
+        final JavaSymbolSolver symbolSolver = new JavaSymbolSolver(getTypeSolver(projectRoot));
         StaticJavaParser.getConfiguration().setSymbolResolver(symbolSolver);
 
         final String documentId = emitVertex("document", Map.of(
@@ -103,9 +176,9 @@ public class Main {
         emitEdge("contains", Map.of("outV", documentId, "inVs", allRangeIds));
     }
 
-    private static TypeSolver getTypeSolver() {
+    private static TypeSolver getTypeSolver(String projectRoot) {
         CombinedTypeSolver typeSolver = new CombinedTypeSolver();
-        typeSolver.add(new JavaParserTypeSolver(SRC_PATH));
+        typeSolver.add(new JavaParserTypeSolver(projectRoot));
         typeSolver.add(new ReflectionTypeSolver());
         return typeSolver;
     }
@@ -241,6 +314,20 @@ public class Main {
         String x = gson.toJson(allArgs);
         System.out.println(x);
         return id;
+    }
+
+    private static class Arguments {
+        public final String projectRoot;
+        public final boolean noContents;
+        public final PrintWriter printer;
+        public final boolean mustClose;
+
+        public Arguments(String projectRoot, boolean noContents, PrintWriter printer, boolean mustClose) {
+            this.projectRoot = projectRoot;
+            this.noContents = noContents;
+            this.printer = printer;
+            this.mustClose = mustClose;
+        }
     }
 
     private static class DefinitionMeta {
