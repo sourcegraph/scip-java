@@ -46,7 +46,7 @@ public class DocumentIndexer {
 
         final String documentId = emitter.emitVertex("document", Map.of(
                 "languageId", "java",
-                "uri", pathname,
+                "uri", String.format("file://%s", Paths.get(pathname).toAbsolutePath().toString()),
                 "contents", "unimplemented" // TODO - extract text
         ));
 

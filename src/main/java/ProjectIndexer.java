@@ -19,10 +19,10 @@ public class ProjectIndexer {
     }
 
     public void index() throws IOException {
-        emitter.emitVertex("metadata", Map.of(
+        emitter.emitVertex("metaData", Map.of(
                 "version", "0.4.0",
                 "positionEncoding", "utf-16",
-                "projectRoot", arguments.projectRoot
+                "projectRoot", String.format("file://%s", Paths.get(arguments.projectRoot).toAbsolutePath().toString())
         ));
 
         String projectId = emitter.emitVertex("project", Map.of(
