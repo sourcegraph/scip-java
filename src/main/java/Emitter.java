@@ -19,6 +19,10 @@ public class Emitter {
         return union;
     }
 
+    public int getNumElements() {
+        return nextId;
+    }
+
     public String emitVertex(String labelName, Map<String, Object> args) {
         return emit("vertex", labelName, args);
     }

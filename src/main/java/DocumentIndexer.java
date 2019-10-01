@@ -18,12 +18,15 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeS
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class DocumentIndexer {
+    public int numDefinitions;
+
     private String projectRoot;
     private String pathname;
     private String projectId;
@@ -82,6 +85,7 @@ public class DocumentIndexer {
         for (DefinitionMeta meta : defs.values()) {
             linkUses(meta, documentId);
 
+            numDefinitions++;
             allRangeIds.add(meta.rangeId);
             allRangeIds.addAll(meta.referenceRangeIds);
         }

@@ -10,12 +10,32 @@ public class Main {
                 ? new PrintWriter(System.out)
                 : new PrintWriter(new File(arguments.outFile));
 
+        Emitter emitter = new Emitter(writer);
+        ProjectIndexer indexer = new ProjectIndexer(arguments, emitter);
+
+        long start = System.nanoTime();
+
         try {
-            new ProjectIndexer(arguments, new Emitter(writer)).index();
+            indexer.index();
         } finally {
+            writer.flush();
+
             if (!arguments.stdout) {
                 writer.close();
             }
+        }
+
+        if (!arguments.stdout) {
+            long elapsed = System.nanoTime() - start;
+
+            System.out.printf(
+                    "%d file(s), %d def(s), %d element(s)\n",
+                    indexer.numFiles,
+                    indexer.numDefinitions,
+                    emitter.getNumElements()
+            );
+
+            System.out.printf("Processed in %.0fms", elapsed / 1e6);
         }
     }
 }

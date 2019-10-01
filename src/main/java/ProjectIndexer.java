@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ProjectIndexer {
+    public int numPackages;
+    public int numFiles;
+    public int numDefinitions;
+
     private Arguments arguments;
     private Emitter emitter;
 
@@ -31,7 +35,11 @@ public class ProjectIndexer {
                 .collect(Collectors.toList());
 
         for (String pathname : files) {
-            new DocumentIndexer(arguments.projectRoot, pathname, projectId, emitter).index();
+            DocumentIndexer indexer = new DocumentIndexer(arguments.projectRoot, pathname, projectId, emitter);
+            indexer.index();
+
+            numFiles++;
+            numDefinitions += indexer.numDefinitions;
         }
     }
 }
