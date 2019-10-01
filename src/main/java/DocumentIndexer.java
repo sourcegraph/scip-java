@@ -124,11 +124,14 @@ public class DocumentIndexer {
             return;
         }
 
-
-        String hoverId = emitter.emitVertex("hoverResult", Map.of("result", Map.of(
-                "language", "java",
-                "value", n.toString() // TODO - vet output
-        )));
+        String hoverId = emitter.emitVertex("hoverResult", Map.of(
+                "result", Map.of(
+                        "contents", Map.of(
+                                "language", "java",
+                                "value", n.toString() // TODO - vet output
+                        )
+                )
+        ));
 
         String resultSetId = emitter.emitVertex("resultSet", Map.of());
         emitter.emitEdge("textDocument/hover", Map.of("outV", resultSetId, "inV", hoverId));
