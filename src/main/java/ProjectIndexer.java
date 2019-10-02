@@ -34,6 +34,7 @@ public class ProjectIndexer {
         List<String> files = createFileStream()
                 .map(x -> x.toString())
                 .filter(f -> f.endsWith(".java"))
+                .sorted()
                 .collect(Collectors.toList());
 
         Map<String, DocumentIndexer> indexers = new HashMap<>();
