@@ -152,7 +152,7 @@ public class DocumentIndexer {
         @Override
         public void visit(final MethodCallExpr n, final Void arg) {
             super.visit(n, arg);
-            emitUse(n, ResolvedMethodDeclaration.class);
+            emitUse(n);
         }
 
         @Override
@@ -170,7 +170,7 @@ public class DocumentIndexer {
         @Override
         public void visit(final NameExpr n, final Void arg) {
             super.visit(n, arg);
-            emitUse(n, ResolvedValueDeclaration.class);
+            emitUse(n);
         }
 
         @Override
@@ -208,10 +208,10 @@ public class DocumentIndexer {
             definitions.put(range, new DefinitionMeta(rangeId, resultSetId)); // + contents?
         }
 
-        private <T extends ResolvedDeclaration> void emitUse(Node n, Class<T> cls) {
-            T definition;
+        private void emitUse(Node n) {
+            ResolvedDeclaration definition;
             try {
-                definition = symbolSolver.resolveDeclaration(n, cls);
+                definition = symbolSolver.resolveDeclaration(n, ResolvedDeclaration.class);
             } catch (RuntimeException ex) {
                 // ignore
                 return;
