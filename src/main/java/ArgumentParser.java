@@ -14,13 +14,13 @@ public class ArgumentParser {
             cmd = parser.parse(options, args);
         } catch (ParseException e) {
             System.out.println(e.getMessage());
-            formatter.printHelp("lsif-java","lsif-java is an LSIF indexer for Java.\n\n", options, "");
+            formatter.printHelp("lsif-java", "lsif-java is an LSIF indexer for Java.\n\n", options, "");
             System.exit(1);
             return null;
         }
 
         if (cmd.hasOption("help")) {
-            formatter.printHelp("lsif-java","lsif-java is an LSIF indexer for Java.\n\n", options, "");
+            formatter.printHelp("lsif-java", "lsif-java is an LSIF indexer for Java.\n\n", options, "");
             System.exit(0);
         }
 
