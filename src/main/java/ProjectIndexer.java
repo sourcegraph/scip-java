@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ProjectIndexer {
-    public int numPackages;
     public int numFiles;
     public int numDefinitions;
 
