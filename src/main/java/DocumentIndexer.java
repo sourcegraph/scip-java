@@ -10,13 +10,11 @@ import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-import com.github.javaparser.resolution.UnsolvedSymbolException;
+import com.github.javaparser.resolution.declarations.AssociableToAST;
+import com.github.javaparser.resolution.declarations.ResolvedDeclaration;
 import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
 import com.github.javaparser.resolution.declarations.ResolvedValueDeclaration;
 import com.github.javaparser.symbolsolver.JavaSymbolSolver;
-import com.github.javaparser.symbolsolver.javaparsermodel.declarations.JavaParserMethodDeclaration;
-import com.github.javaparser.symbolsolver.javaparsermodel.declarations.JavaParserParameterDeclaration;
-import com.github.javaparser.symbolsolver.javaparsermodel.declarations.JavaParserSymbolDeclaration;
 import com.github.javaparser.symbolsolver.model.resolution.TypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver;
@@ -34,18 +32,31 @@ public class DocumentIndexer {
     private String pathname;
     private String projectId;
     private Emitter emitter;
+    private Map<String, DocumentIndexer> indexers;
+    private boolean indexed = false;
     private Map<Range, DefinitionMeta> defs = new HashMap<>();
 
-    public DocumentIndexer(String projectRoot, String pathname, String projectId, Emitter emitter) {
+    public DocumentIndexer(String projectRoot, String pathname, String projectId, Emitter emitter, Map<String, DocumentIndexer> indexers) {
         this.projectRoot = projectRoot;
         this.pathname = pathname;
         this.projectId = projectId;
         this.emitter = emitter;
+        this.indexers = indexers;
     }
 
-    public void index() throws FileNotFoundException {
-        final JavaSymbolSolver symbolSolver = new JavaSymbolSolver(getTypeSolver(projectRoot));
+    public void index() {
+        if (indexed) {
+            return;
+        }
+
+        doIndex();
+        indexed = true;
+    }
+
+    private void doIndex() {
+        JavaSymbolSolver symbolSolver = getSymbolSolver();
         StaticJavaParser.getConfiguration().setSymbolResolver(symbolSolver);
+        CompilationUnit cu = parse();
 
         // TODO - file contents if not flagged
         final String documentId = emitter.emitVertex("document", Map.of(
@@ -53,78 +64,7 @@ public class DocumentIndexer {
                 "uri", String.format("file://%s", Paths.get(pathname).toAbsolutePath().toString())
         ));
 
-        CompilationUnit cu = StaticJavaParser.parse(new File(pathname));
-        VoidVisitorAdapter visitor = new VoidVisitorAdapter<Void>() {
-            @Override
-            public void visit(final MethodCallExpr n, final Void arg) {
-                super.visit(n, arg);
-
-                ResolvedMethodDeclaration definition;
-                try {
-                    definition = symbolSolver.resolveDeclaration(n, ResolvedMethodDeclaration.class);
-                } catch (UnsolvedSymbolException ex) {
-                    return;
-                } catch (UnsupportedOperationException ex) {
-                    return;
-                } catch (RuntimeException ex) {
-                    // TODO - why this one?
-                    return;
-                }
-
-                Node definitionNode = getNode(definition);
-                if (definitionNode != null) {
-                    String definitionPath = definitionNode.findCompilationUnit()
-                            .flatMap(cu -> cu.getStorage())
-                            .map(s -> s.getPath().toString())
-                            .orElse("");
-
-                    if (definitionPath.equals(pathname)) {
-                        emitDefinition(definitionNode);
-                        emitUse(n, definitionNode, documentId);
-                    }
-                }
-            }
-
-            @Override
-            public void visit(final VariableDeclarationExpr n, final Void arg) {
-                super.visit(n, arg);
-                emitDefinition(n);
-            }
-
-            @Override
-            public void visit(final MethodDeclaration n, final Void arg) {
-                super.visit(n, arg);
-                emitDefinition(n);
-            }
-
-            @Override
-            public void visit(final NameExpr n, final Void arg) {
-                super.visit(n, arg);
-
-                ResolvedValueDeclaration definition;
-                try {
-                    definition = symbolSolver.resolveDeclaration(n, ResolvedValueDeclaration.class);
-                } catch (UnsolvedSymbolException ex) {
-                    return;
-                } catch (UnsupportedOperationException ex) {
-                    return;
-                }
-
-                Node definitionNode = getNode(definition);
-                if (definitionNode != null) {
-                    emitDefinition(definitionNode);
-                    emitUse(n, definitionNode, documentId);
-                }
-            }
-
-            @Override
-            public void visit(final Parameter n, final Void arg) {
-                super.visit(n, arg);
-                emitDefinition(n);
-            }
-        };
-
-        cu.accept(visitor, null);
+        cu.accept(new LSIFVisitor(symbolSolver, documentId), null);
 
         Set<String> allRangeIds = new HashSet<>();
         for (DefinitionMeta meta : defs.values()) {
@@ -139,89 +79,29 @@ public class DocumentIndexer {
         emitter.emitEdge("contains", Map.of("outV", documentId, "inVs", allRangeIds));
     }
 
-    private TypeSolver getTypeSolver(String projectRoot) {
+    private JavaSymbolSolver getSymbolSolver() {
+        return new JavaSymbolSolver(getTypeSolver());
+    }
+
+    private TypeSolver getTypeSolver() {
         CombinedTypeSolver typeSolver = new CombinedTypeSolver();
         typeSolver.add(new JavaParserTypeSolver(projectRoot));
         typeSolver.add(new ReflectionTypeSolver());
         return typeSolver;
     }
 
-    private void emitDefinition(Node n) {
-        Optional<Range> rangeContainer = getRange(n);
-        if (!rangeContainer.isPresent()) {
-            throw new RuntimeException("Unexpected range-less AST node: " + n.toString());
+    private CompilationUnit parse() {
+        try {
+            return StaticJavaParser.parse(new File(pathname));
+        } catch (FileNotFoundException ex) {
+            throw new RuntimeException(String.format("Failed to parse %s", pathname));
         }
-
-        Range range = rangeContainer.get();
-
-        if (defs.containsKey(range)) {
-            return;
-        }
-
-        String hoverId = emitter.emitVertex("hoverResult", Map.of(
-                "result", Map.of(
-                        "contents", Map.of(
-                                "language", "java",
-                                "value", n.toString()
-                        )
-                )
-        ));
-
-        String resultSetId = emitter.emitVertex("resultSet", Map.of());
-        emitter.emitEdge("textDocument/hover", Map.of("outV", resultSetId, "inV", hoverId));
-        String rangeId = emitter.emitVertex("range", createRange(range));
-        emitter.emitEdge("next", Map.of("outV", rangeId, "inV", resultSetId));
-
-        defs.put(range, new DefinitionMeta(rangeId, resultSetId)); // + contents?
-    }
-
-    private Map<String, Object> createRange(Range range) {
-        return Map.of("start", createPosition(range.begin), "end", createPosition(range.end));
-    }
-
-    private Map<String, Object> createPosition(Position position) {
-        return Map.of("line", position.line - 1, "character", position.column - 1);
-    }
-
-    private void emitUse(Node n, Node definition, String documentId) {
-        Optional<Range> rangeContainer = getRange(n);
-        Optional<Range> definitionRangeContainer = getRange(definition);
-
-        if (!rangeContainer.isPresent()) {
-            throw new RuntimeException("Unexpected range-less AST node: " + n.toString());
-        }
-
-        if (!definitionRangeContainer.isPresent()) {
-            throw new RuntimeException("Unexpected range-less AST node: " + definition.toString());
-        }
-
-        Range range = rangeContainer.get();
-        Range definitionRange = definitionRangeContainer.get();
-        DefinitionMeta meta = defs.get(definitionRange);
-
-        String rangeId = emitter.emitVertex("range", createRange(range));
-        emitter.emitEdge("next", Map.of("outV", rangeId, "inV", meta.resultSetId));
-
-        if (meta.definitionResultId == null) {
-            String resultId = emitter.emitVertex("definitionResult", Map.of());
-            emitter.emitEdge("textDocument/definition", Map.of("outV", meta.resultSetId, "inV", resultId));
-            meta.definitionResultId = resultId;
-        }
-
-        emitter.emitEdge("item", Map.of(
-                "outV", meta.definitionResultId,
-                "inVs", new String[]{meta.rangeId},
-                "document", documentId
-        ));
-
-        meta.referenceRangeIds.add(rangeId);
     }
 
     private void linkUses(DefinitionMeta meta, String documentId) {
         String resultId = emitter.emitVertex("referenceResult", Map.of());
 
         emitter.emitEdge("textDocument/references", Map.of("outV", meta.resultSetId, "inV", resultId));
-
         emitter.emitEdge("item", Map.of(
                 "property", "definitions",
                 "outV", resultId,
@@ -239,39 +119,168 @@ public class DocumentIndexer {
         }
     }
 
-    private Node getNode(ResolvedMethodDeclaration decl) {
-        if (decl.getClass().isAssignableFrom(JavaParserMethodDeclaration.class)) {
-            return ((JavaParserMethodDeclaration) decl).getWrappedNode();
+    private class LSIFVisitor extends VoidVisitorAdapter<Void> {
+        private JavaSymbolSolver symbolSolver;
+        private String documentId;
+
+        public LSIFVisitor(JavaSymbolSolver symbolSolver, String documentId) {
+            this.symbolSolver = symbolSolver;
+            this.documentId = documentId;
         }
 
-        return null;
-    }
-
-    private Node getNode(ResolvedValueDeclaration decl) {
-        if (decl.getClass().isAssignableFrom(JavaParserSymbolDeclaration.class)) {
-            return ((JavaParserSymbolDeclaration) decl).getWrappedNode();
+        @Override
+        public void visit(final MethodCallExpr n, final Void arg) {
+            super.visit(n, arg);
+            emitUse(n, ResolvedMethodDeclaration.class);
         }
 
-        if (decl.getClass().isAssignableFrom(JavaParserParameterDeclaration.class)) {
-            return ((JavaParserParameterDeclaration) decl).getWrappedNode();
+        @Override
+        public void visit(final VariableDeclarationExpr n, final Void arg) {
+            super.visit(n, arg);
+            emitDefinition(n);
         }
 
-        return null;
-    }
-
-    private Optional<Range> getRange(Node decl) {
-        if (decl.getClass().isAssignableFrom(VariableDeclarationExpr.class)) {
-            // Unwrap variable declarations
-            decl = ((VariableDeclarationExpr) decl).getVariables().get(0);
+        @Override
+        public void visit(final MethodDeclaration n, final Void arg) {
+            super.visit(n, arg);
+            emitDefinition(n);
         }
 
-        try {
-            // Extract only the name portion of the AST node
-            return ((NodeWithSimpleName) decl).getName().getRange();
-        } catch (ClassCastException ex) {
-            // ignore
+        @Override
+        public void visit(final NameExpr n, final Void arg) {
+            super.visit(n, arg);
+            emitUse(n, ResolvedValueDeclaration.class);
         }
 
-        return decl.getRange();
+        @Override
+        public void visit(final Parameter n, final Void arg) {
+            super.visit(n, arg);
+            emitDefinition(n);
+        }
+
+        private void emitDefinition(Node n) {
+            Optional<Range> rangeContainer = getRange(n);
+            if (!rangeContainer.isPresent()) {
+                throw new RuntimeException("Unexpected range-less AST node: " + n.toString());
+            }
+
+            Range range = rangeContainer.get();
+
+            if (defs.containsKey(range)) {
+                return;
+            }
+
+            String hoverId = emitter.emitVertex("hoverResult", Map.of(
+                    "result", Map.of(
+                            "contents", Map.of(
+                                    "language", "java",
+                                    "value", n.toString()
+                            )
+                    )
+            ));
+
+            String resultSetId = emitter.emitVertex("resultSet", Map.of());
+            emitter.emitEdge("textDocument/hover", Map.of("outV", resultSetId, "inV", hoverId));
+            String rangeId = emitter.emitVertex("range", createRange(range));
+            emitter.emitEdge("next", Map.of("outV", rangeId, "inV", resultSetId));
+
+            defs.put(range, new DefinitionMeta(rangeId, resultSetId)); // + contents?
+        }
+
+        private <T extends ResolvedDeclaration> void emitUse(Node n, Class<T> cls) {
+            T definition;
+            try {
+                definition = symbolSolver.resolveDeclaration(n, cls);
+            } catch (RuntimeException ex) {
+                // ignore
+                return;
+            }
+
+            if (!definition.getClass().isAssignableFrom(AssociableToAST.class)) {
+                return;
+            }
+
+            Optional<Node> definitionNodeContainer = ((AssociableToAST<Node>) definition).toAst();
+            if (!definitionNodeContainer.isPresent()) {
+                return;
+            }
+
+            Node definitionNode = definitionNodeContainer.get();
+            if (definitionNode == null) {
+                return;
+            }
+
+            String definitionPath = definitionNode.findCompilationUnit()
+                    .flatMap(cu -> cu.getStorage())
+                    .map(s -> s.getPath().toString())
+                    .orElse("");
+
+            if (definitionPath.equals(pathname)) {
+                emitDefinition(definitionNode);
+                emitUse(n, definitionNode, documentId);
+            } else {
+                // TODO - need to still link use here
+                indexers.get(definitionPath).index();
+            }
+        }
+
+        private void emitUse(Node n, Node definition, String documentId) {
+            Optional<Range> rangeContainer = getRange(n);
+            Optional<Range> definitionRangeContainer = getRange(definition);
+
+            if (!rangeContainer.isPresent()) {
+                throw new RuntimeException("Unexpected range-less AST node: " + n.toString());
+            }
+
+            if (!definitionRangeContainer.isPresent()) {
+                throw new RuntimeException("Unexpected range-less AST node: " + definition.toString());
+            }
+
+            Range range = rangeContainer.get();
+            Range definitionRange = definitionRangeContainer.get();
+            DefinitionMeta meta = defs.get(definitionRange);
+
+            String rangeId = emitter.emitVertex("range", createRange(range));
+            emitter.emitEdge("next", Map.of("outV", rangeId, "inV", meta.resultSetId));
+
+            if (meta.definitionResultId == null) {
+                String resultId = emitter.emitVertex("definitionResult", Map.of());
+                emitter.emitEdge("textDocument/definition", Map.of("outV", meta.resultSetId, "inV", resultId));
+                meta.definitionResultId = resultId;
+            }
+
+            emitter.emitEdge("item", Map.of(
+                    "outV", meta.definitionResultId,
+                    "inVs", new String[]{meta.rangeId},
+                    "document", documentId
+            ));
+
+            meta.referenceRangeIds.add(rangeId);
+        }
+
+        private Optional<Range> getRange(Node decl) {
+            if (decl.getClass().isAssignableFrom(VariableDeclarationExpr.class)) {
+                // Unwrap variable declarations
+                decl = ((VariableDeclarationExpr) decl).getVariables().get(0);
+            }
+
+            try {
+                // Extract only the name portion of the AST node
+                return ((NodeWithSimpleName) decl).getName().getRange();
+            } catch (ClassCastException ex) {
+                // ignore
+            }
+
+            return decl.getRange();
+        }
+
+
+        private Map<String, Object> createRange(Range range) {
+            return Map.of("start", createPosition(range.begin), "end", createPosition(range.end));
+        }
+
+        private Map<String, Object> createPosition(Position position) {
+            return Map.of("line", position.line - 1, "character", position.column - 1);
+        }
     }
 }

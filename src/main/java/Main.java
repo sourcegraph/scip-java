@@ -3,13 +3,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Arguments arguments = ArgumentParser.parse(args);
-
-        PrintWriter writer = arguments.stdout
-                ? new PrintWriter(System.out)
-                : new PrintWriter(new File(arguments.outFile));
-
+        PrintWriter writer = createWriter(arguments);
         Emitter emitter = new Emitter(writer);
         ProjectIndexer indexer = new ProjectIndexer(arguments, emitter);
 
@@ -26,16 +22,32 @@ public class Main {
         }
 
         if (!arguments.stdout) {
-            long elapsed = System.nanoTime() - start;
-
-            System.out.printf(
-                    "%d file(s), %d def(s), %d element(s)\n",
-                    indexer.numFiles,
-                    indexer.numDefinitions,
-                    emitter.getNumElements()
-            );
-
-            System.out.printf("Processed in %.0fms", elapsed / 1e6);
+            displayStats(indexer, emitter, start);
         }
     }
+
+    private static PrintWriter createWriter(Arguments arguments) {
+        if (arguments.stdout) {
+            return new PrintWriter(System.out);
+        }
+
+        try {
+            return new PrintWriter(new File(arguments.outFile));
+        } catch (IOException ex) {
+            throw new RuntimeException(String.format("Failed to open file %s", arguments.outFile));
+        }
+    }
+
+    private static void displayStats(ProjectIndexer indexer, Emitter emitter, long start) {
+
+        System.out.printf(
+                "%d file(s), %d def(s), %d element(s)\n",
+                indexer.numFiles,
+                indexer.numDefinitions,
+                emitter.getNumElements()
+        );
+
+        System.out.printf("Processed in %.0fms", (System.nanoTime() - start) / 1e6);
+    }
+
 }
