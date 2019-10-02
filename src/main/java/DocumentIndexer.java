@@ -10,11 +10,12 @@ import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-import com.github.javaparser.resolution.declarations.AssociableToAST;
 import com.github.javaparser.resolution.declarations.ResolvedDeclaration;
 import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
 import com.github.javaparser.resolution.declarations.ResolvedValueDeclaration;
 import com.github.javaparser.symbolsolver.JavaSymbolSolver;
+import com.github.javaparser.symbolsolver.javaparsermodel.declarations.JavaParserMethodDeclaration;
+import com.github.javaparser.symbolsolver.javaparsermodel.declarations.JavaParserVariableDeclaration;
 import com.github.javaparser.symbolsolver.model.resolution.TypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver;
@@ -26,15 +27,15 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class DocumentIndexer {
-    public int numDefinitions;
-
     private String projectRoot;
     private String pathname;
     private String projectId;
     private Emitter emitter;
     private Map<String, DocumentIndexer> indexers;
+    private String documentId;
     private boolean indexed = false;
-    private Map<Range, DefinitionMeta> defs = new HashMap<>();
+    private Set<String> rangeIds = new HashSet<>();
+    private Map<Range, DefinitionMeta> definitions = new HashMap<>();
 
     public DocumentIndexer(String projectRoot, String pathname, String projectId, Emitter emitter, Map<String, DocumentIndexer> indexers) {
         this.projectRoot = projectRoot;
@@ -42,6 +43,10 @@ public class DocumentIndexer {
         this.projectId = projectId;
         this.emitter = emitter;
         this.indexers = indexers;
+    }
+
+    public int numDefinitions() {
+        return definitions.size();
     }
 
     public void index() {
@@ -59,24 +64,21 @@ public class DocumentIndexer {
         CompilationUnit cu = parse();
 
         // TODO - file contents if not flagged
-        final String documentId = emitter.emitVertex("document", Map.of(
+        this.documentId = emitter.emitVertex("document", Map.of(
                 "languageId", "java",
                 "uri", String.format("file://%s", Paths.get(pathname).toAbsolutePath().toString())
         ));
 
-        cu.accept(new LSIFVisitor(symbolSolver, documentId), null);
+        cu.accept(new LSIFVisitor(symbolSolver), null);
+    }
 
-        Set<String> allRangeIds = new HashSet<>();
-        for (DefinitionMeta meta : defs.values()) {
+    public void resolveUses() {
+        for (DefinitionMeta meta : definitions.values()) {
             linkUses(meta, documentId);
-
-            numDefinitions++;
-            allRangeIds.add(meta.rangeId);
-            allRangeIds.addAll(meta.referenceRangeIds);
         }
 
         emitter.emitEdge("contains", Map.of("outV", projectId, "inVs", new String[]{documentId}));
-        emitter.emitEdge("contains", Map.of("outV", documentId, "inVs", allRangeIds));
+        emitter.emitEdge("contains", Map.of("outV", documentId, "inVs", rangeIds));
     }
 
     private JavaSymbolSolver getSymbolSolver() {
@@ -109,23 +111,21 @@ public class DocumentIndexer {
                 "document", documentId
         ));
 
-        if (!meta.referenceRangeIds.isEmpty()) {
+        for (Map.Entry<String, Set<String>> entry : meta.referenceRangeIds.entrySet()) {
             emitter.emitEdge("item", Map.of(
                     "property", "references",
                     "outV", resultId,
-                    "inVs", meta.referenceRangeIds,
-                    "document", documentId
+                    "inVs", entry.getValue(), // TODO - sort?
+                    "document", entry.getKey()
             ));
         }
     }
 
     private class LSIFVisitor extends VoidVisitorAdapter<Void> {
         private JavaSymbolSolver symbolSolver;
-        private String documentId;
 
-        public LSIFVisitor(JavaSymbolSolver symbolSolver, String documentId) {
+        public LSIFVisitor(JavaSymbolSolver symbolSolver) {
             this.symbolSolver = symbolSolver;
-            this.documentId = documentId;
         }
 
         @Override
@@ -165,8 +165,7 @@ public class DocumentIndexer {
             }
 
             Range range = rangeContainer.get();
-
-            if (defs.containsKey(range)) {
+            if (definitions.containsKey(range)) {
                 return;
             }
 
@@ -184,7 +183,8 @@ public class DocumentIndexer {
             String rangeId = emitter.emitVertex("range", createRange(range));
             emitter.emitEdge("next", Map.of("outV", rangeId, "inV", resultSetId));
 
-            defs.put(range, new DefinitionMeta(rangeId, resultSetId)); // + contents?
+            rangeIds.add(rangeId);
+            definitions.put(range, new DefinitionMeta(rangeId, resultSetId)); // + contents?
         }
 
         private <T extends ResolvedDeclaration> void emitUse(Node n, Class<T> cls) {
@@ -196,16 +196,7 @@ public class DocumentIndexer {
                 return;
             }
 
-            if (!definition.getClass().isAssignableFrom(AssociableToAST.class)) {
-                return;
-            }
-
-            Optional<Node> definitionNodeContainer = ((AssociableToAST<Node>) definition).toAst();
-            if (!definitionNodeContainer.isPresent()) {
-                return;
-            }
-
-            Node definitionNode = definitionNodeContainer.get();
+            Node definitionNode = getNode(definition);
             if (definitionNode == null) {
                 return;
             }
@@ -217,14 +208,35 @@ public class DocumentIndexer {
 
             if (definitionPath.equals(pathname)) {
                 emitDefinition(definitionNode);
-                emitUse(n, definitionNode, documentId);
+                emitUse(n, definitionNode);
             } else {
-                // TODO - need to still link use here
                 indexers.get(definitionPath).index();
+                emitUse(n, definitionNode, definitionPath);
             }
         }
 
-        private void emitUse(Node n, Node definition, String documentId) {
+        private Node getNode(ResolvedDeclaration def) {
+            return
+//                    JavaParserClassDeclaration.class.isInstance(def) ? JavaParserClassDeclaration.class.cast(def).getWrappedNode()
+//                    : JavaParserConstructorDeclaration.class.isInstance(def) ? JavaParserConstructorDeclaration.class.cast(def).getWrappedNode()
+//                    : JavaParserEnumConstantDeclaration.class.isInstance(def) ? JavaParserEnumConstantDeclaration.class.cast(def).getWrappedNode()
+//                    : JavaParserEnumDeclaration.class.isInstance(def) ? JavaParserEnumDeclaration.class.cast(def).getWrappedNode()
+//                    : JavaParserFieldDeclaration.class.isInstance(def) ? JavaParserFieldDeclaration.class.cast(def).getWrappedNode()
+//                    : JavaParserInterfaceDeclaration.class.isInstance(def) ? JavaParserInterfaceDeclaration.class.cast(def).getWrappedNode()
+                    JavaParserMethodDeclaration.class.isInstance(def) ? JavaParserMethodDeclaration.class.cast(def).getWrappedNode()
+//                    : JavaParserParameterDeclaration.class.isInstance(def) ? JavaParserParameterDeclaration.class.cast(def).getWrappedNode()
+//                    : JavaParserTypeVariableDeclaration.class.isInstance(def) ? JavaParserTypeVariableDeclaration.class.cast(def).getWrappedNode()
+                            : JavaParserVariableDeclaration.class.isInstance(def) ? JavaParserVariableDeclaration.class.cast(def).getWrappedNode()
+                            : null;
+        }
+
+        private void emitUse(Node n, Node definition) {
+            emitUse(n, definition, pathname);
+        }
+
+        private void emitUse(Node n, Node definition, String definitionPath) {
+            DocumentIndexer indexer = indexers.get(definitionPath);
+
             Optional<Range> rangeContainer = getRange(n);
             Optional<Range> definitionRangeContainer = getRange(definition);
 
@@ -238,7 +250,7 @@ public class DocumentIndexer {
 
             Range range = rangeContainer.get();
             Range definitionRange = definitionRangeContainer.get();
-            DefinitionMeta meta = defs.get(definitionRange);
+            DefinitionMeta meta = indexer.definitions.get(definitionRange);
 
             String rangeId = emitter.emitVertex("range", createRange(range));
             emitter.emitEdge("next", Map.of("outV", rangeId, "inV", meta.resultSetId));
@@ -252,10 +264,14 @@ public class DocumentIndexer {
             emitter.emitEdge("item", Map.of(
                     "outV", meta.definitionResultId,
                     "inVs", new String[]{meta.rangeId},
-                    "document", documentId
+                    "document", indexer.documentId
             ));
 
-            meta.referenceRangeIds.add(rangeId);
+            rangeIds.add(rangeId);
+
+            Set<String> set = meta.referenceRangeIds.getOrDefault(documentId, new HashSet<>());
+            set.add(rangeId);
+            meta.referenceRangeIds.put(documentId, set);
         }
 
         private Optional<Range> getRange(Node decl) {

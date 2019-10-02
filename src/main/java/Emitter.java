@@ -19,7 +19,7 @@ public class Emitter {
         return union;
     }
 
-    public int getNumElements() {
+    public int numElements() {
         return nextId;
     }
 

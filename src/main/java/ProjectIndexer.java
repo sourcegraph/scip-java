@@ -44,9 +44,15 @@ public class ProjectIndexer {
 
         for (DocumentIndexer indexer : indexers.values()) {
             indexer.index();
+        }
 
+        for (DocumentIndexer indexer : indexers.values()) {
+            indexer.resolveUses(); // TODO - rename
+        }
+
+        for (DocumentIndexer indexer : indexers.values()) {
             numFiles++;
-            numDefinitions += indexer.numDefinitions;
+            numDefinitions += indexer.numDefinitions();
         }
     }
 

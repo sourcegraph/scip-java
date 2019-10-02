@@ -44,7 +44,7 @@ public class Main {
                 "%d file(s), %d def(s), %d element(s)\n",
                 indexer.numFiles,
                 indexer.numDefinitions,
-                emitter.getNumElements()
+                emitter.numElements()
         );
 
         System.out.printf("Processed in %.0fms", (System.nanoTime() - start) / 1e6);
