@@ -176,17 +176,12 @@ public class DocumentIndexer {
     }
 
     private Map<String, Object> createRange(Range range) {
-        return Map.of("start", createPosition(range.begin, -1), "end", createPosition(range.end));
+        return Map.of("start", createPosition(range.begin), "end", createPosition(range.end));
     }
 
     private Map<String, Object> createPosition(Position position) {
-        return createPosition(position, 0);
+        return Map.of("line", position.line - 1, "character", position.column - 1);
     }
-
-    private Map<String, Object> createPosition(Position position, int delta) {
-        return Map.of("line", position.line + delta, "character", position.column + delta);
-    }
-
 
     private void emitUse(Node n, Node definition, String documentId) {
         Optional<Range> rangeContainer = getRange(n);
