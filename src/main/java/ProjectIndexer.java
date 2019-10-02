@@ -42,12 +42,12 @@ public class ProjectIndexer {
             indexers.put(pathname, new DocumentIndexer(arguments.projectRoot, pathname, projectId, emitter, indexers));
         }
 
-        for (DocumentIndexer indexer : indexers.values()) {
-            indexer.index();
+        for (String pathname : files) {
+            indexers.get(pathname).index();
         }
 
-        for (DocumentIndexer indexer : indexers.values()) {
-            indexer.postIndex();
+        for (String pathname : files) {
+            indexers.get(pathname).postIndex();
         }
 
         for (DocumentIndexer indexer : indexers.values()) {

@@ -78,7 +78,7 @@ public class DocumentIndexer {
         }
 
         emitter.emitEdge("contains", Map.of("outV", projectId, "inVs", new String[]{documentId}));
-        emitter.emitEdge("contains", Map.of("outV", documentId, "inVs", rangeIds));
+        emitter.emitEdge("contains", Map.of("outV", documentId, "inVs", rangeIds.stream().sorted().toArray()));
     }
 
     private JavaSymbolSolver getSymbolSolver() {
@@ -115,7 +115,7 @@ public class DocumentIndexer {
             emitter.emitEdge("item", Map.of(
                     "property", "references",
                     "outV", resultId,
-                    "inVs", entry.getValue(), // TODO - sort?
+                    "inVs", entry.getValue().stream().sorted().toArray(),
                     "document", entry.getKey()
             ));
         }
