@@ -191,7 +191,7 @@ public class DocumentIndexer {
             throw new RuntimeException("Unexpected range-less AST node: " + n.toString());
         }
 
-        if (!rangeContainer.isPresent()) {
+        if (!definitionRangeContainer.isPresent()) {
             throw new RuntimeException("Unexpected range-less AST node: " + definition.toString());
         }
 
