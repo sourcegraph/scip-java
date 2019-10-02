@@ -72,8 +72,15 @@ public class DocumentIndexer {
 
                 Node definitionNode = getNode(definition);
                 if (definitionNode != null) {
-                    emitDefinition(definitionNode);
-                    emitUse(n, definitionNode, documentId);
+                    String definitionPath = definitionNode.findCompilationUnit()
+                            .flatMap(cu -> cu.getStorage())
+                            .map(s -> s.getPath().toString())
+                            .orElse("");
+
+                    if (definitionPath.equals(pathname)) {
+                        emitDefinition(definitionNode);
+                        emitUse(n, definitionNode, documentId);
+                    }
                 }
             }
 
