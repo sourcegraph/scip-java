@@ -23,11 +23,15 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeS
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
 public class DocumentIndexer {
     private String projectRoot;
+    private boolean noContents;
     private String pathname;
     private String projectId;
     private Emitter emitter;
@@ -37,8 +41,16 @@ public class DocumentIndexer {
     private Set<String> rangeIds = new HashSet<>();
     private Map<Range, DefinitionMeta> definitions = new HashMap<>();
 
-    public DocumentIndexer(String projectRoot, String pathname, String projectId, Emitter emitter, Map<String, DocumentIndexer> indexers) {
+    public DocumentIndexer(
+            String projectRoot,
+            boolean noContents,
+            String pathname,
+            String projectId,
+            Emitter emitter,
+            Map<String, DocumentIndexer> indexers
+    ) {
         this.projectRoot = projectRoot;
+        this.noContents = noContents;
         this.pathname = pathname;
         this.projectId = projectId;
         this.emitter = emitter;
@@ -63,12 +75,21 @@ public class DocumentIndexer {
         StaticJavaParser.getConfiguration().setSymbolResolver(symbolSolver);
         CompilationUnit cu = parse();
 
-        // TODO - file contents if not flagged
-        this.documentId = emitter.emitVertex("document", Map.of(
+        Map<String, Object> args = Map.of(
                 "languageId", "java",
                 "uri", String.format("file://%s", Paths.get(pathname).toAbsolutePath().toString())
-        ));
+        );
 
+        if (!noContents) {
+            try {
+                List<String> lines = Files.readAllLines(Paths.get(pathname), StandardCharsets.UTF_8);
+                args = Util.union(args, Map.of("contents", String.join("\n", lines)));
+            } catch (IOException ex) {
+                throw new RuntimeException(String.format("Failed to read file %s", pathname));
+            }
+        }
+
+        this.documentId = emitter.emitVertex("document", args);
         cu.accept(new LSIFVisitor(symbolSolver), null);
     }
 

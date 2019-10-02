@@ -13,12 +13,6 @@ public class Emitter {
         this.writer = writer;
     }
 
-    private static Map<String, Object> union(Map<String, Object> h1, Map<String, Object> h2) {
-        HashMap<String, Object> union = new HashMap<>(h1);
-        union.putAll(h2);
-        return union;
-    }
-
     public int numElements() {
         return nextId;
     }
@@ -34,7 +28,7 @@ public class Emitter {
     private String emit(String typeName, String labelName, Map<String, Object> args) {
         String id = String.format("%d", nextId++);
 
-        writer.println(gson.toJson(union(args, Map.of(
+        writer.println(gson.toJson(Util.union(args, Map.of(
                 "id", id,
                 "type", typeName,
                 "label", labelName

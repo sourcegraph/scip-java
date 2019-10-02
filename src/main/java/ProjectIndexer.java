@@ -39,7 +39,14 @@ public class ProjectIndexer {
 
         Map<String, DocumentIndexer> indexers = new HashMap<>();
         for (String pathname : files) {
-            indexers.put(pathname, new DocumentIndexer(arguments.projectRoot, pathname, projectId, emitter, indexers));
+            indexers.put(pathname, new DocumentIndexer(
+                    arguments.projectRoot,
+                    arguments.noContents,
+                    pathname,
+                    projectId,
+                    emitter,
+                    indexers
+            ));
         }
 
         for (String pathname : files) {
