@@ -222,18 +222,17 @@ public class DocumentIndexer {
                 return;
             }
 
-            String definitionPath = definitionNode.findCompilationUnit()
+            Optional<String> definitionPathContainer = definitionNode.findCompilationUnit()
                     .flatMap(cu -> cu.getStorage())
-                    .map(s -> s.getPath().toString())
-                    .orElse("");
+                    .map(s -> s.getPath().toString());
 
-            if (definitionPath.equals(pathname)) {
+            if (definitionPathContainer.isPresent() && definitionPathContainer.get().equals(pathname)) {
                 emitDefinition(definitionNode);
-                emitUse(n, definitionNode);
             } else {
-                indexers.get(definitionPath).index();
-                emitUse(n, definitionNode, definitionPath);
+                indexers.get(definitionPathContainer.get()).index();
             }
+
+            emitUse(n, definitionNode, definitionPathContainer.orElse(pathname));
         }
 
         private Node getNode(ResolvedDeclaration def) {
@@ -249,10 +248,6 @@ public class DocumentIndexer {
 //                    : JavaParserTypeVariableDeclaration.class.isInstance(def) ? JavaParserTypeVariableDeclaration.class.cast(def).getWrappedNode()
                             : JavaParserVariableDeclaration.class.isInstance(def) ? JavaParserVariableDeclaration.class.cast(def).getWrappedNode()
                             : null;
-        }
-
-        private void emitUse(Node n, Node definition) {
-            emitUse(n, definition, pathname);
         }
 
         private void emitUse(Node n, Node definition, String definitionPath) {
