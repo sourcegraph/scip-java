@@ -3,6 +3,7 @@ import com.github.javaparser.Range;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.expr.MethodCallExpr;
@@ -294,6 +295,11 @@ public class DocumentIndexer {
             if (decl.getClass().isAssignableFrom(VariableDeclarationExpr.class)) {
                 // Unwrap variable declarations
                 decl = ((VariableDeclarationExpr) decl).getVariables().get(0);
+            }
+
+            if (decl.getClass().isAssignableFrom(FieldDeclaration.class)) {
+                // Unwrap variable declarations
+                decl = ((FieldDeclaration) decl).getVariables().get(0);
             }
 
             try {
