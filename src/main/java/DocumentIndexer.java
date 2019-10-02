@@ -220,8 +220,6 @@ public class DocumentIndexer {
     private void linkUses(DefinitionMeta meta, String documentId) {
         String resultId = emitter.emitVertex("referenceResult", Map.of());
 
-        // TODO - are these outVs correct? see other indexer issue
-
         emitter.emitEdge("textDocument/references", Map.of("outV", meta.resultSetId, "inV", resultId));
 
         emitter.emitEdge("item", Map.of(
