@@ -8,6 +8,7 @@ import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
+import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.resolution.UnsolvedSymbolException;
 import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
@@ -266,16 +267,16 @@ public class DocumentIndexer {
     }
 
     private Optional<Range> getRange(Node decl) {
-        if (decl.getClass().isAssignableFrom(MethodDeclaration.class)) {
-            return ((MethodDeclaration) decl).getName().getRange();
-        }
-
-        if (decl.getClass().isAssignableFrom(Parameter.class)) {
-            return ((Parameter) decl).getName().getRange();
-        }
-
         if (decl.getClass().isAssignableFrom(VariableDeclarationExpr.class)) {
-            return ((VariableDeclarationExpr) decl).getVariables().get(0).getRange();
+            // Unwrap variable declarations
+            decl = ((VariableDeclarationExpr) decl).getVariables().get(0);
+        }
+
+        try {
+            // Extract only the name portion of the AST node
+            return ((NodeWithSimpleName) decl).getName().getRange();
+        } catch (ClassCastException ex) {
+            // ignore
         }
 
         return decl.getRange();
