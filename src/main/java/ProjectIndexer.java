@@ -47,7 +47,7 @@ public class ProjectIndexer {
         }
 
         for (DocumentIndexer indexer : indexers.values()) {
-            indexer.resolveUses(); // TODO - rename
+            indexer.postIndex();
         }
 
         for (DocumentIndexer indexer : indexers.values()) {

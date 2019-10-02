@@ -72,7 +72,7 @@ public class DocumentIndexer {
         cu.accept(new LSIFVisitor(symbolSolver), null);
     }
 
-    public void resolveUses() {
+    public void postIndex() {
         for (DefinitionMeta meta : definitions.values()) {
             linkUses(meta, documentId);
         }
