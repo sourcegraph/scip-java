@@ -135,7 +135,7 @@ public class DocumentIndexer {
             allRangeIds.addAll(meta.referenceRangeIds);
         }
 
-        emitter.emitEdge("contains", Map.of("outV", projectId, "inVs", documentId));
+        emitter.emitEdge("contains", Map.of("outV", projectId, "inVs", new String[]{documentId}));
         emitter.emitEdge("contains", Map.of("outV", documentId, "inVs", allRangeIds));
     }
 
