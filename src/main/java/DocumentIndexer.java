@@ -6,17 +6,17 @@ import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
+import com.github.javaparser.ast.expr.FieldAccessExpr;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+import com.github.javaparser.resolution.declarations.ResolvedClassDeclaration;
 import com.github.javaparser.resolution.declarations.ResolvedDeclaration;
-import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
-import com.github.javaparser.resolution.declarations.ResolvedValueDeclaration;
+import com.github.javaparser.resolution.types.ResolvedType;
 import com.github.javaparser.symbolsolver.JavaSymbolSolver;
-import com.github.javaparser.symbolsolver.javaparsermodel.declarations.JavaParserMethodDeclaration;
-import com.github.javaparser.symbolsolver.javaparsermodel.declarations.JavaParserVariableDeclaration;
+import com.github.javaparser.symbolsolver.javaparsermodel.declarations.*;
 import com.github.javaparser.symbolsolver.model.resolution.TypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver;
@@ -150,6 +150,11 @@ public class DocumentIndexer {
             this.symbolSolver = symbolSolver;
         }
 
+        // TODO - field access
+        // TODO - types to classes
+        // TODO - enums
+        // TODO - inner classes?
+
         @Override
         public void visit(final MethodCallExpr n, final Void arg) {
             super.visit(n, arg);
@@ -238,14 +243,15 @@ public class DocumentIndexer {
 
         private Node getNode(ResolvedDeclaration def) {
             return
-//                    JavaParserClassDeclaration.class.isInstance(def) ? JavaParserClassDeclaration.class.cast(def).getWrappedNode()
-//                    : JavaParserConstructorDeclaration.class.isInstance(def) ? JavaParserConstructorDeclaration.class.cast(def).getWrappedNode()
+                    JavaParserClassDeclaration.class.isInstance(def) ? JavaParserClassDeclaration.class.cast(def).getWrappedNode()
+                            : JavaParserConstructorDeclaration.class.isInstance(def) ? JavaParserConstructorDeclaration.class.cast(def).getWrappedNode()
 //                    : JavaParserEnumConstantDeclaration.class.isInstance(def) ? JavaParserEnumConstantDeclaration.class.cast(def).getWrappedNode()
 //                    : JavaParserEnumDeclaration.class.isInstance(def) ? JavaParserEnumDeclaration.class.cast(def).getWrappedNode()
-//                    : JavaParserFieldDeclaration.class.isInstance(def) ? JavaParserFieldDeclaration.class.cast(def).getWrappedNode()
+                            : JavaParserFieldDeclaration.class.isInstance(def) ? JavaParserFieldDeclaration.class.cast(def).getWrappedNode()
 //                    : JavaParserInterfaceDeclaration.class.isInstance(def) ? JavaParserInterfaceDeclaration.class.cast(def).getWrappedNode()
-                    JavaParserMethodDeclaration.class.isInstance(def) ? JavaParserMethodDeclaration.class.cast(def).getWrappedNode()
-//                    : JavaParserParameterDeclaration.class.isInstance(def) ? JavaParserParameterDeclaration.class.cast(def).getWrappedNode()
+                            : JavaParserMethodDeclaration.class.isInstance(def) ? JavaParserMethodDeclaration.class.cast(def).getWrappedNode()
+                            : JavaParserParameterDeclaration.class.isInstance(def) ? JavaParserParameterDeclaration.class.cast(def).getWrappedNode()
+                            : JavaParserSymbolDeclaration.class.isInstance(def) ? JavaParserSymbolDeclaration.class.cast(def).getWrappedNode()
 //                    : JavaParserTypeVariableDeclaration.class.isInstance(def) ? JavaParserTypeVariableDeclaration.class.cast(def).getWrappedNode()
                             : JavaParserVariableDeclaration.class.isInstance(def) ? JavaParserVariableDeclaration.class.cast(def).getWrappedNode()
                             : null;
@@ -294,12 +300,12 @@ public class DocumentIndexer {
         private Optional<Range> getRange(Node decl) {
             if (decl.getClass().isAssignableFrom(VariableDeclarationExpr.class)) {
                 // Unwrap variable declarations
-                decl = ((VariableDeclarationExpr) decl).getVariables().get(0);
+                decl = ((VariableDeclarationExpr) decl).getVariables().get(0); // TODO - how to support multiple?
             }
 
             if (decl.getClass().isAssignableFrom(FieldDeclaration.class)) {
                 // Unwrap variable declarations
-                decl = ((FieldDeclaration) decl).getVariables().get(0);
+                decl = ((FieldDeclaration) decl).getVariables().get(0); // TODO - how to support multiple?
             }
 
             try {
