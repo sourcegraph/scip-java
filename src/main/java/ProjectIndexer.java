@@ -1,3 +1,9 @@
+import com.github.javaparser.ParseResult;
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.symbolsolver.utils.SymbolSolverCollectionStrategy;
+import com.github.javaparser.utils.ProjectRoot;
+import com.github.javaparser.utils.SourceRoot;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,43 +37,41 @@ public class ProjectIndexer {
                 "kind", "java"
         ));
 
-        List<String> files = createFileStream()
-                .map(x -> x.toString())
-                .filter(f -> f.endsWith(".java"))
-                .sorted()
-                .collect(Collectors.toList());
-
         Map<String, DocumentIndexer> indexers = new HashMap<>();
-        for (String pathname : files) {
-            indexers.put(pathname, new DocumentIndexer(
-                    arguments.projectRoot,
-                    arguments.noContents,
-                    pathname,
-                    projectId,
-                    emitter,
-                    indexers
-            ));
+
+        ProjectRoot root = new SymbolSolverCollectionStrategy().collect(Paths.get(arguments.projectRoot));
+        for (SourceRoot sr : root.getSourceRoots()) {
+            try {
+                sr.tryToParse();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            for (CompilationUnit cu : sr.getCompilationUnits()) {
+                // .accept(visitor)
+                String pathname = cu.getStorage().get().getPath().toAbsolutePath().toString();
+                indexers.put(pathname, new DocumentIndexer(
+                        arguments.projectRoot,
+                        arguments.noContents,
+                        pathname,
+                        projectId,
+                        emitter,
+                        indexers,
+                        cu
+                ));
+            }
         }
 
-        for (String pathname : files) {
-            indexers.get(pathname).index();
+        for (DocumentIndexer indexer : indexers.values()) {
+            indexer.index();
         }
 
-        for (String pathname : files) {
-            indexers.get(pathname).postIndex();
+        for (DocumentIndexer indexer : indexers.values()) {
+            indexer.postIndex();
         }
 
         for (DocumentIndexer indexer : indexers.values()) {
             numFiles++;
             numDefinitions += indexer.numDefinitions();
-        }
-    }
-
-    private Stream<Path> createFileStream() {
-        try {
-            return Files.walk(Paths.get(arguments.projectRoot));
-        } catch (IOException ex) {
-            throw new RuntimeException(String.format("Failed to walk files in %s", arguments.projectRoot));
         }
     }
 }

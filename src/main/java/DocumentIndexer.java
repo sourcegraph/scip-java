@@ -12,15 +12,22 @@ import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+import com.github.javaparser.resolution.Resolvable;
+import com.github.javaparser.resolution.UnsolvedSymbolException;
 import com.github.javaparser.resolution.declarations.ResolvedClassDeclaration;
 import com.github.javaparser.resolution.declarations.ResolvedDeclaration;
+import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
 import com.github.javaparser.resolution.types.ResolvedType;
 import com.github.javaparser.symbolsolver.JavaSymbolSolver;
 import com.github.javaparser.symbolsolver.javaparsermodel.declarations.*;
 import com.github.javaparser.symbolsolver.model.resolution.TypeSolver;
+import com.github.javaparser.symbolsolver.reflectionmodel.ReflectionMethodDeclaration;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
+import com.github.javaparser.symbolsolver.resolution.typesolvers.JarTypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
+import com.github.javaparser.symbolsolver.utils.SymbolSolverCollectionStrategy;
+import com.github.javaparser.utils.ProjectRoot;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,6 +48,7 @@ public class DocumentIndexer {
     private boolean indexed = false;
     private Set<String> rangeIds = new HashSet<>();
     private Map<Range, DefinitionMeta> definitions = new HashMap<>();
+    private CompilationUnit cu;
 
     public DocumentIndexer(
             String projectRoot,
@@ -48,7 +56,8 @@ public class DocumentIndexer {
             String pathname,
             String projectId,
             Emitter emitter,
-            Map<String, DocumentIndexer> indexers
+            Map<String, DocumentIndexer> indexers,
+            CompilationUnit cu
     ) {
         this.projectRoot = projectRoot;
         this.noContents = noContents;
@@ -56,6 +65,7 @@ public class DocumentIndexer {
         this.projectId = projectId;
         this.emitter = emitter;
         this.indexers = indexers;
+        this.cu = cu;
     }
 
     public int numDefinitions() {
@@ -72,10 +82,6 @@ public class DocumentIndexer {
     }
 
     private void doIndex() {
-        JavaSymbolSolver symbolSolver = getSymbolSolver();
-        StaticJavaParser.getConfiguration().setSymbolResolver(symbolSolver);
-        CompilationUnit cu = parse();
-
         Map<String, Object> args = Map.of(
                 "languageId", "java",
                 "uri", String.format("file://%s", Paths.get(pathname).toAbsolutePath().toString())
@@ -91,7 +97,7 @@ public class DocumentIndexer {
         }
 
         this.documentId = emitter.emitVertex("document", args);
-        cu.accept(new LSIFVisitor(symbolSolver), null);
+        this.cu.accept(new LSIFVisitor(), null);
     }
 
     public void postIndex() {
@@ -101,25 +107,6 @@ public class DocumentIndexer {
 
         emitter.emitEdge("contains", Map.of("outV", projectId, "inVs", new String[]{documentId}));
         emitter.emitEdge("contains", Map.of("outV", documentId, "inVs", rangeIds.stream().sorted().toArray()));
-    }
-
-    private JavaSymbolSolver getSymbolSolver() {
-        return new JavaSymbolSolver(getTypeSolver());
-    }
-
-    private TypeSolver getTypeSolver() {
-        CombinedTypeSolver typeSolver = new CombinedTypeSolver();
-        typeSolver.add(new JavaParserTypeSolver(projectRoot));
-        typeSolver.add(new ReflectionTypeSolver());
-        return typeSolver;
-    }
-
-    private CompilationUnit parse() {
-        try {
-            return StaticJavaParser.parse(new File(pathname));
-        } catch (FileNotFoundException ex) {
-            throw new RuntimeException(String.format("Failed to parse %s", pathname));
-        }
     }
 
     private void linkUses(DefinitionMeta meta, String documentId) {
@@ -144,10 +131,9 @@ public class DocumentIndexer {
     }
 
     private class LSIFVisitor extends VoidVisitorAdapter<Void> {
-        private JavaSymbolSolver symbolSolver;
+        private boolean log;
 
-        public LSIFVisitor(JavaSymbolSolver symbolSolver) {
-            this.symbolSolver = symbolSolver;
+        public LSIFVisitor() {
         }
 
         // TODO - field access
@@ -158,7 +144,16 @@ public class DocumentIndexer {
         @Override
         public void visit(final MethodCallExpr n, final Void arg) {
             super.visit(n, arg);
-            emitUse(n);
+            if (n.getName().getIdentifier().equals("postIndex")) {
+                this.log = true;
+            }
+            try {
+                System.out.println(n.resolve());
+                emitUse(n, n.getScope().resolve());
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+            }
+            this.log = false;
         }
 
         @Override
@@ -176,7 +171,11 @@ public class DocumentIndexer {
         @Override
         public void visit(final NameExpr n, final Void arg) {
             super.visit(n, arg);
-            emitUse(n);
+            try {
+                emitUse(n, n.resolve());
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
         @Override
@@ -214,18 +213,14 @@ public class DocumentIndexer {
             definitions.put(range, new DefinitionMeta(rangeId, resultSetId)); // + contents?
         }
 
-        private void emitUse(Node n) {
-            ResolvedDeclaration definition;
-            try {
-                definition = symbolSolver.resolveDeclaration(n, ResolvedDeclaration.class);
-            } catch (RuntimeException ex) {
-                // ignore
-                return;
-            }
-
-            Node definitionNode = getNode(definition);
+        private void emitUse(Node n, ResolvedDeclaration decl) {
+            Node definitionNode = getNode(decl);
+            if (this.log) System.out.println(decl);
             if (definitionNode == null) {
+                if (this.log) System.out.println("NO DEF");
                 return;
+            } else {
+                if (this.log) System.out.println("DEF");
             }
 
             Optional<String> definitionPathContainer = definitionNode.findCompilationUnit()
@@ -254,10 +249,13 @@ public class DocumentIndexer {
                             : JavaParserSymbolDeclaration.class.isInstance(def) ? JavaParserSymbolDeclaration.class.cast(def).getWrappedNode()
 //                    : JavaParserTypeVariableDeclaration.class.isInstance(def) ? JavaParserTypeVariableDeclaration.class.cast(def).getWrappedNode()
                             : JavaParserVariableDeclaration.class.isInstance(def) ? JavaParserVariableDeclaration.class.cast(def).getWrappedNode()
+//                            : ReflectionMethodDeclaration.class.isInstance(def) ? JavaParserMethodDeclaration.class.cast(def).getWrappedNode()
                             : null;
         }
 
         private void emitUse(Node n, Node definition, String definitionPath) {
+            if (this.log) System.out.println("emitUse2...");
+
             DocumentIndexer indexer = indexers.get(definitionPath);
 
             Optional<Range> rangeContainer = getRange(n);
@@ -277,6 +275,7 @@ public class DocumentIndexer {
 
             String rangeId = emitter.emitVertex("range", createRange(range));
             emitter.emitEdge("next", Map.of("outV", rangeId, "inV", meta.resultSetId));
+            if (this.log) System.out.println("emitUse2 edge...");
 
             if (meta.definitionResultId == null) {
                 String resultId = emitter.emitVertex("definitionResult", Map.of());
