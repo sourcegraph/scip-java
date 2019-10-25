@@ -1,10 +1,13 @@
+import spoon.MavenLauncher;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtType;
+import spoon.reflect.visitor.CtIterator;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -31,30 +34,33 @@ public class ProjectIndexer {
                 "kind", "java"
         ));
 
-        List<String> files = createFileStream()
-                .map(x -> x.toString())
-                .filter(f -> f.endsWith(".java"))
-                .sorted()
-                .collect(Collectors.toList());
+        MavenLauncher spoon = new MavenLauncher(arguments.projectRoot, MavenLauncher.SOURCE_TYPE.ALL_SOURCE);
+        spoon.buildModel();
+        Map<String, CtElement> typeByFile = new HashMap();
+        for (CtElement el : spoon.getModel().getRootPackage().getTypes()) {
+            System.out.println(el.getPosition().getFile().getPath());
+            typeByFile.put(el.getPosition().getFile().getPath(), el);
+        }
 
         Map<String, DocumentIndexer> indexers = new HashMap<>();
-        for (String pathname : files) {
-            indexers.put(pathname, new DocumentIndexer(
+        for (Map.Entry<String, CtElement> pathname : typeByFile.entrySet()) {
+            indexers.put(pathname.getKey(), new DocumentIndexer(
                     arguments.projectRoot,
                     arguments.noContents,
-                    pathname,
+                    pathname.getKey(),
+                    pathname.getValue(),
                     projectId,
                     emitter,
                     indexers
             ));
         }
 
-        for (String pathname : files) {
-            indexers.get(pathname).index();
+        for (DocumentIndexer indexer : indexers.values()) {
+            indexer.index();
         }
 
-        for (String pathname : files) {
-            indexers.get(pathname).postIndex();
+        for (DocumentIndexer indexer : indexers.values()) {
+            indexer.postIndex();
         }
 
         for (DocumentIndexer indexer : indexers.values()) {
