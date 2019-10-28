@@ -1,5 +1,7 @@
 import spoon.MavenLauncher;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtModule;
+import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.visitor.CtIterator;
 
@@ -37,8 +39,8 @@ public class ProjectIndexer {
         MavenLauncher spoon = new MavenLauncher(arguments.projectRoot, MavenLauncher.SOURCE_TYPE.ALL_SOURCE);
         spoon.buildModel();
         Map<String, CtElement> typeByFile = new HashMap();
-        for (CtElement el : spoon.getModel().getRootPackage().getTypes()) {
-            System.out.println(el.getPosition().getFile().getPath());
+        for (CtElement el : spoon.getModel().getAllTypes()) {
+            System.out.println("Found " + el.getPosition().getFile().getPath());
             typeByFile.put(el.getPosition().getFile().getPath(), el);
         }
 
