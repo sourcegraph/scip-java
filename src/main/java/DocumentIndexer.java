@@ -107,62 +107,63 @@ public class DocumentIndexer {
     }
 
     private class LSIFVisitor extends CtScanner {
-        // TODO - field access
-        // TODO - types to classes
-        // TODO - enums
-        // TODO - inner classes?
+        // TODO add support for more language constructs:
+        // https://github.com/INRIA/spoon/blob/master/src/main/java/spoon/reflect/visitor/CtScanner.java
 
         @Override
-        public <T> void visitCtParameter(CtParameter<T> a) {
-            emitDefinition(mkRange(a.getPosition()), mkDoc(a.getType(), a.getDocComment()));
+        public <T> void visitCtParameter(CtParameter<T> el) {
+            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
         }
 
         @Override
-        public <T> void visitCtVariableRead(CtVariableRead<T> a) {
-            emitUse(mkRange(a.getPosition()), mkRange(a.getVariable().getDeclaration().getPosition()), a.getVariable().getDeclaration().getDocComment(), a.getVariable().getDeclaration().getPosition().getFile().getPath());
-        }
-
-        @Override
-        public <T> void visitCtMethod(CtMethod<T> a) {
-            super.visitCtMethod(a);
-            emitDefinition(nameRange(a), mkDoc(a.getType(), a.getDocComment()));
-        }
-
-        @Override
-        public <T> void visitCtInvocation(CtInvocation<T> a) {
-            super.visitCtInvocation(a);
-            if (a.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-            if (a.getExecutable() == null || a.getExecutable().getDeclaration() == null) {
-                return;
-            }
-            Range useRange = identifierRange(a, a.getExecutable().getSimpleName());
+        public <T> void visitCtVariableRead(CtVariableRead<T> el) {
             emitUse(
-                    useRange,
-                    nameRange(a.getExecutable().getDeclaration()),
-                    a.getExecutable().getDeclaration().getDocComment(),
-                    a.getExecutable().getDeclaration().getPosition().getFile().getPath()
+                    mkRange(el.getPosition()),
+                    mkRange(el.getVariable().getDeclaration().getPosition()),
+                    el.getVariable().getDeclaration().getDocComment(),
+                    el.getVariable().getDeclaration().getPosition().getFile().getPath()
             );
         }
 
         @Override
-        public <T> void visitCtField(CtField<T> a) {
-            super.visitCtField(a);
-            emitDefinition(nameRange(a), mkDoc(a.getType(), a.getDocComment()));
+        public <T> void visitCtMethod(CtMethod<T> el) {
+            super.visitCtMethod(el);
+            emitDefinition(nameRange(el), mkDoc(el.getType(), el.getDocComment()));
         }
 
         @Override
-        public <T> void visitCtFieldRead(CtFieldRead<T> a) {
-            super.visitCtFieldRead(a);
-            if (a.getPosition() instanceof NoSourcePosition) {
-                System.out.println("Skipping CtFieldRead (NoSourcePosition) " + a);
+        public <T> void visitCtInvocation(CtInvocation<T> el) {
+            super.visitCtInvocation(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
                 return;
             }
-            Range useRange = identifierRange(a, a.getVariable().getSimpleName());
-            CtField decl = a.getVariable().getDeclaration();
+            if (el.getExecutable() == null || el.getExecutable().getDeclaration() == null) {
+                return;
+            }
+            Range useRange = identifierRange(el, el.getExecutable().getSimpleName());
+            emitUse(
+                    useRange,
+                    nameRange(el.getExecutable().getDeclaration()),
+                    el.getExecutable().getDeclaration().getDocComment(),
+                    el.getExecutable().getDeclaration().getPosition().getFile().getPath()
+            );
+        }
+
+        @Override
+        public <T> void visitCtField(CtField<T> el) {
+            super.visitCtField(el);
+            emitDefinition(nameRange(el), mkDoc(el.getType(), el.getDocComment()));
+        }
+
+        @Override
+        public <T> void visitCtFieldRead(CtFieldRead<T> el) {
+            super.visitCtFieldRead(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+                return;
+            }
+            Range useRange = identifierRange(el, el.getVariable().getSimpleName());
+            CtField decl = el.getVariable().getDeclaration();
             if (decl == null) {
-                System.out.println("Skipping CtFieldRead (null declaration) " + a);
                 return;
             }
             emitUse(
@@ -174,25 +175,23 @@ public class DocumentIndexer {
         }
 
         @Override
-        public <T> void visitCtClass(CtClass<T> a) {
-            super.visitCtClass(a);
-            emitDefinition(nameRange(a), a.getDocComment());
+        public <T> void visitCtClass(CtClass<T> el) {
+            super.visitCtClass(el);
+            emitDefinition(nameRange(el), el.getDocComment());
         }
 
         @Override
-        public <T> void visitCtTypeReference(CtTypeReference<T> a) {
-            super.visitCtTypeReference(a);
-            if (a.getPosition() instanceof NoSourcePosition) {
-                System.out.println("Skipping CtTypeReference (NoSourcePosition) " + a);
+        public <T> void visitCtTypeReference(CtTypeReference<T> el) {
+            super.visitCtTypeReference(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
                 return;
             }
-            CtType decl = a.getDeclaration();
+            CtType decl = el.getDeclaration();
             if (decl == null) {
-                System.out.println("Skipping CtFieldRead (null declaration) " + a);
                 return;
             }
             emitUse(
-                    mkRange(a.getPosition()),
+                    mkRange(el.getPosition()),
                     nameRange(decl),
                     decl.getDocComment(),
                     decl.getPosition().getFile().getPath()
@@ -305,7 +304,7 @@ public class DocumentIndexer {
         private Range identifierRange(CtTargetedExpression a, String b) {
             // Ugh, we only want the range for the identifier, not the whole expression.
             // This will probably break on fields/methods that are spread across lines.
-            // +1 for `.`, +1 because (I'm guessing) end is inclusive
+            // +1 for `.`, +1 because (I'm guessing) end is exclusive
             SourcePosition p = a.getTarget().getPosition();
             return p instanceof NoSourcePosition ?
                     mkRange(a.getPosition()) :
