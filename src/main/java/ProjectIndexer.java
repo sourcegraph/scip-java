@@ -58,7 +58,15 @@ public class ProjectIndexer {
         }
 
         for (DocumentIndexer indexer : indexers.values()) {
-            indexer.index();
+            indexer.preIndex();
+        }
+
+        for (DocumentIndexer indexer : indexers.values()) {
+            indexer.visitDefinitions();
+        }
+
+        for (DocumentIndexer indexer : indexers.values()) {
+            indexer.visitReferences();
         }
 
         for (DocumentIndexer indexer : indexers.values()) {
