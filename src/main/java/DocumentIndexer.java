@@ -22,7 +22,6 @@ public class DocumentIndexer {
     private Emitter emitter;
     private Map<String, DocumentIndexer> indexers;
     private String documentId;
-    private boolean indexed = false;
     private Set<String> rangeIds = new HashSet<>();
     private Map<Range, DefinitionMeta> definitions = new HashMap<>();
 
@@ -48,16 +47,15 @@ public class DocumentIndexer {
         return definitions.size();
     }
 
-    public void index() {
-        if (indexed) {
-            return;
-        }
-
-        doIndex();
-        indexed = true;
+    public void visitDefinitions() {
+        this.spoonElement.accept(new DefinitionsVisitor());
     }
 
-    private void doIndex() {
+    public void visitReferences() {
+        this.spoonElement.accept(new ReferencesVisitor());
+    }
+
+    public void preIndex() {
         Map<String, Object> args = Map.of(
                 "languageId", "java",
                 "uri", String.format("file://%s", Paths.get(pathname).toAbsolutePath().toString())
@@ -73,7 +71,6 @@ public class DocumentIndexer {
         }
 
         this.documentId = emitter.emitVertex("document", args);
-        this.spoonElement.accept(new LSIFVisitor());
     }
 
     public void postIndex() {
@@ -106,23 +103,26 @@ public class DocumentIndexer {
         }
     }
 
-    private class LSIFVisitor extends CtScanner {
-        // TODO add support for more language constructs:
-        // https://github.com/INRIA/spoon/blob/master/src/main/java/spoon/reflect/visitor/CtScanner.java
+    // TODO add support for more language constructs:
+    // https://github.com/INRIA/spoon/blob/master/src/main/java/spoon/reflect/visitor/CtScanner.java
 
+    private class DefinitionsVisitor extends CtScanner {
         @Override
         public <T> void visitCtParameter(CtParameter<T> el) {
+            super.visitCtParameter(el);
             emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
         }
 
         @Override
-        public <T> void visitCtVariableRead(CtVariableRead<T> el) {
-            emitUse(
-                    mkRange(el.getPosition()),
-                    mkRange(el.getVariable().getDeclaration().getPosition()),
-                    el.getVariable().getDeclaration().getDocComment(),
-                    el.getVariable().getDeclaration().getPosition().getFile().getPath()
-            );
+        public <T> void visitCtLocalVariable(CtLocalVariable<T> el) {
+            super.visitCtLocalVariable(el);
+            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
+        }
+
+        @Override
+        public <T> void visitCtCatchVariable(CtCatchVariable<T> el) {
+            super.visitCtCatchVariable(el);
+            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
         }
 
         @Override
@@ -132,46 +132,9 @@ public class DocumentIndexer {
         }
 
         @Override
-        public <T> void visitCtInvocation(CtInvocation<T> el) {
-            super.visitCtInvocation(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-            if (el.getExecutable() == null || el.getExecutable().getDeclaration() == null) {
-                return;
-            }
-            Range useRange = identifierRange(el, el.getExecutable().getSimpleName());
-            emitUse(
-                    useRange,
-                    nameRange(el.getExecutable().getDeclaration()),
-                    el.getExecutable().getDeclaration().getDocComment(),
-                    el.getExecutable().getDeclaration().getPosition().getFile().getPath()
-            );
-        }
-
-        @Override
         public <T> void visitCtField(CtField<T> el) {
             super.visitCtField(el);
             emitDefinition(nameRange(el), mkDoc(el.getType(), el.getDocComment()));
-        }
-
-        @Override
-        public <T> void visitCtFieldRead(CtFieldRead<T> el) {
-            super.visitCtFieldRead(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-            Range useRange = identifierRange(el, el.getVariable().getSimpleName());
-            CtField decl = el.getVariable().getDeclaration();
-            if (decl == null) {
-                return;
-            }
-            emitUse(
-                    useRange,
-                    nameRange(decl),
-                    decl.getDocComment(),
-                    decl.getPosition().getFile().getPath()
-            );
         }
 
         @Override
@@ -180,28 +143,8 @@ public class DocumentIndexer {
             emitDefinition(nameRange(el), el.getDocComment());
         }
 
-        @Override
-        public <T> void visitCtTypeReference(CtTypeReference<T> el) {
-            super.visitCtTypeReference(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-            CtType decl = el.getDeclaration();
-            if (decl == null) {
-                return;
-            }
-            emitUse(
-                    mkRange(el.getPosition()),
-                    nameRange(decl),
-                    decl.getDocComment(),
-                    decl.getPosition().getFile().getPath()
-            );
-        }
-
         private void emitDefinition(Range range, String doc) {
-            if (definitions.containsKey(range)) {
-                return;
-            }
+            System.out.println("DEF " + pathname + ":" + humanRange(range));
 
             String hoverId = emitter.emitVertex("hoverResult", Map.of(
                     "result", Map.of(
@@ -220,15 +163,73 @@ public class DocumentIndexer {
             rangeIds.add(rangeId);
             definitions.put(range, new DefinitionMeta(rangeId, resultSetId)); // + contents?
         }
+    }
 
-        private void emitUse(Range use, Range def, String doc, String defPath) {
-            DocumentIndexer indexer = indexers.get(defPath);
+    private class ReferencesVisitor extends CtScanner {
+        @Override
+        public <T> void visitCtVariableRead(CtVariableRead<T> el) {
+            super.visitCtVariableRead(el);
+            emitUse(
+                    mkRange(el.getPosition()),
+                    mkRange(el.getVariable().getDeclaration().getPosition()),
+                    el.getVariable().getDeclaration().getPosition().getFile().getPath()
+            );
+        }
 
-            if (defPath.equals(pathname)) {
-                emitDefinition(def, doc);
-            } else {
-                indexer.index();
+        @Override
+        public <T> void visitCtInvocation(CtInvocation<T> el) {
+            super.visitCtInvocation(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+                return;
             }
+            if (el.getExecutable() == null || el.getExecutable().getDeclaration() == null) {
+                return;
+            }
+            Range useRange = identifierRange(el, el.getExecutable().getSimpleName());
+            emitUse(
+                    useRange,
+                    nameRange(el.getExecutable().getDeclaration()),
+                    el.getExecutable().getDeclaration().getPosition().getFile().getPath()
+            );
+        }
+
+        @Override
+        public <T> void visitCtFieldRead(CtFieldRead<T> el) {
+            super.visitCtFieldRead(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+                return;
+            }
+            Range useRange = identifierRange(el, el.getVariable().getSimpleName());
+            CtField decl = el.getVariable().getDeclaration();
+            if (decl == null) {
+                return;
+            }
+            emitUse(
+                    useRange,
+                    nameRange(decl),
+                    decl.getPosition().getFile().getPath()
+            );
+        }
+
+        @Override
+        public <T> void visitCtTypeReference(CtTypeReference<T> el) {
+            super.visitCtTypeReference(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+                return;
+            }
+            CtType decl = el.getDeclaration();
+            if (decl == null) {
+                return;
+            }
+            emitUse(
+                    mkRange(el.getPosition()),
+                    nameRange(decl),
+                    decl.getPosition().getFile().getPath()
+            );
+        }
+
+        private void emitUse(Range use, Range def, String defPath) {
+            DocumentIndexer indexer = indexers.get(defPath);
 
             System.out.println(pathname + ":" + humanRange(use) + " -> " + defPath + ":" + humanRange(def));
 
@@ -258,57 +259,57 @@ public class DocumentIndexer {
             set.add(rangeId);
             meta.referenceRangeIds.put(documentId, set);
         }
+    }
 
-        private Range nameRange(CtNamedElement a) {
-            return nameRange(a.getPosition(), a.getSimpleName());
-        }
+    private Range nameRange(CtNamedElement a) {
+        return nameRange(a.getPosition(), a.getSimpleName());
+    }
 
-        private Range nameRange(SourcePosition a, String name) {
-            return Range.range(
-                    a.getLine(),
-                    a.getColumn(),
-                    a.getLine(),
-                    a.getColumn() + name.length()
-            );
-        }
+    private Range nameRange(SourcePosition a, String name) {
+        return Range.range(
+                a.getLine(),
+                a.getColumn(),
+                a.getLine(),
+                a.getColumn() + name.length()
+        );
+    }
 
-        private Range nameRange(Range a, String name) {
-            return Range.range(
-                    a.begin.line,
-                    a.begin.column,
-                    a.end.line,
-                    a.end.column + name.length()
-            );
-        }
+    private Range nameRange(Range a, String name) {
+        return Range.range(
+                a.begin.line,
+                a.begin.column,
+                a.end.line,
+                a.end.column + name.length()
+        );
+    }
 
-        private String mkDoc(CtTypeReference t, String docComment) {
-            return "```java\n" + t + "\n```" + (docComment.equals("") ? "" : "\n---\n" + docComment);
-        }
+    private String mkDoc(CtTypeReference t, String docComment) {
+        return "```java\n" + t + "\n```" + (docComment.equals("") ? "" : "\n---\n" + docComment);
+    }
 
-        private String humanRange(Range r) {
-            return r.begin.line + ":" + r.begin.column + "-" + r.end.line + ":" + r.end.column;
-        }
+    private String humanRange(Range r) {
+        return r.begin.line + ":" + r.begin.column + "-" + r.end.line + ":" + r.end.column;
+    }
 
-        private Range mkRange(SourcePosition pos) {
-            return Range.range(pos.getLine(), pos.getColumn(), pos.getEndLine(), pos.getEndColumn());
-        }
+    private Range mkRange(SourcePosition pos) {
+        return Range.range(pos.getLine(), pos.getColumn(), pos.getEndLine(), pos.getEndColumn());
+    }
 
-        private Map<String, Object> createRange(Range range) {
-            return Map.of("start", createPosition(range.begin), "end", createPosition(range.end));
-        }
+    private Map<String, Object> createRange(Range range) {
+        return Map.of("start", createPosition(range.begin), "end", createPosition(range.end));
+    }
 
-        private Map<String, Object> createPosition(Position position) {
-            return Map.of("line", position.line - 1, "character", position.column - 1);
-        }
+    private Map<String, Object> createPosition(Position position) {
+        return Map.of("line", position.line - 1, "character", position.column - 1);
+    }
 
-        private Range identifierRange(CtTargetedExpression a, String b) {
-            // Ugh, we only want the range for the identifier, not the whole expression.
-            // This will probably break on fields/methods that are spread across lines.
-            // +1 for `.`, +1 because (I'm guessing) end is exclusive
-            SourcePosition p = a.getTarget().getPosition();
-            return p instanceof NoSourcePosition ?
-                    mkRange(a.getPosition()) :
-                    Range.range(p.getEndLine(), p.getEndColumn() + 1 + 1, p.getEndLine(), p.getEndColumn() + 1 + 1 + b.length());
-        }
+    private Range identifierRange(CtTargetedExpression a, String b) {
+        // Ugh, we only want the range for the identifier, not the whole expression.
+        // This will probably break on fields/methods that are spread across lines.
+        // +1 for `.`, +1 because (I'm guessing) end is inclusive
+        SourcePosition p = a.getTarget().getPosition();
+        return p instanceof NoSourcePosition ?
+                mkRange(a.getPosition()) :
+                Range.range(p.getEndLine(), p.getEndColumn() + 1 + 1, p.getEndLine(), p.getEndColumn() + 1 + 1 + b.length());
     }
 }
