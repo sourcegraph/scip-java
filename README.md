@@ -2,7 +2,7 @@
 
 ## Usage
 
-Make sure there is a `pom.xml` in the project root. For Gradle projects, you must first [generate a `pom.xml`](https://docs.gradle.org/current/userguide/maven_plugin.html#sec:maven_convention_methods):
+Make sure there is a `pom.xml` in the project root. For Gradle projects, you can create a `pom.xml` by first adding a [`createPom`](https://docs.gradle.org/current/userguide/maven_plugin.html#sec:maven_convention_methods) task then running `gradle createPom`. Here's an example task:
 
 ```groovy
 task createPom  {
@@ -10,7 +10,7 @@ task createPom  {
 }
 ```
 
-Then run:
+Then run the Java LSIF indexer:
 
 ```
 mvn -q compile assembly:single
