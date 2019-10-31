@@ -2,6 +2,16 @@
 
 ## Usage
 
+Make sure there is a `pom.xml` in the project root. For Gradle projects, you must first [generate a `pom.xml`](https://docs.gradle.org/current/userguide/maven_plugin.html#sec:maven_convention_methods):
+
+```groovy
+task createPom  {
+    pom { }.writeTo("pom.xml")
+}
+```
+
+Then run:
+
 ```
 mvn -q compile assembly:single
 java -cp \
