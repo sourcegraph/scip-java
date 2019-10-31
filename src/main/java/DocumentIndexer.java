@@ -231,11 +231,13 @@ public class DocumentIndexer {
         private void emitUse(Range use, Range def, String defPath) {
             DocumentIndexer indexer = indexers.get(defPath);
 
-            System.out.println(pathname + ":" + humanRange(use) + " -> " + defPath + ":" + humanRange(def));
+            String link = pathname + ":" + humanRange(use) + " -> " + defPath + ":" + humanRange(def);
+            System.out.println("Linking use to definition: " + link);
 
             DefinitionMeta meta = indexer.definitions.get(def);
             if (meta == null) {
-                throw new RuntimeException("BUG definition doesn't exist, usePath " + pathname + ", use " + humanRange(use) + ", defPath " + defPath + ", def " + humanRange(def));
+                System.out.println("WARNING Skipping linking use to definition: " + link);
+                return;
             }
 
             String rangeId = emitter.emitVertex("range", createRange(use));
