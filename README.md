@@ -17,7 +17,7 @@ mvn -q compile assembly:single
 java -cp \
   target/lsifjava-1.0-SNAPSHOT-jar-with-dependencies.jar \
   Main \
-  -projectRoot $PATH_TO_DIR_CONTAINING_POM_XML \
+  -projectRoot <project directory> \
   -noContents \
   -out dump.lsif
 ```
