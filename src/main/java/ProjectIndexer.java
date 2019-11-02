@@ -1,3 +1,4 @@
+import com.google.common.collect.ImmutableMap;
 import spoon.MavenLauncher;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtModule;
@@ -26,13 +27,13 @@ public class ProjectIndexer {
     }
 
     public void index() {
-        emitter.emitVertex("metaData", Map.of(
+        emitter.emitVertex("metaData", Util.mapOf(
                 "version", "0.4.0",
                 "positionEncoding", "utf-16",
                 "projectRoot", String.format("file://%s", Paths.get(arguments.projectRoot).toAbsolutePath().toString())
         ));
 
-        String projectId = emitter.emitVertex("project", Map.of(
+        String projectId = emitter.emitVertex("project", Util.mapOf(
                 "kind", "java"
         ));
 

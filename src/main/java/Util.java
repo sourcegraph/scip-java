@@ -7,4 +7,12 @@ public class Util {
         union.putAll(h2);
         return union;
     }
+
+    protected static Map<String, Object> mapOf(Object... args) {
+        Map<String, Object> map = new HashMap();
+        for (int i = 0; i < args.length - 1; i += 2) {
+            map.put(args[i].toString(), args[i + 1]);
+        }
+        return map;
+    }
 }

@@ -56,7 +56,7 @@ public class DocumentIndexer {
     }
 
     public void preIndex() {
-        Map<String, Object> args = Map.of(
+        Map<String, Object> args = Util.mapOf(
                 "languageId", "java",
                 "uri", String.format("file://%s", Paths.get(pathname).toAbsolutePath().toString())
         );
@@ -64,7 +64,7 @@ public class DocumentIndexer {
         if (!noContents) {
             try {
                 List<String> lines = Files.readAllLines(Paths.get(pathname), StandardCharsets.UTF_8);
-                args = Util.union(args, Map.of("contents", String.join("\n", lines)));
+                args = Util.union(args, Util.mapOf("contents", String.join("\n", lines)));
             } catch (IOException ex) {
                 throw new RuntimeException(String.format("Failed to read file %s", pathname));
             }
@@ -78,15 +78,15 @@ public class DocumentIndexer {
             linkUses(meta, documentId);
         }
 
-        emitter.emitEdge("contains", Map.of("outV", projectId, "inVs", new String[]{documentId}));
-        emitter.emitEdge("contains", Map.of("outV", documentId, "inVs", rangeIds.stream().sorted().toArray()));
+        emitter.emitEdge("contains", Util.mapOf("outV", projectId, "inVs", new String[]{documentId}));
+        emitter.emitEdge("contains", Util.mapOf("outV", documentId, "inVs", rangeIds.stream().sorted().toArray()));
     }
 
     private void linkUses(DefinitionMeta meta, String documentId) {
-        String resultId = emitter.emitVertex("referenceResult", Map.of());
+        String resultId = emitter.emitVertex("referenceResult", Util.mapOf());
 
-        emitter.emitEdge("textDocument/references", Map.of("outV", meta.resultSetId, "inV", resultId));
-        emitter.emitEdge("item", Map.of(
+        emitter.emitEdge("textDocument/references", Util.mapOf("outV", meta.resultSetId, "inV", resultId));
+        emitter.emitEdge("item", Util.mapOf(
                 "property", "definitions",
                 "outV", resultId,
                 "inVs", new String[]{meta.rangeId},
@@ -94,7 +94,7 @@ public class DocumentIndexer {
         ));
 
         for (Map.Entry<String, Set<String>> entry : meta.referenceRangeIds.entrySet()) {
-            emitter.emitEdge("item", Map.of(
+            emitter.emitEdge("item", Util.mapOf(
                     "property", "references",
                     "outV", resultId,
                     "inVs", entry.getValue().stream().sorted().toArray(),
@@ -146,19 +146,19 @@ public class DocumentIndexer {
         private void emitDefinition(Range range, String doc) {
             System.out.println("DEF " + pathname + ":" + humanRange(range));
 
-            String hoverId = emitter.emitVertex("hoverResult", Map.of(
-                    "result", Map.of(
-                            "contents", Map.of(
+            String hoverId = emitter.emitVertex("hoverResult", Util.mapOf(
+                    "result", Util.mapOf(
+                            "contents", Util.mapOf(
                                     "kind", "markdown",
                                     "value", doc
                             )
                     )
             ));
 
-            String resultSetId = emitter.emitVertex("resultSet", Map.of());
-            emitter.emitEdge("textDocument/hover", Map.of("outV", resultSetId, "inV", hoverId));
+            String resultSetId = emitter.emitVertex("resultSet", Util.mapOf());
+            emitter.emitEdge("textDocument/hover", Util.mapOf("outV", resultSetId, "inV", hoverId));
             String rangeId = emitter.emitVertex("range", createRange(range));
-            emitter.emitEdge("next", Map.of("outV", rangeId, "inV", resultSetId));
+            emitter.emitEdge("next", Util.mapOf("outV", rangeId, "inV", resultSetId));
 
             rangeIds.add(rangeId);
             definitions.put(range, new DefinitionMeta(rangeId, resultSetId)); // + contents?
@@ -241,15 +241,15 @@ public class DocumentIndexer {
             }
 
             String rangeId = emitter.emitVertex("range", createRange(use));
-            emitter.emitEdge("next", Map.of("outV", rangeId, "inV", meta.resultSetId));
+            emitter.emitEdge("next", Util.mapOf("outV", rangeId, "inV", meta.resultSetId));
 
             if (meta.definitionResultId == null) {
-                String resultId = emitter.emitVertex("definitionResult", Map.of());
-                emitter.emitEdge("textDocument/definition", Map.of("outV", meta.resultSetId, "inV", resultId));
+                String resultId = emitter.emitVertex("definitionResult", Util.mapOf());
+                emitter.emitEdge("textDocument/definition", Util.mapOf("outV", meta.resultSetId, "inV", resultId));
                 meta.definitionResultId = resultId;
             }
 
-            emitter.emitEdge("item", Map.of(
+            emitter.emitEdge("item", Util.mapOf(
                     "outV", meta.definitionResultId,
                     "inVs", new String[]{meta.rangeId},
                     "document", indexer.documentId
@@ -298,11 +298,11 @@ public class DocumentIndexer {
     }
 
     private Map<String, Object> createRange(Range range) {
-        return Map.of("start", createPosition(range.begin), "end", createPosition(range.end));
+        return Util.mapOf("start", createPosition(range.begin), "end", createPosition(range.end));
     }
 
     private Map<String, Object> createPosition(Position position) {
-        return Map.of("line", position.line - 1, "character", position.column - 1);
+        return Util.mapOf("line", position.line - 1, "character", position.column - 1);
     }
 
     private Range identifierRange(CtTargetedExpression a, String b) {

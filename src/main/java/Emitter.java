@@ -28,7 +28,7 @@ public class Emitter {
     private String emit(String typeName, String labelName, Map<String, Object> args) {
         String id = String.format("%d", nextId++);
 
-        writer.println(gson.toJson(Util.union(args, Map.of(
+        writer.println(gson.toJson(Util.union(args, Util.mapOf(
                 "id", id,
                 "type", typeName,
                 "label", labelName
