@@ -1,3 +1,7 @@
 .idea
 target
 spoon.classpath-app.tmp
+.classpath
+*.project
+.settings
+*.iml
