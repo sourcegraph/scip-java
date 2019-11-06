@@ -29,7 +29,6 @@ Then run the Java LSIF indexer:
 
 - sourcegraph/lsif-java is ~10x faster
 - sourcegraph/lsif-java supports cross-file hovers/definitions/references (Microsoft/lsif-java does not)
-- sourcegraph/lsif-java only supports Maven projects (Microsoft/lsif-java: unknown)
 - sourcegraph/lsif-java uses [Spoon](https://github.com/INRIA/spoon), which is built on [eclipse.jdt.core](https://github.com/eclipse/eclipse.jdt.core)
 - Microsoft/lsif-java uses [eclipse.jdt.ls](https://github.com/eclipse/eclipse.jdt.ls), which is also built on [eclipse.jdt.core](https://github.com/eclipse/eclipse.jdt.core)
 
