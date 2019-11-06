@@ -1,8 +1,9 @@
 .idea
 target
-spoon.classpath-app.tmp
+**/spoon.classpath*.tmp
 .classpath
 *.project
 .settings
 *.iml
 .gradle
+examples/**/dump.lsif
