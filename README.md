@@ -10,15 +10,18 @@ task createPom  {
 }
 ```
 
+Build the Java LSIF indexer:
+
+```
+./gradlew installDist
+```
+
 Then run the Java LSIF indexer:
 
 ```
-mvn -q compile assembly:single
-java -cp \
-  target/lsifjava-1.0-SNAPSHOT-jar-with-dependencies.jar \
-  Main \
-  -projectRoot <project directory> \
+./build/install/lsifjava/bin/lsifjava \
   -noContents \
+  -projectRoot <project directory> \
   -out dump.lsif
 ```
 
@@ -31,3 +34,9 @@ java -cp \
 - Microsoft/lsif-java uses [eclipse.jdt.ls](https://github.com/eclipse/eclipse.jdt.ls), which is also built on [eclipse.jdt.core](https://github.com/eclipse/eclipse.jdt.core)
 
 See https://github.com/microsoft/lsif-java/issues/61 for the status of collaboration efforts.
+
+## Development
+
+```
+./gradlew run --args="-noContents -projectRoot . -out dump.lsif"
+```

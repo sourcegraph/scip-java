@@ -5,6 +5,11 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'application'
+}
+
+application {
+    mainClassName = 'Main'
 }
 
 repositories {
