@@ -37,5 +37,5 @@ See https://github.com/microsoft/lsif-java/issues/61 for the status of collabora
 ## Development
 
 ```
-./gradlew run --args="-noContents -projectRoot . -out dump.lsif"
+./dev
 ```
