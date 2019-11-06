@@ -5,3 +5,4 @@ spoon.classpath-app.tmp
 *.project
 .settings
 *.iml
+.gradle
