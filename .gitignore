@@ -7,3 +7,4 @@ target
 *.iml
 .gradle
 examples/**/dump.lsif
+build
