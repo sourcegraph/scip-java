@@ -1,6 +1,21 @@
 # Java LSIF indexer
 
+## Prerequisites
+
+- Java 1.8 or higher installed on your machine
+- Maven
+
+## Installation
+
+```
+git clone https://github.com/sourcegraph/lsif-java
+cd lsif-java
+./gradlew installDist
+```
+
 ## Usage
+
+### Configuring your project
 
 Make sure there is a `pom.xml` in the project root. For Gradle projects, you can create a `pom.xml` by first adding a [`createPom`](https://docs.gradle.org/current/userguide/maven_plugin.html#sec:maven_convention_methods) task then running `gradle createPom`. Here's an example task:
 
@@ -10,11 +25,7 @@ task createPom  {
 }
 ```
 
-Build the Java LSIF indexer:
-
-```
-./gradlew installDist
-```
+### Indexing your repository (generate LSIF data)
 
 Then run the Java LSIF indexer:
 
