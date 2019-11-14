@@ -30,7 +30,7 @@ task createPom  {
 Then run the Java LSIF indexer:
 
 ```
-./build/install/lsifjava/bin/lsifjava \
+<absolute path to lsif-java>/build/install/lsifjava/bin/lsifjava \
   -noContents \
   -projectRoot <project directory> \
   -out dump.lsif
