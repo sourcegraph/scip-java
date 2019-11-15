@@ -1,5 +1,7 @@
 # Java LSIF indexer
 
+Visit https://lsif.dev/ to learn about LSIF.
+
 ## Installation
 
 - Java 1.8 or higher installed on your machine (macOS: `brew cask install java`)
