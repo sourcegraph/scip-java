@@ -1,11 +1,9 @@
 # Java LSIF indexer
 
-## Prerequisites
-
-- Java 1.8 or higher installed on your machine
-- Maven
-
 ## Installation
+
+- Java 1.8 or higher installed on your machine (macOS: `brew cask install java`)
+- [Maven](https://maven.apache.org/install.html) (macOS: `brew install maven`)
 
 ```
 git clone https://github.com/sourcegraph/lsif-java
@@ -13,11 +11,13 @@ cd lsif-java
 ./gradlew installDist
 ```
 
-## Usage
+## Generating an LSIF dump
 
-### Configuring your project
+**Step 1** Ensure you have a `pom.xml` (Maven projects already have one):
 
-Make sure there is a `pom.xml` in the project root. For Gradle projects, you can create a `pom.xml` by first adding a [`createPom`](https://docs.gradle.org/current/userguide/maven_plugin.html#sec:maven_convention_methods) task then running `gradle createPom`. Here's an example task:
+For Gradle projects:
+
+- Add a [`createPom`](https://docs.gradle.org/current/userguide/maven_plugin.html#sec:maven_convention_methods) task
 
 ```groovy
 task createPom  {
@@ -25,9 +25,10 @@ task createPom  {
 }
 ```
 
-### Indexing your repository (generate LSIF data)
+  - Run `gradle createPom`
+  - You should now see `pom.xml` at the top of your project directory
 
-Then run the Java LSIF indexer:
+**Step 2** Generate an LSIF dump:
 
 ```
 <absolute path to lsif-java>/build/install/lsifjava/bin/lsifjava \
