@@ -15,7 +15,7 @@ import java.util.*;
 
 public class DocumentIndexer {
     private String projectRoot;
-    private boolean noContents;
+    private boolean contents;
     private String pathname;
     private CtElement spoonElement;
     private String projectId;
@@ -27,7 +27,7 @@ public class DocumentIndexer {
 
     public DocumentIndexer(
             String projectRoot,
-            boolean noContents,
+            boolean contents,
             String pathname,
             CtElement spoonElement,
             String projectId,
@@ -35,7 +35,7 @@ public class DocumentIndexer {
             Map<String, DocumentIndexer> indexers
     ) {
         this.projectRoot = projectRoot;
-        this.noContents = noContents;
+        this.contents = contents;
         this.pathname = pathname;
         this.spoonElement = spoonElement;
         this.projectId = projectId;
@@ -61,7 +61,7 @@ public class DocumentIndexer {
                 "uri", String.format("file://%s", Paths.get(pathname).toAbsolutePath().toString())
         );
 
-        if (!noContents) {
+        if (contents) {
             try {
                 List<String> lines = Files.readAllLines(Paths.get(pathname), StandardCharsets.UTF_8);
                 args = Util.union(args, Util.mapOf("contents", String.join("\n", lines)));

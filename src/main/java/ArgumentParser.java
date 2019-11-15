@@ -32,7 +32,7 @@ public class ArgumentParser {
         boolean debug = cmd.hasOption("debug");
         boolean verbose = cmd.hasOption("verbose");
         String projectRoot = cmd.getOptionValue("projectRoot", ".");
-        boolean noContents = cmd.hasOption("noContents");
+        boolean contents = cmd.hasOption("contents");
         String outFile = cmd.getOptionValue("out");
         boolean stdout = cmd.hasOption("stdout");
 
@@ -46,7 +46,7 @@ public class ArgumentParser {
             System.exit(1);
         }
 
-        return new Arguments(projectRoot, noContents, outFile, stdout);
+        return new Arguments(projectRoot, contents, outFile, stdout);
     }
 
     private static Options createOptions() {
@@ -78,8 +78,8 @@ public class ArgumentParser {
         ));
 
         options.addOption(new Option(
-                "noContents", false,
-                "File contents will not be embedded into the dump."
+                "contents", false,
+                "File contents will be embedded into the dump."
         ));
 
         options.addOption(new Option(

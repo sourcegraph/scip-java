@@ -49,7 +49,7 @@ public class ProjectIndexer {
         for (Map.Entry<String, CtElement> pathname : typeByFile.entrySet()) {
             indexers.put(pathname.getKey(), new DocumentIndexer(
                     arguments.projectRoot,
-                    arguments.noContents,
+                    arguments.contents,
                     pathname.getKey(),
                     pathname.getValue(),
                     projectId,

@@ -32,7 +32,6 @@ task createPom  {
 
 ```
 <absolute path to lsif-java>/build/install/lsifjava/bin/lsifjava \
-  -noContents \
   -projectRoot <project directory> \
   -out dump.lsif
 ```
