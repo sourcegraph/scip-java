@@ -4,8 +4,23 @@ Visit https://lsif.dev/ to learn about LSIF.
 
 ## Installation
 
-- Java 1.8 or higher installed on your machine (macOS: `brew cask install java`)
+- Java 1.8 or higher
 - [Maven](https://maven.apache.org/install.html) (macOS: `brew install maven`)
+
+**macOS**
+
+```
+brew cask install java
+brew install maven
+```
+
+**Ubuntu 18.04**
+
+```
+apt-get update && apt-get install -y git default-jdk maven
+```
+
+## Build the LSIF indexer
 
 ```
 git clone https://github.com/sourcegraph/lsif-java
