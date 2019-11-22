@@ -37,7 +37,8 @@ public class ProjectIndexer {
                 "kind", "java"
         ));
 
-        MavenLauncher spoon = new MavenLauncher(arguments.projectRoot, MavenLauncher.SOURCE_TYPE.APP_SOURCE);
+        MavenLauncher spoon = new MavenLauncher(arguments.projectRoot, MavenLauncher.SOURCE_TYPE.ALL_SOURCE);
+        spoon.getEnvironment().setIgnoreDuplicateDeclarations(true);
         spoon.buildModel();
         Map<String, CtElement> typeByFile = new HashMap();
         for (CtElement el : spoon.getModel().getAllTypes()) {
