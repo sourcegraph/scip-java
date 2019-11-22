@@ -309,9 +309,10 @@ public class DocumentIndexer {
         // Ugh, we only want the range for the identifier, not the whole expression.
         // This will probably break on fields/methods that are spread across lines.
         // +1 for `.`, +1 because (I'm guessing) end is inclusive
+        if (a.getTarget() == null || a.getTarget().getPosition() instanceof NoSourcePosition) {
+            return mkRange(a.getPosition());
+        }
         SourcePosition p = a.getTarget().getPosition();
-        return p instanceof NoSourcePosition ?
-                mkRange(a.getPosition()) :
-                Range.range(p.getEndLine(), p.getEndColumn() + 1 + 1, p.getEndLine(), p.getEndColumn() + 1 + 1 + b.length());
+        return Range.range(p.getEndLine(), p.getEndColumn() + 1 + 1, p.getEndLine(), p.getEndColumn() + 1 + 1 + b.length());
     }
 }
