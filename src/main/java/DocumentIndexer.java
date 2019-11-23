@@ -110,6 +110,9 @@ public class DocumentIndexer {
         @Override
         public <T> void visitCtParameter(CtParameter<T> el) {
             super.visitCtParameter(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+                return;
+            }
             emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
         }
 
@@ -172,6 +175,9 @@ public class DocumentIndexer {
             if (el.getVariable().getDeclaration() == null) {
                 return;
             }
+            if (el.getPosition() instanceof NoSourcePosition) {
+                return;
+            }
             emitUse(
                     mkRange(el.getPosition()),
                     mkRange(el.getVariable().getDeclaration().getPosition()),
@@ -185,7 +191,7 @@ public class DocumentIndexer {
             if (el.getPosition() instanceof NoSourcePosition) {
                 return;
             }
-            if (el.getExecutable() == null || el.getExecutable().getDeclaration() == null) {
+            if (el.getExecutable() == null || el.getExecutable().getDeclaration() == null || el.getExecutable().getDeclaration().getPosition() instanceof NoSourcePosition) {
                 return;
             }
             Range useRange = identifierRange(el, el.getExecutable().getSimpleName());
