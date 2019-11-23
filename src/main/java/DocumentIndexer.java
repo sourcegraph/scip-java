@@ -169,6 +169,9 @@ public class DocumentIndexer {
         @Override
         public <T> void visitCtVariableRead(CtVariableRead<T> el) {
             super.visitCtVariableRead(el);
+            if (el.getVariable().getDeclaration() == null) {
+                return;
+            }
             emitUse(
                     mkRange(el.getPosition()),
                     mkRange(el.getVariable().getDeclaration().getPosition()),
