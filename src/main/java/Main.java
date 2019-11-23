@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("Running JVM " + System.getProperty("java.version"));
         Arguments arguments = ArgumentParser.parse(args);
         PrintWriter writer = createWriter(arguments);
         Emitter emitter = new Emitter(writer);
