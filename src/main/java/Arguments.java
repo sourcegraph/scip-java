@@ -7,7 +7,7 @@ public class Arguments {
     public Arguments(String projectRoot, boolean contents, String outFile, boolean stdout) {
         this.projectRoot = projectRoot;
         this.contents = contents;
-        this.outFile = outFile;
+        this.outFile = outFile != null ? outFile : projectRoot + "/dump.lsif";
         this.stdout = stdout;
     }
 }
