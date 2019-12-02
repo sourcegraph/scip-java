@@ -34,16 +34,21 @@ cd lsif-java
 
 For Gradle projects:
 
-- Add a [`createPom`](https://docs.gradle.org/current/userguide/maven_plugin.html#sec:maven_convention_methods) task
+1. Add [`maven-publish`](https://docs.gradle.org/current/userguide/publishing_maven.html) to your `plugins` in `build.gradle`
+2. Specify a publication (TODO specify the destination):
 
 ```groovy
-task createPom  {
-    pom { }.writeTo("pom.xml")
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
+    }
+  }
 }
 ```
 
-  - Run `gradle createPom`
-  - You should now see `pom.xml` at the top of your project directory
+3. Run `./gradlew generatePomFileForPubNamePublication`
+4. You should now see `pom.xml` at the top of your project directory
 
 **Step 2** Generate an LSIF dump:
 

@@ -36,11 +36,6 @@ public class ArgumentParser {
         String outFile = cmd.getOptionValue("out");
         boolean stdout = cmd.hasOption("stdout");
 
-        if (outFile == null && !stdout) {
-            System.err.println("either an output file using -out or -stdout must be specified");
-            System.exit(1);
-        }
-
         if (stdout && (verbose || debug)) {
             System.err.println("debug and verbose options cannot be enabled with -stdout");
             System.exit(1);
