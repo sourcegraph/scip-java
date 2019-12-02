@@ -37,7 +37,7 @@ public class ArgumentParser {
         boolean stdout = cmd.hasOption("stdout");
 
         if (stdout && (verbose || debug)) {
-            System.err.println("debug and verbose options cannot be enabled with --stdout");
+            System.err.println("debug and verbose options cannot be enabled with -stdout");
             System.exit(1);
         }
 
