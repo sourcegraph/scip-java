@@ -1,4 +1,4 @@
-# Java LSIF indexer
+# Java LSIF indexer ![](https://img.shields.io/badge/status-development-yellow?style=flat)
 
 Visit https://lsif.dev/ to learn about LSIF.
 
