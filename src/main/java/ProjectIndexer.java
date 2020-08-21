@@ -42,7 +42,7 @@ public class ProjectIndexer {
         spoon.getEnvironment().setIgnoreDuplicateDeclarations(true);
         spoon.getEnvironment().setComplianceLevel(9);
         spoon.buildModel();
-        Map<String, CtElement> typeByFile = new HashMap();
+        Map<String, CtElement> typeByFile = new HashMap<>();
         for (CtElement el : spoon.getModel().getAllTypes()) {
             System.out.println("Found " + el.getPosition().getFile().getPath());
             typeByFile.put(el.getPosition().getFile().getPath(), el);

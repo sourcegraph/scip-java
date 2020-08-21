@@ -24,6 +24,7 @@ public class DocumentIndexer {
     private String documentId;
     private Set<String> rangeIds = new HashSet<>();
     private Map<Range, DefinitionMeta> definitions = new HashMap<>();
+    private String packageName;
 
     public DocumentIndexer(
             String projectRoot,
@@ -143,19 +144,22 @@ public class DocumentIndexer {
         @Override
         public <T> void visitCtClass(CtClass<T> el) {
             super.visitCtClass(el);
-            emitDefinition(nameRange(el), el.getDocComment());
+            // TODO(nsc) test behaviour with nested inner classes
+            packageName = el.getPackage().getQualifiedName();
+            String doc = mkClassDoc(el, el.getSuperclass(), el.getSuperInterfaces(), el.getDocComment());
+            emitDefinition(nameRange(el), doc);
         }
 
         private void emitDefinition(Range range, String doc) {
             System.out.println("DEF " + pathname + ":" + humanRange(range));
 
             String hoverId = emitter.emitVertex("hoverResult", Util.mapOf(
-                    "result", Util.mapOf(
-                            "contents", Util.mapOf(
-                                    "kind", "markdown",
-                                    "value", doc
-                            )
+                "result", Util.mapOf(
+                    "contents", Util.mapOf(
+                        "kind", "markdown",
+                        "value", doc
                     )
+                )
             ));
 
             String resultSetId = emitter.emitVertex("resultSet", Util.mapOf());
@@ -296,6 +300,86 @@ public class DocumentIndexer {
 
     private String mkDoc(CtTypeReference t, String docComment) {
         return "```java\n" + t + "\n```" + (docComment.equals("") ? "" : "\n---\n" + docComment);
+    }
+
+    private String mkClassDoc(CtClass<?> t, CtTypeReference<?> superClass, Set<CtTypeReference<?>> implemented, String docComment) {
+        StringBuilder b = new StringBuilder("```java\n");
+        if(t.isPublic()) {
+            b.append("public class ");
+        } else if(t.isProtected()) {
+            b.append("protected class ");
+        } else {
+            b.append("private class ");
+        }
+        
+        b.append(t.getSimpleName());
+
+        // handle super class
+        if(superClass != null) {
+            b.append(" ");
+            b.append("extends ");
+            b.append(getLocalizedName(superClass));
+
+            if(superClass.getActualTypeArguments().size() > 0) {
+                b.append("<");
+                Iterator<CtTypeReference<?>> genIter = superClass.getActualTypeArguments().iterator();
+                while(genIter.hasNext()) {
+                    CtTypeReference<?> gen = genIter.next();
+                    b.append(getLocalizedName(gen));
+                    if(genIter.hasNext()) b.append(", ");
+                }
+
+                b.append(">");
+            }
+        }
+        
+        // handle all implemented interfaces
+        if(implemented.size() > 0) {
+            Iterator<CtTypeReference<?>> iter = implemented.iterator();
+            b.append(" implements ");
+            b.append(getLocalizedName(iter.next()));
+            
+            while(iter.hasNext()) {
+                CtTypeReference<?> next = iter.next();
+                b.append(", ");
+                b.append(getLocalizedName(next));
+                
+                // handle all interface generic type params
+                if(next.getActualTypeArguments().size() > 0) {
+                    b.append("<");
+                    Iterator<CtTypeReference<?>> genIter = next.getActualTypeArguments().iterator();
+                    while(genIter.hasNext()) {
+                        CtTypeReference<?> gen = genIter.next();
+                        b.append(getLocalizedName(gen));
+                        if(genIter.hasNext()) b.append(", ");
+                    }
+
+                    b.append(">");
+                }
+            }
+        }
+
+        b.append("\n```");
+
+        if(!docComment.equals("")) {
+            b.append("\n---\n");
+            b.append(docComment);
+        }
+
+        return b.toString();
+    }
+
+    private String getLocalizedName(CtTypeReference type) {
+        if(type.getPackage().getQualifiedName().equals("java.lang")) {
+            System.out.println(type.getQualifiedName() + " starts with java.lang" + ", returning " + type.getSimpleName());
+            return type.getSimpleName();
+        } else if(type.getPackage().getQualifiedName().startsWith(this.packageName)) {
+            System.out.println(type.getQualifiedName() + " starts with " + this.packageName + ", returning " + type.getSimpleName());
+            return type.getSimpleName();
+        } else {
+            System.out.println(type.getQualifiedName() + " starts with neither" + ", returning " + type.getQualifiedName());
+            return type.getQualifiedName();
+        }
     }
 
     private String humanRange(Range r) {
