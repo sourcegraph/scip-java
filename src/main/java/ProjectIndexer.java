@@ -26,11 +26,11 @@ public class ProjectIndexer {
         this.emitter = emitter;
     }
 
-    public void index() {
+    public void index() throws IOException {
         emitter.emitVertex("metaData", Util.mapOf(
                 "version", "0.4.0",
                 "positionEncoding", "utf-16",
-                "projectRoot", String.format("file://%s", Paths.get(arguments.projectRoot).toAbsolutePath().toString()),
+                "projectRoot", String.format("file://%s", Paths.get(arguments.projectRoot).toFile().getCanonicalPath()),
                 "toolInfo", Util.mapOf("name", "lsif-java", "version", "0.1.0")
         ));
 

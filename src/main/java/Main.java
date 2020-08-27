@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
         System.out.println("Running JVM " + System.getProperty("java.version"));
         Arguments arguments = ArgumentParser.parse(args);
         PrintWriter writer = createWriter(arguments);
