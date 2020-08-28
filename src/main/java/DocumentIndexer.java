@@ -8,6 +8,7 @@ import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.CtScanner;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -114,7 +115,27 @@ public class DocumentIndexer {
                 return;
             }
             emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
-        }
+		}
+		
+		@Override
+		public <A extends Annotation> void visitCtAnnotationType(CtAnnotationType<A> el) {
+			super.visitCtAnnotationType(el);
+			if (el.getPosition() instanceof NoSourcePosition) {
+				return;
+			}
+
+			emitDefinition(mkRange(el.getPosition()), mkDoc(el.getReference(), el.getDocComment()));
+		}
+
+		@Override
+		public <T extends Enum<?>> void visitCtEnum(CtEnum<T> el) {
+			super.visitCtEnum(el);
+			if (el.getPosition() instanceof NoSourcePosition) {
+				return;
+			}
+
+			emitDefinition(mkRange(el.getPosition()), mkDoc(el.getReference(), el.getDocComment()));
+		}
 
         @Override
         public <T> void visitCtLocalVariable(CtLocalVariable<T> el) {
