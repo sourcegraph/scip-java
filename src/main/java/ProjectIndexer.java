@@ -5,6 +5,7 @@ import spoon.reflect.declaration.CtModule;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.visitor.CtIterator;
+import spoon.support.compiler.SpoonPom;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,6 +43,14 @@ public class ProjectIndexer {
         spoon.getEnvironment().setIgnoreDuplicateDeclarations(true);
         spoon.getEnvironment().setComplianceLevel(9);
         spoon.buildModel();
+		
+		for (SpoonPom pom : spoon.getPomFile().getModules()) {
+			System.out.println("Found module " + pom.getName() + " at " + Paths.get(pom.getPath()).getParent().toFile().getCanonicalPath());
+			for (SpoonPom child : pom.getModules()) {
+				System.out.println("Found module " + child.getName() + " at " + Paths.get(child.getPath()).getParent().toFile().getCanonicalPath());
+			}
+		}
+
         Map<String, CtElement> typeByFile = new HashMap<>();
         for (CtElement el : spoon.getModel().getAllTypes()) {
             System.out.println("Found " + el.getPosition().getFile().getPath());
