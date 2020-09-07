@@ -1,3 +1,5 @@
+package lsifjava;
+
 public class Arguments {
     public final String projectRoot;
     public final boolean contents;

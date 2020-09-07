@@ -1,3 +1,5 @@
+package lsifjava;
+
 import org.apache.commons.cli.*;
 
 public class ArgumentParser {
