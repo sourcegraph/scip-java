@@ -32,7 +32,7 @@ cd lsif-java
 
 **Step 1** Ensure you have a `pom.xml` (Maven projects already have one):
 
-For Gradle projects (experimental):
+For Gradle projects **_(experimental)_**:
 
 1. Add [`maven-publish`](https://docs.gradle.org/current/userguide/publishing_maven.html) to your `plugins` in `build.gradle`
 2. Specify a publication:
@@ -70,15 +70,13 @@ publishing {
 3. Run `./gradlew generatePomFileForSourcegraphPublication`
 4. You should now see `pom.xml` at the top of your project directory
 
-For multi-project Gradle projects (experimental):
+For multi-project Gradle projects **_(experimental)_**:
 
 1. Modify your `allprojects` block in the root `build.gradle` to resemble the following:
 
 ```groovy
 allprojects {
     // ...
-
-    group "com.sourcegraph.lsifjava"
 
     apply plugin: "maven-publish"
 
@@ -94,17 +92,18 @@ allprojects {
                 sourcegraph(MavenPublication) {
                     def projectDirStr = project.projectDir
                     def subprojectSet = project.subprojects
-                    def sourceSetsSet = ["${projectDirStr}/src/main/java"]
-                    if (project.hasProperty("sourceSets")) {
+                    def sourceSetsSet = []
+                    if (project.hasProperty("sourceSets") &&
+                        project.sourceSets.hasProperty("main") &&
+                        project.sourceSets.main.hasProperty("java") &&
+                        project.sourceSets.main.java.hasProperty("srcDirs")) {
                         sourceSetsSet = project.sourceSets.main.java.srcDirs
                     }
 
                     if (!(new File(projectDirStr.toString()+"/build.gradle").exists())) return
 
                     def javaApplied = components.collect{it.getName()}.contains("java")
-                    if (javaApplied) {
-                        from components.java
-                    }
+                    if (javaApplied) from components.java
 
                     pom.withXml {
                         def node = asNode();
@@ -137,7 +136,7 @@ allprojects {
 ```
 
 2. Run `./gradlew generatePomFileForSourcegraphPublication`
-3. You should now see a number of `pom.xml` files throughout the project
+3. You should now see a `pom.xml` file for each `build.gradle` throughout the project
 
 **Step 2** Generate an LSIF dump:
 
