@@ -1,3 +1,5 @@
+package lsifjava;
+
 import com.github.javaparser.Position;
 import com.github.javaparser.Range;
 import spoon.reflect.code.*;
@@ -168,7 +170,7 @@ public class DocumentIndexer {
         }
 
         private void emitDefinition(Range range, String doc) {
-            System.out.println("DEF " + pathname + ":" + humanRange(range));
+            //System.out.println("DEF " + pathname + ":" + humanRange(range));
 
             String hoverId = emitter.emitVertex("hoverResult", Util.mapOf(
                     "result", Util.mapOf(

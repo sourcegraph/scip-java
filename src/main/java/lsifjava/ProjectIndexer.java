@@ -1,10 +1,7 @@
-import com.google.common.collect.ImmutableMap;
+package lsifjava;
+
 import spoon.MavenLauncher;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtModule;
-import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.visitor.CtIterator;
 import spoon.support.compiler.SpoonPom;
 
 import java.io.IOException;
@@ -12,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ProjectIndexer {
@@ -43,8 +39,8 @@ public class ProjectIndexer {
         spoon.getEnvironment().setIgnoreDuplicateDeclarations(true);
         spoon.getEnvironment().setComplianceLevel(9);
         spoon.buildModel();
-		
-		for (SpoonPom pom : spoon.getPomFile().getModules()) {
+
+        for (SpoonPom pom : spoon.getPomFile().getModules()) {
 			System.out.println("Found module " + pom.getName() + " at " + Paths.get(pom.getPath()).getParent().toFile().getCanonicalPath());
 			for (SpoonPom child : pom.getModules()) {
 				System.out.println("Found module " + child.getName() + " at " + Paths.get(child.getPath()).getParent().toFile().getCanonicalPath());
@@ -53,7 +49,6 @@ public class ProjectIndexer {
 
         Map<String, CtElement> typeByFile = new HashMap<>();
         for (CtElement el : spoon.getModel().getAllTypes()) {
-            System.out.println("Found " + el.getPosition().getFile().getPath());
             typeByFile.put(el.getPosition().getFile().getPath(), el);
         }
 

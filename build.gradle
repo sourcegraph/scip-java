@@ -9,7 +9,7 @@ plugins {
 }
 
 application {
-    mainClassName = 'Main'
+    mainClassName = 'lsifjava.Main'
 }
 
 repositories {
@@ -31,9 +31,14 @@ version = '1.0-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 publishing {
+    model {
+        tasks.generatePomFileForSourcegraphPublication {
+            destination = file("$projectDir/pom.xml")
+        }
+    }
     publications {
-        maven(MavenPublication) {
-            from(components.java)
+        sourcegraph(MavenPublication) {
+            from components.java
         }
     }
 }
