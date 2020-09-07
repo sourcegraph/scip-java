@@ -32,23 +32,115 @@ cd lsif-java
 
 **Step 1** Ensure you have a `pom.xml` (Maven projects already have one):
 
-For Gradle projects:
+For Gradle projects (experimental):
 
 1. Add [`maven-publish`](https://docs.gradle.org/current/userguide/publishing_maven.html) to your `plugins` in `build.gradle`
-2. Specify a publication (TODO specify the destination):
+2. Specify a publication:
 
 ```groovy
+apply plugin: 'maven-publish'
+
+//...
+
 publishing {
-  publications {
-    mavenJava(MavenPublication) {
-      from components.java
+    model {
+        tasks.generatePomFileForSourcegraphPublication {
+            destination = file("$projectDir/pom.xml")
+        }
     }
-  }
+    publications {
+        sourcegraph(MavenPublication) {
+            from components.java
+            def sourceSets = project.sourceSets.main.java.srcDirs
+            pom.withXml {
+                def node = asNode();
+                if (node.get("build").size() == 0) {
+                    node.appendNode("build").with {
+                        if (sourceSets.size() > 0) {
+                            appendNode("sourceDirectory", sourceSets.first())
+                        } else {
+                            def dirpath = "${projectDirStr}/src/main/java"
+                            if (new File(dirpath).exists()) appendNode("sourceDirectory", dirpath)
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 ```
 
-3. Run `./gradlew generatePomFileForPubNamePublication`
+3. Run `./gradlew generatePomFileForSourcegraphPublication`
 4. You should now see `pom.xml` at the top of your project directory
+
+For multi-project Gradle projects (experimental):
+
+1. Modify your `allprojects` block in the root `build.gradle` to resemble the following:
+
+```groovy
+allprojects {
+    // ...
+
+    group "com.sourcegraph.lsifjava"
+
+    apply plugin: "maven-publish"
+
+    afterEvaluate { project ->
+        if (!new File(project.projectDir.toString()+"/build.gradle").exists()) return
+        publishing {
+            model {
+                tasks.generatePomFileForSourcegraphPublication {
+                    destination = file("$projectDir/pom.xml")
+                }
+            }
+            publications {
+                sourcegraph(MavenPublication) {
+                    def projectDirStr = project.projectDir
+                    def subprojectSet = project.subprojects
+                    def sourceSetsSet = ["${projectDirStr}/src/main/java"]
+                    if (project.hasProperty("sourceSets")) {
+                        sourceSetsSet = project.sourceSets.main.java.srcDirs
+                    }
+
+                    if (!(new File(projectDirStr.toString()+"/build.gradle").exists())) return
+
+                    def javaApplied = components.collect{it.getName()}.contains("java")
+                    if (javaApplied) {
+                        from components.java
+                    }
+
+                    pom.withXml {
+                        def node = asNode();
+                        if (node.get("build").size() == 0 && javaApplied) {
+                            node.appendNode("build").with {
+                                if (sourceSetsSet.size() > 0) {
+                                    appendNode("sourceDirectory", sourceSetsSet.first())
+                                } else {
+                                    def dirpath = "${projectDirStr}/src/main/java"
+                                    if (new File(dirpath).exists()) appendNode("sourceDirectory", dirpath)
+                                }
+                            }
+                        }
+
+                        if (subprojectSet.size() > 0) {
+                            node.appendNode("modules").with {
+                                for(Project p : subprojectSet) {
+                                    if(new File(p.path.replace(":", "/./").substring(1)+"/build.gradle").exists()) {
+                                        appendNode("module", p.path.replace(":", "/").substring(1))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+2. Run `./gradlew generatePomFileForSourcegraphPublication`
+3. You should now see a number of `pom.xml` files throughout the project
 
 **Step 2** Generate an LSIF dump:
 
