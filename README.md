@@ -58,9 +58,6 @@ publishing {
                     node.appendNode("build").with {
                         if (sourceSets.size() > 0) {
                             appendNode("sourceDirectory", sourceSets.first())
-                        } else {
-                            def dirpath = "${projectDirStr}/src/main/java"
-                            if (new File(dirpath).exists()) appendNode("sourceDirectory", dirpath)
                         }
                     }
                 }
