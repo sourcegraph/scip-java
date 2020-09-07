@@ -110,10 +110,7 @@ allprojects {
                     def projectDirStr = project.projectDir
                     def subprojectSet = project.subprojects
                     def sourceSetsSet = []
-                    if (project.hasProperty("sourceSets") &&
-                        project.sourceSets.hasProperty("main") &&
-                        project.sourceSets.main.hasProperty("java") &&
-                        project.sourceSets.main.java.hasProperty("srcDirs")) {
+                    if (project.hasProperty("sourceSets.main.java.srcDirs")) {
                         sourceSetsSet = project.sourceSets.main.java.srcDirs
                     }
 
