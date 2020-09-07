@@ -30,18 +30,35 @@ cd lsif-java
 
 ## Generating an LSIF dump
 
-**Step 1** Ensure you have a `pom.xml` (Maven projects already have one):
+### **Step 1**
 
-For Gradle projects **_(experimental)_**:
+Ensure you have a `pom.xml` (Maven projects already have one):
+
+For single-project Gradle projects **_(experimental)_**:
 
 1. Add [`maven-publish`](https://docs.gradle.org/current/userguide/publishing_maven.html) to your `plugins` in `build.gradle`
 2. Specify a publication:
 
+**_with default sourceSets:_**
+
 ```groovy
-apply plugin: 'maven-publish'
+publishing {
+    model {
+        tasks.generatePomFileForSourcegraphPublication {
+            destination = file("$projectDir/pom.xml")
+        }
+    }
+    publications {
+        sourcegraph(MavenPublication) {
+            from components.java
+        }
+    }
+}
+```
 
-//...
+**_with non-default sourceSets:_**
 
+```groovy
 publishing {
     model {
         tasks.generatePomFileForSourcegraphPublication {
@@ -72,7 +89,7 @@ publishing {
 
 For multi-project Gradle projects **_(experimental)_**:
 
-1. Modify your `allprojects` block in the root `build.gradle` to resemble the following:
+1. Modify your `allprojects` block in the root `build.gradle` to include the following:
 
 ```groovy
 allprojects {
@@ -138,7 +155,8 @@ allprojects {
 2. Run `./gradlew generatePomFileForSourcegraphPublication`
 3. You should now see a `pom.xml` file for each `build.gradle` throughout the project
 
-**Step 2** Generate an LSIF dump:
+### **Step 2**
+Generate an LSIF dump:
 
 ```
 <absolute path to lsif-java>/build/install/lsifjava/bin/lsifjava \
