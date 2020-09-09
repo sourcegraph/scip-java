@@ -109,6 +109,10 @@ allprojects {
                 sourcegraph(MavenPublication) {
                     def projectDirStr = project.projectDir
                     def subprojectSet = project.subprojects
+                    def projectPath = project.path.replace(":", "/")/* .substring(1) */
+                    if (projectPath.startsWith("/")) {
+                        projectPath = projectPath.substring(1)
+                    }
                     def sourceSetsSet = []
                     if (project.hasProperty("sourceSets.main.java.srcDirs")) {
                         sourceSetsSet = project.sourceSets.main.java.srcDirs
@@ -136,7 +140,11 @@ allprojects {
                             node.appendNode("modules").with {
                                 for(Project p : subprojectSet) {
                                     if(new File(p.path.replace(":", "/./").substring(1)+"/build.gradle").exists()) {
-                                        appendNode("module", p.path.replace(":", "/").substring(1))
+                                        def path = p.path.replace(":", "/").substring(1)
+                                        if (path.startsWith(projectPath) && projectPath != "") {
+                                            path = path.substring(projectPath.length()+1)
+                                        }
+                                        appendNode("module", path)
                                     }
                                 }
                             }
