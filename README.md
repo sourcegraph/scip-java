@@ -107,18 +107,14 @@ allprojects {
             }
             publications {
                 sourcegraph(MavenPublication) {
-                    def projectDirStr = project.projectDir
+                    def projectDirStr = project.projectDir.toString()
                     def subprojectSet = project.subprojects
-                    def projectPath = project.path.replace(":", "/")/* .substring(1) */
-                    if (projectPath.startsWith("/")) {
-                        projectPath = projectPath.substring(1)
-                    }
                     def sourceSetsSet = []
                     if (project.hasProperty("sourceSets.main.java.srcDirs")) {
                         sourceSetsSet = project.sourceSets.main.java.srcDirs
                     }
 
-                    if (!(new File(projectDirStr.toString()+"/build.gradle").exists())) return
+                    if (!(new File(projectDirStr+"/build.gradle").exists())) return
 
                     def javaApplied = components.collect{it.getName()}.contains("java")
                     if (javaApplied) from components.java
@@ -139,11 +135,8 @@ allprojects {
                         if (subprojectSet.size() > 0) {
                             node.appendNode("modules").with {
                                 for(Project p : subprojectSet) {
-                                    if(new File(p.path.replace(":", "/./").substring(1)+"/build.gradle").exists()) {
-                                        def path = p.path.replace(":", "/").substring(1)
-                                        if (path.startsWith(projectPath) && projectPath != "") {
-                                            path = path.substring(projectPath.length()+1)
-                                        }
+                                    if(new File(p.projectDir.toString()+"/build.gradle").exists()) {
+                                        def path = p.projectDir.toString().substring(projectDirStr.size()+1)
                                         appendNode("module", path)
                                     }
                                 }
