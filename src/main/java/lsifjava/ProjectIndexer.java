@@ -1,9 +1,7 @@
 package lsifjava;
 
 import spoon.MavenLauncher;
-import spoon.compiler.Environment;
 import spoon.reflect.declaration.CtElement;
-import spoon.support.StandardEnvironment;
 import spoon.support.compiler.SpoonPom;
 
 import java.io.IOException;
@@ -16,7 +14,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.google.common.collect.Sets;
 
@@ -109,7 +106,6 @@ public class ProjectIndexer {
             indexers.put(pathname.getKey(), new DocumentIndexer(
                     arguments.projectRoot,
                     arguments.verbose,
-                    arguments.contents,
                     pathname.getKey(),
                     pathname.getValue(),
                     projectId,
@@ -154,14 +150,6 @@ public class ProjectIndexer {
                     .sorted()
                     .collect(Collectors.joining("\n")));
             System.out.println("All: " + allFiles.size() + " Visited: "  + visitedFiles.size());
-        }
-    }
-
-    private Stream<Path> createFileStream() {
-        try {
-            return Files.walk(Paths.get(arguments.projectRoot));
-        } catch (IOException ex) {
-            throw new RuntimeException(String.format("Failed to walk files in %s", arguments.projectRoot));
         }
     }
 

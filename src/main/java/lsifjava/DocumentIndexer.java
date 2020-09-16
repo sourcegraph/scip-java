@@ -12,17 +12,13 @@ import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.CtScanner;
 
-import java.io.IOException;
 import java.lang.annotation.Annotation;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
 public class DocumentIndexer {
     private String projectRoot;
     private boolean verbose;
-    private boolean contents;
     private String pathname;
     private CtElement spoonElement;
     private String projectId;
@@ -35,7 +31,6 @@ public class DocumentIndexer {
     public DocumentIndexer(
             String projectRoot,
             boolean verbose,
-            boolean contents,
             String pathname,
             CtElement spoonElement,
             String projectId,
@@ -44,7 +39,6 @@ public class DocumentIndexer {
     ) {
         this.projectRoot = projectRoot;
         this.verbose = verbose;
-        this.contents = contents;
         this.pathname = pathname;
         this.spoonElement = spoonElement;
         this.projectId = projectId;
@@ -69,15 +63,6 @@ public class DocumentIndexer {
                 "languageId", "java",
                 "uri", String.format("file://%s", Paths.get(pathname).toAbsolutePath().toString())
         );
-
-        if (contents) {
-            try {
-                List<String> lines = Files.readAllLines(Paths.get(pathname), StandardCharsets.UTF_8);
-                args = Util.union(args, Util.mapOf("contents", String.join("\n", lines)));
-            } catch (IOException ex) {
-                throw new RuntimeException(String.format("Failed to read file %s", pathname));
-            }
-        }
 
         this.documentId = emitter.emitVertex("document", args);
     }
@@ -305,7 +290,7 @@ public class DocumentIndexer {
                 return;
             }
             Range useRange = identifierRange(el, el.getVariable().getSimpleName());
-            CtField decl = el.getVariable().getDeclaration();
+            CtField<?> decl = el.getVariable().getDeclaration();
             if (decl == null) {
                 return;
             }
@@ -322,7 +307,7 @@ public class DocumentIndexer {
             if (el.getPosition() instanceof NoSourcePosition) {
                 return;
             }
-            CtType decl = el.getDeclaration();
+            CtType<?> decl = el.getDeclaration();
             if (decl == null) {
                 return;
             }
@@ -363,7 +348,7 @@ public class DocumentIndexer {
                 return;
             }
 
-            CtCatchVariable decl = el.getDeclaration();
+            CtCatchVariable<?> decl = el.getDeclaration();
             if (decl == null || decl.getPosition() instanceof NoSourcePosition) {
                 return;
             }
@@ -382,7 +367,7 @@ public class DocumentIndexer {
                 return;
             }
 
-            CtExecutableReference exec = el.getExecutable();
+            CtExecutableReference<?> exec = el.getExecutable();
             if (exec == null || exec.getDeclaration() == null || exec.getDeclaration().getPosition() instanceof NoSourcePosition) {
                 return;
             }
@@ -455,7 +440,7 @@ public class DocumentIndexer {
         );
     }
 
-    private String mkDoc(CtTypeReference t, String docComment) {
+    private String mkDoc(CtTypeReference<?> t, String docComment) {
         return "```java\n" + t + "\n```" + (docComment.equals("") ? "" : "\n---\n" + docComment);
     }
 
@@ -475,7 +460,7 @@ public class DocumentIndexer {
         return Util.mapOf("line", position.line - 1, "character", position.column - 1);
     }
 
-    private Range identifierRange(CtTargetedExpression a, String b) {
+    private Range identifierRange(CtTargetedExpression<?, ?> a, String b) {
         // Ugh, we only want the range for the identifier, not the whole expression.
         // This will probably break on fields/methods that are spread across lines.
         // +1 for `.`, +1 because (I'm guessing) end is inclusive

@@ -3,7 +3,6 @@ package lsifjava;
 import com.google.gson.Gson;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Emitter {

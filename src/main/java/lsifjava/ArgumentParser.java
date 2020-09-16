@@ -1,6 +1,7 @@
 package lsifjava;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import org.apache.commons.cli.*;
 
@@ -8,7 +9,7 @@ public class ArgumentParser {
     public static final String VERSION = "0.1.0";
     public static final String PROTOCOL_VERSION = "0.4.0";
 
-    public static Arguments parse(String[] args) throws IOException{
+    public static Arguments parse(String[] args) {
         Options options = createOptions();
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -33,13 +34,16 @@ public class ArgumentParser {
             System.exit(0);
         }
 
-        String projectRoot = cmd.getOptionValue("projectRoot", ".");
-        boolean contents = cmd.hasOption("contents");
-        String outFile = cmd.getOptionValue("out");
+        String projectRoot;
+        try {
+            projectRoot = Paths.get(cmd.getOptionValue("projectRoot", ".")).toFile().getCanonicalPath();
+        } catch(IOException e) {
+            throw new RuntimeException(String.format("Directory %s could not be found", cmd.getOptionValue("projectRoot", ".")));
+        }
+        String outFile = cmd.getOptionValue("out", projectRoot + "/dump.lsif");
         boolean verbosity = cmd.hasOption("verbose");
 
-
-        return new Arguments(projectRoot, contents, outFile, verbosity);
+        return new Arguments(projectRoot, outFile, verbosity);
     }
 
     private static Options createOptions() {
@@ -63,11 +67,6 @@ public class ArgumentParser {
         options.addOption(new Option(
                 "projectRoot", true,
                 "Specifies the project root. Defaults to the current working directory."
-        ));
-
-        options.addOption(new Option(
-                "contents", false,
-                "File contents will be embedded into the dump."
         ));
 
         options.addOption(new Option(

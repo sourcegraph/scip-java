@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 public class Main {
     public static void main(String[] args) throws IOException{
         System.out.println("Running JVM " + System.getProperty("java.version"));
+
         Arguments arguments = ArgumentParser.parse(args);
         PrintWriter writer = createWriter(arguments);
         Emitter emitter = new Emitter(writer);
@@ -18,7 +19,6 @@ public class Main {
             indexer.index();
         } finally {
             writer.flush();
-
             writer.close();
         }
 
@@ -34,7 +34,6 @@ public class Main {
     }
 
     private static void displayStats(ProjectIndexer indexer, Emitter emitter, long start) {
-
         System.out.printf(
                 "%d file(s), %d def(s), %d element(s)\n",
                 indexer.numFiles,

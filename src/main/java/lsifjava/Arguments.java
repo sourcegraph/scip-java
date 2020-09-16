@@ -1,18 +1,13 @@
 package lsifjava;
 
-import java.io.IOException;
-import java.nio.file.Paths;
-
 public class Arguments {
     public final String projectRoot;
-    public final boolean contents;
     public final String outFile;
     public final boolean verbose;
 
-    public Arguments(String projectRoot, boolean contents, String outFile, boolean verbose) throws IOException {
-        this.projectRoot = Paths.get(projectRoot).toFile().getCanonicalPath();
-        this.contents = contents;
-        this.outFile = outFile != null ? outFile : projectRoot + "/dump.lsif";
+    public Arguments(String projectRoot, String outFile, boolean verbose) {
+        this.projectRoot = projectRoot;
+        this.outFile = outFile;
         this.verbose = verbose;
     }
 }
