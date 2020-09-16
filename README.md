@@ -7,7 +7,7 @@ Visit https://lsif.dev/ to learn about LSIF.
 - Java 1.8 or higher
 - Maven
 
-**macOS**
+### macOS ###
 
 We recommend using brew to install dependancies on mac OS, you can install brew using the following command:
 ```
@@ -31,7 +31,7 @@ Install Maven:
 brew install maven
 ```
 
-**Ubuntu 18.04**
+### Ubuntu 18.04 ###
 
 ```
 apt-get update && apt-get install -y git default-jdk maven
