@@ -1,12 +1,14 @@
 package lsifjava;
 
+import java.io.IOException;
+
 import org.apache.commons.cli.*;
 
 public class ArgumentParser {
     public static final String VERSION = "0.1.0";
     public static final String PROTOCOL_VERSION = "0.4.0";
 
-    public static Arguments parse(String[] args) {
+    public static Arguments parse(String[] args) throws IOException{
         Options options = createOptions();
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -31,19 +33,13 @@ public class ArgumentParser {
             System.exit(0);
         }
 
-        boolean debug = cmd.hasOption("debug");
-        boolean verbose = cmd.hasOption("verbose");
         String projectRoot = cmd.getOptionValue("projectRoot", ".");
         boolean contents = cmd.hasOption("contents");
         String outFile = cmd.getOptionValue("out");
-        boolean stdout = cmd.hasOption("stdout");
+        boolean verbosity = cmd.hasOption("verbose");
 
-        if (stdout && (verbose || debug)) {
-            System.err.println("debug and verbose options cannot be enabled with -stdout");
-            System.exit(1);
-        }
 
-        return new Arguments(projectRoot, contents, outFile, stdout);
+        return new Arguments(projectRoot, contents, outFile, verbosity);
     }
 
     private static Options createOptions() {
@@ -57,11 +53,6 @@ public class ArgumentParser {
         options.addOption(new Option(
                 "version", false,
                 "Show version."
-        ));
-
-        options.addOption(new Option(
-                "debug", false,
-                "Display debug information."
         ));
 
         options.addOption(new Option(
@@ -82,16 +73,6 @@ public class ArgumentParser {
         options.addOption(new Option(
                 "out", true,
                 "The output file the dump is save to."
-        ));
-
-        options.addOption(new Option(
-                "stdout", false,
-                "Writes the dump to stdout."
-        ));
-
-        options.addOption(new Option(
-                "stdout", false,
-                "Writes the dump to stdout."
         ));
 
         return options;

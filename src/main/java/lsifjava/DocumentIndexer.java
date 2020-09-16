@@ -2,10 +2,13 @@ package lsifjava;
 
 import com.github.javaparser.Position;
 import com.github.javaparser.Range;
+
 import spoon.reflect.code.*;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.cu.position.NoSourcePosition;
 import spoon.reflect.declaration.*;
+import spoon.reflect.reference.CtCatchVariableReference;
+import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.CtScanner;
 
@@ -18,6 +21,7 @@ import java.util.*;
 
 public class DocumentIndexer {
     private String projectRoot;
+    private boolean verbose;
     private boolean contents;
     private String pathname;
     private CtElement spoonElement;
@@ -30,6 +34,7 @@ public class DocumentIndexer {
 
     public DocumentIndexer(
             String projectRoot,
+            boolean verbose,
             boolean contents,
             String pathname,
             CtElement spoonElement,
@@ -38,6 +43,7 @@ public class DocumentIndexer {
             Map<String, DocumentIndexer> indexers
     ) {
         this.projectRoot = projectRoot;
+        this.verbose = verbose;
         this.contents = contents;
         this.pathname = pathname;
         this.spoonElement = spoonElement;
@@ -142,35 +148,102 @@ public class DocumentIndexer {
         @Override
         public <T> void visitCtLocalVariable(CtLocalVariable<T> el) {
             super.visitCtLocalVariable(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+				return;
+            }
+
             emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
         }
 
         @Override
         public <T> void visitCtCatchVariable(CtCatchVariable<T> el) {
             super.visitCtCatchVariable(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+				return;
+            }
+
             emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
         }
 
         @Override
         public <T> void visitCtMethod(CtMethod<T> el) {
             super.visitCtMethod(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+				return;
+            }
+
             emitDefinition(nameRange(el), mkDoc(el.getType(), el.getDocComment()));
         }
 
         @Override
         public <T> void visitCtField(CtField<T> el) {
             super.visitCtField(el);
-            emitDefinition(nameRange(el), mkDoc(el.getType(), el.getDocComment()));
+            if (el.getPosition() instanceof NoSourcePosition) {
+				return;
+            }
+
+            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
         }
 
         @Override
+        public <T> void visitCtConstructor(CtConstructor<T> el) {
+            super.visitCtConstructor(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+				return;
+            }
+
+            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
+        }
+
+        /* @Override
+        public <T> void visitCtEnumValue(CtEnumValue<T> el) {
+            super.visitCtEnumValue(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+				return;
+            }
+
+            emitDefinition(nameRange(el), mkDoc(el.getType(), el.getDocComment()));
+        } */
+
+        @Override
         public <T> void visitCtClass(CtClass<T> el) {
-            super.visitCtClass(el);
-            emitDefinition(nameRange(el), el.getDocComment());
+			super.visitCtClass(el);
+			// TODO(nsc) test behaviour with nested inner classes
+			/* if (el.get) */
+			/* CtPackage elPackage = el.getPackage();
+            if (elPackage == null) {
+				
+				System.err.println("e");
+            }
+			packageName = elPackage.getQualifiedName();
+            String doc = mkClassDoc(el, el.getSuperclass(), el.getSuperInterfaces(), el.getDocComment());
+			emitDefinition(nameRange(el), doc); */
+			emitDefinition(mkRange(el.getPosition()), el.getDocComment());
+        }
+
+        /* @Override
+        public <T> void visitCtAnnotationMethod(CtAnnotationMethod<T> el) {
+            super.visitCtAnnotationMethod(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+                return;
+            }
+
+            emitDefinition(nameRange(el), mkDoc(el.getType(), el.getDocComment()));
+        } */
+
+        @Override
+        public <T> void visitCtInterface(CtInterface<T> el) {
+            super.visitCtInterface(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+                return;
+            }
+
+            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getReference(), el.getDocComment()));
         }
 
         private void emitDefinition(Range range, String doc) {
-            //System.out.println("DEF " + pathname + ":" + humanRange(range));
+            if(verbose)
+                System.out.println("DEF " + pathname.replaceFirst("^"+projectRoot, ".") + ":" + humanRange(range));
 
             String hoverId = emitter.emitVertex("hoverResult", Util.mapOf(
                     "result", Util.mapOf(
@@ -260,15 +333,80 @@ public class DocumentIndexer {
             );
         }
 
+        /* @Override
+        public <T, A extends T> void visitCtAssignment(CtAssignment<T, A> el) {
+            super.visitCtAssignment(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+				return;
+            }
+
+            el.getAssigned().getpa
+        } */
+
+
+        /* @Override
+        public <T> void visitCtSuperAccess(CtSuperAccess<T> el) {
+            super.visitCtSuperAccess(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+                return;
+            }
+
+            //el.get
+
+            //emitUse(use, def, defPath);
+        } */
+
+        @Override
+        public <T> void visitCtCatchVariableReference(CtCatchVariableReference<T> el) {
+            super.visitCtCatchVariableReference(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+                return;
+            }
+
+            CtCatchVariable decl = el.getDeclaration();
+            if (decl == null || decl.getPosition() instanceof NoSourcePosition) {
+                return;
+            }
+
+            emitUse(
+                mkRange(el.getPosition()), 
+                nameRange(decl), 
+                decl.getPosition().getFile().getPath()
+            );
+        }
+
+        @Override
+        public <T> void visitCtConstructorCall(CtConstructorCall<T> el) {
+            super.visitCtConstructorCall(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+                return;
+            }
+
+            CtExecutableReference exec = el.getExecutable();
+            if (exec == null || exec.getDeclaration() == null || exec.getDeclaration().getPosition() instanceof NoSourcePosition) {
+                return;
+            }
+
+            Range useRange = identifierRange(el, exec.getSimpleName());
+            emitUse(
+                useRange, 
+                nameRange(exec.getDeclaration()),
+                exec.getDeclaration().getPosition().getFile().getPath()    
+            );
+        }
+
         private void emitUse(Range use, Range def, String defPath) {
             DocumentIndexer indexer = indexers.get(defPath);
 
-            String link = pathname + ":" + humanRange(use) + " -> " + defPath + ":" + humanRange(def);
-            System.out.println("Linking use to definition: " + link);
+            String link = pathname.replaceFirst("^"+projectRoot, ".") + ":" + humanRange(use) + " -> " + defPath.replaceFirst("^"+projectRoot, ".") + ":" + humanRange(def);
+                
+            if(verbose)
+                System.out.println("Linking use to definition: " + link);
 
             DefinitionMeta meta = indexer.definitions.get(def);
             if (meta == null) {
-                System.out.println("WARNING Skipping linking use to definition: " + link);
+                if(verbose)
+                    System.out.println("WARNING Skipping linking use to definition: " + link);
                 return;
             }
 
