@@ -5,12 +5,29 @@ Visit https://lsif.dev/ to learn about LSIF.
 ## Installation
 
 - Java 1.8 or higher
-- [Maven](https://maven.apache.org/install.html) (macOS: `brew install maven`)
+- Maven
 
 **macOS**
 
+We recommend using brew to install dependancies on mac OS, you can install brew using the following command:
 ```
-brew cask install java
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+
+If you already have brew installed, you'll need to make sure its up to date: 
+```
+brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup
+```
+
+Install Java:
+```
+brew tap homebrew/cask-versions
+brew update
+brew cask install homebrew/cask-versions/adoptopenjdk8
+```
+
+Install Maven:
+```
 brew install maven
 ```
 
@@ -37,6 +54,11 @@ Ensure you have a `pom.xml` (Maven projects already have one):
 For single-project Gradle projects **_(experimental)_**:
 
 1. Add [`maven-publish`](https://docs.gradle.org/current/userguide/publishing_maven.html) to your `plugins` in `build.gradle`
+```
+plugins {
+  id 'maven-publish'
+}
+```
 2. Specify a publication:
 
 **_with default sourceSets:_**
