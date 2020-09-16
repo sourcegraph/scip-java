@@ -19,21 +19,13 @@ public class Main {
         } finally {
             writer.flush();
 
-            if (!arguments.stdout) {
-                writer.close();
-            }
+            writer.close();
         }
 
-        if (!arguments.stdout) {
-            displayStats(indexer, emitter, start);
-        }
+        displayStats(indexer, emitter, start);
     }
 
     private static PrintWriter createWriter(Arguments arguments) {
-        if (arguments.stdout) {
-            return new PrintWriter(System.out);
-        }
-
         try {
             return new PrintWriter(new File(arguments.outFile));
         } catch (IOException ex) {
