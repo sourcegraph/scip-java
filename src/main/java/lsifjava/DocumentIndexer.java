@@ -27,6 +27,7 @@ public class DocumentIndexer {
     private String documentId;
     private Set<String> rangeIds = new HashSet<>();
     private Map<Range, DefinitionMeta> definitions = new HashMap<>();
+    private String packageName;
 
     public DocumentIndexer(
             String projectRoot,
@@ -108,33 +109,33 @@ public class DocumentIndexer {
                 return;
             }
             emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
-		}
-		
-		@Override
-		public <A extends Annotation> void visitCtAnnotationType(CtAnnotationType<A> el) {
-			super.visitCtAnnotationType(el);
-			if (el.getPosition() instanceof NoSourcePosition) {
-				return;
-			}
+        }
+        
+        @Override
+        public <A extends Annotation> void visitCtAnnotationType(CtAnnotationType<A> el) {
+            super.visitCtAnnotationType(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+                return;
+            }
 
-			emitDefinition(mkRange(el.getPosition()), mkDoc(el.getReference(), el.getDocComment()));
-		}
+            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getReference(), el.getDocComment()));
+        }
 
-		@Override
-		public <T extends Enum<?>> void visitCtEnum(CtEnum<T> el) {
-			super.visitCtEnum(el);
-			if (el.getPosition() instanceof NoSourcePosition) {
-				return;
-			}
+        @Override
+        public <T extends Enum<?>> void visitCtEnum(CtEnum<T> el) {
+            super.visitCtEnum(el);
+            if (el.getPosition() instanceof NoSourcePosition) {
+                return;
+            }
 
-			emitDefinition(mkRange(el.getPosition()), mkDoc(el.getReference(), el.getDocComment()));
-		}
+            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getReference(), el.getDocComment()));
+        }
 
         @Override
         public <T> void visitCtLocalVariable(CtLocalVariable<T> el) {
             super.visitCtLocalVariable(el);
             if (el.getPosition() instanceof NoSourcePosition) {
-				return;
+                return;
             }
 
             emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
@@ -144,7 +145,7 @@ public class DocumentIndexer {
         public <T> void visitCtCatchVariable(CtCatchVariable<T> el) {
             super.visitCtCatchVariable(el);
             if (el.getPosition() instanceof NoSourcePosition) {
-				return;
+                return;
             }
 
             emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
@@ -154,7 +155,7 @@ public class DocumentIndexer {
         public <T> void visitCtMethod(CtMethod<T> el) {
             super.visitCtMethod(el);
             if (el.getPosition() instanceof NoSourcePosition) {
-				return;
+                return;
             }
 
             emitDefinition(nameRange(el), mkDoc(el.getType(), el.getDocComment()));
@@ -164,7 +165,7 @@ public class DocumentIndexer {
         public <T> void visitCtField(CtField<T> el) {
             super.visitCtField(el);
             if (el.getPosition() instanceof NoSourcePosition) {
-				return;
+                return;
             }
 
             emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
@@ -174,7 +175,7 @@ public class DocumentIndexer {
         public <T> void visitCtConstructor(CtConstructor<T> el) {
             super.visitCtConstructor(el);
             if (el.getPosition() instanceof NoSourcePosition) {
-				return;
+                return;
             }
 
             emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
@@ -184,7 +185,7 @@ public class DocumentIndexer {
         public <T> void visitCtEnumValue(CtEnumValue<T> el) {
             super.visitCtEnumValue(el);
             if (el.getPosition() instanceof NoSourcePosition) {
-				return;
+                return;
             }
 
             emitDefinition(nameRange(el), mkDoc(el.getType(), el.getDocComment()));
@@ -192,18 +193,16 @@ public class DocumentIndexer {
 
         @Override
         public <T> void visitCtClass(CtClass<T> el) {
-			super.visitCtClass(el);
-			// TODO(nsc) test behaviour with nested inner classes
-			/* if (el.get) */
-			/* CtPackage elPackage = el.getPackage();
+            super.visitCtClass(el);
+            CtPackage elPackage = el.getPackage();
             if (elPackage == null) {
-				
-				System.err.println("e");
+                // if anonymous object instance eg new Object() {...}
+                // do we want to emit a def? Probably
+                emitDefinition(mkRange(el.getPosition()), el.getDocComment());
+                return;
             }
-			packageName = elPackage.getQualifiedName();
-            String doc = mkClassDoc(el, el.getSuperclass(), el.getSuperInterfaces(), el.getDocComment());
-			emitDefinition(nameRange(el), doc); */
-			emitDefinition(mkRange(el.getPosition()), el.getDocComment());
+            packageName = elPackage.getQualifiedName();
+            emitDefinition(nameRange(el), mkClassDoc(el, el.getDocComment()));
         }
 
         /* @Override
@@ -322,7 +321,7 @@ public class DocumentIndexer {
         public <T, A extends T> void visitCtAssignment(CtAssignment<T, A> el) {
             super.visitCtAssignment(el);
             if (el.getPosition() instanceof NoSourcePosition) {
-				return;
+                return;
             }
 
             el.getAssigned().getpa
@@ -442,6 +441,83 @@ public class DocumentIndexer {
 
     private String mkDoc(CtTypeReference<?> t, String docComment) {
         return "```java\n" + t + "\n```" + (docComment.equals("") ? "" : "\n---\n" + docComment);
+    }
+
+    private String mkClassDoc(CtClass<?> t, String docComment) {
+        CtTypeReference<?> superClass = t.getSuperclass();
+        Set<CtTypeReference<?>> implemented = t.getSuperInterfaces();
+
+        StringBuilder b = new StringBuilder("```java\n");
+
+        t.getModifiers().stream().sorted().forEach(m -> b.append(m.toString() + " "));
+
+        b.append("class ");
+        b.append(t.getSimpleName());
+
+        // handle super class
+        if(superClass != null) {
+            b.append(" extends ");
+            b.append(getLocalizedName(superClass));
+            
+            appendTypeParam(b, superClass);
+        }
+        
+        // handle all implemented interfaces
+        if(implemented.size() > 0) {
+            Iterator<CtTypeReference<?>> iter = implemented.iterator();
+            b.append(" implements ");
+            CtTypeReference<?> next = iter.next();
+            b.append(getLocalizedName(next));
+            
+            appendTypeParam(b, next);
+            
+            while(iter.hasNext()) {
+                next = iter.next();
+                b.append(", ");
+                b.append(getLocalizedName(next));
+                
+                appendTypeParam(b, next);
+            }
+        }
+
+        b.append("\n```");
+
+        if(!docComment.equals("")) {
+            b.append("\n---\n");
+            b.append(docComment);
+        }
+
+        return b.toString();
+    }
+
+    /**
+     * Appends string representation of generic type parameters for a superclass/interface to the 
+     * top-level type definition signature string builder
+     * @param b the type signature string builder
+     * @param next the current superclass/interface
+     */
+    private void appendTypeParam(StringBuilder b, CtTypeReference<?> next) {
+        if(next.getActualTypeArguments().size() > 0) {
+            b.append("<");
+            Iterator<CtTypeReference<?>> genIter = next.getActualTypeArguments().iterator();
+            while(genIter.hasNext()) {
+                CtTypeReference<?> gen = genIter.next();
+                b.append(getLocalizedName(gen));
+                if(genIter.hasNext()) b.append(", ");
+            }
+
+            b.append(">");
+        }
+    }
+
+    private String getLocalizedName(CtTypeReference<?> type) {
+        if(type.getPackage().getQualifiedName().equals("java.lang")) {
+            return type.getSimpleName();
+        } else if(type.getPackage().getQualifiedName().startsWith(this.packageName)) {
+            return type.getSimpleName();
+        } else {
+            return type.getQualifiedName();
+        }
     }
 
     private String humanRange(Range r) {
