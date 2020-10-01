@@ -9,6 +9,7 @@ import spoon.reflect.cu.position.NoSourcePosition;
 import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtCatchVariableReference;
 import spoon.reflect.reference.CtExecutableReference;
+import spoon.reflect.reference.CtPackageReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.CtScanner;
 
@@ -511,13 +512,15 @@ public class DocumentIndexer {
     }
 
     private String getLocalizedName(CtTypeReference<?> type) {
-        if(type.getPackage().getQualifiedName().equals("java.lang")) {
-            return type.getSimpleName();
-        } else if(type.getPackage().getQualifiedName().startsWith(this.packageName)) {
-            return type.getSimpleName();
-        } else {
-            return type.getQualifiedName();
+        final CtPackageReference packageRef = type.getPackage();
+        if (packageRef != null) {
+            final String qualifiedName = packageRef.getQualifiedName();
+            if (qualifiedName.equals("java.lang") || qualifiedName.startsWith(this.packageName)) {
+                return type.getSimpleName();
+            }
         }
+
+        return type.getQualifiedName();
     }
 
     private String humanRange(Range r) {
