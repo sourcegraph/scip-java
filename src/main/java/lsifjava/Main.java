@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Main {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         System.out.println("Running JVM " + System.getProperty("java.version"));
 
-        Arguments arguments = ArgumentParser.parse(args);
-        PrintWriter writer = createWriter(arguments);
-        Emitter emitter = new Emitter(writer);
-        ProjectIndexer indexer = new ProjectIndexer(arguments, emitter);
+        var arguments = ArgumentParser.parse(args);
+        var writer = createWriter(arguments);
+        var emitter = new Emitter(writer);
+        var indexer = new ProjectIndexer(arguments, emitter);
 
         long start = System.nanoTime();
 

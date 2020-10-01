@@ -7,6 +7,7 @@ import java.util.Iterator;
  */
 public class Sample extends Object implements Iterator<String>, Iterable<String> {
     public static void nom() {
+        Sample s = new Sample();
         System.out.println("om nom nom");
     }
 

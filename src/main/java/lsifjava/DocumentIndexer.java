@@ -1,47 +1,58 @@
 package lsifjava;
 
-import com.github.javaparser.Position;
-import com.github.javaparser.Range;
+import com.sun.source.util.JavacTask;
+import com.sun.tools.javac.api.JavacTool;
+import com.sun.tools.javac.api.JavacTrees;
+import com.sun.tools.javac.file.JavacFileManager;
+import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.MethodTree;
+import com.sun.source.tree.NewClassTree;
+import com.sun.tools.javac.tree.JCTree;
+import com.sun.source.tree.ClassTree;
+import com.sun.source.tree.PackageTree;
+import com.sun.source.util.TreePath;
+import com.sun.source.util.Trees;
+import com.sun.source.util.TreePathScanner;
+import com.sun.tools.javac.util.Context;
+import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.Position;
 
-import spoon.reflect.code.*;
-import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.cu.position.NoSourcePosition;
-import spoon.reflect.declaration.*;
-import spoon.reflect.reference.CtCatchVariableReference;
-import spoon.reflect.reference.CtExecutableReference;
-import spoon.reflect.reference.CtTypeReference;
-import spoon.reflect.visitor.CtScanner;
-
-import java.lang.annotation.Annotation;
-import java.nio.file.Paths;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Path;
 import java.util.*;
+
+import com.sun.tools.javac.main.JavaCompiler;
+
+import javax.lang.model.element.Element;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.TypeElement;
+import javax.tools.JavaFileObject;
 
 public class DocumentIndexer {
     private String projectRoot;
-    private boolean verbose;
-    private String pathname;
-    private CtElement spoonElement;
     private String projectId;
+    private Path path;
+    
     private Emitter emitter;
-    private Map<String, DocumentIndexer> indexers;
+    private Map<Path, DocumentIndexer> indexers;
+    private boolean verbose;
+    
     private String documentId;
+
+    private boolean indexed;
     private Set<String> rangeIds = new HashSet<>();
     private Map<Range, DefinitionMeta> definitions = new HashMap<>();
-    private String packageName;
 
-    public DocumentIndexer(
-            String projectRoot,
-            boolean verbose,
-            String pathname,
-            CtElement spoonElement,
-            String projectId,
-            Emitter emitter,
-            Map<String, DocumentIndexer> indexers
-    ) {
+    private JavaCompiler compiler;
+    private JavacTask task;
+    private static final JavacTool systemProvider = JavacTool.create();
+    private final Map<String, Object> declaredTypes = new HashMap<>();
+
+    public DocumentIndexer(String projectRoot, boolean verbose, Path path, String projectId, Emitter emitter, Map<Path, DocumentIndexer> indexers) {
         this.projectRoot = projectRoot;
         this.verbose = verbose;
-        this.pathname = pathname;
-        this.spoonElement = spoonElement;
+        this.path = path;
         this.projectId = projectId;
         this.emitter = emitter;
         this.indexers = indexers;
@@ -51,25 +62,48 @@ public class DocumentIndexer {
         return definitions.size();
     }
 
-    public void visitDefinitions() {
-        this.spoonElement.accept(new DefinitionsVisitor());
-    }
-
-    public void visitReferences() {
-        this.spoonElement.accept(new ReferencesVisitor());
-    }
-
     public void preIndex() {
-        Map<String, Object> args = Util.mapOf(
-                "languageId", "java",
-                "uri", String.format("file://%s", Paths.get(pathname).toAbsolutePath().toString())
+        var args = Util.mapOf(
+            "languageId", "java",
+            "uri", String.format("file://%s", path.toAbsolutePath().toString())
         );
 
         this.documentId = emitter.emitVertex("document", args);
     }
 
+    public synchronized void index() throws IOException {
+        if(indexed) return;
+        indexed = true;
+
+        var compUnit = analyzeFile();
+        
+        new IndexingVisitor(compUnit, Trees.instance(task)).scan(compUnit, null);
+    }
+    
+    private CompilationUnitTree analyzeFile() throws IOException {
+        JavaFileObject file = new SourceFileObject(path);
+        var context = new Context();
+        var trees = JavacTrees.instance(context);
+        var fileManager = new JavacFileManager(context, true, Charset.defaultCharset());
+        compiler = JavaCompiler.instance(context);
+        compiler.genEndPos = true;
+        compiler.keepComments = true;
+
+        task = systemProvider.getTask(
+                null, fileManager, null, null,  List.of(), List.of(file), context
+        );
+        var compUnit = task.parse().iterator().next();
+        for(var element : task.analyze()) {
+            /*if(LanguageUtils.isTopLevel(element.getKind())) {
+                var typeName = ((TypeElement) element).getQualifiedName().toString();
+            }*/
+        }
+        
+        return compUnit;
+    }
+
     public void postIndex() {
-        for (DefinitionMeta meta : definitions.values()) {
+        for (var meta : definitions.values()) {
             linkUses(meta, documentId);
         }
 
@@ -77,8 +111,93 @@ public class DocumentIndexer {
         emitter.emitEdge("contains", Util.mapOf("outV", documentId, "inVs", rangeIds.stream().sorted().toArray()));
     }
 
+    public class IndexingVisitor extends TreePathScanner<Void, Void> {
+        private final CompilationUnitTree unit;
+        private final Trees trees;
+
+        public IndexingVisitor(CompilationUnitTree unit, Trees trees) {
+            this.unit = unit;
+            this.trees = trees;
+        }
+        
+        @Override
+        public Void visitPackage(PackageTree node, Void p) {
+            super.visitPackage(node, p);
+            var path = getCurrentPath();
+            return null;
+        }
+
+        @Override
+        public Void visitMethod(MethodTree node, Void p) {
+            var methodDecl = (JCTree.JCMethodDecl) getCurrentPath().getLeaf();
+            var linemap = unit.getLineMap();
+
+            var startLine = (int)linemap.getLineNumber(methodDecl.getStartPosition());
+            var endLine = (int)linemap.getLineNumber(methodDecl.getEndPosition(null));
+            var startCol = (int)linemap.getColumnNumber(methodDecl.getStartPosition());
+            var endCol = (int)linemap.getColumnNumber(methodDecl.getEndPosition(null) + methodDecl.getName().length());
+
+            emitDefinition(
+                new Range(
+                    new Position(startLine, startCol),
+                    new Position(endLine, endCol)
+                ),
+                methodDecl.getModifiers().toString() + methodDecl.getReturnType().toString() + " " + methodDecl.getName()
+            );
+
+            return super.visitMethod(node, p);
+        }
+
+        @Override
+        public Void visitClass(ClassTree node, Void p) {
+            var path = getCurrentPath();
+            var classDecl = (JCTree.JCClassDecl) path.getLeaf();
+            var linemap = unit.getLineMap();
+            var startLine = (int)linemap.getLineNumber(classDecl.getStartPosition());
+            var endLine = (int)linemap.getLineNumber(classDecl.getEndPosition(null));
+            var startCol = (int)linemap.getColumnNumber(classDecl.getStartPosition());
+            var endCol = (int)linemap.getColumnNumber(classDecl.getEndPosition(null) + "class ".length() + classDecl.getSimpleName().length());
+
+            var packagePrefix = "";
+            if (getCurrentPath().getCompilationUnit().getPackageName() != null) {
+                packagePrefix = getCurrentPath().getCompilationUnit().getPackageName() + ".";
+            }
+
+            emitDefinition(
+                new Range(
+                    new Position(startLine, startCol),
+                    new Position(endLine, endCol)
+                ),
+                classDecl.getModifiers().toString() + "class " + packagePrefix + classDecl.getSimpleName()
+            );
+
+            return super.visitClass(node, p);
+        }
+
+        @Override
+        public Void visitNewClass(NewClassTree node, Void p) {
+            var path = getCurrentPath();
+            var newClassExpr = (JCTree.JCNewClass) path.getLeaf();
+
+            /*var hoverData = unit.accept(new ReferenceVisitor(trees, unit, newClassExpr.getStartPosition() + "new ".length()), null);//.scan(unit, (long) newClassExpr.getStartPosition() + 5);
+            if(hoverData == null) return super.visitNewClass(node, p);
+
+            var refElement = hoverData.getElement();
+            var defContainer = LanguageUtils.getTopLevelClass(refElement);
+            if(defContainer == null) return super.visitNewClass(node, p);
+
+            var defName = LanguageUtils.getQualifiedName(defContainer);
+            
+            if(LanguageUtils.isTopLevel(defContainer.getKind())) {
+                
+            }*/
+
+            return super.visitNewClass(node, p);
+        }
+    }
+
     private void linkUses(DefinitionMeta meta, String documentId) {
-        String resultId = emitter.emitVertex("referenceResult", Util.mapOf());
+        var resultId = emitter.emitVertex("referenceResult", Util.mapOf());
 
         emitter.emitEdge("textDocument/references", Util.mapOf("outV", meta.resultSetId, "inV", resultId));
         emitter.emitEdge("item", Util.mapOf(
@@ -88,7 +207,7 @@ public class DocumentIndexer {
                 "document", documentId
         ));
 
-        for (Map.Entry<String, Set<String>> entry : meta.referenceRangeIds.entrySet()) {
+        for (var entry : meta.referenceRangeIds.entrySet()) {
             emitter.emitEdge("item", Util.mapOf(
                     "property", "references",
                     "outV", resultId,
@@ -98,452 +217,87 @@ public class DocumentIndexer {
         }
     }
 
-    // TODO add support for more language constructs:
-    // https://github.com/INRIA/spoon/blob/master/src/main/java/spoon/reflect/visitor/CtScanner.java
+    private void emitDefinition(Range range, String doc) {
+        if(verbose)
+            System.out.println("DEF " + path.toString().replaceFirst("^"+projectRoot, ".") + ":" + humanRange(range));
 
-    private class DefinitionsVisitor extends CtScanner {
-        @Override
-        public <T> void visitCtParameter(CtParameter<T> el) {
-            super.visitCtParameter(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
-        }
-        
-        @Override
-        public <A extends Annotation> void visitCtAnnotationType(CtAnnotationType<A> el) {
-            super.visitCtAnnotationType(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
+        var hoverId = emitter.emitVertex("hoverResult", Util.mapOf(
+                "result", Util.mapOf(
+                        "contents", Util.mapOf(
+                                "kind", "markdown",
+                                "value", doc
+                        )
+                )
+        ));
 
-            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getReference(), el.getDocComment()));
-        }
+        var resultSetId = emitter.emitVertex("resultSet", Util.mapOf());
+        emitter.emitEdge("textDocument/hover", Util.mapOf("outV", resultSetId, "inV", hoverId));
+        var rangeId = emitter.emitVertex("range", createRange(range));
+        emitter.emitEdge("next", Util.mapOf("outV", rangeId, "inV", resultSetId));
 
-        @Override
-        public <T extends Enum<?>> void visitCtEnum(CtEnum<T> el) {
-            super.visitCtEnum(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
+        rangeIds.add(rangeId);
+        definitions.put(range, new DefinitionMeta(rangeId, resultSetId)); // + contents?
+    }
 
-            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getReference(), el.getDocComment()));
-        }
+    private void emitUse(Range use, Range def, Path defPath) {
+        var indexer = indexers.get(defPath);
 
-        @Override
-        public <T> void visitCtLocalVariable(CtLocalVariable<T> el) {
-            super.visitCtLocalVariable(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
+        var link = path.toString().replaceFirst("^"+projectRoot, ".") + ":" + humanRange(use) + " -> " + defPath.toString().replaceFirst("^"+projectRoot, ".") + ":" + humanRange(def);
+            
+        if(verbose)
+            System.out.println("Linking use to definition: " + link);
 
-            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
-        }
-
-        @Override
-        public <T> void visitCtCatchVariable(CtCatchVariable<T> el) {
-            super.visitCtCatchVariable(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-
-            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
-        }
-
-        @Override
-        public <T> void visitCtMethod(CtMethod<T> el) {
-            super.visitCtMethod(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-
-            emitDefinition(nameRange(el), mkDoc(el.getType(), el.getDocComment()));
-        }
-
-        @Override
-        public <T> void visitCtField(CtField<T> el) {
-            super.visitCtField(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-
-            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
-        }
-
-        @Override
-        public <T> void visitCtConstructor(CtConstructor<T> el) {
-            super.visitCtConstructor(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-
-            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getType(), el.getDocComment()));
-        }
-
-        /* @Override
-        public <T> void visitCtEnumValue(CtEnumValue<T> el) {
-            super.visitCtEnumValue(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-
-            emitDefinition(nameRange(el), mkDoc(el.getType(), el.getDocComment()));
-        } */
-
-        @Override
-        public <T> void visitCtClass(CtClass<T> el) {
-            super.visitCtClass(el);
-            CtPackage elPackage = el.getPackage();
-            if (elPackage == null) {
-                // if anonymous object instance eg new Object() {...}
-                // do we want to emit a def? Probably
-                emitDefinition(mkRange(el.getPosition()), el.getDocComment());
-                return;
-            }
-            packageName = elPackage.getQualifiedName();
-            emitDefinition(nameRange(el), mkClassDoc(el, el.getDocComment()));
-        }
-
-        /* @Override
-        public <T> void visitCtAnnotationMethod(CtAnnotationMethod<T> el) {
-            super.visitCtAnnotationMethod(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-
-            emitDefinition(nameRange(el), mkDoc(el.getType(), el.getDocComment()));
-        } */
-
-        @Override
-        public <T> void visitCtInterface(CtInterface<T> el) {
-            super.visitCtInterface(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-
-            emitDefinition(mkRange(el.getPosition()), mkDoc(el.getReference(), el.getDocComment()));
-        }
-
-        private void emitDefinition(Range range, String doc) {
+        var meta = indexer.definitions.get(def);
+        if (meta == null) {
             if(verbose)
-                System.out.println("DEF " + pathname.replaceFirst("^"+projectRoot, ".") + ":" + humanRange(range));
-
-            String hoverId = emitter.emitVertex("hoverResult", Util.mapOf(
-                    "result", Util.mapOf(
-                            "contents", Util.mapOf(
-                                    "kind", "markdown",
-                                    "value", doc
-                            )
-                    )
-            ));
-
-            String resultSetId = emitter.emitVertex("resultSet", Util.mapOf());
-            emitter.emitEdge("textDocument/hover", Util.mapOf("outV", resultSetId, "inV", hoverId));
-            String rangeId = emitter.emitVertex("range", createRange(range));
-            emitter.emitEdge("next", Util.mapOf("outV", rangeId, "inV", resultSetId));
-
-            rangeIds.add(rangeId);
-            definitions.put(range, new DefinitionMeta(rangeId, resultSetId)); // + contents?
-        }
-    }
-
-    private class ReferencesVisitor extends CtScanner {
-        @Override
-        public <T> void visitCtVariableRead(CtVariableRead<T> el) {
-            super.visitCtVariableRead(el);
-            if (el.getVariable().getDeclaration() == null) {
-                return;
-            }
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-            emitUse(
-                    mkRange(el.getPosition()),
-                    mkRange(el.getVariable().getDeclaration().getPosition()),
-                    el.getVariable().getDeclaration().getPosition().getFile().getPath()
-            );
+                System.out.println("WARNING Skipping linking use to definition: " + link);
+            return;
         }
 
-        @Override
-        public <T> void visitCtInvocation(CtInvocation<T> el) {
-            super.visitCtInvocation(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-            if (el.getExecutable() == null || el.getExecutable().getDeclaration() == null || el.getExecutable().getDeclaration().getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-            Range useRange = identifierRange(el, el.getExecutable().getSimpleName());
-            emitUse(
-                    useRange,
-                    nameRange(el.getExecutable().getDeclaration()),
-                    el.getExecutable().getDeclaration().getPosition().getFile().getPath()
-            );
+        var rangeId = emitter.emitVertex("range", createRange(use));
+        emitter.emitEdge("next", Util.mapOf("outV", rangeId, "inV", meta.resultSetId));
+
+        if (meta.definitionResultId == null) {
+            var resultId = emitter.emitVertex("definitionResult", Util.mapOf());
+            emitter.emitEdge("textDocument/definition", Util.mapOf("outV", meta.resultSetId, "inV", resultId));
+            meta.definitionResultId = resultId;
         }
 
-        @Override
-        public <T> void visitCtFieldRead(CtFieldRead<T> el) {
-            super.visitCtFieldRead(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-            Range useRange = identifierRange(el, el.getVariable().getSimpleName());
-            CtField<?> decl = el.getVariable().getDeclaration();
-            if (decl == null) {
-                return;
-            }
-            emitUse(
-                    useRange,
-                    nameRange(decl),
-                    decl.getPosition().getFile().getPath()
-            );
-        }
+        emitter.emitEdge("item", Util.mapOf(
+                "outV", meta.definitionResultId,
+                "inVs", new String[]{meta.rangeId},
+                "document", indexer.documentId
+        ));
 
-        @Override
-        public <T> void visitCtTypeReference(CtTypeReference<T> el) {
-            super.visitCtTypeReference(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-            CtType<?> decl = el.getDeclaration();
-            if (decl == null) {
-                return;
-            }
-            emitUse(
-                    mkRange(el.getPosition()),
-                    nameRange(decl),
-                    decl.getPosition().getFile().getPath()
-            );
-        }
+        rangeIds.add(rangeId);
 
-        /* @Override
-        public <T, A extends T> void visitCtAssignment(CtAssignment<T, A> el) {
-            super.visitCtAssignment(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-
-            el.getAssigned().getpa
-        } */
-
-
-        /* @Override
-        public <T> void visitCtSuperAccess(CtSuperAccess<T> el) {
-            super.visitCtSuperAccess(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-
-            //el.get
-
-            //emitUse(use, def, defPath);
-        } */
-
-        @Override
-        public <T> void visitCtCatchVariableReference(CtCatchVariableReference<T> el) {
-            super.visitCtCatchVariableReference(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-
-            CtCatchVariable<?> decl = el.getDeclaration();
-            if (decl == null || decl.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-
-            emitUse(
-                mkRange(el.getPosition()), 
-                nameRange(decl), 
-                decl.getPosition().getFile().getPath()
-            );
-        }
-
-        @Override
-        public <T> void visitCtConstructorCall(CtConstructorCall<T> el) {
-            super.visitCtConstructorCall(el);
-            if (el.getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-
-            CtExecutableReference<?> exec = el.getExecutable();
-            if (exec == null || exec.getDeclaration() == null || exec.getDeclaration().getPosition() instanceof NoSourcePosition) {
-                return;
-            }
-
-            Range useRange = identifierRange(el, exec.getSimpleName());
-            emitUse(
-                useRange, 
-                nameRange(exec.getDeclaration()),
-                exec.getDeclaration().getPosition().getFile().getPath()    
-            );
-        }
-
-        private void emitUse(Range use, Range def, String defPath) {
-            DocumentIndexer indexer = indexers.get(defPath);
-
-            String link = pathname.replaceFirst("^"+projectRoot, ".") + ":" + humanRange(use) + " -> " + defPath.replaceFirst("^"+projectRoot, ".") + ":" + humanRange(def);
-                
-            if(verbose)
-                System.out.println("Linking use to definition: " + link);
-
-            DefinitionMeta meta = indexer.definitions.get(def);
-            if (meta == null) {
-                if(verbose)
-                    System.out.println("WARNING Skipping linking use to definition: " + link);
-                return;
-            }
-
-            String rangeId = emitter.emitVertex("range", createRange(use));
-            emitter.emitEdge("next", Util.mapOf("outV", rangeId, "inV", meta.resultSetId));
-
-            if (meta.definitionResultId == null) {
-                String resultId = emitter.emitVertex("definitionResult", Util.mapOf());
-                emitter.emitEdge("textDocument/definition", Util.mapOf("outV", meta.resultSetId, "inV", resultId));
-                meta.definitionResultId = resultId;
-            }
-
-            emitter.emitEdge("item", Util.mapOf(
-                    "outV", meta.definitionResultId,
-                    "inVs", new String[]{meta.rangeId},
-                    "document", indexer.documentId
-            ));
-
-            rangeIds.add(rangeId);
-
-            Set<String> set = meta.referenceRangeIds.getOrDefault(documentId, new HashSet<>());
-            set.add(rangeId);
-            meta.referenceRangeIds.put(documentId, set);
-        }
-    }
-
-    private Range nameRange(CtNamedElement a) {
-        return nameRange(a.getPosition(), a.getSimpleName());
-    }
-
-    private Range nameRange(SourcePosition a, String name) {
-        return Range.range(
-                a.getLine(),
-                a.getColumn(),
-                a.getLine(),
-                a.getColumn() + name.length()
-        );
+        var set = meta.referenceRangeIds.getOrDefault(documentId, new HashSet<>());
+        set.add(rangeId);
+        meta.referenceRangeIds.put(documentId, set);
     }
 
     private Range nameRange(Range a, String name) {
-        return Range.range(
-                a.begin.line,
-                a.begin.column,
-                a.end.line,
-                a.end.column + name.length()
+        return new Range(
+                new Position(
+                    a.getStart().getLine(),
+                    a.getStart().getCharacter()
+                ),
+                new Position(
+                    a.getEnd().getLine(),
+                    a.getEnd().getCharacter() + name.length()
+                )
         );
     }
 
-    private String mkDoc(CtTypeReference<?> t, String docComment) {
-        return "```java\n" + t + "\n```" + (docComment.equals("") ? "" : "\n---\n" + docComment);
-    }
-
-    private String mkClassDoc(CtClass<?> t, String docComment) {
-        CtTypeReference<?> superClass = t.getSuperclass();
-        Set<CtTypeReference<?>> implemented = t.getSuperInterfaces();
-
-        StringBuilder b = new StringBuilder("```java\n");
-
-        t.getModifiers().stream().sorted().forEach(m -> b.append(m.toString() + " "));
-
-        b.append("class ");
-        b.append(t.getSimpleName());
-
-        // handle super class
-        if(superClass != null) {
-            b.append(" extends ");
-            b.append(getLocalizedName(superClass));
-            
-            appendTypeParam(b, superClass);
-        }
-        
-        // handle all implemented interfaces
-        if(implemented.size() > 0) {
-            Iterator<CtTypeReference<?>> iter = implemented.iterator();
-            b.append(" implements ");
-            CtTypeReference<?> next = iter.next();
-            b.append(getLocalizedName(next));
-            
-            appendTypeParam(b, next);
-            
-            while(iter.hasNext()) {
-                next = iter.next();
-                b.append(", ");
-                b.append(getLocalizedName(next));
-                
-                appendTypeParam(b, next);
-            }
-        }
-
-        b.append("\n```");
-
-        if(!docComment.equals("")) {
-            b.append("\n---\n");
-            b.append(docComment);
-        }
-
-        return b.toString();
-    }
-
-    /**
-     * Appends string representation of generic type parameters for a superclass/interface to the 
-     * top-level type definition signature string builder
-     * @param b the type signature string builder
-     * @param next the current superclass/interface
-     */
-    private void appendTypeParam(StringBuilder b, CtTypeReference<?> next) {
-        if(next.getActualTypeArguments().size() > 0) {
-            b.append("<");
-            Iterator<CtTypeReference<?>> genIter = next.getActualTypeArguments().iterator();
-            while(genIter.hasNext()) {
-                CtTypeReference<?> gen = genIter.next();
-                b.append(getLocalizedName(gen));
-                if(genIter.hasNext()) b.append(", ");
-            }
-
-            b.append(">");
-        }
-    }
-
-    private String getLocalizedName(CtTypeReference<?> type) {
-        if(type.getPackage().getQualifiedName().equals("java.lang")) {
-            return type.getSimpleName();
-        } else if(type.getPackage().getQualifiedName().startsWith(this.packageName)) {
-            return type.getSimpleName();
-        } else {
-            return type.getQualifiedName();
-        }
-    }
-
     private String humanRange(Range r) {
-        return r.begin.line + ":" + r.begin.column + "-" + r.end.line + ":" + r.end.column;
-    }
-
-    private Range mkRange(SourcePosition pos) {
-        return Range.range(pos.getLine(), pos.getColumn(), pos.getEndLine(), pos.getEndColumn());
+        return r.getStart().getLine() + ":" + r.getStart().getCharacter() + "-" + r.getEnd().getLine() + ":" + r.getEnd().getCharacter();
     }
 
     private Map<String, Object> createRange(Range range) {
-        return Util.mapOf("start", createPosition(range.begin), "end", createPosition(range.end));
+        return Util.mapOf("start", createPosition(range.getStart()), "end", createPosition(range.getEnd()));
     }
 
     private Map<String, Object> createPosition(Position position) {
-        return Util.mapOf("line", position.line - 1, "character", position.column - 1);
-    }
-
-    private Range identifierRange(CtTargetedExpression<?, ?> a, String b) {
-        // Ugh, we only want the range for the identifier, not the whole expression.
-        // This will probably break on fields/methods that are spread across lines.
-        // +1 for `.`, +1 because (I'm guessing) end is inclusive
-        if (a.getTarget() == null || a.getTarget().getPosition() instanceof NoSourcePosition) {
-            return mkRange(a.getPosition());
-        }
-        SourcePosition p = a.getTarget().getPosition();
-        return Range.range(p.getEndLine(), p.getEndColumn() + 1 + 1, p.getEndLine(), p.getEndColumn() + 1 + 1 + b.length());
+        return Util.mapOf("line", position.getLine() - 1, "character", position.getCharacter() - 1);
     }
 }

@@ -10,9 +10,9 @@ public class ArgumentParser {
     public static final String PROTOCOL_VERSION = "0.4.0";
 
     public static Arguments parse(String[] args) {
-        Options options = createOptions();
-        CommandLineParser parser = new DefaultParser();
-        HelpFormatter formatter = new HelpFormatter();
+        var options = createOptions();
+        var parser = new DefaultParser();
+        var formatter = new HelpFormatter();
 
         CommandLine cmd;
         try {
@@ -40,14 +40,14 @@ public class ArgumentParser {
         } catch(IOException e) {
             throw new RuntimeException(String.format("Directory %s could not be found", cmd.getOptionValue("projectRoot", ".")));
         }
-        String outFile = cmd.getOptionValue("out", projectRoot + "/dump.lsif");
-        boolean verbosity = cmd.hasOption("verbose");
+        var outFile = cmd.getOptionValue("out", projectRoot + "/dump.lsif");
+        var verbosity = cmd.hasOption("verbose");
 
         return new Arguments(projectRoot, outFile, verbosity);
     }
 
     private static Options createOptions() {
-        Options options = new Options();
+        var options = new Options();
 
         options.addOption(new Option(
                 "help", false,
