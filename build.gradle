@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
     compile 'com.github.javaparser:javaparser-symbol-solver-core:3.16.1'
-    compile 'fr.inria.gforge.spoon:spoon-core:8.3.0-beta-8'
+    compile 'fr.inria.gforge.spoon:spoon-core:8.3.0-beta-10'
     compile 'com.google.code.gson:gson:2.8.6'
     compile 'commons-cli:commons-cli:1.4'
     compile 'org.slf4j:slf4j-api:1.7.30'
