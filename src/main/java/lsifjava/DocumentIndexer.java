@@ -1,31 +1,30 @@
 package lsifjava;
 
+import com.sun.source.tree.*;
 import com.sun.source.util.JavacTask;
 import com.sun.tools.javac.api.JavacTool;
 import com.sun.tools.javac.api.JavacTrees;
 import com.sun.tools.javac.file.JavacFileManager;
-import com.sun.source.tree.CompilationUnitTree;
-import com.sun.source.tree.MethodTree;
-import com.sun.source.tree.NewClassTree;
 import com.sun.tools.javac.tree.JCTree;
-import com.sun.source.tree.ClassTree;
-import com.sun.source.tree.PackageTree;
+import com.sun.tools.javac.code.Type;
 import com.sun.source.util.TreePath;
 import com.sun.source.util.Trees;
 import com.sun.source.util.TreePathScanner;
 import com.sun.tools.javac.util.Context;
+import org.eclipse.lsp4j.Location;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.Position;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import com.sun.tools.javac.main.JavaCompiler;
 
 import javax.lang.model.element.Element;
-import javax.lang.model.element.Modifier;
 import javax.tools.JavaFileObject;
 
 public class DocumentIndexer {
@@ -43,7 +42,6 @@ public class DocumentIndexer {
     private final Set<String> rangeIds = new HashSet<>();
     private final Map<Range, DefinitionMeta> definitions = new HashMap<>();
 
-    private JavaCompiler compiler;
     private JavacTask task;
     private static final JavacTool systemProvider = JavacTool.create();
     private CompilationUnitTree compUnit;
@@ -83,9 +81,10 @@ public class DocumentIndexer {
         JavaFileObject file = new SourceFileObject(path);
         var context = new Context();
         var fileManager = new JavacFileManager(context, true, Charset.defaultCharset());
-        var trees = JavacTrees.instance(context);
-        compiler = JavaCompiler.instance(context);
+        JavacTrees.instance(context);
+        var compiler = JavaCompiler.instance(context);
         compiler.genEndPos = true;
+        compiler.lineDebugInfo = true;
         compiler.keepComments = true;
 
         task = systemProvider.getTask(
@@ -119,13 +118,6 @@ public class DocumentIndexer {
             this.trees = trees;
         }
         
-        @Override
-        public Void visitPackage(PackageTree node, Void p) {
-            super.visitPackage(node, p);
-            var path = getCurrentPath();
-            return null;
-        }
-
         @Override
         public Void visitMethod(MethodTree node, Void p) {
             var methodDecl = (JCTree.JCMethodDecl) getCurrentPath().getLeaf();
@@ -177,22 +169,15 @@ public class DocumentIndexer {
         public Void visitClass(ClassTree node, Void p) {
             var path = getCurrentPath();
             var classDecl = (JCTree.JCClassDecl) path.getLeaf();
-            var linemap = unit.getLineMap();
-            var startLine = (int)linemap.getLineNumber(classDecl.getStartPosition());
-            var endLine = (int)linemap.getLineNumber(classDecl.getEndPosition(null));
-            var startCol = (int)linemap.getColumnNumber(classDecl.getStartPosition());
-            var endCol = (int)linemap.getColumnNumber(classDecl.getEndPosition(null) + "class ".length() + classDecl.getSimpleName().length());
-
             var packagePrefix = "";
             if (getCurrentPath().getCompilationUnit().getPackageName() != null) {
                 packagePrefix = getCurrentPath().getCompilationUnit().getPackageName() + ".";
             }
 
+            // gets the range of the def ident
+            var range = location(task, getCurrentPath(), classDecl.getSimpleName().toString()).getRange();
             emitDefinition(
-                new Range(
-                    new Position(startLine, startCol),
-                    new Position(endLine, endCol)
-                ),
+                range,
                 classDecl.getModifiers().toString() + "class " + packagePrefix + classDecl.getSimpleName()
             );
 
@@ -200,24 +185,97 @@ public class DocumentIndexer {
         }
 
         @Override
+        public Void visitVariable(VariableTree node, Void p) {
+            var path = getCurrentPath();
+            var varExpr = (JCTree.JCVariableDecl) path.getLeaf();
+
+            // emit def for var
+            var defRange = location(task, path, varExpr.name.toString()).getRange();
+
+            emitDefinition(defRange, varExpr.toString());
+
+            // emit use for type
+            // TODO(noahsc): handle generic types
+            if(varExpr.type instanceof Type.ClassType type) {
+                //var range = location(task, new TreePath(getCurrentPath(), varExpr.getType()), ((JCTree.JCFieldAccess) varExpr.vartype).name.toString());
+                
+            }
+
+
+            return super.visitVariable(node, p);
+        }
+
+        @Override
         public Void visitNewClass(NewClassTree node, Void p) {
             var path = getCurrentPath();
             var newClassExpr = (JCTree.JCNewClass) path.getLeaf();
 
-            /*var hoverData = unit.accept(new ReferenceVisitor(trees, unit, newClassExpr.getStartPosition() + "new ".length()), null);//.scan(unit, (long) newClassExpr.getStartPosition() + 5);
-            if(hoverData == null) return super.visitNewClass(node, p);
+            var ident = (JCTree.JCIdent)newClassExpr.getIdentifier();
+            var identPath = new TreePath(getCurrentPath(), newClassExpr.getIdentifier());
+            var identElement = trees.getElement(identPath);
 
-            var refElement = hoverData.getElement();
-            var defContainer = LanguageUtils.getTopLevelClass(refElement);
+            var defContainer = LanguageUtils.getTopLevelClass(identElement);
             if(defContainer == null) return super.visitNewClass(node, p);
-
-            var defName = LanguageUtils.getQualifiedName(defContainer);
             
-            if(LanguageUtils.isTopLevel(defContainer.getKind())) {
-                
-            }*/
+            var range = location(task, identPath, ident.name.toString()).getRange();
+            
+            var location = findDefinition(task, defContainer);
+            if(location == null) {
+                return super.visitNewClass(node, p);
+            }
+
+            emitUse(
+                    range,
+                    location.getRange(),
+                    Paths.get(getCurrentPath().getCompilationUnit().getSourceFile().toUri())
+            );
 
             return super.visitNewClass(node, p);
+        }
+
+        // from https://github.com/georgewfraser/java-language-server/blob/3555762fa35ab99575130911b3c930cc4d2d7b26/src/main/java/org/javacs/FindHelper.java
+        private Location findDefinition(JavacTask task, Element element) {
+            var trees = Trees.instance(task);
+            var path = trees.getPath(element);
+            if (path == null) return null;
+            var name = element.getSimpleName();
+            if (name.contentEquals("<init>")) name = element.getEnclosingElement().getSimpleName();
+            return location(task, path, name);
+        }
+
+        public Location location(JavacTask task, TreePath path, CharSequence name) {
+            var lines = path.getCompilationUnit().getLineMap();
+            var pos = Trees.instance(task).getSourcePositions();
+            var start = (int) pos.getStartPosition(path.getCompilationUnit(), path.getLeaf());
+            var end = (int) pos.getEndPosition(path.getCompilationUnit(), path.getLeaf());
+            if (name.length() > 0) {
+                start = findNameIn(path.getCompilationUnit(), name, start, end);
+                end = start + name.length();
+            }
+            var startLine = (int) lines.getLineNumber(start);
+            var startColumn = (int) lines.getColumnNumber(start);
+            var startPos = new Position(startLine - 1, startColumn - 1);
+            var endLine = (int) lines.getLineNumber(end);
+            var endColumn = (int) lines.getColumnNumber(end);
+            var endPos = new Position(endLine - 1, endColumn - 1);
+            var range = new Range(startPos, endPos);
+            var uri = path.getCompilationUnit().getSourceFile().toUri();
+            return new Location(uri.toString(), range);
+        }
+
+        public int findNameIn(CompilationUnitTree root, CharSequence name, int start, int end) {
+            CharSequence contents;
+            try {
+                contents = root.getSourceFile().getCharContent(true);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            var matcher = Pattern.compile("\\b" + name + "\\b").matcher(contents);
+            matcher.region(start, end);
+            if (matcher.find()) {
+                return matcher.start();
+            }
+            return -1;
         }
     }
 

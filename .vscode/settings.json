@@ -1,0 +1,26 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.addExports": [
+        "jdk.compiler/com.sun.tools.javac.api",
+        "jdk.compiler/com.sun.tools.javac.code",
+        "jdk.compiler/com.sun.tools.javac.comp",
+        "jdk.compiler/com.sun.tools.javac.main",
+        "jdk.compiler/com.sun.tools.javac.tree",
+        "jdk.compiler/com.sun.tools.javac.model",
+        "jdk.compiler/com.sun.tools.javac.util",
+    ],
+    "java.externalDependencies": [
+        "org.eclipse.lsp4j:org.eclipse.lsp4j:0.9.0",
+        "com.google.code.gson:gson:2.8.6",
+        "commons-cli:commons-cli:1.4",
+        "org.apache.commons:commons-lang3:3.11",
+        "commons-io:commons-io:2.8.0",
+        "org.slf4j:slf4j-api:1.7.30",
+        "org.slf4j:slf4j-nop:1.7.30",
+        "org.eclipse.lsp4j:org.eclipse.lsp4j:0.9.0",
+        "com.google.guava:guava:29.0-jre"
+    ],
+    "[java]":{
+        "editor.formatOnSave": false
+    }
+}

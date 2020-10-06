@@ -1,0 +1,26 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Main<lsifjava>",
+            "request": "launch",
+            "mainClass": "lsifjava.Main",
+            "projectName": "lsifjava",
+            /* "args": "-projectRoot /home/noah/Sourcegraph/playground/java/gson -out /home/noah/Sourcegraph/playground/java/gson/dump.lsif" */
+            "args": "-projectRoot /home/noah/Sourcegraph/lsif-java/examples/small/src/main/java -out dump.lsif"
+            /* "args": "-projectRoot /home/noah/Sourcegraph/lsif-java/examples/multimodule -out dump.lsif" */
+            /* "args": "-projectRoot /home/noah/Sourcegraph/playground/java/eclipse.jdt.core -out /home/noah/Sourcegraph/playground/java/eclipse.jdt.core/dump.lsif" */
+            /* "args": "-projectRoot /home/noah/Sourcegraph/playground/java/metrics -out /home/noah/Sourcegraph/playground/java/metrics/dump.lsif" */
+            /* "args": "-projectRoot /home/noah/Sourcegraph/playground/java/guice -out /home/noah/Sourcegraph/playground/java/guice/dump.lsif" */
+            /* "args": "-projectRoot /home/noah/Sourcegraph/playground/java/dbeaver -out /home/noah/Sourcegraph/playground/java/dbeaver/dump.lsif" */
+            /* "args": "-projectRoot /home/noah/Sourcegraph/playground/java/spring-boot -out /home/noah/Sourcegraph/playground/java/spring-boot/dump.lsif" */
+            /* "args": "-projectRoot /home/noah/Sourcegraph/playground/java/guava -out /home/noah/Sourcegraph/playground/java/guava/dump.lsif" */
+            /* "args": "-projectRoot /home/noah/Sourcegraph/playground/java/Netflix/eureka -out /home/noah/Sourcegraph/playground/java/Netflix/eureka/dump.lsif" */
+            /* "args": "-projectRoot /home/noah/Sourcegraph/playground/java/Netflix/conductor -out /home/noah/Sourcegraph/playground/java/Netflix/conductor/dump.lsif" */
+        }
+    ]
+}
