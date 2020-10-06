@@ -10,8 +10,8 @@ public class ProjectIndexer {
     public int numFiles;
     public int numDefinitions;
 
-    private Arguments arguments;
-    private Emitter emitter;
+    private final Arguments arguments;
+    private final Emitter emitter;
 
     public ProjectIndexer(Arguments arguments, Emitter emitter) {
         this.arguments = arguments;

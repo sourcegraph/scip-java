@@ -26,28 +26,27 @@ import com.sun.tools.javac.main.JavaCompiler;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
-import javax.lang.model.element.TypeElement;
 import javax.tools.JavaFileObject;
 
 public class DocumentIndexer {
-    private String projectRoot;
-    private String projectId;
-    private Path path;
+    private final String projectRoot;
+    private final String projectId;
+    private final Path path;
     
-    private Emitter emitter;
-    private Map<Path, DocumentIndexer> indexers;
-    private boolean verbose;
+    private final Emitter emitter;
+    private final Map<Path, DocumentIndexer> indexers;
+    private final boolean verbose;
     
     private String documentId;
 
     private boolean indexed;
-    private Set<String> rangeIds = new HashSet<>();
-    private Map<Range, DefinitionMeta> definitions = new HashMap<>();
+    private final Set<String> rangeIds = new HashSet<>();
+    private final Map<Range, DefinitionMeta> definitions = new HashMap<>();
 
     private JavaCompiler compiler;
     private JavacTask task;
     private static final JavacTool systemProvider = JavacTool.create();
-    private final Map<String, Object> declaredTypes = new HashMap<>();
+    private CompilationUnitTree compUnit;
 
     public DocumentIndexer(String projectRoot, boolean verbose, Path path, String projectId, Emitter emitter, Map<Path, DocumentIndexer> indexers) {
         this.projectRoot = projectRoot;
@@ -62,29 +61,29 @@ public class DocumentIndexer {
         return definitions.size();
     }
 
-    public void preIndex() {
+    public void preIndex() throws IOException {
         var args = Util.mapOf(
             "languageId", "java",
             "uri", String.format("file://%s", path.toAbsolutePath().toString())
         );
 
-        this.documentId = emitter.emitVertex("document", args);
+        documentId = emitter.emitVertex("document", args);
+
+        compUnit = analyzeFile();
     }
 
-    public synchronized void index() throws IOException {
+    public synchronized void index() {
         if(indexed) return;
         indexed = true;
 
-        var compUnit = analyzeFile();
-        
         new IndexingVisitor(compUnit, Trees.instance(task)).scan(compUnit, null);
     }
     
     private CompilationUnitTree analyzeFile() throws IOException {
         JavaFileObject file = new SourceFileObject(path);
         var context = new Context();
-        var trees = JavacTrees.instance(context);
         var fileManager = new JavacFileManager(context, true, Charset.defaultCharset());
+        var trees = JavacTrees.instance(context);
         compiler = JavaCompiler.instance(context);
         compiler.genEndPos = true;
         compiler.keepComments = true;
@@ -137,12 +136,38 @@ public class DocumentIndexer {
             var startCol = (int)linemap.getColumnNumber(methodDecl.getStartPosition());
             var endCol = (int)linemap.getColumnNumber(methodDecl.getEndPosition(null) + methodDecl.getName().length());
 
+            // constructors not in code still exist in the AST. If they point to the "class " part
+            // of the class declaration, ignore it
+            try {
+                if(compUnit.getSourceFile().getCharContent(true).subSequence(
+                        methodDecl.getStartPosition(),
+                        methodDecl.getEndPosition(null) + methodDecl.getName().length()
+                ).equals("class ")) {
+                    return null;
+                }
+            } catch(IOException e) {
+                return null;
+            }
+
+            var methodName = methodDecl.getName().toString();
+            if(methodName.equals("<init>")) {
+                methodName = LanguageUtils.getTopLevelClass(trees.getElement(getCurrentPath())).getSimpleName().toString();
+            }
+            
+            var returnType = "";
+            if(methodDecl.getReturnType() != null) {
+                returnType = methodDecl.getReturnType().toString() + " ";
+            }
+
             emitDefinition(
                 new Range(
                     new Position(startLine, startCol),
                     new Position(endLine, endCol)
                 ),
-                methodDecl.getModifiers().toString() + methodDecl.getReturnType().toString() + " " + methodDecl.getName()
+                methodDecl.getModifiers().toString() +
+                    returnType +
+                    methodName + "(" +
+                    methodDecl.params.toString() + ")"
             );
 
             return super.visitMethod(node, p);

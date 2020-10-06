@@ -6,7 +6,11 @@ import java.util.Iterator;
  * Sample text
  */
 public class Sample extends Object implements Iterator<String>, Iterable<String> {
-    public static void nom() {
+	public Sample() {
+
+	}
+
+    public static void nom(String test, boolean stuff) {
         Sample s = new Sample();
         System.out.println("om nom nom");
     }
