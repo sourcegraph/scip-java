@@ -6,18 +6,18 @@ import java.util.List;
 /**
  * Sample text
  */
-public class Sample extends Object implements Iterator<String>, Iterable<String> {
-	public Sample() {
-		Sample.nom("", false);
-	}
+public class Sample /*extends Object implements Iterator<String>, Iterable<String>*/ {
+	/*public Sample() {
+	    super();
+    }*/
 
-    public static void nom(String test, boolean stuff) {
-        var s = new Sample();
+    public static void nom(/*String test, boolean stuff*/) {
+        Sample s = new Sample();
         List<Boolean> x = null;
-        System.out.println("om nom nom");
+        //System.out.println("om nom nom");
     }
 
-	public boolean hasNext() {
+	/*public boolean hasNext() {
 		return true;
 	}
 
@@ -27,5 +27,5 @@ public class Sample extends Object implements Iterator<String>, Iterable<String>
 
 	public Iterator<String> iterator() {
 		return this;
-	}
+	}*/
 }
