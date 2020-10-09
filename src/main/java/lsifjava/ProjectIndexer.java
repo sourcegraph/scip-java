@@ -1,9 +1,5 @@
 package lsifjava;
 
-import com.sun.tools.javac.api.JavacTrees;
-import com.sun.tools.javac.main.JavaCompiler;
-import com.sun.tools.javac.util.Context;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,10 +33,10 @@ public class ProjectIndexer {
         var indexers = new HashMap<Path, DocumentIndexer>();
         var collector = new FileCollector(projectId, arguments, emitter, indexers);
         Files.walkFileTree(Paths.get(arguments.projectRoot), collector);
-        //var fileManager = new SourceFileManager(indexers.keySet());
+        var fileManager = new SourceFileManager(indexers.keySet());
 
         for(var indexer : indexers.values()) {
-            indexer.preIndex(null, null);
+            indexer.preIndex(fileManager);
         }
 
         for(var indexer : indexers.values()) {

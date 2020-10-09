@@ -3,7 +3,6 @@ package lsifjava;
 import com.sun.tools.javac.file.JavacFileManager;
 import com.sun.tools.javac.util.Context;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
@@ -13,17 +12,11 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import javax.tools.*;
 
-class SourceFileManager extends JavacFileManager /*ForwardingJavaFileManager<StandardJavaFileManager>*/ {
+class SourceFileManager extends JavacFileManager {
     private final Set<Path> paths;
-    SourceFileManager(Set<Path> paths, Context context) {
-        //super(createDelegateFileManager());
-        super(context, false, Charset.defaultCharset());
+    SourceFileManager(Set<Path> paths) {
+        super(new Context(), false, Charset.defaultCharset());
         this.paths = paths;
-    }
-
-    private static StandardJavaFileManager createDelegateFileManager() {
-        var compiler = ServiceLoader.load(JavaCompiler.class).iterator().next();
-        return compiler.getStandardFileManager(null, null, Charset.defaultCharset());
     }
 
     @Override
@@ -95,6 +88,7 @@ class SourceFileManager extends JavacFileManager /*ForwardingJavaFileManager<Sta
     public JavaFileObject getJavaFileForInput(Location location, String className, JavaFileObject.Kind kind) throws IOException {
         // FileStore shadows disk
         if (location == StandardLocation.SOURCE_PATH) {
+            if (className.equals("module-info")) return null;
             var packageName = mostName(className);
             var simpleClassName = lastName(className);
             Iterator<SourceFileObject> iterator = list(packageName).map(obj -> (SourceFileObject)obj).iterator();
@@ -133,7 +127,7 @@ class SourceFileManager extends JavacFileManager /*ForwardingJavaFileManager<Sta
     public boolean contains(Location location, FileObject file) throws IOException {
         if (location == StandardLocation.SOURCE_PATH) {
             var source = (SourceFileObject) file;
-            return paths.contains(source.path);//FileStore.contains(source.path);
+            return paths.contains(source.path);
         } else {
             return super.contains(location, file);
         }
