@@ -173,18 +173,16 @@ public class DocumentIndexer {
 
         @Override
         public Void visitClass(ClassTree node, Void p) {
-            var path = getCurrentPath();
-            var classDecl = (JCTree.JCClassDecl) path.getLeaf();
             var packagePrefix = "";
-            if (getCurrentPath().getCompilationUnit().getPackageName() != null) {
-                packagePrefix = getCurrentPath().getCompilationUnit().getPackageName() + ".";
+            if (compUnit.getPackageName() != null) {
+                packagePrefix = compUnit.getPackageName() + ".";
             }
 
             // gets the range of the def ident
-            var range = location(getCurrentPath(), classDecl.getSimpleName().toString()).getRange();
+            var range = location(getCurrentPath(), node.getSimpleName().toString()).getRange();
             emitDefinition(
                 range,
-                classDecl.getModifiers().toString() + "class " + packagePrefix + classDecl.getSimpleName()
+                node.getModifiers().toString() + "class " + packagePrefix + node.getSimpleName()
             );
 
             return super.visitClass(node, p);
