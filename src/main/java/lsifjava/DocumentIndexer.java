@@ -3,6 +3,7 @@ package lsifjava;
 import com.sun.source.tree.*;
 import com.sun.source.util.JavacTask;
 import com.sun.tools.javac.api.JavacTool;
+import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.code.Type;
@@ -81,7 +82,22 @@ public class DocumentIndexer {
         var context = new SimpleContext();
 
         task = systemProvider.getTask(
-                null, fileManager, null, null,  List.of(), List.of(new SourceFileObject(path)), context
+                null, fileManager, null, List.of("--enable-preview", "-source", "15", "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED"),  List.of(), List.of(new SourceFileObject(path)), context
         );
         var compUnit = task.parse().iterator().next();
         for(var element : task.analyze()) {}
@@ -127,38 +143,29 @@ public class DocumentIndexer {
         
         @Override
         public Void visitMethod(MethodTree node, Void p) {
-            var methodDecl = (JCTree.JCMethodDecl) getCurrentPath().getLeaf();
-
-            // constructors not in code still exist in the AST. If they point to the "class " part
-            // of the class declaration, ignore it
-            try {
-                if(compUnit.getSourceFile().getCharContent(true).subSequence(
-                        methodDecl.getStartPosition(),
-                        methodDecl.getEndPosition(null) + methodDecl.getName().length()
-                ).equals("class ")) {
-                    return null;
-                }
-            } catch(IOException e) {
+            // synthetic constructors still exist in the AST, ignore it.
+            // TODO(noahsc) point to class decl?
+            if((((JCTree.JCMethodDecl)node).mods.flags & Flags.GENERATEDCONSTR) != 0L) {
                 return null;
             }
 
-            var methodName = methodDecl.getName().toString();
+            var methodName = node.getName().toString();
             if(methodName.equals("<init>")) {
-                methodName = LanguageUtils.getTopLevelClass(trees.getElement(getCurrentPath())).getSimpleName().toString();
+                methodName = ((JCTree.JCMethodDecl) node).sym.owner.name.toString();
             }
             
             var returnType = "";
-            if(methodDecl.getReturnType() != null) {
-                returnType = methodDecl.getReturnType().toString() + " ";
+            if(node.getReturnType() != null) {
+                returnType = node.getReturnType().toString() + " ";
             }
 
             var range = location(getCurrentPath(), methodName).getRange();
             emitDefinition(
                 range,
-                methodDecl.getModifiers().toString() +
+                node.getModifiers().toString() +
                     returnType +
                     methodName + "(" +
-                    methodDecl.params.toString() + ")"
+                    node.getParameters().toString() + ")"
             );
 
             return super.visitMethod(node, p);
@@ -166,18 +173,16 @@ public class DocumentIndexer {
 
         @Override
         public Void visitClass(ClassTree node, Void p) {
-            var path = getCurrentPath();
-            var classDecl = (JCTree.JCClassDecl) path.getLeaf();
             var packagePrefix = "";
-            if (getCurrentPath().getCompilationUnit().getPackageName() != null) {
-                packagePrefix = getCurrentPath().getCompilationUnit().getPackageName() + ".";
+            if (compUnit.getPackageName() != null) {
+                packagePrefix = compUnit.getPackageName() + ".";
             }
 
             // gets the range of the def ident
-            var range = location(getCurrentPath(), classDecl.getSimpleName().toString()).getRange();
+            var range = location(getCurrentPath(), node.getSimpleName().toString()).getRange();
             emitDefinition(
                 range,
-                classDecl.getModifiers().toString() + "class " + packagePrefix + classDecl.getSimpleName()
+                node.getModifiers().toString() + "class " + packagePrefix + node.getSimpleName()
             );
 
             return super.visitClass(node, p);
@@ -185,13 +190,10 @@ public class DocumentIndexer {
 
         @Override
         public Void visitVariable(VariableTree node, Void p) {
-            var path = getCurrentPath();
-            var varExpr = (JCTree.JCVariableDecl) path.getLeaf();
-
             // emit def for var
-            var defRange = location(path, varExpr.name.toString()).getRange();
+            var defRange = location(getCurrentPath(), node.getName().toString()).getRange();
 
-            emitDefinition(defRange, varExpr.toString());
+            emitDefinition(defRange, node.toString());
 
             // emit use for type
             // TODO(noahsc): handle generic types...and more types/symbols
@@ -199,23 +201,23 @@ public class DocumentIndexer {
             Range refRange = null;
             Range useRange = null;
             Path defPath = null;
-            if(varExpr.type instanceof Type.ClassType type) {
+            if(((JCTree.JCVariableDecl) node).type instanceof Type.ClassType type) {
                 if(type.tsym instanceof Symbol.ClassSymbol clazz) {
                     name = clazz.name.toString();
                     var identPath = new TreePath(
-                            getCurrentPath(), varExpr.getType()
+                            getCurrentPath(), node.getType()
                     );
                     var identElement = trees.getElement(identPath);
 
                     var defContainer = LanguageUtils.getTopLevelClass(identElement);
                     if(defContainer == null) return super.visitVariable(node, p);
-                    
-                    var sourceFilePath = ((Symbol.ClassSymbol)defContainer).sourcefile.getName();
-                    if(!sourceFilePath.equals(compUnit.getSourceFile().getName())) {
+
+                    var sourceFile = ((Symbol.ClassSymbol)defContainer).sourcefile;
+                    if(sourceFile != null && !sourceFile.getName().equals(compUnit.getSourceFile().getName())) {
                         // if cross-file, index the file so definitions are populated
-                        if(!indexers.containsKey(Paths.get(sourceFilePath))) return super.visitVariable(node, p);
+                        if(!indexers.containsKey(Paths.get(sourceFile.getName()))) return super.visitVariable(node, p);
                         try {
-                            indexers.get(Paths.get(sourceFilePath)).index();
+                            indexers.get(Paths.get(sourceFile.getName())).index();
                         } catch (IOException e) {
                             return super.visitVariable(node, p);
                         }
@@ -231,7 +233,9 @@ public class DocumentIndexer {
                         defPath = Paths.get(compUnit.getSourceFile().toUri());
                     }
 
-                    useRange = location(identPath, name).getRange();
+                    var location = location(identPath, name);
+                    if(location == null) return super.visitVariable(node, p);
+                    useRange = location.getRange();
                 }
             }
 
@@ -244,13 +248,29 @@ public class DocumentIndexer {
         }
 
         @Override
-        public Void visitNewClass(NewClassTree node, Void p) {
-            var path = getCurrentPath();
-            var newClassExpr = (JCTree.JCNewClass) path.getLeaf();
+        public Void visitMethodInvocation(MethodInvocationTree node, Void unused) {
 
-            var ident = (JCTree.JCIdent)newClassExpr.getIdentifier();
-            var identPath = new TreePath(getCurrentPath(), newClassExpr.getIdentifier());
-            var identElement = newClassExpr.constructor; //trees.getElement(identPath);
+            return super.visitMethodInvocation(node, unused);
+        }
+
+        @Override
+        public Void visitTypeParameter(TypeParameterTree node, Void unused) {
+            return super.visitTypeParameter(node, unused);
+        }
+
+        @Override
+        public Void visitNewClass(NewClassTree node, Void p) {
+            JCTree.JCIdent ident;
+            if (node.getIdentifier() instanceof JCTree.JCIdent id) {
+                ident = id;
+            } else if (node.getIdentifier() instanceof JCTree.JCTypeApply apply) {
+                ident = (JCTree.JCIdent)apply.clazz;
+            } else {
+                System.out.println("identifier was neither JCIdent nor JCTypeApply");
+                return super.visitNewClass(node, p);
+            }
+            var identPath = new TreePath(getCurrentPath(), node.getIdentifier());
+            var identElement =  ((JCTree.JCNewClass)node).constructor;
 
             /*var defContainer = LanguageUtils.getTopLevelClass(identElement);
             if(defContainer == null) return super.visitNewClass(node, p);*/
