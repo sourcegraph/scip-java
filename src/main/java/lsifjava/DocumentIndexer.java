@@ -248,13 +248,29 @@ public class DocumentIndexer {
         }
 
         @Override
-        public Void visitNewClass(NewClassTree node, Void p) {
-            var path = getCurrentPath();
-            var newClassExpr = (JCTree.JCNewClass) path.getLeaf();
+        public Void visitMethodInvocation(MethodInvocationTree node, Void unused) {
 
-            var ident = (JCTree.JCIdent)newClassExpr.getIdentifier();
-            var identPath = new TreePath(getCurrentPath(), newClassExpr.getIdentifier());
-            var identElement = newClassExpr.constructor; //trees.getElement(identPath);
+            return super.visitMethodInvocation(node, unused);
+        }
+
+        @Override
+        public Void visitTypeParameter(TypeParameterTree node, Void unused) {
+            return super.visitTypeParameter(node, unused);
+        }
+
+        @Override
+        public Void visitNewClass(NewClassTree node, Void p) {
+            JCTree.JCIdent ident;
+            if (node.getIdentifier() instanceof JCTree.JCIdent id) {
+                ident = id;
+            } else if (node.getIdentifier() instanceof JCTree.JCTypeApply apply) {
+                ident = (JCTree.JCIdent)apply.clazz;
+            } else {
+                System.out.println("identifier was neither JCIdent nor JCTypeApply");
+                return super.visitNewClass(node, p);
+            }
+            var identPath = new TreePath(getCurrentPath(), node.getIdentifier());
+            var identElement =  ((JCTree.JCNewClass)node).constructor;
 
             /*var defContainer = LanguageUtils.getTopLevelClass(identElement);
             if(defContainer == null) return super.visitNewClass(node, p);*/
