@@ -143,38 +143,29 @@ public class DocumentIndexer {
         
         @Override
         public Void visitMethod(MethodTree node, Void p) {
-            var methodDecl = (JCTree.JCMethodDecl) getCurrentPath().getLeaf();
-
-            // constructors not in code still exist in the AST. If they point to the "class " part
-            // of the class declaration, ignore it
-            try {
-                if(compUnit.getSourceFile().getCharContent(true).subSequence(
-                        methodDecl.getStartPosition(),
-                        methodDecl.getEndPosition(null) + methodDecl.getName().length()
-                ).equals("class ")) {
-                    return null;
-                }
-            } catch(IOException e) {
+            // synthetic constructors still exist in the AST, ignore it.
+            // TODO(noahsc) point to class decl?
+            if((((JCTree.JCMethodDecl)node).mods.flags & Flags.GENERATEDCONSTR) != 0L) {
                 return null;
             }
 
-            var methodName = methodDecl.getName().toString();
+            var methodName = node.getName().toString();
             if(methodName.equals("<init>")) {
-                methodName = LanguageUtils.getTopLevelClass(trees.getElement(getCurrentPath())).getSimpleName().toString();
+                methodName = ((JCTree.JCMethodDecl) node).sym.owner.name.toString();
             }
             
             var returnType = "";
-            if(methodDecl.getReturnType() != null) {
-                returnType = methodDecl.getReturnType().toString() + " ";
+            if(node.getReturnType() != null) {
+                returnType = node.getReturnType().toString() + " ";
             }
 
             var range = location(getCurrentPath(), methodName).getRange();
             emitDefinition(
                 range,
-                methodDecl.getModifiers().toString() +
+                node.getModifiers().toString() +
                     returnType +
                     methodName + "(" +
-                    methodDecl.params.toString() + ")"
+                    node.getParameters().toString() + ")"
             );
 
             return super.visitMethod(node, p);
