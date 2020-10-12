@@ -3,6 +3,7 @@ package lsifjava;
 import com.sun.source.tree.*;
 import com.sun.source.util.JavacTask;
 import com.sun.tools.javac.api.JavacTool;
+import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.code.Type;
@@ -81,7 +82,22 @@ public class DocumentIndexer {
         var context = new SimpleContext();
 
         task = systemProvider.getTask(
-                null, fileManager, null, null,  List.of(), List.of(new SourceFileObject(path)), context
+                null, fileManager, null, List.of("--enable-preview", "-source", "15", "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+                        "--add-exports",
+                        "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED"),  List.of(), List.of(new SourceFileObject(path)), context
         );
         var compUnit = task.parse().iterator().next();
         for(var element : task.analyze()) {}
