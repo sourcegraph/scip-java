@@ -190,13 +190,10 @@ public class DocumentIndexer {
 
         @Override
         public Void visitVariable(VariableTree node, Void p) {
-            var path = getCurrentPath();
-            var varExpr = (JCTree.JCVariableDecl) path.getLeaf();
-
             // emit def for var
-            var defRange = location(path, varExpr.name.toString()).getRange();
+            var defRange = location(getCurrentPath(), node.getName().toString()).getRange();
 
-            emitDefinition(defRange, varExpr.toString());
+            emitDefinition(defRange, node.toString());
 
             // emit use for type
             // TODO(noahsc): handle generic types...and more types/symbols
@@ -204,23 +201,23 @@ public class DocumentIndexer {
             Range refRange = null;
             Range useRange = null;
             Path defPath = null;
-            if(varExpr.type instanceof Type.ClassType type) {
+            if(((JCTree.JCVariableDecl) node).type instanceof Type.ClassType type) {
                 if(type.tsym instanceof Symbol.ClassSymbol clazz) {
                     name = clazz.name.toString();
                     var identPath = new TreePath(
-                            getCurrentPath(), varExpr.getType()
+                            getCurrentPath(), node.getType()
                     );
                     var identElement = trees.getElement(identPath);
 
                     var defContainer = LanguageUtils.getTopLevelClass(identElement);
                     if(defContainer == null) return super.visitVariable(node, p);
-                    
-                    var sourceFilePath = ((Symbol.ClassSymbol)defContainer).sourcefile.getName();
-                    if(!sourceFilePath.equals(compUnit.getSourceFile().getName())) {
+
+                    var sourceFile = ((Symbol.ClassSymbol)defContainer).sourcefile;
+                    if(sourceFile != null && !sourceFile.getName().equals(compUnit.getSourceFile().getName())) {
                         // if cross-file, index the file so definitions are populated
-                        if(!indexers.containsKey(Paths.get(sourceFilePath))) return super.visitVariable(node, p);
+                        if(!indexers.containsKey(Paths.get(sourceFile.getName()))) return super.visitVariable(node, p);
                         try {
-                            indexers.get(Paths.get(sourceFilePath)).index();
+                            indexers.get(Paths.get(sourceFile.getName())).index();
                         } catch (IOException e) {
                             return super.visitVariable(node, p);
                         }
@@ -236,7 +233,9 @@ public class DocumentIndexer {
                         defPath = Paths.get(compUnit.getSourceFile().toUri());
                     }
 
-                    useRange = location(identPath, name).getRange();
+                    var location = location(identPath, name);
+                    if(location == null) return super.visitVariable(node, p);
+                    useRange = location.getRange();
                 }
             }
 
