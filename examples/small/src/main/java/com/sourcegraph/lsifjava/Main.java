@@ -1,7 +1,5 @@
 package com.sourcegraph.lsifjava;
 
-import java.io.File;
-
 /**
  * some Main stuff
  */

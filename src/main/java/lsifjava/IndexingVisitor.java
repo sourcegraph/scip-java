@@ -73,12 +73,17 @@ public class IndexingVisitor extends TreePathScanner<Void, Void> {
         if (compUnit.getPackageName() != null) {
             packagePrefix = compUnit.getPackageName() + ".";
         }
+        
+        var classOrEnum = "class ";
+        if((((JCTree.JCClassDecl) node).sym.flags() & Flags.ENUM) > 0L) {
+            classOrEnum = "enum ";
+        }
 
         // gets the range of the def ident
         var range = location(getCurrentPath(), node.getSimpleName().toString()).getRange();
         currentIndexer.emitDefinition(
                 range,
-                node.getModifiers().toString() + "class " + packagePrefix + node.getSimpleName()
+                node.getModifiers().toString() + classOrEnum + packagePrefix + node.getSimpleName()
         );
 
         return super.visitClass(node, p);

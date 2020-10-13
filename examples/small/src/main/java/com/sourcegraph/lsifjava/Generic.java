@@ -9,4 +9,8 @@ class Generic<T extends Object> {
     public <S extends Integer> Collection<S> select(Class<T> c) { 
         return null;
     }
+
+    public Collection<T> asdf() {
+        return null;
+    }
 }
