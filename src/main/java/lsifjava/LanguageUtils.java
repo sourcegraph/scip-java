@@ -1,7 +1,6 @@
 package lsifjava;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.lsp4j.SymbolKind;
 
@@ -16,35 +15,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LanguageUtils {
-
-    // TODO(beyang): kludge
-    public static String relativePath(String baseUri, String uri) {
-        try {
-            URL base = new URL(baseUri);
-            URL tip = new URL(uri);
-
-            if (!base.getProtocol().equals(tip.getProtocol())) {
-                return null;
-            }
-            if (!base.getHost().equals(tip.getHost())) {
-                return null;
-            }
-            if (!tip.getPath().startsWith(base.getPath())) {
-                return null;
-            }
-            String relPath = tip.getPath().substring(base.getPath().length());
-            if (!relPath.startsWith("/")) {
-                relPath = "/" + relPath;
-            }
-            return relPath;
-        } catch (MalformedURLException e) {
-            return null;
-        }
-    }
-
     public static Element getTopLevelClass(Element element) {
         Element highestClass = null;
         for (; element != null; element = element.getEnclosingElement()) {
@@ -58,10 +30,6 @@ public class LanguageUtils {
 
     public static boolean isTopLevel(ElementKind kind) {
         return kind.isClass() || kind.isInterface();
-    }
-
-    public static String getParentUri(String uri) {
-        return pathToUri(uriToPath(uri).getParent().toString());
     }
 
     public static Path uriToPath(String uri) {
@@ -79,95 +47,6 @@ public class LanguageUtils {
             return Paths.get(uri);
         }
         return Paths.get(URI.create(uri));
-    }
-
-    public static String pathToUri(String path) {
-        path = FilenameUtils.separatorsToUnix(path);
-        String[] components = StringUtils.split(path, '/');
-        for (int i = 0; i < components.length; i++) {
-            try {
-                components[i] = URLEncoder.encode(components[i], StandardCharsets.UTF_8.name());
-            } catch (UnsupportedEncodingException e) {
-                // does not happen
-            }
-        }
-        return "file:///" + StringUtils.join(components, '/');
-    }
-
-    public static String vfsPath(Path p) {
-        return FilenameUtils.separatorsToUnix(p.toString()).replaceAll("\\/+", "/");
-    }
-
-    /**
-     * Joins path-like strings in a semantically correct manner (i.e., joining an absolute path will just return
-     * the absolute path).
-     * @param root     root element
-     * @param elements optional following elements
-     * @return elements concatenated to form a POSIX-style path
-     */
-    public static String joinPath(String root, String... elements) {
-        StringBuilder ret = new StringBuilder(trailingSlash(FilenameUtils.separatorsToUnix(root)));
-        for (String element : elements) {
-            if (element.isEmpty()) {
-                continue;
-            }
-            element = trailingSlash(FilenameUtils.separatorsToUnix(element));
-            if (element.startsWith("/")) {
-                ret = new StringBuilder(element);
-            } else {
-                ret.append(element);
-            }
-        }
-        // remove trailing slash
-        ret.setLength(ret.length() - 1);
-        return ret.toString();
-    }
-
-    /**
-     * Joins two path-like strings by simply concatenating them regardless of the semantics of the path. Tries not to
-     * add more slashes between path elements if they're not necessary.
-     * @param root root path
-     * @param right right path
-     * @return the joined path
-     */
-    public static String concatPath(String root, String right) {
-        if (!root.endsWith("/") && !right.startsWith("/")) {
-            return root + "/" + right;
-        } else if (root.equals("file:///") && right.startsWith("/")) {
-            return root;
-        } else if (root.endsWith("/") && right.startsWith("/")) {
-            return root + StringUtils.removeStart(right, "/");
-        } else {
-            return root + right;
-        }
-    }
-
-    private static String trailingSlash(String s) {
-        return s.endsWith("/") ? s : s + '/';
-    }
-
-    public static boolean startsWith(Path p, Collection<Path> prefixes) {
-        String vfsP = vfsPath(p);
-        for (Path prefix : prefixes) {
-            if (vfsP.startsWith(vfsPath(prefix))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean startsWith(Path p, Path q) {
-        return vfsPath(p).startsWith(vfsPath(q));
-    }
-
-    public static boolean uriContainsOrEquals(String parent, String child) {
-        if (parent.equals(child)) {
-            return true;
-        }
-        if (!parent.endsWith("/")) {
-            parent = parent + "/";
-        }
-        return child.startsWith(parent);
     }
 
     public static String getPackageName(Element element) {
@@ -378,43 +257,6 @@ public class LanguageUtils {
             return StringUtils.EMPTY;
         }
         return StringUtils.join(modifiers, " ") + ' ';
-    }
-
-
-    private static final String[] INCLUDE_SUFFIXES = {
-            ".java",
-            "/pom.xml",
-            ".gradle",
-            ".properties",
-            "/javaconfig.json",
-            "/AndroidManifest.xml", // sometimes needed by Gradle scripts
-            ".groovy" // sometimes needed if Gradle plugin are run directly from the included source files
-    };
-
-    private static final String[] INCLUDE_SUBSTRINGS = {
-            "gradle", // keep anything in a Gradle folder ... figure out how to tighten up this filter
-            "/buildSrc/" // sometimes needed for the Gradle build process
-    };
-
-    private static final String[] EXCLUDE_SUBSTRINGS = {
-            "/src/main/resources/",
-            "/src/test/resources/",
-            "/META-INF/"
-    };
-
-    /**
-     * getRelevantFiles filters the input allUris down to just the files that are relevant to the language server's
-     * analysis. E.g., we exclude most non-Java files (with exceptions made for files relevant to extracting
-     * build information).
-     */
-    public static HashSet<String> getRelevantFiles(Stream<String> allUris) {
-        return allUris.filter(LanguageUtils::isRelevantFile).collect(Collectors.toCollection(HashSet::new));
-    }
-
-    public static boolean isRelevantFile(String uri) {
-        return (StringUtils.endsWithAny(uri, INCLUDE_SUFFIXES) || StringUtils.containsAny(uri, INCLUDE_SUBSTRINGS)) &&
-                (uri.contains("/buildSrc/") || !StringUtils.containsAny(uri, EXCLUDE_SUBSTRINGS)) &&
-                !uri.endsWith(".jar");
     }
 }
 
