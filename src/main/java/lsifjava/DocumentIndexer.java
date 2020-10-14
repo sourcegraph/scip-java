@@ -69,22 +69,22 @@ public class DocumentIndexer {
         var context = new SimpleContext();
 
         task = systemProvider.getTask(
-                null, fileManager, null, List.of("--enable-preview", "-source", "15", "--add-exports",
-                        "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-                        "--add-exports",
-                        "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-                        "--add-exports",
-                        "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
-                        "--add-exports",
-                        "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
-                        "--add-exports",
-                        "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-                        "--add-exports",
-                        "jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-                        "--add-exports",
-                        "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
-                        "--add-exports",
-                        "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED"),  List.of(), List.of(new SourceFileObject(path)), context
+            null, fileManager, null, List.of("--enable-preview", "-source", "15", "--add-exports",
+                    "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+                    "--add-exports",
+                    "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+                    "--add-exports",
+                    "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
+                    "--add-exports",
+                    "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+                    "--add-exports",
+                    "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+                    "--add-exports",
+                    "jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+                    "--add-exports",
+                    "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+                    "--add-exports",
+                    "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED"),  List.of(), List.of(new SourceFileObject(path)), context
         );
         var compUnit = task.parse().iterator().next();
         for(var element : task.analyze()) {}
@@ -126,33 +126,33 @@ public class DocumentIndexer {
 
         emitter.emitEdge("textDocument/references", Util.mapOf("outV", meta.resultSetId, "inV", resultId));
         emitter.emitEdge("item", Util.mapOf(
-                "property", "definitions",
-                "outV", resultId,
-                "inVs", new String[]{meta.rangeId},
-                "document", documentId
+            "property", "definitions",
+            "outV", resultId,
+            "inVs", new String[]{meta.rangeId},
+            "document", documentId
         ));
 
         for (var entry : meta.referenceRangeIds.entrySet()) {
             emitter.emitEdge("item", Util.mapOf(
-                    "property", "references",
-                    "outV", resultId,
-                    "inVs", entry.getValue().stream().sorted().toArray(),
-                    "document", entry.getKey()
+                "property", "references",
+                "outV", resultId,
+                "inVs", entry.getValue().stream().sorted().toArray(),
+                "document", entry.getKey()
             ));
         }
     }
 
-    protected void emitDefinition(Range range, String doc) {
+    protected void emitDefinition(Range range, String hover) {
         if(verbose)
             System.out.println("DEF " + path.toString().replaceFirst("^"+projectRoot, ".") + ":" + humanRange(range));
 
         var hoverId = emitter.emitVertex("hoverResult", Util.mapOf(
-                "result", Util.mapOf(
-                        "contents", Util.mapOf(
-                                "kind", "markdown",
-                                "value", doc
-                        )
+            "result", Util.mapOf(
+                "contents", Util.mapOf(
+                    "kind", "markdown",
+                    "value", hover
                 )
+            )
         ));
 
         var resultSetId = emitter.emitVertex("resultSet", Util.mapOf());
@@ -162,6 +162,11 @@ public class DocumentIndexer {
 
         rangeIds.add(rangeId);
         definitions.put(range, new DefinitionMeta(rangeId, resultSetId)); // + contents?
+    }
+    
+    protected void emitDefinition(Range range, String signature, String doc) {
+        var hover = mkDoc(signature, doc);
+        emitDefinition(range, hover);
     }
 
     protected void emitUse(Range use, Range def, Path defPath) {
@@ -189,9 +194,9 @@ public class DocumentIndexer {
         }
 
         emitter.emitEdge("item", Util.mapOf(
-                "outV", meta.definitionResultId,
-                "inVs", new String[]{meta.rangeId},
-                "document", indexer.documentId
+            "outV", meta.definitionResultId,
+            "inVs", new String[]{meta.rangeId},
+            "document", indexer.documentId
         ));
 
         rangeIds.add(rangeId);
@@ -203,15 +208,19 @@ public class DocumentIndexer {
 
     private Range nameRange(Range a, String name) {
         return new Range(
-                new Position(
-                    a.getStart().getLine(),
-                    a.getStart().getCharacter()
-                ),
-                new Position(
-                    a.getEnd().getLine(),
-                    a.getEnd().getCharacter() + name.length()
-                )
+            new Position(
+                a.getStart().getLine(),
+                a.getStart().getCharacter()
+            ),
+            new Position(
+                a.getEnd().getLine(),
+                a.getEnd().getCharacter() + name.length()
+            )
         );
+    }
+
+    private String mkDoc(String signature, String docComment) {
+        return "```java\n" + signature + "\n```" + (docComment == null || docComment.equals("") ? "" : "\n---\n" + docComment.trim());
     }
 
     private String humanRange(Range r) {
