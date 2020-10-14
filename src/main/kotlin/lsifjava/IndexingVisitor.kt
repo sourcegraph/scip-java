@@ -2,10 +2,7 @@
 package lsifjava
 
 import com.sun.source.tree.*
-import com.sun.source.util.JavacTask
-import com.sun.source.util.TreePath
-import com.sun.source.util.TreePathScanner
-import com.sun.source.util.Trees
+import com.sun.source.util.*
 import com.sun.tools.javac.code.Flags
 import com.sun.tools.javac.code.Symbol
 import com.sun.tools.javac.code.Type
@@ -27,16 +24,18 @@ class IndexingVisitor(
 ): TreePathScanner<Unit?, Unit?>() {
     private val trees: Trees = Trees.instance(task)
 
+    // TODO(nsc) handle 'var'
     override fun visitVariable(node: VariableTree, p: Unit?): Unit? {
         val defRange = findLocation(currentPath, node.name.toString())?.range ?: return super.visitVariable(node, p)
-        
+
+        // emit var definition
         indexer.emitDefinition(defRange, node.toString())
         
+        // emit var type use ref
         var symbol = when((node as JCTree.JCVariableDecl).type) {
-            is Type.ClassType -> node.type.tsym
-            is Type.ArrayType -> node.type.tsym
-            // incl Type.JCPrimitiveType
-            else -> return super.visitVariable(node, p)
+            is Type.JCPrimitiveType -> return super.visitVariable(node, p)
+            is Type.ArrayType -> (node.type as Type.ArrayType).elemtype.tsym
+            else -> node.type.tsym
         }
 
         symbol = when(symbol) {
@@ -49,12 +48,11 @@ class IndexingVisitor(
         val identElement = trees.getElement(identPath)
         val defContainer = LanguageUtils.getTopLevelClass(identElement) as Symbol.ClassSymbol? ?: return super.visitVariable(node, p)
 
-        var defPath: Path = Paths.get(compUnit.sourceFile.toUri())
         val sourceFilePath = defContainer.sourcefile ?: return super.visitVariable(node, p)
+        val defPath: Path = Paths.get(sourceFilePath.name)
         val refRange = if(sourceFilePath.name != compUnit.sourceFile.name) {
             indexers[Paths.get(sourceFilePath.name)]?.index() ?: return super.visitVariable(node, p)
             val location = findDefinition(defContainer) ?: return super.visitVariable(node, p)
-            defPath = Paths.get(location.uri)
             location.range
         } else {
             val location = findDefinition(defContainer) ?: return super.visitVariable(node, p)
@@ -101,7 +99,7 @@ class IndexingVisitor(
             node.modifiers.toString() +
                 returnType +
                 methodName + "(" +
-                node.parameters.toString() + ")"
+                node.parameters.toString(", ") + ")"
         )
         
         return super.visitMethod(node, p)
@@ -164,6 +162,7 @@ class IndexingVisitor(
         return Location(uri.path, range)
     }
 
+    // this will fail to find the correct position of method 'nom' in public <T extends Generic.nom> void nom() {
     private fun findNameIn(root: CompilationUnitTree, name: CharSequence, start: Int, end: Int): Int {
         val contents: CharSequence
         contents = try {
