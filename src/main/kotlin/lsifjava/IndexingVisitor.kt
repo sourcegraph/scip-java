@@ -23,13 +23,14 @@ class IndexingVisitor(
         private val indexers: Map<Path, DocumentIndexer>
 ): TreePathScanner<Unit?, Unit?>() {
     private val trees: Trees = Trees.instance(task)
+    private val docs: DocTrees = DocTrees.instance(task)
 
     // TODO(nsc) handle 'var'
     override fun visitVariable(node: VariableTree, p: Unit?): Unit? {
         val defRange = findLocation(currentPath, node.name.toString())?.range ?: return super.visitVariable(node, p)
 
         // emit var definition
-        indexer.emitDefinition(defRange, node.toString())
+        indexer.emitDefinition(defRange, node.toString(), docs.getDocComment(currentPath))
         
         // emit var type use ref
         var symbol = when((node as JCTree.JCVariableDecl).type) {
@@ -77,7 +78,9 @@ class IndexingVisitor(
         val range = findLocation(currentPath, node.simpleName.toString())?.range ?: return super.visitClass(node, p)
 
         indexer.emitDefinition(
-            range, node.modifiers.toString() + classOrEnum + packagePrefix + node.simpleName
+            range,
+            node.modifiers.toString() + classOrEnum + packagePrefix + node.simpleName,
+            docs.getDocComment(currentPath)
         )
 
         return super.visitClass(node, p)
@@ -99,7 +102,8 @@ class IndexingVisitor(
             node.modifiers.toString() +
                 returnType +
                 methodName + "(" +
-                node.parameters.toString(", ") + ")"
+                node.parameters.toString(", ") + ")",
+            docs.getDocComment(currentPath)
         )
         
         return super.visitMethod(node, p)
