@@ -5,7 +5,6 @@ import com.sun.source.tree.*
 import com.sun.source.util.*
 import com.sun.tools.javac.code.Flags
 import com.sun.tools.javac.code.Symbol
-import com.sun.tools.javac.code.Type
 import com.sun.tools.javac.tree.JCTree
 import org.eclipse.lsp4j.Location
 import org.eclipse.lsp4j.Position
@@ -62,7 +61,7 @@ class IndexingVisitor(
         
         val returnType = node.returnType?.toString()?.plus(" ") ?: ""
         
-        val range = findLocation(currentPath, methodName)?.range ?: return super.visitMethod(node, p)
+        val range = findLocation(currentPath, methodName, node.pos)?.range ?: return super.visitMethod(node, p)
 
         indexer.emitDefinition(
             range,
@@ -93,7 +92,7 @@ class IndexingVisitor(
         val identElement = node.constructor
         
         val defContainer = LanguageUtils.getTopLevelClass(identElement) as Symbol.ClassSymbol? ?: return super.visitNewClass(node, p)
-        val (useRange, refRange, defPath) = findReference(identElement, ident.name.toString(), defContainer, identPath) ?: return super.visitNewClass(node, p)
+        val (useRange, refRange, defPath) = findReference(identElement, ident.name.toString(), defContainer, path = identPath) ?: return super.visitNewClass(node, p)
 
         indexer.emitUse(useRange, refRange, defPath)
 
@@ -114,10 +113,11 @@ class IndexingVisitor(
 
         val name = symbol.name.toString()
         val methodPath = TreePath(currentPath, node.meth)
-        val methodElement = trees.getElement(methodPath)
-        val defContainer = LanguageUtils.getTopLevelClass(methodElement) as Symbol.ClassSymbol? ?: return super.visitMethodInvocation(node, p)
-        
-        val (useRange, refRange, defPath) = findReference(methodElement, name, defContainer, methodPath) ?: return super.visitMethodInvocation(node, p)
+        val defContainer = LanguageUtils.getTopLevelClass(symbol) as Symbol.ClassSymbol? ?: return super.visitMethodInvocation(node, p)
+
+        // this gives us the start pos of the name of the method, so override defStartPos
+        val overrideStartOffset = (trees.getPath(symbol).leaf as JCTree.JCMethodDecl).pos
+        val (useRange, refRange, defPath) = findReference(symbol, name, defContainer, path = methodPath, defStartPos = overrideStartOffset) ?: return super.visitMethodInvocation(node, p)
 
         indexer.emitUse(useRange, refRange, defPath)
 
@@ -154,30 +154,60 @@ class IndexingVisitor(
         
         return super.visitMemberReference(node, p)
     }
-    
-    private fun findReference(symbol: Element, symbolName: String, container: Symbol.ClassSymbol, path: TreePath = currentPath): ReferenceData? {
+
+    override fun visitMemberSelect(node: MemberSelectTree?, p: Unit?): Unit? {
+        if((node as JCTree.JCFieldAccess).sym == null) return super.visitMemberSelect(node, p)
+
+        val symbol = when(node.sym) {
+            is Symbol.ClassSymbol -> node.sym
+            is Symbol.VarSymbol -> node.sym
+            else -> return super.visitMemberSelect(node, p)
+        }
+
+        val name = symbol.name.toString()
+        
+        val defContainer = LanguageUtils.getTopLevelClass(symbol) as Symbol.ClassSymbol? ?: return super.visitMemberSelect(node, p)
+
+        // need to narrow down start pos of the field access here, so override refStartPos
+        val (useRange, refRange, defPath) = findReference(symbol, name, defContainer, refStartPos = node.pos) ?: return super.visitMemberSelect(node, p)
+
+        indexer.emitUse(useRange, refRange, defPath)
+        
+        return super.visitMemberSelect(node, p)
+    }
+
+    /**
+     * @param element the definition element
+     * @param symbolName string non fully qualified name of the symbol
+     * @param container the containing class Symbol of `element`
+     * @param path the TreePath to the reference element (not definition)
+     * @param startPos document offset to be provided if a node supplies a more accurate start position 
+     */
+    private fun findReference(element: Element, symbolName: String, container: Symbol.ClassSymbol, path: TreePath = currentPath, refStartPos: Int? = null, defStartPos: Int? = null): ReferenceData? {
         val sourceFilePath = container.sourcefile ?: return null
         val defPath = Paths.get(sourceFilePath.name)
         if(sourceFilePath.name != compUnit.sourceFile.name)
-            indexers[Paths.get(sourceFilePath.name)]?.index() ?: return null
-        val refRange = findDefinition(symbol)?.range ?: return null
+            indexers[defPath]?.index() ?: return null
+        val refRange = findDefinition(element, defStartPos)?.range ?: return null
 
-        val useRange = findLocation(currentPath, symbolName)?.range ?: return null
+        val useRange = findLocation(path, symbolName, refStartPos)?.range ?: return null
         return ReferenceData(useRange, refRange, defPath)
     }
 
     // from https://github.com/georgewfraser/java-language-server/blob/3555762fa35ab99575130911b3c930cc4d2d7b26/src/main/java/org/javacs/FindHelper.java
-    private fun findDefinition(element: Element): Location? {
+    private fun findDefinition(element: Element, startPos: Int? = null): Location? {
         val path = trees.getPath(element) ?: return null
         var name = element.simpleName
         if (name.contentEquals("<init>")) name = element.enclosingElement.simpleName
-        return findLocation(path, name)
+        return findLocation(path, name, startPos)
     }
 
-    private fun findLocation(path: TreePath, name: CharSequence): Location? {
+    private fun findLocation(path: TreePath, name: CharSequence, startPos: Int? = null): Location? {
         val lines = path.compilationUnit.lineMap
         val pos = trees.sourcePositions
-        var start = pos.getStartPosition(path.compilationUnit, path.leaf).toInt()
+        // we seem to be able to get a more exact position of eg func name from the original node,
+        // so use that instead if given
+        var start = startPos ?: pos.getStartPosition(path.compilationUnit, path.leaf).toInt()
         var end = pos.getEndPosition(path.compilationUnit, path.leaf).toInt()
         if (end == -1) return null
         if (name.isNotEmpty()) {
@@ -196,7 +226,8 @@ class IndexingVisitor(
         return Location(uri.path, range)
     }
 
-    // this will fail to find the correct position of method 'nom' in public <T extends Generic.nom> void nom() {
+    // this may fail to find the correct position if start is too far behind the actual start position
+    // that we want and another matching but incorrect symbol matches the regex
     private fun findNameIn(root: CompilationUnitTree, name: CharSequence, start: Int, end: Int): Int {
         val contents: CharSequence
         contents = try {
