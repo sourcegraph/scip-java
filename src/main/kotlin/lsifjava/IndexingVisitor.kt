@@ -16,6 +16,8 @@ import java.nio.file.Paths
 import java.util.regex.Pattern
 import javax.lang.model.element.Element
 
+data class ReferenceData(val useRange: Range, val refRange: Range, val defPath: Path)
+
 class IndexingVisitor(
         task: JavacTask,
         private val compUnit: CompilationUnitTree,
@@ -27,45 +29,10 @@ class IndexingVisitor(
 
     // TODO(nsc) handle 'var'
     override fun visitVariable(node: VariableTree, p: Unit?): Unit? {
+        // emit var definition
         val defRange = findLocation(currentPath, node.name.toString())?.range ?: return super.visitVariable(node, p)
 
-        // emit var definition
         indexer.emitDefinition(defRange, node.toString(), docs.getDocComment(currentPath))
-        
-        // emit var type use ref
-        var symbol = when((node as JCTree.JCVariableDecl).type) {
-            is Type.JCPrimitiveType -> return super.visitVariable(node, p)
-            is Type.ArrayType -> (node.type as Type.ArrayType).elemtype.tsym
-            else -> node.type.tsym
-        }
-
-        symbol = when(symbol) {
-            is Symbol.ClassSymbol -> symbol
-            else -> return super.visitVariable(node, p)
-        }
-
-        val name = symbol.name.toString()
-        val identPath = TreePath(currentPath, node.getType())
-        val identElement = trees.getElement(identPath)
-        val defContainer = LanguageUtils.getTopLevelClass(identElement) as Symbol.ClassSymbol? ?: return super.visitVariable(node, p)
-
-        val sourceFilePath = defContainer.sourcefile ?: return super.visitVariable(node, p)
-        val defPath: Path = Paths.get(sourceFilePath.name)
-        val refRange = if(sourceFilePath.name != compUnit.sourceFile.name) {
-            indexers[Paths.get(sourceFilePath.name)]?.index() ?: return super.visitVariable(node, p)
-            val location = findDefinition(defContainer) ?: return super.visitVariable(node, p)
-            location.range
-        } else {
-            val location = findDefinition(defContainer) ?: return super.visitVariable(node, p)
-            location.range
-        }
-        
-        val useRange = run {
-            val location = findLocation(identPath, name) ?: return super.visitVariable(node, p)
-            location.range
-        }
-
-        indexer.emitUse(useRange, refRange, defPath)
         
         return super.visitVariable(node, p)
     }
@@ -110,6 +77,7 @@ class IndexingVisitor(
     }
 
     override fun visitNewClass(node: NewClassTree, p: Unit?): Unit? {
+        // ignore auto-genned constructors (for now)
         if((node as JCTree.JCNewClass).constructor.flags() and Flags.GENERATEDCONSTR != 0L) return null
         
         val ident = when(node.identifier) {
@@ -124,16 +92,78 @@ class IndexingVisitor(
         val identPath = TreePath(currentPath, node.identifier)
         val identElement = node.constructor
         
-        val range = findLocation(identPath, ident.name.toString())?.range ?: return super.visitNewClass(node, p)
-        
-        val location = findDefinition(identElement) ?: (findDefinition(trees.getElement(identPath)) ?: return super.visitNewClass(node, p))
+        val defContainer = LanguageUtils.getTopLevelClass(identElement) as Symbol.ClassSymbol? ?: return super.visitNewClass(node, p)
+        val (useRange, refRange, defPath) = findReference(identElement, ident.name.toString(), defContainer, identPath) ?: return super.visitNewClass(node, p)
 
-        indexer.emitUse(
-            range, location.range,
-            Paths.get(compUnit.sourceFile.toUri())
-        )
+        indexer.emitUse(useRange, refRange, defPath)
 
         return super.visitNewClass(node, p)
+    }
+
+    override fun visitMethodInvocation(node: MethodInvocationTree?, p: Unit?): Unit? {
+        val symbol = when((node as JCTree.JCMethodInvocation).meth) {
+            is JCTree.JCFieldAccess -> (node.meth as JCTree.JCFieldAccess).sym
+            is JCTree.JCIdent -> (node.meth as JCTree.JCIdent).sym
+            else -> {
+                println("method receiver tree was neither JCFieldAccess nor JCIdent but ${node.meth.javaClass}")
+                return super.visitMethodInvocation(node, p)
+            }
+        }
+        
+        //val isStatic = symbol.flags_field and Flags.STATIC.toLong() > 0L
+
+        val name = symbol.name.toString()
+        val methodPath = TreePath(currentPath, node.meth)
+        val methodElement = trees.getElement(methodPath)
+        val defContainer = LanguageUtils.getTopLevelClass(methodElement) as Symbol.ClassSymbol? ?: return super.visitMethodInvocation(node, p)
+        
+        val (useRange, refRange, defPath) = findReference(methodElement, name, defContainer, methodPath) ?: return super.visitMethodInvocation(node, p)
+
+        indexer.emitUse(useRange, refRange, defPath)
+
+        return super.visitMethodInvocation(node, p)
+    }
+
+    // does not match `var` or constructor calls
+    override fun visitIdentifier(node: IdentifierTree?, p: Unit?): Unit? {
+        val symbol = (node as JCTree.JCIdent).sym ?: return super.visitIdentifier(node, p)
+        
+        if(symbol is Symbol.PackageSymbol) return super.visitIdentifier(node, p)
+
+        val name = symbol.name.toString()
+        val defContainer = LanguageUtils.getTopLevelClass(symbol) as Symbol.ClassSymbol? ?: return super.visitIdentifier(node, p)
+
+        val (useRange, refRange, defPath) = findReference(symbol, name, defContainer) ?: return super.visitIdentifier(node, p)
+        
+        indexer.emitUse(useRange, refRange, defPath)
+
+        return super.visitIdentifier(node, p)
+    }
+
+    // function references eg test::myfunc or banana::new
+    override fun visitMemberReference(node: MemberReferenceTree?, p: Unit?): Unit? {
+        val symbol = (node as JCTree.JCMemberReference).sym ?: return super.visitMemberReference(node, p)
+        
+        val name = symbol.name.toString()
+        
+        val defContainer = LanguageUtils.getTopLevelClass(symbol) as Symbol.ClassSymbol? ?: return super.visitMemberReference(node, p)
+        
+        val (useRange, refRange, defPath) = findReference(symbol, name, defContainer) ?: return super.visitMemberReference(node, p)
+
+        indexer.emitUse(useRange, refRange, defPath)
+        
+        return super.visitMemberReference(node, p)
+    }
+    
+    private fun findReference(symbol: Element, symbolName: String, container: Symbol.ClassSymbol, path: TreePath = currentPath): ReferenceData? {
+        val sourceFilePath = container.sourcefile ?: return null
+        val defPath = Paths.get(sourceFilePath.name)
+        if(sourceFilePath.name != compUnit.sourceFile.name)
+            indexers[Paths.get(sourceFilePath.name)]?.index() ?: return null
+        val refRange = findDefinition(symbol)?.range ?: return null
+
+        val useRange = findLocation(currentPath, symbolName)?.range ?: return null
+        return ReferenceData(useRange, refRange, defPath)
     }
 
     // from https://github.com/georgewfraser/java-language-server/blob/3555762fa35ab99575130911b3c930cc4d2d7b26/src/main/java/org/javacs/FindHelper.java
