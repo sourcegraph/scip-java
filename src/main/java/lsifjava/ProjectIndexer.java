@@ -19,15 +19,15 @@ public class ProjectIndexer {
     }
 
     public void index() throws IOException {
-        emitter.emitVertex("metaData", Util.mapOf(
-                "version", "0.4.0",
-                "positionEncoding", "utf-16",
-                "projectRoot", String.format("file://%s", Paths.get(arguments.projectRoot).toFile().getCanonicalPath()),
-                "toolInfo", Util.mapOf("name", "lsif-java", "version", "0.1.0")
+        emitter.emitVertex("metaData", Map.of(
+            "version", "0.4.0",
+            "positionEncoding", "utf-16",
+            "projectRoot", String.format("file://%s", Paths.get(arguments.projectRoot).toFile().getCanonicalPath()),
+            "toolInfo", Map.of("name", "lsif-java", "version", "0.1.0")
         ));
 
-        var projectId = emitter.emitVertex("project", Util.mapOf(
-                "kind", "java"
+        var projectId = emitter.emitVertex("project", Map.of(
+            "kind", "java"
         ));
 
         var indexers = new HashMap<Path, DocumentIndexer>();

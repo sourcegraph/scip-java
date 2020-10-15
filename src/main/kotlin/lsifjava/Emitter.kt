@@ -4,7 +4,7 @@ import java.io.PrintWriter
 
 import com.google.gson.Gson
 
-class Emitter(val writer: PrintWriter) {
+class Emitter(private val writer: PrintWriter) {
     private var nextId: Int = 1
 
     private val gson: Gson = Gson()
@@ -17,9 +17,9 @@ class Emitter(val writer: PrintWriter) {
         val id = (nextId++).toString()
 
         val map = mutableMapOf<String, Any>(
-                "id" to id,
-                "type" to typeName,
-                "label" to labelName
+            "id" to id,
+            "type" to typeName,
+            "label" to labelName
         )
         map.putAll(args)
 

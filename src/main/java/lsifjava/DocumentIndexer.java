@@ -8,6 +8,7 @@ import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.Position;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.nio.file.Path;
 import java.util.*;
 
@@ -48,7 +49,7 @@ public class DocumentIndexer {
     public void preIndex(SourceFileManager fileManager) {
         this.fileManager = fileManager;
 
-        var args = Util.mapOf(
+        var args = Map.of(
             "languageId", "java",
             "uri", String.format("file://%s", path.toAbsolutePath().toString())
         );
@@ -69,27 +70,28 @@ public class DocumentIndexer {
         var context = new SimpleContext();
 
         task = systemProvider.getTask(
-            null, fileManager, null, List.of("--enable-preview", "-source", "15", "--add-exports",
-                    "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-                    "--add-exports",
-                    "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-                    "--add-exports",
-                    "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
-                    "--add-exports",
-                    "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
-                    "--add-exports",
-                    "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-                    "--add-exports",
-                    "jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-                    "--add-exports",
-                    "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
-                    "--add-exports",
-                    "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED"),  List.of(), List.of(new SourceFileObject(path)), context
+            OutputStreamWriter.nullWriter(), fileManager, null,
+            List.of("--enable-preview", "-source", "15", "--add-exports",
+                "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+                "--add-exports",
+                "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+                "--add-exports",
+                "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
+                "--add-exports",
+                "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+                "--add-exports",
+                "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+                "--add-exports",
+                "jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+                "--add-exports",
+                "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+                "--add-exports",
+                "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED"),
+            List.of(), List.of(new SourceFileObject(path)), context
         );
+
         var compUnit = task.parse().iterator().next();
         for(var element : task.analyze()) {}
-
-        System.out.println("analyzed and parsed " + path);
 
         return compUnit;
     }
@@ -117,15 +119,15 @@ public class DocumentIndexer {
             linkUses(meta, documentId);
         }
 
-        emitter.emitEdge("contains", Util.mapOf("outV", projectId, "inVs", new String[]{documentId}));
-        emitter.emitEdge("contains", Util.mapOf("outV", documentId, "inVs", rangeIds.stream().sorted().toArray()));
+        emitter.emitEdge("contains", Map.of("outV", projectId, "inVs", new String[]{documentId}));
+        emitter.emitEdge("contains", Map.of("outV", documentId, "inVs", rangeIds.stream().sorted().toArray()));
     }
 
     protected void linkUses(DefinitionMeta meta, String documentId) {
-        var resultId = emitter.emitVertex("referenceResult", Util.mapOf());
+        var resultId = emitter.emitVertex("referenceResult", Map.of());
 
-        emitter.emitEdge("textDocument/references", Util.mapOf("outV", meta.resultSetId, "inV", resultId));
-        emitter.emitEdge("item", Util.mapOf(
+        emitter.emitEdge("textDocument/references", Map.of("outV", meta.resultSetId, "inV", resultId));
+        emitter.emitEdge("item", Map.of(
             "property", "definitions",
             "outV", resultId,
             "inVs", new String[]{meta.rangeId},
@@ -133,7 +135,7 @@ public class DocumentIndexer {
         ));
 
         for (var entry : meta.referenceRangeIds.entrySet()) {
-            emitter.emitEdge("item", Util.mapOf(
+            emitter.emitEdge("item", Map.of(
                 "property", "references",
                 "outV", resultId,
                 "inVs", entry.getValue().stream().sorted().toArray(),
@@ -146,19 +148,19 @@ public class DocumentIndexer {
         if(verbose)
             System.out.println("DEF " + path.toString().replaceFirst("^"+projectRoot, ".") + ":" + humanRange(range));
 
-        var hoverId = emitter.emitVertex("hoverResult", Util.mapOf(
-            "result", Util.mapOf(
-                "contents", Util.mapOf(
+        var hoverId = emitter.emitVertex("hoverResult", Map.of(
+            "result", Map.of(
+                "contents", Map.of(
                     "kind", "markdown",
                     "value", hover
                 )
             )
         ));
 
-        var resultSetId = emitter.emitVertex("resultSet", Util.mapOf());
-        emitter.emitEdge("textDocument/hover", Util.mapOf("outV", resultSetId, "inV", hoverId));
+        var resultSetId = emitter.emitVertex("resultSet", Map.of());
+        emitter.emitEdge("textDocument/hover", Map.of("outV", resultSetId, "inV", hoverId));
         var rangeId = emitter.emitVertex("range", createRange(range));
-        emitter.emitEdge("next", Util.mapOf("outV", rangeId, "inV", resultSetId));
+        emitter.emitEdge("next", Map.of("outV", rangeId, "inV", resultSetId));
 
         rangeIds.add(rangeId);
         definitions.put(range, new DefinitionMeta(rangeId, resultSetId)); // + contents?
@@ -180,20 +182,20 @@ public class DocumentIndexer {
         var meta = indexer.definitions.get(def);
         if (meta == null) {
             if(verbose)
-                System.out.println("WARNING Skipping linking use to definition: " + link);
+                System.out.println("WARNING missing definition for: " + link);
             return;
         }
 
         var rangeId = emitter.emitVertex("range", createRange(use));
-        emitter.emitEdge("next", Util.mapOf("outV", rangeId, "inV", meta.resultSetId));
+        emitter.emitEdge("next", Map.of("outV", rangeId, "inV", meta.resultSetId));
 
         if (meta.definitionResultId == null) {
-            var resultId = emitter.emitVertex("definitionResult", Util.mapOf());
-            emitter.emitEdge("textDocument/definition", Util.mapOf("outV", meta.resultSetId, "inV", resultId));
+            var resultId = emitter.emitVertex("definitionResult", Map.of());
+            emitter.emitEdge("textDocument/definition", Map.of("outV", meta.resultSetId, "inV", resultId));
             meta.definitionResultId = resultId;
         }
 
-        emitter.emitEdge("item", Util.mapOf(
+        emitter.emitEdge("item", Map.of(
             "outV", meta.definitionResultId,
             "inVs", new String[]{meta.rangeId},
             "document", indexer.documentId
@@ -228,10 +230,10 @@ public class DocumentIndexer {
     }
 
     private Map<String, Object> createRange(Range range) {
-        return Util.mapOf("start", createPosition(range.getStart()), "end", createPosition(range.getEnd()));
+        return Map.of("start", createPosition(range.getStart()), "end", createPosition(range.getEnd()));
     }
 
     private Map<String, Object> createPosition(Position position) {
-        return Util.mapOf("line", position.getLine(), "character", position.getCharacter());
+        return Map.of("line", position.getLine(), "character", position.getCharacter());
     }
 }
