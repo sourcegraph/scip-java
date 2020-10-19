@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import javax.tools.*;
 
-class SourceFileManager extends JavacFileManager {
+public class SourceFileManager extends JavacFileManager {
     private final Set<Path> paths;
     SourceFileManager(Set<Path> paths) {
         super(new Context(), false, Charset.defaultCharset());
