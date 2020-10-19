@@ -9,14 +9,14 @@ class Emitter(private val writer: PrintWriter) {
 
     private val gson: Gson = Gson()
 
-    fun emitVertex(labelName: String, args: Map<String, Any?>) = emit("vertex", labelName, args)
+    fun emitVertex(labelName: String, args: Map<String, Any>) = emit("vertex", labelName, args)
 
-    fun emitEdge(labelName: String, args: Map<String, Any?>) = emit("edge", labelName, args)
+    fun emitEdge(labelName: String, args: Map<String, Any>) = emit("edge", labelName, args)
 
-    private fun emit(typeName: String, labelName: String, args: Map<String, Any?>): String {
+    private fun emit(typeName: String, labelName: String, args: Map<String, Any>): String {
         val id = (nextId++).toString()
 
-        val map = mutableMapOf<String, Any?>(
+        val map = mutableMapOf<String, Any>(
             "id" to id,
             "type" to typeName,
             "label" to labelName
