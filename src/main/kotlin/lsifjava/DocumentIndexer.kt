@@ -8,7 +8,6 @@ import com.sun.tools.javac.main.JavaCompiler
 import com.sun.tools.javac.util.Context
 import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.Range
-import java.io.IOException
 import java.io.OutputStreamWriter
 import java.nio.file.Path
 import java.util.*

@@ -38,7 +38,8 @@ class IndexingVisitor(
 
     override fun visitClass(node: ClassTree, p: Unit?): Unit? {
         val packagePrefix = compUnit.packageName?.toString()?.plus(".") ?: ""
-        
+
+        // TODO(nsc): records
         val classOrEnum = if ((node as JCTree.JCClassDecl).sym.flags() and Flags.ENUM.toLong() != 0L) "enum " else "class "
 
         val range = findLocation(currentPath, node.simpleName.toString())?.range ?: return super.visitClass(node, p)
@@ -140,6 +141,17 @@ class IndexingVisitor(
         return super.visitIdentifier(node, p)
     }
 
+    override fun visitTypeParameter(node: TypeParameterTree?, p: Unit?): Unit? {
+        val range = findLocation(currentPath, node!!.name.toString(), (node as JCTree.JCTypeParameter).pos)?.range ?: return super.visitTypeParameter(node, p)
+
+        indexer.emitDefinition(
+                range,
+        "type-parameter $node"
+        )
+
+        return super.visitTypeParameter(node, p)
+    }
+    
     // function references eg test::myfunc or banana::new
     override fun visitMemberReference(node: MemberReferenceTree?, p: Unit?): Unit? {
         val symbol = (node as JCTree.JCMemberReference).sym ?: return super.visitMemberReference(node, p)
@@ -181,7 +193,8 @@ class IndexingVisitor(
      * @param symbolName string non fully qualified name of the symbol
      * @param container the containing class Symbol of `element`
      * @param path the TreePath to the reference element (not definition)
-     * @param startPos document offset to be provided if a node supplies a more accurate start position 
+     * @param refStartPos document offset to be provided if a node supplies a more accurate start position for a reference/use search
+     * @param defStartPos document offset to be provided if a node supplies a more accurate start position for a definition search
      */
     private fun findReference(element: Element, symbolName: String, container: Symbol.ClassSymbol, path: TreePath = currentPath, refStartPos: Int? = null, defStartPos: Int? = null): ReferenceData? {
         val sourceFilePath = container.sourcefile ?: return null
