@@ -34,8 +34,8 @@ public class ProjectIndexer {
         var collector = new FileCollector(projectId, arguments, emitter, indexers);
 
         try(GradleInterface gradleInterface = new GradleInterface(arguments.projectRoot)) {
-            for (String it : gradleInterface.sourceDirectories()) {
-                Files.walkFileTree(Paths.get(it), collector);
+            for (Path it : gradleInterface.sourceDirectories()) {
+                Files.walkFileTree(it, collector);
             }
         }
 
