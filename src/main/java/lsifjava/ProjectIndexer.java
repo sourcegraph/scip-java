@@ -32,7 +32,13 @@ public class ProjectIndexer {
 
         var indexers = new HashMap<Path, DocumentIndexer>();
         var collector = new FileCollector(projectId, arguments, emitter, indexers);
-        Files.walkFileTree(Paths.get(arguments.projectRoot), collector);
+
+        try(GradleInterface gradleInterface = new GradleInterface(arguments.projectRoot)) {
+            for (Path it : gradleInterface.sourceDirectories()) {
+                Files.walkFileTree(it, collector);
+            }
+        }
+
         var fileManager = new SourceFileManager(indexers.keySet());
 
         for(var indexer : indexers.values()) {
