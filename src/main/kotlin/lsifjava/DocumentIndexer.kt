@@ -130,7 +130,7 @@ class DocumentIndexer(
     }
 
     private fun emitDefinition(range: Range, hover: String) {
-        if (verbose) println("DEF " + path.toString().replaceFirst("^" + projectRoot.toRegex(), ".") + ":" + humanRange(range))
+        if (verbose) println("DEF " + path.toString() + ":" + humanRange(range))
         val hoverId = emitter.emitVertex("hoverResult", mapOf(
             "result" to mapOf(
                 "contents" to mapOf(
@@ -155,7 +155,7 @@ class DocumentIndexer(
     internal fun emitUse(use: Range, def: Range, defPath: Path) {
         referencesBacklog.add {
             val indexer = indexers[defPath]
-            val link = path.toString().replaceFirst(projectRoot, ".") + ":" + humanRange(use) + " -> " + defPath.toString().replaceFirst(projectRoot, ".") + ":" + humanRange(def)
+            val link = path.toString() + ":" + humanRange(use) + " -> " + defPath.toString() + ":" + humanRange(def)
 
             if (verbose) println("Linking use to definition: $link")
 
@@ -174,7 +174,7 @@ class DocumentIndexer(
                 meta.definitionResultId = resultId
             }
 
-            emitter.emitEdge("item", mapOf<String, Any>(
+            emitter.emitEdge("item", mapOf(
                 "outV" to meta.definitionResultId,
                 "inVs" to arrayOf(meta.rangeId),
                 "document" to indexer.documentId
@@ -196,8 +196,12 @@ class DocumentIndexer(
                 "\n---\n${docComment.trim()}"
     }
 
+    /**
+     * Returns the stringified range with the lines+1 to make clicking the links in your editor's terminal
+     * direct to the correct line
+     */
     private fun humanRange(r: Range): String {
-        return r.start.line.toString() + ":" + r.start.character + "-" + r.end.line + ":" + r.end.character
+        return (r.start.line+1).toString() + ":" + (r.start.character+1)+ "-" + (r.end.line+1) + ":" + (r.end.character+1)
     }
 
     private fun createRange(range: Range): Map<String, Any> {

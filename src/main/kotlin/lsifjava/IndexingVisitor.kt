@@ -112,12 +112,14 @@ class IndexingVisitor(
         
         //val isStatic = symbol.flags_field and Flags.STATIC.toLong() > 0L
 
-        val name = symbol.name.toString()
+        val name = symbol.name.toString().let {
+            if(it == "<init>") "this" else it
+        }
         val methodPath = TreePath(currentPath, node.meth)
         val defContainer = LanguageUtils.getTopLevelClass(symbol) as Symbol.ClassSymbol? ?: return super.visitMethodInvocation(node, p)
 
         // this gives us the start pos of the name of the method, so override defStartPos
-        val overrideStartOffset = (trees.getPath(symbol).leaf as JCTree.JCMethodDecl).pos
+        val overrideStartOffset = (trees.getPath(symbol)?.leaf as JCTree.JCMethodDecl?)?.pos ?: return super.visitMethodInvocation(node, p)
         val (useRange, refRange, defPath) = findReference(symbol, name, defContainer, path = methodPath, defStartPos = overrideStartOffset) ?: return super.visitMethodInvocation(node, p)
 
         indexer.emitUse(useRange, refRange, defPath)
@@ -132,6 +134,7 @@ class IndexingVisitor(
         if(symbol is Symbol.PackageSymbol) return super.visitIdentifier(node, p)
 
         val name = symbol.name.toString()
+        if(name == "<init>") return super.visitIdentifier(node, p) // handled by visitMethodInvocation
         val defContainer = LanguageUtils.getTopLevelClass(symbol) as Symbol.ClassSymbol? ?: return super.visitIdentifier(node, p)
 
         val (useRange, refRange, defPath) = findReference(symbol, name, defContainer) ?: return super.visitIdentifier(node, p)
@@ -203,7 +206,9 @@ class IndexingVisitor(
             indexers[defPath]?.index() ?: return null
         val refRange = findDefinition(element, defStartPos)?.range ?: return null
 
-        val useRange = findLocation(path, symbolName, refStartPos)?.range ?: return null
+        var name = symbolName
+        if (name.contentEquals("<init>")) name = element.enclosingElement.simpleName.toString()
+        val useRange = findLocation(path, name, refStartPos)?.range ?: return null
         return ReferenceData(useRange, refRange, defPath)
     }
 
