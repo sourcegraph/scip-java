@@ -17,19 +17,13 @@ class GradleInterface(private val projectDir: String): AutoCloseable {
         projectConnection.getModel(EclipseProject::class.java)
     }
 
-    fun classpath(): Classpath {
-        return Classpath(eclipseModel.classpath.map { it.file.canonicalPath })
+    fun classpath() = Classpath(eclipseModel.classpath.map { it.file.canonicalPath })
+
+    fun sourceDirectories() = eclipseModel.sourceDirectories.map {
+        Paths.get(eclipseModel.projectDirectory.path, it.path)
     }
 
-    fun sourceDirectories(): Iterable<Path> {
-        return eclipseModel.sourceDirectories.map {
-            Paths.get(eclipseModel.projectDirectory.path, it.path)
-        }
-    }
-
-    override fun close() {
-        projectConnection.close()
-    }
+    override fun close() = projectConnection.close()
 }
 
 class Classpath(private val classpaths: Iterable<String>): Iterable<String> by classpaths {
