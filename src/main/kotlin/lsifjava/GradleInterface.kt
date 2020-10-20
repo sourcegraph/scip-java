@@ -10,6 +10,7 @@ import java.nio.file.Paths
 // TODO(nsc) exclusions? subprojects? inter-project dependencies? fml
 class GradleInterface(private val projectDir: String): AutoCloseable {
     private val projectConnection by lazy {
+        // TODO(nsc) version override, 6.0 < x < 6.3 seems to be an issue
         GradleConnector.newConnector().forProjectDirectory(Paths.get(projectDir).toFile()).connect()
     }
 

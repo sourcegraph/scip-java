@@ -112,9 +112,9 @@ class IndexingVisitor(
         
         //val isStatic = symbol.flags_field and Flags.STATIC.toLong() > 0L
 
-        val name = symbol.name.toString().let {
+        val name = symbol?.name?.toString()?.let {
             if(it == "<init>") "this" else it
-        }
+        } ?: return super.visitMethodInvocation(node, p)
         val methodPath = TreePath(currentPath, node.meth)
         val defContainer = LanguageUtils.getTopLevelClass(symbol) as Symbol.ClassSymbol? ?: return super.visitMethodInvocation(node, p)
 
