@@ -25,6 +25,11 @@ class DocumentIndexer(
     companion object {
         private val systemProvider = JavacTool.create()
     }
+    
+    data class DefinitionMeta(val rangeId: String, val resultSetId: String) {
+        var definitionResultId: String? = null
+        val referenceRangeIds = HashMap<String, MutableSet<String>>()
+    }
 
     private lateinit var documentId: String
     private var indexed = false
@@ -175,7 +180,7 @@ class DocumentIndexer(
             }
 
             emitter.emitEdge("item", mapOf(
-                "outV" to meta.definitionResultId,
+                "outV" to meta.definitionResultId!!,
                 "inVs" to arrayOf(meta.rangeId),
                 "document" to indexer.documentId
             ))
