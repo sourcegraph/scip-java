@@ -6,7 +6,6 @@ import com.sun.tools.javac.util.Context
 import java.io.IOException
 import java.nio.charset.Charset
 import java.nio.file.Path
-import java.util.logging.Logger
 import java.util.regex.Pattern
 import java.util.stream.Stream
 import javax.tools.FileObject
@@ -38,12 +37,6 @@ class SourceFileManager internal constructor(private val paths: Set<Path>) : Jav
          .map { obj: SourceFileObject? -> obj }
     }
 
-    @Throws(IOException::class)
-    private fun asJavaFileObject(file: Path): JavaFileObject {
-        // TODO erase method bodies of files that are not open
-        return SourceFileObject(file)
-    }
-
     override fun inferBinaryName(location: JavaFileManager.Location, file: JavaFileObject): String {
         return if (location === StandardLocation.SOURCE_PATH) {
             val source = file as SourceFileObject
@@ -56,9 +49,8 @@ class SourceFileManager internal constructor(private val paths: Set<Path>) : Jav
         }
     }
 
-    private fun removeExtension(fileName: String): String {
-        val lastDot = fileName.lastIndexOf(".")
-        return if (lastDot == -1) fileName else fileName.substring(0, lastDot)
+    private fun removeExtension(fileName: String): String = fileName.lastIndexOf(".").let {
+        if(it == -1) fileName else fileName.substring(0, it)
     }
 
     override fun hasLocation(location: JavaFileManager.Location): Boolean {
@@ -103,37 +95,33 @@ class SourceFileManager internal constructor(private val paths: Set<Path>) : Jav
             super.contains(location, file)
         }
     }
+}
 
-    companion object {
-        fun packageName(file: SourceFileObject): String {
-            val packagePattern = Pattern.compile("^package +(.*);")
-            val startOfClass = Pattern.compile("^[\\w ]*class +\\w+")
-            val lines = file.contents.lines().iterator()
-            var line = lines.next()
-            while (line != null) {
-                if (startOfClass.matcher(line).find()) return ""
-                val matchPackage = packagePattern.matcher(line)
-                if (matchPackage.matches()) {
-                    return matchPackage.group(1)
-                }
-                line = lines.next()
-            }
-            // TODO fall back on parsing file
-            return ""
+private fun packageName(file: SourceFileObject): String {
+    val packagePattern = Pattern.compile("^package +(.*);")
+    val startOfClass = Pattern.compile("^[\\w ]*class +\\w+")
+    val lines = file.contents.lineSequence().iterator()
+    var line = lines.next()
+    do {
+        if (startOfClass.matcher(line).find()) return ""
+        val matchPackage = packagePattern.matcher(line)
+        if (matchPackage.matches()) {
+            return matchPackage.group(1)
         }
+        line = lines.next()
+    } while(lines.hasNext())
+    // TODO fall back on parsing file
+    return ""
+}
 
-        // TODO this doesn't work for inner classes, eliminate
-        fun mostName(name: String): String {
-            val lastDot = name.lastIndexOf('.')
-            return if (lastDot == -1) "" else name.substring(0, lastDot)
-        }
+// TODO this doesn't work for inner classes, eliminate
+private fun mostName(name: String): String {
+    val lastDot = name.lastIndexOf('.')
+    return if (lastDot == -1) "" else name.substring(0, lastDot)
+}
 
-        // TODO this doesn't work for inner classes, eliminate
-        fun lastName(name: String): String {
-            val i = name.lastIndexOf('.')
-            return if (i == -1) name else name.substring(i + 1)
-        }
-
-        private val LOG = Logger.getLogger("main")
-    }
+// TODO this doesn't work for inner classes, eliminate
+private fun lastName(name: String): String {
+    val i = name.lastIndexOf('.')
+    return if (i == -1) name else name.substring(i + 1)
 }

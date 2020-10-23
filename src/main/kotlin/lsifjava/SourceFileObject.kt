@@ -27,63 +27,34 @@ class SourceFileObject @JvmOverloads constructor(
         return path == that!!.path
     }
 
-    override fun hashCode(): Int {
-        return path.hashCode()
-    }
+    override fun hashCode() = path.hashCode()
 
-    override fun getKind(): JavaFileObject.Kind {
-        return JavaFileObject.Kind.SOURCE
-    }
+    override fun getKind() = JavaFileObject.Kind.SOURCE
 
-    override fun isNameCompatible(simpleName: String, kind: JavaFileObject.Kind): Boolean {
-        return path.fileName.toString() == simpleName + kind.extension
-    }
+    override fun isNameCompatible(simpleName: String, kind: JavaFileObject.Kind) =
+        path.fileName.toString() == simpleName + kind.extension
 
-    override fun getNestingKind(): NestingKind? {
-        return null
-    }
+    override fun getNestingKind(): NestingKind? = null
 
-    override fun getAccessLevel(): Modifier? {
-        return null
-    }
+    override fun getAccessLevel(): Modifier? = null
 
-    override fun toUri(): URI {
-        return path.toUri()
-    }
+    override fun toUri(): URI = path.toUri()
 
-    override fun getName(): String {
-        return path.toString()
-    }
+    override fun getName() = path.toString()
 
-    override fun openInputStream(): InputStream {
-        return IOUtils.toInputStream(contents, StandardCharsets.UTF_8)
-    }
+    override fun openInputStream(): InputStream = IOUtils.toInputStream(contents, StandardCharsets.UTF_8)
 
-    override fun openOutputStream(): OutputStream {
-        throw UnsupportedOperationException()
-    }
+    override fun openOutputStream(): OutputStream = throw UnsupportedOperationException()
 
-    override fun openReader(ignoreEncodingErrors: Boolean): Reader {
-        return CharSequenceReader(contents)
-    }
+    override fun openReader(ignoreEncodingErrors: Boolean) = CharSequenceReader(contents)
 
-    override fun getCharContent(ignoreEncodingErrors: Boolean): CharSequence {
-        return contents
-    }
+    override fun getCharContent(ignoreEncodingErrors: Boolean): CharSequence = contents
 
-    override fun openWriter(): Writer {
-        throw UnsupportedOperationException()
-    }
+    override fun openWriter(): Writer = throw UnsupportedOperationException()
 
-    override fun getLastModified(): Long {
-        return Instant.EPOCH.toEpochMilli()
-    }
+    override fun getLastModified() = Instant.EPOCH.toEpochMilli()
 
-    override fun delete(): Boolean {
-        throw UnsupportedOperationException()
-    }
+    override fun delete(): Boolean = throw UnsupportedOperationException()
 
-    override fun toString(): String {
-        return path.toString()
-    }
+    override fun toString() = path.toString()
 }
