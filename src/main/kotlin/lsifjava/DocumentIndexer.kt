@@ -193,10 +193,7 @@ class DocumentIndexer(
     }
     
     private fun mkDoc(signature: String, docComment: String?): String {
-        return """
-            ```java
-            $signature
-            ```""".trimIndent() +
+        return "```java\n$signature\n```" +
             if (docComment == null || docComment == "") "" else
                 "\n---\n${docComment.trim()}"
     }
