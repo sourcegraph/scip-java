@@ -36,6 +36,15 @@ class GradleInterface(private val projectDir: String): AutoCloseable {
         project.children.forEach { sourceDirectories(it).toCollection(sourceDirs) }
         return sourceDirs
     }
+    
+    fun javaSourceVersions() = javaSourceVersion(eclipseModel)
+    
+    private fun javaSourceVersion(project: EclipseProject): List<String?> {
+        val javaVersions = arrayListOf<String?>()
+        javaVersions.add(project.javaSourceSettings?.sourceLanguageLevel?.toString())
+        project.children.forEach { javaSourceVersion(it).toCollection(javaVersions) }
+        return javaVersions
+    }
 
     override fun close() = projectConnection.close()
 }

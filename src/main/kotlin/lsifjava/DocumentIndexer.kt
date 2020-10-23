@@ -11,18 +11,20 @@ import org.eclipse.lsp4j.Range
 import java.io.Writer
 import java.nio.file.Path
 import java.util.*
+import javax.tools.Diagnostic
+import javax.tools.DiagnosticListener
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
 class DocumentIndexer(
-    private val projectRoot: String,
     private val verbose: Boolean,
     private val path: Path,
     private val projectId: String,
     private val emitter: Emitter,
     private val indexers: Map<Path, DocumentIndexer>,
     private val classpath: Classpath,
-    private val javacOutput: Writer
+    private val javaSourceVersion: String,
+    private val javacOutput: Writer?
 ) {
     companion object {
         private val systemProvider = JavacTool.create()
@@ -40,6 +42,10 @@ class DocumentIndexer(
     private lateinit var fileManager: SourceFileManager
     
     private val referencesBacklog: LinkedList<() -> Unit> = LinkedList()
+    
+    var javacDiagnostics = LinkedList<Diagnostic<out Any>>()
+        private set
+    private val diagnosticsListener = DiagnosticListener<Any> { javacDiagnostics.add(it) }
 
     fun numDefinitions(): Int {
         return definitions.size
@@ -63,15 +69,18 @@ class DocumentIndexer(
         IndexingVisitor(task, compUnit, this, indexers).scan(compUnit, null)
         referencesBacklog.forEach { it() }
 
+        //javacDiagnostics.forEach(::println)
+
         println("finished analyzing and visiting $path")
     }
 
     private fun analyzeFile(): Pair<JavacTask, CompilationUnitTree> {
         val context = SimpleContext()
+
+        // TODO(nsc) diagnosticsListener not being null seems to interfere with javacOutput
         val task = systemProvider.getTask(
-            javacOutput, fileManager, null,
-            listOf(/*"--enable-preview", */"-source", "8", "-proc:none",
-                "-classpath", classpath.toString()),
+            javacOutput, fileManager, diagnosticsListener,
+            listOf("-source", "8", "-proc:none", "-nowarn", "-source", javaSourceVersion, "-classpath", classpath.toString()),
             listOf(), listOf(SourceFileObject(path)), context
         )
         val compUnit = task.parse().iterator().next()

@@ -11,6 +11,7 @@ import java.nio.file.attribute.BasicFileAttributes
 
 class FileCollector(private val projectId: String, private val args: Arguments, private val emitter: Emitter, private val indexers: MutableMap<Path, DocumentIndexer>) : SimpleFileVisitor<Path>() {
     lateinit var classpath: Classpath
+    var javaSourceVersion: String? = null
     private val javacOutStream by lazy { createJavacOutWriter(args) }
 
     override fun preVisitDirectory(dir: Path, attrs: BasicFileAttributes): FileVisitResult {
@@ -23,13 +24,13 @@ class FileCollector(private val projectId: String, private val args: Arguments, 
     override fun visitFile(file: Path, _attrs: BasicFileAttributes): FileVisitResult {
         if (isJavaFile(file)) {
             indexers[file] = DocumentIndexer(
-                args.projectRoot,
                 args.verbose,
                 file,
                 projectId,
                 emitter,
                 indexers,
                 classpath,
+                javaSourceVersion!!,
                 javacOutStream
             )
         }
@@ -37,9 +38,9 @@ class FileCollector(private val projectId: String, private val args: Arguments, 
     }
 
     companion object {
-        fun createJavacOutWriter(args: Arguments): Writer {
+        fun createJavacOutWriter(args: Arguments): Writer? {
             return when(args.javacOutWriter) {
-                "stdout" -> System.out.writer()
+                "stdout" -> null // getTask interprets this as stdout
                 "stderr" -> System.err.writer()
                 //"none" -> OutputStreamWriter.nullWriter() CANT USE IN JAVA 8 :(
                 "none" -> object : Writer() {

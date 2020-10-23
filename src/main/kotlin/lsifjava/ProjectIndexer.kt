@@ -7,12 +7,14 @@ import java.nio.file.Paths
 class ProjectIndexer(private val arguments: Arguments, private val emitter: Emitter) {
     var numFiles = 0
     var numDefinitions = 0
+    var numJavacErrors = 0
+    
     fun index() {
         emitter.emitVertex("metaData", mapOf(
             "version" to "0.4.0",
             "positionEncoding" to "utf-16",
             "projectRoot" to String.format("file://%s", Paths.get(arguments.projectRoot).toFile().canonicalPath),
-            "toolInfo" to mapOf("name" to "lsif-java", "version" to "0.1.0")
+            "toolInfo" to mapOf("name" to "lsif-java", "version" to "0.7.0")
         ))
 
         val projectId = emitter.emitVertex("project", mapOf(
@@ -23,8 +25,10 @@ class ProjectIndexer(private val arguments: Arguments, private val emitter: Emit
         val collector = FileCollector(projectId, arguments, emitter, indexers)
         GradleInterface(arguments.projectRoot).use { gradleInterface ->
             val classpaths = gradleInterface.getClasspaths()
+            val javaSourceVersions = gradleInterface.javaSourceVersions()
             gradleInterface.getSourceDirectories().forEachIndexed { i, paths ->
                 collector.classpath = classpaths[i]
+                collector.javaSourceVersion = javaSourceVersions[i]
                 paths.forEach {
                     if (Files.notExists(it)) return@forEach
                     Files.walkFileTree(it, collector)
@@ -48,6 +52,7 @@ class ProjectIndexer(private val arguments: Arguments, private val emitter: Emit
         for (indexer in indexers.values) {
             numFiles++
             numDefinitions += indexer.numDefinitions()
+            numJavacErrors += indexer.javacDiagnostics.size
         }
     }
 }
