@@ -25,7 +25,10 @@ class ProjectIndexer(private val arguments: Arguments, private val emitter: Emit
             val classpaths = gradleInterface.getClasspaths()
             gradleInterface.getSourceDirectories().forEachIndexed { i, paths ->
                 collector.classpath = classpaths[i]
-                paths.forEach { Files.walkFileTree(it, collector) }
+                paths.forEach {
+                    if (Files.notExists(it)) return@forEach
+                    Files.walkFileTree(it, collector)
+                }
             }
         }
 
@@ -37,20 +40,6 @@ class ProjectIndexer(private val arguments: Arguments, private val emitter: Emit
         for (indexer in indexers.values) {
             indexer.index()
         }
-
-        /* if(arguments.verbose)
-            System.out.println("\nEMITTING DEFINITIONS\n-------------------------------------------------");
-
-        for(var indexer : indexers.values()) {
-            indexer.visitDefinitions();
-        }
-
-        if(arguments.verbose)
-            System.out.println("\nEMITTING REFERENCES\n-------------------------------------------------");
-
-        for(var indexer : indexers.values()) {
-            indexer.visitReferences();
-        }*/
 
         for (indexer in indexers.values) {
             indexer.postIndex()
