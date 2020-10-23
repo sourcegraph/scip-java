@@ -9,9 +9,11 @@ const val VERSION = "0.1.0"
 const val PROTOCOL_VERSION = "0.4.0"
 
 data class Arguments(
-    public val projectRoot: String,
-    public val outFile: String,
-    public val verbose: Boolean)
+    val projectRoot: String,
+    val outFile: String,
+    val verbose: Boolean,
+    val javacOutWriter: String
+)
 
 fun parse(args: Array<String>): Arguments {
     val options = createOptions()
@@ -33,15 +35,17 @@ fun parse(args: Array<String>): Arguments {
         println("${VERSION}, protocol version $PROTOCOL_VERSION")
         exitProcess(0)
     }
-    val projectRoot: String
-    projectRoot = try {
+
+    val projectRoot = try {
         Paths.get(cmd.getOptionValue("projectRoot", ".")).toFile().canonicalPath
     } catch (e: IOException) {
         throw RuntimeException(String.format("Directory %s could not be found", cmd.getOptionValue("projectRoot", ".")))
     }
     val outFile = cmd.getOptionValue("out", "$projectRoot/dump.lsif")
     val verbosity = cmd.hasOption("verbose")
-    return Arguments(projectRoot, outFile, verbosity)
+    val javacOutWriter = cmd.getOptionValue("javacOut", "none")
+
+    return Arguments(projectRoot, outFile, verbosity, javacOutWriter)
 }
 
 private fun createOptions(): Options {
@@ -65,6 +69,10 @@ private fun createOptions(): Options {
     options.addOption(Option(
         "out", true,
         "The output file the dump is save to."
+    ))
+    options.addOption(Option(
+        "javacOut", true,
+        "The output location for output from javac. Options include stdout, stderr or filepath."
     ))
     return options
 }
