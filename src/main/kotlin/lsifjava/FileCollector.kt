@@ -1,5 +1,7 @@
 package lsifjava
 
+import org.apache.commons.io.output.NullOutputStream
+import java.io.*
 import java.nio.file.FileVisitResult
 import java.nio.file.Files
 import java.nio.file.Path
@@ -8,13 +10,16 @@ import java.nio.file.attribute.BasicFileAttributes
 
 
 class FileCollector(private val projectId: String, private val args: Arguments, private val emitter: Emitter, private val indexers: MutableMap<Path, DocumentIndexer>) : SimpleFileVisitor<Path>() {
-    var classpath: Classpath? = null
+    lateinit var classpath: Classpath
+    private val javacOutStream by lazy { createJavacOutWriter(args) }
+
     override fun preVisitDirectory(dir: Path, attrs: BasicFileAttributes): FileVisitResult {
         return if (attrs.isSymbolicLink) {
             FileVisitResult.SKIP_SUBTREE
         } else FileVisitResult.CONTINUE
     }
 
+    // TODO(nsc) uncouple FileCollector + DocumentIndexer
     override fun visitFile(file: Path, _attrs: BasicFileAttributes): FileVisitResult {
         if (isJavaFile(file)) {
             indexers[file] = DocumentIndexer(
@@ -24,12 +29,28 @@ class FileCollector(private val projectId: String, private val args: Arguments, 
                 projectId,
                 emitter,
                 indexers,
-                classpath!!)
+                classpath,
+                javacOutStream
+            )
         }
         return FileVisitResult.CONTINUE
     }
 
     companion object {
+        fun createJavacOutWriter(args: Arguments): Writer {
+            return when(args.javacOutWriter) {
+                "stdout" -> System.out.writer()
+                "stderr" -> System.err.writer()
+                //"none" -> OutputStreamWriter.nullWriter() CANT USE IN JAVA 8 :(
+                "none" -> object : Writer() {
+                    override fun close() {}
+                    override fun flush() {}
+                    override fun write(p0: CharArray, p1: Int, p2: Int) {}
+                }
+                else -> PrintStream(File(args.javacOutWriter)).writer()
+            }
+        }
+
         fun isJavaFile(file: Path): Boolean {
             val name = file.fileName.toString()
             // We hide module-info.java from javac, because when javac sees module-info.java

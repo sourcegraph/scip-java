@@ -8,7 +8,7 @@ import com.sun.tools.javac.main.JavaCompiler
 import com.sun.tools.javac.util.Context
 import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.Range
-import java.io.OutputStreamWriter
+import java.io.Writer
 import java.nio.file.Path
 import java.util.*
 import kotlin.collections.HashMap
@@ -20,7 +20,9 @@ class DocumentIndexer(
     private val path: Path,
     private val projectId: String,
     private val emitter: Emitter,
-    private val indexers: Map<Path, DocumentIndexer>
+    private val indexers: Map<Path, DocumentIndexer>,
+    private val classpath: Classpath,
+    private val javacOutput: Writer
 ) {
     companion object {
         private val systemProvider = JavacTool.create()
@@ -60,28 +62,16 @@ class DocumentIndexer(
         val (task, compUnit) = analyzeFile()
         IndexingVisitor(task, compUnit, this, indexers).scan(compUnit, null)
         referencesBacklog.forEach { it() }
+
+        println("finished analyzing and visiting $path")
     }
 
     private fun analyzeFile(): Pair<JavacTask, CompilationUnitTree> {
         val context = SimpleContext()
         val task = systemProvider.getTask(
-            OutputStreamWriter.nullWriter(), fileManager, null,
-            listOf("--enable-preview", "-source", "15", "--add-exports",
-                "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-                "--add-exports",
-                "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-                "--add-exports",
-                "jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
-                "--add-exports",
-                "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
-                "--add-exports",
-                "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-                "--add-exports",
-                "jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-                "--add-exports",
-                "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
-                "--add-exports",
-                "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED"),
+            javacOutput, fileManager, null,
+            listOf(/*"--enable-preview", */"-source", "8", "-proc:none",
+                "-classpath", classpath.toString()),
             listOf(), listOf(SourceFileObject(path)), context
         )
         val compUnit = task.parse().iterator().next()
@@ -92,13 +82,14 @@ class DocumentIndexer(
 
     internal class SimpleContext: Context() {
         init {
-            put(JavaCompiler.compilerKey, SimpleCompiler.factory)
+            put(SimpleCompiler.getContextKey(), SimpleCompiler.factory)
         }
     }
 
     internal class SimpleCompiler(context: Context?): JavaCompiler(context) {
         companion object {
             var factory = Context.Factory<JavaCompiler> { context: Context? -> SimpleCompiler(context) }
+            fun getContextKey(): Context.Key<JavaCompiler> = compilerKey
         }
 
         init {
