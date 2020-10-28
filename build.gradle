@@ -13,7 +13,11 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    compile files("${System.getProperty('java.home')}/../lib/tools.jar")
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0'
+    if(JavaVersion.current() < JavaVersion.VERSION_1_9) {
+        println "JDK version is ${JavaVersion.current()}, including tools.jar @ ${System.properties['java.home']}/lib/tools.jar"
+        compile files("${System.properties['java.home']}/../lib/tools.jar")
+    }
     compile 'com.google.code.gson:gson:2.8.6'
     compile 'commons-cli:commons-cli:1.4'
     compile 'org.apache.commons:commons-lang3:3.11'
@@ -29,7 +33,7 @@ dependencies {
 }
 
 application {
-    mainClassName = 'lsifjava.Main'
+    mainClassName = 'lsifjava.MainKt'
 }
 
 compileJava {
@@ -56,3 +60,9 @@ compileJava {
 
 group = 'com.sourcegraph'
 version = '1.0-SNAPSHOT'
+
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xinline-classes"]
+    }
+}

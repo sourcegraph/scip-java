@@ -268,4 +268,19 @@ class IndexingVisitor(
             matcher.start()
         } else -1
     }
+
+    private fun getTopLevelClass(element: Element?): Element? {
+        var element = element
+        var highestClass: Element? = null
+        while (element != null) {
+            val kind = element.kind
+            if (isTopLevel(kind)) {
+                highestClass = element
+            }
+            element = element.enclosingElement
+        }
+        return highestClass
+    }
+
+    private fun isTopLevel(kind: ElementKind) = kind.isClass || kind.isInterface
 }

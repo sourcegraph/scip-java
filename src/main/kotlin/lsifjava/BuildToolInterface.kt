@@ -5,13 +5,17 @@ import org.gradle.tooling.model.eclipse.EclipseProject
 import java.nio.file.Path
 import java.nio.file.Paths
 
-// TODO(nsc) exclusions? subprojects? inter-project dependencies? fml
-class GradleInterface(private val projectDir: String): AutoCloseable {
+interface BuildToolInterface {
+    fun getClasspaths(): List<Classpath>
+    fun getSourceDirectories(): List<List<Path>>
+    fun javaSourceVersions(): List<String?>
+}
+
+// TODO(nsc) exclusions? subprojects? lazy eval with tail rec?
+class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, BuildToolInterface {
     private val projectConnection by lazy {
-        // TODO(nsc) version override, 6.0 < x < 6.3 seems to be an issue
         GradleConnector.newConnector()
-            .forProjectDirectory(Paths.get(projectDir).toFile())
-            //.useGradleVersion("6.3")
+            .forProjectDirectory(projectDir.path.toFile())
             .connect()
     }
 
@@ -19,7 +23,7 @@ class GradleInterface(private val projectDir: String): AutoCloseable {
         projectConnection.getModel(EclipseProject::class.java)
     }
 
-    fun getClasspaths() = classpath(eclipseModel)
+    override fun getClasspaths() = classpath(eclipseModel)
     
     private fun classpath(project: EclipseProject): List<Classpath> {
         val classPaths = arrayListOf<Classpath>()
@@ -28,7 +32,7 @@ class GradleInterface(private val projectDir: String): AutoCloseable {
         return classPaths
     }
 
-    fun getSourceDirectories() = sourceDirectories(eclipseModel)
+    override fun getSourceDirectories() = sourceDirectories(eclipseModel)
 
     private fun sourceDirectories(project: EclipseProject): List<List<Path>> {
         val sourceDirs = arrayListOf<List<Path>>()
@@ -37,8 +41,9 @@ class GradleInterface(private val projectDir: String): AutoCloseable {
         return sourceDirs
     }
     
-    fun javaSourceVersions() = javaSourceVersion(eclipseModel)
-    
+    override fun javaSourceVersions() = javaSourceVersion(eclipseModel)
+
+    // get rid of String?, use parent version or else fallback
     private fun javaSourceVersion(project: EclipseProject): List<String?> {
         val javaVersions = arrayListOf<String?>()
         javaVersions.add(project.javaSourceSettings?.sourceLanguageLevel?.toString())

@@ -1,63 +1,96 @@
 package lsifjava
 
-import org.apache.commons.io.output.NullOutputStream
-import java.io.*
+import kotlinx.coroutines.*
 import java.nio.file.FileVisitResult
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.SimpleFileVisitor
 import java.nio.file.attribute.BasicFileAttributes
+import kotlinx.coroutines.channels.Channel
 
+private data class FileBuildInfo(val filepath: Path, val classpath: Classpath, val javaVersion: String?)
 
-class FileCollector(private val projectId: String, private val args: Arguments, private val emitter: Emitter, private val indexers: MutableMap<Path, DocumentIndexer>) : SimpleFileVisitor<Path>() {
-    lateinit var classpath: Classpath
-    var javaSourceVersion: String? = null
-    private val javacOutStream by lazy { createJavacOutWriter(args) }
+/**
+ * Builds a map of Java filepaths to DocumentIndexers,
+ * with build info derived from `buildToolInterface`
+ */
+fun buildIndexerMap(
+    buildToolInterface: BuildToolInterface,
+    emitter: Emitter,
+    verbose: Boolean,
+    javacDiagListener: CountingDiagnosticListener,
+): Map<Path, DocumentIndexer> {
+    val indexers = mutableMapOf<Path, DocumentIndexer>()
+    
+    val classpaths = buildToolInterface.getClasspaths()
+    val sourceVersions = buildToolInterface.javaSourceVersions()
 
-    override fun preVisitDirectory(dir: Path, attrs: BasicFileAttributes): FileVisitResult {
-        return if (attrs.isSymbolicLink) {
-            FileVisitResult.SKIP_SUBTREE
-        } else FileVisitResult.CONTINUE
+    val fileBuildInfo = Channel<FileBuildInfo>()
+
+    runBlocking {
+        launchFileTreeWalkers(
+            buildToolInterface, fileBuildInfo, classpaths, sourceVersions,
+        ).invokeOnCompletion(fileBuildInfo::close)
+
+        launch {
+            for(info in fileBuildInfo) {
+                indexers[info.filepath] = DocumentIndexer(
+                    CanonicalPath(info.filepath), info.classpath, info.javaVersion!!,
+                    indexers, emitter, javacDiagListener, verbose,
+                )
+            }
+        }.join()
     }
 
-    // TODO(nsc) uncouple FileCollector + DocumentIndexer
+    return indexers
+}
+
+private fun CoroutineScope.launchFileTreeWalkers(
+    buildToolInterface: BuildToolInterface,
+    fileBuildInfoChannel: Channel<FileBuildInfo>,
+    classpaths: List<Classpath>,
+    sourceVersions: List<String?>,
+) =  launch(Dispatchers.IO) {
+    buildToolInterface.getSourceDirectories().forEachIndexed { i, paths ->
+        launch {
+            val collector = AsyncFileCollector(fileBuildInfoChannel, classpaths[i], sourceVersions[i], this)
+            paths.forEach {
+                if(Files.notExists(it)) return@forEach
+                Files.walkFileTree(it, collector)
+            }
+        }
+    }
+}
+
+/**
+ * A weakly asynchronous file-tree visitor. Sends discovered and valid
+ * files+build info into the provided channel asynchronously
+ */
+private class AsyncFileCollector(
+    private val fileInfoChannel: Channel<FileBuildInfo>,
+    private val classpath: Classpath,
+    private val sourceVersion: String?,
+    private val coroutineScope: CoroutineScope,
+) : SimpleFileVisitor<Path>() {
+
+    override fun preVisitDirectory(dir: Path, attrs: BasicFileAttributes): FileVisitResult =
+        if (attrs.isSymbolicLink) FileVisitResult.SKIP_SUBTREE
+        else FileVisitResult.CONTINUE
+
     override fun visitFile(file: Path, _attrs: BasicFileAttributes): FileVisitResult {
         if (isJavaFile(file)) {
-            indexers[file] = DocumentIndexer(
-                args.verbose,
-                file,
-                projectId,
-                emitter,
-                indexers,
-                classpath,
-                javaSourceVersion!!,
-                javacOutStream
-            )
+            coroutineScope.launch {
+                fileInfoChannel.send(FileBuildInfo(file, classpath, sourceVersion))
+            }
         }
         return FileVisitResult.CONTINUE
     }
 
     companion object {
-        fun createJavacOutWriter(args: Arguments): Writer? {
-            return when(args.javacOutWriter) {
-                "stdout" -> null // getTask interprets this as stdout
-                "stderr" -> System.err.writer()
-                //"none" -> OutputStreamWriter.nullWriter() CANT USE IN JAVA 8 :(
-                "none" -> object : Writer() {
-                    override fun close() {}
-                    override fun flush() {}
-                    override fun write(p0: CharArray, p1: Int, p2: Int) {}
-                }
-                else -> PrintStream(File(args.javacOutWriter)).writer()
-            }
-        }
-
         fun isJavaFile(file: Path): Boolean {
             val name = file.fileName.toString()
             // We hide module-info.java from javac, because when javac sees module-info.java
             // it goes into "module mode" and starts looking for classes on the module class path.
-            // This becomes evident when javac starts recompiling *way too much* on each task,
-            // because it doesn't realize there are already up-to-date .class files.
             // The better solution would be for java-language server to detect the presence of module-info.java,
             // and go into its own "module mode" where it infers a module source path and a module class path.
             return name.endsWith(".java") && !Files.isDirectory(file) && name != "module-info.java"

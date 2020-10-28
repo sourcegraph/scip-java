@@ -1,9 +1,5 @@
 package lsifjava
 
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
-
 class ProjectIndexer(private val arguments: Arguments, private val emitter: Emitter) {
     var numFiles = 0
     var numDefinitions = 0
@@ -13,7 +9,7 @@ class ProjectIndexer(private val arguments: Arguments, private val emitter: Emit
         emitter.emitVertex("metaData", mapOf(
             "version" to "0.4.0",
             "positionEncoding" to "utf-16",
-            "projectRoot" to String.format("file://%s", Paths.get(arguments.projectRoot).toFile().canonicalPath),
+            "projectRoot" to "file://${arguments.projectRoot}",
             "toolInfo" to mapOf("name" to "lsif-java", "version" to "0.7.0")
         ))
 
@@ -21,26 +17,17 @@ class ProjectIndexer(private val arguments: Arguments, private val emitter: Emit
             "kind" to "java"
         ))
 
-        val indexers = HashMap<Path, DocumentIndexer>()
-        val collector = FileCollector(projectId, arguments, emitter, indexers)
-        GradleInterface(arguments.projectRoot).use { gradleInterface ->
-            val classpaths = gradleInterface.getClasspaths()
-            val javaSourceVersions = gradleInterface.javaSourceVersions()
-            gradleInterface.getSourceDirectories().forEachIndexed { i, paths ->
-                collector.classpath = classpaths[i]
-                collector.javaSourceVersion = javaSourceVersions[i]
-                paths.forEach {
-                    if (Files.notExists(it)) return@forEach
-                    Files.walkFileTree(it, collector)
-                }
+        createJavacDiagnosticListener(arguments.javacOutWriter).use { javacDiagListener ->
+            val indexers = GradleInterface(arguments.projectRoot).use {
+                buildIndexerMap(it, emitter, arguments.verbose, javacDiagListener)
             }
-        }
 
-        val fileManager = SourceFileManager(indexers.keys)
+            val fileManager = SourceFileManager(indexers.keys)
 
         for (indexer in indexers.values) {
             indexer.preIndex(fileManager)
         }
+
         for (indexer in indexers.values) {
             indexer.index()
         }
@@ -56,5 +43,3 @@ class ProjectIndexer(private val arguments: Arguments, private val emitter: Emit
         }
     }
 }
-
-
