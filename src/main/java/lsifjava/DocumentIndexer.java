@@ -16,6 +16,7 @@ import spoon.reflect.visitor.CtScanner;
 import java.lang.annotation.Annotation;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class DocumentIndexer {
     private String projectRoot;
@@ -380,10 +381,15 @@ public class DocumentIndexer {
             );
         }
 
+        private final Pattern projectRootPattern = Pattern.compile("^" + Pattern.quote(projectRoot));
+
         private void emitUse(Range use, Range def, String defPath) {
             DocumentIndexer indexer = indexers.get(defPath);
 
-            String link = pathname.replaceFirst("^"+projectRoot, ".") + ":" + humanRange(use) + " -> " + defPath.replaceFirst("^"+projectRoot, ".") + ":" + humanRange(def);
+            String link = projectRootPattern.matcher(pathname).replaceFirst(".") +
+                    ":" + humanRange(use) +
+                    " -> " + projectRootPattern.matcher(defPath).replaceFirst(".") +
+                    ":" + humanRange(def);
                 
             if(verbose)
                 System.out.println("Linking use to definition: " + link);
