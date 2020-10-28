@@ -8,11 +8,8 @@ import com.sun.tools.javac.main.JavaCompiler
 import com.sun.tools.javac.util.Context
 import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.Range
-import java.io.Writer
 import java.nio.file.Path
 import java.util.*
-import javax.tools.Diagnostic
-import javax.tools.DiagnosticListener
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
@@ -26,25 +23,24 @@ class DocumentIndexer(
     private val verbose: Boolean,
 ) {
     companion object {
-        private val systemProvider = JavacTool.create()
+        private val systemProvider by lazy { JavacTool.create() }
     }
     
     data class DefinitionMeta(val rangeId: String, val resultSetId: String) {
         var definitionResultId: String? = null
-        val referenceRangeIds = HashMap<String, MutableSet<String>>()
+        val referenceRangeIds: MutableMap<String, MutableSet<String>> = HashMap()
     }
 
-    private lateinit var documentId: String
-    private var indexed = false
+    private var documentId: String
     private val rangeIds: MutableSet<String> = HashSet()
     private val definitions: MutableMap<Range, DefinitionMeta> = HashMap()
-    private lateinit var fileManager: SourceFileManager
-    
+
+    val numDefinitions get() = definitions.size
+
+    lateinit var fileManager: SourceFileManager
+
     private val referencesBacklog: LinkedList<() -> Unit> = LinkedList()
-    
-    var javacDiagnostics = LinkedList<Diagnostic<out Any>>()
-        private set
-    private val diagnosticsListener = DiagnosticListener<Any> { javacDiagnostics.add(it) }
+
 
     init {
         val args = mapOf(
@@ -54,19 +50,14 @@ class DocumentIndexer(
         documentId = emitter.emitVertex("document", args)
     }
 
-    @Synchronized
-    fun index() {
-        if (indexed) return
-        indexed = true
-        
+    // lazy block ensures synchronized calling and only one invocation
+    fun index() = lazy {
         val (task, compUnit) = analyzeFile()
         IndexingVisitor(task, compUnit, this, indexers).scan(compUnit, null)
         referencesBacklog.forEach { it() }
 
-        //javacDiagnostics.forEach(::println)
-
-        println("finished analyzing and visiting $path")
-    }
+        println("finished analyzing and visiting $filepath")
+    }.value // must reference this to trigger the lazy load
 
     private fun analyzeFile(): Pair<JavacTask, CompilationUnitTree> {
         val context = SimpleContext()
@@ -101,7 +92,7 @@ class DocumentIndexer(
         }
     }
 
-    fun postIndex() {
+    fun postIndex(projectId: String) {
         for (meta in definitions.values)
             linkUses(meta, documentId)
         emitter.emitEdge("contains", mapOf("outV" to projectId, "inVs" to arrayOf(documentId)))

@@ -16,7 +16,11 @@ import javax.tools.StandardLocation
 class SourceFileManager internal constructor(private val paths: Set<Path>): JavacFileManager(Context(), false, Charset.defaultCharset()) {
 
     override fun list(
-        location: JavaFileManager.Location, packageName: String, kinds: Set<JavaFileObject.Kind>, recurse: Boolean): Iterable<JavaFileObject> {
+        location: JavaFileManager.Location,
+        packageName: String,
+        kinds: Set<JavaFileObject.Kind>,
+        recurse: Boolean
+    ): Iterable<JavaFileObject> {
         return if (location === StandardLocation.SOURCE_PATH) {
             val sourceFileObjectStream = list(packageName)
             Iterable { sourceFileObjectStream.iterator() }
@@ -26,9 +30,9 @@ class SourceFileManager internal constructor(private val paths: Set<Path>): Java
     }
 
     private fun list(packageName: String): Stream<JavaFileObject> {
-        return paths.stream().map { path: Path? ->
+        return paths.stream().map { path: Path ->
             try {
-                return@map SourceFileObject(path!!)
+                return@map SourceFileObject(path)
             } catch (e: IOException) {
                 return@map null
             }
@@ -52,9 +56,7 @@ class SourceFileManager internal constructor(private val paths: Set<Path>): Java
         if(it == -1) fileName else fileName.substring(0, it)
     }
 
-    override fun hasLocation(location: JavaFileManager.Location): Boolean {
-        return location === StandardLocation.SOURCE_PATH || super.hasLocation(location)
-    }
+    override fun hasLocation(location: JavaFileManager.Location) = location === StandardLocation.SOURCE_PATH || super.hasLocation(location)
 
     override fun getJavaFileForInput(location: JavaFileManager.Location, className: String, kind: JavaFileObject.Kind): JavaFileObject? {
         // FileStore shadows disk

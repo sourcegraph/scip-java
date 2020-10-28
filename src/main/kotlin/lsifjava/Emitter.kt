@@ -9,6 +9,8 @@ class Emitter(private val writer: PrintWriter) {
 
     private val gson: Gson = Gson()
 
+    fun numElements() = nextId
+
     fun emitVertex(labelName: String, args: Map<String, Any>) = emit("vertex", labelName, args)
 
     fun emitEdge(labelName: String, args: Map<String, Any>) = emit("edge", labelName, args)
@@ -27,6 +29,4 @@ class Emitter(private val writer: PrintWriter) {
 
         return id
     }
-
-    fun numElements() = nextId
 }

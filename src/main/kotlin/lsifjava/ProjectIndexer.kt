@@ -24,22 +24,25 @@ class ProjectIndexer(private val arguments: Arguments, private val emitter: Emit
 
             val fileManager = SourceFileManager(indexers.keys)
 
-        for (indexer in indexers.values) {
-            indexer.preIndex(fileManager)
-        }
+            // can we do this earlier???
+            for (indexer in indexers.values) {
+                indexer.fileManager = fileManager
+            }
 
-        for (indexer in indexers.values) {
-            indexer.index()
-        }
+            for (indexer in indexers.values) {
+                indexer.index()
+            }
 
-        for (indexer in indexers.values) {
-            indexer.postIndex()
-        }
+            for (indexer in indexers.values) {
+                indexer.postIndex(projectId)
+            }
 
-        for (indexer in indexers.values) {
-            numFiles++
-            numDefinitions += indexer.numDefinitions()
-            numJavacErrors += indexer.javacDiagnostics.size
+            for (indexer in indexers.values) {
+                numFiles++
+                numDefinitions += indexer.numDefinitions
+            }
+
+            numJavacErrors = javacDiagListener.count
         }
     }
 }
