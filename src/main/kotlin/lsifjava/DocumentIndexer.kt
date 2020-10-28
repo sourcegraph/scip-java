@@ -41,7 +41,6 @@ class DocumentIndexer(
 
     private val referencesBacklog: LinkedList<() -> Unit> = LinkedList()
 
-
     init {
         val args = mapOf(
             "languageId" to "java",

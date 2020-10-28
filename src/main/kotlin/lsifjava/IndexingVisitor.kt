@@ -19,10 +19,10 @@ import javax.lang.model.element.ElementKind
 data class ReferenceData(val useRange: Range, val refRange: Range, val defPath: Path)
 
 class IndexingVisitor(
-        task: JavacTask,
-        private val compUnit: CompilationUnitTree,
-        private val indexer: DocumentIndexer,
-        private val indexers: Map<Path, DocumentIndexer>
+    task: JavacTask,
+    private val compUnit: CompilationUnitTree,
+    private val indexer: DocumentIndexer,
+    private val indexers: Map<Path, DocumentIndexer>
 ): TreePathScanner<Unit?, Unit?>() {
     private val trees: Trees = Trees.instance(task)
     private val docs: DocTrees = DocTrees.instance(task)
@@ -41,8 +41,14 @@ class IndexingVisitor(
     override fun visitClass(node: ClassTree, p: Unit?): Unit? {
         val packagePrefix = compUnit.packageName?.toString()?.plus(".") ?: ""
 
-        // TODO(nsc): records
-        val classOrEnum = if ((node as JCClassDecl).sym.flags() and Flags.ENUM.toLong() != 0L) "enum " else "class "
+        // TODO(nsc): snazzy records hover
+        val classOrEnum: String = when {
+            (node as JCClassDecl).sym.isEnum -> "enum "
+            node.sym.isRecord -> "record "
+            node.sym.isInterface -> "" // for some reason, 'interface ' is part of the modifiers
+            node.sym.isAnnotationType -> ""
+            else -> "class "
+        }
 
         val range = findLocation(currentPath, node.simpleName.toString())?.range
             ?: return super.visitClass(node, p)
