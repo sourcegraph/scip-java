@@ -29,10 +29,11 @@ private fun createWriter(args: Arguments): PrintWriter {
 
 private fun displayStats(indexer: ProjectIndexer, emitter: Emitter, start: Long) {
     System.out.printf(
-        "%d file(s), %d def(s), %d element(s)\n",
+        "%d file(s), %d def(s), %d LSIF element(s), %d total javac error(s)\n",
         indexer.numFiles,
         indexer.numDefinitions,
-        emitter.numElements()
+        emitter.numElements(),
+        indexer.numJavacErrors
     )
     System.out.printf("Processed in %.0fms", (System.nanoTime() - start) / 1e6)
 }

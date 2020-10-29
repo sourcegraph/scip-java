@@ -8,80 +8,63 @@ import com.sun.tools.javac.main.JavaCompiler
 import com.sun.tools.javac.util.Context
 import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.Range
-import java.io.Writer
 import java.nio.file.Path
 import java.util.*
-import javax.tools.Diagnostic
-import javax.tools.DiagnosticListener
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
 class DocumentIndexer(
-    private val verbose: Boolean,
-    private val path: Path,
-    private val projectId: String,
-    private val emitter: Emitter,
-    private val indexers: Map<Path, DocumentIndexer>,
+    private val filepath: CanonicalPath,
     private val classpath: Classpath,
     private val javaSourceVersion: String,
-    private val javacOutput: Writer?
+    private val indexers: Map<Path, DocumentIndexer>,
+    private val emitter: Emitter,
+    private val diagnosticListener: CountingDiagnosticListener,
+    private val verbose: Boolean,
 ) {
     companion object {
-        private val systemProvider = JavacTool.create()
+        private val systemProvider by lazy { JavacTool.create() }
     }
     
     data class DefinitionMeta(val rangeId: String, val resultSetId: String) {
         var definitionResultId: String? = null
-        val referenceRangeIds = HashMap<String, MutableSet<String>>()
+        val referenceRangeIds: MutableMap<String, MutableSet<String>> = HashMap()
     }
 
-    private lateinit var documentId: String
-    private var indexed = false
+    private var documentId: String
     private val rangeIds: MutableSet<String> = HashSet()
     private val definitions: MutableMap<Range, DefinitionMeta> = HashMap()
-    private lateinit var fileManager: SourceFileManager
-    
+
+    val numDefinitions get() = definitions.size
+
+    lateinit var fileManager: SourceFileManager
+
     private val referencesBacklog: LinkedList<() -> Unit> = LinkedList()
-    
-    var javacDiagnostics = LinkedList<Diagnostic<out Any>>()
-        private set
-    private val diagnosticsListener = DiagnosticListener<Any> { javacDiagnostics.add(it) }
 
-    fun numDefinitions(): Int {
-        return definitions.size
-    }
-
-    fun preIndex(fileManager: SourceFileManager) {
-        this.fileManager = fileManager
+    init {
         val args = mapOf(
             "languageId" to "java",
-            "uri" to String.format("file://%s", path.toAbsolutePath().toString())
+            "uri" to "file://$filepath"
         )
         documentId = emitter.emitVertex("document", args)
     }
 
-    @Synchronized
-    fun index() {
-        if (indexed) return
-        indexed = true
-        
+    // lazy block ensures synchronized calling and only one invocation
+    fun index() = lazy {
         val (task, compUnit) = analyzeFile()
         IndexingVisitor(task, compUnit, this, indexers).scan(compUnit, null)
         referencesBacklog.forEach { it() }
 
-        //javacDiagnostics.forEach(::println)
-
-        println("finished analyzing and visiting $path")
-    }
+        println("finished analyzing and visiting $filepath")
+    }.value // must reference this to trigger the lazy load
 
     private fun analyzeFile(): Pair<JavacTask, CompilationUnitTree> {
         val context = SimpleContext()
 
-        // TODO(nsc) diagnosticsListener not being null seems to interfere with javacOutput
         val task = systemProvider.getTask(
-            javacOutput, fileManager, diagnosticsListener,
-            listOf("-source", "8", "-proc:none", "-nowarn", "-source", javaSourceVersion, "-classpath", classpath.toString()),
-            listOf(), listOf(SourceFileObject(path)), context
+            NoopWriter, fileManager, diagnosticListener,
+            listOf("-source", "8", "-proc:none", "-nowarn", "-source", javaSourceVersion, "-classpath", classpath.toString()/* , "--enable-preview" */),
+            listOf(), listOf(SourceFileObject(filepath.path)), context
         )
         val compUnit = task.parse().iterator().next()
         task.analyze()
@@ -108,7 +91,7 @@ class DocumentIndexer(
         }
     }
 
-    fun postIndex() {
+    fun postIndex(projectId: String) {
         for (meta in definitions.values)
             linkUses(meta, documentId)
         emitter.emitEdge("contains", mapOf("outV" to projectId, "inVs" to arrayOf(documentId)))
@@ -135,7 +118,7 @@ class DocumentIndexer(
     }
 
     private fun emitDefinition(range: Range, hover: String) {
-        if (verbose) println("DEF " + path.toString() + ":" + humanRange(range))
+        if (verbose) println("DEF ${filepath}:${humanRange(range)}")
         val hoverId = emitter.emitVertex("hoverResult", mapOf(
             "result" to mapOf(
                 "contents" to mapOf(
@@ -159,12 +142,12 @@ class DocumentIndexer(
 
     internal fun emitUse(use: Range, def: Range, defPath: Path) {
         referencesBacklog.add {
-            val indexer = indexers[defPath]
-            val link = path.toString() + ":" + humanRange(use) + " -> " + defPath.toString() + ":" + humanRange(def)
+            val indexer = indexers[defPath] ?: error("expected indexer for $defPath")
+            val link = "${filepath}:${humanRange(use)} -> ${defPath}:${humanRange(def)}"
 
             if (verbose) println("Linking use to definition: $link")
 
-            val meta = indexer!!.definitions[def]
+            val meta = indexer.definitions[def]
             if (meta == null) {
                 if (verbose) println("WARNING missing definition for: $link")
                 return@add
@@ -192,18 +175,17 @@ class DocumentIndexer(
         }
     }
     
-    private fun mkDoc(signature: String, docComment: String?): String {
-        return "```java\n$signature\n```" +
-            if (docComment == null || docComment == "") "" else
-                "\n---\n${docComment.trim()}"
-    }
+    private fun mkDoc(signature: String, docComment: String?) = 
+        "```java\n$signature\n```" +
+        if (docComment == null || docComment == "") "" 
+        else "\n---\n${docComment.trim()}"
 
     /**
      * Returns the stringified range with the lines+1 to make clicking the links in your editor's terminal
      * direct to the correct line
      */
     private fun humanRange(r: Range): String {
-        return (r.start.line+1).toString() + ":" + (r.start.character+1)+ "-" + (r.end.line+1) + ":" + (r.end.character+1)
+        return "${r.start.line+1}:${r.start.character+1}-${r.end.line+1}:${r.end.character+1}"
     }
 
     private fun createRange(range: Range): Map<String, Any> {

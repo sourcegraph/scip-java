@@ -14,14 +14,15 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.regex.Pattern
 import javax.lang.model.element.Element
+import javax.lang.model.element.ElementKind
 
 data class ReferenceData(val useRange: Range, val refRange: Range, val defPath: Path)
 
 class IndexingVisitor(
-        task: JavacTask,
-        private val compUnit: CompilationUnitTree,
-        private val indexer: DocumentIndexer,
-        private val indexers: Map<Path, DocumentIndexer>
+    task: JavacTask,
+    private val compUnit: CompilationUnitTree,
+    private val indexer: DocumentIndexer,
+    private val indexers: Map<Path, DocumentIndexer>
 ): TreePathScanner<Unit?, Unit?>() {
     private val trees: Trees = Trees.instance(task)
     private val docs: DocTrees = DocTrees.instance(task)
@@ -29,7 +30,8 @@ class IndexingVisitor(
     // TODO(nsc) handle 'var'
     override fun visitVariable(node: VariableTree, p: Unit?): Unit? {
         // emit var definition
-        val defRange = findLocation(currentPath, node.name.toString())?.range ?: return super.visitVariable(node, p)
+        val defRange = findLocation(currentPath, node.name.toString())?.range
+            ?: return super.visitVariable(node, p)
 
         indexer.emitDefinition(defRange, node.toString(), docs.getDocComment(currentPath))
         
@@ -39,10 +41,17 @@ class IndexingVisitor(
     override fun visitClass(node: ClassTree, p: Unit?): Unit? {
         val packagePrefix = compUnit.packageName?.toString()?.plus(".") ?: ""
 
-        // TODO(nsc): records
-        val classOrEnum = if ((node as JCClassDecl).sym.flags() and Flags.ENUM.toLong() != 0L) "enum " else "class "
+        // TODO(nsc): snazzy records hover
+        val classOrEnum: String = when {
+            (node as JCClassDecl).sym.isEnum -> "enum "
+            node.sym.isRecord -> "record "
+            node.sym.isInterface -> "" // for some reason, 'interface ' is part of the modifiers
+            node.sym.isAnnotationType -> ""
+            else -> "class "
+        }
 
-        val range = findLocation(currentPath, node.simpleName.toString())?.range ?: return super.visitClass(node, p)
+        val range = findLocation(currentPath, node.simpleName.toString())?.range
+            ?: return super.visitClass(node, p)
 
         indexer.emitDefinition(
             range,
@@ -62,7 +71,8 @@ class IndexingVisitor(
         
         val returnType = node.returnType?.toString()?.plus(" ") ?: ""
         
-        val range = findLocation(currentPath, methodName, node.pos)?.range ?: return super.visitMethod(node, p)
+        val range = findLocation(currentPath, methodName, node.pos)?.range
+            ?: return super.visitMethod(node, p)
 
         indexer.emitDefinition(
             range,
@@ -78,6 +88,7 @@ class IndexingVisitor(
 
     override fun visitNewClass(node: NewClassTree, p: Unit?): Unit? {
         (node as JCNewClass).constructor ?: return super.visitNewClass(node, p)
+
         // ignore auto-genned constructors (for now)
         if(node.constructor.flags() and Flags.GENERATEDCONSTR != 0L) return null
 
@@ -103,15 +114,17 @@ class IndexingVisitor(
         val identPath = TreePath(currentPath, node.identifier)
         val identElement = node.constructor
         
-        val defContainer = getTopLevelClass(identElement) as Symbol.ClassSymbol? ?: return super.visitNewClass(node, p)
-        val (useRange, refRange, defPath) = findReference(identElement, identName, defContainer, path = identPath) ?: return super.visitNewClass(node, p)
+        val defContainer = getTopLevelClass(identElement) as Symbol.ClassSymbol?
+            ?: return super.visitNewClass(node, p)
+        val (useRange, refRange, defPath) = findReference(identElement, identName, defContainer, path = identPath)
+            ?: return super.visitNewClass(node, p)
 
         indexer.emitUse(useRange, refRange, defPath)
 
         return super.visitNewClass(node, p)
     }
 
-    override fun visitMethodInvocation(node: MethodInvocationTree?, p: Unit?): Unit? {
+    override fun visitMethodInvocation(node: MethodInvocationTree, p: Unit?): Unit? {
         val symbol = when((node as JCMethodInvocation).meth) {
             is JCFieldAccess -> (node.meth as JCFieldAccess).sym
             is JCIdent -> (node.meth as JCIdent).sym
@@ -126,12 +139,16 @@ class IndexingVisitor(
         val name = symbol?.name?.toString()?.let {
             if(it == "<init>") "this" else it
         } ?: return super.visitMethodInvocation(node, p)
+
         val methodPath = TreePath(currentPath, node.meth)
-        val defContainer = getTopLevelClass(symbol) as Symbol.ClassSymbol? ?: return super.visitMethodInvocation(node, p)
+        val defContainer = getTopLevelClass(symbol) as Symbol.ClassSymbol?
+            ?: return super.visitMethodInvocation(node, p)
 
         // this gives us the start pos of the name of the method, so override defStartPos
-        val overrideStartOffset = (trees.getPath(symbol)?.leaf as JCMethodDecl?)?.pos ?: return super.visitMethodInvocation(node, p)
-        val (useRange, refRange, defPath) = findReference(symbol, name, defContainer, path = methodPath, defStartPos = overrideStartOffset) ?: return super.visitMethodInvocation(node, p)
+        val overrideStartOffset = (trees.getPath(symbol)?.leaf as JCMethodDecl?)?.pos
+            ?: return super.visitMethodInvocation(node, p)
+        val (useRange, refRange, defPath) = findReference(symbol, name, defContainer, path = methodPath, defStartPos = overrideStartOffset)
+            ?: return super.visitMethodInvocation(node, p)
 
         indexer.emitUse(useRange, refRange, defPath)
 
@@ -139,24 +156,29 @@ class IndexingVisitor(
     }
 
     // does not match `var` or constructor calls
-    override fun visitIdentifier(node: IdentifierTree?, p: Unit?): Unit? {
-        val symbol = (node as JCIdent).sym ?: return super.visitIdentifier(node, p)
+    override fun visitIdentifier(node: IdentifierTree, p: Unit?): Unit? {
+        val symbol = (node as JCIdent).sym
+            ?: return super.visitIdentifier(node, p)
         
         if(symbol is Symbol.PackageSymbol) return super.visitIdentifier(node, p)
 
         val name = symbol.name.toString()
         if(name == "<init>") return super.visitIdentifier(node, p) // handled by visitMethodInvocation
-        val defContainer = getTopLevelClass(symbol) as Symbol.ClassSymbol? ?: return super.visitIdentifier(node, p)
 
-        val (useRange, refRange, defPath) = findReference(symbol, name, defContainer) ?: return super.visitIdentifier(node, p)
+        val defContainer = getTopLevelClass(symbol) as Symbol.ClassSymbol?
+            ?: return super.visitIdentifier(node, p)
+
+        val (useRange, refRange, defPath) = findReference(symbol, name, defContainer)
+            ?: return super.visitIdentifier(node, p)
         
         indexer.emitUse(useRange, refRange, defPath)
 
         return super.visitIdentifier(node, p)
     }
 
-    override fun visitTypeParameter(node: TypeParameterTree?, p: Unit?): Unit? {
-        val range = findLocation(currentPath, node!!.name.toString(), (node as JCTypeParameter).pos)?.range ?: return super.visitTypeParameter(node, p)
+    override fun visitTypeParameter(node: TypeParameterTree, p: Unit?): Unit? {
+        val range = findLocation(currentPath, node.name.toString(), (node as JCTypeParameter).pos)?.range
+            ?: return super.visitTypeParameter(node, p)
 
         indexer.emitDefinition(range, "type-parameter $node")
 
@@ -164,21 +186,24 @@ class IndexingVisitor(
     }
     
     // function references eg test::myfunc or banana::new
-    override fun visitMemberReference(node: MemberReferenceTree?, p: Unit?): Unit? {
-        val symbol = (node as JCMemberReference).sym ?: return super.visitMemberReference(node, p)
+    override fun visitMemberReference(node: MemberReferenceTree, p: Unit?): Unit? {
+        val symbol = (node as JCMemberReference).sym
+            ?: return super.visitMemberReference(node, p)
         
         val name = symbol.name.toString()
         
-        val defContainer = getTopLevelClass(symbol) as Symbol.ClassSymbol? ?: return super.visitMemberReference(node, p)
+        val defContainer = getTopLevelClass(symbol) as Symbol.ClassSymbol?
+            ?: return super.visitMemberReference(node, p)
         
-        val (useRange, refRange, defPath) = findReference(symbol, name, defContainer) ?: return super.visitMemberReference(node, p)
+        val (useRange, refRange, defPath) = findReference(symbol, name, defContainer)
+            ?: return super.visitMemberReference(node, p)
 
         indexer.emitUse(useRange, refRange, defPath)
         
         return super.visitMemberReference(node, p)
     }
 
-    override fun visitMemberSelect(node: MemberSelectTree?, p: Unit?): Unit? {
+    override fun visitMemberSelect(node: MemberSelectTree, p: Unit?): Unit? {
         if((node as JCFieldAccess).sym == null) return super.visitMemberSelect(node, p)
 
         val symbol = when(node.sym) {
@@ -189,10 +214,12 @@ class IndexingVisitor(
 
         val name = symbol.name.toString()
         
-        val defContainer = getTopLevelClass(symbol) as Symbol.ClassSymbol? ?: return super.visitMemberSelect(node, p)
+        val defContainer = getTopLevelClass(symbol) as Symbol.ClassSymbol?
+            ?: return super.visitMemberSelect(node, p)
 
         // need to narrow down start pos of the field access here, so override refStartPos
-        val (useRange, refRange, defPath) = findReference(symbol, name, defContainer, refStartPos = node.pos) ?: return super.visitMemberSelect(node, p)
+        val (useRange, refRange, defPath) = findReference(symbol, name, defContainer, refStartPos = node.pos)
+            ?: return super.visitMemberSelect(node, p)
 
         indexer.emitUse(useRange, refRange, defPath)
         
@@ -207,7 +234,14 @@ class IndexingVisitor(
      * @param refStartPos document offset to be provided if a node supplies a more accurate start position for a reference/use search
      * @param defStartPos document offset to be provided if a node supplies a more accurate start position for a definition search
      */
-    private fun findReference(element: Element, symbolName: String, container: Symbol.ClassSymbol, path: TreePath = currentPath, refStartPos: Int? = null, defStartPos: Int? = null): ReferenceData? {
+    private fun findReference(
+        element: Element,
+        symbolName: String,
+        container: Symbol.ClassSymbol,
+        path: TreePath = currentPath,
+        refStartPos: Int? = null,
+        defStartPos: Int? = null,
+    ): ReferenceData? {
         val sourceFilePath = container.sourcefile ?: return null
         val defPath = Paths.get(sourceFilePath.name)
         if(sourceFilePath.name != compUnit.sourceFile.name)
@@ -268,4 +302,19 @@ class IndexingVisitor(
             matcher.start()
         } else -1
     }
+
+    private fun getTopLevelClass(element: Element?): Element? {
+        var element = element
+        var highestClass: Element? = null
+        while (element != null) {
+            val kind = element.kind
+            if (isTopLevel(kind)) {
+                highestClass = element
+            }
+            element = element.enclosingElement
+        }
+        return highestClass
+    }
+
+    private fun isTopLevel(kind: ElementKind) = kind.isClass || kind.isInterface
 }
