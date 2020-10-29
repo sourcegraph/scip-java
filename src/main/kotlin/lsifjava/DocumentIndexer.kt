@@ -10,6 +10,7 @@ import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.Range
 import java.nio.file.Path
 import java.util.*
+import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
@@ -49,14 +50,16 @@ class DocumentIndexer(
         documentId = emitter.emitVertex("document", args)
     }
 
-    // lazy block ensures synchronized calling and only one invocation
-    fun index() = lazy {
+    private var indexed = AtomicBoolean(false)
+
+    fun index() {
+        if(!indexed.compareAndSet(false, true)) return
         val (task, compUnit) = analyzeFile()
         IndexingVisitor(task, compUnit, this, indexers).scan(compUnit, null)
         referencesBacklog.forEach { it() }
 
         println("finished analyzing and visiting $filepath")
-    }.value // must reference this to trigger the lazy load
+    }
 
     private fun analyzeFile(): Pair<JavacTask, CompilationUnitTree> {
         val context = SimpleContext()
