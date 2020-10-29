@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-./gradlew -t run --args="-projectRoot examples/small -out examples/small/dump.lsif"

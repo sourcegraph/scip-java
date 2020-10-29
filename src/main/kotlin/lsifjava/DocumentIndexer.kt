@@ -63,7 +63,7 @@ class DocumentIndexer(
 
         val task = systemProvider.getTask(
             NoopWriter, fileManager, diagnosticListener,
-            listOf("-source", "8", "-proc:none", "-nowarn", "-source", javaSourceVersion, "-classpath", classpath.toString()/* , "--enable-preview" */),
+            listOf("-proc:none", "-nowarn", "-source", javaSourceVersion, "-classpath", classpath.toString() , "--enable-preview" ),
             listOf(), listOf(SourceFileObject(filepath.path)), context
         )
         val compUnit = task.parse().iterator().next()
