@@ -38,10 +38,3 @@ sealed class CountingDiagnosticListener(private val out: Writer): DiagnosticList
 
     object NullWriter: CountingDiagnosticListener(NoopWriter)
 }
-
-// OutputStreamWriter.nullWriter() CANT USE IN JAVA 8 :(
-object NoopWriter: Writer() {
-    override fun close() = Unit
-    override fun flush() = Unit
-    override fun write(p0: CharArray, p1: Int, p2: Int) = Unit
-}

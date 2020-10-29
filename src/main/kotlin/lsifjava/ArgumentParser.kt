@@ -8,10 +8,6 @@ import kotlin.system.exitProcess
 const val VERSION = "0.1.0"
 const val PROTOCOL_VERSION = "0.4.0"
 
-inline class CanonicalPath(val path: Path) {
-    override fun toString(): String = path.toFile().canonicalPath
-}
-
 data class Arguments(
     val projectRoot: CanonicalPath,
     val outFile: String,
