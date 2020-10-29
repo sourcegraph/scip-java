@@ -2,6 +2,8 @@
 
 Visit https://lsif.dev/ to learn about LSIF.
 
+Please note, lsif-java is currently undergoing a large-scale rewrite. Progress can be followed at [tree/nsc/comsunsource](https://github.com/sourcegraph/lsif-java/tree/nsc/comsunsource).
+
 ## Installation
 
 - Java 1.8 or higher
