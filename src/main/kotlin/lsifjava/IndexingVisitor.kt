@@ -41,12 +41,15 @@ class IndexingVisitor(
     override fun visitClass(node: ClassTree, p: Unit?): Unit? {
         val packagePrefix = compUnit.packageName?.toString()?.plus(".") ?: ""
 
+        val symbol = (node as JCClassDecl?)?.sym ?: return super.visitClass(node, p)
+        
         // TODO(nsc): snazzy records hover
         val classOrEnum: String = when {
-            (node as JCClassDecl).sym.isEnum -> "enum "
-            node.sym.isRecord -> "record "
-            node.sym.isInterface -> "" // for some reason, 'interface ' is part of the modifiers
-            node.sym.isAnnotationType -> ""
+            symbol.isEnum -> "enum "
+            javaVersion >= 14 && symbol.isRecord -> "record "
+            symbol.isInterface -> "" // for some reason, 'interface ' is part of the modifiers
+            // TODO lowest version
+            javaVersion >= 14 && symbol.isAnnotationType -> ""
             else -> "class "
         }
 
@@ -187,10 +190,11 @@ class IndexingVisitor(
     
     // function references eg test::myfunc or banana::new
     override fun visitMemberReference(node: MemberReferenceTree, p: Unit?): Unit? {
-        val symbol = (node as JCMemberReference).sym
+        val symbol = (node as JCMemberReference?)?.sym
             ?: return super.visitMemberReference(node, p)
         
-        val name = symbol.name.toString()
+        val name = symbol.name?.toString()
+            ?: return super.visitMemberReference(node, p)
         
         val defContainer = getTopLevelClass(symbol) as Symbol.ClassSymbol?
             ?: return super.visitMemberReference(node, p)
