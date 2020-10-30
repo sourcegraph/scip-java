@@ -66,7 +66,7 @@ class DocumentIndexer(
 
         val task = systemProvider.getTask(
             NoopWriter, fileManager, diagnosticListener,
-            listOf("-proc:none", "-nowarn", "-source", javaSourceVersion, "-classpath", classpath.toString() , "--enable-preview" ),
+            listOf("-proc:none", "-nowarn", "-source", javaSourceVersion, "-classpath", classpath.toString() /*, "--enable-preview" */),
             listOf(), listOf(SourceFileObject(filepath.path)), context
         )
         val compUnit = task.parse().iterator().next()
@@ -77,14 +77,22 @@ class DocumentIndexer(
 
     internal class SimpleContext: Context() {
         init {
-            put(SimpleCompiler.getContextKey(), SimpleCompiler.factory)
+            put(SimpleCompiler.contextKey, SimpleCompiler.factory)
         }
     }
 
     internal class SimpleCompiler(context: Context?): JavaCompiler(context) {
         companion object {
-            var factory = Context.Factory<JavaCompiler> { context: Context? -> SimpleCompiler(context) }
-            fun getContextKey(): Context.Key<JavaCompiler> = compilerKey
+            val factory = Context.Factory<JavaCompiler> { context: Context? -> SimpleCompiler(context) }
+            val contextKey: Context.Key<JavaCompiler> by lazy {
+                if(javaVersion == 8) run {
+                    val field = SimpleCompiler::class.java.superclass.getDeclaredField("compilerKey")
+                    field.isAccessible = true
+                    val key: Context.Key<JavaCompiler> = Context.Key() // dummy value to be overwritten
+                    return@lazy field.get(key) as Context.Key<JavaCompiler>
+                }
+                compilerKey  
+            }
         }
 
         init {
