@@ -35,7 +35,7 @@ fun buildIndexerMap(
         launch {
             for(info in fileBuildInfo) {
                 indexers[info.filepath] = DocumentIndexer(
-                    CanonicalPath(info.filepath), info.classpath, info.javaVersion!!,
+                    CanonicalPath(info.filepath), info.classpath, info.javaVersion ?: "1.8",
                     indexers, emitter, javacDiagListener, verbose,
                 )
             }

@@ -2,6 +2,8 @@ package lsifjava
 
 import org.gradle.tooling.GradleConnector
 import org.gradle.tooling.model.eclipse.EclipseProject
+import org.gradle.tooling.model.idea.IdeaProject
+import org.gradle.tooling.model.idea.IdeaSingleEntryLibraryDependency
 import java.nio.file.Path
 import java.nio.file.Paths
 
@@ -11,7 +13,7 @@ interface BuildToolInterface {
     fun javaSourceVersions(): List<String?>
 }
 
-// TODO(nsc) exclusions? subprojects? lazy eval with tail rec?
+// TODO(nsc) exclusions? lazy eval?
 class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, BuildToolInterface {
     private val projectConnection by lazy {
         GradleConnector.newConnector()
@@ -22,21 +24,56 @@ class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, Bui
     private val eclipseModel by lazy {
         projectConnection.getModel(EclipseProject::class.java)
     }
-
-    override fun getClasspaths() = classpath(eclipseModel)
     
-    private fun classpath(project: EclipseProject): List<Classpath> {
+    private val ideaModel by lazy {
+        projectConnection.getModel(IdeaProject::class.java)
+    }
+
+    // is this even *correct*? Is the order the same?
+    override fun getClasspaths(): List<Classpath> {
+        val eclipseClasspaths = getClasspathsFromEclipse()
+        return ideaModel.children.mapIndexed { i, it ->
+            Classpath(it.dependencies
+                .filterIsInstance<IdeaSingleEntryLibraryDependency>()
+                .map { it.file.canonicalPath }
+                .toSet()
+            ) + eclipseClasspaths[i]
+        }
+    }
+
+
+    private fun getClasspathsFromEclipse() = eclipseClasspath(eclipseModel)
+
+    private fun eclipseClasspath(project: EclipseProject): List<Classpath> {
         val classPaths = arrayListOf<Classpath>()
-        classPaths += Classpath(project.classpath.map { it.file.canonicalPath })
-        project.children.forEach { classpath(it).toCollection(classPaths) }
+        classPaths += Classpath(project.classpath.map { it.file.canonicalPath }.toSet())
+        project.children.forEach { eclipseClasspath(it).toCollection(classPaths) }
         return classPaths
     }
 
-    override fun getSourceDirectories() = sourceDirectories(eclipseModel)
+    override fun getSourceDirectories(): List<List<Path>> {
+        return ideaModel.children.flatMap { module ->
+            module.contentRoots.map { root ->
+                root.sourceDirectories.map { Paths.get(it.directory.canonicalPath) } +
+                root.testDirectories.map { Paths.get(it.directory.canonicalPath) } +
+                arrayListOf<Path>(
+                    Paths.get(module.gradleProject.projectDirectory.path, "src/main"),
+                    Paths.get(module.gradleProject.projectDirectory.path, "src/test")
+                )
+            }
+        }
+    }
+
+    //override fun getSourceDirectories() = sourceDirectories(eclipseModel)
 
     private fun sourceDirectories(project: EclipseProject): List<List<Path>> {
         val sourceDirs = arrayListOf<List<Path>>()
-        sourceDirs += project.sourceDirectories.map { Paths.get(project.projectDirectory.path, it.path) }
+        sourceDirs +=
+            arrayListOf<Path>(
+                Paths.get(project.projectDirectory.path, "src/main"),
+                Paths.get(project.projectDirectory.path, "src/test")
+            ) +
+            project.sourceDirectories.map { Paths.get(project.projectDirectory.path, it.path) }
         project.children.forEach { sourceDirectories(it).toCollection(sourceDirs) }
         return sourceDirs
     }
@@ -54,6 +91,10 @@ class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, Bui
     override fun close() = projectConnection.close()
 }
 
-class Classpath(private val classpaths: Iterable<String>): Iterable<String> by classpaths {
+inline class Classpath(private val classpaths: Set<String>) {
+    operator fun plus(other: Set<String>) = Classpath(classpaths.union(other))
+    
+    operator fun plus(other: Classpath) = Classpath(classpaths.union(other.classpaths))
+
     override fun toString() = classpaths.joinToString(":")
 }
