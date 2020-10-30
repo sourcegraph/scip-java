@@ -3,6 +3,8 @@ package lsifjava
 import java.io.File
 import java.io.PrintWriter
 
+val javaVersion: Int = getVersion()
+
 fun main(args: Array<String>) {
     println("Running JVM ${System.getProperty("java.version")}")
 
@@ -36,4 +38,17 @@ private fun displayStats(indexer: ProjectIndexer, emitter: Emitter, start: Long)
         indexer.numJavacErrors
     )
     System.out.printf("Processed in %.0fms", (System.nanoTime() - start) / 1e6)
+}
+
+fun getVersion(): Int {
+    var version = System.getProperty("java.version")
+    if (version.startsWith("1.")) {
+        version = version.substring(2, 3)
+    } else {
+        val dot = version.indexOf(".")
+        if (dot != -1) {
+            version = version.substring(0, dot)
+        }
+    }
+    return version.toInt()
 }
