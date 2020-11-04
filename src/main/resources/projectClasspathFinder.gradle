@@ -1,0 +1,44 @@
+allprojects { project ->
+    task lsifjavaAllGradleDeps {
+        doLast {
+            if (project.hasProperty('android')) {
+                project.android.getBootClasspath().each {
+                    println "lsifjava $it"
+                }
+                if (project.android.hasProperty('applicationVariants')) {
+                    project.android.applicationVariants.all { variant ->
+                        try {
+                            variant.getCompileClasspath().each {
+                                println "lsifjava $it"
+                            }
+                        } catch(ignored){}
+                    }
+                }
+            } else {
+                // Print the list of all dependencies jar files.
+                project.configurations.findAll {
+                    it.metaClass.respondsTo(it, "isCanBeResolved") ? it.isCanBeResolved() : false
+                }.each {
+                    it.resolve().each {
+                        def inspected = it.inspect()
+
+                        if (inspected.endsWith("jar")) {
+                            if (!inspected.contains("zip!")) {
+                                println "lsifjava $it"
+                            }
+                        } else if (inspected.endsWith("aar")) {
+                            // If the dependency is an AAR file we try to determine the location
+                            // of the classes.jar file in the exploded aar folder.
+                            def splitted = inspected.split("/")
+                            def namespace = splitted[-5]
+                            def name = splitted[-4]
+                            def version = splitted[-3]
+                            def explodedPath = "$project.buildDir/intermediates/exploded-aar/$namespace/$name/$version/jars/classes.jar"
+                            println "lsifjava $explodedPath"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

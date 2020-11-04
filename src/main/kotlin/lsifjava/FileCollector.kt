@@ -22,8 +22,9 @@ fun buildIndexerMap(
 ): Map<Path, DocumentIndexer> {
     val indexers = mutableMapOf<Path, DocumentIndexer>()
     
-    val classpaths = buildToolInterface.getClasspaths()
-    val sourceVersions = buildToolInterface.javaSourceVersions()
+    val classpaths = buildToolInterface.classpaths.merge()
+
+    val sourceVersions = buildToolInterface.javaSourceVersions
 
     val fileBuildInfo = Channel<FileBuildInfo>()
 
@@ -39,21 +40,24 @@ fun buildIndexerMap(
                     indexers, emitter, javacDiagListener, verbose,
                 )
             }
-        }.join()
+        }
     }
 
     return indexers
 }
 
+// NOTE: classpaths is the total collection of the found classpaths for all
+// sub-projects. This is a bit of a brute force mash together but it appears to please
+// the javac
 private fun CoroutineScope.launchFileTreeWalkers(
     buildToolInterface: BuildToolInterface,
     fileBuildInfoChannel: Channel<FileBuildInfo>,
-    classpaths: List<Classpath>,
+    classpaths: Classpath,
     sourceVersions: List<String?>,
 ) =  launch(Dispatchers.IO) {
-    buildToolInterface.getSourceDirectories().forEachIndexed { i, paths ->
+    buildToolInterface.sourceDirectories.forEachIndexed { i, paths ->
         launch {
-            val collector = AsyncFileCollector(fileBuildInfoChannel, classpaths[i], sourceVersions[i], this)
+            val collector = AsyncFileCollector(fileBuildInfoChannel, classpaths, sourceVersions[i], this)
             paths.asSequence().filter { Files.exists(it) }.forEach { Files.walkFileTree(it, collector) }
         }
     }
