@@ -15,17 +15,23 @@ interface BuildToolInterface {
 
 // TODO(nsc) exclusions? lazy eval?
 class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, BuildToolInterface {
-    private val projectConnection by lazy {
+    private val initScriptName = "projectClasspathFinder.gradle"
+
+    private val artifactPattern by lazy(LazyThreadSafetyMode.NONE) {
+        "lsifjava (.+)(?:\r?\n)".toRegex()
+    }
+
+    private val projectConnection by lazy(LazyThreadSafetyMode.NONE) {
         GradleConnector.newConnector()
             .forProjectDirectory(projectDir.path.toFile())
             .connect()
     }
 
-    private val eclipseModel by lazy {
+    private val eclipseModel by lazy(LazyThreadSafetyMode.NONE) {
         projectConnection.getModel(EclipseProject::class.java)
     }
     
-    private val ideaModel by lazy {
+    private val ideaModel by lazy(LazyThreadSafetyMode.NONE) {
         projectConnection.getModel(IdeaProject::class.java)
     }
 
