@@ -5,6 +5,7 @@ import com.sun.source.tree.*
 import com.sun.source.util.*
 import com.sun.tools.javac.code.Flags
 import com.sun.tools.javac.code.Symbol
+import com.sun.tools.javac.code.Type
 import com.sun.tools.javac.tree.JCTree.*
 import org.eclipse.lsp4j.Location
 import org.eclipse.lsp4j.Position
@@ -17,6 +18,9 @@ import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind
 
 data class ReferenceData(val useRange: Range, val refRange: Range, val defPath: Path)
+
+// We probably don't want to include `java.lang.` for types of that package.
+fun Type.strip() = this.toString().removePrefix("java.lang.")
 
 class IndexingVisitor(
     task: JavacTask,
@@ -33,7 +37,21 @@ class IndexingVisitor(
         val defRange = findLocation(currentPath, node.name.toString())?.range
             ?: return super.visitVariable(node, p)
 
-        indexer.emitDefinition(defRange, node.toString(), docs.getDocComment(currentPath))
+        // handle enum
+        val isEnum = (node as JCVariableDecl).sym?.flags()?.and(Flags.ENUM.toLong())?.equals(0L)?.not()
+            ?: return super.visitVariable(node, p);
+        
+        val nodeString = if(isEnum) {
+            val constructorCall = ((node.init as JCNewClass).constructor as Symbol.MethodSymbol)
+
+            "enum-constant ${node.sym.owner.name}.${node.sym.name}" +
+                if (constructorCall.params.isEmpty()) ""
+                else "(${constructorCall.params.map { "${it.type.strip()} ${it.name}" }.toString(", ")})"
+        } else {
+            node.toString()
+        }
+
+        indexer.emitDefinition(defRange, nodeString, docs.getDocComment(currentPath))
         
         return super.visitVariable(node, p)
     }
