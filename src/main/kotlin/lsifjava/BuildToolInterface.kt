@@ -44,7 +44,10 @@ class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, Bui
 
         val ideaClasspath = kotlin.runCatching { ideaClasspath() }.getOrDefault(listOf())
 
-        return ideaClasspath.mapIndexed {i, it -> it + eclipseClasspaths[i] + initScriptClasspath }
+        return ideaClasspath.mapIndexed {i, it ->
+            it + initScriptClasspath +
+                eclipseClasspaths.getOrElse(i) { Classpath(setOf())}
+        }
     }
 
     private fun ideaClasspath() = ideaModel.children.map { it ->
