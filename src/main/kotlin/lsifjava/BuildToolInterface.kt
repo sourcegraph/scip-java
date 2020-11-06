@@ -4,54 +4,86 @@ import org.gradle.tooling.GradleConnector
 import org.gradle.tooling.model.eclipse.EclipseProject
 import org.gradle.tooling.model.idea.IdeaProject
 import org.gradle.tooling.model.idea.IdeaSingleEntryLibraryDependency
+import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths
 
 interface BuildToolInterface {
-    fun getClasspaths(): List<Classpath>
-    fun getSourceDirectories(): List<List<Path>>
-    fun javaSourceVersions(): List<String?>
+    val classpaths: List<Classpath>
+    val sourceDirectories: List<List<Path>>
+    val javaSourceVersions: List<String?>
 }
 
 // TODO(nsc) exclusions? lazy eval?
 class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, BuildToolInterface {
-    private val projectConnection by lazy {
+    private val initScriptName = "projectClasspathFinder.gradle"
+
+    private val artifactPattern by lazy(LazyThreadSafetyMode.NONE) {
+        "lsifjava (.+)(?:\r?\n)".toRegex()
+    }
+
+    private val projectConnection by lazy(LazyThreadSafetyMode.NONE) {
         GradleConnector.newConnector()
             .forProjectDirectory(projectDir.path.toFile())
             .connect()
     }
 
-    private val eclipseModel by lazy {
+    private val eclipseModel by lazy(LazyThreadSafetyMode.NONE) {
         projectConnection.getModel(EclipseProject::class.java)
     }
     
-    private val ideaModel by lazy {
+    private val ideaModel by lazy(LazyThreadSafetyMode.NONE) {
         projectConnection.getModel(IdeaProject::class.java)
     }
 
     // is this even *correct*? Is the order the same?
-    override fun getClasspaths(): List<Classpath> {
-        val eclipseClasspaths = getClasspathsFromEclipse()
-        return ideaModel.children.mapIndexed { i, it ->
-            Classpath(it.dependencies
-                .filterIsInstance<IdeaSingleEntryLibraryDependency>()
-                .map { it.file.canonicalPath }
-                .toSet()
-            ) + eclipseClasspaths[i]
-        }
+    override val classpaths: List<Classpath> get() {
+        val initScriptClasspath = kotlin.runCatching { getClasspathFromInitScript() }.getOrDefault(Classpath(setOf()))
+
+        val eclipseClasspaths = kotlin.runCatching { eclipseClasspath() }.getOrDefault(listOf())
+
+        val ideaClasspath = kotlin.runCatching { ideaClasspath() }.getOrDefault(listOf())
+
+        return ideaClasspath.mapIndexed {i, it -> it + eclipseClasspaths[i] + initScriptClasspath }
     }
 
+    private fun ideaClasspath() = ideaModel.children.map { it ->
+        Classpath(it.dependencies
+            .filterIsInstance<IdeaSingleEntryLibraryDependency>()
+            .map { it.file.canonicalPath }
+            .toSet()
+        )
+    }
 
-    private fun getClasspathsFromEclipse() = eclipseClasspath(eclipseModel)
-
-    private fun eclipseClasspath(project: EclipseProject): List<Classpath> {
+    private fun eclipseClasspath(project: EclipseProject = eclipseModel): List<Classpath> {
         val classPaths = arrayListOf<Classpath>()
         classPaths += Classpath(project.classpath.map { it.file.canonicalPath }.toSet())
         project.children.forEach { eclipseClasspath(it).toCollection(classPaths) }
         return classPaths
     }
 
-    override fun getSourceDirectories(): List<List<Path>> {
+    private fun getClasspathFromInitScript(): Classpath {
+        val config = File.createTempFile("lsifjava", ".gradle")
+        config.deleteOnExit()
+
+        config.bufferedWriter().use { configWriter ->
+            ClassLoader.getSystemResourceAsStream(initScriptName)!!.bufferedReader().use { configReader ->
+                configReader.copyTo(configWriter)
+            }
+        }
+
+        // Unix only for now. To be revisited
+        val (stdout, stderr) = execAndReadStdoutAndStderr("./gradlew -I ${config.absolutePath} lsifjavaAllGradleDeps", projectDir.path)
+
+        val artifacts = artifactPattern.findAll(stdout)
+            .mapNotNull { it.groups[1] }
+            .map { Paths.get(it.value).toFile().canonicalPath }
+            .toSet()
+            
+        return Classpath(artifacts)
+    }
+
+    override val sourceDirectories: List<List<Path>> get() {
         return ideaModel.children.flatMap { module ->
             module.contentRoots.map { root ->
                 root.sourceDirectories.map { Paths.get(it.directory.canonicalPath) } +
@@ -78,7 +110,7 @@ class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, Bui
         return sourceDirs
     }
     
-    override fun javaSourceVersions() = javaSourceVersion(eclipseModel)
+    override val javaSourceVersions: List<String?> get() = javaSourceVersion(eclipseModel)
 
     // get rid of String?, use parent version or else fallback
     private fun javaSourceVersion(project: EclipseProject): List<String?> {
@@ -89,12 +121,4 @@ class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, Bui
     }
 
     override fun close() = projectConnection.close()
-}
-
-inline class Classpath(private val classpaths: Set<String>) {
-    operator fun plus(other: Set<String>) = Classpath(classpaths.union(other))
-    
-    operator fun plus(other: Classpath) = Classpath(classpaths.union(other.classpaths))
-
-    override fun toString() = classpaths.joinToString(":")
 }
