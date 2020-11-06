@@ -28,7 +28,13 @@ inline class Classpath(private val classpaths: Set<String>) {
     override fun toString() = classpaths.joinToString(":")
 }
 
-fun List<Classpath>.merge() = this.reduce { acc, classpath -> acc + classpath }
+fun List<Classpath>.merge() = when(this.isEmpty()) {
+    false -> this.reduce { acc, classpath -> acc + classpath }
+    else -> {
+        println("no classpaths were inferred, symbol resolution for external dependencies may fail.")
+        Classpath(setOf())
+    }
+}
 
 fun execAndReadStdoutAndStderr(shellCommand: String, directory: Path): Pair<String, String> {
     val process = Runtime.getRuntime().exec(shellCommand, null, directory.toFile())
