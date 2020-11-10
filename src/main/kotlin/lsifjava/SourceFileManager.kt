@@ -1,19 +1,26 @@
 @file:Suppress("JAVA_MODULE_DOES_NOT_EXPORT_PACKAGE")
 package lsifjava
 
-import com.sun.tools.javac.file.JavacFileManager
-import com.sun.tools.javac.util.Context
 import java.io.IOException
 import java.nio.charset.Charset
 import java.nio.file.Path
+import java.util.*
 import java.util.regex.Pattern
 import java.util.stream.Stream
-import javax.tools.FileObject
-import javax.tools.JavaFileManager
-import javax.tools.JavaFileObject
-import javax.tools.StandardLocation
+import javax.tools.*
 
-class SourceFileManager internal constructor(private val paths: Set<Path>): JavacFileManager(Context(), false, Charset.defaultCharset()) {
+class SourceFileManager internal constructor(private val paths: Set<Path>):
+    ForwardingJavaFileManager<StandardJavaFileManager>(getDelegateFileManager) {
+
+    companion object {
+        val getDelegateFileManager: StandardJavaFileManager get() =
+            ServiceLoader.load(JavaCompiler::class.java).iterator().next()
+                .getStandardFileManager(null, null, Charset.defaultCharset())
+    }
+
+    init {
+        paths.forEach { fileManager.setLocationFromPaths(StandardLocation.SOURCE_PATH, listOf(it)) }
+    }
 
     override fun list(
         location: JavaFileManager.Location,
@@ -59,7 +66,6 @@ class SourceFileManager internal constructor(private val paths: Set<Path>): Java
     override fun hasLocation(location: JavaFileManager.Location) = location === StandardLocation.SOURCE_PATH || super.hasLocation(location)
 
     override fun getJavaFileForInput(location: JavaFileManager.Location, className: String, kind: JavaFileObject.Kind): JavaFileObject? {
-        // FileStore shadows disk
         if (location === StandardLocation.SOURCE_PATH) {
             if (className == "module-info") return null
             val packageName = mostName(className)
@@ -67,14 +73,14 @@ class SourceFileManager internal constructor(private val paths: Set<Path>): Java
             val iterator: Iterator<SourceFileObject> = list(packageName).map { obj: JavaFileObject ->
                 obj as SourceFileObject
             }.iterator()
-            var f = iterator.next()
+            var f: SourceFileObject
             while (iterator.hasNext()) {
+                f = iterator.next()
                 if (f.path.fileName.toString() == simpleClassName + kind.extension) {
                     return f
                 }
-                f = iterator.next()
             }
-            // Fall through to disk in case we have .jar or .zip files on the source path
+            // Fall through to disk in case we have .jar files on the source path
         }
         return super.getJavaFileForInput(location, className, kind)
     }
