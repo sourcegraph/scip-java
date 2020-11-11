@@ -36,18 +36,13 @@ fun Type.strip() = this.toString().removePrefix("java.lang.")
 class IndexingVisitor(
     task: JavacTask,
     private val tool: JavacTool,
-    private val sourceJars: List<Path>,
+    private val externalDocManager: ExternalDocs,
     private val compUnit: CompilationUnitTree,
     private val indexer: DocumentIndexer,
     private val indexers: Map<Path, DocumentIndexer>
 ): TreePathScanner<Unit?, Unit?>() {
     private val trees: Trees = Trees.instance(task)
     private val docs: DocTrees = DocTrees.instance(task)
-    // lazy as we don't want to build up a SourceFileManager if not needed.
-    // Eventually irrelevant once we have a single global instance
-    private val externalDocManager by lazy(LazyThreadSafetyMode.NONE) { 
-        ExternalDocs(sourceJars) 
-    }
 
     // TODO(nsc) handle 'var'
     override fun visitVariable(node: VariableTree, p: Unit?): Unit? {
@@ -206,7 +201,7 @@ class IndexingVisitor(
     override fun visitIdentifier(node: IdentifierTree, p: Unit?): Unit? {
         val symbol = (node as JCIdent).sym
             ?: return super.visitIdentifier(node, p)
-        
+
         if(symbol is Symbol.PackageSymbol) return super.visitIdentifier(node, p)
 
         val name = symbol.name.toString()

@@ -17,9 +17,9 @@ import kotlin.collections.HashSet
 class DocumentIndexer(
     private val filepath: CanonicalPath,
     private val classpath: Classpath,
-    private val sourcespaths: List<Path>,
     private val javaSourceVersion: String,
     private val indexers: Map<Path, DocumentIndexer>,
+    private val docManager: ExternalDocs,
     private val emitter: Emitter,
     private val diagnosticListener: CountingDiagnosticListener,
     private val verbose: Boolean,
@@ -55,7 +55,7 @@ class DocumentIndexer(
     fun index() {
         if(!indexed.compareAndSet(false, true)) return
         val (task, compUnit) = analyzeFile()
-        IndexingVisitor(task, systemProvider, sourcespaths, compUnit, this, indexers).scan(compUnit, null)
+            IndexingVisitor(task, systemProvider, docManager, compUnit, this, indexers).scan(compUnit, null)
         referencesBacklog.forEach { it() }
 
         println("finished analyzing and visiting $filepath")
@@ -84,6 +84,7 @@ class DocumentIndexer(
     internal class SimpleCompiler(context: Context?): JavaCompiler(context) {
         companion object {
             val factory = Context.Factory<JavaCompiler> { context: Context? -> SimpleCompiler(context) }
+
             val contextKey: Context.Key<JavaCompiler> by lazy {
                 if(javaVersion == 8) run {
                     val field = SimpleCompiler::class.java.superclass.getDeclaredField("compilerKey")
