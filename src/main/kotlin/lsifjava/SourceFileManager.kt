@@ -14,12 +14,8 @@ class SourceFileManager internal constructor(private val paths: Set<Path>):
 
     companion object {
         val getDelegateFileManager: StandardJavaFileManager get() =
-            ServiceLoader.load(JavaCompiler::class.java).iterator().next()
+            ToolProvider.getSystemJavaCompiler()
                 .getStandardFileManager(null, null, Charset.defaultCharset())
-    }
-
-    init {
-        paths.forEach { fileManager.setLocationFromPaths(StandardLocation.SOURCE_PATH, listOf(it)) }
     }
 
     override fun list(
