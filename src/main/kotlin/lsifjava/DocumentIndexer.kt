@@ -53,10 +53,14 @@ class DocumentIndexer(
     private var indexed = AtomicBoolean(false)
 
     fun index() {
-        if(!indexed.compareAndSet(false, true)) return
-        val (task, compUnit) = analyzeFile()
+        try {
+            if(!indexed.compareAndSet(false, true)) return
+            val (task, compUnit) = analyzeFile()
             IndexingVisitor(task, systemProvider, docManager, compUnit, this, indexers).scan(compUnit, null)
-        referencesBacklog.forEach { it() }
+            referencesBacklog.forEach { it() }
+        } catch (e: Exception) {
+            throw IndexingException(filepath.toString(), e)
+        }
 
         println("finished analyzing and visiting $filepath")
     }

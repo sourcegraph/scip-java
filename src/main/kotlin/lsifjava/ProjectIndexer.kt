@@ -1,5 +1,7 @@
 package lsifjava
 
+internal class IndexingException(path: String, cause: Throwable): Throwable("failed to index $path", cause)
+
 class ProjectIndexer(private val arguments: Arguments, private val emitter: Emitter) {
     var numFiles = 0
     var numDefinitions = 0
@@ -30,7 +32,11 @@ class ProjectIndexer(private val arguments: Arguments, private val emitter: Emit
             }
 
             for (indexer in indexers.values) {
-                indexer.index()
+                try {
+                    indexer.index()
+                } catch(e: IndexingException) {
+                    println(e)
+                }
             }
 
             for (indexer in indexers.values) {
