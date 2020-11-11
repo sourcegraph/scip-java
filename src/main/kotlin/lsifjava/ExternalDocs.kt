@@ -15,10 +15,17 @@ import javax.tools.*
 
 data class ExternalHoverMeta(val doc: String, val tree: Tree)
 
-class ExternalDocs(docPaths: List<Path>) {
-    private val fileManager = SourceFileManager(docPaths.toSet())
+class ExternalDocs(private val docPaths: List<Path>) {
 
     private val fileCache = HashMap<String, Pair<JavacTask, CompilationUnitTree>?>()
+
+    private val fileManager: StandardJavaFileManager by lazy {
+        val manager = ToolProvider.getSystemJavaCompiler()
+            .getStandardFileManager(null, null, Charset.defaultCharset())
+        manager.setLocation(StandardLocation.SOURCE_PATH, docPaths.map { it.toFile() })
+        manager
+    }
+
     fun findDocForElement(containerClass: String, javac: JavacTool, element: Element): ExternalHoverMeta? {
         val context = DocumentIndexer.SimpleContext()
 
@@ -48,7 +55,8 @@ class ExternalDocs(docPaths: List<Path>) {
             (node as JCMethodDecl).sym ?: return null
 
             if(node.sym.toString() == element.toString()) {
-                return ExternalHoverMeta(docs.getDocComment(currentPath), node)
+                val doc = docs.getDocComment(currentPath) ?: return null
+                return ExternalHoverMeta(doc, node)
             }
 
             return null
@@ -61,14 +69,15 @@ class ExternalDocs(docPaths: List<Path>) {
 
             }
             // filter to instance variables
-            return super.visitVariable(node, p)
+            return null
         }
 
         override fun visitClass(node: ClassTree?, p: Unit?): ExternalHoverMeta? {
             (node as JCClassDecl).sym ?: return null
             
             if(node.sym.toString() == element.toString()) {
-                return ExternalHoverMeta(docs.getDocComment(currentPath), node)
+                val doc = docs.getDocComment(currentPath) ?: return super.visitClass(node, p)
+                return ExternalHoverMeta(doc, node)
             }
 
             return super.visitClass(node, p)
