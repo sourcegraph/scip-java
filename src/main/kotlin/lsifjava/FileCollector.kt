@@ -26,6 +26,9 @@ fun buildIndexerMap(
 
     val sourceVersions = buildToolInterface.javaSourceVersions
 
+    // TODO(nsc) where to move this
+    val externalDocManager = ExternalDocs(buildToolInterface.sourcesList)
+
     val fileBuildInfo = Channel<FileBuildInfo>()
 
     runBlocking {
@@ -37,7 +40,7 @@ fun buildIndexerMap(
             for(info in fileBuildInfo) {
                 indexers[info.filepath] = DocumentIndexer(
                     CanonicalPath(info.filepath), info.classpath, info.javaVersion ?: "1.8",
-                    indexers, emitter, javacDiagListener, verbose,
+                    indexers, externalDocManager, emitter, javacDiagListener, verbose,
                 )
             }
         }

@@ -19,6 +19,7 @@ class DocumentIndexer(
     private val classpath: Classpath,
     private val javaSourceVersion: String,
     private val indexers: Map<Path, DocumentIndexer>,
+    private val docManager: ExternalDocs,
     private val emitter: Emitter,
     private val diagnosticListener: CountingDiagnosticListener,
     private val verbose: Boolean,
@@ -27,12 +28,19 @@ class DocumentIndexer(
         private val systemProvider by lazy { JavacTool.create() }
     }
     
-    data class DefinitionMeta(val rangeId: String, val resultSetId: String) {
+    data class DefinitionMeta(val definitionRangeId: String, val resultSetId: String) {
         var definitionResultId: String? = null
         val referenceRangeIds: MutableMap<String, MutableSet<String>> = HashMap()
     }
 
-    private var documentId: String
+    data class ExternalDefinitionMeta(val resultSetId: String) {
+        val referenceRangeIds: MutableMap<String, MutableSet<String>> = HashMap()
+    }
+
+    private var documentId: String = emitter.emitVertex("document", mapOf(
+        "languageId" to "java",
+        "uri" to "file://$filepath"
+    ))
     private val rangeIds: MutableSet<String> = HashSet()
     private val definitions: MutableMap<Range, DefinitionMeta> = HashMap()
 
@@ -42,21 +50,17 @@ class DocumentIndexer(
 
     private val referencesBacklog: LinkedList<() -> Unit> = LinkedList()
 
-    init {
-        val args = mapOf(
-            "languageId" to "java",
-            "uri" to "file://$filepath"
-        )
-        documentId = emitter.emitVertex("document", args)
-    }
-
     private var indexed = AtomicBoolean(false)
 
     fun index() {
-        if(!indexed.compareAndSet(false, true)) return
-        val (task, compUnit) = analyzeFile()
-        IndexingVisitor(task, compUnit, this, indexers).scan(compUnit, null)
-        referencesBacklog.forEach { it() }
+        try {
+            if(!indexed.compareAndSet(false, true)) return
+            val (task, compUnit) = analyzeFile()
+            IndexingVisitor(task, systemProvider, docManager, compUnit, this, indexers).scan(compUnit, null)
+            referencesBacklog.forEach { it() }
+        } catch (e: Exception) {
+            throw IndexingException(filepath.toString(), e)
+        }
 
         println("finished analyzing and visiting $filepath")
     }
@@ -84,6 +88,7 @@ class DocumentIndexer(
     internal class SimpleCompiler(context: Context?): JavaCompiler(context) {
         companion object {
             val factory = Context.Factory<JavaCompiler> { context: Context? -> SimpleCompiler(context) }
+
             val contextKey: Context.Key<JavaCompiler> by lazy {
                 if(javaVersion == 8) run {
                     val field = SimpleCompiler::class.java.superclass.getDeclaredField("compilerKey")
@@ -104,18 +109,18 @@ class DocumentIndexer(
 
     fun postIndex(projectId: String) {
         for (meta in definitions.values)
-            linkUses(meta, documentId)
+            linkUses(meta)
         emitter.emitEdge("contains", mapOf("outV" to projectId, "inVs" to arrayOf(documentId)))
-        emitter.emitEdge("contains", mapOf("outV" to documentId, "inVs" to rangeIds.stream().sorted().toArray()))
+        emitter.emitEdge("contains", mapOf("outV" to documentId, "inVs" to rangeIds.sorted().toList()))
     }
 
-    private fun linkUses(meta: DefinitionMeta, documentId: String) {
+    private fun linkUses(meta: DefinitionMeta) {
         val resultId = emitter.emitVertex("referenceResult", mapOf())
         emitter.emitEdge("textDocument/references", mapOf("outV" to meta.resultSetId, "inV" to resultId))
         emitter.emitEdge("item", mapOf(
             "property" to "definitions",
             "outV" to resultId,
-            "inVs" to arrayOf(meta.rangeId),
+            "inVs" to arrayOf(meta.definitionRangeId),
             "document" to documentId
         ))
         for ((key, value) in meta.referenceRangeIds) {
@@ -128,13 +133,26 @@ class DocumentIndexer(
         }
     }
 
-    private fun emitDefinition(range: Range, hover: String) {
+    private fun linkUses(meta: ExternalDefinitionMeta) {
+        val resultId = emitter.emitVertex("referenceResult", mapOf())
+        emitter.emitEdge("textDocument/references", mapOf("outV" to meta.resultSetId, "inV" to resultId))
+        for ((key, value) in meta.referenceRangeIds) {
+            emitter.emitEdge("item", mapOf(
+                "property" to "references",
+                "outV" to resultId,
+                "inVs" to value.stream().sorted().toArray(),
+                "document" to key
+            ))
+        }
+    }
+
+    internal fun emitDefinition(range: Range, signature: String, doc: String? = null) {
         if (verbose) println("DEF ${filepath}:${humanRange(range)}")
         val hoverId = emitter.emitVertex("hoverResult", mapOf(
             "result" to mapOf(
                 "contents" to mapOf(
                     "kind" to "markdown",
-                    "value" to hover
+                    "value" to mkDoc(signature, doc)
                 )
             )
         ))
@@ -146,9 +164,26 @@ class DocumentIndexer(
         definitions[range] = DefinitionMeta(rangeId, resultSetId) // + contents?
     }
 
-    internal fun emitDefinition(range: Range, signature: String, doc: String? = null) {
-        val hover = mkDoc(signature, doc)
-        emitDefinition(range, hover)
+    // TODO(nsc): GLOBAL CACHE SO WE DONT HAVE MULTIPLE REFS FOR SAME DEF
+    internal fun emitExternalHoverAndUse(signature: String, doc: String, use: Range) {
+        val hoverId = emitter.emitVertex("hoverResult", mapOf(
+            "result" to mapOf(
+                "contents" to mapOf(
+                    "kind" to "markdown",
+                    "value" to mkDoc(signature, doc)
+                )
+            )
+        ))
+        
+        val resultSetId = emitter.emitVertex("resultSet", mapOf())
+        emitter.emitEdge("textDocument/hover", mapOf("outV" to resultSetId, "inV" to hoverId))
+        val rangeId = emitter.emitVertex("range", createRange(use))
+        emitter.emitEdge("next", mapOf("outV" to rangeId, "inV" to resultSetId))
+        rangeIds.add(rangeId)
+        val meta = ExternalDefinitionMeta(resultSetId).apply {
+            this.referenceRangeIds[documentId] = hashSetOf(rangeId)
+        }
+        linkUses(meta)
     }
 
     internal fun emitUse(use: Range, def: Range, defPath: Path) {
@@ -175,13 +210,14 @@ class DocumentIndexer(
 
             emitter.emitEdge("item", mapOf(
                 "outV" to meta.definitionResultId!!,
-                "inVs" to arrayOf(meta.rangeId),
+                "inVs" to arrayOf(meta.definitionRangeId),
                 "document" to indexer.documentId
             ))
             rangeIds.add(rangeId)
-            meta.referenceRangeIds.getOrDefault(documentId, HashSet()).let {
-                it.add(rangeId)
-                meta.referenceRangeIds[documentId] = it
+            meta.referenceRangeIds.getOrDefault(documentId, HashSet()).apply {
+                this.add(rangeId)
+                // TODO(nsc) ~~figure it out~~ this links it back to the ref range. Why doc id?
+                meta.referenceRangeIds[documentId] = this
             }
         }
     }
