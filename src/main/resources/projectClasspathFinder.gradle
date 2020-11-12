@@ -1,4 +1,11 @@
 allprojects { project ->
+    apply plugin: 'idea'
+    idea {
+        module {
+            downloadSources = true
+        }
+    }
+
     task lsifjavaAllGradleDeps {
         doLast {
             if (project.hasProperty('android')) {
