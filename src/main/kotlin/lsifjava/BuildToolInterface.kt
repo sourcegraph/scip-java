@@ -7,6 +7,7 @@ import org.gradle.tooling.model.idea.IdeaSingleEntryLibraryDependency
 import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths
+import kotlin.LazyThreadSafetyMode.NONE
 
 interface BuildToolInterface {
     val classpaths: List<Classpath>
@@ -28,9 +29,9 @@ class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, Bui
             .forProjectDirectory(projectDir.path.toFile())
             .connect()
 
-    private val eclipseModel = projectConnection.getModel(EclipseProject::class.java)
+    private val eclipseModel by lazy(NONE) { projectConnection.getModel(EclipseProject::class.java) }
 
-    private val ideaModel = projectConnection.getModel(IdeaProject::class.java)
+    private val ideaModel by lazy(NONE) { projectConnection.getModel(IdeaProject::class.java) }
 
     private val initScript = File.createTempFile("lsifjava", ".gradle").apply {
         this.deleteOnExit()
