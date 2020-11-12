@@ -22,5 +22,6 @@
     ],
     "[java]":{
         "editor.formatOnSave": false
-    }
+    },
+    "kotlin.languageServer.path": "/tmp"
 }
