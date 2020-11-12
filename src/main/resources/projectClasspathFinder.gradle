@@ -41,4 +41,11 @@ allprojects { project ->
             }
         }
     }
+
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.fork = true
+            options.forkOptions.executable = '/home/noah/Sourcegraph/lsif-java/src/main/resources/javac-interceptor.sh'
+        }
+    }
 }
