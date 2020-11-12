@@ -57,7 +57,7 @@ private fun CoroutineScope.launchFileTreeWalkers(
 ) =  launch(Dispatchers.IO) {
     buildToolInterface.sourceDirectories.forEachIndexed { i, paths ->
         launch {
-            val collector = AsyncFileCollector(fileBuildInfoChannel, classpaths, sourceVersions[i], this)
+            val collector = AsyncFileCollector(fileBuildInfoChannel, classpaths, sourceVersions.getOrNull(i), this)
             paths.asSequence().filter { Files.exists(it) }.forEach { Files.walkFileTree(it, collector) }
         }
     }

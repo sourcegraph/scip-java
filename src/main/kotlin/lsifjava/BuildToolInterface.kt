@@ -132,7 +132,9 @@ class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, Bui
         return sourceDirs
     }
     
-    override val javaSourceVersions: List<String?> get() = javaSourceVersion(eclipseModel)
+    override val javaSourceVersions: List<String?> get() {
+        return runCatching { javaSourceVersion(eclipseModel) }.getOrDefault(listOf())
+    }
 
     // get rid of String?, use parent version or else fallback
     private fun javaSourceVersion(project: EclipseProject): List<String?> {
