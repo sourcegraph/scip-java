@@ -7,33 +7,50 @@ import org.gradle.tooling.model.idea.IdeaSingleEntryLibraryDependency
 import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths
+import kotlin.LazyThreadSafetyMode.NONE
 
 interface BuildToolInterface {
     val classpaths: List<Classpath>
     val sourceDirectories: List<List<Path>>
     val javaSourceVersions: List<String?>
+    val sourcesList: List<Path>
 }
 
 // TODO(nsc) exclusions? lazy eval?
 class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, BuildToolInterface {
     private val initScriptName = "projectClasspathFinder.gradle"
 
-    private val artifactPattern by lazy(LazyThreadSafetyMode.NONE) {
-        "lsifjava (.+)(?:\r?\n)".toRegex()
-    }
+    private val artifactPattern = "lsifjava (.+)(?:\r?\n)".toRegex()
 
-    private val projectConnection by lazy(LazyThreadSafetyMode.NONE) {
-        GradleConnector.newConnector()
+    // TODO(nsc) this depends on fetching classpaths first
+    override val sourcesList: MutableList<Path> = arrayListOf()
+
+    private val projectConnection = GradleConnector.newConnector()
             .forProjectDirectory(projectDir.path.toFile())
             .connect()
+
+    private val eclipseModel by lazy(NONE) { projectConnection.getModel(EclipseProject::class.java) }
+
+    private val ideaModel by lazy(NONE) { projectConnection.getModel(IdeaProject::class.java) }
+
+    private val initScript = File.createTempFile("lsifjava", ".gradle").apply {
+        this.deleteOnExit()
+        this.bufferedWriter().use { configWriter ->
+            ClassLoader.getSystemResourceAsStream(initScriptName)!!.bufferedReader().use { configReader ->
+                configReader.copyTo(configWriter)
+            }
+        }
     }
 
-    private val eclipseModel by lazy(LazyThreadSafetyMode.NONE) {
-        projectConnection.getModel(EclipseProject::class.java)
-    }
-    
-    private val ideaModel by lazy(LazyThreadSafetyMode.NONE) {
-        projectConnection.getModel(IdeaProject::class.java)
+
+    init {
+        runCatching {
+            // download sources on start
+            projectConnection.newBuild()
+                .addArguments("-I", initScript.absolutePath)
+                .forTasks("idea")
+                .run()
+        }
     }
 
     // is this even *correct*? Is the order the same?
@@ -44,10 +61,21 @@ class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, Bui
 
         val ideaClasspath = kotlin.runCatching { ideaClasspath() }.getOrDefault(listOf())
 
-        return ideaClasspath.mapIndexed {i, it ->
+        val merged = ideaClasspath.mapIndexed {i, it ->
             it + initScriptClasspath +
                 eclipseClasspaths.getOrElse(i) { Classpath(setOf())}
         }
+
+        merged.forEach { it ->
+            it.forEach inner@ { path ->
+                val sourceJar = Paths.get(path).toFile().parentFile.parentFile.walk().asSequence().firstOrNull {
+                    it.isFile && it.name.endsWith("-sources.jar")
+                } ?: return@inner
+                sourcesList.add(Paths.get(sourceJar.canonicalPath))
+            }
+        }
+
+        return merged
     }
 
     private fun ideaClasspath() = ideaModel.children.map { it ->
@@ -66,17 +94,8 @@ class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, Bui
     }
 
     private fun getClasspathFromInitScript(): Classpath {
-        val config = File.createTempFile("lsifjava", ".gradle")
-        config.deleteOnExit()
-
-        config.bufferedWriter().use { configWriter ->
-            ClassLoader.getSystemResourceAsStream(initScriptName)!!.bufferedReader().use { configReader ->
-                configReader.copyTo(configWriter)
-            }
-        }
-
         // Unix only for now. To be revisited
-        val (stdout, stderr) = execAndReadStdoutAndStderr("./gradlew -I ${config.absolutePath} lsifjavaAllGradleDeps", projectDir.path)
+        val (stdout, _) = execAndReadStdoutAndStderr("./gradlew -I ${initScript.absolutePath} lsifjavaAllGradleDeps", projectDir.path)
 
         val artifacts = artifactPattern.findAll(stdout)
             .mapNotNull { it.groups[1] }
@@ -113,7 +132,9 @@ class GradleInterface(private val projectDir: CanonicalPath): AutoCloseable, Bui
         return sourceDirs
     }
     
-    override val javaSourceVersions: List<String?> get() = javaSourceVersion(eclipseModel)
+    override val javaSourceVersions: List<String?> get() {
+        return runCatching { javaSourceVersion(eclipseModel) }.getOrDefault(listOf())
+    }
 
     // get rid of String?, use parent version or else fallback
     private fun javaSourceVersion(project: EclipseProject): List<String?> {

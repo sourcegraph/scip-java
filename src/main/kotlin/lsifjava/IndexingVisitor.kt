@@ -46,7 +46,7 @@ class IndexingVisitor(
 
             "enum-constant ${node.sym.owner.name}.${node.sym.name}" +
                 if (constructorCall.params.isEmpty()) ""
-                else "(${constructorCall.params.map { "${it.type.strip()} ${it.name}" }.toString(", ")})"
+                else "(${constructorCall.params.iterator().asSequence().map { "${it.type.strip()} ${it.name}" }.joinToString(", ")}"
         } else {
             node.toString()
         }

@@ -18,14 +18,16 @@ object NoopWriter: Writer() {
     override fun write(p0: CharArray, p1: Int, p2: Int) = Unit
 }
 
-inline class Classpath(private val classpaths: Set<String>) {
+class Classpath(private val classpaths: Set<String>): Iterable<String> {
     operator fun plus(other: Set<String>) = Classpath(classpaths.union(other))
 
     operator fun plus(other: Classpath) = Classpath(classpaths.union(other.classpaths))
     
-    fun size() = classpaths.size
+    val size get() = classpaths.size
     
     override fun toString() = classpaths.joinToString(":")
+
+    override fun iterator(): Iterator<String> = classpaths.iterator()
 }
 
 fun List<Classpath>.merge() = when(this.isEmpty()) {
