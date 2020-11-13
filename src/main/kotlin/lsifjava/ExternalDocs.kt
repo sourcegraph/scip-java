@@ -29,7 +29,7 @@ class ExternalDocs(private val docPaths: List<Path>) {
     fun findDocForElement(containerClass: String, javac: JavacTool, element: Element): ExternalHoverMeta? {
         val context = DocumentIndexer.SimpleContext()
 
-        val (task, compUnit) = fileCache.getOrElse(containerClass) { analyzeFileFromJar(containerClass, context, javac) }
+        val (task, compUnit) = fileCache.getOrPut(containerClass) { analyzeFileFromJar(containerClass, context, javac) }
             ?: return null
 
         return DocExtractionVisitor(task, element).scan(compUnit, null)
