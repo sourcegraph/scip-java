@@ -5,13 +5,15 @@ import com.sun.source.tree.*
 import com.sun.source.util.DocTrees
 import com.sun.source.util.JavacTask
 import com.sun.source.util.TreePathScanner
-import com.sun.tools.javac.util.Context
 import com.sun.tools.javac.api.JavacTool
 import com.sun.tools.javac.tree.JCTree.*
+import com.sun.tools.javac.util.Context
 import java.nio.charset.Charset
-import java.nio.file.Path
+import java.nio.file.*
 import javax.lang.model.element.Element
-import javax.tools.*
+import javax.tools.JavaFileObject
+import com.sun.tools.javac.file.JavacFileManager
+import javax.tools.StandardLocation
 
 data class ExternalHoverMeta(val doc: String, val tree: Tree)
 
@@ -19,12 +21,13 @@ class ExternalDocs(private val docPaths: List<Path>) {
 
     private val fileCache = HashMap<String, Pair<JavacTask, CompilationUnitTree>?>()
 
-    private val fileManager: StandardJavaFileManager by lazy {
-        val manager = ToolProvider.getSystemJavaCompiler()
-            .getStandardFileManager(null, null, Charset.defaultCharset())
+    private val fileManager = let {
+        val manager = JavacFileManager(Context(), false, Charset.defaultCharset())
         manager.setLocation(StandardLocation.SOURCE_PATH, docPaths.map { it.toFile() })
         manager
     }
+
+    private val jdkFileManager = JDK8CompatFileManager(fileManager)
 
     fun findDocForElement(containerClass: String, javac: JavacTool, element: Element): ExternalHoverMeta? {
         val context = DocumentIndexer.SimpleContext()
@@ -35,9 +38,13 @@ class ExternalDocs(private val docPaths: List<Path>) {
         return DocExtractionVisitor(task, element).scan(compUnit, null)
     }
 
+    private fun findFileFromJars(containerClass: String) =
+        fileManager.getJavaFileForInput(StandardLocation.SOURCE_PATH, containerClass, JavaFileObject.Kind.SOURCE)
+            ?: jdkFileManager.getJavaFileForInput(StandardLocation.SOURCE_PATH, containerClass, JavaFileObject.Kind.SOURCE)
+
     private fun analyzeFileFromJar(containerClass: String, context: Context, javac: JavacTool): Pair<JavacTask, CompilationUnitTree>? {
-        val file = fileManager.getJavaFileForInput(StandardLocation.SOURCE_PATH, containerClass, JavaFileObject.Kind.SOURCE)
-            ?: return null
+        val file = findFileFromJars(containerClass) ?: return null
+
         val task = javac.getTask(NoopWriter, fileManager, CountingDiagnosticListener.NullWriter, listOf(), listOf(), listOf(file), context)
         val compUnit = task.parse().iterator().next()
         val analyzeResult = runCatching { task.analyze() }
@@ -47,7 +54,7 @@ class ExternalDocs(private val docPaths: List<Path>) {
         }
         return Pair(task, compUnit)
     }
-    
+
     private class DocExtractionVisitor(task: JavacTask, private val element: Element): TreePathScanner<ExternalHoverMeta?, Unit?>() {
         private val docs: DocTrees = DocTrees.instance(task)
 
