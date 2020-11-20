@@ -1,8 +1,6 @@
 @file:Suppress("JAVA_MODULE_DOES_NOT_EXPORT_PACKAGE")
 package lsifjava
 
-import javax.tools.ForwardingJavaFileManager
-import javax.tools.StandardJavaFileManager
 import com.sun.tools.javac.util.Context
 import java.io.BufferedReader
 import java.io.File
@@ -12,14 +10,106 @@ import java.nio.charset.Charset
 import java.nio.file.*
 import java.util.concurrent.TimeUnit
 import java.util.stream.Collectors
-import javax.tools.JavaFileManager
-import javax.tools.StandardLocation
+import javax.tools.*
+
+private val JDK_MODULES = listOf(
+    "java.activation",
+    "java.base",
+    "java.compiler",
+    "java.corba",
+    "java.datatransfer",
+    "java.desktop",
+    "java.instrument",
+    "java.jnlp",
+    "java.logging",
+    "java.management",
+    "java.management.rmi",
+    "java.naming",
+    "java.net.http",
+    "java.prefs",
+    "java.rmi",
+    "java.scripting",
+    "java.se",
+    "java.se.ee",
+    "java.security.jgss",
+    "java.security.sasl",
+    "java.smartcardio",
+    "java.sql",
+    "java.sql.rowset",
+    "java.transaction",
+    "java.transaction.xa",
+    "java.xml",
+    "java.xml.bind",
+    "java.xml.crypto",
+    "java.xml.ws",
+    "java.xml.ws.annotation",
+    "javafx.base",
+    "javafx.controls",
+    "javafx.fxml",
+    "javafx.graphics",
+    "javafx.media",
+    "javafx.swing",
+    "javafx.web",
+    "jdk.accessibility",
+    "jdk.aot",
+    "jdk.attach",
+    "jdk.charsets",
+    "jdk.compiler",
+    "jdk.crypto.cryptoki",
+    "jdk.crypto.ec",
+    "jdk.dynalink",
+    "jdk.editpad",
+    "jdk.hotspot.agent",
+    "jdk.httpserver",
+    "jdk.incubator.httpclient",
+    "jdk.internal.ed",
+    "jdk.internal.jvmstat",
+    "jdk.internal.le",
+    "jdk.internal.opt",
+    "jdk.internal.vm.ci",
+    "jdk.internal.vm.compiler",
+    "jdk.internal.vm.compiler.management",
+    "jdk.jartool",
+    "jdk.javadoc",
+    "jdk.jcmd",
+    "jdk.jconsole",
+    "jdk.jdeps",
+    "jdk.jdi",
+    "jdk.jdwp.agent",
+    "jdk.jfr",
+    "jdk.jlink",
+    "jdk.jshell",
+    "jdk.jsobject",
+    "jdk.jstatd",
+    "jdk.localedata",
+    "jdk.management",
+    "jdk.management.agent",
+    "jdk.management.cmm",
+    "jdk.management.jfr",
+    "jdk.management.resource",
+    "jdk.naming.dns",
+    "jdk.naming.rmi",
+    "jdk.net",
+    "jdk.pack",
+    "jdk.packager.services",
+    "jdk.rmic",
+    "jdk.scripting.nashorn",
+    "jdk.scripting.nashorn.shell",
+    "jdk.sctp",
+    "jdk.security.auth",
+    "jdk.security.jgss",
+    "jdk.snmp",
+    "jdk.unsupported",
+    "jdk.unsupported.desktop",
+    "jdk.xml.dom",
+    "jdk.zipfs",
+)
 
 /**
  * FileManager that falls back to JavacPathFileManager for Java 8.
  * Java 8 StandardJavaFileManager doesn't have the <code>setLocationFromPaths</code>
  * method, instead it only has <code>setLocation</code> which requires an 
- * <code>Iterable<? extends File></code>, which would cause an UnsupportedException
+ * <code>Iterable\<? extends File\></code>, which would cause an UnsupportedException
  * when trying to turn the ZipFile from the in-memory FileSystem into a File.
  * Because JavacPathFileManager doesnt exist beyond Java 8 (9?) and we build with 14+,
  * the symbol resolver would fail for that symbol, hence we create an instance via
@@ -37,17 +127,16 @@ class JDK8CompatFileManager(manager: StandardJavaFileManager): ForwardingJavaFil
                     as JavaFileManager?
             }
 
-            val srcZip = srcZip()
-            if(srcZip != null) {
+            srcZip()?.also {
                 if(javaVersion > 8) {
-                    fileManager.setLocationFromPaths(StandardLocation.MODULE_SOURCE_PATH, setOf(srcZip.getPath("/")))
+                    fileManager.setLocationFromPaths(StandardLocation.MODULE_SOURCE_PATH, setOf(it.getPath("/")))
                 } else {
                     java8Manager!!::class.java
                         .getMethod("setDefaultFileSystem", FileSystem::class.java)
-                        .invoke(java8Manager, srcZip)
+                        .invoke(java8Manager, it)
                     java8Manager::class.java
                         .getMethod("setLocation", JavaFileManager.Location::class.java, Iterable::class.java)
-                        .invoke(java8Manager, StandardLocation.SOURCE_PATH, setOf(srcZip.getPath("/")))
+                        .invoke(java8Manager, StandardLocation.SOURCE_PATH, setOf(it.getPath("/")))
                 }
             }
 
@@ -75,6 +164,21 @@ class JDK8CompatFileManager(manager: StandardJavaFileManager): ForwardingJavaFil
             return null
         }
     }
+
+ fun getJavaFileForInput(containerClass: String): JavaFileObject? {
+     if(javaVersion == 8) {
+         return this.getJavaFileForInput(StandardLocation.SOURCE_PATH, containerClass, JavaFileObject.Kind.SOURCE)
+     } else {
+         for(module in JDK_MODULES) {
+             val moduleLocation = this.getLocationForModule(StandardLocation.MODULE_SOURCE_PATH, module) ?: continue
+             this.getJavaFileForInput(moduleLocation, containerClass, JavaFileObject.Kind.SOURCE)?.run {
+                return this
+             }
+         }
+     }
+
+     return null
+ }
 
     // from https://github.com/georgewfraser/java-language-server
     // bless you george for all the references. Maybe Ill cut this down/refactor

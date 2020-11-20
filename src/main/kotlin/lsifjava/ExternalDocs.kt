@@ -1,6 +1,7 @@
 @file:Suppress("JAVA_MODULE_DOES_NOT_EXPORT_PACKAGE")
 package lsifjava
 
+import com.sun.tools.javac.code.*
 import com.sun.source.tree.*
 import com.sun.source.util.DocTrees
 import com.sun.source.util.JavacTask
@@ -17,8 +18,9 @@ import javax.tools.StandardLocation
 
 data class ExternalHoverMeta(val doc: String, val tree: Tree)
 
-class ExternalDocs(private val docPaths: List<Path>) {
+private val emptyFileManager = SourceFileManager(emptySet())
 
+class ExternalDocs(private val docPaths: List<Path>) {
     private val fileCache = HashMap<String, Pair<JavacTask, CompilationUnitTree>?>()
 
     private val fileManager = let {
@@ -38,20 +40,17 @@ class ExternalDocs(private val docPaths: List<Path>) {
         return DocExtractionVisitor(task, element).scan(compUnit, null)
     }
 
-    private fun findFileFromJars(containerClass: String) =
+    private fun findFileFromJars(containerClass: String): JavaFileObject? =
         fileManager.getJavaFileForInput(StandardLocation.SOURCE_PATH, containerClass, JavaFileObject.Kind.SOURCE)
-            ?: jdkFileManager.getJavaFileForInput(StandardLocation.SOURCE_PATH, containerClass, JavaFileObject.Kind.SOURCE)
+            ?: jdkFileManager.getJavaFileForInput(containerClass)
 
     private fun analyzeFileFromJar(containerClass: String, context: Context, javac: JavacTool): Pair<JavacTask, CompilationUnitTree>? {
         val file = findFileFromJars(containerClass) ?: return null
 
-        val task = javac.getTask(NoopWriter, fileManager, CountingDiagnosticListener.NullWriter, listOf(), listOf(), listOf(file), context)
-        val compUnit = task.parse().iterator().next()
-        val analyzeResult = runCatching { task.analyze() }
-        analyzeResult.getOrNull() ?: run {
-            //println("${file.name} threw exception")
-            return null
-        }
+        val task = javac.getTask(NoopWriter, emptyFileManager, CountingDiagnosticListener.NullWriter, listOf(), listOf(), listOf(file), context)
+        val compUnit = task.parse().iterator().apply {
+            if(!hasNext()) return null
+        }.next()
         return Pair(task, compUnit)
     }
 
