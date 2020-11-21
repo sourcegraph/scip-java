@@ -54,10 +54,11 @@ class ExternalDocs(private val docPaths: List<Path>) {
         return Pair(task, compUnit)
     }
 
-    private class DocExtractionVisitor(task: JavacTask, private val element: Element): TreePathScanner<ExternalHoverMeta?, Unit?>() {
-        private val docs: DocTrees = DocTrees.instance(task)
+    private class DocExtractionVisitor(val task: JavacTask, private val element: Element, private val docs: DocTrees = DocTrees.instance(task)): TreePathScanner<ExternalHoverMeta?, Unit?>() {
+        private var new: Boolean = true
+        private lateinit var classDecl: ClassTree
 
-        override fun visitMethod(node: MethodTree?, p: Unit?): ExternalHoverMeta? {
+        override fun visitMethod(node: MethodTree, p: Unit?): ExternalHoverMeta? {
             (node as JCMethodDecl).sym ?: return null
 
             if(node.sym.toString() == element.toString()) {
@@ -68,7 +69,7 @@ class ExternalDocs(private val docPaths: List<Path>) {
             return null
         }
 
-        override fun visitVariable(node: VariableTree?, p: Unit?): ExternalHoverMeta? {
+        override fun visitVariable(node: VariableTree, p: Unit?): ExternalHoverMeta? {
             (node as JCVariableDecl).sym ?: return null
 
             if(node.sym.toString() == element.toString()) {
@@ -78,8 +79,16 @@ class ExternalDocs(private val docPaths: List<Path>) {
             return null
         }
 
-        override fun visitClass(node: ClassTree?, p: Unit?): ExternalHoverMeta? {
-            (node as JCClassDecl).sym ?: return null
+        override fun visitClass(node: ClassTree, p: Unit?): ExternalHoverMeta? {
+            // we need this logic here to stop calling scan on the same ClassTree infinitely, but we also
+            // want to start a new visitor for each nested class decl
+            if(!new) {
+                return DocExtractionVisitor(task, element, docs).scan(node, null)
+            }
+            new = false
+            classDecl = node
+            
+            (node as JCClassDecl).sym ?: return super.visitClass(node, p)
             
             if(node.sym.toString() == element.toString()) {
                 val doc = docs.getDocComment(currentPath) ?: return super.visitClass(node, p)

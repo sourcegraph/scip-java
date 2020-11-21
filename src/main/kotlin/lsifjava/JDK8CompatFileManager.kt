@@ -109,9 +109,9 @@ private val JDK_MODULES = listOf(
  * FileManager that falls back to JavacPathFileManager for Java 8.
  * Java 8 StandardJavaFileManager doesn't have the <code>setLocationFromPaths</code>
  * method, instead it only has <code>setLocation</code> which requires an 
- * <code>Iterable\<? extends File\></code>, which would cause an UnsupportedException
+ * <code>Iterable<? extends File></code>, which would cause an UnsupportedException
  * when trying to turn the ZipFile from the in-memory FileSystem into a File.
- * Because JavacPathFileManager doesnt exist beyond Java 8 (9?) and we build with 14+,
+ * Because JavacPathFileManager doesn't exist beyond Java 8 (9?) and we build with 14+,
  * the symbol resolver would fail for that symbol, hence we create an instance via
  * reflection if the Java version is 8. God I hate this.
  */
@@ -165,28 +165,28 @@ class JDK8CompatFileManager(manager: StandardJavaFileManager): ForwardingJavaFil
         }
     }
 
- fun getJavaFileForInput(containerClass: String): JavaFileObject? {
-     if(javaVersion == 8) {
-         return this.getJavaFileForInput(StandardLocation.SOURCE_PATH, containerClass, JavaFileObject.Kind.SOURCE)
-     } else {
-         for(module in JDK_MODULES) {
-             val moduleLocation = this.getLocationForModule(StandardLocation.MODULE_SOURCE_PATH, module) ?: continue
-             this.getJavaFileForInput(moduleLocation, containerClass, JavaFileObject.Kind.SOURCE)?.run {
-                return this
-             }
-         }
-     }
+    fun getJavaFileForInput(containerClass: String): JavaFileObject? {
+        if(javaVersion == 8) {
+            return this.getJavaFileForInput(StandardLocation.SOURCE_PATH, containerClass, JavaFileObject.Kind.SOURCE)
+        } else {
+            for(module in JDK_MODULES) {
+                val moduleLocation = this.getLocationForModule(StandardLocation.MODULE_SOURCE_PATH, module) ?: continue
+                this.getJavaFileForInput(moduleLocation, containerClass, JavaFileObject.Kind.SOURCE)?.run {
+                    return this
+                }
+            }
+        }
 
-     return null
- }
+        return null
+    }
 
     // from https://github.com/georgewfraser/java-language-server
     // bless you george for all the references. Maybe Ill cut this down/refactor
     private object JavaHomeHelper {
         fun javaHome(): Path? {
-            val fromEnv = System.getenv("JAVA_HOME")
-            if (fromEnv != null)
-                return Paths.get(fromEnv)
+            System.getenv("JAVA_HOME")?.let {
+                return Paths.get(it)
+            }
             val osName = System.getProperty("os.name")
             if (isWindows(osName)) return windowsJavaHome()
             if (isMac(osName)) return macJavaHome()
@@ -237,7 +237,7 @@ class JDK8CompatFileManager(manager: StandardJavaFileManager): ForwardingJavaFil
 
         private fun check(vararg roots: String): Path? {
             for (root in roots) {
-                var list: List<Path> = try {
+                val list: List<Path> = try {
                     Files.list(Paths.get(root)).collect(Collectors.toList())
                 } catch (e: NoSuchFileException) {
                     continue
