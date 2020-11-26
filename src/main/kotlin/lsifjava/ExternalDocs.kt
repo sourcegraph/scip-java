@@ -87,12 +87,13 @@ class ExternalDocs(private val docPaths: List<Path>) {
             }
             new = false
             classDecl = node
-            
-            (node as JCClassDecl).sym ?: return super.visitClass(node, p)
-            
-            if(node.sym.toString() == element.toString()) {
+
+            if(element !is Symbol.ClassSymbol) return super.visitClass(node, p)
+
+            // Assumption: no class-like name conflicts within a single class file
+            if((node as JCClassDecl).name.toString() == element.simpleName.toString()) {
                 val doc = docs.getDocComment(currentPath) ?: return super.visitClass(node, p)
-                return ExternalHoverMeta(doc, node)
+                return ExternalHoverMeta(doc.trim(), node)
             }
 
             return super.visitClass(node, p)
