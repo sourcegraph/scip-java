@@ -59,11 +59,34 @@ class ExternalDocs(private val docPaths: List<Path>) {
         private lateinit var classDecl: ClassTree
 
         override fun visitMethod(node: MethodTree, p: Unit?): ExternalHoverMeta? {
-            (node as JCMethodDecl).sym ?: return null
+            if(element !is Symbol.MethodSymbol) return null
 
-            if(node.sym.toString() == element.toString()) {
+            if(element.owner.simpleName.toString() != classDecl.simpleName.toString())
+                return null
+
+            if(element.name.toString() != node.name.toString()) return null
+
+            if(element.name.toString() != "<init>" &&
+               element.returnType.toString() != node.returnType.toString()) return null
+
+            val paramsEqual = element.params.size == node.parameters.size &&
+                element.params.foldIndexed(true) { i, acc, sym ->
+                    val paramType = (node.parameters[i] as JCVariableDecl).vartype
+                    val defTypeName = when(paramType) {
+                        is JCPrimitiveTypeTree -> paramType.toString()
+                        is JCTypeApply -> paramType.clazz.toString()
+                        is JCIdent -> paramType.toString()
+                        else -> {
+                            println("param type wasn't JCPrimitiveTypeTree|JCTypeApply|JCIdent, but ${paramType::class.java}")
+                            return null
+                        }
+                    }
+                    acc && sym.type.tsym.simpleName.toString() == defTypeName
+                }
+
+            if(paramsEqual) {
                 val doc = docs.getDocComment(currentPath) ?: return null
-                return ExternalHoverMeta(doc, node)
+                return ExternalHoverMeta(doc.trim(), node)
             }
 
             return null
