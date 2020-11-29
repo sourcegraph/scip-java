@@ -55,6 +55,10 @@ class ExternalDocs(private val docPaths: List<Path>) {
     }
 
     private class DocExtractionVisitor(val task: JavacTask, private val element: Element, private val docs: DocTrees = DocTrees.instance(task)): TreePathScanner<ExternalHoverMeta?, Unit?>() {
+        // Basic flag to indicate if this DocExtractionVisitor has visited its assigned class decl yet.
+        // If set to false, we want to create a new DocExtractionVisitor for the class decl we are visiting.
+        // This way we can keep track of the owning class decl for methods/variables that are otherwise only
+        // available with fully resolved symbols, which we don't get with non-full-fat parsing+analyzing
         private var new: Boolean = true
         private lateinit var classDecl: ClassTree
 
@@ -93,11 +97,16 @@ class ExternalDocs(private val docPaths: List<Path>) {
         }
 
         override fun visitVariable(node: VariableTree, p: Unit?): ExternalHoverMeta? {
-            (node as JCVariableDecl).sym ?: return null
+            if(element !is Symbol.VarSymbol) return null
 
-            if(node.sym.toString() == element.toString()) {
+            if(element.owner.simpleName.toString() != classDecl.simpleName.toString())
+                return null
 
+            if(element.name.toString() == node.name.toString()) {
+                val doc = docs.getDocComment(currentPath) ?: return null
+                return ExternalHoverMeta(doc.trim(), node)
             }
+
             // filter to instance variables
             return null
         }
