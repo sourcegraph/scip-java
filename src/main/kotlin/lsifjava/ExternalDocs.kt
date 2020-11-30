@@ -20,7 +20,7 @@ data class ExternalHoverMeta(val doc: String, val tree: Tree)
 
 private val emptyFileManager = SourceFileManager(emptySet())
 
-class ExternalDocs(private val docPaths: List<Path>) {
+class ExternalDocs(private val docPaths: List<Path>, val diagnosticListener: CountingDiagnosticListener) {
     private val fileCache = HashMap<String, Pair<JavacTask, CompilationUnitTree>?>()
 
     private val fileManager = let {
@@ -47,7 +47,7 @@ class ExternalDocs(private val docPaths: List<Path>) {
     private fun analyzeFileFromJar(containerClass: String, context: Context, javac: JavacTool): Pair<JavacTask, CompilationUnitTree>? {
         val file = findFileFromJars(containerClass) ?: return null
 
-        val task = javac.getTask(NoopWriter, emptyFileManager, CountingDiagnosticListener.NullWriter, listOf(), listOf(), listOf(file), context)
+        val task = javac.getTask(NoopWriter, emptyFileManager, diagnosticListener, listOf(), listOf(), listOf(file), context)
         val compUnit = task.parse().iterator().apply {
             if(!hasNext()) return null
         }.next()
