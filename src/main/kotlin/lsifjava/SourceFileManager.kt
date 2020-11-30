@@ -4,12 +4,12 @@ package lsifjava
 import java.io.IOException
 import java.nio.charset.Charset
 import java.nio.file.Path
-import java.util.*
 import java.util.regex.Pattern
 import java.util.stream.Stream
 import javax.tools.*
+import javax.tools.JavaFileObject.Kind
 
-class SourceFileManager internal constructor(private val paths: Set<Path>):
+class SourceFileManager(private val paths: Set<Path>):
     ForwardingJavaFileManager<StandardJavaFileManager>(getDelegateFileManager) {
 
     companion object {
@@ -19,10 +19,7 @@ class SourceFileManager internal constructor(private val paths: Set<Path>):
     }
 
     override fun list(
-        location: JavaFileManager.Location,
-        packageName: String,
-        kinds: Set<JavaFileObject.Kind>,
-        recurse: Boolean
+        location: JavaFileManager.Location, packageName: String, kinds: Set<Kind>, recurse: Boolean
     ): Iterable<JavaFileObject> {
         return if (location === StandardLocation.SOURCE_PATH) {
             val sourceFileObjectStream = list(packageName)

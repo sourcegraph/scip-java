@@ -6,7 +6,7 @@ import java.io.PrintWriter
 val javaVersion: Int = getVersion()
 
 fun main(args: Array<String>) {
-    println("Running JVM ${System.getProperty("java.version")}")
+    println("Running JVM ${System.getProperty("java.version")}, JAVA_HOME is set to ${JavaHomeHelper.javaHome() ?: ""}")
 
     val arguments = parse(args)
     val writer = createWriter(arguments)

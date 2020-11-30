@@ -27,7 +27,7 @@ fun buildIndexerMap(
     val sourceVersions = buildToolInterface.javaSourceVersions
 
     // TODO(nsc) where to move this
-    val externalDocManager = ExternalDocs(buildToolInterface.sourcesList)
+    val externalDocManager = ExternalDocs(buildToolInterface.sourcesList, javacDiagListener)
 
     val fileBuildInfo = Channel<FileBuildInfo>()
 
