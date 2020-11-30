@@ -20,7 +20,8 @@ data class ExternalHoverMeta(val doc: String, val tree: Tree)
 
 private val emptyFileManager = SourceFileManager(emptySet())
 
-class ExternalDocs(private val docPaths: List<Path>, val diagnosticListener: CountingDiagnosticListener) {
+class ExternalDocs(private val docPaths: List<Path>, private val diagnosticListener: CountingDiagnosticListener) {
+    // we cache compilation unit trees here to reduce the number of times we have to invoke the parser
     private val fileCache = HashMap<String, Pair<JavacTask, CompilationUnitTree>?>()
 
     private val fileManager = let {
@@ -31,11 +32,17 @@ class ExternalDocs(private val docPaths: List<Path>, val diagnosticListener: Cou
 
     private val jdkFileManager = JDK8CompatFileManager(fileManager)
 
+    /**
+     * Returns hover metadata for the tree section that matches the given element in the class file
+     * associated with <code>containerClass</code>, which is expected to be the fully qualified name of the class file
+     */
     fun findDocForElement(containerClass: String, javac: JavacTool, element: Element): ExternalHoverMeta? {
         val context = DocumentIndexer.SimpleContext()
 
-        val (task, compUnit) = fileCache.getOrPut(containerClass) { analyzeFileFromJar(containerClass, context, javac) }
-            ?: return null
+        val (task, compUnit) = fileCache.getOrPut(containerClass) {
+            val fileObject = findFileFromJars(containerClass) ?: return@getOrPut null
+            parseFileObject(fileObject, context, javac)
+        } ?: return null
 
         return DocExtractionVisitor(task, element).scan(compUnit, null)
     }
@@ -44,17 +51,24 @@ class ExternalDocs(private val docPaths: List<Path>, val diagnosticListener: Cou
         fileManager.getJavaFileForInput(StandardLocation.SOURCE_PATH, containerClass, JavaFileObject.Kind.SOURCE)
             ?: jdkFileManager.getJavaFileForInput(containerClass)
 
-    private fun analyzeFileFromJar(containerClass: String, context: Context, javac: JavacTool): Pair<JavacTask, CompilationUnitTree>? {
-        val file = findFileFromJars(containerClass) ?: return null
-
+    /**
+     * Performs basic parsing of the external dependency JavaFileObject and returns a (javac task, compilation unit) pair.
+     * For reasons beyond my knowing (and many a staring at the debugger), an empty file manager
+     */
+    private fun parseFileObject(file: JavaFileObject, context: Context, javac: JavacTool): Pair<JavacTask, CompilationUnitTree>? {
         val task = javac.getTask(NoopWriter, emptyFileManager, diagnosticListener, listOf(), listOf(), listOf(file), context)
         val compUnit = task.parse().iterator().apply {
+            // bail out of the enclosing function
             if(!hasNext()) return null
         }.next()
         return Pair(task, compUnit)
     }
 
-    private class DocExtractionVisitor(val task: JavacTask, private val element: Element, private val docs: DocTrees = DocTrees.instance(task)): TreePathScanner<ExternalHoverMeta?, Unit?>() {
+    private class DocExtractionVisitor(
+        val task: JavacTask,
+        private val element: Element,
+        private val docs: DocTrees = DocTrees.instance(task)
+    ): TreePathScanner<ExternalHoverMeta?, Unit?>() {
         // Basic flag to indicate if this DocExtractionVisitor has visited its assigned class decl yet.
         // If set to false, we want to create a new DocExtractionVisitor for the class decl we are visiting.
         // This way we can keep track of the owning class decl for methods/variables that are otherwise only

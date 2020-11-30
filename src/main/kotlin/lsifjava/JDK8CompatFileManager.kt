@@ -113,6 +113,11 @@ private val JDK_MODULES = listOf(
  */
 class JDK8CompatFileManager(manager: StandardJavaFileManager): ForwardingJavaFileManager<JavaFileManager>(getFileManager(manager)) {
     companion object {
+        /**
+         * returns a different JavaFileManager based on the current java version, with either SOURCE_PATH or MODULE_SOURCE_PATH set to "/"
+         * denoting the root of the JAR/ZIP file that this file manager is for. If JDK 8, we instantiate a <code>com.sun.tools.javac.nio.JavacPathFileManager</code>
+         * via reflection, else we use the passed file manager. See the class doc for the reason why.
+         */
         private fun getFileManager(fileManager: StandardJavaFileManager): JavaFileManager {
             var java8Manager: JavaFileManager? = null
 
@@ -161,6 +166,9 @@ class JDK8CompatFileManager(manager: StandardJavaFileManager): ForwardingJavaFil
         }
     }
 
+    /**
+     * Searches for a class either by module or not depending on the current java version.
+     */
     fun getJavaFileForInput(containerClass: String): JavaFileObject? {
         if(javaVersion == 8) {
             return this.getJavaFileForInput(StandardLocation.SOURCE_PATH, containerClass, JavaFileObject.Kind.SOURCE)
