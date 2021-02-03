@@ -6,7 +6,8 @@ target
 .settings
 *.iml
 .gradle
-examples/**/dump.lsif
 build
 bin/*
 *.png
+**/*.lsif
+reflectconfig.json

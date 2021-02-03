@@ -1,2 +1,6 @@
 {
+    "java.externalDependencies": [
+        "com.google.code.gson:gson:2.8.6"
+    ],
+    "java.home": "/usr/lib/jvm/java-15-jdk/",
 }
