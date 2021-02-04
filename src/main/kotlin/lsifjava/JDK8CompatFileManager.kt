@@ -102,20 +102,18 @@ private val JDK_MODULES = listOf(
 )
 
 /**
- * FileManager that falls back to JavacPathFileManager for Java 8.
- * Java 8 StandardJavaFileManager doesn't have the <code>setLocationFromPaths</code>
- * method, instead it only has <code>setLocation</code> which requires an 
- * <code>Iterable<? extends File></code>, which would cause an UnsupportedException
- * when trying to turn the ZipFile from the in-memory FileSystem into a File.
- * Because JavacPathFileManager doesn't exist beyond Java 8 (9?) and we build with 14+,
- * the symbol resolver would fail for that symbol, hence we create an instance via
- * reflection if the Java version is 8. God I hate this.
+ * FileManager that falls back to JavacPathFileManager for Java 8. Java 8 StandardJavaFileManager
+ * doesn't have the setLocationFromPaths method, instead it only has setLocation which requires an
+ * Iterable<? extends File>, which would cause an UnsupportedException when trying to turn the
+ * ZipFile from the in-memory FileSystem into a File. Because JavacPathFileManager doesn't exist
+ * beyond Java 8 (9?) and we build with 14+, the symbol resolver would fail for that symbol,
+ * hence we create an instance via reflection if the Java version is 8. God I hate this.
  */
 class JDK8CompatFileManager(manager: StandardJavaFileManager): ForwardingJavaFileManager<JavaFileManager>(getFileManager(manager)) {
     companion object {
         /**
          * returns a different JavaFileManager based on the current java version, with either SOURCE_PATH or MODULE_SOURCE_PATH set to "/"
-         * denoting the root of the JAR/ZIP file that this file manager is for. If JDK 8, we instantiate a <code>com.sun.tools.javac.nio.JavacPathFileManager</code>
+         * denoting the root of the JAR/ZIP file that this file manager is for. If JDK 8, we instantiate a com.sun.tools.javac.nio.JavacPathFileManager
          * via reflection, else we use the passed file manager. See the class doc for the reason why.
          */
         private fun getFileManager(fileManager: StandardJavaFileManager): JavaFileManager {

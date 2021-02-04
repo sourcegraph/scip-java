@@ -2,7 +2,9 @@
 package lsifjava
 
 import com.sun.source.tree.CompilationUnitTree
+import com.sun.source.util.DocTrees
 import com.sun.source.util.JavacTask
+import com.sun.source.util.Trees
 import com.sun.tools.javac.api.JavacTool
 import com.sun.tools.javac.main.JavaCompiler
 import com.sun.tools.javac.util.Context
@@ -14,6 +16,9 @@ import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
+/**
+ *
+ */
 class DocumentIndexer(
     private val filepath: CanonicalPath,
     private val classpath: Classpath,
@@ -24,10 +29,6 @@ class DocumentIndexer(
     private val diagnosticListener: CountingDiagnosticListener,
     private val verbose: Boolean,
 ) {
-    companion object {
-        private val systemProvider by lazy { JavacTool.create() }
-    }
-    
     data class DefinitionMeta(val definitionRangeId: String, val resultSetId: String) {
         var definitionResultId: String? = null
         val referenceRangeIds: MutableMap<String, MutableSet<String>> = HashMap()
@@ -52,59 +53,26 @@ class DocumentIndexer(
 
     private var indexed = AtomicBoolean(false)
 
+    /**
+     * Invokes the javac
+     */
     fun index() {
         try {
             if(!indexed.compareAndSet(false, true)) return
-            val (task, compUnit) = analyzeFile()
-            IndexingVisitor(task, systemProvider, docManager, compUnit, this, indexers).scan(compUnit, null)
-            referencesBacklog.forEach { it() }
+
+            val systemProvider = JavacTool.create()
+            val (task, compUnit) = generateParseTree(systemProvider, fileManager, diagnosticListener, javaSourceVersion, classpath, filepath)
+
+            val trees: Trees = Trees.instance(task)
+            val docs: DocTrees = DocTrees.instance(task)
+            IndexingVisitor(trees, docs, systemProvider, docManager, compUnit, this, indexers).scan(compUnit, null)
         } catch (e: Exception) {
             throw IndexingException(filepath.toString(), e)
+        } finally {
+            referencesBacklog.forEach { it() }
         }
 
         println("finished analyzing and visiting $filepath")
-    }
-
-    private fun analyzeFile(): Pair<JavacTask, CompilationUnitTree> {
-        val context = SimpleContext()
-
-        val task = systemProvider.getTask(
-            NoopWriter, fileManager, diagnosticListener,
-            listOf("-proc:none", "-nowarn", "-source", javaSourceVersion, "-classpath", classpath.toString() /*, "--enable-preview" */),
-            listOf(), listOf(SourceFileObject(filepath.path)), context
-        )
-        val compUnit = task.parse().iterator().next()
-        task.analyze()
-        
-        return Pair(task, compUnit)
-    }
-
-    internal class SimpleContext: Context() {
-        init {
-            put(SimpleCompiler.contextKey, SimpleCompiler.factory)
-        }
-    }
-
-    internal class SimpleCompiler(context: Context?): JavaCompiler(context) {
-        companion object {
-            val factory = Context.Factory<JavaCompiler> { context: Context? -> SimpleCompiler(context) }
-
-            val contextKey: Context.Key<JavaCompiler> by lazy {
-                if(javaVersion == 8) run {
-                    val field = SimpleCompiler::class.java.superclass.getDeclaredField("compilerKey")
-                    field.isAccessible = true
-                    val key: Context.Key<JavaCompiler> = Context.Key() // dummy value to be overwritten
-                    return@lazy field.get(key) as Context.Key<JavaCompiler>
-                }
-                compilerKey  
-            }
-        }
-
-        init {
-            genEndPos = true
-            lineDebugInfo = true
-            keepComments = true
-        }
     }
 
     fun postIndex(projectId: String) {
@@ -164,7 +132,7 @@ class DocumentIndexer(
         definitions[range] = DefinitionMeta(rangeId, resultSetId) // + contents?
     }
 
-    // TODO(nsc): GLOBAL CACHE SO WE DONT HAVE MULTIPLE REFS FOR SAME DEF
+    // TODO GLOBAL CACHE SO WE DONT HAVE MULTIPLE REFS FOR SAME DEF
     internal fun emitExternalHoverAndUse(signature: String, doc: String, use: Range) {
         val hoverId = emitter.emitVertex("hoverResult", mapOf(
             "result" to mapOf(
@@ -186,6 +154,10 @@ class DocumentIndexer(
         linkUses(meta)
     }
 
+    /**
+     * Adds a processing function to a backlog to be executed after the current document and all transitively dependent
+     * documents are indexed to emit ranges that are linked to def ranges in postIndex.
+     */
     internal fun emitUse(use: Range, def: Range, defPath: Path) {
         referencesBacklog.add {
             val indexer = indexers[defPath] ?: error("expected indexer for $defPath")

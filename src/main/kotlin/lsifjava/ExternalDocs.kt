@@ -37,7 +37,7 @@ class ExternalDocs(private val docPaths: List<Path>, private val diagnosticListe
      * associated with <code>containerClass</code>, which is expected to be the fully qualified name of the class file
      */
     fun findDocForElement(containerClass: String, javac: JavacTool, element: Element): ExternalHoverMeta? {
-        val context = DocumentIndexer.SimpleContext()
+        val context = SimpleContext()
 
         val (task, compUnit) = fileCache.getOrPut(containerClass) {
             val fileObject = findFileFromJars(containerClass) ?: return@getOrPut null
