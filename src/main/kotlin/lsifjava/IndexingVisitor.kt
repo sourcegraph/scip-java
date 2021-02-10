@@ -34,16 +34,14 @@ data class ReferenceData(val useRange: Range, val defRange: Range?, val defPath:
 fun Type.strip() = this.toString().removePrefix("java.lang.")
 
 class IndexingVisitor(
-    task: JavacTask,
+    private val trees: Trees,
+    private val docs: DocTrees,
     private val tool: JavacTool,
     private val externalDocManager: ExternalDocs,
     private val compUnit: CompilationUnitTree,
     private val indexer: DocumentIndexer,
     private val indexers: Map<Path, DocumentIndexer>
 ): TreePathScanner<Unit?, Unit?>() {
-    private val trees: Trees = Trees.instance(task)
-    private val docs: DocTrees = DocTrees.instance(task)
-
     // TODO(nsc) handle 'var'
     override fun visitVariable(node: VariableTree, p: Unit?): Unit? {
         // emit var definition
@@ -74,11 +72,12 @@ class IndexingVisitor(
 
         val symbol = (node as JCClassDecl?)?.sym ?: return super.visitClass(node, p)
         
-        // TODO(nsc): snazzy records hover
+        // TODO snazzy records hover
         val classOrEnum: String = when {
             symbol.isEnum -> "enum "
             javaVersion >= 14 && symbol.isRecord -> "record "
-            symbol.isInterface -> "" // for some reason, 'interface ' is part of the modifiers
+            // for some reason, 'interface ' is part of the modifiers, so we exclude the string here
+            symbol.isInterface -> ""
             // TODO lowest version
             javaVersion >= 14 && symbol.isAnnotationType -> ""
             else -> "class "
@@ -360,8 +359,7 @@ class IndexingVisitor(
     // this may fail to find the correct position if start is too far behind the actual start position
     // that we want and another matching but incorrect symbol matches the regex
     private fun findNameIn(root: CompilationUnitTree, name: CharSequence, start: Int, end: Int): Int {
-        val contents: CharSequence
-        contents = try {
+        val contents = try {
             root.sourceFile.getCharContent(true)
         } catch (e: IOException) {
             throw RuntimeException(e)

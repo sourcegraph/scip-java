@@ -13,6 +13,12 @@ import java.util.stream.Collectors
 
 // from https://github.com/georgewfraser/java-language-server
 // bless you george for all the references. Maybe Ill cut this down/refactor
+/**
+ * Attempts to derive the possible JAVA_HOME, either from the set env var or
+ * through searching various platform dependent directories. If the wrong JAVA_HOME
+ * is found via search in the case where multiple versions are installed, the env
+ * var should be used.
+ */
 object JavaHomeHelper {
     fun javaHome(): Path? {
         System.getenv("JAVA_HOME")?.let {
@@ -37,7 +43,17 @@ object JavaHomeHelper {
 
     private fun macJavaHome(): Path? {
         if (Files.isExecutable(Paths.get("/usr/libexec/java_home"))) {
-            return execJavaHome()
+            return try {
+                val process = ProcessBuilder().command("/usr/libexec/java_home").start()
+                val out = BufferedReader(InputStreamReader(process.inputStream))
+                val line = out.readLine()
+                process.waitFor(5, TimeUnit.SECONDS)
+                Paths.get(line)
+            } catch (e: IOException) {
+                throw RuntimeException(e)
+            } catch (e: InterruptedException) {
+                throw RuntimeException(e)
+            }
         }
         val homes = arrayOf(
             "/Library/Java/JavaVirtualMachines/Home",
@@ -50,20 +66,6 @@ object JavaHomeHelper {
     private fun linuxJavaHome(): Path? {
         val homes = arrayOf("/usr/java", "/opt/java", "/usr/lib/jvm")
         return check(*homes)
-    }
-
-    private fun execJavaHome(): Path {
-        return try {
-            val process = ProcessBuilder().command("/usr/libexec/java_home").start()
-            val out = BufferedReader(InputStreamReader(process.inputStream))
-            val line = out.readLine()
-            process.waitFor(5, TimeUnit.SECONDS)
-            Paths.get(line)
-        } catch (e: IOException) {
-            throw RuntimeException(e)
-        } catch (e: InterruptedException) {
-            throw RuntimeException(e)
-        }
     }
 
     private fun check(vararg roots: String): Path? {
