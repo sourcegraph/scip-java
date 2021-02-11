@@ -71,7 +71,7 @@ lazy val minimized = project
           s"-text:on",
           s"-verbose",
           s"-sourceroot:${baseDirectory.in(ThisBuild).value}",
-          s"-targetroot:${target.in(Compile).value / "semanticdb"}"
+          s"-targetroot:${semanticdbTargetRoot.in(Compile).value}"
         ).mkString(" ")
       )
   )
@@ -97,7 +97,7 @@ lazy val unit = project
         "minimizedJavaSourceDirectory" ->
           sourceDirectory.in(minimized, Compile).value / "java",
         "minimizedJavaTargetroot" ->
-          target.in(minimized, Compile).value / "semanticdb",
+          semanticdbTargetRoot.in(minimized, Compile).value,
         "minimizedScalaSourceDirectory" ->
           sourceDirectory.in(minimizedScala, Compile).value / "scala",
         "minimizedScalaTargetroot" ->
