@@ -3,10 +3,11 @@ package tests
 import java.nio.file.Files
 
 import scala.meta.internal.io.FileIO
-import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
-import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocuments
 import scala.meta.io.AbsolutePath
 import scala.meta.io.RelativePath
+
+import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
+import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocuments
 
 case class SemanticdbFile(
     sourceroot: AbsolutePath,
