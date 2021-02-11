@@ -15,6 +15,7 @@ object JavacBootClasspathPlugin extends AutoPlugin {
   lazy val configSettings = List(
     javacOptions ++= List("-target", "1.8", "-source", "1.8"),
     javacOptions.in(doc) --= List("-target", "1.8"),
+    javacOptions.in(doc) --= bootclasspathSettings,
     javaHome := Some(javaHomeDirectory),
     javacOptions ++= bootclasspathSettings,
     javaOptions ++= bootclasspathSettings

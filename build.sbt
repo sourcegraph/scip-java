@@ -28,7 +28,7 @@ commands +=
 commands +=
   Command.command("checkAll") { s =>
     "scalafmtCheckAll" :: "scalafmtSbtCheck" :: "scalafixAll --check" ::
-      "javafmtCheckAll" :: s
+      "javafmtCheckAll" :: "publishLocal" :: s
   }
 
 lazy val testSettings = List(
