@@ -1,0 +1,42 @@
+package com.sourcegraph.semanticdb_javac;
+
+/**
+ * Describes how to convert a compiler position into SemanticDB Range.
+ *
+ * <p>A Java compiler position has tree parts: "start", "point" and "end".
+ *
+ * <pre>
+ *     public static void main(String[] args) { }
+ *     ^ start
+ *                        ^ point (aka. "preferred position")
+ *                                              ^ end
+ * </pre>
+ *
+ * A SemanticDB range has four parts: "startLine", "startCharacter", "endLine", "endCharacter".
+ */
+public enum CompilerRange {
+  /** Map the compiler start/end positions to SemanticDB start/end positions. */
+  FROM_START_TO_END,
+
+  /**
+   * Map the compiler point position to SemanticDB start and use (point + symbol name length) for
+   * the SemanticDB end position.
+   */
+  FROM_POINT_TO_SYMBOL_NAME,
+
+  /**
+   * Map the compiler (point + 1) position to SemanticDB start and use (point + symbol name length +
+   * 1) for the SemanticDB end position.
+   */
+  FROM_POINT_TO_SYMBOL_NAME_PLUS_ONE;
+
+  public boolean isFromPoint() {
+    switch (this) {
+      case FROM_POINT_TO_SYMBOL_NAME:
+      case FROM_POINT_TO_SYMBOL_NAME_PLUS_ONE:
+        return true;
+      default:
+        return false;
+    }
+  }
+}

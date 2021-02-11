@@ -1,0 +1,106 @@
+// Original source: https://github.com/scalameta/scalameta/blob/cf796cf2436b40494baf2bdc266623dc65264ad5/semanticdb/semanticdb/semanticdb.proto
+// Local modifications:
+// - Removes unused fields to minimize the amount of generated code.
+// - Adds SymbolInformation.documentation that is pending upstream approval.
+
+syntax = "proto3";
+
+package com.sourcegraph.semanticdb_javac;
+
+enum Schema {
+  LEGACY = 0;
+  SEMANTICDB3 = 3;
+  SEMANTICDB4 = 4;
+}
+
+message TextDocuments {
+  repeated TextDocument documents = 1;
+}
+
+message TextDocument {
+  reserved 4, 8, 9;
+  Schema schema = 1;
+  string uri = 2;
+  string text = 3;
+  string md5 = 11;
+  Language language = 10;
+  repeated SymbolInformation symbols = 5;
+  repeated SymbolOccurrence occurrences = 6;
+}
+
+enum Language {
+  UNKNOWN_LANGUAGE = 0;
+  SCALA = 1;
+  JAVA = 2;
+}
+
+message Range {
+  int32 start_line = 1;
+  int32 start_character = 2;
+  int32 end_line = 3;
+  int32 end_character = 4;
+}
+
+message SymbolInformation {
+  enum Kind {
+    reserved 1, 2, 4, 5, 15, 16;
+    UNKNOWN_KIND = 0;
+    LOCAL = 19;
+    FIELD = 20;
+    METHOD = 3;
+    CONSTRUCTOR = 21;
+    MACRO = 6;
+    TYPE = 7;
+    PARAMETER = 8;
+    SELF_PARAMETER = 17;
+    TYPE_PARAMETER = 9;
+    OBJECT = 10;
+    PACKAGE = 11;
+    PACKAGE_OBJECT = 12;
+    CLASS = 13;
+    TRAIT = 14;
+    INTERFACE = 18;
+  }
+  enum Property {
+    UNKNOWN_PROPERTY = 0;
+    reserved 0x1;
+    reserved 0x2;
+    ABSTRACT = 0x4;
+    FINAL = 0x8;
+    SEALED = 0x10;
+    IMPLICIT = 0x20;
+    LAZY = 0x40;
+    CASE = 0x80;
+    COVARIANT = 0x100;
+    CONTRAVARIANT = 0x200;
+    VAL = 0x400;
+    VAR = 0x800;
+    STATIC = 0x1000;
+    PRIMARY = 0x2000;
+    ENUM = 0x4000;
+    DEFAULT = 0x8000;
+  }
+  reserved 2, 6, 7, 8, 9, 10, 11, 12, 14, 15;
+  string symbol = 1;
+  Language language = 16;
+  Kind kind = 3;
+  int32 properties = 4;
+  string display_name = 5;
+  // + spec deviation
+  string documentation = 20;
+  // - spec deviation
+}
+
+
+
+message SymbolOccurrence {
+  enum Role {
+    UNKNOWN_ROLE = 0;
+    REFERENCE = 1;
+    DEFINITION = 2;
+  }
+  Range range = 1;
+  string symbol = 2;
+  Role role = 3;
+}
+
