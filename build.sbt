@@ -5,13 +5,31 @@ inThisBuild(
   List(
     scalaVersion := scala213,
     crossScalaVersions := List(scala213),
-    organization := "com.sourcegraph",
     scalafixDependencies +=
       "com.github.liancheng" %% "organize-imports" % "0.5.0",
     scalafixCaching := true,
     scalacOptions ++= List("-Wunused:imports"),
     semanticdbEnabled := true,
-    semanticdbVersion := scalametaVersion
+    semanticdbVersion := scalametaVersion,
+    organization := "com.sourcegraph",
+    homepage := Some(url("https://github.com/sourcegraph/lsif-java")),
+    licenses := List(
+      "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")
+    ),
+    developers := List(
+      Developer(
+        "olafurpg",
+        "Ólafur Páll Geirsson",
+        "olafurpg@sourcegraph.com",
+        url("https://github.com/olafurpg")
+      ),
+      Developer(
+        "Strum355",
+        "Noah Santschi-Cooney",
+        "noah@sourcegraph.com",
+        url("https://github.com/Strum355")
+      )
+    )
   )
 )
 
