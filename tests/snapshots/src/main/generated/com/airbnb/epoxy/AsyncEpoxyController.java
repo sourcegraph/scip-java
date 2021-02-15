@@ -24,7 +24,7 @@ import static com.airbnb.epoxy.EpoxyAsyncUtil.getAsyncBackgroundHandler;
  */
 public abstract class AsyncEpoxyController extends EpoxyController {
 //              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyController#
-//                                                 ^^^^^^^^^^^^^^^ reference _root_/
+//                                                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 
   /**
    * A new instance that does model building and diffing asynchronously.
@@ -56,6 +56,7 @@ public abstract class AsyncEpoxyController extends EpoxyController {
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^ definition local1
 //                                                                      ^^^^^^^^^^^^^^^^^^ definition local2
     super(getHandler(enableAsyncModelBuilding), getHandler(enableAsyncDiffing));
+//  ^^^^^ reference com/airbnb/epoxy/EpoxyController#`<init>`(+1).
 //        ^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyController#getHandler().
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^ reference local1
 //                                              ^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyController#getHandler().
@@ -68,7 +69,7 @@ public abstract class AsyncEpoxyController extends EpoxyController {
 //                                          ^^^^^^^^^^^ definition local3
     return enableAsync ? getAsyncBackgroundHandler() : MAIN_THREAD_HANDLER;
 //         ^^^^^^^^^^^ reference local3
-//                       ^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyController#getAsyncBackgroundHandler#
-//                                                     ^^^^^^^^^^^^^^^^^^^ reference _root_/
+//                       ^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAsyncUtil#getAsyncBackgroundHandler().
+//                                                     ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAsyncUtil#MAIN_THREAD_HANDLER.
   }
 }

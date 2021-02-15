@@ -30,7 +30,8 @@ class TargetedSuite extends FunSuite with TempDirectories {
       val groups = "<<([0-9a-zA-Z]+)>>".r
       val compiler = new TestCompiler(targetroot())
       val trimmedText = groups.replaceAllIn(original, "$1")
-      val input = Input.VirtualFile(options.name, trimmedText)
+      val relativePath = qualifiedClassName.replace('.', '/') + ".java"
+      val input = Input.VirtualFile(relativePath, trimmedText)
       var matcherCount = 0
       val positions =
         groups
@@ -42,8 +43,7 @@ class TargetedSuite extends FunSuite with TempDirectories {
             Position.Range(input, m.start - startOffset, m.end - endOffset)
           })
           .toList
-      val relativePath = qualifiedClassName.replace('.', '/') + ".java"
-      val result = compiler.compile(relativePath, input.text)
+      val result = compiler.compileSemanticdb(List(input))
       val occurrences = result.textDocument.getOccurrencesList.asScala.toList
       val symbols: List[String] = positions.map { pos =>
         val posRange = Semanticdb

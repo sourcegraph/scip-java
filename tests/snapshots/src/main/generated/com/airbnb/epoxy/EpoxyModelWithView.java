@@ -38,7 +38,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
 //              ^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#`<init>`().
 //              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#
 //                                                 ^^^^ reference _root_/
-//                                                               ^^^^^^^^^^ reference _root_/
+//                                                               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                          ^ reference com/airbnb/epoxy/EpoxyModelWithView#[T]
 
   /**
@@ -82,7 +82,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
   @Override
    ^^^^^^^^ reference java/lang/Override#
   public EpoxyModel<T> layout(@LayoutRes int layoutRes) {
-//       ^^^^^^^^^^ reference _root_/
+//       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModelWithView#[T]
 //                     ^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#layout().
 //                             ^^^^^^^^^ reference androidx/annotation/LayoutRes#

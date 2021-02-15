@@ -7,8 +7,8 @@ package com.airbnb.epoxy;
 class NoOpControllerHelper extends ControllerHelper<EpoxyController> {
 ^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#`<init>`().
 ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#
-//                                 ^^^^^^^^^^^^^^^^ reference _root_/
-//                                                  ^^^^^^^^^^^^^^^ reference _root_/
+//                                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerHelper#
+//                                                  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 
   @Override
    ^^^^^^^^ reference java/lang/Override#

@@ -9,40 +9,56 @@ package com.airbnb.epoxy;
  */
 class ControllerModelList extends ModelList {
 ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList#
-//                                ^^^^^^^^^ reference _root_/
+//                                ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
 
   private static final ModelListObserver OBSERVER = new ModelListObserver() {
-//                     ^^^^^^^^^^^^^^^^^ reference _root_/
+//                     ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
 //                                       ^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList#OBSERVER.
-//                                                      ^^^^^^^^^^^^^^^^^ reference _root_/
+//                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerModelList#OBSERVER.``#`<init>`(). 12:3
+//                                                      ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
+//                                                      ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
+//                                                                          ^ definition com/airbnb/epoxy/ControllerModelList#OBSERVER.``#`<init>`(). 1:4
     @Override
+//   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeInserted(int positionStart, int itemCount) {
+//              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList#OBSERVER.``#onItemRangeInserted().
+//                                      ^^^^^^^^^^^^^ definition local0
+//                                                         ^^^^^^^^^ definition local1
       throw new IllegalStateException(
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:75
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
           "Models cannot be changed once they are added to the controller");
     }
 
     @Override
+//   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeRemoved(int positionStart, int itemCount) {
+//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList#OBSERVER.``#onItemRangeRemoved().
+//                                     ^^^^^^^^^^^^^ definition local2
+//                                                        ^^^^^^^^^ definition local3
       throw new IllegalStateException(
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:75
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
           "Models cannot be changed once they are added to the controller");
     }
   };
 
   ControllerModelList(int expectedModelCount) {
   ^^^^^^ definition com/airbnb/epoxy/ControllerModelList#`<init>`().
-//                        ^^^^^^^^^^^^^^^^^^ definition local0
+//                        ^^^^^^^^^^^^^^^^^^ definition local4
     super(expectedModelCount);
-//        ^^^^^^^^^^^^^^^^^^ reference local0
+//  ^^^^^ reference com/airbnb/epoxy/ModelList#`<init>`().
+//        ^^^^^^^^^^^^^^^^^^ reference local4
     pauseNotifications();
-//  ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerModelList#pauseNotifications#
+//  ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#pauseNotifications().
   }
 
   void freeze() {
 //     ^^^^^^ definition com/airbnb/epoxy/ControllerModelList#freeze().
     setObserver(OBSERVER);
-//  ^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerModelList#setObserver#
+//  ^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#setObserver().
 //              ^^^^^^^^ reference com/airbnb/epoxy/ControllerModelList#OBSERVER.
     resumeNotifications();
-//  ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerModelList#resumeNotifications#
+//  ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#resumeNotifications().
   }
 }

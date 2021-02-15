@@ -11,7 +11,7 @@ public interface GeneratedModel<T> {
    */
   void handlePreBind(EpoxyViewHolder holder, T objectToBind, int position);
 //     ^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel#handlePreBind().
-//                   ^^^^^^^^^^^^^^^ reference _root_/
+//                   ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                   ^^^^^^ definition local0
 //                                           ^ reference com/airbnb/epoxy/GeneratedModel#[T]
 //                                             ^^^^^^^^^^^^ definition local1

@@ -4,13 +4,13 @@ import com.airbnb.epoxy.VisibilityState.Visibility;
 //     ^^^ reference com/
 //         ^^^^^^ reference com/airbnb/
 //                ^^^^^ reference com/airbnb/epoxy/
-//                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState/
-//                                      ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState/Visibility#
+//                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#
+//                                      ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#Visibility#
 
 /** Used to register an onVisibilityChanged callback with a generated model. */
 public interface OnModelVisibilityStateChangedListener<T extends EpoxyModel<V>, V> {
 //     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelVisibilityStateChangedListener#
-//                                                               ^^^^^^^^^^ reference _root_/
+//                                                               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                          ^ reference com/airbnb/epoxy/OnModelVisibilityStateChangedListener#[V]
 
   /**
@@ -28,6 +28,6 @@ public interface OnModelVisibilityStateChangedListener<T extends EpoxyModel<V>, 
 //                                ^^^^^ definition local0
 //                                       ^ reference com/airbnb/epoxy/OnModelVisibilityStateChangedListener#[V]
 //                                         ^^^^ definition local1
-//                                                ^^^^^^^^^^ reference _root_/
+//                                                ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#Visibility#
 //                                                               ^^^^^^^^^^^^^^^ definition local2
 }

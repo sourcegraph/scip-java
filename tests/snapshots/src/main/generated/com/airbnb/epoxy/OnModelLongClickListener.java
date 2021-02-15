@@ -7,7 +7,7 @@ import android.view.View;
 
 public interface OnModelLongClickListener<T extends EpoxyModel<?>, V> {
 //     ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelLongClickListener#
-//                                                  ^^^^^^^^^^ reference _root_/
+//                                                  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
   /**
    * Called when the view bound to the model is clicked.
    *

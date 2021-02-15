@@ -4,8 +4,8 @@ import com.airbnb.epoxy.UpdateOp.Type;
 //     ^^^ reference com/
 //         ^^^^^^ reference com/airbnb/
 //                ^^^^^ reference com/airbnb/epoxy/
-//                      ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp/
-//                               ^^^^ reference com/airbnb/epoxy/UpdateOp/Type#
+//                      ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
+//                               ^^^^ reference com/airbnb/epoxy/UpdateOp#Type#
 
 import java.util.ArrayList;
 //     ^^^^ reference java/
@@ -48,7 +48,7 @@ class UpdateOpHelper {
 ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#
   final List<UpdateOp> opList = new ArrayList<>();
 //      ^^^^ reference java/util/List#
-//           ^^^^^^^^ reference _root_/
+//           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //                     ^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#opList.
 //                              ^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
 //                                  ^^^^^^^^^ reference java/util/ArrayList#
@@ -58,12 +58,12 @@ class UpdateOpHelper {
   // need the up to date position
   final List<UpdateOp> moves = new ArrayList<>();
 //      ^^^^ reference java/util/List#
-//           ^^^^^^^^ reference _root_/
+//           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //                     ^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#moves.
 //                             ^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
 //                                 ^^^^^^^^^ reference java/util/ArrayList#
   private UpdateOp lastOp;
-//        ^^^^^^^^ reference _root_/
+//        ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //                 ^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#lastOp.
   private int numInsertions;
 //            ^^^^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#numInsertions.
@@ -115,13 +115,13 @@ class UpdateOpHelper {
     boolean batchWithLast = isLastOp(ADD)
 //          ^^^^^^^^^^^^^ definition local3
 //                          ^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#isLastOp().
-//                                   ^^^ reference _root_/
+//                                   ^^^ reference com/airbnb/epoxy/UpdateOp#ADD.
         && (lastOp.contains(startPosition) || lastOp.positionEnd() == startPosition);
 //          ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//                 ^^^^^^^^ reference contains#
+//                 ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#contains().
 //                          ^^^^^^^^^^^^^ reference local1
 //                                            ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//                                                   ^^^^^^^^^^^ reference positionEnd#
+//                                                   ^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionEnd().
 //                                                                    ^^^^^^^^^^^^^ reference local1
 
     if (batchWithLast) {
@@ -134,7 +134,7 @@ class UpdateOpHelper {
 //    ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#numInsertionBatches.
       addNewOperation(ADD, startPosition, itemCount);
 //    ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#addNewOperation().
-//                    ^^^ reference _root_/
+//                    ^^^ reference com/airbnb/epoxy/UpdateOp#ADD.
 //                         ^^^^^^^^^^^^^ reference local1
 //                                        ^^^^^^^^^ reference local2
     }
@@ -151,14 +151,14 @@ class UpdateOpHelper {
   void update(final int indexToChange, EpoxyModel<?> payload) {
 //     ^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#update(+1).
 //                      ^^^^^^^^^^^^^ definition local5
-//                                     ^^^^^^^^^^ reference _root_/
+//                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                   ^^^^^^^ definition local6
     if (isLastOp(UPDATE)) {
 //      ^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#isLastOp().
-//               ^^^^^^ reference _root_/
+//               ^^^^^^ reference com/airbnb/epoxy/UpdateOp#UPDATE.
       if (lastOp.positionStart == indexToChange + 1) {
 //        ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//               ^^^^^^^^^^^^^ reference positionStart#
+//               ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
 //                                ^^^^^^^^^^^^^ reference local5
         // Change another item at the start of the batch range
         addItemsToLastOperation(1, payload);
@@ -166,11 +166,11 @@ class UpdateOpHelper {
 //                                 ^^^^^^^ reference local6
         lastOp.positionStart = indexToChange;
 //      ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//             ^^^^^^^^^^^^^ reference positionStart#
+//             ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
 //                             ^^^^^^^^^^^^^ reference local5
       } else if (lastOp.positionEnd() == indexToChange) {
 //               ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//                      ^^^^^^^^^^^ reference positionEnd#
+//                      ^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionEnd().
 //                                       ^^^^^^^^^^^^^ reference local5
         // Add another item at the end of the batch range
         addItemsToLastOperation(1, payload);
@@ -178,7 +178,7 @@ class UpdateOpHelper {
 //                                 ^^^^^^^ reference local6
       } else if (lastOp.contains(indexToChange)) {
 //               ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//                      ^^^^^^^^ reference contains#
+//                      ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#contains().
 //                               ^^^^^^^^^^^^^ reference local5
         // This item is already included in the existing batch range, so we don't add any items
         // to the batch count, but we still need to add the new payload
@@ -189,14 +189,14 @@ class UpdateOpHelper {
         // The item can't be batched with the previous update operation
         addNewOperation(UPDATE, indexToChange, 1, payload);
 //      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#addNewOperation(+1).
-//                      ^^^^^^ reference _root_/
+//                      ^^^^^^ reference com/airbnb/epoxy/UpdateOp#UPDATE.
 //                              ^^^^^^^^^^^^^ reference local5
 //                                                ^^^^^^^ reference local6
       }
     } else {
       addNewOperation(UPDATE, indexToChange, 1, payload);
 //    ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#addNewOperation(+1).
-//                    ^^^^^^ reference _root_/
+//                    ^^^^^^ reference com/airbnb/epoxy/UpdateOp#UPDATE.
 //                            ^^^^^^^^^^^^^ reference local5
 //                                              ^^^^^^^ reference local6
     }
@@ -222,27 +222,27 @@ class UpdateOpHelper {
 //          ^^^^^^^^^^^^^ definition local10
     if (isLastOp(REMOVE)) {
 //      ^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#isLastOp().
-//               ^^^^^^ reference _root_/
+//               ^^^^^^ reference com/airbnb/epoxy/UpdateOp#REMOVE.
       if (lastOp.positionStart == startPosition) {
 //        ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//               ^^^^^^^^^^^^^ reference positionStart#
+//               ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
 //                                ^^^^^^^^^^^^^ reference local8
         // Remove additional items at the end of the batch range
         batchWithLast = true;
 //      ^^^^^^^^^^^^^ reference local10
       } else if (lastOp.isAfter(startPosition)
 //               ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//                      ^^^^^^^ reference isAfter#
+//                      ^^^^^^^ reference com/airbnb/epoxy/UpdateOp#isAfter().
 //                              ^^^^^^^^^^^^^ reference local8
           && startPosition + itemCount >= lastOp.positionStart) {
 //           ^^^^^^^^^^^^^ reference local8
 //                           ^^^^^^^^^ reference local9
 //                                        ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//                                               ^^^^^^^^^^^^^ reference positionStart#
+//                                               ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
         // Removes additional items at the start and (possibly) end of the batch
         lastOp.positionStart = startPosition;
 //      ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//             ^^^^^^^^^^^^^ reference positionStart#
+//             ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
 //                             ^^^^^^^^^^^^^ reference local8
         batchWithLast = true;
 //      ^^^^^^^^^^^^^ reference local10
@@ -259,7 +259,7 @@ class UpdateOpHelper {
 //    ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#numRemovalBatches.
       addNewOperation(REMOVE, startPosition, itemCount);
 //    ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#addNewOperation().
-//                    ^^^^^^ reference _root_/
+//                    ^^^^^^ reference com/airbnb/epoxy/UpdateOp#REMOVE.
 //                            ^^^^^^^^^^^^^ reference local8
 //                                           ^^^^^^^^^ reference local9
     }
@@ -267,19 +267,19 @@ class UpdateOpHelper {
 
   private boolean isLastOp(@UpdateOp.Type int updateType) {
 //                ^^^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#isLastOp().
-//                          ^^^^^^^^ reference UpdateOp/
-//                                   ^^^^ reference UpdateOp/Type#
+//                          ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
+//                                   ^^^^ reference com/airbnb/epoxy/UpdateOp#Type#
 //                                            ^^^^^^^^^^ definition local11
     return lastOp != null && lastOp.type == updateType;
 //         ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
 //                           ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//                                  ^^^^ reference type#
+//                                  ^^^^ reference com/airbnb/epoxy/UpdateOp#type.
 //                                          ^^^^^^^^^^ reference local11
   }
 
   private void addNewOperation(@Type int type, int position, int itemCount) {
 //             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#addNewOperation().
-//                              ^^^^ reference _root_/
+//                              ^^^^ reference com/airbnb/epoxy/UpdateOp#Type#
 //                                       ^^^^ definition local12
 //                                                 ^^^^^^^^ definition local13
 //                                                               ^^^^^^^^^ definition local14
@@ -292,18 +292,18 @@ class UpdateOpHelper {
 
   private void addNewOperation(@Type int type, int position, int itemCount,
 //             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#addNewOperation(+1).
-//                              ^^^^ reference _root_/
+//                              ^^^^ reference com/airbnb/epoxy/UpdateOp#Type#
 //                                       ^^^^ definition local15
 //                                                 ^^^^^^^^ definition local16
 //                                                               ^^^^^^^^^ definition local17
       @Nullable EpoxyModel<?> payload) {
 //     ^^^^^^^^ reference androidx/annotation/Nullable#
-//              ^^^^^^^^^^ reference _root_/
+//              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^ definition local18
     lastOp = UpdateOp.instance(type, position, itemCount, payload);
 //  ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//           ^^^^^^^^ reference _root_/
-//                    ^^^^^^^^ reference instance#
+//           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
+//                    ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#instance().
 //                             ^^^^ reference local15
 //                                   ^^^^^^^^ reference local16
 //                                             ^^^^^^^^^ reference local17
@@ -317,15 +317,15 @@ class UpdateOpHelper {
   private void addItemsToLastOperation(int numItemsToAdd, EpoxyModel<?> payload) {
 //             ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#addItemsToLastOperation().
 //                                         ^^^^^^^^^^^^^ definition local19
-//                                                        ^^^^^^^^^^ reference _root_/
+//                                                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                      ^^^^^^^ definition local20
     lastOp.itemCount += numItemsToAdd;
 //  ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//         ^^^^^^^^^ reference itemCount#
+//         ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
 //                      ^^^^^^^^^^^^^ reference local19
     lastOp.addPayload(payload);
 //  ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
-//         ^^^^^^^^^^ reference addPayload#
+//         ^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#addPayload().
 //                    ^^^^^^^ reference local20
   }
 
@@ -337,11 +337,11 @@ class UpdateOpHelper {
     lastOp = null;
 //  ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
     UpdateOp op = UpdateOp.instance(MOVE, from, to, null);
-//  ^^^^^^^^ reference _root_/
+//  ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //           ^^ definition local23
-//                ^^^^^^^^ reference _root_/
-//                         ^^^^^^^^ reference instance#
-//                                  ^^^^ reference _root_/
+//                ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
+//                         ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#instance().
+//                                  ^^^^ reference com/airbnb/epoxy/UpdateOp#MOVE.
 //                                        ^^^^ reference local21
 //                                              ^^ reference local22
     opList.add(op);

@@ -13,7 +13,7 @@ import static com.airbnb.epoxy.EpoxyAsyncUtil.MAIN_THREAD_HANDLER;
 
 class MainThreadExecutor extends HandlerExecutor {
 ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/MainThreadExecutor#
-//                               ^^^^^^^^^^^^^^^ reference _root_/
+//                               ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HandlerExecutor#
   static final MainThreadExecutor INSTANCE = new MainThreadExecutor(false);
 //             ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#
 //                                ^^^^^^^^ definition com/airbnb/epoxy/MainThreadExecutor#INSTANCE.
@@ -29,6 +29,10 @@ class MainThreadExecutor extends HandlerExecutor {
   ^^^^^^ definition com/airbnb/epoxy/MainThreadExecutor#`<init>`().
 //                           ^^^^^ definition local0
     super(async ? AYSNC_MAIN_THREAD_HANDLER : MAIN_THREAD_HANDLER);
+//  ^^^^^ reference com/airbnb/epoxy/HandlerExecutor#`<init>`().
+//        ^^^^^ reference local0
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAsyncUtil#AYSNC_MAIN_THREAD_HANDLER.
+//                                            ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAsyncUtil#MAIN_THREAD_HANDLER.
   }
 }
 

@@ -7,7 +7,7 @@ import android.view.View;
 
 interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
 ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#
-//                                         ^^^^^^^^^^ reference _root_/
+//                                         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 
   /**
    * Should return a composite flag which defines the enabled move directions in each state

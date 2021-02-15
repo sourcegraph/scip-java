@@ -13,7 +13,7 @@ import java.util.List;
 public abstract class ControllerHelper<T extends EpoxyController> {
 //              ^^^^^^ definition com/airbnb/epoxy/ControllerHelper#`<init>`().
 //              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#
-//                                               ^^^^^^^^^^^^^^^ reference _root_/
+//                                               ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
   public abstract void resetAutoModels();
 //                     ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#resetAutoModels().
 
@@ -23,11 +23,11 @@ public abstract class ControllerHelper<T extends EpoxyController> {
 //                                                      ^^^^^^^^^^ definition local0
     List<EpoxyModel<?>> currentModels = controller.getAdapter().getCopyOfModels();
 //  ^^^^ reference java/util/List#
-//       ^^^^^^^^^^ reference _root_/
+//       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                      ^^^^^^^^^^^^^ definition local1
 //                                      ^^^^^^^^^^ reference local0
-//                                                 ^^^^^^^^^^ reference getAdapter#
-//                                                              ^^^^^^^^^^^^^^^ reference getAdapter#getCopyOfModels#
+//                                                 ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#getAdapter().
+//                                                              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#getCopyOfModels().
 
     for (int i = 0; i < currentModels.size(); i++) {
 //           ^ definition local2
@@ -36,14 +36,14 @@ public abstract class ControllerHelper<T extends EpoxyController> {
 //                                    ^^^^ reference java/util/List#size().
 //                                            ^ reference local2
       EpoxyModel model = currentModels.get(i);
-//    ^^^^^^^^^^ reference _root_/
+//    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //               ^^^^^ definition local3
 //                       ^^^^^^^^^^^^^ reference local1
 //                                     ^^^ reference java/util/List#get().
 //                                         ^ reference local2
       model.validateStateHasNotChangedSinceAdded(
 //    ^^^^^ reference local3
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference validateStateHasNotChangedSinceAdded#
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#validateStateHasNotChangedSinceAdded().
           "Model has changed since it was added to the controller.", i);
 //                                                                   ^ reference local2
     }
@@ -51,13 +51,13 @@ public abstract class ControllerHelper<T extends EpoxyController> {
 
   protected void setControllerToStageTo(EpoxyModel<?> model, T controller) {
 //               ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#setControllerToStageTo().
-//                                      ^^^^^^^^^^ reference _root_/
+//                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                    ^^^^^ definition local4
 //                                                           ^ reference com/airbnb/epoxy/ControllerHelper#[T]
 //                                                             ^^^^^^^^^^ definition local5
     model.controllerToStageTo = controller;
 //  ^^^^^ reference local4
-//        ^^^^^^^^^^^^^^^^^^^ reference `<any>`#controllerToStageTo#
+//        ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#controllerToStageTo.
 //                              ^^^^^^^^^^ reference local5
   }
 }

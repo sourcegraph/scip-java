@@ -3,7 +3,7 @@ package com.airbnb.epoxy;
 class NoOpTimer implements Timer {
 ^^^^^^ definition com/airbnb/epoxy/NoOpTimer#`<init>`().
 ^^^^^^^^^ definition com/airbnb/epoxy/NoOpTimer#
-//                         ^^^^^ reference _root_/
+//                         ^^^^^ reference com/airbnb/epoxy/Timer#
   @Override
    ^^^^^^^^ reference java/lang/Override#
   public void start(String sectionName) {

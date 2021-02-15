@@ -9,8 +9,8 @@ import com.airbnb.epoxy.VisibilityState.Visibility;
 //     ^^^ reference com/
 //         ^^^^^^ reference com/airbnb/
 //                ^^^^^ reference com/airbnb/epoxy/
-//                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState/
-//                                      ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState/Visibility#
+//                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#
+//                                      ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#Visibility#
 
 import java.util.List;
 //     ^^^^ reference java/
@@ -36,8 +36,8 @@ import androidx.annotation.Px;
  */
 public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyModel<T> {
 //              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#
-//                                                   ^^^^^^^^^^^ reference _root_/
-//                                                                        ^^^^^^^^^^ reference _root_/
+//                                                   ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyHolder#
+//                                                                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                                   ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 
   public EpoxyModelWithHolder() {
@@ -48,6 +48,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //       ^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#`<init>`(+1).
 //                                 ^^ definition local0
     super(id);
+//  ^^^^^ reference com/airbnb/epoxy/EpoxyModel#`<init>`().
 //        ^^ reference local0
   }
 
@@ -67,8 +68,8 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                          ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 //                            ^^^^^^ definition local2
     super.bind(holder);
-//  ^^^^^ reference _root_/
-//        ^^^^ reference bind#
+//  ^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#super.
+//        ^^^^ reference com/airbnb/epoxy/EpoxyModel#bind().
 //             ^^^^^^ reference local2
   }
 
@@ -84,8 +85,8 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                                  ^^^^^^ reference java/lang/Object#
 //                                                          ^^^^^^^^ definition local4
     super.bind(holder, payloads);
-//  ^^^^^ reference _root_/
-//        ^^^^ reference bind#
+//  ^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#super.
+//        ^^^^ reference com/airbnb/epoxy/EpoxyModel#bind(+1).
 //             ^^^^^^ reference local3
 //                     ^^^^^^^^ reference local4
   }
@@ -98,11 +99,11 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                          ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 //                            ^^^^^^ definition local5
 //                                     ^^^^^^^ reference androidx/annotation/NonNull#
-//                                             ^^^^^^^^^^ reference _root_/
+//                                             ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                           ^^^^^^^^^^^^^^^^^^^^ definition local6
     super.bind(holder, previouslyBoundModel);
-//  ^^^^^ reference _root_/
-//        ^^^^ reference bind#
+//  ^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#super.
+//        ^^^^ reference com/airbnb/epoxy/EpoxyModel#bind(+2).
 //             ^^^^^^ reference local5
 //                     ^^^^^^^^^^^^^^^^^^^^ reference local6
   }
@@ -115,8 +116,8 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                            ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 //                              ^^^^^^ definition local7
     super.unbind(holder);
-//  ^^^^^ reference _root_/
-//        ^^^^^^ reference unbind#
+//  ^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#super.
+//        ^^^^^^ reference com/airbnb/epoxy/EpoxyModel#unbind().
 //               ^^^^^^ reference local7
   }
 
@@ -125,14 +126,14 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
    ^^^^^^^^ reference java/lang/Override#
   public void onVisibilityStateChanged(@Visibility int visibilityState, @NonNull T holder) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#onVisibilityStateChanged().
-//                                      ^^^^^^^^^^ reference _root_/
+//                                      ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#Visibility#
 //                                                     ^^^^^^^^^^^^^^^ definition local8
 //                                                                       ^^^^^^^ reference androidx/annotation/NonNull#
 //                                                                               ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 //                                                                                 ^^^^^^ definition local9
     super.onVisibilityStateChanged(visibilityState, holder);
-//  ^^^^^ reference _root_/
-//        ^^^^^^^^^^^^^^^^^^^^^^^^ reference onVisibilityStateChanged#
+//  ^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#super.
+//        ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#onVisibilityStateChanged().
 //                                 ^^^^^^^^^^^^^^^ reference local8
 //                                                  ^^^^^^ reference local9
   }
@@ -161,8 +162,8 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //             ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 //               ^^^^^^ definition local14
     super.onVisibilityChanged(
-//  ^^^^^ reference _root_/
-//        ^^^^^^^^^^^^^^^^^^^ reference onVisibilityChanged#
+//  ^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#super.
+//        ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#onVisibilityChanged().
         percentVisibleHeight, percentVisibleWidth,
 //      ^^^^^^^^^^^^^^^^^^^^ reference local10
 //                            ^^^^^^^^^^^^^^^^^^^ reference local11
@@ -180,8 +181,8 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                     ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 //                                       ^^^^^^ definition local15
     return super.onFailedToRecycleView(holder);
-//         ^^^^^ reference _root_/
-//               ^^^^^^^^^^^^^^^^^^^^^ reference onFailedToRecycleView#
+//         ^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#super.
+//               ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#onFailedToRecycleView().
 //                                     ^^^^^^ reference local15
   }
 
@@ -192,8 +193,8 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                   ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 //                                     ^^^^^^ definition local16
     super.onViewAttachedToWindow(holder);
-//  ^^^^^ reference _root_/
-//        ^^^^^^^^^^^^^^^^^^^^^^ reference onViewAttachedToWindow#
+//  ^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#super.
+//        ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#onViewAttachedToWindow().
 //                               ^^^^^^ reference local16
   }
 
@@ -204,8 +205,8 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                     ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 //                                       ^^^^^^ definition local17
     super.onViewDetachedFromWindow(holder);
-//  ^^^^^ reference _root_/
-//        ^^^^^^^^^^^^^^^^^^^^^^^^ reference onViewDetachedFromWindow#
+//  ^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#super.
+//        ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#onViewDetachedFromWindow().
 //                                 ^^^^^^ reference local17
   }
 }

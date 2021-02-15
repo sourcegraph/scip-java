@@ -18,6 +18,6 @@ public interface OnModelBuildFinishedListener {
   void onModelBuildFinished(@NonNull DiffResult result);
 //     ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBuildFinishedListener#onModelBuildFinished().
 //                           ^^^^^^^ reference androidx/annotation/NonNull#
-//                                   ^^^^^^^^^^ reference _root_/
+//                                   ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#
 //                                              ^^^^^^ definition local0
 }

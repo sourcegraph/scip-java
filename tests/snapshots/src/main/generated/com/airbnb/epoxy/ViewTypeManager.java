@@ -35,7 +35,7 @@ class ViewTypeManager {
   @Nullable
    ^^^^^^^^ reference androidx/annotation/Nullable#
   EpoxyModel<?> lastModelForViewTypeLookup;
-  ^^^^^^^^^^ reference _root_/
+  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#lastModelForViewTypeLookup.
 
   /**
@@ -55,7 +55,7 @@ class ViewTypeManager {
 
   int getViewTypeAndRememberModel(EpoxyModel<?> model) {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#getViewTypeAndRememberModel().
-//                                ^^^^^^^^^^ reference _root_/
+//                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                              ^^^^^ definition local0
     lastModelForViewTypeLookup = model;
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewTypeManager#lastModelForViewTypeLookup.
@@ -67,12 +67,12 @@ class ViewTypeManager {
 
   static int getViewType(EpoxyModel<?> model) {
 //           ^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#getViewType().
-//                       ^^^^^^^^^^ reference _root_/
+//                       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                     ^^^^^ definition local1
     int defaultViewType = model.getViewType();
 //      ^^^^^^^^^^^^^^^ definition local2
 //                        ^^^^^ reference local1
-//                              ^^^^^^^^^^^ reference `<any>`#getViewType#
+//                              ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#getViewType().
     if (defaultViewType != 0) {
 //      ^^^^^^^^^^^^^^^ reference local2
       return defaultViewType;
@@ -85,7 +85,7 @@ class ViewTypeManager {
 //  ^^^^^ reference java/lang/Class#
 //        ^^^^^^^^^^ definition local3
 //                     ^^^^^ reference local1
-//                           ^^^^^^^^ reference `<any>`#getClass#
+//                           ^^^^^^^^ reference java/lang/Object#getClass().
 
     Integer viewType = VIEW_TYPE_MAP.get(modelClass);
 //  ^^^^^^^ reference java/lang/Integer#
@@ -127,9 +127,9 @@ class ViewTypeManager {
    * shouldn't be needed, but is a guard against recyclerview behavior changing.
    */
   EpoxyModel<?> getModelForViewType(BaseEpoxyAdapter adapter, int viewType) {
-  ^^^^^^^^^^ reference _root_/
+  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#getModelForViewType().
-//                                  ^^^^^^^^^^^^^^^^ reference _root_/
+//                                  ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
 //                                                   ^^^^^^^ definition local5
 //                                                                ^^^^^^^^ definition local6
     if (lastModelForViewTypeLookup != null
@@ -145,17 +145,17 @@ class ViewTypeManager {
 
     adapter.onExceptionSwallowed(
 //  ^^^^^^^ reference local5
-//          ^^^^^^^^^^^^^^^^^^^^ reference onExceptionSwallowed#
+//          ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#onExceptionSwallowed().
         new IllegalStateException("Last model did not match expected view type"));
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
 //          ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
 
     // To be extra safe in case RecyclerView implementation details change...
     for (EpoxyModel<?> model : adapter.getCurrentModels()) {
-//       ^^^^^^^^^^ reference _root_/
+//       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                     ^^^^^ definition local7
 //                             ^^^^^^^ reference local5
-//                                     ^^^^^^^^^^^^^^^^ reference getCurrentModels#
+//                                     ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
       if (getViewType(model) == viewType) {
 //        ^^^^^^^^^^^ reference com/airbnb/epoxy/ViewTypeManager#getViewType().
 //                    ^^^^^ reference local7
@@ -167,13 +167,14 @@ class ViewTypeManager {
 
     // Check for the hidden model.
     HiddenEpoxyModel hiddenEpoxyModel = new HiddenEpoxyModel();
-//  ^^^^^^^^^^^^^^^^ reference _root_/
+//  ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#
 //                   ^^^^^^^^^^^^^^^^ definition local8
-//                                          ^^^^^^^^^^^^^^^^ reference _root_/
+//                                      ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
+//                                          ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#
     if (viewType == hiddenEpoxyModel.getViewType()) {
 //      ^^^^^^^^ reference local6
 //                  ^^^^^^^^^^^^^^^^ reference local8
-//                                   ^^^^^^^^^^^ reference getViewType#
+//                                   ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#getViewType().
       return hiddenEpoxyModel;
 //           ^^^^^^^^^^^^^^^^ reference local8
     }
