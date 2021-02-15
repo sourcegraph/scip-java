@@ -13,23 +13,23 @@ inThisBuild(
     semanticdbVersion := scalametaVersion,
     organization := "com.sourcegraph",
     homepage := Some(url("https://github.com/sourcegraph/lsif-java")),
-    licenses := List(
-      "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")
-    ),
-    developers := List(
-      Developer(
-        "olafurpg",
-        "Ólafur Páll Geirsson",
-        "olafurpg@sourcegraph.com",
-        url("https://github.com/olafurpg")
-      ),
-      Developer(
-        "Strum355",
-        "Noah Santschi-Cooney",
-        "noah@sourcegraph.com",
-        url("https://github.com/Strum355")
+    licenses :=
+      List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+    developers :=
+      List(
+        Developer(
+          "olafurpg",
+          "Ólafur Páll Geirsson",
+          "olafurpg@sourcegraph.com",
+          url("https://github.com/olafurpg")
+        ),
+        Developer(
+          "Strum355",
+          "Noah Santschi-Cooney",
+          "noah@sourcegraph.com",
+          url("https://github.com/Strum355")
+        )
       )
-    )
   )
 )
 
