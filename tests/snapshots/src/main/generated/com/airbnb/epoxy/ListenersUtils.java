@@ -32,7 +32,7 @@ public class ListenersUtils {
   @Nullable
    ^^^^^^^^ reference androidx/annotation/Nullable#
   static EpoxyViewHolder getEpoxyHolderForChildView(View v) {
-//       ^^^^^^^^^^^^^^^ reference _root_/
+//       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                       ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ListenersUtils#getEpoxyHolderForChildView().
 //                                                  ^^^^ reference _root_/
 //                                                       ^ definition local0
@@ -59,12 +59,12 @@ public class ListenersUtils {
 
     if (!(viewHolder instanceof EpoxyViewHolder)) {
 //        ^^^^^^^^^^ reference local2
-//                              ^^^^^^^^^^^^^^^ reference _root_/
+//                              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
       return null;
     }
 
     return (EpoxyViewHolder) viewHolder;
-//          ^^^^^^^^^^^^^^^ reference _root_/
+//          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                           ^^^^^^^^^^ reference local2
   }
 

@@ -5,9 +5,7 @@ import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.util.concurrent.atomic.AtomicInteger
 
-import scala.collection.parallel.CollectionConverters._
-import scala.jdk.CollectionConverters._
-
+import scala.meta.inputs.Input
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
@@ -35,7 +33,7 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
       println(s"indexing library '$name'")
       val deps = Dependencies
         .resolveDependencies(name :: provided.toList, repos)
-      val options = List("-Xlint:none").asJava
+      val options = List("-Xlint:none")
       val counter = new AtomicInteger()
       val targetroot = Files.createTempDirectory("semanticdb-javac")
 
@@ -63,25 +61,28 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
     ): IndexMetrics = {
       var occurrenceCount, linesOfCode = 0
       FileIO.withJarFileSystem(source, create = false, close = true) { root =>
-        val matchingFiles =
+        val inputs =
           FileIO
             .listAllFilesRecursively(root)
             .iterator
             .filter(file => javaPattern.matches(file.toNIO))
+            .map { file =>
+              val relpath = file.toRelative(root).toString()
+              val text = FileIO.slurp(file, StandardCharsets.UTF_8)
+              linesOfCode += text.linesIterator.size
+              Input.VirtualFile(relpath, text)
+            }
             .toArray
 
-        matchingFiles
-          .par
-          .foreach { file =>
-            val relpath = file.toRelative(root).toString()
-            val text = FileIO.slurp(file, StandardCharsets.UTF_8)
-            linesOfCode += text.linesIterator.size
-            val result = compiler.compile(relpath, text)
-            val print = SemanticdbPrinters
-              .printTextDocument(result.textDocument)
-            val out = context.expectDirectory.resolve(relpath)
+        val result = compiler.compileSemanticdb(inputs)
+        result
+          .textDocuments
+          .getDocumentsList
+          .forEach { textDocument =>
+            occurrenceCount += textDocument.getOccurrencesCount
+            val print = SemanticdbPrinters.printTextDocument(textDocument)
+            val out = context.expectDirectory.resolve(textDocument.getUri)
             handler.onSnapshotTest(context, out, () => print)
-            occurrenceCount += result.textDocument.getOccurrencesCount
           }
       }
       IndexMetrics(occurrenceCount, linesOfCode)

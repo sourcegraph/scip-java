@@ -39,7 +39,7 @@ class DiffHelper {
 ^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#
   private ArrayList<ModelState> oldStateList = new ArrayList<>();
 //        ^^^^^^^^^ reference java/util/ArrayList#
-//                  ^^^^^^^^^^ reference _root_/
+//                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                              ^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#oldStateList.
 //                                             ^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
 //                                                 ^^^^^^^^^ reference java/util/ArrayList#
@@ -48,25 +48,25 @@ class DiffHelper {
   private Map<Long, ModelState> oldStateMap = new HashMap<>();
 //        ^^^ reference java/util/Map#
 //            ^^^^ reference java/lang/Long#
-//                  ^^^^^^^^^^ reference _root_/
+//                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                              ^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#oldStateMap.
 //                                            ^^^^^^^^^^^^^^^ reference java/util/HashMap#`<init>`(+2).
 //                                                ^^^^^^^ reference java/util/HashMap#
   private ArrayList<ModelState> currentStateList = new ArrayList<>();
 //        ^^^^^^^^^ reference java/util/ArrayList#
-//                  ^^^^^^^^^^ reference _root_/
+//                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#currentStateList.
 //                                                 ^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
 //                                                     ^^^^^^^^^ reference java/util/ArrayList#
   private Map<Long, ModelState> currentStateMap = new HashMap<>();
 //        ^^^ reference java/util/Map#
 //            ^^^^ reference java/lang/Long#
-//                  ^^^^^^^^^^ reference _root_/
+//                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#currentStateMap.
 //                                                ^^^^^^^^^^^^^^^ reference java/util/HashMap#`<init>`(+2).
 //                                                    ^^^^^^^ reference java/util/HashMap#
   private final BaseEpoxyAdapter adapter;
-//              ^^^^^^^^^^^^^^^^ reference _root_/
+//              ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
 //                               ^^^^^^^ definition com/airbnb/epoxy/DiffHelper#adapter.
   private final boolean immutableModels;
 //                      ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#immutableModels.
@@ -74,7 +74,7 @@ class DiffHelper {
 
   DiffHelper(BaseEpoxyAdapter adapter, boolean immutableModels) {
   ^^^^^^ definition com/airbnb/epoxy/DiffHelper#`<init>`().
-//           ^^^^^^^^^^^^^^^^ reference _root_/
+//           ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
 //                            ^^^^^^^ definition local0
 //                                             ^^^^^^^^^^^^^^^ definition local1
     this.adapter = adapter;
@@ -87,7 +87,7 @@ class DiffHelper {
 //                         ^^^^^^^^^^^^^^^ reference local1
     adapter.registerAdapterDataObserver(observer);
 //  ^^^^^^^ reference local0
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference registerAdapterDataObserver#
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#registerAdapterDataObserver#
 //                                      ^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#observer.
   }
 
@@ -196,9 +196,10 @@ class DiffHelper {
   void notifyModelChanges() {
 //     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#notifyModelChanges().
     UpdateOpHelper updateOpHelper = new UpdateOpHelper();
-//  ^^^^^^^^^^^^^^ reference _root_/
+//  ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                 ^^^^^^^^^^^^^^ definition local2
-//                                      ^^^^^^^^^^^^^^ reference _root_/
+//                                  ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#`<init>`().
+//                                      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 
     buildDiff(updateOpHelper);
 //  ^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#buildDiff().
@@ -208,88 +209,89 @@ class DiffHelper {
     // observer first so that we don't react to our own notify calls
     adapter.unregisterAdapterDataObserver(observer);
 //  ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference unregisterAdapterDataObserver#
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#unregisterAdapterDataObserver#
 //                                        ^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#observer.
     notifyChanges(updateOpHelper);
 //  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#notifyChanges().
 //                ^^^^^^^^^^^^^^ reference local2
     adapter.registerAdapterDataObserver(observer);
 //  ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference registerAdapterDataObserver#
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#registerAdapterDataObserver#
 //                                      ^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#observer.
   }
 
   private void notifyChanges(UpdateOpHelper opHelper) {
 //             ^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#notifyChanges().
-//                           ^^^^^^^^^^^^^^ reference _root_/
+//                           ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                                          ^^^^^^^^ definition local3
     for (UpdateOp op : opHelper.opList) {
-//       ^^^^^^^^ reference _root_/
+//       ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //                ^^ definition local4
 //                     ^^^^^^^^ reference local3
-//                              ^^^^^^ reference opList#
+//                              ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#opList.
       switch (op.type) {
 //            ^^ reference local4
-//               ^^^^ reference type#
+//               ^^^^ reference com/airbnb/epoxy/UpdateOp#type.
         case UpdateOp.ADD:
-//           ^^^^^^^^ reference _root_/
-//                    ^^^ reference ADD#
+//           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
+//                    ^^^ reference com/airbnb/epoxy/UpdateOp#ADD.
           adapter.notifyItemRangeInserted(op.positionStart, op.itemCount);
 //        ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                ^^^^^^^^^^^^^^^^^^^^^^^ reference notifyItemRangeInserted#
+//                ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemRangeInserted#
 //                                        ^^ reference local4
-//                                           ^^^^^^^^^^^^^ reference positionStart#
+//                                           ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
 //                                                          ^^ reference local4
-//                                                             ^^^^^^^^^ reference itemCount#
+//                                                             ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
           break;
         case UpdateOp.MOVE:
-//           ^^^^^^^^ reference _root_/
-//                    ^^^^ reference MOVE#
+//           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
+//                    ^^^^ reference com/airbnb/epoxy/UpdateOp#MOVE.
           adapter.notifyItemMoved(op.positionStart, op.itemCount);
 //        ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                ^^^^^^^^^^^^^^^ reference notifyItemMoved#
+//                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemMoved#
 //                                ^^ reference local4
-//                                   ^^^^^^^^^^^^^ reference positionStart#
+//                                   ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
 //                                                  ^^ reference local4
-//                                                     ^^^^^^^^^ reference itemCount#
+//                                                     ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
           break;
         case UpdateOp.REMOVE:
-//           ^^^^^^^^ reference _root_/
-//                    ^^^^^^ reference REMOVE#
+//           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
+//                    ^^^^^^ reference com/airbnb/epoxy/UpdateOp#REMOVE.
           adapter.notifyItemRangeRemoved(op.positionStart, op.itemCount);
 //        ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                ^^^^^^^^^^^^^^^^^^^^^^ reference notifyItemRangeRemoved#
+//                ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemRangeRemoved#
 //                                       ^^ reference local4
-//                                          ^^^^^^^^^^^^^ reference positionStart#
+//                                          ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
 //                                                         ^^ reference local4
-//                                                            ^^^^^^^^^ reference itemCount#
+//                                                            ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
           break;
         case UpdateOp.UPDATE:
-//           ^^^^^^^^ reference _root_/
-//                    ^^^^^^ reference UPDATE#
+//           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
+//                    ^^^^^^ reference com/airbnb/epoxy/UpdateOp#UPDATE.
           if (immutableModels && op.payloads != null) {
 //            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#immutableModels.
 //                               ^^ reference local4
-//                                  ^^^^^^^^ reference payloads#
+//                                  ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#payloads.
             adapter.notifyItemRangeChanged(op.positionStart, op.itemCount,
 //          ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                  ^^^^^^^^^^^^^^^^^^^^^^ reference notifyItemRangeChanged#
+//                  ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemRangeChanged#
 //                                         ^^ reference local4
-//                                            ^^^^^^^^^^^^^ reference positionStart#
+//                                            ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
 //                                                           ^^ reference local4
-//                                                              ^^^^^^^^^ reference itemCount#
+//                                                              ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
                 new DiffPayload(op.payloads));
-//                  ^^^^^^^^^^^ reference _root_/
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#`<init>`().
+//                  ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#
 //                              ^^ reference local4
-//                                 ^^^^^^^^ reference payloads#
+//                                 ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#payloads.
           } else {
             adapter.notifyItemRangeChanged(op.positionStart, op.itemCount);
 //          ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                  ^^^^^^^^^^^^^^^^^^^^^^ reference notifyItemRangeChanged#
+//                  ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemRangeChanged#
 //                                         ^^ reference local4
-//                                            ^^^^^^^^^^^^^ reference positionStart#
+//                                            ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
 //                                                           ^^ reference local4
-//                                                              ^^^^^^^^^ reference itemCount#
+//                                                              ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
           }
           break;
         default:
@@ -297,7 +299,7 @@ class DiffHelper {
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`(+1).
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#
 //                                                              ^^ reference local4
-//                                                                 ^^^^ reference type#
+//                                                                 ^^^^ reference com/airbnb/epoxy/UpdateOp#type.
       }
     }
   }
@@ -307,9 +309,9 @@ class DiffHelper {
    * #currentStateList}.
    */
   private UpdateOpHelper buildDiff(UpdateOpHelper updateOpHelper) {
-//        ^^^^^^^^^^^^^^ reference _root_/
+//        ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                       ^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#buildDiff().
-//                                 ^^^^^^^^^^^^^^ reference _root_/
+//                                 ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                                                ^^^^^^^^^^^^^^ definition local5
     prepareStateForDiff();
 //  ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#prepareStateForDiff().
@@ -330,7 +332,7 @@ class DiffHelper {
 //      ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
 //                   ^^^^ reference java/util/ArrayList#size(+1).
 //                            ^^^^^^^^^^^^^^ reference local5
-//                                           ^^^^^^^^^^^^^^ reference getNumRemovals#
+//                                           ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#getNumRemovals().
 //                                                               ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
 //                                                                                ^^^^ reference java/util/ArrayList#size(+1).
     if (hasInsertions) {
@@ -379,7 +381,7 @@ class DiffHelper {
     // Swap the two lists so that we have a copy of the current state to calculate the next diff
     ArrayList<ModelState> tempList = oldStateList;
 //  ^^^^^^^^^ reference java/util/ArrayList#
-//            ^^^^^^^^^^ reference _root_/
+//            ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                        ^^^^^^^^ definition local7
 //                                   ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
     oldStateList = currentStateList;
@@ -392,7 +394,7 @@ class DiffHelper {
     Map<Long, ModelState> tempMap = oldStateMap;
 //  ^^^ reference java/util/Map#
 //      ^^^^ reference java/lang/Long#
-//            ^^^^^^^^^^ reference _root_/
+//            ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                        ^^^^^^^ definition local8
 //                                  ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateMap.
     oldStateMap = currentStateMap;
@@ -405,19 +407,19 @@ class DiffHelper {
     // Remove all pairings in the old states so we can tell which of them were removed. The items
     // that still exist in the new list will be paired when we build the current list state below
     for (ModelState modelState : oldStateList) {
-//       ^^^^^^^^^^ reference _root_/
+//       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                  ^^^^^^^^^^ definition local9
 //                               ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
       modelState.pair = null;
 //    ^^^^^^^^^^ reference local9
-//               ^^^^ reference pair#
+//               ^^^^ reference com/airbnb/epoxy/ModelState#pair.
     }
 
     int modelCount = adapter.getCurrentModels().size();
 //      ^^^^^^^^^^ definition local10
 //                   ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                           ^^^^^^^^^^^^^^^^ reference getCurrentModels#
-//                                              ^^^^ reference getCurrentModels#size#
+//                           ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
+//                                              ^^^^ reference java/util/List#size().
     currentStateList.ensureCapacity(modelCount);
 //  ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
 //                   ^^^^^^^^^^^^^^ reference java/util/ArrayList#ensureCapacity().
@@ -437,48 +439,48 @@ class DiffHelper {
   }
 
   private ModelState createStateForPosition(int position) {
-//        ^^^^^^^^^^ reference _root_/
+//        ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                   ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#createStateForPosition().
 //                                              ^^^^^^^^ definition local12
     EpoxyModel<?> model = adapter.getCurrentModels().get(position);
-//  ^^^^^^^^^^ reference _root_/
+//  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                ^^^^^ definition local13
 //                        ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                                ^^^^^^^^^^^^^^^^ reference getCurrentModels#
-//                                                   ^^^ reference getCurrentModels#get#
+//                                ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
+//                                                   ^^^ reference java/util/List#get().
 //                                                       ^^^^^^^^ reference local12
     model.addedToAdapter = true;
 //  ^^^^^ reference local13
-//        ^^^^^^^^^^^^^^ reference `<any>`#addedToAdapter#
+//        ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#addedToAdapter.
     ModelState state = ModelState.build(model, position, immutableModels);
-//  ^^^^^^^^^^ reference _root_/
+//  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //             ^^^^^ definition local14
-//                     ^^^^^^^^^^ reference _root_/
-//                                ^^^^^ reference build#
+//                     ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
+//                                ^^^^^ reference com/airbnb/epoxy/ModelState#build().
 //                                      ^^^^^ reference local13
 //                                             ^^^^^^^^ reference local12
 //                                                       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#immutableModels.
 
     ModelState previousValue = currentStateMap.put(state.id, state);
-//  ^^^^^^^^^^ reference _root_/
+//  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //             ^^^^^^^^^^^^^ definition local15
 //                             ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateMap.
 //                                             ^^^ reference java/util/Map#put().
 //                                                 ^^^^^ reference local14
-//                                                       ^^ reference id#
+//                                                       ^^ reference com/airbnb/epoxy/ModelState#id.
 //                                                           ^^^^^ reference local14
     if (previousValue != null) {
 //      ^^^^^^^^^^^^^ reference local15
       int previousPosition = previousValue.position;
 //        ^^^^^^^^^^^^^^^^ definition local16
 //                           ^^^^^^^^^^^^^ reference local15
-//                                         ^^^^^^^^ reference position#
+//                                         ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
       EpoxyModel<?> previousModel = adapter.getCurrentModels().get(previousPosition);
-//    ^^^^^^^^^^ reference _root_/
+//    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^^^^^^^^^^^^^ definition local17
 //                                  ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                                          ^^^^^^^^^^^^^^^^ reference getCurrentModels#
-//                                                             ^^^ reference getCurrentModels#get#
+//                                          ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
+//                                                             ^^^ reference java/util/List#get().
 //                                                                 ^^^^^^^^^^^^^^^^ reference local16
       throw new IllegalStateException("Two models have the same ID. ID's must be unique!"
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 2:76
@@ -502,46 +504,46 @@ class DiffHelper {
    */
   private void collectRemovals(UpdateOpHelper helper) {
 //             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectRemovals().
-//                             ^^^^^^^^^^^^^^ reference _root_/
+//                             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                                            ^^^^^^ definition local18
     for (ModelState state : oldStateList) {
-//       ^^^^^^^^^^ reference _root_/
+//       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                  ^^^^^ definition local19
 //                          ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
       // Update the position of the item to take into account previous removals,
       // so that future operations will reference the correct position
       state.position -= helper.getNumRemovals();
 //    ^^^^^ reference local19
-//          ^^^^^^^^ reference position#
+//          ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                      ^^^^^^ reference local18
-//                             ^^^^^^^^^^^^^^ reference getNumRemovals#
+//                             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#getNumRemovals().
 
       // This is our first time going through the list, so we
       // look up the item with the matching id in the new
       // list and hold a reference to it so that we can access it quickly in the future
       state.pair = currentStateMap.get(state.id);
 //    ^^^^^ reference local19
-//          ^^^^ reference pair#
+//          ^^^^ reference com/airbnb/epoxy/ModelState#pair.
 //                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateMap.
 //                                 ^^^ reference java/util/Map#get().
 //                                     ^^^^^ reference local19
-//                                           ^^ reference id#
+//                                           ^^ reference com/airbnb/epoxy/ModelState#id.
       if (state.pair != null) {
 //        ^^^^^ reference local19
-//              ^^^^ reference pair#
+//              ^^^^ reference com/airbnb/epoxy/ModelState#pair.
         state.pair.pair = state;
 //      ^^^^^ reference local19
-//            ^^^^ reference pair#
-//                 ^^^^ reference pair#pair#
+//            ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//                 ^^^^ reference com/airbnb/epoxy/ModelState#pair.
 //                        ^^^^^ reference local19
         continue;
       }
 
       helper.remove(state.position);
 //    ^^^^^^ reference local18
-//           ^^^^^^ reference remove#
+//           ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#remove().
 //                  ^^^^^ reference local19
-//                        ^^^^^^^^ reference position#
+//                        ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
     }
   }
 
@@ -552,25 +554,25 @@ class DiffHelper {
    */
   private void collectInsertions(UpdateOpHelper helper) {
 //             ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectInsertions().
-//                               ^^^^^^^^^^^^^^ reference _root_/
+//                               ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                                              ^^^^^^ definition local20
     Iterator<ModelState> oldItemIterator = oldStateList.iterator();
 //  ^^^^^^^^ reference java/util/Iterator#
-//           ^^^^^^^^^^ reference _root_/
+//           ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                       ^^^^^^^^^^^^^^^ definition local21
 //                                         ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
 //                                                      ^^^^^^^^ reference java/util/ArrayList#iterator().
 
     for (ModelState itemToInsert : currentStateList) {
-//       ^^^^^^^^^^ reference _root_/
+//       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                  ^^^^^^^^^^^^ definition local22
 //                                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
       if (itemToInsert.pair != null) {
 //        ^^^^^^^^^^^^ reference local22
-//                     ^^^^ reference pair#
+//                     ^^^^ reference com/airbnb/epoxy/ModelState#pair.
         // Update the position of the next item in the old list to take any insertions into account
         ModelState nextOldItem = getNextItemWithPair(oldItemIterator);
-//      ^^^^^^^^^^ reference _root_/
+//      ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                 ^^^^^^^^^^^ definition local23
 //                               ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#getNextItemWithPair().
 //                                                   ^^^^^^^^^^^^^^^ reference local21
@@ -578,18 +580,18 @@ class DiffHelper {
 //          ^^^^^^^^^^^ reference local23
           nextOldItem.position += helper.getNumInsertions();
 //        ^^^^^^^^^^^ reference local23
-//                    ^^^^^^^^ reference position#
+//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                                ^^^^^^ reference local20
-//                                       ^^^^^^^^^^^^^^^^ reference getNumInsertions#
+//                                       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#getNumInsertions().
         }
         continue;
       }
 
       helper.add(itemToInsert.position);
 //    ^^^^^^ reference local20
-//           ^^^ reference add#
+//           ^^^ reference com/airbnb/epoxy/UpdateOpHelper#add().
 //               ^^^^^^^^^^^^ reference local22
-//                            ^^^^^^^^ reference position#
+//                            ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
     }
   }
 
@@ -598,17 +600,17 @@ class DiffHelper {
    */
   private void collectChanges(UpdateOpHelper helper) {
 //             ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectChanges().
-//                            ^^^^^^^^^^^^^^ reference _root_/
+//                            ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                                           ^^^^^^ definition local24
     for (ModelState newItem : currentStateList) {
-//       ^^^^^^^^^^ reference _root_/
+//       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                  ^^^^^^^ definition local25
 //                            ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
       ModelState previousItem = newItem.pair;
-//    ^^^^^^^^^^ reference _root_/
+//    ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //               ^^^^^^^^^^^^ definition local26
 //                              ^^^^^^^ reference local25
-//                                      ^^^^ reference pair#
+//                                      ^^^^ reference com/airbnb/epoxy/ModelState#pair.
       if (previousItem == null) {
 //        ^^^^^^^^^^^^ reference local26
         continue;
@@ -624,43 +626,43 @@ class DiffHelper {
         // won't be accurate.
         if (previousItem.model.isDebugValidationEnabled()) {
 //          ^^^^^^^^^^^^ reference local26
-//                       ^^^^^ reference model#
-//                             ^^^^^^^^^^^^^^^^^^^^^^^^ reference model#isDebugValidationEnabled#
+//                       ^^^^^ reference com/airbnb/epoxy/ModelState#model.
+//                             ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#isDebugValidationEnabled().
           previousItem.model
 //        ^^^^^^^^^^^^ reference local26
-//                     ^^^^^ reference model#
+//                     ^^^^^ reference com/airbnb/epoxy/ModelState#model.
               .validateStateHasNotChangedSinceAdded("Model was changed before it could be diffed.",
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference model#validateStateHasNotChangedSinceAdded#
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#validateStateHasNotChangedSinceAdded().
                   previousItem.position);
 //                ^^^^^^^^^^^^ reference local26
-//                             ^^^^^^^^ reference position#
+//                             ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
         }
 
         modelChanged = !previousItem.model.equals(newItem.model);
 //      ^^^^^^^^^^^^ reference local27
 //                      ^^^^^^^^^^^^ reference local26
-//                                   ^^^^^ reference model#
-//                                         ^^^^^^ reference model#equals#
+//                                   ^^^^^ reference com/airbnb/epoxy/ModelState#model.
+//                                         ^^^^^^ reference com/airbnb/epoxy/EpoxyModel#equals().
 //                                                ^^^^^^^ reference local25
-//                                                        ^^^^^ reference model#
+//                                                        ^^^^^ reference com/airbnb/epoxy/ModelState#model.
       } else {
         modelChanged = previousItem.hashCode != newItem.hashCode;
 //      ^^^^^^^^^^^^ reference local27
 //                     ^^^^^^^^^^^^ reference local26
-//                                  ^^^^^^^^ reference hashCode#
+//                                  ^^^^^^^^ reference com/airbnb/epoxy/ModelState#hashCode.
 //                                              ^^^^^^^ reference local25
-//                                                      ^^^^^^^^ reference hashCode#
+//                                                      ^^^^^^^^ reference com/airbnb/epoxy/ModelState#hashCode.
       }
 
       if (modelChanged) {
 //        ^^^^^^^^^^^^ reference local27
         helper.update(newItem.position, previousItem.model);
 //      ^^^^^^ reference local24
-//             ^^^^^^ reference update#
+//             ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#update(+1).
 //                    ^^^^^^^ reference local25
-//                            ^^^^^^^^ reference position#
+//                            ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                                      ^^^^^^^^^^^^ reference local26
-//                                                   ^^^^^ reference model#
+//                                                   ^^^^^ reference com/airbnb/epoxy/ModelState#model.
       }
     }
   }
@@ -670,34 +672,34 @@ class DiffHelper {
    */
   private void collectMoves(UpdateOpHelper helper) {
 //             ^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectMoves().
-//                          ^^^^^^^^^^^^^^ reference _root_/
+//                          ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                                         ^^^^^^ definition local28
     // This walks through both the new and old list simultaneous and checks for position changes.
     Iterator<ModelState> oldItemIterator = oldStateList.iterator();
 //  ^^^^^^^^ reference java/util/Iterator#
-//           ^^^^^^^^^^ reference _root_/
+//           ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                       ^^^^^^^^^^^^^^^ definition local29
 //                                         ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
 //                                                      ^^^^^^^^ reference java/util/ArrayList#iterator().
     ModelState nextOldItem = null;
-//  ^^^^^^^^^^ reference _root_/
+//  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //             ^^^^^^^^^^^ definition local30
 
     for (ModelState newItem : currentStateList) {
-//       ^^^^^^^^^^ reference _root_/
+//       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                  ^^^^^^^ definition local31
 //                            ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
       if (newItem.pair == null) {
 //        ^^^^^^^ reference local31
-//                ^^^^ reference pair#
+//                ^^^^ reference com/airbnb/epoxy/ModelState#pair.
         // This item was inserted. However, insertions are done at the item's final position, and
         // aren't smart about inserting at a different position to take future moves into account.
         // As the old state list is updated to reflect moves, it needs to also consider insertions
         // affected by those moves in order for the final change set to be correct
         if (helper.moves.isEmpty()) {
 //          ^^^^^^ reference local28
-//                 ^^^^^ reference moves#
-//                       ^^^^^^^ reference moves#isEmpty#
+//                 ^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#moves.
+//                       ^^^^^^^ reference java/util/List#isEmpty().
           // There have been no moves, so the item is still at it's correct position
           continue;
         } else {
@@ -707,7 +709,7 @@ class DiffHelper {
           // track its position in the old list and move it back to its final position if necessary
           newItem.pairWithSelf();
 //        ^^^^^^^ reference local31
-//                ^^^^^^^^^^^^ reference pairWithSelf#
+//                ^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#pairWithSelf().
         }
       }
 
@@ -737,7 +739,7 @@ class DiffHelper {
           nextOldItem = newItem.pair;
 //        ^^^^^^^^^^^ reference local30
 //                      ^^^^^^^ reference local31
-//                              ^^^^ reference pair#
+//                              ^^^^ reference com/airbnb/epoxy/ModelState#pair.
         }
       }
 
@@ -748,25 +750,25 @@ class DiffHelper {
         updateItemPosition(newItem.pair, helper.moves);
 //      ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#updateItemPosition().
 //                         ^^^^^^^ reference local31
-//                                 ^^^^ reference pair#
+//                                 ^^^^ reference com/airbnb/epoxy/ModelState#pair.
 //                                       ^^^^^^ reference local28
-//                                              ^^^^^ reference moves#
+//                                              ^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#moves.
         updateItemPosition(nextOldItem, helper.moves);
 //      ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#updateItemPosition().
 //                         ^^^^^^^^^^^ reference local30
 //                                      ^^^^^^ reference local28
-//                                             ^^^^^ reference moves#
+//                                             ^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#moves.
 
         // The item is the same and its already in the correct place
         if (newItem.id == nextOldItem.id && newItem.position == nextOldItem.position) {
 //          ^^^^^^^ reference local31
-//                  ^^ reference id#
+//                  ^^ reference com/airbnb/epoxy/ModelState#id.
 //                        ^^^^^^^^^^^ reference local30
-//                                    ^^ reference id#
+//                                    ^^ reference com/airbnb/epoxy/ModelState#id.
 //                                          ^^^^^^^ reference local31
-//                                                  ^^^^^^^^ reference position#
+//                                                  ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                                                              ^^^^^^^^^^^ reference local30
-//                                                                          ^^^^^^^^ reference position#
+//                                                                          ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
           nextOldItem = null;
 //        ^^^^^^^^^^^ reference local30
           break;
@@ -775,17 +777,17 @@ class DiffHelper {
         int newItemDistance = newItem.pair.position - newItem.position;
 //          ^^^^^^^^^^^^^^^ definition local32
 //                            ^^^^^^^ reference local31
-//                                    ^^^^ reference pair#
-//                                         ^^^^^^^^ reference pair#position#
+//                                    ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//                                         ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                                                    ^^^^^^^ reference local31
-//                                                            ^^^^^^^^ reference position#
+//                                                            ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
         int oldItemDistance = nextOldItem.pair.position - nextOldItem.position;
 //          ^^^^^^^^^^^^^^^ definition local33
 //                            ^^^^^^^^^^^ reference local30
-//                                        ^^^^ reference pair#
-//                                             ^^^^^^^^ reference pair#position#
+//                                        ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//                                             ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                                                        ^^^^^^^^^^^ reference local30
-//                                                                    ^^^^^^^^ reference position#
+//                                                                    ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 
         // Both items are already in the correct position
         if (newItemDistance == 0 && oldItemDistance == 0) {
@@ -801,24 +803,24 @@ class DiffHelper {
 //                            ^^^^^^^^^^^^^^^ reference local32
           helper.move(nextOldItem.position, nextOldItem.pair.position);
 //        ^^^^^^ reference local28
-//               ^^^^ reference move#
+//               ^^^^ reference com/airbnb/epoxy/UpdateOpHelper#move().
 //                    ^^^^^^^^^^^ reference local30
-//                                ^^^^^^^^ reference position#
+//                                ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                                          ^^^^^^^^^^^ reference local30
-//                                                      ^^^^ reference pair#
-//                                                           ^^^^^^^^ reference pair#position#
+//                                                      ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//                                                           ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 
           nextOldItem.position = nextOldItem.pair.position;
 //        ^^^^^^^^^^^ reference local30
-//                    ^^^^^^^^ reference position#
+//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                               ^^^^^^^^^^^ reference local30
-//                                           ^^^^ reference pair#
-//                                                ^^^^^^^^ reference pair#position#
+//                                           ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//                                                ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
           nextOldItem.lastMoveOp = helper.getNumMoves();
 //        ^^^^^^^^^^^ reference local30
-//                    ^^^^^^^^^^ reference lastMoveOp#
+//                    ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#lastMoveOp.
 //                                 ^^^^^^ reference local28
-//                                        ^^^^^^^^^^^ reference getNumMoves#
+//                                        ^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#getNumMoves().
 
           nextOldItem = getNextItemWithPair(oldItemIterator);
 //        ^^^^^^^^^^^ reference local30
@@ -827,25 +829,25 @@ class DiffHelper {
         } else {
           helper.move(newItem.pair.position, newItem.position);
 //        ^^^^^^ reference local28
-//               ^^^^ reference move#
+//               ^^^^ reference com/airbnb/epoxy/UpdateOpHelper#move().
 //                    ^^^^^^^ reference local31
-//                            ^^^^ reference pair#
-//                                 ^^^^^^^^ reference pair#position#
+//                            ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//                                 ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                                           ^^^^^^^ reference local31
-//                                                   ^^^^^^^^ reference position#
+//                                                   ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 
           newItem.pair.position = newItem.position;
 //        ^^^^^^^ reference local31
-//                ^^^^ reference pair#
-//                     ^^^^^^^^ reference pair#position#
+//                ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//                     ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                                ^^^^^^^ reference local31
-//                                        ^^^^^^^^ reference position#
+//                                        ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
           newItem.pair.lastMoveOp = helper.getNumMoves();
 //        ^^^^^^^ reference local31
-//                ^^^^ reference pair#
-//                     ^^^^^^^^^^ reference pair#lastMoveOp#
+//                ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//                     ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#lastMoveOp.
 //                                  ^^^^^^ reference local28
-//                                         ^^^^^^^^^^^ reference getNumMoves#
+//                                         ^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#getNumMoves().
           break;
         }
       }
@@ -859,10 +861,10 @@ class DiffHelper {
    */
   private void updateItemPosition(ModelState item, List<UpdateOp> moveOps) {
 //             ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#updateItemPosition().
-//                                ^^^^^^^^^^ reference _root_/
+//                                ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                                           ^^^^ definition local34
 //                                                 ^^^^ reference java/util/List#
-//                                                      ^^^^^^^^ reference _root_/
+//                                                      ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //                                                                ^^^^^^^ definition local35
     int size = moveOps.size();
 //      ^^^^ definition local36
@@ -872,12 +874,12 @@ class DiffHelper {
     for (int i = item.lastMoveOp; i < size; i++) {
 //           ^ definition local37
 //               ^^^^ reference local34
-//                    ^^^^^^^^^^ reference lastMoveOp#
+//                    ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#lastMoveOp.
 //                                ^ reference local37
 //                                    ^^^^ reference local36
 //                                          ^ reference local37
       UpdateOp moveOp = moveOps.get(i);
-//    ^^^^^^^^ reference _root_/
+//    ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //             ^^^^^^ definition local38
 //                      ^^^^^^^ reference local35
 //                              ^^^ reference java/util/List#get().
@@ -885,38 +887,38 @@ class DiffHelper {
       int fromPosition = moveOp.positionStart;
 //        ^^^^^^^^^^^^ definition local39
 //                       ^^^^^^ reference local38
-//                              ^^^^^^^^^^^^^ reference positionStart#
+//                              ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
       int toPosition = moveOp.itemCount;
 //        ^^^^^^^^^^ definition local40
 //                     ^^^^^^ reference local38
-//                            ^^^^^^^^^ reference itemCount#
+//                            ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
 
       if (item.position > fromPosition && item.position <= toPosition) {
 //        ^^^^ reference local34
-//             ^^^^^^^^ reference position#
+//             ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                        ^^^^^^^^^^^^ reference local39
 //                                        ^^^^ reference local34
-//                                             ^^^^^^^^ reference position#
+//                                             ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                                                         ^^^^^^^^^^ reference local40
         item.position--;
 //      ^^^^ reference local34
-//           ^^^^^^^^ reference position#
+//           ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
       } else if (item.position < fromPosition && item.position >= toPosition) {
 //               ^^^^ reference local34
-//                    ^^^^^^^^ reference position#
+//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                               ^^^^^^^^^^^^ reference local39
 //                                               ^^^^ reference local34
-//                                                    ^^^^^^^^ reference position#
+//                                                    ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
 //                                                                ^^^^^^^^^^ reference local40
         item.position++;
 //      ^^^^ reference local34
-//           ^^^^^^^^ reference position#
+//           ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
       }
     }
 
     item.lastMoveOp = size;
 //  ^^^^ reference local34
-//       ^^^^^^^^^^ reference lastMoveOp#
+//       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#lastMoveOp.
 //                    ^^^^ reference local36
   }
 
@@ -926,13 +928,13 @@ class DiffHelper {
   @Nullable
    ^^^^^^^^ reference androidx/annotation/Nullable#
   private ModelState getNextItemWithPair(Iterator<ModelState> iterator) {
-//        ^^^^^^^^^^ reference _root_/
+//        ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                   ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#getNextItemWithPair().
 //                                       ^^^^^^^^ reference java/util/Iterator#
-//                                                ^^^^^^^^^^ reference _root_/
+//                                                ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                                                            ^^^^^^^^ definition local41
     ModelState nextItem = null;
-//  ^^^^^^^^^^ reference _root_/
+//  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //             ^^^^^^^^ definition local42
     while (nextItem == null && iterator.hasNext()) {
 //         ^^^^^^^^ reference local42
@@ -945,7 +947,7 @@ class DiffHelper {
 
       if (nextItem.pair == null) {
 //        ^^^^^^^^ reference local42
-//                 ^^^^ reference pair#
+//                 ^^^^ reference com/airbnb/epoxy/ModelState#pair.
         // Skip this one and go on to the next
         nextItem = null;
 //      ^^^^^^^^ reference local42

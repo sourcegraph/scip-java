@@ -11,7 +11,7 @@ class ModelState {
   int position;
 //    ^^^^^^^^ definition com/airbnb/epoxy/ModelState#position.
   EpoxyModel<?> model;
-  ^^^^^^^^^^ reference _root_/
+  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //              ^^^^^ definition com/airbnb/epoxy/ModelState#model.
 
   /**
@@ -37,7 +37,7 @@ class ModelState {
   static ModelState build(EpoxyModel<?> model, int position, boolean immutableModel) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                  ^^^^^ definition com/airbnb/epoxy/ModelState#build().
-//                        ^^^^^^^^^^ reference _root_/
+//                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                      ^^^^^ definition local0
 //                                                 ^^^^^^^^ definition local1
 //                                                                   ^^^^^^^^^^^^^^ definition local2
@@ -57,7 +57,7 @@ class ModelState {
 //  ^^^^^ reference local3
 //        ^^ reference com/airbnb/epoxy/ModelState#id.
 //             ^^^^^ reference local0
-//                   ^^ reference `<any>`#id#
+//                   ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
     state.position = position;
 //  ^^^^^ reference local3
 //        ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
@@ -74,7 +74,7 @@ class ModelState {
 //    ^^^^^ reference local3
 //          ^^^^^^^^ reference com/airbnb/epoxy/ModelState#hashCode.
 //                     ^^^^^ reference local0
-//                           ^^^^^^^^ reference `<any>`#hashCode#
+//                           ^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#hashCode().
     }
 
     return state;

@@ -13,14 +13,14 @@ import com.airbnb.epoxy.ViewHolderState.ViewState;
 //     ^^^ reference com/
 //         ^^^^^^ reference com/airbnb/
 //                ^^^^^ reference com/airbnb/epoxy/
-//                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState/
-//                                      ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState/ViewState#
+//                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#
+//                                      ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
 import com.airbnb.epoxy.VisibilityState.Visibility;
 //     ^^^ reference com/
 //         ^^^^^^ reference com/airbnb/
 //                ^^^^^ reference com/airbnb/epoxy/
-//                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState/
-//                                      ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState/Visibility#
+//                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#
+//                                      ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#Visibility#
 
 import java.util.List;
 //     ^^^^ reference java/
@@ -57,19 +57,19 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //                                                ^^^^^^^^^^ reference RecyclerView/ViewHolder#
   @SuppressWarnings("rawtypes") private EpoxyModel epoxyModel;
    ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
-//                                      ^^^^^^^^^^ reference _root_/
+//                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                 ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#epoxyModel.
   private List<Object> payloads;
 //        ^^^^ reference java/util/List#
 //             ^^^^^^ reference java/lang/Object#
 //                     ^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#payloads.
   private EpoxyHolder epoxyHolder;
-//        ^^^^^^^^^^^ reference _root_/
+//        ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyHolder#
 //                    ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#epoxyHolder.
   @Nullable ViewHolderState.ViewState initialViewState;
    ^^^^^^^^ reference androidx/annotation/Nullable#
-//          ^^^^^^^^^^^^^^^ reference ViewHolderState/
-//                          ^^^^^^^^^ reference ViewHolderState/ViewState#
+//          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#
+//                          ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
 //                                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#initialViewState.
 
   // Once the EpoxyHolder is created parent will be set to null.
@@ -98,10 +98,11 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
       // state from a previously bound model.
       initialViewState = new ViewState();
 //    ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#initialViewState.
-//                           ^^^^^^^^^ reference _root_/
+//                       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`().
+//                           ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
       initialViewState.save(itemView);
 //    ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#initialViewState.
-//                     ^^^^ reference ViewHolderState/ViewState#save#
+//                     ^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#save().
 //                          ^^^^^^^^ reference _root_/
     }
   }
@@ -112,7 +113,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#initialViewState.
       initialViewState.restore(itemView);
 //    ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#initialViewState.
-//                     ^^^^^^^ reference ViewHolderState/ViewState#restore#
+//                     ^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#restore().
 //                             ^^^^^^^^ reference _root_/
     }
   }
@@ -120,11 +121,11 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   public void bind(@SuppressWarnings("rawtypes") EpoxyModel model,
 //            ^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#bind().
 //                  ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
-//                                               ^^^^^^^^^^ reference _root_/
+//                                               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                          ^^^^^ definition local3
       @Nullable EpoxyModel<?> previouslyBoundModel, List<Object> payloads, int position) {
 //     ^^^^^^^^ reference androidx/annotation/Nullable#
-//              ^^^^^^^^^^ reference _root_/
+//              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^^^^^^^^^^^^^^ definition local4
 //                                                  ^^^^ reference java/util/List#
 //                                                       ^^^^^^ reference java/lang/Object#
@@ -138,16 +139,16 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
     if (epoxyHolder == null && model instanceof EpoxyModelWithHolder) {
 //      ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#epoxyHolder.
 //                             ^^^^^ reference local3
-//                                              ^^^^^^^^^^^^^^^^^^^^ reference _root_/
+//                                              ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#
       epoxyHolder = ((EpoxyModelWithHolder) model).createNewHolder(parent);
 //    ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#epoxyHolder.
-//                    ^^^^^^^^^^^^^^^^^^^^ reference _root_/
+//                    ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#
 //                                          ^^^^^ reference local3
-//                                                 ^^^^^^^^^^^^^^^ reference createNewHolder#
+//                                                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#createNewHolder().
 //                                                                 ^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#parent.
       epoxyHolder.bindView(itemView);
 //    ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#epoxyHolder.
-//                ^^^^^^^^ reference bindView#
+//                ^^^^^^^^ reference com/airbnb/epoxy/EpoxyHolder#bindView().
 //                         ^^^^^^^^ reference _root_/
     }
     // Safe to set to null as it is only used for createNewHolder method
@@ -156,13 +157,13 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 
     if (model instanceof GeneratedModel) {
 //      ^^^^^ reference local3
-//                       ^^^^^^^^^^^^^^ reference _root_/
+//                       ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/GeneratedModel#
       // The generated method will enforce that only a properly typed listener can be set
       //noinspection unchecked
       ((GeneratedModel) model).handlePreBind(this, objectToBind(), position);
-//      ^^^^^^^^^^^^^^ reference _root_/
+//      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/GeneratedModel#
 //                      ^^^^^ reference local3
-//                             ^^^^^^^^^^^^^ reference handlePreBind#
+//                             ^^^^^^^^^^^^^ reference com/airbnb/epoxy/GeneratedModel#handlePreBind().
 //                                           ^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#this.
 //                                                 ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#objectToBind().
 //                                                                 ^^^^^^^^ reference local6
@@ -173,7 +174,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
       // noinspection unchecked
       model.bind(objectToBind(), previouslyBoundModel);
 //    ^^^^^ reference local3
-//          ^^^^ reference bind#
+//          ^^^^ reference com/airbnb/epoxy/EpoxyModel#bind(+2).
 //               ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#objectToBind().
 //                               ^^^^^^^^^^^^^^^^^^^^ reference local4
     } else if (payloads.isEmpty()) {
@@ -182,26 +183,26 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
       // noinspection unchecked
       model.bind(objectToBind());
 //    ^^^^^ reference local3
-//          ^^^^ reference bind#
+//          ^^^^ reference com/airbnb/epoxy/EpoxyModel#bind().
 //               ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#objectToBind().
     } else {
       // noinspection unchecked
       model.bind(objectToBind(), payloads);
 //    ^^^^^ reference local3
-//          ^^^^ reference bind#
+//          ^^^^ reference com/airbnb/epoxy/EpoxyModel#bind(+1).
 //               ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#objectToBind().
 //                               ^^^^^^^^ reference local5
     }
 
     if (model instanceof GeneratedModel) {
 //      ^^^^^ reference local3
-//                       ^^^^^^^^^^^^^^ reference _root_/
+//                       ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/GeneratedModel#
       // The generated method will enforce that only a properly typed listener can be set
       //noinspection unchecked
       ((GeneratedModel) model).handlePostBind(objectToBind(), position);
-//      ^^^^^^^^^^^^^^ reference _root_/
+//      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/GeneratedModel#
 //                      ^^^^^ reference local3
-//                             ^^^^^^^^^^^^^^ reference handlePostBind#
+//                             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/GeneratedModel#handlePostBind().
 //                                            ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#objectToBind().
 //                                                            ^^^^^^^^ reference local6
     }
@@ -229,7 +230,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
     // noinspection unchecked
     epoxyModel.unbind(objectToBind());
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#epoxyModel.
-//             ^^^^^^ reference unbind#
+//             ^^^^^^ reference com/airbnb/epoxy/EpoxyModel#unbind().
 //                    ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#objectToBind().
 
     epoxyModel = null;
@@ -240,14 +241,14 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 
   public void visibilityStateChanged(@Visibility int visibilityState) {
 //            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#visibilityStateChanged().
-//                                    ^^^^^^^^^^ reference _root_/
+//                                    ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#Visibility#
 //                                                   ^^^^^^^^^^^^^^^ definition local7
     assertBound();
 //  ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#assertBound().
     // noinspection unchecked
     epoxyModel.onVisibilityStateChanged(visibilityState, objectToBind());
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#epoxyModel.
-//             ^^^^^^^^^^^^^^^^^^^^^^^^ reference onVisibilityStateChanged#
+//             ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#onVisibilityStateChanged().
 //                                      ^^^^^^^^^^^^^^^ reference local7
 //                                                       ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#objectToBind().
   }
@@ -276,7 +277,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
     // noinspection unchecked
     epoxyModel.onVisibilityChanged(percentVisibleHeight, percentVisibleWidth, visibleHeight,
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#epoxyModel.
-//             ^^^^^^^^^^^^^^^^^^^ reference onVisibilityChanged#
+//             ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#onVisibilityChanged().
 //                                 ^^^^^^^^^^^^^^^^^^^^ reference local8
 //                                                       ^^^^^^^^^^^^^^^^^^^ reference local9
 //                                                                            ^^^^^^^^^^^^^ reference local10
@@ -296,7 +297,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   }
 
   public EpoxyModel<?> getModel() {
-//       ^^^^^^^^^^ reference _root_/
+//       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                     ^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#getModel().
     assertBound();
 //  ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#assertBound().
@@ -305,7 +306,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   }
 
   public EpoxyHolder getHolder() {
-//       ^^^^^^^^^^^ reference _root_/
+//       ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyHolder#
 //                   ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#getHolder().
     assertBound();
 //  ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#assertBound().

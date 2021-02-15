@@ -63,9 +63,9 @@ using SemanticDB as an intermediary representation for LSIF:
   LSIF because compiler plugins does not have access to a project-wide context,
   which is necessary to produce accurate definitions and hovers in multi-module
   projects with external library dependencies.
-- **Performance**: SemanticDB is fast to write and read. The compiler adds low
-  overhead on compilation and the final conversion from SemanticDB to LSIF can
-  be safely parallelized.
+- **Performance**: SemanticDB is fast to write and read. Each compilation unit
+  can be processed independently to keep memory usage low. The final conversion
+  from SemanticDB to LSIF can be safely parallelized.
 - **Cross-language**: SemanticDB has a
   [spec](https://scalameta.org/docs/semanticdb/specification.html) for Java and
   Scala enabling cross-language navigation in hybrid Java/Scala codebases.
@@ -149,3 +149,7 @@ write tests because:
   code (which is always multiline). Modern versions of Java support multiline
   string literals, but they're not supported in Java 8, which is supported by
   lsif-java.
+
+## Benchmarks
+
+See [docs/benchmarks.md] for benchmark results.

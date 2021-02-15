@@ -21,7 +21,7 @@ import android.os.Handler;
  */
 public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController {
 //              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Typed4EpoxyController#
-//                                                              ^^^^^^^^^^^^^^^ reference _root_/
+//                                                              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 
   private T data1;
 //        ^ reference com/airbnb/epoxy/Typed4EpoxyController#[T]
@@ -49,6 +49,7 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
 //                                                           ^^^^^^^ reference _root_/
 //                                                                   ^^^^^^^^^^^^^^ definition local1
     super(modelBuildingHandler, diffingHandler);
+//  ^^^^^ reference com/airbnb/epoxy/EpoxyController#`<init>`(+1).
 //        ^^^^^^^^^^^^^^^^^^^^ reference local0
 //                              ^^^^^^^^^^^^^^ reference local1
   }
@@ -104,8 +105,8 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
               + "model refresh with new data.");
     }
     super.requestModelBuild();
-//  ^^^^^ reference _root_/
-//        ^^^^^^^^^^^^^^^^^ reference requestModelBuild#
+//  ^^^^^ reference com/airbnb/epoxy/Typed4EpoxyController#super.
+//        ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#requestModelBuild().
   }
 
   @Override
@@ -117,8 +118,8 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
     allowModelBuildRequests = true;
 //  ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Typed4EpoxyController#allowModelBuildRequests.
     super.moveModel(fromPosition, toPosition);
-//  ^^^^^ reference _root_/
-//        ^^^^^^^^^ reference moveModel#
+//  ^^^^^ reference com/airbnb/epoxy/Typed4EpoxyController#super.
+//        ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#moveModel().
 //                  ^^^^^^^^^^^^ reference local6
 //                                ^^^^^^^^^^ reference local7
     allowModelBuildRequests = false;
@@ -139,8 +140,8 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
               + "model refresh with new data.");
     }
     super.requestDelayedModelBuild(delayMs);
-//  ^^^^^ reference _root_/
-//        ^^^^^^^^^^^^^^^^^^^^^^^^ reference requestDelayedModelBuild#
+//  ^^^^^ reference com/airbnb/epoxy/Typed4EpoxyController#super.
+//        ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#requestDelayedModelBuild().
 //                                 ^^^^^^^ reference local8
   }
 
@@ -149,7 +150,7 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
   protected final void buildModels() {
 //                     ^^^^^^^^^^^ definition com/airbnb/epoxy/Typed4EpoxyController#buildModels().
     if (!isBuildingModels()) {
-//       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Typed4EpoxyController#isBuildingModels#
+//       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#isBuildingModels().
       throw new IllegalStateException(
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 2:41
 //              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#

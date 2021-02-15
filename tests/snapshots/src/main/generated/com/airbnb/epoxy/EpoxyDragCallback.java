@@ -10,8 +10,8 @@ import android.view.View;
  */
 public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchCallback<T> {
 //     ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDragCallback#
-//                                           ^^^^^^^^^^ reference _root_/
-//                                                               ^^^^^^^^^^^^^^^^^^^^^^ reference _root_/
+//                                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//                                                               ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyTouchCallback#
 //                                                                                      ^ reference com/airbnb/epoxy/EpoxyDragCallback#[T]
 
   /**

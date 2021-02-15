@@ -24,7 +24,7 @@ class ImmutableModelException extends RuntimeException {
 
   ImmutableModelException(EpoxyModel model, int modelPosition) {
   ^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`().
-//                        ^^^^^^^^^^ reference _root_/
+//                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local0
 //                                              ^^^^^^^^^^^^^ definition local1
     this(model, "", modelPosition);
@@ -35,7 +35,7 @@ class ImmutableModelException extends RuntimeException {
 
   ImmutableModelException(EpoxyModel model,
   ^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`(+1).
-//                        ^^^^^^^^^^ reference _root_/
+//                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local2
       String descriptionOfWhenChangeHappened, int modelPosition) {
 //    ^^^^^^ reference java/lang/String#
@@ -54,7 +54,7 @@ class ImmutableModelException extends RuntimeException {
   private static String buildMessage(EpoxyModel model,
 //               ^^^^^^ reference java/lang/String#
 //                      ^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#buildMessage().
-//                                   ^^^^^^^^^^ reference _root_/
+//                                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                              ^^^^^ definition local5
       String descriptionOfWhenChangeHappened, int modelPosition) {
 //    ^^^^^^ reference java/lang/String#
@@ -72,15 +72,15 @@ class ImmutableModelException extends RuntimeException {
         .append(" Model: ")
 //       ^^^^^^ reference java/lang/StringBuilder#append(+1).
         .append(model.toString())
-//       ^^^^^^ reference java/lang/StringBuilder#append(+7).
+//       ^^^^^^ reference java/lang/StringBuilder#append(+1).
 //              ^^^^^ reference local5
-//                    ^^^^^^^^ reference toString#
+//                    ^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#toString().
         .append("\n\n")
-//       ^^^^^^ reference `<any>`#append#
+//       ^^^^^^ reference java/lang/StringBuilder#append(+1).
         .append(MODEL_CANNOT_BE_CHANGED_MESSAGE)
-//       ^^^^^^ reference `<any>`#append#append#
+//       ^^^^^^ reference java/lang/StringBuilder#append(+1).
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ImmutableModelException#MODEL_CANNOT_BE_CHANGED_MESSAGE.
         .toString();
-//       ^^^^^^^^ reference `<any>`#append#append#toString#
+//       ^^^^^^^^ reference java/lang/StringBuilder#toString().
   }
 }

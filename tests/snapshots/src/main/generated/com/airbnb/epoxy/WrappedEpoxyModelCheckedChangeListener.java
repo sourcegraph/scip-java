@@ -22,12 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#
-//                                                            ^^^^^^^^^^ reference _root_/
+//                                                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
     implements OnCheckedChangeListener {
 //             ^^^^^^^^^^^^^^^^^^^^^^^ reference _root_/
 
   private final OnModelCheckedChangeListener<T, V> originalCheckedChangeListener;
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference _root_/
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/OnModelCheckedChangeListener#
 //                                           ^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[T]
 //                                              ^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[V]
 //                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#originalCheckedChangeListener.
@@ -35,7 +35,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
   public WrappedEpoxyModelCheckedChangeListener(
 //       ^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#`<init>`().
       OnModelCheckedChangeListener<T, V> checkedListener
-//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference _root_/
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/OnModelCheckedChangeListener#
 //                                 ^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[T]
 //                                    ^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[V]
 //                                       ^^^^^^^^^^^^^^^ definition local0
@@ -61,10 +61,10 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //                                            ^^^^^^ definition local1
 //                                                            ^^^^^^^^^ definition local2
     EpoxyViewHolder epoxyHolder = ListenersUtils.getEpoxyHolderForChildView(button);
-//  ^^^^^^^^^^^^^^^ reference _root_/
+//  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                  ^^^^^^^^^^^ definition local3
-//                                ^^^^^^^^^^^^^^ reference _root_/
-//                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference getEpoxyHolderForChildView#
+//                                ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ListenersUtils#
+//                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ListenersUtils#getEpoxyHolderForChildView().
 //                                                                          ^^^^^^ reference local1
     if (epoxyHolder == null) {
 //      ^^^^^^^^^^^ reference local3
@@ -80,7 +80,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
     final int adapterPosition = epoxyHolder.getAdapterPosition();
 //            ^^^^^^^^^^^^^^^ definition local4
 //                              ^^^^^^^^^^^ reference local3
-//                                          ^^^^^^^^^^^^^^^^^^ reference getAdapterPosition#
+//                                          ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#getAdapterPosition#
     if (adapterPosition != RecyclerView.NO_POSITION) {
 //      ^^^^^^^^^^^^^^^ reference local4
 //                         ^^^^^^^^^^^^ reference _root_/
@@ -88,13 +88,13 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
       originalCheckedChangeListener
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#originalCheckedChangeListener.
           .onChecked((T) epoxyHolder.getModel(), (V) epoxyHolder.objectToBind(), button,
-//         ^^^^^^^^^ reference `<any>`#onChecked#
+//         ^^^^^^^^^ reference com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked().
 //                    ^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[T]
 //                       ^^^^^^^^^^^ reference local3
-//                                   ^^^^^^^^ reference getModel#
+//                                   ^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#getModel().
 //                                                ^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[V]
 //                                                   ^^^^^^^^^^^ reference local3
-//                                                               ^^^^^^^^^^^^ reference objectToBind#
+//                                                               ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#objectToBind().
 //                                                                               ^^^^^^ reference local1
           isChecked, adapterPosition);
 //        ^^^^^^^^^ reference local2
@@ -128,7 +128,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 
     return originalCheckedChangeListener.equals(that.originalCheckedChangeListener);
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#originalCheckedChangeListener.
-//                                       ^^^^^^ reference `<any>`#equals#
+//                                       ^^^^^^ reference java/lang/Object#equals().
 //                                              ^^^^ reference local6
 //                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#originalCheckedChangeListener.
   }
@@ -139,6 +139,6 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //           ^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#hashCode().
     return originalCheckedChangeListener.hashCode();
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#originalCheckedChangeListener.
-//                                       ^^^^^^^^ reference `<any>`#hashCode#
+//                                       ^^^^^^^^ reference java/lang/Object#hashCode().
   }
 }

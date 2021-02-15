@@ -1131,7 +1131,7 @@ public class Carousel extends EpoxyRecyclerView {
 //            ^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setModels().
 //                       ^^^^^^^ reference androidx/annotation/NonNull#
 //                               ^^^^ reference java/util/List#
-//                                              ^^^^^^^^^^ reference _root_/
+//                                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                             ^^^^^^ definition local65
     super.setModels(models);
 //  ^^^^^ reference _root_/

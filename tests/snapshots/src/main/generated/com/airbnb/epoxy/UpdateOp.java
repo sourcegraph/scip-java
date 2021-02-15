@@ -62,7 +62,7 @@ class UpdateOp {
 //    ^^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#itemCount.
   ArrayList<EpoxyModel<?>> payloads;
   ^^^^^^^^^ reference java/util/ArrayList#
-//          ^^^^^^^^^^ reference _root_/
+//          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                         ^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#payloads.
 
   private UpdateOp() {
@@ -78,7 +78,7 @@ class UpdateOp {
 //                                                                ^^^^^^^^^ definition local2
       @Nullable EpoxyModel<?> payload) {
 //     ^^^^^^^^ reference androidx/annotation/Nullable#
-//              ^^^^^^^^^^ reference _root_/
+//              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^ definition local3
     UpdateOp op = new UpdateOp();
 //  ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
@@ -145,7 +145,7 @@ class UpdateOp {
   void addPayload(@Nullable EpoxyModel<?> payload) {
 //     ^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#addPayload().
 //                 ^^^^^^^^ reference androidx/annotation/Nullable#
-//                          ^^^^^^^^^^ reference _root_/
+//                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                        ^^^^^^^ definition local8
     if (payload == null) {
 //      ^^^^^^^ reference local8

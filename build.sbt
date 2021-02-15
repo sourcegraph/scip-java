@@ -138,3 +138,13 @@ lazy val snapshots = project
   )
   .dependsOn(minimizedScala, unit)
   .enablePlugins(BuildInfoPlugin)
+
+lazy val bench = project
+  .in(file("tests/benchmarks"))
+  .settings(
+    moduleName := "lsif-java-bench",
+    fork.in(run) := true,
+    skip.in(publish) := true
+  )
+  .dependsOn(unit)
+  .enablePlugins(JmhPlugin)

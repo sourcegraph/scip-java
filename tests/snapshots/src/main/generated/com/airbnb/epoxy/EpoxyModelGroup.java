@@ -98,12 +98,12 @@ import androidx.annotation.Nullable;
  ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //     ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#
-//                                   ^^^^^^^^^^^^^^^^^^^^ reference _root_/
+//                                   ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#
 //                                                        ^^^^^^^^^^^^^^^^ reference _root_/
 
   protected final List<EpoxyModel<?>> models;
 //                ^^^^ reference java/util/List#
-//                     ^^^^^^^^^^ reference _root_/
+//                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                    ^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#models.
 
   private boolean shouldSaveViewStateDefault = false;
@@ -124,10 +124,10 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                        ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                                      ^^^^^^^^^ definition local0
 //                                                 ^^^^^^^^^^ reference java/util/Collection#
-//                                                                      ^^^^^^^^^^ reference _root_/
+//                                                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                                     ^^^^^^ definition local1
     this(layoutRes, new ArrayList<>(models));
-//  ^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+1).
+//  ^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+2).
 //       ^^^^^^^^^ reference local0
 //                  ^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+2).
 //                      ^^^^^^^^^ reference java/util/ArrayList#
@@ -142,12 +142,12 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //       ^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+1).
 //                        ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                                      ^^^^^^^^^ definition local2
-//                                                 ^^^^^^^^^^ reference _root_/
+//                                                 ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                  ^^^^^^ definition local3
     this(layoutRes, new ArrayList<>(Arrays.asList(models)));
-//  ^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+1).
+//  ^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+2).
 //       ^^^^^^^^^ reference local2
-//                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`().
+//                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+2).
 //                      ^^^^^^^^^ reference java/util/ArrayList#
 //                                  ^^^^^^ reference java/util/Arrays#
 //                                         ^^^^^^ reference java/util/Arrays#asList().
@@ -163,7 +163,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                         ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                                       ^^^^^^^^^ definition local4
 //                                                  ^^^^ reference java/util/List#
-//                                                       ^^^^^^^^^^ reference _root_/
+//                                                       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                      ^^^^^^ definition local5
     if (models.isEmpty()) {
 //      ^^^^^^ reference local5
@@ -178,23 +178,23 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //       ^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#models.
 //                ^^^^^^ reference local5
     layout(layoutRes);
-//  ^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#layout#
+//  ^^^^^^ reference com/airbnb/epoxy/EpoxyModel#layout(+1).
 //         ^^^^^^^^^ reference local4
     id(models.get(0).id());
-//  ^^ reference com/airbnb/epoxy/EpoxyModelGroup#id#
+//  ^^ reference com/airbnb/epoxy/EpoxyModel#id(+2).
 //     ^^^^^^ reference local5
 //            ^^^ reference java/util/List#get().
-//                   ^^ reference `<any>`#id#
+//                   ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
 
     boolean saveState = false;
 //          ^^^^^^^^^ definition local6
     for (EpoxyModel<?> model : models) {
-//       ^^^^^^^^^^ reference _root_/
+//       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                     ^^^^^ definition local7
 //                             ^^^^^^ reference local5
       if (model.shouldSaveViewState()) {
 //        ^^^^^ reference local7
-//              ^^^^^^^^^^^^^^^^^^^ reference `<any>`#shouldSaveViewState#
+//              ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#shouldSaveViewState().
         saveState = true;
 //      ^^^^^^^^^ reference local6
         break;
@@ -229,20 +229,20 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
     this();
 //  ^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+3).
     layout(layoutRes);
-//  ^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#layout#
+//  ^^^^^^ reference com/airbnb/epoxy/EpoxyModel#layout(+1).
 //         ^^^^^^^^^ reference local8
   }
 
   protected void addModel(@NonNull EpoxyModel<?> model) {
 //               ^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#addModel().
 //                         ^^^^^^^ reference androidx/annotation/NonNull#
-//                                 ^^^^^^^^^^ reference _root_/
+//                                 ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                               ^^^^^ definition local9
     // By default we save view state if any of the models need to save state.
     shouldSaveViewStateDefault |= model.shouldSaveViewState();
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#shouldSaveViewStateDefault.
 //                                ^^^^^ reference local9
-//                                      ^^^^^^^^^^^^^^^^^^^ reference `<any>`#shouldSaveViewState#
+//                                      ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#shouldSaveViewState().
     models.add(model);
 //  ^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#models.
 //         ^^^ reference java/util/List#add().
@@ -269,9 +269,9 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //     ^^^^^^^^ reference java/lang/Override#
       public void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex) {
 //                ^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#bind().``#onModel().
-//                        ^^^^^^^^^^ reference _root_/
+//                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local11
-//                                          ^^^^^^^^^^^^^^^ reference _root_/
+//                                          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                                          ^^^^^^^^^^ definition local12
 //                                                                          ^^^^^^^^^^ definition local13
         setViewVisibility(model, viewHolder);
@@ -280,7 +280,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                               ^^^^^^^^^^ reference local12
         viewHolder.bind(model, null, Collections.emptyList(), modelIndex);
 //      ^^^^^^^^^^ reference local12
-//                 ^^^^ reference bind#
+//                 ^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#bind().
 //                      ^^^^^ reference local11
 //                                   ^^^^^^^^^^^ reference java/util/Collections#
 //                                               ^^^^^^^^^ reference java/util/Collections#emptyList().
@@ -313,9 +313,9 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //     ^^^^^^^^ reference java/lang/Override#
       public void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex) {
 //                ^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#bind(+1).``#onModel().
-//                        ^^^^^^^^^^ reference _root_/
+//                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local16
-//                                          ^^^^^^^^^^^^^^^ reference _root_/
+//                                          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                                          ^^^^^^^^^^ definition local17
 //                                                                          ^^^^^^^^^^ definition local18
         setViewVisibility(model, viewHolder);
@@ -324,7 +324,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                               ^^^^^^^^^^ reference local17
         viewHolder.bind(model, null, Collections.emptyList(), modelIndex);
 //      ^^^^^^^^^^ reference local17
-//                 ^^^^ reference bind#
+//                 ^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#bind().
 //                      ^^^^^ reference local16
 //                                   ^^^^^^^^^^^ reference java/util/Collections#
 //                                               ^^^^^^^^^ reference java/util/Collections#emptyList().
@@ -341,7 +341,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                          ^^^^^^^^^^^^^^^^ reference _root_/
 //                                           ^^^^^^ definition local19
 //                                                    ^^^^^^^ reference androidx/annotation/NonNull#
-//                                                            ^^^^^^^^^^ reference _root_/
+//                                                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                          ^^^^^^^^^^^^^^^^^^^^ definition local20
     if (!(previouslyBoundModel instanceof EpoxyModelGroup)) {
 //        ^^^^^^^^^^^^^^^^^^^^ reference local20
@@ -369,9 +369,9 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //     ^^^^^^^^ reference java/lang/Override#
       public void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex) {
 //                ^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#bind(+2).``#onModel().
-//                        ^^^^^^^^^^ reference _root_/
+//                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local22
-//                                          ^^^^^^^^^^^^^^^ reference _root_/
+//                                          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                                          ^^^^^^^^^^ definition local23
 //                                                                          ^^^^^^^^^^ definition local24
         setViewVisibility(model, viewHolder);
@@ -385,7 +385,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                                     ^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#models.
 //                                            ^^^^ reference java/util/List#size().
           EpoxyModel<?> previousModel = previousGroup.models.get(modelIndex);
-//        ^^^^^^^^^^ reference _root_/
+//        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                      ^^^^^^^^^^^^^ definition local25
 //                                      ^^^^^^^^^^^^^ reference local21
 //                                                    ^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#models.
@@ -393,12 +393,12 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                                                               ^^^^^^^^^^ reference local24
           if (previousModel.id() == model.id()) {
 //            ^^^^^^^^^^^^^ reference local25
-//                          ^^ reference `<any>`#id#
+//                          ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
 //                                  ^^^^^ reference local22
-//                                        ^^ reference id#
+//                                        ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
             viewHolder.bind(model, previousModel, Collections.emptyList(), modelIndex);
 //          ^^^^^^^^^^ reference local23
-//                     ^^^^ reference bind#
+//                     ^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#bind().
 //                          ^^^^^ reference local22
 //                                 ^^^^^^^^^^^^^ reference local25
 //                                                ^^^^^^^^^^^ reference java/util/Collections#
@@ -410,7 +410,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 
         viewHolder.bind(model, null, Collections.emptyList(), modelIndex);
 //      ^^^^^^^^^^ reference local23
-//                 ^^^^ reference bind#
+//                 ^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#bind().
 //                      ^^^^^ reference local22
 //                                   ^^^^^^^^^^^ reference java/util/Collections#
 //                                               ^^^^^^^^^ reference java/util/Collections#emptyList().
@@ -421,24 +421,24 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 
   private static void setViewVisibility(EpoxyModel model, EpoxyViewHolder viewHolder) {
 //                    ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#setViewVisibility().
-//                                      ^^^^^^^^^^ reference _root_/
+//                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                 ^^^^^ definition local26
-//                                                        ^^^^^^^^^^^^^^^ reference _root_/
+//                                                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                                                        ^^^^^^^^^^ definition local27
     if (model.isShown()) {
 //      ^^^^^ reference local26
-//            ^^^^^^^ reference isShown#
+//            ^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#isShown().
       viewHolder.itemView.setVisibility(View.VISIBLE);
 //    ^^^^^^^^^^ reference local27
-//               ^^^^^^^^ reference itemView#
-//                        ^^^^^^^^^^^^^ reference itemView#setVisibility#
+//               ^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#itemView#
+//                        ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#itemView#setVisibility#
 //                                      ^^^^ reference _root_/
 //                                           ^^^^^^^ reference VISIBLE#
     } else {
       viewHolder.itemView.setVisibility(View.GONE);
 //    ^^^^^^^^^^ reference local27
-//               ^^^^^^^^ reference itemView#
-//                        ^^^^^^^^^^^^^ reference itemView#setVisibility#
+//               ^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#itemView#
+//                        ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#itemView#setVisibility#
 //                                      ^^^^ reference _root_/
 //                                           ^^^^ reference GONE#
     }
@@ -477,17 +477,17 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //     ^^^^^^^^ reference java/lang/Override#
       public void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex) {
 //                ^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#onViewAttachedToWindow().``#onModel().
-//                        ^^^^^^^^^^ reference _root_/
+//                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local30
-//                                          ^^^^^^^^^^^^^^^ reference _root_/
+//                                          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                                          ^^^^^^^^^^ definition local31
 //                                                                          ^^^^^^^^^^ definition local32
         //noinspection unchecked
         model.onViewAttachedToWindow(viewHolder.objectToBind());
 //      ^^^^^ reference local30
-//            ^^^^^^^^^^^^^^^^^^^^^^ reference onViewAttachedToWindow#
+//            ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#onViewAttachedToWindow().
 //                                   ^^^^^^^^^^ reference local31
-//                                              ^^^^^^^^^^^^ reference objectToBind#
+//                                              ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#objectToBind().
       }
     });
   }
@@ -511,17 +511,17 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //     ^^^^^^^^ reference java/lang/Override#
       public void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex) {
 //                ^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#onViewDetachedFromWindow().``#onModel().
-//                        ^^^^^^^^^^ reference _root_/
+//                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local34
-//                                          ^^^^^^^^^^^^^^^ reference _root_/
+//                                          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                                          ^^^^^^^^^^ definition local35
 //                                                                          ^^^^^^^^^^ definition local36
         //noinspection unchecked
         model.onViewDetachedFromWindow(viewHolder.objectToBind());
 //      ^^^^^ reference local34
-//            ^^^^^^^^^^^^^^^^^^^^^^^^ reference onViewDetachedFromWindow#
+//            ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#onViewDetachedFromWindow().
 //                                     ^^^^^^^^^^ reference local35
-//                                                ^^^^^^^^^^^^ reference objectToBind#
+//                                                ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#objectToBind().
       }
     });
   }
@@ -564,9 +564,9 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //        ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
     void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex);
 //       ^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#onModel().
-//               ^^^^^^^^^^ reference _root_/
+//               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                          ^^^^^ definition local41
-//                                 ^^^^^^^^^^^^^^^ reference _root_/
+//                                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                                 ^^^^^^^^^^ definition local42
 //                                                                 ^^^^^^^^^^ definition local43
   }
@@ -582,7 +582,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
     return models.get(0).spanSize(totalSpanCount, position, itemCount);
 //         ^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#models.
 //                ^^^ reference java/util/List#get().
-//                       ^^^^^^^^ reference `<any>`#spanSize#
+//                       ^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#spanSize().
 //                                ^^^^^^^^^^^^^^ reference local44
 //                                                ^^^^^^^^ reference local45
 //                                                          ^^^^^^^^^ reference local46
@@ -605,7 +605,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#shouldSaveViewState(+1).
 //                                                   ^^^^^^^^^^^^^^^^^^^ definition local47
     onMutation();
-//  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#onMutation#
+//  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#onMutation().
     this.shouldSaveViewState = shouldSaveViewState;
 //  ^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#this.
 //       ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#shouldSaveViewState.
@@ -641,7 +641,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
    */
   protected boolean useViewStubLayoutParams(EpoxyModel<?> model, int modelPosition) {
 //                  ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#useViewStubLayoutParams().
-//                                          ^^^^^^^^^^ reference _root_/
+//                                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                        ^^^^^ definition local48
 //                                                                   ^^^^^^^^^^^^^ definition local49
     return true;
@@ -677,8 +677,8 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
       return false;
     }
     if (!super.equals(o)) {
-//       ^^^^^ reference _root_/
-//             ^^^^^^ reference equals#
+//       ^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#super.
+//             ^^^^^^ reference com/airbnb/epoxy/EpoxyModel#equals().
 //                    ^ reference local51
       return false;
     }
@@ -702,8 +702,8 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //           ^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#hashCode().
     int result = super.hashCode();
 //      ^^^^^^ definition local53
-//               ^^^^^ reference _root_/
-//                     ^^^^^^^^ reference hashCode#
+//               ^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#super.
+//                     ^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#hashCode().
     result = 31 * result + models.hashCode();
 //  ^^^^^^ reference local53
 //                ^^^^^^ reference local53

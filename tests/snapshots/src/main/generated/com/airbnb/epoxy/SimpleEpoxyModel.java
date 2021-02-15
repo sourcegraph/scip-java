@@ -26,7 +26,7 @@ import androidx.annotation.NonNull;
  */
 public class SimpleEpoxyModel extends EpoxyModel<View> {
 //     ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#
-//                                    ^^^^^^^^^^ reference _root_/
+//                                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                               ^^^^ reference _root_/
   @LayoutRes private final int layoutRes;
    ^^^^^^^^^ reference androidx/annotation/LayoutRes#
@@ -83,8 +83,8 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                          ^^^^ reference _root_/
 //                               ^^^^ definition local3
     super.bind(view);
-//  ^^^^^ reference _root_/
-//        ^^^^ reference bind#
+//  ^^^^^ reference com/airbnb/epoxy/SimpleEpoxyModel#super.
+//        ^^^^ reference com/airbnb/epoxy/EpoxyModel#bind().
 //             ^^^^ reference local3
     view.setOnClickListener(onClickListener);
 //  ^^^^ reference local3
@@ -106,8 +106,8 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                            ^^^^ reference _root_/
 //                                 ^^^^ definition local4
     super.unbind(view);
-//  ^^^^^ reference _root_/
-//        ^^^^^^ reference unbind#
+//  ^^^^^ reference com/airbnb/epoxy/SimpleEpoxyModel#super.
+//        ^^^^^^ reference com/airbnb/epoxy/EpoxyModel#unbind().
 //               ^^^^ reference local4
     view.setOnClickListener(null);
 //  ^^^^ reference local4
@@ -150,8 +150,8 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
       return false;
     }
     if (!super.equals(o)) {
-//       ^^^^^ reference _root_/
-//             ^^^^^^ reference equals#
+//       ^^^^^ reference com/airbnb/epoxy/SimpleEpoxyModel#super.
+//             ^^^^^^ reference com/airbnb/epoxy/EpoxyModel#equals().
 //                    ^ reference local8
       return false;
     }
@@ -191,8 +191,8 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //           ^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#hashCode().
     int result = super.hashCode();
 //      ^^^^^^ definition local10
-//               ^^^^^ reference _root_/
-//                     ^^^^^^^^ reference hashCode#
+//               ^^^^^ reference com/airbnb/epoxy/SimpleEpoxyModel#super.
+//                     ^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#hashCode().
     result = 31 * result + layoutRes;
 //  ^^^^^^ reference local10
 //                ^^^^^^ reference local10

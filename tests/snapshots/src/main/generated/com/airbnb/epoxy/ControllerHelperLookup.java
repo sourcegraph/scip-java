@@ -43,21 +43,22 @@ class ControllerHelperLookup {
 //                                                              ^^^^^^^^^^^^^^^^^^^^^ reference java/util/LinkedHashMap#`<init>`(+2).
 //                                                                  ^^^^^^^^^^^^^ reference java/util/LinkedHashMap#
   private static final NoOpControllerHelper NO_OP_CONTROLLER_HELPER = new NoOpControllerHelper();
-//                     ^^^^^^^^^^^^^^^^^^^^ reference _root_/
+//                     ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/NoOpControllerHelper#
 //                                          ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#NO_OP_CONTROLLER_HELPER.
-//                                                                        ^^^^^^^^^^^^^^^^^^^^ reference _root_/
+//                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/NoOpControllerHelper#`<init>`().
+//                                                                        ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/NoOpControllerHelper#
 
   static ControllerHelper getHelperForController(EpoxyController controller) {
-//       ^^^^^^^^^^^^^^^^ reference _root_/
+//       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerHelper#
 //                        ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#getHelperForController().
-//                                               ^^^^^^^^^^^^^^^ reference _root_/
+//                                               ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                                                               ^^^^^^^^^^ definition local0
     Constructor<?> constructor = findConstructorForClass(controller.getClass());
 //  ^^^^^^^^^^^ reference java/lang/reflect/Constructor#
 //                 ^^^^^^^^^^^ definition local1
-//                               ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass#
+//                               ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().
 //                                                       ^^^^^^^^^^ reference local0
-//                                                                  ^^^^^^^^ reference getClass#
+//                                                                  ^^^^^^^^ reference java/lang/Object#getClass().
     if (constructor == null) {
 //      ^^^^^^^^^^^ reference local1
       return NO_OP_CONTROLLER_HELPER;
@@ -66,7 +67,7 @@ class ControllerHelperLookup {
 
     try {
       return (ControllerHelper) constructor.newInstance(controller);
-//            ^^^^^^^^^^^^^^^^ reference _root_/
+//            ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerHelper#
 //                              ^^^^^^^^^^^ reference local1
 //                                          ^^^^^^^^^^^ reference java/lang/reflect/Constructor#newInstance().
 //                                                      ^^^^^^^^^^ reference local0

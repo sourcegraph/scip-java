@@ -31,17 +31,17 @@ import androidx.collection.LongSparseArray;
 public class DiffPayload {
 //     ^^^^^^^^^^^ definition com/airbnb/epoxy/DiffPayload#
   private final EpoxyModel<?> singleModel;
-//              ^^^^^^^^^^ reference _root_/
+//              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^^^^^ definition com/airbnb/epoxy/DiffPayload#singleModel.
   private final LongSparseArray<EpoxyModel<?>> modelsById;
 //              ^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#
-//                              ^^^^^^^^^^ reference _root_/
+//                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                             ^^^^^^^^^^ definition com/airbnb/epoxy/DiffPayload#modelsById.
 
   DiffPayload(List<? extends EpoxyModel<?>> models) {
   ^^^^^^ definition com/airbnb/epoxy/DiffPayload#`<init>`().
 //            ^^^^ reference java/util/List#
-//                           ^^^^^^^^^^ reference _root_/
+//                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                          ^^^^^^ definition local0
     if (models.isEmpty()) {
 //      ^^^^^^ reference local0
@@ -74,14 +74,14 @@ public class DiffPayload {
 //                     ^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#
 //                                       ^^^^^^^^^^ reference local1
       for (EpoxyModel<?> model : models) {
-//         ^^^^^^^^^^ reference _root_/
+//         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                       ^^^^^ definition local2
 //                               ^^^^^^ reference local0
         modelsById.put(model.id(), model);
 //      ^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#modelsById.
 //                 ^^^ reference androidx/collection/LongSparseArray#put().
 //                     ^^^^^ reference local2
-//                           ^^ reference `<any>`#id#
+//                           ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
 //                                 ^^^^^ reference local2
       }
     }
@@ -89,7 +89,7 @@ public class DiffPayload {
 
   public DiffPayload(EpoxyModel<?> changedItem) {
 //       ^^^^^^ definition com/airbnb/epoxy/DiffPayload#`<init>`(+1).
-//                   ^^^^^^^^^^ reference _root_/
+//                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                 ^^^^^^^^^^^ definition local3
     this(Collections.singletonList(changedItem));
 //  ^^^^ reference com/airbnb/epoxy/DiffPayload#`<init>`().
@@ -106,7 +106,7 @@ public class DiffPayload {
   @Nullable
    ^^^^^^^^ reference androidx/annotation/Nullable#
   public static EpoxyModel<?> getModelFromPayload(List<Object> payloads, long modelId) {
-//              ^^^^^^^^^^ reference _root_/
+//              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffPayload#getModelFromPayload().
 //                                                ^^^^ reference java/util/List#
 //                                                     ^^^^^^ reference java/lang/Object#
@@ -134,7 +134,7 @@ public class DiffPayload {
         if (diffPayload.singleModel.id() == modelId) {
 //          ^^^^^^^^^^^ reference local7
 //                      ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#singleModel.
-//                                  ^^ reference `<any>`#id#
+//                                  ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
 //                                          ^^^^^^^ reference local5
           return diffPayload.singleModel;
 //               ^^^^^^^^^^^ reference local7
@@ -142,7 +142,7 @@ public class DiffPayload {
         }
       } else {
         EpoxyModel<?> modelForId = diffPayload.modelsById.get(modelId);
-//      ^^^^^^^^^^ reference _root_/
+//      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                    ^^^^^^^^^^ definition local8
 //                                 ^^^^^^^^^^^ reference local7
 //                                             ^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#modelsById.
@@ -213,13 +213,13 @@ public class DiffPayload {
       }
 
       EpoxyModel<?> thisModel = modelsById.valueAt(i);
-//    ^^^^^^^^^^ reference _root_/
+//    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^^^^^^^^^ definition local15
 //                              ^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#modelsById.
 //                                         ^^^^^^^ reference androidx/collection/LongSparseArray#valueAt().
 //                                                 ^ reference local12
       EpoxyModel<?> thatModel = that.modelsById.valueAt(i);
-//    ^^^^^^^^^^ reference _root_/
+//    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^^^^^^^^^ definition local16
 //                              ^^^^ reference local9
 //                                   ^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#modelsById.
