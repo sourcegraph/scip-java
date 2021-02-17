@@ -32,7 +32,7 @@ object JavacBootClasspathPlugin extends AutoPlugin {
   private def toolsJar: File = javaHomeDirectory / "lib" / "tools.jar"
   private def javaHomeDirectory: File = {
     val home = file(System.getProperty("java.home"))
-    if (Properties.isJavaAtLeast("8"))
+    if (Properties.isJavaAtLeast("8") && !Properties.isJavaAtLeast("11"))
       home.getParentFile
     else
       home
