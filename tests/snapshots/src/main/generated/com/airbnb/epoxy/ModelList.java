@@ -161,9 +161,9 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 
     if (previousModel.id() != element.id()) {
 //      ^^^^^^^^^^^^^ reference local12
-//                    ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
+//                    ^^ reference com/airbnb/epoxy/EpoxyModel#id().
 //                            ^^^^^^^ reference local11
-//                                    ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
+//                                    ^^ reference com/airbnb/epoxy/EpoxyModel#id().
       notifyRemoval(index, 1);
 //    ^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyRemoval().
 //                  ^^^^^ reference local10
@@ -184,10 +184,10 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                                 ^^^^^^^^^^ definition local13
     notifyInsertion(size(), 1);
 //  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyInsertion().
-//                  ^^^^ reference java/util/ArrayList#size(+1).
+//                  ^^^^ reference java/util/ArrayList#size().
     return super.add(epoxyModel);
 //         ^^^^^ reference com/airbnb/epoxy/ModelList#super.
-//               ^^^ reference java/util/ArrayList#add().
+//               ^^^ reference java/util/ArrayList#add(+1).
 //                   ^^^^^^^^^^ reference local13
   }
 
@@ -203,7 +203,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                  ^^^^^ reference local14
     super.add(index, element);
 //  ^^^^^ reference com/airbnb/epoxy/ModelList#super.
-//        ^^^ reference java/util/ArrayList#add(+1).
+//        ^^^ reference java/util/ArrayList#add(+2).
 //            ^^^^^ reference local14
 //                   ^^^^^^^ reference local15
   }
@@ -217,7 +217,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                                                          ^ definition local16
     notifyInsertion(size(), c.size());
 //  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyInsertion().
-//                  ^^^^ reference java/util/ArrayList#size(+1).
+//                  ^^^^ reference java/util/ArrayList#size().
 //                          ^ reference local16
 //                            ^^^^ reference java/util/Collection#size().
     return super.addAll(c);
@@ -295,7 +295,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //       ^^^^^^^ reference java/util/ArrayList#isEmpty().
       notifyRemoval(0, size());
 //    ^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyRemoval().
-//                     ^^^^ reference java/util/ArrayList#size(+1).
+//                     ^^^^ reference java/util/ArrayList#size().
       super.clear();
 //    ^^^^^ reference com/airbnb/epoxy/ModelList#super.
 //          ^^^^^ reference java/util/ArrayList#clear().
@@ -430,7 +430,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                 ^^^^^^^ definition com/airbnb/epoxy/ModelList#Itr#hasNext().
       return cursor != size();
 //           ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
-//                     ^^^^ reference java/util/ArrayList#size(+1).
+//                     ^^^^ reference java/util/ArrayList#size().
     }
 
     @SuppressWarnings("unchecked")
@@ -674,7 +674,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     if (start >= 0 && end <= size()) {
 //      ^^^^^ reference local40
 //                    ^^^ reference local41
-//                           ^^^^ reference java/util/ArrayList#size(+1).
+//                           ^^^^ reference java/util/ArrayList#size().
       if (start <= end) {
 //        ^^^^^ reference local40
 //                 ^^^ reference local41
@@ -1195,7 +1195,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public int size() {
-//             ^^^^ definition com/airbnb/epoxy/ModelList#SubList#size(+1).
+//             ^^^^ definition com/airbnb/epoxy/ModelList#SubList#size().
       if (modCount == fullList.modCount) {
 //        ^^^^^^^^ reference java/util/AbstractList#modCount.
 //                    ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.

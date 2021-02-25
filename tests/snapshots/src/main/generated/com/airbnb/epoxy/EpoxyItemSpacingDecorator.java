@@ -294,7 +294,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //                                            ^^^^^^^^^ reference local22
       isInFirstRow = isInFirstRow(position, spanSizeLookup, spanCount);
 //    ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInFirstRow.
-//                   ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInFirstRow(+1).
+//                   ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInFirstRow().
 //                                ^^^^^^^^ reference local16
 //                                          ^^^^^^^^^^^^^^ reference local20
 //                                                          ^^^^^^^^^ reference local22
@@ -302,7 +302,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //    ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInLastRow.
           !isInFirstRow && isInLastRow(position, itemCount, spanSizeLookup, spanCount);
 //         ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInFirstRow.
-//                         ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInLastRow(+1).
+//                         ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInLastRow().
 //                                     ^^^^^^^^ reference local16
 //                                               ^^^^^^^^^ reference local18
 //                                                          ^^^^^^^^^^^^^^ reference local20
@@ -411,7 +411,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   }
 
   private static boolean isInFirstRow(int position, SpanSizeLookup spanSizeLookup, int spanCount) {
-//                       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInFirstRow(+1).
+//                       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInFirstRow().
 //                                        ^^^^^^^^ definition local28
 //                                                  ^^^^^^^^^^^^^^ reference _root_/
 //                                                                 ^^^^^^^^^^^^^^ definition local29
@@ -439,7 +439,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   }
 
   private static boolean isInLastRow(int position, int itemCount, SpanSizeLookup spanSizeLookup,
-//                       ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInLastRow(+1).
+//                       ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInLastRow().
 //                                       ^^^^^^^^ definition local33
 //                                                     ^^^^^^^^^ definition local34
 //                                                                ^^^^^^^^^^^^^^ reference _root_/

@@ -406,6 +406,7 @@ public abstract class EpoxyTouchHelper {
 //    ^^^^^^^^^^^^^^^ reference _root_/
 //                    ^^^^^^^^^^^^^^^ definition local18
           new ItemTouchHelper(new EpoxyModelTouchCallback<U>(controller, targetModelClass) {
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference `<init>`# 37:12
 //            ^^^^^^^^^^^^^^^ reference _root_/
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#andCallbacks().``#`<init>`(). 37:11
 //                                ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#
@@ -883,6 +884,7 @@ public abstract class EpoxyTouchHelper {
 //    ^^^^^^^^^^^^^^^ reference _root_/
 //                    ^^^^^^^^^^^^^^^ definition local64
           new ItemTouchHelper(new EpoxyModelTouchCallback<U>(null, targetModelClass) {
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference `<init>`# 42:12
 //            ^^^^^^^^^^^^^^^ reference _root_/
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#andCallbacks().``#`<init>`(). 42:11
 //                                ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#

@@ -134,6 +134,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                                        ^^^^^^^ reference _root_/
 //                                                ^^^^^^^ definition local0
           return new LinearSnapHelper();
+//               ^^^^^^^^^^^^^^^^^^^^^^ reference `<init>`#
 //                   ^^^^^^^^^^^^^^^^ reference _root_/
         }
       };

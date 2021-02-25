@@ -130,7 +130,7 @@ public abstract class EpoxyModel<T> {
 //          ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#`<init>`().
 //                          ^^ definition local0
     id(id);
-//  ^^ reference com/airbnb/epoxy/EpoxyModel#id(+2).
+//  ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
 //     ^^ reference local0
   }
 
@@ -144,7 +144,7 @@ public abstract class EpoxyModel<T> {
   }
 
   boolean hasDefaultId() {
-//        ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#hasDefaultId(+1).
+//        ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#hasDefaultId().
     return hasDefaultId;
 //         ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#hasDefaultId.
   }
@@ -323,7 +323,7 @@ public abstract class EpoxyModel<T> {
   }
 
   public long id() {
-//            ^^ definition com/airbnb/epoxy/EpoxyModel#id(+1).
+//            ^^ definition com/airbnb/epoxy/EpoxyModel#id().
     return id;
 //         ^^ reference com/airbnb/epoxy/EpoxyModel#id.
   }
@@ -336,7 +336,7 @@ public abstract class EpoxyModel<T> {
   public EpoxyModel<T> id(long id) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
-//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+2).
+//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+1).
 //                             ^^ definition local15
     if ((addedToAdapter || firstControllerAddedTo != null) && id != this.id) {
 //       ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#addedToAdapter.
@@ -369,7 +369,7 @@ public abstract class EpoxyModel<T> {
   public EpoxyModel<T> id(@Nullable Number... ids) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
-//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+3).
+//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+2).
 //                         ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                  ^^^^^^ reference java/lang/Number#
 //                                            ^^^ definition local16
@@ -392,7 +392,7 @@ public abstract class EpoxyModel<T> {
       }
     }
     return id(result);
-//         ^^ reference com/airbnb/epoxy/EpoxyModel#id(+2).
+//         ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
 //            ^^^^^^ reference local17
   }
 
@@ -405,7 +405,7 @@ public abstract class EpoxyModel<T> {
   public EpoxyModel<T> id(long id1, long id2) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
-//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+4).
+//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+3).
 //                             ^^^ definition local19
 //                                       ^^^ definition local20
     long result = hashLong64Bit(id1);
@@ -418,7 +418,7 @@ public abstract class EpoxyModel<T> {
 //                         ^^^^^^^^^^^^^ reference com/airbnb/epoxy/IdUtils#hashLong64Bit().
 //                                       ^^^ reference local20
     return id(result);
-//         ^^ reference com/airbnb/epoxy/EpoxyModel#id(+2).
+//         ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
 //            ^^^^^^ reference local21
   }
 
@@ -437,12 +437,12 @@ public abstract class EpoxyModel<T> {
   public EpoxyModel<T> id(@Nullable CharSequence key) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
-//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+5).
+//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+4).
 //                         ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                  ^^^^^^^^^^^^ reference java/lang/CharSequence#
 //                                               ^^^ definition local22
     id(hashString64Bit(key));
-//  ^^ reference com/airbnb/epoxy/EpoxyModel#id(+2).
+//  ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
 //     ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IdUtils#hashString64Bit().
 //                     ^^^ reference local22
     return this;
@@ -457,7 +457,7 @@ public abstract class EpoxyModel<T> {
   public EpoxyModel<T> id(@Nullable CharSequence key, @Nullable CharSequence... otherKeys) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
-//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+6).
+//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+5).
 //                         ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                  ^^^^^^^^^^^^ reference java/lang/CharSequence#
 //                                               ^^^ definition local23
@@ -482,7 +482,7 @@ public abstract class EpoxyModel<T> {
       }
     }
     return id(result);
-//         ^^ reference com/airbnb/epoxy/EpoxyModel#id(+2).
+//         ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
 //            ^^^^^^ reference local25
   }
 
@@ -501,7 +501,7 @@ public abstract class EpoxyModel<T> {
   public EpoxyModel<T> id(@Nullable CharSequence key, long id) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
-//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+7).
+//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+6).
 //                         ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                  ^^^^^^^^^^^^ reference java/lang/CharSequence#
 //                                               ^^^ definition local27
@@ -516,7 +516,7 @@ public abstract class EpoxyModel<T> {
 //                         ^^^^^^^^^^^^^ reference com/airbnb/epoxy/IdUtils#hashLong64Bit().
 //                                       ^^ reference local28
     id(result);
-//  ^^ reference com/airbnb/epoxy/EpoxyModel#id(+2).
+//  ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
 //     ^^^^^^ reference local29
     return this;
 //         ^^^^ reference com/airbnb/epoxy/EpoxyModel#this.
@@ -543,7 +543,7 @@ public abstract class EpoxyModel<T> {
   public EpoxyModel<T> layout(@LayoutRes int layoutRes) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
-//                     ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#layout(+1).
+//                     ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#layout().
 //                             ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                                           ^^^^^^^^^ definition local30
     onMutation();
@@ -925,7 +925,7 @@ public abstract class EpoxyModel<T> {
   public EpoxyModel<T> spanSizeOverride(@Nullable SpanSizeOverrideCallback spanSizeCallback) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
-//                     ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#spanSizeOverride(+1).
+//                     ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#spanSizeOverride().
 //                                       ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                                ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#
 //                                                                         ^^^^^^^^^^^^^^^^ definition local49

@@ -105,11 +105,11 @@ These are the main components of the project.
 | `./sbt`                                                            | terminal | Start interactive sbt shell with Java 8. Takes a while to load on the first run.    |
 | `unit/test`                                                        | sbt      | Run fast unit tests.                                                                |
 | `~unit/test`                                                       | sbt      | Start watch mode to run tests on file save, good for local edit-and-test workflows. |
-| `snapshot/testOnly tests.MinimizedSnapshotSuite`                   | sbt      | Runs fast snapshot tests. Indexes a small set of files under `tests/minimized`.     |
-| `snapshot/testOnly tests.MinimizedSnapshotSuite -- *InnerClasses*` | sbt      | Runs only individual tests cases matching the name "InnerClasses".                  |
-| `snapshot/testOnly tests.LibrarySnapshotSuite`                     | sbt      | Runs slow snapshot tests. Indexes a corpus of external Java libraries.              |
-| `snapshot/test`                                                    | sbt      | Runs all snapshot tests.                                                            |
-| `snapshot/run`                                                     | sbt      | Update snapshot tests. Use this command after you have fixed a bug.                 |
+| `snapshots/testOnly tests.MinimizedSnapshotSuite`                   | sbt      | Runs fast snapshot tests. Indexes a small set of files under `tests/minimized`.     |
+| `snapshots/testOnly tests.MinimizedSnapshotSuite -- *InnerClasses*` | sbt      | Runs only individual tests cases matching the name "InnerClasses".                  |
+| `snapshots/testOnly tests.LibrarySnapshotSuite`                     | sbt      | Runs slow snapshot tests. Indexes a corpus of external Java libraries.              |
+| `snapshots/test`                                                    | sbt      | Runs all snapshot tests.                                                            |
+| `snapshots/run`                                                     | sbt      | Update snapshot tests. Use this command after you have fixed a bug.                 |
 | `fixAll`                                                           | sbt      | Run Scalafmt, Scalafix and Javafmt on all sources. Run this before opening a PR.    |
 
 ### Import the project into IntelliJ
