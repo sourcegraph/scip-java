@@ -13,17 +13,24 @@ Currently, only Java 8 with the build tool sbt is supported. We hope to increase
 compatibility with more Java language versions and build tools as the project
 evolves.
 
-| Language version | Support |
-| ---------------- | ------- |
-| Java 7           | ❌      |
-| Java 8           | ✅      |
-| Java 11+         | ❌      |
+| Language version | Support            |
+| ---------------- | ------------------ |
+| Java 7           | ❌                 |
+| Java 8           | ✅                 |
+| Java 11          | ✅                 |
+| Java 12          | Untested, may work |
+| Java 13          | Untested, may work |
+| Java 14          | Untested, may work |
+| Java 15          | Untested, may work |
+| Java 16          | Untested, may work |
+| Java 17          | Untested, may work |
 
 | Build tool | Support |
 | ---------- | ------- |
-| Gradle     | ❌      |
-| Maven      | ❌      |
+| Gradle     | ✅      |
+| Maven      | ✅      |
 | Bazel      | ❌      |
+| Buck       | ❌      |
 | sbt        | ✅      |
 
 ## Overview
@@ -82,6 +89,17 @@ using SemanticDB as an intermediary representation for LSIF:
 
 The following sections provide tips on how to contribute to this codebase.
 
+### System dependencies
+
+- `java`: any version should work
+- `git`: any version should work
+- `lsif-semanticdb`:
+  `go get github.com/sourcegraph/lsif-semanticdb/cmd/lsif-semanticdb`
+- `gradle`: `brew install gradle`, or see
+  [general installation guide](https://gradle.org/install/).
+- `mvn`: `brew install maven`, or see
+  [general installation guide](https://www.baeldung.com/install-maven-on-windows-linux-mac).
+
 ### Project structure
 
 These are the main components of the project.
@@ -100,17 +118,19 @@ These are the main components of the project.
 
 ### Helpful commands
 
-| Command                                                            | Where    | Description                                                                         |
-| ------------------------------------------------------------------ | -------- | ----------------------------------------------------------------------------------- |
-| `./sbt`                                                            | terminal | Start interactive sbt shell with Java 8. Takes a while to load on the first run.    |
-| `unit/test`                                                        | sbt      | Run fast unit tests.                                                                |
-| `~unit/test`                                                       | sbt      | Start watch mode to run tests on file save, good for local edit-and-test workflows. |
+| Command                                                             | Where    | Description                                                                         |
+| ------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------- |
+| `./sbt`                                                             | terminal | Start interactive sbt shell with Java 11. Takes a while to load on the first run.   |
+| `unit/test`                                                         | sbt      | Run fast unit tests.                                                                |
+| `~unit/test`                                                        | sbt      | Start watch mode to run tests on file save, good for local edit-and-test workflows. |
+| `buildTools/test`                                                   | sbt      | Run slow build tool tests (Gradle, Maven).                                          |
 | `snapshots/testOnly tests.MinimizedSnapshotSuite`                   | sbt      | Runs fast snapshot tests. Indexes a small set of files under `tests/minimized`.     |
 | `snapshots/testOnly tests.MinimizedSnapshotSuite -- *InnerClasses*` | sbt      | Runs only individual tests cases matching the name "InnerClasses".                  |
 | `snapshots/testOnly tests.LibrarySnapshotSuite`                     | sbt      | Runs slow snapshot tests. Indexes a corpus of external Java libraries.              |
 | `snapshots/test`                                                    | sbt      | Runs all snapshot tests.                                                            |
 | `snapshots/run`                                                     | sbt      | Update snapshot tests. Use this command after you have fixed a bug.                 |
-| `fixAll`                                                           | sbt      | Run Scalafmt, Scalafix and Javafmt on all sources. Run this before opening a PR.    |
+| `cli/run --cwd DIRECTORY`                                           | sbt      | Run `lsif-java` command-line tool against a given Gradle/Maven build.               |
+| `fixAll`                                                            | sbt      | Run Scalafmt, Scalafix and Javafmt on all sources. Run this before opening a PR.    |
 
 ### Import the project into IntelliJ
 

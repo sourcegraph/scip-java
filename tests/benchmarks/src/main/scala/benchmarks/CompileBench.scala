@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit
 import scala.meta.inputs.Input
 import scala.meta.internal.io.FileIO
 
+import com.sourcegraph.lsif_java.DeleteVisitor
 import org.openjdk.jmh.annotations._
-import tests.DeleteVisitor
 import tests.Dependencies
 import tests.TestCompiler
 

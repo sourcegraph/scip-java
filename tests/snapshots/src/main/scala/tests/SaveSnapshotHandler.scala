@@ -7,6 +7,8 @@ import java.util.concurrent.ConcurrentLinkedDeque
 
 import scala.jdk.CollectionConverters._
 
+import com.sourcegraph.lsif_java.DeleteVisitor
+
 class SaveSnapshotHandler extends SnapshotHandler {
   private val writtenTests = new ConcurrentLinkedDeque[Path]()
   override def onSnapshotTest(
