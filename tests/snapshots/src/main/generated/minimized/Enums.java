@@ -1,4 +1,5 @@
 package minimized;
+^^^^^ reference minimized/Enums#
 
 import java.util.Arrays;
 //     ^^^^ reference java/
@@ -41,7 +42,6 @@ public enum Enums {
 //                             ^^^^^^ reference minimized/Enums#values().
 //                                       ^^^ reference java/util/stream/Stream#map().
 //                                           ^ definition local2
-//                                            ^^^^^ reference minimized/Enums#
 //                                                ^ reference local2
 //                                                  ^^^^^ reference minimized/Enums#value.
 //                                                         ^^^ reference java/util/stream/Stream#map().

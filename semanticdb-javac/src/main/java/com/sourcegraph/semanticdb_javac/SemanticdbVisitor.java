@@ -4,12 +4,12 @@ import com.sun.source.tree.*;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TreePathScanner;
+import com.sun.source.util.Trees;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.tree.EndPosTable;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.util.JCDiagnostic;
 import com.sun.tools.javac.util.Position;
-import com.sourcegraph.semanticdb_javac.Semanticdb;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 
 import javax.lang.model.util.Elements;

@@ -1,12 +1,10 @@
 package com.sourcegraph.semanticdb_javac;
 
-import com.sun.tools.javac.code.Kinds;
-import com.sun.tools.javac.code.Scope;
 import com.sun.tools.javac.code.Symbol;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.IdentityHashMap;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ExecutableElement;
+import java.util.*;
 
 import static com.sourcegraph.semanticdb_javac.Debugging.pprint;
 
@@ -33,7 +31,7 @@ public final class GlobalSymbolsCache {
   }
 
   public boolean isNone(Symbol sym) {
-    return sym == null || sym.kind == Kinds.NIL || (sym.kind & Kinds.ERRONEOUS) != 0;
+    return sym == null;
   }
 
   private String uncachedSemanticdbSymbol(Symbol sym, LocalSymbolsCache locals) {
@@ -97,18 +95,13 @@ public final class GlobalSymbolsCache {
    * SemanticDB spec</a>.
    */
   private String methodDisambiguator(Symbol.MethodSymbol sym) {
-    Scope.Entry lookup =
-        sym.owner.members().lookup(sym.name, s -> s instanceof Symbol.MethodSymbol);
-    ArrayList<Symbol> peers = new ArrayList<>();
-    while (lookup != null) {
-      if (lookup.sym != null) {
-        peers.add(lookup.sym);
+    Iterable<? extends Element> elements = sym.owner.getEnclosedElements();
+    ArrayList<ExecutableElement> methods = new ArrayList<>();
+    for (Element e : elements) {
+      if (e instanceof ExecutableElement && e.getSimpleName() == sym.name) {
+        methods.add((ExecutableElement) e);
       }
-      lookup = lookup.next();
     }
-    // NOTE(olafur): reverse the iteration from `Scope.Entry` to get order in which the symbols are
-    // defined in source.
-    Collections.reverse(peers);
     // NOTE(olafur): sort static methods last, according to the spec. Historical note: this
     // requirement is
     // part of the SemanticDB spec because static methods and non-static methods have a different
@@ -117,8 +110,9 @@ public final class GlobalSymbolsCache {
     // definitions.
     // In practice, it's unusual to mix static and non-static methods so this shouldn't be a big
     // issue.
-    peers.sort((a, b) -> Boolean.compare(a.isStatic(), b.isStatic()));
-    int index = peers.indexOf(sym);
+    methods.sort(
+        (a, b) -> Boolean.compare(a.getReceiverType() == null, b.getReceiverType() == null));
+    int index = methods.indexOf(sym);
     if (index == 0) return "()";
     return String.format("(+%d)", index);
   }

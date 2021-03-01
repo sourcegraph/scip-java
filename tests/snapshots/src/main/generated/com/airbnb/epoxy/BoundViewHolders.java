@@ -100,7 +100,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //         ^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#holders.
 //                 ^^^ reference androidx/collection/LongSparseArray#get().
 //                     ^^^^^ reference local3
-//                           ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
+//                           ^^ reference com/airbnb/epoxy/EpoxyModel#id().
   }
 
   private class HolderIterator implements Iterator<EpoxyViewHolder> {

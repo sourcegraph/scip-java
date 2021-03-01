@@ -432,7 +432,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                             ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
       if (model.id() == id) {
 //        ^^^^^ reference local23
-//              ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
+//              ^^ reference com/airbnb/epoxy/EpoxyModel#id().
 //                      ^^ reference local22
         return model;
 //             ^^^^^ reference local23
@@ -466,9 +466,9 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                                                 ^ reference local26
       if (model.id() == targetModel.id()) {
 //        ^^^^^ reference local27
-//              ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
+//              ^^ reference com/airbnb/epoxy/EpoxyModel#id().
 //                      ^^^^^^^^^^^ reference local24
-//                                  ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
+//                                  ^^ reference com/airbnb/epoxy/EpoxyModel#id().
         return i;
 //             ^ reference local26
       }
@@ -505,7 +505,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 
     updatedList.add(toPosition, updatedList.remove(fromPosition));
 //  ^^^^^^^^^^^ reference local30
-//              ^^^ reference java/util/ArrayList#add(+1).
+//              ^^^ reference java/util/ArrayList#add(+2).
 //                  ^^^^^^^^^^ reference local29
 //                              ^^^^^^^^^^^ reference local30
 //                                          ^^^^^^ reference java/util/ArrayList#remove().
@@ -581,21 +581,53 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                                  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                 ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#ITEM_CALLBACK.
       new ItemCallback<EpoxyModel<?>>() {
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference `<any>`#`<init>`# 15:7
+//        ^^^^^^^^^^^^ reference _root_/
 //        ^^^^^^^^^^^^ reference _root_/
 //                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
         @Override
+//       ^^^^^^^^ reference java/lang/Override#
         public boolean areItemsTheSame(EpoxyModel<?> oldItem, EpoxyModel<?> newItem) {
+//                     ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#ITEM_CALLBACK.``#areItemsTheSame().
+//                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//                                                   ^^^^^^^ definition local35
+//                                                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//                                                                          ^^^^^^^ definition local36
           return oldItem.id() == newItem.id();
+//               ^^^^^^^ reference local35
+//                       ^^ reference com/airbnb/epoxy/EpoxyModel#id().
+//                               ^^^^^^^ reference local36
+//                                       ^^ reference com/airbnb/epoxy/EpoxyModel#id().
         }
 
         @Override
+//       ^^^^^^^^ reference java/lang/Override#
         public boolean areContentsTheSame(EpoxyModel<?> oldItem, EpoxyModel<?> newItem) {
+//                     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#ITEM_CALLBACK.``#areContentsTheSame().
+//                                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//                                                      ^^^^^^^ definition local37
+//                                                               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//                                                                             ^^^^^^^ definition local38
           return oldItem.equals(newItem);
+//               ^^^^^^^ reference local37
+//                       ^^^^^^ reference com/airbnb/epoxy/EpoxyModel#equals().
+//                              ^^^^^^^ reference local38
         }
 
         @Override
+//       ^^^^^^^^ reference java/lang/Override#
         public Object getChangePayload(EpoxyModel<?> oldItem, EpoxyModel<?> newItem) {
+//             ^^^^^^ reference java/lang/Object#
+//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#ITEM_CALLBACK.``#getChangePayload().
+//                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//                                                   ^^^^^^^ definition local39
+//                                                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//                                                                          ^^^^^^^ definition local40
           return new DiffPayload(oldItem);
+//               ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#`<init>`(+1).
+//                   ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#
+//                               ^^^^^^^ reference local39
         }
       };
 
@@ -607,11 +639,11 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
    ^^^^^^^^ reference java/lang/Override#
   public boolean isStickyHeader(int position) {
 //               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#isStickyHeader().
-//                                  ^^^^^^^^ definition local35
+//                                  ^^^^^^^^ definition local41
     return epoxyController.isStickyHeader(position);
 //         ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
 //                         ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#isStickyHeader().
-//                                        ^^^^^^^^ reference local35
+//                                        ^^^^^^^^ reference local41
   }
 
   /**
@@ -624,11 +656,11 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //            ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#setupStickyHeaderView().
 //                                   ^^^^^^^ reference org/jetbrains/annotations/NotNull#
 //                                           ^^^^ reference _root_/
-//                                                ^^^^^^^^^^^^ definition local36
+//                                                ^^^^^^^^^^^^ definition local42
     epoxyController.setupStickyHeaderView(stickyHeader);
 //  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
 //                  ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#setupStickyHeaderView().
-//                                        ^^^^^^^^^^^^ reference local36
+//                                        ^^^^^^^^^^^^ reference local42
   }
 
   /**
@@ -641,10 +673,10 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#teardownStickyHeaderView().
 //                                      ^^^^^^^ reference org/jetbrains/annotations/NotNull#
 //                                              ^^^^ reference _root_/
-//                                                   ^^^^^^^^^^^^ definition local37
+//                                                   ^^^^^^^^^^^^ definition local43
     epoxyController.teardownStickyHeaderView(stickyHeader);
 //  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#teardownStickyHeaderView().
-//                                           ^^^^^^^^^^^^ reference local37
+//                                           ^^^^^^^^^^^^ reference local43
   }
 }

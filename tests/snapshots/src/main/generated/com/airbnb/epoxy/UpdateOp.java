@@ -161,7 +161,7 @@ class UpdateOp {
 //                   ^^^^^^^^^ reference java/util/ArrayList#
     } else if (payloads.size() == 1) {
 //             ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#payloads.
-//                      ^^^^ reference java/util/ArrayList#size(+1).
+//                      ^^^^ reference java/util/ArrayList#size().
       // There are multiple payloads, but we don't know how big the batch will end up being.
       // To prevent resizing the list many times we bump it to a medium size
       payloads.ensureCapacity(10);
@@ -171,7 +171,7 @@ class UpdateOp {
 
     payloads.add(payload);
 //  ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#payloads.
-//           ^^^ reference java/util/ArrayList#add().
+//           ^^^ reference java/util/ArrayList#add(+1).
 //               ^^^^^^^ reference local8
   }
 

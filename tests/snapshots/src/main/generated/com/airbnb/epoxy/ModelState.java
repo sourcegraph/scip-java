@@ -57,7 +57,7 @@ class ModelState {
 //  ^^^^^ reference local3
 //        ^^ reference com/airbnb/epoxy/ModelState#id.
 //             ^^^^^ reference local0
-//                   ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
+//                   ^^ reference com/airbnb/epoxy/EpoxyModel#id().
     state.position = position;
 //  ^^^^^ reference local3
 //        ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.

@@ -81,7 +81,7 @@ public class DiffPayload {
 //      ^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#modelsById.
 //                 ^^^ reference androidx/collection/LongSparseArray#put().
 //                     ^^^^^ reference local2
-//                           ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
+//                           ^^ reference com/airbnb/epoxy/EpoxyModel#id().
 //                                 ^^^^^ reference local2
       }
     }
@@ -134,7 +134,7 @@ public class DiffPayload {
         if (diffPayload.singleModel.id() == modelId) {
 //          ^^^^^^^^^^^ reference local7
 //                      ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#singleModel.
-//                                  ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
+//                                  ^^ reference com/airbnb/epoxy/EpoxyModel#id().
 //                                          ^^^^^^^ reference local5
           return diffPayload.singleModel;
 //               ^^^^^^^^^^^ reference local7
