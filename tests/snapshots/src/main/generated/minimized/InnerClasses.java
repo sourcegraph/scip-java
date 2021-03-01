@@ -158,23 +158,23 @@ public class InnerClasses {
 //                         ^^^^^^ reference java/lang/String#
 //                                 ^^ definition local7
         new InnerInterface<String, String>() {
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference minimized/InnerClasses#testAnon().``#`<init>`(). 5:9
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local9 5:9
 //          ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#
 //          ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#
 //                         ^^^^^^ reference java/lang/String#
 //                         ^^^^^^ reference java/lang/String#
 //                                 ^^^^^^ reference java/lang/String#
 //                                 ^^^^^^ reference java/lang/String#
-//                                           ^ definition minimized/InnerClasses#testAnon().``#`<init>`(). 1:4
+//                                           ^ definition local9 1:4
           @Override
 //         ^^^^^^^^ reference java/lang/Override#
           public String apply(String s) {
 //               ^^^^^^ reference java/lang/String#
-//                      ^^^^^ definition minimized/InnerClasses#testAnon().``#apply().
+//                      ^^^^^ definition local10
 //                            ^^^^^^ reference java/lang/String#
-//                                   ^ definition local8
+//                                   ^ definition local11
             return s + "b";
-//                 ^ reference local8
+//                 ^ reference local11
           }
         };
     System.out.println(fn.apply("a"));
@@ -189,33 +189,33 @@ public class InnerClasses {
 //              ^^^^^^ reference java/lang/String#
 //                     ^^^ definition minimized/InnerClasses#app().
     int a = 42;
-//      ^ definition local9
+//      ^ definition local12
     InnerStaticClass.innerStaticMethod();
 //  ^^^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerStaticClass#
 //                   ^^^^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerStaticClass#innerStaticMethod().
     InnerClasses innerClasses = new InnerClasses(a);
 //  ^^^^^^^^^^^^ reference minimized/InnerClasses#
-//               ^^^^^^^^^^^^ definition local10
+//               ^^^^^^^^^^^^ definition local13
 //                              ^^^^^^^^^^^^^^^^^^^ reference minimized/InnerClasses#`<init>`().
 //                                  ^^^^^^^^^^^^ reference minimized/InnerClasses#
-//                                               ^ reference local9
+//                                               ^ reference local12
     InnerClass innerClass = innerClasses.new InnerClass(a);
 //  ^^^^^^^^^^ reference minimized/InnerClasses#InnerClass#
-//             ^^^^^^^^^^ definition local11
-//                          ^^^^^^^^^^^^ reference local10
+//             ^^^^^^^^^^ definition local14
+//                          ^^^^^^^^^^^^ reference local13
 //                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerClass#`<init>`().
 //                                           ^^^^^^^^^^ reference minimized/InnerClasses#InnerClass#
-//                                                      ^ reference local9
+//                                                      ^ reference local12
     innerClass.innerMethod();
-//  ^^^^^^^^^^ reference local11
+//  ^^^^^^^^^^ reference local14
 //             ^^^^^^^^^^^ reference minimized/InnerClasses#InnerClass#innerMethod().
     System.out.println(runInnerInterface(innerClass, a));
 //  ^^^^^^ reference java/lang/System#
 //         ^^^ reference java/lang/System#out.
 //             ^^^^^^^ reference java/io/PrintStream#println(+9).
 //                     ^^^^^^^^^^^^^^^^^ reference minimized/InnerClasses#runInnerInterface().
-//                                       ^^^^^^^^^^ reference local11
-//                                                   ^ reference local9
+//                                       ^^^^^^^^^^ reference local14
+//                                                   ^ reference local12
     testEnum(InnerEnum.A);
 //  ^^^^^^^^ reference minimized/InnerClasses#testEnum().
 //           ^^^^^^^^^ reference minimized/InnerClasses#InnerEnum#

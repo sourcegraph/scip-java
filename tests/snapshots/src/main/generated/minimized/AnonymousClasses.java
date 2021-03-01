@@ -20,23 +20,23 @@ public class AnonymousClasses {
 //                    ^^^^^^^ reference java/lang/Integer#
 //                             ^^ definition local1
         new Function<Integer, Integer>() {
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference minimized/AnonymousClasses#app().``#`<init>`(). 5:9
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local3 5:9
 //          ^^^^^^^^ reference java/util/function/Function#
 //          ^^^^^^^^ reference java/util/function/Function#
 //                   ^^^^^^^ reference java/lang/Integer#
 //                   ^^^^^^^ reference java/lang/Integer#
 //                            ^^^^^^^ reference java/lang/Integer#
 //                            ^^^^^^^ reference java/lang/Integer#
-//                                       ^ definition minimized/AnonymousClasses#app().``#`<init>`(). 1:4
+//                                       ^ definition local3 1:4
           @Override
 //         ^^^^^^^^ reference java/lang/Override#
           public Integer apply(Integer integer) {
 //               ^^^^^^^ reference java/lang/Integer#
-//                       ^^^^^ definition minimized/AnonymousClasses#app().``#apply().
+//                       ^^^^^ definition local4
 //                             ^^^^^^^ reference java/lang/Integer#
-//                                     ^^^^^^^ definition local2
+//                                     ^^^^^^^ definition local5
             return integer + n;
-//                 ^^^^^^^ reference local2
+//                 ^^^^^^^ reference local5
 //                           ^ reference local0
           }
         };
