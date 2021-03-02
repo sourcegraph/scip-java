@@ -12,6 +12,9 @@ jobs:
       - uses: olafurpg/setup-scala@v10
         with:
           java-version: adopt@1.11
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.13.1'
       - run: go get github.com/sourcegraph/lsif-semanticdb/cmd/lsif-semanticdb
       - run: sbt test
   check:
