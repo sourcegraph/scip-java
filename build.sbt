@@ -188,6 +188,7 @@ lazy val unit = project
       Seq[BuildInfoKey](
         version,
         scalaVersion,
+        "temporaryDirectory" -> target.value / "tmpdir",
         "sourceroot" -> baseDirectory.in(ThisBuild).value,
         "minimizedJavaSourceDirectory" ->
           sourceDirectory.in(minimized, Compile).value / "java",

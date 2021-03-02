@@ -5,7 +5,7 @@ class MissingBuildToolSuite extends BaseBuildToolSuite {
     "basic",
     List(),
     expectedOutput =
-      """|error: No build tool detected in workspace '/private/workingDirectory'. At the moment, the only supported build tools are: Gradle, Maven.
+      """|error: No build tool detected in workspace '/workingDirectory'. At the moment, the only supported build tools are: Gradle, Maven.
          |""".stripMargin,
     workingDirectoryLayout = ""
   )
