@@ -91,6 +91,7 @@ lazy val plugin = project
   .in(file("semanticdb-javac"))
   .settings(
     moduleName := "semanticdb-javac",
+    javaToolchainVersion := "1.8",
     autoScalaLibrary := false,
     incOptions ~= { old =>
       old.withEnabled(false)
@@ -152,24 +153,39 @@ lazy val cli = project
   )
   .enablePlugins(NativeImagePlugin, BuildInfoPlugin)
 
+def minimizedSourceDirectory =
+  file("tests/minimized/src/main/java").getAbsoluteFile
+lazy val minimizedSettings = List[Def.Setting[_]](
+  autoScalaLibrary := false,
+  skip.in(publish) := true,
+  fork.in(run) := true,
+  unmanagedSourceDirectories.in(Compile) += minimizedSourceDirectory,
+  javacOptions.in(Compile) ++=
+    List[String](
+      s"-Arandomtimestamp=${System.nanoTime()}",
+      List(
+        s"-Xplugin:semanticdb",
+        s"-text:on",
+        s"-verbose",
+        s"-sourceroot:${baseDirectory.in(ThisBuild).value}",
+        s"-targetroot:${semanticdbTargetRoot.in(Compile).value}"
+      ).mkString(" ")
+    )
+)
+
 lazy val minimized = project
-  .in(file("tests/minimized"))
-  .settings(
-    autoScalaLibrary := false,
-    skip.in(publish) := true,
-    fork.in(run) := true,
-    javacOptions.in(Compile) ++=
-      List[String](
-        s"-Arandomtimestamp=${System.nanoTime()}",
-        List(
-          s"-Xplugin:semanticdb",
-          s"-text:on",
-          s"-verbose",
-          s"-sourceroot:${baseDirectory.in(ThisBuild).value}",
-          s"-targetroot:${semanticdbTargetRoot.in(Compile).value}"
-        ).mkString(" ")
-      )
-  )
+  .in(file("tests/minimized/.j11"))
+  .settings(minimizedSettings)
+  .dependsOn(agent, plugin)
+
+lazy val minimized8 = project
+  .in(file("tests/minimized/.j8"))
+  .settings(minimizedSettings, javaToolchainVersion := "8")
+  .dependsOn(agent, plugin)
+
+lazy val minimized15 = project
+  .in(file("tests/minimized/.j15"))
+  .settings(minimizedSettings, javaToolchainVersion := "15")
   .dependsOn(agent, plugin)
 
 lazy val minimizedScala = project
@@ -190,8 +206,7 @@ lazy val unit = project
         scalaVersion,
         "temporaryDirectory" -> target.value / "tmpdir",
         "sourceroot" -> baseDirectory.in(ThisBuild).value,
-        "minimizedJavaSourceDirectory" ->
-          sourceDirectory.in(minimized, Compile).value / "java",
+        "minimizedJavaSourceDirectory" -> minimizedSourceDirectory,
         "minimizedJavaTargetroot" ->
           semanticdbTargetRoot.in(minimized, Compile).value,
         "minimizedScalaSourceDirectory" ->

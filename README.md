@@ -13,17 +13,17 @@ Currently, only Java 8 with the build tool sbt is supported. We hope to increase
 compatibility with more Java language versions and build tools as the project
 evolves.
 
-| Language version | Support            |
-| ---------------- | ------------------ |
-| Java 7           | ❌                 |
-| Java 8           | ✅                 |
-| Java 11          | ✅                 |
-| Java 12          | Untested, may work |
-| Java 13          | Untested, may work |
-| Java 14          | Untested, may work |
-| Java 15          | Untested, may work |
-| Java 16          | Untested, may work |
-| Java 17          | Untested, may work |
+| Language version | Support                           |
+| ---------------- | --------------------------------- |
+| Java 7           | ❌                                |
+| Java 8           | ✅                                |
+| Java 11          | ✅                                |
+| Java 12          | Not tested in CI, but should work |
+| Java 13          | Not tested in CI, but should work |
+| Java 14          | Not tested in CI, but should work |
+| Java 15          | ✅                                |
+| Java 16          | Not tested in CI, but should work |
+| Java 17          | Not tested in CI, but should work |
 
 | Build tool | Support |
 | ---------- | ------- |

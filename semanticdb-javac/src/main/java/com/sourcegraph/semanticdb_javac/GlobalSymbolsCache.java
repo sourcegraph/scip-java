@@ -44,8 +44,7 @@ public final class GlobalSymbolsCache {
     }
     SemanticdbSymbols.Descriptor desc = semanticdbDescriptor(sym);
     if (options.verboseEnabled && desc.kind == SemanticdbSymbols.Descriptor.Kind.None) {
-      pprint(sym.name.toString());
-      pprint(sym.kind);
+      pprint(sym.getQualifiedName().toString());
       pprint(
           String.format(
               "sym: %s (%s - superclass %s)", sym, sym.getClass(), sym.getClass().getSuperclass()));
