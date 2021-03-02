@@ -29,7 +29,7 @@ object Embedded {
       """"$@""""
     ).mkString(" ")
     val script =
-      s"""#!/bin/sh
+      s"""#!/usr/bin/env bash
          |set -eu
          |LAUNCHER_ARGS=()
          |echo $$@ >> $launcherArgs

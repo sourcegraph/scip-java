@@ -68,7 +68,7 @@ case class GradleJavaCompiler(languageVersion: String, javacPath: Path) {
     Files
       .write(
         dir.resolve("bin").resolve("java"),
-        s"""#!/bin/sh
+        s"""#!/usr/bin/env bash
            |set -eu
            |echo $$@ >> ${dir.resolve("java_arguments")}
            |${javaCommand.mkString(" ")}
