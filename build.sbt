@@ -293,3 +293,15 @@ lazy val fatjarPackageSettings = List[Def.Setting[_]](
     slimJar
   }
 )
+
+
+lazy val docs = project
+  .in(file("lsif-java-docs"))
+  .settings(
+    mdocOut := baseDirectory.in(ThisBuild).value / "website" / "target" / "docs",
+    mdocVariables := Map[String, String](
+      "VERSION" -> version.value
+    )
+  )
+  .dependsOn(unit)
+  .enablePlugins(DocusaurusPlugin)
