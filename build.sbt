@@ -59,7 +59,7 @@ commands +=
 commands +=
   Command.command("checkAll") { s =>
     "scalafmtCheckAll" :: "scalafmtSbtCheck" :: "scalafixAll --check" ::
-      "javafmtCheckAll" :: "publishLocal" :: s
+      "javafmtCheckAll" :: "publishLocal" :: "docs/docusaurusCreateSite" :: s
   }
 
 lazy val agent = project
@@ -293,3 +293,19 @@ lazy val fatjarPackageSettings = List[Def.Setting[_]](
     slimJar
   }
 )
+
+lazy val docs = project
+  .in(file("lsif-java-docs"))
+  .settings(
+    mdocOut :=
+      baseDirectory.in(ThisBuild).value / "website" / "target" / "docs",
+    fork := false,
+    mdocVariables :=
+      Map[String, String](
+        "VERSION" -> version.value,
+        "SCALA_VERSION" -> scalaVersion.value,
+        "STABLE_VERSION" -> version.value.replaceFirst("\\-.*", "")
+      )
+  )
+  .dependsOn(unit)
+  .enablePlugins(DocusaurusPlugin)

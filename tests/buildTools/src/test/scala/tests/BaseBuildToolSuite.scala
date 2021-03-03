@@ -40,7 +40,7 @@ abstract class BaseBuildToolSuite extends MopedSuite(LsifJava.app) {
       FileLayout.fromString(original, root = workingDirectory)
       val targetroot = workingDirectory.resolve("targetroot")
       val arguments =
-        List("--targetroot", targetroot.toString) ++ extraArguments
+        List("index", "--targetroot", targetroot.toString) ++ extraArguments
       val exit = app().run(arguments)
       assertEquals(exit, 0, clues(app.capturedOutput))
       val semanticdbFiles = FileIO

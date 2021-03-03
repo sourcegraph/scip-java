@@ -9,6 +9,7 @@ import moped.annotations.Description
 import moped.annotations.ExampleValue
 import moped.annotations.Inline
 import moped.annotations.TrailingArguments
+import moped.annotations.Usage
 import moped.cli.Application
 import moped.cli.Command
 import moped.cli.CommandParser
@@ -16,9 +17,16 @@ import moped.internal.reporters.Levenshtein
 import os.CommandResult
 import os.Inherit
 import os.Shellable
+import moped.annotations.ExampleUsage
+import moped.annotations.CommandName
 
 @Description(
-  "Generates an LSIF index for the Java build of a provided workspace directory."
+  "Automatically generate an LSIF index in the current working directory."
+)
+@Usage("lsif-java index [OPTIONS ...] -- [TRAILING_ARGUMENTS ...]")
+@ExampleUsage(
+  """|# Running the `index` command with no flags should work most of the time.
+     |$ lsif-java index""".stripMargin
 )
 case class IndexCommand(
     @Description("The path where to generate the LSIF index.") output: Path =
@@ -41,12 +49,12 @@ case class IndexCommand(
     )
     @ExampleValue("Gradle") buildTool: Option[String] = None,
     @Description(
-      "Whether to enable remove generated temporary files on exit."
+      "Whether to remove generated temporary files on exit."
     ) cleanup: Boolean = true,
     @Description(
-      "The build command to use to compile all sources. " +
+      "Optional. The build command to use to compile all sources. " +
         "Defaults to a build-specific command. For example, the default command for Maven command is 'clean verify -DskipTests'." +
-        "To override the default, pass in the build command after a double dash: 'lsif-java -- compile'"
+        "To override the default, pass in the build command after a double dash: 'lsif-java index -- compile test:compile'"
     )
     @TrailingArguments() buildCommand: List[String] = Nil,
     @Inline
