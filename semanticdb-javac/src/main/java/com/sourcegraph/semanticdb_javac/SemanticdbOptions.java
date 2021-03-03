@@ -32,7 +32,7 @@ public class SemanticdbOptions {
       if (arg.startsWith("-targetroot:")) {
         result.targetroot = Paths.get(arg.substring("-targetroot:".length()));
       } else if (arg.startsWith("-sourceroot:")) {
-        result.sourceroot = Paths.get(arg.substring("-sourceroot:".length()));
+        result.sourceroot = Paths.get(arg.substring("-sourceroot:".length())).normalize();
       } else if (arg.equals("-text:on")) {
         result.includeText = true;
       } else if (arg.equals("-text:off")) {

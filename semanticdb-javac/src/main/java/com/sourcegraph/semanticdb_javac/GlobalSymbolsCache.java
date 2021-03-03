@@ -39,18 +39,25 @@ public final class GlobalSymbolsCache {
     String owner = semanticdbSymbol(sym.owner, locals);
     if (owner.equals(SemanticdbSymbols.NONE)) {
       return SemanticdbSymbols.ROOT_PACKAGE;
-    } else if (sym instanceof Symbol.VarSymbol && sym.isLocal()) {
+    } else if (SemanticdbSymbols.isLocal(owner) || isAnonymousClass(sym) || isLocalVariable(sym)) {
       return locals.put(sym);
     }
     SemanticdbSymbols.Descriptor desc = semanticdbDescriptor(sym);
     if (options.verboseEnabled && desc.kind == SemanticdbSymbols.Descriptor.Kind.None) {
-      pprint(sym.name.toString());
-      pprint(sym.kind);
+      pprint(sym.getQualifiedName().toString());
       pprint(
           String.format(
               "sym: %s (%s - superclass %s)", sym, sym.getClass(), sym.getClass().getSuperclass()));
     }
     return SemanticdbSymbols.global(owner, desc);
+  }
+
+  private boolean isLocalVariable(Symbol sym) {
+    return sym instanceof Symbol.VarSymbol && sym.isLocal();
+  }
+
+  private boolean isAnonymousClass(Symbol sym) {
+    return sym instanceof Symbol.ClassSymbol && sym.name.isEmpty();
   }
 
   private SemanticdbSymbols.Descriptor semanticdbDescriptor(Symbol sym) {

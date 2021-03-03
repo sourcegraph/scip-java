@@ -9,6 +9,7 @@ import scala.meta.inputs.Input
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
+import com.sourcegraph.lsif_java.DeleteVisitor
 import coursier.core.Repository
 import coursier.maven.MavenRepository
 

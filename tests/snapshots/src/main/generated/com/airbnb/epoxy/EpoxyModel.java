@@ -711,16 +711,16 @@ public abstract class EpoxyModel<T> {
       controller.addAfterInterceptorCallback(new ModelInterceptorCallback() {
 //    ^^^^^^^^^^ reference local36
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#addAfterInterceptorCallback().
-//                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#addWithDebugValidation().``#`<init>`(). 11:7
+//                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local38 11:7
 //                                               ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#
 //                                               ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#
-//                                                                          ^ definition com/airbnb/epoxy/EpoxyModel#addWithDebugValidation().``#`<init>`(). 1:4
+//                                                                          ^ definition local38 1:4
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
         public void onInterceptorsStarted(EpoxyController controller) {
-//                  ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#addWithDebugValidation().``#onInterceptorsStarted().
+//                  ^^^^^^^^^^^^^^^^^^^^^ definition local39
 //                                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
-//                                                        ^^^^^^^^^^ definition local37
+//                                                        ^^^^^^^^^^ definition local40
           currentlyInInterceptors = true;
 //        ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#currentlyInInterceptors.
         }
@@ -728,9 +728,9 @@ public abstract class EpoxyModel<T> {
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
         public void onInterceptorsFinished(EpoxyController controller) {
-//                  ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#addWithDebugValidation().``#onInterceptorsFinished().
+//                  ^^^^^^^^^^^^^^^^^^^^^^ definition local41
 //                                         ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
-//                                                         ^^^^^^^^^^ definition local38
+//                                                         ^^^^^^^^^^ definition local42
           hashCodeWhenAdded = EpoxyModel.this.hashCode();
 //        ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#hashCodeWhenAdded.
 //                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -790,28 +790,28 @@ public abstract class EpoxyModel<T> {
 //                   ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#getPosition().
 //                                ^^^^^^^ reference androidx/annotation/NonNull#
 //                                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
-//                                                        ^^^^^^^^^^ definition local39
+//                                                        ^^^^^^^^^^ definition local43
       @NonNull EpoxyModel<?> model) {
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                           ^^^^^ definition local40
+//                           ^^^^^ definition local44
     // If the model was added to multiple controllers, or was removed from the controller and then
     // modified, this won't be correct. But those should be very rare cases that we don't need to
     // worry about
     if (controller.isBuildingModels()) {
-//      ^^^^^^^^^^ reference local39
+//      ^^^^^^^^^^ reference local43
 //                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#isBuildingModels().
       return controller.getFirstIndexOfModelInBuildingList(model);
-//           ^^^^^^^^^^ reference local39
+//           ^^^^^^^^^^ reference local43
 //                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#getFirstIndexOfModelInBuildingList().
-//                                                         ^^^^^ reference local40
+//                                                         ^^^^^ reference local44
     }
 
     return controller.getAdapter().getModelPosition(model);
-//         ^^^^^^^^^^ reference local39
+//         ^^^^^^^^^^ reference local43
 //                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#getAdapter().
 //                                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#getModelPosition().
-//                                                  ^^^^^ reference local40
+//                                                  ^^^^^ reference local44
   }
 
   /**
@@ -826,9 +826,9 @@ public abstract class EpoxyModel<T> {
   protected final void validateStateHasNotChangedSinceAdded(String descriptionOfChange,
 //                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#validateStateHasNotChangedSinceAdded().
 //                                                          ^^^^^^ reference java/lang/String#
-//                                                                 ^^^^^^^^^^^^^^^^^^^ definition local41
+//                                                                 ^^^^^^^^^^^^^^^^^^^ definition local45
       int modelPosition) {
-//        ^^^^^^^^^^^^^ definition local42
+//        ^^^^^^^^^^^^^ definition local46
     if (isDebugValidationEnabled()
 //      ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#isDebugValidationEnabled().
         && !currentlyInInterceptors
@@ -840,8 +840,8 @@ public abstract class EpoxyModel<T> {
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ImmutableModelException#`<init>`(+1).
 //              ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ImmutableModelException#
 //                                      ^^^^ reference com/airbnb/epoxy/EpoxyModel#this.
-//                                            ^^^^^^^^^^^^^^^^^^^ reference local41
-//                                                                 ^^^^^^^^^^^^^ reference local42
+//                                            ^^^^^^^^^^^^^^^^^^^ reference local45
+//                                                                 ^^^^^^^^^^^^^ reference local46
     }
   }
 
@@ -850,39 +850,39 @@ public abstract class EpoxyModel<T> {
   public boolean equals(Object o) {
 //               ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#equals().
 //                      ^^^^^^ reference java/lang/Object#
-//                             ^ definition local43
+//                             ^ definition local47
     if (this == o) {
 //      ^^^^ reference com/airbnb/epoxy/EpoxyModel#this.
-//              ^ reference local43
+//              ^ reference local47
       return true;
     }
     if (!(o instanceof EpoxyModel)) {
-//        ^ reference local43
+//        ^ reference local47
 //                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
       return false;
     }
 
     EpoxyModel<?> that = (EpoxyModel<?>) o;
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                ^^^^ definition local44
+//                ^^^^ definition local48
 //                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                       ^ reference local43
+//                                       ^ reference local47
 
     if (id != that.id) {
 //      ^^ reference com/airbnb/epoxy/EpoxyModel#id.
-//            ^^^^ reference local44
+//            ^^^^ reference local48
 //                 ^^ reference com/airbnb/epoxy/EpoxyModel#id.
       return false;
     }
     if (getViewType() != that.getViewType()) {
 //      ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#getViewType().
-//                       ^^^^ reference local44
+//                       ^^^^ reference local48
 //                            ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#getViewType().
       return false;
     }
     return shown == that.shown;
 //         ^^^^^ reference com/airbnb/epoxy/EpoxyModel#shown.
-//                  ^^^^ reference local44
+//                  ^^^^ reference local48
 //                       ^^^^^ reference com/airbnb/epoxy/EpoxyModel#shown.
   }
 
@@ -891,19 +891,19 @@ public abstract class EpoxyModel<T> {
   public int hashCode() {
 //           ^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#hashCode().
     int result = (int) (id ^ (id >>> 32));
-//      ^^^^^^ definition local45
+//      ^^^^^^ definition local49
 //                      ^^ reference com/airbnb/epoxy/EpoxyModel#id.
 //                            ^^ reference com/airbnb/epoxy/EpoxyModel#id.
     result = 31 * result + getViewType();
-//  ^^^^^^ reference local45
-//                ^^^^^^ reference local45
+//  ^^^^^^ reference local49
+//                ^^^^^^ reference local49
 //                         ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#getViewType().
     result = 31 * result + (shown ? 1 : 0);
-//  ^^^^^^ reference local45
-//                ^^^^^^ reference local45
+//  ^^^^^^ reference local49
+//                ^^^^^^ reference local49
 //                          ^^^^^ reference com/airbnb/epoxy/EpoxyModel#shown.
     return result;
-//         ^^^^^^ reference local45
+//         ^^^^^^ reference local49
   }
 
   /**
@@ -916,9 +916,9 @@ public abstract class EpoxyModel<T> {
    */
   public int getSpanSize(int totalSpanCount, int position, int itemCount) {
 //           ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#getSpanSize().
-//                           ^^^^^^^^^^^^^^ definition local46
-//                                               ^^^^^^^^ definition local47
-//                                                             ^^^^^^^^^ definition local48
+//                           ^^^^^^^^^^^^^^ definition local50
+//                                               ^^^^^^^^ definition local51
+//                                                             ^^^^^^^^^ definition local52
     return 1;
   }
 
@@ -928,11 +928,11 @@ public abstract class EpoxyModel<T> {
 //                     ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#spanSizeOverride().
 //                                       ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                                ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#
-//                                                                         ^^^^^^^^^^^^^^^^ definition local49
+//                                                                         ^^^^^^^^^^^^^^^^ definition local53
     this.spanSizeOverride = spanSizeCallback;
 //  ^^^^ reference com/airbnb/epoxy/EpoxyModel#this.
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#spanSizeOverride.
-//                          ^^^^^^^^^^^^^^^^ reference local49
+//                          ^^^^^^^^^^^^^^^^ reference local53
     return this;
 //         ^^^^ reference com/airbnb/epoxy/EpoxyModel#this.
   }
@@ -941,9 +941,9 @@ public abstract class EpoxyModel<T> {
 //       ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#
     int getSpanSize(int totalSpanCount, int position, int itemCount);
 //      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#getSpanSize().
-//                      ^^^^^^^^^^^^^^ definition local50
-//                                          ^^^^^^^^ definition local51
-//                                                        ^^^^^^^^^ definition local52
+//                      ^^^^^^^^^^^^^^ definition local54
+//                                          ^^^^^^^^ definition local55
+//                                                        ^^^^^^^^^ definition local56
   }
 
   /**
@@ -952,24 +952,24 @@ public abstract class EpoxyModel<T> {
    */
   public final int spanSize(int totalSpanCount, int position, int itemCount) {
 //                 ^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#spanSize().
-//                              ^^^^^^^^^^^^^^ definition local53
-//                                                  ^^^^^^^^ definition local54
-//                                                                ^^^^^^^^^ definition local55
+//                              ^^^^^^^^^^^^^^ definition local57
+//                                                  ^^^^^^^^ definition local58
+//                                                                ^^^^^^^^^ definition local59
     if (spanSizeOverride != null) {
 //      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#spanSizeOverride.
       return spanSizeOverride.getSpanSize(totalSpanCount, position, itemCount);
 //           ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#spanSizeOverride.
 //                            ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#getSpanSize().
-//                                        ^^^^^^^^^^^^^^ reference local53
-//                                                        ^^^^^^^^ reference local54
-//                                                                  ^^^^^^^^^ reference local55
+//                                        ^^^^^^^^^^^^^^ reference local57
+//                                                        ^^^^^^^^ reference local58
+//                                                                  ^^^^^^^^^ reference local59
     }
 
     return getSpanSize(totalSpanCount, position, itemCount);
 //         ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#getSpanSize().
-//                     ^^^^^^^^^^^^^^ reference local53
-//                                     ^^^^^^^^ reference local54
-//                                               ^^^^^^^^^ reference local55
+//                     ^^^^^^^^^^^^^^ reference local57
+//                                     ^^^^^^^^ reference local58
+//                                               ^^^^^^^^^ reference local59
   }
 
   /**
@@ -998,12 +998,12 @@ public abstract class EpoxyModel<T> {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
 //                     ^^^^ definition com/airbnb/epoxy/EpoxyModel#show(+1).
-//                                  ^^^^ definition local56
+//                                  ^^^^ definition local60
     onMutation();
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#onMutation().
     shown = show;
 //  ^^^^^ reference com/airbnb/epoxy/EpoxyModel#shown.
-//          ^^^^ reference local56
+//          ^^^^ reference local60
     return this;
 //         ^^^^ reference com/airbnb/epoxy/EpoxyModel#this.
   }
@@ -1054,7 +1054,7 @@ public abstract class EpoxyModel<T> {
 //               ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#onFailedToRecycleView().
 //                                      ^^^^^^^ reference androidx/annotation/NonNull#
 //                                              ^ reference com/airbnb/epoxy/EpoxyModel#[T]
-//                                                ^^^^ definition local57
+//                                                ^^^^ definition local61
     return false;
   }
 
@@ -1067,7 +1067,7 @@ public abstract class EpoxyModel<T> {
 //            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#onViewAttachedToWindow().
 //                                    ^^^^^^^ reference androidx/annotation/NonNull#
 //                                            ^ reference com/airbnb/epoxy/EpoxyModel#[T]
-//                                              ^^^^ definition local58
+//                                              ^^^^ definition local62
 
   }
 
@@ -1081,7 +1081,7 @@ public abstract class EpoxyModel<T> {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#onViewDetachedFromWindow().
 //                                      ^^^^^^^ reference androidx/annotation/NonNull#
 //                                              ^ reference com/airbnb/epoxy/EpoxyModel#[T]
-//                                                ^^^^ definition local59
+//                                                ^^^^ definition local63
 
   }
 

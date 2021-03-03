@@ -26,8 +26,12 @@ public final class SemanticdbSymbols {
     return "local" + suffix;
   }
 
+  public static boolean isLocal(String symbol) {
+    return symbol.startsWith("local");
+  }
+
   public static boolean isGlobal(String symbol) {
-    return !symbol.startsWith("local");
+    return !isLocal(symbol);
   }
 
   /**

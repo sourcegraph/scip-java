@@ -1,4 +1,4 @@
-package tests
+package com.sourcegraph.lsif_java
 
 import java.io.IOException
 import java.nio.file.FileVisitResult
