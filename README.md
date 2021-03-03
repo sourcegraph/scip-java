@@ -1,37 +1,10 @@
-# Java LSIF indexer ![](https://img.shields.io/badge/status-development-yellow?style=flat)
-
-Visit https://lsif.dev/ to learn about LSIF.
+# Java indexer for the Language Server Index Format (LSIF) ![](https://img.shields.io/badge/status-development-yellow?style=flat)
 
 ## Usage
 
-⚠️ This project is under development so there is nothing to try out at the
-moment.
+Visit https://sourcegraph.github.io/lsif-java to get started with lsif-java.
 
-### Supported tools and versions
-
-Currently, only Java 8 with the build tool sbt is supported. We hope to increase
-compatibility with more Java language versions and build tools as the project
-evolves.
-
-| Language version | Support                           |
-| ---------------- | --------------------------------- |
-| Java 7           | ❌                                |
-| Java 8           | ✅                                |
-| Java 11          | ✅                                |
-| Java 12          | Not tested in CI, but should work |
-| Java 13          | Not tested in CI, but should work |
-| Java 14          | Not tested in CI, but should work |
-| Java 15          | ✅                                |
-| Java 16          | Not tested in CI, but should work |
-| Java 17          | Not tested in CI, but should work |
-
-| Build tool | Support |
-| ---------- | ------- |
-| Gradle     | ✅      |
-| Maven      | ✅      |
-| Bazel      | ❌      |
-| Buck       | ❌      |
-| sbt        | ✅      |
+⚠ The rest of this readme is targeted at contributors to the lsif-java codebase.
 
 ## Overview
 
@@ -130,6 +103,8 @@ These are the main components of the project.
 | `snapshots/test`                                                    | sbt      | Runs all snapshot tests.                                                            |
 | `snapshots/run`                                                     | sbt      | Update snapshot tests. Use this command after you have fixed a bug.                 |
 | `cli/run --cwd DIRECTORY`                                           | sbt      | Run `lsif-java` command-line tool against a given Gradle/Maven build.               |
+| `cd website && yarn install && yarn start`                          | terminal | Start live-reload preview of the website at http://localhost:3000/lsif-java.        |
+| `docs/mdoc --watch`                                                 | sbt      | Re-generate markdown files in the `docs/` directory.                                |
 | `fixAll`                                                            | sbt      | Run Scalafmt, Scalafix and Javafmt on all sources. Run this before opening a PR.    |
 
 ### Import the project into IntelliJ
