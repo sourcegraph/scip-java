@@ -29,16 +29,8 @@ jobs:
       - run: git fetch --tags || true
       - name: sbt nativeImage
         shell: bash
-        if: ${{ matrix.os != 'windows-latest' }}
         run: |
           sbt cli/nativeImage "cli/nativeImageRun --cwd tests/gradle-example"
-      - name: sbt nativeImage
-        shell: cmd
-        if: ${{ matrix.os == 'windows-latest' }}
-        run: >-
-          "C:\Program Files (x86)\Microsoft Visual
-          Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat" && sbt
-          cli/nativeImage
       - uses: actions/upload-artifact@master
         with:
           path: ${{ matrix.local_path }}
