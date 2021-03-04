@@ -15,19 +15,19 @@ jobs:
         include:
           - os: macOS-latest
             uploaded_filename: lsif-java-x86_64-apple-darwin
-            local_path: lsif-java/target/native-image/lsif-java
+            local_path: cli/target/native-image/lsif-java
           - os: ubuntu-latest
             uploaded_filename: lsif-java-x86_64-pc-linux
-            local_path: lsif-java/target/native-image/lsif-java
+            local_path: cli/target/native-image/lsif-java
           - os: windows-latest
             uploaded_filename: lsif-java-x86_64-pc-win32.exe
-            local_path: lsif-java\target\native-image\lsif-java.exe
+            local_path: cli\target\native-image\lsif-java.exe
     steps:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v10
       - uses: actions/setup-go@v2
         with:
-          go-version: '^1.13.1'
+          go-version: "^1.13.1"
       - run: go get github.com/sourcegraph/lsif-semanticdb/cmd/lsif-semanticdb
       - run: git fetch --tags || true
       - name: sbt nativeImage
