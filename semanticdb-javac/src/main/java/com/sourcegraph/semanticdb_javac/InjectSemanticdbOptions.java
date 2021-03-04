@@ -10,7 +10,7 @@ public class InjectSemanticdbOptions {
   /**
    * Updates a list of Java compiler arguments to include -Xplugin:semanticdb.
    *
-   * This main method should be used by a `javac` wrapper script like this:
+   * <p>This main method should be used by a `javac` wrapper script like this:
    *
    * <pre>
    *     NEW_OPTIONS_PATH=$(mktemp)
@@ -23,11 +23,12 @@ public class InjectSemanticdbOptions {
    * Requires the following system properties:
    *
    * <ul>
-   *     <li>-Dsemanticdb.output=PATH: the file to write the updated compiler options</li>
-   *     <li>-Dsemanticdb.old-output=PATH: the file to write the original compiler options. Only used for debugging purposes.</li>
-   *     <li>-Dsemanticdb.pluginpath=PATH: the path to the SemanticDB compiler plugin jar</li>
-   *     <li>-Dsemanticdb.sourceroot=PATH: the path to use in -Xplugin:semanticdb -sourceroot:PATH</li>
-   *     <li>-Dsemanticdb.targetroot=PATH: the path to use in -Xplugin:semanticdb -targetroot:PATH</li>
+   *   <li>-Dsemanticdb.output=PATH: the file to write the updated compiler options
+   *   <li>-Dsemanticdb.old-output=PATH: the file to write the original compiler options. Only used
+   *       for debugging purposes.
+   *   <li>-Dsemanticdb.pluginpath=PATH: the path to the SemanticDB compiler plugin jar
+   *   <li>-Dsemanticdb.sourceroot=PATH: the path to use in -Xplugin:semanticdb -sourceroot:PATH
+   *   <li>-Dsemanticdb.targetroot=PATH: the path to use in -Xplugin:semanticdb -targetroot:PATH
    * </ul>
    *
    * @param args the Java compiler arguments to update.
