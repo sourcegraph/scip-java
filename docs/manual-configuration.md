@@ -15,7 +15,7 @@ Indexing a codebase consists of two independent steps:
 - Compile the codebase with the SemanticDB compiler plugin.
 - Generate LSIF index from SemanticDB files.
 
-![A three stage pipeline that starts with a list of Java sources, creates a list of SemanticDB files that then become a single LSIF index.](docs/img/semanticdb-javac-pipeline.svg)
+![A three stage pipeline that starts with a list of Java sources, creates a list of SemanticDB files that then become a single LSIF index.](assets/semanticdb-javac-pipeline.svg)
 
 ## Step 1: Add SemanticDB compiler plugin to the classpath
 
@@ -46,7 +46,7 @@ If you're using sbt.
 libraryDependencies += "com.sourcegraph" % "semanticdb-javac" % "@STABLE_VERSION@"
 ```
 
-## Step 2: enable `-Xplugin:semanticdb` compiler option
+## Step 2: Enable `-Xplugin:semanticdb` compiler option
 
 Add `-Xplugin:semanticdb` to your compiler options to enable the SemanticDB
 compiler plugin. To do this you need to explicitly configure two directories:
@@ -102,13 +102,13 @@ Compile / javacOptions += {
 }
 ```
 
-## Step 4: compile the codebase
+## Step 3: Compile the codebase
 
 Compile all source files in the codebase once the compiler setting has been
 configured. The exact command depends on your build tool. Below are some
 examples:
 
-- Gradle: `./gradlew clean compileTestJava`
+- Gradle: `./gradlew clean compileJava compileTestJava`
 - Maven: `mvn clean verify -DskipTests`
 - sbt: `sbt clean test:compile`
 - Bazel: `bazel build //...`
@@ -123,7 +123,7 @@ build/semanticdb-targetroot/META-INF/semanticdb/j8/src/main/java/example/Example
 ...
 ```
 
-## Step 5: generate LSIF index from SemanticDB files
+## Step 4: Generate LSIF index from SemanticDB files
 
 Run the `lsif-java index-semanticdb` command to convert SemanticDB files into
 LSIF.

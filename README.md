@@ -15,7 +15,7 @@ that generates one
 every `*.java` source file. After compilation completes, the SemanticDB files
 are processed to produce LSIF.
 
-![A three stage pipeline that starts with a list of Java sources, creates a list of SemanticDB files that then become a single LSIF index.](docs/img/semanticdb-javac-pipeline.svg)
+![A three stage pipeline that starts with a list of Java sources, creates a list of SemanticDB files that then become a single LSIF index.](docs/assets/semanticdb-javac-pipeline.svg)
 
 ### Why Java compiler plugin?
 
