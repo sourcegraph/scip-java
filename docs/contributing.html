@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Contributing guide · lsif-java</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This page documents tips and tricks for contributing to the"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Contributing guide · lsif-java"/><meta property="og:type" content="website"/><meta property="og:url" content="https://sourcegraph.github.io/lsif-java/lsif-java/index.html"/><meta property="og:description" content="This page documents tips and tricks for contributing to the"/><meta property="og:image" content="https://sourcegraph.github.io/lsif-java/lsif-java/img/lsif-java.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://sourcegraph.github.io/lsif-java/lsif-java/img/lsif-java.png"/><link rel="shortcut icon" href="/lsif-java/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="/lsif-java/css/custom.css"/><script src="/lsif-java/js/scrollSpy.js"></script><link rel="stylesheet" href="/lsif-java/css/prism.css"/><link rel="stylesheet" href="/lsif-java/css/main.css"/><script src="/lsif-java/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/lsif-java/"><img class="logo" src="/lsif-java/img/lsif-java.png" alt="lsif-java"/><h2 class="headerTitleWithLogo">lsif-java</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/lsif-java/docs/getting-started.html" target="_self">Docs</a></li><li class=""><a href="https://github.com/sourcegraph/lsif-java" target="_blank">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Contributing</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Using</h3><ul class=""><li class="navListItem"><a class="navItem" href="/lsif-java/docs/getting-started.html">Getting started</a></li><li class="navListItem"><a class="navItem" href="/lsif-java/docs/manual-configuration.html">Manual configuration</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Contributing</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/lsif-java/docs/contributing.html">Guide</a></li><li class="navListItem"><a class="navItem" href="/lsif-java/docs/design.html">Design</a></li><li class="navListItem"><a class="navItem" href="/lsif-java/docs/benchmarks.html">Benchmarks</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/sourcegraph/lsif-java/edit/master/docs/contributing.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Contributing guide</h1></header><article><div><span><p>This page documents tips and tricks for contributing to the
+<a href="https://github.com/sourcegraph/lsif-java">sourcegraph/lsif-java</a> codebase.</p>
+<h2><a class="anchor" aria-hidden="true" id="system-dependencies"></a><a href="#system-dependencies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>System dependencies</h2>
+<ul>
+<li><code>java</code>: any version should work</li>
+<li><code>git</code>: any version should work</li>
+<li><code>lsif-semanticdb</code>:
+<code>go get github.com/sourcegraph/lsif-semanticdb/cmd/lsif-semanticdb</code></li>
+<li><code>gradle</code>: <code>brew install gradle</code>, or see
+<a href="https://gradle.org/install/">general installation guide</a>.</li>
+<li><code>mvn</code>: <code>brew install maven</code>, or see
+<a href="https://www.baeldung.com/install-maven-on-windows-linux-mac">general installation guide</a>.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="project-structure"></a><a href="#project-structure" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Project structure</h2>
+<p>These are the main components of the project.</p>
+<ul>
+<li><code>semanticdb-javac/src/main/java</code>: the Java compiler plugin that creates
+SemanticDB files.</li>
+<li><code>tests/minimized</code>: minimized Java source files that reproduce interesting test
+cases.</li>
+<li><code>tests/unit</code>: fast running unit tests that are helpful for local edit-and-test
+workflows.</li>
+<li><code>tests/snapshots</code>: slow running
+<a href="https://jestjs.io/docs/en/snapshot-testing">&quot;snapshot tests&quot;</a> that index a
+corpus of published Java libraries.</li>
+<li><code>cli/src/main/scala</code>: implementation of the <code>lsif-java</code> command-line
+interface.</li>
+<li><code>build.sbt</code>: the sbt build definition.</li>
+<li><code>project/plugins.sbt</code>: plugins for the sbt build.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="helpful-commands"></a><a href="#helpful-commands" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Helpful commands</h2>
+<table>
+<thead>
+<tr><th>Command</th><th>Where</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>./sbt</code></td><td>terminal</td><td>Start interactive sbt shell with Java 11. Takes a while to load on the first run.</td></tr>
+<tr><td><code>unit/test</code></td><td>sbt</td><td>Run fast unit tests.</td></tr>
+<tr><td><code>~unit/test</code></td><td>sbt</td><td>Start watch mode to run tests on file save, good for local edit-and-test workflows.</td></tr>
+<tr><td><code>buildTools/test</code></td><td>sbt</td><td>Run slow build tool tests (Gradle, Maven).</td></tr>
+<tr><td><code>snapshots/testOnly tests.MinimizedSnapshotSuite</code></td><td>sbt</td><td>Runs fast snapshot tests. Indexes a small set of files under <code>tests/minimized</code>.</td></tr>
+<tr><td><code>snapshots/testOnly tests.MinimizedSnapshotSuite -- *InnerClasses*</code></td><td>sbt</td><td>Runs only individual tests cases matching the name &quot;InnerClasses&quot;.</td></tr>
+<tr><td><code>snapshots/testOnly tests.LibrarySnapshotSuite</code></td><td>sbt</td><td>Runs slow snapshot tests. Indexes a corpus of external Java libraries.</td></tr>
+<tr><td><code>snapshots/test</code></td><td>sbt</td><td>Runs all snapshot tests.</td></tr>
+<tr><td><code>snapshots/run</code></td><td>sbt</td><td>Update snapshot tests. Use this command after you have fixed a bug.</td></tr>
+<tr><td><code>cli/run --cwd DIRECTORY</code></td><td>sbt</td><td>Run <code>lsif-java</code> command-line tool against a given Gradle/Maven build.</td></tr>
+<tr><td><code>cd website &amp;&amp; yarn install &amp;&amp; yarn start</code></td><td>terminal</td><td>Start live-reload preview of the website at <a href="http://localhost:3000/lsif-java">http://localhost:3000/lsif-java</a>.</td></tr>
+<tr><td><code>docs/mdoc --watch</code></td><td>sbt</td><td>Re-generate markdown files in the <code>docs/</code> directory.</td></tr>
+<tr><td><code>fixAll</code></td><td>sbt</td><td>Run Scalafmt, Scalafix and Javafmt on all sources. Run this before opening a PR.</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="import-the-project-into-intellij"></a><a href="#import-the-project-into-intellij" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Import the project into IntelliJ</h2>
+<p>It's recommended to use IntelliJ when editing code in this codebase.</p>
+<p>First, install the
+<a href="https://www.jetbrains.com/idea/download/">IntelliJ Community Edition</a>. The
+community edition is
+<a href="https://github.com/JetBrains/intellij-community">open source</a> and free to use.</p>
+<p>Next, install the IntelliJ Scala plugin.</p>
+<p>Finally, run &quot;File &gt; Project From Existing Sources&quot; to import the sbt build into
+IntelliJ. Select the &quot;sbt&quot; option if it asks you to choose between
+sbt/BSP/Bloop.</p>
+<p>It's best to run tests from the sbt shell, not from the IntelliJ UI.</p>
+<h2><a class="anchor" aria-hidden="true" id="dont-use-vs-codevimsublime-textemacs"></a><a href="#dont-use-vs-codevimsublime-textemacs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Don't use VS Code/Vim/Sublime Text/Emacs</h2>
+<p>If you want to use completions and precise code navigation, it's not recommended
+to use other editors than IntelliJ. IntelliJ is the only IDE that properly
+supports hybrid Java/Scala codebases at the moment, although that may change
+soon thanks to lsif-java :)</p>
+<h2><a class="anchor" aria-hidden="true" id="tests-are-written-in-scala"></a><a href="#tests-are-written-in-scala" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tests are written in Scala</h2>
+<p>This codebases uses the Scala library <a href="https://scalameta.org/munit/">MUnit</a> to
+write tests because:</p>
+<ul>
+<li>MUnit has built-in assertions that print readable multiline diffs in color.</li>
+<li>MUnit makes it easy to implement
+<a href="https://jestjs.io/docs/en/snapshot-testing">snapshot testing</a>, which is a
+testing technique that's heavily used in this codebase.</li>
+<li>Multiline literal strings in Scala make it easy to write unit tests for source
+code (which is always multiline). Modern versions of Java support multiline
+string literals, but they're not supported in Java 8, which is supported by
+lsif-java.</li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/lsif-java/docs/manual-configuration.html"><span class="arrow-prev">← </span><span>Manual configuration</span></a><a class="docs-next button" href="/lsif-java/docs/design.html"><span>Design</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#system-dependencies">System dependencies</a></li><li><a href="#project-structure">Project structure</a></li><li><a href="#helpful-commands">Helpful commands</a></li><li><a href="#import-the-project-into-intellij">Import the project into IntelliJ</a></li><li><a href="#dont-use-vs-codevimsublime-textemacs">Don't use VS Code/Vim/Sublime Text/Emacs</a></li><li><a href="#tests-are-written-in-scala">Tests are written in Scala</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#664100"><section class="sitemap"><a href="/lsif-java/" class="nav-home"><img src="/lsif-java/img/lsif-java.png" alt="lsif-java" width="66" height="58"/></a><div><h5>Docs</h5><a href="/lsif-java/docs/installation.html">Get started</a></div><div><h5>Community</h5><a target="_blank">Chat on Gitter</a></div><div><h5>More</h5><a href="https://github.com/sourcegraph/lsif-java" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2021 lsif-java developers</section></footer></div></body></html>
