@@ -25,14 +25,14 @@ it's been downloaded.
 
 ```sh
 # macOS
-curl -Lo lsif-java https://github.com/sourcegraph/lsif-java/releases/download/@STABLE_VERSION@/lsif-java-x86_64-apple-darwin
-chmod +x lsif-java
-./lsif-java --help
+curl -Lo lsif-java https://github.com/sourcegraph/lsif-java/releases/download/@STABLE_VERSION@/lsif-java-x86_64-apple-darwin \
+  && chmod +x lsif-java \
+  && ./lsif-java --help
 
 # Linux
-curl -Lo lsif-java https://github.com/sourcegraph/lsif-java/releases/download/@STABLE_VERSION@/lsif-java-x86_64-pc-linux
-chmod +x lsif-java
-./lsif-java --help
+curl -Lo lsif-java https://github.com/sourcegraph/lsif-java/releases/download/@STABLE_VERSION@/lsif-java-x86_64-pc-linux \
+  && chmod +x lsif-java \
+  && ./lsif-java --help
 ```
 
 ### Java launcher
@@ -43,13 +43,13 @@ the `launch` command, and they're cached for subsequent runs.
 
 ```sh
 # Homebrew
-brew install coursier/formulas/coursier
-coursier launch com.sourcegraph:lsif-java_2.13:@STABLE_VERSION@ -- --help
+brew install coursier/formulas/coursier \
+ && coursier launch com.sourcegraph:lsif-java_2.13:@STABLE_VERSION@ -- --help
 
 # macOS/Linux
-curl -fLo coursier https://git.io/coursier-cli
-chmod +x coursier
-./coursier launch com.sourcegraph:lsif-java_2.13:@STABLE_VERSION@ -- --help
+curl -fLo coursier https://git.io/coursier-cli \
+  && chmod +x coursier \
+  && ./coursier launch com.sourcegraph:lsif-java_2.13:@STABLE_VERSION@ -- --help
 
 # Windows
 bitsadmin /transfer downloadCoursierCli https://git.io/coursier-cli "%cd%\coursier"
