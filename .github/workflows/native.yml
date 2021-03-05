@@ -30,7 +30,7 @@ jobs:
       - name: sbt nativeImage
         shell: bash
         run: |
-          sbt cli/nativeImage "cli/nativeImageRun --cwd tests/gradle-example"
+          sbt cli/nativeImage "cli/nativeImageRun --cwd tests/gradle-example index"
       - uses: actions/upload-artifact@master
         with:
           path: ${{ matrix.local_path }}

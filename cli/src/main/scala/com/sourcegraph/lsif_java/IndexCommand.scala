@@ -6,9 +6,11 @@ import java.nio.file.Paths
 
 import com.sourcegraph.lsif_java.buildtools.BuildTool
 import moped.annotations.Description
+import moped.annotations.ExampleUsage
 import moped.annotations.ExampleValue
 import moped.annotations.Inline
 import moped.annotations.TrailingArguments
+import moped.annotations.Usage
 import moped.cli.Application
 import moped.cli.Command
 import moped.cli.CommandParser
@@ -18,7 +20,12 @@ import os.Inherit
 import os.Shellable
 
 @Description(
-  "Generates an LSIF index for the Java build of a provided workspace directory."
+  "Automatically generate an LSIF index in the current working directory."
+)
+@Usage("lsif-java index [OPTIONS ...] -- [TRAILING_ARGUMENTS ...]")
+@ExampleUsage(
+  """|# Running the `index` command with no flags should work most of the time.
+     |$ lsif-java index""".stripMargin
 )
 case class IndexCommand(
     @Description("The path where to generate the LSIF index.") output: Path =
@@ -41,12 +48,12 @@ case class IndexCommand(
     )
     @ExampleValue("Gradle") buildTool: Option[String] = None,
     @Description(
-      "Whether to enable remove generated temporary files on exit."
+      "Whether to remove generated temporary files on exit."
     ) cleanup: Boolean = true,
     @Description(
-      "The build command to use to compile all sources. " +
+      "Optional. The build command to use to compile all sources. " +
         "Defaults to a build-specific command. For example, the default command for Maven command is 'clean verify -DskipTests'." +
-        "To override the default, pass in the build command after a double dash: 'lsif-java -- compile'"
+        "To override the default, pass in the build command after a double dash: 'lsif-java index -- compile test:compile'"
     )
     @TrailingArguments() buildCommand: List[String] = Nil,
     @Inline
@@ -79,6 +86,7 @@ case class IndexCommand(
   def workingDirectory: Path = AbsolutePath.of(app.env.workingDirectory)
   def finalTargetroot(default: Path): Path =
     AbsolutePath.of(targetroot.getOrElse(default), workingDirectory)
+  def finalOutput: Path = AbsolutePath.of(output, workingDirectory)
   def finalBuildCommand(default: List[String]): List[String] =
     if (buildCommand.isEmpty)
       default
@@ -142,8 +150,14 @@ case class IndexCommand(
         } else {
           val generateLsifResult = process(
             "lsif-semanticdb",
+            s"--out=${finalOutput}",
             s"--semanticdbDir=${tool.targetroot}"
           )
+          if (
+            generateLsifResult.exitCode == 0 && Files.isRegularFile(finalOutput)
+          ) {
+            app.info(finalOutput.toAbsolutePath().toString())
+          }
           generateSemanticdbResult.exitCode + generateLsifResult.exitCode
         }
       case many =>
