@@ -10,12 +10,15 @@ fails.
 
 ## Overview
 
-Indexing a codebase consists of two independent steps:
+Indexing a codebase consists of two independent phases:
 
 - Compile the codebase with the SemanticDB compiler plugin.
 - Generate LSIF index from SemanticDB files.
 
 ![A three stage pipeline that starts with a list of Java sources, creates a list of SemanticDB files that then become a single LSIF index.](assets/semanticdb-javac-pipeline.svg)
+
+The first phase can be complicated to configure and it can take a while to run.
+The second phase is quite simple to configure and it usually runs very fast.
 
 ## Step 1: Add SemanticDB compiler plugin to the classpath
 
@@ -61,9 +64,9 @@ If you're using Gradle.
 
 ```groovy
 tasks.withType(JavaCompile) {
-    def sourceroot = rootProject.projectDir
-    def targetroot = new File(rootProject.buildDir, "semanticdb-targetroot")
-    options.compilerArgs << '-Xplugin:semanticdb -sourceroot:$sourceroot -targetroot:$targetroot'
+  def sourceroot = rootProject.projectDir
+  def targetroot = new File(rootProject.buildDir, "semanticdb-targetroot")
+  options.compilerArgs << "-Xplugin:semanticdb -sourceroot:$sourceroot -targetroot:$targetroot"
 }
 ```
 
@@ -95,10 +98,11 @@ If you're using Maven.
 If you're using sbt.
 
 ```scala
+javaHome := Some(...) // Must be configured to fork the compiler.
 Compile / javacOptions += {
     val sourceroot = (ThisBuild / baseDirectory).value
-    val targetroot = (ThisBuild / target).value / "semanticdb-targetroot"
-    s"-Xplugin:semanticdb -sourceroot:$sourceroot -targeroot:$sourceroot"
+    val targetroot = sourceroot / "target" / "semanticdb-targetroot"
+    s"-Xplugin:semanticdb -sourceroot:$sourceroot -targetroot:$targetroot"
 }
 ```
 

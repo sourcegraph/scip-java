@@ -1,7 +1,15 @@
-# Benchmarks results
+---
+id: benchmarks
+title: Benchmarks
+---
+
+The repository contains benchmarks to measure the overhead of the SemanticDB
+compiler plugin.
 
 ```
-sbt:root> bench/jmh:run -i 3 -wi 3 -f1 -t1
+$ sbt
+...
+sbt:root> bench/jmh:run -i 10 -wi 10 -f1 -t1
 ...
 [info] Benchmark                           (lib)  Mode  Cnt     Score     Error  Units
 [info] CompileBench.compile                guava    ss   10  2291.036 ± 243.428  ms/op 1x

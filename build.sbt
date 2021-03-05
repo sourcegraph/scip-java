@@ -1,3 +1,5 @@
+import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
+import scala.xml.transform.{RewriteRule, RuleTransformer}
 import java.io.File
 import java.util.Properties
 import scala.collection.mutable.ListBuffer
@@ -97,6 +99,16 @@ lazy val plugin = project
       old.withEnabled(false)
     },
     fatjarPackageSettings,
+    assemblyShadeRules.in(assembly) :=
+      Seq(
+        ShadeRule
+          .rename(
+            "com.google.**" -> "com.sourcegraph.shaded.com.google.@1",
+            "google.**" -> "com.sourcegraph.shaded.google.@1",
+            "org.relaxng.**" -> "com.sourcegraph.shaded.relaxng.@1"
+          )
+          .inAll
+      ),
     crossPaths := false,
     PB.targets.in(Compile) :=
       Seq(PB.gens.java -> (Compile / sourceManaged).value)
@@ -280,7 +292,7 @@ lazy val fatjarPackageSettings = List[Def.Setting[_]](
     case PathList("sun", _ @_*) =>
       MergeStrategy.discard
     case PathList("META-INF", "versions", "9", "module-info.class") =>
-      MergeStrategy.first
+      MergeStrategy.discard
     case x =>
       val oldStrategy = (assemblyMergeStrategy in assembly).value
       oldStrategy(x)
@@ -291,6 +303,33 @@ lazy val fatjarPackageSettings = List[Def.Setting[_]](
     val _ = assembly.value
     IO.copyFile(fatJar, slimJar, CopyOptions().withOverwrite(true))
     slimJar
+  },
+  packagedArtifact.in(Compile).in(packageBin) := {
+    val (art, slimJar) = packagedArtifact.in(Compile).in(packageBin).value
+    val fatJar =
+      new File(crossTarget.value + "/" + assemblyJarName.in(assembly).value)
+    val _ = assembly.value
+    IO.copy(List(fatJar -> slimJar), CopyOptions().withOverwrite(true))
+    (art, slimJar)
+  },
+  pomPostProcess := { node =>
+    new RuleTransformer(
+      new RewriteRule {
+        private def isAbsorbedDependency(node: XmlNode): Boolean = {
+          node.label == "dependency" &&
+          node.child.exists(child => child.label == "artifactId")
+        }
+        override def transform(node: XmlNode): XmlNodeSeq =
+          node match {
+            case e: Elem if isAbsorbedDependency(node) =>
+              Comment(
+                "the dependency that was here has been absorbed via sbt-assembly"
+              )
+            case _ =>
+              node
+          }
+      }
+    ).transform(node).head
   }
 )
 

@@ -86,6 +86,7 @@ case class IndexCommand(
   def workingDirectory: Path = AbsolutePath.of(app.env.workingDirectory)
   def finalTargetroot(default: Path): Path =
     AbsolutePath.of(targetroot.getOrElse(default), workingDirectory)
+  def finalOutput: Path = AbsolutePath.of(output, workingDirectory)
   def finalBuildCommand(default: List[String]): List[String] =
     if (buildCommand.isEmpty)
       default
@@ -149,8 +150,14 @@ case class IndexCommand(
         } else {
           val generateLsifResult = process(
             "lsif-semanticdb",
+            s"--out=${finalOutput}",
             s"--semanticdbDir=${tool.targetroot}"
           )
+          if (
+            generateLsifResult.exitCode == 0 && Files.isRegularFile(finalOutput)
+          ) {
+            app.info(finalOutput.toAbsolutePath().toString())
+          }
           generateSemanticdbResult.exitCode + generateLsifResult.exitCode
         }
       case many =>

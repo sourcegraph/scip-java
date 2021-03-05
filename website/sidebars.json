@@ -1,8 +1,13 @@
 {
   "docs": {
-    "Overview": [
+    "Using": [
       "getting-started",
       "manual-configuration"
+    ],
+    "Contributing": [
+      "contributing",
+      "design",
+      "benchmarks"
     ]
   }
 }
