@@ -25,12 +25,12 @@ it's been downloaded.
 
 ```sh
 # macOS
-curl -Lo lsif-java https://github.com/sourcegraph/lsif-java/releases/download/@STABLE_VERSION@/lsif-java-x86_64-apple-darwin \
+curl -Lo lsif-java https://github.com/sourcegraph/lsif-java/releases/download/v@STABLE_VERSION@/lsif-java-x86_64-apple-darwin \
   && chmod +x lsif-java \
   && ./lsif-java --help
 
 # Linux
-curl -Lo lsif-java https://github.com/sourcegraph/lsif-java/releases/download/@STABLE_VERSION@/lsif-java-x86_64-pc-linux \
+curl -Lo lsif-java https://github.com/sourcegraph/lsif-java/releases/download/v@STABLE_VERSION@/lsif-java-x86_64-pc-linux \
   && chmod +x lsif-java \
   && ./lsif-java --help
 ```
