@@ -279,7 +279,7 @@ lazy val testSettings = List(
       "org.scalameta" %% "scalameta" % V.scalameta,
       "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.0",
       "io.get-coursier" %% "coursier" % V.coursier,
-      "com.lihaoyi" %% "pprint" % "0.6.1"
+      "com.lihaoyi" %% "pprint" % "0.6.2"
     )
 )
 
