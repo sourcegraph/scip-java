@@ -51,3 +51,5 @@ out/
 *.hnir
 test-report.json
 dump.lsif
+
+./generated

@@ -2,6 +2,8 @@ package tests
 
 import scala.meta.io.AbsolutePath
 
+import com.sourcegraph.lsif_java.SemanticdbPrinters
+
 class MinimizedSnapshotGenerator extends SnapshotGenerator {
   override def run(context: SnapshotContext, handler: SnapshotHandler): Unit = {
     val sourceroot = AbsolutePath(BuildInfo.sourceroot)

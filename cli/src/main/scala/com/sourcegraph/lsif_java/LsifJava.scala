@@ -16,7 +16,8 @@ object LsifJava {
       CommandParser[HelpCommand],
       CommandParser[VersionCommand],
       CommandParser[IndexCommand],
-      CommandParser[IndexSemanticdbCommand]
+      CommandParser[IndexSemanticdbCommand],
+      CommandParser[SnapshotCommand]
     )
   )
   def main(args: Array[String]): Unit = {
