@@ -15,3 +15,6 @@ class LibrarySnapshotSuite extends SnapshotSuite(new LibrarySnapshotGenerator)
 
 class MinimizedSnapshotSuite
     extends SnapshotSuite(new MinimizedSnapshotGenerator)
+
+class ClonedRepoSnapshotSuite
+  extends SnapshotSuite(new ClonedRepoSnapshotGenerator)

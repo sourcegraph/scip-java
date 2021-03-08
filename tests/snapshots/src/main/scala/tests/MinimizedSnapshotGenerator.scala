@@ -4,6 +4,7 @@ import scala.meta.io.AbsolutePath
 
 class MinimizedSnapshotGenerator extends SnapshotGenerator {
   override def run(context: SnapshotContext, handler: SnapshotHandler): Unit = {
+    print(s"BUILD INFO ${BuildInfo}")
     val sourceroot = AbsolutePath(BuildInfo.sourceroot)
     val fromJavac = SemanticdbFile.fromDirectory(
       AbsolutePath(BuildInfo.minimizedJavaSourceDirectory),
