@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: olafurpg/setup-scala@v10
       - run: git fetch --unshallow
       - name: Publish ${{ github.ref }}
