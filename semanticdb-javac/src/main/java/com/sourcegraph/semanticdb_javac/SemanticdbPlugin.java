@@ -13,7 +13,7 @@ public class SemanticdbPlugin implements Plugin {
   @Override
   public void init(JavacTask task, String... args) {
     SemanticdbReporter reporter = new SemanticdbReporter();
-    SemanticdbOptions options = SemanticdbOptions.parse(args);
+    SemanticdbJavacOptions options = SemanticdbJavacOptions.parse(args);
     GlobalSymbolsCache globals = new GlobalSymbolsCache(options);
     if (!options.errors.isEmpty()) {
       for (String error : options.errors) {

@@ -15,13 +15,13 @@ import java.nio.file.Paths;
  * source file.
  */
 public final class SemanticdbTaskListener implements TaskListener {
-  private final SemanticdbOptions options;
+  private final SemanticdbJavacOptions options;
   private final JavacTask task;
   private final GlobalSymbolsCache globals;
   private final SemanticdbReporter reporter;
 
   public SemanticdbTaskListener(
-      SemanticdbOptions options,
+      SemanticdbJavacOptions options,
       JavacTask task,
       GlobalSymbolsCache globals,
       SemanticdbReporter reporter) {
@@ -69,7 +69,7 @@ public final class SemanticdbTaskListener implements TaskListener {
     }
   }
 
-  private Result<Path, String> semanticdbOutputPath(SemanticdbOptions options, TaskEvent e) {
+  private Result<Path, String> semanticdbOutputPath(SemanticdbJavacOptions options, TaskEvent e) {
     Path absolutePath = Paths.get(e.getSourceFile().toUri()).normalize();
     if (absolutePath.startsWith(options.sourceroot)) {
       Path relativePath = options.sourceroot.relativize(absolutePath);

@@ -15,3 +15,9 @@ class LibrarySnapshotSuite extends SnapshotSuite(new LibrarySnapshotGenerator)
 
 class MinimizedSnapshotSuite
     extends SnapshotSuite(new MinimizedSnapshotGenerator)
+
+class MinimizedLsifSnapshotSuite
+    extends SnapshotSuite(new MinimizedLsifSnapshotGenerator)
+
+class LsifGraphSnapshotSuite
+    extends SnapshotSuite(new LsifGraphSnapshotGenerator)

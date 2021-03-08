@@ -4,13 +4,12 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.Path
-import java.nio.file.PathMatcher
 import java.util.concurrent.TimeUnit
 
 import scala.meta.inputs.Input
 import scala.meta.internal.io.FileIO
 
-import com.sourcegraph.lsif_java.DeleteVisitor
+import com.sourcegraph.io.DeleteVisitor
 import org.openjdk.jmh.annotations._
 import tests.Dependencies
 import tests.TestCompiler
@@ -21,7 +20,7 @@ class CompileBench {
   var deps: Dependencies = _
   var tmp: Path = _
   var compiler: TestCompiler = _
-  var javaPattern: PathMatcher = _
+
   @Param(Array("bytebuddy", "guava"))
   var lib: String = _
 
@@ -32,7 +31,6 @@ class CompileBench {
 
   @Setup()
   def setup(): Unit = {
-    javaPattern = FileSystems.getDefault.getPathMatcher("glob:**.java")
     tmp = Files.createTempDirectory("benchmarks")
     deps = Dependencies.resolveDependencies(List(libs(lib)), Nil)
     compiler = new TestCompiler(deps.classpathSyntax, List.empty[String], tmp)
@@ -43,7 +41,32 @@ class CompileBench {
     Files.walkFileTree(tmp, new DeleteVisitor)
   }
 
-  def foreachSource(fn: Seq[Input.VirtualFile] => Int): Long = {
+  @Benchmark
+  @BenchmarkMode(Array(Mode.SingleShotTime))
+  @OutputTimeUnit(TimeUnit.MILLISECONDS)
+  def compile(): Long = {
+    CompileBench.foreachSource(deps) { inputs =>
+      compiler.compile(inputs).byteCode.length
+    }
+  }
+
+  @Benchmark
+  @BenchmarkMode(Array(Mode.SingleShotTime))
+  @OutputTimeUnit(TimeUnit.MILLISECONDS)
+  def compileSemanticdb(): Long = {
+    CompileBench.foreachSource(deps) { inputs =>
+      compiler.compileSemanticdb(inputs).textDocument.getOccurrencesCount
+    }
+  }
+
+}
+object CompileBench {
+  private val javaPattern = FileSystems
+    .getDefault
+    .getPathMatcher("glob:**.java")
+  def foreachSource(
+      deps: Dependencies
+  )(fn: Seq[Input.VirtualFile] => Int): Long = {
     var sum = 0L
     deps
       .sources
@@ -65,23 +88,4 @@ class CompileBench {
       }
     sum
   }
-
-  @Benchmark
-  @BenchmarkMode(Array(Mode.SingleShotTime))
-  @OutputTimeUnit(TimeUnit.MILLISECONDS)
-  def compile(): Long = {
-    foreachSource { inputs =>
-      compiler.compile(inputs).byteCode.length
-    }
-  }
-
-  @Benchmark
-  @BenchmarkMode(Array(Mode.SingleShotTime))
-  @OutputTimeUnit(TimeUnit.MILLISECONDS)
-  def compileSemanticdb(): Long = {
-    foreachSource { inputs =>
-      compiler.compileSemanticdb(inputs).textDocument.getOccurrencesCount
-    }
-  }
-
 }

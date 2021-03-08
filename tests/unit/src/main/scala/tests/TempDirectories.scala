@@ -3,7 +3,7 @@ package tests
 import java.nio.file.Files
 import java.nio.file.Path
 
-import com.sourcegraph.lsif_java.DeleteVisitor
+import com.sourcegraph.io.DeleteVisitor
 import munit.FunSuite
 
 trait TempDirectories {

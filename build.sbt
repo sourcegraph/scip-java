@@ -1,11 +1,13 @@
 import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
 import scala.xml.transform.{RewriteRule, RuleTransformer}
 import java.io.File
+import java.nio.file.Files
 import java.util.Properties
 import scala.collection.mutable.ListBuffer
 
 lazy val V =
   new {
+    val protobuf = "3.15.6"
     val coursier = "2.0.8"
     val bloop = "1.4.7"
     val bsp = "2.0.0-M13"
@@ -64,11 +66,20 @@ commands +=
       "javafmtCheckAll" :: "publishLocal" :: "docs/docusaurusCreateSite" :: s
   }
 
+lazy val semanticdb = project
+  .in(file("semanticdb-java"))
+  .settings(
+    moduleName := "semanticdb-java",
+    javaOnlySettings,
+    PB.targets.in(Compile) :=
+      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value)
+  )
+
 lazy val agent = project
   .in(file("semanticdb-agent"))
   .settings(
     fatjarPackageSettings,
-    autoScalaLibrary := false,
+    javaOnlySettings,
     moduleName := "semanticdb-agent",
     libraryDependencies ++=
       List(
@@ -76,10 +87,6 @@ lazy val agent = project
         "net.bytebuddy" % "byte-buddy" % "1.10.20",
         "net.bytebuddy" % "byte-buddy-agent" % "1.10.20"
       ),
-    incOptions ~= { old =>
-      old.withEnabled(false)
-    },
-    crossPaths := false,
     Compile / packageBin / packageOptions +=
       Package.ManifestAttributes(
         "Agent-Class" -> "com.sourcegraph.semanticdb_javac.SemanticdbAgent",
@@ -92,13 +99,10 @@ lazy val agent = project
 lazy val plugin = project
   .in(file("semanticdb-javac"))
   .settings(
+    fatjarPackageSettings,
+    javaOnlySettings,
     moduleName := "semanticdb-javac",
     javaToolchainVersion := "1.8",
-    autoScalaLibrary := false,
-    incOptions ~= { old =>
-      old.withEnabled(false)
-    },
-    fatjarPackageSettings,
     assemblyShadeRules.in(assembly) :=
       Seq(
         ShadeRule
@@ -108,14 +112,26 @@ lazy val plugin = project
             "org.relaxng.**" -> "com.sourcegraph.shaded.relaxng.@1"
           )
           .inAll
-      ),
-    crossPaths := false,
-    PB.targets.in(Compile) :=
-      Seq(PB.gens.java -> (Compile / sourceManaged).value)
+      )
   )
+  .dependsOn(semanticdb)
+
+lazy val lsif = project
+  .in(file("lsif-semanticdb"))
+  .settings(
+    moduleName := "lsif-semanticdb",
+    javaToolchainVersion := "1.8",
+    javaOnlySettings,
+    libraryDependencies +=
+      "com.google.protobuf" % "protobuf-java-util" % V.protobuf,
+    PB.targets.in(Compile) :=
+      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
+    Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
+  )
+  .dependsOn(semanticdb)
 
 lazy val cli = project
-  .in(file("cli"))
+  .in(file("lsif-java"))
   .settings(
     moduleName := "lsif-java",
     mainClass.in(Compile) := Some("com.sourcegraph.lsif_java.LsifJava"),
@@ -128,7 +144,11 @@ lazy val cli = project
         "bspVersion" -> V.bsp
       ),
     buildInfoPackage := "com.sourcegraph.lsif_java",
-    libraryDependencies ++= List("org.scalameta" %% "moped" % V.moped),
+    libraryDependencies ++=
+      List(
+        "org.scalameta" %% "moped" % V.moped,
+        "org.scalameta" %% "ascii-graphs" % "0.1.2"
+      ),
     resourceGenerators.in(Compile) +=
       Def
         .task[Seq[File]] {
@@ -161,11 +181,25 @@ lazy val cli = project
           propsFile :: copiedJars.toList
         }
         .taskValue,
-    nativeImageOptions ++= List("-H:IncludeResources=^semanticdb-.*jar$"),
+    nativeImageOptions ++=
+      List(
+        "-H:IncludeResources=^semanticdb-.*jar$",
+        s"-H:ReflectionConfigurationFiles=${target.value / "native-image-configs" / "reflect-config.json"}"
+      ),
     nativeImageOutput := target.in(NativeImage).value / "lsif-java"
   )
   .enablePlugins(NativeImagePlugin, BuildInfoPlugin)
-  .dependsOn(plugin)
+  .dependsOn(lsif)
+
+commands +=
+  Command.command("nativeImageProfiled") { s =>
+    val targetroot =
+      file("tests/minimized/.j11/target/scala-2.13/meta").absolutePath
+    val output = Files.createTempFile("lsif-java", "dump.lsif")
+    "minimized/compile" ::
+      s"""nativeImageRunAgent " index-semanticdb --output=$output $targetroot"""" ::
+      "nativeImage" :: s
+  }
 
 def minimizedSourceDirectory =
   file("tests/minimized/src/main/java").getAbsoluteFile
@@ -264,11 +298,36 @@ lazy val bench = project
   .in(file("tests/benchmarks"))
   .settings(
     moduleName := "lsif-java-bench",
+    javaToolchainVersion := "1.8",
     fork.in(run) := true,
     skip.in(publish) := true
   )
   .dependsOn(unit)
   .enablePlugins(JmhPlugin)
+
+lazy val docs = project
+  .in(file("lsif-java-docs"))
+  .settings(
+    mdocOut :=
+      baseDirectory.in(ThisBuild).value / "website" / "target" / "docs",
+    fork := false,
+    mdocVariables :=
+      Map[String, String](
+        "VERSION" -> version.value,
+        "SCALA_VERSION" -> scalaVersion.value,
+        "STABLE_VERSION" -> version.value.replaceFirst("\\-.*", "")
+      )
+  )
+  .dependsOn(unit)
+  .enablePlugins(DocusaurusPlugin)
+
+lazy val javaOnlySettings = List[Def.Setting[_]](
+  autoScalaLibrary := false,
+  incOptions ~= { old =>
+    old.withEnabled(false)
+  },
+  crossPaths := false
+)
 
 lazy val testSettings = List(
   skip.in(publish) := true,
@@ -279,7 +338,6 @@ lazy val testSettings = List(
       "org.scalameta" %% "munit" % "0.7.10",
       "org.scalameta" %% "moped-testkit" % V.moped,
       "org.scalameta" %% "scalameta" % V.scalameta,
-      "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.0",
       "io.get-coursier" %% "coursier" % V.coursier,
       "com.lihaoyi" %% "pprint" % "0.6.1"
     )
@@ -334,19 +392,3 @@ lazy val fatjarPackageSettings = List[Def.Setting[_]](
     ).transform(node).head
   }
 )
-
-lazy val docs = project
-  .in(file("lsif-java-docs"))
-  .settings(
-    mdocOut :=
-      baseDirectory.in(ThisBuild).value / "website" / "target" / "docs",
-    fork := false,
-    mdocVariables :=
-      Map[String, String](
-        "VERSION" -> version.value,
-        "SCALA_VERSION" -> scalaVersion.value,
-        "STABLE_VERSION" -> version.value.replaceFirst("\\-.*", "")
-      )
-  )
-  .dependsOn(unit)
-  .enablePlugins(DocusaurusPlugin)
