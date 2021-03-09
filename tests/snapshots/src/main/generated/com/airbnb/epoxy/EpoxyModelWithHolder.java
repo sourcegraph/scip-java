@@ -61,7 +61,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                                         ^^^^^^ definition local1
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void bind(@NonNull T holder) {
 //            ^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#bind().
 //                  ^^^^^^^ reference androidx/annotation/NonNull#
@@ -74,7 +74,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void bind(@NonNull T holder, @NonNull List<Object> payloads) {
 //            ^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#bind(+1).
 //                  ^^^^^^^ reference androidx/annotation/NonNull#
@@ -92,7 +92,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void bind(@NonNull T holder, @NonNull EpoxyModel<?> previouslyBoundModel) {
 //            ^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#bind(+2).
 //                  ^^^^^^^ reference androidx/annotation/NonNull#
@@ -109,7 +109,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void unbind(@NonNull T holder) {
 //            ^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#unbind().
 //                    ^^^^^^^ reference androidx/annotation/NonNull#
@@ -123,7 +123,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onVisibilityStateChanged(@Visibility int visibilityState, @NonNull T holder) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#onVisibilityStateChanged().
 //                                      ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#Visibility#
@@ -139,7 +139,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onVisibilityChanged(
 //            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#onVisibilityChanged().
       @FloatRange(from = 0, to = 100) float percentVisibleHeight,
@@ -175,7 +175,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean onFailedToRecycleView(T holder) {
 //               ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#onFailedToRecycleView().
 //                                     ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]
@@ -187,7 +187,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onViewAttachedToWindow(T holder) {
 //            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#onViewAttachedToWindow().
 //                                   ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]
@@ -199,7 +199,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onViewDetachedFromWindow(T holder) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#onViewDetachedFromWindow().
 //                                     ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]

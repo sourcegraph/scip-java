@@ -84,7 +84,7 @@ public abstract class Typed3EpoxyController<T, U, V> extends EpoxyController {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public final void requestModelBuild() {
 //                  ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#requestModelBuild().
     if (!allowModelBuildRequests) {
@@ -101,7 +101,7 @@ public abstract class Typed3EpoxyController<T, U, V> extends EpoxyController {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void moveModel(int fromPosition, int toPosition) {
 //            ^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#moveModel().
 //                          ^^^^^^^^^^^^ definition local5
@@ -118,7 +118,7 @@ public abstract class Typed3EpoxyController<T, U, V> extends EpoxyController {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void requestDelayedModelBuild(int delayMs) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#requestDelayedModelBuild().
 //                                         ^^^^^^^ definition local7
@@ -137,7 +137,7 @@ public abstract class Typed3EpoxyController<T, U, V> extends EpoxyController {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   protected final void buildModels() {
 //                     ^^^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#buildModels().
     if (!isBuildingModels()) {

@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
  * Thrown if a model is changed after it is added to an {@link com.airbnb.epoxy.EpoxyController}.
  */
 class ImmutableModelException extends RuntimeException {
-^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#
+//^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#
 //                                    ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
   private static final String MODEL_CANNOT_BE_CHANGED_MESSAGE =
 //                     ^^^^^^ reference java/lang/String#
@@ -23,7 +23,7 @@ class ImmutableModelException extends RuntimeException {
           + " call `requestModelBuild` instead to recreate all models.";
 
   ImmutableModelException(EpoxyModel model, int modelPosition) {
-  ^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`().
 //                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local0
 //                                              ^^^^^^^^^^^^^ definition local1
@@ -34,7 +34,7 @@ class ImmutableModelException extends RuntimeException {
   }
 
   ImmutableModelException(EpoxyModel model,
-  ^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`(+1).
+//^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`(+1).
 //                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local2
       String descriptionOfWhenChangeHappened, int modelPosition) {
@@ -50,7 +50,7 @@ class ImmutableModelException extends RuntimeException {
   }
 
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   private static String buildMessage(EpoxyModel model,
 //               ^^^^^^ reference java/lang/String#
 //                      ^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#buildMessage().

@@ -28,11 +28,11 @@ import java.lang.annotation.Target;
  * adapter, so it can be used for saving state of a model.
  */
 @Target(ElementType.FIELD)
- ^^^^^^ reference java/lang/annotation/Target#
+//^^^^^ reference java/lang/annotation/Target#
 //      ^^^^^^^^^^^ reference java/lang/annotation/ElementType#
 //                  ^^^^^ reference java/lang/annotation/ElementType#FIELD.
 @Retention(RetentionPolicy.CLASS)
- ^^^^^^^^^ reference java/lang/annotation/Retention#
+//^^^^^^^^ reference java/lang/annotation/Retention#
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface AutoModel {

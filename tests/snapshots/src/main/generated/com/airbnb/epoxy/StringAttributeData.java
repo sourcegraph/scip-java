@@ -28,27 +28,27 @@ public class StringAttributeData {
   private final boolean hasDefault;
 //                      ^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#hasDefault.
   @Nullable private final CharSequence defaultString;
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
 //                        ^^^^^^^^^^^^ reference java/lang/CharSequence#
 //                                     ^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#defaultString.
   @StringRes private final int defaultStringRes;
-   ^^^^^^^^^ reference androidx/annotation/StringRes#
+// ^^^^^^^^^ reference androidx/annotation/StringRes#
 //                             ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#defaultStringRes.
 
   @Nullable private CharSequence string;
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
 //                  ^^^^^^^^^^^^ reference java/lang/CharSequence#
 //                               ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#string.
   @StringRes private int stringRes;
-   ^^^^^^^^^ reference androidx/annotation/StringRes#
+// ^^^^^^^^^ reference androidx/annotation/StringRes#
 //                       ^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#stringRes.
   @PluralsRes private int pluralRes;
-   ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
+// ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
 //                        ^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#pluralRes.
   private int quantity;
 //            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#quantity.
   @Nullable private Object[] formatArgs;
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
 //                  ^^^^^^ reference java/lang/Object#
 //                           ^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#formatArgs.
 
@@ -249,7 +249,7 @@ public class StringAttributeData {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean equals(Object o) {
 //               ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#equals().
 //                      ^^^^^^ reference java/lang/Object#
@@ -309,7 +309,7 @@ public class StringAttributeData {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public int hashCode() {
 //           ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#hashCode().
     int result = string != null ? string.hashCode() : 0;

@@ -7,7 +7,7 @@ public class SubClasses extends AbstractClasses implements Interfaces {
 //                                                         ^^^^^^^^^^ reference minimized/Interfaces#
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public String abstractImplementation() {
 //       ^^^^^^ reference java/lang/String#
 //              ^^^^^^^^^^^^^^^^^^^^^^ definition minimized/SubClasses#abstractImplementation().
@@ -15,7 +15,7 @@ public class SubClasses extends AbstractClasses implements Interfaces {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public String abstractInterfaceMethod() {
 //       ^^^^^^ reference java/lang/String#
 //              ^^^^^^^^^^^^^^^^^^^^^^^ definition minimized/SubClasses#abstractInterfaceMethod().

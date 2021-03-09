@@ -1,5 +1,5 @@
 package minimized;
-^^^^^ reference minimized/Enums#
+//^^^^^ reference minimized/Enums#
 
 import java.util.Arrays;
 //     ^^^^ reference java/
@@ -9,20 +9,20 @@ import java.util.Arrays;
 public enum Enums {
 //     ^^^^^ definition minimized/Enums#
   A("A"),
-  ^ definition minimized/Enums#A.
-   ^^^^^ reference minimized/Enums#`<init>`().
+//^ definition minimized/Enums#A.
+// ^^^^^ reference minimized/Enums#`<init>`().
   B("B"),
-  ^ definition minimized/Enums#B.
-   ^^^^^ reference minimized/Enums#`<init>`().
+//^ definition minimized/Enums#B.
+// ^^^^^ reference minimized/Enums#`<init>`().
   C("C");
-  ^ definition minimized/Enums#C.
-   ^^^^^ reference minimized/Enums#`<init>`().
+//^ definition minimized/Enums#C.
+// ^^^^^ reference minimized/Enums#`<init>`().
   public String value;
 //       ^^^^^^ reference java/lang/String#
 //              ^^^^^ definition minimized/Enums#value.
 
   Enums(String value) {
-  ^^^^^^ definition minimized/Enums#`<init>`().
+//^^^^^^ definition minimized/Enums#`<init>`().
 //      ^^^^^^ reference java/lang/String#
 //             ^^^^^ definition local0
     this.value = value;

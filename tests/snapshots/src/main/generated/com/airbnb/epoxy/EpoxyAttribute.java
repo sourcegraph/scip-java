@@ -27,11 +27,11 @@ import java.lang.annotation.Target;
  * getters, setters, equals, and hashcode for the annotated fields.
  */
 @Target(ElementType.FIELD)
- ^^^^^^ reference java/lang/annotation/Target#
+//^^^^^ reference java/lang/annotation/Target#
 //      ^^^^^^^^^^^ reference java/lang/annotation/ElementType#
 //                  ^^^^^ reference java/lang/annotation/ElementType#FIELD.
 @Retention(RetentionPolicy.CLASS)
- ^^^^^^^^^ reference java/lang/annotation/Retention#
+//^^^^^^^^ reference java/lang/annotation/Retention#
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface EpoxyAttribute {
@@ -41,8 +41,8 @@ public @interface EpoxyAttribute {
    * created.
    */
   enum Option {
-  ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#
-  ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#
+//^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`().
     /**
      * A getter is generated for this attribute by default. Add this option to prevent a getter from
      * being generated.
@@ -98,7 +98,7 @@ public @interface EpoxyAttribute {
 
   /** Specify any {@link Option} values that should be used when generating the model class. */
   Option[] value() default {};
-  ^^^^^^ reference com/airbnb/epoxy/EpoxyAttribute#Option#
+//^^^^^^ reference com/airbnb/epoxy/EpoxyAttribute#Option#
 //         ^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#value().
 
   /**
@@ -110,7 +110,7 @@ public @interface EpoxyAttribute {
    * @deprecated Use {@link Option#DoNotHash} instead.
    */
   @Deprecated
-   ^^^^^^^^^^ reference java/lang/Deprecated#
+// ^^^^^^^^^^ reference java/lang/Deprecated#
   boolean hash() default true;
 //        ^^^^ definition com/airbnb/epoxy/EpoxyAttribute#hash().
 
@@ -123,7 +123,7 @@ public @interface EpoxyAttribute {
    * @deprecated Use {@link Option#NoSetter} instead.
    */
   @Deprecated
-   ^^^^^^^^^^ reference java/lang/Deprecated#
+// ^^^^^^^^^^ reference java/lang/Deprecated#
   boolean setter() default true;
 //        ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#setter().
 }

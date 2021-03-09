@@ -30,8 +30,8 @@ import androidx.annotation.Nullable;
  * be returned.
  */
 class ControllerHelperLookup {
-^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#`<init>`().
-^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#
+//^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#`<init>`().
+//^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#
   private static final String GENERATED_HELPER_CLASS_SUFFIX = "_EpoxyHelper";
 //                     ^^^^^^ reference java/lang/String#
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#GENERATED_HELPER_CLASS_SUFFIX.
@@ -117,7 +117,7 @@ class ControllerHelperLookup {
   }
 
   @Nullable
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
   private static Constructor<?> findConstructorForClass(Class<?> controllerClass) {
 //               ^^^^^^^^^^^ reference java/lang/reflect/Constructor#
 //                              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().

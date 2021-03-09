@@ -30,7 +30,7 @@ public class ListenersUtils {
 //     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ListenersUtils#
 
   @Nullable
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
   static EpoxyViewHolder getEpoxyHolderForChildView(View v) {
 //       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                       ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ListenersUtils#getEpoxyHolderForChildView().
@@ -69,7 +69,7 @@ public class ListenersUtils {
   }
 
   @Nullable
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
   private static RecyclerView findParentRecyclerView(@Nullable View v) {
 //               ^^^^^^^^^^^^ reference _root_/
 //                            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ListenersUtils#findParentRecyclerView().

@@ -30,11 +30,11 @@ import java.lang.annotation.Target;
  * class="com.example.CustomClassName" override in the layout xml.
  */
 @Target(ElementType.TYPE)
- ^^^^^^ reference java/lang/annotation/Target#
+//^^^^^ reference java/lang/annotation/Target#
 //      ^^^^^^^^^^^ reference java/lang/annotation/ElementType#
 //                  ^^^^ reference java/lang/annotation/ElementType#TYPE.
 @Retention(RetentionPolicy.CLASS)
- ^^^^^^^^^ reference java/lang/annotation/Retention#
+//^^^^^^^^ reference java/lang/annotation/Retention#
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface EpoxyDataBindingPattern {
@@ -44,7 +44,7 @@ public @interface EpoxyDataBindingPattern {
    * look up layout files.
    */
   Class<?> rClass();
-  ^^^^^ reference java/lang/Class#
+//^^^^^ reference java/lang/Class#
 //         ^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingPattern#rClass().
   /**
    * A string prefix that your databinding layouts start with. Epoxy will generate a model for each
@@ -54,7 +54,7 @@ public @interface EpoxyDataBindingPattern {
    * databinding layout, Epoxy will generate a HeaderBindingModel_ class for that layout.
    */
   String layoutPrefix();
-  ^^^^^^ reference java/lang/String#
+//^^^^^^ reference java/lang/String#
 //       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingPattern#layoutPrefix().
 
   /**

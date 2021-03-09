@@ -41,7 +41,7 @@ public class SimpleEpoxyController extends EpoxyController {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public final void requestModelBuild() {
 //                  ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#requestModelBuild().
     if (!insideSetModels) {
@@ -57,7 +57,7 @@ public class SimpleEpoxyController extends EpoxyController {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   protected final void buildModels() {
 //                     ^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#buildModels().
     if (!isBuildingModels()) {

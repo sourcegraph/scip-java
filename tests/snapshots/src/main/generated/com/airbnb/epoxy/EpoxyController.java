@@ -259,18 +259,18 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
    * current call and posting it again.
    */
   @RequestedModelBuildType private volatile int requestedModelBuildType =
-   ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#
+// ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#
 //                                              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#requestedModelBuildType.
       RequestedModelBuildType.NONE;
 //    ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#
 //                            ^^^^ reference com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#NONE.
 
   @Retention(RetentionPolicy.SOURCE)
-   ^^^^^^^^^ reference java/lang/annotation/Retention#
+// ^^^^^^^^^ reference java/lang/annotation/Retention#
 //           ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                           ^^^^^^ reference java/lang/annotation/RetentionPolicy#SOURCE.
   @IntDef({RequestedModelBuildType.NONE,
-   ^^^^^^ reference androidx/annotation/IntDef#
+// ^^^^^^ reference androidx/annotation/IntDef#
 //         ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#
 //                                 ^^^^ reference com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#NONE.
       RequestedModelBuildType.NEXT_FRAME,
@@ -682,7 +682,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
    * to allow changes.
    */
   interface ModelInterceptorCallback {
-  ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#
+//^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#
     void onInterceptorsStarted(EpoxyController controller);
 //       ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#onInterceptorsStarted().
 //                             ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
@@ -1312,7 +1312,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
    * RecyclerView, or to get information about models currently in use.
    */
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   public EpoxyControllerAdapter getAdapter() {
 //       ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#
 //                              ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#getAdapter().
@@ -1349,7 +1349,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
    * the span count is correct.
    */
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   public SpanSizeLookup getSpanSizeLookup() {
 //       ^^^^^^^^^^^^^^ reference _root_/
 //                      ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#getSpanSizeLookup().
@@ -1678,7 +1678,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
    * using sticky header feature.
    */
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void setupStickyHeaderView(@NotNull View stickyHeader) {
 //            ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#setupStickyHeaderView().
 //                                   ^^^^^^^ reference org/jetbrains/annotations/NotNull#
@@ -1695,7 +1695,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
    * using sticky header feature.
    */
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void teardownStickyHeaderView(@NotNull View stickyHeader) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#teardownStickyHeaderView().
 //                                      ^^^^^^^ reference org/jetbrains/annotations/NotNull#
@@ -1712,7 +1712,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
    * using sticky header feature.
    */
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean isStickyHeader(int position) {
 //               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#isStickyHeader().
 //                                  ^^^^^^^^ definition local84

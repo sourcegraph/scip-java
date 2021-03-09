@@ -33,11 +33,11 @@ import androidx.annotation.LayoutRes;
  * See https://github.com/airbnb/epoxy/wiki/Generating-Models-from-View-Annotations
  */
 @Target(ElementType.TYPE)
- ^^^^^^ reference java/lang/annotation/Target#
+//^^^^^ reference java/lang/annotation/Target#
 //      ^^^^^^^^^^^ reference java/lang/annotation/ElementType#
 //                  ^^^^ reference java/lang/annotation/ElementType#TYPE.
 @Retention(RetentionPolicy.CLASS)
- ^^^^^^^^^ reference java/lang/annotation/Retention#
+//^^^^^^^^ reference java/lang/annotation/Retention#
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface ModelView {
@@ -49,8 +49,8 @@ public @interface ModelView {
    * layout_width} and {@code layout_height}.
    */
   enum Size {
-  ^^^^ definition com/airbnb/epoxy/ModelView#Size#
-  ^^^^^^ definition com/airbnb/epoxy/ModelView#Size#`<init>`().
+//^^^^ definition com/airbnb/epoxy/ModelView#Size#
+//^^^^^^ definition com/airbnb/epoxy/ModelView#Size#`<init>`().
     NONE,
 //  ^^^^ definition com/airbnb/epoxy/ModelView#Size#NONE.
     WRAP_WIDTH_WRAP_HEIGHT,
@@ -73,7 +73,7 @@ public @interface ModelView {
    * creating the view.
    */
   Size autoLayout() default Size.NONE;
-  ^^^^ reference com/airbnb/epoxy/ModelView#Size#
+//^^^^ reference com/airbnb/epoxy/ModelView#Size#
 //     ^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#autoLayout().
 //                          ^^^^ reference com/airbnb/epoxy/ModelView#Size#
 //                               ^^^^ reference com/airbnb/epoxy/ModelView#Size#NONE.
@@ -85,7 +85,7 @@ public @interface ModelView {
    * Overrides any default set in {@link PackageModelViewConfig}
    */
   @LayoutRes int defaultLayout() default 0;
-   ^^^^^^^^^ reference androidx/annotation/LayoutRes#
+// ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //               ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#defaultLayout().
   /**
    * An optional EpoxyModel subclass to use as the base class of the generated view. A default can
@@ -94,7 +94,7 @@ public @interface ModelView {
    * * Overrides any default set in {@link PackageModelViewConfig}
    */
   Class<?> baseModelClass() default Void.class;
-  ^^^^^ reference java/lang/Class#
+//^^^^^ reference java/lang/Class#
 //         ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#baseModelClass().
 //                                  ^^^^ reference java/lang/Void#
 //                                       ^^^^^ reference java/lang/Void#class.

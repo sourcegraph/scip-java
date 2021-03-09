@@ -45,12 +45,12 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 public class DiffResult {
 //     ^^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#
   @NonNull final List<? extends EpoxyModel<?>> previousModels;
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
 //               ^^^^ reference java/util/List#
 //                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                             ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#previousModels.
   @NonNull final List<? extends EpoxyModel<?>> newModels;
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
 //               ^^^^ reference java/util/List#
 //                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                             ^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#newModels.
@@ -61,7 +61,7 @@ public class DiffResult {
    * we can simply add all or clear all items and skipped running the full diffing.
    */
   @Nullable final DiffUtil.DiffResult differResult;
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
 //                ^^^^^^^^ reference DiffUtil/
 //                         ^^^^^^^^^^ reference DiffUtil/DiffResult#
 //                                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#differResult.

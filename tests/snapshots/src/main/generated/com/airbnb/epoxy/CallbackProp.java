@@ -35,13 +35,13 @@ import java.lang.annotation.Target;
  * changing the value of the listener will not trigger an update to the view.
  */
 @Target({ElementType.METHOD, ElementType.FIELD})
- ^^^^^^ reference java/lang/annotation/Target#
+//^^^^^ reference java/lang/annotation/Target#
 //       ^^^^^^^^^^^ reference java/lang/annotation/ElementType#
 //                   ^^^^^^ reference java/lang/annotation/ElementType#METHOD.
 //                           ^^^^^^^^^^^ reference java/lang/annotation/ElementType#
 //                                       ^^^^^ reference java/lang/annotation/ElementType#FIELD.
 @Retention(RetentionPolicy.CLASS)
- ^^^^^^^^^ reference java/lang/annotation/Retention#
+//^^^^^^^^ reference java/lang/annotation/Retention#
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface CallbackProp {

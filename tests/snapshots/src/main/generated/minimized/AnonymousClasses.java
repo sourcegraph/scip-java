@@ -7,7 +7,7 @@ import java.util.function.Function;
 //                        ^^^^^^^^ reference java/util/function/Function#
 
 @SuppressWarnings("ALL")
- ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public class AnonymousClasses {
 //     ^^^^^^ definition minimized/AnonymousClasses#`<init>`().
 //     ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses#

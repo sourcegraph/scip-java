@@ -6,7 +6,7 @@ import android.util.Log;
 //                  ^^^ reference android/util/Log#
 
 class DebugTimer implements Timer {
-^^^^^^^^^^ definition com/airbnb/epoxy/DebugTimer#
+//^^^^^^^^^^ definition com/airbnb/epoxy/DebugTimer#
 //                          ^^^^^ reference com/airbnb/epoxy/Timer#
 
   private final String tag;
@@ -19,7 +19,7 @@ class DebugTimer implements Timer {
 //               ^^^^^^^^^^^ definition com/airbnb/epoxy/DebugTimer#sectionName.
 
   DebugTimer(String tag) {
-  ^^^^^^ definition com/airbnb/epoxy/DebugTimer#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/DebugTimer#`<init>`().
 //           ^^^^^^ reference java/lang/String#
 //                  ^^^ definition local0
     this.tag = tag;
@@ -39,7 +39,7 @@ class DebugTimer implements Timer {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void start(String sectionName) {
 //            ^^^^^ definition com/airbnb/epoxy/DebugTimer#start().
 //                  ^^^^^^ reference java/lang/String#
@@ -62,7 +62,7 @@ class DebugTimer implements Timer {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void stop() {
 //            ^^^^ definition com/airbnb/epoxy/DebugTimer#stop().
     if (startTime == -1) {

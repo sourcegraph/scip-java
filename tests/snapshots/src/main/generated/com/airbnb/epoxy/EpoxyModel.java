@@ -89,7 +89,7 @@ public abstract class EpoxyModel<T> {
   private long id;
 //             ^^ definition com/airbnb/epoxy/EpoxyModel#id.
   @LayoutRes private int layout;
-   ^^^^^^^^^ reference androidx/annotation/LayoutRes#
+// ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                       ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#layout.
   private boolean shown = true;
 //                ^^^^^ definition com/airbnb/epoxy/EpoxyModel#shown.
@@ -113,7 +113,7 @@ public abstract class EpoxyModel<T> {
    * allowed for AutoModels, and only if implicit adding is enabled.
    */
   EpoxyController controllerToStageTo;
-  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
+//^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#controllerToStageTo.
   private boolean currentlyInInterceptors;
 //                ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#currentlyInInterceptors.
@@ -122,7 +122,7 @@ public abstract class EpoxyModel<T> {
   private boolean hasDefaultId;
 //                ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#hasDefaultId.
   @Nullable private SpanSizeOverrideCallback spanSizeOverride;
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#
 //                                           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#spanSizeOverride.
 
@@ -534,12 +534,12 @@ public abstract class EpoxyModel<T> {
    * dynamically.
    */
   @LayoutRes
-   ^^^^^^^^^ reference androidx/annotation/LayoutRes#
+// ^^^^^^^^^ reference androidx/annotation/LayoutRes#
   protected abstract int getDefaultLayout();
 //                       ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#getDefaultLayout().
 
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   public EpoxyModel<T> layout(@LayoutRes int layoutRes) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
@@ -556,7 +556,7 @@ public abstract class EpoxyModel<T> {
   }
 
   @LayoutRes
-   ^^^^^^^^^ reference androidx/annotation/LayoutRes#
+// ^^^^^^^^^ reference androidx/annotation/LayoutRes#
   public final int getLayout() {
 //                 ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#getLayout().
     if (layout == 0) {
@@ -573,7 +573,7 @@ public abstract class EpoxyModel<T> {
    * Sets fields of the model to default ones.
    */
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   public EpoxyModel<T> reset() {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
@@ -846,7 +846,7 @@ public abstract class EpoxyModel<T> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean equals(Object o) {
 //               ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#equals().
 //                      ^^^^^^ reference java/lang/Object#
@@ -887,7 +887,7 @@ public abstract class EpoxyModel<T> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public int hashCode() {
 //           ^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#hashCode().
     int result = (int) (id ^ (id >>> 32));
@@ -978,7 +978,7 @@ public abstract class EpoxyModel<T> {
    * EpoxyController}
    */
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   public EpoxyModel<T> show() {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
@@ -993,7 +993,7 @@ public abstract class EpoxyModel<T> {
    * EpoxyController}
    */
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   public EpoxyModel<T> show(boolean show) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
@@ -1014,7 +1014,7 @@ public abstract class EpoxyModel<T> {
    * EpoxyController}
    */
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   public EpoxyModel<T> hide() {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
@@ -1086,7 +1086,7 @@ public abstract class EpoxyModel<T> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public String toString() {
 //       ^^^^^^ reference java/lang/String#
 //              ^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#toString().

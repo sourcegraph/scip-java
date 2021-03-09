@@ -22,12 +22,12 @@ import androidx.annotation.PluralsRes;
 public class QuantityStringResAttribute {
 //     ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#
   @PluralsRes private final int id;
-   ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
+// ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
 //                              ^^ definition com/airbnb/epoxy/QuantityStringResAttribute#id.
   private final int quantity;
 //                  ^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#quantity.
   @Nullable private final Object[] formatArgs;
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
 //                        ^^^^^^ reference java/lang/Object#
 //                                 ^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.
 
@@ -65,7 +65,7 @@ public class QuantityStringResAttribute {
   }
 
   @PluralsRes
-   ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
+// ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
   public int getId() {
 //           ^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#getId().
     return id;
@@ -79,7 +79,7 @@ public class QuantityStringResAttribute {
   }
 
   @Nullable
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
   public Object[] getFormatArgs() {
 //       ^^^^^^ reference java/lang/Object#
 //                ^^^^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#getFormatArgs().
@@ -114,7 +114,7 @@ public class QuantityStringResAttribute {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean equals(Object o) {
 //               ^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#equals().
 //                      ^^^^^^ reference java/lang/Object#
@@ -158,7 +158,7 @@ public class QuantityStringResAttribute {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public int hashCode() {
 //           ^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#hashCode().
     int result = id;

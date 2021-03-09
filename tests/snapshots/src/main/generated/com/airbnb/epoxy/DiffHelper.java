@@ -36,7 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * Helper to track changes in the models list.
  */
 class DiffHelper {
-^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#
+//^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#
   private ArrayList<ModelState> oldStateList = new ArrayList<>();
 //        ^^^^^^^^^ reference java/util/ArrayList#
 //                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
@@ -73,7 +73,7 @@ class DiffHelper {
 
 
   DiffHelper(BaseEpoxyAdapter adapter, boolean immutableModels) {
-  ^^^^^^ definition com/airbnb/epoxy/DiffHelper#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/DiffHelper#`<init>`().
 //           ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
 //                            ^^^^^^^ definition local0
 //                                             ^^^^^^^^^^^^^^^ definition local1
@@ -1084,7 +1084,7 @@ class DiffHelper {
    * Gets the next item in the list that has a pair, meaning it wasn't inserted or removed.
    */
   @Nullable
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
   private ModelState getNextItemWithPair(Iterator<ModelState> iterator) {
 //        ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                   ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#getNextItemWithPair().

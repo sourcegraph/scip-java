@@ -38,21 +38,21 @@ import java.lang.annotation.Target;
  * Alternatively, the {@link #options()} parameter can be used to configure a prop.
  */
 @Target({ElementType.METHOD, ElementType.FIELD})
- ^^^^^^ reference java/lang/annotation/Target#
+//^^^^^ reference java/lang/annotation/Target#
 //       ^^^^^^^^^^^ reference java/lang/annotation/ElementType#
 //                   ^^^^^^ reference java/lang/annotation/ElementType#METHOD.
 //                           ^^^^^^^^^^^ reference java/lang/annotation/ElementType#
 //                                       ^^^^^ reference java/lang/annotation/ElementType#FIELD.
 @Retention(RetentionPolicy.CLASS)
- ^^^^^^^^^ reference java/lang/annotation/Retention#
+//^^^^^^^^ reference java/lang/annotation/Retention#
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface ModelProp {
 //      ^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#
 
   enum Option {
-  ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#
-  ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#
+//^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#`<init>`().
     /**
      * By default every prop's hashCode and equals method is called when determining the
      * model's state. This option can be used to exclude an prop's hashCode/equals from
@@ -103,7 +103,7 @@ public @interface ModelProp {
 
   /** Specify any {@link Option} values that should be used when generating the model class. */
   Option[] options() default {};
-  ^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#
+//^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#
 //         ^^^^^^^ definition com/airbnb/epoxy/ModelProp#options().
 
   /**
@@ -111,7 +111,7 @@ public @interface ModelProp {
    * "@ModelProp(DoNotHash)".
    */
   Option[] value() default {};
-  ^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#
+//^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#
 //         ^^^^^ definition com/airbnb/epoxy/ModelProp#value().
 
   /**
@@ -126,7 +126,7 @@ public @interface ModelProp {
    * objects are not valid annotation parameters.
    */
   String defaultValue() default "";
-  ^^^^^^ reference java/lang/String#
+//^^^^^^ reference java/lang/String#
 //       ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#defaultValue().
 
   /**
@@ -136,6 +136,6 @@ public @interface ModelProp {
    * https://github.com/airbnb/epoxy/wiki/Generating-Models-from-View-Annotations#prop-groups
    */
   String group() default "";
-  ^^^^^^ reference java/lang/String#
+//^^^^^^ reference java/lang/String#
 //       ^^^^^ definition com/airbnb/epoxy/ModelProp#group().
 }

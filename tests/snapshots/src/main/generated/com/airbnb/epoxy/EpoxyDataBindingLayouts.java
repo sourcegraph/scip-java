@@ -38,18 +38,18 @@ import androidx.annotation.LayoutRes;
  * layout.
  */
 @Target(ElementType.TYPE)
- ^^^^^^ reference java/lang/annotation/Target#
+//^^^^^ reference java/lang/annotation/Target#
 //      ^^^^^^^^^^^ reference java/lang/annotation/ElementType#
 //                  ^^^^ reference java/lang/annotation/ElementType#TYPE.
 @Retention(RetentionPolicy.CLASS)
- ^^^^^^^^^ reference java/lang/annotation/Retention#
+//^^^^^^^^ reference java/lang/annotation/Retention#
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface EpoxyDataBindingLayouts {
 //      ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingLayouts#
   /** A list of databinding layout resources that should have EpoxyModel's generated for them. */
   @LayoutRes int[] value();
-   ^^^^^^^^^ reference androidx/annotation/LayoutRes#
+// ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                 ^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingLayouts#value().
 
   /**

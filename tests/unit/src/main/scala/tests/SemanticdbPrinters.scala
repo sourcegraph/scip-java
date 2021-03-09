@@ -49,12 +49,17 @@ object SemanticdbPrinters {
       }
     out
       .append(
-        if (r.getStartCharacter > 3)
+        if (r.getStartCharacter > 2)
           "// " + " " * (r.getStartCharacter - 3)
         else
-          " " * r.getStartCharacter
+          "//" //* r.getStartCharacter
       )
-      .append("^" * width)
+      .append(
+        if (r.getStartCharacter == 1)
+          "^" * (width-1)
+        else
+          "^" * width
+      )
       .append(" ")
       .append(occ.getRole.toString.toLowerCase)
       .append(" ")

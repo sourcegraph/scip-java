@@ -157,7 +157,7 @@ public abstract class BaseEpoxyAdapter
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public int getItemCount() {
 //           ^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#getItemCount().
     return getCurrentModels().size();
@@ -179,7 +179,7 @@ public abstract class BaseEpoxyAdapter
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public long getItemId(int position) {
 //            ^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#getItemId().
 //                          ^^^^^^^^ definition local5
@@ -194,7 +194,7 @@ public abstract class BaseEpoxyAdapter
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public int getItemViewType(int position) {
 //           ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#getItemViewType().
 //                               ^^^^^^^^ definition local6
@@ -206,7 +206,7 @@ public abstract class BaseEpoxyAdapter
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public EpoxyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 //       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                       ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onCreateViewHolder().
@@ -236,7 +236,7 @@ public abstract class BaseEpoxyAdapter
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onBindViewHolder(EpoxyViewHolder holder, int position) {
 //            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onBindViewHolder().
 //                             ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
@@ -251,7 +251,7 @@ public abstract class BaseEpoxyAdapter
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onBindViewHolder(EpoxyViewHolder holder, int position, List<Object> payloads) {
 //            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onBindViewHolder(+1).
 //                             ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
@@ -396,7 +396,7 @@ public abstract class BaseEpoxyAdapter
   }
 
   EpoxyModel<?> getModelForPosition(int position) {
-  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#getModelForPosition().
 //                                      ^^^^^^^^ definition local29
     return getCurrentModels().get(position);
@@ -406,7 +406,7 @@ public abstract class BaseEpoxyAdapter
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onViewRecycled(EpoxyViewHolder holder) {
 //            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onViewRecycled().
 //                           ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
@@ -435,9 +435,9 @@ public abstract class BaseEpoxyAdapter
   }
 
   @CallSuper
-   ^^^^^^^^^ reference androidx/annotation/CallSuper#
+// ^^^^^^^^^ reference androidx/annotation/CallSuper#
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onDetachedFromRecyclerView().
 //                                        ^^^^^^^ reference androidx/annotation/NonNull#
@@ -465,9 +465,9 @@ public abstract class BaseEpoxyAdapter
   }
 
   @CallSuper
-   ^^^^^^^^^ reference androidx/annotation/CallSuper#
+// ^^^^^^^^^ reference androidx/annotation/CallSuper#
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean onFailedToRecycleView(EpoxyViewHolder holder) {
 //               ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onFailedToRecycleView().
 //                                     ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
@@ -483,9 +483,9 @@ public abstract class BaseEpoxyAdapter
   }
 
   @CallSuper
-   ^^^^^^^^^ reference androidx/annotation/CallSuper#
+// ^^^^^^^^^ reference androidx/annotation/CallSuper#
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onViewAttachedToWindow(EpoxyViewHolder holder) {
 //            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onViewAttachedToWindow().
 //                                   ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
@@ -501,9 +501,9 @@ public abstract class BaseEpoxyAdapter
   }
 
   @CallSuper
-   ^^^^^^^^^ reference androidx/annotation/CallSuper#
+// ^^^^^^^^^ reference androidx/annotation/CallSuper#
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onViewDetachedFromWindow(EpoxyViewHolder holder) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onViewDetachedFromWindow().
 //                                     ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
@@ -669,7 +669,7 @@ public abstract class BaseEpoxyAdapter
    * using sticky header feature.
    */
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void setupStickyHeaderView(@NotNull View stickyHeader) {
 //            ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#setupStickyHeaderView().
 //                                   ^^^^^^^ reference org/jetbrains/annotations/NotNull#
@@ -686,7 +686,7 @@ public abstract class BaseEpoxyAdapter
    * using sticky header feature.
    */
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void teardownStickyHeaderView(@NotNull View stickyHeader) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#teardownStickyHeaderView().
 //                                      ^^^^^^^ reference org/jetbrains/annotations/NotNull#
@@ -703,7 +703,7 @@ public abstract class BaseEpoxyAdapter
    * using sticky header feature.
    */
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean isStickyHeader(int position) {
 //               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#isStickyHeader().
 //                                  ^^^^^^^^ definition local47

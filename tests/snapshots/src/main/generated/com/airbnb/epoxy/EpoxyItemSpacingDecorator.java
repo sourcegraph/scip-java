@@ -108,7 +108,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   }
 
   @Px
-   ^^ reference androidx/annotation/Px#
+// ^^ reference androidx/annotation/Px#
   public int getPxBetweenItems() {
 //           ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#getPxBetweenItems().
     return pxBetweenItems;
@@ -116,7 +116,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void getItemOffsets(Rect outRect, View view, RecyclerView parent, State state) {
 //            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#getItemOffsets().
 //                           ^^^^ reference _root_/

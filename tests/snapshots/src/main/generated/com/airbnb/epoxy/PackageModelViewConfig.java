@@ -27,11 +27,11 @@ import java.lang.annotation.Target;
  * packages.
  */
 @Target(ElementType.TYPE)
- ^^^^^^ reference java/lang/annotation/Target#
+//^^^^^ reference java/lang/annotation/Target#
 //      ^^^^^^^^^^^ reference java/lang/annotation/ElementType#
 //                  ^^^^ reference java/lang/annotation/ElementType#TYPE.
 @Retention(RetentionPolicy.CLASS)
- ^^^^^^^^^ reference java/lang/annotation/Retention#
+//^^^^^^^^ reference java/lang/annotation/Retention#
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface PackageModelViewConfig {
@@ -41,7 +41,7 @@ public @interface PackageModelViewConfig {
    * look up layout files.
    */
   Class<?> rClass();
-  ^^^^^ reference java/lang/Class#
+//^^^^^ reference java/lang/Class#
 //         ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#rClass().
   /**
    * A default layout pattern to be used for specifying layouts for generated models. If this is set
@@ -52,12 +52,12 @@ public @interface PackageModelViewConfig {
    * changed to "view_holder_%s" then the layout used would be "R.layout.view_holder_my_view".
    */
   String defaultLayoutPattern() default "%s";
-  ^^^^^^ reference java/lang/String#
+//^^^^^^ reference java/lang/String#
 //       ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#defaultLayoutPattern().
 
   /** An optional EpoxyModel subclass that generated models should extend. */
   Class<?> defaultBaseModelClass() default Void.class;
-  ^^^^^ reference java/lang/Class#
+//^^^^^ reference java/lang/Class#
 //         ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#defaultBaseModelClass().
 //                                         ^^^^ reference java/lang/Void#
 //                                              ^^^^^ reference java/lang/Void#class.
@@ -77,7 +77,7 @@ public @interface PackageModelViewConfig {
    * Suffix, which will be appended to generated model's names. "Model_" is a default value.
    */
   String generatedModelSuffix() default "Model_";
-  ^^^^^^ reference java/lang/String#
+//^^^^^^ reference java/lang/String#
 //       ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#generatedModelSuffix().
 
   /**
@@ -92,7 +92,7 @@ public @interface PackageModelViewConfig {
    * Default is false. This may also be set project wide with an annotation processor option.
    */
   Option disableGenerateBuilderOverloads() default Option.Default;
-  ^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
+//^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#disableGenerateBuilderOverloads().
 //                                                 ^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
 //                                                        ^^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#Default.
@@ -106,7 +106,7 @@ public @interface PackageModelViewConfig {
    * Default is false. This may also be set project wide with an annotation processor option.
    */
   Option disableGenerateGetters() default Option.Default;
-  ^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
+//^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
 //       ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#disableGenerateGetters().
 //                                        ^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
 //                                               ^^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#Default.
@@ -121,7 +121,7 @@ public @interface PackageModelViewConfig {
    * Default is false. This may also be set project wide with an annotation processor option.
    */
   Option disableGenerateReset() default Option.Default;
-  ^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
+//^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
 //       ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#disableGenerateReset().
 //                                      ^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
 //                                             ^^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#Default.
@@ -130,8 +130,8 @@ public @interface PackageModelViewConfig {
    * Enable or Disable an option, or inherit the default.
    */
   enum Option {
-  ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#
-  ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#
+//^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#`<init>`().
     Default,
 //  ^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Default.
     Enabled,

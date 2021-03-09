@@ -33,7 +33,7 @@ import androidx.annotation.Nullable;
  * support this then disable it in your base class (not recommended).
  */
 @SuppressWarnings("WeakerAccess")
- ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 //              ^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#`<init>`().
 //              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#
@@ -59,9 +59,9 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 //                   ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#diffHelper.
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   List<EpoxyModel<?>> getCurrentModels() {
-  ^^^^ reference java/util/List#
+//^^^^ reference java/util/List#
 //     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#getCurrentModels().
     return models;
@@ -106,9 +106,9 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   EpoxyModel<?> getModelForPosition(int position) {
-  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#getModelForPosition().
 //                                      ^^^^^^^^ definition local0
     EpoxyModel<?> model = models.get(position);
