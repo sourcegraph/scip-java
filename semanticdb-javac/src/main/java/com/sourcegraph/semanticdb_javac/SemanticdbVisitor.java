@@ -4,7 +4,6 @@ import com.sun.source.tree.*;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TreePathScanner;
-import com.sun.source.util.Trees;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.tree.EndPosTable;
 import com.sun.tools.javac.tree.JCTree;
@@ -75,11 +74,13 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   }
 
   private void emitSymbolInformation(Symbol sym) {
-    Semanticdb.SymbolInformation info =
-        Semanticdb.SymbolInformation.newBuilder()
-            .setSymbol(semanticdbSymbol(sym))
-            .setDocumentation(semanticdbDocumentation(sym))
-            .build();
+    Semanticdb.SymbolInformation.Builder builder =
+        Semanticdb.SymbolInformation.newBuilder().setSymbol(semanticdbSymbol(sym));
+    Semanticdb.Documentation documentation = semanticdbDocumentation(sym);
+    if (documentation != null) builder.setDocumentation(documentation);
+
+    Semanticdb.SymbolInformation info = builder.build();
+
     if (SemanticdbSymbols.isGlobal(info.getSymbol())) {
       symbolInfos.add(info);
     }
@@ -242,15 +243,18 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     return out.toString();
   }
 
-  private String semanticdbDocumentation(Symbol sym) {
+  private Semanticdb.Documentation semanticdbDocumentation(Symbol sym) {
     try {
       Elements elements = task.getElements();
-      if (elements == null) return "";
+      if (elements == null) return null;
 
       String doc = elements.getDocComment(sym);
-      if (doc == null) return "";
+      if (doc == null) return null;
 
-      return doc;
+      return Semanticdb.Documentation.newBuilder()
+          .setFormat(Semanticdb.Documentation.Format.JAVADOC)
+          .setMessage(doc)
+          .build();
     } catch (NullPointerException e) {
       // Can happen in `getDocComment()`
       // Caused by: java.lang.NullPointerException
@@ -259,7 +263,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       //   at com.sun.tools.javac.model.JavacElements.getDocComment(JavacElements.java:321)
       //   at
       // com.sourcegraph.semanticdb_javac.SemanticdbVisitor.semanticdbDocumentation(SemanticdbVisitor.java:233)
-      return "";
+      return null;
     }
   }
 }

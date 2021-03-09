@@ -86,12 +86,21 @@ message SymbolInformation {
   Kind kind = 3;
   int32 properties = 4;
   string display_name = 5;
-  // + spec deviation
-  string documentation = 20;
-  // - spec deviation
+  repeated string overridden_symbols = 19;
+  Documentation documentation = 20;
 }
 
-
+message Documentation {
+  enum Format {
+    HTML = 0;
+    MARKDOWN = 1;
+    JAVADOC = 2;
+    SCALADOC = 3;
+    KDOC = 4;
+  }
+  string message = 1;
+  Format format = 2;
+}
 
 message SymbolOccurrence {
   enum Role {
