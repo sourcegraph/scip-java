@@ -52,7 +52,7 @@ object SemanticdbPrinters {
         if (r.getStartCharacter > 2)
           "// " + " " * (r.getStartCharacter - 3)
         else
-          "//" //* r.getStartCharacter
+          "//"
       )
       .append(
         if (r.getStartCharacter == 1)
