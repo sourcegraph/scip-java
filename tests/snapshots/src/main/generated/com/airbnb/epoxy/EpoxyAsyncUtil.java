@@ -74,7 +74,7 @@ public final class EpoxyAsyncUtil {
    * each {@link Message} that is sent to it or {@link Runnable} that is posted to it
    */
   @MainThread
-   ^^^^^^^^^^ reference androidx/annotation/MainThread#
+// ^^^^^^^^^^ reference androidx/annotation/MainThread#
   public static Handler getAsyncBackgroundHandler() {
 //              ^^^^^^^ reference _root_/
 //                      ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#getAsyncBackgroundHandler().

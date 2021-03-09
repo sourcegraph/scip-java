@@ -45,7 +45,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeChanged(int positionStart, int itemCount) {
 //            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeChanged().
 //                                   ^^^^^^^^^^^^^ definition local1
@@ -59,7 +59,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeChanged(int positionStart, int itemCount, @Nullable Object payload) {
 //            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeChanged(+1).
 //                                   ^^^^^^^^^^^^^ definition local3
@@ -85,7 +85,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeInserted(int positionStart, int itemCount) {
 //            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeInserted().
 //                                    ^^^^^^^^^^^^^ definition local6
@@ -99,7 +99,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeRemoved(int positionStart, int itemCount) {
 //            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeRemoved().
 //                                   ^^^^^^^^^^^^^ definition local8
@@ -113,7 +113,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
 //            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeMoved().
 //                                 ^^^^^^^^^^^^ definition local10

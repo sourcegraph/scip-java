@@ -50,10 +50,10 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback;
  * Also adds support for canceling an in progress diff, and makes everything thread safe.
  */
 class AsyncEpoxyDiffer {
-^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#
+//^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#
 
   interface ResultCallback {
-  ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#
+//^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#
     void onResult(@NonNull DiffResult result);
 //       ^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#onResult().
 //                 ^^^^^^^ reference androidx/annotation/NonNull#
@@ -78,7 +78,7 @@ class AsyncEpoxyDiffer {
 //                                                        ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#
 
   AsyncEpoxyDiffer(
-  ^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#`<init>`().
       @NonNull Handler handler,
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^^^^ reference _root_/
@@ -110,7 +110,7 @@ class AsyncEpoxyDiffer {
   }
 
   @Nullable
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
   private volatile List<? extends EpoxyModel<?>> list;
 //                 ^^^^ reference java/util/List#
 //                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -122,7 +122,7 @@ class AsyncEpoxyDiffer {
    * Collections.emptyList when list is null, wrapped by Collections.unmodifiableList otherwise
    */
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   private volatile List<? extends EpoxyModel<?>> readOnlyList = Collections.emptyList();
 //                 ^^^^ reference java/util/List#
 //                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -142,9 +142,9 @@ class AsyncEpoxyDiffer {
    * @return current List.
    */
   @AnyThread
-   ^^^^^^^^^ reference androidx/annotation/AnyThread#
+// ^^^^^^^^^ reference androidx/annotation/AnyThread#
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   public List<? extends EpoxyModel<?>> getCurrentList() {
 //       ^^^^ reference java/util/List#
 //                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -158,9 +158,9 @@ class AsyncEpoxyDiffer {
    * diff to cancel, false otherwise.
    */
   @SuppressWarnings("WeakerAccess")
-   ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
+// ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
   @AnyThread
-   ^^^^^^^^^ reference androidx/annotation/AnyThread#
+// ^^^^^^^^^ reference androidx/annotation/AnyThread#
   public boolean cancelDiff() {
 //               ^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#cancelDiff().
     return generationTracker.finishMaxGeneration();
@@ -172,9 +172,9 @@ class AsyncEpoxyDiffer {
    * @return True if a diff operation is in progress.
    */
   @SuppressWarnings("WeakerAccess")
-   ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
+// ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
   @AnyThread
-   ^^^^^^^^^ reference androidx/annotation/AnyThread#
+// ^^^^^^^^^ reference androidx/annotation/AnyThread#
   public boolean isDiffInProgress() {
 //               ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#isDiffInProgress().
     return generationTracker.hasUnfinishedGeneration();
@@ -189,7 +189,7 @@ class AsyncEpoxyDiffer {
    * synced.
    */
   @AnyThread
-   ^^^^^^^^^ reference androidx/annotation/AnyThread#
+// ^^^^^^^^^ reference androidx/annotation/AnyThread#
   public synchronized boolean forceListOverride(@Nullable List<EpoxyModel<?>> newList) {
 //                            ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#forceListOverride().
 //                                               ^^^^^^^^ reference androidx/annotation/Nullable#
@@ -223,9 +223,9 @@ class AsyncEpoxyDiffer {
    * and the new List will be swapped in.
    */
   @AnyThread
-   ^^^^^^^^^ reference androidx/annotation/AnyThread#
+// ^^^^^^^^^ reference androidx/annotation/AnyThread#
   @SuppressWarnings("WeakerAccess")
-   ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
+// ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
   public void submitList(@Nullable final List<? extends EpoxyModel<?>> newList) {
 //            ^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#submitList().
 //                        ^^^^^^^^ reference androidx/annotation/Nullable#
@@ -400,7 +400,7 @@ class AsyncEpoxyDiffer {
    * set. False if the generation is old and the list was ignored.
    */
   @AnyThread
-   ^^^^^^^^^ reference androidx/annotation/AnyThread#
+// ^^^^^^^^^ reference androidx/annotation/AnyThread#
   private synchronized boolean tryLatchList(@Nullable List<? extends EpoxyModel<?>> newList,
 //                             ^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#tryLatchList().
 //                                           ^^^^^^^^ reference androidx/annotation/Nullable#

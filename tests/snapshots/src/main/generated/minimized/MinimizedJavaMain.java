@@ -1,7 +1,7 @@
 package minimized;
 
 @Annotations(value = "value", format = "format")
- ^^^^^^^^^^^ reference minimized/Annotations#
+//^^^^^^^^^^ reference minimized/Annotations#
 //           ^^^^^ reference minimized/Annotations#value().
 //                            ^^^^^^ reference minimized/Annotations#format().
 public class MinimizedJavaMain {

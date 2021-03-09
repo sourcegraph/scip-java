@@ -33,11 +33,11 @@ import androidx.annotation.LayoutRes;
  * boilerplate reduction.
  */
 @Target(ElementType.TYPE)
- ^^^^^^ reference java/lang/annotation/Target#
+//^^^^^ reference java/lang/annotation/Target#
 //      ^^^^^^^^^^^ reference java/lang/annotation/ElementType#
 //                  ^^^^ reference java/lang/annotation/ElementType#TYPE.
 @Retention(RetentionPolicy.CLASS)
- ^^^^^^^^^ reference java/lang/annotation/Retention#
+//^^^^^^^^ reference java/lang/annotation/Retention#
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface EpoxyModelClass {
@@ -47,7 +47,7 @@ public @interface EpoxyModelClass {
    * don't have to implement `getDefaultLayout`; it will be generated for you.
    */
   @LayoutRes int layout() default 0;
-   ^^^^^^^^^ reference androidx/annotation/LayoutRes#
+// ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //               ^^^^^^ definition com/airbnb/epoxy/EpoxyModelClass#layout().
 
   /**

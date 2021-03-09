@@ -27,14 +27,14 @@ import androidx.annotation.NonNull;
  * same as the handler's thread.
  */
 class HandlerExecutor implements Executor {
-^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#
+//^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#
 //                               ^^^^^^^^ reference java/util/concurrent/Executor#
   final Handler handler;
 //      ^^^^^^^ reference _root_/
 //              ^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#handler.
 
   HandlerExecutor(Handler handler) {
-  ^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#`<init>`().
 //                ^^^^^^^ reference _root_/
 //                        ^^^^^^^ definition local0
     this.handler = handler;
@@ -44,7 +44,7 @@ class HandlerExecutor implements Executor {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void execute(@NonNull Runnable command) {
 //            ^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#execute().
 //                     ^^^^^^^ reference androidx/annotation/NonNull#

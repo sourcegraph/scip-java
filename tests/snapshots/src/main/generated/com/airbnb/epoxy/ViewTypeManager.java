@@ -19,8 +19,8 @@ import androidx.annotation.VisibleForTesting;
 //                         ^^^^^^^^^^^^^^^^^ reference androidx/annotation/VisibleForTesting#
 
 class ViewTypeManager {
-^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#`<init>`().
-^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#
+//^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#`<init>`().
+//^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#
   private static final Map<Class, Integer> VIEW_TYPE_MAP = new HashMap<>();
 //                     ^^^ reference java/util/Map#
 //                         ^^^^^ reference java/lang/Class#
@@ -33,9 +33,9 @@ class ViewTypeManager {
    * look up what view type belongs to which model.
    */
   @Nullable
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
   EpoxyModel<?> lastModelForViewTypeLookup;
-  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#lastModelForViewTypeLookup.
 
   /**
@@ -45,7 +45,7 @@ class ViewTypeManager {
    * don't carry over values across tests.
    */
   @VisibleForTesting
-   ^^^^^^^^^^^^^^^^^ reference androidx/annotation/VisibleForTesting#
+// ^^^^^^^^^^^^^^^^^ reference androidx/annotation/VisibleForTesting#
   void resetMapForTesting() {
 //     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#resetMapForTesting().
     VIEW_TYPE_MAP.clear();
@@ -127,7 +127,7 @@ class ViewTypeManager {
    * shouldn't be needed, but is a guard against recyclerview behavior changing.
    */
   EpoxyModel<?> getModelForViewType(BaseEpoxyAdapter adapter, int viewType) {
-  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#getModelForViewType().
 //                                  ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
 //                                                   ^^^^^^^ definition local5

@@ -29,7 +29,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                               ^^^^ reference _root_/
   @LayoutRes private final int layoutRes;
-   ^^^^^^^^^ reference androidx/annotation/LayoutRes#
+// ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                             ^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#layoutRes.
   private View.OnClickListener onClickListener;
 //        ^^^^ reference View/
@@ -74,9 +74,9 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
   }
 
   @CallSuper
-   ^^^^^^^^^ reference androidx/annotation/CallSuper#
+// ^^^^^^^^^ reference androidx/annotation/CallSuper#
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void bind(@NonNull View view) {
 //            ^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#bind().
 //                  ^^^^^^^ reference androidx/annotation/NonNull#
@@ -97,9 +97,9 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
   }
 
   @CallSuper
-   ^^^^^^^^^ reference androidx/annotation/CallSuper#
+// ^^^^^^^^^ reference androidx/annotation/CallSuper#
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void unbind(@NonNull View view) {
 //            ^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#unbind().
 //                    ^^^^^^^ reference androidx/annotation/NonNull#
@@ -115,7 +115,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   protected int getDefaultLayout() {
 //              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#getDefaultLayout().
     return layoutRes;
@@ -123,7 +123,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public int getSpanSize(int totalSpanCount, int position, int itemCount) {
 //           ^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#getSpanSize().
 //                           ^^^^^^^^^^^^^^ definition local5
@@ -134,7 +134,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean equals(Object o) {
 //               ^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#equals().
 //                      ^^^^^^ reference java/lang/Object#
@@ -186,7 +186,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public int hashCode() {
 //           ^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#hashCode().
     int result = super.hashCode();

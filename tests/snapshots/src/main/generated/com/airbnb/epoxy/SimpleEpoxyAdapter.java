@@ -28,7 +28,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void enableDiffing() {
 //            ^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#enableDiffing().
     super.enableDiffing();
@@ -37,7 +37,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void notifyModelsChanged() {
 //            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#notifyModelsChanged().
     super.notifyModelsChanged();
@@ -46,7 +46,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public BoundViewHolders getBoundViewHolders() {
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#
 //                        ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#getBoundViewHolders().
@@ -56,7 +56,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void notifyModelChanged(EpoxyModel<?> model) {
 //            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#notifyModelChanged().
 //                               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -68,7 +68,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void addModels(EpoxyModel<?>... modelsToAdd) {
 //            ^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#addModels().
 //                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -80,7 +80,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void addModels(Collection<? extends EpoxyModel<?>> modelsToAdd) {
 //            ^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#addModels(+1).
 //                      ^^^^^^^^^^ reference java/util/Collection#
@@ -93,7 +93,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void insertModelBefore(EpoxyModel<?> modelToInsert, EpoxyModel<?> modelToInsertBefore) {
 //            ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#insertModelBefore().
 //                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -108,7 +108,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void insertModelAfter(EpoxyModel<?> modelToInsert, EpoxyModel<?> modelToInsertAfter) {
 //            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#insertModelAfter().
 //                             ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -123,7 +123,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void removeModel(EpoxyModel<?> model) {
 //            ^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#removeModel().
 //                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -135,7 +135,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void removeAllModels() {
 //            ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#removeAllModels().
     super.removeAllModels();
@@ -144,7 +144,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void removeAllAfterModel(EpoxyModel<?> model) {
 //            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#removeAllAfterModel().
 //                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -156,7 +156,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void showModel(EpoxyModel<?> model, boolean show) {
 //            ^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#showModel().
 //                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -170,7 +170,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void showModel(EpoxyModel<?> model) {
 //            ^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#showModel(+1).
 //                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -182,7 +182,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void showModels(EpoxyModel<?>... models) {
 //            ^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#showModels().
 //                       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -194,7 +194,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void showModels(boolean show, EpoxyModel<?>... models) {
 //            ^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(+1).
 //                               ^^^^ definition local13
@@ -208,7 +208,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void showModels(Iterable<EpoxyModel<?>> epoxyModels) {
 //            ^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(+2).
 //                       ^^^^^^^^ reference java/lang/Iterable#
@@ -221,7 +221,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void showModels(Iterable<EpoxyModel<?>> epoxyModels, boolean show) {
 //            ^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(+3).
 //                       ^^^^^^^^ reference java/lang/Iterable#
@@ -236,7 +236,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void hideModel(EpoxyModel<?> model) {
 //            ^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#hideModel().
 //                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -248,7 +248,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void hideModels(Iterable<EpoxyModel<?>> epoxyModels) {
 //            ^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#hideModels().
 //                       ^^^^^^^^ reference java/lang/Iterable#
@@ -261,7 +261,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void hideModels(EpoxyModel<?>... models) {
 //            ^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#hideModels(+1).
 //                       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -273,7 +273,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void hideAllAfterModel(EpoxyModel<?> model) {
 //            ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#hideAllAfterModel().
 //                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -285,7 +285,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public List<EpoxyModel<?>> getAllModelsAfter(EpoxyModel<?> model) {
 //       ^^^^ reference java/util/List#
 //            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -299,7 +299,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public int getModelPosition(EpoxyModel<?> model) {
 //           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#getModelPosition().
 //                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#

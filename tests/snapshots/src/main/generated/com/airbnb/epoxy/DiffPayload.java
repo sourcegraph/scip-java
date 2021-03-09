@@ -39,7 +39,7 @@ public class DiffPayload {
 //                                             ^^^^^^^^^^ definition com/airbnb/epoxy/DiffPayload#modelsById.
 
   DiffPayload(List<? extends EpoxyModel<?>> models) {
-  ^^^^^^ definition com/airbnb/epoxy/DiffPayload#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/DiffPayload#`<init>`().
 //            ^^^^ reference java/util/List#
 //                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                          ^^^^^^ definition local0
@@ -104,7 +104,7 @@ public class DiffPayload {
    * throw if an unexpected type is found.
    */
   @Nullable
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
   public static EpoxyModel<?> getModelFromPayload(List<Object> payloads, long modelId) {
 //              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffPayload#getModelFromPayload().
@@ -160,7 +160,7 @@ public class DiffPayload {
   }
 
   @VisibleForTesting
-   ^^^^^^^^^^^^^^^^^ reference androidx/annotation/VisibleForTesting#
+// ^^^^^^^^^^^^^^^^^ reference androidx/annotation/VisibleForTesting#
   boolean equalsForTesting(DiffPayload that) {
 //        ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffPayload#equalsForTesting().
 //                         ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#

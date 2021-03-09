@@ -21,7 +21,7 @@ import androidx.collection.LongSparseArray;
 
 /** Helper class for keeping track of {@link EpoxyViewHolder}s that are currently bound. */
 @SuppressWarnings("WeakerAccess")
- ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //     ^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#`<init>`().
 //     ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#
@@ -35,7 +35,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //                                                             ^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#
 
   @Nullable
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
   public EpoxyViewHolder get(EpoxyViewHolder holder) {
 //       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                       ^^^ definition com/airbnb/epoxy/BoundViewHolders#get().
@@ -79,7 +79,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public Iterator<EpoxyViewHolder> iterator() {
 //       ^^^^^^^^ reference java/util/Iterator#
 //                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
@@ -90,7 +90,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
   }
 
   @Nullable
-   ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference androidx/annotation/Nullable#
   public EpoxyViewHolder getHolderForModel(EpoxyModel<?> model) {
 //       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                       ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#getHolderForModel().

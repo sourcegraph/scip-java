@@ -44,8 +44,8 @@ import static com.airbnb.epoxy.UpdateOp.UPDATE;
 
 /** Helper class to collect changes in a diff, batching when possible. */
 class UpdateOpHelper {
-^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#`<init>`().
-^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#
+//^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#`<init>`().
+//^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#
   final List<UpdateOp> opList = new ArrayList<>();
 //      ^^^^ reference java/util/List#
 //           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#

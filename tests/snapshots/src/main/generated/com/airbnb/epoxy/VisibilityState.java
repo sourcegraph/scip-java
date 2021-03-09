@@ -21,11 +21,11 @@ public final class VisibilityState {
 //           ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#
 
   @Retention(RetentionPolicy.SOURCE)
-   ^^^^^^^^^ reference java/lang/annotation/Retention#
+// ^^^^^^^^^ reference java/lang/annotation/Retention#
 //           ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                           ^^^^^^ reference java/lang/annotation/RetentionPolicy#SOURCE.
   @IntDef({VISIBLE,
-   ^^^^^^ reference androidx/annotation/IntDef#
+// ^^^^^^ reference androidx/annotation/IntDef#
 //         ^^^^^^^ reference com/airbnb/epoxy/VisibilityState#VISIBLE.
            INVISIBLE,
 //         ^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#INVISIBLE.

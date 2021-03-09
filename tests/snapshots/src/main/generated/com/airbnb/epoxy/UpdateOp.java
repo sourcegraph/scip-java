@@ -27,20 +27,20 @@ import androidx.annotation.Nullable;
 
 /** Defines an operation that makes a change to the epoxy model list. */
 class UpdateOp {
-^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#
+//^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#
 
   @IntDef({ADD, REMOVE, UPDATE, MOVE})
-   ^^^^^^ reference androidx/annotation/IntDef#
+// ^^^^^^ reference androidx/annotation/IntDef#
 //         ^^^ reference com/airbnb/epoxy/UpdateOp#ADD.
 //              ^^^^^^ reference com/airbnb/epoxy/UpdateOp#REMOVE.
 //                      ^^^^^^ reference com/airbnb/epoxy/UpdateOp#UPDATE.
 //                              ^^^^ reference com/airbnb/epoxy/UpdateOp#MOVE.
   @Retention(RetentionPolicy.SOURCE)
-   ^^^^^^^^^ reference java/lang/annotation/Retention#
+// ^^^^^^^^^ reference java/lang/annotation/Retention#
 //           ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                           ^^^^^^ reference java/lang/annotation/RetentionPolicy#SOURCE.
   @interface Type {
-   ^^^^ definition com/airbnb/epoxy/UpdateOp#Type#
+// ^^^^ definition com/airbnb/epoxy/UpdateOp#Type#
   }
 
   static final int ADD = 0;
@@ -53,7 +53,7 @@ class UpdateOp {
 //                 ^^^^ definition com/airbnb/epoxy/UpdateOp#MOVE.
 
   @Type int type;
-   ^^^^ reference com/airbnb/epoxy/UpdateOp#Type#
+// ^^^^ reference com/airbnb/epoxy/UpdateOp#Type#
 //          ^^^^ definition com/airbnb/epoxy/UpdateOp#type.
   int positionStart;
 //    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#positionStart.
@@ -61,7 +61,7 @@ class UpdateOp {
   int itemCount;
 //    ^^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#itemCount.
   ArrayList<EpoxyModel<?>> payloads;
-  ^^^^^^^^^ reference java/util/ArrayList#
+//^^^^^^^^^ reference java/util/ArrayList#
 //          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                         ^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#payloads.
 
@@ -176,7 +176,7 @@ class UpdateOp {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public String toString() {
 //       ^^^^^^ reference java/lang/String#
 //              ^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#toString().

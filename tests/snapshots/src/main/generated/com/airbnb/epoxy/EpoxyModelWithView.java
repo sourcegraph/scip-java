@@ -48,7 +48,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
    * @see androidx.recyclerview.widget.RecyclerView.Adapter#getItemViewType(int)
    */
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   protected int getViewType() {
 //              ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#getViewType().
     return 0;
@@ -61,7 +61,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
    * @param parent The parent ViewGroup that the returned view will be added to.
    */
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   protected abstract T buildView(@NonNull ViewGroup parent);
 //                   ^ reference com/airbnb/epoxy/EpoxyModelWithView#[T]
 //                     ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#buildView().
@@ -70,7 +70,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
 //                                                  ^^^^^^ definition local0
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   protected final int getDefaultLayout() {
 //                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#getDefaultLayout().
     throw new UnsupportedOperationException(
@@ -80,7 +80,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public EpoxyModel<T> layout(@LayoutRes int layoutRes) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModelWithView#[T]

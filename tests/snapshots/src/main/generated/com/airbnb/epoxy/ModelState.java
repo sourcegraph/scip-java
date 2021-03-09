@@ -2,8 +2,8 @@ package com.airbnb.epoxy;
 
 /** Helper to store relevant information about a model that we need to determine if it changed. */
 class ModelState {
-^^^^^^ definition com/airbnb/epoxy/ModelState#`<init>`().
-^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#
+//^^^^^^ definition com/airbnb/epoxy/ModelState#`<init>`().
+//^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#
   long id;
 //     ^^ definition com/airbnb/epoxy/ModelState#id.
   int hashCode;
@@ -11,7 +11,7 @@ class ModelState {
   int position;
 //    ^^^^^^^^ definition com/airbnb/epoxy/ModelState#position.
   EpoxyModel<?> model;
-  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //              ^^^^^ definition com/airbnb/epoxy/ModelState#model.
 
   /**
@@ -20,7 +20,7 @@ class ModelState {
    * prevent having to look up the matching pair in a hash map every time.
    */
   ModelState pair;
-  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
+//^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //           ^^^^ definition com/airbnb/epoxy/ModelState#pair.
 
   /**
@@ -124,7 +124,7 @@ class ModelState {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public String toString() {
 //       ^^^^^^ reference java/lang/String#
 //              ^^^^^^^^ definition com/airbnb/epoxy/ModelState#toString().

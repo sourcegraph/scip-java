@@ -1,7 +1,7 @@
 package com.airbnb.epoxy;
 
 interface Timer {
-^^^^^ definition com/airbnb/epoxy/Timer#
+//^^^^^ definition com/airbnb/epoxy/Timer#
   void start(String sectionName);
 //     ^^^^^ definition com/airbnb/epoxy/Timer#start().
 //           ^^^^^^ reference java/lang/String#

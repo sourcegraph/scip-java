@@ -18,12 +18,12 @@ import com.airbnb.viewmodeladapter.R;
  * view.
  */
 class HiddenEpoxyModel extends EpoxyModel<Space> {
-^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
-^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#
+//^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
+//^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#
 //                             ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                        ^^^^^ reference _root_/
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public int getDefaultLayout() {
 //           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#getDefaultLayout().
     return R.layout.view_holder_empty_view;
@@ -33,7 +33,7 @@ class HiddenEpoxyModel extends EpoxyModel<Space> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public int getSpanSize(int spanCount, int position, int itemCount) {
 //           ^^^^^^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#getSpanSize().
 //                           ^^^^^^^^^ definition local0

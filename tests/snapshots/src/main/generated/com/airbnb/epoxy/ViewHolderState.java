@@ -57,14 +57,14 @@ import androidx.collection.LongSparseArray;
  * the {@link EpoxyModel}.
  */
 @SuppressWarnings("WeakerAccess")
- ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
-^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#
+//^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#
 //                            ^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#
 //                                            ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
 //                                                                  ^^^^^^^^^^ reference _root_/
   ViewHolderState() {
-  ^^^^^^ definition com/airbnb/epoxy/ViewHolderState#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/ViewHolderState#`<init>`().
   }
 
   private ViewHolderState(int size) {
@@ -76,14 +76,14 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public int describeContents() {
 //           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#describeContents().
     return 0;
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void writeToParcel(Parcel dest, int flags) {
 //            ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#writeToParcel().
 //                          ^^^^^^ reference _root_/

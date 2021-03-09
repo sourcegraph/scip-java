@@ -10,7 +10,7 @@ import java.util.List;
 //               ^^^^ reference java/util/List#
 
 @SuppressWarnings("ALL")
- ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public class RawTypes {
 //     ^^^^^^ definition minimized/RawTypes#`<init>`().
 //     ^^^^^^^^ definition minimized/RawTypes#

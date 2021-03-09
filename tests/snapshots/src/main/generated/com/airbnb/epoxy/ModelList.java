@@ -44,12 +44,12 @@ import androidx.annotation.NonNull;
  * diffing since we have a knowledge of what changed in the list.
  */
 class ModelList extends ArrayList<EpoxyModel<?>> {
-^^^^^^^^^ definition com/airbnb/epoxy/ModelList#
+//^^^^^^^^^ definition com/airbnb/epoxy/ModelList#
 //                      ^^^^^^^^^ reference java/util/ArrayList#
 //                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 
   ModelList(int expectedModelCount) {
-  ^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`().
 //              ^^^^^^^^^^^^^^^^^^ definition local0
     super(expectedModelCount);
 //  ^^^^^ reference java/util/ArrayList#`<init>`().
@@ -57,12 +57,12 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   ModelList() {
-  ^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`(+1).
+//^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`(+1).
 
   }
 
   interface ModelListObserver {
-  ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver#
+//^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver#
     void onItemRangeInserted(int positionStart, int itemCount);
 //       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeInserted().
 //                               ^^^^^^^^^^^^^ definition local1
@@ -144,7 +144,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public EpoxyModel<?> set(int index, EpoxyModel<?> element) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                     ^^^ definition com/airbnb/epoxy/ModelList#set().
@@ -177,7 +177,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean add(EpoxyModel<?> epoxyModel) {
 //               ^^^ definition com/airbnb/epoxy/ModelList#add().
 //                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -192,7 +192,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void add(int index, EpoxyModel<?> element) {
 //            ^^^ definition com/airbnb/epoxy/ModelList#add(+1).
 //                    ^^^^^ definition local14
@@ -209,7 +209,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean addAll(Collection<? extends EpoxyModel<?>> c) {
 //               ^^^^^^ definition com/airbnb/epoxy/ModelList#addAll().
 //                      ^^^^^^^^^^ reference java/util/Collection#
@@ -227,7 +227,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean addAll(int index, Collection<? extends EpoxyModel<?>> c) {
 //               ^^^^^^ definition com/airbnb/epoxy/ModelList#addAll(+1).
 //                          ^^^^^ definition local17
@@ -247,7 +247,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public EpoxyModel<?> remove(int index) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                     ^^^^^^ definition com/airbnb/epoxy/ModelList#remove().
@@ -262,7 +262,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean remove(Object o) {
 //               ^^^^^^ definition com/airbnb/epoxy/ModelList#remove(+1).
 //                      ^^^^^^ reference java/lang/Object#
@@ -288,7 +288,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public void clear() {
 //            ^^^^^ definition com/airbnb/epoxy/ModelList#clear().
     if (!isEmpty()) {
@@ -303,7 +303,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   protected void removeRange(int fromIndex, int toIndex) {
 //               ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#removeRange().
 //                               ^^^^^^^^^ definition local22
@@ -327,7 +327,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean removeAll(Collection<?> collection) {
 //               ^^^^^^^^^ definition com/airbnb/epoxy/ModelList#removeAll().
 //                         ^^^^^^^^^^ reference java/util/Collection#
@@ -361,7 +361,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public boolean retainAll(Collection<?> collection) {
 //               ^^^^^^^^^ definition com/airbnb/epoxy/ModelList#retainAll().
 //                         ^^^^^^^^^^ reference java/util/Collection#
@@ -395,9 +395,9 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public Iterator<EpoxyModel<?>> iterator() {
 //       ^^^^^^^^ reference java/util/Iterator#
 //                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -503,9 +503,9 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public ListIterator<EpoxyModel<?>> listIterator() {
 //       ^^^^^^^^^^^^ reference java/util/ListIterator#
 //                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -516,9 +516,9 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public ListIterator<EpoxyModel<?>> listIterator(int index) {
 //       ^^^^^^^^^^^^ reference java/util/ListIterator#
 //                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -662,9 +662,9 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   @NonNull
-   ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference androidx/annotation/NonNull#
   @Override
-   ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference java/lang/Override#
   public List<EpoxyModel<?>> subList(int start, int end) {
 //       ^^^^ reference java/util/List#
 //            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
