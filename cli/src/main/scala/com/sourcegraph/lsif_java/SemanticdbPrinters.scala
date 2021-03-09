@@ -1,4 +1,4 @@
-package tests
+package com.sourcegraph.lsif_java
 
 import scala.jdk.CollectionConverters._
 
@@ -56,7 +56,7 @@ object SemanticdbPrinters {
       )
       .append(
         if (r.getStartCharacter == 1)
-          "^" * (width-1)
+          "^" * (width - 1)
         else
           "^" * width
       )

@@ -119,6 +119,7 @@ lazy val cli = project
   .settings(
     moduleName := "lsif-java",
     mainClass.in(Compile) := Some("com.sourcegraph.lsif_java.LsifJava"),
+    baseDirectory.in(run) := baseDirectory.in(ThisBuild).value,
     buildInfoKeys :=
       Seq[BuildInfoKey](
         version,
@@ -164,6 +165,7 @@ lazy val cli = project
     nativeImageOutput := target.in(NativeImage).value / "lsif-java"
   )
   .enablePlugins(NativeImagePlugin, BuildInfoPlugin)
+  .dependsOn(plugin)
 
 def minimizedSourceDirectory =
   file("tests/minimized/src/main/java").getAbsoluteFile
