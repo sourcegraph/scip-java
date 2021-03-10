@@ -9,8 +9,8 @@ import java.util.function.Function;
 @SuppressWarnings("ALL")
 //^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public class AnonymousClasses {
-//     ^^^^^^ definition minimized/AnonymousClasses#`<init>`().
-//     ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses#
+//           ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses#
+//           ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses#`<init>`().
   public static int app(int n) {
 //                  ^^^ definition minimized/AnonymousClasses#app().
 //                          ^ definition local0
@@ -27,7 +27,6 @@ public class AnonymousClasses {
 //                   ^^^^^^^ reference java/lang/Integer#
 //                            ^^^^^^^ reference java/lang/Integer#
 //                            ^^^^^^^ reference java/lang/Integer#
-//                                       ^ definition local3 1:4
           @Override
 //         ^^^^^^^^ reference java/lang/Override#
           public Integer apply(Integer integer) {

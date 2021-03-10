@@ -1,7 +1,7 @@
 package com.airbnb.epoxy;
 
 public class IllegalEpoxyUsage extends RuntimeException {
-//     ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/IllegalEpoxyUsage#
+//           ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/IllegalEpoxyUsage#
 //                                     ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
   public IllegalEpoxyUsage(String message) {
 //       ^^^^^^ definition com/airbnb/epoxy/IllegalEpoxyUsage#`<init>`().

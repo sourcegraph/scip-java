@@ -2,11 +2,11 @@ package minimized;
 
 /** Example from https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.4 */
 public class TypeVariables {
-//     ^^^^^^ definition minimized/TypeVariables#`<init>`().
-//     ^^^^^^^^^^^^^ definition minimized/TypeVariables#
+//           ^^^^^^^^^^^^^ definition minimized/TypeVariables#
+//           ^^^^^^^^^^^^^ definition minimized/TypeVariables#`<init>`().
   static class C {
-//       ^ definition minimized/TypeVariables#C#
-//       ^^^^^^ definition minimized/TypeVariables#C#`<init>`().
+//             ^ definition minimized/TypeVariables#C#
+//             ^ definition minimized/TypeVariables#C#`<init>`().
     public void mCPublic() {}
 //              ^^^^^^^^ definition minimized/TypeVariables#C#mCPublic().
 
@@ -18,14 +18,14 @@ public class TypeVariables {
   }
 
   interface I {
-//^ definition minimized/TypeVariables#I#
+//          ^ definition minimized/TypeVariables#I#
     void mI();
 //       ^^ definition minimized/TypeVariables#I#mI().
   }
 
   static class CT extends C implements I {
-//       ^^ definition minimized/TypeVariables#CT#
-//       ^^^^^^ definition minimized/TypeVariables#CT#`<init>`().
+//             ^^ definition minimized/TypeVariables#CT#
+//             ^^ definition minimized/TypeVariables#CT#`<init>`().
 //                        ^ reference minimized/TypeVariables#C#
 //                                     ^ reference minimized/TypeVariables#I#
     public void mI() {}

@@ -41,7 +41,7 @@ import androidx.annotation.LayoutRes;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface EpoxyModelClass {
-//      ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelClass#
+//                ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelClass#
   /**
    * A layout resource that should be used as the default layout for the model. If you set this you
    * don't have to implement `getDefaultLayout`; it will be generated for you.

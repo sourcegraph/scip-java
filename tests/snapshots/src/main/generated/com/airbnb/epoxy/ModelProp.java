@@ -48,11 +48,11 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface ModelProp {
-//      ^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#
+//                ^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#
 
   enum Option {
-//^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#
-//^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#`<init>`().
+//     ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#
+//     ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#`<init>`().
     /**
      * By default every prop's hashCode and equals method is called when determining the
      * model's state. This option can be used to exclude an prop's hashCode/equals from

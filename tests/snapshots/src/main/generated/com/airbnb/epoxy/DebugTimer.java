@@ -6,7 +6,7 @@ import android.util.Log;
 //                  ^^^ reference android/util/Log#
 
 class DebugTimer implements Timer {
-//^^^^^^^^^^ definition com/airbnb/epoxy/DebugTimer#
+//    ^^^^^^^^^^ definition com/airbnb/epoxy/DebugTimer#
 //                          ^^^^^ reference com/airbnb/epoxy/Timer#
 
   private final String tag;

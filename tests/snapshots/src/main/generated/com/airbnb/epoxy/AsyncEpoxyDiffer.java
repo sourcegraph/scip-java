@@ -50,10 +50,10 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback;
  * Also adds support for canceling an in progress diff, and makes everything thread safe.
  */
 class AsyncEpoxyDiffer {
-//^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#
+//    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#
 
   interface ResultCallback {
-//^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#
+//          ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#
     void onResult(@NonNull DiffResult result);
 //       ^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#onResult().
 //                 ^^^^^^^ reference androidx/annotation/NonNull#
@@ -322,7 +322,6 @@ class AsyncEpoxyDiffer {
 //                   ^^^^^^^^^^^^^^^^ reference local13 6:5
 //                       ^^^^^^^^ reference java/lang/Runnable#
 //                       ^^^^^^^^ reference java/lang/Runnable#
-//                                  ^ definition local13 1:4
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
       public void run() {
@@ -371,7 +370,6 @@ class AsyncEpoxyDiffer {
 //                                            ^^^^^^^^^^^^^^^^ reference local20 8:5
 //                                                ^^^^^^^^ reference java/lang/Runnable#
 //                                                ^^^^^^^^ reference java/lang/Runnable#
-//                                                           ^ definition local20 1:4
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
       public void run() {
@@ -449,8 +447,8 @@ class AsyncEpoxyDiffer {
    * generation number is synced with the list state at the time it was created.
    */
   private static class GenerationTracker {
-//               ^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#`<init>`().
-//               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#
+//                     ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#
+//                     ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#`<init>`().
 
     // Max generation of currently scheduled runnable
     private volatile int maxScheduledGeneration;
@@ -507,7 +505,7 @@ class AsyncEpoxyDiffer {
   }
 
   private static class DiffCallback extends DiffUtil.Callback {
-//               ^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#
+//                     ^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#
 //                                          ^^^^^^^^ reference DiffUtil/
 //                                                   ^^^^^^^^ reference DiffUtil/Callback#
 

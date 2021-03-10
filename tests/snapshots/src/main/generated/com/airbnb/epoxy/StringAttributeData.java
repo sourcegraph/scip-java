@@ -24,7 +24,7 @@ import androidx.annotation.StringRes;
 //                         ^^^^^^^^^ reference androidx/annotation/StringRes#
 
 public class StringAttributeData {
-//     ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#
+//           ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#
   private final boolean hasDefault;
 //                      ^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#hasDefault.
   @Nullable private final CharSequence defaultString;

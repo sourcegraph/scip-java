@@ -57,7 +57,7 @@ import androidx.recyclerview.widget.RecyclerView.State;
  * are on the grid. Only designed to work with standard linear or grid layout managers.
  */
 public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
-//     ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#
 //                                             ^^^^^^^^^^^^ reference RecyclerView/
 //                                                          ^^^^^^^^^^^^^^ reference RecyclerView/ItemDecoration#
   private int pxBetweenItems;

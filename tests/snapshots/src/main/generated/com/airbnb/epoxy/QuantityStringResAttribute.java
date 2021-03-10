@@ -20,7 +20,7 @@ import androidx.annotation.PluralsRes;
 //                         ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
 
 public class QuantityStringResAttribute {
-//     ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#
   @PluralsRes private final int id;
 // ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
 //                              ^^ definition com/airbnb/epoxy/QuantityStringResAttribute#id.

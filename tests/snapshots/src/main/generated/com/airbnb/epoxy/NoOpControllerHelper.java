@@ -5,8 +5,8 @@ package com.airbnb.epoxy;
  * com.airbnb.epoxy.AutoModel} usage.
  */
 class NoOpControllerHelper extends ControllerHelper<EpoxyController> {
-//^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#`<init>`().
-//^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#
+//    ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#
+//    ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#`<init>`().
 //                                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerHelper#
 //                                                  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 

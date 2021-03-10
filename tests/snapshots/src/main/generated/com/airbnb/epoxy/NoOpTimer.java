@@ -1,8 +1,8 @@
 package com.airbnb.epoxy;
 
 class NoOpTimer implements Timer {
-//^^^^^^ definition com/airbnb/epoxy/NoOpTimer#`<init>`().
-//^^^^^^^^^ definition com/airbnb/epoxy/NoOpTimer#
+//    ^^^^^^^^^ definition com/airbnb/epoxy/NoOpTimer#
+//    ^^^^^^^^^ definition com/airbnb/epoxy/NoOpTimer#`<init>`().
 //                         ^^^^^ reference com/airbnb/epoxy/Timer#
   @Override
 // ^^^^^^^^ reference java/lang/Override#

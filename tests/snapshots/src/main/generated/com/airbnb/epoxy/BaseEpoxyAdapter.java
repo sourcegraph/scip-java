@@ -60,7 +60,7 @@ import androidx.recyclerview.widget.RecyclerView;
 //                                  ^^^^^^^^^^^^ reference androidx/recyclerview/widget/RecyclerView#
 
 public abstract class BaseEpoxyAdapter
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#
+//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#
     extends RecyclerView.Adapter<EpoxyViewHolder>
 //          ^^^^^^^^^^^^ reference RecyclerView/
 //                       ^^^^^^^ reference RecyclerView/Adapter#

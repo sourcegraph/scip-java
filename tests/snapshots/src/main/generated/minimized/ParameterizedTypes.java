@@ -1,8 +1,8 @@
 package minimized;
 
 public class ParameterizedTypes<A, B> {
-//     ^^^^^^ definition minimized/ParameterizedTypes#`<init>`().
-//     ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#
+//           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#
+//           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#`<init>`().
   public String app(A a, B b) {
 //       ^^^^^^ reference java/lang/String#
 //              ^^^ definition minimized/ParameterizedTypes#app().

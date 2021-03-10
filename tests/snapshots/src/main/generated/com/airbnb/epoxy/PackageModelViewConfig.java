@@ -35,7 +35,7 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface PackageModelViewConfig {
-//      ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#
+//                ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#
   /**
    * The R class used in this module (eg "com.example.app.R.class"). This is needed so Epoxy can
    * look up layout files.
@@ -130,8 +130,8 @@ public @interface PackageModelViewConfig {
    * Enable or Disable an option, or inherit the default.
    */
   enum Option {
-//^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#
-//^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#`<init>`().
+//     ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#
+//     ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#`<init>`().
     Default,
 //  ^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Default.
     Enabled,

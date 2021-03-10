@@ -19,7 +19,7 @@ import androidx.annotation.NonNull;
  * pattern when binding to a model.
  */
 public abstract class EpoxyHolder {
-//              ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#
+//                    ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#
 
   public EpoxyHolder(@NonNull ViewParent parent) {
 //       ^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#`<init>`().

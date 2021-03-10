@@ -2,8 +2,8 @@ package minimized;
 
 /** Example class docstring. */
 public class Docstrings {
-//     ^^^^^^ definition minimized/Docstrings#`<init>`().
-//     ^^^^^^^^^^ definition minimized/Docstrings#
+//           ^^^^^^^^^^ definition minimized/Docstrings#
+//           ^^^^^^^^^^ definition minimized/Docstrings#`<init>`().
 
   /** Example field docstring. */
   public static int field = 42;

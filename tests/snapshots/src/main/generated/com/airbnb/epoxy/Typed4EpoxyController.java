@@ -20,7 +20,7 @@ import android.os.Handler;
  * @see Typed3EpoxyController
  */
 public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController {
-//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Typed4EpoxyController#
+//                    ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Typed4EpoxyController#
 //                                                              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 
   private T data1;

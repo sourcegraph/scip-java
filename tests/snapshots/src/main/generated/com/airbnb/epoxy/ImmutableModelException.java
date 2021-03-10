@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
  * Thrown if a model is changed after it is added to an {@link com.airbnb.epoxy.EpoxyController}.
  */
 class ImmutableModelException extends RuntimeException {
-//^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#
+//    ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#
 //                                    ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
   private static final String MODEL_CANNOT_BE_CHANGED_MESSAGE =
 //                     ^^^^^^ reference java/lang/String#

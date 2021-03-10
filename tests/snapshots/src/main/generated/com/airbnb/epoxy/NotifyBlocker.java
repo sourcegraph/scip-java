@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
  * This observer throws upon any changes done outside of diffing.
  */
 class NotifyBlocker extends AdapterDataObserver {
-//^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#`<init>`().
-//^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#
+//    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#
+//    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#`<init>`().
 //                          ^^^^^^^^^^^^^^^^^^^ reference _root_/
 
   private boolean changesAllowed;

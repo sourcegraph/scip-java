@@ -36,7 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * Helper to track changes in the models list.
  */
 class DiffHelper {
-//^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#
+//    ^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#
   private ArrayList<ModelState> oldStateList = new ArrayList<>();
 //        ^^^^^^^^^ reference java/util/ArrayList#
 //                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#

@@ -32,8 +32,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
  * view holders to {@link com.airbnb.epoxy.EpoxyViewHolder} for simpler use with Epoxy.
  */
 public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback {
-//              ^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#`<init>`().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#
+//                    ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#
+//                    ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#`<init>`().
 //                                                     ^^^^^^^^^^^^^^^ reference ItemTouchHelper/
 //                                                                     ^^^^^^^^ reference ItemTouchHelper/Callback#
 

@@ -71,7 +71,7 @@ import static com.airbnb.epoxy.IdUtils.hashString64Bit;
  * @see EpoxyModelWithView
  */
 public abstract class EpoxyModel<T> {
-//              ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#
+//                    ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#
 
   /**
    * Counts how many of these objects are created, so that each new object can have a unique id .
@@ -657,7 +657,7 @@ public abstract class EpoxyModel<T> {
    * @see #addIf(AddPredicate, EpoxyController)
    */
   public interface AddPredicate {
-//       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#AddPredicate#
+//                 ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#AddPredicate#
     boolean addIf();
 //          ^^^^^ definition com/airbnb/epoxy/EpoxyModel#AddPredicate#addIf().
   }
@@ -714,7 +714,6 @@ public abstract class EpoxyModel<T> {
 //                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local38 11:7
 //                                               ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#
 //                                               ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#
-//                                                                          ^ definition local38 1:4
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
         public void onInterceptorsStarted(EpoxyController controller) {
@@ -938,7 +937,7 @@ public abstract class EpoxyModel<T> {
   }
 
   public interface SpanSizeOverrideCallback {
-//       ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#
+//                 ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#
     int getSpanSize(int totalSpanCount, int position, int itemCount);
 //      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#getSpanSize().
 //                      ^^^^^^^^^^^^^^ definition local54

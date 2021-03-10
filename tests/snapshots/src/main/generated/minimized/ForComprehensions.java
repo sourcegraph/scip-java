@@ -10,8 +10,8 @@ import java.util.List;
 //               ^^^^ reference java/util/List#
 
 public class ForComprehensions {
-//     ^^^^^^ definition minimized/ForComprehensions#`<init>`().
-//     ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions#
+//           ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions#
+//           ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions#`<init>`().
   public static int app(int n) {
 //                  ^^^ definition minimized/ForComprehensions#app().
 //                          ^ definition local0

@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
  * For use with {@link EpoxyModelTouchCallback}
  */
 public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouchCallback<T> {
-//     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxySwipeCallback#
+//               ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxySwipeCallback#
 //                                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyTouchCallback#
 //                                                                                       ^ reference com/airbnb/epoxy/EpoxySwipeCallback#[T]

@@ -35,7 +35,7 @@ import androidx.annotation.MainThread;
  * Various helpers for running Epoxy operations off the main thread.
  */
 public final class EpoxyAsyncUtil {
-//           ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#
+//                 ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#
   private EpoxyAsyncUtil() {
 //        ^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#`<init>`().
   }

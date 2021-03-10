@@ -41,7 +41,7 @@ import androidx.annotation.LayoutRes;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface ModelView {
-//      ^^^^^^^^^ definition com/airbnb/epoxy/ModelView#
+//                ^^^^^^^^^ definition com/airbnb/epoxy/ModelView#
 
   /**
    * Use with {@link #autoLayout()} to declare what layout parameters should be used to size your
@@ -49,8 +49,8 @@ public @interface ModelView {
    * layout_width} and {@code layout_height}.
    */
   enum Size {
-//^^^^ definition com/airbnb/epoxy/ModelView#Size#
-//^^^^^^ definition com/airbnb/epoxy/ModelView#Size#`<init>`().
+//     ^^^^ definition com/airbnb/epoxy/ModelView#Size#
+//     ^^^^ definition com/airbnb/epoxy/ModelView#Size#`<init>`().
     NONE,
 //  ^^^^ definition com/airbnb/epoxy/ModelView#Size#NONE.
     WRAP_WIDTH_WRAP_HEIGHT,

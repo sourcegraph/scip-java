@@ -27,7 +27,7 @@ import androidx.annotation.Nullable;
 
 /** Defines an operation that makes a change to the epoxy model list. */
 class UpdateOp {
-//^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#
+//    ^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#
 
   @IntDef({ADD, REMOVE, UPDATE, MOVE})
 // ^^^^^^ reference androidx/annotation/IntDef#
@@ -40,7 +40,7 @@ class UpdateOp {
 //           ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                           ^^^^^^ reference java/lang/annotation/RetentionPolicy#SOURCE.
   @interface Type {
-// ^^^^ definition com/airbnb/epoxy/UpdateOp#Type#
+//           ^^^^ definition com/airbnb/epoxy/UpdateOp#Type#
   }
 
   static final int ADD = 0;

@@ -17,8 +17,8 @@ import androidx.annotation.IntDef;
 //                         ^^^^^^ reference androidx/annotation/IntDef#
 
 public final class VisibilityState {
-//           ^^^^^^ definition com/airbnb/epoxy/VisibilityState#`<init>`().
-//           ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#
+//                 ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#
+//                 ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#`<init>`().
 
   @Retention(RetentionPolicy.SOURCE)
 // ^^^^^^^^^ reference java/lang/annotation/Retention#
@@ -40,7 +40,7 @@ public final class VisibilityState {
            PARTIAL_IMPRESSION_INVISIBLE})
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#PARTIAL_IMPRESSION_INVISIBLE.
   public @interface Visibility {
-//        ^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#Visibility#
+//                  ^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#Visibility#
   }
 
   /**

@@ -1,7 +1,7 @@
 package minimized;
 
 public class InnerClasses {
-//     ^^^^^^^^^^^^ definition minimized/InnerClasses#
+//           ^^^^^^^^^^^^ definition minimized/InnerClasses#
 
   private final int exampleField;
 //                  ^^^^^^^^^^^^ definition minimized/InnerClasses#exampleField.
@@ -16,8 +16,8 @@ public class InnerClasses {
   }
 
   public enum InnerEnum {
-//       ^^^^^^ definition minimized/InnerClasses#InnerEnum#`<init>`().
-//       ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum#
+//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum#
+//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum#`<init>`().
     A,
 //  ^ definition minimized/InnerClasses#InnerEnum#A.
     B,
@@ -27,7 +27,7 @@ public class InnerClasses {
   }
 
   public interface InnerInterface<A, B> {
-//       ^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerInterface#
+//                 ^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerInterface#
     B apply(A a);
 //  ^ reference minimized/InnerClasses#InnerInterface#[B]
 //    ^^^^^ definition minimized/InnerClasses#InnerInterface#apply().
@@ -36,14 +36,14 @@ public class InnerClasses {
   }
 
   public static class InnerStaticClass {
-//              ^^^^^^ definition minimized/InnerClasses#InnerStaticClass#`<init>`().
-//              ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#
+//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#
+//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#`<init>`().
     public static void innerStaticMethod() {}
 //                     ^^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#innerStaticMethod().
   }
 
   public class InnerClass implements InnerInterface<Integer, Integer> {
-//       ^^^^^^^^^^ definition minimized/InnerClasses#InnerClass#
+//             ^^^^^^^^^^ definition minimized/InnerClasses#InnerClass#
 //                                   ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#
 //                                                  ^^^^^^^ reference java/lang/Integer#
 //                                                           ^^^^^^^ reference java/lang/Integer#
@@ -165,7 +165,6 @@ public class InnerClasses {
 //                         ^^^^^^ reference java/lang/String#
 //                                 ^^^^^^ reference java/lang/String#
 //                                 ^^^^^^ reference java/lang/String#
-//                                           ^ definition local9 1:4
           @Override
 //         ^^^^^^^^ reference java/lang/Override#
           public String apply(String s) {

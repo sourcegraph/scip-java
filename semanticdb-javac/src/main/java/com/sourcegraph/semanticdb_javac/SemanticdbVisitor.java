@@ -1,9 +1,8 @@
 package com.sourcegraph.semanticdb_javac;
 
 import com.sun.source.tree.*;
-import com.sun.source.util.JavacTask;
-import com.sun.source.util.TaskEvent;
-import com.sun.source.util.TreePathScanner;
+import com.sun.source.util.*;
+import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.tree.EndPosTable;
 import com.sun.tools.javac.tree.JCTree;
@@ -11,6 +10,7 @@ import com.sun.tools.javac.util.JCDiagnostic;
 import com.sun.tools.javac.util.Position;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 
+import javax.lang.model.element.Element;
 import javax.lang.model.util.Elements;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -28,6 +28,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   private final JavacTask task;
   private final TaskEvent event;
   private final SemanticdbOptions options;
+  private final Trees trees;
   private final EndPosTable endPosTable;
   private final ArrayList<Semanticdb.SymbolOccurrence> occurrences;
   private final ArrayList<Semanticdb.SymbolInformation> symbolInfos;
@@ -39,6 +40,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     this.locals = new LocalSymbolsCache(); // Fresh cache per compilation unit.
     this.event = event;
     this.options = options;
+    this.trees = Trees.instance(task);
     if (event.getCompilationUnit() instanceof JCTree.JCCompilationUnit) {
       this.endPosTable = ((JCTree.JCCompilationUnit) event.getCompilationUnit()).endPositions;
     } else {
@@ -94,7 +96,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   public Void visitClass(ClassTree node, Void unused) {
     if (node instanceof JCTree.JCClassDecl) {
       JCTree.JCClassDecl cls = (JCTree.JCClassDecl) node;
-      emitSymbolOccurrence(cls.sym, cls, Role.DEFINITION, CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
+      emitSymbolOccurrence(
+          cls.sym, cls, Role.DEFINITION, CompilerRange.FROM_POINT_WITH_TEXT_SEARCH);
     }
     return super.visitClass(node, unused);
   }
@@ -103,8 +106,11 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   public Void visitMethod(MethodTree node, Void unused) {
     if (node instanceof JCTree.JCMethodDecl) {
       JCTree.JCMethodDecl meth = (JCTree.JCMethodDecl) node;
-      emitSymbolOccurrence(
-          meth.sym, meth, Role.DEFINITION, CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
+      CompilerRange range = CompilerRange.FROM_POINT_TO_SYMBOL_NAME;
+      if (meth.params.isEmpty() && (meth.sym.flags() & Flags.GENERATEDCONSTR) != 0L) {
+        range = CompilerRange.FROM_TEXT_SEARCH;
+      }
+      emitSymbolOccurrence(meth.sym, meth, Role.DEFINITION, range);
     }
     return super.visitMethod(node, unused);
   }
@@ -177,7 +183,11 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       start = pos.getStartPosition();
       end = pos.getEndPosition(endPosTable);
     }
-    if (start != Position.NOPOS && end != Position.NOPOS && end > start) {
+
+    if (kind.isFromTextSearch() && sym.name.length() > 0) {
+      return RangeFinder.findRange(
+          getCurrentPath(), trees, getCurrentPath().getCompilationUnit(), sym, start);
+    } else if (start != Position.NOPOS && end != Position.NOPOS && end > start) {
       LineMap lineMap = event.getCompilationUnit().getLineMap();
       Semanticdb.Range range =
           Semanticdb.Range.newBuilder()
