@@ -8,11 +8,16 @@ import com.sun.source.util.Trees;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Name;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.sourcegraph.semanticdb_javac.Debugging.pprint;
+
 public class RangeFinder {
+  private static final HashMap<CompilationUnitTree, String> contentsCache = new HashMap<>();
+
   public static Optional<Semanticdb.Range> findRange(
       TreePath path, Trees trees, CompilationUnitTree root, Element element, int startPos) {
     LineMap lineMap = root.getLineMap();
@@ -22,11 +27,11 @@ public class RangeFinder {
     int endPos = (int) trees.getSourcePositions().getEndPosition(root, path.getLeaf());
     // false for anonymous classes
     if (name.length() != 0) {
-      startPos = findNameIn(root, name, startPos, endPos);
+      startPos = findNameIn(root, name, startPos);
       endPos = startPos + name.length();
     }
 
-    if (endPos == -1) {
+    if (endPos == -1 || startPos == -1) {
       return Optional.empty();
     }
 
@@ -40,19 +45,21 @@ public class RangeFinder {
     return Optional.of(range);
   }
 
-  private static int findNameIn(CompilationUnitTree root, CharSequence name, int start, int end) {
-    String contents;
-    try {
-      contents = root.getSourceFile().getCharContent(true).toString();
-    } catch (IOException e) {
-      return -1;
-    }
+  private static int findNameIn(CompilationUnitTree root, CharSequence name, int start) {
+    String content =
+        contentsCache.computeIfAbsent(
+            root,
+            (s) -> {
+              try {
+                return root.getSourceFile().getCharContent(true).toString();
+              } catch (IOException e) {
+                return null;
+              }
+            });
 
-    if (end == -1) {
-      end = contents.length();
-    }
+    if (content == null) return -1;
 
-    int offset = contents.indexOf(" " + name, start);
+    int offset = content.indexOf(" " + name, start);
     if (offset > -1) {
       return offset + 1;
     }
