@@ -52,12 +52,10 @@ public class RangeFinder {
       end = contents.length();
     }
 
-    Matcher matcher = Pattern.compile("\\b" + name + "\\b").matcher(contents);
-    matcher.region(start, end);
-    if (matcher.find()) {
-      return matcher.start();
-    } else {
-      return -1;
+    int offset = contents.indexOf(" " + name, start);
+    if (offset > -1) {
+      return offset + 1;
     }
+    return -1;
   }
 }
