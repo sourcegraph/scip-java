@@ -1,8 +1,8 @@
 package minimized;
 
 public class ClassOf {
-//     ^^^^^^ definition minimized/ClassOf#`<init>`().
-//     ^^^^^^^ definition minimized/ClassOf#
+//           ^^^^^^^ definition minimized/ClassOf#
+//           ^^^^^^^ definition minimized/ClassOf#`<init>`().
   public static String app() {
 //              ^^^^^^ reference java/lang/String#
 //                     ^^^ definition minimized/ClassOf#app().

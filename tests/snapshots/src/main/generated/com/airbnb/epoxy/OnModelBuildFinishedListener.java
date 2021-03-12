@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
  * alerted to new model changes.
  */
 public interface OnModelBuildFinishedListener {
-//     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBuildFinishedListener#
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBuildFinishedListener#
   /**
    * Called after {@link EpoxyController#buildModels()} has run and changes have been notified to
    * the adapter. This will be called even if no changes existed.

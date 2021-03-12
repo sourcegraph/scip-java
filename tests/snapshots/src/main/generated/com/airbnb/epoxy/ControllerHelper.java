@@ -11,8 +11,8 @@ import java.util.List;
  * annotation processor.
  */
 public abstract class ControllerHelper<T extends EpoxyController> {
-//              ^^^^^^ definition com/airbnb/epoxy/ControllerHelper#`<init>`().
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#
+//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#
+//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#`<init>`().
 //                                               ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
   public abstract void resetAutoModels();
 //                     ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#resetAutoModels().

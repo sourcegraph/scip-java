@@ -18,8 +18,8 @@ import com.airbnb.viewmodeladapter.R;
  * view.
  */
 class HiddenEpoxyModel extends EpoxyModel<Space> {
-//^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
-//^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#
+//    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#
+//    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
 //                             ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                        ^^^^^ reference _root_/
   @Override

@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
  * Utilities for generating 64-bit long IDs from types such as {@link CharSequence}.
  */
 public final class IdUtils {
-//           ^^^^^^^ definition com/airbnb/epoxy/IdUtils#
+//                 ^^^^^^^ definition com/airbnb/epoxy/IdUtils#
   private IdUtils() {
 //        ^^^^^^ definition com/airbnb/epoxy/IdUtils#`<init>`().
   }

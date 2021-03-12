@@ -26,8 +26,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 //                                               ^^^^^^^^^^ reference androidx/recyclerview/widget/RecyclerView/ViewHolder#
 
 public class ListenersUtils {
-//     ^^^^^^ definition com/airbnb/epoxy/ListenersUtils#`<init>`().
-//     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ListenersUtils#
+//           ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ListenersUtils#
+//           ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ListenersUtils#`<init>`().
 
   @Nullable
 // ^^^^^^^^ reference androidx/annotation/Nullable#

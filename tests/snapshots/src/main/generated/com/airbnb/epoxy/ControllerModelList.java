@@ -8,7 +8,7 @@ package com.airbnb.epoxy;
  * why it doesn't do anything.
  */
 class ControllerModelList extends ModelList {
-//^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList#
+//    ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList#
 //                                ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
 
   private static final ModelListObserver OBSERVER = new ModelListObserver() {
@@ -17,7 +17,6 @@ class ControllerModelList extends ModelList {
 //                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^ reference local1 12:3
 //                                                      ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
 //                                                      ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
-//                                                                          ^ definition local1 1:4
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeInserted(int positionStart, int itemCount) {

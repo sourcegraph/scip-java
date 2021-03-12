@@ -1,8 +1,8 @@
 package minimized;
 
 public abstract class AbstractClasses {
-//              ^^^^^^ definition minimized/AbstractClasses#`<init>`().
-//              ^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#
+//                    ^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#
+//                    ^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#`<init>`().
   public String defaultImplementation() {
 //       ^^^^^^ reference java/lang/String#
 //              ^^^^^^^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#defaultImplementation().

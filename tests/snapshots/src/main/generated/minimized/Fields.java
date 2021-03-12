@@ -1,8 +1,8 @@
 package minimized;
 
 public class Fields {
-//     ^^^^^^ definition minimized/Fields#
-//     ^^^^^^ definition minimized/Fields#`<init>`().
+//           ^^^^^^ definition minimized/Fields#
+//           ^^^^^^ definition minimized/Fields#`<init>`().
   private final int privateField = 0;
 //                  ^^^^^^^^^^^^ definition minimized/Fields#privateField.
   protected int protectedField = 0;
@@ -17,16 +17,16 @@ public class Fields {
 //                  ^^^^^^^^^^^^^^^^^ definition minimized/Fields#staticPublicField.
 
   public class InnerFields {
-//       ^^^^^^ definition minimized/Fields#InnerFields#`<init>`().
-//       ^^^^^^^^^^^ definition minimized/Fields#InnerFields#
+//             ^^^^^^^^^^^ definition minimized/Fields#InnerFields#
+//             ^^^^^^^^^^^ definition minimized/Fields#InnerFields#`<init>`().
     public int publicInnerField = publicField;
 //             ^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerFields#publicInnerField.
 //                                ^^^^^^^^^^^ reference minimized/Fields#publicField.
   }
 
   public static class InnerStaticFields {
-//              ^^^^^^ definition minimized/Fields#InnerStaticFields#`<init>`().
-//              ^^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerStaticFields#
+//                    ^^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerStaticFields#
+//                    ^^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerStaticFields#`<init>`().
     public int publicNonStaticInnerField = 0;
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerStaticFields#publicNonStaticInnerField.
     public static int publicStaticInnerField = 0;

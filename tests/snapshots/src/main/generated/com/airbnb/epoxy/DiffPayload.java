@@ -29,7 +29,7 @@ import androidx.collection.LongSparseArray;
  * call.
  */
 public class DiffPayload {
-//     ^^^^^^^^^^^ definition com/airbnb/epoxy/DiffPayload#
+//           ^^^^^^^^^^^ definition com/airbnb/epoxy/DiffPayload#
   private final EpoxyModel<?> singleModel;
 //              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^^^^^ definition com/airbnb/epoxy/DiffPayload#singleModel.

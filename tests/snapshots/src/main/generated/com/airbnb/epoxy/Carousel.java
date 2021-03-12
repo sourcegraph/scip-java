@@ -110,7 +110,7 @@ import androidx.recyclerview.widget.SnapHelper;
 //                                            ^^^^ reference com/airbnb/epoxy/ModelView#Size#
 //                                                 ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelView#Size#MATCH_WIDTH_WRAP_HEIGHT.
 public class Carousel extends EpoxyRecyclerView {
-//     ^^^^^^^^ definition com/airbnb/epoxy/Carousel#
+//           ^^^^^^^^ definition com/airbnb/epoxy/Carousel#
 //                            ^^^^^^^^^^^^^^^^^ reference _root_/
   public static final int NO_VALUE_SET = -1;
 //                        ^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#NO_VALUE_SET.
@@ -122,7 +122,6 @@ public class Carousel extends EpoxyRecyclerView {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^ reference local1 7:7
 //        ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#SnapHelperFactory#
 //        ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#SnapHelperFactory#
-//                            ^ definition local1 2:3
 
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
@@ -768,7 +767,7 @@ public class Carousel extends EpoxyRecyclerView {
    * @see #setPadding(Padding)
    */
   public static class Padding {
-//              ^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#
+//                    ^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#
     public final int left;
 //                   ^^^^ definition com/airbnb/epoxy/Carousel#Padding#left.
     public final int top;
@@ -784,8 +783,8 @@ public class Carousel extends EpoxyRecyclerView {
 //                           ^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#paddingType.
 
     enum PaddingType {
-//  ^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType#`<init>`().
-//  ^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType#
+//       ^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType#
+//       ^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType#`<init>`().
       PX,
 //    ^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType#PX.
       DP,
@@ -1151,8 +1150,8 @@ public class Carousel extends EpoxyRecyclerView {
 
   /** Provide a SnapHelper implementation you want to use with a Carousel. */
   public abstract static class SnapHelperFactory {
-//                       ^^^^^^ definition com/airbnb/epoxy/Carousel#SnapHelperFactory#`<init>`().
-//                       ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#SnapHelperFactory#
+//                             ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#SnapHelperFactory#
+//                             ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#SnapHelperFactory#`<init>`().
     /**
      * Create and return a new instance of a {@link androidx.recyclerview.widget.SnapHelper} for use
      * with a Carousel.

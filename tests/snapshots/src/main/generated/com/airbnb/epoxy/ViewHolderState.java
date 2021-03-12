@@ -59,7 +59,7 @@ import androidx.collection.LongSparseArray;
 @SuppressWarnings("WeakerAccess")
 //^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
-//^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#
+//    ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#
 //                            ^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#
 //                                            ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
 //                                                                  ^^^^^^^^^^ reference _root_/
@@ -286,7 +286,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
    * parcelable support.
    */
   public static class ViewState extends SparseArray<Parcelable> implements Parcelable {
-//              ^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#
+//                    ^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#
 //                                      ^^^^^^^^^^^ reference _root_/
 //                                                  ^^^^^^^^^^ reference _root_/
 //                                                                         ^^^^^^^^^^ reference _root_/

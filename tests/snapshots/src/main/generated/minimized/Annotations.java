@@ -44,7 +44,7 @@ import static java.lang.annotation.ElementType.*;
 //                                                                    ^^^^^^^^^ reference java/lang/annotation/ElementType#PARAMETER.
 //                                                                               ^^^^ reference java/lang/annotation/ElementType#TYPE.
 public @interface Annotations {
-//      ^^^^^^^^^^^ definition minimized/Annotations#
+//                ^^^^^^^^^^^ definition minimized/Annotations#
 
   String value() default "";
 //^^^^^^ reference java/lang/String#

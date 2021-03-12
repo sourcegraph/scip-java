@@ -35,7 +35,7 @@ import androidx.annotation.Px;
  * instead of a specific view when binding to your model.
  */
 public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyModel<T> {
-//              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#
+//                    ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#
 //                                                   ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyHolder#
 //                                                                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                                   ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]

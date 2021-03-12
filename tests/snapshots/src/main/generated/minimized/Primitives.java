@@ -6,8 +6,8 @@ import java.util.Random;
 //               ^^^^^^ reference java/util/Random#
 
 public class Primitives {
-//     ^^^^^^ definition minimized/Primitives#`<init>`().
-//     ^^^^^^^^^^ definition minimized/Primitives#
+//           ^^^^^^^^^^ definition minimized/Primitives#
+//           ^^^^^^^^^^ definition minimized/Primitives#`<init>`().
   public static String app() {
 //              ^^^^^^ reference java/lang/String#
 //                     ^^^ definition minimized/Primitives#app().

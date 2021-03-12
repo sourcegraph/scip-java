@@ -63,8 +63,8 @@ import static androidx.recyclerview.widget.ItemTouchHelper.Callback.makeMovement
  * Epoxy view holders to remove some boilerplate for you.
  */
 public abstract class EpoxyTouchHelper {
-//              ^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#`<init>`().
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#
+//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#
+//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#`<init>`().
 
   /**
    * The entry point for setting up drag support.
@@ -85,7 +85,7 @@ public abstract class EpoxyTouchHelper {
   }
 
   public static class DragBuilder {
-//              ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder#
+//                    ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder#
 
     private final EpoxyController controller;
 //                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
@@ -120,7 +120,7 @@ public abstract class EpoxyTouchHelper {
   }
 
   public static class DragBuilder2 {
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#
+//                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#
 
     private final EpoxyController controller;
 //                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
@@ -210,7 +210,7 @@ public abstract class EpoxyTouchHelper {
   }
 
   public static class DragBuilder3 {
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#
+//                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#
 
     private final EpoxyController controller;
 //                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
@@ -322,7 +322,7 @@ public abstract class EpoxyTouchHelper {
   }
 
   public static class DragBuilder4<U extends EpoxyModel> {
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#
+//                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#
 //                                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 
     private final EpoxyController controller;
@@ -415,7 +415,6 @@ public abstract class EpoxyTouchHelper {
 //                                                        ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#controller.
 //                                                                       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#targetModelClass.
-//                                                                                         ^ definition local20 2:3
 //                                                                                         ^ definition local21 2:7
 //                                                                                         ^ definition local22 2:13
 //                                                                                           reference java/lang/ 2:2
@@ -543,8 +542,8 @@ public abstract class EpoxyTouchHelper {
   }
 
   public abstract static class DragCallbacks<T extends EpoxyModel>
-//                       ^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#`<init>`().
-//                       ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#
+//                             ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#
+//                             ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#`<init>`().
 //                                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
       implements EpoxyDragCallback<T> {
 //               ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyDragCallback#
@@ -636,7 +635,7 @@ public abstract class EpoxyTouchHelper {
   }
 
   public static class SwipeBuilder {
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#
+//                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#
 
     private final RecyclerView recyclerView;
 //                ^^^^^^^^^^^^ reference _root_/
@@ -707,7 +706,7 @@ public abstract class EpoxyTouchHelper {
   }
 
   public static class SwipeBuilder2 {
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#
+//                    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#
 
     private final RecyclerView recyclerView;
 //                ^^^^^^^^^^^^ reference _root_/
@@ -810,7 +809,7 @@ public abstract class EpoxyTouchHelper {
   }
 
   public static class SwipeBuilder3<U extends EpoxyModel> {
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#
+//                    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#
 //                                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 
     private final RecyclerView recyclerView;
@@ -892,7 +891,6 @@ public abstract class EpoxyTouchHelper {
 //                                                        ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
 //                                                        ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
 //                                                                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#targetModelClass.
-//                                                                                   ^ definition local74 2:3
 //                                                                                   ^ definition local75 2:7
 //                                                                                   ^ definition local76 2:13
 //                                                                                     reference java/lang/ 2:2
@@ -1040,8 +1038,8 @@ public abstract class EpoxyTouchHelper {
   }
 
   public abstract static class SwipeCallbacks<T extends EpoxyModel>
-//                       ^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#`<init>`().
-//                       ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#
+//                             ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#
+//                             ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#`<init>`().
 //                                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
       implements EpoxySwipeCallback<T> {
 //               ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxySwipeCallback#

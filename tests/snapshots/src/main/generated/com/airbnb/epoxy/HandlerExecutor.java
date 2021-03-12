@@ -27,7 +27,7 @@ import androidx.annotation.NonNull;
  * same as the handler's thread.
  */
 class HandlerExecutor implements Executor {
-//^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#
+//    ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#
 //                               ^^^^^^^^ reference java/util/concurrent/Executor#
   final Handler handler;
 //      ^^^^^^^ reference _root_/

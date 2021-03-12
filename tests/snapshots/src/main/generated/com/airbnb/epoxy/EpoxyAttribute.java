@@ -35,14 +35,14 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface EpoxyAttribute {
-//      ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#
+//                ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#
   /**
    * Options that can be included on the attribute to affect how the model's generated class is
    * created.
    */
   enum Option {
-//^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#
-//^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`().
+//     ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#
+//     ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`().
     /**
      * A getter is generated for this attribute by default. Add this option to prevent a getter from
      * being generated.

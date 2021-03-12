@@ -1,8 +1,8 @@
 package minimized;
 
 public class Methods {
-//     ^^^^^^ definition minimized/Methods#`<init>`().
-//     ^^^^^^^ definition minimized/Methods#
+//           ^^^^^^^ definition minimized/Methods#
+//           ^^^^^^^ definition minimized/Methods#`<init>`().
   private int overload(int value) {
 //            ^^^^^^^^ definition minimized/Methods#overload().
 //                         ^^^^^ definition local0

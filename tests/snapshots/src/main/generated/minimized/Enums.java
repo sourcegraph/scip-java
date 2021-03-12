@@ -7,7 +7,7 @@ import java.util.Arrays;
 //               ^^^^^^ reference java/util/Arrays#
 
 public enum Enums {
-//     ^^^^^ definition minimized/Enums#
+//          ^^^^^ definition minimized/Enums#
   A("A"),
 //^ definition minimized/Enums#A.
 // ^^^^^ reference minimized/Enums#`<init>`().

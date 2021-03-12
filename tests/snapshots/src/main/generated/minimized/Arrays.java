@@ -1,8 +1,8 @@
 package minimized;
 
 public class Arrays {
-//     ^^^^^^ definition minimized/Arrays#
-//     ^^^^^^ definition minimized/Arrays#`<init>`().
+//           ^^^^^^ definition minimized/Arrays#
+//           ^^^^^^ definition minimized/Arrays#`<init>`().
   public static String app() {
 //              ^^^^^^ reference java/lang/String#
 //                     ^^^ definition minimized/Arrays#app().

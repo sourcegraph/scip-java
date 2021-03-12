@@ -43,7 +43,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
  * Wraps the result of {@link AsyncEpoxyDiffer#submitList(List)}.
  */
 public class DiffResult {
-//     ^^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#
+//           ^^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#
   @NonNull final List<? extends EpoxyModel<?>> previousModels;
 // ^^^^^^^ reference androidx/annotation/NonNull#
 //               ^^^^ reference java/util/List#
