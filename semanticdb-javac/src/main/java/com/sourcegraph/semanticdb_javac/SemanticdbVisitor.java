@@ -49,7 +49,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     }
     this.occurrences = new ArrayList<>();
     this.symbolInfos = new ArrayList<>();
-    // this.source = "";
+    this.source = semanticdbText();
   }
 
   public Semanticdb.TextDocument buildTextDocument(CompilationUnitTree tree) {
@@ -60,7 +60,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         .setSchema(Semanticdb.Schema.SEMANTICDB4)
         .setLanguage(Semanticdb.Language.JAVA)
         .setUri(semanticdbUri())
-        .setText(semanticdbText(!options.includeText))
+        .setText(options.includeText ? this.source : "")
         .setMd5(semanticdbMd5())
         .addAllOccurrences(occurrences)
         .addAllSymbols(symbolInfos)
@@ -188,12 +188,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
     if (kind.isFromTextSearch() && sym.name.length() > 0) {
       return RangeFinder.findRange(
-          getCurrentPath(),
-          trees,
-          getCurrentPath().getCompilationUnit(),
-          sym,
-          start,
-          semanticdbText(false));
+          getCurrentPath(), trees, getCurrentPath().getCompilationUnit(), sym, start, this.source);
     } else if (start != Position.NOPOS && end != Position.NOPOS && end > start) {
       LineMap lineMap = event.getCompilationUnit().getLineMap();
       Semanticdb.Range range =
@@ -230,8 +225,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     }
   }
 
-  private String semanticdbText(boolean noop) {
-    if (noop) return "";
+  private String semanticdbText() {
     if (source != null) return source;
     try {
       source = event.getSourceFile().getCharContent(true).toString();
