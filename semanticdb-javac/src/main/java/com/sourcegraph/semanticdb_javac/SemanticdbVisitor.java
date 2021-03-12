@@ -32,6 +32,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   private final EndPosTable endPosTable;
   private final ArrayList<Semanticdb.SymbolOccurrence> occurrences;
   private final ArrayList<Semanticdb.SymbolInformation> symbolInfos;
+  private String source;
 
   public SemanticdbVisitor(
       JavacTask task, GlobalSymbolsCache globals, TaskEvent event, SemanticdbOptions options) {
@@ -48,6 +49,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     }
     this.occurrences = new ArrayList<>();
     this.symbolInfos = new ArrayList<>();
+    // this.source = "";
   }
 
   public Semanticdb.TextDocument buildTextDocument(CompilationUnitTree tree) {
@@ -58,7 +60,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         .setSchema(Semanticdb.Schema.SEMANTICDB4)
         .setLanguage(Semanticdb.Language.JAVA)
         .setUri(semanticdbUri())
-        .setText(semanticdbText())
+        .setText(semanticdbText(!options.includeText))
         .setMd5(semanticdbMd5())
         .addAllOccurrences(occurrences)
         .addAllSymbols(symbolInfos)
@@ -186,7 +188,12 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
     if (kind.isFromTextSearch() && sym.name.length() > 0) {
       return RangeFinder.findRange(
-          getCurrentPath(), trees, getCurrentPath().getCompilationUnit(), sym, start);
+          getCurrentPath(),
+          trees,
+          getCurrentPath().getCompilationUnit(),
+          sym,
+          start,
+          semanticdbText(false));
     } else if (start != Position.NOPOS && end != Position.NOPOS && end > start) {
       LineMap lineMap = event.getCompilationUnit().getLineMap();
       Semanticdb.Range range =
@@ -223,13 +230,15 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     }
   }
 
-  private String semanticdbText() {
-    if (!options.includeText) return "";
+  private String semanticdbText(boolean noop) {
+    if (noop) return "";
+    if (source != null) return source;
     try {
-      return event.getSourceFile().getCharContent(true).toString();
+      source = event.getSourceFile().getCharContent(true).toString();
     } catch (IOException e) {
-      return "";
+      source = "";
     }
+    return source;
   }
 
   private String semanticdbMd5() {
