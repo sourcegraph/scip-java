@@ -3,6 +3,8 @@ package minimized;
 public class ParameterizedTypes<A, B> {
 //           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#
 //           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#`<init>`().
+//                              ^ definition minimized/ParameterizedTypes#[A]
+//                                 ^ definition minimized/ParameterizedTypes#[B]
   public String app(A a, B b) {
 //       ^^^^^^ reference java/lang/String#
 //              ^^^ definition minimized/ParameterizedTypes#app().
