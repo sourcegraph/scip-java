@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Optional;
 
+import static com.sourcegraph.semanticdb_javac.Debugging.pprint;
+
 /** Walks the AST of a typechecked compilation unit and generates a SemanticDB TextDocument. */
 public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
@@ -54,6 +56,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   }
 
   public Semanticdb.TextDocument buildTextDocument(CompilationUnitTree tree) {
+    // pprint(semanticdbUri());
     this.scan(tree, null); // Trigger recursive AST traversal to collect SemanticDB information.
 
     return Semanticdb.TextDocument.newBuilder()
@@ -80,6 +83,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   private void emitSymbolInformation(Symbol sym) {
     Semanticdb.SymbolInformation.Builder builder =
         Semanticdb.SymbolInformation.newBuilder().setSymbol(semanticdbSymbol(sym));
+    // .setSignature(semanticdbSignature(sym));
     Semanticdb.Documentation documentation = semanticdbDocumentation(sym);
     if (documentation != null) builder.setDocumentation(documentation);
 
@@ -178,6 +182,10 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   // =================================================
   // Utilities to generate SemanticDB data structures.
   // =================================================
+
+  private Semanticdb.Signature semanticdbSignature(Symbol sym) {
+    return new SemanticdbSignatures(globals, locals).generateSignature(sym);
+  }
 
   private String semanticdbSymbol(Symbol sym) {
     return globals.semanticdbSymbol(sym, locals);
