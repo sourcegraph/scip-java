@@ -720,7 +720,7 @@ public abstract class EpoxyModel<T> {
         public void onInterceptorsStarted(EpoxyController controller) {
 //                  ^^^^^^^^^^^^^^^^^^^^^ definition local39
 //                                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
-//                                                        ^^^^^^^^^^ definition local40
+//                                                        ^^^^^^^^^^ definition local41
           currentlyInInterceptors = true;
 //        ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#currentlyInInterceptors.
         }
@@ -728,7 +728,7 @@ public abstract class EpoxyModel<T> {
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
         public void onInterceptorsFinished(EpoxyController controller) {
-//                  ^^^^^^^^^^^^^^^^^^^^^^ definition local41
+//                  ^^^^^^^^^^^^^^^^^^^^^^ definition local40
 //                                         ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                                                         ^^^^^^^^^^ definition local42
           hashCodeWhenAdded = EpoxyModel.this.hashCode();

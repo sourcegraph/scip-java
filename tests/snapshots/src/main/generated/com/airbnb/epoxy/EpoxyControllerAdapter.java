@@ -591,35 +591,35 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
         public boolean areItemsTheSame(EpoxyModel<?> oldItem, EpoxyModel<?> newItem) {
 //                     ^^^^^^^^^^^^^^^ definition local36
 //                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                   ^^^^^^^ definition local37
+//                                                   ^^^^^^^ definition local39
 //                                                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                                          ^^^^^^^ definition local38
+//                                                                          ^^^^^^^ definition local40
           return oldItem.id() == newItem.id();
-//               ^^^^^^^ reference local37
+//               ^^^^^^^ reference local39
 //                       ^^ reference com/airbnb/epoxy/EpoxyModel#id().
-//                               ^^^^^^^ reference local38
+//                               ^^^^^^^ reference local40
 //                                       ^^ reference com/airbnb/epoxy/EpoxyModel#id().
         }
 
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
         public boolean areContentsTheSame(EpoxyModel<?> oldItem, EpoxyModel<?> newItem) {
-//                     ^^^^^^^^^^^^^^^^^^ definition local39
+//                     ^^^^^^^^^^^^^^^^^^ definition local37
 //                                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                      ^^^^^^^ definition local40
+//                                                      ^^^^^^^ definition local41
 //                                                               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                                             ^^^^^^^ definition local41
+//                                                                             ^^^^^^^ definition local42
           return oldItem.equals(newItem);
-//               ^^^^^^^ reference local40
+//               ^^^^^^^ reference local41
 //                       ^^^^^^ reference com/airbnb/epoxy/EpoxyModel#equals().
-//                              ^^^^^^^ reference local41
+//                              ^^^^^^^ reference local42
         }
 
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
         public Object getChangePayload(EpoxyModel<?> oldItem, EpoxyModel<?> newItem) {
 //             ^^^^^^ reference java/lang/Object#
-//                    ^^^^^^^^^^^^^^^^ definition local42
+//                    ^^^^^^^^^^^^^^^^ definition local38
 //                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                   ^^^^^^^ definition local43
 //                                                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#

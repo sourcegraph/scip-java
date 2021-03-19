@@ -56,7 +56,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   }
 
   public Semanticdb.TextDocument buildTextDocument(CompilationUnitTree tree) {
-    // pprint(semanticdbUri());
+    pprint(semanticdbUri());
     this.scan(tree, null); // Trigger recursive AST traversal to collect SemanticDB information.
 
     return Semanticdb.TextDocument.newBuilder()
@@ -83,9 +83,10 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   private void emitSymbolInformation(Symbol sym) {
     Semanticdb.SymbolInformation.Builder builder =
         Semanticdb.SymbolInformation.newBuilder().setSymbol(semanticdbSymbol(sym));
-    // .setSignature(semanticdbSignature(sym));
     Semanticdb.Documentation documentation = semanticdbDocumentation(sym);
     if (documentation != null) builder.setDocumentation(documentation);
+    Semanticdb.Signature signature = semanticdbSignature(sym);
+    if (signature != null) builder.setSignature(signature);
 
     Semanticdb.SymbolInformation info = builder.build();
 

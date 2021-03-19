@@ -21,8 +21,8 @@ class ControllerModelList extends ModelList {
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeInserted(int positionStart, int itemCount) {
 //              ^^^^^^^^^^^^^^^^^^^ definition local2
-//                                      ^^^^^^^^^^^^^ definition local3
-//                                                         ^^^^^^^^^ definition local4
+//                                      ^^^^^^^^^^^^^ definition local4
+//                                                         ^^^^^^^^^ definition local5
       throw new IllegalStateException(
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:75
 //              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
@@ -32,7 +32,7 @@ class ControllerModelList extends ModelList {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeRemoved(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^ definition local5
+//              ^^^^^^^^^^^^^^^^^^ definition local3
 //                                     ^^^^^^^^^^^^^ definition local6
 //                                                        ^^^^^^^^^ definition local7
       throw new IllegalStateException(

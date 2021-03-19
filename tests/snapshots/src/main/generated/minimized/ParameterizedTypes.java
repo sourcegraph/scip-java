@@ -1,17 +1,15 @@
 package minimized;
 
-import java.util.List;
+import java.util.Map;
 //     ^^^^ reference java/
 //          ^^^^ reference java/util/
-//               ^^^^ reference java/util/List#
+//               ^^^ reference java/util/Map#
 
 public class ParameterizedTypes<A, B> {
 //           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#
 //           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#`<init>`().
 //                              ^ definition minimized/ParameterizedTypes#[A]
 //                                 ^ definition minimized/ParameterizedTypes#[B]
-  //Class<?> clazz;
-
   public String app(A a, B b) {
 //       ^^^^^^ reference java/lang/String#
 //              ^^^ definition minimized/ParameterizedTypes#app().
@@ -25,7 +23,8 @@ public class ParameterizedTypes<A, B> {
 //                        ^ reference local1
   }
 
-  public List<?> doStuff() { return null; }
-//       ^^^^ reference java/util/List#
-//               ^^^^^^^ definition minimized/ParameterizedTypes#doStuff().
+  public Map<? extends String, ?> doStuff() { return null; }
+//       ^^^ reference java/util/Map#
+//                     ^^^^^^ reference java/lang/String#
+//                                ^^^^^^^ definition minimized/ParameterizedTypes#doStuff().
 }

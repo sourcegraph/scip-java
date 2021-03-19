@@ -114,24 +114,24 @@ class DiffHelper {
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeChanged(int positionStart, int itemCount) {
 //              ^^^^^^^^^^^^^^^^^^ definition local4
-//                                     ^^^^^^^^^^^^^ definition local5
-//                                                        ^^^^^^^^^ definition local6
+//                                     ^^^^^^^^^^^^^ definition local8
+//                                                        ^^^^^^^^^ definition local9
       for (int i = positionStart; i < positionStart + itemCount; i++) {
-//             ^ definition local7
-//                 ^^^^^^^^^^^^^ reference local5
-//                                ^ reference local7
-//                                    ^^^^^^^^^^^^^ reference local5
-//                                                    ^^^^^^^^^ reference local6
-//                                                               ^ reference local7
+//             ^ definition local10
+//                 ^^^^^^^^^^^^^ reference local8
+//                                ^ reference local10
+//                                    ^^^^^^^^^^^^^ reference local8
+//                                                    ^^^^^^^^^ reference local9
+//                                                               ^ reference local10
         currentStateList.get(i).hashCode = adapter.getCurrentModels().get(i).hashCode();
 //      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
 //                       ^^^ reference java/util/ArrayList#get().
-//                           ^ reference local7
+//                           ^ reference local10
 //                              ^^^^^^^^ reference com/airbnb/epoxy/ModelState#hashCode.
 //                                         ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
 //                                                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
 //                                                                    ^^^ reference java/util/List#get().
-//                                                                        ^ reference local7
+//                                                                        ^ reference local10
 //                                                                           ^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#hashCode().
       }
     }
@@ -139,93 +139,93 @@ class DiffHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeInserted(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^^ definition local8
-//                                      ^^^^^^^^^^^^^ definition local9
-//                                                         ^^^^^^^^^ definition local10
+//              ^^^^^^^^^^^^^^^^^^^ definition local5
+//                                      ^^^^^^^^^^^^^ definition local11
+//                                                         ^^^^^^^^^ definition local12
       if (itemCount == 0) {
-//        ^^^^^^^^^ reference local10
+//        ^^^^^^^^^ reference local12
         // no-op
         return;
       }
 
       if (itemCount == 1 || positionStart == currentStateList.size()) {
-//        ^^^^^^^^^ reference local10
-//                          ^^^^^^^^^^^^^ reference local9
+//        ^^^^^^^^^ reference local12
+//                          ^^^^^^^^^^^^^ reference local11
 //                                           ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
 //                                                            ^^^^ reference java/util/ArrayList#size().
         for (int i = positionStart; i < positionStart + itemCount; i++) {
-//               ^ definition local11
-//                   ^^^^^^^^^^^^^ reference local9
-//                                  ^ reference local11
-//                                      ^^^^^^^^^^^^^ reference local9
-//                                                      ^^^^^^^^^ reference local10
-//                                                                 ^ reference local11
+//               ^ definition local13
+//                   ^^^^^^^^^^^^^ reference local11
+//                                  ^ reference local13
+//                                      ^^^^^^^^^^^^^ reference local11
+//                                                      ^^^^^^^^^ reference local12
+//                                                                 ^ reference local13
           currentStateList.add(i, createStateForPosition(i));
 //        ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
 //                         ^^^ reference java/util/ArrayList#add(+2).
-//                             ^ reference local11
+//                             ^ reference local13
 //                                ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#createStateForPosition().
-//                                                       ^ reference local11
+//                                                       ^ reference local13
         }
       } else {
         // Add in a batch since multiple insertions to the middle of the list are slow
         List<ModelState> newModels = new ArrayList<>(itemCount);
 //      ^^^^ reference java/util/List#
 //           ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                       ^^^^^^^^^ definition local12
+//                       ^^^^^^^^^ definition local14
 //                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`().
 //                                       ^^^^^^^^^ reference java/util/ArrayList#
-//                                                   ^^^^^^^^^ reference local10
+//                                                   ^^^^^^^^^ reference local12
         for (int i = positionStart; i < positionStart + itemCount; i++) {
-//               ^ definition local13
-//                   ^^^^^^^^^^^^^ reference local9
-//                                  ^ reference local13
-//                                      ^^^^^^^^^^^^^ reference local9
-//                                                      ^^^^^^^^^ reference local10
-//                                                                 ^ reference local13
+//               ^ definition local15
+//                   ^^^^^^^^^^^^^ reference local11
+//                                  ^ reference local15
+//                                      ^^^^^^^^^^^^^ reference local11
+//                                                      ^^^^^^^^^ reference local12
+//                                                                 ^ reference local15
           newModels.add(createStateForPosition(i));
-//        ^^^^^^^^^ reference local12
+//        ^^^^^^^^^ reference local14
 //                  ^^^ reference java/util/List#add().
 //                      ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#createStateForPosition().
-//                                             ^ reference local13
+//                                             ^ reference local15
         }
 
         currentStateList.addAll(positionStart, newModels);
 //      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
 //                       ^^^^^^ reference java/util/ArrayList#addAll(+1).
-//                              ^^^^^^^^^^^^^ reference local9
-//                                             ^^^^^^^^^ reference local12
+//                              ^^^^^^^^^^^^^ reference local11
+//                                             ^^^^^^^^^ reference local14
       }
 
       // Update positions of affected items
       int size = currentStateList.size();
-//        ^^^^ definition local14
+//        ^^^^ definition local16
 //               ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
 //                                ^^^^ reference java/util/ArrayList#size().
       for (int i = positionStart + itemCount; i < size; i++) {
-//             ^ definition local15
-//                 ^^^^^^^^^^^^^ reference local9
-//                                 ^^^^^^^^^ reference local10
-//                                            ^ reference local15
-//                                                ^^^^ reference local14
-//                                                      ^ reference local15
+//             ^ definition local17
+//                 ^^^^^^^^^^^^^ reference local11
+//                                 ^^^^^^^^^ reference local12
+//                                            ^ reference local17
+//                                                ^^^^ reference local16
+//                                                      ^ reference local17
         currentStateList.get(i).position += itemCount;
 //      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
 //                       ^^^ reference java/util/ArrayList#get().
-//                           ^ reference local15
+//                           ^ reference local17
 //                              ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                                          ^^^^^^^^^ reference local10
+//                                          ^^^^^^^^^ reference local12
       }
     }
 
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeRemoved(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^ definition local16
-//                                     ^^^^^^^^^^^^^ definition local17
-//                                                        ^^^^^^^^^ definition local18
+//              ^^^^^^^^^^^^^^^^^^ definition local6
+//                                     ^^^^^^^^^^^^^ definition local18
+//                                                        ^^^^^^^^^ definition local19
       if (itemCount == 0) {
-//        ^^^^^^^^^ reference local18
+//        ^^^^^^^^^ reference local19
         // no-op
         return;
       }
@@ -233,51 +233,51 @@ class DiffHelper {
       List<ModelState> modelsToRemove =
 //    ^^^^ reference java/util/List#
 //         ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                     ^^^^^^^^^^^^^^ definition local19
+//                     ^^^^^^^^^^^^^^ definition local20
           currentStateList.subList(positionStart, positionStart + itemCount);
 //        ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
 //                         ^^^^^^^ reference java/util/ArrayList#subList().
-//                                 ^^^^^^^^^^^^^ reference local17
-//                                                ^^^^^^^^^^^^^ reference local17
-//                                                                ^^^^^^^^^ reference local18
+//                                 ^^^^^^^^^^^^^ reference local18
+//                                                ^^^^^^^^^^^^^ reference local18
+//                                                                ^^^^^^^^^ reference local19
       for (ModelState model : modelsToRemove) {
 //         ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                    ^^^^^ definition local20
-//                            ^^^^^^^^^^^^^^ reference local19
+//                    ^^^^^ definition local21
+//                            ^^^^^^^^^^^^^^ reference local20
         currentStateMap.remove(model.id);
 //      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateMap.
 //                      ^^^^^^ reference java/util/Map#remove().
-//                             ^^^^^ reference local20
+//                             ^^^^^ reference local21
 //                                   ^^ reference com/airbnb/epoxy/ModelState#id.
       }
       modelsToRemove.clear();
-//    ^^^^^^^^^^^^^^ reference local19
+//    ^^^^^^^^^^^^^^ reference local20
 //                   ^^^^^ reference java/util/List#clear().
 
       // Update positions of affected items
       int size = currentStateList.size();
-//        ^^^^ definition local21
+//        ^^^^ definition local22
 //               ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
 //                                ^^^^ reference java/util/ArrayList#size().
       for (int i = positionStart; i < size; i++) {
-//             ^ definition local22
-//                 ^^^^^^^^^^^^^ reference local17
-//                                ^ reference local22
-//                                    ^^^^ reference local21
-//                                          ^ reference local22
+//             ^ definition local23
+//                 ^^^^^^^^^^^^^ reference local18
+//                                ^ reference local23
+//                                    ^^^^ reference local22
+//                                          ^ reference local23
         currentStateList.get(i).position -= itemCount;
 //      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
 //                       ^^^ reference java/util/ArrayList#get().
-//                           ^ reference local22
+//                           ^ reference local23
 //                              ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                                          ^^^^^^^^^ reference local18
+//                                          ^^^^^^^^^ reference local19
       }
     }
 
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
-//              ^^^^^^^^^^^^^^^^ definition local23
+//              ^^^^^^^^^^^^^^^^ definition local7
 //                                   ^^^^^^^^^^^^ definition local24
 //                                                     ^^^^^^^^^^ definition local25
 //                                                                     ^^^^^^^^^ definition local26

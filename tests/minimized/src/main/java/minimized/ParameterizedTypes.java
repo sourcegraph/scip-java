@@ -1,13 +1,11 @@
 package minimized;
 
-import java.util.List;
+import java.util.Map;
 
 public class ParameterizedTypes<A, B> {
-  //Class<?> clazz;
-
   public String app(A a, B b) {
     return a.toString() + b;
   }
 
-  public List<?> doStuff() { return null; }
+  public Map<? extends String, ?> doStuff() { return null; }
 }

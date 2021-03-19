@@ -3,14 +3,13 @@ package com.sourcegraph.semanticdb_javac;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Type;
 import com.sourcegraph.semanticdb_javac.Semanticdb.*;
-import com.sun.tools.javac.util.List;
 
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
 import javax.lang.model.type.*;
 import javax.lang.model.type.IntersectionType;
 import javax.lang.model.util.SimpleTypeVisitor8;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.sourcegraph.semanticdb_javac.Debugging.pprint;
 
@@ -42,17 +41,28 @@ public final class SemanticdbSignatures {
     builder.setTypeParameters(generateScope(sym.getTypeParameters()));
 
     if (sym.getSuperclass() != Type.noType) {
-      builder.addParents(generateType(sym.getSuperclass()));
+      Semanticdb.Type superType = generateType(sym.getSuperclass());
+      if (superType == null) {
+        pprint("CLASS GAVE NULL " + sym.getSuperclass() + " " + sym);
+      } else {
+        builder.addParents(superType);
+      }
     }
     for (Type iType : sym.getInterfaces()) {
-      builder.addParents(generateType(iType));
+      Semanticdb.Type type = generateType(iType);
+      // this can happen if an interface type isnt properly resolved. Shows as _root_ in snapshots
+      if (type == null) {
+        pprint("INTERFACE GAVE NULL " + iType + " " + sym);
+        continue;
+      }
+      builder.addParents(type);
     }
 
     Scope.Builder declarations = Scope.newBuilder();
     for (Symbol enclosed : sym.getEnclosedElements()) {
       declarations.addSymlinks(cache.semanticdbSymbol(enclosed, locals));
     }
-    builder.setDeclarations(declarations);
+    builder.setDeclarations(generateScope(sym.getEnclosedElements()));
 
     return Signature.newBuilder().setClassSignature(builder).build();
   }
@@ -73,23 +83,24 @@ public final class SemanticdbSignatures {
   }
 
   private Signature generateFieldSignature(Symbol.VarSymbol sym) {
-    if (generateType(sym.type) == null) {
-      // pprint(generateType(sym.type) + " " + sym.type + " " + cache.semanticdbSymbol(sym,
-      // locals));
+    Semanticdb.Type generateType = generateType(sym.type);
+    if (generateType == null) {
+      pprint("FIELD TYPE GAVE NULL " + sym.type + " " + cache.semanticdbSymbol(sym, locals));
+      return null;
     }
     return Signature.newBuilder()
-        .setValueSignature(ValueSignature.newBuilder().setTpe(generateType(sym.type)))
+        .setValueSignature(ValueSignature.newBuilder().setTpe(generateType))
         .build();
   }
 
   private Signature generateTypeSignature(Symbol.TypeVariableSymbol sym) {
     TypeSignature.Builder builder = TypeSignature.newBuilder();
 
-    pprint(sym.type.getKind() + " " + sym);
-
     builder.setTypeParameters(generateScope(sym.getTypeParameters()));
 
-    builder.setUpperBound(generateType(sym.type.getUpperBound()));
+    Semanticdb.Type upperBound = generateType(sym.type.getUpperBound());
+    if (upperBound != null) builder.setUpperBound(upperBound);
+    if (upperBound == null) pprint("UPPER BOUND GAVE NULL " + sym + " " + sym.type.getUpperBound());
 
     return Signature.newBuilder().setTypeSignature(builder).build();
   }
@@ -123,13 +134,35 @@ public final class SemanticdbSignatures {
           t.getTypeArguments().stream().anyMatch((type) -> type instanceof WildcardType);
 
       ArrayList<Semanticdb.Type> typeParams = new ArrayList<>();
+      Scope.Builder declarations = Scope.newBuilder();
       for (TypeMirror type : t.getTypeArguments()) {
-        Semanticdb.Type visit = super.visit(type);
-        if (visit == null) {
-          pprint(type + " " + visit + " " + type.getClass());
+        Semanticdb.Type visited = super.visit(type);
+        if (visited == null) {
+          pprint("NULL TYPE PARAM " + type + " " + type.getClass());
           continue;
         }
-        typeParams.add(visit);
+        typeParams.add(visited);
+
+        if (type instanceof WildcardType) {
+          TypeSignature.Builder typeSig = TypeSignature.newBuilder();
+          WildcardType wildcardType = (WildcardType) type;
+
+          // semanticdb spec asks for List() not None for  type_parameters field
+          typeSig.setTypeParameters(Scope.newBuilder());
+
+          if (wildcardType.getExtendsBound() != null) {
+            typeSig.setUpperBound(super.visit(wildcardType.getExtendsBound()));
+          } else if (wildcardType.getSuperBound() != null) {
+            typeSig.setLowerBound(super.visit(wildcardType.getSuperBound()));
+          }
+
+          declarations.addHardlinks(
+              SymbolInformation.newBuilder()
+                  .setSymbol("local_wildcard")
+                  .setSignature(Signature.newBuilder().setTypeSignature(typeSig)));
+        } else {
+          declarations.addSymlinks(cache.semanticdbSymbol(((Type) type).asElement(), locals));
+        }
       }
 
       if (!isExistential) {
@@ -148,18 +181,22 @@ public final class SemanticdbSignatures {
                             .setTypeRef(
                                 TypeRef.newBuilder()
                                     .setSymbol(cache.semanticdbSymbol(t.asElement(), locals))
-                                    .addAllTypeArguments(typeParams))))
+                                    .addAllTypeArguments(typeParams)))
+                    .setDeclarations(declarations))
             .build();
       }
     }
 
     @Override
     public Semanticdb.Type visitArray(ArrayType t, Void unused) {
+      Semanticdb.Type arrayComponentType = super.visit(t.getComponentType());
+      if (arrayComponentType == null) {
+        pprint("ARRAY GAVE NULL " + t.getComponentType() + " " + t);
+        return null;
+      }
       return Semanticdb.Type.newBuilder()
           .setTypeRef(
-              TypeRef.newBuilder()
-                  .setSymbol("scala/Array#")
-                  .addTypeArguments(super.visit(t.getComponentType())))
+              TypeRef.newBuilder().setSymbol("scala/Array#").addTypeArguments(arrayComponentType))
           .build();
     }
 
@@ -192,9 +229,11 @@ public final class SemanticdbSignatures {
 
     @Override
     public Semanticdb.Type visitWildcard(WildcardType t, Void unused) {
-      new Exception().printStackTrace();
       return Semanticdb.Type.newBuilder()
-          .setExistentialType(ExistentialType.newBuilder().build())
+          .setTypeRef(
+              // https://github.com/scalameta/scalameta/issues/1703
+              // https://sourcegraph.com/github.com/scalameta/scalameta/-/blob/semanticdb/metacp/src/main/scala/scala/meta/internal/javacp/Javacp.scala#L452:19
+              TypeRef.newBuilder().setSymbol("local_wildcard").build())
           .build();
     }
 
