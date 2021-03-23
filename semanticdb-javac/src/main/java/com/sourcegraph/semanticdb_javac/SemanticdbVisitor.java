@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Optional;
 
-import static com.sourcegraph.semanticdb_javac.Debugging.pprint;
-
 /** Walks the AST of a typechecked compilation unit and generates a SemanticDB TextDocument. */
 public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
@@ -56,7 +54,6 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   }
 
   public Semanticdb.TextDocument buildTextDocument(CompilationUnitTree tree) {
-    pprint(semanticdbUri());
     this.scan(tree, null); // Trigger recursive AST traversal to collect SemanticDB information.
 
     return Semanticdb.TextDocument.newBuilder()

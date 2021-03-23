@@ -11,11 +11,14 @@ import javax.lang.model.util.SimpleTypeVisitor8;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.sourcegraph.semanticdb_javac.Debugging.pprint;
-
 public final class SemanticdbSignatures {
   private final GlobalSymbolsCache cache;
   private final LocalSymbolsCache locals;
+
+  private static final Semanticdb.Type UNRESOLVED_TYPE_REF =
+      Semanticdb.Type.newBuilder()
+          .setTypeRef(TypeRef.newBuilder().setSymbol("unresolved_type#"))
+          .build();
 
   public SemanticdbSignatures(GlobalSymbolsCache cache, LocalSymbolsCache locals) {
     this.cache = cache;
@@ -43,17 +46,14 @@ public final class SemanticdbSignatures {
     if (sym.getSuperclass() != Type.noType) {
       Semanticdb.Type superType = generateType(sym.getSuperclass());
       if (superType == null) {
-        pprint("CLASS GAVE NULL " + sym.getSuperclass() + " " + sym);
-      } else {
-        builder.addParents(superType);
+        superType = UNRESOLVED_TYPE_REF;
       }
+      builder.addParents(superType);
     }
     for (Type iType : sym.getInterfaces()) {
       Semanticdb.Type type = generateType(iType);
-      // this can happen if an interface type isnt properly resolved. Shows as _root_ in snapshots
       if (type == null) {
-        pprint("INTERFACE GAVE NULL " + iType + " " + sym);
-        continue;
+        type = UNRESOLVED_TYPE_REF;
       }
       builder.addParents(type);
     }
@@ -85,8 +85,7 @@ public final class SemanticdbSignatures {
   private Signature generateFieldSignature(Symbol.VarSymbol sym) {
     Semanticdb.Type generateType = generateType(sym.type);
     if (generateType == null) {
-      pprint("FIELD TYPE GAVE NULL " + sym.type + " " + cache.semanticdbSymbol(sym, locals));
-      return null;
+      generateType = UNRESOLVED_TYPE_REF;
     }
     return Signature.newBuilder()
         .setValueSignature(ValueSignature.newBuilder().setTpe(generateType))
@@ -100,7 +99,7 @@ public final class SemanticdbSignatures {
 
     Semanticdb.Type upperBound = generateType(sym.type.getUpperBound());
     if (upperBound != null) builder.setUpperBound(upperBound);
-    if (upperBound == null) pprint("UPPER BOUND GAVE NULL " + sym + " " + sym.type.getUpperBound());
+    else builder.setUpperBound(UNRESOLVED_TYPE_REF);
 
     return Signature.newBuilder().setTypeSignature(builder).build();
   }
@@ -138,8 +137,7 @@ public final class SemanticdbSignatures {
       for (TypeMirror type : t.getTypeArguments()) {
         Semanticdb.Type visited = super.visit(type);
         if (visited == null) {
-          pprint("NULL TYPE PARAM " + type + " " + type.getClass());
-          continue;
+          visited = UNRESOLVED_TYPE_REF;
         }
         typeParams.add(visited);
 
@@ -191,8 +189,7 @@ public final class SemanticdbSignatures {
     public Semanticdb.Type visitArray(ArrayType t, Void unused) {
       Semanticdb.Type arrayComponentType = super.visit(t.getComponentType());
       if (arrayComponentType == null) {
-        pprint("ARRAY GAVE NULL " + t.getComponentType() + " " + t);
-        return null;
+        arrayComponentType = UNRESOLVED_TYPE_REF;
       }
       return Semanticdb.Type.newBuilder()
           .setTypeRef(
