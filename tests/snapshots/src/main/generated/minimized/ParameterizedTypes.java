@@ -1,5 +1,10 @@
 package minimized;
 
+import java.util.Map;
+//     ^^^^ reference java/
+//          ^^^^ reference java/util/
+//               ^^^ reference java/util/Map#
+
 public class ParameterizedTypes<A, B> {
 //           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#
 //           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#`<init>`().
@@ -17,4 +22,9 @@ public class ParameterizedTypes<A, B> {
 //           ^^^^^^^^ reference java/lang/Object#toString().
 //                        ^ reference local1
   }
+
+  public Map<? extends String, ?> doStuff() { return null; }
+//       ^^^ reference java/util/Map#
+//                     ^^^^^^ reference java/lang/String#
+//                                ^^^^^^^ definition minimized/ParameterizedTypes#doStuff().
 }

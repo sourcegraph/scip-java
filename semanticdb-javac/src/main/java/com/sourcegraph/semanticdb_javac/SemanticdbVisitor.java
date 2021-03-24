@@ -82,6 +82,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         Semanticdb.SymbolInformation.newBuilder().setSymbol(semanticdbSymbol(sym));
     Semanticdb.Documentation documentation = semanticdbDocumentation(sym);
     if (documentation != null) builder.setDocumentation(documentation);
+    Semanticdb.Signature signature = semanticdbSignature(sym);
+    if (signature != null) builder.setSignature(signature);
 
     Semanticdb.SymbolInformation info = builder.build();
 
@@ -178,6 +180,10 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   // =================================================
   // Utilities to generate SemanticDB data structures.
   // =================================================
+
+  private Semanticdb.Signature semanticdbSignature(Symbol sym) {
+    return new SemanticdbSignatures(globals, locals).generateSignature(sym);
+  }
 
   private String semanticdbSymbol(Symbol sym) {
     return globals.semanticdbSymbol(sym, locals);
