@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -101,8 +102,14 @@ public class LsifSemanticdb {
       writer.emitItem(ids.referenceResult, rangeId, doc.id);
 
       // Definition
-      if (occ.getRole() == SymbolOccurrence.Role.DEFINITION && ids.isDefinitionDefined()) {
-        writer.emitItem(ids.definitionResult, rangeId, doc.id);
+      if (occ.getRole() == SymbolOccurrence.Role.DEFINITION) {
+        if (ids.isDefinitionDefined()) {
+          writer.emitItem(ids.definitionResult, rangeId, doc.id);
+        } else {
+          options.reporter.error(
+              new NoSuchElementException(
+                  String.format("no definition ID for symbol '%s'", occ.getSymbol())));
+        }
 
         // Hover
         String documentation = symbolInformation.getDocumentation().getMessage();
