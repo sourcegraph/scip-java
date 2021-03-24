@@ -1,6 +1,7 @@
 package tests
 
 import java.io.StringWriter
+import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 import javax.tools.ToolProvider
@@ -9,26 +10,32 @@ import scala.collection.mutable.ListBuffer
 import scala.jdk.CollectionConverters._
 
 import scala.meta.Input
+import scala.meta.internal.io.FileIO
+import scala.meta.io.AbsolutePath
 
 import com.sourcegraph.semanticdb_javac.Semanticdb
 
 object TestCompiler {
-  private val PROCESSOR_PATH = System.getProperty("java.class.path")
+  val PROCESSOR_PATH = System.getProperty("java.class.path")
 }
 
 class TestCompiler(
     val classpath: String,
     val options: List[String],
-    val targetroot: Path
+    val targetroot: Path,
+    val sourceroot: Path = Files.createTempDirectory("semanticdb-javac")
 ) {
 
-  private val sourceroot = Files.createTempDirectory("semanticdb-javac")
   private val compiler = ToolProvider.getSystemJavaCompiler
   private val fileManager =
     new SimpleFileManager(compiler.getStandardFileManager(null, null, null))
 
   def this(targetroot: Path) {
     this(TestCompiler.PROCESSOR_PATH, Nil, targetroot)
+  }
+
+  def compileSemanticdbDirectory(dir: Path): CompileResult = {
+    compileSemanticdb(inputsFromDirectory(dir))
   }
 
   def compileSemanticdb(inputs: Seq[Input.VirtualFile]): CompileResult = {
@@ -89,5 +96,18 @@ class TestCompiler(
     }
     val stdout = output.toString
     CompileResult(bytecode, stdout, textDocuments.build(), isSuccess)
+  }
+
+  private def inputsFromDirectory(dir: Path): Seq[Input.VirtualFile] = {
+    val root = AbsolutePath(dir)
+    FileIO
+      .listAllFilesRecursively(root)
+      .filter(_.toNIO.getFileName.toString.endsWith(".java"))
+      .map(p =>
+        Input.VirtualFile(
+          p.toRelative(root).toString(),
+          FileIO.slurp(p, StandardCharsets.UTF_8)
+        )
+      )
   }
 }

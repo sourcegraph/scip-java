@@ -79,7 +79,7 @@ class TargetedSuite extends FunSuite with TempDirectories {
   }
 
   checkDoc(
-    "overloading",
+    "issue-24",
     """package example;
       |/** Docstring for class. */
       |class Test {

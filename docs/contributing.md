@@ -63,7 +63,14 @@ First, install the
 community edition is
 [open source](https://github.com/JetBrains/intellij-community) and free to use.
 
-Next, install the IntelliJ Scala plugin.
+Next, install the following IntelliJ plugins:
+
+- IntelliJ Scala plugin.
+- Google Java Format
+
+Next, follow
+[these instructions](https://github.com/HPI-Information-Systems/Metanome/wiki/Installing-the-google-styleguide-settings-in-intellij-and-eclipse)
+here to configure the Google Java formatter.
 
 Finally, run "File > Project From Existing Sources" to import the sbt build into
 IntelliJ. Select the "sbt" option if it asks you to choose between

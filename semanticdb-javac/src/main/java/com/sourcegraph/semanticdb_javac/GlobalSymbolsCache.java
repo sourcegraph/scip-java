@@ -12,9 +12,9 @@ import static com.sourcegraph.semanticdb_javac.Debugging.pprint;
 public final class GlobalSymbolsCache {
 
   private final IdentityHashMap<Symbol, String> globals = new IdentityHashMap<>();
-  private final SemanticdbOptions options;
+  private final SemanticdbJavacOptions options;
 
-  public GlobalSymbolsCache(SemanticdbOptions options) {
+  public GlobalSymbolsCache(SemanticdbJavacOptions options) {
     this.options = options;
   }
 
