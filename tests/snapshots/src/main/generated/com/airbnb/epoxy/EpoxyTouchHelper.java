@@ -247,6 +247,7 @@ public abstract class EpoxyTouchHelper {
      * draggable type.
      */
     public <U extends EpoxyModel> DragBuilder4<U> withTarget(Class<U> targetModelClass) {
+//          ^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#withTarget().[U]
 //                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#
 //                                             ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#withTarget().[U]
@@ -737,6 +738,7 @@ public abstract class EpoxyTouchHelper {
      * swipable type.
      */
     public <U extends EpoxyModel> SwipeBuilder3<U> withTarget(Class<U> targetModelClass) {
+//          ^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#withTarget().[U]
 //                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#
 //                                              ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#withTarget().[U]

@@ -85,6 +85,8 @@ public class InnerClasses {
   }
 
   private static <A, B> B runInnerInterface(InnerInterface<A, B> fn, A a) {
+//                ^ definition minimized/InnerClasses#runInnerInterface().[A]
+//                   ^ definition minimized/InnerClasses#runInnerInterface().[B]
 //                      ^ reference minimized/InnerClasses#runInnerInterface().[B]
 //                        ^^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#runInnerInterface().
 //                                          ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#

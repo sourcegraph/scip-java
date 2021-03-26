@@ -126,6 +126,17 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         range = CompilerRange.FROM_TEXT_SEARCH;
       }
       emitSymbolOccurrence(meth.sym, meth, Role.DEFINITION, range);
+
+      List<JCTree.JCTypeParameter> typeParameters = meth.getTypeParameters();
+      int i = 0;
+      for (Symbol.TypeVariableSymbol typeSym : meth.sym.getTypeParameters()) {
+        emitSymbolOccurrence(
+            typeSym,
+            typeParameters.get(i),
+            Role.DEFINITION,
+            CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
+        i++;
+      }
     }
     return super.visitMethod(node, unused);
   }

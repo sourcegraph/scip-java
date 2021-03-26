@@ -33,6 +33,7 @@ public class TypeVariables {
   }
 
   public static <T extends C & I> void app(T t) {
+//               ^ definition minimized/TypeVariables#app().[T]
 //                         ^ reference minimized/TypeVariables#C#
 //                             ^ reference minimized/TypeVariables#I#
 //                                     ^^^ definition minimized/TypeVariables#app().
