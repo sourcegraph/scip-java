@@ -87,6 +87,9 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     Semanticdb.Signature signature = semanticdbSignature(sym);
     if (signature != null) builder.setSignature(signature);
 
+    builder
+        .setProperties(semanticdbSymbolInfoProperties(sym))
+        .setDisplayName(sym.name.toString())
     switch (sym.getKind()) {
       case ENUM:
       case CLASS:

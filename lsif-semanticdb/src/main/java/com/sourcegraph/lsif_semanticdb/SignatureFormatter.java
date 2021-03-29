@@ -21,6 +21,8 @@ public class SignatureFormatter {
       formatClassSignature(signature.getClassSignature());
     } else if (signature.hasMethodSignature()) {
       formatMethodSignature(signature.getMethodSignature());
+    } else if (signature.hasValueSignature()) {
+      formatValueSignature(signature.getValueSignature());
     }
 
     return s.toString();
@@ -84,6 +86,12 @@ public class SignatureFormatter {
                         + symInfo.getDisplayName())
             .collect(Collectors.joining(", ", "(", ")")));
   }
+
+  private void formatValueSignature(ValueSignature valueSignature) {
+    printKeyword(formatType(valueSignature.getTpe()));
+    s.append(symbolInformation.getDisplayName());
+  }
+
   /**
    * Transforms symlinks from a Scope into a List of SymbolInformation's looked up in the Symtab.
    */
@@ -103,8 +111,19 @@ public class SignatureFormatter {
     return new SignatureFormatter(typeInfo, symtab).formatSymbol();
   }
 
+  private String formatTypeArguments(List<Type> typeArguments) {
+    if (typeArguments.isEmpty()) return "";
+
+    return typeArguments.stream().map(this::formatType).collect(Collectors.joining(", ", "<", ">"));
+  }
+
   private String formatType(Type type) {
     StringBuilder b = new StringBuilder();
+    if (type.hasTypeRef()) {
+      TypeRef typeRef = type.getTypeRef();
+      b.append(symbolDisplayName(typeRef.getSymbol()));
+      b.append(formatTypeArguments(typeRef.getTypeArgumentsList()));
+    }
 
     return b.toString();
   }
