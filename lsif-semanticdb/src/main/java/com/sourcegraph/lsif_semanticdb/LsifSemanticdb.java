@@ -76,6 +76,8 @@ public class LsifSemanticdb {
   }
 
   private Integer processDocument(LsifTextDocument doc, Set<String> isExportedSymbol) {
+    Symtab symtab = new Symtab(doc.semanticdb);
+
     int documentId = writer.emitDocument(doc);
     Set<String> localDefinitions =
         doc.semanticdb.getOccurrencesList().stream()
@@ -118,6 +120,12 @@ public class LsifSemanticdb {
           markedStrings.add(new MarkedString(doc.semanticdb.getLanguage(), documentation));
         }
 
+        if (symbolInformation.hasSignature()) {
+          markedStrings.add(
+              new MarkedString(
+                  doc.semanticdb.getLanguage(),
+                  new SignatureFormatter(symbolInformation, symtab).formatSymbol()));
+        }
 
         if (!markedStrings.isEmpty()) {
           int hoverId = writer.emitHoverResult(markedStrings.toArray(new MarkedString[0]));
