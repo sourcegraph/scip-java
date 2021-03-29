@@ -112,9 +112,15 @@ public class LsifSemanticdb {
         }
 
         // Hover
+        ArrayList<MarkedString> markedStrings = new ArrayList<>();
         String documentation = symbolInformation.getDocumentation().getMessage();
         if (!documentation.isEmpty()) {
-          int hoverId = writer.emitHoverResult(doc.semanticdb.getLanguage(), documentation);
+          markedStrings.add(new MarkedString(doc.semanticdb.getLanguage(), documentation));
+        }
+
+
+        if (!markedStrings.isEmpty()) {
+          int hoverId = writer.emitHoverResult(markedStrings.toArray(new MarkedString[0]));
           writer.emitHoverEdge(ids.resultSet, hoverId);
         }
       }
