@@ -90,6 +90,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     builder
         .setProperties(semanticdbSymbolInfoProperties(sym))
         .setDisplayName(sym.name.toString())
+        .setAccess(semanticdbAccess(sym));
+
     switch (sym.getKind()) {
       case ENUM:
       case CLASS:
@@ -111,9 +113,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
     Semanticdb.SymbolInformation info = builder.build();
 
-    if (SemanticdbSymbols.isGlobal(info.getSymbol())) {
-      symbolInfos.add(info);
-    }
+    symbolInfos.add(info);
   }
 
   // =======================================
@@ -298,7 +298,34 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   private int semanticdbSymbolInfoProperties(Symbol sym) {
     int properties = 0;
     properties |= sym.isEnum() ? Property.ENUM_VALUE : 0;
+    properties |= sym.isStatic() ? Property.STATIC_VALUE : 0;
+    properties |= (sym.flags() & Flags.ABSTRACT) > 0 ? Property.ABSTRACT_VALUE : 0;
+    properties |= (sym.flags() & Flags.FINAL) > 0 ? Property.FINAL_VALUE : 0;
     return properties;
+  }
+
+  private Semanticdb.Access semanticdbAccess(Symbol sym) {
+    switch ((int) sym.flags() & Flags.AccessFlags) {
+      case Flags.PRIVATE:
+        return Semanticdb.Access.newBuilder()
+            .setPrivateAccess(Semanticdb.PrivateAccess.newBuilder())
+            .build();
+      case Flags.PUBLIC:
+        return Semanticdb.Access.newBuilder()
+            .setPublicAccess(Semanticdb.PublicAccess.newBuilder())
+            .build();
+      case Flags.PROTECTED:
+        return Semanticdb.Access.newBuilder()
+            .setProtectedAccess(Semanticdb.ProtectedAccess.newBuilder())
+            .build();
+      case 0:
+        return Semanticdb.Access.newBuilder()
+            .setPrivateWithinAccess(
+                Semanticdb.PrivateWithinAccess.newBuilder().setSymbol(semanticdbSymbol(sym.owner)))
+            .build();
+      default:
+        throw new IllegalStateException("access flag " + (sym.flags() & Flags.AccessFlags));
+    }
   }
 
   private String semanticdbUri() {

@@ -1,6 +1,12 @@
 package com.sourcegraph.lsif_semanticdb;
 
+import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class SignatureFormatter {
   private static final Type OBJECT_TYPE_REF =
@@ -34,6 +40,8 @@ public class SignatureFormatter {
   }
 
   private void formatClassSignature(ClassSignature classSignature) {
+    printKeyword(formatAccess());
+    printKeyword(formatModifiers());
 
     switch (symbolInformation.getKind()) {
       case CLASS:
@@ -70,6 +78,9 @@ public class SignatureFormatter {
   }
 
   private void formatMethodSignature(MethodSignature methodSignature) {
+    printKeyword(formatAccess());
+    printKeyword(formatModifiers());
+
     List<SymbolInformation> typeParameters = getSymlinks(methodSignature.getTypeParameters());
     if (!typeParameters.isEmpty()) {
       printKeyword(
@@ -93,6 +104,8 @@ public class SignatureFormatter {
   }
 
   private void formatValueSignature(ValueSignature valueSignature) {
+    printKeyword(formatAccess());
+    printKeyword(formatModifiers());
     printKeyword(formatType(valueSignature.getTpe()));
     s.append(symbolInformation.getDisplayName());
   }
@@ -170,6 +183,31 @@ public class SignatureFormatter {
     }
 
     return b.toString();
+  }
+
+  private String formatAccess() {
+    if (symbolInformation.getAccess().hasPrivateAccess()) {
+      return "private";
+    } else if (symbolInformation.getAccess().hasPublicAccess()) {
+      return "public";
+    } else if (symbolInformation.getAccess().hasProtectedAccess()) {
+      return "protected";
+    }
+    return "";
+  }
+
+  private String formatModifiers() {
+    ArrayList<String> modifiers = new ArrayList<>();
+    if (has(Property.ABSTRACT)) {
+      modifiers.add("abstract");
+    }
+    if (has(Property.STATIC)) {
+      modifiers.add("static");
+    }
+    if (has(Property.FINAL)) {
+      modifiers.add("final");
+    }
+    return String.join(" ", modifiers);
   }
 
   private void printKeyword(String keyword) {
