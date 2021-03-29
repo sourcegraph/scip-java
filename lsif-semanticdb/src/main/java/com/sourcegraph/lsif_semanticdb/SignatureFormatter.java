@@ -19,6 +19,8 @@ public class SignatureFormatter {
     Signature signature = symbolInformation.getSignature();
     if (signature.hasClassSignature()) {
       formatClassSignature(signature.getClassSignature());
+    } else if (signature.hasMethodSignature()) {
+      formatMethodSignature(signature.getMethodSignature());
     }
 
     return s.toString();
@@ -60,6 +62,28 @@ public class SignatureFormatter {
     }
   }
 
+  private void formatMethodSignature(MethodSignature methodSignature) {
+    List<SymbolInformation> typeParameters = getSymlinks(methodSignature.getTypeParameters());
+    if (!typeParameters.isEmpty()) {
+      printKeyword(
+          typeParameters.stream()
+              .map(this::formatTypeParameter)
+              .collect(Collectors.joining(", ", "<", ">")));
+    }
+
+    printKeyword(formatType(methodSignature.getReturnType()));
+    s.append(symbolInformation.getDisplayName());
+
+    s.append(
+        methodSignature.getParameterListsList().stream()
+            .flatMap((params) -> getSymlinks(params).stream())
+            .map(
+                (symInfo) ->
+                    formatType(symInfo.getSignature().getValueSignature().getTpe())
+                        + " "
+                        + symInfo.getDisplayName())
+            .collect(Collectors.joining(", ", "(", ")")));
+  }
   /**
    * Transforms symlinks from a Scope into a List of SymbolInformation's looked up in the Symtab.
    */
