@@ -6,6 +6,9 @@ public class SignatureFormatter {
   private static final Type OBJECT_TYPE_REF =
       Type.newBuilder().setTypeRef(TypeRef.newBuilder().setSymbol("java/lang/Object#")).build();
 
+  private static final Type WILDCARD_TYPE_REF =
+      Type.newBuilder().setTypeRef(TypeRef.newBuilder().setSymbol("local_wildcard")).build();
+
   private final StringBuilder s = new StringBuilder();
   private final SymbolInformation symbolInformation;
   private final Symtab symtab;
@@ -23,6 +26,8 @@ public class SignatureFormatter {
       formatMethodSignature(signature.getMethodSignature());
     } else if (signature.hasValueSignature()) {
       formatValueSignature(signature.getValueSignature());
+    } else if (signature.hasTypeSignature()) {
+      formatTypeParameterSignature(signature.getTypeSignature());
     }
 
     return s.toString();
@@ -92,6 +97,18 @@ public class SignatureFormatter {
     s.append(symbolInformation.getDisplayName());
   }
 
+  private void formatTypeParameterSignature(TypeSignature typeSignature) {
+    s.append(symbolInformation.getDisplayName());
+    if (typeSignature.hasLowerBound()) {
+      printKeyword(" super");
+      s.append(formatType(typeSignature.getLowerBound()));
+    } else if (typeSignature.hasUpperBound()
+        && !typeSignature.getUpperBound().equals(OBJECT_TYPE_REF)) {
+      printKeyword(" extends");
+      s.append(formatType(typeSignature.getUpperBound()));
+    }
+  }
+
   /**
    * Transforms symlinks from a Scope into a List of SymbolInformation's looked up in the Symtab.
    */
@@ -123,6 +140,33 @@ public class SignatureFormatter {
       TypeRef typeRef = type.getTypeRef();
       b.append(symbolDisplayName(typeRef.getSymbol()));
       b.append(formatTypeArguments(typeRef.getTypeArgumentsList()));
+    } else if (type.hasIntersectionType()) {
+      b.append(
+          type.getIntersectionType().getTypesList().stream()
+              .map(this::formatType)
+              .collect(Collectors.joining(" & ")));
+    } else if (type.hasExistentialType()) {
+      AtomicInteger hardlinkStep = new AtomicInteger();
+      TypeRef typeRef = type.getExistentialType().getTpe().getTypeRef();
+      b.append(symbolDisplayName(type.getExistentialType().getTpe().getTypeRef().getSymbol()));
+      b.append(
+          typeRef.getTypeArgumentsList().stream()
+              .map(
+                  (typeArg) -> {
+                    // if hardlink (aka wildcard) we need to reach into declarations at index
+                    // hardlinkStep
+                    if (typeArg.equals(WILDCARD_TYPE_REF)) {
+                      SymbolInformation hardlink =
+                          type.getExistentialType()
+                              .getDeclarations()
+                              .getHardlinks(hardlinkStep.getAndIncrement());
+                      return symbolDisplayName(hardlink.getSymbol())
+                          + new SignatureFormatter(hardlink, symtab).formatSymbol();
+                    }
+                    // else for symlink we can use the usual path
+                    return formatType(typeArg);
+                  })
+              .collect(Collectors.joining(", ", "<", ">")));
     }
 
     return b.toString();
