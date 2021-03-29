@@ -87,7 +87,11 @@ object SemanticdbPrinters {
       .append(
         symbols.get(occ.getSymbol) match {
           case Some(info) if occ.getRole == Role.DEFINITION =>
-            " " + new SignatureFormatter(info, symtab).formatSymbol() + ""
+            val sig = new SignatureFormatter(info, symtab).formatSymbol()
+            if (sig == "")
+              " " + info.getDisplayName
+            else
+              " " + sig + ""
           case _ =>
             ""
         }
