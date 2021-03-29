@@ -9,6 +9,8 @@ import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.util.JCDiagnostic;
 import com.sun.tools.javac.util.List;
 import com.sun.tools.javac.util.Position;
+import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Kind;
+import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 
 import javax.lang.model.element.Element;
@@ -84,6 +86,25 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     if (documentation != null) builder.setDocumentation(documentation);
     Semanticdb.Signature signature = semanticdbSignature(sym);
     if (signature != null) builder.setSignature(signature);
+
+    switch (sym.getKind()) {
+      case ENUM:
+      case CLASS:
+        builder.setKind(Kind.CLASS);
+        break;
+      case INTERFACE:
+        builder.setKind(Kind.INTERFACE);
+        break;
+      case FIELD:
+        builder.setKind(Kind.FIELD);
+        break;
+      case METHOD:
+        builder.setKind(Kind.METHOD);
+        break;
+      case TYPE_PARAMETER:
+        builder.setKind(Kind.TYPE_PARAMETER);
+        break;
+    }
 
     Semanticdb.SymbolInformation info = builder.build();
 
@@ -269,6 +290,12 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     } catch (IOException | NoSuchAlgorithmException e) {
       return "";
     }
+  }
+
+  private int semanticdbSymbolInfoProperties(Symbol sym) {
+    int properties = 0;
+    properties |= sym.isEnum() ? Property.ENUM_VALUE : 0;
+    return properties;
   }
 
   private String semanticdbUri() {
