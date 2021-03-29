@@ -44,13 +44,13 @@ import static java.lang.annotation.ElementType.*;
 //                                                                    ^^^^^^^^^ reference java/lang/annotation/ElementType#PARAMETER.
 //                                                                               ^^^^ reference java/lang/annotation/ElementType#TYPE.
 public @interface Annotations {
-//                ^^^^^^^^^^^ definition minimized/Annotations#
+//                ^^^^^^^^^^^ definition minimized/Annotations# public abstract Annotations extends Annotation
 
   String value() default "";
 //^^^^^^ reference java/lang/String#
-//       ^^^^^ definition minimized/Annotations#value().
+//       ^^^^^ definition minimized/Annotations#value(). public abstract String value()
 
   String format() default "";
 //^^^^^^ reference java/lang/String#
-//       ^^^^^^ definition minimized/Annotations#format().
+//       ^^^^^^ definition minimized/Annotations#format(). public abstract String format()
 }

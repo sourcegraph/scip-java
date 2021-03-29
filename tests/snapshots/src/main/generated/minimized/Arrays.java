@@ -1,21 +1,21 @@
 package minimized;
 
 public class Arrays {
-//           ^^^^^^ definition minimized/Arrays#
-//           ^^^^^^ definition minimized/Arrays#`<init>`().
+//           ^^^^^^ definition minimized/Arrays# public class Arrays
+//           ^^^^^^ definition minimized/Arrays#`<init>`(). public <init>()
   public static String app() {
 //              ^^^^^^ reference java/lang/String#
-//                     ^^^ definition minimized/Arrays#app().
+//                     ^^^ definition minimized/Arrays#app(). public static String app()
     int[] a = {1, 2, 3};
-//        ^ definition local0
+//        ^ definition local0 Array<int> a
     String[] b = {"1", "2", "3"};
 //  ^^^^^^ reference java/lang/String#
-//           ^ definition local1
+//           ^ definition local1 Array<String> b
     int[][] c = {{1}, {2}, {3}};
-//          ^ definition local2
+//          ^ definition local2 Array<Array<int>> c
     String[][] d = {{"1"}, {"2"}, {"3"}};
 //  ^^^^^^ reference java/lang/String#
-//             ^ definition local3
+//             ^ definition local3 Array<Array<String>> d
     return b[0] + a[0] + c[1][0] + d[1][0];
 //         ^ reference local1
 //                ^ reference local0

@@ -39,8 +39,8 @@ import androidx.recyclerview.widget.RecyclerView;
  * your own {@link ItemTouchHelper} if you need extra flexibility or customization.
  */
 public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
-//                    ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#
-//                                            ^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
+//                    ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback# public abstract class EpoxyModelTouchCallback<T extends EpoxyModel> extends EpoxyTouchHelperCallback, EpoxyDragCallback<T>, EpoxySwipeCallback<T>
+//                                            ^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#[T] T extends EpoxyModel
 //                                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
     extends EpoxyTouchHelperCallback implements EpoxyDragCallback<T>, EpoxySwipeCallback<T> {
 //          ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelperCallback#
@@ -50,31 +50,31 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                                                                       ^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
 
   private static final int TOUCH_DEBOUNCE_MILLIS = 300;
-//                         ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#TOUCH_DEBOUNCE_MILLIS.
+//                         ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#TOUCH_DEBOUNCE_MILLIS. private static final int TOUCH_DEBOUNCE_MILLIS
 
   @Nullable private final EpoxyController controller;
 // ^^^^^^^^ reference androidx/annotation/Nullable#
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
-//                                        ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#controller.
+//                                        ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#controller. private final EpoxyController controller
   private final Class<T> targetModelClass;
 //              ^^^^^ reference java/lang/Class#
 //                    ^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
-//                       ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#targetModelClass.
+//                       ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#targetModelClass. private final Class<T> targetModelClass
   private EpoxyViewHolder holderBeingDragged;
 //        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                        ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#holderBeingDragged.
+//                        ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#holderBeingDragged. private EpoxyViewHolder holderBeingDragged
   private EpoxyViewHolder holderBeingSwiped;
 //        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                        ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#holderBeingSwiped.
+//                        ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#holderBeingSwiped. private EpoxyViewHolder holderBeingSwiped
 
   public EpoxyModelTouchCallback(@Nullable EpoxyController controller, Class<T> targetModelClass) {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#`<init>`().
+//       ^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#`<init>`(). public <init>(EpoxyController controller, Class<T> targetModelClass)
 //                                ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                         ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
-//                                                         ^^^^^^^^^^ definition local0
+//                                                         ^^^^^^^^^^ definition local0 EpoxyController controller
 //                                                                     ^^^^^ reference java/lang/Class#
 //                                                                           ^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
-//                                                                              ^^^^^^^^^^^^^^^^ definition local1
+//                                                                              ^^^^^^^^^^^^^^^^ definition local1 Class<T> targetModelClass
     this.controller = controller;
 //  ^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#this.
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#controller.
@@ -88,14 +88,14 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected int getMovementFlags(RecyclerView recyclerView, EpoxyViewHolder viewHolder) {
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#getMovementFlags().
+//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#getMovementFlags(). protected int getMovementFlags(unresolved_type recyclerView, EpoxyViewHolder viewHolder)
 //                               ^^^^^^^^^^^^ reference _root_/
-//                                            ^^^^^^^^^^^^ definition local2
+//                                            ^^^^^^^^^^^^ definition local2 unresolved_type recyclerView
 //                                                          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                                          ^^^^^^^^^^ definition local3
+//                                                                          ^^^^^^^^^^ definition local3 EpoxyViewHolder viewHolder
     EpoxyModel<?> model = viewHolder.getModel();
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                ^^^^^ definition local4
+//                ^^^^^ definition local4 EpoxyModel<?> model
 //                        ^^^^^^^^^^ reference local3
 //                                   ^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#getModel().
 
@@ -103,7 +103,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
     // dragging and dropping) then we won't want to enable anything if another
     // callback has a view actively selected.
     boolean isOtherCallbackActive =
-//          ^^^^^^^^^^^^^^^^^^^^^ definition local5
+//          ^^^^^^^^^^^^^^^^^^^^^ definition local5 boolean isOtherCallbackActive
         holderBeingDragged == null
 //      ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#holderBeingDragged.
             && holderBeingSwiped == null
@@ -131,14 +131,14 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected boolean canDropOver(RecyclerView recyclerView, EpoxyViewHolder current,
-//                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#canDropOver().
+//                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#canDropOver(). protected boolean canDropOver(unresolved_type recyclerView, EpoxyViewHolder current, EpoxyViewHolder target)
 //                              ^^^^^^^^^^^^ reference _root_/
-//                                           ^^^^^^^^^^^^ definition local6
+//                                           ^^^^^^^^^^^^ definition local6 unresolved_type recyclerView
 //                                                         ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                                         ^^^^^^^ definition local7
+//                                                                         ^^^^^^^ definition local7 EpoxyViewHolder current
       EpoxyViewHolder target) {
 //    ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                    ^^^^^^ definition local8
+//                    ^^^^^^ definition local8 EpoxyViewHolder target
     // By default we don't allow dropping on a model that isn't a drag target
     return isTouchableModel(target.getModel());
 //         ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#isTouchableModel().
@@ -147,9 +147,9 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   }
 
   protected boolean isTouchableModel(EpoxyModel<?> model) {
-//                  ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#isTouchableModel().
+//                  ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#isTouchableModel(). protected boolean isTouchableModel(EpoxyModel<?> model)
 //                                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                 ^^^^^ definition local9
+//                                                 ^^^^^ definition local9 EpoxyModel<?> model
     return targetModelClass.isInstance(model);
 //         ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#targetModelClass.
 //                          ^^^^^^^^^^ reference java/lang/Class#isInstance().
@@ -159,14 +159,14 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected boolean onMove(RecyclerView recyclerView, EpoxyViewHolder viewHolder,
-//                  ^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onMove().
+//                  ^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onMove(). protected boolean onMove(unresolved_type recyclerView, EpoxyViewHolder viewHolder, EpoxyViewHolder target)
 //                         ^^^^^^^^^^^^ reference _root_/
-//                                      ^^^^^^^^^^^^ definition local10
+//                                      ^^^^^^^^^^^^ definition local10 unresolved_type recyclerView
 //                                                    ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                                    ^^^^^^^^^^ definition local11
+//                                                                    ^^^^^^^^^^ definition local11 EpoxyViewHolder viewHolder
       EpoxyViewHolder target) {
 //    ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                    ^^^^^^ definition local12
+//                    ^^^^^^ definition local12 EpoxyViewHolder target
 
     if (controller == null) {
 //      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#controller.
@@ -177,11 +177,11 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
     }
 
     int fromPosition = viewHolder.getAdapterPosition();
-//      ^^^^^^^^^^^^ definition local13
+//      ^^^^^^^^^^^^ definition local13 int fromPosition
 //                     ^^^^^^^^^^ reference local11
 //                                ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#getAdapterPosition#
     int toPosition = target.getAdapterPosition();
-//      ^^^^^^^^^^ definition local14
+//      ^^^^^^^^^^ definition local14 int toPosition
 //                   ^^^^^^ reference local12
 //                          ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#getAdapterPosition#
     controller.moveModel(fromPosition, toPosition);
@@ -192,7 +192,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 
     EpoxyModel<?> model = viewHolder.getModel();
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                ^^^^^ definition local15
+//                ^^^^^ definition local15 EpoxyModel<?> model
 //                        ^^^^^^^^^^ reference local11
 //                                   ^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#getModel().
     if (!isTouchableModel(model)) {
@@ -221,35 +221,35 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onModelMoved(int fromPosition, int toPosition, T modelBeingMoved, View itemView) {
-//            ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onModelMoved().
-//                             ^^^^^^^^^^^^ definition local16
-//                                               ^^^^^^^^^^ definition local17
+//            ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onModelMoved(). public onModelMoved(int fromPosition, int toPosition, T modelBeingMoved, unresolved_type itemView)
+//                             ^^^^^^^^^^^^ definition local16 int fromPosition
+//                                               ^^^^^^^^^^ definition local17 int toPosition
 //                                                           ^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
-//                                                             ^^^^^^^^^^^^^^^ definition local18
+//                                                             ^^^^^^^^^^^^^^^ definition local18 T modelBeingMoved
 //                                                                              ^^^^ reference _root_/
-//                                                                                   ^^^^^^^^ definition local19
+//                                                                                   ^^^^^^^^ definition local19 unresolved_type itemView
 
   }
 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected void onSwiped(EpoxyViewHolder viewHolder, int direction) {
-//               ^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onSwiped().
+//               ^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onSwiped(). protected onSwiped(EpoxyViewHolder viewHolder, int direction)
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                        ^^^^^^^^^^ definition local20
-//                                                        ^^^^^^^^^ definition local21
+//                                        ^^^^^^^^^^ definition local20 EpoxyViewHolder viewHolder
+//                                                        ^^^^^^^^^ definition local21 int direction
     EpoxyModel<?> model = viewHolder.getModel();
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                ^^^^^ definition local22
+//                ^^^^^ definition local22 EpoxyModel<?> model
 //                        ^^^^^^^^^^ reference local20
 //                                   ^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#getModel().
     View view = viewHolder.itemView;
 //  ^^^^ reference _root_/
-//       ^^^^ definition local23
+//       ^^^^ definition local23 unresolved_type view
 //              ^^^^^^^^^^ reference local20
 //                         ^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#itemView#
     int position = viewHolder.getAdapterPosition();
-//      ^^^^^^^^ definition local24
+//      ^^^^^^^^ definition local24 int position
 //                 ^^^^^^^^^^ reference local20
 //                            ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#getAdapterPosition#
 
@@ -277,24 +277,24 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onSwipeCompleted(T model, View itemView, int position, int direction) {
-//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeCompleted().
+//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeCompleted(). public onSwipeCompleted(T model, unresolved_type itemView, int position, int direction)
 //                             ^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
-//                               ^^^^^ definition local25
+//                               ^^^^^ definition local25 T model
 //                                      ^^^^ reference _root_/
-//                                           ^^^^^^^^ definition local26
-//                                                         ^^^^^^^^ definition local27
-//                                                                       ^^^^^^^^^ definition local28
+//                                           ^^^^^^^^ definition local26 unresolved_type itemView
+//                                                         ^^^^^^^^ definition local27 int position
+//                                                                       ^^^^^^^^^ definition local28 int direction
 
   }
 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected void onSelectedChanged(@Nullable EpoxyViewHolder viewHolder, int actionState) {
-//               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onSelectedChanged().
+//               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onSelectedChanged(). protected onSelectedChanged(EpoxyViewHolder viewHolder, int actionState)
 //                                  ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                           ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                           ^^^^^^^^^^ definition local29
-//                                                                           ^^^^^^^^^^^ definition local30
+//                                                           ^^^^^^^^^^ definition local29 EpoxyViewHolder viewHolder
+//                                                                           ^^^^^^^^^^^ definition local30 int actionState
     super.onSelectedChanged(viewHolder, actionState);
 //  ^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#super.
 //        ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelperCallback#onSelectedChanged().
@@ -305,7 +305,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //      ^^^^^^^^^^ reference local29
       EpoxyModel<?> model = viewHolder.getModel();
 //    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                  ^^^^^ definition local31
+//                  ^^^^^ definition local31 EpoxyModel<?> model
 //                          ^^^^^^^^^^ reference local29
 //                                     ^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#getModel().
       if (!isTouchableModel(model)) {
@@ -387,9 +387,9 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   }
 
   private void markRecyclerViewHasSelection(RecyclerView recyclerView) {
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#markRecyclerViewHasSelection().
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#markRecyclerViewHasSelection(). private markRecyclerViewHasSelection(unresolved_type recyclerView)
 //                                          ^^^^^^^^^^^^ reference _root_/
-//                                                       ^^^^^^^^^^^^ definition local32
+//                                                       ^^^^^^^^^^^^ definition local32 unresolved_type recyclerView
     recyclerView.setTag(R.id.epoxy_touch_helper_selection_status, Boolean.TRUE);
 //  ^^^^^^^^^^^^ reference local32
 //               ^^^^^^ reference setTag#
@@ -401,9 +401,9 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   }
 
   private boolean recyclerViewHasSelection(RecyclerView recyclerView) {
-//                ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#recyclerViewHasSelection().
+//                ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#recyclerViewHasSelection(). private boolean recyclerViewHasSelection(unresolved_type recyclerView)
 //                                         ^^^^^^^^^^^^ reference _root_/
-//                                                      ^^^^^^^^^^^^ definition local33
+//                                                      ^^^^^^^^^^^^ definition local33 unresolved_type recyclerView
     return recyclerView.getTag(R.id.epoxy_touch_helper_selection_status) != null;
 //         ^^^^^^^^^^^^ reference local33
 //                      ^^^^^^ reference getTag#
@@ -413,9 +413,9 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   }
 
   private void clearRecyclerViewSelectionMarker(RecyclerView recyclerView) {
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#clearRecyclerViewSelectionMarker().
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#clearRecyclerViewSelectionMarker(). private clearRecyclerViewSelectionMarker(unresolved_type recyclerView)
 //                                              ^^^^^^^^^^^^ reference _root_/
-//                                                           ^^^^^^^^^^^^ definition local34
+//                                                           ^^^^^^^^^^^^ definition local34 unresolved_type recyclerView
     recyclerView.setTag(R.id.epoxy_touch_helper_selection_status, null);
 //  ^^^^^^^^^^^^ reference local34
 //               ^^^^^^ reference setTag#
@@ -427,57 +427,57 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onSwipeStarted(T model, View itemView, int adapterPosition) {
-//            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeStarted().
+//            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeStarted(). public onSwipeStarted(T model, unresolved_type itemView, int adapterPosition)
 //                           ^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
-//                             ^^^^^ definition local35
+//                             ^^^^^ definition local35 T model
 //                                    ^^^^ reference _root_/
-//                                         ^^^^^^^^ definition local36
-//                                                       ^^^^^^^^^^^^^^^ definition local37
+//                                         ^^^^^^^^ definition local36 unresolved_type itemView
+//                                                       ^^^^^^^^^^^^^^^ definition local37 int adapterPosition
 
   }
 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onSwipeReleased(T model, View itemView) {
-//            ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeReleased().
+//            ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeReleased(). public onSwipeReleased(T model, unresolved_type itemView)
 //                            ^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
-//                              ^^^^^ definition local38
+//                              ^^^^^ definition local38 T model
 //                                     ^^^^ reference _root_/
-//                                          ^^^^^^^^ definition local39
+//                                          ^^^^^^^^ definition local39 unresolved_type itemView
 
   }
 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onDragStarted(T model, View itemView, int adapterPosition) {
-//            ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onDragStarted().
+//            ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onDragStarted(). public onDragStarted(T model, unresolved_type itemView, int adapterPosition)
 //                          ^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
-//                            ^^^^^ definition local40
+//                            ^^^^^ definition local40 T model
 //                                   ^^^^ reference _root_/
-//                                        ^^^^^^^^ definition local41
-//                                                      ^^^^^^^^^^^^^^^ definition local42
+//                                        ^^^^^^^^ definition local41 unresolved_type itemView
+//                                                      ^^^^^^^^^^^^^^^ definition local42 int adapterPosition
 
   }
 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onDragReleased(T model, View itemView) {
-//            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onDragReleased().
+//            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onDragReleased(). public onDragReleased(T model, unresolved_type itemView)
 //                           ^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
-//                             ^^^^^ definition local43
+//                             ^^^^^ definition local43 T model
 //                                    ^^^^ reference _root_/
-//                                         ^^^^^^^^ definition local44
+//                                         ^^^^^^^^ definition local44 unresolved_type itemView
 
   }
 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected void clearView(final RecyclerView recyclerView, EpoxyViewHolder viewHolder) {
-//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#clearView().
+//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(). protected clearView(unresolved_type recyclerView, EpoxyViewHolder viewHolder)
 //                               ^^^^^^^^^^^^ reference _root_/
-//                                            ^^^^^^^^^^^^ definition local45
+//                                            ^^^^^^^^^^^^ definition local45 final unresolved_type recyclerView
 //                                                          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                                          ^^^^^^^^^^ definition local46
+//                                                                          ^^^^^^^^^^ definition local46 EpoxyViewHolder viewHolder
     super.clearView(recyclerView, viewHolder);
 //  ^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#super.
 //        ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView().
@@ -506,7 +506,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
       public void run() {
-//                ^^^ definition local49
+//                ^^^ definition local49 public run()
         clearRecyclerViewSelectionMarker(recyclerView);
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#clearRecyclerViewSelectionMarker().
 //                                       ^^^^^^^^^^^^ reference local45
@@ -518,29 +518,29 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void clearView(T model, View itemView) {
-//            ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(+1).
+//            ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(+1). public clearView(T model, unresolved_type itemView)
 //                      ^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
-//                        ^^^^^ definition local50
+//                        ^^^^^ definition local50 T model
 //                               ^^^^ reference _root_/
-//                                    ^^^^^^^^ definition local51
+//                                    ^^^^^^^^ definition local51 unresolved_type itemView
 
   }
 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected void onChildDraw(Canvas c, RecyclerView recyclerView, EpoxyViewHolder viewHolder,
-//               ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onChildDraw().
+//               ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onChildDraw(). protected onChildDraw(unresolved_type c, unresolved_type recyclerView, EpoxyViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive)
 //                           ^^^^^^ reference _root_/
-//                                  ^ definition local52
+//                                  ^ definition local52 unresolved_type c
 //                                     ^^^^^^^^^^^^ reference _root_/
-//                                                  ^^^^^^^^^^^^ definition local53
+//                                                  ^^^^^^^^^^^^ definition local53 unresolved_type recyclerView
 //                                                                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                                                ^^^^^^^^^^ definition local54
+//                                                                                ^^^^^^^^^^ definition local54 EpoxyViewHolder viewHolder
       float dX, float dY, int actionState, boolean isCurrentlyActive) {
-//          ^^ definition local55
-//                    ^^ definition local56
-//                            ^^^^^^^^^^^ definition local57
-//                                                 ^^^^^^^^^^^^^^^^^ definition local58
+//          ^^ definition local55 float dX
+//                    ^^ definition local56 float dY
+//                            ^^^^^^^^^^^ definition local57 int actionState
+//                                                 ^^^^^^^^^^^^^^^^^ definition local58 boolean isCurrentlyActive
     super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
 //  ^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#super.
 //        ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelperCallback#onChildDraw().
@@ -554,7 +554,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 
     EpoxyModel<?> model = viewHolder.getModel();
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                ^^^^^ definition local59
+//                ^^^^^ definition local59 EpoxyModel<?> model
 //                        ^^^^^^^^^^ reference local54
 //                                   ^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#getModel().
     if (!isTouchableModel(model)) {
@@ -570,12 +570,12 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 
     View itemView = viewHolder.itemView;
 //  ^^^^ reference _root_/
-//       ^^^^^^^^ definition local60
+//       ^^^^^^^^ definition local60 unresolved_type itemView
 //                  ^^^^^^^^^^ reference local54
 //                             ^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#itemView#
 
     float swipeProgress;
-//        ^^^^^^^^^^^^^ definition local61
+//        ^^^^^^^^^^^^^ definition local61 float swipeProgress
     if (Math.abs(dX) > Math.abs(dY)) {
 //      ^^^^ reference java/lang/Math#
 //           ^^^ reference java/lang/Math#abs(+2).
@@ -598,7 +598,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 
     // Clamp to 1/-1 in the case of side padding where the view can be swiped extra
     float clampedProgress = Math.max(-1f, Math.min(1f, swipeProgress));
-//        ^^^^^^^^^^^^^^^ definition local62
+//        ^^^^^^^^^^^^^^^ definition local62 float clampedProgress
 //                          ^^^^ reference java/lang/Math#
 //                               ^^^ reference java/lang/Math#max(+2).
 //                                        ^^^^ reference java/lang/Math#
@@ -618,15 +618,15 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onSwipeProgressChanged(T model, View itemView, float swipeProgress,
-//            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeProgressChanged().
+//            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeProgressChanged(). public onSwipeProgressChanged(T model, unresolved_type itemView, float swipeProgress, unresolved_type canvas)
 //                                   ^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
-//                                     ^^^^^ definition local63
+//                                     ^^^^^ definition local63 T model
 //                                            ^^^^ reference _root_/
-//                                                 ^^^^^^^^ definition local64
-//                                                                 ^^^^^^^^^^^^^ definition local65
+//                                                 ^^^^^^^^ definition local64 unresolved_type itemView
+//                                                                 ^^^^^^^^^^^^^ definition local65 float swipeProgress
       Canvas canvas) {
 //    ^^^^^^ reference _root_/
-//           ^^^^^^ definition local66
+//           ^^^^^^ definition local66 unresolved_type canvas
 
   }
 }

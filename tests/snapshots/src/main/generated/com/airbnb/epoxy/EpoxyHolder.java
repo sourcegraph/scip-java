@@ -19,19 +19,19 @@ import androidx.annotation.NonNull;
  * pattern when binding to a model.
  */
 public abstract class EpoxyHolder {
-//                    ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#
+//                    ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyHolder# public abstract class EpoxyHolder
 
   public EpoxyHolder(@NonNull ViewParent parent) {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#`<init>`().
+//       ^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#`<init>`(). public <init>(unresolved_type parent)
 //                    ^^^^^^^ reference androidx/annotation/NonNull#
 //                            ^^^^^^^^^^ reference _root_/
-//                                       ^^^^^^ definition local0
+//                                       ^^^^^^ definition local0 unresolved_type parent
     this();
 //  ^^^^ reference com/airbnb/epoxy/EpoxyHolder#`<init>`(+1).
   }
 
   public EpoxyHolder() {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#`<init>`(+1).
+//       ^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#`<init>`(+1). public <init>()
   }
 
   /**
@@ -43,8 +43,8 @@ public abstract class EpoxyHolder {
    * {@link EpoxyModelWithHolder#getLayout()}
    */
   protected abstract void bindView(@NonNull View itemView);
-//                        ^^^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#bindView().
+//                        ^^^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#bindView(). protected abstract bindView(unresolved_type itemView)
 //                                  ^^^^^^^ reference androidx/annotation/NonNull#
 //                                          ^^^^ reference _root_/
-//                                               ^^^^^^^^ definition local1
+//                                               ^^^^^^^^ definition local1 unresolved_type itemView
 }

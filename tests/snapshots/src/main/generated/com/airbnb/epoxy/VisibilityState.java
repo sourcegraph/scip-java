@@ -17,8 +17,8 @@ import androidx.annotation.IntDef;
 //                         ^^^^^^ reference androidx/annotation/IntDef#
 
 public final class VisibilityState {
-//                 ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#
-//                 ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#`<init>`().
+//                 ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState# public final class VisibilityState
+//                 ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#`<init>`(). public <init>()
 
   @Retention(RetentionPolicy.SOURCE)
 // ^^^^^^^^^ reference java/lang/annotation/Retention#
@@ -40,7 +40,7 @@ public final class VisibilityState {
            PARTIAL_IMPRESSION_INVISIBLE})
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#PARTIAL_IMPRESSION_INVISIBLE.
   public @interface Visibility {
-//                  ^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#Visibility#
+//                  ^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#Visibility# public abstract static Visibility extends Annotation
   }
 
   /**
@@ -48,7 +48,7 @@ public final class VisibilityState {
    * of the Component is visible.
    */
   public static final int VISIBLE = 0;
-//                        ^^^^^^^ definition com/airbnb/epoxy/VisibilityState#VISIBLE.
+//                        ^^^^^^^ definition com/airbnb/epoxy/VisibilityState#VISIBLE. public static final int VISIBLE
 
   /**
    * Event triggered when a Component becomes invisible. This is the same with exiting the Visible
@@ -56,7 +56,7 @@ public final class VisibilityState {
    * when a component leaves any of these ranges should be written in the handler for this event.
    */
   public static final int INVISIBLE = 1;
-//                        ^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#INVISIBLE.
+//                        ^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#INVISIBLE. public static final int INVISIBLE
 
   /**
    * Event triggered when a Component enters the Focused Range. This happens when either the
@@ -64,7 +64,7 @@ public final class VisibilityState {
    * the viewport, when the it is fully visible.
    */
   public static final int FOCUSED_VISIBLE = 2;
-//                        ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#FOCUSED_VISIBLE.
+//                        ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#FOCUSED_VISIBLE. public static final int FOCUSED_VISIBLE
 
   /**
    * Event triggered when a Component exits the Focused Range. The Focused Range is defined as at
@@ -72,7 +72,7 @@ public final class VisibilityState {
    * it is fully visible.
    */
   public static final int UNFOCUSED_VISIBLE = 3;
-//                        ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#UNFOCUSED_VISIBLE.
+//                        ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#UNFOCUSED_VISIBLE. public static final int UNFOCUSED_VISIBLE
 
   /**
    * Event triggered when a Component enters the Full Impression Range. This happens, for instance
@@ -80,7 +80,7 @@ public final class VisibilityState {
    * become visible.
    */
   public static final int FULL_IMPRESSION_VISIBLE = 4;
-//                        ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#FULL_IMPRESSION_VISIBLE.
+//                        ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#FULL_IMPRESSION_VISIBLE. public static final int FULL_IMPRESSION_VISIBLE
 
   /**
    * Event triggered when a Component enters the Partial Impression Range. This happens, for
@@ -89,7 +89,7 @@ public final class VisibilityState {
    * {@link EpoxyVisibilityTracker#setPartialImpressionThresholdPercentage(int)}.
    */
   public static final int PARTIAL_IMPRESSION_VISIBLE = 5;
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#PARTIAL_IMPRESSION_VISIBLE.
+//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#PARTIAL_IMPRESSION_VISIBLE. public static final int PARTIAL_IMPRESSION_VISIBLE
 
   /**
    * Event triggered when a Component exits the Partial Impression Range. This happens, for
@@ -98,5 +98,5 @@ public final class VisibilityState {
    * {@link EpoxyVisibilityTracker#setPartialImpressionThresholdPercentage(int)}.
    */
   public static final int PARTIAL_IMPRESSION_INVISIBLE = 6;
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#PARTIAL_IMPRESSION_INVISIBLE.
+//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#PARTIAL_IMPRESSION_INVISIBLE. public static final int PARTIAL_IMPRESSION_INVISIBLE
 }

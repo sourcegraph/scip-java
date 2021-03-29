@@ -46,7 +46,6 @@ public class SymbolDescriptor {
       return new IllegalArgumentException("invalid symbol format\n" + symbol + "\n" + b.toString());
     }
 
-
     public char readChar() {
       if (i < 0) throw fail();
 

@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
  * Thrown if a model is changed after it is added to an {@link com.airbnb.epoxy.EpoxyController}.
  */
 class ImmutableModelException extends RuntimeException {
-//    ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#
+//    ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException# class ImmutableModelException extends RuntimeException
 //                                    ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
   private static final String MODEL_CANNOT_BE_CHANGED_MESSAGE =
 //                     ^^^^^^ reference java/lang/String#
-//                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#MODEL_CANNOT_BE_CHANGED_MESSAGE.
+//                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#MODEL_CANNOT_BE_CHANGED_MESSAGE. private static final String MODEL_CANNOT_BE_CHANGED_MESSAGE
       "Epoxy attribute fields on a model cannot be changed once the model is added to a "
           + "controller. Check that these fields are not updated, or that the assigned objects "
           + "are not mutated, outside of the buildModels method. The only exception is if "
@@ -23,10 +23,10 @@ class ImmutableModelException extends RuntimeException {
           + " call `requestModelBuild` instead to recreate all models.";
 
   ImmutableModelException(EpoxyModel model, int modelPosition) {
-//^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`(). <init>(EpoxyModel model, int modelPosition)
 //                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                   ^^^^^ definition local0
-//                                              ^^^^^^^^^^^^^ definition local1
+//                                   ^^^^^ definition local0 EpoxyModel model
+//                                              ^^^^^^^^^^^^^ definition local1 int modelPosition
     this(model, "", modelPosition);
 //  ^^^^ reference com/airbnb/epoxy/ImmutableModelException#`<init>`(+1).
 //       ^^^^^ reference local0
@@ -34,13 +34,13 @@ class ImmutableModelException extends RuntimeException {
   }
 
   ImmutableModelException(EpoxyModel model,
-//^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`(+1).
+//^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`(+1). <init>(EpoxyModel model, String descriptionOfWhenChangeHappened, int modelPosition)
 //                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                   ^^^^^ definition local2
+//                                   ^^^^^ definition local2 EpoxyModel model
       String descriptionOfWhenChangeHappened, int modelPosition) {
 //    ^^^^^^ reference java/lang/String#
-//           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local3
-//                                                ^^^^^^^^^^^^^ definition local4
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local3 String descriptionOfWhenChangeHappened
+//                                                ^^^^^^^^^^^^^ definition local4 int modelPosition
     super(buildMessage(model, descriptionOfWhenChangeHappened, modelPosition));
 //  ^^^^^ reference java/lang/RuntimeException#`<init>`(+1).
 //        ^^^^^^^^^^^^ reference com/airbnb/epoxy/ImmutableModelException#buildMessage().
@@ -53,13 +53,13 @@ class ImmutableModelException extends RuntimeException {
 // ^^^^^^^ reference androidx/annotation/NonNull#
   private static String buildMessage(EpoxyModel model,
 //               ^^^^^^ reference java/lang/String#
-//                      ^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#buildMessage().
+//                      ^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#buildMessage(). private static String buildMessage(EpoxyModel model, String descriptionOfWhenChangeHappened, int modelPosition)
 //                                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                              ^^^^^ definition local5
+//                                              ^^^^^ definition local5 EpoxyModel model
       String descriptionOfWhenChangeHappened, int modelPosition) {
 //    ^^^^^^ reference java/lang/String#
-//           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local6
-//                                                ^^^^^^^^^^^^^ definition local7
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local6 String descriptionOfWhenChangeHappened
+//                                                ^^^^^^^^^^^^^ definition local7 int modelPosition
     return new StringBuilder(descriptionOfWhenChangeHappened)
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/StringBuilder#`<init>`(+2).
 //             ^^^^^^^^^^^^^ reference java/lang/StringBuilder#

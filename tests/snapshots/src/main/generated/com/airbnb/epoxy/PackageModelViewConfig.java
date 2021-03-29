@@ -35,14 +35,14 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface PackageModelViewConfig {
-//                ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#
+//                ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig# public abstract PackageModelViewConfig extends Annotation
   /**
    * The R class used in this module (eg "com.example.app.R.class"). This is needed so Epoxy can
    * look up layout files.
    */
   Class<?> rClass();
 //^^^^^ reference java/lang/Class#
-//         ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#rClass().
+//         ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#rClass(). public abstract Class<?> rClass()
   /**
    * A default layout pattern to be used for specifying layouts for generated models. If this is set
    * then a layout can be omitted from a view's {@link com.airbnb.epoxy.ModelView} annotation.
@@ -53,12 +53,12 @@ public @interface PackageModelViewConfig {
    */
   String defaultLayoutPattern() default "%s";
 //^^^^^^ reference java/lang/String#
-//       ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#defaultLayoutPattern().
+//       ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#defaultLayoutPattern(). public abstract String defaultLayoutPattern()
 
   /** An optional EpoxyModel subclass that generated models should extend. */
   Class<?> defaultBaseModelClass() default Void.class;
 //^^^^^ reference java/lang/Class#
-//         ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#defaultBaseModelClass().
+//         ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#defaultBaseModelClass(). public abstract Class<?> defaultBaseModelClass()
 //                                         ^^^^ reference java/lang/Void#
 //                                              ^^^^^ reference java/lang/Void#class.
 
@@ -71,14 +71,14 @@ public @interface PackageModelViewConfig {
    * other layout instead of the default.
    */
   boolean useLayoutOverloads() default false;
-//        ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#useLayoutOverloads().
+//        ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#useLayoutOverloads(). public abstract boolean useLayoutOverloads()
 
   /**
    * Suffix, which will be appended to generated model's names. "Model_" is a default value.
    */
   String generatedModelSuffix() default "Model_";
 //^^^^^^ reference java/lang/String#
-//       ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#generatedModelSuffix().
+//       ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#generatedModelSuffix(). public abstract String generatedModelSuffix()
 
   /**
    * Controls whether "builder" setter functions that returns the model type will be duplicated
@@ -93,7 +93,7 @@ public @interface PackageModelViewConfig {
    */
   Option disableGenerateBuilderOverloads() default Option.Default;
 //^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
-//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#disableGenerateBuilderOverloads().
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#disableGenerateBuilderOverloads(). public abstract Option disableGenerateBuilderOverloads()
 //                                                 ^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
 //                                                        ^^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#Default.
 
@@ -107,7 +107,7 @@ public @interface PackageModelViewConfig {
    */
   Option disableGenerateGetters() default Option.Default;
 //^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
-//       ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#disableGenerateGetters().
+//       ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#disableGenerateGetters(). public abstract Option disableGenerateGetters()
 //                                        ^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
 //                                               ^^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#Default.
 
@@ -122,7 +122,7 @@ public @interface PackageModelViewConfig {
    */
   Option disableGenerateReset() default Option.Default;
 //^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
-//       ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#disableGenerateReset().
+//       ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#disableGenerateReset(). public abstract Option disableGenerateReset()
 //                                      ^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#
 //                                             ^^^^^^^ reference com/airbnb/epoxy/PackageModelViewConfig#Option#Default.
 
@@ -130,13 +130,13 @@ public @interface PackageModelViewConfig {
    * Enable or Disable an option, or inherit the default.
    */
   enum Option {
-//     ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#
-//     ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#`<init>`().
+//     ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option# public static final enum Option extends Enum<Option>
+//     ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#`<init>`(). private <init>()
     Default,
-//  ^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Default.
+//  ^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Default. public static final Option Default
     Enabled,
-//  ^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Enabled.
+//  ^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Enabled. public static final Option Enabled
     Disabled
-//  ^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Disabled.
+//  ^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Disabled. public static final Option Disabled
   }
 }

@@ -30,32 +30,32 @@ import androidx.annotation.Nullable;
  * be returned.
  */
 class ControllerHelperLookup {
-//    ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#
-//    ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#`<init>`().
+//    ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup# class ControllerHelperLookup
+//    ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#`<init>`(). <init>()
   private static final String GENERATED_HELPER_CLASS_SUFFIX = "_EpoxyHelper";
 //                     ^^^^^^ reference java/lang/String#
-//                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#GENERATED_HELPER_CLASS_SUFFIX.
+//                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#GENERATED_HELPER_CLASS_SUFFIX. private static final String GENERATED_HELPER_CLASS_SUFFIX
   private static final Map<Class<?>, Constructor<?>> BINDINGS = new LinkedHashMap<>();
 //                     ^^^ reference java/util/Map#
 //                         ^^^^^ reference java/lang/Class#
 //                                   ^^^^^^^^^^^ reference java/lang/reflect/Constructor#
-//                                                   ^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#BINDINGS.
+//                                                   ^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#BINDINGS. private static final Map<Class<?>, Constructor<?>> BINDINGS
 //                                                              ^^^^^^^^^^^^^^^^^^^^^ reference java/util/LinkedHashMap#`<init>`(+2).
 //                                                                  ^^^^^^^^^^^^^ reference java/util/LinkedHashMap#
   private static final NoOpControllerHelper NO_OP_CONTROLLER_HELPER = new NoOpControllerHelper();
 //                     ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/NoOpControllerHelper#
-//                                          ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#NO_OP_CONTROLLER_HELPER.
+//                                          ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#NO_OP_CONTROLLER_HELPER. private static final NoOpControllerHelper NO_OP_CONTROLLER_HELPER
 //                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/NoOpControllerHelper#`<init>`().
 //                                                                        ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/NoOpControllerHelper#
 
   static ControllerHelper getHelperForController(EpoxyController controller) {
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerHelper#
-//                        ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#getHelperForController().
+//                        ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#getHelperForController(). static ControllerHelper getHelperForController(EpoxyController controller)
 //                                               ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
-//                                                               ^^^^^^^^^^ definition local0
+//                                                               ^^^^^^^^^^ definition local0 EpoxyController controller
     Constructor<?> constructor = findConstructorForClass(controller.getClass());
 //  ^^^^^^^^^^^ reference java/lang/reflect/Constructor#
-//                 ^^^^^^^^^^^ definition local1
+//                 ^^^^^^^^^^^ definition local1 Constructor<?> constructor
 //                               ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().
 //                                                       ^^^^^^^^^^ reference local0
 //                                                                  ^^^^^^^^ reference java/lang/Object#getClass().
@@ -73,7 +73,7 @@ class ControllerHelperLookup {
 //                                                      ^^^^^^^^^^ reference local0
     } catch (IllegalAccessException e) {
 //           ^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalAccessException#
-//                                  ^ definition local2
+//                                  ^ definition local2 IllegalAccessException e
       throw new RuntimeException("Unable to invoke " + constructor, e);
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#`<init>`(+2).
 //              ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
@@ -81,7 +81,7 @@ class ControllerHelperLookup {
 //                                                                  ^ reference local2
     } catch (InstantiationException e) {
 //           ^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/InstantiationException#
-//                                  ^ definition local3
+//                                  ^ definition local3 InstantiationException e
       throw new RuntimeException("Unable to invoke " + constructor, e);
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#`<init>`(+2).
 //              ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
@@ -89,10 +89,10 @@ class ControllerHelperLookup {
 //                                                                  ^ reference local3
     } catch (InvocationTargetException e) {
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/reflect/InvocationTargetException#
-//                                     ^ definition local4
+//                                     ^ definition local4 InvocationTargetException e
       Throwable cause = e.getCause();
 //    ^^^^^^^^^ reference java/lang/Throwable#
-//              ^^^^^ definition local5
+//              ^^^^^ definition local5 Throwable cause
 //                      ^ reference local4
 //                        ^^^^^^^^ reference java/lang/reflect/InvocationTargetException#getCause().
       if (cause instanceof RuntimeException) {
@@ -120,12 +120,12 @@ class ControllerHelperLookup {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
   private static Constructor<?> findConstructorForClass(Class<?> controllerClass) {
 //               ^^^^^^^^^^^ reference java/lang/reflect/Constructor#
-//                              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().
+//                              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass(). private static Constructor<?> findConstructorForClass(Class<?> controllerClass)
 //                                                      ^^^^^ reference java/lang/Class#
-//                                                               ^^^^^^^^^^^^^^^ definition local6
+//                                                               ^^^^^^^^^^^^^^^ definition local6 Class<?> controllerClass
     Constructor<?> helperCtor = BINDINGS.get(controllerClass);
 //  ^^^^^^^^^^^ reference java/lang/reflect/Constructor#
-//                 ^^^^^^^^^^ definition local7
+//                 ^^^^^^^^^^ definition local7 Constructor<?> helperCtor
 //                              ^^^^^^^^ reference com/airbnb/epoxy/ControllerHelperLookup#BINDINGS.
 //                                       ^^^ reference java/util/Map#get().
 //                                           ^^^^^^^^^^^^^^^ reference local6
@@ -140,7 +140,7 @@ class ControllerHelperLookup {
 
     String clsName = controllerClass.getName();
 //  ^^^^^^ reference java/lang/String#
-//         ^^^^^^^ definition local8
+//         ^^^^^^^ definition local8 String clsName
 //                   ^^^^^^^^^^^^^^^ reference local6
 //                                   ^^^^^^^ reference java/lang/Class#getName().
     if (clsName.startsWith("android.") || clsName.startsWith("java.")) {
@@ -154,7 +154,7 @@ class ControllerHelperLookup {
     try {
       Class<?> bindingClass = Class.forName(clsName + GENERATED_HELPER_CLASS_SUFFIX);
 //    ^^^^^ reference java/lang/Class#
-//             ^^^^^^^^^^^^ definition local9
+//             ^^^^^^^^^^^^ definition local9 Class<?> bindingClass
 //                            ^^^^^ reference java/lang/Class#
 //                                  ^^^^^^^ reference java/lang/Class#forName().
 //                                          ^^^^^^^ reference local8
@@ -167,7 +167,7 @@ class ControllerHelperLookup {
 //                                             ^^^^^^^^^^^^^^^ reference local6
     } catch (ClassNotFoundException e) {
 //           ^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/ClassNotFoundException#
-//                                  ^ definition local10
+//                                  ^ definition local10 ClassNotFoundException e
       helperCtor = findConstructorForClass(controllerClass.getSuperclass());
 //    ^^^^^^^^^^ reference local7
 //                 ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().
@@ -175,7 +175,7 @@ class ControllerHelperLookup {
 //                                                         ^^^^^^^^^^^^^ reference java/lang/Class#getSuperclass().
     } catch (NoSuchMethodException e) {
 //           ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/NoSuchMethodException#
-//                                 ^ definition local11
+//                                 ^ definition local11 NoSuchMethodException e
       throw new RuntimeException("Unable to find Epoxy Helper constructor for " + clsName, e);
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#`<init>`(+2).
 //              ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#

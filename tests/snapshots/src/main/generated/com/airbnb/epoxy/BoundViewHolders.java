@@ -23,14 +23,14 @@ import androidx.collection.LongSparseArray;
 @SuppressWarnings("WeakerAccess")
 //^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
-//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#
-//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#`<init>`().
+//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders# public class BoundViewHolders extends Iterable<EpoxyViewHolder>
+//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#`<init>`(). public <init>()
 //                                       ^^^^^^^^ reference java/lang/Iterable#
 //                                                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
   private final LongSparseArray<EpoxyViewHolder> holders = new LongSparseArray<>();
 //              ^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#
 //                              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                               ^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#holders.
+//                                               ^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#holders. private final LongSparseArray<EpoxyViewHolder> holders
 //                                                         ^^^^^^^^^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#`<init>`().
 //                                                             ^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#
 
@@ -38,9 +38,9 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
   public EpoxyViewHolder get(EpoxyViewHolder holder) {
 //       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                       ^^^ definition com/airbnb/epoxy/BoundViewHolders#get().
+//                       ^^^ definition com/airbnb/epoxy/BoundViewHolders#get(). public EpoxyViewHolder get(EpoxyViewHolder holder)
 //                           ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                           ^^^^^^ definition local0
+//                                           ^^^^^^ definition local0 EpoxyViewHolder holder
     return holders.get(holder.getItemId());
 //         ^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#holders.
 //                 ^^^ reference androidx/collection/LongSparseArray#get().
@@ -49,9 +49,9 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
   }
 
   public void put(EpoxyViewHolder holder) {
-//            ^^^ definition com/airbnb/epoxy/BoundViewHolders#put().
+//            ^^^ definition com/airbnb/epoxy/BoundViewHolders#put(). public put(EpoxyViewHolder holder)
 //                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                ^^^^^^ definition local1
+//                                ^^^^^^ definition local1 EpoxyViewHolder holder
     holders.put(holder.getItemId(), holder);
 //  ^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#holders.
 //          ^^^ reference androidx/collection/LongSparseArray#put().
@@ -61,9 +61,9 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
   }
 
   public void remove(EpoxyViewHolder holder) {
-//            ^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#remove().
+//            ^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#remove(). public remove(EpoxyViewHolder holder)
 //                   ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                   ^^^^^^ definition local2
+//                                   ^^^^^^ definition local2 EpoxyViewHolder holder
     holders.remove(holder.getItemId());
 //  ^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#holders.
 //          ^^^^^^ reference androidx/collection/LongSparseArray#remove().
@@ -72,7 +72,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
   }
 
   public int size() {
-//           ^^^^ definition com/airbnb/epoxy/BoundViewHolders#size().
+//           ^^^^ definition com/airbnb/epoxy/BoundViewHolders#size(). public int size()
     return holders.size();
 //         ^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#holders.
 //                 ^^^^ reference androidx/collection/LongSparseArray#size().
@@ -83,7 +83,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
   public Iterator<EpoxyViewHolder> iterator() {
 //       ^^^^^^^^ reference java/util/Iterator#
 //                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                 ^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#iterator().
+//                                 ^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#iterator(). public Iterator<EpoxyViewHolder> iterator()
     return new HolderIterator();
 //         ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#HolderIterator#`<init>`().
 //             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#HolderIterator#
@@ -93,9 +93,9 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
   public EpoxyViewHolder getHolderForModel(EpoxyModel<?> model) {
 //       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                       ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#getHolderForModel().
+//                       ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#getHolderForModel(). public EpoxyViewHolder getHolderForModel(EpoxyModel<?> model)
 //                                         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                       ^^^^^ definition local3
+//                                                       ^^^^^ definition local3 EpoxyModel<?> model
     return holders.get(model.id());
 //         ^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#holders.
 //                 ^^^ reference androidx/collection/LongSparseArray#get().
@@ -104,17 +104,17 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
   }
 
   private class HolderIterator implements Iterator<EpoxyViewHolder> {
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator#
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator#`<init>`().
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator# private class HolderIterator extends Iterator<EpoxyViewHolder>
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator#`<init>`(). private <init>()
 //                                        ^^^^^^^^ reference java/util/Iterator#
 //                                                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
     private int position = 0;
-//              ^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator#position.
+//              ^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator#position. private int position
 
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public boolean hasNext() {
-//                 ^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator#hasNext().
+//                 ^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator#hasNext(). public boolean hasNext()
       return position < holders.size();
 //           ^^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#HolderIterator#position.
 //                      ^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#holders.
@@ -125,7 +125,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //   ^^^^^^^^ reference java/lang/Override#
     public EpoxyViewHolder next() {
 //         ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                         ^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator#next().
+//                         ^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator#next(). public EpoxyViewHolder next()
       if (!hasNext()) {
 //         ^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#HolderIterator#hasNext().
         throw new NoSuchElementException();
@@ -141,7 +141,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void remove() {
-//              ^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator#remove().
+//              ^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator#remove(). public remove()
       throw new UnsupportedOperationException();
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`().
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#

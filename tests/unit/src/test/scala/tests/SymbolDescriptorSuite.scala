@@ -1,10 +1,11 @@
 package tests
 
-import com.sourcegraph.semanticdb_javac.SemanticdbSymbols.Descriptor.Kind
-import com.sourcegraph.lsif_semanticdb.SymbolDescriptor;
-import munit.{FunSuite, TestOptions}
-
 import scala.meta.internal.semanticdb.Scala._
+
+import com.sourcegraph.lsif_semanticdb.SymbolDescriptor
+import com.sourcegraph.semanticdb_javac.SemanticdbSymbols.Descriptor.Kind
+import munit.FunSuite
+import munit.TestOptions
 
 class SymbolDescriptorSuite extends FunSuite {
   def checkDescriptor(options: TestOptions): Unit = {

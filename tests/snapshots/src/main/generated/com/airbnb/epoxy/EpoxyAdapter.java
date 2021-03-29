@@ -35,12 +35,12 @@ import androidx.annotation.Nullable;
 @SuppressWarnings("WeakerAccess")
 //^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
-//                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#
-//                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#`<init>`().
+//                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter# public abstract class EpoxyAdapter extends BaseEpoxyAdapter
+//                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#`<init>`(). public <init>()
 //                                         ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
   private final HiddenEpoxyModel hiddenModel = new HiddenEpoxyModel();
 //              ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#
-//                               ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#hiddenModel.
+//                               ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#hiddenModel. private final HiddenEpoxyModel hiddenModel
 //                                             ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
 //                                                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#
 
@@ -51,19 +51,19 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected final List<EpoxyModel<?>> models = new ModelList();
 //                ^^^^ reference java/util/List#
 //                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                    ^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#models.
+//                                    ^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#models. protected final List<EpoxyModel<?>> models
 //                                             ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#`<init>`(+1).
 //                                                 ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
   private DiffHelper diffHelper;
 //        ^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#
-//                   ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#diffHelper.
+//                   ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#diffHelper. private DiffHelper diffHelper
 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   List<EpoxyModel<?>> getCurrentModels() {
 //^^^^ reference java/util/List#
 //     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#getCurrentModels().
+//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#getCurrentModels(). List<EpoxyModel<?>> getCurrentModels()
     return models;
 //         ^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#models.
   }
@@ -75,7 +75,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @see #notifyModelsChanged()
    */
   protected void enableDiffing() {
-//               ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#enableDiffing().
+//               ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#enableDiffing(). protected enableDiffing()
     if (diffHelper != null) {
 //      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#diffHelper.
       throw new IllegalStateException("Diffing was already enabled");
@@ -109,11 +109,11 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 // ^^^^^^^^ reference java/lang/Override#
   EpoxyModel<?> getModelForPosition(int position) {
 //^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#getModelForPosition().
-//                                      ^^^^^^^^ definition local0
+//              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#getModelForPosition(). EpoxyModel<?> getModelForPosition(int position)
+//                                      ^^^^^^^^ definition local0 int position
     EpoxyModel<?> model = models.get(position);
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                ^^^^^ definition local1
+//                ^^^^^ definition local1 EpoxyModel<?> model
 //                        ^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#models.
 //                               ^^^ reference java/util/List#get().
 //                                   ^^^^^^^^ reference local0
@@ -138,7 +138,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    */
 
   protected void notifyModelsChanged() {
-//               ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#notifyModelsChanged().
+//               ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#notifyModelsChanged(). protected notifyModelsChanged()
     if (diffHelper == null) {
 //      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#diffHelper.
       throw new IllegalStateException("You must enable diffing before notifying models changed");
@@ -156,9 +156,9 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * retained the same position.
    */
   protected void notifyModelChanged(EpoxyModel<?> model) {
-//               ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#notifyModelChanged().
+//               ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#notifyModelChanged(). protected notifyModelChanged(EpoxyModel<?> model)
 //                                  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                ^^^^^ definition local2
+//                                                ^^^^^ definition local2 EpoxyModel<?> model
     notifyModelChanged(model, null);
 //  ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#notifyModelChanged(+1).
 //                     ^^^^^ reference local2
@@ -169,14 +169,14 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * retained the same position.
    */
   protected void notifyModelChanged(EpoxyModel<?> model, @Nullable Object payload) {
-//               ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#notifyModelChanged(+1).
+//               ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#notifyModelChanged(+1). protected notifyModelChanged(EpoxyModel<?> model, Object payload)
 //                                  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                ^^^^^ definition local3
+//                                                ^^^^^ definition local3 EpoxyModel<?> model
 //                                                        ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                                                 ^^^^^^ reference java/lang/Object#
-//                                                                        ^^^^^^^ definition local4
+//                                                                        ^^^^^^^ definition local4 Object payload
     int index = getModelPosition(model);
-//      ^^^^^ definition local5
+//      ^^^^^ definition local5 int index
 //              ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
 //                               ^^^^^ reference local3
     if (index != -1) {
@@ -192,11 +192,11 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * Adds the model to the end of the {@link #models} list and notifies that the item was inserted.
    */
   protected void addModel(EpoxyModel<?> modelToAdd) {
-//               ^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#addModel().
+//               ^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#addModel(). protected addModel(EpoxyModel<?> modelToAdd)
 //                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                      ^^^^^^^^^^ definition local6
+//                                      ^^^^^^^^^^ definition local6 EpoxyModel<?> modelToAdd
     int initialSize = models.size();
-//      ^^^^^^^^^^^ definition local7
+//      ^^^^^^^^^^^ definition local7 int initialSize
 //                    ^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#models.
 //                           ^^^^ reference java/util/List#size().
 
@@ -219,15 +219,15 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * inserted.
    */
   protected void addModels(EpoxyModel<?>... modelsToAdd) {
-//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#addModels().
+//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#addModels(). protected addModels(Array<EpoxyModel<?>> modelsToAdd)
 //                         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                          ^^^^^^^^^^^ definition local8
+//                                          ^^^^^^^^^^^ definition local8 Array<EpoxyModel<?>> modelsToAdd
     int initialSize = models.size();
-//      ^^^^^^^^^^^ definition local9
+//      ^^^^^^^^^^^ definition local9 int initialSize
 //                    ^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#models.
 //                           ^^^^ reference java/util/List#size().
     int numModelsToAdd = modelsToAdd.length;
-//      ^^^^^^^^^^^^^^ definition local10
+//      ^^^^^^^^^^^^^^ definition local10 int numModelsToAdd
 //                       ^^^^^^^^^^^ reference local8
 //                                   ^^^^^^ reference length.
 
@@ -259,12 +259,12 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * inserted.
    */
   protected void addModels(Collection<? extends EpoxyModel<?>> modelsToAdd) {
-//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#addModels(+1).
+//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#addModels(+1). protected addModels(Collection<? extends EpoxyModel<?>> modelsToAdd)
 //                         ^^^^^^^^^^ reference java/util/Collection#
 //                                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                             ^^^^^^^^^^^ definition local11
+//                                                             ^^^^^^^^^^^ definition local11 Collection<? extends EpoxyModel<?>> modelsToAdd
     int initialSize = models.size();
-//      ^^^^^^^^^^^ definition local12
+//      ^^^^^^^^^^^ definition local12 int initialSize
 //                    ^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#models.
 //                           ^^^^ reference java/util/List#size().
 
@@ -289,13 +289,13 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * item was inserted.
    */
   protected void insertModelBefore(EpoxyModel<?> modelToInsert, EpoxyModel<?> modelToInsertBefore) {
-//               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#insertModelBefore().
+//               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#insertModelBefore(). protected insertModelBefore(EpoxyModel<?> modelToInsert, EpoxyModel<?> modelToInsertBefore)
 //                                 ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                               ^^^^^^^^^^^^^ definition local13
+//                                               ^^^^^^^^^^^^^ definition local13 EpoxyModel<?> modelToInsert
 //                                                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                                            ^^^^^^^^^^^^^^^^^^^ definition local14
+//                                                                            ^^^^^^^^^^^^^^^^^^^ definition local14 EpoxyModel<?> modelToInsertBefore
     int targetIndex = getModelPosition(modelToInsertBefore);
-//      ^^^^^^^^^^^ definition local15
+//      ^^^^^^^^^^^ definition local15 int targetIndex
 //                    ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
 //                                     ^^^^^^^^^^^^^^^^^^^ reference local14
     if (targetIndex == -1) {
@@ -326,13 +326,13 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * was inserted.
    */
   protected void insertModelAfter(EpoxyModel<?> modelToInsert, EpoxyModel<?> modelToInsertAfter) {
-//               ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#insertModelAfter().
+//               ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#insertModelAfter(). protected insertModelAfter(EpoxyModel<?> modelToInsert, EpoxyModel<?> modelToInsertAfter)
 //                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                              ^^^^^^^^^^^^^ definition local16
+//                                              ^^^^^^^^^^^^^ definition local16 EpoxyModel<?> modelToInsert
 //                                                             ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                                           ^^^^^^^^^^^^^^^^^^ definition local17
+//                                                                           ^^^^^^^^^^^^^^^^^^ definition local17 EpoxyModel<?> modelToInsertAfter
     int modelIndex = getModelPosition(modelToInsertAfter);
-//      ^^^^^^^^^^ definition local18
+//      ^^^^^^^^^^ definition local18 int modelIndex
 //                   ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
 //                                    ^^^^^^^^^^^^^^^^^^ reference local17
     if (modelIndex == -1) {
@@ -344,7 +344,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
     }
 
     int targetIndex = modelIndex + 1;
-//      ^^^^^^^^^^^ definition local19
+//      ^^^^^^^^^^^ definition local19 int targetIndex
 //                    ^^^^^^^^^^ reference local18
     pauseModelListNotifications();
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#pauseModelListNotifications().
@@ -366,11 +366,11 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * nothing.
    */
   protected void removeModel(EpoxyModel<?> model) {
-//               ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#removeModel().
+//               ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#removeModel(). protected removeModel(EpoxyModel<?> model)
 //                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                         ^^^^^ definition local20
+//                                         ^^^^^ definition local20 EpoxyModel<?> model
     int index = getModelPosition(model);
-//      ^^^^^ definition local21
+//      ^^^^^ definition local21 int index
 //              ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
 //                               ^^^^^ reference local20
     if (index != -1) {
@@ -394,9 +394,9 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * Removes all models
    */
   protected void removeAllModels() {
-//               ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#removeAllModels().
+//               ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#removeAllModels(). protected removeAllModels()
     int numModelsRemoved = models.size();
-//      ^^^^^^^^^^^^^^^^ definition local22
+//      ^^^^^^^^^^^^^^^^ definition local22 int numModelsRemoved
 //                         ^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#models.
 //                                ^^^^ reference java/util/List#size().
 
@@ -419,21 +419,21 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * data.
    */
   protected void removeAllAfterModel(EpoxyModel<?> model) {
-//               ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#removeAllAfterModel().
+//               ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#removeAllAfterModel(). protected removeAllAfterModel(EpoxyModel<?> model)
 //                                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                 ^^^^^ definition local23
+//                                                 ^^^^^ definition local23 EpoxyModel<?> model
     List<EpoxyModel<?>> modelsToRemove = getAllModelsAfter(model);
 //  ^^^^ reference java/util/List#
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                      ^^^^^^^^^^^^^^ definition local24
+//                      ^^^^^^^^^^^^^^ definition local24 List<EpoxyModel<?>> modelsToRemove
 //                                       ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#getAllModelsAfter().
 //                                                         ^^^^^ reference local23
     int numModelsRemoved = modelsToRemove.size();
-//      ^^^^^^^^^^^^^^^^ definition local25
+//      ^^^^^^^^^^^^^^^^ definition local25 int numModelsRemoved
 //                         ^^^^^^^^^^^^^^ reference local24
 //                                        ^^^^ reference java/util/List#size().
     int initialModelCount = models.size();
-//      ^^^^^^^^^^^^^^^^^ definition local26
+//      ^^^^^^^^^^^^^^^^^ definition local26 int initialModelCount
 //                          ^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#models.
 //                                 ^^^^ reference java/util/List#size().
 
@@ -461,10 +461,10 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @param show  True to show the model, false to hide it.
    */
   protected void showModel(EpoxyModel<?> model, boolean show) {
-//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModel().
+//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModel(). protected showModel(EpoxyModel<?> model, boolean show)
 //                         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                       ^^^^^ definition local27
-//                                                      ^^^^ definition local28
+//                                       ^^^^^ definition local27 EpoxyModel<?> model
+//                                                      ^^^^ definition local28 boolean show
     if (model.isShown() == show) {
 //      ^^^^^ reference local27
 //            ^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#isShown().
@@ -487,9 +487,9 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @param model The model to show. It should already be added to the {@link #models} list.
    */
   protected void showModel(EpoxyModel<?> model) {
-//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModel(+1).
+//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModel(+1). protected showModel(EpoxyModel<?> model)
 //                         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                       ^^^^^ definition local29
+//                                       ^^^^^ definition local29 EpoxyModel<?> model
     showModel(model, true);
 //  ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#showModel().
 //            ^^^^^ reference local29
@@ -501,9 +501,9 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @param models The models to show. They should already be added to the {@link #models} list.
    */
   protected void showModels(EpoxyModel<?>... models) {
-//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModels().
+//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModels(). protected showModels(Array<EpoxyModel<?>> models)
 //                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                           ^^^^^^ definition local30
+//                                           ^^^^^^ definition local30 Array<EpoxyModel<?>> models
     showModels(Arrays.asList(models));
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#showModels(+2).
 //             ^^^^^^ reference java/util/Arrays#
@@ -519,10 +519,10 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @param show   True to show the models, false to hide them.
    */
   protected void showModels(boolean show, EpoxyModel<?>... models) {
-//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModels(+1).
-//                                  ^^^^ definition local31
+//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModels(+1). protected showModels(boolean show, Array<EpoxyModel<?>> models)
+//                                  ^^^^ definition local31 boolean show
 //                                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                         ^^^^^^ definition local32
+//                                                         ^^^^^^ definition local32 Array<EpoxyModel<?>> models
     showModels(Arrays.asList(models), show);
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#showModels(+3).
 //             ^^^^^^ reference java/util/Arrays#
@@ -537,10 +537,10 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @param models The models to show. They should already be added to the {@link #models} list.
    */
   protected void showModels(Iterable<EpoxyModel<?>> models) {
-//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModels(+2).
+//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModels(+2). protected showModels(Iterable<EpoxyModel<?>> models)
 //                          ^^^^^^^^ reference java/lang/Iterable#
 //                                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                  ^^^^^^ definition local33
+//                                                  ^^^^^^ definition local33 Iterable<EpoxyModel<?>> models
     showModels(models, true);
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#showModels(+3).
 //             ^^^^^^ reference local33
@@ -554,14 +554,14 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @param show   True to show the models, false to hide them.
    */
   protected void showModels(Iterable<EpoxyModel<?>> models, boolean show) {
-//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModels(+3).
+//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModels(+3). protected showModels(Iterable<EpoxyModel<?>> models, boolean show)
 //                          ^^^^^^^^ reference java/lang/Iterable#
 //                                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                  ^^^^^^ definition local34
-//                                                                  ^^^^ definition local35
+//                                                  ^^^^^^ definition local34 Iterable<EpoxyModel<?>> models
+//                                                                  ^^^^ definition local35 boolean show
     for (EpoxyModel<?> model : models) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                     ^^^^^ definition local36
+//                     ^^^^^ definition local36 EpoxyModel<?> model
 //                             ^^^^^^ reference local34
       showModel(model, show);
 //    ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#showModel().
@@ -576,9 +576,9 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @param model The model to hide. This should already be added to the {@link #models} list.
    */
   protected void hideModel(EpoxyModel<?> model) {
-//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#hideModel().
+//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#hideModel(). protected hideModel(EpoxyModel<?> model)
 //                         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                       ^^^^^ definition local37
+//                                       ^^^^^ definition local37 EpoxyModel<?> model
     showModel(model, false);
 //  ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#showModel().
 //            ^^^^^ reference local37
@@ -590,10 +590,10 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @param models The models to hide. They should already be added to the {@link #models} list.
    */
   protected void hideModels(Iterable<EpoxyModel<?>> models) {
-//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#hideModels().
+//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#hideModels(). protected hideModels(Iterable<EpoxyModel<?>> models)
 //                          ^^^^^^^^ reference java/lang/Iterable#
 //                                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                  ^^^^^^ definition local38
+//                                                  ^^^^^^ definition local38 Iterable<EpoxyModel<?>> models
     showModels(models, false);
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#showModels(+3).
 //             ^^^^^^ reference local38
@@ -605,9 +605,9 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @param models The models to hide. They should already be added to the {@link #models} list.
    */
   protected void hideModels(EpoxyModel<?>... models) {
-//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#hideModels(+1).
+//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#hideModels(+1). protected hideModels(Array<EpoxyModel<?>> models)
 //                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                           ^^^^^^ definition local39
+//                                           ^^^^^^ definition local39 Array<EpoxyModel<?>> models
     hideModels(Arrays.asList(models));
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#hideModels().
 //             ^^^^^^ reference java/util/Arrays#
@@ -621,9 +621,9 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @param model The model after which to hide. It must exist in the {@link #models} list.
    */
   protected void hideAllAfterModel(EpoxyModel<?> model) {
-//               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#hideAllAfterModel().
+//               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#hideAllAfterModel(). protected hideAllAfterModel(EpoxyModel<?> model)
 //                                 ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                               ^^^^^ definition local40
+//                                               ^^^^^ definition local40 EpoxyModel<?> model
     hideModels(getAllModelsAfter(model));
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#hideModels().
 //             ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#getAllModelsAfter().
@@ -640,11 +640,11 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected List<EpoxyModel<?>> getAllModelsAfter(EpoxyModel<?> model) {
 //          ^^^^ reference java/util/List#
 //               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                              ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#getAllModelsAfter().
+//                              ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#getAllModelsAfter(). protected List<EpoxyModel<?>> getAllModelsAfter(EpoxyModel<?> model)
 //                                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                              ^^^^^ definition local41
+//                                                              ^^^^^ definition local41 EpoxyModel<?> model
     int index = getModelPosition(model);
-//      ^^^^^ definition local42
+//      ^^^^^ definition local42 int index
 //              ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
 //                               ^^^^^ reference local41
     if (index == -1) {
@@ -668,7 +668,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * prevent the differ having to do work to track them.
    */
   private void pauseModelListNotifications() {
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#pauseModelListNotifications().
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#pauseModelListNotifications(). private pauseModelListNotifications()
     ((ModelList) models).pauseNotifications();
 //    ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
 //               ^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#models.
@@ -676,7 +676,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   }
 
   private void resumeModelListNotifications() {
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#resumeModelListNotifications().
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#resumeModelListNotifications(). private resumeModelListNotifications()
     ((ModelList) models).resumeNotifications();
 //    ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
 //               ^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#models.

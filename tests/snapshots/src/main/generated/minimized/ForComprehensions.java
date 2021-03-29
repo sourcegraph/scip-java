@@ -10,22 +10,22 @@ import java.util.List;
 //               ^^^^ reference java/util/List#
 
 public class ForComprehensions {
-//           ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions#
-//           ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions#`<init>`().
+//           ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions# public class ForComprehensions
+//           ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions#`<init>`(). public <init>()
   public static int app(int n) {
-//                  ^^^ definition minimized/ForComprehensions#app().
-//                          ^ definition local0
+//                  ^^^ definition minimized/ForComprehensions#app(). public static int app(int n)
+//                          ^ definition local0 int n
     List<Integer> integers = Collections.singletonList(n);
 //  ^^^^ reference java/util/List#
 //       ^^^^^^^ reference java/lang/Integer#
-//                ^^^^^^^^ definition local1
+//                ^^^^^^^^ definition local1 List<Integer> integers
 //                           ^^^^^^^^^^^ reference java/util/Collections#
 //                                       ^^^^^^^^^^^^^ reference java/util/Collections#singletonList().
 //                                                     ^ reference local0
     int result = 0;
-//      ^^^^^^ definition local2
+//      ^^^^^^ definition local2 int result
     for (int i : integers) {
-//           ^ definition local3
+//           ^ definition local3 int i
 //               ^^^^^^^^ reference local1
       result += i;
 //    ^^^^^^ reference local2

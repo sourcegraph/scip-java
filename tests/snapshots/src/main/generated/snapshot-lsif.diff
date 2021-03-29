@@ -1,0 +1,714 @@
+=========================
+= minimized/RawTypes.java
+=========================
+++ expected
+-- obtained
+ public class RawTypes {
+-//           ^^^^^^^^ definition minimized/RawTypes#
+-//           ^^^^^^^^ definition minimized/RawTypes#`<init>`().
++//           ^^^^^^^^ definition minimized/RawTypes# public class RawTypes
++//           ^^^^^^^^ definition minimized/RawTypes#`<init>`(). public <init>()
+   public static final List x = Collections.singletonList(42);
+ //                    ^^^^ reference java/util/List#
+-//                         ^ definition minimized/RawTypes#x.
++//                         ^ definition minimized/RawTypes#x. public static final List x
+ //                             ^^^^^^^^^^^ reference java/util/Collections#
+=======================
+= minimized/Fields.java
+=======================
+++ expected
+-- obtained
+ public class Fields {
+-//           ^^^^^^ definition minimized/Fields#
+-//           ^^^^^^ definition minimized/Fields#`<init>`().
++//           ^^^^^^ definition minimized/Fields# public class Fields
++//           ^^^^^^ definition minimized/Fields#`<init>`(). public <init>()
+   private final int privateField = 0;
+-//                  ^^^^^^^^^^^^ definition minimized/Fields#privateField.
++//                  ^^^^^^^^^^^^ definition minimized/Fields#privateField. private final int privateField
+   protected int protectedField = 0;
+-//              ^^^^^^^^^^^^^^ definition minimized/Fields#protectedField.
++//              ^^^^^^^^^^^^^^ definition minimized/Fields#protectedField. protected int protectedField
+   public int publicField = 0;
+-//           ^^^^^^^^^^^ definition minimized/Fields#publicField.
++//           ^^^^^^^^^^^ definition minimized/Fields#publicField. public int publicField
+   private static final int staticPrivateField = 0;
+-//                         ^^^^^^^^^^^^^^^^^^ definition minimized/Fields#staticPrivateField.
++//                         ^^^^^^^^^^^^^^^^^^ definition minimized/Fields#staticPrivateField. private static final int staticPrivateField
+   protected static int staticProtectedFields = 0;
+-//                     ^^^^^^^^^^^^^^^^^^^^^ definition minimized/Fields#staticProtectedFields.
++//                     ^^^^^^^^^^^^^^^^^^^^^ definition minimized/Fields#staticProtectedFields. protected static int staticProtectedFields
+   public static int staticPublicField = 0;
+-//                  ^^^^^^^^^^^^^^^^^ definition minimized/Fields#staticPublicField.
++//                  ^^^^^^^^^^^^^^^^^ definition minimized/Fields#staticPublicField. public static int staticPublicField
+ ∙
+   public class InnerFields {
+-//             ^^^^^^^^^^^ definition minimized/Fields#InnerFields#
+-//             ^^^^^^^^^^^ definition minimized/Fields#InnerFields#`<init>`().
++//             ^^^^^^^^^^^ definition minimized/Fields#InnerFields# public class InnerFields
++//             ^^^^^^^^^^^ definition minimized/Fields#InnerFields#`<init>`(). public <init>()
+     public int publicInnerField = publicField;
+-//             ^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerFields#publicInnerField.
++//             ^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerFields#publicInnerField. public int publicInnerField
+ //                                ^^^^^^^^^^^ reference minimized/Fields#publicField.
+   public static class InnerStaticFields {
+-//                    ^^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerStaticFields#
+-//                    ^^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerStaticFields#`<init>`().
++//                    ^^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerStaticFields# public static class InnerStaticFields
++//                    ^^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerStaticFields#`<init>`(). public <init>()
+     public int publicNonStaticInnerField = 0;
+-//             ^^^^^^^^^^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerStaticFields#publicNonStaticInnerField.
++//             ^^^^^^^^^^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerStaticFields#publicNonStaticInnerField. public int publicNonStaticInnerField
+     public static int publicStaticInnerField = 0;
+-//                    ^^^^^^^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerStaticFields#publicStaticInnerField.
++//                    ^^^^^^^^^^^^^^^^^^^^^^ definition minimized/Fields#InnerStaticFields#publicStaticInnerField. public static int publicStaticInnerField
+   }
+ //              ^^^^^^ reference java/lang/String#
+-//                     ^^^ definition minimized/Fields#app().
++//                     ^^^ definition minimized/Fields#app(). public static String app()
+     Fields fields = new Fields();
+ //  ^^^^^^ reference minimized/Fields#
+-//         ^^^^^^ definition local0
++//         ^^^^^^ definition local0 Fields fields
+ //                  ^^^^^^^^^^^^ reference minimized/Fields#`<init>`().
+ //  ^^^^^^^^^^^ reference minimized/Fields#InnerFields#
+-//              ^^^^^^^^^^^ definition local1
++//              ^^^^^^^^^^^ definition local1 InnerFields innerFields
+ //                            ^^^^^^ reference local0
+ //  ^^^^^^^^^^^^^^^^^ reference minimized/Fields#InnerStaticFields#
+-//                    ^^^^^^^^^^^^^^^^^ definition local2
++//                    ^^^^^^^^^^^^^^^^^ definition local2 InnerStaticFields innerStaticFields
+ //                                        ^^^^^^^^^^^^^^^^^^^^^^^ reference minimized/Fields#InnerStaticFields#`<init>`().
+==================================
+= minimized/MinimizedJavaMain.java
+==================================
+++ expected
+-- obtained
+ public class MinimizedJavaMain {
+-//           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain#
+-//           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain#`<init>`().
++//           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain# public class MinimizedJavaMain
++//           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain#`<init>`(). public <init>()
+   public static void main(String[] args) {
+-//                   ^^^^ definition minimized/MinimizedJavaMain#main().
++//                   ^^^^ definition minimized/MinimizedJavaMain#main(). public static main(Array<String> args)
+ //                        ^^^^^^ reference java/lang/String#
+-//                                 ^^^^ definition local0
++//                                 ^^^^ definition local0 Array<String> args
+     TypeVariables.app(new TypeVariables.CT());
+=============================
+= minimized/InnerClasses.java
+=============================
+++ expected
+-- obtained
+ public class InnerClasses {
+-//           ^^^^^^^^^^^^ definition minimized/InnerClasses#
++//           ^^^^^^^^^^^^ definition minimized/InnerClasses# public class InnerClasses
+ ∙
+   private final int exampleField;
+-//                  ^^^^^^^^^^^^ definition minimized/InnerClasses#exampleField.
++//                  ^^^^^^^^^^^^ definition minimized/InnerClasses#exampleField. private final int exampleField
+ ∙
+   public InnerClasses(int exampleField) {
+-//       ^^^^^^ definition minimized/InnerClasses#`<init>`().
+-//                        ^^^^^^^^^^^^ definition local0
++//       ^^^^^^ definition minimized/InnerClasses#`<init>`(). public <init>(int exampleField)
++//                        ^^^^^^^^^^^^ definition local0 int exampleField
+     this.exampleField = exampleField;
+   public enum InnerEnum {
+-//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum#
+-//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum#`<init>`().
++//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum# public static final enum InnerEnum extends Enum<InnerEnum>
++//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum#`<init>`(). private <init>()
+     A,
+-//  ^ definition minimized/InnerClasses#InnerEnum#A.
++//  ^ definition minimized/InnerClasses#InnerEnum#A. public static final InnerEnum A
+     B,
+-//  ^ definition minimized/InnerClasses#InnerEnum#B.
++//  ^ definition minimized/InnerClasses#InnerEnum#B. public static final InnerEnum B
+     C
+-//  ^ definition minimized/InnerClasses#InnerEnum#C.
++//  ^ definition minimized/InnerClasses#InnerEnum#C. public static final InnerEnum C
+   }
+   public interface InnerInterface<A, B> {
+-//                 ^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerInterface#
+-//                                ^ definition minimized/InnerClasses#InnerInterface#[A]
+-//                                   ^ definition minimized/InnerClasses#InnerInterface#[B]
++//                 ^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerInterface# public abstract static interface InnerInterface<A, B>
++//                                ^ definition minimized/InnerClasses#InnerInterface#[A] A
++//                                   ^ definition minimized/InnerClasses#InnerInterface#[B] B
+     B apply(A a);
+ //  ^ reference minimized/InnerClasses#InnerInterface#[B]
+-//    ^^^^^ definition minimized/InnerClasses#InnerInterface#apply().
++//    ^^^^^ definition minimized/InnerClasses#InnerInterface#apply(). public abstract B apply(A a)
+ //          ^ reference minimized/InnerClasses#InnerInterface#[A]
+-//            ^ definition local1
++//            ^ definition local1 A a
+   }
+   public static class InnerStaticClass {
+-//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#
+-//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#`<init>`().
++//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass# public static class InnerStaticClass
++//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#`<init>`(). public <init>()
+     public static void innerStaticMethod() {}
+-//                     ^^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#innerStaticMethod().
++//                     ^^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#innerStaticMethod(). public static innerStaticMethod()
+   }
+   public class InnerClass implements InnerInterface<Integer, Integer> {
+-//             ^^^^^^^^^^ definition minimized/InnerClasses#InnerClass#
++//             ^^^^^^^^^^ definition minimized/InnerClasses#InnerClass# public class InnerClass extends InnerInterface<Integer, Integer>
+ //                                   ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#
+     private final int field;
+-//                    ^^^^^ definition minimized/InnerClasses#InnerClass#field.
++//                    ^^^^^ definition minimized/InnerClasses#InnerClass#field. private final int field
+ ∙
+     public InnerClass(int field) {
+-//         ^^^^^^ definition minimized/InnerClasses#InnerClass#`<init>`().
+-//                        ^^^^^ definition local2
++//         ^^^^^^ definition minimized/InnerClasses#InnerClass#`<init>`(). public <init>(int field)
++//                        ^^^^^ definition local2 int field
+       this.field = field;
+     public void innerMethod() {
+-//              ^^^^^^^^^^^ definition minimized/InnerClasses#InnerClass#innerMethod().
++//              ^^^^^^^^^^^ definition minimized/InnerClasses#InnerClass#innerMethod(). public innerMethod()
+       System.out.println(field + exampleField);
+ //         ^^^^^^^ reference java/lang/Integer#
+-//                 ^^^^^ definition minimized/InnerClasses#InnerClass#apply().
++//                 ^^^^^ definition minimized/InnerClasses#InnerClass#apply(). public Integer apply(Integer integer)
+ //                       ^^^^^^^ reference java/lang/Integer#
+-//                               ^^^^^^^ definition local3
++//                               ^^^^^^^ definition local3 Integer integer
+       return field * integer;
+   private static <A, B> B runInnerInterface(InnerInterface<A, B> fn, A a) {
+-//                ^ definition minimized/InnerClasses#runInnerInterface().[A]
+-//                   ^ definition minimized/InnerClasses#runInnerInterface().[B]
++//                ^ definition minimized/InnerClasses#runInnerInterface().[A] A
++//                   ^ definition minimized/InnerClasses#runInnerInterface().[B] B
+ //                      ^ reference minimized/InnerClasses#runInnerInterface().[B]
+-//                        ^^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#runInnerInterface().
++//                        ^^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#runInnerInterface(). private static <A, B> B runInnerInterface(InnerInterface<A, B> fn, A a)
+ //                                          ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#
+ //                                                            ^ reference minimized/InnerClasses#runInnerInterface().[B]
+-//                                                               ^^ definition local4
++//                                                               ^^ definition local4 InnerInterface<A, B> fn
+ //                                                                   ^ reference minimized/InnerClasses#runInnerInterface().[A]
+-//                                                                     ^ definition local5
++//                                                                     ^ definition local5 A a
+     return fn.apply(a);
+   public static void testEnum(InnerEnum magicEnum) {
+-//                   ^^^^^^^^ definition minimized/InnerClasses#testEnum().
++//                   ^^^^^^^^ definition minimized/InnerClasses#testEnum(). public static testEnum(InnerEnum magicEnum)
+ //                            ^^^^^^^^^ reference minimized/InnerClasses#InnerEnum#
+-//                                      ^^^^^^^^^ definition local6
++//                                      ^^^^^^^^^ definition local6 InnerEnum magicEnum
+     if (System.nanoTime() > System.nanoTime()) {
+   public static void testAnon() {
+-//                   ^^^^^^^^ definition minimized/InnerClasses#testAnon().
++//                   ^^^^^^^^ definition minimized/InnerClasses#testAnon(). public static testAnon()
+     InnerInterface<String, String> fn =
+ //                         ^^^^^^ reference java/lang/String#
+-//                                 ^^ definition local7
++//                                 ^^ definition local7 InnerInterface<String, String> fn
+         new InnerInterface<String, String>() {
+ //               ^^^^^^ reference java/lang/String#
+-//                      ^^^^^ definition local10
++//                      ^^^^^ definition local10 public String apply(String s)
+ //                            ^^^^^^ reference java/lang/String#
+-//                                   ^ definition local11
++//                                   ^ definition local11 String s
+             return s + "b";
+ //              ^^^^^^ reference java/lang/String#
+-//                     ^^^ definition minimized/InnerClasses#app().
++//                     ^^^ definition minimized/InnerClasses#app(). public static String app()
+     int a = 42;
+-//      ^ definition local12
++//      ^ definition local12 int a
+     InnerStaticClass.innerStaticMethod();
+ //  ^^^^^^^^^^^^ reference minimized/InnerClasses#
+-//               ^^^^^^^^^^^^ definition local13
++//               ^^^^^^^^^^^^ definition local13 InnerClasses innerClasses
+ //                              ^^^^^^^^^^^^^^^^^^^ reference minimized/InnerClasses#`<init>`().
+ //  ^^^^^^^^^^ reference minimized/InnerClasses#InnerClass#
+-//             ^^^^^^^^^^ definition local14
++//             ^^^^^^^^^^ definition local14 InnerClass innerClass
+ //                          ^^^^^^^^^^^^ reference local13
+============================
+= minimized/Annotations.java
+============================
+++ expected
+-- obtained
+ public @interface Annotations {
+-//                ^^^^^^^^^^^ definition minimized/Annotations#
++//                ^^^^^^^^^^^ definition minimized/Annotations# public abstract Annotations extends Annotation
+ ∙
+ //^^^^^^ reference java/lang/String#
+-//       ^^^^^ definition minimized/Annotations#value().
++//       ^^^^^ definition minimized/Annotations#value(). public abstract String value()
+ ∙
+ //^^^^^^ reference java/lang/String#
+-//       ^^^^^^ definition minimized/Annotations#format().
++//       ^^^^^^ definition minimized/Annotations#format(). public abstract String format()
+ }
+========================
+= minimized/ClassOf.java
+========================
+++ expected
+-- obtained
+ public class ClassOf {
+-//           ^^^^^^^ definition minimized/ClassOf#
+-//           ^^^^^^^ definition minimized/ClassOf#`<init>`().
++//           ^^^^^^^ definition minimized/ClassOf# public class ClassOf
++//           ^^^^^^^ definition minimized/ClassOf#`<init>`(). public <init>()
+   public static String app() {
+ //              ^^^^^^ reference java/lang/String#
+-//                     ^^^ definition minimized/ClassOf#app().
++//                     ^^^ definition minimized/ClassOf#app(). public static String app()
+     return ClassOf.class.getName();
+========================
+= minimized/Methods.java
+========================
+++ expected
+-- obtained
+ public class Methods {
+-//           ^^^^^^^ definition minimized/Methods#
+-//           ^^^^^^^ definition minimized/Methods#`<init>`().
++//           ^^^^^^^ definition minimized/Methods# public class Methods
++//           ^^^^^^^ definition minimized/Methods#`<init>`(). public <init>()
+   private int overload(int value) {
+-//            ^^^^^^^^ definition minimized/Methods#overload().
+-//                         ^^^^^ definition local0
++//            ^^^^^^^^ definition minimized/Methods#overload(). private int overload(int value)
++//                         ^^^^^ definition local0 int value
+     return value + 1;
+ //        ^^^^^^ reference java/lang/String#
+-//               ^^^^^^^^ definition minimized/Methods#overload(+1).
++//               ^^^^^^^^ definition minimized/Methods#overload(+1). private String overload(String value)
+ //                        ^^^^^^ reference java/lang/String#
+-//                               ^^^^^ definition local1
++//                               ^^^^^ definition local1 String value
+     return value + "1";
+   private static int staticOverload(int value) {
+-//                   ^^^^^^^^^^^^^^ definition minimized/Methods#staticOverload().
+-//                                      ^^^^^ definition local2
++//                   ^^^^^^^^^^^^^^ definition minimized/Methods#staticOverload(). private static int staticOverload(int value)
++//                                      ^^^^^ definition local2 int value
+     return value + 1;
+ //               ^^^^^^ reference java/lang/String#
+-//                      ^^^^^^^^^^^^^^ definition minimized/Methods#staticOverload(+1).
++//                      ^^^^^^^^^^^^^^ definition minimized/Methods#staticOverload(+1). private static String staticOverload(String value)
+ //                                     ^^^^^^ reference java/lang/String#
+-//                                            ^^^^^ definition local3
++//                                            ^^^^^ definition local3 String value
+     return value + "1";
+ //              ^^^^^^ reference java/lang/String#
+-//                     ^^^ definition minimized/Methods#app().
+-//                             ^ definition local4
++//                     ^^^ definition minimized/Methods#app(). public static String app(int n, String m)
++//                             ^ definition local4 int n
+ //                                ^^^^^^ reference java/lang/String#
+-//                                       ^ definition local5
++//                                       ^ definition local5 String m
+     Methods methods = new Methods();
+ //  ^^^^^^^ reference minimized/Methods#
+-//          ^^^^^^^ definition local6
++//          ^^^^^^^ definition local6 Methods methods
+ //                    ^^^^^^^^^^^^^ reference minimized/Methods#`<init>`().
+     int a = staticOverload(n);
+-//      ^ definition local7
++//      ^ definition local7 int a
+ //          ^^^^^^^^^^^^^^ reference minimized/Methods#staticOverload().
+ //  ^^^^^^ reference java/lang/String#
+-//         ^ definition local8
++//         ^ definition local8 String b
+ //             ^^^^^^^^^^^^^^ reference minimized/Methods#staticOverload(+1).
+     int c = methods.overload(n);
+-//      ^ definition local9
++//      ^ definition local9 int c
+ //          ^^^^^^^ reference local6
+ //  ^^^^^^ reference java/lang/String#
+-//         ^ definition local10
++//         ^ definition local10 String d
+ //             ^^^^^^^ reference local6
+===================================
+= minimized/ParameterizedTypes.java
+===================================
+++ expected
+-- obtained
+ public class ParameterizedTypes<A, B extends String> {
+-//           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#
+-//           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#`<init>`().
+-//                              ^ definition minimized/ParameterizedTypes#[A]
+-//                                 ^ definition minimized/ParameterizedTypes#[B]
++//           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes# public class ParameterizedTypes<A, B extends String>
++//           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#`<init>`(). public <init>()
++//                              ^ definition minimized/ParameterizedTypes#[A] A
++//                                 ^ definition minimized/ParameterizedTypes#[B] B extends String
+ //                                           ^^^^^^ reference java/lang/String#
+   public <T extends Iterable<A> & Iterator<B>> void iteratorable(List<T> list) {}
+-//        ^ definition minimized/ParameterizedTypes#iteratorable().[T]
++//        ^ definition minimized/ParameterizedTypes#iteratorable().[T] T extends Iterable<A> & Iterator<B>
+ //                  ^^^^^^^^ reference java/lang/Iterable#
+ //                                         ^ reference minimized/ParameterizedTypes#[B]
+-//                                                  ^^^^^^^^^^^^ definition minimized/ParameterizedTypes#iteratorable().
++//                                                  ^^^^^^^^^^^^ definition minimized/ParameterizedTypes#iteratorable(). public <T extends Iterable<A> & Iterator<B>> iteratorable(List<T> list)
+ //                                                               ^^^^ reference java/util/List#
+ //                                                                    ^ reference minimized/ParameterizedTypes#iteratorable().[T]
+-//                                                                       ^^^^ definition local0
++//                                                                       ^^^^ definition local0 List<T> list
+ ∙
+ //       ^^^^^^ reference java/lang/String#
+-//              ^^^ definition minimized/ParameterizedTypes#app().
++//              ^^^ definition minimized/ParameterizedTypes#app(). public String app(A a, B b)
+ //                  ^ reference minimized/ParameterizedTypes#[A]
+-//                    ^ definition local1
++//                    ^ definition local1 A a
+ //                       ^ reference minimized/ParameterizedTypes#[B]
+-//                         ^ definition local2
++//                         ^ definition local2 B b
+     return a.toString() + b;
+ //                     ^^^^^^ reference java/lang/String#
+-//                                ^^^^^^^ definition minimized/ParameterizedTypes#doStuff().
++//                                ^^^^^^^ definition minimized/ParameterizedTypes#doStuff(). public Map<? extends String, ?> doStuff()
+ ∙
+ //                                             ^^^^^^^ reference java/lang/Integer#
+-//                                                      ^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#createQuadruplet().
++//                                                      ^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#createQuadruplet(). public Quadruplet<String, ?, Object, ? super Integer> createQuadruplet()
+ ∙
+   public static class Quadruplet<T, S, X, Y> {}
+-//                    ^^^^^^^^^^ definition minimized/ParameterizedTypes#Quadruplet#
+-//                    ^^^^^^^^^^ definition minimized/ParameterizedTypes#Quadruplet#`<init>`().
+-//                               ^ definition minimized/ParameterizedTypes#Quadruplet#[T]
+-//                                  ^ definition minimized/ParameterizedTypes#Quadruplet#[S]
+-//                                     ^ definition minimized/ParameterizedTypes#Quadruplet#[X]
+-//                                        ^ definition minimized/ParameterizedTypes#Quadruplet#[Y]
++//                    ^^^^^^^^^^ definition minimized/ParameterizedTypes#Quadruplet# public static class Quadruplet<T, S, X, Y>
++//                    ^^^^^^^^^^ definition minimized/ParameterizedTypes#Quadruplet#`<init>`(). public <init>()
++//                               ^ definition minimized/ParameterizedTypes#Quadruplet#[T] T
++//                                  ^ definition minimized/ParameterizedTypes#Quadruplet#[S] S
++//                                     ^ definition minimized/ParameterizedTypes#Quadruplet#[X] X
++//                                        ^ definition minimized/ParameterizedTypes#Quadruplet#[Y] Y
+ }
+======================
+= minimized/Enums.java
+======================
+++ expected
+-- obtained
+ public enum Enums {
+-//          ^^^^^ definition minimized/Enums#
++//          ^^^^^ definition minimized/Enums# public final enum Enums extends Enum<Enums>
+   A("A"),
+-//^ definition minimized/Enums#A.
++//^ definition minimized/Enums#A. public static final Enums A
+ // ^^^^^ reference minimized/Enums#`<init>`().
+   B("B"),
+-//^ definition minimized/Enums#B.
++//^ definition minimized/Enums#B. public static final Enums B
+ // ^^^^^ reference minimized/Enums#`<init>`().
+   C("C");
+-//^ definition minimized/Enums#C.
++//^ definition minimized/Enums#C. public static final Enums C
+ // ^^^^^ reference minimized/Enums#`<init>`().
+ //       ^^^^^^ reference java/lang/String#
+-//              ^^^^^ definition minimized/Enums#value.
++//              ^^^^^ definition minimized/Enums#value. public String value
+ ∙
+   Enums(String value) {
+-//^^^^^^ definition minimized/Enums#`<init>`().
++//^^^^^^ definition minimized/Enums#`<init>`(). private <init>(String value)
+ //      ^^^^^^ reference java/lang/String#
+-//             ^^^^^ definition local0
++//             ^^^^^ definition local0 String value
+     this.value = value;
+ //              ^^^^^^ reference java/lang/String#
+-//                     ^^^ definition minimized/Enums#app().
++//                     ^^^ definition minimized/Enums#app(). public static String app()
+     String all = Arrays.stream(values()).map(e -> e.value).map(Enums::valueOf).toString();
+ //  ^^^^^^ reference java/lang/String#
+-//         ^^^ definition local1
++//         ^^^ definition local1 String all
+ //               ^^^^^^ reference java/util/Arrays#
+ //                                       ^^^ reference java/util/stream/Stream#map().
+-//                                           ^ definition local2
++//                                           ^ definition local2 Enums e
+ //                                                ^ reference local2
+===========================
+= minimized/Primitives.java
+===========================
+++ expected
+-- obtained
+ public class Primitives {
+-//           ^^^^^^^^^^ definition minimized/Primitives#
+-//           ^^^^^^^^^^ definition minimized/Primitives#`<init>`().
++//           ^^^^^^^^^^ definition minimized/Primitives# public class Primitives
++//           ^^^^^^^^^^ definition minimized/Primitives#`<init>`(). public <init>()
+   public static String app() {
+ //              ^^^^^^ reference java/lang/String#
+-//                     ^^^ definition minimized/Primitives#app().
++//                     ^^^ definition minimized/Primitives#app(). public static String app()
+     Random random = new Random();
+ //  ^^^^^^ reference java/util/Random#
+-//         ^^^^^^ definition local0
++//         ^^^^^^ definition local0 Random random
+ //                  ^^^^^^^^^^^^ reference java/util/Random#`<init>`().
+     byte a = (byte) random.nextInt();
+-//       ^ definition local1
++//       ^ definition local1 byte a
+ //                  ^^^^^^ reference local0
+     short b = (short) random.nextInt();
+-//        ^ definition local2
++//        ^ definition local2 short b
+ //                    ^^^^^^ reference local0
+     int c = random.nextInt();
+-//      ^ definition local3
++//      ^ definition local3 int c
+ //          ^^^^^^ reference local0
+     long d = random.nextLong();
+-//       ^ definition local4
++//       ^ definition local4 long d
+ //           ^^^^^^ reference local0
+     char e = (char) random.nextInt();
+-//       ^ definition local5
++//       ^ definition local5 char e
+ //                  ^^^^^^ reference local0
+     float f = (float) random.nextDouble();
+-//        ^ definition local6
++//        ^ definition local6 float f
+ //                    ^^^^^^ reference local0
+     double g = (double) random.nextDouble();
+-//         ^ definition local7
++//         ^ definition local7 double g
+ //                      ^^^^^^ reference local0
+     boolean h = random.nextBoolean();
+-//          ^ definition local8
++//          ^ definition local8 boolean h
+ //              ^^^^^^ reference local0
+===========================
+= minimized/SubClasses.java
+===========================
+++ expected
+-- obtained
+ public class SubClasses extends AbstractClasses implements Interfaces {
+-//           ^^^^^^^^^^ definition minimized/SubClasses#
+-//           ^^^^^^^^^^ definition minimized/SubClasses#`<init>`().
++//           ^^^^^^^^^^ definition minimized/SubClasses# public class SubClasses extends AbstractClasses, Interfaces
++//           ^^^^^^^^^^ definition minimized/SubClasses#`<init>`(). public <init>()
+ //                              ^^^^^^^^^^^^^^^ reference minimized/AbstractClasses#
+ //       ^^^^^^ reference java/lang/String#
+-//              ^^^^^^^^^^^^^^^^^^^^^^ definition minimized/SubClasses#abstractImplementation().
++//              ^^^^^^^^^^^^^^^^^^^^^^ definition minimized/SubClasses#abstractImplementation(). public String abstractImplementation()
+     return "abstract";
+ //       ^^^^^^ reference java/lang/String#
+-//              ^^^^^^^^^^^^^^^^^^^^^^^ definition minimized/SubClasses#abstractInterfaceMethod().
++//              ^^^^^^^^^^^^^^^^^^^^^^^ definition minimized/SubClasses#abstractInterfaceMethod(). public String abstractInterfaceMethod()
+     return "abstractInterface";
+ //              ^^^^^^ reference java/lang/String#
+-//                     ^^^ definition minimized/SubClasses#app().
++//                     ^^^ definition minimized/SubClasses#app(). public static String app()
+     SubClasses s = new SubClasses();
+ //  ^^^^^^^^^^ reference minimized/SubClasses#
+-//             ^ definition local0
++//             ^ definition local0 SubClasses s
+ //                 ^^^^^^^^^^^^^^^^ reference minimized/SubClasses#`<init>`().
+================================
+= minimized/AbstractClasses.java
+================================
+++ expected
+-- obtained
+ public abstract class AbstractClasses {
+-//                    ^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#
+-//                    ^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#`<init>`().
++//                    ^^^^^^^^^^^^^^^ definition minimized/AbstractClasses# public abstract class AbstractClasses
++//                    ^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#`<init>`(). public <init>()
+   public String defaultImplementation() {
+ //       ^^^^^^ reference java/lang/String#
+-//              ^^^^^^^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#defaultImplementation().
++//              ^^^^^^^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#defaultImplementation(). public String defaultImplementation()
+     return "";
+ //                ^^^^^^ reference java/lang/String#
+-//                       ^^^^^^^^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#abstractImplementation().
++//                       ^^^^^^^^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#abstractImplementation(). public abstract String abstractImplementation()
+ }
+=======================
+= minimized/Arrays.java
+=======================
+++ expected
+-- obtained
+ public class Arrays {
+-//           ^^^^^^ definition minimized/Arrays#
+-//           ^^^^^^ definition minimized/Arrays#`<init>`().
++//           ^^^^^^ definition minimized/Arrays# public class Arrays
++//           ^^^^^^ definition minimized/Arrays#`<init>`(). public <init>()
+   public static String app() {
+ //              ^^^^^^ reference java/lang/String#
+-//                     ^^^ definition minimized/Arrays#app().
++//                     ^^^ definition minimized/Arrays#app(). public static String app()
+     int[] a = {1, 2, 3};
+-//        ^ definition local0
++//        ^ definition local0 Array<int> a
+     String[] b = {"1", "2", "3"};
+ //  ^^^^^^ reference java/lang/String#
+-//           ^ definition local1
++//           ^ definition local1 Array<String> b
+     int[][] c = {{1}, {2}, {3}};
+-//          ^ definition local2
++//          ^ definition local2 Array<Array<int>> c
+     String[][] d = {{"1"}, {"2"}, {"3"}};
+ //  ^^^^^^ reference java/lang/String#
+-//             ^ definition local3
++//             ^ definition local3 Array<Array<String>> d
+     return b[0] + a[0] + c[1][0] + d[1][0];
+=================================
+= minimized/AnonymousClasses.java
+=================================
+++ expected
+-- obtained
+ public class AnonymousClasses {
+-//           ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses#
+-//           ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses#`<init>`().
++//           ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses# public class AnonymousClasses
++//           ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses#`<init>`(). public <init>()
+   public static int app(int n) {
+-//                  ^^^ definition minimized/AnonymousClasses#app().
+-//                          ^ definition local0
++//                  ^^^ definition minimized/AnonymousClasses#app(). public static int app(int n)
++//                          ^ definition local0 int n
+     Function<Integer, Integer> fn =
+ //                    ^^^^^^^ reference java/lang/Integer#
+-//                             ^^ definition local1
++//                             ^^ definition local1 Function<Integer, Integer> fn
+         new Function<Integer, Integer>() {
+ //               ^^^^^^^ reference java/lang/Integer#
+-//                       ^^^^^ definition local4
++//                       ^^^^^ definition local4 public Integer apply(Integer integer)
+ //                             ^^^^^^^ reference java/lang/Integer#
+-//                                     ^^^^^^^ definition local5
++//                                     ^^^^^^^ definition local5 Integer integer
+             return integer + n;
+==================================
+= minimized/ForComprehensions.java
+==================================
+++ expected
+-- obtained
+ public class ForComprehensions {
+-//           ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions#
+-//           ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions#`<init>`().
++//           ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions# public class ForComprehensions
++//           ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions#`<init>`(). public <init>()
+   public static int app(int n) {
+-//                  ^^^ definition minimized/ForComprehensions#app().
+-//                          ^ definition local0
++//                  ^^^ definition minimized/ForComprehensions#app(). public static int app(int n)
++//                          ^ definition local0 int n
+     List<Integer> integers = Collections.singletonList(n);
+ //       ^^^^^^^ reference java/lang/Integer#
+-//                ^^^^^^^^ definition local1
++//                ^^^^^^^^ definition local1 List<Integer> integers
+ //                           ^^^^^^^^^^^ reference java/util/Collections#
+     int result = 0;
+-//      ^^^^^^ definition local2
++//      ^^^^^^ definition local2 int result
+     for (int i : integers) {
+-//           ^ definition local3
++//           ^ definition local3 int i
+ //               ^^^^^^^^ reference local1
+===========================
+= minimized/Docstrings.java
+===========================
+++ expected
+-- obtained
+ public class Docstrings {
+-//           ^^^^^^^^^^ definition minimized/Docstrings#
+-//           ^^^^^^^^^^ definition minimized/Docstrings#`<init>`().
++//           ^^^^^^^^^^ definition minimized/Docstrings# public class Docstrings
++//           ^^^^^^^^^^ definition minimized/Docstrings#`<init>`(). public <init>()
+ ∙
+   public static int field = 42;
+-//                  ^^^^^ definition minimized/Docstrings#field.
++//                  ^^^^^ definition minimized/Docstrings#field. public static int field
+ ∙
+   public static int method() {
+-//                  ^^^^^^ definition minimized/Docstrings#method().
++//                  ^^^^^^ definition minimized/Docstrings#method(). public static int method()
+     return 42;
+   public static int methodParameter(int n) {
+-//                  ^^^^^^^^^^^^^^^ definition minimized/Docstrings#methodParameter().
+-//                                      ^ definition local0
++//                  ^^^^^^^^^^^^^^^ definition minimized/Docstrings#methodParameter(). public static int methodParameter(int n)
++//                                      ^ definition local0 int n
+     return n + 42;
+ //              ^^^^^^ reference java/lang/String#
+-//                     ^^^ definition minimized/Docstrings#app().
++//                     ^^^ definition minimized/Docstrings#app(). public static String app()
+     return String.format("%s%s%s", field, method(), methodParameter(42));
+===========================
+= minimized/Interfaces.java
+===========================
+++ expected
+-- obtained
+ public interface Interfaces {
+-//               ^^^^^^^^^^ definition minimized/Interfaces#
++//               ^^^^^^^^^^ definition minimized/Interfaces# public abstract interface Interfaces
+   String abstractInterfaceMethod();
+ //^^^^^^ reference java/lang/String#
+-//       ^^^^^^^^^^^^^^^^^^^^^^^ definition minimized/Interfaces#abstractInterfaceMethod().
++//       ^^^^^^^^^^^^^^^^^^^^^^^ definition minimized/Interfaces#abstractInterfaceMethod(). public abstract String abstractInterfaceMethod()
+ ∙
+ //        ^^^^^^ reference java/lang/String#
+-//               ^^^^^^^^^^^^^^^^^^^^^^ definition minimized/Interfaces#defaultInterfaceMethod().
++//               ^^^^^^^^^^^^^^^^^^^^^^ definition minimized/Interfaces#defaultInterfaceMethod(). public abstract String defaultInterfaceMethod()
+     return "default";
+==============================
+= minimized/TypeVariables.java
+==============================
+++ expected
+-- obtained
+ public class TypeVariables {
+-//           ^^^^^^^^^^^^^ definition minimized/TypeVariables#
+-//           ^^^^^^^^^^^^^ definition minimized/TypeVariables#`<init>`().
++//           ^^^^^^^^^^^^^ definition minimized/TypeVariables# public class TypeVariables
++//           ^^^^^^^^^^^^^ definition minimized/TypeVariables#`<init>`(). public <init>()
+   static class C {
+-//             ^ definition minimized/TypeVariables#C#
+-//             ^ definition minimized/TypeVariables#C#`<init>`().
++//             ^ definition minimized/TypeVariables#C# static class C
++//             ^ definition minimized/TypeVariables#C#`<init>`(). <init>()
+     public void mCPublic() {}
+-//              ^^^^^^^^ definition minimized/TypeVariables#C#mCPublic().
++//              ^^^^^^^^ definition minimized/TypeVariables#C#mCPublic(). public mCPublic()
+ ∙
+     protected void mCProtected() {}
+-//                 ^^^^^^^^^^^ definition minimized/TypeVariables#C#mCProtected().
++//                 ^^^^^^^^^^^ definition minimized/TypeVariables#C#mCProtected(). protected mCProtected()
+ ∙
+     void mCPackage() {}
+-//       ^^^^^^^^^ definition minimized/TypeVariables#C#mCPackage().
++//       ^^^^^^^^^ definition minimized/TypeVariables#C#mCPackage(). mCPackage()
+   }
+   interface I {
+-//          ^ definition minimized/TypeVariables#I#
++//          ^ definition minimized/TypeVariables#I# abstract static interface I
+     void mI();
+-//       ^^ definition minimized/TypeVariables#I#mI().
++//       ^^ definition minimized/TypeVariables#I#mI(). public abstract mI()
+   }
+   static class CT extends C implements I {
+-//             ^^ definition minimized/TypeVariables#CT#
+-//             ^^ definition minimized/TypeVariables#CT#`<init>`().
++//             ^^ definition minimized/TypeVariables#CT# static class CT extends C, I
++//             ^^ definition minimized/TypeVariables#CT#`<init>`(). <init>()
+ //                        ^ reference minimized/TypeVariables#C#
+     public void mI() {}
+-//              ^^ definition minimized/TypeVariables#CT#mI().
++//              ^^ definition minimized/TypeVariables#CT#mI(). public mI()
+   }
+   public static <T extends C & I> void app(T t) {
+-//               ^ definition minimized/TypeVariables#app().[T]
++//               ^ definition minimized/TypeVariables#app().[T] T extends C & I
+ //                         ^ reference minimized/TypeVariables#C#
+ //                             ^ reference minimized/TypeVariables#I#
+-//                                     ^^^ definition minimized/TypeVariables#app().
++//                                     ^^^ definition minimized/TypeVariables#app(). public static <T extends C & I> app(T t)
+ //                                         ^ reference minimized/TypeVariables#app().[T]
+-//                                           ^ definition local0
++//                                           ^ definition local0 T t
+     t.mI();

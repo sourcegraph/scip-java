@@ -7,24 +7,24 @@ import java.util.Arrays;
 //               ^^^^^^ reference java/util/Arrays#
 
 public enum Enums {
-//          ^^^^^ definition minimized/Enums#
+//          ^^^^^ definition minimized/Enums# public final enum Enums extends Enum<Enums>
   A("A"),
-//^ definition minimized/Enums#A.
+//^ definition minimized/Enums#A. public static final Enums A
 // ^^^^^ reference minimized/Enums#`<init>`().
   B("B"),
-//^ definition minimized/Enums#B.
+//^ definition minimized/Enums#B. public static final Enums B
 // ^^^^^ reference minimized/Enums#`<init>`().
   C("C");
-//^ definition minimized/Enums#C.
+//^ definition minimized/Enums#C. public static final Enums C
 // ^^^^^ reference minimized/Enums#`<init>`().
   public String value;
 //       ^^^^^^ reference java/lang/String#
-//              ^^^^^ definition minimized/Enums#value.
+//              ^^^^^ definition minimized/Enums#value. public String value
 
   Enums(String value) {
-//^^^^^^ definition minimized/Enums#`<init>`().
+//^^^^^^ definition minimized/Enums#`<init>`(). private <init>(String value)
 //      ^^^^^^ reference java/lang/String#
-//             ^^^^^ definition local0
+//             ^^^^^ definition local0 String value
     this.value = value;
 //  ^^^^ reference minimized/Enums#this.
 //       ^^^^^ reference minimized/Enums#value.
@@ -33,15 +33,15 @@ public enum Enums {
 
   public static String app() {
 //              ^^^^^^ reference java/lang/String#
-//                     ^^^ definition minimized/Enums#app().
+//                     ^^^ definition minimized/Enums#app(). public static String app()
     String all = Arrays.stream(values()).map(e -> e.value).map(Enums::valueOf).toString();
 //  ^^^^^^ reference java/lang/String#
-//         ^^^ definition local1
+//         ^^^ definition local1 String all
 //               ^^^^^^ reference java/util/Arrays#
 //                      ^^^^^^ reference java/util/Arrays#stream().
 //                             ^^^^^^ reference minimized/Enums#values().
 //                                       ^^^ reference java/util/stream/Stream#map().
-//                                           ^ definition local2
+//                                           ^ definition local2 Enums e
 //                                                ^ reference local2
 //                                                  ^^^^^ reference minimized/Enums#value.
 //                                                         ^^^ reference java/util/stream/Stream#map().

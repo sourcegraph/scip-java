@@ -8,21 +8,21 @@ package com.airbnb.epoxy;
  * why it doesn't do anything.
  */
 class ControllerModelList extends ModelList {
-//    ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList#
+//    ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList# class ControllerModelList extends ModelList
 //                                ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
 
   private static final ModelListObserver OBSERVER = new ModelListObserver() {
 //                     ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
-//                                       ^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList#OBSERVER.
+//                                       ^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList#OBSERVER. private static final ModelListObserver OBSERVER
 //                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^ reference local1 12:3
 //                                                      ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
 //                                                      ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeInserted(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^^ definition local2
-//                                      ^^^^^^^^^^^^^ definition local4
-//                                                         ^^^^^^^^^ definition local5
+//              ^^^^^^^^^^^^^^^^^^^ definition local2 public onItemRangeInserted(int positionStart, int itemCount)
+//                                      ^^^^^^^^^^^^^ definition local4 int positionStart
+//                                                         ^^^^^^^^^ definition local5 int itemCount
       throw new IllegalStateException(
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:75
 //              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
@@ -32,9 +32,9 @@ class ControllerModelList extends ModelList {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeRemoved(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^ definition local3
-//                                     ^^^^^^^^^^^^^ definition local6
-//                                                        ^^^^^^^^^ definition local7
+//              ^^^^^^^^^^^^^^^^^^ definition local3 public onItemRangeRemoved(int positionStart, int itemCount)
+//                                     ^^^^^^^^^^^^^ definition local6 int positionStart
+//                                                        ^^^^^^^^^ definition local7 int itemCount
       throw new IllegalStateException(
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:75
 //              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
@@ -43,8 +43,8 @@ class ControllerModelList extends ModelList {
   };
 
   ControllerModelList(int expectedModelCount) {
-//^^^^^^ definition com/airbnb/epoxy/ControllerModelList#`<init>`().
-//                        ^^^^^^^^^^^^^^^^^^ definition local8
+//^^^^^^ definition com/airbnb/epoxy/ControllerModelList#`<init>`(). <init>(int expectedModelCount)
+//                        ^^^^^^^^^^^^^^^^^^ definition local8 int expectedModelCount
     super(expectedModelCount);
 //  ^^^^^ reference com/airbnb/epoxy/ModelList#`<init>`().
 //        ^^^^^^^^^^^^^^^^^^ reference local8
@@ -53,7 +53,7 @@ class ControllerModelList extends ModelList {
   }
 
   void freeze() {
-//     ^^^^^^ definition com/airbnb/epoxy/ControllerModelList#freeze().
+//     ^^^^^^ definition com/airbnb/epoxy/ControllerModelList#freeze(). freeze()
     setObserver(OBSERVER);
 //  ^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#setObserver().
 //              ^^^^^^^^ reference com/airbnb/epoxy/ControllerModelList#OBSERVER.

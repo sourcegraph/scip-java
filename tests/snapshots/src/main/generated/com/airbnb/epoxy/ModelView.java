@@ -41,7 +41,7 @@ import androidx.annotation.LayoutRes;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface ModelView {
-//                ^^^^^^^^^ definition com/airbnb/epoxy/ModelView#
+//                ^^^^^^^^^ definition com/airbnb/epoxy/ModelView# public abstract ModelView extends Annotation
 
   /**
    * Use with {@link #autoLayout()} to declare what layout parameters should be used to size your
@@ -49,18 +49,18 @@ public @interface ModelView {
    * layout_width} and {@code layout_height}.
    */
   enum Size {
-//     ^^^^ definition com/airbnb/epoxy/ModelView#Size#
-//     ^^^^ definition com/airbnb/epoxy/ModelView#Size#`<init>`().
+//     ^^^^ definition com/airbnb/epoxy/ModelView#Size# public static final enum Size extends Enum<Size>
+//     ^^^^ definition com/airbnb/epoxy/ModelView#Size#`<init>`(). private <init>()
     NONE,
-//  ^^^^ definition com/airbnb/epoxy/ModelView#Size#NONE.
+//  ^^^^ definition com/airbnb/epoxy/ModelView#Size#NONE. public static final Size NONE
     WRAP_WIDTH_WRAP_HEIGHT,
-//  ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#WRAP_WIDTH_WRAP_HEIGHT.
+//  ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#WRAP_WIDTH_WRAP_HEIGHT. public static final Size WRAP_WIDTH_WRAP_HEIGHT
     WRAP_WIDTH_MATCH_HEIGHT,
-//  ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#WRAP_WIDTH_MATCH_HEIGHT.
+//  ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#WRAP_WIDTH_MATCH_HEIGHT. public static final Size WRAP_WIDTH_MATCH_HEIGHT
     MATCH_WIDTH_WRAP_HEIGHT,
-//  ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#MATCH_WIDTH_WRAP_HEIGHT.
+//  ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#MATCH_WIDTH_WRAP_HEIGHT. public static final Size MATCH_WIDTH_WRAP_HEIGHT
     MATCH_WIDTH_MATCH_HEIGHT
-//  ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#MATCH_WIDTH_MATCH_HEIGHT.
+//  ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#MATCH_WIDTH_MATCH_HEIGHT. public static final Size MATCH_WIDTH_MATCH_HEIGHT
   }
 
   /**
@@ -74,7 +74,7 @@ public @interface ModelView {
    */
   Size autoLayout() default Size.NONE;
 //^^^^ reference com/airbnb/epoxy/ModelView#Size#
-//     ^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#autoLayout().
+//     ^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#autoLayout(). public abstract Size autoLayout()
 //                          ^^^^ reference com/airbnb/epoxy/ModelView#Size#
 //                               ^^^^ reference com/airbnb/epoxy/ModelView#Size#NONE.
 
@@ -86,7 +86,7 @@ public @interface ModelView {
    */
   @LayoutRes int defaultLayout() default 0;
 // ^^^^^^^^^ reference androidx/annotation/LayoutRes#
-//               ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#defaultLayout().
+//               ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#defaultLayout(). public abstract int defaultLayout()
   /**
    * An optional EpoxyModel subclass to use as the base class of the generated view. A default can
    * also be set with {@link PackageModelViewConfig}
@@ -95,7 +95,7 @@ public @interface ModelView {
    */
   Class<?> baseModelClass() default Void.class;
 //^^^^^ reference java/lang/Class#
-//         ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#baseModelClass().
+//         ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#baseModelClass(). public abstract Class<?> baseModelClass()
 //                                  ^^^^ reference java/lang/Void#
 //                                       ^^^^^ reference java/lang/Void#class.
   /**
@@ -104,12 +104,12 @@ public @interface ModelView {
    * see: EpoxyModel#shouldSaveViewState
    */
   boolean saveViewState() default false;
-//        ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#saveViewState().
+//        ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#saveViewState(). public abstract boolean saveViewState()
   /**
    * True to have the generated model take up the total available span count. False to instead use a
    * span count of 1. If you need to programmatically determine your model's span size you can use
    * the spanSizeCallback method on EpoxyModel.
    */
   boolean fullSpan() default true;
-//        ^^^^^^^^ definition com/airbnb/epoxy/ModelView#fullSpan().
+//        ^^^^^^^^ definition com/airbnb/epoxy/ModelView#fullSpan(). public abstract boolean fullSpan()
 }

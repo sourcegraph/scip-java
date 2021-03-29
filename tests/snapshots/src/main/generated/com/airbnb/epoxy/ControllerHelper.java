@@ -11,34 +11,34 @@ import java.util.List;
  * annotation processor.
  */
 public abstract class ControllerHelper<T extends EpoxyController> {
-//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#
-//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#`<init>`().
-//                                     ^ definition com/airbnb/epoxy/ControllerHelper#[T]
+//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper# public abstract class ControllerHelper<T extends EpoxyController>
+//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#`<init>`(). public <init>()
+//                                     ^ definition com/airbnb/epoxy/ControllerHelper#[T] T extends EpoxyController
 //                                               ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
   public abstract void resetAutoModels();
-//                     ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#resetAutoModels().
+//                     ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#resetAutoModels(). public abstract resetAutoModels()
 
   protected void validateModelHashCodesHaveNotChanged(T controller) {
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#validateModelHashCodesHaveNotChanged().
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#validateModelHashCodesHaveNotChanged(). protected validateModelHashCodesHaveNotChanged(T controller)
 //                                                    ^ reference com/airbnb/epoxy/ControllerHelper#[T]
-//                                                      ^^^^^^^^^^ definition local0
+//                                                      ^^^^^^^^^^ definition local0 T controller
     List<EpoxyModel<?>> currentModels = controller.getAdapter().getCopyOfModels();
 //  ^^^^ reference java/util/List#
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                      ^^^^^^^^^^^^^ definition local1
+//                      ^^^^^^^^^^^^^ definition local1 List<EpoxyModel<?>> currentModels
 //                                      ^^^^^^^^^^ reference local0
 //                                                 ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#getAdapter().
 //                                                              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#getCopyOfModels().
 
     for (int i = 0; i < currentModels.size(); i++) {
-//           ^ definition local2
+//           ^ definition local2 int i
 //                  ^ reference local2
 //                      ^^^^^^^^^^^^^ reference local1
 //                                    ^^^^ reference java/util/List#size().
 //                                            ^ reference local2
       EpoxyModel model = currentModels.get(i);
 //    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//               ^^^^^ definition local3
+//               ^^^^^ definition local3 EpoxyModel model
 //                       ^^^^^^^^^^^^^ reference local1
 //                                     ^^^ reference java/util/List#get().
 //                                         ^ reference local2
@@ -51,11 +51,11 @@ public abstract class ControllerHelper<T extends EpoxyController> {
   }
 
   protected void setControllerToStageTo(EpoxyModel<?> model, T controller) {
-//               ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#setControllerToStageTo().
+//               ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#setControllerToStageTo(). protected setControllerToStageTo(EpoxyModel<?> model, T controller)
 //                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                    ^^^^^ definition local4
+//                                                    ^^^^^ definition local4 EpoxyModel<?> model
 //                                                           ^ reference com/airbnb/epoxy/ControllerHelper#[T]
-//                                                             ^^^^^^^^^^ definition local5
+//                                                             ^^^^^^^^^^ definition local5 T controller
     model.controllerToStageTo = controller;
 //  ^^^^^ reference local4
 //        ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#controllerToStageTo.

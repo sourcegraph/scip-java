@@ -1,14 +1,13 @@
 package com.sourcegraph.lsif_java
 
-import com.sourcegraph.lsif_semanticdb.{SignatureFormatter, Symtab}
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role
-
 import scala.jdk.CollectionConverters._
-import com.sourcegraph.semanticdb_javac.Semanticdb.{
-  SymbolInformation,
-  SymbolOccurrence,
-  TextDocument
-}
+
+import com.sourcegraph.lsif_semanticdb.SignatureFormatter
+import com.sourcegraph.lsif_semanticdb.Symtab
+import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation
+import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence
+import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role
+import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
 
 object SemanticdbPrinters {
   def printTextDocument(doc: TextDocument): String = {

@@ -27,16 +27,16 @@ import androidx.annotation.NonNull;
  * same as the handler's thread.
  */
 class HandlerExecutor implements Executor {
-//    ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#
+//    ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor# class HandlerExecutor extends Executor
 //                               ^^^^^^^^ reference java/util/concurrent/Executor#
   final Handler handler;
 //      ^^^^^^^ reference _root_/
-//              ^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#handler.
+//              ^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#handler. final unresolved_type handler
 
   HandlerExecutor(Handler handler) {
-//^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#`<init>`(). <init>(unresolved_type handler)
 //                ^^^^^^^ reference _root_/
-//                        ^^^^^^^ definition local0
+//                        ^^^^^^^ definition local0 unresolved_type handler
     this.handler = handler;
 //  ^^^^ reference com/airbnb/epoxy/HandlerExecutor#this.
 //       ^^^^^^^ reference com/airbnb/epoxy/HandlerExecutor#handler.
@@ -46,10 +46,10 @@ class HandlerExecutor implements Executor {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void execute(@NonNull Runnable command) {
-//            ^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#execute().
+//            ^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#execute(). public execute(Runnable command)
 //                     ^^^^^^^ reference androidx/annotation/NonNull#
 //                             ^^^^^^^^ reference java/lang/Runnable#
-//                                      ^^^^^^^ definition local1
+//                                      ^^^^^^^ definition local1 Runnable command
     // If we're already on the same thread then we can execute this synchronously
     if (Looper.myLooper() == handler.getLooper()) {
 //      ^^^^^^ reference _root_/

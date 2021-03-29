@@ -2,17 +2,17 @@ package com.airbnb.epoxy;
 
 /** Helper to store relevant information about a model that we need to determine if it changed. */
 class ModelState {
-//    ^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#
-//    ^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#`<init>`().
+//    ^^^^^^^^^^ definition com/airbnb/epoxy/ModelState# class ModelState
+//    ^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#`<init>`(). <init>()
   long id;
-//     ^^ definition com/airbnb/epoxy/ModelState#id.
+//     ^^ definition com/airbnb/epoxy/ModelState#id. long id
   int hashCode;
-//    ^^^^^^^^ definition com/airbnb/epoxy/ModelState#hashCode.
+//    ^^^^^^^^ definition com/airbnb/epoxy/ModelState#hashCode. int hashCode
   int position;
-//    ^^^^^^^^ definition com/airbnb/epoxy/ModelState#position.
+//    ^^^^^^^^ definition com/airbnb/epoxy/ModelState#position. int position
   EpoxyModel<?> model;
 //^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//              ^^^^^ definition com/airbnb/epoxy/ModelState#model.
+//              ^^^^^ definition com/airbnb/epoxy/ModelState#model. EpoxyModel<?> model
 
   /**
    * A link to the item with the same id in the other list when diffing two lists. This will be null
@@ -21,7 +21,7 @@ class ModelState {
    */
   ModelState pair;
 //^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//           ^^^^ definition com/airbnb/epoxy/ModelState#pair.
+//           ^^^^ definition com/airbnb/epoxy/ModelState#pair. ModelState pair
 
   /**
    * How many movement operations have been applied to this item in order to update its position. As
@@ -32,18 +32,18 @@ class ModelState {
    * up to date position.
    */
   int lastMoveOp;
-//    ^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#lastMoveOp.
+//    ^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#lastMoveOp. int lastMoveOp
 
   static ModelState build(EpoxyModel<?> model, int position, boolean immutableModel) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                  ^^^^^ definition com/airbnb/epoxy/ModelState#build().
+//                  ^^^^^ definition com/airbnb/epoxy/ModelState#build(). static ModelState build(EpoxyModel<?> model, int position, boolean immutableModel)
 //                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                      ^^^^^ definition local0
-//                                                 ^^^^^^^^ definition local1
-//                                                                   ^^^^^^^^^^^^^^ definition local2
+//                                      ^^^^^ definition local0 EpoxyModel<?> model
+//                                                 ^^^^^^^^ definition local1 int position
+//                                                                   ^^^^^^^^^^^^^^ definition local2 boolean immutableModel
     ModelState state = new ModelState();
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//             ^^^^^ definition local3
+//             ^^^^^ definition local3 ModelState state
 //                     ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#`<init>`().
 //                         ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 
@@ -86,7 +86,7 @@ class ModelState {
    * inserted item in the old list.
    */
   void pairWithSelf() {
-//     ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#pairWithSelf().
+//     ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#pairWithSelf(). pairWithSelf()
     if (pair != null) {
 //      ^^^^ reference com/airbnb/epoxy/ModelState#pair.
       throw new IllegalStateException("Already paired.");
@@ -127,7 +127,7 @@ class ModelState {
 // ^^^^^^^^ reference java/lang/Override#
   public String toString() {
 //       ^^^^^^ reference java/lang/String#
-//              ^^^^^^^^ definition com/airbnb/epoxy/ModelState#toString().
+//              ^^^^^^^^ definition com/airbnb/epoxy/ModelState#toString(). public String toString()
     return "ModelState{"
         + "id=" + id
 //                ^^ reference com/airbnb/epoxy/ModelState#id.

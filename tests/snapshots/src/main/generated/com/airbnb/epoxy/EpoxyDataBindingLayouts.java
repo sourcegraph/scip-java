@@ -46,11 +46,11 @@ import androidx.annotation.LayoutRes;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface EpoxyDataBindingLayouts {
-//                ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingLayouts#
+//                ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingLayouts# public abstract EpoxyDataBindingLayouts extends Annotation
   /** A list of databinding layout resources that should have EpoxyModel's generated for them. */
   @LayoutRes int[] value();
 // ^^^^^^^^^ reference androidx/annotation/LayoutRes#
-//                 ^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingLayouts#value().
+//                 ^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingLayouts#value(). public abstract Array<int> value()
 
   /**
      * If true, any variable whose type does not implement equals and hashcode will have the
@@ -62,5 +62,5 @@ public @interface EpoxyDataBindingLayouts {
    * For details on the nuances of this, see https://github.com/airbnb/epoxy/wiki/DoNotHash
    */
   boolean enableDoNotHash() default true;
-//        ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingLayouts#enableDoNotHash().
+//        ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingLayouts#enableDoNotHash(). public abstract boolean enableDoNotHash()
 }

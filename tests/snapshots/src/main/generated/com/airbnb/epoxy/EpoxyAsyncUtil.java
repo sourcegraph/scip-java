@@ -35,9 +35,9 @@ import androidx.annotation.MainThread;
  * Various helpers for running Epoxy operations off the main thread.
  */
 public final class EpoxyAsyncUtil {
-//                 ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#
+//                 ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil# public final class EpoxyAsyncUtil
   private EpoxyAsyncUtil() {
-//        ^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#`<init>`().
+//        ^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#`<init>`(). private <init>()
   }
 
   /**
@@ -45,7 +45,7 @@ public final class EpoxyAsyncUtil {
    */
   public static final Handler MAIN_THREAD_HANDLER =
 //                    ^^^^^^^ reference _root_/
-//                            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#MAIN_THREAD_HANDLER.
+//                            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#MAIN_THREAD_HANDLER. public static final unresolved_type MAIN_THREAD_HANDLER
       createHandler(Looper.getMainLooper(), false);
 //    ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAsyncUtil#createHandler().
 //                  ^^^^^^ reference _root_/
@@ -58,7 +58,7 @@ public final class EpoxyAsyncUtil {
    */
   public static final Handler AYSNC_MAIN_THREAD_HANDLER =
 //                    ^^^^^^^ reference _root_/
-//                            ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#AYSNC_MAIN_THREAD_HANDLER.
+//                            ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#AYSNC_MAIN_THREAD_HANDLER. public static final unresolved_type AYSNC_MAIN_THREAD_HANDLER
       createHandler(Looper.getMainLooper(), true);
 //    ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAsyncUtil#createHandler().
 //                  ^^^^^^ reference _root_/
@@ -66,7 +66,7 @@ public final class EpoxyAsyncUtil {
 
   private static Handler asyncBackgroundHandler;
 //               ^^^^^^^ reference _root_/
-//                       ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#asyncBackgroundHandler.
+//                       ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#asyncBackgroundHandler. private static unresolved_type asyncBackgroundHandler
 
   /**
    * A Handler class that uses a separate background thread dedicated to Epoxy. Additionally,
@@ -77,7 +77,7 @@ public final class EpoxyAsyncUtil {
 // ^^^^^^^^^^ reference androidx/annotation/MainThread#
   public static Handler getAsyncBackgroundHandler() {
 //              ^^^^^^^ reference _root_/
-//                      ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#getAsyncBackgroundHandler().
+//                      ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#getAsyncBackgroundHandler(). public static getAsyncBackgroundHandler()
     // This is initialized lazily so we don't create the thread unless it will be used.
     // It isn't synchronized so it should only be accessed on the main thread.
     if (asyncBackgroundHandler == null) {
@@ -100,10 +100,10 @@ public final class EpoxyAsyncUtil {
    */
   public static Handler createHandler(Looper looper, boolean async) {
 //              ^^^^^^^ reference _root_/
-//                      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#createHandler().
+//                      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#createHandler(). public static createHandler(unresolved_type looper, boolean async)
 //                                    ^^^^^^ reference _root_/
-//                                           ^^^^^^ definition local0
-//                                                           ^^^^^ definition local1
+//                                           ^^^^^^ definition local0 unresolved_type looper
+//                                                           ^^^^^ definition local1 boolean async
     if (!async) {
 //       ^^^^^ reference local1
       return new Handler(looper);
@@ -144,7 +144,7 @@ public final class EpoxyAsyncUtil {
 //                       ^^^^^^ reference local0
       } catch (Throwable ignored) {
 //             ^^^^^^^^^ reference java/lang/Throwable#
-//                       ^^^^^^^ definition local2
+//                       ^^^^^^^ definition local2 Throwable ignored
       }
     }
 
@@ -159,12 +159,12 @@ public final class EpoxyAsyncUtil {
    */
   public static Looper buildBackgroundLooper(String threadName) {
 //              ^^^^^^ reference _root_/
-//                     ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#buildBackgroundLooper().
+//                     ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#buildBackgroundLooper(). public static buildBackgroundLooper(String threadName)
 //                                           ^^^^^^ reference java/lang/String#
-//                                                  ^^^^^^^^^^ definition local3
+//                                                  ^^^^^^^^^^ definition local3 String threadName
     HandlerThread handlerThread = new HandlerThread(threadName);
 //  ^^^^^^^^^^^^^ reference _root_/
-//                ^^^^^^^^^^^^^ definition local4
+//                ^^^^^^^^^^^^^ definition local4 unresolved_type handlerThread
 //                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference `<init>`#
 //                                    ^^^^^^^^^^^^^ reference _root_/
 //                                                  ^^^^^^^^^^ reference local3

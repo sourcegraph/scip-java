@@ -6,8 +6,8 @@ import android.view.View;
 //                  ^^^^ reference android/view/View#
 
 interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
-//        ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#
-//                               ^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
+//        ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback# abstract interface BaseEpoxyTouchCallback<T extends EpoxyModel>
+//                               ^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#[T] T extends EpoxyModel
 //                                         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 
   /**
@@ -21,10 +21,10 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
    * @see androidx.recyclerview.widget.ItemTouchHelper.Callback#getMovementFlags
    */
   int getMovementFlagsForModel(T model, int adapterPosition);
-//    ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#getMovementFlagsForModel().
+//    ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#getMovementFlagsForModel(). public abstract int getMovementFlagsForModel(T model, int adapterPosition)
 //                             ^ reference com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
-//                               ^^^^^ definition local0
-//                                          ^^^^^^^^^^^^^^^ definition local1
+//                               ^^^^^ definition local0 T model
+//                                          ^^^^^^^^^^^^^^^ definition local1 int adapterPosition
 
   /**
    * Called when the user interaction with a view is over and the view has
@@ -37,9 +37,9 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
    * @param itemView The view being cleared.
    */
   void clearView(T model, View itemView);
-//     ^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView().
+//     ^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView(). public abstract clearView(T model, unresolved_type itemView)
 //               ^ reference com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
-//                 ^^^^^ definition local2
+//                 ^^^^^ definition local2 T model
 //                        ^^^^ reference _root_/
-//                             ^^^^^^^^ definition local3
+//                             ^^^^^^^^ definition local3 unresolved_type itemView
 }

@@ -1,8 +1,8 @@
 package minimized;
 
 public class SubClasses extends AbstractClasses implements Interfaces {
-//           ^^^^^^^^^^ definition minimized/SubClasses#
-//           ^^^^^^^^^^ definition minimized/SubClasses#`<init>`().
+//           ^^^^^^^^^^ definition minimized/SubClasses# public class SubClasses extends AbstractClasses, Interfaces
+//           ^^^^^^^^^^ definition minimized/SubClasses#`<init>`(). public <init>()
 //                              ^^^^^^^^^^^^^^^ reference minimized/AbstractClasses#
 //                                                         ^^^^^^^^^^ reference minimized/Interfaces#
 
@@ -10,7 +10,7 @@ public class SubClasses extends AbstractClasses implements Interfaces {
 // ^^^^^^^^ reference java/lang/Override#
   public String abstractImplementation() {
 //       ^^^^^^ reference java/lang/String#
-//              ^^^^^^^^^^^^^^^^^^^^^^ definition minimized/SubClasses#abstractImplementation().
+//              ^^^^^^^^^^^^^^^^^^^^^^ definition minimized/SubClasses#abstractImplementation(). public String abstractImplementation()
     return "abstract";
   }
 
@@ -18,16 +18,16 @@ public class SubClasses extends AbstractClasses implements Interfaces {
 // ^^^^^^^^ reference java/lang/Override#
   public String abstractInterfaceMethod() {
 //       ^^^^^^ reference java/lang/String#
-//              ^^^^^^^^^^^^^^^^^^^^^^^ definition minimized/SubClasses#abstractInterfaceMethod().
+//              ^^^^^^^^^^^^^^^^^^^^^^^ definition minimized/SubClasses#abstractInterfaceMethod(). public String abstractInterfaceMethod()
     return "abstractInterface";
   }
 
   public static String app() {
 //              ^^^^^^ reference java/lang/String#
-//                     ^^^ definition minimized/SubClasses#app().
+//                     ^^^ definition minimized/SubClasses#app(). public static String app()
     SubClasses s = new SubClasses();
 //  ^^^^^^^^^^ reference minimized/SubClasses#
-//             ^ definition local0
+//             ^ definition local0 SubClasses s
 //                 ^^^^^^^^^^^^^^^^ reference minimized/SubClasses#`<init>`().
 //                     ^^^^^^^^^^ reference minimized/SubClasses#
     return s.abstractImplementation()

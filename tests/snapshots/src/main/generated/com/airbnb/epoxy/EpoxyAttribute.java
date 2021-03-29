@@ -35,26 +35,26 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface EpoxyAttribute {
-//                ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#
+//                ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute# public abstract EpoxyAttribute extends Annotation
   /**
    * Options that can be included on the attribute to affect how the model's generated class is
    * created.
    */
   enum Option {
-//     ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#
-//     ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`().
+//     ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option# public static final enum Option extends Enum<Option>
+//     ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`(). private <init>()
     /**
      * A getter is generated for this attribute by default. Add this option to prevent a getter from
      * being generated.
      */
     NoGetter,
-//  ^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#NoGetter.
+//  ^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#NoGetter. public static final Option NoGetter
     /**
      * A setter is generated for this attribute by default. Add this option to prevent a setter from
      * being generated.
      */
     NoSetter,
-//  ^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#NoSetter.
+//  ^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#NoSetter. public static final Option NoSetter
     /**
      * By default every attribute's hashCode and equals method is called when determining the
      * model's state. This option can be used to exclude an attribute's hashCode/equals from
@@ -71,7 +71,7 @@ public @interface EpoxyAttribute {
      * then you can use this to prevent the rebind.
      */
     DoNotHash,
-//  ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#DoNotHash.
+//  ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#DoNotHash. public static final Option DoNotHash
     /**
      * This is meant to be used in conjunction with {@link PackageEpoxyConfig#requireHashCode()}.
      * When that is enabled every attribute must implement hashCode/equals. However, there are some
@@ -87,19 +87,19 @@ public @interface EpoxyAttribute {
      * contribute to model state you should use {@link Option#DoNotHash} instead.
      */
     IgnoreRequireHashCode,
-//  ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#IgnoreRequireHashCode.
+//  ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#IgnoreRequireHashCode. public static final Option IgnoreRequireHashCode
     /**
      * This attribute is used in {@link Object#toString()} implementation by default.
      * Add this option to prevent this attribute being used in {@link Object#toString()}.
      */
     DoNotUseInToString
-//  ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#DoNotUseInToString.
+//  ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#DoNotUseInToString. public static final Option DoNotUseInToString
   }
 
   /** Specify any {@link Option} values that should be used when generating the model class. */
   Option[] value() default {};
 //^^^^^^ reference com/airbnb/epoxy/EpoxyAttribute#Option#
-//         ^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#value().
+//         ^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#value(). public abstract Array<Option> value()
 
   /**
    * Whether or not to include this attribute in equals and hashCode calculations.
@@ -112,7 +112,7 @@ public @interface EpoxyAttribute {
   @Deprecated
 // ^^^^^^^^^^ reference java/lang/Deprecated#
   boolean hash() default true;
-//        ^^^^ definition com/airbnb/epoxy/EpoxyAttribute#hash().
+//        ^^^^ definition com/airbnb/epoxy/EpoxyAttribute#hash(). public abstract boolean hash()
 
   /**
    * Whether or not to generate setter for this attribute.
@@ -125,5 +125,5 @@ public @interface EpoxyAttribute {
   @Deprecated
 // ^^^^^^^^^^ reference java/lang/Deprecated#
   boolean setter() default true;
-//        ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#setter().
+//        ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#setter(). public abstract boolean setter()
 }

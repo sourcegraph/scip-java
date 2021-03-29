@@ -2,8 +2,8 @@ package com.airbnb.epoxy;
 
 /** Interface applied to generated models to allow the base adapter to interact with them. */
 public interface GeneratedModel<T> {
-//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel#
-//                              ^ definition com/airbnb/epoxy/GeneratedModel#[T]
+//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel# public abstract interface GeneratedModel<T>
+//                              ^ definition com/airbnb/epoxy/GeneratedModel#[T] T
   /**
    * Called on the generated model immediately before the main model onBind method has been called.
    * This let's the generated model handle binding setup of its own
@@ -11,12 +11,12 @@ public interface GeneratedModel<T> {
    * The ViewHolder is needed to get the model's adapter position when clicked.
    */
   void handlePreBind(EpoxyViewHolder holder, T objectToBind, int position);
-//     ^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel#handlePreBind().
+//     ^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel#handlePreBind(). public abstract handlePreBind(EpoxyViewHolder holder, T objectToBind, int position)
 //                   ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                   ^^^^^^ definition local0
+//                                   ^^^^^^ definition local0 EpoxyViewHolder holder
 //                                           ^ reference com/airbnb/epoxy/GeneratedModel#[T]
-//                                             ^^^^^^^^^^^^ definition local1
-//                                                               ^^^^^^^^ definition local2
+//                                             ^^^^^^^^^^^^ definition local1 T objectToBind
+//                                                               ^^^^^^^^ definition local2 int position
   /**
    * Called on the generated model immediately after the main model onBind method has been called.
    * This let's the generated model handle binding of its own and dispatch calls to its onBind
@@ -27,8 +27,8 @@ public interface GeneratedModel<T> {
    * the other. We don't want to dispatch two onBind listener calls in that case.
    */
   void handlePostBind(T objectToBind, int position);
-//     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel#handlePostBind().
+//     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel#handlePostBind(). public abstract handlePostBind(T objectToBind, int position)
 //                    ^ reference com/airbnb/epoxy/GeneratedModel#[T]
-//                      ^^^^^^^^^^^^ definition local3
-//                                        ^^^^^^^^ definition local4
+//                      ^^^^^^^^^^^^ definition local3 T objectToBind
+//                                        ^^^^^^^^ definition local4 int position
 }
