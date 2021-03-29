@@ -8,9 +8,9 @@ public class MinimizedJavaMain {
 //           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain# public class MinimizedJavaMain
 //           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain#`<init>`(). public <init>()
   public static void main(String[] args) {
-//                   ^^^^ definition minimized/MinimizedJavaMain#main(). public static main(Array<String> args)
+//                   ^^^^ definition minimized/MinimizedJavaMain#main(). public static main(String[] args)
 //                        ^^^^^^ reference java/lang/String#
-//                                 ^^^^ definition local0 Array<String> args
+//                                 ^^^^ definition local0 String[] args
     TypeVariables.app(new TypeVariables.CT());
 //  ^^^^^^^^^^^^^ reference minimized/TypeVariables#
 //                ^^^ reference minimized/TypeVariables#app().

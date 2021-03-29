@@ -858,10 +858,10 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
    * EpoxyController#buildModels()}.
    */
   protected void add(@NonNull EpoxyModel<?>... modelsToAdd) {
-//               ^^^ definition com/airbnb/epoxy/EpoxyController#add(+1). protected add(Array<EpoxyModel<?>> modelsToAdd)
+//               ^^^ definition com/airbnb/epoxy/EpoxyController#add(+1). protected add(EpoxyModel<?>[] modelsToAdd)
 //                    ^^^^^^^ reference androidx/annotation/NonNull#
 //                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                             ^^^^^^^^^^^ definition local27 Array<EpoxyModel<?>> modelsToAdd
+//                                             ^^^^^^^^^^^ definition local27 EpoxyModel<?>[] modelsToAdd
     modelsBeingBuilt.ensureCapacity(modelsBeingBuilt.size() + modelsToAdd.length);
 //  ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#modelsBeingBuilt.
 //                   ^^^^^^^^^^^^^^ reference java/util/ArrayList#ensureCapacity().

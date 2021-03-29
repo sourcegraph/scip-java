@@ -50,7 +50,7 @@ public class StringAttributeData {
   @Nullable private Object[] formatArgs;
 // ^^^^^^^^ reference androidx/annotation/Nullable#
 //                  ^^^^^^ reference java/lang/Object#
-//                           ^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#formatArgs. private Array<Object> formatArgs
+//                           ^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#formatArgs. private Object[] formatArgs
 
   public StringAttributeData() {
 //       ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#`<init>`(). public <init>()
@@ -122,12 +122,12 @@ public class StringAttributeData {
   }
 
   public void setValue(@StringRes int stringRes, @Nullable Object[] formatArgs) {
-//            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#setValue(+2). public setValue(int stringRes, Array<Object> formatArgs)
+//            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#setValue(+2). public setValue(int stringRes, Object[] formatArgs)
 //                      ^^^^^^^^^ reference androidx/annotation/StringRes#
 //                                    ^^^^^^^^^ definition local4 int stringRes
 //                                                ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                                         ^^^^^^ reference java/lang/Object#
-//                                                                  ^^^^^^^^^^ definition local5 Array<Object> formatArgs
+//                                                                  ^^^^^^^^^^ definition local5 Object[] formatArgs
     if (stringRes != 0) {
 //      ^^^^^^^^^ reference local4
       this.stringRes = stringRes;
@@ -170,13 +170,13 @@ public class StringAttributeData {
   }
 
   public void setValue(@PluralsRes int pluralRes, int quantity, @Nullable Object[] formatArgs) {
-//            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#setValue(+3). public setValue(int pluralRes, int quantity, Array<Object> formatArgs)
+//            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#setValue(+3). public setValue(int pluralRes, int quantity, Object[] formatArgs)
 //                      ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
 //                                     ^^^^^^^^^ definition local6 int pluralRes
 //                                                    ^^^^^^^^ definition local7 int quantity
 //                                                               ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                                                        ^^^^^^ reference java/lang/Object#
-//                                                                                 ^^^^^^^^^^ definition local8 Array<Object> formatArgs
+//                                                                                 ^^^^^^^^^^ definition local8 Object[] formatArgs
     if (pluralRes != 0) {
 //      ^^^^^^^^^ reference local6
       this.pluralRes = pluralRes;

@@ -6,18 +6,18 @@ package example;
 
  /** Example1 docstring */
 public class Example1 {}
-//           ^^^^^^^^ definition example/Example1#
-//           ^^^^^^^^ definition example/Example1#`<init>`().
+//           ^^^^^^^^ definition example/Example1# public class Example1
+//           ^^^^^^^^ definition example/Example1#`<init>`(). public <init>()
 
 /example/Example2.java
 package example;
 
 public class Example2 {
-//           ^^^^^^^^ definition example/Example2#
-//           ^^^^^^^^ definition example/Example2#`<init>`().
+//           ^^^^^^^^ definition example/Example2# public class Example2
+//           ^^^^^^^^ definition example/Example2#`<init>`(). public <init>()
   public Example1 example;
 //       ^^^^^^^^ reference example/Example1#
-//                ^^^^^^^ definition example/Example2#example.
+//                ^^^^^^^ definition example/Example2#example. public Example1 example
 }
 
 

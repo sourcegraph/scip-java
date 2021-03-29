@@ -15,6 +15,8 @@ public class SignatureFormatter {
   private static final Type WILDCARD_TYPE_REF =
       Type.newBuilder().setTypeRef(TypeRef.newBuilder().setSymbol("local_wildcard")).build();
 
+  private static final String ARRAY_SYMBOL = "scala/Array#";
+
   private final StringBuilder s = new StringBuilder();
   private final SymbolInformation symbolInformation;
   private final Symtab symtab;
@@ -151,8 +153,13 @@ public class SignatureFormatter {
     StringBuilder b = new StringBuilder();
     if (type.hasTypeRef()) {
       TypeRef typeRef = type.getTypeRef();
-      b.append(symbolDisplayName(typeRef.getSymbol()));
-      b.append(formatTypeArguments(typeRef.getTypeArgumentsList()));
+      if (typeRef.getSymbol().equals(ARRAY_SYMBOL)) {
+        b.append(formatType(typeRef.getTypeArguments(0)));
+        b.append("[]");
+      } else {
+        b.append(symbolDisplayName(typeRef.getSymbol()));
+        b.append(formatTypeArguments(typeRef.getTypeArgumentsList()));
+      }
     } else if (type.hasIntersectionType()) {
       b.append(
           type.getIntersectionType().getTypesList().stream()

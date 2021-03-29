@@ -117,7 +117,7 @@ public class LsifSemanticdb {
         ArrayList<MarkedString> markedStrings = new ArrayList<>();
         String documentation = symbolInformation.getDocumentation().getMessage();
         if (!documentation.isEmpty()) {
-          markedStrings.add(new MarkedString(doc.semanticdb.getLanguage(), documentation));
+          markedStrings.add(new MarkedString(Semanticdb.Language.UNKNOWN_LANGUAGE, documentation));
         }
 
         if (symbolInformation.hasSignature()) {

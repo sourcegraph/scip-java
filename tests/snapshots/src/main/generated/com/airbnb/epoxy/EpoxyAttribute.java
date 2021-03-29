@@ -99,7 +99,7 @@ public @interface EpoxyAttribute {
   /** Specify any {@link Option} values that should be used when generating the model class. */
   Option[] value() default {};
 //^^^^^^ reference com/airbnb/epoxy/EpoxyAttribute#Option#
-//         ^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#value(). public abstract Array<Option> value()
+//         ^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#value(). public abstract Option[] value()
 
   /**
    * Whether or not to include this attribute in equals and hashCode calculations.

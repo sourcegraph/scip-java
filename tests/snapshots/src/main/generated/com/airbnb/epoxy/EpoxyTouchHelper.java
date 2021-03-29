@@ -287,10 +287,10 @@ public abstract class EpoxyTouchHelper {
     public DragBuilder4<EpoxyModel> withTargets(Class<? extends EpoxyModel>... targetModelClasses) {
 //         ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#
 //                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#withTargets(). public DragBuilder4<EpoxyModel> withTargets(Array<Class<? extends EpoxyModel>> targetModelClasses)
+//                                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#withTargets(). public DragBuilder4<EpoxyModel> withTargets(Class<? extends EpoxyModel>[] targetModelClasses)
 //                                              ^^^^^ reference java/lang/Class#
 //                                                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                                             ^^^^^^^^^^^^^^^^^^ definition local11 Array<Class<? extends EpoxyModel>> targetModelClasses
+//                                                                             ^^^^^^^^^^^^^^^^^^ definition local11 Class<? extends EpoxyModel>[] targetModelClasses
       return new DragBuilder4<>(controller, recyclerView, movementFlags, EpoxyModel.class,
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#`<init>`(). 1:44
 //               ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#
@@ -777,11 +777,11 @@ public abstract class EpoxyTouchHelper {
     public SwipeBuilder3<EpoxyModel> withTargets(
 //         ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#
 //                       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                   ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#withTargets(). public SwipeBuilder3<EpoxyModel> withTargets(Array<Class<? extends EpoxyModel>> targetModelClasses)
+//                                   ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#withTargets(). public SwipeBuilder3<EpoxyModel> withTargets(Class<? extends EpoxyModel>[] targetModelClasses)
         Class<? extends EpoxyModel>... targetModelClasses) {
 //      ^^^^^ reference java/lang/Class#
 //                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                     ^^^^^^^^^^^^^^^^^^ definition local66 Array<Class<? extends EpoxyModel>> targetModelClasses
+//                                     ^^^^^^^^^^^^^^^^^^ definition local66 Class<? extends EpoxyModel>[] targetModelClasses
       return new SwipeBuilder3<>(recyclerView, movementFlags, EpoxyModel.class,
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#`<init>`(). 1:44
 //               ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#

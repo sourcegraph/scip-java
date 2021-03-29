@@ -29,17 +29,17 @@ public class QuantityStringResAttribute {
   @Nullable private final Object[] formatArgs;
 // ^^^^^^^^ reference androidx/annotation/Nullable#
 //                        ^^^^^^ reference java/lang/Object#
-//                                 ^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#formatArgs. private final Array<Object> formatArgs
+//                                 ^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#formatArgs. private final Object[] formatArgs
 
   public QuantityStringResAttribute(@PluralsRes int id, int quantity,
-//       ^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#`<init>`(). public <init>(int id, int quantity, Array<Object> formatArgs)
+//       ^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#`<init>`(). public <init>(int id, int quantity, Object[] formatArgs)
 //                                   ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
 //                                                  ^^ definition local0 int id
 //                                                          ^^^^^^^^ definition local1 int quantity
       @Nullable Object[] formatArgs) {
 //     ^^^^^^^^ reference androidx/annotation/Nullable#
 //              ^^^^^^ reference java/lang/Object#
-//                       ^^^^^^^^^^ definition local2 Array<Object> formatArgs
+//                       ^^^^^^^^^^ definition local2 Object[] formatArgs
     this.quantity = quantity;
 //  ^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#this.
 //       ^^^^^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#quantity.
@@ -82,7 +82,7 @@ public class QuantityStringResAttribute {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
   public Object[] getFormatArgs() {
 //       ^^^^^^ reference java/lang/Object#
-//                ^^^^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#getFormatArgs(). public Array<Object> getFormatArgs()
+//                ^^^^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#getFormatArgs(). public Object[] getFormatArgs()
     return formatArgs;
 //         ^^^^^^^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.
   }

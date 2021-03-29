@@ -370,10 +370,10 @@ public abstract class EpoxyModel<T> {
   public EpoxyModel<T> id(@Nullable Number... ids) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
-//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+2). public EpoxyModel<T> id(Array<Number> ids)
+//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+2). public EpoxyModel<T> id(Number[] ids)
 //                         ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                  ^^^^^^ reference java/lang/Number#
-//                                            ^^^ definition local16 Array<Number> ids
+//                                            ^^^ definition local16 Number[] ids
     long result = 0;
 //       ^^^^^^ definition local17 long result
     if (ids != null) {
@@ -458,13 +458,13 @@ public abstract class EpoxyModel<T> {
   public EpoxyModel<T> id(@Nullable CharSequence key, @Nullable CharSequence... otherKeys) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModel#[T]
-//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+5). public EpoxyModel<T> id(CharSequence key, Array<CharSequence> otherKeys)
+//                     ^^ definition com/airbnb/epoxy/EpoxyModel#id(+5). public EpoxyModel<T> id(CharSequence key, CharSequence[] otherKeys)
 //                         ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                  ^^^^^^^^^^^^ reference java/lang/CharSequence#
 //                                               ^^^ definition local23 CharSequence key
 //                                                     ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                                              ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                                                              ^^^^^^^^^ definition local24 Array<CharSequence> otherKeys
+//                                                                              ^^^^^^^^^ definition local24 CharSequence[] otherKeys
     long result = hashString64Bit(key);
 //       ^^^^^^ definition local25 long result
 //                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IdUtils#hashString64Bit().

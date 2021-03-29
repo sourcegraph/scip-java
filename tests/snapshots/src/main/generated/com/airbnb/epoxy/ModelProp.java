@@ -104,7 +104,7 @@ public @interface ModelProp {
   /** Specify any {@link Option} values that should be used when generating the model class. */
   Option[] options() default {};
 //^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#
-//         ^^^^^^^ definition com/airbnb/epoxy/ModelProp#options(). public abstract Array<Option> options()
+//         ^^^^^^^ definition com/airbnb/epoxy/ModelProp#options(). public abstract Option[] options()
 
   /**
    * The same as {@link #options()}, but this allows the shortcut of setting an option eg
@@ -112,7 +112,7 @@ public @interface ModelProp {
    */
   Option[] value() default {};
 //^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#
-//         ^^^^^ definition com/airbnb/epoxy/ModelProp#value(). public abstract Array<Option> value()
+//         ^^^^^ definition com/airbnb/epoxy/ModelProp#value(). public abstract Option[] value()
 
   /**
    * The name of the constant field that should be used as the default value for this prop. The

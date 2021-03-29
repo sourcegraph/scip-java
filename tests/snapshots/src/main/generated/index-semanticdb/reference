@@ -5,11 +5,11 @@
 package example;
  /** Docstring for Example */
 public class Example {
-//           ^^^^^^^ definition example/Example#
-//           ^^^^^^^ definition example/Example#`<init>`().
+//           ^^^^^^^ definition example/Example# public class Example
+//           ^^^^^^^ definition example/Example#`<init>`(). public <init>()
   Example next;
 //^^^^^^^ reference example/Example#
-//        ^^^^ definition example/Example#next.
+//        ^^^^ definition example/Example#next. Example next
 }
 
 

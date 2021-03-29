@@ -219,9 +219,9 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * inserted.
    */
   protected void addModels(EpoxyModel<?>... modelsToAdd) {
-//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#addModels(). protected addModels(Array<EpoxyModel<?>> modelsToAdd)
+//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#addModels(). protected addModels(EpoxyModel<?>[] modelsToAdd)
 //                         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                          ^^^^^^^^^^^ definition local8 Array<EpoxyModel<?>> modelsToAdd
+//                                          ^^^^^^^^^^^ definition local8 EpoxyModel<?>[] modelsToAdd
     int initialSize = models.size();
 //      ^^^^^^^^^^^ definition local9 int initialSize
 //                    ^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#models.
@@ -501,9 +501,9 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @param models The models to show. They should already be added to the {@link #models} list.
    */
   protected void showModels(EpoxyModel<?>... models) {
-//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModels(). protected showModels(Array<EpoxyModel<?>> models)
+//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModels(). protected showModels(EpoxyModel<?>[] models)
 //                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                           ^^^^^^ definition local30 Array<EpoxyModel<?>> models
+//                                           ^^^^^^ definition local30 EpoxyModel<?>[] models
     showModels(Arrays.asList(models));
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#showModels(+2).
 //             ^^^^^^ reference java/util/Arrays#
@@ -519,10 +519,10 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @param show   True to show the models, false to hide them.
    */
   protected void showModels(boolean show, EpoxyModel<?>... models) {
-//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModels(+1). protected showModels(boolean show, Array<EpoxyModel<?>> models)
+//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#showModels(+1). protected showModels(boolean show, EpoxyModel<?>[] models)
 //                                  ^^^^ definition local31 boolean show
 //                                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                         ^^^^^^ definition local32 Array<EpoxyModel<?>> models
+//                                                         ^^^^^^ definition local32 EpoxyModel<?>[] models
     showModels(Arrays.asList(models), show);
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#showModels(+3).
 //             ^^^^^^ reference java/util/Arrays#
@@ -605,9 +605,9 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
    * @param models The models to hide. They should already be added to the {@link #models} list.
    */
   protected void hideModels(EpoxyModel<?>... models) {
-//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#hideModels(+1). protected hideModels(Array<EpoxyModel<?>> models)
+//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#hideModels(+1). protected hideModels(EpoxyModel<?>[] models)
 //                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                           ^^^^^^ definition local39 Array<EpoxyModel<?>> models
+//                                           ^^^^^^ definition local39 EpoxyModel<?>[] models
     hideModels(Arrays.asList(models));
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#hideModels().
 //             ^^^^^^ reference java/util/Arrays#

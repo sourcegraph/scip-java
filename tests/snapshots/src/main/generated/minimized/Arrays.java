@@ -7,15 +7,15 @@ public class Arrays {
 //              ^^^^^^ reference java/lang/String#
 //                     ^^^ definition minimized/Arrays#app(). public static String app()
     int[] a = {1, 2, 3};
-//        ^ definition local0 Array<int> a
+//        ^ definition local0 int[] a
     String[] b = {"1", "2", "3"};
 //  ^^^^^^ reference java/lang/String#
-//           ^ definition local1 Array<String> b
+//           ^ definition local1 String[] b
     int[][] c = {{1}, {2}, {3}};
-//          ^ definition local2 Array<Array<int>> c
+//          ^ definition local2 int[][] c
     String[][] d = {{"1"}, {"2"}, {"3"}};
 //  ^^^^^^ reference java/lang/String#
-//             ^ definition local3 Array<Array<String>> d
+//             ^ definition local3 String[][] d
     return b[0] + a[0] + c[1][0] + d[1][0];
 //         ^ reference local1
 //                ^ reference local0

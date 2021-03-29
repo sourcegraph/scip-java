@@ -50,7 +50,7 @@ public @interface EpoxyDataBindingLayouts {
   /** A list of databinding layout resources that should have EpoxyModel's generated for them. */
   @LayoutRes int[] value();
 // ^^^^^^^^^ reference androidx/annotation/LayoutRes#
-//                 ^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingLayouts#value(). public abstract Array<int> value()
+//                 ^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingLayouts#value(). public abstract int[] value()
 
   /**
      * If true, any variable whose type does not implement equals and hashcode will have the

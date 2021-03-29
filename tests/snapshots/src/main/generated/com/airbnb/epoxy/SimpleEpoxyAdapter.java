@@ -70,9 +70,9 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void addModels(EpoxyModel<?>... modelsToAdd) {
-//            ^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#addModels(). public addModels(Array<EpoxyModel<?>> modelsToAdd)
+//            ^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#addModels(). public addModels(EpoxyModel<?>[] modelsToAdd)
 //                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                       ^^^^^^^^^^^ definition local1 Array<EpoxyModel<?>> modelsToAdd
+//                                       ^^^^^^^^^^^ definition local1 EpoxyModel<?>[] modelsToAdd
     super.addModels(modelsToAdd);
 //  ^^^^^ reference com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#addModels().
@@ -184,9 +184,9 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void showModels(EpoxyModel<?>... models) {
-//            ^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(). public showModels(Array<EpoxyModel<?>> models)
+//            ^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(). public showModels(EpoxyModel<?>[] models)
 //                       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                        ^^^^^^ definition local12 Array<EpoxyModel<?>> models
+//                                        ^^^^^^ definition local12 EpoxyModel<?>[] models
     super.showModels(models);
 //  ^^^^^ reference com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#showModels().
@@ -196,10 +196,10 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void showModels(boolean show, EpoxyModel<?>... models) {
-//            ^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(+1). public showModels(boolean show, Array<EpoxyModel<?>> models)
+//            ^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(+1). public showModels(boolean show, EpoxyModel<?>[] models)
 //                               ^^^^ definition local13 boolean show
 //                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                      ^^^^^^ definition local14 Array<EpoxyModel<?>> models
+//                                                      ^^^^^^ definition local14 EpoxyModel<?>[] models
     super.showModels(show, models);
 //  ^^^^^ reference com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#showModels(+1).
@@ -263,9 +263,9 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void hideModels(EpoxyModel<?>... models) {
-//            ^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#hideModels(+1). public hideModels(Array<EpoxyModel<?>> models)
+//            ^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#hideModels(+1). public hideModels(EpoxyModel<?>[] models)
 //                       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                        ^^^^^^ definition local20 Array<EpoxyModel<?>> models
+//                                        ^^^^^^ definition local20 EpoxyModel<?>[] models
     super.hideModels(models);
 //  ^^^^^ reference com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#hideModels(+1).

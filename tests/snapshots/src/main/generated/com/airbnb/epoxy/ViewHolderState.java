@@ -126,7 +126,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 
     public ViewHolderState[] newArray(int size) {
 //         ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#
-//                           ^^^^^^^^ definition local6 public Array<ViewHolderState> newArray(int size)
+//                           ^^^^^^^^ definition local6 public ViewHolderState[] newArray(int size)
 //                                        ^^^^ definition local8 int size
       return new ViewHolderState[size];
 //               ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#
@@ -296,11 +296,11 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
     }
 
     private ViewState(int size, int[] keys, Parcelable[] values) {
-//          ^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`(+1). private <init>(int size, Array<int> keys, Array<unresolved_type> values)
+//          ^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`(+1). private <init>(int size, int[] keys, unresolved_type[] values)
 //                        ^^^^ definition local22 int size
-//                                    ^^^^ definition local23 Array<int> keys
+//                                    ^^^^ definition local23 int[] keys
 //                                          ^^^^^^^^^^ reference _root_/
-//                                                       ^^^^^^ definition local24 Array<unresolved_type> values
+//                                                       ^^^^^^ definition local24 unresolved_type[] values
       super(size);
 //          ^^^^ reference local22
       for (int i = 0; i < size; ++i) {
@@ -403,11 +403,11 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //        ^^^^ definition local33 int size
 //               ^^^^ reference androidx/collection/LongSparseArray#size().
       int[] keys = new int[size];
-//          ^^^^ definition local34 Array<int> keys
+//          ^^^^ definition local34 int[] keys
 //                         ^^^^ reference local33
       Parcelable[] values = new Parcelable[size];
 //    ^^^^^^^^^^ reference _root_/
-//                 ^^^^^^ definition local35 Array<unresolved_type> values
+//                 ^^^^^^ definition local35 unresolved_type[] values
 //                              ^^^^^^^^^^ reference _root_/
 //                                         ^^^^ reference local33
       for (int i = 0; i < size; ++i) {
@@ -467,7 +467,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                     ^^^^^^ reference local41
 //                            ^^^^^^^ reference readInt#
             int[] keys = new int[size];
-//                ^^^^ definition local44 Array<int> keys
+//                ^^^^ definition local44 int[] keys
 //                               ^^^^ reference local43
             source.readIntArray(keys);
 //          ^^^^^^ reference local41
@@ -475,7 +475,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                              ^^^^ reference local44
             Parcelable[] values = source.readParcelableArray(loader);
 //          ^^^^^^^^^^ reference _root_/
-//                       ^^^^^^ definition local45 Array<unresolved_type> values
+//                       ^^^^^^ definition local45 unresolved_type[] values
 //                                ^^^^^^ reference local41
 //                                       ^^^^^^^^^^^^^^^^^^^ reference readParcelableArray#
 //                                                           ^^^^^^ reference local42
@@ -503,7 +503,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //         ^^^^^^^^ reference java/lang/Override#
           public ViewState[] newArray(int size) {
 //               ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
-//                           ^^^^^^^^ definition local40 public Array<ViewState> newArray(int size)
+//                           ^^^^^^^^ definition local40 public ViewState[] newArray(int size)
 //                                        ^^^^ definition local47 int size
             return new ViewState[size];
 //                     ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#

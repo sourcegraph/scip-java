@@ -23,7 +23,7 @@ object SemanticdbPrinters {
       .linesWithSeparators
       .zipWithIndex
       .foreach { case (line, i) =>
-        out.append(line)
+        out.append(line.replace("\t", "→"))
         val occurences = occurrencesByLine
           .getOrElse(i, Nil)
           .sortBy(o =>

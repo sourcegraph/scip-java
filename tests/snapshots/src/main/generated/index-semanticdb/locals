@@ -5,11 +5,11 @@
 package example;
 
 public class Example {
-//           ^^^^^^^ definition example/Example#
-//           ^^^^^^^ definition example/Example#`<init>`().
+//           ^^^^^^^ definition example/Example# public class Example
+//           ^^^^^^^ definition example/Example#`<init>`(). public <init>()
   public static int increment(int n) { return n + 1; }
-//                  ^^^^^^^^^ definition example/Example#increment().
-//                                ^ definition local0
+//                  ^^^^^^^^^ definition example/Example#increment(). public static int increment(int n)
+//                                ^ definition local0 int n
 //                                            ^ reference local0
 }
 
