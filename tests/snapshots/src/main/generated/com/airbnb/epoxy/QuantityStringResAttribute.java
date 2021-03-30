@@ -41,15 +41,15 @@ public class QuantityStringResAttribute {
 //              ^^^^^^ reference java/lang/Object#
 //                       ^^^^^^^^^^ definition local2 Object[] formatArgs
     this.quantity = quantity;
-//  ^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#this.
+//  ^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#
 //       ^^^^^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#quantity.
 //                  ^^^^^^^^ reference local1
     this.id = id;
-//  ^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#this.
+//  ^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#
 //       ^^ reference com/airbnb/epoxy/QuantityStringResAttribute#id.
 //            ^^ reference local0
     this.formatArgs = formatArgs;
-//  ^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#this.
+//  ^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.
 //                    ^^^^^^^^^^ reference local2
   }
@@ -120,7 +120,7 @@ public class QuantityStringResAttribute {
 //                      ^^^^^^ reference java/lang/Object#
 //                             ^ definition local6 Object o
     if (this == o) {
-//      ^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#this.
+//      ^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#
 //              ^ reference local6
       return true;
     }

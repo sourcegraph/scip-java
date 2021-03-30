@@ -87,7 +87,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                                                                 ^^^^^^^ reference _root_/
 //                                                                         ^^^^^^^^^^^^^^ definition local1 unresolved_type diffingHandler
     this.epoxyController = epoxyController;
-//  ^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#this.
+//  ^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#
 //       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
 //                         ^^^^^^^^^^^^^^^ reference local0
     differ = new AsyncEpoxyDiffer(
@@ -97,7 +97,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
         diffingHandler,
 //      ^^^^^^^^^^^^^^ reference local1
         this,
-//      ^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#this.
+//      ^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#
         ITEM_CALLBACK
 //      ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#ITEM_CALLBACK.
     );
@@ -226,7 +226,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
     result.dispatchTo(this);
 //  ^^^^^^ reference local7
 //         ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#dispatchTo().
-//                    ^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#this.
+//                    ^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#
     notifyBlocker.blockChanges();
 //  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#notifyBlocker.
 //                ^^^^^^^^^^^^ reference com/airbnb/epoxy/NotifyBlocker#blockChanges().

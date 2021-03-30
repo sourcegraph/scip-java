@@ -88,7 +88,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //        ^^^^ reference local1
 
     this.parent = parent;
-//  ^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#this.
+//  ^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //       ^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#parent.
 //                ^^^^^^ reference local0
     if (saveInitialState) {
@@ -132,7 +132,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //                                                               ^^^^^^^^ definition local5 List<Object> payloads
 //                                                                             ^^^^^^^^ definition local6 int position
     this.payloads = payloads;
-//  ^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#this.
+//  ^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //       ^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#payloads.
 //                  ^^^^^^^^ reference local5
 
@@ -164,7 +164,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/GeneratedModel#
 //                      ^^^^^ reference local3
 //                             ^^^^^^^^^^^^^ reference com/airbnb/epoxy/GeneratedModel#handlePreBind().
-//                                           ^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#this.
+//                                           ^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                                 ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#objectToBind().
 //                                                                 ^^^^^^^^ reference local6
     }

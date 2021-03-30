@@ -76,11 +76,11 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                                                           ^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
 //                                                                              ^^^^^^^^^^^^^^^^ definition local1 Class<T> targetModelClass
     this.controller = controller;
-//  ^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#this.
+//  ^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#controller.
 //                    ^^^^^^^^^^ reference local0
     this.targetModelClass = targetModelClass;
-//  ^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#this.
+//  ^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#targetModelClass.
 //                          ^^^^^^^^^^^^^^^^ reference local1
   }

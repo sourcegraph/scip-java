@@ -70,7 +70,7 @@ public class StringAttributeData {
     hasDefault = true;
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#hasDefault.
     this.defaultString = defaultString;
-//  ^^^^ reference com/airbnb/epoxy/StringAttributeData#this.
+//  ^^^^ reference com/airbnb/epoxy/StringAttributeData#
 //       ^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#defaultString.
 //                       ^^^^^^^^^^^^^ reference local0
     string = defaultString;
@@ -87,7 +87,7 @@ public class StringAttributeData {
     hasDefault = true;
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#hasDefault.
     this.defaultStringRes = defaultStringRes;
-//  ^^^^ reference com/airbnb/epoxy/StringAttributeData#this.
+//  ^^^^ reference com/airbnb/epoxy/StringAttributeData#
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#defaultStringRes.
 //                          ^^^^^^^^^^^^^^^^ reference local1
     stringRes = defaultStringRes;
@@ -103,7 +103,7 @@ public class StringAttributeData {
 //                               ^^^^^^^^^^^^ reference java/lang/CharSequence#
 //                                            ^^^^^^ definition local2 CharSequence string
     this.string = string;
-//  ^^^^ reference com/airbnb/epoxy/StringAttributeData#this.
+//  ^^^^ reference com/airbnb/epoxy/StringAttributeData#
 //       ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.
 //                ^^^^^^ reference local2
     stringRes = 0;
@@ -131,11 +131,11 @@ public class StringAttributeData {
     if (stringRes != 0) {
 //      ^^^^^^^^^ reference local4
       this.stringRes = stringRes;
-//    ^^^^ reference com/airbnb/epoxy/StringAttributeData#this.
+//    ^^^^ reference com/airbnb/epoxy/StringAttributeData#
 //         ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#stringRes.
 //                     ^^^^^^^^^ reference local4
       this.formatArgs = formatArgs;
-//    ^^^^ reference com/airbnb/epoxy/StringAttributeData#this.
+//    ^^^^ reference com/airbnb/epoxy/StringAttributeData#
 //         ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#formatArgs.
 //                      ^^^^^^^^^^ reference local5
       string = null;
@@ -180,15 +180,15 @@ public class StringAttributeData {
     if (pluralRes != 0) {
 //      ^^^^^^^^^ reference local6
       this.pluralRes = pluralRes;
-//    ^^^^ reference com/airbnb/epoxy/StringAttributeData#this.
+//    ^^^^ reference com/airbnb/epoxy/StringAttributeData#
 //         ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#pluralRes.
 //                     ^^^^^^^^^ reference local6
       this.quantity = quantity;
-//    ^^^^ reference com/airbnb/epoxy/StringAttributeData#this.
+//    ^^^^ reference com/airbnb/epoxy/StringAttributeData#
 //         ^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#quantity.
 //                    ^^^^^^^^ reference local7
       this.formatArgs = formatArgs;
-//    ^^^^ reference com/airbnb/epoxy/StringAttributeData#this.
+//    ^^^^ reference com/airbnb/epoxy/StringAttributeData#
 //         ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#formatArgs.
 //                      ^^^^^^^^^^ reference local8
       string = null;
@@ -255,7 +255,7 @@ public class StringAttributeData {
 //                      ^^^^^^ reference java/lang/Object#
 //                             ^ definition local10 Object o
     if (this == o) {
-//      ^^^^ reference com/airbnb/epoxy/StringAttributeData#this.
+//      ^^^^ reference com/airbnb/epoxy/StringAttributeData#
 //              ^ reference local10
       return true;
     }

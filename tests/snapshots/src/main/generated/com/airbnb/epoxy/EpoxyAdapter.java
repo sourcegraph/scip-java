@@ -102,7 +102,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#diffHelper.
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#`<init>`().
 //                   ^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#
-//                              ^^^^ reference com/airbnb/epoxy/EpoxyAdapter#this.
+//                              ^^^^ reference com/airbnb/epoxy/EpoxyAdapter#
   }
 
   @Override

@@ -332,7 +332,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
       view.saveHierarchyState(this);
 //    ^^^^ reference local26
 //         ^^^^^^^^^^^^^^^^^^ reference saveHierarchyState#
-//                            ^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#this.
+//                            ^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
       view.setId(originalId);
 //    ^^^^ reference local26
 //         ^^^^^ reference setId#
@@ -354,7 +354,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
       view.restoreHierarchyState(this);
 //    ^^^^ reference local28
 //         ^^^^^^^^^^^^^^^^^^^^^ reference restoreHierarchyState#
-//                               ^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#this.
+//                               ^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
       view.setId(originalId);
 //    ^^^^ reference local28
 //         ^^^^^ reference setId#

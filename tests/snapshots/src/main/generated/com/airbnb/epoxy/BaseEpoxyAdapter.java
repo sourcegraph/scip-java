@@ -218,7 +218,7 @@ public abstract class BaseEpoxyAdapter
 //                ^^^^^ definition local9 EpoxyModel<?> model
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#viewTypeManager.
 //                                        ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewTypeManager#getModelForViewType().
-//                                                            ^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#this.
+//                                                            ^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
 //                                                                  ^^^^^^^^ reference local8
     View view = model.buildView(parent);
 //  ^^^^ reference _root_/
@@ -642,7 +642,7 @@ public abstract class BaseEpoxyAdapter
 //            ^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#setSpanCount(). public setSpanCount(int spanCount)
 //                             ^^^^^^^^^ definition local44 int spanCount
     this.spanCount = spanCount;
-//  ^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#this.
+//  ^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
 //       ^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#spanCount.
 //                   ^^^^^^^^^ reference local44
   }

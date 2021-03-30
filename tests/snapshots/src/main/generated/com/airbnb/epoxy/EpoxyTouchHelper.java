@@ -96,7 +96,7 @@ public abstract class EpoxyTouchHelper {
 //                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                                      ^^^^^^^^^^ definition local1 EpoxyController controller
       this.controller = controller;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder#
 //         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder#controller.
 //                      ^^^^^^^^^^ reference local1
     }
@@ -136,11 +136,11 @@ public abstract class EpoxyTouchHelper {
 //                                                   ^^^^^^^^^^^^ reference _root_/
 //                                                                ^^^^^^^^^^^^ definition local4 unresolved_type recyclerView
       this.controller = controller;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#
 //         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#controller.
 //                      ^^^^^^^^^^ reference local3
       this.recyclerView = recyclerView;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#
 //         ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#recyclerView.
 //                        ^^^^^^^^^^^^ reference local4
     }
@@ -229,15 +229,15 @@ public abstract class EpoxyTouchHelper {
 //                                                                ^^^^^^^^^^^^ definition local7 unresolved_type recyclerView
 //                                                                                  ^^^^^^^^^^^^^ definition local8 int movementFlags
       this.controller = controller;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#
 //         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#controller.
 //                      ^^^^^^^^^^ reference local6
       this.recyclerView = recyclerView;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#
 //         ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#recyclerView.
 //                        ^^^^^^^^^^^^ reference local7
       this.movementFlags = movementFlags;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#
 //         ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#movementFlags.
 //                         ^^^^^^^^^^^^^ reference local8
     }
@@ -363,23 +363,23 @@ public abstract class EpoxyTouchHelper {
 //                                                                   ^^^^^^^^^^^^^^^^^^ definition local16 List<Class<? extends EpoxyModel>> targetModelClasses
 
       this.controller = controller;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#
 //         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#controller.
 //                      ^^^^^^^^^^ reference local12
       this.recyclerView = recyclerView;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#
 //         ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#recyclerView.
 //                        ^^^^^^^^^^^^ reference local13
       this.movementFlags = movementFlags;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#
 //         ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#movementFlags.
 //                         ^^^^^^^^^^^^^ reference local14
       this.targetModelClass = targetModelClass;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#
 //         ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#targetModelClass.
 //                            ^^^^^^^^^^^^^^^^ reference local15
       this.targetModelClasses = targetModelClasses;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#
 //         ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#targetModelClasses.
 //                              ^^^^^^^^^^^^^^^^^^ reference local16
     }
@@ -649,7 +649,7 @@ public abstract class EpoxyTouchHelper {
 //                       ^^^^^^^^^^^^ reference _root_/
 //                                    ^^^^^^^^^^^^ definition local60 unresolved_type recyclerView
       this.recyclerView = recyclerView;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#
 //         ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#recyclerView.
 //                        ^^^^^^^^^^^^ reference local60
     }
@@ -724,11 +724,11 @@ public abstract class EpoxyTouchHelper {
         int movementFlags) {
 //          ^^^^^^^^^^^^^ definition local63 int movementFlags
       this.recyclerView = recyclerView;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#
 //         ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#recyclerView.
 //                        ^^^^^^^^^^^^ reference local62
       this.movementFlags = movementFlags;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#
 //         ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#movementFlags.
 //                         ^^^^^^^^^^^^^ reference local63
     }
@@ -848,19 +848,19 @@ public abstract class EpoxyTouchHelper {
 //                                                                   ^^^^^^^^^^^^^^^^^^ definition local70 List<Class<? extends EpoxyModel>> targetModelClasses
 
       this.recyclerView = recyclerView;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#
 //         ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#recyclerView.
 //                        ^^^^^^^^^^^^ reference local67
       this.movementFlags = movementFlags;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#
 //         ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#movementFlags.
 //                         ^^^^^^^^^^^^^ reference local68
       this.targetModelClass = targetModelClass;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#
 //         ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#targetModelClass.
 //                            ^^^^^^^^^^^^^^^^ reference local69
       this.targetModelClasses = targetModelClasses;
-//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#this.
+//    ^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#
 //         ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#targetModelClasses.
 //                              ^^^^^^^^^^^^^^^^^^ reference local70
     }

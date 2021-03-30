@@ -50,7 +50,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
     }
 
     this.originalCheckedChangeListener = checkedListener;
-//  ^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#this.
+//  ^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#originalCheckedChangeListener.
 //                                       ^^^^^^^^^^^^^^^ reference local0
   }
@@ -111,7 +111,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //                      ^^^^^^ reference java/lang/Object#
 //                             ^ definition local5 Object o
     if (this == o) {
-//      ^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#this.
+//      ^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#
 //              ^ reference local5
       return true;
     }
