@@ -41,20 +41,20 @@ public @interface EpoxyAttribute {
    * created.
    */
   enum Option {
-//     ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option# public static final enum Option extends Enum<Option>
+//     ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option# public enum Option
 //     ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`(). private <init>()
     /**
      * A getter is generated for this attribute by default. Add this option to prevent a getter from
      * being generated.
      */
     NoGetter,
-//  ^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#NoGetter. public static final Option NoGetter
+//  ^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#NoGetter. Option.NoGetter /* ordinal 0 */
     /**
      * A setter is generated for this attribute by default. Add this option to prevent a setter from
      * being generated.
      */
     NoSetter,
-//  ^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#NoSetter. public static final Option NoSetter
+//  ^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#NoSetter. Option.NoSetter /* ordinal 1 */
     /**
      * By default every attribute's hashCode and equals method is called when determining the
      * model's state. This option can be used to exclude an attribute's hashCode/equals from
@@ -71,7 +71,7 @@ public @interface EpoxyAttribute {
      * then you can use this to prevent the rebind.
      */
     DoNotHash,
-//  ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#DoNotHash. public static final Option DoNotHash
+//  ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#DoNotHash. Option.DoNotHash /* ordinal 2 */
     /**
      * This is meant to be used in conjunction with {@link PackageEpoxyConfig#requireHashCode()}.
      * When that is enabled every attribute must implement hashCode/equals. However, there are some
@@ -87,13 +87,13 @@ public @interface EpoxyAttribute {
      * contribute to model state you should use {@link Option#DoNotHash} instead.
      */
     IgnoreRequireHashCode,
-//  ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#IgnoreRequireHashCode. public static final Option IgnoreRequireHashCode
+//  ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#IgnoreRequireHashCode. Option.IgnoreRequireHashCode /* ordinal 3 */
     /**
      * This attribute is used in {@link Object#toString()} implementation by default.
      * Add this option to prevent this attribute being used in {@link Object#toString()}.
      */
     DoNotUseInToString
-//  ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#DoNotUseInToString. public static final Option DoNotUseInToString
+//  ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#DoNotUseInToString. Option.DoNotUseInToString /* ordinal 4 */
   }
 
   /** Specify any {@link Option} values that should be used when generating the model class. */

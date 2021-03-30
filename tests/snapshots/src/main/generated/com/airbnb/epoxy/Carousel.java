@@ -783,14 +783,14 @@ public class Carousel extends EpoxyRecyclerView {
 //                           ^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#paddingType. public final PaddingType paddingType
 
     enum PaddingType {
-//       ^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType# static final enum PaddingType extends Enum<PaddingType>
+//       ^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType# enum PaddingType
 //       ^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType#`<init>`(). private <init>()
       PX,
-//    ^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType#PX. public static final PaddingType PX
+//    ^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType#PX. PaddingType.PX /* ordinal 0 */
       DP,
-//    ^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType#DP. public static final PaddingType DP
+//    ^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType#DP. PaddingType.DP /* ordinal 1 */
       RESOURCE
-//    ^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType#RESOURCE. public static final PaddingType RESOURCE
+//    ^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#PaddingType#RESOURCE. PaddingType.RESOURCE /* ordinal 2 */
     }
 
     /**

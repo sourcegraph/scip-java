@@ -51,7 +51,7 @@ public @interface ModelProp {
 //                ^^^^^^^^^ definition com/airbnb/epoxy/ModelProp# public abstract ModelProp extends Annotation
 
   enum Option {
-//     ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option# public static final enum Option extends Enum<Option>
+//     ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option# public enum Option
 //     ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#`<init>`(). private <init>()
     /**
      * By default every prop's hashCode and equals method is called when determining the
@@ -69,7 +69,7 @@ public @interface ModelProp {
      * then you can use this to prevent the rebind.
      */
     DoNotHash,
-//  ^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#DoNotHash. public static final Option DoNotHash
+//  ^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#DoNotHash. Option.DoNotHash /* ordinal 0 */
     /**
      * This is meant to be used in conjunction with {@link PackageEpoxyConfig#requireHashCode()}.
      * When that is enabled every prop must implement hashCode/equals. However, there are some
@@ -85,20 +85,20 @@ public @interface ModelProp {
      * contribute to model state you should use {@link Option#DoNotHash} instead.
      */
     IgnoreRequireHashCode,
-//  ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#IgnoreRequireHashCode. public static final Option IgnoreRequireHashCode
+//  ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#IgnoreRequireHashCode. Option.IgnoreRequireHashCode /* ordinal 1 */
     /**
      * Setters with a type of {@link CharSequence} can add this option to have {@link
      * androidx.annotation.StringRes} and {@link androidx.annotation.PluralsRes}
      * overload methods generated on the model, so users can set the string via a resource.
      */
     GenerateStringOverloads,
-//  ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#GenerateStringOverloads. public static final Option GenerateStringOverloads
+//  ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#GenerateStringOverloads. Option.GenerateStringOverloads /* ordinal 2 */
     /**
      * Setters with a param annotated with @Nullable can use this to have null set when the view is
      * recycled.
      */
     NullOnRecycle
-//  ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#NullOnRecycle. public static final Option NullOnRecycle
+//  ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#NullOnRecycle. Option.NullOnRecycle /* ordinal 3 */
   }
 
   /** Specify any {@link Option} values that should be used when generating the model class. */

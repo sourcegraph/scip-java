@@ -16,14 +16,14 @@ public class InnerClasses {
   }
 
   public enum InnerEnum {
-//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum# public static final enum InnerEnum extends Enum<InnerEnum>
+//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum# public enum InnerEnum
 //            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum#`<init>`(). private <init>()
     A,
-//  ^ definition minimized/InnerClasses#InnerEnum#A. public static final InnerEnum A
+//  ^ definition minimized/InnerClasses#InnerEnum#A. InnerEnum.A /* ordinal 0 */
     B,
-//  ^ definition minimized/InnerClasses#InnerEnum#B. public static final InnerEnum B
+//  ^ definition minimized/InnerClasses#InnerEnum#B. InnerEnum.B /* ordinal 1 */
     C
-//  ^ definition minimized/InnerClasses#InnerEnum#C. public static final InnerEnum C
+//  ^ definition minimized/InnerClasses#InnerEnum#C. InnerEnum.C /* ordinal 2 */
   }
 
   public interface InnerInterface<A, B> {

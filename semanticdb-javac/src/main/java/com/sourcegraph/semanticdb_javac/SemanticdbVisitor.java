@@ -13,7 +13,7 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Kind;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 
-import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.util.Elements;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -22,6 +22,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /** Walks the AST of a typechecked compilation unit and generates a SemanticDB TextDocument. */
 public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
@@ -69,17 +70,17 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         .build();
   }
 
-  private void emitSymbolOccurrence(
-      Symbol sym, JCDiagnostic.DiagnosticPosition pos, Role role, CompilerRange kind) {
-    Optional<Semanticdb.SymbolOccurrence> occ = semanticdbOccurrence(sym, pos, kind, role);
+  private <T extends JCTree & JCDiagnostic.DiagnosticPosition> void emitSymbolOccurrence(
+      Symbol sym, T posTree, Role role, CompilerRange kind) {
+    Optional<Semanticdb.SymbolOccurrence> occ = semanticdbOccurrence(sym, posTree, kind, role);
     occ.ifPresent(occurrences::add);
     if (role == Role.DEFINITION) {
       // Only emit SymbolInformation for symbols that are defined in this compilation unit.
-      emitSymbolInformation(sym);
+      emitSymbolInformation(sym, posTree);
     }
   }
 
-  private void emitSymbolInformation(Symbol sym) {
+  private void emitSymbolInformation(Symbol sym, JCTree tree) {
     Semanticdb.SymbolInformation.Builder builder =
         Semanticdb.SymbolInformation.newBuilder().setSymbol(semanticdbSymbol(sym));
     Semanticdb.Documentation documentation = semanticdbDocumentation(sym);
@@ -109,6 +110,11 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       case TYPE_PARAMETER:
         builder.setKind(Kind.TYPE_PARAMETER);
         break;
+      case ENUM_CONSTANT: // overwrite previous value here
+        String args =
+            ((JCTree.JCNewClass) ((JCTree.JCVariableDecl) tree).init)
+                .args.stream().map(JCTree::toString).collect(Collectors.joining(", "));
+        if (!args.isEmpty()) builder.setDisplayName(sym.name.toString() + "(" + args + ")");
     }
 
     Semanticdb.SymbolInformation info = builder.build();

@@ -5,6 +5,7 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,7 @@ public class SignatureFormatter {
       Type.newBuilder().setTypeRef(TypeRef.newBuilder().setSymbol("local_wildcard")).build();
 
   private static final String ARRAY_SYMBOL = "scala/Array#";
+  private static final String ENUM_SYMBOL = "java/lang/Enum#";
 
   private final StringBuilder s = new StringBuilder();
   private final SymbolInformation symbolInformation;
@@ -43,7 +45,7 @@ public class SignatureFormatter {
 
   private void formatClassSignature(ClassSignature classSignature) {
     printKeyword(formatAccess());
-    printKeyword(formatModifiers());
+    if (!has(Property.ENUM)) printKeyword(formatModifiers());
 
     switch (symbolInformation.getKind()) {
       case CLASS:
@@ -69,7 +71,8 @@ public class SignatureFormatter {
 
     List<Type> parentsList =
         classSignature.getParentsList().stream()
-            .filter((parent) -> !parent.equals(OBJECT_TYPE_REF))
+            .filter(parent -> !parent.equals(OBJECT_TYPE_REF))
+            .filter(parent -> !parent.getTypeRef().getSymbol().equals(ENUM_SYMBOL))
             .collect(Collectors.toList());
     if (!parentsList.isEmpty()) {
       printKeyword(" extends");
@@ -106,10 +109,24 @@ public class SignatureFormatter {
   }
 
   private void formatValueSignature(ValueSignature valueSignature) {
-    printKeyword(formatAccess());
-    printKeyword(formatModifiers());
-    printKeyword(formatType(valueSignature.getTpe()));
-    s.append(symbolInformation.getDisplayName());
+    if (isEnumConstant()) {
+      String ownerSym = SymbolDescriptor.parseFromSymbol(symbolInformation.getSymbol()).owner;
+      SymbolInformation ownerInfo = symtab.symbols.get(ownerSym);
+      List<SymbolInformation> enumConstants =
+          getSymlinks(ownerInfo.getSignature().getClassSignature().getDeclarations()).stream()
+              .filter(Objects::nonNull)
+              .filter(this::isEnumConstant)
+              .collect(Collectors.toList());
+      int ordinal = enumConstants.indexOf(symbolInformation);
+      s.append(ownerInfo.getDisplayName()).append('.');
+      s.append(this.symbolInformation.getDisplayName());
+      s.append(" /* ordinal ").append(ordinal).append(" */");
+    } else {
+      printKeyword(formatAccess());
+      printKeyword(formatModifiers());
+      printKeyword(formatType(valueSignature.getTpe()));
+      s.append(symbolInformation.getDisplayName());
+    }
   }
 
   private void formatTypeParameterSignature(TypeSignature typeSignature) {
@@ -222,8 +239,29 @@ public class SignatureFormatter {
     s.append(keyword).append(' ');
   }
 
+  private boolean isEnumConstant(SymbolInformation symInfo) {
+    if (!(has(Property.ENUM, symInfo)
+        && has(Property.FINAL, symInfo)
+        && has(Property.STATIC, symInfo)
+        && symInfo.getAccess().hasPublicAccess())) {
+      return false;
+    }
+    SymbolInformation owner =
+        symtab.symbols.get(SymbolDescriptor.parseFromSymbol(symInfo.getSymbol()).owner);
+    if (owner == null) return false;
+    return owner.getKind() == SymbolInformation.Kind.CLASS && has(Property.ENUM, owner);
+  }
+
+  private boolean isEnumConstant() {
+    return isEnumConstant(symbolInformation);
+  }
+
+  private boolean has(Property property, SymbolInformation symInfo) {
+    return (symInfo.getProperties() & property.getNumber()) > 0;
+  }
+
   private boolean has(Property property) {
-    return (symbolInformation.getProperties() & property.getNumber()) > 0;
+    return has(property, symbolInformation);
   }
 
   /**

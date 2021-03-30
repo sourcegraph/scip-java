@@ -130,13 +130,13 @@ public @interface PackageModelViewConfig {
    * Enable or Disable an option, or inherit the default.
    */
   enum Option {
-//     ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option# public static final enum Option extends Enum<Option>
+//     ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option# public enum Option
 //     ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#`<init>`(). private <init>()
     Default,
-//  ^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Default. public static final Option Default
+//  ^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Default. Option.Default /* ordinal 0 */
     Enabled,
-//  ^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Enabled. public static final Option Enabled
+//  ^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Enabled. Option.Enabled /* ordinal 1 */
     Disabled
-//  ^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Disabled. public static final Option Disabled
+//  ^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Disabled. Option.Disabled /* ordinal 2 */
   }
 }

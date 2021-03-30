@@ -2,13 +2,13 @@ package minimized;
 
 import java.util.Arrays;
 
-public enum Enums {
-  A("A"),
-  B("B"),
-  C("C");
+enum Enums {
+  A("A", 420),
+  B("B", 1),
+  C("C", 5);
   public String value;
 
-  Enums(String value) {
+  Enums(String value, int a) {
     this.value = value;
   }
 

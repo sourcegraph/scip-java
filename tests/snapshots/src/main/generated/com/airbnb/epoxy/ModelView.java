@@ -49,18 +49,18 @@ public @interface ModelView {
    * layout_width} and {@code layout_height}.
    */
   enum Size {
-//     ^^^^ definition com/airbnb/epoxy/ModelView#Size# public static final enum Size extends Enum<Size>
+//     ^^^^ definition com/airbnb/epoxy/ModelView#Size# public enum Size
 //     ^^^^ definition com/airbnb/epoxy/ModelView#Size#`<init>`(). private <init>()
     NONE,
-//  ^^^^ definition com/airbnb/epoxy/ModelView#Size#NONE. public static final Size NONE
+//  ^^^^ definition com/airbnb/epoxy/ModelView#Size#NONE. Size.NONE /* ordinal 0 */
     WRAP_WIDTH_WRAP_HEIGHT,
-//  ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#WRAP_WIDTH_WRAP_HEIGHT. public static final Size WRAP_WIDTH_WRAP_HEIGHT
+//  ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#WRAP_WIDTH_WRAP_HEIGHT. Size.WRAP_WIDTH_WRAP_HEIGHT /* ordinal 1 */
     WRAP_WIDTH_MATCH_HEIGHT,
-//  ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#WRAP_WIDTH_MATCH_HEIGHT. public static final Size WRAP_WIDTH_MATCH_HEIGHT
+//  ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#WRAP_WIDTH_MATCH_HEIGHT. Size.WRAP_WIDTH_MATCH_HEIGHT /* ordinal 2 */
     MATCH_WIDTH_WRAP_HEIGHT,
-//  ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#MATCH_WIDTH_WRAP_HEIGHT. public static final Size MATCH_WIDTH_WRAP_HEIGHT
+//  ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#MATCH_WIDTH_WRAP_HEIGHT. Size.MATCH_WIDTH_WRAP_HEIGHT /* ordinal 3 */
     MATCH_WIDTH_MATCH_HEIGHT
-//  ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#MATCH_WIDTH_MATCH_HEIGHT. public static final Size MATCH_WIDTH_MATCH_HEIGHT
+//  ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#Size#MATCH_WIDTH_MATCH_HEIGHT. Size.MATCH_WIDTH_MATCH_HEIGHT /* ordinal 4 */
   }
 
   /**

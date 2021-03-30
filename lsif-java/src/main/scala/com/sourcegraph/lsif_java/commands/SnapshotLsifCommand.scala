@@ -129,18 +129,20 @@ object SnapshotLsifCommand {
                 hoverId <- lsif.hoverEdges.get(resultSetId)
                 hover <- lsif.hoverVertexes.get(hoverId)
               } yield hover
-            ).get.getContentsList.asScala.map { h =>
-              println(h.getLanguage)
-              h
-            }.find { h => h.getLanguage != Language.UNKNOWN_LANGUAGE.toString.toLowerCase }.get.getValue
+            ).get
+              .getContentsList
+              .asScala
+              .find { h =>
+                h.getLanguage != Language.UNKNOWN_LANGUAGE.toString.toLowerCase
+              }
+              .get
+              .getValue
           val symInfo = SymbolInformation
             .newBuilder()
             // we cheese it a bit here, as this is less work than trying to reconstruct
             // a Signature from the pretty-printed Signature, with accompanying logic
             // to fallback to display_name in SemanticdbPrinters.scala
-            .setDisplayName(hover)
-            .setSymbol(symbol)
-            .build()
+            .setDisplayName(hover).setSymbol(symbol).build()
           doc.addSymbols(symInfo)
         }
       }
