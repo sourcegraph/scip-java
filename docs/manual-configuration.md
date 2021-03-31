@@ -27,6 +27,14 @@ zero-dependency Java library that you can install like any normal dependency.
 
 [![](https://img.shields.io/maven-central/v/com.sourcegraph/semanticdb-javac)](https://repo1.maven.org/maven2/com/sourcegraph/semanticdb-javac/)
 
+Use `curl` to download the compiler plugin jar file manually so that it can be
+added to the `javac -classpath` option.
+
+```sh
+curl -Lo semanticdb-javac.jar https://repo1.maven.org/maven2/com/sourcegraph/semanticdb-javac/@STABLE_VERSION@/semanticdb-javac-@STABLE_VERSION@.jar
+javac -classpath semanticdb-javac.jar MyApplication.java
+```
+
 If you're using Gradle.
 
 ```groovy
@@ -129,8 +137,11 @@ build/semanticdb-targetroot/META-INF/semanticdb/j8/src/main/java/example/Example
 
 ## Step 4: Generate LSIF index from SemanticDB files
 
-Run the `lsif-java index-semanticdb` command to convert SemanticDB files into
-LSIF.
+First, install the `lsif-java` command-line tool according to the instructions
+in the [getting started guide](getting-started.md).
+
+Next, run the `lsif-java index-semanticdb` command to convert SemanticDB files
+into LSIF.
 
 ```sh
 ❯ lsif-java index-semanticdb $TARGETROOT
