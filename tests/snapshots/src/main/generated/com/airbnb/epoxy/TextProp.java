@@ -45,7 +45,7 @@ import androidx.annotation.StringRes;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface TextProp {
-//                ^^^^^^^^ definition com/airbnb/epoxy/TextProp# public abstract TextProp extends Annotation
+//                ^^^^^^^^ definition com/airbnb/epoxy/TextProp# public @interface TextProp
 
   @StringRes int defaultRes() default 0;
 // ^^^^^^^^^ reference androidx/annotation/StringRes#

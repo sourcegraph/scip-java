@@ -99,6 +99,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         builder.setKind(Kind.CLASS);
         break;
       case INTERFACE:
+      case ANNOTATION_TYPE:
         builder.setKind(Kind.INTERFACE);
         break;
       case FIELD:

@@ -38,7 +38,7 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface EpoxyDataBindingPattern {
-//                ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingPattern# public abstract EpoxyDataBindingPattern extends Annotation
+//                ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingPattern# public @interface EpoxyDataBindingPattern
   /**
    * The R class used in this module (eg "com.example.app.R.class"). This is needed so Epoxy can
    * look up layout files.

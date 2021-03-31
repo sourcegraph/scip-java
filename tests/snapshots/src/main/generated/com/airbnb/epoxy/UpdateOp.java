@@ -40,7 +40,7 @@ class UpdateOp {
 //           ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                           ^^^^^^ reference java/lang/annotation/RetentionPolicy#SOURCE.
   @interface Type {
-//           ^^^^ definition com/airbnb/epoxy/UpdateOp#Type# abstract static Type extends Annotation
+//           ^^^^ definition com/airbnb/epoxy/UpdateOp#Type# @interface Type
   }
 
   static final int ADD = 0;

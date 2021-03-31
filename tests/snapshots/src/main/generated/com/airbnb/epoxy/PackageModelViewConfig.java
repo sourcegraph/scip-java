@@ -35,7 +35,7 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface PackageModelViewConfig {
-//                ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig# public abstract PackageModelViewConfig extends Annotation
+//                ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig# public @interface PackageModelViewConfig
   /**
    * The R class used in this module (eg "com.example.app.R.class"). This is needed so Epoxy can
    * look up layout files.

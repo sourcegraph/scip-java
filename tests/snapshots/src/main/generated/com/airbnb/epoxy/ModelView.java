@@ -41,7 +41,7 @@ import androidx.annotation.LayoutRes;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface ModelView {
-//                ^^^^^^^^^ definition com/airbnb/epoxy/ModelView# public abstract ModelView extends Annotation
+//                ^^^^^^^^^ definition com/airbnb/epoxy/ModelView# public @interface ModelView
 
   /**
    * Use with {@link #autoLayout()} to declare what layout parameters should be used to size your

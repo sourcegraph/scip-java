@@ -48,7 +48,7 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface ModelProp {
-//                ^^^^^^^^^ definition com/airbnb/epoxy/ModelProp# public abstract ModelProp extends Annotation
+//                ^^^^^^^^^ definition com/airbnb/epoxy/ModelProp# public @interface ModelProp
 
   enum Option {
 //     ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option# public enum Option

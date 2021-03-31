@@ -280,7 +280,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //    ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#
 //                            ^^^^^^^ reference com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#DELAYED.
   private @interface RequestedModelBuildType {
-//                   ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#RequestedModelBuildType# private abstract static RequestedModelBuildType extends Annotation
+//                   ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#RequestedModelBuildType# private @interface RequestedModelBuildType
     int NONE = 0;
 //      ^^^^ definition com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#NONE. public static final int NONE
     /** A request has been made to build models immediately. It is posted. */

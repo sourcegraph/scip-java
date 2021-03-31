@@ -40,7 +40,7 @@ public final class VisibilityState {
            PARTIAL_IMPRESSION_INVISIBLE})
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#PARTIAL_IMPRESSION_INVISIBLE.
   public @interface Visibility {
-//                  ^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#Visibility# public abstract static Visibility extends Annotation
+//                  ^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#Visibility# public @interface Visibility
   }
 
   /**

@@ -18,6 +18,7 @@ public class SignatureFormatter {
 
   private static final String ARRAY_SYMBOL = "scala/Array#";
   private static final String ENUM_SYMBOL = "java/lang/Enum#";
+  private static final String ANNOTATION_SYMBOL = "java/lang/annotation/Annotation#";
 
   private final StringBuilder s = new StringBuilder();
   private final SymbolInformation symbolInformation;
@@ -44,8 +45,12 @@ public class SignatureFormatter {
   }
 
   private void formatClassSignature(ClassSignature classSignature) {
+    boolean isAnnotation =
+        classSignature.getParentsList().stream()
+            .anyMatch(t -> t.getTypeRef().getSymbol().equals(ANNOTATION_SYMBOL));
+
     printKeyword(formatAccess());
-    if (!has(Property.ENUM)) printKeyword(formatModifiers());
+    if (!has(Property.ENUM) && !isAnnotation) printKeyword(formatModifiers());
 
     switch (symbolInformation.getKind()) {
       case CLASS:
@@ -56,6 +61,10 @@ public class SignatureFormatter {
         }
         break;
       case INTERFACE:
+        if (isAnnotation) {
+          printKeyword("@interface");
+          break;
+        }
         printKeyword("interface");
         break;
     }
@@ -73,7 +82,9 @@ public class SignatureFormatter {
         classSignature.getParentsList().stream()
             .filter(parent -> !parent.equals(OBJECT_TYPE_REF))
             .filter(parent -> !parent.getTypeRef().getSymbol().equals(ENUM_SYMBOL))
+            .filter(parent -> !parent.getTypeRef().getSymbol().equals(ANNOTATION_SYMBOL))
             .collect(Collectors.toList());
+    // TODO: extends vs implements
     if (!parentsList.isEmpty()) {
       printKeyword(" extends");
 

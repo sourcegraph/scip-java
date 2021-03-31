@@ -35,5 +35,5 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface OnViewRecycled {
-//                ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnViewRecycled# public abstract OnViewRecycled extends Annotation
+//                ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnViewRecycled# public @interface OnViewRecycled
 }

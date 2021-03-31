@@ -35,7 +35,7 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface EpoxyAttribute {
-//                ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute# public abstract EpoxyAttribute extends Annotation
+//                ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute# public @interface EpoxyAttribute
   /**
    * Options that can be included on the attribute to affect how the model's generated class is
    * created.

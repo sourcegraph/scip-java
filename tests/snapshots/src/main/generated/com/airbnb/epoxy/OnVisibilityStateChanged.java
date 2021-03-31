@@ -47,5 +47,5 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface OnVisibilityStateChanged {
-//                ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnVisibilityStateChanged# public abstract OnVisibilityStateChanged extends Annotation
+//                ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnVisibilityStateChanged# public @interface OnVisibilityStateChanged
 }
