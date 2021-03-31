@@ -11,41 +11,22 @@ tools that we're planning to support in the future.
 
 ## Install `lsif-java`
 
-Most users only install `lsif-java` on a CI machine to upload LSIF indexes to a
-remote service like [Sourcegraph](https://sourcegraph.com/). The easiest way to
-install `lsif-java` is to download the native binary. However, you can also
-install `lsif-java` as a Java binary if that's easier to integrate with your
-setup.
-
-### Native binary
-
-The native binary is only available for Linux and macOS. The native binary
-includes all dependencies and does not need further access to the internet after
-it's been downloaded.
-
-```sh
-# macOS
-curl -Lo lsif-java https://github.com/sourcegraph/lsif-java/releases/download/v@STABLE_VERSION@/lsif-java-x86_64-apple-darwin \
-  && chmod +x lsif-java \
-  && ./lsif-java --help
-
-# Linux
-curl -Lo lsif-java https://github.com/sourcegraph/lsif-java/releases/download/v@STABLE_VERSION@/lsif-java-x86_64-pc-linux \
-  && chmod +x lsif-java \
-  && ./lsif-java --help
-```
+The most common way to use `lsif-java` is to run it from CI to upload LSIF
+indexes after merging a pull request. The easiest way to install `lsif-java` is
+to use the Java launcher.
 
 ### Java launcher
 
+Use the `lsif-java` launcher if you can install software from the internet in
+your CI.
+
 Use [Coursier](https://get-coursier.io/docs/cli-installation.html) to launch the
-Java binary. The jar files of `lsif-java` are downloaded the first time you run
-the `launch` command, and they're cached for subsequent runs.
+`lsif-java` Java binary. The jar files for `lsif-java` are downloaded the first
+time you run the `launch` command, and they are cached for subsequent runs.
+
+Copy-paste the steps below into your CI workflow to launch `lsif-java`.
 
 ```sh
-# Homebrew
-brew install coursier/formulas/coursier \
- && coursier launch com.sourcegraph:lsif-java_2.13:@STABLE_VERSION@ -- --help
-
 # macOS/Linux
 curl -fLo coursier https://git.io/coursier-cli \
   && chmod +x coursier \
@@ -55,17 +36,38 @@ curl -fLo coursier https://git.io/coursier-cli \
 bitsadmin /transfer downloadCoursierCli https://git.io/coursier-cli "%cd%\coursier"
 bitsadmin /transfer downloadCoursierBat https://git.io/coursier-bat "%cd%\coursier.bat"
 ./coursier launch com.sourcegraph:lsif-java_2.13:@STABLE_VERSION@ -- --help
+
+# Homebrew
+brew install coursier/formulas/coursier \
+ && coursier launch com.sourcegraph:lsif-java_2.13:@STABLE_VERSION@ -- --help
 ```
+
+Additional command-line flags can be passed after the `--` argument. For
+example, replace `--help` with `index` in the command above to run the `index`
+subcommand.
 
 ### Java fat jar
 
-Use the Coursier `bootstrap` command to generate an executable Java binary,
-which includes all dependencies and does not require further access to the
-internet after installation.
+Use the `lsif-java` fat jar if your CI does not allow downloading binaries from
+the internet.
+
+Use the [Coursier](https://get-coursier.io/docs/cli-installation) `bootstrap`
+command to generate a local fat jar binary. The fat jar binary includes all
+dependencies and does not require further access to the internet after
+installation. The local fat jar will somehow need to be made available to your
+CI machine.
 
 ```sh
-# macOS/Linux/Windows
-cs bootstrap --standalone -o lsif-java com.sourcegraph:lsif-java_2.13:@STABLE_VERSION@
+# macOS/Linux
+curl -fLo coursier https://git.io/coursier-cli \
+  && chmod +x coursier \
+  && ./coursier bootstrap --standalone -o lsif-java com.sourcegraph:lsif-java_2.13:@STABLE_VERSION@
+./lsif-java --help
+
+# Windows
+bitsadmin /transfer downloadCoursierCli https://git.io/coursier-cli "%cd%\coursier"
+bitsadmin /transfer downloadCoursierBat https://git.io/coursier-bat "%cd%\coursier.bat"
+./coursier bootstrap --standalone -o lsif-java com.sourcegraph:lsif-java_2.13:@STABLE_VERSION@
 ./lsif-java --help
 ```
 
@@ -102,11 +104,16 @@ libraryDependencies += "com.sourcegraph" %% "lsif-java" % "@STABLE_VERSION@"
 
 ## Run `lsif-java index`
 
+> The `index` command is only supported for Gradle and Maven, see
+> [Supported build tools](#supported-build-tools) for more details about other
+> build tools.
+
 Run the `lsif-java index` command to generate an LSIF index for your codebase.
 This command should automatically infer the structure of your codebase and
 configure your build tool to generate LSIF.
 
 ```sh
+# At the root of a Gradle or Maven codebase.
 $ lsif-java index
 ...
 info: /path/to/dump.lsif
