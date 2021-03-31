@@ -93,7 +93,7 @@ public class LsifWriter implements AutoCloseable {
     return definitionResult;
   }
 
-  public int emitHoverResult(MarkedString... markedStrings) {
+  public int emitHoverResult(MarkedString[] markedStrings) {
     return emitObject(
         lsifVertex("hoverResult")
             .setResult(

@@ -4,7 +4,6 @@ import scala.jdk.CollectionConverters._
 
 import com.sourcegraph.lsif_semanticdb.SignatureFormatter
 import com.sourcegraph.lsif_semanticdb.Symtab
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role
 import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
@@ -15,7 +14,6 @@ object SemanticdbPrinters {
       .getOccurrencesList
       .asScala
       .groupBy(_.getRange.getStartLine)
-    val symbolsmap = doc.getSymbolsList.asScala.map(s => s.getSymbol -> s).toMap
     val out = new StringBuilder()
     val symtab = new Symtab(doc)
     doc
@@ -24,7 +22,7 @@ object SemanticdbPrinters {
       .zipWithIndex
       .foreach { case (line, i) =>
         out.append(line.replace("\t", "→"))
-        val occurences = occurrencesByLine
+        val occurrences = occurrencesByLine
           .getOrElse(i, Nil)
           .sortBy(o =>
             (
@@ -33,8 +31,8 @@ object SemanticdbPrinters {
               o.getRange.getEndCharacter
             )
           )
-        occurences.foreach { occ =>
-          formatOccurrence(out, occ, line, symbolsmap, symtab)
+        occurrences.foreach { occ =>
+          formatOccurrence(out, occ, line, symtab)
         }
       }
     out.toString()
@@ -44,7 +42,6 @@ object SemanticdbPrinters {
       out: StringBuilder,
       occ: SymbolOccurrence,
       line: String,
-      symbols: Map[String, SymbolInformation],
       symtab: Symtab
   ): Unit = {
     val r = occ.getRange
@@ -85,13 +82,13 @@ object SemanticdbPrinters {
           ""
       )
       .append(
-        symbols.get(occ.getSymbol) match {
+        symtab.symbols.asScala.get(occ.getSymbol) match {
           case Some(info) if occ.getRole == Role.DEFINITION =>
             val sig = new SignatureFormatter(info, symtab).formatSymbol()
-            if (sig == "")
+            if (sig.isEmpty)
               " " + info.getDisplayName
             else
-              " " + sig + ""
+              " " + sig
           case _ =>
             ""
         }

@@ -39,9 +39,9 @@ class SnapshotCommandSuite extends MopedSuite(LsifJava.app) {
          |
          |public class Sample {
          |//           ^^^^^^ definition main/Sample# public class Sample
-         |//           ^^^^^^ definition main/Sample#`<init>`(). public <init>()
+         |//           ^^^^^^ definition main/Sample#`<init>`(). public Sample()
          |   public static void main(String[] asdf) {}
-         |//                    ^^^^ definition main/Sample#main(). public static main(String[] asdf)
+         |//                    ^^^^ definition main/Sample#main(). public static void main(String[] asdf)
          |//                         ^^^^^^ reference java/lang/String#
          |//                                  ^^^^ definition local0 String[] asdf
          |}

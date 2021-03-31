@@ -125,18 +125,14 @@ object SnapshotLsifCommand {
           val hover =
             (
               for {
-                resultSetId <- lsif.next.get(o.getId)
-                hoverId <- lsif.hoverEdges.get(resultSetId)
-                hover <- lsif.hoverVertexes.get(hoverId)
-              } yield hover
-            ).get
-              .getContentsList
-              .asScala
-              .find { h =>
-                h.getLanguage != Language.UNKNOWN_LANGUAGE.toString.toLowerCase
-              }
-              .get
-              .getValue
+                resultSetId <- lsif.next.get(o.getId).toList
+                hoverId <- lsif.hoverEdges.get(resultSetId).toList
+                hover <- lsif.hoverVertexes.get(hoverId).toList
+                contents <- hover.getContentsList.asScala
+                if contents.getLanguage !=
+                  Language.UNKNOWN_LANGUAGE.toString.toLowerCase
+              } yield contents.getValue
+            ).mkString("\n")
           val symInfo = SymbolInformation
             .newBuilder()
             // we cheese it a bit here, as this is less work than trying to reconstruct

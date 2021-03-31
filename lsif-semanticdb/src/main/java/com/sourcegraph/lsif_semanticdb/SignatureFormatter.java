@@ -78,17 +78,18 @@ public class SignatureFormatter {
               .collect(Collectors.joining(", ", "<", ">")));
     }
 
-    List<Type> parentsList =
+    List<Type> nonSyntheticParents =
         classSignature.getParentsList().stream()
             .filter(parent -> !parent.equals(OBJECT_TYPE_REF))
             .filter(parent -> !parent.getTypeRef().getSymbol().equals(ENUM_SYMBOL))
             .filter(parent -> !parent.getTypeRef().getSymbol().equals(ANNOTATION_SYMBOL))
             .collect(Collectors.toList());
     // TODO: extends vs implements
-    if (!parentsList.isEmpty()) {
+    if (!nonSyntheticParents.isEmpty()) {
       printKeyword(" extends");
 
-      String parents = parentsList.stream().map(this::formatType).collect(Collectors.joining(", "));
+      String parents =
+          nonSyntheticParents.stream().map(this::formatType).collect(Collectors.joining(", "));
       s.append(parents);
     }
   }
@@ -120,7 +121,7 @@ public class SignatureFormatter {
         methodSignature.getParameterListsList().stream()
             .flatMap((params) -> getSymlinks(params).stream())
             .map(
-                (symInfo) ->
+                symInfo ->
                     formatType(symInfo.getSignature().getValueSignature().getTpe())
                         + " "
                         + symInfo.getDisplayName())
