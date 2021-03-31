@@ -42,7 +42,7 @@ public @interface EpoxyAttribute {
    */
   enum Option {
 //     ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option# public enum Option
-//     ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`(). private void <init>()
+//     ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`(). private Option()
     /**
      * A getter is generated for this attribute by default. Add this option to prevent a getter from
      * being generated.

@@ -43,11 +43,11 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
 //                ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Typed4EpoxyController#allowModelBuildRequests. private boolean allowModelBuildRequests
 
   public Typed4EpoxyController() {
-//       ^^^^^^ definition com/airbnb/epoxy/Typed4EpoxyController#`<init>`(). public void <init>()
+//       ^^^^^^ definition com/airbnb/epoxy/Typed4EpoxyController#`<init>`(). public Typed4EpoxyController()
   }
 
   public Typed4EpoxyController(Handler modelBuildingHandler, Handler diffingHandler) {
-//       ^^^^^^ definition com/airbnb/epoxy/Typed4EpoxyController#`<init>`(+1). public void <init>(unresolved_type modelBuildingHandler, unresolved_type diffingHandler)
+//       ^^^^^^ definition com/airbnb/epoxy/Typed4EpoxyController#`<init>`(+1). public Typed4EpoxyController(unresolved_type modelBuildingHandler, unresolved_type diffingHandler)
 //                             ^^^^^^^ reference _root_/
 //                                     ^^^^^^^^^^^^^^^^^^^^ definition local0 unresolved_type modelBuildingHandler
 //                                                           ^^^^^^^ reference _root_/

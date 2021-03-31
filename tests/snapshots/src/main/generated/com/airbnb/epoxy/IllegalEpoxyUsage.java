@@ -4,7 +4,7 @@ public class IllegalEpoxyUsage extends RuntimeException {
 //           ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/IllegalEpoxyUsage# public class IllegalEpoxyUsage extends RuntimeException
 //                                     ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
   public IllegalEpoxyUsage(String message) {
-//       ^^^^^^ definition com/airbnb/epoxy/IllegalEpoxyUsage#`<init>`(). public void <init>(String message)
+//       ^^^^^^ definition com/airbnb/epoxy/IllegalEpoxyUsage#`<init>`(). public IllegalEpoxyUsage(String message)
 //                         ^^^^^^ reference java/lang/String#
 //                                ^^^^^^^ definition local0 String message
     super(message);

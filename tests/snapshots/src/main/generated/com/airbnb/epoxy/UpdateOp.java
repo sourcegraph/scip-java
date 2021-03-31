@@ -66,7 +66,7 @@ class UpdateOp {
 //                         ^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#payloads. ArrayList<EpoxyModel<?>> payloads
 
   private UpdateOp() {
-//        ^^^^^^ definition com/airbnb/epoxy/UpdateOp#`<init>`(). private void <init>()
+//        ^^^^^^ definition com/airbnb/epoxy/UpdateOp#`<init>`(). private UpdateOp()
   }
 
   static UpdateOp instance(@Type int type, int positionStart, int itemCount,

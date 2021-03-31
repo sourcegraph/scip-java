@@ -2,7 +2,7 @@ package minimized;
 
 public class Methods {
 //           ^^^^^^^ definition minimized/Methods# public class Methods
-//           ^^^^^^^ definition minimized/Methods#`<init>`(). public void <init>()
+//           ^^^^^^^ definition minimized/Methods#`<init>`(). public Methods()
   private int overload(int value) {
 //            ^^^^^^^^ definition minimized/Methods#overload(). private int overload(int value)
 //                         ^^^^^ definition local0 int value

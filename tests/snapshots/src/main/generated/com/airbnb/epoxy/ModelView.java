@@ -50,7 +50,7 @@ public @interface ModelView {
    */
   enum Size {
 //     ^^^^ definition com/airbnb/epoxy/ModelView#Size# public enum Size
-//     ^^^^ definition com/airbnb/epoxy/ModelView#Size#`<init>`(). private void <init>()
+//     ^^^^ definition com/airbnb/epoxy/ModelView#Size#`<init>`(). private Size()
     NONE,
 //  ^^^^ definition com/airbnb/epoxy/ModelView#Size#NONE. Size.NONE /* ordinal 0 */
     WRAP_WIDTH_WRAP_HEIGHT,

@@ -33,7 +33,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
  */
 public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback {
 //                    ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback# public abstract class EpoxyTouchHelperCallback extends unresolved_type
-//                    ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#`<init>`(). public void <init>()
+//                    ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#`<init>`(). public EpoxyTouchHelperCallback()
 //                                                     ^^^^^^^^^^^^^^^ reference ItemTouchHelper/
 //                                                                     ^^^^^^^^ reference ItemTouchHelper/Callback#
 

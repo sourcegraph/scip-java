@@ -108,6 +108,9 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       case METHOD:
         builder.setKind(Kind.METHOD);
         break;
+      case CONSTRUCTOR:
+        builder.setKind(Kind.CONSTRUCTOR);
+        break;
       case TYPE_PARAMETER:
         builder.setKind(Kind.TYPE_PARAMETER);
         break;

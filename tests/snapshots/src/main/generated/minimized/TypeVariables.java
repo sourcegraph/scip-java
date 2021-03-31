@@ -3,10 +3,10 @@ package minimized;
 /** Example from https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.4 */
 public class TypeVariables {
 //           ^^^^^^^^^^^^^ definition minimized/TypeVariables# public class TypeVariables
-//           ^^^^^^^^^^^^^ definition minimized/TypeVariables#`<init>`(). public void <init>()
+//           ^^^^^^^^^^^^^ definition minimized/TypeVariables#`<init>`(). public TypeVariables()
   static class C {
 //             ^ definition minimized/TypeVariables#C# static class C
-//             ^ definition minimized/TypeVariables#C#`<init>`(). void <init>()
+//             ^ definition minimized/TypeVariables#C#`<init>`(). C()
     public void mCPublic() {}
 //              ^^^^^^^^ definition minimized/TypeVariables#C#mCPublic(). public void mCPublic()
 
@@ -25,7 +25,7 @@ public class TypeVariables {
 
   static class CT extends C implements I {
 //             ^^ definition minimized/TypeVariables#CT# static class CT extends C, I
-//             ^^ definition minimized/TypeVariables#CT#`<init>`(). void <init>()
+//             ^^ definition minimized/TypeVariables#CT#`<init>`(). CT()
 //                        ^ reference minimized/TypeVariables#C#
 //                                     ^ reference minimized/TypeVariables#I#
     public void mI() {}

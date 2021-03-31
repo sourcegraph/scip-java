@@ -34,7 +34,7 @@ class HandlerExecutor implements Executor {
 //              ^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#handler. final unresolved_type handler
 
   HandlerExecutor(Handler handler) {
-//^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#`<init>`(). void <init>(unresolved_type handler)
+//^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#`<init>`(). HandlerExecutor(unresolved_type handler)
 //                ^^^^^^^ reference _root_/
 //                        ^^^^^^^ definition local0 unresolved_type handler
     this.handler = handler;

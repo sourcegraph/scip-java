@@ -37,7 +37,7 @@ import androidx.annotation.MainThread;
 public final class EpoxyAsyncUtil {
 //                 ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil# public final class EpoxyAsyncUtil
   private EpoxyAsyncUtil() {
-//        ^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#`<init>`(). private void <init>()
+//        ^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#`<init>`(). private EpoxyAsyncUtil()
   }
 
   /**

@@ -68,7 +68,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                        ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#holderBeingSwiped. private EpoxyViewHolder holderBeingSwiped
 
   public EpoxyModelTouchCallback(@Nullable EpoxyController controller, Class<T> targetModelClass) {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#`<init>`(). public void <init>(EpoxyController controller, Class<T> targetModelClass)
+//       ^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#`<init>`(). public EpoxyModelTouchCallback(EpoxyController controller, Class<T> targetModelClass)
 //                                ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                         ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                                                         ^^^^^^^^^^ definition local0 EpoxyController controller

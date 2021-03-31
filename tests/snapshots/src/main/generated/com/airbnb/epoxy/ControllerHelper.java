@@ -12,7 +12,7 @@ import java.util.List;
  */
 public abstract class ControllerHelper<T extends EpoxyController> {
 //                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper# public abstract class ControllerHelper<T extends EpoxyController>
-//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#`<init>`(). public void <init>()
+//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelper#`<init>`(). public ControllerHelper()
 //                                     ^ definition com/airbnb/epoxy/ControllerHelper#[T] T extends EpoxyController
 //                                               ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
   public abstract void resetAutoModels();

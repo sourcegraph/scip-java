@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ForComprehensions {
 //           ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions# public class ForComprehensions
-//           ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions#`<init>`(). public void <init>()
+//           ^^^^^^^^^^^^^^^^^ definition minimized/ForComprehensions#`<init>`(). public ForComprehensions()
   public static int app(int n) {
 //                  ^^^ definition minimized/ForComprehensions#app(). public static int app(int n)
 //                          ^ definition local0 int n

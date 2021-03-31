@@ -2,7 +2,7 @@ package minimized;
 
 public class SubClasses extends AbstractClasses implements Interfaces {
 //           ^^^^^^^^^^ definition minimized/SubClasses# public class SubClasses extends AbstractClasses, Interfaces
-//           ^^^^^^^^^^ definition minimized/SubClasses#`<init>`(). public void <init>()
+//           ^^^^^^^^^^ definition minimized/SubClasses#`<init>`(). public SubClasses()
 //                              ^^^^^^^^^^^^^^^ reference minimized/AbstractClasses#
 //                                                         ^^^^^^^^^^ reference minimized/Interfaces#
 

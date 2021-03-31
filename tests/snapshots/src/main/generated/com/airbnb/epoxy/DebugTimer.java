@@ -19,7 +19,7 @@ class DebugTimer implements Timer {
 //               ^^^^^^^^^^^ definition com/airbnb/epoxy/DebugTimer#sectionName. private String sectionName
 
   DebugTimer(String tag) {
-//^^^^^^ definition com/airbnb/epoxy/DebugTimer#`<init>`(). void <init>(String tag)
+//^^^^^^ definition com/airbnb/epoxy/DebugTimer#`<init>`(). DebugTimer(String tag)
 //           ^^^^^^ reference java/lang/String#
 //                  ^^^ definition local0 String tag
     this.tag = tag;

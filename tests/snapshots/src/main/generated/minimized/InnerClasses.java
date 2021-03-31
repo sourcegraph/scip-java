@@ -7,7 +7,7 @@ public class InnerClasses {
 //                  ^^^^^^^^^^^^ definition minimized/InnerClasses#exampleField. private final int exampleField
 
   public InnerClasses(int exampleField) {
-//       ^^^^^^ definition minimized/InnerClasses#`<init>`(). public void <init>(int exampleField)
+//       ^^^^^^ definition minimized/InnerClasses#`<init>`(). public InnerClasses(int exampleField)
 //                        ^^^^^^^^^^^^ definition local0 int exampleField
     this.exampleField = exampleField;
 //  ^^^^ reference minimized/InnerClasses#
@@ -17,7 +17,7 @@ public class InnerClasses {
 
   public enum InnerEnum {
 //            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum# public enum InnerEnum
-//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum#`<init>`(). private void <init>()
+//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum#`<init>`(). private InnerEnum()
     A,
 //  ^ definition minimized/InnerClasses#InnerEnum#A. InnerEnum.A /* ordinal 0 */
     B,
@@ -39,7 +39,7 @@ public class InnerClasses {
 
   public static class InnerStaticClass {
 //                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass# public static class InnerStaticClass
-//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#`<init>`(). public void <init>()
+//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#`<init>`(). public InnerStaticClass()
     public static void innerStaticMethod() {}
 //                     ^^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#innerStaticMethod(). public static void innerStaticMethod()
   }
@@ -53,7 +53,7 @@ public class InnerClasses {
 //                    ^^^^^ definition minimized/InnerClasses#InnerClass#field. private final int field
 
     public InnerClass(int field) {
-//         ^^^^^^ definition minimized/InnerClasses#InnerClass#`<init>`(). public void <init>(int field)
+//         ^^^^^^ definition minimized/InnerClasses#InnerClass#`<init>`(). public InnerClass(int field)
 //                        ^^^^^ definition local2 int field
       this.field = field;
 //    ^^^^ reference minimized/InnerClasses#InnerClass#

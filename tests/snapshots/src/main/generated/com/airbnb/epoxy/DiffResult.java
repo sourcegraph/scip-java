@@ -154,7 +154,7 @@ public class DiffResult {
   }
 
   private DiffResult(
-//        ^^^^^^ definition com/airbnb/epoxy/DiffResult#`<init>`(). private void <init>(List<? extends EpoxyModel<?>> previousModels, List<? extends EpoxyModel<?>> newModels, unresolved_type differResult)
+//        ^^^^^^ definition com/airbnb/epoxy/DiffResult#`<init>`(). private DiffResult(List<? extends EpoxyModel<?>> previousModels, List<? extends EpoxyModel<?>> newModels, unresolved_type differResult)
       @NonNull List<? extends EpoxyModel<?>> previousModels,
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^ reference java/util/List#

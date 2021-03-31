@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class SimpleEpoxyController extends EpoxyController {
 //           ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController# public class SimpleEpoxyController extends EpoxyController
-//           ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#`<init>`(). public void <init>()
+//           ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#`<init>`(). public SimpleEpoxyController()
 //                                         ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
   private List<? extends EpoxyModel<?>> currentModels;
 //        ^^^^ reference java/util/List#

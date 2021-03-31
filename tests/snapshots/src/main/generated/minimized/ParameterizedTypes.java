@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class ParameterizedTypes<A, B extends String> {
 //           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes# public class ParameterizedTypes<A, B extends String>
-//           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#`<init>`(). public void <init>()
+//           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#`<init>`(). public ParameterizedTypes()
 //                              ^ definition minimized/ParameterizedTypes#[A] A
 //                                 ^ definition minimized/ParameterizedTypes#[B] B extends String
 //                                           ^^^^^^ reference java/lang/String#
@@ -61,7 +61,7 @@ public class ParameterizedTypes<A, B extends String> {
 
   public static class Quadruplet<T, S, X, Y> {}
 //                    ^^^^^^^^^^ definition minimized/ParameterizedTypes#Quadruplet# public static class Quadruplet<T, S, X, Y>
-//                    ^^^^^^^^^^ definition minimized/ParameterizedTypes#Quadruplet#`<init>`(). public void <init>()
+//                    ^^^^^^^^^^ definition minimized/ParameterizedTypes#Quadruplet#`<init>`(). public Quadruplet()
 //                               ^ definition minimized/ParameterizedTypes#Quadruplet#[T] T
 //                                  ^ definition minimized/ParameterizedTypes#Quadruplet#[S] S
 //                                     ^ definition minimized/ParameterizedTypes#Quadruplet#[X] X

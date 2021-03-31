@@ -53,7 +53,7 @@ public class StringAttributeData {
 //                           ^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#formatArgs. private Object[] formatArgs
 
   public StringAttributeData() {
-//       ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#`<init>`(). public void <init>()
+//       ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#`<init>`(). public StringAttributeData()
     hasDefault = false;
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#hasDefault.
     defaultString = null;
@@ -63,7 +63,7 @@ public class StringAttributeData {
   }
 
   public StringAttributeData(@Nullable CharSequence defaultString) {
-//       ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#`<init>`(+1). public void <init>(CharSequence defaultString)
+//       ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#`<init>`(+1). public StringAttributeData(CharSequence defaultString)
 //                            ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                     ^^^^^^^^^^^^ reference java/lang/CharSequence#
 //                                                  ^^^^^^^^^^^^^ definition local0 CharSequence defaultString
@@ -81,7 +81,7 @@ public class StringAttributeData {
   }
 
   public StringAttributeData(@StringRes int defaultStringRes) {
-//       ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#`<init>`(+2). public void <init>(int defaultStringRes)
+//       ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#`<init>`(+2). public StringAttributeData(int defaultStringRes)
 //                            ^^^^^^^^^ reference androidx/annotation/StringRes#
 //                                          ^^^^^^^^^^^^^^^^ definition local1 int defaultStringRes
     hasDefault = true;

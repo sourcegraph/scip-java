@@ -30,7 +30,7 @@ public abstract class AsyncEpoxyController extends EpoxyController {
    * A new instance that does model building and diffing asynchronously.
    */
   public AsyncEpoxyController() {
-//       ^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyController#`<init>`(). public void <init>()
+//       ^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyController#`<init>`(). public AsyncEpoxyController()
     this(true);
 //  ^^^^ reference com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+1).
   }
@@ -40,7 +40,7 @@ public abstract class AsyncEpoxyController extends EpoxyController {
    *                    both on the main thread.
    */
   public AsyncEpoxyController(boolean enableAsync) {
-//       ^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+1). public void <init>(boolean enableAsync)
+//       ^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+1). public AsyncEpoxyController(boolean enableAsync)
 //                                    ^^^^^^^^^^^ definition local0 boolean enableAsync
     this(enableAsync, enableAsync);
 //  ^^^^ reference com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+2).
@@ -52,7 +52,7 @@ public abstract class AsyncEpoxyController extends EpoxyController {
    * Individually control whether model building and diffing are done async or on the main thread.
    */
   public AsyncEpoxyController(boolean enableAsyncModelBuilding, boolean enableAsyncDiffing) {
-//       ^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+2). public void <init>(boolean enableAsyncModelBuilding, boolean enableAsyncDiffing)
+//       ^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+2). public AsyncEpoxyController(boolean enableAsyncModelBuilding, boolean enableAsyncDiffing)
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^ definition local1 boolean enableAsyncModelBuilding
 //                                                                      ^^^^^^^^^^^^^^^^^^ definition local2 boolean enableAsyncDiffing
     super(getHandler(enableAsyncModelBuilding), getHandler(enableAsyncDiffing));

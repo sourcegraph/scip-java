@@ -80,7 +80,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                                                                           ^^^^^^^^^ reference java/util/ArrayList#
 
   EpoxyControllerAdapter(@NonNull EpoxyController epoxyController, Handler diffingHandler) {
-//^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#`<init>`(). void <init>(EpoxyController epoxyController, unresolved_type diffingHandler)
+//^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#`<init>`(). EpoxyControllerAdapter(EpoxyController epoxyController, unresolved_type diffingHandler)
 //                        ^^^^^^^ reference androidx/annotation/NonNull#
 //                                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                                                ^^^^^^^^^^^^^^^ definition local0 EpoxyController epoxyController

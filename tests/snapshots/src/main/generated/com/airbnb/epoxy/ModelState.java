@@ -3,7 +3,7 @@ package com.airbnb.epoxy;
 /** Helper to store relevant information about a model that we need to determine if it changed. */
 class ModelState {
 //    ^^^^^^^^^^ definition com/airbnb/epoxy/ModelState# class ModelState
-//    ^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#`<init>`(). void <init>()
+//    ^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#`<init>`(). ModelState()
   long id;
 //     ^^ definition com/airbnb/epoxy/ModelState#id. long id
   int hashCode;

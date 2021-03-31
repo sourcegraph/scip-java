@@ -2,7 +2,7 @@ package minimized;
 
 public abstract class AbstractClasses {
 //                    ^^^^^^^^^^^^^^^ definition minimized/AbstractClasses# public abstract class AbstractClasses
-//                    ^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#`<init>`(). public void <init>()
+//                    ^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#`<init>`(). public AbstractClasses()
   public String defaultImplementation() {
 //       ^^^^^^ reference java/lang/String#
 //              ^^^^^^^^^^^^^^^^^^^^^ definition minimized/AbstractClasses#defaultImplementation(). public String defaultImplementation()

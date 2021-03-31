@@ -31,7 +31,7 @@ import androidx.annotation.Nullable;
  */
 class ControllerHelperLookup {
 //    ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup# class ControllerHelperLookup
-//    ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#`<init>`(). void <init>()
+//    ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#`<init>`(). ControllerHelperLookup()
   private static final String GENERATED_HELPER_CLASS_SUFFIX = "_EpoxyHelper";
 //                     ^^^^^^ reference java/lang/String#
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#GENERATED_HELPER_CLASS_SUFFIX. private static final String GENERATED_HELPER_CLASS_SUFFIX

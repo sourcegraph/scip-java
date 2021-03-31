@@ -120,7 +120,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
    * @param models    The models that will be used to bind the views in the given layout.
    */
   public EpoxyModelGroup(@LayoutRes int layoutRes, Collection<? extends EpoxyModel<?>> models) {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#`<init>`(). public void <init>(int layoutRes, Collection<? extends EpoxyModel<?>> models)
+//       ^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#`<init>`(). public EpoxyModelGroup(int layoutRes, Collection<? extends EpoxyModel<?>> models)
 //                        ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                                      ^^^^^^^^^ definition local0 int layoutRes
 //                                                 ^^^^^^^^^^ reference java/util/Collection#
@@ -139,7 +139,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
    * @param models    The models that will be used to bind the views in the given layout.
    */
   public EpoxyModelGroup(@LayoutRes int layoutRes, EpoxyModel<?>... models) {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+1). public void <init>(int layoutRes, EpoxyModel<?>[] models)
+//       ^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+1). public EpoxyModelGroup(int layoutRes, EpoxyModel<?>[] models)
 //                        ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                                      ^^^^^^^^^ definition local2 int layoutRes
 //                                                 ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -159,7 +159,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
    * @param models    The models that will be used to bind the views in the given layout.
    */
   private EpoxyModelGroup(@LayoutRes int layoutRes, List<EpoxyModel<?>> models) {
-//        ^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+2). private void <init>(int layoutRes, List<EpoxyModel<?>> models)
+//        ^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+2). private EpoxyModelGroup(int layoutRes, List<EpoxyModel<?>> models)
 //                         ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                                       ^^^^^^^^^ definition local4 int layoutRes
 //                                                  ^^^^ reference java/util/List#
@@ -210,7 +210,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
    * Constructor use for DSL
    */
   protected EpoxyModelGroup() {
-//          ^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+3). protected void <init>()
+//          ^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+3). protected EpoxyModelGroup()
     models = new ArrayList<>();
 //  ^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#models.
 //           ^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
@@ -223,7 +223,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
    * Constructor use for DSL
    */
   protected EpoxyModelGroup(@LayoutRes int layoutRes) {
-//          ^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+4). protected void <init>(int layoutRes)
+//          ^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+4). protected EpoxyModelGroup(int layoutRes)
 //                           ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                                         ^^^^^^^^^ definition local8 int layoutRes
     this();

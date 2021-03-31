@@ -105,8 +105,16 @@ public class SignatureFormatter {
               .collect(Collectors.joining(", ", "<", ">")));
     }
 
-    printKeyword(formatType(methodSignature.getReturnType()));
-    s.append(symbolInformation.getDisplayName());
+    if (symbolInformation.getKind() != SymbolInformation.Kind.CONSTRUCTOR) {
+      printKeyword(formatType(methodSignature.getReturnType()));
+      s.append(symbolInformation.getDisplayName());
+    } else {
+      s.append(
+          SymbolDescriptor.parseFromSymbol(
+                  SymbolDescriptor.parseFromSymbol(symbolInformation.getSymbol()).owner)
+              .descriptor
+              .name);
+    }
 
     s.append(
         methodSignature.getParameterListsList().stream()

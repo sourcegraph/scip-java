@@ -3,7 +3,7 @@ package minimized;
 /** Example class docstring. */
 public class Docstrings {
 //           ^^^^^^^^^^ definition minimized/Docstrings# public class Docstrings
-//           ^^^^^^^^^^ definition minimized/Docstrings#`<init>`(). public void <init>()
+//           ^^^^^^^^^^ definition minimized/Docstrings#`<init>`(). public Docstrings()
 
   /** Example field docstring. */
   public static int field = 42;

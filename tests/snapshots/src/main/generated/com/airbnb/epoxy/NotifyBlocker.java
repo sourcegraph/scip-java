@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
  */
 class NotifyBlocker extends AdapterDataObserver {
 //    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker# class NotifyBlocker extends unresolved_type
-//    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#`<init>`(). void <init>()
+//    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#`<init>`(). NotifyBlocker()
 //                          ^^^^^^^^^^^^^^^^^^^ reference _root_/
 
   private boolean changesAllowed;

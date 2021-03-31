@@ -35,7 +35,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //                     ^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#tag. private final String tag
 
   public EpoxyDiffLogger(String tag) {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#`<init>`(). public void <init>(String tag)
+//       ^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#`<init>`(). public EpoxyDiffLogger(String tag)
 //                       ^^^^^^ reference java/lang/String#
 //                              ^^^ definition local0 String tag
     this.tag = tag;

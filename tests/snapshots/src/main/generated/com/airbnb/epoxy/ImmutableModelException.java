@@ -23,7 +23,7 @@ class ImmutableModelException extends RuntimeException {
           + " call `requestModelBuild` instead to recreate all models.";
 
   ImmutableModelException(EpoxyModel model, int modelPosition) {
-//^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`(). void <init>(EpoxyModel model, int modelPosition)
+//^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`(). ImmutableModelException(EpoxyModel model, int modelPosition)
 //                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local0 EpoxyModel model
 //                                              ^^^^^^^^^^^^^ definition local1 int modelPosition
@@ -34,7 +34,7 @@ class ImmutableModelException extends RuntimeException {
   }
 
   ImmutableModelException(EpoxyModel model,
-//^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`(+1). void <init>(EpoxyModel model, String descriptionOfWhenChangeHappened, int modelPosition)
+//^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#`<init>`(+1). ImmutableModelException(EpoxyModel model, String descriptionOfWhenChangeHappened, int modelPosition)
 //                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local2 EpoxyModel model
       String descriptionOfWhenChangeHappened, int modelPosition) {

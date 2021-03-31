@@ -7,14 +7,14 @@ package example;
  /** Example1 docstring */
 public class Example1 {}
 //           ^^^^^^^^ definition example/Example1# public class Example1
-//           ^^^^^^^^ definition example/Example1#`<init>`(). public void <init>()
+//           ^^^^^^^^ definition example/Example1#`<init>`(). public Example1()
 
 /example/Example2.java
 package example;
 
 public class Example2 {
 //           ^^^^^^^^ definition example/Example2# public class Example2
-//           ^^^^^^^^ definition example/Example2#`<init>`(). public void <init>()
+//           ^^^^^^^^ definition example/Example2#`<init>`(). public Example2()
   public Example1 example;
 //       ^^^^^^^^ reference example/Example1#
 //                ^^^^^^^ definition example/Example2#example. public Example1 example

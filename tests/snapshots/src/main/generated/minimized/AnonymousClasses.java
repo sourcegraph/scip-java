@@ -10,7 +10,7 @@ import java.util.function.Function;
 //^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public class AnonymousClasses {
 //           ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses# public class AnonymousClasses
-//           ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses#`<init>`(). public void <init>()
+//           ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses#`<init>`(). public AnonymousClasses()
   public static int app(int n) {
 //                  ^^^ definition minimized/AnonymousClasses#app(). public static int app(int n)
 //                          ^ definition local0 int n

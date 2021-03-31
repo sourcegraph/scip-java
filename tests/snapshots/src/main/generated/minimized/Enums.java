@@ -22,7 +22,7 @@ enum Enums {
 //              ^^^^^ definition minimized/Enums#value. public String value
 
   Enums(String value, int a) {
-//^^^^^^ definition minimized/Enums#`<init>`(). private void <init>(String value, int a)
+//^^^^^^ definition minimized/Enums#`<init>`(). private Enums(String value, int a)
 //      ^^^^^^ reference java/lang/String#
 //             ^^^^^ definition local0 String value
 //                        ^ definition local1 int a
