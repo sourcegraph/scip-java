@@ -2,7 +2,7 @@ package minimized;
 
 public class ClassOf {
 //           ^^^^^^^ definition minimized/ClassOf# public class ClassOf
-//           ^^^^^^^ definition minimized/ClassOf#`<init>`(). public <init>()
+//           ^^^^^^^ definition minimized/ClassOf#`<init>`(). public void <init>()
   public static String app() {
 //              ^^^^^^ reference java/lang/String#
 //                     ^^^ definition minimized/ClassOf#app(). public static String app()

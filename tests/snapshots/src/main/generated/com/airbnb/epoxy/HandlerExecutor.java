@@ -34,7 +34,7 @@ class HandlerExecutor implements Executor {
 //              ^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#handler. final unresolved_type handler
 
   HandlerExecutor(Handler handler) {
-//^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#`<init>`(). <init>(unresolved_type handler)
+//^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#`<init>`(). void <init>(unresolved_type handler)
 //                ^^^^^^^ reference _root_/
 //                        ^^^^^^^ definition local0 unresolved_type handler
     this.handler = handler;
@@ -46,7 +46,7 @@ class HandlerExecutor implements Executor {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void execute(@NonNull Runnable command) {
-//            ^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#execute(). public execute(Runnable command)
+//            ^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#execute(). public void execute(Runnable command)
 //                     ^^^^^^^ reference androidx/annotation/NonNull#
 //                             ^^^^^^^^ reference java/lang/Runnable#
 //                                      ^^^^^^^ definition local1 Runnable command

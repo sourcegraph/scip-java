@@ -19,7 +19,7 @@ class DebugTimer implements Timer {
 //               ^^^^^^^^^^^ definition com/airbnb/epoxy/DebugTimer#sectionName. private String sectionName
 
   DebugTimer(String tag) {
-//^^^^^^ definition com/airbnb/epoxy/DebugTimer#`<init>`(). <init>(String tag)
+//^^^^^^ definition com/airbnb/epoxy/DebugTimer#`<init>`(). void <init>(String tag)
 //           ^^^^^^ reference java/lang/String#
 //                  ^^^ definition local0 String tag
     this.tag = tag;
@@ -31,7 +31,7 @@ class DebugTimer implements Timer {
   }
 
   private void reset() {
-//             ^^^^^ definition com/airbnb/epoxy/DebugTimer#reset(). private reset()
+//             ^^^^^ definition com/airbnb/epoxy/DebugTimer#reset(). private void reset()
     startTime = -1;
 //  ^^^^^^^^^ reference com/airbnb/epoxy/DebugTimer#startTime.
     sectionName = null;
@@ -41,7 +41,7 @@ class DebugTimer implements Timer {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void start(String sectionName) {
-//            ^^^^^ definition com/airbnb/epoxy/DebugTimer#start(). public start(String sectionName)
+//            ^^^^^ definition com/airbnb/epoxy/DebugTimer#start(). public void start(String sectionName)
 //                  ^^^^^^ reference java/lang/String#
 //                         ^^^^^^^^^^^ definition local1 String sectionName
     if (startTime != -1) {
@@ -64,7 +64,7 @@ class DebugTimer implements Timer {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void stop() {
-//            ^^^^ definition com/airbnb/epoxy/DebugTimer#stop(). public stop()
+//            ^^^^ definition com/airbnb/epoxy/DebugTimer#stop(). public void stop()
     if (startTime == -1) {
 //      ^^^^^^^^^ reference com/airbnb/epoxy/DebugTimer#startTime.
       throw new IllegalStateException("Timer was not started");

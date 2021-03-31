@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class ParameterizedTypes<A, B extends String> {
 //           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes# public class ParameterizedTypes<A, B extends String>
-//           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#`<init>`(). public <init>()
+//           ^^^^^^^^^^^^^^^^^^ definition minimized/ParameterizedTypes#`<init>`(). public void <init>()
 //                              ^ definition minimized/ParameterizedTypes#[A] A
 //                                 ^ definition minimized/ParameterizedTypes#[B] B extends String
 //                                           ^^^^^^ reference java/lang/String#
@@ -29,7 +29,7 @@ public class ParameterizedTypes<A, B extends String> {
 //                           ^ reference minimized/ParameterizedTypes#[A]
 //                                ^^^^^^^^ reference java/util/Iterator#
 //                                         ^ reference minimized/ParameterizedTypes#[B]
-//                                                  ^^^^^^^^^^^^ definition minimized/ParameterizedTypes#iteratorable(). public <T extends Iterable<A> & Iterator<B>> iteratorable(List<T> list)
+//                                                  ^^^^^^^^^^^^ definition minimized/ParameterizedTypes#iteratorable(). public <T extends Iterable<A> & Iterator<B>> void iteratorable(List<T> list)
 //                                                               ^^^^ reference java/util/List#
 //                                                                    ^ reference minimized/ParameterizedTypes#iteratorable().[T]
 //                                                                       ^^^^ definition local0 List<T> list
@@ -61,7 +61,7 @@ public class ParameterizedTypes<A, B extends String> {
 
   public static class Quadruplet<T, S, X, Y> {}
 //                    ^^^^^^^^^^ definition minimized/ParameterizedTypes#Quadruplet# public static class Quadruplet<T, S, X, Y>
-//                    ^^^^^^^^^^ definition minimized/ParameterizedTypes#Quadruplet#`<init>`(). public <init>()
+//                    ^^^^^^^^^^ definition minimized/ParameterizedTypes#Quadruplet#`<init>`(). public void <init>()
 //                               ^ definition minimized/ParameterizedTypes#Quadruplet#[T] T
 //                                  ^ definition minimized/ParameterizedTypes#Quadruplet#[S] S
 //                                     ^ definition minimized/ParameterizedTypes#Quadruplet#[X] X

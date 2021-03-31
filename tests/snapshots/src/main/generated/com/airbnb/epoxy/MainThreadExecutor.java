@@ -26,7 +26,7 @@ class MainThreadExecutor extends HandlerExecutor {
 //                                                     ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#
 
   MainThreadExecutor(boolean async) {
-//^^^^^^ definition com/airbnb/epoxy/MainThreadExecutor#`<init>`(). <init>(boolean async)
+//^^^^^^ definition com/airbnb/epoxy/MainThreadExecutor#`<init>`(). void <init>(boolean async)
 //                           ^^^^^ definition local0 boolean async
     super(async ? AYSNC_MAIN_THREAD_HANDLER : MAIN_THREAD_HANDLER);
 //  ^^^^^ reference com/airbnb/epoxy/HandlerExecutor#`<init>`().

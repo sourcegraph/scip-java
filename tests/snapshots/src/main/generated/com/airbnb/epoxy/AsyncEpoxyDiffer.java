@@ -55,7 +55,7 @@ class AsyncEpoxyDiffer {
   interface ResultCallback {
 //          ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback# abstract static interface ResultCallback
     void onResult(@NonNull DiffResult result);
-//       ^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#onResult(). public abstract onResult(DiffResult result)
+//       ^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#onResult(). public abstract void onResult(DiffResult result)
 //                 ^^^^^^^ reference androidx/annotation/NonNull#
 //                         ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#
 //                                    ^^^^^^ definition local0 DiffResult result
@@ -78,7 +78,7 @@ class AsyncEpoxyDiffer {
 //                                                        ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#
 
   AsyncEpoxyDiffer(
-//^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#`<init>`(). <init>(unresolved_type handler, ResultCallback resultCallback, unresolved_type diffCallback)
+//^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#`<init>`(). void <init>(unresolved_type handler, ResultCallback resultCallback, unresolved_type diffCallback)
       @NonNull Handler handler,
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^^^^ reference _root_/
@@ -227,7 +227,7 @@ class AsyncEpoxyDiffer {
   @SuppressWarnings("WeakerAccess")
 // ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
   public void submitList(@Nullable final List<? extends EpoxyModel<?>> newList) {
-//            ^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#submitList(). public submitList(List<? extends EpoxyModel<?>> newList)
+//            ^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#submitList(). public void submitList(List<? extends EpoxyModel<?>> newList)
 //                        ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                       ^^^^ reference java/util/List#
 //                                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -325,7 +325,7 @@ class AsyncEpoxyDiffer {
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
       public void run() {
-//                ^^^ definition local14 public run()
+//                ^^^ definition local14 public void run()
         DiffUtil.DiffResult result = DiffUtil.calculateDiff(wrappedCallback);
 //      ^^^^^^^^ reference DiffUtil/
 //               ^^^^^^^^^^ reference DiffUtil/DiffResult#
@@ -347,7 +347,7 @@ class AsyncEpoxyDiffer {
   }
 
   private void onRunCompleted(
-//             ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#onRunCompleted(). private onRunCompleted(int runGeneration, List<? extends EpoxyModel<?>> newList, DiffResult result)
+//             ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#onRunCompleted(). private void onRunCompleted(int runGeneration, List<? extends EpoxyModel<?>> newList, DiffResult result)
       final int runGeneration,
 //              ^^^^^^^^^^^^^ definition local16 final int runGeneration
       @Nullable final List<? extends EpoxyModel<?>> newList,
@@ -373,7 +373,7 @@ class AsyncEpoxyDiffer {
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
       public void run() {
-//                ^^^ definition local21 public run()
+//                ^^^ definition local21 public void run()
         final boolean dispatchResult = tryLatchList(newList, runGeneration);
 //                    ^^^^^^^^^^^^^^ definition local22 final boolean dispatchResult
 //                                     ^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#tryLatchList().
@@ -448,7 +448,7 @@ class AsyncEpoxyDiffer {
    */
   private static class GenerationTracker {
 //                     ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker# private static class GenerationTracker
-//                     ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#`<init>`(). private <init>()
+//                     ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#`<init>`(). private void <init>()
 
     // Max generation of currently scheduled runnable
     private volatile int maxScheduledGeneration;
@@ -523,7 +523,7 @@ class AsyncEpoxyDiffer {
 //                                            ^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#diffCallback. private final unresolved_type diffCallback
 
     DiffCallback(List<? extends EpoxyModel<?>> oldList, List<? extends EpoxyModel<?>> newList,
-//  ^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#`<init>`(). <init>(List<? extends EpoxyModel<?>> oldList, List<? extends EpoxyModel<?>> newList, unresolved_type diffCallback)
+//  ^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#`<init>`(). void <init>(List<? extends EpoxyModel<?>> oldList, List<? extends EpoxyModel<?>> newList, unresolved_type diffCallback)
 //               ^^^^ reference java/util/List#
 //                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                             ^^^^^^^ definition local28 List<? extends EpoxyModel<?>> oldList

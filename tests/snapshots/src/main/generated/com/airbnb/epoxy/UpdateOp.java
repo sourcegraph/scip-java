@@ -66,7 +66,7 @@ class UpdateOp {
 //                         ^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#payloads. ArrayList<EpoxyModel<?>> payloads
 
   private UpdateOp() {
-//        ^^^^^^ definition com/airbnb/epoxy/UpdateOp#`<init>`(). private <init>()
+//        ^^^^^^ definition com/airbnb/epoxy/UpdateOp#`<init>`(). private void <init>()
   }
 
   static UpdateOp instance(@Type int type, int positionStart, int itemCount,
@@ -143,7 +143,7 @@ class UpdateOp {
   }
 
   void addPayload(@Nullable EpoxyModel<?> payload) {
-//     ^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#addPayload(). addPayload(EpoxyModel<?> payload)
+//     ^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#addPayload(). void addPayload(EpoxyModel<?> payload)
 //                 ^^^^^^^^ reference androidx/annotation/Nullable#
 //                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                        ^^^^^^^ definition local8 EpoxyModel<?> payload

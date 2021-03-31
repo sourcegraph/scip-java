@@ -154,7 +154,7 @@ public class DiffResult {
   }
 
   private DiffResult(
-//        ^^^^^^ definition com/airbnb/epoxy/DiffResult#`<init>`(). private <init>(List<? extends EpoxyModel<?>> previousModels, List<? extends EpoxyModel<?>> newModels, unresolved_type differResult)
+//        ^^^^^^ definition com/airbnb/epoxy/DiffResult#`<init>`(). private void <init>(List<? extends EpoxyModel<?>> previousModels, List<? extends EpoxyModel<?>> newModels, unresolved_type differResult)
       @NonNull List<? extends EpoxyModel<?>> previousModels,
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^ reference java/util/List#
@@ -186,7 +186,7 @@ public class DiffResult {
   }
 
   public void dispatchTo(Adapter adapter) {
-//            ^^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#dispatchTo(). public dispatchTo(unresolved_type adapter)
+//            ^^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#dispatchTo(). public void dispatchTo(unresolved_type adapter)
 //                       ^^^^^^^ reference _root_/
 //                               ^^^^^^^ definition local9 unresolved_type adapter
     dispatchTo(new AdapterListUpdateCallback(adapter));
@@ -197,7 +197,7 @@ public class DiffResult {
   }
 
   public void dispatchTo(ListUpdateCallback callback) {
-//            ^^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#dispatchTo(+1). public dispatchTo(unresolved_type callback)
+//            ^^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#dispatchTo(+1). public void dispatchTo(unresolved_type callback)
 //                       ^^^^^^^^^^^^^^^^^^ reference _root_/
 //                                          ^^^^^^^^ definition local10 unresolved_type callback
     if (differResult != null) {

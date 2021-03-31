@@ -20,7 +20,7 @@ class ControllerModelList extends ModelList {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeInserted(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^^ definition local2 public onItemRangeInserted(int positionStart, int itemCount)
+//              ^^^^^^^^^^^^^^^^^^^ definition local2 public void onItemRangeInserted(int positionStart, int itemCount)
 //                                      ^^^^^^^^^^^^^ definition local4 int positionStart
 //                                                         ^^^^^^^^^ definition local5 int itemCount
       throw new IllegalStateException(
@@ -32,7 +32,7 @@ class ControllerModelList extends ModelList {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeRemoved(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^ definition local3 public onItemRangeRemoved(int positionStart, int itemCount)
+//              ^^^^^^^^^^^^^^^^^^ definition local3 public void onItemRangeRemoved(int positionStart, int itemCount)
 //                                     ^^^^^^^^^^^^^ definition local6 int positionStart
 //                                                        ^^^^^^^^^ definition local7 int itemCount
       throw new IllegalStateException(
@@ -43,7 +43,7 @@ class ControllerModelList extends ModelList {
   };
 
   ControllerModelList(int expectedModelCount) {
-//^^^^^^ definition com/airbnb/epoxy/ControllerModelList#`<init>`(). <init>(int expectedModelCount)
+//^^^^^^ definition com/airbnb/epoxy/ControllerModelList#`<init>`(). void <init>(int expectedModelCount)
 //                        ^^^^^^^^^^^^^^^^^^ definition local8 int expectedModelCount
     super(expectedModelCount);
 //  ^^^^^ reference com/airbnb/epoxy/ModelList#`<init>`().
@@ -53,7 +53,7 @@ class ControllerModelList extends ModelList {
   }
 
   void freeze() {
-//     ^^^^^^ definition com/airbnb/epoxy/ControllerModelList#freeze(). freeze()
+//     ^^^^^^ definition com/airbnb/epoxy/ControllerModelList#freeze(). void freeze()
     setObserver(OBSERVER);
 //  ^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#setObserver().
 //              ^^^^^^^^ reference com/airbnb/epoxy/ControllerModelList#OBSERVER.

@@ -39,11 +39,11 @@ public abstract class Typed3EpoxyController<T, U, V> extends EpoxyController {
 //                ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#allowModelBuildRequests. private boolean allowModelBuildRequests
 
   public Typed3EpoxyController() {
-//       ^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#`<init>`(). public <init>()
+//       ^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#`<init>`(). public void <init>()
   }
 
   public Typed3EpoxyController(Handler modelBuildingHandler, Handler diffingHandler) {
-//       ^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#`<init>`(+1). public <init>(unresolved_type modelBuildingHandler, unresolved_type diffingHandler)
+//       ^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#`<init>`(+1). public void <init>(unresolved_type modelBuildingHandler, unresolved_type diffingHandler)
 //                             ^^^^^^^ reference _root_/
 //                                     ^^^^^^^^^^^^^^^^^^^^ definition local0 unresolved_type modelBuildingHandler
 //                                                           ^^^^^^^ reference _root_/
@@ -59,7 +59,7 @@ public abstract class Typed3EpoxyController<T, U, V> extends EpoxyController {
    * to {@link #buildModels(Object, Object, Object)}
    */
   public void setData(T data1, U data2, V data3) {
-//            ^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#setData(). public setData(T data1, U data2, V data3)
+//            ^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#setData(). public void setData(T data1, U data2, V data3)
 //                    ^ reference com/airbnb/epoxy/Typed3EpoxyController#[T]
 //                      ^^^^^ definition local2 T data1
 //                             ^ reference com/airbnb/epoxy/Typed3EpoxyController#[U]
@@ -89,7 +89,7 @@ public abstract class Typed3EpoxyController<T, U, V> extends EpoxyController {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public final void requestModelBuild() {
-//                  ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#requestModelBuild(). public final requestModelBuild()
+//                  ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#requestModelBuild(). public final void requestModelBuild()
     if (!allowModelBuildRequests) {
 //       ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Typed3EpoxyController#allowModelBuildRequests.
       throw new IllegalStateException(
@@ -106,7 +106,7 @@ public abstract class Typed3EpoxyController<T, U, V> extends EpoxyController {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void moveModel(int fromPosition, int toPosition) {
-//            ^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#moveModel(). public moveModel(int fromPosition, int toPosition)
+//            ^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#moveModel(). public void moveModel(int fromPosition, int toPosition)
 //                          ^^^^^^^^^^^^ definition local5 int fromPosition
 //                                            ^^^^^^^^^^ definition local6 int toPosition
     allowModelBuildRequests = true;
@@ -123,7 +123,7 @@ public abstract class Typed3EpoxyController<T, U, V> extends EpoxyController {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void requestDelayedModelBuild(int delayMs) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#requestDelayedModelBuild(). public requestDelayedModelBuild(int delayMs)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#requestDelayedModelBuild(). public void requestDelayedModelBuild(int delayMs)
 //                                         ^^^^^^^ definition local7 int delayMs
     if (!allowModelBuildRequests) {
 //       ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Typed3EpoxyController#allowModelBuildRequests.
@@ -142,7 +142,7 @@ public abstract class Typed3EpoxyController<T, U, V> extends EpoxyController {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected final void buildModels() {
-//                     ^^^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#buildModels(). protected final buildModels()
+//                     ^^^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#buildModels(). protected final void buildModels()
     if (!isBuildingModels()) {
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#isBuildingModels().
       throw new IllegalStateException(
@@ -159,7 +159,7 @@ public abstract class Typed3EpoxyController<T, U, V> extends EpoxyController {
   }
 
   protected abstract void buildModels(T data1, U data2, V data3);
-//                        ^^^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#buildModels(+1). protected abstract buildModels(T data1, U data2, V data3)
+//                        ^^^^^^^^^^^ definition com/airbnb/epoxy/Typed3EpoxyController#buildModels(+1). protected abstract void buildModels(T data1, U data2, V data3)
 //                                    ^ reference com/airbnb/epoxy/Typed3EpoxyController#[T]
 //                                      ^^^^^ definition local8 T data1
 //                                             ^ reference com/airbnb/epoxy/Typed3EpoxyController#[U]

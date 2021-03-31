@@ -131,7 +131,7 @@ public @interface PackageModelViewConfig {
    */
   enum Option {
 //     ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option# public enum Option
-//     ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#`<init>`(). private <init>()
+//     ^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#`<init>`(). private void <init>()
     Default,
 //  ^^^^^^^ definition com/airbnb/epoxy/PackageModelViewConfig#Option#Default. Option.Default /* ordinal 0 */
     Enabled,

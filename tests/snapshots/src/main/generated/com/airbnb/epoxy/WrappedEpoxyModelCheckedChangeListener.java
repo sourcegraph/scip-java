@@ -35,7 +35,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#originalCheckedChangeListener. private final OnModelCheckedChangeListener<T, V> originalCheckedChangeListener
 
   public WrappedEpoxyModelCheckedChangeListener(
-//       ^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#`<init>`(). public <init>(OnModelCheckedChangeListener<T, V> checkedListener)
+//       ^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#`<init>`(). public void <init>(OnModelCheckedChangeListener<T, V> checkedListener)
       OnModelCheckedChangeListener<T, V> checkedListener
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/OnModelCheckedChangeListener#
 //                                 ^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[T]
@@ -58,7 +58,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onCheckedChanged(CompoundButton button, boolean isChecked) {
-//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#onCheckedChanged(). public onCheckedChanged(unresolved_type button, boolean isChecked)
+//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#onCheckedChanged(). public void onCheckedChanged(unresolved_type button, boolean isChecked)
 //                             ^^^^^^^^^^^^^^ reference _root_/
 //                                            ^^^^^^ definition local1 unresolved_type button
 //                                                            ^^^^^^^^^ definition local2 boolean isChecked

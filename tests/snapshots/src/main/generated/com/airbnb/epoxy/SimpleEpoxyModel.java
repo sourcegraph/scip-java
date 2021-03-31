@@ -39,7 +39,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //            ^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#spanCount. private int spanCount
 
   public SimpleEpoxyModel(@LayoutRes int layoutRes) {
-//       ^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#`<init>`(). public <init>(int layoutRes)
+//       ^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#`<init>`(). public void <init>(int layoutRes)
 //                         ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                                       ^^^^^^^^^ definition local0 int layoutRes
     this.layoutRes = layoutRes;
@@ -78,7 +78,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void bind(@NonNull View view) {
-//            ^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#bind(). public bind(unresolved_type view)
+//            ^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#bind(). public void bind(unresolved_type view)
 //                  ^^^^^^^ reference androidx/annotation/NonNull#
 //                          ^^^^ reference _root_/
 //                               ^^^^ definition local3 unresolved_type view
@@ -101,7 +101,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void unbind(@NonNull View view) {
-//            ^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#unbind(). public unbind(unresolved_type view)
+//            ^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#unbind(). public void unbind(unresolved_type view)
 //                    ^^^^^^^ reference androidx/annotation/NonNull#
 //                            ^^^^ reference _root_/
 //                                 ^^^^ definition local4 unresolved_type view

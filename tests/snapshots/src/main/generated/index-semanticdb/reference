@@ -6,7 +6,7 @@ package example;
  /** Docstring for Example */
 public class Example {
 //           ^^^^^^^ definition example/Example# public class Example
-//           ^^^^^^^ definition example/Example#`<init>`(). public <init>()
+//           ^^^^^^^ definition example/Example#`<init>`(). public void <init>()
   Example next;
 //^^^^^^^ reference example/Example#
 //        ^^^^ definition example/Example#next. Example next

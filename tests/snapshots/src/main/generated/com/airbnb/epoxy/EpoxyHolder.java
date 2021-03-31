@@ -22,7 +22,7 @@ public abstract class EpoxyHolder {
 //                    ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyHolder# public abstract class EpoxyHolder
 
   public EpoxyHolder(@NonNull ViewParent parent) {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#`<init>`(). public <init>(unresolved_type parent)
+//       ^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#`<init>`(). public void <init>(unresolved_type parent)
 //                    ^^^^^^^ reference androidx/annotation/NonNull#
 //                            ^^^^^^^^^^ reference _root_/
 //                                       ^^^^^^ definition local0 unresolved_type parent
@@ -31,7 +31,7 @@ public abstract class EpoxyHolder {
   }
 
   public EpoxyHolder() {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#`<init>`(+1). public <init>()
+//       ^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#`<init>`(+1). public void <init>()
   }
 
   /**
@@ -43,7 +43,7 @@ public abstract class EpoxyHolder {
    * {@link EpoxyModelWithHolder#getLayout()}
    */
   protected abstract void bindView(@NonNull View itemView);
-//                        ^^^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#bindView(). protected abstract bindView(unresolved_type itemView)
+//                        ^^^^^^^^ definition com/airbnb/epoxy/EpoxyHolder#bindView(). protected abstract void bindView(unresolved_type itemView)
 //                                  ^^^^^^^ reference androidx/annotation/NonNull#
 //                                          ^^^^ reference _root_/
 //                                               ^^^^^^^^ definition local1 unresolved_type itemView

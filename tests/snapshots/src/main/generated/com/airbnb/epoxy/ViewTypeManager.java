@@ -20,7 +20,7 @@ import androidx.annotation.VisibleForTesting;
 
 class ViewTypeManager {
 //    ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager# class ViewTypeManager
-//    ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#`<init>`(). <init>()
+//    ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#`<init>`(). void <init>()
   private static final Map<Class, Integer> VIEW_TYPE_MAP = new HashMap<>();
 //                     ^^^ reference java/util/Map#
 //                         ^^^^^ reference java/lang/Class#
@@ -47,7 +47,7 @@ class ViewTypeManager {
   @VisibleForTesting
 // ^^^^^^^^^^^^^^^^^ reference androidx/annotation/VisibleForTesting#
   void resetMapForTesting() {
-//     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#resetMapForTesting(). resetMapForTesting()
+//     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#resetMapForTesting(). void resetMapForTesting()
     VIEW_TYPE_MAP.clear();
 //  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewTypeManager#VIEW_TYPE_MAP.
 //                ^^^^^ reference java/util/Map#clear().

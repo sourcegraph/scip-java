@@ -33,7 +33,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
  */
 public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback {
 //                    ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback# public abstract class EpoxyTouchHelperCallback extends unresolved_type
-//                    ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#`<init>`(). public <init>()
+//                    ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#`<init>`(). public void <init>()
 //                                                     ^^^^^^^^^^^^^^^ reference ItemTouchHelper/
 //                                                                     ^^^^^^^^ reference ItemTouchHelper/Callback#
 
@@ -97,7 +97,7 @@ public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public final void onSwiped(ViewHolder viewHolder, int direction) {
-//                  ^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onSwiped(). public final onSwiped(unresolved_type viewHolder, int direction)
+//                  ^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onSwiped(). public final void onSwiped(unresolved_type viewHolder, int direction)
 //                           ^^^^^^^^^^ reference _root_/
 //                                      ^^^^^^^^^^ definition local10 unresolved_type viewHolder
 //                                                      ^^^^^^^^^ definition local11 int direction
@@ -112,7 +112,7 @@ public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback 
    * @see #onSwiped(ViewHolder, int)
    */
   protected abstract void onSwiped(EpoxyViewHolder viewHolder, int direction);
-//                        ^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onSwiped(+-1). protected abstract onSwiped(EpoxyViewHolder viewHolder, int direction)
+//                        ^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onSwiped(+-1). protected abstract void onSwiped(EpoxyViewHolder viewHolder, int direction)
 //                                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                                 ^^^^^^^^^^ definition local12 EpoxyViewHolder viewHolder
 //                                                                 ^^^^^^^^^ definition local13 int direction
@@ -262,7 +262,7 @@ public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public final void onSelectedChanged(ViewHolder viewHolder, int actionState) {
-//                  ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onSelectedChanged(). public final onSelectedChanged(unresolved_type viewHolder, int actionState)
+//                  ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onSelectedChanged(). public final void onSelectedChanged(unresolved_type viewHolder, int actionState)
 //                                    ^^^^^^^^^^ reference _root_/
 //                                               ^^^^^^^^^^ definition local32 unresolved_type viewHolder
 //                                                               ^^^^^^^^^^^ definition local33 int actionState
@@ -277,7 +277,7 @@ public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback 
    * @see #onSelectedChanged(ViewHolder, int)
    */
   protected void onSelectedChanged(EpoxyViewHolder viewHolder, int actionState) {
-//               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onSelectedChanged(+-1). protected onSelectedChanged(EpoxyViewHolder viewHolder, int actionState)
+//               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onSelectedChanged(+-1). protected void onSelectedChanged(EpoxyViewHolder viewHolder, int actionState)
 //                                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                                 ^^^^^^^^^^ definition local34 EpoxyViewHolder viewHolder
 //                                                                 ^^^^^^^^^^^ definition local35 int actionState
@@ -291,7 +291,7 @@ public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public final void onMoved(RecyclerView recyclerView, ViewHolder viewHolder, int fromPos,
-//                  ^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onMoved(). public final onMoved(unresolved_type recyclerView, unresolved_type viewHolder, int fromPos, unresolved_type target, int toPos, int x, int y)
+//                  ^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onMoved(). public final void onMoved(unresolved_type recyclerView, unresolved_type viewHolder, int fromPos, unresolved_type target, int toPos, int x, int y)
 //                          ^^^^^^^^^^^^ reference _root_/
 //                                       ^^^^^^^^^^^^ definition local36 unresolved_type recyclerView
 //                                                     ^^^^^^^^^^ reference _root_/
@@ -322,7 +322,7 @@ public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback 
    * @see #onMoved(RecyclerView, ViewHolder, int, ViewHolder, int, int, int)
    */
   protected void onMoved(RecyclerView recyclerView, EpoxyViewHolder viewHolder, int fromPos,
-//               ^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onMoved(+1). protected onMoved(unresolved_type recyclerView, EpoxyViewHolder viewHolder, int fromPos, EpoxyViewHolder target, int toPos, int x, int y)
+//               ^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onMoved(+1). protected void onMoved(unresolved_type recyclerView, EpoxyViewHolder viewHolder, int fromPos, EpoxyViewHolder target, int toPos, int x, int y)
 //                       ^^^^^^^^^^^^ reference _root_/
 //                                    ^^^^^^^^^^^^ definition local43 unresolved_type recyclerView
 //                                                  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
@@ -349,7 +349,7 @@ public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public final void clearView(RecyclerView recyclerView, ViewHolder viewHolder) {
-//                  ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(). public final clearView(unresolved_type recyclerView, unresolved_type viewHolder)
+//                  ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(). public final void clearView(unresolved_type recyclerView, unresolved_type viewHolder)
 //                            ^^^^^^^^^^^^ reference _root_/
 //                                         ^^^^^^^^^^^^ definition local50 unresolved_type recyclerView
 //                                                       ^^^^^^^^^^ reference _root_/
@@ -365,7 +365,7 @@ public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback 
    * @see #clearView(RecyclerView, ViewHolder)
    */
   protected void clearView(RecyclerView recyclerView, EpoxyViewHolder viewHolder) {
-//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(+1). protected clearView(unresolved_type recyclerView, EpoxyViewHolder viewHolder)
+//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(+1). protected void clearView(unresolved_type recyclerView, EpoxyViewHolder viewHolder)
 //                         ^^^^^^^^^^^^ reference _root_/
 //                                      ^^^^^^^^^^^^ definition local52 unresolved_type recyclerView
 //                                                    ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
@@ -380,7 +380,7 @@ public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public final void onChildDraw(Canvas c, RecyclerView recyclerView, ViewHolder viewHolder,
-//                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onChildDraw(). public final onChildDraw(unresolved_type c, unresolved_type recyclerView, unresolved_type viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive)
+//                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onChildDraw(). public final void onChildDraw(unresolved_type c, unresolved_type recyclerView, unresolved_type viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive)
 //                              ^^^^^^ reference _root_/
 //                                     ^ definition local54 unresolved_type c
 //                                        ^^^^^^^^^^^^ reference _root_/
@@ -411,7 +411,7 @@ public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback 
    * @see #onChildDraw(Canvas, RecyclerView, ViewHolder, float, float, int, boolean)
    */
   protected void onChildDraw(Canvas c, RecyclerView recyclerView, EpoxyViewHolder viewHolder,
-//               ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onChildDraw(+1). protected onChildDraw(unresolved_type c, unresolved_type recyclerView, EpoxyViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive)
+//               ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onChildDraw(+1). protected void onChildDraw(unresolved_type c, unresolved_type recyclerView, EpoxyViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive)
 //                           ^^^^^^ reference _root_/
 //                                  ^ definition local61 unresolved_type c
 //                                     ^^^^^^^^^^^^ reference _root_/
@@ -438,7 +438,7 @@ public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public final void onChildDrawOver(Canvas c, RecyclerView recyclerView, ViewHolder viewHolder,
-//                  ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onChildDrawOver(). public final onChildDrawOver(unresolved_type c, unresolved_type recyclerView, unresolved_type viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive)
+//                  ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onChildDrawOver(). public final void onChildDrawOver(unresolved_type c, unresolved_type recyclerView, unresolved_type viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive)
 //                                  ^^^^^^ reference _root_/
 //                                         ^ definition local68 unresolved_type c
 //                                            ^^^^^^^^^^^^ reference _root_/
@@ -469,7 +469,7 @@ public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback 
    * @see #onChildDrawOver(Canvas, RecyclerView, ViewHolder, float, float, int, boolean)
    */
   protected void onChildDrawOver(Canvas c, RecyclerView recyclerView, EpoxyViewHolder viewHolder,
-//               ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onChildDrawOver(+1). protected onChildDrawOver(unresolved_type c, unresolved_type recyclerView, EpoxyViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive)
+//               ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#onChildDrawOver(+1). protected void onChildDrawOver(unresolved_type c, unresolved_type recyclerView, EpoxyViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive)
 //                               ^^^^^^ reference _root_/
 //                                      ^ definition local75 unresolved_type c
 //                                         ^^^^^^^^^^^^ reference _root_/

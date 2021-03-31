@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Primitives {
 //           ^^^^^^^^^^ definition minimized/Primitives# public class Primitives
-//           ^^^^^^^^^^ definition minimized/Primitives#`<init>`(). public <init>()
+//           ^^^^^^^^^^ definition minimized/Primitives#`<init>`(). public void <init>()
   public static String app() {
 //              ^^^^^^ reference java/lang/String#
 //                     ^^^ definition minimized/Primitives#app(). public static String app()
@@ -58,4 +58,7 @@ public class Primitives {
 //                                      ^ reference local7
 //                                          ^ reference local8
   }
+
+  public static void test() {}
+//                   ^^^^ definition minimized/Primitives#test(). public static void test()
 }

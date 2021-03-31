@@ -73,7 +73,7 @@ class DiffHelper {
 
 
   DiffHelper(BaseEpoxyAdapter adapter, boolean immutableModels) {
-//^^^^^^ definition com/airbnb/epoxy/DiffHelper#`<init>`(). <init>(BaseEpoxyAdapter adapter, boolean immutableModels)
+//^^^^^^ definition com/airbnb/epoxy/DiffHelper#`<init>`(). void <init>(BaseEpoxyAdapter adapter, boolean immutableModels)
 //           ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
 //                            ^^^^^^^ definition local0 BaseEpoxyAdapter adapter
 //                                             ^^^^^^^^^^^^^^^ definition local1 boolean immutableModels
@@ -103,7 +103,7 @@ class DiffHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onChanged() {
-//              ^^^^^^^^^ definition local3 public onChanged()
+//              ^^^^^^^^^ definition local3 public void onChanged()
       throw new UnsupportedOperationException(
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1). 1:99
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#
@@ -113,7 +113,7 @@ class DiffHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeChanged(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^ definition local4 public onItemRangeChanged(int positionStart, int itemCount)
+//              ^^^^^^^^^^^^^^^^^^ definition local4 public void onItemRangeChanged(int positionStart, int itemCount)
 //                                     ^^^^^^^^^^^^^ definition local8 int positionStart
 //                                                        ^^^^^^^^^ definition local9 int itemCount
       for (int i = positionStart; i < positionStart + itemCount; i++) {
@@ -139,7 +139,7 @@ class DiffHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeInserted(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^^ definition local5 public onItemRangeInserted(int positionStart, int itemCount)
+//              ^^^^^^^^^^^^^^^^^^^ definition local5 public void onItemRangeInserted(int positionStart, int itemCount)
 //                                      ^^^^^^^^^^^^^ definition local11 int positionStart
 //                                                         ^^^^^^^^^ definition local12 int itemCount
       if (itemCount == 0) {
@@ -221,7 +221,7 @@ class DiffHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeRemoved(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^ definition local6 public onItemRangeRemoved(int positionStart, int itemCount)
+//              ^^^^^^^^^^^^^^^^^^ definition local6 public void onItemRangeRemoved(int positionStart, int itemCount)
 //                                     ^^^^^^^^^^^^^ definition local18 int positionStart
 //                                                        ^^^^^^^^^ definition local19 int itemCount
       if (itemCount == 0) {
@@ -277,7 +277,7 @@ class DiffHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
-//              ^^^^^^^^^^^^^^^^ definition local7 public onItemRangeMoved(int fromPosition, int toPosition, int itemCount)
+//              ^^^^^^^^^^^^^^^^ definition local7 public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount)
 //                                   ^^^^^^^^^^^^ definition local24 int fromPosition
 //                                                     ^^^^^^^^^^ definition local25 int toPosition
 //                                                                     ^^^^^^^^^ definition local26 int itemCount
@@ -352,7 +352,7 @@ class DiffHelper {
    * current list and the last list that was set.
    */
   void notifyModelChanges() {
-//     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#notifyModelChanges(). notifyModelChanges()
+//     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#notifyModelChanges(). void notifyModelChanges()
     UpdateOpHelper updateOpHelper = new UpdateOpHelper();
 //  ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                 ^^^^^^^^^^^^^^ definition local30 UpdateOpHelper updateOpHelper
@@ -379,7 +379,7 @@ class DiffHelper {
   }
 
   private void notifyChanges(UpdateOpHelper opHelper) {
-//             ^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#notifyChanges(). private notifyChanges(UpdateOpHelper opHelper)
+//             ^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#notifyChanges(). private void notifyChanges(UpdateOpHelper opHelper)
 //                           ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                                          ^^^^^^^^ definition local31 UpdateOpHelper opHelper
     for (UpdateOp op : opHelper.opList) {
@@ -515,7 +515,7 @@ class DiffHelper {
   }
 
   private void resetOldState() {
-//             ^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#resetOldState(). private resetOldState()
+//             ^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#resetOldState(). private void resetOldState()
     oldStateList.clear();
 //  ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
 //               ^^^^^ reference java/util/ArrayList#clear().
@@ -525,7 +525,7 @@ class DiffHelper {
   }
 
   private void prepareStateForDiff() {
-//             ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#prepareStateForDiff(). private prepareStateForDiff()
+//             ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#prepareStateForDiff(). private void prepareStateForDiff()
     // We use a list of the models as well as a map by their id,
     // so we can easily find them by both position and id
 
@@ -661,7 +661,7 @@ class DiffHelper {
    * Walking through it in order makes it easy to batch adjacent removals.
    */
   private void collectRemovals(UpdateOpHelper helper) {
-//             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectRemovals(). private collectRemovals(UpdateOpHelper helper)
+//             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectRemovals(). private void collectRemovals(UpdateOpHelper helper)
 //                             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                                            ^^^^^^ definition local46 UpdateOpHelper helper
     for (ModelState state : oldStateList) {
@@ -711,7 +711,7 @@ class DiffHelper {
    * list. Walking through it in order makes it easy to batch adjacent insertions.
    */
   private void collectInsertions(UpdateOpHelper helper) {
-//             ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectInsertions(). private collectInsertions(UpdateOpHelper helper)
+//             ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectInsertions(). private void collectInsertions(UpdateOpHelper helper)
 //                               ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                                              ^^^^^^ definition local48 UpdateOpHelper helper
     Iterator<ModelState> oldItemIterator = oldStateList.iterator();
@@ -757,7 +757,7 @@ class DiffHelper {
    * Check if any items have had their values changed, batching if possible.
    */
   private void collectChanges(UpdateOpHelper helper) {
-//             ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectChanges(). private collectChanges(UpdateOpHelper helper)
+//             ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectChanges(). private void collectChanges(UpdateOpHelper helper)
 //                            ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                                           ^^^^^^ definition local52 UpdateOpHelper helper
     for (ModelState newItem : currentStateList) {
@@ -829,7 +829,7 @@ class DiffHelper {
    * Check which items have had a position changed. Recyclerview does not support batching these.
    */
   private void collectMoves(UpdateOpHelper helper) {
-//             ^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectMoves(). private collectMoves(UpdateOpHelper helper)
+//             ^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectMoves(). private void collectMoves(UpdateOpHelper helper)
 //                          ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                                         ^^^^^^ definition local56 UpdateOpHelper helper
     // This walks through both the new and old list simultaneous and checks for position changes.
@@ -1018,7 +1018,7 @@ class DiffHelper {
    * we know which ones to apply next time.
    */
   private void updateItemPosition(ModelState item, List<UpdateOp> moveOps) {
-//             ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#updateItemPosition(). private updateItemPosition(ModelState item, List<UpdateOp> moveOps)
+//             ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#updateItemPosition(). private void updateItemPosition(ModelState item, List<UpdateOp> moveOps)
 //                                ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                                           ^^^^ definition local62 ModelState item
 //                                                 ^^^^ reference java/util/List#

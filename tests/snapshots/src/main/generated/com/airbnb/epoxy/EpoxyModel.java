@@ -128,7 +128,7 @@ public abstract class EpoxyModel<T> {
 //                                           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#spanSizeOverride. private SpanSizeOverrideCallback spanSizeOverride
 
   protected EpoxyModel(long id) {
-//          ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#`<init>`(). protected <init>(long id)
+//          ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#`<init>`(). protected void <init>(long id)
 //                          ^^ definition local0 long id
     id(id);
 //  ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
@@ -136,7 +136,7 @@ public abstract class EpoxyModel<T> {
   }
 
   public EpoxyModel() {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#`<init>`(+1). public <init>()
+//       ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#`<init>`(+1). public void <init>()
     this(idCounter--);
 //  ^^^^ reference com/airbnb/epoxy/EpoxyModel#`<init>`().
 //       ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#idCounter.
@@ -189,7 +189,7 @@ public abstract class EpoxyModel<T> {
    * fields to ensure proper recycling.
    */
   public void bind(@NonNull T view) {
-//            ^^^^ definition com/airbnb/epoxy/EpoxyModel#bind(). public bind(T view)
+//            ^^^^ definition com/airbnb/epoxy/EpoxyModel#bind(). public void bind(T view)
 //                  ^^^^^^^ reference androidx/annotation/NonNull#
 //                          ^ reference com/airbnb/epoxy/EpoxyModel#[T]
 //                            ^^^^ definition local2 T view
@@ -205,7 +205,7 @@ public abstract class EpoxyModel<T> {
    * an {@link EpoxyAdapter}
    */
   public void bind(@NonNull T view, @NonNull List<Object> payloads) {
-//            ^^^^ definition com/airbnb/epoxy/EpoxyModel#bind(+1). public bind(T view, List<Object> payloads)
+//            ^^^^ definition com/airbnb/epoxy/EpoxyModel#bind(+1). public void bind(T view, List<Object> payloads)
 //                  ^^^^^^^ reference androidx/annotation/NonNull#
 //                          ^ reference com/airbnb/epoxy/EpoxyModel#[T]
 //                            ^^^^ definition local3 T view
@@ -250,7 +250,7 @@ public abstract class EpoxyModel<T> {
    *                             recyclerview change payloads.
    */
   public void bind(@NonNull T view, @NonNull EpoxyModel<?> previouslyBoundModel) {
-//            ^^^^ definition com/airbnb/epoxy/EpoxyModel#bind(+2). public bind(T view, EpoxyModel<?> previouslyBoundModel)
+//            ^^^^ definition com/airbnb/epoxy/EpoxyModel#bind(+2). public void bind(T view, EpoxyModel<?> previouslyBoundModel)
 //                  ^^^^^^^ reference androidx/annotation/NonNull#
 //                          ^ reference com/airbnb/epoxy/EpoxyModel#[T]
 //                            ^^^^ definition local5 T view
@@ -273,7 +273,7 @@ public abstract class EpoxyModel<T> {
    * @see EpoxyAdapter#onViewRecycled(EpoxyViewHolder)
    */
   public void unbind(@NonNull T view) {
-//            ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#unbind(). public unbind(T view)
+//            ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#unbind(). public void unbind(T view)
 //                    ^^^^^^^ reference androidx/annotation/NonNull#
 //                            ^ reference com/airbnb/epoxy/EpoxyModel#[T]
 //                              ^^^^ definition local7 T view
@@ -285,7 +285,7 @@ public abstract class EpoxyModel<T> {
    * @see OnVisibilityStateChanged annotation
    */
   public void onVisibilityStateChanged(@Visibility int visibilityState, @NonNull T view) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#onVisibilityStateChanged(). public onVisibilityStateChanged(int visibilityState, T view)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#onVisibilityStateChanged(). public void onVisibilityStateChanged(int visibilityState, T view)
 //                                      ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#Visibility#
 //                                                     ^^^^^^^^^^^^^^^ definition local8 int visibilityState
 //                                                                       ^^^^^^^ reference androidx/annotation/NonNull#
@@ -299,7 +299,7 @@ public abstract class EpoxyModel<T> {
    * @see OnVisibilityChanged annotation
    */
   public void onVisibilityChanged(
-//            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#onVisibilityChanged(). public onVisibilityChanged(float percentVisibleHeight, float percentVisibleWidth, int visibleHeight, int visibleWidth, T view)
+//            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#onVisibilityChanged(). public void onVisibilityChanged(float percentVisibleHeight, float percentVisibleWidth, int visibleHeight, int visibleWidth, T view)
       @FloatRange(from = 0.0f, to = 100.0f) float percentVisibleHeight,
 //     ^^^^^^^^^^ reference androidx/annotation/FloatRange#
 //                ^^^^ reference androidx/annotation/FloatRange#from().
@@ -596,7 +596,7 @@ public abstract class EpoxyModel<T> {
    * EpoxyController#buildModels()}.
    */
   public void addTo(@NonNull EpoxyController controller) {
-//            ^^^^^ definition com/airbnb/epoxy/EpoxyModel#addTo(). public addTo(EpoxyController controller)
+//            ^^^^^ definition com/airbnb/epoxy/EpoxyModel#addTo(). public void addTo(EpoxyController controller)
 //                   ^^^^^^^ reference androidx/annotation/NonNull#
 //                           ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                                           ^^^^^^^^^^ definition local31 EpoxyController controller
@@ -611,7 +611,7 @@ public abstract class EpoxyModel<T> {
    * {@link EpoxyController#buildModels()}.
    */
   public void addIf(boolean condition, @NonNull EpoxyController controller) {
-//            ^^^^^ definition com/airbnb/epoxy/EpoxyModel#addIf(). public addIf(boolean condition, EpoxyController controller)
+//            ^^^^^ definition com/airbnb/epoxy/EpoxyModel#addIf(). public void addIf(boolean condition, EpoxyController controller)
 //                          ^^^^^^^^^ definition local32 boolean condition
 //                                      ^^^^^^^ reference androidx/annotation/NonNull#
 //                                              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
@@ -640,7 +640,7 @@ public abstract class EpoxyModel<T> {
    * called from inside {@link EpoxyController#buildModels()}.
    */
   public void addIf(@NonNull AddPredicate predicate, @NonNull EpoxyController controller) {
-//            ^^^^^ definition com/airbnb/epoxy/EpoxyModel#addIf(+1). public addIf(AddPredicate predicate, EpoxyController controller)
+//            ^^^^^ definition com/airbnb/epoxy/EpoxyModel#addIf(+1). public void addIf(AddPredicate predicate, EpoxyController controller)
 //                   ^^^^^^^ reference androidx/annotation/NonNull#
 //                           ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#AddPredicate#
 //                                        ^^^^^^^^^ definition local34 AddPredicate predicate
@@ -668,7 +668,7 @@ public abstract class EpoxyModel<T> {
    * "validateEpoxyModelUsage" is enabled and the model is used with an {@link EpoxyController}.
    */
   protected final void addWithDebugValidation(@NonNull EpoxyController controller) {
-//                     ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#addWithDebugValidation(). protected final addWithDebugValidation(EpoxyController controller)
+//                     ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#addWithDebugValidation(). protected final void addWithDebugValidation(EpoxyController controller)
 //                                             ^^^^^^^ reference androidx/annotation/NonNull#
 //                                                     ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                                                                     ^^^^^^^^^^ definition local36 EpoxyController controller
@@ -718,7 +718,7 @@ public abstract class EpoxyModel<T> {
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
         public void onInterceptorsStarted(EpoxyController controller) {
-//                  ^^^^^^^^^^^^^^^^^^^^^ definition local39 public onInterceptorsStarted(EpoxyController controller)
+//                  ^^^^^^^^^^^^^^^^^^^^^ definition local39 public void onInterceptorsStarted(EpoxyController controller)
 //                                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                                                        ^^^^^^^^^^ definition local41 EpoxyController controller
           currentlyInInterceptors = true;
@@ -728,7 +728,7 @@ public abstract class EpoxyModel<T> {
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
         public void onInterceptorsFinished(EpoxyController controller) {
-//                  ^^^^^^^^^^^^^^^^^^^^^^ definition local40 public onInterceptorsFinished(EpoxyController controller)
+//                  ^^^^^^^^^^^^^^^^^^^^^^ definition local40 public void onInterceptorsFinished(EpoxyController controller)
 //                                         ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                                                         ^^^^^^^^^^ definition local42 EpoxyController controller
           hashCodeWhenAdded = EpoxyModel.this.hashCode();
@@ -760,7 +760,7 @@ public abstract class EpoxyModel<T> {
    * implicit adding is enabled.
    */
   protected final void onMutation() {
-//                     ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#onMutation(). protected final onMutation()
+//                     ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#onMutation(). protected final void onMutation()
     // The model may be added to multiple controllers, in which case if it was already diffed
     // and added to an adapter in one controller we don't want to even allow interceptors
     // from changing the model in a different controller
@@ -824,7 +824,7 @@ public abstract class EpoxyModel<T> {
    * an object that is set on the model.
    */
   protected final void validateStateHasNotChangedSinceAdded(String descriptionOfChange,
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#validateStateHasNotChangedSinceAdded(). protected final validateStateHasNotChangedSinceAdded(String descriptionOfChange, int modelPosition)
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#validateStateHasNotChangedSinceAdded(). protected final void validateStateHasNotChangedSinceAdded(String descriptionOfChange, int modelPosition)
 //                                                          ^^^^^^ reference java/lang/String#
 //                                                                 ^^^^^^^^^^^^^^^^^^^ definition local45 String descriptionOfChange
       int modelPosition) {
@@ -1064,7 +1064,7 @@ public abstract class EpoxyModel<T> {
    * @see EpoxyAdapter#onViewAttachedToWindow(androidx.recyclerview.widget.RecyclerView.ViewHolder)
    */
   public void onViewAttachedToWindow(@NonNull T view) {
-//            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#onViewAttachedToWindow(). public onViewAttachedToWindow(T view)
+//            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#onViewAttachedToWindow(). public void onViewAttachedToWindow(T view)
 //                                    ^^^^^^^ reference androidx/annotation/NonNull#
 //                                            ^ reference com/airbnb/epoxy/EpoxyModel#[T]
 //                                              ^^^^ definition local62 T view
@@ -1078,7 +1078,7 @@ public abstract class EpoxyModel<T> {
    * .ViewHolder)
    */
   public void onViewDetachedFromWindow(@NonNull T view) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#onViewDetachedFromWindow(). public onViewDetachedFromWindow(T view)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#onViewDetachedFromWindow(). public void onViewDetachedFromWindow(T view)
 //                                      ^^^^^^^ reference androidx/annotation/NonNull#
 //                                              ^ reference com/airbnb/epoxy/EpoxyModel#[T]
 //                                                ^^^^ definition local63 T view

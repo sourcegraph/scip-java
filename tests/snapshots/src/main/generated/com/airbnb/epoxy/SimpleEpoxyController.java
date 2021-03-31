@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class SimpleEpoxyController extends EpoxyController {
 //           ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController# public class SimpleEpoxyController extends EpoxyController
-//           ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#`<init>`(). public <init>()
+//           ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#`<init>`(). public void <init>()
 //                                         ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
   private List<? extends EpoxyModel<?>> currentModels;
 //        ^^^^ reference java/util/List#
@@ -25,7 +25,7 @@ public class SimpleEpoxyController extends EpoxyController {
    * .
    */
   public void setModels(List<? extends EpoxyModel<?>> models) {
-//            ^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#setModels(). public setModels(List<? extends EpoxyModel<?>> models)
+//            ^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#setModels(). public void setModels(List<? extends EpoxyModel<?>> models)
 //                      ^^^^ reference java/util/List#
 //                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                    ^^^^^^ definition local0 List<? extends EpoxyModel<?>> models
@@ -43,7 +43,7 @@ public class SimpleEpoxyController extends EpoxyController {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public final void requestModelBuild() {
-//                  ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#requestModelBuild(). public final requestModelBuild()
+//                  ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#requestModelBuild(). public final void requestModelBuild()
     if (!insideSetModels) {
 //       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/SimpleEpoxyController#insideSetModels.
       throw new IllegalEpoxyUsage(
@@ -59,7 +59,7 @@ public class SimpleEpoxyController extends EpoxyController {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected final void buildModels() {
-//                     ^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#buildModels(). protected final buildModels()
+//                     ^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#buildModels(). protected final void buildModels()
     if (!isBuildingModels()) {
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#isBuildingModels().
       throw new IllegalEpoxyUsage(

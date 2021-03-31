@@ -49,7 +49,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 
   ModelList(int expectedModelCount) {
-//^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`(). <init>(int expectedModelCount)
+//^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`(). void <init>(int expectedModelCount)
 //              ^^^^^^^^^^^^^^^^^^ definition local0 int expectedModelCount
     super(expectedModelCount);
 //  ^^^^^ reference java/util/ArrayList#`<init>`().
@@ -57,18 +57,18 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   ModelList() {
-//^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`(+1). <init>()
+//^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`(+1). void <init>()
 
   }
 
   interface ModelListObserver {
 //          ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver# abstract static interface ModelListObserver
     void onItemRangeInserted(int positionStart, int itemCount);
-//       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeInserted(). public abstract onItemRangeInserted(int positionStart, int itemCount)
+//       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeInserted(). public abstract void onItemRangeInserted(int positionStart, int itemCount)
 //                               ^^^^^^^^^^^^^ definition local1 int positionStart
 //                                                  ^^^^^^^^^ definition local2 int itemCount
     void onItemRangeRemoved(int positionStart, int itemCount);
-//       ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeRemoved(). public abstract onItemRangeRemoved(int positionStart, int itemCount)
+//       ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeRemoved(). public abstract void onItemRangeRemoved(int positionStart, int itemCount)
 //                              ^^^^^^^^^^^^^ definition local3 int positionStart
 //                                                 ^^^^^^^^^ definition local4 int itemCount
   }
@@ -80,7 +80,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                          ^^^^^^^^ definition com/airbnb/epoxy/ModelList#observer. private ModelListObserver observer
 
   void pauseNotifications() {
-//     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#pauseNotifications(). pauseNotifications()
+//     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#pauseNotifications(). void pauseNotifications()
     if (notificationsPaused) {
 //      ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notificationsPaused.
       throw new IllegalStateException("Notifications already paused");
@@ -92,7 +92,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   void resumeNotifications() {
-//     ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#resumeNotifications(). resumeNotifications()
+//     ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#resumeNotifications(). void resumeNotifications()
     if (!notificationsPaused) {
 //       ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notificationsPaused.
       throw new IllegalStateException("Notifications already resumed");
@@ -104,7 +104,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   void setObserver(ModelListObserver observer) {
-//     ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#setObserver(). setObserver(ModelListObserver observer)
+//     ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#setObserver(). void setObserver(ModelListObserver observer)
 //                 ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
 //                                   ^^^^^^^^ definition local5 ModelListObserver observer
     this.observer = observer;
@@ -114,7 +114,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   private void notifyInsertion(int positionStart, int itemCount) {
-//             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#notifyInsertion(). private notifyInsertion(int positionStart, int itemCount)
+//             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#notifyInsertion(). private void notifyInsertion(int positionStart, int itemCount)
 //                                 ^^^^^^^^^^^^^ definition local6 int positionStart
 //                                                    ^^^^^^^^^ definition local7 int itemCount
     if (!notificationsPaused && observer != null) {
@@ -129,7 +129,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   private void notifyRemoval(int positionStart, int itemCount) {
-//             ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#notifyRemoval(). private notifyRemoval(int positionStart, int itemCount)
+//             ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#notifyRemoval(). private void notifyRemoval(int positionStart, int itemCount)
 //                               ^^^^^^^^^^^^^ definition local8 int positionStart
 //                                                  ^^^^^^^^^ definition local9 int itemCount
     if (!notificationsPaused && observer != null) {
@@ -194,7 +194,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void add(int index, EpoxyModel<?> element) {
-//            ^^^ definition com/airbnb/epoxy/ModelList#add(+1). public add(int index, EpoxyModel<?> element)
+//            ^^^ definition com/airbnb/epoxy/ModelList#add(+1). public void add(int index, EpoxyModel<?> element)
 //                    ^^^^^ definition local14 int index
 //                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                         ^^^^^^^ definition local15 EpoxyModel<?> element
@@ -290,7 +290,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void clear() {
-//            ^^^^^ definition com/airbnb/epoxy/ModelList#clear(). public clear()
+//            ^^^^^ definition com/airbnb/epoxy/ModelList#clear(). public void clear()
     if (!isEmpty()) {
 //       ^^^^^^^ reference java/util/ArrayList#isEmpty().
       notifyRemoval(0, size());
@@ -305,7 +305,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected void removeRange(int fromIndex, int toIndex) {
-//               ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#removeRange(). protected removeRange(int fromIndex, int toIndex)
+//               ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#removeRange(). protected void removeRange(int fromIndex, int toIndex)
 //                               ^^^^^^^^^ definition local22 int fromIndex
 //                                              ^^^^^^^ definition local23 int toIndex
     if (fromIndex == toIndex) {
@@ -415,7 +415,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
    */
   private class Itr implements Iterator<EpoxyModel<?>> {
 //              ^^^ definition com/airbnb/epoxy/ModelList#Itr# private class Itr extends Iterator<EpoxyModel<?>>
-//              ^^^ definition com/airbnb/epoxy/ModelList#Itr#`<init>`(). private <init>()
+//              ^^^ definition com/airbnb/epoxy/ModelList#Itr#`<init>`(). private void <init>()
 //                             ^^^^^^^^ reference java/util/Iterator#
 //                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
     int cursor;       // index of next element to return
@@ -457,7 +457,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     }
 
     public void remove() {
-//              ^^^^^^ definition com/airbnb/epoxy/ModelList#Itr#remove(). public remove()
+//              ^^^^^^ definition com/airbnb/epoxy/ModelList#Itr#remove(). public void remove()
       if (lastRet < 0) {
 //        ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
         throw new IllegalStateException();
@@ -491,7 +491,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     }
 
     final void checkForComodification() {
-//             ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#Itr#checkForComodification(). final checkForComodification()
+//             ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#Itr#checkForComodification(). final void checkForComodification()
       if (modCount != expectedModCount) {
 //        ^^^^^^^^ reference java/util/AbstractList#modCount.
 //                    ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#expectedModCount.
@@ -542,7 +542,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                                             ^^^^^^^^^^^^ reference java/util/ListIterator#
 //                                                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
     ListItr(int index) {
-//  ^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr#`<init>`(). <init>(int index)
+//  ^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr#`<init>`(). void <init>(int index)
 //              ^^^^^ definition local33 int index
       cursor = index;
 //    ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
@@ -598,7 +598,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     }
 
     public void set(EpoxyModel<?> e) {
-//              ^^^ definition com/airbnb/epoxy/ModelList#ListItr#set(). public set(EpoxyModel<?> e)
+//              ^^^ definition com/airbnb/epoxy/ModelList#ListItr#set(). public void set(EpoxyModel<?> e)
 //                  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                ^ definition local35 EpoxyModel<?> e
       if (lastRet < 0) {
@@ -627,7 +627,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     }
 
     public void add(EpoxyModel<?> e) {
-//              ^^^ definition com/airbnb/epoxy/ModelList#ListItr#add(). public add(EpoxyModel<?> e)
+//              ^^^ definition com/airbnb/epoxy/ModelList#ListItr#add(). public void add(EpoxyModel<?> e)
 //                  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                ^ definition local37 EpoxyModel<?> e
       checkForComodification();
@@ -729,7 +729,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                ^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#end. private int end
 
       SubListIterator(ListIterator<EpoxyModel<?>> it, SubList list, int offset, int length) {
-//    ^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#`<init>`(). <init>(ListIterator<EpoxyModel<?>> it, SubList list, int offset, int length)
+//    ^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#`<init>`(). void <init>(ListIterator<EpoxyModel<?>> it, SubList list, int offset, int length)
 //                    ^^^^^^^^^^^^ reference java/util/ListIterator#
 //                                 ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                ^^ definition local42 ListIterator<EpoxyModel<?>> it
@@ -753,7 +753,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
       }
 
       public void add(EpoxyModel<?> object) {
-//                ^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#add(). public add(EpoxyModel<?> object)
+//                ^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#add(). public void add(EpoxyModel<?> object)
 //                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                  ^^^^^^ definition local46 EpoxyModel<?> object
         iterator.add(object);
@@ -840,7 +840,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
       }
 
       public void remove() {
-//                ^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#remove(). public remove()
+//                ^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#remove(). public void remove()
         iterator.remove();
 //      ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
 //               ^^^^^^ reference java/util/ListIterator#remove().
@@ -852,7 +852,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
       }
 
       public void set(EpoxyModel<?> object) {
-//                ^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#set(). public set(EpoxyModel<?> object)
+//                ^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#set(). public void set(EpoxyModel<?> object)
 //                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                  ^^^^^^ definition local48 EpoxyModel<?> object
         iterator.set(object);
@@ -863,7 +863,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     }
 
     SubList(ModelList list, int start, int end) {
-//  ^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#`<init>`(). <init>(ModelList list, int start, int end)
+//  ^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#`<init>`(). void <init>(ModelList list, int start, int end)
 //          ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
 //                    ^^^^ definition local49 ModelList list
 //                              ^^^^^ definition local50 int start
@@ -887,7 +887,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void add(int location, EpoxyModel<?> object) {
-//              ^^^ definition com/airbnb/epoxy/ModelList#SubList#add(). public add(int location, EpoxyModel<?> object)
+//              ^^^ definition com/airbnb/epoxy/ModelList#SubList#add(). public void add(int location, EpoxyModel<?> object)
 //                      ^^^^^^^^ definition local52 int location
 //                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                              ^^^^^^ definition local53 EpoxyModel<?> object
@@ -1127,7 +1127,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     protected void removeRange(int start, int end) {
-//                 ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#removeRange(). protected removeRange(int start, int end)
+//                 ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#removeRange(). protected void removeRange(int start, int end)
 //                                 ^^^^^ definition local63 int start
 //                                            ^^^ definition local64 int end
       if (start != end) {
@@ -1209,7 +1209,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     }
 
     void sizeChanged(boolean increment) {
-//       ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#sizeChanged(). sizeChanged(boolean increment)
+//       ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#sizeChanged(). void sizeChanged(boolean increment)
 //                           ^^^^^^^^^ definition local67 boolean increment
       if (increment) {
 //        ^^^^^^^^^ reference local67

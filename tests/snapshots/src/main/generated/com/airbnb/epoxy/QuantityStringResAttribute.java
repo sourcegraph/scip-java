@@ -32,7 +32,7 @@ public class QuantityStringResAttribute {
 //                                 ^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#formatArgs. private final Object[] formatArgs
 
   public QuantityStringResAttribute(@PluralsRes int id, int quantity,
-//       ^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#`<init>`(). public <init>(int id, int quantity, Object[] formatArgs)
+//       ^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#`<init>`(). public void <init>(int id, int quantity, Object[] formatArgs)
 //                                   ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
 //                                                  ^^ definition local0 int id
 //                                                          ^^^^^^^^ definition local1 int quantity
@@ -55,7 +55,7 @@ public class QuantityStringResAttribute {
   }
 
   public QuantityStringResAttribute(int id, int quantity) {
-//       ^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#`<init>`(+1). public <init>(int id, int quantity)
+//       ^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#`<init>`(+1). public void <init>(int id, int quantity)
 //                                      ^^ definition local3 int id
 //                                              ^^^^^^^^ definition local4 int quantity
     this(id, quantity, null);

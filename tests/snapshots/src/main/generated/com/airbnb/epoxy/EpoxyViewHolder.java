@@ -78,7 +78,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //                   ^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#parent. private unresolved_type parent
 
   public EpoxyViewHolder(ViewParent parent, View view, boolean saveInitialState) {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#`<init>`(). public <init>(unresolved_type parent, unresolved_type view, boolean saveInitialState)
+//       ^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#`<init>`(). public void <init>(unresolved_type parent, unresolved_type view, boolean saveInitialState)
 //                       ^^^^^^^^^^ reference _root_/
 //                                  ^^^^^^ definition local0 unresolved_type parent
 //                                          ^^^^ reference _root_/
@@ -108,7 +108,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   }
 
   void restoreInitialViewState() {
-//     ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#restoreInitialViewState(). restoreInitialViewState()
+//     ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#restoreInitialViewState(). void restoreInitialViewState()
     if (initialViewState != null) {
 //      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#initialViewState.
       initialViewState.restore(itemView);
@@ -119,7 +119,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   }
 
   public void bind(@SuppressWarnings("rawtypes") EpoxyModel model,
-//            ^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#bind(). public bind(EpoxyModel model, EpoxyModel<?> previouslyBoundModel, List<Object> payloads, int position)
+//            ^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#bind(). public void bind(EpoxyModel model, EpoxyModel<?> previouslyBoundModel, List<Object> payloads, int position)
 //                  ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 //                                               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                          ^^^^^ definition local3 EpoxyModel model
@@ -224,7 +224,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   }
 
   public void unbind() {
-//            ^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#unbind(). public unbind()
+//            ^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#unbind(). public void unbind()
     assertBound();
 //  ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#assertBound().
     // noinspection unchecked
@@ -240,7 +240,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   }
 
   public void visibilityStateChanged(@Visibility int visibilityState) {
-//            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#visibilityStateChanged(). public visibilityStateChanged(int visibilityState)
+//            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#visibilityStateChanged(). public void visibilityStateChanged(int visibilityState)
 //                                    ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#Visibility#
 //                                                   ^^^^^^^^^^^^^^^ definition local7 int visibilityState
     assertBound();
@@ -254,7 +254,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   }
 
   public void visibilityChanged(
-//            ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#visibilityChanged(). public visibilityChanged(float percentVisibleHeight, float percentVisibleWidth, int visibleHeight, int visibleWidth)
+//            ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#visibilityChanged(). public void visibilityChanged(float percentVisibleHeight, float percentVisibleWidth, int visibleHeight, int visibleWidth)
       @FloatRange(from = 0.0f, to = 100.0f) float percentVisibleHeight,
 //     ^^^^^^^^^^ reference androidx/annotation/FloatRange#
 //                ^^^^ reference androidx/annotation/FloatRange#from().
@@ -315,7 +315,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   }
 
   private void assertBound() {
-//             ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#assertBound(). private assertBound()
+//             ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#assertBound(). private void assertBound()
     if (epoxyModel == null) {
 //      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#epoxyModel.
       throw new IllegalStateException("This holder is not currently bound.");

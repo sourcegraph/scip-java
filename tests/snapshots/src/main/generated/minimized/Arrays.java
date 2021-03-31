@@ -2,7 +2,7 @@ package minimized;
 
 public class Arrays {
 //           ^^^^^^ definition minimized/Arrays# public class Arrays
-//           ^^^^^^ definition minimized/Arrays#`<init>`(). public <init>()
+//           ^^^^^^ definition minimized/Arrays#`<init>`(). public void <init>()
   public static String app() {
 //              ^^^^^^ reference java/lang/String#
 //                     ^^^ definition minimized/Arrays#app(). public static String app()

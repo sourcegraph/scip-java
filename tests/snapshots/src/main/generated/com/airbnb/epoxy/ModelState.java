@@ -3,7 +3,7 @@ package com.airbnb.epoxy;
 /** Helper to store relevant information about a model that we need to determine if it changed. */
 class ModelState {
 //    ^^^^^^^^^^ definition com/airbnb/epoxy/ModelState# class ModelState
-//    ^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#`<init>`(). <init>()
+//    ^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#`<init>`(). void <init>()
   long id;
 //     ^^ definition com/airbnb/epoxy/ModelState#id. long id
   int hashCode;
@@ -86,7 +86,7 @@ class ModelState {
    * inserted item in the old list.
    */
   void pairWithSelf() {
-//     ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#pairWithSelf(). pairWithSelf()
+//     ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelState#pairWithSelf(). void pairWithSelf()
     if (pair != null) {
 //      ^^^^ reference com/airbnb/epoxy/ModelState#pair.
       throw new IllegalStateException("Already paired.");

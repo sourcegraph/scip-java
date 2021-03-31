@@ -6,9 +6,9 @@ package minimized;
 //                            ^^^^^^ reference minimized/Annotations#format().
 public class MinimizedJavaMain {
 //           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain# public class MinimizedJavaMain
-//           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain#`<init>`(). public <init>()
+//           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain#`<init>`(). public void <init>()
   public static void main(String[] args) {
-//                   ^^^^ definition minimized/MinimizedJavaMain#main(). public static main(String[] args)
+//                   ^^^^ definition minimized/MinimizedJavaMain#main(). public static void main(String[] args)
 //                        ^^^^^^ reference java/lang/String#
 //                                 ^^^^ definition local0 String[] args
     TypeVariables.app(new TypeVariables.CT());

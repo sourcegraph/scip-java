@@ -64,11 +64,11 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                                            ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
 //                                                                  ^^^^^^^^^^ reference _root_/
   ViewHolderState() {
-//^^^^^^ definition com/airbnb/epoxy/ViewHolderState#`<init>`(). <init>()
+//^^^^^^ definition com/airbnb/epoxy/ViewHolderState#`<init>`(). void <init>()
   }
 
   private ViewHolderState(int size) {
-//        ^^^^^^ definition com/airbnb/epoxy/ViewHolderState#`<init>`(+1). private <init>(int size)
+//        ^^^^^^ definition com/airbnb/epoxy/ViewHolderState#`<init>`(+1). private void <init>(int size)
 //                            ^^^^ definition local0 int size
     super(size);
 //  ^^^^^ reference androidx/collection/LongSparseArray#`<init>`(+1).
@@ -85,7 +85,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void writeToParcel(Parcel dest, int flags) {
-//            ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#writeToParcel(). public writeToParcel(unresolved_type dest, int flags)
+//            ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#writeToParcel(). public void writeToParcel(unresolved_type dest, int flags)
 //                          ^^^^^^ reference _root_/
 //                                 ^^^^ definition local1 unresolved_type dest
 //                                           ^^^^^ definition local2 int flags
@@ -189,7 +189,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
   }
 
   public void save(Collection<EpoxyViewHolder> holders) {
-//            ^^^^ definition com/airbnb/epoxy/ViewHolderState#save(). public save(Collection<EpoxyViewHolder> holders)
+//            ^^^^ definition com/airbnb/epoxy/ViewHolderState#save(). public void save(Collection<EpoxyViewHolder> holders)
 //                 ^^^^^^^^^^ reference java/util/Collection#
 //                            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                             ^^^^^^^ definition local16 Collection<EpoxyViewHolder> holders
@@ -205,7 +205,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 
   /** Save the state of the view bound to the given holder. */
   public void save(EpoxyViewHolder holder) {
-//            ^^^^ definition com/airbnb/epoxy/ViewHolderState#save(+1). public save(EpoxyViewHolder holder)
+//            ^^^^ definition com/airbnb/epoxy/ViewHolderState#save(+1). public void save(EpoxyViewHolder holder)
 //                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                 ^^^^^^ definition local18 EpoxyViewHolder holder
     if (!holder.getModel().shouldSaveViewState()) {
@@ -249,7 +249,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
    * here.
    */
   public void restore(EpoxyViewHolder holder) {
-//            ^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#restore(). public restore(EpoxyViewHolder holder)
+//            ^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#restore(). public void restore(EpoxyViewHolder holder)
 //                    ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                    ^^^^^^ definition local20 EpoxyViewHolder holder
     if (!holder.getModel().shouldSaveViewState()) {
@@ -292,11 +292,11 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                                                                         ^^^^^^^^^^ reference _root_/
 
     ViewState() {
-//  ^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`(). <init>()
+//  ^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`(). void <init>()
     }
 
     private ViewState(int size, int[] keys, Parcelable[] values) {
-//          ^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`(+1). private <init>(int size, int[] keys, unresolved_type[] values)
+//          ^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`(+1). private void <init>(int size, int[] keys, unresolved_type[] values)
 //                        ^^^^ definition local22 int size
 //                                    ^^^^ definition local23 int[] keys
 //                                          ^^^^^^^^^^ reference _root_/
@@ -318,7 +318,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
     }
 
     public void save(View view) {
-//              ^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#save(). public save(unresolved_type view)
+//              ^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#save(). public void save(unresolved_type view)
 //                   ^^^^ reference _root_/
 //                        ^^^^ definition local26 unresolved_type view
       int originalId = view.getId();
@@ -340,7 +340,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
     }
 
     public void restore(View view) {
-//              ^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#restore(). public restore(unresolved_type view)
+//              ^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#restore(). public void restore(unresolved_type view)
 //                      ^^^^ reference _root_/
 //                           ^^^^ definition local28 unresolved_type view
       int originalId = view.getId();
@@ -368,7 +368,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
      * saving and restoring state.
      */
     private void setIdIfNoneExists(View view) {
-//               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#setIdIfNoneExists(). private setIdIfNoneExists(unresolved_type view)
+//               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#setIdIfNoneExists(). private void setIdIfNoneExists(unresolved_type view)
 //                                 ^^^^ reference _root_/
 //                                      ^^^^ definition local30 unresolved_type view
       if (view.getId() == View.NO_ID) {
@@ -395,7 +395,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void writeToParcel(Parcel parcel, int flags) {
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#writeToParcel(). public writeToParcel(unresolved_type parcel, int flags)
+//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#writeToParcel(). public void writeToParcel(unresolved_type parcel, int flags)
 //                            ^^^^^^ reference _root_/
 //                                   ^^^^^^ definition local31 unresolved_type parcel
 //                                               ^^^^^ definition local32 int flags

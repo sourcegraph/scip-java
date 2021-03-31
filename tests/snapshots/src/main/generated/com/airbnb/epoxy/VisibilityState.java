@@ -18,7 +18,7 @@ import androidx.annotation.IntDef;
 
 public final class VisibilityState {
 //                 ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState# public final class VisibilityState
-//                 ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#`<init>`(). public <init>()
+//                 ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#`<init>`(). public void <init>()
 
   @Retention(RetentionPolicy.SOURCE)
 // ^^^^^^^^^ reference java/lang/annotation/Retention#

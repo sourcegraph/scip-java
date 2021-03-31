@@ -52,7 +52,7 @@ public @interface ModelProp {
 
   enum Option {
 //     ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option# public enum Option
-//     ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#`<init>`(). private <init>()
+//     ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#`<init>`(). private void <init>()
     /**
      * By default every prop's hashCode and equals method is called when determining the
      * model's state. This option can be used to exclude an prop's hashCode/equals from

@@ -135,7 +135,7 @@ public abstract class BaseEpoxyAdapter
   };
 
   public BaseEpoxyAdapter() {
-//       ^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#`<init>`(). public <init>()
+//       ^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#`<init>`(). public void <init>()
     // Defaults to stable ids since view models generate unique ids. Set this to false in the
     // subclass if you don't want to support it
     setHasStableIds(true);
@@ -150,7 +150,7 @@ public abstract class BaseEpoxyAdapter
    * will recover, but you can override this to be aware of when they happen.
    */
   protected void onExceptionSwallowed(RuntimeException exception) {
-//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onExceptionSwallowed(). protected onExceptionSwallowed(RuntimeException exception)
+//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onExceptionSwallowed(). protected void onExceptionSwallowed(RuntimeException exception)
 //                                    ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
 //                                                     ^^^^^^^^^ definition local4 RuntimeException exception
 
@@ -238,7 +238,7 @@ public abstract class BaseEpoxyAdapter
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onBindViewHolder(EpoxyViewHolder holder, int position) {
-//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onBindViewHolder(). public onBindViewHolder(EpoxyViewHolder holder, int position)
+//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onBindViewHolder(). public void onBindViewHolder(EpoxyViewHolder holder, int position)
 //                             ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                             ^^^^^^ definition local11 EpoxyViewHolder holder
 //                                                         ^^^^^^^^ definition local12 int position
@@ -253,7 +253,7 @@ public abstract class BaseEpoxyAdapter
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onBindViewHolder(EpoxyViewHolder holder, int position, List<Object> payloads) {
-//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onBindViewHolder(+1). public onBindViewHolder(EpoxyViewHolder holder, int position, List<Object> payloads)
+//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onBindViewHolder(+1). public void onBindViewHolder(EpoxyViewHolder holder, int position, List<Object> payloads)
 //                             ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                             ^^^^^^ definition local13 EpoxyViewHolder holder
 //                                                         ^^^^^^^^ definition local14 int position
@@ -333,7 +333,7 @@ public abstract class BaseEpoxyAdapter
    * they want alerts on when a model is bound.
    */
   protected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position,
-//               ^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onModelBound(). protected onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position, List<Object> payloads)
+//               ^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onModelBound(). protected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position, List<Object> payloads)
 //                            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                            ^^^^^^ definition local18 EpoxyViewHolder holder
 //                                                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -352,7 +352,7 @@ public abstract class BaseEpoxyAdapter
   }
 
   void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position,
-//     ^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onModelBound(+1). onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position, EpoxyModel<?> previouslyBoundModel)
+//     ^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onModelBound(+1). void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position, EpoxyModel<?> previouslyBoundModel)
 //                  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                  ^^^^^^ definition local22 EpoxyViewHolder holder
 //                                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -374,7 +374,7 @@ public abstract class BaseEpoxyAdapter
    * they want alerts on when a model is bound.
    */
   protected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position) {
-//               ^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onModelBound(+2). protected onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position)
+//               ^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onModelBound(+2). protected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position)
 //                            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                            ^^^^^^ definition local26 EpoxyViewHolder holder
 //                                                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -408,7 +408,7 @@ public abstract class BaseEpoxyAdapter
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onViewRecycled(EpoxyViewHolder holder) {
-//            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onViewRecycled(). public onViewRecycled(EpoxyViewHolder holder)
+//            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onViewRecycled(). public void onViewRecycled(EpoxyViewHolder holder)
 //                           ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                           ^^^^^^ definition local30 EpoxyViewHolder holder
     viewHolderState.save(holder);
@@ -439,7 +439,7 @@ public abstract class BaseEpoxyAdapter
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onDetachedFromRecyclerView(). public onDetachedFromRecyclerView(unresolved_type recyclerView)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onDetachedFromRecyclerView(). public void onDetachedFromRecyclerView(unresolved_type recyclerView)
 //                                        ^^^^^^^ reference androidx/annotation/NonNull#
 //                                                ^^^^^^^^^^^^ reference _root_/
 //                                                             ^^^^^^^^^^^^ definition local32 unresolved_type recyclerView
@@ -456,7 +456,7 @@ public abstract class BaseEpoxyAdapter
    * they want alerts on when a model is unbound.
    */
   protected void onModelUnbound(EpoxyViewHolder holder, EpoxyModel<?> model) {
-//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onModelUnbound(). protected onModelUnbound(EpoxyViewHolder holder, EpoxyModel<?> model)
+//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onModelUnbound(). protected void onModelUnbound(EpoxyViewHolder holder, EpoxyModel<?> model)
 //                              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                              ^^^^^^ definition local33 EpoxyViewHolder holder
 //                                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -487,7 +487,7 @@ public abstract class BaseEpoxyAdapter
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onViewAttachedToWindow(EpoxyViewHolder holder) {
-//            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onViewAttachedToWindow(). public onViewAttachedToWindow(EpoxyViewHolder holder)
+//            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onViewAttachedToWindow(). public void onViewAttachedToWindow(EpoxyViewHolder holder)
 //                                   ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                                   ^^^^^^ definition local36 EpoxyViewHolder holder
     //noinspection unchecked,rawtypes
@@ -505,7 +505,7 @@ public abstract class BaseEpoxyAdapter
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onViewDetachedFromWindow(EpoxyViewHolder holder) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onViewDetachedFromWindow(). public onViewDetachedFromWindow(EpoxyViewHolder holder)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onViewDetachedFromWindow(). public void onViewDetachedFromWindow(EpoxyViewHolder holder)
 //                                     ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                                     ^^^^^^ definition local37 EpoxyViewHolder holder
     //noinspection unchecked,rawtypes
@@ -519,7 +519,7 @@ public abstract class BaseEpoxyAdapter
   }
 
   public void onSaveInstanceState(Bundle outState) {
-//            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onSaveInstanceState(). public onSaveInstanceState(unresolved_type outState)
+//            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onSaveInstanceState(). public void onSaveInstanceState(unresolved_type outState)
 //                                ^^^^^^ reference _root_/
 //                                       ^^^^^^^^ definition local38 unresolved_type outState
     // Save the state of currently bound views first so they are included. Views that were
@@ -552,7 +552,7 @@ public abstract class BaseEpoxyAdapter
   }
 
   public void onRestoreInstanceState(@Nullable Bundle inState) {
-//            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onRestoreInstanceState(). public onRestoreInstanceState(unresolved_type inState)
+//            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#onRestoreInstanceState(). public void onRestoreInstanceState(unresolved_type inState)
 //                                    ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                             ^^^^^^ reference _root_/
 //                                                    ^^^^^^^ definition local40 unresolved_type inState
@@ -639,7 +639,7 @@ public abstract class BaseEpoxyAdapter
    * @see EpoxyModel#getSpanSize(int, int, int)
    */
   public void setSpanCount(int spanCount) {
-//            ^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#setSpanCount(). public setSpanCount(int spanCount)
+//            ^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#setSpanCount(). public void setSpanCount(int spanCount)
 //                             ^^^^^^^^^ definition local44 int spanCount
     this.spanCount = spanCount;
 //  ^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
@@ -671,7 +671,7 @@ public abstract class BaseEpoxyAdapter
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void setupStickyHeaderView(@NotNull View stickyHeader) {
-//            ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#setupStickyHeaderView(). public setupStickyHeaderView(unresolved_type stickyHeader)
+//            ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#setupStickyHeaderView(). public void setupStickyHeaderView(unresolved_type stickyHeader)
 //                                   ^^^^^^^ reference org/jetbrains/annotations/NotNull#
 //                                           ^^^^ reference _root_/
 //                                                ^^^^^^^^^^^^ definition local45 unresolved_type stickyHeader
@@ -688,7 +688,7 @@ public abstract class BaseEpoxyAdapter
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void teardownStickyHeaderView(@NotNull View stickyHeader) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#teardownStickyHeaderView(). public teardownStickyHeaderView(unresolved_type stickyHeader)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#teardownStickyHeaderView(). public void teardownStickyHeaderView(unresolved_type stickyHeader)
 //                                      ^^^^^^^ reference org/jetbrains/annotations/NotNull#
 //                                              ^^^^ reference _root_/
 //                                                   ^^^^^^^^^^^^ definition local46 unresolved_type stickyHeader

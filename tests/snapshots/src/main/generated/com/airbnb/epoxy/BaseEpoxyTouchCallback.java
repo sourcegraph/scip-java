@@ -37,7 +37,7 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
    * @param itemView The view being cleared.
    */
   void clearView(T model, View itemView);
-//     ^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView(). public abstract clearView(T model, unresolved_type itemView)
+//     ^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView(). public abstract void clearView(T model, unresolved_type itemView)
 //               ^ reference com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
 //                 ^^^^^ definition local2 T model
 //                        ^^^^ reference _root_/
