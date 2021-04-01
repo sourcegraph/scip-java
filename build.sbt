@@ -335,7 +335,7 @@ lazy val testSettings = List(
   testFrameworks := List(new TestFramework("munit.Framework")),
   libraryDependencies ++=
     List(
-      "org.scalameta" %% "munit" % "0.7.10",
+      "org.scalameta" %% "munit" % "0.7.23",
       "org.scalameta" %% "moped-testkit" % V.moped,
       "org.scalameta" %% "scalameta" % V.scalameta,
       "io.get-coursier" %% "coursier" % V.coursier,
