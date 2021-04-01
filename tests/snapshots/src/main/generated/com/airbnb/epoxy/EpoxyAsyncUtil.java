@@ -77,7 +77,7 @@ public final class EpoxyAsyncUtil {
 // ^^^^^^^^^^ reference androidx/annotation/MainThread#
   public static Handler getAsyncBackgroundHandler() {
 //              ^^^^^^^ reference _root_/
-//                      ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#getAsyncBackgroundHandler(). @MainThread public static getAsyncBackgroundHandler()
+//                      ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#getAsyncBackgroundHandler(). @MainThread public static unresolved_type getAsyncBackgroundHandler()
     // This is initialized lazily so we don't create the thread unless it will be used.
     // It isn't synchronized so it should only be accessed on the main thread.
     if (asyncBackgroundHandler == null) {
@@ -100,7 +100,7 @@ public final class EpoxyAsyncUtil {
    */
   public static Handler createHandler(Looper looper, boolean async) {
 //              ^^^^^^^ reference _root_/
-//                      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#createHandler(). public static createHandler(unresolved_type looper, boolean async)
+//                      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#createHandler(). public static unresolved_type createHandler(unresolved_type looper, boolean async)
 //                                    ^^^^^^ reference _root_/
 //                                           ^^^^^^ definition local0 unresolved_type looper
 //                                                           ^^^^^ definition local1 boolean async
@@ -157,7 +157,7 @@ public final class EpoxyAsyncUtil {
    */
   public static Looper buildBackgroundLooper(String threadName) {
 //              ^^^^^^ reference _root_/
-//                     ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#buildBackgroundLooper(). public static buildBackgroundLooper(String threadName)
+//                     ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#buildBackgroundLooper(). public static unresolved_type buildBackgroundLooper(String threadName)
 //                                           ^^^^^^ reference java/lang/String#
 //                                                  ^^^^^^^^^^ definition local3 String threadName
     HandlerThread handlerThread = new HandlerThread(threadName);

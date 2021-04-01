@@ -167,6 +167,7 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
   /** Recursively collects all Java files in the working directory */
   private def collectAllJavaFiles(dir: Path): List[Path] = {
     val javaPattern = FileSystems.getDefault.getPathMatcher("glob:**.java")
+    val moduleInfo = Paths.get("module-info.java")
     val buf = ListBuffer.empty[Path]
     Files.walkFileTree(
       dir,
@@ -184,7 +185,7 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
             file: Path,
             attrs: BasicFileAttributes
         ): FileVisitResult = {
-          if (javaPattern.matches(file)) {
+          if (javaPattern.matches(file) && !file.endsWith(moduleInfo)) {
             buf += file
           }
           FileVisitResult.CONTINUE

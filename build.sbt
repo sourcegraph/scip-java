@@ -15,6 +15,7 @@ lazy val V =
     def scala213 = "2.13.4"
     def scala212 = "2.12.12"
     def scalameta = "4.4.8"
+    def testcontainers = "0.39.3"
     def requests = "0.6.5"
   }
 
@@ -195,6 +196,45 @@ lazy val cli = project
   )
   .enablePlugins(NativeImagePlugin, BuildInfoPlugin)
   .dependsOn(lsif)
+commands +=
+  Command.command("dockerfile") { s =>
+    "commitall" :: "reload" :: "packagehub/dockerfileUpdate" :: "publish" :: s
+  }
+
+def commitAll(): Unit = {
+  import scala.sys.process._
+  "git add .".!!
+  "git commit --allow-empty -m WIP".!!
+
+}
+commands +=
+  Command.command("commitall") { s =>
+    commitAll()
+    s
+  }
+
+lazy val packagehub = project
+  .in(file("packagehub"))
+  .settings(
+    moduleName := "packagehub",
+    mainClass.in(Compile) := Some("com.sourcegraph.packagehub.PackageHub"),
+    TaskKey[Unit]("dockerfileUpdate") := {
+      val template = IO.read(file("Dockerfile.template"))
+      IO.write(file("Dockerfile"), template.replace("VERSION", version.value))
+      commitAll()
+    },
+    libraryDependencies ++=
+      List(
+        "com.google.cloud.sql" % "postgres-socket-factory" % "1.2.1",
+        "com.zaxxer" % "HikariCP" % "4.0.3",
+        "org.flywaydb" % "flyway-core" % "7.7.1",
+        "org.postgresql" % "postgresql" % "42.2.14",
+        "org.scalameta" %% "scalameta" % V.scalameta,
+        "com.lihaoyi" %% "cask" % "0.7.8"
+      )
+  )
+  .enablePlugins(AssemblyPlugin)
+  .dependsOn(cli)
 
 commands +=
   Command.command("nativeImageProfiled") { s =>
@@ -273,7 +313,7 @@ lazy val unit = project
       ),
     buildInfoPackage := "tests"
   )
-  .dependsOn(plugin, cli)
+  .dependsOn(plugin, cli, packagehub)
   .enablePlugins(BuildInfoPlugin)
 
 lazy val buildTools = project
@@ -344,6 +384,8 @@ lazy val testSettings = List(
   libraryDependencies ++=
     List(
       "org.scalameta" %% "munit" % "0.7.23",
+      "com.dimafeng" %% "testcontainers-scala-munit" % V.testcontainers,
+      "com.dimafeng" %% "testcontainers-scala-postgresql" % V.testcontainers,
       "org.scalameta" %% "moped-testkit" % V.moped,
       "org.scalameta" %% "scalameta" % V.scalameta,
       "io.get-coursier" %% "coursier" % V.coursier,

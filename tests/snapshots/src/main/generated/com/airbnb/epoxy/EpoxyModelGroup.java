@@ -627,7 +627,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 // ^^^^^^^^ reference java/lang/Override#
   protected final ModelGroupHolder createNewHolder(@NonNull ViewParent parent) {
 //                ^^^^^^^^^^^^^^^^ reference _root_/
-//                                 ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#createNewHolder(). @Override protected final createNewHolder(unresolved_type parent)
+//                                 ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#createNewHolder(). @Override protected final unresolved_type createNewHolder(unresolved_type parent)
 //                                                  ^^^^^^^ reference androidx/annotation/NonNull#
 //                                                          ^^^^^^^^^^ reference _root_/
 //                                                                     ^^^^^^ definition local65 @NonNull unresolved_type parent

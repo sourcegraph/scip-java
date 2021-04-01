@@ -113,6 +113,6 @@ public final class SemanticdbSignatures {
   }
 
   private Semanticdb.Type generateType(TypeMirror mirror) {
-    return mirror.accept(new SemanticdbTypeVisitor(cache, locals), null);
+    return new SemanticdbTypeVisitor(cache, locals).semanticdbType(mirror);
   }
 }

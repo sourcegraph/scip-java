@@ -211,7 +211,7 @@ public abstract class EpoxyTouchHelperCallback extends ItemTouchHelper.Callback 
 // ^^^^^^^^ reference java/lang/Override#
   public final ViewHolder chooseDropTarget(ViewHolder selected, List dropTargets, int curX,
 //             ^^^^^^^^^^ reference _root_/
-//                        ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#chooseDropTarget(). @Override public final chooseDropTarget(unresolved_type selected, List dropTargets, int curX, int curY)
+//                        ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelperCallback#chooseDropTarget(). @Override public final unresolved_type chooseDropTarget(unresolved_type selected, List dropTargets, int curX, int curY)
 //                                         ^^^^^^^^^^ reference _root_/
 //                                                    ^^^^^^^^ definition local24 unresolved_type selected
 //                                                              ^^^^ reference java/util/List#

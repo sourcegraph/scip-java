@@ -170,7 +170,7 @@ public abstract class EpoxyModel<T> {
    */
   protected View buildView(@NonNull ViewGroup parent) {
 //          ^^^^ reference _root_/
-//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#buildView(). protected buildView(unresolved_type parent)
+//               ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#buildView(). protected unresolved_type buildView(unresolved_type parent)
 //                          ^^^^^^^ reference androidx/annotation/NonNull#
 //                                  ^^^^^^^^^ reference _root_/
 //                                            ^^^^^^ definition local1 @NonNull unresolved_type parent

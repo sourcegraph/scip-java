@@ -81,6 +81,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |repositories { mavenCentral() }
        |dependencies { implementation "junit:junit:4.13.1" }
        |/src/main/java/Example.java
+       |import org.junit.Assert;
        |public class Example {}
        |/src/test/java/ExampleSuite.java
        |public class ExampleSuite {}
@@ -97,6 +98,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |    languageVersion = JavaLanguageVersion.of(8)
        |  }
        |}
+       |repositories { mavenCentral() }
+       |dependencies { implementation "junit:junit:4.13.1" }
        |/src/main/java/Example.java
        |public class Example {}
        |""".stripMargin,
