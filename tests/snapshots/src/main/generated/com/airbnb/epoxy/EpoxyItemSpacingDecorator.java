@@ -57,52 +57,52 @@ import androidx.recyclerview.widget.RecyclerView.State;
  * are on the grid. Only designed to work with standard linear or grid layout managers.
  */
 public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
-//           ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator# public class EpoxyItemSpacingDecorator extends unresolved_type
 //                                             ^^^^^^^^^^^^ reference RecyclerView/
 //                                                          ^^^^^^^^^^^^^^ reference RecyclerView/ItemDecoration#
   private int pxBetweenItems;
-//            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#pxBetweenItems.
+//            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#pxBetweenItems. private int pxBetweenItems
   private boolean verticallyScrolling;
-//                ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#verticallyScrolling.
+//                ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#verticallyScrolling. private boolean verticallyScrolling
   private boolean horizontallyScrolling;
-//                ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#horizontallyScrolling.
+//                ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#horizontallyScrolling. private boolean horizontallyScrolling
   private boolean firstItem;
-//                ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#firstItem.
+//                ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#firstItem. private boolean firstItem
   private boolean lastItem;
-//                ^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#lastItem.
+//                ^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#lastItem. private boolean lastItem
   private boolean grid;
-//                ^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#grid.
+//                ^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#grid. private boolean grid
 
   private boolean isFirstItemInRow;
-//                ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isFirstItemInRow.
+//                ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isFirstItemInRow. private boolean isFirstItemInRow
   private boolean fillsLastSpan;
-//                ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#fillsLastSpan.
+//                ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#fillsLastSpan. private boolean fillsLastSpan
   private boolean isInFirstRow;
-//                ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInFirstRow.
+//                ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInFirstRow. private boolean isInFirstRow
   private boolean isInLastRow;
-//                ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInLastRow.
+//                ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInLastRow. private boolean isInLastRow
 
   public EpoxyItemSpacingDecorator() {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#`<init>`().
+//       ^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#`<init>`(). public EpoxyItemSpacingDecorator()
     this(0);
 //  ^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#`<init>`(+1).
   }
 
   public EpoxyItemSpacingDecorator(@Px int pxBetweenItems) {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#`<init>`(+1).
+//       ^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#`<init>`(+1). public EpoxyItemSpacingDecorator(int pxBetweenItems)
 //                                  ^^ reference androidx/annotation/Px#
-//                                         ^^^^^^^^^^^^^^ definition local0
+//                                         ^^^^^^^^^^^^^^ definition local0 int pxBetweenItems
     setPxBetweenItems(pxBetweenItems);
 //  ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#setPxBetweenItems().
 //                    ^^^^^^^^^^^^^^ reference local0
   }
 
   public void setPxBetweenItems(@Px int pxBetweenItems) {
-//            ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#setPxBetweenItems().
+//            ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#setPxBetweenItems(). public void setPxBetweenItems(int pxBetweenItems)
 //                               ^^ reference androidx/annotation/Px#
-//                                      ^^^^^^^^^^^^^^ definition local1
+//                                      ^^^^^^^^^^^^^^ definition local1 int pxBetweenItems
     this.pxBetweenItems = pxBetweenItems;
-//  ^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#this.
+//  ^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#
 //       ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#pxBetweenItems.
 //                        ^^^^^^^^^^^^^^ reference local1
   }
@@ -110,7 +110,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   @Px
 // ^^ reference androidx/annotation/Px#
   public int getPxBetweenItems() {
-//           ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#getPxBetweenItems().
+//           ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#getPxBetweenItems(). public int getPxBetweenItems()
     return pxBetweenItems;
 //         ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#pxBetweenItems.
   }
@@ -118,22 +118,22 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void getItemOffsets(Rect outRect, View view, RecyclerView parent, State state) {
-//            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#getItemOffsets().
+//            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#getItemOffsets(). public void getItemOffsets(unresolved_type outRect, unresolved_type view, unresolved_type parent, unresolved_type state)
 //                           ^^^^ reference _root_/
-//                                ^^^^^^^ definition local2
+//                                ^^^^^^^ definition local2 unresolved_type outRect
 //                                         ^^^^ reference _root_/
-//                                              ^^^^ definition local3
+//                                              ^^^^ definition local3 unresolved_type view
 //                                                    ^^^^^^^^^^^^ reference _root_/
-//                                                                 ^^^^^^ definition local4
+//                                                                 ^^^^^^ definition local4 unresolved_type parent
 //                                                                         ^^^^^ reference _root_/
-//                                                                               ^^^^^ definition local5
+//                                                                               ^^^^^ definition local5 unresolved_type state
     // Zero everything out for the common case
     outRect.setEmpty();
 //  ^^^^^^^ reference local2
 //          ^^^^^^^^ reference setEmpty#
 
     int position = parent.getChildAdapterPosition(view);
-//      ^^^^^^^^ definition local6
+//      ^^^^^^^^ definition local6 int position
 //                 ^^^^^^ reference local4
 //                        ^^^^^^^^^^^^^^^^^^^^^^^ reference getChildAdapterPosition#
 //                                                ^^^^ reference local3
@@ -148,7 +148,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
     RecyclerView.LayoutManager layout = parent.getLayoutManager();
 //  ^^^^^^^^^^^^ reference RecyclerView/
 //               ^^^^^^^^^^^^^ reference RecyclerView/LayoutManager#
-//                             ^^^^^^ definition local7
+//                             ^^^^^^ definition local7 unresolved_type layout
 //                                      ^^^^^^ reference local4
 //                                             ^^^^^^^^^^^^^^^^ reference getLayoutManager#
     calculatePositionDetails(parent, position, layout);
@@ -158,16 +158,16 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //                                             ^^^^^^ reference local7
 
     boolean left = useLeftPadding();
-//          ^^^^ definition local8
+//          ^^^^ definition local8 boolean left
 //                 ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#useLeftPadding().
     boolean right = useRightPadding();
-//          ^^^^^ definition local9
+//          ^^^^^ definition local9 boolean right
 //                  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#useRightPadding().
     boolean top = useTopPadding();
-//          ^^^ definition local10
+//          ^^^ definition local10 boolean top
 //                ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#useTopPadding().
     boolean bottom = useBottomPadding();
-//          ^^^^^^ definition local11
+//          ^^^^^^ definition local11 boolean bottom
 //                   ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#useBottomPadding().
 
     if (shouldReverseLayout(layout, horizontallyScrolling)) {
@@ -177,7 +177,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
       if (horizontallyScrolling) {
 //        ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#horizontallyScrolling.
         boolean temp = left;
-//              ^^^^ definition local12
+//              ^^^^ definition local12 boolean temp
 //                     ^^^^ reference local8
         left = right;
 //      ^^^^ reference local8
@@ -187,7 +187,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //              ^^^^ reference local12
       } else {
         boolean temp = top;
-//              ^^^^ definition local13
+//              ^^^^ definition local13 boolean temp
 //                     ^^^ reference local10
         top = bottom;
 //      ^^^ reference local10
@@ -201,7 +201,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
     // Divided by two because it is applied to the left side of one item and the right of another
     // to add up to the total desired space
     int padding = pxBetweenItems / 2;
-//      ^^^^^^^ definition local14
+//      ^^^^^^^ definition local14 int padding
 //                ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#pxBetweenItems.
     outRect.right = right ? padding : 0;
 //  ^^^^^^^ reference local2
@@ -226,14 +226,14 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   }
 
   private void calculatePositionDetails(RecyclerView parent, int position, LayoutManager layout) {
-//             ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#calculatePositionDetails().
+//             ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#calculatePositionDetails(). private void calculatePositionDetails(unresolved_type parent, int position, unresolved_type layout)
 //                                      ^^^^^^^^^^^^ reference _root_/
-//                                                   ^^^^^^ definition local15
-//                                                               ^^^^^^^^ definition local16
+//                                                   ^^^^^^ definition local15 unresolved_type parent
+//                                                               ^^^^^^^^ definition local16 int position
 //                                                                         ^^^^^^^^^^^^^ reference _root_/
-//                                                                                       ^^^^^^ definition local17
+//                                                                                       ^^^^^^ definition local17 unresolved_type layout
     int itemCount = parent.getAdapter().getItemCount();
-//      ^^^^^^^^^ definition local18
+//      ^^^^^^^^^ definition local18 int itemCount
 //                  ^^^^^^ reference local15
 //                         ^^^^^^^^^^ reference getAdapter#
 //                                      ^^^^^^^^^^^^ reference getAdapter#getItemCount#
@@ -261,25 +261,25 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //      ^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#grid.
       GridLayoutManager grid = (GridLayoutManager) layout;
 //    ^^^^^^^^^^^^^^^^^ reference _root_/
-//                      ^^^^ definition local19
+//                      ^^^^ definition local19 unresolved_type grid
 //                              ^^^^^^^^^^^^^^^^^ reference _root_/
 //                                                 ^^^^^^ reference local17
       final SpanSizeLookup spanSizeLookup = grid.getSpanSizeLookup();
 //          ^^^^^^^^^^^^^^ reference _root_/
-//                         ^^^^^^^^^^^^^^ definition local20
+//                         ^^^^^^^^^^^^^^ definition local20 final unresolved_type spanSizeLookup
 //                                          ^^^^ reference local19
 //                                               ^^^^^^^^^^^^^^^^^ reference getSpanSizeLookup#
       int spanSize = spanSizeLookup.getSpanSize(position);
-//        ^^^^^^^^ definition local21
+//        ^^^^^^^^ definition local21 int spanSize
 //                   ^^^^^^^^^^^^^^ reference local20
 //                                  ^^^^^^^^^^^ reference getSpanSize#
 //                                              ^^^^^^^^ reference local16
       int spanCount = grid.getSpanCount();
-//        ^^^^^^^^^ definition local22
+//        ^^^^^^^^^ definition local22 int spanCount
 //                    ^^^^ reference local19
 //                         ^^^^^^^^^^^^ reference getSpanCount#
       int spanIndex = spanSizeLookup.getSpanIndex(position, spanCount);
-//        ^^^^^^^^^ definition local23
+//        ^^^^^^^^^ definition local23 int spanIndex
 //                    ^^^^^^^^^^^^^^ reference local20
 //                                   ^^^^^^^^^^^^ reference getSpanIndex#
 //                                                ^^^^^^^^ reference local16
@@ -311,12 +311,12 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   }
 
   private static boolean shouldReverseLayout(LayoutManager layout, boolean horizontallyScrolling) {
-//                       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#shouldReverseLayout().
+//                       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#shouldReverseLayout(). private static boolean shouldReverseLayout(unresolved_type layout, boolean horizontallyScrolling)
 //                                           ^^^^^^^^^^^^^ reference _root_/
-//                                                         ^^^^^^ definition local24
-//                                                                         ^^^^^^^^^^^^^^^^^^^^^ definition local25
+//                                                         ^^^^^^ definition local24 unresolved_type layout
+//                                                                         ^^^^^^^^^^^^^^^^^^^^^ definition local25 boolean horizontallyScrolling
     boolean reverseLayout =
-//          ^^^^^^^^^^^^^ definition local26
+//          ^^^^^^^^^^^^^ definition local26 boolean reverseLayout
         layout instanceof LinearLayoutManager && ((LinearLayoutManager) layout).getReverseLayout();
 //      ^^^^^^ reference local24
 //                        ^^^^^^^^^^^^^^^^^^^ reference _root_/
@@ -324,7 +324,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //                                                                      ^^^^^^ reference local24
 //                                                                              ^^^^^^^^^^^^^^^^ reference getReverseLayout#
     boolean rtl = layout.getLayoutDirection() == ViewCompat.LAYOUT_DIRECTION_RTL;
-//          ^^^ definition local27
+//          ^^^ definition local27 boolean rtl
 //                ^^^^^^ reference local24
 //                       ^^^^^^^^^^^^^^^^^^ reference getLayoutDirection#
 //                                               ^^^^^^^^^^ reference _root_/
@@ -343,7 +343,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   }
 
   private boolean useBottomPadding() {
-//                ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#useBottomPadding().
+//                ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#useBottomPadding(). private boolean useBottomPadding()
     if (grid) {
 //      ^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#grid.
       return (horizontallyScrolling && !fillsLastSpan)
@@ -360,7 +360,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   }
 
   private boolean useTopPadding() {
-//                ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#useTopPadding().
+//                ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#useTopPadding(). private boolean useTopPadding()
     if (grid) {
 //      ^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#grid.
       return (horizontallyScrolling && !isFirstItemInRow)
@@ -377,7 +377,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   }
 
   private boolean useRightPadding() {
-//                ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#useRightPadding().
+//                ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#useRightPadding(). private boolean useRightPadding()
     if (grid) {
 //      ^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#grid.
       return (horizontallyScrolling && !isInLastRow)
@@ -394,7 +394,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   }
 
   private boolean useLeftPadding() {
-//                ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#useLeftPadding().
+//                ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#useLeftPadding(). private boolean useLeftPadding()
     if (grid) {
 //      ^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#grid.
       return (horizontallyScrolling && !isInFirstRow)
@@ -411,15 +411,15 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   }
 
   private static boolean isInFirstRow(int position, SpanSizeLookup spanSizeLookup, int spanCount) {
-//                       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInFirstRow().
-//                                        ^^^^^^^^ definition local28
+//                       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInFirstRow(). private static boolean isInFirstRow(int position, unresolved_type spanSizeLookup, int spanCount)
+//                                        ^^^^^^^^ definition local28 int position
 //                                                  ^^^^^^^^^^^^^^ reference _root_/
-//                                                                 ^^^^^^^^^^^^^^ definition local29
-//                                                                                     ^^^^^^^^^ definition local30
+//                                                                 ^^^^^^^^^^^^^^ definition local29 unresolved_type spanSizeLookup
+//                                                                                     ^^^^^^^^^ definition local30 int spanCount
     int totalSpan = 0;
-//      ^^^^^^^^^ definition local31
+//      ^^^^^^^^^ definition local31 int totalSpan
     for (int i = 0; i <= position; i++) {
-//           ^ definition local32
+//           ^ definition local32 int i
 //                  ^ reference local32
 //                       ^^^^^^^^ reference local28
 //                                 ^ reference local32
@@ -439,17 +439,17 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   }
 
   private static boolean isInLastRow(int position, int itemCount, SpanSizeLookup spanSizeLookup,
-//                       ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInLastRow().
-//                                       ^^^^^^^^ definition local33
-//                                                     ^^^^^^^^^ definition local34
+//                       ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInLastRow(). private static boolean isInLastRow(int position, int itemCount, unresolved_type spanSizeLookup, int spanCount)
+//                                       ^^^^^^^^ definition local33 int position
+//                                                     ^^^^^^^^^ definition local34 int itemCount
 //                                                                ^^^^^^^^^^^^^^ reference _root_/
-//                                                                               ^^^^^^^^^^^^^^ definition local35
+//                                                                               ^^^^^^^^^^^^^^ definition local35 unresolved_type spanSizeLookup
       int spanCount) {
-//        ^^^^^^^^^ definition local36
+//        ^^^^^^^^^ definition local36 int spanCount
     int totalSpan = 0;
-//      ^^^^^^^^^ definition local37
+//      ^^^^^^^^^ definition local37 int totalSpan
     for (int i = itemCount - 1; i >= position; i--) {
-//           ^ definition local38
+//           ^ definition local38 int i
 //               ^^^^^^^^^ reference local34
 //                              ^ reference local38
 //                                   ^^^^^^^^ reference local33

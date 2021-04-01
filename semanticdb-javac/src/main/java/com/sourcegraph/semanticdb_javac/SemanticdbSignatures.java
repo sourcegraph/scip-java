@@ -234,6 +234,13 @@ public final class SemanticdbSignatures {
           .build();
     }
 
+    @Override
+    public Semanticdb.Type visitNoType(NoType t, Void unused) {
+      return Semanticdb.Type.newBuilder()
+          .setTypeRef(TypeRef.newBuilder().setSymbol(primitiveSymbol(t.getKind())))
+          .build();
+    }
+
     public String primitiveSymbol(TypeKind kind) {
       switch (kind) {
         case BOOLEAN:

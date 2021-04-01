@@ -7,10 +7,10 @@ import android.view.View;
 
 /** Used to register a click listener on a generated model. */
 public interface OnModelClickListener<T extends EpoxyModel<?>, V> {
-//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelClickListener#
-//                                    ^ definition com/airbnb/epoxy/OnModelClickListener#[T]
+//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelClickListener# public abstract interface OnModelClickListener<T extends EpoxyModel<?>, V>
+//                                    ^ definition com/airbnb/epoxy/OnModelClickListener#[T] T extends EpoxyModel<?>
 //                                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                             ^ definition com/airbnb/epoxy/OnModelClickListener#[V]
+//                                                             ^ definition com/airbnb/epoxy/OnModelClickListener#[V] V
   /**
    * Called when the view bound to the model is clicked.
    *
@@ -21,12 +21,12 @@ public interface OnModelClickListener<T extends EpoxyModel<?>, V> {
    * @param position    The position of the model in the adapter.
    */
   void onClick(T model, V parentView, View clickedView, int position);
-//     ^^^^^^^ definition com/airbnb/epoxy/OnModelClickListener#onClick().
+//     ^^^^^^^ definition com/airbnb/epoxy/OnModelClickListener#onClick(). public abstract void onClick(T model, V parentView, unresolved_type clickedView, int position)
 //             ^ reference com/airbnb/epoxy/OnModelClickListener#[T]
-//               ^^^^^ definition local0
+//               ^^^^^ definition local0 T model
 //                      ^ reference com/airbnb/epoxy/OnModelClickListener#[V]
-//                        ^^^^^^^^^^ definition local1
+//                        ^^^^^^^^^^ definition local1 V parentView
 //                                    ^^^^ reference _root_/
-//                                         ^^^^^^^^^^^ definition local2
-//                                                          ^^^^^^^^ definition local3
+//                                         ^^^^^^^^^^^ definition local2 unresolved_type clickedView
+//                                                          ^^^^^^^^ definition local3 int position
 }

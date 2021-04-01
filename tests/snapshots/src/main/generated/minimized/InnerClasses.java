@@ -1,68 +1,68 @@
 package minimized;
 
 public class InnerClasses {
-//           ^^^^^^^^^^^^ definition minimized/InnerClasses#
+//           ^^^^^^^^^^^^ definition minimized/InnerClasses# public class InnerClasses
 
   private final int exampleField;
-//                  ^^^^^^^^^^^^ definition minimized/InnerClasses#exampleField.
+//                  ^^^^^^^^^^^^ definition minimized/InnerClasses#exampleField. private final int exampleField
 
   public InnerClasses(int exampleField) {
-//       ^^^^^^ definition minimized/InnerClasses#`<init>`().
-//                        ^^^^^^^^^^^^ definition local0
+//       ^^^^^^ definition minimized/InnerClasses#`<init>`(). public InnerClasses(int exampleField)
+//                        ^^^^^^^^^^^^ definition local0 int exampleField
     this.exampleField = exampleField;
-//  ^^^^ reference minimized/InnerClasses#this.
+//  ^^^^ reference minimized/InnerClasses#
 //       ^^^^^^^^^^^^ reference minimized/InnerClasses#exampleField.
 //                      ^^^^^^^^^^^^ reference local0
   }
 
   public enum InnerEnum {
-//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum#
-//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum#`<init>`().
+//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum# public enum InnerEnum
+//            ^^^^^^^^^ definition minimized/InnerClasses#InnerEnum#`<init>`(). private InnerEnum()
     A,
-//  ^ definition minimized/InnerClasses#InnerEnum#A.
+//  ^ definition minimized/InnerClasses#InnerEnum#A. InnerEnum.A /* ordinal 0 */
     B,
-//  ^ definition minimized/InnerClasses#InnerEnum#B.
+//  ^ definition minimized/InnerClasses#InnerEnum#B. InnerEnum.B /* ordinal 1 */
     C
-//  ^ definition minimized/InnerClasses#InnerEnum#C.
+//  ^ definition minimized/InnerClasses#InnerEnum#C. InnerEnum.C /* ordinal 2 */
   }
 
   public interface InnerInterface<A, B> {
-//                 ^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerInterface#
-//                                ^ definition minimized/InnerClasses#InnerInterface#[A]
-//                                   ^ definition minimized/InnerClasses#InnerInterface#[B]
+//                 ^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerInterface# public abstract static interface InnerInterface<A, B>
+//                                ^ definition minimized/InnerClasses#InnerInterface#[A] A
+//                                   ^ definition minimized/InnerClasses#InnerInterface#[B] B
     B apply(A a);
 //  ^ reference minimized/InnerClasses#InnerInterface#[B]
-//    ^^^^^ definition minimized/InnerClasses#InnerInterface#apply().
+//    ^^^^^ definition minimized/InnerClasses#InnerInterface#apply(). public abstract B apply(A a)
 //          ^ reference minimized/InnerClasses#InnerInterface#[A]
-//            ^ definition local1
+//            ^ definition local1 A a
   }
 
   public static class InnerStaticClass {
-//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#
-//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#`<init>`().
+//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass# public static class InnerStaticClass
+//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#`<init>`(). public InnerStaticClass()
     public static void innerStaticMethod() {}
-//                     ^^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#innerStaticMethod().
+//                     ^^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#innerStaticMethod(). public static void innerStaticMethod()
   }
 
   public class InnerClass implements InnerInterface<Integer, Integer> {
-//             ^^^^^^^^^^ definition minimized/InnerClasses#InnerClass#
+//             ^^^^^^^^^^ definition minimized/InnerClasses#InnerClass# public class InnerClass implements InnerInterface<Integer, Integer>
 //                                   ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#
 //                                                  ^^^^^^^ reference java/lang/Integer#
 //                                                           ^^^^^^^ reference java/lang/Integer#
     private final int field;
-//                    ^^^^^ definition minimized/InnerClasses#InnerClass#field.
+//                    ^^^^^ definition minimized/InnerClasses#InnerClass#field. private final int field
 
     public InnerClass(int field) {
-//         ^^^^^^ definition minimized/InnerClasses#InnerClass#`<init>`().
-//                        ^^^^^ definition local2
+//         ^^^^^^ definition minimized/InnerClasses#InnerClass#`<init>`(). public InnerClass(int field)
+//                        ^^^^^ definition local2 int field
       this.field = field;
-//    ^^^^ reference minimized/InnerClasses#InnerClass#this.
+//    ^^^^ reference minimized/InnerClasses#InnerClass#
 //         ^^^^^ reference minimized/InnerClasses#InnerClass#field.
 //                 ^^^^^ reference local2
     }
 
     public void innerMethod() {
-//              ^^^^^^^^^^^ definition minimized/InnerClasses#InnerClass#innerMethod().
+//              ^^^^^^^^^^^ definition minimized/InnerClasses#InnerClass#innerMethod(). public void innerMethod()
       System.out.println(field + exampleField);
 //    ^^^^^^ reference java/lang/System#
 //           ^^^ reference java/lang/System#out.
@@ -75,9 +75,9 @@ public class InnerClasses {
 //   ^^^^^^^^ reference java/lang/Override#
     public Integer apply(Integer integer) {
 //         ^^^^^^^ reference java/lang/Integer#
-//                 ^^^^^ definition minimized/InnerClasses#InnerClass#apply().
+//                 ^^^^^ definition minimized/InnerClasses#InnerClass#apply(). public Integer apply(Integer integer)
 //                       ^^^^^^^ reference java/lang/Integer#
-//                               ^^^^^^^ definition local3
+//                               ^^^^^^^ definition local3 Integer integer
       return field * integer;
 //           ^^^^^ reference minimized/InnerClasses#InnerClass#field.
 //                   ^^^^^^^ reference local3
@@ -85,16 +85,16 @@ public class InnerClasses {
   }
 
   private static <A, B> B runInnerInterface(InnerInterface<A, B> fn, A a) {
-//                ^ definition minimized/InnerClasses#runInnerInterface().[A]
-//                   ^ definition minimized/InnerClasses#runInnerInterface().[B]
+//                ^ definition minimized/InnerClasses#runInnerInterface().[A] A
+//                   ^ definition minimized/InnerClasses#runInnerInterface().[B] B
 //                      ^ reference minimized/InnerClasses#runInnerInterface().[B]
-//                        ^^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#runInnerInterface().
+//                        ^^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#runInnerInterface(). private static <A, B> B runInnerInterface(InnerInterface<A, B> fn, A a)
 //                                          ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#
 //                                                         ^ reference minimized/InnerClasses#runInnerInterface().[A]
 //                                                            ^ reference minimized/InnerClasses#runInnerInterface().[B]
-//                                                               ^^ definition local4
+//                                                               ^^ definition local4 InnerInterface<A, B> fn
 //                                                                   ^ reference minimized/InnerClasses#runInnerInterface().[A]
-//                                                                     ^ definition local5
+//                                                                     ^ definition local5 A a
     return fn.apply(a);
 //         ^^ reference local4
 //            ^^^^^ reference minimized/InnerClasses#InnerInterface#apply().
@@ -102,9 +102,9 @@ public class InnerClasses {
   }
 
   public static void testEnum(InnerEnum magicEnum) {
-//                   ^^^^^^^^ definition minimized/InnerClasses#testEnum().
+//                   ^^^^^^^^ definition minimized/InnerClasses#testEnum(). public static void testEnum(InnerEnum magicEnum)
 //                            ^^^^^^^^^ reference minimized/InnerClasses#InnerEnum#
-//                                      ^^^^^^^^^ definition local6
+//                                      ^^^^^^^^^ definition local6 InnerEnum magicEnum
     if (System.nanoTime() > System.nanoTime()) {
 //      ^^^^^^ reference java/lang/System#
 //             ^^^^^^^^ reference java/lang/System#nanoTime().
@@ -155,12 +155,12 @@ public class InnerClasses {
   }
 
   public static void testAnon() {
-//                   ^^^^^^^^ definition minimized/InnerClasses#testAnon().
+//                   ^^^^^^^^ definition minimized/InnerClasses#testAnon(). public static void testAnon()
     InnerInterface<String, String> fn =
 //  ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#
 //                 ^^^^^^ reference java/lang/String#
 //                         ^^^^^^ reference java/lang/String#
-//                                 ^^ definition local7
+//                                 ^^ definition local7 InnerInterface<String, String> fn
         new InnerInterface<String, String>() {
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local9 5:9
 //          ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#
@@ -173,9 +173,9 @@ public class InnerClasses {
 //         ^^^^^^^^ reference java/lang/Override#
           public String apply(String s) {
 //               ^^^^^^ reference java/lang/String#
-//                      ^^^^^ definition local10
+//                      ^^^^^ definition local10 public String apply(String s)
 //                            ^^^^^^ reference java/lang/String#
-//                                   ^ definition local11
+//                                   ^ definition local11 String s
             return s + "b";
 //                 ^ reference local11
           }
@@ -190,21 +190,21 @@ public class InnerClasses {
 
   public static String app() {
 //              ^^^^^^ reference java/lang/String#
-//                     ^^^ definition minimized/InnerClasses#app().
+//                     ^^^ definition minimized/InnerClasses#app(). public static String app()
     int a = 42;
-//      ^ definition local12
+//      ^ definition local12 int a
     InnerStaticClass.innerStaticMethod();
 //  ^^^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerStaticClass#
 //                   ^^^^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerStaticClass#innerStaticMethod().
     InnerClasses innerClasses = new InnerClasses(a);
 //  ^^^^^^^^^^^^ reference minimized/InnerClasses#
-//               ^^^^^^^^^^^^ definition local13
+//               ^^^^^^^^^^^^ definition local13 InnerClasses innerClasses
 //                              ^^^^^^^^^^^^^^^^^^^ reference minimized/InnerClasses#`<init>`().
 //                                  ^^^^^^^^^^^^ reference minimized/InnerClasses#
 //                                               ^ reference local12
     InnerClass innerClass = innerClasses.new InnerClass(a);
 //  ^^^^^^^^^^ reference minimized/InnerClasses#InnerClass#
-//             ^^^^^^^^^^ definition local14
+//             ^^^^^^^^^^ definition local14 InnerClass innerClass
 //                          ^^^^^^^^^^^^ reference local13
 //                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerClass#`<init>`().
 //                                           ^^^^^^^^^^ reference minimized/InnerClasses#InnerClass#

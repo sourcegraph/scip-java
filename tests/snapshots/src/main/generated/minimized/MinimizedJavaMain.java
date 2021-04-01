@@ -5,12 +5,12 @@ package minimized;
 //           ^^^^^ reference minimized/Annotations#value().
 //                            ^^^^^^ reference minimized/Annotations#format().
 public class MinimizedJavaMain {
-//           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain#
-//           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain#`<init>`().
+//           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain# public class MinimizedJavaMain
+//           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain#`<init>`(). public MinimizedJavaMain()
   public static void main(String[] args) {
-//                   ^^^^ definition minimized/MinimizedJavaMain#main().
+//                   ^^^^ definition minimized/MinimizedJavaMain#main(). public static void main(String[] args)
 //                        ^^^^^^ reference java/lang/String#
-//                                 ^^^^ definition local0
+//                                 ^^^^ definition local0 String[] args
     TypeVariables.app(new TypeVariables.CT());
 //  ^^^^^^^^^^^^^ reference minimized/TypeVariables#
 //                ^^^ reference minimized/TypeVariables#app().

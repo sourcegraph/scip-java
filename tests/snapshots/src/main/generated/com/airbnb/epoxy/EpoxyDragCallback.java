@@ -9,8 +9,8 @@ import android.view.View;
  * For use with {@link EpoxyModelTouchCallback}
  */
 public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchCallback<T> {
-//               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDragCallback#
-//                                 ^ definition com/airbnb/epoxy/EpoxyDragCallback#[T]
+//               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDragCallback# public abstract interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchCallback<T>
+//                                 ^ definition com/airbnb/epoxy/EpoxyDragCallback#[T] T extends EpoxyModel
 //                                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                               ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyTouchCallback#
 //                                                                                      ^ reference com/airbnb/epoxy/EpoxyDragCallback#[T]
@@ -27,12 +27,12 @@ public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchC
    * @param adapterPosition The adapter position of the model
    */
   void onDragStarted(T model, View itemView, int adapterPosition);
-//     ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDragCallback#onDragStarted().
+//     ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDragCallback#onDragStarted(). public abstract void onDragStarted(T model, unresolved_type itemView, int adapterPosition)
 //                   ^ reference com/airbnb/epoxy/EpoxyDragCallback#[T]
-//                     ^^^^^ definition local0
+//                     ^^^^^ definition local0 T model
 //                            ^^^^ reference _root_/
-//                                 ^^^^^^^^ definition local1
-//                                               ^^^^^^^^^^^^^^^ definition local2
+//                                 ^^^^^^^^ definition local1 unresolved_type itemView
+//                                               ^^^^^^^^^^^^^^^ definition local2 int adapterPosition
 
   /**
    * Called after {@link #onDragStarted(EpoxyModel, View, int)} when the dragged view is dropped to
@@ -49,13 +49,13 @@ public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchC
    * @param toPosition      The new adapter position of the model
    */
   void onModelMoved(int fromPosition, int toPosition, T modelBeingMoved, View itemView);
-//     ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDragCallback#onModelMoved().
-//                      ^^^^^^^^^^^^ definition local3
-//                                        ^^^^^^^^^^ definition local4
+//     ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDragCallback#onModelMoved(). public abstract void onModelMoved(int fromPosition, int toPosition, T modelBeingMoved, unresolved_type itemView)
+//                      ^^^^^^^^^^^^ definition local3 int fromPosition
+//                                        ^^^^^^^^^^ definition local4 int toPosition
 //                                                    ^ reference com/airbnb/epoxy/EpoxyDragCallback#[T]
-//                                                      ^^^^^^^^^^^^^^^ definition local5
+//                                                      ^^^^^^^^^^^^^^^ definition local5 T modelBeingMoved
 //                                                                       ^^^^ reference _root_/
-//                                                                            ^^^^^^^^ definition local6
+//                                                                            ^^^^^^^^ definition local6 unresolved_type itemView
 
   /**
    * Called after {@link #onDragStarted(EpoxyModel, View, int)} when the view being dragged is
@@ -72,9 +72,9 @@ public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchC
    * @param itemView The view that was being dragged
    */
   void onDragReleased(T model, View itemView);
-//     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDragCallback#onDragReleased().
+//     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDragCallback#onDragReleased(). public abstract void onDragReleased(T model, unresolved_type itemView)
 //                    ^ reference com/airbnb/epoxy/EpoxyDragCallback#[T]
-//                      ^^^^^ definition local7
+//                      ^^^^^ definition local7 T model
 //                             ^^^^ reference _root_/
-//                                  ^^^^^^^^ definition local8
+//                                  ^^^^^^^^ definition local8 unresolved_type itemView
 }

@@ -39,13 +39,13 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface PackageEpoxyConfig {
-//                ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#
+//                ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig# public @interface PackageEpoxyConfig
   boolean REQUIRE_HASHCODE_DEFAULT = false;
-//        ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#REQUIRE_HASHCODE_DEFAULT.
+//        ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#REQUIRE_HASHCODE_DEFAULT. public static final boolean REQUIRE_HASHCODE_DEFAULT
   boolean REQUIRE_ABSTRACT_MODELS_DEFAULT = false;
-//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#REQUIRE_ABSTRACT_MODELS_DEFAULT.
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#REQUIRE_ABSTRACT_MODELS_DEFAULT. public static final boolean REQUIRE_ABSTRACT_MODELS_DEFAULT
   boolean IMPLICITLY_ADD_AUTO_MODELS_DEFAULT = false;
-//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#IMPLICITLY_ADD_AUTO_MODELS_DEFAULT.
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#IMPLICITLY_ADD_AUTO_MODELS_DEFAULT. public static final boolean IMPLICITLY_ADD_AUTO_MODELS_DEFAULT
   /**
    * If true, all fields marked with {@link com.airbnb.epoxy.EpoxyAttribute} must have a type that
    * implements hashCode and equals (besides the default Object implementation), or the attribute
@@ -66,7 +66,7 @@ public @interface PackageEpoxyConfig {
    * implement hashCode/equals.
    */
   boolean requireHashCode() default REQUIRE_HASHCODE_DEFAULT;
-//        ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#requireHashCode().
+//        ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#requireHashCode(). public abstract boolean requireHashCode()
 //                                  ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/PackageEpoxyConfig#REQUIRE_HASHCODE_DEFAULT.
 
   /**
@@ -78,7 +78,7 @@ public @interface PackageEpoxyConfig {
    * of the generated class.
    */
   boolean requireAbstractModels() default REQUIRE_ABSTRACT_MODELS_DEFAULT;
-//        ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#requireAbstractModels().
+//        ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#requireAbstractModels(). public abstract boolean requireAbstractModels()
 //                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/PackageEpoxyConfig#REQUIRE_ABSTRACT_MODELS_DEFAULT.
 
   /**
@@ -90,6 +90,6 @@ public @interface PackageEpoxyConfig {
    * https://github.com/airbnb/epoxy/wiki/Epoxy-Controller#implicit-adding
    */
   boolean implicitlyAddAutoModels() default IMPLICITLY_ADD_AUTO_MODELS_DEFAULT;
-//        ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#implicitlyAddAutoModels().
+//        ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#implicitlyAddAutoModels(). public abstract boolean implicitlyAddAutoModels()
 //                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/PackageEpoxyConfig#IMPLICITLY_ADD_AUTO_MODELS_DEFAULT.
 }

@@ -48,11 +48,11 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface ModelProp {
-//                ^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#
+//                ^^^^^^^^^ definition com/airbnb/epoxy/ModelProp# public @interface ModelProp
 
   enum Option {
-//     ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#
-//     ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#`<init>`().
+//     ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option# public enum Option
+//     ^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#`<init>`(). private Option()
     /**
      * By default every prop's hashCode and equals method is called when determining the
      * model's state. This option can be used to exclude an prop's hashCode/equals from
@@ -69,7 +69,7 @@ public @interface ModelProp {
      * then you can use this to prevent the rebind.
      */
     DoNotHash,
-//  ^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#DoNotHash.
+//  ^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#DoNotHash. Option.DoNotHash /* ordinal 0 */
     /**
      * This is meant to be used in conjunction with {@link PackageEpoxyConfig#requireHashCode()}.
      * When that is enabled every prop must implement hashCode/equals. However, there are some
@@ -85,26 +85,26 @@ public @interface ModelProp {
      * contribute to model state you should use {@link Option#DoNotHash} instead.
      */
     IgnoreRequireHashCode,
-//  ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#IgnoreRequireHashCode.
+//  ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#IgnoreRequireHashCode. Option.IgnoreRequireHashCode /* ordinal 1 */
     /**
      * Setters with a type of {@link CharSequence} can add this option to have {@link
      * androidx.annotation.StringRes} and {@link androidx.annotation.PluralsRes}
      * overload methods generated on the model, so users can set the string via a resource.
      */
     GenerateStringOverloads,
-//  ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#GenerateStringOverloads.
+//  ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#GenerateStringOverloads. Option.GenerateStringOverloads /* ordinal 2 */
     /**
      * Setters with a param annotated with @Nullable can use this to have null set when the view is
      * recycled.
      */
     NullOnRecycle
-//  ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#NullOnRecycle.
+//  ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#NullOnRecycle. Option.NullOnRecycle /* ordinal 3 */
   }
 
   /** Specify any {@link Option} values that should be used when generating the model class. */
   Option[] options() default {};
 //^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#
-//         ^^^^^^^ definition com/airbnb/epoxy/ModelProp#options().
+//         ^^^^^^^ definition com/airbnb/epoxy/ModelProp#options(). public abstract Option[] options()
 
   /**
    * The same as {@link #options()}, but this allows the shortcut of setting an option eg
@@ -112,7 +112,7 @@ public @interface ModelProp {
    */
   Option[] value() default {};
 //^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#
-//         ^^^^^ definition com/airbnb/epoxy/ModelProp#value().
+//         ^^^^^ definition com/airbnb/epoxy/ModelProp#value(). public abstract Option[] value()
 
   /**
    * The name of the constant field that should be used as the default value for this prop. The
@@ -127,7 +127,7 @@ public @interface ModelProp {
    */
   String defaultValue() default "";
 //^^^^^^ reference java/lang/String#
-//       ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#defaultValue().
+//       ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#defaultValue(). public abstract String defaultValue()
 
   /**
    * Specify an optional group name. Multiple props with the same group name will only allow one of
@@ -137,5 +137,5 @@ public @interface ModelProp {
    */
   String group() default "";
 //^^^^^^ reference java/lang/String#
-//       ^^^^^ definition com/airbnb/epoxy/ModelProp#group().
+//       ^^^^^ definition com/airbnb/epoxy/ModelProp#group(). public abstract String group()
 }

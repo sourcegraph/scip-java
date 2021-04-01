@@ -2,7 +2,10 @@ package com.sourcegraph.lsif_java
 
 import scala.jdk.CollectionConverters._
 
+import com.sourcegraph.lsif_semanticdb.SignatureFormatter
+import com.sourcegraph.lsif_semanticdb.Symtab
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence
+import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role
 import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
 
 object SemanticdbPrinters {
@@ -12,13 +15,14 @@ object SemanticdbPrinters {
       .asScala
       .groupBy(_.getRange.getStartLine)
     val out = new StringBuilder()
+    val symtab = new Symtab(doc)
     doc
       .getText
       .linesWithSeparators
       .zipWithIndex
       .foreach { case (line, i) =>
         out.append(line.replace("\t", "→"))
-        val occurences = occurrencesByLine
+        val occurrences = occurrencesByLine
           .getOrElse(i, Nil)
           .sortBy(o =>
             (
@@ -27,8 +31,8 @@ object SemanticdbPrinters {
               o.getRange.getEndCharacter
             )
           )
-        occurences.foreach { occ =>
-          formatOccurrence(out, occ, line)
+        occurrences.foreach { occ =>
+          formatOccurrence(out, occ, line, symtab)
         }
       }
     out.toString()
@@ -37,7 +41,8 @@ object SemanticdbPrinters {
   private def formatOccurrence(
       out: StringBuilder,
       occ: SymbolOccurrence,
-      line: String
+      line: String,
+      symtab: Symtab
   ): Unit = {
     val r = occ.getRange
     val isMultiline = r.getStartLine != r.getEndLine
@@ -76,6 +81,19 @@ object SemanticdbPrinters {
         else
           ""
       )
+      .append(
+        symtab.symbols.asScala.get(occ.getSymbol) match {
+          case Some(info) if occ.getRole == Role.DEFINITION =>
+            val sig = new SignatureFormatter(info, symtab).formatSymbol()
+            if (sig.isEmpty)
+              " " + info.getDisplayName
+            else
+              " " + sig
+          case _ =>
+            ""
+        }
+      )
       .append("\n")
   }
+
 }

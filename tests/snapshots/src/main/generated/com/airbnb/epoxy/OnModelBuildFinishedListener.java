@@ -10,14 +10,14 @@ import androidx.annotation.NonNull;
  * alerted to new model changes.
  */
 public interface OnModelBuildFinishedListener {
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBuildFinishedListener#
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBuildFinishedListener# public abstract interface OnModelBuildFinishedListener
   /**
    * Called after {@link EpoxyController#buildModels()} has run and changes have been notified to
    * the adapter. This will be called even if no changes existed.
    */
   void onModelBuildFinished(@NonNull DiffResult result);
-//     ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBuildFinishedListener#onModelBuildFinished().
+//     ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBuildFinishedListener#onModelBuildFinished(). public abstract void onModelBuildFinished(DiffResult result)
 //                           ^^^^^^^ reference androidx/annotation/NonNull#
 //                                   ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#
-//                                              ^^^^^^ definition local0
+//                                              ^^^^^^ definition local0 DiffResult result
 }

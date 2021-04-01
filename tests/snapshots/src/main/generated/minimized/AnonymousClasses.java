@@ -9,16 +9,16 @@ import java.util.function.Function;
 @SuppressWarnings("ALL")
 //^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public class AnonymousClasses {
-//           ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses#
-//           ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses#`<init>`().
+//           ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses# public class AnonymousClasses
+//           ^^^^^^^^^^^^^^^^ definition minimized/AnonymousClasses#`<init>`(). public AnonymousClasses()
   public static int app(int n) {
-//                  ^^^ definition minimized/AnonymousClasses#app().
-//                          ^ definition local0
+//                  ^^^ definition minimized/AnonymousClasses#app(). public static int app(int n)
+//                          ^ definition local0 int n
     Function<Integer, Integer> fn =
 //  ^^^^^^^^ reference java/util/function/Function#
 //           ^^^^^^^ reference java/lang/Integer#
 //                    ^^^^^^^ reference java/lang/Integer#
-//                             ^^ definition local1
+//                             ^^ definition local1 Function<Integer, Integer> fn
         new Function<Integer, Integer>() {
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local3 5:9
 //          ^^^^^^^^ reference java/util/function/Function#
@@ -31,9 +31,9 @@ public class AnonymousClasses {
 //         ^^^^^^^^ reference java/lang/Override#
           public Integer apply(Integer integer) {
 //               ^^^^^^^ reference java/lang/Integer#
-//                       ^^^^^ definition local4
+//                       ^^^^^ definition local4 public Integer apply(Integer integer)
 //                             ^^^^^^^ reference java/lang/Integer#
-//                                     ^^^^^^^ definition local5
+//                                     ^^^^^^^ definition local5 Integer integer
             return integer + n;
 //                 ^^^^^^^ reference local5
 //                           ^ reference local0

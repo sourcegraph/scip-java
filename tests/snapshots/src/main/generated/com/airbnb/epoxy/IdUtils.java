@@ -9,9 +9,9 @@ import androidx.annotation.Nullable;
  * Utilities for generating 64-bit long IDs from types such as {@link CharSequence}.
  */
 public final class IdUtils {
-//                 ^^^^^^^ definition com/airbnb/epoxy/IdUtils#
+//                 ^^^^^^^ definition com/airbnb/epoxy/IdUtils# public final class IdUtils
   private IdUtils() {
-//        ^^^^^^ definition com/airbnb/epoxy/IdUtils#`<init>`().
+//        ^^^^^^ definition com/airbnb/epoxy/IdUtils#`<init>`(). private IdUtils()
   }
 
   /**
@@ -23,8 +23,8 @@ public final class IdUtils {
    * http://www.javamex.com/tutorials/random_numbers/xorshift.shtml
    */
   public static long hashLong64Bit(long value) {
-//                   ^^^^^^^^^^^^^ definition com/airbnb/epoxy/IdUtils#hashLong64Bit().
-//                                      ^^^^^ definition local0
+//                   ^^^^^^^^^^^^^ definition com/airbnb/epoxy/IdUtils#hashLong64Bit(). public static long hashLong64Bit(long value)
+//                                      ^^^^^ definition local0 long value
     value ^= (value << 21);
 //  ^^^^^ reference local0
 //            ^^^^^ reference local0
@@ -48,23 +48,23 @@ public final class IdUtils {
    * Hash implementation from http://www.isthe.com/chongo/tech/comp/fnv/index.html#FNV-1a
    */
   public static long hashString64Bit(@Nullable CharSequence str) {
-//                   ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/IdUtils#hashString64Bit().
+//                   ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/IdUtils#hashString64Bit(). public static long hashString64Bit(CharSequence str)
 //                                    ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                             ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                                          ^^^ definition local1
+//                                                          ^^^ definition local1 CharSequence str
     if (str == null) {
 //      ^^^ reference local1
       return 0;
     }
 
     long result = 0xcbf29ce484222325L;
-//       ^^^^^^ definition local2
+//       ^^^^^^ definition local2 long result
     final int len = str.length();
-//            ^^^ definition local3
+//            ^^^ definition local3 final int len
 //                  ^^^ reference local1
 //                      ^^^^^^ reference java/lang/CharSequence#length().
     for (int i = 0; i < len; i++) {
-//           ^ definition local4
+//           ^ definition local4 int i
 //                  ^ reference local4
 //                      ^^^ reference local3
 //                           ^ reference local4

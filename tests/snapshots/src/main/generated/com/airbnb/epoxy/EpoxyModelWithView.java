@@ -35,9 +35,9 @@ import androidx.annotation.NonNull;
  * resource file.
  */
 public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
-//                    ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#
-//                    ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#`<init>`().
-//                                       ^ definition com/airbnb/epoxy/EpoxyModelWithView#[T]
+//                    ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView# public abstract class EpoxyModelWithView<T extends unresolved_type> extends EpoxyModel<T>
+//                    ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#`<init>`(). public EpoxyModelWithView()
+//                                       ^ definition com/airbnb/epoxy/EpoxyModelWithView#[T] T extends unresolved_type
 //                                                 ^^^^ reference _root_/
 //                                                               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                          ^ reference com/airbnb/epoxy/EpoxyModelWithView#[T]
@@ -51,7 +51,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected int getViewType() {
-//              ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#getViewType().
+//              ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#getViewType(). protected int getViewType()
     return 0;
   }
 
@@ -65,15 +65,15 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
 // ^^^^^^^^ reference java/lang/Override#
   protected abstract T buildView(@NonNull ViewGroup parent);
 //                   ^ reference com/airbnb/epoxy/EpoxyModelWithView#[T]
-//                     ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#buildView().
+//                     ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#buildView(). protected abstract T buildView(unresolved_type parent)
 //                                ^^^^^^^ reference androidx/annotation/NonNull#
 //                                        ^^^^^^^^^ reference _root_/
-//                                                  ^^^^^^ definition local0
+//                                                  ^^^^^^ definition local0 unresolved_type parent
 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected final int getDefaultLayout() {
-//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#getDefaultLayout().
+//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#getDefaultLayout(). protected final int getDefaultLayout()
     throw new UnsupportedOperationException(
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1). 1:83
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#
@@ -85,9 +85,9 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
   public EpoxyModel<T> layout(@LayoutRes int layoutRes) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModelWithView#[T]
-//                     ^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#layout().
+//                     ^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#layout(). public EpoxyModel<T> layout(int layoutRes)
 //                             ^^^^^^^^^ reference androidx/annotation/LayoutRes#
-//                                           ^^^^^^^^^ definition local1
+//                                           ^^^^^^^^^ definition local1 int layoutRes
     throw new UnsupportedOperationException(
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1). 1:83
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#

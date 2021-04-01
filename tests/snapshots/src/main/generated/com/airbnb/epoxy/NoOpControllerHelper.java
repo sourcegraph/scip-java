@@ -5,15 +5,15 @@ package com.airbnb.epoxy;
  * com.airbnb.epoxy.AutoModel} usage.
  */
 class NoOpControllerHelper extends ControllerHelper<EpoxyController> {
-//    ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#
-//    ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#`<init>`().
+//    ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper# class NoOpControllerHelper extends ControllerHelper<EpoxyController>
+//    ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#`<init>`(). NoOpControllerHelper()
 //                                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerHelper#
 //                                                  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void resetAutoModels() {
-//            ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#resetAutoModels().
+//            ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#resetAutoModels(). public void resetAutoModels()
     // No - Op
   }
 }

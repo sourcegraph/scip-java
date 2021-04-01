@@ -12,11 +12,11 @@ import java.util.List;
 @SuppressWarnings("ALL")
 //^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public class RawTypes {
-//           ^^^^^^^^ definition minimized/RawTypes#
-//           ^^^^^^^^ definition minimized/RawTypes#`<init>`().
+//           ^^^^^^^^ definition minimized/RawTypes# public class RawTypes
+//           ^^^^^^^^ definition minimized/RawTypes#`<init>`(). public RawTypes()
   public static final List x = Collections.singletonList(42);
 //                    ^^^^ reference java/util/List#
-//                         ^ definition minimized/RawTypes#x.
+//                         ^ definition minimized/RawTypes#x. public static final List x
 //                             ^^^^^^^^^^^ reference java/util/Collections#
 //                                         ^^^^^^^^^^^^^ reference java/util/Collections#singletonList().
 }

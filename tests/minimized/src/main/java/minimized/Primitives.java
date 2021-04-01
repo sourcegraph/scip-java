@@ -15,4 +15,6 @@ public class Primitives {
     boolean h = random.nextBoolean();
     return "" + a + b + c + d + e + f + g + h;
   }
+
+  public static void test() {}
 }

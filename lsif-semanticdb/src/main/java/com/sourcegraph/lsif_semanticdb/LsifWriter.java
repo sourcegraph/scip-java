@@ -10,9 +10,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /** High-level utility methods to write LSIF vertex/edge objects into the LSIF output stream. */
 public class LsifWriter implements AutoCloseable {
@@ -90,15 +93,21 @@ public class LsifWriter implements AutoCloseable {
     return definitionResult;
   }
 
-  public int emitHoverResult(Semanticdb.Language language, String value) {
+  public int emitHoverResult(MarkedString[] markedStrings) {
     return emitObject(
         lsifVertex("hoverResult")
             .setResult(
                 LsifHover.newBuilder()
-                    .addContents(
-                        Content.newBuilder()
-                            .setLanguage(language.toString().toLowerCase(Locale.ROOT))
-                            .setValue(value))));
+                    .addAllContents(
+                        Arrays.stream(markedStrings)
+                            .map(
+                                (ms) ->
+                                    Content.newBuilder()
+                                        .setLanguage(
+                                            ms.language.toString().toLowerCase(Locale.ROOT))
+                                        .setValue(ms.value)
+                                        .build())
+                            .collect(Collectors.toList()))));
   }
 
   public void emitHoverEdge(int outV, int inV) {

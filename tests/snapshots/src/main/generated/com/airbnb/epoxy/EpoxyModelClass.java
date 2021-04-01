@@ -41,14 +41,14 @@ import androidx.annotation.LayoutRes;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface EpoxyModelClass {
-//                ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelClass#
+//                ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelClass# public @interface EpoxyModelClass
   /**
    * A layout resource that should be used as the default layout for the model. If you set this you
    * don't have to implement `getDefaultLayout`; it will be generated for you.
    */
   @LayoutRes int layout() default 0;
 // ^^^^^^^^^ reference androidx/annotation/LayoutRes#
-//               ^^^^^^ definition com/airbnb/epoxy/EpoxyModelClass#layout().
+//               ^^^^^^ definition com/airbnb/epoxy/EpoxyModelClass#layout(). public abstract int layout()
 
   /**
    * If true, any layout file name that has {@link #layout()} as a prefix will be included as a
@@ -59,5 +59,5 @@ public @interface EpoxyModelClass {
    * other layout instead of the default.
    */
   boolean useLayoutOverloads() default false;
-//        ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelClass#useLayoutOverloads().
+//        ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelClass#useLayoutOverloads(). public abstract boolean useLayoutOverloads()
 }

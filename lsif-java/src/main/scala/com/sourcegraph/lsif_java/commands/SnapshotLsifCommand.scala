@@ -28,6 +28,7 @@ import com.sourcegraph.lsif_protocol.LsifObject
 import com.sourcegraph.lsif_protocol.LsifPosition
 import com.sourcegraph.semanticdb_javac.Semanticdb
 import com.sourcegraph.semanticdb_javac.Semanticdb.Language
+import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role
 import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
@@ -119,6 +120,27 @@ object SnapshotLsifCommand {
           .setSymbol(symbol)
           .build()
         doc.addOccurrences(occ)
+
+        if (isDefinition) {
+          val hover =
+            (
+              for {
+                resultSetId <- lsif.next.get(o.getId).toList
+                hoverId <- lsif.hoverEdges.get(resultSetId).toList
+                hover <- lsif.hoverVertexes.get(hoverId).toList
+                contents <- hover.getContentsList.asScala
+                if contents.getLanguage !=
+                  Language.UNKNOWN_LANGUAGE.toString.toLowerCase
+              } yield contents.getValue
+            ).mkString("\n")
+          val symInfo = SymbolInformation
+            .newBuilder()
+            // we cheese it a bit here, as this is less work than trying to reconstruct
+            // a Signature from the pretty-printed Signature, with accompanying logic
+            // to fallback to display_name in SemanticdbPrinters.scala
+            .setDisplayName(hover).setSymbol(symbol).build()
+          doc.addSymbols(symInfo)
+        }
       }
     lsif.documents.values.map(_.build()).toList
   }

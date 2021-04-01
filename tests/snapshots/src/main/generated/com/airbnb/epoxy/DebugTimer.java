@@ -6,24 +6,24 @@ import android.util.Log;
 //                  ^^^ reference android/util/Log#
 
 class DebugTimer implements Timer {
-//    ^^^^^^^^^^ definition com/airbnb/epoxy/DebugTimer#
+//    ^^^^^^^^^^ definition com/airbnb/epoxy/DebugTimer# class DebugTimer implements Timer
 //                          ^^^^^ reference com/airbnb/epoxy/Timer#
 
   private final String tag;
 //              ^^^^^^ reference java/lang/String#
-//                     ^^^ definition com/airbnb/epoxy/DebugTimer#tag.
+//                     ^^^ definition com/airbnb/epoxy/DebugTimer#tag. private final String tag
   private long startTime;
-//             ^^^^^^^^^ definition com/airbnb/epoxy/DebugTimer#startTime.
+//             ^^^^^^^^^ definition com/airbnb/epoxy/DebugTimer#startTime. private long startTime
   private String sectionName;
 //        ^^^^^^ reference java/lang/String#
-//               ^^^^^^^^^^^ definition com/airbnb/epoxy/DebugTimer#sectionName.
+//               ^^^^^^^^^^^ definition com/airbnb/epoxy/DebugTimer#sectionName. private String sectionName
 
   DebugTimer(String tag) {
-//^^^^^^ definition com/airbnb/epoxy/DebugTimer#`<init>`().
+//^^^^^^ definition com/airbnb/epoxy/DebugTimer#`<init>`(). DebugTimer(String tag)
 //           ^^^^^^ reference java/lang/String#
-//                  ^^^ definition local0
+//                  ^^^ definition local0 String tag
     this.tag = tag;
-//  ^^^^ reference com/airbnb/epoxy/DebugTimer#this.
+//  ^^^^ reference com/airbnb/epoxy/DebugTimer#
 //       ^^^ reference com/airbnb/epoxy/DebugTimer#tag.
 //             ^^^ reference local0
     reset();
@@ -31,7 +31,7 @@ class DebugTimer implements Timer {
   }
 
   private void reset() {
-//             ^^^^^ definition com/airbnb/epoxy/DebugTimer#reset().
+//             ^^^^^ definition com/airbnb/epoxy/DebugTimer#reset(). private void reset()
     startTime = -1;
 //  ^^^^^^^^^ reference com/airbnb/epoxy/DebugTimer#startTime.
     sectionName = null;
@@ -41,9 +41,9 @@ class DebugTimer implements Timer {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void start(String sectionName) {
-//            ^^^^^ definition com/airbnb/epoxy/DebugTimer#start().
+//            ^^^^^ definition com/airbnb/epoxy/DebugTimer#start(). public void start(String sectionName)
 //                  ^^^^^^ reference java/lang/String#
-//                         ^^^^^^^^^^^ definition local1
+//                         ^^^^^^^^^^^ definition local1 String sectionName
     if (startTime != -1) {
 //      ^^^^^^^^^ reference com/airbnb/epoxy/DebugTimer#startTime.
       throw new IllegalStateException("Timer was already started");
@@ -56,7 +56,7 @@ class DebugTimer implements Timer {
 //              ^^^^^^ reference java/lang/System#
 //                     ^^^^^^^^ reference java/lang/System#nanoTime().
     this.sectionName = sectionName;
-//  ^^^^ reference com/airbnb/epoxy/DebugTimer#this.
+//  ^^^^ reference com/airbnb/epoxy/DebugTimer#
 //       ^^^^^^^^^^^ reference com/airbnb/epoxy/DebugTimer#sectionName.
 //                     ^^^^^^^^^^^ reference local1
   }
@@ -64,7 +64,7 @@ class DebugTimer implements Timer {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void stop() {
-//            ^^^^ definition com/airbnb/epoxy/DebugTimer#stop().
+//            ^^^^ definition com/airbnb/epoxy/DebugTimer#stop(). public void stop()
     if (startTime == -1) {
 //      ^^^^^^^^^ reference com/airbnb/epoxy/DebugTimer#startTime.
       throw new IllegalStateException("Timer was not started");
@@ -73,7 +73,7 @@ class DebugTimer implements Timer {
     }
 
     float durationMs = (System.nanoTime() - startTime) / 1000000f;
-//        ^^^^^^^^^^ definition local2
+//        ^^^^^^^^^^ definition local2 float durationMs
 //                      ^^^^^^ reference java/lang/System#
 //                             ^^^^^^^^ reference java/lang/System#nanoTime().
 //                                          ^^^^^^^^^ reference com/airbnb/epoxy/DebugTimer#startTime.
