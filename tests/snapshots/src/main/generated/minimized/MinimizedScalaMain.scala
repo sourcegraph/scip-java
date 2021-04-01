@@ -3,7 +3,7 @@ package minimized
 
 // format: off
 object MinimizedScalaMain {
-//     ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedScalaMain. public final MinimizedScalaMain extends AnyRef
+//     ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedScalaMain. public final MinimizedScalaMain
   def main(args: Array[String]): Unit = {
 //    ^^^^ definition minimized/MinimizedScalaMain.main(). public void main(String[] args)
 //         ^^^^ definition minimized/MinimizedScalaMain.main().(args) String[] args

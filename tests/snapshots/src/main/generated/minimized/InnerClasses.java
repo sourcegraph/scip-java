@@ -45,7 +45,7 @@ public class InnerClasses {
   }
 
   public class InnerClass implements InnerInterface<Integer, Integer> {
-//             ^^^^^^^^^^ definition minimized/InnerClasses#InnerClass# public class InnerClass extends InnerInterface<Integer, Integer>
+//             ^^^^^^^^^^ definition minimized/InnerClasses#InnerClass# public class InnerClass implements InnerInterface<Integer, Integer>
 //                                   ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#
 //                                                  ^^^^^^^ reference java/lang/Integer#
 //                                                           ^^^^^^^ reference java/lang/Integer#

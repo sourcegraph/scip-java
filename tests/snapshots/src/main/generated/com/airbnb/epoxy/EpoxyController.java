@@ -112,7 +112,7 @@ import static com.airbnb.epoxy.ControllerHelperLookup.getHelperForController;
  * accurate.
  */
 public abstract class EpoxyController implements ModelCollector, StickyHeaderCallbacks {
-//                    ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController# public abstract class EpoxyController extends unresolved_type, unresolved_type
+//                    ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController# public abstract class EpoxyController implements unresolved_type, unresolved_type
 //                                               ^^^^^^^^^^^^^^ reference _root_/
 //                                                               ^^^^^^^^^^^^^^^^^^^^^ reference _root_/
 

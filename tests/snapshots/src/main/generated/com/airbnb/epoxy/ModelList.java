@@ -414,7 +414,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
    * the parent methods so that the proper notifications are done.
    */
   private class Itr implements Iterator<EpoxyModel<?>> {
-//              ^^^ definition com/airbnb/epoxy/ModelList#Itr# private class Itr extends Iterator<EpoxyModel<?>>
+//              ^^^ definition com/airbnb/epoxy/ModelList#Itr# private class Itr implements Iterator<EpoxyModel<?>>
 //              ^^^ definition com/airbnb/epoxy/ModelList#Itr#`<init>`(). private Itr()
 //                             ^^^^^^^^ reference java/util/Iterator#
 //                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -537,7 +537,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
    * notifications are done.
    */
   private class ListItr extends Itr implements ListIterator<EpoxyModel<?>> {
-//              ^^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr# private class ListItr extends Itr, ListIterator<EpoxyModel<?>>
+//              ^^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr# private class ListItr extends Itr implements ListIterator<EpoxyModel<?>>
 //                              ^^^ reference com/airbnb/epoxy/ModelList#Itr#
 //                                             ^^^^^^^^^^^^ reference java/util/ListIterator#
 //                                                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -713,7 +713,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //              ^^^^ definition com/airbnb/epoxy/ModelList#SubList#size. private int size
 
     private static final class SubListIterator implements ListIterator<EpoxyModel<?>> {
-//                             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator# private static final class SubListIterator extends ListIterator<EpoxyModel<?>>
+//                             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator# private static final class SubListIterator implements ListIterator<EpoxyModel<?>>
 //                                                        ^^^^^^^^^^^^ reference java/util/ListIterator#
 //                                                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
       private final SubList subList;

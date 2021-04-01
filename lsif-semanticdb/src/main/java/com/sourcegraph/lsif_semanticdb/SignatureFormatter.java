@@ -49,12 +49,14 @@ public class SignatureFormatter {
         classSignature.getParentsList().stream()
             .anyMatch(t -> t.getTypeRef().getSymbol().equals(ANNOTATION_SYMBOL));
 
+    boolean isEnum = has(Property.ENUM);
+
     printKeyword(formatAccess());
-    if (!has(Property.ENUM) && !isAnnotation) printKeyword(formatModifiers());
+    if (!isEnum && !isAnnotation) printKeyword(formatModifiers());
 
     switch (symbolInformation.getKind()) {
       case CLASS:
-        if (has(Property.ENUM)) {
+        if (isEnum) {
           printKeyword("enum");
         } else {
           printKeyword("class");
@@ -78,19 +80,63 @@ public class SignatureFormatter {
               .collect(Collectors.joining(", ", "<", ">")));
     }
 
+    boolean hasSuperClass = !classSignature.getParentsList().contains(OBJECT_TYPE_REF);
+
     List<Type> nonSyntheticParents =
         classSignature.getParentsList().stream()
             .filter(parent -> !parent.equals(OBJECT_TYPE_REF))
             .filter(parent -> !parent.getTypeRef().getSymbol().equals(ENUM_SYMBOL))
             .filter(parent -> !parent.getTypeRef().getSymbol().equals(ANNOTATION_SYMBOL))
             .collect(Collectors.toList());
-    // TODO: extends vs implements
-    if (!nonSyntheticParents.isEmpty()) {
-      printKeyword(" extends");
 
-      String parents =
-          nonSyntheticParents.stream().map(this::formatType).collect(Collectors.joining(", "));
-      s.append(parents);
+    if (nonSyntheticParents.isEmpty()) return;
+
+    // Determine which parents from ClassSignature.parents are classes or interfaces so we know to
+    // use
+    // 'extends' or 'implements'.
+    // The logic is as follows:
+    // 1. If the symbol has type CLASS, there will always be at least 1 parent. For enums, this is
+    //    java/lang/Enum#, otherwise it is java/lang/Object# if no superclass is specified.
+    //    Therefore, if the parents list contains java/lang/Object# type or the symbol is an enum,
+    //    then no superclass was defined and all parents are interfaces and we must print 'implements'
+    //    followed by all superinterfaces.
+    //    Else if it is not an enum and the list of non-synthetic parents is non empty, a superclass
+    //    was specified and we must print it with the 'extends' keyword prefixed, followed by
+    //    'implements' and all superinterfaces, if any.
+    // 2. If the symbol has type INTERFACE, then any defined parents must also be interfaces, so if
+    //    the list of non-synthetic parents is not empty, print 'implements' and all superinterfaces.
+    switch (symbolInformation.getKind()) {
+      case CLASS:
+        // if no superclass or is an enum, every non synthetic parent is an interface
+        if (isEnum || !hasSuperClass) {
+          printKeyword(" implements");
+
+          String superInterfaces =
+              nonSyntheticParents.stream().map(this::formatType).collect(Collectors.joining(", "));
+          s.append(superInterfaces);
+        } else {
+          // else if has a superclass and is not an enum
+          printKeyword(" extends");
+          s.append(formatType(nonSyntheticParents.get(0)));
+
+          String superInterfaces =
+              nonSyntheticParents.stream()
+                  .skip(1)
+                  .map(this::formatType)
+                  .collect(Collectors.joining(", "));
+          if (!superInterfaces.isEmpty()) {
+            printKeyword(" implements");
+            s.append(superInterfaces);
+          }
+        }
+        break;
+      case INTERFACE:
+        // can only extend other interfaces
+        printKeyword(" extends");
+
+        String superInterfaces =
+            nonSyntheticParents.stream().map(this::formatType).collect(Collectors.joining(", "));
+        s.append(superInterfaces);
     }
   }
 

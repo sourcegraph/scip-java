@@ -39,7 +39,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * your own {@link ItemTouchHelper} if you need extra flexibility or customization.
  */
 public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
-//                    ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback# public abstract class EpoxyModelTouchCallback<T extends EpoxyModel> extends EpoxyTouchHelperCallback, EpoxyDragCallback<T>, EpoxySwipeCallback<T>
+//                    ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelTouchCallback# public abstract class EpoxyModelTouchCallback<T extends EpoxyModel> extends EpoxyTouchHelperCallback implements EpoxyDragCallback<T>, EpoxySwipeCallback<T>
 //                                            ^ definition com/airbnb/epoxy/EpoxyModelTouchCallback#[T] T extends EpoxyModel
 //                                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
     extends EpoxyTouchHelperCallback implements EpoxyDragCallback<T>, EpoxySwipeCallback<T> {

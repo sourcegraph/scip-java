@@ -23,7 +23,7 @@ import androidx.collection.LongSparseArray;
 @SuppressWarnings("WeakerAccess")
 //^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
-//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders# public class BoundViewHolders extends Iterable<EpoxyViewHolder>
+//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders# public class BoundViewHolders implements Iterable<EpoxyViewHolder>
 //           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#`<init>`(). public BoundViewHolders()
 //                                       ^^^^^^^^ reference java/lang/Iterable#
 //                                                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
@@ -104,7 +104,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
   }
 
   private class HolderIterator implements Iterator<EpoxyViewHolder> {
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator# private class HolderIterator extends Iterator<EpoxyViewHolder>
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator# private class HolderIterator implements Iterator<EpoxyViewHolder>
 //              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator#`<init>`(). private HolderIterator()
 //                                        ^^^^^^^^ reference java/util/Iterator#
 //                                                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
