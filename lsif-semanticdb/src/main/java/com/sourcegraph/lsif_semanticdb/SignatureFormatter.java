@@ -98,13 +98,15 @@ public class SignatureFormatter {
     // 1. If the symbol has type CLASS, there will always be at least 1 parent. For enums, this is
     //    java/lang/Enum#, otherwise it is java/lang/Object# if no superclass is specified.
     //    Therefore, if the parents list contains java/lang/Object# type or the symbol is an enum,
-    //    then no superclass was defined and all parents are interfaces and we must print 'implements'
+    //    then no superclass was defined and all parents are interfaces and we must print
+    // 'implements'
     //    followed by all superinterfaces.
     //    Else if it is not an enum and the list of non-synthetic parents is non empty, a superclass
     //    was specified and we must print it with the 'extends' keyword prefixed, followed by
     //    'implements' and all superinterfaces, if any.
     // 2. If the symbol has type INTERFACE, then any defined parents must also be interfaces, so if
-    //    the list of non-synthetic parents is not empty, print 'implements' and all superinterfaces.
+    //    the list of non-synthetic parents is not empty, print 'implements' and all
+    // superinterfaces.
     switch (symbolInformation.getKind()) {
       case CLASS:
         // if no superclass or is an enum, every non synthetic parent is an interface
