@@ -84,7 +84,7 @@ lazy val agent = project
     libraryDependencies ++=
       List(
         "org.javassist" % "javassist" % "3.27.0-GA",
-        "net.bytebuddy" % "byte-buddy" % "1.10.20",
+        "net.bytebuddy" % "byte-buddy" % "1.10.22",
         "net.bytebuddy" % "byte-buddy-agent" % "1.10.22"
       ),
     Compile / packageBin / packageOptions +=
