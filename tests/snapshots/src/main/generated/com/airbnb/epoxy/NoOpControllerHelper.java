@@ -13,7 +13,7 @@ class NoOpControllerHelper extends ControllerHelper<EpoxyController> {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void resetAutoModels() {
-//            ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#resetAutoModels(). public void resetAutoModels()
+//            ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#resetAutoModels(). @Override public void resetAutoModels()
     // No - Op
   }
 }

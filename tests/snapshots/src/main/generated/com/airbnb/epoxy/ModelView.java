@@ -41,7 +41,7 @@ import androidx.annotation.LayoutRes;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface ModelView {
-//                ^^^^^^^^^ definition com/airbnb/epoxy/ModelView# public @interface ModelView
+//                ^^^^^^^^^ definition com/airbnb/epoxy/ModelView# @Target(ElementType.TYPE) @Retention(RetentionPolicy.CLASS) public @interface ModelView
 
   /**
    * Use with {@link #autoLayout()} to declare what layout parameters should be used to size your
@@ -86,7 +86,7 @@ public @interface ModelView {
    */
   @LayoutRes int defaultLayout() default 0;
 // ^^^^^^^^^ reference androidx/annotation/LayoutRes#
-//               ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#defaultLayout(). public abstract int defaultLayout()
+//               ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelView#defaultLayout(). @LayoutRes public abstract int defaultLayout()
   /**
    * An optional EpoxyModel subclass to use as the base class of the generated view. A default can
    * also be set with {@link PackageModelViewConfig}

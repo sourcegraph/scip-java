@@ -45,9 +45,9 @@ import androidx.annotation.StringRes;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface TextProp {
-//                ^^^^^^^^ definition com/airbnb/epoxy/TextProp# public @interface TextProp
+//                ^^^^^^^^ definition com/airbnb/epoxy/TextProp# @Target({ElementType.METHOD, ElementType.FIELD}) @Retention(RetentionPolicy.CLASS) public @interface TextProp
 
   @StringRes int defaultRes() default 0;
 // ^^^^^^^^^ reference androidx/annotation/StringRes#
-//               ^^^^^^^^^^ definition com/airbnb/epoxy/TextProp#defaultRes(). public abstract int defaultRes()
+//               ^^^^^^^^^^ definition com/airbnb/epoxy/TextProp#defaultRes(). @StringRes public abstract int defaultRes()
 }

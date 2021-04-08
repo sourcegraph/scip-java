@@ -53,7 +53,7 @@ class ImmutableModelException extends RuntimeException {
 // ^^^^^^^ reference androidx/annotation/NonNull#
   private static String buildMessage(EpoxyModel model,
 //               ^^^^^^ reference java/lang/String#
-//                      ^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#buildMessage(). private static String buildMessage(EpoxyModel model, String descriptionOfWhenChangeHappened, int modelPosition)
+//                      ^^^^^^^^^^^^ definition com/airbnb/epoxy/ImmutableModelException#buildMessage(). @NonNull private static String buildMessage(EpoxyModel model, String descriptionOfWhenChangeHappened, int modelPosition)
 //                                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                              ^^^^^ definition local5 EpoxyModel model
       String descriptionOfWhenChangeHappened, int modelPosition) {

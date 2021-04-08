@@ -4,16 +4,17 @@ import com.sun.source.tree.*;
 import com.sun.source.util.*;
 import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
+import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.tree.EndPosTable;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.util.JCDiagnostic;
-import com.sun.tools.javac.util.List;
 import com.sun.tools.javac.util.Position;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Kind;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 
-import javax.lang.model.element.ElementKind;
+import javax.lang.model.type.PrimitiveType;
+import javax.lang.model.type.TypeKind;
 import javax.lang.model.util.Elements;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -21,8 +22,11 @@ import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.ARRAY_SYMBOL;
 
 /** Walks the AST of a typechecked compilation unit and generates a SemanticDB TextDocument. */
 public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
@@ -87,6 +91,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     if (documentation != null) builder.setDocumentation(documentation);
     Semanticdb.Signature signature = semanticdbSignature(sym);
     if (signature != null) builder.setSignature(signature);
+    List<Semanticdb.Annotation> annotations = semanticdbAnnotations(tree);
+    if (annotations != null) builder.addAllAnnotations(annotations);
 
     builder
         .setProperties(semanticdbSymbolInfoProperties(sym))
@@ -303,6 +309,171 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     } catch (IOException | NoSuchAlgorithmException e) {
       return "";
     }
+  }
+
+  private List<Semanticdb.Annotation> semanticdbAnnotations(JCTree node) {
+    if (!(node instanceof JCTree.JCClassDecl)
+        && !(node instanceof JCTree.JCVariableDecl)
+        && !(node instanceof JCTree.JCMethodDecl)) return null;
+
+    List<Semanticdb.Annotation> annotations = new ArrayList<>();
+
+    JCTree.JCModifiers mods;
+    if (node instanceof JCTree.JCClassDecl) {
+      mods = ((JCTree.JCClassDecl) node).getModifiers();
+    } else if (node instanceof JCTree.JCMethodDecl) {
+      mods = ((JCTree.JCMethodDecl) node).getModifiers();
+    } else {
+      mods = ((JCTree.JCVariableDecl) node).getModifiers();
+    }
+
+    for (JCTree.JCAnnotation annotation : mods.getAnnotations()) {
+      annotations.add(semanticdbAnnotation(annotation).build());
+    }
+
+    return annotations;
+  }
+
+  private Semanticdb.Annotation.Builder semanticdbAnnotation(JCTree.JCAnnotation annotation) {
+    Semanticdb.Annotation.Builder builder = Semanticdb.Annotation.newBuilder();
+    builder.setTpe(new SemanticdbTypeVisitor(globals, locals).visit(annotation.type));
+
+    for (JCTree.JCExpression param : annotation.args) {
+      Semanticdb.Annotation.ParameterPair.Builder parameterBuilder =
+          Semanticdb.Annotation.ParameterPair.newBuilder();
+
+      // anecdotally always JCAssign
+      JCTree.JCAssign assign = (JCTree.JCAssign) param;
+      JCTree.JCExpression assignValue = assign.rhs;
+
+      parameterBuilder.setKey(globals.semanticdbSymbol(((JCTree.JCIdent) assign.lhs).sym, locals));
+
+      parameterBuilder.setValue(semanticdbAnnotationParameter(assignValue));
+
+      builder.addParameters(parameterBuilder);
+    }
+
+    return builder;
+  }
+
+  private Semanticdb.Tree.Builder semanticdbAnnotationParameter(JCTree.JCExpression expr) {
+    if (expr instanceof JCTree.JCFieldAccess) {
+      JCTree.JCFieldAccess rhs = (JCTree.JCFieldAccess) expr;
+
+      Semanticdb.SelectTree.Builder selectBuilder =
+          Semanticdb.SelectTree.newBuilder()
+              .setQualifier(
+                  Semanticdb.Tree.newBuilder()
+                      .setIdTree(
+                          Semanticdb.IdTree.newBuilder()
+                              .setSymbol(globals.semanticdbSymbol(rhs.sym.owner, locals))))
+              .setId(
+                  Semanticdb.IdTree.newBuilder()
+                      .setSymbol(globals.semanticdbSymbol(rhs.sym, locals)));
+      return Semanticdb.Tree.newBuilder().setSelectTree(selectBuilder);
+    } else if (expr instanceof JCTree.JCNewArray) {
+      JCTree.JCNewArray rhs = (JCTree.JCNewArray) expr;
+      Semanticdb.ApplyTree.Builder applyTreeBuilder =
+          Semanticdb.ApplyTree.newBuilder()
+              .setFunction(
+                  Semanticdb.Tree.newBuilder()
+                      .setIdTree(Semanticdb.IdTree.newBuilder().setSymbol(ARRAY_SYMBOL)));
+
+      for (JCTree.JCExpression element : rhs.elems) {
+        applyTreeBuilder.addArguments(semanticdbAnnotationParameter(element));
+      }
+      return Semanticdb.Tree.newBuilder().setApplyTree(applyTreeBuilder);
+    } else if (expr instanceof JCTree.JCLiteral) {
+      // Literals can either be a primitive or String
+      JCTree.JCLiteral rhs = (JCTree.JCLiteral) expr;
+
+      Semanticdb.LiteralTree.Builder literalBuilder = Semanticdb.LiteralTree.newBuilder();
+
+      if (rhs.type instanceof Type.JCPrimitiveType) {
+        Type.JCPrimitiveType type = (Type.JCPrimitiveType) rhs.type;
+        Semanticdb.Constant.Builder constantBuilder = Semanticdb.Constant.newBuilder();
+        switch (type.getKind()) {
+          case BOOLEAN:
+            constantBuilder.setBooleanConstant(
+                Semanticdb.BooleanConstant.newBuilder()
+                    .setValue(((Integer) rhs.value) == 1)
+                    .build());
+            break;
+          case BYTE:
+            constantBuilder.setByteConstant(
+                Semanticdb.ByteConstant.newBuilder().setValue((Byte) rhs.value).build());
+            break;
+          case SHORT:
+            constantBuilder.setShortConstant(
+                Semanticdb.ShortConstant.newBuilder().setValue((Short) rhs.value).build());
+            break;
+          case INT:
+            constantBuilder.setIntConstant(
+                Semanticdb.IntConstant.newBuilder().setValue((Integer) rhs.value).build());
+            break;
+          case LONG:
+            constantBuilder.setLongConstant(
+                Semanticdb.LongConstant.newBuilder().setValue((Long) rhs.value).build());
+            break;
+          case CHAR:
+            constantBuilder.setCharConstant(
+                Semanticdb.CharConstant.newBuilder().setValue((Character) rhs.value).build());
+            break;
+          case FLOAT:
+            constantBuilder.setFloatConstant(
+                Semanticdb.FloatConstant.newBuilder().setValue((Float) rhs.value).build());
+            break;
+          case DOUBLE:
+            constantBuilder.setDoubleConstant(
+                Semanticdb.DoubleConstant.newBuilder().setValue((Double) rhs.value).build());
+            break;
+        }
+        literalBuilder.setConstant(constantBuilder);
+      } else if (rhs.type instanceof Type.ClassType) {
+        Semanticdb.Constant.Builder constantBuilder = Semanticdb.Constant.newBuilder();
+
+        if (rhs.value instanceof String) {
+          constantBuilder.setStringConstant(
+              Semanticdb.StringConstant.newBuilder().setValue((String) rhs.value).build());
+        } else {
+          throw new IllegalStateException(
+              semanticdbUri()
+                  + ": annotation parameter rhs was of unexpected class type "
+                  + rhs.value.getClass()
+                  + "\n"
+                  + rhs.value);
+        }
+
+        literalBuilder.setConstant(constantBuilder);
+      } else {
+        throw new IllegalStateException(
+            semanticdbUri()
+                + ": annotation parameter rhs was of unexpected type "
+                + rhs.type.getClass()
+                + "\n"
+                + rhs.type);
+      }
+
+      return Semanticdb.Tree.newBuilder().setLiteralTree(literalBuilder);
+    } else if (expr instanceof JCTree.JCAnnotation) {
+      return Semanticdb.Tree.newBuilder()
+          .setAnnotationTree(
+              Semanticdb.AnnotationTree.newBuilder()
+                  .setAnnotation(semanticdbAnnotation((JCTree.JCAnnotation) expr)));
+    } else if (expr instanceof JCTree.JCIdent) {
+      return Semanticdb.Tree.newBuilder()
+          .setIdTree(
+              Semanticdb.IdTree.newBuilder()
+                  .setSymbol(globals.semanticdbSymbol(((JCTree.JCIdent) expr).sym, locals))
+                  .build());
+    }
+
+    throw new IllegalArgumentException(
+        semanticdbUri()
+            + ": annotation parameter rhs was of unexpected tree node type "
+            + expr.getClass()
+            + "\n"
+            + expr);
   }
 
   private int semanticdbSymbolInfoProperties(Symbol sym) {

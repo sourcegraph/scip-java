@@ -51,7 +51,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected int getViewType() {
-//              ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#getViewType(). protected int getViewType()
+//              ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#getViewType(). @Override protected int getViewType()
     return 0;
   }
 
@@ -65,15 +65,15 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
 // ^^^^^^^^ reference java/lang/Override#
   protected abstract T buildView(@NonNull ViewGroup parent);
 //                   ^ reference com/airbnb/epoxy/EpoxyModelWithView#[T]
-//                     ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#buildView(). protected abstract T buildView(unresolved_type parent)
+//                     ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#buildView(). @Override protected abstract T buildView(unresolved_type parent)
 //                                ^^^^^^^ reference androidx/annotation/NonNull#
 //                                        ^^^^^^^^^ reference _root_/
-//                                                  ^^^^^^ definition local0 unresolved_type parent
+//                                                  ^^^^^^ definition local0 @NonNull unresolved_type parent
 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected final int getDefaultLayout() {
-//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#getDefaultLayout(). protected final int getDefaultLayout()
+//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#getDefaultLayout(). @Override protected final int getDefaultLayout()
     throw new UnsupportedOperationException(
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1). 1:83
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#
@@ -85,9 +85,9 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
   public EpoxyModel<T> layout(@LayoutRes int layoutRes) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference com/airbnb/epoxy/EpoxyModelWithView#[T]
-//                     ^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#layout(). public EpoxyModel<T> layout(int layoutRes)
+//                     ^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#layout(). @Override public EpoxyModel<T> layout(int layoutRes)
 //                             ^^^^^^^^^ reference androidx/annotation/LayoutRes#
-//                                           ^^^^^^^^^ definition local1 int layoutRes
+//                                           ^^^^^^^^^ definition local1 @LayoutRes int layoutRes
     throw new UnsupportedOperationException(
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1). 1:83
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#

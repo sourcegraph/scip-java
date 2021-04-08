@@ -19,5 +19,5 @@ public interface OnModelBuildFinishedListener {
 //     ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBuildFinishedListener#onModelBuildFinished(). public abstract void onModelBuildFinished(DiffResult result)
 //                           ^^^^^^^ reference androidx/annotation/NonNull#
 //                                   ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#
-//                                              ^^^^^^ definition local0 DiffResult result
+//                                              ^^^^^^ definition local0 @NonNull DiffResult result
 }

@@ -2,4 +2,3 @@
 -Xms1G
 -Xmx4G
 -Dfile.encoding=UTF-8
--Dsbt.server.autostart=false

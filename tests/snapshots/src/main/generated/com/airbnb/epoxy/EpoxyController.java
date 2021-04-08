@@ -260,7 +260,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
    */
   @RequestedModelBuildType private volatile int requestedModelBuildType =
 // ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#
-//                                              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#requestedModelBuildType. private int requestedModelBuildType
+//                                              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#requestedModelBuildType. @RequestedModelBuildType private int requestedModelBuildType
       RequestedModelBuildType.NONE;
 //    ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#
 //                            ^^^^ reference com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#NONE.
@@ -280,7 +280,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //    ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#
 //                            ^^^^^^^ reference com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#DELAYED.
   private @interface RequestedModelBuildType {
-//                   ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#RequestedModelBuildType# private @interface RequestedModelBuildType
+//                   ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#RequestedModelBuildType# @Retention(RetentionPolicy.SOURCE) @IntDef({RequestedModelBuildType.NONE, RequestedModelBuildType.NEXT_FRAME, RequestedModelBuildType.DELAYED}) private @interface RequestedModelBuildType
     int NONE = 0;
 //      ^^^^ definition com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#NONE. public static final int NONE
     /** A request has been made to build models immediately. It is posted. */
@@ -477,7 +477,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void run() {
-//              ^^^ definition local7 public void run()
+//              ^^^ definition local7 @Override public void run()
       // Do this first to mark the controller as being in the model building process.
       threadBuildingModels = Thread.currentThread();
 //    ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#threadBuildingModels.
@@ -767,7 +767,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                  ^^^^^^^ reference androidx/annotation/NonNull#
 //                          ^^^^ reference java/util/List#
 //                               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                              ^^^^^^ definition local23 List<EpoxyModel<?>> models
+//                                              ^^^^^^ definition local23 @NonNull List<EpoxyModel<?>> models
   }
 
   /**
@@ -782,7 +782,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#addInterceptor(). public void addInterceptor(Interceptor interceptor)
 //                            ^^^^^^^ reference androidx/annotation/NonNull#
 //                                    ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#Interceptor#
-//                                                ^^^^^^^^^^^ definition local24 Interceptor interceptor
+//                                                ^^^^^^^^^^^ definition local24 @NonNull Interceptor interceptor
     interceptors.add(interceptor);
 //  ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#interceptors.
 //               ^^^ reference java/util/List#add().
@@ -794,7 +794,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //            ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#removeInterceptor(). public void removeInterceptor(Interceptor interceptor)
 //                               ^^^^^^^ reference androidx/annotation/NonNull#
 //                                       ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#Interceptor#
-//                                                   ^^^^^^^^^^^ definition local25 Interceptor interceptor
+//                                                   ^^^^^^^^^^^ definition local25 @NonNull Interceptor interceptor
     interceptors.remove(interceptor);
 //  ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#interceptors.
 //               ^^^^^^ reference java/util/List#remove().
@@ -846,7 +846,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //            ^^^ definition com/airbnb/epoxy/EpoxyController#add(). public void add(EpoxyModel<?> model)
 //                 ^^^^^^^ reference androidx/annotation/NonNull#
 //                         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                       ^^^^^ definition local26 EpoxyModel<?> model
+//                                       ^^^^^ definition local26 @NonNull EpoxyModel<?> model
     model.addTo(this);
 //  ^^^^^ reference local26
 //        ^^^^^ reference com/airbnb/epoxy/EpoxyModel#addTo().
@@ -861,7 +861,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //               ^^^ definition com/airbnb/epoxy/EpoxyController#add(+1). protected void add(EpoxyModel<?>[] modelsToAdd)
 //                    ^^^^^^^ reference androidx/annotation/NonNull#
 //                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                             ^^^^^^^^^^^ definition local27 EpoxyModel<?>[] modelsToAdd
+//                                             ^^^^^^^^^^^ definition local27 @NonNull EpoxyModel<?>[] modelsToAdd
     modelsBeingBuilt.ensureCapacity(modelsBeingBuilt.size() + modelsToAdd.length);
 //  ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#modelsBeingBuilt.
 //                   ^^^^^^^^^^^^^^ reference java/util/ArrayList#ensureCapacity().
@@ -889,7 +889,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                    ^^^^^^^ reference androidx/annotation/NonNull#
 //                            ^^^^ reference java/util/List#
 //                                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                          ^^^^^^^^^^^ definition local29 List<? extends EpoxyModel<?>> modelsToAdd
+//                                                          ^^^^^^^^^^^ definition local29 @NonNull List<? extends EpoxyModel<?>> modelsToAdd
     modelsBeingBuilt.ensureCapacity(modelsBeingBuilt.size() + modelsToAdd.size());
 //  ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#modelsBeingBuilt.
 //                   ^^^^^^^^^^^^^^ reference java/util/ArrayList#ensureCapacity().
@@ -1314,7 +1314,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 // ^^^^^^^ reference androidx/annotation/NonNull#
   public EpoxyControllerAdapter getAdapter() {
 //       ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#
-//                              ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#getAdapter(). public EpoxyControllerAdapter getAdapter()
+//                              ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#getAdapter(). @NonNull public EpoxyControllerAdapter getAdapter()
     return adapter;
 //         ^^^^^^^ reference com/airbnb/epoxy/EpoxyController#adapter.
   }
@@ -1323,7 +1323,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#onSaveInstanceState(). public void onSaveInstanceState(unresolved_type outState)
 //                                 ^^^^^^^ reference androidx/annotation/NonNull#
 //                                         ^^^^^^ reference _root_/
-//                                                ^^^^^^^^ definition local53 unresolved_type outState
+//                                                ^^^^^^^^ definition local53 @NonNull unresolved_type outState
     adapter.onSaveInstanceState(outState);
 //  ^^^^^^^ reference com/airbnb/epoxy/EpoxyController#adapter.
 //          ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#onSaveInstanceState().
@@ -1334,7 +1334,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#onRestoreInstanceState(). public void onRestoreInstanceState(unresolved_type inState)
 //                                    ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                             ^^^^^^ reference _root_/
-//                                                    ^^^^^^^ definition local54 unresolved_type inState
+//                                                    ^^^^^^^ definition local54 @Nullable unresolved_type inState
     adapter.onRestoreInstanceState(inState);
 //  ^^^^^^^ reference com/airbnb/epoxy/EpoxyController#adapter.
 //          ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#onRestoreInstanceState().
@@ -1351,7 +1351,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 // ^^^^^^^ reference androidx/annotation/NonNull#
   public SpanSizeLookup getSpanSizeLookup() {
 //       ^^^^^^^^^^^^^^ reference _root_/
-//                      ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#getSpanSizeLookup(). public getSpanSizeLookup()
+//                      ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#getSpanSizeLookup(). @NonNull public getSpanSizeLookup()
     return adapter.getSpanSizeLookup();
 //         ^^^^^^^ reference com/airbnb/epoxy/EpoxyController#adapter.
 //                 ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getSpanSizeLookup().
@@ -1403,7 +1403,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#onExceptionSwallowed(). protected void onExceptionSwallowed(RuntimeException exception)
 //                                     ^^^^^^^ reference androidx/annotation/NonNull#
 //                                             ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
-//                                                              ^^^^^^^^^ definition local56 RuntimeException exception
+//                                                              ^^^^^^^^^ definition local56 @NonNull RuntimeException exception
     globalExceptionHandler.onException(this, exception);
 //  ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#globalExceptionHandler.
 //                         ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#ExceptionHandler#onException().
@@ -1426,14 +1426,14 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
         public void onException(@NonNull EpoxyController controller,
-//                  ^^^^^^^^^^^ definition local59 public void onException(EpoxyController controller, RuntimeException exception)
+//                  ^^^^^^^^^^^ definition local59 @Override public void onException(EpoxyController controller, RuntimeException exception)
 //                               ^^^^^^^ reference androidx/annotation/NonNull#
 //                                       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
-//                                                       ^^^^^^^^^^ definition local60 EpoxyController controller
+//                                                       ^^^^^^^^^^ definition local60 @NonNull EpoxyController controller
             @NonNull RuntimeException exception) {
 //           ^^^^^^^ reference androidx/annotation/NonNull#
 //                   ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
-//                                    ^^^^^^^^^ definition local61 RuntimeException exception
+//                                    ^^^^^^^^^ definition local61 @NonNull RuntimeException exception
           // Ignore exceptions as the default
         }
       };
@@ -1457,7 +1457,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
       @NonNull ExceptionHandler globalExceptionHandler) {
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#ExceptionHandler#
-//                              ^^^^^^^^^^^^^^^^^^^^^^ definition local62 ExceptionHandler globalExceptionHandler
+//                              ^^^^^^^^^^^^^^^^^^^^^^ definition local62 @NonNull ExceptionHandler globalExceptionHandler
     EpoxyController.globalExceptionHandler = globalExceptionHandler;
 //  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                  ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#globalExceptionHandler.
@@ -1479,10 +1479,10 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //       ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#ExceptionHandler#onException(). public abstract void onException(EpoxyController controller, RuntimeException exception)
 //                    ^^^^^^^ reference androidx/annotation/NonNull#
 //                            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
-//                                            ^^^^^^^^^^ definition local63 EpoxyController controller
+//                                            ^^^^^^^^^^ definition local63 @NonNull EpoxyController controller
 //                                                         ^^^^^^^ reference androidx/annotation/NonNull#
 //                                                                 ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
-//                                                                                  ^^^^^^^^^ definition local64 RuntimeException exception
+//                                                                                  ^^^^^^^^^ definition local64 @NonNull RuntimeException exception
   }
 
   void onAttachedToRecyclerViewInternal(RecyclerView recyclerView) {
@@ -1505,7 +1505,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
         public void run() {
-//                  ^^^ definition local68 public void run()
+//                  ^^^ definition local68 @Override public void run()
           // Only warn if there are still multiple adapters attached after a delay, to allow for
           // a grace period
           if (recyclerViewAttachCount > 1) {
@@ -1551,7 +1551,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //               ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#onAttachedToRecyclerView(). protected void onAttachedToRecyclerView(unresolved_type recyclerView)
 //                                         ^^^^^^^ reference androidx/annotation/NonNull#
 //                                                 ^^^^^^^^^^^^ reference _root_/
-//                                                              ^^^^^^^^^^^^ definition local70 unresolved_type recyclerView
+//                                                              ^^^^^^^^^^^^ definition local70 @NonNull unresolved_type recyclerView
 
   }
 
@@ -1560,7 +1560,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#onDetachedFromRecyclerView(). protected void onDetachedFromRecyclerView(unresolved_type recyclerView)
 //                                           ^^^^^^^ reference androidx/annotation/NonNull#
 //                                                   ^^^^^^^^^^^^ reference _root_/
-//                                                                ^^^^^^^^^^^^ definition local71 unresolved_type recyclerView
+//                                                                ^^^^^^^^^^^^ definition local71 @NonNull unresolved_type recyclerView
 
   }
 
@@ -1601,16 +1601,16 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //               ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#onModelBound(). protected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> boundModel, int position, EpoxyModel<?> previouslyBoundModel)
 //                             ^^^^^^^ reference androidx/annotation/NonNull#
 //                                     ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                     ^^^^^^ definition local72 EpoxyViewHolder holder
+//                                                     ^^^^^^ definition local72 @NonNull EpoxyViewHolder holder
 //                                                              ^^^^^^^ reference androidx/annotation/NonNull#
 //                                                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                                                    ^^^^^^^^^^ definition local73 EpoxyModel<?> boundModel
+//                                                                                    ^^^^^^^^^^ definition local73 @NonNull EpoxyModel<?> boundModel
       int position,
 //        ^^^^^^^^ definition local74 int position
       @Nullable EpoxyModel<?> previouslyBoundModel) {
 //     ^^^^^^^^ reference androidx/annotation/Nullable#
 //              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                            ^^^^^^^^^^^^^^^^^^^^ definition local75 EpoxyModel<?> previouslyBoundModel
+//                            ^^^^^^^^^^^^^^^^^^^^ definition local75 @Nullable EpoxyModel<?> previouslyBoundModel
   }
 
   /**
@@ -1622,10 +1622,10 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#onModelUnbound(). protected void onModelUnbound(EpoxyViewHolder holder, EpoxyModel<?> model)
 //                               ^^^^^^^ reference androidx/annotation/NonNull#
 //                                       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                       ^^^^^^ definition local76 EpoxyViewHolder holder
+//                                                       ^^^^^^ definition local76 @NonNull EpoxyViewHolder holder
 //                                                                ^^^^^^^ reference androidx/annotation/NonNull#
 //                                                                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                                                      ^^^^^ definition local77 EpoxyModel<?> model
+//                                                                                      ^^^^^ definition local77 @NonNull EpoxyModel<?> model
 
   }
 
@@ -1639,11 +1639,11 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //               ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#onViewAttachedToWindow(). protected void onViewAttachedToWindow(EpoxyViewHolder holder, EpoxyModel<?> model)
 //                                       ^^^^^^^ reference androidx/annotation/NonNull#
 //                                               ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                               ^^^^^^ definition local78 EpoxyViewHolder holder
+//                                                               ^^^^^^ definition local78 @NonNull EpoxyViewHolder holder
       @NonNull EpoxyModel<?> model) {
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                           ^^^^^ definition local79 EpoxyModel<?> model
+//                           ^^^^^ definition local79 @NonNull EpoxyModel<?> model
 
   }
 
@@ -1657,11 +1657,11 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //               ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#onViewDetachedFromWindow(). protected void onViewDetachedFromWindow(EpoxyViewHolder holder, EpoxyModel<?> model)
 //                                         ^^^^^^^ reference androidx/annotation/NonNull#
 //                                                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                                 ^^^^^^ definition local80 EpoxyViewHolder holder
+//                                                                 ^^^^^^ definition local80 @NonNull EpoxyViewHolder holder
       @NonNull EpoxyModel<?> model) {
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                           ^^^^^ definition local81 EpoxyModel<?> model
+//                           ^^^^^ definition local81 @NonNull EpoxyModel<?> model
 
   }
 
@@ -1677,10 +1677,10 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void setupStickyHeaderView(@NotNull View stickyHeader) {
-//            ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#setupStickyHeaderView(). public void setupStickyHeaderView(unresolved_type stickyHeader)
+//            ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#setupStickyHeaderView(). @Override public void setupStickyHeaderView(unresolved_type stickyHeader)
 //                                   ^^^^^^^ reference org/jetbrains/annotations/NotNull#
 //                                           ^^^^ reference _root_/
-//                                                ^^^^^^^^^^^^ definition local82 unresolved_type stickyHeader
+//                                                ^^^^^^^^^^^^ definition local82 @NotNull unresolved_type stickyHeader
     // no-op
   }
 
@@ -1694,10 +1694,10 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void teardownStickyHeaderView(@NotNull View stickyHeader) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#teardownStickyHeaderView(). public void teardownStickyHeaderView(unresolved_type stickyHeader)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#teardownStickyHeaderView(). @Override public void teardownStickyHeaderView(unresolved_type stickyHeader)
 //                                      ^^^^^^^ reference org/jetbrains/annotations/NotNull#
 //                                              ^^^^ reference _root_/
-//                                                   ^^^^^^^^^^^^ definition local83 unresolved_type stickyHeader
+//                                                   ^^^^^^^^^^^^ definition local83 @NotNull unresolved_type stickyHeader
     // no-op
   }
 
@@ -1711,7 +1711,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public boolean isStickyHeader(int position) {
-//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#isStickyHeader(). public boolean isStickyHeader(int position)
+//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#isStickyHeader(). @Override public boolean isStickyHeader(int position)
 //                                  ^^^^^^^^ definition local84 int position
     return false;
   }

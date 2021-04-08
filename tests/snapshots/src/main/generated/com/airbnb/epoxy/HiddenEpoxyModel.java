@@ -25,7 +25,7 @@ class HiddenEpoxyModel extends EpoxyModel<Space> {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public int getDefaultLayout() {
-//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#getDefaultLayout(). public int getDefaultLayout()
+//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#getDefaultLayout(). @Override public int getDefaultLayout()
     return R.layout.view_holder_empty_view;
 //         ^ reference R/
 //           ^^^^^^ reference R/layout#
@@ -35,7 +35,7 @@ class HiddenEpoxyModel extends EpoxyModel<Space> {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public int getSpanSize(int spanCount, int position, int itemCount) {
-//           ^^^^^^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#getSpanSize(). public int getSpanSize(int spanCount, int position, int itemCount)
+//           ^^^^^^^^^^^ definition com/airbnb/epoxy/HiddenEpoxyModel#getSpanSize(). @Override public int getSpanSize(int spanCount, int position, int itemCount)
 //                           ^^^^^^^^^ definition local0 int spanCount
 //                                          ^^^^^^^^ definition local1 int position
 //                                                        ^^^^^^^^^ definition local2 int itemCount

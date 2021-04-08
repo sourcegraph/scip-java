@@ -43,7 +43,7 @@ public class SimpleEpoxyController extends EpoxyController {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public final void requestModelBuild() {
-//                  ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#requestModelBuild(). public final void requestModelBuild()
+//                  ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#requestModelBuild(). @Override public final void requestModelBuild()
     if (!insideSetModels) {
 //       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/SimpleEpoxyController#insideSetModels.
       throw new IllegalEpoxyUsage(
@@ -59,7 +59,7 @@ public class SimpleEpoxyController extends EpoxyController {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected final void buildModels() {
-//                     ^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#buildModels(). protected final void buildModels()
+//                     ^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyController#buildModels(). @Override protected final void buildModels()
     if (!isBuildingModels()) {
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#isBuildingModels().
       throw new IllegalEpoxyUsage(

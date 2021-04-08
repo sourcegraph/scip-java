@@ -77,7 +77,7 @@ public final class EpoxyAsyncUtil {
 // ^^^^^^^^^^ reference androidx/annotation/MainThread#
   public static Handler getAsyncBackgroundHandler() {
 //              ^^^^^^^ reference _root_/
-//                      ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#getAsyncBackgroundHandler(). public static getAsyncBackgroundHandler()
+//                      ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAsyncUtil#getAsyncBackgroundHandler(). @MainThread public static getAsyncBackgroundHandler()
     // This is initialized lazily so we don't create the thread unless it will be used.
     // It isn't synchronized so it should only be accessed on the main thread.
     if (asyncBackgroundHandler == null) {

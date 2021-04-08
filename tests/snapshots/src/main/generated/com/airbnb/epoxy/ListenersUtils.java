@@ -33,7 +33,7 @@ public class ListenersUtils {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
   static EpoxyViewHolder getEpoxyHolderForChildView(View v) {
 //       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                       ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ListenersUtils#getEpoxyHolderForChildView(). static EpoxyViewHolder getEpoxyHolderForChildView(unresolved_type v)
+//                       ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ListenersUtils#getEpoxyHolderForChildView(). @Nullable static EpoxyViewHolder getEpoxyHolderForChildView(unresolved_type v)
 //                                                  ^^^^ reference _root_/
 //                                                       ^ definition local0 unresolved_type v
     RecyclerView recyclerView = findParentRecyclerView(v);
@@ -72,10 +72,10 @@ public class ListenersUtils {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
   private static RecyclerView findParentRecyclerView(@Nullable View v) {
 //               ^^^^^^^^^^^^ reference _root_/
-//                            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ListenersUtils#findParentRecyclerView(). private static findParentRecyclerView(unresolved_type v)
+//                            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ListenersUtils#findParentRecyclerView(). @Nullable private static findParentRecyclerView(unresolved_type v)
 //                                                    ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                                             ^^^^ reference _root_/
-//                                                                  ^ definition local3 unresolved_type v
+//                                                                  ^ definition local3 @Nullable unresolved_type v
     if (v == null) {
 //      ^ reference local3
       return null;

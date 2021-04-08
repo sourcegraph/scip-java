@@ -35,7 +35,7 @@ import androidx.annotation.Nullable;
 @SuppressWarnings("WeakerAccess")
 //^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
-//                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter# public abstract class EpoxyAdapter extends BaseEpoxyAdapter
+//                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter# @SuppressWarnings("WeakerAccess") public abstract class EpoxyAdapter extends BaseEpoxyAdapter
 //                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#`<init>`(). public EpoxyAdapter()
 //                                         ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
   private final HiddenEpoxyModel hiddenModel = new HiddenEpoxyModel();
@@ -63,7 +63,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   List<EpoxyModel<?>> getCurrentModels() {
 //^^^^ reference java/util/List#
 //     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#getCurrentModels(). List<EpoxyModel<?>> getCurrentModels()
+//                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#getCurrentModels(). @Override List<EpoxyModel<?>> getCurrentModels()
     return models;
 //         ^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#models.
   }
@@ -109,7 +109,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 // ^^^^^^^^ reference java/lang/Override#
   EpoxyModel<?> getModelForPosition(int position) {
 //^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#getModelForPosition(). EpoxyModel<?> getModelForPosition(int position)
+//              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#getModelForPosition(). @Override EpoxyModel<?> getModelForPosition(int position)
 //                                      ^^^^^^^^ definition local0 int position
     EpoxyModel<?> model = models.get(position);
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -174,7 +174,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 //                                                ^^^^^ definition local3 EpoxyModel<?> model
 //                                                        ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                                                 ^^^^^^ reference java/lang/Object#
-//                                                                        ^^^^^^^ definition local4 Object payload
+//                                                                        ^^^^^^^ definition local4 @Nullable Object payload
     int index = getModelPosition(model);
 //      ^^^^^ definition local5 int index
 //              ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().

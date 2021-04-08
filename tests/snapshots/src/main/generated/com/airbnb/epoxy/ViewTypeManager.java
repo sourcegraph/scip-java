@@ -36,7 +36,7 @@ class ViewTypeManager {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
   EpoxyModel<?> lastModelForViewTypeLookup;
 //^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#lastModelForViewTypeLookup. EpoxyModel<?> lastModelForViewTypeLookup
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#lastModelForViewTypeLookup. @Nullable EpoxyModel<?> lastModelForViewTypeLookup
 
   /**
    * The type map is static so that models of the same class share the same views across different
@@ -47,7 +47,7 @@ class ViewTypeManager {
   @VisibleForTesting
 // ^^^^^^^^^^^^^^^^^ reference androidx/annotation/VisibleForTesting#
   void resetMapForTesting() {
-//     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#resetMapForTesting(). void resetMapForTesting()
+//     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#resetMapForTesting(). @VisibleForTesting void resetMapForTesting()
     VIEW_TYPE_MAP.clear();
 //  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewTypeManager#VIEW_TYPE_MAP.
 //                ^^^^^ reference java/util/Map#clear().

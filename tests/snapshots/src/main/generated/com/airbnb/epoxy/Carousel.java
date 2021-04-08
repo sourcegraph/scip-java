@@ -110,7 +110,7 @@ import androidx.recyclerview.widget.SnapHelper;
 //                                            ^^^^ reference com/airbnb/epoxy/ModelView#Size#
 //                                                 ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelView#Size#MATCH_WIDTH_WRAP_HEIGHT.
 public class Carousel extends EpoxyRecyclerView {
-//           ^^^^^^^^ definition com/airbnb/epoxy/Carousel# public class Carousel extends unresolved_type
+//           ^^^^^^^^ definition com/airbnb/epoxy/Carousel# @ModelView(saveViewState = true, autoLayout = Size.MATCH_WIDTH_WRAP_HEIGHT) public class Carousel extends unresolved_type
 //                            ^^^^^^^^^^^^^^^^^ reference _root_/
   public static final int NO_VALUE_SET = -1;
 //                        ^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#NO_VALUE_SET. public static final int NO_VALUE_SET
@@ -129,7 +129,7 @@ public class Carousel extends EpoxyRecyclerView {
 //       ^^^^^^^ reference androidx/annotation/NonNull#
         public SnapHelper buildSnapHelper(Context context) {
 //             ^^^^^^^^^^ reference _root_/
-//                        ^^^^^^^^^^^^^^^ definition local2 public buildSnapHelper(unresolved_type context)
+//                        ^^^^^^^^^^^^^^^ definition local2 @Override @NonNull public buildSnapHelper(unresolved_type context)
 //                                        ^^^^^^^ reference _root_/
 //                                                ^^^^^^^ definition local3 unresolved_type context
           return new LinearSnapHelper();
@@ -144,7 +144,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                  ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                            ^^ reference androidx/annotation/Dimension#DP.
   private static int defaultSpacingBetweenItemsDp = 8;
-//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#defaultSpacingBetweenItemsDp. private static int defaultSpacingBetweenItemsDp
+//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#defaultSpacingBetweenItemsDp. @Dimension(unit = Dimension.DP) private static int defaultSpacingBetweenItemsDp
 
   private float numViewsToShowOnScreen;
 //              ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#numViewsToShowOnScreen. private float numViewsToShowOnScreen
@@ -163,7 +163,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                        ^^^^^^^ definition local5 unresolved_type context
 //                                  ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                           ^^^^^^^^^^^^ reference _root_/
-//                                                        ^^^^^ definition local6 unresolved_type attrs
+//                                                        ^^^^^ definition local6 @Nullable unresolved_type attrs
     super(context, attrs);
 //        ^^^^^^^ reference local5
 //                 ^^^^^ reference local6
@@ -175,7 +175,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                        ^^^^^^^ definition local7 unresolved_type context
 //                                  ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                           ^^^^^^^^^^^^ reference _root_/
-//                                                        ^^^^^ definition local8 unresolved_type attrs
+//                                                        ^^^^^ definition local8 @Nullable unresolved_type attrs
 //                                                                   ^^^^^^^^ definition local9 int defStyle
     super(context, attrs, defStyle);
 //        ^^^^^^^ reference local7
@@ -186,7 +186,7 @@ public class Carousel extends EpoxyRecyclerView {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected void init() {
-//               ^^^^ definition com/airbnb/epoxy/Carousel#init(). protected void init()
+//               ^^^^ definition com/airbnb/epoxy/Carousel#init(). @Override protected void init()
     super.init();
 //  ^^^^^ reference _root_/
 //        ^^^^ reference init#
@@ -244,7 +244,7 @@ public class Carousel extends EpoxyRecyclerView {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
   protected SnapHelperFactory getSnapHelperFactory() {
 //          ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#SnapHelperFactory#
-//                            ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#getSnapHelperFactory(). protected SnapHelperFactory getSnapHelperFactory()
+//                            ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#getSnapHelperFactory(). @Nullable protected SnapHelperFactory getSnapHelperFactory()
     return defaultGlobalSnapHelperFactory;
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#defaultGlobalSnapHelperFactory.
   }
@@ -261,7 +261,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setDefaultGlobalSnapHelperFactory(). public static void setDefaultGlobalSnapHelperFactory(SnapHelperFactory factory)
 //                                                      ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                                               ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#SnapHelperFactory#
-//                                                                                 ^^^^^^^ definition local12 SnapHelperFactory factory
+//                                                                                 ^^^^^^^ definition local12 @Nullable SnapHelperFactory factory
     defaultGlobalSnapHelperFactory = factory;
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#defaultGlobalSnapHelperFactory.
 //                                   ^^^^^^^ reference local12
@@ -272,7 +272,7 @@ public class Carousel extends EpoxyRecyclerView {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void setHasFixedSize(boolean hasFixedSize) {
-//            ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setHasFixedSize(). public void setHasFixedSize(boolean hasFixedSize)
+//            ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setHasFixedSize(). @ModelProp @Override public void setHasFixedSize(boolean hasFixedSize)
 //                                    ^^^^^^^^^^^^ definition local13 boolean hasFixedSize
     super.setHasFixedSize(hasFixedSize);
 //  ^^^^^ reference _root_/
@@ -302,7 +302,7 @@ public class Carousel extends EpoxyRecyclerView {
 // ^^^^^^^^^ reference com/airbnb/epoxy/ModelProp#
 //           ^^^^^ reference com/airbnb/epoxy/ModelProp#group().
   public void setNumViewsToShowOnScreen(float viewCount) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setNumViewsToShowOnScreen(). public void setNumViewsToShowOnScreen(float viewCount)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setNumViewsToShowOnScreen(). @ModelProp(group = "prefetch") public void setNumViewsToShowOnScreen(float viewCount)
 //                                            ^^^^^^^^^ definition local14 float viewCount
     numViewsToShowOnScreen = viewCount;
 //  ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#numViewsToShowOnScreen.
@@ -334,7 +334,7 @@ public class Carousel extends EpoxyRecyclerView {
 // ^^^^^^^^^ reference com/airbnb/epoxy/ModelProp#
 //           ^^^^^ reference com/airbnb/epoxy/ModelProp#group().
   public void setInitialPrefetchItemCount(int numItemsToPrefetch) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setInitialPrefetchItemCount(). public void setInitialPrefetchItemCount(int numItemsToPrefetch)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setInitialPrefetchItemCount(). @ModelProp(group = "prefetch") public void setInitialPrefetchItemCount(int numItemsToPrefetch)
 //                                            ^^^^^^^^^^^^^^^^^^ definition local15 int numItemsToPrefetch
     if (numItemsToPrefetch < 0) {
 //      ^^^^^^^^^^^^^^^^^^ reference local15
@@ -367,7 +367,7 @@ public class Carousel extends EpoxyRecyclerView {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onChildAttachedToWindow(View child) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#onChildAttachedToWindow(). public void onChildAttachedToWindow(unresolved_type child)
+//            ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#onChildAttachedToWindow(). @Override public void onChildAttachedToWindow(unresolved_type child)
 //                                    ^^^^ reference _root_/
 //                                         ^^^^^ definition local18 unresolved_type child
     if (numViewsToShowOnScreen > 0) {
@@ -464,7 +464,7 @@ public class Carousel extends EpoxyRecyclerView {
   @Px
 // ^^ reference androidx/annotation/Px#
   private static int getTotalWidthPx(View view) {
-//                   ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#getTotalWidthPx(). private static int getTotalWidthPx(unresolved_type view)
+//                   ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#getTotalWidthPx(). @Px private static int getTotalWidthPx(unresolved_type view)
 //                                   ^^^^ reference _root_/
 //                                        ^^^^ definition local25 unresolved_type view
     if (view.getWidth() > 0) {
@@ -500,7 +500,7 @@ public class Carousel extends EpoxyRecyclerView {
   @Px
 // ^^ reference androidx/annotation/Px#
   private static int getTotalHeightPx(View view) {
-//                   ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#getTotalHeightPx(). private static int getTotalHeightPx(unresolved_type view)
+//                   ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#getTotalHeightPx(). @Px private static int getTotalHeightPx(unresolved_type view)
 //                                    ^^^^ reference _root_/
 //                                         ^^^^ definition local27 unresolved_type view
     if (view.getHeight() > 0) {
@@ -535,7 +535,7 @@ public class Carousel extends EpoxyRecyclerView {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onChildDetachedFromWindow(View child) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#onChildDetachedFromWindow(). public void onChildDetachedFromWindow(unresolved_type child)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#onChildDetachedFromWindow(). @Override public void onChildDetachedFromWindow(unresolved_type child)
 //                                      ^^^^ reference _root_/
 //                                           ^^^^^ definition local29 unresolved_type child
     // Restore the view width that existed before we modified it
@@ -581,7 +581,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                                                      ^^^^ reference androidx/annotation/Dimension#unit().
 //                                                             ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                                                                       ^^ reference androidx/annotation/Dimension#DP.
-//                                                                               ^^ definition local32 int dp
+//                                                                               ^^ definition local32 @Dimension(unit = Dimension.DP) int dp
     defaultSpacingBetweenItemsDp = dp;
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#defaultSpacingBetweenItemsDp.
 //                                 ^^ reference local32
@@ -599,7 +599,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                  ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                            ^^ reference androidx/annotation/Dimension#DP.
   protected int getDefaultSpacingBetweenItemsDp() {
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#getDefaultSpacingBetweenItemsDp(). protected int getDefaultSpacingBetweenItemsDp()
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#getDefaultSpacingBetweenItemsDp(). @Dimension(unit = Dimension.DP) protected int getDefaultSpacingBetweenItemsDp()
     return defaultSpacingBetweenItemsDp;
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#defaultSpacingBetweenItemsDp.
   }
@@ -612,9 +612,9 @@ public class Carousel extends EpoxyRecyclerView {
 // ^^^^^^^^^ reference com/airbnb/epoxy/ModelProp#
 //           ^^^^^ reference com/airbnb/epoxy/ModelProp#group().
   public void setPaddingRes(@DimenRes int paddingRes) {
-//            ^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setPaddingRes(). public void setPaddingRes(int paddingRes)
+//            ^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setPaddingRes(). @ModelProp(group = "padding") public void setPaddingRes(int paddingRes)
 //                           ^^^^^^^^ reference androidx/annotation/DimenRes#
-//                                        ^^^^^^^^^^ definition local33 int paddingRes
+//                                        ^^^^^^^^^^ definition local33 @DimenRes int paddingRes
     int px = resToPx(paddingRes);
 //      ^^ definition local34 int px
 //           ^^^^^^^ reference com/airbnb/epoxy/Carousel#resToPx#
@@ -641,12 +641,12 @@ public class Carousel extends EpoxyRecyclerView {
 //           ^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelProp#defaultValue().
 //                                          ^^^^^ reference com/airbnb/epoxy/ModelProp#group().
   public void setPaddingDp(@Dimension(unit = Dimension.DP) int paddingDp) {
-//            ^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setPaddingDp(). public void setPaddingDp(int paddingDp)
+//            ^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setPaddingDp(). @ModelProp(defaultValue = "NO_VALUE_SET", group = "padding") public void setPaddingDp(int paddingDp)
 //                          ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                                    ^^^^ reference androidx/annotation/Dimension#unit().
 //                                           ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                                                     ^^ reference androidx/annotation/Dimension#DP.
-//                                                             ^^^^^^^^^ definition local35 int paddingDp
+//                                                             ^^^^^^^^^ definition local35 @Dimension(unit = Dimension.DP) int paddingDp
     int px = dpToPx(paddingDp != NO_VALUE_SET ? paddingDp : getDefaultSpacingBetweenItemsDp());
 //      ^^ definition local36 int px
 //           ^^^^^^ reference com/airbnb/epoxy/Carousel#dpToPx#
@@ -675,10 +675,10 @@ public class Carousel extends EpoxyRecyclerView {
 // ^^^^^^^^^ reference com/airbnb/epoxy/ModelProp#
 //           ^^^^^ reference com/airbnb/epoxy/ModelProp#group().
   public void setPadding(@Nullable Padding padding) {
-//            ^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setPadding(). public void setPadding(Padding padding)
+//            ^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setPadding(). @ModelProp(group = "padding") public void setPadding(Padding padding)
 //                        ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                 ^^^^^^^ reference com/airbnb/epoxy/Carousel#Padding#
-//                                         ^^^^^^^ definition local37 Padding padding
+//                                         ^^^^^^^ definition local37 @Nullable Padding padding
     if (padding == null) {
 //      ^^^^^^^ reference local37
       setPaddingDp(0);
@@ -802,9 +802,9 @@ public class Carousel extends EpoxyRecyclerView {
 //                ^^^^^^^ reference com/airbnb/epoxy/Carousel#Padding#
 //                        ^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#resource(). public static Padding resource(int paddingRes, int itemSpacingRes)
 //                                  ^^^^^^^^ reference androidx/annotation/DimenRes#
-//                                               ^^^^^^^^^^ definition local38 int paddingRes
+//                                               ^^^^^^^^^^ definition local38 @DimenRes int paddingRes
 //                                                            ^^^^^^^^ reference androidx/annotation/DimenRes#
-//                                                                         ^^^^^^^^^^^^^^ definition local39 int itemSpacingRes
+//                                                                         ^^^^^^^^^^^^^^ definition local39 @DimenRes int itemSpacingRes
       return new Padding(
 //           ^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#Padding#`<init>`(+2). 1:95
 //               ^^^^^^^ reference com/airbnb/epoxy/Carousel#Padding#
@@ -831,19 +831,19 @@ public class Carousel extends EpoxyRecyclerView {
 //                        ^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#resource(+1). public static Padding resource(int leftRes, int topRes, int rightRes, int bottomRes, int itemSpacingRes)
         @DimenRes int leftRes,
 //       ^^^^^^^^ reference androidx/annotation/DimenRes#
-//                    ^^^^^^^ definition local40 int leftRes
+//                    ^^^^^^^ definition local40 @DimenRes int leftRes
         @DimenRes int topRes,
 //       ^^^^^^^^ reference androidx/annotation/DimenRes#
-//                    ^^^^^^ definition local41 int topRes
+//                    ^^^^^^ definition local41 @DimenRes int topRes
         @DimenRes int rightRes,
 //       ^^^^^^^^ reference androidx/annotation/DimenRes#
-//                    ^^^^^^^^ definition local42 int rightRes
+//                    ^^^^^^^^ definition local42 @DimenRes int rightRes
         @DimenRes int bottomRes,
 //       ^^^^^^^^ reference androidx/annotation/DimenRes#
-//                    ^^^^^^^^^ definition local43 int bottomRes
+//                    ^^^^^^^^^ definition local43 @DimenRes int bottomRes
         @DimenRes int itemSpacingRes) {
 //       ^^^^^^^^ reference androidx/annotation/DimenRes#
-//                    ^^^^^^^^^^^^^^ definition local44 int itemSpacingRes
+//                    ^^^^^^^^^^^^^^ definition local44 @DimenRes int itemSpacingRes
       return new Padding(
 //           ^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#Padding#`<init>`(+2). 1:85
 //               ^^^^^^^ reference com/airbnb/epoxy/Carousel#Padding#
@@ -870,13 +870,13 @@ public class Carousel extends EpoxyRecyclerView {
 //                 ^^^^ reference androidx/annotation/Dimension#unit().
 //                        ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                                  ^^ reference androidx/annotation/Dimension#DP.
-//                                          ^^^^^^^^^ definition local45 int paddingDp
+//                                          ^^^^^^^^^ definition local45 @Dimension(unit = Dimension.DP) int paddingDp
         @Dimension(unit = Dimension.DP) int itemSpacingDp) {
 //       ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                 ^^^^ reference androidx/annotation/Dimension#unit().
 //                        ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                                  ^^ reference androidx/annotation/Dimension#DP.
-//                                          ^^^^^^^^^^^^^ definition local46 int itemSpacingDp
+//                                          ^^^^^^^^^^^^^ definition local46 @Dimension(unit = Dimension.DP) int itemSpacingDp
       return new Padding(paddingDp, paddingDp, paddingDp, paddingDp, itemSpacingDp, PaddingType.DP);
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#Padding#`<init>`(+2).
 //               ^^^^^^^ reference com/airbnb/epoxy/Carousel#Padding#
@@ -905,31 +905,31 @@ public class Carousel extends EpoxyRecyclerView {
 //                 ^^^^ reference androidx/annotation/Dimension#unit().
 //                        ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                                  ^^ reference androidx/annotation/Dimension#DP.
-//                                          ^^^^^^ definition local47 int leftDp
+//                                          ^^^^^^ definition local47 @Dimension(unit = Dimension.DP) int leftDp
         @Dimension(unit = Dimension.DP) int topDp,
 //       ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                 ^^^^ reference androidx/annotation/Dimension#unit().
 //                        ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                                  ^^ reference androidx/annotation/Dimension#DP.
-//                                          ^^^^^ definition local48 int topDp
+//                                          ^^^^^ definition local48 @Dimension(unit = Dimension.DP) int topDp
         @Dimension(unit = Dimension.DP) int rightDp,
 //       ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                 ^^^^ reference androidx/annotation/Dimension#unit().
 //                        ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                                  ^^ reference androidx/annotation/Dimension#DP.
-//                                          ^^^^^^^ definition local49 int rightDp
+//                                          ^^^^^^^ definition local49 @Dimension(unit = Dimension.DP) int rightDp
         @Dimension(unit = Dimension.DP) int bottomDp,
 //       ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                 ^^^^ reference androidx/annotation/Dimension#unit().
 //                        ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                                  ^^ reference androidx/annotation/Dimension#DP.
-//                                          ^^^^^^^^ definition local50 int bottomDp
+//                                          ^^^^^^^^ definition local50 @Dimension(unit = Dimension.DP) int bottomDp
         @Dimension(unit = Dimension.DP) int itemSpacingDp) {
 //       ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                 ^^^^ reference androidx/annotation/Dimension#unit().
 //                        ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                                  ^^ reference androidx/annotation/Dimension#DP.
-//                                          ^^^^^^^^^^^^^ definition local51 int itemSpacingDp
+//                                          ^^^^^^^^^^^^^ definition local51 @Dimension(unit = Dimension.DP) int itemSpacingDp
       return new Padding(leftDp, topDp, rightDp, bottomDp, itemSpacingDp, PaddingType.DP);
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#Padding#`<init>`(+2).
 //               ^^^^^^^ reference com/airbnb/epoxy/Carousel#Padding#
@@ -950,9 +950,9 @@ public class Carousel extends EpoxyRecyclerView {
     public Padding(@Px int paddingPx, @Px int itemSpacingPx) {
 //         ^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#`<init>`(). public Padding(int paddingPx, int itemSpacingPx)
 //                  ^^ reference androidx/annotation/Px#
-//                         ^^^^^^^^^ definition local52 int paddingPx
+//                         ^^^^^^^^^ definition local52 @Px int paddingPx
 //                                     ^^ reference androidx/annotation/Px#
-//                                            ^^^^^^^^^^^^^ definition local53 int itemSpacingPx
+//                                            ^^^^^^^^^^^^^ definition local53 @Px int itemSpacingPx
       this(paddingPx, paddingPx, paddingPx, paddingPx, itemSpacingPx, PaddingType.PX);
 //    ^^^^ reference com/airbnb/epoxy/Carousel#Padding#`<init>`(+2).
 //         ^^^^^^^^^ reference local52
@@ -976,15 +976,15 @@ public class Carousel extends EpoxyRecyclerView {
 //         ^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#`<init>`(+1). public Padding(int leftPx, int topPx, int rightPx, int bottomPx, int itemSpacingPx)
         @Px int leftPx, @Px int topPx, @Px int rightPx, @Px int bottomPx, @Px int itemSpacingPx) {
 //       ^^ reference androidx/annotation/Px#
-//              ^^^^^^ definition local54 int leftPx
+//              ^^^^^^ definition local54 @Px int leftPx
 //                       ^^ reference androidx/annotation/Px#
-//                              ^^^^^ definition local55 int topPx
+//                              ^^^^^ definition local55 @Px int topPx
 //                                      ^^ reference androidx/annotation/Px#
-//                                             ^^^^^^^ definition local56 int rightPx
+//                                             ^^^^^^^ definition local56 @Px int rightPx
 //                                                       ^^ reference androidx/annotation/Px#
-//                                                              ^^^^^^^^ definition local57 int bottomPx
+//                                                              ^^^^^^^^ definition local57 @Px int bottomPx
 //                                                                         ^^ reference androidx/annotation/Px#
-//                                                                                ^^^^^^^^^^^^^ definition local58 int itemSpacingPx
+//                                                                                ^^^^^^^^^^^^^ definition local58 @Px int itemSpacingPx
       this(leftPx, topPx, rightPx, bottomPx, itemSpacingPx, PaddingType.PX);
 //    ^^^^ reference com/airbnb/epoxy/Carousel#Padding#`<init>`(+2).
 //         ^^^^^^ reference local54
@@ -1045,7 +1045,7 @@ public class Carousel extends EpoxyRecyclerView {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public boolean equals(Object o) {
-//                 ^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#equals(). public boolean equals(Object o)
+//                 ^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#equals(). @Override public boolean equals(Object o)
 //                        ^^^^^^ reference java/lang/Object#
 //                               ^ definition local65 Object o
       if (this == o) {
@@ -1100,7 +1100,7 @@ public class Carousel extends EpoxyRecyclerView {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public int hashCode() {
-//             ^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#hashCode(). public int hashCode()
+//             ^^^^^^^^ definition com/airbnb/epoxy/Carousel#Padding#hashCode(). @Override public int hashCode()
       int result = left;
 //        ^^^^^^ definition local67 int result
 //                 ^^^^ reference com/airbnb/epoxy/Carousel#Padding#left.
@@ -1128,11 +1128,11 @@ public class Carousel extends EpoxyRecyclerView {
   @ModelProp
 // ^^^^^^^^^ reference com/airbnb/epoxy/ModelProp#
   public void setModels(@NonNull List<? extends EpoxyModel<?>> models) {
-//            ^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setModels(). public void setModels(List<? extends EpoxyModel<?>> models)
+//            ^^^^^^^^^ definition com/airbnb/epoxy/Carousel#setModels(). @ModelProp public void setModels(List<? extends EpoxyModel<?>> models)
 //                       ^^^^^^^ reference androidx/annotation/NonNull#
 //                               ^^^^ reference java/util/List#
 //                                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                             ^^^^^^ definition local68 List<? extends EpoxyModel<?>> models
+//                                                             ^^^^^^ definition local68 @NonNull List<? extends EpoxyModel<?>> models
     super.setModels(models);
 //  ^^^^^ reference _root_/
 //        ^^^^^^^^^ reference setModels#
@@ -1142,7 +1142,7 @@ public class Carousel extends EpoxyRecyclerView {
   @OnViewRecycled
 // ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/OnViewRecycled#
   public void clear() {
-//            ^^^^^ definition com/airbnb/epoxy/Carousel#clear(). public void clear()
+//            ^^^^^ definition com/airbnb/epoxy/Carousel#clear(). @OnViewRecycled public void clear()
     super.clear();
 //  ^^^^^ reference _root_/
 //        ^^^^^ reference clear#
@@ -1160,7 +1160,7 @@ public class Carousel extends EpoxyRecyclerView {
 //   ^^^^^^^ reference androidx/annotation/NonNull#
     public abstract SnapHelper buildSnapHelper(Context context);
 //                  ^^^^^^^^^^ reference _root_/
-//                             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#SnapHelperFactory#buildSnapHelper(). public abstract buildSnapHelper(unresolved_type context)
+//                             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#SnapHelperFactory#buildSnapHelper(). @NonNull public abstract buildSnapHelper(unresolved_type context)
 //                                             ^^^^^^^ reference _root_/
 //                                                     ^^^^^^^ definition local69 unresolved_type context
   }

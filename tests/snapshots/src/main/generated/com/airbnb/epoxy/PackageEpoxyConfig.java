@@ -39,7 +39,7 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface PackageEpoxyConfig {
-//                ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig# public @interface PackageEpoxyConfig
+//                ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig# @Target(ElementType.TYPE) @Retention(RetentionPolicy.CLASS) public @interface PackageEpoxyConfig
   boolean REQUIRE_HASHCODE_DEFAULT = false;
 //        ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/PackageEpoxyConfig#REQUIRE_HASHCODE_DEFAULT. public static final boolean REQUIRE_HASHCODE_DEFAULT
   boolean REQUIRE_ABSTRACT_MODELS_DEFAULT = false;

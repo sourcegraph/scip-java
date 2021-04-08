@@ -120,7 +120,7 @@ class ControllerHelperLookup {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
   private static Constructor<?> findConstructorForClass(Class<?> controllerClass) {
 //               ^^^^^^^^^^^ reference java/lang/reflect/Constructor#
-//                              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass(). private static Constructor<?> findConstructorForClass(Class<?> controllerClass)
+//                              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass(). @Nullable private static Constructor<?> findConstructorForClass(Class<?> controllerClass)
 //                                                      ^^^^^ reference java/lang/Class#
 //                                                               ^^^^^^^^^^^^^^^ definition local6 Class<?> controllerClass
     Constructor<?> helperCtor = BINDINGS.get(controllerClass);

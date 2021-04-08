@@ -37,7 +37,7 @@ class NotifyBlocker extends AdapterDataObserver {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onChanged() {
-//            ^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#onChanged(). public void onChanged()
+//            ^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#onChanged(). @Override public void onChanged()
     if (!changesAllowed) {
 //       ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/NotifyBlocker#changesAllowed.
       throw new IllegalStateException(
@@ -50,7 +50,7 @@ class NotifyBlocker extends AdapterDataObserver {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeChanged(int positionStart, int itemCount) {
-//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#onItemRangeChanged(). public void onItemRangeChanged(int positionStart, int itemCount)
+//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#onItemRangeChanged(). @Override public void onItemRangeChanged(int positionStart, int itemCount)
 //                                   ^^^^^^^^^^^^^ definition local0 int positionStart
 //                                                      ^^^^^^^^^ definition local1 int itemCount
     onChanged();
@@ -60,7 +60,7 @@ class NotifyBlocker extends AdapterDataObserver {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
-//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#onItemRangeChanged(+1). public void onItemRangeChanged(int positionStart, int itemCount, Object payload)
+//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#onItemRangeChanged(+1). @Override public void onItemRangeChanged(int positionStart, int itemCount, Object payload)
 //                                   ^^^^^^^^^^^^^ definition local2 int positionStart
 //                                                      ^^^^^^^^^ definition local3 int itemCount
 //                                                                 ^^^^^^ reference java/lang/Object#
@@ -72,7 +72,7 @@ class NotifyBlocker extends AdapterDataObserver {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeInserted(int positionStart, int itemCount) {
-//            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#onItemRangeInserted(). public void onItemRangeInserted(int positionStart, int itemCount)
+//            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#onItemRangeInserted(). @Override public void onItemRangeInserted(int positionStart, int itemCount)
 //                                    ^^^^^^^^^^^^^ definition local5 int positionStart
 //                                                       ^^^^^^^^^ definition local6 int itemCount
     onChanged();
@@ -82,7 +82,7 @@ class NotifyBlocker extends AdapterDataObserver {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeRemoved(int positionStart, int itemCount) {
-//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#onItemRangeRemoved(). public void onItemRangeRemoved(int positionStart, int itemCount)
+//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#onItemRangeRemoved(). @Override public void onItemRangeRemoved(int positionStart, int itemCount)
 //                                   ^^^^^^^^^^^^^ definition local7 int positionStart
 //                                                      ^^^^^^^^^ definition local8 int itemCount
     onChanged();
@@ -92,7 +92,7 @@ class NotifyBlocker extends AdapterDataObserver {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
-//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#onItemRangeMoved(). public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount)
+//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#onItemRangeMoved(). @Override public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount)
 //                                 ^^^^^^^^^^^^ definition local9 int fromPosition
 //                                                   ^^^^^^^^^^ definition local10 int toPosition
 //                                                                   ^^^^^^^^^ definition local11 int itemCount

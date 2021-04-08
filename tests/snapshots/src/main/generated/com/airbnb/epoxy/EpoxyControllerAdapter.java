@@ -83,7 +83,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#`<init>`(). EpoxyControllerAdapter(EpoxyController epoxyController, unresolved_type diffingHandler)
 //                        ^^^^^^^ reference androidx/annotation/NonNull#
 //                                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
-//                                                ^^^^^^^^^^^^^^^ definition local0 EpoxyController epoxyController
+//                                                ^^^^^^^^^^^^^^^ definition local0 @NonNull EpoxyController epoxyController
 //                                                                 ^^^^^^^ reference _root_/
 //                                                                         ^^^^^^^^^^^^^^ definition local1 unresolved_type diffingHandler
     this.epoxyController = epoxyController;
@@ -109,10 +109,10 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected void onExceptionSwallowed(@NonNull RuntimeException exception) {
-//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onExceptionSwallowed(). protected void onExceptionSwallowed(RuntimeException exception)
+//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onExceptionSwallowed(). @Override protected void onExceptionSwallowed(RuntimeException exception)
 //                                     ^^^^^^^ reference androidx/annotation/NonNull#
 //                                             ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
-//                                                              ^^^^^^^^^ definition local2 RuntimeException exception
+//                                                              ^^^^^^^^^ definition local2 @NonNull RuntimeException exception
     epoxyController.onExceptionSwallowed(exception);
 //  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
 //                  ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#onExceptionSwallowed().
@@ -126,7 +126,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   List<? extends EpoxyModel<?>> getCurrentModels() {
 //^^^^ reference java/util/List#
 //               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels(). List<? extends EpoxyModel<?>> getCurrentModels()
+//                              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels(). @NonNull @Override List<? extends EpoxyModel<?>> getCurrentModels()
     return differ.getCurrentList();
 //         ^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#differ.
 //                ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#getCurrentList().
@@ -135,7 +135,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public int getItemCount() {
-//           ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getItemCount(). public int getItemCount()
+//           ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getItemCount(). @Override public int getItemCount()
     // RecyclerView calls this A LOT. The base class implementation does
     // getCurrentModels().size() which adds some overhead because of the method calls.
     // We can easily memoize this, which seems to help when there are lots of models.
@@ -148,7 +148,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //     ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#setModels(). void setModels(ControllerModelList models)
 //                ^^^^^^^ reference androidx/annotation/NonNull#
 //                        ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerModelList#
-//                                            ^^^^^^ definition local3 ControllerModelList models
+//                                            ^^^^^^ definition local3 @NonNull ControllerModelList models
     // If debug model validations are on then we should help detect the error case where models
     // were incorrectly mutated once they were added. That check is also done before and after
     // bind, but there is no other check after that to see if a model is incorrectly
@@ -211,10 +211,10 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onResult(@NonNull DiffResult result) {
-//            ^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onResult(). public void onResult(DiffResult result)
+//            ^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onResult(). @Override public void onResult(DiffResult result)
 //                      ^^^^^^^ reference androidx/annotation/NonNull#
 //                              ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#
-//                                         ^^^^^^ definition local7 DiffResult result
+//                                         ^^^^^^ definition local7 @NonNull DiffResult result
     itemCount = result.newModels.size();
 //  ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#itemCount.
 //              ^^^^^^ reference local7
@@ -269,17 +269,17 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   boolean diffPayloadsEnabled() {
-//        ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#diffPayloadsEnabled(). boolean diffPayloadsEnabled()
+//        ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#diffPayloadsEnabled(). @Override boolean diffPayloadsEnabled()
     return true;
   }
 
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onAttachedToRecyclerView(). public void onAttachedToRecyclerView(unresolved_type recyclerView)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onAttachedToRecyclerView(). @Override public void onAttachedToRecyclerView(unresolved_type recyclerView)
 //                                      ^^^^^^^ reference androidx/annotation/NonNull#
 //                                              ^^^^^^^^^^^^ reference _root_/
-//                                                           ^^^^^^^^^^^^ definition local11 unresolved_type recyclerView
+//                                                           ^^^^^^^^^^^^ definition local11 @NonNull unresolved_type recyclerView
     super.onAttachedToRecyclerView(recyclerView);
 //  ^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#super.
 //        ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#onAttachedToRecyclerView#
@@ -293,10 +293,10 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onDetachedFromRecyclerView(). public void onDetachedFromRecyclerView(unresolved_type recyclerView)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onDetachedFromRecyclerView(). @Override public void onDetachedFromRecyclerView(unresolved_type recyclerView)
 //                                        ^^^^^^^ reference androidx/annotation/NonNull#
 //                                                ^^^^^^^^^^^^ reference _root_/
-//                                                             ^^^^^^^^^^^^ definition local12 unresolved_type recyclerView
+//                                                             ^^^^^^^^^^^^ definition local12 @NonNull unresolved_type recyclerView
     super.onDetachedFromRecyclerView(recyclerView);
 //  ^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#super.
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#onDetachedFromRecyclerView().
@@ -310,10 +310,10 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onViewAttachedToWindow(@NonNull EpoxyViewHolder holder) {
-//            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onViewAttachedToWindow(). public void onViewAttachedToWindow(EpoxyViewHolder holder)
+//            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onViewAttachedToWindow(). @Override public void onViewAttachedToWindow(EpoxyViewHolder holder)
 //                                    ^^^^^^^ reference androidx/annotation/NonNull#
 //                                            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                            ^^^^^^ definition local13 EpoxyViewHolder holder
+//                                                            ^^^^^^ definition local13 @NonNull EpoxyViewHolder holder
     super.onViewAttachedToWindow(holder);
 //  ^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#super.
 //        ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#onViewAttachedToWindow().
@@ -329,10 +329,10 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onViewDetachedFromWindow(@NonNull EpoxyViewHolder holder) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onViewDetachedFromWindow(). public void onViewDetachedFromWindow(EpoxyViewHolder holder)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onViewDetachedFromWindow(). @Override public void onViewDetachedFromWindow(EpoxyViewHolder holder)
 //                                      ^^^^^^^ reference androidx/annotation/NonNull#
 //                                              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                              ^^^^^^ definition local14 EpoxyViewHolder holder
+//                                                              ^^^^^^ definition local14 @NonNull EpoxyViewHolder holder
     super.onViewDetachedFromWindow(holder);
 //  ^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#super.
 //        ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#onViewDetachedFromWindow().
@@ -348,18 +348,18 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected void onModelBound(@NonNull EpoxyViewHolder holder, @NonNull EpoxyModel<?> model,
-//               ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onModelBound(). protected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position, EpoxyModel<?> previouslyBoundModel)
+//               ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onModelBound(). @Override protected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position, EpoxyModel<?> previouslyBoundModel)
 //                             ^^^^^^^ reference androidx/annotation/NonNull#
 //                                     ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                     ^^^^^^ definition local15 EpoxyViewHolder holder
+//                                                     ^^^^^^ definition local15 @NonNull EpoxyViewHolder holder
 //                                                              ^^^^^^^ reference androidx/annotation/NonNull#
 //                                                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                                                    ^^^^^ definition local16 EpoxyModel<?> model
+//                                                                                    ^^^^^ definition local16 @NonNull EpoxyModel<?> model
       int position, @Nullable EpoxyModel<?> previouslyBoundModel) {
 //        ^^^^^^^^ definition local17 int position
 //                   ^^^^^^^^ reference androidx/annotation/Nullable#
 //                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                          ^^^^^^^^^^^^^^^^^^^^ definition local18 EpoxyModel<?> previouslyBoundModel
+//                                          ^^^^^^^^^^^^^^^^^^^^ definition local18 @Nullable EpoxyModel<?> previouslyBoundModel
     epoxyController.onModelBound(holder, model, position, previouslyBoundModel);
 //  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
 //                  ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#onModelBound().
@@ -372,13 +372,13 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   protected void onModelUnbound(@NonNull EpoxyViewHolder holder, @NonNull EpoxyModel<?> model) {
-//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onModelUnbound(). protected void onModelUnbound(EpoxyViewHolder holder, EpoxyModel<?> model)
+//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#onModelUnbound(). @Override protected void onModelUnbound(EpoxyViewHolder holder, EpoxyModel<?> model)
 //                               ^^^^^^^ reference androidx/annotation/NonNull#
 //                                       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
-//                                                       ^^^^^^ definition local19 EpoxyViewHolder holder
+//                                                       ^^^^^^ definition local19 @NonNull EpoxyViewHolder holder
 //                                                                ^^^^^^^ reference androidx/annotation/NonNull#
 //                                                                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                                                      ^^^^^ definition local20 EpoxyModel<?> model
+//                                                                                      ^^^^^ definition local20 @NonNull EpoxyModel<?> model
     epoxyController.onModelUnbound(holder, model);
 //  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
 //                  ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#onModelUnbound().
@@ -392,7 +392,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   public List<EpoxyModel<?>> getCopyOfModels() {
 //       ^^^^ reference java/util/List#
 //            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                           ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getCopyOfModels(). public List<EpoxyModel<?>> getCopyOfModels()
+//                           ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getCopyOfModels(). @NonNull public List<EpoxyModel<?>> getCopyOfModels()
     //noinspection unchecked
     return (List<EpoxyModel<?>>) getCurrentModels();
 //          ^^^^ reference java/util/List#
@@ -408,7 +408,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^ reference androidx/annotation/NonNull#
   public EpoxyModel<?> getModelAtPosition(int position) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getModelAtPosition(). public EpoxyModel<?> getModelAtPosition(int position)
+//                     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getModelAtPosition(). @NonNull public EpoxyModel<?> getModelAtPosition(int position)
 //                                            ^^^^^^^^ definition local21 int position
     return getCurrentModels().get(position);
 //         ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
@@ -424,7 +424,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference androidx/annotation/Nullable#
   public EpoxyModel<?> getModelById(long id) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                     ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getModelById(). public EpoxyModel<?> getModelById(long id)
+//                     ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getModelById(). @Nullable public EpoxyModel<?> getModelById(long id)
 //                                       ^^ definition local22 long id
     for (EpoxyModel<?> model : getCurrentModels()) {
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -445,10 +445,10 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public int getModelPosition(@NonNull EpoxyModel<?> targetModel) {
-//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getModelPosition(). public int getModelPosition(EpoxyModel<?> targetModel)
+//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getModelPosition(). @Override public int getModelPosition(EpoxyModel<?> targetModel)
 //                             ^^^^^^^ reference androidx/annotation/NonNull#
 //                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                   ^^^^^^^^^^^ definition local24 EpoxyModel<?> targetModel
+//                                                   ^^^^^^^^^^^ definition local24 @NonNull EpoxyModel<?> targetModel
     int size = getCurrentModels().size();
 //      ^^^^ definition local25 int size
 //             ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
@@ -483,7 +483,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference java/lang/Override#
   public BoundViewHolders getBoundViewHolders() {
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#
-//                        ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getBoundViewHolders(). public BoundViewHolders getBoundViewHolders()
+//                        ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#getBoundViewHolders(). @NonNull @Override public BoundViewHolders getBoundViewHolders()
     return super.getBoundViewHolders();
 //         ^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#super.
 //               ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getBoundViewHolders().
@@ -492,7 +492,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @UiThread
 // ^^^^^^^^ reference androidx/annotation/UiThread#
   void moveModel(int fromPosition, int toPosition) {
-//     ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#moveModel(). void moveModel(int fromPosition, int toPosition)
+//     ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#moveModel(). @UiThread void moveModel(int fromPosition, int toPosition)
 //                   ^^^^^^^^^^^^ definition local28 int fromPosition
 //                                     ^^^^^^^^^^ definition local29 int toPosition
     ArrayList<EpoxyModel<?>> updatedList = new ArrayList<>(getCurrentModels());
@@ -540,7 +540,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @UiThread
 // ^^^^^^^^ reference androidx/annotation/UiThread#
   void notifyModelChanged(int position) {
-//     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#notifyModelChanged(). void notifyModelChanged(int position)
+//     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#notifyModelChanged(). @UiThread void notifyModelChanged(int position)
 //                            ^^^^^^^^ definition local32 int position
     ArrayList<EpoxyModel<?>> updatedList = new ArrayList<>(getCurrentModels());
 //  ^^^^^^^^^ reference java/util/ArrayList#
@@ -589,7 +589,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
         public boolean areItemsTheSame(EpoxyModel<?> oldItem, EpoxyModel<?> newItem) {
-//                     ^^^^^^^^^^^^^^^ definition local36 public boolean areItemsTheSame(EpoxyModel<?> oldItem, EpoxyModel<?> newItem)
+//                     ^^^^^^^^^^^^^^^ definition local36 @Override public boolean areItemsTheSame(EpoxyModel<?> oldItem, EpoxyModel<?> newItem)
 //                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                   ^^^^^^^ definition local39 EpoxyModel<?> oldItem
 //                                                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -604,7 +604,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
         public boolean areContentsTheSame(EpoxyModel<?> oldItem, EpoxyModel<?> newItem) {
-//                     ^^^^^^^^^^^^^^^^^^ definition local37 public boolean areContentsTheSame(EpoxyModel<?> oldItem, EpoxyModel<?> newItem)
+//                     ^^^^^^^^^^^^^^^^^^ definition local37 @Override public boolean areContentsTheSame(EpoxyModel<?> oldItem, EpoxyModel<?> newItem)
 //                                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                      ^^^^^^^ definition local41 EpoxyModel<?> oldItem
 //                                                               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -619,7 +619,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //       ^^^^^^^^ reference java/lang/Override#
         public Object getChangePayload(EpoxyModel<?> oldItem, EpoxyModel<?> newItem) {
 //             ^^^^^^ reference java/lang/Object#
-//                    ^^^^^^^^^^^^^^^^ definition local38 public Object getChangePayload(EpoxyModel<?> oldItem, EpoxyModel<?> newItem)
+//                    ^^^^^^^^^^^^^^^^ definition local38 @Override public Object getChangePayload(EpoxyModel<?> oldItem, EpoxyModel<?> newItem)
 //                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                   ^^^^^^^ definition local43 EpoxyModel<?> oldItem
 //                                                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -638,7 +638,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public boolean isStickyHeader(int position) {
-//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#isStickyHeader(). public boolean isStickyHeader(int position)
+//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#isStickyHeader(). @Override public boolean isStickyHeader(int position)
 //                                  ^^^^^^^^ definition local45 int position
     return epoxyController.isStickyHeader(position);
 //         ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
@@ -653,10 +653,10 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void setupStickyHeaderView(@NotNull View stickyHeader) {
-//            ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#setupStickyHeaderView(). public void setupStickyHeaderView(unresolved_type stickyHeader)
+//            ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#setupStickyHeaderView(). @Override public void setupStickyHeaderView(unresolved_type stickyHeader)
 //                                   ^^^^^^^ reference org/jetbrains/annotations/NotNull#
 //                                           ^^^^ reference _root_/
-//                                                ^^^^^^^^^^^^ definition local46 unresolved_type stickyHeader
+//                                                ^^^^^^^^^^^^ definition local46 @NotNull unresolved_type stickyHeader
     epoxyController.setupStickyHeaderView(stickyHeader);
 //  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
 //                  ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#setupStickyHeaderView().
@@ -670,10 +670,10 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void teardownStickyHeaderView(@NotNull View stickyHeader) {
-//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#teardownStickyHeaderView(). public void teardownStickyHeaderView(unresolved_type stickyHeader)
+//            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter#teardownStickyHeaderView(). @Override public void teardownStickyHeaderView(unresolved_type stickyHeader)
 //                                      ^^^^^^^ reference org/jetbrains/annotations/NotNull#
 //                                              ^^^^ reference _root_/
-//                                                   ^^^^^^^^^^^^ definition local47 unresolved_type stickyHeader
+//                                                   ^^^^^^^^^^^^ definition local47 @NotNull unresolved_type stickyHeader
     epoxyController.teardownStickyHeaderView(stickyHeader);
 //  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#teardownStickyHeaderView().

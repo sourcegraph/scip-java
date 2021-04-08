@@ -41,7 +41,7 @@ class DebugTimer implements Timer {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void start(String sectionName) {
-//            ^^^^^ definition com/airbnb/epoxy/DebugTimer#start(). public void start(String sectionName)
+//            ^^^^^ definition com/airbnb/epoxy/DebugTimer#start(). @Override public void start(String sectionName)
 //                  ^^^^^^ reference java/lang/String#
 //                         ^^^^^^^^^^^ definition local1 String sectionName
     if (startTime != -1) {
@@ -64,7 +64,7 @@ class DebugTimer implements Timer {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void stop() {
-//            ^^^^ definition com/airbnb/epoxy/DebugTimer#stop(). public void stop()
+//            ^^^^ definition com/airbnb/epoxy/DebugTimer#stop(). @Override public void stop()
     if (startTime == -1) {
 //      ^^^^^^^^^ reference com/airbnb/epoxy/DebugTimer#startTime.
       throw new IllegalStateException("Timer was not started");

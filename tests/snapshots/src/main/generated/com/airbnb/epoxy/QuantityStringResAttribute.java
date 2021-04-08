@@ -23,23 +23,23 @@ public class QuantityStringResAttribute {
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute# public class QuantityStringResAttribute
   @PluralsRes private final int id;
 // ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
-//                              ^^ definition com/airbnb/epoxy/QuantityStringResAttribute#id. private final int id
+//                              ^^ definition com/airbnb/epoxy/QuantityStringResAttribute#id. @PluralsRes private final int id
   private final int quantity;
 //                  ^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#quantity. private final int quantity
   @Nullable private final Object[] formatArgs;
 // ^^^^^^^^ reference androidx/annotation/Nullable#
 //                        ^^^^^^ reference java/lang/Object#
-//                                 ^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#formatArgs. private final Object[] formatArgs
+//                                 ^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#formatArgs. @Nullable private final Object[] formatArgs
 
   public QuantityStringResAttribute(@PluralsRes int id, int quantity,
 //       ^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#`<init>`(). public QuantityStringResAttribute(int id, int quantity, Object[] formatArgs)
 //                                   ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
-//                                                  ^^ definition local0 int id
+//                                                  ^^ definition local0 @PluralsRes int id
 //                                                          ^^^^^^^^ definition local1 int quantity
       @Nullable Object[] formatArgs) {
 //     ^^^^^^^^ reference androidx/annotation/Nullable#
 //              ^^^^^^ reference java/lang/Object#
-//                       ^^^^^^^^^^ definition local2 Object[] formatArgs
+//                       ^^^^^^^^^^ definition local2 @Nullable Object[] formatArgs
     this.quantity = quantity;
 //  ^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#
 //       ^^^^^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#quantity.
@@ -67,7 +67,7 @@ public class QuantityStringResAttribute {
   @PluralsRes
 // ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
   public int getId() {
-//           ^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#getId(). public int getId()
+//           ^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#getId(). @PluralsRes public int getId()
     return id;
 //         ^^ reference com/airbnb/epoxy/QuantityStringResAttribute#id.
   }
@@ -82,7 +82,7 @@ public class QuantityStringResAttribute {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
   public Object[] getFormatArgs() {
 //       ^^^^^^ reference java/lang/Object#
-//                ^^^^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#getFormatArgs(). public Object[] getFormatArgs()
+//                ^^^^^^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#getFormatArgs(). @Nullable public Object[] getFormatArgs()
     return formatArgs;
 //         ^^^^^^^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.
   }
@@ -116,7 +116,7 @@ public class QuantityStringResAttribute {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public boolean equals(Object o) {
-//               ^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#equals(). public boolean equals(Object o)
+//               ^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#equals(). @Override public boolean equals(Object o)
 //                      ^^^^^^ reference java/lang/Object#
 //                             ^ definition local6 Object o
     if (this == o) {
@@ -160,7 +160,7 @@ public class QuantityStringResAttribute {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public int hashCode() {
-//           ^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#hashCode(). public int hashCode()
+//           ^^^^^^^^ definition com/airbnb/epoxy/QuantityStringResAttribute#hashCode(). @Override public int hashCode()
     int result = id;
 //      ^^^^^^ definition local8 int result
 //               ^^ reference com/airbnb/epoxy/QuantityStringResAttribute#id.
