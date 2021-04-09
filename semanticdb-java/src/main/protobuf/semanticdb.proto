@@ -103,22 +103,13 @@ message SymbolInformation {
   Kind kind = 3;
   int32 properties = 4;
   string display_name = 5;
-  repeated Annotation annotations = 13;
+  // -- OUT OF SPEC -- //
+  repeated AnnotationTree annotations = 13;
+  // -- OUT OF SPEC -- //
   Signature signature = 17;
   Access access = 18;
   repeated string overridden_symbols = 19;
   Documentation documentation = 20;
-}
-
-message Annotation {
-  Type tpe = 1;
-  // -- OUT OF SPEC -- //
-  message ParameterPair {
-    string key = 1;
-    Tree value = 2;
-  }
-  repeated ParameterPair parameters = 2;
-  // -- OUT OF SPEC -- //
 }
 
 message Access {
@@ -200,7 +191,8 @@ message Tree {
     OriginalTree original_tree = 6;
     SelectTree select_tree = 7;
     // -- OUT OF SPEC -- //
-    AnnotationTree annotation_tree = 8;
+    AnnotationTree annotation_tree = 9;
+    AssignTree assign_tree = 10;
     // -- OUT OF SPEC -- //
   }
 }
@@ -227,9 +219,17 @@ message SelectTree {
   IdTree id = 2;
 }
 
+// -- OUT OF SPEC -- //
 message AnnotationTree {
-  Annotation annotation = 1;
+  Type tpe = 1;
+  repeated Tree parameters = 2;
 }
+
+message AssignTree {
+    Tree lhs = 1;
+    Tree rhs = 2;
+}
+// -- OUT OF SPEC -- //
 
 message Constant {
   oneof sealed_value {

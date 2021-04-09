@@ -249,29 +249,32 @@ public class SignatureFormatter {
         .collect(Collectors.joining("\n"));
   }
 
-  private String formatAnnotation(Annotation annotation) {
+  private String formatAnnotation(AnnotationTree annotation) {
     StringBuilder b = new StringBuilder();
     b.append('@');
     b.append(formatType(annotation.getTpe()));
     if (annotation.getParametersCount() > 0) {
       b.append('(');
-      Annotation.ParameterPair firstParam = annotation.getParameters(0);
+      AssignTree firstParam = annotation.getParameters(0).getAssignTree();
       // if only 1 parameter, and its LHS is named 'value', we can omit the 'value = '
-      // docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls-9.7.3
+      // https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls-9.7.3
       if (annotation.getParametersCount() == 1
-          && SymbolDescriptor.parseFromSymbol(firstParam.getKey())
+          && SymbolDescriptor.parseFromSymbol(firstParam.getLhs().getIdTree().getSymbol())
               .descriptor
               .name
               .equals("value")) {
-        b.append(formatTree(firstParam.getValue()));
+        b.append(formatTree(firstParam.getRhs()));
       } else {
         String parameter =
             annotation.getParametersList().stream()
                 .map(
                     p ->
-                        SymbolDescriptor.parseFromSymbol(p.getKey()).descriptor.name
+                        SymbolDescriptor.parseFromSymbol(
+                                    p.getAssignTree().getLhs().getIdTree().getSymbol())
+                                .descriptor
+                                .name
                             + " = "
-                            + formatTree(p.getValue()))
+                            + formatTree(p.getAssignTree().getRhs()))
                 .collect(Collectors.joining(", "));
         b.append(parameter);
       }
@@ -292,7 +295,7 @@ public class SignatureFormatter {
               .descriptor
               .name;
     } else if (tree.hasAnnotationTree()) {
-      return formatAnnotation(tree.getAnnotationTree().getAnnotation());
+      return formatAnnotation(tree.getAnnotationTree());
     } else if (tree.hasApplyTree()) {
       if (tree.getApplyTree().getFunction().hasIdTree()
           && tree.getApplyTree().getFunction().getIdTree().getSymbol().equals(ARRAY_SYMBOL)) {

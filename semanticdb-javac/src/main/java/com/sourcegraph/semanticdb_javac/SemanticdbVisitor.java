@@ -13,8 +13,6 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Kind;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 
-import javax.lang.model.type.PrimitiveType;
-import javax.lang.model.type.TypeKind;
 import javax.lang.model.util.Elements;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -91,7 +89,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     if (documentation != null) builder.setDocumentation(documentation);
     Semanticdb.Signature signature = semanticdbSignature(sym);
     if (signature != null) builder.setSignature(signature);
-    List<Semanticdb.Annotation> annotations = semanticdbAnnotations(tree);
+    List<Semanticdb.AnnotationTree> annotations = semanticdbAnnotations(tree);
     if (annotations != null) builder.addAllAnnotations(annotations);
 
     builder
@@ -311,12 +309,12 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     }
   }
 
-  private List<Semanticdb.Annotation> semanticdbAnnotations(JCTree node) {
+  private List<Semanticdb.AnnotationTree> semanticdbAnnotations(JCTree node) {
     if (!(node instanceof JCTree.JCClassDecl)
         && !(node instanceof JCTree.JCVariableDecl)
         && !(node instanceof JCTree.JCMethodDecl)) return null;
 
-    List<Semanticdb.Annotation> annotations = new ArrayList<>();
+    List<Semanticdb.AnnotationTree> annotations = new ArrayList<>();
 
     JCTree.JCModifiers mods;
     if (node instanceof JCTree.JCClassDecl) {
@@ -334,26 +332,31 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     return annotations;
   }
 
-  private Semanticdb.Annotation.Builder semanticdbAnnotation(JCTree.JCAnnotation annotation) {
-    Semanticdb.Annotation.Builder builder = Semanticdb.Annotation.newBuilder();
-    builder.setTpe(new SemanticdbTypeVisitor(globals, locals).visit(annotation.type));
+  private Semanticdb.AnnotationTree.Builder semanticdbAnnotation(JCTree.JCAnnotation annotation) {
+    Semanticdb.AnnotationTree.Builder annotationBuilder = Semanticdb.AnnotationTree.newBuilder();
+    annotationBuilder.setTpe(new SemanticdbTypeVisitor(globals, locals).visit(annotation.type));
 
     for (JCTree.JCExpression param : annotation.args) {
-      Semanticdb.Annotation.ParameterPair.Builder parameterBuilder =
-          Semanticdb.Annotation.ParameterPair.newBuilder();
+      Semanticdb.AssignTree.Builder parameterBuilder = Semanticdb.AssignTree.newBuilder();
 
       // anecdotally always JCAssign
       JCTree.JCAssign assign = (JCTree.JCAssign) param;
       JCTree.JCExpression assignValue = assign.rhs;
 
-      parameterBuilder.setKey(globals.semanticdbSymbol(((JCTree.JCIdent) assign.lhs).sym, locals));
+      parameterBuilder.setLhs(
+          Semanticdb.Tree.newBuilder()
+              .setIdTree(
+                  Semanticdb.IdTree.newBuilder()
+                      .setSymbol(
+                          globals.semanticdbSymbol(((JCTree.JCIdent) assign.lhs).sym, locals))
+                      .build()));
 
-      parameterBuilder.setValue(semanticdbAnnotationParameter(assignValue));
+      parameterBuilder.setRhs(semanticdbAnnotationParameter(assignValue));
 
-      builder.addParameters(parameterBuilder);
+      annotationBuilder.addParameters(Semanticdb.Tree.newBuilder().setAssignTree(parameterBuilder));
     }
 
-    return builder;
+    return annotationBuilder;
   }
 
   private Semanticdb.Tree.Builder semanticdbAnnotationParameter(JCTree.JCExpression expr) {
@@ -457,9 +460,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       return Semanticdb.Tree.newBuilder().setLiteralTree(literalBuilder);
     } else if (expr instanceof JCTree.JCAnnotation) {
       return Semanticdb.Tree.newBuilder()
-          .setAnnotationTree(
-              Semanticdb.AnnotationTree.newBuilder()
-                  .setAnnotation(semanticdbAnnotation((JCTree.JCAnnotation) expr)));
+          .setAnnotationTree(semanticdbAnnotation((JCTree.JCAnnotation) expr));
     } else if (expr instanceof JCTree.JCIdent) {
       return Semanticdb.Tree.newBuilder()
           .setIdTree(
