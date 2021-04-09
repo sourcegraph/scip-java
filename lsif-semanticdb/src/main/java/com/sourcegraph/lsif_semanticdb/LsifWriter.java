@@ -83,7 +83,7 @@ public class LsifWriter implements AutoCloseable {
 
   public int emitReferenceResult(int resultSet) {
     int referenceResult = emitObject(lsifVertex("referenceResult"));
-    emitEdge("textDocument/reference", resultSet, referenceResult);
+    emitEdge("textDocument/references", resultSet, referenceResult);
     return referenceResult;
   }
 
