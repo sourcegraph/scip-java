@@ -5,6 +5,7 @@ import com.sun.source.util.*;
 import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Type;
+import com.sun.tools.javac.model.JavacTypes;
 import com.sun.tools.javac.tree.EndPosTable;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.util.JCDiagnostic;
@@ -19,10 +20,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.ARRAY_SYMBOL;
@@ -34,6 +32,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   private final LocalSymbolsCache locals;
   private final JavacTask task;
   private final TaskEvent event;
+  private final JavacTypes javacTypes;
   private final Trees trees;
   private final SemanticdbJavacOptions options;
   private final EndPosTable endPosTable;
@@ -42,12 +41,17 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   private String source;
 
   public SemanticdbVisitor(
-      JavacTask task, GlobalSymbolsCache globals, TaskEvent event, SemanticdbJavacOptions options) {
+      JavacTask task,
+      GlobalSymbolsCache globals,
+      TaskEvent event,
+      SemanticdbJavacOptions options,
+      JavacTypes javacTypes) {
     this.task = task;
     this.globals = globals; // Reused cache between compilation units.
     this.locals = new LocalSymbolsCache(); // Fresh cache per compilation unit.
     this.event = event;
     this.options = options;
+    this.javacTypes = javacTypes;
     this.trees = Trees.instance(task);
     if (event.getCompilationUnit() instanceof JCTree.JCCompilationUnit) {
       this.endPosTable = ((JCTree.JCCompilationUnit) event.getCompilationUnit()).endPositions;
@@ -113,6 +117,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         break;
       case METHOD:
         builder.setKind(Kind.METHOD);
+        builder.addAllOverriddenSymbols(semanticdbOverrides(sym));
         break;
       case CONSTRUCTOR:
         builder.setKind(Kind.CONSTRUCTOR);
@@ -500,6 +505,17 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     properties |= (sym.flags() & Flags.ABSTRACT) > 0 ? Property.ABSTRACT_VALUE : 0;
     properties |= (sym.flags() & Flags.FINAL) > 0 ? Property.FINAL_VALUE : 0;
     return properties;
+  }
+
+  private List<String> semanticdbOverrides(Symbol sym) {
+    ArrayList<String> overriddenSymbols = new ArrayList<>();
+    Set<Symbol.MethodSymbol> overriddenMethods = javacTypes.getOverriddenMethods(sym);
+
+    for (Symbol.MethodSymbol meth : overriddenMethods) {
+      overriddenSymbols.add(semanticdbSymbol(meth));
+    }
+
+    return overriddenSymbols;
   }
 
   private Semanticdb.Access semanticdbAccess(Symbol sym) {
