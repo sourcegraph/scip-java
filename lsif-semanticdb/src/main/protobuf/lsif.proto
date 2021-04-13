@@ -25,6 +25,7 @@ message LsifObject {
   LsifPosition end = 20;
   string name = 21;
   string manager = 22;
+  string property = 23;
 }
 
 message LsifToolInfo {

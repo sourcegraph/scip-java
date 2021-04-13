@@ -136,6 +136,18 @@ public class LsifSemanticdb {
           writer.emitHoverEdge(ids.resultSet, hoverId);
         }
       }
+
+      // Overrides
+      if (symbolInformation.getOverriddenSymbolsCount() > 0) {
+        int[] overriddenReferenceResultIds = new int[symbolInformation.getOverriddenSymbolsCount()];
+        for (int i = 0; i < symbolInformation.getOverriddenSymbolsCount(); i++) {
+          String overriddenSymbol = symbolInformation.getOverriddenSymbols(i);
+          ResultIds overriddenIds = results.getOrInsertResultSet(overriddenSymbol);
+          overriddenReferenceResultIds[i] = overriddenIds.referenceResult;
+        }
+        writer.emitReferenceResultsItemEdge(
+            ids.referenceResult, overriddenReferenceResultIds, doc.id);
+      }
     }
     writer.emitContains(doc.id, new ArrayList<>(rangeIds));
     writer.flush();
