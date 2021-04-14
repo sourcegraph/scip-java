@@ -30,9 +30,6 @@ public class RangeFinder {
     int endPos = (int) trees.getSourcePositions().getEndPosition(root, path.getLeaf());
     // false for anonymous classes
     if (name.length() != 0) {
-      // for declared constructors with no modifiers, findNameIn will return -1 as the name will
-      // not start with a space, the first char is the start of the name
-      if (source.charAt(startPos) != ' ') startPos -= 1;
       startPos = findNameIn(name, startPos, source);
       endPos = startPos + name.length();
     }
@@ -54,9 +51,9 @@ public class RangeFinder {
   private static int findNameIn(CharSequence name, int start, String source) {
     if (source.equals("")) return -1;
 
-    int offset = source.indexOf(" " + name, start);
+    int offset = source.indexOf(name.toString(), start);
     if (offset > -1) {
-      return offset + 1;
+      return offset ;
     }
     return -1;
   }
