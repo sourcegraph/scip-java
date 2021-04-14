@@ -224,7 +224,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
   //////////////////////////////////////////////////////////////////////////////////////////
 
   public EpoxyController() {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyController#`<init>`(). public EpoxyController()
+//       ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#`<init>`(). public EpoxyController()
     this(defaultModelBuildingHandler, defaultDiffingHandler);
 //  ^^^^ reference com/airbnb/epoxy/EpoxyController#`<init>`(+1).
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#defaultModelBuildingHandler.
@@ -232,7 +232,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
   }
 
   public EpoxyController(Handler modelBuildingHandler, Handler diffingHandler) {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyController#`<init>`(+1). public EpoxyController(unresolved_type modelBuildingHandler, unresolved_type diffingHandler)
+//       ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#`<init>`(+1). public EpoxyController(unresolved_type modelBuildingHandler, unresolved_type diffingHandler)
 //                       ^^^^^^^ reference _root_/
 //                               ^^^^^^^^^^^^^^^^^^^^ definition local0 unresolved_type modelBuildingHandler
 //                                                     ^^^^^^^ reference _root_/

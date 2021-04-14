@@ -128,7 +128,7 @@ public abstract class EpoxyModel<T> {
 //                                           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#spanSizeOverride. private SpanSizeOverrideCallback spanSizeOverride
 
   protected EpoxyModel(long id) {
-//          ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#`<init>`(). protected EpoxyModel(long id)
+//          ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#`<init>`(). protected EpoxyModel(long id)
 //                          ^^ definition local0 long id
     id(id);
 //  ^^ reference com/airbnb/epoxy/EpoxyModel#id(+1).
@@ -136,7 +136,7 @@ public abstract class EpoxyModel<T> {
   }
 
   public EpoxyModel() {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyModel#`<init>`(+1). public EpoxyModel()
+//       ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#`<init>`(+1). public EpoxyModel()
     this(idCounter--);
 //  ^^^^ reference com/airbnb/epoxy/EpoxyModel#`<init>`().
 //       ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#idCounter.

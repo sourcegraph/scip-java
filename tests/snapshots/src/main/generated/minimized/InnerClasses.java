@@ -7,7 +7,7 @@ public class InnerClasses {
 //                  ^^^^^^^^^^^^ definition minimized/InnerClasses#exampleField. private final int exampleField
 
   public InnerClasses(int exampleField) {
-//       ^^^^^^ definition minimized/InnerClasses#`<init>`(). public InnerClasses(int exampleField)
+//       ^^^^^^^^^^^^ definition minimized/InnerClasses#`<init>`(). public InnerClasses(int exampleField)
 //                        ^^^^^^^^^^^^ definition local0 int exampleField
     this.exampleField = exampleField;
 //  ^^^^ reference minimized/InnerClasses#
@@ -53,7 +53,7 @@ public class InnerClasses {
 //                    ^^^^^ definition minimized/InnerClasses#InnerClass#field. private final int field
 
     public InnerClass(int field) {
-//         ^^^^^^ definition minimized/InnerClasses#InnerClass#`<init>`(). public InnerClass(int field)
+//         ^^^^^^^^^^ definition minimized/InnerClasses#InnerClass#`<init>`(). public InnerClass(int field)
 //                        ^^^^^ definition local2 int field
       this.field = field;
 //    ^^^^ reference minimized/InnerClasses#InnerClass#

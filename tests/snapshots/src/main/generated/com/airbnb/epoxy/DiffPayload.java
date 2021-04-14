@@ -39,7 +39,7 @@ public class DiffPayload {
 //                                             ^^^^^^^^^^ definition com/airbnb/epoxy/DiffPayload#modelsById. private final LongSparseArray<EpoxyModel<?>> modelsById
 
   DiffPayload(List<? extends EpoxyModel<?>> models) {
-//^^^^^^ definition com/airbnb/epoxy/DiffPayload#`<init>`(). DiffPayload(List<? extends EpoxyModel<?>> models)
+//^^^^^^^^^^^ definition com/airbnb/epoxy/DiffPayload#`<init>`(). DiffPayload(List<? extends EpoxyModel<?>> models)
 //            ^^^^ reference java/util/List#
 //                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                          ^^^^^^ definition local0 List<? extends EpoxyModel<?>> models
@@ -88,7 +88,7 @@ public class DiffPayload {
   }
 
   public DiffPayload(EpoxyModel<?> changedItem) {
-//       ^^^^^^ definition com/airbnb/epoxy/DiffPayload#`<init>`(+1). public DiffPayload(EpoxyModel<?> changedItem)
+//       ^^^^^^^^^^^ definition com/airbnb/epoxy/DiffPayload#`<init>`(+1). public DiffPayload(EpoxyModel<?> changedItem)
 //                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                 ^^^^^^^^^^^ definition local3 EpoxyModel<?> changedItem
     this(Collections.singletonList(changedItem));

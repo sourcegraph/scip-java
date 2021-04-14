@@ -78,7 +78,7 @@ class AsyncEpoxyDiffer {
 //                                                        ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#
 
   AsyncEpoxyDiffer(
-//^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#`<init>`(). AsyncEpoxyDiffer(unresolved_type handler, ResultCallback resultCallback, unresolved_type diffCallback)
+//^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#`<init>`(). AsyncEpoxyDiffer(unresolved_type handler, ResultCallback resultCallback, unresolved_type diffCallback)
       @NonNull Handler handler,
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^^^^ reference _root_/
@@ -523,7 +523,7 @@ class AsyncEpoxyDiffer {
 //                                            ^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#diffCallback. private final unresolved_type diffCallback
 
     DiffCallback(List<? extends EpoxyModel<?>> oldList, List<? extends EpoxyModel<?>> newList,
-//  ^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#`<init>`(). DiffCallback(List<? extends EpoxyModel<?>> oldList, List<? extends EpoxyModel<?>> newList, unresolved_type diffCallback)
+//  ^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#`<init>`(). DiffCallback(List<? extends EpoxyModel<?>> oldList, List<? extends EpoxyModel<?>> newList, unresolved_type diffCallback)
 //               ^^^^ reference java/util/List#
 //                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                             ^^^^^^^ definition local28 List<? extends EpoxyModel<?>> oldList

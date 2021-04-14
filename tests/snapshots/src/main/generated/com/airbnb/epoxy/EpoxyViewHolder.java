@@ -78,7 +78,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //                   ^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#parent. private unresolved_type parent
 
   public EpoxyViewHolder(ViewParent parent, View view, boolean saveInitialState) {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#`<init>`(). public EpoxyViewHolder(unresolved_type parent, unresolved_type view, boolean saveInitialState)
+//       ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#`<init>`(). public EpoxyViewHolder(unresolved_type parent, unresolved_type view, boolean saveInitialState)
 //                       ^^^^^^^^^^ reference _root_/
 //                                  ^^^^^^ definition local0 unresolved_type parent
 //                                          ^^^^ reference _root_/

@@ -83,13 +83,13 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //                ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#isInLastRow. private boolean isInLastRow
 
   public EpoxyItemSpacingDecorator() {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#`<init>`(). public EpoxyItemSpacingDecorator()
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#`<init>`(). public EpoxyItemSpacingDecorator()
     this(0);
 //  ^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#`<init>`(+1).
   }
 
   public EpoxyItemSpacingDecorator(@Px int pxBetweenItems) {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#`<init>`(+1). public EpoxyItemSpacingDecorator(int pxBetweenItems)
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#`<init>`(+1). public EpoxyItemSpacingDecorator(int pxBetweenItems)
 //                                  ^^ reference androidx/annotation/Px#
 //                                         ^^^^^^^^^^^^^^ definition local0 int pxBetweenItems
     setPxBetweenItems(pxBetweenItems);

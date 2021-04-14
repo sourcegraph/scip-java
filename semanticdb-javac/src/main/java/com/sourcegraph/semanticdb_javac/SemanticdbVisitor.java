@@ -156,8 +156,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     if (node instanceof JCTree.JCMethodDecl) {
       JCTree.JCMethodDecl meth = (JCTree.JCMethodDecl) node;
       CompilerRange range = CompilerRange.FROM_POINT_TO_SYMBOL_NAME;
-      if ((meth.sym.flags() & Flags.GENERATEDCONSTR) != 0L) {
-        range = CompilerRange.FROM_TEXT_SEARCH;
+      if (meth.sym.name.toString().equals("<init>")) {
+        range = CompilerRange.FROM_POINT_WITH_TEXT_SEARCH;
       }
       emitSymbolOccurrence(meth.sym, meth, Role.DEFINITION, range);
 

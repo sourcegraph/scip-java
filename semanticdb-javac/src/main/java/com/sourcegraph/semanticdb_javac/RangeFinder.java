@@ -51,9 +51,9 @@ public class RangeFinder {
   private static int findNameIn(CharSequence name, int start, String source) {
     if (source.equals("")) return -1;
 
-    int offset = source.indexOf(" " + name, start);
+    int offset = source.indexOf(name.toString(), start);
     if (offset > -1) {
-      return offset + 1;
+      return offset ;
     }
     return -1;
   }

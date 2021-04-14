@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 public final class IdUtils {
 //                 ^^^^^^^ definition com/airbnb/epoxy/IdUtils# public final class IdUtils
   private IdUtils() {
-//        ^^^^^^ definition com/airbnb/epoxy/IdUtils#`<init>`(). private IdUtils()
+//        ^^^^^^^ definition com/airbnb/epoxy/IdUtils#`<init>`(). private IdUtils()
   }
 
   /**
