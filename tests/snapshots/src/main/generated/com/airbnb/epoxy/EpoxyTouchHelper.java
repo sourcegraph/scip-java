@@ -92,7 +92,7 @@ public abstract class EpoxyTouchHelper {
 //                                ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder#controller. private final EpoxyController controller
 
     private DragBuilder(EpoxyController controller) {
-//          ^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder#`<init>`(). private DragBuilder(EpoxyController controller)
+//          ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder#`<init>`(). private DragBuilder(EpoxyController controller)
 //                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                                      ^^^^^^^^^^ definition local1 EpoxyController controller
       this.controller = controller;
@@ -130,7 +130,7 @@ public abstract class EpoxyTouchHelper {
 //                             ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#recyclerView. private final unresolved_type recyclerView
 
     private DragBuilder2(EpoxyController controller, RecyclerView recyclerView) {
-//          ^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#`<init>`(). private DragBuilder2(EpoxyController controller, unresolved_type recyclerView)
+//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#`<init>`(). private DragBuilder2(EpoxyController controller, unresolved_type recyclerView)
 //                       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                                       ^^^^^^^^^^ definition local3 EpoxyController controller
 //                                                   ^^^^^^^^^^^^ reference _root_/
@@ -222,7 +222,7 @@ public abstract class EpoxyTouchHelper {
 //                    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#movementFlags. private final int movementFlags
 
     private DragBuilder3(EpoxyController controller, RecyclerView recyclerView, int movementFlags) {
-//          ^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#`<init>`(). private DragBuilder3(EpoxyController controller, unresolved_type recyclerView, int movementFlags)
+//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#`<init>`(). private DragBuilder3(EpoxyController controller, unresolved_type recyclerView, int movementFlags)
 //                       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                                       ^^^^^^^^^^ definition local6 EpoxyController controller
 //                                                   ^^^^^^^^^^^^ reference _root_/
@@ -346,7 +346,7 @@ public abstract class EpoxyTouchHelper {
 //                                                  ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#targetModelClasses. private final List<Class<? extends EpoxyModel>> targetModelClasses
 
     private DragBuilder4(EpoxyController controller,
-//          ^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#`<init>`(). private DragBuilder4(EpoxyController controller, unresolved_type recyclerView, int movementFlags, Class<U> targetModelClass, List<Class<? extends EpoxyModel>> targetModelClasses)
+//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#`<init>`(). private DragBuilder4(EpoxyController controller, unresolved_type recyclerView, int movementFlags, Class<U> targetModelClass, List<Class<? extends EpoxyModel>> targetModelClasses)
 //                       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 //                                       ^^^^^^^^^^ definition local12 EpoxyController controller
         RecyclerView recyclerView, int movementFlags,
@@ -645,7 +645,7 @@ public abstract class EpoxyTouchHelper {
 //                             ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#recyclerView. private final unresolved_type recyclerView
 
     private SwipeBuilder(RecyclerView recyclerView) {
-//          ^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#`<init>`(). private SwipeBuilder(unresolved_type recyclerView)
+//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#`<init>`(). private SwipeBuilder(unresolved_type recyclerView)
 //                       ^^^^^^^^^^^^ reference _root_/
 //                                    ^^^^^^^^^^^^ definition local60 unresolved_type recyclerView
       this.recyclerView = recyclerView;
@@ -718,7 +718,7 @@ public abstract class EpoxyTouchHelper {
 //                    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#movementFlags. private final int movementFlags
 
     private SwipeBuilder2(RecyclerView recyclerView,
-//          ^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#`<init>`(). private SwipeBuilder2(unresolved_type recyclerView, int movementFlags)
+//          ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#`<init>`(). private SwipeBuilder2(unresolved_type recyclerView, int movementFlags)
 //                        ^^^^^^^^^^^^ reference _root_/
 //                                     ^^^^^^^^^^^^ definition local62 unresolved_type recyclerView
         int movementFlags) {
@@ -833,7 +833,7 @@ public abstract class EpoxyTouchHelper {
 //                                                  ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#targetModelClasses. private final List<Class<? extends EpoxyModel>> targetModelClasses
 
     private SwipeBuilder3(
-//          ^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#`<init>`(). private SwipeBuilder3(unresolved_type recyclerView, int movementFlags, Class<U> targetModelClass, List<Class<? extends EpoxyModel>> targetModelClasses)
+//          ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#`<init>`(). private SwipeBuilder3(unresolved_type recyclerView, int movementFlags, Class<U> targetModelClass, List<Class<? extends EpoxyModel>> targetModelClasses)
         RecyclerView recyclerView, int movementFlags,
 //      ^^^^^^^^^^^^ reference _root_/
 //                   ^^^^^^^^^^^^ definition local67 unresolved_type recyclerView

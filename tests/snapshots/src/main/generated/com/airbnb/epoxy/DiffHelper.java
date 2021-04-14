@@ -73,7 +73,7 @@ class DiffHelper {
 
 
   DiffHelper(BaseEpoxyAdapter adapter, boolean immutableModels) {
-//^^^^^^ definition com/airbnb/epoxy/DiffHelper#`<init>`(). DiffHelper(BaseEpoxyAdapter adapter, boolean immutableModels)
+//^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#`<init>`(). DiffHelper(BaseEpoxyAdapter adapter, boolean immutableModels)
 //           ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
 //                            ^^^^^^^ definition local0 BaseEpoxyAdapter adapter
 //                                             ^^^^^^^^^^^^^^^ definition local1 boolean immutableModels

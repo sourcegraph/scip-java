@@ -42,11 +42,11 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                                                                   ^ reference com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 
   public EpoxyModelWithHolder() {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#`<init>`(). public EpoxyModelWithHolder()
+//       ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#`<init>`(). public EpoxyModelWithHolder()
   }
 
   public EpoxyModelWithHolder(long id) {
-//       ^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#`<init>`(+1). public EpoxyModelWithHolder(long id)
+//       ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithHolder#`<init>`(+1). public EpoxyModelWithHolder(long id)
 //                                 ^^ definition local0 long id
     super(id);
 //  ^^^^^ reference com/airbnb/epoxy/EpoxyModel#`<init>`().

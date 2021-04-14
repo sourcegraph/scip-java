@@ -49,7 +49,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 
   ModelList(int expectedModelCount) {
-//^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`(). ModelList(int expectedModelCount)
+//^^^^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`(). ModelList(int expectedModelCount)
 //              ^^^^^^^^^^^^^^^^^^ definition local0 int expectedModelCount
     super(expectedModelCount);
 //  ^^^^^ reference java/util/ArrayList#`<init>`().
@@ -57,7 +57,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   ModelList() {
-//^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`(+1). ModelList()
+//^^^^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`(+1). ModelList()
 
   }
 
@@ -542,7 +542,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                                             ^^^^^^^^^^^^ reference java/util/ListIterator#
 //                                                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
     ListItr(int index) {
-//  ^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr#`<init>`(). ListItr(int index)
+//  ^^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr#`<init>`(). ListItr(int index)
 //              ^^^^^ definition local33 int index
       cursor = index;
 //    ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
@@ -729,7 +729,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                ^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#end. private int end
 
       SubListIterator(ListIterator<EpoxyModel<?>> it, SubList list, int offset, int length) {
-//    ^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#`<init>`(). SubListIterator(ListIterator<EpoxyModel<?>> it, SubList list, int offset, int length)
+//    ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#`<init>`(). SubListIterator(ListIterator<EpoxyModel<?>> it, SubList list, int offset, int length)
 //                    ^^^^^^^^^^^^ reference java/util/ListIterator#
 //                                 ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                ^^ definition local42 ListIterator<EpoxyModel<?>> it
@@ -863,7 +863,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     }
 
     SubList(ModelList list, int start, int end) {
-//  ^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#`<init>`(). SubList(ModelList list, int start, int end)
+//  ^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#`<init>`(). SubList(ModelList list, int start, int end)
 //          ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
 //                    ^^^^ definition local49 ModelList list
 //                              ^^^^^ definition local50 int start

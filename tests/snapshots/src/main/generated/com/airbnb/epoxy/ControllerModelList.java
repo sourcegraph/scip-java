@@ -43,7 +43,7 @@ class ControllerModelList extends ModelList {
   };
 
   ControllerModelList(int expectedModelCount) {
-//^^^^^^ definition com/airbnb/epoxy/ControllerModelList#`<init>`(). ControllerModelList(int expectedModelCount)
+//^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList#`<init>`(). ControllerModelList(int expectedModelCount)
 //                        ^^^^^^^^^^^^^^^^^^ definition local8 int expectedModelCount
     super(expectedModelCount);
 //  ^^^^^ reference com/airbnb/epoxy/ModelList#`<init>`().

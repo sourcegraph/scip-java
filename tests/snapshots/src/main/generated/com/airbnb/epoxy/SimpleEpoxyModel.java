@@ -39,7 +39,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //            ^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#spanCount. private int spanCount
 
   public SimpleEpoxyModel(@LayoutRes int layoutRes) {
-//       ^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#`<init>`(). public SimpleEpoxyModel(int layoutRes)
+//       ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel#`<init>`(). public SimpleEpoxyModel(int layoutRes)
 //                         ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                                       ^^^^^^^^^ definition local0 int layoutRes
     this.layoutRes = layoutRes;
