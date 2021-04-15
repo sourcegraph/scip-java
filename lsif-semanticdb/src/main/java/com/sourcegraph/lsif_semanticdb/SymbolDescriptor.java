@@ -43,7 +43,7 @@ public class SymbolDescriptor {
         b.append(' ');
       }
       b.append('^');
-      return new IllegalArgumentException("invalid symbol format\n" + symbol + "\n" + b.toString());
+      return new IllegalArgumentException("invalid symbol format\n" + symbol + "\n" + b);
     }
 
     public char readChar() {

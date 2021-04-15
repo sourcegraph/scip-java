@@ -53,7 +53,7 @@ public class RangeFinder {
 
     int offset = source.indexOf(name.toString(), start);
     if (offset > -1) {
-      return offset ;
+      return offset;
     }
     return -1;
   }
