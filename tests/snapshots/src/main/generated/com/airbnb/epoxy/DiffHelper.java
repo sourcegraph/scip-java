@@ -41,8 +41,7 @@ class DiffHelper {
 //        ^^^^^^^^^ reference java/util/ArrayList#
 //                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                              ^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#oldStateList. private ArrayList<ModelState> oldStateList
-//                                             ^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
-//                                                 ^^^^^^^^^ reference java/util/ArrayList#
+//                                                 ^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
   // Using a HashMap instead of a LongSparseArray to
   // have faster look up times at the expense of memory
   private Map<Long, ModelState> oldStateMap = new HashMap<>();
@@ -50,21 +49,18 @@ class DiffHelper {
 //            ^^^^ reference java/lang/Long#
 //                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                              ^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#oldStateMap. private Map<Long, ModelState> oldStateMap
-//                                            ^^^^^^^^^^^^^^^ reference java/util/HashMap#`<init>`(+2).
-//                                                ^^^^^^^ reference java/util/HashMap#
+//                                                ^^^^^^^ reference java/util/HashMap#`<init>`(+2).
   private ArrayList<ModelState> currentStateList = new ArrayList<>();
 //        ^^^^^^^^^ reference java/util/ArrayList#
 //                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#currentStateList. private ArrayList<ModelState> currentStateList
-//                                                 ^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
-//                                                     ^^^^^^^^^ reference java/util/ArrayList#
+//                                                     ^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
   private Map<Long, ModelState> currentStateMap = new HashMap<>();
 //        ^^^ reference java/util/Map#
 //            ^^^^ reference java/lang/Long#
 //                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#currentStateMap. private Map<Long, ModelState> currentStateMap
-//                                                ^^^^^^^^^^^^^^^ reference java/util/HashMap#`<init>`(+2).
-//                                                    ^^^^^^^ reference java/util/HashMap#
+//                                                    ^^^^^^^ reference java/util/HashMap#`<init>`(+2).
   private final BaseEpoxyAdapter adapter;
 //              ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
 //                               ^^^^^^^ definition com/airbnb/epoxy/DiffHelper#adapter. private final BaseEpoxyAdapter adapter
@@ -95,18 +91,14 @@ class DiffHelper {
 //              ^^^^^^^^^^^^ reference RecyclerView/
 //                           ^^^^^^^^^^^^^^^^^^^ reference RecyclerView/AdapterDataObserver#
 //                                               ^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#observer. private final unresolved_type observer
-//                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference `<any>`#`<init>`# 91:3
 //                                                              ^^^^^^^^^^^^ reference RecyclerView/
-//                                                              ^^^^^^^^^^^^ reference RecyclerView/
-//                                                                           ^^^^^^^^^^^^^^^^^^^ reference RecyclerView/AdapterDataObserver#
 //                                                                           ^^^^^^^^^^^^^^^^^^^ reference RecyclerView/AdapterDataObserver#
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onChanged() {
 //              ^^^^^^^^^ definition local3 @Override public void onChanged()
       throw new UnsupportedOperationException(
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1). 1:99
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1).
           "Diffing is enabled. You should use notifyModelsChanged instead of notifyDataSetChanged");
     }
 
@@ -173,8 +165,7 @@ class DiffHelper {
 //      ^^^^ reference java/util/List#
 //           ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                       ^^^^^^^^^ definition local14 List<ModelState> newModels
-//                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`().
-//                                       ^^^^^^^^^ reference java/util/ArrayList#
+//                                       ^^^^^^^^^ reference java/util/ArrayList#`<init>`().
 //                                                   ^^^^^^^^^ reference local12
         for (int i = positionStart; i < positionStart + itemCount; i++) {
 //               ^ definition local15 int i
@@ -291,8 +282,7 @@ class DiffHelper {
       if (itemCount != 1) {
 //        ^^^^^^^^^ reference local26
         throw new IllegalArgumentException("Moving more than 1 item at a time is not "
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`(+1). 1:63
-//                ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#
+//                ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`(+1).
             + "supported. Number of items moved: " + itemCount);
 //                                                   ^^^^^^^^^ reference local26
       }
@@ -356,8 +346,7 @@ class DiffHelper {
     UpdateOpHelper updateOpHelper = new UpdateOpHelper();
 //  ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
 //                 ^^^^^^^^^^^^^^ definition local30 UpdateOpHelper updateOpHelper
-//                                  ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#`<init>`().
-//                                      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
+//                                      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#`<init>`().
 
     buildDiff(updateOpHelper);
 //  ^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#buildDiff().
@@ -438,8 +427,7 @@ class DiffHelper {
 //                                                           ^^ reference local32
 //                                                              ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
                 new DiffPayload(op.payloads));
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#`<init>`().
-//                  ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#
+//                  ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#`<init>`().
 //                              ^^ reference local32
 //                                 ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#payloads.
           } else {
@@ -454,8 +442,7 @@ class DiffHelper {
           break;
         default:
           throw new IllegalArgumentException("Unknown type: " + op.type);
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`(+1).
-//                  ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#
+//                  ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`(+1).
 //                                                              ^^ reference local32
 //                                                                 ^^^^ reference com/airbnb/epoxy/UpdateOp#type.
       }
@@ -641,8 +628,7 @@ class DiffHelper {
 //                                                             ^^^ reference java/util/List#get().
 //                                                                 ^^^^^^^^^^^^^^^^ reference local44
       throw new IllegalStateException("Two models have the same ID. ID's must be unique!"
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 2:76
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
           + " Model at position " + position + ": " + model
 //                                  ^^^^^^^^ reference local40
 //                                                    ^^^^^ reference local41

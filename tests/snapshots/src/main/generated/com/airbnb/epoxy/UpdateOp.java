@@ -83,8 +83,7 @@ class UpdateOp {
     UpdateOp op = new UpdateOp();
 //  ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //           ^^ definition local4 UpdateOp op
-//                ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#`<init>`().
-//                    ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
+//                    ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#`<init>`().
 
     op.type = type;
 //  ^^ reference local4
@@ -157,8 +156,7 @@ class UpdateOp {
       // In most cases this won't be a batch update so we can expect just one payload
       payloads = new ArrayList<>(1);
 //    ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#payloads.
-//               ^^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`().
-//                   ^^^^^^^^^ reference java/util/ArrayList#
+//                   ^^^^^^^^^ reference java/util/ArrayList#`<init>`().
     } else if (payloads.size() == 1) {
 //             ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#payloads.
 //                      ^^^^ reference java/util/ArrayList#size().

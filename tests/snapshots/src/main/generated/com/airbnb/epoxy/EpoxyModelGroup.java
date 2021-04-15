@@ -129,8 +129,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
     this(layoutRes, new ArrayList<>(models));
 //  ^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+2).
 //       ^^^^^^^^^ reference local0
-//                  ^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+2).
-//                      ^^^^^^^^^ reference java/util/ArrayList#
+//                      ^^^^^^^^^ reference java/util/ArrayList#`<init>`(+2).
 //                                  ^^^^^^ reference local1
   }
 
@@ -147,8 +146,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
     this(layoutRes, new ArrayList<>(Arrays.asList(models)));
 //  ^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+2).
 //       ^^^^^^^^^ reference local2
-//                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+2).
-//                      ^^^^^^^^^ reference java/util/ArrayList#
+//                      ^^^^^^^^^ reference java/util/ArrayList#`<init>`(+2).
 //                                  ^^^^^^ reference java/util/Arrays#
 //                                         ^^^^^^ reference java/util/Arrays#asList().
 //                                                ^^^^^^ reference local3
@@ -169,8 +167,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //      ^^^^^^ reference local5
 //             ^^^^^^^ reference java/util/List#isEmpty().
       throw new IllegalArgumentException("Models cannot be empty");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`(+1).
     }
 
     this.models = models;
@@ -213,8 +210,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //          ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+3). protected EpoxyModelGroup()
     models = new ArrayList<>();
 //  ^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#models.
-//           ^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
-//               ^^^^^^^^^ reference java/util/ArrayList#
+//               ^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
     shouldSaveViewStateDefault = false;
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#shouldSaveViewStateDefault.
   }
@@ -263,7 +259,6 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                ^^^^^^ reference local10
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local12 6:5
 //                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
-//                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
       public void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex) {
@@ -305,7 +300,6 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#iterateModels().
 //                ^^^^^^ reference local17
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local20 6:5
-//                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
 //                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
@@ -360,7 +354,6 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#iterateModels().
 //                ^^^^^^ reference local25
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local29 15:5
-//                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
 //                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
@@ -468,7 +461,6 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                ^^^^^^ reference local38
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local40 6:5
 //                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
-//                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
       public void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex) {
@@ -500,7 +492,6 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#iterateModels().
 //                ^^^^^^ reference local45
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local47 6:5
-//                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
 //                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
@@ -588,8 +579,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
   protected final int getDefaultLayout() {
 //                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#getDefaultLayout(). @Override protected final int getDefaultLayout()
     throw new UnsupportedOperationException(
-//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1). 1:74
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1).
         "You should set a layout with layout(...) instead of using this.");
   }
 
@@ -651,8 +641,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                                                          ^^^^^^^^^^ reference _root_/
 //                                                                     ^^^^^^ definition local65 @NonNull unresolved_type parent
     return new ModelGroupHolder(parent);
-//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference `<init>`#
-//             ^^^^^^^^^^^^^^^^ reference _root_/
+//             ^^^^^^^^^^^^^^^^ reference `<init>`#
 //                              ^^^^^^ reference local65
   }
 

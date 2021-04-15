@@ -14,8 +14,7 @@ public class Primitives {
     Random random = new Random();
 //  ^^^^^^ reference java/util/Random#
 //         ^^^^^^ definition local0 Random random
-//                  ^^^^^^^^^^^^ reference java/util/Random#`<init>`().
-//                      ^^^^^^ reference java/util/Random#
+//                      ^^^^^^ reference java/util/Random#`<init>`().
     byte a = (byte) random.nextInt();
 //       ^ definition local1 byte a
 //                  ^^^^^^ reference local0

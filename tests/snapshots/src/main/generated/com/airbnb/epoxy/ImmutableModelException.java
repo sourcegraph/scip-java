@@ -61,8 +61,7 @@ class ImmutableModelException extends RuntimeException {
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local6 String descriptionOfWhenChangeHappened
 //                                                ^^^^^^^^^^^^^ definition local7 int modelPosition
     return new StringBuilder(descriptionOfWhenChangeHappened)
-//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/StringBuilder#`<init>`(+2).
-//             ^^^^^^^^^^^^^ reference java/lang/StringBuilder#
+//             ^^^^^^^^^^^^^ reference java/lang/StringBuilder#`<init>`(+2).
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local6
         .append(" Position: ")
 //       ^^^^^^ reference java/lang/StringBuilder#append(+1).

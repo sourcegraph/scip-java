@@ -50,8 +50,7 @@ class UpdateOpHelper {
 //      ^^^^ reference java/util/List#
 //           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //                     ^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#opList. final List<UpdateOp> opList
-//                              ^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
-//                                  ^^^^^^^^^ reference java/util/ArrayList#
+//                                  ^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
   // We have to be careful to update all item positions in the list when we
   // do a MOVE. This adds some complexity.
   // To do this we keep track of all moves and apply them to an item when we
@@ -60,8 +59,7 @@ class UpdateOpHelper {
 //      ^^^^ reference java/util/List#
 //           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //                     ^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#moves. final List<UpdateOp> moves
-//                             ^^^^^^^^^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
-//                                 ^^^^^^^^^ reference java/util/ArrayList#
+//                                 ^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
   private UpdateOp lastOp;
 //        ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //                 ^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#lastOp. private UpdateOp lastOp

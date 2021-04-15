@@ -39,19 +39,15 @@ public class Fields {
     Fields fields = new Fields();
 //  ^^^^^^ reference minimized/Fields#
 //         ^^^^^^ definition local0 Fields fields
-//                  ^^^^^^^^^^^^ reference minimized/Fields#`<init>`().
-//                      ^^^^^^ reference minimized/Fields#
+//                      ^^^^^^ reference minimized/Fields#`<init>`().
     InnerFields innerFields = fields.new InnerFields();
 //  ^^^^^^^^^^^ reference minimized/Fields#InnerFields#
 //              ^^^^^^^^^^^ definition local1 InnerFields innerFields
-//                            ^^^^^^ reference local0
-//                            ^^^^^^^^^^^^^^^^^^^^^^^^ reference minimized/Fields#InnerFields#`<init>`().
-//                                       ^^^^^^^^^^^ reference minimized/Fields#InnerFields#
+//                                       ^^^^^^^^^^^ reference minimized/Fields#InnerFields#`<init>`().
     InnerStaticFields innerStaticFields = new InnerStaticFields();
 //  ^^^^^^^^^^^^^^^^^ reference minimized/Fields#InnerStaticFields#
 //                    ^^^^^^^^^^^^^^^^^ definition local2 InnerStaticFields innerStaticFields
-//                                        ^^^^^^^^^^^^^^^^^^^^^^^ reference minimized/Fields#InnerStaticFields#`<init>`().
-//                                            ^^^^^^^^^^^^^^^^^ reference minimized/Fields#InnerStaticFields#
+//                                            ^^^^^^^^^^^^^^^^^ reference minimized/Fields#InnerStaticFields#`<init>`().
     return String.valueOf(fields.privateField)
 //         ^^^^^^ reference java/lang/String#
 //                ^^^^^^^ reference java/lang/String#valueOf(+5).

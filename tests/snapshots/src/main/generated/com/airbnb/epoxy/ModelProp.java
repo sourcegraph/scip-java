@@ -83,6 +83,7 @@ public @interface ModelProp {
      * If you use this it is your responsibility to ensure that the object assigned to the prop
      * at runtime correctly implements hashCode/equals. If you don't want the prop to
      * contribute to model state you should use {@link Option#DoNotHash} instead.
+//                                                     ^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#`<init>`().
      */
     IgnoreRequireHashCode,
 //  ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#Option#IgnoreRequireHashCode. Option.IgnoreRequireHashCode /* ordinal 1 */
@@ -102,6 +103,9 @@ public @interface ModelProp {
   }
 
   /** Specify any {@link Option} values that should be used when generating the model class. */
+//                       ^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#`<init>`().
+//                       ^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#`<init>`().
+//                       ^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#`<init>`().
   Option[] options() default {};
 //^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#
 //         ^^^^^^^ definition com/airbnb/epoxy/ModelProp#options(). public abstract Option[] options()

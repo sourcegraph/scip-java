@@ -44,8 +44,7 @@ class ModelState {
     ModelState state = new ModelState();
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //             ^^^^^ definition local3 ModelState state
-//                     ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#`<init>`().
-//                         ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
+//                         ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#`<init>`().
 
     state.lastMoveOp = 0;
 //  ^^^^^ reference local3
@@ -90,14 +89,12 @@ class ModelState {
     if (pair != null) {
 //      ^^^^ reference com/airbnb/epoxy/ModelState#pair.
       throw new IllegalStateException("Already paired.");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
     }
 
     pair = new ModelState();
 //  ^^^^ reference com/airbnb/epoxy/ModelState#pair.
-//         ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#`<init>`().
-//             ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
+//             ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#`<init>`().
     pair.lastMoveOp = 0;
 //  ^^^^ reference com/airbnb/epoxy/ModelState#pair.
 //       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#lastMoveOp.

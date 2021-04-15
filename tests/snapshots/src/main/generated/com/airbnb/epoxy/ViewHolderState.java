@@ -118,10 +118,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                    ^^^^^^^ reference _root_/
 //                            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#
 //                                             ^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#CREATOR. public static final unresolved_type CREATOR
-//                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference `<any>`#`<init>`# 18:3
 //                                                           ^^^^^^^ reference _root_/
-//                                                           ^^^^^^^ reference _root_/
-//                                                                   ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#
 //                                                                   ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#
 
     public ViewHolderState[] newArray(int size) {
@@ -145,8 +142,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
       ViewHolderState state = new ViewHolderState(size);
 //    ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#
 //                    ^^^^^ definition local11 ViewHolderState state
-//                            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#`<init>`(+1).
-//                                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#
+//                                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#`<init>`(+1).
 //                                                ^^^^ reference local10
 
       for (int i = 0; i < size; i++) {
@@ -228,8 +224,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //      ^^^^^ reference local19
       state = new ViewState();
 //    ^^^^^ reference local19
-//            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`().
-//                ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
+//                ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`().
     }
 
     state.save(holder.itemView);
@@ -446,12 +441,8 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                              ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
 //                                         ^^^^^^^ definition com/airbnb/epoxy/ViewHolderState#ViewState#CREATOR. public static final unresolved_type CREATOR
         new Parcelable.ClassLoaderCreator<ViewState>() {
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference `<any>`#`<init>`# 19:9
-//          ^^^^^^^^^^ reference Parcelable/
 //          ^^^^^^^^^^ reference Parcelable/
 //                     ^^^^^^^^^^^^^^^^^^ reference Parcelable/ClassLoaderCreator#
-//                     ^^^^^^^^^^^^^^^^^^ reference Parcelable/ClassLoaderCreator#
-//                                        ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
 //                                        ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
           @Override
 //         ^^^^^^^^ reference java/lang/Override#
@@ -480,8 +471,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                                       ^^^^^^^^^^^^^^^^^^^ reference readParcelableArray#
 //                                                           ^^^^^^ reference local42
             return new ViewState(size, keys, values);
-//                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`(+1).
-//                     ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
+//                     ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`(+1).
 //                               ^^^^ reference local43
 //                                     ^^^^ reference local44
 //                                           ^^^^^^ reference local45

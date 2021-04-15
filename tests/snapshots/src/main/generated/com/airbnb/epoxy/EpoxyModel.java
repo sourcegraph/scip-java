@@ -346,8 +346,7 @@ public abstract class EpoxyModel<T> {
 //                                                                  ^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                       ^^ reference com/airbnb/epoxy/EpoxyModel#id.
       throw new IllegalEpoxyUsage(
-//          ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IllegalEpoxyUsage#`<init>`(). 1:79
-//              ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IllegalEpoxyUsage#
+//              ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IllegalEpoxyUsage#`<init>`().
           "Cannot change a model's id after it has been added to the adapter.");
     }
 
@@ -675,8 +674,7 @@ public abstract class EpoxyModel<T> {
     if (controller == null) {
 //      ^^^^^^^^^^ reference local36
       throw new IllegalArgumentException("Controller cannot be null");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`(+1).
     }
 
     if (controller.isModelAddedMultipleTimes(this)) {
@@ -684,8 +682,7 @@ public abstract class EpoxyModel<T> {
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#isModelAddedMultipleTimes().
 //                                           ^^^^ reference com/airbnb/epoxy/EpoxyModel#
       throw new IllegalEpoxyUsage(
-//          ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IllegalEpoxyUsage#`<init>`(). 2:68
-//              ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IllegalEpoxyUsage#
+//              ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IllegalEpoxyUsage#`<init>`().
           "This model was already added to the controller at position "
               + controller.getFirstIndexOfModelInBuildingList(this));
 //              ^^^^^^^^^^ reference local36
@@ -713,7 +710,6 @@ public abstract class EpoxyModel<T> {
 //    ^^^^^^^^^^ reference local36
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#addAfterInterceptorCallback().
 //                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local38 11:7
-//                                               ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#
 //                                               ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#
         @Override
 //       ^^^^^^^^ reference java/lang/Override#
@@ -768,8 +764,7 @@ public abstract class EpoxyModel<T> {
 //      ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#isDebugValidationEnabled().
 //                                     ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#currentlyInInterceptors.
       throw new ImmutableModelException(this,
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ImmutableModelException#`<init>`(). 1:52
-//              ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ImmutableModelException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ImmutableModelException#`<init>`().
 //                                      ^^^^ reference com/airbnb/epoxy/EpoxyModel#
           getPosition(firstControllerAddedTo, this));
 //        ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#getPosition().
@@ -837,8 +832,7 @@ public abstract class EpoxyModel<T> {
 //         ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#hashCodeWhenAdded.
 //                              ^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#hashCode().
       throw new ImmutableModelException(this, descriptionOfChange, modelPosition);
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ImmutableModelException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ImmutableModelException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ImmutableModelException#`<init>`(+1).
 //                                      ^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                            ^^^^^^^^^^^^^^^^^^^ reference local45
 //                                                                 ^^^^^^^^^^^^^ reference local46

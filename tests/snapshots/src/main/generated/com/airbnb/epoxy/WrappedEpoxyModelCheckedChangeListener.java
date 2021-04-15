@@ -45,8 +45,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
     if (checkedListener == null) {
 //      ^^^^^^^^^^^^^^^ reference local0
       throw new IllegalArgumentException("Checked change listener cannot be null");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`(+1).
     }
 
     this.originalCheckedChangeListener = checkedListener;

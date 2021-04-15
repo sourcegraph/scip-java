@@ -74,8 +74,7 @@ class AsyncEpoxyDiffer {
   private final GenerationTracker generationTracker = new GenerationTracker();
 //              ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#
 //                                ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#generationTracker. private final GenerationTracker generationTracker
-//                                                    ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#`<init>`().
-//                                                        ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#
+//                                                        ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#`<init>`().
 
   AsyncEpoxyDiffer(
 //^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#`<init>`(). AsyncEpoxyDiffer(unresolved_type handler, ResultCallback resultCallback, unresolved_type diffCallback)
@@ -96,8 +95,7 @@ class AsyncEpoxyDiffer {
     this.executor = new HandlerExecutor(handler);
 //  ^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#
 //       ^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#executor.
-//                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HandlerExecutor#`<init>`().
-//                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HandlerExecutor#
+//                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HandlerExecutor#`<init>`().
 //                                      ^^^^^^^ reference local1
     this.resultCallback = resultCallback;
 //  ^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#
@@ -310,8 +308,7 @@ class AsyncEpoxyDiffer {
     final DiffCallback wrappedCallback = new DiffCallback(previousList, newList, diffCallback);
 //        ^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#
 //                     ^^^^^^^^^^^^^^^ definition local11 final DiffCallback wrappedCallback
-//                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#`<init>`().
-//                                           ^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#
+//                                           ^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#`<init>`().
 //                                                        ^^^^^^^^^^^^ reference local9
 //                                                                      ^^^^^^^ reference local7
 //                                                                               ^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#diffCallback.
@@ -320,7 +317,6 @@ class AsyncEpoxyDiffer {
 //  ^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#executor.
 //           ^^^^^^^ reference java/util/concurrent/Executor#execute().
 //                   ^^^^^^^^^^^^^^^^ reference local13 6:5
-//                       ^^^^^^^^ reference java/lang/Runnable#
 //                       ^^^^^^^^ reference java/lang/Runnable#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
@@ -368,7 +364,6 @@ class AsyncEpoxyDiffer {
 //                     ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#ASYNC_INSTANCE.
 //                                    ^^^^^^^ reference com/airbnb/epoxy/HandlerExecutor#execute().
 //                                            ^^^^^^^^^^^^^^^^ reference local20 8:5
-//                                                ^^^^^^^^ reference java/lang/Runnable#
 //                                                ^^^^^^^^ reference java/lang/Runnable#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#

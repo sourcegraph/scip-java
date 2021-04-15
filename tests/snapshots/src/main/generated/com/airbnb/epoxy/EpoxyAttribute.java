@@ -85,6 +85,9 @@ public @interface EpoxyAttribute {
      * If you use this it is your responsibility to ensure that the object assigned to the attribute
      * at runtime correctly implements hashCode/equals. If you don't want the attribute to
      * contribute to model state you should use {@link Option#DoNotHash} instead.
+//                                                     ^^^^^^ reference com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`().
+//                                                     ^^^^^^ reference com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`().
+//                                                     ^^^^^^ reference com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`().
      */
     IgnoreRequireHashCode,
 //  ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#Option#IgnoreRequireHashCode. Option.IgnoreRequireHashCode /* ordinal 3 */
@@ -97,6 +100,8 @@ public @interface EpoxyAttribute {
   }
 
   /** Specify any {@link Option} values that should be used when generating the model class. */
+//                       ^^^^^^ reference com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`().
+//                       ^^^^^^ reference com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`().
   Option[] value() default {};
 //^^^^^^ reference com/airbnb/epoxy/EpoxyAttribute#Option#
 //         ^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#value(). public abstract Option[] value()

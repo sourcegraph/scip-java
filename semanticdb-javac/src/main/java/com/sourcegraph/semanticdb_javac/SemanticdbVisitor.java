@@ -221,9 +221,14 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   public Void visitNewClass(NewClassTree node, Void unused) {
     if (node instanceof JCTree.JCNewClass) {
       JCTree.JCNewClass cls = (JCTree.JCNewClass) node;
-      emitSymbolOccurrence(cls.constructor, cls, Role.REFERENCE, CompilerRange.FROM_START_TO_END);
+      emitSymbolOccurrence(cls.constructor, cls, Role.REFERENCE, CompilerRange.FROM_TEXT_SEARCH);
     }
-    return super.visitNewClass(node, unused);
+
+    // to avoid emitting a reference to the class itself, we manually scan everything
+    // except the identifier
+    scan(node.getTypeArguments(), unused);
+    scan(node.getArguments(), unused);
+    return scan(node.getClassBody(), unused);
   }
 
   // =================================================

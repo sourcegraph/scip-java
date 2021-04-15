@@ -103,6 +103,9 @@ public class InnerClasses {
 
   public static void testEnum(InnerEnum magicEnum) {
 //                   ^^^^^^^^ definition minimized/InnerClasses#testEnum(). public static void testEnum(InnerEnum magicEnum)
+//                            ^^^^^^^^^ reference minimized/InnerClasses#InnerEnum#`<init>`().
+//                            ^^^^^^^^^ reference minimized/InnerClasses#InnerEnum#`<init>`().
+//                            ^^^^^^^^^ reference minimized/InnerClasses#InnerEnum#`<init>`().
 //                            ^^^^^^^^^ reference minimized/InnerClasses#InnerEnum#
 //                                      ^^^^^^^^^ definition local6 InnerEnum magicEnum
     if (System.nanoTime() > System.nanoTime()) {
@@ -164,10 +167,7 @@ public class InnerClasses {
         new InnerInterface<String, String>() {
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local9 5:9
 //          ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#
-//          ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#
 //                         ^^^^^^ reference java/lang/String#
-//                         ^^^^^^ reference java/lang/String#
-//                                 ^^^^^^ reference java/lang/String#
 //                                 ^^^^^^ reference java/lang/String#
           @Override
 //         ^^^^^^^^ reference java/lang/Override#
@@ -199,15 +199,12 @@ public class InnerClasses {
     InnerClasses innerClasses = new InnerClasses(a);
 //  ^^^^^^^^^^^^ reference minimized/InnerClasses#
 //               ^^^^^^^^^^^^ definition local13 InnerClasses innerClasses
-//                              ^^^^^^^^^^^^^^^^^^^ reference minimized/InnerClasses#`<init>`().
-//                                  ^^^^^^^^^^^^ reference minimized/InnerClasses#
+//                                  ^^^^^^^^^^^^ reference minimized/InnerClasses#`<init>`().
 //                                               ^ reference local12
     InnerClass innerClass = innerClasses.new InnerClass(a);
 //  ^^^^^^^^^^ reference minimized/InnerClasses#InnerClass#
 //             ^^^^^^^^^^ definition local14 InnerClass innerClass
-//                          ^^^^^^^^^^^^ reference local13
-//                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerClass#`<init>`().
-//                                           ^^^^^^^^^^ reference minimized/InnerClasses#InnerClass#
+//                                           ^^^^^^^^^^ reference minimized/InnerClasses#InnerClass#`<init>`().
 //                                                      ^ reference local12
     innerClass.innerMethod();
 //  ^^^^^^^^^^ reference local14

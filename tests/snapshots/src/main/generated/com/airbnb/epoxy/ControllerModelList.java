@@ -16,7 +16,6 @@ class ControllerModelList extends ModelList {
 //                                       ^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList#OBSERVER. private static final ModelListObserver OBSERVER
 //                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^ reference local1 12:3
 //                                                      ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
-//                                                      ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -24,8 +23,7 @@ class ControllerModelList extends ModelList {
 //                                      ^^^^^^^^^^^^^ definition local4 int positionStart
 //                                                         ^^^^^^^^^ definition local5 int itemCount
       throw new IllegalStateException(
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:75
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
           "Models cannot be changed once they are added to the controller");
     }
 
@@ -36,8 +34,7 @@ class ControllerModelList extends ModelList {
 //                                     ^^^^^^^^^^^^^ definition local6 int positionStart
 //                                                        ^^^^^^^^^ definition local7 int itemCount
       throw new IllegalStateException(
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:75
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
           "Models cannot be changed once they are added to the controller");
     }
   };

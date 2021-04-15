@@ -41,8 +41,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   private final HiddenEpoxyModel hiddenModel = new HiddenEpoxyModel();
 //              ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#
 //                               ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#hiddenModel. private final HiddenEpoxyModel hiddenModel
-//                                             ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
-//                                                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#
+//                                                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
 
   /**
    * Subclasses should modify this list as necessary with the models they want to show. Subclasses
@@ -52,8 +51,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 //                ^^^^ reference java/util/List#
 //                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                    ^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#models. protected final List<EpoxyModel<?>> models
-//                                             ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#`<init>`(+1).
-//                                                 ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
+//                                                 ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#`<init>`(+1).
   private DiffHelper diffHelper;
 //        ^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#
 //                   ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#diffHelper. private DiffHelper diffHelper
@@ -79,29 +77,25 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
     if (diffHelper != null) {
 //      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#diffHelper.
       throw new IllegalStateException("Diffing was already enabled");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
     }
 
     if (!models.isEmpty()) {
 //       ^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#models.
 //              ^^^^^^^ reference java/util/List#isEmpty().
       throw new IllegalStateException("You must enable diffing before modifying models");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
     }
 
     if (!hasStableIds()) {
 //       ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#hasStableIds#
       throw new IllegalStateException("You must have stable ids to use diffing");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
     }
 
     diffHelper = new DiffHelper(this, false);
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#diffHelper.
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#`<init>`().
-//                   ^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#
+//                   ^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#`<init>`().
 //                              ^^^^ reference com/airbnb/epoxy/EpoxyAdapter#
   }
 
@@ -142,8 +136,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
     if (diffHelper == null) {
 //      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#diffHelper.
       throw new IllegalStateException("You must enable diffing before notifying models changed");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
     }
 
     diffHelper.notifyModelChanges();
@@ -301,8 +294,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
     if (targetIndex == -1) {
 //      ^^^^^^^^^^^ reference local15
       throw new IllegalStateException("Model is not added: " + modelToInsertBefore);
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
 //                                                             ^^^^^^^^^^^^^^^^^^^ reference local14
     }
 
@@ -338,8 +330,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
     if (modelIndex == -1) {
 //      ^^^^^^^^^^ reference local18
       throw new IllegalStateException("Model is not added: " + modelToInsertAfter);
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
 //                                                             ^^^^^^^^^^^^^^^^^^ reference local17
     }
 
@@ -650,8 +641,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
     if (index == -1) {
 //      ^^^^^ reference local42
       throw new IllegalStateException("Model is not added: " + model);
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
 //                                                             ^^^^^ reference local41
     }
     return models.subList(index + 1, models.size());
