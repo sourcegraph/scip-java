@@ -496,7 +496,6 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
     recyclerView.postDelayed(new Runnable() {
 //  ^^^^^^^^^^^^ reference local45
 //               ^^^^^^^^^^^ reference postDelayed#
-//                           ^^^^^^^^^^^^^^^^ reference local48 5:5
 //                               ^^^^^^^^ reference java/lang/Runnable#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#

@@ -163,7 +163,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       JCTree.JCMethodDecl meth = (JCTree.JCMethodDecl) node;
       if (meth.sym == null) return super.visitMethod(node, unused);
       CompilerRange range = CompilerRange.FROM_POINT_TO_SYMBOL_NAME;
-      if (meth.sym.name.toString().equals("<init>")) {
+      if (meth.sym.isConstructor()) {
+        if (meth.sym.owner.isAnonymous()) return null;
         range = CompilerRange.FROM_POINT_WITH_TEXT_SEARCH;
       }
       emitSymbolOccurrence(meth.sym, meth, Role.DEFINITION, range);
@@ -224,7 +225,9 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   public Void visitNewClass(NewClassTree node, Void unused) {
     if (node instanceof JCTree.JCNewClass) {
       JCTree.JCNewClass cls = (JCTree.JCNewClass) node;
-      emitSymbolOccurrence(cls.constructor, cls, Role.REFERENCE, CompilerRange.FROM_TEXT_SEARCH);
+      if (!cls.type.tsym.isAnonymous()) {
+        emitSymbolOccurrence(cls.constructor, cls, Role.REFERENCE, CompilerRange.FROM_TEXT_SEARCH);
+      }
     }
 
     // to avoid emitting a reference to the class itself, we manually scan everything

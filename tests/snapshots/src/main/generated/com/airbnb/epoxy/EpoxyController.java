@@ -466,7 +466,6 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
   private final Runnable buildModelsRunnable = new Runnable() {
 //              ^^^^^^^^ reference java/lang/Runnable#
 //                       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#buildModelsRunnable. private final Runnable buildModelsRunnable
-//                                             ^^^^^^^^^^^^^^^^ reference local6 49:3
 //                                                 ^^^^^^^^ reference java/lang/Runnable#
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
@@ -1402,7 +1401,6 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //               ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#ExceptionHandler#
 //                                ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#globalExceptionHandler. private static ExceptionHandler globalExceptionHandler
       new ExceptionHandler() {
-//    ^^^^^^^^^^^^^^^^^^^^^^^^ reference local58 7:7
 //        ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#ExceptionHandler#
 
         @Override
@@ -1481,7 +1479,6 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                       ^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#INSTANCE.
 //                                ^^^^^^^ reference com/airbnb/epoxy/HandlerExecutor#handler.
 //                                        ^^^^^^^^^^^ reference postDelayed#
-//                                                    ^^^^^^^^^^^^^^^^ reference local67 19:7
 //                                                        ^^^^^^^^ reference java/lang/Runnable#
         @Override
 //       ^^^^^^^^ reference java/lang/Override#

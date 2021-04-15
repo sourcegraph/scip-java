@@ -257,7 +257,6 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
     iterateModels(holder, new IterateModelsCallback() {
 //  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#iterateModels().
 //                ^^^^^^ reference local10
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local12 6:5
 //                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
@@ -299,7 +298,6 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
     iterateModels(holder, new IterateModelsCallback() {
 //  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#iterateModels().
 //                ^^^^^^ reference local17
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local20 6:5
 //                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
@@ -353,7 +351,6 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
     iterateModels(holder, new IterateModelsCallback() {
 //  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#iterateModels().
 //                ^^^^^^ reference local25
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local29 15:5
 //                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
@@ -459,7 +456,6 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
     iterateModels(holder, new IterateModelsCallback() {
 //  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#iterateModels().
 //                ^^^^^^ reference local38
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local40 6:5
 //                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
@@ -491,7 +487,6 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
     iterateModels(holder, new IterateModelsCallback() {
 //  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#iterateModels().
 //                ^^^^^^ reference local45
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local47 6:5
 //                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
