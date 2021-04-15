@@ -106,7 +106,6 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                 ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
 //                                   ^^^^^^^^ definition local5 ModelListObserver observer
     this.observer = observer;
-//  ^^^^ reference com/airbnb/epoxy/ModelList#
 //       ^^^^^^^^ reference com/airbnb/epoxy/ModelList#observer.
 //                  ^^^^^^^^ reference local5
   }
@@ -448,7 +447,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //              ^ reference local30
       return ModelList.this.get(i);
 //           ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
-//                     ^^^^ reference com/airbnb/epoxy/ModelList#
+//                     ^^^^ reference com/airbnb/epoxy/ModelList#this.
 //                          ^^^ reference java/util/ArrayList#get().
 //                              ^ reference local30
     }
@@ -466,7 +465,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
       try {
         ModelList.this.remove(lastRet);
 //      ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
-//                ^^^^ reference com/airbnb/epoxy/ModelList#
+//                ^^^^ reference com/airbnb/epoxy/ModelList#this.
 //                     ^^^^^^ reference com/airbnb/epoxy/ModelList#remove().
 //                            ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
         cursor = lastRet;
@@ -583,7 +582,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //              ^ reference local34
       return ModelList.this.get(i);
 //           ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
-//                     ^^^^ reference com/airbnb/epoxy/ModelList#
+//                     ^^^^ reference com/airbnb/epoxy/ModelList#this.
 //                          ^^^ reference java/util/ArrayList#get().
 //                              ^ reference local34
     }
@@ -603,7 +602,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
       try {
         ModelList.this.set(lastRet, e);
 //      ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
-//                ^^^^ reference com/airbnb/epoxy/ModelList#
+//                ^^^^ reference com/airbnb/epoxy/ModelList#this.
 //                     ^^^ reference com/airbnb/epoxy/ModelList#set().
 //                         ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
 //                                  ^ reference local35
@@ -628,7 +627,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //              ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
         ModelList.this.add(i, e);
 //      ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
-//                ^^^^ reference com/airbnb/epoxy/ModelList#
+//                ^^^^ reference com/airbnb/epoxy/ModelList#this.
 //                     ^^^ reference com/airbnb/epoxy/ModelList#add(+1).
 //                         ^ reference local38
 //                            ^ reference local37
@@ -668,7 +667,6 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                 ^^^ reference local41
         return new SubList(this, start, end);
 //                 ^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#`<init>`().
-//                         ^^^^ reference com/airbnb/epoxy/ModelList#
 //                               ^^^^^ reference local40
 //                                      ^^^ reference local41
       }
@@ -1047,7 +1045,6 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                                            ^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#listIterator(+1).
 //                                                         ^^^^^^^^ reference local60
 //                                                                    ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
-//                                                                             ^^^^ reference com/airbnb/epoxy/ModelList#SubList#
 //                                                                                   ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
 //                                                                                           ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
         }

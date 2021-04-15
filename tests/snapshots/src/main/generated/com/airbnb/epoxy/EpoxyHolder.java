@@ -27,7 +27,6 @@ public abstract class EpoxyHolder {
 //                            ^^^^^^^^^^ reference _root_/
 //                                       ^^^^^^ definition local0 @NonNull unresolved_type parent
     this();
-//  ^^^^ reference com/airbnb/epoxy/EpoxyHolder#`<init>`(+1).
   }
 
   public EpoxyHolder() {

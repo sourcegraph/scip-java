@@ -80,9 +80,6 @@ public final class GlobalSymbolsCache {
       return new SemanticdbSymbols.Descriptor(
           SemanticdbSymbols.Descriptor.Kind.TypeParameter, sym.name.toString());
     } else if (sym instanceof Symbol.VarSymbol) {
-      if (sym.name.toString().equals("this")) {
-        return new SemanticdbSymbols.Descriptor(SemanticdbSymbols.Descriptor.Kind.None, "");
-      }
       return new SemanticdbSymbols.Descriptor(
           SemanticdbSymbols.Descriptor.Kind.Term, sym.name.toString());
     } else {

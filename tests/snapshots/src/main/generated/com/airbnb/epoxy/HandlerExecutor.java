@@ -38,7 +38,6 @@ class HandlerExecutor implements Executor {
 //                ^^^^^^^ reference _root_/
 //                        ^^^^^^^ definition local0 unresolved_type handler
     this.handler = handler;
-//  ^^^^ reference com/airbnb/epoxy/HandlerExecutor#
 //       ^^^^^^^ reference com/airbnb/epoxy/HandlerExecutor#handler.
 //                 ^^^^^^^ reference local0
   }

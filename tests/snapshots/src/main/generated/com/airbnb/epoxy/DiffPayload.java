@@ -90,7 +90,6 @@ public class DiffPayload {
 //                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                 ^^^^^^^^^^^ definition local3 EpoxyModel<?> changedItem
     this(Collections.singletonList(changedItem));
-//  ^^^^ reference com/airbnb/epoxy/DiffPayload#`<init>`().
 //       ^^^^^^^^^^^ reference java/util/Collections#
 //                   ^^^^^^^^^^^^^ reference java/util/Collections#singletonList().
 //                                 ^^^^^^^^^^^ reference local3

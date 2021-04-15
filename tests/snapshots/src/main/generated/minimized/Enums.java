@@ -27,7 +27,6 @@ enum Enums {
 //             ^^^^^ definition local0 String value
 //                        ^ definition local1 int a
     this.value = value;
-//  ^^^^ reference minimized/Enums#
 //       ^^^^^ reference minimized/Enums#value.
 //               ^^^^^ reference local0
   }

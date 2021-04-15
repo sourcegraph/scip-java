@@ -193,6 +193,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   public Void visitIdentifier(IdentifierTree node, Void unused) {
     if (node instanceof JCTree.JCIdent) {
       JCTree.JCIdent ident = (JCTree.JCIdent) node;
+      if (ident.name.toString().equals("this")) return null;
       emitSymbolOccurrence(ident.sym, ident, Role.REFERENCE, CompilerRange.FROM_START_TO_END);
     }
     return super.visitIdentifier(node, unused);

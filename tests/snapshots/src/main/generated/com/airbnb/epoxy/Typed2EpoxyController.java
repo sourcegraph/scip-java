@@ -61,11 +61,9 @@ public abstract class Typed2EpoxyController<T, U> extends EpoxyController {
 //                             ^ reference com/airbnb/epoxy/Typed2EpoxyController#[U]
 //                               ^^^^^ definition local3 U data2
     this.data1 = data1;
-//  ^^^^ reference com/airbnb/epoxy/Typed2EpoxyController#
 //       ^^^^^ reference com/airbnb/epoxy/Typed2EpoxyController#data1.
 //               ^^^^^ reference local2
     this.data2 = data2;
-//  ^^^^ reference com/airbnb/epoxy/Typed2EpoxyController#
 //       ^^^^^ reference com/airbnb/epoxy/Typed2EpoxyController#data2.
 //               ^^^^^ reference local3
     allowModelBuildRequests = true;

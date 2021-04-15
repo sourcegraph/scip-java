@@ -28,7 +28,6 @@ class ImmutableModelException extends RuntimeException {
 //                                   ^^^^^ definition local0 EpoxyModel model
 //                                              ^^^^^^^^^^^^^ definition local1 int modelPosition
     this(model, "", modelPosition);
-//  ^^^^ reference com/airbnb/epoxy/ImmutableModelException#`<init>`(+1).
 //       ^^^^^ reference local0
 //                  ^^^^^^^^^^^^^ reference local1
   }
