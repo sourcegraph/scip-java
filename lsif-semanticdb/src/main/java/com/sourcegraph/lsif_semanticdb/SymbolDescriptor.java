@@ -1,9 +1,13 @@
 package com.sourcegraph.lsif_semanticdb;
 
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
+import com.sourcegraph.semanticdb_javac.SemanticdbSymbols.Descriptor;
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols.Descriptor.Kind;
+import java.util.Optional;
+import javax.swing.text.html.Option;
 
 public class SymbolDescriptor {
+
   public final SemanticdbSymbols.Descriptor descriptor;
   public final String owner;
 
@@ -16,7 +20,27 @@ public class SymbolDescriptor {
     return new Parser(symbol).entryPoint();
   }
 
+  public static Optional<SymbolDescriptor> toplevel(String symbol) {
+    if (symbol == null || symbol.isEmpty()) {
+      return Optional.empty();
+    }
+    if (SemanticdbSymbols.isLocal(symbol)) {
+      return Optional.empty();
+    }
+    SymbolDescriptor current = parseFromSymbol(symbol);
+    if (current.descriptor.kind == Kind.Package) {
+      return Optional.empty();
+    }
+    SymbolDescriptor owner = parseFromSymbol(current.owner);
+    if (owner.descriptor.kind == Kind.Package) {
+      return Optional.of(current);
+    } else {
+      return toplevel(current.owner);
+    }
+  }
+
   public static class Parser {
+
     private int i;
     private char currChar = EOF;
     private final String symbol;
@@ -30,6 +54,8 @@ public class SymbolDescriptor {
     }
 
     public SymbolDescriptor entryPoint() {
+      if (SemanticdbSymbols.isLocal(symbol))
+        return new SymbolDescriptor(Descriptor.local(symbol), SemanticdbSymbols.NONE);
       readChar();
       SemanticdbSymbols.Descriptor descriptor = parseDescriptor();
 

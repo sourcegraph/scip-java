@@ -15,6 +15,8 @@ public class LsifSemanticdbOptions {
   public final String language;
   public final LsifOutputFormat format;
   public final boolean parallel;
+  public final boolean indexJdk;
+  public final List<MavenPackage> packages;
 
   public LsifSemanticdbOptions(
       List<Path> targetroots,
@@ -24,7 +26,9 @@ public class LsifSemanticdbOptions {
       LsifToolInfo toolInfo,
       String language,
       LsifOutputFormat format,
-      boolean parallel) {
+      boolean parallel,
+      boolean indexJdk,
+      List<MavenPackage> packages) {
     this.targetroots = targetroots;
     this.output = output;
     this.sourceroot = sourceroot;
@@ -33,5 +37,7 @@ public class LsifSemanticdbOptions {
     this.language = language;
     this.format = format;
     this.parallel = parallel;
+    this.indexJdk = indexJdk;
+    this.packages = packages;
   }
 }

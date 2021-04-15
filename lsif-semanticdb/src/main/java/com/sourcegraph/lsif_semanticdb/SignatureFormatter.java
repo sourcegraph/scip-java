@@ -3,6 +3,7 @@ package com.sourcegraph.lsif_semanticdb;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.*;
 
+import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -162,11 +163,11 @@ public class SignatureFormatter {
       printKeyword(formatType(methodSignature.getReturnType()));
       s.append(symbolInformation.getDisplayName());
     } else {
-      s.append(
-          SymbolDescriptor.parseFromSymbol(
-                  SymbolDescriptor.parseFromSymbol(symbolInformation.getSymbol()).owner)
-              .descriptor
-              .name);
+      String owner = SymbolDescriptor.parseFromSymbol(symbolInformation.getSymbol()).owner;
+      // Fix for https://github.com/sourcegraph/lsif-java/issues/150
+      if (!owner.equals(SemanticdbSymbols.NONE)) {
+        s.append(SymbolDescriptor.parseFromSymbol(owner).descriptor.name);
+      }
     }
 
     s.append(

@@ -1,5 +1,6 @@
 package tests
 
+import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
 
@@ -54,6 +55,29 @@ class LsifGraphSnapshotGenerator extends SnapshotGenerator {
          |""".stripMargin
     )
 
+    gen.indexSemanticdb(
+      "packages",
+      "org/hamcrest/MatcherAssert#",
+      """|/example/Example.java
+         |package example;
+         |import org.hamcrest.MatcherAssert;
+         |public class Example {
+         |  public static void run() { MatcherAssert.assertThat("", true); }
+         |}
+         |""".stripMargin
+    )
+
+    gen.indexSemanticdb(
+      "packages-jvm",
+      "java/lang/String#",
+      """|/example/Example.java
+         |package example;
+         |public class Example {
+         |  public static String run() { return "hello"; }
+         |}
+         |""".stripMargin
+    )
+
     handler.onFinished(context)
 
   }
@@ -92,8 +116,18 @@ class LsifGraphSnapshotGenerator extends SnapshotGenerator {
               targetroot,
               sourceroot
             )
+          val Seq(hamcrestJar) =
+            TestCompiler
+              .PROCESSOR_PATH
+              .split(File.pathSeparator)
+              .filter(_.contains("hamcrest"))
+              .toSeq
+          FileLayout.fromString(
+            s"/dependencies.txt\norg.hamcrest\thamcrest-core\t1.3\t$hamcrestJar\n",
+            targetroot
+          )
           val result = compiler.compileSemanticdbDirectory(sourceroot)
-          require(result.isSuccess, result)
+          require(result.isSuccess, result.stdout)
           runSuccessfully(
             List(
               "index-semanticdb",

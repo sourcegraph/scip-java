@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -122,6 +121,18 @@ public class LsifWriter implements AutoCloseable {
     String kind = isExportedSymbol ? "export" : "import";
     return emitObject(
         lsifVertex("moniker").setKind(kind).setScheme("semanticdb").setIdentifier(symbol));
+  }
+
+  public void emitPackageInformationEdge(int monikerId, int packageId) {
+    emitObject(lsifEdge("packageInformation").setOutV(monikerId).setInV(packageId));
+  }
+
+  public int emitpackageinformationVertex(Package pkg) {
+    return emitObject(
+        lsifVertex("packageInformation")
+            .setName(pkg.repoName())
+            .setManager("packagehub")
+            .setVersion(pkg.version()));
   }
 
   public void emitItem(int outV, int inV, int document) {

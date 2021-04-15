@@ -6,6 +6,7 @@ import java.nio.file._
 import scala.collection.mutable.ListBuffer
 import scala.util.Properties
 
+import com.sourcegraph.lsif_java.Embedded
 import com.sourcegraph.lsif_java.commands.IndexCommand
 import os.CommandResult
 
@@ -53,12 +54,17 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           s"--no-daemon"
         )
       buildCommand ++= index.finalBuildCommand(List("clean", "compileTestJava"))
+      buildCommand += lsifJavaDependencies
 
       val result = index.process(buildCommand.toList: _*)
       printDebugLogs(tmp)
-      result
+      Embedded
+        .reportUnexpectedJavacErrors(index.app.reporter, tmp)
+        .getOrElse(result)
     }
   }
+
+  private def lsifJavaDependencies = "lsifJavaDependencies"
 
   private def printDebugLogs(tmp: Path): Unit = {
     val path = GradleJavaCompiler.debugPath(tmp)
@@ -79,6 +85,8 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
         case None =>
           ""
       }
+    val dependenciesPath = targetroot.resolve("dependencies.txt")
+    Files.deleteIfExists(dependenciesPath)
     val script =
       s"""|allprojects {
           |  gradle.projectsEvaluated {
@@ -90,6 +98,38 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |      options.fork = true
           |      options.incremental = false
           |      $executable
+          |    }
+          |  }
+          |  task $lsifJavaDependencies {
+          |    def depsOut = java.nio.file.Paths.get('$dependenciesPath')
+          |    doLast {
+          |      tasks.withType(JavaCompile) {
+          |        try {
+          |          configurations.each { config ->
+          |              def artifactType = org.gradle.api.attributes.Attribute.of("artifactType", String.class)
+          |              def attributeType = "jar"
+          |              if (config.canBeResolved) {
+          |                def artifacts = config.incoming.artifactView { view ->
+          |                  view.lenient = true
+          |                  view.attributes { container ->
+          |                    container.attribute(artifactType, attributeType)
+          |                  }
+          |                }.artifacts
+          |                def lines = artifacts.collect {
+          |                    def id = it.id.componentIdentifier
+          |                    return "$$id.group\t$$id.module\t$$id.version\t$$it.file"
+          |                }
+          |                java.nio.file.Files.write(
+          |                    depsOut,
+          |                    lines.unique(false),
+          |                    java.nio.file.StandardOpenOption.APPEND,
+          |                    java.nio.file.StandardOpenOption.CREATE)
+          |              }
+          |          }
+          |        } catch (Exception e) {
+          |          // Ignore errors.
+          |        }
+          |      }
           |    }
           |  }
           |}

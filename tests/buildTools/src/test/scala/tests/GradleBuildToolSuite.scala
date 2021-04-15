@@ -10,12 +10,19 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
     "basic",
     """|/build.gradle
        |apply plugin: 'java'
+       |repositories { mavenCentral() }
+       |dependencies { implementation "junit:junit:4.13.1" }
        |/src/main/java/Example.java
+       |import org.junit.Assert;
        |public class Example {}
        |/src/test/java/ExampleSuite.java
        |public class ExampleSuite {}
        |""".stripMargin,
-    2
+    expectedSemanticdbFiles = 2,
+    expectedPackages =
+      """|maven:junit:junit:4.11
+         |maven:org.hamcrest:hamcrest-core:1.3
+         |""".stripMargin
   )
 
   checkBuild(
@@ -27,6 +34,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |    languageVersion = JavaLanguageVersion.of(8)
        |  }
        |}
+       |repositories { mavenCentral() }
+       |dependencies { implementation "junit:junit:4.13.1" }
        |/src/main/java/Example.java
        |public class Example {}
        |/src/test/java/ExampleSuite.java

@@ -191,10 +191,19 @@ object SnapshotLsifCommand {
     def asciiGraph(symbol: String): String = {
       import org.scalameta.ascii.layout._
       import org.scalameta.ascii.graph.Graph
-      val List(moniker) =
+      val monikers =
         byLabel("moniker")
           .filter(o => o.getType() == "vertex" && o.getIdentifier() == symbol)
           .toList
+      val moniker =
+        monikers match {
+          case Nil =>
+            throw new NoSuchElementException(symbol)
+          case head :: Nil =>
+            head
+          case many =>
+            throw new MatchError(many)
+        }
       val S = subgraph(moniker)
       val vertices = SortedSet.newBuilder[String]
       val edges = ListBuffer.empty[(String, String)]
@@ -244,6 +253,8 @@ object SnapshotLsifCommand {
               node.getEnd().getCharacter()
             )
             s"range(${node.getId()}) ${renderPos(node.getStart())} '${p.text}'"
+          case ("vertex", "packageInformation") =>
+            s"${node.getName()}(${node.getId()})"
           case ("vertex", label) =>
             s"${label}(${node.getId()})"
           case _ =>
@@ -293,7 +304,7 @@ object SnapshotLsifCommand {
       s"open $svg".!
     }
 
-    val isSuccessorRelevantLabel = Set("resultSet")
+    val isSuccessorRelevantLabel = Set("resultSet", "moniker")
     def subgraph(node: LsifObject): Graph[LsifObject] = {
       val S = GraphBuilder.directed().immutable[LsifObject]()
       val visited = mutable.Set.empty[Int]

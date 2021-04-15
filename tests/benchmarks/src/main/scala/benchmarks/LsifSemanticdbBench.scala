@@ -5,9 +5,9 @@ import java.nio.file.Path
 import java.util.concurrent.TimeUnit
 
 import com.sourcegraph.io.DeleteVisitor
+import com.sourcegraph.lsif_java.Dependencies
 import com.sourcegraph.lsif_java.LsifJava
 import org.openjdk.jmh.annotations._
-import tests.Dependencies
 import tests.TestCompiler
 
 @State(Scope.Benchmark)
@@ -20,7 +20,7 @@ class LsifSemanticdbBench {
   def setup(): Unit = {
     targetroot = Files.createTempDirectory("lsif-java")
     deps = Dependencies
-      .resolveDependencies(List("com.google.guava:guava:30.1-jre"), Nil)
+      .resolveDependencies(List("com.google.guava:guava:30.1-jre"))
     val compiler =
       new TestCompiler(deps.classpathSyntax, List.empty[String], targetroot)
     CompileBench.foreachSource(deps) { inputs =>

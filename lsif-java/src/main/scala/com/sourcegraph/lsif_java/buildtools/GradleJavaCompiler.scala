@@ -29,16 +29,28 @@ case class GradleJavaCompiler(languageVersion: String, javacPath: Path) {
     val javac = Embedded.customJavac(index.workingDirectory, targetroot, tmp)
     val agent = Embedded.agentJar(tmp)
     val debugPath = GradleJavaCompiler.debugPath(tmp)
+    val javacopts = targetroot.resolve("javacopts.txt")
+    Files.createDirectories(javacopts.getParent)
 
-    createBinaries(home, javac, agent, index, targetroot, pluginPath, debugPath)
     createBinaries(
-      home.resolve("Contents").resolve("Home"),
-      javac,
-      agent,
-      index,
-      targetroot,
-      pluginPath,
-      debugPath
+      dir = home,
+      javac = javac,
+      agent = agent,
+      index = index,
+      javacopts = javacopts,
+      targetroot = targetroot,
+      pluginPath = pluginPath,
+      debugPath = debugPath
+    )
+    createBinaries(
+      dir = home.resolve("Contents").resolve("Home"),
+      javac = javac,
+      agent = agent,
+      index = index,
+      javacopts = javacopts,
+      targetroot = targetroot,
+      pluginPath = pluginPath,
+      debugPath = debugPath
     ) // for macOS
     home
   }
@@ -48,6 +60,7 @@ case class GradleJavaCompiler(languageVersion: String, javacPath: Path) {
       javac: Path,
       agent: Path,
       index: IndexCommand,
+      javacopts: Path,
       targetroot: Path,
       pluginPath: Path,
       debugPath: Path
@@ -57,6 +70,7 @@ case class GradleJavaCompiler(languageVersion: String, javacPath: Path) {
     val javaCommand = ListBuffer[String](
       javaBinary.toString,
       s"-javaagent:$agent",
+      s"-Dsemanticdb.javacopts=${javacopts}",
       s"-Dsemanticdb.pluginpath=${pluginPath}",
       s"-Dsemanticdb.targetroot=${targetroot}",
       s"-Dsemanticdb.sourceroot=${index.workingDirectory}"

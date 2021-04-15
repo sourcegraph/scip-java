@@ -9,6 +9,15 @@ import java.nio.file.attribute.BasicFileAttributes
 
 class DeleteVisitor(deleteFile: Path => Boolean = _ => true)
     extends SimpleFileVisitor[Path] {
+  override def preVisitDirectory(
+      dir: Path,
+      attrs: BasicFileAttributes
+  ): FileVisitResult = {
+    if (!deleteFile(dir))
+      FileVisitResult.SKIP_SUBTREE
+    else
+      super.preVisitDirectory(dir, attrs)
+  }
   override def visitFile(
       file: Path,
       attrs: BasicFileAttributes

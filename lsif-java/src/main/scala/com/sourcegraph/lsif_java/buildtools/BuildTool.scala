@@ -12,6 +12,10 @@ abstract class BuildTool(val name: String, index: IndexCommand) {
 
   protected def defaultTargetroot: Path
 
+  def isHidden: Boolean = false
+
+  def indexJdk(): Boolean = true
+
   final def targetroot: Path =
     AbsolutePath
       .of(index.targetroot.getOrElse(defaultTargetroot), index.workingDirectory)
@@ -24,5 +28,11 @@ abstract class BuildTool(val name: String, index: IndexCommand) {
 
 object BuildTool {
   def all(index: IndexCommand): List[BuildTool] =
-    List(new GradleBuildTool(index), new MavenBuildTool(index))
+    List(
+      new GradleBuildTool(index),
+      new MavenBuildTool(index),
+      new LsifBuildTool(index)
+    )
+  def allNames: String =
+    all(IndexCommand()).filterNot(_.isHidden).map(_.name).mkString(", ")
 }

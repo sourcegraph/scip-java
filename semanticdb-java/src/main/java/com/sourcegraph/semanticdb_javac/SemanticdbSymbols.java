@@ -1,6 +1,7 @@
 package com.sourcegraph.semanticdb_javac;
 
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Utilities to construct SemanticDB symbols.
@@ -51,6 +52,7 @@ public final class SemanticdbSymbols {
 
     public enum Kind {
       None,
+      Local,
       Term,
       Method,
       Type,
@@ -71,6 +73,10 @@ public final class SemanticdbSymbols {
       this.kind = kind;
       this.name = name;
       this.disambiguator = disambiguator;
+    }
+
+    public static Descriptor local(String name) {
+      return new Descriptor(Kind.Local, name);
     }
 
     @Override

@@ -36,6 +36,7 @@ public class LsifSemanticdb {
   }
 
   private void run() throws IOException {
+    PackageTable packages = new PackageTable(options, writer);
     writer.emitMetaData();
     int projectId = writer.emitProject(options.language);
 
@@ -46,7 +47,7 @@ public class LsifSemanticdb {
     Set<String> isExportedSymbol = exportSymbols(files);
     List<Integer> documentIds =
         filesStream(files)
-            .flatMap(d -> processPath(d, isExportedSymbol))
+            .flatMap(d -> processPath(d, isExportedSymbol, packages))
             .collect(Collectors.toList());
 
     writer.emitContains(projectId, documentIds);
@@ -71,11 +72,13 @@ public class LsifSemanticdb {
         .collect(Collectors.toSet());
   }
 
-  private Stream<Integer> processPath(Path path, Set<String> isExportedSymbol) {
-    return parseTextDocument(path).map(d -> processDocument(d, isExportedSymbol));
+  private Stream<Integer> processPath(
+      Path path, Set<String> isExportedSymbol, PackageTable packages) {
+    return parseTextDocument(path).map(d -> processDocument(d, isExportedSymbol, packages));
   }
 
-  private Integer processDocument(LsifTextDocument doc, Set<String> isExportedSymbol) {
+  private Integer processDocument(
+      LsifTextDocument doc, Set<String> isExportedSymbol, PackageTable packages) {
     Symtab symtab = new Symtab(doc.semanticdb);
 
     int documentId = writer.emitDocument(doc);
@@ -87,7 +90,8 @@ public class LsifSemanticdb {
             .map(SymbolOccurrence::getSymbol)
             .collect(Collectors.toSet());
     doc.id = documentId;
-    ResultSets results = new ResultSets(writer, globals, isExportedSymbol, localDefinitions);
+    ResultSets results =
+        new ResultSets(writer, globals, isExportedSymbol, localDefinitions, packages);
     Set<Integer> rangeIds = new LinkedHashSet<>();
 
     for (SymbolOccurrence occ : doc.sortedSymbolOccurrences()) {
