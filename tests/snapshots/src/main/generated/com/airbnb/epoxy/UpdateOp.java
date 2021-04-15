@@ -40,7 +40,7 @@ class UpdateOp {
 //           ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                           ^^^^^^ reference java/lang/annotation/RetentionPolicy#SOURCE.
   @interface Type {
-//           ^^^^ definition com/airbnb/epoxy/UpdateOp#Type# @interface Type
+//           ^^^^ definition com/airbnb/epoxy/UpdateOp#Type# @IntDef({ADD, REMOVE, UPDATE, MOVE}) @Retention(RetentionPolicy.SOURCE) @interface Type
   }
 
   static final int ADD = 0;
@@ -54,7 +54,7 @@ class UpdateOp {
 
   @Type int type;
 // ^^^^ reference com/airbnb/epoxy/UpdateOp#Type#
-//          ^^^^ definition com/airbnb/epoxy/UpdateOp#type. int type
+//          ^^^^ definition com/airbnb/epoxy/UpdateOp#type. @Type int type
   int positionStart;
 //    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#positionStart. int positionStart
   /** Holds the target position if this is a MOVE */
@@ -73,13 +73,13 @@ class UpdateOp {
 //       ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //                ^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#instance(). static UpdateOp instance(int type, int positionStart, int itemCount, EpoxyModel<?> payload)
 //                          ^^^^ reference com/airbnb/epoxy/UpdateOp#Type#
-//                                   ^^^^ definition local0 int type
+//                                   ^^^^ definition local0 @Type int type
 //                                             ^^^^^^^^^^^^^ definition local1 int positionStart
 //                                                                ^^^^^^^^^ definition local2 int itemCount
       @Nullable EpoxyModel<?> payload) {
 //     ^^^^^^^^ reference androidx/annotation/Nullable#
 //              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                            ^^^^^^^ definition local3 EpoxyModel<?> payload
+//                            ^^^^^^^ definition local3 @Nullable EpoxyModel<?> payload
     UpdateOp op = new UpdateOp();
 //  ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //           ^^ definition local4 UpdateOp op
@@ -146,7 +146,7 @@ class UpdateOp {
 //     ^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#addPayload(). void addPayload(EpoxyModel<?> payload)
 //                 ^^^^^^^^ reference androidx/annotation/Nullable#
 //                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                        ^^^^^^^ definition local8 EpoxyModel<?> payload
+//                                        ^^^^^^^ definition local8 @Nullable EpoxyModel<?> payload
     if (payload == null) {
 //      ^^^^^^^ reference local8
       return;
@@ -179,7 +179,7 @@ class UpdateOp {
 // ^^^^^^^^ reference java/lang/Override#
   public String toString() {
 //       ^^^^^^ reference java/lang/String#
-//              ^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#toString(). public String toString()
+//              ^^^^^^^^ definition com/airbnb/epoxy/UpdateOp#toString(). @Override public String toString()
     return "UpdateOp{"
         + "type=" + type
 //                  ^^^^ reference com/airbnb/epoxy/UpdateOp#type.

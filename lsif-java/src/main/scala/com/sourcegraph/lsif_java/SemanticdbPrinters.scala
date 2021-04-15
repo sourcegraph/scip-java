@@ -88,7 +88,7 @@ object SemanticdbPrinters {
             if (sig.isEmpty)
               " " + info.getDisplayName
             else
-              " " + sig
+              " " + sig.replace('\n', ' ')
           case _ =>
             ""
         }

@@ -75,7 +75,7 @@ public class InnerClasses {
 //   ^^^^^^^^ reference java/lang/Override#
     public Integer apply(Integer integer) {
 //         ^^^^^^^ reference java/lang/Integer#
-//                 ^^^^^ definition minimized/InnerClasses#InnerClass#apply(). public Integer apply(Integer integer)
+//                 ^^^^^ definition minimized/InnerClasses#InnerClass#apply(). @Override public Integer apply(Integer integer)
 //                       ^^^^^^^ reference java/lang/Integer#
 //                               ^^^^^^^ definition local3 Integer integer
       return field * integer;
@@ -173,7 +173,7 @@ public class InnerClasses {
 //         ^^^^^^^^ reference java/lang/Override#
           public String apply(String s) {
 //               ^^^^^^ reference java/lang/String#
-//                      ^^^^^ definition local10 public String apply(String s)
+//                      ^^^^^ definition local10 @Override public String apply(String s)
 //                            ^^^^^^ reference java/lang/String#
 //                                   ^ definition local11 String s
             return s + "b";

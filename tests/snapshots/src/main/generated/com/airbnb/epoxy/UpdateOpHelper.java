@@ -269,7 +269,7 @@ class UpdateOpHelper {
 //                ^^^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#isLastOp(). private boolean isLastOp(int updateType)
 //                          ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
 //                                   ^^^^ reference com/airbnb/epoxy/UpdateOp#Type#
-//                                            ^^^^^^^^^^ definition local11 int updateType
+//                                            ^^^^^^^^^^ definition local11 @Type int updateType
     return lastOp != null && lastOp.type == updateType;
 //         ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
 //                           ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
@@ -280,7 +280,7 @@ class UpdateOpHelper {
   private void addNewOperation(@Type int type, int position, int itemCount) {
 //             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#addNewOperation(). private void addNewOperation(int type, int position, int itemCount)
 //                              ^^^^ reference com/airbnb/epoxy/UpdateOp#Type#
-//                                       ^^^^ definition local12 int type
+//                                       ^^^^ definition local12 @Type int type
 //                                                 ^^^^^^^^ definition local13 int position
 //                                                               ^^^^^^^^^ definition local14 int itemCount
     addNewOperation(type, position, itemCount, null);
@@ -293,13 +293,13 @@ class UpdateOpHelper {
   private void addNewOperation(@Type int type, int position, int itemCount,
 //             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UpdateOpHelper#addNewOperation(+1). private void addNewOperation(int type, int position, int itemCount, EpoxyModel<?> payload)
 //                              ^^^^ reference com/airbnb/epoxy/UpdateOp#Type#
-//                                       ^^^^ definition local15 int type
+//                                       ^^^^ definition local15 @Type int type
 //                                                 ^^^^^^^^ definition local16 int position
 //                                                               ^^^^^^^^^ definition local17 int itemCount
       @Nullable EpoxyModel<?> payload) {
 //     ^^^^^^^^ reference androidx/annotation/Nullable#
 //              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                            ^^^^^^^ definition local18 EpoxyModel<?> payload
+//                            ^^^^^^^ definition local18 @Nullable EpoxyModel<?> payload
     lastOp = UpdateOp.instance(type, position, itemCount, payload);
 //  ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#lastOp.
 //           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#

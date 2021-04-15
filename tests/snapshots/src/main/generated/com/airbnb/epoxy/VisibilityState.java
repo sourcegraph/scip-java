@@ -40,7 +40,7 @@ public final class VisibilityState {
            PARTIAL_IMPRESSION_INVISIBLE})
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#PARTIAL_IMPRESSION_INVISIBLE.
   public @interface Visibility {
-//                  ^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#Visibility# public @interface Visibility
+//                  ^^^^^^^^^^ definition com/airbnb/epoxy/VisibilityState#Visibility# @Retention(RetentionPolicy.SOURCE) @IntDef({VISIBLE, INVISIBLE, FOCUSED_VISIBLE, UNFOCUSED_VISIBLE, FULL_IMPRESSION_VISIBLE, PARTIAL_IMPRESSION_VISIBLE, PARTIAL_IMPRESSION_INVISIBLE}) public @interface Visibility
   }
 
   /**

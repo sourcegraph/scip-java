@@ -47,7 +47,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeChanged(int positionStart, int itemCount) {
-//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeChanged(). public void onItemRangeChanged(int positionStart, int itemCount)
+//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeChanged(). @Override public void onItemRangeChanged(int positionStart, int itemCount)
 //                                   ^^^^^^^^^^^^^ definition local1 int positionStart
 //                                                      ^^^^^^^^^ definition local2 int itemCount
     Log.d(tag, "Item range changed. Start: " + positionStart + " Count: " + itemCount);
@@ -61,12 +61,12 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeChanged(int positionStart, int itemCount, @Nullable Object payload) {
-//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeChanged(+1). public void onItemRangeChanged(int positionStart, int itemCount, Object payload)
+//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeChanged(+1). @Override public void onItemRangeChanged(int positionStart, int itemCount, Object payload)
 //                                   ^^^^^^^^^^^^^ definition local3 int positionStart
 //                                                      ^^^^^^^^^ definition local4 int itemCount
 //                                                                  ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                                                           ^^^^^^ reference java/lang/Object#
-//                                                                                  ^^^^^^^ definition local5 Object payload
+//                                                                                  ^^^^^^^ definition local5 @Nullable Object payload
     if (payload == null) {
 //      ^^^^^^^ reference local5
       onItemRangeChanged(positionStart, itemCount);
@@ -87,7 +87,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeInserted(int positionStart, int itemCount) {
-//            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeInserted(). public void onItemRangeInserted(int positionStart, int itemCount)
+//            ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeInserted(). @Override public void onItemRangeInserted(int positionStart, int itemCount)
 //                                    ^^^^^^^^^^^^^ definition local6 int positionStart
 //                                                       ^^^^^^^^^ definition local7 int itemCount
     Log.d(tag, "Item range inserted. Start: " + positionStart + " Count: " + itemCount);
@@ -101,7 +101,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeRemoved(int positionStart, int itemCount) {
-//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeRemoved(). public void onItemRangeRemoved(int positionStart, int itemCount)
+//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeRemoved(). @Override public void onItemRangeRemoved(int positionStart, int itemCount)
 //                                   ^^^^^^^^^^^^^ definition local8 int positionStart
 //                                                      ^^^^^^^^^ definition local9 int itemCount
     Log.d(tag, "Item range removed. Start: " + positionStart + " Count: " + itemCount);
@@ -115,7 +115,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
-//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeMoved(). public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount)
+//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeMoved(). @Override public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount)
 //                                 ^^^^^^^^^^^^ definition local10 int fromPosition
 //                                                   ^^^^^^^^^^ definition local11 int toPosition
 //                                                                   ^^^^^^^^^ definition local12 int itemCount

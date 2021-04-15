@@ -91,7 +91,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   public EpoxyItemSpacingDecorator(@Px int pxBetweenItems) {
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#`<init>`(+1). public EpoxyItemSpacingDecorator(int pxBetweenItems)
 //                                  ^^ reference androidx/annotation/Px#
-//                                         ^^^^^^^^^^^^^^ definition local0 int pxBetweenItems
+//                                         ^^^^^^^^^^^^^^ definition local0 @Px int pxBetweenItems
     setPxBetweenItems(pxBetweenItems);
 //  ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#setPxBetweenItems().
 //                    ^^^^^^^^^^^^^^ reference local0
@@ -100,7 +100,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   public void setPxBetweenItems(@Px int pxBetweenItems) {
 //            ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#setPxBetweenItems(). public void setPxBetweenItems(int pxBetweenItems)
 //                               ^^ reference androidx/annotation/Px#
-//                                      ^^^^^^^^^^^^^^ definition local1 int pxBetweenItems
+//                                      ^^^^^^^^^^^^^^ definition local1 @Px int pxBetweenItems
     this.pxBetweenItems = pxBetweenItems;
 //  ^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#
 //       ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#pxBetweenItems.
@@ -110,7 +110,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   @Px
 // ^^ reference androidx/annotation/Px#
   public int getPxBetweenItems() {
-//           ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#getPxBetweenItems(). public int getPxBetweenItems()
+//           ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#getPxBetweenItems(). @Px public int getPxBetweenItems()
     return pxBetweenItems;
 //         ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#pxBetweenItems.
   }
@@ -118,7 +118,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void getItemOffsets(Rect outRect, View view, RecyclerView parent, State state) {
-//            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#getItemOffsets(). public void getItemOffsets(unresolved_type outRect, unresolved_type view, unresolved_type parent, unresolved_type state)
+//            ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#getItemOffsets(). @Override public void getItemOffsets(unresolved_type outRect, unresolved_type view, unresolved_type parent, unresolved_type state)
 //                           ^^^^ reference _root_/
 //                                ^^^^^^^ definition local2 unresolved_type outRect
 //                                         ^^^^ reference _root_/

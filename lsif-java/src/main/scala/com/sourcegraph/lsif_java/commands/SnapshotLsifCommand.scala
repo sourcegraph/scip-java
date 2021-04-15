@@ -138,7 +138,7 @@ object SnapshotLsifCommand {
             // we cheese it a bit here, as this is less work than trying to reconstruct
             // a Signature from the pretty-printed Signature, with accompanying logic
             // to fallback to display_name in SemanticdbPrinters.scala
-            .setDisplayName(hover).setSymbol(symbol).build()
+            .setDisplayName(hover.replace('\n', ' ')).setSymbol(symbol).build()
           doc.addSymbols(symInfo)
         }
       }

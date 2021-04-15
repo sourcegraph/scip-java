@@ -428,7 +428,7 @@ public abstract class EpoxyTouchHelper {
             @Override
 //           ^^^^^^^^ reference java/lang/Override#
             public int getMovementFlagsForModel(U model, int adapterPosition) {
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^ definition local21 public int getMovementFlagsForModel(U model, int adapterPosition)
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^ definition local21 @Override public int getMovementFlagsForModel(U model, int adapterPosition)
 //                                              ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                                ^^^^^ definition local29 U model
 //                                                           ^^^^^^^^^^^^^^^ definition local30 int adapterPosition
@@ -439,7 +439,7 @@ public abstract class EpoxyTouchHelper {
             @Override
 //           ^^^^^^^^ reference java/lang/Override#
             protected boolean isTouchableModel(EpoxyModel<?> model) {
-//                            ^^^^^^^^^^^^^^^^ definition local22 protected boolean isTouchableModel(EpoxyModel<?> model)
+//                            ^^^^^^^^^^^^^^^^ definition local22 @Override protected boolean isTouchableModel(EpoxyModel<?> model)
 //                                             ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                           ^^^^^ definition local31 EpoxyModel<?> model
               boolean isTargetType = targetModelClasses.size() == 1
@@ -468,7 +468,7 @@ public abstract class EpoxyTouchHelper {
             @Override
 //           ^^^^^^^^ reference java/lang/Override#
             public void onDragStarted(U model, View itemView, int adapterPosition) {
-//                      ^^^^^^^^^^^^^ definition local23 public void onDragStarted(U model, unresolved_type itemView, int adapterPosition)
+//                      ^^^^^^^^^^^^^ definition local23 @Override public void onDragStarted(U model, unresolved_type itemView, int adapterPosition)
 //                                    ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                      ^^^^^ definition local34 U model
 //                                             ^^^^ reference _root_/
@@ -485,7 +485,7 @@ public abstract class EpoxyTouchHelper {
             @Override
 //           ^^^^^^^^ reference java/lang/Override#
             public void onDragReleased(U model, View itemView) {
-//                      ^^^^^^^^^^^^^^ definition local24 public void onDragReleased(U model, unresolved_type itemView)
+//                      ^^^^^^^^^^^^^^ definition local24 @Override public void onDragReleased(U model, unresolved_type itemView)
 //                                     ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                       ^^^^^ definition local37 U model
 //                                              ^^^^ reference _root_/
@@ -500,7 +500,7 @@ public abstract class EpoxyTouchHelper {
             @Override
 //           ^^^^^^^^ reference java/lang/Override#
             public void onModelMoved(int fromPosition, int toPosition, U modelBeingMoved,
-//                      ^^^^^^^^^^^^ definition local25 public void onModelMoved(int fromPosition, int toPosition, U modelBeingMoved, unresolved_type itemView)
+//                      ^^^^^^^^^^^^ definition local25 @Override public void onModelMoved(int fromPosition, int toPosition, U modelBeingMoved, unresolved_type itemView)
 //                                       ^^^^^^^^^^^^ definition local39 int fromPosition
 //                                                         ^^^^^^^^^^ definition local40 int toPosition
 //                                                                     ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
@@ -520,7 +520,7 @@ public abstract class EpoxyTouchHelper {
             @Override
 //           ^^^^^^^^ reference java/lang/Override#
             public void clearView(U model, View itemView) {
-//                      ^^^^^^^^^ definition local26 public void clearView(U model, unresolved_type itemView)
+//                      ^^^^^^^^^ definition local26 @Override public void clearView(U model, unresolved_type itemView)
 //                                ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                  ^^^^^ definition local43 U model
 //                                         ^^^^ reference _root_/
@@ -555,7 +555,7 @@ public abstract class EpoxyTouchHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onDragStarted(T model, View itemView, int adapterPosition) {
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#onDragStarted(). public void onDragStarted(T model, unresolved_type itemView, int adapterPosition)
+//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#onDragStarted(). @Override public void onDragStarted(T model, unresolved_type itemView, int adapterPosition)
 //                            ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#[T]
 //                              ^^^^^ definition local45 T model
 //                                     ^^^^ reference _root_/
@@ -567,7 +567,7 @@ public abstract class EpoxyTouchHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onDragReleased(T model, View itemView) {
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#onDragReleased(). public void onDragReleased(T model, unresolved_type itemView)
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#onDragReleased(). @Override public void onDragReleased(T model, unresolved_type itemView)
 //                             ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#[T]
 //                               ^^^^^ definition local48 T model
 //                                      ^^^^ reference _root_/
@@ -578,7 +578,7 @@ public abstract class EpoxyTouchHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public abstract void onModelMoved(int fromPosition, int toPosition, T modelBeingMoved,
-//                       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#onModelMoved(). public abstract void onModelMoved(int fromPosition, int toPosition, T modelBeingMoved, unresolved_type itemView)
+//                       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#onModelMoved(). @Override public abstract void onModelMoved(int fromPosition, int toPosition, T modelBeingMoved, unresolved_type itemView)
 //                                        ^^^^^^^^^^^^ definition local50 int fromPosition
 //                                                          ^^^^^^^^^^ definition local51 int toPosition
 //                                                                      ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#[T]
@@ -590,7 +590,7 @@ public abstract class EpoxyTouchHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void clearView(T model, View itemView) {
-//              ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#clearView(). public void clearView(T model, unresolved_type itemView)
+//              ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#clearView(). @Override public void clearView(T model, unresolved_type itemView)
 //                        ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#[T]
 //                          ^^^^^ definition local54 T model
 //                                 ^^^^ reference _root_/
@@ -613,7 +613,7 @@ public abstract class EpoxyTouchHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public final int getMovementFlagsForModel(T model, int adapterPosition) {
-//                   ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#getMovementFlagsForModel(). public final int getMovementFlagsForModel(T model, int adapterPosition)
+//                   ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#getMovementFlagsForModel(). @Override public final int getMovementFlagsForModel(T model, int adapterPosition)
 //                                            ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#[T]
 //                                              ^^^^^ definition local57 T model
 //                                                         ^^^^^^^^^^^^^^^ definition local58 int adapterPosition
@@ -907,7 +907,7 @@ public abstract class EpoxyTouchHelper {
             @Override
 //           ^^^^^^^^ reference java/lang/Override#
             public int getMovementFlagsForModel(U model, int adapterPosition) {
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^ definition local75 public int getMovementFlagsForModel(U model, int adapterPosition)
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^ definition local75 @Override public int getMovementFlagsForModel(U model, int adapterPosition)
 //                                              ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
 //                                                ^^^^^ definition local84 U model
 //                                                           ^^^^^^^^^^^^^^^ definition local85 int adapterPosition
@@ -918,7 +918,7 @@ public abstract class EpoxyTouchHelper {
             @Override
 //           ^^^^^^^^ reference java/lang/Override#
             protected boolean isTouchableModel(EpoxyModel<?> model) {
-//                            ^^^^^^^^^^^^^^^^ definition local76 protected boolean isTouchableModel(EpoxyModel<?> model)
+//                            ^^^^^^^^^^^^^^^^ definition local76 @Override protected boolean isTouchableModel(EpoxyModel<?> model)
 //                                             ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                           ^^^^^ definition local86 EpoxyModel<?> model
               boolean isTargetType = targetModelClasses.size() == 1
@@ -947,7 +947,7 @@ public abstract class EpoxyTouchHelper {
             @Override
 //           ^^^^^^^^ reference java/lang/Override#
             public void onSwipeStarted(U model, View itemView, int adapterPosition) {
-//                      ^^^^^^^^^^^^^^ definition local77 public void onSwipeStarted(U model, unresolved_type itemView, int adapterPosition)
+//                      ^^^^^^^^^^^^^^ definition local77 @Override public void onSwipeStarted(U model, unresolved_type itemView, int adapterPosition)
 //                                     ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
 //                                       ^^^^^ definition local89 U model
 //                                              ^^^^ reference _root_/
@@ -964,7 +964,7 @@ public abstract class EpoxyTouchHelper {
             @Override
 //           ^^^^^^^^ reference java/lang/Override#
             public void onSwipeProgressChanged(U model, View itemView, float swipeProgress,
-//                      ^^^^^^^^^^^^^^^^^^^^^^ definition local78 public void onSwipeProgressChanged(U model, unresolved_type itemView, float swipeProgress, unresolved_type canvas)
+//                      ^^^^^^^^^^^^^^^^^^^^^^ definition local78 @Override public void onSwipeProgressChanged(U model, unresolved_type itemView, float swipeProgress, unresolved_type canvas)
 //                                             ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
 //                                               ^^^^^ definition local92 U model
 //                                                      ^^^^ reference _root_/
@@ -985,7 +985,7 @@ public abstract class EpoxyTouchHelper {
             @Override
 //           ^^^^^^^^ reference java/lang/Override#
             public void onSwipeCompleted(U model, View itemView, int position, int direction) {
-//                      ^^^^^^^^^^^^^^^^ definition local79 public void onSwipeCompleted(U model, unresolved_type itemView, int position, int direction)
+//                      ^^^^^^^^^^^^^^^^ definition local79 @Override public void onSwipeCompleted(U model, unresolved_type itemView, int position, int direction)
 //                                       ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
 //                                         ^^^^^ definition local96 U model
 //                                                ^^^^ reference _root_/
@@ -1004,7 +1004,7 @@ public abstract class EpoxyTouchHelper {
             @Override
 //           ^^^^^^^^ reference java/lang/Override#
             public void onSwipeReleased(U model, View itemView) {
-//                      ^^^^^^^^^^^^^^^ definition local80 public void onSwipeReleased(U model, unresolved_type itemView)
+//                      ^^^^^^^^^^^^^^^ definition local80 @Override public void onSwipeReleased(U model, unresolved_type itemView)
 //                                      ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
 //                                        ^^^^^ definition local100 U model
 //                                               ^^^^ reference _root_/
@@ -1019,7 +1019,7 @@ public abstract class EpoxyTouchHelper {
             @Override
 //           ^^^^^^^^ reference java/lang/Override#
             public void clearView(U model, View itemView) {
-//                      ^^^^^^^^^ definition local81 public void clearView(U model, unresolved_type itemView)
+//                      ^^^^^^^^^ definition local81 @Override public void clearView(U model, unresolved_type itemView)
 //                                ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
 //                                  ^^^^^ definition local102 U model
 //                                         ^^^^ reference _root_/
@@ -1054,7 +1054,7 @@ public abstract class EpoxyTouchHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onSwipeStarted(T model, View itemView, int adapterPosition) {
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#onSwipeStarted(). public void onSwipeStarted(T model, unresolved_type itemView, int adapterPosition)
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#onSwipeStarted(). @Override public void onSwipeStarted(T model, unresolved_type itemView, int adapterPosition)
 //                             ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#[T]
 //                               ^^^^^ definition local104 T model
 //                                      ^^^^ reference _root_/
@@ -1066,7 +1066,7 @@ public abstract class EpoxyTouchHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onSwipeProgressChanged(T model, View itemView, float swipeProgress,
-//              ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#onSwipeProgressChanged(). public void onSwipeProgressChanged(T model, unresolved_type itemView, float swipeProgress, unresolved_type canvas)
+//              ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#onSwipeProgressChanged(). @Override public void onSwipeProgressChanged(T model, unresolved_type itemView, float swipeProgress, unresolved_type canvas)
 //                                     ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#[T]
 //                                       ^^^^^ definition local107 T model
 //                                              ^^^^ reference _root_/
@@ -1081,7 +1081,7 @@ public abstract class EpoxyTouchHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public abstract void onSwipeCompleted(T model, View itemView, int position, int direction);
-//                       ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#onSwipeCompleted(). public abstract void onSwipeCompleted(T model, unresolved_type itemView, int position, int direction)
+//                       ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#onSwipeCompleted(). @Override public abstract void onSwipeCompleted(T model, unresolved_type itemView, int position, int direction)
 //                                        ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#[T]
 //                                          ^^^^^ definition local111 T model
 //                                                 ^^^^ reference _root_/
@@ -1092,7 +1092,7 @@ public abstract class EpoxyTouchHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onSwipeReleased(T model, View itemView) {
-//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#onSwipeReleased(). public void onSwipeReleased(T model, unresolved_type itemView)
+//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#onSwipeReleased(). @Override public void onSwipeReleased(T model, unresolved_type itemView)
 //                              ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#[T]
 //                                ^^^^^ definition local115 T model
 //                                       ^^^^ reference _root_/
@@ -1103,7 +1103,7 @@ public abstract class EpoxyTouchHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void clearView(T model, View itemView) {
-//              ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#clearView(). public void clearView(T model, unresolved_type itemView)
+//              ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#clearView(). @Override public void clearView(T model, unresolved_type itemView)
 //                        ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#[T]
 //                          ^^^^^ definition local117 T model
 //                                 ^^^^ reference _root_/
@@ -1126,7 +1126,7 @@ public abstract class EpoxyTouchHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public final int getMovementFlagsForModel(T model, int adapterPosition) {
-//                   ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#getMovementFlagsForModel(). public final int getMovementFlagsForModel(T model, int adapterPosition)
+//                   ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#getMovementFlagsForModel(). @Override public final int getMovementFlagsForModel(T model, int adapterPosition)
 //                                            ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#[T]
 //                                              ^^^^^ definition local120 T model
 //                                                         ^^^^^^^^^^^^^^^ definition local121 int adapterPosition

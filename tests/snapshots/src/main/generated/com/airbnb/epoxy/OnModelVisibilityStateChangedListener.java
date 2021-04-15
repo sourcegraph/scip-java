@@ -31,5 +31,5 @@ public interface OnModelVisibilityStateChangedListener<T extends EpoxyModel<V>, 
 //                                       ^ reference com/airbnb/epoxy/OnModelVisibilityStateChangedListener#[V]
 //                                         ^^^^ definition local1 V view
 //                                                ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#Visibility#
-//                                                               ^^^^^^^^^^^^^^^ definition local2 int visibilityState
+//                                                               ^^^^^^^^^^^^^^^ definition local2 @Visibility int visibilityState
 }

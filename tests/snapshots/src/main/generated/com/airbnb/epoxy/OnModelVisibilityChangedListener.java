@@ -42,15 +42,15 @@ public interface OnModelVisibilityChangedListener<T extends EpoxyModel<V>, V> {
 //     ^^^^^^^^^^ reference androidx/annotation/FloatRange#
 //                ^^^^ reference androidx/annotation/FloatRange#from().
 //                          ^^ reference androidx/annotation/FloatRange#to().
-//                                          ^^^^^^^^^^^^^^^^^^^^ definition local2 float percentVisibleHeight
+//                                          ^^^^^^^^^^^^^^^^^^^^ definition local2 @FloatRange(from = 0, to = 100) float percentVisibleHeight
       @FloatRange(from = 0, to = 100) float percentVisibleWidth,
 //     ^^^^^^^^^^ reference androidx/annotation/FloatRange#
 //                ^^^^ reference androidx/annotation/FloatRange#from().
 //                          ^^ reference androidx/annotation/FloatRange#to().
-//                                          ^^^^^^^^^^^^^^^^^^^ definition local3 float percentVisibleWidth
+//                                          ^^^^^^^^^^^^^^^^^^^ definition local3 @FloatRange(from = 0, to = 100) float percentVisibleWidth
       @Px int heightVisible, @Px int widthVisible);
 //     ^^ reference androidx/annotation/Px#
-//            ^^^^^^^^^^^^^ definition local4 int heightVisible
+//            ^^^^^^^^^^^^^ definition local4 @Px int heightVisible
 //                            ^^ reference androidx/annotation/Px#
-//                                   ^^^^^^^^^^^^ definition local5 int widthVisible
+//                                   ^^^^^^^^^^^^ definition local5 @Px int widthVisible
 }

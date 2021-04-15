@@ -52,13 +52,13 @@ import androidx.recyclerview.widget.RecyclerView;
 @SuppressWarnings("WeakerAccess")
 //^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public class EpoxyViewHolder extends RecyclerView.ViewHolder {
-//           ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder# public class EpoxyViewHolder extends unresolved_type
+//           ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder# @SuppressWarnings("WeakerAccess") public class EpoxyViewHolder extends unresolved_type
 //                                   ^^^^^^^^^^^^ reference RecyclerView/
 //                                                ^^^^^^^^^^ reference RecyclerView/ViewHolder#
   @SuppressWarnings("rawtypes") private EpoxyModel epoxyModel;
 // ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 //                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                 ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#epoxyModel. private EpoxyModel epoxyModel
+//                                                 ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#epoxyModel. @SuppressWarnings("rawtypes") private EpoxyModel epoxyModel
   private List<Object> payloads;
 //        ^^^^ reference java/util/List#
 //             ^^^^^^ reference java/lang/Object#
@@ -70,7 +70,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
 //          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#
 //                          ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
-//                                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#initialViewState. ViewState initialViewState
+//                                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#initialViewState. @Nullable ViewState initialViewState
 
   // Once the EpoxyHolder is created parent will be set to null.
   private ViewParent parent;
@@ -122,11 +122,11 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //            ^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#bind(). public void bind(EpoxyModel model, EpoxyModel<?> previouslyBoundModel, List<Object> payloads, int position)
 //                  ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 //                                               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                          ^^^^^ definition local3 EpoxyModel model
+//                                                          ^^^^^ definition local3 @SuppressWarnings("rawtypes") EpoxyModel model
       @Nullable EpoxyModel<?> previouslyBoundModel, List<Object> payloads, int position) {
 //     ^^^^^^^^ reference androidx/annotation/Nullable#
 //              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                            ^^^^^^^^^^^^^^^^^^^^ definition local4 EpoxyModel<?> previouslyBoundModel
+//                            ^^^^^^^^^^^^^^^^^^^^ definition local4 @Nullable EpoxyModel<?> previouslyBoundModel
 //                                                  ^^^^ reference java/util/List#
 //                                                       ^^^^^^ reference java/lang/Object#
 //                                                               ^^^^^^^^ definition local5 List<Object> payloads
@@ -216,7 +216,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 // ^^^^^^^ reference androidx/annotation/NonNull#
   Object objectToBind() {
 //^^^^^^ reference java/lang/Object#
-//       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#objectToBind(). Object objectToBind()
+//       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#objectToBind(). @NonNull Object objectToBind()
     return epoxyHolder != null ? epoxyHolder : itemView;
 //         ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#epoxyHolder.
 //                               ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#epoxyHolder.
@@ -242,7 +242,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   public void visibilityStateChanged(@Visibility int visibilityState) {
 //            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#visibilityStateChanged(). public void visibilityStateChanged(int visibilityState)
 //                                    ^^^^^^^^^^ reference com/airbnb/epoxy/VisibilityState#Visibility#
-//                                                   ^^^^^^^^^^^^^^^ definition local7 int visibilityState
+//                                                   ^^^^^^^^^^^^^^^ definition local7 @Visibility int visibilityState
     assertBound();
 //  ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#assertBound().
     // noinspection unchecked
@@ -259,18 +259,18 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //     ^^^^^^^^^^ reference androidx/annotation/FloatRange#
 //                ^^^^ reference androidx/annotation/FloatRange#from().
 //                             ^^ reference androidx/annotation/FloatRange#to().
-//                                                ^^^^^^^^^^^^^^^^^^^^ definition local8 float percentVisibleHeight
+//                                                ^^^^^^^^^^^^^^^^^^^^ definition local8 @FloatRange(from = 0.0f, to = 100.0f) float percentVisibleHeight
       @FloatRange(from = 0.0f, to = 100.0f) float percentVisibleWidth,
 //     ^^^^^^^^^^ reference androidx/annotation/FloatRange#
 //                ^^^^ reference androidx/annotation/FloatRange#from().
 //                             ^^ reference androidx/annotation/FloatRange#to().
-//                                                ^^^^^^^^^^^^^^^^^^^ definition local9 float percentVisibleWidth
+//                                                ^^^^^^^^^^^^^^^^^^^ definition local9 @FloatRange(from = 0.0f, to = 100.0f) float percentVisibleWidth
       @Px int visibleHeight,
 //     ^^ reference androidx/annotation/Px#
-//            ^^^^^^^^^^^^^ definition local10 int visibleHeight
+//            ^^^^^^^^^^^^^ definition local10 @Px int visibleHeight
       @Px int visibleWidth
 //     ^^ reference androidx/annotation/Px#
-//            ^^^^^^^^^^^^ definition local11 int visibleWidth
+//            ^^^^^^^^^^^^ definition local11 @Px int visibleWidth
   ) {
     assertBound();
 //  ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#assertBound().
@@ -328,7 +328,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 // ^^^^^^^^ reference java/lang/Override#
   public String toString() {
 //       ^^^^^^ reference java/lang/String#
-//              ^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#toString(). public String toString()
+//              ^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder#toString(). @Override public String toString()
     return "EpoxyViewHolder{"
         + "epoxyModel=" + epoxyModel
 //                        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#epoxyModel.

@@ -103,7 +103,7 @@ class DiffHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onChanged() {
-//              ^^^^^^^^^ definition local3 public void onChanged()
+//              ^^^^^^^^^ definition local3 @Override public void onChanged()
       throw new UnsupportedOperationException(
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1). 1:99
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#
@@ -113,7 +113,7 @@ class DiffHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeChanged(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^ definition local4 public void onItemRangeChanged(int positionStart, int itemCount)
+//              ^^^^^^^^^^^^^^^^^^ definition local4 @Override public void onItemRangeChanged(int positionStart, int itemCount)
 //                                     ^^^^^^^^^^^^^ definition local8 int positionStart
 //                                                        ^^^^^^^^^ definition local9 int itemCount
       for (int i = positionStart; i < positionStart + itemCount; i++) {
@@ -139,7 +139,7 @@ class DiffHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeInserted(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^^ definition local5 public void onItemRangeInserted(int positionStart, int itemCount)
+//              ^^^^^^^^^^^^^^^^^^^ definition local5 @Override public void onItemRangeInserted(int positionStart, int itemCount)
 //                                      ^^^^^^^^^^^^^ definition local11 int positionStart
 //                                                         ^^^^^^^^^ definition local12 int itemCount
       if (itemCount == 0) {
@@ -221,7 +221,7 @@ class DiffHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeRemoved(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^ definition local6 public void onItemRangeRemoved(int positionStart, int itemCount)
+//              ^^^^^^^^^^^^^^^^^^ definition local6 @Override public void onItemRangeRemoved(int positionStart, int itemCount)
 //                                     ^^^^^^^^^^^^^ definition local18 int positionStart
 //                                                        ^^^^^^^^^ definition local19 int itemCount
       if (itemCount == 0) {
@@ -277,7 +277,7 @@ class DiffHelper {
     @Override
 //   ^^^^^^^^ reference java/lang/Override#
     public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
-//              ^^^^^^^^^^^^^^^^ definition local7 public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount)
+//              ^^^^^^^^^^^^^^^^ definition local7 @Override public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount)
 //                                   ^^^^^^^^^^^^ definition local24 int fromPosition
 //                                                     ^^^^^^^^^^ definition local25 int toPosition
 //                                                                     ^^^^^^^^^ definition local26 int itemCount
@@ -1087,7 +1087,7 @@ class DiffHelper {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
   private ModelState getNextItemWithPair(Iterator<ModelState> iterator) {
 //        ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                   ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#getNextItemWithPair(). private ModelState getNextItemWithPair(Iterator<ModelState> iterator)
+//                   ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#getNextItemWithPair(). @Nullable private ModelState getNextItemWithPair(Iterator<ModelState> iterator)
 //                                       ^^^^^^^^ reference java/util/Iterator#
 //                                                ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
 //                                                            ^^^^^^^^ definition local69 Iterator<ModelState> iterator

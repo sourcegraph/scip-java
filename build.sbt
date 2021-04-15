@@ -248,6 +248,7 @@ lazy val unit = project
   .in(file("tests/unit"))
   .settings(
     testSettings,
+    //javaOptions ++= Seq(   "-Xdebug",   "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"),
     buildInfoKeys :=
       Seq[BuildInfoKey](
         version,

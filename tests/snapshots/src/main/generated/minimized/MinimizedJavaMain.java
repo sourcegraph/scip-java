@@ -5,7 +5,7 @@ package minimized;
 //           ^^^^^ reference minimized/Annotations#value().
 //                            ^^^^^^ reference minimized/Annotations#format().
 public class MinimizedJavaMain {
-//           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain# public class MinimizedJavaMain
+//           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain# @Annotations(value = "value", format = "format") public class MinimizedJavaMain
 //           ^^^^^^^^^^^^^^^^^ definition minimized/MinimizedJavaMain#`<init>`(). public MinimizedJavaMain()
   public static void main(String[] args) {
 //                   ^^^^ definition minimized/MinimizedJavaMain#main(). public static void main(String[] args)

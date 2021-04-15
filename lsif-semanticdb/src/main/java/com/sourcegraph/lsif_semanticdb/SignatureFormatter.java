@@ -4,6 +4,7 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -50,6 +51,8 @@ public class SignatureFormatter {
             .anyMatch(t -> t.getTypeRef().getSymbol().equals(ANNOTATION_SYMBOL));
 
     boolean isEnum = has(Property.ENUM);
+
+    printKeywordln(formatAnnotations());
 
     printKeyword(formatAccess());
     if (!isEnum && !isAnnotation) printKeyword(formatModifiers());
@@ -143,6 +146,7 @@ public class SignatureFormatter {
   }
 
   private void formatMethodSignature(MethodSignature methodSignature) {
+    printKeywordln(formatAnnotations());
     printKeyword(formatAccess());
     printKeyword(formatModifiers());
 
@@ -177,6 +181,7 @@ public class SignatureFormatter {
   }
 
   private void formatValueSignature(ValueSignature valueSignature) {
+    printKeywordln(formatAnnotations());
     if (isEnumConstant()) {
       String ownerSym = SymbolDescriptor.parseFromSymbol(symbolInformation.getSymbol()).owner;
       SymbolInformation ownerInfo = symtab.symbols.get(ownerSym);
@@ -232,6 +237,101 @@ public class SignatureFormatter {
     if (typeArguments.isEmpty()) return "";
 
     return typeArguments.stream().map(this::formatType).collect(Collectors.joining(", ", "<", ">"));
+  }
+
+  private String formatAnnotations() {
+    return formatAnnotations(symbolInformation);
+  }
+
+  private String formatAnnotations(SymbolInformation symInfo) {
+    return symInfo.getAnnotationsList().stream()
+        .map(this::formatAnnotation)
+        .collect(Collectors.joining("\n"));
+  }
+
+  private String formatAnnotation(AnnotationTree annotation) {
+    StringBuilder b = new StringBuilder();
+    b.append('@');
+    b.append(formatType(annotation.getTpe()));
+    if (annotation.getParametersCount() > 0) {
+      b.append('(');
+      AssignTree firstParam = annotation.getParameters(0).getAssignTree();
+      // if only 1 parameter, and its LHS is named 'value', we can omit the 'value = '
+      // https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls-9.7.3
+      if (annotation.getParametersCount() == 1
+          && SymbolDescriptor.parseFromSymbol(firstParam.getLhs().getIdTree().getSymbol())
+              .descriptor
+              .name
+              .equals("value")) {
+        b.append(formatTree(firstParam.getRhs()));
+      } else {
+        String parameter =
+            annotation.getParametersList().stream()
+                .map(
+                    p ->
+                        SymbolDescriptor.parseFromSymbol(
+                                    p.getAssignTree().getLhs().getIdTree().getSymbol())
+                                .descriptor
+                                .name
+                            + " = "
+                            + formatTree(p.getAssignTree().getRhs()))
+                .collect(Collectors.joining(", "));
+        b.append(parameter);
+      }
+      b.append(')');
+    }
+    return b.toString();
+  }
+
+  private String formatTree(Tree tree) {
+    if (tree.hasIdTree()) {
+      return SymbolDescriptor.parseFromSymbol(tree.getIdTree().getSymbol()).descriptor.name;
+    } else if (tree.hasLiteralTree()) {
+      return formatConstant(tree.getLiteralTree().getConstant());
+    } else if (tree.hasSelectTree()) {
+      return formatTree(tree.getSelectTree().getQualifier())
+          + "."
+          + SymbolDescriptor.parseFromSymbol(tree.getSelectTree().getId().getSymbol())
+              .descriptor
+              .name;
+    } else if (tree.hasAnnotationTree()) {
+      return formatAnnotation(tree.getAnnotationTree());
+    } else if (tree.hasApplyTree()) {
+      if (tree.getApplyTree().getFunction().hasIdTree()
+          && tree.getApplyTree().getFunction().getIdTree().getSymbol().equals(ARRAY_SYMBOL)) {
+        return tree.getApplyTree().getArgumentsList().stream()
+            .map(this::formatTree)
+            .collect(Collectors.joining(", ", "{", "}"));
+      } else {
+        throw new IllegalArgumentException(
+            "unexpected apply tree function " + tree.getApplyTree().getFunction());
+      }
+    }
+
+    throw new IllegalArgumentException("tree was of unexpected type " + tree);
+  }
+
+  private String formatConstant(Constant constant) {
+    if (constant.hasBooleanConstant()) {
+      return Boolean.toString(constant.getBooleanConstant().getValue());
+    } else if (constant.hasByteConstant()) {
+      return Integer.toString(constant.getByteConstant().getValue());
+    } else if (constant.hasShortConstant()) {
+      return Integer.toString(constant.getShortConstant().getValue());
+    } else if (constant.hasCharConstant()) {
+      return String.valueOf((char) constant.getCharConstant().getValue());
+    } else if (constant.hasIntConstant()) {
+      return Integer.toString(constant.getIntConstant().getValue());
+    } else if (constant.hasLongConstant()) {
+      return Long.toString(constant.getLongConstant().getValue());
+    } else if (constant.hasFloatConstant()) {
+      return Float.toString(constant.getFloatConstant().getValue()) + 'f';
+    } else if (constant.hasDoubleConstant()) {
+      return Double.toString(constant.getDoubleConstant().getValue());
+    } else if (constant.hasStringConstant()) {
+      return '"' + constant.getStringConstant().getValue() + '"';
+    }
+    throw new IllegalArgumentException("constant was not of known type " + constant);
   }
 
   private String formatType(Type type) {
@@ -305,6 +405,11 @@ public class SignatureFormatter {
   private void printKeyword(String keyword) {
     if (keyword.isEmpty()) return;
     s.append(keyword).append(' ');
+  }
+
+  private void printKeywordln(String keyword) {
+    if (keyword.isEmpty()) return;
+    s.append(keyword).append('\n');
   }
 
   private boolean isEnumConstant(SymbolInformation symInfo) {

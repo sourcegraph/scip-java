@@ -48,12 +48,12 @@ public class DiffResult {
 // ^^^^^^^ reference androidx/annotation/NonNull#
 //               ^^^^ reference java/util/List#
 //                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                             ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#previousModels. final List<? extends EpoxyModel<?>> previousModels
+//                                             ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#previousModels. @NonNull final List<? extends EpoxyModel<?>> previousModels
   @NonNull final List<? extends EpoxyModel<?>> newModels;
 // ^^^^^^^ reference androidx/annotation/NonNull#
 //               ^^^^ reference java/util/List#
 //                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                             ^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#newModels. final List<? extends EpoxyModel<?>> newModels
+//                                             ^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#newModels. @NonNull final List<? extends EpoxyModel<?>> newModels
 
   /**
    * If this is non null it means the full differ ran and the result is contained
@@ -64,7 +64,7 @@ public class DiffResult {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
 //                ^^^^^^^^ reference DiffUtil/
 //                         ^^^^^^^^^^ reference DiffUtil/DiffResult#
-//                                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#differResult. final unresolved_type differResult
+//                                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffResult#differResult. @Nullable final unresolved_type differResult
 
   /** No changes were made to the models. */
   static DiffResult noOp(@Nullable List<? extends EpoxyModel<?>> models) {
@@ -73,7 +73,7 @@ public class DiffResult {
 //                        ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                 ^^^^ reference java/util/List#
 //                                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                               ^^^^^^ definition local0 List<? extends EpoxyModel<?>> models
+//                                                               ^^^^^^ definition local0 @Nullable List<? extends EpoxyModel<?>> models
     if (models == null) {
 //      ^^^^^^ reference local0
       models = Collections.emptyList();
@@ -95,7 +95,7 @@ public class DiffResult {
 //                            ^^^^^^^ reference androidx/annotation/NonNull#
 //                                    ^^^^ reference java/util/List#
 //                                                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                                  ^^^^^^^^^ definition local1 List<? extends EpoxyModel<?>> newModels
+//                                                                  ^^^^^^^^^ definition local1 @NonNull List<? extends EpoxyModel<?>> newModels
     //noinspection unchecked
     return new DiffResult(Collections.EMPTY_LIST, newModels, null);
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#`<init>`().
@@ -112,7 +112,7 @@ public class DiffResult {
 //                         ^^^^^^^ reference androidx/annotation/NonNull#
 //                                 ^^^^ reference java/util/List#
 //                                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                               ^^^^^^^^^^^^^^ definition local2 List<? extends EpoxyModel<?>> previousModels
+//                                                               ^^^^^^^^^^^^^^ definition local2 @NonNull List<? extends EpoxyModel<?>> previousModels
     //noinspection unchecked
     return new DiffResult(previousModels, Collections.EMPTY_LIST, null);
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#`<init>`().
@@ -133,17 +133,17 @@ public class DiffResult {
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^ reference java/util/List#
 //                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                           ^^^^^^^^^^^^^^ definition local3 List<? extends EpoxyModel<?>> previousModels
+//                                           ^^^^^^^^^^^^^^ definition local3 @NonNull List<? extends EpoxyModel<?>> previousModels
       @NonNull List<? extends EpoxyModel<?>> newModels,
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^ reference java/util/List#
 //                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                           ^^^^^^^^^ definition local4 List<? extends EpoxyModel<?>> newModels
+//                                           ^^^^^^^^^ definition local4 @NonNull List<? extends EpoxyModel<?>> newModels
       @NonNull DiffUtil.DiffResult differResult
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^^^^^ reference DiffUtil/
 //                      ^^^^^^^^^^ reference DiffUtil/DiffResult#
-//                                 ^^^^^^^^^^^^ definition local5 unresolved_type differResult
+//                                 ^^^^^^^^^^^^ definition local5 @NonNull unresolved_type differResult
   ) {
     return new DiffResult(previousModels, newModels, differResult);
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#`<init>`().
@@ -159,17 +159,17 @@ public class DiffResult {
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^ reference java/util/List#
 //                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                           ^^^^^^^^^^^^^^ definition local6 List<? extends EpoxyModel<?>> previousModels
+//                                           ^^^^^^^^^^^^^^ definition local6 @NonNull List<? extends EpoxyModel<?>> previousModels
       @NonNull List<? extends EpoxyModel<?>> newModels,
 //     ^^^^^^^ reference androidx/annotation/NonNull#
 //             ^^^^ reference java/util/List#
 //                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                           ^^^^^^^^^ definition local7 List<? extends EpoxyModel<?>> newModels
+//                                           ^^^^^^^^^ definition local7 @NonNull List<? extends EpoxyModel<?>> newModels
       @Nullable DiffUtil.DiffResult differResult
 //     ^^^^^^^^ reference androidx/annotation/Nullable#
 //              ^^^^^^^^ reference DiffUtil/
 //                       ^^^^^^^^^^ reference DiffUtil/DiffResult#
-//                                  ^^^^^^^^^^^^ definition local8 unresolved_type differResult
+//                                  ^^^^^^^^^^^^ definition local8 @Nullable unresolved_type differResult
   ) {
     this.previousModels = previousModels;
 //  ^^^^ reference com/airbnb/epoxy/DiffResult#

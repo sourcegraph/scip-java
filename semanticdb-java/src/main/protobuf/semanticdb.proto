@@ -103,6 +103,9 @@ message SymbolInformation {
   Kind kind = 3;
   int32 properties = 4;
   string display_name = 5;
+  // -- OUT OF SPEC -- //
+  repeated AnnotationTree annotations = 13;
+  // -- OUT OF SPEC -- //
   Signature signature = 17;
   Access access = 18;
   repeated string overridden_symbols = 19;
@@ -178,4 +181,102 @@ message ExistentialType {
   reserved 2;
   Type tpe = 1;
   Scope declarations = 3;
+}
+
+message Tree {
+  oneof sealed_value {
+    ApplyTree apply_tree = 1;
+    IdTree id_tree = 3;
+    LiteralTree literal_tree = 4;
+    OriginalTree original_tree = 6;
+    SelectTree select_tree = 7;
+    // -- OUT OF SPEC -- //
+    AnnotationTree annotation_tree = 9;
+    AssignTree assign_tree = 10;
+    // -- OUT OF SPEC -- //
+  }
+}
+
+message ApplyTree {
+  Tree function = 1;
+  repeated Tree arguments = 2;
+}
+
+message IdTree {
+  string symbol = 1;
+}
+
+message OriginalTree {
+  Range range = 1;
+}
+
+message LiteralTree {
+  Constant constant = 1;
+}
+
+message SelectTree {
+  Tree qualifier = 1;
+  IdTree id = 2;
+}
+
+// -- OUT OF SPEC -- //
+message AnnotationTree {
+  Type tpe = 1;
+  repeated Tree parameters = 2;
+}
+
+message AssignTree {
+    Tree lhs = 1;
+    Tree rhs = 2;
+}
+// -- OUT OF SPEC -- //
+
+message Constant {
+  oneof sealed_value {
+    BooleanConstant boolean_constant = 2;
+    ByteConstant byte_constant = 3;
+    ShortConstant short_constant = 4;
+    CharConstant char_constant = 5;
+    IntConstant int_constant = 6;
+    LongConstant long_constant = 7;
+    FloatConstant float_constant = 8;
+    DoubleConstant double_constant = 9;
+    StringConstant string_constant = 10;
+  }
+}
+
+message BooleanConstant {
+  bool value = 1;
+}
+
+message ByteConstant {
+  int32 value = 1;
+}
+
+message ShortConstant {
+  int32 value = 1;
+}
+
+message CharConstant {
+  int32 value = 1;
+}
+
+message IntConstant {
+  int32 value = 1;
+}
+
+message LongConstant {
+  int64 value = 1;
+}
+
+message FloatConstant {
+  float value = 1;
+}
+
+message DoubleConstant {
+  double value = 1;
+}
+
+message StringConstant {
+  string value = 1;
 }

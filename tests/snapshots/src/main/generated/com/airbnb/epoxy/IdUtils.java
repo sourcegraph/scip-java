@@ -51,7 +51,7 @@ public final class IdUtils {
 //                   ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/IdUtils#hashString64Bit(). public static long hashString64Bit(CharSequence str)
 //                                    ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                             ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                                          ^^^ definition local1 CharSequence str
+//                                                          ^^^ definition local1 @Nullable CharSequence str
     if (str == null) {
 //      ^^^ reference local1
       return 0;

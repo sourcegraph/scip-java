@@ -46,10 +46,10 @@ class HandlerExecutor implements Executor {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void execute(@NonNull Runnable command) {
-//            ^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#execute(). public void execute(Runnable command)
+//            ^^^^^^^ definition com/airbnb/epoxy/HandlerExecutor#execute(). @Override public void execute(Runnable command)
 //                     ^^^^^^^ reference androidx/annotation/NonNull#
 //                             ^^^^^^^^ reference java/lang/Runnable#
-//                                      ^^^^^^^ definition local1 Runnable command
+//                                      ^^^^^^^ definition local1 @NonNull Runnable command
     // If we're already on the same thread then we can execute this synchronously
     if (Looper.myLooper() == handler.getLooper()) {
 //      ^^^^^^ reference _root_/

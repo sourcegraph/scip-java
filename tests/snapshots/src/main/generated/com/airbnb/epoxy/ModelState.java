@@ -127,7 +127,7 @@ class ModelState {
 // ^^^^^^^^ reference java/lang/Override#
   public String toString() {
 //       ^^^^^^ reference java/lang/String#
-//              ^^^^^^^^ definition com/airbnb/epoxy/ModelState#toString(). public String toString()
+//              ^^^^^^^^ definition com/airbnb/epoxy/ModelState#toString(). @Override public String toString()
     return "ModelState{"
         + "id=" + id
 //                ^^ reference com/airbnb/epoxy/ModelState#id.

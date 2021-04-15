@@ -30,27 +30,27 @@ public class StringAttributeData {
   @Nullable private final CharSequence defaultString;
 // ^^^^^^^^ reference androidx/annotation/Nullable#
 //                        ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                     ^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#defaultString. private final CharSequence defaultString
+//                                     ^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#defaultString. @Nullable private final CharSequence defaultString
   @StringRes private final int defaultStringRes;
 // ^^^^^^^^^ reference androidx/annotation/StringRes#
-//                             ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#defaultStringRes. private final int defaultStringRes
+//                             ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#defaultStringRes. @StringRes private final int defaultStringRes
 
   @Nullable private CharSequence string;
 // ^^^^^^^^ reference androidx/annotation/Nullable#
 //                  ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                               ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#string. private CharSequence string
+//                               ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#string. @Nullable private CharSequence string
   @StringRes private int stringRes;
 // ^^^^^^^^^ reference androidx/annotation/StringRes#
-//                       ^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#stringRes. private int stringRes
+//                       ^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#stringRes. @StringRes private int stringRes
   @PluralsRes private int pluralRes;
 // ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
-//                        ^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#pluralRes. private int pluralRes
+//                        ^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#pluralRes. @PluralsRes private int pluralRes
   private int quantity;
 //            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#quantity. private int quantity
   @Nullable private Object[] formatArgs;
 // ^^^^^^^^ reference androidx/annotation/Nullable#
 //                  ^^^^^^ reference java/lang/Object#
-//                           ^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#formatArgs. private Object[] formatArgs
+//                           ^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#formatArgs. @Nullable private Object[] formatArgs
 
   public StringAttributeData() {
 //       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#`<init>`(). public StringAttributeData()
@@ -66,7 +66,7 @@ public class StringAttributeData {
 //       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#`<init>`(+1). public StringAttributeData(CharSequence defaultString)
 //                            ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                     ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                                  ^^^^^^^^^^^^^ definition local0 CharSequence defaultString
+//                                                  ^^^^^^^^^^^^^ definition local0 @Nullable CharSequence defaultString
     hasDefault = true;
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#hasDefault.
     this.defaultString = defaultString;
@@ -83,7 +83,7 @@ public class StringAttributeData {
   public StringAttributeData(@StringRes int defaultStringRes) {
 //       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#`<init>`(+2). public StringAttributeData(int defaultStringRes)
 //                            ^^^^^^^^^ reference androidx/annotation/StringRes#
-//                                          ^^^^^^^^^^^^^^^^ definition local1 int defaultStringRes
+//                                          ^^^^^^^^^^^^^^^^ definition local1 @StringRes int defaultStringRes
     hasDefault = true;
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#hasDefault.
     this.defaultStringRes = defaultStringRes;
@@ -101,7 +101,7 @@ public class StringAttributeData {
 //            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#setValue(). public void setValue(CharSequence string)
 //                      ^^^^^^^^ reference androidx/annotation/Nullable#
 //                               ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                            ^^^^^^ definition local2 CharSequence string
+//                                            ^^^^^^ definition local2 @Nullable CharSequence string
     this.string = string;
 //  ^^^^ reference com/airbnb/epoxy/StringAttributeData#
 //       ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.
@@ -115,7 +115,7 @@ public class StringAttributeData {
   public void setValue(@StringRes int stringRes) {
 //            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#setValue(+1). public void setValue(int stringRes)
 //                      ^^^^^^^^^ reference androidx/annotation/StringRes#
-//                                    ^^^^^^^^^ definition local3 int stringRes
+//                                    ^^^^^^^^^ definition local3 @StringRes int stringRes
     setValue(stringRes, null);
 //  ^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#setValue(+2).
 //           ^^^^^^^^^ reference local3
@@ -124,10 +124,10 @@ public class StringAttributeData {
   public void setValue(@StringRes int stringRes, @Nullable Object[] formatArgs) {
 //            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#setValue(+2). public void setValue(int stringRes, Object[] formatArgs)
 //                      ^^^^^^^^^ reference androidx/annotation/StringRes#
-//                                    ^^^^^^^^^ definition local4 int stringRes
+//                                    ^^^^^^^^^ definition local4 @StringRes int stringRes
 //                                                ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                                         ^^^^^^ reference java/lang/Object#
-//                                                                  ^^^^^^^^^^ definition local5 Object[] formatArgs
+//                                                                  ^^^^^^^^^^ definition local5 @Nullable Object[] formatArgs
     if (stringRes != 0) {
 //      ^^^^^^^^^ reference local4
       this.stringRes = stringRes;
@@ -172,11 +172,11 @@ public class StringAttributeData {
   public void setValue(@PluralsRes int pluralRes, int quantity, @Nullable Object[] formatArgs) {
 //            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#setValue(+3). public void setValue(int pluralRes, int quantity, Object[] formatArgs)
 //                      ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
-//                                     ^^^^^^^^^ definition local6 int pluralRes
+//                                     ^^^^^^^^^ definition local6 @PluralsRes int pluralRes
 //                                                    ^^^^^^^^ definition local7 int quantity
 //                                                               ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                                                        ^^^^^^ reference java/lang/Object#
-//                                                                                 ^^^^^^^^^^ definition local8 Object[] formatArgs
+//                                                                                 ^^^^^^^^^^ definition local8 @Nullable Object[] formatArgs
     if (pluralRes != 0) {
 //      ^^^^^^^^^ reference local6
       this.pluralRes = pluralRes;
@@ -251,7 +251,7 @@ public class StringAttributeData {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public boolean equals(Object o) {
-//               ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#equals(). public boolean equals(Object o)
+//               ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#equals(). @Override public boolean equals(Object o)
 //                      ^^^^^^ reference java/lang/Object#
 //                             ^ definition local10 Object o
     if (this == o) {
@@ -311,7 +311,7 @@ public class StringAttributeData {
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public int hashCode() {
-//           ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#hashCode(). public int hashCode()
+//           ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#hashCode(). @Override public int hashCode()
     int result = string != null ? string.hashCode() : 0;
 //      ^^^^^^ definition local12 int result
 //               ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.

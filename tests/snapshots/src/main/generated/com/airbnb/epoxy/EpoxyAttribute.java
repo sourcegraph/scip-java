@@ -35,7 +35,7 @@ import java.lang.annotation.Target;
 //         ^^^^^^^^^^^^^^^ reference java/lang/annotation/RetentionPolicy#
 //                         ^^^^^ reference java/lang/annotation/RetentionPolicy#CLASS.
 public @interface EpoxyAttribute {
-//                ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute# public @interface EpoxyAttribute
+//                ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute# @Target(ElementType.FIELD) @Retention(RetentionPolicy.CLASS) public @interface EpoxyAttribute
   /**
    * Options that can be included on the attribute to affect how the model's generated class is
    * created.
@@ -112,7 +112,7 @@ public @interface EpoxyAttribute {
   @Deprecated
 // ^^^^^^^^^^ reference java/lang/Deprecated#
   boolean hash() default true;
-//        ^^^^ definition com/airbnb/epoxy/EpoxyAttribute#hash(). public abstract boolean hash()
+//        ^^^^ definition com/airbnb/epoxy/EpoxyAttribute#hash(). @Deprecated public abstract boolean hash()
 
   /**
    * Whether or not to generate setter for this attribute.
@@ -125,5 +125,5 @@ public @interface EpoxyAttribute {
   @Deprecated
 // ^^^^^^^^^^ reference java/lang/Deprecated#
   boolean setter() default true;
-//        ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#setter(). public abstract boolean setter()
+//        ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#setter(). @Deprecated public abstract boolean setter()
 }

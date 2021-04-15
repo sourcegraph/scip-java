@@ -58,7 +58,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public void onCheckedChanged(CompoundButton button, boolean isChecked) {
-//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#onCheckedChanged(). public void onCheckedChanged(unresolved_type button, boolean isChecked)
+//            ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#onCheckedChanged(). @Override public void onCheckedChanged(unresolved_type button, boolean isChecked)
 //                             ^^^^^^^^^^^^^^ reference _root_/
 //                                            ^^^^^^ definition local1 unresolved_type button
 //                                                            ^^^^^^^^^ definition local2 boolean isChecked
@@ -107,7 +107,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public boolean equals(Object o) {
-//               ^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#equals(). public boolean equals(Object o)
+//               ^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#equals(). @Override public boolean equals(Object o)
 //                      ^^^^^^ reference java/lang/Object#
 //                             ^ definition local5 Object o
     if (this == o) {
@@ -138,7 +138,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
   @Override
 // ^^^^^^^^ reference java/lang/Override#
   public int hashCode() {
-//           ^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#hashCode(). public int hashCode()
+//           ^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#hashCode(). @Override public int hashCode()
     return originalCheckedChangeListener.hashCode();
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#originalCheckedChangeListener.
 //                                       ^^^^^^^^ reference java/lang/Object#hashCode().

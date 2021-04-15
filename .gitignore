@@ -29,6 +29,8 @@ _site/
 metals.sbt
 metals/project/
 
+.bsp
+
 .vscode/
 
 local.*

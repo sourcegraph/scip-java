@@ -6,19 +6,13 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.*;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.type.*;
-import javax.lang.model.type.IntersectionType;
-import javax.lang.model.util.SimpleTypeVisitor8;
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.UNRESOLVED_TYPE_REF;
 
 public final class SemanticdbSignatures {
   private final GlobalSymbolsCache cache;
   private final LocalSymbolsCache locals;
-
-  private static final Semanticdb.Type UNRESOLVED_TYPE_REF =
-      Semanticdb.Type.newBuilder()
-          .setTypeRef(TypeRef.newBuilder().setSymbol("unresolved_type#"))
-          .build();
 
   public SemanticdbSignatures(GlobalSymbolsCache cache, LocalSymbolsCache locals) {
     this.cache = cache;
@@ -115,155 +109,5 @@ public final class SemanticdbSignatures {
 
   private Semanticdb.Type generateType(TypeMirror mirror) {
     return mirror.accept(new SemanticdbTypeVisitor(cache, locals), null);
-  }
-
-  /** A TypeMirror tree visitor that constructs a recursive SemanticDB Type structure. */
-  private static class SemanticdbTypeVisitor extends SimpleTypeVisitor8<Semanticdb.Type, Void> {
-    private final GlobalSymbolsCache cache;
-    private final LocalSymbolsCache locals;
-
-    private SemanticdbTypeVisitor(GlobalSymbolsCache cache, LocalSymbolsCache locals) {
-      this.cache = cache;
-      this.locals = locals;
-    }
-
-    @Override
-    public Semanticdb.Type visitDeclared(DeclaredType t, Void unused) {
-      boolean isExistential =
-          t.getTypeArguments().stream().anyMatch((type) -> type instanceof WildcardType);
-
-      ArrayList<Semanticdb.Type> typeParams = new ArrayList<>();
-      Scope.Builder declarations = Scope.newBuilder();
-      for (TypeMirror type : t.getTypeArguments()) {
-        Semanticdb.Type visited = super.visit(type);
-        if (visited == null) {
-          visited = UNRESOLVED_TYPE_REF;
-        }
-        typeParams.add(visited);
-
-        if (type instanceof WildcardType) {
-          TypeSignature.Builder typeSig = TypeSignature.newBuilder();
-          WildcardType wildcardType = (WildcardType) type;
-
-          // semanticdb spec asks for List() not None for  type_parameters field
-          typeSig.setTypeParameters(Scope.newBuilder());
-
-          if (wildcardType.getExtendsBound() != null) {
-            typeSig.setUpperBound(super.visit(wildcardType.getExtendsBound()));
-          } else if (wildcardType.getSuperBound() != null) {
-            typeSig.setLowerBound(super.visit(wildcardType.getSuperBound()));
-          }
-
-          declarations.addHardlinks(
-              SymbolInformation.newBuilder()
-                  .setSymbol("local_wildcard")
-                  .setSignature(Signature.newBuilder().setTypeSignature(typeSig)));
-        } else {
-          declarations.addSymlinks(cache.semanticdbSymbol(((Type) type).asElement(), locals));
-        }
-      }
-
-      if (!isExistential) {
-        return Semanticdb.Type.newBuilder()
-            .setTypeRef(
-                TypeRef.newBuilder()
-                    .setSymbol(cache.semanticdbSymbol(t.asElement(), locals))
-                    .addAllTypeArguments(typeParams))
-            .build();
-      } else {
-        return Semanticdb.Type.newBuilder()
-            .setExistentialType(
-                ExistentialType.newBuilder()
-                    .setTpe(
-                        Semanticdb.Type.newBuilder()
-                            .setTypeRef(
-                                TypeRef.newBuilder()
-                                    .setSymbol(cache.semanticdbSymbol(t.asElement(), locals))
-                                    .addAllTypeArguments(typeParams)))
-                    .setDeclarations(declarations))
-            .build();
-      }
-    }
-
-    @Override
-    public Semanticdb.Type visitArray(ArrayType t, Void unused) {
-      Semanticdb.Type arrayComponentType = super.visit(t.getComponentType());
-      if (arrayComponentType == null) {
-        arrayComponentType = UNRESOLVED_TYPE_REF;
-      }
-      return Semanticdb.Type.newBuilder()
-          .setTypeRef(
-              TypeRef.newBuilder().setSymbol("scala/Array#").addTypeArguments(arrayComponentType))
-          .build();
-    }
-
-    @Override
-    public Semanticdb.Type visitPrimitive(PrimitiveType t, Void unused) {
-      return Semanticdb.Type.newBuilder()
-          .setTypeRef(TypeRef.newBuilder().setSymbol(primitiveSymbol(t.getKind())))
-          .build();
-    }
-
-    @Override
-    public Semanticdb.Type visitTypeVariable(TypeVariable t, Void unused) {
-      return Semanticdb.Type.newBuilder()
-          .setTypeRef(
-              TypeRef.newBuilder().setSymbol(cache.semanticdbSymbol(t.asElement(), locals)).build())
-          .build();
-    }
-
-    @Override
-    public Semanticdb.Type visitIntersection(IntersectionType t, Void unused) {
-      ArrayList<Semanticdb.Type> types = new ArrayList<>();
-      for (TypeMirror type : t.getBounds()) {
-        types.add(super.visit(type));
-      }
-
-      return Semanticdb.Type.newBuilder()
-          .setIntersectionType(Semanticdb.IntersectionType.newBuilder().addAllTypes(types).build())
-          .build();
-    }
-
-    @Override
-    public Semanticdb.Type visitWildcard(WildcardType t, Void unused) {
-      return Semanticdb.Type.newBuilder()
-          .setTypeRef(
-              // https://github.com/scalameta/scalameta/issues/1703
-              // https://sourcegraph.com/github.com/scalameta/scalameta/-/blob/semanticdb/metacp/src/main/scala/scala/meta/internal/javacp/Javacp.scala#L452:19
-              TypeRef.newBuilder().setSymbol("local_wildcard").build())
-          .build();
-    }
-
-    @Override
-    public Semanticdb.Type visitNoType(NoType t, Void unused) {
-      return Semanticdb.Type.newBuilder()
-          .setTypeRef(TypeRef.newBuilder().setSymbol(primitiveSymbol(t.getKind())))
-          .build();
-    }
-
-    public String primitiveSymbol(TypeKind kind) {
-      switch (kind) {
-        case BOOLEAN:
-          return "scala/Boolean#";
-        case BYTE:
-          return "scala/Byte#";
-        case SHORT:
-          return "scala/Short#";
-        case INT:
-          return "scala/Int#";
-        case LONG:
-          return "scala/Long#";
-        case CHAR:
-          return "scala/Char#";
-        case FLOAT:
-          return "scala/Float#";
-        case DOUBLE:
-          return "scala/Double#";
-        case VOID:
-          return "scala/Unit#";
-        default:
-          throw new IllegalArgumentException("got " + kind.name());
-      }
-    }
   }
 }
