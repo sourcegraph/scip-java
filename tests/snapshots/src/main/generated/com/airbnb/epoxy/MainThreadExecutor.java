@@ -17,13 +17,11 @@ class MainThreadExecutor extends HandlerExecutor {
   static final MainThreadExecutor INSTANCE = new MainThreadExecutor(false);
 //             ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#
 //                                ^^^^^^^^ definition com/airbnb/epoxy/MainThreadExecutor#INSTANCE. static final MainThreadExecutor INSTANCE
-//                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#`<init>`().
-//                                               ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#
+//                                               ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#`<init>`().
   static final MainThreadExecutor ASYNC_INSTANCE = new MainThreadExecutor(true);
 //             ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#
 //                                ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/MainThreadExecutor#ASYNC_INSTANCE. static final MainThreadExecutor ASYNC_INSTANCE
-//                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#`<init>`().
-//                                                     ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#
+//                                                     ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#`<init>`().
 
   MainThreadExecutor(boolean async) {
 //^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/MainThreadExecutor#`<init>`(). MainThreadExecutor(boolean async)

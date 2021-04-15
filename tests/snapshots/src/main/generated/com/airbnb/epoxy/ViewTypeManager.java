@@ -26,8 +26,7 @@ class ViewTypeManager {
 //                         ^^^^^ reference java/lang/Class#
 //                                ^^^^^^^ reference java/lang/Integer#
 //                                         ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ViewTypeManager#VIEW_TYPE_MAP. private static final Map<Class, Integer> VIEW_TYPE_MAP
-//                                                         ^^^^^^^^^^^^^^^ reference java/util/HashMap#`<init>`(+2).
-//                                                             ^^^^^^^ reference java/util/HashMap#
+//                                                             ^^^^^^^ reference java/util/HashMap#`<init>`(+2).
   /**
    * The last model that had its view type looked up. This is stored so in most cases we can quickly
    * look up what view type belongs to which model.
@@ -147,8 +146,7 @@ class ViewTypeManager {
 //  ^^^^^^^ reference local5
 //          ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#onExceptionSwallowed().
         new IllegalStateException("Last model did not match expected view type"));
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//          ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//          ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
 
     // To be extra safe in case RecyclerView implementation details change...
     for (EpoxyModel<?> model : adapter.getCurrentModels()) {
@@ -169,8 +167,7 @@ class ViewTypeManager {
     HiddenEpoxyModel hiddenEpoxyModel = new HiddenEpoxyModel();
 //  ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#
 //                   ^^^^^^^^^^^^^^^^ definition local8 HiddenEpoxyModel hiddenEpoxyModel
-//                                      ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
-//                                          ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#
+//                                          ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
     if (viewType == hiddenEpoxyModel.getViewType()) {
 //      ^^^^^^^^ reference local6
 //                  ^^^^^^^^^^^^^^^^ reference local8
@@ -180,8 +177,7 @@ class ViewTypeManager {
     }
 
     throw new IllegalStateException("Could not find model for view type: " + viewType);
-//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//            ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//            ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
 //                                                                           ^^^^^^^^ reference local6
   }
 }

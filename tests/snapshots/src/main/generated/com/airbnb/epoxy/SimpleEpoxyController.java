@@ -47,8 +47,7 @@ public class SimpleEpoxyController extends EpoxyController {
     if (!insideSetModels) {
 //       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/SimpleEpoxyController#insideSetModels.
       throw new IllegalEpoxyUsage(
-//          ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IllegalEpoxyUsage#`<init>`(). 1:84
-//              ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IllegalEpoxyUsage#
+//              ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IllegalEpoxyUsage#`<init>`().
           "You cannot call `requestModelBuild` directly. Call `setModels` instead.");
     }
     super.requestModelBuild();
@@ -63,8 +62,7 @@ public class SimpleEpoxyController extends EpoxyController {
     if (!isBuildingModels()) {
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#isBuildingModels().
       throw new IllegalEpoxyUsage(
-//          ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IllegalEpoxyUsage#`<init>`(). 1:78
-//              ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IllegalEpoxyUsage#
+//              ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/IllegalEpoxyUsage#`<init>`().
           "You cannot call `buildModels` directly. Call `setModels` instead.");
     }
     add(currentModels);

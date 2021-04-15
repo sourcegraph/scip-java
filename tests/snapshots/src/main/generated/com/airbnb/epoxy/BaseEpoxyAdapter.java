@@ -78,8 +78,7 @@ public abstract class BaseEpoxyAdapter
   private final ViewTypeManager viewTypeManager = new ViewTypeManager();
 //              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewTypeManager#
 //                              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#viewTypeManager. private final ViewTypeManager viewTypeManager
-//                                                ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewTypeManager#`<init>`().
-//                                                    ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewTypeManager#
+//                                                    ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewTypeManager#`<init>`().
   /**
    * Keeps track of view holders that are currently bound so we can save their state in {@link
    * #onSaveInstanceState(Bundle)}.
@@ -87,19 +86,15 @@ public abstract class BaseEpoxyAdapter
   private final BoundViewHolders boundViewHolders = new BoundViewHolders();
 //              ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#
 //                               ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#boundViewHolders. private final BoundViewHolders boundViewHolders
-//                                                  ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#`<init>`().
-//                                                      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#
+//                                                      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#`<init>`().
   private ViewHolderState viewHolderState = new ViewHolderState();
 //        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#
 //                        ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#viewHolderState. private ViewHolderState viewHolderState
-//                                          ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#`<init>`().
-//                                              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#
+//                                              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#`<init>`().
 
   private final SpanSizeLookup spanSizeLookup = new SpanSizeLookup() {
 //              ^^^^^^^^^^^^^^ reference _root_/
 //                             ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#spanSizeLookup. private final unresolved_type spanSizeLookup
-//                                              ^^^^^^^^^^^^^^^^^^^^^^ reference `<any>`#`<init>`# 19:3
-//                                                  ^^^^^^^^^^^^^^ reference _root_/
 //                                                  ^^^^^^^^^^^^^^ reference _root_/
 
     @Override
@@ -227,8 +222,7 @@ public abstract class BaseEpoxyAdapter
 //                    ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#buildView().
 //                              ^^^^^^ reference local7
     return new EpoxyViewHolder(parent, view, model.shouldSaveViewState());
-//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#`<init>`().
-//             ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
+//             ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#`<init>`().
 //                             ^^^^^^ reference local7
 //                                     ^^^^ reference local10
 //                                           ^^^^^ reference local9
@@ -540,8 +534,7 @@ public abstract class BaseEpoxyAdapter
 //                      ^^^^ reference androidx/collection/LongSparseArray#size().
 //                                     ^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#hasStableIds#
       throw new IllegalStateException("Must have stable ids when saving view holder state");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
     }
 
     outState.putParcelable(SAVED_STATE_ARG_VIEW_HOLDERS, viewHolderState);
@@ -562,8 +555,7 @@ public abstract class BaseEpoxyAdapter
 //      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#boundViewHolders.
 //                       ^^^^ reference com/airbnb/epoxy/BoundViewHolders#size().
       throw new IllegalStateException(
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 2:52
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
           "State cannot be restored once views have been bound. It should be done before adding "
               + "the adapter to the recycler view.");
     }
@@ -578,8 +570,7 @@ public abstract class BaseEpoxyAdapter
       if (viewHolderState == null) {
 //        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#viewHolderState.
         throw new IllegalStateException(
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:89
-//                ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//                ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
             "Tried to restore instance state, but onSaveInstanceState was never called.");
       }
     }

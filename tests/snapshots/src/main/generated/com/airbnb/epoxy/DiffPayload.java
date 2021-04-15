@@ -47,8 +47,7 @@ public class DiffPayload {
 //      ^^^^^^ reference local0
 //             ^^^^^^^ reference java/util/List#isEmpty().
       throw new IllegalStateException("Models must not be empty");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
     }
 
     int modelCount = models.size();
@@ -70,8 +69,7 @@ public class DiffPayload {
 //    ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#singleModel.
       modelsById = new LongSparseArray<>(modelCount);
 //    ^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#modelsById.
-//                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#`<init>`(+1).
-//                     ^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#
+//                     ^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#`<init>`(+1).
 //                                       ^^^^^^^^^^ reference local1
       for (EpoxyModel<?> model : models) {
 //         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#

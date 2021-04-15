@@ -47,8 +47,7 @@ class DebugTimer implements Timer {
     if (startTime != -1) {
 //      ^^^^^^^^^ reference com/airbnb/epoxy/DebugTimer#startTime.
       throw new IllegalStateException("Timer was already started");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
     }
 
     startTime = System.nanoTime();
@@ -68,8 +67,7 @@ class DebugTimer implements Timer {
     if (startTime == -1) {
 //      ^^^^^^^^^ reference com/airbnb/epoxy/DebugTimer#startTime.
       throw new IllegalStateException("Timer was not started");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
     }
 
     float durationMs = (System.nanoTime() - startTime) / 1000000f;

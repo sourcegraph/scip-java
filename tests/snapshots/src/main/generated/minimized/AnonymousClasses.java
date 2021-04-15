@@ -22,10 +22,7 @@ public class AnonymousClasses {
         new Function<Integer, Integer>() {
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local3 5:9
 //          ^^^^^^^^ reference java/util/function/Function#
-//          ^^^^^^^^ reference java/util/function/Function#
 //                   ^^^^^^^ reference java/lang/Integer#
-//                   ^^^^^^^ reference java/lang/Integer#
-//                            ^^^^^^^ reference java/lang/Integer#
 //                            ^^^^^^^ reference java/lang/Integer#
           @Override
 //         ^^^^^^^^ reference java/lang/Override#

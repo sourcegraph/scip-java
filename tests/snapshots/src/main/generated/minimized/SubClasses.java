@@ -28,8 +28,7 @@ public class SubClasses extends AbstractClasses implements Interfaces {
     SubClasses s = new SubClasses();
 //  ^^^^^^^^^^ reference minimized/SubClasses#
 //             ^ definition local0 SubClasses s
-//                 ^^^^^^^^^^^^^^^^ reference minimized/SubClasses#`<init>`().
-//                     ^^^^^^^^^^ reference minimized/SubClasses#
+//                     ^^^^^^^^^^ reference minimized/SubClasses#`<init>`().
     return s.abstractImplementation()
 //         ^ reference local0
 //           ^^^^^^^^^^^^^^^^^^^^^^ reference minimized/SubClasses#abstractImplementation().

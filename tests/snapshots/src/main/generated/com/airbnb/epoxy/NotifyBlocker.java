@@ -41,8 +41,7 @@ class NotifyBlocker extends AdapterDataObserver {
     if (!changesAllowed) {
 //       ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/NotifyBlocker#changesAllowed.
       throw new IllegalStateException(
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:87
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
           "You cannot notify item changes directly. Call `requestModelBuild` instead.");
     }
   }

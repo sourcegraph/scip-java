@@ -107,8 +107,7 @@ public final class EpoxyAsyncUtil {
     if (!async) {
 //       ^^^^^ reference local1
       return new Handler(looper);
-//           ^^^^^^^^^^^^^^^^^^^ reference `<init>`#
-//               ^^^^^^^ reference _root_/
+//               ^^^^^^^ reference `<init>`#
 //                       ^^^^^^ reference local0
     }
 
@@ -149,8 +148,7 @@ public final class EpoxyAsyncUtil {
     }
 
     return new Handler(looper);
-//         ^^^^^^^^^^^^^^^^^^^ reference `<init>`#
-//             ^^^^^^^ reference _root_/
+//             ^^^^^^^ reference `<init>`#
 //                     ^^^^^^ reference local0
   }
 
@@ -165,8 +163,7 @@ public final class EpoxyAsyncUtil {
     HandlerThread handlerThread = new HandlerThread(threadName);
 //  ^^^^^^^^^^^^^ reference _root_/
 //                ^^^^^^^^^^^^^ definition local4 unresolved_type handlerThread
-//                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference `<init>`#
-//                                    ^^^^^^^^^^^^^ reference _root_/
+//                                    ^^^^^^^^^^^^^ reference `<init>`#
 //                                                  ^^^^^^^^^^ reference local3
     handlerThread.start();
 //  ^^^^^^^^^^^^^ reference local4

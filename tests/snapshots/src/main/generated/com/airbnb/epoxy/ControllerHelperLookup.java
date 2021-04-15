@@ -40,13 +40,11 @@ class ControllerHelperLookup {
 //                         ^^^^^ reference java/lang/Class#
 //                                   ^^^^^^^^^^^ reference java/lang/reflect/Constructor#
 //                                                   ^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#BINDINGS. private static final Map<Class<?>, Constructor<?>> BINDINGS
-//                                                              ^^^^^^^^^^^^^^^^^^^^^ reference java/util/LinkedHashMap#`<init>`(+2).
-//                                                                  ^^^^^^^^^^^^^ reference java/util/LinkedHashMap#
+//                                                                  ^^^^^^^^^^^^^ reference java/util/LinkedHashMap#`<init>`(+2).
   private static final NoOpControllerHelper NO_OP_CONTROLLER_HELPER = new NoOpControllerHelper();
 //                     ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/NoOpControllerHelper#
 //                                          ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerHelperLookup#NO_OP_CONTROLLER_HELPER. private static final NoOpControllerHelper NO_OP_CONTROLLER_HELPER
-//                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/NoOpControllerHelper#`<init>`().
-//                                                                        ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/NoOpControllerHelper#
+//                                                                        ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/NoOpControllerHelper#`<init>`().
 
   static ControllerHelper getHelperForController(EpoxyController controller) {
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerHelper#
@@ -75,16 +73,14 @@ class ControllerHelperLookup {
 //           ^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalAccessException#
 //                                  ^ definition local2 IllegalAccessException e
       throw new RuntimeException("Unable to invoke " + constructor, e);
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#`<init>`(+2).
-//              ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
+//              ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#`<init>`(+2).
 //                                                     ^^^^^^^^^^^ reference local1
 //                                                                  ^ reference local2
     } catch (InstantiationException e) {
 //           ^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/InstantiationException#
 //                                  ^ definition local3 InstantiationException e
       throw new RuntimeException("Unable to invoke " + constructor, e);
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#`<init>`(+2).
-//              ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
+//              ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#`<init>`(+2).
 //                                                     ^^^^^^^^^^^ reference local1
 //                                                                  ^ reference local3
     } catch (InvocationTargetException e) {
@@ -110,8 +106,7 @@ class ControllerHelperLookup {
 //                    ^^^^^ reference local5
       }
       throw new RuntimeException("Unable to get Epoxy helper class.", cause);
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#`<init>`(+2).
-//              ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
+//              ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#`<init>`(+2).
 //                                                                    ^^^^^ reference local5
     }
   }
@@ -177,8 +172,7 @@ class ControllerHelperLookup {
 //           ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/NoSuchMethodException#
 //                                 ^ definition local11 NoSuchMethodException e
       throw new RuntimeException("Unable to find Epoxy Helper constructor for " + clsName, e);
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#`<init>`(+2).
-//              ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
+//              ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#`<init>`(+2).
 //                                                                                ^^^^^^^ reference local8
 //                                                                                         ^ reference local11
     }

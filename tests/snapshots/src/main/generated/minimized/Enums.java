@@ -10,18 +10,18 @@ enum Enums {
 //   ^^^^^ definition minimized/Enums# enum Enums
   A("A", 420),
 //^ definition minimized/Enums#A. Enums.A("A", 420) /* ordinal 0 */
-// ^^^^^^^^^^ reference minimized/Enums#`<init>`().
   B("B", 1),
 //^ definition minimized/Enums#B. Enums.B("B", 1) /* ordinal 1 */
-// ^^^^^^^^ reference minimized/Enums#`<init>`().
   C("C", 5);
 //^ definition minimized/Enums#C. Enums.C("C", 5) /* ordinal 2 */
-// ^^^^^^^^ reference minimized/Enums#`<init>`().
   public String value;
 //       ^^^^^^ reference java/lang/String#
 //              ^^^^^ definition minimized/Enums#value. public String value
 
   Enums(String value, int a) {
+//^^^^^ reference minimized/Enums#`<init>`().
+//^^^^^ reference minimized/Enums#`<init>`().
+//^^^^^ reference minimized/Enums#`<init>`().
 //^^^^^ definition minimized/Enums#`<init>`(). private Enums(String value, int a)
 //      ^^^^^^ reference java/lang/String#
 //             ^^^^^ definition local0 String value

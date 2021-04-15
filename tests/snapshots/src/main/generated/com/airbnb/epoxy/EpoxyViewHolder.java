@@ -98,8 +98,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
       // state from a previously bound model.
       initialViewState = new ViewState();
 //    ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#initialViewState.
-//                       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`().
-//                           ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#
+//                           ^^^^^^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`().
       initialViewState.save(itemView);
 //    ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#initialViewState.
 //                     ^^^^ reference com/airbnb/epoxy/ViewHolderState#ViewState#save().
@@ -319,8 +318,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
     if (epoxyModel == null) {
 //      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#epoxyModel.
       throw new IllegalStateException("This holder is not currently bound.");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
     }
   }
 

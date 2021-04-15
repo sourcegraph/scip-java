@@ -171,8 +171,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
     if (controller == null) {
 //      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#controller.
       throw new IllegalStateException(
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:84
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
           "A controller must be provided in the constructor if dragging is enabled");
     }
 
@@ -199,8 +198,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#isTouchableModel().
 //                        ^^^^^ reference local15
       throw new IllegalStateException(
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:80
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
           "A model was dragged that is not a valid target: " + model.getClass());
 //                                                             ^^^^^ reference local15
 //                                                                   ^^^^^^^^ reference java/lang/Object#getClass().
@@ -257,8 +255,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#isTouchableModel().
 //                        ^^^^^ reference local22
       throw new IllegalStateException(
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:79
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
           "A model was swiped that is not a valid target: " + model.getClass());
 //                                                            ^^^^^ reference local22
 //                                                                  ^^^^^^^^ reference java/lang/Object#getClass().
@@ -312,8 +309,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //         ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#isTouchableModel().
 //                          ^^^^^ reference local31
         throw new IllegalStateException(
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:83
-//                ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//                ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
             "A model was selected that is not a valid target: " + model.getClass());
 //                                                                ^^^^^ reference local31
 //                                                                      ^^^^^^^^ reference java/lang/Object#getClass().
@@ -502,7 +498,6 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //               ^^^^^^^^^^^ reference postDelayed#
 //                           ^^^^^^^^^^^^^^^^ reference local48 5:5
 //                               ^^^^^^^^ reference java/lang/Runnable#
-//                               ^^^^^^^^ reference java/lang/Runnable#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
       public void run() {
@@ -561,8 +556,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#isTouchableModel().
 //                        ^^^^^ reference local59
       throw new IllegalStateException(
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 1:81
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
           "A model was selected that is not a valid target: " + model.getClass());
 //                                                              ^^^^^ reference local59
 //                                                                    ^^^^^^^^ reference java/lang/Object#getClass().

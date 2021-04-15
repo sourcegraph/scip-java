@@ -75,8 +75,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
   protected final int getDefaultLayout() {
 //                    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#getDefaultLayout(). @Override protected final int getDefaultLayout()
     throw new UnsupportedOperationException(
-//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1). 1:83
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1).
         "Layout resources are unsupported. Views must be created with `buildView`");
   }
 
@@ -89,8 +88,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
 //                             ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                                           ^^^^^^^^^ definition local1 @LayoutRes int layoutRes
     throw new UnsupportedOperationException(
-//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1). 1:83
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`(+1).
         "Layout resources are unsupported. Views must be created with `buildView`");
   }
 }

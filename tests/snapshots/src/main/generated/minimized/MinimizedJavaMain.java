@@ -14,9 +14,7 @@ public class MinimizedJavaMain {
     TypeVariables.app(new TypeVariables.CT());
 //  ^^^^^^^^^^^^^ reference minimized/TypeVariables#
 //                ^^^ reference minimized/TypeVariables#app().
-//                    ^^^^^^^^^^^^^^^^^^^^^^ reference minimized/TypeVariables#CT#`<init>`().
-//                        ^^^^^^^^^^^^^ reference minimized/TypeVariables#
-//                                      ^^ reference minimized/TypeVariables#CT#
+//                                      ^^ reference minimized/TypeVariables#CT#`<init>`().
     System.out.println(
 //  ^^^^^^ reference java/lang/System#
 //         ^^^ reference java/lang/System#out.
@@ -43,10 +41,7 @@ public class MinimizedJavaMain {
 //            ^^^^^^^^^^ reference minimized/Primitives#
 //                       ^^^ reference minimized/Primitives#app().
             + new ParameterizedTypes<Integer, String>().app(42, "42")
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference minimized/ParameterizedTypes#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^ reference minimized/ParameterizedTypes#
-//                                   ^^^^^^^ reference java/lang/Integer#
-//                                            ^^^^^^ reference java/lang/String#
+//                ^^^^^^^^^^^^^^^^^^ reference minimized/ParameterizedTypes#`<init>`().
 //                                                      ^^^ reference minimized/ParameterizedTypes#app().
             + RawTypes.x.toString()
 //            ^^^^^^^^ reference minimized/RawTypes#

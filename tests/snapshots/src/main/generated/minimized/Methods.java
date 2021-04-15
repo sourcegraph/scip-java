@@ -44,8 +44,7 @@ public class Methods {
     Methods methods = new Methods();
 //  ^^^^^^^ reference minimized/Methods#
 //          ^^^^^^^ definition local6 Methods methods
-//                    ^^^^^^^^^^^^^ reference minimized/Methods#`<init>`().
-//                        ^^^^^^^ reference minimized/Methods#
+//                        ^^^^^^^ reference minimized/Methods#`<init>`().
     int a = staticOverload(n);
 //      ^ definition local7 int a
 //          ^^^^^^^^^^^^^^ reference minimized/Methods#staticOverload().

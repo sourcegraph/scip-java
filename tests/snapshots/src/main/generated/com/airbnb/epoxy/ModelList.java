@@ -84,8 +84,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     if (notificationsPaused) {
 //      ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notificationsPaused.
       throw new IllegalStateException("Notifications already paused");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
     }
     notificationsPaused = true;
 //  ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notificationsPaused.
@@ -96,8 +95,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     if (!notificationsPaused) {
 //       ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notificationsPaused.
       throw new IllegalStateException("Notifications already resumed");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
     }
     notificationsPaused = false;
 //  ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notificationsPaused.
@@ -403,8 +401,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                               ^^^^^^^^ definition com/airbnb/epoxy/ModelList#iterator(). @NonNull @Override public Iterator<EpoxyModel<?>> iterator()
     return new Itr();
-//         ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#`<init>`().
-//             ^^^ reference com/airbnb/epoxy/ModelList#Itr#
+//             ^^^ reference com/airbnb/epoxy/ModelList#Itr#`<init>`().
   }
 
   /**
@@ -461,8 +458,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
       if (lastRet < 0) {
 //        ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
         throw new IllegalStateException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//                ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`().
       }
       checkForComodification();
 //    ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#checkForComodification().
@@ -485,8 +481,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
 //                                       ^^ definition local31 IndexOutOfBoundsException ex
         throw new ConcurrentModificationException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
       }
     }
 
@@ -496,8 +491,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //        ^^^^^^^^ reference java/util/AbstractList#modCount.
 //                    ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#expectedModCount.
         throw new ConcurrentModificationException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
       }
     }
   }
@@ -511,8 +505,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#listIterator(). @NonNull @Override public ListIterator<EpoxyModel<?>> listIterator()
     return new ListItr(0);
-//         ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ListItr#`<init>`().
-//             ^^^^^^^ reference com/airbnb/epoxy/ModelList#ListItr#
+//             ^^^^^^^ reference com/airbnb/epoxy/ModelList#ListItr#`<init>`().
   }
 
   @NonNull
@@ -525,8 +518,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                                   ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#listIterator(+1). @NonNull @Override public ListIterator<EpoxyModel<?>> listIterator(int index)
 //                                                    ^^^^^ definition local32 int index
     return new ListItr(index);
-//         ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ListItr#`<init>`().
-//             ^^^^^^^ reference com/airbnb/epoxy/ModelList#ListItr#
+//             ^^^^^^^ reference com/airbnb/epoxy/ModelList#ListItr#`<init>`().
 //                     ^^^^^ reference local32
   }
 
@@ -580,8 +572,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
       if (i < 0) {
 //        ^ reference local34
         throw new NoSuchElementException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#
+//                ^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#`<init>`().
       }
 
       cursor = i;
@@ -604,8 +595,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
       if (lastRet < 0) {
 //        ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
         throw new IllegalStateException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//                ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`().
       }
       checkForComodification();
 //    ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#checkForComodification().
@@ -621,8 +611,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
 //                                       ^^ definition local36 IndexOutOfBoundsException ex
         throw new ConcurrentModificationException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
       }
     }
 
@@ -655,8 +644,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
 //                                       ^^ definition local39 IndexOutOfBoundsException ex
         throw new ConcurrentModificationException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
       }
     }
   }
@@ -679,19 +667,16 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //        ^^^^^ reference local40
 //                 ^^^ reference local41
         return new SubList(this, start, end);
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#`<init>`().
-//                 ^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#
+//                 ^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#`<init>`().
 //                         ^^^^ reference com/airbnb/epoxy/ModelList#
 //                               ^^^^^ reference local40
 //                                      ^^^ reference local41
       }
       throw new IllegalArgumentException();
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`().
     }
     throw new IndexOutOfBoundsException();
-//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
   }
 
   /**
@@ -795,8 +780,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                        ^^^^ reference java/util/ListIterator#next().
         }
         throw new NoSuchElementException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#
+//                ^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#`<init>`().
       }
 
       public int nextIndex() {
@@ -819,8 +803,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                        ^^^^^^^^ reference java/util/ListIterator#previous().
         }
         throw new NoSuchElementException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#
+//                ^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#`<init>`().
       }
 
       public int previousIndex() {
@@ -913,13 +896,11 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                            ^^^^^^^^ reference java/util/AbstractList#modCount.
         } else {
           throw new IndexOutOfBoundsException();
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
-//                  ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
+//                  ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
         }
       } else {
         throw new ConcurrentModificationException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
       }
     }
 
@@ -961,12 +942,10 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //               ^^^^^^ reference local56
         }
         throw new IndexOutOfBoundsException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
       }
       throw new ConcurrentModificationException();
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
     }
 
     @Override
@@ -1003,8 +982,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //             ^^^^^^ reference local58
       }
       throw new ConcurrentModificationException();
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
     }
 
     @Override
@@ -1028,12 +1006,10 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                                       ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
         }
         throw new IndexOutOfBoundsException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
       }
       throw new ConcurrentModificationException();
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
     }
 
     @NonNull
@@ -1066,8 +1042,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                           ^^^^^^^^ reference local60
 //                                       ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
           return new SubListIterator(fullList.listIterator(location + offset), this, offset, size);
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#`<init>`().
-//                   ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#
+//                   ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#`<init>`().
 //                                   ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
 //                                            ^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#listIterator(+1).
 //                                                         ^^^^^^^^ reference local60
@@ -1077,12 +1052,10 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                                                                                           ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
         }
         throw new IndexOutOfBoundsException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
       }
       throw new ConcurrentModificationException();
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
     }
 
     @Override
@@ -1116,12 +1089,10 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //               ^^^^^^ reference local62
         }
         throw new IndexOutOfBoundsException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
       }
       throw new ConcurrentModificationException();
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
     }
 
     @Override
@@ -1154,8 +1125,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                            ^^^^^^^^ reference java/util/AbstractList#modCount.
         } else {
           throw new ConcurrentModificationException();
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
-//                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
         }
       }
     }
@@ -1184,12 +1154,10 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                                               ^^^^^^ reference local66
         }
         throw new IndexOutOfBoundsException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
       }
       throw new ConcurrentModificationException();
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
     }
 
     @Override
@@ -1204,8 +1172,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //             ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
       }
       throw new ConcurrentModificationException();
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
     }
 
     void sizeChanged(boolean increment) {

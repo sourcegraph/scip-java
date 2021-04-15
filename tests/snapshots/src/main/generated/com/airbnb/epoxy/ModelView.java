@@ -65,6 +65,11 @@ public @interface ModelView {
 
   /**
    * If set to an option besides {@link Size#NONE} Epoxy will create an instance of this view
+//                                      ^^^^ reference com/airbnb/epoxy/ModelView#Size#`<init>`().
+//                                      ^^^^ reference com/airbnb/epoxy/ModelView#Size#`<init>`().
+//                                      ^^^^ reference com/airbnb/epoxy/ModelView#Size#`<init>`().
+//                                      ^^^^ reference com/airbnb/epoxy/ModelView#Size#`<init>`().
+//                                      ^^^^ reference com/airbnb/epoxy/ModelView#Size#`<init>`().
    * programmatically at runtime instead of inflating the view from xml. This is an alternative to
    * using {@link #defaultLayout()}, and is a good option if you just need to specify layout
    * parameters on your view with no other styling.

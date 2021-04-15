@@ -82,8 +82,7 @@ public class DiffResult {
 //                         ^^^^^^^^^ reference java/util/Collections#emptyList().
     }
     return new DiffResult(models, models, null);
-//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#`<init>`().
-//             ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#
+//             ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#`<init>`().
 //                        ^^^^^^ reference local0
 //                                ^^^^^^ reference local0
   }
@@ -98,8 +97,7 @@ public class DiffResult {
 //                                                                  ^^^^^^^^^ definition local1 @NonNull List<? extends EpoxyModel<?>> newModels
     //noinspection unchecked
     return new DiffResult(Collections.EMPTY_LIST, newModels, null);
-//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#`<init>`().
-//             ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#
+//             ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#`<init>`().
 //                        ^^^^^^^^^^^ reference java/util/Collections#
 //                                    ^^^^^^^^^^ reference java/util/Collections#EMPTY_LIST.
 //                                                ^^^^^^^^^ reference local1
@@ -115,8 +113,7 @@ public class DiffResult {
 //                                                               ^^^^^^^^^^^^^^ definition local2 @NonNull List<? extends EpoxyModel<?>> previousModels
     //noinspection unchecked
     return new DiffResult(previousModels, Collections.EMPTY_LIST, null);
-//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#`<init>`().
-//             ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#
+//             ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#`<init>`().
 //                        ^^^^^^^^^^^^^^ reference local2
 //                                        ^^^^^^^^^^^ reference java/util/Collections#
 //                                                    ^^^^^^^^^^ reference java/util/Collections#EMPTY_LIST.
@@ -146,8 +143,7 @@ public class DiffResult {
 //                                 ^^^^^^^^^^^^ definition local5 @NonNull unresolved_type differResult
   ) {
     return new DiffResult(previousModels, newModels, differResult);
-//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#`<init>`().
-//             ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#
+//             ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#`<init>`().
 //                        ^^^^^^^^^^^^^^ reference local3
 //                                        ^^^^^^^^^ reference local4
 //                                                   ^^^^^^^^^^^^ reference local5
@@ -191,8 +187,7 @@ public class DiffResult {
 //                               ^^^^^^^ definition local9 unresolved_type adapter
     dispatchTo(new AdapterListUpdateCallback(adapter));
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#dispatchTo().
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference `<init>`#
-//                 ^^^^^^^^^^^^^^^^^^^^^^^^^ reference _root_/
+//                 ^^^^^^^^^^^^^^^^^^^^^^^^^ reference `<init>`#
 //                                           ^^^^^^^ reference local9
   }
 

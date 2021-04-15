@@ -103,8 +103,7 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
     if (!allowModelBuildRequests) {
 //       ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Typed4EpoxyController#allowModelBuildRequests.
       throw new IllegalStateException(
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 2:47
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
           "You cannot call `requestModelBuild` directly. Call `setData` instead to trigger a "
               + "model refresh with new data.");
     }
@@ -138,8 +137,7 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
     if (!allowModelBuildRequests) {
 //       ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Typed4EpoxyController#allowModelBuildRequests.
       throw new IllegalStateException(
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 2:47
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
           "You cannot call `requestModelBuild` directly. Call `setData` instead to trigger a "
               + "model refresh with new data.");
     }
@@ -156,8 +154,7 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
     if (!isBuildingModels()) {
 //       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#isBuildingModels().
       throw new IllegalStateException(
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1). 2:41
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#
+//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
           "You cannot call `buildModels` directly. Call `setData` instead to trigger a model "
               + "refresh with new data.");
     }

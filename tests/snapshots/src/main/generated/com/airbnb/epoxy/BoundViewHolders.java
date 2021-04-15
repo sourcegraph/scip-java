@@ -31,8 +31,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //              ^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#
 //                              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                               ^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#holders. private final LongSparseArray<EpoxyViewHolder> holders
-//                                                         ^^^^^^^^^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#`<init>`().
-//                                                             ^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#
+//                                                             ^^^^^^^^^^^^^^^ reference androidx/collection/LongSparseArray#`<init>`().
 
   @Nullable
 // ^^^^^^^^ reference androidx/annotation/Nullable#
@@ -85,8 +84,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                 ^^^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#iterator(). @Override public Iterator<EpoxyViewHolder> iterator()
     return new HolderIterator();
-//         ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#HolderIterator#`<init>`().
-//             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#HolderIterator#
+//             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#HolderIterator#`<init>`().
   }
 
   @Nullable
@@ -129,8 +127,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
       if (!hasNext()) {
 //         ^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#HolderIterator#hasNext().
         throw new NoSuchElementException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#`<init>`().
-//                ^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#
+//                ^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#`<init>`().
       }
       return holders.valueAt(position++);
 //           ^^^^^^^ reference com/airbnb/epoxy/BoundViewHolders#holders.
@@ -143,8 +140,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
     public void remove() {
 //              ^^^^^^ definition com/airbnb/epoxy/BoundViewHolders#HolderIterator#remove(). @Override public void remove()
       throw new UnsupportedOperationException();
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/UnsupportedOperationException#`<init>`().
     }
   }
 }
