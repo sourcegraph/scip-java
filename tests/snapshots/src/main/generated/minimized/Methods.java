@@ -35,12 +35,14 @@ public class Methods {
 //         ^^^^^ reference local3
   }
 
-  public static String app(int n, String m) {
+  public static String app(int n, String m) throws RuntimeException, IndexOutOfBoundsException {
 //              ^^^^^^ reference java/lang/String#
-//                     ^^^ definition minimized/Methods#app(). public static String app(int n, String m)
+//                     ^^^ definition minimized/Methods#app(). public static String app(int n, String m) throws RuntimeException, IndexOutOfBoundsException
 //                             ^ definition local4 int n
 //                                ^^^^^^ reference java/lang/String#
 //                                       ^ definition local5 String m
+//                                                 ^^^^^^^^^^^^^^^^ reference java/lang/RuntimeException#
+//                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
     Methods methods = new Methods();
 //  ^^^^^^^ reference minimized/Methods#
 //          ^^^^^^^ definition local6 Methods methods

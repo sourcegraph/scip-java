@@ -178,6 +178,14 @@ public class SignatureFormatter {
                         + " "
                         + symInfo.getDisplayName())
             .collect(Collectors.joining(", ", "(", ")")));
+
+    if (!methodSignature.getThrowsList().isEmpty()) {
+      printKeyword(" throws");
+      s.append(
+          methodSignature.getThrowsList().stream()
+              .map(this::formatType)
+              .collect(Collectors.joining(", ")));
+    }
   }
 
   private void formatValueSignature(ValueSignature valueSignature) {

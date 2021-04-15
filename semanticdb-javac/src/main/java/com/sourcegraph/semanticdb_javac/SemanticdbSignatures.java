@@ -7,6 +7,7 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.*;
 import javax.lang.model.element.Element;
 import javax.lang.model.type.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.UNRESOLVED_TYPE_REF;
 
@@ -72,6 +73,10 @@ public final class SemanticdbSignatures {
     if (returnType != null) {
       builder.setReturnType(returnType);
     }
+
+    List<Semanticdb.Type> thrownTypes =
+        sym.getThrownTypes().stream().map(this::generateType).collect(Collectors.toList());
+    builder.addAllThrows(thrownTypes);
 
     return Signature.newBuilder().setMethodSignature(builder).build();
   }
