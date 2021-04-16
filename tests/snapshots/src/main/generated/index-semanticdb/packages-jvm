@@ -1,0 +1,47 @@
+───────────────
+│ Source code │
+───────────────
+/example/Example.java
+package example;
+public class Example {
+//           ^^^^^^^ definition example/Example# public class Example
+//           ^^^^^^^ definition example/Example#`<init>`(). public Example()
+  public static String run() { return "hello"; }
+//              ^^^^^^ reference java/lang/String#
+//                     ^^^ definition example/Example#run(). public static String run()
+}
+
+
+─────────────────────────────────────────────
+│ LSIF Graph for symbol 'java/lang/String#' │
+─────────────────────────────────────────────
+           ╭──────────╮
+           │project(2)│
+           ╰─────┬────╯
+                 │
+                 v
+  ╭─────────────────────────────╮
+  │document example/Example.java│
+  ╰──────────────┬──────────────╯
+                 │
+                 v
+     ╭───────────────────────╮
+     │range(37) 2:16 'String'│
+     ╰───────┬───────────────╯
+             │             ^
+             │             ╰╮
+             v              │
+      ╭─────────────╮       │
+      │resultSet(30)│       │
+      ╰───────┬─┬───╯       │
+              │ │           │
+              │ ╰───────────┼╮
+              v             ││
+ ╭─────────────────────────╮││
+ │moniker java/lang/String#│││
+ ╰─────┬───────────────────╯││
+       │                    ││
+       v                    │v
+ ╭──────────╮ ╭─────────────┴─────╮
+ │jdk:11(33)│ │referenceResult(35)│
+ ╰──────────╯ ╰───────────────────╯

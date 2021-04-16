@@ -1,8 +1,12 @@
 package com.sourcegraph.lsif_java
+
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
+
+import moped.reporters.Reporter
+import os.CommandResult
 
 object Embedded {
 
@@ -10,20 +14,29 @@ object Embedded {
     copyFile(tmpDir, "semanticdb-plugin.jar")
 
   def agentJar(tmpDir: Path): Path = copyFile(tmpDir, "semanticdb-agent.jar")
+  def coursier(tmpDir: Path): Path = {
+    val result = copyFile(tmpDir, "lsif-java/coursier")
+    result.toFile().setExecutable(true)
+    result
+  }
+
+  private def javacErrorpath(tmp: Path) = tmp.resolve("errorpath.txt")
 
   def customJavac(sourceroot: Path, targetroot: Path, tmp: Path): Path = {
     val javac = tmp.resolve("javac")
     val pluginpath = Embedded.semanticdbJar(tmp)
-    val oldArguments = tmp.resolve("javac_oldarguments")
-    val newArguments = tmp.resolve("javac_newarguments")
-    val launcherArgs = tmp.resolve("javac_launcherarguments")
+    val errorpath = javacErrorpath(tmp)
+    val javacopts = targetroot.resolve("javacopts.txt")
+    Files.createDirectories(targetroot)
+    val newJavacopts = tmp.resolve("javac_newarguments")
     val injectSemanticdbArguments = List[String](
       "java",
+      s"-Dsemanticdb.errorpath=$errorpath",
       s"-Dsemanticdb.pluginpath=$pluginpath",
       s"-Dsemanticdb.sourceroot=$sourceroot",
       s"-Dsemanticdb.targetroot=$targetroot",
-      s"-Dsemanticdb.output=$newArguments",
-      s"-Dsemanticdb.old-output=$oldArguments",
+      s"-Dsemanticdb.output=$$NEW_JAVAC_OPTS",
+      s"-Dsemanticdb.old-output=$javacopts",
       s"-classpath $pluginpath",
       "com.sourcegraph.semanticdb_javac.InjectSemanticdbOptions",
       """"$@""""
@@ -32,7 +45,7 @@ object Embedded {
       s"""#!/usr/bin/env bash
          |set -eu
          |LAUNCHER_ARGS=()
-         |echo $$@ >> $launcherArgs
+         |NEW_JAVAC_OPTS="$newJavacopts-$$RANDOM"
          |for arg in "$$@"; do
          |  if [[ $$arg == -J* ]]; then
          |    LAUNCHER_ARGS+=("$$arg")
@@ -40,9 +53,9 @@ object Embedded {
          |done
          |$injectSemanticdbArguments
          |if [ $${#LAUNCHER_ARGS[@]} -eq 0 ]; then
-         |  javac "@$newArguments"
+         |  javac "@$$NEW_JAVAC_OPTS"
          |else
-         |  javac "@$newArguments" "$${LAUNCHER_ARGS[@]}"
+         |  javac "@$$NEW_JAVAC_OPTS" "$${LAUNCHER_ARGS[@]}"
          |fi
          |""".stripMargin
     Files.write(javac, script.getBytes(StandardCharsets.UTF_8))
@@ -50,9 +63,35 @@ object Embedded {
     javac
   }
 
+  /**
+   * The custom javac wrapper reports errors to a specific file if unexpected
+   * errors happen. The javac wrapper gets invoked by builds tools like
+   * Gradle/Maven, which hide the actual errors from the script because they
+   * assume the standard output is from javac. This file is used a side-channel
+   * to avoid relying on the error reporting from Gradle/Maven.
+   */
+  def reportUnexpectedJavacErrors(
+      reporter: Reporter,
+      tmp: Path
+  ): Option[CommandResult] = {
+    val errorpath = javacErrorpath(tmp)
+    if (Files.isRegularFile(errorpath)) {
+      reporter.error("unexpected javac compile errors")
+      Files
+        .readAllLines(errorpath)
+        .forEach { line =>
+          reporter.error(line)
+        }
+      Some(CommandResult(1, Nil))
+    } else {
+      None
+    }
+  }
+
   private def copyFile(tmpDir: Path, filename: String): Path = {
     val in = this.getClass.getResourceAsStream(s"/$filename")
     val out = tmpDir.resolve(filename)
+    Files.createDirectories(out.getParent())
     try Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING)
     finally in.close()
     out

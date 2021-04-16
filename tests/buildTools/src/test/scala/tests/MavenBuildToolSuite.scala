@@ -21,7 +21,11 @@ class MavenBuildToolSuite extends BaseBuildToolSuite {
         |package com;
         |public class ExampleSuite {}
         |""".stripMargin,
-    2
+    2,
+    expectedPackages =
+      """|maven:junit:junit:4.11
+         |maven:org.hamcrest:hamcrest-core:1.3
+         |""".stripMargin
   )
 
   checkBuild(

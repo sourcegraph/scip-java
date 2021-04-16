@@ -1,5 +1,6 @@
 package com.sourcegraph.semanticdb_javac;
 
+import java.nio.charset.StandardCharsets;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.asm.Advice;
 
@@ -52,6 +53,19 @@ public class SemanticdbAgent {
       if (SOURCEROOT == null) throw new NoSuchElementException("-Dsemanticdb.sourceroot");
       String TARGETROOT = System.getProperty("semanticdb.targetroot");
       if (TARGETROOT == null) throw new NoSuchElementException("-Dsemanticdb.targetroot");
+      String DEBUGPATH = System.getProperty("semanticdb.debugpath");
+      String JAVACOPTS = System.getProperty("semanticdb.javacopts");
+      if (JAVACOPTS != null) {
+        try {
+          Files.write(
+              Paths.get(JAVACOPTS),
+              arguments,
+              StandardCharsets.UTF_8,
+              StandardOpenOption.APPEND,
+              StandardOpenOption.CREATE);
+        } catch (IOException unused) {
+        }
+      }
 
       boolean isProcessorpathUpdated = false;
       String previousOption = "";
@@ -80,12 +94,11 @@ public class SemanticdbAgent {
           String.format(
               "-Xplugin:semanticdb -sourceroot:%s -targetroot:%s", SOURCEROOT, TARGETROOT));
 
-      String debugPath = System.getProperty("semanticdb.debugpath");
-      if (debugPath != null) {
+      if (DEBUGPATH != null) {
         try (PrintStream fos =
             new PrintStream(
                 Files.newOutputStream(
-                    Paths.get(debugPath), StandardOpenOption.APPEND, StandardOpenOption.CREATE))) {
+                    Paths.get(DEBUGPATH), StandardOpenOption.APPEND, StandardOpenOption.CREATE))) {
           fos.println("Java Home: " + System.getProperty("java.home"));
           fos.println("Old Options: " + arguments);
           fos.println("New Options: " + newOptions);

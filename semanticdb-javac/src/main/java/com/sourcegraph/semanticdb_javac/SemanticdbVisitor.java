@@ -74,6 +74,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
   private <T extends JCTree & JCDiagnostic.DiagnosticPosition> void emitSymbolOccurrence(
       Symbol sym, T posTree, Role role, CompilerRange kind) {
+    if (sym == null) return;
     Optional<Semanticdb.SymbolOccurrence> occ = semanticdbOccurrence(sym, posTree, kind, role);
     occ.ifPresent(occurrences::add);
     if (role == Role.DEFINITION) {
@@ -138,6 +139,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   public Void visitClass(ClassTree node, Void unused) {
     if (node instanceof JCTree.JCClassDecl) {
       JCTree.JCClassDecl cls = (JCTree.JCClassDecl) node;
+      if (cls.sym == null) return super.visitClass(node, unused);
       emitSymbolOccurrence(
           cls.sym, cls, Role.DEFINITION, CompilerRange.FROM_POINT_WITH_TEXT_SEARCH);
 
@@ -159,6 +161,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   public Void visitMethod(MethodTree node, Void unused) {
     if (node instanceof JCTree.JCMethodDecl) {
       JCTree.JCMethodDecl meth = (JCTree.JCMethodDecl) node;
+      if (meth.sym == null) return super.visitMethod(node, unused);
       CompilerRange range = CompilerRange.FROM_POINT_TO_SYMBOL_NAME;
       if (meth.sym.name.toString().equals("<init>")) {
         range = CompilerRange.FROM_POINT_WITH_TEXT_SEARCH;
@@ -236,6 +239,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   // =================================================
 
   private Semanticdb.Signature semanticdbSignature(Symbol sym) {
+
     return new SemanticdbSignatures(globals, locals).generateSignature(sym);
   }
 
@@ -245,8 +249,9 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
   private Optional<Semanticdb.Range> semanticdbRange(
       JCDiagnostic.DiagnosticPosition pos, CompilerRange kind, Symbol sym) {
+    if (sym == null) return Optional.empty();
     int start, end;
-    if (kind.isFromPoint() && sym != null && sym.name != null) {
+    if (kind.isFromPoint() && sym.name != null) {
       start = pos.getPreferredPosition();
       if (kind == CompilerRange.FROM_POINT_TO_SYMBOL_NAME_PLUS_ONE) {
         start++;

@@ -8,10 +8,11 @@ import java.util.concurrent.TimeUnit
 
 import scala.meta.inputs.Input
 import scala.meta.internal.io.FileIO
+import scala.meta.io.AbsolutePath
 
 import com.sourcegraph.io.DeleteVisitor
+import com.sourcegraph.lsif_java.Dependencies
 import org.openjdk.jmh.annotations._
-import tests.Dependencies
 import tests.TestCompiler
 
 @State(Scope.Benchmark)
@@ -32,7 +33,7 @@ class CompileBench {
   @Setup()
   def setup(): Unit = {
     tmp = Files.createTempDirectory("benchmarks")
-    deps = Dependencies.resolveDependencies(List(libs(lib)), Nil)
+    deps = Dependencies.resolveDependencies(List(libs(lib)))
     compiler = new TestCompiler(deps.classpathSyntax, List.empty[String], tmp)
   }
 
@@ -71,7 +72,8 @@ object CompileBench {
     deps
       .sources
       .foreach { source =>
-        FileIO.withJarFileSystem(source, create = false, close = true) { root =>
+        val path = AbsolutePath(source)
+        FileIO.withJarFileSystem(path, create = false, close = true) { root =>
           val files =
             FileIO
               .listAllFilesRecursively(root)

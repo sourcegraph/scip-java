@@ -14,16 +14,19 @@ public class ResultSets implements Function<String, ResultIds> {
   private final HashMap<String, ResultIds> locals;
   private final Set<String> exportedSymbols;
   private final Set<String> localDefinitions;
+  private final PackageTable packages;
 
   public ResultSets(
       LsifWriter writer,
       Map<String, ResultIds> globals,
       Set<String> exportedSymbols,
-      Set<String> localDefinitions) {
+      Set<String> localDefinitions,
+      PackageTable packages) {
     this.writer = writer;
     this.globals = globals;
     this.exportedSymbols = exportedSymbols;
     this.localDefinitions = localDefinitions;
+    this.packages = packages;
     locals = new HashMap<>();
   }
 
@@ -42,6 +45,7 @@ public class ResultSets implements Function<String, ResultIds> {
     // Moniker
     int monikerId = writer.emitMonikerVertex(symbol, isExportedSymbol);
     writer.emitMonikerEdge(resultSet, monikerId);
+    packages.writeImportedSymbol(symbol, monikerId);
 
     int definitionId = hasDefinitionResult ? writer.emitDefinitionResult(resultSet) : -1;
 

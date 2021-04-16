@@ -2,9 +2,14 @@ package com.sourcegraph.semanticdb_javac;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SemanticdbOptionBuilder {
   private String previousArg = "";
@@ -12,6 +17,7 @@ public class SemanticdbOptionBuilder {
   private final ArrayList<String> result = new ArrayList<>();
   private boolean isClasspathUpdated = false;
 
+  public static final String ERRORPATH = System.getProperty("semanticdb.errorpath", "");
   private static final String PLUGINPATH = System.getProperty("semanticdb.pluginpath", "");
   private static final String SOURCEROOT = System.getProperty("semanticdb.sourceroot", "");
   private static final String TARGETROOT = System.getProperty("semanticdb.targetroot", "");
@@ -71,8 +77,14 @@ public class SemanticdbOptionBuilder {
     return finalResult;
   }
 
+  public void writeFile(String file, List<String> lines, OpenOption... options) throws IOException {
+    Path path = Paths.get(file);
+    Files.createDirectories(path.getParent());
+    Files.write(path, lines, StandardCharsets.UTF_8, options);
+  }
+
   public void write() throws IOException {
-    Files.write(Paths.get(OUTPUT), finalResult());
-    Files.write(Paths.get(OLD_OUTPUT), oldArgs);
+    writeFile(OUTPUT, finalResult());
+    writeFile(OLD_OUTPUT, oldArgs, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
   }
 }

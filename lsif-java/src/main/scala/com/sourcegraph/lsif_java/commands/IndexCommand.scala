@@ -46,6 +46,9 @@ case class IndexCommand(
     @Description(
       "Whether to remove generated temporary files on exit."
     ) cleanup: Boolean = true,
+    @Description("URL to a PackageHub instance")
+    @Hidden // Hidden because it's not supposed to be used yet by normal users.
+    packagehub: Option[String] = None,
     @Description(
       "Optional. The build command to use to compile all sources. " +
         "Defaults to a build-specific command. For example, the default command for Maven command is 'clean verify -DskipTests'." +
@@ -120,10 +123,9 @@ case class IndexCommand(
             )
           case _ =>
             if (Files.isDirectory(workingDirectory)) {
-              val buildToolNames = allBuildTools.map(_.name).mkString(", ")
               app.error(
                 s"No build tool detected in workspace '$workingDirectory'. " +
-                  s"At the moment, the only supported build tools are: $buildToolNames."
+                  s"At the moment, the only supported build tools are: ${BuildTool.allNames}."
               )
             } else {
               val cause =
@@ -143,16 +145,18 @@ case class IndexCommand(
         val generateSemanticdbResult = tool.generateSemanticdb()
         if (!Files.isDirectory(tool.targetroot)) {
           generateSemanticdbResult.exitCode
+        } else if (app.reporter.hasErrors()) {
+          app.reporter.exitCode()
+        } else if (generateSemanticdbResult.exitCode != 0) {
+          generateSemanticdbResult.exitCode
         } else {
-          val generateLsifResult = IndexSemanticdbCommand(
+          IndexSemanticdbCommand(
+            indexJdk = tool.indexJdk(),
             output = finalOutput,
             targetroot = List(tool.targetroot),
+            packagehub = packagehub,
             app = app
           ).run()
-          if (generateLsifResult == 0 && Files.isRegularFile(finalOutput)) {
-            app.info(finalOutput.toAbsolutePath.toString())
-          }
-          generateSemanticdbResult.exitCode + generateLsifResult
         }
       case many =>
         val names = many.map(_.name).mkString(", ")

@@ -91,6 +91,7 @@ object GradleJavaToolchains {
       } else {
         Nil
       }
+
     GradleJavaToolchains(toolchains, tool, index, tmp)
   }
 }

@@ -23,6 +23,8 @@ message LsifObject {
   string identifier = 18;
   LsifPosition start = 19;
   LsifPosition end = 20;
+  string name = 21;
+  string manager = 22;
 }
 
 message LsifToolInfo {

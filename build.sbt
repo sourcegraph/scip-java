@@ -15,6 +15,7 @@ lazy val V =
     def scala213 = "2.13.4"
     def scala212 = "2.12.12"
     def scalameta = "4.4.8"
+    def requests = "0.6.5"
   }
 
 inThisBuild(
@@ -102,7 +103,7 @@ lazy val plugin = project
     fatjarPackageSettings,
     javaOnlySettings,
     moduleName := "semanticdb-javac",
-    javaToolchainVersion := "1.8",
+    javaToolchainVersion := "8",
     assemblyShadeRules.in(assembly) :=
       Seq(
         ShadeRule
@@ -120,7 +121,7 @@ lazy val lsif = project
   .in(file("lsif-semanticdb"))
   .settings(
     moduleName := "lsif-semanticdb",
-    javaToolchainVersion := "1.8",
+    javaToolchainVersion := "8",
     javaOnlySettings,
     libraryDependencies +=
       "com.google.protobuf" % "protobuf-java-util" % V.protobuf,
@@ -146,6 +147,9 @@ lazy val cli = project
     buildInfoPackage := "com.sourcegraph.lsif_java",
     libraryDependencies ++=
       List(
+        "io.get-coursier" %% "coursier" % V.coursier,
+        "org.scala-lang.modules" %% "scala-xml" % "2.0.0-RC1",
+        "com.lihaoyi" %% "requests" % V.requests,
         "org.scalameta" %% "moped" % V.moped,
         "org.scalameta" %% "ascii-graphs" % "0.1.2"
       ),
@@ -299,7 +303,6 @@ lazy val bench = project
   .in(file("tests/benchmarks"))
   .settings(
     moduleName := "lsif-java-bench",
-    javaToolchainVersion := "1.8",
     fork.in(run) := true,
     skip.in(publish) := true
   )

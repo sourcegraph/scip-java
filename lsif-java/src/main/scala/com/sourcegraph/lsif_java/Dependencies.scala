@@ -1,14 +1,14 @@
-package tests
+package com.sourcegraph.lsif_java
 
 import java.io.File
-import java.nio.file.FileSystems
+import java.nio.file.Path
 
 import scala.concurrent.duration.Duration
 import scala.xml.XML
 
-import scala.meta.io.AbsolutePath
-
+import com.sourcegraph.lsif_java.BuildInfo
 import coursier.Fetch
+import coursier.Repositories
 import coursier.Resolve
 import coursier.cache.Cache
 import coursier.cache.CachePolicy
@@ -18,9 +18,12 @@ import coursier.parse.DependencyParser
 import coursier.util.Task
 
 case class Dependencies(
-    sources: Seq[AbsolutePath],
-    classpath: Seq[AbsolutePath]
+    dependencies: List[Dependency],
+    sourcesResult: Fetch.Result,
+    classpathResult: Fetch.Result
 ) {
+  val sources: Seq[Path] = sourcesResult.files.map(_.toPath())
+  val classpath: Seq[Path] = classpathResult.files.map(_.toPath())
   def classpathSyntax: String = classpath.mkString(File.pathSeparator)
 }
 
@@ -30,34 +33,46 @@ object Dependencies {
     .withCachePolicies(List(CachePolicy.LocalOnly, CachePolicy.Update))
     .withTtl(Duration.Inf)
     .withChecksums(Nil)
-  private val jarPattern = FileSystems.getDefault.getPathMatcher("glob:**.jar")
+  private val defaultExtraRepositories = List[Repository](
+    Repositories.google,
+    Repositories.clojars,
+    Repositories.jitpack,
+    Repositories.centralGcs
+  )
 
   def resolveDependencies(
       dependencies: List[String],
-      repos: List[Repository]
+      transitive: Boolean = true
   ): Dependencies = {
     val deps = dependencies.map(parseDependency)
-    val provided = deps.flatMap(d => resolveProvidedDeps(d, repos))
+    val provided = deps.flatMap(d => resolveProvidedDeps(d))
+    def nonTransitiveDeps = deps.map(_.withTransitive(false))
     val fetch = Fetch[Task](Cache.default)
       .addDependencies(deps: _*)
       .addDependencies(provided: _*)
-      .addRepositories(repos: _*)
+      .addRepositories(defaultExtraRepositories: _*)
 
-    val classpath = fetch.run()
-    val sources = fetch.withClassifiers(Set(Classifier.sources)).run()
+    val classpath = fetch.runResult()
+    val sources = fetch
+      .withDependencies(
+        if (transitive)
+          fetch.dependencies
+        else
+          nonTransitiveDeps
+      )
+      .withClassifiers(Set(Classifier.sources))
+      .runResult()
     Dependencies(
-      sources = sources.map(AbsolutePath(_)),
-      classpath = classpath.map(AbsolutePath(_))
+      dependencies = deps,
+      sourcesResult = sources,
+      classpathResult = classpath
     )
   }
 
-  private def resolveProvidedDeps(
-      dep: Dependency,
-      repos: List[Repository]
-  ): Seq[Dependency] = {
+  def resolveProvidedDeps(dep: Dependency): Seq[Dependency] = {
     val artifacts = Resolve[Task](Cache.default)
       .addDependencies(dep)
-      .addRepositories(repos: _*)
+      .addRepositories(defaultExtraRepositories: _*)
       .run()
       .artifacts()
     for {
@@ -83,10 +98,13 @@ object Dependencies {
     )
   }.toList
 
-  private def parseDependency(lib: String): Dependency = {
-    val dep = DependencyParser
+  def parseDependencyEither(lib: String): Either[String, Dependency] = {
+    DependencyParser
       .dependency(lib, defaultScalaVersion = BuildInfo.scalaVersion)
-    dep match {
+  }
+
+  private def parseDependency(lib: String): Dependency = {
+    parseDependencyEither(lib) match {
       case Left(error) =>
         throw new IllegalArgumentException(error)
       case Right(value) =>
