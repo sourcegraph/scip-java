@@ -1,5 +1,9 @@
 package tests
 
+import munit.IgnoreSuite
+
+// FIXME: disabled because of https://github.com/sourcegraph/lsif-java/issues/164
+@IgnoreSuite
 class GradleBuildToolSuite extends BaseBuildToolSuite {
 
   checkBuild(
