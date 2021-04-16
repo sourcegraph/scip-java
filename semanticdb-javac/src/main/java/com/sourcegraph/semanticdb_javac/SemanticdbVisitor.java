@@ -13,6 +13,7 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Kind;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.util.Elements;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -193,7 +194,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   public Void visitIdentifier(IdentifierTree node, Void unused) {
     if (node instanceof JCTree.JCIdent) {
       JCTree.JCIdent ident = (JCTree.JCIdent) node;
-      if (ident.name.toString().equals("this")) return null;
+      if (ident.name.toString().equals("this") && ident.sym.getKind() != ElementKind.CONSTRUCTOR)
+        return null;
       emitSymbolOccurrence(ident.sym, ident, Role.REFERENCE, CompilerRange.FROM_START_TO_END);
     }
     return super.visitIdentifier(node, unused);

@@ -32,6 +32,7 @@ public abstract class AsyncEpoxyController extends EpoxyController {
   public AsyncEpoxyController() {
 //       ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyController#`<init>`(). public AsyncEpoxyController()
     this(true);
+//  ^^^^ reference com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+1).
   }
 
   /**
@@ -42,6 +43,7 @@ public abstract class AsyncEpoxyController extends EpoxyController {
 //       ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+1). public AsyncEpoxyController(boolean enableAsync)
 //                                    ^^^^^^^^^^^ definition local0 boolean enableAsync
     this(enableAsync, enableAsync);
+//  ^^^^ reference com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+2).
 //       ^^^^^^^^^^^ reference local0
 //                    ^^^^^^^^^^^ reference local0
   }

@@ -85,6 +85,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   public EpoxyItemSpacingDecorator() {
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyItemSpacingDecorator#`<init>`(). public EpoxyItemSpacingDecorator()
     this(0);
+//  ^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#`<init>`(+1).
   }
 
   public EpoxyItemSpacingDecorator(@Px int pxBetweenItems) {

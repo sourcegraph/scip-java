@@ -223,6 +223,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
   public EpoxyController() {
 //       ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#`<init>`(). public EpoxyController()
     this(defaultModelBuildingHandler, defaultDiffingHandler);
+//  ^^^^ reference com/airbnb/epoxy/EpoxyController#`<init>`(+1).
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#defaultModelBuildingHandler.
 //                                    ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#defaultDiffingHandler.
   }

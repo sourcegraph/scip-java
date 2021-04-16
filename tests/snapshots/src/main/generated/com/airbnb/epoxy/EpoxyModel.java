@@ -138,6 +138,7 @@ public abstract class EpoxyModel<T> {
   public EpoxyModel() {
 //       ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#`<init>`(+1). public EpoxyModel()
     this(idCounter--);
+//  ^^^^ reference com/airbnb/epoxy/EpoxyModel#`<init>`().
 //       ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#idCounter.
     hasDefaultId = true;
 //  ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#hasDefaultId.

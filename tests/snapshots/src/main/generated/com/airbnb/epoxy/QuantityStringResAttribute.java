@@ -56,6 +56,7 @@ public class QuantityStringResAttribute {
 //                                      ^^ definition local3 int id
 //                                              ^^^^^^^^ definition local4 int quantity
     this(id, quantity, null);
+//  ^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#`<init>`().
 //       ^^ reference local3
 //           ^^^^^^^^ reference local4
   }

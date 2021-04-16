@@ -947,6 +947,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                                     ^^ reference androidx/annotation/Px#
 //                                            ^^^^^^^^^^^^^ definition local53 @Px int itemSpacingPx
       this(paddingPx, paddingPx, paddingPx, paddingPx, itemSpacingPx, PaddingType.PX);
+//    ^^^^ reference com/airbnb/epoxy/Carousel#Padding#`<init>`(+2).
 //         ^^^^^^^^^ reference local52
 //                    ^^^^^^^^^ reference local52
 //                               ^^^^^^^^^ reference local52
@@ -978,6 +979,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                                                                         ^^ reference androidx/annotation/Px#
 //                                                                                ^^^^^^^^^^^^^ definition local58 @Px int itemSpacingPx
       this(leftPx, topPx, rightPx, bottomPx, itemSpacingPx, PaddingType.PX);
+//    ^^^^ reference com/airbnb/epoxy/Carousel#Padding#`<init>`(+2).
 //         ^^^^^^ reference local54
 //                 ^^^^^ reference local55
 //                        ^^^^^^^ reference local56
