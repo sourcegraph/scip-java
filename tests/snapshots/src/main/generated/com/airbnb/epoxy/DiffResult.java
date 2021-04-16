@@ -168,15 +168,12 @@ public class DiffResult {
 //                                  ^^^^^^^^^^^^ definition local8 @Nullable unresolved_type differResult
   ) {
     this.previousModels = previousModels;
-//  ^^^^ reference com/airbnb/epoxy/DiffResult#
 //       ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#previousModels.
 //                        ^^^^^^^^^^^^^^ reference local6
     this.newModels = newModels;
-//  ^^^^ reference com/airbnb/epoxy/DiffResult#
 //       ^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#newModels.
 //                   ^^^^^^^^^ reference local7
     this.differResult = differResult;
-//  ^^^^ reference com/airbnb/epoxy/DiffResult#
 //       ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#differResult.
 //                      ^^^^^^^^^^^^ reference local8
   }

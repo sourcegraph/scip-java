@@ -93,16 +93,13 @@ class AsyncEpoxyDiffer {
 //                                         ^^^^^^^^^^^^ definition local3 @NonNull unresolved_type diffCallback
   ) {
     this.executor = new HandlerExecutor(handler);
-//  ^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#
 //       ^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#executor.
 //                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/HandlerExecutor#`<init>`().
 //                                      ^^^^^^^ reference local1
     this.resultCallback = resultCallback;
-//  ^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#
 //       ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#resultCallback.
 //                        ^^^^^^^^^^^^^^ reference local2
     this.diffCallback = diffCallback;
-//  ^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#
 //       ^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#diffCallback.
 //                      ^^^^^^^^^^^^ reference local3
   }
@@ -239,7 +236,6 @@ class AsyncEpoxyDiffer {
 //                                                ^^^^^^^^^^^^ definition local9 @Nullable final List<? extends EpoxyModel<?>> previousList
 
     synchronized (this) {
-//                ^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#
       // Incrementing generation means any currently-running diffs are discarded when they finish
       // We synchronize to guarantee list object and generation number are in sync
       runGeneration = generationTracker.incrementAndGetNextScheduled();
@@ -530,15 +526,12 @@ class AsyncEpoxyDiffer {
 //                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                  ^^^^^^^^^^^^ definition local30 unresolved_type diffCallback
       this.oldList = oldList;
-//    ^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#
 //         ^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#oldList.
 //                   ^^^^^^^ reference local28
       this.newList = newList;
-//    ^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#
 //         ^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#newList.
 //                   ^^^^^^^ reference local29
       this.diffCallback = diffCallback;
-//    ^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#
 //         ^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#diffCallback.
 //                        ^^^^^^^^^^^^ reference local30
     }

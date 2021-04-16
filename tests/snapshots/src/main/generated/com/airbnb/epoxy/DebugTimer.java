@@ -23,7 +23,6 @@ class DebugTimer implements Timer {
 //           ^^^^^^ reference java/lang/String#
 //                  ^^^ definition local0 String tag
     this.tag = tag;
-//  ^^^^ reference com/airbnb/epoxy/DebugTimer#
 //       ^^^ reference com/airbnb/epoxy/DebugTimer#tag.
 //             ^^^ reference local0
     reset();
@@ -55,7 +54,6 @@ class DebugTimer implements Timer {
 //              ^^^^^^ reference java/lang/System#
 //                     ^^^^^^^^ reference java/lang/System#nanoTime().
     this.sectionName = sectionName;
-//  ^^^^ reference com/airbnb/epoxy/DebugTimer#
 //       ^^^^^^^^^^^ reference com/airbnb/epoxy/DebugTimer#sectionName.
 //                     ^^^^^^^^^^^ reference local1
   }

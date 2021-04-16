@@ -113,7 +113,6 @@ class ModelState {
     pair.pair = this;
 //  ^^^^ reference com/airbnb/epoxy/ModelState#pair.
 //       ^^^^ reference com/airbnb/epoxy/ModelState#pair.
-//              ^^^^ reference com/airbnb/epoxy/ModelState#
     pair.model = model;
 //  ^^^^ reference com/airbnb/epoxy/ModelState#pair.
 //       ^^^^^ reference com/airbnb/epoxy/ModelState#model.

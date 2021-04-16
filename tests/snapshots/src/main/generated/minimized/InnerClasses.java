@@ -10,7 +10,6 @@ public class InnerClasses {
 //       ^^^^^^^^^^^^ definition minimized/InnerClasses#`<init>`(). public InnerClasses(int exampleField)
 //                        ^^^^^^^^^^^^ definition local0 int exampleField
     this.exampleField = exampleField;
-//  ^^^^ reference minimized/InnerClasses#
 //       ^^^^^^^^^^^^ reference minimized/InnerClasses#exampleField.
 //                      ^^^^^^^^^^^^ reference local0
   }
@@ -56,7 +55,6 @@ public class InnerClasses {
 //         ^^^^^^^^^^ definition minimized/InnerClasses#InnerClass#`<init>`(). public InnerClass(int field)
 //                        ^^^^^ definition local2 int field
       this.field = field;
-//    ^^^^ reference minimized/InnerClasses#InnerClass#
 //         ^^^^^ reference minimized/InnerClasses#InnerClass#field.
 //                 ^^^^^ reference local2
     }

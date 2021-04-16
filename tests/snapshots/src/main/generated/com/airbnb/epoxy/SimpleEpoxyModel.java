@@ -43,7 +43,6 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                         ^^^^^^^^^ reference androidx/annotation/LayoutRes#
 //                                       ^^^^^^^^^ definition local0 @LayoutRes int layoutRes
     this.layoutRes = layoutRes;
-//  ^^^^ reference com/airbnb/epoxy/SimpleEpoxyModel#
 //       ^^^^^^^^^ reference com/airbnb/epoxy/SimpleEpoxyModel#layoutRes.
 //                   ^^^^^^^^^ reference local0
   }
@@ -55,11 +54,9 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                                     ^^^^^^^^^^^^^^^ reference View/OnClickListener#
 //                                                     ^^^^^^^^ definition local1 unresolved_type listener
     this.onClickListener = listener;
-//  ^^^^ reference com/airbnb/epoxy/SimpleEpoxyModel#
 //       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/SimpleEpoxyModel#onClickListener.
 //                         ^^^^^^^^ reference local1
     return this;
-//         ^^^^ reference com/airbnb/epoxy/SimpleEpoxyModel#
   }
 
   public SimpleEpoxyModel span(int span) {
@@ -70,7 +67,6 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //  ^^^^^^^^^ reference com/airbnb/epoxy/SimpleEpoxyModel#spanCount.
 //              ^^^^ reference local2
     return this;
-//         ^^^^ reference com/airbnb/epoxy/SimpleEpoxyModel#
   }
 
   @CallSuper
@@ -140,7 +136,6 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                      ^^^^^^ reference java/lang/Object#
 //                             ^ definition local8 Object o
     if (this == o) {
-//      ^^^^ reference com/airbnb/epoxy/SimpleEpoxyModel#
 //              ^ reference local8
       return true;
     }

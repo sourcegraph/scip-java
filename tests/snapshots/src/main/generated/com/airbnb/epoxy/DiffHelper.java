@@ -74,11 +74,9 @@ class DiffHelper {
 //                            ^^^^^^^ definition local0 BaseEpoxyAdapter adapter
 //                                             ^^^^^^^^^^^^^^^ definition local1 boolean immutableModels
     this.adapter = adapter;
-//  ^^^^ reference com/airbnb/epoxy/DiffHelper#
 //       ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
 //                 ^^^^^^^ reference local0
     this.immutableModels = immutableModels;
-//  ^^^^ reference com/airbnb/epoxy/DiffHelper#
 //       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#immutableModels.
 //                         ^^^^^^^^^^^^^^^ reference local1
     adapter.registerAdapterDataObserver(observer);

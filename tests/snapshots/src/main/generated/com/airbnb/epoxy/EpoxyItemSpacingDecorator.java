@@ -102,7 +102,6 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //                               ^^ reference androidx/annotation/Px#
 //                                      ^^^^^^^^^^^^^^ definition local1 @Px int pxBetweenItems
     this.pxBetweenItems = pxBetweenItems;
-//  ^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#
 //       ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyItemSpacingDecorator#pxBetweenItems.
 //                        ^^^^^^^^^^^^^^ reference local1
   }
