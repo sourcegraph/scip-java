@@ -52,7 +52,9 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           s"-Porg.gradle.java.installations.paths=${toolchains.paths()}",
           s"--no-daemon"
         )
-      buildCommand ++= index.finalBuildCommand(List("clean", "compileTestJava"))
+      buildCommand ++=
+        index
+          .finalBuildCommand(List("--stacktrace", "clean", "compileTestJava"))
 
       val result = index.process(buildCommand.toList: _*)
       printDebugLogs(tmp)
