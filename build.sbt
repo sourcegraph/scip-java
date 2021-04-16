@@ -104,6 +104,7 @@ lazy val plugin = project
     javaOnlySettings,
     moduleName := "semanticdb-javac",
     javaToolchainVersion := "8",
+    javacOptions += "-g",
     assemblyShadeRules.in(assembly) :=
       Seq(
         ShadeRule

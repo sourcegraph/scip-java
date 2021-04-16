@@ -35,6 +35,7 @@ object JavaToolchainPlugin extends AutoPlugin {
       ),
     javacOptions.in(doc) --= List("-target", "1.8"),
     javacOptions.in(doc) --= bootclasspathSettings(javaToolchainVersion.value),
+    javacOptions.in(doc) --= List("-g"),
     javaHome := Some(getJavaHome(javaToolchainVersion.value)),
     javacOptions ++= bootclasspathSettings(javaToolchainVersion.value),
     javaOptions ++= bootclasspathSettings(javaToolchainVersion.value)

@@ -119,7 +119,6 @@ public class Carousel extends EpoxyRecyclerView {
 //               ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#SnapHelperFactory#
 //                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#defaultGlobalSnapHelperFactory. private static SnapHelperFactory defaultGlobalSnapHelperFactory
       new SnapHelperFactory() {
-//    ^^^^^^^^^^^^^^^^^^^^^^^^^ reference local1 7:7
 //        ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/Carousel#SnapHelperFactory#
 
         @Override

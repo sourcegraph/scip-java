@@ -163,7 +163,6 @@ public class InnerClasses {
 //                         ^^^^^^ reference java/lang/String#
 //                                 ^^ definition local7 InnerInterface<String, String> fn
         new InnerInterface<String, String>() {
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local9 5:9
 //          ^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerInterface#
 //                         ^^^^^^ reference java/lang/String#
 //                                 ^^^^^^ reference java/lang/String#

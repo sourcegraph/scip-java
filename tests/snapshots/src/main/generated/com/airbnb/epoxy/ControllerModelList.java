@@ -14,7 +14,6 @@ class ControllerModelList extends ModelList {
   private static final ModelListObserver OBSERVER = new ModelListObserver() {
 //                     ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
 //                                       ^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList#OBSERVER. private static final ModelListObserver OBSERVER
-//                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^ reference local1 12:3
 //                                                      ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
     @Override
 //   ^^^^^^^^ reference java/lang/Override#

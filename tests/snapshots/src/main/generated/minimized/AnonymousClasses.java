@@ -20,7 +20,6 @@ public class AnonymousClasses {
 //                    ^^^^^^^ reference java/lang/Integer#
 //                             ^^ definition local1 Function<Integer, Integer> fn
         new Function<Integer, Integer>() {
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local3 5:9
 //          ^^^^^^^^ reference java/util/function/Function#
 //                   ^^^^^^^ reference java/lang/Integer#
 //                            ^^^^^^^ reference java/lang/Integer#

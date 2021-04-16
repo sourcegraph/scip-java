@@ -698,7 +698,6 @@ public abstract class EpoxyModel<T> {
       controller.addAfterInterceptorCallback(new ModelInterceptorCallback() {
 //    ^^^^^^^^^^ reference local36
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#addAfterInterceptorCallback().
-//                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local38 11:7
 //                                               ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#
         @Override
 //       ^^^^^^^^ reference java/lang/Override#

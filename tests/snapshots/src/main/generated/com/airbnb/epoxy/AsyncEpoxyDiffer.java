@@ -312,7 +312,6 @@ class AsyncEpoxyDiffer {
     executor.execute(new Runnable() {
 //  ^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#executor.
 //           ^^^^^^^ reference java/util/concurrent/Executor#execute().
-//                   ^^^^^^^^^^^^^^^^ reference local13 6:5
 //                       ^^^^^^^^ reference java/lang/Runnable#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
@@ -359,7 +358,6 @@ class AsyncEpoxyDiffer {
 //  ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#
 //                     ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/MainThreadExecutor#ASYNC_INSTANCE.
 //                                    ^^^^^^^ reference com/airbnb/epoxy/HandlerExecutor#execute().
-//                                            ^^^^^^^^^^^^^^^^ reference local20 8:5
 //                                                ^^^^^^^^ reference java/lang/Runnable#
       @Override
 //     ^^^^^^^^ reference java/lang/Override#
