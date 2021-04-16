@@ -17,7 +17,7 @@ public class Methods {
     return value + "1";
   }
 
-  public static String app(int n, String m) {
+  public static String app(int n, String m) throws RuntimeException, IndexOutOfBoundsException {
     Methods methods = new Methods();
     int a = staticOverload(n);
     String b = staticOverload(m);
