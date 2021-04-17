@@ -156,17 +156,18 @@ of Java versions.
 Please open an issue if your build tool is not listed in the table below. Feel
 free to subscribe to the tracking issues to receive updates on your build tool.
 
-| Build tool | Support | Tracking issue                                                                   |
-| ---------- | ------- | -------------------------------------------------------------------------------- |
-| Gradle     | ✅      |                                                                                  |
-| Maven      | ✅      |                                                                                  |
-| Bazel      | ❌      | [sourcegraph/lsif-java#88](https://github.com/sourcegraph/lsif-java/issues/88)   |
-| Buck       | ❌      | [sourcegraph/lsif-java#99](https://github.com/sourcegraph/lsif-java/issues/99)   |
-| sbt        | ❌      | [sourcegraph/lsif-java#110](https://github.com/sourcegraph/lsif-java/issues/110) |
+| Build tool     | Single repo navigation | Cross-repo navigation | Tracking issue                                                                   |
+| -------------- | ---------------------- | --------------------- | -------------------------------------------------------------------------------- |
+| Maven          | ✅                     | ✅                    |                                                                                  |
+| Gradle v4.0+   | ✅                     | ✅                    |                                                                                  |
+| Gradle v2.2.1+ | ✅                     | ❌                    | [sourcegraph/lsif-java#167](https://github.com/sourcegraph/lsif-java/issues/167) |
+| Bazel          | ❌                     | ❌                    | [sourcegraph/lsif-java#88](https://github.com/sourcegraph/lsif-java/issues/88)   |
+| Buck           | ❌                     | ❌                    | [sourcegraph/lsif-java#99](https://github.com/sourcegraph/lsif-java/issues/99)   |
+| sbt            | ❌                     | ❌                    | [sourcegraph/lsif-java#110](https://github.com/sourcegraph/lsif-java/issues/110) |
 
 **✅**: automatic indexing is fully supported. Please report a bug if the
 `lsif-java index` command does not work on your codebase.
 
-**❌**: automatic inference is not supported but (!) you may still be able to
-use `lsif-java` by configuring it manually using the instructions
+**❌**: automatic indexing is not supported but (!) you may still be able to use
+`lsif-java` by configuring it manually using the instructions
 [here](manual-configuration.md).

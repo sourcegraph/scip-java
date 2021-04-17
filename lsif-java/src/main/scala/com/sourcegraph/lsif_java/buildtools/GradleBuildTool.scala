@@ -37,31 +37,49 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
       else
         "gradle"
 
-    TemporaryFiles.withDirectory(index.cleanup) { tmp =>
+    TemporaryFiles.withDirectory(index) { tmp =>
       val toolchains = GradleJavaToolchains
         .fromWorkspace(this, index, gradleCommand, tmp)
-      val script = initScript(toolchains, tmp).toString
-
-      val buildCommand = ListBuffer.empty[String]
-      buildCommand ++=
-        List(
-          gradleCommand,
-          "--init-script",
-          script,
-          "-Porg.gradle.java.installations.auto-detect=false",
-          "-Porg.gradle.java.installations.auto-download=false",
-          s"-Porg.gradle.java.installations.paths=${toolchains.paths()}",
-          s"--no-daemon"
-        )
-      buildCommand ++= index.finalBuildCommand(List("clean", "compileTestJava"))
-      buildCommand += lsifJavaDependencies
-
-      val result = index.process(buildCommand.toList: _*)
-      printDebugLogs(tmp)
-      Embedded
-        .reportUnexpectedJavacErrors(index.app.reporter, tmp)
-        .getOrElse(result)
+      toolchains.gradleVersion match {
+        case Some(gradleVersion)
+            if gradleVersion.startsWith("6.7") &&
+              toolchains.toolchains.nonEmpty =>
+          index
+            .app
+            .error(
+              "lsif-java does not support Gradle 6.7 when used together with Java toolchains. " +
+                "To fix this problem, upgrade to Gradle version 6.8 or newer and try again."
+            )
+          CommandResult(1, Nil)
+        case _ =>
+          runCompileCommand(toolchains)
+      }
     }
+  }
+
+  private def runCompileCommand(
+      toolchains: GradleJavaToolchains
+  ): CommandResult = {
+    val script = initScript(toolchains, toolchains.tmp).toString
+    val buildCommand = ListBuffer.empty[String]
+    buildCommand += toolchains.gradleCommand
+    buildCommand += s"--no-daemon"
+    buildCommand += "--init-script"
+    buildCommand += script
+    if (toolchains.toolchains.nonEmpty) {
+      buildCommand += "-Porg.gradle.java.installations.auto-detect=false"
+      buildCommand += "-Porg.gradle.java.installations.auto-download=false"
+      buildCommand +=
+        s"-Porg.gradle.java.installations.paths=${toolchains.paths()}"
+    }
+    buildCommand ++= index.finalBuildCommand(List("clean", "compileTestJava"))
+    buildCommand += lsifJavaDependencies
+
+    val result = index.process(buildCommand.toList: _*)
+    printDebugLogs(toolchains.tmp)
+    Embedded
+      .reportUnexpectedJavacErrors(index.app.reporter, toolchains.tmp)
+      .getOrElse(result)
   }
 
   private def lsifJavaDependencies = "lsifJavaDependencies"

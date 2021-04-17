@@ -23,11 +23,20 @@ object Embedded {
   private def javacErrorpath(tmp: Path) = tmp.resolve("errorpath.txt")
 
   def customJavac(sourceroot: Path, targetroot: Path, tmp: Path): Path = {
-    val javac = tmp.resolve("javac")
+    val bin = tmp.resolve("bin")
+    val javac = bin.resolve("javac")
+    val java = bin.resolve("java")
     val pluginpath = Embedded.semanticdbJar(tmp)
     val errorpath = javacErrorpath(tmp)
     val javacopts = targetroot.resolve("javacopts.txt")
     Files.createDirectories(targetroot)
+    Files.createDirectories(bin)
+    Files.write(
+      java,
+      """#!/usr/bin/env bash
+        |java "$@"
+        |""".stripMargin.getBytes(StandardCharsets.UTF_8)
+    )
     val newJavacopts = tmp.resolve("javac_newarguments")
     val injectSemanticdbArguments = List[String](
       "java",
@@ -60,6 +69,7 @@ object Embedded {
          |""".stripMargin
     Files.write(javac, script.getBytes(StandardCharsets.UTF_8))
     javac.toFile.setExecutable(true)
+    java.toFile.setExecutable(true)
     javac
   }
 

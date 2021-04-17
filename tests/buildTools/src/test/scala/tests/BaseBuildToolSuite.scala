@@ -1,6 +1,7 @@
 package tests
 
 import java.nio.file.FileSystems
+import java.nio.file.Files
 import java.nio.file.Path
 
 import scala.meta.internal.io.FileIO
@@ -12,6 +13,7 @@ import moped.testkit.DeleteVisitor
 import moped.testkit.FileLayout
 import moped.testkit.MopedSuite
 import munit.TestOptions
+import os.Shellable
 
 abstract class BaseBuildToolSuite extends MopedSuite(LsifJava.app) {
   override def environmentVariables: Map[String, String] = sys.env
@@ -36,23 +38,40 @@ abstract class BaseBuildToolSuite extends MopedSuite(LsifJava.app) {
       expectedSemanticdbFiles: Int = 0,
       extraArguments: List[String] = Nil,
       expectedError: String = "",
-      expectedPackages: String = ""
+      expectedPackages: String = "",
+      initCommand: => List[String] = Nil
   ): Unit = {
     test(options) {
+      if (initCommand.nonEmpty) {
+        os.proc(Shellable(initCommand)).call(os.Path(workingDirectory))
+      }
       FileLayout.fromString(original, root = workingDirectory)
       val targetroot = workingDirectory.resolve("targetroot")
       val arguments =
-        List("index", "--targetroot", targetroot.toString) ++ extraArguments
+        List[String](
+          "index",
+          "--temporary-directory",
+          Files.createDirectories(cacheDirectory).toString,
+          "--targetroot",
+          targetroot.toString
+        ) ++ extraArguments
       val exit = app().run(arguments)
+      if (extraArguments.contains("--verbose")) {
+        println(app.capturedOutput)
+      }
       if (expectedError.nonEmpty) {
         assert(clue(exit) != 0, clues(app.capturedOutput))
         assertNoDiff(app.capturedOutput, expectedError)
       } else {
         assertEquals(exit, 0, clues(app.capturedOutput))
       }
-      val semanticdbFiles = FileIO
-        .listAllFilesRecursively(AbsolutePath(targetroot))
-        .filter(p => semanticdbPattern.matches(p.toNIO))
+      val semanticdbFiles =
+        if (!Files.isDirectory(targetroot))
+          Nil
+        else
+          FileIO
+            .listAllFilesRecursively(AbsolutePath(targetroot))
+            .filter(p => semanticdbPattern.matches(p.toNIO))
       if (semanticdbFiles.length != expectedSemanticdbFiles) {
         fail(
           s"Expected $expectedSemanticdbFiles SemanticDB file(s) to be generated.",

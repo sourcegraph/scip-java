@@ -17,7 +17,7 @@ class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
     Files.isRegularFile(index.workingDirectory.resolve("pom.xml"))
 
   override def generateSemanticdb(): CommandResult = {
-    TemporaryFiles.withDirectory(index.cleanup) { tmp =>
+    TemporaryFiles.withDirectory(index) { tmp =>
       val mvnw = index.workingDirectory.resolve("mvnw")
       val mavenScript =
         if (Files.isRegularFile(mvnw))

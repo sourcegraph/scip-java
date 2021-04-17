@@ -13,6 +13,8 @@ case class GradleJavaToolchains(
     toolchains: List[GradleJavaCompiler],
     tool: GradleBuildTool,
     index: IndexCommand,
+    gradleVersion: Option[String],
+    gradleCommand: String,
     tmp: Path
 ) {
 
@@ -53,9 +55,20 @@ object GradleJavaToolchains {
   ): GradleJavaToolchains = {
     val scriptPath = tmp.resolve("java-toolchains.gradle")
     val toolchainsPath = tmp.resolve("java-toolchains.txt")
+    val gradleVersionPath = tmp.resolve("gradle-version.txt")
     val taskName = "lsifDetectJavaToolchains"
     val script =
-      s"""|allprojects {
+      s"""|
+          |try {
+          |  java.nio.file.Files.write(
+          |    java.nio.file.Paths.get('$gradleVersionPath'),
+          |    [gradle.gradleVersion],
+          |    java.nio.file.StandardOpenOption.TRUNCATE_EXISTING,
+          |    java.nio.file.StandardOpenOption.CREATE)
+          |} catch (Exception e) {
+          |  // Ignore errors.
+          |}
+          |allprojects {
           |  task $taskName {
           |    def out = java.nio.file.Paths.get('$toolchainsPath')
           |    doLast {
@@ -92,6 +105,20 @@ object GradleJavaToolchains {
         Nil
       }
 
-    GradleJavaToolchains(toolchains, tool, index, tmp)
+    val gradleVersion =
+      if (Files.isRegularFile(gradleVersionPath)) {
+        Some(new String(Files.readAllBytes(gradleVersionPath)).trim)
+      } else {
+        None
+      }
+
+    GradleJavaToolchains(
+      toolchains,
+      tool,
+      index,
+      gradleVersion = gradleVersion,
+      gradleCommand = gradleCommand,
+      tmp = tmp
+    )
   }
 }

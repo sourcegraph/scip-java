@@ -49,6 +49,8 @@ case class IndexCommand(
     @Description("URL to a PackageHub instance")
     @Hidden // Hidden because it's not supposed to be used yet by normal users.
     packagehub: Option[String] = None,
+    @Hidden // Hidden because it's only used for testing purposes
+    temporaryDirectory: Option[Path] = None,
     @Description(
       "Optional. The build command to use to compile all sources. " +
         "Defaults to a build-specific command. For example, the default command for Maven command is 'clean verify -DskipTests'." +
