@@ -144,6 +144,8 @@ public class LsifSemanticdb {
           String overriddenSymbol = symbolInformation.getOverriddenSymbols(i);
           ResultIds overriddenIds = results.getOrInsertResultSet(overriddenSymbol);
           overriddenReferenceResultIds[i] = overriddenIds.referenceResult;
+          writer.emitReferenceResultsItemEdge(
+              overriddenIds.referenceResult, new int[] {rangeId}, doc.id);
         }
         writer.emitReferenceResultsItemEdge(
             ids.referenceResult, overriddenReferenceResultIds, doc.id);
