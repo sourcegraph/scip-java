@@ -255,6 +255,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
   private Optional<Semanticdb.Range> semanticdbRange(
       JCDiagnostic.DiagnosticPosition pos, CompilerRange kind, Symbol sym) {
+    LineMap lineMap = event.getCompilationUnit().getLineMap();
     if (sym == null) return Optional.empty();
     int start, end;
     if (kind.isFromPoint() && sym.name != null) {
@@ -269,10 +270,17 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     }
 
     if (kind.isFromTextSearch() && sym.name.length() > 0) {
-      return RangeFinder.findRange(
-          getCurrentPath(), trees, getCurrentPath().getCompilationUnit(), sym, start, this.source);
+      Optional<Semanticdb.Range> range =
+          RangeFinder.findRange(
+              getCurrentPath(),
+              trees,
+              getCurrentPath().getCompilationUnit(),
+              sym,
+              start,
+              this.source);
+      if (range.isPresent()) return Optional.of(correctForTabs(range.get(), lineMap, start));
+      else return range;
     } else if (start != Position.NOPOS && end != Position.NOPOS && end > start) {
-      LineMap lineMap = event.getCompilationUnit().getLineMap();
       Semanticdb.Range range =
           Semanticdb.Range.newBuilder()
               .setStartLine((int) lineMap.getLineNumber(start) - 1)
@@ -280,10 +288,35 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
               .setEndLine((int) lineMap.getLineNumber(end) - 1)
               .setEndCharacter((int) lineMap.getColumnNumber(end) - 1)
               .build();
+
+      range = correctForTabs(range, lineMap, start);
+
       return Optional.of(range);
-    } else {
-      return Optional.empty();
     }
+
+    return Optional.empty();
+  }
+
+  private Semanticdb.Range correctForTabs(Semanticdb.Range range, LineMap lineMap, int start) {
+    int startLinePos = (int) lineMap.getPosition(lineMap.getLineNumber(start), 0);
+
+    // javac replaces every tab with 8 spaces in the linemap. As this is potentially inconsistent
+    // with the source file itself, we adjust for that here if the line is actually indented with
+    // tabs.
+    // As for every tab there are 8 spaces, we remove 7 spaces for every tab to get the correct
+    // char offset (note: different to _column_ offset your editor shows)
+    if (this.source.charAt(startLinePos) == '\t') {
+      int count = 1;
+      while (this.source.charAt(++startLinePos) == '\t') count++;
+      range =
+          range
+              .toBuilder()
+              .setStartCharacter(range.getStartCharacter() - (count * 7))
+              .setEndCharacter(range.getEndCharacter() - (count * 7))
+              .build();
+    }
+
+    return range;
   }
 
   private Optional<Semanticdb.SymbolOccurrence> semanticdbOccurrence(

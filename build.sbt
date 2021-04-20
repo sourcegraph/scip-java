@@ -230,16 +230,19 @@ lazy val minimized = project
   .in(file("tests/minimized/.j11"))
   .settings(minimizedSettings)
   .dependsOn(agent, plugin)
+  .disablePlugins(JavaFormatterPlugin)
 
 lazy val minimized8 = project
   .in(file("tests/minimized/.j8"))
   .settings(minimizedSettings, javaToolchainVersion := "8")
   .dependsOn(agent, plugin)
+  .disablePlugins(JavaFormatterPlugin)
 
 lazy val minimized15 = project
   .in(file("tests/minimized/.j15"))
   .settings(minimizedSettings, javaToolchainVersion := "15")
   .dependsOn(agent, plugin)
+  .disablePlugins(JavaFormatterPlugin)
 
 lazy val minimizedScala = project
   .in(file("tests/minimized-scala"))
