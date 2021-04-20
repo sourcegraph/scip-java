@@ -150,4 +150,55 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
     1,
     extraArguments = List("--", "compileJava")
   )
+
+  checkBuild(
+    "playframework",
+    """|/build.gradle
+       |plugins {
+       |  id 'org.gradle.playframework' version '0.11'
+       |  id 'idea'
+       |}
+       |
+       |play {
+       |  platform {
+       |    playVersion = '2.6.7'
+       |    scalaVersion = '2.12'
+       |    javaVersion = JavaVersion.VERSION_1_8
+       |  }
+       |  injectedRoutesGenerator = true
+       |}
+       |dependencies {
+       |  implementation "com.typesafe.play:play-guice_2.12:2.6.7"
+       |}
+       |
+       |repositories {
+       |  mavenCentral()
+       |  maven {
+       |    name "lightbend-maven-releases"
+       |    url "https://repo.lightbend.com/lightbend/maven-release"
+       |  }
+       |  ivy {
+       |    name "lightbend-ivy-release"
+       |    url "https://repo.lightbend.com/lightbend/ivy-releases"
+       |    layout "ivy"
+       |  }
+       |}
+       |/app/controllers/HomeController.java
+       |package controllers;
+       |import play.mvc.*;
+       |import views.html.*;
+       |public class HomeController extends Controller {
+       |    public Result index() {
+       |        return ok(index.render("Your new application is ready."));
+       |    }
+       |}
+       |/app/views/index.scala.html
+       |@(message: String)
+       |<h1>@message</h1>
+       |/conf/routes
+       |GET / controllers.HomeController.index
+       |""".stripMargin,
+    2, // Two files because `conf/routes` generates a Java file.
+    initCommand = gradleVersion("6.8")
+  )
 }

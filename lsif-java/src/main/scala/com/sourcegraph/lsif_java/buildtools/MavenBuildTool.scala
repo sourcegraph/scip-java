@@ -53,7 +53,7 @@ class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
           )
         )
 
-      val exit = index.process(buildCommand.toList: _*)
+      val exit = index.process(buildCommand)
       Embedded
         .reportUnexpectedJavacErrors(index.app.reporter, tmp)
         .getOrElse(exit)

@@ -9,6 +9,10 @@ package com.sourcegraph.lsif_semanticdb;
 public abstract class LsifSemanticdbReporter {
   public void error(Throwable e) {}
 
+  public void error(String message) {
+    error(new RuntimeException(message));
+  }
+
   public void startProcessing(int taskSize) {}
 
   public void processedOneItem() {}

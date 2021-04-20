@@ -61,15 +61,19 @@ case class IndexCommand(
     app: Application = Application.default
 ) extends Command {
 
-  def process(shellable: String*): CommandResult = {
-    app.info(shellable.mkString(" "))
+  def process(
+      shellable: Shellable,
+      env: Map[String, String] = Map.empty
+  ): CommandResult = {
+    app.info(shellable.value.mkString(" "))
     app
-      .process(Shellable(shellable))
+      .process(shellable)
       .call(
         check = false,
         stdout = Inherit,
         stderr = Inherit,
-        cwd = workingDirectory
+        cwd = workingDirectory,
+        env = env
       )
   }
 
