@@ -92,7 +92,9 @@ object GradleJavaToolchains {
           |}
           |""".stripMargin
     Files.write(scriptPath, script.getBytes(StandardCharsets.UTF_8))
-    index.process(gradleCommand, "--init-script", scriptPath.toString, taskName)
+    index.process(
+      List(gradleCommand, "--init-script", scriptPath.toString, taskName)
+    )
     val toolchains: List[GradleJavaCompiler] =
       if (Files.isRegularFile(toolchainsPath)) {
         Files

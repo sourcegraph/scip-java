@@ -7,7 +7,7 @@ import scala.jdk.CollectionConverters._
 import munit.FunSuite
 import munit.TestOptions
 
-class GradleOptionsBuilderSuite extends FunSuite {
+class GradleJavaCompilerArgumentsBuilderSuite extends FunSuite {
   val targetroot = System.getProperty("semanticdb.targetroot")
   val sourceroot = System.getProperty("semanticdb.sourceroot")
   val pluginpath = System.getProperty("semanticdb.pluginpath")
@@ -19,7 +19,8 @@ class GradleOptionsBuilderSuite extends FunSuite {
       expected: List[String]
   ): Unit = {
     test(options) {
-      val obtained = new GradleOptionsBuilder(original).build().asScala.toList
+      val obtained =
+        new GradleJavaCompilerArgumentsBuilder(original).build().asScala.toList
       assertEquals(obtained, expected)
     }
   }

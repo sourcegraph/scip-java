@@ -5,10 +5,12 @@ import static net.bytebuddy.matcher.ElementMatchers.named;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.lang.instrument.Instrumentation;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -21,18 +23,77 @@ import net.bytebuddy.asm.Advice;
 public class SemanticdbAgent {
 
   public static void premain(String agentArgs, Instrumentation inst) {
+    // NOTE(olafur): Uncoment below if you want see all the loaded classes.
+    //    PrintStream logger = newLogger();
+    //    inst.addTransformer(
+    //        new ClassFileTransformer() {
+    //          @Override
+    //          public byte[] transform(
+    //              ClassLoader loader,
+    //              String className,
+    //              Class<?> classBeingRedefined,
+    //              ProtectionDomain protectionDomain,
+    //              byte[] classfileBuffer) {
+    //            logger.println(className);
+    //            return classfileBuffer;
+    //          }
+    //        });
+    new AgentBuilder.Default()
+        .disableClassFormatChanges()
+        .type(
+            named("org.gradle.api.internal.tasks.compile.DefaultJvmLanguageCompileSpec")
+                .or(named("tests.GradleDefaultJvmLanguageCompileSpec")))
+        .transform(
+            new AgentBuilder.Transformer.ForAdvice()
+                .advice(
+                    named("getCompileClasspath"),
+                    DefaultJvmLanguageCompileSpecAdvice.class.getName()))
+        .installOn(inst);
     new AgentBuilder.Default()
         .type(
             named("org.gradle.api.internal.tasks.compile.JavaCompilerArgumentsBuilder")
-                .or(named("tests.GradleOptionsBuilder")))
+                .or(named("tests.GradleJavaCompilerArgumentsBuilder")))
         .transform(
             new AgentBuilder.Transformer.ForAdvice()
-                .advice(named("build"), GradleAdvice.class.getName()))
+                .advice(named("build"), JavaCompilerArgumentsBuilderAdvice.class.getName()))
         .installOn(inst);
   }
 
+  private static PrintStream newLogger() {
+    Path path = Paths.get(System.getProperty("user.home"), ".lsif-java", "logs.txt");
+    try {
+      Files.createDirectories(path.getParent());
+      OutputStream fos =
+          Files.newOutputStream(
+              path, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+      return new PrintStream(fos);
+    } catch (IOException e) {
+      return new PrintStream(
+          new OutputStream() {
+            @Override
+            public void write(int b) {}
+          });
+    }
+  }
+
   @SuppressWarnings("all")
-  public static class GradleAdvice {
+  public static class DefaultJvmLanguageCompileSpecAdvice {
+    @Advice.OnMethodExit
+    public static void getClasspath(
+        @Advice.Return(readOnly = false, typing = DYNAMIC) List<File> classpath) {
+      String PLUGINPATH = System.getProperty("semanticdb.pluginpath");
+      if (PLUGINPATH == null) throw new NoSuchElementException("-Dsemanticdb.pluginpath");
+      File semanticdbJar = new File(PLUGINPATH);
+      if (!classpath.contains(semanticdbJar)) {
+        List<File> newClasspath = new ArrayList<>(classpath);
+        newClasspath.add(semanticdbJar);
+        classpath = newClasspath;
+      }
+    }
+  }
+
+  @SuppressWarnings("all")
+  public static class JavaCompilerArgumentsBuilderAdvice {
 
     /**
      * The bytecode of this method gets injected at the end of the following method in Gradle:

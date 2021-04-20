@@ -75,7 +75,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     buildCommand ++= index.finalBuildCommand(List("clean", "compileTestJava"))
     buildCommand += lsifJavaDependencies
 
-    val result = index.process(buildCommand.toList: _*)
+    val result = index.process(buildCommand)
     printDebugLogs(toolchains.tmp)
     Embedded
       .reportUnexpectedJavacErrors(index.app.reporter, toolchains.tmp)
@@ -103,6 +103,9 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
         case None =>
           ""
       }
+
+    val agentpath = Embedded.agentJar(tmp)
+    val pluginpath = Embedded.semanticdbJar(tmp)
     val dependenciesPath = targetroot.resolve("dependencies.txt")
     Files.deleteIfExists(dependenciesPath)
     val script =
@@ -111,16 +114,36 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |    boolean isJavaEnabled = project.plugins.any {
           |       it.getClass().getName().endsWith("org.gradle.api.plugins.JavaPlugin")
           |    }
-          |    if (!isJavaEnabled) return
-          |    tasks.withType(JavaCompile) {
-          |      options.fork = true
-          |      options.incremental = false
-          |      $executable
+          |    boolean isScalaEnabled = project.plugins.any {
+          |       it.getClass().getName().endsWith("org.gradle.api.plugins.scala.ScalaPlugin")
+          |    }
+          |    if (isJavaEnabled) {
+          |      tasks.withType(JavaCompile) {
+          |        options.fork = true
+          |        options.incremental = false
+          |        $executable
+          |      }
+          |    }
+          |    if (isScalaEnabled) {
+          |      // The Scala plugin runs Zinc, an incremental compiler, in a separate daemon process.
+          |      // Zinc invokes the Java compiler directly to compile mixed Java/Scala projects
+          |      // instead of respecting the `JavaCompile` fork options from the Gradle Java plugin.
+          |      // By enabling the SemanticDB Java agent on the Zinc daemon process, we manage
+          |      // to configure Zinc to use the semanticdb-javac compiler plugin for Java compilation.
+          |      tasks.withType(ScalaCompile) {
+          |        scalaCompileOptions.forkOptions.with {
+          |          jvmArgs << '-javaagent:$agentpath'
+          |          jvmArgs << '-Dsemanticdb.pluginpath=$pluginpath'
+          |          jvmArgs << '-Dsemanticdb.sourceroot=$sourceroot'
+          |          jvmArgs << '-Dsemanticdb.targetroot=$targetroot'
+          |        }
+          |      }
           |    }
           |  }
           |  task $lsifJavaDependencies {
           |    def depsOut = java.nio.file.Paths.get('$dependenciesPath')
           |    doLast {
+          |      java.nio.file.Files.createDirectories(depsOut.getParent())
           |      tasks.withType(JavaCompile) {
           |        try {
           |          configurations.each { config ->

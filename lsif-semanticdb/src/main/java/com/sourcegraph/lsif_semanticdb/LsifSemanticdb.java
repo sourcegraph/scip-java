@@ -37,12 +37,21 @@ public class LsifSemanticdb {
 
   private void run() throws IOException {
     PackageTable packages = new PackageTable(options, writer);
-    writer.emitMetaData();
-    int projectId = writer.emitProject(options.language);
-
     List<Path> files = SemanticdbWalker.findSemanticdbFiles(options);
     if (options.reporter.hasErrors()) return;
+    if (files.isEmpty()) {
+      options.reporter.error(
+          "No SemanticDB files found. "
+              + "This typically means that `lsif-java` is unable to automatically "
+              + "index this codebase. If you are using Gradle or Maven, please report an issue to "
+              + "https://github.com/sourcegraph/lsif-java and include steps to reproduce. "
+              + "If you are using a different build tool, make sure that you have followed all "
+              + "of the steps from https://sourcegraph.github.io/lsif-java/docs/manual-configuration.html");
+      return;
+    }
     options.reporter.startProcessing(files.size());
+    writer.emitMetaData();
+    int projectId = writer.emitProject(options.language);
 
     Set<String> isExportedSymbol = exportSymbols(files);
     List<Integer> documentIds =
