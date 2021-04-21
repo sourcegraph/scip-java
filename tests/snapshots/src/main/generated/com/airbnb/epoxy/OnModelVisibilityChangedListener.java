@@ -33,7 +33,7 @@ public interface OnModelVisibilityChangedListener<T extends EpoxyModel<V>, V> {
    * @param widthVisible         The visible width in pixel
    */
   void onVisibilityChanged(T model, V view,
-//     ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelVisibilityChangedListener#onVisibilityChanged(). public void onVisibilityChanged(T model, V view, float percentVisibleHeight, float percentVisibleWidth, int heightVisible, int widthVisible)
+//     ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelVisibilityChangedListener#onVisibilityChanged(). public abstract void onVisibilityChanged(T model, V view, float percentVisibleHeight, float percentVisibleWidth, int heightVisible, int widthVisible)
 //                         ^ reference com/airbnb/epoxy/OnModelVisibilityChangedListener#[T]
 //                           ^^^^^ definition local0 T model
 //                                  ^ reference com/airbnb/epoxy/OnModelVisibilityChangedListener#[V]

@@ -8,7 +8,7 @@ public interface StyleBuilderCallback<T> {
 //               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StyleBuilderCallback# public interface StyleBuilderCallback<T>
 //                                    ^ definition com/airbnb/epoxy/StyleBuilderCallback#[T] T
   void buildStyle(T builder);
-//     ^^^^^^^^^^ definition com/airbnb/epoxy/StyleBuilderCallback#buildStyle(). public void buildStyle(T builder)
+//     ^^^^^^^^^^ definition com/airbnb/epoxy/StyleBuilderCallback#buildStyle(). public abstract void buildStyle(T builder)
 //                ^ reference com/airbnb/epoxy/StyleBuilderCallback#[T]
 //                  ^^^^^^^ definition local0 T builder
 }

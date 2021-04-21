@@ -97,6 +97,7 @@ message SymbolInformation {
     SEALED = 0x10;
     STATIC = 0x1000;
     ENUM = 0x4000;
+    DEFAULT = 0x8000;
   }
   reserved 2, 6, 7, 8, 9, 10, 11, 12, 14, 15;
   string symbol = 1;

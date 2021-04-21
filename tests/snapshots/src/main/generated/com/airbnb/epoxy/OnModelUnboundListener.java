@@ -11,7 +11,7 @@ public interface OnModelUnboundListener<T extends EpoxyModel<?>, V> {
    * that were unbound.
    */
   void onModelUnbound(T model, V view);
-//     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelUnboundListener#onModelUnbound(). public void onModelUnbound(T model, V view)
+//     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelUnboundListener#onModelUnbound(). public abstract void onModelUnbound(T model, V view)
 //                    ^ reference com/airbnb/epoxy/OnModelUnboundListener#[T]
 //                      ^^^^^ definition local0 T model
 //                             ^ reference com/airbnb/epoxy/OnModelUnboundListener#[V]

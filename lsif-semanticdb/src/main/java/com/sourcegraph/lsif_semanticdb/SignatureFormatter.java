@@ -151,11 +151,7 @@ public class SignatureFormatter {
     printKeywordln(formatAnnotations());
     printKeyword(formatAccess());
 
-    String owner = SymbolDescriptor.parseFromSymbol(symbolInformation.getSymbol()).owner;
-    SymbolInformation ownerSymbol =
-        symtab.symbols.get(SymbolDescriptor.parseFromSymbol(symbolInformation.getSymbol()).owner);
-    if (ownerSymbol != null && ownerSymbol.getKind() != SymbolInformation.Kind.INTERFACE)
-      printKeyword(formatModifiers());
+    printKeyword(formatModifiers());
 
     List<SymbolInformation> typeParameters = getSymlinks(methodSignature.getTypeParameters());
     if (!typeParameters.isEmpty()) {
@@ -169,6 +165,7 @@ public class SignatureFormatter {
       printKeyword(formatType(methodSignature.getReturnType()));
       s.append(symbolInformation.getDisplayName());
     } else {
+      String owner = SymbolDescriptor.parseFromSymbol(symbolInformation.getSymbol()).owner;
       // Fix for https://github.com/sourcegraph/lsif-java/issues/150
       if (!owner.equals(SemanticdbSymbols.NONE)) {
         s.append(SymbolDescriptor.parseFromSymbol(owner).descriptor.name);
@@ -402,17 +399,13 @@ public class SignatureFormatter {
     return "";
   }
 
+  // https://checkstyle.sourceforge.io/config_modifier.html#ModifierOrder
   private String formatModifiers() {
     ArrayList<String> modifiers = new ArrayList<>();
-    if (has(Property.ABSTRACT)) {
-      modifiers.add("abstract");
-    }
-    if (has(Property.STATIC)) {
-      modifiers.add("static");
-    }
-    if (has(Property.FINAL)) {
-      modifiers.add("final");
-    }
+    if (has(Property.ABSTRACT)) modifiers.add("abstract");
+    if (has(Property.DEFAULT)) modifiers.add("default");
+    if (has(Property.STATIC)) modifiers.add("static");
+    if (has(Property.FINAL)) modifiers.add("final");
     return String.join(" ", modifiers);
   }
 

@@ -21,7 +21,7 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
    * @see androidx.recyclerview.widget.ItemTouchHelper.Callback#getMovementFlags
    */
   int getMovementFlagsForModel(T model, int adapterPosition);
-//    ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#getMovementFlagsForModel(). public int getMovementFlagsForModel(T model, int adapterPosition)
+//    ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#getMovementFlagsForModel(). public abstract int getMovementFlagsForModel(T model, int adapterPosition)
 //                             ^ reference com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
 //                               ^^^^^ definition local0 T model
 //                                          ^^^^^^^^^^^^^^^ definition local1 int adapterPosition
@@ -37,7 +37,7 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
    * @param itemView The view being cleared.
    */
   void clearView(T model, View itemView);
-//     ^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView(). public void clearView(T model, unresolved_type itemView)
+//     ^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView(). public abstract void clearView(T model, unresolved_type itemView)
 //               ^ reference com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
 //                 ^^^^^ definition local2 T model
 //                        ^^^^ reference _root_/

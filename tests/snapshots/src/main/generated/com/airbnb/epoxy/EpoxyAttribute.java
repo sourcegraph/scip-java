@@ -104,7 +104,7 @@ public @interface EpoxyAttribute {
 //                       ^^^^^^ reference com/airbnb/epoxy/EpoxyAttribute#Option#`<init>`().
   Option[] value() default {};
 //^^^^^^ reference com/airbnb/epoxy/EpoxyAttribute#Option#
-//         ^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#value(). public Option[] value()
+//         ^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#value(). public abstract Option[] value()
 
   /**
    * Whether or not to include this attribute in equals and hashCode calculations.
@@ -117,7 +117,7 @@ public @interface EpoxyAttribute {
   @Deprecated
 // ^^^^^^^^^^ reference java/lang/Deprecated#
   boolean hash() default true;
-//        ^^^^ definition com/airbnb/epoxy/EpoxyAttribute#hash(). @Deprecated public boolean hash()
+//        ^^^^ definition com/airbnb/epoxy/EpoxyAttribute#hash(). @Deprecated public abstract boolean hash()
 
   /**
    * Whether or not to generate setter for this attribute.
@@ -130,5 +130,5 @@ public @interface EpoxyAttribute {
   @Deprecated
 // ^^^^^^^^^^ reference java/lang/Deprecated#
   boolean setter() default true;
-//        ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#setter(). @Deprecated public boolean setter()
+//        ^^^^^^ definition com/airbnb/epoxy/EpoxyAttribute#setter(). @Deprecated public abstract boolean setter()
 }

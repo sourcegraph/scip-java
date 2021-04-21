@@ -542,7 +542,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
   private interface IterateModelsCallback {
 //                  ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback# private interface IterateModelsCallback
     void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex);
-//       ^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#onModel(). public void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex)
+//       ^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#onModel(). public abstract void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex)
 //               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                          ^^^^^ definition local56 EpoxyModel model
 //                                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#

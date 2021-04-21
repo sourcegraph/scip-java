@@ -530,8 +530,12 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     int properties = 0;
     properties |= sym.isEnum() ? Property.ENUM_VALUE : 0;
     properties |= sym.isStatic() ? Property.STATIC_VALUE : 0;
-    properties |= (sym.flags() & Flags.ABSTRACT) > 0 ? Property.ABSTRACT_VALUE : 0;
+    // for default interface methods, Flags.ABSTRACT is also set...
+    boolean abstractNotDefault =
+        ((sym.flags() & Flags.ABSTRACT) > 0) && ((sym.flags() & Flags.DEFAULT) == 0);
+    properties |= abstractNotDefault ? Property.ABSTRACT_VALUE : 0;
     properties |= (sym.flags() & Flags.FINAL) > 0 ? Property.FINAL_VALUE : 0;
+    properties |= (sym.flags() & Flags.DEFAULT) > 0 ? Property.DEFAULT_VALUE : 0;
     return properties;
   }
 

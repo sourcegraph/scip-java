@@ -16,7 +16,7 @@ public interface OnModelBuildFinishedListener {
    * the adapter. This will be called even if no changes existed.
    */
   void onModelBuildFinished(@NonNull DiffResult result);
-//     ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBuildFinishedListener#onModelBuildFinished(). public void onModelBuildFinished(DiffResult result)
+//     ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBuildFinishedListener#onModelBuildFinished(). public abstract void onModelBuildFinished(DiffResult result)
 //                           ^^^^^^^ reference androidx/annotation/NonNull#
 //                                   ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#
 //                                              ^^^^^^ definition local0 @NonNull DiffResult result
