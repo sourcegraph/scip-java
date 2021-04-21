@@ -49,5 +49,5 @@ public @interface TextProp {
 
   @StringRes int defaultRes() default 0;
 // ^^^^^^^^^ reference androidx/annotation/StringRes#
-//               ^^^^^^^^^^ definition com/airbnb/epoxy/TextProp#defaultRes(). @StringRes public abstract int defaultRes()
+//               ^^^^^^^^^^ definition com/airbnb/epoxy/TextProp#defaultRes(). @StringRes public int defaultRes()
 }

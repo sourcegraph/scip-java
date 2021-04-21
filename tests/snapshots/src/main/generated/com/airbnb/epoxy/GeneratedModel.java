@@ -2,7 +2,7 @@ package com.airbnb.epoxy;
 
 /** Interface applied to generated models to allow the base adapter to interact with them. */
 public interface GeneratedModel<T> {
-//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel# public abstract interface GeneratedModel<T>
+//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel# public interface GeneratedModel<T>
 //                              ^ definition com/airbnb/epoxy/GeneratedModel#[T] T
   /**
    * Called on the generated model immediately before the main model onBind method has been called.
@@ -11,7 +11,7 @@ public interface GeneratedModel<T> {
    * The ViewHolder is needed to get the model's adapter position when clicked.
    */
   void handlePreBind(EpoxyViewHolder holder, T objectToBind, int position);
-//     ^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel#handlePreBind(). public abstract void handlePreBind(EpoxyViewHolder holder, T objectToBind, int position)
+//     ^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel#handlePreBind(). public void handlePreBind(EpoxyViewHolder holder, T objectToBind, int position)
 //                   ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyViewHolder#
 //                                   ^^^^^^ definition local0 EpoxyViewHolder holder
 //                                           ^ reference com/airbnb/epoxy/GeneratedModel#[T]
@@ -27,7 +27,7 @@ public interface GeneratedModel<T> {
    * the other. We don't want to dispatch two onBind listener calls in that case.
    */
   void handlePostBind(T objectToBind, int position);
-//     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel#handlePostBind(). public abstract void handlePostBind(T objectToBind, int position)
+//     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel#handlePostBind(). public void handlePostBind(T objectToBind, int position)
 //                    ^ reference com/airbnb/epoxy/GeneratedModel#[T]
 //                      ^^^^^^^^^^^^ definition local3 T objectToBind
 //                                        ^^^^^^^^ definition local4 int position

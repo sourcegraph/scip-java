@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
  * For use with {@link EpoxyModelTouchCallback}
  */
 public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouchCallback<T> {
-//               ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxySwipeCallback# public abstract interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouchCallback<T>
+//               ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxySwipeCallback# public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouchCallback<T>
 //                                  ^ definition com/airbnb/epoxy/EpoxySwipeCallback#[T] T extends EpoxyModel
 //                                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyTouchCallback#
@@ -37,7 +37,7 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
    * @param adapterPosition The adapter position of the model
    */
   void onSwipeStarted(T model, View itemView, int adapterPosition);
-//     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxySwipeCallback#onSwipeStarted(). public abstract void onSwipeStarted(T model, unresolved_type itemView, int adapterPosition)
+//     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxySwipeCallback#onSwipeStarted(). public void onSwipeStarted(T model, unresolved_type itemView, int adapterPosition)
 //                    ^ reference com/airbnb/epoxy/EpoxySwipeCallback#[T]
 //                      ^^^^^ definition local0 T model
 //                             ^^^^ reference _root_/
@@ -59,7 +59,7 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
    *                      this to support custom swipe animations.
    */
   void onSwipeProgressChanged(T model, View itemView, float swipeProgress,
-//     ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxySwipeCallback#onSwipeProgressChanged(). public abstract void onSwipeProgressChanged(T model, unresolved_type itemView, float swipeProgress, unresolved_type canvas)
+//     ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxySwipeCallback#onSwipeProgressChanged(). public void onSwipeProgressChanged(T model, unresolved_type itemView, float swipeProgress, unresolved_type canvas)
 //                            ^ reference com/airbnb/epoxy/EpoxySwipeCallback#[T]
 //                              ^^^^^ definition local3 T model
 //                                     ^^^^ reference _root_/
@@ -79,7 +79,7 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
    * @param itemView The view that was being swiped
    */
   void onSwipeReleased(T model, View itemView);
-//     ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxySwipeCallback#onSwipeReleased(). public abstract void onSwipeReleased(T model, unresolved_type itemView)
+//     ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxySwipeCallback#onSwipeReleased(). public void onSwipeReleased(T model, unresolved_type itemView)
 //                     ^ reference com/airbnb/epoxy/EpoxySwipeCallback#[T]
 //                       ^^^^^ definition local7 T model
 //                              ^^^^ reference _root_/
@@ -103,7 +103,7 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
    *                  directions were enabled.
    */
   void onSwipeCompleted(T model, View itemView, int position, int direction);
-//     ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxySwipeCallback#onSwipeCompleted(). public abstract void onSwipeCompleted(T model, unresolved_type itemView, int position, int direction)
+//     ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxySwipeCallback#onSwipeCompleted(). public void onSwipeCompleted(T model, unresolved_type itemView, int position, int direction)
 //                      ^ reference com/airbnb/epoxy/EpoxySwipeCallback#[T]
 //                        ^^^^^ definition local9 T model
 //                               ^^^^ reference _root_/

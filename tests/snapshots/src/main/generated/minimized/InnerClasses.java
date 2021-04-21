@@ -26,12 +26,12 @@ public class InnerClasses {
   }
 
   public interface InnerInterface<A, B> {
-//                 ^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerInterface# public abstract static interface InnerInterface<A, B>
+//                 ^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerInterface# public interface InnerInterface<A, B>
 //                                ^ definition minimized/InnerClasses#InnerInterface#[A] A
 //                                   ^ definition minimized/InnerClasses#InnerInterface#[B] B
     B apply(A a);
 //  ^ reference minimized/InnerClasses#InnerInterface#[B]
-//    ^^^^^ definition minimized/InnerClasses#InnerInterface#apply(). public abstract B apply(A a)
+//    ^^^^^ definition minimized/InnerClasses#InnerInterface#apply(). public B apply(A a)
 //          ^ reference minimized/InnerClasses#InnerInterface#[A]
 //            ^ definition local1 A a
   }

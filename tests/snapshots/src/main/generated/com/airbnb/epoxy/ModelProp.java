@@ -108,7 +108,7 @@ public @interface ModelProp {
 //                       ^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#`<init>`().
   Option[] options() default {};
 //^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#
-//         ^^^^^^^ definition com/airbnb/epoxy/ModelProp#options(). public abstract Option[] options()
+//         ^^^^^^^ definition com/airbnb/epoxy/ModelProp#options(). public Option[] options()
 
   /**
    * The same as {@link #options()}, but this allows the shortcut of setting an option eg
@@ -116,7 +116,7 @@ public @interface ModelProp {
    */
   Option[] value() default {};
 //^^^^^^ reference com/airbnb/epoxy/ModelProp#Option#
-//         ^^^^^ definition com/airbnb/epoxy/ModelProp#value(). public abstract Option[] value()
+//         ^^^^^ definition com/airbnb/epoxy/ModelProp#value(). public Option[] value()
 
   /**
    * The name of the constant field that should be used as the default value for this prop. The
@@ -131,7 +131,7 @@ public @interface ModelProp {
    */
   String defaultValue() default "";
 //^^^^^^ reference java/lang/String#
-//       ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#defaultValue(). public abstract String defaultValue()
+//       ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelProp#defaultValue(). public String defaultValue()
 
   /**
    * Specify an optional group name. Multiple props with the same group name will only allow one of
@@ -141,5 +141,5 @@ public @interface ModelProp {
    */
   String group() default "";
 //^^^^^^ reference java/lang/String#
-//       ^^^^^ definition com/airbnb/epoxy/ModelProp#group(). public abstract String group()
+//       ^^^^^ definition com/airbnb/epoxy/ModelProp#group(). public String group()
 }

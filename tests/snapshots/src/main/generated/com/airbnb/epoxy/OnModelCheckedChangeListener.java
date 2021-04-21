@@ -6,7 +6,7 @@ import android.widget.CompoundButton;
 //                    ^^^^^^^^^^^^^^ reference android/widget/CompoundButton#
 
 public interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V> {
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelCheckedChangeListener# public abstract interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V>
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelCheckedChangeListener# public interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //                                            ^ definition com/airbnb/epoxy/OnModelCheckedChangeListener#[T] T extends EpoxyModel<?>
 //                                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                     ^ definition com/airbnb/epoxy/OnModelCheckedChangeListener#[V] V
@@ -21,7 +21,7 @@ public interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V> {
    * @param position    The position of the model in the adapter.
    */
   void onChecked(T model, V parentView,
-//     ^^^^^^^^^ definition com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked(). public abstract void onChecked(T model, V parentView, unresolved_type checkedView, boolean isChecked, int position)
+//     ^^^^^^^^^ definition com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked(). public void onChecked(T model, V parentView, unresolved_type checkedView, boolean isChecked, int position)
 //               ^ reference com/airbnb/epoxy/OnModelCheckedChangeListener#[T]
 //                 ^^^^^ definition local0 T model
 //                        ^ reference com/airbnb/epoxy/OnModelCheckedChangeListener#[V]

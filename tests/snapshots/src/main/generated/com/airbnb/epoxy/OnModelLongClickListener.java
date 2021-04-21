@@ -6,7 +6,7 @@ import android.view.View;
 //                  ^^^^ reference android/view/View#
 
 public interface OnModelLongClickListener<T extends EpoxyModel<?>, V> {
-//               ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelLongClickListener# public abstract interface OnModelLongClickListener<T extends EpoxyModel<?>, V>
+//               ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelLongClickListener# public interface OnModelLongClickListener<T extends EpoxyModel<?>, V>
 //                                        ^ definition com/airbnb/epoxy/OnModelLongClickListener#[T] T extends EpoxyModel<?>
 //                                                  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                 ^ definition com/airbnb/epoxy/OnModelLongClickListener#[V] V
@@ -20,7 +20,7 @@ public interface OnModelLongClickListener<T extends EpoxyModel<?>, V> {
    * @param position    The position of the model in the adapter.
    */
   boolean onLongClick(T model, V parentView, View clickedView, int position);
-//        ^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelLongClickListener#onLongClick(). public abstract boolean onLongClick(T model, V parentView, unresolved_type clickedView, int position)
+//        ^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelLongClickListener#onLongClick(). public boolean onLongClick(T model, V parentView, unresolved_type clickedView, int position)
 //                    ^ reference com/airbnb/epoxy/OnModelLongClickListener#[T]
 //                      ^^^^^ definition local0 T model
 //                             ^ reference com/airbnb/epoxy/OnModelLongClickListener#[V]

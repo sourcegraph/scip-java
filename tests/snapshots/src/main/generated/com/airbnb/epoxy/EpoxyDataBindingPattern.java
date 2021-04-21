@@ -45,7 +45,7 @@ public @interface EpoxyDataBindingPattern {
    */
   Class<?> rClass();
 //^^^^^ reference java/lang/Class#
-//         ^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingPattern#rClass(). public abstract Class<?> rClass()
+//         ^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingPattern#rClass(). public Class<?> rClass()
   /**
    * A string prefix that your databinding layouts start with. Epoxy will generate a model for each
    * databinding layout whose name starts with this.
@@ -55,7 +55,7 @@ public @interface EpoxyDataBindingPattern {
    */
   String layoutPrefix();
 //^^^^^^ reference java/lang/String#
-//       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingPattern#layoutPrefix(). public abstract String layoutPrefix()
+//       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingPattern#layoutPrefix(). public String layoutPrefix()
 
   /**
    * If true, any variable whose type does not implement equals and hashcode will have the
@@ -67,5 +67,5 @@ public @interface EpoxyDataBindingPattern {
    * For details on the nuances of this, see https://github.com/airbnb/epoxy/wiki/DoNotHash
    */
   boolean enableDoNotHash() default true;
-//        ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingPattern#enableDoNotHash(). public abstract boolean enableDoNotHash()
+//        ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDataBindingPattern#enableDoNotHash(). public boolean enableDoNotHash()
 }

@@ -52,11 +52,12 @@ public class SignatureFormatter {
             .anyMatch(t -> t.getTypeRef().getSymbol().equals(ANNOTATION_SYMBOL));
 
     boolean isEnum = has(Property.ENUM);
+    boolean isInterface = symbolInformation.getKind() == SymbolInformation.Kind.INTERFACE;
 
     printKeywordln(formatAnnotations());
 
     printKeyword(formatAccess());
-    if (!isEnum && !isAnnotation) printKeyword(formatModifiers());
+    if (!isEnum && !isAnnotation && !isInterface) printKeyword(formatModifiers());
 
     switch (symbolInformation.getKind()) {
       case CLASS:
@@ -149,7 +150,12 @@ public class SignatureFormatter {
   private void formatMethodSignature(MethodSignature methodSignature) {
     printKeywordln(formatAnnotations());
     printKeyword(formatAccess());
-    printKeyword(formatModifiers());
+
+    String owner = SymbolDescriptor.parseFromSymbol(symbolInformation.getSymbol()).owner;
+    SymbolInformation ownerSymbol =
+        symtab.symbols.get(SymbolDescriptor.parseFromSymbol(symbolInformation.getSymbol()).owner);
+    if (ownerSymbol != null && ownerSymbol.getKind() != SymbolInformation.Kind.INTERFACE)
+      printKeyword(formatModifiers());
 
     List<SymbolInformation> typeParameters = getSymlinks(methodSignature.getTypeParameters());
     if (!typeParameters.isEmpty()) {
@@ -163,7 +169,6 @@ public class SignatureFormatter {
       printKeyword(formatType(methodSignature.getReturnType()));
       s.append(symbolInformation.getDisplayName());
     } else {
-      String owner = SymbolDescriptor.parseFromSymbol(symbolInformation.getSymbol()).owner;
       // Fix for https://github.com/sourcegraph/lsif-java/issues/150
       if (!owner.equals(SemanticdbSymbols.NONE)) {
         s.append(SymbolDescriptor.parseFromSymbol(owner).descriptor.name);

@@ -18,9 +18,9 @@ public class TypeVariables {
   }
 
   interface I {
-//          ^ definition minimized/TypeVariables#I# abstract static interface I
+//          ^ definition minimized/TypeVariables#I# interface I
     void mI();
-//       ^^ definition minimized/TypeVariables#I#mI(). public abstract void mI()
+//       ^^ definition minimized/TypeVariables#I#mI(). public void mI()
   }
 
   static class CT extends C implements I {

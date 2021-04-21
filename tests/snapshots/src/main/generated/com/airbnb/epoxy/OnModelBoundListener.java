@@ -2,7 +2,7 @@ package com.airbnb.epoxy;
 
 /** Used to register an onBind callback with a generated model. */
 public interface OnModelBoundListener<T extends EpoxyModel<?>, V> {
-//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBoundListener# public abstract interface OnModelBoundListener<T extends EpoxyModel<?>, V>
+//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBoundListener# public interface OnModelBoundListener<T extends EpoxyModel<?>, V>
 //                                    ^ definition com/airbnb/epoxy/OnModelBoundListener#[T] T extends EpoxyModel<?>
 //                                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                             ^ definition com/airbnb/epoxy/OnModelBoundListener#[V] V
@@ -15,7 +15,7 @@ public interface OnModelBoundListener<T extends EpoxyModel<?>, V> {
    * @param position The adapter position of the model
    */
   void onModelBound(T model, V view, int position);
-//     ^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBoundListener#onModelBound(). public abstract void onModelBound(T model, V view, int position)
+//     ^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelBoundListener#onModelBound(). public void onModelBound(T model, V view, int position)
 //                  ^ reference com/airbnb/epoxy/OnModelBoundListener#[T]
 //                    ^^^^^ definition local0 T model
 //                           ^ reference com/airbnb/epoxy/OnModelBoundListener#[V]

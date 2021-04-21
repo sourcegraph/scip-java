@@ -55,9 +55,9 @@ public @interface Annotations {
 
   String value() default "";
 //^^^^^^ reference java/lang/String#
-//       ^^^^^ definition minimized/Annotations#value(). public abstract String value()
+//       ^^^^^ definition minimized/Annotations#value(). public String value()
 
   String format() default "";
 //^^^^^^ reference java/lang/String#
-//       ^^^^^^ definition minimized/Annotations#format(). public abstract String format()
+//       ^^^^^^ definition minimized/Annotations#format(). public String format()
 }

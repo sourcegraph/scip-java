@@ -648,9 +648,9 @@ public abstract class EpoxyModel<T> {
    * @see #addIf(AddPredicate, EpoxyController)
    */
   public interface AddPredicate {
-//                 ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#AddPredicate# public abstract static interface AddPredicate
+//                 ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#AddPredicate# public interface AddPredicate
     boolean addIf();
-//          ^^^^^ definition com/airbnb/epoxy/EpoxyModel#AddPredicate#addIf(). public abstract boolean addIf()
+//          ^^^^^ definition com/airbnb/epoxy/EpoxyModel#AddPredicate#addIf(). public boolean addIf()
   }
 
   /**
@@ -913,9 +913,9 @@ public abstract class EpoxyModel<T> {
   }
 
   public interface SpanSizeOverrideCallback {
-//                 ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback# public abstract static interface SpanSizeOverrideCallback
+//                 ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback# public interface SpanSizeOverrideCallback
     int getSpanSize(int totalSpanCount, int position, int itemCount);
-//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#getSpanSize(). public abstract int getSpanSize(int totalSpanCount, int position, int itemCount)
+//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#getSpanSize(). public int getSpanSize(int totalSpanCount, int position, int itemCount)
 //                      ^^^^^^^^^^^^^^ definition local54 int totalSpanCount
 //                                          ^^^^^^^^ definition local55 int position
 //                                                        ^^^^^^^^^ definition local56 int itemCount
