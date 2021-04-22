@@ -92,21 +92,15 @@ public class LsifWriter implements AutoCloseable {
     return definitionResult;
   }
 
-  public int emitHoverResult(MarkedString[] markedStrings) {
+  public int emitHoverResult(MarkupContent markupContents) {
     return emitObject(
         lsifVertex("hoverResult")
             .setResult(
                 LsifHover.newBuilder()
-                    .addAllContents(
-                        Arrays.stream(markedStrings)
-                            .map(
-                                (ms) ->
-                                    Content.newBuilder()
-                                        .setLanguage(
-                                            ms.language.toString().toLowerCase(Locale.ROOT))
-                                        .setValue(ms.value)
-                                        .build())
-                            .collect(Collectors.toList()))));
+                    .setContents(
+                        Content.newBuilder()
+                            .setKind(markupContents.kind.toString().toLowerCase())
+                            .setValue(markupContents.value))));
   }
 
   public void emitHoverEdge(int outV, int inV) {

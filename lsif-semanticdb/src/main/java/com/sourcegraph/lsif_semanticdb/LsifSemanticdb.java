@@ -1,5 +1,6 @@
 package com.sourcegraph.lsif_semanticdb;
 
+import com.sourcegraph.lsif_protocol.MarkupKind;
 import com.sourcegraph.semanticdb_javac.Semanticdb;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence;
@@ -8,12 +9,7 @@ import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -127,21 +123,35 @@ public class LsifSemanticdb {
         }
 
         // Hover
-        ArrayList<MarkedString> markedStrings = new ArrayList<>();
         String documentation = symbolInformation.getDocumentation().getMessage();
+
+        StringBuilder markupContent = new StringBuilder(documentation.length());
+
         if (!documentation.isEmpty()) {
-          markedStrings.add(new MarkedString(Semanticdb.Language.UNKNOWN_LANGUAGE, documentation));
+          markupContent.append(documentation.replaceAll("\n", "\n\n"));
         }
 
         if (symbolInformation.hasSignature()) {
-          markedStrings.add(
-              new MarkedString(
-                  doc.semanticdb.getLanguage(),
-                  new SignatureFormatter(symbolInformation, symtab).formatSymbol()));
+          if (markupContent.length() != 0) markupContent.append("\n---\n");
+
+          String language =
+              doc.semanticdb.getLanguage().toString().toLowerCase(Locale.ROOT).intern();
+          String signature = new SignatureFormatter(symbolInformation, symtab).formatSymbol();
+
+          markupContent.ensureCapacity(
+              markupContent.length() + signature.length() + language.length() + 8);
+          markupContent
+              .append("```")
+              .append(language)
+              .append('\n')
+              .append(signature)
+              .append("\n```");
         }
 
-        if (!markedStrings.isEmpty()) {
-          int hoverId = writer.emitHoverResult(markedStrings.toArray(new MarkedString[0]));
+        if (markupContent.length() != 0) {
+          int hoverId =
+              writer.emitHoverResult(
+                  new MarkupContent(MarkupKind.MARKDOWN, markupContent.toString()));
           writer.emitHoverEdge(ids.resultSet, hoverId);
         }
       }
