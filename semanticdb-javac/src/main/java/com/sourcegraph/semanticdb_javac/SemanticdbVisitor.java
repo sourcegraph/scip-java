@@ -19,10 +19,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.ARRAY_SYMBOL;
@@ -469,7 +466,9 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
             break;
           case CHAR:
             constantBuilder.setCharConstant(
-                Semanticdb.CharConstant.newBuilder().setValue((Character) rhs.value).build());
+                Semanticdb.CharConstant.newBuilder()
+                    .setValue(Character.forDigit((Integer) rhs.value, 10))
+                    .build());
             break;
           case FLOAT:
             constantBuilder.setFloatConstant(
@@ -516,6 +515,13 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
               Semanticdb.IdTree.newBuilder()
                   .setSymbol(globals.semanticdbSymbol(((JCTree.JCIdent) expr).sym, locals))
                   .build());
+    } else if (expr instanceof JCTree.JCBinary) {
+      Semanticdb.BinaryOperatorTree.Builder binOp = Semanticdb.BinaryOperatorTree.newBuilder();
+      JCTree.JCBinary binExpr = (JCTree.JCBinary) expr;
+      binOp.setLhs(semanticdbAnnotationParameter(binExpr.lhs));
+      binOp.setOp(semanticdbBinaryOperator(expr.getKind()));
+      binOp.setRhs(semanticdbAnnotationParameter(binExpr.rhs));
+      return Semanticdb.Tree.newBuilder().setBinopTree(binOp.build());
     }
 
     throw new IllegalArgumentException(
@@ -556,6 +562,52 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
             .build();
       default:
         throw new IllegalStateException("access flag " + (sym.flags() & Flags.AccessFlags));
+    }
+  }
+
+  private Semanticdb.BinaryOperator semanticdbBinaryOperator(Tree.Kind kind) {
+    switch (kind) {
+      case PLUS:
+        return Semanticdb.BinaryOperator.PLUS;
+      case MINUS:
+        return Semanticdb.BinaryOperator.MINUS;
+      case MULTIPLY:
+        return Semanticdb.BinaryOperator.MULTIPLY;
+      case DIVIDE:
+        return Semanticdb.BinaryOperator.DIVIDE;
+      case REMAINDER:
+        return Semanticdb.BinaryOperator.REMAINDER;
+      case LESS_THAN:
+        return Semanticdb.BinaryOperator.LESS_THAN;
+      case GREATER_THAN:
+        return Semanticdb.BinaryOperator.GREATER_THAN;
+      case LEFT_SHIFT:
+        return Semanticdb.BinaryOperator.SHIFT_LEFT;
+      case RIGHT_SHIFT:
+        return Semanticdb.BinaryOperator.SHIFT_RIGHT;
+      case UNSIGNED_RIGHT_SHIFT:
+        return Semanticdb.BinaryOperator.SHIFT_RIGHT_UNSIGNED;
+      case EQUAL_TO:
+        return Semanticdb.BinaryOperator.EQUAL_TO;
+      case NOT_EQUAL_TO:
+        return Semanticdb.BinaryOperator.NOT_EQUAL_TO;
+      case LESS_THAN_EQUAL:
+        return Semanticdb.BinaryOperator.LESS_THAN_EQUAL;
+      case GREATER_THAN_EQUAL:
+        return Semanticdb.BinaryOperator.GREATER_THAN_EQUAL;
+      case CONDITIONAL_AND:
+        return Semanticdb.BinaryOperator.CONDITIONAL_AND;
+      case CONDITIONAL_OR:
+        return Semanticdb.BinaryOperator.CONDITIONAL_OR;
+      case AND:
+        return Semanticdb.BinaryOperator.AND;
+      case OR:
+        return Semanticdb.BinaryOperator.OR;
+      case XOR:
+        return Semanticdb.BinaryOperator.XOR;
+      default:
+        throw new IllegalStateException(
+            semanticdbUri() + ": unexpected binary expression operator kind " + kind);
     }
   }
 

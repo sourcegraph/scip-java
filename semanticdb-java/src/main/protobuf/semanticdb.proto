@@ -194,6 +194,7 @@ message Tree {
     // -- OUT OF SPEC -- //
     AnnotationTree annotation_tree = 9;
     AssignTree assign_tree = 10;
+    BinaryOperatorTree binop_tree = 11;
     // -- OUT OF SPEC -- //
   }
 }
@@ -229,6 +230,34 @@ message AnnotationTree {
 message AssignTree {
     Tree lhs = 1;
     Tree rhs = 2;
+}
+
+message BinaryOperatorTree {
+  Tree lhs = 1;
+  BinaryOperator op = 2;
+  Tree rhs = 3;
+}
+
+enum BinaryOperator {
+  PLUS = 0;
+  MINUS = 1;
+  MULTIPLY = 2;
+  DIVIDE = 3;
+  REMAINDER = 4;
+  GREATER_THAN = 5;
+  LESS_THAN = 6;
+  AND = 7;
+  XOR = 8;
+  OR = 9;
+  CONDITIONAL_AND = 10;
+  CONDITIONAL_OR = 11;
+  SHIFT_LEFT = 12;
+  SHIFT_RIGHT = 13;
+  SHIFT_RIGHT_UNSIGNED = 14;
+  EQUAL_TO = 15;
+  NOT_EQUAL_TO = 16;
+  GREATER_THAN_EQUAL = 17;
+  LESS_THAN_EQUAL = 18;
 }
 // -- OUT OF SPEC -- //
 
