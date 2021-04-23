@@ -2,7 +2,7 @@ package com.airbnb.epoxy;
 
 /** Used to register an onUnbind callback with a generated model. */
 public interface OnModelUnboundListener<T extends EpoxyModel<?>, V> {
-//               ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelUnboundListener# public abstract interface OnModelUnboundListener<T extends EpoxyModel<?>, V>
+//               ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelUnboundListener# public interface OnModelUnboundListener<T extends EpoxyModel<?>, V>
 //                                      ^ definition com/airbnb/epoxy/OnModelUnboundListener#[T] T extends EpoxyModel<?>
 //                                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                               ^ definition com/airbnb/epoxy/OnModelUnboundListener#[V] V

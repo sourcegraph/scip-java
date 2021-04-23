@@ -6,7 +6,7 @@ import android.widget.CompoundButton;
 //                    ^^^^^^^^^^^^^^ reference android/widget/CompoundButton#
 
 public interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V> {
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelCheckedChangeListener# public abstract interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V>
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelCheckedChangeListener# public interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //                                            ^ definition com/airbnb/epoxy/OnModelCheckedChangeListener#[T] T extends EpoxyModel<?>
 //                                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                     ^ definition com/airbnb/epoxy/OnModelCheckedChangeListener#[V] V

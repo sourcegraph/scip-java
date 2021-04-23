@@ -6,7 +6,7 @@ import android.view.View;
 //                  ^^^^ reference android/view/View#
 
 public interface OnModelLongClickListener<T extends EpoxyModel<?>, V> {
-//               ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelLongClickListener# public abstract interface OnModelLongClickListener<T extends EpoxyModel<?>, V>
+//               ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelLongClickListener# public interface OnModelLongClickListener<T extends EpoxyModel<?>, V>
 //                                        ^ definition com/airbnb/epoxy/OnModelLongClickListener#[T] T extends EpoxyModel<?>
 //                                                  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                 ^ definition com/airbnb/epoxy/OnModelLongClickListener#[V] V

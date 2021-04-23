@@ -18,7 +18,7 @@ public class TypeVariables {
   }
 
   interface I {
-//          ^ definition minimized/TypeVariables#I# abstract static interface I
+//          ^ definition minimized/TypeVariables#I# interface I
     void mI();
 //       ^^ definition minimized/TypeVariables#I#mI(). public abstract void mI()
   }

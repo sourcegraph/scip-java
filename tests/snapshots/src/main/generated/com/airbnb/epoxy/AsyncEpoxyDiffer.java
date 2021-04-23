@@ -53,7 +53,7 @@ class AsyncEpoxyDiffer {
 //    ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer# class AsyncEpoxyDiffer
 
   interface ResultCallback {
-//          ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback# abstract static interface ResultCallback
+//          ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback# interface ResultCallback
     void onResult(@NonNull DiffResult result);
 //       ^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#onResult(). public abstract void onResult(DiffResult result)
 //                 ^^^^^^^ reference androidx/annotation/NonNull#

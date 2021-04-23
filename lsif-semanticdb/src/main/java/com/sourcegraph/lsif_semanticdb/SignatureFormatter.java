@@ -52,11 +52,12 @@ public class SignatureFormatter {
             .anyMatch(t -> t.getTypeRef().getSymbol().equals(ANNOTATION_SYMBOL));
 
     boolean isEnum = has(Property.ENUM);
+    boolean isInterface = symbolInformation.getKind() == SymbolInformation.Kind.INTERFACE;
 
     printKeywordln(formatAnnotations());
 
     printKeyword(formatAccess());
-    if (!isEnum && !isAnnotation) printKeyword(formatModifiers());
+    if (!isEnum && !isAnnotation && !isInterface) printKeyword(formatModifiers());
 
     switch (symbolInformation.getKind()) {
       case CLASS:
@@ -149,6 +150,7 @@ public class SignatureFormatter {
   private void formatMethodSignature(MethodSignature methodSignature) {
     printKeywordln(formatAnnotations());
     printKeyword(formatAccess());
+
     printKeyword(formatModifiers());
 
     List<SymbolInformation> typeParameters = getSymlinks(methodSignature.getTypeParameters());
@@ -449,17 +451,13 @@ public class SignatureFormatter {
     return "";
   }
 
+  // https://checkstyle.sourceforge.io/config_modifier.html#ModifierOrder
   private String formatModifiers() {
     ArrayList<String> modifiers = new ArrayList<>();
-    if (has(Property.ABSTRACT)) {
-      modifiers.add("abstract");
-    }
-    if (has(Property.STATIC)) {
-      modifiers.add("static");
-    }
-    if (has(Property.FINAL)) {
-      modifiers.add("final");
-    }
+    if (has(Property.ABSTRACT)) modifiers.add("abstract");
+    if (has(Property.DEFAULT)) modifiers.add("default");
+    if (has(Property.STATIC)) modifiers.add("static");
+    if (has(Property.FINAL)) modifiers.add("final");
     return String.join(" ", modifiers);
   }
 

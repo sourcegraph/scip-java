@@ -2,7 +2,7 @@ package com.airbnb.epoxy;
 
 /** Interface applied to generated models to allow the base adapter to interact with them. */
 public interface GeneratedModel<T> {
-//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel# public abstract interface GeneratedModel<T>
+//               ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/GeneratedModel# public interface GeneratedModel<T>
 //                              ^ definition com/airbnb/epoxy/GeneratedModel#[T] T
   /**
    * Called on the generated model immediately before the main model onBind method has been called.

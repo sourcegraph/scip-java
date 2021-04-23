@@ -7,7 +7,7 @@ import android.view.View;
 
 /** Used to register a click listener on a generated model. */
 public interface OnModelClickListener<T extends EpoxyModel<?>, V> {
-//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelClickListener# public abstract interface OnModelClickListener<T extends EpoxyModel<?>, V>
+//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/OnModelClickListener# public interface OnModelClickListener<T extends EpoxyModel<?>, V>
 //                                    ^ definition com/airbnb/epoxy/OnModelClickListener#[T] T extends EpoxyModel<?>
 //                                              ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                             ^ definition com/airbnb/epoxy/OnModelClickListener#[V] V

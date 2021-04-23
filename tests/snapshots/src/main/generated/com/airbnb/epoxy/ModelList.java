@@ -62,7 +62,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   }
 
   interface ModelListObserver {
-//          ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver# abstract static interface ModelListObserver
+//          ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver# interface ModelListObserver
     void onItemRangeInserted(int positionStart, int itemCount);
 //       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeInserted(). public abstract void onItemRangeInserted(int positionStart, int itemCount)
 //                               ^^^^^^^^^^^^^ definition local1 int positionStart

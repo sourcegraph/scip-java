@@ -35,7 +35,7 @@ public class InnerClasses {
   }
 
   public interface InnerInterface<A, B> {
-//                 ^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerInterface# public abstract static interface InnerInterface<A, B>
+//                 ^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerInterface# public interface InnerInterface<A, B>
 //                                ^ definition minimized/InnerClasses#InnerInterface#[A] A
 //                                   ^ definition minimized/InnerClasses#InnerInterface#[B] B
     B apply(A a);

@@ -5,7 +5,7 @@ package com.airbnb.epoxy;
  * view is set up to be styled with the Paris library.
  */
 public interface StyleBuilderCallback<T> {
-//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StyleBuilderCallback# public abstract interface StyleBuilderCallback<T>
+//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StyleBuilderCallback# public interface StyleBuilderCallback<T>
 //                                    ^ definition com/airbnb/epoxy/StyleBuilderCallback#[T] T
   void buildStyle(T builder);
 //     ^^^^^^^^^^ definition com/airbnb/epoxy/StyleBuilderCallback#buildStyle(). public abstract void buildStyle(T builder)

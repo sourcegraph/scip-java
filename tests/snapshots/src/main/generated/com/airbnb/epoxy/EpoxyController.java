@@ -670,7 +670,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
    * to allow changes.
    */
   interface ModelInterceptorCallback {
-//          ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback# abstract static interface ModelInterceptorCallback
+//          ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback# interface ModelInterceptorCallback
     void onInterceptorsStarted(EpoxyController controller);
 //       ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#onInterceptorsStarted(). public abstract void onInterceptorsStarted(EpoxyController controller)
 //                             ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
@@ -738,7 +738,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 
   /** A callback that is run after {@link #buildModels()} completes and before diffing is run. */
   public interface Interceptor {
-//                 ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#Interceptor# public abstract static interface Interceptor
+//                 ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#Interceptor# public interface Interceptor
     /**
      * This is called immediately after {@link #buildModels()} and before diffing is run and the
      * models are set on the adapter. This is a final chance to make any changes to the the models
@@ -1437,7 +1437,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
   }
 
   public interface ExceptionHandler {
-//                 ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#ExceptionHandler# public abstract static interface ExceptionHandler
+//                 ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#ExceptionHandler# public interface ExceptionHandler
     /**
      * This is called when recoverable exceptions happen at runtime. They can be ignored and Epoxy
      * will recover, but you can override this to be aware of when they happen.
