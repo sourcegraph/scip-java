@@ -6,6 +6,15 @@ public class InnerClasses {
   private final int exampleField;
 //                  ^^^^^^^^^^^^ definition minimized/InnerClasses#exampleField. private final int exampleField
 
+  private static final String STRING = "asdf";
+//                     ^^^^^^ reference java/lang/String#
+//                            ^^^^^^ definition minimized/InnerClasses#STRING. private static final String STRING
+
+  private static final int top = 5;
+//                         ^^^ definition minimized/InnerClasses#top. private static final int top
+  private static final int bottom = 10;
+//                         ^^^^^^ definition minimized/InnerClasses#bottom. private static final int bottom
+
   public InnerClasses(int exampleField) {
 //       ^^^^^^^^^^^^ definition minimized/InnerClasses#`<init>`(). public InnerClasses(int exampleField)
 //                        ^^^^^^^^^^^^ definition local0 int exampleField
@@ -36,9 +45,23 @@ public class InnerClasses {
 //            ^ definition local1 A a
   }
 
+  public @interface InnerAnnotation {
+//                  ^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerAnnotation# public @interface InnerAnnotation
+    int value();
+//      ^^^^^ definition minimized/InnerClasses#InnerAnnotation#value(). public abstract int value()
+  }
+
+  @SuppressWarnings(STRING + " ")
+// ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
+//                  ^^^^^^ reference minimized/InnerClasses#STRING.
+  @InnerAnnotation(top / bottom)
+// ^^^^^^^^^^^^^^^ reference minimized/InnerClasses#InnerAnnotation#
+//                 ^^^ reference minimized/InnerClasses#top.
+//                       ^^^^^^ reference minimized/InnerClasses#bottom.
   public static class InnerStaticClass {
-//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass# public static class InnerStaticClass
+//                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass# @SuppressWarnings(STRING + " ") @InnerAnnotation(top / bottom) public static class InnerStaticClass
 //                    ^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#`<init>`(). public InnerStaticClass()
+
     public static void innerStaticMethod() {}
 //                     ^^^^^^^^^^^^^^^^^ definition minimized/InnerClasses#InnerStaticClass#innerStaticMethod(). public static void innerStaticMethod()
   }

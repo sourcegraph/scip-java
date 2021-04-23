@@ -315,6 +315,12 @@ public class SignatureFormatter {
         throw new IllegalArgumentException(
             "unexpected apply tree function " + tree.getApplyTree().getFunction());
       }
+    } else if (tree.hasBinopTree()) {
+      return formatTree(tree.getBinopTree().getLhs())
+          + " "
+          + formatBinaryOperator(tree.getBinopTree().getOp())
+          + " "
+          + formatTree(tree.getBinopTree().getRhs());
     }
 
     throw new IllegalArgumentException("tree was of unexpected type " + tree);
@@ -341,6 +347,52 @@ public class SignatureFormatter {
       return '"' + constant.getStringConstant().getValue() + '"';
     }
     throw new IllegalArgumentException("constant was not of known type " + constant);
+  }
+
+  private String formatBinaryOperator(BinaryOperator op) {
+    switch (op) {
+      case PLUS:
+        return "+";
+      case MINUS:
+        return "-";
+      case MULTIPLY:
+        return "*";
+      case DIVIDE:
+        return "/";
+      case REMAINDER:
+        return "%";
+      case GREATER_THAN:
+        return ">";
+      case LESS_THAN:
+        return "<";
+      case AND:
+        return "&";
+      case XOR:
+        return "^";
+      case OR:
+        return "|";
+      case CONDITIONAL_AND:
+        return "&&";
+      case CONDITIONAL_OR:
+        return "||";
+      case SHIFT_LEFT:
+        return "<<";
+      case SHIFT_RIGHT:
+        return ">>";
+      case SHIFT_RIGHT_UNSIGNED:
+        return ">>>";
+      case EQUAL_TO:
+        return "==";
+      case NOT_EQUAL_TO:
+        return "!=";
+      case GREATER_THAN_EQUAL:
+        return ">=";
+      case LESS_THAN_EQUAL:
+        return "<=";
+      case UNRECOGNIZED:
+        throw new IllegalArgumentException("unexpected binary operator " + op);
+    }
+    return null;
   }
 
   private String formatType(Type type) {

@@ -4,6 +4,11 @@ public class InnerClasses {
 
   private final int exampleField;
 
+  private static final String STRING = "asdf";
+
+  private static final int top = 5;
+  private static final int bottom = 10;
+
   public InnerClasses(int exampleField) {
     this.exampleField = exampleField;
   }
@@ -18,7 +23,14 @@ public class InnerClasses {
     B apply(A a);
   }
 
+  public @interface InnerAnnotation {
+    int value();
+  }
+
+  @SuppressWarnings(STRING + " ")
+  @InnerAnnotation(top / bottom)
   public static class InnerStaticClass {
+
     public static void innerStaticMethod() {}
   }
 
