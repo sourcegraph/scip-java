@@ -1,5 +1,7 @@
 package tests
 
+import java.util.stream.Collectors
+
 import scala.meta.Input
 
 import com.sourcegraph.lsif_semanticdb.Symtab
@@ -17,29 +19,23 @@ class OverridesSuite extends FunSuite with TempDirectories {
       options: TestOptions,
       source: String,
       extractSymbol: String,
-      expectedSymbols: List[String],
-      expectedCount: Int,
-      qualifiedClassName: String = "example.Parent"
+      expectedSymbols: String*
   ): Unit = {
     test(options) {
       val compiler = new TestCompiler(targetroot())
-      val relativePath = qualifiedClassName.replace('.', '/') + ".java"
+      val relativePath = "example.Parent".replace('.', '/') + ".java"
       val input = Input.VirtualFile(relativePath, source)
       val result = compiler.compileSemanticdb(List(input))
       val symtab = new Symtab(result.textDocument)
 
-      val count = symtab.symbols.get(extractSymbol).getOverriddenSymbolsCount
+      val expectedSyms = expectedSymbols.mkString("\n")
       val syms = symtab
         .symbols
         .get(extractSymbol)
         .getOverriddenSymbolsList
-        .toArray(new Array[String](count))
-      assertEquals(count, expectedCount)
-      syms
-        .zipWithIndex
-        .foreach { case (str, i) =>
-          assertEquals(str, expectedSymbols(i))
-        }
+        .stream
+        .collect(Collectors.joining("\n"))
+      assertNoDiff(expectedSyms, syms)
     }
   }
 
@@ -57,8 +53,7 @@ class OverridesSuite extends FunSuite with TempDirectories {
       |}
       |""".stripMargin,
     "example/Parent#Child#stuff().",
-    List("example/Parent#stuff()."),
-    1
+    "example/Parent#stuff()."
   )
 
   checkOverrides(
@@ -71,8 +66,7 @@ class OverridesSuite extends FunSuite with TempDirectories {
       |}
       |""".stripMargin,
     "example/Parent#toString().",
-    List("java/lang/Object#toString()."),
-    1
+    "java/lang/Object#toString()."
   )
 
   checkOverrides(
@@ -91,8 +85,7 @@ class OverridesSuite extends FunSuite with TempDirectories {
       |}
       |""".stripMargin,
     "example/Parent#Child#stuff().",
-    List("example/Parent#Test#stuff()."),
-    1
+    "example/Parent#Test#stuff()."
   )
 
   checkOverrides(
@@ -109,8 +102,7 @@ class OverridesSuite extends FunSuite with TempDirectories {
       |}
       |""".stripMargin,
     "example/Parent#IntHaha#add().",
-    List("example/Parent#Haha#add()."),
-    1
+    "example/Parent#Haha#add()."
   )
 
   checkOverrides(
@@ -128,8 +120,9 @@ class OverridesSuite extends FunSuite with TempDirectories {
       |}
       |""".stripMargin,
     "example/Parent#Child#toString().",
-    List("example/Parent#toString().", "java/lang/Object#toString()."),
-    2
+    """example/Parent#toString().
+      |java/lang/Object#toString().
+      |""".stripMargin
   )
 
   checkOverrides(
@@ -146,7 +139,6 @@ class OverridesSuite extends FunSuite with TempDirectories {
       |}
       |""".stripMargin,
     "example/Parent#Child#stuff().",
-    List("example/Parent#stuff()."),
-    1
+    "example/Parent#stuff()."
   )
 }
