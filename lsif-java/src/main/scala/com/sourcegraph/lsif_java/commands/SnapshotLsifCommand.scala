@@ -177,18 +177,17 @@ object SnapshotLsifCommand {
         .toMap
     val hovers: Map[String, String] = monikers.map { case (sym, obj) =>
       val hover =
-        (
-          for {
-            resultSet <- monikerInverse.get(obj.getId).toList
-            hoverEdge <- hoverEdges.get(resultSet).toList
-            hoverResult <- hoverVertexes.get(hoverEdge).toList
-            contents <- hoverResult.getContents.getValue.trim
-          } yield contents
-        ).mkString
-          .split("\n---\n")
-          .last
-          .stripPrefix("```java\n")
-          .stripSuffix("\n```")
+        for {
+          resultSet <- monikerInverse.get(obj.getId).toList
+          hoverEdge <- hoverEdges.get(resultSet).toList
+          hoverResult <- hoverVertexes.get(hoverEdge).toList
+          contents = hoverResult.getContents.getValue.trim
+          codeFence <- contents
+            .linesIterator
+            .dropWhile(_ != "```java")
+            .drop(1)
+            .takeWhile(_ != "```")
+        } yield codeFence
       sym -> hover.mkString("\n\n")
     }
 
