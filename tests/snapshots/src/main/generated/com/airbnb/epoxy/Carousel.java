@@ -127,7 +127,7 @@ public class Carousel extends EpoxyRecyclerView {
 //       ^^^^^^^ reference androidx/annotation/NonNull#
         public SnapHelper buildSnapHelper(Context context) {
 //             ^^^^^^^^^^ reference _root_/
-//                        ^^^^^^^^^^^^^^^ definition local2 @Override @NonNull public buildSnapHelper(unresolved_type context)
+//                        ^^^^^^^^^^^^^^^ definition local2 @Override @NonNull public unresolved_type buildSnapHelper(unresolved_type context)
 //                                        ^^^^^^^ reference _root_/
 //                                                ^^^^^^^ definition local3 unresolved_type context
           return new LinearSnapHelper();
@@ -1145,7 +1145,7 @@ public class Carousel extends EpoxyRecyclerView {
 //   ^^^^^^^ reference androidx/annotation/NonNull#
     public abstract SnapHelper buildSnapHelper(Context context);
 //                  ^^^^^^^^^^ reference _root_/
-//                             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#SnapHelperFactory#buildSnapHelper(). @NonNull public abstract buildSnapHelper(unresolved_type context)
+//                             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#SnapHelperFactory#buildSnapHelper(). @NonNull public abstract unresolved_type buildSnapHelper(unresolved_type context)
 //                                             ^^^^^^^ reference _root_/
 //                                                     ^^^^^^^ definition local69 unresolved_type context
   }

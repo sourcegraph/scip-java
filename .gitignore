@@ -55,3 +55,4 @@ test-report.json
 dump.lsif
 
 ./generated
+/sources

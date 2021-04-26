@@ -203,6 +203,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   public Void visitIdentifier(IdentifierTree node, Void unused) {
     if (node instanceof JCTree.JCIdent) {
       JCTree.JCIdent ident = (JCTree.JCIdent) node;
+      if (ident.name == null || ident.sym == null) return null;
       if (ident.name.toString().equals("this") && ident.sym.getKind() != ElementKind.CONSTRUCTOR)
         return null;
       emitSymbolOccurrence(ident.sym, ident, Role.REFERENCE, CompilerRange.FROM_START_TO_END);
@@ -233,7 +234,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   public Void visitNewClass(NewClassTree node, Void unused) {
     if (node instanceof JCTree.JCNewClass) {
       JCTree.JCNewClass cls = (JCTree.JCNewClass) node;
-      if (!cls.type.tsym.isAnonymous()) {
+      if (cls.type != null && cls.type.tsym != null && !cls.type.tsym.isAnonymous()) {
         emitSymbolOccurrence(cls.constructor, cls, Role.REFERENCE, CompilerRange.FROM_TEXT_SEARCH);
       }
     }
@@ -388,7 +389,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
   private Semanticdb.AnnotationTree.Builder semanticdbAnnotation(JCTree.JCAnnotation annotation) {
     Semanticdb.AnnotationTree.Builder annotationBuilder = Semanticdb.AnnotationTree.newBuilder();
-    annotationBuilder.setTpe(new SemanticdbTypeVisitor(globals, locals).visit(annotation.type));
+    annotationBuilder.setTpe(
+        new SemanticdbTypeVisitor(globals, locals).semanticdbType(annotation.type));
 
     for (JCTree.JCExpression param : annotation.args) {
       Semanticdb.AssignTree.Builder parameterBuilder = Semanticdb.AssignTree.newBuilder();

@@ -72,7 +72,7 @@ public class ListenersUtils {
 // ^^^^^^^^ reference androidx/annotation/Nullable#
   private static RecyclerView findParentRecyclerView(@Nullable View v) {
 //               ^^^^^^^^^^^^ reference _root_/
-//                            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ListenersUtils#findParentRecyclerView(). @Nullable private static findParentRecyclerView(unresolved_type v)
+//                            ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ListenersUtils#findParentRecyclerView(). @Nullable private static unresolved_type findParentRecyclerView(unresolved_type v)
 //                                                    ^^^^^^^^ reference androidx/annotation/Nullable#
 //                                                             ^^^^ reference _root_/
 //                                                                  ^ definition local3 @Nullable unresolved_type v

@@ -383,7 +383,7 @@ public abstract class EpoxyTouchHelper {
      */
     public ItemTouchHelper andCallbacks(final DragCallbacks<U> callbacks) {
 //         ^^^^^^^^^^^^^^^ reference _root_/
-//                         ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#andCallbacks(). public andCallbacks(DragCallbacks<U> callbacks)
+//                         ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#andCallbacks(). public unresolved_type andCallbacks(DragCallbacks<U> callbacks)
 //                                            ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#
 //                                                          ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                                             ^^^^^^^^^ definition local17 final DragCallbacks<U> callbacks
@@ -840,7 +840,7 @@ public abstract class EpoxyTouchHelper {
      */
     public ItemTouchHelper andCallbacks(final SwipeCallbacks<U> callbacks) {
 //         ^^^^^^^^^^^^^^^ reference _root_/
-//                         ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#andCallbacks(). public andCallbacks(SwipeCallbacks<U> callbacks)
+//                         ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#andCallbacks(). public unresolved_type andCallbacks(SwipeCallbacks<U> callbacks)
 //                                            ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#
 //                                                           ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
 //                                                              ^^^^^^^^^ definition local69 final SwipeCallbacks<U> callbacks

@@ -1326,7 +1326,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 // ^^^^^^^ reference androidx/annotation/NonNull#
   public SpanSizeLookup getSpanSizeLookup() {
 //       ^^^^^^^^^^^^^^ reference _root_/
-//                      ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#getSpanSizeLookup(). @NonNull public getSpanSizeLookup()
+//                      ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyController#getSpanSizeLookup(). @NonNull public unresolved_type getSpanSizeLookup()
     return adapter.getSpanSizeLookup();
 //         ^^^^^^^ reference com/airbnb/epoxy/EpoxyController#adapter.
 //                 ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getSpanSizeLookup().

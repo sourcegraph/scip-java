@@ -616,7 +616,7 @@ public abstract class BaseEpoxyAdapter
    */
   public SpanSizeLookup getSpanSizeLookup() {
 //       ^^^^^^^^^^^^^^ reference _root_/
-//                      ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#getSpanSizeLookup(). public getSpanSizeLookup()
+//                      ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/BaseEpoxyAdapter#getSpanSizeLookup(). public unresolved_type getSpanSizeLookup()
     return spanSizeLookup;
 //         ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#spanSizeLookup.
   }

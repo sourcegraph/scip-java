@@ -23,6 +23,11 @@ class SemanticdbTypeVisitor extends SimpleTypeVisitor8<Semanticdb.Type, Void> {
     this.locals = locals;
   }
 
+  public Semanticdb.Type semanticdbType(TypeMirror tpe) {
+    Semanticdb.Type result = super.visit(tpe);
+    return result == null ? UNRESOLVED_TYPE_REF : result;
+  }
+
   @Override
   public Semanticdb.Type visitDeclared(DeclaredType t, Void unused) {
     boolean isExistential =
@@ -31,11 +36,7 @@ class SemanticdbTypeVisitor extends SimpleTypeVisitor8<Semanticdb.Type, Void> {
     ArrayList<Semanticdb.Type> typeParams = new ArrayList<>();
     Semanticdb.Scope.Builder declarations = Semanticdb.Scope.newBuilder();
     for (TypeMirror type : t.getTypeArguments()) {
-      Semanticdb.Type visited = super.visit(type);
-      if (visited == null) {
-        visited = UNRESOLVED_TYPE_REF;
-      }
-      typeParams.add(visited);
+      typeParams.add(semanticdbType(type));
 
       if (type instanceof WildcardType) {
         Semanticdb.TypeSignature.Builder typeSig = Semanticdb.TypeSignature.newBuilder();
@@ -83,15 +84,11 @@ class SemanticdbTypeVisitor extends SimpleTypeVisitor8<Semanticdb.Type, Void> {
 
   @Override
   public Semanticdb.Type visitArray(ArrayType t, Void unused) {
-    Semanticdb.Type arrayComponentType = super.visit(t.getComponentType());
-    if (arrayComponentType == null) {
-      arrayComponentType = UNRESOLVED_TYPE_REF;
-    }
     return Semanticdb.Type.newBuilder()
         .setTypeRef(
             Semanticdb.TypeRef.newBuilder()
                 .setSymbol(ARRAY_SYMBOL)
-                .addTypeArguments(arrayComponentType))
+                .addTypeArguments(semanticdbType(t.getComponentType())))
         .build();
   }
 

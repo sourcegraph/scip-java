@@ -65,7 +65,7 @@ public abstract class AsyncEpoxyController extends EpoxyController {
 
   private static Handler getHandler(boolean enableAsync) {
 //               ^^^^^^^ reference _root_/
-//                       ^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyController#getHandler(). private static getHandler(boolean enableAsync)
+//                       ^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyController#getHandler(). private static unresolved_type getHandler(boolean enableAsync)
 //                                          ^^^^^^^^^^^ definition local3 boolean enableAsync
     return enableAsync ? getAsyncBackgroundHandler() : MAIN_THREAD_HANDLER;
 //         ^^^^^^^^^^^ reference local3
