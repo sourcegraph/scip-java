@@ -4,6 +4,7 @@ import com.sun.source.util.JavacTask;
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
 import com.sourcegraph.semanticdb_javac.Semanticdb;
+import com.sun.tools.javac.model.JavacTypes;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,16 +20,19 @@ public final class SemanticdbTaskListener implements TaskListener {
   private final JavacTask task;
   private final GlobalSymbolsCache globals;
   private final SemanticdbReporter reporter;
+  private final JavacTypes javacTypes;
 
   public SemanticdbTaskListener(
       SemanticdbJavacOptions options,
       JavacTask task,
       GlobalSymbolsCache globals,
-      SemanticdbReporter reporter) {
+      SemanticdbReporter reporter,
+      JavacTypes javacTypes) {
     this.options = options;
     this.task = task;
     this.globals = globals;
     this.reporter = reporter;
+    this.javacTypes = javacTypes;
   }
 
   @Override
@@ -51,7 +55,7 @@ public final class SemanticdbTaskListener implements TaskListener {
     Result<Path, String> path = semanticdbOutputPath(options, e);
     if (path.isOk()) {
       Semanticdb.TextDocument textDocument =
-          new SemanticdbVisitor(task, globals, e, options)
+          new SemanticdbVisitor(task, globals, e, options, javacTypes)
               .buildTextDocument(e.getCompilationUnit());
       writeSemanticdb(path.getOrThrow(), textDocument);
     } else {
