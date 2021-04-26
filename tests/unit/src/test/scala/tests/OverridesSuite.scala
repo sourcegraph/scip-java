@@ -35,7 +35,7 @@ class OverridesSuite extends FunSuite with TempDirectories {
         .getOverriddenSymbolsList
         .stream
         .collect(Collectors.joining("\n"))
-      assertNoDiff(expectedSyms, syms)
+      assertNoDiff(syms, expectedSyms)
     }
   }
 
