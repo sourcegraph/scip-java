@@ -40,7 +40,8 @@ class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
           // issue for this repo.
           s"-Dmaven.compiler.compilerId=javac",
           s"-Dmaven.compiler.executable=$executable",
-          s"-Dmaven.compiler.fork=true"
+          s"-Dmaven.compiler.fork=true",
+          s"--no-transfer-progress"
         )
       buildCommand ++=
         index.finalBuildCommand(
