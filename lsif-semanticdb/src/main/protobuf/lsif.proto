@@ -39,9 +39,14 @@ message LsifPosition {
 }
 
 message LsifHover {
-  repeated Content contents = 1;
+  Content contents = 1;
   message Content {
-     string language = 1;
+     string kind = 1; // not MarkupKind because must be lowercase
      string value = 2;
   }
+}
+
+enum MarkupKind {
+  PLAINTEXT = 0;
+  MARKDOWN = 1;
 }

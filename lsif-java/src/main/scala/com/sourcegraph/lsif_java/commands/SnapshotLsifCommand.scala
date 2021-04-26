@@ -128,11 +128,13 @@ object SnapshotLsifCommand {
                 resultSetId <- lsif.next.get(o.getId).toList
                 hoverId <- lsif.hoverEdges.get(resultSetId).toList
                 hover <- lsif.hoverVertexes.get(hoverId).toList
-                contents <- hover.getContentsList.asScala
-                if contents.getLanguage !=
-                  Language.UNKNOWN_LANGUAGE.toString.toLowerCase
-              } yield contents.getValue
-            ).mkString("\n")
+                contents <- hover.getContents.getValue
+              } yield contents
+            ).mkString
+              .split("\n---\n")
+              .last
+              .stripPrefix("```java\n")
+              .stripSuffix("\n```")
           val symInfo = SymbolInformation
             .newBuilder()
             // we cheese it a bit here, as this is less work than trying to reconstruct
@@ -174,14 +176,19 @@ object SnapshotLsifCommand {
         .map(m => m.getIdentifier -> m)
         .toMap
     val hovers: Map[String, String] = monikers.map { case (sym, obj) =>
-      val hoverMessage =
+      val hover =
         for {
           resultSet <- monikerInverse.get(obj.getId).toList
           hoverEdge <- hoverEdges.get(resultSet).toList
           hoverResult <- hoverVertexes.get(hoverEdge).toList
-          contents <- hoverResult.getContentsList.asScala
-        } yield contents.getValue.trim
-      sym -> hoverMessage.mkString("\n\n")
+          contents = hoverResult.getContents.getValue.trim
+          codeFence <- contents
+            .linesIterator
+            .dropWhile(_ != "```java")
+            .drop(1)
+            .takeWhile(_ != "```")
+        } yield codeFence
+      sym -> hover.mkString("\n\n")
     }
 
     def visualizeGraph(): String = {
@@ -193,7 +200,7 @@ object SnapshotLsifCommand {
       import org.scalameta.ascii.graph.Graph
       val monikers =
         byLabel("moniker")
-          .filter(o => o.getType() == "vertex" && o.getIdentifier() == symbol)
+          .filter(o => o.getType == "vertex" && o.getIdentifier == symbol)
           .toList
       val moniker =
         monikers match {
@@ -209,56 +216,54 @@ object SnapshotLsifCommand {
       val edges = ListBuffer.empty[(String, String)]
       val inputs = mutable.Map.empty[String, Input]
       def input(range: LsifObject): Input = {
-        val uri = G
-          .predecessors(range)
-          .asScala
-          .iterator
-          .filter(_.getLabel() == "document")
-          .next()
-          .getUri()
+        val uri =
+          G.predecessors(range)
+            .asScala
+            .iterator
+            .filter(_.getLabel == "document")
+            .next()
+            .getUri
         inputs.getOrElseUpdate(uri, Input.path(Paths.get(URI.create(uri))))
       }
       def renderPos(pos: LsifPosition): String = {
-        s"${pos.getLine()}:${pos.getCharacter()}"
+        s"${pos.getLine}:${pos.getCharacter}"
       }
       val addedVertexes = mutable.Set.empty[String]
       def render(node: LsifObject): String = {
-        (node.getType(), node.getLabel()) match {
+        (node.getType, node.getLabel) match {
           case ("vertex", "document") =>
             val filename = sourceroot
-              .relativize(Paths.get(URI.create(node.getUri())))
+              .relativize(Paths.get(URI.create(node.getUri)))
               .iterator()
               .asScala
               .mkString("/")
             s"document ${filename}"
           case ("vertex", "hoverResult") =>
             val contents = node
-              .getResult()
-              .getContentsList()
-              .asScala
-              .map(_.getValue())
-              .mkString("\n")
+              .getResult
+              .getContents
+              .getValue
               .replace("\n", "\\n")
               .trim()
-            s"hoverResult(${node.getId()}) ${contents}"
+            s"hoverResult(${node.getId}) ${contents}"
           case ("vertex", "moniker") =>
-            s"moniker ${node.getIdentifier()}"
+            s"moniker ${node.getIdentifier}"
           case ("vertex", "range") =>
             val i = input(node)
             val p = Position.range(
               i,
-              node.getStart().getLine(),
-              node.getStart().getCharacter(),
-              node.getEnd().getLine(),
-              node.getEnd().getCharacter()
+              node.getStart.getLine,
+              node.getStart.getCharacter,
+              node.getEnd.getLine,
+              node.getEnd.getCharacter
             )
-            s"range(${node.getId()}) ${renderPos(node.getStart())} '${p.text}'"
+            s"range(${node.getId}) ${renderPos(node.getStart)} '${p.text}'"
           case ("vertex", "packageInformation") =>
-            s"${node.getName()}(${node.getId()})"
+            s"${node.getName}(${node.getId})"
           case ("vertex", label) =>
-            s"${label}(${node.getId()})"
+            s"${label}(${node.getId})"
           case _ =>
-            s"${node.getType}/${node.getLabel} (${node.getId()})"
+            s"${node.getType}/${node.getLabel} (${node.getId})"
         }
       }
       def isAdded(vertex: LsifObject) = addedVertexes.contains(render(vertex))
@@ -309,14 +314,14 @@ object SnapshotLsifCommand {
       val S = GraphBuilder.directed().immutable[LsifObject]()
       val visited = mutable.Set.empty[Int]
       def loop(l: LsifObject): Unit = {
-        if (visited.add(l.getId())) {
+        if (visited.add(l.getId)) {
           S.addNode(l)
           G.predecessors(l)
             .forEach { n =>
               S.putEdge(EndpointPair.ordered(l, n))
               loop(n)
             }
-          if (isSuccessorRelevantLabel(l.getLabel())) {
+          if (isSuccessorRelevantLabel(l.getLabel)) {
             G.successors(l)
               .forEach { n =>
                 S.putEdge(EndpointPair.ordered(n, l))
@@ -357,7 +362,7 @@ object SnapshotLsifCommand {
                 } {
                   B.addEdge(
                     EndpointPair.ordered(outV, inV),
-                    o.toBuilder().clearInVs().setInV(inId).build()
+                    o.toBuilder.clearInVs().setInV(inId).build()
                   )
                 }
               }
