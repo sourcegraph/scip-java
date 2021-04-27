@@ -393,23 +393,28 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         new SemanticdbTypeVisitor(globals, locals).semanticdbType(annotation.type));
 
     for (JCTree.JCExpression param : annotation.args) {
-      Semanticdb.AssignTree.Builder parameterBuilder = Semanticdb.AssignTree.newBuilder();
+      // anecdotally not always JCAssign in some situations when a compilation unit can't resolve
+      // symbols fully
+      if (param instanceof JCTree.JCAssign) {
+        Semanticdb.AssignTree.Builder parameterBuilder = Semanticdb.AssignTree.newBuilder();
+        JCTree.JCAssign assign = (JCTree.JCAssign) param;
+        JCTree.JCExpression assignValue = assign.rhs;
 
-      // anecdotally always JCAssign
-      JCTree.JCAssign assign = (JCTree.JCAssign) param;
-      JCTree.JCExpression assignValue = assign.rhs;
+        parameterBuilder.setLhs(
+            Semanticdb.Tree.newBuilder()
+                .setIdTree(
+                    Semanticdb.IdTree.newBuilder()
+                        .setSymbol(
+                            globals.semanticdbSymbol(((JCTree.JCIdent) assign.lhs).sym, locals))
+                        .build()));
 
-      parameterBuilder.setLhs(
-          Semanticdb.Tree.newBuilder()
-              .setIdTree(
-                  Semanticdb.IdTree.newBuilder()
-                      .setSymbol(
-                          globals.semanticdbSymbol(((JCTree.JCIdent) assign.lhs).sym, locals))
-                      .build()));
+        parameterBuilder.setRhs(semanticdbAnnotationParameter(assignValue));
 
-      parameterBuilder.setRhs(semanticdbAnnotationParameter(assignValue));
-
-      annotationBuilder.addParameters(Semanticdb.Tree.newBuilder().setAssignTree(parameterBuilder));
+        annotationBuilder.addParameters(
+            Semanticdb.Tree.newBuilder().setAssignTree(parameterBuilder));
+      } else {
+        annotationBuilder.addParameters(semanticdbAnnotationParameter(param));
+      }
     }
 
     return annotationBuilder;
@@ -447,10 +452,10 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       JCTree.JCLiteral rhs = (JCTree.JCLiteral) expr;
 
       Semanticdb.LiteralTree.Builder literalBuilder = Semanticdb.LiteralTree.newBuilder();
+      Semanticdb.Constant.Builder constantBuilder = Semanticdb.Constant.newBuilder();
 
       if (rhs.type instanceof Type.JCPrimitiveType) {
         Type.JCPrimitiveType type = (Type.JCPrimitiveType) rhs.type;
-        Semanticdb.Constant.Builder constantBuilder = Semanticdb.Constant.newBuilder();
         switch (type.getKind()) {
           case BOOLEAN:
             constantBuilder.setBooleanConstant(
@@ -491,8 +496,6 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         }
         literalBuilder.setConstant(constantBuilder);
       } else if (rhs.type instanceof Type.ClassType) {
-        Semanticdb.Constant.Builder constantBuilder = Semanticdb.Constant.newBuilder();
-
         if (rhs.value instanceof String) {
           constantBuilder.setStringConstant(
               Semanticdb.StringConstant.newBuilder().setValue((String) rhs.value).build());
@@ -506,13 +509,19 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         }
 
         literalBuilder.setConstant(constantBuilder);
+      } else if (rhs.type instanceof Type.UnknownType) {
+        literalBuilder.setConstant(
+            Semanticdb.Constant.newBuilder()
+                .setStringConstant(Semanticdb.StringConstant.newBuilder().setValue("UNRESOLVED")));
       } else {
         throw new IllegalStateException(
             semanticdbUri()
                 + ": annotation parameter rhs was of unexpected type "
                 + rhs.type.getClass()
                 + "\n"
-                + rhs.type);
+                + rhs.type
+                + " "
+                + rhs);
       }
 
       return Semanticdb.Tree.newBuilder().setLiteralTree(literalBuilder);
