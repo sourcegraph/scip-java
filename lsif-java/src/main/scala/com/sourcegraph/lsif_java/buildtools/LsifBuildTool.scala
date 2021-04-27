@@ -103,9 +103,12 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
     }
     val javaFiles = collectAllJavaFiles(sourceroot).map(_.toString())
     if (javaFiles.isEmpty) {
-      throw new IllegalArgumentException(
-        s"no files matching pattern '$sourceroot/**.java'"
-      )
+      index
+        .app
+        .warning(
+          s"doing nothing, no files matching pattern '$sourceroot/**.java'"
+        )
+      return CommandResult(0, Nil)
     }
     def generatedDir(name: String): String = {
       Files.createDirectory(tmp.resolve(name)).toString()
