@@ -264,33 +264,35 @@ public class SignatureFormatter {
     StringBuilder b = new StringBuilder();
     b.append('@');
     b.append(formatType(annotation.getTpe()));
-    if (annotation.getParametersCount() > 0) {
+
+    if (annotation.getParametersCount() == 1) {
       b.append('(');
-      AssignTree firstParam = annotation.getParameters(0).getAssignTree();
+
+      Tree parameter = annotation.getParameters(0);
       // if only 1 parameter, and its LHS is named 'value', we can omit the 'value = '
       // https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls-9.7.3
-      if (annotation.getParametersCount() == 1
+      AssignTree firstParam = parameter.getAssignTree();
+      if (parameter.hasAssignTree()
           && SymbolDescriptor.parseFromSymbol(firstParam.getLhs().getIdTree().getSymbol())
               .descriptor
               .name
               .equals("value")) {
         b.append(formatTree(firstParam.getRhs()));
       } else {
-        String parameter =
-            annotation.getParametersList().stream()
-                .map(
-                    p ->
-                        SymbolDescriptor.parseFromSymbol(
-                                    p.getAssignTree().getLhs().getIdTree().getSymbol())
-                                .descriptor
-                                .name
-                            + " = "
-                            + formatTree(p.getAssignTree().getRhs()))
-                .collect(Collectors.joining(", "));
-        b.append(parameter);
+        b.append(formatTree(parameter));
       }
+
+      b.append(')');
+    } else if (annotation.getParametersCount() > 1) {
+      b.append('(');
+      String parameter =
+          annotation.getParametersList().stream()
+              .map(this::formatTree)
+              .collect(Collectors.joining(", "));
+      b.append(parameter);
       b.append(')');
     }
+
     return b.toString();
   }
 
@@ -323,6 +325,10 @@ public class SignatureFormatter {
           + formatBinaryOperator(tree.getBinopTree().getOp())
           + " "
           + formatTree(tree.getBinopTree().getRhs());
+    } else if (tree.hasAssignTree()) {
+      return formatTree(tree.getAssignTree().getLhs())
+          + " = "
+          + formatTree(tree.getAssignTree().getRhs());
     }
 
     throw new IllegalArgumentException("tree was of unexpected type " + tree);
