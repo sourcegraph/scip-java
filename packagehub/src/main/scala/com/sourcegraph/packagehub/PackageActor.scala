@@ -173,7 +173,15 @@ class PackageActor(
     val env = LsifJava.app.env.withStandardOutput(ps).withStandardError(ps)
     val app = LsifJava.app.withEnv(env).withReporter(ConsoleReporter(ps))
     val index = app.run(
-      List("index", "--cwd", sourceroot.toString(), "--output", dump.toString())
+      List(
+        "index",
+        "--cwd",
+        sourceroot.toString(),
+        "--output",
+        dump.toString(),
+        "--build-tool",
+        "lsif"
+      )
     )
     if (index != 0) {
       ps.flush()
