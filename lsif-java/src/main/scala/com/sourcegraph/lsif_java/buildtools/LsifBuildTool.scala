@@ -136,8 +136,8 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
     val result = os
       .proc("javac", s"@$argsfile")
       .call(
-        stdout = os.Inherit,
-        stderr = os.Inherit,
+        stdout = os.Pipe,
+        stderr = os.Pipe,
         cwd = os.Path(sourceroot),
         check = false
       )
