@@ -23,6 +23,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.*;
 import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.ARRAY_SYMBOL;
 
 /** Walks the AST of a typechecked compilation unit and generates a SemanticDB TextDocument. */
@@ -89,13 +90,13 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   }
 
   private void emitSymbolInformation(Symbol sym, JCTree tree) {
-    Semanticdb.SymbolInformation.Builder builder =
-        Semanticdb.SymbolInformation.newBuilder().setSymbol(semanticdbSymbol(sym));
+    Semanticdb.SymbolInformation.Builder builder = symbolInformation(semanticdbSymbol(sym));
     Semanticdb.Documentation documentation = semanticdbDocumentation(sym);
     if (documentation != null) builder.setDocumentation(documentation);
     Semanticdb.Signature signature = semanticdbSignature(sym);
     if (signature != null) builder.setSignature(signature);
-    List<Semanticdb.AnnotationTree> annotations = semanticdbAnnotations(tree);
+    List<Semanticdb.AnnotationTree> annotations =
+        new SemanticdbTrees(globals, locals, semanticdbUri()).annotations(tree);
     if (annotations != null) builder.addAllAnnotations(annotations);
 
     builder
@@ -331,12 +332,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     if (range.isPresent()) {
       String ssym = semanticdbSymbol(sym);
       if (!ssym.equals(SemanticdbSymbols.NONE)) {
-        Semanticdb.SymbolOccurrence occ =
-            Semanticdb.SymbolOccurrence.newBuilder()
-                .setSymbol(ssym)
-                .setRange(range.get())
-                .setRole(role)
-                .build();
+        Semanticdb.SymbolOccurrence occ = symbolOccurrence(ssym, range.get(), role);
         return Optional.of(occ);
       } else {
         return Optional.empty();
@@ -362,193 +358,6 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     } catch (IOException | NoSuchAlgorithmException e) {
       return "";
     }
-  }
-
-  private List<Semanticdb.AnnotationTree> semanticdbAnnotations(JCTree node) {
-    if (!(node instanceof JCTree.JCClassDecl)
-        && !(node instanceof JCTree.JCVariableDecl)
-        && !(node instanceof JCTree.JCMethodDecl)) return null;
-
-    List<Semanticdb.AnnotationTree> annotations = new ArrayList<>();
-
-    JCTree.JCModifiers mods;
-    if (node instanceof JCTree.JCClassDecl) {
-      mods = ((JCTree.JCClassDecl) node).getModifiers();
-    } else if (node instanceof JCTree.JCMethodDecl) {
-      mods = ((JCTree.JCMethodDecl) node).getModifiers();
-    } else {
-      mods = ((JCTree.JCVariableDecl) node).getModifiers();
-    }
-
-    for (JCTree.JCAnnotation annotation : mods.getAnnotations()) {
-      annotations.add(semanticdbAnnotation(annotation).build());
-    }
-
-    return annotations;
-  }
-
-  private Semanticdb.AnnotationTree.Builder semanticdbAnnotation(JCTree.JCAnnotation annotation) {
-    Semanticdb.AnnotationTree.Builder annotationBuilder = Semanticdb.AnnotationTree.newBuilder();
-    annotationBuilder.setTpe(
-        new SemanticdbTypeVisitor(globals, locals).semanticdbType(annotation.type));
-
-    for (JCTree.JCExpression param : annotation.args) {
-      // anecdotally not always JCAssign in some situations when a compilation unit can't resolve
-      // symbols fully
-      if (param instanceof JCTree.JCAssign) {
-        Semanticdb.AssignTree.Builder parameterBuilder = Semanticdb.AssignTree.newBuilder();
-        JCTree.JCAssign assign = (JCTree.JCAssign) param;
-        JCTree.JCExpression assignValue = assign.rhs;
-
-        parameterBuilder.setLhs(
-            Semanticdb.Tree.newBuilder()
-                .setIdTree(
-                    Semanticdb.IdTree.newBuilder()
-                        .setSymbol(
-                            globals.semanticdbSymbol(((JCTree.JCIdent) assign.lhs).sym, locals))
-                        .build()));
-
-        parameterBuilder.setRhs(semanticdbAnnotationParameter(assignValue));
-
-        annotationBuilder.addParameters(
-            Semanticdb.Tree.newBuilder().setAssignTree(parameterBuilder));
-      } else {
-        annotationBuilder.addParameters(semanticdbAnnotationParameter(param));
-      }
-    }
-
-    return annotationBuilder;
-  }
-
-  private Semanticdb.Tree.Builder semanticdbAnnotationParameter(JCTree.JCExpression expr) {
-    if (expr instanceof JCTree.JCFieldAccess) {
-      JCTree.JCFieldAccess rhs = (JCTree.JCFieldAccess) expr;
-
-      Semanticdb.SelectTree.Builder selectBuilder =
-          Semanticdb.SelectTree.newBuilder()
-              .setQualifier(
-                  Semanticdb.Tree.newBuilder()
-                      .setIdTree(
-                          Semanticdb.IdTree.newBuilder()
-                              .setSymbol(globals.semanticdbSymbol(rhs.sym.owner, locals))))
-              .setId(
-                  Semanticdb.IdTree.newBuilder()
-                      .setSymbol(globals.semanticdbSymbol(rhs.sym, locals)));
-      return Semanticdb.Tree.newBuilder().setSelectTree(selectBuilder);
-    } else if (expr instanceof JCTree.JCNewArray) {
-      JCTree.JCNewArray rhs = (JCTree.JCNewArray) expr;
-      Semanticdb.ApplyTree.Builder applyTreeBuilder =
-          Semanticdb.ApplyTree.newBuilder()
-              .setFunction(
-                  Semanticdb.Tree.newBuilder()
-                      .setIdTree(Semanticdb.IdTree.newBuilder().setSymbol(ARRAY_SYMBOL)));
-
-      for (JCTree.JCExpression element : rhs.elems) {
-        applyTreeBuilder.addArguments(semanticdbAnnotationParameter(element));
-      }
-      return Semanticdb.Tree.newBuilder().setApplyTree(applyTreeBuilder);
-    } else if (expr instanceof JCTree.JCLiteral) {
-      // Literals can either be a primitive or String
-      JCTree.JCLiteral rhs = (JCTree.JCLiteral) expr;
-
-      Semanticdb.LiteralTree.Builder literalBuilder = Semanticdb.LiteralTree.newBuilder();
-      Semanticdb.Constant.Builder constantBuilder = Semanticdb.Constant.newBuilder();
-
-      if (rhs.type instanceof Type.JCPrimitiveType) {
-        Type.JCPrimitiveType type = (Type.JCPrimitiveType) rhs.type;
-        switch (type.getKind()) {
-          case BOOLEAN:
-            constantBuilder.setBooleanConstant(
-                Semanticdb.BooleanConstant.newBuilder()
-                    .setValue(((Integer) rhs.value) == 1)
-                    .build());
-            break;
-          case BYTE:
-            constantBuilder.setByteConstant(
-                Semanticdb.ByteConstant.newBuilder().setValue((Byte) rhs.value).build());
-            break;
-          case SHORT:
-            constantBuilder.setShortConstant(
-                Semanticdb.ShortConstant.newBuilder().setValue((Short) rhs.value).build());
-            break;
-          case INT:
-            constantBuilder.setIntConstant(
-                Semanticdb.IntConstant.newBuilder().setValue((Integer) rhs.value).build());
-            break;
-          case LONG:
-            constantBuilder.setLongConstant(
-                Semanticdb.LongConstant.newBuilder().setValue((Long) rhs.value).build());
-            break;
-          case CHAR:
-            constantBuilder.setCharConstant(
-                Semanticdb.CharConstant.newBuilder()
-                    .setValue(Character.forDigit((Integer) rhs.value, 10))
-                    .build());
-            break;
-          case FLOAT:
-            constantBuilder.setFloatConstant(
-                Semanticdb.FloatConstant.newBuilder().setValue((Float) rhs.value).build());
-            break;
-          case DOUBLE:
-            constantBuilder.setDoubleConstant(
-                Semanticdb.DoubleConstant.newBuilder().setValue((Double) rhs.value).build());
-            break;
-        }
-        literalBuilder.setConstant(constantBuilder);
-      } else if (rhs.type instanceof Type.ClassType) {
-        if (rhs.value instanceof String) {
-          constantBuilder.setStringConstant(
-              Semanticdb.StringConstant.newBuilder().setValue((String) rhs.value).build());
-        } else {
-          throw new IllegalStateException(
-              semanticdbUri()
-                  + ": annotation parameter rhs was of unexpected class type "
-                  + rhs.value.getClass()
-                  + "\n"
-                  + rhs.value);
-        }
-
-        literalBuilder.setConstant(constantBuilder);
-      } else if (rhs.type instanceof Type.UnknownType) {
-        literalBuilder.setConstant(
-            Semanticdb.Constant.newBuilder()
-                .setStringConstant(Semanticdb.StringConstant.newBuilder().setValue("UNRESOLVED")));
-      } else {
-        throw new IllegalStateException(
-            semanticdbUri()
-                + ": annotation parameter rhs was of unexpected type "
-                + rhs.type.getClass()
-                + "\n"
-                + rhs.type
-                + " "
-                + rhs);
-      }
-
-      return Semanticdb.Tree.newBuilder().setLiteralTree(literalBuilder);
-    } else if (expr instanceof JCTree.JCAnnotation) {
-      return Semanticdb.Tree.newBuilder()
-          .setAnnotationTree(semanticdbAnnotation((JCTree.JCAnnotation) expr));
-    } else if (expr instanceof JCTree.JCIdent) {
-      return Semanticdb.Tree.newBuilder()
-          .setIdTree(
-              Semanticdb.IdTree.newBuilder()
-                  .setSymbol(globals.semanticdbSymbol(((JCTree.JCIdent) expr).sym, locals))
-                  .build());
-    } else if (expr instanceof JCTree.JCBinary) {
-      Semanticdb.BinaryOperatorTree.Builder binOp = Semanticdb.BinaryOperatorTree.newBuilder();
-      JCTree.JCBinary binExpr = (JCTree.JCBinary) expr;
-      binOp.setLhs(semanticdbAnnotationParameter(binExpr.lhs));
-      binOp.setOp(semanticdbBinaryOperator(expr.getKind()));
-      binOp.setRhs(semanticdbAnnotationParameter(binExpr.rhs));
-      return Semanticdb.Tree.newBuilder().setBinopTree(binOp.build());
-    }
-
-    throw new IllegalArgumentException(
-        semanticdbUri()
-            + ": annotation parameter rhs was of unexpected tree node type "
-            + expr.getClass()
-            + "\n"
-            + expr);
   }
 
   private int semanticdbSymbolInfoProperties(Symbol sym) {
@@ -578,70 +387,15 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   private Semanticdb.Access semanticdbAccess(Symbol sym) {
     switch ((int) sym.flags() & Flags.AccessFlags) {
       case Flags.PRIVATE:
-        return Semanticdb.Access.newBuilder()
-            .setPrivateAccess(Semanticdb.PrivateAccess.newBuilder())
-            .build();
+        return privateAccess();
       case Flags.PUBLIC:
-        return Semanticdb.Access.newBuilder()
-            .setPublicAccess(Semanticdb.PublicAccess.newBuilder())
-            .build();
+        return publicAccess();
       case Flags.PROTECTED:
-        return Semanticdb.Access.newBuilder()
-            .setProtectedAccess(Semanticdb.ProtectedAccess.newBuilder())
-            .build();
+        return protectedAccess();
       case 0:
-        return Semanticdb.Access.newBuilder()
-            .setPrivateWithinAccess(
-                Semanticdb.PrivateWithinAccess.newBuilder().setSymbol(semanticdbSymbol(sym.owner)))
-            .build();
+        return privateWithinAccess(semanticdbSymbol(sym.owner));
       default:
         throw new IllegalStateException("access flag " + (sym.flags() & Flags.AccessFlags));
-    }
-  }
-
-  private Semanticdb.BinaryOperator semanticdbBinaryOperator(Tree.Kind kind) {
-    switch (kind) {
-      case PLUS:
-        return Semanticdb.BinaryOperator.PLUS;
-      case MINUS:
-        return Semanticdb.BinaryOperator.MINUS;
-      case MULTIPLY:
-        return Semanticdb.BinaryOperator.MULTIPLY;
-      case DIVIDE:
-        return Semanticdb.BinaryOperator.DIVIDE;
-      case REMAINDER:
-        return Semanticdb.BinaryOperator.REMAINDER;
-      case LESS_THAN:
-        return Semanticdb.BinaryOperator.LESS_THAN;
-      case GREATER_THAN:
-        return Semanticdb.BinaryOperator.GREATER_THAN;
-      case LEFT_SHIFT:
-        return Semanticdb.BinaryOperator.SHIFT_LEFT;
-      case RIGHT_SHIFT:
-        return Semanticdb.BinaryOperator.SHIFT_RIGHT;
-      case UNSIGNED_RIGHT_SHIFT:
-        return Semanticdb.BinaryOperator.SHIFT_RIGHT_UNSIGNED;
-      case EQUAL_TO:
-        return Semanticdb.BinaryOperator.EQUAL_TO;
-      case NOT_EQUAL_TO:
-        return Semanticdb.BinaryOperator.NOT_EQUAL_TO;
-      case LESS_THAN_EQUAL:
-        return Semanticdb.BinaryOperator.LESS_THAN_EQUAL;
-      case GREATER_THAN_EQUAL:
-        return Semanticdb.BinaryOperator.GREATER_THAN_EQUAL;
-      case CONDITIONAL_AND:
-        return Semanticdb.BinaryOperator.CONDITIONAL_AND;
-      case CONDITIONAL_OR:
-        return Semanticdb.BinaryOperator.CONDITIONAL_OR;
-      case AND:
-        return Semanticdb.BinaryOperator.AND;
-      case OR:
-        return Semanticdb.BinaryOperator.OR;
-      case XOR:
-        return Semanticdb.BinaryOperator.XOR;
-      default:
-        throw new IllegalStateException(
-            semanticdbUri() + ": unexpected binary expression operator kind " + kind);
     }
   }
 

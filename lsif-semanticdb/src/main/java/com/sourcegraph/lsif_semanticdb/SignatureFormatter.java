@@ -5,18 +5,17 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.*;
 
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-public class SignatureFormatter {
-  private static final Type OBJECT_TYPE_REF =
-      Type.newBuilder().setTypeRef(TypeRef.newBuilder().setSymbol("java/lang/Object#")).build();
+import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.typeRef;
 
-  private static final Type WILDCARD_TYPE_REF =
-      Type.newBuilder().setTypeRef(TypeRef.newBuilder().setSymbol("local_wildcard")).build();
+public class SignatureFormatter {
+  private static final Type OBJECT_TYPE_REF = typeRef("java/lang/Object#");
+
+  private static final Type WILDCARD_TYPE_REF = typeRef("local_wildcard");
 
   private static final String ARRAY_SYMBOL = "scala/Array#";
   private static final String ENUM_SYMBOL = "java/lang/Enum#";
