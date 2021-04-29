@@ -69,7 +69,7 @@ class PackageActor(
   def lsifIndex(msg: Package, lsifUpload: Boolean): Path = {
     commitSources(msg)
     val dump = indexClasspathArtifact(msg)
-    if (lsifUpload) {
+    if (lsifUpload && Files.isRegularFile(dump)) {
       os.proc(src, "login").call(stdout = os.Pipe, stderr = os.Pipe)
       os.proc(src, "lsif", "upload", "--no-progress", "--repo", msg.path)
         .call(
@@ -163,6 +163,8 @@ class PackageActor(
   def indexClasspathArtifact(pkg: Package): Path = {
     val sourceroot = packageDir(pkg)
     val dump = sourceroot.resolve("dump.lsif")
+    if (!Files.isDirectory(sourceroot))
+      return dump
     val out = new ByteArrayOutputStream
     val ps =
       new PrintStream(out) {
@@ -171,7 +173,15 @@ class PackageActor(
     val env = LsifJava.app.env.withStandardOutput(ps).withStandardError(ps)
     val app = LsifJava.app.withEnv(env).withReporter(ConsoleReporter(ps))
     val index = app.run(
-      List("index", "--cwd", sourceroot.toString(), "--output", dump.toString())
+      List(
+        "index",
+        "--cwd",
+        sourceroot.toString(),
+        "--output",
+        dump.toString(),
+        "--build-tool",
+        "lsif"
+      )
     )
     if (index != 0) {
       ps.flush()

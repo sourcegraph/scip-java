@@ -71,18 +71,20 @@ object Package {
         else
           Left(exit.out.trim())
       case s"maven:$library" =>
-        Dependencies
-          .parseDependencyEither(library)
-          .flatMap { dep =>
-            try {
-              // Report an error if the dependency can't be resolved.
-              Dependencies.resolveProvidedDeps(dep)
-              Right(MavenPackage(dep))
-            } catch {
-              case NonFatal(e) =>
-                Left(e.getMessage())
-            }
+        try {
+          val deps = Dependencies
+            .resolveDependencies(List(library), transitive = false)
+          if (deps.sources.isEmpty) {
+            Left(s"no sources for package '$library'")
+          } else if (deps.dependencies.length != 1) {
+            Left(s"expected a single dependency, got ${deps.dependencies}")
+          } else {
+            Right(MavenPackage(deps.dependencies.head))
           }
+        } catch {
+          case NonFatal(e) =>
+            Left(e.getMessage())
+        }
       case other =>
         Left(
           s"unsupported package '$other'. To fix this problem, use a valid syntax " +
