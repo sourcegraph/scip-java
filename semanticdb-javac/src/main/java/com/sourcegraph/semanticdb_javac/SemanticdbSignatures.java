@@ -9,6 +9,7 @@ import javax.lang.model.type.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.*;
 import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.UNRESOLVED_TYPE_REF;
 
 public final class SemanticdbSignatures {
@@ -53,13 +54,9 @@ public final class SemanticdbSignatures {
       builder.addParents(type);
     }
 
-    Scope.Builder declarations = Scope.newBuilder();
-    for (Symbol enclosed : sym.getEnclosedElements()) {
-      declarations.addSymlinks(cache.semanticdbSymbol(enclosed, locals));
-    }
     builder.setDeclarations(generateScope(sym.getEnclosedElements()));
 
-    return Signature.newBuilder().setClassSignature(builder).build();
+    return signature(builder);
   }
 
   private Signature generateMethodSignature(Symbol.MethodSymbol sym) {
@@ -78,7 +75,7 @@ public final class SemanticdbSignatures {
         sym.getThrownTypes().stream().map(this::generateType).collect(Collectors.toList());
     builder.addAllThrows(thrownTypes);
 
-    return Signature.newBuilder().setMethodSignature(builder).build();
+    return signature(builder);
   }
 
   private Signature generateFieldSignature(Symbol.VarSymbol sym) {
@@ -86,9 +83,7 @@ public final class SemanticdbSignatures {
     if (generateType == null) {
       generateType = UNRESOLVED_TYPE_REF;
     }
-    return Signature.newBuilder()
-        .setValueSignature(ValueSignature.newBuilder().setTpe(generateType))
-        .build();
+    return signature(ValueSignature.newBuilder().setTpe(generateType));
   }
 
   private Signature generateTypeSignature(Symbol.TypeVariableSymbol sym) {
@@ -100,14 +95,13 @@ public final class SemanticdbSignatures {
     if (upperBound != null) builder.setUpperBound(upperBound);
     else builder.setUpperBound(UNRESOLVED_TYPE_REF);
 
-    return Signature.newBuilder().setTypeSignature(builder).build();
+    return signature(builder);
   }
 
-  private <T extends Element> Scope generateScope(List<T> elements) {
+  private Scope generateScope(List<? extends Element> elements) {
     Scope.Builder scope = Scope.newBuilder();
-    for (T typeVar : elements) {
-      String s = cache.semanticdbSymbol(typeVar, locals);
-      scope.addSymlinks(s);
+    for (Element typeVar : elements) {
+      scope.addSymlinks(cache.semanticdbSymbol(typeVar, locals));
     }
     return scope.build();
   }

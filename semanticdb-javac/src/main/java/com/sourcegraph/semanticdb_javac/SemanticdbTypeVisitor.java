@@ -1,17 +1,17 @@
 package com.sourcegraph.semanticdb_javac;
 
 import com.sun.tools.javac.code.Type;
+import com.sun.tools.javac.util.List;
 
 import javax.lang.model.type.*;
 import javax.lang.model.util.SimpleTypeVisitor8;
 import java.util.ArrayList;
 
+import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.*;
+
 /** A TypeMirror tree visitor that constructs a recursive SemanticDB Type structure. */
 class SemanticdbTypeVisitor extends SimpleTypeVisitor8<Semanticdb.Type, Void> {
-  static final Semanticdb.Type UNRESOLVED_TYPE_REF =
-      Semanticdb.Type.newBuilder()
-          .setTypeRef(Semanticdb.TypeRef.newBuilder().setSymbol("unresolved_type#"))
-          .build();
+  static final Semanticdb.Type UNRESOLVED_TYPE_REF = typeRef("unresolved_type#");
 
   static final String ARRAY_SYMBOL = "scala/Array#";
 
@@ -61,52 +61,26 @@ class SemanticdbTypeVisitor extends SimpleTypeVisitor8<Semanticdb.Type, Void> {
     }
 
     if (!isExistential) {
-      return Semanticdb.Type.newBuilder()
-          .setTypeRef(
-              Semanticdb.TypeRef.newBuilder()
-                  .setSymbol(cache.semanticdbSymbol(t.asElement(), locals))
-                  .addAllTypeArguments(typeParams))
-          .build();
+      return typeRef(cache.semanticdbSymbol(t.asElement(), locals), typeParams);
     } else {
-      return Semanticdb.Type.newBuilder()
-          .setExistentialType(
-              Semanticdb.ExistentialType.newBuilder()
-                  .setTpe(
-                      Semanticdb.Type.newBuilder()
-                          .setTypeRef(
-                              Semanticdb.TypeRef.newBuilder()
-                                  .setSymbol(cache.semanticdbSymbol(t.asElement(), locals))
-                                  .addAllTypeArguments(typeParams)))
-                  .setDeclarations(declarations))
-          .build();
+      return existentialType(
+          typeRef(cache.semanticdbSymbol(t.asElement(), locals), typeParams), declarations.build());
     }
   }
 
   @Override
   public Semanticdb.Type visitArray(ArrayType t, Void unused) {
-    return Semanticdb.Type.newBuilder()
-        .setTypeRef(
-            Semanticdb.TypeRef.newBuilder()
-                .setSymbol(ARRAY_SYMBOL)
-                .addTypeArguments(semanticdbType(t.getComponentType())))
-        .build();
+    return typeRef(ARRAY_SYMBOL, List.of(semanticdbType(t.getComponentType())));
   }
 
   @Override
   public Semanticdb.Type visitPrimitive(PrimitiveType t, Void unused) {
-    return Semanticdb.Type.newBuilder()
-        .setTypeRef(Semanticdb.TypeRef.newBuilder().setSymbol(primitiveSymbol(t.getKind())))
-        .build();
+    return typeRef(primitiveSymbol(t.getKind()));
   }
 
   @Override
   public Semanticdb.Type visitTypeVariable(TypeVariable t, Void unused) {
-    return Semanticdb.Type.newBuilder()
-        .setTypeRef(
-            Semanticdb.TypeRef.newBuilder()
-                .setSymbol(cache.semanticdbSymbol(t.asElement(), locals))
-                .build())
-        .build();
+    return typeRef(cache.semanticdbSymbol(t.asElement(), locals));
   }
 
   @Override
@@ -116,26 +90,19 @@ class SemanticdbTypeVisitor extends SimpleTypeVisitor8<Semanticdb.Type, Void> {
       types.add(super.visit(type));
     }
 
-    return Semanticdb.Type.newBuilder()
-        .setIntersectionType(Semanticdb.IntersectionType.newBuilder().addAllTypes(types).build())
-        .build();
+    return intersectionType(types);
   }
 
   @Override
   public Semanticdb.Type visitWildcard(WildcardType t, Void unused) {
-    return Semanticdb.Type.newBuilder()
-        .setTypeRef(
-            // https://github.com/scalameta/scalameta/issues/1703
-            // https://sourcegraph.com/github.com/scalameta/scalameta/-/blob/semanticdb/metacp/src/main/scala/scala/meta/internal/javacp/Javacp.scala#L452:19
-            Semanticdb.TypeRef.newBuilder().setSymbol("local_wildcard").build())
-        .build();
+    // https://github.com/scalameta/scalameta/issues/1703
+    // https://sourcegraph.com/github.com/scalameta/scalameta/-/blob/semanticdb/metacp/src/main/scala/scala/meta/internal/javacp/Javacp.scala#L452:19
+    return typeRef("local_wildcard");
   }
 
   @Override
   public Semanticdb.Type visitNoType(NoType t, Void unused) {
-    return Semanticdb.Type.newBuilder()
-        .setTypeRef(Semanticdb.TypeRef.newBuilder().setSymbol(primitiveSymbol(t.getKind())))
-        .build();
+    return typeRef(primitiveSymbol(t.getKind()));
   }
 
   public String primitiveSymbol(TypeKind kind) {
