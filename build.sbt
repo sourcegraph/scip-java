@@ -389,7 +389,7 @@ lazy val testSettings = List(
       "org.scalameta" %% "moped-testkit" % V.moped,
       "org.scalameta" %% "scalameta" % V.scalameta,
       "io.get-coursier" %% "coursier" % V.coursier,
-      "com.lihaoyi" %% "pprint" % "0.6.4"
+      "com.lihaoyi" %% "pprint" % "0.6.5"
     )
 )
 
