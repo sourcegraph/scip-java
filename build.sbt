@@ -230,7 +230,7 @@ lazy val packagehub = project
         "org.flywaydb" % "flyway-core" % "7.7.1",
         "org.postgresql" % "postgresql" % "42.2.14",
         "org.scalameta" %% "scalameta" % V.scalameta,
-        "com.lihaoyi" %% "cask" % "0.7.8"
+        "com.lihaoyi" %% "cask" % "0.7.10"
       )
   )
   .enablePlugins(AssemblyPlugin)
