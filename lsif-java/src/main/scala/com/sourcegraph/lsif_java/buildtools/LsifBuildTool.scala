@@ -10,11 +10,9 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.SimpleFileVisitor
 import java.nio.file.attribute.BasicFileAttributes
-
 import scala.collection.mutable.ListBuffer
 import scala.jdk.CollectionConverters._
 import scala.util.control.NonFatal
-
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.lsif_java.Dependencies
 import com.sourcegraph.lsif_java.Embedded
@@ -30,7 +28,8 @@ import moped.macros.ClassShape
 import moped.parsers.JsonParser
 import moped.reporters.Diagnostic
 import moped.reporters.Input
-import os.CommandResult
+import os.ProcessOutput.Readlines
+import os.{CommandResult, ProcessOutput}
 
 /**
  * A custom build tool that is specifically made for lsif-java.
@@ -133,11 +132,14 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
     if (javaFiles.size > 1) {
       index.app.reporter.info(f"Compiling ${javaFiles.size}%,.0f Java sources")
     }
+    val pipe = Readlines(line => {
+      index.app.reporter.info(line)
+    })
     val result = os
       .proc("javac", s"@$argsfile")
       .call(
-        stdout = os.Pipe,
-        stderr = os.Pipe,
+        stdout = pipe,
+        stderr = pipe,
         cwd = os.Path(sourceroot),
         check = false
       )
