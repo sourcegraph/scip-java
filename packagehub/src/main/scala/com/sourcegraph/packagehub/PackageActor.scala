@@ -30,6 +30,7 @@ import os.SubProcess
 import ujson.Arr
 import ujson.Bool
 import ujson.Obj
+import ujson.Str
 
 /**
  * Actor that creates git repos from package sources and (optionally LSIF
@@ -237,13 +238,13 @@ class PackageActor(
       List("dump.lsif", packagehubCached).asJava
     )
     val build = Obj()
-    val dependencies =
-      dep match {
-        case MavenPackage(dep) =>
-          build("dependencies") = Arr(packageId(dep))
-        case _ =>
-          build("indexJdk") = Bool(false)
-      }
+    dep match {
+      case MavenPackage(dep) =>
+        build("dependencies") = Arr(packageId(dep))
+      case JdkPackage(version) =>
+        build("indexJdk") = Bool(false)
+        build("jvm") = Str(version)
+    }
     Files.write(
       repo.resolve("lsif-java.json"),
       List(ujson.write(build, indent = 2)).asJava

@@ -10,9 +10,11 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.SimpleFileVisitor
 import java.nio.file.attribute.BasicFileAttributes
+
 import scala.collection.mutable.ListBuffer
 import scala.jdk.CollectionConverters._
 import scala.util.control.NonFatal
+
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.lsif_java.Dependencies
 import com.sourcegraph.lsif_java.Embedded
@@ -28,8 +30,8 @@ import moped.macros.ClassShape
 import moped.parsers.JsonParser
 import moped.reporters.Diagnostic
 import moped.reporters.Input
+import os.CommandResult
 import os.ProcessOutput.Readlines
-import os.{CommandResult, ProcessOutput}
 
 /**
  * A custom build tool that is specifically made for lsif-java.
@@ -100,7 +102,11 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
     if (!Files.isDirectory(sourceroot)) {
       throw new NoSuchFileException(sourceroot.toString())
     }
-    val javaFiles = collectAllJavaFiles(sourceroot).map(_.toString())
+    val allJavaFiles = collectAllJavaFiles(sourceroot)
+    val javaFiles = allJavaFiles
+      .filterNot(_.endsWith(moduleInfo))
+      .map(_.toString())
+    val moduleInfos = allJavaFiles.filter(_.endsWith(moduleInfo))
     if (javaFiles.isEmpty) {
       index
         .app
@@ -126,7 +132,16 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
     arguments += actualClasspath.mkString(File.pathSeparator)
     arguments +=
       s"-Xplugin:semanticdb -targetroot:$targetroot -sourceroot:$sourceroot"
-    arguments ++= javaFiles
+    if (!config.indexJdk && moduleInfos.nonEmpty) {
+      moduleInfos.foreach { module =>
+        arguments += "--module"
+        arguments += module.getParent.getFileName.toString
+      }
+      arguments += "--module-source-path"
+      arguments += sourceroot.toString
+    } else {
+      arguments ++= javaFiles
+    }
     val quotedArguments = arguments.map(a => "\"" + a + "\"")
     Files.write(argsfile, quotedArguments.asJava)
     if (javaFiles.size > 1) {
@@ -135,8 +150,17 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
     val pipe = Readlines(line => {
       index.app.reporter.info(line)
     })
+    val javac = Paths.get(
+      os.proc(coursier.toString, "java-home", "--jvm", config.jvm)
+        .call()
+        .out
+        .trim(),
+      "bin",
+      "javac"
+    )
+    index.app.reporter.info(s"$$ $javac @$argsfile")
     val result = os
-      .proc("javac", s"@$argsfile")
+      .proc(javac.toString, s"@$argsfile")
       .call(
         stdout = pipe,
         stderr = pipe,
@@ -168,11 +192,11 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
   private def clean(): Unit = {
     Files.walkFileTree(targetroot, new DeleteVisitor)
   }
+  val moduleInfo = Paths.get("module-info.java")
 
   /** Recursively collects all Java files in the working directory */
   private def collectAllJavaFiles(dir: Path): List[Path] = {
     val javaPattern = FileSystems.getDefault.getPathMatcher("glob:**.java")
-    val moduleInfo = Paths.get("module-info.java")
     val buf = ListBuffer.empty[Path]
     Files.walkFileTree(
       dir,
@@ -190,7 +214,7 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
             file: Path,
             attrs: BasicFileAttributes
         ): FileVisitResult = {
-          if (javaPattern.matches(file) && !file.endsWith(moduleInfo)) {
+          if (javaPattern.matches(file)) {
             buf += file
           }
           FileVisitResult.CONTINUE
