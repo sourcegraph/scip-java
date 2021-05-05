@@ -1,11 +1,11 @@
-FROM openjdk:8-jdk-alpine@sha256:94792824df2df33402f201713f932b58cb9de94a0cd524164a0f2283343547b3
-COPY bin/coursier coursier
-RUN apk add --no-cache git curl \
-    && git config --global user.email "you@example.com" \
-    && git config --global user.name "Your Name" \
-    && git config --global http.postBuffer 1048576000 \
-    && curl -L https://sourcegraph.com/.api/src-cli/src_linux_amd64 -o /src \
-    && chmod +x /src \
-    && /coursier bootstrap -r sonatype:snapshots com.sourcegraph:packagehub_2.13:VERSION -o /packagehub
+FROM sourcegraph/lsif-java
+COPY bin/packagehub.sh /packagehub.sh
+RUN chmod +x /packagehub.sh
+RUN git config --global user.email "you@example.com"
+RUN git config --global user.name "Your Name"
+RUN git config --global http.postBuffer 1048576000
+RUN curl -L https://sourcegraph.com/.api/src-cli/src_linux_amd64 -o /src
+RUN chmod +x /src
+RUN /coursier bootstrap -r sonatype:snapshots com.sourcegraph:packagehub_2.13:VERSION -o /packagehub
 ENV COURSIER_REPOSITORIES=central|https://maven.google.com/|jitpack
-ENTRYPOINT /packagehub --host 0.0.0.0 --port $PORT --src /src --coursier /coursier --postgres.username=$DB_USER --postgres.password=$DB_PASS --postgres.url=$DB_URL --auto-index-delay=PT1M
+CMD ["/packagehub.sh"]
