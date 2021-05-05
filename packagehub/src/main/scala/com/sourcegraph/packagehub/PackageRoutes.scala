@@ -93,11 +93,12 @@ class PackageRoutes(
   def indexedPackages(): ujson.Value =
     Arr.from(store.allIndexedPackages().map(_.id))
 
-  @cask.post("/packagehub/index-package/:pkg")
+  @cask.post("/packagehub/index-package", subpath = true)
   def indexPackage(
-      pkg: String,
+      request: cask.Request,
       upload: Boolean = false
   ): cask.Response[Data] = {
+    val pkg = request.remainingPathSegments.mkString("/")
     parsePackage(pkg) match {
       case Left(error) =>
         badRequest(error)
@@ -105,7 +106,6 @@ class PackageRoutes(
         store.addPackage(pkg)
         if (!store.isIndexedPackage(pkg)) {
           val dump = actor.lsifIndex(pkg, lsifUpload = upload)
-          val size = Files.size(dump)
           val verb =
             if (upload)
               "uploaded"
@@ -182,6 +182,7 @@ class PackageRoutes(
           env("GIT_PROTOCOL") = protocol
         }
       args += path.toString()
+      val command = args.toSeq.mkString(" ")
       val result = os
         .proc(Shellable(args.toSeq))
         .spawn(
@@ -190,11 +191,12 @@ class PackageRoutes(
           stderr = os.Pipe,
           stdin = request.bytes
         )
-      Response(new ProcessData(result, request), 200, headers.toSeq)
+      Response(new ProcessData(result, request, command), 200, headers.toSeq)
     }
   }
 
-  private class ProcessData(proc: SubProcess, request: Request) extends Data {
+  private class ProcessData(proc: SubProcess, request: Request, command: String)
+      extends Data {
     def write(out: OutputStream): Unit = {
       Internals.transfer(proc.stdout, out)
       proc.waitFor()
@@ -203,7 +205,8 @@ class PackageRoutes(
         val path = Obj(
           "exit" -> exit,
           "path" -> request.exchange.getRequestPath(),
-          "method" -> request.exchange.getRequestMethod().toString()
+          "method" -> request.exchange.getRequestMethod().toString(),
+          "command" -> command
         )
         throw new RuntimeException(ujson.write(path)) with NoStackTrace
       }
