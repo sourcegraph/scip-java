@@ -34,6 +34,7 @@ public class LsifSemanticdb {
   private void run() throws IOException {
     PackageTable packages = new PackageTable(options, writer);
     List<Path> files = SemanticdbWalker.findSemanticdbFiles(options);
+    Collections.sort(files);
     if (options.reporter.hasErrors()) return;
     if (files.isEmpty()) {
       options.reporter.error(
