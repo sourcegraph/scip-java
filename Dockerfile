@@ -1,4 +1,4 @@
-FROM sourcegraph/lsif-java
+FROM sourcegraph/lsif-java@sha256:96bbba1f3dff1a7594876c43acfb2076642e1a4b33862643138fbacbca7f42d5
 COPY bin/packagehub.sh /packagehub.sh
 RUN chmod +x /packagehub.sh
 RUN git config --global user.email "you@example.com"
