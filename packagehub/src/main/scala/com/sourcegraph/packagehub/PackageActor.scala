@@ -1,9 +1,7 @@
 package com.sourcegraph.packagehub
 
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
-import java.io.PrintStream
 import java.net.URL
 import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
@@ -26,16 +24,15 @@ import castor.Context
 import castor.SimpleActor
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.lsif_java.Dependencies
-import com.sourcegraph.lsif_java.LsifJava
+import com.sourcegraph.lsif_java.buildtools.LsifBuildTool
+import com.sourcegraph.lsif_semanticdb.JavaVersion
 import coursier.core.Dependency
-import moped.reporters.ConsoleReporter
 import org.rauschig.jarchivelib.ArchiverFactory
 import os.CommandResult
 import os.ProcessOutput.Readlines
 import os.Shellable
 import os.SubProcess
 import ujson.Arr
-import ujson.Bool
 import ujson.Obj
 import ujson.Str
 
@@ -110,7 +107,7 @@ class PackageActor(
         )
         srcs.find(Files.isRegularFile(_)) match {
           case Some(src) =>
-            commitSourcesArtifact(pkg, src)
+            commitSourcesArtifact(pkg, src, Dependencies.empty)
           case None =>
             throw new IllegalArgumentException(s"no such files: $srcs")
         }
@@ -153,7 +150,10 @@ class PackageActor(
           .stripPrefix("/private")
       )
       moveDirectory(parent, repo)
-      // TODO: write .gitignore file
+      Files.write(
+        repo.resolve(".gitignore"),
+        List("/tsconfig.json", "node_modules/").asJava
+      )
       cacheDirectory(npm)
       Files.walkFileTree(tmp, new DeleteVisitor())
       gitInit(repo)
@@ -196,7 +196,7 @@ class PackageActor(
       .fullDetailedArtifacts
       .foreach {
         case (dep, _, _, Some(file)) =>
-          commitSourcesArtifact(MavenPackage(dep), file.toPath)
+          commitSourcesArtifact(MavenPackage(dep), file.toPath, deps)
         case _ =>
       }
   }
@@ -245,52 +245,65 @@ class PackageActor(
     val dump = sourceroot.resolve("dump.lsif")
     if (!Files.isDirectory(sourceroot))
       return dump
-    val out = new ByteArrayOutputStream
-    val ps = new PrintStream(out)
-
-    val index: Int =
-      pkg match {
-        case _: NpmPackage =>
-          exec(sourceroot, List("yarn", "install"))
-          val tsconfig = sourceroot.resolve("tsconfig.json")
-          if (!Files.isRegularFile(tsconfig)) {
-            val config = Obj(
-              "include" -> Arr("**/*"),
-              "compilerOptions" -> Obj("allowJs" -> true)
-            )
-            Files.write(tsconfig, List(ujson.write(config, indent = 2)).asJava)
-          }
-          exec(
-            sourceroot,
-            List("npx", "@olafurpg/lsif-tsc", "-p", sourceroot.toString)
-          ).exitCode
-        case _ =>
-          val env = LsifJava
-            .app
-            .env
-            .withStandardOutput(ps)
-            .withStandardError(ps)
-          val app = LsifJava.app.withEnv(env).withReporter(ConsoleReporter(ps))
-          app.run(
-            List(
-              "index",
-              "--cwd",
-              sourceroot.toString(),
-              "--output",
-              dump.toString(),
-              "--build-tool",
-              "lsif"
-            )
+    pkg match {
+      case _: NpmPackage =>
+        exec(sourceroot, List("yarn", "install"))
+        val tsconfig = sourceroot.resolve("tsconfig.json")
+        if (!Files.isRegularFile(tsconfig)) {
+          val config = Obj(
+            "include" -> Arr("**/*"),
+            "compilerOptions" -> Obj("allowJs" -> true)
           )
-      }
-    if (index != 0) {
-      ps.flush()
-      sys.error(out.toString())
+          Files.write(tsconfig, List(ujson.write(config, indent = 2)).asJava)
+        }
+        exec(
+          sourceroot,
+          List("npx", "@olafurpg/lsif-tsc", "-p", sourceroot.toString)
+        )
+      case _ =>
+        val jvm: String =
+          pkg match {
+            case JdkPackage(version) =>
+              version
+            case _ =>
+              val configVersion: Option[String] =
+                for {
+                  config <- Option(
+                    sourceroot.resolve(LsifBuildTool.ConfigFileName)
+                  )
+                  if Files.isRegularFile(config)
+                  obj <- ujson.read(os.read(os.Path(config))).objOpt
+                  version <- obj.get("jvm")
+                  versionStr <- version.strOpt
+                } yield versionStr
+              configVersion.getOrElse(JavaVersion.DEFAULT_JAVA_VERSION.toString)
+          }
+        exec(
+          sourceroot,
+          List(
+            "coursier",
+            "launch",
+            "--jvm",
+            jvm,
+            "--contrib",
+            "lsif-java",
+            "--",
+            "index",
+            "--output",
+            dump.toString(),
+            "--build-tool",
+            "lsif"
+          )
+        )
     }
     dump
   }
 
-  private def commitSourcesArtifact(dep: Package, file: Path): Unit = {
+  private def commitSourcesArtifact(
+      dep: Package,
+      file: Path,
+      deps: Dependencies
+  ): Unit = {
     val repo = packageDir(dep)
     Files.createDirectories(repo)
     gitInit(repo)
@@ -323,25 +336,33 @@ class PackageActor(
           }
         )
     }
-    val gitignore = ListBuffer[String]("dump.lsif", packagehubCached)
-    dep match {
-      case _: NpmPackage =>
-        gitignore += "/tsconfig.json"
-        gitignore += "node_modules/"
-      case _ =>
-    }
-    Files.write(repo.resolve(".gitignore"), gitignore.asJava)
+    Files.write(
+      repo.resolve(".gitignore"),
+      List("dump.lsif", packagehubCached).asJava
+    )
     val build = Obj()
     dep match {
       case MavenPackage(dep) =>
+        val inferredJvmVersion =
+          for {
+            jar <- deps.classpath.headOption
+            version <- Option(JavaVersion.classfileJvmVersion(jar).orElse(null))
+            // Some libraries like JUnit target Java 3 but we can still compile them with Java 8.
+          } yield JavaVersion.roundToNearestStableRelease(version).toString
+        val jvmVersion = inferredJvmVersion
+          .getOrElse(JavaVersion.DEFAULT_JAVA_VERSION.toString)
+
+        build("kind") = Str("maven")
+        build("jvm") = Str(jvmVersion)
         build("dependencies") = Arr(packageId(dep))
       case JdkPackage(version) =>
-        build("indexJdk") = Bool(false)
+        build("kind") = Str("jdk")
         build("jvm") = Str(version)
+        build("dependencies") = Arr()
       case _ =>
     }
     Files.write(
-      repo.resolve("lsif-java.json"),
+      repo.resolve(LsifBuildTool.ConfigFileName),
       List(ujson.write(build, indent = 2)).asJava
     )
     cacheDirectory(dep)

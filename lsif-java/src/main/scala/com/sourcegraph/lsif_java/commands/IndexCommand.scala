@@ -157,7 +157,6 @@ case class IndexCommand(
           generateSemanticdbResult.exitCode
         } else {
           IndexSemanticdbCommand(
-            indexJdk = tool.indexJdk(),
             output = finalOutput,
             targetroot = List(tool.targetroot),
             packagehub = packagehub,

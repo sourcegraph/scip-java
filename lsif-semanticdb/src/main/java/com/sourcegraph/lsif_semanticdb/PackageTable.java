@@ -26,7 +26,6 @@ public class PackageTable implements Function<Package, Integer> {
   private final Set<String> cachedJdkSymbols = new HashSet<>();
   private final Map<Package, Integer> lsif = new ConcurrentHashMap<>();
   private final JavaVersion javaVersion;
-  private final boolean indexJdk;
   private final LsifWriter writer;
 
   private static final PathMatcher JAR_PATTERN =
@@ -37,13 +36,10 @@ public class PackageTable implements Function<Package, Integer> {
   public PackageTable(LsifSemanticdbOptions options, LsifWriter writer) throws IOException {
     this.writer = writer;
     this.javaVersion = new JavaVersion();
-    this.indexJdk = options.indexJdk;
     for (MavenPackage pkg : options.packages) {
       indexPackage(pkg);
     }
-    if (indexJdk) {
-      indexJdk();
-    }
+    indexJdk();
   }
 
   public void writeImportedSymbol(String symbol, int monikerId) {
@@ -106,7 +102,6 @@ public class PackageTable implements Function<Package, Integer> {
    * under the URL "jrt:/".
    */
   private boolean isJrtClassfile(String classfile) {
-    if (!indexJdk) return false;
     if (cachedJdkSymbols.contains(classfile)) return true;
     URL resource = getClass().getResource("/" + classfile);
     boolean isJrt = resource != null && "jrt".equals(resource.getProtocol());
@@ -114,26 +109,6 @@ public class PackageTable implements Function<Package, Integer> {
       cachedJdkSymbols.add(classfile);
     }
     return isJrt;
-  }
-
-  /**
-   * Returns the equivalent of `Path.toString()` but uses forward slashes on all operating systems
-   * (including Windows).
-   */
-  private String relativePathToString(Path path) {
-    StringBuilder out = new StringBuilder();
-    Iterator<Path> it = path.iterator();
-    boolean first = true;
-    while (it.hasNext()) {
-      if (first) {
-        first = false;
-      } else {
-        out.append('/');
-      }
-      String filename = it.next().toString();
-      out.append(filename);
-    }
-    return out.toString();
   }
 
   /**

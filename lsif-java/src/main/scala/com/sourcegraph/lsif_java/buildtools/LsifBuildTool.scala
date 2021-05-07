@@ -50,9 +50,9 @@ import os.ProcessOutput.Readlines
 class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
 
   protected def defaultTargetroot: Path = Paths.get("target")
-  private def configFile = index.workingDirectory.resolve("lsif-java.json")
+  private def configFile =
+    index.workingDirectory.resolve(LsifBuildTool.ConfigFileName)
   def usedInCurrentDirectory(): Boolean = Files.isRegularFile(configFile)
-  override def indexJdk(): Boolean = parsedConfig.getOrElse(Config()).indexJdk
   override def isHidden: Boolean = true
   def generateSemanticdb(): CommandResult = {
     parsedConfig match {
@@ -132,7 +132,7 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
     arguments += actualClasspath.mkString(File.pathSeparator)
     arguments +=
       s"-Xplugin:semanticdb -targetroot:$targetroot -sourceroot:$sourceroot"
-    if (!config.indexJdk && moduleInfos.nonEmpty) {
+    if (config.kind == "jdk" && moduleInfos.nonEmpty) {
       moduleInfos.foreach { module =>
         arguments += "--module"
         arguments += module.getParent.getFileName.toString
@@ -192,7 +192,8 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
   private def clean(): Unit = {
     Files.walkFileTree(targetroot, new DeleteVisitor)
   }
-  val moduleInfo = Paths.get("module-info.java")
+
+  private val moduleInfo = Paths.get("module-info.java")
 
   /** Recursively collects all Java files in the working directory */
   private def collectAllJavaFiles(dir: Path): List[Path] = {
@@ -280,10 +281,14 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
   private case class Config(
       dependencies: List[Dependency] = Nil,
       jvm: String = "8",
-      indexJdk: Boolean = true
+      kind: String = ""
   )
   private object Config {
     implicit lazy val codec = moped.macros.deriveCodec(Config())
   }
 
+}
+
+object LsifBuildTool {
+  val ConfigFileName = "lsif-java.json"
 }
