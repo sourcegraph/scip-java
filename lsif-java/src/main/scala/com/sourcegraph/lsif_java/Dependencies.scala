@@ -28,6 +28,7 @@ case class Dependencies(
 }
 
 object Dependencies {
+  val empty = Dependencies(Nil, Fetch.Result(), Fetch.Result())
   private val cache: FileCache[Task] = FileCache[Task]()
     .noCredentials
     .withCachePolicies(List(CachePolicy.LocalOnly, CachePolicy.Update))

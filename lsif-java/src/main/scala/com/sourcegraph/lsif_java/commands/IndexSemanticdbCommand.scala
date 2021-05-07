@@ -33,10 +33,6 @@ final case class IndexSemanticdbCommand(
     @Description(
       "Whether to process the SemanticDB files in parallel"
     ) parallel: Boolean = true,
-    @Description(
-      "Whether to index against symbols in the JDK codebase. " +
-        "If false, no 'packageInformation' LSIF edges will be emitted for JDK symbols."
-    ) indexJdk: Boolean = true,
     @Description("URL to a PackageHub instance")
     @Hidden
     packagehub: Option[String] = None,
@@ -76,7 +72,6 @@ final case class IndexSemanticdbCommand(
         "java",
         format,
         parallel,
-        indexJdk,
         packages.map(_.toPackageInformation).asJava
       )
     LsifSemanticdb.run(options)

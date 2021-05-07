@@ -14,8 +14,6 @@ abstract class BuildTool(val name: String, index: IndexCommand) {
 
   def isHidden: Boolean = false
 
-  def indexJdk(): Boolean = true
-
   final def sourceroot: Path = index.workingDirectory
   final def targetroot: Path =
     AbsolutePath
