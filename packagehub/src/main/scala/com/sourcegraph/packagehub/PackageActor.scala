@@ -281,7 +281,7 @@ class PackageActor(
         exec(
           sourceroot,
           List(
-            "coursier",
+            coursier,
             "launch",
             "--jvm",
             jvm,
