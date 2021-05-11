@@ -59,7 +59,9 @@ case class SnapshotLsifCommand(
       in = AbsolutePath.of(inputPath, sourceroot)
       doc <- SnapshotLsifCommand.parseTextDocument(in, sourceroot)
     } {
-      val docPath = AbsolutePath.of(Path.of(doc.getUri), sourceroot).toRealPath()
+      val docPath = AbsolutePath
+        .of(Paths.get(doc.getUri), sourceroot)
+        .toRealPath()
       if (docPath.toAbsolutePath.startsWith(sourceroot)) {
         SnapshotCommand.writeSnapshot(doc, finalOutput)
       }
