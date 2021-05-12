@@ -49,8 +49,8 @@ case class SnapshotLsifCommand(
     @PositionalArguments() input: List[Path] = List(Paths.get("dump.lsif"))
 ) extends Command {
 
-  private val finalOutput = AbsolutePath.of(output, sourceroot)
   def sourceroot: Path = AbsolutePath.of(app.env.workingDirectory)
+  private val finalOutput = AbsolutePath.of(output, sourceroot)
 
   def run(): Int = {
     Files.walkFileTree(finalOutput, new DeleteVisitor())
@@ -59,7 +59,12 @@ case class SnapshotLsifCommand(
       in = AbsolutePath.of(inputPath, sourceroot)
       doc <- SnapshotLsifCommand.parseTextDocument(in, sourceroot)
     } {
-      SnapshotCommand.writeSnapshot(doc, finalOutput)
+      val docPath = AbsolutePath
+        .of(Paths.get(doc.getUri), sourceroot)
+        .toRealPath()
+      if (docPath.toAbsolutePath.startsWith(sourceroot)) {
+        SnapshotCommand.writeSnapshot(doc, finalOutput)
+      }
     }
     0
   }
