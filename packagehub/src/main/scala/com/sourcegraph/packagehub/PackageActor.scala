@@ -49,7 +49,7 @@ class PackageActor(
     src: String,
     coursier: String,
     store: PackageStore,
-    packagehubUrl: String,
+    lsifJavaVersion: String,
     val dir: Path,
     val addr: Int = 3434
 )(implicit ctx: Context, log: cask.Logger)
@@ -285,8 +285,9 @@ class PackageActor(
             "launch",
             "--jvm",
             jvm,
-            "--contrib",
-            "lsif-java",
+            s"com.sourcegraph:lsif-java_2.13:${lsifJavaVersion}",
+            "-r",
+            "sonatype:snapshots",
             "--",
             "index",
             "--output",
