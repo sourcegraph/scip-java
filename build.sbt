@@ -64,8 +64,9 @@ commands +=
 
 commands +=
   Command.command("checkAll") { s =>
-    "scalafmtCheckAll" :: "scalafmtSbtCheck" :: "scalafixAll --check" ::
-      "javafmtCheckAll" :: "publishLocal" :: "docs/docusaurusCreateSite" :: s
+    "javafmtCheckAll" :: "scalafmtCheckAll" :: "scalafmtSbtCheck" ::
+      "scalafixAll --check" :: "publishLocal" :: "docs/docusaurusCreateSite" ::
+      s
   }
 
 lazy val semanticdb = project
