@@ -66,7 +66,9 @@ compiler plugin. To do this you need to explicitly configure two directories:
   It's important that all of the source files that should be index live under
   this directory.
 - `-targetroot:PATH`: the absolute path to the directory where to generate
-  SemanticDB file. This directory can be anywhere on your file system.
+  SemanticDB file. This directory can be anywhere on your file system.  
+  Alternatively, pass in `-targetroot:javac-classes-directory`
+  for the plugin to automatically use the `javac` output directory.
 
 If you're using Gradle.
 

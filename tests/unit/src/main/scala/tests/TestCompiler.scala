@@ -28,7 +28,10 @@ class TestCompiler(
 
   private val compiler = ToolProvider.getSystemJavaCompiler
   private val fileManager =
-    new SimpleFileManager(compiler.getStandardFileManager(null, null, null))
+    new SimpleFileManager(
+      compiler.getStandardFileManager(null, null, null),
+      targetroot
+    )
 
   def this(targetroot: Path) {
     this(TestCompiler.PROCESSOR_PATH, Nil, targetroot)
