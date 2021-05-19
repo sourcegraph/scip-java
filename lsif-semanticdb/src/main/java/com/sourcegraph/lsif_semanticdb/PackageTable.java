@@ -36,10 +36,14 @@ public class PackageTable implements Function<Package, Integer> {
   public PackageTable(LsifSemanticdbOptions options, LsifWriter writer) throws IOException {
     this.writer = writer;
     this.javaVersion = new JavaVersion();
+    // NOTE: it's important that we index the JDK before maven packages. Some maven packages
+    // redefine classes from the JDK and we want those maven packages to take precedence over
+    // the JDK. The motivation to prioritize maven packages over the JDK is that we only want
+    // to exports monikers against the JDK when indexing the JDK repo.
+    indexJdk();
     for (MavenPackage pkg : options.packages) {
       indexPackage(pkg);
     }
-    indexJdk();
   }
 
   public void writeImportedSymbol(String symbol, int monikerId) {
