@@ -38,6 +38,9 @@ final case class IndexSemanticdbCommand(
     packagehub: Option[String] = None,
     @Description("Directories that contain SemanticDB files.")
     @PositionalArguments() targetroot: List[Path] = Nil,
+    @Description(
+      "The kind of this build, one of: empty string, jdk, maven"
+    ) buildKind: String = "",
     @Inline() app: Application = Application.default
 ) extends Command {
   def sourceroot: Path = AbsolutePath.of(app.env.workingDirectory)
@@ -72,7 +75,8 @@ final case class IndexSemanticdbCommand(
         "java",
         format,
         parallel,
-        packages.map(_.toPackageInformation).asJava
+        packages.map(_.toPackageInformation).asJava,
+        buildKind
       )
     LsifSemanticdb.run(options)
     postPackages(packages)

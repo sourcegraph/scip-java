@@ -13,6 +13,7 @@ abstract class BuildTool(val name: String, index: IndexCommand) {
   protected def defaultTargetroot: Path
 
   def isHidden: Boolean = false
+  def buildKind: String = ""
 
   final def sourceroot: Path = index.workingDirectory
   final def targetroot: Path =

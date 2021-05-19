@@ -36,18 +36,31 @@ public class PackageTable implements Function<Package, Integer> {
   public PackageTable(LsifSemanticdbOptions options, LsifWriter writer) throws IOException {
     this.writer = writer;
     this.javaVersion = new JavaVersion();
+    // NOTE: it's important that we index the JDK before maven packages. Some maven packages
+    // redefine classes from the JDK and we want those maven packages to take precedence over
+    // the JDK. The motivation to prioritize maven packages over the JDK is that we only want
+    // to exports monikers against the JDK when indexing the JDK repo.
+    indexJdk();
     for (MavenPackage pkg : options.packages) {
       indexPackage(pkg);
     }
-    indexJdk();
+  }
+
+  public void writeMonikerPackage(int monikerId, Package pkg) {
+    int pkgId = lsif.computeIfAbsent(pkg, this);
+    writer.emitPackageInformationEdge(monikerId, pkgId);
   }
 
   public void writeImportedSymbol(String symbol, int monikerId) {
-    packageForSymbol(symbol)
-        .ifPresent(
-            pkg -> {
-              int pkgId = lsif.computeIfAbsent(pkg, this);
-              writer.emitPackageInformationEdge(monikerId, pkgId);
+    packageForSymbol(symbol).ifPresent(pkg -> writeMonikerPackage(monikerId, pkg));
+  }
+
+  public Optional<Package> packageForSymbol(String symbol) {
+    return SymbolDescriptor.toplevel(symbol)
+        .flatMap(
+            toplevel -> {
+              String classfile = toplevel.owner + toplevel.descriptor.name + ".class";
+              return packageForClassfile(classfile);
             });
   }
 
@@ -56,15 +69,6 @@ public class PackageTable implements Function<Package, Integer> {
     if (result != null) return Optional.of(result);
     if (!javaVersion.isJava8 && isJrtClassfile(classfile)) return Optional.of(javaVersion.pkg);
     return Optional.empty();
-  }
-
-  private Optional<Package> packageForSymbol(String symbol) {
-    return SymbolDescriptor.toplevel(symbol)
-        .flatMap(
-            toplevel -> {
-              String classfile = toplevel.owner + toplevel.descriptor.name + ".class";
-              return packageForClassfile(classfile);
-            });
   }
 
   private void indexPackage(MavenPackage pkg) throws IOException {
