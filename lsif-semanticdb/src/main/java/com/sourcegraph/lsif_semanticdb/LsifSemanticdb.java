@@ -97,7 +97,7 @@ public class LsifSemanticdb {
             .collect(Collectors.toSet());
     doc.id = documentId;
     ResultSets results =
-        new ResultSets(writer, globals, isExportedSymbol, localDefinitions, packages);
+        new ResultSets(writer, globals, isExportedSymbol, localDefinitions, packages, options);
     Set<Integer> rangeIds = new LinkedHashSet<>();
 
     for (SymbolOccurrence occ : doc.sortedSymbolOccurrences()) {

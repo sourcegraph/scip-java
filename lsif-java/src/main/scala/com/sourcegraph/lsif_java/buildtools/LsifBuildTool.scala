@@ -54,6 +54,8 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
     index.workingDirectory.resolve(LsifBuildTool.ConfigFileName)
   def usedInCurrentDirectory(): Boolean = Files.isRegularFile(configFile)
   override def isHidden: Boolean = true
+  override def buildKind: String =
+    parsedConfig.fold(_.kind, _ => super.buildKind)
   def generateSemanticdb(): CommandResult = {
     parsedConfig match {
       case ValueResult(value) =>

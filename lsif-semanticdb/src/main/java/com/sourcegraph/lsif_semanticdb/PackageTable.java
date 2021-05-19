@@ -46,12 +46,21 @@ public class PackageTable implements Function<Package, Integer> {
     }
   }
 
+  public void writeMonikerPackage(int monikerId, Package pkg) {
+    int pkgId = lsif.computeIfAbsent(pkg, this);
+    writer.emitPackageInformationEdge(monikerId, pkgId);
+  }
+
   public void writeImportedSymbol(String symbol, int monikerId) {
-    packageForSymbol(symbol)
-        .ifPresent(
-            pkg -> {
-              int pkgId = lsif.computeIfAbsent(pkg, this);
-              writer.emitPackageInformationEdge(monikerId, pkgId);
+    packageForSymbol(symbol).ifPresent(pkg -> writeMonikerPackage(monikerId, pkg));
+  }
+
+  public Optional<Package> packageForSymbol(String symbol) {
+    return SymbolDescriptor.toplevel(symbol)
+        .flatMap(
+            toplevel -> {
+              String classfile = toplevel.owner + toplevel.descriptor.name + ".class";
+              return packageForClassfile(classfile);
             });
   }
 
@@ -60,15 +69,6 @@ public class PackageTable implements Function<Package, Integer> {
     if (result != null) return Optional.of(result);
     if (!javaVersion.isJava8 && isJrtClassfile(classfile)) return Optional.of(javaVersion.pkg);
     return Optional.empty();
-  }
-
-  private Optional<Package> packageForSymbol(String symbol) {
-    return SymbolDescriptor.toplevel(symbol)
-        .flatMap(
-            toplevel -> {
-              String classfile = toplevel.owner + toplevel.descriptor.name + ".class";
-              return packageForClassfile(classfile);
-            });
   }
 
   private void indexPackage(MavenPackage pkg) throws IOException {

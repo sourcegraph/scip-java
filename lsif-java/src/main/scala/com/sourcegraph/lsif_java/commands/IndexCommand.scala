@@ -160,6 +160,7 @@ case class IndexCommand(
             output = finalOutput,
             targetroot = List(tool.targetroot),
             packagehub = packagehub,
+            buildKind = tool.buildKind,
             app = app
           ).run()
         }
