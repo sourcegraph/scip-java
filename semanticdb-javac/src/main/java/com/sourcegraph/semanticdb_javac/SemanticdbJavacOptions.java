@@ -11,14 +11,10 @@ import com.sun.tools.javac.util.Context;
 
 import static javax.tools.StandardLocation.CLASS_OUTPUT;
 
-/**
- * Settings that can be configured alongside the -Xplugin compiler option.
- */
+/** Settings that can be configured alongside the -Xplugin compiler option. */
 public class SemanticdbJavacOptions {
 
-  /**
-   * The directory to place META-INF and its .semanticdb files
-   */
+  /** The directory to place META-INF and its .semanticdb files */
   public Path targetroot;
 
   public Path sourceroot;
@@ -90,9 +86,7 @@ public class SemanticdbJavacOptions {
       String errorMsg =
           String.format(
               "-targetroot:%s passed but could not get the class output directory: %s",
-              JAVAC_CLASSES_DIR_ARG,
-              e.getMessage()
-          );
+              JAVAC_CLASSES_DIR_ARG, e.getMessage());
       result.errors.add(errorMsg);
     }
     return outputDir;
