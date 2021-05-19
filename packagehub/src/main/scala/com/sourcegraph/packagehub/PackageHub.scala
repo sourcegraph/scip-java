@@ -39,6 +39,9 @@ case class PackageHub(
     postgres: PostgresOptions = PostgresOptions(),
     @Description("URL of the PackageHub server") packagehubUrl: String =
       "https://packagehub-ohcltxh6aq-uc.a.run.app",
+    @Description(
+      "The version of lsif-java to use for indexing packages"
+    ) lsifJavaVersion: String = BuildInfo.version,
     @Description("Path to the src-cli binary") src: String = "src",
     @Description("Path to the coursier binary") coursier: String = "coursier",
     @Description("If enabled, schedule an LSIF index after the given delay")
@@ -62,7 +65,7 @@ case class PackageHub(
         src,
         coursier,
         store,
-        packagehubUrl,
+        lsifJavaVersion,
         dir.getOrElse(app.env.cacheDirectory)
       )(ctx, log)
     val routes = new PackageRoutes(this, actor, store, log)(ctx)

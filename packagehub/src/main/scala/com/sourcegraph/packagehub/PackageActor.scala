@@ -49,7 +49,7 @@ class PackageActor(
     src: String,
     coursier: String,
     store: PackageStore,
-    packagehubUrl: String,
+    lsifJavaVersion: String,
     val dir: Path,
     val addr: Int = 3434
 )(implicit ctx: Context, log: cask.Logger)
@@ -247,7 +247,10 @@ class PackageActor(
       return dump
     pkg match {
       case _: NpmPackage =>
-        exec(sourceroot, List("yarn", "install"))
+        val toolVersions = sourceroot.resolve(".tool-versions")
+        if (!Files.isRegularFile(toolVersions)) {
+          Files.write(toolVersions, List("yarn 1.22.4").asJava)
+        }
         val tsconfig = sourceroot.resolve("tsconfig.json")
         if (!Files.isRegularFile(tsconfig)) {
           val config = Obj(
@@ -256,6 +259,7 @@ class PackageActor(
           )
           Files.write(tsconfig, List(ujson.write(config, indent = 2)).asJava)
         }
+        exec(sourceroot, List("yarn", "install"))
         exec(
           sourceroot,
           List("npx", "@olafurpg/lsif-tsc", "-p", sourceroot.toString)
@@ -285,8 +289,9 @@ class PackageActor(
             "launch",
             "--jvm",
             jvm,
-            "--contrib",
-            "lsif-java",
+            s"com.sourcegraph:lsif-java_2.13:${lsifJavaVersion}",
+            "-r",
+            "sonatype:snapshots",
             "--",
             "index",
             "--output",
