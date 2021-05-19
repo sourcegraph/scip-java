@@ -1,6 +1,7 @@
 package tests;
 
 import java.net.URI;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import javax.tools.FileObject;
@@ -13,10 +14,12 @@ import com.sourcegraph.semanticdb_javac.SemanticdbJavacOptions;
 public class SimpleFileManager
     extends ForwardingJavaFileManager<StandardJavaFileManager> {
 
-  public List<SimpleClassFile> compiled = new ArrayList<>();
+  public final List<SimpleClassFile> compiled = new ArrayList<>();
+  public final Path targetroot;
 
-  protected SimpleFileManager(StandardJavaFileManager fileManager) {
+  protected SimpleFileManager(StandardJavaFileManager fileManager, Path targetroot) {
     super(fileManager);
+    this.targetroot = targetroot;
   }
 
   // standard constructors/getters
@@ -24,8 +27,8 @@ public class SimpleFileManager
   @Override
   public JavaFileObject getJavaFileForOutput(Location location,
                                              String className, JavaFileObject.Kind kind, FileObject sibling) {
-    SimpleClassFile result = new SimpleClassFile(
-        URI.create("string://" + className));
+    URI uri = targetroot.resolve(className).toUri();
+    SimpleClassFile result = new SimpleClassFile(uri);
     if (!className.equals(SemanticdbJavacOptions.stubClassName)) {
       compiled.add(result);
     }

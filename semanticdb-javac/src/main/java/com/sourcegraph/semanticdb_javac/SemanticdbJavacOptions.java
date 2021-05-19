@@ -1,5 +1,7 @@
 package com.sourcegraph.semanticdb_javac;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class SemanticdbJavacOptions {
   public boolean verboseEnabled = false;
   public final ArrayList<String> errors;
 
-  public static String stubClassName = "META-INF-stub";
+  public static String stubClassName = "META-INF-semanticdb-stub";
 
   public SemanticdbJavacOptions() {
     errors = new ArrayList<>();
@@ -83,10 +85,12 @@ public class SemanticdbJavacOptions {
           fm.getJavaFileForOutput(CLASS_OUTPUT, stubClassName, JavaFileObject.Kind.CLASS, null);
       outputDir = Paths.get(outputDirStub.toUri()).toAbsolutePath().getParent();
     } catch (Exception e) {
+      ByteArrayOutputStream out = new ByteArrayOutputStream();
+      e.printStackTrace(new PrintStream(out));
       String errorMsg =
           String.format(
-              "-targetroot:%s passed but could not get the class output directory: %s",
-              JAVAC_CLASSES_DIR_ARG, e.getMessage());
+              "exception while processing SemanticDB option '-targetroot:%s'\n%s",
+              JAVAC_CLASSES_DIR_ARG, out.toString());
       result.errors.add(errorMsg);
     }
     return outputDir;
