@@ -43,7 +43,7 @@ public class ResultSets implements Function<String, ResultIds> {
     int resultSet = writer.emitResultSet();
 
     // Moniker
-    int monikerId = writer.emitMonikerVertex(symbol, isExportedSymbol);
+    int monikerId = writer.emitMonikerVertex(symbol, hasDefinitionResult);
     writer.emitMonikerEdge(resultSet, monikerId);
     packages.writeImportedSymbol(symbol, monikerId);
 
