@@ -5,6 +5,7 @@ import com.sourcegraph.lsif_protocol.LsifHover.Content;
 import com.sourcegraph.lsif_protocol.LsifObject;
 import com.sourcegraph.lsif_protocol.LsifPosition;
 import com.sourcegraph.semanticdb_javac.Semanticdb;
+import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -112,7 +113,8 @@ public class LsifWriter implements AutoCloseable {
   }
 
   public int emitMonikerVertex(String symbol, boolean isExportedSymbol) {
-    String kind = isExportedSymbol ? "export" : "import";
+    String kind =
+        SemanticdbSymbols.isLocal(symbol) ? "local" : isExportedSymbol ? "export" : "import";
     return emitObject(
         lsifVertex("moniker").setKind(kind).setScheme("semanticdb").setIdentifier(symbol));
   }

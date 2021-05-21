@@ -150,6 +150,10 @@ class LsifGraphSnapshotGenerator extends SnapshotGenerator {
             ),
             sourceroot
           )
+          assert(
+            Files.isDirectory(outputSnapshot),
+            s"snapshot-lsif command did not create directory $outputSnapshot"
+          )
           val snapshotLsif = FileLayout.asString(outputSnapshot)
           val obtained = new StringBuilder()
             .header("Source code")

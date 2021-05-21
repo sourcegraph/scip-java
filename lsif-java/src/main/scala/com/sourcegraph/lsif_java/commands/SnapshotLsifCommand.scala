@@ -49,8 +49,8 @@ case class SnapshotLsifCommand(
     @PositionalArguments() input: List[Path] = List(Paths.get("dump.lsif"))
 ) extends Command {
 
-  def sourceroot: Path = AbsolutePath.of(app.env.workingDirectory)
-  private val finalOutput = AbsolutePath.of(output, sourceroot)
+  def sourceroot: Path = AbsolutePath.of(app.env.workingDirectory).normalize()
+  private val finalOutput = AbsolutePath.of(output, sourceroot).normalize()
 
   def run(): Int = {
     Files.walkFileTree(finalOutput, new DeleteVisitor())
@@ -61,7 +61,7 @@ case class SnapshotLsifCommand(
     } {
       val docPath = AbsolutePath
         .of(Paths.get(doc.getUri), sourceroot)
-        .toRealPath()
+        .normalize()
       if (docPath.toAbsolutePath.startsWith(sourceroot)) {
         SnapshotCommand.writeSnapshot(doc, finalOutput)
       }
@@ -252,7 +252,7 @@ object SnapshotLsifCommand {
               .trim()
             s"hoverResult(${node.getId}) ${contents}"
           case ("vertex", "moniker") =>
-            s"moniker ${node.getIdentifier}"
+            s"${node.getKind} ${node.getIdentifier}"
           case ("vertex", "range") =>
             val i = input(node)
             val p = Position.range(
