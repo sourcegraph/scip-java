@@ -45,6 +45,7 @@ class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
       buildCommand ++=
         index.finalBuildCommand(
           List(
+            s"--batch-mode",
             s"clean",
             // Default to the "verify" command, as recommended by the official docs
             // https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#usual-command-line-calls
