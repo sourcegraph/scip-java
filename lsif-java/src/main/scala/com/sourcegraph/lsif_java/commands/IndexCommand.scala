@@ -6,15 +6,15 @@ import java.nio.file.Paths
 
 import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.lsif_java.buildtools.BuildTool
+import fansi.Color
 import moped.annotations._
 import moped.cli.Application
 import moped.cli.Command
 import moped.cli.CommandParser
 import moped.internal.reporters.Levenshtein
 import os.CommandResult
-import os.Inherit
-import os.Shellable
 import os.ProcessOutput
+import os.Shellable
 
 @Description(
   "Automatically generate an LSIF index in the current working directory."
@@ -66,7 +66,7 @@ case class IndexCommand(
       shellable: Shellable,
       env: Map[String, String] = Map.empty
   ): CommandResult = {
-    app.info(shellable.value.mkString(" "))
+    app.out.println(Color.DarkGray(shellable.value.mkString("$ ", " ", "")))
     app
       .process(shellable)
       .call(
