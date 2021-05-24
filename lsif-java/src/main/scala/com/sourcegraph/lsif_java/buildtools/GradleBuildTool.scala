@@ -75,7 +75,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     buildCommand ++= index.finalBuildCommand(List("clean", "compileTestJava"))
     buildCommand += lsifJavaDependencies
 
-    val result = index.process(buildCommand)
+    val result = index.process(buildCommand, env = Map("TERM" -> "dumb"))
     printDebugLogs(toolchains.tmp)
     Embedded
       .reportUnexpectedJavacErrors(index.app.reporter, toolchains.tmp)
