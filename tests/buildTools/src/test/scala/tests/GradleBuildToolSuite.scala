@@ -103,10 +103,13 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |/src/main/java/Example.java
        |public class Example {}
        |""".stripMargin,
-    expectedError =
-      """|info: /workingDirectory/gradlew --init-script /cache/java-toolchains.gradle lsifDetectJavaToolchains
-         |error: lsif-java does not support Gradle 6.7 when used together with Java toolchains. To fix this problem, upgrade to Gradle version 6.8 or newer and try again.
-         |""".stripMargin,
+    expectedError = Some { error =>
+      assert(
+        clue(error).contains(
+          """error: lsif-java does not support Gradle 6.7 when used together with Java toolchains. To fix this problem, upgrade to Gradle version 6.8 or newer and try again."""
+        )
+      )
+    },
     initCommand = gradleVersion("6.7")
   )
 
