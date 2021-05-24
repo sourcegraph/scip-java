@@ -37,7 +37,7 @@ abstract class BaseBuildToolSuite extends MopedSuite(LsifJava.app) {
       original: String,
       expectedSemanticdbFiles: Int = 0,
       extraArguments: List[String] = Nil,
-      expectedError: String = "",
+      expectedError: Option[String => Unit] = None,
       expectedPackages: String = "",
       initCommand: => List[String] = Nil
   ): Unit = {
@@ -59,11 +59,12 @@ abstract class BaseBuildToolSuite extends MopedSuite(LsifJava.app) {
       if (extraArguments.contains("--verbose")) {
         println(app.capturedOutput)
       }
-      if (expectedError.nonEmpty) {
-        assert(clue(exit) != 0, clues(app.capturedOutput))
-        assertNoDiff(app.capturedOutput, expectedError)
-      } else {
-        assertEquals(exit, 0, clues(app.capturedOutput))
+      expectedError match {
+        case Some(fn) =>
+          assert(clue(exit) != 0, clues(app.capturedOutput))
+          fn(app.capturedOutput)
+        case None =>
+          assertEquals(exit, 0, clues(app.capturedOutput))
       }
       val semanticdbFiles =
         if (!Files.isDirectory(targetroot))

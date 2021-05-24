@@ -6,13 +6,14 @@ import java.nio.file.Paths
 
 import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.lsif_java.buildtools.BuildTool
+import fansi.Color
 import moped.annotations._
 import moped.cli.Application
 import moped.cli.Command
 import moped.cli.CommandParser
 import moped.internal.reporters.Levenshtein
 import os.CommandResult
-import os.Inherit
+import os.ProcessOutput
 import os.Shellable
 
 @Description(
@@ -65,13 +66,13 @@ case class IndexCommand(
       shellable: Shellable,
       env: Map[String, String] = Map.empty
   ): CommandResult = {
-    app.info(shellable.value.mkString(" "))
+    app.out.println(Color.DarkGray(shellable.value.mkString("$ ", " ", "")))
     app
       .process(shellable)
       .call(
         check = false,
-        stdout = Inherit,
-        stderr = Inherit,
+        stdout = ProcessOutput.Readlines(line => app.out.println(line)),
+        stderr = ProcessOutput.Readlines(line => app.err.println(line)),
         cwd = workingDirectory,
         env = env
       )
