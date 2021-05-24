@@ -14,6 +14,7 @@ import moped.internal.reporters.Levenshtein
 import os.CommandResult
 import os.Inherit
 import os.Shellable
+import os.ProcessOutput
 
 @Description(
   "Automatically generate an LSIF index in the current working directory."
@@ -70,8 +71,8 @@ case class IndexCommand(
       .process(shellable)
       .call(
         check = false,
-        stdout = Inherit,
-        stderr = Inherit,
+        stdout = ProcessOutput.Readlines(line => app.out.println(line)),
+        stderr = ProcessOutput.Readlines(line => app.err.println(line)),
         cwd = workingDirectory,
         env = env
       )
