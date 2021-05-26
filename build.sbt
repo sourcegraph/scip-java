@@ -53,9 +53,9 @@ inThisBuild(
 )
 
 name := "root"
-bloopGenerate.in(Compile) := None
-bloopGenerate.in(Test) := None
-skip.in(publish) := true
+(Compile / bloopGenerate) := None
+(Test / bloopGenerate) := None
+(publish / skip) := true
 
 commands +=
   Command.command("fixAll") { s =>
@@ -74,7 +74,7 @@ lazy val semanticdb = project
   .settings(
     moduleName := "semanticdb-java",
     javaOnlySettings,
-    PB.targets.in(Compile) :=
+    (Compile / PB.targets) :=
       Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value)
   )
 
@@ -106,7 +106,7 @@ lazy val plugin = project
     moduleName := "semanticdb-javac",
     javaToolchainVersion := "8",
     javacOptions += "-g",
-    assemblyShadeRules.in(assembly) :=
+    (assembly / assemblyShadeRules) :=
       Seq(
         ShadeRule
           .rename(
@@ -127,7 +127,7 @@ lazy val lsif = project
     javaOnlySettings,
     libraryDependencies +=
       "com.google.protobuf" % "protobuf-java-util" % V.protobuf,
-    PB.targets.in(Compile) :=
+    (Compile / PB.targets) :=
       Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
     Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
   )
@@ -137,8 +137,8 @@ lazy val cli = project
   .in(file("lsif-java"))
   .settings(
     moduleName := "lsif-java",
-    mainClass.in(Compile) := Some("com.sourcegraph.lsif_java.LsifJava"),
-    baseDirectory.in(run) := baseDirectory.in(ThisBuild).value,
+    (Compile / mainClass) := Some("com.sourcegraph.lsif_java.LsifJava"),
+    (run / baseDirectory) := (ThisBuild / baseDirectory).value,
     buildInfoKeys :=
       Seq[BuildInfoKey](
         version,
@@ -150,27 +150,27 @@ lazy val cli = project
     libraryDependencies ++=
       List(
         "io.get-coursier" %% "coursier" % V.coursier,
-        "org.scala-lang.modules" %% "scala-xml" % "2.0.0-RC1",
+        "org.scala-lang.modules" %% "scala-xml" % "1.3.0",
         "com.lihaoyi" %% "requests" % V.requests,
         "org.scalameta" %% "moped" % V.moped,
         "org.scalameta" %% "ascii-graphs" % "0.1.2"
       ),
-    resourceGenerators.in(Compile) +=
+    (Compile / resourceGenerators) +=
       Def
         .task[Seq[File]] {
           val outs = ListBuffer.empty[(File, File)]
-          val out = resourceManaged.in(Compile).value.toPath
+          val out = (Compile / resourceManaged).value.toPath
           IO.delete(out.toFile)
           def addJar(jar: File, filename: String): Unit = {
             outs += jar -> out.resolve(filename).toFile
           }
 
           addJar(
-            Keys.`package`.in(plugin, Compile).value,
+            (plugin / Compile / Keys.`package`).value,
             "semanticdb-plugin.jar"
           )
           addJar(
-            Keys.`package`.in(agent, Compile).value,
+            (agent / Compile / Keys.`package`).value,
             "semanticdb-agent.jar"
           )
 
@@ -192,7 +192,7 @@ lazy val cli = project
         "-H:IncludeResources=^semanticdb-.*jar$",
         s"-H:ReflectionConfigurationFiles=${target.value / "native-image-configs" / "reflect-config.json"}"
       ),
-    nativeImageOutput := target.in(NativeImage).value / "lsif-java"
+    nativeImageOutput := (NativeImage / target).value / "lsif-java"
   )
   .enablePlugins(NativeImagePlugin, BuildInfoPlugin)
   .dependsOn(lsif)
@@ -217,7 +217,7 @@ lazy val packagehub = project
   .in(file("packagehub"))
   .settings(
     moduleName := "packagehub",
-    mainClass.in(Compile) := Some("com.sourcegraph.packagehub.PackageHub"),
+    (Compile / mainClass) := Some("com.sourcegraph.packagehub.PackageHub"),
     TaskKey[Unit]("dockerfileUpdate") := {
       val template = IO.read(file("Dockerfile.template"))
       IO.write(file("Dockerfile"), template.replace("VERSION", version.value))
@@ -251,18 +251,18 @@ def minimizedSourceDirectory =
   file("tests/minimized/src/main/java").getAbsoluteFile
 lazy val minimizedSettings = List[Def.Setting[_]](
   autoScalaLibrary := false,
-  skip.in(publish) := true,
-  fork.in(run) := true,
-  unmanagedSourceDirectories.in(Compile) += minimizedSourceDirectory,
-  javacOptions.in(Compile) ++=
+  (publish / skip) := true,
+  (run / fork) := true,
+  (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
+  (Compile / javacOptions) ++=
     List[String](
       s"-Arandomtimestamp=${System.nanoTime()}",
       List(
         s"-Xplugin:semanticdb",
         s"-text:on",
         s"-verbose",
-        s"-sourceroot:${baseDirectory.in(ThisBuild).value}",
-        s"-targetroot:${semanticdbTargetRoot.in(Compile).value}"
+        s"-sourceroot:${(ThisBuild / baseDirectory).value}",
+        s"-targetroot:${(Compile / semanticdbTargetRoot).value}"
       ).mkString(" ")
     )
 )
@@ -288,7 +288,7 @@ lazy val minimized15 = project
 lazy val minimizedScala = project
   .in(file("tests/minimized-scala"))
   .settings(
-    skip.in(publish) := true,
+    (publish / skip) := true,
     semanticdbOptions ++= List("-P:semanticdb:text:on")
   )
   .dependsOn(minimized)
@@ -303,14 +303,14 @@ lazy val unit = project
         version,
         scalaVersion,
         "temporaryDirectory" -> target.value / "tmpdir",
-        "sourceroot" -> baseDirectory.in(ThisBuild).value,
+        "sourceroot" -> (ThisBuild / baseDirectory).value,
         "minimizedJavaSourceDirectory" -> minimizedSourceDirectory,
         "minimizedJavaTargetroot" ->
-          semanticdbTargetRoot.in(minimized, Compile).value,
+          (minimized / Compile / semanticdbTargetRoot).value,
         "minimizedScalaSourceDirectory" ->
-          sourceDirectory.in(minimizedScala, Compile).value / "scala",
+          (minimizedScala / Compile / sourceDirectory).value / "scala",
         "minimizedScalaTargetroot" ->
-          semanticdbTargetRoot.in(minimizedScala, Compile).value
+          (minimizedScala / Compile / semanticdbTargetRoot).value
       ),
     buildInfoPackage := "tests"
   )
@@ -321,12 +321,12 @@ lazy val buildTools = project
   .in(file("tests/buildTools"))
   .settings(
     testSettings,
-    javaOptions.in(Test) ++=
+    (Test / javaOptions) ++=
       List(
-        s"-javaagent:${Keys.`package`.in(agent, Compile).value}",
-        s"-Dsemanticdb.pluginpath=${Keys.`package`.in(plugin, Compile).value}",
-        s"-Dsemanticdb.sourceroot=${baseDirectory.in(ThisBuild).value}",
-        s"-Dsemanticdb.targetroot=${target.in(agent, Compile).value / "semanticdb-targetroot"}"
+        s"-javaagent:${(agent / Compile / Keys.`package`).value}",
+        s"-Dsemanticdb.pluginpath=${(plugin / Compile / Keys.`package`).value}",
+        s"-Dsemanticdb.sourceroot=${(ThisBuild / baseDirectory).value}",
+        s"-Dsemanticdb.targetroot=${(agent / Compile / target).value / "semanticdb-targetroot"}"
       )
   )
   .dependsOn(agent, unit)
@@ -337,7 +337,7 @@ lazy val snapshots = project
     testSettings,
     buildInfoKeys :=
       Seq[BuildInfoKey](
-        "snapshotDirectory" -> sourceDirectory.in(Compile).value / "generated"
+        "snapshotDirectory" -> (Compile / sourceDirectory).value / "generated"
       ),
     buildInfoPackage := "tests.snapshots"
   )
@@ -348,8 +348,8 @@ lazy val bench = project
   .in(file("tests/benchmarks"))
   .settings(
     moduleName := "lsif-java-bench",
-    fork.in(run) := true,
-    skip.in(publish) := true
+    (run / fork) := true,
+    (publish / skip) := true
   )
   .dependsOn(unit)
   .enablePlugins(JmhPlugin)
@@ -358,7 +358,7 @@ lazy val docs = project
   .in(file("lsif-java-docs"))
   .settings(
     mdocOut :=
-      baseDirectory.in(ThisBuild).value / "website" / "target" / "docs",
+      (ThisBuild / baseDirectory).value / "website" / "target" / "docs",
     fork := false,
     mdocVariables :=
       Map[String, String](
@@ -379,7 +379,7 @@ lazy val javaOnlySettings = List[Def.Setting[_]](
 )
 
 lazy val testSettings = List(
-  skip.in(publish) := true,
+  (publish / skip) := true,
   autoScalaLibrary := true,
   testFrameworks := List(new TestFramework("munit.Framework")),
   libraryDependencies ++=
@@ -395,7 +395,7 @@ lazy val testSettings = List(
 )
 
 lazy val fatjarPackageSettings = List[Def.Setting[_]](
-  assemblyMergeStrategy in assembly := {
+  (assembly / assemblyMergeStrategy) := {
     case PathList("javax", _ @_*) =>
       MergeStrategy.discard
     case PathList("com", "sun", _ @_*) =>
@@ -405,20 +405,20 @@ lazy val fatjarPackageSettings = List[Def.Setting[_]](
     case PathList("META-INF", "versions", "9", "module-info.class") =>
       MergeStrategy.discard
     case x =>
-      val oldStrategy = (assemblyMergeStrategy in assembly).value
+      val oldStrategy = (assembly / assemblyMergeStrategy).value
       oldStrategy(x)
   },
-  Keys.`package`.in(Compile) := {
-    val slimJar = Keys.`package`.in(Compile).value
-    val fatJar = crossTarget.value / assemblyJarName.in(assembly).value
+  (Compile / Keys.`package`) := {
+    val slimJar = (Compile / Keys.`package`).value
+    val fatJar = crossTarget.value / (assembly / assemblyJarName).value
     val _ = assembly.value
     IO.copyFile(fatJar, slimJar, CopyOptions().withOverwrite(true))
     slimJar
   },
-  packagedArtifact.in(Compile).in(packageBin) := {
-    val (art, slimJar) = packagedArtifact.in(Compile).in(packageBin).value
+  (Compile / packageBin / packagedArtifact) := {
+    val (art, slimJar) = (Compile / packageBin / packagedArtifact).value
     val fatJar =
-      new File(crossTarget.value + "/" + assemblyJarName.in(assembly).value)
+      new File(crossTarget.value + "/" + (assembly / assemblyJarName).value)
     val _ = assembly.value
     IO.copy(List(fatJar -> slimJar), CopyOptions().withOverwrite(true))
     (art, slimJar)
