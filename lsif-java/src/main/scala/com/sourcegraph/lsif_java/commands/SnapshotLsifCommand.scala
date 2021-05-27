@@ -33,6 +33,8 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role
 import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
 import moped.annotations.CommandName
+import moped.annotations.Description
+import moped.annotations.ExampleValue
 import moped.annotations.Inline
 import moped.annotations.PositionalArguments
 import moped.cli.Application
@@ -46,6 +48,12 @@ import org.scalameta.ascii.layout.prefs.LayoutPrefsImpl
 case class SnapshotLsifCommand(
     @Inline() app: Application = Application.default,
     output: Path = Paths.get("generated"),
+    @Description(
+      "Space-separated list of '$FILE_EXTENSION,$COMMENT_SYNTAX' that determines what syntax " +
+        "to use for comments depending on the file extension of the source file."
+    )
+    @ExampleValue("py,# scala,// ") commentSyntax: CommentSyntax =
+      CommentSyntax.default,
     @PositionalArguments() input: List[Path] = List(Paths.get("dump.lsif"))
 ) extends Command {
 
@@ -63,9 +71,14 @@ case class SnapshotLsifCommand(
         .of(Paths.get(doc.getUri), sourceroot)
         .normalize()
       if (docPath.toAbsolutePath.startsWith(sourceroot)) {
-        SnapshotCommand.writeSnapshot(doc, finalOutput)
+        SnapshotCommand.writeSnapshot(doc, finalOutput, commentSyntax)
+      } else {
+        app.warning(
+          s"skipping path '$docPath' because it is not part of the sourceroot '$sourceroot'"
+        )
       }
     }
+    app.info(finalOutput.toString())
     0
   }
 
@@ -85,6 +98,8 @@ object SnapshotLsifCommand {
     val lsif = new IndexedLsif(input, objects, sourceroot)
     lsif
       .ranges
+      .iterator
+      .filter(o => lsif.contains.contains(o.getId))
       .foreach { o =>
         val docId = lsif.contains(o.getId)
         val doc = lsif.textDocument(docId)
