@@ -2,6 +2,7 @@ package com.sourcegraph.lsif_java
 
 import scala.jdk.CollectionConverters._
 
+import com.sourcegraph.lsif_java.commands.CommentSyntax
 import com.sourcegraph.lsif_semanticdb.SignatureFormatter
 import com.sourcegraph.lsif_semanticdb.Symtab
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence
@@ -9,13 +10,18 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role
 import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
 
 object SemanticdbPrinters {
-  def printTextDocument(doc: TextDocument): String = {
+  def printTextDocument(
+      doc: TextDocument,
+      comments: CommentSyntax = CommentSyntax.default
+  ): String = {
     val occurrencesByLine = doc
       .getOccurrencesList
       .asScala
       .groupBy(_.getRange.getStartLine)
     val out = new StringBuilder()
     val symtab = new Symtab(doc)
+    val extension = doc.getUri.split("\\.").lastOption.getOrElse("")
+    val commentSyntax = comments.extensionSyntax(extension)
     doc
       .getText
       .linesWithSeparators
@@ -32,7 +38,7 @@ object SemanticdbPrinters {
             )
           )
         occurrences.foreach { occ =>
-          formatOccurrence(out, occ, line, symtab)
+          formatOccurrence(out, occ, line, symtab, commentSyntax)
         }
       }
     out.toString()
@@ -42,7 +48,8 @@ object SemanticdbPrinters {
       out: StringBuilder,
       occ: SymbolOccurrence,
       line: String,
-      symtab: Symtab
+      symtab: Symtab,
+      commentSyntax: String
   ): Unit = {
     val r = occ.getRange
     val isMultiline = r.getStartLine != r.getEndLine
@@ -54,10 +61,12 @@ object SemanticdbPrinters {
       }
     out
       .append(
-        if (r.getStartCharacter > 2)
-          "// " + " " * (r.getStartCharacter - 3)
+        if (r.getStartCharacter > commentSyntax.length)
+          s"$commentSyntax " +
+            " " *
+            (r.getStartCharacter - commentSyntax.length - 1)
         else
-          "//"
+          commentSyntax
       )
       .append(
         if (r.getStartCharacter == 1)

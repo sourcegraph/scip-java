@@ -82,8 +82,12 @@ case class SnapshotCommand(
 }
 
 object SnapshotCommand {
-  def writeSnapshot(doc: TextDocument, outputDirectory: Path): Unit = {
-    val document = SemanticdbPrinters.printTextDocument(doc)
+  def writeSnapshot(
+      doc: TextDocument,
+      outputDirectory: Path,
+      commentSyntax: CommentSyntax = CommentSyntax.default
+  ): Unit = {
+    val document = SemanticdbPrinters.printTextDocument(doc, commentSyntax)
     val snapshotOutput = outputDirectory.resolve(doc.getUri)
     Files.createDirectories(snapshotOutput.getParent)
     Files.write(snapshotOutput, document.getBytes(StandardCharsets.UTF_8))
