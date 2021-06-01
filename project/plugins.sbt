@@ -8,7 +8,7 @@ addSbtPlugin("com.thesamet" % "sbt-protoc" % "1.0.0")
 addSbtPlugin("ch.epfl.scala" % "sbt-bloop" % "1.4.8-17-3eab1f80")
 addSbtPlugin("com.sourcegraph" % "sbt-sourcegraph" % "0.2.0")
 addSbtPlugin("com.lightbend.sbt" % "sbt-java-formatter" % "0.6.0")
-addSbtPlugin("pl.project13.scala" % "sbt-jmh" % "0.4.0")
+addSbtPlugin("pl.project13.scala" % "sbt-jmh" % "0.4.3")
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.15.0")
 addSbtPlugin("io.spray" % "sbt-revolver" % "0.9.1")
 
