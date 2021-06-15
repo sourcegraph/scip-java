@@ -80,10 +80,20 @@ public class LsifSemanticdb {
 
   private Stream<Integer> processPath(
       Path path, Set<String> isExportedSymbol, PackageTable packages) {
-    return parseTextDocument(path).map(d -> processDocument(d, isExportedSymbol, packages));
+    return parseTextDocument(path).flatMap(d -> processDocument(d, isExportedSymbol, packages));
   }
 
-  private Integer processDocument(
+  private Stream<Integer> processDocument(
+      LsifTextDocument doc, Set<String> isExportedSymbol, PackageTable packages) {
+    try {
+      return Stream.of(processDocumentUnsafe(doc, isExportedSymbol, packages));
+    } catch (Exception e) {
+      options.reporter.error(new LsifProcessingException(doc, e));
+      return Stream.empty();
+    }
+  }
+
+  private Integer processDocumentUnsafe(
       LsifTextDocument doc, Set<String> isExportedSymbol, PackageTable packages) {
     Symtab symtab = new Symtab(doc.semanticdb);
 

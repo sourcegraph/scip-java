@@ -5,7 +5,6 @@ import java.nio.file.NoSuchFileException
 
 import moped.cli.Application
 import moped.progressbars.InteractiveProgressBar
-import moped.reporters.Diagnostic
 
 /**
  * Console reporter for index-semanticdb command.
@@ -25,7 +24,7 @@ class ConsoleLsifSemanticdbReporter(app: Application)
       case _: NoSuchFileException =>
         app.reporter.error(s"no such file: ${e.getMessage}")
       case _ =>
-        app.reporter.log(Diagnostic.exception(e))
+        e.printStackTrace(app.err)
     }
   }
 
