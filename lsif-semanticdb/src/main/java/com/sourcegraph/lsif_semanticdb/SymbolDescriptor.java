@@ -4,7 +4,6 @@ import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols.Descriptor;
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols.Descriptor.Kind;
 import java.util.Optional;
-import javax.swing.text.html.Option;
 
 public class SymbolDescriptor {
 
@@ -15,6 +14,8 @@ public class SymbolDescriptor {
     this.descriptor = descriptor;
     this.owner = owner;
   }
+
+  public static SymbolDescriptor NONE = new SymbolDescriptor(Descriptor.NONE, SemanticdbSymbols.NONE);
 
   public static SymbolDescriptor parseFromSymbol(String symbol) {
     return new Parser(symbol).entryPoint();
@@ -56,6 +57,8 @@ public class SymbolDescriptor {
     public SymbolDescriptor entryPoint() {
       if (SemanticdbSymbols.isLocal(symbol))
         return new SymbolDescriptor(Descriptor.local(symbol), SemanticdbSymbols.NONE);
+      if (SemanticdbSymbols.NONE.equals(symbol))
+        return SymbolDescriptor.NONE;
       readChar();
       SemanticdbSymbols.Descriptor descriptor = parseDescriptor();
 
