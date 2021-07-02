@@ -157,6 +157,8 @@ public class LsifSemanticdb {
               .append('\n')
               .append(signature)
               .append("\n```");
+        } else {
+          markupContent.append(symbolInformation.getDisplayName());
         }
 
         if (markupContent.length() != 0) {
