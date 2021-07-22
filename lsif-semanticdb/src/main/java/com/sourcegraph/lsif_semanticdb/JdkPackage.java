@@ -9,7 +9,7 @@ public class JdkPackage extends Package {
 
   @Override
   public String repoName() {
-    return String.format("jdk/%s", version);
+    return "jdk";
   }
 
   @Override

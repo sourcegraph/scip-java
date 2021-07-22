@@ -127,7 +127,7 @@ public class LsifWriter implements AutoCloseable {
     return emitObject(
         lsifVertex("packageInformation")
             .setName(pkg.repoName())
-            .setManager("packagehub")
+            .setManager("jvm-dependencies")
             .setVersion(pkg.version()));
   }
 

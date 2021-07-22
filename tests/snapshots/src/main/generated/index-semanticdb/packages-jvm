@@ -43,5 +43,5 @@ public class Example {
        │                    ││
        v                    v│
  ╭──────────╮ ╭──────────────┴────╮
- │jdk/11(33)│ │referenceResult(35)│
+ │jdk 11(33)│ │referenceResult(35)│
  ╰──────────╯ ╰───────────────────╯
