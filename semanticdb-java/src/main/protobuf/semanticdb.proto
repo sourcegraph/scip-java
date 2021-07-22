@@ -81,11 +81,16 @@ message SymbolInformation {
     FIELD = 20;
     METHOD = 3;
     CONSTRUCTOR = 21;
+    MACRO = 6;
     TYPE = 7;
     PARAMETER = 8;
+    SELF_PARAMETER = 17;
     TYPE_PARAMETER = 9;
+    OBJECT = 10;
     PACKAGE = 11;
+    PACKAGE_OBJECT = 12;
     CLASS = 13;
+    TRAIT = 14;
     INTERFACE = 18;
   }
   enum Property {
@@ -95,7 +100,15 @@ message SymbolInformation {
     ABSTRACT = 0x4;
     FINAL = 0x8;
     SEALED = 0x10;
+    IMPLICIT = 0x20;
+    LAZY = 0x40;
+    CASE = 0x80;
+    COVARIANT = 0x100;
+    CONTRAVARIANT = 0x200;
+    VAL = 0x400;
+    VAR = 0x800;
     STATIC = 0x1000;
+    PRIMARY = 0x2000;
     ENUM = 0x4000;
     DEFAULT = 0x8000;
   }
@@ -117,6 +130,7 @@ message SymbolInformation {
 message Access {
   oneof sealed_value {
     PrivateAccess private_access = 1;
+    PrivateThisAccess private_this_access = 2;
     PrivateWithinAccess private_within_access = 3;
     ProtectedAccess protected_access = 4;
     PublicAccess public_access = 7;
@@ -127,6 +141,9 @@ message PrivateAccess {}
 
 message PrivateWithinAccess {
   string symbol = 1;
+}
+
+message PrivateThisAccess {
 }
 
 message ProtectedAccess {}
@@ -165,24 +182,89 @@ message Type {
   reserved 1, 3, 4, 5, 6, 11, 12, 15, 16;
   oneof sealed_value {
     TypeRef type_ref = 2;
-    ExistentialType existential_type = 9;
+    SingleType single_type = 20;
+    ThisType this_type = 21;
+    SuperType super_type = 22;
+    ConstantType constant_type = 23;
     IntersectionType intersection_type = 17;
+    UnionType union_type = 18;
+    WithType with_type = 19;
+    StructuralType structural_type = 7;
+    AnnotatedType annotated_type = 8;
+    ExistentialType existential_type = 9;
+    UniversalType universal_type = 10;
+    ByNameType by_name_type = 13;
+    RepeatedType repeated_type = 14;
   }
 }
 
+
 message TypeRef {
+  Type prefix = 1;
   string symbol = 2;
   repeated Type type_arguments = 3;
+}
+
+message SingleType {
+  Type prefix = 1;
+  string symbol = 2;
+}
+
+message ThisType {
+  string symbol = 1;
+}
+
+message SuperType {
+  Type prefix = 1;
+  string symbol = 2;
+}
+
+message ConstantType {
+  Constant constant = 1;
 }
 
 message IntersectionType {
   repeated Type types = 1;
 }
 
+message UnionType {
+  repeated Type types = 1;
+}
+
+message WithType {
+  repeated Type types = 1;
+}
+
+message StructuralType {
+  reserved 1, 2, 3;
+  Type tpe = 4;
+  Scope declarations = 5;
+}
+
+message AnnotatedType {
+  reserved 2;
+  repeated AnnotationTree annotations = 3;
+  Type tpe = 1;
+}
+
 message ExistentialType {
   reserved 2;
   Type tpe = 1;
   Scope declarations = 3;
+}
+
+message UniversalType {
+  reserved 1;
+  Scope type_parameters = 3;
+  Type tpe = 2;
+}
+
+message ByNameType {
+  Type tpe = 1;
+}
+
+message RepeatedType {
+  Type tpe = 1;
 }
 
 message Tree {

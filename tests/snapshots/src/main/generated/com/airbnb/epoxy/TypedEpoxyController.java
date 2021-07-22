@@ -24,7 +24,7 @@ import androidx.annotation.Nullable;
  * @see Typed4EpoxyController
  */
 public abstract class TypedEpoxyController<T> extends EpoxyController {
-//                    ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/TypedEpoxyController# public abstract class TypedEpoxyController<T> extends EpoxyController
+//                    ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/TypedEpoxyController# public abstract class TypedEpoxyController<T>
 //                                         ^ definition com/airbnb/epoxy/TypedEpoxyController#[T] T
 //                                                    ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
   private T currentData;

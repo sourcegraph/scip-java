@@ -494,7 +494,7 @@ class AsyncEpoxyDiffer {
   }
 
   private static class DiffCallback extends DiffUtil.Callback {
-//                     ^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback# private static class DiffCallback extends unresolved_type
+//                     ^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback# private static class DiffCallback
 //                                          ^^^^^^^^ reference DiffUtil/
 //                                                   ^^^^^^^^ reference DiffUtil/Callback#
 

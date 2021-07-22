@@ -25,7 +25,7 @@ import androidx.annotation.NonNull;
  * span size.
  */
 public class SimpleEpoxyModel extends EpoxyModel<View> {
-//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel# public class SimpleEpoxyModel extends EpoxyModel<unresolved_type>
+//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyModel# public class SimpleEpoxyModel
 //                                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                               ^^^^ reference _root_/
   @LayoutRes private final int layoutRes;

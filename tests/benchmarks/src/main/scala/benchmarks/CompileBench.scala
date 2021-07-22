@@ -34,7 +34,13 @@ class CompileBench {
   def setup(): Unit = {
     tmp = Files.createTempDirectory("benchmarks")
     deps = Dependencies.resolveDependencies(List(libs(lib)))
-    compiler = new TestCompiler(deps.classpathSyntax, List.empty[String], tmp)
+    compiler =
+      new TestCompiler(
+        deps.classpathSyntax,
+        javacOptions = Nil,
+        scalacOptions = Nil,
+        targetroot = tmp
+      )
   }
 
   @TearDown()

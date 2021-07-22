@@ -28,7 +28,7 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
  * optimization.
  */
 public class EpoxyDiffLogger extends AdapterDataObserver {
-//           ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger# public class EpoxyDiffLogger extends unresolved_type
+//           ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyDiffLogger# public class EpoxyDiffLogger
 //                                   ^^^^^^^^^^^^^^^^^^^ reference _root_/
   private final String tag;
 //              ^^^^^^ reference java/lang/String#

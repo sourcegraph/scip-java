@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * checked change.
  */
 public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
-//           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener# public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V> implements unresolved_type
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener# public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //                                                  ^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[T] T extends EpoxyModel<?>
 //                                                            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 //                                                                           ^ definition com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[V] V

@@ -52,7 +52,7 @@ import androidx.recyclerview.widget.RecyclerView;
 @SuppressWarnings("WeakerAccess")
 //^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public class EpoxyViewHolder extends RecyclerView.ViewHolder {
-//           ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder# @SuppressWarnings("WeakerAccess") public class EpoxyViewHolder extends unresolved_type
+//           ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyViewHolder# @SuppressWarnings("WeakerAccess") public class EpoxyViewHolder
 //                                   ^^^^^^^^^^^^ reference RecyclerView/
 //                                                ^^^^^^^^^^ reference RecyclerView/ViewHolder#
   @SuppressWarnings("rawtypes") private EpoxyModel epoxyModel;

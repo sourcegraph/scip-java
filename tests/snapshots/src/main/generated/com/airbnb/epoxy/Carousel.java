@@ -110,7 +110,7 @@ import androidx.recyclerview.widget.SnapHelper;
 //                                            ^^^^ reference com/airbnb/epoxy/ModelView#Size#
 //                                                 ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelView#Size#MATCH_WIDTH_WRAP_HEIGHT.
 public class Carousel extends EpoxyRecyclerView {
-//           ^^^^^^^^ definition com/airbnb/epoxy/Carousel# @ModelView(saveViewState = true, autoLayout = Size.MATCH_WIDTH_WRAP_HEIGHT) public class Carousel extends unresolved_type
+//           ^^^^^^^^ definition com/airbnb/epoxy/Carousel# @ModelView(saveViewState = true, autoLayout = Size.MATCH_WIDTH_WRAP_HEIGHT) public class Carousel
 //                            ^^^^^^^^^^^^^^^^^ reference _root_/
   public static final int NO_VALUE_SET = -1;
 //                        ^^^^^^^^^^^^ definition com/airbnb/epoxy/Carousel#NO_VALUE_SET. public static final int NO_VALUE_SET

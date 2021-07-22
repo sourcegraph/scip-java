@@ -8,7 +8,7 @@ package com.airbnb.epoxy;
  * why it doesn't do anything.
  */
 class ControllerModelList extends ModelList {
-//    ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList# class ControllerModelList extends ModelList
+//    ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ControllerModelList# class ControllerModelList
 //                                ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
 
   private static final ModelListObserver OBSERVER = new ModelListObserver() {

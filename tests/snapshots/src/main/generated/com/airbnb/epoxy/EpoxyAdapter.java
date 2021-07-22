@@ -35,7 +35,7 @@ import androidx.annotation.Nullable;
 @SuppressWarnings("WeakerAccess")
 //^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
-//                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter# @SuppressWarnings("WeakerAccess") public abstract class EpoxyAdapter extends BaseEpoxyAdapter
+//                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter# @SuppressWarnings("WeakerAccess") public abstract class EpoxyAdapter
 //                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyAdapter#`<init>`(). public EpoxyAdapter()
 //                                         ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
   private final HiddenEpoxyModel hiddenModel = new HiddenEpoxyModel();
