@@ -17,7 +17,7 @@ public class MavenPackage extends Package {
 
   @Override
   public String repoName() {
-    return String.format("maven/%s/%s/%s", groupId, artifactId, version);
+    return String.format("maven/%s/%s", groupId, artifactId);
   }
 
   @Override

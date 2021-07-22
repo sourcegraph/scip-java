@@ -279,7 +279,7 @@ object SnapshotLsifCommand {
             )
             s"range(${node.getId}) ${renderPos(node.getStart)} '${p.text}'"
           case ("vertex", "packageInformation") =>
-            s"${node.getName}(${node.getId})"
+            s"${node.getName} ${node.getVersion}(${node.getId})"
           case ("vertex", label) =>
             s"${label}(${node.getId})"
           case _ =>
