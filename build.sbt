@@ -226,7 +226,7 @@ lazy val packagehub = project
     libraryDependencies ++=
       List(
         "com.google.cloud.sql" % "postgres-socket-factory" % "1.3.0",
-        "com.zaxxer" % "HikariCP" % "4.0.3",
+        "com.zaxxer" % "HikariCP" % "5.0.0",
         "org.flywaydb" % "flyway-core" % "7.7.1",
         "org.postgresql" % "postgresql" % "42.2.23",
         "org.rauschig" % "jarchivelib" % "1.1.0",
