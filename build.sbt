@@ -12,9 +12,12 @@ lazy val V =
     val bloop = "1.4.7"
     val bsp = "2.0.0-M13"
     val moped = "0.1.10"
-    def scala213 = "2.13.4"
-    def scala212 = "2.12.12"
-    def scalameta = "4.4.8"
+    def scala213 = "2.13.6"
+    def scala212 = "2.12.14"
+    def scala211 = "2.11.12"
+    def scala3 = "3.0.1"
+    def metals = "0.10.5"
+    def scalameta = "4.4.25"
     def testcontainers = "0.39.3"
     def requests = "0.6.5"
   }
@@ -143,6 +146,11 @@ lazy val cli = project
       Seq[BuildInfoKey](
         version,
         scalaVersion,
+        "mtags" -> V.metals,
+        "scala211" -> V.scala211,
+        "scala212" -> V.scala212,
+        "scala213" -> V.scala213,
+        "scala3" -> V.scala3,
         "bloopVersion" -> V.bloop,
         "bspVersion" -> V.bsp
       ),
@@ -150,6 +158,7 @@ lazy val cli = project
     libraryDependencies ++=
       List(
         "io.get-coursier" %% "coursier" % V.coursier,
+        "org.scalameta" % "mtags-interfaces" % V.metals,
         "org.scala-lang.modules" %% "scala-xml" % "1.3.0",
         "com.lihaoyi" %% "requests" % V.requests,
         "org.scalameta" %% "moped" % V.moped,
@@ -385,6 +394,7 @@ lazy val testSettings = List(
   libraryDependencies ++=
     List(
       "org.scalameta" %% "munit" % "0.7.27",
+      "org.scalameta" %% "mtags" % V.metals cross CrossVersion.full,
       "com.dimafeng" %% "testcontainers-scala-munit" % V.testcontainers,
       "com.dimafeng" %% "testcontainers-scala-postgresql" % V.testcontainers,
       "org.scalameta" %% "moped-testkit" % V.moped,

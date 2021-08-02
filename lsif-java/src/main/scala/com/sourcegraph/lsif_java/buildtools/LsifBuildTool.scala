@@ -2,6 +2,7 @@ package com.sourcegraph.lsif_java.buildtools
 
 import java.io.File
 import java.io.IOException
+import java.net.URLClassLoader
 import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
 import java.nio.file.Files
@@ -9,16 +10,26 @@ import java.nio.file.NoSuchFileException
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.SimpleFileVisitor
+import java.nio.file.StandardOpenOption
 import java.nio.file.attribute.BasicFileAttributes
+import java.util.ServiceLoader
 
 import scala.collection.mutable.ListBuffer
 import scala.jdk.CollectionConverters._
+import scala.util.Failure
+import scala.util.Success
+import scala.util.Try
 import scala.util.control.NonFatal
 
+import scala.meta.pc.PresentationCompiler
+
 import com.sourcegraph.io.DeleteVisitor
+import com.sourcegraph.lsif_java.BuildInfo
 import com.sourcegraph.lsif_java.Dependencies
 import com.sourcegraph.lsif_java.Embedded
 import com.sourcegraph.lsif_java.commands.IndexCommand
+import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
+import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocuments
 import moped.json.DecodingContext
 import moped.json.ErrorResult
 import moped.json.JsonCodec
@@ -32,6 +43,7 @@ import moped.reporters.Diagnostic
 import moped.reporters.Input
 import os.CommandResult
 import os.ProcessOutput.Readlines
+import os.SubprocessException
 
 /**
  * A custom build tool that is specifically made for lsif-java.
@@ -49,6 +61,16 @@ import os.ProcessOutput.Readlines
  */
 class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
 
+  private val javaPattern = FileSystems
+    .getDefault
+    .getPathMatcher("glob:**.java")
+  private val scalaPattern = FileSystems
+    .getDefault
+    .getPathMatcher("glob:**.scala")
+  private val allPatterns = FileSystems
+    .getDefault
+    .getPathMatcher("glob:**.{java,scala}")
+  private val moduleInfo = Paths.get("module-info.java")
   protected def defaultTargetroot: Path = Paths.get("target")
   private def configFile =
     index.workingDirectory.resolve(LsifBuildTool.ConfigFileName)
@@ -96,40 +118,168 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
     Files.createDirectories(tmp)
     Files.createDirectories(targetroot)
     val deps = Dependencies.resolveDependencies(config.dependencies.map(_.repr))
-    val semanticdbJar = Embedded.semanticdbJar(tmp)
-    val coursier = Embedded.coursier(tmp)
-    val actualClasspath = deps.classpath :+ semanticdbJar
-    val argsfile = targetroot.resolve("javacopts.txt")
     val sourceroot = index.workingDirectory
     if (!Files.isDirectory(sourceroot)) {
       throw new NoSuchFileException(sourceroot.toString())
     }
-    val allJavaFiles = collectAllJavaFiles(sourceroot)
-    val javaFiles = allJavaFiles
-      .filterNot(_.endsWith(moduleInfo))
-      .map(_.toString())
-    val moduleInfos = allJavaFiles.filter(_.endsWith(moduleInfo))
-    if (javaFiles.isEmpty) {
+    val allSourceFiles = collectAllSourceFiles(sourceroot)
+    val javaFiles = allSourceFiles.filter(path => javaPattern.matches(path))
+    val scalaFiles = allSourceFiles.filter(path => scalaPattern.matches(path))
+    if (javaFiles.isEmpty && scalaFiles.isEmpty) {
       index
         .app
         .warning(
-          s"doing nothing, no files matching pattern '$sourceroot/**.java'"
+          s"doing nothing, no files matching pattern '$sourceroot/**.{java,scala}'"
         )
       return CommandResult(0, Nil)
     }
-    def generatedDir(name: String): String = {
-      Files.createDirectory(tmp.resolve(name)).toString()
+    val errors = ListBuffer.empty[Try[Unit]]
+    errors += compileJavaFiles(tmp, deps, config, javaFiles)
+    errors += compileScalaFiles(deps, scalaFiles)
+    if (index.cleanup) {
+      Files.walkFileTree(tmp, new DeleteVisitor)
     }
+    val isSemanticdbGenerated = Files
+      .isDirectory(targetroot.resolve("META-INF"))
+    if (errors.nonEmpty && !isSemanticdbGenerated) {
+      CommandResult(1, Nil)
+    } else {
+      if (isSemanticdbGenerated) {
+        index
+          .app
+          .reporter
+          .info(
+            "Some SemanticDB files got generated even if there were compile errors. " +
+              "In most cases, this means that lsif-java managed to index everything " +
+              "except the locations that had compile errors and you can ignore the compile errors."
+          )
+      }
+      CommandResult(0, Nil)
+    }
+  }
+
+  private def compileScalaFiles(
+      deps: Dependencies,
+      allScalaFiles: List[Path]
+  ): Try[Unit] =
+    Try {
+      withScalaPresentationCompiler(deps) { compiler =>
+        allScalaFiles.foreach { path =>
+          try compileScalaFile(compiler, path)
+          catch {
+            case NonFatal(e) =>
+              // We want to try and index as much as possible so we don't fail the entire
+              // compilation even if a single file fails to compile.
+              index.app.reporter.log(Diagnostic.exception(e))
+          }
+        }
+      }
+    }
+
+  private def compileScalaFile(
+      compiler: PresentationCompiler,
+      path: Path
+  ): Unit = {
+    val input = Input.path(path)
+    val textDocument = TextDocument
+      .parseFrom(compiler.semanticdbTextDocument(path.toUri, input.text).get())
+      .toBuilder
+      .setUri(sourceroot.relativize(path).iterator().asScala.mkString("/"))
+    val textDocuments = TextDocuments
+      .newBuilder()
+      .addDocuments(textDocument)
+      .build()
+    val relpath = sourceroot
+      .relativize(path)
+      .resolveSibling(path.getFileName.toString + ".semanticdb")
+    val out = targetroot
+      .resolve("META-INF")
+      .resolve("semanticdb")
+      .resolve(relpath)
+    Files.createDirectories(out.getParent)
+    Files.write(
+      out,
+      textDocuments.toByteArray,
+      StandardOpenOption.TRUNCATE_EXISTING,
+      StandardOpenOption.CREATE
+    )
+  }
+
+  private def withScalaPresentationCompiler[T](
+      deps: Dependencies
+  )(fn: PresentationCompiler => T): T = {
+    val scalaVersion = deps
+      .classpath
+      .headOption
+      .flatMap(jar => ScalaVersion.inferFromJar(jar))
+      .getOrElse {
+        throw new IllegalArgumentException(
+          s"failed to infer the Scala version from the dependencies: " +
+            pprint.PPrinter.BlackWhite.tokenize(deps.classpath).mkString
+        )
+      }
+    val mtags = Dependencies.resolveDependencies(
+      List(s"org.scalameta:mtags_${scalaVersion}:${BuildInfo.mtags}")
+    )
+    val scalaLibrary = mtags
+      .classpath
+      .filter(_.getFileName.toString.contains("scala-library"))
+    val parent = new ScalaCompilerClassLoader(this.getClass.getClassLoader)
+
+    val jars = mtags.classpath.map(_.toUri.toURL).toArray
+    val classloader = new URLClassLoader(jars, parent)
+    val compilers = ServiceLoader
+      .load(classOf[PresentationCompiler], classloader)
+      .iterator()
+    if (compilers.hasNext) {
+      val classpath = deps.classpath ++ scalaLibrary
+      val argsfile = targetroot.resolve("javacopts.txt")
+      Files.createDirectories(argsfile.getParent)
+      Files.write(
+        argsfile,
+        List("-classpath", classpath.mkString(File.pathSeparator)).asJava,
+        StandardOpenOption.CREATE,
+        StandardOpenOption.TRUNCATE_EXISTING
+      )
+      val compiler = compilers
+        .next()
+        .newInstance("lsif-java", classpath.asJava, List[String]().asJava)
+      try {
+        fn(compiler)
+      } finally {
+        compiler.shutdown()
+      }
+    } else {
+      throw new IllegalArgumentException(
+        s"failed to load mtags presentation compiler for Scala version $scalaVersion"
+      )
+    }
+  }
+
+  private def compileJavaFiles(
+      tmp: Path,
+      deps: Dependencies,
+      config: Config,
+      allJavaFiles: List[Path]
+  ): Try[Unit] = {
+    val (moduleInfos, javaFiles) = allJavaFiles
+      .partition(_.endsWith(moduleInfo))
+    if (javaFiles.isEmpty)
+      return Success(())
+    val semanticdbJar = Embedded.semanticdbJar(tmp)
+    val coursier = Embedded.coursier(tmp)
+    val actualClasspath = deps.classpath :+ semanticdbJar
+    val argsfile = targetroot.resolve("javacopts.txt")
     val arguments = ListBuffer.empty[String]
     arguments += "-encoding"
     arguments += "utf8"
     arguments += "-nowarn"
     arguments += "-d"
-    arguments += generatedDir("d")
+    arguments += generatedDir(tmp, "d")
     arguments += "-s"
-    arguments += generatedDir("s")
+    arguments += generatedDir(tmp, "s")
     arguments += "-h"
-    arguments += generatedDir("h")
+    arguments += generatedDir(tmp, "h")
     arguments += "-classpath"
     arguments += actualClasspath.mkString(File.pathSeparator)
     arguments +=
@@ -142,7 +292,7 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
       arguments += "--module-source-path"
       arguments += sourceroot.toString
     } else {
-      arguments ++= javaFiles
+      arguments ++= javaFiles.map(_.toString)
     }
     val quotedArguments = arguments.map(a => "\"" + a + "\"")
     Files.write(argsfile, quotedArguments.asJava)
@@ -169,37 +319,18 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
         cwd = os.Path(sourceroot),
         check = false
       )
-    if (index.cleanup) {
-      Files.walkFileTree(tmp, new DeleteVisitor)
-    }
-    val isSemanticdbGenerated = Files
-      .isDirectory(targetroot.resolve("META-INF"))
-    if (result.exitCode != 0 && !isSemanticdbGenerated) {
-      result
-    } else {
-      if (isSemanticdbGenerated) {
-        index
-          .app
-          .reporter
-          .info(
-            "Some SemanticDB files got generated even if there were compile errors. " +
-              "In most cases, this means that lsif-java managed to index everything " +
-              "except the locations that had compile errors and you can ignore the compile errors."
-          )
-      }
-      CommandResult(0, Nil)
-    }
+    if (result.exitCode == 0)
+      Success(())
+    else
+      Failure(SubprocessException(result))
   }
 
   private def clean(): Unit = {
     Files.walkFileTree(targetroot, new DeleteVisitor)
   }
 
-  private val moduleInfo = Paths.get("module-info.java")
-
   /** Recursively collects all Java files in the working directory */
-  private def collectAllJavaFiles(dir: Path): List[Path] = {
-    val javaPattern = FileSystems.getDefault.getPathMatcher("glob:**.java")
+  private def collectAllSourceFiles(dir: Path): List[Path] = {
     val buf = ListBuffer.empty[Path]
     Files.walkFileTree(
       dir,
@@ -217,7 +348,7 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
             file: Path,
             attrs: BasicFileAttributes
         ): FileVisitResult = {
-          if (javaPattern.matches(file)) {
+          if (allPatterns.matches(file)) {
             buf += file
           }
           FileVisitResult.CONTINUE
@@ -229,6 +360,10 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
       }
     )
     buf.toList
+  }
+
+  private def generatedDir(tmp: Path, name: String): String = {
+    Files.createDirectory(tmp.resolve(name)).toString()
   }
 
   /**

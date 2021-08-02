@@ -112,7 +112,8 @@ class LsifGraphSnapshotGenerator extends SnapshotGenerator {
           val compiler =
             new TestCompiler(
               TestCompiler.PROCESSOR_PATH,
-              Nil,
+              javacOptions = Nil,
+              scalacOptions = Nil,
               targetroot,
               sourceroot
             )

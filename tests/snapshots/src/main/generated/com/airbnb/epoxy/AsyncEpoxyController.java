@@ -23,7 +23,7 @@ import static com.airbnb.epoxy.EpoxyAsyncUtil.getAsyncBackgroundHandler;
  * See https://github.com/airbnb/epoxy/wiki/Epoxy-Controller#asynchronous-support
  */
 public abstract class AsyncEpoxyController extends EpoxyController {
-//                    ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyController# public abstract class AsyncEpoxyController extends EpoxyController
+//                    ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/AsyncEpoxyController# public abstract class AsyncEpoxyController
 //                                                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
 
   /**

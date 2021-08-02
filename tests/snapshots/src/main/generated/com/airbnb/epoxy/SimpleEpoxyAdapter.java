@@ -15,7 +15,7 @@ import java.util.List;
  * to modify the adapter from elsewhere, such as from an activity.
  */
 public class SimpleEpoxyAdapter extends EpoxyAdapter {
-//           ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter# public class SimpleEpoxyAdapter extends EpoxyAdapter
+//           ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter# public class SimpleEpoxyAdapter
 //           ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/SimpleEpoxyAdapter#`<init>`(). public SimpleEpoxyAdapter()
 //                                      ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyAdapter#
 

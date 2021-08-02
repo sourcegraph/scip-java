@@ -6,6 +6,8 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.concurrent.atomic.AtomicInteger
 
+import scala.util.Properties
+
 import scala.meta.inputs.Input
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
@@ -15,6 +17,7 @@ import com.sourcegraph.lsif_java.Dependencies
 import com.sourcegraph.lsif_java.SemanticdbPrinters
 
 class LibrarySnapshotGenerator extends SnapshotGenerator {
+  val scalaPattern = FileSystems.getDefault.getPathMatcher("glob:**.scala")
   val javaPattern = FileSystems.getDefault.getPathMatcher("glob:**.java")
   private case class IndexMetrics(occurrenceCount: Int, linesOfCode: Int)
 
@@ -24,6 +27,13 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
       "com.airbnb.android:epoxy:4.3.1",
       isIncluded = jar => jar.contains("epoxy")
     )
+    gen.checkLibrary(
+      "com.lihaoyi:ujson_2.13:1.4.0",
+      provided = List(
+        s"org.scala-lang:scala-library:${Properties.versionNumberString}"
+      ),
+      isIncluded = jar => jar.contains("ujson")
+    )
   }
   private class Gen(context: SnapshotContext, handler: SnapshotHandler) {
     def checkLibrary(
@@ -32,12 +42,17 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
         isIncluded: String => Boolean = _ => true
     ): Unit = {
       println(s"indexing library '$name'")
-      val deps = Dependencies.resolveDependencies(name :: provided.toList)
-      val options = List("-Xlint:none")
+      val deps = Dependencies.resolveDependencies(name :: provided)
       val counter = new AtomicInteger()
       val targetroot = Files.createTempDirectory("semanticdb-javac")
 
-      val compiler = new TestCompiler(deps.classpathSyntax, options, targetroot)
+      val compiler =
+        new TestCompiler(
+          deps.classpathSyntax,
+          javacOptions = List("-Xlint:none"),
+          scalacOptions = Nil,
+          targetroot
+        )
       val timer = new Timer()
       val toIndex = deps.sources.filter(p => isIncluded(p.getFileName.toString))
       toIndex.foreach { source =>
@@ -64,7 +79,10 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
               FileIO
                 .listAllFilesRecursively(root)
                 .iterator
-                .filter(file => javaPattern.matches(file.toNIO))
+                .filter(file =>
+                  javaPattern.matches(file.toNIO) ||
+                    scalaPattern.matches(file.toNIO)
+                )
                 .map { file =>
                   val relpath = file.toRelative(root).toString()
                   val text = FileIO.slurp(file, StandardCharsets.UTF_8)

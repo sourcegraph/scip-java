@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
  * This observer throws upon any changes done outside of diffing.
  */
 class NotifyBlocker extends AdapterDataObserver {
-//    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker# class NotifyBlocker extends unresolved_type
+//    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker# class NotifyBlocker
 //    ^^^^^^^^^^^^^ definition com/airbnb/epoxy/NotifyBlocker#`<init>`(). NotifyBlocker()
 //                          ^^^^^^^^^^^^^^^^^^^ reference _root_/
 

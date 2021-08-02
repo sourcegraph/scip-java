@@ -44,7 +44,7 @@ import androidx.annotation.NonNull;
  * diffing since we have a knowledge of what changed in the list.
  */
 class ModelList extends ArrayList<EpoxyModel<?>> {
-//    ^^^^^^^^^ definition com/airbnb/epoxy/ModelList# class ModelList extends ArrayList<EpoxyModel<?>>
+//    ^^^^^^^^^ definition com/airbnb/epoxy/ModelList# class ModelList
 //                      ^^^^^^^^^ reference java/util/ArrayList#
 //                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
 
@@ -410,7 +410,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
    * the parent methods so that the proper notifications are done.
    */
   private class Itr implements Iterator<EpoxyModel<?>> {
-//              ^^^ definition com/airbnb/epoxy/ModelList#Itr# private class Itr implements Iterator<EpoxyModel<?>>
+//              ^^^ definition com/airbnb/epoxy/ModelList#Itr# private class Itr
 //              ^^^ definition com/airbnb/epoxy/ModelList#Itr#`<init>`(). private Itr()
 //                             ^^^^^^^^ reference java/util/Iterator#
 //                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -528,7 +528,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
    * notifications are done.
    */
   private class ListItr extends Itr implements ListIterator<EpoxyModel<?>> {
-//              ^^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr# private class ListItr extends Itr implements ListIterator<EpoxyModel<?>>
+//              ^^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr# private class ListItr
 //                              ^^^ reference com/airbnb/epoxy/ModelList#Itr#
 //                                             ^^^^^^^^^^^^ reference java/util/ListIterator#
 //                                                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
@@ -684,7 +684,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
    * the implementation to call the parent methods so that the proper notifications are done.
    */
   private static class SubList extends AbstractList<EpoxyModel<?>> {
-//                     ^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList# private static class SubList extends AbstractList<EpoxyModel<?>>
+//                     ^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList# private static class SubList
 //                                     ^^^^^^^^^^^^ reference java/util/AbstractList#
 //                                                  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
     private final ModelList fullList;
@@ -696,7 +696,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //              ^^^^ definition com/airbnb/epoxy/ModelList#SubList#size. private int size
 
     private static final class SubListIterator implements ListIterator<EpoxyModel<?>> {
-//                             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator# private static final class SubListIterator implements ListIterator<EpoxyModel<?>>
+//                             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator# private static final class SubListIterator
 //                                                        ^^^^^^^^^^^^ reference java/util/ListIterator#
 //                                                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
       private final SubList subList;

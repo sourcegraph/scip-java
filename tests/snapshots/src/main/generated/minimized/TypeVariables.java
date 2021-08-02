@@ -24,7 +24,7 @@ public class TypeVariables {
   }
 
   static class CT extends C implements I {
-//             ^^ definition minimized/TypeVariables#CT# static class CT extends C implements I
+//             ^^ definition minimized/TypeVariables#CT# static class CT
 //             ^^ definition minimized/TypeVariables#CT#`<init>`(). CT()
 //                        ^ reference minimized/TypeVariables#C#
 //                                     ^ reference minimized/TypeVariables#I#

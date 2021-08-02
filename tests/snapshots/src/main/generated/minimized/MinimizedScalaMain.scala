@@ -3,10 +3,10 @@ package minimized
 
 // format: off
 object MinimizedScalaMain {
-//     ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedScalaMain. public final MinimizedScalaMain
+//     ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedScalaMain. object MinimizedScalaMain
   def main(args: Array[String]): Unit = {
-//    ^^^^ definition minimized/MinimizedScalaMain.main(). public void main(String[] args)
-//         ^^^^ definition minimized/MinimizedScalaMain.main().(args) String[] args
+//    ^^^^ definition minimized/MinimizedScalaMain.main(). def main(args: Array[String]): Unit
+//         ^^^^ definition minimized/MinimizedScalaMain.main().(args) args: Array[String]
 //               ^^^^^ reference scala/Array#
 //                     ^^^^^^ reference scala/Predef.String#
 //                               ^^^^ reference scala/Unit#

@@ -4,9 +4,8 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.*;
 
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -14,20 +13,42 @@ import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.typeRef;
 
 public class SignatureFormatter {
   private static final Type OBJECT_TYPE_REF = typeRef("java/lang/Object#");
+  private static final Type PRODUCT_TYPE_REF = typeRef("scala/Product#");
+  private static final Type SCALA_SERIALIZABLE_TYPE_REF = typeRef("scala/package.Serializable#");
+  private static final Type JAVA_SERIALIZABLE_TYPE_REF = typeRef("java/util/Serializable#");
+  private static final Type SCALA_ANY_TYPE_REF = typeRef("scala/Any#");
+  private static final Type SCALA_ANYREF_TYPE_REF = typeRef("scala/AnyRef#");
 
   private static final Type WILDCARD_TYPE_REF = typeRef("local_wildcard");
 
+  private static final Type NOTHING_SYMBOL = typeRef("scala/Nothing#");
+  private static final String FUNCTION_SYMBOL_PREFIX = "scala/Function";
+  private static final String TUPLE_SYMBOL_PREFIX = "scala/Tuple";
   private static final String ARRAY_SYMBOL = "scala/Array#";
   private static final String ENUM_SYMBOL = "java/lang/Enum#";
   private static final String ANNOTATION_SYMBOL = "java/lang/annotation/Annotation#";
+  private static final Set<Type> REDUNDANT_CLASS_PARENTS = new HashSet<>();
+  private static final Set<Type> CASE_CLASS_PARENTS = new HashSet<>();
+
+  {
+    REDUNDANT_CLASS_PARENTS.add(OBJECT_TYPE_REF);
+    REDUNDANT_CLASS_PARENTS.add(SCALA_ANY_TYPE_REF);
+    REDUNDANT_CLASS_PARENTS.add(SCALA_ANYREF_TYPE_REF);
+
+    CASE_CLASS_PARENTS.add(PRODUCT_TYPE_REF);
+    CASE_CLASS_PARENTS.add(SCALA_SERIALIZABLE_TYPE_REF);
+    CASE_CLASS_PARENTS.add(JAVA_SERIALIZABLE_TYPE_REF);
+  }
 
   private final StringBuilder s = new StringBuilder();
   private final SymbolInformation symbolInformation;
   private final Symtab symtab;
+  private final boolean isScala;
 
   public SignatureFormatter(SymbolInformation symbolInformation, Symtab symtab) {
     this.symbolInformation = symbolInformation;
     this.symtab = symtab;
+    this.isScala = symbolInformation.getLanguage() == Language.SCALA;
   }
 
   public String formatSymbol() {
@@ -41,7 +62,6 @@ public class SignatureFormatter {
     } else if (signature.hasTypeSignature()) {
       formatTypeParameterSignature(signature.getTypeSignature());
     }
-
     return s.toString();
   }
 
@@ -73,27 +93,59 @@ public class SignatureFormatter {
         }
         printKeyword("interface");
         break;
+      case OBJECT:
+        printKeyword("object");
+        break;
+      case TRAIT:
+        printKeyword("trait");
+        break;
+      case PACKAGE_OBJECT:
+        printKeyword("package object");
+        break;
+      default:
+        break;
     }
     s.append(symbolInformation.getDisplayName());
+    if (symbolInformation.getKind() == SymbolInformation.Kind.CLASS && has(Property.CASE)) {
+      primaryConstructor(classSignature)
+          .ifPresent(
+              constructorSignature ->
+                  formatScalaParameterList(constructorSignature.getParameterListsList()));
+    }
 
     List<SymbolInformation> typeParameters = getSymlinks(classSignature.getTypeParameters());
     if (!typeParameters.isEmpty()) {
       s.append(
           typeParameters.stream()
               .map(this::formatTypeParameter)
-              .collect(Collectors.joining(", ", "<", ">")));
+              .collect(Collectors.joining(", ", isScala ? "[" : "<", isScala ? "]" : ">")));
     }
 
-    boolean hasSuperClass = !classSignature.getParentsList().contains(OBJECT_TYPE_REF);
+    boolean hasNonRedundantParent =
+        classSignature.getParentsList().size() > 0
+            && !REDUNDANT_CLASS_PARENTS.contains(classSignature.getParentsList().get(0));
+
+    boolean isCaseClass =
+        isScala
+            && symbolInformation.getKind() == SymbolInformation.Kind.CLASS
+            && has(Property.CASE);
 
     List<Type> nonSyntheticParents =
         classSignature.getParentsList().stream()
-            .filter(parent -> !parent.equals(OBJECT_TYPE_REF))
+            .filter(parent -> !REDUNDANT_CLASS_PARENTS.contains(parent))
             .filter(parent -> !parent.getTypeRef().getSymbol().equals(ENUM_SYMBOL))
+            .filter(parent -> isCaseClass && !CASE_CLASS_PARENTS.contains(parent))
             .filter(parent -> !parent.getTypeRef().getSymbol().equals(ANNOTATION_SYMBOL))
             .collect(Collectors.toList());
 
     if (nonSyntheticParents.isEmpty()) return;
+
+    if (isScala) {
+      printKeyword(" extends");
+      s.append(
+          nonSyntheticParents.stream().map(this::formatType).collect(Collectors.joining(" with ")));
+      return;
+    }
 
     // Determine which parents from ClassSignature.parents are classes or interfaces so we know to
     // use
@@ -114,7 +166,7 @@ public class SignatureFormatter {
     switch (symbolInformation.getKind()) {
       case CLASS:
         // if no superclass or is an enum, every non synthetic parent is an interface
-        if (isEnum || !hasSuperClass) {
+        if (isEnum || !hasNonRedundantParent) {
           printKeyword(" implements");
 
           String superInterfaces =
@@ -147,9 +199,13 @@ public class SignatureFormatter {
   }
 
   private void formatMethodSignature(MethodSignature methodSignature) {
+    if (isScala) {
+      formatScalaMethodSignature(methodSignature);
+      return;
+    }
+
     printKeywordln(formatAnnotations());
     printKeyword(formatAccess());
-
     printKeyword(formatModifiers());
 
     List<SymbolInformation> typeParameters = getSymlinks(methodSignature.getTypeParameters());
@@ -160,25 +216,21 @@ public class SignatureFormatter {
               .collect(Collectors.joining(", ", "<", ">")));
     }
 
-    if (symbolInformation.getKind() != SymbolInformation.Kind.CONSTRUCTOR) {
-      printKeyword(formatType(methodSignature.getReturnType()));
-      s.append(symbolInformation.getDisplayName());
-    } else {
+    if (symbolInformation.getKind() == SymbolInformation.Kind.CONSTRUCTOR) {
       String owner = SymbolDescriptor.parseFromSymbol(symbolInformation.getSymbol()).owner;
       // Fix for https://github.com/sourcegraph/lsif-java/issues/150
       if (!owner.equals(SemanticdbSymbols.NONE)) {
         s.append(SymbolDescriptor.parseFromSymbol(owner).descriptor.name);
       }
+    } else {
+      printKeyword(formatType(methodSignature.getReturnType()));
+      s.append(symbolInformation.getDisplayName());
     }
 
     s.append(
         methodSignature.getParameterListsList().stream()
             .flatMap((params) -> getSymlinks(params).stream())
-            .map(
-                symInfo ->
-                    formatType(symInfo.getSignature().getValueSignature().getTpe())
-                        + " "
-                        + symInfo.getDisplayName())
+            .map(this::formatTermParameter)
             .collect(Collectors.joining(", ", "(", ")")));
 
     if (!methodSignature.getThrowsList().isEmpty()) {
@@ -187,6 +239,65 @@ public class SignatureFormatter {
           methodSignature.getThrowsList().stream()
               .map(this::formatType)
               .collect(Collectors.joining(", ")));
+    }
+  }
+
+  private String formatTermParameter(SymbolInformation info) {
+    if (isScala) {
+      return info.getDisplayName()
+          + ": "
+          + formatType(info.getSignature().getValueSignature().getTpe());
+    }
+    return formatType(info.getSignature().getValueSignature().getTpe())
+        + " "
+        + info.getDisplayName();
+  }
+
+  private void formatScalaMethodSignature(MethodSignature methodSignature) {
+    printKeywordln(formatAnnotations());
+    printKeyword(formatAccess());
+    printKeyword(formatModifiers());
+    if (has(Property.VAL)) {
+      printKeyword("val");
+    } else if (has(Property.VAR)) {
+      printKeyword("var");
+    } else {
+      printKeyword("def");
+    }
+    s.append(
+        symbolInformation.getKind() == SymbolInformation.Kind.CONSTRUCTOR
+            ? "this"
+            : symbolInformation.getDisplayName());
+    formatScalaParameterList(methodSignature.getParameterListsList());
+    printKeyword(":");
+    s.append(this.formatType(methodSignature.getReturnType()));
+  }
+
+  private Optional<MethodSignature> primaryConstructor(ClassSignature classSignature) {
+    Symtab scopeSymtab = symtab.withHardlinks(classSignature.getDeclarations());
+    int n = classSignature.getDeclarations().getSymlinksCount();
+    for (int i = 0; i < n; i++) {
+      String symlink = classSignature.getDeclarations().getSymlinks(i);
+      SymbolInformation info = scopeSymtab.symbols.get(symlink);
+      if (info != null
+          && info.getKind() == SymbolInformation.Kind.CONSTRUCTOR
+          && has(Property.PRIMARY, info)
+          && info.hasSignature()
+          && info.getSignature().hasMethodSignature()) {
+        return Optional.of(info.getSignature().getMethodSignature());
+      }
+    }
+    return Optional.empty();
+  }
+
+  private void formatScalaParameterList(List<Scope> parameterList) {
+    for (Scope scope : parameterList) {
+      List<SymbolInformation> infos =
+          scope.getHardlinksCount() > 0 ? scope.getHardlinksList() : getSymlinks(scope);
+      s.append(
+          infos.stream()
+              .map(this::formatTermParameter)
+              .collect(Collectors.joining(", ", "(", ")")));
     }
   }
 
@@ -207,19 +318,30 @@ public class SignatureFormatter {
     } else {
       printKeyword(formatAccess());
       printKeyword(formatModifiers());
-      printKeyword(formatType(valueSignature.getTpe()));
-      s.append(symbolInformation.getDisplayName());
+      if (isScala) {
+        s.append(symbolInformation.getDisplayName());
+        printKeyword(":");
+        printKeyword(formatType(valueSignature.getTpe()));
+      } else {
+        printKeyword(formatType(valueSignature.getTpe()));
+        s.append(symbolInformation.getDisplayName());
+      }
     }
   }
 
   private void formatTypeParameterSignature(TypeSignature typeSignature) {
+    if (isScala && symbolInformation.getKind() == SymbolInformation.Kind.TYPE) {
+      printKeyword("type");
+    }
     s.append(symbolInformation.getDisplayName());
-    if (typeSignature.hasLowerBound()) {
-      printKeyword(" super");
+    if (typeSignature.hasLowerBound()
+        && (!isScala || !typeSignature.getLowerBound().equals(NOTHING_SYMBOL))) {
+      printKeyword(isScala ? " >:" : " super");
       s.append(formatType(typeSignature.getLowerBound()));
-    } else if (typeSignature.hasUpperBound()
-        && !typeSignature.getUpperBound().equals(OBJECT_TYPE_REF)) {
-      printKeyword(" extends");
+    }
+    if (typeSignature.hasUpperBound()
+        && !typeSignature.getUpperBound().equals(isScala ? SCALA_ANY_TYPE_REF : OBJECT_TYPE_REF)) {
+      printKeyword(isScala ? " <:" : " extends");
       s.append(formatType(typeSignature.getUpperBound()));
     }
   }
@@ -246,7 +368,9 @@ public class SignatureFormatter {
   private String formatTypeArguments(List<Type> typeArguments) {
     if (typeArguments.isEmpty()) return "";
 
-    return typeArguments.stream().map(this::formatType).collect(Collectors.joining(", ", "<", ">"));
+    return typeArguments.stream()
+        .map(this::formatType)
+        .collect(Collectors.joining(", ", isScala ? "[" : "<", isScala ? "]" : ">"));
   }
 
   private String formatAnnotations() {
@@ -341,7 +465,7 @@ public class SignatureFormatter {
     } else if (constant.hasShortConstant()) {
       return Integer.toString(constant.getShortConstant().getValue());
     } else if (constant.hasCharConstant()) {
-      return String.valueOf((char) constant.getCharConstant().getValue());
+      return String.format("'%s'", (char) constant.getCharConstant().getValue());
     } else if (constant.hasIntConstant()) {
       return Integer.toString(constant.getIntConstant().getValue());
     } else if (constant.hasLongConstant()) {
@@ -407,17 +531,83 @@ public class SignatureFormatter {
     if (type.hasTypeRef()) {
       TypeRef typeRef = type.getTypeRef();
       if (typeRef.getSymbol().equals(ARRAY_SYMBOL)) {
-        b.append(formatType(typeRef.getTypeArguments(0)));
-        b.append("[]");
+        if (isScala) {
+          b.append("Array[");
+          b.append(formatType(typeRef.getTypeArguments(0)));
+          b.append("]");
+        } else {
+          b.append(formatType(typeRef.getTypeArguments(0)));
+          b.append("[]");
+        }
+      } else if (isScala && typeRef.getSymbol().startsWith(FUNCTION_SYMBOL_PREFIX)) {
+        int n = typeRef.getTypeArgumentsCount() - 1;
+        if (n == 0) {
+          // Special-case for Function1[A, B]: don't wrap `A`  in parenthesis like this `(A) => B`
+          s.append(formatType(typeRef.getTypeArguments(0)));
+        } else {
+          b.append(
+              typeRef.getTypeArgumentsList().stream()
+                  .limit(n)
+                  .map(this::formatType)
+                  .collect(Collectors.joining(", ", "(", ")")));
+        }
+        b.append(" => ");
+        b.append(formatType(typeRef.getTypeArguments(n)));
+      } else if (isScala && typeRef.getSymbol().startsWith(TUPLE_SYMBOL_PREFIX)) {
+        b.append(
+            typeRef.getTypeArgumentsList().stream()
+                .map(this::formatType)
+                .collect(Collectors.joining(", ", "(", ")")));
       } else {
         b.append(symbolDisplayName(typeRef.getSymbol()));
         b.append(formatTypeArguments(typeRef.getTypeArgumentsList()));
       }
+    } else if (type.hasSingleType()) {
+      SingleType tpe = type.getSingleType();
+      if (tpe.hasPrefix()) {
+        b.append(formatType(tpe.getPrefix()));
+      }
+      SymbolInformation info = symtab.symbols.get(tpe.getSymbol());
+      if (info != null) {
+        b.append(info.getDisplayName()).append(".type");
+      }
+    } else if (type.hasThisType()) {
+      b.append("this.type");
+    } else if (type.hasSuperType()) {
+      SuperType tpe = type.getSuperType();
+      if (tpe.hasPrefix()) {
+        b.append(formatType(tpe.getPrefix())).append(".");
+      }
+      b.append("super");
+    } else if (type.hasConstantType()) {
+      b.append(this.formatConstant(type.getConstantType().getConstant()));
     } else if (type.hasIntersectionType()) {
       b.append(
           type.getIntersectionType().getTypesList().stream()
               .map(this::formatType)
-              .collect(Collectors.joining(" & ")));
+              .collect(Collectors.joining(isScala ? " with " : " & ")));
+    } else if (type.hasUnionType()) {
+      b.append(
+          type.getIntersectionType().getTypesList().stream()
+              .map(this::formatType)
+              .collect(Collectors.joining(" | ")));
+    } else if (type.hasStructuralType()) {
+      StructuralType tpe = type.getStructuralType();
+      int n = tpe.getDeclarations().getHardlinksCount();
+      if (n == 0) {
+        b.append(" {}");
+      } else {
+        b.append(formatType(tpe.getTpe())).append(" {");
+        Symtab hardlinkSymtab = symtab.withHardlinks(tpe.getDeclarations());
+        for (int i = 0; i < n; i++) {
+          SymbolInformation info = tpe.getDeclarations().getHardlinks(i);
+          if (i > 0) {
+            b.append(";");
+          }
+          b.append(" ").append(new SignatureFormatter(info, hardlinkSymtab).formatSymbol());
+        }
+        b.append(" }");
+      }
     } else if (type.hasExistentialType()) {
       AtomicInteger hardlinkStep = new AtomicInteger();
       TypeRef typeRef = type.getExistentialType().getTpe().getTypeRef();
@@ -439,19 +629,32 @@ public class SignatureFormatter {
                     // else for symlink we can use the usual path
                     return formatType(typeArg);
                   })
-              .collect(Collectors.joining(", ", "<", ">")));
+              .collect(Collectors.joining(", ", isScala ? "[" : "<", isScala ? "[" : ">")));
+    } else if (type.hasByNameType()) {
+      b.append("=> ").append(formatType(type.getByNameType().getTpe()));
+    } else if (type.hasRepeatedType()) {
+      b.append(formatType(type.getRepeatedType().getTpe())).append("*");
     }
 
-    return b.toString();
+    return b.toString().trim();
   }
 
   private String formatAccess() {
-    if (symbolInformation.getAccess().hasPrivateAccess()) {
+    Access access = symbolInformation.getAccess();
+    if (access.hasPrivateAccess()) {
       return "private";
-    } else if (symbolInformation.getAccess().hasPublicAccess()) {
+    } else if (!isScala && access.hasPublicAccess()) {
       return "public";
-    } else if (symbolInformation.getAccess().hasProtectedAccess()) {
+    } else if (access.hasProtectedAccess()) {
       return "protected";
+    } else if (isScala && access.hasPrivateThisAccess()) {
+      return "private[this]";
+    } else if (isScala && access.hasPrivateWithinAccess()) {
+      String name =
+          SymbolDescriptor.parseFromSymbol(access.getPrivateWithinAccess().getSymbol())
+              .descriptor
+              .name;
+      return String.format("protected[%s]", name);
     }
     return "";
   }
@@ -459,10 +662,23 @@ public class SignatureFormatter {
   // https://checkstyle.sourceforge.io/config_modifier.html#ModifierOrder
   private String formatModifiers() {
     ArrayList<String> modifiers = new ArrayList<>();
-    if (has(Property.ABSTRACT)) modifiers.add("abstract");
+    if (has(Property.ABSTRACT)) {
+      if (isScala && symbolInformation.getKind() != SymbolInformation.Kind.CLASS) {
+      } else {
+        modifiers.add("abstract");
+      }
+    }
     if (has(Property.DEFAULT)) modifiers.add("default");
     if (has(Property.STATIC)) modifiers.add("static");
-    if (has(Property.FINAL)) modifiers.add("final");
+    if (has(Property.FINAL)) {
+      if (symbolInformation.getKind() != SymbolInformation.Kind.OBJECT
+          && symbolInformation.getKind() != SymbolInformation.Kind.PACKAGE_OBJECT) {
+        modifiers.add("final");
+      }
+    }
+    if (has(Property.IMPLICIT)) modifiers.add("implicit");
+    if (has(Property.SEALED)) modifiers.add("sealed");
+    if (has(Property.CASE)) modifiers.add("case");
     return String.join(" ", modifiers);
   }
 
@@ -507,6 +723,20 @@ public class SignatureFormatter {
    * we check for those first before attempting to decode a SemanticDB symbol.
    */
   public String symbolDisplayName(String symbol) {
+    if (isScala) {
+      return symbolScalaDisplayName(symbol);
+    }
+    return symbolJavaDisplayName(symbol);
+  }
+
+  private String symbolScalaDisplayName(String symbol) {
+    if ("local_wildcard".equals(symbol)) {
+      return "*";
+    }
+    return SymbolDescriptor.parseFromSymbol(symbol).descriptor.name;
+  }
+
+  private String symbolJavaDisplayName(String symbol) {
     switch (symbol) {
       case "local_wildcard":
         return "?";

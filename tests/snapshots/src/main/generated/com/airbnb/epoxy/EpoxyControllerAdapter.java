@@ -56,7 +56,7 @@ import androidx.recyclerview.widget.RecyclerView;
 //                                  ^^^^^^^^^^^^ reference androidx/recyclerview/widget/RecyclerView#
 
 public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements ResultCallback {
-//                 ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter# public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements ResultCallback
+//                 ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyControllerAdapter# public final class EpoxyControllerAdapter
 //                                                ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
 //                                                                            ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#
   private final NotifyBlocker notifyBlocker = new NotifyBlocker();

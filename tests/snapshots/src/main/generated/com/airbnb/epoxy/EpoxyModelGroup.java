@@ -97,7 +97,7 @@ import androidx.annotation.Nullable;
 @SuppressWarnings("rawtypes")
 //^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
 public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
-//           ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup# @SuppressWarnings("rawtypes") public class EpoxyModelGroup extends EpoxyModelWithHolder<unresolved_type>
+//           ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelGroup# @SuppressWarnings("rawtypes") public class EpoxyModelGroup
 //                                   ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelWithHolder#
 //                                                        ^^^^^^^^^^^^^^^^ reference _root_/
 

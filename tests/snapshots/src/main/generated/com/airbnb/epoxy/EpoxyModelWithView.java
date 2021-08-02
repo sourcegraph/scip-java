@@ -35,7 +35,7 @@ import androidx.annotation.NonNull;
  * resource file.
  */
 public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
-//                    ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView# public abstract class EpoxyModelWithView<T extends unresolved_type> extends EpoxyModel<T>
+//                    ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView# public abstract class EpoxyModelWithView<T extends unresolved_type>
 //                    ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyModelWithView#`<init>`(). public EpoxyModelWithView()
 //                                       ^ definition com/airbnb/epoxy/EpoxyModelWithView#[T] T extends unresolved_type
 //                                                 ^^^^ reference _root_/
