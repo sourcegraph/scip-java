@@ -269,8 +269,10 @@ public class SignatureFormatter {
             ? "this"
             : symbolInformation.getDisplayName());
     formatScalaParameterList(methodSignature.getParameterListsList());
-    printKeyword(":");
-    s.append(this.formatType(methodSignature.getReturnType()));
+    if (symbolInformation.getKind() != SymbolInformation.Kind.CONSTRUCTOR) {
+      printKeyword(":");
+      s.append(this.formatType(methodSignature.getReturnType()));
+    }
   }
 
   private Optional<MethodSignature> primaryConstructor(ClassSignature classSignature) {

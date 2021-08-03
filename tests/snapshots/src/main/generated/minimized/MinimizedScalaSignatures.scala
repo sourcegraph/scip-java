@@ -6,11 +6,11 @@ package minimized
 
 case class MinimizedCaseClass(value: String) {
 //         ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedCaseClass# case class MinimizedCaseClass(value: String)
-//                            definition minimized/MinimizedCaseClass#`<init>`(). def this(value: String):
+//                            definition minimized/MinimizedCaseClass#`<init>`(). def this(value: String)
 //                            ^^^^^ definition minimized/MinimizedCaseClass#value. val value: String
 //                                   ^^^^^^ reference scala/Predef.String#
   def this() = this("value")
-//    ^^^^ definition minimized/MinimizedCaseClass#`<init>`(+1). def this():
+//    ^^^^ definition minimized/MinimizedCaseClass#`<init>`(+1). def this()
 //                  reference minimized/MinimizedCaseClass#`<init>`().
 }
 
@@ -34,7 +34,7 @@ trait MinimizedTrait[T] extends AutoCloseable {
 
 class MinimizedScalaSignatures extends AutoCloseable with java.io.Serializable {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedScalaSignatures# class MinimizedScalaSignatures
-//                              definition minimized/MinimizedScalaSignatures#`<init>`(). def this():
+//                              definition minimized/MinimizedScalaSignatures#`<init>`(). def this()
 //                                     ^^^^^^^^^^^^^ reference java/lang/AutoCloseable#
 //                                                    reference java/lang/Object#`<init>`().
 //                                                        ^^^^ reference java/
