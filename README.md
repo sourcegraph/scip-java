@@ -7,3 +7,4 @@
 | Manual configuration | https://sourcegraph.github.io/lsif-java/docs/manual-configuration.html |
 | Contributing         | https://sourcegraph.github.io/lsif-java/docs/contributing.html         |
 | Design               | https://sourcegraph.github.io/lsif-java/docs/design.html               |
+
