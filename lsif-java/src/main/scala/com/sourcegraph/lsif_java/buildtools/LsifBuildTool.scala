@@ -12,7 +12,11 @@ import java.nio.file.Paths
 import java.nio.file.SimpleFileVisitor
 import java.nio.file.StandardOpenOption
 import java.nio.file.attribute.BasicFileAttributes
+import java.util
+import java.util.Collections
+import java.util.Optional
 import java.util.ServiceLoader
+import java.util.concurrent.TimeUnit
 
 import scala.collection.mutable.ListBuffer
 import scala.jdk.CollectionConverters._
@@ -22,6 +26,7 @@ import scala.util.Try
 import scala.util.control.NonFatal
 
 import scala.meta.pc.PresentationCompiler
+import scala.meta.pc.PresentationCompilerConfig
 
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.lsif_java.BuildInfo
@@ -244,6 +249,31 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
       val compiler = compilers
         .next()
         .newInstance("lsif-java", classpath.asJava, List[String]().asJava)
+        .withConfiguration(
+          new PresentationCompilerConfig {
+            override def parameterHintsCommand(): Optional[String] =
+              Optional.empty()
+            override def completionCommand(): Optional[String] =
+              Optional.empty()
+            override def symbolPrefixes(): util.Map[String, String] =
+              Collections.emptyMap()
+            override def isDefaultSymbolPrefixes: Boolean = false
+            override def overrideDefFormat()
+                : PresentationCompilerConfig.OverrideDefFormat =
+              PresentationCompilerConfig.OverrideDefFormat.Ascii
+            override def isCompletionItemDetailEnabled: Boolean = false
+            override def isStripMarginOnTypeFormattingEnabled: Boolean = false
+            override def isCompletionItemDocumentationEnabled: Boolean = false
+            override def isHoverDocumentationEnabled: Boolean = false
+            override def snippetAutoIndent(): Boolean = false
+            override def isSignatureHelpDocumentationEnabled: Boolean = false
+            override def isCompletionSnippetsEnabled: Boolean = false
+            override def timeoutDelay(): Long = 0
+            override def timeoutUnit(): TimeUnit = TimeUnit.SECONDS
+            override def semanticdbCompilerOptions(): util.List[String] =
+              Collections.emptyList()
+          }
+        )
       try {
         fn(compiler)
       } finally {
