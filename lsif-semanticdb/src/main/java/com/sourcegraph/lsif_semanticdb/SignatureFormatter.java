@@ -52,6 +52,14 @@ public class SignatureFormatter {
   }
 
   public String formatSymbol() {
+    try {
+      return formatSymbolUnsafe();
+    } catch (Exception e) {
+      throw new SignatureFormatterException(symbolInformation, e);
+    }
+  }
+
+  private String formatSymbolUnsafe() {
     Signature signature = symbolInformation.getSignature();
     if (signature.hasClassSignature()) {
       formatClassSignature(signature.getClassSignature());
@@ -243,6 +251,7 @@ public class SignatureFormatter {
   }
 
   private String formatTermParameter(SymbolInformation info) {
+    if (info == null) return "";
     if (isScala) {
       return info.getDisplayName()
           + ": "
@@ -354,7 +363,10 @@ public class SignatureFormatter {
   private List<SymbolInformation> getSymlinks(Scope scope) {
     ArrayList<SymbolInformation> symlinks = new ArrayList<>();
     for (int i = 0; i < scope.getSymlinksCount(); i++) {
-      symlinks.add(symtab.symbols.get(scope.getSymlinks(i)));
+      SymbolInformation info = symtab.symbols.get(scope.getSymlinks(i));
+      if (info != null) {
+        symlinks.add(info);
+      }
     }
     return symlinks;
   }
@@ -549,7 +561,7 @@ public class SignatureFormatter {
         } else {
           b.append(
               typeRef.getTypeArgumentsList().stream()
-                  .limit(n)
+                  .limit(Math.max(0, n))
                   .map(this::formatType)
                   .collect(Collectors.joining(", ", "(", ")")));
         }

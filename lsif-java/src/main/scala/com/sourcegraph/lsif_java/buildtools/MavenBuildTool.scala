@@ -11,12 +11,22 @@ import com.sourcegraph.lsif_java.commands.IndexCommand
 import os.CommandResult
 
 class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
-  override def defaultTargetroot: Path =
-    Paths.get("target", "semanticdb-targetroot")
+
   override def usedInCurrentDirectory(): Boolean =
     Files.isRegularFile(index.workingDirectory.resolve("pom.xml"))
 
-  override def generateSemanticdb(): CommandResult = {
+  override def generateLsif(): Int = {
+    BuildTool.generateLsifFromTargetroot(
+      generateSemanticdb(),
+      index.finalTargetroot(defaultTargetroot),
+      index
+    )
+  }
+
+  private def defaultTargetroot: Path =
+    Paths.get("target", "semanticdb-targetroot")
+
+  private def generateSemanticdb(): CommandResult = {
     TemporaryFiles.withDirectory(index) { tmp =>
       val mvnw = index.workingDirectory.resolve("mvnw")
       val mavenScript =

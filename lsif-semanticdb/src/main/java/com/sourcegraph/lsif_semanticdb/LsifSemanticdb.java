@@ -1,5 +1,6 @@
 package com.sourcegraph.lsif_semanticdb;
 
+import com.google.protobuf.CodedInputStream;
 import com.sourcegraph.lsif_protocol.MarkupKind;
 import com.sourcegraph.semanticdb_javac.Semanticdb;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation;
@@ -188,11 +189,13 @@ public class LsifSemanticdb {
 
   private Stream<LsifTextDocument> parseTextDocument(Path semanticdbPath) {
     try {
-      return Semanticdb.TextDocuments.parseFrom(Files.readAllBytes(semanticdbPath))
-          .getDocumentsList().stream()
+      CodedInputStream in = CodedInputStream.newInstance(Files.readAllBytes(semanticdbPath));
+      in.setRecursionLimit(1000);
+      return Semanticdb.TextDocuments.parseFrom(in).getDocumentsList().stream()
           .filter(sdb -> !sdb.getOccurrencesList().isEmpty())
           .map(sdb -> new LsifTextDocument(semanticdbPath, sdb, options.sourceroot));
     } catch (IOException e) {
+      options.reporter.error("invalid protobuf: " + semanticdbPath);
       options.reporter.error(e);
       return Stream.empty();
     }
