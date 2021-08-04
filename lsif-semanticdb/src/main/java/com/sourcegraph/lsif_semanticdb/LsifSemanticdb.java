@@ -133,40 +133,37 @@ public class LsifSemanticdb {
                   String.format("no definition ID for symbol '%s'", occ.getSymbol())));
         }
 
-        // Hover
+        // Hover 1: signature
         String documentation = symbolInformation.getDocumentation().getMessage();
-
         StringBuilder markupContent = new StringBuilder(documentation.length());
-
-        if (!documentation.isEmpty()) {
-          markupContent.append(documentation.replaceAll("\n", "\n\n"));
-        }
-
         if (symbolInformation.hasSignature()) {
-          if (markupContent.length() != 0) markupContent.append("\n---\n");
-
           String language =
               doc.semanticdb.getLanguage().toString().toLowerCase(Locale.ROOT).intern();
           String signature = new SignatureFormatter(symbolInformation, symtab).formatSymbol();
-
-          markupContent.ensureCapacity(
-              markupContent.length() + signature.length() + language.length() + 8);
           markupContent
               .append("```")
               .append(language)
               .append('\n')
               .append(signature)
               .append("\n```");
-        } else {
+        }
+
+        // Hover 2: docstring
+        if (!documentation.isEmpty()) {
+          if (markupContent.length() != 0) markupContent.append("\n---\n");
+          markupContent.append(documentation.replaceAll("\n", "\n\n"));
+        }
+
+        if (markupContent.length() == 0) {
+          // Always emit a non-empty hover message to prevent Sourcegraph from falling back to
+          // Search-Based hover messages.
           markupContent.append(symbolInformation.getDisplayName());
         }
 
-        if (markupContent.length() != 0) {
-          int hoverId =
-              writer.emitHoverResult(
-                  new MarkupContent(MarkupKind.MARKDOWN, markupContent.toString()));
-          writer.emitHoverEdge(ids.resultSet, hoverId);
-        }
+        int hoverId =
+            writer.emitHoverResult(
+                new MarkupContent(MarkupKind.MARKDOWN, markupContent.toString()));
+        writer.emitHoverEdge(ids.resultSet, hoverId);
       }
 
       // Overrides

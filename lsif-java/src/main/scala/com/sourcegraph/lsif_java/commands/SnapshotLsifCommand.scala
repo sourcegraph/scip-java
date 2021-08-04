@@ -148,13 +148,15 @@ object SnapshotLsifCommand {
                 resultSetId <- lsif.next.get(o.getId).toList
                 hoverId <- lsif.hoverEdges.get(resultSetId).toList
                 hover <- lsif.hoverVertexes.get(hoverId).toList
-                contents <- hover.getContents.getValue
-              } yield contents
-            ).mkString
-              .split("\n---\n")
-              .last
-              .stripPrefix("```java\n")
-              .stripSuffix("\n```")
+                line <- hover
+                  .getContents
+                  .getValue
+                  .linesIterator
+                  .dropWhile(!_.startsWith("```"))
+                  .drop(1)
+                  .takeWhile(_ != "```")
+              } yield line
+            ).mkString("\n")
           val symInfo = SymbolInformation
             .newBuilder()
             // we cheese it a bit here, as this is less work than trying to reconstruct
