@@ -76,14 +76,25 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
     .getDefault
     .getPathMatcher("glob:**.{java,scala}")
   private val moduleInfo = Paths.get("module-info.java")
-  protected def defaultTargetroot: Path = Paths.get("target")
+
+  override def usedInCurrentDirectory(): Boolean =
+    Files.isRegularFile(configFile)
+  override def isHidden: Boolean = true
+  override def generateLsif(): Int = {
+    BuildTool.generateLsifFromTargetroot(
+      generateSemanticdb(),
+      index.finalTargetroot(defaultTargetroot),
+      index,
+      buildKind
+    )
+  }
+
+  private def targetroot: Path = index.finalTargetroot(defaultTargetroot)
+  private def defaultTargetroot: Path = Paths.get("target")
   private def configFile =
     index.workingDirectory.resolve(LsifBuildTool.ConfigFileName)
-  def usedInCurrentDirectory(): Boolean = Files.isRegularFile(configFile)
-  override def isHidden: Boolean = true
-  override def buildKind: String =
-    parsedConfig.fold(_.kind, _ => super.buildKind)
-  def generateSemanticdb(): CommandResult = {
+  private def buildKind: String = parsedConfig.fold(_.kind, _ => "")
+  private def generateSemanticdb(): CommandResult = {
     parsedConfig match {
       case ValueResult(value) =>
         clean()
@@ -224,7 +235,7 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
         )
       }
     val mtags = Dependencies.resolveDependencies(
-      List(s"org.scalameta:mtags_${scalaVersion}:${BuildInfo.mtags}")
+      List(s"org.scalameta:mtags_${scalaVersion}:${BuildInfo.mtagsVersion}")
     )
     val scalaLibrary = mtags
       .classpath

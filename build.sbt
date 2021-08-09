@@ -17,7 +17,7 @@ lazy val V =
     def scala211 = "2.11.12"
     def scala3 = "3.0.1"
     def metals = "0.10.6-M1"
-    def scalameta = "4.4.25"
+    def scalameta = "4.4.26"
     def testcontainers = "0.39.3"
     def requests = "0.6.5"
   }
@@ -145,8 +145,12 @@ lazy val cli = project
     buildInfoKeys :=
       Seq[BuildInfoKey](
         version,
+        sbtVersion,
         scalaVersion,
-        "mtags" -> V.metals,
+        "sbtSourcegraphVersion" ->
+          com.sourcegraph.sbtsourcegraph.BuildInfo.version,
+        "semanticdbVersion" -> V.scalameta,
+        "mtagsVersion" -> V.metals,
         "scala211" -> V.scala211,
         "scala212" -> V.scala212,
         "scala213" -> V.scala213,
@@ -268,6 +272,7 @@ lazy val minimizedSettings = List[Def.Setting[_]](
       s"-Arandomtimestamp=${System.nanoTime()}",
       List(
         s"-Xplugin:semanticdb",
+        s"-build-tool:sbt",
         s"-text:on",
         s"-verbose",
         s"-sourceroot:${(ThisBuild / baseDirectory).value}",
@@ -290,7 +295,11 @@ lazy val minimized8 = project
 
 lazy val minimized15 = project
   .in(file("tests/minimized/.j15"))
-  .settings(minimizedSettings, javaToolchainVersion := "15")
+  .settings(
+    minimizedSettings,
+    javaToolchainVersion := "15",
+    Compile / javaHome := None
+  )
   .dependsOn(agent, plugin)
   .disablePlugins(JavaFormatterPlugin)
 

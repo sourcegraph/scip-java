@@ -23,6 +23,7 @@ public class SemanticdbJavacOptions {
   public boolean includeText = false;
   public boolean verboseEnabled = false;
   public final ArrayList<String> errors;
+  public UriScheme uriScheme = UriScheme.DEFAULT;
 
   public static String stubClassName = "META-INF-semanticdb-stub";
 
@@ -53,6 +54,8 @@ public class SemanticdbJavacOptions {
         }
       } else if (arg.startsWith("-sourceroot:")) {
         result.sourceroot = Paths.get(arg.substring("-sourceroot:".length())).normalize();
+      } else if (arg.equals("-build-tool:sbt")) {
+        result.uriScheme = UriScheme.SBT;
       } else if (arg.equals("-text:on")) {
         result.includeText = true;
       } else if (arg.equals("-text:off")) {

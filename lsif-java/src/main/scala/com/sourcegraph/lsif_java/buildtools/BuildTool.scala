@@ -1,29 +1,20 @@
 package com.sourcegraph.lsif_java.buildtools
 
+import java.nio.file.Files
 import java.nio.file.Path
 
-import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.lsif_java.commands.IndexCommand
+import com.sourcegraph.lsif_java.commands.IndexSemanticdbCommand
+import os.CommandResult
 
 /**
  * A build tool such as Gradle, Maven or Bazel.
  */
 abstract class BuildTool(val name: String, index: IndexCommand) {
-
-  protected def defaultTargetroot: Path
-
   def isHidden: Boolean = false
-  def buildKind: String = ""
-
   final def sourceroot: Path = index.workingDirectory
-  final def targetroot: Path =
-    AbsolutePath
-      .of(index.targetroot.getOrElse(defaultTargetroot), index.workingDirectory)
-
   def usedInCurrentDirectory(): Boolean
-
-  def generateSemanticdb(): os.CommandResult
-
+  def generateLsif(): Int
 }
 
 object BuildTool {
@@ -31,8 +22,32 @@ object BuildTool {
     List(
       new GradleBuildTool(index),
       new MavenBuildTool(index),
-      new LsifBuildTool(index)
+      new LsifBuildTool(index),
+      new SbtBuildTool(index)
     )
   def allNames: String =
     all(IndexCommand()).filterNot(_.isHidden).map(_.name).mkString(", ")
+
+  def generateLsifFromTargetroot(
+      generateSemanticdbResult: CommandResult,
+      targetroot: Path,
+      index: IndexCommand,
+      buildKind: String = ""
+  ): Int = {
+    if (!Files.isDirectory(targetroot)) {
+      generateSemanticdbResult.exitCode
+    } else if (index.app.reporter.hasErrors()) {
+      index.app.reporter.exitCode()
+    } else if (generateSemanticdbResult.exitCode != 0) {
+      generateSemanticdbResult.exitCode
+    } else {
+      IndexSemanticdbCommand(
+        output = index.finalOutput,
+        targetroot = List(targetroot),
+        packagehub = index.packagehub,
+        buildKind = buildKind,
+        app = index.app
+      ).run()
+    }
+  }
 }

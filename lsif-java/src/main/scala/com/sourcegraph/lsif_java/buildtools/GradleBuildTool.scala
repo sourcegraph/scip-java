@@ -12,9 +12,6 @@ import os.CommandResult
 
 class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
 
-  override def defaultTargetroot: Path =
-    Paths.get("build", "semanticdb-targetroot")
-
   override def usedInCurrentDirectory(): Boolean = {
     Files.isRegularFile(index.workingDirectory.resolve("settings.gradle")) ||
     Files.isRegularFile(index.workingDirectory.resolve("gradlew")) ||
@@ -22,7 +19,16 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     Files.isRegularFile(index.workingDirectory.resolve("build.gradle.kts"))
   }
 
-  override def generateSemanticdb(): CommandResult = {
+  override def generateLsif(): Int = {
+    BuildTool
+      .generateLsifFromTargetroot(generateSemanticdb(), targetroot, index)
+  }
+
+  def targetroot: Path = index.finalTargetroot(defaultTargetroot)
+
+  private def defaultTargetroot: Path =
+    Paths.get("build", "semanticdb-targetroot")
+  private def generateSemanticdb(): CommandResult = {
     val gradleWrapper: Path = index
       .workingDirectory
       .resolve(

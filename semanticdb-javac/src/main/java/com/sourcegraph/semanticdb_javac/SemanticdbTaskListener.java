@@ -7,6 +7,7 @@ import com.sourcegraph.semanticdb_javac.Semanticdb;
 import com.sun.tools.javac.model.JavacTypes;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -73,8 +74,23 @@ public final class SemanticdbTaskListener implements TaskListener {
     }
   }
 
+  public static Path absolutePathFromUri(SemanticdbJavacOptions options, URI uri) {
+    if (options.uriScheme == UriScheme.SBT
+        && uri.getScheme().equals("vf")
+        && uri.toString().startsWith("vf://tmp/")) {
+      String[] parts = uri.toString().split("/", 5);
+      if (parts.length == 5) {
+        return options.sourceroot.resolve(Paths.get(parts[4]));
+      } else {
+        throw new IllegalArgumentException("unsupported URI: " + uri);
+      }
+    } else {
+      return Paths.get(uri);
+    }
+  }
+
   private Result<Path, String> semanticdbOutputPath(SemanticdbJavacOptions options, TaskEvent e) {
-    Path absolutePath = Paths.get(e.getSourceFile().toUri()).normalize();
+    Path absolutePath = absolutePathFromUri(options, e.getSourceFile().toUri());
     if (absolutePath.startsWith(options.sourceroot)) {
       Path relativePath = options.sourceroot.relativize(absolutePath);
       String filename = relativePath.getFileName().toString() + ".semanticdb";

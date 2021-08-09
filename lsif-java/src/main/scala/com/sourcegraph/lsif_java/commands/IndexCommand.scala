@@ -66,7 +66,16 @@ case class IndexCommand(
       shellable: Shellable,
       env: Map[String, String] = Map.empty
   ): CommandResult = {
-    app.out.println(Color.DarkGray(shellable.value.mkString("$ ", " ", "")))
+    val commandSyntax = shellable
+      .value
+      .map { line =>
+        if (line.contains(" "))
+          s"""'$line'"""
+        else
+          line
+      }
+      .mkString("$ ", " ", "")
+    app.out.println(Color.DarkGray(commandSyntax))
     app
       .process(shellable)
       .call(
@@ -149,22 +158,7 @@ case class IndexCommand(
         }
         1
       case tool :: Nil =>
-        val generateSemanticdbResult = tool.generateSemanticdb()
-        if (!Files.isDirectory(tool.targetroot)) {
-          generateSemanticdbResult.exitCode
-        } else if (app.reporter.hasErrors()) {
-          app.reporter.exitCode()
-        } else if (generateSemanticdbResult.exitCode != 0) {
-          generateSemanticdbResult.exitCode
-        } else {
-          IndexSemanticdbCommand(
-            output = finalOutput,
-            targetroot = List(tool.targetroot),
-            packagehub = packagehub,
-            buildKind = tool.buildKind,
-            app = app
-          ).run()
-        }
+        tool.generateLsif()
       case many =>
         val names = many.map(_.name).mkString(", ")
         app.error(
