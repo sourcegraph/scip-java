@@ -119,7 +119,7 @@ object ClasspathEntry {
           (xml \ "parent" \ key).text
         else
           node.text
-      }
+      }.trim
       val groupId = xmlValue("groupId")
       val artifactId = xmlValue("artifactId")
       val version = xmlValue("version")
