@@ -472,7 +472,9 @@ public class SignatureFormatter {
   }
 
   private String formatConstant(Constant constant) {
-    if (constant.hasBooleanConstant()) {
+    if (constant.hasUnitConstant()) {
+      return isScala ? "()" : "scala.Unit()";
+    } else if (constant.hasBooleanConstant()) {
       return Boolean.toString(constant.getBooleanConstant().getValue());
     } else if (constant.hasByteConstant()) {
       return Integer.toString(constant.getByteConstant().getValue());
@@ -490,6 +492,8 @@ public class SignatureFormatter {
       return Double.toString(constant.getDoubleConstant().getValue());
     } else if (constant.hasStringConstant()) {
       return '"' + constant.getStringConstant().getValue() + '"';
+    } else if (constant.hasNullConstant()) {
+      return "null";
     }
     throw new IllegalArgumentException("constant was not of known type " + constant);
   }

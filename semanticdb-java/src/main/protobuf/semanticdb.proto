@@ -346,6 +346,7 @@ enum BinaryOperator {
 
 message Constant {
   oneof sealed_value {
+    UnitConstant unit_constant = 1;
     BooleanConstant boolean_constant = 2;
     ByteConstant byte_constant = 3;
     ShortConstant short_constant = 4;
@@ -355,7 +356,11 @@ message Constant {
     FloatConstant float_constant = 8;
     DoubleConstant double_constant = 9;
     StringConstant string_constant = 10;
+    NullConstant null_constant = 11;
   }
+}
+
+message UnitConstant {
 }
 
 message BooleanConstant {
@@ -392,4 +397,7 @@ message DoubleConstant {
 
 message StringConstant {
   string value = 1;
+}
+
+message NullConstant {
 }
