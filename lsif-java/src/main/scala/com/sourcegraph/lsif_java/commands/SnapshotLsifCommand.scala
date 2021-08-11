@@ -114,16 +114,11 @@ object SnapshotLsifCommand {
           else
             Role.REFERENCE
 
-        val symbol =
-          (
-            for {
-              resultSetId <- lsif.next.get(o.getId)
-              monikerId <- lsif.moniker.get(resultSetId)
-              moniker <- lsif.monikerIdentifier.get(monikerId)
-            } yield moniker
-          ).getOrElse {
+        val symbol = lsif
+          .symbolFromRange(o)
+          .getOrElse {
             val id = lsif.next.getOrElse(o.getId, o.getId)
-            s"local$id"
+            s"missingMoniker$id"
           }
         val occ = SymbolOccurrence
           .newBuilder()
@@ -188,6 +183,20 @@ object SnapshotLsifCommand {
 
     def textDocument(id: Int): TextDocument.Builder = {
       documents.getOrElseUpdate(id, TextDocument.newBuilder())
+    }
+    def symbolFromRange(o: LsifObject): Option[String] = {
+      val moniker =
+        for {
+          monikerId <- this.moniker.get(o.getId())
+          moniker <- this.monikerIdentifier.get(monikerId)
+        } yield moniker
+      moniker.orElse {
+        for {
+          resultSetId <- this.next.get(o.getId())
+          resultSet <- this.byId.get(resultSetId)
+          fromResultSet <- symbolFromRange(resultSet)
+        } yield fromResultSet
+      }
     }
 
     val monikers: Map[String, LsifObject] =
