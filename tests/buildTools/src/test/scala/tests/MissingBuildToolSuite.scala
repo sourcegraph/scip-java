@@ -14,7 +14,7 @@ class MissingBuildToolSuite extends BaseBuildToolSuite {
     "ambiguous",
     List("index"),
     expectedOutput =
-      """|error: Multiple build tools detected: Gradle, Maven. To fix this problem, use the '--build-tools=BUILD_TOOL_NAME' flag to specify which build tool to run.
+      """|error: Multiple build tools detected: Gradle, Maven. To fix this problem, use the '--build-tool=BUILD_TOOL_NAME' flag to specify which build tool to run.
          |""".stripMargin,
     workingDirectoryLayout =
       """|/pom.xml
