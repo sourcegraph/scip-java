@@ -163,7 +163,7 @@ case class IndexCommand(
         val names = many.map(_.name).mkString(", ")
         app.error(
           s"Multiple build tools detected: $names. " +
-            s"To fix this problem, use the '--build-tools=BUILD_TOOL_NAME' flag to specify which build tool to run."
+            s"To fix this problem, use the '--build-tool=BUILD_TOOL_NAME' flag to specify which build tool to run."
         )
         1
     }
