@@ -78,7 +78,7 @@ class TargetedSuite extends FunSuite with TempDirectories {
     }
   }
 
-  checkDoc(
+  /*checkDoc(
     "issue-24",
     """package example;
       |/** Docstring for class. */
@@ -90,6 +90,28 @@ class TargetedSuite extends FunSuite with TempDirectories {
       |    "".<<lastIndexOf>>('b', 0);
       |    "".<<lastIndexOf>>("c");
       |    "".<<lastIndexOf>>("d", 0);
+      |    return 42;
+      |  }
+      |}
+      |""".stripMargin,
+    { case (_, List(a, b, c, d)) =>
+      assertNoDiff(a, "java/lang/String#lastIndexOf().")
+      assertNoDiff(b, "java/lang/String#lastIndexOf(+1).")
+      assertNoDiff(c, "java/lang/String#lastIndexOf(+2).")
+      assertNoDiff(d, "java/lang/String#lastIndexOf(+3).")
+    }
+  )*/
+
+  checkDoc(
+    "issue-24",
+    """package example;
+      |import java.util.*;
+      |
+      |class Test {
+      |  /** Docstring for method. */
+      |  public int number() {
+      |    List<Integer> x = null;
+      |    x.add(1);
       |    return 42;
       |  }
       |}

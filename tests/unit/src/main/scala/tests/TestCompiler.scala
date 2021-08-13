@@ -5,15 +5,15 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 import javax.tools.ToolProvider
-
 import scala.collection.mutable.ListBuffer
 import scala.jdk.CollectionConverters._
-
 import scala.meta.Input
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
-
 import com.sourcegraph.semanticdb_javac.Semanticdb
+import com.sun.tools.javac.api.BasicJavacTask
+import com.sun.tools.javac.util.Context
+import com.sun.tools.javadoc.JavadocClassReader
 
 object TestCompiler {
   val PROCESSOR_PATH = System.getProperty("java.class.path")
@@ -78,6 +78,7 @@ class TestCompiler(
       null,
       compilationUnits.asJava
     )
+    val ctx = task.asInstanceOf[BasicJavacTask].getContext
     val isSuccess = task.call()
     var bytecode = new Array[Byte](0)
     if (!fileManager.compiled.isEmpty)

@@ -154,6 +154,7 @@ message SymbolOccurrence {
   Range range = 1;
   string symbol = 2;
   Role role = 3;
+  Scope parameterized_types = 4;
 }
 
 message Scope {

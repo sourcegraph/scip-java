@@ -331,8 +331,9 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     Optional<Semanticdb.Range> range = semanticdbRange(pos, kind, sym);
     if (range.isPresent()) {
       String ssym = semanticdbSymbol(sym);
+//            List<Scope> typeParams = sym.type.allparams().map()
       if (!ssym.equals(SemanticdbSymbols.NONE)) {
-        Semanticdb.SymbolOccurrence occ = symbolOccurrence(ssym, range.get(), role);
+        Semanticdb.SymbolOccurrence occ = symbolOccurrence(ssym, range.get(), role, null);
         return Optional.of(occ);
       } else {
         return Optional.empty();

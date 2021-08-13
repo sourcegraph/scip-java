@@ -5,6 +5,7 @@ import com.sun.source.util.Plugin;
 import com.sun.tools.javac.api.BasicJavacTask;
 import com.sun.tools.javac.model.JavacTypes;
 import com.sun.tools.javac.util.Context;
+import com.sun.tools.javadoc.JavadocClassReader;
 
 /** Entrypoint of the semanticdb-javac compiler plugin. */
 public class SemanticdbPlugin implements Plugin {
@@ -22,6 +23,7 @@ public class SemanticdbPlugin implements Plugin {
     SemanticdbJavacOptions options = SemanticdbJavacOptions.parse(args, ctx);
     GlobalSymbolsCache globals = new GlobalSymbolsCache(options);
     JavacTypes javacTypes = JavacTypes.instance(ctx);
+    JavadocClassReader javadocClassReader = JavadocClassReader.instance0(ctx);
     if (!options.errors.isEmpty()) {
       for (String error : options.errors) {
         reporter.error(error);

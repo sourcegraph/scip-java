@@ -19,11 +19,13 @@ public class LsifSemanticdb {
   private final LsifWriter writer;
   private final LsifSemanticdbOptions options;
   private final Map<String, ResultIds> globals;
+  private final Map<Semanticdb.Range, Integer> ranges;
 
   public LsifSemanticdb(LsifWriter writer, LsifSemanticdbOptions options) {
     this.writer = writer;
     this.options = options;
     this.globals = new ConcurrentHashMap<>();
+    this.ranges = new ConcurrentHashMap<>();
   }
 
   public static void run(LsifSemanticdbOptions options) throws IOException {
@@ -114,8 +116,14 @@ public class LsifSemanticdb {
       SymbolInformation symbolInformation =
           doc.symbols.getOrDefault(occ.getSymbol(), SymbolInformation.getDefaultInstance());
       ResultIds ids = results.getOrInsertResultSet(occ.getSymbol());
-      int rangeId = writer.emitRange(occ.getRange());
-      rangeIds.add(rangeId);
+      int rangeId =
+          ranges.computeIfAbsent(
+              occ.getRange(),
+              (Semanticdb.Range r) -> {
+                int newRangeId = writer.emitRange(r);
+                rangeIds.add(newRangeId);
+                return newRangeId;
+              });
 
       // Range
       writer.emitNext(rangeId, ids.resultSet);
