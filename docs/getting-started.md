@@ -132,24 +132,47 @@ options.
 com.sourcegraph.lsif_java.LsifJava.printHelp(Console.out)
 ```
 
-## Supported Java versions
+## Supported programming languages
+
+| Programming language | Gradle | Maven | sbt | Tracking issue                                                                                                              |
+| -------------------- | ------ | ----- | --- | --------------------------------------------------------------------------------------------------------------------------- |
+| Java                 | ✅     | ✅    | ✅  |                                                                                                                             |
+| Scala                | ❌     | ❌    | ✅  | [Maven](https://github.com/sourcegraph/lsif-java/issues/301), [Gradle](https://github.com/sourcegraph/lsif-java/issues/302) |
+| Kotlin               | ❌     | ❌    | ❌  | [#302](https://github.com/sourcegraph/lsif-java/issues/302)                                                                 |
+
+### Java
 
 The `lsif-java` indexer is implemented as a Java compiler plugin that runs as
 part of your regular compilation in the build tool. By using Java compiler APIs,
 `lsif-java` is able to generate accurate indexing information for a broad range
 of Java versions.
 
-| Language version | Support                        |
-| ---------------- | ------------------------------ |
-| Java 7           | ❌                             |
-| Java 8           | ✅                             |
-| Java 11          | ✅                             |
-| Java 12          | Not tested in CI, but may work |
-| Java 13          | Not tested in CI, but may work |
-| Java 14          | Not tested in CI, but may work |
-| Java 15          | ✅                             |
-| Java 16          | Not tested in CI, but may work |
-| Java 17          | Not tested in CI, but may work |
+| Java version | Support                        |
+| ------------ | ------------------------------ |
+| Java 7       | ❌                             |
+| Java 8       | ✅                             |
+| Java 11      | ✅                             |
+| Java 12      | Not tested in CI, but may work |
+| Java 13      | Not tested in CI, but may work |
+| Java 14      | Not tested in CI, but may work |
+| Java 15      | ✅                             |
+| Java 16      | Not tested in CI, but may work |
+| Java 17      | Not tested in CI, but may work |
+
+### Scala
+
+Scala version support should always match the Scala versions that are supported
+by [Metals](https://scalameta.org/metals), the Scala language server.
+
+| Scala version | Goto definition | Find references | Hover |
+| ------------- | --------------- | --------------- | ----- |
+| Scala 2.10.x  | ❌              | ❌              | ❌    |
+| Scala 2.11.x  | ✅              | ✅              | ✅    |
+| Scala 2.12.x  | ✅              | ✅              | ✅    |
+| Scala 2.13.x  | ✅              | ✅              | ✅    |
+| Scala 3.x     | ✅              | ✅              | ❌    |
+
+> Scala.js and Scala Native have equal support as Scala on the JVM.
 
 ## Supported build tools
 
@@ -162,14 +185,15 @@ tools may require [manual configuration](manual-configuration.md).
 Please open an issue if your build tool is not listed in the table below. Feel
 free to subscribe to the tracking issues to receive updates on your build tool.
 
-| Build tool              | Single repo navigation | Cross-repo navigation | Tracking issue                                                                   |
-| ----------------------- | ---------------------- | --------------------- | -------------------------------------------------------------------------------- |
-| Maven                   | ✅                     | ✅                    |                                                                                  |
-| Gradle v4.0+            | ✅                     | ✅                    |                                                                                  |
-| Gradle v2.2.1+          | ✅                     | ❌                    | [sourcegraph/lsif-java#167](https://github.com/sourcegraph/lsif-java/issues/167) |
-| Bazel                   | ❌                     | ❌                    | [sourcegraph/lsif-java#88](https://github.com/sourcegraph/lsif-java/issues/88)   |
-| Buck                    | ❌                     | ❌                    | [sourcegraph/lsif-java#99](https://github.com/sourcegraph/lsif-java/issues/99)   |
-| sbt (v0.13.17, and v1+) | ✅                     | ✅                    |                                                                                  |
+| Build tool | Java | Scala | Kotlin | Tracking issue                                                                   |
+| ---------- | ---- | ----- | ------ | -------------------------------------------------------------------------------- |
+| Maven      | ✅   | ❌    | ❌     |                                                                                  |
+| Gradle     | ✅   | ❌    | ❌     |                                                                                  |
+| sbt        | ✅   | ✅    | ❌     |                                                                                  |
+| Ant        | ❌   | ❌    | ❌     | [sourcegraph/lsif-java#305](https://github.com/sourcegraph/lsif-java/issues/305) |
+| Bazel      | ❌   | ❌    | ❌     | [sourcegraph/lsif-java#88](https://github.com/sourcegraph/lsif-java/issues/88)   |
+| Buck       | ❌   | ❌    | ❌     | [sourcegraph/lsif-java#99](https://github.com/sourcegraph/lsif-java/issues/99)   |
+| Mill       | ❌   | ❌    | ❌     | [sourcegraph/lsif-java#306](https://github.com/sourcegraph/lsif-java/issues/306) |
 
 **✅**: automatic indexing is fully supported. Please report a bug if the
 `lsif-java index` command does not work on your codebase.
@@ -183,10 +207,33 @@ free to subscribe to the tracking issues to receive updates on your build tool.
 See the [manual configuration](manual-configuration.md) guide for instructions
 on how to configure lsif-java to work with any build tool.
 
-## Supported programming languages
+### Gradle
 
-| Programming language | Gradle | Maven | sbt | Tracking issue                                                                                                              |
-| -------------------- | ------ | ----- | --- | --------------------------------------------------------------------------------------------------------------------------- |
-| Java                 | ✅     | ✅    | ✅  |                                                                                                                             |
-| Scala                | ❌     | ❌    | ✅  | [Maven](https://github.com/sourcegraph/lsif-java/issues/301), [Gradle](https://github.com/sourcegraph/lsif-java/issues/302) |
-| Kotlin               | ❌     | ❌    | ❌  | [#302](https://github.com/sourcegraph/lsif-java/issues/302)                                                                 |
+The `lsif-java index` build should be able to automatically index most Gradle
+projects. However, the following Gradle integrations are not yet supported:
+
+| Integration | Supported | Tracking issue                                                                   |
+| ----------- | --------- | -------------------------------------------------------------------------------- |
+| Android     | ❌        | [sourcegraph/lsif-java#304](https://github.com/sourcegraph/lsif-java/issues/304) |
+| Kotlin      | ❌        | [sourcegraph/lsif-java#177](https://github.com/sourcegraph/lsif-java/issues/177) |
+| Scala       | ❌        | [sourcegraph/lsif-java#302](https://github.com/sourcegraph/lsif-java/issues/302) |
+
+### Maven
+
+The `lsif-java index` build should be able to automatically index most Maven
+projects. However, the following Maven integrations are not yet supported:
+
+| Integration         | Supported | Tracking issue                                                                   |
+| ------------------- | --------- | -------------------------------------------------------------------------------- |
+| scala-maven-plugin  | ❌        | [sourcegraph/lsif-java#301](https://github.com/sourcegraph/lsif-java/issues/301) |
+| scalor-maven-plugin | ❌        | [sourcegraph/lsif-java#301](https://github.com/sourcegraph/lsif-java/issues/301) |
+| kotlin-maven-plugin | ❌        | [sourcegraph/lsif-java#304](https://github.com/sourcegraph/lsif-java/issues/304) |
+
+### sbt
+
+The `lsif-java index` build should be able to automatically index most Maven
+projects, with the following caveats:
+
+| Integration   | Supported | Recommendation          |
+| ------------- | --------- | ----------------------- |
+| sbt <v0.13.17 | ❌        | Upgrade to sbt v0.13.17 |
