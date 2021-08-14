@@ -46,7 +46,7 @@ enum Enums {
 //                                                  ^^^^^ reference minimized/Enums#value.
 //                                                         ^^^ reference java/util/stream/Stream#map().
 //                                                             ^^^^^ reference minimized/Enums#
-//                                                             ^^^^^^^^^^^^^^ reference minimized/Enums#valueOf().
+//                                                                    ^^^^^^^ reference minimized/Enums#valueOf().
 //                                                                             ^^^^^^^^ reference java/lang/Object#toString().
     return all + A.value + B.value + C.value;
 //         ^^^ reference local2

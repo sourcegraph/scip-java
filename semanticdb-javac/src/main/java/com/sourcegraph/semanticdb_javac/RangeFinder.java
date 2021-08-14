@@ -22,7 +22,8 @@ public class RangeFinder {
       CompilationUnitTree root,
       Element element,
       int startPos,
-      String source) {
+      String source,
+      boolean fromEnd) {
     LineMap lineMap = root.getLineMap();
     Name name = element.getSimpleName();
     if (name.contentEquals("<init>")) name = element.getEnclosingElement().getSimpleName();
@@ -30,7 +31,7 @@ public class RangeFinder {
     int endPos = (int) trees.getSourcePositions().getEndPosition(root, path.getLeaf());
     // false for anonymous classes
     if (name.length() != 0) {
-      startPos = findNameIn(name, startPos, source);
+      startPos = findNameIn(name, fromEnd ? endPos : startPos, source, fromEnd);
       endPos = startPos + name.length();
     }
 
@@ -48,10 +49,12 @@ public class RangeFinder {
     return Optional.of(range);
   }
 
-  private static int findNameIn(CharSequence name, int start, String source) {
+  private static int findNameIn(CharSequence name, int start, String source, boolean fromEnd) {
     if (source.equals("")) return -1;
 
-    int offset = source.indexOf(name.toString(), start);
+    int offset;
+    if (fromEnd) offset = source.lastIndexOf(name.toString(), start);
+    else offset = source.indexOf(name.toString(), start);
     if (offset > -1) {
       return offset;
     }
