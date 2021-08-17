@@ -216,7 +216,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   public Void visitMemberReference(MemberReferenceTree node, Void unused) {
     if (node instanceof JCTree.JCMemberReference) {
       JCTree.JCMemberReference ref = (JCTree.JCMemberReference) node;
-      emitSymbolOccurrence(ref.sym, ref, Role.REFERENCE, CompilerRange.FROM_START_TO_END);
+      emitSymbolOccurrence(ref.sym, ref, Role.REFERENCE, CompilerRange.FROM_END_WITH_TEXT_SEARCH);
     }
     return super.visitMemberReference(node, unused);
   }
@@ -284,7 +284,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
               getCurrentPath().getCompilationUnit(),
               sym,
               start,
-              this.source);
+              this.source,
+              kind.isFromEnd());
       if (range.isPresent()) return Optional.of(correctForTabs(range.get(), lineMap, start));
       else return range;
     } else if (start != Position.NOPOS && end != Position.NOPOS && end > start) {
