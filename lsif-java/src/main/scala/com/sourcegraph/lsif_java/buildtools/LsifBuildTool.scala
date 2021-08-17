@@ -136,7 +136,7 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
     val deps = Dependencies.resolveDependencies(config.dependencies.map(_.repr))
     val sourceroot = index.workingDirectory
     if (!Files.isDirectory(sourceroot)) {
-      throw new NoSuchFileException(sourceroot.toString())
+      throw new NoSuchFileException(sourceroot.toString)
     }
     val allSourceFiles = collectAllSourceFiles(sourceroot)
     val javaFiles = allSourceFiles.filter(path => javaPattern.matches(path))
@@ -150,8 +150,9 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
       return CommandResult(0, Nil)
     }
     val errors = ListBuffer.empty[Try[Unit]]
-    errors += compileJavaFiles(tmp, deps, config, javaFiles)
-    errors += compileScalaFiles(deps, scalaFiles)
+    compileJavaFiles(tmp, deps, config, javaFiles)
+      .recover(e => errors.addOne(Failure(e)))
+    compileScalaFiles(deps, scalaFiles).recover(e => errors.addOne(Failure(e)))
     if (index.cleanup) {
       Files.walkFileTree(tmp, new DeleteVisitor)
     }
@@ -159,19 +160,18 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
       .isDirectory(targetroot.resolve("META-INF"))
     if (errors.nonEmpty && !isSemanticdbGenerated) {
       CommandResult(1, Nil)
-    } else {
-      if (isSemanticdbGenerated) {
-        index
-          .app
-          .reporter
-          .info(
-            "Some SemanticDB files got generated even if there were compile errors. " +
-              "In most cases, this means that lsif-java managed to index everything " +
-              "except the locations that had compile errors and you can ignore the compile errors."
-          )
-      }
-      CommandResult(0, Nil)
+    } else if (errors.nonEmpty && isSemanticdbGenerated) {
+      index
+        .app
+        .reporter
+        .info(
+          "Some SemanticDB files got generated even if there were compile errors. " +
+            "In most cases, this means that lsif-java managed to index everything " +
+            "except the locations that had compile errors and you can ignore the compile errors." +
+            errors.mkString("\n")
+        )
     }
+    CommandResult(0, Nil)
   }
 
   private def compileScalaFiles(
@@ -179,17 +179,18 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
       allScalaFiles: List[Path]
   ): Try[Unit] =
     Try {
-      withScalaPresentationCompiler(deps) { compiler =>
-        allScalaFiles.foreach { path =>
-          try compileScalaFile(compiler, path)
-          catch {
-            case NonFatal(e) =>
-              // We want to try and index as much as possible so we don't fail the entire
-              // compilation even if a single file fails to compile.
-              index.app.reporter.log(Diagnostic.exception(e))
+      if (allScalaFiles.nonEmpty)
+        withScalaPresentationCompiler(deps) { compiler =>
+          allScalaFiles.foreach { path =>
+            try compileScalaFile(compiler, path)
+            catch {
+              case NonFatal(e) =>
+                // We want to try and index as much as possible so we don't fail the entire
+                // compilation even if a single file fails to compile.
+                index.app.reporter.log(Diagnostic.exception(e))
+            }
           }
         }
-      }
     }
 
   private def compileScalaFile(
