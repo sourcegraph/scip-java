@@ -18,6 +18,7 @@ lazy val V =
     def scala3 = "3.0.1"
     def metals = "0.10.6-M1"
     def scalameta = "4.4.26"
+    def semanticdbKotlinc = "0.0.2"
     def testcontainers = "0.39.3"
     def requests = "0.6.5"
   }
@@ -150,6 +151,7 @@ lazy val cli = project
         "sbtSourcegraphVersion" ->
           com.sourcegraph.sbtsourcegraph.BuildInfo.version,
         "semanticdbVersion" -> V.scalameta,
+        "semanticdbKotlincVersion" -> V.semanticdbKotlinc,
         "mtagsVersion" -> V.metals,
         "scala211" -> V.scala211,
         "scala212" -> V.scala212,
@@ -166,7 +168,8 @@ lazy val cli = project
         "org.scala-lang.modules" %% "scala-xml" % "1.3.0",
         "com.lihaoyi" %% "requests" % V.requests,
         "org.scalameta" %% "moped" % V.moped,
-        "org.scalameta" %% "ascii-graphs" % "0.1.2"
+        "org.scalameta" %% "ascii-graphs" % "0.1.2",
+        "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % "1.5.21"
       ),
     (Compile / resourceGenerators) +=
       Def

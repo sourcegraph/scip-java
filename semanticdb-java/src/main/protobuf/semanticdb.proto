@@ -32,6 +32,7 @@ enum Language {
   UNKNOWN_LANGUAGE = 0;
   SCALA = 1;
   JAVA = 2;
+  KOTLIN =3;
 }
 
 message Range {
