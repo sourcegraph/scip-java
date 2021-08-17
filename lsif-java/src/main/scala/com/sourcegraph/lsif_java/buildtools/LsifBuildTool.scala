@@ -1,7 +1,6 @@
 package com.sourcegraph.lsif_java.buildtools
 
-import java.io.File
-import java.io.IOException
+import java.io.{File, FileOutputStream, IOException}
 import java.net.URLClassLoader
 import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
@@ -17,17 +16,14 @@ import java.util.Collections
 import java.util.Optional
 import java.util.ServiceLoader
 import java.util.concurrent.TimeUnit
-
 import scala.collection.mutable.ListBuffer
 import scala.jdk.CollectionConverters._
 import scala.util.Failure
 import scala.util.Success
 import scala.util.Try
 import scala.util.control.NonFatal
-
 import scala.meta.pc.PresentationCompiler
 import scala.meta.pc.PresentationCompilerConfig
-
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.lsif_java.BuildInfo
 import com.sourcegraph.lsif_java.Dependencies
@@ -46,9 +42,22 @@ import moped.macros.ClassShape
 import moped.parsers.JsonParser
 import moped.reporters.Diagnostic
 import moped.reporters.Input
+import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
+import org.jetbrains.kotlin.cli.common.arguments.ParseCommandLineArgumentsKt.parseCommandLineArguments
+import org.jetbrains.kotlin.cli.common.messages.{
+  CompilerMessageSeverity,
+  CompilerMessageSourceLocation,
+  MessageCollector,
+  MessageRenderer
+}
+import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler
+import org.jetbrains.kotlin.config.Services
 import os.CommandResult
 import os.ProcessOutput.Readlines
 import os.SubprocessException
+
+import java.util.jar.JarFile
+import scala.language.postfixOps
 
 /**
  * A custom build tool that is specifically made for lsif-java.
@@ -72,9 +81,12 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
   private val scalaPattern = FileSystems
     .getDefault
     .getPathMatcher("glob:**.scala")
+  private val kotlinPattern = FileSystems
+    .getDefault
+    .getPathMatcher("glob:**.kt")
   private val allPatterns = FileSystems
     .getDefault
-    .getPathMatcher("glob:**.{java,scala}")
+    .getPathMatcher("glob:**.{java,scala,kt}")
   private val moduleInfo = Paths.get("module-info.java")
 
   override def usedInCurrentDirectory(): Boolean =
@@ -139,20 +151,22 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
       throw new NoSuchFileException(sourceroot.toString)
     }
     val allSourceFiles = collectAllSourceFiles(sourceroot)
-    val javaFiles = allSourceFiles.filter(path => javaPattern.matches(path))
-    val scalaFiles = allSourceFiles.filter(path => scalaPattern.matches(path))
-    if (javaFiles.isEmpty && scalaFiles.isEmpty) {
+    val javaFiles = allSourceFiles.filter(javaPattern.matches)
+    val scalaFiles = allSourceFiles.filter(scalaPattern.matches)
+    val kotlinFiles = allSourceFiles.filter(kotlinPattern.matches)
+    if (javaFiles.isEmpty && scalaFiles.isEmpty && kotlinFiles.isEmpty) {
       index
         .app
         .warning(
-          s"doing nothing, no files matching pattern '$sourceroot/**.{java,scala}'"
+          s"doing nothing, no files matching pattern '$sourceroot/**.{java,scala,kt}'"
         )
       return CommandResult(0, Nil)
     }
+
     val errors = ListBuffer.empty[Try[Unit]]
-    compileJavaFiles(tmp, deps, config, javaFiles)
-      .recover(e => errors.addOne(Failure(e)))
-    compileScalaFiles(deps, scalaFiles).recover(e => errors.addOne(Failure(e)))
+    errors += compileJavaFiles(tmp, deps, config, javaFiles)
+    errors += compileScalaFiles(deps, scalaFiles)
+    errors += compileKotlinFiles(deps, config, kotlinFiles)
     if (index.cleanup) {
       Files.walkFileTree(tmp, new DeleteVisitor)
     }
@@ -168,12 +182,140 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
           .info(
             "Some SemanticDB files got generated even if there were compile errors. " +
               "In most cases, this means that lsif-java managed to index everything " +
-              "except the locations that had compile errors and you can ignore the compile errors." +
+              "except the locations that had compile errors and you can ignore the compile errors.\n" +
               errors.mkString("\n")
           )
       }
       CommandResult(0, Nil)
     }
+  }
+
+  private def compileKotlinFiles(
+      deps: Dependencies,
+      config: Config,
+      allKotlinFiles: List[Path]
+  ): Try[Unit] = {
+    if (allKotlinFiles.isEmpty)
+      return Success()
+    val filesPaths = allKotlinFiles.map(_.toString)
+
+    val plugin =
+      Dependencies
+        .resolveDependencies(
+          List(
+            s"com.sourcegraph:semanticdb-kotlinc:${BuildInfo.semanticdbKotlincVersion}"
+          ),
+          transitive = false
+        )
+        .classpath
+        .head
+
+    val self = config.dependencies.head
+    val commonKotlinFiles: List[Path] =
+      Dependencies
+        .kotlinMPPCommon(self.groupId, self.artifactId, self.version) match {
+        case Some(common) =>
+          val outdir = Files.createTempDirectory("lsifjava-kotlin")
+          val file = common.toFile
+          val basename = file
+            .getName
+            .substring(0, file.getName.lastIndexOf("."))
+          val newFiles = ListBuffer[Path]()
+          val jar = new JarFile(file)
+          val enu = jar.entries
+          while (enu.hasMoreElements) {
+            val entry = enu.nextElement
+            val entryPath =
+              if (entry.getName.startsWith(basename))
+                entry.getName.substring(basename.length)
+              else
+                entry.getName
+
+            if (entry.isDirectory) {
+              new File(outdir.toString, entryPath).mkdirs
+            } else if (entry.getName.endsWith(".kt")) {
+              val newFile = new File(outdir.toString, entryPath)
+              newFiles.addOne(newFile.toPath)
+              val istream = jar.getInputStream(entry)
+              val ostream = new FileOutputStream(newFile)
+              Iterator
+                .continually(istream.read)
+                .takeWhile(-1 !=)
+                .foreach(ostream.write)
+              ostream.close()
+              istream.close()
+            }
+          }
+          newFiles.toList
+        case None =>
+          List[Path]()
+      }
+
+    val kargs: K2JVMCompilerArguments = new K2JVMCompilerArguments()
+    val args = ListBuffer[String](
+      "-nowarn",
+      "-no-reflect",
+      "-no-stdlib",
+      "-Xmulti-platform",
+      "-Xno-check-actual",
+      "-Xopt-in=kotlin.RequiresOptIn",
+      "-Xopt-in=kotlin.ExperimentalUnsignedTypes",
+      "-Xopt-in=kotlin.ExperimentalStdlibApi",
+      "-Xopt-in=kotlin.ExperimentalMultiplatform",
+      "-Xopt-in=kotlin.contracts.ExperimentalContracts",
+      "-Xallow-kotlin-package",
+      s"-Xplugin=$plugin",
+      "-P",
+      s"plugin:semanticdb-kotlinc:sourceroot=$sourceroot",
+      "-P",
+      s"plugin:semanticdb-kotlinc:targetroot=$targetroot",
+      "-classpath",
+      deps.classpathSyntax
+    )
+
+    if (commonKotlinFiles.nonEmpty) {
+      args +=
+        s"-Xcommon-sources=${commonKotlinFiles.map(_.toAbsolutePath.toString).mkString(",")}"
+    }
+
+    args ++= filesPaths ++ commonKotlinFiles.map(_.toAbsolutePath.toString)
+
+    parseCommandLineArguments(args.asJava, kargs)
+
+    if (true)
+      println(s"ARGS ${args.mkString(" ")}")
+
+    val exit = new K2JVMCompiler().exec(
+      new MessageCollector {
+        private val errors = new util.LinkedList[String]
+        override def clear(): Unit = errors.clear()
+
+        override def hasErrors: Boolean = !errors.isEmpty
+
+        override def report(
+            compilerMessageSeverity: CompilerMessageSeverity,
+            s: String,
+            compilerMessageSourceLocation: CompilerMessageSourceLocation
+        ): Unit = {
+          if (
+            s.endsWith("without a body must be abstract") ||
+            s.endsWith("must have a body")
+          )
+            return // we get these when indexing the stdlib, no other solution found yet
+          val msg = MessageRenderer
+            .PLAIN_FULL_PATHS
+            .render(compilerMessageSeverity, s, compilerMessageSourceLocation)
+          System.err.println(msg)
+          errors.push(msg)
+        }
+      },
+      Services.EMPTY,
+      kargs
+    )
+    if (exit.getCode == 0)
+      Success(())
+    else
+      Failure(new Exception(exit.toString))
   }
 
   private def compileScalaFiles(
