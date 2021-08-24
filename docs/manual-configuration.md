@@ -173,7 +173,7 @@ one of the following files in the SemanticDB _targetroot_ directory (the path in
   classpath have sibling `.pom` files. In some build tools like Gradle, the POM
   files are not siblings to the jars on the classpath so the `javacopts.txt`
   format cannot be used.
-- `dependencies.txt`: a tab-separated values files where the columns are: group
+- `dependencies.txt`: a tab-separated values file where the columns are: group
   ID, artifact ID, version and jar path. For example,
   ```sh
   $ cat $TARGETROOT/dependencies.txt
