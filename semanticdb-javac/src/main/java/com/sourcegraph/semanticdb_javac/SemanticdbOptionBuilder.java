@@ -27,7 +27,9 @@ public class SemanticdbOptionBuilder {
   public void processArgument(String arg) {
     oldArgs.add(arg);
     arg = unwrapQuote(arg);
-    if ("-processorpath".equals(previousArg) || "-classpath".equals(previousArg)) {
+    if ("-processorpath".equals(previousArg)
+        || "-classpath".equals(previousArg)
+        || "-cp".equals(previousArg)) {
       isClasspathUpdated = true;
       result.add(PLUGINPATH + File.pathSeparator + arg);
     } else if (arg.startsWith("-J")) {
