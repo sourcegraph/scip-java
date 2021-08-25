@@ -207,4 +207,30 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
     2, // Two files because `conf/routes` generates a Java file.
     initCommand = gradleVersion("6.8")
   )
+
+  checkBuild(
+    "checkerframework",
+    """|/build.gradle
+       |plugins {
+       |    id 'java'
+       |    id 'org.checkerframework' version '0.5.24'
+       |}
+       |repositories {
+       |    mavenCentral()
+       |}
+       |java {
+       |  toolchain {
+       |    languageVersion = JavaLanguageVersion.of(8)
+       |  }
+       |}
+       |/src/main/java/foo/Example.java
+       |package foo;
+       |public class Example {}
+       |/src/test/java/foo/ExampleSuite.java
+       |package foo;
+       |public class ExampleSuite {}
+       |""".stripMargin,
+    2,
+    initCommand = gradleVersion("6.8.3")
+  )
 }
