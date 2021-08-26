@@ -134,11 +134,11 @@ com.sourcegraph.lsif_java.LsifJava.printHelp(Console.out)
 
 ## Supported programming languages
 
-| Programming language | Gradle | Maven | sbt | Tracking issue                                                                                                              |
-| -------------------- | ------ | ----- | --- | --------------------------------------------------------------------------------------------------------------------------- |
-| Java                 | ✅     | ✅    | ✅  |                                                                                                                             |
-| Scala                | ❌     | ❌    | ✅  | [Maven](https://github.com/sourcegraph/lsif-java/issues/301), [Gradle](https://github.com/sourcegraph/lsif-java/issues/302) |
-| Kotlin               | ❌     | ❌    | ❌  | [#302](https://github.com/sourcegraph/lsif-java/issues/302)                                                                 |
+| Programming language | Gradle | Maven | sbt | Tracking issue                                              |
+| -------------------- | ------ | ----- | --- | ----------------------------------------------------------- |
+| Java                 | ✅     | ✅    | ✅  |                                                             |
+| Scala                | ✅     | ❌    | ✅  | [#302](https://github.com/sourcegraph/lsif-java/issues/302) |
+| Kotlin               | ❌     | ❌    | ❌  | [#304](https://github.com/sourcegraph/lsif-java/issues/304) |
 
 ### Java
 
@@ -216,7 +216,7 @@ projects. However, the following Gradle integrations are not yet supported:
 | ----------- | --------- | -------------------------------------------------------------------------------- |
 | Android     | ❌        | [sourcegraph/lsif-java#304](https://github.com/sourcegraph/lsif-java/issues/304) |
 | Kotlin      | ❌        | [sourcegraph/lsif-java#177](https://github.com/sourcegraph/lsif-java/issues/177) |
-| Scala       | ❌        | [sourcegraph/lsif-java#302](https://github.com/sourcegraph/lsif-java/issues/302) |
+| Scala       | ✅        |                                                                                  |
 
 ### Maven
 

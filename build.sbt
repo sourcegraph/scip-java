@@ -147,6 +147,12 @@ lazy val cli = project
         version,
         sbtVersion,
         scalaVersion,
+        "semanticdbScalacVersions" ->
+          com
+            .sourcegraph
+            .sbtsourcegraph
+            .Versions
+            .cachedSemanticdbVersionsByScalaVersion,
         "sbtSourcegraphVersion" ->
           com.sourcegraph.sbtsourcegraph.BuildInfo.version,
         "semanticdbVersion" -> V.scalameta,
