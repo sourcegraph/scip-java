@@ -50,6 +50,17 @@ public class SemanticdbAgent {
                     DefaultJvmLanguageCompileSpecAdvice.class.getName()))
         .installOn(inst);
     new AgentBuilder.Default()
+        .disableClassFormatChanges()
+        .type(
+            named("org.gradle.api.internal.tasks.compile.DefaultJavaCompileSpec")
+                .or(named("tests.GradleDefaultJavaCompileSpec")))
+        .transform(
+            new AgentBuilder.Transformer.ForAdvice()
+                .advice(
+                    named("getAnnotationProcessorPath"),
+                    DefaultJavaCompileSpecAdvice.class.getName()))
+        .installOn(inst);
+    new AgentBuilder.Default()
         .type(
             named("org.gradle.api.internal.tasks.compile.JavaCompilerArgumentsBuilder")
                 .or(named("tests.GradleJavaCompilerArgumentsBuilder")))
@@ -81,6 +92,23 @@ public class SemanticdbAgent {
     @Advice.OnMethodExit
     public static void getClasspath(
         @Advice.Return(readOnly = false, typing = DYNAMIC) List<File> classpath) {
+      String PLUGINPATH = System.getProperty("semanticdb.pluginpath");
+      if (PLUGINPATH == null) throw new NoSuchElementException("-Dsemanticdb.pluginpath");
+      File semanticdbJar = new File(PLUGINPATH);
+      if (!classpath.contains(semanticdbJar)) {
+        List<File> newClasspath = new ArrayList<>(classpath);
+        newClasspath.add(semanticdbJar);
+        classpath = newClasspath;
+      }
+    }
+  }
+
+  @SuppressWarnings("all")
+  public static class DefaultJavaCompileSpecAdvice {
+    @Advice.OnMethodExit
+    public static void getAnnotationProcessorPath(
+        @Advice.Return(readOnly = false, typing = DYNAMIC) List<File> classpath) {
+      if (classpath == null) return;
       String PLUGINPATH = System.getProperty("semanticdb.pluginpath");
       if (PLUGINPATH == null) throw new NoSuchElementException("-Dsemanticdb.pluginpath");
       File semanticdbJar = new File(PLUGINPATH);
