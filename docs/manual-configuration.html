@@ -77,7 +77,10 @@ added to the <code>javac -classpath</code> option.</p>
 javac -classpath semanticdb-javac.jar MyApplication.java
 </code></pre>
 <p>If you're using Gradle.</p>
-<pre><code class="hljs css language-groovy">compileOnly <span class="hljs-string">group:</span> <span class="hljs-string">'com.sourcegraph'</span>, <span class="hljs-string">name:</span> <span class="hljs-string">'semanticdb-javac'</span>, <span class="hljs-string">version:</span> <span class="hljs-string">'0.6.6'</span>
+<pre><code class="hljs css language-groovy"><span class="hljs-comment">// Option 1: if you are not using annotation processors</span>
+compileOnly <span class="hljs-string">'com.sourcegraph:semanticdb-javac:0.6.6'</span>
+<span class="hljs-comment">// Option 2: if you are using annotation processors</span>
+annotationProcessor <span class="hljs-string">'com.sourcegraph:semanticdb-javac:0.6.6'</span>
 </code></pre>
 <p>If you're using Maven.</p>
 <pre><code class="hljs css language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
