@@ -78,7 +78,17 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
       buildCommand +=
         s"-Porg.gradle.java.installations.paths=${toolchains.paths()}"
     }
-    buildCommand ++= index.finalBuildCommand(List("clean", "compileTestJava"))
+    buildCommand ++=
+      index.finalBuildCommand(
+        List(
+          // Disable the checkerframework plugin because it updates the processorpath
+          // in a way that causes the error "plug-in not found: semanticdb".
+          // Details: https://github.com/kelloggm/checkerframework-gradle-plugin/blob/76d1926ae22144b082dfcfde1abe625750469398/src/main/groovy/org/checkerframework/gradle/plugin/CheckerFrameworkPlugin.groovy#L374-L376
+          "-PskipCheckerFramework",
+          "clean",
+          "compileTestJava"
+        )
+      )
     buildCommand += lsifJavaDependencies
 
     val result = index.process(buildCommand, env = Map("TERM" -> "dumb"))

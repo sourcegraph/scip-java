@@ -135,12 +135,18 @@ public class SemanticdbAgent {
         switch (previousOption) {
           case "-processorpath":
           case "-processor-path":
+          case "-cp":
           case "-classpath":
           case "-class-path":
             isProcessorpathUpdated = true;
             newOptions.add(PLUGINPATH + File.pathSeparator + option);
             break;
+          case "-Xlint":
+            break;
           default:
+            if (option.startsWith("-Xplugin:ErrorProne")) {
+              break;
+            }
             newOptions.add(option);
             break;
         }
@@ -155,13 +161,19 @@ public class SemanticdbAgent {
               "-Xplugin:semanticdb -sourceroot:%s -targetroot:%s", SOURCEROOT, TARGETROOT));
 
       if (DEBUGPATH != null) {
-        try (PrintStream fos =
-            new PrintStream(
-                Files.newOutputStream(
-                    Paths.get(DEBUGPATH), StandardOpenOption.APPEND, StandardOpenOption.CREATE))) {
-          fos.println("Java Home: " + System.getProperty("java.home"));
-          fos.println("Old Options: " + arguments);
-          fos.println("New Options: " + newOptions);
+        ArrayList<String> debuglines = new ArrayList<>();
+        debuglines.add("============== Java Home: " + System.getProperty("java.home"));
+        debuglines.add("============== Old Options");
+        debuglines.addAll(arguments);
+        debuglines.add("============== New Options");
+        debuglines.addAll(newOptions);
+
+        try {
+          Files.write(
+              Paths.get(DEBUGPATH),
+              debuglines,
+              StandardOpenOption.CREATE,
+              StandardOpenOption.APPEND);
         } catch (IOException e) {
         }
       }

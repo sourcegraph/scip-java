@@ -38,7 +38,10 @@ javac -classpath semanticdb-javac.jar MyApplication.java
 If you're using Gradle.
 
 ```groovy
-compileOnly group: 'com.sourcegraph', name: 'semanticdb-javac', version: '@STABLE_VERSION@'
+// Option 1: if you are not using annotation processors
+compileOnly 'com.sourcegraph:semanticdb-javac:@STABLE_VERSION@'
+// Option 2: if you are using annotation processors
+annotationProcessor 'com.sourcegraph:semanticdb-javac:@STABLE_VERSION@'
 ```
 
 If you're using Maven.

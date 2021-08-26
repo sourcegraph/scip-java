@@ -76,7 +76,7 @@ abstract class BaseBuildToolSuite extends MopedSuite(LsifJava.app) {
       if (semanticdbFiles.length != expectedSemanticdbFiles) {
         fail(
           s"Expected $expectedSemanticdbFiles SemanticDB file(s) to be generated.",
-          clues(semanticdbFiles)
+          clues(semanticdbFiles, app.capturedOutput)
         )
       }
       if (expectedPackages.nonEmpty) {
