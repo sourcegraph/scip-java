@@ -233,4 +233,33 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
     2,
     initCommand = gradleVersion("6.8.3")
   )
+
+  checkBuild(
+    "scala",
+    """|/build.gradle
+       |plugins {
+       |    id 'scala'
+       |}
+       |repositories {
+       |    mavenCentral()
+       |}
+       |dependencies {
+       |  implementation 'org.scala-lang:scala-library:2.12.12'
+       |}
+       |/src/main/java/foo/JExample.java
+       |package foo;
+       |public class JExample {}
+       |/src/main/scala/foo/Example.scala
+       |package foo
+       |object Example {}
+       |/src/test/java/foo/JExampleSuite.java
+       |package foo;
+       |public class JExampleSuite {}
+       |/src/test/scala/foo/ExampleSuite.scala
+       |package foo
+       |class ExampleSuite {}
+       |""".stripMargin,
+    4
+  )
+
 }

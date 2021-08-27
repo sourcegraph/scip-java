@@ -14,6 +14,7 @@ case class GradleJavaToolchains(
     tool: GradleBuildTool,
     index: IndexCommand,
     gradleVersion: Option[String],
+    isScalaEnabled: Boolean,
     gradleCommand: String,
     tmp: Path
 ) {
@@ -55,6 +56,7 @@ object GradleJavaToolchains {
   ): GradleJavaToolchains = {
     val scriptPath = tmp.resolve("java-toolchains.gradle")
     val toolchainsPath = tmp.resolve("java-toolchains.txt")
+    val scalaEnabledPath = tmp.resolve("scala-enabled.txt")
     val gradleVersionPath = tmp.resolve("gradle-version.txt")
     val taskName = "lsifDetectJavaToolchains"
     val script =
@@ -70,7 +72,7 @@ object GradleJavaToolchains {
           |}
           |allprojects {
           |  task $taskName {
-          |    def out = java.nio.file.Paths.get('$toolchainsPath')
+          |    def toolchainsOut = java.nio.file.Paths.get('$toolchainsPath')
           |    doLast {
           |      tasks.withType(JavaCompile) {
           |        try {
@@ -79,13 +81,23 @@ object GradleJavaToolchains {
           |          def version = javaCompiler.get().getMetadata().getLanguageVersion().asInt()
           |          def line = "$$version $$path"
           |          java.nio.file.Files.write(
-          |            out,
+          |            toolchainsOut,
           |            [line],
           |            java.nio.file.StandardOpenOption.APPEND,
           |            java.nio.file.StandardOpenOption.CREATE)
           |        } catch (Exception e) {
           |          // Ignore errors.
           |        }
+          |      }
+          |      boolean isScalaEnabled = project.plugins.any {
+          |        it.getClass().getName().endsWith("org.gradle.api.plugins.scala.ScalaPlugin")
+          |      }
+          |      if (isScalaEnabled) {
+          |        java.nio.file.Files.write(
+          |          java.nio.file.Paths.get('$scalaEnabledPath'),
+          |          ["true"],
+          |          java.nio.file.StandardOpenOption.APPEND,
+          |          java.nio.file.StandardOpenOption.CREATE)
           |      }
           |    }
           |  }
@@ -119,6 +131,7 @@ object GradleJavaToolchains {
       tool,
       index,
       gradleVersion = gradleVersion,
+      isScalaEnabled = Files.isRegularFile(scalaEnabledPath),
       gradleCommand = gradleCommand,
       tmp = tmp
     )

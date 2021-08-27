@@ -68,6 +68,7 @@ public final class SemanticdbTaskListener implements TaskListener {
     try {
       byte[] bytes =
           Semanticdb.TextDocuments.newBuilder().addDocuments(textDocument).build().toByteArray();
+      Files.createDirectories(output.getParent());
       Files.write(output, bytes);
     } catch (IOException e) {
       reporter.exception(e);
@@ -101,15 +102,7 @@ public final class SemanticdbTaskListener implements TaskListener {
               .resolve("semanticdb")
               .resolve(relativePath)
               .resolveSibling(filename);
-      try {
-        Files.createDirectories(semanticdbOutputPath.getParent());
-        return Result.ok(semanticdbOutputPath);
-      } catch (IOException exception) {
-        return Result.error(
-            String.format(
-                "failed to create parent directory for '%s'. Error message: %s",
-                semanticdbOutputPath, exception.getMessage()));
-      }
+      return Result.ok(semanticdbOutputPath);
     } else {
       return Result.error(
           String.format(
