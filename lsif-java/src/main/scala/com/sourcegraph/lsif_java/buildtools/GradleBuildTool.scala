@@ -246,9 +246,11 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
   def semanticdbScalacGroovySyntax(): String =
     BuildInfo
       .semanticdbScalacVersions
+      .removed(
+        "2.12.3"
+      ) // Not supported because the last semanticdb-scalac_2.12.3 release doesn't support the option -P:semanticdb:targetroot:PATH.
       .map { case (key, value) =>
         s"'$key':'$value'"
-      }
-      .mkString("[", ", ", "]")
+      }.mkString("[", ", ", "]")
 
 }
