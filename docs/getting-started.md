@@ -188,8 +188,8 @@ free to subscribe to the tracking issues to receive updates on your build tool.
 | Build tool | Java | Scala | Kotlin | Tracking issue                                                                   |
 | ---------- | ---- | ----- | ------ | -------------------------------------------------------------------------------- |
 | Maven      | ✅   | ❌    | ❌     |                                                                                  |
-| Gradle     | ✅   | ❌    | ❌     |                                                                                  |
-| sbt        | ✅   | ✅    | ❌     |                                                                                  |
+| Gradle     | ✅   | ✅    | ❌     |                                                                                  |
+| sbt        | ✅   | ✅    | n/a    |                                                                                  |
 | Ant        | ❌   | ❌    | ❌     | [sourcegraph/lsif-java#305](https://github.com/sourcegraph/lsif-java/issues/305) |
 | Bazel      | ❌   | ❌    | ❌     | [sourcegraph/lsif-java#88](https://github.com/sourcegraph/lsif-java/issues/88)   |
 | Buck       | ❌   | ❌    | ❌     | [sourcegraph/lsif-java#99](https://github.com/sourcegraph/lsif-java/issues/99)   |
