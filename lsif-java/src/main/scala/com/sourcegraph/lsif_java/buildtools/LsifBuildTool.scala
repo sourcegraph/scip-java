@@ -160,18 +160,20 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
       .isDirectory(targetroot.resolve("META-INF"))
     if (errors.nonEmpty && !isSemanticdbGenerated) {
       CommandResult(1, Nil)
-    } else if (errors.nonEmpty && isSemanticdbGenerated) {
-      index
-        .app
-        .reporter
-        .info(
-          "Some SemanticDB files got generated even if there were compile errors. " +
-            "In most cases, this means that lsif-java managed to index everything " +
-            "except the locations that had compile errors and you can ignore the compile errors." +
-            errors.mkString("\n")
-        )
+    } else {
+      if (errors.nonEmpty && isSemanticdbGenerated) {
+        index
+          .app
+          .reporter
+          .info(
+            "Some SemanticDB files got generated even if there were compile errors. " +
+              "In most cases, this means that lsif-java managed to index everything " +
+              "except the locations that had compile errors and you can ignore the compile errors." +
+              errors.mkString("\n")
+          )
+      }
+      CommandResult(0, Nil)
     }
-    CommandResult(0, Nil)
   }
 
   private def compileScalaFiles(
