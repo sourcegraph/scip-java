@@ -3,6 +3,7 @@ package com.sourcegraph.lsif_java
 import java.io.PrintStream
 
 import com.sourcegraph.lsif_java.commands.IndexCommand
+import com.sourcegraph.lsif_java.commands.IndexDependencyCommand
 import com.sourcegraph.lsif_java.commands.IndexSemanticdbCommand
 import com.sourcegraph.lsif_java.commands.SnapshotCommand
 import com.sourcegraph.lsif_java.commands.SnapshotLsifCommand
@@ -21,6 +22,7 @@ object LsifJava {
       CommandParser[VersionCommand],
       CommandParser[IndexCommand],
       CommandParser[IndexSemanticdbCommand],
+      CommandParser[IndexDependencyCommand],
       CommandParser[SnapshotCommand],
       CommandParser[SnapshotLsifCommand]
     )
