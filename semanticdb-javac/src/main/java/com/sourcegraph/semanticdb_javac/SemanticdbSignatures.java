@@ -1,10 +1,8 @@
 package com.sourcegraph.semanticdb_javac;
 
-import com.sun.tools.javac.code.Symbol;
-import com.sun.tools.javac.code.Type;
 import com.sourcegraph.semanticdb_javac.Semanticdb.*;
 
-import javax.lang.model.element.Element;
+import javax.lang.model.element.*;
 import javax.lang.model.type.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,32 +19,32 @@ public final class SemanticdbSignatures {
     this.locals = locals;
   }
 
-  public Signature generateSignature(Symbol sym) {
-    if (sym instanceof Symbol.ClassSymbol) {
-      return generateClassSignature((Symbol.ClassSymbol) sym);
-    } else if (sym instanceof Symbol.MethodSymbol) {
-      return generateMethodSignature((Symbol.MethodSymbol) sym);
-    } else if (sym instanceof Symbol.VarSymbol) {
-      return generateFieldSignature((Symbol.VarSymbol) sym);
-    } else if (sym instanceof Symbol.TypeVariableSymbol) {
-      return generateTypeSignature((Symbol.TypeVariableSymbol) sym);
+  public Signature generateSignature(Element sym) {
+    if (sym instanceof TypeElement) {
+      return generateClassSignature((TypeElement) sym);
+    } else if (sym instanceof ExecutableElement) {
+      return generateMethodSignature((ExecutableElement) sym);
+    } else if (sym instanceof VariableElement) {
+      return generateFieldSignature((VariableElement) sym);
+    } else if (sym instanceof TypeParameterElement) {
+      return generateTypeSignature((TypeParameterElement) sym);
     }
     return null;
   }
 
-  private Signature generateClassSignature(Symbol.ClassSymbol sym) {
+  private Signature generateClassSignature(TypeElement sym) {
     ClassSignature.Builder builder = ClassSignature.newBuilder();
 
     builder.setTypeParameters(generateScope(sym.getTypeParameters()));
 
-    if (sym.getSuperclass() != Type.noType) {
+    if (!(sym.getSuperclass() instanceof NoType)) {
       Semanticdb.Type superType = generateType(sym.getSuperclass());
       if (superType == null) {
         superType = UNRESOLVED_TYPE_REF;
       }
       builder.addParents(superType);
     }
-    for (Type iType : sym.getInterfaces()) {
+    for (TypeMirror iType : sym.getInterfaces()) {
       Semanticdb.Type type = generateType(iType);
       if (type == null) {
         type = UNRESOLVED_TYPE_REF;
@@ -59,12 +57,12 @@ public final class SemanticdbSignatures {
     return signature(builder);
   }
 
-  private Signature generateMethodSignature(Symbol.MethodSymbol sym) {
+  private Signature generateMethodSignature(ExecutableElement sym) {
     MethodSignature.Builder builder = MethodSignature.newBuilder();
 
     builder.setTypeParameters(generateScope(sym.getTypeParameters()));
 
-    builder.addParameterLists(generateScope(sym.params()));
+    builder.addParameterLists(generateScope(sym.getParameters()));
 
     Semanticdb.Type returnType = generateType(sym.getReturnType());
     if (returnType != null) {
@@ -78,20 +76,21 @@ public final class SemanticdbSignatures {
     return signature(builder);
   }
 
-  private Signature generateFieldSignature(Symbol.VarSymbol sym) {
-    Semanticdb.Type generateType = generateType(sym.type);
+  private Signature generateFieldSignature(VariableElement sym) {
+    Semanticdb.Type generateType = generateType(sym.asType());
     if (generateType == null) {
       generateType = UNRESOLVED_TYPE_REF;
     }
     return signature(ValueSignature.newBuilder().setTpe(generateType));
   }
 
-  private Signature generateTypeSignature(Symbol.TypeVariableSymbol sym) {
+  private Signature generateTypeSignature(TypeParameterElement sym) {
     TypeSignature.Builder builder = TypeSignature.newBuilder();
 
-    builder.setTypeParameters(generateScope(sym.getTypeParameters()));
+    //    builder.setTypeParameters(generateScope(sym.getTypeParameters()));
 
-    Semanticdb.Type upperBound = generateType(sym.type.getUpperBound());
+    Semanticdb.Type upperBound = generateType(((TypeVariable) sym.asType()).getUpperBound());
+    //    System.err.println(upperBound);
     if (upperBound != null) builder.setUpperBound(upperBound);
     else builder.setUpperBound(UNRESOLVED_TYPE_REF);
 

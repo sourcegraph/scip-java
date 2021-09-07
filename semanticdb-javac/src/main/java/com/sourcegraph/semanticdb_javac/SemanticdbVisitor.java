@@ -2,9 +2,6 @@ package com.sourcegraph.semanticdb_javac;
 
 import com.sun.source.tree.*;
 import com.sun.source.util.*;
-import com.sun.tools.javac.code.Flags;
-import com.sun.tools.javac.code.Symbol;
-import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.model.JavacTypes;
 import com.sun.tools.javac.tree.EndPosTable;
 import com.sun.tools.javac.tree.JCTree;
@@ -14,11 +11,10 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Kind;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 
-import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.*;
 import javax.lang.model.util.Elements;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -79,7 +75,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   }
 
   private <T extends JCTree & JCDiagnostic.DiagnosticPosition> void emitSymbolOccurrence(
-      Symbol sym, T posTree, Role role, CompilerRange kind) {
+      Element sym, T posTree, Role role, CompilerRange kind) {
     if (sym == null) return;
     Optional<Semanticdb.SymbolOccurrence> occ = semanticdbOccurrence(sym, posTree, kind, role);
     occ.ifPresent(occurrences::add);
@@ -89,7 +85,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     }
   }
 
-  private void emitSymbolInformation(Symbol sym, JCTree tree) {
+  private void emitSymbolInformation(Element sym, JCTree tree) {
     Semanticdb.SymbolInformation.Builder builder = symbolInformation(semanticdbSymbol(sym));
     Semanticdb.Documentation documentation = semanticdbDocumentation(sym);
     if (documentation != null) builder.setDocumentation(documentation);
@@ -101,7 +97,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
     builder
         .setProperties(semanticdbSymbolInfoProperties(sym))
-        .setDisplayName(sym.name.toString())
+        .setDisplayName(sym.getSimpleName().toString())
         .setAccess(semanticdbAccess(sym));
 
     switch (sym.getKind()) {
@@ -130,7 +126,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         String args =
             ((JCTree.JCNewClass) ((JCTree.JCVariableDecl) tree).init)
                 .args.stream().map(JCTree::toString).collect(Collectors.joining(", "));
-        if (!args.isEmpty()) builder.setDisplayName(sym.name.toString() + "(" + args + ")");
+        if (!args.isEmpty())
+          builder.setDisplayName(sym.getSimpleName().toString() + "(" + args + ")");
     }
 
     Semanticdb.SymbolInformation info = builder.build();
@@ -152,7 +149,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
       List<JCTree.JCTypeParameter> typeParameters = cls.getTypeParameters();
       int i = 0;
-      for (Symbol.TypeVariableSymbol typeSym : cls.sym.getTypeParameters()) {
+      for (TypeParameterElement typeSym : cls.sym.getTypeParameters()) {
         emitSymbolOccurrence(
             typeSym,
             typeParameters.get(i),
@@ -178,7 +175,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
       List<JCTree.JCTypeParameter> typeParameters = meth.getTypeParameters();
       int i = 0;
-      for (Symbol.TypeVariableSymbol typeSym : meth.sym.getTypeParameters()) {
+      for (TypeParameterElement typeSym : meth.sym.getTypeParameters()) {
         emitSymbolOccurrence(
             typeSym,
             typeParameters.get(i),
@@ -251,32 +248,32 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   // Utilities to generate SemanticDB data structures.
   // =================================================
 
-  private Semanticdb.Signature semanticdbSignature(Symbol sym) {
+  private Semanticdb.Signature semanticdbSignature(Element sym) {
 
     return new SemanticdbSignatures(globals, locals).generateSignature(sym);
   }
 
-  private String semanticdbSymbol(Symbol sym) {
+  private String semanticdbSymbol(Element sym) {
     return globals.semanticdbSymbol(sym, locals);
   }
 
   private Optional<Semanticdb.Range> semanticdbRange(
-      JCDiagnostic.DiagnosticPosition pos, CompilerRange kind, Symbol sym) {
+      JCDiagnostic.DiagnosticPosition pos, CompilerRange kind, Element sym) {
     LineMap lineMap = event.getCompilationUnit().getLineMap();
     if (sym == null) return Optional.empty();
     int start, end;
-    if (kind.isFromPoint() && sym.name != null) {
+    if (kind.isFromPoint() && sym.getSimpleName() != null) {
       start = pos.getPreferredPosition();
       if (kind == CompilerRange.FROM_POINT_TO_SYMBOL_NAME_PLUS_ONE) {
         start++;
       }
-      end = start + sym.name.length();
+      end = start + sym.getSimpleName().length();
     } else {
       start = pos.getStartPosition();
       end = pos.getEndPosition(endPosTable);
     }
 
-    if (kind.isFromTextSearch() && sym.name.length() > 0) {
+    if (kind.isFromTextSearch() && sym.getSimpleName().length() > 0) {
       Optional<Semanticdb.Range> range =
           RangeFinder.findRange(
               getCurrentPath(),
@@ -328,7 +325,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   }
 
   private Optional<Semanticdb.SymbolOccurrence> semanticdbOccurrence(
-      Symbol sym, JCDiagnostic.DiagnosticPosition pos, CompilerRange kind, Role role) {
+      Element sym, JCDiagnostic.DiagnosticPosition pos, CompilerRange kind, Role role) {
     Optional<Semanticdb.Range> range = semanticdbRange(pos, kind, sym);
     if (range.isPresent()) {
       String ssym = semanticdbSymbol(sym);
@@ -361,42 +358,46 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     }
   }
 
-  private int semanticdbSymbolInfoProperties(Symbol sym) {
+  private int semanticdbSymbolInfoProperties(Element sym) {
     int properties = 0;
-    properties |= sym.isEnum() ? Property.ENUM_VALUE : 0;
-    properties |= sym.isStatic() ? Property.STATIC_VALUE : 0;
+    properties |=
+        (sym.getKind() == ElementKind.ENUM || sym.getKind() == ElementKind.ENUM_CONSTANT)
+            ? Property.ENUM_VALUE
+            : 0;
+    properties |= sym.getModifiers().contains(Modifier.STATIC) ? Property.STATIC_VALUE : 0;
     // for default interface methods, Flags.ABSTRACT is also set...
     boolean abstractNotDefault =
-        ((sym.flags() & Flags.ABSTRACT) > 0) && ((sym.flags() & Flags.DEFAULT) == 0);
+        sym.getModifiers().contains(Modifier.ABSTRACT)
+            && !sym.getModifiers().contains(Modifier.DEFAULT);
     properties |= abstractNotDefault ? Property.ABSTRACT_VALUE : 0;
-    properties |= (sym.flags() & Flags.FINAL) > 0 ? Property.FINAL_VALUE : 0;
-    properties |= (sym.flags() & Flags.DEFAULT) > 0 ? Property.DEFAULT_VALUE : 0;
+    properties |= sym.getModifiers().contains(Modifier.FINAL) ? Property.FINAL_VALUE : 0;
+    properties |= sym.getModifiers().contains(Modifier.DEFAULT) ? Property.DEFAULT_VALUE : 0;
     return properties;
   }
 
-  private List<String> semanticdbOverrides(Symbol sym) {
+  private List<String> semanticdbOverrides(Element sym) {
     ArrayList<String> overriddenSymbols = new ArrayList<>();
-    Set<Symbol.MethodSymbol> overriddenMethods = javacTypes.getOverriddenMethods(sym);
+    Set<ExecutableElement> overriddenMethods =
+        javacTypes.getOverriddenMethods(sym).stream()
+            .map(m -> (ExecutableElement) m)
+            .collect(Collectors.toSet());
 
-    for (Symbol.MethodSymbol meth : overriddenMethods) {
+    for (ExecutableElement meth : overriddenMethods) {
       overriddenSymbols.add(semanticdbSymbol(meth));
     }
 
     return overriddenSymbols;
   }
 
-  private Semanticdb.Access semanticdbAccess(Symbol sym) {
-    switch ((int) sym.flags() & Flags.AccessFlags) {
-      case Flags.PRIVATE:
-        return privateAccess();
-      case Flags.PUBLIC:
-        return publicAccess();
-      case Flags.PROTECTED:
-        return protectedAccess();
-      case 0:
-        return privateWithinAccess(semanticdbSymbol(sym.owner));
-      default:
-        throw new IllegalStateException("access flag " + (sym.flags() & Flags.AccessFlags));
+  private Semanticdb.Access semanticdbAccess(Element sym) {
+    if (sym.getModifiers().contains(Modifier.PRIVATE)) {
+      return privateAccess();
+    } else if (sym.getModifiers().contains(Modifier.PUBLIC)) {
+      return publicAccess();
+    } else if (sym.getModifiers().contains(Modifier.PROTECTED)) {
+      return protectedAccess();
+    } else {
+      return privateWithinAccess(semanticdbSymbol(sym.getEnclosingElement()));
     }
   }
 
@@ -414,7 +415,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     return out.toString();
   }
 
-  private Semanticdb.Documentation semanticdbDocumentation(Symbol sym) {
+  private Semanticdb.Documentation semanticdbDocumentation(Element sym) {
     try {
       Elements elements = task.getElements();
       if (elements == null) return null;
