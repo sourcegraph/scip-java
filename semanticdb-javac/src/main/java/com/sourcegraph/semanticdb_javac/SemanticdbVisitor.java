@@ -2,9 +2,6 @@ package com.sourcegraph.semanticdb_javac;
 
 import com.sun.source.tree.*;
 import com.sun.source.util.*;
-import com.sun.tools.javac.model.JavacTypes;
-import com.sun.tools.javac.tree.EndPosTable;
-import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.util.JCDiagnostic;
 import com.sun.tools.javac.util.Position;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Kind;
@@ -13,6 +10,7 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 
 import javax.lang.model.element.*;
 import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
@@ -20,7 +18,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.*;
-import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.ARRAY_SYMBOL;
 
 /** Walks the AST of a typechecked compilation unit and generates a SemanticDB TextDocument. */
 public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
@@ -29,10 +26,9 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   private final LocalSymbolsCache locals;
   private final JavacTask task;
   private final TaskEvent event;
-  private final JavacTypes javacTypes;
+  private final Types javacTypes;
   private final Trees trees;
   private final SemanticdbJavacOptions options;
-  private final EndPosTable endPosTable;
   private final ArrayList<Semanticdb.SymbolOccurrence> occurrences;
   private final ArrayList<Semanticdb.SymbolInformation> symbolInfos;
   private String source;
@@ -42,7 +38,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       GlobalSymbolsCache globals,
       TaskEvent event,
       SemanticdbJavacOptions options,
-      JavacTypes javacTypes) {
+      Types javacTypes) {
     this.task = task;
     this.globals = globals; // Reused cache between compilation units.
     this.locals = new LocalSymbolsCache(); // Fresh cache per compilation unit.
@@ -50,11 +46,6 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     this.options = options;
     this.javacTypes = javacTypes;
     this.trees = Trees.instance(task);
-    if (event.getCompilationUnit() instanceof JCTree.JCCompilationUnit) {
-      this.endPosTable = ((JCTree.JCCompilationUnit) event.getCompilationUnit()).endPositions;
-    } else {
-      this.endPosTable = new EmptyEndPosTable();
-    }
     this.occurrences = new ArrayList<>();
     this.symbolInfos = new ArrayList<>();
     this.source = semanticdbText();
@@ -74,8 +65,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         .build();
   }
 
-  private <T extends JCTree & JCDiagnostic.DiagnosticPosition> void emitSymbolOccurrence(
-      Element sym, T posTree, Role role, CompilerRange kind) {
+  private void emitSymbolOccurrence(Element sym, Tree posTree, Role role, CompilerRange kind) {
     if (sym == null) return;
     Optional<Semanticdb.SymbolOccurrence> occ = semanticdbOccurrence(sym, posTree, kind, role);
     occ.ifPresent(occurrences::add);
@@ -85,14 +75,16 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     }
   }
 
-  private void emitSymbolInformation(Element sym, JCTree tree) {
+  private void emitSymbolInformation(Element sym, Tree tree) {
     Semanticdb.SymbolInformation.Builder builder = symbolInformation(semanticdbSymbol(sym));
     Semanticdb.Documentation documentation = semanticdbDocumentation(sym);
     if (documentation != null) builder.setDocumentation(documentation);
     Semanticdb.Signature signature = semanticdbSignature(sym);
     if (signature != null) builder.setSignature(signature);
     List<Semanticdb.AnnotationTree> annotations =
-        new SemanticdbTrees(globals, locals, semanticdbUri()).annotations(tree);
+        new SemanticdbTrees(
+                globals, locals, semanticdbUri(), trees, javacTypes, event.getCompilationUnit())
+            .annotations(tree);
     if (annotations != null) builder.addAllAnnotations(annotations);
 
     builder
@@ -114,7 +106,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         break;
       case METHOD:
         builder.setKind(Kind.METHOD);
-        builder.addAllOverriddenSymbols(semanticdbOverrides(sym));
+        //        builder.addAllOverriddenSymbols(semanticdbOverrides(sym));
         break;
       case CONSTRUCTOR:
         builder.setKind(Kind.CONSTRUCTOR);
@@ -124,8 +116,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         break;
       case ENUM_CONSTANT: // overwrite previous value here
         String args =
-            ((JCTree.JCNewClass) ((JCTree.JCVariableDecl) tree).init)
-                .args.stream().map(JCTree::toString).collect(Collectors.joining(", "));
+            ((NewClassTree) ((VariableTree) tree).getInitializer())
+                .getArguments().stream().map(Tree::toString).collect(Collectors.joining(", "));
         if (!args.isEmpty())
           builder.setDisplayName(sym.getSimpleName().toString() + "(" + args + ")");
     }
@@ -141,100 +133,103 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
   @Override
   public Void visitClass(ClassTree node, Void unused) {
-    if (node instanceof JCTree.JCClassDecl) {
-      JCTree.JCClassDecl cls = (JCTree.JCClassDecl) node;
-      if (cls.sym == null) return super.visitClass(node, unused);
-      emitSymbolOccurrence(
-          cls.sym, cls, Role.DEFINITION, CompilerRange.FROM_POINT_WITH_TEXT_SEARCH);
+    Element element = trees.getElement(getCurrentPath());
+    if (element == null) return super.visitClass(node, unused);
 
-      List<JCTree.JCTypeParameter> typeParameters = cls.getTypeParameters();
-      int i = 0;
-      for (TypeParameterElement typeSym : cls.sym.getTypeParameters()) {
-        emitSymbolOccurrence(
-            typeSym,
-            typeParameters.get(i),
-            Role.DEFINITION,
-            CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
-        i++;
-      }
+    emitSymbolOccurrence(element, node, Role.DEFINITION, CompilerRange.FROM_POINT_WITH_TEXT_SEARCH);
+
+    for (TypeParameterTree typeParameter : node.getTypeParameters()) {
+      Element typeParamElement =
+          trees.getElement(trees.getPath(event.getCompilationUnit(), typeParameter));
+      emitSymbolOccurrence(
+          typeParamElement,
+          typeParameter,
+          Role.DEFINITION,
+          CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
     }
+
     return super.visitClass(node, unused);
   }
 
   @Override
   public Void visitMethod(MethodTree node, Void unused) {
-    if (node instanceof JCTree.JCMethodDecl) {
-      JCTree.JCMethodDecl meth = (JCTree.JCMethodDecl) node;
-      if (meth.sym == null) return super.visitMethod(node, unused);
-      CompilerRange range = CompilerRange.FROM_POINT_TO_SYMBOL_NAME;
-      if (meth.sym.isConstructor()) {
-        if (meth.sym.owner.isAnonymous()) return null;
-        range = CompilerRange.FROM_POINT_WITH_TEXT_SEARCH;
-      }
-      emitSymbolOccurrence(meth.sym, meth, Role.DEFINITION, range);
+    ExecutableElement element = (ExecutableElement) trees.getElement(getCurrentPath());
+    if (element == null) return super.visitMethod(node, unused);
 
-      List<JCTree.JCTypeParameter> typeParameters = meth.getTypeParameters();
-      int i = 0;
-      for (TypeParameterElement typeSym : meth.sym.getTypeParameters()) {
-        emitSymbolOccurrence(
-            typeSym,
-            typeParameters.get(i),
-            Role.DEFINITION,
-            CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
-        i++;
-      }
+    CompilerRange range = CompilerRange.FROM_POINT_TO_SYMBOL_NAME;
+    if (element.getSimpleName().contentEquals("<init>")) {
+      if (element.getEnclosingElement().getSimpleName().toString().isEmpty()) return null;
+      range = CompilerRange.FROM_POINT_WITH_TEXT_SEARCH;
     }
+
+    emitSymbolOccurrence(element, node, Role.DEFINITION, range);
+
+    for (TypeParameterTree typeParameter : node.getTypeParameters()) {
+      Element typeParamElement =
+          trees.getElement(trees.getPath(event.getCompilationUnit(), typeParameter));
+      emitSymbolOccurrence(
+          typeParamElement,
+          typeParameter,
+          Role.DEFINITION,
+          CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
+    }
+
     return super.visitMethod(node, unused);
   }
 
   @Override
   public Void visitVariable(VariableTree node, Void unused) {
-    if (node instanceof JCTree.JCVariableDecl) {
-      JCTree.JCVariableDecl decl = (JCTree.JCVariableDecl) node;
-      emitSymbolOccurrence(
-          decl.sym, decl, Role.DEFINITION, CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
-    }
+    Element element = trees.getElement(getCurrentPath());
+    if (element == null) return super.visitVariable(node, unused);
+
+    emitSymbolOccurrence(element, node, Role.DEFINITION, CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
+
     return super.visitVariable(node, unused);
   }
 
   @Override
   public Void visitIdentifier(IdentifierTree node, Void unused) {
-    if (node instanceof JCTree.JCIdent) {
-      JCTree.JCIdent ident = (JCTree.JCIdent) node;
-      if (ident.name == null || ident.sym == null) return null;
-      if (ident.name.toString().equals("this") && ident.sym.getKind() != ElementKind.CONSTRUCTOR)
-        return null;
-      emitSymbolOccurrence(ident.sym, ident, Role.REFERENCE, CompilerRange.FROM_START_TO_END);
-    }
+    Element element = trees.getElement(getCurrentPath());
+    if (element == null || node.getName() == null) return null;
+    if (node.getName().contentEquals("this") && element.getKind() != ElementKind.CONSTRUCTOR)
+      return null;
+
+    emitSymbolOccurrence(element, node, Role.REFERENCE, CompilerRange.FROM_START_TO_END);
+
     return super.visitIdentifier(node, unused);
   }
 
   @Override
   public Void visitMemberReference(MemberReferenceTree node, Void unused) {
-    if (node instanceof JCTree.JCMemberReference) {
-      JCTree.JCMemberReference ref = (JCTree.JCMemberReference) node;
-      emitSymbolOccurrence(ref.sym, ref, Role.REFERENCE, CompilerRange.FROM_END_WITH_TEXT_SEARCH);
-    }
+    Element element = trees.getElement(getCurrentPath());
+    if (element == null) return super.visitMemberReference(node, unused);
+
+    emitSymbolOccurrence(element, node, Role.REFERENCE, CompilerRange.FROM_END_WITH_TEXT_SEARCH);
+
     return super.visitMemberReference(node, unused);
   }
 
   @Override
   public Void visitMemberSelect(MemberSelectTree node, Void unused) {
-    if (node instanceof JCTree.JCFieldAccess) {
-      JCTree.JCFieldAccess select = (JCTree.JCFieldAccess) node;
-      emitSymbolOccurrence(
-          select.sym, select, Role.REFERENCE, CompilerRange.FROM_POINT_TO_SYMBOL_NAME_PLUS_ONE);
-    }
+    Element element = trees.getElement(getCurrentPath());
+    if (element == null) return super.visitMemberSelect(node, unused);
+
+    emitSymbolOccurrence(
+        element, node, Role.REFERENCE, CompilerRange.FROM_POINT_TO_SYMBOL_NAME_PLUS_ONE);
+
     return super.visitMemberSelect(node, unused);
   }
 
   @Override
   public Void visitNewClass(NewClassTree node, Void unused) {
-    if (node instanceof JCTree.JCNewClass) {
-      JCTree.JCNewClass cls = (JCTree.JCNewClass) node;
-      if (cls.type != null && cls.type.tsym != null && !cls.type.tsym.isAnonymous()) {
-        emitSymbolOccurrence(cls.constructor, cls, Role.REFERENCE, CompilerRange.FROM_TEXT_SEARCH);
-      }
+    Element identElement =
+        trees.getElement(trees.getPath(event.getCompilationUnit(), node.getIdentifier()));
+    Element ctorElement = trees.getElement(getCurrentPath());
+    if (identElement != null
+        && identElement.asType() != null
+        && !ctorElement.getEnclosingElement().getSimpleName().toString().isEmpty()) {
+      emitSymbolOccurrence(
+          ctorElement, node.getIdentifier(), Role.REFERENCE, CompilerRange.FROM_TEXT_SEARCH);
     }
 
     // to avoid emitting a reference to the class itself, we manually scan everything
@@ -250,18 +245,27 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
   private Semanticdb.Signature semanticdbSignature(Element sym) {
 
-    return new SemanticdbSignatures(globals, locals).generateSignature(sym);
+    return new SemanticdbSignatures(globals, locals, javacTypes).generateSignature(sym);
   }
 
   private String semanticdbSymbol(Element sym) {
     return globals.semanticdbSymbol(sym, locals);
   }
 
-  private Optional<Semanticdb.Range> semanticdbRange(
-      JCDiagnostic.DiagnosticPosition pos, CompilerRange kind, Element sym) {
+  private Optional<Semanticdb.Range> semanticdbRange(Tree pos1, CompilerRange kind, Element sym) {
     LineMap lineMap = event.getCompilationUnit().getLineMap();
-    if (sym == null) return Optional.empty();
     int start, end;
+    JCDiagnostic.DiagnosticPosition pos = (JCDiagnostic.DiagnosticPosition) pos1;
+    // if (kind.isFromPoint() && sym.getSimpleName() != null) {
+    //   start = (int) trees.getSourcePositions().getStartPosition(event.getCompilationUnit(), pos);
+    //   if (kind == CompilerRange.FROM_POINT_TO_SYMBOL_NAME_PLUS_ONE) {
+    //     start++;
+    //   }
+    //   end = start + sym.getSimpleName().length();
+    // } else {
+    //   start = (int) trees.getSourcePositions().getStartPosition(event.getCompilationUnit(), pos);
+    //   end = (int) trees.getSourcePositions().getEndPosition(event.getCompilationUnit(), pos);
+    // }
     if (kind.isFromPoint() && sym.getSimpleName() != null) {
       start = pos.getPreferredPosition();
       if (kind == CompilerRange.FROM_POINT_TO_SYMBOL_NAME_PLUS_ONE) {
@@ -270,7 +274,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       end = start + sym.getSimpleName().length();
     } else {
       start = pos.getStartPosition();
-      end = pos.getEndPosition(endPosTable);
+      end = (int) trees.getSourcePositions().getEndPosition(event.getCompilationUnit(), (Tree) pos);
     }
 
     if (kind.isFromTextSearch() && sym.getSimpleName().length() > 0) {
@@ -325,7 +329,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   }
 
   private Optional<Semanticdb.SymbolOccurrence> semanticdbOccurrence(
-      Element sym, JCDiagnostic.DiagnosticPosition pos, CompilerRange kind, Role role) {
+      Element sym, Tree pos, CompilerRange kind, Role role) {
     Optional<Semanticdb.Range> range = semanticdbRange(pos, kind, sym);
     if (range.isPresent()) {
       String ssym = semanticdbSymbol(sym);
@@ -375,7 +379,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     return properties;
   }
 
-  private List<String> semanticdbOverrides(Element sym) {
+  /*private List<String> semanticdbOverrides(Element sym) {
     ArrayList<String> overriddenSymbols = new ArrayList<>();
     Set<ExecutableElement> overriddenMethods =
         javacTypes.getOverriddenMethods(sym).stream()
@@ -387,7 +391,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     }
 
     return overriddenSymbols;
-  }
+  }*/
 
   private Semanticdb.Access semanticdbAccess(Element sym) {
     if (sym.getModifiers().contains(Modifier.PRIVATE)) {

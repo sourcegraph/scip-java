@@ -3,9 +3,8 @@ package com.sourcegraph.semanticdb_javac;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
-import com.sourcegraph.semanticdb_javac.Semanticdb;
-import com.sun.tools.javac.model.JavacTypes;
 
+import javax.lang.model.util.Types;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
@@ -21,14 +20,14 @@ public final class SemanticdbTaskListener implements TaskListener {
   private final JavacTask task;
   private final GlobalSymbolsCache globals;
   private final SemanticdbReporter reporter;
-  private final JavacTypes javacTypes;
+  private final Types javacTypes;
 
   public SemanticdbTaskListener(
       SemanticdbJavacOptions options,
       JavacTask task,
       GlobalSymbolsCache globals,
       SemanticdbReporter reporter,
-      JavacTypes javacTypes) {
+      Types javacTypes) {
     this.options = options;
     this.task = task;
     this.globals = globals;
@@ -47,7 +46,7 @@ public final class SemanticdbTaskListener implements TaskListener {
     } catch (Exception ex) {
       // Catch exceptions because we don't want to stop the compilation even if this plugin has a
       // bug. We report the full stack trace because it's helpful for bug reports. Exceptions
-      // should only happen in *exceptional* situations and they should be reported upstream.
+      // should only happen in *exceptional* situations, and they should be reported upstream.
       reporter.exception(ex);
     }
   }

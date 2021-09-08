@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.tools.FileObject;
 import javax.tools.JavaFileManager;
 import javax.tools.JavaFileObject;
+import javax.tools.ToolProvider;
 
 import com.sun.tools.javac.util.Context;
 
@@ -40,7 +41,7 @@ public class SemanticdbJavacOptions {
 
   public static String JAVAC_CLASSES_DIR_ARG = "javac-classes-directory";
 
-  public static SemanticdbJavacOptions parse(String[] args, Context ctx) {
+  public static SemanticdbJavacOptions parse(String[] args) {
     SemanticdbJavacOptions result = new SemanticdbJavacOptions();
     boolean useJavacClassesDir = false;
     for (String arg : args) {
@@ -48,7 +49,7 @@ public class SemanticdbJavacOptions {
         String argValue = arg.substring("-targetroot:".length());
         if (argValue.equals(JAVAC_CLASSES_DIR_ARG)) {
           useJavacClassesDir = true;
-          result.targetroot = getJavacClassesDir(result, ctx);
+          result.targetroot = getJavacClassesDir(result);
         } else {
           result.targetroot = Paths.get(argValue);
         }
@@ -79,11 +80,12 @@ public class SemanticdbJavacOptions {
     return result;
   }
 
-  private static Path getJavacClassesDir(SemanticdbJavacOptions result, Context ctx) {
+  private static Path getJavacClassesDir(SemanticdbJavacOptions result) {
     // I'm not aware of a better way to get the class output directory from javac
     Path outputDir = null;
     try {
-      JavaFileManager fm = ctx.get(JavaFileManager.class);
+      JavaFileManager fm =
+          ToolProvider.getSystemJavaCompiler().getStandardFileManager(null, null, null);
       FileObject outputDirStub =
           fm.getJavaFileForOutput(CLASS_OUTPUT, stubClassName, JavaFileObject.Kind.CLASS, null);
       outputDir = Paths.get(outputDirStub.toUri()).toAbsolutePath().getParent();

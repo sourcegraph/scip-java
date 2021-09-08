@@ -1,11 +1,10 @@
 package com.sourcegraph.semanticdb_javac;
 
-import com.sun.tools.javac.code.Type;
-import com.sun.tools.javac.util.List;
-
 import javax.lang.model.type.*;
 import javax.lang.model.util.SimpleTypeVisitor8;
+import javax.lang.model.util.Types;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.*;
 
@@ -17,10 +16,12 @@ class SemanticdbTypeVisitor extends SimpleTypeVisitor8<Semanticdb.Type, Void> {
 
   private final GlobalSymbolsCache cache;
   private final LocalSymbolsCache locals;
+  private final Types types;
 
-  SemanticdbTypeVisitor(GlobalSymbolsCache cache, LocalSymbolsCache locals) {
+  SemanticdbTypeVisitor(GlobalSymbolsCache cache, LocalSymbolsCache locals, Types types) {
     this.cache = cache;
     this.locals = locals;
+    this.types = types;
   }
 
   public Semanticdb.Type semanticdbType(TypeMirror tpe) {
@@ -56,7 +57,7 @@ class SemanticdbTypeVisitor extends SimpleTypeVisitor8<Semanticdb.Type, Void> {
                 .setSymbol("local_wildcard")
                 .setSignature(Semanticdb.Signature.newBuilder().setTypeSignature(typeSig)));
       } else {
-        declarations.addSymlinks(cache.semanticdbSymbol(((Type) type).asElement(), locals));
+        declarations.addSymlinks(cache.semanticdbSymbol(types.asElement(type), locals));
       }
     }
 
@@ -70,7 +71,7 @@ class SemanticdbTypeVisitor extends SimpleTypeVisitor8<Semanticdb.Type, Void> {
 
   @Override
   public Semanticdb.Type visitArray(ArrayType t, Void unused) {
-    return typeRef(ARRAY_SYMBOL, List.of(semanticdbType(t.getComponentType())));
+    return typeRef(ARRAY_SYMBOL, Collections.singletonList(semanticdbType(t.getComponentType())));
   }
 
   @Override

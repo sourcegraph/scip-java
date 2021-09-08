@@ -4,6 +4,7 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.*;
 
 import javax.lang.model.element.*;
 import javax.lang.model.type.*;
+import javax.lang.model.util.Types;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,10 +14,12 @@ import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.UNRESOLVED_
 public final class SemanticdbSignatures {
   private final GlobalSymbolsCache cache;
   private final LocalSymbolsCache locals;
+  private final Types types;
 
-  public SemanticdbSignatures(GlobalSymbolsCache cache, LocalSymbolsCache locals) {
+  public SemanticdbSignatures(GlobalSymbolsCache cache, LocalSymbolsCache locals, Types types) {
     this.cache = cache;
     this.locals = locals;
+    this.types = types;
   }
 
   public Signature generateSignature(Element sym) {
@@ -106,6 +109,6 @@ public final class SemanticdbSignatures {
   }
 
   private Semanticdb.Type generateType(TypeMirror mirror) {
-    return new SemanticdbTypeVisitor(cache, locals).semanticdbType(mirror);
+    return new SemanticdbTypeVisitor(cache, locals, types).semanticdbType(mirror);
   }
 }

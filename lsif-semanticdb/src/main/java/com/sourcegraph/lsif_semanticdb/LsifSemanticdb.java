@@ -189,9 +189,11 @@ public class LsifSemanticdb {
 
   private Stream<LsifTextDocument> parseTextDocument(Path semanticdbPath) {
     try {
-      CodedInputStream in = CodedInputStream.newInstance(Files.readAllBytes(semanticdbPath));
-      in.setRecursionLimit(1000);
-      return Semanticdb.TextDocuments.parseFrom(in).getDocumentsList().stream()
+      //      CodedInputStream in =
+      // CodedInputStream.newInstance(Files.readAllBytes(semanticdbPath));
+      //      in.setRecursionLimit(1000);
+      return Semanticdb.TextDocuments.parseFrom(Files.readAllBytes(semanticdbPath))
+          .getDocumentsList().stream()
           .filter(sdb -> !sdb.getOccurrencesList().isEmpty())
           .map(sdb -> new LsifTextDocument(semanticdbPath, sdb, options.sourceroot));
     } catch (IOException e) {
