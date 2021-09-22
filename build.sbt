@@ -246,7 +246,7 @@ lazy val packagehub = project
       List(
         "com.google.cloud.sql" % "postgres-socket-factory" % "1.3.3",
         "com.zaxxer" % "HikariCP" % "5.0.0",
-        "org.flywaydb" % "flyway-core" % "7.12.1",
+        "org.flywaydb" % "flyway-core" % "7.15.0",
         "org.postgresql" % "postgresql" % "42.2.23",
         "org.rauschig" % "jarchivelib" % "1.1.0",
         "org.scalameta" %% "scalameta" % V.scalameta,
