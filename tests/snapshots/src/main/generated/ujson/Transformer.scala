@@ -25,5 +25,6 @@ trait Transformer[I] {
 //                        ^ reference ujson/Transformer#[I]
 //                             ^^^^^^^^ reference ujson/Readable.
 //                                      ^^^^^^^^^^^^^^^ reference ujson/Readable.fromTransformer.
+//                                                      reference ujson/Readable.fromTransformer.apply().
 //                                                      ^ reference ujson/Transformer#transformable().(j)
 }

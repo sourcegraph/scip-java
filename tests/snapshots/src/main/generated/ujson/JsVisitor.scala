@@ -179,6 +179,7 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 //                       ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#subVisitor().
 //                                  ^^^^^^^^^^ reference upickle/core/Visitor#visitInt32().
 //                                             ^^^^^ reference ujson/JsVisitor#visitBinary().(bytes)
+//                                                   reference scala/Array#apply().
 //                                                   ^^^^^^ reference ujson/JsVisitor#visitBinary().(offset)
 //                                                          ^ reference scala/Int#`+`(+4).
 //                                                            ^ reference local3

@@ -213,6 +213,9 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                                                                               ^^^^^^ reference upickle/core/Util.reject().
 //                                                                                                      ^^^^ reference local14
 //                                                                                                           ^^^^^ reference ujson/IndexedValue#index().
+//                                                                                                                  reference scala/collection/IterableOnceOps#foreach().
+//                                                                                                                  reference local14
+//                                                                                                                  reference scala/Function1#apply().
         ctx.visitEnd(i)
 //      ^^^ reference local13
 //          ^^^^^^^^ reference upickle/core/ObjArrVisitor#visitEnd().
@@ -238,6 +241,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                          ^ reference local16
 //                                                   ^^^^^^ reference upickle/core/Util.reject().
 //                                                          ^ reference local16
+//                                                             reference scala/Function1#apply().
 
           ctx.visitKeyValue(keyVisitor.visitString(k, i))
 //        ^^^ reference local18
@@ -258,7 +262,12 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                                                              ^^^^^^ reference upickle/core/Util.reject().
 //                                                                                     ^^^^ reference local22
 //                                                                                          ^^^^^ reference ujson/IndexedValue#index().
+//                                                                                                 reference scala/Function1#apply().
         }
+//        reference scala/collection/IterableOps#withFilter().
+//        reference local19
+//        reference scala/collection/WithFilter#foreach().
+//        reference local20
         ctx.visitEnd(i)
 //      ^^^ reference local18
 //          ^^^^^^^^ reference upickle/core/ObjArrVisitor#visitEnd().
@@ -268,6 +277,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //        ^^^^^^ reference upickle/core/Util.reject().
 //               ^ reference ujson/IndexedValue.transform().(j)
 //                 ^^^^^ reference ujson/IndexedValue#index().
+//                        reference scala/Function1#apply().
 
 
   object Builder extends JsVisitor[IndexedValue, IndexedValue]{
@@ -316,6 +326,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                           ^^^ reference ujson/IndexedValue.Arr#
 //                                                 ^^^^^^^^^^^^ reference ujson/IndexedValue.
 //                                                              ^^^ reference ujson/IndexedValue.Arr.
+//                                                                  reference ujson/IndexedValue.Arr.apply().
 //                                                                  ^ reference ujson/IndexedValue.Builder.visitArray().(i)
 //                                                                     ^^^ reference local25
 //                                                                         ^^^^^ reference scala/collection/IterableOnceOps#toSeq().
@@ -384,6 +395,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                           ^^^ reference ujson/IndexedValue.Obj#
 //                                                 ^^^^^^^^^^^^ reference ujson/IndexedValue.
 //                                                              ^^^ reference ujson/IndexedValue.Obj.
+//                                                                  reference ujson/IndexedValue.Obj.apply().
 //                                                                  ^ reference ujson/IndexedValue.Builder.visitObject().(i)
 //                                                                     ^^^ reference local32
 //                                                                         ^^^^^ reference scala/collection/IterableOnceOps#toSeq().
@@ -395,6 +407,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                   ^^^ reference scala/Int#
 //                          ^^^^^^^^^^^^ reference ujson/IndexedValue.
 //                                       ^^^^ reference ujson/IndexedValue.Null.
+//                                            reference ujson/IndexedValue.Null.apply().
 //                                            ^ reference ujson/IndexedValue.Builder.visitNull().(i)
 
     def visitFalse(i: Int) = IndexedValue.False(i)
@@ -403,6 +416,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                    ^^^ reference scala/Int#
 //                           ^^^^^^^^^^^^ reference ujson/IndexedValue.
 //                                        ^^^^^ reference ujson/IndexedValue.False.
+//                                              reference ujson/IndexedValue.False.apply().
 //                                              ^ reference ujson/IndexedValue.Builder.visitFalse().(i)
 
     def visitTrue(i: Int) = IndexedValue.True(i)
@@ -411,6 +425,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                   ^^^ reference scala/Int#
 //                          ^^^^^^^^^^^^ reference ujson/IndexedValue.
 //                                       ^^^^ reference ujson/IndexedValue.True.
+//                                            reference ujson/IndexedValue.True.apply().
 //                                            ^ reference ujson/IndexedValue.Builder.visitTrue().(i)
 
     def visitFloat64StringParts(s: CharSequence, decIndex: Int, expIndex: Int, i: Int) = IndexedValue.Num(i, s, decIndex, expIndex)
@@ -425,6 +440,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                                                                ^^^ reference scala/Int#
 //                                                                                       ^^^^^^^^^^^^ reference ujson/IndexedValue.
 //                                                                                                    ^^^ reference ujson/IndexedValue.Num.
+//                                                                                                        reference ujson/IndexedValue.Num.apply().
 //                                                                                                        ^ reference ujson/IndexedValue.Builder.visitFloat64StringParts().(i)
 //                                                                                                           ^ reference ujson/IndexedValue.Builder.visitFloat64StringParts().(s)
 //                                                                                                              ^^^^^^^^ reference ujson/IndexedValue.Builder.visitFloat64StringParts().(decIndex)
@@ -437,6 +453,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                          ^^^ reference scala/Int#
 //                                                 ^^^^^^^^^^^^ reference ujson/IndexedValue.
 //                                                              ^^^^^^ reference ujson/IndexedValue.NumRaw.
+//                                                                     reference ujson/IndexedValue.NumRaw.apply().
 //                                                                     ^ reference ujson/IndexedValue.Builder.visitFloat64().(i)
 //                                                                        ^ reference ujson/IndexedValue.Builder.visitFloat64().(d)
 
@@ -448,6 +465,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                      ^^^ reference scala/Int#
 //                                             ^^^^^^^^^^^^ reference ujson/IndexedValue.
 //                                                          ^^^ reference ujson/IndexedValue.Str.
+//                                                              reference ujson/IndexedValue.Str.apply().
 //                                                              ^ reference ujson/IndexedValue.Builder.visitString().(i)
 //                                                                 ^ reference ujson/IndexedValue.Builder.visitString().(s)
   }

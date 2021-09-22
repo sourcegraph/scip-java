@@ -50,6 +50,8 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                                              ^^^^ reference local1
 //                                                    ^^^ reference local0
 //                                                        ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#subVisitor().
+//                                                                         reference scala/collection/IterableOnceOps#foreach().
+//                                                                         reference local1
     ctx.visitEnd(-1)
 //  ^^^ reference local0
 //      ^^^^^^^^ reference upickle/core/ObjArrVisitor#visitEnd().
@@ -94,6 +96,8 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                                    ^^^ reference local3
 //                                        ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#subVisitor().
     }
+//    reference scala/collection/IterableOnceOps#foreach().
+//    reference local4
     ctx.visitEnd(-1)
 //  ^^^ reference local3
 //      ^^^^^^^^ reference upickle/core/ObjArrVisitor#visitEnd().
@@ -153,6 +157,8 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                                           ^^ reference ujson/AstTransformer#AstObjVisitor#vs.
 //                                              ^^ reference scala/collection/mutable/Growable#`+=`().
 //                                                  ^^^ reference ujson/AstTransformer#AstObjVisitor#key().
+//                                                      reference scala/Predef.
+//                                                      reference scala/Predef.ArrowAssoc().
 //                                                      ^^ reference scala/Predef.ArrowAssoc#`->`().
 //                                                         ^ reference ujson/AstTransformer#AstObjVisitor#visitValue().(v)
 
@@ -161,6 +167,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //               ^^^^^ definition ujson/AstTransformer#AstObjVisitor#visitEnd().(index)
 //                      ^^^ reference scala/Int#
 //                             ^^^^^ reference ujson/AstTransformer#AstObjVisitor#build.
+//                                   reference scala/Function1#apply().
 //                                   ^^ reference ujson/AstTransformer#AstObjVisitor#vs.
 //                                      ^^^^^^ reference scala/collection/mutable/Builder#result().
   }
@@ -205,6 +212,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //               ^^^^^ definition ujson/AstTransformer#AstArrVisitor#visitEnd().(index)
 //                      ^^^ reference scala/Int#
 //                             ^^^^^ reference ujson/AstTransformer#AstArrVisitor#build.
+//                                   reference scala/Function1#apply().
 //                                   ^^ reference ujson/AstTransformer#AstArrVisitor#vs.
 //                                      ^^^^^^ reference scala/collection/mutable/Builder#result().
   }

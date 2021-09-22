@@ -55,6 +55,7 @@ object MinimizedScalaMain {
 //                                                reference minimized/ParameterizedTypes#`<init>`().
             .app(42, "42") +
 //           ^^^ reference minimized/ParameterizedTypes#app().
+//                  reference scala/Predef.int2Integer().
 //                         ^ reference java/lang/String#`+`().
           RawTypes.x.toString + 
 //        ^^^^^^^^ reference minimized/RawTypes#

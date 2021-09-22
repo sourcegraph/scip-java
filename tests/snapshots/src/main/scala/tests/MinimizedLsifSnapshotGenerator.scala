@@ -20,14 +20,29 @@ class MinimizedLsifSnapshotGenerator extends SnapshotGenerator {
   }
   def onFinished(context: SnapshotContext): Unit = ()
   override def run(context: SnapshotContext, handler: SnapshotHandler): Unit = {
+    onTargetroot(
+      context,
+      handler,
+      AbsolutePath(BuildInfo.minimizedJavaTargetroot),
+      AbsolutePath(BuildInfo.minimizedJavaSourceDirectory)
+    )
+    onTargetroot(
+      context,
+      handler,
+      AbsolutePath(BuildInfo.minimizedScalaTargetroot),
+      AbsolutePath(BuildInfo.minimizedScalaSourceDirectory)
+    )
+  }
+  def onTargetroot(
+      context: SnapshotContext,
+      handler: SnapshotHandler,
+      targetroot: AbsolutePath,
+      sourceDirectory: AbsolutePath
+  ): Unit = {
     val sourceroot = AbsolutePath(BuildInfo.sourceroot)
     val lsifOutput = Files.createTempDirectory("lsif-java").resolve("dump.lsif")
     val snapshotOutput = AbsolutePath(Files.createTempDirectory("lsif-java"))
     try {
-      val javaTargetroot = AbsolutePath(BuildInfo.minimizedJavaTargetroot)
-      val javaSourceDirectory = AbsolutePath(
-        BuildInfo.minimizedJavaSourceDirectory
-      )
       run(
         List(
           "index-semanticdb",
@@ -36,7 +51,7 @@ class MinimizedLsifSnapshotGenerator extends SnapshotGenerator {
           "--output",
           lsifOutput.toString,
           "--targetroot",
-          javaTargetroot.toString()
+          targetroot.toString()
         )
       )
       run(
@@ -57,7 +72,7 @@ class MinimizedLsifSnapshotGenerator extends SnapshotGenerator {
           val relativeToSourceroot = file.toRelative(snapshotOutput)
           val absoluteSource = sourceroot.resolve(relativeToSourceroot)
           val relativeToSourceDirectory = absoluteSource
-            .toRelative(javaSourceDirectory)
+            .toRelative(sourceDirectory)
           val expectOutput = AbsolutePath(
             context.expectDirectory.resolve(relativeToSourceDirectory.toNIO)
           )
