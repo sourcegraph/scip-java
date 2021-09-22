@@ -3,6 +3,7 @@ package com.sourcegraph.lsif_java
 import scala.jdk.CollectionConverters._
 
 import com.sourcegraph.lsif_java.commands.CommentSyntax
+import com.sourcegraph.lsif_semanticdb.LsifTextDocument
 import com.sourcegraph.lsif_semanticdb.SignatureFormatter
 import com.sourcegraph.lsif_semanticdb.Symtab
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence
@@ -14,8 +15,8 @@ object SemanticdbPrinters {
       doc: TextDocument,
       comments: CommentSyntax = CommentSyntax.default
   ): String = {
-    val occurrencesByLine = doc
-      .getOccurrencesList
+    val occurrencesByLine = LsifTextDocument
+      .sortedSymbolOccurrences(doc)
       .asScala
       .groupBy(_.getRange.getStartLine)
     val out = new StringBuilder()
@@ -80,13 +81,7 @@ object SemanticdbPrinters {
       .append(occ.getSymbol)
       .append(
         if (isMultiline)
-          " "
-        else
-          ""
-      )
-      .append(
-        if (isMultiline)
-          s"${r.getEndLine - r.getStartLine}:${r.getEndCharacter}"
+          s" ${r.getEndLine - r.getStartLine}:${r.getEndCharacter}"
         else
           ""
       )
@@ -102,7 +97,10 @@ object SemanticdbPrinters {
             ""
         }
       )
-      .append("\n")
+    while (out.last == ' ') { // Trim trailing whitespace
+      out.setLength(out.length() - 1)
+    }
+    out.append("\n")
   }
 
 }

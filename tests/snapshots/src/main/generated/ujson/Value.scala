@@ -37,6 +37,7 @@ sealed trait Value extends Readable with geny.Writable{
   override def httpContentType = Some("application/json")
 //             ^^^^^^^^^^^^^^^ definition ujson/Value#httpContentType().
 //                               ^^^^ reference scala/Some.
+//                                    reference scala/Some.apply().
   def value: Any
 //    ^^^^^ definition ujson/Value#value().
 //           ^^^ reference scala/Any#
@@ -55,6 +56,7 @@ sealed trait Value extends Readable with geny.Writable{
     case _ => throw Value.InvalidData(this, "Expected ujson.Str")
 //                  ^^^^^ reference ujson/Value.
 //                        ^^^^^^^^^^^ reference ujson/Value.InvalidData.
+//                                    reference ujson/Value.InvalidData.apply().
   }
 
   /**
@@ -66,6 +68,7 @@ sealed trait Value extends Readable with geny.Writable{
 //       ^^^ reference ujson/Str.
 //           ^^^^^ definition local1
 //                     ^^^^ reference scala/Some.
+//                          reference scala/Some.apply().
 //                          ^^^^^ reference local1
     case _ => None
 //            ^^^^ reference scala/None.
@@ -85,6 +88,7 @@ sealed trait Value extends Readable with geny.Writable{
     case _ => throw Value.InvalidData(this, "Expected ujson.Obj")
 //                  ^^^^^ reference ujson/Value.
 //                        ^^^^^^^^^^^ reference ujson/Value.InvalidData.
+//                                    reference ujson/Value.InvalidData.apply().
   }
   /**
     * Returns an Optional key/value map of this [[Value]] in case this [[Value]] is a 'Obj'.
@@ -95,6 +99,7 @@ sealed trait Value extends Readable with geny.Writable{
 //       ^^^ reference ujson/Obj.
 //           ^^^^^ definition local3
 //                     ^^^^ reference scala/Some.
+//                          reference scala/Some.apply().
 //                          ^^^^^ reference local3
     case _ => None
 //            ^^^^ reference scala/None.
@@ -113,6 +118,7 @@ sealed trait Value extends Readable with geny.Writable{
     case _ => throw Value.InvalidData(this, "Expected ujson.Arr")
 //                  ^^^^^ reference ujson/Value.
 //                        ^^^^^^^^^^^ reference ujson/Value.InvalidData.
+//                                    reference ujson/Value.InvalidData.apply().
   }
   /**
     * Returns The optional elements of this [[Value]] in case this [[Value]] is a 'Arr'.
@@ -123,6 +129,7 @@ sealed trait Value extends Readable with geny.Writable{
 //       ^^^ reference ujson/Arr.
 //           ^^^^^ definition local5
 //                     ^^^^ reference scala/Some.
+//                          reference scala/Some.apply().
 //                          ^^^^^ reference local5
     case _ => None
 //            ^^^^ reference scala/None.
@@ -141,6 +148,7 @@ sealed trait Value extends Readable with geny.Writable{
     case _ => throw Value.InvalidData(this, "Expected ujson.Num")
 //                  ^^^^^ reference ujson/Value.
 //                        ^^^^^^^^^^^ reference ujson/Value.InvalidData.
+//                                    reference ujson/Value.InvalidData.apply().
   }
   /**
     * Returns an Option[Double] in case this [[Value]] is a 'Num'.
@@ -151,6 +159,7 @@ sealed trait Value extends Readable with geny.Writable{
 //       ^^^ reference ujson/Num.
 //           ^^^^^ definition local7
 //                     ^^^^ reference scala/Some.
+//                          reference scala/Some.apply().
 //                          ^^^^^ reference local7
     case _ => None
 //            ^^^^ reference scala/None.
@@ -164,11 +173,13 @@ sealed trait Value extends Readable with geny.Writable{
     case ujson.Bool(value) => value
 //       ^^^^^ reference ujson/
 //             ^^^^ reference ujson/Bool.
+//                  reference ujson/Bool.unapply().
 //                  ^^^^^ definition local8
 //                            ^^^^^ reference local8
     case _ => throw Value.InvalidData(this, "Expected ujson.Bool")
 //                  ^^^^^ reference ujson/Value.
 //                        ^^^^^^^^^^^ reference ujson/Value.InvalidData.
+//                                    reference ujson/Value.InvalidData.apply().
   }
   /**
     * Returns an Optional `Boolean` value of this [[Value]] in case this [[Value]] is a 'Bool'.
@@ -177,8 +188,10 @@ sealed trait Value extends Readable with geny.Writable{
 //    ^^^^^^^ definition ujson/Value#boolOpt().
     case Bool(value) => Some(value)
 //       ^^^^ reference ujson/Bool.
+//            reference ujson/Bool.unapply().
 //            ^^^^^ definition local9
 //                      ^^^^ reference scala/Some.
+//                           reference scala/Some.apply().
 //                           ^^^^^ reference local9
     case _ => None
 //            ^^^^ reference scala/None.
@@ -201,6 +214,7 @@ sealed trait Value extends Readable with geny.Writable{
 //                   ^^^^^^^^ reference ujson/Value.Selector#
 //                              ^^^^^ reference ujson/Value#
 //                                      ^ reference ujson/Value#apply().(s)
+//                                        reference ujson/Value.Selector#apply().
   def update(s: Value.Selector, v: Value): Unit = s(this) = v
 //    ^^^^^^ definition ujson/Value#update().
 //           ^ definition ujson/Value#update().(s)
@@ -210,6 +224,7 @@ sealed trait Value extends Readable with geny.Writable{
 //                                 ^^^^^ reference ujson/Value#
 //                                         ^^^^ reference scala/Unit#
 //                                                ^ reference ujson/Value#update().(s)
+//                                                  reference ujson/Value.Selector#update().
 //                                                          ^ reference ujson/Value#update().(v)
 
   /**
@@ -229,8 +244,11 @@ sealed trait Value extends Readable with geny.Writable{
 //                                          ^^^^^ reference ujson/Value#
 //                                                  ^^^^ reference scala/Unit#
 //                                                         ^ reference ujson/Value#update(+1).(s)
+//                                                           reference ujson/Value.Selector#update().
 //                                                                   ^ reference ujson/Value#update(+1).(f)
+//                                                                     reference scala/Function1#apply().
 //                                                                     ^ reference ujson/Value#update(+1).(s)
+//                                                                       reference ujson/Value.Selector#apply().
 
   def transform[T](f: Visitor[_, T]) = Value.transform(this, f)
 //    ^^^^^^^^^ definition ujson/Value#transform().
@@ -252,6 +270,7 @@ sealed trait Value extends Readable with geny.Writable{
 //                                            ^^^^^^^ reference scala/Boolean#
 //                                                                    ^^^^^^^^^ reference ujson/Value#transform().
 //                                                                              ^^^^^^^^^^^^^^ reference ujson/StringRenderer.
+//                                                                                             reference ujson/StringRenderer.apply().
 //                                                                                             ^^^^^^ reference ujson/Value#render().(indent)
 //                                                                                                     ^^^^^^^^^^^^^ reference ujson/Value#render().(escapeUnicode)
 //                                                                                                                     ^^^^^^^^ reference java/io/StringWriter#toString().
@@ -333,6 +352,7 @@ object Value extends AstTransformer[Value]{
 //                         ^^^^^ reference ujson/Value.Value#
 //                                 ^ reference ujson/Value.Selector.IntSelector#apply().(x)
 //                                   ^^^ reference ujson/Value#arr().
+//                                       reference scala/collection/mutable/ArrayBuffer#apply().
 //                                       ^ reference ujson/Value.Selector.IntSelector#i.
       def update(x: Value, y: Value) = x.arr(i) = y
 //        ^^^^^^ definition ujson/Value.Selector.IntSelector#update().
@@ -342,6 +362,7 @@ object Value extends AstTransformer[Value]{
 //                            ^^^^^ reference ujson/Value.Value#
 //                                     ^ reference ujson/Value.Selector.IntSelector#update().(x)
 //                                       ^^^ reference ujson/Value#arr().
+//                                           reference scala/collection/mutable/ArrayBuffer#update().
 //                                           ^ reference ujson/Value.Selector.IntSelector#i.
 //                                                ^ reference ujson/Value.Selector.IntSelector#update().(y)
     }
@@ -359,6 +380,7 @@ object Value extends AstTransformer[Value]{
 //                         ^^^^^ reference ujson/Value.Value#
 //                                 ^ reference ujson/Value.Selector.StringSelector#apply().(x)
 //                                   ^^^ reference ujson/Value#obj().
+//                                       reference scala/collection/MapOps#apply().
 //                                       ^ reference ujson/Value.Selector.StringSelector#i.
       def update(x: Value, y: Value) = x.obj(i) = y
 //        ^^^^^^ definition ujson/Value.Selector.StringSelector#update().
@@ -368,6 +390,7 @@ object Value extends AstTransformer[Value]{
 //                            ^^^^^ reference ujson/Value.Value#
 //                                     ^ reference ujson/Value.Selector.StringSelector#update().(x)
 //                                       ^^^ reference ujson/Value#obj().
+//                                           reference scala/collection/mutable/LinkedHashMap#update().
 //                                           ^ reference ujson/Value.Selector.StringSelector#i.
 //                                                ^ reference ujson/Value.Selector.StringSelector#update().(y)
     }
@@ -478,8 +501,12 @@ object Value extends AstTransformer[Value]{
 //                                                           ^^^ reference ujson/Value.Arr.
 //                                                               ^^^^ reference ujson/Arr.from().
 //                                                                    ^^^^^ reference ujson/Value.JsonableSeq().(items)
+//                                                                          reference scala/collection/IterableOnce.
+//                                                                          reference scala/collection/IterableOnce.iterableOnceExtensionMethods().
 //                                                                          ^^^ reference scala/collection/IterableOnceExtensionMethods#map().
 //                                                                              ^ reference ujson/Value.JsonableSeq().(f)
+//                                                                                  reference scala/Predef.
+//                                                                                  reference scala/Predef.$conforms().
   implicit def JsonableDict[T](items: TraversableOnce[(String, T)])
 //             ^^^^^^^^^^^^ definition ujson/Value.JsonableDict().
 //                          ^ definition ujson/Value.JsonableDict().[T]
@@ -495,11 +522,14 @@ object Value extends AstTransformer[Value]{
 //                                                            ^^^ reference ujson/Value.Obj.
 //                                                                ^^^^ reference ujson/Obj.from().
 //                                                                     ^^^^^ reference ujson/Value.JsonableDict().(items)
+//                                                                           reference scala/collection/IterableOnce.
+//                                                                           reference scala/collection/IterableOnce.iterableOnceExtensionMethods().
 //                                                                           ^^^ reference scala/collection/IterableOnceExtensionMethods#map().
 //                                                                               ^ definition local10
 //                                                                                     ^ reference local10
 //                                                                                       ^^ reference scala/Tuple2#_1.
 //                                                                                           ^ reference ujson/Value.JsonableDict().(f)
+//                                                                                             reference scala/Function1#apply().
 //                                                                                             ^ reference local10
 //                                                                                               ^^ reference scala/Tuple2#_2.
   implicit def JsonableBoolean(i: Boolean): Bool = if (i) ujson.True else ujson.False
@@ -518,6 +548,7 @@ object Value extends AstTransformer[Value]{
 //                             ^^^^ reference scala/Byte#
 //                                    ^^^ reference ujson/Value.Num#
 //                                          ^^^ reference ujson/Value.Num.
+//                                              reference ujson/Num.apply().
 //                                              ^ reference scala/Byte#toDouble().
   implicit def JsonableShort(i: Short): Num = Num(i)
 //             ^^^^^^^^^^^^^ definition ujson/Value.JsonableShort().
@@ -525,6 +556,7 @@ object Value extends AstTransformer[Value]{
 //                              ^^^^^ reference scala/Short#
 //                                      ^^^ reference ujson/Value.Num#
 //                                            ^^^ reference ujson/Value.Num.
+//                                                reference ujson/Num.apply().
 //                                                ^ reference scala/Short#toDouble().
   implicit def JsonableInt(i: Int): Num = Num(i)
 //             ^^^^^^^^^^^ definition ujson/Value.JsonableInt().
@@ -532,6 +564,7 @@ object Value extends AstTransformer[Value]{
 //                            ^^^ reference scala/Int#
 //                                  ^^^ reference ujson/Value.Num#
 //                                        ^^^ reference ujson/Value.Num.
+//                                            reference ujson/Num.apply().
 //                                            ^ reference scala/Int#toDouble().
   implicit def JsonableLong(i: Long): Str = Str(i.toString)
 //             ^^^^^^^^^^^^ definition ujson/Value.JsonableLong().
@@ -539,6 +572,7 @@ object Value extends AstTransformer[Value]{
 //                             ^^^^ reference scala/Long#
 //                                    ^^^ reference ujson/Value.Str#
 //                                          ^^^ reference ujson/Value.Str.
+//                                              reference ujson/Str.apply().
 //                                              ^ reference ujson/Value.JsonableLong().(i)
 //                                                ^^^^^^^^ reference scala/Any#toString().
   implicit def JsonableFloat(i: Float): Num = Num(i)
@@ -547,6 +581,7 @@ object Value extends AstTransformer[Value]{
 //                              ^^^^^ reference scala/Float#
 //                                      ^^^ reference ujson/Value.Num#
 //                                            ^^^ reference ujson/Value.Num.
+//                                                reference ujson/Num.apply().
 //                                                ^ reference scala/Float#toDouble().
   implicit def JsonableDouble(i: Double): Num = Num(i)
 //             ^^^^^^^^^^^^^^ definition ujson/Value.JsonableDouble().
@@ -554,6 +589,7 @@ object Value extends AstTransformer[Value]{
 //                               ^^^^^^ reference scala/Double#
 //                                        ^^^ reference ujson/Value.Num#
 //                                              ^^^ reference ujson/Value.Num.
+//                                                  reference ujson/Num.apply().
 //                                                  ^ reference ujson/Value.JsonableDouble().(i)
   implicit def JsonableNull(i: Null): Null.type = Null
 //             ^^^^^^^^^^^^ definition ujson/Value.JsonableNull().
@@ -567,6 +603,7 @@ object Value extends AstTransformer[Value]{
 //                               ^^^^^^^^^^^^ reference java/lang/CharSequence#
 //                                              ^^^ reference ujson/Value.Str#
 //                                                    ^^^ reference ujson/Value.Str.
+//                                                        reference ujson/Str.apply().
 //                                                        ^ reference ujson/Value.JsonableString().(s)
 //                                                          ^^^^^^^^ reference java/lang/Object#toString().
 
@@ -640,7 +677,10 @@ object Value extends AstTransformer[Value]{
 //                                                                         ^^ definition local15
 //                                                                               ^^^^^ reference ujson/
 //                                                                                     ^^^ reference ujson/Arr.
+//                                                                                         reference ujson/Arr.apply(+1).
 //                                                                                         ^^ reference local15
+//                                                                                              reference scala/collection/mutable/ArrayBuffer.
+//                                                                                              reference scala/collection/IterableFactory#iterableFactory().
 
   def visitObject(length: Int, index: Int) = new AstObjVisitor[mutable.LinkedHashMap[String, Value]](xs => ujson.Obj(xs))
 //    ^^^^^^^^^^^ definition ujson/Value.visitObject().
@@ -657,7 +697,10 @@ object Value extends AstTransformer[Value]{
 //                                                                                                   ^^ definition local16
 //                                                                                                         ^^^^^ reference ujson/
 //                                                                                                               ^^^ reference ujson/Obj.
+//                                                                                                                   reference ujson/Obj.apply(+2).
 //                                                                                                                   ^^ reference local16
+//                                                                                                                        reference scala/collection/mutable/LinkedHashMap.
+//                                                                                                                        reference scala/collection/MapFactory#mapFactory().
 
   def visitNull(index: Int) = ujson.Null
 //    ^^^^^^^^^ definition ujson/Value.visitNull().
@@ -693,6 +736,7 @@ object Value extends AstTransformer[Value]{
     ujson.Num(
 //  ^^^^^ reference ujson/
 //        ^^^ reference ujson/Num.
+//            reference ujson/Num.apply().
       if (decIndex != -1 || expIndex != -1) s.toString.toDouble
 //        ^^^^^^^^ reference ujson/Value.visitFloat64StringParts().(decIndex)
 //                 ^^ reference scala/Int#`!=`(+3).
@@ -701,6 +745,7 @@ object Value extends AstTransformer[Value]{
 //                                   ^^ reference scala/Int#`!=`(+3).
 //                                          ^ reference ujson/Value.visitFloat64StringParts().(s)
 //                                            ^^^^^^^^ reference java/lang/Object#toString().
+//                                                     reference scala/Predef.augmentString().
 //                                                     ^^^^^^^^ reference scala/collection/StringOps#toDouble().
       else Util.parseIntegralNum(s, decIndex, expIndex, index)
 //         ^^^^ reference upickle/core/Util.
@@ -720,6 +765,7 @@ object Value extends AstTransformer[Value]{
 //                                            ^^^ reference scala/Int#
 //                                                   ^^^^^ reference ujson/
 //                                                         ^^^ reference ujson/Num.
+//                                                             reference ujson/Num.apply().
 //                                                             ^ reference ujson/Value.visitFloat64().(d)
 
   def visitString(s: CharSequence, index: Int) = ujson.Str(s.toString)
@@ -730,6 +776,7 @@ object Value extends AstTransformer[Value]{
 //                                        ^^^ reference scala/Int#
 //                                               ^^^^^ reference ujson/
 //                                                     ^^^ reference ujson/Str.
+//                                                         reference ujson/Str.apply().
 //                                                         ^ reference ujson/Value.visitString().(s)
 //                                                           ^^^^^^^^ reference java/lang/Object#toString().
 
@@ -751,6 +798,7 @@ object Value extends AstTransformer[Value]{
     extends Exception(s"$msg (data: $data)")
 //          ^^^^^^^^^ reference scala/package.Exception#
 //                    reference java/lang/Exception#`<init>`(+1).
+//                     reference scala/StringContext.apply().
 //                    ^ reference scala/StringContext#s().
 //                       ^^^ reference ujson/Value.InvalidData#`<init>`().(msg)
 //                                   ^^^^ reference ujson/Value.InvalidData#`<init>`().(data)
@@ -785,9 +833,13 @@ object Obj{
 //                                                            ^^^ reference ujson/Obj#
     Obj(mutable.LinkedHashMap(items.toSeq:_*))
 //  ^^^ reference ujson/Obj.
+//      reference ujson/Obj.apply(+2).
 //      ^^^^^^^ reference scala/collection/mutable/
 //              ^^^^^^^^^^^^^ reference scala/collection/mutable/LinkedHashMap.
+//                            reference scala/collection/MapFactory#apply().
 //                            ^^^^^ reference ujson/Obj.from().(items)
+//                                  reference scala/collection/IterableOnce.
+//                                  reference scala/collection/IterableOnce.iterableOnceExtensionMethods().
 //                                  ^^^^^ reference scala/collection/IterableOnceExtensionMethods#toSeq().
   }
   // Weird telescoped version of `apply(items: (String, Value)*)`, to avoid
@@ -821,6 +873,7 @@ object Obj{
 //          ^^^^ reference ujson/Obj.apply().(item)
 //               ^^ reference scala/Tuple2#_1.
 //                   ^^^^ reference ujson/Obj.apply().(conv)
+//                        reference scala/Function1#apply().
 //                        ^^^^ reference ujson/Obj.apply().(item)
 //                             ^^ reference scala/Tuple2#_2.
     for (i <- items) map.put(i._1, i._2)
@@ -832,8 +885,11 @@ object Obj{
 //                             ^^ reference scala/Tuple2#_1.
 //                                 ^ reference local18
 //                                   ^^ reference scala/Tuple2#_2.
+//                                       reference scala/collection/IterableOnceOps#foreach().
+//                                       reference local18
     Obj(map)
 //  ^^^ reference ujson/Obj.
+//      reference ujson/Obj.apply(+2).
 //      ^^^ reference local17
   }
 
@@ -841,6 +897,7 @@ object Obj{
 //    ^^^^^ definition ujson/Obj.apply(+1).
 //             ^^^ reference ujson/Obj#
 //                   ^^^ reference ujson/Obj.
+//                       reference ujson/Obj.apply(+2).
 //                           ^^^^^^^ reference scala/collection/mutable/
 //                                   ^^^^^^^^^^^^^ reference scala/collection/mutable/LinkedHashMap#
 //                                                 ^^^^^^ reference scala/Predef.String#
@@ -876,17 +933,21 @@ object Arr{
 //                                           reference scala/collection/mutable/ArrayBuffer#`<init>`(+1).
     items.foreach{ item =>
 //  ^^^^^ reference ujson/Arr.from().(items)
+//        reference scala/collection/IterableOnce.
+//        reference scala/collection/IterableOnce.iterableOnceExtensionMethods().
 //        ^^^^^^^ reference scala/collection/IterableOnceExtensionMethods#foreach().
 //                 ^^^^ definition local20
       buf += (conv(item): Value)
 //    ^^^ reference local19
 //        ^^ reference scala/collection/mutable/Growable#`+=`().
 //            ^^^^ reference ujson/Arr.from().(conv)
+//                 reference scala/Function1#apply().
 //                 ^^^^ reference local20
 //                        ^^^^^ reference ujson/Value#
     }
     Arr(buf)
 //  ^^^ reference ujson/Arr.
+//      reference ujson/Arr.apply(+1).
 //      ^^^ reference local19
   }
 
@@ -914,6 +975,7 @@ object Arr{
     }
     Arr(buf)
 //  ^^^ reference ujson/Arr.
+//      reference ujson/Arr.apply(+1).
 //      ^^^ reference local21
   }
 }
@@ -950,6 +1012,7 @@ object Bool{
 //                         ^^^^^^ reference scala/Option#
 //                                ^^^^^^^ reference scala/Boolean#
 //                                           ^^^^ reference scala/Some.
+//                                                reference scala/Some.apply().
 //                                                ^^^^ reference ujson/Bool.unapply().(bool)
 //                                                     ^^^^^ reference ujson/Bool#value().
 }

@@ -7,6 +7,7 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -189,15 +190,28 @@ public class LsifSemanticdb {
 
   private Stream<LsifTextDocument> parseTextDocument(Path semanticdbPath) {
     try {
-      CodedInputStream in = CodedInputStream.newInstance(Files.readAllBytes(semanticdbPath));
-      in.setRecursionLimit(1000);
-      return Semanticdb.TextDocuments.parseFrom(in).getDocumentsList().stream()
+      return textDocumentsParseFrom(semanticdbPath).getDocumentsList().stream()
           .filter(sdb -> !sdb.getOccurrencesList().isEmpty())
           .map(sdb -> new LsifTextDocument(semanticdbPath, sdb, options.sourceroot));
     } catch (IOException e) {
       options.reporter.error("invalid protobuf: " + semanticdbPath);
       options.reporter.error(e);
       return Stream.empty();
+    }
+  }
+
+  private Semanticdb.TextDocuments textDocumentsParseFrom(Path semanticdbPath) throws IOException {
+    byte[] bytes = Files.readAllBytes(semanticdbPath);
+    try {
+      CodedInputStream in = CodedInputStream.newInstance(bytes);
+      in.setRecursionLimit(1000);
+      return Semanticdb.TextDocuments.parseFrom(in);
+    } catch (NoSuchMethodError ignored) {
+      // NOTE(olafur): For some reason, NoSuchMethodError gets thrown when running `snapshots/run`
+      // in the sbt build. I'm unable to reproduce the error in `snapshots/test` or when running the
+      // published version
+      // of `lsif-java index`.
+      return Semanticdb.TextDocuments.parseFrom(bytes);
     }
   }
 }
