@@ -409,7 +409,7 @@ lazy val testSettings = List(
   testFrameworks := List(new TestFramework("munit.Framework")),
   libraryDependencies ++=
     List(
-      "org.scalameta" %% "munit" % "0.7.27",
+      "org.scalameta" %% "munit" % "0.7.29",
       "org.scalameta" %% "mtags" % V.metals cross CrossVersion.full,
       "com.dimafeng" %% "testcontainers-scala-munit" % V.testcontainers,
       "com.dimafeng" %% "testcontainers-scala-postgresql" % V.testcontainers,
