@@ -166,6 +166,7 @@ trait ReadableLowPri{
 //                                 ^ reference local5
 //                                      ^ reference local5
 //                                          ^^^^ reference ujson/ReadableLowPri#fromReadable().(conv)
+//                                               reference scala/Function1#apply().
 //                                               ^ reference ujson/ReadableLowPri#fromReadable().(s)
 //                                                  ^^^^^^^^^^^^^^^^ reference geny/Readable#readBytesThrough().
 //                                                                   ^^^^^^^^^^^^^^^^^ reference ujson/InputStreamParser.

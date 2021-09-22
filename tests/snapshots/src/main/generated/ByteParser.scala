@@ -144,6 +144,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     val (value, i) = parseTopLevel(0, facade)
 //       ^^^^^ definition local0
 //              ^ definition local1
+//                 reference scala/Tuple2.apply().
 //                   ^^^^^^^^^^^^^ reference ujson/ByteParser#parseTopLevel().
 //                                    ^^^^^^ reference ujson/ByteParser#parse().(facade)
     var j = i
@@ -208,6 +209,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //        ^^^^^^^^^^^^^^^^^ reference scala/Predef.ArrayCharSequence#
 //                          reference scala/Predef.ArrayCharSequence#`<init>`().
 //                          ^^^^^ reference scala/Array.
+//                                reference scala/Array.apply(+4).
 //                                ^^^^^^^ reference ujson/ByteParser#elemOps.
 //                                        ^^^^^ reference upickle/core/ByteOps.toInt().
 //                                              ^^^^^^^^^^^ reference ujson/ByteParser#getByteSafe().
@@ -218,12 +220,14 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     )
     val s = "%s got %s" format (msg, out.makeString())
 //      ^ definition local5
+//                      reference scala/Predef.augmentString().
 //                      ^^^^^^ reference scala/collection/StringOps#format().
 //                              ^^^ reference ujson/ByteParser#die().(msg)
 //                                   ^^^ reference local4
 //                                       ^^^^^^^^^^ reference upickle/core/ByteBuilder#makeString().
     throw ParseException(s, i)
 //        ^^^^^^^^^^^^^^ reference ujson/ParseException.
+//                       reference ujson/ParseException.apply().
 //                       ^ reference local5
 //                          ^ reference ujson/ByteParser#die().(i)
   }
@@ -898,6 +902,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     catch reject(i)
 //        ^^^^^^ reference ujson/ByteParser#reject().
 //               ^ reference ujson/ByteParser#parseTopLevel().(i)
+//                  reference scala/Function1#apply().
   }
   /**
    * Parse and return the next JSON value and the position beyond it.
@@ -1007,6 +1012,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                                    ^ reference ujson/ByteParser#reject().(j)
 //                                               ^ reference local21
   }
+//  reference scala/Function1#apply().
   /**
    * Tail-recursive parsing method to do the bulk of JSON parsing.
    *
@@ -1070,6 +1076,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                                            ^^^^^^^^^ reference ujson/ByteParser#parseNested().(stackHead)
 //                                                             ^^^^^^ reference ujson/ByteParser#reject().
 //                                                                    ^ reference ujson/ByteParser#parseNested().(i)
+//                                                                       reference scala/Function1#apply().
             parseNested(COLON, nextJ, stackHead, stackTail)
 //          ^^^^^^^^^^^ reference ujson/ByteParser#parseNested().
 //                      ^^^^^ reference ujson/ByteParser#COLON.
@@ -1087,6 +1094,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                                              ^^^^^^^^^ reference ujson/ByteParser#parseNested().(stackHead)
 //                                                               ^^^^^^ reference ujson/ByteParser#reject().
 //                                                                      ^ reference ujson/ByteParser#parseNested().(i)
+//                                                                         reference scala/Function1#apply().
             parseNested(collectionEndFor(stackHead), nextJ, stackHead, stackTail)
 //          ^^^^^^^^^^^ reference ujson/ByteParser#parseNested().
 //                      ^^^^^^^^^^^^^^^^ reference ujson/ByteParser#collectionEndFor().
@@ -1137,6 +1145,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
           catch reject(i)
 //              ^^^^^^ reference ujson/ByteParser#reject().
 //                     ^ reference ujson/ByteParser#parseNested().(i)
+//                        reference scala/Function1#apply().
         parseNested(ARRBEG, i + 1, ctx, stackHead :: stackTail)
 //      ^^^^^^^^^^^ reference ujson/ByteParser#parseNested().
 //                  ^^^^^^ reference ujson/ByteParser#ARRBEG.
@@ -1165,6 +1174,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
           catch reject(i)
 //              ^^^^^^ reference ujson/ByteParser#reject().
 //                     ^ reference ujson/ByteParser#parseNested().(i)
+//                        reference scala/Function1#apply().
         parseNested(OBJBEG, i + 1, ctx, stackHead :: stackTail)
 //      ^^^^^^^^^^^ reference ujson/ByteParser#parseNested().
 //                  ^^^^^^ reference ujson/ByteParser#OBJBEG.
@@ -1195,6 +1205,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
           catch reject(i)
 //              ^^^^^^ reference ujson/ByteParser#reject().
 //                     ^ reference ujson/ByteParser#parseNested().(i)
+//                        reference scala/Function1#apply().
         parseNested(collectionEndFor(stackHead), ctx, stackHead, stackTail)
 //      ^^^^^^^^^^^ reference ujson/ByteParser#parseNested().
 //                  ^^^^^^^^^^^^^^^^ reference ujson/ByteParser#collectionEndFor().
@@ -1226,6 +1237,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
         catch reject(i)
 //            ^^^^^^ reference ujson/ByteParser#reject().
 //                   ^ reference ujson/ByteParser#parseNested().(i)
+//                      reference scala/Function1#apply().
         parseNested(collectionEndFor(stackHead), i + 4, stackHead, stackTail)
 //      ^^^^^^^^^^^ reference ujson/ByteParser#parseNested().
 //                  ^^^^^^^^^^^^^^^^ reference ujson/ByteParser#collectionEndFor().
@@ -1258,6 +1270,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
         catch reject(i)
 //            ^^^^^^ reference ujson/ByteParser#reject().
 //                   ^ reference ujson/ByteParser#parseNested().(i)
+//                      reference scala/Function1#apply().
         parseNested(collectionEndFor(stackHead), i + 5, stackHead, stackTail)
 //      ^^^^^^^^^^^ reference ujson/ByteParser#parseNested().
 //                  ^^^^^^^^^^^^^^^^ reference ujson/ByteParser#collectionEndFor().
@@ -1290,6 +1303,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
         catch reject(i)
 //            ^^^^^^ reference ujson/ByteParser#reject().
 //                   ^ reference ujson/ByteParser#parseNested().(i)
+//                      reference scala/Function1#apply().
         parseNested(collectionEndFor(stackHead), i + 4, stackHead, stackTail)
 //      ^^^^^^^^^^^ reference ujson/ByteParser#parseNested().
 //                  ^^^^^^^^^^^^^^^^ reference ujson/ByteParser#collectionEndFor().
@@ -1436,6 +1450,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     die(i, s"expected $expected")
 //  ^^^ reference ujson/ByteParser#die().
 //      ^ reference ujson/ByteParser#dieWithFailureMessage().(i)
+//          reference scala/StringContext.apply().
 //         ^ reference scala/StringContext#s().
 //                     ^^^^^^^^ reference local34
   }
@@ -1472,13 +1487,16 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                ^^^^^^^ reference scala/collection/immutable/List#isEmpty().
       Some(try stackHead.visitEnd(i) catch reject(i), i + 1)
 //    ^^^^ reference scala/Some.
+//         reference scala/Some.apply().
 //             ^^^^^^^^^ reference ujson/ByteParser#tryCloseCollection().(stackHead)
 //                       ^^^^^^^^ reference upickle/core/ObjArrVisitor#visitEnd().
 //                                ^ reference ujson/ByteParser#tryCloseCollection().(i)
 //                                         ^^^^^^ reference ujson/ByteParser#reject().
 //                                                ^ reference ujson/ByteParser#tryCloseCollection().(i)
+//                                                   reference scala/Function1#apply().
 //                                                    ^ reference ujson/ByteParser#tryCloseCollection().(i)
 //                                                      ^ reference scala/Int#`+`(+4).
+//                                                           reference scala/Tuple2.apply().
     } else {
       val ctxt2 = stackTail.head.narrow
 //        ^^^^^ definition local35
@@ -1494,6 +1512,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                                                ^ reference ujson/ByteParser#tryCloseCollection().(i)
 //                                                         ^^^^^^ reference ujson/ByteParser#reject().
 //                                                                ^ reference ujson/ByteParser#tryCloseCollection().(i)
+//                                                                   reference scala/Function1#apply().
       None
 //    ^^^^ reference scala/None.
 
@@ -1540,6 +1559,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //          ^ reference scala/Int#`<`(+2).
 //                 ^^^ reference ujson/ByteParser#die().
 //                     ^ reference local36
+//                         reference scala/StringContext.apply().
 //                        ^ reference scala/StringContext#s().
 //                                          ^ reference local37
       if (c == '\\' || c > 127) return -1 - j
@@ -1591,6 +1611,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //          ^ reference scala/Int#`<`(+2).
 //                 ^^^ reference ujson/ByteParser#die().
 //                     ^ reference local38
+//                         reference scala/StringContext.apply().
 //                        ^ reference scala/StringContext#s().
 //                                          ^ reference local39
       else if (c == '\\') {
@@ -1662,6 +1683,7 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                  ^^^ reference ujson/ByteParser#die().
 //                      ^ reference local38
 //                        ^ reference scala/Int#`+`(+4).
+//                              reference scala/StringContext.apply().
 //                             ^ reference scala/StringContext#s().
         }
       } else {

@@ -37,11 +37,40 @@ public class LsifTextDocument {
   }
 
   public List<Semanticdb.SymbolOccurrence> sortedSymbolOccurrences() {
+    return LsifTextDocument.sortedSymbolOccurrences(semanticdb);
+  }
+
+  public static List<Semanticdb.SymbolOccurrence> sortedSymbolOccurrences(
+      Semanticdb.TextDocument semanticdb) {
     ArrayList<Semanticdb.SymbolOccurrence> result =
         new ArrayList<>(semanticdb.getOccurrencesList().size());
     result.addAll(semanticdb.getOccurrencesList());
+    for (Semanticdb.Synthetic synthetic : semanticdb.getSyntheticsList()) {
+      addAllSyntheticOccurrences(synthetic, result);
+    }
     result.sort((o1, o2) -> new RangeComparator().compare(o1.getRange(), o2.getRange()));
     return result;
+  }
+
+  private static void addAllSyntheticOccurrences(
+      Semanticdb.Synthetic synthetic, ArrayList<Semanticdb.SymbolOccurrence> buffer) {
+    Semanticdb.Range offsetRange =
+        Semanticdb.Range.newBuilder(synthetic.getRange())
+            .setStartLine(synthetic.getRange().getEndLine())
+            .setStartCharacter(synthetic.getRange().getEndCharacter())
+            .build();
+    new SemanticdbTreeVisitor() {
+      @Override
+      void visitIdTree(Semanticdb.IdTree tree) {
+        Semanticdb.SymbolOccurrence syntheticOccurrence =
+            Semanticdb.SymbolOccurrence.newBuilder()
+                .setRange(offsetRange)
+                .setSymbol(tree.getSymbol())
+                .setRole(Semanticdb.SymbolOccurrence.Role.REFERENCE)
+                .build();
+        buffer.add(syntheticOccurrence);
+      }
+    }.visitTree(synthetic.getTree());
   }
 
   private void setSemanticdb(Semanticdb.TextDocument semanticdb) {

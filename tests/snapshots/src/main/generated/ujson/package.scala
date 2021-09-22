@@ -107,6 +107,7 @@ package object ujson{
 //  ^^^^^^^^^ reference ujson/package.transform().
 //            ^ reference ujson/package.writeTo().(t)
 //               ^^^^^^^^ reference ujson/Renderer.
+//                        reference ujson/Renderer.apply().
 //                        ^^^ reference ujson/package.writeTo().(out)
 //                             ^^^^^^ reference ujson/package.writeTo().(indent)
 //                                     ^^^^^^^^^^^^^ reference ujson/package.writeTo().(escapeUnicode)
@@ -227,6 +228,7 @@ package object ujson{
 //  ^^^^^^^^^ reference ujson/package.transform().
 //            ^ reference ujson/package.reformatTo().(s)
 //               ^^^^^^^^ reference ujson/Renderer.
+//                        reference ujson/Renderer.apply().
 //                        ^^^ reference ujson/package.reformatTo().(out)
 //                             ^^^^^^ reference ujson/package.reformatTo().(indent)
 //                                     ^^^^^^^^^^^^^ reference ujson/package.reformatTo().(escapeUnicode)

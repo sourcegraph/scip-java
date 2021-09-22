@@ -313,7 +313,8 @@ lazy val minimizedScala = project
   .in(file("tests/minimized-scala"))
   .settings(
     (publish / skip) := true,
-    semanticdbOptions ++= List("-P:semanticdb:text:on")
+    semanticdbOptions ++=
+      List("-P:semanticdb:text:on", "-P:semanticdb:synthetics:on")
   )
   .dependsOn(minimized)
 

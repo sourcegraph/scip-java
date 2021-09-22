@@ -26,6 +26,7 @@ message TextDocument {
   Language language = 10;
   repeated SymbolInformation symbols = 5;
   repeated SymbolOccurrence occurrences = 6;
+  repeated Synthetic synthetics = 12;
 }
 
 enum Language {
@@ -267,13 +268,21 @@ message RepeatedType {
   Type tpe = 1;
 }
 
+message Synthetic {
+  Range range = 1;
+  Tree tree = 2;
+}
+
 message Tree {
   oneof sealed_value {
     ApplyTree apply_tree = 1;
+    FunctionTree function_tree = 2;
     IdTree id_tree = 3;
     LiteralTree literal_tree = 4;
+    MacroExpansionTree macro_expansion_tree = 5;
     OriginalTree original_tree = 6;
     SelectTree select_tree = 7;
+    TypeApplyTree type_apply_tree = 8;
     // -- OUT OF SPEC -- //
     AnnotationTree annotation_tree = 9;
     AssignTree assign_tree = 10;
@@ -287,21 +296,38 @@ message ApplyTree {
   repeated Tree arguments = 2;
 }
 
+
+message FunctionTree {
+  repeated IdTree parameters = 1;
+  Tree body = 2;
+}
+
 message IdTree {
   string symbol = 1;
+}
+
+
+message LiteralTree {
+  Constant constant = 1;
+}
+
+message MacroExpansionTree {
+  Tree before_expansion = 1;
+  Type tpe = 2;
 }
 
 message OriginalTree {
   Range range = 1;
 }
 
-message LiteralTree {
-  Constant constant = 1;
-}
-
 message SelectTree {
   Tree qualifier = 1;
   IdTree id = 2;
+}
+
+message TypeApplyTree {
+  Tree function = 1;
+  repeated Type type_arguments = 2;
 }
 
 // -- OUT OF SPEC -- //
