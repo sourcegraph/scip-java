@@ -11,8 +11,6 @@ This page documents tips and tricks for contributing to the
 
 - `java`: any version should work
 - `git`: any version should work
-- `lsif-semanticdb`:
-  `go get github.com/sourcegraph/lsif-semanticdb/cmd/lsif-semanticdb`
 - `gradle`: `brew install gradle`, or see
   [general installation guide](https://gradle.org/install/).
 - `mvn`: `brew install maven`, or see
