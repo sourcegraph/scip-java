@@ -1,6 +1,8 @@
 package com.sourcegraph.lsif_java.buildtools
 
-import java.io.{File, FileOutputStream, IOException}
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.net.URLClassLoader
 import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
@@ -16,14 +18,19 @@ import java.util.Collections
 import java.util.Optional
 import java.util.ServiceLoader
 import java.util.concurrent.TimeUnit
+import java.util.jar.JarFile
+
 import scala.collection.mutable.ListBuffer
 import scala.jdk.CollectionConverters._
+import scala.language.postfixOps
 import scala.util.Failure
 import scala.util.Success
 import scala.util.Try
 import scala.util.control.NonFatal
+
 import scala.meta.pc.PresentationCompiler
 import scala.meta.pc.PresentationCompilerConfig
+
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.lsif_java.BuildInfo
 import com.sourcegraph.lsif_java.Dependencies
@@ -44,20 +51,15 @@ import moped.reporters.Diagnostic
 import moped.reporters.Input
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
 import org.jetbrains.kotlin.cli.common.arguments.ParseCommandLineArgumentsKt.parseCommandLineArguments
-import org.jetbrains.kotlin.cli.common.messages.{
-  CompilerMessageSeverity,
-  CompilerMessageSourceLocation,
-  MessageCollector,
-  MessageRenderer
-}
+import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
+import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSourceLocation
+import org.jetbrains.kotlin.cli.common.messages.MessageCollector
+import org.jetbrains.kotlin.cli.common.messages.MessageRenderer
 import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler
 import org.jetbrains.kotlin.config.Services
 import os.CommandResult
 import os.ProcessOutput.Readlines
 import os.SubprocessException
-
-import java.util.jar.JarFile
-import scala.language.postfixOps
 
 /**
  * A custom build tool that is specifically made for lsif-java.

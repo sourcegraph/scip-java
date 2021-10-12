@@ -9,13 +9,13 @@ import java.nio.file.StandardOpenOption
 import java.util.jar.JarFile
 
 import com.sourcegraph.io.AbsolutePath
+import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.lsif_java.Dependencies
 import com.sourcegraph.lsif_semanticdb.JavaVersion
-import moped.cli.Command
-import moped.cli.CommandParser
 import moped.annotations.DeprecatedName
 import moped.annotations.Hidden
-import com.sourcegraph.io.DeleteVisitor
+import moped.cli.Command
+import moped.cli.CommandParser
 
 final case class IndexDependencyCommand(
     @DeprecatedName("target", "Use --output instead", "0.6.10") output: Path =
