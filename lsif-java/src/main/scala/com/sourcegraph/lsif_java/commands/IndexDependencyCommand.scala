@@ -13,15 +13,18 @@ import com.sourcegraph.lsif_java.Dependencies
 import com.sourcegraph.lsif_semanticdb.JavaVersion
 import moped.cli.Command
 import moped.cli.CommandParser
+import moped.annotations.DeprecatedName
 
 final case class IndexDependencyCommand(
-    target: Path = Paths.get("maven"),
+    @DeprecatedName("target", "Use --output instead", "0.6.10") output: Path =
+      Paths.get("maven"),
     index: IndexCommand = IndexCommand(),
-    dependency: String = ""
+    dependency: String = "",
+    provided: List[String] = Nil
 ) extends Command {
   def app = index.app
   private val absoluteTarget = AbsolutePath
-    .of(target, app.env.workingDirectory)
+    .of(output, app.env.workingDirectory)
     .resolve(dependency.replace(":", "__"))
   def run(): Int = {
     if (dependency == "") {
@@ -29,7 +32,7 @@ final case class IndexDependencyCommand(
       1
     } else {
       val deps = Dependencies
-        .resolveDependencies(List(dependency), transitive = false)
+        .resolveDependencies(dependency :: provided, transitive = false)
       deps.sources.headOption match {
         case Some(sources) =>
           unzipJar(sources)
@@ -39,8 +42,10 @@ final case class IndexDependencyCommand(
                 JavaVersion.classfileJvmVersion(classpath).orElse(8)
               ) match {
                 case Some(jvmVersion) =>
+                  val roundedVersion = JavaVersion
+                    .roundToNearestStableRelease(jvmVersion)
                   val config =
-                    s"""{"kind":"maven","jvm":"$jvmVersion","dependencies":["$dependency"]}"""
+                    s"""{"kind":"maven","jvm":"${roundedVersion}","dependencies":["$dependency"]}"""
                   Files.createDirectories(absoluteTarget)
                   Files.write(
                     absoluteTarget.resolve("lsif-java.json"),
@@ -71,7 +76,6 @@ final case class IndexDependencyCommand(
           app.reporter.error(s"no sources for dependency '$dependency'")
           1
       }
-      1
     }
   }
 

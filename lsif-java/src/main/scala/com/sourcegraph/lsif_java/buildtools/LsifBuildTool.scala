@@ -163,10 +163,14 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
       return CommandResult(0, Nil)
     }
 
-    val errors = ListBuffer.empty[Try[Unit]]
-    errors += compileJavaFiles(tmp, deps, config, javaFiles)
-    errors += compileScalaFiles(deps, scalaFiles)
-    errors += compileKotlinFiles(deps, config, kotlinFiles)
+    val compileAttemtps = ListBuffer.empty[Try[Unit]]
+    compileAttemtps += compileJavaFiles(tmp, deps, config, javaFiles)
+    compileAttemtps += compileScalaFiles(deps, scalaFiles)
+    compileAttemtps += compileKotlinFiles(deps, config, kotlinFiles)
+    val errors = compileAttemtps.collect { case Failure(exception) =>
+      exception
+    }
+
     if (index.cleanup) {
       Files.walkFileTree(tmp, new DeleteVisitor)
     }
@@ -182,9 +186,11 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
           .info(
             "Some SemanticDB files got generated even if there were compile errors. " +
               "In most cases, this means that lsif-java managed to index everything " +
-              "except the locations that had compile errors and you can ignore the compile errors.\n" +
-              errors.mkString("\n")
+              "except the locations that had compile errors and you can ignore the compile errors."
           )
+        errors.foreach { error =>
+          index.app.reporter.info(error.getMessage())
+        }
       }
       CommandResult(0, Nil)
     }
@@ -282,9 +288,6 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
 
     parseCommandLineArguments(args.asJava, kargs)
 
-    if (true)
-      println(s"ARGS ${args.mkString(" ")}")
-
     val exit = new K2JVMCompiler().exec(
       new MessageCollector {
         private val errors = new util.LinkedList[String]
@@ -305,7 +308,7 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
           val msg = MessageRenderer
             .PLAIN_FULL_PATHS
             .render(compilerMessageSeverity, s, compilerMessageSourceLocation)
-          System.err.println(msg)
+          index.app.reporter.debug(msg)
           errors.push(msg)
         }
       },
