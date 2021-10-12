@@ -184,7 +184,6 @@ public class DiffResult {
 //                               ^^^^^^^ definition local9 unresolved_type adapter
     dispatchTo(new AdapterListUpdateCallback(adapter));
 //  ^^^^^^^^^^ reference com/airbnb/epoxy/DiffResult#dispatchTo().
-//                 ^^^^^^^^^^^^^^^^^^^^^^^^^ reference `<init>`#
 //                                           ^^^^^^^ reference local9
   }
 

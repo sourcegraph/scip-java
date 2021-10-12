@@ -292,7 +292,7 @@ public class StringAttributeData {
 
     return Arrays.equals(formatArgs, that.formatArgs);
 //         ^^^^^^ reference java/util/Arrays#
-//                ^^^^^^ reference java/util/Arrays#equals(+16).
+//                ^^^^^^ reference java/util/Arrays#equals(+8).
 //                       ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#formatArgs.
 //                                   ^^^^ reference local11
 //                                        ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#formatArgs.

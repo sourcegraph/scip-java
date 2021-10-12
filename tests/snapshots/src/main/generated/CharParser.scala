@@ -38,27 +38,27 @@ import scala.annotation.{switch, tailrec}
   * to construct the `CharSequences` that `visitString` requires, etc.
   */
 abstract class CharParser[J] extends upickle.core.BufferingCharParser{
-//             ^^^^^^^^^^ definition ujson/CharParser#
-//                        ^ definition ujson/CharParser#[J]
-//                            definition ujson/CharParser#`<init>`().
+//             ^^^^^^^^^^ definition ujson/CharParser# abstract class CharParser[J]
+//                        ^ definition ujson/CharParser#[J] J
+//                            definition ujson/CharParser#`<init>`(). def this()
 //                                   ^^^^^^^ reference upickle/
 //                                           ^^^^ reference upickle/core/
 //                                                ^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#
   private[this] val elemOps = upickle.core.CharOps
-//                  ^^^^^^^ definition ujson/CharParser#elemOps.
+//                  ^^^^^^^ definition ujson/CharParser#elemOps. private[this] val elemOps:
 //                            ^^^^^^^ reference upickle/
 //                                    ^^^^ reference upickle/core/
 //                                         ^^^^^^^ reference upickle/core/CharOps.
   private[this] val outputBuilder = new upickle.core.CharBuilder()
-//                  ^^^^^^^^^^^^^ definition ujson/CharParser#outputBuilder.
+//                  ^^^^^^^^^^^^^ definition ujson/CharParser#outputBuilder. private[this] val outputBuilder: CharBuilder
 //                                      ^^^^^^^ reference upickle/
 //                                              ^^^^ reference upickle/core/
 //                                                   ^^^^^^^^^^^ reference upickle/core/CharBuilder#
 //                                                               reference upickle/core/CharBuilder#`<init>`().
 
   def requestUntilOrThrow(i: Int) = {
-//    ^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#requestUntilOrThrow().
-//                        ^ definition ujson/CharParser#requestUntilOrThrow().(i)
+//    ^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#requestUntilOrThrow(). def requestUntilOrThrow(i: Int): Unit
+//                        ^ definition ujson/CharParser#requestUntilOrThrow().(i) i: Int
 //                           ^^^ reference scala/Int#
     if (requestUntil(i)) throw new IncompleteParseException("exhausted input")
 //      ^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#requestUntil().
@@ -67,8 +67,8 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                                                          reference ujson/IncompleteParseException#`<init>`().
   }
   override def getCharSafe(i: Int): Char = {
-//             ^^^^^^^^^^^ definition ujson/CharParser#getCharSafe().
-//                         ^ definition ujson/CharParser#getCharSafe().(i)
+//             ^^^^^^^^^^^ definition ujson/CharParser#getCharSafe(). def getCharSafe(i: Int): Char
+//                         ^ definition ujson/CharParser#getCharSafe().(i) i: Int
 //                            ^^^ reference scala/Int#
 //                                  ^^^^ reference scala/Char#
     requestUntilOrThrow(i)
@@ -83,8 +83,8 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * Return true iff 'i' is at or beyond the end of the input (EOF).
    */
   protected[this] def atEof(i: Int) = requestUntil(i)
-//                    ^^^^^ definition ujson/CharParser#atEof().
-//                          ^ definition ujson/CharParser#atEof().(i)
+//                    ^^^^^ definition ujson/CharParser#atEof(). def atEof(i: Int): Boolean
+//                          ^ definition ujson/CharParser#atEof().(i) i: Int
 //                             ^^^ reference scala/Int#
 //                                    ^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#requestUntil().
 //                                                 ^ reference ujson/CharParser#atEof().(i)
@@ -93,7 +93,7 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * Should be called when parsing is finished.
    */
   protected[this] def close(): Unit
-//                    ^^^^^ definition ujson/CharParser#close().
+//                    ^^^^^ definition ujson/CharParser#close(). def close(): Unit
 //                             ^^^^ reference scala/Unit#
 
   /**
@@ -102,31 +102,31 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
   @inline private[this] final val ARRBEG = 6
 // ^^^^^^ reference scala/inline#
 //         reference scala/inline#`<init>`().
-//                                ^^^^^^ definition ujson/CharParser#ARRBEG.
+//                                ^^^^^^ definition ujson/CharParser#ARRBEG. @inline private[this] final val ARRBEG: 6
   @inline private[this] final val OBJBEG = 7
 // ^^^^^^ reference scala/inline#
 //         reference scala/inline#`<init>`().
-//                                ^^^^^^ definition ujson/CharParser#OBJBEG.
+//                                ^^^^^^ definition ujson/CharParser#OBJBEG. @inline private[this] final val OBJBEG: 7
   @inline private[this] final val DATA = 1
 // ^^^^^^ reference scala/inline#
 //         reference scala/inline#`<init>`().
-//                                ^^^^ definition ujson/CharParser#DATA.
+//                                ^^^^ definition ujson/CharParser#DATA. @inline private[this] final val DATA: 1
   @inline private[this] final val KEY = 2
 // ^^^^^^ reference scala/inline#
 //         reference scala/inline#`<init>`().
-//                                ^^^ definition ujson/CharParser#KEY.
+//                                ^^^ definition ujson/CharParser#KEY. @inline private[this] final val KEY: 2
   @inline private[this] final val COLON = 3
 // ^^^^^^ reference scala/inline#
 //         reference scala/inline#`<init>`().
-//                                ^^^^^ definition ujson/CharParser#COLON.
+//                                ^^^^^ definition ujson/CharParser#COLON. @inline private[this] final val COLON: 3
   @inline private[this] final val ARREND = 4
 // ^^^^^^ reference scala/inline#
 //         reference scala/inline#`<init>`().
-//                                ^^^^^^ definition ujson/CharParser#ARREND.
+//                                ^^^^^^ definition ujson/CharParser#ARREND. @inline private[this] final val ARREND: 4
   @inline private[this] final val OBJEND = 5
 // ^^^^^^ reference scala/inline#
 //         reference scala/inline#`<init>`().
-//                                ^^^^^^ definition ujson/CharParser#OBJEND.
+//                                ^^^^^^ definition ujson/CharParser#OBJEND. @inline private[this] final val OBJEND: 5
 
   /**
     * Parse the JSON document into a single JSON value.
@@ -136,59 +136,58 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
     * multiple top-level objects are not allowed.
     */
   final def parse(facade: Visitor[_, J]): J = {
-//          ^^^^^ definition ujson/CharParser#parse().
-//                ^^^^^^ definition ujson/CharParser#parse().(facade)
+//          ^^^^^ definition ujson/CharParser#parse(). final def parse(facade: Visitor[local0, J[): J
+//                ^^^^^^ definition ujson/CharParser#parse().(facade) facade: Visitor[local0, J[
 //                        ^^^^^^^ reference upickle/core/Visitor#
 //                                   ^ reference ujson/CharParser#[J]
 //                                        ^ reference ujson/CharParser#[J]
     val (value, i) = parseTopLevel(0, facade)
-//       ^^^^^ definition local0
-//              ^ definition local1
-//                 reference scala/Tuple2.apply().
+//       ^^^^^ definition local2 value: J
+//              ^ definition local3 i: Int
 //                   ^^^^^^^^^^^^^ reference ujson/CharParser#parseTopLevel().
 //                                    ^^^^^^ reference ujson/CharParser#parse().(facade)
     var j = i
-//      ^ definition local3
-//          ^ reference local1
+//      ^ definition local4 j: Int
+//          ^ reference local3
     while (!atEof(j)) {
 //         ^ reference scala/Boolean#`unary_!`().
 //          ^^^^^ reference ujson/CharParser#atEof().
-//                ^ reference local3
+//                ^ reference local4
       (getCharSafe(j): @switch) match {
 //     ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                 ^ reference local3
+//                 ^ reference local4
         case '\n' | ' ' | '\t' | '\r' => j += 1
-//                                       ^ reference local3
+//                                       ^ reference local4
 //                                         ^^ reference scala/Int#`+`(+4).
         case _ => die(j, "expected whitespace or eof")
 //                ^^^ reference ujson/CharParser#die().
-//                    ^ reference local3
+//                    ^ reference local4
       }
     }
     if (!atEof(j)) die(j, "expected eof")
 //      ^ reference scala/Boolean#`unary_!`().
 //       ^^^^^ reference ujson/CharParser#atEof().
-//             ^ reference local3
+//             ^ reference local4
 //                 ^^^ reference ujson/CharParser#die().
-//                     ^ reference local3
+//                     ^ reference local4
     close()
 //  ^^^^^ reference ujson/CharParser#close().
     value
-//  ^^^^^ reference local0
+//  ^^^^^ reference local2
   }
 
   /**
    * Used to generate error messages with character info and offsets.
    */
   protected[this] def die(i: Int, msg: String): Nothing = {
-//                    ^^^ definition ujson/CharParser#die().
-//                        ^ definition ujson/CharParser#die().(i)
+//                    ^^^ definition ujson/CharParser#die(). def die(i: Int, msg: String): Nothing
+//                        ^ definition ujson/CharParser#die().(i) i: Int
 //                           ^^^ reference scala/Int#
-//                                ^^^ definition ujson/CharParser#die().(msg)
+//                                ^^^ definition ujson/CharParser#die().(msg) msg: String
 //                                     ^^^^^^ reference scala/Predef.String#
 //                                              ^^^^^^^ reference scala/Nothing#
     val out = new upickle.core.CharBuilder()
-//      ^^^ definition local4
+//      ^^^ definition local6 out: CharBuilder
 //                ^^^^^^^ reference upickle/
 //                        ^^^^ reference upickle/core/
 //                             ^^^^^^^^^^^ reference upickle/core/CharBuilder#
@@ -204,12 +203,11 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                     ^^^^^^^^^^^ reference upickle/core/CharBuilder#
 //                                 reference upickle/core/CharBuilder#`<init>`().
       out,
-//    ^^^ reference local4
+//    ^^^ reference local6
       new ArrayCharSequence(Array(elemOps.toInt(getCharSafe(i)).toChar)),
 //        ^^^^^^^^^^^^^^^^^ reference scala/Predef.ArrayCharSequence#
 //                          reference scala/Predef.ArrayCharSequence#`<init>`().
 //                          ^^^^^ reference scala/Array.
-//                                reference scala/Array.apply(+4).
 //                                ^^^^^^^ reference ujson/CharParser#elemOps.
 //                                        ^^^^^ reference upickle/core/CharOps.toInt().
 //                                              ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
@@ -219,16 +217,14 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //    ^^^^^^^ reference upickle/core/RenderUtils.escapeChar().(unicode)
     )
     val s = "%s got %s" format (msg, out.makeString())
-//      ^ definition local5
-//                      reference scala/Predef.augmentString().
+//      ^ definition local7 s: String
 //                      ^^^^^^ reference scala/collection/StringOps#format().
 //                              ^^^ reference ujson/CharParser#die().(msg)
-//                                   ^^^ reference local4
+//                                   ^^^ reference local6
 //                                       ^^^^^^^^^^ reference upickle/core/CharBuilder#makeString().
     throw ParseException(s, i)
 //        ^^^^^^^^^^^^^^ reference ujson/ParseException.
-//                       reference ujson/ParseException.apply().
-//                       ^ reference local5
+//                       ^ reference local7
 //                          ^ reference ujson/CharParser#die().(i)
   }
 
@@ -243,163 +239,163 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * number.
    */
   protected[this] final def parseNum(i: Int, ctxt: ObjArrVisitor[Any, J], facade: Visitor[_, J]): Int = {
-//                          ^^^^^^^^ definition ujson/CharParser#parseNum().
-//                                   ^ definition ujson/CharParser#parseNum().(i)
+//                          ^^^^^^^^ definition ujson/CharParser#parseNum(). final def parseNum(i: Int, ctxt: ObjArrVisitor[Any, J], facade: Visitor[local8, J[): Int
+//                                   ^ definition ujson/CharParser#parseNum().(i) i: Int
 //                                      ^^^ reference scala/Int#
-//                                           ^^^^ definition ujson/CharParser#parseNum().(ctxt)
+//                                           ^^^^ definition ujson/CharParser#parseNum().(ctxt) ctxt: ObjArrVisitor[Any, J]
 //                                                 ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
 //                                                               ^^^ reference scala/Any#
 //                                                                    ^ reference ujson/CharParser#[J]
-//                                                                        ^^^^^^ definition ujson/CharParser#parseNum().(facade)
+//                                                                        ^^^^^^ definition ujson/CharParser#parseNum().(facade) facade: Visitor[local8, J[
 //                                                                                ^^^^^^^ reference upickle/core/Visitor#
 //                                                                                           ^ reference ujson/CharParser#[J]
 //                                                                                                ^^^ reference scala/Int#
     var j = i
-//      ^ definition local6
+//      ^ definition local9 j: Int
 //          ^ reference ujson/CharParser#parseNum().(i)
     var c = getCharSafe(j)
-//      ^ definition local7
+//      ^ definition local10 c: Char
 //          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local6
+//                      ^ reference local9
     var decIndex = -1
-//      ^^^^^^^^ definition local8
+//      ^^^^^^^^ definition local11 decIndex: Int
     var expIndex = -1
-//      ^^^^^^^^ definition local9
+//      ^^^^^^^^ definition local12 expIndex: Int
 
     if (c == '-') {
-//      ^ reference local7
+//      ^ reference local10
 //        ^^ reference scala/Char#`==`(+2).
       j += 1
-//    ^ reference local6
+//    ^ reference local9
 //      ^^ reference scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local7
+//    ^ reference local10
 //        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local6
+//                    ^ reference local9
     }
     if (c == '0') {
-//      ^ reference local7
+//      ^ reference local10
 //        ^^ reference scala/Char#`==`(+2).
       j += 1
-//    ^ reference local6
+//    ^ reference local9
 //      ^^ reference scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local7
+//    ^ reference local10
 //        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local6
+//                    ^ reference local9
     } else {
       val j0 = j
-//        ^^ definition local10
-//             ^ reference local6
+//        ^^ definition local13 j0: Int
+//             ^ reference local9
       while (elemOps.within('0', c, '9')) {
 //           ^^^^^^^ reference ujson/CharParser#elemOps.
 //                   ^^^^^^ reference upickle/core/CharOps.within().
-//                               ^ reference local7
+//                               ^ reference local10
         j += 1;
-//      ^ reference local6
+//      ^ reference local9
 //        ^^ reference scala/Int#`+`(+4).
         c = getCharSafe(j)
-//      ^ reference local7
+//      ^ reference local10
 //          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local6
+//                      ^ reference local9
       }
       if (j == j0) die(i, "expected digit")
-//        ^ reference local6
+//        ^ reference local9
 //          ^^ reference scala/Int#`==`(+3).
-//             ^^ reference local10
+//             ^^ reference local13
 //                 ^^^ reference ujson/CharParser#die().
 //                     ^ reference ujson/CharParser#parseNum().(i)
     }
 
     if (c == '.') {
-//      ^ reference local7
+//      ^ reference local10
 //        ^^ reference scala/Char#`==`(+2).
       decIndex = j - i
-//    ^^^^^^^^ reference local8
-//               ^ reference local6
+//    ^^^^^^^^ reference local11
+//               ^ reference local9
 //                 ^ reference scala/Int#`-`(+3).
 //                   ^ reference ujson/CharParser#parseNum().(i)
       j += 1
-//    ^ reference local6
+//    ^ reference local9
 //      ^^ reference scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local7
+//    ^ reference local10
 //        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local6
+//                    ^ reference local9
       val j0 = j
-//        ^^ definition local11
-//             ^ reference local6
+//        ^^ definition local15 j0: Int
+//             ^ reference local9
       while (elemOps.within('0', c, '9')) {
 //           ^^^^^^^ reference ujson/CharParser#elemOps.
 //                   ^^^^^^ reference upickle/core/CharOps.within().
-//                               ^ reference local7
+//                               ^ reference local10
         j += 1
-//      ^ reference local6
+//      ^ reference local9
 //        ^^ reference scala/Int#`+`(+4).
         c = getCharSafe(j)
-//      ^ reference local7
+//      ^ reference local10
 //          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local6
+//                      ^ reference local9
       }
       if (j0 == j) die(i, "expected digit")
-//        ^^ reference local11
+//        ^^ reference local15
 //           ^^ reference scala/Int#`==`(+3).
-//              ^ reference local6
+//              ^ reference local9
 //                 ^^^ reference ujson/CharParser#die().
 //                     ^ reference ujson/CharParser#parseNum().(i)
     }
 
     if (c == 'e' || c == 'E') {
-//      ^ reference local7
+//      ^ reference local10
 //        ^^ reference scala/Char#`==`(+2).
 //               ^^ reference scala/Boolean#`||`().
-//                  ^ reference local7
+//                  ^ reference local10
 //                    ^^ reference scala/Char#`==`(+2).
       expIndex = j - i
-//    ^^^^^^^^ reference local9
-//               ^ reference local6
+//    ^^^^^^^^ reference local12
+//               ^ reference local9
 //                 ^ reference scala/Int#`-`(+3).
 //                   ^ reference ujson/CharParser#parseNum().(i)
       j += 1
-//    ^ reference local6
+//    ^ reference local9
 //      ^^ reference scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local7
+//    ^ reference local10
 //        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local6
+//                    ^ reference local9
       if (c == '+' || c == '-') {
-//        ^ reference local7
+//        ^ reference local10
 //          ^^ reference scala/Char#`==`(+2).
 //                 ^^ reference scala/Boolean#`||`().
-//                    ^ reference local7
+//                    ^ reference local10
 //                      ^^ reference scala/Char#`==`(+2).
         j += 1
-//      ^ reference local6
+//      ^ reference local9
 //        ^^ reference scala/Int#`+`(+4).
         c = getCharSafe(j)
-//      ^ reference local7
+//      ^ reference local10
 //          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local6
+//                      ^ reference local9
       }
       val j0 = j
-//        ^^ definition local12
-//             ^ reference local6
+//        ^^ definition local17 j0: Int
+//             ^ reference local9
       while (elemOps.within('0', c, '9')) {
 //           ^^^^^^^ reference ujson/CharParser#elemOps.
 //                   ^^^^^^ reference upickle/core/CharOps.within().
-//                               ^ reference local7
+//                               ^ reference local10
         j += 1
-//      ^ reference local6
+//      ^ reference local9
 //        ^^ reference scala/Int#`+`(+4).
         c = getCharSafe(j)
-//      ^ reference local7
+//      ^ reference local10
 //          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local6
+//                      ^ reference local9
       }
       if (j0 == j)  die(i, "expected digit")
-//        ^^ reference local12
+//        ^^ reference local17
 //           ^^ reference scala/Int#`==`(+3).
-//              ^ reference local6
+//              ^ reference local9
 //                  ^^^ reference ujson/CharParser#die().
 //                      ^ reference ujson/CharParser#parseNum().(i)
     }
@@ -409,31 +405,31 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //       ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#visitValue().
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().
 //                                                     ^^^^^^ reference ujson/CharParser#parseNum().(facade)
-//                                                             ^^^^^^^^ reference local8
-//                                                                       ^^^^^^^^ reference local9
+//                                                             ^^^^^^^^ reference local11
+//                                                                       ^^^^^^^^ reference local12
 //                                                                                 ^ reference ujson/CharParser#parseNum().(i)
-//                                                                                    ^ reference local6
+//                                                                                    ^ reference local9
 //                                                                                        ^ reference ujson/CharParser#parseNum().(i)
     j
-//  ^ reference local6
+//  ^ reference local9
   }
 
   def visitFloat64StringPartsWithWrapper(facade: Visitor[_, J],
-//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().
-//                                       ^^^^^^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(facade)
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper(). def visitFloat64StringPartsWithWrapper(facade: Visitor[local19, J[, decIndex: Int, expIndex: Int, i: Int, j: Int): J
+//                                       ^^^^^^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(facade) facade: Visitor[local19, J[
 //                                               ^^^^^^^ reference upickle/core/Visitor#
 //                                                          ^ reference ujson/CharParser#[J]
                                          decIndex: Int,
-//                                       ^^^^^^^^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(decIndex)
+//                                       ^^^^^^^^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(decIndex) decIndex: Int
 //                                                 ^^^ reference scala/Int#
                                          expIndex: Int,
-//                                       ^^^^^^^^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(expIndex)
+//                                       ^^^^^^^^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(expIndex) expIndex: Int
 //                                                 ^^^ reference scala/Int#
                                          i: Int,
-//                                       ^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(i)
+//                                       ^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(i) i: Int
 //                                          ^^^ reference scala/Int#
                                          j: Int) = {
-//                                       ^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(j)
+//                                       ^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(j) j: Int
 //                                          ^^^ reference scala/Int#
     facade.visitFloat64StringParts(
 //  ^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().(facade)
@@ -468,211 +464,211 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * This method has all the same caveats as the previous method.
    */
   protected[this] final def parseNumTopLevel(i: Int, facade: Visitor[_, J]): (J, Int) = {
-//                          ^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseNumTopLevel().
-//                                           ^ definition ujson/CharParser#parseNumTopLevel().(i)
+//                          ^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseNumTopLevel(). final def parseNumTopLevel(i: Int, facade: Visitor[local20, J[): (J, Int)
+//                                           ^ definition ujson/CharParser#parseNumTopLevel().(i) i: Int
 //                                              ^^^ reference scala/Int#
-//                                                   ^^^^^^ definition ujson/CharParser#parseNumTopLevel().(facade)
+//                                                   ^^^^^^ definition ujson/CharParser#parseNumTopLevel().(facade) facade: Visitor[local20, J[
 //                                                           ^^^^^^^ reference upickle/core/Visitor#
 //                                                                      ^ reference ujson/CharParser#[J]
 //                                                                            ^ reference ujson/CharParser#[J]
 //                                                                               ^^^ reference scala/Int#
     var j = i
-//      ^ definition local13
+//      ^ definition local21 j: Int
 //          ^ reference ujson/CharParser#parseNumTopLevel().(i)
     var c = getCharSafe(j)
-//      ^ definition local14
+//      ^ definition local22 c: Char
 //          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local13
+//                      ^ reference local21
     var decIndex = -1
-//      ^^^^^^^^ definition local15
+//      ^^^^^^^^ definition local23 decIndex: Int
     var expIndex = -1
-//      ^^^^^^^^ definition local16
+//      ^^^^^^^^ definition local24 expIndex: Int
 
     if (c == '-') {
-//      ^ reference local14
+//      ^ reference local22
 //        ^^ reference scala/Char#`==`(+2).
       // any valid input will require at least one digit after -
       j += 1
-//    ^ reference local13
+//    ^ reference local21
 //      ^^ reference scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local14
+//    ^ reference local22
 //        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local13
+//                    ^ reference local21
     }
     if (c == '0') {
-//      ^ reference local14
+//      ^ reference local22
 //        ^^ reference scala/Char#`==`(+2).
       j += 1
-//    ^ reference local13
+//    ^ reference local21
 //      ^^ reference scala/Int#`+`(+4).
       if (atEof(j)) {
 //        ^^^^^ reference ujson/CharParser#atEof().
-//              ^ reference local13
+//              ^ reference local21
         return (visitFloat64StringPartsWithWrapper(facade, decIndex, expIndex, i, j), j)
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().
 //                                                 ^^^^^^ reference ujson/CharParser#parseNumTopLevel().(facade)
-//                                                         ^^^^^^^^ reference local15
-//                                                                   ^^^^^^^^ reference local16
+//                                                         ^^^^^^^^ reference local23
+//                                                                   ^^^^^^^^ reference local24
 //                                                                             ^ reference ujson/CharParser#parseNumTopLevel().(i)
-//                                                                                ^ reference local13
-//                                                                                    ^ reference local13
+//                                                                                ^ reference local21
+//                                                                                    ^ reference local21
       }
       c = getCharSafe(j)
-//    ^ reference local14
+//    ^ reference local22
 //        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local13
+//                    ^ reference local21
     } else {
       val j0 = j
-//        ^^ definition local17
-//             ^ reference local13
+//        ^^ definition local25 j0: Int
+//             ^ reference local21
       while (elemOps.within('0', c, '9')) {
 //           ^^^^^^^ reference ujson/CharParser#elemOps.
 //                   ^^^^^^ reference upickle/core/CharOps.within().
-//                               ^ reference local14
+//                               ^ reference local22
         j += 1
-//      ^ reference local13
+//      ^ reference local21
 //        ^^ reference scala/Int#`+`(+4).
         if (atEof(j)) {
 //          ^^^^^ reference ujson/CharParser#atEof().
-//                ^ reference local13
+//                ^ reference local21
           return (visitFloat64StringPartsWithWrapper(facade, decIndex, expIndex, i, j), j)
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().
 //                                                   ^^^^^^ reference ujson/CharParser#parseNumTopLevel().(facade)
-//                                                           ^^^^^^^^ reference local15
-//                                                                     ^^^^^^^^ reference local16
+//                                                           ^^^^^^^^ reference local23
+//                                                                     ^^^^^^^^ reference local24
 //                                                                               ^ reference ujson/CharParser#parseNumTopLevel().(i)
-//                                                                                  ^ reference local13
-//                                                                                      ^ reference local13
+//                                                                                  ^ reference local21
+//                                                                                      ^ reference local21
         }
         c = getCharSafe(j)
-//      ^ reference local14
+//      ^ reference local22
 //          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local13
+//                      ^ reference local21
       }
       if (j0 == j) die(i, "expected digit")
-//        ^^ reference local17
+//        ^^ reference local25
 //           ^^ reference scala/Int#`==`(+3).
-//              ^ reference local13
+//              ^ reference local21
 //                 ^^^ reference ujson/CharParser#die().
 //                     ^ reference ujson/CharParser#parseNumTopLevel().(i)
     }
 
     if (c == '.') {
-//      ^ reference local14
+//      ^ reference local22
 //        ^^ reference scala/Char#`==`(+2).
       // any valid input will require at least one digit after .
       decIndex = j - i
-//    ^^^^^^^^ reference local15
-//               ^ reference local13
+//    ^^^^^^^^ reference local23
+//               ^ reference local21
 //                 ^ reference scala/Int#`-`(+3).
 //                   ^ reference ujson/CharParser#parseNumTopLevel().(i)
       j += 1
-//    ^ reference local13
+//    ^ reference local21
 //      ^^ reference scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local14
+//    ^ reference local22
 //        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local13
+//                    ^ reference local21
       val j0 = j
-//        ^^ definition local18
-//             ^ reference local13
+//        ^^ definition local27 j0: Int
+//             ^ reference local21
       while (elemOps.within('0', c, '9')) {
 //           ^^^^^^^ reference ujson/CharParser#elemOps.
 //                   ^^^^^^ reference upickle/core/CharOps.within().
-//                               ^ reference local14
+//                               ^ reference local22
         j += 1
-//      ^ reference local13
+//      ^ reference local21
 //        ^^ reference scala/Int#`+`(+4).
         if (atEof(j)) {
 //          ^^^^^ reference ujson/CharParser#atEof().
-//                ^ reference local13
+//                ^ reference local21
           return (visitFloat64StringPartsWithWrapper(facade, decIndex, expIndex, i, j), j)
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().
 //                                                   ^^^^^^ reference ujson/CharParser#parseNumTopLevel().(facade)
-//                                                           ^^^^^^^^ reference local15
-//                                                                     ^^^^^^^^ reference local16
+//                                                           ^^^^^^^^ reference local23
+//                                                                     ^^^^^^^^ reference local24
 //                                                                               ^ reference ujson/CharParser#parseNumTopLevel().(i)
-//                                                                                  ^ reference local13
-//                                                                                      ^ reference local13
+//                                                                                  ^ reference local21
+//                                                                                      ^ reference local21
         }
         c = getCharSafe(j)
-//      ^ reference local14
+//      ^ reference local22
 //          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local13
+//                      ^ reference local21
       }
       if(j0 == j) die(i, "expected digit")
-//       ^^ reference local18
+//       ^^ reference local27
 //          ^^ reference scala/Int#`==`(+3).
-//             ^ reference local13
+//             ^ reference local21
 //                ^^^ reference ujson/CharParser#die().
 //                    ^ reference ujson/CharParser#parseNumTopLevel().(i)
     }
 
     if (c == 'e' || c == 'E') {
-//      ^ reference local14
+//      ^ reference local22
 //        ^^ reference scala/Char#`==`(+2).
 //               ^^ reference scala/Boolean#`||`().
-//                  ^ reference local14
+//                  ^ reference local22
 //                    ^^ reference scala/Char#`==`(+2).
       // any valid input will require at least one digit after e, e+, etc
       expIndex = j - i
-//    ^^^^^^^^ reference local16
-//               ^ reference local13
+//    ^^^^^^^^ reference local24
+//               ^ reference local21
 //                 ^ reference scala/Int#`-`(+3).
 //                   ^ reference ujson/CharParser#parseNumTopLevel().(i)
       j += 1
-//    ^ reference local13
+//    ^ reference local21
 //      ^^ reference scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local14
+//    ^ reference local22
 //        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local13
+//                    ^ reference local21
       if (c == '+' || c == '-') {
-//        ^ reference local14
+//        ^ reference local22
 //          ^^ reference scala/Char#`==`(+2).
 //                 ^^ reference scala/Boolean#`||`().
-//                    ^ reference local14
+//                    ^ reference local22
 //                      ^^ reference scala/Char#`==`(+2).
         j += 1
-//      ^ reference local13
+//      ^ reference local21
 //        ^^ reference scala/Int#`+`(+4).
         c = getCharSafe(j)
-//      ^ reference local14
+//      ^ reference local22
 //          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local13
+//                      ^ reference local21
       }
       val j0 = j
-//        ^^ definition local19
-//             ^ reference local13
+//        ^^ definition local29 j0: Int
+//             ^ reference local21
       while (elemOps.within('0', c, '9')) {
 //           ^^^^^^^ reference ujson/CharParser#elemOps.
 //                   ^^^^^^ reference upickle/core/CharOps.within().
-//                               ^ reference local14
+//                               ^ reference local22
         j += 1
-//      ^ reference local13
+//      ^ reference local21
 //        ^^ reference scala/Int#`+`(+4).
         if (atEof(j)) {
 //          ^^^^^ reference ujson/CharParser#atEof().
-//                ^ reference local13
+//                ^ reference local21
           return (visitFloat64StringPartsWithWrapper(facade, decIndex, expIndex, i, j), j)
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().
 //                                                   ^^^^^^ reference ujson/CharParser#parseNumTopLevel().(facade)
-//                                                           ^^^^^^^^ reference local15
-//                                                                     ^^^^^^^^ reference local16
+//                                                           ^^^^^^^^ reference local23
+//                                                                     ^^^^^^^^ reference local24
 //                                                                               ^ reference ujson/CharParser#parseNumTopLevel().(i)
-//                                                                                  ^ reference local13
-//                                                                                      ^ reference local13
+//                                                                                  ^ reference local21
+//                                                                                      ^ reference local21
         }
         c = getCharSafe(j)
-//      ^ reference local14
+//      ^ reference local22
 //          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local13
+//                      ^ reference local21
       }
       if (j0 == j) die(i, "expected digit")
-//        ^^ reference local19
+//        ^^ reference local29
 //           ^^ reference scala/Int#`==`(+3).
-//              ^ reference local13
+//              ^ reference local21
 //                 ^^^ reference ujson/CharParser#die().
 //                     ^ reference ujson/CharParser#parseNumTopLevel().(i)
     }
@@ -680,11 +676,11 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
     (visitFloat64StringPartsWithWrapper(facade, decIndex, expIndex, i, j), j)
 //   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().
 //                                      ^^^^^^ reference ujson/CharParser#parseNumTopLevel().(facade)
-//                                              ^^^^^^^^ reference local15
-//                                                        ^^^^^^^^ reference local16
+//                                              ^^^^^^^^ reference local23
+//                                                        ^^^^^^^^ reference local24
 //                                                                  ^ reference ujson/CharParser#parseNumTopLevel().(i)
-//                                                                     ^ reference local13
-//                                                                         ^ reference local13
+//                                                                     ^ reference local21
+//                                                                         ^ reference local21
   }
 
   /**
@@ -694,8 +690,8 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * This is why it can only return Char instead of Int.
    */
   protected[this] final def descape(i: Int): Char = {
-//                          ^^^^^^^ definition ujson/CharParser#descape().
-//                                  ^ definition ujson/CharParser#descape().(i)
+//                          ^^^^^^^ definition ujson/CharParser#descape(). final def descape(i: Int): Char
+//                                  ^ definition ujson/CharParser#descape().(i) i: Int
 //                                     ^^^ reference scala/Int#
 //                                           ^^^^ reference scala/Char#
     import upickle.core.RenderUtils.hex
@@ -704,10 +700,10 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                      ^^^^^^^^^^^ reference upickle/core/RenderUtils.
 //                                  ^^^ reference upickle/core/RenderUtils.hex().
     var x = 0
-//      ^ definition local20
+//      ^ definition local31 x: Int
     x = (x << 4) | hex(getCharSafe(i+2).toInt)
-//  ^ reference local20
-//       ^ reference local20
+//  ^ reference local31
+//       ^ reference local31
 //         ^^ reference scala/Int#`<<`().
 //               ^ reference scala/Int#`|`(+3).
 //                 ^^^ reference upickle/core/RenderUtils.hex().
@@ -716,8 +712,8 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                                  ^ reference scala/Int#`+`(+4).
 //                                      ^^^^^ reference scala/Char#toInt().
     x = (x << 4) | hex(getCharSafe(i+3).toInt)
-//  ^ reference local20
-//       ^ reference local20
+//  ^ reference local31
+//       ^ reference local31
 //         ^^ reference scala/Int#`<<`().
 //               ^ reference scala/Int#`|`(+3).
 //                 ^^^ reference upickle/core/RenderUtils.hex().
@@ -726,8 +722,8 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                                  ^ reference scala/Int#`+`(+4).
 //                                      ^^^^^ reference scala/Char#toInt().
     x = (x << 4) | hex(getCharSafe(i+4).toInt)
-//  ^ reference local20
-//       ^ reference local20
+//  ^ reference local31
+//       ^ reference local31
 //         ^^ reference scala/Int#`<<`().
 //               ^ reference scala/Int#`|`(+3).
 //                 ^^^ reference upickle/core/RenderUtils.hex().
@@ -736,8 +732,8 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                                  ^ reference scala/Int#`+`(+4).
 //                                      ^^^^^ reference scala/Char#toInt().
     x = (x << 4) | hex(getCharSafe(i+5).toInt)
-//  ^ reference local20
-//       ^ reference local20
+//  ^ reference local31
+//       ^ reference local31
 //         ^^ reference scala/Int#`<<`().
 //               ^ reference scala/Int#`|`(+3).
 //                 ^^^ reference upickle/core/RenderUtils.hex().
@@ -746,7 +742,7 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                                  ^ reference scala/Int#`+`(+4).
 //                                      ^^^^^ reference scala/Char#toInt().
     x.toChar
-//  ^ reference local20
+//  ^ reference local31
 //    ^^^^^^ reference scala/Int#toChar().
   }
 
@@ -757,10 +753,10 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * Note that this method assumes that the first character has already been checked.
    */
   protected[this] final def parseTrue(i: Int, facade: Visitor[_, J]): J = {
-//                          ^^^^^^^^^ definition ujson/CharParser#parseTrue().
-//                                    ^ definition ujson/CharParser#parseTrue().(i)
+//                          ^^^^^^^^^ definition ujson/CharParser#parseTrue(). final def parseTrue(i: Int, facade: Visitor[local32, J[): J
+//                                    ^ definition ujson/CharParser#parseTrue().(i) i: Int
 //                                       ^^^ reference scala/Int#
-//                                            ^^^^^^ definition ujson/CharParser#parseTrue().(facade)
+//                                            ^^^^^^ definition ujson/CharParser#parseTrue().(facade) facade: Visitor[local32, J[
 //                                                    ^^^^^^^ reference upickle/core/Visitor#
 //                                                               ^ reference ujson/CharParser#[J]
 //                                                                    ^ reference ujson/CharParser#[J]
@@ -800,10 +796,10 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * Note that this method assumes that the first character has already been checked.
    */
   protected[this] final def parseFalse(i: Int, facade: Visitor[_, J]): J = {
-//                          ^^^^^^^^^^ definition ujson/CharParser#parseFalse().
-//                                     ^ definition ujson/CharParser#parseFalse().(i)
+//                          ^^^^^^^^^^ definition ujson/CharParser#parseFalse(). final def parseFalse(i: Int, facade: Visitor[local33, J[): J
+//                                     ^ definition ujson/CharParser#parseFalse().(i) i: Int
 //                                        ^^^ reference scala/Int#
-//                                             ^^^^^^ definition ujson/CharParser#parseFalse().(facade)
+//                                             ^^^^^^ definition ujson/CharParser#parseFalse().(facade) facade: Visitor[local33, J[
 //                                                     ^^^^^^^ reference upickle/core/Visitor#
 //                                                                ^ reference ujson/CharParser#[J]
 //                                                                     ^ reference ujson/CharParser#[J]
@@ -849,10 +845,10 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * Note that this method assumes that the first character has already been checked.
    */
   protected[this] final def parseNull(i: Int, facade: Visitor[_, J]): J = {
-//                          ^^^^^^^^^ definition ujson/CharParser#parseNull().
-//                                    ^ definition ujson/CharParser#parseNull().(i)
+//                          ^^^^^^^^^ definition ujson/CharParser#parseNull(). final def parseNull(i: Int, facade: Visitor[local34, J[): J
+//                                    ^ definition ujson/CharParser#parseNull().(i) i: Int
 //                                       ^^^ reference scala/Int#
-//                                            ^^^^^^ definition ujson/CharParser#parseNull().(facade)
+//                                            ^^^^^^ definition ujson/CharParser#parseNull().(facade) facade: Visitor[local34, J[
 //                                                    ^^^^^^^ reference upickle/core/Visitor#
 //                                                               ^ reference ujson/CharParser#[J]
 //                                                                    ^ reference ujson/CharParser#[J]
@@ -887,10 +883,10 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
   }
 
   protected[this] final def parseTopLevel(i: Int, facade: Visitor[_, J]): (J, Int) = {
-//                          ^^^^^^^^^^^^^ definition ujson/CharParser#parseTopLevel().
-//                                        ^ definition ujson/CharParser#parseTopLevel().(i)
+//                          ^^^^^^^^^^^^^ definition ujson/CharParser#parseTopLevel(). final def parseTopLevel(i: Int, facade: Visitor[local35, J[): (J, Int)
+//                                        ^ definition ujson/CharParser#parseTopLevel().(i) i: Int
 //                                           ^^^ reference scala/Int#
-//                                                ^^^^^^ definition ujson/CharParser#parseTopLevel().(facade)
+//                                                ^^^^^^ definition ujson/CharParser#parseTopLevel().(facade) facade: Visitor[local35, J[
 //                                                        ^^^^^^^ reference upickle/core/Visitor#
 //                                                                   ^ reference ujson/CharParser#[J]
 //                                                                         ^ reference ujson/CharParser#[J]
@@ -902,7 +898,6 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
     catch reject(i)
 //        ^^^^^^ reference ujson/CharParser#reject().
 //               ^ reference ujson/CharParser#parseTopLevel().(i)
-//                  reference scala/Function1#apply().
   }
   /**
    * Parse and return the next JSON value and the position beyond it.
@@ -911,10 +906,10 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 // ^^^^^^^ reference scala/annotation/tailrec#
 //         reference scala/annotation/tailrec#`<init>`().
   protected[this] final def parseTopLevel0(i: Int, facade: Visitor[_, J]): (J, Int) = {
-//                          ^^^^^^^^^^^^^^ definition ujson/CharParser#parseTopLevel0().
-//                                         ^ definition ujson/CharParser#parseTopLevel0().(i)
+//                          ^^^^^^^^^^^^^^ definition ujson/CharParser#parseTopLevel0(). @tailrec final def parseTopLevel0(i: Int, facade: Visitor[local38, J[): (J, Int)
+//                                         ^ definition ujson/CharParser#parseTopLevel0().(i) i: Int
 //                                            ^^^ reference scala/Int#
-//                                                 ^^^^^^ definition ujson/CharParser#parseTopLevel0().(facade)
+//                                                 ^^^^^^ definition ujson/CharParser#parseTopLevel0().(facade) facade: Visitor[local38, J[
 //                                                         ^^^^^^^ reference upickle/core/Visitor#
 //                                                                    ^ reference ujson/CharParser#[J]
 //                                                                          ^ reference ujson/CharParser#[J]
@@ -995,24 +990,24 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
   }
 
   def reject(j: Int): PartialFunction[Throwable, Nothing] = {
-//    ^^^^^^ definition ujson/CharParser#reject().
-//           ^ definition ujson/CharParser#reject().(j)
+//    ^^^^^^ definition ujson/CharParser#reject(). def reject(j: Int): PartialFunction[Throwable, Nothing]
+//           ^ definition ujson/CharParser#reject().(j) j: Int
 //              ^^^ reference scala/Int#
 //                    ^^^^^^^^^^^^^^^ reference scala/PartialFunction#
 //                                    ^^^^^^^^^ reference scala/package.Throwable#
 //                                               ^^^^^^^ reference scala/Nothing#
+//                                                           definition local39 @SerialVersionUID final class $anonfun
     case e: Abort =>
-//       ^ definition local21
+//       ^ definition local46 e: Abort
 //          ^^^^^ reference upickle/core/Abort#
       throw new AbortException(e.msg, j, -1, -1, e)
 //              ^^^^^^^^^^^^^^ reference upickle/core/AbortException#
 //                             reference upickle/core/AbortException#`<init>`().
-//                             ^ reference local21
+//                             ^ reference local46
 //                               ^^^ reference upickle/core/Abort#msg.
 //                                    ^ reference ujson/CharParser#reject().(j)
-//                                               ^ reference local21
+//                                               ^ reference local46
   }
-//  reference scala/Function1#apply().
   /**
    * Tail-recursive parsing method to do the bulk of JSON parsing.
    *
@@ -1034,18 +1029,18 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 // ^^^^^^^ reference scala/annotation/tailrec#
 //         reference scala/annotation/tailrec#`<init>`().
   protected[this] final def parseNested(state: Int,
-//                          ^^^^^^^^^^^ definition ujson/CharParser#parseNested().
-//                                      ^^^^^ definition ujson/CharParser#parseNested().(state)
+//                          ^^^^^^^^^^^ definition ujson/CharParser#parseNested(). @tailrec final def parseNested(state: Int, i: Int, stackHead: ObjArrVisitor[local50, J[, stackTail: List[ObjArrVisitor[local51, J[]): (J, Int)
+//                                      ^^^^^ definition ujson/CharParser#parseNested().(state) state: Int
 //                                             ^^^ reference scala/Int#
                                         i: Int,
-//                                      ^ definition ujson/CharParser#parseNested().(i)
+//                                      ^ definition ujson/CharParser#parseNested().(i) i: Int
 //                                         ^^^ reference scala/Int#
                                         stackHead: ObjArrVisitor[_, J],
-//                                      ^^^^^^^^^ definition ujson/CharParser#parseNested().(stackHead)
+//                                      ^^^^^^^^^ definition ujson/CharParser#parseNested().(stackHead) stackHead: ObjArrVisitor[local50, J[
 //                                                 ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
 //                                                                  ^ reference ujson/CharParser#[J]
                                         stackTail: List[ObjArrVisitor[_, J]]) : (J, Int) = {
-//                                      ^^^^^^^^^ definition ujson/CharParser#parseNested().(stackTail)
+//                                      ^^^^^^^^^ definition ujson/CharParser#parseNested().(stackTail) stackTail: List[ObjArrVisitor[local51, J[]
 //                                                 ^^^^ reference scala/package.List#
 //                                                      ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
 //                                                                       ^ reference ujson/CharParser#[J]
@@ -1070,17 +1065,16 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //             ^^^ reference ujson/CharParser#KEY.
 //                   ^^^^^^ reference ujson/CharParser#OBJBEG.
             val nextJ = try parseStringKey(i, stackHead) catch reject(i)
-//              ^^^^^ definition local22
+//              ^^^^^ definition local52 nextJ: Int
 //                          ^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringKey().
 //                                         ^ reference ujson/CharParser#parseNested().(i)
 //                                            ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
 //                                                             ^^^^^^ reference ujson/CharParser#reject().
 //                                                                    ^ reference ujson/CharParser#parseNested().(i)
-//                                                                       reference scala/Function1#apply().
             parseNested(COLON, nextJ, stackHead, stackTail)
 //          ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
 //                      ^^^^^ reference ujson/CharParser#COLON.
-//                             ^^^^^ reference local22
+//                             ^^^^^ reference local52
 //                                    ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
 //                                               ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
 
@@ -1088,18 +1082,17 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //             ^^^^ reference ujson/CharParser#DATA.
 //                    ^^^^^^ reference ujson/CharParser#ARRBEG.
             val nextJ = try parseStringValue(i, stackHead) catch reject(i)
-//              ^^^^^ definition local23
+//              ^^^^^ definition local55 nextJ: Int
 //                          ^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringValue().
 //                                           ^ reference ujson/CharParser#parseNested().(i)
 //                                              ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
 //                                                               ^^^^^^ reference ujson/CharParser#reject().
 //                                                                      ^ reference ujson/CharParser#parseNested().(i)
-//                                                                         reference scala/Function1#apply().
             parseNested(collectionEndFor(stackHead), nextJ, stackHead, stackTail)
 //          ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
 //                      ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
 //                                       ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                                   ^^^^^ reference local23
+//                                                   ^^^^^ reference local55
 //                                                          ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
 //                                                                     ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
 
@@ -1133,7 +1126,7 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                    ^^^^^ reference ujson/CharParser#parseNested().(state)
 //                           ^ reference ujson/CharParser#parseNested().(i)
         val ctx =
-//          ^^^ definition local24
+//          ^^^ definition local58 ctx: ArrVisitor[local59, J[
           try stackHead.subVisitor.asInstanceOf[Visitor[_, J]].visitArray(-1, i)
 //            ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
 //                      ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#subVisitor().
@@ -1145,14 +1138,13 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
           catch reject(i)
 //              ^^^^^^ reference ujson/CharParser#reject().
 //                     ^ reference ujson/CharParser#parseNested().(i)
-//                        reference scala/Function1#apply().
         parseNested(ARRBEG, i + 1, ctx, stackHead :: stackTail)
 //      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
 //                  ^^^^^^ reference ujson/CharParser#ARRBEG.
 //                          ^ reference ujson/CharParser#parseNested().(i)
 //                            ^ reference scala/Int#`+`(+4).
-//                                 ^^^ reference local24
-//                                      ^^^^^^^^^ reference local25
+//                                 ^^^ reference local58
+//                                      ^^^^^^^^^ reference local62
 //                                                ^^ reference scala/collection/immutable/List#`::`().
 //                                                   ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
 
@@ -1162,7 +1154,7 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                    ^^^^^ reference ujson/CharParser#parseNested().(state)
 //                           ^ reference ujson/CharParser#parseNested().(i)
         val ctx =
-//          ^^^ definition local27
+//          ^^^ definition local63 ctx: ObjVisitor[local64, J[
           try stackHead.subVisitor.asInstanceOf[Visitor[_, J]].visitObject(-1, i)
 //            ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
 //                      ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#subVisitor().
@@ -1174,14 +1166,13 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
           catch reject(i)
 //              ^^^^^^ reference ujson/CharParser#reject().
 //                     ^ reference ujson/CharParser#parseNested().(i)
-//                        reference scala/Function1#apply().
         parseNested(OBJBEG, i + 1, ctx, stackHead :: stackTail)
 //      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
 //                  ^^^^^^ reference ujson/CharParser#OBJBEG.
 //                          ^ reference ujson/CharParser#parseNested().(i)
 //                            ^ reference scala/Int#`+`(+4).
-//                                 ^^^ reference local27
-//                                      ^^^^^^^^^ reference local28
+//                                 ^^^ reference local63
+//                                      ^^^^^^^^^ reference local67
 //                                                ^^ reference scala/collection/immutable/List#`::`().
 //                                                   ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
 
@@ -1191,7 +1182,7 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                    ^^^^^ reference ujson/CharParser#parseNested().(state)
 //                           ^ reference ujson/CharParser#parseNested().(i)
         val ctx =
-//          ^^^ definition local29
+//          ^^^ definition local68 ctx: Int
           try parseNum(i, stackHead.narrow, stackHead.subVisitor.asInstanceOf[Visitor[_, J]])
 //            ^^^^^^^^ reference ujson/CharParser#parseNum().
 //                     ^ reference ujson/CharParser#parseNested().(i)
@@ -1205,12 +1196,11 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
           catch reject(i)
 //              ^^^^^^ reference ujson/CharParser#reject().
 //                     ^ reference ujson/CharParser#parseNested().(i)
-//                        reference scala/Function1#apply().
         parseNested(collectionEndFor(stackHead), ctx, stackHead, stackTail)
 //      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
 //                  ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
 //                                   ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                               ^^^ reference local29
+//                                               ^^^ reference local68
 //                                                    ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
 //                                                               ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
 
@@ -1237,7 +1227,6 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
         catch reject(i)
 //            ^^^^^^ reference ujson/CharParser#reject().
 //                   ^ reference ujson/CharParser#parseNested().(i)
-//                      reference scala/Function1#apply().
         parseNested(collectionEndFor(stackHead), i + 4, stackHead, stackTail)
 //      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
 //                  ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
@@ -1270,7 +1259,6 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
         catch reject(i)
 //            ^^^^^^ reference ujson/CharParser#reject().
 //                   ^ reference ujson/CharParser#parseNested().(i)
-//                      reference scala/Function1#apply().
         parseNested(collectionEndFor(stackHead), i + 5, stackHead, stackTail)
 //      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
 //                  ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
@@ -1303,7 +1291,6 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
         catch reject(i)
 //            ^^^^^^ reference ujson/CharParser#reject().
 //                   ^ reference ujson/CharParser#parseNested().(i)
-//                      reference scala/Function1#apply().
         parseNested(collectionEndFor(stackHead), i + 4, stackHead, stackTail)
 //      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
 //                  ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
@@ -1354,21 +1341,21 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                                                   ^ reference ujson/CharParser#parseNested().(i)
               case Some(t) => t
 //                 ^^^^ reference scala/Some.
-//                      ^ definition local30
-//                            ^ reference local30
+//                      ^ definition local77 t: (J, Int)
+//                            ^ reference local77
               case None =>
 //                 ^^^^ reference scala/None.
                 val stackTailHead = stackTail.head
-//                  ^^^^^^^^^^^^^ definition local31
+//                  ^^^^^^^^^^^^^ definition local78 stackTailHead: ObjArrVisitor[local51, J[
 //                                  ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
 //                                            ^^^^ reference scala/collection/IterableOps#head().
                 parseNested(collectionEndFor(stackTailHead), i + 1, stackTailHead, stackTail.tail)
 //              ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
 //                          ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
-//                                           ^^^^^^^^^^^^^ reference local31
+//                                           ^^^^^^^^^^^^^ reference local78
 //                                                           ^ reference ujson/CharParser#parseNested().(i)
 //                                                             ^ reference scala/Int#`+`(+4).
-//                                                                  ^^^^^^^^^^^^^ reference local31
+//                                                                  ^^^^^^^^^^^^^ reference local78
 //                                                                                 ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
 //                                                                                           ^^^^ reference scala/collection/IterableOps#tail().
             }
@@ -1391,21 +1378,21 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                                                   ^ reference ujson/CharParser#parseNested().(i)
               case Some(t) => t
 //                 ^^^^ reference scala/Some.
-//                      ^ definition local32
-//                            ^ reference local32
+//                      ^ definition local79 t: (J, Int)
+//                            ^ reference local79
               case None =>
 //                 ^^^^ reference scala/None.
                 val stackTailHead = stackTail.head
-//                  ^^^^^^^^^^^^^ definition local33
+//                  ^^^^^^^^^^^^^ definition local80 stackTailHead: ObjArrVisitor[local51, J[
 //                                  ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
 //                                            ^^^^ reference scala/collection/IterableOps#head().
                 parseNested(collectionEndFor(stackTailHead), i + 1, stackTailHead, stackTail.tail)
 //              ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
 //                          ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
-//                                           ^^^^^^^^^^^^^ reference local33
+//                                           ^^^^^^^^^^^^^ reference local80
 //                                                           ^ reference ujson/CharParser#parseNested().(i)
 //                                                             ^ reference scala/Int#`+`(+4).
-//                                                                  ^^^^^^^^^^^^^ reference local33
+//                                                                  ^^^^^^^^^^^^^ reference local80
 //                                                                                 ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
 //                                                                                           ^^^^ reference scala/collection/IterableOps#tail().
             }
@@ -1424,13 +1411,13 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 
 
   def dieWithFailureMessage(i: Int, state: Int) = {
-//    ^^^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#dieWithFailureMessage().
-//                          ^ definition ujson/CharParser#dieWithFailureMessage().(i)
+//    ^^^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#dieWithFailureMessage(). def dieWithFailureMessage(i: Int, state: Int): Nothing
+//                          ^ definition ujson/CharParser#dieWithFailureMessage().(i) i: Int
 //                             ^^^ reference scala/Int#
-//                                  ^^^^^ definition ujson/CharParser#dieWithFailureMessage().(state)
+//                                  ^^^^^ definition ujson/CharParser#dieWithFailureMessage().(state) state: Int
 //                                         ^^^ reference scala/Int#
     val expected = state match{
-//      ^^^^^^^^ definition local34
+//      ^^^^^^^^ definition local81 expected: String
 //                 ^^^^^ reference ujson/CharParser#dieWithFailureMessage().(state)
       case ARRBEG => "json value or ]"
 //         ^^^^^^ reference ujson/CharParser#ARRBEG.
@@ -1450,16 +1437,15 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
     die(i, s"expected $expected")
 //  ^^^ reference ujson/CharParser#die().
 //      ^ reference ujson/CharParser#dieWithFailureMessage().(i)
-//          reference scala/StringContext.apply().
 //         ^ reference scala/StringContext#s().
-//                     ^^^^^^^^ reference local34
+//                     ^^^^^^^^ reference local81
   }
 
   def failIfNotData(state: Int, i: Int) = (state: @switch) match{
-//    ^^^^^^^^^^^^^ definition ujson/CharParser#failIfNotData().
-//                  ^^^^^ definition ujson/CharParser#failIfNotData().(state)
+//    ^^^^^^^^^^^^^ definition ujson/CharParser#failIfNotData(). def failIfNotData(state: Int, i: Int): Unit
+//                  ^^^^^ definition ujson/CharParser#failIfNotData().(state) state: Int
 //                         ^^^ reference scala/Int#
-//                              ^ definition ujson/CharParser#failIfNotData().(i)
+//                              ^ definition ujson/CharParser#failIfNotData().(i) i: Int
 //                                 ^^^ reference scala/Int#
 //                                         ^^^^^ reference ujson/CharParser#failIfNotData().(state)
     case DATA | ARRBEG => // do nothing
@@ -1472,39 +1458,36 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
   }
 
   def tryCloseCollection(stackHead: ObjArrVisitor[_, J], stackTail: List[ObjArrVisitor[_, J]], i: Int) = {
-//    ^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#tryCloseCollection().
-//                       ^^^^^^^^^ definition ujson/CharParser#tryCloseCollection().(stackHead)
+//    ^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#tryCloseCollection(). def tryCloseCollection(stackHead: ObjArrVisitor[local82, J[, stackTail: List[ObjArrVisitor[local83, J[], i: Int): Option[(J, Int)]
+//                       ^^^^^^^^^ definition ujson/CharParser#tryCloseCollection().(stackHead) stackHead: ObjArrVisitor[local82, J[
 //                                  ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
 //                                                   ^ reference ujson/CharParser#[J]
-//                                                       ^^^^^^^^^ definition ujson/CharParser#tryCloseCollection().(stackTail)
+//                                                       ^^^^^^^^^ definition ujson/CharParser#tryCloseCollection().(stackTail) stackTail: List[ObjArrVisitor[local83, J[]
 //                                                                  ^^^^ reference scala/package.List#
 //                                                                       ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
 //                                                                                        ^ reference ujson/CharParser#[J]
-//                                                                                             ^ definition ujson/CharParser#tryCloseCollection().(i)
+//                                                                                             ^ definition ujson/CharParser#tryCloseCollection().(i) i: Int
 //                                                                                                ^^^ reference scala/Int#
     if (stackTail.isEmpty) {
 //      ^^^^^^^^^ reference ujson/CharParser#tryCloseCollection().(stackTail)
 //                ^^^^^^^ reference scala/collection/immutable/List#isEmpty().
       Some(try stackHead.visitEnd(i) catch reject(i), i + 1)
 //    ^^^^ reference scala/Some.
-//         reference scala/Some.apply().
 //             ^^^^^^^^^ reference ujson/CharParser#tryCloseCollection().(stackHead)
 //                       ^^^^^^^^ reference upickle/core/ObjArrVisitor#visitEnd().
 //                                ^ reference ujson/CharParser#tryCloseCollection().(i)
 //                                         ^^^^^^ reference ujson/CharParser#reject().
 //                                                ^ reference ujson/CharParser#tryCloseCollection().(i)
-//                                                   reference scala/Function1#apply().
 //                                                    ^ reference ujson/CharParser#tryCloseCollection().(i)
 //                                                      ^ reference scala/Int#`+`(+4).
-//                                                           reference scala/Tuple2.apply().
     } else {
       val ctxt2 = stackTail.head.narrow
-//        ^^^^^ definition local35
+//        ^^^^^ definition local86 ctxt2: ObjArrVisitor[Any, J]
 //                ^^^^^^^^^ reference ujson/CharParser#tryCloseCollection().(stackTail)
 //                          ^^^^ reference scala/collection/IterableOps#head().
 //                               ^^^^^^ reference upickle/core/ObjArrVisitor#narrow().
       try ctxt2.visitValue(stackHead.visitEnd(i), i) catch reject(i)
-//        ^^^^^ reference local35
+//        ^^^^^ reference local86
 //              ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#visitValue().
 //                         ^^^^^^^^^ reference ujson/CharParser#tryCloseCollection().(stackHead)
 //                                   ^^^^^^^^ reference upickle/core/ObjArrVisitor#visitEnd().
@@ -1512,15 +1495,14 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                                                ^ reference ujson/CharParser#tryCloseCollection().(i)
 //                                                         ^^^^^^ reference ujson/CharParser#reject().
 //                                                                ^ reference ujson/CharParser#tryCloseCollection().(i)
-//                                                                   reference scala/Function1#apply().
       None
 //    ^^^^ reference scala/None.
 
     }
   }
   def collectionEndFor(stackHead: ObjArrVisitor[_, _]) = {
-//    ^^^^^^^^^^^^^^^^ definition ujson/CharParser#collectionEndFor().
-//                     ^^^^^^^^^ definition ujson/CharParser#collectionEndFor().(stackHead)
+//    ^^^^^^^^^^^^^^^^ definition ujson/CharParser#collectionEndFor(). def collectionEndFor(stackHead: ObjArrVisitor[local89, local90[): Int
+//                     ^^^^^^^^^ definition ujson/CharParser#collectionEndFor().(stackHead) stackHead: ObjArrVisitor[local89, local90[
 //                                ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
     if (stackHead.isObj) OBJEND
 //      ^^^^^^^^^ reference ujson/CharParser#collectionEndFor().(stackHead)
@@ -1538,50 +1520,49 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
     * chars.
     */
   protected[this] final def parseStringSimple(i: Int): Int = {
-//                          ^^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringSimple().
-//                                            ^ definition ujson/CharParser#parseStringSimple().(i)
+//                          ^^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringSimple(). final def parseStringSimple(i: Int): Int
+//                                            ^ definition ujson/CharParser#parseStringSimple().(i) i: Int
 //                                               ^^^ reference scala/Int#
 //                                                     ^^^ reference scala/Int#
     var j = i
-//      ^ definition local36
+//      ^ definition local91 j: Int
 //          ^ reference ujson/CharParser#parseStringSimple().(i)
     var c = elemOps.toUnsignedInt(getCharSafe(j))
-//      ^ definition local37
+//      ^ definition local92 c: Int
 //          ^^^^^^^ reference ujson/CharParser#elemOps.
 //                  ^^^^^^^^^^^^^ reference upickle/core/CharOps.toUnsignedInt().
 //                                ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                                            ^ reference local36
+//                                            ^ reference local91
     while (c != '"') {
-//         ^ reference local37
+//         ^ reference local92
 //           ^^ reference scala/Int#`!=`(+2).
       if (c < ' ') die(j, s"control char (${c}) in string")
-//        ^ reference local37
+//        ^ reference local92
 //          ^ reference scala/Int#`<`(+2).
 //                 ^^^ reference ujson/CharParser#die().
-//                     ^ reference local36
-//                         reference scala/StringContext.apply().
+//                     ^ reference local91
 //                        ^ reference scala/StringContext#s().
-//                                          ^ reference local37
+//                                          ^ reference local92
       if (c == '\\' || c > 127) return -1 - j
-//        ^ reference local37
+//        ^ reference local92
 //          ^^ reference scala/Int#`==`(+2).
 //                  ^^ reference scala/Boolean#`||`().
-//                     ^ reference local37
+//                     ^ reference local92
 //                       ^ reference scala/Int#`>`(+3).
 //                                        ^ reference scala/Int#`-`(+3).
-//                                          ^ reference local36
+//                                          ^ reference local91
       j += 1
-//    ^ reference local36
+//    ^ reference local91
 //      ^^ reference scala/Int#`+`(+4).
       c = elemOps.toUnsignedInt(getCharSafe(j))
-//    ^ reference local37
+//    ^ reference local92
 //        ^^^^^^^ reference ujson/CharParser#elemOps.
 //                ^^^^^^^^^^^^^ reference upickle/core/CharOps.toUnsignedInt().
 //                              ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                                          ^ reference local36
+//                                          ^ reference local91
     }
     j + 1
-//  ^ reference local36
+//  ^ reference local91
 //    ^ reference scala/Int#`+`(+4).
   }
 
@@ -1589,101 +1570,99 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
     * Parse a string that is known to have escape sequences.
     */
   protected[this] final def parseStringComplex(i0: Int): Int = {
-//                          ^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringComplex().
-//                                             ^^ definition ujson/CharParser#parseStringComplex().(i0)
+//                          ^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringComplex(). final def parseStringComplex(i0: Int): Int
+//                                             ^^ definition ujson/CharParser#parseStringComplex().(i0) i0: Int
 //                                                 ^^^ reference scala/Int#
 //                                                       ^^^ reference scala/Int#
     var i = i0
-//      ^ definition local38
+//      ^ definition local94 i: Int
 //          ^^ reference ujson/CharParser#parseStringComplex().(i0)
     var c = elemOps.toUnsignedInt(getCharSafe(i))
-//      ^ definition local39
+//      ^ definition local95 c: Int
 //          ^^^^^^^ reference ujson/CharParser#elemOps.
 //                  ^^^^^^^^^^^^^ reference upickle/core/CharOps.toUnsignedInt().
 //                                ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                                            ^ reference local38
+//                                            ^ reference local94
     while (c != '"') {
-//         ^ reference local39
+//         ^ reference local95
 //           ^^ reference scala/Int#`!=`(+2).
 
       if (c < ' ') die(i, s"control char (${c}) in string")
-//        ^ reference local39
+//        ^ reference local95
 //          ^ reference scala/Int#`<`(+2).
 //                 ^^^ reference ujson/CharParser#die().
-//                     ^ reference local38
-//                         reference scala/StringContext.apply().
+//                     ^ reference local94
 //                        ^ reference scala/StringContext#s().
-//                                          ^ reference local39
+//                                          ^ reference local95
       else if (c == '\\') {
-//             ^ reference local39
+//             ^ reference local95
 //               ^^ reference scala/Int#`==`(+2).
         (getCharSafe(i + 1): @switch) match {
 //       ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                   ^ reference local38
+//                   ^ reference local94
 //                     ^ reference scala/Int#`+`(+4).
           case 'b' => { outputBuilder.append('\b'); i += 2 }
 //                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
 //                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                  ^ reference local38
+//                                                  ^ reference local94
 //                                                    ^^ reference scala/Int#`+`(+4).
           case 'f' => { outputBuilder.append('\f'); i += 2 }
 //                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
 //                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                  ^ reference local38
+//                                                  ^ reference local94
 //                                                    ^^ reference scala/Int#`+`(+4).
           case 'n' => { outputBuilder.append('\n'); i += 2 }
 //                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
 //                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                  ^ reference local38
+//                                                  ^ reference local94
 //                                                    ^^ reference scala/Int#`+`(+4).
           case 'r' => { outputBuilder.append('\r'); i += 2 }
 //                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
 //                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                  ^ reference local38
+//                                                  ^ reference local94
 //                                                    ^^ reference scala/Int#`+`(+4).
           case 't' => { outputBuilder.append('\t'); i += 2 }
 //                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
 //                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                  ^ reference local38
+//                                                  ^ reference local94
 //                                                    ^^ reference scala/Int#`+`(+4).
 
           case '"' => { outputBuilder.append('"'); i += 2 }
 //                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
 //                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                 ^ reference local38
+//                                                 ^ reference local94
 //                                                   ^^ reference scala/Int#`+`(+4).
           case '/' => { outputBuilder.append('/'); i += 2 }
 //                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
 //                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                 ^ reference local38
+//                                                 ^ reference local94
 //                                                   ^^ reference scala/Int#`+`(+4).
           case '\\' => { outputBuilder.append('\\'); i += 2 }
 //                       ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
 //                                     ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                   ^ reference local38
+//                                                   ^ reference local94
 //                                                     ^^ reference scala/Int#`+`(+4).
 
           // if there's a problem then descape will explode
           case 'u' =>
             val d = descape(i)
-//              ^ definition local40
+//              ^ definition local97 d: Char
 //                  ^^^^^^^ reference ujson/CharParser#descape().
-//                          ^ reference local38
+//                          ^ reference local94
             outputBuilder.appendC(d)
 //          ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
 //                        ^^^^^^^ reference upickle/core/CharAppendC#appendC().
-//                                ^ reference local40
+//                                ^ reference local97
 
             i += 6
-//          ^ reference local38
+//          ^ reference local94
 //            ^^ reference scala/Int#`+`(+4).
 
           case c => die(i + 1, s"illegal escape sequence after \\")
-//             ^ definition local41
+//             ^ definition local98 c: Char
 //                  ^^^ reference ujson/CharParser#die().
-//                      ^ reference local38
+//                      ^ reference local94
 //                        ^ reference scala/Int#`+`(+4).
-//                              reference scala/StringContext.apply().
 //                             ^ reference scala/StringContext#s().
         }
       } else {
@@ -1695,21 +1674,21 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
         outputBuilder.append(c)
 //      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
 //                    ^^^^^^ reference upickle/core/CharBuilder#append().
-//                           ^ reference local39
+//                           ^ reference local95
         i += 1
-//      ^ reference local38
+//      ^ reference local94
 //        ^^ reference scala/Int#`+`(+4).
       }
       c = elemOps.toUnsignedInt(getCharSafe(i))
-//    ^ reference local39
+//    ^ reference local95
 //        ^^^^^^^ reference ujson/CharParser#elemOps.
 //                ^^^^^^^^^^^^^ reference upickle/core/CharOps.toUnsignedInt().
 //                              ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                                          ^ reference local38
+//                                          ^ reference local94
     }
 
     i + 1
-//  ^ reference local38
+//  ^ reference local94
 //    ^ reference scala/Int#`+`(+4).
   }
 
@@ -1722,21 +1701,21 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
     * interpret a multi-char code point incorrectly.
     */
   protected[this] final def parseStringValue(i: Int, stackHead: ObjArrVisitor[_, J]): Int = {
-//                          ^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringValue().
-//                                           ^ definition ujson/CharParser#parseStringValue().(i)
+//                          ^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringValue(). final def parseStringValue(i: Int, stackHead: ObjArrVisitor[local99, J[): Int
+//                                           ^ definition ujson/CharParser#parseStringValue().(i) i: Int
 //                                              ^^^ reference scala/Int#
-//                                                   ^^^^^^^^^ definition ujson/CharParser#parseStringValue().(stackHead)
+//                                                   ^^^^^^^^^ definition ujson/CharParser#parseStringValue().(stackHead) stackHead: ObjArrVisitor[local99, J[
 //                                                              ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
 //                                                                               ^ reference ujson/CharParser#[J]
 //                                                                                    ^^^ reference scala/Int#
 
     val k = parseStringSimple(i + 1)
-//      ^ definition local42
+//      ^ definition local100 k: Int
 //          ^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringSimple().
 //                            ^ reference ujson/CharParser#parseStringValue().(i)
 //                              ^ reference scala/Int#`+`(+4).
     if (k >= 0) {
-//      ^ reference local42
+//      ^ reference local100
 //        ^^ reference scala/Int#`>=`(+3).
       visitString(i, unsafeCharSeqForRange(i + 1, k - i - 2), stackHead)
 //    ^^^^^^^^^^^ reference ujson/CharParser#visitString().
@@ -1744,19 +1723,19 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                   ^^^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#unsafeCharSeqForRange().
 //                                         ^ reference ujson/CharParser#parseStringValue().(i)
 //                                           ^ reference scala/Int#`+`(+4).
-//                                                ^ reference local42
+//                                                ^ reference local100
 //                                                  ^ reference scala/Int#`-`(+3).
 //                                                    ^ reference ujson/CharParser#parseStringValue().(i)
 //                                                      ^ reference scala/Int#`-`(+3).
 //                                                            ^^^^^^^^^ reference ujson/CharParser#parseStringValue().(stackHead)
       k
-//    ^ reference local42
+//    ^ reference local100
     } else {
       val k2 = parseStringToOutputBuilder(i, k)
-//        ^^ definition local43
+//        ^^ definition local101 k2: Int
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringToOutputBuilder().
 //                                        ^ reference ujson/CharParser#parseStringValue().(i)
-//                                           ^ reference local42
+//                                           ^ reference local100
       visitString(i, outputBuilder.makeString(), stackHead)
 //    ^^^^^^^^^^^ reference ujson/CharParser#visitString().
 //                ^ reference ujson/CharParser#parseStringValue().(i)
@@ -1764,26 +1743,26 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                                 ^^^^^^^^^^ reference upickle/core/CharBuilder#makeString().
 //                                               ^^^^^^^^^ reference ujson/CharParser#parseStringValue().(stackHead)
       k2
-//    ^^ reference local43
+//    ^^ reference local101
     }
   }
 
   protected[this] final def parseStringKey(i: Int, stackHead: ObjArrVisitor[_, J]): Int = {
-//                          ^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringKey().
-//                                         ^ definition ujson/CharParser#parseStringKey().(i)
+//                          ^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringKey(). final def parseStringKey(i: Int, stackHead: ObjArrVisitor[local102, J[): Int
+//                                         ^ definition ujson/CharParser#parseStringKey().(i) i: Int
 //                                            ^^^ reference scala/Int#
-//                                                 ^^^^^^^^^ definition ujson/CharParser#parseStringKey().(stackHead)
+//                                                 ^^^^^^^^^ definition ujson/CharParser#parseStringKey().(stackHead) stackHead: ObjArrVisitor[local102, J[
 //                                                            ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
 //                                                                             ^ reference ujson/CharParser#[J]
 //                                                                                  ^^^ reference scala/Int#
 
     val k = parseStringSimple(i + 1)
-//      ^ definition local44
+//      ^ definition local103 k: Int
 //          ^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringSimple().
 //                            ^ reference ujson/CharParser#parseStringKey().(i)
 //                              ^ reference scala/Int#`+`(+4).
     if (k >= 0) {
-//      ^ reference local44
+//      ^ reference local103
 //        ^^ reference scala/Int#`>=`(+3).
       visitStringKey(i, unsafeCharSeqForRange(i + 1, k - i - 2), stackHead)
 //    ^^^^^^^^^^^^^^ reference ujson/CharParser#visitStringKey().
@@ -1791,19 +1770,19 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                      ^^^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#unsafeCharSeqForRange().
 //                                            ^ reference ujson/CharParser#parseStringKey().(i)
 //                                              ^ reference scala/Int#`+`(+4).
-//                                                   ^ reference local44
+//                                                   ^ reference local103
 //                                                     ^ reference scala/Int#`-`(+3).
 //                                                       ^ reference ujson/CharParser#parseStringKey().(i)
 //                                                         ^ reference scala/Int#`-`(+3).
 //                                                               ^^^^^^^^^ reference ujson/CharParser#parseStringKey().(stackHead)
       k
-//    ^ reference local44
+//    ^ reference local103
     } else {
       val k2 = parseStringToOutputBuilder(i, k)
-//        ^^ definition local45
+//        ^^ definition local104 k2: Int
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringToOutputBuilder().
 //                                        ^ reference ujson/CharParser#parseStringKey().(i)
-//                                           ^ reference local44
+//                                           ^ reference local103
       visitStringKey(i, outputBuilder.makeString(), stackHead)
 //    ^^^^^^^^^^^^^^ reference ujson/CharParser#visitStringKey().
 //                   ^ reference ujson/CharParser#parseStringKey().(i)
@@ -1811,16 +1790,16 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                                    ^^^^^^^^^^ reference upickle/core/CharBuilder#makeString().
 //                                                  ^^^^^^^^^ reference ujson/CharParser#parseStringKey().(stackHead)
       k2
-//    ^^ reference local45
+//    ^^ reference local104
     }
   }
 
 
   def parseStringToOutputBuilder(i: Int, k: Int) = {
-//    ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringToOutputBuilder().
-//                               ^ definition ujson/CharParser#parseStringToOutputBuilder().(i)
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringToOutputBuilder(). def parseStringToOutputBuilder(i: Int, k: Int): Int
+//                               ^ definition ujson/CharParser#parseStringToOutputBuilder().(i) i: Int
 //                                  ^^^ reference scala/Int#
-//                                       ^ definition ujson/CharParser#parseStringToOutputBuilder().(k)
+//                                       ^ definition ujson/CharParser#parseStringToOutputBuilder().(k) k: Int
 //                                          ^^^ reference scala/Int#
     outputBuilder.reset()
 //  ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
@@ -1836,26 +1815,26 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //                                                    ^ reference scala/Int#`-`(+3).
 //                                                      ^ reference ujson/CharParser#parseStringToOutputBuilder().(i)
     val k2 = parseStringComplex(-k - 1)
-//      ^^ definition local46
+//      ^^ definition local105 k2: Int
 //           ^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringComplex().
 //                              ^ reference scala/Int#`unary_-`().
 //                               ^ reference ujson/CharParser#parseStringToOutputBuilder().(k)
 //                                 ^ reference scala/Int#`-`(+3).
     k2
-//  ^^ reference local46
+//  ^^ reference local105
   }
 
   def visitString(i: Int, s: CharSequence, stackHead: ObjArrVisitor[_, J]) = {
-//    ^^^^^^^^^^^ definition ujson/CharParser#visitString().
-//                ^ definition ujson/CharParser#visitString().(i)
+//    ^^^^^^^^^^^ definition ujson/CharParser#visitString(). def visitString(i: Int, s: CharSequence, stackHead: ObjArrVisitor[local106, J[): Unit
+//                ^ definition ujson/CharParser#visitString().(i) i: Int
 //                   ^^^ reference scala/Int#
-//                        ^ definition ujson/CharParser#visitString().(s)
+//                        ^ definition ujson/CharParser#visitString().(s) s: CharSequence
 //                           ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                         ^^^^^^^^^ definition ujson/CharParser#visitString().(stackHead)
+//                                         ^^^^^^^^^ definition ujson/CharParser#visitString().(stackHead) stackHead: ObjArrVisitor[local106, J[
 //                                                    ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
 //                                                                     ^ reference ujson/CharParser#[J]
     val v = stackHead.subVisitor.visitString(s, i)
-//      ^ definition local47
+//      ^ definition local107 v: Any
 //          ^^^^^^^^^ reference ujson/CharParser#visitString().(stackHead)
 //                    ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#subVisitor().
 //                               ^^^^^^^^^^^ reference upickle/core/Visitor#visitString().
@@ -1865,33 +1844,33 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 //  ^^^^^^^^^ reference ujson/CharParser#visitString().(stackHead)
 //            ^^^^^^ reference upickle/core/ObjArrVisitor#narrow().
 //                   ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#visitValue().
-//                              ^ reference local47
+//                              ^ reference local107
 //                                 ^ reference ujson/CharParser#visitString().(i)
   }
   def visitStringKey(i: Int, s: CharSequence, stackHead: ObjArrVisitor[_, J]) = {
-//    ^^^^^^^^^^^^^^ definition ujson/CharParser#visitStringKey().
-//                   ^ definition ujson/CharParser#visitStringKey().(i)
+//    ^^^^^^^^^^^^^^ definition ujson/CharParser#visitStringKey(). def visitStringKey(i: Int, s: CharSequence, stackHead: ObjArrVisitor[local108, J[): Unit
+//                   ^ definition ujson/CharParser#visitStringKey().(i) i: Int
 //                      ^^^ reference scala/Int#
-//                           ^ definition ujson/CharParser#visitStringKey().(s)
+//                           ^ definition ujson/CharParser#visitStringKey().(s) s: CharSequence
 //                              ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                            ^^^^^^^^^ definition ujson/CharParser#visitStringKey().(stackHead)
+//                                            ^^^^^^^^^ definition ujson/CharParser#visitStringKey().(stackHead) stackHead: ObjArrVisitor[local108, J[
 //                                                       ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
 //                                                                        ^ reference ujson/CharParser#[J]
     val obj = stackHead.asInstanceOf[ObjVisitor[Any, _]]
-//      ^^^ definition local48
+//      ^^^ definition local109 obj: ObjVisitor[Any, Any]
 //            ^^^^^^^^^ reference ujson/CharParser#visitStringKey().(stackHead)
 //                      ^^^^^^^^^^^^ reference scala/Any#asInstanceOf().
 //                                   ^^^^^^^^^^ reference upickle/core/ObjVisitor#
 //                                              ^^^ reference scala/Any#
     val keyVisitor = obj.visitKey(i)
-//      ^^^^^^^^^^ definition local49
-//                   ^^^ reference local48
+//      ^^^^^^^^^^ definition local110 keyVisitor: Visitor[local111, Any[
+//                   ^^^ reference local109
 //                       ^^^^^^^^ reference upickle/core/ObjVisitor#visitKey().
 //                                ^ reference ujson/CharParser#visitStringKey().(i)
     obj.visitKeyValue(keyVisitor.visitString(s, i))
-//  ^^^ reference local48
+//  ^^^ reference local109
 //      ^^^^^^^^^^^^^ reference upickle/core/ObjVisitor#visitKeyValue().
-//                    ^^^^^^^^^^ reference local49
+//                    ^^^^^^^^^^ reference local110
 //                               ^^^^^^^^^^^ reference upickle/core/Visitor#visitString().
 //                                           ^ reference ujson/CharParser#visitStringKey().(s)
 //                                              ^ reference ujson/CharParser#visitStringKey().(i)
@@ -1899,54 +1878,54 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
 
 
   protected[this] final def parseStringTopLevel(i: Int, facade: Visitor[_, J]): (J, Int) = {
-//                          ^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringTopLevel().
-//                                              ^ definition ujson/CharParser#parseStringTopLevel().(i)
+//                          ^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringTopLevel(). final def parseStringTopLevel(i: Int, facade: Visitor[local112, J[): (J, Int)
+//                                              ^ definition ujson/CharParser#parseStringTopLevel().(i) i: Int
 //                                                 ^^^ reference scala/Int#
-//                                                      ^^^^^^ definition ujson/CharParser#parseStringTopLevel().(facade)
+//                                                      ^^^^^^ definition ujson/CharParser#parseStringTopLevel().(facade) facade: Visitor[local112, J[
 //                                                              ^^^^^^^ reference upickle/core/Visitor#
 //                                                                         ^ reference ujson/CharParser#[J]
 //                                                                               ^ reference ujson/CharParser#[J]
 //                                                                                  ^^^ reference scala/Int#
 
     val k = parseStringSimple(i + 1)
-//      ^ definition local50
+//      ^ definition local113 k: Int
 //          ^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringSimple().
 //                            ^ reference ujson/CharParser#parseStringTopLevel().(i)
 //                              ^ reference scala/Int#`+`(+4).
     if (k >= 0) {
-//      ^ reference local50
+//      ^ reference local113
 //        ^^ reference scala/Int#`>=`(+3).
       val res = facade.visitString(unsafeCharSeqForRange(i + 1, k - i - 2), i)
-//        ^^^ definition local51
+//        ^^^ definition local114 res: J
 //              ^^^^^^ reference ujson/CharParser#parseStringTopLevel().(facade)
 //                     ^^^^^^^^^^^ reference upickle/core/Visitor#visitString().
 //                                 ^^^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#unsafeCharSeqForRange().
 //                                                       ^ reference ujson/CharParser#parseStringTopLevel().(i)
 //                                                         ^ reference scala/Int#`+`(+4).
-//                                                              ^ reference local50
+//                                                              ^ reference local113
 //                                                                ^ reference scala/Int#`-`(+3).
 //                                                                  ^ reference ujson/CharParser#parseStringTopLevel().(i)
 //                                                                    ^ reference scala/Int#`-`(+3).
 //                                                                          ^ reference ujson/CharParser#parseStringTopLevel().(i)
       (res, k)
-//     ^^^ reference local51
-//          ^ reference local50
+//     ^^^ reference local114
+//          ^ reference local113
     } else {
       val k2 = parseStringToOutputBuilder(i, k)
-//        ^^ definition local52
+//        ^^ definition local115 k2: Int
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringToOutputBuilder().
 //                                        ^ reference ujson/CharParser#parseStringTopLevel().(i)
-//                                           ^ reference local50
+//                                           ^ reference local113
       val res = facade.visitString(outputBuilder.makeString(), i)
-//        ^^^ definition local53
+//        ^^^ definition local116 res: J
 //              ^^^^^^ reference ujson/CharParser#parseStringTopLevel().(facade)
 //                     ^^^^^^^^^^^ reference upickle/core/Visitor#visitString().
 //                                 ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
 //                                               ^^^^^^^^^^ reference upickle/core/CharBuilder#makeString().
 //                                                             ^ reference ujson/CharParser#parseStringTopLevel().(i)
       (res, k2)
-//     ^^^ reference local53
-//          ^^ reference local52
+//     ^^^ reference local116
+//          ^^ reference local115
     }
   }
 }

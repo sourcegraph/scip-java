@@ -147,7 +147,7 @@ public class QuantityStringResAttribute {
     // Probably incorrect - comparing Object[] arrays with Arrays.equals
     return Arrays.equals(formatArgs, that.formatArgs);
 //         ^^^^^^ reference java/util/Arrays#
-//                ^^^^^^ reference java/util/Arrays#equals(+16).
+//                ^^^^^^ reference java/util/Arrays#equals(+8).
 //                       ^^^^^^^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.
 //                                   ^^^^ reference local7
 //                                        ^^^^^^^^^^ reference com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.

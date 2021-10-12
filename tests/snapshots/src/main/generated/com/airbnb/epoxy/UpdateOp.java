@@ -169,7 +169,7 @@ class UpdateOp {
 
     payloads.add(payload);
 //  ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#payloads.
-//           ^^^ reference java/util/ArrayList#add(+1).
+//           ^^^ reference java/util/ArrayList#add().
 //               ^^^^^^^ reference local8
   }
 
