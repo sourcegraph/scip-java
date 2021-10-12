@@ -66,30 +66,20 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
       println(s"indexing library '$name'")
       val providedArguments = provided.flatMap(p => List("--provided", p))
       val targetroot = Files.createTempDirectory("semanticdb-javac")
-      val indexDir = Files.createTempDirectory("semanticdb-javac")
+      val snapshotDir = Files.createTempDirectory("semanticdb-javac")
       runLsifJava(
         List(
           "index-dependency",
+          "--snapshot",
           "--dependency",
           name,
           "--output",
-          indexDir.toString()
+          snapshotDir.toString()
         ) ++ providedArguments
       )
-      val snapshotDir = Files.createTempDirectory("semanticdb-javac")
-      val dumpDir = indexDir.toFile().listFiles().head.toPath
-      val outputDir = snapshotDir.resolve(dumpDir.getFileName())
-      runLsifJava(
-        List(
-          "snapshot-lsif",
-          "--cwd",
-          dumpDir.toString(),
-          "--output",
-          outputDir.toString()
-        )
-      )
+      val root = snapshotDir.toFile().listFiles().head.toPath()
       Files.walkFileTree(
-        outputDir,
+        root,
         new SimpleFileVisitor[Path] {
           override def visitFile(
               file: Path,
@@ -97,9 +87,7 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
           ): FileVisitResult = {
             val print =
               new String(Files.readAllBytes(file), StandardCharsets.UTF_8)
-            val out = context
-              .expectDirectory
-              .resolve(outputDir.relativize(file))
+            val out = context.expectDirectory.resolve(root.relativize(file))
             handler.onSnapshotTest(context, out, () => print)
             super.visitFile(file, attrs)
           }
