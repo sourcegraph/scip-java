@@ -253,7 +253,7 @@ lazy val packagehub = project
         "org.postgresql" % "postgresql" % "42.2.23",
         "org.rauschig" % "jarchivelib" % "1.2.0",
         "org.scalameta" %% "scalameta" % V.scalameta,
-        "com.lihaoyi" %% "cask" % "0.7.8"
+        "com.lihaoyi" %% "cask" % "0.7.12"
       )
   )
   .enablePlugins(AssemblyPlugin)
