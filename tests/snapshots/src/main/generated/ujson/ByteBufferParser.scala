@@ -33,20 +33,20 @@ import java.nio.charset.StandardCharsets
  * update its own mutable position fields.
  */
 final class ByteBufferParser[J](src: ByteBuffer) extends ByteParser[J]{
-//          ^^^^^^^^^^^^^^^^ definition ujson/ByteBufferParser#
-//                           ^ definition ujson/ByteBufferParser#[J]
-//                              definition ujson/ByteBufferParser#`<init>`().
-//                              ^^^ definition ujson/ByteBufferParser#src.
+//          ^^^^^^^^^^^^^^^^ definition ujson/ByteBufferParser# final class ByteBufferParser[J]
+//                           ^ definition ujson/ByteBufferParser#[J] J
+//                              definition ujson/ByteBufferParser#`<init>`(). def this(src: ByteBuffer)
+//                              ^^^ definition ujson/ByteBufferParser#src. private[this] val src: ByteBuffer
 //                                   ^^^^^^^^^^ reference java/nio/ByteBuffer#
 //                                                       ^^^^^^^^^^ reference ujson/ByteParser#
 //                                                                  ^ reference ujson/ByteBufferParser#[J]
 //                                                                     reference ujson/ByteParser#`<init>`().
   private[this] final val start = src.position()
-//                        ^^^^^ definition ujson/ByteBufferParser#start.
+//                        ^^^^^ definition ujson/ByteBufferParser#start. private[this] final val start: Int
 //                                ^^^ reference ujson/ByteBufferParser#src.
 //                                    ^^^^^^^^ reference java/nio/Buffer#position().
   private[this] final val limit = src.limit() - start
-//                        ^^^^^ definition ujson/ByteBufferParser#limit.
+//                        ^^^^^ definition ujson/ByteBufferParser#limit. private[this] final val limit: Int
 //                                ^^^ reference ujson/ByteBufferParser#src.
 //                                    ^^^^^ reference java/nio/Buffer#limit().
 //                                            ^ reference scala/Int#`-`(+3).
@@ -54,21 +54,21 @@ final class ByteBufferParser[J](src: ByteBuffer) extends ByteParser[J]{
 
 
   protected[this] final def close() = { src.position(start) }
-//                          ^^^^^ definition ujson/ByteBufferParser#close().
+//                          ^^^^^ definition ujson/ByteBufferParser#close(). final def close(): Unit
 //                                      ^^^ reference ujson/ByteBufferParser#src.
 //                                          ^^^^^^^^ reference java/nio/ByteBuffer#position().
 //                                                   ^^^^^ reference ujson/ByteBufferParser#start.
   override def growBuffer(until: Int): Unit = ()
-//             ^^^^^^^^^^ definition ujson/ByteBufferParser#growBuffer().
-//                        ^^^^^ definition ujson/ByteBufferParser#growBuffer().(until)
+//             ^^^^^^^^^^ definition ujson/ByteBufferParser#growBuffer(). def growBuffer(until: Int): Unit
+//                        ^^^^^ definition ujson/ByteBufferParser#growBuffer().(until) until: Int
 //                               ^^^ reference scala/Int#
 //                                     ^^^^ reference scala/Unit#
   def readDataIntoBuffer(buffer: Array[Byte], bufferOffset: Int) = {
-//    ^^^^^^^^^^^^^^^^^^ definition ujson/ByteBufferParser#readDataIntoBuffer().
-//                       ^^^^^^ definition ujson/ByteBufferParser#readDataIntoBuffer().(buffer)
+//    ^^^^^^^^^^^^^^^^^^ definition ujson/ByteBufferParser#readDataIntoBuffer(). def readDataIntoBuffer(buffer: Array[Byte], bufferOffset: Int): (Array[Byte], Boolean, Int)
+//                       ^^^^^^ definition ujson/ByteBufferParser#readDataIntoBuffer().(buffer) buffer: Array[Byte]
 //                               ^^^^^ reference scala/Array#
 //                                     ^^^^ reference scala/Byte#
-//                                            ^^^^^^^^^^^^ definition ujson/ByteBufferParser#readDataIntoBuffer().(bufferOffset)
+//                                            ^^^^^^^^^^^^ definition ujson/ByteBufferParser#readDataIntoBuffer().(bufferOffset) bufferOffset: Int
 //                                                          ^^^ reference scala/Int#
 
     if(buffer == null) (java.util.Arrays.copyOfRange(src.array(), start, src.limit()), limit == 0, limit)
@@ -93,16 +93,16 @@ final class ByteBufferParser[J](src: ByteBuffer) extends ByteParser[J]{
 }
 
 object ByteBufferParser extends Transformer[ByteBuffer]{
-//     ^^^^^^^^^^^^^^^^ definition ujson/ByteBufferParser.
+//     ^^^^^^^^^^^^^^^^ definition ujson/ByteBufferParser. object ByteBufferParser
 //                              ^^^^^^^^^^^ reference ujson/Transformer#
 //                                          ^^^^^^^^^^ reference java/nio/ByteBuffer#
 //                                                      reference java/lang/Object#`<init>`().
   def transform[T](j: ByteBuffer, f: Visitor[_, T]) = new ByteBufferParser(j).parse(f)
-//    ^^^^^^^^^ definition ujson/ByteBufferParser.transform().
-//              ^ definition ujson/ByteBufferParser.transform().[T]
-//                 ^ definition ujson/ByteBufferParser.transform().(j)
+//    ^^^^^^^^^ definition ujson/ByteBufferParser.transform(). def transform(j: ByteBuffer, f: Visitor[local0, T[): T
+//              ^ definition ujson/ByteBufferParser.transform().[T] T
+//                 ^ definition ujson/ByteBufferParser.transform().(j) j: ByteBuffer
 //                    ^^^^^^^^^^ reference java/nio/ByteBuffer#
-//                                ^ definition ujson/ByteBufferParser.transform().(f)
+//                                ^ definition ujson/ByteBufferParser.transform().(f) f: Visitor[local0, T[
 //                                   ^^^^^^^ reference upickle/core/Visitor#
 //                                              ^ reference ujson/ByteBufferParser.transform().[T]
 //                                                        ^^^^^^^^^^^^^^^^ reference ujson/ByteBufferParser#

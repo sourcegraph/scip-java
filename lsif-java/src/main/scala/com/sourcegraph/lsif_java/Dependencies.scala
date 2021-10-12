@@ -4,9 +4,9 @@ import java.io.File
 import java.nio.file.Path
 
 import scala.concurrent.duration.Duration
+import scala.util.Try
 import scala.xml.XML
 
-import com.sourcegraph.lsif_java.BuildInfo
 import coursier.Fetch
 import coursier.Repositories
 import coursier.Resolve
@@ -40,6 +40,37 @@ object Dependencies {
     Repositories.jitpack,
     Repositories.centralGcs
   )
+
+  /**
+   * Attempts to find the "common definitions" JAR for a potentially
+   * MultiPlatform Project. We only support JVM for now, native and JS are not
+   * supported. If it ends with '-jvm', we search for a JAR with the classifier
+   * truncated. If it does not end with -jvm, we search for a JAR with the
+   * -common classifier. This is non-exhaustive, and the classifiers are
+   * completely arbitrary.
+   */
+  def kotlinMPPCommon(
+      group: String,
+      artifact: String,
+      version: String
+  ): Option[Path] =
+    Try {
+      val task = Fetch[Task](Cache.default)
+        .withClassifiers(Set(Classifier.sources))
+        .addRepositories(defaultExtraRepositories: _*)
+
+      if (artifact.endsWith("-jvm")) {
+        val dependency = Dependencies
+          .parseDependency(s"$group:${artifact.stripSuffix("-jvm")}:$version")
+        val result = task.addDependencies(dependency).runResult()
+        return Some(result.files.head.toPath)
+      }
+
+      val dependency = Dependencies
+        .parseDependency(s"$group:$artifact-common:$version")
+      val result = task.addDependencies(dependency).runResult()
+      result.files.head.toPath
+    }.toOption
 
   def resolveDependencies(
       dependencies: List[String],

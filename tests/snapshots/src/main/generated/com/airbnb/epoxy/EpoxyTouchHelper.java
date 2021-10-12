@@ -391,7 +391,6 @@ public abstract class EpoxyTouchHelper {
 //    ^^^^^^^^^^^^^^^ reference _root_/
 //                    ^^^^^^^^^^^^^^^ definition local18 unresolved_type itemTouchHelper
           new ItemTouchHelper(new EpoxyModelTouchCallback<U>(controller, targetModelClass) {
-//            ^^^^^^^^^^^^^^^ reference `<init>`#
 //                                ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#
 //                                                        ^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#controller.
@@ -848,7 +847,6 @@ public abstract class EpoxyTouchHelper {
 //    ^^^^^^^^^^^^^^^ reference _root_/
 //                    ^^^^^^^^^^^^^^^ definition local70 unresolved_type itemTouchHelper
           new ItemTouchHelper(new EpoxyModelTouchCallback<U>(null, targetModelClass) {
-//            ^^^^^^^^^^^^^^^ reference `<init>`#
 //                                ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModelTouchCallback#
 //                                                        ^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
 //                                                                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#targetModelClass.

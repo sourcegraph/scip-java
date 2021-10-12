@@ -22,29 +22,29 @@ import upickle.core.{ObjArrVisitor, Visitor}
  */
 private[ujson] final class StringParser[J](s: String) extends CharParser[J]{
 //      ^^^^^ reference ujson/
-//                         ^^^^^^^^^^^^ definition ujson/StringParser#
-//                                      ^ definition ujson/StringParser#[J]
-//                                         definition ujson/StringParser#`<init>`().
-//                                         ^ definition ujson/StringParser#s.
+//                         ^^^^^^^^^^^^ definition ujson/StringParser# protected[ujson] final class StringParser[J]
+//                                      ^ definition ujson/StringParser#[J] J
+//                                         definition ujson/StringParser#`<init>`(). def this(s: String)
+//                                         ^ definition ujson/StringParser#s. private[this] val s: String
 //                                            ^^^^^^ reference scala/Predef.String#
 //                                                            ^^^^^^^^^^ reference ujson/CharParser#
 //                                                                       ^ reference ujson/StringParser#[J]
 //                                                                          reference ujson/CharParser#`<init>`().
   private[this] val sLength = s.length
-//                  ^^^^^^^ definition ujson/StringParser#sLength.
+//                  ^^^^^^^ definition ujson/StringParser#sLength. private[this] val sLength: Int
 //                            ^ reference ujson/StringParser#s.
 //                              ^^^^^^ reference java/lang/String#length().
   override def growBuffer(until: Int): Unit = ()
-//             ^^^^^^^^^^ definition ujson/StringParser#growBuffer().
-//                        ^^^^^ definition ujson/StringParser#growBuffer().(until)
+//             ^^^^^^^^^^ definition ujson/StringParser#growBuffer(). def growBuffer(until: Int): Unit
+//                        ^^^^^ definition ujson/StringParser#growBuffer().(until) until: Int
 //                               ^^^ reference scala/Int#
 //                                     ^^^^ reference scala/Unit#
   def readDataIntoBuffer(buffer: Array[Char], bufferOffset: Int) = {
-//    ^^^^^^^^^^^^^^^^^^ definition ujson/StringParser#readDataIntoBuffer().
-//                       ^^^^^^ definition ujson/StringParser#readDataIntoBuffer().(buffer)
+//    ^^^^^^^^^^^^^^^^^^ definition ujson/StringParser#readDataIntoBuffer(). def readDataIntoBuffer(buffer: Array[Char], bufferOffset: Int): (Array[Char], Boolean, Int)
+//                       ^^^^^^ definition ujson/StringParser#readDataIntoBuffer().(buffer) buffer: Array[Char]
 //                               ^^^^^ reference scala/Array#
 //                                     ^^^^ reference scala/Char#
-//                                            ^^^^^^^^^^^^ definition ujson/StringParser#readDataIntoBuffer().(bufferOffset)
+//                                            ^^^^^^^^^^^^ definition ujson/StringParser#readDataIntoBuffer().(bufferOffset) bufferOffset: Int
 //                                                          ^^^ reference scala/Int#
     if(buffer == null) (s.toCharArray, sLength == 0, sLength)
 //     ^^^^^^ reference ujson/StringParser#readDataIntoBuffer().(buffer)
@@ -58,20 +58,20 @@ private[ujson] final class StringParser[J](s: String) extends CharParser[J]{
 //        ^^^^^^ reference ujson/StringParser#readDataIntoBuffer().(buffer)
   }
   final def close() = ()
-//          ^^^^^ definition ujson/StringParser#close().
+//          ^^^^^ definition ujson/StringParser#close(). final def close(): Unit
 }
 
 object StringParser extends Transformer[String]{
-//     ^^^^^^^^^^^^ definition ujson/StringParser.
+//     ^^^^^^^^^^^^ definition ujson/StringParser. object StringParser
 //                          ^^^^^^^^^^^ reference ujson/Transformer#
 //                                      ^^^^^^ reference scala/Predef.String#
 //                                              reference java/lang/Object#`<init>`().
   def transform[T](j: String, f: Visitor[_, T]) = new StringParser(j).parse(f)
-//    ^^^^^^^^^ definition ujson/StringParser.transform().
-//              ^ definition ujson/StringParser.transform().[T]
-//                 ^ definition ujson/StringParser.transform().(j)
+//    ^^^^^^^^^ definition ujson/StringParser.transform(). def transform(j: String, f: Visitor[local0, T[): T
+//              ^ definition ujson/StringParser.transform().[T] T
+//                 ^ definition ujson/StringParser.transform().(j) j: String
 //                    ^^^^^^ reference scala/Predef.String#
-//                            ^ definition ujson/StringParser.transform().(f)
+//                            ^ definition ujson/StringParser.transform().(f) f: Visitor[local0, T[
 //                               ^^^^^^^ reference upickle/core/Visitor#
 //                                          ^ reference ujson/StringParser.transform().[T]
 //                                                    ^^^^^^^^^^^^ reference ujson/StringParser#

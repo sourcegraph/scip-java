@@ -632,7 +632,6 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                                                          ^^^^^^^^^^ reference _root_/
 //                                                                     ^^^^^^ definition local65 @NonNull unresolved_type parent
     return new ModelGroupHolder(parent);
-//             ^^^^^^^^^^^^^^^^ reference `<init>`#
 //                              ^^^^^^ reference local65
   }
 

@@ -22,39 +22,39 @@ import upickle.core.{ArrVisitor, ObjVisitor}
   * benefits from receiving data in batches, rather than elem by elem.
   */
 class BaseCharRenderer[T <: upickle.core.CharOps.Output]
-//    ^^^^^^^^^^^^^^^^ definition ujson/BaseCharRenderer#
-//                     ^ definition ujson/BaseCharRenderer#[T]
+//    ^^^^^^^^^^^^^^^^ definition ujson/BaseCharRenderer# class BaseCharRenderer[T <: Output]
+//                     ^ definition ujson/BaseCharRenderer#[T] T <: Output
 //                          ^^^^^^^ reference upickle/
 //                                  ^^^^ reference upickle/core/
 //                                       ^^^^^^^ reference upickle/core/CharOps.
 //                                               ^^^^^^ reference upickle/core/CharOps.Output#
                       (out: T,
-//                     ^^^ definition ujson/BaseCharRenderer#out.
+//                     ^^^ definition ujson/BaseCharRenderer#out. private[this] val out: T
 //                          ^ reference ujson/BaseCharRenderer#[T]
                        indent: Int = -1,
-//                     ^^^^^^ definition ujson/BaseCharRenderer#indent.
+//                     ^^^^^^ definition ujson/BaseCharRenderer#indent. private[this] val indent: Int
 //                             ^^^ reference scala/Int#
                        escapeUnicode: Boolean = false) extends JsVisitor[T, T]{
-//                     ^^^^^^^^^^^^^ definition ujson/BaseCharRenderer#escapeUnicode.
+//                     ^^^^^^^^^^^^^ definition ujson/BaseCharRenderer#escapeUnicode. private[this] val escapeUnicode: Boolean
 //                                    ^^^^^^^ reference scala/Boolean#
 //                                                             ^^^^^^^^^ reference ujson/JsVisitor#
 //                                                                       ^ reference ujson/BaseCharRenderer#[T]
 //                                                                          ^ reference ujson/BaseCharRenderer#[T]
 //                                                                             reference java/lang/Object#`<init>`().
   private[this] val elemBuilder = new upickle.core.CharBuilder
-//                  ^^^^^^^^^^^ definition ujson/BaseCharRenderer#elemBuilder.
+//                  ^^^^^^^^^^^ definition ujson/BaseCharRenderer#elemBuilder. private[this] val elemBuilder: CharBuilder
 //                                    ^^^^^^^ reference upickle/
 //                                            ^^^^ reference upickle/core/
 //                                                 ^^^^^^^^^^^ reference upickle/core/CharBuilder#
 //                                                             reference upickle/core/CharBuilder#`<init>`().
   private[this] val unicodeCharBuilder = new upickle.core.CharBuilder()
-//                  ^^^^^^^^^^^^^^^^^^ definition ujson/BaseCharRenderer#unicodeCharBuilder.
+//                  ^^^^^^^^^^^^^^^^^^ definition ujson/BaseCharRenderer#unicodeCharBuilder. private[this] val unicodeCharBuilder: CharBuilder
 //                                           ^^^^^^^ reference upickle/
 //                                                   ^^^^ reference upickle/core/
 //                                                        ^^^^^^^^^^^ reference upickle/core/CharBuilder#
 //                                                                    reference upickle/core/CharBuilder#`<init>`().
   def flushCharBuilder() = {
-//    ^^^^^^^^^^^^^^^^ definition ujson/BaseCharRenderer#flushCharBuilder().
+//    ^^^^^^^^^^^^^^^^ definition ujson/BaseCharRenderer#flushCharBuilder(). def flushCharBuilder(): Unit
     elemBuilder.writeOutToIfLongerThan(out, if (depth == 0) 0 else 1000)
 //  ^^^^^^^^^^^ reference ujson/BaseCharRenderer#elemBuilder.
 //              ^^^^^^^^^^^^^^^^^^^^^^ reference upickle/core/CharBuilder#writeOutToIfLongerThan().
@@ -64,15 +64,15 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
   }
 
   private[this] var depth: Int = 0
-//                  ^^^^^ definition ujson/BaseCharRenderer#depth().
+//                  ^^^^^ definition ujson/BaseCharRenderer#depth(). private[this] var depth: Int
 //                         ^^^ reference scala/Int#
 
 
   private[this] var commaBuffered = false
-//                  ^^^^^^^^^^^^^ definition ujson/BaseCharRenderer#commaBuffered().
+//                  ^^^^^^^^^^^^^ definition ujson/BaseCharRenderer#commaBuffered(). private[this] var commaBuffered: Boolean
 
   def flushBuffer() = {
-//    ^^^^^^^^^^^ definition ujson/BaseCharRenderer#flushBuffer().
+//    ^^^^^^^^^^^ definition ujson/BaseCharRenderer#flushBuffer(). def flushBuffer(): Unit
     if (commaBuffered) {
 //      ^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#commaBuffered().
       commaBuffered = false
@@ -85,11 +85,12 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
     }
   }
   def visitArray(length: Int, index: Int) = new ArrVisitor[T, T] {
-//    ^^^^^^^^^^ definition ujson/BaseCharRenderer#visitArray().
-//               ^^^^^^ definition ujson/BaseCharRenderer#visitArray().(length)
+//    ^^^^^^^^^^ definition ujson/BaseCharRenderer#visitArray(). def visitArray(length: Int, index: Int): { def subVisitor: BaseCharRenderer[T] }
+//               ^^^^^^ definition ujson/BaseCharRenderer#visitArray().(length) length: Int
 //                       ^^^ reference scala/Int#
-//                            ^^^^^ definition ujson/BaseCharRenderer#visitArray().(index)
+//                            ^^^^^ definition ujson/BaseCharRenderer#visitArray().(index) index: Int
 //                                   ^^^ reference scala/Int#
+//                                               definition local1 final class $anon
 //                                              ^^^^^^^^^^ reference upickle/core/ArrVisitor#
 //                                                         ^ reference ujson/BaseCharRenderer#[T]
 //                                                            ^ reference ujson/BaseCharRenderer#[T]
@@ -106,13 +107,13 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
     renderIndent()
 //  ^^^^^^^^^^^^ reference ujson/BaseCharRenderer#renderIndent().
     def subVisitor = BaseCharRenderer.this
-//      ^^^^^^^^^^ definition local0
+//      ^^^^^^^^^^ definition local0 def subVisitor: BaseCharRenderer[T]
 //                   ^^^^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#
     def visitValue(v: T, index: Int): Unit = {
-//      ^^^^^^^^^^ definition local1
-//                 ^ definition local2
+//      ^^^^^^^^^^ definition local2 def visitValue(v: T, index: Int): Unit
+//                 ^ definition local4 v: T
 //                    ^ reference ujson/BaseCharRenderer#[T]
-//                       ^^^^^ definition local3
+//                       ^^^^^ definition local5 index: Int
 //                              ^^^ reference scala/Int#
 //                                    ^^^^ reference scala/Unit#
       flushBuffer()
@@ -121,8 +122,8 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
 //    ^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#commaBuffered().
     }
     def visitEnd(index: Int) = {
-//      ^^^^^^^^ definition local4
-//               ^^^^^ definition local5
+//      ^^^^^^^^ definition local3 def visitEnd(index: Int): T
+//               ^^^^^ definition local6 index: Int
 //                      ^^^ reference scala/Int#
       commaBuffered = false
 //    ^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#commaBuffered().
@@ -142,11 +143,12 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
   }
 
   def visitObject(length: Int, index: Int) = new ObjVisitor[T, T] {
-//    ^^^^^^^^^^^ definition ujson/BaseCharRenderer#visitObject().
-//                ^^^^^^ definition ujson/BaseCharRenderer#visitObject().(length)
+//    ^^^^^^^^^^^ definition ujson/BaseCharRenderer#visitObject(). def visitObject(length: Int, index: Int): { def subVisitor: BaseCharRenderer[T]; def visitKey(index: Int): BaseCharRenderer[T] }
+//                ^^^^^^ definition ujson/BaseCharRenderer#visitObject().(length) length: Int
 //                        ^^^ reference scala/Int#
-//                             ^^^^^ definition ujson/BaseCharRenderer#visitObject().(index)
+//                             ^^^^^ definition ujson/BaseCharRenderer#visitObject().(index) index: Int
 //                                    ^^^ reference scala/Int#
+//                                                definition local10 final class $anon
 //                                               ^^^^^^^^^^ reference upickle/core/ObjVisitor#
 //                                                          ^ reference ujson/BaseCharRenderer#[T]
 //                                                             ^ reference ujson/BaseCharRenderer#[T]
@@ -162,16 +164,16 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
     renderIndent()
 //  ^^^^^^^^^^^^ reference ujson/BaseCharRenderer#renderIndent().
     def subVisitor = BaseCharRenderer.this
-//      ^^^^^^^^^^ definition local6
+//      ^^^^^^^^^^ definition local7 def subVisitor: BaseCharRenderer[T]
 //                   ^^^^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#
     def visitKey(index: Int) = BaseCharRenderer.this
-//      ^^^^^^^^ definition local7
-//               ^^^^^ definition local8
+//      ^^^^^^^^ definition local8 def visitKey(index: Int): BaseCharRenderer[T]
+//               ^^^^^ definition local9 index: Int
 //                      ^^^ reference scala/Int#
 //                             ^^^^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#
     def visitKeyValue(s: Any): Unit = {
-//      ^^^^^^^^^^^^^ definition local9
-//                    ^ definition local10
+//      ^^^^^^^^^^^^^ definition local11 def visitKeyValue(s: Any): Unit
+//                    ^ definition local14 s: Any
 //                       ^^^ reference scala/Any#
 //                             ^^^^ reference scala/Unit#
       elemBuilder.append(':')
@@ -184,18 +186,18 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
 //                                  ^^^^^^ reference upickle/core/CharBuilder#append(+1).
     }
     def visitValue(v: T, index: Int): Unit = {
-//      ^^^^^^^^^^ definition local11
-//                 ^ definition local12
+//      ^^^^^^^^^^ definition local12 def visitValue(v: T, index: Int): Unit
+//                 ^ definition local15 v: T
 //                    ^ reference ujson/BaseCharRenderer#[T]
-//                       ^^^^^ definition local13
+//                       ^^^^^ definition local16 index: Int
 //                              ^^^ reference scala/Int#
 //                                    ^^^^ reference scala/Unit#
       commaBuffered = true
 //    ^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#commaBuffered().
     }
     def visitEnd(index: Int) = {
-//      ^^^^^^^^ definition local14
-//               ^^^^^ definition local15
+//      ^^^^^^^^ definition local13 def visitEnd(index: Int): T
+//               ^^^^^ definition local17 index: Int
 //                      ^^^ reference scala/Int#
       commaBuffered = false
 //    ^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#commaBuffered().
@@ -215,8 +217,8 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
   }
 
   def visitNull(index: Int) = {
-//    ^^^^^^^^^ definition ujson/BaseCharRenderer#visitNull().
-//              ^^^^^ definition ujson/BaseCharRenderer#visitNull().(index)
+//    ^^^^^^^^^ definition ujson/BaseCharRenderer#visitNull(). def visitNull(index: Int): T
+//              ^^^^^ definition ujson/BaseCharRenderer#visitNull().(index) index: Int
 //                     ^^^ reference scala/Int#
     flushBuffer()
 //  ^^^^^^^^^^^ reference ujson/BaseCharRenderer#flushBuffer().
@@ -242,8 +244,8 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
   }
 
   def visitFalse(index: Int) = {
-//    ^^^^^^^^^^ definition ujson/BaseCharRenderer#visitFalse().
-//               ^^^^^ definition ujson/BaseCharRenderer#visitFalse().(index)
+//    ^^^^^^^^^^ definition ujson/BaseCharRenderer#visitFalse(). def visitFalse(index: Int): T
+//               ^^^^^ definition ujson/BaseCharRenderer#visitFalse().(index) index: Int
 //                      ^^^ reference scala/Int#
     flushBuffer()
 //  ^^^^^^^^^^^ reference ujson/BaseCharRenderer#flushBuffer().
@@ -272,8 +274,8 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
   }
 
   def visitTrue(index: Int) = {
-//    ^^^^^^^^^ definition ujson/BaseCharRenderer#visitTrue().
-//              ^^^^^ definition ujson/BaseCharRenderer#visitTrue().(index)
+//    ^^^^^^^^^ definition ujson/BaseCharRenderer#visitTrue(). def visitTrue(index: Int): T
+//              ^^^^^ definition ujson/BaseCharRenderer#visitTrue().(index) index: Int
 //                     ^^^ reference scala/Int#
     flushBuffer()
 //  ^^^^^^^^^^^ reference ujson/BaseCharRenderer#flushBuffer().
@@ -299,14 +301,14 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
   }
 
   def visitFloat64StringParts(s: CharSequence, decIndex: Int, expIndex: Int, index: Int) = {
-//    ^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/BaseCharRenderer#visitFloat64StringParts().
-//                            ^ definition ujson/BaseCharRenderer#visitFloat64StringParts().(s)
+//    ^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/BaseCharRenderer#visitFloat64StringParts(). def visitFloat64StringParts(s: CharSequence, decIndex: Int, expIndex: Int, index: Int): T
+//                            ^ definition ujson/BaseCharRenderer#visitFloat64StringParts().(s) s: CharSequence
 //                               ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                             ^^^^^^^^ definition ujson/BaseCharRenderer#visitFloat64StringParts().(decIndex)
+//                                             ^^^^^^^^ definition ujson/BaseCharRenderer#visitFloat64StringParts().(decIndex) decIndex: Int
 //                                                       ^^^ reference scala/Int#
-//                                                            ^^^^^^^^ definition ujson/BaseCharRenderer#visitFloat64StringParts().(expIndex)
+//                                                            ^^^^^^^^ definition ujson/BaseCharRenderer#visitFloat64StringParts().(expIndex) expIndex: Int
 //                                                                      ^^^ reference scala/Int#
-//                                                                           ^^^^^ definition ujson/BaseCharRenderer#visitFloat64StringParts().(index)
+//                                                                           ^^^^^ definition ujson/BaseCharRenderer#visitFloat64StringParts().(index) index: Int
 //                                                                                  ^^^ reference scala/Int#
     flushBuffer()
 //  ^^^^^^^^^^^ reference ujson/BaseCharRenderer#flushBuffer().
@@ -316,23 +318,23 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
 //                           ^ reference ujson/BaseCharRenderer#visitFloat64StringParts().(s)
 //                             ^^^^^^ reference java/lang/CharSequence#length().
     var i = 0
-//      ^ definition local16
+//      ^ definition local18 i: Int
     val sLength = s.length
-//      ^^^^^^^ definition local17
+//      ^^^^^^^ definition local19 sLength: Int
 //                ^ reference ujson/BaseCharRenderer#visitFloat64StringParts().(s)
 //                  ^^^^^^ reference java/lang/CharSequence#length().
     while(i < sLength){
-//        ^ reference local16
+//        ^ reference local18
 //          ^ reference scala/Int#`<`(+3).
-//            ^^^^^^^ reference local17
+//            ^^^^^^^ reference local19
       elemBuilder.appendUnsafeC(s.charAt(i))
 //    ^^^^^^^^^^^ reference ujson/BaseCharRenderer#elemBuilder.
 //                ^^^^^^^^^^^^^ reference upickle/core/CharBuilder#appendUnsafeC().
 //                              ^ reference ujson/BaseCharRenderer#visitFloat64StringParts().(s)
 //                                ^^^^^^ reference java/lang/CharSequence#charAt().
-//                                       ^ reference local16
+//                                       ^ reference local18
       i += 1
-//    ^ reference local16
+//    ^ reference local18
 //      ^^ reference scala/Int#`+`(+4).
     }
     flushCharBuilder()
@@ -342,10 +344,10 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
   }
 
   override def visitFloat64(d: Double, index: Int) = {
-//             ^^^^^^^^^^^^ definition ujson/BaseCharRenderer#visitFloat64().
-//                          ^ definition ujson/BaseCharRenderer#visitFloat64().(d)
+//             ^^^^^^^^^^^^ definition ujson/BaseCharRenderer#visitFloat64(). def visitFloat64(d: Double, index: Int): T
+//                          ^ definition ujson/BaseCharRenderer#visitFloat64().(d) d: Double
 //                             ^^^^^^ reference scala/Double#
-//                                     ^^^^^ definition ujson/BaseCharRenderer#visitFloat64().(index)
+//                                     ^^^^^ definition ujson/BaseCharRenderer#visitFloat64().(index) index: Int
 //                                            ^^^ reference scala/Int#
     d match{
 //  ^ reference ujson/BaseCharRenderer#visitFloat64().(d)
@@ -358,30 +360,30 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
 //                ^^^^^^^^^^^^^^^^ reference scala/Double.NegativeInfinity.
 //                                    ^^^^^^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#visitNonNullString().
       case d if java.lang.Double.isNaN(d) => visitNonNullString("NaN", -1)
-//         ^ definition local18
+//         ^ definition local21 d: Double
 //              ^^^^ reference java/
 //                   ^^^^ reference java/lang/
 //                        ^^^^^^ reference java/lang/Double#
 //                               ^^^^^ reference java/lang/Double#isNaN(+1).
-//                                     ^ reference local18
+//                                     ^ reference local21
 //                                           ^^^^^^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#visitNonNullString().
       case d =>
-//         ^ definition local19
+//         ^ definition local22 d: Double
         val i = d.toInt
-//          ^ definition local20
-//              ^ reference local19
+//          ^ definition local23 i: Int
+//              ^ reference local22
 //                ^^^^^ reference scala/Double#toInt().
         if (d == i) visitFloat64StringParts(i.toString, -1, -1, index)
-//          ^ reference local19
+//          ^ reference local22
 //            ^^ reference scala/Double#`==`(+3).
-//               ^ reference local20
+//               ^ reference local23
 //                  ^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#visitFloat64StringParts().
-//                                          ^ reference local20
+//                                          ^ reference local23
 //                                            ^^^^^^^^ reference scala/Any#toString().
 //                                                              ^^^^^ reference ujson/BaseCharRenderer#visitFloat64().(index)
         else super.visitFloat64(d, index)
 //                 ^^^^^^^^^^^^ reference ujson/JsVisitor#visitFloat64().
-//                              ^ reference local19
+//                              ^ reference local22
 //                                 ^^^^^ reference ujson/BaseCharRenderer#visitFloat64().(index)
         flushBuffer()
 //      ^^^^^^^^^^^ reference ujson/BaseCharRenderer#flushBuffer().
@@ -394,10 +396,10 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
 
 
   def visitString(s: CharSequence, index: Int) = {
-//    ^^^^^^^^^^^ definition ujson/BaseCharRenderer#visitString().
-//                ^ definition ujson/BaseCharRenderer#visitString().(s)
+//    ^^^^^^^^^^^ definition ujson/BaseCharRenderer#visitString(). def visitString(s: CharSequence, index: Int): T
+//                ^ definition ujson/BaseCharRenderer#visitString().(s) s: CharSequence
 //                   ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                 ^^^^^ definition ujson/BaseCharRenderer#visitString().(index)
+//                                 ^^^^^ definition ujson/BaseCharRenderer#visitString().(index) index: Int
 //                                        ^^^ reference scala/Int#
 
     if (s eq null) visitNull(index)
@@ -412,10 +414,10 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
   }
 
   def visitNonNullString(s: CharSequence, index: Int) = {
-//    ^^^^^^^^^^^^^^^^^^ definition ujson/BaseCharRenderer#visitNonNullString().
-//                       ^ definition ujson/BaseCharRenderer#visitNonNullString().(s)
+//    ^^^^^^^^^^^^^^^^^^ definition ujson/BaseCharRenderer#visitNonNullString(). def visitNonNullString(s: CharSequence, index: Int): T
+//                       ^ definition ujson/BaseCharRenderer#visitNonNullString().(s) s: CharSequence
 //                          ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                        ^^^^^ definition ujson/BaseCharRenderer#visitNonNullString().(index)
+//                                        ^^^^^ definition ujson/BaseCharRenderer#visitNonNullString().(index) index: Int
 //                                               ^^^ reference scala/Int#
     flushBuffer()
 //  ^^^^^^^^^^^ reference ujson/BaseCharRenderer#flushBuffer().
@@ -435,32 +437,32 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
   }
 
   final def renderIndent() = {
-//          ^^^^^^^^^^^^ definition ujson/BaseCharRenderer#renderIndent().
+//          ^^^^^^^^^^^^ definition ujson/BaseCharRenderer#renderIndent(). final def renderIndent(): Unit
     if (indent == -1) ()
 //      ^^^^^^ reference ujson/BaseCharRenderer#indent.
 //             ^^ reference scala/Int#`==`(+3).
     else {
       var i = indent * depth
-//        ^ definition local21
+//        ^ definition local24 i: Int
 //            ^^^^^^ reference ujson/BaseCharRenderer#indent.
 //                   ^ reference scala/Int#`*`(+3).
 //                     ^^^^^ reference ujson/BaseCharRenderer#depth().
       elemBuilder.ensureLength(i + 1)
 //    ^^^^^^^^^^^ reference ujson/BaseCharRenderer#elemBuilder.
 //                ^^^^^^^^^^^^ reference upickle/core/CharBuilder#ensureLength().
-//                             ^ reference local21
+//                             ^ reference local24
 //                               ^ reference scala/Int#`+`(+4).
       elemBuilder.appendUnsafe('\n')
 //    ^^^^^^^^^^^ reference ujson/BaseCharRenderer#elemBuilder.
 //                ^^^^^^^^^^^^ reference upickle/core/CharBuilder#appendUnsafe().
       while(i > 0) {
-//          ^ reference local21
+//          ^ reference local24
 //            ^ reference scala/Int#`>`(+3).
         elemBuilder.appendUnsafe(' ')
 //      ^^^^^^^^^^^ reference ujson/BaseCharRenderer#elemBuilder.
 //                  ^^^^^^^^^^^^ reference upickle/core/CharBuilder#appendUnsafe().
         i -= 1
-//      ^ reference local21
+//      ^ reference local24
 //        ^^ reference scala/Int#`-`(+3).
       }
     }

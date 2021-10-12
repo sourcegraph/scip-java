@@ -184,7 +184,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                  ^^^^ reference java/util/ArrayList#size().
     return super.add(epoxyModel);
 //         ^^^^^ reference com/airbnb/epoxy/ModelList#super.
-//               ^^^ reference java/util/ArrayList#add(+1).
+//               ^^^ reference java/util/ArrayList#add().
 //                   ^^^^^^^^^^ reference local13
   }
 
@@ -200,7 +200,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                  ^^^^^ reference local14
     super.add(index, element);
 //  ^^^^^ reference com/airbnb/epoxy/ModelList#super.
-//        ^^^ reference java/util/ArrayList#add(+2).
+//        ^^^ reference java/util/ArrayList#add(+1).
 //            ^^^^^ reference local14
 //                   ^^^^^^^ reference local15
   }

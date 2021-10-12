@@ -4,13 +4,13 @@ import upickle.core.NoOpVisitor
 //                  ^^^^^^^^^^^ reference upickle/core/NoOpVisitor.
 
 package object ujson{
-//             ^^^^^ definition ujson/package.
+//             ^^^^^ definition ujson/package. package object ujson
   def transform[T](t: Readable, v: upickle.core.Visitor[_, T]) = t.transform(v)
-//    ^^^^^^^^^ definition ujson/package.transform().
-//              ^ definition ujson/package.transform().[T]
-//                 ^ definition ujson/package.transform().(t)
+//    ^^^^^^^^^ definition ujson/package.transform(). def transform(t: Readable, v: Visitor[local0, T[): T
+//              ^ definition ujson/package.transform().[T] T
+//                 ^ definition ujson/package.transform().(t) t: Readable
 //                    ^^^^^^^^ reference ujson/Readable#
-//                              ^ definition ujson/package.transform().(v)
+//                              ^ definition ujson/package.transform().(v) v: Visitor[local0, T[
 //                                 ^^^^^^^ reference upickle/
 //                                         ^^^^ reference upickle/core/
 //                                              ^^^^^^^ reference upickle/core/Visitor#
@@ -23,10 +23,10 @@ package object ujson{
     * Read the given JSON input as a JSON struct
     */
   def read(s: Readable, trace: Boolean = false): Value.Value =
-//    ^^^^ definition ujson/package.read().
-//         ^ definition ujson/package.read().(s)
+//    ^^^^ definition ujson/package.read(). def read(s: Readable, trace: Boolean): Value
+//         ^ definition ujson/package.read().(s) s: Readable
 //            ^^^^^^^^ reference ujson/Readable#
-//                      ^^^^^ definition ujson/package.read().(trace)
+//                      ^^^^^ definition ujson/package.read().(trace) default trace: Boolean
 //                             ^^^^^^^ reference scala/Boolean#
 //                                               ^^^^^ reference ujson/Value.
 //                                                     ^^^^^ reference ujson/Value.Value#
@@ -41,8 +41,8 @@ package object ujson{
 //                                                              ^ reference ujson/package.read().(s)
 
   def copy(t: Value.Value): Value.Value = transform(t, Value)
-//    ^^^^ definition ujson/package.copy().
-//         ^ definition ujson/package.copy().(t)
+//    ^^^^ definition ujson/package.copy(). def copy(t: Value): Value
+//         ^ definition ujson/package.copy().(t) t: Value
 //            ^^^^^ reference ujson/Value.
 //                  ^^^^^ reference ujson/Value.Value#
 //                          ^^^^^ reference ujson/Value.
@@ -55,19 +55,19 @@ package object ujson{
     * Write the given JSON struct as a JSON String
     */
   def write(t: Value.Value,
-//    ^^^^^ definition ujson/package.write().
-//          ^ definition ujson/package.write().(t)
+//    ^^^^^ definition ujson/package.write(). def write(t: Value, indent: Int, escapeUnicode: Boolean): String
+//          ^ definition ujson/package.write().(t) t: Value
 //             ^^^^^ reference ujson/Value.
 //                   ^^^^^ reference ujson/Value.Value#
             indent: Int = -1,
-//          ^^^^^^ definition ujson/package.write().(indent)
+//          ^^^^^^ definition ujson/package.write().(indent) default indent: Int
 //                  ^^^ reference scala/Int#
             escapeUnicode: Boolean = false): String = {
-//          ^^^^^^^^^^^^^ definition ujson/package.write().(escapeUnicode)
+//          ^^^^^^^^^^^^^ definition ujson/package.write().(escapeUnicode) default escapeUnicode: Boolean
 //                         ^^^^^^^ reference scala/Boolean#
 //                                           ^^^^^^ reference scala/Predef.String#
     val writer = new java.io.StringWriter
-//      ^^^^^^ definition local0
+//      ^^^^^^ definition local1 writer: StringWriter
 //                   ^^^^ reference java/
 //                        ^^ reference java/io/
 //                           ^^^^^^^^^^^^ reference java/io/StringWriter#
@@ -75,11 +75,11 @@ package object ujson{
     writeTo(t, writer, indent, escapeUnicode)
 //  ^^^^^^^ reference ujson/package.writeTo().
 //          ^ reference ujson/package.write().(t)
-//             ^^^^^^ reference local0
+//             ^^^^^^ reference local1
 //                     ^^^^^^ reference ujson/package.write().(indent)
 //                             ^^^^^^^^^^^^^ reference ujson/package.write().(escapeUnicode)
     writer.toString
-//  ^^^^^^ reference local0
+//  ^^^^^^ reference local1
 //         ^^^^^^^^ reference java/io/StringWriter#toString().
   }
 
@@ -87,46 +87,45 @@ package object ujson{
     * Write the given JSON struct as a JSON String to the given Writer
     */
   def writeTo(t: Value.Value,
-//    ^^^^^^^ definition ujson/package.writeTo().
-//            ^ definition ujson/package.writeTo().(t)
+//    ^^^^^^^ definition ujson/package.writeTo(). def writeTo(t: Value, out: Writer, indent: Int, escapeUnicode: Boolean): Unit
+//            ^ definition ujson/package.writeTo().(t) t: Value
 //               ^^^^^ reference ujson/Value.
 //                     ^^^^^ reference ujson/Value.Value#
               out: java.io.Writer,
-//            ^^^ definition ujson/package.writeTo().(out)
+//            ^^^ definition ujson/package.writeTo().(out) out: Writer
 //                 ^^^^ reference java/
 //                      ^^ reference java/io/
 //                         ^^^^^^ reference java/io/Writer#
               indent: Int = -1,
-//            ^^^^^^ definition ujson/package.writeTo().(indent)
+//            ^^^^^^ definition ujson/package.writeTo().(indent) default indent: Int
 //                    ^^^ reference scala/Int#
               escapeUnicode: Boolean = false): Unit = {
-//            ^^^^^^^^^^^^^ definition ujson/package.writeTo().(escapeUnicode)
+//            ^^^^^^^^^^^^^ definition ujson/package.writeTo().(escapeUnicode) default escapeUnicode: Boolean
 //                           ^^^^^^^ reference scala/Boolean#
 //                                             ^^^^ reference scala/Unit#
     transform(t, Renderer(out, indent, escapeUnicode))
 //  ^^^^^^^^^ reference ujson/package.transform().
 //            ^ reference ujson/package.writeTo().(t)
 //               ^^^^^^^^ reference ujson/Renderer.
-//                        reference ujson/Renderer.apply().
 //                        ^^^ reference ujson/package.writeTo().(out)
 //                             ^^^^^^ reference ujson/package.writeTo().(indent)
 //                                     ^^^^^^^^^^^^^ reference ujson/package.writeTo().(escapeUnicode)
   }
   def writeToOutputStream(t: Value.Value,
-//    ^^^^^^^^^^^^^^^^^^^ definition ujson/package.writeToOutputStream().
-//                        ^ definition ujson/package.writeToOutputStream().(t)
+//    ^^^^^^^^^^^^^^^^^^^ definition ujson/package.writeToOutputStream(). def writeToOutputStream(t: Value, out: OutputStream, indent: Int, escapeUnicode: Boolean): Unit
+//                        ^ definition ujson/package.writeToOutputStream().(t) t: Value
 //                           ^^^^^ reference ujson/Value.
 //                                 ^^^^^ reference ujson/Value.Value#
                           out: java.io.OutputStream,
-//                        ^^^ definition ujson/package.writeToOutputStream().(out)
+//                        ^^^ definition ujson/package.writeToOutputStream().(out) out: OutputStream
 //                             ^^^^ reference java/
 //                                  ^^ reference java/io/
 //                                     ^^^^^^^^^^^^ reference java/io/OutputStream#
                           indent: Int = -1,
-//                        ^^^^^^ definition ujson/package.writeToOutputStream().(indent)
+//                        ^^^^^^ definition ujson/package.writeToOutputStream().(indent) default indent: Int
 //                                ^^^ reference scala/Int#
                           escapeUnicode: Boolean = false): Unit = {
-//                        ^^^^^^^^^^^^^ definition ujson/package.writeToOutputStream().(escapeUnicode)
+//                        ^^^^^^^^^^^^^ definition ujson/package.writeToOutputStream().(escapeUnicode) default escapeUnicode: Boolean
 //                                       ^^^^^^^ reference scala/Boolean#
 //                                                         ^^^^ reference scala/Unit#
     transform(t, new BaseByteRenderer(out, indent, escapeUnicode))
@@ -140,18 +139,18 @@ package object ujson{
   }
 
   def writeToByteArray(t: Value.Value,
-//    ^^^^^^^^^^^^^^^^ definition ujson/package.writeToByteArray().
-//                     ^ definition ujson/package.writeToByteArray().(t)
+//    ^^^^^^^^^^^^^^^^ definition ujson/package.writeToByteArray(). def writeToByteArray(t: Value, indent: Int, escapeUnicode: Boolean): Array[Byte]
+//                     ^ definition ujson/package.writeToByteArray().(t) t: Value
 //                        ^^^^^ reference ujson/Value.
 //                              ^^^^^ reference ujson/Value.Value#
                        indent: Int = -1,
-//                     ^^^^^^ definition ujson/package.writeToByteArray().(indent)
+//                     ^^^^^^ definition ujson/package.writeToByteArray().(indent) default indent: Int
 //                             ^^^ reference scala/Int#
                        escapeUnicode: Boolean = false) = {
-//                     ^^^^^^^^^^^^^ definition ujson/package.writeToByteArray().(escapeUnicode)
+//                     ^^^^^^^^^^^^^ definition ujson/package.writeToByteArray().(escapeUnicode) default escapeUnicode: Boolean
 //                                    ^^^^^^^ reference scala/Boolean#
     val baos = new java.io.ByteArrayOutputStream
-//      ^^^^ definition local1
+//      ^^^^ definition local2 baos: ByteArrayOutputStream
 //                 ^^^^ reference java/
 //                      ^^ reference java/io/
 //                         ^^^^^^^^^^^^^^^^^^^^^ reference java/io/ByteArrayOutputStream#
@@ -159,11 +158,11 @@ package object ujson{
     writeToOutputStream(t, baos, indent, escapeUnicode)
 //  ^^^^^^^^^^^^^^^^^^^ reference ujson/package.writeToOutputStream().
 //                      ^ reference ujson/package.writeToByteArray().(t)
-//                         ^^^^ reference local1
+//                         ^^^^ reference local2
 //                               ^^^^^^ reference ujson/package.writeToByteArray().(indent)
 //                                       ^^^^^^^^^^^^^ reference ujson/package.writeToByteArray().(escapeUnicode)
     baos.toByteArray
-//  ^^^^ reference local1
+//  ^^^^ reference local2
 //       ^^^^^^^^^^^ reference java/io/ByteArrayOutputStream#toByteArray().
   }
 
@@ -171,8 +170,8 @@ package object ujson{
     * Parse the given JSON input, failing if it is invalid
     */
   def validate(s: Readable): Unit = transform(s, NoOpVisitor)
-//    ^^^^^^^^ definition ujson/package.validate().
-//             ^ definition ujson/package.validate().(s)
+//    ^^^^^^^^ definition ujson/package.validate(). def validate(s: Readable): Unit
+//             ^ definition ujson/package.validate().(s) s: Readable
 //                ^^^^^^^^ reference ujson/Readable#
 //                           ^^^^ reference scala/Unit#
 //                                  ^^^^^^^^^ reference ujson/package.transform().
@@ -183,16 +182,16 @@ package object ujson{
     * the configured formatting
     */
   def reformat(s: Readable, indent: Int = -1, escapeUnicode: Boolean = false): String = {
-//    ^^^^^^^^ definition ujson/package.reformat().
-//             ^ definition ujson/package.reformat().(s)
+//    ^^^^^^^^ definition ujson/package.reformat(). def reformat(s: Readable, indent: Int, escapeUnicode: Boolean): String
+//             ^ definition ujson/package.reformat().(s) s: Readable
 //                ^^^^^^^^ reference ujson/Readable#
-//                          ^^^^^^ definition ujson/package.reformat().(indent)
+//                          ^^^^^^ definition ujson/package.reformat().(indent) default indent: Int
 //                                  ^^^ reference scala/Int#
-//                                            ^^^^^^^^^^^^^ definition ujson/package.reformat().(escapeUnicode)
+//                                            ^^^^^^^^^^^^^ definition ujson/package.reformat().(escapeUnicode) default escapeUnicode: Boolean
 //                                                           ^^^^^^^ reference scala/Boolean#
 //                                                                             ^^^^^^ reference scala/Predef.String#
     val writer = new java.io.StringWriter()
-//      ^^^^^^ definition local2
+//      ^^^^^^ definition local3 writer: StringWriter
 //                   ^^^^ reference java/
 //                        ^^ reference java/io/
 //                           ^^^^^^^^^^^^ reference java/io/StringWriter#
@@ -200,11 +199,11 @@ package object ujson{
     reformatTo(s, writer, indent, escapeUnicode)
 //  ^^^^^^^^^^ reference ujson/package.reformatTo().
 //             ^ reference ujson/package.reformat().(s)
-//                ^^^^^^ reference local2
+//                ^^^^^^ reference local3
 //                        ^^^^^^ reference ujson/package.reformat().(indent)
 //                                ^^^^^^^^^^^^^ reference ujson/package.reformat().(escapeUnicode)
     writer.toString
-//  ^^^^^^ reference local2
+//  ^^^^^^ reference local3
 //         ^^^^^^^^ reference java/io/StringWriter#toString().
   }
   /**
@@ -212,23 +211,22 @@ package object ujson{
     * the configured formatting to the given Writer
     */
   def reformatTo(s: Readable, out: java.io.Writer, indent: Int = -1, escapeUnicode: Boolean = false): Unit = {
-//    ^^^^^^^^^^ definition ujson/package.reformatTo().
-//               ^ definition ujson/package.reformatTo().(s)
+//    ^^^^^^^^^^ definition ujson/package.reformatTo(). def reformatTo(s: Readable, out: Writer, indent: Int, escapeUnicode: Boolean): Unit
+//               ^ definition ujson/package.reformatTo().(s) s: Readable
 //                  ^^^^^^^^ reference ujson/Readable#
-//                            ^^^ definition ujson/package.reformatTo().(out)
+//                            ^^^ definition ujson/package.reformatTo().(out) out: Writer
 //                                 ^^^^ reference java/
 //                                      ^^ reference java/io/
 //                                         ^^^^^^ reference java/io/Writer#
-//                                                 ^^^^^^ definition ujson/package.reformatTo().(indent)
+//                                                 ^^^^^^ definition ujson/package.reformatTo().(indent) default indent: Int
 //                                                         ^^^ reference scala/Int#
-//                                                                   ^^^^^^^^^^^^^ definition ujson/package.reformatTo().(escapeUnicode)
+//                                                                   ^^^^^^^^^^^^^ definition ujson/package.reformatTo().(escapeUnicode) default escapeUnicode: Boolean
 //                                                                                  ^^^^^^^ reference scala/Boolean#
 //                                                                                                    ^^^^ reference scala/Unit#
     transform(s, Renderer(out, indent, escapeUnicode))
 //  ^^^^^^^^^ reference ujson/package.transform().
 //            ^ reference ujson/package.reformatTo().(s)
 //               ^^^^^^^^ reference ujson/Renderer.
-//                        reference ujson/Renderer.apply().
 //                        ^^^ reference ujson/package.reformatTo().(out)
 //                             ^^^^^^ reference ujson/package.reformatTo().(indent)
 //                                     ^^^^^^^^^^^^^ reference ujson/package.reformatTo().(escapeUnicode)
@@ -238,19 +236,19 @@ package object ujson{
     * the configured formatting to the given Writer
     */
   def reformatToOutputStream(s: Readable,
-//    ^^^^^^^^^^^^^^^^^^^^^^ definition ujson/package.reformatToOutputStream().
-//                           ^ definition ujson/package.reformatToOutputStream().(s)
+//    ^^^^^^^^^^^^^^^^^^^^^^ definition ujson/package.reformatToOutputStream(). def reformatToOutputStream(s: Readable, out: OutputStream, indent: Int, escapeUnicode: Boolean): Unit
+//                           ^ definition ujson/package.reformatToOutputStream().(s) s: Readable
 //                              ^^^^^^^^ reference ujson/Readable#
                              out: java.io.OutputStream,
-//                           ^^^ definition ujson/package.reformatToOutputStream().(out)
+//                           ^^^ definition ujson/package.reformatToOutputStream().(out) out: OutputStream
 //                                ^^^^ reference java/
 //                                     ^^ reference java/io/
 //                                        ^^^^^^^^^^^^ reference java/io/OutputStream#
                              indent: Int = -1,
-//                           ^^^^^^ definition ujson/package.reformatToOutputStream().(indent)
+//                           ^^^^^^ definition ujson/package.reformatToOutputStream().(indent) default indent: Int
 //                                   ^^^ reference scala/Int#
                              escapeUnicode: Boolean = false): Unit = {
-//                           ^^^^^^^^^^^^^ definition ujson/package.reformatToOutputStream().(escapeUnicode)
+//                           ^^^^^^^^^^^^^ definition ujson/package.reformatToOutputStream().(escapeUnicode) default escapeUnicode: Boolean
 //                                          ^^^^^^^ reference scala/Boolean#
 //                                                            ^^^^ reference scala/Unit#
     transform(s, new BaseByteRenderer(out, indent, escapeUnicode))
@@ -263,17 +261,17 @@ package object ujson{
 //                                                 ^^^^^^^^^^^^^ reference ujson/package.reformatToOutputStream().(escapeUnicode)
   }
   def reformatToByteArray(s: Readable,
-//    ^^^^^^^^^^^^^^^^^^^ definition ujson/package.reformatToByteArray().
-//                        ^ definition ujson/package.reformatToByteArray().(s)
+//    ^^^^^^^^^^^^^^^^^^^ definition ujson/package.reformatToByteArray(). def reformatToByteArray(s: Readable, indent: Int, escapeUnicode: Boolean): Array[Byte]
+//                        ^ definition ujson/package.reformatToByteArray().(s) s: Readable
 //                           ^^^^^^^^ reference ujson/Readable#
                           indent: Int = -1,
-//                        ^^^^^^ definition ujson/package.reformatToByteArray().(indent)
+//                        ^^^^^^ definition ujson/package.reformatToByteArray().(indent) default indent: Int
 //                                ^^^ reference scala/Int#
                           escapeUnicode: Boolean = false) = {
-//                        ^^^^^^^^^^^^^ definition ujson/package.reformatToByteArray().(escapeUnicode)
+//                        ^^^^^^^^^^^^^ definition ujson/package.reformatToByteArray().(escapeUnicode) default escapeUnicode: Boolean
 //                                       ^^^^^^^ reference scala/Boolean#
     val baos = new java.io.ByteArrayOutputStream
-//      ^^^^ definition local3
+//      ^^^^ definition local4 baos: ByteArrayOutputStream
 //                 ^^^^ reference java/
 //                      ^^ reference java/io/
 //                         ^^^^^^^^^^^^^^^^^^^^^ reference java/io/ByteArrayOutputStream#
@@ -281,11 +279,11 @@ package object ujson{
     reformatToOutputStream(s, baos, indent, escapeUnicode)
 //  ^^^^^^^^^^^^^^^^^^^^^^ reference ujson/package.reformatToOutputStream().
 //                         ^ reference ujson/package.reformatToByteArray().(s)
-//                            ^^^^ reference local3
+//                            ^^^^ reference local4
 //                                  ^^^^^^ reference ujson/package.reformatToByteArray().(indent)
 //                                          ^^^^^^^^^^^^^ reference ujson/package.reformatToByteArray().(escapeUnicode)
     baos.toByteArray
-//  ^^^^ reference local3
+//  ^^^^ reference local4
 //       ^^^^^^^^^^^ reference java/io/ByteArrayOutputStream#toByteArray().
   }
   // End ujson
@@ -293,12 +291,12 @@ package object ujson{
 // ^^^^^^^^^^ reference scala/deprecated#
 //            reference scala/deprecated#`<init>`().
   type Js = Value
-//     ^^ definition ujson/package.Js#
+//     ^^ definition ujson/package.Js# type Js >: Value <: Value
 //          ^^^^^ reference ujson/Value#
   @deprecated("use ujson.Value")
 // ^^^^^^^^^^ reference scala/deprecated#
 //            reference scala/deprecated#`<init>`().
   val Js = Value
-//    ^^ definition ujson/package.Js.
+//    ^^ definition ujson/package.Js. @deprecated val Js:
 //         ^^^^^ reference ujson/Value.
 }

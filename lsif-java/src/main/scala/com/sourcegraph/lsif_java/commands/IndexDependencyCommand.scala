@@ -9,52 +9,53 @@ import java.nio.file.StandardOpenOption
 import java.util.jar.JarFile
 
 import com.sourcegraph.io.AbsolutePath
+import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.lsif_java.Dependencies
 import com.sourcegraph.lsif_semanticdb.JavaVersion
+import moped.annotations.DeprecatedName
+import moped.annotations.Hidden
 import moped.cli.Command
 import moped.cli.CommandParser
 
 final case class IndexDependencyCommand(
-    target: Path = Paths.get("maven"),
+    @DeprecatedName("target", "Use --output instead", "0.6.10") output: Path =
+      Paths.get("maven"),
     index: IndexCommand = IndexCommand(),
-    dependency: String = ""
+    @Hidden
+    snapshotCommand: SnapshotLsifCommand = SnapshotLsifCommand(),
+    dependency: String = "",
+    provided: List[String] = Nil,
+    snapshot: Boolean = false
 ) extends Command {
   def app = index.app
   private val absoluteTarget = AbsolutePath
-    .of(target, app.env.workingDirectory)
+    .of(output, app.env.workingDirectory)
     .resolve(dependency.replace(":", "__"))
+  private val indexTarget =
+    if (!snapshot)
+      absoluteTarget
+    else
+      Files.createTempDirectory("lsif-java-index")
+  private val snapshotTarget = absoluteTarget
   def run(): Int = {
     if (dependency == "") {
       app.reporter.error("dependency can't be empty")
       1
     } else {
       val deps = Dependencies
-        .resolveDependencies(List(dependency), transitive = false)
+        .resolveDependencies(dependency :: provided, transitive = false)
       deps.sources.headOption match {
+        case None =>
+          app.reporter.error(s"no sources for dependency '$dependency'")
+          1
         case Some(sources) =>
           unzipJar(sources)
           deps.classpath.headOption match {
+            case None =>
+              app.reporter.error(s"no classpath for dependency '$dependency'")
+              1
             case Some(classpath) =>
-              Option(
-                JavaVersion.classfileJvmVersion(classpath).orElse(8)
-              ) match {
-                case Some(jvmVersion) =>
-                  val config =
-                    s"""{"kind":"maven","jvm":"$jvmVersion","dependencies":["$dependency"]}"""
-                  Files.createDirectories(absoluteTarget)
-                  Files.write(
-                    absoluteTarget.resolve("lsif-java.json"),
-                    config.getBytes(StandardCharsets.UTF_8),
-                    StandardOpenOption.CREATE,
-                    StandardOpenOption.TRUNCATE_EXISTING
-                  )
-                  index
-                    .copy(
-                      buildTool = Some("lsif"),
-                      app = app
-                        .withEnv(app.env.withWorkingDirectory(absoluteTarget))
-                    )
-                    .run()
+              inferJvmVersion(classpath) match {
                 case None =>
                   app
                     .reporter
@@ -62,17 +63,50 @@ final case class IndexDependencyCommand(
                       s"failed to infer JVM version for classpath '$classpath'"
                     )
                   1
+                case Some(jvmVersion) =>
+                  val exit = indexJar(jvmVersion)
+                  if (exit == 0 && snapshot) {
+                    try {
+                      snapshotCommand
+                        .copy(
+                          output = snapshotTarget,
+                          app = app
+                            .withEnv(app.env.withWorkingDirectory(indexTarget))
+                        )
+                        .run()
+                    } finally {
+                      Files.walkFileTree(indexTarget, new DeleteVisitor())
+                    }
+                  } else {
+                    exit
+                  }
               }
-            case None =>
-              app.reporter.error(s"no classpath for dependency '$dependency'")
-              1
           }
-        case None =>
-          app.reporter.error(s"no sources for dependency '$dependency'")
-          1
       }
-      1
     }
+  }
+
+  private def inferJvmVersion(jar: Path): Option[Int] = {
+    Option(JavaVersion.classfileJvmVersion(jar).orElse(8))
+      .map(JavaVersion.roundToNearestStableRelease(_))
+  }
+
+  private def indexJar(jvmVersion: Int): Int = {
+    val config =
+      s"""{"kind":"maven","jvm":"$jvmVersion","dependencies":["$dependency"]}"""
+    Files.createDirectories(indexTarget)
+    Files.write(
+      indexTarget.resolve("lsif-java.json"),
+      config.getBytes(StandardCharsets.UTF_8),
+      StandardOpenOption.CREATE,
+      StandardOpenOption.TRUNCATE_EXISTING
+    )
+    index
+      .copy(
+        buildTool = Some("lsif"),
+        app = app.withEnv(app.env.withWorkingDirectory(indexTarget))
+      )
+      .run()
   }
 
   private def unzipJar(file: Path): Unit = {
@@ -82,7 +116,7 @@ final case class IndexDependencyCommand(
       while (entries.hasMoreElements()) {
         val entry = entries.nextElement()
         if (!entry.isDirectory()) {
-          val out = absoluteTarget.resolve(entry.getName())
+          val out = indexTarget.resolve(entry.getName())
           Files.createDirectories(out.getParent())
           val in = jar.getInputStream(entry)
           try Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING)

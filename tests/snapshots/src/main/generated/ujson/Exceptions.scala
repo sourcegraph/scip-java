@@ -3,15 +3,15 @@ package ujson
 
 
 sealed trait ParsingFailedException extends Exception
-//           ^^^^^^^^^^^^^^^^^^^^^^ definition ujson/ParsingFailedException#
+//           ^^^^^^^^^^^^^^^^^^^^^^ definition ujson/ParsingFailedException# sealed trait ParsingFailedException
 //                                          ^^^^^^^^^ reference scala/package.Exception#
 
 case class ParseException(clue: String, index: Int)
-//         ^^^^^^^^^^^^^^ definition ujson/ParseException#
-//                        definition ujson/ParseException#`<init>`().
-//                        ^^^^ definition ujson/ParseException#clue.
+//         ^^^^^^^^^^^^^^ definition ujson/ParseException# case class ParseException(clue: String, index: Int) extends Exception with ParsingFailedException
+//                        definition ujson/ParseException#`<init>`(). def this(clue: String, index: Int)
+//                        ^^^^ definition ujson/ParseException#clue. val clue: String
 //                              ^^^^^^ reference scala/Predef.String#
-//                                      ^^^^^ definition ujson/ParseException#index.
+//                                      ^^^^^ definition ujson/ParseException#index. val index: Int
 //                                             ^^^ reference scala/Int#
   extends Exception(clue + " at index " + index) with ParsingFailedException
 //        ^^^^^^^^^ reference scala/package.Exception#
@@ -23,9 +23,9 @@ case class ParseException(clue: String, index: Int)
 //                                                    ^^^^^^^^^^^^^^^^^^^^^^ reference ujson/ParsingFailedException#
 
 case class IncompleteParseException(msg: String)
-//         ^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/IncompleteParseException#
-//                                  definition ujson/IncompleteParseException#`<init>`().
-//                                  ^^^ definition ujson/IncompleteParseException#msg.
+//         ^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/IncompleteParseException# case class IncompleteParseException(msg: String) extends Exception with ParsingFailedException
+//                                  definition ujson/IncompleteParseException#`<init>`(). def this(msg: String)
+//                                  ^^^ definition ujson/IncompleteParseException#msg. val msg: String
 //                                       ^^^^^^ reference scala/Predef.String#
   extends Exception(msg) with ParsingFailedException
 //        ^^^^^^^^^ reference scala/package.Exception#

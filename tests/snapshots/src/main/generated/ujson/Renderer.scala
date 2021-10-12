@@ -20,11 +20,11 @@ import scala.annotation.switch
 //                      ^^^^^^ reference scala/annotation/switch#
 
 case class BytesRenderer(indent: Int = -1, escapeUnicode: Boolean = false)
-//         ^^^^^^^^^^^^^ definition ujson/BytesRenderer#
-//                       definition ujson/BytesRenderer#`<init>`().
-//                       ^^^^^^ definition ujson/BytesRenderer#indent.
+//         ^^^^^^^^^^^^^ definition ujson/BytesRenderer# case class BytesRenderer(indent: Int, escapeUnicode: Boolean) extends BaseByteRenderer[ByteArrayOutputStream]
+//                       definition ujson/BytesRenderer#`<init>`(). def this(indent: Int, escapeUnicode: Boolean)
+//                       ^^^^^^ definition ujson/BytesRenderer#indent. val indent: Int
 //                               ^^^ reference scala/Int#
-//                                         ^^^^^^^^^^^^^ definition ujson/BytesRenderer#escapeUnicode.
+//                                         ^^^^^^^^^^^^^ definition ujson/BytesRenderer#escapeUnicode. val escapeUnicode: Boolean
 //                                                        ^^^^^^^ reference scala/Boolean#
   extends BaseByteRenderer(new ByteArrayOutputStream(), indent, escapeUnicode){
 //        ^^^^^^^^^^^^^^^^ reference ujson/BaseByteRenderer#
@@ -37,12 +37,12 @@ case class BytesRenderer(indent: Int = -1, escapeUnicode: Boolean = false)
 
 
 case class StringRenderer(indent: Int = -1,
-//         ^^^^^^^^^^^^^^ definition ujson/StringRenderer#
-//                        definition ujson/StringRenderer#`<init>`().
-//                        ^^^^^^ definition ujson/StringRenderer#indent.
+//         ^^^^^^^^^^^^^^ definition ujson/StringRenderer# case class StringRenderer(indent: Int, escapeUnicode: Boolean) extends BaseCharRenderer[StringWriter]
+//                        definition ujson/StringRenderer#`<init>`(). def this(indent: Int, escapeUnicode: Boolean)
+//                        ^^^^^^ definition ujson/StringRenderer#indent. val indent: Int
 //                                ^^^ reference scala/Int#
                           escapeUnicode: Boolean = false)
-//                        ^^^^^^^^^^^^^ definition ujson/StringRenderer#escapeUnicode.
+//                        ^^^^^^^^^^^^^ definition ujson/StringRenderer#escapeUnicode. val escapeUnicode: Boolean
 //                                       ^^^^^^^ reference scala/Boolean#
   extends BaseCharRenderer(new java.io.StringWriter(), indent, escapeUnicode)
 //        ^^^^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#
@@ -55,17 +55,17 @@ case class StringRenderer(indent: Int = -1,
 //                                                             ^^^^^^^^^^^^^ reference ujson/StringRenderer#`<init>`().(escapeUnicode)
 
 case class Renderer(out: java.io.Writer,
-//         ^^^^^^^^ definition ujson/Renderer#
-//                  definition ujson/Renderer#`<init>`().
-//                  ^^^ definition ujson/Renderer#out.
+//         ^^^^^^^^ definition ujson/Renderer# case class Renderer(out: Writer, indent: Int, escapeUnicode: Boolean) extends BaseCharRenderer[Writer]
+//                  definition ujson/Renderer#`<init>`(). def this(out: Writer, indent: Int, escapeUnicode: Boolean)
+//                  ^^^ definition ujson/Renderer#out. val out: Writer
 //                       ^^^^ reference java/
 //                            ^^ reference java/io/
 //                               ^^^^^^ reference java/io/Writer#
                     indent: Int = -1,
-//                  ^^^^^^ definition ujson/Renderer#indent.
+//                  ^^^^^^ definition ujson/Renderer#indent. val indent: Int
 //                          ^^^ reference scala/Int#
                     escapeUnicode: Boolean = false)
-//                  ^^^^^^^^^^^^^ definition ujson/Renderer#escapeUnicode.
+//                  ^^^^^^^^^^^^^ definition ujson/Renderer#escapeUnicode. val escapeUnicode: Boolean
 //                                 ^^^^^^^ reference scala/Boolean#
   extends BaseCharRenderer(out, indent, escapeUnicode)
 //        ^^^^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#
