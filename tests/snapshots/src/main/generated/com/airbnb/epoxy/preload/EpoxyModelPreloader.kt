@@ -95,6 +95,7 @@ abstract class EpoxyModelPreloader<T : EpoxyModel<*>, U : ViewMetadata?, P : Pre
     )
 
     companion object {
+//            ^^^^^^^^^ definition com/airbnb/epoxy/preload/EpoxyModelPreloader#Companion#
 
         /**
          * Helper to create a [EpoxyModelPreloader].

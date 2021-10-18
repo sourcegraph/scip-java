@@ -517,6 +517,7 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
     }
 
     companion object {
+//            ^^^^^^^^^ definition com/airbnb/epoxy/preload/EpoxyPreloader#Companion#
 
         /**
          *
@@ -709,6 +710,7 @@ class ViewData<out U : ViewMetadata?>(
 interface ViewMetadata {
 //        ^^^^^^^^^^^^ definition com/airbnb/epoxy/preload/ViewMetadata#
     companion object {
+//            ^^^^^^^^^ definition com/airbnb/epoxy/preload/ViewMetadata#Companion#
         fun getDefault(view: View): ViewMetadata? {
 //          ^^^^^^^^^^ definition com/airbnb/epoxy/preload/ViewMetadata#Companion#getDefault().
 //                     ^^^^ definition com/airbnb/epoxy/preload/ViewMetadata#Companion#getDefault().(view)
