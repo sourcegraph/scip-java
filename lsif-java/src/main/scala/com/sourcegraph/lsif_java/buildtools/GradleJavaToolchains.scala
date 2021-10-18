@@ -14,7 +14,10 @@ case class GradleJavaToolchains(
     tool: GradleBuildTool,
     index: IndexCommand,
     gradleVersion: Option[String],
+    isJavaEnabled: Boolean,
     isScalaEnabled: Boolean,
+    isKotlinEnabled: Boolean,
+    isKotlinMultiplatformEnabled: Boolean,
     gradleCommand: String,
     tmp: Path
 ) {
@@ -56,7 +59,11 @@ object GradleJavaToolchains {
   ): GradleJavaToolchains = {
     val scriptPath = tmp.resolve("java-toolchains.gradle")
     val toolchainsPath = tmp.resolve("java-toolchains.txt")
+    val javaEnabledPath = tmp.resolve("java-enabled.txt")
     val scalaEnabledPath = tmp.resolve("scala-enabled.txt")
+    val kotlinEnabledPath = tmp.resolve("kotlin-enabled.txt")
+    val kotlinMultiplatformEnabledPath = tmp
+      .resolve("kotlin-multiplatform-enabled.txt")
     val gradleVersionPath = tmp.resolve("gradle-version.txt")
     val taskName = "lsifDetectJavaToolchains"
     val script =
@@ -70,12 +77,21 @@ object GradleJavaToolchains {
           |} catch (Exception e) {
           |  // Ignore errors.
           |}
+          |
+          |def lsifJavaAppendLine(path, line) {
+          |  java.nio.file.Files.write(
+          |    java.nio.file.Paths.get(path),
+          |    [line],
+          |    java.nio.file.StandardOpenOption.APPEND,
+          |    java.nio.file.StandardOpenOption.CREATE)
+          |}
+          |
           |allprojects {
           |  task $taskName {
           |    def toolchainsOut = java.nio.file.Paths.get('$toolchainsPath')
           |    doLast {
-          |      tasks.withType(JavaCompile) {
-          |        try {
+          |      try {
+          |        tasks.withType(JavaCompile) {
           |          def lines = new ArrayList<String>()
           |          def path = javaCompiler.get().getExecutablePath()
           |          def version = javaCompiler.get().getMetadata().getLanguageVersion().asInt()
@@ -85,19 +101,21 @@ object GradleJavaToolchains {
           |            [line],
           |            java.nio.file.StandardOpenOption.APPEND,
           |            java.nio.file.StandardOpenOption.CREATE)
-          |        } catch (Exception e) {
-          |          // Ignore errors.
+          |          lsifJavaAppendLine(toolchainsOut, line)
           |        }
+          |      } catch (Exception e) {
+          |        // Ignore errors.
           |      }
-          |      boolean isScalaEnabled = project.plugins.any {
-          |        it.getClass().getName().endsWith("org.gradle.api.plugins.scala.ScalaPlugin")
-          |      }
-          |      if (isScalaEnabled) {
-          |        java.nio.file.Files.write(
-          |          java.nio.file.Paths.get('$scalaEnabledPath'),
-          |          ["true"],
-          |          java.nio.file.StandardOpenOption.APPEND,
-          |          java.nio.file.StandardOpenOption.CREATE)
+          |      project.plugins.each {
+          |        def name = it.getClass().getName()
+          |        if (name.endsWith("org.gradle.api.plugins.JavaPlugin"))
+          |          lsifJavaAppendLine('$javaEnabledPath', 'true')
+          |        if (name.endsWith("org.gradle.api.plugins.scala.ScalaPlugin"))
+          |          lsifJavaAppendLine('$scalaEnabledPath', 'true')
+          |        if (name.startsWith("org.jetbrains.kotlin.gradle.plugin"))
+          |          lsifJavaAppendLine('$kotlinEnabledPath', 'true')
+          |        if (name.equals("org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper"))
+          |          lsifJavaAppendLine('$kotlinMultiplatformEnabledPath', 'true')
           |      }
           |    }
           |  }
@@ -131,7 +149,11 @@ object GradleJavaToolchains {
       tool,
       index,
       gradleVersion = gradleVersion,
+      isJavaEnabled = Files.isRegularFile(javaEnabledPath),
       isScalaEnabled = Files.isRegularFile(scalaEnabledPath),
+      isKotlinEnabled = Files.isRegularFile(kotlinEnabledPath),
+      isKotlinMultiplatformEnabled = Files
+        .isRegularFile(kotlinMultiplatformEnabledPath),
       gradleCommand = gradleCommand,
       tmp = tmp
     )

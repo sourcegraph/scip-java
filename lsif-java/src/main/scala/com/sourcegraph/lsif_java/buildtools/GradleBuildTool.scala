@@ -84,9 +84,20 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
       index.finalBuildCommand(
         List[Option[String]](
           Some("clean"),
-          Some("compileTestJava"),
+          if (toolchains.isJavaEnabled)
+            Some("compileTestJava")
+          else
+            None,
           if (toolchains.isScalaEnabled)
             Some("compileTestScala")
+          else
+            None,
+          if (toolchains.isKotlinEnabled)
+            Some("compileTestKotlin")
+          else
+            None,
+          if (toolchains.isKotlinMultiplatformEnabled)
+            Some("compileTestKotlinJvm")
           else
             None
         ).flatten
@@ -131,6 +142,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
       else
         ""
     val dependenciesPath = targetroot.resolve("dependencies.txt")
+    val kotlinSemanticdbVersion = BuildInfo.semanticdbKotlincVersion
     Files.deleteIfExists(dependenciesPath)
     val script =
       s"""|allprojects {
@@ -140,6 +152,9 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |    }
           |    boolean isScalaEnabled = project.plugins.any {
           |       it.getClass().getName().endsWith("org.gradle.api.plugins.scala.ScalaPlugin")
+          |    }
+          |    boolean isKotlinEnabled = project.plugins.any {
+          |       it.getClass().getName().startsWith("org.jetbrains.kotlin.gradle.plugin")
           |    }
           |    if (isJavaEnabled) {
           |      tasks.withType(JavaCompile) {
@@ -176,6 +191,25 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |          jvmArgs << '-Dsemanticdb.pluginpath=$pluginpath'
           |          jvmArgs << '-Dsemanticdb.sourceroot=$sourceroot'
           |          jvmArgs << '-Dsemanticdb.targetroot=$targetroot'
+          |        }
+          |      }
+          |    }
+          |    if (isKotlinEnabled) {
+          |      tasks.configureEach {
+          |        if (it.getClass().getName().contains("KotlinCompile")) {
+          |          try {
+          |            def semanticdbKotlincDependency = "com.sourcegraph:semanticdb-kotlinc:$kotlinSemanticdbVersion"
+          |            def semanticdbKotlinc = project.configurations.detachedConfiguration(dependencies.create(semanticdbKotlincDependency)).files[0]
+          |            kotlinOptions {
+          |              freeCompilerArgs << "-Xplugin=" + semanticdbKotlinc
+          |              freeCompilerArgs << "-P"
+          |              freeCompilerArgs << "plugin:semanticdb-kotlinc:sourceroot=$sourceroot"
+          |              freeCompilerArgs << "-P"
+          |              freeCompilerArgs << "plugin:semanticdb-kotlinc:targetroot=$targetroot"
+          |            }
+          |          } catch (Throwable e) {
+          |            e.printStackTrace()
+          |          }
           |        }
           |      }
           |    }
@@ -236,7 +270,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |  }
           |  return null
           |}
-          |    """.stripMargin
+          |""".stripMargin
     Files.write(
       tmp.resolve("init-script.gradle"),
       script.getBytes(StandardCharsets.UTF_8)
