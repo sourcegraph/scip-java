@@ -18,7 +18,7 @@ lazy val V =
     def scala3 = "3.0.1"
     def metals = "0.10.6-M1"
     def scalameta = "4.4.26"
-    def semanticdbKotlinc = "0.0.2"
+    def semanticdbKotlinc = "0.1.0"
     def testcontainers = "0.39.3"
     def requests = "0.6.5"
   }
@@ -409,7 +409,8 @@ lazy val javaOnlySettings = List[Def.Setting[_]](
 lazy val testSettings = List(
   (publish / skip) := true,
   autoScalaLibrary := true,
-  testFrameworks := List(new TestFramework("munit.Framework")),
+  testFrameworks := List(TestFrameworks.MUnit),
+  testOptions ++= List(Tests.Argument(TestFrameworks.MUnit, "-b")),
   libraryDependencies ++=
     List(
       "org.scalameta" %% "munit" % "0.7.29",

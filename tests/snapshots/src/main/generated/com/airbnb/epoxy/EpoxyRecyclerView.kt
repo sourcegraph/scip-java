@@ -1142,6 +1142,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     companion object {
+//            ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#Companion#
         private const val DEFAULT_ADAPTER_REMOVAL_DELAY_MS = 2000
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#Companion#DEFAULT_ADAPTER_REMOVAL_DELAY_MS.
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#Companion#getDEFAULT_ADAPTER_REMOVAL_DELAY_MS().

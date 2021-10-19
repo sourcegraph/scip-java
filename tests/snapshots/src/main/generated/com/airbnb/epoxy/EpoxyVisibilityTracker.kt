@@ -1085,6 +1085,7 @@ class EpoxyVisibilityTracker {
     }
 
     companion object {
+//            ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#
         private const val TAG = "EpoxyVisibilityTracker"
 //                        ^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#TAG.
 //                        ^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTAG().

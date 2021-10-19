@@ -443,6 +443,7 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
     }
 
     companion object {
+//            ^^^^^^^^^ definition com/airbnb/epoxy/ModelGroupHolder#Companion#
 
         private val HELPER_ADAPTER = HelperAdapter()
 //                  ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelGroupHolder#Companion#HELPER_ADAPTER.
