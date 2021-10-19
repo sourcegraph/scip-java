@@ -4,4 +4,4 @@ RUN apt-get install --yes maven npm
 RUN curl -fLo /coursier https://git.io/coursier-cli
 RUN chmod +x /coursier
 RUN npm install --global yarn
-RUN /coursier launch --contrib --ttl 0 lsif-java -- --help
+RUN /coursier bootstrap --standalone com.sourcegraph:lsif-java_2.13:0.6.11 -o /usr/local/bin/lsif-java
