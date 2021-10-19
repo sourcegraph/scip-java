@@ -62,7 +62,20 @@ tools that we're planning to support in the future.</p>
 <h2><a class="anchor" aria-hidden="true" id="install-lsif-java"></a><a href="#install-lsif-java" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install <code>lsif-java</code></h2>
 <p>The most common way to use <code>lsif-java</code> is to run it from CI to upload LSIF
 indexes after merging a pull request. The easiest way to install <code>lsif-java</code> is
-to use the Java launcher.</p>
+to use the Docker launcher.</p>
+<h3><a class="anchor" aria-hidden="true" id="docker-container"></a><a href="#docker-container" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Docker container</h3>
+<p>Run the <code>lsif-java index</code>command from the <code>sourcegraph/lsif-java</code> Docker
+container.</p>
+<pre><code class="hljs css language-sh">$ docker run -v $(<span class="hljs-built_in">pwd</span>):/home/gradle sourcegraph/lsif-java:latest lsif-java index
+$ src lsif upload <span class="hljs-comment"># (optional) upload index to Sourcegraph</span>
+</code></pre>
+<p>If everything went OK, a <code>dump.lsif</code> file should exist after the command has
+finished indexing the project.</p>
+<blockquote>
+<p>The Docker container re-downloads all dependencies on every run, which can be
+slow for large projects. Consider using the <a href="#java-launcher">Java launcher</a>
+instead to re-use the existing build cache of your project.</p>
+</blockquote>
 <h3><a class="anchor" aria-hidden="true" id="java-launcher"></a><a href="#java-launcher" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Java launcher</h3>
 <p>Use the <code>lsif-java</code> launcher if you can install software from the internet in
 your CI.</p>
@@ -128,14 +141,14 @@ libraryDependencies <span class="token operator">+=</span> <span class="token st
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="run-lsif-java-index"></a><a href="#run-lsif-java-index" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Run <code>lsif-java index</code></h2>
 <blockquote>
-<p>The <code>index</code> command is only supported for Gradle and Maven, see
+<p>The <code>index</code> command is only supported for Gradle, Maven and sbt. See
 <a href="#supported-build-tools">Supported build tools</a> for more details about other
 build tools.</p>
 </blockquote>
 <p>Run the <code>lsif-java index</code> command to generate an LSIF index for your codebase.
 This command should automatically infer the structure of your codebase and
 configure your build tool to generate LSIF.</p>
-<pre><code class="hljs css language-sh"><span class="hljs-comment"># At the root of a Gradle or Maven codebase.</span>
+<pre><code class="hljs css language-sh"><span class="hljs-comment"># At the root of a Gradle, Maven or sbt codebase.</span>
 $ lsif-java index
 ...
 info: /path/to/dump.lsif
@@ -192,7 +205,7 @@ EXAMPLES
 <tbody>
 <tr><td>Java</td><td>✅</td><td>✅</td><td>✅</td><td></td></tr>
 <tr><td>Scala</td><td>✅</td><td>❌</td><td>✅</td><td><a href="https://github.com/sourcegraph/lsif-java/issues/302">#302</a></td></tr>
-<tr><td>Kotlin</td><td>❌</td><td>❌</td><td>❌</td><td><a href="https://github.com/sourcegraph/lsif-java/issues/304">#304</a></td></tr>
+<tr><td>Kotlin</td><td>✅</td><td>❌</td><td>n/a</td><td><a href="https://github.com/sourcegraph/lsif-java/issues/304">#304</a></td></tr>
 </tbody>
 </table>
 <h3><a class="anchor" aria-hidden="true" id="java"></a><a href="#java" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Java</h3>
@@ -202,18 +215,18 @@ part of your regular compilation in the build tool. By using Java compiler APIs,
 of Java versions.</p>
 <table>
 <thead>
-<tr><th>Java version</th><th>Support</th></tr>
+<tr><th>Java version</th><th>Support</th><th>Tracking issue</th></tr>
 </thead>
 <tbody>
-<tr><td>Java 7</td><td>❌</td></tr>
-<tr><td>Java 8</td><td>✅</td></tr>
-<tr><td>Java 11</td><td>✅</td></tr>
-<tr><td>Java 12</td><td>Not tested in CI, but may work</td></tr>
-<tr><td>Java 13</td><td>Not tested in CI, but may work</td></tr>
-<tr><td>Java 14</td><td>Not tested in CI, but may work</td></tr>
-<tr><td>Java 15</td><td>✅</td></tr>
-<tr><td>Java 16</td><td>Not tested in CI, but may work</td></tr>
-<tr><td>Java 17</td><td>Not tested in CI, but may work</td></tr>
+<tr><td>Java 7</td><td>❌</td><td></td></tr>
+<tr><td>Java 8</td><td>✅</td><td></td></tr>
+<tr><td>Java 11</td><td>✅</td><td></td></tr>
+<tr><td>Java 12</td><td>Not tested in CI, but may work</td><td></td></tr>
+<tr><td>Java 13</td><td>Not tested in CI, but may work</td><td></td></tr>
+<tr><td>Java 14</td><td>Not tested in CI, but may work</td><td></td></tr>
+<tr><td>Java 15</td><td>✅</td><td></td></tr>
+<tr><td>Java 16</td><td>❌</td><td></td></tr>
+<tr><td>Java 17</td><td>❌</td><td><a href="https://github.com/sourcegraph/lsif-java/issues/263">sourcegraph/lsif-java#263</a></td></tr>
 </tbody>
 </table>
 <h3><a class="anchor" aria-hidden="true" id="scala"></a><a href="#scala" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala</h3>
@@ -234,6 +247,11 @@ by <a href="https://scalameta.org/metals">Metals</a>, the Scala language server.
 <blockquote>
 <p>Scala.js and Scala Native have equal support as Scala on the JVM.</p>
 </blockquote>
+<h3><a class="anchor" aria-hidden="true" id="kotlin"></a><a href="#kotlin" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Kotlin</h3>
+<p>The Kotlin support in lsif-java is the least mature compared to the Java and
+Scala support. Don't hesitate to report issues at
+<a href="https://github.com/sourcegraph/lsif-kotlin">https://github.com/sourcegraph/lsif-kotlin</a> if you encounter issues using the
+Kotlin support.</p>
 <h2><a class="anchor" aria-hidden="true" id="supported-build-tools"></a><a href="#supported-build-tools" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Supported build tools</h2>
 <p>It's possible to use lsif-java with any Java build tool. Some build tools can be
 automatically configured by the <code>lsif-java index</code> command while other build
@@ -247,7 +265,7 @@ free to subscribe to the tracking issues to receive updates on your build tool.<
 </thead>
 <tbody>
 <tr><td>Maven</td><td>✅</td><td>❌</td><td>❌</td><td></td></tr>
-<tr><td>Gradle</td><td>✅</td><td>✅</td><td>❌</td><td></td></tr>
+<tr><td>Gradle</td><td>✅</td><td>✅</td><td>✅</td><td></td></tr>
 <tr><td>sbt</td><td>✅</td><td>✅</td><td>n/a</td><td></td></tr>
 <tr><td>Ant</td><td>❌</td><td>❌</td><td>❌</td><td><a href="https://github.com/sourcegraph/lsif-java/issues/305">sourcegraph/lsif-java#305</a></td></tr>
 <tr><td>Bazel</td><td>❌</td><td>❌</td><td>❌</td><td><a href="https://github.com/sourcegraph/lsif-java/issues/88">sourcegraph/lsif-java#88</a></td></tr>
@@ -271,8 +289,8 @@ projects. However, the following Gradle integrations are not yet supported:</p>
 <tr><th>Integration</th><th>Supported</th><th>Tracking issue</th></tr>
 </thead>
 <tbody>
-<tr><td>Android</td><td>❌</td><td><a href="https://github.com/sourcegraph/lsif-java/issues/304">sourcegraph/lsif-java#304</a></td></tr>
-<tr><td>Kotlin</td><td>❌</td><td><a href="https://github.com/sourcegraph/lsif-java/issues/177">sourcegraph/lsif-java#177</a></td></tr>
+<tr><td>Android</td><td>❌</td><td><a href="https://github.com/sourcegraph/lsif-java/issues/177">sourcegraph/lsif-java#177</a></td></tr>
+<tr><td>Kotlin</td><td>✅</td><td></td></tr>
 <tr><td>Scala</td><td>✅</td><td></td></tr>
 </tbody>
 </table>
@@ -300,4 +318,4 @@ projects, with the following caveats:</p>
 <tr><td>sbt &lt;v0.13.17</td><td>❌</td><td>Upgrade to sbt v0.13.17</td></tr>
 </tbody>
 </table>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/lsif-java/docs/manual-configuration.html"><span>Manual configuration</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install-lsif-java">Install <code>lsif-java</code></a><ul class="toc-headings"><li><a href="#java-launcher">Java launcher</a></li><li><a href="#java-fat-jar">Java fat jar</a></li><li><a href="#java-library">Java library</a></li></ul></li><li><a href="#run-lsif-java-index">Run <code>lsif-java index</code></a></li><li><a href="#supported-programming-languages">Supported programming languages</a><ul class="toc-headings"><li><a href="#java">Java</a></li><li><a href="#scala">Scala</a></li></ul></li><li><a href="#supported-build-tools">Supported build tools</a><ul class="toc-headings"><li><a href="#automatic-configuration">Automatic configuration</a></li><li><a href="#manual-configuration">Manual configuration</a></li><li><a href="#gradle">Gradle</a></li><li><a href="#maven">Maven</a></li><li><a href="#sbt">sbt</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#664100"><section class="sitemap"><a href="/lsif-java/" class="nav-home"><img src="/lsif-java/img/lsif-java.png" alt="lsif-java" width="66" height="58"/></a><div><h5>Docs</h5><a href="/lsif-java/docs/installation.html">Get started</a></div><div><h5>Community</h5><a target="_blank">Chat on Gitter</a></div><div><h5>More</h5><a href="https://github.com/sourcegraph/lsif-java" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2021 lsif-java developers</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/lsif-java/docs/manual-configuration.html"><span>Manual configuration</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install-lsif-java">Install <code>lsif-java</code></a><ul class="toc-headings"><li><a href="#docker-container">Docker container</a></li><li><a href="#java-launcher">Java launcher</a></li><li><a href="#java-fat-jar">Java fat jar</a></li><li><a href="#java-library">Java library</a></li></ul></li><li><a href="#run-lsif-java-index">Run <code>lsif-java index</code></a></li><li><a href="#supported-programming-languages">Supported programming languages</a><ul class="toc-headings"><li><a href="#java">Java</a></li><li><a href="#scala">Scala</a></li><li><a href="#kotlin">Kotlin</a></li></ul></li><li><a href="#supported-build-tools">Supported build tools</a><ul class="toc-headings"><li><a href="#automatic-configuration">Automatic configuration</a></li><li><a href="#manual-configuration">Manual configuration</a></li><li><a href="#gradle">Gradle</a></li><li><a href="#maven">Maven</a></li><li><a href="#sbt">sbt</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#664100"><section class="sitemap"><a href="/lsif-java/" class="nav-home"><img src="/lsif-java/img/lsif-java.png" alt="lsif-java" width="66" height="58"/></a><div><h5>Docs</h5><a href="/lsif-java/docs/installation.html">Get started</a></div><div><h5>Community</h5><a target="_blank">Chat on Gitter</a></div><div><h5>More</h5><a href="https://github.com/sourcegraph/lsif-java" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2021 lsif-java developers</section></footer></div></body></html>
