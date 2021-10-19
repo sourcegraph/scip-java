@@ -13,7 +13,24 @@ tools that we're planning to support in the future.
 
 The most common way to use `lsif-java` is to run it from CI to upload LSIF
 indexes after merging a pull request. The easiest way to install `lsif-java` is
-to use the Java launcher.
+to use the Docker launcher.
+
+### Docker container
+
+Run the `lsif-java index`command from the `sourcegraph/lsif-java` Docker
+container.
+
+```sh
+$ docker run -v $(pwd):/home/gradle sourcegraph/lsif-java:latest lsif-java index
+$ src lsif upload # (optional) upload index to Sourcegraph
+```
+
+If everything went OK, a `dump.lsif` file should exist after the command has
+finished indexing the project.
+
+> The Docker container re-downloads all dependencies on every run, which can be
+> slow for large projects. Consider using the [Java launcher](#java-launcher)
+> instead to re-use the existing build cache of your project.
 
 ### Java launcher
 
@@ -104,7 +121,7 @@ libraryDependencies += "com.sourcegraph" %% "lsif-java" % "@STABLE_VERSION@"
 
 ## Run `lsif-java index`
 
-> The `index` command is only supported for Gradle and Maven, see
+> The `index` command is only supported for Gradle, Maven and sbt. See
 > [Supported build tools](#supported-build-tools) for more details about other
 > build tools.
 
@@ -113,7 +130,7 @@ This command should automatically infer the structure of your codebase and
 configure your build tool to generate LSIF.
 
 ```sh
-# At the root of a Gradle or Maven codebase.
+# At the root of a Gradle, Maven or sbt codebase.
 $ lsif-java index
 ...
 info: /path/to/dump.lsif
@@ -138,7 +155,7 @@ com.sourcegraph.lsif_java.LsifJava.printHelp(Console.out)
 | -------------------- | ------ | ----- | --- | ----------------------------------------------------------- |
 | Java                 | ✅     | ✅    | ✅  |                                                             |
 | Scala                | ✅     | ❌    | ✅  | [#302](https://github.com/sourcegraph/lsif-java/issues/302) |
-| Kotlin               | ❌     | ❌    | ❌  | [#304](https://github.com/sourcegraph/lsif-java/issues/304) |
+| Kotlin               | ✅     | ❌    | n/a | [#304](https://github.com/sourcegraph/lsif-java/issues/304) |
 
 ### Java
 
@@ -147,17 +164,17 @@ part of your regular compilation in the build tool. By using Java compiler APIs,
 `lsif-java` is able to generate accurate indexing information for a broad range
 of Java versions.
 
-| Java version | Support                        |
-| ------------ | ------------------------------ |
-| Java 7       | ❌                             |
-| Java 8       | ✅                             |
-| Java 11      | ✅                             |
-| Java 12      | Not tested in CI, but may work |
-| Java 13      | Not tested in CI, but may work |
-| Java 14      | Not tested in CI, but may work |
-| Java 15      | ✅                             |
-| Java 16      | Not tested in CI, but may work |
-| Java 17      | Not tested in CI, but may work |
+| Java version | Support                        | Tracking issue                                                                   |
+| ------------ | ------------------------------ | -------------------------------------------------------------------------------- |
+| Java 7       | ❌                             |                                                                                  |
+| Java 8       | ✅                             |                                                                                  |
+| Java 11      | ✅                             |                                                                                  |
+| Java 12      | Not tested in CI, but may work |                                                                                  |
+| Java 13      | Not tested in CI, but may work |                                                                                  |
+| Java 14      | Not tested in CI, but may work |                                                                                  |
+| Java 15      | ✅                             |                                                                                  |
+| Java 16      | ❌                             |                                                                                  |
+| Java 17      | ❌                             | [sourcegraph/lsif-java#263](https://github.com/sourcegraph/lsif-java/issues/263) |
 
 ### Scala
 
@@ -174,6 +191,13 @@ by [Metals](https://scalameta.org/metals), the Scala language server.
 
 > Scala.js and Scala Native have equal support as Scala on the JVM.
 
+### Kotlin
+
+The Kotlin support in lsif-java is the least mature compared to the Java and
+Scala support. Don't hesitate to report issues at
+https://github.com/sourcegraph/lsif-kotlin if you encounter issues using the
+Kotlin support.
+
 ## Supported build tools
 
 It's possible to use lsif-java with any Java build tool. Some build tools can be
@@ -188,7 +212,7 @@ free to subscribe to the tracking issues to receive updates on your build tool.
 | Build tool | Java | Scala | Kotlin | Tracking issue                                                                   |
 | ---------- | ---- | ----- | ------ | -------------------------------------------------------------------------------- |
 | Maven      | ✅   | ❌    | ❌     |                                                                                  |
-| Gradle     | ✅   | ✅    | ❌     |                                                                                  |
+| Gradle     | ✅   | ✅    | ✅     |                                                                                  |
 | sbt        | ✅   | ✅    | n/a    |                                                                                  |
 | Ant        | ❌   | ❌    | ❌     | [sourcegraph/lsif-java#305](https://github.com/sourcegraph/lsif-java/issues/305) |
 | Bazel      | ❌   | ❌    | ❌     | [sourcegraph/lsif-java#88](https://github.com/sourcegraph/lsif-java/issues/88)   |
@@ -214,8 +238,8 @@ projects. However, the following Gradle integrations are not yet supported:
 
 | Integration | Supported | Tracking issue                                                                   |
 | ----------- | --------- | -------------------------------------------------------------------------------- |
-| Android     | ❌        | [sourcegraph/lsif-java#304](https://github.com/sourcegraph/lsif-java/issues/304) |
-| Kotlin      | ❌        | [sourcegraph/lsif-java#177](https://github.com/sourcegraph/lsif-java/issues/177) |
+| Android     | ❌        | [sourcegraph/lsif-java#177](https://github.com/sourcegraph/lsif-java/issues/177) |
+| Kotlin      | ✅        |                                                                                  |
 | Scala       | ✅        |                                                                                  |
 
 ### Maven

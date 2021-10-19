@@ -27,10 +27,10 @@ class Button extends React.Component {
 }
 
 Button.defaultProps = {
-  target: "_self"
+  target: "_self",
 };
 
-const SplashContainer = props => (
+const SplashContainer = (props) => (
   <div className="homeContainer">
     <div className="homeSplashFade">
       <div className="wrapper homeWrapper">{props.children}</div>
@@ -38,14 +38,14 @@ const SplashContainer = props => (
   </div>
 );
 
-const ProjectTitle = props => (
+const ProjectTitle = (props) => (
   <h2 className="projectTitle">
     {siteConfig.title}
     <small>{siteConfig.tagline}</small>
   </h2>
 );
 
-const PromoSection = props => (
+const PromoSection = (props) => (
   <div className="section promoSection">
     <div className="promoRow">
       <div className="pluginRowBlock">{props.children}</div>
@@ -71,7 +71,7 @@ class HomeSplash extends React.Component {
   }
 }
 
-const Block = props => (
+const Block = (props) => (
   <Container
     padding={["bottom", "top"]}
     id={props.id}
@@ -81,30 +81,38 @@ const Block = props => (
   </Container>
 );
 
-const Features = props => {
+const Features = (props) => {
   const features = [
+    // {
+    //   title: "Multiple language versions",
+    //   content: "Works with Java 8, Java 11 and Java 15.",
+    //   image:
+    //     "https://user-images.githubusercontent.com/1408093/109818700-93378e00-7c33-11eb-8385-7ea88533cb87.png",
+    //   imageAlign: "left"
+    // },
     {
-      title: "Multiple language versions",
-      content: "Works with Java 8, Java 11 and Java 15. The latest bleeding edge Java version probably works as well.",
+      title: "Multiple languages",
+      content:
+        "Java, Scala and Kotlin are supported, including navigation between different languages.",
       image:
-        "https://user-images.githubusercontent.com/1408093/109818700-93378e00-7c33-11eb-8385-7ea88533cb87.png",
-      imageAlign: "left"
+        "https://user-images.githubusercontent.com/1408093/137899150-e8d92cdd-8bd2-4802-9cd2-288442708aff.png",
+      imageAlign: "left",
     },
     {
       title: "Multiple build tools",
       content:
-        "The build tools Gradle and Maven are supported. We plan to add support for more build tools in the future.",
+        "The build tools Gradle, Maven and sbt are supported. We plan to add support for more build tools in the future.",
       image:
-        "https://user-images.githubusercontent.com/1408093/109819002-e4478200-7c33-11eb-99d3-c42d84acda47.png",
-      imageAlign: "right"
+        "https://user-images.githubusercontent.com/1408093/137899144-cfc6fc1b-a7c0-4fd7-ac4b-be516e459123.png",
+      imageAlign: "right",
     },
     {
       title: "Simple installation",
       content:
-        "Run the `lsif-java` command-line tool at the root of your Gradle/Maven build to generate an LSIF index. No manual configuration needed.",
+        "Run the `lsif-java` command-line tool at the root of your Gradle/Maven/sbt build to generate an LSIF index. No manual configuration needed.",
       image:
         "https://user-images.githubusercontent.com/1408093/109820615-769c5580-7c35-11eb-9063-98e932c5d6c5.png",
-      imageAlign: "left"
+      imageAlign: "left",
     },
     {
       title: "Low overhead",
@@ -112,15 +120,15 @@ const Features = props => {
         "Indexing a repository should be roughly as fast as compiling all of the sources in the repository.",
       image:
         "https://user-images.githubusercontent.com/1408093/109820240-1dccbd00-7c35-11eb-8a87-6b1850687e28.png",
-      imageAlign: "right"
-    }
+      imageAlign: "right",
+    },
   ];
   return (
     <div
       className="productShowcaseSection paddingBottom"
       style={{ textAlign: "left" }}
     >
-      {features.map(feature => (
+      {features.map((feature) => (
         <Block key={feature.title}>{[feature]}</Block>
       ))}
     </div>
