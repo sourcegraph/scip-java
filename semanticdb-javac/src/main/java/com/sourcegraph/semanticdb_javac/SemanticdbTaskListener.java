@@ -44,11 +44,17 @@ public final class SemanticdbTaskListener implements TaskListener {
     if (e.getKind() != TaskEvent.Kind.ANALYZE) return;
     try {
       onFinishedAnalyze(e);
-    } catch (Exception ex) {
+    } catch (Throwable ex) {
       // Catch exceptions because we don't want to stop the compilation even if this plugin has a
       // bug. We report the full stack trace because it's helpful for bug reports. Exceptions
       // should only happen in *exceptional* situations and they should be reported upstream.
-      reporter.exception(ex);
+      Throwable throwable = ex;
+      if (e.getSourceFile() != null) {
+        throwable =
+            new CompilationUnitException(
+                String.valueOf(e.getSourceFile().toUri().toString()), throwable);
+      }
+      reporter.exception(throwable);
     }
   }
 

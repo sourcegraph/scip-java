@@ -153,6 +153,13 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       List<JCTree.JCTypeParameter> typeParameters = cls.getTypeParameters();
       int i = 0;
       for (Symbol.TypeVariableSymbol typeSym : cls.sym.getTypeParameters()) {
+        if (i >= typeParameters.size()) {
+          // Happens in testcontainers/testcontainers-java, see
+          // https://github.com/sourcegraph/lsif-java/issues/319
+          // Failed to reproduce with a minimal source file so we don't have a test case that hits
+          // this branch.
+          break;
+        }
         emitSymbolOccurrence(
             typeSym,
             typeParameters.get(i),
