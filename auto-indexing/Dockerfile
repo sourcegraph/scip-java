@@ -1,4 +1,4 @@
-FROM gradle:7.2.0-jdk8@sha256:b35400ea7916acb1966e388dfc9bc87a0b0190bfe5a9c361c3b5c9a9d1bc5f4a
+FROM gradle:7.2.0-jdk8@sha256:fa25782f22f6d7937e3c9442e791991604ed0c007c3638ae0623d8a9c8f05452
 RUN apt-get update
 RUN apt-get install --yes maven npm
 RUN curl -fLo /coursier https://git.io/coursier-cli
