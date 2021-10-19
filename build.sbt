@@ -302,11 +302,12 @@ lazy val minimized8 = project
   .dependsOn(agent, plugin)
   .disablePlugins(JavaFormatterPlugin)
 
-lazy val minimized15 = project
+lazy val minimized17 = project
   .in(file("tests/minimized/.j15"))
   .settings(
     minimizedSettings,
-    javaToolchainVersion := "15",
+    // Non-zulu release is blocked by https://github.com/coursier/jvm-index/pull/53
+    javaToolchainVersion := "zulu:17",
     Compile / javaHome := None
   )
   .dependsOn(agent, plugin)
