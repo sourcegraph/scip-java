@@ -3,6 +3,7 @@ package com.sourcegraph.semanticdb_javac;
 import com.sun.tools.javac.code.Symbol;
 
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import java.util.*;
 
@@ -57,7 +58,14 @@ public final class GlobalSymbolsCache {
   }
 
   private boolean isLocalVariable(Symbol sym) {
-    return sym instanceof Symbol.VarSymbol && sym.isLocal();
+    switch (sym.getKind()) {
+      case PARAMETER:
+      case EXCEPTION_PARAMETER:
+      case LOCAL_VARIABLE:
+        return true;
+      default:
+        return false;
+    }
   }
 
   private boolean isAnonymousClass(Symbol sym) {

@@ -15,14 +15,18 @@ import java.util.jar.JarFile;
 public class JavaVersion {
   public final boolean isJava8;
   public final JdkPackage pkg;
-  private static PathMatcher CLASS_PATTERN =
+  private static final PathMatcher CLASS_PATTERN =
       FileSystems.getDefault().getPathMatcher("glob:**.class");
-  private static PathMatcher JAR_PATTERN = FileSystems.getDefault().getPathMatcher("glob:**.jar");
+  private static final PathMatcher JAR_PATTERN =
+      FileSystems.getDefault().getPathMatcher("glob:**.jar");
 
-  public static int JAVA8_VERSION = 8;
-  public static int JAVA11_VERSION = 11;
-  public static int DEFAULT_JAVA_VERSION = JAVA8_VERSION;
-  private static int JAVA0_MAJOR_VERSION = 44;
+  public static final int JAVA8_VERSION = 8;
+  public static final int JAVA11_VERSION = 11;
+  public static final int JAVA17_VERSION = 17;
+  public static final int DEFAULT_JAVA_VERSION = JAVA8_VERSION;
+
+  @SuppressWarnings("FieldCanBeLocal")
+  private static final int JAVA0_MAJOR_VERSION = 44;
 
   public JavaVersion() {
     this(System.getProperty("java.version"));
@@ -40,9 +44,11 @@ public class JavaVersion {
     else return version;
   }
 
+  @SuppressWarnings("ManualMinMaxCalculation")
   public static int roundToNearestStableRelease(int version) {
     if (version <= JAVA8_VERSION) return JAVA8_VERSION;
     if (version <= JAVA11_VERSION) return JAVA11_VERSION;
+    if (version <= JAVA17_VERSION) return JAVA17_VERSION;
     return version;
   }
 

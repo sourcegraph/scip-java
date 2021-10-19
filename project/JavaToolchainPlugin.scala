@@ -20,6 +20,9 @@ object JavaToolchainPlugin extends AutoPlugin {
     lazy val javaToolchainVersion = settingKey[String](
       "The version of the Java"
     )
+    lazy val javaToolchainJvmIndex = settingKey[Option[String]](
+      "The JVM index to use"
+    )
   }
   import autoImport._
 
@@ -36,14 +39,21 @@ object JavaToolchainPlugin extends AutoPlugin {
     (doc / javacOptions) --= List("-target", "1.8"),
     (doc / javacOptions) --= bootclasspathSettings(javaToolchainVersion.value),
     (doc / javacOptions) --= List("-g"),
-    javaHome := Some(getJavaHome(javaToolchainVersion.value)),
+    javaHome :=
+      Some(
+        getJavaHome(javaToolchainVersion.value, javaToolchainJvmIndex.value)
+      ),
     javacOptions ++= bootclasspathSettings(javaToolchainVersion.value),
     javaOptions ++= bootclasspathSettings(javaToolchainVersion.value)
   )
 
   override lazy val projectSettings: Seq[Def.Setting[_]] =
     List(Compile, Test).flatMap(c => inConfig(c)(configSettings)) ++
-      List(fork := true, javaToolchainVersion := "11")
+      List(
+        fork := true,
+        javaToolchainVersion := "11",
+        javaToolchainJvmIndex := None
+      )
 
   /**
    * For Java 8, we need to manually add the Java compiler to the boot
@@ -70,14 +80,20 @@ object JavaToolchainPlugin extends AutoPlugin {
 
   private val javaHomeCache: util.Map[String, File] = Collections
     .synchronizedMap(new util.HashMap[String, File]())
-  private def getJavaHome(version: String): File = {
+  private def getJavaHome(
+      version: String,
+      jvmIndex: Option[String] = None
+  ): File = {
     javaHomeCache.computeIfAbsent(
       version,
       (v: String) => {
         val coursier = Paths.get("bin", "coursier")
-        new File(
-          Process(List(coursier.toString, "java-home", "--jvm", v)).!!.trim
-        )
+        val index = jvmIndex
+          .toList
+          .flatMap(index => "--jvm-index" :: index :: Nil)
+        val arguments =
+          List(coursier.toString, "java-home", "--jvm", v) ++ index
+        new File(Process(arguments).!!.trim)
       }
     )
   }
