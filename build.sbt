@@ -219,10 +219,6 @@ lazy val cli = project
   )
   .enablePlugins(NativeImagePlugin, BuildInfoPlugin)
   .dependsOn(lsif)
-commands +=
-  Command.command("dockerfile") { s =>
-    "commitall" :: "reload" :: "packagehub/dockerfileUpdate" :: "publish" :: s
-  }
 
 def commitAll(): Unit = {
   import scala.sys.process._
@@ -235,30 +231,6 @@ commands +=
     commitAll()
     s
   }
-
-lazy val packagehub = project
-  .in(file("packagehub"))
-  .settings(
-    moduleName := "packagehub",
-    (Compile / mainClass) := Some("com.sourcegraph.packagehub.PackageHub"),
-    TaskKey[Unit]("dockerfileUpdate") := {
-      val template = IO.read(file("Dockerfile.template"))
-      IO.write(file("Dockerfile"), template.replace("VERSION", version.value))
-      commitAll()
-    },
-    libraryDependencies ++=
-      List(
-        "com.google.cloud.sql" % "postgres-socket-factory" % "1.3.4",
-        "com.zaxxer" % "HikariCP" % "5.0.0",
-        "org.flywaydb" % "flyway-core" % "8.0.1",
-        "org.postgresql" % "postgresql" % "42.2.23",
-        "org.rauschig" % "jarchivelib" % "1.2.0",
-        "org.scalameta" %% "scalameta" % V.scalameta,
-        "com.lihaoyi" %% "cask" % "0.7.8"
-      )
-  )
-  .enablePlugins(AssemblyPlugin)
-  .dependsOn(cli)
 
 commands +=
   Command.command("nativeImageProfiled") { s =>
@@ -400,7 +372,7 @@ lazy val unit = project
       ),
     buildInfoPackage := "tests"
   )
-  .dependsOn(plugin, cli, packagehub)
+  .dependsOn(plugin, cli)
   .enablePlugins(BuildInfoPlugin)
 
 lazy val buildTools = project
