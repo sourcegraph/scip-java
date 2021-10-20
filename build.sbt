@@ -245,8 +245,12 @@ commands +=
 def minimizedSourceDirectory =
   file("tests/minimized/src/main/java").getAbsoluteFile
 
-def semanticdbCompileOptions =
-  Def.setting {
+lazy val minimizedSettings = List[Def.Setting[_]](
+  autoScalaLibrary := false,
+  (publish / skip) := true,
+  (run / fork) := true,
+  (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
+  (Compile / javacOptions) ++=
     List[String](
       s"-Arandomtimestamp=${System.nanoTime()}",
       List(
@@ -258,13 +262,6 @@ def semanticdbCompileOptions =
         s"-targetroot:${(Compile / semanticdbTargetRoot).value}"
       ).mkString(" ")
     )
-  }
-lazy val minimizedSettings = List[Def.Setting[_]](
-  autoScalaLibrary := false,
-  (publish / skip) := true,
-  (run / fork) := true,
-  (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
-  (Compile / javacOptions) ++= semanticdbCompileOptions.value
 )
 
 lazy val minimized = project
@@ -279,65 +276,26 @@ lazy val minimized8 = project
   .dependsOn(agent, plugin)
   .disablePlugins(JavaFormatterPlugin)
 
-def javaModuleExports =
-  List(
-    "-J--add-exports",
-    "-Jjdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-    "-J--add-exports",
-    "-Jjdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-    "-J--add-exports",
-    "-Jjdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-    "-J--add-exports",
-    "-Jjdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-    "-J--add-exports",
-    "-Jjdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
-  )
-
-def compileWithJava17 =
-  Def.task {
-    val args = ListBuffer.empty[String]
-    val javaSources = (minimized8 / Compile / sources)
-      .value
-      .map(_.getAbsolutePath)
-    val javac = (Compile / javaHome)
-      .value
-      .get
-      .toPath
-      .resolve("bin")
-      .resolve("javac")
-      .toString
-    val compileClasspath = List(
-      "-classpath",
-      (Compile / dependencyClasspath)
-        .value
-        .map(_.data.getAbsolutePath)
-        .mkString(java.io.File.pathSeparator)
-    )
-    val outputDirectory = (Compile / classDirectory).value
-    IO.delete(outputDirectory)
-
-    args += javac
-    args ++= javaModuleExports
-    args ++= List("-d", outputDirectory.getAbsolutePath)
-    args ++= semanticdbCompileOptions.value
-    args ++= compileClasspath
-    args ++= javaSources
-    val exit = scala.sys.process.Process(args.toList).!
-    if (exit != 0) {
-      throw new RuntimeException("javac compilation failed") with NoStackTrace
-    }
-  }
-
 lazy val minimized17 = project
   .in(file("tests/minimized/.j17"))
   .settings(
     minimizedSettings,
-    Compile / sources := Nil,
     javaToolchainJvmIndex :=
       Some("https://github.com/coursier/jvm-index/blob/master/index.json"),
     javaToolchainVersion := "temurin:17",
-    Compile / compile :=
-      (Compile / compile).dependsOn(compileWithJava17).value
+    javacOptions ++=
+      List(
+        "-J--add-exports",
+        "-Jjdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "-J--add-exports",
+        "-Jjdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "-J--add-exports",
+        "-Jjdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+        "-J--add-exports",
+        "-Jjdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "-J--add-exports",
+        "-Jjdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+      )
   )
   .dependsOn(agent, plugin)
   .disablePlugins(JavaFormatterPlugin)
