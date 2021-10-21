@@ -60,20 +60,24 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
             )
           CommandResult(1, Nil)
         case _ =>
-          runCompileCommand(toolchains)
+          runCompileCommand(toolchains, tmp)
       }
     }
   }
 
   private def runCompileCommand(
-      toolchains: GradleJavaToolchains
+      toolchains: GradleJavaToolchains,
+      tmp: Path
   ): CommandResult = {
     val script = initScript(toolchains, toolchains.tmp).toString
     val buildCommand = ListBuffer.empty[String]
+    val pluginpath = Embedded.agentJar(tmp)
     buildCommand += toolchains.gradleCommand
     buildCommand += s"--no-daemon"
     buildCommand += "--init-script"
     buildCommand += script
+    buildCommand +=
+      s"-Dorg.gradle.jvmargs=-javaagent:$pluginpath -Dsemanticdb.targetroot=$targetroot"
     if (toolchains.toolchains.nonEmpty) {
       buildCommand += "-Porg.gradle.java.installations.auto-detect=false"
       buildCommand += "-Porg.gradle.java.installations.auto-download=false"

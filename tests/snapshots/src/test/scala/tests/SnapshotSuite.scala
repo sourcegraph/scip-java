@@ -21,3 +21,6 @@ class MinimizedLsifSnapshotSuite
 
 class LsifGraphSnapshotSuite
     extends SnapshotSuite(new LsifGraphSnapshotGenerator)
+
+class ProtobufSemanticdbSnapshotSuite
+    extends SnapshotSuite(new ProtobufSemanticdbGenerator)

@@ -2,7 +2,6 @@ package com.sourcegraph.lsif_java
 
 import scala.jdk.CollectionConverters._
 
-import com.sourcegraph.lsif_java.commands.CommentSyntax
 import com.sourcegraph.lsif_semanticdb.LsifTextDocument
 import com.sourcegraph.lsif_semanticdb.SignatureFormatter
 import com.sourcegraph.lsif_semanticdb.Symtab

@@ -1,0 +1,19 @@
+syntax = "proto3";
+// definition minimized/JavaMultipleFilesOuterClass#
+
+package minimized;
+
+option java_multiple_files = true;
+
+message JavaMultipleFiles {
+//      ^^^^^^^^^^^^^^^^^ definition minimized/JavaMultipleFiles#
+//      ^^^^^^^^^^^^^^^^^ definition minimized/JavaMultipleFilesOrBuilder#
+//      ^^^^^^^^^^^^^^^^^ definition minimized/JavaMultipleFiles#Builder#
+  int32 int32_field = 1;
+//      ^^^^^^^^^^^ definition minimized/JavaMultipleFiles#getInt32Field().
+//      ^^^^^^^^^^^ definition minimized/JavaMultipleFiles#INT32_FIELD_FIELD_NUMBER.
+//      ^^^^^^^^^^^ definition minimized/JavaMultipleFilesOrBuilder#getInt32Field().
+//      ^^^^^^^^^^^ definition minimized/JavaMultipleFiles#Builder#getInt32Field().
+//      ^^^^^^^^^^^ definition minimized/JavaMultipleFiles#Builder#setInt32Field().
+//      ^^^^^^^^^^^ definition minimized/JavaMultipleFiles#Builder#clearInt32Field().
+}

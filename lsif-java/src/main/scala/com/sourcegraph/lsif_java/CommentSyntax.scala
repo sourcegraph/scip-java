@@ -1,4 +1,4 @@
-package com.sourcegraph.lsif_java.commands
+package com.sourcegraph.lsif_java
 
 case class CommentSyntax(value: String) {
   private val map =

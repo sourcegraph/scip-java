@@ -23,6 +23,7 @@ import com.google.protobuf.InvalidProtocolBufferException
 import com.google.protobuf.util.JsonFormat
 import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.io.DeleteVisitor
+import com.sourcegraph.lsif_java.CommentSyntax
 import com.sourcegraph.lsif_protocol.LsifHover
 import com.sourcegraph.lsif_protocol.LsifObject
 import com.sourcegraph.lsif_protocol.LsifPosition

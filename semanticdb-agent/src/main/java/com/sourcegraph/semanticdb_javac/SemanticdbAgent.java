@@ -7,15 +7,16 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.Instrumentation;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.security.ProtectionDomain;
+import java.util.*;
+
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.asm.Advice;
 
@@ -68,6 +69,16 @@ public class SemanticdbAgent {
             new AgentBuilder.Transformer.ForAdvice()
                 .advice(named("build"), JavaCompilerArgumentsBuilderAdvice.class.getName()))
         .installOn(inst);
+    new AgentBuilder.Default()
+        .disableClassFormatChanges()
+        .with(AgentBuilder.RedefinitionStrategy.REDEFINITION)
+        .type(
+            named("com.google.protobuf.gradle.GenerateProtoTask")
+                .or(named("tests.GenerateProtoTask")))
+        .transform(
+            (builder, type, cl, module) ->
+                builder.visit(Advice.to(CompileProtoTaskAdvice.class).on(named("compileFiles"))))
+        .installOn(inst);
   }
 
   private static PrintStream newLogger() {
@@ -116,6 +127,56 @@ public class SemanticdbAgent {
         List<File> newClasspath = new ArrayList<>(classpath);
         newClasspath.add(semanticdbJar);
         classpath = newClasspath;
+      }
+    }
+  }
+
+  @SuppressWarnings("all")
+  public static class CompileProtoTaskAdvice {
+    // Targets this method
+    // https://github.com/google/protobuf-gradle-plugin/blob/924c63d44c7182781202c8e9f638c6f2449b6cfd/src/main/groovy/com/google/protobuf/gradle/GenerateProtoTask.groovy#L663
+    @Advice.OnMethodEnter
+    public static void compileFiles(List<CharSequence> cmd) {
+      String TARGETROOT = System.getProperty("semanticdb.targetroot");
+      if (TARGETROOT == null) throw new NoSuchElementException("-Dsemanticdb.targetroot");
+      Path descriptorSetOut;
+      int randomNumber = 1;
+      Random random = new Random();
+      do {
+        randomNumber = random.nextInt(10000);
+        String candidateFilename = String.format("descriptor_set-%d.desc", randomNumber);
+        descriptorSetOut = Paths.get(TARGETROOT, "protobuf", candidateFilename);
+      } while (Files.isRegularFile(descriptorSetOut));
+      boolean isIncludeImports = false;
+      boolean isIncludeSourceInfo = false;
+      boolean isDescriptorSetOut = false;
+      for (CharSequence partSequence : cmd) {
+        String part = partSequence.toString();
+        if (part.equals("--include_imports")) {
+          isIncludeImports = true;
+        } else if (part.equals("--include_source_info")) {
+          isIncludeImports = true;
+        } else if (part.startsWith("--descriptor_set_out")) {
+          isDescriptorSetOut = true;
+        }
+      }
+      try {
+        Files.createDirectories(descriptorSetOut.getParent());
+        Path commandPath =
+            descriptorSetOut.resolveSibling(
+                descriptorSetOut.getFileName().toString() + ".protobuf-command.txt");
+        if (!isIncludeImports) {
+          cmd.add(1, "--include_imports");
+        }
+        if (!isIncludeSourceInfo) {
+          cmd.add(1, "--include_source_info");
+        }
+        if (!isDescriptorSetOut) {
+          cmd.add(1, "--descriptor_set_out=" + descriptorSetOut);
+        }
+        Files.write(commandPath, cmd, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+      } catch (IOException e) {
+        e.printStackTrace();
       }
     }
   }

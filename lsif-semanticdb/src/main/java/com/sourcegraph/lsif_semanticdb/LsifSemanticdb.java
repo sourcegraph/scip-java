@@ -53,10 +53,11 @@ public class LsifSemanticdb {
     int projectId = writer.emitProject(options.language);
 
     Set<String> isExportedSymbol = exportSymbols(files);
-    List<Integer> documentIds =
-        filesStream(files)
-            .flatMap(d -> processPath(d, isExportedSymbol, packages))
-            .collect(Collectors.toList());
+    Stream<Integer> protobufIds =
+        protobufStream().flatMap(d -> processDocument(d, isExportedSymbol, packages));
+    Stream<Integer> buildIds =
+        filesStream(files).flatMap(d -> processPath(d, isExportedSymbol, packages));
+    List<Integer> documentIds = Stream.concat(protobufIds, buildIds).collect(Collectors.toList());
 
     writer.emitContains(projectId, documentIds);
 
@@ -69,8 +70,7 @@ public class LsifSemanticdb {
   }
 
   private Set<String> exportSymbols(List<Path> files) {
-    return filesStream(files)
-        .flatMap(this::parseTextDocument)
+    return Stream.concat(filesStream(files).flatMap(this::parseTextDocument), protobufStream())
         .flatMap(
             d ->
                 d.semanticdb.getOccurrencesList().stream()
@@ -78,6 +78,12 @@ public class LsifSemanticdb {
                     .map(SymbolOccurrence::getSymbol)
                     .filter(SemanticdbSymbols::isGlobal))
         .collect(Collectors.toSet());
+  }
+
+  private Stream<LsifTextDocument> protobufStream() {
+    return options.parallel
+        ? options.protobufTextDocuments.parallelStream()
+        : options.protobufTextDocuments.stream();
   }
 
   private Stream<Integer> processPath(

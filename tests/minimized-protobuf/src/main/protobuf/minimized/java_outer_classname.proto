@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package minimized;
+
+option java_outer_classname = "ExampleProtos";
+
+message JavaOuterClassname {
+  int32 int32_field = 1;
+}

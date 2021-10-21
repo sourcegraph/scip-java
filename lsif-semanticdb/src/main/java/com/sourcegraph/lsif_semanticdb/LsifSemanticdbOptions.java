@@ -1,6 +1,8 @@
 package com.sourcegraph.lsif_semanticdb;
 
 import com.sourcegraph.lsif_protocol.LsifToolInfo;
+import com.sourcegraph.semanticdb_javac.Semanticdb;
+
 import java.nio.file.Path;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class LsifSemanticdbOptions {
   public final boolean parallel;
   public final List<MavenPackage> packages;
   public final String buildKind;
+  public final List<LsifTextDocument> protobufTextDocuments;
 
   public LsifSemanticdbOptions(
       List<Path> targetroots,
@@ -28,7 +31,8 @@ public class LsifSemanticdbOptions {
       LsifOutputFormat format,
       boolean parallel,
       List<MavenPackage> packages,
-      String buildKind) {
+      String buildKind,
+      List<LsifTextDocument> protobufTextDocuments) {
     this.targetroots = targetroots;
     this.output = output;
     this.sourceroot = sourceroot;
@@ -39,5 +43,6 @@ public class LsifSemanticdbOptions {
     this.parallel = parallel;
     this.packages = packages;
     this.buildKind = buildKind;
+    this.protobufTextDocuments = protobufTextDocuments;
   }
 }

@@ -1,6 +1,7 @@
 import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
 import scala.xml.transform.{RewriteRule, RuleTransformer}
 import java.io.File
+import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.util.Properties
 import scala.collection.mutable.ListBuffer
@@ -300,6 +301,56 @@ lazy val minimized17 = project
   .dependsOn(agent, plugin)
   .disablePlugins(JavaFormatterPlugin)
 
+def protobufDescriptorOut =
+  Def.setting[File] {
+    (Compile / semanticdbTargetRoot).value / "protobuf" / "descriptor_out.desc"
+  }
+
+lazy val minimizedProtobuf = project
+  .in(file("tests/minimized-protobuf"))
+  .settings(
+    minimizedSettings,
+    (Compile / unmanagedSourceDirectories) := Nil,
+    (Compile / PB.targets) :=
+      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
+    (Compile / PB.protocExecutable) := {
+      val executable = (Compile / PB.protocExecutable).value
+      protobufDescriptorOut.value.getParentFile.mkdirs()
+      executable
+    },
+    (Compile / PB.protocOptions) ++= {
+      List(
+        s"--descriptor_set_out=${protobufDescriptorOut.value}",
+        "--include_source_info",
+        "--include_imports"
+      )
+    },
+    Compile / resourceGenerators +=
+      Def
+        .task[Seq[File]] {
+          val out = (Compile / semanticdbTargetRoot).value / "protobuf" /
+            "descriptor.protobuf-command.txt"
+          out.getParentFile.mkdirs()
+          val arguments = ListBuffer.empty[String]
+          arguments += "protoc"
+          arguments ++=
+            (Compile / PB.includePaths)
+              .value
+              .map(p => s"-I${p.getAbsolutePath}")
+          arguments ++= (Compile / PB.protocOptions).value
+          arguments += s"--java_out=/some/random/path"
+          IO.write(
+            out,
+            arguments.mkString("", "\n", "\n"),
+            StandardCharsets.UTF_8,
+            append = false
+          )
+          Nil
+        }
+        .taskValue
+  )
+  .dependsOn(plugin)
+
 lazy val minimizedScala = project
   .in(file("tests/minimized-scala"))
   .settings(
@@ -323,6 +374,12 @@ lazy val unit = project
         "minimizedJavaSourceDirectory" -> minimizedSourceDirectory,
         "minimizedJavaTargetroot" ->
           (minimized / Compile / semanticdbTargetRoot).value,
+        "minimizedProtobufGeneratedSourceDirectory" ->
+          (minimizedProtobuf / Compile / sourceManaged).value,
+        "minimizedProtobufSourceDirectory" ->
+          (minimizedProtobuf / Compile / sourceDirectory).value / "protobuf",
+        "minimizedProtobufTargetroot" ->
+          (minimizedProtobuf / Compile / semanticdbTargetRoot).value,
         "minimizedScalaSourceDirectory" ->
           (minimizedScala / Compile / sourceDirectory).value / "scala",
         "minimizedScalaTargetroot" ->
@@ -357,7 +414,7 @@ lazy val snapshots = project
       ),
     buildInfoPackage := "tests.snapshots"
   )
-  .dependsOn(minimizedScala, unit)
+  .dependsOn(minimizedProtobuf, minimizedScala, unit)
   .enablePlugins(BuildInfoPlugin)
 
 lazy val bench = project

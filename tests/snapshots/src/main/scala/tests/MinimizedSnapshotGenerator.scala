@@ -17,7 +17,12 @@ class MinimizedSnapshotGenerator extends SnapshotGenerator {
       sourceroot,
       AbsolutePath(BuildInfo.minimizedScalaTargetroot)
     )
-    val files = fromJavac ++ fromScalac
+    val fromProtobuf = SemanticdbFile.fromProtobuf(
+      AbsolutePath(BuildInfo.minimizedProtobufSourceDirectory),
+      sourceroot,
+      AbsolutePath(BuildInfo.minimizedProtobufTargetroot)
+    )
+    val files = fromJavac ++ fromScalac ++ fromProtobuf
     files.foreach { file =>
       val relativeToSourceDirectory = file
         .javaPath

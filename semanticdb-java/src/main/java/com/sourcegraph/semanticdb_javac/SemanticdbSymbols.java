@@ -1,7 +1,6 @@
 package com.sourcegraph.semanticdb_javac;
 
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Utilities to construct SemanticDB symbols.

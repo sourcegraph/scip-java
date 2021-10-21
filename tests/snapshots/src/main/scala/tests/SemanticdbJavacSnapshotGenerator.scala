@@ -6,6 +6,7 @@ object SemanticdbJavacSnapshotGenerator
         new LibrarySnapshotGenerator(),
         new MinimizedSnapshotGenerator(),
         new MinimizedLsifSnapshotGenerator(),
-        new LsifGraphSnapshotGenerator()
+        new LsifGraphSnapshotGenerator(),
+        new ProtobufSemanticdbGenerator()
       )
     )

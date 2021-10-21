@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package minimized;
+
+message Message {
+  message InnerMessage {
+    string inner_string_field = 1;
+    repeated int32 inner_repeated_field = 2;
+  }
+  enum InnerEnum {
+    UNKNOWN = 0;
+    CASE1 = 1;
+    CASE2 = 2;
+  }
+  string string_field = 1;
+  repeated int32 repeated_int32 = 2;
+  InnerMessage inner_message = 3;
+  InnerEnum inner_enum = 4;
+  repeated InnerMessage repeated_inner_message = 5;
+  repeated InnerEnum repeated_inner_enum = 6;
+  map<string, int32> map_field = 7;
+}

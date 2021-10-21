@@ -1,0 +1,19 @@
+syntax = "proto3";
+// definition minimized/ExampleProtos#
+
+package minimized;
+
+option java_outer_classname = "ExampleProtos";
+
+message JavaOuterClassname {
+//      ^^^^^^^^^^^^^^^^^^ definition minimized/ExampleProtos#JavaOuterClassname#
+//      ^^^^^^^^^^^^^^^^^^ definition minimized/ExampleProtos#JavaOuterClassnameOrBuilder#
+//      ^^^^^^^^^^^^^^^^^^ definition minimized/ExampleProtos#JavaOuterClassname#Builder#
+  int32 int32_field = 1;
+//      ^^^^^^^^^^^ definition minimized/ExampleProtos#JavaOuterClassname#getInt32Field().
+//      ^^^^^^^^^^^ definition minimized/ExampleProtos#JavaOuterClassname#INT32_FIELD_FIELD_NUMBER.
+//      ^^^^^^^^^^^ definition minimized/ExampleProtos#JavaOuterClassnameOrBuilder#getInt32Field().
+//      ^^^^^^^^^^^ definition minimized/ExampleProtos#JavaOuterClassname#Builder#getInt32Field().
+//      ^^^^^^^^^^^ definition minimized/ExampleProtos#JavaOuterClassname#Builder#setInt32Field().
+//      ^^^^^^^^^^^ definition minimized/ExampleProtos#JavaOuterClassname#Builder#clearInt32Field().
+}

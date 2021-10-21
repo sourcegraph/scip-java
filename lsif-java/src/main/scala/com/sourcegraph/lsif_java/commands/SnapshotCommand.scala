@@ -8,6 +8,7 @@ import scala.collection.mutable.ListBuffer
 import scala.jdk.CollectionConverters._
 
 import com.sourcegraph.io.DeleteVisitor
+import com.sourcegraph.lsif_java.CommentSyntax
 import com.sourcegraph.lsif_java.SemanticdbPrinters
 import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
 import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocuments

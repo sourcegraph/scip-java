@@ -1,5 +1,6 @@
 package com.sourcegraph.lsif_java.commands
 
+import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.concurrent.TimeUnit
@@ -9,15 +10,18 @@ import scala.jdk.CollectionConverters._
 import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.lsif_java.BuildInfo
 import com.sourcegraph.lsif_java.buildtools.ClasspathEntry
+import com.sourcegraph.lsif_protobuf.LsifProtobuf
 import com.sourcegraph.lsif_protocol.LsifToolInfo
 import com.sourcegraph.lsif_semanticdb.ConsoleLsifSemanticdbReporter
 import com.sourcegraph.lsif_semanticdb.LsifOutputFormat
 import com.sourcegraph.lsif_semanticdb.LsifSemanticdb
 import com.sourcegraph.lsif_semanticdb.LsifSemanticdbOptions
+import com.sourcegraph.lsif_semanticdb.LsifTextDocument
 import moped.annotations._
 import moped.cli.Application
 import moped.cli.Command
 import moped.cli.CommandParser
+import moped.reporters.Reporter
 import ujson.Arr
 import ujson.Obj
 
@@ -76,7 +80,10 @@ final case class IndexSemanticdbCommand(
         format,
         parallel,
         packages.map(_.toPackageInformation).asJava,
-        buildKind
+        buildKind,
+        IndexSemanticdbCommand
+          .protobufTextDocuments(targetroot, sourceroot, app.reporter)
+          .asJava
       )
     LsifSemanticdb.run(options)
     postPackages(packages)
@@ -124,4 +131,20 @@ object IndexSemanticdbCommand {
     path.getFileName.toString.endsWith(".lsif-protobuf")
   val default = IndexSemanticdbCommand()
   implicit val parser = CommandParser.derive(default)
+
+  def protobufTextDocuments(
+      targetroots: List[Path],
+      sourceroot: Path,
+      reporter: Reporter
+  ): List[LsifTextDocument] = {
+    for {
+      root <- targetroots
+      protobufDirectory = root.resolve("protobuf")
+      file <- Option(protobufDirectory.toFile().listFiles()).toList.flatten
+      if file.getName().endsWith(".protobuf-command.txt")
+      protocOptions = Files.readAllLines(file.toPath()).asScala.toList
+      protobuf = new LsifProtobuf(sourceroot, protocOptions, reporter)
+      document <- protobuf.textDocuments().getDocumentsList().asScala
+    } yield new LsifTextDocument(file.toPath, document, sourceroot)
+  }
 }
