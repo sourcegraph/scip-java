@@ -3,6 +3,7 @@ package com.sourcegraph.lsif_java
 import scala.jdk.CollectionConverters._
 
 import com.sourcegraph.lsif_java.commands.CommentSyntax
+import com.sourcegraph.lsif_java.commands.SnapshotLsifCommand
 import com.sourcegraph.lsif_semanticdb.LsifTextDocument
 import com.sourcegraph.lsif_semanticdb.SignatureFormatter
 import com.sourcegraph.lsif_semanticdb.Symtab
@@ -88,11 +89,23 @@ object SemanticdbPrinters {
       .append(
         symtab.symbols.asScala.get(occ.getSymbol) match {
           case Some(info) if occ.getRole == Role.DEFINITION =>
-            val sig = new SignatureFormatter(info, symtab).formatSymbol()
-            if (sig.isEmpty)
+            val signature: String =
+              if (info.hasSignature) {
+                new SignatureFormatter(info, symtab)
+                  .formatSymbol()
+                  .trim
+                  .replace('\n', ' ')
+              } else if (info.hasDocumentation) {
+                SnapshotLsifCommand
+                  .signatureLines(info.getDocumentation.getMessage)
+                  .mkString(" ")
+              } else {
+                ""
+              }
+            if (signature.isEmpty)
               " " + info.getDisplayName
             else
-              " " + sig.trim.replace('\n', ' ')
+              " " + signature
           case _ =>
             ""
         }
