@@ -143,13 +143,7 @@ object SnapshotLsifCommand {
                 resultSetId <- lsif.next.get(o.getId).toList
                 hoverId <- lsif.hoverEdges.get(resultSetId).toList
                 hover <- lsif.hoverVertexes.get(hoverId).toList
-                line <- hover
-                  .getContents
-                  .getValue
-                  .linesIterator
-                  .dropWhile(!_.startsWith("```"))
-                  .drop(1)
-                  .takeWhile(_ != "```")
+                line <- signatureLines(hover.getContents.getValue)
               } yield line
             ).mkString("\n")
           val symInfo = SymbolInformation
@@ -162,6 +156,14 @@ object SnapshotLsifCommand {
         }
       }
     lsif.documents.values.map(_.build()).toList
+  }
+
+  def signatureLines(documentation: String): Iterator[String] = {
+    documentation
+      .linesIterator
+      .dropWhile(!_.startsWith("```"))
+      .drop(1)
+      .takeWhile(_ != "```")
   }
 
   class IndexedLsif(

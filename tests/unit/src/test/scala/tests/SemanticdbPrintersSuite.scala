@@ -1,7 +1,9 @@
 package tests
 
 import com.sourcegraph.lsif_java.SemanticdbPrinters
+import com.sourcegraph.semanticdb_javac.Semanticdb.Documentation
 import com.sourcegraph.semanticdb_javac.Semanticdb.Range
+import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role
 import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
@@ -80,6 +82,44 @@ class SemanticdbPrintersSuite extends FunSuite {
          |→→→Qux()
          |// ^^^ definition foo/Indexer#Qux().
          |}
+         |""".stripMargin
+    )
+  }
+
+  test("documentation") {
+    val doc = TextDocument
+      .newBuilder()
+      .setText("fun main() {}\n")
+      .addOccurrences(
+        SymbolOccurrence
+          .newBuilder()
+          .setSymbol("main().")
+          .setRange(
+            Range
+              .newBuilder()
+              .setStartLine(0)
+              .setStartCharacter(4)
+              .setEndLine(0)
+              .setEndCharacter(8)
+          )
+          .setRole(Role.DEFINITION)
+      )
+      .addSymbols(
+        SymbolInformation
+          .newBuilder()
+          .setSymbol("main().")
+          .setDocumentation(
+            Documentation
+              .newBuilder()
+              .setMessage("```kt\nfun main(): kotlin.Unit\n```")
+          )
+      )
+      .build()
+
+    assertNoDiff(
+      SemanticdbPrinters.printTextDocument(doc),
+      """|fun main() {}
+         |//  ^^^^ definition main(). fun main(): kotlin.Unit
          |""".stripMargin
     )
   }
