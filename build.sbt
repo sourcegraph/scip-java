@@ -19,7 +19,7 @@ lazy val V =
     def scala3 = "3.0.1"
     def metals = "0.10.6-M1"
     def scalameta = "4.4.26"
-    def semanticdbKotlinc = "0.1.0"
+    def semanticdbKotlinc = "0.2.0"
     def testcontainers = "0.39.3"
     def requests = "0.6.5"
   }

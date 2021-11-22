@@ -10,7 +10,7 @@ import android.content.pm.ApplicationInfo
 @PublishedApi
 //^^^^^^^^^^^ reference kotlin/PublishedApi#`<init>`().
 internal val Context.isDebuggable: Boolean
-//                   ^^^^^^^^^^^^ definition com/airbnb/epoxy/utils/utilsKt#isDebuggable.
+//                   ^^^^^^^^^^^^ definition com/airbnb/epoxy/utils/utilsKt#isDebuggable.  internal val [ERROR : Context].isDebuggable: kotlin.Boolean
 //                                 ^^^^^^^ reference kotlin/Boolean#
     get() = (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
-//  ^^^ definition com/airbnb/epoxy/utils/utilsKt#getIsDebuggable().
+//  ^^^ definition com/airbnb/epoxy/utils/utilsKt#getIsDebuggable().  internal fun [ERROR : Context].<get-isDebuggable>(): kotlin.Boolean

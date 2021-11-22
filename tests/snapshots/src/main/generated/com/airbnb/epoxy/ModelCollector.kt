@@ -8,9 +8,9 @@ package com.airbnb.epoxy
  * helpers for carousel: @link https://github.com/airbnb/epoxy/issues/847.
  */
 interface ModelCollector {
-//        ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelCollector#
+//        ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelCollector#  public interface ModelCollector
 
     fun add(model: EpoxyModel<*>)
-//      ^^^ definition com/airbnb/epoxy/ModelCollector#add().
-//          ^^^^^ definition com/airbnb/epoxy/ModelCollector#add().(model)
+//      ^^^ definition com/airbnb/epoxy/ModelCollector#add().  public abstract fun add(model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>)
+//          ^^^^^ definition com/airbnb/epoxy/ModelCollector#add().(model)  value-parameter model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>
 }
