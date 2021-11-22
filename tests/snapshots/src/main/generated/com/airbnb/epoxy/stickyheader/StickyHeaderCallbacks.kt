@@ -13,15 +13,15 @@ import androidx.recyclerview.widget.RecyclerView
  * combined with [StickyHeaderLinearLayoutManager].
  */
 interface StickyHeaderCallbacks {
-//        ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#
+//        ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#  public interface StickyHeaderCallbacks
 
     /**
      * Return true if the view at the specified [position] needs to be sticky
      * else false.
      */
     fun isStickyHeader(position: Int): Boolean
-//      ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#isStickyHeader().
-//                     ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#isStickyHeader().(position)
+//      ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#isStickyHeader().  public abstract fun isStickyHeader(position: kotlin.Int): kotlin.Boolean
+//                     ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#isStickyHeader().(position)  value-parameter position: kotlin.Int
 //                               ^^^ reference kotlin/Int#
 //                                     ^^^^^^^ reference kotlin/Boolean#
 
@@ -36,8 +36,8 @@ interface StickyHeaderCallbacks {
      * and before any other calls to this method go through.
      */
     fun setupStickyHeaderView(stickyHeader: View) = Unit
-//      ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#setupStickyHeaderView().
-//                            ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#setupStickyHeaderView().(stickyHeader)
+//      ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#setupStickyHeaderView().  public open fun setupStickyHeaderView(stickyHeader: [ERROR : View])
+//                            ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#setupStickyHeaderView().(stickyHeader)  value-parameter stickyHeader: [ERROR : View]
 //                                                  ^^^^ reference kotlin/Unit#
 
     /**
@@ -47,8 +47,8 @@ interface StickyHeaderCallbacks {
      * Called after [setupStickyHeaderView].
      */
     fun teardownStickyHeaderView(stickyHeader: View) = Unit
-//      ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#teardownStickyHeaderView().
-//                               ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#teardownStickyHeaderView().(stickyHeader)
+//      ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#teardownStickyHeaderView().  public open fun teardownStickyHeaderView(stickyHeader: [ERROR : View])
+//                               ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#teardownStickyHeaderView().(stickyHeader)  value-parameter stickyHeader: [ERROR : View]
 //                                                     ^^^^ reference kotlin/Unit#
 
     //endregion

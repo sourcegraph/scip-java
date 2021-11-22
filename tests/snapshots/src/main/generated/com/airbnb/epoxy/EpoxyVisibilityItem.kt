@@ -38,98 +38,98 @@ import androidx.recyclerview.widget.RecyclerView
 //                             ^^^^^^^^^^^^^^^^^ reference androidx/annotation/VisibleForTesting#
 //                                               ^^^^^^^^^^^^^^^ reference androidx/annotation/VisibleForTesting#PACKAGE_PRIVATE.
 class EpoxyVisibilityItem(adapterPosition: Int? = null) {
-//    ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#
-//    ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#`<init>`().
-//                        ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#`<init>`().(adapterPosition)
+//    ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#  public final class EpoxyVisibilityItem
+//    ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#`<init>`().  public constructor EpoxyVisibilityItem(adapterPosition: kotlin.Int? = ...)
+//                        ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#`<init>`().(adapterPosition)  value-parameter adapterPosition: kotlin.Int? = ...
 //                                         ^^^ reference kotlin/Int#
 
     private val localVisibleRect = Rect()
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#localVisibleRect.
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getLocalVisibleRect().
+//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#localVisibleRect.  private final val localVisibleRect: [ERROR : Type for Rect()]
+//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getLocalVisibleRect().  private final val localVisibleRect: [ERROR : Type for Rect()]
 
     var adapterPosition = RecyclerView.NO_POSITION
-//      ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#adapterPosition.
-//      ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getAdapterPosition().
+//      ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#adapterPosition.  public final var adapterPosition: [ERROR : <ERROR PROPERTY TYPE>]
+//      ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getAdapterPosition().  public final var adapterPosition: [ERROR : <ERROR PROPERTY TYPE>]
         private set
-//              ^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setAdapterPosition().
+//              ^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setAdapterPosition().  private final fun <set-adapterPosition>(<set-?>: [ERROR : <ERROR PROPERTY TYPE>])
 
     @Px
 //   ^^ reference androidx/annotation/Px#`<init>`().
     private var height = 0
-//              ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#height.
-//              ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getHeight().
-//              ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setHeight().
+//              ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#height.  private final var height: kotlin.Int
+//              ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getHeight().  private final var height: kotlin.Int
+//              ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setHeight().  private final var height: kotlin.Int
 
     @Px
 //   ^^ reference androidx/annotation/Px#`<init>`().
     private var width = 0
-//              ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#width.
-//              ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getWidth().
-//              ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setWidth().
+//              ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#width.  private final var width: kotlin.Int
+//              ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getWidth().  private final var width: kotlin.Int
+//              ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setWidth().  private final var width: kotlin.Int
 
     @Px
 //   ^^ reference androidx/annotation/Px#`<init>`().
     private var visibleHeight = 0
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#visibleHeight.
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getVisibleHeight().
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setVisibleHeight().
+//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#visibleHeight.  private final var visibleHeight: kotlin.Int
+//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getVisibleHeight().  private final var visibleHeight: kotlin.Int
+//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setVisibleHeight().  private final var visibleHeight: kotlin.Int
 
     @Px
 //   ^^ reference androidx/annotation/Px#`<init>`().
     private var visibleWidth = 0
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#visibleWidth.
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getVisibleWidth().
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setVisibleWidth().
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#visibleWidth.  private final var visibleWidth: kotlin.Int
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getVisibleWidth().  private final var visibleWidth: kotlin.Int
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setVisibleWidth().  private final var visibleWidth: kotlin.Int
 
     @Px
 //   ^^ reference androidx/annotation/Px#`<init>`().
     private var viewportHeight = 0
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#viewportHeight.
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getViewportHeight().
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setViewportHeight().
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#viewportHeight.  private final var viewportHeight: kotlin.Int
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getViewportHeight().  private final var viewportHeight: kotlin.Int
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setViewportHeight().  private final var viewportHeight: kotlin.Int
 
     @Px
 //   ^^ reference androidx/annotation/Px#`<init>`().
     private var viewportWidth = 0
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#viewportWidth.
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getViewportWidth().
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setViewportWidth().
+//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#viewportWidth.  private final var viewportWidth: kotlin.Int
+//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getViewportWidth().  private final var viewportWidth: kotlin.Int
+//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setViewportWidth().  private final var viewportWidth: kotlin.Int
     private var partiallyVisible = false
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#partiallyVisible.
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getPartiallyVisible().
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setPartiallyVisible().
+//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#partiallyVisible.  private final var partiallyVisible: kotlin.Boolean
+//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getPartiallyVisible().  private final var partiallyVisible: kotlin.Boolean
+//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setPartiallyVisible().  private final var partiallyVisible: kotlin.Boolean
     private var fullyVisible = false
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#fullyVisible.
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getFullyVisible().
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setFullyVisible().
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#fullyVisible.  private final var fullyVisible: kotlin.Boolean
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getFullyVisible().  private final var fullyVisible: kotlin.Boolean
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setFullyVisible().  private final var fullyVisible: kotlin.Boolean
     private var visible = false
-//              ^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#visible.
-//              ^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getVisible().
-//              ^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setVisible().
+//              ^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#visible.  private final var visible: kotlin.Boolean
+//              ^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getVisible().  private final var visible: kotlin.Boolean
+//              ^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setVisible().  private final var visible: kotlin.Boolean
     private var focusedVisible = false
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#focusedVisible.
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getFocusedVisible().
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setFocusedVisible().
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#focusedVisible.  private final var focusedVisible: kotlin.Boolean
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getFocusedVisible().  private final var focusedVisible: kotlin.Boolean
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setFocusedVisible().  private final var focusedVisible: kotlin.Boolean
     private var viewVisibility = View.GONE
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#viewVisibility.
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getViewVisibility().
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setViewVisibility().
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#viewVisibility.  private final var viewVisibility: [ERROR : <ERROR PROPERTY TYPE>]
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getViewVisibility().  private final var viewVisibility: [ERROR : <ERROR PROPERTY TYPE>]
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setViewVisibility().  private final var viewVisibility: [ERROR : <ERROR PROPERTY TYPE>]
 
     /** Store last value for de-duping  */
     private var lastVisibleHeightNotified: Int? = null
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#lastVisibleHeightNotified.
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getLastVisibleHeightNotified().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setLastVisibleHeightNotified().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#lastVisibleHeightNotified.  private final var lastVisibleHeightNotified: kotlin.Int?
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getLastVisibleHeightNotified().  private final var lastVisibleHeightNotified: kotlin.Int?
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setLastVisibleHeightNotified().  private final var lastVisibleHeightNotified: kotlin.Int?
 //                                         ^^^ reference kotlin/Int#
     private var lastVisibleWidthNotified: Int? = null
-//              ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#lastVisibleWidthNotified.
-//              ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getLastVisibleWidthNotified().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setLastVisibleWidthNotified().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#lastVisibleWidthNotified.  private final var lastVisibleWidthNotified: kotlin.Int?
+//              ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getLastVisibleWidthNotified().  private final var lastVisibleWidthNotified: kotlin.Int?
+//              ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setLastVisibleWidthNotified().  private final var lastVisibleWidthNotified: kotlin.Int?
 //                                        ^^^ reference kotlin/Int#
     private var lastVisibilityNotified: Int? = null
-//              ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#lastVisibilityNotified.
-//              ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getLastVisibilityNotified().
-//              ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setLastVisibilityNotified().
+//              ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#lastVisibilityNotified.  private final var lastVisibilityNotified: kotlin.Int?
+//              ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#getLastVisibilityNotified().  private final var lastVisibilityNotified: kotlin.Int?
+//              ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#setLastVisibilityNotified().  private final var lastVisibilityNotified: kotlin.Int?
 //                                      ^^^ reference kotlin/Int#
 
     init {
@@ -150,10 +150,10 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
      * @return true if the view has been measured
      */
     fun update(view: View, parent: ViewGroup, detachEvent: Boolean): Boolean {
-//      ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#update().
-//             ^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#update().(view)
-//                         ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#update().(parent)
-//                                            ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#update().(detachEvent)
+//      ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#update().  public final fun update(view: [ERROR : View], parent: [ERROR : ViewGroup], detachEvent: kotlin.Boolean): kotlin.Boolean
+//             ^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#update().(view)  value-parameter view: [ERROR : View]
+//                         ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#update().(parent)  value-parameter parent: [ERROR : ViewGroup]
+//                                            ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#update().(detachEvent)  value-parameter detachEvent: kotlin.Boolean
 //                                                         ^^^^^^^ reference kotlin/Boolean#
 //                                                                   ^^^^^^^ reference kotlin/Boolean#
         // Clear the rect before calling getLocalVisibleRect
@@ -161,7 +161,7 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
 //      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#localVisibleRect.
 //      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getLocalVisibleRect().
         val viewDrawn = view.getLocalVisibleRect(localVisibleRect) && !detachEvent
-//          ^^^^^^^^^ definition local1
+//          ^^^^^^^^^ definition local1  val viewDrawn: kotlin.Boolean
 //                      ^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#update().(view)
 //                                               ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#localVisibleRect.
 //                                               ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getLocalVisibleRect().
@@ -218,8 +218,8 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
     }
 
     fun reset(newAdapterPosition: Int) {
-//      ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#reset().
-//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#reset().(newAdapterPosition)
+//      ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#reset().  public final fun reset(newAdapterPosition: kotlin.Int)
+//            ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#reset().(newAdapterPosition)  value-parameter newAdapterPosition: kotlin.Int
 //                                ^^^ reference kotlin/Int#
         fullyVisible = false
 //      ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#fullyVisible.
@@ -252,12 +252,12 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
     }
 
     fun handleVisible(epoxyHolder: EpoxyViewHolder, detachEvent: Boolean) {
-//      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleVisible().
-//                    ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleVisible().(epoxyHolder)
-//                                                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleVisible().(detachEvent)
+//      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleVisible().  public final fun handleVisible(epoxyHolder: [ERROR : EpoxyViewHolder], detachEvent: kotlin.Boolean)
+//                    ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleVisible().(epoxyHolder)  value-parameter epoxyHolder: [ERROR : EpoxyViewHolder]
+//                                                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleVisible().(detachEvent)  value-parameter detachEvent: kotlin.Boolean
 //                                                               ^^^^^^^ reference kotlin/Boolean#
         val previousVisible = visible
-//          ^^^^^^^^^^^^^^^ definition local2
+//          ^^^^^^^^^^^^^^^ definition local2  val previousVisible: kotlin.Boolean
 //                            ^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#visible.
 //                            ^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getVisible().
 //                            ^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#setVisible().
@@ -288,12 +288,12 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
     }
 
     fun handleFocus(epoxyHolder: EpoxyViewHolder, detachEvent: Boolean) {
-//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleFocus().
-//                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleFocus().(epoxyHolder)
-//                                                ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleFocus().(detachEvent)
+//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleFocus().  public final fun handleFocus(epoxyHolder: [ERROR : EpoxyViewHolder], detachEvent: kotlin.Boolean)
+//                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleFocus().(epoxyHolder)  value-parameter epoxyHolder: [ERROR : EpoxyViewHolder]
+//                                                ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleFocus().(detachEvent)  value-parameter detachEvent: kotlin.Boolean
 //                                                             ^^^^^^^ reference kotlin/Boolean#
         val previousFocusedVisible = focusedVisible
-//          ^^^^^^^^^^^^^^^^^^^^^^ definition local3
+//          ^^^^^^^^^^^^^^^^^^^^^^ definition local3  val previousFocusedVisible: kotlin.Boolean
 //                                   ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#focusedVisible.
 //                                   ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getFocusedVisible().
 //                                   ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#setFocusedVisible().
@@ -324,21 +324,21 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
     }
 
     fun handlePartialImpressionVisible(
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handlePartialImpressionVisible().
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handlePartialImpressionVisible().  public final fun handlePartialImpressionVisible(epoxyHolder: [ERROR : EpoxyViewHolder], detachEvent: kotlin.Boolean, thresholdPercentage: kotlin.Int)
         epoxyHolder: EpoxyViewHolder,
-//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handlePartialImpressionVisible().(epoxyHolder)
+//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handlePartialImpressionVisible().(epoxyHolder)  value-parameter epoxyHolder: [ERROR : EpoxyViewHolder]
         detachEvent: Boolean,
-//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handlePartialImpressionVisible().(detachEvent)
+//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handlePartialImpressionVisible().(detachEvent)  value-parameter detachEvent: kotlin.Boolean
 //                   ^^^^^^^ reference kotlin/Boolean#
         @IntRange(from = 0, to = 100) thresholdPercentage: Int
 //       ^^^^^^^^ reference androidx/annotation/IntRange#`<init>`().
 //                ^^^^ reference androidx/annotation/IntRange#`<init>`().(from)
 //                          ^^ reference androidx/annotation/IntRange#`<init>`().(to)
-//                                    ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handlePartialImpressionVisible().(thresholdPercentage)
+//                                    ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handlePartialImpressionVisible().(thresholdPercentage)  value-parameter thresholdPercentage: kotlin.Int
 //                                                         ^^^ reference kotlin/Int#
     ) {
         val previousPartiallyVisible = partiallyVisible
-//          ^^^^^^^^^^^^^^^^^^^^^^^^ definition local4
+//          ^^^^^^^^^^^^^^^^^^^^^^^^ definition local4  val previousPartiallyVisible: kotlin.Boolean
 //                                     ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#partiallyVisible.
 //                                     ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getPartiallyVisible().
 //                                     ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#setPartiallyVisible().
@@ -370,12 +370,12 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
     }
 
     fun handleFullImpressionVisible(epoxyHolder: EpoxyViewHolder, detachEvent: Boolean) {
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleFullImpressionVisible().
-//                                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleFullImpressionVisible().(epoxyHolder)
-//                                                                ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleFullImpressionVisible().(detachEvent)
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleFullImpressionVisible().  public final fun handleFullImpressionVisible(epoxyHolder: [ERROR : EpoxyViewHolder], detachEvent: kotlin.Boolean)
+//                                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleFullImpressionVisible().(epoxyHolder)  value-parameter epoxyHolder: [ERROR : EpoxyViewHolder]
+//                                                                ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleFullImpressionVisible().(detachEvent)  value-parameter detachEvent: kotlin.Boolean
 //                                                                             ^^^^^^^ reference kotlin/Boolean#
         val previousFullyVisible = fullyVisible
-//          ^^^^^^^^^^^^^^^^^^^^ definition local5
+//          ^^^^^^^^^^^^^^^^^^^^ definition local5  val previousFullyVisible: kotlin.Boolean
 //                                 ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#fullyVisible.
 //                                 ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getFullyVisible().
 //                                 ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#setFullyVisible().
@@ -403,13 +403,13 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
     }
 
     fun handleChanged(epoxyHolder: EpoxyViewHolder, visibilityChangedEnabled: Boolean): Boolean {
-//      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleChanged().
-//                    ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleChanged().(epoxyHolder)
-//                                                  ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleChanged().(visibilityChangedEnabled)
+//      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleChanged().  public final fun handleChanged(epoxyHolder: [ERROR : EpoxyViewHolder], visibilityChangedEnabled: kotlin.Boolean): kotlin.Boolean
+//                    ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleChanged().(epoxyHolder)  value-parameter epoxyHolder: [ERROR : EpoxyViewHolder]
+//                                                  ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#handleChanged().(visibilityChangedEnabled)  value-parameter visibilityChangedEnabled: kotlin.Boolean
 //                                                                            ^^^^^^^ reference kotlin/Boolean#
 //                                                                                      ^^^^^^^ reference kotlin/Boolean#
         var changed = false
-//          ^^^^^^^ definition local6
+//          ^^^^^^^ definition local6  var changed: kotlin.Boolean
         if (visibleHeight != lastVisibleHeightNotified || visibleWidth != lastVisibleWidthNotified || viewVisibility != lastVisibilityNotified) {
 //          ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#visibleHeight.
 //          ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getVisibleHeight().
@@ -499,7 +499,7 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
     }
 
     private fun isVisible(): Boolean {
-//              ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#isVisible().
+//              ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#isVisible().  private final fun isVisible(): kotlin.Boolean
 //                           ^^^^^^^ reference kotlin/Boolean#
         return viewVisibility == View.VISIBLE && visibleHeight > 0 && visibleWidth > 0
 //             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#viewVisibility.
@@ -516,10 +516,10 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
     }
 
     private fun isInFocusVisible(): Boolean {
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#isInFocusVisible().
+//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#isInFocusVisible().  private final fun isInFocusVisible(): kotlin.Boolean
 //                                  ^^^^^^^ reference kotlin/Boolean#
         val halfViewportArea = viewportHeight * viewportWidth / 2
-//          ^^^^^^^^^^^^^^^^ definition local7
+//          ^^^^^^^^^^^^^^^^ definition local7  val halfViewportArea: kotlin.Int
 //                             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#viewportHeight.
 //                             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getViewportHeight().
 //                             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#setViewportHeight().
@@ -529,7 +529,7 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
 //                                              ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#setViewportWidth().
 //                                                            ^ reference kotlin/Int#div(+3).
         val totalArea = height * width
-//          ^^^^^^^^^ definition local8
+//          ^^^^^^^^^ definition local8  val totalArea: kotlin.Int
 //                      ^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#height.
 //                      ^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getHeight().
 //                      ^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#setHeight().
@@ -538,7 +538,7 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
 //                               ^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getWidth().
 //                               ^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#setWidth().
         val visibleArea = visibleHeight * visibleWidth
-//          ^^^^^^^^^^^ definition local9
+//          ^^^^^^^^^^^ definition local9  val visibleArea: kotlin.Int
 //                        ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#visibleHeight.
 //                        ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getVisibleHeight().
 //                        ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#setVisibleHeight().
@@ -566,7 +566,7 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
     }
 
     private fun isPartiallyVisible(
-//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#isPartiallyVisible().
+//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#isPartiallyVisible().  private final fun isPartiallyVisible(thresholdPercentage: kotlin.Int): kotlin.Boolean
         @IntRange(
 //       ^^^^^^^^ reference androidx/annotation/IntRange#`<init>`().
             from = 0,
@@ -574,7 +574,7 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
             to = 100
 //          ^^ reference androidx/annotation/IntRange#`<init>`().(to)
         ) thresholdPercentage: Int
-//        ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#isPartiallyVisible().(thresholdPercentage)
+//        ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#isPartiallyVisible().(thresholdPercentage)  value-parameter thresholdPercentage: kotlin.Int
 //                             ^^^ reference kotlin/Int#
     ): Boolean {
 //     ^^^^^^^ reference kotlin/Boolean#
@@ -584,7 +584,7 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
 //                              ^^ reference kotlin/Int#equals().
 //                                           ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#isVisible().
         val totalArea = height * width
-//          ^^^^^^^^^ definition local10
+//          ^^^^^^^^^ definition local10  val totalArea: kotlin.Int
 //                      ^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#height.
 //                      ^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getHeight().
 //                      ^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#setHeight().
@@ -593,7 +593,7 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
 //                               ^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getWidth().
 //                               ^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#setWidth().
         val visibleArea = visibleHeight * visibleWidth
-//          ^^^^^^^^^^^ definition local11
+//          ^^^^^^^^^^^ definition local11  val visibleArea: kotlin.Int
 //                        ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#visibleHeight.
 //                        ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getVisibleHeight().
 //                        ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#setVisibleHeight().
@@ -602,7 +602,7 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
 //                                        ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getVisibleWidth().
 //                                        ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#setVisibleWidth().
         val visibleAreaPercentage = visibleArea / totalArea.toFloat() * 100
-//          ^^^^^^^^^^^^^^^^^^^^^ definition local12
+//          ^^^^^^^^^^^^^^^^^^^^^ definition local12  val visibleAreaPercentage: kotlin.Float
 //                                  ^^^^^^^^^^^ reference local11
 //                                              ^ reference kotlin/Int#div(+2).
 //                                                ^^^^^^^^^ reference local10
@@ -618,7 +618,7 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
     }
 
     private fun isFullyVisible(): Boolean {
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#isFullyVisible().
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#isFullyVisible().  private final fun isFullyVisible(): kotlin.Boolean
 //                                ^^^^^^^ reference kotlin/Boolean#
         return viewVisibility == View.VISIBLE && visibleHeight == height && visibleWidth == width
 //             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#viewVisibility.
@@ -641,8 +641,8 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
     }
 
     fun shiftBy(offsetPosition: Int) {
-//      ^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#shiftBy().
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#shiftBy().(offsetPosition)
+//      ^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#shiftBy().  public final fun shiftBy(offsetPosition: kotlin.Int)
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityItem#shiftBy().(offsetPosition)  value-parameter offsetPosition: kotlin.Int
 //                              ^^^ reference kotlin/Int#
         adapterPosition += offsetPosition
 //      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#adapterPosition.

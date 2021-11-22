@@ -95,15 +95,15 @@ import com.airbnb.viewmodeladapter.R
  * desired in a scrolling list
  */
 open class EpoxyRecyclerView @JvmOverloads constructor(
-//         ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#
+//         ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#  public open class EpoxyRecyclerView
 //                            ^^^^^^^^^^^^ reference kotlin/jvm/JvmOverloads#`<init>`().
-//                                         ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().
+//                                         ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().  public constructor EpoxyRecyclerView(context: [ERROR : Context], attrs: [ERROR : AttributeSet]? = ..., defStyleAttr: kotlin.Int = ...)
     context: Context,
-//  ^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(context)
+//  ^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(context)  value-parameter context: [ERROR : Context]
     attrs: AttributeSet? = null,
-//  ^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(attrs)
+//  ^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(attrs)  value-parameter attrs: [ERROR : AttributeSet]? = ...
     defStyleAttr: Int = 0
-//  ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(defStyleAttr)
+//  ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(defStyleAttr)  value-parameter defStyleAttr: kotlin.Int = ...
 //                ^^^ reference kotlin/Int#
 ) : RecyclerView(context, attrs, defStyleAttr) {
 //               ^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(context)
@@ -111,13 +111,13 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //                               ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(defStyleAttr)
 
     protected val spacingDecorator = EpoxyItemSpacingDecorator()
-//                ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#spacingDecorator.
-//                ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getSpacingDecorator().
+//                ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#spacingDecorator.  protected final val spacingDecorator: [ERROR : Type for EpoxyItemSpacingDecorator()]
+//                ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getSpacingDecorator().  protected final val spacingDecorator: [ERROR : Type for EpoxyItemSpacingDecorator()]
 
     private var epoxyController: EpoxyController? = null
-//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
-//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
-//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setEpoxyController().
+//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.  private final var epoxyController: [ERROR : EpoxyController]?
+//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().  private final var epoxyController: [ERROR : EpoxyController]?
+//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setEpoxyController().  private final var epoxyController: [ERROR : EpoxyController]?
 
     /**
      * The adapter that was removed because the RecyclerView was detached from the window. We save it
@@ -134,19 +134,19 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * @see .setRemoveAdapterWhenDetachedFromWindow
      */
     private var removedAdapter: RecyclerView.Adapter<*>? = null
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#removedAdapter.
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getRemovedAdapter().
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setRemovedAdapter().
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#removedAdapter.  private final var removedAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getRemovedAdapter().  private final var removedAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setRemovedAdapter().  private final var removedAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
 
     private var removeAdapterWhenDetachedFromWindow = true
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#removeAdapterWhenDetachedFromWindow.
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getRemoveAdapterWhenDetachedFromWindow().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setRemoveAdapterWhenDetachedFromWindow().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#removeAdapterWhenDetachedFromWindow.  private final var removeAdapterWhenDetachedFromWindow: kotlin.Boolean
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getRemoveAdapterWhenDetachedFromWindow().  private final var removeAdapterWhenDetachedFromWindow: kotlin.Boolean
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setRemoveAdapterWhenDetachedFromWindow().  public final fun setRemoveAdapterWhenDetachedFromWindow(removeAdapterWhenDetachedFromWindow: kotlin.Boolean)
 
     private var delayMsWhenRemovingAdapterOnDetach: Int = DEFAULT_ADAPTER_REMOVAL_DELAY_MS
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#delayMsWhenRemovingAdapterOnDetach.
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getDelayMsWhenRemovingAdapterOnDetach().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setDelayMsWhenRemovingAdapterOnDetach().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#delayMsWhenRemovingAdapterOnDetach.  private final var delayMsWhenRemovingAdapterOnDetach: kotlin.Int
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getDelayMsWhenRemovingAdapterOnDetach().  private final var delayMsWhenRemovingAdapterOnDetach: kotlin.Int
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setDelayMsWhenRemovingAdapterOnDetach().  public final fun setDelayMsWhenRemovingAdapterOnDetach(delayMsWhenRemovingAdapterOnDetach: kotlin.Int)
 //                                                  ^^^ reference kotlin/Int#
 //                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#Companion#DEFAULT_ADAPTER_REMOVAL_DELAY_MS.
 //                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#Companion#getDEFAULT_ADAPTER_REMOVAL_DELAY_MS().
@@ -157,13 +157,13 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * overhead of needlessly attempting to remove the runnable when it isn't posted.
      */
     private var isRemoveAdapterRunnablePosted: Boolean = false
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#isRemoveAdapterRunnablePosted.
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getIsRemoveAdapterRunnablePosted().
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setIsRemoveAdapterRunnablePosted().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#isRemoveAdapterRunnablePosted.  private final var isRemoveAdapterRunnablePosted: kotlin.Boolean
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getIsRemoveAdapterRunnablePosted().  private final var isRemoveAdapterRunnablePosted: kotlin.Boolean
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setIsRemoveAdapterRunnablePosted().  private final var isRemoveAdapterRunnablePosted: kotlin.Boolean
 //                                             ^^^^^^^ reference kotlin/Boolean#
     private val removeAdapterRunnable = Runnable {
-//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#removeAdapterRunnable.
-//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getRemoveAdapterRunnable().
+//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#removeAdapterRunnable.  private final val removeAdapterRunnable: java.lang.Runnable
+//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getRemoveAdapterRunnable().  private final val removeAdapterRunnable: java.lang.Runnable
 //                                      ^^^^^^^^ reference java/lang/Runnable#
         if (isRemoveAdapterRunnablePosted) {
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#isRemoveAdapterRunnablePosted.
@@ -181,49 +181,49 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     private val preloadScrollListeners: MutableList<EpoxyPreloader<*>> = mutableListOf()
-//              ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#preloadScrollListeners.
-//              ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getPreloadScrollListeners().
+//              ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#preloadScrollListeners.  private final val preloadScrollListeners: kotlin.collections.MutableList<com.airbnb.epoxy.preload.EpoxyPreloader<*>>
+//              ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getPreloadScrollListeners().  private final val preloadScrollListeners: kotlin.collections.MutableList<com.airbnb.epoxy.preload.EpoxyPreloader<*>>
 //                                      ^^^^^^^^^^^ reference kotlin/collections/MutableList#
 //                                                  ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/preload/EpoxyPreloader#
 //                                                                       ^^^^^^^^^^^^^ reference kotlin/collections/CollectionsKt#mutableListOf().
 
     private val preloadConfigs: MutableList<PreloadConfig<*, *, *>> = mutableListOf()
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#preloadConfigs.
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getPreloadConfigs().
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#preloadConfigs.  private final val preloadConfigs: kotlin.collections.MutableList<com.airbnb.epoxy.EpoxyRecyclerView.PreloadConfig<*, *, *>>
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#getPreloadConfigs().  private final val preloadConfigs: kotlin.collections.MutableList<com.airbnb.epoxy.EpoxyRecyclerView.PreloadConfig<*, *, *>>
 //                              ^^^^^^^^^^^ reference kotlin/collections/MutableList#
 //                                          ^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#
 //                                                                    ^^^^^^^^^^^^^ reference kotlin/collections/CollectionsKt#mutableListOf().
 
     private class PreloadConfig<T : EpoxyModel<*>, U : ViewMetadata?, P : PreloadRequestHolder>(
-//                ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#
-//                ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().
-//                              ^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[T]
-//                                                 ^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[U]
+//                ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#  private final class PreloadConfig<T, U : com.airbnb.epoxy.preload.ViewMetadata?, P : com.airbnb.epoxy.preload.PreloadRequestHolder>
+//                ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().  public constructor PreloadConfig<T, U : com.airbnb.epoxy.preload.ViewMetadata?, P : com.airbnb.epoxy.preload.PreloadRequestHolder>(maxPreload: kotlin.Int, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>, requestHolderFactory: () -> P)
+//                              ^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[T]  <T>
+//                                                 ^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[U]  <U : com.airbnb.epoxy.preload.ViewMetadata?>
 //                                                     ^^^^^^^^^^^^ reference com/airbnb/epoxy/preload/ViewMetadata#
-//                                                                    ^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[P]
+//                                                                    ^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[P]  <P : com.airbnb.epoxy.preload.PreloadRequestHolder>
 //                                                                        ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/preload/PreloadRequestHolder#
         val maxPreload: Int,
-//          ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#maxPreload.
-//          ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#getMaxPreload().
-//          ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(maxPreload)
+//          ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#maxPreload.  public final val maxPreload: kotlin.Int
+//          ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#getMaxPreload().  public final val maxPreload: kotlin.Int
+//          ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(maxPreload)  value-parameter maxPreload: kotlin.Int
 //                      ^^^ reference kotlin/Int#
         val errorHandler: PreloadErrorHandler,
-//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#errorHandler.
-//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#getErrorHandler().
-//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(errorHandler)
+//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#errorHandler.  public final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */
+//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#getErrorHandler().  public final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */
+//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(errorHandler)  value-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */
 //                        ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/preload/PreloadErrorHandler#
         val preloader: EpoxyModelPreloader<T, U, P>,
-//          ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#preloader.
-//          ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#getPreloader().
-//          ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(preloader)
+//          ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#preloader.  public final val preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>
+//          ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#getPreloader().  public final val preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>
+//          ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(preloader)  value-parameter preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>
 //                     ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/preload/EpoxyModelPreloader#
 //                                         ^ reference com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[T]
 //                                            ^ reference com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[U]
 //                                               ^ reference com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[P]
         val requestHolderFactory: () -> P
-//          ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#requestHolderFactory.
-//          ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#getRequestHolderFactory().
-//          ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(requestHolderFactory)
+//          ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#requestHolderFactory.  public final val requestHolderFactory: () -> P
+//          ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#getRequestHolderFactory().  public final val requestHolderFactory: () -> P
+//          ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(requestHolderFactory)  value-parameter requestHolderFactory: () -> P
 //                                      ^ reference com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[P]
     )
 
@@ -241,26 +241,26 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * @param requestHolderFactory Should create and return a new [PreloadRequestHolder] each time it is invoked
      */
     fun <T : EpoxyModel<*>, U : ViewMetadata?, P : PreloadRequestHolder> addPreloader(
-//       ^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[T]
-//                          ^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[U]
+//       ^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[T]  <T>
+//                          ^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[U]  <U : com.airbnb.epoxy.preload.ViewMetadata?>
 //                              ^^^^^^^^^^^^ reference com/airbnb/epoxy/preload/ViewMetadata#
-//                                             ^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[P]
+//                                             ^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[P]  <P : com.airbnb.epoxy.preload.PreloadRequestHolder>
 //                                                 ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/preload/PreloadRequestHolder#
-//                                                                       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().
+//                                                                       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().  public final fun <T, U : com.airbnb.epoxy.preload.ViewMetadata?, P : com.airbnb.epoxy.preload.PreloadRequestHolder> addPreloader(maxPreloadDistance: kotlin.Int = ..., errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>, requestHolderFactory: () -> P)
         maxPreloadDistance: Int = 3,
-//      ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(maxPreloadDistance)
+//      ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(maxPreloadDistance)  value-parameter maxPreloadDistance: kotlin.Int = ...
 //                          ^^^ reference kotlin/Int#
         errorHandler: PreloadErrorHandler,
-//      ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(errorHandler)
+//      ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(errorHandler)  value-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */
 //                    ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/preload/PreloadErrorHandler#
         preloader: EpoxyModelPreloader<T, U, P>,
-//      ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(preloader)
+//      ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(preloader)  value-parameter preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>
 //                 ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/preload/EpoxyModelPreloader#
 //                                     ^ reference com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[T]
 //                                        ^ reference com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[U]
 //                                           ^ reference com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[P]
         requestHolderFactory: () -> P
-//      ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(requestHolderFactory)
+//      ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(requestHolderFactory)  value-parameter requestHolderFactory: () -> P
 //                                  ^ reference com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[P]
     ) {
         preloadConfigs.add(
@@ -288,7 +288,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * Clears all preloaders added with [addPreloader]
      */
     fun clearPreloaders() {
-//      ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#clearPreloaders().
+//      ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#clearPreloaders().  public final fun clearPreloaders()
         preloadConfigs.clear()
 //      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#preloadConfigs.
 //      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#getPreloadConfigs().
@@ -298,7 +298,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     private fun updatePreloaders() {
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#updatePreloaders().
+//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#updatePreloaders().  private final fun updatePreloaders()
         preloadScrollListeners.forEach { removeOnScrollListener(it) }
 //      ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#preloadScrollListeners.
 //      ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#getPreloadScrollListeners().
@@ -309,13 +309,13 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //      ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#getPreloadScrollListeners().
 //                             ^^^^^ reference kotlin/collections/MutableList#clear().
         val currAdapter = adapter ?: return
-//          ^^^^^^^^^^^ definition local1
+//          ^^^^^^^^^^^ definition local1  val currAdapter: [ERROR : Type for adapter ?: return]
 
         preloadConfigs.forEach { preloadConfig ->
 //      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#preloadConfigs.
 //      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#getPreloadConfigs().
 //                     ^^^^^^^ reference kotlin/collections/CollectionsKt#forEach(+10).
-//                               ^^^^^^^^^^^^^ definition local2
+//                               ^^^^^^^^^^^^^ definition local2  value-parameter preloadConfig: com.airbnb.epoxy.EpoxyRecyclerView.PreloadConfig<*, *, *>
 
             if (currAdapter is EpoxyAdapter) {
 //              ^^^^^^^^^^^ reference local1
@@ -393,8 +393,8 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * RecyclerView is re-attached to the window at a later point.
      */
     fun setRemoveAdapterWhenDetachedFromWindow(removeAdapterWhenDetachedFromWindow: Boolean) {
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setRemoveAdapterWhenDetachedFromWindow().
-//                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setRemoveAdapterWhenDetachedFromWindow().(removeAdapterWhenDetachedFromWindow)
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setRemoveAdapterWhenDetachedFromWindow().  public final fun setRemoveAdapterWhenDetachedFromWindow(removeAdapterWhenDetachedFromWindow: kotlin.Boolean)
+//                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setRemoveAdapterWhenDetachedFromWindow().(removeAdapterWhenDetachedFromWindow)  value-parameter removeAdapterWhenDetachedFromWindow: kotlin.Boolean
 //                                                                                  ^^^^^^^ reference kotlin/Boolean#
         this.removeAdapterWhenDetachedFromWindow = removeAdapterWhenDetachedFromWindow
 //      ^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#
@@ -416,8 +416,8 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * ends.
      */
     fun setDelayMsWhenRemovingAdapterOnDetach(delayMsWhenRemovingAdapterOnDetach: Int) {
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setDelayMsWhenRemovingAdapterOnDetach().
-//                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setDelayMsWhenRemovingAdapterOnDetach().(delayMsWhenRemovingAdapterOnDetach)
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setDelayMsWhenRemovingAdapterOnDetach().  public final fun setDelayMsWhenRemovingAdapterOnDetach(delayMsWhenRemovingAdapterOnDetach: kotlin.Int)
+//                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setDelayMsWhenRemovingAdapterOnDetach().(delayMsWhenRemovingAdapterOnDetach)  value-parameter delayMsWhenRemovingAdapterOnDetach: kotlin.Int
 //                                                                                ^^^ reference kotlin/Int#
         this.delayMsWhenRemovingAdapterOnDetach = delayMsWhenRemovingAdapterOnDetach
 //      ^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#
@@ -432,7 +432,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
         if (attrs != null) {
 //          ^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(attrs)
             val a = context.obtainStyledAttributes(
-//              ^ definition local3
+//              ^ definition local3  val a: [ERROR : <ERROR FUNCTION RETURN TYPE>]
 //                  ^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(context)
                 attrs, R.styleable.EpoxyRecyclerView,
 //              ^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(attrs)
@@ -458,7 +458,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     @CallSuper
 //   ^^^^^^^^^ reference androidx/annotation/CallSuper#`<init>`().
     protected open fun init() {
-//                     ^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#init().
+//                     ^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#init().  protected open fun init()
         clipToPadding = false
         initViewPool()
 //      ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#initViewPool().
@@ -472,7 +472,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * @see .shouldShareViewPoolAcrossContext
      */
     private fun initViewPool() {
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#initViewPool().
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#initViewPool().  private final fun initViewPool()
         if (!shouldShareViewPoolAcrossContext()) {
 //          ^ reference kotlin/Boolean#not().
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#shouldShareViewPoolAcrossContext().
@@ -498,7 +498,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * Create a new instance of a view pool to use with this recyclerview. By default a [ ] is used.
      */
     protected open fun createViewPool(): RecyclerView.RecycledViewPool {
-//                     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#createViewPool().
+//                     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#createViewPool().  protected open fun createViewPool(): [ERROR : RecyclerView.RecycledViewPool]
         return UnboundedViewPool()
 //             ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UnboundedViewPool#`<init>`().
     }
@@ -508,16 +508,16 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * false here.
      */
     open fun shouldShareViewPoolAcrossContext(): Boolean {
-//           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#shouldShareViewPoolAcrossContext().
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#shouldShareViewPoolAcrossContext().  public open fun shouldShareViewPoolAcrossContext(): kotlin.Boolean
 //                                               ^^^^^^^ reference kotlin/Boolean#
         return true
     }
 
     override fun setLayoutParams(params: ViewGroup.LayoutParams) {
-//               ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setLayoutParams().
-//                               ^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setLayoutParams().(params)
+//               ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setLayoutParams().  public open fun setLayoutParams(params: [ERROR : ViewGroup.LayoutParams])
+//                               ^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setLayoutParams().(params)  value-parameter params: [ERROR : ViewGroup.LayoutParams]
         val isFirstParams = layoutParams == null
-//          ^^^^^^^^^^^^^ definition local4
+//          ^^^^^^^^^^^^^ definition local4  val isFirstParams: kotlin.Boolean
         super.setLayoutParams(params)
 //      ^^^^^ reference kotlin/Any#
 //                            ^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#setLayoutParams().(params)
@@ -547,9 +547,9 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * [.setClipToPadding] is set to false.
      */
     protected open fun createLayoutManager(): RecyclerView.LayoutManager {
-//                     ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#createLayoutManager().
+//                     ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#createLayoutManager().  protected open fun createLayoutManager(): [ERROR : RecyclerView.LayoutManager]
         val layoutParams = layoutParams
-//          ^^^^^^^^^^^^ definition local5
+//          ^^^^^^^^^^^^ definition local5  val layoutParams: [ERROR : Type for layoutParams]
 
         // 0 represents matching constraints in a LinearLayout or ConstraintLayout
         if (layoutParams.height == RecyclerView.LayoutParams.MATCH_PARENT || layoutParams.height == 0) {
@@ -573,8 +573,8 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     override fun setLayoutManager(layout: RecyclerView.LayoutManager?) {
-//               ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setLayoutManager().
-//                                ^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setLayoutManager().(layout)
+//               ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setLayoutManager().  public open fun setLayoutManager(layout: [ERROR : RecyclerView.LayoutManager]?)
+//                                ^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setLayoutManager().(layout)  value-parameter layout: [ERROR : RecyclerView.LayoutManager]?
         super.setLayoutManager(layout)
 //      ^^^^^ reference kotlin/Any#
 //                             ^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#setLayoutManager().(layout)
@@ -587,11 +587,11 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * adapter automatically.
      */
     private fun syncSpanCount() {
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#syncSpanCount().
+//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#syncSpanCount().  private final fun syncSpanCount()
         val layout = layoutManager
-//          ^^^^^^ definition local6
+//          ^^^^^^ definition local6  val layout: [ERROR : Type for layoutManager]
         val controller = epoxyController
-//          ^^^^^^^^^^ definition local7
+//          ^^^^^^^^^^ definition local7  val controller: [ERROR : EpoxyController]?
 //                       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
 //                       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
 //                       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#setEpoxyController().
@@ -615,7 +615,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     override fun requestLayout() {
-//               ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#requestLayout().
+//               ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#requestLayout().  public open fun requestLayout()
         // Grid layout manager calls this when the span count is changed. Its the easiest way to
         // detect a span count change and update our controller accordingly.
         syncSpanCount()
@@ -625,9 +625,9 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     fun setItemSpacingRes(@DimenRes itemSpacingRes: Int) {
-//      ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingRes().
+//      ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingRes().  public final fun setItemSpacingRes(itemSpacingRes: kotlin.Int)
 //                         ^^^^^^^^ reference androidx/annotation/DimenRes#`<init>`().
-//                                  ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingRes().(itemSpacingRes)
+//                                  ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingRes().(itemSpacingRes)  value-parameter itemSpacingRes: kotlin.Int
 //                                                  ^^^ reference kotlin/Int#
         setItemSpacingPx(resToPx(itemSpacingRes))
 //      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingPx().
@@ -636,12 +636,12 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     fun setItemSpacingDp(@Dimension(unit = Dimension.DP) dp: Int) {
-//      ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingDp().
+//      ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingDp().  public final fun setItemSpacingDp(dp: kotlin.Int)
 //                        ^^^^^^^^^ reference androidx/annotation/Dimension#`<init>`().
 //                                  ^^^^ reference androidx/annotation/Dimension#`<init>`().(unit)
 //                                         ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                                                   ^^ reference androidx/annotation/Dimension#DP.
-//                                                       ^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingDp().(dp)
+//                                                       ^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingDp().(dp)  value-parameter dp: kotlin.Int
 //                                                           ^^^ reference kotlin/Int#
         setItemSpacingPx(dpToPx(dp))
 //      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingPx().
@@ -663,9 +663,9 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * @see .setItemSpacingRes
      */
     open fun setItemSpacingPx(@Px spacingPx: Int) {
-//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingPx().
+//           ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingPx().  public open fun setItemSpacingPx(spacingPx: kotlin.Int)
 //                             ^^ reference androidx/annotation/Px#`<init>`().
-//                                ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingPx().(spacingPx)
+//                                ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingPx().(spacingPx)  value-parameter spacingPx: kotlin.Int
 //                                           ^^^ reference kotlin/Int#
         removeItemDecoration(spacingDecorator)
 //                           ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#spacingDecorator.
@@ -696,11 +696,11 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
 
     open fun setModels(models: List<EpoxyModel<*>>) {
-//           ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setModels().
-//                     ^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setModels().(models)
+//           ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setModels().  public open fun setModels(models: kotlin.collections.List<[ERROR : EpoxyModel<*>]<out [ERROR : *]>>)
+//                     ^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setModels().(models)  value-parameter models: kotlin.collections.List<[ERROR : EpoxyModel<*>]<out [ERROR : *]>>
 //                             ^^^^ reference kotlin/collections/List#
         val controller = (epoxyController as? SimpleEpoxyController)
-//          ^^^^^^^^^^ definition local8
+//          ^^^^^^^^^^ definition local8  val controller: ???
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#setEpoxyController().
@@ -732,8 +732,8 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
 
     fun setController(controller: EpoxyController) {
-//      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setController().
-//                    ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setController().(controller)
+//      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setController().  public final fun setController(controller: [ERROR : EpoxyController])
+//                    ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setController().(controller)  value-parameter controller: [ERROR : EpoxyController]
         epoxyController = controller
 //      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
 //      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
@@ -756,8 +756,8 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * @see setModels
      */
     fun setControllerAndBuildModels(controller: EpoxyController) {
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setControllerAndBuildModels().
-//                                  ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setControllerAndBuildModels().(controller)
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setControllerAndBuildModels().  public final fun setControllerAndBuildModels(controller: [ERROR : EpoxyController])
+//                                  ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setControllerAndBuildModels().(controller)  value-parameter controller: [ERROR : EpoxyController]
         controller.requestModelBuild()
 //      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#setControllerAndBuildModels().(controller)
         setController(controller)
@@ -776,11 +776,11 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * The Java equivalent is [buildModelsWith].
      */
     fun withModels(buildModels: EpoxyController.() -> Unit) {
-//      ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#withModels().
-//                 ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#withModels().(buildModels)
+//      ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#withModels().  public final fun withModels(buildModels: [ERROR : EpoxyController].() -> kotlin.Unit)
+//                 ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#withModels().(buildModels)  value-parameter buildModels: [ERROR : EpoxyController].() -> kotlin.Unit
 //                                                    ^^^^ reference kotlin/Unit#
         val controller = (epoxyController as? WithModelsController)
-//          ^^^^^^^^^^ definition local9
+//          ^^^^^^^^^^ definition local9  val controller: com.airbnb.epoxy.EpoxyRecyclerView.WithModelsController
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#setEpoxyController().
@@ -802,16 +802,16 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     private class WithModelsController : EpoxyController() {
-//                ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#
-//                ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#  private final class WithModelsController
+//                ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#`<init>`().  public constructor WithModelsController()
         var callback: EpoxyController.() -> Unit = {}
-//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#callback.
-//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#getCallback().
-//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#setCallback().
+//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#callback.  public final var callback: [ERROR : EpoxyController].() -> kotlin.Unit
+//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#getCallback().  public final var callback: [ERROR : EpoxyController].() -> kotlin.Unit
+//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#setCallback().  public final var callback: [ERROR : EpoxyController].() -> kotlin.Unit
 //                                          ^^^^ reference kotlin/Unit#
 
         override fun buildModels() {
-//                   ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#buildModels().
+//                   ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#buildModels().  public open fun buildModels()
             callback(this)
 //          ^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#callback.
 //          ^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#getCallback().
@@ -837,11 +837,11 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * @see setModels
      */
     fun buildModelsWith(callback: ModelBuilderCallback) {
-//      ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#buildModelsWith().
-//                      ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#buildModelsWith().(callback)
+//      ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#buildModelsWith().  public final fun buildModelsWith(callback: com.airbnb.epoxy.EpoxyRecyclerView.ModelBuilderCallback)
+//                      ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#buildModelsWith().(callback)  value-parameter callback: com.airbnb.epoxy.EpoxyRecyclerView.ModelBuilderCallback
 //                                ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#
         val controller = (epoxyController as? ModelBuilderCallbackController)
-//          ^^^^^^^^^^ definition local11
+//          ^^^^^^^^^^ definition local11  val controller: com.airbnb.epoxy.EpoxyRecyclerView.ModelBuilderCallbackController
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#setEpoxyController().
@@ -863,22 +863,22 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     private class ModelBuilderCallbackController : EpoxyController() {
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#  private final class ModelBuilderCallbackController
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#`<init>`().  public constructor ModelBuilderCallbackController()
         var callback: ModelBuilderCallback = object : ModelBuilderCallback {
-//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#callback.
-//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#getCallback().
-//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#setCallback().
+//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#callback.  public final var callback: com.airbnb.epoxy.EpoxyRecyclerView.ModelBuilderCallback
+//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#getCallback().  public final var callback: com.airbnb.epoxy.EpoxyRecyclerView.ModelBuilderCallback
+//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#setCallback().  public final var callback: com.airbnb.epoxy.EpoxyRecyclerView.ModelBuilderCallback
 //                    ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#
 //                                                    ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#
             override fun buildModels(controller: EpoxyController) {
-//                       ^^^^^^^^^^^ definition local13
-//                                   ^^^^^^^^^^ definition local14
+//                       ^^^^^^^^^^^ definition local13  public open fun buildModels(controller: [ERROR : EpoxyController])
+//                                   ^^^^^^^^^^ definition local14  value-parameter controller: [ERROR : EpoxyController]
             }
         }
 
         override fun buildModels() {
-//                   ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#buildModels().
+//                   ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#buildModels().  public open fun buildModels()
             callback.buildModels(this)
 //          ^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#callback.
 //          ^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#getCallback().
@@ -892,15 +892,15 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * A callback for creating models without needing a custom EpoxyController class. Used with [buildModelsWith]
      */
     interface ModelBuilderCallback {
-//            ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#
+//            ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#  public interface ModelBuilderCallback
         /**
          * Analagous to [EpoxyController.buildModels]. You should create new model instances and
          * add them to the given controller. [AutoModel] cannot be used with models added this
          * way.
          */
         fun buildModels(controller: EpoxyController)
-//          ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#buildModels().
-//                      ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#buildModels().(controller)
+//          ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#buildModels().  public abstract fun buildModels(controller: [ERROR : EpoxyController])
+//                      ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#buildModels().(controller)  value-parameter controller: [ERROR : EpoxyController]
     }
 
     /**
@@ -912,7 +912,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * controller or set models again.
      */
     fun requestModelBuild() {
-//      ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#requestModelBuild().
+//      ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#requestModelBuild().  public final fun requestModelBuild()
         if (epoxyController == null) {
 //          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
 //          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
@@ -943,7 +943,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      * Any existing child views are recycled to the view pool.
      */
     open fun clear() {
-//           ^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#clear().
+//           ^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#clear().  public open fun clear()
         // The controller is cleared so the next time models are set we can create a fresh one.
         epoxyController?.cancelPendingModelBuild()
 //      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
@@ -964,12 +964,12 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     @Px
 //   ^^ reference androidx/annotation/Px#`<init>`().
     protected fun dpToPx(@Dimension(unit = Dimension.DP) dp: Int): Int {
-//                ^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#dpToPx().
+//                ^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#dpToPx().  protected final fun dpToPx(dp: kotlin.Int): kotlin.Int
 //                        ^^^^^^^^^ reference androidx/annotation/Dimension#`<init>`().
 //                                  ^^^^ reference androidx/annotation/Dimension#`<init>`().(unit)
 //                                         ^^^^^^^^^ reference androidx/annotation/Dimension#
 //                                                   ^^ reference androidx/annotation/Dimension#DP.
-//                                                       ^^ definition com/airbnb/epoxy/EpoxyRecyclerView#dpToPx().(dp)
+//                                                       ^^ definition com/airbnb/epoxy/EpoxyRecyclerView#dpToPx().(dp)  value-parameter dp: kotlin.Int
 //                                                           ^^^ reference kotlin/Int#
 //                                                                 ^^^ reference kotlin/Int#
         return TypedValue
@@ -984,9 +984,9 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     @Px
 //   ^^ reference androidx/annotation/Px#`<init>`().
     protected fun resToPx(@DimenRes itemSpacingRes: Int): Int {
-//                ^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#resToPx().
+//                ^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#resToPx().  protected final fun resToPx(itemSpacingRes: kotlin.Int): kotlin.Int
 //                         ^^^^^^^^ reference androidx/annotation/DimenRes#`<init>`().
-//                                  ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#resToPx().(itemSpacingRes)
+//                                  ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#resToPx().(itemSpacingRes)  value-parameter itemSpacingRes: kotlin.Int
 //                                                  ^^^ reference kotlin/Int#
 //                                                        ^^^ reference kotlin/Int#
         return resources.getDimensionPixelOffset(itemSpacingRes)
@@ -994,8 +994,8 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     override fun setAdapter(adapter: RecyclerView.Adapter<*>?) {
-//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setAdapter().
-//                          ^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setAdapter().(adapter)
+//               ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setAdapter().  public open fun setAdapter(adapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?)
+//                          ^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#setAdapter().(adapter)  value-parameter adapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
         super.setAdapter(adapter)
 //      ^^^^^ reference kotlin/Any#
 //                       ^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#setAdapter().(adapter)
@@ -1007,11 +1007,11 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     override fun swapAdapter(
-//               ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#swapAdapter().
+//               ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#swapAdapter().  public open fun swapAdapter(adapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?, removeAndRecycleExistingViews: kotlin.Boolean)
         adapter: RecyclerView.Adapter<*>?,
-//      ^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#swapAdapter().(adapter)
+//      ^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#swapAdapter().(adapter)  value-parameter adapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
         removeAndRecycleExistingViews: Boolean
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#swapAdapter().(removeAndRecycleExistingViews)
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#swapAdapter().(removeAndRecycleExistingViews)  value-parameter removeAndRecycleExistingViews: kotlin.Boolean
 //                                     ^^^^^^^ reference kotlin/Boolean#
     ) {
         super.swapAdapter(adapter, removeAndRecycleExistingViews)
@@ -1026,7 +1026,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     public override fun onAttachedToWindow() {
-//                      ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#onAttachedToWindow().
+//                      ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#onAttachedToWindow().  public open fun onAttachedToWindow()
         super.onAttachedToWindow()
 //      ^^^^^ reference kotlin/Any#
 
@@ -1046,7 +1046,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     public override fun onDetachedFromWindow() {
-//                      ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#onDetachedFromWindow().
+//                      ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#onDetachedFromWindow().  public open fun onDetachedFromWindow()
         super.onDetachedFromWindow()
 //      ^^^^^ reference kotlin/Any#
         preloadScrollListeners.forEach { it.cancelPreloadRequests() }
@@ -1087,9 +1087,9 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     private fun removeAdapter() {
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#removeAdapter().
+//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#removeAdapter().  private final fun removeAdapter()
         val currentAdapter = adapter
-//          ^^^^^^^^^^^^^^ definition local16
+//          ^^^^^^^^^^^^^^ definition local16  val currentAdapter: [ERROR : Type for adapter]
         if (currentAdapter != null) {
 //          ^^^^^^^^^^^^^^ reference local16
             // Clear the adapter so the adapter releases its reference to this RecyclerView.
@@ -1112,7 +1112,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     private fun clearRemovedAdapterAndCancelRunnable() {
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#clearRemovedAdapterAndCancelRunnable().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#clearRemovedAdapterAndCancelRunnable().  private final fun clearRemovedAdapterAndCancelRunnable()
         removedAdapter = null
 //      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#removedAdapter.
 //      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyRecyclerView#getRemovedAdapter().
@@ -1132,7 +1132,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     private fun clearPoolIfActivityIsDestroyed() {
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#clearPoolIfActivityIsDestroyed().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#clearPoolIfActivityIsDestroyed().  private final fun clearPoolIfActivityIsDestroyed()
         // Views in the pool hold context references which can keep the activity from being GC'd,
         // plus they can hold significant memory resources. We should clear it asap after the pool
         // is no longer needed - the main signal we use for this is that the activity is destroyed.
@@ -1142,18 +1142,18 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
     }
 
     companion object {
-//            ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#Companion#
+//            ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#Companion#  public companion object
         private const val DEFAULT_ADAPTER_REMOVAL_DELAY_MS = 2000
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#Companion#DEFAULT_ADAPTER_REMOVAL_DELAY_MS.
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#Companion#getDEFAULT_ADAPTER_REMOVAL_DELAY_MS().
+//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#Companion#DEFAULT_ADAPTER_REMOVAL_DELAY_MS.  private const final val DEFAULT_ADAPTER_REMOVAL_DELAY_MS: kotlin.Int
+//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#Companion#getDEFAULT_ADAPTER_REMOVAL_DELAY_MS().  private const final val DEFAULT_ADAPTER_REMOVAL_DELAY_MS: kotlin.Int
 
         /**
          * Store one unique pool per activity. They are cleared out when activities are destroyed, so this
          * only needs to hold pools for active activities.
          */
         private val ACTIVITY_RECYCLER_POOL = ActivityRecyclerPool()
-//                  ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#Companion#ACTIVITY_RECYCLER_POOL.
-//                  ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#Companion#getACTIVITY_RECYCLER_POOL().
+//                  ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#Companion#ACTIVITY_RECYCLER_POOL.  private final val ACTIVITY_RECYCLER_POOL: com.airbnb.epoxy.ActivityRecyclerPool
+//                  ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyRecyclerView#Companion#getACTIVITY_RECYCLER_POOL().  private final val ACTIVITY_RECYCLER_POOL: com.airbnb.epoxy.ActivityRecyclerPool
 //                                           ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ActivityRecyclerPool#`<init>`().
     }
 }
