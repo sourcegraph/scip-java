@@ -165,11 +165,11 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
       return CommandResult(0, Nil)
     }
 
-    val compileAttemtps = ListBuffer.empty[Try[Unit]]
-    compileAttemtps += compileJavaFiles(tmp, deps, config, javaFiles)
-    compileAttemtps += compileScalaFiles(deps, scalaFiles)
-    compileAttemtps += compileKotlinFiles(deps, config, kotlinFiles)
-    val errors = compileAttemtps.collect { case Failure(exception) =>
+    val compileAttempts = ListBuffer.empty[Try[Unit]]
+    compileAttempts += compileJavaFiles(tmp, deps, config, javaFiles)
+    compileAttempts += compileScalaFiles(deps, scalaFiles)
+    compileAttempts += compileKotlinFiles(deps, config, kotlinFiles)
+    val errors = compileAttempts.collect { case Failure(exception) =>
       exception
     }
 
@@ -179,6 +179,9 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
     val isSemanticdbGenerated = Files
       .isDirectory(targetroot.resolve("META-INF"))
     if (errors.nonEmpty && !isSemanticdbGenerated) {
+      errors.foreach { error =>
+        index.app.reporter.log(Diagnostic.exception(error))
+      }
       CommandResult(1, Nil)
     } else {
       if (errors.nonEmpty && isSemanticdbGenerated) {
@@ -376,8 +379,9 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
   )(fn: PresentationCompiler => T): T = {
     val scalaVersion = deps
       .classpath
-      .headOption
+      .iterator
       .flatMap(jar => ScalaVersion.inferFromJar(jar))
+      .nextOption()
       .getOrElse {
         throw new IllegalArgumentException(
           s"failed to infer the Scala version from the dependencies: " +
