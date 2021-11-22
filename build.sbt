@@ -149,6 +149,7 @@ lazy val cli = project
         version,
         sbtVersion,
         scalaVersion,
+        "javacModuleOptions" -> javacModuleOptions,
         "semanticdbScalacVersions" ->
           com
             .sourcegraph
@@ -210,14 +211,50 @@ lazy val cli = project
           propsFile :: copiedJars.toList
         }
         .taskValue,
-    nativeImageOptions ++=
+    docker / imageNames :=
       List(
-        "-H:IncludeResources=^semanticdb-.*jar$",
-        s"-H:ReflectionConfigurationFiles=${target.value / "native-image-configs" / "reflect-config.json"}"
+        ImageName("sourcegraph/lsif-java:latest"),
+        ImageName(s"sourcegraph/lsif-java:${version.value}")
       ),
-    nativeImageOutput := (NativeImage / target).value / "lsif-java"
+    docker / dockerfile := {
+      val binaryDistribution = pack.value
+      val script = (ThisBuild / baseDirectory).value / "bin" /
+        "lsif-java-docker-script.sh"
+      new Dockerfile {
+        from("gradle:7.2.0-jdk8")
+
+        // Setup system dependencies.
+        run("apt-get", "update")
+        run("apt-get", "install", "--yes", "maven", "jq")
+
+        // Install Coursier.
+        run(
+          "curl",
+          "-fLo",
+          "/usr/local/bin/coursier",
+          "https://git.io/coursier-cli"
+        )
+        run("chmod", "+x", "/usr/local/bin/coursier")
+
+        // Pre-download Java 8, 11 and 17.
+        run("coursier", "java-home", "--jvm", "8")
+        run("coursier", "java-home", "--jvm", "11")
+        run(
+          "coursier",
+          "java-home",
+          "--jvm",
+          "temurin:17",
+          "--jvm-index",
+          "https://github.com/coursier/jvm-index/blob/master/index.json"
+        )
+
+        // Install `lsif-java` binary.
+        add(script, "/usr/local/bin/lsif-java")
+        add(binaryDistribution, "/app/lsif-java")
+      }
+    }
   )
-  .enablePlugins(NativeImagePlugin, BuildInfoPlugin)
+  .enablePlugins(PackPlugin, DockerPlugin, BuildInfoPlugin)
   .dependsOn(lsif)
 
 def commitAll(): Unit = {
@@ -276,6 +313,20 @@ lazy val minimized8 = project
   .dependsOn(agent, plugin)
   .disablePlugins(JavaFormatterPlugin)
 
+def javacModuleOptions =
+  List(
+    "-J--add-exports",
+    "-Jjdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+    "-J--add-exports",
+    "-Jjdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+    "-J--add-exports",
+    "-Jjdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+    "-J--add-exports",
+    "-Jjdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+    "-J--add-exports",
+    "-Jjdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+  )
+
 lazy val minimized17 = project
   .in(file("tests/minimized/.j17"))
   .settings(
@@ -283,19 +334,7 @@ lazy val minimized17 = project
     javaToolchainJvmIndex :=
       Some("https://github.com/coursier/jvm-index/blob/master/index.json"),
     javaToolchainVersion := "temurin:17",
-    javacOptions ++=
-      List(
-        "-J--add-exports",
-        "-Jjdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-        "-J--add-exports",
-        "-Jjdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-        "-J--add-exports",
-        "-Jjdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-        "-J--add-exports",
-        "-Jjdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-        "-J--add-exports",
-        "-Jjdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
-      )
+    javacOptions ++= javacModuleOptions
   )
   .dependsOn(agent, plugin)
   .disablePlugins(JavaFormatterPlugin)
@@ -373,6 +412,7 @@ lazy val bench = project
 lazy val docs = project
   .in(file("lsif-java-docs"))
   .settings(
+    moduleName := "lsif-java-docs",
     mdocOut :=
       (ThisBuild / baseDirectory).value / "website" / "target" / "docs",
     fork := false,

@@ -494,7 +494,14 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
       index.app.reporter.info(line)
     })
     val javac = Paths.get(
-      os.proc(coursier.toString, "java-home", "--jvm", config.jvm)
+      os.proc(
+          coursier.toString,
+          "java-home",
+          "--jvm",
+          config.jvm,
+          "--jvm-index",
+          "https://github.com/coursier/jvm-index/blob/master/index.json"
+        )
         .call()
         .out
         .trim(),
@@ -502,8 +509,13 @@ class LsifBuildTool(index: IndexCommand) extends BuildTool("LSIF", index) {
       "javac"
     )
     index.app.reporter.info(s"$$ $javac @$argsfile")
+    val javacModuleOptions: Seq[String] =
+      if (config.jvm != "8")
+        BuildInfo.javacModuleOptions
+      else
+        Nil
     val result = os
-      .proc(javac.toString, s"@$argsfile")
+      .proc(javac.toString, s"@$argsfile", javacModuleOptions)
       .call(
         stdout = pipe,
         stderr = pipe,
