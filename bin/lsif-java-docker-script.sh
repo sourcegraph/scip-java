@@ -2,7 +2,7 @@
 # Wrapper script for `lsif-java`, which automatically picks up the correct JVM
 # version. It assumes that `coursier` is available on the `$PATH` and that the
 # `lsif-java` binary is already installed at `/app/lsif-java/bin/lsif-java`.
-set -eux
+set -eu
 JVM_VERSION="8"
 FILE="$PWD/lsif-java.json"
 if test -f "$FILE"; then
