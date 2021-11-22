@@ -1,4 +1,4 @@
-name: Docker
+name: Release Docker
 on:
   push:
     tags: ["*"]
