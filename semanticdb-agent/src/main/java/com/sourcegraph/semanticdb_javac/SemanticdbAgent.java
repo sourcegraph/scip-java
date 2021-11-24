@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.lang.instrument.Instrumentation;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -68,6 +70,12 @@ public class SemanticdbAgent {
             new AgentBuilder.Transformer.ForAdvice()
                 .advice(named("build"), JavaCompilerArgumentsBuilderAdvice.class.getName()))
         .installOn(inst);
+    new AgentBuilder.Default()
+        .type(named("org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration"))
+        .transform(
+            new AgentBuilder.Transformer.ForAdvice()
+                .advice(named("analyseCode"), CompilationUnitDeclarationAdvice.class.getName()))
+        .installOn(inst);
   }
 
   private static PrintStream newLogger() {
@@ -116,6 +124,23 @@ public class SemanticdbAgent {
         List<File> newClasspath = new ArrayList<>(classpath);
         newClasspath.add(semanticdbJar);
         classpath = newClasspath;
+      }
+    }
+  }
+
+  @SuppressWarnings("all")
+  public static class CompilationUnitDeclarationAdvice {
+    @Advice.OnMethodExit
+    public static void analyzeCode(@Advice.This Object self) {
+      try {
+        Class<?> plugin = Class.forName("com.sourcegraph.semanticdb_ecj.SemanticdbEcjPlugin");
+        Method runMethod = plugin.getDeclaredMethod("run", Object.class);
+        runMethod.invoke(null, self);
+      } catch (ClassNotFoundException
+          | NoSuchMethodException
+          | IllegalAccessException
+          | InvocationTargetException e) {
+        e.printStackTrace();
       }
     }
   }

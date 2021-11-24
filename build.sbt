@@ -103,6 +103,32 @@ lazy val agent = project
       )
   )
 
+lazy val ecj = project
+  .in(file("semanticdb-ecj"))
+  .settings(
+    fatjarPackageSettings,
+    javaOnlySettings,
+    moduleName := "semanticdb-ecj",
+    javaToolchainVersion := "8",
+    javacOptions += "-g",
+    libraryDependencies ++=
+      List("org.eclipse.jdt" % "ecj" % "3.13.0" % "provided"),
+    mainClass := Some("com.sourcegraph.semanticdb_ecj.SemanticdbEcpPlugin"),
+    javaOptions += s"-javaagent:${(agent / Compile / Keys.`package`).value}",
+    (assembly / assemblyShadeRules) :=
+      Seq(
+        ShadeRule.zap("or.eclipse.**").inAll,
+        ShadeRule
+          .rename(
+            "com.google.**" -> "com.sourcegraph.shaded.com.google.@1",
+            "google.**" -> "com.sourcegraph.shaded.google.@1",
+            "org.relaxng.**" -> "com.sourcegraph.shaded.relaxng.@1"
+          )
+          .inAll
+      )
+  )
+  .dependsOn(semanticdb)
+
 lazy val plugin = project
   .in(file("semanticdb-javac"))
   .settings(
@@ -336,6 +362,56 @@ lazy val minimized17 = project
       Some("https://github.com/coursier/jvm-index/blob/master/index.json"),
     javaToolchainVersion := "temurin:17",
     javacOptions ++= javacModuleOptions
+  )
+  .dependsOn(agent, plugin)
+  .disablePlugins(JavaFormatterPlugin)
+
+lazy val minimizedEcj = project
+  .in(file("tests/minimized/.ecj"))
+  .settings(
+    minimizedSettings,
+    javaToolchainVersion := "8",
+    Compile / sources := Nil,
+    Compile / compile := {
+      val old = (Compile / compile).value
+      val actualSources = (minimized / Compile / sources).value
+      val cp = (ecj / Compile / fullClasspath)
+        .value
+        .map(_.data)
+        .mkString(java.io.File.pathSeparator)
+      val javaBinary = (Compile / javaHome)
+        .value
+        .get
+        .toPath
+        .resolve("bin")
+        .resolve("java")
+      println(
+        s"compiling ${actualSources.size} sources with Eclipse Java Compiler"
+      )
+      val compileExit =
+        scala
+          .sys
+          .process
+          .Process(
+            List[String](
+              javaBinary.toString,
+              s"-javaagent:${(agent / Compile / Keys.`package`).value}",
+              "-cp",
+              cp,
+              "org.eclipse.jdt.internal.compiler.batch.Main",
+              "-1.8",
+              "-warn:none",
+              "-preserveAllLocals",
+              "-d",
+              (Compile / classDirectory).value.getAbsolutePath
+            ) ++ actualSources.map(_.getAbsolutePath)
+          )
+          .!
+      if (compileExit != 0) {
+        throw new RuntimeException("javac compilation failed") with NoStackTrace
+      }
+      old
+    }
   )
   .dependsOn(agent, plugin)
   .disablePlugins(JavaFormatterPlugin)

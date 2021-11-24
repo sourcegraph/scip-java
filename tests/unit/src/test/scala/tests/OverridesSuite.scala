@@ -20,7 +20,7 @@ class OverridesSuite extends FunSuite with TempDirectories {
       source: String,
       extractSymbol: String,
       expectedSymbols: String*
-  ): Unit = {
+  )(implicit loc: munit.Location): Unit = {
     test(options) {
       val compiler = new TestCompiler(targetroot())
       val relativePath = "example.Parent".replace('.', '/') + ".java"
@@ -120,9 +120,9 @@ class OverridesSuite extends FunSuite with TempDirectories {
       |}
       |""".stripMargin,
     "example/Parent#Child#toString().",
-    """example/Parent#toString().
-      |java/lang/Object#toString().
-      |""".stripMargin
+    """|example/Parent#toString().
+       |java/lang/Object#toString().
+       |""".stripMargin
   )
 
   checkOverrides(
