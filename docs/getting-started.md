@@ -164,17 +164,22 @@ part of your regular compilation in the build tool. By using Java compiler APIs,
 `lsif-java` is able to generate accurate indexing information for a broad range
 of Java versions.
 
-| Java version | Support                        | Tracking issue                                                                   |
-| ------------ | ------------------------------ | -------------------------------------------------------------------------------- |
-| Java 7       | ❌                             |                                                                                  |
-| Java 8       | ✅                             |                                                                                  |
-| Java 11      | ✅                             |                                                                                  |
-| Java 12      | Not tested in CI, but may work |                                                                                  |
-| Java 13      | Not tested in CI, but may work |                                                                                  |
-| Java 14      | Not tested in CI, but may work |                                                                                  |
-| Java 15      | ✅                             |                                                                                  |
-| Java 16      | ❌                             |                                                                                  |
-| Java 17      | ❌                             | [sourcegraph/lsif-java#263](https://github.com/sourcegraph/lsif-java/issues/263) |
+| Java version | Support                             | Tracking issue |
+| ------------ | ----------------------------------- | -------------- |
+| Java 7       | ❌                                  |                |
+| Java 8       | ✅                                  |                |
+| Java 11      | ✅                                  |                |
+| Java 17      | ✅, requires custom `--add-exports` |                |
+
+For Java 17 and newer versions, the following JVM options are required:
+
+```
+--add-exports jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED
+--add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
+--add-exports jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
+--add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+--add-exports jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED
+```
 
 ### Scala
 
