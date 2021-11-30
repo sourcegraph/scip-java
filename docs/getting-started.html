@@ -221,14 +221,16 @@ of Java versions.</p>
 <tr><td>Java 7</td><td>❌</td><td></td></tr>
 <tr><td>Java 8</td><td>✅</td><td></td></tr>
 <tr><td>Java 11</td><td>✅</td><td></td></tr>
-<tr><td>Java 12</td><td>Not tested in CI, but may work</td><td></td></tr>
-<tr><td>Java 13</td><td>Not tested in CI, but may work</td><td></td></tr>
-<tr><td>Java 14</td><td>Not tested in CI, but may work</td><td></td></tr>
-<tr><td>Java 15</td><td>✅</td><td></td></tr>
-<tr><td>Java 16</td><td>❌</td><td></td></tr>
-<tr><td>Java 17</td><td>❌</td><td><a href="https://github.com/sourcegraph/lsif-java/issues/263">sourcegraph/lsif-java#263</a></td></tr>
+<tr><td>Java 17</td><td>✅, requires custom <code>--add-exports</code></td><td></td></tr>
 </tbody>
 </table>
+<p>For Java 17 and newer versions, the following JVM options are required:</p>
+<pre><code class="hljs">--<span class="hljs-built_in">add</span>-exports jdk.<span class="hljs-keyword">compiler</span>/<span class="hljs-keyword">com</span>.<span class="hljs-keyword">sun</span>.tools.javac.model=ALL-UNNAMED
+--<span class="hljs-built_in">add</span>-exports jdk.<span class="hljs-keyword">compiler</span>/<span class="hljs-keyword">com</span>.<span class="hljs-keyword">sun</span>.tools.javac.api=ALL-UNNAMED
+--<span class="hljs-built_in">add</span>-exports jdk.<span class="hljs-keyword">compiler</span>/<span class="hljs-keyword">com</span>.<span class="hljs-keyword">sun</span>.tools.javac.tree=ALL-UNNAMED
+--<span class="hljs-built_in">add</span>-exports jdk.<span class="hljs-keyword">compiler</span>/<span class="hljs-keyword">com</span>.<span class="hljs-keyword">sun</span>.tools.javac.util=ALL-UNNAMED
+--<span class="hljs-built_in">add</span>-exports jdk.<span class="hljs-keyword">compiler</span>/<span class="hljs-keyword">com</span>.<span class="hljs-keyword">sun</span>.tools.javac.code=ALL-UNNAMED
+</code></pre>
 <h3><a class="anchor" aria-hidden="true" id="scala"></a><a href="#scala" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala</h3>
 <p>Scala version support should always match the Scala versions that are supported
 by <a href="https://scalameta.org/metals">Metals</a>, the Scala language server.</p>
