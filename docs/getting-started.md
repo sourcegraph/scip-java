@@ -28,9 +28,29 @@ $ src lsif upload # (optional) upload index to Sourcegraph
 If everything went OK, a `dump.lsif` file should exist after the command has
 finished indexing the project.
 
-> The Docker container re-downloads all dependencies on every run, which can be
-> slow for large projects. Consider using the [Java launcher](#java-launcher)
-> instead to re-use the existing build cache of your project.
+> The Docker container is made available for convenience at the cost of
+> performance. Consider using the [Java launcher](#java-launcher) instead of the
+> Docker container for better performance. The Docker container is a large
+> download because it includes multiple pre-installed Java versions (Java 8,
+> Java 11 and Java 17). Also, external dependencies of your codebase get
+> re-downloaded on every `lsif-java index` invocation.
+
+Java 8 is the Java version in the Docker container. Use the following commands
+to change the default version:
+
+- Java 11: `eval "$(coursier java --jvm 11 --env)"`
+- Java 17:
+  `eval "$(coursier java --jvm temurin:17 --jvm-index https://github.com/coursier/jvm-index/blob/master/index.json --env)"`
+
+Alternatively, create a `lsif-java.json` file at the root of your repository
+with the following values:
+
+```jsonc
+// lsif-java.json
+{
+  "jvm": "11" // or "17"
+}
+```
 
 ### Java launcher
 
