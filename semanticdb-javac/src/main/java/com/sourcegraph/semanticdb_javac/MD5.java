@@ -26,10 +26,7 @@ public final class MD5 {
   }
 
   public static String digest(CharSequence chars) throws NoSuchAlgorithmException {
-    CharBuffer buf = CharBuffer.wrap(chars);
-    byte[] bytes = StandardCharsets.UTF_8.encode(buf).array();
     MessageDigest md5 = MessageDigest.getInstance("MD5");
-    md5.digest(bytes);
-    return bytesToHex(md5.digest());
+    return bytesToHex(md5.digest(chars.toString().getBytes()));
   }
 }
