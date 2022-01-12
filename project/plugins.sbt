@@ -1,6 +1,6 @@
 addSbtPlugin("org.xerial.sbt" % "sbt-pack" % "0.14")
 addSbtPlugin("se.marcuslonnberg" % "sbt-docker" % "1.8.2")
-addSbtPlugin("com.geirsson" % "sbt-ci-release" % "1.5.10")
+addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.5.10")
 addSbtPlugin("com.eed3si9n" % "sbt-buildinfo" % "0.10.0")
 addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.3")
 addSbtPlugin("org.scalameta" % "sbt-mdoc" % "2.2.24")
