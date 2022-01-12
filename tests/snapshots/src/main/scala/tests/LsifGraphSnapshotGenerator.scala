@@ -8,6 +8,7 @@ import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.lsif_java.LsifJava
 import com.sourcegraph.lsif_java.commands.SnapshotLsifCommand
 import com.sourcegraph.lsif_java.commands.SnapshotLsifCommand.IndexedLsif
+import moped.reporters.ConsoleReporter
 import moped.testkit.FileLayout
 
 class LsifGraphSnapshotGenerator extends SnapshotGenerator {
@@ -140,7 +141,8 @@ class LsifGraphSnapshotGenerator extends SnapshotGenerator {
             sourceroot
           )
           val objects = SnapshotLsifCommand.parseInput(outputLsif)
-          val lsif = new IndexedLsif(outputLsif, objects, sourceroot)
+          val reporter = ConsoleReporter(System.out)
+          val lsif = new IndexedLsif(outputLsif, objects, sourceroot, reporter)
           runSuccessfully(
             List(
               "snapshot-lsif",

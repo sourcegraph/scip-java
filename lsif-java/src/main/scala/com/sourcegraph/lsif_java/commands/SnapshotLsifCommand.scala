@@ -42,6 +42,7 @@ import moped.cli.Command
 import moped.cli.CommandParser
 import moped.reporters.Input
 import moped.reporters.Position
+import moped.reporters.Reporter
 import org.scalameta.ascii.layout.prefs.LayoutPrefsImpl
 
 @CommandName("snapshot-lsif")
@@ -65,7 +66,11 @@ case class SnapshotLsifCommand(
     for {
       inputPath <- input
       in = AbsolutePath.of(inputPath, sourceroot)
-      doc <- SnapshotLsifCommand.parseTextDocument(in, sourceroot)
+      if Files.isRegularFile(in) || {
+        app.error(s"no such file: $in")
+        false
+      }
+      doc <- SnapshotLsifCommand.parseTextDocument(in, sourceroot, app.reporter)
     } {
       val docPath = AbsolutePath
         .of(Paths.get(doc.getUri), sourceroot)
@@ -86,16 +91,21 @@ case class SnapshotLsifCommand(
 
 object SnapshotLsifCommand {
   private val jsonParser = JsonFormat.parser().ignoringUnknownFields()
-  def parseTextDocument(input: Path, sourceroot: Path): List[TextDocument] = {
-    parseSemanticdb(input, parseInput(input), sourceroot)
+  def parseTextDocument(
+      input: Path,
+      sourceroot: Path,
+      reporter: Reporter
+  ): List[TextDocument] = {
+    parseSemanticdb(input, parseInput(input), sourceroot, reporter)
   }
 
   def parseSemanticdb(
       input: Path,
       objects: mutable.Buffer[LsifObject],
-      sourceroot: Path
+      sourceroot: Path,
+      reporter: Reporter
   ): List[TextDocument] = {
-    val lsif = new IndexedLsif(input, objects, sourceroot)
+    val lsif = new IndexedLsif(input, objects, sourceroot, reporter)
     lsif
       .ranges
       .iterator
@@ -169,7 +179,8 @@ object SnapshotLsifCommand {
   class IndexedLsif(
       val path: Path,
       val objects: mutable.Buffer[LsifObject],
-      val sourceroot: Path
+      val sourceroot: Path,
+      val reporter: Reporter
   ) {
     val documents = mutable.Map.empty[Int, TextDocument.Builder]
     val next = mutable.Map.empty[Int, Int]
@@ -432,24 +443,28 @@ object SnapshotLsifCommand {
             case "document" =>
               val relativeFile = Paths.get(URI.create(o.getUri))
               val absoluteFile = sourceroot.resolve(relativeFile)
-              val text =
-                new String(
-                  Files.readAllBytes(absoluteFile),
-                  StandardCharsets.UTF_8
-                )
-              val relativeUri = sourceroot
-                .relativize(absoluteFile)
-                .iterator()
-                .asScala
-                .mkString("/")
-              val language = Language
-                .values()
-                .find(_.name().compareToIgnoreCase(o.getLanguage) == 0)
-                .getOrElse(Language.UNKNOWN_LANGUAGE)
-              textDocument(o.getId)
-                .setUri(relativeUri)
-                .setLanguage(language)
-                .setText(text)
+              if (!Files.isRegularFile(absoluteFile)) {
+                reporter.warning(s"no such file: $absoluteFile")
+              } else {
+                val text =
+                  new String(
+                    Files.readAllBytes(absoluteFile),
+                    StandardCharsets.UTF_8
+                  )
+                val relativeUri = sourceroot
+                  .relativize(absoluteFile)
+                  .iterator()
+                  .asScala
+                  .mkString("/")
+                val language = Language
+                  .values()
+                  .find(_.name().compareToIgnoreCase(o.getLanguage) == 0)
+                  .getOrElse(Language.UNKNOWN_LANGUAGE)
+                textDocument(o.getId)
+                  .setUri(relativeUri)
+                  .setLanguage(language)
+                  .setText(text)
+              }
             case "definitionResult" =>
               isDefinitionResult += o.getId()
             case "hoverResult" =>

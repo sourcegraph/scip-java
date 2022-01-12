@@ -108,10 +108,12 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       case ENUM:
       case CLASS:
         builder.setKind(Kind.CLASS);
+        builder.addAllOverriddenSymbols(semanticdbParentSymbols(sym, new ArrayList<>()));
         break;
       case INTERFACE:
       case ANNOTATION_TYPE:
         builder.setKind(Kind.INTERFACE);
+        builder.addAllOverriddenSymbols(semanticdbParentSymbols(sym, new ArrayList<>()));
         break;
       case FIELD:
         builder.setKind(Kind.FIELD);
@@ -379,6 +381,31 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     properties |= (sym.flags() & Flags.FINAL) > 0 ? Property.FINAL_VALUE : 0;
     properties |= (sym.flags() & Flags.DEFAULT) > 0 ? Property.DEFAULT_VALUE : 0;
     return properties;
+  }
+
+  private List<String> semanticdbParentSymbols(Symbol sym, List<String> result) {
+    if (!(sym instanceof Symbol.ClassSymbol)) {
+      return result;
+    }
+    Symbol.ClassSymbol csym = (Symbol.ClassSymbol) sym;
+    if (csym.getSuperclass() != Type.noType) {
+      semanticdbParentSymbol(csym.getSuperclass().tsym, result);
+    }
+    for (Type iType : csym.getInterfaces()) {
+      semanticdbParentSymbol(iType.tsym, result);
+    }
+    return result;
+  }
+
+  private void semanticdbParentSymbol(Symbol sym, List<String> result) {
+    if (sym == null) {
+      return;
+    }
+    String ssym = semanticdbSymbol(sym);
+    if (!Objects.equals(ssym, SemanticdbSymbols.NONE)) {
+      result.add(ssym);
+      semanticdbParentSymbols(sym, result);
+    }
   }
 
   private List<String> semanticdbOverrides(Symbol sym) {

@@ -49,10 +49,10 @@ public class LsifOutputStream {
     b.output.reset();
     try {
       switch (options.format) {
-        case PROTOBUF:
+        case GRAPH_PROTOBUF:
           object.buildPartial().writeTo(b.output);
           break;
-        case JSON:
+        case GRAPH_NDJSON:
         default:
           jsonPrinter.appendTo(object, b.writer);
           b.writer.flush();
@@ -69,7 +69,9 @@ public class LsifOutputStream {
       byte[] bytes = buffer.poll();
       while (bytes != null) {
         out.write(bytes);
-        out.write(NEWLINE);
+        if (options.format.isNewlineDelimitedJSON()) {
+          out.write(NEWLINE);
+        }
         bytes = buffer.poll();
       }
       out.flush();
