@@ -7,14 +7,18 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
+import lib.codeintel.lsif_typed.LsifTyped;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /** The core logic that converts SemanticDB into LSIF. */
 public class LsifSemanticdb {
@@ -49,6 +53,114 @@ public class LsifSemanticdb {
       return;
     }
     options.reporter.startProcessing(files.size());
+    if (options.format.isTyped()) {
+      runTyped(files, packages);
+    } else {
+      runGraph(files, packages);
+    }
+    writer.build();
+    options.reporter.endProcessing();
+  }
+
+  private void runTyped(List<Path> files, PackageTable packages) {
+    writer.emitTyped(typedMetadata());
+    filesStream(files).forEach(document -> processTypedDocument(document, packages));
+  }
+
+  private String typedSymbol(String symbol, Package pkg) {
+    if (symbol.startsWith("local")) {
+      return "local " + symbol.substring("local".length());
+    }
+    return "semanticdb maven " + pkg.repoName() + " " + pkg.version() + " " + symbol;
+  }
+
+  private void processTypedDocument(Path path, PackageTable packages) {
+    for (LsifTextDocument doc : parseTextDocument(path).collect(Collectors.toList())) {
+      if (doc.semanticdb.getOccurrencesCount() == 0) {
+        continue;
+      }
+
+      Path absolutePath = Paths.get(URI.create(doc.semanticdb.getUri()));
+      String relativePath =
+          StreamSupport.stream(options.sourceroot.relativize(absolutePath).spliterator(), false)
+              .map(p -> p.getFileName().toString())
+              .collect(Collectors.joining("/"));
+      LsifTyped.Document.Builder tdoc =
+          LsifTyped.Document.newBuilder().setRelativePath(relativePath);
+      for (SymbolOccurrence occ : doc.sortedSymbolOccurrences()) {
+        int role = 0;
+        if (occ.getRole() == Role.DEFINITION) {
+          role |= LsifTyped.SymbolRole.Definition_VALUE;
+        }
+        boolean isSingleLineRange = occ.getRange().getStartLine() == occ.getRange().getEndLine();
+        Iterable<Integer> range =
+            isSingleLineRange
+                ? Arrays.asList(
+                    occ.getRange().getStartLine(),
+                    occ.getRange().getStartCharacter(),
+                    occ.getRange().getEndCharacter())
+                : Arrays.asList(
+                    occ.getRange().getStartLine(),
+                    occ.getRange().getStartCharacter(),
+                    occ.getRange().getEndLine(),
+                    occ.getRange().getEndCharacter());
+        Package pkg = packages.packageForSymbol(occ.getSymbol()).orElse(Package.EMPTY);
+        tdoc.addOccurrences(
+            LsifTyped.Occurrence.newBuilder()
+                .addAllRange(range)
+                .setSymbol(typedSymbol(occ.getSymbol(), pkg))
+                .setSymbolRoles(role));
+      }
+      Symtab symtab = new Symtab(doc.semanticdb);
+      for (SymbolInformation info : doc.semanticdb.getSymbolsList()) {
+        Package pkg = packages.packageForSymbol(info.getSymbol()).orElse(Package.EMPTY);
+        LsifTyped.SymbolInformation.Builder tinfo =
+            LsifTyped.SymbolInformation.newBuilder().setSymbol(typedSymbol(info.getSymbol(), pkg));
+
+        for (String overriddenSymbol : info.getOverriddenSymbolsList()) {
+          if (isIgnoredOverriddenSymbol(overriddenSymbol)) {
+            continue;
+          }
+          Package overriddenSymbolPkg =
+              packages.packageForSymbol(overriddenSymbol).orElse(Package.EMPTY);
+          tinfo.addRelationships(
+              LsifTyped.Relationship.newBuilder()
+                  .setSymbol(typedSymbol(overriddenSymbol, overriddenSymbolPkg))
+                  .setIsImplementation(true)
+                  .setIsReference(SemanticdbSymbols.isMethod(info.getSymbol())));
+        }
+        if (info.hasSignature()) {
+          String language =
+              doc.semanticdb.getLanguage().toString().toLowerCase(Locale.ROOT).intern();
+          String signature = new SignatureFormatter(info, symtab).formatSymbol();
+          tinfo.addDocumentation("```" + language + "\n" + signature + "\n```");
+        }
+        String documentation = info.getDocumentation().getMessage();
+        if (!documentation.isEmpty()) {
+          tinfo.addDocumentation(documentation);
+        }
+        tdoc.addSymbols(tinfo);
+      }
+      writer.emitTyped(LsifTyped.Index.newBuilder().addDocuments(tdoc).build());
+    }
+  }
+
+  private LsifTyped.Index typedMetadata() {
+    return LsifTyped.Index.newBuilder()
+        .setMetadata(
+            LsifTyped.Metadata.newBuilder()
+                .setVersion(LsifTyped.ProtocolVersion.UnspecifiedProtocolVersion)
+                .setProjectRoot(options.sourceroot.toUri().toString())
+                .setTextDocumentEncoding(LsifTyped.TextEncoding.UTF8)
+                .setToolInfo(
+                    LsifTyped.ToolInfo.newBuilder()
+                        .setName(options.toolInfo.getName())
+                        .setVersion(options.toolInfo.getVersion())
+                        .addAllArguments(options.toolInfo.getArgsList())))
+        .build();
+  }
+
+  private void runGraph(List<Path> files, PackageTable packages) {
     writer.emitMetaData();
     int projectId = writer.emitProject(options.language);
 
@@ -57,11 +169,7 @@ public class LsifSemanticdb {
         filesStream(files)
             .flatMap(d -> processPath(d, isExportedSymbol, packages))
             .collect(Collectors.toList());
-
     writer.emitContains(projectId, documentIds);
-
-    writer.build();
-    options.reporter.endProcessing();
   }
 
   private Stream<Path> filesStream(List<Path> files) {
@@ -170,16 +278,22 @@ public class LsifSemanticdb {
 
       // Overrides
       if (symbolInformation.getOverriddenSymbolsCount() > 0) {
-        int[] overriddenReferenceResultIds = new int[symbolInformation.getOverriddenSymbolsCount()];
+        List<Integer> overriddenReferenceResultIds =
+            new ArrayList<>(symbolInformation.getOverriddenSymbolsCount());
         for (int i = 0; i < symbolInformation.getOverriddenSymbolsCount(); i++) {
           String overriddenSymbol = symbolInformation.getOverriddenSymbols(i);
+          if (isIgnoredOverriddenSymbol(overriddenSymbol)) {
+            continue;
+          }
           ResultIds overriddenIds = results.getOrInsertResultSet(overriddenSymbol);
-          overriddenReferenceResultIds[i] = overriddenIds.referenceResult;
+          overriddenReferenceResultIds.add(overriddenIds.referenceResult);
           writer.emitReferenceResultsItemEdge(
-              overriddenIds.referenceResult, new int[] {rangeId}, doc.id);
+              overriddenIds.referenceResult, Collections.singletonList(rangeId), doc.id);
         }
-        writer.emitReferenceResultsItemEdge(
-            ids.referenceResult, overriddenReferenceResultIds, doc.id);
+        if (overriddenReferenceResultIds.size() > 0) {
+          writer.emitReferenceResultsItemEdge(
+              ids.referenceResult, overriddenReferenceResultIds, doc.id);
+        }
       }
     }
     writer.emitContains(doc.id, new ArrayList<>(rangeIds));
@@ -213,5 +327,11 @@ public class LsifSemanticdb {
       // of `lsif-java index`.
       return Semanticdb.TextDocuments.parseFrom(bytes);
     }
+  }
+
+  private boolean isIgnoredOverriddenSymbol(String symbol) {
+    // Skip java/lang/Object# since it's the parent of all classes
+    // making it noisy for "find implementations" results.
+    return symbol.equals("java/lang/Object#");
   }
 }

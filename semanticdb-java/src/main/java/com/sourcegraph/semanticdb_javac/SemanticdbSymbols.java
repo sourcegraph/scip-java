@@ -35,6 +35,10 @@ public final class SemanticdbSymbols {
     return !isLocal(symbol);
   }
 
+  public static boolean isMethod(String symbol) {
+    return symbol.endsWith(").");
+  }
+
   /**
    * A SemanticDB symbol is composed from a list of "descriptors".
    *

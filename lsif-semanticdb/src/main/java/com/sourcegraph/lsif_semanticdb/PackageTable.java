@@ -19,6 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.regex.Pattern;
 
 public class PackageTable implements Function<Package, Integer> {
 
@@ -30,8 +31,6 @@ public class PackageTable implements Function<Package, Integer> {
 
   private static final PathMatcher JAR_PATTERN =
       FileSystems.getDefault().getPathMatcher("glob:**.jar");
-  private static final PathMatcher CLASS_PATTERN =
-      FileSystems.getDefault().getPathMatcher("glob:**.class");
 
   public PackageTable(LsifSemanticdbOptions options, LsifWriter writer) throws IOException {
     this.writer = writer;
@@ -51,10 +50,6 @@ public class PackageTable implements Function<Package, Integer> {
     writer.emitPackageInformationEdge(monikerId, pkgId);
   }
 
-  public void writeImportedSymbol(String symbol, int monikerId) {
-    packageForSymbol(symbol).ifPresent(pkg -> writeMonikerPackage(monikerId, pkg));
-  }
-
   public Optional<Package> packageForSymbol(String symbol) {
     return SymbolDescriptor.toplevel(symbol)
         .flatMap(
@@ -65,6 +60,7 @@ public class PackageTable implements Function<Package, Integer> {
   }
 
   private Optional<Package> packageForClassfile(String classfile) {
+
     Package result = byClassfile.get(classfile);
     if (result != null) return Optional.of(result);
     if (!javaVersion.isJava8 && isJrtClassfile(classfile)) return Optional.of(javaVersion.pkg);

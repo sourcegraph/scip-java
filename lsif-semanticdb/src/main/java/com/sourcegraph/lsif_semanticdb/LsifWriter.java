@@ -6,6 +6,8 @@ import com.sourcegraph.lsif_protocol.LsifObject;
 import com.sourcegraph.lsif_protocol.LsifPosition;
 import com.sourcegraph.semanticdb_javac.Semanticdb;
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
+import lib.codeintel.lsif_typed.LsifTyped;
+
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,6 +17,7 @@ import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /** High-level utility methods to write LSIF vertex/edge objects into the LSIF output stream. */
@@ -34,6 +37,10 @@ public class LsifWriter implements AutoCloseable {
     this.output =
         new LsifOutputStream(options, new BufferedOutputStream(Files.newOutputStream(tmp)));
     this.options = options;
+  }
+
+  public void emitTyped(LsifTyped.Index index) {
+    this.output.write(index.toByteArray());
   }
 
   public void emitMetaData() {
@@ -139,12 +146,11 @@ public class LsifWriter implements AutoCloseable {
     emitObject(lsifEdge("item").setOutV(outV).addInVs(inV).setDocument(document));
   }
 
-  public void emitReferenceResultsItemEdge(int outV, int[] inVs, int document) {
-    List<Integer> ints = Arrays.stream(inVs).boxed().collect(Collectors.toList());
+  public void emitReferenceResultsItemEdge(int outV, Iterable<Integer> inVs, int document) {
     emitObject(
         lsifEdge("item")
             .setOutV(outV)
-            .addAllInVs(ints)
+            .addAllInVs(inVs)
             .setDocument(document)
             .setProperty("referenceResults"));
   }

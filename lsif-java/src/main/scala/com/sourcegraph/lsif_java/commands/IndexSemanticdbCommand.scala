@@ -44,17 +44,19 @@ final case class IndexSemanticdbCommand(
     @Inline() app: Application = Application.default
 ) extends Command {
   def sourceroot: Path = AbsolutePath.of(app.env.workingDirectory)
-  def isProtobufFormat: Boolean =
-    IndexSemanticdbCommand.isProtobufFormat(output)
   def absoluteTargetroots: List[Path] =
     targetroot.map(AbsolutePath.of(_, app.env.workingDirectory))
   def run(): Int = {
     val reporter = new ConsoleLsifSemanticdbReporter(app)
-    val format =
-      if (isProtobufFormat)
-        LsifOutputFormat.PROTOBUF
-      else
-        LsifOutputFormat.JSON
+    val outputFilename = output.getFileName.toString
+    val format = LsifOutputFormat.fromFilename(outputFilename)
+    if (format == LsifOutputFormat.UNKNOWN) {
+      app.error(
+        s"unknown output format for filename '$outputFilename'. " +
+          s"Supported file extension are `*.lsif`, `*.lsif-typed'"
+      )
+      return 1
+    }
     val packages =
       absoluteTargetroots
         .iterator
