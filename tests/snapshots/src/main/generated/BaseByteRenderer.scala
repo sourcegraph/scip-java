@@ -23,6 +23,7 @@ import upickle.core.{ArrVisitor, ObjVisitor}
   */
 class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //    ^^^^^^^^^^^^^^^^ definition ujson/BaseByteRenderer# class BaseByteRenderer[T <: Output]
+//    ^^^^^^^^^^^^^^^^ definition ujson/BaseByteRenderer. object BaseByteRenderer
 //                     ^ definition ujson/BaseByteRenderer#[T] T <: Output
 //                          ^^^^^^^ reference upickle/
 //                                  ^^^^ reference upickle/core/
@@ -65,11 +66,13 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 
   private[this] var depth: Int = 0
 //                  ^^^^^ definition ujson/BaseByteRenderer#depth(). private[this] var depth: Int
+//                  ^^^^^ definition ujson/BaseByteRenderer#`depth_=`(). private[this] var depth_=(x$1: Int): Unit
 //                         ^^^ reference scala/Int#
 
 
   private[this] var commaBuffered = false
 //                  ^^^^^^^^^^^^^ definition ujson/BaseByteRenderer#commaBuffered(). private[this] var commaBuffered: Boolean
+//                  ^^^^^^^^^^^^^ definition ujson/BaseByteRenderer#`commaBuffered_=`(). private[this] var commaBuffered_=(x$1: Boolean): Unit
 
   def flushBuffer() = {
 //    ^^^^^^^^^^^ definition ujson/BaseByteRenderer#flushBuffer(). def flushBuffer(): Unit

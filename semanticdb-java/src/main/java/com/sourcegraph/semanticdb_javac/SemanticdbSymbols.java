@@ -79,6 +79,14 @@ public final class SemanticdbSymbols {
       this.disambiguator = disambiguator;
     }
 
+    public Descriptor withName(String newName) {
+      return new Descriptor(kind, newName, disambiguator);
+    }
+
+    public Descriptor withKind(Kind newKind) {
+      return new Descriptor(newKind, name, disambiguator);
+    }
+
     public static Descriptor local(String name) {
       return new Descriptor(Kind.Local, name);
     }

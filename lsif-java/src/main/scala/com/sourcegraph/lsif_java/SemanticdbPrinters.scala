@@ -17,7 +17,9 @@ object SemanticdbPrinters {
       comments: CommentSyntax = CommentSyntax.default
   ): String = {
     val occurrencesByLine = LsifTextDocument
-      .sortedSymbolOccurrences(doc)
+      .sortedSymbolOccurrences(
+        LsifTextDocument.manifestOccurrencesForSyntheticSymbols(doc)
+      )
       .asScala
       .groupBy(_.getRange.getStartLine)
     val out = new StringBuilder()

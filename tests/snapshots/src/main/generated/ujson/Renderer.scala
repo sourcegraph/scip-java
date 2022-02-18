@@ -21,6 +21,11 @@ import scala.annotation.switch
 
 case class BytesRenderer(indent: Int = -1, escapeUnicode: Boolean = false)
 //         ^^^^^^^^^^^^^ definition ujson/BytesRenderer# case class BytesRenderer(indent: Int, escapeUnicode: Boolean) extends BaseByteRenderer[ByteArrayOutputStream]
+//         ^^^^^^^^^^^^^ definition ujson/BytesRenderer#productElement(). def productElement(x$1: Int): Any
+//         ^^^^^^^^^^^^^ definition ujson/BytesRenderer#productElementName(). def productElementName(x$1: Int): String
+//         ^^^^^^^^^^^^^ definition ujson/BytesRenderer. object BytesRenderer
+//         ^^^^^^^^^^^^^ definition ujson/BytesRenderer#copy(). def copy(indent: Int, escapeUnicode: Boolean): BytesRenderer
+//         ^^^^^^^^^^^^^ definition ujson/BytesRenderer.apply(). def apply(indent: Int, escapeUnicode: Boolean): BytesRenderer
 //                       definition ujson/BytesRenderer#`<init>`(). def this(indent: Int, escapeUnicode: Boolean)
 //                       ^^^^^^ definition ujson/BytesRenderer#indent. val indent: Int
 //                               ^^^ reference scala/Int#
@@ -38,6 +43,11 @@ case class BytesRenderer(indent: Int = -1, escapeUnicode: Boolean = false)
 
 case class StringRenderer(indent: Int = -1,
 //         ^^^^^^^^^^^^^^ definition ujson/StringRenderer# case class StringRenderer(indent: Int, escapeUnicode: Boolean) extends BaseCharRenderer[StringWriter]
+//         ^^^^^^^^^^^^^^ definition ujson/StringRenderer. object StringRenderer
+//         ^^^^^^^^^^^^^^ definition ujson/StringRenderer#copy(). def copy(indent: Int, escapeUnicode: Boolean): StringRenderer
+//         ^^^^^^^^^^^^^^ definition ujson/StringRenderer.apply(). def apply(indent: Int, escapeUnicode: Boolean): StringRenderer
+//         ^^^^^^^^^^^^^^ definition ujson/StringRenderer#productElement(). def productElement(x$1: Int): Any
+//         ^^^^^^^^^^^^^^ definition ujson/StringRenderer#productElementName(). def productElementName(x$1: Int): String
 //                        definition ujson/StringRenderer#`<init>`(). def this(indent: Int, escapeUnicode: Boolean)
 //                        ^^^^^^ definition ujson/StringRenderer#indent. val indent: Int
 //                                ^^^ reference scala/Int#
@@ -56,6 +66,11 @@ case class StringRenderer(indent: Int = -1,
 
 case class Renderer(out: java.io.Writer,
 //         ^^^^^^^^ definition ujson/Renderer# case class Renderer(out: Writer, indent: Int, escapeUnicode: Boolean) extends BaseCharRenderer[Writer]
+//         ^^^^^^^^ definition ujson/Renderer. object Renderer
+//         ^^^^^^^^ definition ujson/Renderer.apply(). def apply(out: Writer, indent: Int, escapeUnicode: Boolean): Renderer
+//         ^^^^^^^^ definition ujson/Renderer#productElementName(). def productElementName(x$1: Int): String
+//         ^^^^^^^^ definition ujson/Renderer#copy(). def copy(out: Writer, indent: Int, escapeUnicode: Boolean): Renderer
+//         ^^^^^^^^ definition ujson/Renderer#productElement(). def productElement(x$1: Int): Any
 //                  definition ujson/Renderer#`<init>`(). def this(out: Writer, indent: Int, escapeUnicode: Boolean)
 //                  ^^^ definition ujson/Renderer#out. val out: Writer
 //                       ^^^^ reference java/

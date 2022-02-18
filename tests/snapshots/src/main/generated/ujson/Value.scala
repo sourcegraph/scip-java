@@ -743,6 +743,11 @@ object Value extends AstTransformer[Value]{
     */
   case class InvalidData(data: Value, msg: String)
 //           ^^^^^^^^^^^ definition ujson/Value.InvalidData# case class InvalidData(data: Value, msg: String) extends Exception
+//           ^^^^^^^^^^^ definition ujson/Value.InvalidData#copy(). def copy(data: Value, msg: String): InvalidData
+//           ^^^^^^^^^^^ definition ujson/Value.InvalidData. object InvalidData
+//           ^^^^^^^^^^^ definition ujson/Value.InvalidData.apply(). def apply(data: Value, msg: String): InvalidData
+//           ^^^^^^^^^^^ definition ujson/Value.InvalidData#productElementName(). def productElementName(x$1: Int): String
+//           ^^^^^^^^^^^ definition ujson/Value.InvalidData#productElement(). def productElement(x$1: Int): Any
 //                       definition ujson/Value.InvalidData#`<init>`(). def this(data: Value, msg: String)
 //                       ^^^^ definition ujson/Value.InvalidData#data. val data: Value
 //                             ^^^^^ reference ujson/Value.Value#
@@ -758,6 +763,11 @@ object Value extends AstTransformer[Value]{
 
 case class Str(value: String) extends Value
 //         ^^^ definition ujson/Str# case class Str(value: String) extends Value
+//         ^^^ definition ujson/Str#productElement(). def productElement(x$1: Int): Any
+//         ^^^ definition ujson/Str#copy(). def copy(value: String): Str
+//         ^^^ definition ujson/Str. object Str
+//         ^^^ definition ujson/Str#productElementName(). def productElementName(x$1: Int): String
+//         ^^^ definition ujson/Str.apply(). def apply(value: String): Str
 //             definition ujson/Str#`<init>`(). def this(value: String)
 //             ^^^^^ definition ujson/Str#value. val value: String
 //                    ^^^^^^ reference scala/Predef.String#
@@ -765,6 +775,9 @@ case class Str(value: String) extends Value
 //                                          reference java/lang/Object#`<init>`().
 case class Obj(value: mutable.LinkedHashMap[String, Value]) extends Value
 //         ^^^ definition ujson/Obj# case class Obj(value: LinkedHashMap[String, Value]) extends Value
+//         ^^^ definition ujson/Obj#productElementName(). def productElementName(x$1: Int): String
+//         ^^^ definition ujson/Obj#productElement(). def productElement(x$1: Int): Any
+//         ^^^ definition ujson/Obj#copy(). def copy(value: LinkedHashMap[String, Value]): Obj
 //             definition ujson/Obj#`<init>`(). def this(value: LinkedHashMap[String, Value])
 //             ^^^^^ definition ujson/Obj#value. val value: LinkedHashMap[String, Value]
 //                    ^^^^^^^ reference scala/collection/mutable/
@@ -776,6 +789,7 @@ case class Obj(value: mutable.LinkedHashMap[String, Value]) extends Value
 // reference java/lang/Object#`<init>`().
 object Obj{
 //     ^^^ definition ujson/Obj. object Obj
+//     ^^^ definition ujson/Obj.apply(+2). def apply(value: LinkedHashMap[String, Value]): Obj
   implicit def from(items: TraversableOnce[(String, Value)]): Obj = {
 //             ^^^^ definition ujson/Obj.from(). implicit def from(items: TraversableOnce[(String, Value)]): Obj
 //                  ^^^^^ definition ujson/Obj.from().(items) items: TraversableOnce[(String, Value)]
@@ -849,6 +863,9 @@ object Obj{
 }
 case class Arr(value: ArrayBuffer[Value]) extends Value
 //         ^^^ definition ujson/Arr# case class Arr(value: ArrayBuffer[Value]) extends Value
+//         ^^^ definition ujson/Arr#productElement(). def productElement(x$1: Int): Any
+//         ^^^ definition ujson/Arr#productElementName(). def productElementName(x$1: Int): String
+//         ^^^ definition ujson/Arr#copy(). def copy(value: ArrayBuffer[Value]): Arr
 //             definition ujson/Arr#`<init>`(). def this(value: ArrayBuffer[Value])
 //             ^^^^^ definition ujson/Arr#value. val value: ArrayBuffer[Value]
 //                    ^^^^^^^^^^^ reference scala/collection/mutable/ArrayBuffer#
@@ -858,6 +875,7 @@ case class Arr(value: ArrayBuffer[Value]) extends Value
 // reference java/lang/Object#`<init>`().
 object Arr{
 //     ^^^ definition ujson/Arr. object Arr
+//     ^^^ definition ujson/Arr.apply(+1). def apply(value: ArrayBuffer[Value]): Arr
   implicit def from[T](items: TraversableOnce[T])(implicit conv: T => Value): Arr = {
 //             ^^^^ definition ujson/Arr.from(). implicit def from(items: TraversableOnce[T])(conv: (T) => Value): Arr
 //                  ^ definition ujson/Arr.from().[T] T
@@ -919,6 +937,11 @@ object Arr{
 }
 case class Num(value: Double) extends Value
 //         ^^^ definition ujson/Num# case class Num(value: Double) extends Value
+//         ^^^ definition ujson/Num#productElement(). def productElement(x$1: Int): Any
+//         ^^^ definition ujson/Num#copy(). def copy(value: Double): Num
+//         ^^^ definition ujson/Num.apply(). def apply(value: Double): Num
+//         ^^^ definition ujson/Num#productElementName(). def productElementName(x$1: Int): String
+//         ^^^ definition ujson/Num. object Num
 //             definition ujson/Num#`<init>`(). def this(value: Double)
 //             ^^^^^ definition ujson/Num#value. val value: Double
 //                    ^^^^^^ reference scala/Double#
@@ -955,6 +978,7 @@ object Bool{
 }
 case object False extends Bool{
 //          ^^^^^ definition ujson/False. case object False
+//          ^^^^^ definition ujson/False.productElement(). def productElement(x$1: Int): Any
 //                        ^^^^ reference ujson/Bool#
 //                             reference ujson/Bool#`<init>`().
   def value = false
@@ -962,6 +986,7 @@ case object False extends Bool{
 }
 case object True extends Bool{
 //          ^^^^ definition ujson/True. case object True
+//          ^^^^ definition ujson/True.productElement(). def productElement(x$1: Int): Any
 //                       ^^^^ reference ujson/Bool#
 //                            reference ujson/Bool#`<init>`().
   def value = true
@@ -969,6 +994,7 @@ case object True extends Bool{
 }
 case object Null extends Value{
 //          ^^^^ definition ujson/Null. case object Null
+//          ^^^^ definition ujson/Null.productElement(). def productElement(x$1: Int): Any
 //                       ^^^^^ reference ujson/Value#
 //                             reference java/lang/Object#`<init>`().
   def value = null
