@@ -118,9 +118,7 @@ public class LsifSemanticdb {
             LsifTyped.SymbolInformation.newBuilder().setSymbol(typedSymbol(info.getSymbol(), pkg));
 
         for (String overriddenSymbol : info.getOverriddenSymbolsList()) {
-          if (overriddenSymbol.equals("java/lang/Object#")) {
-            // Skip java/lang/Object# since it's the parent of all classes
-            // making it noisy for "find implementations" results.
+          if (isIgnoredOverriddenSymbol(overriddenSymbol)) {
             continue;
           }
           Package overriddenSymbolPkg =
@@ -280,16 +278,22 @@ public class LsifSemanticdb {
 
       // Overrides
       if (symbolInformation.getOverriddenSymbolsCount() > 0) {
-        int[] overriddenReferenceResultIds = new int[symbolInformation.getOverriddenSymbolsCount()];
+        List<Integer> overriddenReferenceResultIds =
+            new ArrayList<>(symbolInformation.getOverriddenSymbolsCount());
         for (int i = 0; i < symbolInformation.getOverriddenSymbolsCount(); i++) {
           String overriddenSymbol = symbolInformation.getOverriddenSymbols(i);
+          if (isIgnoredOverriddenSymbol(overriddenSymbol)) {
+            continue;
+          }
           ResultIds overriddenIds = results.getOrInsertResultSet(overriddenSymbol);
-          overriddenReferenceResultIds[i] = overriddenIds.referenceResult;
+          overriddenReferenceResultIds.add(overriddenIds.referenceResult);
           writer.emitReferenceResultsItemEdge(
-              overriddenIds.referenceResult, new int[] {rangeId}, doc.id);
+              overriddenIds.referenceResult, Collections.singletonList(rangeId), doc.id);
         }
-        writer.emitReferenceResultsItemEdge(
-            ids.referenceResult, overriddenReferenceResultIds, doc.id);
+        if (overriddenReferenceResultIds.size() > 0) {
+          writer.emitReferenceResultsItemEdge(
+              ids.referenceResult, overriddenReferenceResultIds, doc.id);
+        }
       }
     }
     writer.emitContains(doc.id, new ArrayList<>(rangeIds));
@@ -323,5 +327,11 @@ public class LsifSemanticdb {
       // of `lsif-java index`.
       return Semanticdb.TextDocuments.parseFrom(bytes);
     }
+  }
+
+  private boolean isIgnoredOverriddenSymbol(String symbol) {
+    // Skip java/lang/Object# since it's the parent of all classes
+    // making it noisy for "find implementations" results.
+    return symbol.equals("java/lang/Object#");
   }
 }

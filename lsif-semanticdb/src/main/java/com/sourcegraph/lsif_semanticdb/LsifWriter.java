@@ -146,12 +146,11 @@ public class LsifWriter implements AutoCloseable {
     emitObject(lsifEdge("item").setOutV(outV).addInVs(inV).setDocument(document));
   }
 
-  public void emitReferenceResultsItemEdge(int outV, int[] inVs, int document) {
-    List<Integer> ints = Arrays.stream(inVs).boxed().collect(Collectors.toList());
+  public void emitReferenceResultsItemEdge(int outV, Iterable<Integer> inVs, int document) {
     emitObject(
         lsifEdge("item")
             .setOutV(outV)
-            .addAllInVs(ints)
+            .addAllInVs(inVs)
             .setDocument(document)
             .setProperty("referenceResults"));
   }
