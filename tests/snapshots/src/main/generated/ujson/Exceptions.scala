@@ -8,6 +8,11 @@ sealed trait ParsingFailedException extends Exception
 
 case class ParseException(clue: String, index: Int)
 //         ^^^^^^^^^^^^^^ definition ujson/ParseException# case class ParseException(clue: String, index: Int) extends Exception with ParsingFailedException
+//         ^^^^^^^^^^^^^^ definition ujson/ParseException#productElementName(). def productElementName(x$1: Int): String
+//         ^^^^^^^^^^^^^^ definition ujson/ParseException.apply(). def apply(clue: String, index: Int): ParseException
+//         ^^^^^^^^^^^^^^ definition ujson/ParseException. object ParseException
+//         ^^^^^^^^^^^^^^ definition ujson/ParseException#copy(). def copy(clue: String, index: Int): ParseException
+//         ^^^^^^^^^^^^^^ definition ujson/ParseException#productElement(). def productElement(x$1: Int): Any
 //                        definition ujson/ParseException#`<init>`(). def this(clue: String, index: Int)
 //                        ^^^^ definition ujson/ParseException#clue. val clue: String
 //                              ^^^^^^ reference scala/Predef.String#
@@ -24,6 +29,11 @@ case class ParseException(clue: String, index: Int)
 
 case class IncompleteParseException(msg: String)
 //         ^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/IncompleteParseException# case class IncompleteParseException(msg: String) extends Exception with ParsingFailedException
+//         ^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/IncompleteParseException#productElement(). def productElement(x$1: Int): Any
+//         ^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/IncompleteParseException.apply(). def apply(msg: String): IncompleteParseException
+//         ^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/IncompleteParseException#copy(). def copy(msg: String): IncompleteParseException
+//         ^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/IncompleteParseException#productElementName(). def productElementName(x$1: Int): String
+//         ^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/IncompleteParseException. object IncompleteParseException
 //                                  definition ujson/IncompleteParseException#`<init>`(). def this(msg: String)
 //                                  ^^^ definition ujson/IncompleteParseException#msg. val msg: String
 //                                       ^^^^^^ reference scala/Predef.String#

@@ -33,6 +33,11 @@ object Readable extends ReadableLowPri{
 //                                     reference java/lang/Object#`<init>`().
   case class fromTransformer[T](t: T, w: Transformer[T]) extends Readable{
 //           ^^^^^^^^^^^^^^^ definition ujson/Readable.fromTransformer# case class fromTransformer(t: T, w: Transformer[T])[T] extends Readable
+//           ^^^^^^^^^^^^^^^ definition ujson/Readable.fromTransformer#copy(). def copy(t: T, w: Transformer[T]): fromTransformer[T]
+//           ^^^^^^^^^^^^^^^ definition ujson/Readable.fromTransformer#productElement(). def productElement(x$1: Int): Any
+//           ^^^^^^^^^^^^^^^ definition ujson/Readable.fromTransformer.apply(). def apply(t: T, w: Transformer[T]): fromTransformer[T]
+//           ^^^^^^^^^^^^^^^ definition ujson/Readable.fromTransformer. object fromTransformer
+//           ^^^^^^^^^^^^^^^ definition ujson/Readable.fromTransformer#productElementName(). def productElementName(x$1: Int): String
 //                           ^ definition ujson/Readable.fromTransformer#[T] T
 //                              definition ujson/Readable.fromTransformer#`<init>`(). def this(t: T, w: Transformer[T])
 //                              ^ definition ujson/Readable.fromTransformer#t. val t: T

@@ -6,6 +6,11 @@ package minimized
 
 case class MinimizedCaseClass(value: String) {
 //         ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedCaseClass# case class MinimizedCaseClass(value: String)
+//         ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedCaseClass.apply(). def apply(value: String): MinimizedCaseClass
+//         ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedCaseClass#productElement(). def productElement(x$1: Int): Any
+//         ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedCaseClass. object MinimizedCaseClass
+//         ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedCaseClass#productElementName(). def productElementName(x$1: Int): String
+//         ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedCaseClass#copy(). def copy(value: String): MinimizedCaseClass
 //                            definition minimized/MinimizedCaseClass#`<init>`(). def this(value: String)
 //                            ^^^^^ definition minimized/MinimizedCaseClass#value. val value: String
 //                                   ^^^^^^ reference scala/Predef.String#
