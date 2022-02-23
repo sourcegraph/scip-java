@@ -4,11 +4,11 @@ import scala.jdk.CollectionConverters._
 
 import com.sourcegraph.lsif_java.commands.CommentSyntax
 import com.sourcegraph.lsif_java.commands.SnapshotLsifCommand
+import com.sourcegraph.lsif_semanticdb.LsifSemanticdb
 import com.sourcegraph.lsif_semanticdb.LsifTextDocument
 import com.sourcegraph.lsif_semanticdb.SignatureFormatter
 import com.sourcegraph.lsif_semanticdb.Symtab
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role
 import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
 
 object SemanticdbPrinters {
@@ -17,9 +17,7 @@ object SemanticdbPrinters {
       comments: CommentSyntax = CommentSyntax.default
   ): String = {
     val occurrencesByLine = LsifTextDocument
-      .sortedSymbolOccurrences(
-        LsifTextDocument.manifestOccurrencesForSyntheticSymbols(doc)
-      )
+      .sortedSymbolOccurrences(doc)
       .asScala
       .groupBy(_.getRange.getStartLine)
     val out = new StringBuilder()
@@ -90,7 +88,7 @@ object SemanticdbPrinters {
       )
       .append(
         symtab.symbols.asScala.get(occ.getSymbol) match {
-          case Some(info) if occ.getRole == Role.DEFINITION =>
+          case Some(info) if LsifSemanticdb.isDefinitionRole(occ.getRole) =>
             val signature: String =
               if (info.hasSignature) {
                 new SignatureFormatter(info, symtab)

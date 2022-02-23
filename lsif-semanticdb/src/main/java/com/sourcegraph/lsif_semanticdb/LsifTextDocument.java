@@ -104,6 +104,7 @@ public class LsifTextDocument {
         if (alternativeDefinition != null) {
           builder.addOccurrences(
               Semanticdb.SymbolOccurrence.newBuilder(alternativeDefinition)
+                  .setRole(Semanticdb.SymbolOccurrence.Role.SYNTHETIC_DEFINITION)
                   .setSymbol(info.getSymbol()));
           break;
         }
