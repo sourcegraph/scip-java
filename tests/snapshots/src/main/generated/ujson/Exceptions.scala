@@ -15,8 +15,12 @@ case class ParseException(clue: String, index: Int)
 //         ^^^^^^^^^^^^^^ synthetic_definition ujson/ParseException#productElement(). def productElement(x$1: Int): Any
 //                        definition ujson/ParseException#`<init>`(). def this(clue: String, index: Int)
 //                        ^^^^ definition ujson/ParseException#clue. val clue: String
+//                        ^^^^ synthetic_definition ujson/ParseException.apply().(clue) clue: String
+//                        ^^^^ synthetic_definition ujson/ParseException#copy().(clue) default clue: String
 //                              ^^^^^^ reference scala/Predef.String#
 //                                      ^^^^^ definition ujson/ParseException#index. val index: Int
+//                                      ^^^^^ synthetic_definition ujson/ParseException.apply().(index) index: Int
+//                                      ^^^^^ synthetic_definition ujson/ParseException#copy().(index) default index: Int
 //                                             ^^^ reference scala/Int#
   extends Exception(clue + " at index " + index) with ParsingFailedException
 //        ^^^^^^^^^ reference scala/package.Exception#
@@ -36,6 +40,8 @@ case class IncompleteParseException(msg: String)
 //         ^^^^^^^^^^^^^^^^^^^^^^^^ synthetic_definition ujson/IncompleteParseException. object IncompleteParseException
 //                                  definition ujson/IncompleteParseException#`<init>`(). def this(msg: String)
 //                                  ^^^ definition ujson/IncompleteParseException#msg. val msg: String
+//                                  ^^^ synthetic_definition ujson/IncompleteParseException.apply().(msg) msg: String
+//                                  ^^^ synthetic_definition ujson/IncompleteParseException#copy().(msg) default msg: String
 //                                       ^^^^^^ reference scala/Predef.String#
   extends Exception(msg) with ParsingFailedException
 //        ^^^^^^^^^ reference scala/package.Exception#

@@ -338,7 +338,7 @@ public class LsifSemanticdb {
   }
 
   private boolean isIgnoredOverriddenSymbol(String symbol) {
-    // Skip java/lang/Object# since it's the parent of all classes
+    // Skip java/lang/Object# and similar symbols from Scala since it's the parent of all classes
     // making it noisy for "find implementations" results.
     return symbol.equals("java/lang/Object#");
   }
