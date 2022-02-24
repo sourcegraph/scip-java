@@ -136,6 +136,24 @@ public class LsifTextDocument {
                   owner.owner, owner.descriptor.withKind(SemanticdbSymbols.Descriptor.Kind.Type)));
         }
         break;
+      case Parameter:
+        SymbolDescriptor owner = SymbolDescriptor.parseFromSymbol(sym.owner);
+        if (owner.descriptor.name.equals("copy")) {
+          // case classes copy method parameter.
+          alternatives.add(
+              SemanticdbSymbols.global(
+                  owner.owner, sym.descriptor.withKind(SemanticdbSymbols.Descriptor.Kind.Term)));
+        } else if (owner.descriptor.name.equals("apply")) {
+          // case class companion apply constructor parameter.
+          SymbolDescriptor grandparent = SymbolDescriptor.parseFromSymbol(owner.owner);
+          String companion =
+              SemanticdbSymbols.global(
+                  grandparent.owner,
+                  grandparent.descriptor.withKind(SemanticdbSymbols.Descriptor.Kind.Type));
+          alternatives.add(
+              SemanticdbSymbols.global(
+                  companion, sym.descriptor.withKind(SemanticdbSymbols.Descriptor.Kind.Term)));
+        }
       case Term:
         alternatives.add(
             SemanticdbSymbols.global(

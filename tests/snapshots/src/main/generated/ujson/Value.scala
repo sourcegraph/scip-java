@@ -750,8 +750,12 @@ object Value extends AstTransformer[Value]{
 //           ^^^^^^^^^^^ synthetic_definition ujson/Value.InvalidData#productElement(). def productElement(x$1: Int): Any
 //                       definition ujson/Value.InvalidData#`<init>`(). def this(data: Value, msg: String)
 //                       ^^^^ definition ujson/Value.InvalidData#data. val data: Value
+//                       ^^^^ synthetic_definition ujson/Value.InvalidData.apply().(data) data: Value
+//                       ^^^^ synthetic_definition ujson/Value.InvalidData#copy().(data) default data: Value
 //                             ^^^^^ reference ujson/Value.Value#
 //                                    ^^^ definition ujson/Value.InvalidData#msg. val msg: String
+//                                    ^^^ synthetic_definition ujson/Value.InvalidData#copy().(msg) default msg: String
+//                                    ^^^ synthetic_definition ujson/Value.InvalidData.apply().(msg) msg: String
 //                                         ^^^^^^ reference scala/Predef.String#
     extends Exception(s"$msg (data: $data)")
 //          ^^^^^^^^^ reference scala/package.Exception#
@@ -770,6 +774,8 @@ case class Str(value: String) extends Value
 //         ^^^ synthetic_definition ujson/Str.apply(). def apply(value: String): Str
 //             definition ujson/Str#`<init>`(). def this(value: String)
 //             ^^^^^ definition ujson/Str#value. val value: String
+//             ^^^^^ synthetic_definition ujson/Str.apply().(value) value: String
+//             ^^^^^ synthetic_definition ujson/Str#copy().(value) default value: String
 //                    ^^^^^^ reference scala/Predef.String#
 //                                    ^^^^^ reference ujson/Value#
 //                                          reference java/lang/Object#`<init>`().
@@ -780,6 +786,8 @@ case class Obj(value: mutable.LinkedHashMap[String, Value]) extends Value
 //         ^^^ synthetic_definition ujson/Obj#copy(). def copy(value: LinkedHashMap[String, Value]): Obj
 //             definition ujson/Obj#`<init>`(). def this(value: LinkedHashMap[String, Value])
 //             ^^^^^ definition ujson/Obj#value. val value: LinkedHashMap[String, Value]
+//             ^^^^^ synthetic_definition ujson/Obj.apply(+2).(value) value: LinkedHashMap[String, Value]
+//             ^^^^^ synthetic_definition ujson/Obj#copy().(value) default value: LinkedHashMap[String, Value]
 //                    ^^^^^^^ reference scala/collection/mutable/
 //                            ^^^^^^^^^^^^^ reference scala/collection/mutable/LinkedHashMap#
 //                                          ^^^^^^ reference scala/Predef.String#
@@ -868,6 +876,8 @@ case class Arr(value: ArrayBuffer[Value]) extends Value
 //         ^^^ synthetic_definition ujson/Arr#copy(). def copy(value: ArrayBuffer[Value]): Arr
 //             definition ujson/Arr#`<init>`(). def this(value: ArrayBuffer[Value])
 //             ^^^^^ definition ujson/Arr#value. val value: ArrayBuffer[Value]
+//             ^^^^^ synthetic_definition ujson/Arr#copy().(value) default value: ArrayBuffer[Value]
+//             ^^^^^ synthetic_definition ujson/Arr.apply(+1).(value) value: ArrayBuffer[Value]
 //                    ^^^^^^^^^^^ reference scala/collection/mutable/ArrayBuffer#
 //                                ^^^^^ reference ujson/Value#
 //                                                ^^^^^ reference ujson/Value#
@@ -944,6 +954,8 @@ case class Num(value: Double) extends Value
 //         ^^^ synthetic_definition ujson/Num. object Num
 //             definition ujson/Num#`<init>`(). def this(value: Double)
 //             ^^^^^ definition ujson/Num#value. val value: Double
+//             ^^^^^ synthetic_definition ujson/Num.apply().(value) value: Double
+//             ^^^^^ synthetic_definition ujson/Num#copy().(value) default value: Double
 //                    ^^^^^^ reference scala/Double#
 //                                    ^^^^^ reference ujson/Value#
 //                                          reference java/lang/Object#`<init>`().

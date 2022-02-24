@@ -41,8 +41,12 @@ object Readable extends ReadableLowPri{
 //                           ^ definition ujson/Readable.fromTransformer#[T] T
 //                              definition ujson/Readable.fromTransformer#`<init>`(). def this(t: T, w: Transformer[T])
 //                              ^ definition ujson/Readable.fromTransformer#t. val t: T
+//                              ^ synthetic_definition ujson/Readable.fromTransformer#copy().(t) default t: T
+//                              ^ synthetic_definition ujson/Readable.fromTransformer.apply().(t) t: T
 //                                 ^ reference ujson/Readable.fromTransformer#[T]
 //                                    ^ definition ujson/Readable.fromTransformer#w. val w: Transformer[T]
+//                                    ^ synthetic_definition ujson/Readable.fromTransformer#copy().(w) default w: Transformer[T]
+//                                    ^ synthetic_definition ujson/Readable.fromTransformer.apply().(w) w: Transformer[T]
 //                                       ^^^^^^^^^^^ reference ujson/Transformer#
 //                                                   ^ reference ujson/Readable.fromTransformer#[T]
 //                                                               ^^^^^^^^ reference ujson/Readable#

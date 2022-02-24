@@ -13,6 +13,8 @@ case class MinimizedCaseClass(value: String) {
 //         ^^^^^^^^^^^^^^^^^^ synthetic_definition minimized/MinimizedCaseClass#copy(). def copy(value: String): MinimizedCaseClass
 //                            definition minimized/MinimizedCaseClass#`<init>`(). def this(value: String)
 //                            ^^^^^ definition minimized/MinimizedCaseClass#value. val value: String
+//                            ^^^^^ synthetic_definition minimized/MinimizedCaseClass#copy().(value) default value: String
+//                            ^^^^^ synthetic_definition minimized/MinimizedCaseClass.apply().(value) value: String
 //                                   ^^^^^^ reference scala/Predef.String#
   def this() = this("value")
 //    ^^^^ definition minimized/MinimizedCaseClass#`<init>`(+1). def this()

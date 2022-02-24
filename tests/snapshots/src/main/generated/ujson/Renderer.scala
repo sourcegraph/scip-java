@@ -28,8 +28,12 @@ case class BytesRenderer(indent: Int = -1, escapeUnicode: Boolean = false)
 //         ^^^^^^^^^^^^^ synthetic_definition ujson/BytesRenderer.apply(). def apply(indent: Int, escapeUnicode: Boolean): BytesRenderer
 //                       definition ujson/BytesRenderer#`<init>`(). def this(indent: Int, escapeUnicode: Boolean)
 //                       ^^^^^^ definition ujson/BytesRenderer#indent. val indent: Int
+//                       ^^^^^^ synthetic_definition ujson/BytesRenderer#copy().(indent) default indent: Int
+//                       ^^^^^^ synthetic_definition ujson/BytesRenderer.apply().(indent) default indent: Int
 //                               ^^^ reference scala/Int#
 //                                         ^^^^^^^^^^^^^ definition ujson/BytesRenderer#escapeUnicode. val escapeUnicode: Boolean
+//                                         ^^^^^^^^^^^^^ synthetic_definition ujson/BytesRenderer#copy().(escapeUnicode) default escapeUnicode: Boolean
+//                                         ^^^^^^^^^^^^^ synthetic_definition ujson/BytesRenderer.apply().(escapeUnicode) default escapeUnicode: Boolean
 //                                                        ^^^^^^^ reference scala/Boolean#
   extends BaseByteRenderer(new ByteArrayOutputStream(), indent, escapeUnicode){
 //        ^^^^^^^^^^^^^^^^ reference ujson/BaseByteRenderer#
@@ -50,9 +54,13 @@ case class StringRenderer(indent: Int = -1,
 //         ^^^^^^^^^^^^^^ synthetic_definition ujson/StringRenderer#productElementName(). def productElementName(x$1: Int): String
 //                        definition ujson/StringRenderer#`<init>`(). def this(indent: Int, escapeUnicode: Boolean)
 //                        ^^^^^^ definition ujson/StringRenderer#indent. val indent: Int
+//                        ^^^^^^ synthetic_definition ujson/StringRenderer#copy().(indent) default indent: Int
+//                        ^^^^^^ synthetic_definition ujson/StringRenderer.apply().(indent) default indent: Int
 //                                ^^^ reference scala/Int#
                           escapeUnicode: Boolean = false)
 //                        ^^^^^^^^^^^^^ definition ujson/StringRenderer#escapeUnicode. val escapeUnicode: Boolean
+//                        ^^^^^^^^^^^^^ synthetic_definition ujson/StringRenderer.apply().(escapeUnicode) default escapeUnicode: Boolean
+//                        ^^^^^^^^^^^^^ synthetic_definition ujson/StringRenderer#copy().(escapeUnicode) default escapeUnicode: Boolean
 //                                       ^^^^^^^ reference scala/Boolean#
   extends BaseCharRenderer(new java.io.StringWriter(), indent, escapeUnicode)
 //        ^^^^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#
@@ -73,14 +81,20 @@ case class Renderer(out: java.io.Writer,
 //         ^^^^^^^^ synthetic_definition ujson/Renderer#productElement(). def productElement(x$1: Int): Any
 //                  definition ujson/Renderer#`<init>`(). def this(out: Writer, indent: Int, escapeUnicode: Boolean)
 //                  ^^^ definition ujson/Renderer#out. val out: Writer
+//                  ^^^ synthetic_definition ujson/Renderer.apply().(out) out: Writer
+//                  ^^^ synthetic_definition ujson/Renderer#copy().(out) default out: Writer
 //                       ^^^^ reference java/
 //                            ^^ reference java/io/
 //                               ^^^^^^ reference java/io/Writer#
                     indent: Int = -1,
 //                  ^^^^^^ definition ujson/Renderer#indent. val indent: Int
+//                  ^^^^^^ synthetic_definition ujson/Renderer#copy().(indent) default indent: Int
+//                  ^^^^^^ synthetic_definition ujson/Renderer.apply().(indent) default indent: Int
 //                          ^^^ reference scala/Int#
                     escapeUnicode: Boolean = false)
 //                  ^^^^^^^^^^^^^ definition ujson/Renderer#escapeUnicode. val escapeUnicode: Boolean
+//                  ^^^^^^^^^^^^^ synthetic_definition ujson/Renderer.apply().(escapeUnicode) default escapeUnicode: Boolean
+//                  ^^^^^^^^^^^^^ synthetic_definition ujson/Renderer#copy().(escapeUnicode) default escapeUnicode: Boolean
 //                                 ^^^^^^^ reference scala/Boolean#
   extends BaseCharRenderer(out, indent, escapeUnicode)
 //        ^^^^^^^^^^^^^^^^ reference ujson/BaseCharRenderer#
