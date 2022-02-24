@@ -3,11 +3,11 @@ package minimized
 
 case class Issue396(a: Int)
 //         ^^^^^^^^ definition minimized/Issue396# case class Issue396(a: Int)
-//         ^^^^^^^^ definition minimized/Issue396#copy(). def copy(a: Int): Issue396
-//         ^^^^^^^^ definition minimized/Issue396#productElement(). def productElement(x$1: Int): Any
-//         ^^^^^^^^ definition minimized/Issue396. object Issue396
-//         ^^^^^^^^ definition minimized/Issue396.apply(). def apply(a: Int): Issue396
-//         ^^^^^^^^ definition minimized/Issue396#productElementName(). def productElementName(x$1: Int): String
+//         ^^^^^^^^ synthetic_definition minimized/Issue396#copy(). def copy(a: Int): Issue396
+//         ^^^^^^^^ synthetic_definition minimized/Issue396#productElement(). def productElement(x$1: Int): Any
+//         ^^^^^^^^ synthetic_definition minimized/Issue396. object Issue396
+//         ^^^^^^^^ synthetic_definition minimized/Issue396.apply(). def apply(a: Int): Issue396
+//         ^^^^^^^^ synthetic_definition minimized/Issue396#productElementName(). def productElementName(x$1: Int): String
 //                  definition minimized/Issue396#`<init>`(). def this(a: Int)
 //                  ^ definition minimized/Issue396#a. val a: Int
 //                     ^^^ reference scala/Int#

@@ -52,7 +52,6 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
     def checkLibrary(name: String, provided: List[String] = Nil): Unit = {
       println(s"indexing library '$name'")
       val providedArguments = provided.flatMap(p => List("--provided", p))
-      val targetroot = Files.createTempDirectory("semanticdb-javac")
       val snapshotDir = Files.createTempDirectory("semanticdb-javac")
       runLsifJava(
         List(

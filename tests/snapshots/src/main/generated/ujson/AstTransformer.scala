@@ -119,7 +119,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 
     private[this] var key: String = null
 //                    ^^^ definition ujson/AstTransformer#AstObjVisitor#key(). private[this] var key: String
-//                    ^^^ definition ujson/AstTransformer#AstObjVisitor#`key_=`(). private[this] var key_=(x$1: String): Unit
+//                    ^^^ synthetic_definition ujson/AstTransformer#AstObjVisitor#`key_=`(). private[this] var key_=(x$1: String): Unit
 //                         ^^^^^^ reference scala/Predef.String#
     private[this] val vs = factory.newBuilder
 //                    ^^ definition ujson/AstTransformer#AstObjVisitor#vs. private[this] val vs: Builder[(String, I), T]

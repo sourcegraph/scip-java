@@ -43,11 +43,11 @@ object IndexedValue extends Transformer[IndexedValue]{
   
   case class Str(index: Int, value0: java.lang.CharSequence) extends IndexedValue
 //           ^^^ definition ujson/IndexedValue.Str# case class Str(index: Int, value0: CharSequence) extends IndexedValue
-//           ^^^ definition ujson/IndexedValue.Str#copy(). def copy(index: Int, value0: CharSequence): Str
-//           ^^^ definition ujson/IndexedValue.Str.apply(). def apply(index: Int, value0: CharSequence): Str
-//           ^^^ definition ujson/IndexedValue.Str. object Str
-//           ^^^ definition ujson/IndexedValue.Str#productElement(). def productElement(x$1: Int): Any
-//           ^^^ definition ujson/IndexedValue.Str#productElementName(). def productElementName(x$1: Int): String
+//           ^^^ synthetic_definition ujson/IndexedValue.Str#copy(). def copy(index: Int, value0: CharSequence): Str
+//           ^^^ synthetic_definition ujson/IndexedValue.Str.apply(). def apply(index: Int, value0: CharSequence): Str
+//           ^^^ synthetic_definition ujson/IndexedValue.Str. object Str
+//           ^^^ synthetic_definition ujson/IndexedValue.Str#productElement(). def productElement(x$1: Int): Any
+//           ^^^ synthetic_definition ujson/IndexedValue.Str#productElementName(). def productElementName(x$1: Int): String
 //               definition ujson/IndexedValue.Str#`<init>`(). def this(index: Int, value0: CharSequence)
 //               ^^^^^ definition ujson/IndexedValue.Str#index. val index: Int
 //                      ^^^ reference scala/Int#
@@ -59,10 +59,10 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                                                                reference java/lang/Object#`<init>`().
   case class Obj(index: Int, value0: (java.lang.CharSequence, IndexedValue)*) extends IndexedValue
 //           ^^^ definition ujson/IndexedValue.Obj# case class Obj(index: Int, value0: (CharSequence, IndexedValue)*) extends IndexedValue
-//           ^^^ definition ujson/IndexedValue.Obj.apply(). def apply(index: Int, value0: (CharSequence, IndexedValue)*): Obj
-//           ^^^ definition ujson/IndexedValue.Obj#productElement(). def productElement(x$1: Int): Any
-//           ^^^ definition ujson/IndexedValue.Obj. object Obj
-//           ^^^ definition ujson/IndexedValue.Obj#productElementName(). def productElementName(x$1: Int): String
+//           ^^^ synthetic_definition ujson/IndexedValue.Obj.apply(). def apply(index: Int, value0: (CharSequence, IndexedValue)*): Obj
+//           ^^^ synthetic_definition ujson/IndexedValue.Obj#productElement(). def productElement(x$1: Int): Any
+//           ^^^ synthetic_definition ujson/IndexedValue.Obj. object Obj
+//           ^^^ synthetic_definition ujson/IndexedValue.Obj#productElementName(). def productElementName(x$1: Int): String
 //               definition ujson/IndexedValue.Obj#`<init>`(). def this(index: Int, value0: (CharSequence, IndexedValue)*)
 //               ^^^^^ definition ujson/IndexedValue.Obj#index. val index: Int
 //                      ^^^ reference scala/Int#
@@ -75,10 +75,10 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                                                                                 reference java/lang/Object#`<init>`().
   case class Arr(index: Int, value: IndexedValue*) extends IndexedValue
 //           ^^^ definition ujson/IndexedValue.Arr# case class Arr(index: Int, value: IndexedValue*) extends IndexedValue
-//           ^^^ definition ujson/IndexedValue.Arr#productElementName(). def productElementName(x$1: Int): String
-//           ^^^ definition ujson/IndexedValue.Arr#productElement(). def productElement(x$1: Int): Any
-//           ^^^ definition ujson/IndexedValue.Arr. object Arr
-//           ^^^ definition ujson/IndexedValue.Arr.apply(). def apply(index: Int, value: IndexedValue*): Arr
+//           ^^^ synthetic_definition ujson/IndexedValue.Arr#productElementName(). def productElementName(x$1: Int): String
+//           ^^^ synthetic_definition ujson/IndexedValue.Arr#productElement(). def productElement(x$1: Int): Any
+//           ^^^ synthetic_definition ujson/IndexedValue.Arr. object Arr
+//           ^^^ synthetic_definition ujson/IndexedValue.Arr.apply(). def apply(index: Int, value: IndexedValue*): Arr
 //               definition ujson/IndexedValue.Arr#`<init>`(). def this(index: Int, value: IndexedValue*)
 //               ^^^^^ definition ujson/IndexedValue.Arr#index. val index: Int
 //                      ^^^ reference scala/Int#
@@ -88,11 +88,11 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                                                      reference java/lang/Object#`<init>`().
   case class Num(index: Int, s: CharSequence, decIndex: Int, expIndex: Int) extends IndexedValue
 //           ^^^ definition ujson/IndexedValue.Num# case class Num(index: Int, s: CharSequence, decIndex: Int, expIndex: Int) extends IndexedValue
-//           ^^^ definition ujson/IndexedValue.Num. object Num
-//           ^^^ definition ujson/IndexedValue.Num#copy(). def copy(index: Int, s: CharSequence, decIndex: Int, expIndex: Int): Num
-//           ^^^ definition ujson/IndexedValue.Num#productElement(). def productElement(x$1: Int): Any
-//           ^^^ definition ujson/IndexedValue.Num#productElementName(). def productElementName(x$1: Int): String
-//           ^^^ definition ujson/IndexedValue.Num.apply(). def apply(index: Int, s: CharSequence, decIndex: Int, expIndex: Int): Num
+//           ^^^ synthetic_definition ujson/IndexedValue.Num. object Num
+//           ^^^ synthetic_definition ujson/IndexedValue.Num#copy(). def copy(index: Int, s: CharSequence, decIndex: Int, expIndex: Int): Num
+//           ^^^ synthetic_definition ujson/IndexedValue.Num#productElement(). def productElement(x$1: Int): Any
+//           ^^^ synthetic_definition ujson/IndexedValue.Num#productElementName(). def productElementName(x$1: Int): String
+//           ^^^ synthetic_definition ujson/IndexedValue.Num.apply(). def apply(index: Int, s: CharSequence, decIndex: Int, expIndex: Int): Num
 //               definition ujson/IndexedValue.Num#`<init>`(). def this(index: Int, s: CharSequence, decIndex: Int, expIndex: Int)
 //               ^^^^^ definition ujson/IndexedValue.Num#index. val index: Int
 //                      ^^^ reference scala/Int#
@@ -106,11 +106,11 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                                                                               reference java/lang/Object#`<init>`().
   case class NumRaw(index: Int, d: Double) extends IndexedValue
 //           ^^^^^^ definition ujson/IndexedValue.NumRaw# case class NumRaw(index: Int, d: Double) extends IndexedValue
-//           ^^^^^^ definition ujson/IndexedValue.NumRaw#copy(). def copy(index: Int, d: Double): NumRaw
-//           ^^^^^^ definition ujson/IndexedValue.NumRaw. object NumRaw
-//           ^^^^^^ definition ujson/IndexedValue.NumRaw#productElement(). def productElement(x$1: Int): Any
-//           ^^^^^^ definition ujson/IndexedValue.NumRaw.apply(). def apply(index: Int, d: Double): NumRaw
-//           ^^^^^^ definition ujson/IndexedValue.NumRaw#productElementName(). def productElementName(x$1: Int): String
+//           ^^^^^^ synthetic_definition ujson/IndexedValue.NumRaw#copy(). def copy(index: Int, d: Double): NumRaw
+//           ^^^^^^ synthetic_definition ujson/IndexedValue.NumRaw. object NumRaw
+//           ^^^^^^ synthetic_definition ujson/IndexedValue.NumRaw#productElement(). def productElement(x$1: Int): Any
+//           ^^^^^^ synthetic_definition ujson/IndexedValue.NumRaw.apply(). def apply(index: Int, d: Double): NumRaw
+//           ^^^^^^ synthetic_definition ujson/IndexedValue.NumRaw#productElementName(). def productElementName(x$1: Int): String
 //                  definition ujson/IndexedValue.NumRaw#`<init>`(). def this(index: Int, d: Double)
 //                  ^^^^^ definition ujson/IndexedValue.NumRaw#index. val index: Int
 //                         ^^^ reference scala/Int#
@@ -120,11 +120,11 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                                              reference java/lang/Object#`<init>`().
   case class False(index: Int) extends IndexedValue{
 //           ^^^^^ definition ujson/IndexedValue.False# case class False(index: Int) extends IndexedValue
-//           ^^^^^ definition ujson/IndexedValue.False. object False
-//           ^^^^^ definition ujson/IndexedValue.False#productElementName(). def productElementName(x$1: Int): String
-//           ^^^^^ definition ujson/IndexedValue.False.apply(). def apply(index: Int): False
-//           ^^^^^ definition ujson/IndexedValue.False#productElement(). def productElement(x$1: Int): Any
-//           ^^^^^ definition ujson/IndexedValue.False#copy(). def copy(index: Int): False
+//           ^^^^^ synthetic_definition ujson/IndexedValue.False. object False
+//           ^^^^^ synthetic_definition ujson/IndexedValue.False#productElementName(). def productElementName(x$1: Int): String
+//           ^^^^^ synthetic_definition ujson/IndexedValue.False.apply(). def apply(index: Int): False
+//           ^^^^^ synthetic_definition ujson/IndexedValue.False#productElement(). def productElement(x$1: Int): Any
+//           ^^^^^ synthetic_definition ujson/IndexedValue.False#copy(). def copy(index: Int): False
 //                 definition ujson/IndexedValue.False#`<init>`(). def this(index: Int)
 //                 ^^^^^ definition ujson/IndexedValue.False#index. val index: Int
 //                        ^^^ reference scala/Int#
@@ -135,11 +135,11 @@ object IndexedValue extends Transformer[IndexedValue]{
   }
   case class True(index: Int) extends IndexedValue{
 //           ^^^^ definition ujson/IndexedValue.True# case class True(index: Int) extends IndexedValue
-//           ^^^^ definition ujson/IndexedValue.True#productElement(). def productElement(x$1: Int): Any
-//           ^^^^ definition ujson/IndexedValue.True. object True
-//           ^^^^ definition ujson/IndexedValue.True#copy(). def copy(index: Int): True
-//           ^^^^ definition ujson/IndexedValue.True.apply(). def apply(index: Int): True
-//           ^^^^ definition ujson/IndexedValue.True#productElementName(). def productElementName(x$1: Int): String
+//           ^^^^ synthetic_definition ujson/IndexedValue.True#productElement(). def productElement(x$1: Int): Any
+//           ^^^^ synthetic_definition ujson/IndexedValue.True. object True
+//           ^^^^ synthetic_definition ujson/IndexedValue.True#copy(). def copy(index: Int): True
+//           ^^^^ synthetic_definition ujson/IndexedValue.True.apply(). def apply(index: Int): True
+//           ^^^^ synthetic_definition ujson/IndexedValue.True#productElementName(). def productElementName(x$1: Int): String
 //                definition ujson/IndexedValue.True#`<init>`(). def this(index: Int)
 //                ^^^^^ definition ujson/IndexedValue.True#index. val index: Int
 //                       ^^^ reference scala/Int#
@@ -150,11 +150,11 @@ object IndexedValue extends Transformer[IndexedValue]{
   }
   case class Null(index: Int) extends IndexedValue{
 //           ^^^^ definition ujson/IndexedValue.Null# case class Null(index: Int) extends IndexedValue
-//           ^^^^ definition ujson/IndexedValue.Null#copy(). def copy(index: Int): Null
-//           ^^^^ definition ujson/IndexedValue.Null#productElement(). def productElement(x$1: Int): Any
-//           ^^^^ definition ujson/IndexedValue.Null#productElementName(). def productElementName(x$1: Int): String
-//           ^^^^ definition ujson/IndexedValue.Null.apply(). def apply(index: Int): Null
-//           ^^^^ definition ujson/IndexedValue.Null. object Null
+//           ^^^^ synthetic_definition ujson/IndexedValue.Null#copy(). def copy(index: Int): Null
+//           ^^^^ synthetic_definition ujson/IndexedValue.Null#productElement(). def productElement(x$1: Int): Any
+//           ^^^^ synthetic_definition ujson/IndexedValue.Null#productElementName(). def productElementName(x$1: Int): String
+//           ^^^^ synthetic_definition ujson/IndexedValue.Null.apply(). def apply(index: Int): Null
+//           ^^^^ synthetic_definition ujson/IndexedValue.Null. object Null
 //                definition ujson/IndexedValue.Null#`<init>`(). def this(index: Int)
 //                ^^^^^ definition ujson/IndexedValue.Null#index. val index: Int
 //                       ^^^ reference scala/Int#

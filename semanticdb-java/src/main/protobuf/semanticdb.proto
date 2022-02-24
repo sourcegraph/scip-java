@@ -169,6 +169,10 @@ message SymbolOccurrence {
     UNKNOWN_ROLE = 0;
     REFERENCE = 1;
     DEFINITION = 2;
+    // NOTE: this role does not exist in the upstream SemanticDB spec.
+    // WE added SYNTHETIC_DEFINITION fix the following lsif-java issue:
+    // https://github.com/sourcegraph/lsif-java/issues/399
+    SYNTHETIC_DEFINITION = 3;
   }
   Range range = 1;
   string symbol = 2;

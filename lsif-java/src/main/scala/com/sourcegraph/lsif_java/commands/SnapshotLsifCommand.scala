@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.util.concurrent.atomic.AtomicInteger
 import java.util.stream.Collectors
 import java.util.stream.Stream
 
@@ -118,17 +119,23 @@ object SnapshotLsifCommand {
           .predecessors(o)
           .asScala
           .exists(_.getLabel == "definitionResult")
+        val isSyntheticDefinition = isDefinition && !lsif.next.contains(o.getId)
         val role =
-          if (isDefinition)
+          if (isSyntheticDefinition)
+            Role.SYNTHETIC_DEFINITION
+          else if (isDefinition)
             Role.DEFINITION
           else
             Role.REFERENCE
 
         val symbol = lsif
           .symbolFromRange(o)
+          .orElse(lsif.monikerViaDefinition(o))
           .getOrElse {
-            val id = lsif.next.getOrElse(o.getId, o.getId)
-            s"missingMoniker$id"
+            val id = lsif
+              .next
+              .getOrElse(o.getId, lsif.nextMissingMonikerId(doc.getUri))
+            s"localMissingMoniker$id"
           }
         val occ = SymbolOccurrence
           .newBuilder()
@@ -147,15 +154,7 @@ object SnapshotLsifCommand {
         doc.addOccurrences(occ)
 
         if (isDefinition) {
-          val hover =
-            (
-              for {
-                resultSetId <- lsif.next.get(o.getId).toList
-                hoverId <- lsif.hoverEdges.get(resultSetId).toList
-                hover <- lsif.hoverVertexes.get(hoverId).toList
-                line <- signatureLines(hover.getContents.getValue)
-              } yield line
-            ).mkString("\n")
+          val hover = lsif.hoverViaDefinition(o)
           val symInfo = SymbolInformation
             .newBuilder()
             // we cheese it a bit here, as this is less work than trying to reconstruct
@@ -184,6 +183,11 @@ object SnapshotLsifCommand {
   ) {
     val documents = mutable.Map.empty[Int, TextDocument.Builder]
     val next = mutable.Map.empty[Int, Int]
+    private val missingMonikerCounter = mutable.Map.empty[String, AtomicInteger]
+    def nextMissingMonikerId(uri: String) =
+      missingMonikerCounter
+        .getOrElseUpdate(uri, new AtomicInteger())
+        .incrementAndGet()
     val monikerIdentifier = mutable.Map.empty[Int, String]
     val moniker = mutable.Map.empty[Int, Int]
     val monikerInverse = mutable.Map.empty[Int, Int]
@@ -377,6 +381,35 @@ object SnapshotLsifCommand {
       loop(node)
       S.build()
     }
+
+    def definitioResultSet(node: LsifObject): Option[LsifObject] = {
+      for {
+        definitionResult <- G.predecessors(node).asScala
+        if definitionResult.getLabel == "definitionResult"
+        resultSet <- G.predecessors(definitionResult).asScala
+        if resultSet.getLabel == "resultSet"
+      } yield resultSet
+    }.headOption
+
+    def monikerViaDefinition(node: LsifObject): Option[String] = {
+      for {
+        resultSet <- definitioResultSet(node).toList
+        moniker <- G.successors(resultSet).asScala
+        if moniker.getLabel == "moniker"
+      } yield moniker.getIdentifier
+    }.headOption
+
+    def hoverViaDefinition(node: LsifObject): String = {
+      for {
+        resultSet <- definitioResultSet(node).toList
+        hover <-
+          G.successors(resultSet)
+            .asScala
+            .find(_.getLabel == "hoverResult")
+            .toList
+        line <- signatureLines(hover.getResult.getContents.getValue)
+      } yield line
+    }.mkString("\n")
 
     val byId = objects.iterator.map(o => o.getId -> o).toMap
     val byType = objects.groupBy(_.getType)

@@ -74,6 +74,10 @@ public class LsifSemanticdb {
     return "semanticdb maven " + pkg.repoName() + " " + pkg.version() + " " + symbol;
   }
 
+  public static boolean isDefinitionRole(Role role) {
+    return role == Role.DEFINITION || role == Role.SYNTHETIC_DEFINITION;
+  }
+
   private void processTypedDocument(Path path, PackageTable packages) {
     for (LsifTextDocument doc : parseTextDocument(path).collect(Collectors.toList())) {
       if (doc.semanticdb.getOccurrencesCount() == 0) {
@@ -89,7 +93,7 @@ public class LsifSemanticdb {
           LsifTyped.Document.newBuilder().setRelativePath(relativePath);
       for (SymbolOccurrence occ : doc.sortedSymbolOccurrences()) {
         int role = 0;
-        if (occ.getRole() == Role.DEFINITION) {
+        if (isDefinitionRole(occ.getRole())) {
           role |= LsifTyped.SymbolRole.Definition_VALUE;
         }
         boolean isSingleLineRange = occ.getRange().getStartLine() == occ.getRange().getEndLine();
@@ -182,7 +186,7 @@ public class LsifSemanticdb {
         .flatMap(
             d ->
                 d.semanticdb.getOccurrencesList().stream()
-                    .filter(occ -> occ.getRole() == Role.DEFINITION)
+                    .filter(occ -> isDefinitionRole(occ.getRole()))
                     .map(SymbolOccurrence::getSymbol)
                     .filter(SemanticdbSymbols::isGlobal))
         .collect(Collectors.toSet());
@@ -212,7 +216,7 @@ public class LsifSemanticdb {
         doc.semanticdb.getOccurrencesList().stream()
             .filter(
                 occ ->
-                    occ.getRole() == Role.DEFINITION && SemanticdbSymbols.isLocal(occ.getSymbol()))
+                    isDefinitionRole(occ.getRole()) && SemanticdbSymbols.isLocal(occ.getSymbol()))
             .map(SymbolOccurrence::getSymbol)
             .collect(Collectors.toSet());
     doc.id = documentId;
@@ -228,13 +232,15 @@ public class LsifSemanticdb {
       rangeIds.add(rangeId);
 
       // Range
-      writer.emitNext(rangeId, ids.resultSet);
+      if (occ.getRole() != Role.SYNTHETIC_DEFINITION) {
+        writer.emitNext(rangeId, ids.resultSet);
+      }
 
       // Reference
       writer.emitItem(ids.referenceResult, rangeId, doc.id);
 
       // Definition
-      if (occ.getRole() == SymbolOccurrence.Role.DEFINITION) {
+      if (isDefinitionRole(occ.getRole())) {
         if (ids.isDefinitionDefined()) {
           writer.emitItem(ids.definitionResult, rangeId, doc.id);
         } else {
@@ -277,7 +283,9 @@ public class LsifSemanticdb {
       }
 
       // Overrides
-      if (symbolInformation.getOverriddenSymbolsCount() > 0) {
+      if (symbolInformation.getOverriddenSymbolsCount() > 0
+          && SemanticdbSymbols.isMethod(symbolInformation.getSymbol())
+          && occ.getRole() == Role.DEFINITION) {
         List<Integer> overriddenReferenceResultIds =
             new ArrayList<>(symbolInformation.getOverriddenSymbolsCount());
         for (int i = 0; i < symbolInformation.getOverriddenSymbolsCount(); i++) {
