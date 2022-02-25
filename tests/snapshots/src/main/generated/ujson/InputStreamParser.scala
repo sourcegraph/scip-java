@@ -33,16 +33,19 @@ final class InputStreamParser[J](val inputStream: java.io.InputStream,
 //                            ^ definition ujson/InputStreamParser#[J] J
 //                               definition ujson/InputStreamParser#`<init>`(). def this(inputStream: InputStream, minBufferStartSize: Int, maxBufferStartSize: Int)
 //                                   ^^^^^^^^^^^ definition ujson/InputStreamParser#inputStream. val inputStream: InputStream
+//                                   ^^^^^^^^^^^ definition ujson/InputStreamParser#`<init>`().(inputStream) inputStream: InputStream
 //                                                ^^^^ reference java/
 //                                                     ^^ reference java/io/
 //                                                        ^^^^^^^^^^^ reference java/io/InputStream#
                                  val minBufferStartSize: Int = BufferingInputStreamParser.defaultMinBufferStartSize,
 //                                   ^^^^^^^^^^^^^^^^^^ definition ujson/InputStreamParser#minBufferStartSize. val minBufferStartSize: Int
+//                                   ^^^^^^^^^^^^^^^^^^ definition ujson/InputStreamParser#`<init>`().(minBufferStartSize) default minBufferStartSize: Int
 //                                                       ^^^ reference scala/Int#
 //                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingInputStreamParser.
 //                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingInputStreamParser.defaultMinBufferStartSize.
                                  val maxBufferStartSize: Int = BufferingInputStreamParser.defaultMaxBufferStartSize)
 //                                   ^^^^^^^^^^^^^^^^^^ definition ujson/InputStreamParser#maxBufferStartSize. val maxBufferStartSize: Int
+//                                   ^^^^^^^^^^^^^^^^^^ definition ujson/InputStreamParser#`<init>`().(maxBufferStartSize) default maxBufferStartSize: Int
 //                                                       ^^^ reference scala/Int#
 //                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingInputStreamParser.
 //                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingInputStreamParser.defaultMaxBufferStartSize.

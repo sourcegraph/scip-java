@@ -36,17 +36,19 @@ object Readable extends ReadableLowPri{
 //           ^^^^^^^^^^^^^^^ synthetic_definition ujson/Readable.fromTransformer#copy(). def copy(t: T, w: Transformer[T]): fromTransformer[T]
 //           ^^^^^^^^^^^^^^^ synthetic_definition ujson/Readable.fromTransformer#productElement(). def productElement(x$1: Int): Any
 //           ^^^^^^^^^^^^^^^ synthetic_definition ujson/Readable.fromTransformer.apply(). def apply(t: T, w: Transformer[T]): fromTransformer[T]
-//           ^^^^^^^^^^^^^^^ synthetic_definition ujson/Readable.fromTransformer. object fromTransformer
+//           ^^^^^^^^^^^^^^^ definition ujson/Readable.fromTransformer. object fromTransformer
 //           ^^^^^^^^^^^^^^^ synthetic_definition ujson/Readable.fromTransformer#productElementName(). def productElementName(x$1: Int): String
 //                           ^ definition ujson/Readable.fromTransformer#[T] T
 //                              definition ujson/Readable.fromTransformer#`<init>`(). def this(t: T, w: Transformer[T])
 //                              ^ definition ujson/Readable.fromTransformer#t. val t: T
-//                              ^ synthetic_definition ujson/Readable.fromTransformer#copy().(t) default t: T
-//                              ^ synthetic_definition ujson/Readable.fromTransformer.apply().(t) t: T
+//                              ^ definition ujson/Readable.fromTransformer#copy().(t) default t: T
+//                              ^ definition ujson/Readable.fromTransformer#`<init>`().(t) t: T
+//                              ^ definition ujson/Readable.fromTransformer.apply().(t) t: T
 //                                 ^ reference ujson/Readable.fromTransformer#[T]
 //                                    ^ definition ujson/Readable.fromTransformer#w. val w: Transformer[T]
-//                                    ^ synthetic_definition ujson/Readable.fromTransformer#copy().(w) default w: Transformer[T]
-//                                    ^ synthetic_definition ujson/Readable.fromTransformer.apply().(w) w: Transformer[T]
+//                                    ^ definition ujson/Readable.fromTransformer#copy().(w) default w: Transformer[T]
+//                                    ^ definition ujson/Readable.fromTransformer#`<init>`().(w) w: Transformer[T]
+//                                    ^ definition ujson/Readable.fromTransformer.apply().(w) w: Transformer[T]
 //                                       ^^^^^^^^^^^ reference ujson/Transformer#
 //                                                   ^ reference ujson/Readable.fromTransformer#[T]
 //                                                               ^^^^^^^^ reference ujson/Readable#

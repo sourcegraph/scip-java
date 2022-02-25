@@ -23,7 +23,7 @@ import upickle.core.{ArrVisitor, ObjVisitor}
   */
 class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //    ^^^^^^^^^^^^^^^^ definition ujson/BaseByteRenderer# class BaseByteRenderer[T <: Output]
-//    ^^^^^^^^^^^^^^^^ synthetic_definition ujson/BaseByteRenderer. object BaseByteRenderer
+//    ^^^^^^^^^^^^^^^^ definition ujson/BaseByteRenderer. object BaseByteRenderer
 //                     ^ definition ujson/BaseByteRenderer#[T] T <: Output
 //                          ^^^^^^^ reference upickle/
 //                                  ^^^^ reference upickle/core/
@@ -31,12 +31,15 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //                                               ^^^^^^ reference upickle/core/ByteOps.Output#
                       (out: T,
 //                     ^^^ definition ujson/BaseByteRenderer#out. private[this] val out: T
+//                     ^^^ definition ujson/BaseByteRenderer#`<init>`().(out) out: T
 //                          ^ reference ujson/BaseByteRenderer#[T]
                        indent: Int = -1,
 //                     ^^^^^^ definition ujson/BaseByteRenderer#indent. private[this] val indent: Int
+//                     ^^^^^^ definition ujson/BaseByteRenderer#`<init>`().(indent) default indent: Int
 //                             ^^^ reference scala/Int#
                        escapeUnicode: Boolean = false) extends JsVisitor[T, T]{
 //                     ^^^^^^^^^^^^^ definition ujson/BaseByteRenderer#escapeUnicode. private[this] val escapeUnicode: Boolean
+//                     ^^^^^^^^^^^^^ definition ujson/BaseByteRenderer#`<init>`().(escapeUnicode) default escapeUnicode: Boolean
 //                                    ^^^^^^^ reference scala/Boolean#
 //                                                             ^^^^^^^^^ reference ujson/JsVisitor#
 //                                                                       ^ reference ujson/BaseByteRenderer#[T]
@@ -66,13 +69,13 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 
   private[this] var depth: Int = 0
 //                  ^^^^^ definition ujson/BaseByteRenderer#depth(). private[this] var depth: Int
-//                  ^^^^^ synthetic_definition ujson/BaseByteRenderer#`depth_=`(). private[this] var depth_=(x$1: Int): Unit
+//                  ^^^^^ definition ujson/BaseByteRenderer#`depth_=`(). private[this] var depth_=(x$1: Int): Unit
 //                         ^^^ reference scala/Int#
 
 
   private[this] var commaBuffered = false
 //                  ^^^^^^^^^^^^^ definition ujson/BaseByteRenderer#commaBuffered(). private[this] var commaBuffered: Boolean
-//                  ^^^^^^^^^^^^^ synthetic_definition ujson/BaseByteRenderer#`commaBuffered_=`(). private[this] var commaBuffered_=(x$1: Boolean): Unit
+//                  ^^^^^^^^^^^^^ definition ujson/BaseByteRenderer#`commaBuffered_=`(). private[this] var commaBuffered_=(x$1: Boolean): Unit
 
   def flushBuffer() = {
 //    ^^^^^^^^^^^ definition ujson/BaseByteRenderer#flushBuffer(). def flushBuffer(): Unit

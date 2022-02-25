@@ -98,13 +98,14 @@ public class LsifTextDocument {
       if (definition != null) {
         continue;
       }
-      for (String alternativeSymbol : alternativeSymbols(info)) {
+      for (Semanticdb.SymbolOccurrence alternativeSymbol : alternativeSymbols(info)) {
         Semanticdb.SymbolOccurrence alternativeDefinition =
-            definitionOccurrences.get(alternativeSymbol);
+            definitionOccurrences.get(alternativeSymbol.getSymbol());
         if (alternativeDefinition != null) {
           builder.addOccurrences(
-              Semanticdb.SymbolOccurrence.newBuilder(alternativeDefinition)
-                  .setRole(Semanticdb.SymbolOccurrence.Role.SYNTHETIC_DEFINITION)
+              Semanticdb.SymbolOccurrence.newBuilder()
+                  .setRange(alternativeDefinition.getRange())
+                  .setRole(alternativeSymbol.getRole())
                   .setSymbol(info.getSymbol()));
           break;
         }
@@ -118,29 +119,31 @@ public class LsifTextDocument {
   public static final Set<String> syntheticCompanionObjectNames =
       new HashSet<>(Arrays.asList("apply", "copy"));
 
-  public static List<String> alternativeSymbols(Semanticdb.SymbolInformation info) {
-    ArrayList<String> alternatives = new ArrayList<>();
+  public static List<Semanticdb.SymbolOccurrence> alternativeSymbols(
+      Semanticdb.SymbolInformation info) {
+    SymbolOccurrences alternatives = new SymbolOccurrences();
     SymbolDescriptor sym = SymbolDescriptor.parseFromSymbol(info.getSymbol());
     switch (sym.descriptor.kind) {
       case Method:
         if (sym.descriptor.name.endsWith("_=")) {
           String newName = sym.descriptor.name.substring(0, sym.descriptor.name.length() - 2);
-          alternatives.add(SemanticdbSymbols.global(sym.owner, sym.descriptor.withName(newName)));
+          alternatives.addDefinition(
+              SemanticdbSymbols.global(sym.owner, sym.descriptor.withName(newName)));
         } else if (syntheticCaseClassMethodNames.contains(sym.descriptor.name)) {
-          alternatives.add(sym.owner);
+          alternatives.addSyntheticDefinition(sym.owner);
         } else if (syntheticCompanionObjectNames.contains(sym.descriptor.name)) {
-          alternatives.add(sym.owner);
+          alternatives.addSyntheticDefinition(sym.owner);
           SymbolDescriptor owner = SymbolDescriptor.parseFromSymbol(sym.owner);
-          alternatives.add(
+          alternatives.addSyntheticDefinition(
               SemanticdbSymbols.global(
                   owner.owner, owner.descriptor.withKind(SemanticdbSymbols.Descriptor.Kind.Type)));
         }
         break;
       case Parameter:
         SymbolDescriptor owner = SymbolDescriptor.parseFromSymbol(sym.owner);
-        if (owner.descriptor.name.equals("copy")) {
+        if (owner.descriptor.name.equals("copy") || owner.descriptor.name.equals("<init>")) {
           // case classes copy method parameter.
-          alternatives.add(
+          alternatives.addDefinition(
               SemanticdbSymbols.global(
                   owner.owner, sym.descriptor.withKind(SemanticdbSymbols.Descriptor.Kind.Term)));
         } else if (owner.descriptor.name.equals("apply")) {
@@ -150,17 +153,18 @@ public class LsifTextDocument {
               SemanticdbSymbols.global(
                   grandparent.owner,
                   grandparent.descriptor.withKind(SemanticdbSymbols.Descriptor.Kind.Type));
-          alternatives.add(
+          alternatives.addDefinition(
               SemanticdbSymbols.global(
                   companion, sym.descriptor.withKind(SemanticdbSymbols.Descriptor.Kind.Term)));
         }
       case Term:
-        alternatives.add(
+        alternatives.addDefinition(
             SemanticdbSymbols.global(
                 sym.owner, sym.descriptor.withKind(SemanticdbSymbols.Descriptor.Kind.Type)));
         break;
       default:
     }
-    return alternatives;
+
+    return alternatives.occurrences;
   }
 }

@@ -18,6 +18,7 @@ private[ujson] final class CharSequenceParser[J](cs: CharSequence) extends CharP
 //                                            ^ definition ujson/CharSequenceParser#[J] J
 //                                               definition ujson/CharSequenceParser#`<init>`(). def this(cs: CharSequence)
 //                                               ^^ definition ujson/CharSequenceParser#cs. private[this] val cs: CharSequence
+//                                               ^^ definition ujson/CharSequenceParser#`<init>`().(cs) cs: CharSequence
 //                                                   ^^^^^^^^^^^^ reference java/lang/CharSequence#
 //                                                                         ^^^^^^^^^^ reference ujson/CharParser#
 //                                                                                    ^ reference ujson/CharSequenceParser#[J]
