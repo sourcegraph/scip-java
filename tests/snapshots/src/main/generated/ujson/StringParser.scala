@@ -26,6 +26,7 @@ private[ujson] final class StringParser[J](s: String) extends CharParser[J]{
 //                                      ^ definition ujson/StringParser#[J] J
 //                                         definition ujson/StringParser#`<init>`(). def this(s: String)
 //                                         ^ definition ujson/StringParser#s. private[this] val s: String
+//                                         ^ definition ujson/StringParser#`<init>`().(s) s: String
 //                                            ^^^^^^ reference scala/Predef.String#
 //                                                            ^^^^^^^^^^ reference ujson/CharParser#
 //                                                                       ^ reference ujson/StringParser#[J]

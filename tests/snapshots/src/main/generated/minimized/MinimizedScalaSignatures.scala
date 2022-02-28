@@ -8,13 +8,14 @@ case class MinimizedCaseClass(value: String) {
 //         ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedCaseClass# case class MinimizedCaseClass(value: String)
 //         ^^^^^^^^^^^^^^^^^^ synthetic_definition minimized/MinimizedCaseClass.apply(). def apply(value: String): MinimizedCaseClass
 //         ^^^^^^^^^^^^^^^^^^ synthetic_definition minimized/MinimizedCaseClass#productElement(). def productElement(x$1: Int): Any
-//         ^^^^^^^^^^^^^^^^^^ synthetic_definition minimized/MinimizedCaseClass. object MinimizedCaseClass
+//         ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedCaseClass. object MinimizedCaseClass
 //         ^^^^^^^^^^^^^^^^^^ synthetic_definition minimized/MinimizedCaseClass#productElementName(). def productElementName(x$1: Int): String
 //         ^^^^^^^^^^^^^^^^^^ synthetic_definition minimized/MinimizedCaseClass#copy(). def copy(value: String): MinimizedCaseClass
 //                            definition minimized/MinimizedCaseClass#`<init>`(). def this(value: String)
 //                            ^^^^^ definition minimized/MinimizedCaseClass#value. val value: String
-//                            ^^^^^ synthetic_definition minimized/MinimizedCaseClass#copy().(value) default value: String
-//                            ^^^^^ synthetic_definition minimized/MinimizedCaseClass.apply().(value) value: String
+//                            ^^^^^ definition minimized/MinimizedCaseClass#copy().(value) default value: String
+//                            ^^^^^ definition minimized/MinimizedCaseClass#`<init>`().(value) value: String
+//                            ^^^^^ definition minimized/MinimizedCaseClass.apply().(value) value: String
 //                                   ^^^^^^ reference scala/Predef.String#
   def this() = this("value")
 //    ^^^^ definition minimized/MinimizedCaseClass#`<init>`(+1). def this()
