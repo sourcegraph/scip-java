@@ -70,8 +70,8 @@ case class GradleJavaCompiler(languageVersion: String, javacPath: Path) {
     val javaCommand = ListBuffer[String](
       javaBinary.toString,
       s"-javaagent:$agent",
-      s"-Dsemanticdb.javacopts=${javacopts}",
-      s"-Dsemanticdb.pluginpath=${pluginPath}",
+      s"-Dsemanticdb.javacopts=$javacopts",
+      s"-Dsemanticdb.pluginpath=$pluginPath",
       s"-Dsemanticdb.targetroot=${targetroot}",
       s"-Dsemanticdb.sourceroot=${index.workingDirectory}"
     )
@@ -98,6 +98,11 @@ case class GradleJavaCompiler(languageVersion: String, javacPath: Path) {
       )
       .toFile
       .setExecutable(true)
+    // for compileKotlin when using jvm toolchains
+    Files.createSymbolicLink(
+      dir.resolve("lib"),
+      javacPath.getParent.getParent.resolve("lib")
+    )
   }
 }
 object GradleJavaCompiler {
