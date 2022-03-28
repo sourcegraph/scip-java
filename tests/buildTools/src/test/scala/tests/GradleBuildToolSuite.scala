@@ -289,7 +289,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
 
   List("8", "11").foreach { version =>
     checkBuild(
-      "kotlin-jvm-toolchains",
+      s"kotlin-jvm-toolchains-jdk-$version",
       s"""|/build.gradle
           |plugins {
           |    id 'java'
