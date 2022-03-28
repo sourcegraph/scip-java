@@ -287,6 +287,28 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
     4
   )
 
+  List("8", "11").foreach { version =>
+    checkBuild(
+      "kotlin-jvm-toolchains",
+      s"""|/build.gradle
+          |plugins {
+          |    id 'java'
+          |    id 'org.jetbrains.kotlin.jvm' version '1.5.31'
+          |}
+          |java {
+          |  toolchain {
+          |    languageVersion = JavaLanguageVersion.of($version)
+          |  }
+          |}
+          |repositories { mavenCentral() }
+          |/src/main/kotlin/foo/Example.kt
+          |package foo
+          |object Example {}
+          |""".stripMargin,
+      1
+    )
+  }
+
   List("jvm()" -> 2, "jvm { withJava() }" -> 4).foreach {
     case (jvmSettings, expectedSemanticdbFiles) =>
       checkBuild(
@@ -326,5 +348,4 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
         expectedSemanticdbFiles
       )
   }
-
 }

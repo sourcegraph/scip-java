@@ -98,16 +98,29 @@ case class GradleJavaCompiler(languageVersion: String, javacPath: Path) {
       )
       .toFile
       .setExecutable(true)
-    // for compileKotlin when using jvm toolchains
+
+    // for compileKotlin when using jvm toolchains.
+    // JDK 9+ have jrt-fs.jar in $JDK_HOME/lib
     val libPath = dir.resolve("lib")
+    val javacLibPath = javacPath.getParent.getParent.resolve("lib")
     Files
-      .walk(javacPath.getParent.getParent.resolve("lib"))
+      .walk(javacLibPath)
       .forEach(source => {
-        val destination = libPath.resolve(
-          javacPath.getParent.getParent.resolve("lib").relativize(source)
-        )
+        val destination = libPath.resolve(javacLibPath.relativize(source))
         Files.copy(source, destination)
       })
+
+    // JDK 8 has rt.jar in $JDK_HOME/jre/lib
+    if (languageVersion == "8") {
+      val jrePath = dir.resolve("jre")
+      val javacJrePath = javacPath.getParent.getParent.resolve("jre")
+      Files
+        .walk(javacJrePath)
+        .forEach(source => {
+          val destination = jrePath.resolve(javacJrePath.relativize(source))
+          Files.copy(source, destination)
+        })
+    }
   }
 }
 object GradleJavaCompiler {
@@ -121,9 +134,9 @@ object GradleJavaCompiler {
   /**
    * Parses a single space-separated line into a GradleJavaCompiler instance.
    *
-   * Example input: "8 /path/javac"
+   * Example input: "8 /javacLibPath/javac"
    *
-   * Example output: `Some(GradleJavaCompiler("8", * /path/javac))`
+   * Example output: `Some(GradleJavaCompiler("8", * /javacLibPath/javac))`
    */
   def fromLine(line: String): Option[GradleJavaCompiler] =
     line.split(' ') match {
