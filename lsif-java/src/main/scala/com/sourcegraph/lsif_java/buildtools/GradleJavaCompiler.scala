@@ -100,12 +100,6 @@ case class GradleJavaCompiler(languageVersion: String, javacPath: Path) {
       .toFile
       .setExecutable(true)
 
-    // For compile{Test}Kotlin when using jvm toolchains, we need to have access
-    // to JDK internals found in <java-installation-path>/lib in JDK 9+,
-    // as well as <java-installation-path>/jre/lib in JDK <=8, else we get
-    // "no class roots are found in the JDK path" from the compile{Test}Kotlin tasks.
-    // https://docs.oracle.com/en/java/javase/12/migrate/index.html#JSMIG-GUID-A78CC891-701D-4549-AA4E-B8DD90228B4B
-
     val copyFiles =
       (source: Path, destination: Path) => {
         Files
@@ -121,6 +115,11 @@ case class GradleJavaCompiler(languageVersion: String, javacPath: Path) {
           })
       }
 
+    // For compile{Test}Kotlin when using jvm toolchains, we need to have access
+    // to JDK internals found in <java-installation-path>/lib in JDK 9+,
+    // as well as <java-installation-path>/jre/lib in JDK <=8, else we get
+    // "no class roots are found in the JDK path" from the compile{Test}Kotlin tasks.
+    // https://docs.oracle.com/en/java/javase/12/migrate/index.html#JSMIG-GUID-A78CC891-701D-4549-AA4E-B8DD90228B4B
     val libPath = dir.resolve("lib")
     val javacLibPath = javacPath.getParent.getParent.resolve("lib")
     copyFiles(javacLibPath, libPath)
