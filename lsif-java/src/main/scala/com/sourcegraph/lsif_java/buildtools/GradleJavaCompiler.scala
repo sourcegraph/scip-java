@@ -72,7 +72,7 @@ case class GradleJavaCompiler(languageVersion: String, javacPath: Path) {
       s"-javaagent:$agent",
       s"-Dsemanticdb.javacopts=$javacopts",
       s"-Dsemanticdb.pluginpath=$pluginPath",
-      s"-Dsemanticdb.targetroot=${targetroot}",
+      s"-Dsemanticdb.targetroot=$targetroot",
       s"-Dsemanticdb.sourceroot=${index.workingDirectory}"
     )
     if (index.verbose) {
@@ -99,10 +99,15 @@ case class GradleJavaCompiler(languageVersion: String, javacPath: Path) {
       .toFile
       .setExecutable(true)
     // for compileKotlin when using jvm toolchains
-    Files.createSymbolicLink(
-      dir.resolve("lib"),
-      javacPath.getParent.getParent.resolve("lib")
-    )
+    val libPath = dir.resolve("lib")
+    Files
+      .walk(javacPath.getParent.getParent.resolve("lib"))
+      .forEach(source => {
+        val destination = libPath.resolve(
+          javacPath.getParent.getParent.resolve("lib").relativize(source)
+        )
+        Files.copy(source, destination)
+      })
   }
 }
 object GradleJavaCompiler {
