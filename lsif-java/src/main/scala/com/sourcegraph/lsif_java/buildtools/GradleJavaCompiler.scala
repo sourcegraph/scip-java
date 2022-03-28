@@ -8,6 +8,7 @@ import java.nio.file.StandardCopyOption
 
 import scala.collection.mutable.ListBuffer
 
+import com.sourcegraph.io.CopyVisitor
 import com.sourcegraph.lsif_java.Embedded
 import com.sourcegraph.lsif_java.commands.IndexCommand
 
@@ -99,27 +100,29 @@ case class GradleJavaCompiler(languageVersion: String, javacPath: Path) {
       .toFile
       .setExecutable(true)
 
-    // for compileKotlin when using jvm toolchains.
-    // JDK 9+ have jrt-fs.jar in $JDK_HOME/lib
+    // For compile{Test}Kotlin when using jvm toolchains, we need to have access
+    // to JDK internals found in <java-installation-path>/lib in JDK 9+,
+    // as well as <java-installation-path>/jre/lib in JDK <=8, else we get
+    // "no class roots are found in the JDK path" from the compile{Test}Kotlin tasks.
+    // https://docs.oracle.com/en/java/javase/12/migrate/index.html#JSMIG-GUID-A78CC891-701D-4549-AA4E-B8DD90228B4B
     val libPath = dir.resolve("lib")
+    Files.createDirectory(libPath)
     val javacLibPath = javacPath.getParent.getParent.resolve("lib")
-    Files
-      .walk(javacLibPath)
-      .forEach(source => {
-        val destination = libPath.resolve(javacLibPath.relativize(source))
-        Files.copy(source, destination)
-      })
+    Files.walkFileTree(javacLibPath, new CopyVisitor(javacLibPath, libPath))
 
-    // JDK 8 has rt.jar in $JDK_HOME/jre/lib
     if (languageVersion == "8") {
-      val jrePath = dir.resolve("jre")
-      val javacJrePath = javacPath.getParent.getParent.resolve("jre")
-      Files
-        .walk(javacJrePath)
-        .forEach(source => {
-          val destination = jrePath.resolve(javacJrePath.relativize(source))
-          Files.copy(source, destination)
-        })
+      val jreLibPath = dir.resolve("jre").resolve("lib")
+      Files.createDirectories(jreLibPath.getParent)
+      val javacJreLibPath = javacPath
+        .getParent
+        .getParent
+        .resolve("jre")
+        .resolve("lib")
+
+      Files.walkFileTree(
+        javacJreLibPath,
+        new CopyVisitor(javacJreLibPath, jreLibPath)
+      )
     }
   }
 }
