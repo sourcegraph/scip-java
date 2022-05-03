@@ -1,11 +1,12 @@
 package tests
 
 class MissingBuildToolSuite extends BaseBuildToolSuite {
+
   checkErrorOutput(
     "basic",
     List("index"),
     expectedOutput =
-      s"""|error: No build tool detected in workspace '/workingDirectory'. At the moment, the only supported build tools are: Gradle, Maven, sbt.
+      s"""|error: No build tool detected in workspace '${java.io.File.separator}workingDirectory'. At the moment, the only supported build tools are: Gradle, Maven, sbt.
           |""".stripMargin,
     workingDirectoryLayout = ""
   )

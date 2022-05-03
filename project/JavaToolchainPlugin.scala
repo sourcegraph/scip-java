@@ -92,7 +92,8 @@ object JavaToolchainPlugin extends AutoPlugin {
           .toList
           .flatMap(index => "--jvm-index" :: index :: Nil)
         val arguments =
-          List(coursier.toString, "java-home", "--jvm", v) ++ index
+          List("java", "-jar", coursier.toString, "java-home", "--jvm", v) ++
+            index
         new File(Process(arguments).!!.trim)
       }
     )

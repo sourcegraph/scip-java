@@ -3,6 +3,7 @@ package tests
 import com.sourcegraph.lsif_java.{BuildInfo => V}
 
 class LsifBuildToolSuite extends BaseBuildToolSuite {
+  override def tags = List(SkipWindows)
   checkBuild(
     "basic",
     """|/lsif-java.json
