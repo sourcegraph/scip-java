@@ -215,7 +215,8 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |    }
           |  }
           |  task $lsifJavaDependencies {
-          |    def depsOut = java.nio.file.Paths.get('$dependenciesPath')
+          |    def depsOut = java.nio.file.Paths.get(
+          |      java.net.URI.create('${dependenciesPath.toUri}'))
           |    doLast {
           |      java.nio.file.Files.createDirectories(depsOut.getParent())
           |      tasks.withType(JavaCompile) {

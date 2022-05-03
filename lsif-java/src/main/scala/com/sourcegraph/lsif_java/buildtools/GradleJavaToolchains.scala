@@ -70,7 +70,8 @@ object GradleJavaToolchains {
       s"""|
           |try {
           |  java.nio.file.Files.write(
-          |    java.nio.file.Paths.get('$gradleVersionPath'),
+          |    java.nio.file.Paths.get(
+          |      java.net.URI.create('${gradleVersionPath.toUri}')),
           |    [gradle.gradleVersion],
           |    java.nio.file.StandardOpenOption.TRUNCATE_EXISTING,
           |    java.nio.file.StandardOpenOption.CREATE)
@@ -88,7 +89,8 @@ object GradleJavaToolchains {
           |
           |allprojects {
           |  task $taskName {
-          |    def toolchainsOut = java.nio.file.Paths.get('$toolchainsPath')
+          |    def toolchainsOut = java.nio.file.Paths.get(
+          |      java.net.URI.create('${toolchainsPath.toUri}'))
           |    doLast {
           |      try {
           |        tasks.withType(JavaCompile) {
