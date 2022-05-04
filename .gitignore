@@ -56,3 +56,7 @@ dump.lsif
 
 ./generated
 /sources
+bazel-bin
+bazel-lsif-java
+bazel-out
+bazel-testlogs

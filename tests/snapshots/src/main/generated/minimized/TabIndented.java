@@ -14,15 +14,24 @@ public class TabIndented {
 →→→public boolean equals(Object other) {
 //                ^^^^^^ definition local3 @Override public boolean equals(Object other)
 //                       ^^^^^^ reference java/lang/Object#
-//                              ^^^^^ definition local5 Object other
+//                              ^^^^^ definition local6 Object other
 →→→→return false;
+→→→}
+
+→→→@Override
+//  ^^^^^^^^ reference java/lang/Override#
+→→→public int hashCode() {
+//            ^^^^^^^^ definition local4 @Override public int hashCode()
+→→→→return System.identityHashCode(this);
+//         ^^^^^^ reference java/lang/System#
+//                ^^^^^^^^^^^^^^^^ reference java/lang/System#identityHashCode().
 →→→}
 
 →→→@Override
 //  ^^^^^^^^ reference java/lang/Override#
 →→→public String toString() {
 //        ^^^^^^ reference java/lang/String#
-//               ^^^^^^^^ definition local4 @Override public String toString()
+//               ^^^^^^^^ definition local5 @Override public String toString()
 →→→→return "";
 →→→}
 →→};

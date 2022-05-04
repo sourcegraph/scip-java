@@ -1,6 +1,7 @@
 package minimized;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 enum Enums {
   A("A", 420),
@@ -13,7 +14,7 @@ enum Enums {
   }
 
   public static String app() {
-    String all = Arrays.stream(values()).map(e -> e.value).map(Enums::valueOf).toString();
+    String all = Arrays.stream(values()).map(e -> e.value).map(Enums::valueOf).collect(Collectors.toList()).toString();
     return all + A.value + B.value + C.value;
   }
 }

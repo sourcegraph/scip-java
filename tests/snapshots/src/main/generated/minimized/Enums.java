@@ -5,6 +5,11 @@ import java.util.Arrays;
 //     ^^^^ reference java/
 //          ^^^^ reference java/util/
 //               ^^^^^^ reference java/util/Arrays#
+import java.util.stream.Collectors;
+//     ^^^^ reference java/
+//          ^^^^ reference java/util/
+//               ^^^^^^ reference java/util/stream/
+//                      ^^^^^^^^^^ reference java/util/stream/Collectors#
 
 enum Enums {
 //   ^^^^^ definition minimized/Enums# enum Enums
@@ -34,7 +39,7 @@ enum Enums {
   public static String app() {
 //              ^^^^^^ reference java/lang/String#
 //                     ^^^ definition minimized/Enums#app(). public static String app()
-    String all = Arrays.stream(values()).map(e -> e.value).map(Enums::valueOf).toString();
+    String all = Arrays.stream(values()).map(e -> e.value).map(Enums::valueOf).collect(Collectors.toList()).toString();
 //  ^^^^^^ reference java/lang/String#
 //         ^^^ definition local2 String all
 //               ^^^^^^ reference java/util/Arrays#
@@ -47,7 +52,10 @@ enum Enums {
 //                                                         ^^^ reference java/util/stream/Stream#map().
 //                                                             ^^^^^ reference minimized/Enums#
 //                                                                    ^^^^^^^ reference minimized/Enums#valueOf().
-//                                                                             ^^^^^^^^ reference java/lang/Object#toString().
+//                                                                             ^^^^^^^ reference java/util/stream/Stream#collect(+1).
+//                                                                                     ^^^^^^^^^^ reference java/util/stream/Collectors#
+//                                                                                                ^^^^^^ reference java/util/stream/Collectors#toList().
+//                                                                                                          ^^^^^^^^ reference java/lang/Object#toString().
     return all + A.value + B.value + C.value;
 //         ^^^ reference local2
 //               ^ reference minimized/Enums#A.

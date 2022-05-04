@@ -129,11 +129,11 @@ public class InnerClasses {
 //                            ^^^^^^^^^ reference minimized/InnerClasses#InnerEnum#`<init>`().
 //                            ^^^^^^^^^ reference minimized/InnerClasses#InnerEnum#
 //                                      ^^^^^^^^^ definition local6 InnerEnum magicEnum
-    if (System.nanoTime() > System.nanoTime()) {
+    if (System.nanoTime() > System.currentTimeMillis()) {
 //      ^^^^^^ reference java/lang/System#
 //             ^^^^^^^^ reference java/lang/System#nanoTime().
 //                          ^^^^^^ reference java/lang/System#
-//                                 ^^^^^^^^ reference java/lang/System#nanoTime().
+//                                 ^^^^^^^^^^^^^^^^^ reference java/lang/System#currentTimeMillis().
       magicEnum = InnerEnum.B;
 //    ^^^^^^^^^ reference local6
 //                ^^^^^^^^^ reference minimized/InnerClasses#InnerEnum#

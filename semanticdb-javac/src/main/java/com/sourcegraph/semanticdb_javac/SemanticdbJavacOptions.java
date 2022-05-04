@@ -23,6 +23,7 @@ public class SemanticdbJavacOptions {
   public boolean includeText = false;
   public boolean verboseEnabled = false;
   public final ArrayList<String> errors;
+  public boolean isErrorReported = false;
   public UriScheme uriScheme = UriScheme.DEFAULT;
 
   public static String stubClassName = "META-INF-semanticdb-stub";
@@ -56,6 +57,10 @@ public class SemanticdbJavacOptions {
         result.sourceroot = Paths.get(arg.substring("-sourceroot:".length())).normalize();
       } else if (arg.equals("-build-tool:sbt")) {
         result.uriScheme = UriScheme.SBT;
+      } else if (arg.equals("-build-tool:bazel")) {
+        result.uriScheme = UriScheme.BAZEL;
+        useJavacClassesDir = true;
+        result.targetroot = getJavacClassesDir(result, ctx);
       } else if (arg.equals("-text:on")) {
         result.includeText = true;
       } else if (arg.equals("-text:off")) {
@@ -73,7 +78,11 @@ public class SemanticdbJavacOptions {
     if (result.targetroot == null && !useJavacClassesDir) {
       result.errors.add(missingRequiredDirectoryOption("targetroot"));
     }
-    if (result.sourceroot == null) {
+    if (result.uriScheme != UriScheme.BAZEL && result.sourceroot == null) {
+      // When using -build-tool:bazel, the sourceroot is automatically inferred from the first
+      // compilation unit.
+      // See `SemanticdbTaskListener.inferBazelSourceroot()` for the method that infers the
+      // sourceroot.
       result.errors.add(missingRequiredDirectoryOption("sourceroot"));
     }
     return result;

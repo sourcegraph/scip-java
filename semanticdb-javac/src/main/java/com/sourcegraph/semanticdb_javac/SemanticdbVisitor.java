@@ -435,8 +435,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   }
 
   private String semanticdbUri() {
-    Path absolutePath =
-        SemanticdbTaskListener.absolutePathFromUri(options, event.getSourceFile().toUri());
+    Path absolutePath = SemanticdbTaskListener.absolutePathFromUri(options, event.getSourceFile());
     Path relativePath = options.sourceroot.relativize(absolutePath);
     StringBuilder out = new StringBuilder();
     Iterator<Path> it = relativePath.iterator();
