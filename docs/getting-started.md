@@ -12,8 +12,9 @@ tools that we're planning to support in the future.
 ## Install `lsif-java`
 
 The most common way to use `lsif-java` is to run it from CI to upload LSIF
-indexes after merging a pull request. The easiest way to install `lsif-java` is
-to use the Docker launcher.
+indexes after merging a pull request.
+
+The easiest way to install `lsif-java` is to use the Docker launcher.
 
 ### Docker container
 
@@ -259,7 +260,15 @@ on how to configure lsif-java to work with any build tool.
 ### Gradle
 
 The `lsif-java index` build should be able to automatically index most Gradle
-projects. However, the following Gradle integrations are not yet supported:
+projects. You Gradle build must contain one of the following files in the same
+directory where `lsif-java index` gets invoked.
+
+- settings.gradle
+- gradlew
+- build.gradle
+- build.gradle.kts
+
+The following Gradle integrations are not yet supported:
 
 | Integration | Supported | Tracking issue                                                                   |
 | ----------- | --------- | -------------------------------------------------------------------------------- |
@@ -270,7 +279,10 @@ projects. However, the following Gradle integrations are not yet supported:
 ### Maven
 
 The `lsif-java index` build should be able to automatically index most Maven
-projects. However, the following Maven integrations are not yet supported:
+projects. Your Maven build must contain a `pom.xml` file in the same directory
+where `lsif-java index` gets invoked.
+
+The following Maven integrations are not yet supported:
 
 | Integration         | Supported | Tracking issue                                                                   |
 | ------------------- | --------- | -------------------------------------------------------------------------------- |
@@ -286,3 +298,4 @@ projects, with the following caveats:
 | Integration   | Supported | Recommendation          |
 | ------------- | --------- | ----------------------- |
 | sbt <v0.13.17 | ❌        | Upgrade to sbt v0.13.17 |
+
