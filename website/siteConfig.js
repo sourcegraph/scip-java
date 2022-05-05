@@ -60,7 +60,7 @@ const siteConfig = {
   ogImage: "img/lsif-java.png",
   twitterImage: "img/lsif-java.png",
 
-  editUrl: `${repoUrl}/edit/master/docs/`,
+  editUrl: `${repoUrl}/edit/main/docs/`,
 
   repoUrl,
 };
