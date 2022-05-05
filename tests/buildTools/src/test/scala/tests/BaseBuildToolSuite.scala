@@ -4,6 +4,8 @@ import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.Path
 
+import scala.util.Properties
+
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
@@ -12,11 +14,27 @@ import com.sourcegraph.lsif_java.buildtools.ClasspathEntry
 import moped.testkit.DeleteVisitor
 import moped.testkit.FileLayout
 import moped.testkit.MopedSuite
+import munit.Tag
 import munit.TestOptions
 import os.Shellable
 
 abstract class BaseBuildToolSuite extends MopedSuite(LsifJava.app) {
   override def environmentVariables: Map[String, String] = sys.env
+
+  def tags = List.empty[Tag]
+
+  override def munitTestTransforms: List[TestTransform] =
+    super.munitTestTransforms ++
+      List(
+        new TestTransform(
+          "SkipWindows",
+          t =>
+            if (Properties.isWin && t.tags(SkipWindows))
+              t.tag(munit.Ignore)
+            else
+              t
+        )
+      )
 
   // NOTE(olafur): workaround for https://github.com/scalameta/moped/issues/18
   override val temporaryDirectory: DirectoryFixture =
@@ -41,7 +59,7 @@ abstract class BaseBuildToolSuite extends MopedSuite(LsifJava.app) {
       expectedPackages: String = "",
       initCommand: => List[String] = Nil
   ): Unit = {
-    test(options) {
+    test(options.withTags(options.tags ++ tags)) {
       if (initCommand.nonEmpty) {
         os.proc(Shellable(initCommand)).call(os.Path(workingDirectory))
       }
