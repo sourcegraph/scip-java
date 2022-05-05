@@ -15,12 +15,12 @@ import java.util.List;
 public class SemanticdbWalker extends SimpleFileVisitor<Path> {
   private final ArrayList<Path> result;
   private final LsifSemanticdbOptions options;
-  private final PathMatcher semanticdbPattern;
+  private final PathMatcher semanticdbPattern =
+      FileSystems.getDefault().getPathMatcher("glob:**.semanticdb");
 
   public SemanticdbWalker(LsifSemanticdbOptions options) {
     this.options = options;
     result = new ArrayList<>();
-    semanticdbPattern = FileSystems.getDefault().getPathMatcher("glob:**.semanticdb");
   }
 
   @Override
@@ -39,8 +39,13 @@ public class SemanticdbWalker extends SimpleFileVisitor<Path> {
 
   public static List<Path> findSemanticdbFiles(LsifSemanticdbOptions options) throws IOException {
     SemanticdbWalker walker = new SemanticdbWalker(options);
+    PathMatcher jarPattern = FileSystems.getDefault().getPathMatcher("glob:**.jar");
     for (Path root : options.targetroots) {
-      Files.walkFileTree(root, walker);
+      if (jarPattern.matches(root)) {
+        walker.result.add(root);
+      } else {
+        Files.walkFileTree(root, walker);
+      }
     }
     return walker.result;
   }

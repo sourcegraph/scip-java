@@ -34,8 +34,8 @@ java_library(
 	srcs = glob(["src/main/java/**/*.java"]),
 	resources = ["src/main/resources/META-INF/services/com.sun.source.util.Plugin"],
 	deps = [
-		"//semanticdb-java/src/main/protobuf:semanticdb_java_proto",
-		"//semanticdb-java/src/main/java/com/sourcegraph/semanticdb_javac:semanticdb_java",
+                "//semanticdb-java/src/main/protobuf:semanticdb_java_proto",
+		"//semanticdb-java",
 		":javac-import",
 	],
 )
