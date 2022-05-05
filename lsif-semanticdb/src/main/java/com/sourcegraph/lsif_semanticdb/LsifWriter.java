@@ -29,11 +29,9 @@ public class LsifWriter implements AutoCloseable {
   private final AtomicInteger id = new AtomicInteger();
 
   public LsifWriter(LsifSemanticdbOptions options) throws IOException {
-    this.tmp =
-        Files.createTempFile(
-            "lsif-semanticdb",
-            "dump.lsif",
-            PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rw-r--r--")));
+    this.tmp = Files.createTempFile("lsif-semanticdb", "dump.lsif");
+    this.tmp.toFile().setReadable(true);
+    this.tmp.toFile().setWritable(true);
     this.output =
         new LsifOutputStream(options, new BufferedOutputStream(Files.newOutputStream(tmp)));
     this.options = options;
