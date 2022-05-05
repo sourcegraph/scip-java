@@ -9,11 +9,22 @@ index of your Java codebase using Gradle or Maven. See
 [Supported build tools](#supported-build-tools) for an overview of other build
 tools that we're planning to support in the future.
 
+**NOTE:** Lsif-java expects your build to have one of the following files in the directory where lsif-java index gets invoked
+- **Gradle:**
+  - settings.gradle
+  - gradlew
+  - build.gradle
+  - build.gradle.kts
+
+- **Maven:**
+  - settings.gradle
+
 ## Install `lsif-java`
 
 The most common way to use `lsif-java` is to run it from CI to upload LSIF
-indexes after merging a pull request. The easiest way to install `lsif-java` is
-to use the Docker launcher.
+indexes after merging a pull request. 
+
+The easiest way to install `lsif-java` is to use the Docker launcher.
 
 ### Docker container
 
