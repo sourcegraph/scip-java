@@ -15,6 +15,10 @@ public class MavenPackage extends Package {
     this.version = version;
   }
 
+  public MavenPackage withJar(Path newJar) {
+    return new MavenPackage(newJar, this.groupId, this.artifactId, this.version);
+  }
+
   @Override
   public String repoName() {
     return String.format("maven/%s/%s", groupId, artifactId);

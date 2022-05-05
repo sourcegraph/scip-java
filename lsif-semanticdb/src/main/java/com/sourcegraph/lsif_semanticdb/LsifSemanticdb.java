@@ -10,12 +10,13 @@ import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
 import lib.codeintel.lsif_typed.LsifTyped;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -322,8 +323,31 @@ public class LsifSemanticdb {
     }
   }
 
+  private static PathMatcher jarPattern = FileSystems.getDefault().getPathMatcher("glob:**.jar");
+
   private Semanticdb.TextDocuments textDocumentsParseFrom(Path semanticdbPath) throws IOException {
-    byte[] bytes = Files.readAllBytes(semanticdbPath);
+    if (jarPattern.matches(semanticdbPath)) {
+      return textDocumentsParseJarFile(semanticdbPath);
+    }
+    return textDocumentsParseFromBytes(Files.readAllBytes(semanticdbPath));
+  }
+
+  private Semanticdb.TextDocuments textDocumentsParseJarFile(Path jarFile) throws IOException {
+    Semanticdb.TextDocuments.Builder result = Semanticdb.TextDocuments.newBuilder();
+    try (JarFile file = new JarFile(jarFile.toFile())) {
+      Enumeration<JarEntry> entries = file.entries();
+      while (entries.hasMoreElements()) {
+        JarEntry element = entries.nextElement();
+        if (element.getName().endsWith(".semanticdb")) {
+          byte[] bytes = InputStreamBytes.readAll(file.getInputStream(element));
+          result.addAllDocuments(textDocumentsParseFromBytes(bytes).getDocumentsList());
+        }
+      }
+    }
+    return result.build();
+  }
+
+  private Semanticdb.TextDocuments textDocumentsParseFromBytes(byte[] bytes) throws IOException {
     try {
       CodedInputStream in = CodedInputStream.newInstance(bytes);
       in.setRecursionLimit(1000);

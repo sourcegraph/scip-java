@@ -1,4 +1,6 @@
-workspace(name = "lsif_java_tests")
+
+# This is an end-to-end example of how to consume lsif-java from an external repository.
+workspace(name = "lsif_java_example")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 ##############
@@ -12,6 +14,15 @@ http_archive(
         "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.0.3/bazel-skylib-1.0.3.tar.gz",
     ],
 )
+
+##############
+# lsif-java
+##############
+local_repository(
+    name = "lsif_java",
+    path = "../.."
+)
+# TODO: add commented out `http_archive` example once this workspace file is available on GitHub.
 
 ##########
 # Protobuf
@@ -47,11 +58,13 @@ rules_jvm_external_setup()
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 maven_install(
     artifacts = [
-        "com.google.protobuf:protobuf-java:3.15.6",
-        "com.google.protobuf:protobuf-java-util:3.15.6",
-        "org.projectlombok:lombok:1.18.22",
+        "com.google.protobuf:protobuf-java:3.15.6", # Required dependency by lsif-java.
+        "com.google.protobuf:protobuf-java-util:3.15.6", # Required dependency by lsif-java.
+        "com.google.guava:guava:31.0-jre", # Not required dependency, only used by tests.
     ],
     repositories = [
          "https://repo1.maven.org/maven2",
     ],
 )
+load("@maven//:defs.bzl", "pinned_maven_install")
+pinned_maven_install()

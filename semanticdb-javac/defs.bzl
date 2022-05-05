@@ -16,12 +16,12 @@ def java_binary(javacopts=[], plugins=[],**kwargs):
 
 def _actual_javacopts(javacopts):
     return select({
-        "//semanticdb-javac:is_enabled": ["'-Xplugin:semanticdb -build-tool:bazel'"] + javacopts,
+        "@lsif_java//semanticdb-javac:is_enabled": ["'-Xplugin:semanticdb -build-tool:bazel'"] + javacopts,
         "//conditions:default": javacopts,
     })
 
 def _actual_plugins(plugins):
     return select({
-        "//semanticdb-javac:is_enabled": ["//semanticdb-javac:plugin"] + plugins,
+        "@lsif_java//semanticdb-javac:is_enabled": ["@lsif_java//semanticdb-javac:plugin"] + plugins,
         "//conditions:default": plugins,
     })
