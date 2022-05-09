@@ -5,7 +5,6 @@ import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
 import com.sun.source.util.Trees;
 import com.sun.tools.javac.model.JavacTypes;
-import com.sun.tools.javac.util.Options;
 
 import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
@@ -48,8 +47,8 @@ public final class SemanticdbTaskListener implements TaskListener {
   public void finished(TaskEvent e) {
     if (e.getKind() != TaskEvent.Kind.ANALYZE) return;
     if (!options.errors.isEmpty()) {
-      if (!options.isErrorReported) {
-        options.isErrorReported = true;
+      if (!options.alreadyReportedErrors) {
+        options.alreadyReportedErrors = true;
         for (String error : options.errors) {
           trees.printMessage(
               Diagnostic.Kind.ERROR,
@@ -129,7 +128,8 @@ public final class SemanticdbTaskListener implements TaskListener {
     }
   }
 
-  // Infers the `-sourceroot:` flag from the provided file
+  // Infers the `-sourceroot:` flag from the provided file.
+  // FIXME: add unit tests https://github.com/sourcegraph/lsif-java/issues/444
   private void inferBazelSourceroot(JavaFileObject file) {
     if (options.uriScheme != UriScheme.BAZEL || options.sourceroot != null) {
       return;
@@ -141,12 +141,14 @@ public final class SemanticdbTaskListener implements TaskListener {
     // uriPath is the sandbox/temporary file path, for example
     // /private/var/tmp/com/example/Hello.java
     //
-    // We infer sourceroot by iterating the names of both files in reverse order and stop at the
-    // first entry where  the two paths are different. For the  example above, we compare
-    // "Hello.java", then "example",  then "com",  and when we reach  "repo" !+ "tmp" then we guess
-    // that "/home/repo" is the sourceroot. This  logic is brittle  and it would be nice to use more
-    // dedicated APIs, but Bazel actively makes an effort to  sandbox compilation  and hide access
-    // to the original workspace, which is why we resort to  solutions like this.
+    // We infer sourceroot by iterating the names of both files in reverse order
+    // and stop at the first entry where  the two paths are different. For the
+    // example above, we compare "Hello.java", then "example", then "com", and
+    // when we reach "repo" != "tmp" then we guess that "/home/repo" is the
+    // sourceroot. This logic is brittle  and it would be nice to use more
+    // dedicated APIs, but Bazel actively makes an effort to  sandbox
+    // compilation and hide access to the original workspace, which is why we
+    // resort to solutions like this.
     int relativePathDepth = 0;
     int uriPathDepth = uriPath.getNameCount();
     int absolutePathDepth = absolutePath.getNameCount();

@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 
 public class BazelBuildTool {
 
-
   public static int runAndReturnExitCode(String[] args) throws IOException {
     Optional<BazelOptions> maybeOptions = BazelOptions.parse(args);
     if (!maybeOptions.isPresent()) {
@@ -57,8 +56,7 @@ public class BazelBuildTool {
     return 0;
   }
 
-  public static List<MavenPackage> mavenPackages(BazelOptions options)
-      throws IOException {
+  public static List<MavenPackage> mavenPackages(BazelOptions options) throws IOException {
     ArrayList<MavenPackage> result = new ArrayList<>();
     if (!options.isQueryMavenImports) {
       return result;
@@ -89,7 +87,7 @@ public class BazelBuildTool {
               String[] parts = tag.substring("maven_coordinates=".length()).split(":");
               if (parts.length == 3) {
                 // The jar part is populated via `withJar()` below.
-                basePackage = new MavenPackage(/* jar = */null, parts[0], parts[1], parts[2]);
+                basePackage = new MavenPackage(/* jar = */ null, parts[0], parts[1], parts[2]);
               }
             }
           }
@@ -114,10 +112,7 @@ public class BazelBuildTool {
       throws IOException {
     List<String> command = Arrays.asList(options.bazelBinary, "query", query, "--output=proto");
     System.out.println("running: " + String.join(" ", command));
-    Process bazelQuery =
-        new ProcessBuilder(command)
-            .directory(options.sourceroot.toFile())
-            .start();
+    Process bazelQuery = new ProcessBuilder(command).directory(options.sourceroot.toFile()).start();
     byte[] bytes = InputStreamBytes.readAll(bazelQuery.getInputStream());
     if (bazelQuery.isAlive()) {
       throw new RuntimeException(new String(InputStreamBytes.readAll(bazelQuery.getErrorStream())));
