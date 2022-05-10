@@ -4,6 +4,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 ##############
 # Bazel stdlib
 ##############
+# To update this version, copy-paste instructions from https://github.com/bazelbuild/bazel-skylib/releases
 http_archive(
     name = "bazel_skylib",
     sha256 = "1c531376ac7e5a180e0237938a2536de0c54d93f5c278634818e0efc952dd56c",
@@ -32,6 +33,7 @@ rules_proto_toolchains()
 ##############
 # JVM External
 ##############
+# To update this version, copy-paste instructions from https://github.com/bazelbuild/rules_jvm_external/releases
 RULES_JVM_EXTERNAL_TAG = "4.2"
 RULES_JVM_EXTERNAL_SHA = "cd1a77b7b02e8e008439ca76fd34f5b07aecb8c752961f9640dea15e9e5ba1ca"
 http_archive(
