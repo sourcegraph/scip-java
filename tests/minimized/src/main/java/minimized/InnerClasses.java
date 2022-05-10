@@ -56,7 +56,7 @@ public class InnerClasses {
   }
 
   public static void testEnum(InnerEnum magicEnum) {
-    if (System.nanoTime() > System.nanoTime()) {
+    if (System.nanoTime() > System.currentTimeMillis()) {
       magicEnum = InnerEnum.B;
     }
     switch (magicEnum) {

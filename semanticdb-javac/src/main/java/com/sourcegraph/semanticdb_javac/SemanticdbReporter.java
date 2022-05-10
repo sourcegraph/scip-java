@@ -1,6 +1,12 @@
 package com.sourcegraph.semanticdb_javac;
 
-import java.io.PrintStream;
+import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.Tree;
+import com.sun.source.util.Trees;
+
+import javax.tools.Diagnostic;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintWriter;
 
 /**
  * Utilities to report error messages.
@@ -9,22 +15,26 @@ import java.io.PrintStream;
  * This class can be removed if the Java compiler has APIs to report info/warning/error messages.
  */
 public class SemanticdbReporter {
-  private final PrintStream out;
+  private final Trees trees;
 
-  public SemanticdbReporter() {
-    this.out = System.err;
+  public SemanticdbReporter(Trees trees) {
+    this.trees = trees;
   }
 
-  public void exception(Throwable e) {
-    e.printStackTrace(out);
-    out.println(
+  public void exception(Throwable e, Tree tree, CompilationUnitTree root) {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    PrintWriter writer = new PrintWriter(baos);
+    e.printStackTrace(writer);
+    writer.println(
         "Please report a bug to https://github.com/sourcegraph/semanticdb-java with the stack trace above.");
+    trees.printMessage(Diagnostic.Kind.ERROR, baos.toString(), tree, root);
   }
 
-  public void error(String message) {
+  public void error(String message, Tree tree, CompilationUnitTree root) {
     // NOTE(olafur): ideally, this message should be reported as a compiler diagnostic, but I dind't
     // find
     // the reporter API so the message goes to stderr instead for now.
-    out.printf("semanticdb-javac: %s\n", message);
+    trees.printMessage(
+        Diagnostic.Kind.ERROR, String.format("semanticdb-javac: %s", message), tree, root);
   }
 }

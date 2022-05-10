@@ -3,9 +3,11 @@ package com.sourcegraph.semanticdb_javac;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
-import com.sourcegraph.semanticdb_javac.Semanticdb;
+import com.sun.source.util.Trees;
 import com.sun.tools.javac.model.JavacTypes;
 
+import javax.tools.Diagnostic;
+import javax.tools.JavaFileObject;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
@@ -22,6 +24,7 @@ public final class SemanticdbTaskListener implements TaskListener {
   private final GlobalSymbolsCache globals;
   private final SemanticdbReporter reporter;
   private final JavacTypes javacTypes;
+  private final Trees trees;
 
   public SemanticdbTaskListener(
       SemanticdbJavacOptions options,
@@ -34,6 +37,7 @@ public final class SemanticdbTaskListener implements TaskListener {
     this.globals = globals;
     this.reporter = reporter;
     this.javacTypes = javacTypes;
+    this.trees = Trees.instance(task);
   }
 
   @Override
@@ -42,6 +46,20 @@ public final class SemanticdbTaskListener implements TaskListener {
   @Override
   public void finished(TaskEvent e) {
     if (e.getKind() != TaskEvent.Kind.ANALYZE) return;
+    if (!options.errors.isEmpty()) {
+      if (!options.alreadyReportedErrors) {
+        options.alreadyReportedErrors = true;
+        for (String error : options.errors) {
+          trees.printMessage(
+              Diagnostic.Kind.ERROR,
+              "semanticdb-javac: " + error,
+              e.getCompilationUnit(),
+              e.getCompilationUnit());
+        }
+      }
+      return;
+    }
+    inferBazelSourceroot(e.getSourceFile());
     try {
       onFinishedAnalyze(e);
     } catch (Throwable ex) {
@@ -54,7 +72,8 @@ public final class SemanticdbTaskListener implements TaskListener {
             new CompilationUnitException(
                 String.valueOf(e.getSourceFile().toUri().toString()), throwable);
       }
-      reporter.exception(throwable);
+      reporter.exception(throwable, e.getCompilationUnit(), e.getCompilationUnit());
+      throw new RuntimeException("boom", throwable);
     }
   }
 
@@ -64,24 +83,25 @@ public final class SemanticdbTaskListener implements TaskListener {
       Semanticdb.TextDocument textDocument =
           new SemanticdbVisitor(task, globals, e, options, javacTypes)
               .buildTextDocument(e.getCompilationUnit());
-      writeSemanticdb(path.getOrThrow(), textDocument);
+      writeSemanticdb(e, path.getOrThrow(), textDocument);
     } else {
-      reporter.error(path.getErrorOrThrow());
+      reporter.error(path.getErrorOrThrow(), e.getCompilationUnit(), e.getCompilationUnit());
     }
   }
 
-  private void writeSemanticdb(Path output, Semanticdb.TextDocument textDocument) {
+  private void writeSemanticdb(TaskEvent event, Path output, Semanticdb.TextDocument textDocument) {
     try {
       byte[] bytes =
           Semanticdb.TextDocuments.newBuilder().addDocuments(textDocument).build().toByteArray();
       Files.createDirectories(output.getParent());
       Files.write(output, bytes);
     } catch (IOException e) {
-      reporter.exception(e);
+      reporter.exception(e, event.getCompilationUnit(), event.getCompilationUnit());
     }
   }
 
-  public static Path absolutePathFromUri(SemanticdbJavacOptions options, URI uri) {
+  public static Path absolutePathFromUri(SemanticdbJavacOptions options, JavaFileObject file) {
+    URI uri = file.toUri();
     if (options.uriScheme == UriScheme.SBT
         && uri.getScheme().equals("vf")
         && uri.toString().startsWith("vf://tmp/")) {
@@ -91,13 +111,63 @@ public final class SemanticdbTaskListener implements TaskListener {
       } else {
         throw new IllegalArgumentException("unsupported URI: " + uri);
       }
+    } else if (options.uriScheme == UriScheme.BAZEL) {
+      String toString = file.toString();
+      // This solution is hacky, and it would be very nice to use a dedicated API instead.
+      // The Bazel Java compiler constructs `SimpleFileObject` with a "user-friendly" name that
+      // points to the original source file and an underlying/actual file path in a temporary
+      // directory. We're constrained by having to use only public APIs of the Java compiler
+      // and `toString()` seems to be the only way to access the user-friendly path.
+      if (toString.startsWith("SimpleFileObject[") && toString.endsWith("]")) {
+        return Paths.get(toString.substring("SimpleFileObject[".length(), toString.length() - 1));
+      } else {
+        throw new IllegalArgumentException("unsupported source file: " + toString);
+      }
     } else {
       return Paths.get(uri);
     }
   }
 
+  // Infers the `-sourceroot:` flag from the provided file.
+  // FIXME: add unit tests https://github.com/sourcegraph/lsif-java/issues/444
+  private void inferBazelSourceroot(JavaFileObject file) {
+    if (options.uriScheme != UriScheme.BAZEL || options.sourceroot != null) {
+      return;
+    }
+    Path absolutePath = absolutePathFromUri(options, file);
+    Path uriPath = Paths.get(file.toUri());
+    // absolutePath is the "human-readable" original path, for example
+    // /home/repo/com/example/Hello.java
+    // uriPath is the sandbox/temporary file path, for example
+    // /private/var/tmp/com/example/Hello.java
+    //
+    // We infer sourceroot by iterating the names of both files in reverse order
+    // and stop at the first entry where  the two paths are different. For the
+    // example above, we compare "Hello.java", then "example", then "com", and
+    // when we reach "repo" != "tmp" then we guess that "/home/repo" is the
+    // sourceroot. This logic is brittle  and it would be nice to use more
+    // dedicated APIs, but Bazel actively makes an effort to  sandbox
+    // compilation and hide access to the original workspace, which is why we
+    // resort to solutions like this.
+    int relativePathDepth = 0;
+    int uriPathDepth = uriPath.getNameCount();
+    int absolutePathDepth = absolutePath.getNameCount();
+    while (relativePathDepth < uriPathDepth && relativePathDepth < absolutePathDepth) {
+      String uriName = uriPath.getName(uriPathDepth - relativePathDepth - 1).toString();
+      String pathName = absolutePath.getName(absolutePathDepth - relativePathDepth - 1).toString();
+      if (!uriName.equals(pathName)) {
+        break;
+      }
+      relativePathDepth++;
+    }
+    options.sourceroot =
+        absolutePath
+            .getRoot()
+            .resolve(absolutePath.subpath(0, absolutePathDepth - relativePathDepth));
+  }
+
   private Result<Path, String> semanticdbOutputPath(SemanticdbJavacOptions options, TaskEvent e) {
-    Path absolutePath = absolutePathFromUri(options, e.getSourceFile().toUri());
+    Path absolutePath = absolutePathFromUri(options, e.getSourceFile());
     if (absolutePath.startsWith(options.sourceroot)) {
       Path relativePath = options.sourceroot.relativize(absolutePath);
       String filename = relativePath.getFileName().toString() + ".semanticdb";

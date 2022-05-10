@@ -33,6 +33,9 @@ final case class IndexSemanticdbCommand(
     @Description(
       "Whether to process the SemanticDB files in parallel"
     ) parallel: Boolean = true,
+    @Description(
+      "Whether to infer the location of SemanticDB files based as produced by Bazel"
+    ) bazel: Boolean = true,
     @Description("URL to a PackageHub instance")
     @Hidden
     packagehub: Option[String] = None,
