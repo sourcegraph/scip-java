@@ -21,6 +21,11 @@ jobs:
         with:
           go-version: "^1.13.1"
       - run: sbt test
+      - name: Test Summary
+        uses: test-summary/action@v1
+        with:
+          paths: "tests/**/TEST-*.xml"
+        if: always()
   bazel:
     runs-on: ubuntu-latest
     steps:
