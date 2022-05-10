@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 public class BazelBuildTool {
 
-  public static int runAndReturnExitCode(String[] args) throws IOException {
+  public static int runAndReturnExitCode(String[] args) throws IOException, InterruptedException {
     Optional<BazelOptions> maybeOptions = BazelOptions.parse(args);
     if (!maybeOptions.isPresent()) {
       return 1;
@@ -56,7 +56,8 @@ public class BazelBuildTool {
     return 0;
   }
 
-  public static List<MavenPackage> mavenPackages(BazelOptions options) throws IOException {
+  public static List<MavenPackage> mavenPackages(BazelOptions options)
+      throws IOException, InterruptedException {
     ArrayList<MavenPackage> result = new ArrayList<>();
     if (!options.isQueryMavenImports) {
       return result;
@@ -109,22 +110,19 @@ public class BazelBuildTool {
   }
 
   public static Bazelbuild.QueryResult runBazelQuery(BazelOptions options, String query)
-      throws IOException {
+      throws IOException, InterruptedException {
     List<String> command = Arrays.asList(options.bazelBinary, "query", query, "--output=proto");
     System.out.println("running: " + String.join(" ", command));
     Process bazelQuery = new ProcessBuilder(command).directory(options.sourceroot.toFile()).start();
     byte[] bytes = InputStreamBytes.readAll(bazelQuery.getInputStream());
-    if (bazelQuery.isAlive()) {
-      throw new RuntimeException(new String(InputStreamBytes.readAll(bazelQuery.getErrorStream())));
-    }
-    int exitValue = bazelQuery.exitValue();
+    int exitValue = bazelQuery.waitFor();
     if (exitValue != 0) {
       throw new RuntimeException("bazel command failed\n" + new String(bytes));
     }
     return Bazelbuild.QueryResult.parseFrom(bytes);
   }
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, InterruptedException {
     System.exit(runAndReturnExitCode(args));
   }
 }
