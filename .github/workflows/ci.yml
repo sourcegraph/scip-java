@@ -27,11 +27,11 @@ jobs:
       - uses: actions/checkout@v2
       - run: yarn global add @bazel/bazelisk
       - run: bazel build //... --//semanticdb-javac:enabled=true
-      - run: bazel run lsif-semanticdb:bazel -- --sourceroot $PWD
+      - run: bazel run lsif-semanticdb:bazel -- --sourceroot "$PWD"
       - run: du -h dump.lsif-typed
       - run: bazel build //... --@lsif_java//semanticdb-javac:enabled=true
         working-directory: examples/bazel-example
-      - run: bazel run @lsif_java//lsif-semanticdb:bazel -- --sourceroot $PWD
+      - run: bazel run @lsif_java//lsif-semanticdb:bazel -- --sourceroot "$PWD"
         working-directory: examples/bazel-example
       - run: du -h dump.lsif-typed
         working-directory: examples/bazel-example
