@@ -5,7 +5,7 @@ object SemanticdbJavacSnapshotGenerator
       List(
         new LibrarySnapshotGenerator(),
         new MinimizedSnapshotGenerator(),
-        new MinimizedLsifSnapshotGenerator(),
-        new LsifGraphSnapshotGenerator()
+        new MinimizedScipSnapshotGenerator(),
+        new ScipGraphSnapshotGenerator()
       )
     )

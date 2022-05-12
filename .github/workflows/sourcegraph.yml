@@ -6,9 +6,9 @@ on:
       - olafurpg/lets-go
     pull_request:
 jobs:
-  lsif:
+  scip:
     runs-on: ubuntu-latest
-    name: "Upload LSIF"
+    name: "Upload SCIP"
     steps:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v13

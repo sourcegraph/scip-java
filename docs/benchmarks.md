@@ -25,4 +25,4 @@ sbt:root> bench/jmh:run -i 10 -wi 10 -f1 -t1
   compilation by 45-50%.
 - Recommendation: do not enable the SemanticDB compiler plugin during local
   edit-and-test workflows. The compiler plugin is primarily intended to be
-  enabled in custom CI jobs to upload LSIF indexes.
+  enabled in custom CI jobs to upload SCIP indexes.

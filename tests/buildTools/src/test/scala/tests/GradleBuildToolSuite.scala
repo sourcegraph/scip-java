@@ -106,7 +106,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
     expectedError = Some { error =>
       assert(
         clue(error).contains(
-          """error: lsif-java does not support Gradle 6.7 when used together with Java toolchains. To fix this problem, upgrade to Gradle version 6.8 or newer and try again."""
+          """error: scip-java does not support Gradle 6.7 when used together with Java toolchains. To fix this problem, upgrade to Gradle version 6.8 or newer and try again."""
         )
       )
     },

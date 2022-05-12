@@ -3,9 +3,9 @@ id: manual-configuration
 title: Manual configuration
 ---
 
-The `lsif-java index` command does a best-effort to automatically index a given
+The `scip-java index` command does a best-effort to automatically index a given
 codebase. The automatic step may not always work. The purpose of this page is to
-document the steps to manually configure lsif-java when automatic indexing
+document the steps to manually configure scip-java when automatic indexing
 fails.
 
 ## Overview
@@ -13,9 +13,9 @@ fails.
 Indexing a codebase consists of two independent phases:
 
 - Compile the codebase with the SemanticDB compiler plugin.
-- Generate LSIF index from SemanticDB files.
+- Generate SCIP index from SemanticDB files.
 
-![A three stage pipeline that starts with a list of Java sources, creates a list of SemanticDB files that then become a single LSIF index.](assets/semanticdb-javac-pipeline.svg)
+![A three stage pipeline that starts with a list of Java sources, creates a list of SemanticDB files that then become a single SCIP index.](assets/semanticdb-javac-pipeline.svg)
 
 The first phase can be complicated to configure and it can take a while to run.
 The second phase is quite simple to configure and it usually runs very fast.
@@ -140,23 +140,23 @@ build/semanticdb-targetroot/META-INF/semanticdb/j8/src/main/java/example/Example
 ...
 ```
 
-## Step 4: Generate LSIF index from SemanticDB files
+## Step 4: Generate SCIP index from SemanticDB files
 
-First, install the `lsif-java` command-line tool according to the instructions
+First, install the `scip-java` command-line tool according to the instructions
 in the [getting started guide](getting-started.md).
 
-Next, run the `lsif-java index-semanticdb` command to convert SemanticDB files
-into LSIF.
+Next, run the `scip-java index-semanticdb` command to convert SemanticDB files
+into SCIP.
 
 ```sh
-❯ lsif-java index-semanticdb $TARGETROOT
-❯ file dump.lsif
-dump.lsif: JSON data
+❯ scip-java index-semanticdb $TARGETROOT
+❯ file index.scip
+index.scip: JSON data
 ```
 
 ## Step 5 (optional): Enable cross-repository navigation
 
-By default, the `dump.lsif` file only enables navigation within the local
+By default, the `index.scip` file only enables navigation within the local
 repository. You can optionally enable cross-repository navigation by creating
 one of the following files in the SemanticDB _targetroot_ directory (the path in
 `-Xplugin:semanticdb -targeroot:PATH`).
@@ -183,7 +183,7 @@ one of the following files in the SemanticDB _targetroot_ directory (the path in
   junit junit 4.13.2  /path/to/junit.jar
   org.hamcrest hamcrest-core 1.3  /path/to/hamcrest-core.jar
   ```
-  The `dependencies.txt` format is used by lsif-java to map symbols such as
+  The `dependencies.txt` format is used by scip-java to map symbols such as
   `org.junit.Assert` to Maven co-ordinates like `junit:junit:4.13.2`. As long as
   your Sourcegraph instance has another repository that defines that symbol, the
   cross-repository navigation should succeed. Only jar files are supported at

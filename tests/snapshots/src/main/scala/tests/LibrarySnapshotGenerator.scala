@@ -12,19 +12,19 @@ import java.nio.file.attribute.BasicFileAttributes
 
 import scala.util.Properties
 
-import com.sourcegraph.lsif_java.LsifJava
+import com.sourcegraph.scip_java.ScipJava
 import moped.reporters.ConsoleReporter
 
 class LibrarySnapshotGenerator extends SnapshotGenerator {
   val scalaPattern = FileSystems.getDefault.getPathMatcher("glob:**.scala")
   val javaPattern = FileSystems.getDefault.getPathMatcher("glob:**.java")
-  def runLsifJava(arguments: List[String]): Unit = {
+  def runScipJava(arguments: List[String]): Unit = {
     val baos = new ByteArrayOutputStream
-    val exitCode = LsifJava
+    val exitCode = ScipJava
       .app
       .withReporter(ConsoleReporter(new PrintStream(baos)))
       .withEnv(
-        LsifJava
+        ScipJava
           .app
           .env
           .withStandardOutput(new PrintStream(baos))
@@ -53,7 +53,7 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
       println(s"indexing library '$name'")
       val providedArguments = provided.flatMap(p => List("--provided", p))
       val snapshotDir = Files.createTempDirectory("semanticdb-javac")
-      runLsifJava(
+      runScipJava(
         List(
           "index-dependency",
           "--snapshot",

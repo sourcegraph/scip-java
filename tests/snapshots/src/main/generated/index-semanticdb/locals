@@ -15,7 +15,7 @@ public class Example {
 
 
 ──────────────────────────────────
-│ LSIF Graph for symbol 'local0' │
+│ SCIP Graph for symbol 'local0' │
 ──────────────────────────────────
                                ╭──────────╮
                                │project(2)│

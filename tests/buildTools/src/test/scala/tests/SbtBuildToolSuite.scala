@@ -3,7 +3,7 @@ package tests
 import munit.IgnoreSuite
 
 // Ignored because the sbt-sourcegraph plugin adds the -build-tool:sbt flag, which
-// is yet not supported by any stable release of lsif-java. We can un-ignore this
+// is yet not supported by any stable release of scip-java. We can un-ignore this
 // test suite after the next release.
 @IgnoreSuite
 class SbtBuildToolSuite extends BaseBuildToolSuite {

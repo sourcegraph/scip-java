@@ -9,8 +9,8 @@ import scala.util.Properties
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
-import com.sourcegraph.lsif_java.LsifJava
-import com.sourcegraph.lsif_java.buildtools.ClasspathEntry
+import com.sourcegraph.scip_java.ScipJava
+import com.sourcegraph.scip_java.buildtools.ClasspathEntry
 import moped.testkit.DeleteVisitor
 import moped.testkit.FileLayout
 import moped.testkit.MopedSuite
@@ -18,7 +18,7 @@ import munit.Tag
 import munit.TestOptions
 import os.Shellable
 
-abstract class BaseBuildToolSuite extends MopedSuite(LsifJava.app) {
+abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
   override def environmentVariables: Map[String, String] = sys.env
 
   def tags = List.empty[Tag]

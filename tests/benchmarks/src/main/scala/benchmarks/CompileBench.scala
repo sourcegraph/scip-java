@@ -11,7 +11,7 @@ import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
 import com.sourcegraph.io.DeleteVisitor
-import com.sourcegraph.lsif_java.Dependencies
+import com.sourcegraph.scip_java.Dependencies
 import org.openjdk.jmh.annotations._
 import tests.TestCompiler
 

@@ -157,7 +157,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       for (Symbol.TypeVariableSymbol typeSym : cls.sym.getTypeParameters()) {
         if (i >= typeParameters.size()) {
           // Happens in testcontainers/testcontainers-java, see
-          // https://github.com/sourcegraph/lsif-java/issues/319
+          // https://github.com/sourcegraph/scip-java/issues/319
           // Failed to reproduce with a minimal source file so we don't have a test case that hits
           // this branch.
           break;

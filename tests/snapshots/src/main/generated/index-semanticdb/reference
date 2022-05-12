@@ -14,7 +14,7 @@ public class Example {
 
 
 ────────────────────────────────────────────
-│ LSIF Graph for symbol 'example/Example#' │
+│ SCIP Graph for symbol 'example/Example#' │
 ────────────────────────────────────────────
                                                              ╭──────────╮
                                                              │project(2)│

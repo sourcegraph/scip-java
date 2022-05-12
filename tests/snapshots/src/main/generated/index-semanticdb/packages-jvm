@@ -13,7 +13,7 @@ public class Example {
 
 
 ─────────────────────────────────────────────
-│ LSIF Graph for symbol 'java/lang/String#' │
+│ SCIP Graph for symbol 'java/lang/String#' │
 ─────────────────────────────────────────────
            ╭──────────╮
            │project(2)│

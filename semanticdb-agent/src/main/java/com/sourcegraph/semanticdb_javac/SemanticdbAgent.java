@@ -71,7 +71,7 @@ public class SemanticdbAgent {
   }
 
   private static PrintStream newLogger() {
-    Path path = Paths.get(System.getProperty("user.home"), ".lsif-java", "logs.txt");
+    Path path = Paths.get(System.getProperty("user.home"), ".scip-java", "logs.txt");
     try {
       Files.createDirectories(path.getParent());
       OutputStream fos =

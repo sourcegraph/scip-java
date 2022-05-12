@@ -5,7 +5,7 @@ title: Contributing guide
 ---
 
 This page documents tips and tricks for contributing to the
-[sourcegraph/lsif-java](https://github.com/sourcegraph/lsif-java) codebase.
+[sourcegraph/scip-java](https://github.com/sourcegraph/scip-java) codebase.
 
 ## System dependencies
 
@@ -29,7 +29,7 @@ These are the main components of the project.
 - `tests/snapshots`: slow running
   ["snapshot tests"](https://jestjs.io/docs/en/snapshot-testing) that index a
   corpus of published Java libraries.
-- `cli/src/main/scala`: implementation of the `lsif-java` command-line
+- `cli/src/main/scala`: implementation of the `scip-java` command-line
   interface.
 - `build.sbt`: the sbt build definition.
 - `project/plugins.sbt`: plugins for the sbt build.
@@ -47,8 +47,8 @@ These are the main components of the project.
 | `snapshots/testOnly tests.LibrarySnapshotSuite`                     | sbt      | Runs slow snapshot tests. Indexes a corpus of external Java libraries.              |
 | `snapshots/test`                                                    | sbt      | Runs all snapshot tests.                                                            |
 | `snapshots/run`                                                     | sbt      | Update snapshot tests. Use this command after you have fixed a bug.                 |
-| `cli/run --cwd DIRECTORY`                                           | sbt      | Run `lsif-java` command-line tool against a given Gradle/Maven build.               |
-| `cd website && yarn install && yarn start`                          | terminal | Start live-reload preview of the website at http://localhost:3000/lsif-java.        |
+| `cli/run --cwd DIRECTORY`                                           | sbt      | Run `scip-java` command-line tool against a given Gradle/Maven build.               |
+| `cd website && yarn install && yarn start`                          | terminal | Start live-reload preview of the website at http://localhost:3000/scip-java.        |
 | `docs/mdoc --watch`                                                 | sbt      | Re-generate markdown files in the `docs/` directory.                                |
 | `fixAll`                                                            | sbt      | Run Scalafmt, Scalafix and Javafmt on all sources. Run this before opening a PR.    |
 
@@ -81,7 +81,7 @@ It's best to run tests from the sbt shell, not from the IntelliJ UI.
 If you want to use completions and precise code navigation, it's not recommended
 to use other editors than IntelliJ. IntelliJ is the only IDE that properly
 supports hybrid Java/Scala codebases at the moment, although that may change
-soon thanks to lsif-java :)
+soon thanks to scip-java :)
 
 ## Tests are written in Scala
 
@@ -95,4 +95,4 @@ write tests because:
 - Multiline literal strings in Scala make it easy to write unit tests for source
   code (which is always multiline). Modern versions of Java support multiline
   string literals, but they're not supported in Java 8, which is supported by
-  lsif-java.
+  scip-java.
