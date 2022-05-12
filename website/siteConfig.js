@@ -1,17 +1,17 @@
 // See https://docusaurus.io/docs/site-config.html for all the possible
 // site configuration options.
 
-const repoUrl = "https://github.com/sourcegraph/lsif-java";
-const baseUrl = "/lsif-java/";
+const repoUrl = "https://github.com/sourcegraph/scip-java";
+const baseUrl = "/scip-java/";
 
 const siteConfig = {
-  title: "lsif-java",
-  tagline: "Java indexer for the Language Server Index Format (LSIF)",
-  url: "https://sourcegraph.github.io/lsif-java",
+  title: "scip-java",
+  tagline: "Java indexer for the Language Server Index Format (SCIP)",
+  url: "https://sourcegraph.github.io/scip-java",
   baseUrl: baseUrl,
 
   // Used for publishing and more
-  projectName: "lsif-java",
+  projectName: "scip-java",
   organizationName: "sourcegraph",
 
   // algolia: {
@@ -29,8 +29,8 @@ const siteConfig = {
   // users,
 
   /* path to images for header/footer */
-  headerIcon: "img/lsif-java.png",
-  footerIcon: "img/lsif-java.png",
+  headerIcon: "img/scip-java.png",
+  footerIcon: "img/scip-java.png",
   favicon: "img/favicon.ico",
 
   /* colors for website */
@@ -46,7 +46,7 @@ const siteConfig = {
 
   usePrism: ['scala'],
   // This copyright info is used in /core/Footer.js and blog rss/atom feeds.
-  copyright: `Copyright © ${new Date().getFullYear()} lsif-java developers`,
+  copyright: `Copyright © ${new Date().getFullYear()} scip-java developers`,
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks
@@ -57,8 +57,8 @@ const siteConfig = {
   onPageNav: "separate",
 
   /* Open Graph and Twitter card images */
-  ogImage: "img/lsif-java.png",
-  twitterImage: "img/lsif-java.png",
+  ogImage: "img/scip-java.png",
+  twitterImage: "img/scip-java.png",
 
   editUrl: `${repoUrl}/edit/main/docs/`,
 

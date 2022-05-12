@@ -1,6 +1,6 @@
 package tests
 
-import com.sourcegraph.lsif_java.SemanticdbPrinters
+import com.sourcegraph.scip_java.SemanticdbPrinters
 import com.sourcegraph.semanticdb_javac.Semanticdb.Documentation
 import com.sourcegraph.semanticdb_javac.Semanticdb.Range
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation

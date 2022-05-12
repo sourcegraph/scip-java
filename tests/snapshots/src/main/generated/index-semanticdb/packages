@@ -18,7 +18,7 @@ public class Example {
 
 
 ───────────────────────────────────────────────────────
-│ LSIF Graph for symbol 'org/hamcrest/MatcherAssert#' │
+│ SCIP Graph for symbol 'org/hamcrest/MatcherAssert#' │
 ───────────────────────────────────────────────────────
                                            ╭──────────╮
                                            │project(2)│

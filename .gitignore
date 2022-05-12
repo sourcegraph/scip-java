@@ -52,11 +52,12 @@ project/metals.sbt
 out/
 *.hnir
 test-report.json
-dump.lsif
+index.scip
 
 ./generated
 /sources
 bazel-bin
-bazel-lsif-java
+bazel-scip-java
 bazel-out
 bazel-testlogs
+bazel-lsif-java

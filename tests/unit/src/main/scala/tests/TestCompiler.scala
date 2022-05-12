@@ -88,7 +88,7 @@ class TestCompiler(
         .asScala
         .toList
     val compilerWithClasspath = compiler.newInstance(
-      "file://lsif-java",
+      "file://scip-java",
       Classpath(classpath).entries.map(_.toNIO).asJava,
       (scalacOptions ++ extraScalacOptions).asJava
     )

@@ -1,3 +1,3 @@
 # Contributing guide
 
-See https://sourcegraph.github.io/lsif-java/docs/contributing.html
+See https://sourcegraph.github.io/scip-java/docs/contributing.html

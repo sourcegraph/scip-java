@@ -4,11 +4,11 @@ import java.nio.file.Files
 
 import scala.meta.inputs.Input
 
-import com.sourcegraph.lsif_java.LsifJava
+import com.sourcegraph.scip_java.ScipJava
 import moped.testkit.FileLayout
 import moped.testkit.MopedSuite
 
-class SnapshotCommandSuite extends MopedSuite(LsifJava.app) {
+class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
   test("snapshot") {
     FileLayout.fromString(
       """/main/Sample.java

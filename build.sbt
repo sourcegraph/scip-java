@@ -35,7 +35,7 @@ inThisBuild(
     semanticdbEnabled := true,
     semanticdbVersion := V.scalameta,
     organization := "com.sourcegraph",
-    homepage := Some(url("https://github.com/sourcegraph/lsif-java")),
+    homepage := Some(url("https://github.com/sourcegraph/scip-java")),
     dynverSeparator := "-",
     licenses :=
       List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
@@ -124,10 +124,10 @@ lazy val plugin = project
   )
   .dependsOn(semanticdb)
 
-lazy val lsif = project
-  .in(file("lsif-semanticdb"))
+lazy val scip = project
+  .in(file("scip-semanticdb"))
   .settings(
-    moduleName := "lsif-semanticdb",
+    moduleName := "scip-semanticdb",
     javaToolchainVersion := "8",
     javaOnlySettings,
     libraryDependencies +=
@@ -139,10 +139,10 @@ lazy val lsif = project
   .dependsOn(semanticdb)
 
 lazy val cli = project
-  .in(file("lsif-java"))
+  .in(file("scip-java"))
   .settings(
-    moduleName := "lsif-java",
-    (Compile / mainClass) := Some("com.sourcegraph.lsif_java.LsifJava"),
+    moduleName := "scip-java",
+    (Compile / mainClass) := Some("com.sourcegraph.scip_java.ScipJava"),
     (run / baseDirectory) := (ThisBuild / baseDirectory).value,
     buildInfoKeys :=
       Seq[BuildInfoKey](
@@ -168,7 +168,7 @@ lazy val cli = project
         "bloopVersion" -> V.bloop,
         "bspVersion" -> V.bsp
       ),
-    buildInfoPackage := "com.sourcegraph.lsif_java",
+    buildInfoPackage := "com.sourcegraph.scip_java",
     libraryDependencies ++=
       List(
         "io.get-coursier" %% "coursier" % V.coursier,
@@ -200,26 +200,26 @@ lazy val cli = project
 
           IO.copy(outs)
           val props = new Properties()
-          val propsFile = out.resolve("lsif-java.properties").toFile
+          val propsFile = out.resolve("scip-java.properties").toFile
           val copiedJars = outs.collect { case (_, out) =>
             out
           }
           val names = copiedJars.map(_.getName).mkString(";")
           props.put("jarNames", names)
-          IO.write(props, "lsif-java", propsFile)
+          IO.write(props, "scip-java", propsFile)
 
           propsFile :: copiedJars.toList
         }
         .taskValue,
     docker / imageNames :=
       List(
-        ImageName("sourcegraph/lsif-java:latest"),
-        ImageName(s"sourcegraph/lsif-java:${version.value}")
+        ImageName("sourcegraph/scip-java:latest"),
+        ImageName(s"sourcegraph/scip-java:${version.value}")
       ),
     docker / dockerfile := {
       val binaryDistribution = pack.value
       val script = (ThisBuild / baseDirectory).value / "bin" /
-        "lsif-java-docker-script.sh"
+        "scip-java-docker-script.sh"
       new Dockerfile {
         from("gradle:7.2.0-jdk8")
 
@@ -248,14 +248,14 @@ lazy val cli = project
           "https://github.com/coursier/jvm-index/blob/master/index.json"
         )
 
-        // Install `lsif-java` binary.
-        add(script, "/usr/local/bin/lsif-java")
-        add(binaryDistribution, "/app/lsif-java")
+        // Install `scip-java` binary.
+        add(script, "/usr/local/bin/scip-java")
+        add(binaryDistribution, "/app/scip-java")
       }
     }
   )
   .enablePlugins(PackPlugin, DockerPlugin, BuildInfoPlugin)
-  .dependsOn(lsif)
+  .dependsOn(scip)
 
 def commitAll(): Unit = {
   import scala.sys.process._
@@ -273,7 +273,7 @@ commands +=
   Command.command("nativeImageProfiled") { s =>
     val targetroot =
       file("tests/minimized/.j11/target/scala-2.13/meta").absolutePath
-    val output = Files.createTempFile("lsif-java", "dump.lsif")
+    val output = Files.createTempFile("scip-java", "index.scip")
     "minimized/compile" ::
       s"""nativeImageRunAgent " index-semanticdb --output=$output $targetroot"""" ::
       "nativeImage" :: s
@@ -403,7 +403,7 @@ lazy val snapshots = project
 lazy val bench = project
   .in(file("tests/benchmarks"))
   .settings(
-    moduleName := "lsif-java-bench",
+    moduleName := "scip-java-bench",
     (run / fork) := true,
     (publish / skip) := true
   )
@@ -411,9 +411,9 @@ lazy val bench = project
   .enablePlugins(JmhPlugin)
 
 lazy val docs = project
-  .in(file("lsif-java-docs"))
+  .in(file("scip-java-docs"))
   .settings(
-    moduleName := "lsif-java-docs",
+    moduleName := "scip-java-docs",
     mdocOut :=
       (ThisBuild / baseDirectory).value / "website" / "target" / "docs",
     fork := false,

@@ -1,10 +1,10 @@
-# Java indexer for the Language Server Index Format (LSIF) ![](https://img.shields.io/badge/status-development-yellow?style=flat)
+# Java, Scala, and Kotlin indexer for SCIP ![](https://img.shields.io/badge/status-development-green?style=flat)
 
 | Documentation        | Link                                                                   |
 | -------------------- | ---------------------------------------------------------------------- |
-| Landing page         | https://sourcegraph.github.io/lsif-java                                |
-| Getting started      | https://sourcegraph.github.io/lsif-java/docs/getting-started.html      |
-| Manual configuration | https://sourcegraph.github.io/lsif-java/docs/manual-configuration.html |
-| Contributing         | https://sourcegraph.github.io/lsif-java/docs/contributing.html         |
-| Design               | https://sourcegraph.github.io/lsif-java/docs/design.html               |
+| Landing page         | https://sourcegraph.github.io/scip-java                                |
+| Getting started      | https://sourcegraph.github.io/scip-java/docs/getting-started.html      |
+| Manual configuration | https://sourcegraph.github.io/scip-java/docs/manual-configuration.html |
+| Contributing         | https://sourcegraph.github.io/scip-java/docs/contributing.html         |
+| Design               | https://sourcegraph.github.io/scip-java/docs/design.html               |
 

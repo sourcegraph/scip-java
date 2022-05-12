@@ -22,7 +22,7 @@ public class Example2 {
 
 
 ─────────────────────────────────────────────
-│ LSIF Graph for symbol 'example/Example1#' │
+│ SCIP Graph for symbol 'example/Example1#' │
 ─────────────────────────────────────────────
                                                              ╭──────────╮
                                                              │project(2)│

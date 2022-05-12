@@ -1,6 +1,5 @@
-
-# This is an end-to-end example of how to consume lsif-java from an external repository.
-workspace(name = "lsif_java_example")
+# This is an end-to-end example of how to consume scip-java from an external repository.
+workspace(name = "scip_java_example")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 ##############
@@ -17,10 +16,10 @@ http_archive(
 )
 
 ##############
-# lsif-java
+# scip-java
 ##############
 local_repository(
-    name = "lsif_java",
+    name = "scip_java",
     path = "../.."
 )
 # TODO: add commented out `http_archive` example once this workspace file is available on GitHub.
@@ -60,8 +59,8 @@ rules_jvm_external_setup()
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 maven_install(
     artifacts = [
-        "com.google.protobuf:protobuf-java:3.15.6", # Required dependency by lsif-java.
-        "com.google.protobuf:protobuf-java-util:3.15.6", # Required dependency by lsif-java.
+        "com.google.protobuf:protobuf-java:3.15.6", # Required dependency by scip-java.
+        "com.google.protobuf:protobuf-java-util:3.15.6", # Required dependency by scip-java.
         "com.google.guava:guava:31.0-jre", # Not required dependency, only used by tests.
     ],
     repositories = [

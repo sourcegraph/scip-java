@@ -129,7 +129,7 @@ public final class SemanticdbTaskListener implements TaskListener {
   }
 
   // Infers the `-sourceroot:` flag from the provided file.
-  // FIXME: add unit tests https://github.com/sourcegraph/lsif-java/issues/444
+  // FIXME: add unit tests https://github.com/sourcegraph/scip-java/issues/444
   private void inferBazelSourceroot(JavaFileObject file) {
     if (options.uriScheme != UriScheme.BAZEL || options.sourceroot != null) {
       return;
