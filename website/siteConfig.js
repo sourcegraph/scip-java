@@ -6,7 +6,7 @@ const baseUrl = "/scip-java/";
 
 const siteConfig = {
   title: "scip-java",
-  tagline: "Java indexer for the Language Server Index Format (SCIP)",
+  tagline: "Java indexer for the SCIP Code Intelligence Protocol",
   url: "https://sourcegraph.github.io/scip-java",
   baseUrl: baseUrl,
 
