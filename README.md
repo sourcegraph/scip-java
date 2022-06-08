@@ -7,4 +7,3 @@
 | Manual configuration | https://sourcegraph.github.io/scip-java/docs/manual-configuration.html |
 | Contributing         | https://sourcegraph.github.io/scip-java/docs/contributing.html         |
 | Design               | https://sourcegraph.github.io/scip-java/docs/design.html               |
-

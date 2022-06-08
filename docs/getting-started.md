@@ -241,7 +241,7 @@ free to subscribe to the tracking issues to receive updates on your build tool.
 | Gradle     | ✅   | ✅    | ✅     |                                                                                  |
 | sbt        | ✅   | ✅    | n/a    |                                                                                  |
 | Ant        | ❌   | ❌    | ❌     | [sourcegraph/scip-java#305](https://github.com/sourcegraph/scip-java/issues/305) |
-| Bazel      | ❌   | ❌    | ❌     | [sourcegraph/scip-java#88](https://github.com/sourcegraph/scip-java/issues/88)   |
+| Bazel      | ✅   | ✅    | ❌     |                                                                                  |
 | Buck       | ❌   | ❌    | ❌     | [sourcegraph/scip-java#99](https://github.com/sourcegraph/scip-java/issues/99)   |
 | Mill       | ❌   | ❌    | ❌     | [sourcegraph/scip-java#306](https://github.com/sourcegraph/scip-java/issues/306) |
 
@@ -299,3 +299,23 @@ projects, with the following caveats:
 | ------------- | --------- | ----------------------- |
 | sbt <v0.13.17 | ❌        | Upgrade to sbt v0.13.17 |
 
+### Bazel
+
+Bazel is supported by scip-java but it requires custom configuration to work
+correctly. Note that the `scip-java index` command does not automatically index
+Bazel builds.
+
+The Bazel integration for scip-java is specifically designed to be compatible
+with the Bazel build cache to enable incremental indexing. To achieve this,
+scip-java must be configured in `WORKSPACE` and `BUILD` files. The scip-java
+repository contains an example for how to configure everything.
+
+- [WORKSPACE](https://github.com/sourcegraph/scip-java/blob/main/examples/bazel-example/WORKSPACE):
+  adds the required dependencies to be able to run scip-java itself.
+- [BUILD](https://github.com/sourcegraph/scip-java/blob/main/examples/bazel-example/src/main/java/example/BUILD):
+  configured `java_library` and `java_binary` targets to be indexed with
+  scip-java.
+
+Don't hesitate to open an issue in the
+[scip-java repository](https://github.com/sourcegraph/scip-java) if you have any
+questions about using scip-java with Bazel builds.

@@ -20,6 +20,7 @@ abstract class BuildTool(val name: String, index: IndexCommand) {
 object BuildTool {
   def all(index: IndexCommand): List[BuildTool] =
     List(
+      new BazelBuildTool(index),
       new GradleBuildTool(index),
       new MavenBuildTool(index),
       new ScipBuildTool(index),
