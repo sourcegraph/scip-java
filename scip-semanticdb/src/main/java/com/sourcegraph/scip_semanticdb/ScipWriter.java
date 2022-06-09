@@ -6,7 +6,7 @@ import com.sourcegraph.lsif_protocol.LsifObject;
 import com.sourcegraph.lsif_protocol.LsifPosition;
 import com.sourcegraph.semanticdb_javac.Semanticdb;
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
-import lib.codeintel.scip.Scip;
+import com.sourcegraph.Scip;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;

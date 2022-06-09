@@ -6,6 +6,8 @@ import com.sourcegraph.scip_java.commands.IndexCommand
 
 class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
 
+  override def isHidden: Boolean = true
+
   override def usedInCurrentDirectory(): Boolean = {
     Files.isRegularFile(index.workingDirectory.resolve("WORKSPACE"))
   }

@@ -7,7 +7,7 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
-import lib.codeintel.scip.Scip;
+import com.sourcegraph.Scip;
 
 import java.io.IOException;
 import java.io.InputStream;
