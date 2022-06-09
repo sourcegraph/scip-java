@@ -13,6 +13,7 @@ syntax = "proto3";
 package lib.codeintel.scip;
 
 option go_package = "github.com/sourcegraph/sourcegraph/lib/codeintel/scip/";
+option java_package = "com.sourcegraph";
 
 // Index represents a complete SCIP index for a workspace this is rooted at a
 // single directory. An Index message payload can have a large memory footprint
