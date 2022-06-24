@@ -144,6 +144,17 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     val dependenciesPath = targetroot.resolve("dependencies.txt")
     val kotlinSemanticdbVersion = BuildInfo.semanticdbKotlincVersion
     Files.deleteIfExists(dependenciesPath)
+    val javaModuleOptions =
+      if (Properties.isJavaAtLeast(9)) {
+        // Include --add-exports flags for Java 9+
+        BuildInfo
+          .javacModuleOptions
+          .map(option => s""""$option"""")
+          .mkString(",")
+      } else {
+        // No --add-exports flags for Java 8
+        ""
+      }
     val script =
       s"""|allprojects {
           |  gradle.projectsEvaluated {
@@ -160,6 +171,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |      tasks.withType(JavaCompile) {
           |        options.fork = true
           |        options.incremental = false
+          |        options.forkOptions.jvmArgs.addAll([$javaModuleOptions])
           |        $executable
           |      }
           |    }
