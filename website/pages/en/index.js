@@ -111,7 +111,7 @@ const Features = (props) => {
       content:
         "Run the `scip-java` command-line tool at the root of your Gradle/Maven/sbt build to generate an SCIP index. No manual configuration needed.",
       image:
-        "https://user-images.githubusercontent.com/1408093/109820615-769c5580-7c35-11eb-9063-98e932c5d6c5.png",
+        "https://storage.googleapis.com/sourcegraph-assets/blog/scip-java-simple-install.png",
       imageAlign: "left",
     },
     {
