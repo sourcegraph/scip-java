@@ -39,7 +39,7 @@ const siteConfig = {
     secondaryColor: "#664100"
   },
 
-  customDocsPath: "website/target/docs",
+  customDocsPath: "./docs",
 
   stylesheets: [baseUrl + "css/custom.css"],
 
