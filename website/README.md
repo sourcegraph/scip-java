@@ -11,7 +11,6 @@ $ yarn install
 ## Start
 
 ```bash
-$ cd website/
 # In one terminal window, requires a Java installation
 $ ./sbt "docs/mdoc -w"
 # In a separate terminal window
