@@ -131,7 +131,7 @@ public class ScipSemanticdb {
               Scip.Relationship.newBuilder()
                   .setSymbol(typedSymbol(overriddenSymbol, overriddenSymbolPkg))
                   .setIsImplementation(true)
-                  .setIsReference(SemanticdbSymbols.isMethod(info.getSymbol())));
+                  .setIsReference(SemanticdbSymbols.isMethodOrField(info.getSymbol())));
         }
         if (info.hasSignature()) {
           String language =
@@ -284,7 +284,7 @@ public class ScipSemanticdb {
 
       // Overrides
       if (symbolInformation.getOverriddenSymbolsCount() > 0
-          && SemanticdbSymbols.isMethod(symbolInformation.getSymbol())
+          && SemanticdbSymbols.isMethodOrField(symbolInformation.getSymbol())
           && occ.getRole() == Role.DEFINITION) {
         List<Integer> overriddenReferenceResultIds =
             new ArrayList<>(symbolInformation.getOverriddenSymbolsCount());
