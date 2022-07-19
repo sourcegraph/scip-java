@@ -1,7 +1,6 @@
 package com.sourcegraph.semanticdb_javac;
 
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Utilities to construct SemanticDB symbols.
@@ -36,7 +35,7 @@ public final class SemanticdbSymbols {
   }
 
   public static boolean isMethodOrField(String symbol) {
-    return symbol.endsWith(".");
+    return symbol.endsWith("#");
   }
 
   /**

@@ -10,7 +10,6 @@ import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
 import com.sourcegraph.Scip;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.nio.file.*;
 import java.util.*;
@@ -131,7 +130,7 @@ public class ScipSemanticdb {
               Scip.Relationship.newBuilder()
                   .setSymbol(typedSymbol(overriddenSymbol, overriddenSymbolPkg))
                   .setIsImplementation(true)
-                  .setIsReference(SemanticdbSymbols.isMethodOrField(info.getSymbol())));
+                  .setIsReference(supportsReferenceRelationship(info)));
         }
         if (info.hasSignature()) {
           String language =
@@ -284,7 +283,7 @@ public class ScipSemanticdb {
 
       // Overrides
       if (symbolInformation.getOverriddenSymbolsCount() > 0
-          && SemanticdbSymbols.isMethodOrField(symbolInformation.getSymbol())
+          && supportsReferenceRelationship(symbolInformation)
           && occ.getRole() == Role.DEFINITION) {
         List<Integer> overriddenReferenceResultIds =
             new ArrayList<>(symbolInformation.getOverriddenSymbolsCount());
@@ -308,6 +307,17 @@ public class ScipSemanticdb {
     writer.flush();
     options.reporter.processedOneItem();
     return documentId;
+  }
+
+  private static boolean supportsReferenceRelationship(SymbolInformation info) {
+    switch (info.getKind()) {
+      case CLASS:
+      case OBJECT:
+      case PACKAGE_OBJECT:
+        return false;
+      default:
+        return true;
+    }
   }
 
   private Stream<ScipTextDocument> parseTextDocument(Path semanticdbPath) {
