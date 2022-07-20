@@ -48,7 +48,11 @@ final case class IndexSemanticdbCommand(
 ) extends Command {
   def sourceroot: Path = AbsolutePath.of(app.env.workingDirectory)
   def absoluteTargetroots: List[Path] =
-    targetroot.map(AbsolutePath.of(_, app.env.workingDirectory))
+    if (targetroot.isEmpty)
+      List(sourceroot)
+    else
+      targetroot.map(AbsolutePath.of(_, sourceroot))
+
   def run(): Int = {
     val reporter = new ConsoleScipSemanticdbReporter(app)
     val outputFilename = output.getFileName.toString
@@ -68,7 +72,7 @@ final case class IndexSemanticdbCommand(
         .toList
     val options =
       new ScipSemanticdbOptions(
-        targetroot.map(ts => AbsolutePath.of(ts, sourceroot)).asJava,
+        absoluteTargetroots.asJava,
         AbsolutePath.of(output, sourceroot),
         sourceroot,
         reporter,
