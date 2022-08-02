@@ -24,7 +24,8 @@ object BuildTool {
       new GradleBuildTool(index),
       new MavenBuildTool(index),
       new ScipBuildTool(index),
-      new SbtBuildTool(index)
+      new SbtBuildTool(index),
+      new MillBuildTool(index)
     )
   def allNames: String =
     all(IndexCommand()).filterNot(_.isHidden).map(_.name).mkString(", ")

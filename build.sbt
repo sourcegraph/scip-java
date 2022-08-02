@@ -22,6 +22,8 @@ lazy val V =
     def semanticdbKotlinc = "0.2.0"
     def testcontainers = "0.39.3"
     def requests = "0.6.5"
+    def minimalMillVersion = "0.10.3"
+    def millScipVersion = "0.2.2"
   }
 
 inThisBuild(
@@ -166,7 +168,9 @@ lazy val cli = project
         "scala213" -> V.scala213,
         "scala3" -> V.scala3,
         "bloopVersion" -> V.bloop,
-        "bspVersion" -> V.bsp
+        "bspVersion" -> V.bsp,
+        "minimalMillVersion" -> V.minimalMillVersion,
+        "millScipVersion" -> V.millScipVersion
       ),
     buildInfoPackage := "com.sourcegraph.scip_java",
     libraryDependencies ++=
