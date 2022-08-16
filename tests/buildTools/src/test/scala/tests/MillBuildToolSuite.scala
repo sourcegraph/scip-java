@@ -53,9 +53,15 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
           |""".stripMargin,
       expectedSemanticdbFiles = 2,
       expectedPackages =
-        """|maven:munit:munit:1.0.0-M6
+        """|maven:junit:junit:4.13.2
+           |maven:org.hamcrest:hamcrest-core:1.3
+           |maven:org.scala-lang:scala-library:2.13.8
+           |maven:org.scala-sbt:test-interface:1.0
+           |maven:org.scalameta:junit-interface:1.0.0-M6
+           |maven:org.scalameta:munit_2.13:1.0.0-M6
            |""".stripMargin,
-      initCommand = setupMill()
+      initCommand = setupMill(),
+      targetRoot = Some("out/io/kipp/mill/scip/Scip/generate.dest")
     )
   }
 }
