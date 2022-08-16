@@ -20,4 +20,5 @@ class ReflectiveCall {
   println(a.b)
 //^^^^^^^ reference scala/Predef.println(+1).
 //        ^ reference minimized/ReflectiveCall#a.
+//          ^ reference local1
 }
