@@ -41,8 +41,6 @@ class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
         index.workingDirectory,
         index.finalTargetroot(defaultTargetroot),
         tmp,
-        // TODO: infer Java version from `java -version` because it may not
-        // match the Java version that's used by the current process.
         GradleJavaToolchains.isJavaAtLeast(SystemJavaVersion.detect(), "11")
       )
       buildCommand ++=

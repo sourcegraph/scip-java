@@ -126,9 +126,8 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
   }
 
   private def initScript(toolchains: GradleJavaToolchains, tmp: Path): Path = {
-    val executableJavacPath = toolchains.executableJavacPath()
     val executable =
-      executableJavacPath match {
+      toolchains.executableJavacPath() match {
         case Some(path) =>
           s"options.forkOptions.executable = '$path'"
         case None =>
@@ -161,7 +160,6 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |      tasks.withType(JavaCompile) {
           |        options.fork = true
           |        options.incremental = false
-          |        System.out.println("JAVA VERSION " + System.getProperty("java.version"))
           |        $executable
           |      }
           |    }
