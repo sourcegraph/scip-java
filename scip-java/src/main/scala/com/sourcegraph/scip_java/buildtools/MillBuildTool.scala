@@ -39,7 +39,7 @@ class MillBuildTool(index: IndexCommand) extends BuildTool("mill", index) {
     val localMill = Files.isRegularFile(millFile)
     val command =
       if (localMill) {
-        "./mill"
+        millFile.toString()
       } else {
         "mill"
       }
