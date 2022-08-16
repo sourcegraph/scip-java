@@ -8,6 +8,7 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         # NOTE(olafurpg) Windows is not enabled because it times out due to reasons I don't understand.
         # os: [windows-latest, ubuntu-latest]
