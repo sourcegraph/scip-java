@@ -67,7 +67,7 @@ object JavaToolchainPlugin extends AutoPlugin {
     // The tools.jar file includes the bytecode for the Java compiler in the com.sun.source package.
     // The Java compiler is available by default in Java 9+, so we only need to add tools.jar to the
     // bootclasspath for Java 8.
-    if (home.toString.contains("1.8") && toolsJar.isFile) {
+    if (version == "8" && toolsJar.isFile) {
       List(s"-Xbootclasspath/p:$toolsJar")
     } else {
       List()
@@ -77,6 +77,7 @@ object JavaToolchainPlugin extends AutoPlugin {
   private def java8Bootclasspath(): String = {
     (getJavaHome("8") / "jre" / "lib" / "rt.jar").toString
   }
+
 
   private val javaHomeCache: util.Map[String, File] = Collections
     .synchronizedMap(new util.HashMap[String, File]())
@@ -92,10 +93,19 @@ object JavaToolchainPlugin extends AutoPlugin {
           .toList
           .flatMap(index => "--jvm-index" :: index :: Nil)
         val arguments =
-          List("java", "-jar", coursier.toString, "java-home", "--jvm", v) ++
+          List("java", "-jar", coursier.toString, "java-home", "--jvm", v, "--architecture", jvmArchitecture(v)) ++
             index
         new File(Process(arguments).!!.trim)
       }
     )
   }
+
+  private def jvmArchitecture(jvmVersion: String): String =
+    if (scala.util.Properties.isMac && sys.props("os.arch") == "aarch64") "amd64"
+    else defaultCoursierJVMArchitecture
+ def defaultCoursierJVMArchitecture: String =
+    sys.props("os.arch") match{
+      case "x86_64" => "amd64"
+      case x => x
+    }
 }

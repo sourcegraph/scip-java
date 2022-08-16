@@ -8,7 +8,7 @@ import scala.util.control.NoStackTrace
 
 lazy val V =
   new {
-    val protobuf = "3.15.6"
+    val protobuf = "3.21.4"
     val coursier = "2.0.8"
     val bloop = "1.4.7"
     val bsp = "2.0.0-M13"
@@ -37,6 +37,7 @@ inThisBuild(
     organization := "com.sourcegraph",
     homepage := Some(url("https://github.com/sourcegraph/scip-java")),
     dynverSeparator := "-",
+    PB.protocVersion := V.protobuf,
     licenses :=
       List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
     developers :=
@@ -243,9 +244,7 @@ lazy val cli = project
           "coursier",
           "java-home",
           "--jvm",
-          "temurin:17",
-          "--jvm-index",
-          "https://github.com/coursier/jvm-index/blob/master/index.json"
+          "17"
         )
 
         // Install `scip-java` binary.
@@ -332,9 +331,7 @@ lazy val minimized17 = project
   .in(file("tests/minimized/.j17"))
   .settings(
     minimizedSettings,
-    javaToolchainJvmIndex :=
-      Some("https://github.com/coursier/jvm-index/blob/master/index.json"),
-    javaToolchainVersion := "temurin:17",
+    javaToolchainVersion := "17",
     javacOptions ++= javacModuleOptions
   )
   .dependsOn(agent, plugin)

@@ -503,8 +503,8 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
           "java-home",
           "--jvm",
           config.jvm,
-          "--jvm-index",
-          "https://github.com/coursier/jvm-index/blob/master/index.json"
+          "--architecture",
+          jvmArchitecture
         )
         .call()
         .out
@@ -531,6 +531,15 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     else
       Failure(SubprocessException(result))
   }
+
+  private def jvmArchitecture: String =
+    if (scala.util.Properties.isMac && sys.props("os.arch") == "aarch64") "amd64"
+    else defaultCoursierJVMArchitecture
+ def defaultCoursierJVMArchitecture: String =
+    sys.props("os.arch") match{
+      case "x86_64" => "amd64"
+      case x => x
+    }
 
   private def clean(): Unit = {
     Files.walkFileTree(targetroot, new DeleteVisitor)
