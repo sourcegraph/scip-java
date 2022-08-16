@@ -10,7 +10,6 @@ lazy val V =
   new {
     val protobuf = "3.21.4"
     val coursier = "2.0.8"
-    val bloop = "1.4.7"
     val bsp = "2.0.0-M13"
     val moped = "0.1.10"
     def scala213 = "2.13.6"
@@ -61,8 +60,6 @@ inThisBuild(
 )
 
 name := "root"
-(Compile / bloopGenerate) := None
-(Test / bloopGenerate) := None
 (publish / skip) := true
 
 commands +=
@@ -168,7 +165,6 @@ lazy val cli = project
         "scala212" -> V.scala212,
         "scala213" -> V.scala213,
         "scala3" -> V.scala3,
-        "bloopVersion" -> V.bloop,
         "bspVersion" -> V.bsp,
         "minimalMillVersion" -> V.minimalMillVersion,
         "millScipVersion" -> V.millScipVersion
