@@ -5,6 +5,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
 
+import com.sourcegraph.scip_java.BuildInfo
 import moped.reporters.Reporter
 import os.CommandResult
 
@@ -22,7 +23,12 @@ object Embedded {
 
   private def javacErrorpath(tmp: Path) = tmp.resolve("errorpath.txt")
 
-  def customJavac(sourceroot: Path, targetroot: Path, tmp: Path): Path = {
+  def customJavac(
+      sourceroot: Path,
+      targetroot: Path,
+      tmp: Path,
+      javaAtLeast17: Boolean
+  ): Path = {
     val bin = tmp.resolve("bin")
     val javac = bin.resolve("javac")
     val java = bin.resolve("java")
@@ -38,6 +44,11 @@ object Embedded {
         |""".stripMargin.getBytes(StandardCharsets.UTF_8)
     )
     val newJavacopts = tmp.resolve("javac_newarguments")
+    val javacModuleOptions =
+      if (javaAtLeast17)
+        BuildInfo.javacModuleOptions.mkString(" ")
+      else
+        ""
     val injectSemanticdbArguments = List[String](
       "java",
       s"-Dsemanticdb.errorpath=$errorpath",
@@ -62,9 +73,9 @@ object Embedded {
          |done
          |$injectSemanticdbArguments
          |if [ $${#LAUNCHER_ARGS[@]} -eq 0 ]; then
-         |  javac "@$$NEW_JAVAC_OPTS"
+         |  javac $javacModuleOptions "@$$NEW_JAVAC_OPTS"
          |else
-         |  javac "@$$NEW_JAVAC_OPTS" "$${LAUNCHER_ARGS[@]}"
+         |  javac $javacModuleOptions "@$$NEW_JAVAC_OPTS" "$${LAUNCHER_ARGS[@]}"
          |fi
          |""".stripMargin
     Files.write(javac, script.getBytes(StandardCharsets.UTF_8))

@@ -27,7 +27,10 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
   List("latest" -> "implementation", "4.0" -> "compile").foreach {
     case (version, config) =>
       checkBuild(
-        s"basic-$version",
+        if (version == "latest")
+          "basic-latest"
+        else
+          s"basic-$version".tag(Java8Only),
         s"""|/build.gradle
             |apply plugin: 'java'
             |repositories {
@@ -55,7 +58,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
 
   List("3.3", "2.2.1").foreach { version =>
     checkBuild(
-      s"legacy-$version",
+      s"legacy-$version".tag(Java8Only),
       s"""|/build.gradle
           |apply plugin: 'java'
           |/src/main/java/Example.java
@@ -90,7 +93,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
   )
 
   checkBuild(
-    "toolchains-6.7",
+    "toolchains-6.7".tag(Java8Only),
     """|/build.gradle
        |apply plugin: 'java'
        |java {
@@ -114,7 +117,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
   )
 
   checkBuild(
-    "toolchains-6.8",
+    "toolchains-6.8".tag(Java8Only),
     """|/build.gradle
        |apply plugin: 'java'
        |java {
@@ -158,7 +161,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
   )
 
   checkBuild(
-    "playframework",
+    "playframework".tag(Java8Only),
     """|/build.gradle
        |plugins {
        |  id 'org.gradle.playframework' version '0.11'
@@ -209,7 +212,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
   )
 
   checkBuild(
-    "checkerframework",
+    "checkerframework".tag(Java8Only),
     """|/build.gradle
        |plugins {
        |    id 'java'
