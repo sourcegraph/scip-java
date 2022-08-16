@@ -5,6 +5,7 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 import scala.collection.mutable.ListBuffer
+import scala.util.Properties
 
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
@@ -39,7 +40,10 @@ class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
       val executable = Embedded.customJavac(
         index.workingDirectory,
         index.finalTargetroot(defaultTargetroot),
-        tmp
+        tmp,
+        // TODO: infer Java version from `java -version` because it may not
+        // match the Java version that's used by the current process.
+        Properties.isJavaAtLeast(11)
       )
       buildCommand ++=
         List(
