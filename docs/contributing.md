@@ -76,12 +76,14 @@ sbt/BSP/Bloop.
 
 It's best to run tests from the sbt shell, not from the IntelliJ UI.
 
-## Don't use VS Code/Vim/Sublime Text/Emacs
+## Importing the project with Metals
 
-If you want to use completions and precise code navigation, it's not recommended
-to use other editors than IntelliJ. IntelliJ is the only IDE that properly
-supports hybrid Java/Scala codebases at the moment, although that may change
-soon thanks to scip-java :)
+While the cross-language support won't be as rich as it is in IntelliJ,
+[Metals](https://scalameta.org/metals/) does offer rich language support for
+Scala and basic Java navigation support (thanks to scip-java!). When using
+Metals and your editor of choice it's recommended to use sbt as your build
+server. This isn't the default with Metals, so you'll want to use the `Metals:
+Switch build server` command and choose `sbt`.
 
 ## Tests are written in Scala
 
