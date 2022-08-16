@@ -5,8 +5,8 @@ import java.nio.file.StandardCopyOption
 
 import scala.jdk.CollectionConverters._
 
-import com.sourcegraph.scip_java.commands.IndexCommand
 import com.sourcegraph.scip_java.BuildInfo
+import com.sourcegraph.scip_java.commands.IndexCommand
 
 class MillBuildTool(index: IndexCommand) extends BuildTool("mill", index) {
 
