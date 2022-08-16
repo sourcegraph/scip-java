@@ -1,32 +1,61 @@
 package tests
 
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
+import java.nio.file.attribute.PosixFilePermission
+
+import scala.jdk.CollectionConverters._
+
 class MillBuildToolSuite extends BaseBuildToolSuite {
-  checkBuild(
-    s"minimal",
-    s"""|/.mill-version
-        |0.10.5
-        |/build.sc
-        |import mill._, scalalib._
-        |object minimal extends ScalaModule {
-        |  def scalaVersion = "2.13.8"
-        |  object test extends Tests with TestModule.Munit {
-        |    def ivyDeps = Agg(ivy"org.scalameta::munit:1.0.0-M6")
-        | }
-        |}
-        |/minimal/src/Main.scala
-        |package minimal
-        |object Main extends App
-        |/minimal/test/src/MainSuite.scala
-        |package minimal
-        |class MainSpec extends munit.FunSuite {
-        |  test("numbers") {
-        |    assertEquals(1, 1)
-        |  }
-        |}
-        |""".stripMargin,
-    expectedSemanticdbFiles = 2,
-    expectedPackages =
-      """|maven:munit:munit:1.0.0-M6
-         |""".stripMargin
-  )
+
+  def setupMill() = {
+    val mill = workingDirectory.resolve("mill")
+    val resource = getClass().getResource("/mill")
+    val in = Paths.get(resource.toURI)
+
+    Files.createDirectories(mill.getParent)
+    Files.copy(in, mill, StandardCopyOption.REPLACE_EXISTING)
+    Files.setPosixFilePermissions(
+      mill,
+      Set(
+        PosixFilePermission.OWNER_READ,
+        PosixFilePermission.OWNER_WRITE,
+        PosixFilePermission.OWNER_EXECUTE
+      ).asJava
+    )
+    List("./mill", "--version")
+  }
+
+  List("0.10.0").foreach { version =>
+    checkBuild(
+      s"minimal",
+      s"""|/.mill-version
+          |${version}
+          |/build.sc
+          |import mill._, scalalib._
+          |object minimal extends ScalaModule {
+          |  def scalaVersion = "2.13.8"
+          |  object test extends Tests with TestModule.Munit {
+          |    def ivyDeps = Agg(ivy"org.scalameta::munit:1.0.0-M6")
+          | }
+          |}
+          |/minimal/src/Main.scala
+          |package minimal
+          |object Main extends App
+          |/minimal/test/src/MainSuite.scala
+          |package minimal
+          |class MainSpec extends munit.FunSuite {
+          |  test("numbers") {
+          |    assertEquals(1, 1)
+          |  }
+          |}
+          |""".stripMargin,
+      expectedSemanticdbFiles = 2,
+      expectedPackages =
+        """|maven:munit:munit:1.0.0-M6
+           |""".stripMargin,
+      initCommand = setupMill()
+    )
+  }
 }
