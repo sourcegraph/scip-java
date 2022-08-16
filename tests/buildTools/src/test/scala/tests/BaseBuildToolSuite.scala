@@ -57,14 +57,16 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
       extraArguments: List[String] = Nil,
       expectedError: Option[String => Unit] = None,
       expectedPackages: String = "",
-      initCommand: => List[String] = Nil
+      initCommand: => List[String] = Nil,
+      targetRoot: Option[String] = None
   ): Unit = {
     test(options.withTags(options.tags ++ tags)) {
       if (initCommand.nonEmpty) {
         os.proc(Shellable(initCommand)).call(os.Path(workingDirectory))
       }
       FileLayout.fromString(original, root = workingDirectory)
-      val targetroot = workingDirectory.resolve("targetroot")
+      val targetroot = workingDirectory
+        .resolve(targetRoot.getOrElse("targetroot"))
       val arguments =
         List[String](
           "index",
