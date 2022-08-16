@@ -533,12 +533,16 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   }
 
   private def jvmArchitecture: String =
-    if (scala.util.Properties.isMac && sys.props("os.arch") == "aarch64") "amd64"
-    else defaultCoursierJVMArchitecture
- def defaultCoursierJVMArchitecture: String =
-    sys.props("os.arch") match{
-      case "x86_64" => "amd64"
-      case x => x
+    if (scala.util.Properties.isMac && sys.props("os.arch") == "aarch64")
+      "amd64"
+    else
+      defaultCoursierJVMArchitecture
+  def defaultCoursierJVMArchitecture: String =
+    sys.props("os.arch") match {
+      case "x86_64" =>
+        "amd64"
+      case x =>
+        x
     }
 
   private def clean(): Unit = {

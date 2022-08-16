@@ -78,7 +78,6 @@ object JavaToolchainPlugin extends AutoPlugin {
     (getJavaHome("8") / "jre" / "lib" / "rt.jar").toString
   }
 
-
   private val javaHomeCache: util.Map[String, File] = Collections
     .synchronizedMap(new util.HashMap[String, File]())
   private def getJavaHome(
@@ -93,19 +92,31 @@ object JavaToolchainPlugin extends AutoPlugin {
           .toList
           .flatMap(index => "--jvm-index" :: index :: Nil)
         val arguments =
-          List("java", "-jar", coursier.toString, "java-home", "--jvm", v, "--architecture", jvmArchitecture(v)) ++
-            index
+          List(
+            "java",
+            "-jar",
+            coursier.toString,
+            "java-home",
+            "--jvm",
+            v,
+            "--architecture",
+            jvmArchitecture(v)
+          ) ++ index
         new File(Process(arguments).!!.trim)
       }
     )
   }
 
   private def jvmArchitecture(jvmVersion: String): String =
-    if (scala.util.Properties.isMac && sys.props("os.arch") == "aarch64") "amd64"
-    else defaultCoursierJVMArchitecture
- def defaultCoursierJVMArchitecture: String =
-    sys.props("os.arch") match{
-      case "x86_64" => "amd64"
-      case x => x
+    if (scala.util.Properties.isMac && sys.props("os.arch") == "aarch64")
+      "amd64"
+    else
+      defaultCoursierJVMArchitecture
+  def defaultCoursierJVMArchitecture: String =
+    sys.props("os.arch") match {
+      case "x86_64" =>
+        "amd64"
+      case x =>
+        x
     }
 }

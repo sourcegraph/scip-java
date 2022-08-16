@@ -240,12 +240,7 @@ lazy val cli = project
         // Pre-download Java 8, 11 and 17.
         run("coursier", "java-home", "--jvm", "8")
         run("coursier", "java-home", "--jvm", "11")
-        run(
-          "coursier",
-          "java-home",
-          "--jvm",
-          "17"
-        )
+        run("coursier", "java-home", "--jvm", "17")
 
         // Install `scip-java` binary.
         add(script, "/usr/local/bin/scip-java")
