@@ -35,11 +35,13 @@ class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
         else {
           "mvn"
         }
+      val start = System.nanoTime()
       val buildCommand = ListBuffer.empty[String]
       val executable = Embedded.customJavac(
         index.workingDirectory,
         index.finalTargetroot(defaultTargetroot),
-        tmp
+        tmp,
+        GradleJavaToolchains.isJavaAtLeast(SystemJavaVersion.detect(), "11")
       )
       buildCommand ++=
         List(

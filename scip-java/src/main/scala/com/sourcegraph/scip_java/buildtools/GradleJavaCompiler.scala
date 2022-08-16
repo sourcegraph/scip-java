@@ -27,7 +27,12 @@ case class GradleJavaCompiler(languageVersion: String, javacPath: Path) {
       pluginPath: Path
   ): Path = {
     val home = tmp.resolve(s"1.$languageVersion")
-    val javac = Embedded.customJavac(index.workingDirectory, targetroot, tmp)
+    val javac = Embedded.customJavac(
+      index.workingDirectory,
+      targetroot,
+      tmp,
+      GradleJavaToolchains.isJavaAtLeast(languageVersion, "17")
+    )
     val agent = Embedded.agentJar(tmp)
     val debugPath = GradleJavaCompiler.debugPath(tmp)
     val javacopts = targetroot.resolve("javacopts.txt")

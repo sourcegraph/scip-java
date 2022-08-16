@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 
+import scala.annotation.tailrec
 import scala.jdk.CollectionConverters._
 
 import com.sourcegraph.scip_java.Embedded
@@ -14,6 +15,7 @@ case class GradleJavaToolchains(
     tool: GradleBuildTool,
     index: IndexCommand,
     gradleVersion: Option[String],
+    javaVersion: Option[String],
     isJavaEnabled: Boolean,
     isScalaEnabled: Boolean,
     isKotlinEnabled: Boolean,
@@ -24,9 +26,22 @@ case class GradleJavaToolchains(
 
   def isEmpty: Boolean = toolchains.isEmpty
 
+  def isJavaAtLeast(version: Int): Boolean = {
+    val actualVersion = javaVersion.getOrElse(sys.props("java.version"))
+    GradleJavaToolchains
+      .isJavaAtLeast(actualVersion, math.max(version, 0).toString())
+  }
+
   def executableJavacPath(): Option[Path] = {
     if (toolchains.isEmpty) {
-      Some(Embedded.customJavac(index.workingDirectory, tool.targetroot, tmp))
+      Some(
+        Embedded.customJavac(
+          index.workingDirectory,
+          tool.targetroot,
+          tmp,
+          isJavaAtLeast(17)
+        )
+      )
     } else {
       None
     }
@@ -62,6 +77,7 @@ object GradleJavaToolchains {
     val javaEnabledPath = tmp.resolve("java-enabled.txt")
     val scalaEnabledPath = tmp.resolve("scala-enabled.txt")
     val kotlinEnabledPath = tmp.resolve("kotlin-enabled.txt")
+    val javaVersionPath = tmp.resolve("java-version.txt")
     val kotlinMultiplatformEnabledPath = tmp
       .resolve("kotlin-multiplatform-enabled.txt")
     val gradleVersionPath = tmp.resolve("gradle-version.txt")
@@ -73,6 +89,12 @@ object GradleJavaToolchains {
           |    java.nio.file.Paths.get(
           |      java.net.URI.create('${gradleVersionPath.toUri}')),
           |    [gradle.gradleVersion],
+          |    java.nio.file.StandardOpenOption.TRUNCATE_EXISTING,
+          |    java.nio.file.StandardOpenOption.CREATE)
+          |  java.nio.file.Files.write(
+          |    java.nio.file.Paths.get(
+          |      java.net.URI.create('${javaVersionPath.toUri}')),
+          |    [System.getProperty("java.version")],
           |    java.nio.file.StandardOpenOption.TRUNCATE_EXISTING,
           |    java.nio.file.StandardOpenOption.CREATE)
           |} catch (Exception e) {
@@ -146,11 +168,19 @@ object GradleJavaToolchains {
         None
       }
 
+    val javaVersion =
+      if (Files.isRegularFile(javaVersionPath)) {
+        Some(new String(Files.readAllBytes(javaVersionPath)).trim)
+      } else {
+        None
+      }
+
     GradleJavaToolchains(
       toolchains,
       tool,
       index,
       gradleVersion = gradleVersion,
+      javaVersion = javaVersion,
       isJavaEnabled = Files.isRegularFile(javaEnabledPath),
       isScalaEnabled = Files.isRegularFile(scalaEnabledPath),
       isKotlinEnabled = Files.isRegularFile(kotlinEnabledPath),
@@ -159,5 +189,69 @@ object GradleJavaToolchains {
       gradleCommand = gradleCommand,
       tmp = tmp
     )
+  }
+
+  // Copy-pasted from scala.util.Properties.isJavaAtLeast but makes the actual
+  // version a parameterizeable instead of being hard-coded to
+  // `Properties.javaVersionSpec`.
+  def isJavaAtLeast(
+      actualVersion: String,
+      comparisonVersion: String
+  ): Boolean = {
+    def versionOf(s: String, depth: Int): (Int, String) =
+      s.indexOf('.') match {
+        case 0 =>
+          (-2, s.substring(1))
+        case 1 if depth == 0 && s.charAt(0) == '1' =>
+          val r0 = s.substring(2)
+          val (v, r) = versionOf(r0, 1)
+          val n =
+            if (v > 8 || r0.isEmpty)
+              -2
+            else
+              v // accept 1.8, not 1.9 or 1.
+          (n, r)
+        case -1 =>
+          val n =
+            if (!s.isEmpty)
+              s.toInt
+            else if (depth == 0)
+              -2
+            else
+              0
+          (n, "")
+        case i =>
+          val r = s.substring(i + 1)
+          val n =
+            if (depth < 2 && r.isEmpty)
+              -2
+            else
+              s.substring(0, i).toInt
+          (n, r)
+      }
+    @tailrec
+    def compareVersions(s: String, v: String, depth: Int): Int = {
+      if (depth >= 3)
+        0
+      else {
+        val (sn, srest) = versionOf(s, depth)
+        val (vn, vrest) = versionOf(v, depth)
+        if (vn < 0)
+          -2
+        else if (sn < vn)
+          -1
+        else if (sn > vn)
+          1
+        else
+          compareVersions(srest, vrest, depth + 1)
+      }
+    }
+
+    compareVersions(actualVersion, comparisonVersion, 0) match {
+      case -2 =>
+        throw new NumberFormatException(s"Not a version: $comparisonVersion")
+      case i =>
+        i >= 0
+    }
   }
 }
