@@ -22,7 +22,7 @@ lazy val V =
     def semanticdbKotlinc = "0.2.0"
     def testcontainers = "0.39.3"
     def requests = "0.6.5"
-    def minimalMillVersion = "0.10.3"
+    def minimalMillVersion = "0.10.0"
     def millScipVersion = "0.2.2"
   }
 

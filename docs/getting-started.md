@@ -306,7 +306,7 @@ projects, with the following caveats:
 
 | Integration   | Supported | Recommendation             |
 | ------------- | --------- | -------------------------- |
-| Mill <v0.10.3 | ❌        | Upgrade to Mill >= v0.10.3 |
+| Mill <v0.10.0 | ❌        | Upgrade to Mill >= v0.10.0 |
 
 
 ### Bazel
