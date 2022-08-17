@@ -8,7 +8,9 @@ import scala.util.control.NoStackTrace
 
 lazy val V =
   new {
-    val protobuf = "3.21.4"
+    val protobuf = "3.15.6"
+    val protoc =
+      "3.17.3" // the oldest protoc version with Apple M1 support, see https://github.com/scalapb/ScalaPB/issues/1024#issuecomment-860126568
     val coursier = "2.0.8"
     val bsp = "2.0.0-M13"
     val moped = "0.1.10"
@@ -38,7 +40,7 @@ inThisBuild(
     organization := "com.sourcegraph",
     homepage := Some(url("https://github.com/sourcegraph/scip-java")),
     dynverSeparator := "-",
-    PB.protocVersion := V.protobuf,
+    PB.protocVersion := V.protoc,
     licenses :=
       List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
     developers :=
