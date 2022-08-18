@@ -13,7 +13,7 @@ lazy val V =
       "3.17.3" // the oldest protoc version with Apple M1 support, see https://github.com/scalapb/ScalaPB/issues/1024#issuecomment-860126568
     val coursier = "2.0.8"
     val bsp = "2.0.0-M13"
-    val moped = "0.1.10"
+    val moped = "0.1.11"
     def scala213 = "2.13.6"
     def scala212 = "2.12.14"
     def scala211 = "2.11.12"
