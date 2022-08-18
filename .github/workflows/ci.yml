@@ -18,8 +18,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          cache: 'sbt'
+          distribution: "temurin"
+          cache: "sbt"
           java-version: ${{ matrix.java }}
       - run: sbt test
   bazel:
@@ -42,7 +42,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: "temurin"
           java-version: 17
-          cache: 'sbt'
-      - run: sbt checkAll
+          cache: "sbt"
+      - run: sbt checkAll cli/docker

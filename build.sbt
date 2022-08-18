@@ -235,7 +235,7 @@ lazy val cli = project
           "curl",
           "-fLo",
           "/usr/local/bin/coursier",
-          "https://git.io/coursier-cli"
+          "https://github.com/coursier/launchers/raw/master/coursier"
         )
         run("chmod", "+x", "/usr/local/bin/coursier")
 
