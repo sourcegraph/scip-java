@@ -186,23 +186,23 @@ DESCRIPTION
   Automatically generate an SCIP index in the current working directory.
 
 OPTIONS
-  --help: Boolean               Print this help message
-  --output: Path = "index.scip" The path where to generate the SCIP index.
-  --targetroot: Option[Path]    The directory where to generate SemanticDB
-                                files. Defaults to a build-specific path. For
-                                example, the default value for Gradle is
-                                'build/semanticdb-targetroot' and for Maven it's
-                                'target/semanticdb-targetroot'
-  --verbose: Boolean = false    Whether to enable the -verbose flag in the
-                                SemanticDB compiler plugin.
-  --text: Boolean = false       Whether to enable the -text:on flag in the
-                                SemanticDB compiler plugin.
-  --build-tool: Option[String]  Explicitly specify which build tool to use. By
-                                default, the build tool is automatically
-                                detected. Use this flag if the automatic build
-                                tool detection is not working correctly.
-  --cleanup: Boolean = true     Whether to remove generated temporary files on
-                                exit.
+  --help: Boolean                 Print this help message
+  --output: Path = "index.scip"   The path where to generate the SCIP index.
+  --targetroot: Option[Path]      The directory where to generate SemanticDB
+                                  files. Defaults to a build-specific path. For
+                                  example, the default value for Gradle is
+                                  'build/semanticdb-targetroot' and for Maven
+                                  it's 'target/semanticdb-targetroot'
+  --[no-]verbose: Boolean = false Whether to enable the -verbose flag in the
+                                  SemanticDB compiler plugin.
+  --[no-]text: Boolean = false    Whether to enable the -text:on flag in the
+                                  SemanticDB compiler plugin.
+  --build-tool: Option[String]    Explicitly specify which build tool to use. By
+                                  default, the build tool is automatically
+                                  detected. Use this flag if the automatic build
+                                  tool detection is not working correctly.
+  --[no-]cleanup: Boolean = true  Whether to remove generated temporary files on
+                                  exit.
 
 TRAILING ARGUMENTS
   Optional. The build command to use to compile all sources. Defaults to a
