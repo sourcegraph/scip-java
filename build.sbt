@@ -32,7 +32,7 @@ inThisBuild(
     scalaVersion := V.scala213,
     crossScalaVersions := List(V.scala213),
     scalafixDependencies +=
-      "com.github.liancheng" %% "organize-imports" % "0.5.0",
+      "com.github.liancheng" %% "organize-imports" % "0.6.0",
     scalafixCaching := true,
     scalacOptions ++= List("-Wunused:imports"),
     semanticdbEnabled := true,
