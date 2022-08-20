@@ -398,6 +398,7 @@ lazy val bench = project
   .in(file("tests/benchmarks"))
   .settings(
     moduleName := "scip-java-bench",
+    Jmh / bspEnabled := false,
     (run / fork) := true,
     (publish / skip) := true
   )
