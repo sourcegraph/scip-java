@@ -23,6 +23,8 @@ public class SignatureFormatter {
 
   private static final Type NOTHING_SYMBOL = typeRef("scala/Nothing#");
   private static final String FUNCTION_SYMBOL_PREFIX = "scala/Function";
+  // Special case scala/Function object to not confluce with Function1 for example
+  private static final String FUNCTION_OBJECT = "scala/Function.";
   private static final String TUPLE_SYMBOL_PREFIX = "scala/Tuple";
   private static final String ARRAY_SYMBOL = "scala/Array#";
   private static final String ENUM_SYMBOL = "java/lang/Enum#";
@@ -557,7 +559,9 @@ public class SignatureFormatter {
           b.append(formatType(typeRef.getTypeArguments(0)));
           b.append("[]");
         }
-      } else if (isScala && typeRef.getSymbol().startsWith(FUNCTION_SYMBOL_PREFIX)) {
+      } else if (isScala
+          && typeRef.getSymbol().startsWith(FUNCTION_SYMBOL_PREFIX)
+          && !typeRef.getSymbol().startsWith(FUNCTION_OBJECT)) {
         int n = typeRef.getTypeArgumentsCount() - 1;
         if (n == 0) {
           // Special-case for Function1[A, B]: don't wrap `A`  in parenthesis like this `(A) => B`
