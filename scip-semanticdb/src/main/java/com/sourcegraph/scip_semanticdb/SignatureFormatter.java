@@ -23,7 +23,7 @@ public class SignatureFormatter {
 
   private static final Type NOTHING_SYMBOL = typeRef("scala/Nothing#");
   private static final String FUNCTION_SYMBOL_PREFIX = "scala/Function";
-  // Special case scala/Function object to not confluce with Function1 for example
+  // Special case scala/Function object to not conflict with Function1 for example
   private static final String FUNCTION_OBJECT = "scala/Function.";
   private static final String TUPLE_SYMBOL_PREFIX = "scala/Tuple";
   private static final String ARRAY_SYMBOL = "scala/Array#";
@@ -561,6 +561,7 @@ public class SignatureFormatter {
         }
       } else if (isScala
           && typeRef.getSymbol().startsWith(FUNCTION_SYMBOL_PREFIX)
+          && typeRef.getTypeArgumentsCount() > 0
           && !typeRef.getSymbol().startsWith(FUNCTION_OBJECT)) {
         int n = typeRef.getTypeArgumentsCount() - 1;
         if (n == 0) {
