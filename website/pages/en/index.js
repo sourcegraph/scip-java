@@ -101,7 +101,7 @@ const Features = (props) => {
     {
       title: "Multiple build tools",
       content:
-        "The build tools Gradle, Maven and sbt are supported. We plan to add support for more build tools in the future.",
+        "The build tools Gradle, Maven, Mill, and sbt are supported. We plan to add support for more build tools in the future.",
       image:
         "https://user-images.githubusercontent.com/1408093/137899144-cfc6fc1b-a7c0-4fd7-ac4b-be516e459123.png",
       imageAlign: "right",
