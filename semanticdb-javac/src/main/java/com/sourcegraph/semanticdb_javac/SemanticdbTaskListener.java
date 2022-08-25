@@ -102,7 +102,7 @@ public final class SemanticdbTaskListener implements TaskListener {
 
   public static Path absolutePathFromUri(SemanticdbJavacOptions options, JavaFileObject file) {
     URI uri = file.toUri();
-    if (options.uriScheme == UriScheme.SBT
+    if ((options.uriScheme == UriScheme.SBT || options.uriScheme == UriScheme.ZINC)
         && uri.getScheme().equals("vf")
         && uri.toString().startsWith("vf://tmp/")) {
       String[] parts = uri.toString().split("/", 5);
