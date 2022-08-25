@@ -48,6 +48,7 @@ class MillBuildTool(index: IndexCommand) extends BuildTool("mill", index) {
     val millProcess = index.process(
       List(
         command,
+        "--no-server",
         "--import",
         s"ivy:io.chris-kipp::mill-scip::${BuildInfo.millScipVersion}",
         "io.kipp.mill.scip.Scip/generate",
