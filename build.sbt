@@ -24,7 +24,7 @@ lazy val V =
     def testcontainers = "0.39.3"
     def requests = "0.6.5"
     def minimalMillVersion = "0.10.0"
-    def millScipVersion = "0.2.3"
+    def millScipVersion = "0.3.0"
   }
 
 inThisBuild(

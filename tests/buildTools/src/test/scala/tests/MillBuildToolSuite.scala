@@ -9,7 +9,7 @@ import scala.jdk.CollectionConverters._
 
 class MillBuildToolSuite extends BaseBuildToolSuite {
 
-  def setupMill() = {
+  def setupMill(millVersion: String) = {
     val mill = workingDirectory.resolve("mill")
     val resource = getClass().getResource("/mill")
     val in = Paths.get(resource.toURI)
@@ -24,7 +24,7 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
         PosixFilePermission.OWNER_EXECUTE
       ).asJava
     )
-    List("./mill", "--version")
+    List("./mill", s"--mill-version", millVersion, "--version")
   }
 
   def scalaLibrary(scalaVersion: String) =
@@ -92,8 +92,30 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
             |maven:org.scalameta:junit-interface:1.0.0-M6
             |maven:org.scalameta:munit_${scalaBinaryVersion(scalaVersion)}:1.0.0-M6
             |""".stripMargin,
-      initCommand = setupMill(),
+      initCommand = setupMill(millVersion),
       targetRoot = Some("out/io/kipp/mill/scip/Scip/generate.dest")
     )
   }
+
+  checkBuild(
+    "java-module",
+    s"""|/.mill-version
+        |0.10.7
+        |/build.sc
+        |import mill._, scalalib._
+        |object minimal extends JavaModule
+        |/minimal/src/ScipOutputFormat.java
+        |package minimal;
+        |public enum ScipOutputFormat {
+        |  GRAPH_NDJSON,
+        |  GRAPH_PROTOBUF,
+        |  TYPED_PROTOBUF,
+        |  TYPED_NDJSON,
+        |  UNKNOWN;
+        |}
+        |""".stripMargin,
+    expectedSemanticdbFiles = 1,
+    initCommand = setupMill("0.10.7"),
+    targetRoot = Some("out/io/kipp/mill/scip/Scip/generate.dest")
+  )
 }

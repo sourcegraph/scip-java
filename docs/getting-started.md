@@ -243,7 +243,7 @@ free to subscribe to the tracking issues to receive updates on your build tool.
 | Ant        | ❌   | ❌    | ❌     | [sourcegraph/scip-java#305](https://github.com/sourcegraph/scip-java/issues/305) |
 | Bazel      | ✅   | ✅    | ❌     |                                                                                  |
 | Buck       | ❌   | ❌    | ❌     | [sourcegraph/scip-java#99](https://github.com/sourcegraph/scip-java/issues/99)   |
-| Mill       | ❌   | ✅    | ❌     | 
+| Mill       | ✅   | ✅    | ❌     | 
 
 **✅**: automatic indexing is fully supported. Please report a bug if the
 `scip-java index` command does not work on your codebase.
@@ -304,9 +304,10 @@ projects, with the following caveats:
 The `scip-java index` build should be able to automatically index most Mill 
 projects, with the following caveats:
 
-| Integration   | Supported | Recommendation             |
-| ------------- | --------- | -------------------------- |
-| Mill <v0.10.0 | ❌        | Upgrade to Mill >= v0.10.0 |
+| Integration   | Supported           | Recommendation                             |
+| ------------- | --------------------| -------------------------------------------|
+| Mill <v0.10.0 | ❌                  | Upgrade to Mill >= v0.10.0                 |
+| Mill <v0.10.6 | Only supports Scala | Upgrade to Mill >= v0.10.6 for Java support|
 
 
 ### Bazel
