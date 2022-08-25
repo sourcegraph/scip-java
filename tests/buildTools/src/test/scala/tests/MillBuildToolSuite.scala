@@ -118,4 +118,23 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
     initCommand = setupMill("0.10.7"),
     targetRoot = Some("out/io/kipp/mill/scip/Scip/generate.dest")
   )
+
+  checkBuild(
+    "lsif-output",
+    s"""|/.mill-version
+        |0.10.7
+        |/build.sc
+        |import mill._, scalalib._
+        |object minimal extends ScalaModule {
+        |  def scalaVersion = "3.1.3"
+        |}
+        |/minimal/src/Main.scala
+        |package minimal
+        |@main def hello = ()
+        |""".stripMargin,
+    expectedSemanticdbFiles = 1,
+    initCommand = setupMill("0.10.7"),
+    targetRoot = Some("out/io/kipp/mill/scip/Scip/generate.dest"),
+    extraArguments = List("--output", "dump.lsif")
+  )
 }

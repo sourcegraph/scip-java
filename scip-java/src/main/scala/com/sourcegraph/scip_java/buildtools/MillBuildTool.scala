@@ -35,6 +35,8 @@ class MillBuildTool(index: IndexCommand) extends BuildTool("mill", index) {
     1
   }
 
+  private val rawOutput = index.output.toString
+
   private def unconditionallyGenerateScip(): Int = {
     val localMill = Files.isRegularFile(millFile)
     val command =
@@ -48,7 +50,9 @@ class MillBuildTool(index: IndexCommand) extends BuildTool("mill", index) {
         command,
         "--import",
         s"ivy:io.chris-kipp::mill-scip::${BuildInfo.millScipVersion}",
-        "io.kipp.mill.scip.Scip/generate"
+        "io.kipp.mill.scip.Scip/generate",
+        "--output",
+        rawOutput
       )
     )
     val scipFile = index
@@ -60,10 +64,10 @@ class MillBuildTool(index: IndexCommand) extends BuildTool("mill", index) {
       .resolve("scip")
       .resolve("Scip")
       .resolve("generate.dest")
-      .resolve("index.scip")
+      .resolve(rawOutput)
 
     if (millProcess.exitCode == 0 && Files.isRegularFile(scipFile)) {
-      val output = index.workingDirectory.resolve("index.scip")
+      val output = index.workingDirectory.resolve(rawOutput)
       Files.copy(scipFile, output, StandardCopyOption.REPLACE_EXISTING)
       index.app.info(output.toString)
     }
