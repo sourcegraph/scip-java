@@ -30,7 +30,7 @@ class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
     TemporaryFiles.withDirectory(index) { tmp =>
       val mvnw = index.workingDirectory.resolve("mvnw")
       val mavenScript =
-        if (Files.isRegularFile(mvnw))
+        if (Files.isRegularFile(mvnw) && Files.isExecutable(mvnw))
           mvnw.toString
         else {
           "mvn"

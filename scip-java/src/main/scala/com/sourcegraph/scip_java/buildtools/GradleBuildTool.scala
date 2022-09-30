@@ -40,7 +40,9 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           "gradlew"
       )
     val gradleCommand: String =
-      if (Files.isRegularFile(gradleWrapper))
+      if (
+        Files.isRegularFile(gradleWrapper) && Files.isExecutable(gradleWrapper)
+      )
         gradleWrapper.toString
       else
         "gradle"
