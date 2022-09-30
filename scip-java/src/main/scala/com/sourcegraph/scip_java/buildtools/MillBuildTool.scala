@@ -38,7 +38,7 @@ class MillBuildTool(index: IndexCommand) extends BuildTool("mill", index) {
   private val rawOutput = index.output.toString
 
   private def unconditionallyGenerateScip(): Int = {
-    val localMill = Files.isRegularFile(millFile)
+    val localMill = Files.isExecutable(millFile)
     val command =
       if (localMill) {
         "./mill"
