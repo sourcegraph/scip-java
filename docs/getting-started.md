@@ -23,7 +23,7 @@ container.
 
 ```sh
 $ docker run -v $(pwd):/home/gradle sourcegraph/scip-java:latest scip-java index
-$ src scip upload # (optional) upload index to Sourcegraph
+$ src code-intel upload # (optional) upload index to Sourcegraph
 ```
 
 If everything went OK, a `index.scip` file should exist after the command has
@@ -99,7 +99,7 @@ CI machine.
 # macOS/Linux
 curl -fLo coursier https://git.io/coursier-cli \
   && chmod +x coursier \
-  && ./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java_2.13:@STABLE_VERSION@
+  && ./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java_2.13:@STABLE_VERSION@ --main com.sourcegraph.scip_java.ScipJava
 ./scip-java --help
 
 # Windows
