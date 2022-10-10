@@ -67,7 +67,7 @@ indexes after merging a pull request.</p>
 <p>Run the <code>scip-java index</code>command from the <code>sourcegraph/scip-java</code> Docker
 container.</p>
 <pre><code class="hljs css language-sh">$ docker run -v $(<span class="hljs-built_in">pwd</span>):/home/gradle sourcegraph/scip-java:latest scip-java index
-$ src scip upload <span class="hljs-comment"># (optional) upload index to Sourcegraph</span>
+$ src code-intel upload <span class="hljs-comment"># (optional) upload index to Sourcegraph</span>
 </code></pre>
 <p>If everything went OK, a <code>index.scip</code> file should exist after the command has
 finished indexing the project.</p>
@@ -128,7 +128,7 @@ CI machine.</p>
 <pre><code class="hljs css language-sh"><span class="hljs-comment"># macOS/Linux</span>
 curl -fLo coursier https://git.io/coursier-cli \
   &amp;&amp; chmod +x coursier \
-  &amp;&amp; ./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java_2.13:0.8.7
+  &amp;&amp; ./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java_2.13:0.8.7 --main com.sourcegraph.scip_java.ScipJava
 ./scip-java --<span class="hljs-built_in">help</span>
 
 <span class="hljs-comment"># Windows</span>
