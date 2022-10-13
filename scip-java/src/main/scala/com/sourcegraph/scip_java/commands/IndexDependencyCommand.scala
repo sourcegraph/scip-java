@@ -104,7 +104,6 @@ final case class IndexDependencyCommand(
     index
       .copy(
         buildTool = Some("scip"),
-        output = Paths.get("dump.lsif"),
         app = app.withEnv(app.env.withWorkingDirectory(indexTarget))
       )
       .run()
