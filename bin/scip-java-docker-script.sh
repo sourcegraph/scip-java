@@ -3,7 +3,7 @@
 # version. It assumes that `coursier` is available on the `$PATH` and that the
 # `scip-java` binary is already installed at `/app/scip-java/bin/scip-java`.
 set -eu
-JVM_VERSION="8"
+JVM_VERSION="${JVM_VERSION:-8}"
 FILE="$PWD/lsif-java.json"
 if test -f "$FILE"; then
 	FROM_CONFIG=$(jq -r '.jvm' "$FILE")
