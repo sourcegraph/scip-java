@@ -221,7 +221,7 @@ by [Metals](https://scalameta.org/metals), the Scala language server.
 
 The Kotlin support in scip-java is the least mature compared to the Java and
 Scala support. Don't hesitate to report issues at
-https://github.com/sourcegraph/scip-kotlin if you encounter issues using the
+https://github.com/sourcegraph/scip-java if you encounter issues using the
 Kotlin support.
 
 ## Supported build tools
