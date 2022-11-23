@@ -144,7 +144,10 @@ lazy val scip = project
   .settings(
     moduleName := "scip-semanticdb",
     javaToolchainVersion := "8",
-    javaOnlySettings
+    javaOnlySettings,
+    (Compile / PB.targets) :=
+      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
+    Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
   )
   .dependsOn(semanticdb, scipProto)
 
