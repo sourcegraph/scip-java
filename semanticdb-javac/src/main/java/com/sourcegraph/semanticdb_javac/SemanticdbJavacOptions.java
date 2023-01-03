@@ -55,7 +55,7 @@ public class SemanticdbJavacOptions {
         }
       } else if (arg.startsWith("-sourceroot:")) {
         result.sourceroot = Paths.get(arg.substring("-sourceroot:".length())).normalize();
-      } else if (arg.equals("-build-tool:sbt") || args.equals("-build-tool:mill")) {
+      } else if (arg.equals("-build-tool:sbt") || arg.equals("-build-tool:mill")) {
         result.uriScheme = UriScheme.ZINC;
       } else if (arg.equals("-build-tool:bazel")) {
         result.uriScheme = UriScheme.BAZEL;
