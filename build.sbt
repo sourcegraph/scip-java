@@ -235,7 +235,7 @@ lazy val cli = project
       val script = (ThisBuild / baseDirectory).value / "bin" /
         "scip-java-docker-script.sh"
       new Dockerfile {
-        from("gradle:7.2.0-jdk8")
+        from("gradle:7.6.0-jdk8")
 
         // Setup system dependencies.
         run("apt-get", "update")
