@@ -221,7 +221,7 @@ by [Metals](https://scalameta.org/metals), the Scala language server.
 
 The Kotlin support in scip-java is the least mature compared to the Java and
 Scala support. Don't hesitate to report issues at
-https://github.com/sourcegraph/scip-kotlin if you encounter issues using the
+https://github.com/sourcegraph/scip-java if you encounter issues using the
 Kotlin support.
 
 ## Supported build tools
@@ -243,7 +243,7 @@ free to subscribe to the tracking issues to receive updates on your build tool.
 | Ant        | ❌   | ❌    | ❌     | [sourcegraph/scip-java#305](https://github.com/sourcegraph/scip-java/issues/305) |
 | Bazel      | ✅   | ✅    | ❌     |                                                                                  |
 | Buck       | ❌   | ❌    | ❌     | [sourcegraph/scip-java#99](https://github.com/sourcegraph/scip-java/issues/99)   |
-| Mill       | ✅   | ✅    | ❌     | 
+| Mill       | ✅   | ✅    | ❌     |
 
 **✅**: automatic indexing is fully supported. Please report a bug if the
 `scip-java index` command does not work on your codebase.
@@ -301,7 +301,7 @@ projects, with the following caveats:
 
 ### Mill
 
-The `scip-java index` build should be able to automatically index most Mill 
+The `scip-java index` build should be able to automatically index most Mill
 projects, with the following caveats:
 
 | Integration   | Supported           | Recommendation                             |
