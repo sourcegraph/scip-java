@@ -22,7 +22,7 @@ final case class IndexDependencyCommand(
       Paths.get("maven"),
     index: IndexCommand = IndexCommand(),
     @Hidden
-    snapshotCommand: SnapshotCommand = SnapshotCommand(),
+    snapshotCommand: SnapshotLsifCommand = SnapshotLsifCommand(),
     dependency: String = "",
     provided: List[String] = Nil,
     snapshot: Boolean = false

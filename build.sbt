@@ -126,10 +126,10 @@ lazy val plugin = project
   )
   .dependsOn(semanticdb)
 
-lazy val scipProto = project
-  .in(file("scip-java-proto"))
+lazy val scip = project
+  .in(file("scip-semanticdb"))
   .settings(
-    moduleName := "scip-java-proto",
+    moduleName := "scip-semanticdb",
     javaToolchainVersion := "8",
     javaOnlySettings,
     libraryDependencies +=
@@ -138,18 +138,7 @@ lazy val scipProto = project
       Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
     Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
   )
-
-lazy val scip = project
-  .in(file("scip-semanticdb"))
-  .settings(
-    moduleName := "scip-semanticdb",
-    javaToolchainVersion := "8",
-    javaOnlySettings,
-    (Compile / PB.targets) :=
-      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
-    Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
-  )
-  .dependsOn(semanticdb, scipProto)
+  .dependsOn(semanticdb)
 
 lazy val cli = project
   .in(file("scip-java"))
