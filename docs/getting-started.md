@@ -14,11 +14,16 @@ tools that we're planning to support in the future.
 The most common way to use `scip-java` is to run it from CI to upload SCIP
 indexes after merging a pull request.
 
-The easiest way to install `scip-java` is to use the Docker launcher.
+The easiest way to install `scip-java` is to use the Docker image.
 
-### Docker container
+<!-- The #docker-container span below is included for backwards compatibility
+after we renamed the "Docker container" section into "Docker image". -->
 
-Use the `sourcegraph/scip-java` Docker container to run `scip-java`.
+<span id="docker-container"></span>
+
+### Docker image
+
+Use the `sourcegraph/scip-java` Docker image to run `scip-java`.
 
 ```sh
 $ docker run -v $(pwd):/home/gradle --env JVM_VERSION=8 sourcegraph/scip-java:latest scip-java index
@@ -28,18 +33,17 @@ $ src code-intel upload # (optional) upload index to Sourcegraph
 If everything went OK, a `index.scip` file should exist after the command has
 finished indexing the project.
 
-> The `sourcegraph/scip-java` Docker container is made available for convenience
-> at the cost of performance. The `sourcegraph/scip-java` container is a big
-> download because it includes includes pre-installed versions of Java 8, Java
-> 11, and Java 17. The `sourcegraph/scip-java` container has slow performance
-> because it needs to download all external dependencies of your codebase on
-> every invocation.
+> The `sourcegraph/scip-java` Docker image is made available for convenience at
+> the cost of performance. The `sourcegraph/scip-java` image is a big download
+> because it includes pre-installed versions of Java 8, Java 11, and Java 17.
+> The `sourcegraph/scip-java` image has slow performance because it needs to
+> download all external dependencies of your codebase on every invocation.
 >
-> For better performance, we recommend using your own Docker container together
-> with the [Java launcher](#java-launcher) option.
+> For better performance, we recommend using your own Docker image together with
+> the [Java launcher](#java-launcher) option.
 
-Java 8 is the default Java version in the `sourcegraph/scip-java` Docker
-container. Use the following commands to use a different JVM version:
+Java 8 is the default Java version in the `sourcegraph/scip-java` Docker image.
+Use the following commands to use a different JVM version:
 
 ```sh
 # Java 11
@@ -52,7 +56,7 @@ docker run -v $(pwd):/home/gradle --env JVM_VERSION=17 sourcegraph/scip-java:lat
 ### Java launcher
 
 Use the Java launcher to install `scip-java` on your local computer or any
-Docker container with a pre-installed Java version.
+Docker image with a pre-installed Java version.
 
 ```sh
 # macOS/Linux
