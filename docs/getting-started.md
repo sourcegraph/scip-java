@@ -18,51 +18,41 @@ The easiest way to install `scip-java` is to use the Docker launcher.
 
 ### Docker container
 
-Run the `scip-java index`command from the `sourcegraph/scip-java` Docker
-container.
+Use the `sourcegraph/scip-java` Docker container to run `scip-java`.
 
 ```sh
-$ docker run -v $(pwd):/home/gradle sourcegraph/scip-java:latest scip-java index
+$ docker run -v $(pwd):/home/gradle --env JVM_VERSION=8 sourcegraph/scip-java:latest scip-java index
 $ src code-intel upload # (optional) upload index to Sourcegraph
 ```
 
 If everything went OK, a `index.scip` file should exist after the command has
 finished indexing the project.
 
-> The Docker container is made available for convenience at the cost of
-> performance. Consider using the [Java launcher](#java-launcher) instead of the
-> Docker container for better performance. The Docker container is a large
-> download because it includes multiple pre-installed Java versions (Java 8,
-> Java 11 and Java 17). Also, external dependencies of your codebase get
-> re-downloaded on every `scip-java index` invocation.
+> The `sourcegraph/scip-java` Docker container is made available for convenience
+> at the cost of performance. The `sourcegraph/scip-java` container is a big
+> download because it includes includes pre-installed versions of Java 8, Java
+> 11, and Java 17. The `sourcegraph/scip-java` container has slow performance
+> because it needs to download all external dependencies of your codebase on
+> every invocation.
+>
+> For better performance, we recommend using your own Docker container together
+> with the [Java launcher](#java-launcher) option.
 
-Java 8 is the Java version in the Docker container. Use the following commands
-to change the default version:
+Java 8 is the default Java version in the `sourcegraph/scip-java` Docker
+container. Use the following commands to use a different JVM version:
 
-- Java 11: `eval "$(coursier java --jvm 11 --env)"`
-- Java 17:
-  `eval "$(coursier java --jvm temurin:17 --jvm-index https://github.com/coursier/jvm-index/blob/master/index.json --env)"`
+```sh
+# Java 11
+docker run -v $(pwd):/home/gradle --env JVM_VERSION=11 sourcegraph/scip-java:latest scip-java index
 
-Alternatively, create a `lsif-java.json` file at the root of your repository
-with the following values:
-
-```jsonc
-// lsif-java.json
-{
-  "jvm": "11" // or "17"
-}
+# Java 17
+docker run -v $(pwd):/home/gradle --env JVM_VERSION=17 sourcegraph/scip-java:latest scip-java index
 ```
 
 ### Java launcher
 
-Use the `scip-java` launcher if you can install software from the internet in
-your CI.
-
-Use [Coursier](https://get-coursier.io/docs/cli-installation.html) to launch the
-`scip-java` Java binary. The jar files for `scip-java` are downloaded the first
-time you run the `launch` command, and they are cached for subsequent runs.
-
-Copy-paste the steps below into your CI workflow to launch `scip-java`.
+Use the Java launcher to install `scip-java` on your local computer or any
+Docker container with a pre-installed Java version.
 
 ```sh
 # macOS/Linux
@@ -75,25 +65,25 @@ bitsadmin /transfer downloadCoursierCli https://git.io/coursier-cli "%cd%\coursi
 bitsadmin /transfer downloadCoursierBat https://git.io/coursier-bat "%cd%\coursier.bat"
 ./coursier launch com.sourcegraph:scip-java_2.13:@STABLE_VERSION@ -- --help
 
-# Homebrew
+# macOS Homebrew
 brew install coursier/formulas/coursier \
  && coursier launch com.sourcegraph:scip-java_2.13:@STABLE_VERSION@ -- --help
 ```
 
-Additional command-line flags can be passed after the `--` argument. For
-example, replace `--help` with `index` in the command above to run the `index`
-subcommand.
+The Java launcher uses
+[Coursier](https://get-coursier.io/docs/cli-installation.html) to download
+`scip-java` artifacts from Maven Central and build an executable `scip-java`
+binary. The jar files for `scip-java` are downloaded the first time you run the
+`launch` command, and they are cached for subsequent runs.
+
+Additional command-line flags can be passed to `scip-java` after the `--`
+argument. For example, replace `--help` with `index` in the command above to run
+the `index` subcommand.
 
 ### Java fat jar
 
-Use the `scip-java` fat jar if your CI does not allow downloading binaries from
-the internet.
-
-Use the [Coursier](https://get-coursier.io/docs/cli-installation) `bootstrap`
-command to generate a local fat jar binary. The fat jar binary includes all
-dependencies and does not require further access to the internet after
-installation. The local fat jar will somehow need to be made available to your
-CI machine.
+Use the fat jar option to build a standalone `scip-java` executable. Note that
+you still need a Java installation to run the `scip-java` binary.
 
 ```sh
 # macOS/Linux
@@ -108,6 +98,11 @@ bitsadmin /transfer downloadCoursierBat https://git.io/coursier-bat "%cd%\coursi
 ./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java_2.13:@STABLE_VERSION@
 ./scip-java --help
 ```
+
+The fat jar uses the [Coursier](https://get-coursier.io/docs/cli-installation)
+`bootstrap` command to generate a binary. The fat jar binary includes all
+dependencies and does not require further access to the internet after
+installation.
 
 ### Java library
 
@@ -146,7 +141,7 @@ libraryDependencies += "com.sourcegraph" %% "scip-java" % "@STABLE_VERSION@"
 > [Supported build tools](#supported-build-tools) for more details about other
 > build tools.
 
-Run the `scip-java index` command to generate an SCIP index for your codebase.
+Run the `scip-java index` command to generate a SCIP index for your codebase.
 This command should automatically infer the structure of your codebase and
 configure your build tool to generate SCIP.
 
@@ -155,6 +150,21 @@ configure your build tool to generate SCIP.
 $ scip-java index
 ...
 info: /path/to/index.scip
+```
+
+| Build tool | Default command                                                                 |
+| ---------- | ------------------------------------------------------------------------------- |
+| Gradle     | `clean compileTestJava compileTestScala compileTestKotlin compileTestKotlinJvm` |
+| Maven      | `--batch-mode clean verify -DskipTests`                                         |
+| sbt        | `sourcegraphEnable sourcegraphScip` (via sbt-sourcegraph plugin)                |
+| Mill       | `io.kipp.mill.scip.Scip/generate` (via mill-scip plugin)                        |
+
+Customize the build command by passing additional arguments after
+`scip-java index --`.
+
+```sh
+# Example: use `mvn package` instead of `mvn verify`
+scip-java index -- --batch-mode -DskipTests package
 ```
 
 The `index.scip` file contains the SCIP index and is ready to be used.
@@ -172,11 +182,11 @@ com.sourcegraph.scip_java.ScipJava.printHelp(Console.out)
 
 ## Supported programming languages
 
-| Programming language | Gradle | Maven | sbt | Tracking issue                                              |
-| -------------------- | ------ | ----- | --- | ----------------------------------------------------------- |
-| Java                 | ✅     | ✅    | ✅  |                                                             |
-| Scala                | ✅     | ❌    | ✅  | [#302](https://github.com/sourcegraph/scip-java/issues/302) |
-| Kotlin               | ✅     | ❌    | n/a | [#304](https://github.com/sourcegraph/scip-java/issues/304) |
+| Programming language | Gradle | Maven | sbt | Mill | Tracking issue                                              |
+| -------------------- | ------ | ----- | --- | ---- | ----------------------------------------------------------- |
+| Java                 | ✅     | ✅    | ✅  | ✅   |                                                             |
+| Scala                | ✅     | ❌    | ✅  | ✅   | [#302](https://github.com/sourcegraph/scip-java/issues/302) |
+| Kotlin               | ✅     | ❌    | n/a | n/a  |                                                             |
 
 ### Java
 
@@ -185,12 +195,12 @@ part of your regular compilation in the build tool. By using Java compiler APIs,
 `scip-java` is able to generate accurate indexing information for a broad range
 of Java versions.
 
-| Java version | Support                             | Tracking issue |
-| ------------ | ----------------------------------- | -------------- |
-| Java 7       | ❌                                  |                |
-| Java 8       | ✅                                  |                |
-| Java 11      | ✅                                  |                |
-| Java 17      | ✅, requires custom `--add-exports` |                |
+| Java version | Support                      | Tracking issue |
+| ------------ | ---------------------------- | -------------- |
+| Java 7       | ❌                           |                |
+| Java 8       | ✅                           |                |
+| Java 11      | ✅                           |                |
+| Java 17      | ✅, requires `--add-exports` |                |
 
 For Java 17 and newer versions, the following JVM options are required:
 
@@ -219,8 +229,8 @@ by [Metals](https://scalameta.org/metals), the Scala language server.
 
 ### Kotlin
 
-The Kotlin support in scip-java is the least mature compared to the Java and
-Scala support. Don't hesitate to report issues at
+The Kotlin support in scip-java is less mature compared to the Java and Scala
+support. Don't hesitate to report issues at
 https://github.com/sourcegraph/scip-java if you encounter issues using the
 Kotlin support.
 
@@ -304,11 +314,10 @@ projects, with the following caveats:
 The `scip-java index` build should be able to automatically index most Mill
 projects, with the following caveats:
 
-| Integration   | Supported           | Recommendation                             |
-| ------------- | --------------------| -------------------------------------------|
-| Mill <v0.10.0 | ❌                  | Upgrade to Mill >= v0.10.0                 |
-| Mill <v0.10.6 | Only supports Scala | Upgrade to Mill >= v0.10.6 for Java support|
-
+| Integration   | Supported           | Recommendation                              |
+| ------------- | ------------------- | ------------------------------------------- |
+| Mill <v0.10.0 | ❌                  | Upgrade to Mill >= v0.10.0                  |
+| Mill <v0.10.6 | Only supports Scala | Upgrade to Mill >= v0.10.6 for Java support |
 
 ### Bazel
 
