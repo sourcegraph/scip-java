@@ -62,44 +62,37 @@ tools that we're planning to support in the future.</p>
 <h2><a class="anchor" aria-hidden="true" id="install-scip-java"></a><a href="#install-scip-java" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install <code>scip-java</code></h2>
 <p>The most common way to use <code>scip-java</code> is to run it from CI to upload SCIP
 indexes after merging a pull request.</p>
-<p>The easiest way to install <code>scip-java</code> is to use the Docker launcher.</p>
-<h3><a class="anchor" aria-hidden="true" id="docker-container"></a><a href="#docker-container" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Docker container</h3>
-<p>Run the <code>scip-java index</code>command from the <code>sourcegraph/scip-java</code> Docker
-container.</p>
-<pre><code class="hljs css language-sh">$ docker run -v $(<span class="hljs-built_in">pwd</span>):/home/gradle sourcegraph/scip-java:latest scip-java index
+<p>The easiest way to install <code>scip-java</code> is to use the Docker image.</p>
+<!-- The #docker-container span below is included for backwards compatibility
+after we renamed the "Docker container" section into "Docker image". -->
+<p><span id="docker-container"></span></p>
+<h3><a class="anchor" aria-hidden="true" id="docker-image"></a><a href="#docker-image" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Docker image</h3>
+<p>Use the <code>sourcegraph/scip-java</code> Docker image to run <code>scip-java</code>.</p>
+<pre><code class="hljs css language-sh">$ docker run -v $(<span class="hljs-built_in">pwd</span>):/home/gradle --env JVM_VERSION=8 sourcegraph/scip-java:latest scip-java index
 $ src code-intel upload <span class="hljs-comment"># (optional) upload index to Sourcegraph</span>
 </code></pre>
 <p>If everything went OK, a <code>index.scip</code> file should exist after the command has
 finished indexing the project.</p>
 <blockquote>
-<p>The Docker container is made available for convenience at the cost of
-performance. Consider using the <a href="#java-launcher">Java launcher</a> instead of the
-Docker container for better performance. The Docker container is a large
-download because it includes multiple pre-installed Java versions (Java 8,
-Java 11 and Java 17). Also, external dependencies of your codebase get
-re-downloaded on every <code>scip-java index</code> invocation.</p>
+<p>The <code>sourcegraph/scip-java</code> Docker image is made available for convenience at
+the cost of performance. The <code>sourcegraph/scip-java</code> image is a big download
+because it includes pre-installed versions of Java 8, Java 11, and Java 17.
+The <code>sourcegraph/scip-java</code> image has slow performance because it needs to
+download all external dependencies of your codebase on every invocation.</p>
+<p>For better performance, we recommend using your own Docker image together with
+the <a href="#java-launcher">Java launcher</a> option.</p>
 </blockquote>
-<p>Java 8 is the Java version in the Docker container. Use the following commands
-to change the default version:</p>
-<ul>
-<li>Java 11: <code>eval &quot;$(coursier java --jvm 11 --env)&quot;</code></li>
-<li>Java 17:
-<code>eval &quot;$(coursier java --jvm temurin:17 --jvm-index https://github.com/coursier/jvm-index/blob/master/index.json --env)&quot;</code></li>
-</ul>
-<p>Alternatively, create a <code>lsif-java.json</code> file at the root of your repository
-with the following values:</p>
-<pre><code class="hljs css language-jsonc"><span class="hljs-comment">// lsif-java.json</span>
-{
-  <span class="hljs-attr">"jvm"</span>: <span class="hljs-string">"11"</span> <span class="hljs-comment">// or "17"</span>
-}
+<p>Java 8 is the default Java version in the <code>sourcegraph/scip-java</code> Docker image.
+Use the following commands to use a different JVM version:</p>
+<pre><code class="hljs css language-sh"><span class="hljs-comment"># Java 11</span>
+docker run -v $(<span class="hljs-built_in">pwd</span>):/home/gradle --env JVM_VERSION=11 sourcegraph/scip-java:latest scip-java index
+
+<span class="hljs-comment"># Java 17</span>
+docker run -v $(<span class="hljs-built_in">pwd</span>):/home/gradle --env JVM_VERSION=17 sourcegraph/scip-java:latest scip-java index
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="java-launcher"></a><a href="#java-launcher" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Java launcher</h3>
-<p>Use the <code>scip-java</code> launcher if you can install software from the internet in
-your CI.</p>
-<p>Use <a href="https://get-coursier.io/docs/cli-installation.html">Coursier</a> to launch the
-<code>scip-java</code> Java binary. The jar files for <code>scip-java</code> are downloaded the first
-time you run the <code>launch</code> command, and they are cached for subsequent runs.</p>
-<p>Copy-paste the steps below into your CI workflow to launch <code>scip-java</code>.</p>
+<p>Use the Java launcher to install <code>scip-java</code> on your local computer or any
+Docker image with a pre-installed Java version.</p>
 <pre><code class="hljs css language-sh"><span class="hljs-comment"># macOS/Linux</span>
 curl -fLo coursier https://git.io/coursier-cli \
   &amp;&amp; chmod +x coursier \
@@ -110,21 +103,21 @@ bitsadmin /transfer downloadCoursierCli https://git.io/coursier-cli <span class=
 bitsadmin /transfer downloadCoursierBat https://git.io/coursier-bat <span class="hljs-string">"%cd%\coursier.bat"</span>
 ./coursier launch com.sourcegraph:scip-java_2.13:0.8.10 -- --<span class="hljs-built_in">help</span>
 
-<span class="hljs-comment"># Homebrew</span>
+<span class="hljs-comment"># macOS Homebrew</span>
 brew install coursier/formulas/coursier \
  &amp;&amp; coursier launch com.sourcegraph:scip-java_2.13:0.8.10 -- --<span class="hljs-built_in">help</span>
 </code></pre>
-<p>Additional command-line flags can be passed after the <code>--</code> argument. For
-example, replace <code>--help</code> with <code>index</code> in the command above to run the <code>index</code>
-subcommand.</p>
+<p>The Java launcher uses
+<a href="https://get-coursier.io/docs/cli-installation.html">Coursier</a> to download
+<code>scip-java</code> artifacts from Maven Central and build an executable <code>scip-java</code>
+binary. The jar files for <code>scip-java</code> are downloaded the first time you run the
+<code>launch</code> command, and they are cached for subsequent runs.</p>
+<p>Additional command-line flags can be passed to <code>scip-java</code> after the <code>--</code>
+argument. For example, replace <code>--help</code> with <code>index</code> in the command above to run
+the <code>index</code> subcommand.</p>
 <h3><a class="anchor" aria-hidden="true" id="java-fat-jar"></a><a href="#java-fat-jar" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Java fat jar</h3>
-<p>Use the <code>scip-java</code> fat jar if your CI does not allow downloading binaries from
-the internet.</p>
-<p>Use the <a href="https://get-coursier.io/docs/cli-installation">Coursier</a> <code>bootstrap</code>
-command to generate a local fat jar binary. The fat jar binary includes all
-dependencies and does not require further access to the internet after
-installation. The local fat jar will somehow need to be made available to your
-CI machine.</p>
+<p>Use the fat jar option to build a standalone <code>scip-java</code> executable. Note that
+you still need a Java installation to run the <code>scip-java</code> binary.</p>
 <pre><code class="hljs css language-sh"><span class="hljs-comment"># macOS/Linux</span>
 curl -fLo coursier https://git.io/coursier-cli \
   &amp;&amp; chmod +x coursier \
@@ -137,6 +130,10 @@ bitsadmin /transfer downloadCoursierBat https://git.io/coursier-bat <span class=
 ./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java_2.13:0.8.10
 ./scip-java --<span class="hljs-built_in">help</span>
 </code></pre>
+<p>The fat jar uses the <a href="https://get-coursier.io/docs/cli-installation">Coursier</a>
+<code>bootstrap</code> command to generate a binary. The fat jar binary includes all
+dependencies and does not require further access to the internet after
+installation.</p>
 <h3><a class="anchor" aria-hidden="true" id="java-library"></a><a href="#java-library" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Java library</h3>
 <p>The <code>scip-java</code> command-line interface is published to Maven Central. You can
 run the command-line interface as a library by directly invoking the <code>main()</code>
@@ -162,13 +159,29 @@ libraryDependencies <span class="token operator">+=</span> <span class="token st
 <a href="#supported-build-tools">Supported build tools</a> for more details about other
 build tools.</p>
 </blockquote>
-<p>Run the <code>scip-java index</code> command to generate an SCIP index for your codebase.
+<p>Run the <code>scip-java index</code> command to generate a SCIP index for your codebase.
 This command should automatically infer the structure of your codebase and
 configure your build tool to generate SCIP.</p>
 <pre><code class="hljs css language-sh"><span class="hljs-comment"># At the root of a Gradle, Maven or sbt codebase.</span>
 $ scip-java index
 ...
 info: /path/to/index.scip
+</code></pre>
+<table>
+<thead>
+<tr><th>Build tool</th><th>Default command</th></tr>
+</thead>
+<tbody>
+<tr><td>Gradle</td><td><code>clean compileTestJava compileTestScala compileTestKotlin compileTestKotlinJvm</code></td></tr>
+<tr><td>Maven</td><td><code>--batch-mode clean verify -DskipTests</code></td></tr>
+<tr><td>sbt</td><td><code>sourcegraphEnable sourcegraphScip</code> (via sbt-sourcegraph plugin)</td></tr>
+<tr><td>Mill</td><td><code>io.kipp.mill.scip.Scip/generate</code> (via mill-scip plugin)</td></tr>
+</tbody>
+</table>
+<p>Customize the build command by passing additional arguments after
+<code>scip-java index --</code>.</p>
+<pre><code class="hljs css language-sh"><span class="hljs-comment"># Example: use `mvn package` instead of `mvn verify`</span>
+scip-java index -- --batch-mode -DskipTests package
 </code></pre>
 <p>The <code>index.scip</code> file contains the SCIP index and is ready to be used.</p>
 <blockquote>
@@ -217,12 +230,12 @@ EXAMPLES
 <h2><a class="anchor" aria-hidden="true" id="supported-programming-languages"></a><a href="#supported-programming-languages" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Supported programming languages</h2>
 <table>
 <thead>
-<tr><th>Programming language</th><th>Gradle</th><th>Maven</th><th>sbt</th><th>Tracking issue</th></tr>
+<tr><th>Programming language</th><th>Gradle</th><th>Maven</th><th>sbt</th><th>Mill</th><th>Tracking issue</th></tr>
 </thead>
 <tbody>
-<tr><td>Java</td><td>✅</td><td>✅</td><td>✅</td><td></td></tr>
-<tr><td>Scala</td><td>✅</td><td>❌</td><td>✅</td><td><a href="https://github.com/sourcegraph/scip-java/issues/302">#302</a></td></tr>
-<tr><td>Kotlin</td><td>✅</td><td>❌</td><td>n/a</td><td><a href="https://github.com/sourcegraph/scip-java/issues/304">#304</a></td></tr>
+<tr><td>Java</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td></td></tr>
+<tr><td>Scala</td><td>✅</td><td>❌</td><td>✅</td><td>✅</td><td><a href="https://github.com/sourcegraph/scip-java/issues/302">#302</a></td></tr>
+<tr><td>Kotlin</td><td>✅</td><td>❌</td><td>n/a</td><td>n/a</td><td></td></tr>
 </tbody>
 </table>
 <h3><a class="anchor" aria-hidden="true" id="java"></a><a href="#java" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Java</h3>
@@ -238,7 +251,7 @@ of Java versions.</p>
 <tr><td>Java 7</td><td>❌</td><td></td></tr>
 <tr><td>Java 8</td><td>✅</td><td></td></tr>
 <tr><td>Java 11</td><td>✅</td><td></td></tr>
-<tr><td>Java 17</td><td>✅, requires custom <code>--add-exports</code></td><td></td></tr>
+<tr><td>Java 17</td><td>✅, requires <code>--add-exports</code></td><td></td></tr>
 </tbody>
 </table>
 <p>For Java 17 and newer versions, the following JVM options are required:</p>
@@ -267,8 +280,8 @@ by <a href="https://scalameta.org/metals">Metals</a>, the Scala language server.
 <p>Scala.js and Scala Native have equal support as Scala on the JVM.</p>
 </blockquote>
 <h3><a class="anchor" aria-hidden="true" id="kotlin"></a><a href="#kotlin" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Kotlin</h3>
-<p>The Kotlin support in scip-java is the least mature compared to the Java and
-Scala support. Don't hesitate to report issues at
+<p>The Kotlin support in scip-java is less mature compared to the Java and Scala
+support. Don't hesitate to report issues at
 <a href="https://github.com/sourcegraph/scip-java">https://github.com/sourcegraph/scip-java</a> if you encounter issues using the
 Kotlin support.</p>
 <h2><a class="anchor" aria-hidden="true" id="supported-build-tools"></a><a href="#supported-build-tools" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Supported build tools</h2>
@@ -377,4 +390,4 @@ scip-java.</li>
 <p>Don't hesitate to open an issue in the
 <a href="https://github.com/sourcegraph/scip-java">scip-java repository</a> if you have any
 questions about using scip-java with Bazel builds.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/scip-java/docs/manual-configuration.html"><span>Manual configuration</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install-scip-java">Install <code>scip-java</code></a><ul class="toc-headings"><li><a href="#docker-container">Docker container</a></li><li><a href="#java-launcher">Java launcher</a></li><li><a href="#java-fat-jar">Java fat jar</a></li><li><a href="#java-library">Java library</a></li></ul></li><li><a href="#run-scip-java-index">Run <code>scip-java index</code></a></li><li><a href="#supported-programming-languages">Supported programming languages</a><ul class="toc-headings"><li><a href="#java">Java</a></li><li><a href="#scala">Scala</a></li><li><a href="#kotlin">Kotlin</a></li></ul></li><li><a href="#supported-build-tools">Supported build tools</a><ul class="toc-headings"><li><a href="#automatic-configuration">Automatic configuration</a></li><li><a href="#manual-configuration">Manual configuration</a></li><li><a href="#gradle">Gradle</a></li><li><a href="#maven">Maven</a></li><li><a href="#sbt">sbt</a></li><li><a href="#mill">Mill</a></li><li><a href="#bazel">Bazel</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#664100"><section class="sitemap"><a href="/scip-java/" class="nav-home"><img src="/scip-java/img/scip-java.png" alt="scip-java" width="66" height="58"/></a><div><h5>Docs</h5><a href="/scip-java/docs/installation.html">Get started</a></div><div><h5>Community</h5><a href="https://discord.gg/hJbyNrRJWr" target="_blank">Chat on Discord</a></div><div><h5>More</h5><a href="https://github.com/sourcegraph/scip-java" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2023 scip-java developers</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/scip-java/docs/manual-configuration.html"><span>Manual configuration</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install-scip-java">Install <code>scip-java</code></a><ul class="toc-headings"><li><a href="#docker-image">Docker image</a></li><li><a href="#java-launcher">Java launcher</a></li><li><a href="#java-fat-jar">Java fat jar</a></li><li><a href="#java-library">Java library</a></li></ul></li><li><a href="#run-scip-java-index">Run <code>scip-java index</code></a></li><li><a href="#supported-programming-languages">Supported programming languages</a><ul class="toc-headings"><li><a href="#java">Java</a></li><li><a href="#scala">Scala</a></li><li><a href="#kotlin">Kotlin</a></li></ul></li><li><a href="#supported-build-tools">Supported build tools</a><ul class="toc-headings"><li><a href="#automatic-configuration">Automatic configuration</a></li><li><a href="#manual-configuration">Manual configuration</a></li><li><a href="#gradle">Gradle</a></li><li><a href="#maven">Maven</a></li><li><a href="#sbt">sbt</a></li><li><a href="#mill">Mill</a></li><li><a href="#bazel">Bazel</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#664100"><section class="sitemap"><a href="/scip-java/" class="nav-home"><img src="/scip-java/img/scip-java.png" alt="scip-java" width="66" height="58"/></a><div><h5>Docs</h5><a href="/scip-java/docs/installation.html">Get started</a></div><div><h5>Community</h5><a href="https://discord.gg/hJbyNrRJWr" target="_blank">Chat on Discord</a></div><div><h5>More</h5><a href="https://github.com/sourcegraph/scip-java" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2023 scip-java developers</section></footer></div></body></html>
