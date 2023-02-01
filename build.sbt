@@ -255,6 +255,17 @@ lazy val cli = project
         run("coursier", "java-home", "--jvm", "11")
         run("coursier", "java-home", "--jvm", "17")
 
+        // Install `sbt`
+        run(
+          "curl",
+          "-fLo",
+          "sbt.zip",
+          "https://github.com/sbt/sbt/releases/download/v1.8.2/sbt-1.8.2.zip"
+        )
+        run("unzip", "sbt.zip")
+        run("rm", "sbt.zip")
+        run("ln", "-sfv", "/home/gradle/sbt/bin/sbt", "/usr/local/bin/sbt")
+
         // Install `scip-java` binary.
         add(script, "/usr/local/bin/scip-java")
         add(binaryDistribution, "/app/scip-java")
