@@ -232,42 +232,48 @@ lazy val cli = project
       ),
     docker / dockerfile := {
       val binaryDistribution = pack.value
-      val script = (ThisBuild / baseDirectory).value / "bin" /
+      val scipJavaWrapper = (ThisBuild / baseDirectory).value / "bin" /
         "scip-java-docker-script.sh"
+      val dockerSetup = (ThisBuild / baseDirectory).value / "bin" /
+        "docker-setup.sh"
       new Dockerfile {
-        from("gradle:7.2.0-jdk8")
+        from("ubuntu:latest")
 
         // Setup system dependencies.
         run("apt-get", "update")
-        run("apt-get", "install", "--yes", "maven", "jq")
-
-        // Install Coursier.
         run(
+          "apt-get",
+          "install",
+          "--yes",
+          "jq",
+          "wget",
           "curl",
-          "-fLo",
-          "/usr/local/bin/coursier",
-          "https://github.com/coursier/launchers/raw/master/coursier"
+          "zip",
+          "unzip",
+          "git",
+          // C++ and Python dependencies that may be needed by some random JVM
+          // builds.
+          "python3",
+          "python3-pip",
+          "autoconf",
+          "automake",
+          "libtool",
+          "build-essential",
+          "libtool",
+          "make",
+          "g++"
         )
-        run("chmod", "+x", "/usr/local/bin/coursier")
 
-        // Pre-download Java 8, 11 and 17.
-        run("coursier", "java-home", "--jvm", "8")
-        run("coursier", "java-home", "--jvm", "11")
-        run("coursier", "java-home", "--jvm", "17")
+        // Install SDKMAN
+        add(dockerSetup, "/docker-setup.sh")
+        run("bash", "/docker-setup.sh")
 
-        // Install `sbt`
-        run(
-          "curl",
-          "-fLo",
-          "sbt.zip",
-          "https://github.com/sbt/sbt/releases/download/v1.8.2/sbt-1.8.2.zip"
-        )
-        run("unzip", "sbt.zip")
-        run("rm", "sbt.zip")
-        run("ln", "-sfv", "/home/gradle/sbt/bin/sbt", "/usr/local/bin/sbt")
+        env("PATH", "/opt/maven/maven-3.8.7/bin:${PATH}")
+        env("PATH", "/opt/gradle/gradle-7.6/bin:${PATH}")
+        env("PATH", "/root/.local/share/coursier/bin:${PATH}")
 
         // Install `scip-java` binary.
-        add(script, "/usr/local/bin/scip-java")
+        add(scipJavaWrapper, "/usr/local/bin/scip-java")
         add(binaryDistribution, "/app/scip-java")
       }
     }
