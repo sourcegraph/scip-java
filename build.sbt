@@ -237,7 +237,7 @@ lazy val cli = project
       val dockerSetup = (ThisBuild / baseDirectory).value / "bin" /
         "docker-setup.sh"
       new Dockerfile {
-        from("ubuntu:latest")
+        from("gradle:7.2.0-jdk17")
 
         // Setup system dependencies.
         run("apt-get", "update")
@@ -268,8 +268,7 @@ lazy val cli = project
         add(dockerSetup, "/docker-setup.sh")
         run("bash", "/docker-setup.sh")
 
-        env("PATH", "/opt/maven/maven-3.8.7/bin:${PATH}")
-        env("PATH", "/opt/gradle/gradle-7.6/bin:${PATH}")
+        env("PATH", "/opt/maven/bin:${PATH}")
         env("PATH", "/root/.local/share/coursier/bin:${PATH}")
 
         // Install `scip-java` binary.
