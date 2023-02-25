@@ -1,9 +1,11 @@
 package com.sourcegraph.scip_java.buildtools
 
 import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.StandardCopyOption
 
 import scala.jdk.CollectionConverters._
+import scala.util.Properties
 
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.commands.IndexCommand
@@ -38,14 +40,25 @@ class MillBuildTool(index: IndexCommand) extends BuildTool("mill", index) {
   private val rawOutput = index.output.toString
 
   private def unconditionallyGenerateScip(): Int = {
+    val millWrapper: Path = index
+      .workingDirectory
+      .resolve(
+        if (Properties.isWin)
+          "millw.bat"
+        else
+          "millw"
+      )
     val localMill =
       Files.isRegularFile(millFile) && Files.isExecutable(millFile)
-    val command =
-      if (localMill) {
+    val command: String =
+      if (Files.isRegularFile(millWrapper) && Files.isExecutable(millWrapper))
+        millWrapper.toString
+      else if (localMill) {
         "./mill"
       } else {
         "mill"
       }
+
     val millProcess = index.process(
       List(
         command,
