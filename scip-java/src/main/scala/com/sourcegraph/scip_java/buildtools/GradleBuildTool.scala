@@ -216,40 +216,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |      }
           |    }
           |  }
-          |  task $scipJavaDependencies {
-          |    def depsOut = java.nio.file.Paths.get(
-          |      java.net.URI.create('${dependenciesPath.toUri}'))
-          |    doLast {
-          |      java.nio.file.Files.createDirectories(depsOut.getParent())
-          |      tasks.withType(JavaCompile) {
-          |        try {
-          |          configurations.each { config ->
-          |              def artifactType = org.gradle.api.attributes.Attribute.of("artifactType", String.class)
-          |              def attributeType = "jar"
-          |              if (config.canBeResolved) {
-          |                def artifacts = config.incoming.artifactView { view ->
-          |                  view.lenient = true
-          |                  view.attributes { container ->
-          |                    container.attribute(artifactType, attributeType)
-          |                  }
-          |                }.artifacts
-          |                def lines = artifacts.collect {
-          |                    def id = it.id.componentIdentifier
-          |                    return "$$id.group\t$$id.module\t$$id.version\t$$it.file"
-          |                }
-          |                java.nio.file.Files.write(
-          |                    depsOut,
-          |                    lines.unique(false),
-          |                    java.nio.file.StandardOpenOption.APPEND,
-          |                    java.nio.file.StandardOpenOption.CREATE)
-          |              }
-          |          }
-          |        } catch (Exception e) {
-          |          // Ignore errors.
-          |        }
-          |      }
-          |    }
-          |  }
+          |  task $scipJavaDependencies(type: WriteDependencies)
           |}
           |def scipJavaSemanticdbScalacVersions(scalaVersion) {
           |  ${semanticdbScalacGroovySyntax()}[scalaVersion]
@@ -272,6 +239,35 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |    }
           |  }
           |  return null
+          |}
+          |
+          |class WriteDependencies extends DefaultTask {
+          |    @TaskAction
+          |    void printResolvedDependencies() {
+          |        def depsOut = java.nio.file.Paths.get(
+          |            java.net.URI.create('${dependenciesPath.toUri}'))
+          |        def configurations = project.configurations
+          |        configurations.each { configuration ->
+          |            if (!configuration.canBeResolved || java.lang.reflect.Modifier.isAbstract(configuration.getClass().getModifiers())) {
+          |                return
+          |            }
+          |	           def resolvedConfiguration
+          |            try {
+          |                resolvedConfiguration = configuration.resolvedConfiguration
+          |            } catch (Exception e) {
+          |                println "Skipping configuration '$$configuration.name' due to resolution failure: $$e.message"
+          |                return
+          |            }
+          |            def lines = resolvedConfiguration.resolvedArtifacts.collect { artifact ->
+          |                return "$$artifact.moduleVersion.id.group\t$$artifact.moduleVersion.id.name\t$$artifact.moduleVersion.id.version\t$$artifact.file.absolutePath"
+          |            }
+          |            java.nio.file.Files.write(
+          |                depsOut,
+          |                lines.unique(false),
+          |                java.nio.file.StandardOpenOption.APPEND,
+          |                java.nio.file.StandardOpenOption.CREATE)
+          |        }
+          |    }
           |}
           |""".stripMargin
     Files.write(
