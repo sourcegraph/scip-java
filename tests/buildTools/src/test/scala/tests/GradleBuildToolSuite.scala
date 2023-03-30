@@ -80,8 +80,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |apply plugin: 'java'
        |java {
        |  toolchain {
-       |    languageVersion = JavaLanguageVersion.of(8)
-       |  }
+       |    languageVersion = JavaLanguageVersion.of(8) |  }
        |}
        |repositories { mavenCentral() }
        |dependencies { implementation "junit:junit:4.13.1" }
@@ -295,6 +294,51 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |""".stripMargin,
     4,
     initCommand = gradleVersion()
+  )
+
+  checkBuild(
+    "implementation-deps".only,
+    """|/settings.gradle
+       |rootProject.name = 'marklogic-examples'
+       |include('app')
+       |/app/build.gradle
+       |plugins {
+       |    id 'java-library'
+       |}
+       |repositories {
+       |    mavenCentral()
+       |}
+       |dependencies {
+       |    implementation 'com.marklogic:marklogic-client-api:6.1.0'
+       |}
+       |/app/src/main/java/foo/Methods.java
+       |package foo;
+       |import com.marklogic.client.admin.MethodType;
+       |public class Methods {
+       |  MethodType foo;
+       |}
+       |""".stripMargin,
+    expectedSemanticdbFiles = 1,
+    expectedPackages =
+      """|maven:com.fasterxml.jackson.core:jackson-annotations:2.14.1
+         |maven:com.fasterxml.jackson.core:jackson-core:2.14.1
+         |maven:com.fasterxml.jackson.core:jackson-databind:2.14.1
+         |maven:com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.14.1
+         |maven:com.marklogic:marklogic-client-api:6.1.0
+         |maven:com.squareup.okhttp3:logging-interceptor:4.10.0
+         |maven:com.squareup.okhttp3:okhttp:4.10.0
+         |maven:com.squareup.okio:okio-jvm:3.0.0
+         |maven:com.sun.mail:javax.mail:1.6.2
+         |maven:io.github.rburgst:okhttp-digest:2.7
+         |maven:javax.activation:activation:1.1
+         |maven:javax.ws.rs:javax.ws.rs-api:2.1.1
+         |maven:org.jetbrains.kotlin:kotlin-stdlib-common:1.6.20
+         |maven:org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10
+         |maven:org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10
+         |maven:org.jetbrains.kotlin:kotlin-stdlib:1.6.20
+         |maven:org.jetbrains:annotations:13.0
+         |maven:org.slf4j:slf4j-api:1.7.36
+         |""".stripMargin
   )
 
   List("8", "11").foreach { version =>

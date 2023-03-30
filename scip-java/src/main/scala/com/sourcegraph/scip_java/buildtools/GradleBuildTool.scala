@@ -246,6 +246,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |    void printResolvedDependencies() {
           |        def depsOut = java.nio.file.Paths.get(
           |            java.net.URI.create('${dependenciesPath.toUri}'))
+          |        java.nio.file.Files.createDirectories(depsOut.getParent())
           |        def configurations = project.configurations
           |        configurations.each { configuration ->
           |            if (!configuration.canBeResolved || java.lang.reflect.Modifier.isAbstract(configuration.getClass().getModifiers())) {
