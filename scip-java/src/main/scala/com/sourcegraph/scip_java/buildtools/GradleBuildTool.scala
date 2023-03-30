@@ -252,21 +252,20 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |            if (!configuration.canBeResolved || java.lang.reflect.Modifier.isAbstract(configuration.getClass().getModifiers())) {
           |                return
           |            }
-          |	           def resolvedConfiguration
           |            try {
-          |                resolvedConfiguration = configuration.resolvedConfiguration
+          |                def resolvedConfiguration = configuration.resolvedConfiguration
+          |                def lines = resolvedConfiguration.resolvedArtifacts.collect { artifact ->
+          |                    return "$$artifact.moduleVersion.id.group\t$$artifact.moduleVersion.id.name\t$$artifact.moduleVersion.id.version\t$$artifact.file.absolutePath"
+          |                }
+          |                java.nio.file.Files.write(
+          |                    depsOut,
+          |                    lines.unique(false),
+          |                    java.nio.file.StandardOpenOption.APPEND,
+          |                    java.nio.file.StandardOpenOption.CREATE)
           |            } catch (Exception e) {
           |                println "Skipping configuration '$$configuration.name' due to resolution failure: $$e.message"
           |                return
           |            }
-          |            def lines = resolvedConfiguration.resolvedArtifacts.collect { artifact ->
-          |                return "$$artifact.moduleVersion.id.group\t$$artifact.moduleVersion.id.name\t$$artifact.moduleVersion.id.version\t$$artifact.file.absolutePath"
-          |            }
-          |            java.nio.file.Files.write(
-          |                depsOut,
-          |                lines.unique(false),
-          |                java.nio.file.StandardOpenOption.APPEND,
-          |                java.nio.file.StandardOpenOption.CREATE)
           |        }
           |    }
           |}

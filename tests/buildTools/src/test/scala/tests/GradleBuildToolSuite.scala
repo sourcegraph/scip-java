@@ -297,7 +297,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
   )
 
   checkBuild(
-    "implementation-deps".only,
+    "implementation-deps",
     """|/settings.gradle
        |rootProject.name = 'marklogic-examples'
        |include('app')
