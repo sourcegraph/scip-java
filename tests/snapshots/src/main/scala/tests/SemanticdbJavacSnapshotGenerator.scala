@@ -4,8 +4,9 @@ object SemanticdbJavacSnapshotGenerator
     extends AggregateSnapshotGenerator(
       List(
         new LibrarySnapshotGenerator(),
-        new MinimizedSnapshotGenerator(),
-        new MinimizedScipSnapshotGenerator(),
+        new MinimizedSnapshotSemanticdbGenerator(),
+        new MinimizedSnapshotScipGenerator(),
+        new MinimizedSnapshotLsifGenerator(),
         new ScipGraphSnapshotGenerator()
       )
     )

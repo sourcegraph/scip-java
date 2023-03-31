@@ -6,20 +6,28 @@ package minimized
 
 case class MinimizedCaseClass(value: String) {
 //         ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedCaseClass# case class MinimizedCaseClass(value: String)
-//         ^^^^^^^^^^^^^^^^^^ synthetic_definition minimized/MinimizedCaseClass.apply(). def apply(value: String): MinimizedCaseClass
-//         ^^^^^^^^^^^^^^^^^^ synthetic_definition minimized/MinimizedCaseClass#productElement(). def productElement(x$1: Int): Any
-//         ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedCaseClass. object MinimizedCaseClass
-//         ^^^^^^^^^^^^^^^^^^ synthetic_definition minimized/MinimizedCaseClass#productElementName(). def productElementName(x$1: Int): String
-//         ^^^^^^^^^^^^^^^^^^ synthetic_definition minimized/MinimizedCaseClass#copy(). def copy(value: String): MinimizedCaseClass
 //                            definition minimized/MinimizedCaseClass#`<init>`(). def this(value: String)
 //                            ^^^^^ definition minimized/MinimizedCaseClass#value. val value: String
-//                            ^^^^^ definition minimized/MinimizedCaseClass#copy().(value) default value: String
-//                            ^^^^^ definition minimized/MinimizedCaseClass#`<init>`().(value) value: String
-//                            ^^^^^ definition minimized/MinimizedCaseClass.apply().(value) value: String
 //                                   ^^^^^^ reference scala/Predef.String#
-  def this() = this("value")
+  def this() = this(value = "value")
 //    ^^^^ definition minimized/MinimizedCaseClass#`<init>`(+1). def this()
 //                  reference minimized/MinimizedCaseClass#`<init>`().
+//                  ^^^^^ reference minimized/MinimizedCaseClass#`<init>`().(value)
+}
+object MinimizedCaseClass {
+//     ^^^^^^^^^^^^^^^^^^ definition minimized/MinimizedCaseClass. object MinimizedCaseClass
+  def main(): Unit = {
+//    ^^^^ definition minimized/MinimizedCaseClass.main(). def main(): Unit
+//            ^^^^ reference scala/Unit#
+    println(MinimizedCaseClass.apply(value = "value1").copy(value = "value2").value)
+//  ^^^^^^^ reference scala/Predef.println(+1).
+//          ^^^^^^^^^^^^^^^^^^ reference minimized/MinimizedCaseClass.
+//                             ^^^^^ reference minimized/MinimizedCaseClass.apply().
+//                                   ^^^^^ reference minimized/MinimizedCaseClass.apply().(value)
+//                                                     ^^^^ reference minimized/MinimizedCaseClass#copy().
+//                                                          ^^^^^ reference minimized/MinimizedCaseClass#copy().(value)
+//                                                                            ^^^^^ reference minimized/MinimizedCaseClass#value.
+  }
 }
 
 trait MinimizedTrait[T] extends AutoCloseable {

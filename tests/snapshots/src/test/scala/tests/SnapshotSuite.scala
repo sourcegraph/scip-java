@@ -13,11 +13,14 @@ abstract class SnapshotSuite(generator: SnapshotGenerator)
 
 class LibrarySnapshotSuite extends SnapshotSuite(new LibrarySnapshotGenerator)
 
-class MinimizedSnapshotSuite
-    extends SnapshotSuite(new MinimizedSnapshotGenerator)
+class MinimizedSnapshotSemanticdbSuite
+    extends SnapshotSuite(new MinimizedSnapshotSemanticdbGenerator)
 
-class MinimizedScipSnapshotSuite
-    extends SnapshotSuite(new MinimizedScipSnapshotGenerator)
+class MinimizedSnapshotScipSuite
+  extends SnapshotSuite(new MinimizedSnapshotScipGenerator)
+
+class MinimizedSnapshotLsifSuite
+    extends SnapshotSuite(new MinimizedSnapshotLsifGenerator)
 
 class ScipGraphSnapshotSuite
     extends SnapshotSuite(new ScipGraphSnapshotGenerator)
