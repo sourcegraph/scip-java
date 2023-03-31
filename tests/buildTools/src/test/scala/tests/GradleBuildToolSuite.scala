@@ -80,7 +80,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |apply plugin: 'java'
        |java {
        |  toolchain {
-       |    languageVersion = JavaLanguageVersion.of(8) |  }
+       |    languageVersion = JavaLanguageVersion.of(8)
+       |  }
        |}
        |repositories { mavenCentral() }
        |dependencies { implementation "junit:junit:4.13.1" }
