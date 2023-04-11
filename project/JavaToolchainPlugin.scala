@@ -98,25 +98,35 @@ object JavaToolchainPlugin extends AutoPlugin {
             coursier.toString,
             "java-home",
             "--jvm",
-            v,
+            jvmName(v),
             "--architecture",
-            jvmArchitecture(v)
+            jvmArchitecture
           ) ++ index
+
         new File(Process(arguments).!!.trim)
       }
     )
   }
 
-  private def jvmArchitecture(jvmVersion: String): String =
-    if (scala.util.Properties.isMac && sys.props("os.arch") == "aarch64")
-      "amd64"
-    else
-      defaultCoursierJVMArchitecture
-  def defaultCoursierJVMArchitecture: String =
+  private def jvmName(version: String) =
+    version match {
+      case "8" if isAppleM1 =>
+        "zulu:8" // the only Java 8 distribution available for Apple M1 is Zulu
+      case _ =>
+        version
+    }
+
+  private def isAppleM1 =
+    scala.util.Properties.isMac && sys.props("os.arch") == "aarch64"
+
+  private def jvmArchitecture: String =
     sys.props("os.arch") match {
       case "x86_64" =>
         "amd64"
-      case x =>
-        x
+      case _ if isAppleM1 =>
+        "arm64"
+      case other =>
+        other
     }
+
 }
