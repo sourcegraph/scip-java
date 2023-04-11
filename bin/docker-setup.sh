@@ -4,7 +4,7 @@ curl -fLo /usr/local/bin/coursier https://github.com/coursier/coursier/releases/
 chmod +x /usr/local/bin/coursier
 coursier setup --yes
 
-curl -fLo maven.zip https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.zip
+curl -fLo maven.zip https://archive.apache.org/dist/maven/maven-3/3.9.1/binaries/apache-maven-3.9.1-bin.zip 
 unzip -d /opt/maven maven.zip
 mv /opt/maven/*/* /opt/maven
 
