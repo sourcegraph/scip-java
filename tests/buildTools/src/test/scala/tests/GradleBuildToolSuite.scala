@@ -339,7 +339,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
          |maven:org.jetbrains.kotlin:kotlin-stdlib:1.6.20
          |maven:org.jetbrains:annotations:13.0
          |maven:org.slf4j:slf4j-api:1.7.36
-         |""".stripMargin
+         |""".stripMargin,
+    initCommand = gradleVersion()
   )
 
   List("8", "11").foreach { version =>
