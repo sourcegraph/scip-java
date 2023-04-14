@@ -8,7 +8,9 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
   def gradleVersion(version: String = ""): List[String] = {
     createEmptyBuildScript()
     if (version.isEmpty || version == "latest")
-      List("gradle", "wrapper")
+      // Hardcode v7.6.1 since auto-indexing does not work for Gradle v8 at the moment.
+      // See https://github.com/sourcegraph/scip-java/issues/545
+      List("gradle", "wrapper", "--gradle-version", "v7.6.1")
     else
       List("gradle", "wrapper", "--gradle-version", version)
   }
