@@ -82,6 +82,8 @@ object GradleJavaToolchains {
       .resolve("kotlin-multiplatform-enabled.txt")
     val gradleVersionPath = tmp.resolve("gradle-version.txt")
     val taskName = "scipDetectJavaToolchains"
+    val scalaPluginName = "org.gradle.api.plugins.scala.ScalaPlugin"
+    val javaPluginName = "org.gradle.api.plugins.JavaPlugin"
     val script =
       s"""|
           |try {
@@ -132,9 +134,9 @@ object GradleJavaToolchains {
           |      }
           |      project.plugins.each {
           |        def name = it.getClass().getName()
-          |        if (name.endsWith("org.gradle.api.plugins.JavaPlugin"))
+          |        if (name.endsWith("$javaPluginName") || name.endsWith('$javaPluginName$$Inject'))
           |          scipJavaAppendLine('$javaEnabledPath', 'true')
-          |        if (name.endsWith("org.gradle.api.plugins.scala.ScalaPlugin"))
+          |        if (name.endsWith("$scalaPluginName") || name.endsWith('$scalaPluginName$$Inject'))
           |          scipJavaAppendLine('$scalaEnabledPath', 'true')
           |        if (name.startsWith("org.jetbrains.kotlin.gradle.plugin"))
           |          scipJavaAppendLine('$kotlinEnabledPath', 'true')

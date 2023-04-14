@@ -150,10 +150,18 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
       s"""|allprojects {
           |  gradle.projectsEvaluated {
           |    boolean isJavaEnabled = project.plugins.any {
-          |       it.getClass().getName().endsWith("org.gradle.api.plugins.JavaPlugin")
+          |       def pluginName = it.getClass().getName()
+          |       def javaName = "org.gradle.api.plugins.JavaPlugin"
+          |       def injectJavaName = javaName + '$$Inject' // Gradle 8.0+
+          |       
+          |       pluginName.endsWith(javaName) || pluginName.endsWith(injectJavaName)
           |    }
           |    boolean isScalaEnabled = project.plugins.any {
-          |       it.getClass().getName().endsWith("org.gradle.api.plugins.scala.ScalaPlugin")
+          |       def pluginName = it.getClass().getName()
+          |       def scalaName = "org.gradle.api.plugins.scala.ScalaPlugin"
+          |       def injectScalaName = scalaName + '$$Inject' // Gradle 8.0+
+          |       
+          |       pluginName.endsWith(scalaName) || pluginName.endsWith(injectScalaName)
           |    }
           |    boolean isKotlinEnabled = project.plugins.any {
           |       it.getClass().getName().startsWith("org.jetbrains.kotlin.gradle.plugin")
