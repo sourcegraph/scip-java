@@ -128,16 +128,19 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
   }
 
   private def initScript(toolchains: GradleJavaToolchains, tmp: Path): Path = {
+    val agentpath = Embedded.agentJar(tmp)
+    val pluginpath = Embedded.semanticdbJar(tmp)
     val executable =
       toolchains.executableJavacPath() match {
         case Some(path) =>
           s"options.forkOptions.executable = '$path'"
         case None =>
-          ""
+          s"""
+          options.annotationProcessorPath = files('$pluginpath')
+          options.compilerArgs += ['-Xplugin:semanticdb -targetroot:$targetroot -sourceroot:$sourceroot']
+          """
       }
 
-    val agentpath = Embedded.agentJar(tmp)
-    val pluginpath = Embedded.semanticdbJar(tmp)
     def handleExceptionGroovySyntax(): String =
       if (index.verbose)
         "e.printStackTrace()"

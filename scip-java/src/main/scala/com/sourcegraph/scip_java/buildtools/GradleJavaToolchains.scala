@@ -178,9 +178,9 @@ object GradleJavaToolchains {
       }
 
     GradleJavaToolchains(
-      toolchains,
-      tool,
-      index,
+      toolchains = toolchains,
+      tool = tool,
+      index = index,
       gradleVersion = gradleVersion,
       javaVersion = javaVersion,
       isJavaEnabled = Files.isRegularFile(javaEnabledPath),
