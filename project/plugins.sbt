@@ -16,7 +16,7 @@ addSbtPlugin("io.spray" % "sbt-revolver" % "0.9.1")
 addSbtPlugin("org.scala-debugger" % "sbt-jdi-tools" % "1.1.1")
 
 libraryDependencies ++=
-  List("com.thesamet.scalapb" %% "compilerplugin" % "0.11.11")
+  List("com.thesamet.scalapb" %% "compilerplugin" % "0.11.13")
 
 ThisBuild / libraryDependencySchemes ++=
   Seq("org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always)
