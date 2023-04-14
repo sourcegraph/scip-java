@@ -130,6 +130,24 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
   private def initScript(toolchains: GradleJavaToolchains, tmp: Path): Path = {
     val agentpath = Embedded.agentJar(tmp)
     val pluginpath = Embedded.semanticdbJar(tmp)
+
+    val javacModuleOptions =
+      if (toolchains.isJavaAtLeast(9))
+        List(
+          "--add-exports",
+          "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+          "--add-exports",
+          "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+          "--add-exports",
+          "jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+          "--add-exports",
+          "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+          "--add-exports",
+          "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+        ).map(m => s"'$m'").mkString("[", ", ", "]")
+      else
+        "[]"
+
     val executable =
       toolchains.executableJavacPath() match {
         case Some(path) =>
@@ -138,6 +156,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           s"""
           options.annotationProcessorPath = files('$pluginpath')
           options.compilerArgs += ['-Xplugin:semanticdb -targetroot:$targetroot -sourceroot:$sourceroot']
+          options.forkOptions.jvmArgs += $javacModuleOptions
           """
       }
 
