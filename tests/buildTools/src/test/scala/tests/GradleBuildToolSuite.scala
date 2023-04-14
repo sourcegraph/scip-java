@@ -272,7 +272,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
   )
 
   checkBuild(
-    "kotlin".only,
+    "kotlin",
     """|/build.gradle
        |plugins {
        |    id 'org.jetbrains.kotlin.jvm' version '1.5.31'
