@@ -8,7 +8,9 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
   def gradleVersion(version: String = ""): List[String] = {
     createEmptyBuildScript()
     if (version.isEmpty || version == "latest")
-      List("gradle", "wrapper")
+      // Hardcode v7.6.1 since auto-indexing does not work for Gradle v8 at the moment.
+      // See https://github.com/sourcegraph/scip-java/issues/544
+      List("gradle", "wrapper", "--gradle-version", "7.6.1")
     else
       List("gradle", "wrapper", "--gradle-version", version)
   }
@@ -89,7 +91,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |/src/test/java/ExampleSuite.java
        |public class ExampleSuite {}
        |""".stripMargin,
-    2
+    2,
+    initCommand = gradleVersion()
   )
 
   checkBuild(
@@ -144,7 +147,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |<hello/>
        |""".stripMargin,
     2,
-    extraArguments = List("--build-tool", "gradle")
+    extraArguments = List("--build-tool", "gradle"),
+    initCommand = gradleVersion()
   )
 
   checkBuild(
@@ -157,7 +161,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |public class ExampleSuite {}
        |""".stripMargin,
     1,
-    extraArguments = List("--", "compileJava")
+    extraArguments = List("--", "compileJava"),
+    initCommand = gradleVersion()
   )
 
   checkBuild(
@@ -262,7 +267,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |package foo
        |class ExampleSuite {}
        |""".stripMargin,
-    4
+    4,
+    initCommand = gradleVersion()
   )
 
   checkBuild(
@@ -287,7 +293,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |package foo
        |class ExampleSuite {}
        |""".stripMargin,
-    4
+    4,
+    initCommand = gradleVersion()
   )
 
   List("8", "11").foreach { version =>
@@ -308,7 +315,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
           |package foo
           |object Example {}
           |""".stripMargin,
-      1
+      1,
+      initCommand = gradleVersion()
     )
   }
 
@@ -348,7 +356,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
             |package foo
             |class ExampleJvmSuite {}
             |""".stripMargin,
-        expectedSemanticdbFiles
+        expectedSemanticdbFiles,
+        initCommand = gradleVersion()
       )
   }
 }
