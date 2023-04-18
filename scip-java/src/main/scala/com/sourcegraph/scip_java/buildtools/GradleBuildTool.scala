@@ -10,6 +10,7 @@ import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
+import org.intellij.lang.annotations.Language
 import os.CommandResult
 
 class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
@@ -73,7 +74,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     val script = initScript(toolchains, toolchains.tmp).toString
     val buildCommand = ListBuffer.empty[String]
     buildCommand += toolchains.gradleCommand
-    buildCommand += s"--no-daemon"
+    buildCommand += "--no-daemon"
     buildCommand += "--init-script"
     buildCommand += script
     if (toolchains.toolchains.nonEmpty) {
@@ -82,6 +83,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
       buildCommand +=
         s"-Porg.gradle.java.installations.paths=${toolchains.paths()}"
     }
+    buildCommand += "-Pkotlin.compiler.execution.strategy=in-process"
     buildCommand ++=
       index.finalBuildCommand(
         List[Option[String]](
@@ -146,6 +148,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     val dependenciesPath = targetroot.resolve("dependencies.txt")
     val kotlinSemanticdbVersion = BuildInfo.semanticdbKotlincVersion
     Files.deleteIfExists(dependenciesPath)
+    @Language("Groovy")
     val script =
       s"""|allprojects {
           |  gradle.projectsEvaluated {
