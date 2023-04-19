@@ -2,93 +2,105 @@
 package com.airbnb.epoxy;
 
 import java.util.ArrayList;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^^^^^^^ reference java/util/ArrayList#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
 import java.util.HashMap;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^^^^^ reference java/util/HashMap#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^^^^^ reference semanticdb maven jdk 11 java/util/HashMap#
 import java.util.Iterator;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^^^^^^ reference java/util/Iterator#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
 import java.util.List;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^^ reference java/util/List#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^^ reference semanticdb maven jdk 11 java/util/List#
 import java.util.Map;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^ reference java/util/Map#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^ reference semanticdb maven jdk 11 java/util/Map#
 
 import androidx.annotation.Nullable;
-//     ^^^^^^^^ reference androidx/
-//              ^^^^^^^^^^ reference androidx/annotation/
-//                         ^^^^^^^^ reference androidx/annotation/Nullable#
+//     ^^^^^^^^ reference semanticdb maven . . androidx/
+//              ^^^^^^^^^^ reference semanticdb maven . . androidx/annotation/
+//                         ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 import androidx.recyclerview.widget.RecyclerView;
-//     ^^^^^^^^ reference androidx/
-//              ^^^^^^^^^^^^ reference androidx/recyclerview/
-//                           ^^^^^^ reference androidx/recyclerview/widget/
-//                                  ^^^^^^^^^^^^ reference androidx/recyclerview/widget/RecyclerView#
+//     ^^^^^^^^ reference semanticdb maven . . androidx/
+//              ^^^^^^^^^^^^ reference semanticdb maven . . androidx/recyclerview/
+//                           ^^^^^^ reference semanticdb maven . . androidx/recyclerview/widget/
+//                                  ^^^^^^^^^^^^ reference semanticdb maven . . androidx/recyclerview/widget/RecyclerView#
 
 /**
  * Helper to track changes in the models list.
  */
 class DiffHelper {
-//    ^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper# class DiffHelper
+//    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#
+//               documentation ```java\nclass DiffHelper\n```
+//               documentation  Helper to track changes in the models list.\n
   private ArrayList<ModelState> oldStateList = new ArrayList<>();
-//        ^^^^^^^^^ reference java/util/ArrayList#
-//                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                              ^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#oldStateList. private ArrayList<ModelState> oldStateList
-//                                                 ^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
+//        ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
+//                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
+//                                           documentation ```java\nprivate ArrayList<ModelState> oldStateList\n```
+//                                                 ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`(+1).
   // Using a HashMap instead of a LongSparseArray to
   // have faster look up times at the expense of memory
   private Map<Long, ModelState> oldStateMap = new HashMap<>();
-//        ^^^ reference java/util/Map#
-//            ^^^^ reference java/lang/Long#
-//                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                              ^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#oldStateMap. private Map<Long, ModelState> oldStateMap
-//                                                ^^^^^^^ reference java/util/HashMap#`<init>`(+2).
+//        ^^^ reference semanticdb maven jdk 11 java/util/Map#
+//            ^^^^ reference semanticdb maven jdk 11 java/lang/Long#
+//                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                              ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateMap.
+//                                          documentation ```java\nprivate Map<Long, ModelState> oldStateMap\n```
+//                                                ^^^^^^^ reference semanticdb maven jdk 11 java/util/HashMap#`<init>`(+2).
   private ArrayList<ModelState> currentStateList = new ArrayList<>();
-//        ^^^^^^^^^ reference java/util/ArrayList#
-//                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#currentStateList. private ArrayList<ModelState> currentStateList
-//                                                     ^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
+//        ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
+//                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateList.
+//                                               documentation ```java\nprivate ArrayList<ModelState> currentStateList\n```
+//                                                     ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`(+1).
   private Map<Long, ModelState> currentStateMap = new HashMap<>();
-//        ^^^ reference java/util/Map#
-//            ^^^^ reference java/lang/Long#
-//                  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#currentStateMap. private Map<Long, ModelState> currentStateMap
-//                                                    ^^^^^^^ reference java/util/HashMap#`<init>`(+2).
+//        ^^^ reference semanticdb maven jdk 11 java/util/Map#
+//            ^^^^ reference semanticdb maven jdk 11 java/lang/Long#
+//                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateMap.
+//                                              documentation ```java\nprivate Map<Long, ModelState> currentStateMap\n```
+//                                                    ^^^^^^^ reference semanticdb maven jdk 11 java/util/HashMap#`<init>`(+2).
   private final BaseEpoxyAdapter adapter;
-//              ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
-//                               ^^^^^^^ definition com/airbnb/epoxy/DiffHelper#adapter. private final BaseEpoxyAdapter adapter
+//              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
+//                               ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
+//                                       documentation ```java\nprivate final BaseEpoxyAdapter adapter\n```
   private final boolean immutableModels;
-//                      ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#immutableModels. private final boolean immutableModels
+//                      ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#immutableModels.
+//                                      documentation ```java\nprivate final boolean immutableModels\n```
 
 
   DiffHelper(BaseEpoxyAdapter adapter, boolean immutableModels) {
-//^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#`<init>`(). DiffHelper(BaseEpoxyAdapter adapter, boolean immutableModels)
-//           ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#
-//                            ^^^^^^^ definition local0 BaseEpoxyAdapter adapter
-//                                             ^^^^^^^^^^^^^^^ definition local1 boolean immutableModels
+//^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#`<init>`().
+//           documentation ```java\nDiffHelper(BaseEpoxyAdapter adapter, boolean immutableModels)\n```
+//           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
+//                            ^^^^^^^ definition local 0
+//                                    documentation ```java\nBaseEpoxyAdapter adapter\n```
+//                                             ^^^^^^^^^^^^^^^ definition local 1
+//                                                             documentation ```java\nboolean immutableModels\n```
     this.adapter = adapter;
-//       ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                 ^^^^^^^ reference local0
+//       ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
+//                 ^^^^^^^ reference local 0
     this.immutableModels = immutableModels;
-//       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#immutableModels.
-//                         ^^^^^^^^^^^^^^^ reference local1
+//       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#immutableModels.
+//                         ^^^^^^^^^^^^^^^ reference local 1
     adapter.registerAdapterDataObserver(observer);
-//  ^^^^^^^ reference local0
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#registerAdapterDataObserver#
-//                                      ^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#observer.
+//  ^^^^^^^ reference local 0
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#registerAdapterDataObserver#
+//                                      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#observer.
   }
 
   private final RecyclerView.AdapterDataObserver observer = new RecyclerView.AdapterDataObserver() {
-//              ^^^^^^^^^^^^ reference RecyclerView/
-//                           ^^^^^^^^^^^^^^^^^^^ reference RecyclerView/AdapterDataObserver#
-//                                               ^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#observer. private final unresolved_type observer
+//              ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView/
+//                           ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView/AdapterDataObserver#
+//                                               ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#observer.
+//                                                        documentation ```java\nprivate final unresolved_type observer\n```
     @Override
     public void onChanged() {
       throw new UnsupportedOperationException(
@@ -186,109 +198,115 @@ class DiffHelper {
    * current list and the last list that was set.
    */
   void notifyModelChanges() {
-//     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#notifyModelChanges(). void notifyModelChanges()
+//     ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#notifyModelChanges().
+//                        documentation ```java\nvoid notifyModelChanges()\n```
+//                        documentation  Set the current list of models. The diff callbacks will be notified of the changes between the\n current list and the last list that was set.\n
     UpdateOpHelper updateOpHelper = new UpdateOpHelper();
-//  ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
-//                 ^^^^^^^^^^^^^^ definition local2 UpdateOpHelper updateOpHelper
-//                                      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#`<init>`().
+//  ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
+//                 ^^^^^^^^^^^^^^ definition local 2
+//                                documentation ```java\nUpdateOpHelper updateOpHelper\n```
+//                                      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#`<init>`().
 
     buildDiff(updateOpHelper);
-//  ^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#buildDiff().
-//            ^^^^^^^^^^^^^^ reference local2
+//  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#buildDiff().
+//            ^^^^^^^^^^^^^^ reference local 2
 
     // Send out the proper notify calls for the diff. We remove our
     // observer first so that we don't react to our own notify calls
     adapter.unregisterAdapterDataObserver(observer);
-//  ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#unregisterAdapterDataObserver#
-//                                        ^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#observer.
+//  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#unregisterAdapterDataObserver#
+//                                        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#observer.
     notifyChanges(updateOpHelper);
-//  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#notifyChanges().
-//                ^^^^^^^^^^^^^^ reference local2
+//  ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#notifyChanges().
+//                ^^^^^^^^^^^^^^ reference local 2
     adapter.registerAdapterDataObserver(observer);
-//  ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#registerAdapterDataObserver#
-//                                      ^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#observer.
+//  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#registerAdapterDataObserver#
+//                                      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#observer.
   }
 
   private void notifyChanges(UpdateOpHelper opHelper) {
-//             ^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#notifyChanges(). private void notifyChanges(UpdateOpHelper opHelper)
-//                           ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
-//                                          ^^^^^^^^ definition local3 UpdateOpHelper opHelper
+//             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#notifyChanges().
+//                           documentation ```java\nprivate void notifyChanges(UpdateOpHelper opHelper)\n```
+//                           ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
+//                                          ^^^^^^^^ definition local 3
+//                                                   documentation ```java\nUpdateOpHelper opHelper\n```
     for (UpdateOp op : opHelper.opList) {
-//       ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
-//                ^^ definition local4 UpdateOp op
-//                     ^^^^^^^^ reference local3
-//                              ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#opList.
+//       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
+//                ^^ definition local 4
+//                   documentation ```java\nUpdateOp op\n```
+//                     ^^^^^^^^ reference local 3
+//                              ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#opList.
       switch (op.type) {
-//            ^^ reference local4
-//               ^^^^ reference com/airbnb/epoxy/UpdateOp#type.
+//            ^^ reference local 4
+//               ^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#type.
         case UpdateOp.ADD:
-//           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
-//                    ^^^ reference com/airbnb/epoxy/UpdateOp#ADD.
+//           ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
+//                    ^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#ADD.
           adapter.notifyItemRangeInserted(op.positionStart, op.itemCount);
-//        ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemRangeInserted#
-//                                        ^^ reference local4
-//                                           ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
-//                                                          ^^ reference local4
-//                                                             ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
+//        ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
+//                ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemRangeInserted#
+//                                        ^^ reference local 4
+//                                           ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionStart.
+//                                                          ^^ reference local 4
+//                                                             ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#itemCount.
           break;
         case UpdateOp.MOVE:
-//           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
-//                    ^^^^ reference com/airbnb/epoxy/UpdateOp#MOVE.
+//           ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
+//                    ^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#MOVE.
           adapter.notifyItemMoved(op.positionStart, op.itemCount);
-//        ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemMoved#
-//                                ^^ reference local4
-//                                   ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
-//                                                  ^^ reference local4
-//                                                     ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
+//        ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
+//                ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemMoved#
+//                                ^^ reference local 4
+//                                   ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionStart.
+//                                                  ^^ reference local 4
+//                                                     ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#itemCount.
           break;
         case UpdateOp.REMOVE:
-//           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
-//                    ^^^^^^ reference com/airbnb/epoxy/UpdateOp#REMOVE.
+//           ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
+//                    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#REMOVE.
           adapter.notifyItemRangeRemoved(op.positionStart, op.itemCount);
-//        ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemRangeRemoved#
-//                                       ^^ reference local4
-//                                          ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
-//                                                         ^^ reference local4
-//                                                            ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
+//        ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
+//                ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemRangeRemoved#
+//                                       ^^ reference local 4
+//                                          ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionStart.
+//                                                         ^^ reference local 4
+//                                                            ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#itemCount.
           break;
         case UpdateOp.UPDATE:
-//           ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
-//                    ^^^^^^ reference com/airbnb/epoxy/UpdateOp#UPDATE.
+//           ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
+//                    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#UPDATE.
           if (immutableModels && op.payloads != null) {
-//            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#immutableModels.
-//                               ^^ reference local4
-//                                  ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#payloads.
+//            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#immutableModels.
+//                               ^^ reference local 4
+//                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#payloads.
             adapter.notifyItemRangeChanged(op.positionStart, op.itemCount,
-//          ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                  ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemRangeChanged#
-//                                         ^^ reference local4
-//                                            ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
-//                                                           ^^ reference local4
-//                                                              ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
+//          ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
+//                  ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemRangeChanged#
+//                                         ^^ reference local 4
+//                                            ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionStart.
+//                                                           ^^ reference local 4
+//                                                              ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#itemCount.
                 new DiffPayload(op.payloads));
-//                  ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffPayload#`<init>`().
-//                              ^^ reference local4
-//                                 ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#payloads.
+//                  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#`<init>`().
+//                              ^^ reference local 4
+//                                 ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#payloads.
           } else {
             adapter.notifyItemRangeChanged(op.positionStart, op.itemCount);
-//          ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                  ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemRangeChanged#
-//                                         ^^ reference local4
-//                                            ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
-//                                                           ^^ reference local4
-//                                                              ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
+//          ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
+//                  ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#notifyItemRangeChanged#
+//                                         ^^ reference local 4
+//                                            ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionStart.
+//                                                           ^^ reference local 4
+//                                                              ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#itemCount.
           }
           break;
         default:
           throw new IllegalArgumentException("Unknown type: " + op.type);
-//                  ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`(+1).
-//                                                              ^^ reference local4
-//                                                                 ^^^^ reference com/airbnb/epoxy/UpdateOp#type.
+//                  ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IllegalArgumentException#`<init>`(+1).
+//                                                              ^^ reference local 4
+//                                                                 ^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#type.
       }
     }
   }
@@ -298,12 +316,15 @@ class DiffHelper {
    * #currentStateList}.
    */
   private UpdateOpHelper buildDiff(UpdateOpHelper updateOpHelper) {
-//        ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
-//                       ^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#buildDiff(). private UpdateOpHelper buildDiff(UpdateOpHelper updateOpHelper)
-//                                 ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
-//                                                ^^^^^^^^^^^^^^ definition local5 UpdateOpHelper updateOpHelper
+//        ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
+//                       ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#buildDiff().
+//                                 documentation ```java\nprivate UpdateOpHelper buildDiff(UpdateOpHelper updateOpHelper)\n```
+//                                 documentation  Create a list of operations that define the difference between {@link #oldStateList} and {@link\n #currentStateList}.\n
+//                                 ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
+//                                                ^^^^^^^^^^^^^^ definition local 5
+//                                                               documentation ```java\nUpdateOpHelper updateOpHelper\n```
     prepareStateForDiff();
-//  ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#prepareStateForDiff().
+//  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#prepareStateForDiff().
 
     // The general approach is to first search for removals, then additions, and lastly changes.
     // Focusing on one type of operation at a time makes it easy to coalesce batch changes.
@@ -311,178 +332,193 @@ class DiffHelper {
     // result list we update the positions of items in the oldStateList to reflect
     // the change, this way subsequent operations will use the correct, updated positions.
     collectRemovals(updateOpHelper);
-//  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#collectRemovals().
-//                  ^^^^^^^^^^^^^^ reference local5
+//  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectRemovals().
+//                  ^^^^^^^^^^^^^^ reference local 5
 
     // Only need to check for insertions if new list is bigger
     boolean hasInsertions =
-//          ^^^^^^^^^^^^^ definition local6 boolean hasInsertions
+//          ^^^^^^^^^^^^^ definition local 6
+//                        documentation ```java\nboolean hasInsertions\n```
         oldStateList.size() - updateOpHelper.getNumRemovals() != currentStateList.size();
-//      ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
-//                   ^^^^ reference java/util/ArrayList#size().
-//                            ^^^^^^^^^^^^^^ reference local5
-//                                           ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#getNumRemovals().
-//                                                               ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
-//                                                                                ^^^^ reference java/util/ArrayList#size().
+//      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
+//                   ^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#size().
+//                            ^^^^^^^^^^^^^^ reference local 5
+//                                           ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#getNumRemovals().
+//                                                               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateList.
+//                                                                                ^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#size().
     if (hasInsertions) {
-//      ^^^^^^^^^^^^^ reference local6
+//      ^^^^^^^^^^^^^ reference local 6
       collectInsertions(updateOpHelper);
-//    ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#collectInsertions().
-//                      ^^^^^^^^^^^^^^ reference local5
+//    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectInsertions().
+//                      ^^^^^^^^^^^^^^ reference local 5
     }
 
     collectMoves(updateOpHelper);
-//  ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#collectMoves().
-//               ^^^^^^^^^^^^^^ reference local5
+//  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectMoves().
+//               ^^^^^^^^^^^^^^ reference local 5
     collectChanges(updateOpHelper);
-//  ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#collectChanges().
-//                 ^^^^^^^^^^^^^^ reference local5
+//  ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectChanges().
+//                 ^^^^^^^^^^^^^^ reference local 5
 
     resetOldState();
-//  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#resetOldState().
+//  ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#resetOldState().
 
     return updateOpHelper;
-//         ^^^^^^^^^^^^^^ reference local5
+//         ^^^^^^^^^^^^^^ reference local 5
   }
 
   private void resetOldState() {
-//             ^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#resetOldState(). private void resetOldState()
+//             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#resetOldState().
+//                           documentation ```java\nprivate void resetOldState()\n```
     oldStateList.clear();
-//  ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
-//               ^^^^^ reference java/util/ArrayList#clear().
+//  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
+//               ^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#clear().
     oldStateMap.clear();
-//  ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateMap.
-//              ^^^^^ reference java/util/Map#clear().
+//  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateMap.
+//              ^^^^^ reference semanticdb maven jdk 11 java/util/Map#clear().
   }
 
   private void prepareStateForDiff() {
-//             ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#prepareStateForDiff(). private void prepareStateForDiff()
+//             ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#prepareStateForDiff().
+//                                 documentation ```java\nprivate void prepareStateForDiff()\n```
     // We use a list of the models as well as a map by their id,
     // so we can easily find them by both position and id
 
     oldStateList.clear();
-//  ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
-//               ^^^^^ reference java/util/ArrayList#clear().
+//  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
+//               ^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#clear().
     oldStateMap.clear();
-//  ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateMap.
-//              ^^^^^ reference java/util/Map#clear().
+//  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateMap.
+//              ^^^^^ reference semanticdb maven jdk 11 java/util/Map#clear().
 
     // Swap the two lists so that we have a copy of the current state to calculate the next diff
     ArrayList<ModelState> tempList = oldStateList;
-//  ^^^^^^^^^ reference java/util/ArrayList#
-//            ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                        ^^^^^^^^ definition local7 ArrayList<ModelState> tempList
-//                                   ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
+//  ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
+//            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                        ^^^^^^^^ definition local 7
+//                                 documentation ```java\nArrayList<ModelState> tempList\n```
+//                                   ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
     oldStateList = currentStateList;
-//  ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
-//                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
+//  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
+//                 ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateList.
     currentStateList = tempList;
-//  ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
-//                     ^^^^^^^^ reference local7
+//  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateList.
+//                     ^^^^^^^^ reference local 7
 
     Map<Long, ModelState> tempMap = oldStateMap;
-//  ^^^ reference java/util/Map#
-//      ^^^^ reference java/lang/Long#
-//            ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                        ^^^^^^^ definition local8 Map<Long, ModelState> tempMap
-//                                  ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateMap.
+//  ^^^ reference semanticdb maven jdk 11 java/util/Map#
+//      ^^^^ reference semanticdb maven jdk 11 java/lang/Long#
+//            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                        ^^^^^^^ definition local 8
+//                                documentation ```java\nMap<Long, ModelState> tempMap\n```
+//                                  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateMap.
     oldStateMap = currentStateMap;
-//  ^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateMap.
-//                ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateMap.
+//  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateMap.
+//                ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateMap.
     currentStateMap = tempMap;
-//  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateMap.
-//                    ^^^^^^^ reference local8
+//  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateMap.
+//                    ^^^^^^^ reference local 8
 
     // Remove all pairings in the old states so we can tell which of them were removed. The items
     // that still exist in the new list will be paired when we build the current list state below
     for (ModelState modelState : oldStateList) {
-//       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                  ^^^^^^^^^^ definition local9 ModelState modelState
-//                               ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
+//       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                  ^^^^^^^^^^ definition local 9
+//                             documentation ```java\nModelState modelState\n```
+//                               ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
       modelState.pair = null;
-//    ^^^^^^^^^^ reference local9
-//               ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//    ^^^^^^^^^^ reference local 9
+//               ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
     }
 
     int modelCount = adapter.getCurrentModels().size();
-//      ^^^^^^^^^^ definition local10 int modelCount
-//                   ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                           ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
-//                                              ^^^^ reference java/util/List#size().
+//      ^^^^^^^^^^ definition local 10
+//                 documentation ```java\nint modelCount\n```
+//                   ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
+//                           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
+//                                              ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
     currentStateList.ensureCapacity(modelCount);
-//  ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
-//                   ^^^^^^^^^^^^^^ reference java/util/ArrayList#ensureCapacity().
-//                                  ^^^^^^^^^^ reference local10
+//  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateList.
+//                   ^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#ensureCapacity().
+//                                  ^^^^^^^^^^ reference local 10
 
     for (int i = 0; i < modelCount; i++) {
-//           ^ definition local11 int i
-//                  ^ reference local11
-//                      ^^^^^^^^^^ reference local10
-//                                  ^ reference local11
+//           ^ definition local 11
+//             documentation ```java\nint i\n```
+//                  ^ reference local 11
+//                      ^^^^^^^^^^ reference local 10
+//                                  ^ reference local 11
       currentStateList.add(createStateForPosition(i));
-//    ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
-//                     ^^^ reference java/util/ArrayList#add().
-//                         ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#createStateForPosition().
-//                                                ^ reference local11
+//    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateList.
+//                     ^^^ reference semanticdb maven jdk 11 java/util/ArrayList#add().
+//                         ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#createStateForPosition().
+//                                                ^ reference local 11
     }
   }
 
   private ModelState createStateForPosition(int position) {
-//        ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                   ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#createStateForPosition(). private ModelState createStateForPosition(int position)
-//                                              ^^^^^^^^ definition local12 int position
+//        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                   ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#createStateForPosition().
+//                                          documentation ```java\nprivate ModelState createStateForPosition(int position)\n```
+//                                              ^^^^^^^^ definition local 12
+//                                                       documentation ```java\nint position\n```
     EpoxyModel<?> model = adapter.getCurrentModels().get(position);
-//  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                ^^^^^ definition local13 EpoxyModel<?> model
-//                        ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                                ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
-//                                                   ^^^ reference java/util/List#get().
-//                                                       ^^^^^^^^ reference local12
+//  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                ^^^^^ definition local 13
+//                      documentation ```java\nEpoxyModel<?> model\n```
+//                        ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
+//                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
+//                                                   ^^^ reference semanticdb maven jdk 11 java/util/List#get().
+//                                                       ^^^^^^^^ reference local 12
     model.addedToAdapter = true;
-//  ^^^^^ reference local13
-//        ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#addedToAdapter.
+//  ^^^^^ reference local 13
+//        ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#addedToAdapter.
     ModelState state = ModelState.build(model, position, immutableModels);
-//  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//             ^^^^^ definition local14 ModelState state
-//                     ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                                ^^^^^ reference com/airbnb/epoxy/ModelState#build().
-//                                      ^^^^^ reference local13
-//                                             ^^^^^^^^ reference local12
-//                                                       ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#immutableModels.
+//  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//             ^^^^^ definition local 14
+//                   documentation ```java\nModelState state\n```
+//                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                                ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#build().
+//                                      ^^^^^ reference local 13
+//                                             ^^^^^^^^ reference local 12
+//                                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#immutableModels.
 
     ModelState previousValue = currentStateMap.put(state.id, state);
-//  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//             ^^^^^^^^^^^^^ definition local15 ModelState previousValue
-//                             ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateMap.
-//                                             ^^^ reference java/util/Map#put().
-//                                                 ^^^^^ reference local14
-//                                                       ^^ reference com/airbnb/epoxy/ModelState#id.
-//                                                           ^^^^^ reference local14
+//  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//             ^^^^^^^^^^^^^ definition local 15
+//                           documentation ```java\nModelState previousValue\n```
+//                             ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateMap.
+//                                             ^^^ reference semanticdb maven jdk 11 java/util/Map#put().
+//                                                 ^^^^^ reference local 14
+//                                                       ^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#id.
+//                                                           ^^^^^ reference local 14
     if (previousValue != null) {
-//      ^^^^^^^^^^^^^ reference local15
+//      ^^^^^^^^^^^^^ reference local 15
       int previousPosition = previousValue.position;
-//        ^^^^^^^^^^^^^^^^ definition local16 int previousPosition
-//                           ^^^^^^^^^^^^^ reference local15
-//                                         ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
+//        ^^^^^^^^^^^^^^^^ definition local 16
+//                         documentation ```java\nint previousPosition\n```
+//                           ^^^^^^^^^^^^^ reference local 15
+//                                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
       EpoxyModel<?> previousModel = adapter.getCurrentModels().get(previousPosition);
-//    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                  ^^^^^^^^^^^^^ definition local17 EpoxyModel<?> previousModel
-//                                  ^^^^^^^ reference com/airbnb/epoxy/DiffHelper#adapter.
-//                                          ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
-//                                                             ^^^ reference java/util/List#get().
-//                                                                 ^^^^^^^^^^^^^^^^ reference local16
+//    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                  ^^^^^^^^^^^^^ definition local 17
+//                                documentation ```java\nEpoxyModel<?> previousModel\n```
+//                                  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
+//                                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
+//                                                             ^^^ reference semanticdb maven jdk 11 java/util/List#get().
+//                                                                 ^^^^^^^^^^^^^^^^ reference local 16
       throw new IllegalStateException("Two models have the same ID. ID's must be unique!"
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
+//              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IllegalStateException#`<init>`(+1).
           + " Model at position " + position + ": " + model
-//                                  ^^^^^^^^ reference local12
-//                                                    ^^^^^ reference local13
+//                                  ^^^^^^^^ reference local 12
+//                                                    ^^^^^ reference local 13
           + " Model at position " + previousPosition + ": " + previousModel);
-//                                  ^^^^^^^^^^^^^^^^ reference local16
-//                                                            ^^^^^^^^^^^^^ reference local17
+//                                  ^^^^^^^^^^^^^^^^ reference local 16
+//                                                            ^^^^^^^^^^^^^ reference local 17
     }
 
     return state;
-//         ^^^^^ reference local14
+//         ^^^^^ reference local 14
   }
 
   /**
@@ -491,47 +527,51 @@ class DiffHelper {
    * Walking through it in order makes it easy to batch adjacent removals.
    */
   private void collectRemovals(UpdateOpHelper helper) {
-//             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectRemovals(). private void collectRemovals(UpdateOpHelper helper)
-//                             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
-//                                            ^^^^^^ definition local18 UpdateOpHelper helper
+//             ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectRemovals().
+//                             documentation ```java\nprivate void collectRemovals(UpdateOpHelper helper)\n```
+//                             documentation  Find all removal operations and add them to the result list. The general strategy here is to\n walk through the {@link #oldStateList} and check for items that don't exist in the new list.\n Walking through it in order makes it easy to batch adjacent removals.\n
+//                             ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
+//                                            ^^^^^^ definition local 18
+//                                                   documentation ```java\nUpdateOpHelper helper\n```
     for (ModelState state : oldStateList) {
-//       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                  ^^^^^ definition local19 ModelState state
-//                          ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
+//       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                  ^^^^^ definition local 19
+//                        documentation ```java\nModelState state\n```
+//                          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
       // Update the position of the item to take into account previous removals,
       // so that future operations will reference the correct position
       state.position -= helper.getNumRemovals();
-//    ^^^^^ reference local19
-//          ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                      ^^^^^^ reference local18
-//                             ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#getNumRemovals().
+//    ^^^^^ reference local 19
+//          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                      ^^^^^^ reference local 18
+//                             ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#getNumRemovals().
 
       // This is our first time going through the list, so we
       // look up the item with the matching id in the new
       // list and hold a reference to it so that we can access it quickly in the future
       state.pair = currentStateMap.get(state.id);
-//    ^^^^^ reference local19
-//          ^^^^ reference com/airbnb/epoxy/ModelState#pair.
-//                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateMap.
-//                                 ^^^ reference java/util/Map#get().
-//                                     ^^^^^ reference local19
-//                                           ^^ reference com/airbnb/epoxy/ModelState#id.
+//    ^^^^^ reference local 19
+//          ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
+//                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateMap.
+//                                 ^^^ reference semanticdb maven jdk 11 java/util/Map#get().
+//                                     ^^^^^ reference local 19
+//                                           ^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#id.
       if (state.pair != null) {
-//        ^^^^^ reference local19
-//              ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//        ^^^^^ reference local 19
+//              ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
         state.pair.pair = state;
-//      ^^^^^ reference local19
-//            ^^^^ reference com/airbnb/epoxy/ModelState#pair.
-//                 ^^^^ reference com/airbnb/epoxy/ModelState#pair.
-//                        ^^^^^ reference local19
+//      ^^^^^ reference local 19
+//            ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
+//                 ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
+//                        ^^^^^ reference local 19
         continue;
       }
 
       helper.remove(state.position);
-//    ^^^^^^ reference local18
-//           ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#remove().
-//                  ^^^^^ reference local19
-//                        ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
+//    ^^^^^^ reference local 18
+//           ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#remove().
+//                  ^^^^^ reference local 19
+//                        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
     }
   }
 
@@ -541,45 +581,51 @@ class DiffHelper {
    * list. Walking through it in order makes it easy to batch adjacent insertions.
    */
   private void collectInsertions(UpdateOpHelper helper) {
-//             ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectInsertions(). private void collectInsertions(UpdateOpHelper helper)
-//                               ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
-//                                              ^^^^^^ definition local20 UpdateOpHelper helper
+//             ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectInsertions().
+//                               documentation ```java\nprivate void collectInsertions(UpdateOpHelper helper)\n```
+//                               documentation  Find all insertion operations and add them to the result list. The general strategy here is to\n walk through the {@link #currentStateList} and check for items that don't exist in the old\n list. Walking through it in order makes it easy to batch adjacent insertions.\n
+//                               ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
+//                                              ^^^^^^ definition local 20
+//                                                     documentation ```java\nUpdateOpHelper helper\n```
     Iterator<ModelState> oldItemIterator = oldStateList.iterator();
-//  ^^^^^^^^ reference java/util/Iterator#
-//           ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                       ^^^^^^^^^^^^^^^ definition local21 Iterator<ModelState> oldItemIterator
-//                                         ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
-//                                                      ^^^^^^^^ reference java/util/ArrayList#iterator().
+//  ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
+//           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                       ^^^^^^^^^^^^^^^ definition local 21
+//                                       documentation ```java\nIterator<ModelState> oldItemIterator\n```
+//                                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
+//                                                      ^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#iterator().
 
     for (ModelState itemToInsert : currentStateList) {
-//       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                  ^^^^^^^^^^^^ definition local22 ModelState itemToInsert
-//                                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
+//       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                  ^^^^^^^^^^^^ definition local 22
+//                               documentation ```java\nModelState itemToInsert\n```
+//                                 ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateList.
       if (itemToInsert.pair != null) {
-//        ^^^^^^^^^^^^ reference local22
-//                     ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//        ^^^^^^^^^^^^ reference local 22
+//                     ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
         // Update the position of the next item in the old list to take any insertions into account
         ModelState nextOldItem = getNextItemWithPair(oldItemIterator);
-//      ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                 ^^^^^^^^^^^ definition local23 ModelState nextOldItem
-//                               ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#getNextItemWithPair().
-//                                                   ^^^^^^^^^^^^^^^ reference local21
+//      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                 ^^^^^^^^^^^ definition local 23
+//                             documentation ```java\nModelState nextOldItem\n```
+//                               ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#getNextItemWithPair().
+//                                                   ^^^^^^^^^^^^^^^ reference local 21
         if (nextOldItem != null) {
-//          ^^^^^^^^^^^ reference local23
+//          ^^^^^^^^^^^ reference local 23
           nextOldItem.position += helper.getNumInsertions();
-//        ^^^^^^^^^^^ reference local23
-//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                                ^^^^^^ reference local20
-//                                       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#getNumInsertions().
+//        ^^^^^^^^^^^ reference local 23
+//                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                                ^^^^^^ reference local 20
+//                                       ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#getNumInsertions().
         }
         continue;
       }
 
       helper.add(itemToInsert.position);
-//    ^^^^^^ reference local20
-//           ^^^ reference com/airbnb/epoxy/UpdateOpHelper#add().
-//               ^^^^^^^^^^^^ reference local22
-//                            ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
+//    ^^^^^^ reference local 20
+//           ^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#add().
+//               ^^^^^^^^^^^^ reference local 22
+//                            ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
     }
   }
 
@@ -587,70 +633,76 @@ class DiffHelper {
    * Check if any items have had their values changed, batching if possible.
    */
   private void collectChanges(UpdateOpHelper helper) {
-//             ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectChanges(). private void collectChanges(UpdateOpHelper helper)
-//                            ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
-//                                           ^^^^^^ definition local24 UpdateOpHelper helper
+//             ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectChanges().
+//                            documentation ```java\nprivate void collectChanges(UpdateOpHelper helper)\n```
+//                            documentation  Check if any items have had their values changed, batching if possible.\n
+//                            ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
+//                                           ^^^^^^ definition local 24
+//                                                  documentation ```java\nUpdateOpHelper helper\n```
     for (ModelState newItem : currentStateList) {
-//       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                  ^^^^^^^ definition local25 ModelState newItem
-//                            ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
+//       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                  ^^^^^^^ definition local 25
+//                          documentation ```java\nModelState newItem\n```
+//                            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateList.
       ModelState previousItem = newItem.pair;
-//    ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//               ^^^^^^^^^^^^ definition local26 ModelState previousItem
-//                              ^^^^^^^ reference local25
-//                                      ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//               ^^^^^^^^^^^^ definition local 26
+//                            documentation ```java\nModelState previousItem\n```
+//                              ^^^^^^^ reference local 25
+//                                      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
       if (previousItem == null) {
-//        ^^^^^^^^^^^^ reference local26
+//        ^^^^^^^^^^^^ reference local 26
         continue;
       }
 
       // We use equals when we know the models are immutable and available, otherwise we have to
       // rely on the stored hashCode
       boolean modelChanged;
-//            ^^^^^^^^^^^^ definition local27 boolean modelChanged
+//            ^^^^^^^^^^^^ definition local 27
+//                         documentation ```java\nboolean modelChanged\n```
       if (immutableModels) {
-//        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#immutableModels.
+//        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#immutableModels.
         // Make sure that the old model hasn't changed, otherwise comparing it with the new one
         // won't be accurate.
         if (previousItem.model.isDebugValidationEnabled()) {
-//          ^^^^^^^^^^^^ reference local26
-//                       ^^^^^ reference com/airbnb/epoxy/ModelState#model.
-//                             ^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#isDebugValidationEnabled().
+//          ^^^^^^^^^^^^ reference local 26
+//                       ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#model.
+//                             ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#isDebugValidationEnabled().
           previousItem.model
-//        ^^^^^^^^^^^^ reference local26
-//                     ^^^^^ reference com/airbnb/epoxy/ModelState#model.
+//        ^^^^^^^^^^^^ reference local 26
+//                     ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#model.
               .validateStateHasNotChangedSinceAdded("Model was changed before it could be diffed.",
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#validateStateHasNotChangedSinceAdded().
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#validateStateHasNotChangedSinceAdded().
                   previousItem.position);
-//                ^^^^^^^^^^^^ reference local26
-//                             ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
+//                ^^^^^^^^^^^^ reference local 26
+//                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
         }
 
         modelChanged = !previousItem.model.equals(newItem.model);
-//      ^^^^^^^^^^^^ reference local27
-//                      ^^^^^^^^^^^^ reference local26
-//                                   ^^^^^ reference com/airbnb/epoxy/ModelState#model.
-//                                         ^^^^^^ reference com/airbnb/epoxy/EpoxyModel#equals().
-//                                                ^^^^^^^ reference local25
-//                                                        ^^^^^ reference com/airbnb/epoxy/ModelState#model.
+//      ^^^^^^^^^^^^ reference local 27
+//                      ^^^^^^^^^^^^ reference local 26
+//                                   ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#model.
+//                                         ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#equals().
+//                                                ^^^^^^^ reference local 25
+//                                                        ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#model.
       } else {
         modelChanged = previousItem.hashCode != newItem.hashCode;
-//      ^^^^^^^^^^^^ reference local27
-//                     ^^^^^^^^^^^^ reference local26
-//                                  ^^^^^^^^ reference com/airbnb/epoxy/ModelState#hashCode.
-//                                              ^^^^^^^ reference local25
-//                                                      ^^^^^^^^ reference com/airbnb/epoxy/ModelState#hashCode.
+//      ^^^^^^^^^^^^ reference local 27
+//                     ^^^^^^^^^^^^ reference local 26
+//                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#hashCode.
+//                                              ^^^^^^^ reference local 25
+//                                                      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#hashCode.
       }
 
       if (modelChanged) {
-//        ^^^^^^^^^^^^ reference local27
+//        ^^^^^^^^^^^^ reference local 27
         helper.update(newItem.position, previousItem.model);
-//      ^^^^^^ reference local24
-//             ^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#update(+1).
-//                    ^^^^^^^ reference local25
-//                            ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                                      ^^^^^^^^^^^^ reference local26
-//                                                   ^^^^^ reference com/airbnb/epoxy/ModelState#model.
+//      ^^^^^^ reference local 24
+//             ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#update(+1).
+//                    ^^^^^^^ reference local 25
+//                            ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                                      ^^^^^^^^^^^^ reference local 26
+//                                                   ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#model.
       }
     }
   }
@@ -659,35 +711,41 @@ class DiffHelper {
    * Check which items have had a position changed. Recyclerview does not support batching these.
    */
   private void collectMoves(UpdateOpHelper helper) {
-//             ^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#collectMoves(). private void collectMoves(UpdateOpHelper helper)
-//                          ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#
-//                                         ^^^^^^ definition local28 UpdateOpHelper helper
+//             ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectMoves().
+//                          documentation ```java\nprivate void collectMoves(UpdateOpHelper helper)\n```
+//                          documentation  Check which items have had a position changed. Recyclerview does not support batching these.\n
+//                          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
+//                                         ^^^^^^ definition local 28
+//                                                documentation ```java\nUpdateOpHelper helper\n```
     // This walks through both the new and old list simultaneous and checks for position changes.
     Iterator<ModelState> oldItemIterator = oldStateList.iterator();
-//  ^^^^^^^^ reference java/util/Iterator#
-//           ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                       ^^^^^^^^^^^^^^^ definition local29 Iterator<ModelState> oldItemIterator
-//                                         ^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#oldStateList.
-//                                                      ^^^^^^^^ reference java/util/ArrayList#iterator().
+//  ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
+//           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                       ^^^^^^^^^^^^^^^ definition local 29
+//                                       documentation ```java\nIterator<ModelState> oldItemIterator\n```
+//                                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
+//                                                      ^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#iterator().
     ModelState nextOldItem = null;
-//  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//             ^^^^^^^^^^^ definition local30 ModelState nextOldItem
+//  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//             ^^^^^^^^^^^ definition local 30
+//                         documentation ```java\nModelState nextOldItem\n```
 
     for (ModelState newItem : currentStateList) {
-//       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                  ^^^^^^^ definition local31 ModelState newItem
-//                            ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#currentStateList.
+//       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                  ^^^^^^^ definition local 31
+//                          documentation ```java\nModelState newItem\n```
+//                            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateList.
       if (newItem.pair == null) {
-//        ^^^^^^^ reference local31
-//                ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//        ^^^^^^^ reference local 31
+//                ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
         // This item was inserted. However, insertions are done at the item's final position, and
         // aren't smart about inserting at a different position to take future moves into account.
         // As the old state list is updated to reflect moves, it needs to also consider insertions
         // affected by those moves in order for the final change set to be correct
         if (helper.moves.isEmpty()) {
-//          ^^^^^^ reference local28
-//                 ^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#moves.
-//                       ^^^^^^^ reference java/util/List#isEmpty().
+//          ^^^^^^ reference local 28
+//                 ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#moves.
+//                       ^^^^^^^ reference semanticdb maven jdk 11 java/util/List#isEmpty().
           // There have been no moves, so the item is still at it's correct position
           continue;
         } else {
@@ -696,8 +754,8 @@ class DiffHelper {
           // (for optimization purposes), but we can create a pair for this item to
           // track its position in the old list and move it back to its final position if necessary
           newItem.pairWithSelf();
-//        ^^^^^^^ reference local31
-//                ^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#pairWithSelf().
+//        ^^^^^^^ reference local 31
+//                ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pairWithSelf().
         }
       }
 
@@ -712,130 +770,132 @@ class DiffHelper {
       // already iterated through are guaranteed to have their pair
       // be already in the right spot, which won't be affected by future MOVEs.
       if (nextOldItem == null) {
-//        ^^^^^^^^^^^ reference local30
+//        ^^^^^^^^^^^ reference local 30
         nextOldItem = getNextItemWithPair(oldItemIterator);
-//      ^^^^^^^^^^^ reference local30
-//                    ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#getNextItemWithPair().
-//                                        ^^^^^^^^^^^^^^^ reference local29
+//      ^^^^^^^^^^^ reference local 30
+//                    ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#getNextItemWithPair().
+//                                        ^^^^^^^^^^^^^^^ reference local 29
 
         // We've already iterated through all old items and moved each
         // item once. However, subsequent moves may have shifted an item out of
         // its correct space once it was already moved. We finish
         // iterating through all the new items to ensure everything is still correct
         if (nextOldItem == null) {
-//          ^^^^^^^^^^^ reference local30
+//          ^^^^^^^^^^^ reference local 30
           nextOldItem = newItem.pair;
-//        ^^^^^^^^^^^ reference local30
-//                      ^^^^^^^ reference local31
-//                              ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//        ^^^^^^^^^^^ reference local 30
+//                      ^^^^^^^ reference local 31
+//                              ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
         }
       }
 
       while (nextOldItem != null) {
-//           ^^^^^^^^^^^ reference local30
+//           ^^^^^^^^^^^ reference local 30
         // Make sure the positions are updated to the latest
         // move operations before we calculate the next move
         updateItemPosition(newItem.pair, helper.moves);
-//      ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#updateItemPosition().
-//                         ^^^^^^^ reference local31
-//                                 ^^^^ reference com/airbnb/epoxy/ModelState#pair.
-//                                       ^^^^^^ reference local28
-//                                              ^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#moves.
+//      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#updateItemPosition().
+//                         ^^^^^^^ reference local 31
+//                                 ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
+//                                       ^^^^^^ reference local 28
+//                                              ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#moves.
         updateItemPosition(nextOldItem, helper.moves);
-//      ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#updateItemPosition().
-//                         ^^^^^^^^^^^ reference local30
-//                                      ^^^^^^ reference local28
-//                                             ^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#moves.
+//      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#updateItemPosition().
+//                         ^^^^^^^^^^^ reference local 30
+//                                      ^^^^^^ reference local 28
+//                                             ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#moves.
 
         // The item is the same and its already in the correct place
         if (newItem.id == nextOldItem.id && newItem.position == nextOldItem.position) {
-//          ^^^^^^^ reference local31
-//                  ^^ reference com/airbnb/epoxy/ModelState#id.
-//                        ^^^^^^^^^^^ reference local30
-//                                    ^^ reference com/airbnb/epoxy/ModelState#id.
-//                                          ^^^^^^^ reference local31
-//                                                  ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                                                              ^^^^^^^^^^^ reference local30
-//                                                                          ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
+//          ^^^^^^^ reference local 31
+//                  ^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#id.
+//                        ^^^^^^^^^^^ reference local 30
+//                                    ^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#id.
+//                                          ^^^^^^^ reference local 31
+//                                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                                                              ^^^^^^^^^^^ reference local 30
+//                                                                          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
           nextOldItem = null;
-//        ^^^^^^^^^^^ reference local30
+//        ^^^^^^^^^^^ reference local 30
           break;
         }
 
         int newItemDistance = newItem.pair.position - newItem.position;
-//          ^^^^^^^^^^^^^^^ definition local32 int newItemDistance
-//                            ^^^^^^^ reference local31
-//                                    ^^^^ reference com/airbnb/epoxy/ModelState#pair.
-//                                         ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                                                    ^^^^^^^ reference local31
-//                                                            ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
+//          ^^^^^^^^^^^^^^^ definition local 32
+//                          documentation ```java\nint newItemDistance\n```
+//                            ^^^^^^^ reference local 31
+//                                    ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
+//                                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                                                    ^^^^^^^ reference local 31
+//                                                            ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
         int oldItemDistance = nextOldItem.pair.position - nextOldItem.position;
-//          ^^^^^^^^^^^^^^^ definition local33 int oldItemDistance
-//                            ^^^^^^^^^^^ reference local30
-//                                        ^^^^ reference com/airbnb/epoxy/ModelState#pair.
-//                                             ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                                                        ^^^^^^^^^^^ reference local30
-//                                                                    ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
+//          ^^^^^^^^^^^^^^^ definition local 33
+//                          documentation ```java\nint oldItemDistance\n```
+//                            ^^^^^^^^^^^ reference local 30
+//                                        ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
+//                                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                                                        ^^^^^^^^^^^ reference local 30
+//                                                                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
 
         // Both items are already in the correct position
         if (newItemDistance == 0 && oldItemDistance == 0) {
-//          ^^^^^^^^^^^^^^^ reference local32
-//                                  ^^^^^^^^^^^^^^^ reference local33
+//          ^^^^^^^^^^^^^^^ reference local 32
+//                                  ^^^^^^^^^^^^^^^ reference local 33
           nextOldItem = null;
-//        ^^^^^^^^^^^ reference local30
+//        ^^^^^^^^^^^ reference local 30
           break;
         }
 
         if (oldItemDistance > newItemDistance) {
-//          ^^^^^^^^^^^^^^^ reference local33
-//                            ^^^^^^^^^^^^^^^ reference local32
+//          ^^^^^^^^^^^^^^^ reference local 33
+//                            ^^^^^^^^^^^^^^^ reference local 32
           helper.move(nextOldItem.position, nextOldItem.pair.position);
-//        ^^^^^^ reference local28
-//               ^^^^ reference com/airbnb/epoxy/UpdateOpHelper#move().
-//                    ^^^^^^^^^^^ reference local30
-//                                ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                                          ^^^^^^^^^^^ reference local30
-//                                                      ^^^^ reference com/airbnb/epoxy/ModelState#pair.
-//                                                           ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
+//        ^^^^^^ reference local 28
+//               ^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#move().
+//                    ^^^^^^^^^^^ reference local 30
+//                                ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                                          ^^^^^^^^^^^ reference local 30
+//                                                      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
+//                                                           ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
 
           nextOldItem.position = nextOldItem.pair.position;
-//        ^^^^^^^^^^^ reference local30
-//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                               ^^^^^^^^^^^ reference local30
-//                                           ^^^^ reference com/airbnb/epoxy/ModelState#pair.
-//                                                ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
+//        ^^^^^^^^^^^ reference local 30
+//                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                               ^^^^^^^^^^^ reference local 30
+//                                           ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
+//                                                ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
           nextOldItem.lastMoveOp = helper.getNumMoves();
-//        ^^^^^^^^^^^ reference local30
-//                    ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#lastMoveOp.
-//                                 ^^^^^^ reference local28
-//                                        ^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#getNumMoves().
+//        ^^^^^^^^^^^ reference local 30
+//                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#lastMoveOp.
+//                                 ^^^^^^ reference local 28
+//                                        ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#getNumMoves().
 
           nextOldItem = getNextItemWithPair(oldItemIterator);
-//        ^^^^^^^^^^^ reference local30
-//                      ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/DiffHelper#getNextItemWithPair().
-//                                          ^^^^^^^^^^^^^^^ reference local29
+//        ^^^^^^^^^^^ reference local 30
+//                      ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#getNextItemWithPair().
+//                                          ^^^^^^^^^^^^^^^ reference local 29
         } else {
           helper.move(newItem.pair.position, newItem.position);
-//        ^^^^^^ reference local28
-//               ^^^^ reference com/airbnb/epoxy/UpdateOpHelper#move().
-//                    ^^^^^^^ reference local31
-//                            ^^^^ reference com/airbnb/epoxy/ModelState#pair.
-//                                 ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                                           ^^^^^^^ reference local31
-//                                                   ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
+//        ^^^^^^ reference local 28
+//               ^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#move().
+//                    ^^^^^^^ reference local 31
+//                            ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
+//                                 ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                                           ^^^^^^^ reference local 31
+//                                                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
 
           newItem.pair.position = newItem.position;
-//        ^^^^^^^ reference local31
-//                ^^^^ reference com/airbnb/epoxy/ModelState#pair.
-//                     ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                                ^^^^^^^ reference local31
-//                                        ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
+//        ^^^^^^^ reference local 31
+//                ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
+//                     ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                                ^^^^^^^ reference local 31
+//                                        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
           newItem.pair.lastMoveOp = helper.getNumMoves();
-//        ^^^^^^^ reference local31
-//                ^^^^ reference com/airbnb/epoxy/ModelState#pair.
-//                     ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#lastMoveOp.
-//                                  ^^^^^^ reference local28
-//                                         ^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOpHelper#getNumMoves().
+//        ^^^^^^^ reference local 31
+//                ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
+//                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#lastMoveOp.
+//                                  ^^^^^^ reference local 28
+//                                         ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#getNumMoves().
           break;
         }
       }
@@ -848,101 +908,114 @@ class DiffHelper {
    * we know which ones to apply next time.
    */
   private void updateItemPosition(ModelState item, List<UpdateOp> moveOps) {
-//             ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#updateItemPosition(). private void updateItemPosition(ModelState item, List<UpdateOp> moveOps)
-//                                ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                                           ^^^^ definition local34 ModelState item
-//                                                 ^^^^ reference java/util/List#
-//                                                      ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
-//                                                                ^^^^^^^ definition local35 List<UpdateOp> moveOps
+//             ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#updateItemPosition().
+//                                documentation ```java\nprivate void updateItemPosition(ModelState item, List<UpdateOp> moveOps)\n```
+//                                documentation  Apply the movement operations to the given item to update its position. Only applies the\n operations that have not been applied yet, and stores how many operations have been applied so\n we know which ones to apply next time.\n
+//                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                                           ^^^^ definition local 34
+//                                                documentation ```java\nModelState item\n```
+//                                                 ^^^^ reference semanticdb maven jdk 11 java/util/List#
+//                                                      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
+//                                                                ^^^^^^^ definition local 35
+//                                                                        documentation ```java\nList<UpdateOp> moveOps\n```
     int size = moveOps.size();
-//      ^^^^ definition local36 int size
-//             ^^^^^^^ reference local35
-//                     ^^^^ reference java/util/List#size().
+//      ^^^^ definition local 36
+//           documentation ```java\nint size\n```
+//             ^^^^^^^ reference local 35
+//                     ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
 
     for (int i = item.lastMoveOp; i < size; i++) {
-//           ^ definition local37 int i
-//               ^^^^ reference local34
-//                    ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#lastMoveOp.
-//                                ^ reference local37
-//                                    ^^^^ reference local36
-//                                          ^ reference local37
+//           ^ definition local 37
+//             documentation ```java\nint i\n```
+//               ^^^^ reference local 34
+//                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#lastMoveOp.
+//                                ^ reference local 37
+//                                    ^^^^ reference local 36
+//                                          ^ reference local 37
       UpdateOp moveOp = moveOps.get(i);
-//    ^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#
-//             ^^^^^^ definition local38 UpdateOp moveOp
-//                      ^^^^^^^ reference local35
-//                              ^^^ reference java/util/List#get().
-//                                  ^ reference local37
+//    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
+//             ^^^^^^ definition local 38
+//                    documentation ```java\nUpdateOp moveOp\n```
+//                      ^^^^^^^ reference local 35
+//                              ^^^ reference semanticdb maven jdk 11 java/util/List#get().
+//                                  ^ reference local 37
       int fromPosition = moveOp.positionStart;
-//        ^^^^^^^^^^^^ definition local39 int fromPosition
-//                       ^^^^^^ reference local38
-//                              ^^^^^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#positionStart.
+//        ^^^^^^^^^^^^ definition local 39
+//                     documentation ```java\nint fromPosition\n```
+//                       ^^^^^^ reference local 38
+//                              ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionStart.
       int toPosition = moveOp.itemCount;
-//        ^^^^^^^^^^ definition local40 int toPosition
-//                     ^^^^^^ reference local38
-//                            ^^^^^^^^^ reference com/airbnb/epoxy/UpdateOp#itemCount.
+//        ^^^^^^^^^^ definition local 40
+//                   documentation ```java\nint toPosition\n```
+//                     ^^^^^^ reference local 38
+//                            ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#itemCount.
 
       if (item.position > fromPosition && item.position <= toPosition) {
-//        ^^^^ reference local34
-//             ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                        ^^^^^^^^^^^^ reference local39
-//                                        ^^^^ reference local34
-//                                             ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                                                         ^^^^^^^^^^ reference local40
+//        ^^^^ reference local 34
+//             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                        ^^^^^^^^^^^^ reference local 39
+//                                        ^^^^ reference local 34
+//                                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                                                         ^^^^^^^^^^ reference local 40
         item.position--;
-//      ^^^^ reference local34
-//           ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
+//      ^^^^ reference local 34
+//           ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
       } else if (item.position < fromPosition && item.position >= toPosition) {
-//               ^^^^ reference local34
-//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                               ^^^^^^^^^^^^ reference local39
-//                                               ^^^^ reference local34
-//                                                    ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
-//                                                                ^^^^^^^^^^ reference local40
+//               ^^^^ reference local 34
+//                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                               ^^^^^^^^^^^^ reference local 39
+//                                               ^^^^ reference local 34
+//                                                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
+//                                                                ^^^^^^^^^^ reference local 40
         item.position++;
-//      ^^^^ reference local34
-//           ^^^^^^^^ reference com/airbnb/epoxy/ModelState#position.
+//      ^^^^ reference local 34
+//           ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
       }
     }
 
     item.lastMoveOp = size;
-//  ^^^^ reference local34
-//       ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#lastMoveOp.
-//                    ^^^^ reference local36
+//  ^^^^ reference local 34
+//       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#lastMoveOp.
+//                    ^^^^ reference local 36
   }
 
   /**
    * Gets the next item in the list that has a pair, meaning it wasn't inserted or removed.
    */
   @Nullable
-// ^^^^^^^^ reference androidx/annotation/Nullable#
+// ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
   private ModelState getNextItemWithPair(Iterator<ModelState> iterator) {
-//        ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                   ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/DiffHelper#getNextItemWithPair(). @Nullable private ModelState getNextItemWithPair(Iterator<ModelState> iterator)
-//                                       ^^^^^^^^ reference java/util/Iterator#
-//                                                ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//                                                            ^^^^^^^^ definition local41 Iterator<ModelState> iterator
+//        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                   ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#getNextItemWithPair().
+//                                       documentation ```java\n@Nullable\nprivate ModelState getNextItemWithPair(Iterator<ModelState> iterator)\n```
+//                                       documentation  Gets the next item in the list that has a pair, meaning it wasn't inserted or removed.\n
+//                                       ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
+//                                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//                                                            ^^^^^^^^ definition local 41
+//                                                                     documentation ```java\nIterator<ModelState> iterator\n```
     ModelState nextItem = null;
-//  ^^^^^^^^^^ reference com/airbnb/epoxy/ModelState#
-//             ^^^^^^^^ definition local42 ModelState nextItem
+//  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
+//             ^^^^^^^^ definition local 42
+//                      documentation ```java\nModelState nextItem\n```
     while (nextItem == null && iterator.hasNext()) {
-//         ^^^^^^^^ reference local42
-//                             ^^^^^^^^ reference local41
-//                                      ^^^^^^^ reference java/util/Iterator#hasNext().
+//         ^^^^^^^^ reference local 42
+//                             ^^^^^^^^ reference local 41
+//                                      ^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#hasNext().
       nextItem = iterator.next();
-//    ^^^^^^^^ reference local42
-//               ^^^^^^^^ reference local41
-//                        ^^^^ reference java/util/Iterator#next().
+//    ^^^^^^^^ reference local 42
+//               ^^^^^^^^ reference local 41
+//                        ^^^^ reference semanticdb maven jdk 11 java/util/Iterator#next().
 
       if (nextItem.pair == null) {
-//        ^^^^^^^^ reference local42
-//                 ^^^^ reference com/airbnb/epoxy/ModelState#pair.
+//        ^^^^^^^^ reference local 42
+//                 ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
         // Skip this one and go on to the next
         nextItem = null;
-//      ^^^^^^^^ reference local42
+//      ^^^^^^^^ reference local 42
       }
     }
 
     return nextItem;
-//         ^^^^^^^^ reference local42
+//         ^^^^^^^^ reference local 42
   }
 }

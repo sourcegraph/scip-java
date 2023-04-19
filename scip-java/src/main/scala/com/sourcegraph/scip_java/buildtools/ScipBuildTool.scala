@@ -387,7 +387,8 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       .getOrElse {
         throw new IllegalArgumentException(
           s"failed to infer the Scala version from the dependencies: " +
-            pprint.PPrinter.BlackWhite.tokenize(deps.classpath).mkString
+            pprint.PPrinter.BlackWhite.tokenize(deps.classpath).mkString +
+            s"\n\nTo fix this, consider adding 'org.scala-lang:scala-library:${BuildInfo.scalaVersion}' to the list of dependencies."
         )
       }
     val mtags = Dependencies.resolveDependencies(

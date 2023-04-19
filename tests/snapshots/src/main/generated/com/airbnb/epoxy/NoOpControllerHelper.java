@@ -5,15 +5,21 @@ package com.airbnb.epoxy;
  * com.airbnb.epoxy.AutoModel} usage.
  */
 class NoOpControllerHelper extends ControllerHelper<EpoxyController> {
-//    ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper# class NoOpControllerHelper
-//    ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#`<init>`(). NoOpControllerHelper()
-//                                 ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ControllerHelper#
-//                                                  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyController#
+//    ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NoOpControllerHelper#
+//                         documentation ```java\nclass NoOpControllerHelper\n```
+//                         documentation  A {@link ControllerHelper} implementation for adapters with no {@link\n com.airbnb.epoxy.AutoModel} usage.\n
+//                         relationship is_implementation semanticdb maven . . com/airbnb/epoxy/ControllerHelper#
+//    ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NoOpControllerHelper#`<init>`().
+//                         documentation ```java\nNoOpControllerHelper()\n```
+//                                 ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ControllerHelper#
+//                                                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void resetAutoModels() {
-//            ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/NoOpControllerHelper#resetAutoModels(). @Override public void resetAutoModels()
+//            ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NoOpControllerHelper#resetAutoModels().
+//                            documentation ```java\n@Override\npublic void resetAutoModels()\n```
+//                            relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/ControllerHelper#resetAutoModels().
     // No - Op
   }
 }

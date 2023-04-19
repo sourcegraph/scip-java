@@ -1,33 +1,33 @@
 package ujson
-//      ^^^^^ definition ujson/
+//      ^^^^^ definition semanticdb maven . . ujson/
 import java.io.StringWriter
-//     ^^^^ reference java/
-//          ^^ reference java/io/
-//             ^^^^^^^^^^^^ reference java/io/StringWriter#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^ reference semanticdb maven . . java/io/
+//             ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/io/StringWriter#
 
 import upickle.core.{Abort, AbortException, ObjArrVisitor, ObjVisitor, Visitor}
-//     ^^^^^^^ reference upickle/
-//             ^^^^ reference upickle/core/
-//                   ^^^^^ reference upickle/core/Abort.
-//                   ^^^^^ reference upickle/core/Abort#
-//                          ^^^^^^^^^^^^^^ reference upickle/core/AbortException.
-//                          ^^^^^^^^^^^^^^ reference upickle/core/AbortException#
-//                                          ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
-//                                                         ^^^^^^^^^^ reference upickle/core/ObjVisitor#
-//                                                                     ^^^^^^^ reference upickle/core/Visitor.
-//                                                                     ^^^^^^^ reference upickle/core/Visitor#
+//     ^^^^^^^ reference semanticdb maven . . upickle/
+//             ^^^^ reference semanticdb maven . . upickle/core/
+//                   ^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Abort.
+//                   ^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Abort#
+//                          ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/AbortException.
+//                          ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/AbortException#
+//                                          ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
+//                                                         ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjVisitor#
+//                                                                     ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
+//                                                                     ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 import java.nio.charset.Charset
-//     ^^^^ reference java/
-//          ^^^ reference java/nio/
-//              ^^^^^^^ reference java/nio/charset/
-//                      ^^^^^^^ reference java/nio/charset/Charset#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^ reference semanticdb maven . . java/nio/
+//              ^^^^^^^ reference semanticdb maven . . java/nio/charset/
+//                      ^^^^^^^ reference semanticdb maven jdk 11 java/nio/charset/Charset#
 
 
 import scala.annotation.{switch, tailrec}
-//     ^^^^^ reference scala/
-//           ^^^^^^^^^^ reference scala/annotation/
-//                       ^^^^^^ reference scala/annotation/switch#
-//                               ^^^^^^^ reference scala/annotation/tailrec#
+//     ^^^^^ reference semanticdb maven . . scala/
+//           ^^^^^^^^^^ reference semanticdb maven . . scala/annotation/
+//                       ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/annotation/switch#
+//                               ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/annotation/tailrec#
 
 /**
   * A specialized JSON parse that can parse Chars (Chars or Bytes), sending
@@ -38,95 +38,115 @@ import scala.annotation.{switch, tailrec}
   * to construct the `CharSequences` that `visitString` requires, etc.
   */
 abstract class CharParser[J] extends upickle.core.BufferingCharParser{
-//             ^^^^^^^^^^ definition ujson/CharParser# abstract class CharParser[J]
-//                        ^ definition ujson/CharParser#[J] J
-//                            definition ujson/CharParser#`<init>`(). def this()
-//                                   ^^^^^^^ reference upickle/
-//                                           ^^^^ reference upickle/core/
-//                                                ^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#
+//             ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#
+//                        documentation ```scala\nabstract class CharParser[J]\n```
+//                        ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                          documentation ```scala\nJ\n```
+//                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#`<init>`().
+//                             documentation ```scala\ndef this()\n```
+//                                   ^^^^^^^ reference semanticdb maven . . upickle/
+//                                           ^^^^ reference semanticdb maven . . upickle/core/
+//                                                ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#
   private[this] val elemOps = upickle.core.CharOps
-//                  ^^^^^^^ definition ujson/CharParser#elemOps. private[this] val elemOps:
-//                            ^^^^^^^ reference upickle/
-//                                    ^^^^ reference upickle/core/
-//                                         ^^^^^^^ reference upickle/core/CharOps.
+//                  ^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#elemOps.
+//                          documentation ```scala\nprivate[this] val elemOps: \n```
+//                            ^^^^^^^ reference semanticdb maven . . upickle/
+//                                    ^^^^ reference semanticdb maven . . upickle/core/
+//                                         ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.
   private[this] val outputBuilder = new upickle.core.CharBuilder()
-//                  ^^^^^^^^^^^^^ definition ujson/CharParser#outputBuilder. private[this] val outputBuilder: CharBuilder
-//                                      ^^^^^^^ reference upickle/
-//                                              ^^^^ reference upickle/core/
-//                                                   ^^^^^^^^^^^ reference upickle/core/CharBuilder#
-//                                                               reference upickle/core/CharBuilder#`<init>`().
+//                  ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                                documentation ```scala\nprivate[this] val outputBuilder: CharBuilder\n```
+//                                      ^^^^^^^ reference semanticdb maven . . upickle/
+//                                              ^^^^ reference semanticdb maven . . upickle/core/
+//                                                   ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#
+//                                                              ^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#`<init>`().
 
   def requestUntilOrThrow(i: Int) = {
-//    ^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#requestUntilOrThrow(). def requestUntilOrThrow(i: Int): Unit
-//                        ^ definition ujson/CharParser#requestUntilOrThrow().(i) i: Int
-//                           ^^^ reference scala/Int#
+//    ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#requestUntilOrThrow().
+//                        documentation ```scala\ndef requestUntilOrThrow(i: Int): Unit\n```
+//                        ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#requestUntilOrThrow().(i)
+//                          documentation ```scala\ni: Int \n```
+//                           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     if (requestUntil(i)) throw new IncompleteParseException("exhausted input")
-//      ^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#requestUntil().
-//                   ^ reference ujson/CharParser#requestUntilOrThrow().(i)
-//                                 ^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/IncompleteParseException#
-//                                                          reference ujson/IncompleteParseException#`<init>`().
+//      ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#requestUntil().
+//                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#requestUntilOrThrow().(i)
+//                                 ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException#
+//                                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException#`<init>`().
   }
   override def getCharSafe(i: Int): Char = {
-//             ^^^^^^^^^^^ definition ujson/CharParser#getCharSafe(). def getCharSafe(i: Int): Char
-//                         ^ definition ujson/CharParser#getCharSafe().(i) i: Int
-//                            ^^^ reference scala/Int#
-//                                  ^^^^ reference scala/Char#
+//             ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                         documentation ```scala\ndef getCharSafe(i: Int): Char\n```
+//                         relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#getCharSafe().
+//                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().(i)
+//                           documentation ```scala\ni: Int \n```
+//                            ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                  ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#
     requestUntilOrThrow(i)
-//  ^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#requestUntilOrThrow().
-//                      ^ reference ujson/CharParser#getCharSafe().(i)
+//  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#requestUntilOrThrow().
+//                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().(i)
     getCharUnsafe(i)
-//  ^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#getCharUnsafe().
-//                ^ reference ujson/CharParser#getCharSafe().(i)
+//  ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#getCharUnsafe().
+//                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().(i)
   }
 
   /**
    * Return true iff 'i' is at or beyond the end of the input (EOF).
    */
   protected[this] def atEof(i: Int) = requestUntil(i)
-//                    ^^^^^ definition ujson/CharParser#atEof(). def atEof(i: Int): Boolean
-//                          ^ definition ujson/CharParser#atEof().(i) i: Int
-//                             ^^^ reference scala/Int#
-//                                    ^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#requestUntil().
-//                                                 ^ reference ujson/CharParser#atEof().(i)
+//                    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#atEof().
+//                          documentation ```scala\ndef atEof(i: Int): Boolean\n```
+//                          ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#atEof().(i)
+//                            documentation ```scala\ni: Int \n```
+//                             ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                    ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#requestUntil().
+//                                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#atEof().(i)
 
   /**
    * Should be called when parsing is finished.
    */
   protected[this] def close(): Unit
-//                    ^^^^^ definition ujson/CharParser#close(). def close(): Unit
-//                             ^^^^ reference scala/Unit#
+//                    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#close().
+//                          documentation ```scala\ndef close(): Unit\n```
+//                             ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
 
   /**
    * Valid parser states.
    */
   @inline private[this] final val ARRBEG = 6
-// ^^^^^^ reference scala/inline#
-//         reference scala/inline#`<init>`().
-//                                ^^^^^^ definition ujson/CharParser#ARRBEG. @inline private[this] final val ARRBEG: 6
+// ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#
+//        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#`<init>`().
+//                                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#ARRBEG.
+//                                       documentation ```scala\n@inline\nprivate[this] final val ARRBEG: 6\n```
   @inline private[this] final val OBJBEG = 7
-// ^^^^^^ reference scala/inline#
-//         reference scala/inline#`<init>`().
-//                                ^^^^^^ definition ujson/CharParser#OBJBEG. @inline private[this] final val OBJBEG: 7
+// ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#
+//        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#`<init>`().
+//                                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#OBJBEG.
+//                                       documentation ```scala\n@inline\nprivate[this] final val OBJBEG: 7\n```
   @inline private[this] final val DATA = 1
-// ^^^^^^ reference scala/inline#
-//         reference scala/inline#`<init>`().
-//                                ^^^^ definition ujson/CharParser#DATA. @inline private[this] final val DATA: 1
+// ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#
+//        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#`<init>`().
+//                                ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#DATA.
+//                                     documentation ```scala\n@inline\nprivate[this] final val DATA: 1\n```
   @inline private[this] final val KEY = 2
-// ^^^^^^ reference scala/inline#
-//         reference scala/inline#`<init>`().
-//                                ^^^ definition ujson/CharParser#KEY. @inline private[this] final val KEY: 2
+// ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#
+//        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#`<init>`().
+//                                ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#KEY.
+//                                    documentation ```scala\n@inline\nprivate[this] final val KEY: 2\n```
   @inline private[this] final val COLON = 3
-// ^^^^^^ reference scala/inline#
-//         reference scala/inline#`<init>`().
-//                                ^^^^^ definition ujson/CharParser#COLON. @inline private[this] final val COLON: 3
+// ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#
+//        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#`<init>`().
+//                                ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#COLON.
+//                                      documentation ```scala\n@inline\nprivate[this] final val COLON: 3\n```
   @inline private[this] final val ARREND = 4
-// ^^^^^^ reference scala/inline#
-//         reference scala/inline#`<init>`().
-//                                ^^^^^^ definition ujson/CharParser#ARREND. @inline private[this] final val ARREND: 4
+// ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#
+//        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#`<init>`().
+//                                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#ARREND.
+//                                       documentation ```scala\n@inline\nprivate[this] final val ARREND: 4\n```
   @inline private[this] final val OBJEND = 5
-// ^^^^^^ reference scala/inline#
-//         reference scala/inline#`<init>`().
-//                                ^^^^^^ definition ujson/CharParser#OBJEND. @inline private[this] final val OBJEND: 5
+// ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#
+//        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/inline#`<init>`().
+//                                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#OBJEND.
+//                                       documentation ```scala\n@inline\nprivate[this] final val OBJEND: 5\n```
 
   /**
     * Parse the JSON document into a single JSON value.
@@ -136,96 +156,106 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
     * multiple top-level objects are not allowed.
     */
   final def parse(facade: Visitor[_, J]): J = {
-//          ^^^^^ definition ujson/CharParser#parse(). final def parse(facade: Visitor[local0, J[): J
-//                ^^^^^^ definition ujson/CharParser#parse().(facade) facade: Visitor[local0, J[
-//                        ^^^^^^^ reference upickle/core/Visitor#
-//                                   ^ reference ujson/CharParser#[J]
-//                                        ^ reference ujson/CharParser#[J]
+//          ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parse().
+//                documentation ```scala\nfinal def parse(facade: Visitor[local0, J[): J\n```
+//                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parse().(facade)
+//                       documentation ```scala\nfacade: Visitor[local0, J[ \n```
+//                        ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
     val (value, i) = parseTopLevel(0, facade)
-//       ^^^^^ definition local2 value: J
-//              ^ definition local3 i: Int
-//                   ^^^^^^^^^^^^^ reference ujson/CharParser#parseTopLevel().
-//                                    ^^^^^^ reference ujson/CharParser#parse().(facade)
+//       ^^^^^ definition local 2
+//             documentation ```scala\nvalue: J \n```
+//              ^ definition local 3
+//                documentation ```scala\ni: Int \n```
+//                   ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel().
+//                                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parse().(facade)
     var j = i
-//      ^ definition local4 j: Int
-//          ^ reference local3
+//      ^ definition local 4
+//        documentation ```scala\nj: Int \n```
+//          ^ reference local 3
     while (!atEof(j)) {
-//         ^ reference scala/Boolean#`unary_!`().
-//          ^^^^^ reference ujson/CharParser#atEof().
-//                ^ reference local4
+//         ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`unary_!`().
+//          ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#atEof().
+//                ^ reference local 4
       (getCharSafe(j): @switch) match {
-//     ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                 ^ reference local4
+//     ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                 ^ reference local 4
         case '\n' | ' ' | '\t' | '\r' => j += 1
-//                                       ^ reference local4
-//                                         ^^ reference scala/Int#`+`(+4).
+//                                       ^ reference local 4
+//                                         ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
         case _ => die(j, "expected whitespace or eof")
-//                ^^^ reference ujson/CharParser#die().
-//                    ^ reference local4
+//                ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//                    ^ reference local 4
       }
     }
     if (!atEof(j)) die(j, "expected eof")
-//      ^ reference scala/Boolean#`unary_!`().
-//       ^^^^^ reference ujson/CharParser#atEof().
-//             ^ reference local4
-//                 ^^^ reference ujson/CharParser#die().
-//                     ^ reference local4
+//      ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`unary_!`().
+//       ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#atEof().
+//             ^ reference local 4
+//                 ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//                     ^ reference local 4
     close()
-//  ^^^^^ reference ujson/CharParser#close().
+//  ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#close().
     value
-//  ^^^^^ reference local2
+//  ^^^^^ reference local 2
   }
 
   /**
    * Used to generate error messages with character info and offsets.
    */
   protected[this] def die(i: Int, msg: String): Nothing = {
-//                    ^^^ definition ujson/CharParser#die(). def die(i: Int, msg: String): Nothing
-//                        ^ definition ujson/CharParser#die().(i) i: Int
-//                           ^^^ reference scala/Int#
-//                                ^^^ definition ujson/CharParser#die().(msg) msg: String
-//                                     ^^^^^^ reference scala/Predef.String#
-//                                              ^^^^^^^ reference scala/Nothing#
+//                    ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//                        documentation ```scala\ndef die(i: Int, msg: String): Nothing\n```
+//                        ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().(i)
+//                          documentation ```scala\ni: Int \n```
+//                           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().(msg)
+//                                    documentation ```scala\nmsg: String \n```
+//                                     ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
+//                                              ^^^^^^^ reference semanticdb maven . . scala/Nothing#
     val out = new upickle.core.CharBuilder()
-//      ^^^ definition local6 out: CharBuilder
-//                ^^^^^^^ reference upickle/
-//                        ^^^^ reference upickle/core/
-//                             ^^^^^^^^^^^ reference upickle/core/CharBuilder#
-//                                         reference upickle/core/CharBuilder#`<init>`().
+//      ^^^ definition local 6
+//          documentation ```scala\nout: CharBuilder \n```
+//                ^^^^^^^ reference semanticdb maven . . upickle/
+//                        ^^^^ reference semanticdb maven . . upickle/core/
+//                             ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#
+//                                        ^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#`<init>`().
     upickle.core.RenderUtils.escapeChar(
-//  ^^^^^^^ reference upickle/
-//          ^^^^ reference upickle/core/
-//               ^^^^^^^^^^^ reference upickle/core/RenderUtils.
-//                           ^^^^^^^^^^ reference upickle/core/RenderUtils.escapeChar().
+//  ^^^^^^^ reference semanticdb maven . . upickle/
+//          ^^^^ reference semanticdb maven . . upickle/core/
+//               ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/RenderUtils.
+//                           ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/RenderUtils.escapeChar().
       new upickle.core.CharBuilder(),
-//        ^^^^^^^ reference upickle/
-//                ^^^^ reference upickle/core/
-//                     ^^^^^^^^^^^ reference upickle/core/CharBuilder#
-//                                 reference upickle/core/CharBuilder#`<init>`().
+//        ^^^^^^^ reference semanticdb maven . . upickle/
+//                ^^^^ reference semanticdb maven . . upickle/core/
+//                     ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#
+//                                ^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#`<init>`().
       out,
-//    ^^^ reference local6
+//    ^^^ reference local 6
       new ArrayCharSequence(Array(elemOps.toInt(getCharSafe(i)).toChar)),
-//        ^^^^^^^^^^^^^^^^^ reference scala/Predef.ArrayCharSequence#
-//                          reference scala/Predef.ArrayCharSequence#`<init>`().
-//                          ^^^^^ reference scala/Array.
-//                                ^^^^^^^ reference ujson/CharParser#elemOps.
-//                                        ^^^^^ reference upickle/core/CharOps.toInt().
-//                                              ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                                                          ^ reference ujson/CharParser#die().(i)
-//                                                              ^^^^^^ reference scala/Int#toChar().
+//        ^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.ArrayCharSequence#
+//                         ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.ArrayCharSequence#`<init>`().
+//                          ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Array.
+//                                ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#elemOps.
+//                                        ^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.toInt().
+//                                              ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                                                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().(i)
+//                                                              ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#toChar().
       unicode = false
-//    ^^^^^^^ reference upickle/core/RenderUtils.escapeChar().(unicode)
+//    ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/RenderUtils.escapeChar().(unicode)
     )
     val s = "%s got %s" format (msg, out.makeString())
-//      ^ definition local7 s: String
-//                      ^^^^^^ reference scala/collection/StringOps#format().
-//                              ^^^ reference ujson/CharParser#die().(msg)
-//                                   ^^^ reference local6
-//                                       ^^^^^^^^^^ reference upickle/core/CharBuilder#makeString().
+//      ^ definition local 7
+//        documentation ```scala\ns: String \n```
+//                      ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/StringOps#format().
+//                              ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().(msg)
+//                                   ^^^ reference local 6
+//                                       ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#makeString().
     throw ParseException(s, i)
-//        ^^^^^^^^^^^^^^ reference ujson/ParseException.
-//                       ^ reference local7
-//                          ^ reference ujson/CharParser#die().(i)
+//        ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException.
+//                       ^ reference local 7
+//                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().(i)
   }
 
 
@@ -239,213 +269,230 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * number.
    */
   protected[this] final def parseNum(i: Int, ctxt: ObjArrVisitor[Any, J], facade: Visitor[_, J]): Int = {
-//                          ^^^^^^^^ definition ujson/CharParser#parseNum(). final def parseNum(i: Int, ctxt: ObjArrVisitor[Any, J], facade: Visitor[local8, J[): Int
-//                                   ^ definition ujson/CharParser#parseNum().(i) i: Int
-//                                      ^^^ reference scala/Int#
-//                                           ^^^^ definition ujson/CharParser#parseNum().(ctxt) ctxt: ObjArrVisitor[Any, J]
-//                                                 ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
-//                                                               ^^^ reference scala/Any#
-//                                                                    ^ reference ujson/CharParser#[J]
-//                                                                        ^^^^^^ definition ujson/CharParser#parseNum().(facade) facade: Visitor[local8, J[
-//                                                                                ^^^^^^^ reference upickle/core/Visitor#
-//                                                                                           ^ reference ujson/CharParser#[J]
-//                                                                                                ^^^ reference scala/Int#
+//                          ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().
+//                                   documentation ```scala\nfinal def parseNum(i: Int, ctxt: ObjArrVisitor[Any, J], facade: Visitor[local8, J[): Int\n```
+//                                   ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().(i)
+//                                     documentation ```scala\ni: Int \n```
+//                                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                           ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().(ctxt)
+//                                                documentation ```scala\nctxt: ObjArrVisitor[Any, J] \n```
+//                                                 ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
+//                                                               ^^^ reference semanticdb maven . . scala/Any#
+//                                                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                        ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().(facade)
+//                                                                               documentation ```scala\nfacade: Visitor[local8, J[ \n```
+//                                                                                ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                                                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     var j = i
-//      ^ definition local9 j: Int
-//          ^ reference ujson/CharParser#parseNum().(i)
+//      ^ definition local 9
+//        documentation ```scala\nj: Int \n```
+//          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().(i)
     var c = getCharSafe(j)
-//      ^ definition local10 c: Char
-//          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local9
+//      ^ definition local 10
+//        documentation ```scala\nc: Char \n```
+//          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                      ^ reference local 9
     var decIndex = -1
-//      ^^^^^^^^ definition local11 decIndex: Int
+//      ^^^^^^^^ definition local 11
+//               documentation ```scala\ndecIndex: Int \n```
     var expIndex = -1
-//      ^^^^^^^^ definition local12 expIndex: Int
+//      ^^^^^^^^ definition local 12
+//               documentation ```scala\nexpIndex: Int \n```
 
     if (c == '-') {
-//      ^ reference local10
-//        ^^ reference scala/Char#`==`(+2).
+//      ^ reference local 10
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
       j += 1
-//    ^ reference local9
-//      ^^ reference scala/Int#`+`(+4).
+//    ^ reference local 9
+//      ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local10
-//        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local9
+//    ^ reference local 10
+//        ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                    ^ reference local 9
     }
     if (c == '0') {
-//      ^ reference local10
-//        ^^ reference scala/Char#`==`(+2).
+//      ^ reference local 10
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
       j += 1
-//    ^ reference local9
-//      ^^ reference scala/Int#`+`(+4).
+//    ^ reference local 9
+//      ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local10
-//        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local9
+//    ^ reference local 10
+//        ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                    ^ reference local 9
     } else {
       val j0 = j
-//        ^^ definition local13 j0: Int
-//             ^ reference local9
+//        ^^ definition local 13
+//           documentation ```scala\nj0: Int \n```
+//             ^ reference local 9
       while (elemOps.within('0', c, '9')) {
-//           ^^^^^^^ reference ujson/CharParser#elemOps.
-//                   ^^^^^^ reference upickle/core/CharOps.within().
-//                               ^ reference local10
+//           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#elemOps.
+//                   ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.within().
+//                               ^ reference local 10
         j += 1;
-//      ^ reference local9
-//        ^^ reference scala/Int#`+`(+4).
+//      ^ reference local 9
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
         c = getCharSafe(j)
-//      ^ reference local10
-//          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local9
+//      ^ reference local 10
+//          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                      ^ reference local 9
       }
       if (j == j0) die(i, "expected digit")
-//        ^ reference local9
-//          ^^ reference scala/Int#`==`(+3).
-//             ^^ reference local13
-//                 ^^^ reference ujson/CharParser#die().
-//                     ^ reference ujson/CharParser#parseNum().(i)
+//        ^ reference local 9
+//          ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`==`(+3).
+//             ^^ reference local 13
+//                 ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().(i)
     }
 
     if (c == '.') {
-//      ^ reference local10
-//        ^^ reference scala/Char#`==`(+2).
+//      ^ reference local 10
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
       decIndex = j - i
-//    ^^^^^^^^ reference local11
-//               ^ reference local9
-//                 ^ reference scala/Int#`-`(+3).
-//                   ^ reference ujson/CharParser#parseNum().(i)
+//    ^^^^^^^^ reference local 11
+//               ^ reference local 9
+//                 ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().(i)
       j += 1
-//    ^ reference local9
-//      ^^ reference scala/Int#`+`(+4).
+//    ^ reference local 9
+//      ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local10
-//        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local9
+//    ^ reference local 10
+//        ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                    ^ reference local 9
       val j0 = j
-//        ^^ definition local15 j0: Int
-//             ^ reference local9
+//        ^^ definition local 15
+//           documentation ```scala\nj0: Int \n```
+//             ^ reference local 9
       while (elemOps.within('0', c, '9')) {
-//           ^^^^^^^ reference ujson/CharParser#elemOps.
-//                   ^^^^^^ reference upickle/core/CharOps.within().
-//                               ^ reference local10
+//           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#elemOps.
+//                   ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.within().
+//                               ^ reference local 10
         j += 1
-//      ^ reference local9
-//        ^^ reference scala/Int#`+`(+4).
+//      ^ reference local 9
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
         c = getCharSafe(j)
-//      ^ reference local10
-//          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local9
+//      ^ reference local 10
+//          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                      ^ reference local 9
       }
       if (j0 == j) die(i, "expected digit")
-//        ^^ reference local15
-//           ^^ reference scala/Int#`==`(+3).
-//              ^ reference local9
-//                 ^^^ reference ujson/CharParser#die().
-//                     ^ reference ujson/CharParser#parseNum().(i)
+//        ^^ reference local 15
+//           ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`==`(+3).
+//              ^ reference local 9
+//                 ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().(i)
     }
 
     if (c == 'e' || c == 'E') {
-//      ^ reference local10
-//        ^^ reference scala/Char#`==`(+2).
-//               ^^ reference scala/Boolean#`||`().
-//                  ^ reference local10
-//                    ^^ reference scala/Char#`==`(+2).
+//      ^ reference local 10
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
+//               ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`||`().
+//                  ^ reference local 10
+//                    ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
       expIndex = j - i
-//    ^^^^^^^^ reference local12
-//               ^ reference local9
-//                 ^ reference scala/Int#`-`(+3).
-//                   ^ reference ujson/CharParser#parseNum().(i)
+//    ^^^^^^^^ reference local 12
+//               ^ reference local 9
+//                 ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().(i)
       j += 1
-//    ^ reference local9
-//      ^^ reference scala/Int#`+`(+4).
+//    ^ reference local 9
+//      ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local10
-//        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local9
+//    ^ reference local 10
+//        ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                    ^ reference local 9
       if (c == '+' || c == '-') {
-//        ^ reference local10
-//          ^^ reference scala/Char#`==`(+2).
-//                 ^^ reference scala/Boolean#`||`().
-//                    ^ reference local10
-//                      ^^ reference scala/Char#`==`(+2).
+//        ^ reference local 10
+//          ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
+//                 ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`||`().
+//                    ^ reference local 10
+//                      ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
         j += 1
-//      ^ reference local9
-//        ^^ reference scala/Int#`+`(+4).
+//      ^ reference local 9
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
         c = getCharSafe(j)
-//      ^ reference local10
-//          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local9
+//      ^ reference local 10
+//          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                      ^ reference local 9
       }
       val j0 = j
-//        ^^ definition local17 j0: Int
-//             ^ reference local9
+//        ^^ definition local 17
+//           documentation ```scala\nj0: Int \n```
+//             ^ reference local 9
       while (elemOps.within('0', c, '9')) {
-//           ^^^^^^^ reference ujson/CharParser#elemOps.
-//                   ^^^^^^ reference upickle/core/CharOps.within().
-//                               ^ reference local10
+//           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#elemOps.
+//                   ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.within().
+//                               ^ reference local 10
         j += 1
-//      ^ reference local9
-//        ^^ reference scala/Int#`+`(+4).
+//      ^ reference local 9
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
         c = getCharSafe(j)
-//      ^ reference local10
-//          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local9
+//      ^ reference local 10
+//          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                      ^ reference local 9
       }
       if (j0 == j)  die(i, "expected digit")
-//        ^^ reference local17
-//           ^^ reference scala/Int#`==`(+3).
-//              ^ reference local9
-//                  ^^^ reference ujson/CharParser#die().
-//                      ^ reference ujson/CharParser#parseNum().(i)
+//        ^^ reference local 17
+//           ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`==`(+3).
+//              ^ reference local 9
+//                  ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().(i)
     }
 
     ctxt.visitValue(visitFloat64StringPartsWithWrapper(facade, decIndex, expIndex, i, j), i)
-//  ^^^^ reference ujson/CharParser#parseNum().(ctxt)
-//       ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#visitValue().
-//                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().
-//                                                     ^^^^^^ reference ujson/CharParser#parseNum().(facade)
-//                                                             ^^^^^^^^ reference local11
-//                                                                       ^^^^^^^^ reference local12
-//                                                                                 ^ reference ujson/CharParser#parseNum().(i)
-//                                                                                    ^ reference local9
-//                                                                                        ^ reference ujson/CharParser#parseNum().(i)
+//  ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().(ctxt)
+//       ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#visitValue().
+//                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().
+//                                                     ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().(facade)
+//                                                             ^^^^^^^^ reference local 11
+//                                                                       ^^^^^^^^ reference local 12
+//                                                                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().(i)
+//                                                                                    ^ reference local 9
+//                                                                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().(i)
     j
-//  ^ reference local9
+//  ^ reference local 9
   }
 
   def visitFloat64StringPartsWithWrapper(facade: Visitor[_, J],
-//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper(). def visitFloat64StringPartsWithWrapper(facade: Visitor[local19, J[, decIndex: Int, expIndex: Int, i: Int, j: Int): J
-//                                       ^^^^^^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(facade) facade: Visitor[local19, J[
-//                                               ^^^^^^^ reference upickle/core/Visitor#
-//                                                          ^ reference ujson/CharParser#[J]
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().
+//                                       documentation ```scala\ndef visitFloat64StringPartsWithWrapper(facade: Visitor[local19, J[, decIndex: Int, expIndex: Int, i: Int, j: Int): J\n```
+//                                       ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().(facade)
+//                                              documentation ```scala\nfacade: Visitor[local19, J[ \n```
+//                                               ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
                                          decIndex: Int,
-//                                       ^^^^^^^^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(decIndex) decIndex: Int
-//                                                 ^^^ reference scala/Int#
+//                                       ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().(decIndex)
+//                                                documentation ```scala\ndecIndex: Int \n```
+//                                                 ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
                                          expIndex: Int,
-//                                       ^^^^^^^^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(expIndex) expIndex: Int
-//                                                 ^^^ reference scala/Int#
+//                                       ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().(expIndex)
+//                                                documentation ```scala\nexpIndex: Int \n```
+//                                                 ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
                                          i: Int,
-//                                       ^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(i) i: Int
-//                                          ^^^ reference scala/Int#
+//                                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().(i)
+//                                         documentation ```scala\ni: Int \n```
+//                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
                                          j: Int) = {
-//                                       ^ definition ujson/CharParser#visitFloat64StringPartsWithWrapper().(j) j: Int
-//                                          ^^^ reference scala/Int#
+//                                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().(j)
+//                                         documentation ```scala\nj: Int \n```
+//                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     facade.visitFloat64StringParts(
-//  ^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().(facade)
-//         ^^^^^^^^^^^^^^^^^^^^^^^ reference upickle/core/Visitor#visitFloat64StringParts().
+//  ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().(facade)
+//         ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitFloat64StringParts().
       unsafeCharSeqForRange(i, j - i),
-//    ^^^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#unsafeCharSeqForRange().
-//                          ^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().(i)
-//                             ^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().(j)
-//                               ^ reference scala/Int#`-`(+3).
-//                                 ^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().(i)
+//    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#unsafeCharSeqForRange().
+//                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().(i)
+//                             ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().(j)
+//                               ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().(i)
       decIndex,
-//    ^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().(decIndex)
+//    ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().(decIndex)
       expIndex,
-//    ^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().(expIndex)
+//    ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().(expIndex)
       i
-//    ^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().(i)
+//    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().(i)
     )
   }
 
@@ -464,223 +511,233 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * This method has all the same caveats as the previous method.
    */
   protected[this] final def parseNumTopLevel(i: Int, facade: Visitor[_, J]): (J, Int) = {
-//                          ^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseNumTopLevel(). final def parseNumTopLevel(i: Int, facade: Visitor[local20, J[): (J, Int)
-//                                           ^ definition ujson/CharParser#parseNumTopLevel().(i) i: Int
-//                                              ^^^ reference scala/Int#
-//                                                   ^^^^^^ definition ujson/CharParser#parseNumTopLevel().(facade) facade: Visitor[local20, J[
-//                                                           ^^^^^^^ reference upickle/core/Visitor#
-//                                                                      ^ reference ujson/CharParser#[J]
-//                                                                            ^ reference ujson/CharParser#[J]
-//                                                                               ^^^ reference scala/Int#
+//                          ^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().
+//                                           documentation ```scala\nfinal def parseNumTopLevel(i: Int, facade: Visitor[local20, J[): (J, Int)\n```
+//                                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(i)
+//                                             documentation ```scala\ni: Int \n```
+//                                              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                   ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(facade)
+//                                                          documentation ```scala\nfacade: Visitor[local20, J[ \n```
+//                                                           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     var j = i
-//      ^ definition local21 j: Int
-//          ^ reference ujson/CharParser#parseNumTopLevel().(i)
+//      ^ definition local 21
+//        documentation ```scala\nj: Int \n```
+//          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(i)
     var c = getCharSafe(j)
-//      ^ definition local22 c: Char
-//          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local21
+//      ^ definition local 22
+//        documentation ```scala\nc: Char \n```
+//          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                      ^ reference local 21
     var decIndex = -1
-//      ^^^^^^^^ definition local23 decIndex: Int
+//      ^^^^^^^^ definition local 23
+//               documentation ```scala\ndecIndex: Int \n```
     var expIndex = -1
-//      ^^^^^^^^ definition local24 expIndex: Int
+//      ^^^^^^^^ definition local 24
+//               documentation ```scala\nexpIndex: Int \n```
 
     if (c == '-') {
-//      ^ reference local22
-//        ^^ reference scala/Char#`==`(+2).
+//      ^ reference local 22
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
       // any valid input will require at least one digit after -
       j += 1
-//    ^ reference local21
-//      ^^ reference scala/Int#`+`(+4).
+//    ^ reference local 21
+//      ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local22
-//        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local21
+//    ^ reference local 22
+//        ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                    ^ reference local 21
     }
     if (c == '0') {
-//      ^ reference local22
-//        ^^ reference scala/Char#`==`(+2).
+//      ^ reference local 22
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
       j += 1
-//    ^ reference local21
-//      ^^ reference scala/Int#`+`(+4).
+//    ^ reference local 21
+//      ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
       if (atEof(j)) {
-//        ^^^^^ reference ujson/CharParser#atEof().
-//              ^ reference local21
+//        ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#atEof().
+//              ^ reference local 21
         return (visitFloat64StringPartsWithWrapper(facade, decIndex, expIndex, i, j), j)
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().
-//                                                 ^^^^^^ reference ujson/CharParser#parseNumTopLevel().(facade)
-//                                                         ^^^^^^^^ reference local23
-//                                                                   ^^^^^^^^ reference local24
-//                                                                             ^ reference ujson/CharParser#parseNumTopLevel().(i)
-//                                                                                ^ reference local21
-//                                                                                    ^ reference local21
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().
+//                                                 ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(facade)
+//                                                         ^^^^^^^^ reference local 23
+//                                                                   ^^^^^^^^ reference local 24
+//                                                                             ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(i)
+//                                                                                ^ reference local 21
+//                                                                                    ^ reference local 21
       }
       c = getCharSafe(j)
-//    ^ reference local22
-//        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local21
+//    ^ reference local 22
+//        ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                    ^ reference local 21
     } else {
       val j0 = j
-//        ^^ definition local25 j0: Int
-//             ^ reference local21
+//        ^^ definition local 25
+//           documentation ```scala\nj0: Int \n```
+//             ^ reference local 21
       while (elemOps.within('0', c, '9')) {
-//           ^^^^^^^ reference ujson/CharParser#elemOps.
-//                   ^^^^^^ reference upickle/core/CharOps.within().
-//                               ^ reference local22
+//           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#elemOps.
+//                   ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.within().
+//                               ^ reference local 22
         j += 1
-//      ^ reference local21
-//        ^^ reference scala/Int#`+`(+4).
+//      ^ reference local 21
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
         if (atEof(j)) {
-//          ^^^^^ reference ujson/CharParser#atEof().
-//                ^ reference local21
+//          ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#atEof().
+//                ^ reference local 21
           return (visitFloat64StringPartsWithWrapper(facade, decIndex, expIndex, i, j), j)
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().
-//                                                   ^^^^^^ reference ujson/CharParser#parseNumTopLevel().(facade)
-//                                                           ^^^^^^^^ reference local23
-//                                                                     ^^^^^^^^ reference local24
-//                                                                               ^ reference ujson/CharParser#parseNumTopLevel().(i)
-//                                                                                  ^ reference local21
-//                                                                                      ^ reference local21
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().
+//                                                   ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(facade)
+//                                                           ^^^^^^^^ reference local 23
+//                                                                     ^^^^^^^^ reference local 24
+//                                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(i)
+//                                                                                  ^ reference local 21
+//                                                                                      ^ reference local 21
         }
         c = getCharSafe(j)
-//      ^ reference local22
-//          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local21
+//      ^ reference local 22
+//          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                      ^ reference local 21
       }
       if (j0 == j) die(i, "expected digit")
-//        ^^ reference local25
-//           ^^ reference scala/Int#`==`(+3).
-//              ^ reference local21
-//                 ^^^ reference ujson/CharParser#die().
-//                     ^ reference ujson/CharParser#parseNumTopLevel().(i)
+//        ^^ reference local 25
+//           ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`==`(+3).
+//              ^ reference local 21
+//                 ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(i)
     }
 
     if (c == '.') {
-//      ^ reference local22
-//        ^^ reference scala/Char#`==`(+2).
+//      ^ reference local 22
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
       // any valid input will require at least one digit after .
       decIndex = j - i
-//    ^^^^^^^^ reference local23
-//               ^ reference local21
-//                 ^ reference scala/Int#`-`(+3).
-//                   ^ reference ujson/CharParser#parseNumTopLevel().(i)
+//    ^^^^^^^^ reference local 23
+//               ^ reference local 21
+//                 ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(i)
       j += 1
-//    ^ reference local21
-//      ^^ reference scala/Int#`+`(+4).
+//    ^ reference local 21
+//      ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local22
-//        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local21
+//    ^ reference local 22
+//        ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                    ^ reference local 21
       val j0 = j
-//        ^^ definition local27 j0: Int
-//             ^ reference local21
+//        ^^ definition local 27
+//           documentation ```scala\nj0: Int \n```
+//             ^ reference local 21
       while (elemOps.within('0', c, '9')) {
-//           ^^^^^^^ reference ujson/CharParser#elemOps.
-//                   ^^^^^^ reference upickle/core/CharOps.within().
-//                               ^ reference local22
+//           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#elemOps.
+//                   ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.within().
+//                               ^ reference local 22
         j += 1
-//      ^ reference local21
-//        ^^ reference scala/Int#`+`(+4).
+//      ^ reference local 21
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
         if (atEof(j)) {
-//          ^^^^^ reference ujson/CharParser#atEof().
-//                ^ reference local21
+//          ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#atEof().
+//                ^ reference local 21
           return (visitFloat64StringPartsWithWrapper(facade, decIndex, expIndex, i, j), j)
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().
-//                                                   ^^^^^^ reference ujson/CharParser#parseNumTopLevel().(facade)
-//                                                           ^^^^^^^^ reference local23
-//                                                                     ^^^^^^^^ reference local24
-//                                                                               ^ reference ujson/CharParser#parseNumTopLevel().(i)
-//                                                                                  ^ reference local21
-//                                                                                      ^ reference local21
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().
+//                                                   ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(facade)
+//                                                           ^^^^^^^^ reference local 23
+//                                                                     ^^^^^^^^ reference local 24
+//                                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(i)
+//                                                                                  ^ reference local 21
+//                                                                                      ^ reference local 21
         }
         c = getCharSafe(j)
-//      ^ reference local22
-//          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local21
+//      ^ reference local 22
+//          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                      ^ reference local 21
       }
       if(j0 == j) die(i, "expected digit")
-//       ^^ reference local27
-//          ^^ reference scala/Int#`==`(+3).
-//             ^ reference local21
-//                ^^^ reference ujson/CharParser#die().
-//                    ^ reference ujson/CharParser#parseNumTopLevel().(i)
+//       ^^ reference local 27
+//          ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`==`(+3).
+//             ^ reference local 21
+//                ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(i)
     }
 
     if (c == 'e' || c == 'E') {
-//      ^ reference local22
-//        ^^ reference scala/Char#`==`(+2).
-//               ^^ reference scala/Boolean#`||`().
-//                  ^ reference local22
-//                    ^^ reference scala/Char#`==`(+2).
+//      ^ reference local 22
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
+//               ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`||`().
+//                  ^ reference local 22
+//                    ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
       // any valid input will require at least one digit after e, e+, etc
       expIndex = j - i
-//    ^^^^^^^^ reference local24
-//               ^ reference local21
-//                 ^ reference scala/Int#`-`(+3).
-//                   ^ reference ujson/CharParser#parseNumTopLevel().(i)
+//    ^^^^^^^^ reference local 24
+//               ^ reference local 21
+//                 ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(i)
       j += 1
-//    ^ reference local21
-//      ^^ reference scala/Int#`+`(+4).
+//    ^ reference local 21
+//      ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
       c = getCharSafe(j)
-//    ^ reference local22
-//        ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                    ^ reference local21
+//    ^ reference local 22
+//        ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                    ^ reference local 21
       if (c == '+' || c == '-') {
-//        ^ reference local22
-//          ^^ reference scala/Char#`==`(+2).
-//                 ^^ reference scala/Boolean#`||`().
-//                    ^ reference local22
-//                      ^^ reference scala/Char#`==`(+2).
+//        ^ reference local 22
+//          ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
+//                 ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`||`().
+//                    ^ reference local 22
+//                      ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
         j += 1
-//      ^ reference local21
-//        ^^ reference scala/Int#`+`(+4).
+//      ^ reference local 21
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
         c = getCharSafe(j)
-//      ^ reference local22
-//          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local21
+//      ^ reference local 22
+//          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                      ^ reference local 21
       }
       val j0 = j
-//        ^^ definition local29 j0: Int
-//             ^ reference local21
+//        ^^ definition local 29
+//           documentation ```scala\nj0: Int \n```
+//             ^ reference local 21
       while (elemOps.within('0', c, '9')) {
-//           ^^^^^^^ reference ujson/CharParser#elemOps.
-//                   ^^^^^^ reference upickle/core/CharOps.within().
-//                               ^ reference local22
+//           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#elemOps.
+//                   ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.within().
+//                               ^ reference local 22
         j += 1
-//      ^ reference local21
-//        ^^ reference scala/Int#`+`(+4).
+//      ^ reference local 21
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
         if (atEof(j)) {
-//          ^^^^^ reference ujson/CharParser#atEof().
-//                ^ reference local21
+//          ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#atEof().
+//                ^ reference local 21
           return (visitFloat64StringPartsWithWrapper(facade, decIndex, expIndex, i, j), j)
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().
-//                                                   ^^^^^^ reference ujson/CharParser#parseNumTopLevel().(facade)
-//                                                           ^^^^^^^^ reference local23
-//                                                                     ^^^^^^^^ reference local24
-//                                                                               ^ reference ujson/CharParser#parseNumTopLevel().(i)
-//                                                                                  ^ reference local21
-//                                                                                      ^ reference local21
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().
+//                                                   ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(facade)
+//                                                           ^^^^^^^^ reference local 23
+//                                                                     ^^^^^^^^ reference local 24
+//                                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(i)
+//                                                                                  ^ reference local 21
+//                                                                                      ^ reference local 21
         }
         c = getCharSafe(j)
-//      ^ reference local22
-//          ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                      ^ reference local21
+//      ^ reference local 22
+//          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                      ^ reference local 21
       }
       if (j0 == j) die(i, "expected digit")
-//        ^^ reference local29
-//           ^^ reference scala/Int#`==`(+3).
-//              ^ reference local21
-//                 ^^^ reference ujson/CharParser#die().
-//                     ^ reference ujson/CharParser#parseNumTopLevel().(i)
+//        ^^ reference local 29
+//           ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`==`(+3).
+//              ^ reference local 21
+//                 ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(i)
     }
 
     (visitFloat64StringPartsWithWrapper(facade, decIndex, expIndex, i, j), j)
-//   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#visitFloat64StringPartsWithWrapper().
-//                                      ^^^^^^ reference ujson/CharParser#parseNumTopLevel().(facade)
-//                                              ^^^^^^^^ reference local23
-//                                                        ^^^^^^^^ reference local24
-//                                                                  ^ reference ujson/CharParser#parseNumTopLevel().(i)
-//                                                                     ^ reference local21
-//                                                                         ^ reference local21
+//   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitFloat64StringPartsWithWrapper().
+//                                      ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(facade)
+//                                              ^^^^^^^^ reference local 23
+//                                                        ^^^^^^^^ reference local 24
+//                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().(i)
+//                                                                     ^ reference local 21
+//                                                                         ^ reference local 21
   }
 
   /**
@@ -690,60 +747,63 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * This is why it can only return Char instead of Int.
    */
   protected[this] final def descape(i: Int): Char = {
-//                          ^^^^^^^ definition ujson/CharParser#descape(). final def descape(i: Int): Char
-//                                  ^ definition ujson/CharParser#descape().(i) i: Int
-//                                     ^^^ reference scala/Int#
-//                                           ^^^^ reference scala/Char#
+//                          ^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#descape().
+//                                  documentation ```scala\nfinal def descape(i: Int): Char\n```
+//                                  ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#descape().(i)
+//                                    documentation ```scala\ni: Int \n```
+//                                     ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                           ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#
     import upickle.core.RenderUtils.hex
-//         ^^^^^^^ reference upickle/
-//                 ^^^^ reference upickle/core/
-//                      ^^^^^^^^^^^ reference upickle/core/RenderUtils.
-//                                  ^^^ reference upickle/core/RenderUtils.hex().
+//         ^^^^^^^ reference semanticdb maven . . upickle/
+//                 ^^^^ reference semanticdb maven . . upickle/core/
+//                      ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/RenderUtils.
+//                                  ^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/RenderUtils.hex().
     var x = 0
-//      ^ definition local31 x: Int
+//      ^ definition local 31
+//        documentation ```scala\nx: Int \n```
     x = (x << 4) | hex(getCharSafe(i+2).toInt)
-//  ^ reference local31
-//       ^ reference local31
-//         ^^ reference scala/Int#`<<`().
-//               ^ reference scala/Int#`|`(+3).
-//                 ^^^ reference upickle/core/RenderUtils.hex().
-//                     ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                                 ^ reference ujson/CharParser#descape().(i)
-//                                  ^ reference scala/Int#`+`(+4).
-//                                      ^^^^^ reference scala/Char#toInt().
+//  ^ reference local 31
+//       ^ reference local 31
+//         ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`<<`().
+//               ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`|`(+3).
+//                 ^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/RenderUtils.hex().
+//                     ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#descape().(i)
+//                                  ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                      ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#toInt().
     x = (x << 4) | hex(getCharSafe(i+3).toInt)
-//  ^ reference local31
-//       ^ reference local31
-//         ^^ reference scala/Int#`<<`().
-//               ^ reference scala/Int#`|`(+3).
-//                 ^^^ reference upickle/core/RenderUtils.hex().
-//                     ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                                 ^ reference ujson/CharParser#descape().(i)
-//                                  ^ reference scala/Int#`+`(+4).
-//                                      ^^^^^ reference scala/Char#toInt().
+//  ^ reference local 31
+//       ^ reference local 31
+//         ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`<<`().
+//               ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`|`(+3).
+//                 ^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/RenderUtils.hex().
+//                     ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#descape().(i)
+//                                  ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                      ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#toInt().
     x = (x << 4) | hex(getCharSafe(i+4).toInt)
-//  ^ reference local31
-//       ^ reference local31
-//         ^^ reference scala/Int#`<<`().
-//               ^ reference scala/Int#`|`(+3).
-//                 ^^^ reference upickle/core/RenderUtils.hex().
-//                     ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                                 ^ reference ujson/CharParser#descape().(i)
-//                                  ^ reference scala/Int#`+`(+4).
-//                                      ^^^^^ reference scala/Char#toInt().
+//  ^ reference local 31
+//       ^ reference local 31
+//         ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`<<`().
+//               ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`|`(+3).
+//                 ^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/RenderUtils.hex().
+//                     ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#descape().(i)
+//                                  ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                      ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#toInt().
     x = (x << 4) | hex(getCharSafe(i+5).toInt)
-//  ^ reference local31
-//       ^ reference local31
-//         ^^ reference scala/Int#`<<`().
-//               ^ reference scala/Int#`|`(+3).
-//                 ^^^ reference upickle/core/RenderUtils.hex().
-//                     ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                                 ^ reference ujson/CharParser#descape().(i)
-//                                  ^ reference scala/Int#`+`(+4).
-//                                      ^^^^^ reference scala/Char#toInt().
+//  ^ reference local 31
+//       ^ reference local 31
+//         ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`<<`().
+//               ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`|`(+3).
+//                 ^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/RenderUtils.hex().
+//                     ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#descape().(i)
+//                                  ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                      ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#toInt().
     x.toChar
-//  ^ reference local31
-//    ^^^^^^ reference scala/Int#toChar().
+//  ^ reference local 31
+//    ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#toChar().
   }
 
 
@@ -753,40 +813,43 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * Note that this method assumes that the first character has already been checked.
    */
   protected[this] final def parseTrue(i: Int, facade: Visitor[_, J]): J = {
-//                          ^^^^^^^^^ definition ujson/CharParser#parseTrue(). final def parseTrue(i: Int, facade: Visitor[local32, J[): J
-//                                    ^ definition ujson/CharParser#parseTrue().(i) i: Int
-//                                       ^^^ reference scala/Int#
-//                                            ^^^^^^ definition ujson/CharParser#parseTrue().(facade) facade: Visitor[local32, J[
-//                                                    ^^^^^^^ reference upickle/core/Visitor#
-//                                                               ^ reference ujson/CharParser#[J]
-//                                                                    ^ reference ujson/CharParser#[J]
+//                          ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTrue().
+//                                    documentation ```scala\nfinal def parseTrue(i: Int, facade: Visitor[local32, J[): J\n```
+//                                    ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTrue().(i)
+//                                      documentation ```scala\ni: Int \n```
+//                                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                            ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTrue().(facade)
+//                                                   documentation ```scala\nfacade: Visitor[local32, J[ \n```
+//                                                    ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
     requestUntilOrThrow(i + 3)
-//  ^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#requestUntilOrThrow().
-//                      ^ reference ujson/CharParser#parseTrue().(i)
-//                        ^ reference scala/Int#`+`(+4).
+//  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#requestUntilOrThrow().
+//                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTrue().(i)
+//                        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
     if (getCharUnsafe(i + 1) == 'r' && getCharUnsafe(i + 2) == 'u' && getCharUnsafe(i + 3) == 'e') {
-//      ^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#getCharUnsafe().
-//                    ^ reference ujson/CharParser#parseTrue().(i)
-//                      ^ reference scala/Int#`+`(+4).
-//                           ^^ reference scala/Char#`==`(+2).
-//                                  ^^ reference scala/Boolean#`&&`().
-//                                     ^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#getCharUnsafe().
-//                                                   ^ reference ujson/CharParser#parseTrue().(i)
-//                                                     ^ reference scala/Int#`+`(+4).
-//                                                          ^^ reference scala/Char#`==`(+2).
-//                                                                 ^^ reference scala/Boolean#`&&`().
-//                                                                    ^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#getCharUnsafe().
-//                                                                                  ^ reference ujson/CharParser#parseTrue().(i)
-//                                                                                    ^ reference scala/Int#`+`(+4).
-//                                                                                         ^^ reference scala/Char#`==`(+2).
+//      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#getCharUnsafe().
+//                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTrue().(i)
+//                      ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                           ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
+//                                  ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`&&`().
+//                                     ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#getCharUnsafe().
+//                                                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTrue().(i)
+//                                                     ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                          ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
+//                                                                 ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`&&`().
+//                                                                    ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#getCharUnsafe().
+//                                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTrue().(i)
+//                                                                                    ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                                                         ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
       facade.visitTrue(i)
-//    ^^^^^^ reference ujson/CharParser#parseTrue().(facade)
-//           ^^^^^^^^^ reference upickle/core/Visitor#visitTrue().
-//                     ^ reference ujson/CharParser#parseTrue().(i)
+//    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTrue().(facade)
+//           ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitTrue().
+//                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTrue().(i)
     } else {
       die(i, "expected true")
-//    ^^^ reference ujson/CharParser#die().
-//        ^ reference ujson/CharParser#parseTrue().(i)
+//    ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTrue().(i)
     }
   }
 
@@ -796,46 +859,49 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * Note that this method assumes that the first character has already been checked.
    */
   protected[this] final def parseFalse(i: Int, facade: Visitor[_, J]): J = {
-//                          ^^^^^^^^^^ definition ujson/CharParser#parseFalse(). final def parseFalse(i: Int, facade: Visitor[local33, J[): J
-//                                     ^ definition ujson/CharParser#parseFalse().(i) i: Int
-//                                        ^^^ reference scala/Int#
-//                                             ^^^^^^ definition ujson/CharParser#parseFalse().(facade) facade: Visitor[local33, J[
-//                                                     ^^^^^^^ reference upickle/core/Visitor#
-//                                                                ^ reference ujson/CharParser#[J]
-//                                                                     ^ reference ujson/CharParser#[J]
+//                          ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseFalse().
+//                                     documentation ```scala\nfinal def parseFalse(i: Int, facade: Visitor[local33, J[): J\n```
+//                                     ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseFalse().(i)
+//                                       documentation ```scala\ni: Int \n```
+//                                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                             ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseFalse().(facade)
+//                                                    documentation ```scala\nfacade: Visitor[local33, J[ \n```
+//                                                     ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
     requestUntilOrThrow(i + 4)
-//  ^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#requestUntilOrThrow().
-//                      ^ reference ujson/CharParser#parseFalse().(i)
-//                        ^ reference scala/Int#`+`(+4).
+//  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#requestUntilOrThrow().
+//                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseFalse().(i)
+//                        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
 
     if (getCharUnsafe(i + 1) == 'a' && getCharUnsafe(i + 2) == 'l' && getCharUnsafe(i + 3) == 's' && getCharUnsafe(i + 4) == 'e') {
-//      ^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#getCharUnsafe().
-//                    ^ reference ujson/CharParser#parseFalse().(i)
-//                      ^ reference scala/Int#`+`(+4).
-//                           ^^ reference scala/Char#`==`(+2).
-//                                  ^^ reference scala/Boolean#`&&`().
-//                                     ^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#getCharUnsafe().
-//                                                   ^ reference ujson/CharParser#parseFalse().(i)
-//                                                     ^ reference scala/Int#`+`(+4).
-//                                                          ^^ reference scala/Char#`==`(+2).
-//                                                                 ^^ reference scala/Boolean#`&&`().
-//                                                                    ^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#getCharUnsafe().
-//                                                                                  ^ reference ujson/CharParser#parseFalse().(i)
-//                                                                                    ^ reference scala/Int#`+`(+4).
-//                                                                                         ^^ reference scala/Char#`==`(+2).
-//                                                                                                ^^ reference scala/Boolean#`&&`().
-//                                                                                                   ^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#getCharUnsafe().
-//                                                                                                                 ^ reference ujson/CharParser#parseFalse().(i)
-//                                                                                                                   ^ reference scala/Int#`+`(+4).
-//                                                                                                                        ^^ reference scala/Char#`==`(+2).
+//      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#getCharUnsafe().
+//                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseFalse().(i)
+//                      ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                           ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
+//                                  ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`&&`().
+//                                     ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#getCharUnsafe().
+//                                                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseFalse().(i)
+//                                                     ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                          ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
+//                                                                 ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`&&`().
+//                                                                    ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#getCharUnsafe().
+//                                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseFalse().(i)
+//                                                                                    ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                                                         ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
+//                                                                                                ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`&&`().
+//                                                                                                   ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#getCharUnsafe().
+//                                                                                                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseFalse().(i)
+//                                                                                                                   ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                                                                                        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
       facade.visitFalse(i)
-//    ^^^^^^ reference ujson/CharParser#parseFalse().(facade)
-//           ^^^^^^^^^^ reference upickle/core/Visitor#visitFalse().
-//                      ^ reference ujson/CharParser#parseFalse().(i)
+//    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseFalse().(facade)
+//           ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitFalse().
+//                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseFalse().(i)
     } else {
       die(i, "expected false")
-//    ^^^ reference ujson/CharParser#die().
-//        ^ reference ujson/CharParser#parseFalse().(i)
+//    ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseFalse().(i)
     }
   }
 
@@ -845,168 +911,181 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * Note that this method assumes that the first character has already been checked.
    */
   protected[this] final def parseNull(i: Int, facade: Visitor[_, J]): J = {
-//                          ^^^^^^^^^ definition ujson/CharParser#parseNull(). final def parseNull(i: Int, facade: Visitor[local34, J[): J
-//                                    ^ definition ujson/CharParser#parseNull().(i) i: Int
-//                                       ^^^ reference scala/Int#
-//                                            ^^^^^^ definition ujson/CharParser#parseNull().(facade) facade: Visitor[local34, J[
-//                                                    ^^^^^^^ reference upickle/core/Visitor#
-//                                                               ^ reference ujson/CharParser#[J]
-//                                                                    ^ reference ujson/CharParser#[J]
+//                          ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNull().
+//                                    documentation ```scala\nfinal def parseNull(i: Int, facade: Visitor[local34, J[): J\n```
+//                                    ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNull().(i)
+//                                      documentation ```scala\ni: Int \n```
+//                                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                            ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNull().(facade)
+//                                                   documentation ```scala\nfacade: Visitor[local34, J[ \n```
+//                                                    ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
     requestUntilOrThrow(i + 3)
-//  ^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#requestUntilOrThrow().
-//                      ^ reference ujson/CharParser#parseNull().(i)
-//                        ^ reference scala/Int#`+`(+4).
+//  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#requestUntilOrThrow().
+//                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNull().(i)
+//                        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
     if (getCharUnsafe(i + 1) == 'u' && getCharUnsafe(i + 2) == 'l' && getCharUnsafe(i + 3) == 'l') {
-//      ^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#getCharUnsafe().
-//                    ^ reference ujson/CharParser#parseNull().(i)
-//                      ^ reference scala/Int#`+`(+4).
-//                           ^^ reference scala/Char#`==`(+2).
-//                                  ^^ reference scala/Boolean#`&&`().
-//                                     ^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#getCharUnsafe().
-//                                                   ^ reference ujson/CharParser#parseNull().(i)
-//                                                     ^ reference scala/Int#`+`(+4).
-//                                                          ^^ reference scala/Char#`==`(+2).
-//                                                                 ^^ reference scala/Boolean#`&&`().
-//                                                                    ^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#getCharUnsafe().
-//                                                                                  ^ reference ujson/CharParser#parseNull().(i)
-//                                                                                    ^ reference scala/Int#`+`(+4).
-//                                                                                         ^^ reference scala/Char#`==`(+2).
+//      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#getCharUnsafe().
+//                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNull().(i)
+//                      ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                           ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
+//                                  ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`&&`().
+//                                     ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#getCharUnsafe().
+//                                                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNull().(i)
+//                                                     ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                          ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
+//                                                                 ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`&&`().
+//                                                                    ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#getCharUnsafe().
+//                                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNull().(i)
+//                                                                                    ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                                                         ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#`==`(+2).
       facade.visitNull(i)
-//    ^^^^^^ reference ujson/CharParser#parseNull().(facade)
-//           ^^^^^^^^^ reference upickle/core/Visitor#visitNull().
-//                     ^ reference ujson/CharParser#parseNull().(i)
+//    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNull().(facade)
+//           ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitNull().
+//                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNull().(i)
     } else {
       die(i, "expected null")
-//    ^^^ reference ujson/CharParser#die().
-//        ^ reference ujson/CharParser#parseNull().(i)
+//    ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNull().(i)
     }
   }
 
   protected[this] final def parseTopLevel(i: Int, facade: Visitor[_, J]): (J, Int) = {
-//                          ^^^^^^^^^^^^^ definition ujson/CharParser#parseTopLevel(). final def parseTopLevel(i: Int, facade: Visitor[local35, J[): (J, Int)
-//                                        ^ definition ujson/CharParser#parseTopLevel().(i) i: Int
-//                                           ^^^ reference scala/Int#
-//                                                ^^^^^^ definition ujson/CharParser#parseTopLevel().(facade) facade: Visitor[local35, J[
-//                                                        ^^^^^^^ reference upickle/core/Visitor#
-//                                                                   ^ reference ujson/CharParser#[J]
-//                                                                         ^ reference ujson/CharParser#[J]
-//                                                                            ^^^ reference scala/Int#
+//                          ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel().
+//                                        documentation ```scala\nfinal def parseTopLevel(i: Int, facade: Visitor[local35, J[): (J, Int)\n```
+//                                        ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel().(i)
+//                                          documentation ```scala\ni: Int \n```
+//                                           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel().(facade)
+//                                                       documentation ```scala\nfacade: Visitor[local35, J[ \n```
+//                                                        ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                            ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     try parseTopLevel0(i, facade)
-//      ^^^^^^^^^^^^^^ reference ujson/CharParser#parseTopLevel0().
-//                     ^ reference ujson/CharParser#parseTopLevel().(i)
-//                        ^^^^^^ reference ujson/CharParser#parseTopLevel().(facade)
+//      ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().
+//                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel().(i)
+//                        ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel().(facade)
     catch reject(i)
-//        ^^^^^^ reference ujson/CharParser#reject().
-//               ^ reference ujson/CharParser#parseTopLevel().(i)
+//        ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().
+//               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel().(i)
   }
   /**
    * Parse and return the next JSON value and the position beyond it.
    */
   @tailrec
-// ^^^^^^^ reference scala/annotation/tailrec#
-//         reference scala/annotation/tailrec#`<init>`().
+// ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/annotation/tailrec#
+//        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/annotation/tailrec#`<init>`().
   protected[this] final def parseTopLevel0(i: Int, facade: Visitor[_, J]): (J, Int) = {
-//                          ^^^^^^^^^^^^^^ definition ujson/CharParser#parseTopLevel0(). @tailrec final def parseTopLevel0(i: Int, facade: Visitor[local38, J[): (J, Int)
-//                                         ^ definition ujson/CharParser#parseTopLevel0().(i) i: Int
-//                                            ^^^ reference scala/Int#
-//                                                 ^^^^^^ definition ujson/CharParser#parseTopLevel0().(facade) facade: Visitor[local38, J[
-//                                                         ^^^^^^^ reference upickle/core/Visitor#
-//                                                                    ^ reference ujson/CharParser#[J]
-//                                                                          ^ reference ujson/CharParser#[J]
-//                                                                             ^^^ reference scala/Int#
+//                          ^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().
+//                                         documentation ```scala\n@tailrec\nfinal def parseTopLevel0(i: Int, facade: Visitor[local38, J[): (J, Int)\n```
+//                                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                                           documentation ```scala\ni: Int \n```
+//                                            ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                 ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(facade)
+//                                                        documentation ```scala\nfacade: Visitor[local38, J[ \n```
+//                                                         ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                             ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     (getCharSafe(i): @switch) match {
-//   ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//               ^ reference ujson/CharParser#parseTopLevel0().(i)
+//   ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
       // ignore whitespace
       case ' ' | '\t' | 'r' => parseTopLevel0(i + 1, facade)
-//                             ^^^^^^^^^^^^^^ reference ujson/CharParser#parseTopLevel0().
-//                                            ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                                              ^ reference scala/Int#`+`(+4).
-//                                                   ^^^^^^ reference ujson/CharParser#parseTopLevel0().(facade)
+//                             ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().
+//                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                                              ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                   ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(facade)
       case '\n' => parseTopLevel0(i + 1, facade)
-//                 ^^^^^^^^^^^^^^ reference ujson/CharParser#parseTopLevel0().
-//                                ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                                  ^ reference scala/Int#`+`(+4).
-//                                       ^^^^^^ reference ujson/CharParser#parseTopLevel0().(facade)
+//                 ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().
+//                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                                  ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                       ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(facade)
 
       // if we have a recursive top-level structure, we'll delegate the parsing
       // duties to our good friend rparse().
       case '[' => parseNested(ARRBEG, i + 1, facade.visitArray(-1, i), Nil)
-//                ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                            ^^^^^^ reference ujson/CharParser#ARRBEG.
-//                                    ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                                      ^ reference scala/Int#`+`(+4).
-//                                           ^^^^^^ reference ujson/CharParser#parseTopLevel0().(facade)
-//                                                  ^^^^^^^^^^ reference upickle/core/Visitor#visitArray().
-//                                                                 ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                                                                     ^^^ reference scala/package.Nil.
+//                ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                            ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#ARRBEG.
+//                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                                      ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                           ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(facade)
+//                                                  ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitArray().
+//                                                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                                                                     ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/package.Nil.
       case '{' => parseNested(OBJBEG, i + 1, facade.visitObject(-1, i), Nil)
-//                ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                            ^^^^^^ reference ujson/CharParser#OBJBEG.
-//                                    ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                                      ^ reference scala/Int#`+`(+4).
-//                                           ^^^^^^ reference ujson/CharParser#parseTopLevel0().(facade)
-//                                                  ^^^^^^^^^^^ reference upickle/core/Visitor#visitObject().
-//                                                                  ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                                                                      ^^^ reference scala/package.Nil.
+//                ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                            ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#OBJBEG.
+//                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                                      ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                           ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(facade)
+//                                                  ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitObject().
+//                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                                                                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/package.Nil.
 
       // we have a single top-level number
       case '-' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' => parseNumTopLevel(i, facade)
-//                                                                            ^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseNumTopLevel().
-//                                                                                             ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                                                                                                ^^^^^^ reference ujson/CharParser#parseTopLevel0().(facade)
+//                                                                            ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNumTopLevel().
+//                                                                                             ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                                                                                                ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(facade)
 
       // we have a single top-level string
       case '"' => parseStringTopLevel(i, facade)
-//                ^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringTopLevel().
-//                                    ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                                       ^^^^^^ reference ujson/CharParser#parseTopLevel0().(facade)
+//                ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringTopLevel().
+//                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                                       ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(facade)
 
       // we have a single top-level constant
       case 't' => (parseTrue(i, facade), i + 4)
-//                 ^^^^^^^^^ reference ujson/CharParser#parseTrue().
-//                           ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                              ^^^^^^ reference ujson/CharParser#parseTopLevel0().(facade)
-//                                       ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                                         ^ reference scala/Int#`+`(+4).
+//                 ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTrue().
+//                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                              ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(facade)
+//                                       ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                                         ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
       case 'f' => (parseFalse(i, facade), i + 5)
-//                 ^^^^^^^^^^ reference ujson/CharParser#parseFalse().
-//                            ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                               ^^^^^^ reference ujson/CharParser#parseTopLevel0().(facade)
-//                                        ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                                          ^ reference scala/Int#`+`(+4).
+//                 ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseFalse().
+//                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                               ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(facade)
+//                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                                          ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
       case 'n' => (parseNull(i, facade), i + 4)
-//                 ^^^^^^^^^ reference ujson/CharParser#parseNull().
-//                           ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                              ^^^^^^ reference ujson/CharParser#parseTopLevel0().(facade)
-//                                       ^ reference ujson/CharParser#parseTopLevel0().(i)
-//                                         ^ reference scala/Int#`+`(+4).
+//                 ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNull().
+//                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                              ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(facade)
+//                                       ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
+//                                         ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
 
       // invalid
       case _ => die(i, "expected json value")
-//              ^^^ reference ujson/CharParser#die().
-//                  ^ reference ujson/CharParser#parseTopLevel0().(i)
+//              ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTopLevel0().(i)
     }
   }
 
   def reject(j: Int): PartialFunction[Throwable, Nothing] = {
-//    ^^^^^^ definition ujson/CharParser#reject(). def reject(j: Int): PartialFunction[Throwable, Nothing]
-//           ^ definition ujson/CharParser#reject().(j) j: Int
-//              ^^^ reference scala/Int#
-//                    ^^^^^^^^^^^^^^^ reference scala/PartialFunction#
-//                                    ^^^^^^^^^ reference scala/package.Throwable#
-//                                               ^^^^^^^ reference scala/Nothing#
-//                                                           definition local39 @SerialVersionUID final class $anonfun
+//    ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().
+//           documentation ```scala\ndef reject(j: Int): PartialFunction[Throwable, Nothing]\n```
+//           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().(j)
+//             documentation ```scala\nj: Int \n```
+//              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                    ^^^^^^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/PartialFunction#
+//                                    ^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/package.Throwable#
+//                                               ^^^^^^^ reference semanticdb maven . . scala/Nothing#
+//                                                          ^ definition local 39
+//                                                            documentation ```scala\n@SerialVersionUID\nfinal class $anonfun\n```
     case e: Abort =>
-//       ^ definition local46 e: Abort
-//          ^^^^^ reference upickle/core/Abort#
+//       ^ definition local 46
+//         documentation ```scala\ne: Abort \n```
+//          ^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Abort#
       throw new AbortException(e.msg, j, -1, -1, e)
-//              ^^^^^^^^^^^^^^ reference upickle/core/AbortException#
-//                             reference upickle/core/AbortException#`<init>`().
-//                             ^ reference local46
-//                               ^^^ reference upickle/core/Abort#msg.
-//                                    ^ reference ujson/CharParser#reject().(j)
-//                                               ^ reference local46
+//              ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/AbortException#
+//                            ^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/AbortException#`<init>`().
+//                             ^ reference local 46
+//                               ^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Abort#msg.
+//                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().(j)
+//                                               ^ reference local 46
   }
   /**
    * Tail-recursive parsing method to do the bulk of JSON parsing.
@@ -1026,490 +1105,518 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
    * @param path the json path in the tree
    */
   @tailrec
-// ^^^^^^^ reference scala/annotation/tailrec#
-//         reference scala/annotation/tailrec#`<init>`().
+// ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/annotation/tailrec#
+//        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/annotation/tailrec#`<init>`().
   protected[this] final def parseNested(state: Int,
-//                          ^^^^^^^^^^^ definition ujson/CharParser#parseNested(). @tailrec final def parseNested(state: Int, i: Int, stackHead: ObjArrVisitor[local50, J[, stackTail: List[ObjArrVisitor[local51, J[]): (J, Int)
-//                                      ^^^^^ definition ujson/CharParser#parseNested().(state) state: Int
-//                                             ^^^ reference scala/Int#
+//                          ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                                      documentation ```scala\n@tailrec\nfinal def parseNested(state: Int, i: Int, stackHead: ObjArrVisitor[local50, J[, stackTail: List[ObjArrVisitor[local51, J[]): (J, Int)\n```
+//                                      ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
+//                                            documentation ```scala\nstate: Int \n```
+//                                             ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
                                         i: Int,
-//                                      ^ definition ujson/CharParser#parseNested().(i) i: Int
-//                                         ^^^ reference scala/Int#
+//                                      ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                        documentation ```scala\ni: Int \n```
+//                                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
                                         stackHead: ObjArrVisitor[_, J],
-//                                      ^^^^^^^^^ definition ujson/CharParser#parseNested().(stackHead) stackHead: ObjArrVisitor[local50, J[
-//                                                 ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
-//                                                                  ^ reference ujson/CharParser#[J]
+//                                      ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                                documentation ```scala\nstackHead: ObjArrVisitor[local50, J[ \n```
+//                                                 ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
+//                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
                                         stackTail: List[ObjArrVisitor[_, J]]) : (J, Int) = {
-//                                      ^^^^^^^^^ definition ujson/CharParser#parseNested().(stackTail) stackTail: List[ObjArrVisitor[local51, J[]
-//                                                 ^^^^ reference scala/package.List#
-//                                                      ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
-//                                                                       ^ reference ujson/CharParser#[J]
-//                                                                               ^ reference ujson/CharParser#[J]
-//                                                                                  ^^^ reference scala/Int#
+//                                      ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
+//                                                documentation ```scala\nstackTail: List[ObjArrVisitor[local51, J[] \n```
+//                                                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/package.List#
+//                                                      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
+//                                                                       ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     (getCharSafe(i): @switch) match{
-//   ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//               ^ reference ujson/CharParser#parseNested().(i)
+//   ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
       case ' ' | '\t' | '\r' | '\n' =>
         parseNested(state, i + 1, stackHead, stackTail)
-//      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                  ^^^^^ reference ujson/CharParser#parseNested().(state)
-//                         ^ reference ujson/CharParser#parseNested().(i)
-//                           ^ reference scala/Int#`+`(+4).
-//                                ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                           ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
+//      ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                  ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
+//                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                           ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
 
       case '"' =>
         state match{
-//      ^^^^^ reference ujson/CharParser#parseNested().(state)
+//      ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
           case KEY | OBJBEG =>
-//             ^^^ reference ujson/CharParser#KEY.
-//                   ^^^^^^ reference ujson/CharParser#OBJBEG.
+//             ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#KEY.
+//                   ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#OBJBEG.
             val nextJ = try parseStringKey(i, stackHead) catch reject(i)
-//              ^^^^^ definition local52 nextJ: Int
-//                          ^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringKey().
-//                                         ^ reference ujson/CharParser#parseNested().(i)
-//                                            ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                                             ^^^^^^ reference ujson/CharParser#reject().
-//                                                                    ^ reference ujson/CharParser#parseNested().(i)
+//              ^^^^^ definition local 52
+//                    documentation ```scala\nnextJ: Int \n```
+//                          ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringKey().
+//                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                            ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                                             ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().
+//                                                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
             parseNested(COLON, nextJ, stackHead, stackTail)
-//          ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                      ^^^^^ reference ujson/CharParser#COLON.
-//                             ^^^^^ reference local52
-//                                    ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                               ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
+//          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                      ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#COLON.
+//                             ^^^^^ reference local 52
+//                                    ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                               ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
 
           case DATA | ARRBEG =>
-//             ^^^^ reference ujson/CharParser#DATA.
-//                    ^^^^^^ reference ujson/CharParser#ARRBEG.
+//             ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#DATA.
+//                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#ARRBEG.
             val nextJ = try parseStringValue(i, stackHead) catch reject(i)
-//              ^^^^^ definition local55 nextJ: Int
-//                          ^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringValue().
-//                                           ^ reference ujson/CharParser#parseNested().(i)
-//                                              ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                                               ^^^^^^ reference ujson/CharParser#reject().
-//                                                                      ^ reference ujson/CharParser#parseNested().(i)
+//              ^^^^^ definition local 55
+//                    documentation ```scala\nnextJ: Int \n```
+//                          ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringValue().
+//                                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                              ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                                               ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().
+//                                                                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
             parseNested(collectionEndFor(stackHead), nextJ, stackHead, stackTail)
-//          ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                      ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
-//                                       ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                                   ^^^^^ reference local55
-//                                                          ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                                                     ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
+//          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                      ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#collectionEndFor().
+//                                       ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                                   ^^^^^ reference local 55
+//                                                          ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                                                     ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
 
           case _ => dieWithFailureMessage(i, state)
-//                  ^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#dieWithFailureMessage().
-//                                        ^ reference ujson/CharParser#parseNested().(i)
-//                                           ^^^^^ reference ujson/CharParser#parseNested().(state)
+//                  ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#dieWithFailureMessage().
+//                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                           ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
         }
 
       case ':' =>
         // we are in an object just after a key, expecting to see a colon.
         state match{
-//      ^^^^^ reference ujson/CharParser#parseNested().(state)
+//      ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
           case COLON => parseNested(DATA, i + 1, stackHead, stackTail)
-//             ^^^^^ reference ujson/CharParser#COLON.
-//                      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                                  ^^^^ reference ujson/CharParser#DATA.
-//                                        ^ reference ujson/CharParser#parseNested().(i)
-//                                          ^ reference scala/Int#`+`(+4).
-//                                               ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                                          ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
+//             ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#COLON.
+//                      ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                                  ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#DATA.
+//                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                          ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                               ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                                          ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
           case _ => dieWithFailureMessage(i, state)
-//                  ^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#dieWithFailureMessage().
-//                                        ^ reference ujson/CharParser#parseNested().(i)
-//                                           ^^^^^ reference ujson/CharParser#parseNested().(state)
+//                  ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#dieWithFailureMessage().
+//                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                           ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
         }
 
       case '[' =>
         failIfNotData(state, i)
-//      ^^^^^^^^^^^^^ reference ujson/CharParser#failIfNotData().
-//                    ^^^^^ reference ujson/CharParser#parseNested().(state)
-//                           ^ reference ujson/CharParser#parseNested().(i)
+//      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#failIfNotData().
+//                    ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
+//                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         val ctx =
-//          ^^^ definition local58 ctx: ArrVisitor[local59, J[
+//          ^^^ definition local 58
+//              documentation ```scala\nctx: ArrVisitor[local59, J[ \n```
           try stackHead.subVisitor.asInstanceOf[Visitor[_, J]].visitArray(-1, i)
-//            ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                      ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#subVisitor().
-//                                 ^^^^^^^^^^^^ reference scala/Any#asInstanceOf().
-//                                              ^^^^^^^ reference upickle/core/Visitor#
-//                                                         ^ reference ujson/CharParser#[J]
-//                                                             ^^^^^^^^^^ reference upickle/core/Visitor#visitArray().
-//                                                                            ^ reference ujson/CharParser#parseNested().(i)
+//            ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                      ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#subVisitor().
+//                                 ^^^^^^^^^^^^ reference semanticdb maven . . scala/Any#asInstanceOf().
+//                                              ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                             ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitArray().
+//                                                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
           catch reject(i)
-//              ^^^^^^ reference ujson/CharParser#reject().
-//                     ^ reference ujson/CharParser#parseNested().(i)
+//              ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().
+//                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         parseNested(ARRBEG, i + 1, ctx, stackHead :: stackTail)
-//      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                  ^^^^^^ reference ujson/CharParser#ARRBEG.
-//                          ^ reference ujson/CharParser#parseNested().(i)
-//                            ^ reference scala/Int#`+`(+4).
-//                                 ^^^ reference local58
-//                                      ^^^^^^^^^ reference local62
-//                                                ^^ reference scala/collection/immutable/List#`::`().
-//                                                   ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
+//      ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                  ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#ARRBEG.
+//                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                            ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                 ^^^ reference local 58
+//                                      ^^^^^^^^^ reference local 62
+//                                                ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/immutable/List#`::`().
+//                                                   ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
 
       case '{' =>
         failIfNotData(state, i)
-//      ^^^^^^^^^^^^^ reference ujson/CharParser#failIfNotData().
-//                    ^^^^^ reference ujson/CharParser#parseNested().(state)
-//                           ^ reference ujson/CharParser#parseNested().(i)
+//      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#failIfNotData().
+//                    ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
+//                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         val ctx =
-//          ^^^ definition local63 ctx: ObjVisitor[local64, J[
+//          ^^^ definition local 63
+//              documentation ```scala\nctx: ObjVisitor[local64, J[ \n```
           try stackHead.subVisitor.asInstanceOf[Visitor[_, J]].visitObject(-1, i)
-//            ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                      ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#subVisitor().
-//                                 ^^^^^^^^^^^^ reference scala/Any#asInstanceOf().
-//                                              ^^^^^^^ reference upickle/core/Visitor#
-//                                                         ^ reference ujson/CharParser#[J]
-//                                                             ^^^^^^^^^^^ reference upickle/core/Visitor#visitObject().
-//                                                                             ^ reference ujson/CharParser#parseNested().(i)
+//            ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                      ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#subVisitor().
+//                                 ^^^^^^^^^^^^ reference semanticdb maven . . scala/Any#asInstanceOf().
+//                                              ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                             ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitObject().
+//                                                                             ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
           catch reject(i)
-//              ^^^^^^ reference ujson/CharParser#reject().
-//                     ^ reference ujson/CharParser#parseNested().(i)
+//              ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().
+//                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         parseNested(OBJBEG, i + 1, ctx, stackHead :: stackTail)
-//      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                  ^^^^^^ reference ujson/CharParser#OBJBEG.
-//                          ^ reference ujson/CharParser#parseNested().(i)
-//                            ^ reference scala/Int#`+`(+4).
-//                                 ^^^ reference local63
-//                                      ^^^^^^^^^ reference local67
-//                                                ^^ reference scala/collection/immutable/List#`::`().
-//                                                   ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
+//      ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                  ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#OBJBEG.
+//                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                            ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                 ^^^ reference local 63
+//                                      ^^^^^^^^^ reference local 67
+//                                                ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/immutable/List#`::`().
+//                                                   ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
 
       case '-' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' =>
         failIfNotData(state, i)
-//      ^^^^^^^^^^^^^ reference ujson/CharParser#failIfNotData().
-//                    ^^^^^ reference ujson/CharParser#parseNested().(state)
-//                           ^ reference ujson/CharParser#parseNested().(i)
+//      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#failIfNotData().
+//                    ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
+//                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         val ctx =
-//          ^^^ definition local68 ctx: Int
+//          ^^^ definition local 68
+//              documentation ```scala\nctx: Int \n```
           try parseNum(i, stackHead.narrow, stackHead.subVisitor.asInstanceOf[Visitor[_, J]])
-//            ^^^^^^^^ reference ujson/CharParser#parseNum().
-//                     ^ reference ujson/CharParser#parseNested().(i)
-//                        ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                  ^^^^^^ reference upickle/core/ObjArrVisitor#narrow().
-//                                          ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                                    ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#subVisitor().
-//                                                               ^^^^^^^^^^^^ reference scala/Any#asInstanceOf().
-//                                                                            ^^^^^^^ reference upickle/core/Visitor#
-//                                                                                       ^ reference ujson/CharParser#[J]
+//            ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNum().
+//                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                        ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                  ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#narrow().
+//                                          ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                                    ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#subVisitor().
+//                                                               ^^^^^^^^^^^^ reference semanticdb maven . . scala/Any#asInstanceOf().
+//                                                                            ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                                                       ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
           catch reject(i)
-//              ^^^^^^ reference ujson/CharParser#reject().
-//                     ^ reference ujson/CharParser#parseNested().(i)
+//              ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().
+//                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         parseNested(collectionEndFor(stackHead), ctx, stackHead, stackTail)
-//      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                  ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
-//                                   ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                               ^^^ reference local68
-//                                                    ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                                               ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
+//      ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                  ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#collectionEndFor().
+//                                   ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                               ^^^ reference local 68
+//                                                    ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                                               ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
 
       case 't' =>
         failIfNotData(state, i)
-//      ^^^^^^^^^^^^^ reference ujson/CharParser#failIfNotData().
-//                    ^^^^^ reference ujson/CharParser#parseNested().(state)
-//                           ^ reference ujson/CharParser#parseNested().(i)
+//      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#failIfNotData().
+//                    ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
+//                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         try stackHead.narrow.visitValue(
-//          ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                    ^^^^^^ reference upickle/core/ObjArrVisitor#narrow().
-//                           ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#visitValue().
+//          ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#narrow().
+//                           ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#visitValue().
           parseTrue(i, stackHead.subVisitor.asInstanceOf[Visitor[_, J]]),
-//        ^^^^^^^^^ reference ujson/CharParser#parseTrue().
-//                  ^ reference ujson/CharParser#parseNested().(i)
-//                     ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                               ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#subVisitor().
-//                                          ^^^^^^^^^^^^ reference scala/Any#asInstanceOf().
-//                                                       ^^^^^^^ reference upickle/core/Visitor#
-//                                                                  ^ reference ujson/CharParser#[J]
+//        ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseTrue().
+//                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                     ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                               ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#subVisitor().
+//                                          ^^^^^^^^^^^^ reference semanticdb maven . . scala/Any#asInstanceOf().
+//                                                       ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
           i
-//        ^ reference ujson/CharParser#parseNested().(i)
+//        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         )
         catch reject(i)
-//            ^^^^^^ reference ujson/CharParser#reject().
-//                   ^ reference ujson/CharParser#parseNested().(i)
+//            ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().
+//                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         parseNested(collectionEndFor(stackHead), i + 4, stackHead, stackTail)
-//      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                  ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
-//                                   ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                               ^ reference ujson/CharParser#parseNested().(i)
-//                                                 ^ reference scala/Int#`+`(+4).
-//                                                      ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                                                 ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
+//      ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                  ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#collectionEndFor().
+//                                   ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                                 ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                      ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                                                 ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
 
       case 'f' =>
         failIfNotData(state, i)
-//      ^^^^^^^^^^^^^ reference ujson/CharParser#failIfNotData().
-//                    ^^^^^ reference ujson/CharParser#parseNested().(state)
-//                           ^ reference ujson/CharParser#parseNested().(i)
+//      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#failIfNotData().
+//                    ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
+//                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         try stackHead.narrow.visitValue(
-//          ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                    ^^^^^^ reference upickle/core/ObjArrVisitor#narrow().
-//                           ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#visitValue().
+//          ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#narrow().
+//                           ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#visitValue().
           parseFalse(i, stackHead.subVisitor.asInstanceOf[Visitor[_, J]]),
-//        ^^^^^^^^^^ reference ujson/CharParser#parseFalse().
-//                   ^ reference ujson/CharParser#parseNested().(i)
-//                      ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#subVisitor().
-//                                           ^^^^^^^^^^^^ reference scala/Any#asInstanceOf().
-//                                                        ^^^^^^^ reference upickle/core/Visitor#
-//                                                                   ^ reference ujson/CharParser#[J]
+//        ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseFalse().
+//                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                      ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#subVisitor().
+//                                           ^^^^^^^^^^^^ reference semanticdb maven . . scala/Any#asInstanceOf().
+//                                                        ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
           i
-//        ^ reference ujson/CharParser#parseNested().(i)
+//        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         )
         catch reject(i)
-//            ^^^^^^ reference ujson/CharParser#reject().
-//                   ^ reference ujson/CharParser#parseNested().(i)
+//            ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().
+//                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         parseNested(collectionEndFor(stackHead), i + 5, stackHead, stackTail)
-//      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                  ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
-//                                   ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                               ^ reference ujson/CharParser#parseNested().(i)
-//                                                 ^ reference scala/Int#`+`(+4).
-//                                                      ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                                                 ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
+//      ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                  ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#collectionEndFor().
+//                                   ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                                 ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                      ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                                                 ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
 
       case 'n' =>
         failIfNotData(state, i)
-//      ^^^^^^^^^^^^^ reference ujson/CharParser#failIfNotData().
-//                    ^^^^^ reference ujson/CharParser#parseNested().(state)
-//                           ^ reference ujson/CharParser#parseNested().(i)
+//      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#failIfNotData().
+//                    ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
+//                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         try stackHead.narrow.visitValue(
-//          ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                    ^^^^^^ reference upickle/core/ObjArrVisitor#narrow().
-//                           ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#visitValue().
+//          ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#narrow().
+//                           ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#visitValue().
           parseNull(i, stackHead.subVisitor.asInstanceOf[Visitor[_, J]]),
-//        ^^^^^^^^^ reference ujson/CharParser#parseNull().
-//                  ^ reference ujson/CharParser#parseNested().(i)
-//                     ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                               ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#subVisitor().
-//                                          ^^^^^^^^^^^^ reference scala/Any#asInstanceOf().
-//                                                       ^^^^^^^ reference upickle/core/Visitor#
-//                                                                  ^ reference ujson/CharParser#[J]
+//        ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNull().
+//                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                     ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                               ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#subVisitor().
+//                                          ^^^^^^^^^^^^ reference semanticdb maven . . scala/Any#asInstanceOf().
+//                                                       ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
           i
-//        ^ reference ujson/CharParser#parseNested().(i)
+//        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         )
         catch reject(i)
-//            ^^^^^^ reference ujson/CharParser#reject().
-//                   ^ reference ujson/CharParser#parseNested().(i)
+//            ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().
+//                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         parseNested(collectionEndFor(stackHead), i + 4, stackHead, stackTail)
-//      ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                  ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
-//                                   ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                               ^ reference ujson/CharParser#parseNested().(i)
-//                                                 ^ reference scala/Int#`+`(+4).
-//                                                      ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                                                 ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
+//      ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                  ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#collectionEndFor().
+//                                   ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                                 ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                      ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                                                 ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
 
       case ',' =>
         dropBufferUntil(i)
-//      ^^^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#dropBufferUntil().
-//                      ^ reference ujson/CharParser#parseNested().(i)
+//      ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#dropBufferUntil().
+//                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
         (state: @switch) match{
-//       ^^^^^ reference ujson/CharParser#parseNested().(state)
+//       ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
           case ARREND => parseNested(DATA, i + 1, stackHead, stackTail)
-//             ^^^^^^ reference ujson/CharParser#ARREND.
-//                       ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                                   ^^^^ reference ujson/CharParser#DATA.
-//                                         ^ reference ujson/CharParser#parseNested().(i)
-//                                           ^ reference scala/Int#`+`(+4).
-//                                                ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                                           ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
+//             ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#ARREND.
+//                       ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                                   ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#DATA.
+//                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                                           ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
           case OBJEND => parseNested(KEY, i + 1, stackHead, stackTail)
-//             ^^^^^^ reference ujson/CharParser#OBJEND.
-//                       ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                                   ^^^ reference ujson/CharParser#KEY.
-//                                        ^ reference ujson/CharParser#parseNested().(i)
-//                                          ^ reference scala/Int#`+`(+4).
-//                                               ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                                          ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
+//             ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#OBJEND.
+//                       ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                                   ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#KEY.
+//                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                          ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                               ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                                          ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
           case _ => dieWithFailureMessage(i, state)
-//                  ^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#dieWithFailureMessage().
-//                                        ^ reference ujson/CharParser#parseNested().(i)
-//                                           ^^^^^ reference ujson/CharParser#parseNested().(state)
+//                  ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#dieWithFailureMessage().
+//                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                           ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
         }
 
       case ']' =>
         (state: @switch) match{
-//       ^^^^^ reference ujson/CharParser#parseNested().(state)
+//       ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
           case ARREND | ARRBEG =>
-//             ^^^^^^ reference ujson/CharParser#ARREND.
-//                      ^^^^^^ reference ujson/CharParser#ARRBEG.
+//             ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#ARREND.
+//                      ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#ARRBEG.
             tryCloseCollection(stackHead, stackTail, i) match{
-//          ^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#tryCloseCollection().
-//                             ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                        ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
-//                                                   ^ reference ujson/CharParser#parseNested().(i)
+//          ^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().
+//                             ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                        ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
+//                                                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
               case Some(t) => t
-//                 ^^^^ reference scala/Some.
-//                      ^ definition local77 t: (J, Int)
-//                            ^ reference local77
+//                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Some.
+//                      ^ definition local 77
+//                        documentation ```scala\nt: (J, Int) \n```
+//                            ^ reference local 77
               case None =>
-//                 ^^^^ reference scala/None.
+//                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/None.
                 val stackTailHead = stackTail.head
-//                  ^^^^^^^^^^^^^ definition local78 stackTailHead: ObjArrVisitor[local51, J[
-//                                  ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
-//                                            ^^^^ reference scala/collection/IterableOps#head().
+//                  ^^^^^^^^^^^^^ definition local 78
+//                                documentation ```scala\nstackTailHead: ObjArrVisitor[local51, J[ \n```
+//                                  ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
+//                                            ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/IterableOps#head().
                 parseNested(collectionEndFor(stackTailHead), i + 1, stackTailHead, stackTail.tail)
-//              ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                          ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
-//                                           ^^^^^^^^^^^^^ reference local78
-//                                                           ^ reference ujson/CharParser#parseNested().(i)
-//                                                             ^ reference scala/Int#`+`(+4).
-//                                                                  ^^^^^^^^^^^^^ reference local78
-//                                                                                 ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
-//                                                                                           ^^^^ reference scala/collection/IterableOps#tail().
+//              ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                          ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#collectionEndFor().
+//                                           ^^^^^^^^^^^^^ reference local 78
+//                                                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                                             ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                                  ^^^^^^^^^^^^^ reference local 78
+//                                                                                 ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
+//                                                                                           ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/IterableOps#tail().
             }
           case _ => dieWithFailureMessage(i, state)
-//                  ^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#dieWithFailureMessage().
-//                                        ^ reference ujson/CharParser#parseNested().(i)
-//                                           ^^^^^ reference ujson/CharParser#parseNested().(state)
+//                  ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#dieWithFailureMessage().
+//                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                           ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
         }
 
       case '}' =>
         (state: @switch) match{
-//       ^^^^^ reference ujson/CharParser#parseNested().(state)
+//       ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
           case OBJEND | OBJBEG =>
-//             ^^^^^^ reference ujson/CharParser#OBJEND.
-//                      ^^^^^^ reference ujson/CharParser#OBJBEG.
+//             ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#OBJEND.
+//                      ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#OBJBEG.
             tryCloseCollection(stackHead, stackTail, i) match{
-//          ^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#tryCloseCollection().
-//                             ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackHead)
-//                                        ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
-//                                                   ^ reference ujson/CharParser#parseNested().(i)
+//          ^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().
+//                             ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackHead)
+//                                        ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
+//                                                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
               case Some(t) => t
-//                 ^^^^ reference scala/Some.
-//                      ^ definition local79 t: (J, Int)
-//                            ^ reference local79
+//                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Some.
+//                      ^ definition local 79
+//                        documentation ```scala\nt: (J, Int) \n```
+//                            ^ reference local 79
               case None =>
-//                 ^^^^ reference scala/None.
+//                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/None.
                 val stackTailHead = stackTail.head
-//                  ^^^^^^^^^^^^^ definition local80 stackTailHead: ObjArrVisitor[local51, J[
-//                                  ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
-//                                            ^^^^ reference scala/collection/IterableOps#head().
+//                  ^^^^^^^^^^^^^ definition local 80
+//                                documentation ```scala\nstackTailHead: ObjArrVisitor[local51, J[ \n```
+//                                  ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
+//                                            ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/IterableOps#head().
                 parseNested(collectionEndFor(stackTailHead), i + 1, stackTailHead, stackTail.tail)
-//              ^^^^^^^^^^^ reference ujson/CharParser#parseNested().
-//                          ^^^^^^^^^^^^^^^^ reference ujson/CharParser#collectionEndFor().
-//                                           ^^^^^^^^^^^^^ reference local80
-//                                                           ^ reference ujson/CharParser#parseNested().(i)
-//                                                             ^ reference scala/Int#`+`(+4).
-//                                                                  ^^^^^^^^^^^^^ reference local80
-//                                                                                 ^^^^^^^^^ reference ujson/CharParser#parseNested().(stackTail)
-//                                                                                           ^^^^ reference scala/collection/IterableOps#tail().
+//              ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().
+//                          ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#collectionEndFor().
+//                                           ^^^^^^^^^^^^^ reference local 80
+//                                                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                                             ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                                  ^^^^^^^^^^^^^ reference local 80
+//                                                                                 ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(stackTail)
+//                                                                                           ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/IterableOps#tail().
             }
           case _ => dieWithFailureMessage(i, state)
-//                  ^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#dieWithFailureMessage().
-//                                        ^ reference ujson/CharParser#parseNested().(i)
-//                                           ^^^^^ reference ujson/CharParser#parseNested().(state)
+//                  ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#dieWithFailureMessage().
+//                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                           ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
         }
       case _ => dieWithFailureMessage(i, state)
-//              ^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#dieWithFailureMessage().
-//                                    ^ reference ujson/CharParser#parseNested().(i)
-//                                       ^^^^^ reference ujson/CharParser#parseNested().(state)
+//              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#dieWithFailureMessage().
+//                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(i)
+//                                       ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseNested().(state)
 
     }
   }
 
 
   def dieWithFailureMessage(i: Int, state: Int) = {
-//    ^^^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#dieWithFailureMessage(). def dieWithFailureMessage(i: Int, state: Int): Nothing
-//                          ^ definition ujson/CharParser#dieWithFailureMessage().(i) i: Int
-//                             ^^^ reference scala/Int#
-//                                  ^^^^^ definition ujson/CharParser#dieWithFailureMessage().(state) state: Int
-//                                         ^^^ reference scala/Int#
+//    ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#dieWithFailureMessage().
+//                          documentation ```scala\ndef dieWithFailureMessage(i: Int, state: Int): Nothing\n```
+//                          ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#dieWithFailureMessage().(i)
+//                            documentation ```scala\ni: Int \n```
+//                             ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                  ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#dieWithFailureMessage().(state)
+//                                        documentation ```scala\nstate: Int \n```
+//                                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     val expected = state match{
-//      ^^^^^^^^ definition local81 expected: String
-//                 ^^^^^ reference ujson/CharParser#dieWithFailureMessage().(state)
+//      ^^^^^^^^ definition local 81
+//               documentation ```scala\nexpected: String \n```
+//                 ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#dieWithFailureMessage().(state)
       case ARRBEG => "json value or ]"
-//         ^^^^^^ reference ujson/CharParser#ARRBEG.
+//         ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#ARRBEG.
       case OBJBEG => "json value or }"
-//         ^^^^^^ reference ujson/CharParser#OBJBEG.
+//         ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#OBJBEG.
       case DATA => "json value"
-//         ^^^^ reference ujson/CharParser#DATA.
+//         ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#DATA.
       case KEY => "json string key"
-//         ^^^ reference ujson/CharParser#KEY.
+//         ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#KEY.
       case COLON => ":"
-//         ^^^^^ reference ujson/CharParser#COLON.
+//         ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#COLON.
       case ARREND => ", or ]"
-//         ^^^^^^ reference ujson/CharParser#ARREND.
+//         ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#ARREND.
       case OBJEND => ", or }"
-//         ^^^^^^ reference ujson/CharParser#OBJEND.
+//         ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#OBJEND.
     }
     die(i, s"expected $expected")
-//  ^^^ reference ujson/CharParser#die().
-//      ^ reference ujson/CharParser#dieWithFailureMessage().(i)
-//         ^ reference scala/StringContext#s().
-//                     ^^^^^^^^ reference local81
+//  ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#dieWithFailureMessage().(i)
+//         ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/StringContext#s().
+//                     ^^^^^^^^ reference local 81
   }
 
   def failIfNotData(state: Int, i: Int) = (state: @switch) match{
-//    ^^^^^^^^^^^^^ definition ujson/CharParser#failIfNotData(). def failIfNotData(state: Int, i: Int): Unit
-//                  ^^^^^ definition ujson/CharParser#failIfNotData().(state) state: Int
-//                         ^^^ reference scala/Int#
-//                              ^ definition ujson/CharParser#failIfNotData().(i) i: Int
-//                                 ^^^ reference scala/Int#
-//                                         ^^^^^ reference ujson/CharParser#failIfNotData().(state)
+//    ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#failIfNotData().
+//                  documentation ```scala\ndef failIfNotData(state: Int, i: Int): Unit\n```
+//                  ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#failIfNotData().(state)
+//                        documentation ```scala\nstate: Int \n```
+//                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#failIfNotData().(i)
+//                                documentation ```scala\ni: Int \n```
+//                                 ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                         ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#failIfNotData().(state)
     case DATA | ARRBEG => // do nothing
-//       ^^^^ reference ujson/CharParser#DATA.
-//              ^^^^^^ reference ujson/CharParser#ARRBEG.
+//       ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#DATA.
+//              ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#ARRBEG.
     case _ => dieWithFailureMessage(i, state)
-//            ^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#dieWithFailureMessage().
-//                                  ^ reference ujson/CharParser#failIfNotData().(i)
-//                                     ^^^^^ reference ujson/CharParser#failIfNotData().(state)
+//            ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#dieWithFailureMessage().
+//                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#failIfNotData().(i)
+//                                     ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#failIfNotData().(state)
   }
 
   def tryCloseCollection(stackHead: ObjArrVisitor[_, J], stackTail: List[ObjArrVisitor[_, J]], i: Int) = {
-//    ^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#tryCloseCollection(). def tryCloseCollection(stackHead: ObjArrVisitor[local82, J[, stackTail: List[ObjArrVisitor[local83, J[], i: Int): Option[(J, Int)]
-//                       ^^^^^^^^^ definition ujson/CharParser#tryCloseCollection().(stackHead) stackHead: ObjArrVisitor[local82, J[
-//                                  ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
-//                                                   ^ reference ujson/CharParser#[J]
-//                                                       ^^^^^^^^^ definition ujson/CharParser#tryCloseCollection().(stackTail) stackTail: List[ObjArrVisitor[local83, J[]
-//                                                                  ^^^^ reference scala/package.List#
-//                                                                       ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
-//                                                                                        ^ reference ujson/CharParser#[J]
-//                                                                                             ^ definition ujson/CharParser#tryCloseCollection().(i) i: Int
-//                                                                                                ^^^ reference scala/Int#
+//    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().
+//                       documentation ```scala\ndef tryCloseCollection(stackHead: ObjArrVisitor[local82, J[, stackTail: List[ObjArrVisitor[local83, J[], i: Int): Option[(J, Int)]\n```
+//                       ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().(stackHead)
+//                                 documentation ```scala\nstackHead: ObjArrVisitor[local82, J[ \n```
+//                                  ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
+//                                                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                       ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().(stackTail)
+//                                                                 documentation ```scala\nstackTail: List[ObjArrVisitor[local83, J[] \n```
+//                                                                  ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/package.List#
+//                                                                       ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
+//                                                                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                                             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().(i)
+//                                                                                               documentation ```scala\ni: Int \n```
+//                                                                                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     if (stackTail.isEmpty) {
-//      ^^^^^^^^^ reference ujson/CharParser#tryCloseCollection().(stackTail)
-//                ^^^^^^^ reference scala/collection/immutable/List#isEmpty().
+//      ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().(stackTail)
+//                ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/immutable/List#isEmpty().
       Some(try stackHead.visitEnd(i) catch reject(i), i + 1)
-//    ^^^^ reference scala/Some.
-//             ^^^^^^^^^ reference ujson/CharParser#tryCloseCollection().(stackHead)
-//                       ^^^^^^^^ reference upickle/core/ObjArrVisitor#visitEnd().
-//                                ^ reference ujson/CharParser#tryCloseCollection().(i)
-//                                         ^^^^^^ reference ujson/CharParser#reject().
-//                                                ^ reference ujson/CharParser#tryCloseCollection().(i)
-//                                                    ^ reference ujson/CharParser#tryCloseCollection().(i)
-//                                                      ^ reference scala/Int#`+`(+4).
+//    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Some.
+//             ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().(stackHead)
+//                       ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#visitEnd().
+//                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().(i)
+//                                         ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().
+//                                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().(i)
+//                                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().(i)
+//                                                      ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
     } else {
       val ctxt2 = stackTail.head.narrow
-//        ^^^^^ definition local86 ctxt2: ObjArrVisitor[Any, J]
-//                ^^^^^^^^^ reference ujson/CharParser#tryCloseCollection().(stackTail)
-//                          ^^^^ reference scala/collection/IterableOps#head().
-//                               ^^^^^^ reference upickle/core/ObjArrVisitor#narrow().
+//        ^^^^^ definition local 86
+//              documentation ```scala\nctxt2: ObjArrVisitor[Any, J] \n```
+//                ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().(stackTail)
+//                          ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/IterableOps#head().
+//                               ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#narrow().
       try ctxt2.visitValue(stackHead.visitEnd(i), i) catch reject(i)
-//        ^^^^^ reference local86
-//              ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#visitValue().
-//                         ^^^^^^^^^ reference ujson/CharParser#tryCloseCollection().(stackHead)
-//                                   ^^^^^^^^ reference upickle/core/ObjArrVisitor#visitEnd().
-//                                            ^ reference ujson/CharParser#tryCloseCollection().(i)
-//                                                ^ reference ujson/CharParser#tryCloseCollection().(i)
-//                                                         ^^^^^^ reference ujson/CharParser#reject().
-//                                                                ^ reference ujson/CharParser#tryCloseCollection().(i)
+//        ^^^^^ reference local 86
+//              ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#visitValue().
+//                         ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().(stackHead)
+//                                   ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#visitEnd().
+//                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().(i)
+//                                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().(i)
+//                                                         ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#reject().
+//                                                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#tryCloseCollection().(i)
       None
-//    ^^^^ reference scala/None.
+//    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/None.
 
     }
   }
   def collectionEndFor(stackHead: ObjArrVisitor[_, _]) = {
-//    ^^^^^^^^^^^^^^^^ definition ujson/CharParser#collectionEndFor(). def collectionEndFor(stackHead: ObjArrVisitor[local89, local90[): Int
-//                     ^^^^^^^^^ definition ujson/CharParser#collectionEndFor().(stackHead) stackHead: ObjArrVisitor[local89, local90[
-//                                ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
+//    ^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#collectionEndFor().
+//                     documentation ```scala\ndef collectionEndFor(stackHead: ObjArrVisitor[local89, local90[): Int\n```
+//                     ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#collectionEndFor().(stackHead)
+//                               documentation ```scala\nstackHead: ObjArrVisitor[local89, local90[ \n```
+//                                ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
     if (stackHead.isObj) OBJEND
-//      ^^^^^^^^^ reference ujson/CharParser#collectionEndFor().(stackHead)
-//                ^^^^^ reference upickle/core/ObjArrVisitor#isObj().
-//                       ^^^^^^ reference ujson/CharParser#OBJEND.
+//      ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#collectionEndFor().(stackHead)
+//                ^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#isObj().
+//                       ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#OBJEND.
     else ARREND
-//       ^^^^^^ reference ujson/CharParser#ARREND.
+//       ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#ARREND.
   }
 
   /**
@@ -1520,150 +1627,160 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
     * chars.
     */
   protected[this] final def parseStringSimple(i: Int): Int = {
-//                          ^^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringSimple(). final def parseStringSimple(i: Int): Int
-//                                            ^ definition ujson/CharParser#parseStringSimple().(i) i: Int
-//                                               ^^^ reference scala/Int#
-//                                                     ^^^ reference scala/Int#
+//                          ^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringSimple().
+//                                            documentation ```scala\nfinal def parseStringSimple(i: Int): Int\n```
+//                                            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringSimple().(i)
+//                                              documentation ```scala\ni: Int \n```
+//                                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                     ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     var j = i
-//      ^ definition local91 j: Int
-//          ^ reference ujson/CharParser#parseStringSimple().(i)
+//      ^ definition local 91
+//        documentation ```scala\nj: Int \n```
+//          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringSimple().(i)
     var c = elemOps.toUnsignedInt(getCharSafe(j))
-//      ^ definition local92 c: Int
-//          ^^^^^^^ reference ujson/CharParser#elemOps.
-//                  ^^^^^^^^^^^^^ reference upickle/core/CharOps.toUnsignedInt().
-//                                ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                                            ^ reference local91
+//      ^ definition local 92
+//        documentation ```scala\nc: Int \n```
+//          ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#elemOps.
+//                  ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.toUnsignedInt().
+//                                ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                                            ^ reference local 91
     while (c != '"') {
-//         ^ reference local92
-//           ^^ reference scala/Int#`!=`(+2).
+//         ^ reference local 92
+//           ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`!=`(+2).
       if (c < ' ') die(j, s"control char (${c}) in string")
-//        ^ reference local92
-//          ^ reference scala/Int#`<`(+2).
-//                 ^^^ reference ujson/CharParser#die().
-//                     ^ reference local91
-//                        ^ reference scala/StringContext#s().
-//                                          ^ reference local92
+//        ^ reference local 92
+//          ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`<`(+2).
+//                 ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//                     ^ reference local 91
+//                        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/StringContext#s().
+//                                          ^ reference local 92
       if (c == '\\' || c > 127) return -1 - j
-//        ^ reference local92
-//          ^^ reference scala/Int#`==`(+2).
-//                  ^^ reference scala/Boolean#`||`().
-//                     ^ reference local92
-//                       ^ reference scala/Int#`>`(+3).
-//                                        ^ reference scala/Int#`-`(+3).
-//                                          ^ reference local91
+//        ^ reference local 92
+//          ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`==`(+2).
+//                  ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#`||`().
+//                     ^ reference local 92
+//                       ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`>`(+3).
+//                                        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                                          ^ reference local 91
       j += 1
-//    ^ reference local91
-//      ^^ reference scala/Int#`+`(+4).
+//    ^ reference local 91
+//      ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
       c = elemOps.toUnsignedInt(getCharSafe(j))
-//    ^ reference local92
-//        ^^^^^^^ reference ujson/CharParser#elemOps.
-//                ^^^^^^^^^^^^^ reference upickle/core/CharOps.toUnsignedInt().
-//                              ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                                          ^ reference local91
+//    ^ reference local 92
+//        ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#elemOps.
+//                ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.toUnsignedInt().
+//                              ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                                          ^ reference local 91
     }
     j + 1
-//  ^ reference local91
-//    ^ reference scala/Int#`+`(+4).
+//  ^ reference local 91
+//    ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
   }
 
   /**
     * Parse a string that is known to have escape sequences.
     */
   protected[this] final def parseStringComplex(i0: Int): Int = {
-//                          ^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringComplex(). final def parseStringComplex(i0: Int): Int
-//                                             ^^ definition ujson/CharParser#parseStringComplex().(i0) i0: Int
-//                                                 ^^^ reference scala/Int#
-//                                                       ^^^ reference scala/Int#
+//                          ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringComplex().
+//                                             documentation ```scala\nfinal def parseStringComplex(i0: Int): Int\n```
+//                                             ^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringComplex().(i0)
+//                                                documentation ```scala\ni0: Int \n```
+//                                                 ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     var i = i0
-//      ^ definition local94 i: Int
-//          ^^ reference ujson/CharParser#parseStringComplex().(i0)
+//      ^ definition local 94
+//        documentation ```scala\ni: Int \n```
+//          ^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringComplex().(i0)
     var c = elemOps.toUnsignedInt(getCharSafe(i))
-//      ^ definition local95 c: Int
-//          ^^^^^^^ reference ujson/CharParser#elemOps.
-//                  ^^^^^^^^^^^^^ reference upickle/core/CharOps.toUnsignedInt().
-//                                ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                                            ^ reference local94
+//      ^ definition local 95
+//        documentation ```scala\nc: Int \n```
+//          ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#elemOps.
+//                  ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.toUnsignedInt().
+//                                ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                                            ^ reference local 94
     while (c != '"') {
-//         ^ reference local95
-//           ^^ reference scala/Int#`!=`(+2).
+//         ^ reference local 95
+//           ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`!=`(+2).
 
       if (c < ' ') die(i, s"control char (${c}) in string")
-//        ^ reference local95
-//          ^ reference scala/Int#`<`(+2).
-//                 ^^^ reference ujson/CharParser#die().
-//                     ^ reference local94
-//                        ^ reference scala/StringContext#s().
-//                                          ^ reference local95
+//        ^ reference local 95
+//          ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`<`(+2).
+//                 ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//                     ^ reference local 94
+//                        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/StringContext#s().
+//                                          ^ reference local 95
       else if (c == '\\') {
-//             ^ reference local95
-//               ^^ reference scala/Int#`==`(+2).
+//             ^ reference local 95
+//               ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`==`(+2).
         (getCharSafe(i + 1): @switch) match {
-//       ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                   ^ reference local94
-//                     ^ reference scala/Int#`+`(+4).
+//       ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                   ^ reference local 94
+//                     ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
           case 'b' => { outputBuilder.append('\b'); i += 2 }
-//                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                  ^ reference local94
-//                                                    ^^ reference scala/Int#`+`(+4).
+//                      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#append(+1).
+//                                                  ^ reference local 94
+//                                                    ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
           case 'f' => { outputBuilder.append('\f'); i += 2 }
-//                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                  ^ reference local94
-//                                                    ^^ reference scala/Int#`+`(+4).
+//                      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#append(+1).
+//                                                  ^ reference local 94
+//                                                    ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
           case 'n' => { outputBuilder.append('\n'); i += 2 }
-//                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                  ^ reference local94
-//                                                    ^^ reference scala/Int#`+`(+4).
+//                      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#append(+1).
+//                                                  ^ reference local 94
+//                                                    ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
           case 'r' => { outputBuilder.append('\r'); i += 2 }
-//                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                  ^ reference local94
-//                                                    ^^ reference scala/Int#`+`(+4).
+//                      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#append(+1).
+//                                                  ^ reference local 94
+//                                                    ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
           case 't' => { outputBuilder.append('\t'); i += 2 }
-//                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                  ^ reference local94
-//                                                    ^^ reference scala/Int#`+`(+4).
+//                      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#append(+1).
+//                                                  ^ reference local 94
+//                                                    ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
 
           case '"' => { outputBuilder.append('"'); i += 2 }
-//                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                 ^ reference local94
-//                                                   ^^ reference scala/Int#`+`(+4).
+//                      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#append(+1).
+//                                                 ^ reference local 94
+//                                                   ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
           case '/' => { outputBuilder.append('/'); i += 2 }
-//                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                                    ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                 ^ reference local94
-//                                                   ^^ reference scala/Int#`+`(+4).
+//                      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#append(+1).
+//                                                 ^ reference local 94
+//                                                   ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
           case '\\' => { outputBuilder.append('\\'); i += 2 }
-//                       ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                                     ^^^^^^ reference upickle/core/CharBuilder#append(+1).
-//                                                   ^ reference local94
-//                                                     ^^ reference scala/Int#`+`(+4).
+//                       ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                                     ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#append(+1).
+//                                                   ^ reference local 94
+//                                                     ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
 
           // if there's a problem then descape will explode
           case 'u' =>
             val d = descape(i)
-//              ^ definition local97 d: Char
-//                  ^^^^^^^ reference ujson/CharParser#descape().
-//                          ^ reference local94
+//              ^ definition local 97
+//                documentation ```scala\nd: Char \n```
+//                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#descape().
+//                          ^ reference local 94
             outputBuilder.appendC(d)
-//          ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                        ^^^^^^^ reference upickle/core/CharAppendC#appendC().
-//                                ^ reference local97
+//          ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                        ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharAppendC#appendC().
+//                                ^ reference local 97
 
             i += 6
-//          ^ reference local94
-//            ^^ reference scala/Int#`+`(+4).
+//          ^ reference local 94
+//            ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
 
           case c => die(i + 1, s"illegal escape sequence after \\")
-//             ^ definition local98 c: Char
-//                  ^^^ reference ujson/CharParser#die().
-//                      ^ reference local94
-//                        ^ reference scala/Int#`+`(+4).
-//                             ^ reference scala/StringContext#s().
+//             ^ definition local 98
+//               documentation ```scala\nc: Char \n```
+//                  ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#die().
+//                      ^ reference local 94
+//                        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                             ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/StringContext#s().
         }
       } else {
         // this case is for "normal" code points that are just one Char.
@@ -1672,24 +1789,24 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
         // will all be in the ranges D800–DBFF (high surrogates) or
         // DC00–DFFF (low surrogates).
         outputBuilder.append(c)
-//      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                    ^^^^^^ reference upickle/core/CharBuilder#append().
-//                           ^ reference local95
+//      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#append().
+//                           ^ reference local 95
         i += 1
-//      ^ reference local94
-//        ^^ reference scala/Int#`+`(+4).
+//      ^ reference local 94
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
       }
       c = elemOps.toUnsignedInt(getCharSafe(i))
-//    ^ reference local95
-//        ^^^^^^^ reference ujson/CharParser#elemOps.
-//                ^^^^^^^^^^^^^ reference upickle/core/CharOps.toUnsignedInt().
-//                              ^^^^^^^^^^^ reference ujson/CharParser#getCharSafe().
-//                                          ^ reference local94
+//    ^ reference local 95
+//        ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#elemOps.
+//                ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.toUnsignedInt().
+//                              ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#getCharSafe().
+//                                          ^ reference local 94
     }
 
     i + 1
-//  ^ reference local94
-//    ^ reference scala/Int#`+`(+4).
+//  ^ reference local 94
+//    ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
   }
 
   /**
@@ -1701,231 +1818,263 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
     * interpret a multi-char code point incorrectly.
     */
   protected[this] final def parseStringValue(i: Int, stackHead: ObjArrVisitor[_, J]): Int = {
-//                          ^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringValue(). final def parseStringValue(i: Int, stackHead: ObjArrVisitor[local99, J[): Int
-//                                           ^ definition ujson/CharParser#parseStringValue().(i) i: Int
-//                                              ^^^ reference scala/Int#
-//                                                   ^^^^^^^^^ definition ujson/CharParser#parseStringValue().(stackHead) stackHead: ObjArrVisitor[local99, J[
-//                                                              ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
-//                                                                               ^ reference ujson/CharParser#[J]
-//                                                                                    ^^^ reference scala/Int#
+//                          ^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringValue().
+//                                           documentation ```scala\nfinal def parseStringValue(i: Int, stackHead: ObjArrVisitor[local99, J[): Int\n```
+//                                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringValue().(i)
+//                                             documentation ```scala\ni: Int \n```
+//                                              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                   ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringValue().(stackHead)
+//                                                             documentation ```scala\nstackHead: ObjArrVisitor[local99, J[ \n```
+//                                                              ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
+//                                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                                    ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 
     val k = parseStringSimple(i + 1)
-//      ^ definition local100 k: Int
-//          ^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringSimple().
-//                            ^ reference ujson/CharParser#parseStringValue().(i)
-//                              ^ reference scala/Int#`+`(+4).
+//      ^ definition local 100
+//        documentation ```scala\nk: Int \n```
+//          ^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringSimple().
+//                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringValue().(i)
+//                              ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
     if (k >= 0) {
-//      ^ reference local100
-//        ^^ reference scala/Int#`>=`(+3).
+//      ^ reference local 100
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`>=`(+3).
       visitString(i, unsafeCharSeqForRange(i + 1, k - i - 2), stackHead)
-//    ^^^^^^^^^^^ reference ujson/CharParser#visitString().
-//                ^ reference ujson/CharParser#parseStringValue().(i)
-//                   ^^^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#unsafeCharSeqForRange().
-//                                         ^ reference ujson/CharParser#parseStringValue().(i)
-//                                           ^ reference scala/Int#`+`(+4).
-//                                                ^ reference local100
-//                                                  ^ reference scala/Int#`-`(+3).
-//                                                    ^ reference ujson/CharParser#parseStringValue().(i)
-//                                                      ^ reference scala/Int#`-`(+3).
-//                                                            ^^^^^^^^^ reference ujson/CharParser#parseStringValue().(stackHead)
+//    ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitString().
+//                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringValue().(i)
+//                   ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#unsafeCharSeqForRange().
+//                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringValue().(i)
+//                                           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                ^ reference local 100
+//                                                  ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringValue().(i)
+//                                                      ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                                                            ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringValue().(stackHead)
       k
-//    ^ reference local100
+//    ^ reference local 100
     } else {
       val k2 = parseStringToOutputBuilder(i, k)
-//        ^^ definition local101 k2: Int
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringToOutputBuilder().
-//                                        ^ reference ujson/CharParser#parseStringValue().(i)
-//                                           ^ reference local100
+//        ^^ definition local 101
+//           documentation ```scala\nk2: Int \n```
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringToOutputBuilder().
+//                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringValue().(i)
+//                                           ^ reference local 100
       visitString(i, outputBuilder.makeString(), stackHead)
-//    ^^^^^^^^^^^ reference ujson/CharParser#visitString().
-//                ^ reference ujson/CharParser#parseStringValue().(i)
-//                   ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                                 ^^^^^^^^^^ reference upickle/core/CharBuilder#makeString().
-//                                               ^^^^^^^^^ reference ujson/CharParser#parseStringValue().(stackHead)
+//    ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitString().
+//                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringValue().(i)
+//                   ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                                 ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#makeString().
+//                                               ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringValue().(stackHead)
       k2
-//    ^^ reference local101
+//    ^^ reference local 101
     }
   }
 
   protected[this] final def parseStringKey(i: Int, stackHead: ObjArrVisitor[_, J]): Int = {
-//                          ^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringKey(). final def parseStringKey(i: Int, stackHead: ObjArrVisitor[local102, J[): Int
-//                                         ^ definition ujson/CharParser#parseStringKey().(i) i: Int
-//                                            ^^^ reference scala/Int#
-//                                                 ^^^^^^^^^ definition ujson/CharParser#parseStringKey().(stackHead) stackHead: ObjArrVisitor[local102, J[
-//                                                            ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
-//                                                                             ^ reference ujson/CharParser#[J]
-//                                                                                  ^^^ reference scala/Int#
+//                          ^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringKey().
+//                                         documentation ```scala\nfinal def parseStringKey(i: Int, stackHead: ObjArrVisitor[local102, J[): Int\n```
+//                                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringKey().(i)
+//                                           documentation ```scala\ni: Int \n```
+//                                            ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                 ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringKey().(stackHead)
+//                                                           documentation ```scala\nstackHead: ObjArrVisitor[local102, J[ \n```
+//                                                            ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
+//                                                                             ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 
     val k = parseStringSimple(i + 1)
-//      ^ definition local103 k: Int
-//          ^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringSimple().
-//                            ^ reference ujson/CharParser#parseStringKey().(i)
-//                              ^ reference scala/Int#`+`(+4).
+//      ^ definition local 103
+//        documentation ```scala\nk: Int \n```
+//          ^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringSimple().
+//                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringKey().(i)
+//                              ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
     if (k >= 0) {
-//      ^ reference local103
-//        ^^ reference scala/Int#`>=`(+3).
+//      ^ reference local 103
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`>=`(+3).
       visitStringKey(i, unsafeCharSeqForRange(i + 1, k - i - 2), stackHead)
-//    ^^^^^^^^^^^^^^ reference ujson/CharParser#visitStringKey().
-//                   ^ reference ujson/CharParser#parseStringKey().(i)
-//                      ^^^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#unsafeCharSeqForRange().
-//                                            ^ reference ujson/CharParser#parseStringKey().(i)
-//                                              ^ reference scala/Int#`+`(+4).
-//                                                   ^ reference local103
-//                                                     ^ reference scala/Int#`-`(+3).
-//                                                       ^ reference ujson/CharParser#parseStringKey().(i)
-//                                                         ^ reference scala/Int#`-`(+3).
-//                                                               ^^^^^^^^^ reference ujson/CharParser#parseStringKey().(stackHead)
+//    ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitStringKey().
+//                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringKey().(i)
+//                      ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#unsafeCharSeqForRange().
+//                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringKey().(i)
+//                                              ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                   ^ reference local 103
+//                                                     ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                                                       ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringKey().(i)
+//                                                         ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                                                               ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringKey().(stackHead)
       k
-//    ^ reference local103
+//    ^ reference local 103
     } else {
       val k2 = parseStringToOutputBuilder(i, k)
-//        ^^ definition local104 k2: Int
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringToOutputBuilder().
-//                                        ^ reference ujson/CharParser#parseStringKey().(i)
-//                                           ^ reference local103
+//        ^^ definition local 104
+//           documentation ```scala\nk2: Int \n```
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringToOutputBuilder().
+//                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringKey().(i)
+//                                           ^ reference local 103
       visitStringKey(i, outputBuilder.makeString(), stackHead)
-//    ^^^^^^^^^^^^^^ reference ujson/CharParser#visitStringKey().
-//                   ^ reference ujson/CharParser#parseStringKey().(i)
-//                      ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                                    ^^^^^^^^^^ reference upickle/core/CharBuilder#makeString().
-//                                                  ^^^^^^^^^ reference ujson/CharParser#parseStringKey().(stackHead)
+//    ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitStringKey().
+//                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringKey().(i)
+//                      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                                    ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#makeString().
+//                                                  ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringKey().(stackHead)
       k2
-//    ^^ reference local104
+//    ^^ reference local 104
     }
   }
 
 
   def parseStringToOutputBuilder(i: Int, k: Int) = {
-//    ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringToOutputBuilder(). def parseStringToOutputBuilder(i: Int, k: Int): Int
-//                               ^ definition ujson/CharParser#parseStringToOutputBuilder().(i) i: Int
-//                                  ^^^ reference scala/Int#
-//                                       ^ definition ujson/CharParser#parseStringToOutputBuilder().(k) k: Int
-//                                          ^^^ reference scala/Int#
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringToOutputBuilder().
+//                               documentation ```scala\ndef parseStringToOutputBuilder(i: Int, k: Int): Int\n```
+//                               ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringToOutputBuilder().(i)
+//                                 documentation ```scala\ni: Int \n```
+//                                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringToOutputBuilder().(k)
+//                                         documentation ```scala\nk: Int \n```
+//                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     outputBuilder.reset()
-//  ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                ^^^^^ reference upickle/core/CharBuilder#reset().
+//  ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                ^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#reset().
     appendCharsToBuilder(outputBuilder, i + 1, -k - 2 - i)
-//  ^^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#appendCharsToBuilder().
-//                       ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                                      ^ reference ujson/CharParser#parseStringToOutputBuilder().(i)
-//                                        ^ reference scala/Int#`+`(+4).
-//                                             ^ reference scala/Int#`unary_-`().
-//                                              ^ reference ujson/CharParser#parseStringToOutputBuilder().(k)
-//                                                ^ reference scala/Int#`-`(+3).
-//                                                    ^ reference scala/Int#`-`(+3).
-//                                                      ^ reference ujson/CharParser#parseStringToOutputBuilder().(i)
+//  ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#appendCharsToBuilder().
+//                       ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringToOutputBuilder().(i)
+//                                        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                             ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`unary_-`().
+//                                              ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringToOutputBuilder().(k)
+//                                                ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                                                    ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                                                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringToOutputBuilder().(i)
     val k2 = parseStringComplex(-k - 1)
-//      ^^ definition local105 k2: Int
-//           ^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringComplex().
-//                              ^ reference scala/Int#`unary_-`().
-//                               ^ reference ujson/CharParser#parseStringToOutputBuilder().(k)
-//                                 ^ reference scala/Int#`-`(+3).
+//      ^^ definition local 105
+//         documentation ```scala\nk2: Int \n```
+//           ^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringComplex().
+//                              ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`unary_-`().
+//                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringToOutputBuilder().(k)
+//                                 ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
     k2
-//  ^^ reference local105
+//  ^^ reference local 105
   }
 
   def visitString(i: Int, s: CharSequence, stackHead: ObjArrVisitor[_, J]) = {
-//    ^^^^^^^^^^^ definition ujson/CharParser#visitString(). def visitString(i: Int, s: CharSequence, stackHead: ObjArrVisitor[local106, J[): Unit
-//                ^ definition ujson/CharParser#visitString().(i) i: Int
-//                   ^^^ reference scala/Int#
-//                        ^ definition ujson/CharParser#visitString().(s) s: CharSequence
-//                           ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                         ^^^^^^^^^ definition ujson/CharParser#visitString().(stackHead) stackHead: ObjArrVisitor[local106, J[
-//                                                    ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
-//                                                                     ^ reference ujson/CharParser#[J]
+//    ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitString().
+//                documentation ```scala\ndef visitString(i: Int, s: CharSequence, stackHead: ObjArrVisitor[local106, J[): Unit\n```
+//                ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitString().(i)
+//                  documentation ```scala\ni: Int \n```
+//                   ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                        ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitString().(s)
+//                          documentation ```scala\ns: CharSequence \n```
+//                           ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
+//                                         ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitString().(stackHead)
+//                                                   documentation ```scala\nstackHead: ObjArrVisitor[local106, J[ \n```
+//                                                    ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
+//                                                                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
     val v = stackHead.subVisitor.visitString(s, i)
-//      ^ definition local107 v: Any
-//          ^^^^^^^^^ reference ujson/CharParser#visitString().(stackHead)
-//                    ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#subVisitor().
-//                               ^^^^^^^^^^^ reference upickle/core/Visitor#visitString().
-//                                           ^ reference ujson/CharParser#visitString().(s)
-//                                              ^ reference ujson/CharParser#visitString().(i)
+//      ^ definition local 107
+//        documentation ```scala\nv: Any \n```
+//          ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitString().(stackHead)
+//                    ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#subVisitor().
+//                               ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitString().
+//                                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitString().(s)
+//                                              ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitString().(i)
     stackHead.narrow.visitValue(v, i)
-//  ^^^^^^^^^ reference ujson/CharParser#visitString().(stackHead)
-//            ^^^^^^ reference upickle/core/ObjArrVisitor#narrow().
-//                   ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#visitValue().
-//                              ^ reference local107
-//                                 ^ reference ujson/CharParser#visitString().(i)
+//  ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitString().(stackHead)
+//            ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#narrow().
+//                   ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#visitValue().
+//                              ^ reference local 107
+//                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitString().(i)
   }
   def visitStringKey(i: Int, s: CharSequence, stackHead: ObjArrVisitor[_, J]) = {
-//    ^^^^^^^^^^^^^^ definition ujson/CharParser#visitStringKey(). def visitStringKey(i: Int, s: CharSequence, stackHead: ObjArrVisitor[local108, J[): Unit
-//                   ^ definition ujson/CharParser#visitStringKey().(i) i: Int
-//                      ^^^ reference scala/Int#
-//                           ^ definition ujson/CharParser#visitStringKey().(s) s: CharSequence
-//                              ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                            ^^^^^^^^^ definition ujson/CharParser#visitStringKey().(stackHead) stackHead: ObjArrVisitor[local108, J[
-//                                                       ^^^^^^^^^^^^^ reference upickle/core/ObjArrVisitor#
-//                                                                        ^ reference ujson/CharParser#[J]
+//    ^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitStringKey().
+//                   documentation ```scala\ndef visitStringKey(i: Int, s: CharSequence, stackHead: ObjArrVisitor[local108, J[): Unit\n```
+//                   ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitStringKey().(i)
+//                     documentation ```scala\ni: Int \n```
+//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitStringKey().(s)
+//                             documentation ```scala\ns: CharSequence \n```
+//                              ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
+//                                            ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitStringKey().(stackHead)
+//                                                      documentation ```scala\nstackHead: ObjArrVisitor[local108, J[ \n```
+//                                                       ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
+//                                                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
     val obj = stackHead.asInstanceOf[ObjVisitor[Any, _]]
-//      ^^^ definition local109 obj: ObjVisitor[Any, Any]
-//            ^^^^^^^^^ reference ujson/CharParser#visitStringKey().(stackHead)
-//                      ^^^^^^^^^^^^ reference scala/Any#asInstanceOf().
-//                                   ^^^^^^^^^^ reference upickle/core/ObjVisitor#
-//                                              ^^^ reference scala/Any#
+//      ^^^ definition local 109
+//          documentation ```scala\nobj: ObjVisitor[Any, Any] \n```
+//            ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitStringKey().(stackHead)
+//                      ^^^^^^^^^^^^ reference semanticdb maven . . scala/Any#asInstanceOf().
+//                                   ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjVisitor#
+//                                              ^^^ reference semanticdb maven . . scala/Any#
     val keyVisitor = obj.visitKey(i)
-//      ^^^^^^^^^^ definition local110 keyVisitor: Visitor[local111, Any[
-//                   ^^^ reference local109
-//                       ^^^^^^^^ reference upickle/core/ObjVisitor#visitKey().
-//                                ^ reference ujson/CharParser#visitStringKey().(i)
+//      ^^^^^^^^^^ definition local 110
+//                 documentation ```scala\nkeyVisitor: Visitor[local111, Any[ \n```
+//                   ^^^ reference local 109
+//                       ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjVisitor#visitKey().
+//                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitStringKey().(i)
     obj.visitKeyValue(keyVisitor.visitString(s, i))
-//  ^^^ reference local109
-//      ^^^^^^^^^^^^^ reference upickle/core/ObjVisitor#visitKeyValue().
-//                    ^^^^^^^^^^ reference local110
-//                               ^^^^^^^^^^^ reference upickle/core/Visitor#visitString().
-//                                           ^ reference ujson/CharParser#visitStringKey().(s)
-//                                              ^ reference ujson/CharParser#visitStringKey().(i)
+//  ^^^ reference local 109
+//      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjVisitor#visitKeyValue().
+//                    ^^^^^^^^^^ reference local 110
+//                               ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitString().
+//                                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitStringKey().(s)
+//                                              ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#visitStringKey().(i)
   }
 
 
   protected[this] final def parseStringTopLevel(i: Int, facade: Visitor[_, J]): (J, Int) = {
-//                          ^^^^^^^^^^^^^^^^^^^ definition ujson/CharParser#parseStringTopLevel(). final def parseStringTopLevel(i: Int, facade: Visitor[local112, J[): (J, Int)
-//                                              ^ definition ujson/CharParser#parseStringTopLevel().(i) i: Int
-//                                                 ^^^ reference scala/Int#
-//                                                      ^^^^^^ definition ujson/CharParser#parseStringTopLevel().(facade) facade: Visitor[local112, J[
-//                                                              ^^^^^^^ reference upickle/core/Visitor#
-//                                                                         ^ reference ujson/CharParser#[J]
-//                                                                               ^ reference ujson/CharParser#[J]
-//                                                                                  ^^^ reference scala/Int#
+//                          ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringTopLevel().
+//                                              documentation ```scala\nfinal def parseStringTopLevel(i: Int, facade: Visitor[local112, J[): (J, Int)\n```
+//                                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringTopLevel().(i)
+//                                                documentation ```scala\ni: Int \n```
+//                                                 ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                      ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringTopLevel().(facade)
+//                                                             documentation ```scala\nfacade: Visitor[local112, J[ \n```
+//                                                              ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#[J]
+//                                                                                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 
     val k = parseStringSimple(i + 1)
-//      ^ definition local113 k: Int
-//          ^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringSimple().
-//                            ^ reference ujson/CharParser#parseStringTopLevel().(i)
-//                              ^ reference scala/Int#`+`(+4).
+//      ^ definition local 113
+//        documentation ```scala\nk: Int \n```
+//          ^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringSimple().
+//                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringTopLevel().(i)
+//                              ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
     if (k >= 0) {
-//      ^ reference local113
-//        ^^ reference scala/Int#`>=`(+3).
+//      ^ reference local 113
+//        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`>=`(+3).
       val res = facade.visitString(unsafeCharSeqForRange(i + 1, k - i - 2), i)
-//        ^^^ definition local114 res: J
-//              ^^^^^^ reference ujson/CharParser#parseStringTopLevel().(facade)
-//                     ^^^^^^^^^^^ reference upickle/core/Visitor#visitString().
-//                                 ^^^^^^^^^^^^^^^^^^^^^ reference upickle/core/BufferingCharParser#unsafeCharSeqForRange().
-//                                                       ^ reference ujson/CharParser#parseStringTopLevel().(i)
-//                                                         ^ reference scala/Int#`+`(+4).
-//                                                              ^ reference local113
-//                                                                ^ reference scala/Int#`-`(+3).
-//                                                                  ^ reference ujson/CharParser#parseStringTopLevel().(i)
-//                                                                    ^ reference scala/Int#`-`(+3).
-//                                                                          ^ reference ujson/CharParser#parseStringTopLevel().(i)
+//        ^^^ definition local 114
+//            documentation ```scala\nres: J \n```
+//              ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringTopLevel().(facade)
+//                     ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitString().
+//                                 ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#unsafeCharSeqForRange().
+//                                                       ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringTopLevel().(i)
+//                                                         ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`+`(+4).
+//                                                              ^ reference local 113
+//                                                                ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringTopLevel().(i)
+//                                                                    ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`-`(+3).
+//                                                                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringTopLevel().(i)
       (res, k)
-//     ^^^ reference local114
-//          ^ reference local113
+//     ^^^ reference local 114
+//          ^ reference local 113
     } else {
       val k2 = parseStringToOutputBuilder(i, k)
-//        ^^ definition local115 k2: Int
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference ujson/CharParser#parseStringToOutputBuilder().
-//                                        ^ reference ujson/CharParser#parseStringTopLevel().(i)
-//                                           ^ reference local113
+//        ^^ definition local 115
+//           documentation ```scala\nk2: Int \n```
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringToOutputBuilder().
+//                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringTopLevel().(i)
+//                                           ^ reference local 113
       val res = facade.visitString(outputBuilder.makeString(), i)
-//        ^^^ definition local116 res: J
-//              ^^^^^^ reference ujson/CharParser#parseStringTopLevel().(facade)
-//                     ^^^^^^^^^^^ reference upickle/core/Visitor#visitString().
-//                                 ^^^^^^^^^^^^^ reference ujson/CharParser#outputBuilder.
-//                                               ^^^^^^^^^^ reference upickle/core/CharBuilder#makeString().
-//                                                             ^ reference ujson/CharParser#parseStringTopLevel().(i)
+//        ^^^ definition local 116
+//            documentation ```scala\nres: J \n```
+//              ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringTopLevel().(facade)
+//                     ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitString().
+//                                 ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#outputBuilder.
+//                                               ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#makeString().
+//                                                             ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#parseStringTopLevel().(i)
       (res, k2)
-//     ^^^ reference local116
-//          ^^ reference local115
+//     ^^^ reference local 116
+//          ^^ reference local 115
     }
   }
 }
