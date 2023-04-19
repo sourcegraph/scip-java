@@ -39,10 +39,6 @@ object JavaToolchainPlugin extends AutoPlugin {
     (doc / javacOptions) --= List("-target", "1.8"),
     (doc / javacOptions) --= bootclasspathSettings(javaToolchainVersion.value),
     (doc / javacOptions) --= List("-g"),
-    javaHome :=
-      Some(
-        getJavaHome(javaToolchainVersion.value, javaToolchainJvmIndex.value)
-      ),
     javacOptions ++= bootclasspathSettings(javaToolchainVersion.value),
     javaOptions ++= bootclasspathSettings(javaToolchainVersion.value)
   )
@@ -52,7 +48,11 @@ object JavaToolchainPlugin extends AutoPlugin {
       List(
         fork := true,
         javaToolchainVersion := "11",
-        javaToolchainJvmIndex := None
+        javaToolchainJvmIndex := None,
+        javaHome :=
+          Some(
+            getJavaHome(javaToolchainVersion.value, javaToolchainJvmIndex.value)
+          )
       )
 
   /**
