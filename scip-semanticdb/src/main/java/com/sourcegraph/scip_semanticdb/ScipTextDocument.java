@@ -87,6 +87,7 @@ public class ScipTextDocument {
       return semanticdb;
     }
     Semanticdb.TextDocument.Builder builder = Semanticdb.TextDocument.newBuilder(semanticdb);
+    builder.clearSymbols();
     HashMap<String, Semanticdb.SymbolOccurrence> definitionOccurrences = new HashMap<>();
     for (Semanticdb.SymbolOccurrence occ : semanticdb.getOccurrencesList()) {
       if (occ.getRole() == Semanticdb.SymbolOccurrence.Role.DEFINITION) {
@@ -94,22 +95,21 @@ public class ScipTextDocument {
       }
     }
     for (Semanticdb.SymbolInformation info : semanticdb.getSymbolsList()) {
+      Semanticdb.SymbolInformation.Builder newInfo = Semanticdb.SymbolInformation.newBuilder(info);
       Semanticdb.SymbolOccurrence definition = definitionOccurrences.get(info.getSymbol());
       if (definition != null) {
+        builder.addSymbols(newInfo);
         continue;
       }
       for (Semanticdb.SymbolOccurrence alternativeSymbol : alternativeSymbols(info)) {
         Semanticdb.SymbolOccurrence alternativeDefinition =
             definitionOccurrences.get(alternativeSymbol.getSymbol());
         if (alternativeDefinition != null) {
-          builder.addOccurrences(
-              Semanticdb.SymbolOccurrence.newBuilder()
-                  .setRange(alternativeDefinition.getRange())
-                  .setRole(alternativeSymbol.getRole())
-                  .setSymbol(info.getSymbol()));
+          newInfo.addDefinitionRelationships(alternativeDefinition.getSymbol());
           break;
         }
       }
+      builder.addSymbols(newInfo);
     }
     return builder.build();
   }
