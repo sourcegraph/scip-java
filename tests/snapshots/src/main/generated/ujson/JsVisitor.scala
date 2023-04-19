@@ -55,7 +55,7 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 //                                  ^^^ reference scala/Int#
 //                                        ^ reference ujson/JsVisitor#[J]
 //                                            ^^^^^^^^^^^^ reference ujson/JsVisitor#visitFloat64().
-//                                                         ^ reference scala/Float#toDouble().
+//                                                         ^ reference ujson/JsVisitor#visitFloat32().(d)
 //                                                            ^^^^^ reference ujson/JsVisitor#visitFloat32().(index)
   def visitInt32(i: Int, index: Int): J = visitFloat64(i, index)
 //    ^^^^^^^^^^ definition ujson/JsVisitor#visitInt32(). def visitInt32(i: Int, index: Int): J
@@ -65,7 +65,7 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 //                              ^^^ reference scala/Int#
 //                                    ^ reference ujson/JsVisitor#[J]
 //                                        ^^^^^^^^^^^^ reference ujson/JsVisitor#visitFloat64().
-//                                                     ^ reference scala/Int#toDouble().
+//                                                     ^ reference ujson/JsVisitor#visitInt32().(i)
 //                                                        ^^^^^ reference ujson/JsVisitor#visitInt32().(index)
   def visitInt64(i: Long, index: Int): J = {
 //    ^^^^^^^^^^ definition ujson/JsVisitor#visitInt64(). def visitInt64(i: Long, index: Int): J
@@ -90,7 +90,7 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 //                                                                                           ^^^^^ reference ujson/JsVisitor#visitInt64().(index)
     else visitFloat64(i, index)
 //       ^^^^^^^^^^^^ reference ujson/JsVisitor#visitFloat64().
-//                    ^ reference scala/Long#toDouble().
+//                    ^ reference ujson/JsVisitor#visitInt64().(i)
 //                       ^^^^^ reference ujson/JsVisitor#visitInt64().(index)
   }
   def visitUInt64(i: Long, index: Int): J = {
@@ -117,7 +117,7 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 //                                                                                    ^^^^^ reference ujson/JsVisitor#visitUInt64().(index)
     else visitFloat64(i, index)
 //       ^^^^^^^^^^^^ reference ujson/JsVisitor#visitFloat64().
-//                    ^ reference scala/Long#toDouble().
+//                    ^ reference ujson/JsVisitor#visitUInt64().(i)
 //                       ^^^^^ reference ujson/JsVisitor#visitUInt64().(index)
   }
 
@@ -232,7 +232,7 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 //  ^^^ reference local5
 //      ^^^^^^^^^^ reference upickle/core/ObjArrVisitor#visitValue().
 //                 ^^^^^^^^^^^^ reference ujson/JsVisitor#visitFloat64().
-//                              ^^^ reference scala/Byte#toDouble().
+//                              ^^^ reference ujson/JsVisitor#visitExt().(tag)
 //                                   ^^^^^ reference ujson/JsVisitor#visitExt().(index)
 //                                          ^^^^^^^^^^^^ reference scala/Any#asInstanceOf().
 //                                                       ^ reference ujson/JsVisitor#[T]

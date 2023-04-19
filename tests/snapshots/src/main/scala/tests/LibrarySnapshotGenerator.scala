@@ -56,6 +56,7 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
       runScipJava(
         List(
           "index-dependency",
+          "--no-cleanup",
           "--snapshot",
           "--dependency",
           name,

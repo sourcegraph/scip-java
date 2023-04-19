@@ -10,20 +10,20 @@ import java.util.ArrayDeque
 //               ^^^^^^^^^^ reference java/util/ArrayDeque#
 
 internal class PreloadTargetProvider<P : PreloadRequestHolder>(
-//             ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#  internal final class PreloadTargetProvider<P : com.airbnb.epoxy.preload.PreloadRequestHolder>
-//             ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#`<init>`().  public constructor PreloadTargetProvider<P : com.airbnb.epoxy.preload.PreloadRequestHolder>(maxPreload: kotlin.Int, requestHolderFactory: () -> P)
-//                                   ^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#[P]  <P : com.airbnb.epoxy.preload.PreloadRequestHolder>
+//             ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider# internal final class PreloadTargetProvider<P : com.airbnb.epoxy.preload.PreloadRequestHolder>
+//             ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#`<init>`(). public constructor PreloadTargetProvider<P : com.airbnb.epoxy.preload.PreloadRequestHolder>(maxPreload: kotlin.Int, requestHolderFactory: () -> P)
+//                                   ^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#[P] <P : com.airbnb.epoxy.preload.PreloadRequestHolder>
 //                                       ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/preload/PreloadRequestHolder#
     maxPreload: Int,
-//  ^^^^^^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#`<init>`().(maxPreload)  value-parameter maxPreload: kotlin.Int
+//  ^^^^^^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#`<init>`().(maxPreload) value-parameter maxPreload: kotlin.Int
 //              ^^^ reference kotlin/Int#
     requestHolderFactory: () -> P
-//  ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#`<init>`().(requestHolderFactory)  value-parameter requestHolderFactory: () -> P
+//  ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#`<init>`().(requestHolderFactory) value-parameter requestHolderFactory: () -> P
 //                              ^ reference com/airbnb/epoxy/preload/PreloadTargetProvider#[P]
 ) {
     private val queue = ArrayDeque<P>((0 until maxPreload).map { requestHolderFactory() })
-//              ^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#queue.  private final val queue: java.util.ArrayDeque<P>
-//              ^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#getQueue().  private final val queue: java.util.ArrayDeque<P>
+//              ^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#queue. private final val queue: java.util.ArrayDeque<P>
+//              ^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#getQueue(). private final val queue: java.util.ArrayDeque<P>
 //                      ^^^^^^^^^^ reference java/util/ArrayDeque#`<init>`(+2).
 //                                 ^ reference com/airbnb/epoxy/preload/PreloadTargetProvider#[P]
 //                                       ^^^^^ reference kotlin/ranges/RangesKt#until(+6).
@@ -32,10 +32,10 @@ internal class PreloadTargetProvider<P : PreloadRequestHolder>(
 //                                                               ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/preload/PreloadTargetProvider#`<init>`().(requestHolderFactory)
 
     internal fun next(): P {
-//               ^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#next().  internal final fun next(): P
+//               ^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#next(). internal final fun next(): P
 //                       ^ reference com/airbnb/epoxy/preload/PreloadTargetProvider#[P]
         val result = queue.poll()
-//          ^^^^^^ definition local0  val result: P!
+//          ^^^^^^ definition local0 val result: P!
 //                   ^^^^^ reference com/airbnb/epoxy/preload/PreloadTargetProvider#queue.
 //                   ^^^^^ reference com/airbnb/epoxy/preload/PreloadTargetProvider#getQueue().
 //                         ^^^^ reference java/util/ArrayDeque#poll().
@@ -52,7 +52,7 @@ internal class PreloadTargetProvider<P : PreloadRequestHolder>(
     }
 
     fun clearAll() {
-//      ^^^^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#clearAll().  public final fun clearAll()
+//      ^^^^^^^^ definition com/airbnb/epoxy/preload/PreloadTargetProvider#clearAll(). public final fun clearAll()
         queue.forEach { it.clear() }
 //      ^^^^^ reference com/airbnb/epoxy/preload/PreloadTargetProvider#queue.
 //      ^^^^^ reference com/airbnb/epoxy/preload/PreloadTargetProvider#getQueue().
@@ -73,8 +73,8 @@ internal class PreloadTargetProvider<P : PreloadRequestHolder>(
  * data.
  */
 interface PreloadRequestHolder {
-//        ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/preload/PreloadRequestHolder#  public interface PreloadRequestHolder
+//        ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/preload/PreloadRequestHolder# public interface PreloadRequestHolder
     /** Clear any ongoing preload request. */
     fun clear()
-//      ^^^^^ definition com/airbnb/epoxy/preload/PreloadRequestHolder#clear().  public abstract fun clear()
+//      ^^^^^ definition com/airbnb/epoxy/preload/PreloadRequestHolder#clear(). public abstract fun clear()
 }

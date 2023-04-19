@@ -13,9 +13,9 @@ import android.view.View
  * views will instead by used.
  */
 interface Preloadable {
-//        ^^^^^^^^^^^ definition com/airbnb/epoxy/preload/Preloadable#  public interface Preloadable
+//        ^^^^^^^^^^^ definition com/airbnb/epoxy/preload/Preloadable# public interface Preloadable
     val viewsToPreload: List<View>
-//      ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/preload/Preloadable#viewsToPreload.  public abstract val viewsToPreload: kotlin.collections.List<[ERROR : View]>
-//      ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/preload/Preloadable#getViewsToPreload().  public abstract val viewsToPreload: kotlin.collections.List<[ERROR : View]>
+//      ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/preload/Preloadable#viewsToPreload. public abstract val viewsToPreload: kotlin.collections.List<[ERROR : View]>
+//      ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/preload/Preloadable#getViewsToPreload(). public abstract val viewsToPreload: kotlin.collections.List<[ERROR : View]>
 //                      ^^^^ reference kotlin/collections/List#
 }

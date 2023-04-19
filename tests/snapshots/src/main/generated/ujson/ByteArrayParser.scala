@@ -37,7 +37,6 @@ final class ByteArrayParser[J](src: Array[Byte]) extends ByteParser[J]{
 //                          ^ definition ujson/ByteArrayParser#[J] J
 //                             definition ujson/ByteArrayParser#`<init>`(). def this(src: Array[Byte])
 //                             ^^^ definition ujson/ByteArrayParser#src. private[this] val src: Array[Byte]
-//                             ^^^ definition ujson/ByteArrayParser#`<init>`().(src) src: Array[Byte]
 //                                  ^^^^^ reference scala/Array#
 //                                        ^^^^ reference scala/Byte#
 //                                                       ^^^^^^^^^^ reference ujson/ByteParser#

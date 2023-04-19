@@ -104,12 +104,10 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                    ^ definition ujson/AstTransformer#AstObjVisitor#[T] T
 //                       definition ujson/AstTransformer#AstObjVisitor#`<init>`(). def this(build: (T) => I)(factory: Factory[(String, I), T])
 //                       ^^^^^ definition ujson/AstTransformer#AstObjVisitor#build. private[this] val build: (T) => I
-//                       ^^^^^ definition ujson/AstTransformer#AstObjVisitor#`<init>`().(build) build: (T) => I
 //                              ^ reference ujson/AstTransformer#AstObjVisitor#[T]
 //                                   ^ reference ujson/AstTransformer#[I]
                         (implicit factory: Factory[(String, I), T])extends ObjVisitor[I, I] {
 //                                ^^^^^^^ definition ujson/AstTransformer#AstObjVisitor#factory. private[this] implicit val factory: Factory[(String, I), T]
-//                                ^^^^^^^ definition ujson/AstTransformer#AstObjVisitor#`<init>`().(factory) implicit factory: Factory[(String, I), T]
 //                                         ^^^^^^^ reference upickle/core/compat/package.Factory#
 //                                                  ^^^^^^ reference scala/Predef.String#
 //                                                          ^ reference ujson/AstTransformer#[I]
@@ -121,7 +119,6 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 
     private[this] var key: String = null
 //                    ^^^ definition ujson/AstTransformer#AstObjVisitor#key(). private[this] var key: String
-//                    ^^^ definition ujson/AstTransformer#AstObjVisitor#`key_=`(). private[this] var key_=(x$1: String): Unit
 //                         ^^^^^^ reference scala/Predef.String#
     private[this] val vs = factory.newBuilder
 //                    ^^ definition ujson/AstTransformer#AstObjVisitor#vs. private[this] val vs: Builder[(String, I), T]
@@ -172,13 +169,11 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                    ^ definition ujson/AstTransformer#AstArrVisitor#[T] T
 //                          definition ujson/AstTransformer#AstArrVisitor#`<init>`(). def this(build: (T[I]) => I)(factory: Factory[I, T[I]])
 //                          ^^^^^ definition ujson/AstTransformer#AstArrVisitor#build. private[this] val build: (T[I]) => I
-//                          ^^^^^ definition ujson/AstTransformer#AstArrVisitor#`<init>`().(build) build: (T[I]) => I
 //                                 ^ reference ujson/AstTransformer#AstArrVisitor#[T]
 //                                   ^ reference ujson/AstTransformer#[I]
 //                                         ^ reference ujson/AstTransformer#[I]
                            (implicit factory: Factory[I, T[I]]) extends ArrVisitor[I, I]{
 //                                   ^^^^^^^ definition ujson/AstTransformer#AstArrVisitor#factory. private[this] implicit val factory: Factory[I, T[I]]
-//                                   ^^^^^^^ definition ujson/AstTransformer#AstArrVisitor#`<init>`().(factory) implicit factory: Factory[I, T[I]]
 //                                            ^^^^^^^ reference upickle/core/compat/package.Factory#
 //                                                    ^ reference ujson/AstTransformer#[I]
 //                                                       ^ reference ujson/AstTransformer#AstArrVisitor#[T]

@@ -24,26 +24,26 @@ import java.util.Queue
  * they need.
  */
 internal class UnboundedViewPool : RecycledViewPool() {
-//             ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#  internal final class UnboundedViewPool
-//             ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#`<init>`().  public constructor UnboundedViewPool()
+//             ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool# internal final class UnboundedViewPool
+//             ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#`<init>`(). public constructor UnboundedViewPool()
 
     private val scrapHeaps = SparseArray<Queue<ViewHolder>>()
-//              ^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.  private final val scrapHeaps: [ERROR : Type for SparseArray<Queue<ViewHolder>>()]
-//              ^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps().  private final val scrapHeaps: [ERROR : Type for SparseArray<Queue<ViewHolder>>()]
+//              ^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#scrapHeaps. private final val scrapHeaps: [ERROR : Type for SparseArray<Queue<ViewHolder>>()]
+//              ^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps(). private final val scrapHeaps: [ERROR : Type for SparseArray<Queue<ViewHolder>>()]
 //                                       ^^^^^ reference java/util/Queue#
 
     override fun clear() {
-//               ^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#clear().  public open fun clear()
+//               ^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#clear(). public open fun clear()
         scrapHeaps.clear()
 //      ^^^^^^^^^^ reference com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //      ^^^^^^^^^^ reference com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps().
     }
 
     override fun setMaxRecycledViews(viewType: Int, max: Int) {
-//               ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#setMaxRecycledViews().  public open fun setMaxRecycledViews(viewType: kotlin.Int, max: kotlin.Int)
-//                                   ^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#setMaxRecycledViews().(viewType)  value-parameter viewType: kotlin.Int
+//               ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#setMaxRecycledViews(). public open fun setMaxRecycledViews(viewType: kotlin.Int, max: kotlin.Int)
+//                                   ^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#setMaxRecycledViews().(viewType) value-parameter viewType: kotlin.Int
 //                                             ^^^ reference kotlin/Int#
-//                                                  ^^^ definition com/airbnb/epoxy/UnboundedViewPool#setMaxRecycledViews().(max)  value-parameter max: kotlin.Int
+//                                                  ^^^ definition com/airbnb/epoxy/UnboundedViewPool#setMaxRecycledViews().(max) value-parameter max: kotlin.Int
 //                                                       ^^^ reference kotlin/Int#
         throw UnsupportedOperationException(
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference kotlin/UnsupportedOperationException#`<init>`(+1).
@@ -52,11 +52,11 @@ internal class UnboundedViewPool : RecycledViewPool() {
     }
 
     override fun getRecycledView(viewType: Int): ViewHolder? {
-//               ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getRecycledView().  public open fun getRecycledView(viewType: kotlin.Int): [ERROR : ViewHolder]?
-//                               ^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getRecycledView().(viewType)  value-parameter viewType: kotlin.Int
+//               ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getRecycledView(). public open fun getRecycledView(viewType: kotlin.Int): [ERROR : ViewHolder]?
+//                               ^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getRecycledView().(viewType) value-parameter viewType: kotlin.Int
 //                                         ^^^ reference kotlin/Int#
         val scrapHeap = scrapHeaps.get(viewType)
-//          ^^^^^^^^^ definition local0  val scrapHeap: [ERROR : <ERROR FUNCTION RETURN TYPE>]
+//          ^^^^^^^^^ definition local0 val scrapHeap: [ERROR : <ERROR FUNCTION RETURN TYPE>]
 //                      ^^^^^^^^^^ reference com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //                      ^^^^^^^^^^ reference com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps().
 //                                     ^^^^^^^^ reference com/airbnb/epoxy/UnboundedViewPool#getRecycledView().(viewType)
@@ -65,8 +65,8 @@ internal class UnboundedViewPool : RecycledViewPool() {
     }
 
     override fun putRecycledView(viewHolder: ViewHolder) {
-//               ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#putRecycledView().  public open fun putRecycledView(viewHolder: [ERROR : ViewHolder])
-//                               ^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#putRecycledView().(viewHolder)  value-parameter viewHolder: [ERROR : ViewHolder]
+//               ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#putRecycledView(). public open fun putRecycledView(viewHolder: [ERROR : ViewHolder])
+//                               ^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#putRecycledView().(viewHolder) value-parameter viewHolder: [ERROR : ViewHolder]
         getScrapHeapForType(viewHolder.itemViewType).add(viewHolder)
 //      ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/UnboundedViewPool#getScrapHeapForType().
 //                          ^^^^^^^^^^ reference com/airbnb/epoxy/UnboundedViewPool#putRecycledView().(viewHolder)
@@ -75,8 +75,8 @@ internal class UnboundedViewPool : RecycledViewPool() {
     }
 
     override fun getRecycledViewCount(viewType: Int): Int {
-//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getRecycledViewCount().  public open fun getRecycledViewCount(viewType: kotlin.Int): kotlin.Int
-//                                    ^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getRecycledViewCount().(viewType)  value-parameter viewType: kotlin.Int
+//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getRecycledViewCount(). public open fun getRecycledViewCount(viewType: kotlin.Int): kotlin.Int
+//                                    ^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getRecycledViewCount().(viewType) value-parameter viewType: kotlin.Int
 //                                              ^^^ reference kotlin/Int#
 //                                                    ^^^ reference kotlin/Int#
         return scrapHeaps.get(viewType)?.size ?: 0
@@ -86,12 +86,12 @@ internal class UnboundedViewPool : RecycledViewPool() {
     }
 
     private fun getScrapHeapForType(viewType: Int): Queue<ViewHolder> {
-//              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getScrapHeapForType().  private final fun getScrapHeapForType(viewType: kotlin.Int): java.util.Queue<[ERROR : ViewHolder]>
-//                                  ^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getScrapHeapForType().(viewType)  value-parameter viewType: kotlin.Int
+//              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getScrapHeapForType(). private final fun getScrapHeapForType(viewType: kotlin.Int): java.util.Queue<[ERROR : ViewHolder]>
+//                                  ^^^^^^^^ definition com/airbnb/epoxy/UnboundedViewPool#getScrapHeapForType().(viewType) value-parameter viewType: kotlin.Int
 //                                            ^^^ reference kotlin/Int#
 //                                                  ^^^^^ reference java/util/Queue#
         var scrapHeap: Queue<ViewHolder>? = scrapHeaps.get(viewType)
-//          ^^^^^^^^^ definition local1  var scrapHeap: java.util.Queue<[ERROR : ViewHolder]>?
+//          ^^^^^^^^^ definition local1 var scrapHeap: java.util.Queue<[ERROR : ViewHolder]>?
 //                     ^^^^^ reference java/util/Queue#
 //                                          ^^^^^^^^^^ reference com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //                                          ^^^^^^^^^^ reference com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps().

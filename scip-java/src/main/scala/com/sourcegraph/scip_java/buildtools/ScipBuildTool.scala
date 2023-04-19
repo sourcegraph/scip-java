@@ -111,7 +111,9 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   private def generateSemanticdb(): CommandResult = {
     parsedConfig match {
       case ValueResult(value) =>
-        clean()
+        if (index.cleanup) {
+          clean()
+        }
         try {
           compile(value)
         } catch {

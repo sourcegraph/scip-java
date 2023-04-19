@@ -120,7 +120,8 @@ public class ScipSemanticdb {
         Scip.SymbolInformation.Builder tinfo =
             Scip.SymbolInformation.newBuilder().setSymbol(typedSymbol(info.getSymbol(), pkg));
 
-        for (String overriddenSymbol : info.getOverriddenSymbolsList()) {
+        for (int i = 0; i < info.getOverriddenSymbolsCount(); i++) {
+          String overriddenSymbol = info.getOverriddenSymbols(i);
           if (isIgnoredOverriddenSymbol(overriddenSymbol)) {
             continue;
           }
