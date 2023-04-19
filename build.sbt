@@ -311,7 +311,7 @@ lazy val minimizedSettings = List[Def.Setting[_]](
   (run / fork) := true,
   (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
   libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.22"),
-  (Compile / javacOptions) ++=
+  javacOptions ++=
     List[String](
       s"-Arandomtimestamp=${System.nanoTime()}",
       List(
@@ -327,13 +327,13 @@ lazy val minimizedSettings = List[Def.Setting[_]](
 
 lazy val minimized = project
   .in(file("tests/minimized/.j11"))
-  .settings(minimizedSettings)
+  .settings(minimizedSettings, javaOnlySettings)
   .dependsOn(agent, plugin)
   .disablePlugins(JavaFormatterPlugin)
 
 lazy val minimized8 = project
   .in(file("tests/minimized/.j8"))
-  .settings(minimizedSettings, javaToolchainVersion := "8")
+  .settings(minimizedSettings, javaToolchainVersion := "8", javaOnlySettings)
   .dependsOn(agent, plugin)
   .disablePlugins(JavaFormatterPlugin)
 
@@ -354,6 +354,7 @@ def javacModuleOptions =
 lazy val minimized17 = project
   .in(file("tests/minimized/.j17"))
   .settings(
+    javaOnlySettings,
     minimizedSettings,
     javaToolchainVersion := "17",
     javacOptions ++= javacModuleOptions
@@ -452,7 +453,7 @@ lazy val docs = project
 lazy val javaOnlySettings = List[Def.Setting[_]](
   autoScalaLibrary := false,
   incOptions ~= { old =>
-    old.withEnabled(false)
+    old.withEnabled(false).withApiDebug(true)
   },
   crossPaths := false
 )
