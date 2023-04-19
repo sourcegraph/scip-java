@@ -564,7 +564,7 @@ usefulTasks :=
       "Runs slow snapshot tests. Indexes a corpus of external Java libraries."
     ).alias("slowSnapshotTests"),
     UsefulTask("snapshots/test", "Runs all snapshot tests")
-      .alias("slowSnapshotTests"),
+      .alias("snapshotTests"),
     UsefulTask(
       "buildTools/testOnly tests.Gradle*",
       "Runs tests for Gradle builds"
