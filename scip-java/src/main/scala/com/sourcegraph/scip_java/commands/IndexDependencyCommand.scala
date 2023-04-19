@@ -65,6 +65,11 @@ final case class IndexDependencyCommand(
                   1
                 case Some(jvmVersion) =>
                   val exit = indexJar(jvmVersion)
+                  pprint.log(dependency)
+                  pprint.log(snapshot)
+                  pprint.log(indexTarget)
+                  pprint.log(snapshotTarget)
+                  pprint.log(exit)
                   if (exit == 0 && snapshot) {
                     try {
                       snapshotCommand

@@ -28,6 +28,7 @@ class MinimizedSnapshotSemanticdbGenerator extends SnapshotGenerator {
         .resolve(relativeToSourceDirectory.toNIO)
       val doc = ScipTextDocument
         .manifestOccurrencesForSyntheticSymbols(file.textDocument)
+      pprint.log(expectOutput)
       handler.onSnapshotTest(
         context,
         expectOutput,

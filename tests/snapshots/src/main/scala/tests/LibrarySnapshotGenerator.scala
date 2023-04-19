@@ -64,6 +64,7 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
         ) ++ providedArguments
       )
       val root = snapshotDir.toFile().listFiles().head.toPath()
+      pprint.log(root)
       Files.walkFileTree(
         root,
         new SimpleFileVisitor[Path] {
@@ -71,9 +72,11 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
               file: Path,
               attrs: BasicFileAttributes
           ): FileVisitResult = {
+            pprint.log(file)
             val print =
               new String(Files.readAllBytes(file), StandardCharsets.UTF_8)
             val out = context.expectDirectory.resolve(root.relativize(file))
+            pprint.log(out)
             handler.onSnapshotTest(context, out, () => print)
             super.visitFile(file, attrs)
           }

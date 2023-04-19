@@ -73,6 +73,7 @@ case class SnapshotCommand(
       )
     }
 
+    pprint.log(semanticdbFiles.map(_.getUri))
     semanticdbFiles.foreach { doc =>
       SnapshotCommand.writeSnapshot(doc, output)
     }
