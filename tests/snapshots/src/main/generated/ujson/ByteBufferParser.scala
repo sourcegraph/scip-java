@@ -39,10 +39,11 @@ final class ByteBufferParser[J](src: ByteBuffer) extends ByteParser[J]{
 //                             documentation ```scala\nJ\n```
 //                             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#`<init>`().
 //                               documentation ```scala\ndef this(src: ByteBuffer)\n```
-//                              ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#`<init>`().(src)
-//                                  documentation ```scala\nsrc: ByteBuffer \n```
 //                              ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#src.
 //                                  documentation ```scala\nprivate[this] val src: ByteBuffer\n```
+//                              ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#`<init>`().(src)
+//                                  documentation ```scala\nsrc: ByteBuffer \n```
+//                                  relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#src.
 //                                   ^^^^^^^^^^ reference semanticdb maven jdk 11 java/nio/ByteBuffer#
 //                                                       ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#
 //                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#[J]

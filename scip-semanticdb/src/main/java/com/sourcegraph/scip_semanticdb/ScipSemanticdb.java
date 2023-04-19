@@ -68,6 +68,9 @@ public class ScipSemanticdb {
   }
 
   private String typedSymbol(String symbol, Package pkg) {
+    if (symbol.isEmpty()) {
+      return "";
+    }
     if (symbol.startsWith("local")) {
       return "local " + symbol.substring("local".length());
     }
@@ -91,6 +94,9 @@ public class ScipSemanticdb {
               .collect(Collectors.joining("/"));
       Scip.Document.Builder tdoc = Scip.Document.newBuilder().setRelativePath(relativePath);
       for (SymbolOccurrence occ : doc.sortedSymbolOccurrences()) {
+        if (occ.getSymbol().isEmpty()) {
+          continue;
+        }
         int role = 0;
         if (isDefinitionRole(occ.getRole())) {
           role |= Scip.SymbolRole.Definition_VALUE;
@@ -116,12 +122,35 @@ public class ScipSemanticdb {
       }
       Symtab symtab = new Symtab(doc.semanticdb);
       for (SymbolInformation info : doc.semanticdb.getSymbolsList()) {
+        if (info.getSymbol().isEmpty()) {
+          continue;
+        }
         Package pkg = packages.packageForSymbol(info.getSymbol()).orElse(Package.EMPTY);
         Scip.SymbolInformation.Builder tinfo =
             Scip.SymbolInformation.newBuilder().setSymbol(typedSymbol(info.getSymbol(), pkg));
 
+        for (int i = 0; i < info.getDefinitionRelationshipsCount(); i++) {
+          String definitionSymbol = info.getDefinitionRelationships(i);
+          if (definitionSymbol.isEmpty()) {
+            continue;
+          }
+          Package definitionSymbolPkg =
+              packages.packageForSymbol(definitionSymbol).orElse(Package.EMPTY);
+          SymbolInformation definitionInfo = symtab.symbols.get(definitionSymbol);
+          tinfo.addRelationships(
+              Scip.Relationship.newBuilder()
+                  .setSymbol(typedSymbol(definitionSymbol, definitionSymbolPkg))
+                  .setIsDefinition(true)
+                  .setIsReference(
+                      definitionInfo != null
+                          && definitionInfo.getDisplayName().equals(info.getDisplayName())
+                          && supportsReferenceRelationship(info)));
+        }
         for (int i = 0; i < info.getOverriddenSymbolsCount(); i++) {
           String overriddenSymbol = info.getOverriddenSymbols(i);
+          if (overriddenSymbol.isEmpty()) {
+            continue;
+          }
           if (isIgnoredOverriddenSymbol(overriddenSymbol)) {
             continue;
           }
@@ -225,82 +254,85 @@ public class ScipSemanticdb {
     Set<Integer> rangeIds = new LinkedHashSet<>();
 
     for (SymbolOccurrence occ : doc.sortedSymbolOccurrences()) {
-      SymbolInformation symbolInformation =
-          doc.symbols.getOrDefault(occ.getSymbol(), SymbolInformation.getDefaultInstance());
-      ResultIds ids = results.getOrInsertResultSet(occ.getSymbol());
-      int rangeId = writer.emitRange(occ.getRange());
-      rangeIds.add(rangeId);
+      for (String symbol : occ.getSymbol().split(";")) {
+        SymbolInformation symbolInformation =
+            doc.symbols.getOrDefault(symbol, SymbolInformation.getDefaultInstance());
+        ResultIds ids = results.getOrInsertResultSet(symbol);
+        int rangeId = writer.emitRange(occ.getRange());
+        rangeIds.add(rangeId);
 
-      // Range
-      if (occ.getRole() != Role.SYNTHETIC_DEFINITION) {
-        writer.emitNext(rangeId, ids.resultSet);
-      }
-
-      // Reference
-      writer.emitItem(ids.referenceResult, rangeId, doc.id);
-
-      // Definition
-      if (isDefinitionRole(occ.getRole())) {
-        if (ids.isDefinitionDefined()) {
-          writer.emitItem(ids.definitionResult, rangeId, doc.id);
-        } else {
-          options.reporter.error(
-              new NoSuchElementException(
-                  String.format("no definition ID for symbol '%s'", occ.getSymbol())));
+        // Range
+        if (occ.getRole() != Role.SYNTHETIC_DEFINITION) {
+          writer.emitNext(rangeId, ids.resultSet);
         }
 
-        // Hover 1: signature
-        String documentation = symbolInformation.getDocumentation().getMessage();
-        StringBuilder markupContent = new StringBuilder(documentation.length());
-        if (symbolInformation.hasSignature()) {
-          String language =
-              doc.semanticdb.getLanguage().toString().toLowerCase(Locale.ROOT).intern();
-          String signature = new SignatureFormatter(symbolInformation, symtab).formatSymbol();
-          markupContent
-              .append("```")
-              .append(language)
-              .append('\n')
-              .append(signature)
-              .append("\n```");
-        }
+        // Reference
+        writer.emitItem(ids.referenceResult, rangeId, doc.id);
 
-        // Hover 2: docstring
-        if (!documentation.isEmpty()) {
-          if (markupContent.length() != 0) markupContent.append("\n---\n");
-          markupContent.append(documentation.replaceAll("\n", "\n\n"));
-        }
-
-        if (markupContent.length() == 0) {
-          // Always emit a non-empty hover message to prevent Sourcegraph from falling back to
-          // Search-Based hover messages.
-          markupContent.append(symbolInformation.getDisplayName());
-        }
-
-        int hoverId =
-            writer.emitHoverResult(
-                new MarkupContent(MarkupKind.MARKDOWN, markupContent.toString()));
-        writer.emitHoverEdge(ids.resultSet, hoverId);
-      }
-
-      // Overrides
-      if (symbolInformation.getOverriddenSymbolsCount() > 0
-          && supportsReferenceRelationship(symbolInformation)
-          && occ.getRole() == Role.DEFINITION) {
-        List<Integer> overriddenReferenceResultIds =
-            new ArrayList<>(symbolInformation.getOverriddenSymbolsCount());
-        for (int i = 0; i < symbolInformation.getOverriddenSymbolsCount(); i++) {
-          String overriddenSymbol = symbolInformation.getOverriddenSymbols(i);
-          if (isIgnoredOverriddenSymbol(overriddenSymbol)) {
-            continue;
+        // Definition
+        if (isDefinitionRole(occ.getRole())) {
+          if (ids.isDefinitionDefined()) {
+            writer.emitItem(ids.definitionResult, rangeId, doc.id);
+          } else {
+            options.reporter.error(
+                new NoSuchElementException(
+                    String.format("no definition ID for symbol '%s'", symbol)));
           }
-          ResultIds overriddenIds = results.getOrInsertResultSet(overriddenSymbol);
-          overriddenReferenceResultIds.add(overriddenIds.referenceResult);
-          writer.emitReferenceResultsItemEdge(
-              overriddenIds.referenceResult, Collections.singletonList(rangeId), doc.id);
+
+          // Hover 1: signature
+          String documentation = symbolInformation.getDocumentation().getMessage();
+          StringBuilder markupContent = new StringBuilder(documentation.length());
+          if (symbolInformation.hasSignature()) {
+            String language =
+                doc.semanticdb.getLanguage().toString().toLowerCase(Locale.ROOT).intern();
+            String signature = new SignatureFormatter(symbolInformation, symtab).formatSymbol();
+            markupContent
+                .append("```")
+                .append(language)
+                .append('\n')
+                .append(signature)
+                .append("\n```");
+          }
+
+          // Hover 2: docstring
+          if (!documentation.isEmpty()) {
+            if (markupContent.length() != 0) markupContent.append("\n---\n");
+            markupContent.append(documentation.replaceAll("\n", "\n\n"));
+          }
+
+          if (markupContent.length() == 0) {
+            // Always emit a non-empty hover message to prevent Sourcegraph from falling
+            // back to
+            // Search-Based hover messages.
+            markupContent.append(symbolInformation.getDisplayName());
+          }
+
+          int hoverId =
+              writer.emitHoverResult(
+                  new MarkupContent(MarkupKind.MARKDOWN, markupContent.toString()));
+          writer.emitHoverEdge(ids.resultSet, hoverId);
         }
-        if (overriddenReferenceResultIds.size() > 0) {
-          writer.emitReferenceResultsItemEdge(
-              ids.referenceResult, overriddenReferenceResultIds, doc.id);
+
+        // Overrides
+        if (symbolInformation.getOverriddenSymbolsCount() > 0
+            && supportsReferenceRelationship(symbolInformation)
+            && occ.getRole() == Role.DEFINITION) {
+          List<Integer> overriddenReferenceResultIds =
+              new ArrayList<>(symbolInformation.getOverriddenSymbolsCount());
+          for (int i = 0; i < symbolInformation.getOverriddenSymbolsCount(); i++) {
+            String overriddenSymbol = symbolInformation.getOverriddenSymbols(i);
+            if (isIgnoredOverriddenSymbol(overriddenSymbol)) {
+              continue;
+            }
+            ResultIds overriddenIds = results.getOrInsertResultSet(overriddenSymbol);
+            overriddenReferenceResultIds.add(overriddenIds.referenceResult);
+            writer.emitReferenceResultsItemEdge(
+                overriddenIds.referenceResult, Collections.singletonList(rangeId), doc.id);
+          }
+          if (overriddenReferenceResultIds.size() > 0) {
+            writer.emitReferenceResultsItemEdge(
+                ids.referenceResult, overriddenReferenceResultIds, doc.id);
+          }
         }
       }
     }
@@ -363,8 +395,10 @@ public class ScipSemanticdb {
       in.setRecursionLimit(1000);
       return Semanticdb.TextDocuments.parseFrom(in);
     } catch (NoSuchMethodError ignored) {
-      // NOTE(olafur): For some reason, NoSuchMethodError gets thrown when running `snapshots/run`
-      // in the sbt build. I'm unable to reproduce the error in `snapshots/test` or when running the
+      // NOTE(olafur): For some reason, NoSuchMethodError gets thrown when running
+      // `snapshots/run`
+      // in the sbt build. I'm unable to reproduce the error in `snapshots/test` or
+      // when running the
       // published version
       // of `scip-java index`.
       return Semanticdb.TextDocuments.parseFrom(bytes);
@@ -372,7 +406,8 @@ public class ScipSemanticdb {
   }
 
   private boolean isIgnoredOverriddenSymbol(String symbol) {
-    // Skip java/lang/Object# and similar symbols from Scala since it's the parent of all classes
+    // Skip java/lang/Object# and similar symbols from Scala since it's the parent
+    // of all classes
     // making it noisy for "find implementations" results.
     return symbol.equals("java/lang/Object#");
   }
