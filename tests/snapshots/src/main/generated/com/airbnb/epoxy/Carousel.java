@@ -859,9 +859,9 @@ public class Carousel extends EpoxyRecyclerView {
     enum PaddingType {
 //       ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#PaddingType#
 //                   documentation ```java\nenum PaddingType\n```
-//                   relationship is_implementation semanticdb maven jdk 11 java/lang/Enum#
-//                   relationship is_implementation semanticdb maven jdk 11 java/lang/Comparable#
 //                   relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
+//                   relationship is_implementation semanticdb maven jdk 11 java/lang/Comparable#
+//                   relationship is_implementation semanticdb maven jdk 11 java/lang/Enum#
 //       ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#PaddingType#`<init>`().
 //                   documentation ```java\nprivate PaddingType()\n```
       PX,

@@ -58,10 +58,10 @@ import androidx.recyclerview.widget.RecyclerView;
 public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements ResultCallback {
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#
 //                                        documentation ```java\npublic final class EpoxyControllerAdapter\n```
-//                                        relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
 //                                        relationship is_implementation semanticdb maven . . RecyclerView/Adapter#
 //                                        relationship is_implementation semanticdb maven . . ``/StickyHeaderCallbacks#
 //                                        relationship is_implementation semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#
+//                                        relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
 //                                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
 //                                                                            ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#
   private final NotifyBlocker notifyBlocker = new NotifyBlocker();

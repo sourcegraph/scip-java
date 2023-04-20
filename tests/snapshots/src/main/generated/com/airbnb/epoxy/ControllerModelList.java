@@ -12,20 +12,20 @@ class ControllerModelList extends ModelList {
 //                        documentation ```java\nclass ControllerModelList\n```
 //                        documentation  This ArrayList subclass enforces that no changes are made to the list after {@link #freeze()} is\n called. This prevents model interceptors from storing the list and trying to change it later. We\n could copy the list before diffing, but that would waste memory to make the copy for every\n buildModels cycle, plus the interceptors could still try to modify the list and be confused about\n why it doesn't do anything.\n
 //                        relationship is_implementation semanticdb maven . . com/airbnb/epoxy/ModelList#
-//                        relationship is_implementation semanticdb maven jdk 11 java/util/ArrayList#
-//                        relationship is_implementation semanticdb maven jdk 11 java/util/AbstractList#
-//                        relationship is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#
-//                        relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//                        relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
-//                        relationship is_implementation semanticdb maven jdk 11 java/util/List#
-//                        relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//                        relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
-//                        relationship is_implementation semanticdb maven jdk 11 java/util/List#
-//                        relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//                        relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
-//                        relationship is_implementation semanticdb maven jdk 11 java/util/RandomAccess#
-//                        relationship is_implementation semanticdb maven jdk 11 java/lang/Cloneable#
 //                        relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
+//                        relationship is_implementation semanticdb maven jdk 11 java/lang/Cloneable#
+//                        relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
+//                        relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
+//                        relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
+//                        relationship is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#
+//                        relationship is_implementation semanticdb maven jdk 11 java/util/AbstractList#
+//                        relationship is_implementation semanticdb maven jdk 11 java/util/ArrayList#
+//                        relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
+//                        relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
+//                        relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
+//                        relationship is_implementation semanticdb maven jdk 11 java/util/List#
+//                        relationship is_implementation semanticdb maven jdk 11 java/util/List#
+//                        relationship is_implementation semanticdb maven jdk 11 java/util/RandomAccess#
 //                                ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#
 
   private static final ModelListObserver OBSERVER = new ModelListObserver() {

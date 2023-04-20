@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 enum Enums {
 //   ^^^^^ definition semanticdb maven . . minimized/Enums#
 //         documentation ```java\nenum Enums\n```
-//         relationship is_implementation semanticdb maven jdk 11 java/lang/Enum#
-//         relationship is_implementation semanticdb maven jdk 11 java/lang/Comparable#
 //         relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
+//         relationship is_implementation semanticdb maven jdk 11 java/lang/Comparable#
+//         relationship is_implementation semanticdb maven jdk 11 java/lang/Enum#
   A("A", 420),
 //^ definition semanticdb maven . . minimized/Enums#A.
 //  documentation ```java\nEnums.A("A", 420) /* ordinal 0 */\n```

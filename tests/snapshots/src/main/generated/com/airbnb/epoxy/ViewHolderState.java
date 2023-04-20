@@ -62,9 +62,9 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //    ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#
 //                    documentation ```java\n@SuppressWarnings("WeakerAccess")\nclass ViewHolderState\n```
 //                    documentation  Helper for {@link EpoxyAdapter} to store the state of Views in the adapter. This is useful for\n saving changes due to user input, such as text input or selection, when a view is scrolled off\n screen or if the adapter needs to be recreated.\n <p/>\n This saved state is separate from the state represented by a {@link EpoxyModel}, which should\n represent the more permanent state of the data shown in the view. This class stores transient\n state that is added to the View after it is bound to a {@link EpoxyModel}. For example, a {@link\n EpoxyModel} may inflate and bind an EditText and then be responsible for styling it and attaching\n listeners. If the user then inputs text, scrolls the view offscreen and then scrolls back, this\n class will preserve the inputted text without the {@link EpoxyModel} needing to be aware of its\n existence.\n <p/>\n This class relies on the adapter having stable ids, as the state of a view is mapped to the id of\n the {@link EpoxyModel}.\n
-//                    relationship is_implementation semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#
-//                    relationship is_implementation semanticdb maven jdk 11 java/lang/Cloneable#
 //                    relationship is_implementation semanticdb maven . . ``/Parcelable#
+//                    relationship is_implementation semanticdb maven jdk 11 java/lang/Cloneable#
+//                    relationship is_implementation semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#
 //                            ^^^^^^^^^^^^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#
 //                                            ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#
 //                                                                  ^^^^^^^^^^ reference semanticdb maven . . _root_/
@@ -275,8 +275,8 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                    ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#
 //                              documentation ```java\npublic static class ViewState\n```
 //                              documentation  A wrapper around a sparse array as a helper to save the state of a view. This also adds\n parcelable support.\n
-//                              relationship is_implementation semanticdb maven . . ``/SparseArray#
 //                              relationship is_implementation semanticdb maven . . ``/Parcelable#
+//                              relationship is_implementation semanticdb maven . . ``/SparseArray#
 //                                      ^^^^^^^^^^^ reference semanticdb maven . . _root_/
 //                                                  ^^^^^^^^^^ reference semanticdb maven . . _root_/
 //                                                                         ^^^^^^^^^^ reference semanticdb maven . . _root_/

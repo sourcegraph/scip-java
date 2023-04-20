@@ -512,8 +512,8 @@ public abstract class EpoxyTouchHelper {
             public void onDragStarted(U model, View itemView, int adapterPosition) {
 //                      ^^^^^^^^^^^^^ definition local 23
 //                                    documentation ```java\n@Override\npublic void onDragStarted(U model, unresolved_type itemView, int adapterPosition)\n```
-//                                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragStarted().
 //                                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onDragStarted().
+//                                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragStarted().
 //                                    ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                      ^^^^^ definition local 32
 //                                            documentation ```java\nU model\n```
@@ -535,8 +535,8 @@ public abstract class EpoxyTouchHelper {
             public void onDragReleased(U model, View itemView) {
 //                      ^^^^^^^^^^^^^^ definition local 24
 //                                     documentation ```java\n@Override\npublic void onDragReleased(U model, unresolved_type itemView)\n```
-//                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragReleased().
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onDragReleased().
+//                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragReleased().
 //                                     ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                       ^^^^^ definition local 35
 //                                             documentation ```java\nU model\n```
@@ -555,8 +555,8 @@ public abstract class EpoxyTouchHelper {
             public void onModelMoved(int fromPosition, int toPosition, U modelBeingMoved,
 //                      ^^^^^^^^^^^^ definition local 25
 //                                   documentation ```java\n@Override\npublic void onModelMoved(int fromPosition, int toPosition, U modelBeingMoved, unresolved_type itemView)\n```
-//                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onModelMoved().
 //                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onModelMoved().
+//                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onModelMoved().
 //                                       ^^^^^^^^^^^^ definition local 37
 //                                                    documentation ```java\nint fromPosition\n```
 //                                                         ^^^^^^^^^^ definition local 38
@@ -582,11 +582,11 @@ public abstract class EpoxyTouchHelper {
             public void clearView(U model, View itemView) {
 //                      ^^^^^^^^^ definition local 26
 //                                documentation ```java\n@Override\npublic void clearView(U model, unresolved_type itemView)\n```
-//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(+1).
-//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView().
 //                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView().
-//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(+1).
+//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView().
+//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(+1).
 //                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView().
+//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(+1).
 //                                ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                  ^^^^^ definition local 41
 //                                        documentation ```java\nU model\n```
@@ -614,8 +614,8 @@ public abstract class EpoxyTouchHelper {
   public abstract static class DragCallbacks<T extends EpoxyModel>
 //                             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#
 //                                           documentation ```java\npublic abstract static class DragCallbacks<T extends EpoxyModel>\n```
-//                                           relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#
 //                                           relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
+//                                           relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#
 //                             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#`<init>`().
 //                                           documentation ```java\npublic DragCallbacks()\n```
 //                                           ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#[T]
@@ -1176,11 +1176,11 @@ public abstract class EpoxyTouchHelper {
             public void clearView(U model, View itemView) {
 //                      ^^^^^^^^^ definition local 79
 //                                documentation ```java\n@Override\npublic void clearView(U model, unresolved_type itemView)\n```
-//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(+1).
-//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView().
 //                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView().
-//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(+1).
+//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView().
+//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(+1).
 //                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView().
+//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(+1).
 //                                ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
 //                                  ^^^^^ definition local 98
 //                                        documentation ```java\nU model\n```
@@ -1208,8 +1208,8 @@ public abstract class EpoxyTouchHelper {
   public abstract static class SwipeCallbacks<T extends EpoxyModel>
 //                             ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#
 //                                            documentation ```java\npublic abstract static class SwipeCallbacks<T extends EpoxyModel>\n```
-//                                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#
 //                                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
+//                                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#
 //                             ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#`<init>`().
 //                                            documentation ```java\npublic SwipeCallbacks()\n```
 //                                            ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#[T]

@@ -175,9 +175,12 @@ object ScipPrinters {
               .append(documentation.replace("\n", "\\n").replace("\t", "\\t"))
               .append("\n")
           }
-        0.until(info.getRelationshipsCount)
-          .foreach { n =>
-            val relationship = info.getRelationships(n)
+        info
+          .getRelationshipsList
+          .asScala
+          .toList
+          .sortBy(_.getSymbol) // sort for deterministic order
+          .foreach { relationship =>
             out.append(prefix).append("relationship")
             if (relationship.getIsReference) {
               out.append(" is_reference")

@@ -47,20 +47,20 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //    ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#
 //              documentation ```java\nclass ModelList\n```
 //              documentation  Used by our {@link EpoxyAdapter} to track models. It simply wraps ArrayList and notifies an\n observer when remove or insertion operations are done on the list. This allows us to optimize\n diffing since we have a knowledge of what changed in the list.\n
-//              relationship is_implementation semanticdb maven jdk 11 java/util/ArrayList#
-//              relationship is_implementation semanticdb maven jdk 11 java/util/AbstractList#
-//              relationship is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#
-//              relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//              relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
-//              relationship is_implementation semanticdb maven jdk 11 java/util/List#
-//              relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//              relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
-//              relationship is_implementation semanticdb maven jdk 11 java/util/List#
-//              relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//              relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
-//              relationship is_implementation semanticdb maven jdk 11 java/util/RandomAccess#
-//              relationship is_implementation semanticdb maven jdk 11 java/lang/Cloneable#
 //              relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
+//              relationship is_implementation semanticdb maven jdk 11 java/lang/Cloneable#
+//              relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
+//              relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
+//              relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/AbstractList#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/ArrayList#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/List#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/List#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/RandomAccess#
 //                      ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
 //                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 
@@ -184,8 +184,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                     ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#set().
 //                         documentation ```java\n@Override\npublic EpoxyModel<?> set(int index, EpoxyModel<?> element)\n```
-//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#set().
 //                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#set().
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#set().
 //                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#set().
 //                             ^^^^^ definition local 10
 //                                   documentation ```java\nint index\n```
@@ -223,11 +223,11 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   public boolean add(EpoxyModel<?> epoxyModel) {
 //               ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#add().
 //                   documentation ```java\n@Override\npublic boolean add(EpoxyModel<?> epoxyModel)\n```
-//                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#add().
-//                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#add().
-//                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#add().
 //                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#add().
+//                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#add().
+//                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#add().
 //                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#add().
+//                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#add().
 //                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                 ^^^^^^^^^^ definition local 13
 //                                            documentation ```java\nEpoxyModel<?> epoxyModel\n```
@@ -245,8 +245,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   public void add(int index, EpoxyModel<?> element) {
 //            ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#add(+1).
 //                documentation ```java\n@Override\npublic void add(int index, EpoxyModel<?> element)\n```
-//                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#add(+1).
 //                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#add(+1).
+//                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#add(+1).
 //                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#add(+1).
 //                    ^^^^^ definition local 14
 //                          documentation ```java\nint index\n```
@@ -268,10 +268,10 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   public boolean addAll(Collection<? extends EpoxyModel<?>> c) {
 //               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#addAll().
 //                      documentation ```java\n@Override\npublic boolean addAll(Collection<? extends EpoxyModel<?>> c)\n```
-//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#addAll().
-//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#addAll().
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#addAll().
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#addAll().
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#addAll().
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#addAll().
 //                      ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#
 //                                           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                          ^ definition local 16
@@ -292,8 +292,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   public boolean addAll(int index, Collection<? extends EpoxyModel<?>> c) {
 //               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#addAll(+1).
 //                      documentation ```java\n@Override\npublic boolean addAll(int index, Collection<? extends EpoxyModel<?>> c)\n```
-//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#addAll(+1).
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#addAll().
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#addAll(+1).
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#addAll(+1).
 //                          ^^^^^ definition local 17
 //                                documentation ```java\nint index\n```
@@ -319,8 +319,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                     ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#remove().
 //                            documentation ```java\n@Override\npublic EpoxyModel<?> remove(int index)\n```
-//                            relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#remove().
 //                            relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#remove().
+//                            relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#remove().
 //                            relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#remove(+1).
 //                                ^^^^^ definition local 19
 //                                      documentation ```java\nint index\n```
@@ -338,10 +338,10 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   public boolean remove(Object o) {
 //               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#remove(+1).
 //                      documentation ```java\n@Override\npublic boolean remove(Object o)\n```
-//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#remove(+1).
-//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#remove().
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#remove().
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#remove(+1).
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#remove().
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#remove().
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                             ^ definition local 20
 //                               documentation ```java\nObject o\n```
@@ -371,11 +371,11 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   public void clear() {
 //            ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#clear().
 //                  documentation ```java\n@Override\npublic void clear()\n```
-//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#clear().
-//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#clear().
-//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#clear().
 //                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#clear().
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#clear().
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#clear().
 //                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#clear().
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#clear().
     if (!isEmpty()) {
 //       ^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#isEmpty().
       notifyRemoval(0, size());
@@ -392,8 +392,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   protected void removeRange(int fromIndex, int toIndex) {
 //               ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#removeRange().
 //                           documentation ```java\n@Override\nprotected void removeRange(int fromIndex, int toIndex)\n```
-//                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#removeRange().
 //                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#removeRange().
+//                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#removeRange().
 //                               ^^^^^^^^^ definition local 22
 //                                         documentation ```java\nint fromIndex\n```
 //                                              ^^^^^^^ definition local 23
@@ -421,10 +421,10 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   public boolean removeAll(Collection<?> collection) {
 //               ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#removeAll().
 //                         documentation ```java\n@Override\npublic boolean removeAll(Collection<?> collection)\n```
-//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#removeAll().
-//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#removeAll().
 //                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#removeAll().
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#removeAll().
 //                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#removeAll().
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#removeAll().
 //                         ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#
 //                                       ^^^^^^^^^^ definition local 24
 //                                                  documentation ```java\nCollection<?> collection\n```
@@ -463,10 +463,10 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
   public boolean retainAll(Collection<?> collection) {
 //               ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#retainAll().
 //                         documentation ```java\n@Override\npublic boolean retainAll(Collection<?> collection)\n```
-//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#retainAll().
-//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#retainAll().
 //                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#retainAll().
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#retainAll().
 //                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#retainAll().
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#retainAll().
 //                         ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#
 //                                       ^^^^^^^^^^ definition local 27
 //                                                  documentation ```java\nCollection<?> collection\n```
@@ -509,12 +509,12 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                               ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#iterator().
 //                                        documentation ```java\n@NonNull\n@Override\npublic Iterator<EpoxyModel<?>> iterator()\n```
-//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#iterator().
-//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#iterator().
-//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#iterator().
-//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#iterator().
-//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#iterator().
 //                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Iterable#iterator().
+//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#iterator().
+//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#iterator().
+//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#iterator().
+//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#iterator().
+//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#iterator().
     return new Itr();
 //             ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#`<init>`().
   }
@@ -636,8 +636,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#listIterator().
 //                                                documentation ```java\n@NonNull\n@Override\npublic ListIterator<EpoxyModel<?>> listIterator()\n```
-//                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#listIterator(+1).
 //                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#listIterator().
+//                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#listIterator(+1).
 //                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#listIterator().
     return new ListItr(0);
 //             ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#ListItr#`<init>`().
@@ -652,8 +652,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#listIterator(+1).
 //                                                documentation ```java\n@NonNull\n@Override\npublic ListIterator<EpoxyModel<?>> listIterator(int index)\n```
-//                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#listIterator().
 //                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#listIterator(+1).
+//                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#listIterator().
 //                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#listIterator(+1).
 //                                                    ^^^^^ definition local 32
 //                                                          documentation ```java\nint index\n```
@@ -674,8 +674,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                      documentation  A ListIterator implementation that calls through to the parent list's methods for modification.\n Some implementations may modify the list data directly instead of calling into the parent\n list's methods. We need the implementation to call the parent methods so that the proper\n notifications are done.\n
 //                      relationship is_implementation semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#
 //                      relationship is_implementation semanticdb maven jdk 11 java/util/Iterator#
-//                      relationship is_implementation semanticdb maven jdk 11 java/util/ListIterator#
 //                      relationship is_implementation semanticdb maven jdk 11 java/util/Iterator#
+//                      relationship is_implementation semanticdb maven jdk 11 java/util/ListIterator#
 //                              ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#
 //                                             ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#
 //                                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
@@ -824,8 +824,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                           ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#subList().
 //                                   documentation ```java\n@NonNull\n@Override\npublic List<EpoxyModel<?>> subList(int start, int end)\n```
-//                                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#subList().
 //                                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#subList().
+//                                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#subList().
 //                                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#subList().
 //                                       ^^^^^ definition local 40
 //                                             documentation ```java\nint start\n```
@@ -860,13 +860,13 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                     ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#
 //                             documentation ```java\nprivate static class SubList\n```
 //                             documentation  A SubList implementation from Android's AbstractList class. It's copied here to make sure the\n implementation doesn't change, since some implementations, like the Java 1.8 ArrayList.SubList\n class, modify the list data directly instead of calling into the parent list's methods. We need\n the implementation to call the parent methods so that the proper notifications are done.\n
-//                             relationship is_implementation semanticdb maven jdk 11 java/util/AbstractList#
+//                             relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
+//                             relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
 //                             relationship is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#
+//                             relationship is_implementation semanticdb maven jdk 11 java/util/AbstractList#
 //                             relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//                             relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
+//                             relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
 //                             relationship is_implementation semanticdb maven jdk 11 java/util/List#
-//                             relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//                             relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
 //                                     ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#
 //                                                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
     private final ModelList fullList;
@@ -883,8 +883,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     private static final class SubListIterator implements ListIterator<EpoxyModel<?>> {
 //                             ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#
 //                                             documentation ```java\nprivate static final class SubListIterator\n```
-//                                             relationship is_implementation semanticdb maven jdk 11 java/util/ListIterator#
 //                                             relationship is_implementation semanticdb maven jdk 11 java/util/Iterator#
+//                                             relationship is_implementation semanticdb maven jdk 11 java/util/ListIterator#
 //                                                        ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#
 //                                                                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
       private final SubList subList;
@@ -953,8 +953,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
       public boolean hasNext() {
 //                   ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#hasNext().
 //                           documentation ```java\npublic boolean hasNext()\n```
-//                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#hasNext().
 //                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Iterator#hasNext().
+//                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#hasNext().
         return iterator.nextIndex() < end;
 //             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
 //                      ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#nextIndex().
@@ -975,8 +975,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                         ^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#next().
 //                              documentation ```java\npublic EpoxyModel<?> next()\n```
-//                              relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#next().
 //                              relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Iterator#next().
+//                              relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#next().
         if (iterator.nextIndex() < end) {
 //          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
 //                   ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#nextIndex().
@@ -1038,8 +1038,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
       public void remove() {
 //                ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#remove().
 //                       documentation ```java\npublic void remove()\n```
-//                       relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#remove().
 //                       relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Iterator#remove().
+//                       relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#remove().
         iterator.remove();
 //      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
 //               ^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#remove().
@@ -1187,9 +1187,9 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     public boolean addAll(@NonNull Collection<? extends EpoxyModel<?>> collection) {
 //                 ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#addAll(+1).
 //                        documentation ```java\n@Override\npublic boolean addAll(Collection<? extends EpoxyModel<?>> collection)\n```
-//                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#addAll().
 //                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#addAll().
 //                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#addAll().
+//                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#addAll().
 //                         ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                 ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#
 //                                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
@@ -1265,11 +1265,11 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                 ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#iterator().
 //                                          documentation ```java\n@NonNull\n@Override\npublic Iterator<EpoxyModel<?>> iterator()\n```
-//                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#iterator().
-//                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#iterator().
-//                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#iterator().
-//                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#iterator().
 //                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Iterable#iterator().
+//                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#iterator().
+//                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#iterator().
+//                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#iterator().
+//                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#iterator().
       return listIterator(0);
 //           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#listIterator().
     }
@@ -1432,9 +1432,9 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
     public int size() {
 //             ^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size().
 //                  documentation ```java\n@Override\npublic int size()\n```
-//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#size().
 //                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#size().
 //                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#size().
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#size().
       if (modCount == fullList.modCount) {
 //        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
 //                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.

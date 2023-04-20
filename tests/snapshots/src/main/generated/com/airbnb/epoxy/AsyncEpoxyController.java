@@ -26,9 +26,9 @@ public abstract class AsyncEpoxyController extends EpoxyController {
 //                    ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#
 //                                         documentation ```java\npublic abstract class AsyncEpoxyController\n```
 //                                         documentation  A subclass of {@link EpoxyController} that makes it easy to do model building and diffing in\n the background.\n <p>\n See https://github.com/airbnb/epoxy/wiki/Epoxy-Controller#asynchronous-support\n
-//                                         relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                                         relationship is_implementation semanticdb maven . . ``/ModelCollector#
 //                                         relationship is_implementation semanticdb maven . . ``/StickyHeaderCallbacks#
+//                                         relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                                                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 
   /**
