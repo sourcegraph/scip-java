@@ -176,7 +176,6 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
             collectViewStubs(viewGroup, this)
 //          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#collectViewStubs().
 //                           ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#createViewStubData().(viewGroup)
-//                                      ^^^^ reference semanticdb maven . . 
 
             if (isEmpty()) {
 //              ^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#isEmpty().
