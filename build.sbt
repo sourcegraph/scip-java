@@ -525,3 +525,55 @@ lazy val fatjarPackageSettings = List[Def.Setting[_]](
     ).transform(node).head
   }
 )
+
+import sbtwelcome._
+
+logo :=
+  raw"""
+       |           _             _                  
+       |          (_)           (_)                 
+       |  ___  ___ _ _ __ ______ _  __ ___   ____ _ 
+       | / __|/ __| | '_ \______| |/ _` \ \ / / _` |
+       | \__ \ (__| | |_) |     | | (_| |\ V / (_| |
+       | |___/\___|_| .__/      | |\__,_| \_/ \__,_|
+       |            | |        _/ |                 
+       |            |_|       |__/                  
+       |
+       |${version.value}
+       |
+       |${scala.Console.YELLOW}Scala ${scalaVersion
+    .value}${scala.Console.RESET}
+       |
+       |""".stripMargin
+
+usefulTasks :=
+  Seq(
+    UsefulTask(
+      "fixAll",
+      "Run Scalafmt, Scalafix and Javafmt on all sources. Run this before opening a PR."
+    ).noAlias,
+    UsefulTask(
+      "snapshots/run",
+      "Update snapshot tests. Use this command after you have fixed a bug."
+    ).alias("regenerateSnapshots"),
+    UsefulTask(
+      "snapshots/testOnly tests.MinimizedSnapshotSuite",
+      "Run a small subset of snapshot tests for fast iteration"
+    ).alias("fastSnapshotTests"),
+    UsefulTask(
+      "snapshots/testOnly tests.LibrarySnapshotSuite",
+      "Runs slow snapshot tests. Indexes a corpus of external Java libraries."
+    ).alias("slowSnapshotTests"),
+    UsefulTask("snapshots/test", "Runs all snapshot tests")
+      .alias("snapshotTests"),
+    UsefulTask(
+      "buildTools/testOnly tests.Gradle*",
+      "Runs tests for Gradle builds"
+    ).alias("gradleTests"),
+    UsefulTask(
+      "buildTools/testOnly tests.Maven*",
+      "Runs tests for Gradle builds"
+    ).alias("mavenTests")
+  )
+
+logoColor := scala.Console.MAGENTA
