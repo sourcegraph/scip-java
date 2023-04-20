@@ -167,7 +167,9 @@ object ScipPrinters {
         val prefix =
           comment + (" " * indent.length) + (" " * carets.length) + " "
         val docs =
-          0.until(info.getDocumentationCount).map(info.getDocumentation).sorted
+          Vector
+            .tabulate(info.getDocumentationCount())(info.getDocumentation)
+            .sorted
 
         docs.foreach { documentation =>
           out
@@ -177,10 +179,10 @@ object ScipPrinters {
             .append("\n")
         }
 
-        val relationships = 0
-          .until(info.getRelationshipsCount())
-          .map(info.getRelationships)
-          .sortBy(_.getSymbol())
+        val relationships =
+          Vector
+            .tabulate(info.getRelationshipsCount())(info.getRelationships)
+            .sortBy(_.getSymbol())
 
         relationships.foreach { relationship =>
           out.append(prefix).append("relationship")
