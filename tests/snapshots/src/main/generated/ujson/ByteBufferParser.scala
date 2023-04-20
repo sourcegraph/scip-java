@@ -37,7 +37,6 @@ final class ByteBufferParser[J](src: ByteBuffer) extends ByteParser[J]{
 //                           ^ definition ujson/ByteBufferParser#[J] J
 //                              definition ujson/ByteBufferParser#`<init>`(). def this(src: ByteBuffer)
 //                              ^^^ definition ujson/ByteBufferParser#src. private[this] val src: ByteBuffer
-//                              ^^^ definition ujson/ByteBufferParser#`<init>`().(src) src: ByteBuffer
 //                                   ^^^^^^^^^^ reference java/nio/ByteBuffer#
 //                                                       ^^^^^^^^^^ reference ujson/ByteParser#
 //                                                                  ^ reference ujson/ByteBufferParser#[J]

@@ -31,6 +31,7 @@ case class SnapshotCommand(
     ) targetroot: List[Path] = Nil,
     @Description("Output directory for the annotated snapshots") output: Path =
       Paths.get("generated"),
+    cleanup: Boolean = true,
     @Inline() app: Application = Application.default
 ) extends Command {
   def sourceroot: Path = app.env.workingDirectory
@@ -39,7 +40,9 @@ case class SnapshotCommand(
     val semanticdbPattern = FileSystems
       .getDefault
       .getPathMatcher("glob:**.semanticdb")
-    Files.walkFileTree(output, new DeleteVisitor())
+    if (cleanup) {
+      Files.walkFileTree(output, new DeleteVisitor())
+    }
     Files.createDirectories(output)
     val semanticdbFiles = ListBuffer.empty[TextDocument]
 

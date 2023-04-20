@@ -40,16 +40,16 @@ import kotlinx.android.parcel.Parcelize
  * ```
  */
 class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
-//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#  public final class StickyHeaderLinearLayoutManager
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager# public final class StickyHeaderLinearLayoutManager
 //                                     ^^^^^^^^^^^^ reference kotlin/jvm/JvmOverloads#`<init>`().
-//                                                  ^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#`<init>`().  public constructor StickyHeaderLinearLayoutManager(context: [ERROR : Context], orientation: kotlin.Int = ..., reverseLayout: kotlin.Boolean = ...)
+//                                                  ^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#`<init>`(). public constructor StickyHeaderLinearLayoutManager(context: [ERROR : Context], orientation: kotlin.Int = ..., reverseLayout: kotlin.Boolean = ...)
     context: Context,
-//  ^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#`<init>`().(context)  value-parameter context: [ERROR : Context]
+//  ^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#`<init>`().(context) value-parameter context: [ERROR : Context]
     orientation: Int = RecyclerView.VERTICAL,
-//  ^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#`<init>`().(orientation)  value-parameter orientation: kotlin.Int = ...
+//  ^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#`<init>`().(orientation) value-parameter orientation: kotlin.Int = ...
 //               ^^^ reference kotlin/Int#
     reverseLayout: Boolean = false
-//  ^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#`<init>`().(reverseLayout)  value-parameter reverseLayout: kotlin.Boolean = ...
+//  ^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#`<init>`().(reverseLayout) value-parameter reverseLayout: kotlin.Boolean = ...
 //                 ^^^^^^^ reference kotlin/Boolean#
 ) : LinearLayoutManager(context, orientation, reverseLayout) {
 //                      ^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#`<init>`().(context)
@@ -57,56 +57,56 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                            ^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#`<init>`().(reverseLayout)
 
     private var adapter: BaseEpoxyAdapter? = null
-//              ^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#adapter.  private final var adapter: [ERROR : BaseEpoxyAdapter]?
-//              ^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getAdapter().  private final var adapter: [ERROR : BaseEpoxyAdapter]?
-//              ^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().  private final fun setAdapter(newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?)
+//              ^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#adapter. private final var adapter: [ERROR : BaseEpoxyAdapter]?
+//              ^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getAdapter(). private final var adapter: [ERROR : BaseEpoxyAdapter]?
+//              ^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter(). private final fun setAdapter(newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?)
 
     // Translation for header
     private var translationX: Float = 0f
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.  private final var translationX: kotlin.Float
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationX().  private final var translationX: kotlin.Float
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationX().  private final var translationX: kotlin.Float
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX. private final var translationX: kotlin.Float
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationX(). private final var translationX: kotlin.Float
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationX(). private final var translationX: kotlin.Float
 //                            ^^^^^ reference kotlin/Float#
     private var translationY: Float = 0f
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.  private final var translationY: kotlin.Float
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationY().  private final var translationY: kotlin.Float
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationY().  private final var translationY: kotlin.Float
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY. private final var translationY: kotlin.Float
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationY(). private final var translationY: kotlin.Float
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationY(). private final var translationY: kotlin.Float
 //                            ^^^^^ reference kotlin/Float#
 
     // Header positions for the currently displayed list and their observer.
     private val headerPositions = mutableListOf<Int>()
-//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.  private final val headerPositions: kotlin.collections.MutableList<kotlin.Int>
-//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().  private final val headerPositions: kotlin.collections.MutableList<kotlin.Int>
+//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions. private final val headerPositions: kotlin.collections.MutableList<kotlin.Int>
+//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions(). private final val headerPositions: kotlin.collections.MutableList<kotlin.Int>
 //                                ^^^^^^^^^^^^^ reference kotlin/collections/CollectionsKt#mutableListOf().
 //                                              ^^^ reference kotlin/Int#
     private val headerPositionsObserver = HeaderPositionsAdapterDataObserver()
-//              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositionsObserver.  private final val headerPositionsObserver: com.airbnb.epoxy.stickyheader.StickyHeaderLinearLayoutManager.HeaderPositionsAdapterDataObserver
-//              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositionsObserver().  private final val headerPositionsObserver: com.airbnb.epoxy.stickyheader.StickyHeaderLinearLayoutManager.HeaderPositionsAdapterDataObserver
+//              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositionsObserver. private final val headerPositionsObserver: com.airbnb.epoxy.stickyheader.StickyHeaderLinearLayoutManager.HeaderPositionsAdapterDataObserver
+//              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositionsObserver(). private final val headerPositionsObserver: com.airbnb.epoxy.stickyheader.StickyHeaderLinearLayoutManager.HeaderPositionsAdapterDataObserver
 //                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#`<init>`().
 
     // Sticky header's ViewHolder and dirty state.
     private var stickyHeader: View? = null
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.  private final var stickyHeader: [ERROR : View]?
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().  private final var stickyHeader: [ERROR : View]?
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().  private final var stickyHeader: [ERROR : View]?
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader. private final var stickyHeader: [ERROR : View]?
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader(). private final var stickyHeader: [ERROR : View]?
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader(). private final var stickyHeader: [ERROR : View]?
     private var stickyHeaderPosition = RecyclerView.NO_POSITION
-//              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.  private final var stickyHeaderPosition: [ERROR : <ERROR PROPERTY TYPE>]
-//              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeaderPosition().  private final var stickyHeaderPosition: [ERROR : <ERROR PROPERTY TYPE>]
-//              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderPosition().  private final var stickyHeaderPosition: [ERROR : <ERROR PROPERTY TYPE>]
+//              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition. private final var stickyHeaderPosition: [ERROR : <ERROR PROPERTY TYPE>]
+//              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeaderPosition(). private final var stickyHeaderPosition: [ERROR : <ERROR PROPERTY TYPE>]
+//              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderPosition(). private final var stickyHeaderPosition: [ERROR : <ERROR PROPERTY TYPE>]
 
     // Save / Restore scroll state
     private var scrollPosition = RecyclerView.NO_POSITION
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.  private final var scrollPosition: [ERROR : <ERROR PROPERTY TYPE>]
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollPosition().  private final var scrollPosition: [ERROR : <ERROR PROPERTY TYPE>]
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollPosition().  private final var scrollPosition: [ERROR : <ERROR PROPERTY TYPE>]
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition. private final var scrollPosition: [ERROR : <ERROR PROPERTY TYPE>]
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollPosition(). private final var scrollPosition: [ERROR : <ERROR PROPERTY TYPE>]
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollPosition(). private final var scrollPosition: [ERROR : <ERROR PROPERTY TYPE>]
     private var scrollOffset = 0
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollOffset.  private final var scrollOffset: kotlin.Int
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollOffset().  private final var scrollOffset: kotlin.Int
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollOffset().  private final var scrollOffset: kotlin.Int
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollOffset. private final var scrollOffset: kotlin.Int
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollOffset(). private final var scrollOffset: kotlin.Int
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollOffset(). private final var scrollOffset: kotlin.Int
 
     override fun onAttachedToWindow(recyclerView: RecyclerView) {
-//               ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAttachedToWindow().  public open fun onAttachedToWindow(recyclerView: [ERROR : RecyclerView])
-//                                  ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAttachedToWindow().(recyclerView)  value-parameter recyclerView: [ERROR : RecyclerView]
+//               ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAttachedToWindow(). public open fun onAttachedToWindow(recyclerView: [ERROR : RecyclerView])
+//                                  ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAttachedToWindow().(recyclerView) value-parameter recyclerView: [ERROR : RecyclerView]
         super.onAttachedToWindow(recyclerView)
 //      ^^^^^ reference kotlin/Any#
 //                               ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAttachedToWindow().(recyclerView)
@@ -116,9 +116,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
     }
 
     override fun onAdapterChanged(oldAdapter: RecyclerView.Adapter<*>?, newAdapter: RecyclerView.Adapter<*>?) {
-//               ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAdapterChanged().  public open fun onAdapterChanged(oldAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?, newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?)
-//                                ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAdapterChanged().(oldAdapter)  value-parameter oldAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
-//                                                                      ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAdapterChanged().(newAdapter)  value-parameter newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
+//               ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAdapterChanged(). public open fun onAdapterChanged(oldAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?, newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?)
+//                                ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAdapterChanged().(oldAdapter) value-parameter oldAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
+//                                                                      ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAdapterChanged().(newAdapter) value-parameter newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
         super.onAdapterChanged(oldAdapter, newAdapter)
 //      ^^^^^ reference kotlin/Any#
 //                             ^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAdapterChanged().(oldAdapter)
@@ -131,8 +131,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
     @Suppress("UNCHECKED_CAST")
 //   ^^^^^^^^ reference kotlin/Suppress#`<init>`().
     private fun setAdapter(newAdapter: RecyclerView.Adapter<*>?) {
-//              ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().  private final fun setAdapter(newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?)
-//                         ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().(newAdapter)  value-parameter newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
+//              ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter(). private final fun setAdapter(newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?)
+//                         ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().(newAdapter) value-parameter newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
         adapter?.unregisterAdapterDataObserver(headerPositionsObserver)
 //      ^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#adapter.
 //      ^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getAdapter().
@@ -169,7 +169,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
     }
 
     override fun onSaveInstanceState(): Parcelable {
-//               ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onSaveInstanceState().  public open fun onSaveInstanceState(): [ERROR : Parcelable]
+//               ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onSaveInstanceState(). public open fun onSaveInstanceState(): [ERROR : Parcelable]
         return SavedState(
 //             ^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().
             superState = super.onSaveInstanceState(),
@@ -189,8 +189,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
     }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
-//               ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onRestoreInstanceState().  public open fun onRestoreInstanceState(state: [ERROR : Parcelable]?)
-//                                      ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onRestoreInstanceState().(state)  value-parameter state: [ERROR : Parcelable]?
+//               ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onRestoreInstanceState(). public open fun onRestoreInstanceState(state: [ERROR : Parcelable]?)
+//                                      ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onRestoreInstanceState().(state) value-parameter state: [ERROR : Parcelable]?
         (state as? SavedState)?.let {
 //       ^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onRestoreInstanceState().(state)
 //                 ^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#
@@ -218,14 +218,14 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
     }
 
     override fun scrollVerticallyBy(dy: Int, recycler: RecyclerView.Recycler, state: RecyclerView.State?): Int {
-//               ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollVerticallyBy().  public open fun scrollVerticallyBy(dy: kotlin.Int, recycler: [ERROR : RecyclerView.Recycler], state: [ERROR : RecyclerView.State]?): kotlin.Int
-//                                  ^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollVerticallyBy().(dy)  value-parameter dy: kotlin.Int
+//               ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollVerticallyBy(). public open fun scrollVerticallyBy(dy: kotlin.Int, recycler: [ERROR : RecyclerView.Recycler], state: [ERROR : RecyclerView.State]?): kotlin.Int
+//                                  ^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollVerticallyBy().(dy) value-parameter dy: kotlin.Int
 //                                      ^^^ reference kotlin/Int#
-//                                           ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollVerticallyBy().(recycler)  value-parameter recycler: [ERROR : RecyclerView.Recycler]
-//                                                                            ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollVerticallyBy().(state)  value-parameter state: [ERROR : RecyclerView.State]?
+//                                           ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollVerticallyBy().(recycler) value-parameter recycler: [ERROR : RecyclerView.Recycler]
+//                                                                            ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollVerticallyBy().(state) value-parameter state: [ERROR : RecyclerView.State]?
 //                                                                                                         ^^^ reference kotlin/Int#
         val scrolled = restoreView { super.scrollVerticallyBy(dy, recycler, state) }
-//          ^^^^^^^^ definition local1  val scrolled: kotlin.Unit
+//          ^^^^^^^^ definition local1 val scrolled: kotlin.Unit
 //                     ^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                   ^^^^^ reference kotlin/Any#
 //                                                            ^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollVerticallyBy().(dy)
@@ -243,14 +243,14 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
     }
 
     override fun scrollHorizontallyBy(dx: Int, recycler: RecyclerView.Recycler, state: RecyclerView.State?): Int {
-//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollHorizontallyBy().  public open fun scrollHorizontallyBy(dx: kotlin.Int, recycler: [ERROR : RecyclerView.Recycler], state: [ERROR : RecyclerView.State]?): kotlin.Int
-//                                    ^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollHorizontallyBy().(dx)  value-parameter dx: kotlin.Int
+//               ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollHorizontallyBy(). public open fun scrollHorizontallyBy(dx: kotlin.Int, recycler: [ERROR : RecyclerView.Recycler], state: [ERROR : RecyclerView.State]?): kotlin.Int
+//                                    ^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollHorizontallyBy().(dx) value-parameter dx: kotlin.Int
 //                                        ^^^ reference kotlin/Int#
-//                                             ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollHorizontallyBy().(recycler)  value-parameter recycler: [ERROR : RecyclerView.Recycler]
-//                                                                              ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollHorizontallyBy().(state)  value-parameter state: [ERROR : RecyclerView.State]?
+//                                             ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollHorizontallyBy().(recycler) value-parameter recycler: [ERROR : RecyclerView.Recycler]
+//                                                                              ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollHorizontallyBy().(state) value-parameter state: [ERROR : RecyclerView.State]?
 //                                                                                                           ^^^ reference kotlin/Int#
         val scrolled = restoreView { super.scrollHorizontallyBy(dx, recycler, state) }
-//          ^^^^^^^^ definition local2  val scrolled: kotlin.Unit
+//          ^^^^^^^^ definition local2 val scrolled: kotlin.Unit
 //                     ^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                   ^^^^^ reference kotlin/Any#
 //                                                              ^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollHorizontallyBy().(dx)
@@ -268,9 +268,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
     }
 
     override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: RecyclerView.State) {
-//               ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onLayoutChildren().  public open fun onLayoutChildren(recycler: [ERROR : RecyclerView.Recycler], state: [ERROR : RecyclerView.State])
-//                                ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onLayoutChildren().(recycler)  value-parameter recycler: [ERROR : RecyclerView.Recycler]
-//                                                                 ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onLayoutChildren().(state)  value-parameter state: [ERROR : RecyclerView.State]
+//               ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onLayoutChildren(). public open fun onLayoutChildren(recycler: [ERROR : RecyclerView.Recycler], state: [ERROR : RecyclerView.State])
+//                                ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onLayoutChildren().(recycler) value-parameter recycler: [ERROR : RecyclerView.Recycler]
+//                                                                 ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onLayoutChildren().(state) value-parameter state: [ERROR : RecyclerView.State]
         restoreView { super.onLayoutChildren(recycler, state) }
 //      ^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                    ^^^^^ reference kotlin/Any#
@@ -285,29 +285,29 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
     }
 
     override fun scrollToPosition(position: Int) = scrollToPositionWithOffset(position, INVALID_OFFSET)
-//               ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPosition().  public open fun scrollToPosition(position: kotlin.Int)
-//                                ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPosition().(position)  value-parameter position: kotlin.Int
+//               ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPosition(). public open fun scrollToPosition(position: kotlin.Int)
+//                                ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPosition().(position) value-parameter position: kotlin.Int
 //                                          ^^^ reference kotlin/Int#
 //                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset().
 //                                                                            ^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPosition().(position)
 
     override fun scrollToPositionWithOffset(position: Int, offset: Int) = scrollToPositionWithOffset(position, offset, true)
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset().  public open fun scrollToPositionWithOffset(position: kotlin.Int, offset: kotlin.Int)
-//                                          ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset().(position)  value-parameter position: kotlin.Int
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(). public open fun scrollToPositionWithOffset(position: kotlin.Int, offset: kotlin.Int)
+//                                          ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset().(position) value-parameter position: kotlin.Int
 //                                                    ^^^ reference kotlin/Int#
-//                                                         ^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset().(offset)  value-parameter offset: kotlin.Int
+//                                                         ^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset().(offset) value-parameter offset: kotlin.Int
 //                                                                 ^^^ reference kotlin/Int#
 //                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).
 //                                                                                                   ^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset().(position)
 //                                                                                                             ^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset().(offset)
 
     private fun scrollToPositionWithOffset(position: Int, offset: Int, adjustForStickyHeader: Boolean) {
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).  private final fun scrollToPositionWithOffset(position: kotlin.Int, offset: kotlin.Int, adjustForStickyHeader: kotlin.Boolean)
-//                                         ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(position)  value-parameter position: kotlin.Int
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1). private final fun scrollToPositionWithOffset(position: kotlin.Int, offset: kotlin.Int, adjustForStickyHeader: kotlin.Boolean)
+//                                         ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(position) value-parameter position: kotlin.Int
 //                                                   ^^^ reference kotlin/Int#
-//                                                        ^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(offset)  value-parameter offset: kotlin.Int
+//                                                        ^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(offset) value-parameter offset: kotlin.Int
 //                                                                ^^^ reference kotlin/Int#
-//                                                                     ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(adjustForStickyHeader)  value-parameter adjustForStickyHeader: kotlin.Boolean
+//                                                                     ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(adjustForStickyHeader) value-parameter adjustForStickyHeader: kotlin.Boolean
 //                                                                                            ^^^^^^^ reference kotlin/Boolean#
         // Reset pending scroll.
         setScrollState(RecyclerView.NO_POSITION, INVALID_OFFSET)
@@ -326,7 +326,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
         // There is no header above or the position is a header.
         val headerIndex = findHeaderIndexOrBefore(position)
-//          ^^^^^^^^^^^ definition local3  val headerIndex: kotlin.Int
+//          ^^^^^^^^^^^ definition local3 val headerIndex: kotlin.Int
 //                        ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrBefore().
 //                                                ^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(position)
         if (headerIndex == -1 || findHeaderIndex(position) != -1) {
@@ -371,7 +371,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                                 ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeaderPosition().
 //                                                                 ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderPosition().
             val adjustedOffset = (if (offset != INVALID_OFFSET) offset else 0) + stickyHeader!!.height
-//              ^^^^^^^^^^^^^^ definition local4  val adjustedOffset: [ERROR : Type for (if (offset != INVALID_OFFSET) offset else 0) + stickyHeader!!.height]
+//              ^^^^^^^^^^^^^^ definition local4 val adjustedOffset: [ERROR : Type for (if (offset != INVALID_OFFSET) offset else 0) + stickyHeader!!.height]
 //                                    ^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(offset)
 //                                           ^^ reference kotlin/Int#equals().
 //                                                              ^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(offset)
@@ -400,72 +400,72 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
     // Mainly [RecyclerView] functionality by removing sticky header from calculations
 
     override fun computeVerticalScrollExtent(state: RecyclerView.State): Int = restoreView { super.computeVerticalScrollExtent(state) }
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollExtent().  public open fun computeVerticalScrollExtent(state: [ERROR : RecyclerView.State]): kotlin.Int
-//                                           ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollExtent().(state)  value-parameter state: [ERROR : RecyclerView.State]
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollExtent(). public open fun computeVerticalScrollExtent(state: [ERROR : RecyclerView.State]): kotlin.Int
+//                                           ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollExtent().(state) value-parameter state: [ERROR : RecyclerView.State]
 //                                                                       ^^^ reference kotlin/Int#
 //                                                                             ^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                                                                           ^^^^^ reference kotlin/Any#
 //                                                                                                                             ^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollExtent().(state)
 
     override fun computeVerticalScrollOffset(state: RecyclerView.State): Int = restoreView { super.computeVerticalScrollOffset(state) }
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollOffset().  public open fun computeVerticalScrollOffset(state: [ERROR : RecyclerView.State]): kotlin.Int
-//                                           ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollOffset().(state)  value-parameter state: [ERROR : RecyclerView.State]
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollOffset(). public open fun computeVerticalScrollOffset(state: [ERROR : RecyclerView.State]): kotlin.Int
+//                                           ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollOffset().(state) value-parameter state: [ERROR : RecyclerView.State]
 //                                                                       ^^^ reference kotlin/Int#
 //                                                                             ^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                                                                           ^^^^^ reference kotlin/Any#
 //                                                                                                                             ^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollOffset().(state)
 
     override fun computeVerticalScrollRange(state: RecyclerView.State): Int = restoreView { super.computeVerticalScrollRange(state) }
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollRange().  public open fun computeVerticalScrollRange(state: [ERROR : RecyclerView.State]): kotlin.Int
-//                                          ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollRange().(state)  value-parameter state: [ERROR : RecyclerView.State]
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollRange(). public open fun computeVerticalScrollRange(state: [ERROR : RecyclerView.State]): kotlin.Int
+//                                          ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollRange().(state) value-parameter state: [ERROR : RecyclerView.State]
 //                                                                      ^^^ reference kotlin/Int#
 //                                                                            ^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                                                                          ^^^^^ reference kotlin/Any#
 //                                                                                                                           ^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollRange().(state)
 
     override fun computeHorizontalScrollExtent(state: RecyclerView.State): Int = restoreView { super.computeHorizontalScrollExtent(state) }
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollExtent().  public open fun computeHorizontalScrollExtent(state: [ERROR : RecyclerView.State]): kotlin.Int
-//                                             ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollExtent().(state)  value-parameter state: [ERROR : RecyclerView.State]
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollExtent(). public open fun computeHorizontalScrollExtent(state: [ERROR : RecyclerView.State]): kotlin.Int
+//                                             ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollExtent().(state) value-parameter state: [ERROR : RecyclerView.State]
 //                                                                         ^^^ reference kotlin/Int#
 //                                                                               ^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                                                                             ^^^^^ reference kotlin/Any#
 //                                                                                                                                 ^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollExtent().(state)
 
     override fun computeHorizontalScrollOffset(state: RecyclerView.State): Int = restoreView { super.computeHorizontalScrollOffset(state) }
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollOffset().  public open fun computeHorizontalScrollOffset(state: [ERROR : RecyclerView.State]): kotlin.Int
-//                                             ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollOffset().(state)  value-parameter state: [ERROR : RecyclerView.State]
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollOffset(). public open fun computeHorizontalScrollOffset(state: [ERROR : RecyclerView.State]): kotlin.Int
+//                                             ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollOffset().(state) value-parameter state: [ERROR : RecyclerView.State]
 //                                                                         ^^^ reference kotlin/Int#
 //                                                                               ^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                                                                             ^^^^^ reference kotlin/Any#
 //                                                                                                                                 ^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollOffset().(state)
 
     override fun computeHorizontalScrollRange(state: RecyclerView.State): Int = restoreView { super.computeHorizontalScrollRange(state) }
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollRange().  public open fun computeHorizontalScrollRange(state: [ERROR : RecyclerView.State]): kotlin.Int
-//                                            ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollRange().(state)  value-parameter state: [ERROR : RecyclerView.State]
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollRange(). public open fun computeHorizontalScrollRange(state: [ERROR : RecyclerView.State]): kotlin.Int
+//                                            ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollRange().(state) value-parameter state: [ERROR : RecyclerView.State]
 //                                                                        ^^^ reference kotlin/Int#
 //                                                                              ^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                                                                            ^^^^^ reference kotlin/Any#
 //                                                                                                                               ^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollRange().(state)
 
     override fun computeScrollVectorForPosition(targetPosition: Int): PointF? = restoreView { super.computeScrollVectorForPosition(targetPosition) }
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeScrollVectorForPosition().  public open fun computeScrollVectorForPosition(targetPosition: kotlin.Int): [ERROR : PointF]?
-//                                              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeScrollVectorForPosition().(targetPosition)  value-parameter targetPosition: kotlin.Int
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeScrollVectorForPosition(). public open fun computeScrollVectorForPosition(targetPosition: kotlin.Int): [ERROR : PointF]?
+//                                              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeScrollVectorForPosition().(targetPosition) value-parameter targetPosition: kotlin.Int
 //                                                              ^^^ reference kotlin/Int#
 //                                                                              ^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                                                                            ^^^^^ reference kotlin/Any#
 //                                                                                                                                 ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeScrollVectorForPosition().(targetPosition)
 
     override fun onFocusSearchFailed(
-//               ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().  public open fun onFocusSearchFailed(focused: [ERROR : View], focusDirection: kotlin.Int, recycler: [ERROR : RecyclerView.Recycler], state: [ERROR : RecyclerView.State]): [ERROR : View]?
+//               ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed(). public open fun onFocusSearchFailed(focused: [ERROR : View], focusDirection: kotlin.Int, recycler: [ERROR : RecyclerView.Recycler], state: [ERROR : RecyclerView.State]): [ERROR : View]?
         focused: View,
-//      ^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().(focused)  value-parameter focused: [ERROR : View]
+//      ^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().(focused) value-parameter focused: [ERROR : View]
         focusDirection: Int,
-//      ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().(focusDirection)  value-parameter focusDirection: kotlin.Int
+//      ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().(focusDirection) value-parameter focusDirection: kotlin.Int
 //                      ^^^ reference kotlin/Int#
         recycler: RecyclerView.Recycler,
-//      ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().(recycler)  value-parameter recycler: [ERROR : RecyclerView.Recycler]
+//      ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().(recycler) value-parameter recycler: [ERROR : RecyclerView.Recycler]
         state: RecyclerView.State
-//      ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().(state)  value-parameter state: [ERROR : RecyclerView.State]
+//      ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().(state) value-parameter state: [ERROR : RecyclerView.State]
     ): View? = restoreView { super.onFocusSearchFailed(focused, focusDirection, recycler, state) }
 //             ^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                           ^^^^^ reference kotlin/Any#
@@ -479,9 +479,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * detaching the view -> performing operation -> detaching the view.
      */
     private fun <T> restoreView(operation: () -> T): T {
-//               ^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().[T]  <T>
-//                  ^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().  private final fun <T> restoreView(operation: () -> T): T
-//                              ^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().(operation)  value-parameter operation: () -> T
+//               ^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().[T] <T>
+//                  ^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView(). private final fun <T> restoreView(operation: () -> T): T
+//                              ^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().(operation) value-parameter operation: () -> T
 //                                               ^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().[T]
 //                                                   ^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().[T]
         stickyHeader?.let(this::detachView)
@@ -490,7 +490,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //      ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
 //                        ^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#
         val result = operation()
-//          ^^^^^^ definition local5  val result: T
+//          ^^^^^^ definition local5 val result: T
 //                   ^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().(operation)
         stickyHeader?.let(this::attachView)
 //      ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
@@ -507,8 +507,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * Offsets the vertical location of the sticky header relative to the its default position.
      */
     fun setStickyHeaderTranslationY(translationY: Float) {
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderTranslationY().  public final fun setStickyHeaderTranslationY(translationY: kotlin.Float)
-//                                  ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderTranslationY().(translationY)  value-parameter translationY: kotlin.Float
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderTranslationY(). public final fun setStickyHeaderTranslationY(translationY: kotlin.Float)
+//                                  ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderTranslationY().(translationY) value-parameter translationY: kotlin.Float
 //                                                ^^^^^ reference kotlin/Float#
         this.translationY = translationY
 //      ^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#
@@ -523,8 +523,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * Offsets the horizontal location of the sticky header relative to the its default position.
      */
     fun setStickyHeaderTranslationX(translationX: Float) {
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderTranslationX().  public final fun setStickyHeaderTranslationX(translationX: kotlin.Float)
-//                                  ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderTranslationX().(translationX)  value-parameter translationX: kotlin.Float
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderTranslationX(). public final fun setStickyHeaderTranslationX(translationX: kotlin.Float)
+//                                  ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderTranslationX().(translationX) value-parameter translationX: kotlin.Float
 //                                                ^^^^^ reference kotlin/Float#
         this.translationX = translationX
 //      ^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#
@@ -539,8 +539,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * Returns true if `view` is the current sticky header.
      */
     fun isStickyHeader(view: View): Boolean = view === stickyHeader
-//      ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isStickyHeader().  public final fun isStickyHeader(view: [ERROR : View]): kotlin.Boolean
-//                     ^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isStickyHeader().(view)  value-parameter view: [ERROR : View]
+//      ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isStickyHeader(). public final fun isStickyHeader(view: [ERROR : View]): kotlin.Boolean
+//                     ^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isStickyHeader().(view) value-parameter view: [ERROR : View]
 //                                  ^^^^^^^ reference kotlin/Boolean#
 //                                            ^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isStickyHeader().(view)
 //                                                     ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
@@ -551,40 +551,40 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * Updates the sticky header state (creation, binding, display), to be called whenever there's a layout or scroll
      */
     private fun updateStickyHeader(recycler: RecyclerView.Recycler, layout: Boolean) {
-//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#updateStickyHeader().  private final fun updateStickyHeader(recycler: [ERROR : RecyclerView.Recycler], layout: kotlin.Boolean)
-//                                 ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#updateStickyHeader().(recycler)  value-parameter recycler: [ERROR : RecyclerView.Recycler]
-//                                                                  ^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#updateStickyHeader().(layout)  value-parameter layout: kotlin.Boolean
+//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#updateStickyHeader(). private final fun updateStickyHeader(recycler: [ERROR : RecyclerView.Recycler], layout: kotlin.Boolean)
+//                                 ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#updateStickyHeader().(recycler) value-parameter recycler: [ERROR : RecyclerView.Recycler]
+//                                                                  ^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#updateStickyHeader().(layout) value-parameter layout: kotlin.Boolean
 //                                                                          ^^^^^^^ reference kotlin/Boolean#
         val headerCount = headerPositions.size
-//          ^^^^^^^^^^^ definition local6  val headerCount: kotlin.Int
+//          ^^^^^^^^^^^ definition local6 val headerCount: kotlin.Int
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                        ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
 //                                        ^^^^ reference kotlin/collections/MutableList#size.
 //                                        ^^^^ reference kotlin/collections/MutableList#getSize().
         val childCount = childCount
-//          ^^^^^^^^^^ definition local7  val childCount: [ERROR : Type for childCount]
+//          ^^^^^^^^^^ definition local7 val childCount: [ERROR : Type for childCount]
         if (headerCount > 0 && childCount > 0) {
 //          ^^^^^^^^^^^ reference local6
 //                      ^ reference kotlin/Int#compareTo(+3).
 //                             ^^^^^^^^^^ reference local7
             // Find first valid child.
             var anchorView: View? = null
-//              ^^^^^^^^^^ definition local8  var anchorView: [ERROR : View]?
+//              ^^^^^^^^^^ definition local8 var anchorView: [ERROR : View]?
             var anchorIndex = -1
-//              ^^^^^^^^^^^ definition local9  var anchorIndex: kotlin.Int
+//              ^^^^^^^^^^^ definition local9 var anchorIndex: kotlin.Int
 //                            ^ reference kotlin/Int#unaryMinus().
             var anchorPos = -1
-//              ^^^^^^^^^ definition local10  var anchorPos: kotlin.Int
+//              ^^^^^^^^^ definition local10 var anchorPos: kotlin.Int
 //                          ^ reference kotlin/Int#unaryMinus().
             for (i in 0 until childCount) {
-//               ^ definition local11  val i: kotlin.Int
+//               ^ definition local11 val i: kotlin.Int
 //                      ^^^^^ reference kotlin/ranges/RangesKt#until(+6).
 //                            ^^^^^^^^^^ reference local7
                 val child = getChildAt(i)
-//                  ^^^^^ definition local12  val child: [ERROR : Type for getChildAt(i)]
+//                  ^^^^^ definition local12 val child: [ERROR : Type for getChildAt(i)]
 //                                     ^ reference local11
                 val params = child!!.layoutParams as RecyclerView.LayoutParams
-//                  ^^^^^^ definition local13  val params: [ERROR : RecyclerView.LayoutParams]
+//                  ^^^^^^ definition local13 val params: [ERROR : RecyclerView.LayoutParams]
 //                           ^^^^^ reference local12
                 if (isViewValidAnchor(child, params)) {
 //                  ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().
@@ -608,11 +608,11 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                              ^^ reference kotlin/Int#equals().
 //                                                 ^ reference kotlin/Int#unaryMinus().
                 val headerIndex = findHeaderIndexOrBefore(anchorPos)
-//                  ^^^^^^^^^^^ definition local14  val headerIndex: kotlin.Int
+//                  ^^^^^^^^^^^ definition local14 val headerIndex: kotlin.Int
 //                                ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrBefore().
 //                                                        ^^^^^^^^^ reference local10
                 val headerPos = if (headerIndex != -1) headerPositions[headerIndex] else -1
-//                  ^^^^^^^^^ definition local15  val headerPos: kotlin.Int
+//                  ^^^^^^^^^ definition local15 val headerPos: kotlin.Int
 //                                  ^^^^^^^^^^^ reference local14
 //                                              ^^ reference kotlin/Int#equals().
 //                                                 ^ reference kotlin/Int#unaryMinus().
@@ -621,7 +621,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                                     ^^^^^^^^^^^ reference local14
 //                                                                                       ^ reference kotlin/Int#unaryMinus().
                 val nextHeaderPos = if (headerCount > headerIndex + 1) headerPositions[headerIndex + 1] else -1
-//                  ^^^^^^^^^^^^^ definition local16  val nextHeaderPos: kotlin.Int
+//                  ^^^^^^^^^^^^^ definition local16 val nextHeaderPos: kotlin.Int
 //                                      ^^^^^^^^^^^ reference local6
 //                                                  ^ reference kotlin/Int#compareTo(+3).
 //                                                    ^^^^^^^^^^^ reference local14
@@ -699,12 +699,12 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                  ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                  ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
                         val nextHeaderView: View? = if (nextHeaderPos != -1) {
-//                          ^^^^^^^^^^^^^^ definition local17  val nextHeaderView: [ERROR : View]?
+//                          ^^^^^^^^^^^^^^ definition local17 val nextHeaderView: [ERROR : View]?
 //                                                      ^^^^^^^^^^^^^ reference local16
 //                                                                    ^^ reference kotlin/Int#equals().
 //                                                                       ^ reference kotlin/Int#unaryMinus().
                             val nextHeaderView = getChildAt(anchorIndex + (nextHeaderPos - anchorPos))
-//                              ^^^^^^^^^^^^^^ definition local18  val nextHeaderView: [ERROR : Type for getChildAt(anchorIndex + (nextHeaderPos - anchorPos))]
+//                              ^^^^^^^^^^^^^^ definition local18 val nextHeaderView: [ERROR : Type for getChildAt(anchorIndex + (nextHeaderPos - anchorPos))]
 //                                                          ^^^^^^^^^^^ reference local9
 //                                                                      ^ reference kotlin/Int#plus(+3).
 //                                                                         ^^^^^^^^^^^^^ reference local16
@@ -745,12 +745,12 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * [stickyHeader].
      */
     private fun createStickyHeader(recycler: RecyclerView.Recycler, position: Int) {
-//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().  private final fun createStickyHeader(recycler: [ERROR : RecyclerView.Recycler], position: kotlin.Int)
-//                                 ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().(recycler)  value-parameter recycler: [ERROR : RecyclerView.Recycler]
-//                                                                  ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().(position)  value-parameter position: kotlin.Int
+//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader(). private final fun createStickyHeader(recycler: [ERROR : RecyclerView.Recycler], position: kotlin.Int)
+//                                 ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().(recycler) value-parameter recycler: [ERROR : RecyclerView.Recycler]
+//                                                                  ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().(position) value-parameter position: kotlin.Int
 //                                                                            ^^^ reference kotlin/Int#
         val stickyHeader = recycler.getViewForPosition(position)
-//          ^^^^^^^^^^^^ definition local19  val stickyHeader: [ERROR : <ERROR FUNCTION RETURN TYPE>]
+//          ^^^^^^^^^^^^ definition local19 val stickyHeader: [ERROR : <ERROR FUNCTION RETURN TYPE>]
 //                         ^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().(recycler)
 //                                                     ^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().(position)
 
@@ -791,10 +791,10 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * Binds the [stickyHeader] for the given [position].
      */
     private fun bindStickyHeader(recycler: RecyclerView.Recycler, stickyHeader: View, position: Int) {
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().  private final fun bindStickyHeader(recycler: [ERROR : RecyclerView.Recycler], stickyHeader: [ERROR : View], position: kotlin.Int)
-//                               ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(recycler)  value-parameter recycler: [ERROR : RecyclerView.Recycler]
-//                                                                ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(stickyHeader)  value-parameter stickyHeader: [ERROR : View]
-//                                                                                    ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(position)  value-parameter position: kotlin.Int
+//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader(). private final fun bindStickyHeader(recycler: [ERROR : RecyclerView.Recycler], stickyHeader: [ERROR : View], position: kotlin.Int)
+//                               ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(recycler) value-parameter recycler: [ERROR : RecyclerView.Recycler]
+//                                                                ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(stickyHeader) value-parameter stickyHeader: [ERROR : View]
+//                                                                                    ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(position) value-parameter position: kotlin.Int
 //                                                                                              ^^^ reference kotlin/Int#
         // Bind the sticky header.
         recycler.bindViewToPosition(stickyHeader, position)
@@ -818,7 +818,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
             stickyHeader.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
 //          ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(stickyHeader)
                 override fun onGlobalLayout() {
-//                           ^^^^^^^^^^^^^^ definition local20  public open fun onGlobalLayout()
+//                           ^^^^^^^^^^^^^^ definition local20 public open fun onGlobalLayout()
                     if (Build.VERSION.SDK_INT < 16) stickyHeader.viewTreeObserver.removeGlobalOnLayoutListener(this)
 //                                                  ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(stickyHeader)
 //                                                                                                             ^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().`<no name provided>`#
@@ -849,8 +849,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * Measures and lays out [stickyHeader].
      */
     private fun measureAndLayout(stickyHeader: View) {
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#measureAndLayout().  private final fun measureAndLayout(stickyHeader: [ERROR : View])
-//                               ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#measureAndLayout().(stickyHeader)  value-parameter stickyHeader: [ERROR : View]
+//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#measureAndLayout(). private final fun measureAndLayout(stickyHeader: [ERROR : View])
+//                               ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#measureAndLayout().(stickyHeader) value-parameter stickyHeader: [ERROR : View]
         measureChildWithMargins(stickyHeader, 0, 0)
 //                              ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#measureAndLayout().(stickyHeader)
         when (orientation) {
@@ -870,10 +870,10 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * @param recycler If passed, the sticky header will be returned to the recycled view pool.
      */
     private fun scrapStickyHeader(recycler: RecyclerView.Recycler?) {
-//              ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrapStickyHeader().  private final fun scrapStickyHeader(recycler: [ERROR : RecyclerView.Recycler]?)
-//                                ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrapStickyHeader().(recycler)  value-parameter recycler: [ERROR : RecyclerView.Recycler]?
+//              ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrapStickyHeader(). private final fun scrapStickyHeader(recycler: [ERROR : RecyclerView.Recycler]?)
+//                                ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrapStickyHeader().(recycler) value-parameter recycler: [ERROR : RecyclerView.Recycler]?
         val stickyHeader = stickyHeader ?: return
-//          ^^^^^^^^^^^^ definition local21  val stickyHeader: kotlin.Nothing
+//          ^^^^^^^^^^^^ definition local21 val stickyHeader: kotlin.Nothing
 //                         ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                         ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                         ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
@@ -917,9 +917,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * Returns true when `view` is a valid anchor, ie. the first view to be valid and visible.
      */
     private fun isViewValidAnchor(view: View, params: RecyclerView.LayoutParams): Boolean {
-//              ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().  private final fun isViewValidAnchor(view: [ERROR : View], params: [ERROR : RecyclerView.LayoutParams]): kotlin.Boolean
-//                                ^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(view)  value-parameter view: [ERROR : View]
-//                                            ^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(params)  value-parameter params: [ERROR : RecyclerView.LayoutParams]
+//              ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor(). private final fun isViewValidAnchor(view: [ERROR : View], params: [ERROR : RecyclerView.LayoutParams]): kotlin.Boolean
+//                                ^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(view) value-parameter view: [ERROR : View]
+//                                            ^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(params) value-parameter params: [ERROR : RecyclerView.LayoutParams]
 //                                                                                ^^^^^^^ reference kotlin/Boolean#
         return when {
             !params.isItemRemoved && !params.isViewInvalid -> when (orientation) {
@@ -962,8 +962,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * Returns true when the `view` is at the edge of the parent [RecyclerView].
      */
     private fun isViewOnBoundary(view: View): Boolean {
-//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary().  private final fun isViewOnBoundary(view: [ERROR : View]): kotlin.Boolean
-//                               ^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary().(view)  value-parameter view: [ERROR : View]
+//              ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary(). private final fun isViewOnBoundary(view: [ERROR : View]): kotlin.Boolean
+//                               ^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary().(view) value-parameter view: [ERROR : View]
 //                                            ^^^^^^^ reference kotlin/Boolean#
         return when (orientation) {
             VERTICAL -> when {
@@ -1002,14 +1002,14 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * [android.R.attr.clipToPadding].
      */
     private fun getY(headerView: View, nextHeaderView: View?): Float {
-//              ^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getY().  private final fun getY(headerView: [ERROR : View], nextHeaderView: [ERROR : View]?): kotlin.Float
-//                   ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getY().(headerView)  value-parameter headerView: [ERROR : View]
-//                                     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getY().(nextHeaderView)  value-parameter nextHeaderView: [ERROR : View]?
+//              ^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getY(). private final fun getY(headerView: [ERROR : View], nextHeaderView: [ERROR : View]?): kotlin.Float
+//                   ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getY().(headerView) value-parameter headerView: [ERROR : View]
+//                                     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getY().(nextHeaderView) value-parameter nextHeaderView: [ERROR : View]?
 //                                                             ^^^^^ reference kotlin/Float#
         when (orientation) {
             VERTICAL -> {
                 var y = translationY
-//                  ^ definition local22  var y: kotlin.Float
+//                  ^ definition local22 var y: kotlin.Float
 //                      ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
 //                      ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationY().
 //                      ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationY().
@@ -1021,10 +1021,10 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                 if (nextHeaderView != null) {
 //                  ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getY().(nextHeaderView)
                     val bottomMargin = (nextHeaderView.layoutParams as? ViewGroup.MarginLayoutParams)?.bottomMargin ?: 0
-//                      ^^^^^^^^^^^^ definition local23  val bottomMargin: kotlin.Int
+//                      ^^^^^^^^^^^^ definition local23 val bottomMargin: kotlin.Int
 //                                      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getY().(nextHeaderView)
                     val topMargin = (nextHeaderView.layoutParams as? ViewGroup.MarginLayoutParams)?.topMargin ?: 0
-//                      ^^^^^^^^^ definition local24  val topMargin: kotlin.Int
+//                      ^^^^^^^^^ definition local24 val topMargin: kotlin.Int
 //                                   ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getY().(nextHeaderView)
                     y = when {
 //                  ^ reference local22
@@ -1054,14 +1054,14 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * [android.R.attr.clipToPadding].
      */
     private fun getX(headerView: View, nextHeaderView: View?): Float {
-//              ^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getX().  private final fun getX(headerView: [ERROR : View], nextHeaderView: [ERROR : View]?): kotlin.Float
-//                   ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getX().(headerView)  value-parameter headerView: [ERROR : View]
-//                                     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getX().(nextHeaderView)  value-parameter nextHeaderView: [ERROR : View]?
+//              ^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getX(). private final fun getX(headerView: [ERROR : View], nextHeaderView: [ERROR : View]?): kotlin.Float
+//                   ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getX().(headerView) value-parameter headerView: [ERROR : View]
+//                                     ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getX().(nextHeaderView) value-parameter nextHeaderView: [ERROR : View]?
 //                                                             ^^^^^ reference kotlin/Float#
         when (orientation) {
             HORIZONTAL -> {
                 var x = translationX
-//                  ^ definition local25  var x: kotlin.Float
+//                  ^ definition local25 var x: kotlin.Float
 //                      ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
 //                      ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationX().
 //                      ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationX().
@@ -1073,10 +1073,10 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                 if (nextHeaderView != null) {
 //                  ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getX().(nextHeaderView)
                     val leftMargin = (nextHeaderView.layoutParams as? ViewGroup.MarginLayoutParams)?.leftMargin ?: 0
-//                      ^^^^^^^^^^ definition local26  val leftMargin: kotlin.Int
+//                      ^^^^^^^^^^ definition local26 val leftMargin: kotlin.Int
 //                                    ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getX().(nextHeaderView)
                     val rightMargin = (nextHeaderView.layoutParams as? ViewGroup.MarginLayoutParams)?.rightMargin ?: 0
-//                      ^^^^^^^^^^^ definition local27  val rightMargin: kotlin.Int
+//                      ^^^^^^^^^^^ definition local27 val rightMargin: kotlin.Int
 //                                     ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getX().(nextHeaderView)
                     x = when {
 //                  ^ reference local25
@@ -1105,14 +1105,14 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * Finds the header index of `position` in `headerPositions`.
      */
     private fun findHeaderIndex(position: Int): Int {
-//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndex().  private final fun findHeaderIndex(position: kotlin.Int): kotlin.Int
-//                              ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndex().(position)  value-parameter position: kotlin.Int
+//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndex(). private final fun findHeaderIndex(position: kotlin.Int): kotlin.Int
+//                              ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndex().(position) value-parameter position: kotlin.Int
 //                                        ^^^ reference kotlin/Int#
 //                                              ^^^ reference kotlin/Int#
         var low = 0
-//          ^^^ definition local28  var low: kotlin.Int
+//          ^^^ definition local28 var low: kotlin.Int
         var high = headerPositions.size - 1
-//          ^^^^ definition local29  var high: kotlin.Int
+//          ^^^^ definition local29 var high: kotlin.Int
 //                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
 //                                 ^^^^ reference kotlin/collections/MutableList#size.
@@ -1123,7 +1123,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                 ^^ reference kotlin/Int#compareTo(+3).
 //                    ^^^^ reference local29
             val middle = (low + high) / 2
-//              ^^^^^^ definition local30  val middle: kotlin.Int
+//              ^^^^^^ definition local30 val middle: kotlin.Int
 //                        ^^^ reference local28
 //                            ^ reference kotlin/Int#plus(+3).
 //                              ^^^^ reference local29
@@ -1159,14 +1159,14 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * Finds the header index of `position` or the one before it in `headerPositions`.
      */
     private fun findHeaderIndexOrBefore(position: Int): Int {
-//              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrBefore().  private final fun findHeaderIndexOrBefore(position: kotlin.Int): kotlin.Int
-//                                      ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrBefore().(position)  value-parameter position: kotlin.Int
+//              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrBefore(). private final fun findHeaderIndexOrBefore(position: kotlin.Int): kotlin.Int
+//                                      ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrBefore().(position) value-parameter position: kotlin.Int
 //                                                ^^^ reference kotlin/Int#
 //                                                      ^^^ reference kotlin/Int#
         var low = 0
-//          ^^^ definition local31  var low: kotlin.Int
+//          ^^^ definition local31 var low: kotlin.Int
         var high = headerPositions.size - 1
-//          ^^^^ definition local32  var high: kotlin.Int
+//          ^^^^ definition local32 var high: kotlin.Int
 //                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
 //                                 ^^^^ reference kotlin/collections/MutableList#size.
@@ -1177,7 +1177,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                 ^^ reference kotlin/Int#compareTo(+3).
 //                    ^^^^ reference local32
             val middle = (low + high) / 2
-//              ^^^^^^ definition local33  val middle: kotlin.Int
+//              ^^^^^^ definition local33 val middle: kotlin.Int
 //                        ^^^ reference local31
 //                            ^ reference kotlin/Int#plus(+3).
 //                              ^^^^ reference local32
@@ -1221,14 +1221,14 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * Finds the header index of `position` or the one next to it in `headerPositions`.
      */
     private fun findHeaderIndexOrNext(position: Int): Int {
-//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrNext().  private final fun findHeaderIndexOrNext(position: kotlin.Int): kotlin.Int
-//                                    ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrNext().(position)  value-parameter position: kotlin.Int
+//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrNext(). private final fun findHeaderIndexOrNext(position: kotlin.Int): kotlin.Int
+//                                    ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrNext().(position) value-parameter position: kotlin.Int
 //                                              ^^^ reference kotlin/Int#
 //                                                    ^^^ reference kotlin/Int#
         var low = 0
-//          ^^^ definition local34  var low: kotlin.Int
+//          ^^^ definition local34 var low: kotlin.Int
         var high = headerPositions.size - 1
-//          ^^^^ definition local35  var high: kotlin.Int
+//          ^^^^ definition local35 var high: kotlin.Int
 //                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                 ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
 //                                 ^^^^ reference kotlin/collections/MutableList#size.
@@ -1239,7 +1239,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                 ^^ reference kotlin/Int#compareTo(+3).
 //                    ^^^^ reference local35
             val middle = (low + high) / 2
-//              ^^^^^^ definition local36  val middle: kotlin.Int
+//              ^^^^^^ definition local36 val middle: kotlin.Int
 //                        ^^^ reference local34
 //                            ^ reference kotlin/Int#plus(+3).
 //                              ^^^^ reference local35
@@ -1275,10 +1275,10 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
     }
 
     private fun setScrollState(position: Int, offset: Int) {
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollState().  private final fun setScrollState(position: kotlin.Int, offset: kotlin.Int)
-//                             ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollState().(position)  value-parameter position: kotlin.Int
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollState(). private final fun setScrollState(position: kotlin.Int, offset: kotlin.Int)
+//                             ^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollState().(position) value-parameter position: kotlin.Int
 //                                       ^^^ reference kotlin/Int#
-//                                            ^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollState().(offset)  value-parameter offset: kotlin.Int
+//                                            ^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollState().(offset) value-parameter offset: kotlin.Int
 //                                                    ^^^ reference kotlin/Int#
         scrollPosition = position
 //      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
@@ -1299,21 +1299,21 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
     @Parcelize
 //   ^^^^^^^^^ reference kotlinx/android/parcel/Parcelize#`<init>`().
     data class SavedState(
-//             ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#  public final data class SavedState
-//             ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().  public constructor SavedState(superState: [ERROR : Parcelable]?, scrollPosition: kotlin.Int, scrollOffset: kotlin.Int)
+//             ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState# public final data class SavedState
+//             ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`(). public constructor SavedState(superState: [ERROR : Parcelable]?, scrollPosition: kotlin.Int, scrollOffset: kotlin.Int)
         val superState: Parcelable?,
-//          ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#superState.  public final val superState: [ERROR : Parcelable]?
-//          ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getSuperState().  public final val superState: [ERROR : Parcelable]?
-//          ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().(superState)  value-parameter superState: [ERROR : Parcelable]?
+//          ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#superState. public final val superState: [ERROR : Parcelable]?
+//          ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getSuperState(). public final val superState: [ERROR : Parcelable]?
+//          ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().(superState) value-parameter superState: [ERROR : Parcelable]?
         val scrollPosition: Int,
-//          ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#scrollPosition.  public final val scrollPosition: kotlin.Int
-//          ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getScrollPosition().  public final val scrollPosition: kotlin.Int
-//          ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().(scrollPosition)  value-parameter scrollPosition: kotlin.Int
+//          ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#scrollPosition. public final val scrollPosition: kotlin.Int
+//          ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getScrollPosition(). public final val scrollPosition: kotlin.Int
+//          ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().(scrollPosition) value-parameter scrollPosition: kotlin.Int
 //                          ^^^ reference kotlin/Int#
         val scrollOffset: Int
-//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#scrollOffset.  public final val scrollOffset: kotlin.Int
-//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getScrollOffset().  public final val scrollOffset: kotlin.Int
-//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().(scrollOffset)  value-parameter scrollOffset: kotlin.Int
+//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#scrollOffset. public final val scrollOffset: kotlin.Int
+//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getScrollOffset(). public final val scrollOffset: kotlin.Int
+//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().(scrollOffset) value-parameter scrollOffset: kotlin.Int
 //                        ^^^ reference kotlin/Int#
     ) : Parcelable
 
@@ -1323,26 +1323,26 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      * This is used in detriment of [RecyclerView.LayoutManager]'s callbacks to control when they're received.
      */
     private inner class HeaderPositionsAdapterDataObserver : RecyclerView.AdapterDataObserver() {
-//                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#  private final inner class HeaderPositionsAdapterDataObserver
-//                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#`<init>`().  public constructor HeaderPositionsAdapterDataObserver()
+//                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver# private final inner class HeaderPositionsAdapterDataObserver
+//                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#`<init>`(). public constructor HeaderPositionsAdapterDataObserver()
         override fun onChanged() {
-//                   ^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onChanged().  public open fun onChanged()
+//                   ^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onChanged(). public open fun onChanged()
             // There's no hint at what changed, so go through the adapter.
             headerPositions.clear()
 //          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
 //                          ^^^^^ reference kotlin/collections/MutableList#clear().
             val itemCount = adapter?.itemCount ?: 0
-//              ^^^^^^^^^ definition local37  val itemCount: kotlin.Int
+//              ^^^^^^^^^ definition local37 val itemCount: kotlin.Int
 //                          ^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#adapter.
 //                          ^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getAdapter().
 //                          ^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().
             for (i in 0 until itemCount) {
-//               ^ definition local38  val i: kotlin.Int
+//               ^ definition local38 val i: kotlin.Int
 //                      ^^^^^ reference kotlin/ranges/RangesKt#until(+6).
 //                            ^^^^^^^^^ reference local37
                 val isSticky = adapter?.isStickyHeader(i) ?: false
-//                  ^^^^^^^^ definition local39  val isSticky: kotlin.Boolean
+//                  ^^^^^^^^ definition local39 val isSticky: kotlin.Boolean
 //                             ^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#adapter.
 //                             ^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getAdapter().
 //                             ^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().
@@ -1375,14 +1375,14 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
         }
 
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-//                   ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeInserted().  public open fun onItemRangeInserted(positionStart: kotlin.Int, itemCount: kotlin.Int)
-//                                       ^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeInserted().(positionStart)  value-parameter positionStart: kotlin.Int
+//                   ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeInserted(). public open fun onItemRangeInserted(positionStart: kotlin.Int, itemCount: kotlin.Int)
+//                                       ^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeInserted().(positionStart) value-parameter positionStart: kotlin.Int
 //                                                      ^^^ reference kotlin/Int#
-//                                                           ^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeInserted().(itemCount)  value-parameter itemCount: kotlin.Int
+//                                                           ^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeInserted().(itemCount) value-parameter itemCount: kotlin.Int
 //                                                                      ^^^ reference kotlin/Int#
             // Shift headers below down.
             val headerCount = headerPositions.size
-//              ^^^^^^^^^^^ definition local40  val headerCount: kotlin.Int
+//              ^^^^^^^^^^^ definition local40 val headerCount: kotlin.Int
 //                            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
 //                                            ^^^^ reference kotlin/collections/MutableList#size.
@@ -1391,7 +1391,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //              ^^^^^^^^^^^ reference local40
 //                          ^ reference kotlin/Int#compareTo(+3).
                 var i = findHeaderIndexOrNext(positionStart)
-//                  ^ definition local41  var i: kotlin.Int
+//                  ^ definition local41 var i: kotlin.Int
 //                      ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrNext().
 //                                            ^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeInserted().(positionStart)
                 while (i != -1 && i < headerCount) {
@@ -1418,14 +1418,14 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
             // Add new headers.
             for (i in positionStart until positionStart + itemCount) {
-//               ^ definition local42  val i: kotlin.Int
+//               ^ definition local42 val i: kotlin.Int
 //                    ^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeInserted().(positionStart)
 //                                  ^^^^^ reference kotlin/ranges/RangesKt#until(+6).
 //                                        ^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeInserted().(positionStart)
 //                                                      ^ reference kotlin/Int#plus(+3).
 //                                                        ^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeInserted().(itemCount)
                 val isSticky = adapter?.isStickyHeader(i) ?: false
-//                  ^^^^^^^^ definition local43  val isSticky: kotlin.Boolean
+//                  ^^^^^^^^ definition local43 val isSticky: kotlin.Boolean
 //                             ^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#adapter.
 //                             ^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getAdapter().
 //                             ^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().
@@ -1433,7 +1433,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                 if (isSticky) {
 //                  ^^^^^^^^ reference local43
                     val headerIndex = findHeaderIndexOrNext(i)
-//                      ^^^^^^^^^^^ definition local44  val headerIndex: kotlin.Int
+//                      ^^^^^^^^^^^ definition local44 val headerIndex: kotlin.Int
 //                                    ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrNext().
 //                                                          ^ reference local42
                     if (headerIndex != -1) {
@@ -1458,13 +1458,13 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
         }
 
         override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-//                   ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeRemoved().  public open fun onItemRangeRemoved(positionStart: kotlin.Int, itemCount: kotlin.Int)
-//                                      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeRemoved().(positionStart)  value-parameter positionStart: kotlin.Int
+//                   ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeRemoved(). public open fun onItemRangeRemoved(positionStart: kotlin.Int, itemCount: kotlin.Int)
+//                                      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeRemoved().(positionStart) value-parameter positionStart: kotlin.Int
 //                                                     ^^^ reference kotlin/Int#
-//                                                          ^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeRemoved().(itemCount)  value-parameter itemCount: kotlin.Int
+//                                                          ^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeRemoved().(itemCount) value-parameter itemCount: kotlin.Int
 //                                                                     ^^^ reference kotlin/Int#
             var headerCount = headerPositions.size
-//              ^^^^^^^^^^^ definition local45  var headerCount: kotlin.Int
+//              ^^^^^^^^^^^ definition local45 var headerCount: kotlin.Int
 //                            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
 //                                            ^^^^ reference kotlin/collections/MutableList#size.
@@ -1474,7 +1474,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                          ^ reference kotlin/Int#compareTo(+3).
                 // Remove headers.
                 for (i in positionStart + itemCount - 1 downTo positionStart) {
-//                   ^ definition local46  val i: kotlin.Int
+//                   ^ definition local46 val i: kotlin.Int
 //                        ^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeRemoved().(positionStart)
 //                                      ^ reference kotlin/Int#plus(+3).
 //                                        ^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeRemoved().(itemCount)
@@ -1482,7 +1482,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                      ^^^^^^ reference kotlin/ranges/RangesKt#downTo(+6).
 //                                                             ^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeRemoved().(positionStart)
                     val index = findHeaderIndex(i)
-//                      ^^^^^ definition local47  val index: kotlin.Int
+//                      ^^^^^ definition local47 val index: kotlin.Int
 //                              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndex().
 //                                              ^ reference local46
                     if (index != -1) {
@@ -1518,7 +1518,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
                 // Shift headers below up.
                 var i = findHeaderIndexOrNext(positionStart + itemCount)
-//                  ^ definition local48  var i: kotlin.Int
+//                  ^ definition local48 var i: kotlin.Int
 //                      ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrNext().
 //                                            ^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeRemoved().(positionStart)
 //                                                          ^ reference kotlin/Int#plus(+3).
@@ -1547,17 +1547,17 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
         }
 
         override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
-//                   ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().  public open fun onItemRangeMoved(fromPosition: kotlin.Int, toPosition: kotlin.Int, itemCount: kotlin.Int)
-//                                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().(fromPosition)  value-parameter fromPosition: kotlin.Int
+//                   ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved(). public open fun onItemRangeMoved(fromPosition: kotlin.Int, toPosition: kotlin.Int, itemCount: kotlin.Int)
+//                                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().(fromPosition) value-parameter fromPosition: kotlin.Int
 //                                                  ^^^ reference kotlin/Int#
-//                                                       ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().(toPosition)  value-parameter toPosition: kotlin.Int
+//                                                       ^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().(toPosition) value-parameter toPosition: kotlin.Int
 //                                                                   ^^^ reference kotlin/Int#
-//                                                                        ^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().(itemCount)  value-parameter itemCount: kotlin.Int
+//                                                                        ^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().(itemCount) value-parameter itemCount: kotlin.Int
 //                                                                                   ^^^ reference kotlin/Int#
             // Shift moved headers by toPosition - fromPosition.
             // Shift headers in-between by -itemCount (reverse if upwards).
             val headerCount = headerPositions.size
-//              ^^^^^^^^^^^ definition local49  val headerCount: kotlin.Int
+//              ^^^^^^^^^^^ definition local49 val headerCount: kotlin.Int
 //                            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                            ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
 //                                            ^^^^ reference kotlin/collections/MutableList#size.
@@ -1570,7 +1570,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                               ^ reference kotlin/Int#compareTo(+3).
 //                                 ^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().(toPosition)
                     var i = findHeaderIndexOrNext(fromPosition)
-//                      ^ definition local50  var i: kotlin.Int
+//                      ^ definition local50 var i: kotlin.Int
 //                          ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrNext().
 //                                                ^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().(fromPosition)
                     while (i != -1 && i < headerCount) {
@@ -1581,7 +1581,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                      ^ reference kotlin/Int#compareTo(+3).
 //                                        ^^^^^^^^^^^ reference local49
                         val headerPos = headerPositions[i]
-//                          ^^^^^^^^^ definition local51  val headerPos: kotlin.Int
+//                          ^^^^^^^^^ definition local51 val headerPos: kotlin.Int
 //                                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
 //                                                      ^ reference local50
@@ -1634,7 +1634,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                     }
                 } else {
                     var i = findHeaderIndexOrNext(toPosition)
-//                      ^ definition local52  var i: kotlin.Int
+//                      ^ definition local52 var i: kotlin.Int
 //                          ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrNext().
 //                                                ^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().(toPosition)
                     loop@ while (i != -1 && i < headerCount) {
@@ -1645,7 +1645,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                            ^ reference kotlin/Int#compareTo(+3).
 //                                              ^^^^^^^^^^^ reference local49
                         val headerPos = headerPositions[i]
-//                          ^^^^^^^^^ definition local53  val headerPos: kotlin.Int
+//                          ^^^^^^^^^ definition local53 val headerPos: kotlin.Int
 //                                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                      ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
 //                                                      ^ reference local52
@@ -1700,17 +1700,17 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
         }
 
         private fun sortHeaderAtIndex(index: Int) {
-//                  ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#sortHeaderAtIndex().  private final fun sortHeaderAtIndex(index: kotlin.Int)
-//                                    ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#sortHeaderAtIndex().(index)  value-parameter index: kotlin.Int
+//                  ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#sortHeaderAtIndex(). private final fun sortHeaderAtIndex(index: kotlin.Int)
+//                                    ^^^^^ definition com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#sortHeaderAtIndex().(index) value-parameter index: kotlin.Int
 //                                           ^^^ reference kotlin/Int#
             val headerPos = headerPositions.removeAt(index)
-//              ^^^^^^^^^ definition local54  val headerPos: kotlin.Int
+//              ^^^^^^^^^ definition local54 val headerPos: kotlin.Int
 //                          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                          ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
 //                                          ^^^^^^^^ reference kotlin/collections/MutableList#removeAt().
 //                                                   ^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#sortHeaderAtIndex().(index)
             val headerIndex = findHeaderIndexOrNext(headerPos)
-//              ^^^^^^^^^^^ definition local55  val headerIndex: kotlin.Int
+//              ^^^^^^^^^^^ definition local55 val headerIndex: kotlin.Int
 //                            ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrNext().
 //                                                  ^^^^^^^^^ reference local54
             if (headerIndex != -1) {

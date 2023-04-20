@@ -15,25 +15,25 @@ import androidx.recyclerview.widget.RecyclerView
  * listeners.
  */
 class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, OnLongClickListener {
-//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#  public final class WrappedEpoxyModelClickListener<T, V>
-//                                   ^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T]  <T>
-//                                                      ^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#[V]  <V>
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener# public final class WrappedEpoxyModelClickListener<T, V>
+//                                   ^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T] <T>
+//                                                      ^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#[V] <V>
     // Save the original click listener to call back to when clicked.
     // This also lets us call back to the original hashCode and equals methods
     private val originalClickListener: OnModelClickListener<T, V>?
-//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.  private final val originalClickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?
-//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalClickListener().  private final val originalClickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?
+//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener. private final val originalClickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?
+//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalClickListener(). private final val originalClickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?
 //                                                          ^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T]
 //                                                             ^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#[V]
     private val originalLongClickListener: OnModelLongClickListener<T, V>?
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.  private final val originalLongClickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalLongClickListener().  private final val originalLongClickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener. private final val originalLongClickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalLongClickListener(). private final val originalLongClickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?
 //                                                                  ^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T]
 //                                                                     ^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#[V]
 
     constructor(clickListener: OnModelClickListener<T, V>?) {
-//  ^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`().  public constructor WrappedEpoxyModelClickListener<T, V>(clickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?)
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`().(clickListener)  value-parameter clickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?
+//  ^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`(). public constructor WrappedEpoxyModelClickListener<T, V>(clickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?)
+//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`().(clickListener) value-parameter clickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?
 //                                                  ^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T]
 //                                                     ^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#[V]
         requireNotNull(clickListener) {
@@ -53,8 +53,8 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
     }
 
     constructor(clickListener: OnModelLongClickListener<T, V>?) {
-//  ^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`(+1).  public constructor WrappedEpoxyModelClickListener<T, V>(clickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?)
-//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`(+1).(clickListener)  value-parameter clickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?
+//  ^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`(+1). public constructor WrappedEpoxyModelClickListener<T, V>(clickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?)
+//              ^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`(+1).(clickListener) value-parameter clickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?
 //                                                      ^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T]
 //                                                         ^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#[V]
         requireNotNull(clickListener) {
@@ -74,10 +74,10 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
     }
 
     override fun onClick(view: View) {
-//               ^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#onClick().  public open fun onClick(view: [ERROR : View])
-//                       ^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#onClick().(view)  value-parameter view: [ERROR : View]
+//               ^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#onClick(). public open fun onClick(view: [ERROR : View])
+//                       ^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#onClick().(view) value-parameter view: [ERROR : View]
         val modelInfo = getClickedModelInfo(view) ?: return
-//          ^^^^^^^^^ definition local0  val modelInfo: com.airbnb.epoxy.WrappedEpoxyModelClickListener.ClickedModelInfo
+//          ^^^^^^^^^ definition local0 val modelInfo: com.airbnb.epoxy.WrappedEpoxyModelClickListener.ClickedModelInfo
 //                      ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#getClickedModelInfo().
 //                                          ^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#onClick().(view)
 
@@ -107,11 +107,11 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
     }
 
     override fun onLongClick(view: View): Boolean {
-//               ^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#onLongClick().  public open fun onLongClick(view: [ERROR : View]): kotlin.Boolean
-//                           ^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#onLongClick().(view)  value-parameter view: [ERROR : View]
+//               ^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#onLongClick(). public open fun onLongClick(view: [ERROR : View]): kotlin.Boolean
+//                           ^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#onLongClick().(view) value-parameter view: [ERROR : View]
 //                                        ^^^^^^^ reference kotlin/Boolean#
         val modelInfo = getClickedModelInfo(view) ?: return false
-//          ^^^^^^^^^ definition local1  val modelInfo: com.airbnb.epoxy.WrappedEpoxyModelClickListener.ClickedModelInfo
+//          ^^^^^^^^^ definition local1 val modelInfo: com.airbnb.epoxy.WrappedEpoxyModelClickListener.ClickedModelInfo
 //                      ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#getClickedModelInfo().
 //                                          ^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#onLongClick().(view)
 
@@ -141,27 +141,27 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
     }
 
     private fun getClickedModelInfo(view: View): ClickedModelInfo? {
-//              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#getClickedModelInfo().  private final fun getClickedModelInfo(view: [ERROR : View]): com.airbnb.epoxy.WrappedEpoxyModelClickListener.ClickedModelInfo?
-//                                  ^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#getClickedModelInfo().(view)  value-parameter view: [ERROR : View]
+//              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#getClickedModelInfo(). private final fun getClickedModelInfo(view: [ERROR : View]): com.airbnb.epoxy.WrappedEpoxyModelClickListener.ClickedModelInfo?
+//                                  ^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#getClickedModelInfo().(view) value-parameter view: [ERROR : View]
 //                                               ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#
         val epoxyHolder = ListenersUtils.getEpoxyHolderForChildView(view)
-//          ^^^^^^^^^^^ definition local2  val epoxyHolder: kotlin.Nothing
+//          ^^^^^^^^^^^ definition local2 val epoxyHolder: kotlin.Nothing
 //                                                                  ^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#getClickedModelInfo().(view)
             ?: error("Could not find RecyclerView holder for clicked view")
 //             ^^^^^ reference kotlin/PreconditionsKt#error().
 
         val adapterPosition = epoxyHolder.adapterPosition
-//          ^^^^^^^^^^^^^^^ definition local3  val adapterPosition: [ERROR : Type for epoxyHolder.adapterPosition]
+//          ^^^^^^^^^^^^^^^ definition local3 val adapterPosition: [ERROR : Type for epoxyHolder.adapterPosition]
 //                            ^^^^^^^^^^^ reference local2
         if (adapterPosition == RecyclerView.NO_POSITION) return null
 //          ^^^^^^^^^^^^^^^ reference local3
 
         val boundObject = epoxyHolder.objectToBind()
-//          ^^^^^^^^^^^ definition local4  val boundObject: [ERROR : Type for epoxyHolder.objectToBind()]
+//          ^^^^^^^^^^^ definition local4 val boundObject: [ERROR : Type for epoxyHolder.objectToBind()]
 //                        ^^^^^^^^^^^ reference local2
 
         val holderToUse = if (boundObject is ModelGroupHolder) {
-//          ^^^^^^^^^^^ definition local5  val holderToUse: kotlin.Nothing
+//          ^^^^^^^^^^^ definition local5 val holderToUse: kotlin.Nothing
 //                            ^^^^^^^^^^^ reference local4
 //                                           ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelGroupHolder#
             // For a model group the clicked view could belong to any of the nested models in the group.
@@ -194,21 +194,21 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
     }
 
     private class ClickedModelInfo(
-//                ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#  private final class ClickedModelInfo
-//                ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().  public constructor ClickedModelInfo(model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>, adapterPosition: kotlin.Int, boundObject: kotlin.Any)
+//                ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo# private final class ClickedModelInfo
+//                ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`(). public constructor ClickedModelInfo(model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>, adapterPosition: kotlin.Int, boundObject: kotlin.Any)
         val model: EpoxyModel<*>,
-//          ^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#model.  public final val model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>
-//          ^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#getModel().  public final val model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>
-//          ^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().(model)  value-parameter model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>
+//          ^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#model. public final val model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>
+//          ^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#getModel(). public final val model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>
+//          ^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().(model) value-parameter model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>
         val adapterPosition: Int,
-//          ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#adapterPosition.  public final val adapterPosition: kotlin.Int
-//          ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#getAdapterPosition().  public final val adapterPosition: kotlin.Int
-//          ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().(adapterPosition)  value-parameter adapterPosition: kotlin.Int
+//          ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#adapterPosition. public final val adapterPosition: kotlin.Int
+//          ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#getAdapterPosition(). public final val adapterPosition: kotlin.Int
+//          ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().(adapterPosition) value-parameter adapterPosition: kotlin.Int
 //                           ^^^ reference kotlin/Int#
         val boundObject: Any
-//          ^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#boundObject.  public final val boundObject: kotlin.Any
-//          ^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#getBoundObject().  public final val boundObject: kotlin.Any
-//          ^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().(boundObject)  value-parameter boundObject: kotlin.Any
+//          ^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#boundObject. public final val boundObject: kotlin.Any
+//          ^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#getBoundObject(). public final val boundObject: kotlin.Any
+//          ^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().(boundObject) value-parameter boundObject: kotlin.Any
 //                       ^^^ reference kotlin/Any#
     )
 
@@ -216,10 +216,10 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
      * Returns a sequence of this View plus any and all children, recursively.
      */
     private val View.allViewsInHierarchy: Sequence<View>
-//                   ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#allViewsInHierarchy.  private final val [ERROR : View].allViewsInHierarchy: kotlin.sequences.Sequence<[ERROR : View]>
+//                   ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#allViewsInHierarchy. private final val [ERROR : View].allViewsInHierarchy: kotlin.sequences.Sequence<[ERROR : View]>
 //                                        ^^^^^^^^ reference kotlin/sequences/Sequence#
         get() {
-//      ^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#getAllViewsInHierarchy().  private final fun [ERROR : View].<get-allViewsInHierarchy>(): kotlin.sequences.Sequence<[ERROR : View]>
+//      ^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#getAllViewsInHierarchy(). private final fun [ERROR : View].<get-allViewsInHierarchy>(): kotlin.sequences.Sequence<[ERROR : View]>
             return if (this is ViewGroup) {
 //                     ^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#allViewsInHierarchy.
                 children.flatMap {
@@ -234,37 +234,37 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
 
     /** Returns a [Sequence] over the child views in this view group. */
     internal val ViewGroup.children: Sequence<View>
-//                         ^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#children.  internal final val [ERROR : ViewGroup].children: kotlin.sequences.Sequence<[ERROR : View]>
+//                         ^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#children. internal final val [ERROR : ViewGroup].children: kotlin.sequences.Sequence<[ERROR : View]>
 //                                   ^^^^^^^^ reference kotlin/sequences/Sequence#
         get() = object : Sequence<View> {
-//      ^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#getChildren().  internal final fun [ERROR : ViewGroup].<get-children>(): kotlin.sequences.Sequence<[ERROR : View]>
+//      ^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#getChildren(). internal final fun [ERROR : ViewGroup].<get-children>(): kotlin.sequences.Sequence<[ERROR : View]>
 //                       ^^^^^^^^ reference kotlin/sequences/Sequence#
             override fun iterator() = this@children.iterator()
-//                       ^^^^^^^^ definition local6  public open fun iterator(): [ERROR : <ERROR FUNCTION RETURN TYPE>]
+//                       ^^^^^^^^ definition local6 public open fun iterator(): [ERROR : <ERROR FUNCTION RETURN TYPE>]
 //                                    ^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#children.
         }
 
     /** Returns a [MutableIterator] over the views in this view group. */
     internal operator fun ViewGroup.iterator() = object : MutableIterator<View> {
-//                                  ^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#iterator().  internal final operator fun [ERROR : ViewGroup].iterator(): kotlin.collections.MutableIterator<[ERROR : View]>
+//                                  ^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#iterator(). internal final operator fun [ERROR : ViewGroup].iterator(): kotlin.collections.MutableIterator<[ERROR : View]>
 //                                                        ^^^^^^^^^^^^^^^ reference kotlin/collections/MutableIterator#
         private var index = 0
-//                  ^^^^^ definition local7  private final var index: kotlin.Int
-//                  ^^^^^ definition local8  private final var index: kotlin.Int
-//                  ^^^^^ definition local9  private final var index: kotlin.Int
+//                  ^^^^^ definition local7 private final var index: kotlin.Int
+//                  ^^^^^ definition local8 private final var index: kotlin.Int
+//                  ^^^^^ definition local9 private final var index: kotlin.Int
         override fun hasNext() = index < childCount
-//                   ^^^^^^^ definition local10  public open fun hasNext(): [ERROR : Error function type]
+//                   ^^^^^^^ definition local10 public open fun hasNext(): [ERROR : Error function type]
 //                               ^^^^^ reference local7
 //                               ^^^^^ reference local8
 //                               ^^^^^ reference local9
         override fun next() = getChildAt(index++) ?: throw IndexOutOfBoundsException()
-//                   ^^^^ definition local11  public open fun next(): kotlin.Nothing
+//                   ^^^^ definition local11 public open fun next(): kotlin.Nothing
 //                                       ^^^^^ reference local7
 //                                       ^^^^^ reference local8
 //                                       ^^^^^ reference local9
 //                                            ^^ reference kotlin/Int#inc().
         override fun remove() = removeViewAt(--index)
-//                   ^^^^^^ definition local12  public open fun remove(): [ERROR : <ERROR FUNCTION RETURN TYPE>]
+//                   ^^^^^^ definition local12 public open fun remove(): [ERROR : <ERROR FUNCTION RETURN TYPE>]
 //                                           ^^ reference kotlin/Int#dec().
 //                                             ^^^^^ reference local7
 //                                             ^^^^^ reference local8
@@ -272,8 +272,8 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
     }
 
     override fun equals(other: Any?): Boolean {
-//               ^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#equals().  public open fun equals(other: kotlin.Any?): kotlin.Boolean
-//                      ^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#equals().(other)  value-parameter other: kotlin.Any?
+//               ^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#equals(). public open fun equals(other: kotlin.Any?): kotlin.Boolean
+//                      ^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#equals().(other) value-parameter other: kotlin.Any?
 //                             ^^^ reference kotlin/Any#
 //                                    ^^^^^^^ reference kotlin/Boolean#
         if (this === other) {
@@ -324,10 +324,10 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
     }
 
     override fun hashCode(): Int {
-//               ^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#hashCode().  public open fun hashCode(): kotlin.Int
+//               ^^^^^^^^ definition com/airbnb/epoxy/WrappedEpoxyModelClickListener#hashCode(). public open fun hashCode(): kotlin.Int
 //                           ^^^ reference kotlin/Int#
         var result = originalClickListener?.hashCode() ?: 0
-//          ^^^^^^ definition local13  var result: kotlin.Int
+//          ^^^^^^ definition local13 var result: kotlin.Int
 //                   ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
 //                   ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalClickListener().
         result = 31 * result + (originalLongClickListener?.hashCode() ?: 0)

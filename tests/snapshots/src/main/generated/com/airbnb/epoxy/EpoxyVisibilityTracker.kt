@@ -49,15 +49,15 @@ import java.util.HashMap
  * @see OnModelVisibilityStateChangedListener
  */
 class EpoxyVisibilityTracker {
-//    ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#  public final class EpoxyVisibilityTracker
-//    ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#`<init>`().  public constructor EpoxyVisibilityTracker()
+//    ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker# public final class EpoxyVisibilityTracker
+//    ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#`<init>`(). public constructor EpoxyVisibilityTracker()
 
     /**
      * Used to listen to [RecyclerView.ItemAnimator] ending animations.
      */
     private val itemAnimatorFinishedListener =
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#itemAnimatorFinishedListener.  private final val itemAnimatorFinishedListener: [ERROR : <ERROR FUNCTION RETURN TYPE>]
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getItemAnimatorFinishedListener().  private final val itemAnimatorFinishedListener: [ERROR : <ERROR FUNCTION RETURN TYPE>]
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#itemAnimatorFinishedListener. private final val itemAnimatorFinishedListener: [ERROR : <ERROR FUNCTION RETURN TYPE>]
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getItemAnimatorFinishedListener(). private final val itemAnimatorFinishedListener: [ERROR : <ERROR FUNCTION RETURN TYPE>]
         RecyclerView.ItemAnimator.ItemAnimatorFinishedListener {
             processChangeEvent(
 //          ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().
@@ -68,42 +68,42 @@ class EpoxyVisibilityTracker {
 
     /** Maintain visibility item indexed by view id (identity hashcode)  */
     private val visibilityIdToItemMap = SparseArray<EpoxyVisibilityItem>()
-//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.  private final val visibilityIdToItemMap: [ERROR : Type for SparseArray<EpoxyVisibilityItem>()]
-//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItemMap().  private final val visibilityIdToItemMap: [ERROR : Type for SparseArray<EpoxyVisibilityItem>()]
+//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap. private final val visibilityIdToItemMap: [ERROR : Type for SparseArray<EpoxyVisibilityItem>()]
+//              ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItemMap(). private final val visibilityIdToItemMap: [ERROR : Type for SparseArray<EpoxyVisibilityItem>()]
 //                                                  ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#
     private val visibilityIdToItems: MutableList<EpoxyVisibilityItem> = ArrayList()
-//              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.  private final val visibilityIdToItems: kotlin.collections.MutableList<com.airbnb.epoxy.EpoxyVisibilityItem>
-//              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().  private final val visibilityIdToItems: kotlin.collections.MutableList<com.airbnb.epoxy.EpoxyVisibilityItem>
+//              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems. private final val visibilityIdToItems: kotlin.collections.MutableList<com.airbnb.epoxy.EpoxyVisibilityItem>
+//              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems(). private final val visibilityIdToItems: kotlin.collections.MutableList<com.airbnb.epoxy.EpoxyVisibilityItem>
 //                                   ^^^^^^^^^^^ reference kotlin/collections/MutableList#
 //                                               ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#
 //                                                                      ^^^^^^^^^ reference java/util/ArrayList#`<init>`(+1).
 
     /** listener used to process scroll, layout and attach events  */
     private val listener = Listener()
-//              ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#listener.  private final val listener: com.airbnb.epoxy.EpoxyVisibilityTracker.Listener
-//              ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getListener().  private final val listener: com.airbnb.epoxy.EpoxyVisibilityTracker.Listener
+//              ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#listener. private final val listener: com.airbnb.epoxy.EpoxyVisibilityTracker.Listener
+//              ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getListener(). private final val listener: com.airbnb.epoxy.EpoxyVisibilityTracker.Listener
 //                         ^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#`<init>`().
 
     /** listener used to process data events  */
     private val observer = DataObserver()
-//              ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#observer.  private final val observer: com.airbnb.epoxy.EpoxyVisibilityTracker.DataObserver
-//              ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getObserver().  private final val observer: com.airbnb.epoxy.EpoxyVisibilityTracker.DataObserver
+//              ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#observer. private final val observer: com.airbnb.epoxy.EpoxyVisibilityTracker.DataObserver
+//              ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getObserver(). private final val observer: com.airbnb.epoxy.EpoxyVisibilityTracker.DataObserver
 //                         ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#`<init>`().
 
     private var attachedRecyclerView: RecyclerView? = null
-//              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView.  private final var attachedRecyclerView: [ERROR : RecyclerView]?
-//              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getAttachedRecyclerView().  private final var attachedRecyclerView: [ERROR : RecyclerView]?
-//              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#setAttachedRecyclerView().  private final var attachedRecyclerView: [ERROR : RecyclerView]?
+//              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView. private final var attachedRecyclerView: [ERROR : RecyclerView]?
+//              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getAttachedRecyclerView(). private final var attachedRecyclerView: [ERROR : RecyclerView]?
+//              ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#setAttachedRecyclerView(). private final var attachedRecyclerView: [ERROR : RecyclerView]?
 
     private var lastAdapterSeen: RecyclerView.Adapter<*>? = null
-//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#lastAdapterSeen.  private final var lastAdapterSeen: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
-//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getLastAdapterSeen().  private final var lastAdapterSeen: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
-//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#setLastAdapterSeen().  private final var lastAdapterSeen: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
+//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#lastAdapterSeen. private final var lastAdapterSeen: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
+//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getLastAdapterSeen(). private final var lastAdapterSeen: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
+//              ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#setLastAdapterSeen(). private final var lastAdapterSeen: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?
 
     /** All nested visibility trackers  */
     private val nestedTrackers: MutableMap<RecyclerView, EpoxyVisibilityTracker> = HashMap()
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#nestedTrackers.  private final val nestedTrackers: kotlin.collections.MutableMap<[ERROR : RecyclerView], com.airbnb.epoxy.EpoxyVisibilityTracker>
-//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getNestedTrackers().  private final val nestedTrackers: kotlin.collections.MutableMap<[ERROR : RecyclerView], com.airbnb.epoxy.EpoxyVisibilityTracker>
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#nestedTrackers. private final val nestedTrackers: kotlin.collections.MutableMap<[ERROR : RecyclerView], com.airbnb.epoxy.EpoxyVisibilityTracker>
+//              ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getNestedTrackers(). private final val nestedTrackers: kotlin.collections.MutableMap<[ERROR : RecyclerView], com.airbnb.epoxy.EpoxyVisibilityTracker>
 //                              ^^^^^^^^^^ reference kotlin/collections/MutableMap#
 //                                                       ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#
 //                                                                                 ^^^^^^^ reference java/util/HashMap#`<init>`(+2).
@@ -111,9 +111,9 @@ class EpoxyVisibilityTracker {
     /** This flag is for optimizing the process on detach. If detach is from data changed then it
      * need to re-process all views, else no need (ex: scroll). */
     private var visibleDataChanged = false
-//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.  private final var visibleDataChanged: kotlin.Boolean
-//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibleDataChanged().  private final var visibleDataChanged: kotlin.Boolean
-//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#setVisibleDataChanged().  private final var visibleDataChanged: kotlin.Boolean
+//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged. private final var visibleDataChanged: kotlin.Boolean
+//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibleDataChanged(). private final var visibleDataChanged: kotlin.Boolean
+//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#setVisibleDataChanged(). private final var visibleDataChanged: kotlin.Boolean
 
     /**
      * Enable or disable visibility changed event. Default is `true`, disable it if you don't need
@@ -124,9 +124,9 @@ class EpoxyVisibilityTracker {
      * @see OnModelVisibilityChangedListener
      */
     var onChangedEnabled = true
-//      ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#onChangedEnabled.  public final var onChangedEnabled: kotlin.Boolean
-//      ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getOnChangedEnabled().  public final var onChangedEnabled: kotlin.Boolean
-//      ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#setOnChangedEnabled().  public final var onChangedEnabled: kotlin.Boolean
+//      ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#onChangedEnabled. public final var onChangedEnabled: kotlin.Boolean
+//      ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getOnChangedEnabled(). public final var onChangedEnabled: kotlin.Boolean
+//      ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#setOnChangedEnabled(). public final var onChangedEnabled: kotlin.Boolean
 
     /**
      * Set the threshold of percentage visible area to identify the partial impression view state.
@@ -141,9 +141,9 @@ class EpoxyVisibilityTracker {
 //            ^^^^ reference androidx/annotation/IntRange#`<init>`().(from)
 //                      ^^ reference androidx/annotation/IntRange#`<init>`().(to)
     var partialImpressionThresholdPercentage: Int? = null
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#partialImpressionThresholdPercentage.  public final var partialImpressionThresholdPercentage: kotlin.Int?
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getPartialImpressionThresholdPercentage().  public final var partialImpressionThresholdPercentage: kotlin.Int?
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#setPartialImpressionThresholdPercentage().  public final var partialImpressionThresholdPercentage: kotlin.Int?
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#partialImpressionThresholdPercentage. public final var partialImpressionThresholdPercentage: kotlin.Int?
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#getPartialImpressionThresholdPercentage(). public final var partialImpressionThresholdPercentage: kotlin.Int?
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#setPartialImpressionThresholdPercentage(). public final var partialImpressionThresholdPercentage: kotlin.Int?
 //                                            ^^^ reference kotlin/Int#
 
     /**
@@ -152,8 +152,8 @@ class EpoxyVisibilityTracker {
      * @param recyclerView The recyclerview that the EpoxyController has its adapter added to.
      */
     fun attach(recyclerView: RecyclerView) {
-//      ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#attach().  public final fun attach(recyclerView: [ERROR : RecyclerView])
-//             ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#attach().(recyclerView)  value-parameter recyclerView: [ERROR : RecyclerView]
+//      ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#attach(). public final fun attach(recyclerView: [ERROR : RecyclerView])
+//             ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#attach().(recyclerView) value-parameter recyclerView: [ERROR : RecyclerView]
         attachedRecyclerView = recyclerView
 //      ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView.
 //      ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#getAttachedRecyclerView().
@@ -183,8 +183,8 @@ class EpoxyVisibilityTracker {
      * @param recyclerView The recycler view that the EpoxyController has its adapter added to.
      */
     fun detach(recyclerView: RecyclerView) {
-//      ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#detach().  public final fun detach(recyclerView: [ERROR : RecyclerView])
-//             ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#detach().(recyclerView)  value-parameter recyclerView: [ERROR : RecyclerView]
+//      ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#detach(). public final fun detach(recyclerView: [ERROR : RecyclerView])
+//             ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#detach().(recyclerView) value-parameter recyclerView: [ERROR : RecyclerView]
         recyclerView.removeOnScrollListener(listener)
 //      ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#detach().(recyclerView)
 //                                          ^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
@@ -212,7 +212,7 @@ class EpoxyVisibilityTracker {
      * events. This may be useful when you change the adapter on the [RecyclerView].
      */
     fun clearVisibilityStates() {
-//      ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#clearVisibilityStates().  public final fun clearVisibilityStates()
+//      ^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#clearVisibilityStates(). public final fun clearVisibilityStates()
         // Clear our visibility items
         visibilityIdToItemMap.clear()
 //      ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
@@ -233,7 +233,7 @@ class EpoxyVisibilityTracker {
      * attached on the horizontal RecyclerView.
      */
     fun requestVisibilityCheck() {
-//      ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#requestVisibilityCheck().  public final fun requestVisibilityCheck()
+//      ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#requestVisibilityCheck(). public final fun requestVisibilityCheck()
         processChangeEvent("requestVisibilityCheck")
 //      ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().
     }
@@ -244,21 +244,21 @@ class EpoxyVisibilityTracker {
      * @param checkItemAnimator: true if it need to check if ItemAnimator is running
      */
     private fun processChangeEvent(debug: String, checkItemAnimator: Boolean = true) {
-//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().  private final fun processChangeEvent(debug: kotlin.String, checkItemAnimator: kotlin.Boolean = ...)
-//                                 ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().(debug)  value-parameter debug: kotlin.String
+//              ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent(). private final fun processChangeEvent(debug: kotlin.String, checkItemAnimator: kotlin.Boolean = ...)
+//                                 ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().(debug) value-parameter debug: kotlin.String
 //                                        ^^^^^^ reference kotlin/String#
-//                                                ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().(checkItemAnimator)  value-parameter checkItemAnimator: kotlin.Boolean = ...
+//                                                ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().(checkItemAnimator) value-parameter checkItemAnimator: kotlin.Boolean = ...
 //                                                                   ^^^^^^^ reference kotlin/Boolean#
 
         // Only if attached
         val recyclerView = attachedRecyclerView ?: return
-//          ^^^^^^^^^^^^ definition local0  val recyclerView: kotlin.Nothing
+//          ^^^^^^^^^^^^ definition local0 val recyclerView: kotlin.Nothing
 //                         ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView.
 //                         ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#getAttachedRecyclerView().
 //                         ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#setAttachedRecyclerView().
 
         val itemAnimator = recyclerView.itemAnimator
-//          ^^^^^^^^^^^^ definition local1  val itemAnimator: [ERROR : Type for recyclerView.itemAnimator]
+//          ^^^^^^^^^^^^ definition local1 val itemAnimator: [ERROR : Type for recyclerView.itemAnimator]
 //                         ^^^^^^^^^^^^ reference local0
         if (checkItemAnimator && itemAnimator != null) {
 //          ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().(checkItemAnimator)
@@ -283,14 +283,14 @@ class EpoxyVisibilityTracker {
     }
 
     private fun processChangeEventWithDetachedView(detachedView: View?, debug: String) {
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEventWithDetachedView().  private final fun processChangeEventWithDetachedView(detachedView: [ERROR : View]?, debug: kotlin.String)
-//                                                 ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEventWithDetachedView().(detachedView)  value-parameter detachedView: [ERROR : View]?
-//                                                                      ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEventWithDetachedView().(debug)  value-parameter debug: kotlin.String
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEventWithDetachedView(). private final fun processChangeEventWithDetachedView(detachedView: [ERROR : View]?, debug: kotlin.String)
+//                                                 ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEventWithDetachedView().(detachedView) value-parameter detachedView: [ERROR : View]?
+//                                                                      ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEventWithDetachedView().(debug) value-parameter debug: kotlin.String
 //                                                                             ^^^^^^ reference kotlin/String#
 
         // Only if attached
         val recyclerView = attachedRecyclerView ?: return
-//          ^^^^^^^^^^^^ definition local2  val recyclerView: kotlin.Nothing
+//          ^^^^^^^^^^^^ definition local2 val recyclerView: kotlin.Nothing
 //                         ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView.
 //                         ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#getAttachedRecyclerView().
 //                         ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#setAttachedRecyclerView().
@@ -307,11 +307,11 @@ class EpoxyVisibilityTracker {
 
         // Process all attached children
         for (i in 0 until recyclerView.childCount) {
-//           ^ definition local3  val i: kotlin.Int
+//           ^ definition local3 val i: kotlin.Int
 //                  ^^^^^ reference kotlin/ranges/RangesKt#until(+6).
 //                        ^^^^^^^^^^^^ reference local2
             val child = recyclerView.getChildAt(i)
-//              ^^^^^ definition local4  val child: [ERROR : Type for recyclerView.getChildAt(i)]
+//              ^^^^^ definition local4 val child: [ERROR : Type for recyclerView.getChildAt(i)]
 //                      ^^^^^^^^^^^^ reference local2
 //                                              ^ reference local3
             if (child != null && child !== detachedView) {
@@ -333,12 +333,12 @@ class EpoxyVisibilityTracker {
      * clear the current visibility states
      */
     private fun processNewAdapterIfNecessary() {
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processNewAdapterIfNecessary().  private final fun processNewAdapterIfNecessary()
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processNewAdapterIfNecessary(). private final fun processNewAdapterIfNecessary()
         attachedRecyclerView?.adapter?.let { adapter ->
 //      ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView.
 //      ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#getAttachedRecyclerView().
 //      ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#setAttachedRecyclerView().
-//                                           ^^^^^^^ definition local5  value-parameter adapter: [ERROR : <Unknown lambda parameter type>]
+//                                           ^^^^^^^ definition local5 value-parameter adapter: [ERROR : <Unknown lambda parameter type>]
             if (lastAdapterSeen != adapter) {
 //              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#lastAdapterSeen.
 //              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#getLastAdapterSeen().
@@ -374,16 +374,16 @@ class EpoxyVisibilityTracker {
      * @param eventOriginForDebug a debug strings used for logs
      */
     private fun processChild(child: View, detachEvent: Boolean, eventOriginForDebug: String) {
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().  private final fun processChild(child: [ERROR : View], detachEvent: kotlin.Boolean, eventOriginForDebug: kotlin.String)
-//                           ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(child)  value-parameter child: [ERROR : View]
-//                                        ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(detachEvent)  value-parameter detachEvent: kotlin.Boolean
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(). private final fun processChild(child: [ERROR : View], detachEvent: kotlin.Boolean, eventOriginForDebug: kotlin.String)
+//                           ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(child) value-parameter child: [ERROR : View]
+//                                        ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(detachEvent) value-parameter detachEvent: kotlin.Boolean
 //                                                     ^^^^^^^ reference kotlin/Boolean#
-//                                                              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(eventOriginForDebug)  value-parameter eventOriginForDebug: kotlin.String
+//                                                              ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(eventOriginForDebug) value-parameter eventOriginForDebug: kotlin.String
 //                                                                                   ^^^^^^ reference kotlin/String#
 
         // Only if attached
         val recyclerView = attachedRecyclerView ?: return
-//          ^^^^^^^^^^^^ definition local6  val recyclerView: kotlin.Nothing
+//          ^^^^^^^^^^^^ definition local6 val recyclerView: kotlin.Nothing
 //                         ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView.
 //                         ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#getAttachedRecyclerView().
 //                         ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#setAttachedRecyclerView().
@@ -391,19 +391,19 @@ class EpoxyVisibilityTracker {
         // Preemptive check for child's parent validity to prevent `IllegalArgumentException` in
         // `getChildViewHolder`.
         val isParentValid = child.parent == null || child.parent === recyclerView
-//          ^^^^^^^^^^^^^ definition local7  val isParentValid: kotlin.Boolean
+//          ^^^^^^^^^^^^^ definition local7 val isParentValid: kotlin.Boolean
 //                          ^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(child)
 //                                                  ^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(child)
 //                                                                   ^^^^^^^^^^^^ reference local6
         val viewHolder = if (isParentValid) recyclerView.getChildViewHolder(child) else null
-//          ^^^^^^^^^^ definition local8  val viewHolder: kotlin.Nothing?
+//          ^^^^^^^^^^ definition local8 val viewHolder: kotlin.Nothing?
 //                           ^^^^^^^^^^^^^ reference local7
 //                                          ^^^^^^^^^^^^ reference local6
 //                                                                          ^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(child)
         if (viewHolder is EpoxyViewHolder) {
 //          ^^^^^^^^^^ reference local8
             val epoxyHolder = viewHolder.holder
-//              ^^^^^^^^^^^ definition local9  val epoxyHolder: [ERROR : Type for viewHolder.holder]
+//              ^^^^^^^^^^^ definition local9 val epoxyHolder: [ERROR : Type for viewHolder.holder]
 //                            ^^^^^^^^^^ reference local8
             processChild(recyclerView, child, detachEvent, eventOriginForDebug, viewHolder)
 //          ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).
@@ -435,22 +435,22 @@ class EpoxyVisibilityTracker {
      * @param eventOriginForDebug a debug strings used for logs
      */
     private fun processModelGroupChildren(
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().  private final fun processModelGroupChildren(recyclerView: [ERROR : RecyclerView], epoxyHolder: com.airbnb.epoxy.ModelGroupHolder, detachEvent: kotlin.Boolean, eventOriginForDebug: kotlin.String)
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren(). private final fun processModelGroupChildren(recyclerView: [ERROR : RecyclerView], epoxyHolder: com.airbnb.epoxy.ModelGroupHolder, detachEvent: kotlin.Boolean, eventOriginForDebug: kotlin.String)
         recyclerView: RecyclerView,
-//      ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(recyclerView)  value-parameter recyclerView: [ERROR : RecyclerView]
+//      ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(recyclerView) value-parameter recyclerView: [ERROR : RecyclerView]
         epoxyHolder: ModelGroupHolder,
-//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(epoxyHolder)  value-parameter epoxyHolder: com.airbnb.epoxy.ModelGroupHolder
+//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(epoxyHolder) value-parameter epoxyHolder: com.airbnb.epoxy.ModelGroupHolder
 //                   ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelGroupHolder#
         detachEvent: Boolean,
-//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(detachEvent)  value-parameter detachEvent: kotlin.Boolean
+//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(detachEvent) value-parameter detachEvent: kotlin.Boolean
 //                   ^^^^^^^ reference kotlin/Boolean#
         eventOriginForDebug: String
-//      ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(eventOriginForDebug)  value-parameter eventOriginForDebug: kotlin.String
+//      ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(eventOriginForDebug) value-parameter eventOriginForDebug: kotlin.String
 //                           ^^^^^^ reference kotlin/String#
     ) {
         // Iterate through models in the group and process each of them instead of the group
         for (groupChildHolder in epoxyHolder.viewHolders) {
-//           ^^^^^^^^^^^^^^^^ definition local10  val groupChildHolder: [ERROR : <ERROR FUNCTION RETURN TYPE>]
+//           ^^^^^^^^^^^^^^^^ definition local10 val groupChildHolder: [ERROR : <ERROR FUNCTION RETURN TYPE>]
 //                               ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(epoxyHolder)
 //                                           ^^^^^^^^^^^ reference com/airbnb/epoxy/ModelGroupHolder#viewHolders.
 //                                           ^^^^^^^^^^^ reference com/airbnb/epoxy/ModelGroupHolder#getViewHolders().
@@ -496,22 +496,22 @@ class EpoxyVisibilityTracker {
      * @param viewHolder          the view holder for the child view
      */
     private fun processChild(
-//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).  private final fun processChild(recyclerView: [ERROR : RecyclerView], child: [ERROR : View], detachEvent: kotlin.Boolean, eventOriginForDebug: kotlin.String, viewHolder: [ERROR : EpoxyViewHolder])
+//              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1). private final fun processChild(recyclerView: [ERROR : RecyclerView], child: [ERROR : View], detachEvent: kotlin.Boolean, eventOriginForDebug: kotlin.String, viewHolder: [ERROR : EpoxyViewHolder])
         recyclerView: RecyclerView,
-//      ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(recyclerView)  value-parameter recyclerView: [ERROR : RecyclerView]
+//      ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(recyclerView) value-parameter recyclerView: [ERROR : RecyclerView]
         child: View,
-//      ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(child)  value-parameter child: [ERROR : View]
+//      ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(child) value-parameter child: [ERROR : View]
         detachEvent: Boolean,
-//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(detachEvent)  value-parameter detachEvent: kotlin.Boolean
+//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(detachEvent) value-parameter detachEvent: kotlin.Boolean
 //                   ^^^^^^^ reference kotlin/Boolean#
         eventOriginForDebug: String,
-//      ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(eventOriginForDebug)  value-parameter eventOriginForDebug: kotlin.String
+//      ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(eventOriginForDebug) value-parameter eventOriginForDebug: kotlin.String
 //                           ^^^^^^ reference kotlin/String#
         viewHolder: EpoxyViewHolder
-//      ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(viewHolder)  value-parameter viewHolder: [ERROR : EpoxyViewHolder]
+//      ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(viewHolder) value-parameter viewHolder: [ERROR : EpoxyViewHolder]
     ) {
         val changed = processVisibilityEvents(
-//          ^^^^^^^ definition local11  val changed: kotlin.Boolean
+//          ^^^^^^^ definition local11 val changed: kotlin.Boolean
 //                    ^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().
             recyclerView,
 //          ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(recyclerView)
@@ -545,16 +545,16 @@ class EpoxyVisibilityTracker {
      * @return true if changed
      */
     private fun processVisibilityEvents(
-//              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().  private final fun processVisibilityEvents(recyclerView: [ERROR : RecyclerView], epoxyHolder: [ERROR : EpoxyViewHolder], detachEvent: kotlin.Boolean, eventOriginForDebug: kotlin.String): kotlin.Boolean
+//              ^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents(). private final fun processVisibilityEvents(recyclerView: [ERROR : RecyclerView], epoxyHolder: [ERROR : EpoxyViewHolder], detachEvent: kotlin.Boolean, eventOriginForDebug: kotlin.String): kotlin.Boolean
         recyclerView: RecyclerView,
-//      ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(recyclerView)  value-parameter recyclerView: [ERROR : RecyclerView]
+//      ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(recyclerView) value-parameter recyclerView: [ERROR : RecyclerView]
         epoxyHolder: EpoxyViewHolder,
-//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(epoxyHolder)  value-parameter epoxyHolder: [ERROR : EpoxyViewHolder]
+//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(epoxyHolder) value-parameter epoxyHolder: [ERROR : EpoxyViewHolder]
         detachEvent: Boolean,
-//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(detachEvent)  value-parameter detachEvent: kotlin.Boolean
+//      ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(detachEvent) value-parameter detachEvent: kotlin.Boolean
 //                   ^^^^^^^ reference kotlin/Boolean#
         eventOriginForDebug: String
-//      ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(eventOriginForDebug)  value-parameter eventOriginForDebug: kotlin.String
+//      ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(eventOriginForDebug) value-parameter eventOriginForDebug: kotlin.String
 //                           ^^^^^^ reference kotlin/String#
     ): Boolean {
 //     ^^^^^^^ reference kotlin/Boolean#
@@ -579,15 +579,15 @@ class EpoxyVisibilityTracker {
             )
         }
         val itemView = epoxyHolder.itemView
-//          ^^^^^^^^ definition local12  val itemView: [ERROR : <ERROR PROPERTY TYPE>]
+//          ^^^^^^^^ definition local12 val itemView: [ERROR : <ERROR PROPERTY TYPE>]
 //                     ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(epoxyHolder)
         val id = System.identityHashCode(itemView)
-//          ^^ definition local13  val id: kotlin.Int
+//          ^^ definition local13 val id: kotlin.Int
 //               ^^^^^^ reference java/lang/System#
 //                      ^^^^^^^^^^^^^^^^ reference java/lang/System#identityHashCode().
 //                                       ^^^^^^^^ reference local12
         var vi = visibilityIdToItemMap[id]
-//          ^^ definition local14  var vi: [ERROR : <ERROR FUNCTION RETURN TYPE>]
+//          ^^ definition local14 var vi: [ERROR : <ERROR FUNCTION RETURN TYPE>]
 //               ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
 //               ^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItemMap().
 //                                     ^^ reference local13
@@ -620,7 +620,7 @@ class EpoxyVisibilityTracker {
 //                   ^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(epoxyHolder)
         }
         var changed = false
-//          ^^^^^^^ definition local15  var changed: kotlin.Boolean
+//          ^^^^^^^ definition local15 var changed: kotlin.Boolean
         if (vi.update(itemView, recyclerView, detachEvent)) {
 //          ^^ reference local14
 //                    ^^^^^^^^ reference local12
@@ -636,7 +636,7 @@ class EpoxyVisibilityTracker {
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#getPartialImpressionThresholdPercentage().
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#setPartialImpressionThresholdPercentage().
 //                                                ^^^ reference kotlin/StandardKt#let().
-//                                                      ^^^^^^^^^^ definition local16  value-parameter percentage: kotlin.Int
+//                                                      ^^^^^^^^^^ definition local16 value-parameter percentage: kotlin.Int
                 vi.handlePartialImpressionVisible(
 //              ^^ reference local14
                     epoxyHolder, detachEvent,
@@ -667,17 +667,17 @@ class EpoxyVisibilityTracker {
     }
 
     private fun processChildRecyclerViewAttached(childRecyclerView: RecyclerView) {
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewAttached().  private final fun processChildRecyclerViewAttached(childRecyclerView: [ERROR : RecyclerView])
-//                                               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewAttached().(childRecyclerView)  value-parameter childRecyclerView: [ERROR : RecyclerView]
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewAttached(). private final fun processChildRecyclerViewAttached(childRecyclerView: [ERROR : RecyclerView])
+//                                               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewAttached().(childRecyclerView) value-parameter childRecyclerView: [ERROR : RecyclerView]
         // Register itself in the EpoxyVisibilityTracker. This will take care of nested list
         // tracking (ex: carousel)
         val tracker = getTracker(childRecyclerView) ?: EpoxyVisibilityTracker().let { nested ->
-//          ^^^^^^^ definition local17  val tracker: com.airbnb.epoxy.EpoxyVisibilityTracker
+//          ^^^^^^^ definition local17 val tracker: com.airbnb.epoxy.EpoxyVisibilityTracker
 //                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTracker().
 //                               ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewAttached().(childRecyclerView)
 //                                                     ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#`<init>`().
 //                                                                              ^^^ reference kotlin/StandardKt#let().
-//                                                                                    ^^^^^^ definition local18  value-parameter nested: com.airbnb.epoxy.EpoxyVisibilityTracker
+//                                                                                    ^^^^^^ definition local18 value-parameter nested: com.airbnb.epoxy.EpoxyVisibilityTracker
             nested.partialImpressionThresholdPercentage = partialImpressionThresholdPercentage
 //          ^^^^^^ reference local18
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#partialImpressionThresholdPercentage.
@@ -701,8 +701,8 @@ class EpoxyVisibilityTracker {
     }
 
     private fun processChildRecyclerViewDetached(childRecyclerView: RecyclerView) {
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewDetached().  private final fun processChildRecyclerViewDetached(childRecyclerView: [ERROR : RecyclerView])
-//                                               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewDetached().(childRecyclerView)  value-parameter childRecyclerView: [ERROR : RecyclerView]
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewDetached(). private final fun processChildRecyclerViewDetached(childRecyclerView: [ERROR : RecyclerView])
+//                                               ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewDetached().(childRecyclerView) value-parameter childRecyclerView: [ERROR : RecyclerView]
         nestedTrackers.remove(childRecyclerView)
 //      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#nestedTrackers.
 //      ^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#getNestedTrackers().
@@ -715,38 +715,38 @@ class EpoxyVisibilityTracker {
      * implementations
      */
     private inner class Listener :
-//                      ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#  private final inner class Listener
-//                      ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#`<init>`().  public constructor Listener()
+//                      ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener# private final inner class Listener
+//                      ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#`<init>`(). public constructor Listener()
         RecyclerView.OnScrollListener(),
         View.OnLayoutChangeListener,
         RecyclerView.OnChildAttachStateChangeListener {
         override fun onLayoutChange(
-//                   ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().  public open fun onLayoutChange(recyclerView: [ERROR : View], left: kotlin.Int, top: kotlin.Int, right: kotlin.Int, bottom: kotlin.Int, oldLeft: kotlin.Int, oldTop: kotlin.Int, oldRight: kotlin.Int, oldBottom: kotlin.Int)
+//                   ^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange(). public open fun onLayoutChange(recyclerView: [ERROR : View], left: kotlin.Int, top: kotlin.Int, right: kotlin.Int, bottom: kotlin.Int, oldLeft: kotlin.Int, oldTop: kotlin.Int, oldRight: kotlin.Int, oldBottom: kotlin.Int)
             recyclerView: View,
-//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(recyclerView)  value-parameter recyclerView: [ERROR : View]
+//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(recyclerView) value-parameter recyclerView: [ERROR : View]
             left: Int,
-//          ^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(left)  value-parameter left: kotlin.Int
+//          ^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(left) value-parameter left: kotlin.Int
 //                ^^^ reference kotlin/Int#
             top: Int,
-//          ^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(top)  value-parameter top: kotlin.Int
+//          ^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(top) value-parameter top: kotlin.Int
 //               ^^^ reference kotlin/Int#
             right: Int,
-//          ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(right)  value-parameter right: kotlin.Int
+//          ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(right) value-parameter right: kotlin.Int
 //                 ^^^ reference kotlin/Int#
             bottom: Int,
-//          ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(bottom)  value-parameter bottom: kotlin.Int
+//          ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(bottom) value-parameter bottom: kotlin.Int
 //                  ^^^ reference kotlin/Int#
             oldLeft: Int,
-//          ^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(oldLeft)  value-parameter oldLeft: kotlin.Int
+//          ^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(oldLeft) value-parameter oldLeft: kotlin.Int
 //                   ^^^ reference kotlin/Int#
             oldTop: Int,
-//          ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(oldTop)  value-parameter oldTop: kotlin.Int
+//          ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(oldTop) value-parameter oldTop: kotlin.Int
 //                  ^^^ reference kotlin/Int#
             oldRight: Int,
-//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(oldRight)  value-parameter oldRight: kotlin.Int
+//          ^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(oldRight) value-parameter oldRight: kotlin.Int
 //                    ^^^ reference kotlin/Int#
             oldBottom: Int
-//          ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(oldBottom)  value-parameter oldBottom: kotlin.Int
+//          ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(oldBottom) value-parameter oldBottom: kotlin.Int
 //                     ^^^ reference kotlin/Int#
         ) {
             processChangeEvent("onLayoutChange")
@@ -754,19 +754,19 @@ class EpoxyVisibilityTracker {
         }
 
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                   ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onScrolled().  public open fun onScrolled(recyclerView: [ERROR : RecyclerView], dx: kotlin.Int, dy: kotlin.Int)
-//                              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onScrolled().(recyclerView)  value-parameter recyclerView: [ERROR : RecyclerView]
-//                                                          ^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onScrolled().(dx)  value-parameter dx: kotlin.Int
+//                   ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onScrolled(). public open fun onScrolled(recyclerView: [ERROR : RecyclerView], dx: kotlin.Int, dy: kotlin.Int)
+//                              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onScrolled().(recyclerView) value-parameter recyclerView: [ERROR : RecyclerView]
+//                                                          ^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onScrolled().(dx) value-parameter dx: kotlin.Int
 //                                                              ^^^ reference kotlin/Int#
-//                                                                   ^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onScrolled().(dy)  value-parameter dy: kotlin.Int
+//                                                                   ^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onScrolled().(dy) value-parameter dy: kotlin.Int
 //                                                                       ^^^ reference kotlin/Int#
             processChangeEvent("onScrolled")
 //          ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().
         }
 
         override fun onChildViewAttachedToWindow(child: View) {
-//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewAttachedToWindow().  public open fun onChildViewAttachedToWindow(child: [ERROR : View])
-//                                               ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewAttachedToWindow().(child)  value-parameter child: [ERROR : View]
+//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewAttachedToWindow(). public open fun onChildViewAttachedToWindow(child: [ERROR : View])
+//                                               ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewAttachedToWindow().(child) value-parameter child: [ERROR : View]
             if (child is RecyclerView) {
 //              ^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewAttachedToWindow().(child)
                 processChildRecyclerViewAttached(child)
@@ -779,8 +779,8 @@ class EpoxyVisibilityTracker {
         }
 
         override fun onChildViewDetachedFromWindow(child: View) {
-//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewDetachedFromWindow().  public open fun onChildViewDetachedFromWindow(child: [ERROR : View])
-//                                                 ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewDetachedFromWindow().(child)  value-parameter child: [ERROR : View]
+//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewDetachedFromWindow(). public open fun onChildViewDetachedFromWindow(child: [ERROR : View])
+//                                                 ^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewDetachedFromWindow().(child) value-parameter child: [ERROR : View]
             if (child is RecyclerView) {
 //              ^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewDetachedFromWindow().(child)
                 processChildRecyclerViewDetached(child)
@@ -813,13 +813,13 @@ class EpoxyVisibilityTracker {
      * need to look at the data events from the adapter.
      */
     internal inner class DataObserver : RecyclerView.AdapterDataObserver() {
-//                       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#  internal final inner class DataObserver
-//                       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#`<init>`().  public constructor DataObserver()
+//                       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver# internal final inner class DataObserver
+//                       ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#`<init>`(). public constructor DataObserver()
         /**
          * Clear the current visibility statues
          */
         override fun onChanged() {
-//                   ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onChanged().  public open fun onChanged()
+//                   ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onChanged(). public open fun onChanged()
             if (notEpoxyManaged(attachedRecyclerView)) {
 //              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#notEpoxyManaged().
 //                              ^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView.
@@ -852,10 +852,10 @@ class EpoxyVisibilityTracker {
          * position by inserted item count.
          */
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-//                   ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeInserted().  public open fun onItemRangeInserted(positionStart: kotlin.Int, itemCount: kotlin.Int)
-//                                       ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeInserted().(positionStart)  value-parameter positionStart: kotlin.Int
+//                   ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeInserted(). public open fun onItemRangeInserted(positionStart: kotlin.Int, itemCount: kotlin.Int)
+//                                       ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeInserted().(positionStart) value-parameter positionStart: kotlin.Int
 //                                                      ^^^ reference kotlin/Int#
-//                                                           ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeInserted().(itemCount)  value-parameter itemCount: kotlin.Int
+//                                                           ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeInserted().(itemCount) value-parameter itemCount: kotlin.Int
 //                                                                      ^^^ reference kotlin/Int#
             if (notEpoxyManaged(attachedRecyclerView)) {
 //              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#notEpoxyManaged().
@@ -874,7 +874,7 @@ class EpoxyVisibilityTracker {
 //                                                               ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeInserted().(itemCount)
             }
             for (item in visibilityIdToItems) {
-//               ^^^^ definition local19  val item: com.airbnb.epoxy.EpoxyVisibilityItem
+//               ^^^^ definition local19 val item: com.airbnb.epoxy.EpoxyVisibilityItem
 //                       ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
 //                       ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
                 if (item.adapterPosition >= positionStart) {
@@ -899,10 +899,10 @@ class EpoxyVisibilityTracker {
          * adapter position by removed item count
          */
         override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-//                   ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeRemoved().  public open fun onItemRangeRemoved(positionStart: kotlin.Int, itemCount: kotlin.Int)
-//                                      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeRemoved().(positionStart)  value-parameter positionStart: kotlin.Int
+//                   ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeRemoved(). public open fun onItemRangeRemoved(positionStart: kotlin.Int, itemCount: kotlin.Int)
+//                                      ^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeRemoved().(positionStart) value-parameter positionStart: kotlin.Int
 //                                                     ^^^ reference kotlin/Int#
-//                                                          ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeRemoved().(itemCount)  value-parameter itemCount: kotlin.Int
+//                                                          ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeRemoved().(itemCount) value-parameter itemCount: kotlin.Int
 //                                                                     ^^^ reference kotlin/Int#
             if (notEpoxyManaged(attachedRecyclerView)) {
 //              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#notEpoxyManaged().
@@ -921,7 +921,7 @@ class EpoxyVisibilityTracker {
 //                                                              ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeRemoved().(itemCount)
             }
             for (item in visibilityIdToItems) {
-//               ^^^^ definition local20  val item: com.airbnb.epoxy.EpoxyVisibilityItem
+//               ^^^^ definition local20 val item: com.airbnb.epoxy.EpoxyVisibilityItem
 //                       ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
 //                       ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
                 if (item.adapterPosition >= positionStart) {
@@ -950,12 +950,12 @@ class EpoxyVisibilityTracker {
          * does not seem to use range for moved items.
          */
         override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
-//                   ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved().  public open fun onItemRangeMoved(fromPosition: kotlin.Int, toPosition: kotlin.Int, itemCount: kotlin.Int)
-//                                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved().(fromPosition)  value-parameter fromPosition: kotlin.Int
+//                   ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved(). public open fun onItemRangeMoved(fromPosition: kotlin.Int, toPosition: kotlin.Int, itemCount: kotlin.Int)
+//                                    ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved().(fromPosition) value-parameter fromPosition: kotlin.Int
 //                                                  ^^^ reference kotlin/Int#
-//                                                       ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved().(toPosition)  value-parameter toPosition: kotlin.Int
+//                                                       ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved().(toPosition) value-parameter toPosition: kotlin.Int
 //                                                                   ^^^ reference kotlin/Int#
-//                                                                        ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved().(itemCount)  value-parameter itemCount: kotlin.Int
+//                                                                        ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved().(itemCount) value-parameter itemCount: kotlin.Int
 //                                                                                   ^^^ reference kotlin/Int#
             if (notEpoxyManaged(attachedRecyclerView)) {
 //              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#notEpoxyManaged().
@@ -965,7 +965,7 @@ class EpoxyVisibilityTracker {
                 return
             }
             for (i in 0 until itemCount) {
-//               ^ definition local21  val i: kotlin.Int
+//               ^ definition local21 val i: kotlin.Int
 //                      ^^^^^ reference kotlin/ranges/RangesKt#until(+6).
 //                            ^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved().(itemCount)
                 onItemMoved(fromPosition + i, toPosition + i)
@@ -980,10 +980,10 @@ class EpoxyVisibilityTracker {
         }
 
         private fun onItemMoved(fromPosition: Int, toPosition: Int) {
-//                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemMoved().  private final fun onItemMoved(fromPosition: kotlin.Int, toPosition: kotlin.Int)
-//                              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemMoved().(fromPosition)  value-parameter fromPosition: kotlin.Int
+//                  ^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemMoved(). private final fun onItemMoved(fromPosition: kotlin.Int, toPosition: kotlin.Int)
+//                              ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemMoved().(fromPosition) value-parameter fromPosition: kotlin.Int
 //                                            ^^^ reference kotlin/Int#
-//                                                 ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemMoved().(toPosition)  value-parameter toPosition: kotlin.Int
+//                                                 ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemMoved().(toPosition) value-parameter toPosition: kotlin.Int
 //                                                             ^^^ reference kotlin/Int#
             if (notEpoxyManaged(attachedRecyclerView)) {
 //              ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#notEpoxyManaged().
@@ -1002,11 +1002,11 @@ class EpoxyVisibilityTracker {
 //                                                           ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemMoved().(fromPosition)
             }
             for (item in visibilityIdToItems) {
-//               ^^^^ definition local22  val item: com.airbnb.epoxy.EpoxyVisibilityItem
+//               ^^^^ definition local22 val item: com.airbnb.epoxy.EpoxyVisibilityItem
 //                       ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
 //                       ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
                 val position = item.adapterPosition
-//                  ^^^^^^^^ definition local23  val position: [ERROR : <ERROR PROPERTY TYPE>]
+//                  ^^^^^^^^ definition local23 val position: [ERROR : <ERROR PROPERTY TYPE>]
 //                             ^^^^ reference local22
 //                                  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#adapterPosition.
 //                                  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityItem#getAdapterPosition().
@@ -1075,8 +1075,8 @@ class EpoxyVisibilityTracker {
          * @return true if managed by an [BaseEpoxyAdapter]
          */
         private fun notEpoxyManaged(recyclerView: RecyclerView?): Boolean {
-//                  ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#notEpoxyManaged().  private final fun notEpoxyManaged(recyclerView: [ERROR : RecyclerView]?): kotlin.Boolean
-//                                  ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#notEpoxyManaged().(recyclerView)  value-parameter recyclerView: [ERROR : RecyclerView]?
+//                  ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#notEpoxyManaged(). private final fun notEpoxyManaged(recyclerView: [ERROR : RecyclerView]?): kotlin.Boolean
+//                                  ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#notEpoxyManaged().(recyclerView) value-parameter recyclerView: [ERROR : RecyclerView]?
 //                                                                ^^^^^^^ reference kotlin/Boolean#
             return recyclerView == null || recyclerView.adapter !is BaseEpoxyAdapter
 //                 ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#notEpoxyManaged().(recyclerView)
@@ -1085,24 +1085,24 @@ class EpoxyVisibilityTracker {
     }
 
     companion object {
-//            ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#  public companion object
+//            ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion# public companion object
         private const val TAG = "EpoxyVisibilityTracker"
-//                        ^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#TAG.  private const final val TAG: kotlin.String
-//                        ^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTAG().  private const final val TAG: kotlin.String
+//                        ^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#TAG. private const final val TAG: kotlin.String
+//                        ^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTAG(). private const final val TAG: kotlin.String
 
         @IdRes
 //       ^^^^^ reference androidx/annotation/IdRes#`<init>`().
         private val TAG_ID = R.id.epoxy_visibility_tracker
-//                  ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#TAG_ID.  private final val TAG_ID: [ERROR : <ERROR PROPERTY TYPE>]
-//                  ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTAG_ID().  private final val TAG_ID: [ERROR : <ERROR PROPERTY TYPE>]
+//                  ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#TAG_ID. private final val TAG_ID: [ERROR : <ERROR PROPERTY TYPE>]
+//                  ^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTAG_ID(). private final val TAG_ID: [ERROR : <ERROR PROPERTY TYPE>]
 
         /**
          * @param recyclerView the view.
          * @return the tracker for the given [RecyclerView]. Null if no tracker was attached.
          */
         private fun getTracker(recyclerView: RecyclerView): EpoxyVisibilityTracker? {
-//                  ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTracker().  private final fun getTracker(recyclerView: [ERROR : RecyclerView]): com.airbnb.epoxy.EpoxyVisibilityTracker?
-//                             ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTracker().(recyclerView)  value-parameter recyclerView: [ERROR : RecyclerView]
+//                  ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTracker(). private final fun getTracker(recyclerView: [ERROR : RecyclerView]): com.airbnb.epoxy.EpoxyVisibilityTracker?
+//                             ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTracker().(recyclerView) value-parameter recyclerView: [ERROR : RecyclerView]
 //                                                          ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#
             return recyclerView.getTag(TAG_ID) as EpoxyVisibilityTracker?
 //                 ^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTracker().(recyclerView)
@@ -1117,11 +1117,11 @@ class EpoxyVisibilityTracker {
          * @param tracker the tracker
          */
         private fun setTracker(
-//                  ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#setTracker().  private final fun setTracker(recyclerView: [ERROR : RecyclerView], tracker: com.airbnb.epoxy.EpoxyVisibilityTracker?)
+//                  ^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#setTracker(). private final fun setTracker(recyclerView: [ERROR : RecyclerView], tracker: com.airbnb.epoxy.EpoxyVisibilityTracker?)
             recyclerView: RecyclerView,
-//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#setTracker().(recyclerView)  value-parameter recyclerView: [ERROR : RecyclerView]
+//          ^^^^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#setTracker().(recyclerView) value-parameter recyclerView: [ERROR : RecyclerView]
             tracker: EpoxyVisibilityTracker?
-//          ^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#setTracker().(tracker)  value-parameter tracker: com.airbnb.epoxy.EpoxyVisibilityTracker?
+//          ^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#setTracker().(tracker) value-parameter tracker: com.airbnb.epoxy.EpoxyVisibilityTracker?
 //                   ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyVisibilityTracker#
         ) {
             recyclerView.setTag(TAG_ID, tracker)
@@ -1133,7 +1133,7 @@ class EpoxyVisibilityTracker {
 
         // Not actionable at runtime. It is only useful for internal test-troubleshooting.
         const val DEBUG_LOG = false
-//                ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#DEBUG_LOG.  public const final val DEBUG_LOG: kotlin.Boolean
-//                ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getDEBUG_LOG().  public const final val DEBUG_LOG: kotlin.Boolean
+//                ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#DEBUG_LOG. public const final val DEBUG_LOG: kotlin.Boolean
+//                ^^^^^^^^^ definition com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getDEBUG_LOG(). public const final val DEBUG_LOG: kotlin.Boolean
     }
 }
