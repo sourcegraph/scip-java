@@ -59,7 +59,9 @@ object ScipPrinters {
         val occurrences = occurrencesByLine
           .getOrElse(i, Nil)
           .toSeq
-          .sortBy(o => o.getRangeList.asScala.toList.map(_.toInt))
+          .sortBy(o =>
+            (o.getRangeList.asScala.toList.map(_.toInt), o.getSymbol)
+          )
         occurrences.foreach { occ =>
           formatOccurrence(input, out, occ, line, symtab, commentSyntax)
           if ((occ.getSymbolRoles & SymbolRole.Definition_VALUE) > 0) {

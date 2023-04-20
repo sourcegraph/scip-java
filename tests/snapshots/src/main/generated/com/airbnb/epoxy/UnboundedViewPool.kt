@@ -30,9 +30,9 @@ internal class UnboundedViewPool : RecycledViewPool() {
 //                               documentation ```kt\npublic constructor UnboundedViewPool()\n```\n\n----\n\n\n Like its parent, UnboundedViewPool lets you share Views between multiple RecyclerViews. However\n there is no maximum number of recycled views that it will store. This usually ends up being\n optimal, barring any hard memory constraints, as RecyclerViews do not recycle more Views than\n they need.\n
 
     private val scrapHeaps = SparseArray<Queue<ViewHolder>>()
-//              ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
-//                         documentation ```kt\nprivate final val scrapHeaps: [ERROR : Type for SparseArray<Queue<ViewHolder>>()]\n```
 //              ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps().
+//                         documentation ```kt\nprivate final val scrapHeaps: [ERROR : Type for SparseArray<Queue<ViewHolder>>()]\n```
+//              ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //                         documentation ```kt\nprivate final val scrapHeaps: [ERROR : Type for SparseArray<Queue<ViewHolder>>()]\n```
 //                                       ^^^^^ reference semanticdb maven jdk 11 java/util/Queue#
 
@@ -40,8 +40,8 @@ internal class UnboundedViewPool : RecycledViewPool() {
 //               ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#clear().
 //                     documentation ```kt\npublic open fun clear()\n```
         scrapHeaps.clear()
-//      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps().
+//      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
     }
 
     override fun setMaxRecycledViews(viewType: Int, max: Int) {
@@ -68,8 +68,8 @@ internal class UnboundedViewPool : RecycledViewPool() {
         val scrapHeap = scrapHeaps.get(viewType)
 //          ^^^^^^^^^ definition local 0
 //                    documentation ```kt\nval scrapHeap: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
-//                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps().
+//                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //                                     ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getRecycledView().(viewType)
         return scrapHeap?.poll()
 //             ^^^^^^^^^ reference local 0
@@ -95,8 +95,8 @@ internal class UnboundedViewPool : RecycledViewPool() {
 //                                              ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                    ^^^ reference semanticdb maven . . kotlin/Int#
         return scrapHeaps.get(viewType)?.size ?: 0
-//             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps().
+//             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //                            ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getRecycledViewCount().(viewType)
     }
 
@@ -111,8 +111,8 @@ internal class UnboundedViewPool : RecycledViewPool() {
 //          ^^^^^^^^^ definition local 1
 //                    documentation ```kt\nvar scrapHeap: java.util.Queue<[ERROR : ViewHolder]>?\n```
 //                     ^^^^^ reference semanticdb maven jdk 11 java/util/Queue#
-//                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps().
+//                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //                                                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeapForType().(viewType)
         if (scrapHeap == null) {
 //          ^^^^^^^^^ reference local 1
@@ -121,8 +121,8 @@ internal class UnboundedViewPool : RecycledViewPool() {
 //          ^^^^^^^^^ reference local 1
 //                      ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/LinkedList#`<init>`().
             scrapHeaps.put(viewType, scrapHeap)
-//          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps().
+//          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeapForType().(viewType)
 //                                   ^^^^^^^^^ reference local 1
         }

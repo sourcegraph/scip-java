@@ -5,8 +5,8 @@ import upickle.core.{ObjArrVisitor, Visitor}
 //     ^^^^^^^ reference semanticdb maven . . upickle/
 //             ^^^^ reference semanticdb maven . . upickle/core/
 //                   ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
-//                                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
 //                                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
 
 /**
  * Basic in-memory string parsing.
@@ -28,10 +28,10 @@ private[ujson] final class StringParser[J](s: String) extends CharParser[J]{
 //                                        documentation ```scala\nJ\n```
 //                                        ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#`<init>`().
 //                                          documentation ```scala\ndef this(s: String)\n```
-//                                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#s.
-//                                           documentation ```scala\nprivate[this] val s: String\n```
 //                                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#`<init>`().(s)
 //                                           documentation ```scala\ns: String \n```
+//                                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#s.
+//                                           documentation ```scala\nprivate[this] val s: String\n```
 //                                            ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
 //                                                            ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#
 //                                                                       ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#[J]

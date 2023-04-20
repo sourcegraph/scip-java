@@ -68,12 +68,12 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //                                                     ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`().
 //                                                                 documentation ```kt\nprivate constructor EpoxyPreloader<P : com.airbnb.epoxy.preload.PreloadRequestHolder>(adapter: [ERROR : BaseEpoxyAdapter], preloadTargetFactory: () -> P, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, maxItemsToPreload: kotlin.Int, modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>)\n```
     private val adapter: BaseEpoxyAdapter,
+//              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`().(adapter)
+//                      documentation ```kt\nvalue-parameter adapter: [ERROR : BaseEpoxyAdapter]\n```
 //              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#adapter.
 //                      documentation ```kt\nprivate final val adapter: [ERROR : BaseEpoxyAdapter]\n```
 //              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getAdapter().
 //                      documentation ```kt\nprivate final val adapter: [ERROR : BaseEpoxyAdapter]\n```
-//              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`().(adapter)
-//                      documentation ```kt\nvalue-parameter adapter: [ERROR : BaseEpoxyAdapter]\n```
     preloadTargetFactory: () -> P,
 //  ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`().(preloadTargetFactory)
 //                       documentation ```kt\nvalue-parameter preloadTargetFactory: () -> P\n```
@@ -83,12 +83,12 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //               documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //                ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
     private val maxItemsToPreload: Int,
-//              ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#maxItemsToPreload.
-//                                documentation ```kt\nprivate final val maxItemsToPreload: kotlin.Int\n```
-//              ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getMaxItemsToPreload().
-//                                documentation ```kt\nprivate final val maxItemsToPreload: kotlin.Int\n```
 //              ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`().(maxItemsToPreload)
 //                                documentation ```kt\nvalue-parameter maxItemsToPreload: kotlin.Int\n```
+//              ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getMaxItemsToPreload().
+//                                documentation ```kt\nprivate final val maxItemsToPreload: kotlin.Int\n```
+//              ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#maxItemsToPreload.
+//                                documentation ```kt\nprivate final val maxItemsToPreload: kotlin.Int\n```
 //                                 ^^^ reference semanticdb maven . . kotlin/Int#
     modelPreloaders: List<EpoxyModelPreloader<*, *, out P>>
 //  ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`().(modelPreloaders)
@@ -99,9 +99,9 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 ) : RecyclerView.OnScrollListener() {
 
     private var lastVisibleRange: IntRange = IntRange.EMPTY
-//              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastVisibleRange.
-//                               documentation ```kt\nprivate final var lastVisibleRange: kotlin.ranges.IntRange\n```
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getLastVisibleRange().
+//                               documentation ```kt\nprivate final var lastVisibleRange: kotlin.ranges.IntRange\n```
+//              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastVisibleRange.
 //                               documentation ```kt\nprivate final var lastVisibleRange: kotlin.ranges.IntRange\n```
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setLastVisibleRange().
 //                               documentation ```kt\nprivate final var lastVisibleRange: kotlin.ranges.IntRange\n```
@@ -110,9 +110,9 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //                                                    ^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#Companion#EMPTY.
 //                                                    ^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#Companion#getEMPTY().
     private var lastPreloadRange: IntProgression = IntRange.EMPTY
-//              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastPreloadRange.
-//                               documentation ```kt\nprivate final var lastPreloadRange: kotlin.ranges.IntProgression\n```
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getLastPreloadRange().
+//                               documentation ```kt\nprivate final var lastPreloadRange: kotlin.ranges.IntProgression\n```
+//              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastPreloadRange.
 //                               documentation ```kt\nprivate final var lastPreloadRange: kotlin.ranges.IntProgression\n```
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setLastPreloadRange().
 //                               documentation ```kt\nprivate final var lastPreloadRange: kotlin.ranges.IntProgression\n```
@@ -121,26 +121,26 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //                                                          ^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#Companion#EMPTY.
 //                                                          ^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#Companion#getEMPTY().
     private var totalItemCount = -1
-//              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#totalItemCount.
-//                             documentation ```kt\nprivate final var totalItemCount: kotlin.Int\n```
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getTotalItemCount().
 //                             documentation ```kt\nprivate final var totalItemCount: kotlin.Int\n```
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setTotalItemCount().
 //                             documentation ```kt\nprivate final var totalItemCount: kotlin.Int\n```
+//              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#totalItemCount.
+//                             documentation ```kt\nprivate final var totalItemCount: kotlin.Int\n```
 //                               ^ reference semanticdb maven . . kotlin/Int#unaryMinus().
     private var scrollState: Int = RecyclerView.SCROLL_STATE_IDLE
-//              ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#scrollState.
-//                          documentation ```kt\nprivate final var scrollState: kotlin.Int\n```
 //              ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getScrollState().
+//                          documentation ```kt\nprivate final var scrollState: kotlin.Int\n```
+//              ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#scrollState.
 //                          documentation ```kt\nprivate final var scrollState: kotlin.Int\n```
 //              ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setScrollState().
 //                          documentation ```kt\nprivate final var scrollState: kotlin.Int\n```
 //                           ^^^ reference semanticdb maven . . kotlin/Int#
 
     private val modelPreloaders: Map<Class<out EpoxyModel<*>>, EpoxyModelPreloader<*, *, out P>> =
-//              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#modelPreloaders.
-//                              documentation ```kt\nprivate final val modelPreloaders: kotlin.collections.Map<java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>, com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>\n```
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getModelPreloaders().
+//                              documentation ```kt\nprivate final val modelPreloaders: kotlin.collections.Map<java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>, com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>\n```
+//              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#modelPreloaders.
 //                              documentation ```kt\nprivate final val modelPreloaders: kotlin.collections.Map<java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>, com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>\n```
 //                               ^^^ reference semanticdb maven . . kotlin/collections/Map#
 //                                   ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
@@ -150,24 +150,24 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`().(modelPreloaders)
 //                      ^^^^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#associateBy(+18).
 //                                    ^^ reference local 0
-//                                       ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#modelType.
 //                                       ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#getModelType().
+//                                       ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#modelType.
 
     private val requestHolderFactory =
-//              ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#requestHolderFactory.
-//                                   documentation ```kt\nprivate final val requestHolderFactory: com.airbnb.epoxy.preload.PreloadTargetProvider<P>\n```
 //              ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getRequestHolderFactory().
+//                                   documentation ```kt\nprivate final val requestHolderFactory: com.airbnb.epoxy.preload.PreloadTargetProvider<P>\n```
+//              ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#requestHolderFactory.
 //                                   documentation ```kt\nprivate final val requestHolderFactory: com.airbnb.epoxy.preload.PreloadTargetProvider<P>\n```
         PreloadTargetProvider(maxItemsToPreload, preloadTargetFactory)
 //      ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#`<init>`().
-//                            ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#maxItemsToPreload.
 //                            ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getMaxItemsToPreload().
+//                            ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#maxItemsToPreload.
 //                                               ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`().(preloadTargetFactory)
 
     private val viewDataCache = PreloadableViewDataProvider(adapter, errorHandler)
-//              ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#viewDataCache.
-//                            documentation ```kt\nprivate final val viewDataCache: com.airbnb.epoxy.preload.PreloadableViewDataProvider\n```
 //              ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getViewDataCache().
+//                            documentation ```kt\nprivate final val viewDataCache: com.airbnb.epoxy.preload.PreloadableViewDataProvider\n```
+//              ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#viewDataCache.
 //                            documentation ```kt\nprivate final val viewDataCache: com.airbnb.epoxy.preload.PreloadableViewDataProvider\n```
 //                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#`<init>`().
 //                                                          ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#adapter.
@@ -251,12 +251,12 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
     init {
         require(maxItemsToPreload > 0) {
 //      ^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/PreconditionsKt#require(+1).
-//              ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#maxItemsToPreload.
 //              ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getMaxItemsToPreload().
+//              ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#maxItemsToPreload.
 //                                ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
             "maxItemsToPreload must be greater than 0. Was $maxItemsToPreload"
-//                                                          ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#maxItemsToPreload.
 //                                                          ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getMaxItemsToPreload().
+//                                                          ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#maxItemsToPreload.
         }
     }
 
@@ -269,8 +269,8 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //                                                                         documentation ```kt\nvalue-parameter newState: kotlin.Int\n```
 //                                                                          ^^^ reference semanticdb maven . . kotlin/Int#
         scrollState = newState
-//      ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#scrollState.
 //      ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getScrollState().
+//      ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#scrollState.
 //      ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setScrollState().
 //                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#onScrollStateChanged().(newState)
     }
@@ -310,9 +310,9 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 
         // Update item count before anything else because validations depend on it
         totalItemCount = recyclerView.adapter?.itemCount ?: 0
-//      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#totalItemCount.
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getTotalItemCount().
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setTotalItemCount().
+//      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#totalItemCount.
 //                       ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#onScrolled().(recyclerView)
 
         val layoutManager = recyclerView.layoutManager as LinearLayoutManager
@@ -332,15 +332,15 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //          ^^^^^^^^^^^^^^^^^^^^ reference local 2
 //                                              ^^^^^^^^^^^^^^^^^^^ reference local 3
             lastVisibleRange = IntRange.EMPTY
-//          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastVisibleRange.
 //          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getLastVisibleRange().
+//          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastVisibleRange.
 //          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setLastVisibleRange().
 //                             ^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#Companion#
 //                                      ^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#Companion#EMPTY.
 //                                      ^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#Companion#getEMPTY().
             lastPreloadRange = IntRange.EMPTY
-//          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastPreloadRange.
 //          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getLastPreloadRange().
+//          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastPreloadRange.
 //          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setLastPreloadRange().
 //                             ^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#Companion#
 //                                      ^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#Companion#EMPTY.
@@ -357,8 +357,8 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
         if (visibleRange == lastVisibleRange) {
 //          ^^^^^^^^^^^^ reference local 4
 //                       ^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#equals().
-//                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastVisibleRange.
 //                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getLastVisibleRange().
+//                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastVisibleRange.
 //                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setLastVisibleRange().
             return
         }
@@ -371,20 +371,20 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //                       ^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#first.
 //                       ^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#getFirst().
 //                             ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
-//                               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastVisibleRange.
 //                               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getLastVisibleRange().
+//                               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastVisibleRange.
 //                               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setLastVisibleRange().
 //                                                ^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#first.
 //                                                ^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#getFirst().
 //                                                         ^^^^^^^^^^^^ reference local 4
-//                                                                      ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#last.
 //                                                                      ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#getLast().
+//                                                                      ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#last.
 //                                                                           ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
-//                                                                             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastVisibleRange.
 //                                                                             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getLastVisibleRange().
+//                                                                             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastVisibleRange.
 //                                                                             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setLastVisibleRange().
-//                                                                                              ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#last.
 //                                                                                              ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#getLast().
+//                                                                                              ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntRange#last.
 
         val preloadRange =
 //          ^^^^^^^^^^^^ definition local 6
@@ -400,8 +400,8 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //      ^^^^^^^^^^^^ reference local 6
             .subtract(lastPreloadRange)
 //           ^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#subtract(+9).
-//                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastPreloadRange.
 //                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getLastPreloadRange().
+//                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastPreloadRange.
 //                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setLastPreloadRange().
             .forEach { preloadAdapterPosition(it) }
 //           ^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#forEach(+10).
@@ -409,13 +409,13 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //                                            ^^ reference local 7
 
         lastVisibleRange = visibleRange
-//      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastVisibleRange.
 //      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getLastVisibleRange().
+//      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastVisibleRange.
 //      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setLastVisibleRange().
 //                         ^^^^^^^^^^^^ reference local 4
         lastPreloadRange = preloadRange
-//      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastPreloadRange.
 //      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getLastPreloadRange().
+//      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#lastPreloadRange.
 //      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setLastPreloadRange().
 //                         ^^^^^^^^^^^^ reference local 6
     }
@@ -466,12 +466,12 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //               ^^^^ reference local 8
 //                    ^ reference semanticdb maven . . kotlin/Int#plus(+3).
 //                          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#calculatePreloadRange().(isIncreasing)
-//                                        ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#maxItemsToPreload.
 //                                        ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getMaxItemsToPreload().
+//                                        ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#maxItemsToPreload.
 //                                                          ^ reference semanticdb maven . . kotlin/Int#minus(+3).
 //                                                                     ^ reference semanticdb maven . . kotlin/Int#minus(+3).
-//                                                                       ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#maxItemsToPreload.
 //                                                                       ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getMaxItemsToPreload().
+//                                                                       ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#maxItemsToPreload.
 
         return IntProgression.fromClosedRange(
 //             ^^^^^^^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/IntProgression#Companion#
@@ -500,18 +500,18 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //                                     ^^ reference semanticdb maven . . kotlin/Int#equals().
 //                                                                    ^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#isInvalid().
 //                                                                         ^^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
-//                                                                            ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#totalItemCount.
 //                                                                            ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getTotalItemCount().
 //                                                                            ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setTotalItemCount().
+//                                                                            ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#totalItemCount.
 
     private fun Int.clampToAdapterRange() = min(totalItemCount - 1, max(this, 0))
 //              ^^^ reference semanticdb maven . . kotlin/Int#
 //                  ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#clampToAdapterRange().
 //                                      documentation ```kt\nprivate final fun kotlin.Int.clampToAdapterRange(): kotlin.Int\n```
 //                                          ^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/math/MathKt#min(+2).
-//                                              ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#totalItemCount.
 //                                              ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getTotalItemCount().
 //                                              ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#setTotalItemCount().
+//                                              ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#totalItemCount.
 //                                                             ^ reference semanticdb maven . . kotlin/Int#minus(+3).
 //                                                                  ^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/math/MathKt#max(+2).
 //                                                                      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#clampToAdapterRange().
@@ -539,8 +539,8 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //          ^^^^^^^^^ definition local 11
 //                    documentation ```kt\nval preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<[ERROR : EpoxyModel<*>]<out [ERROR : *]>, com.airbnb.epoxy.preload.ViewMetadata?, P>\n```
             modelPreloaders[epoxyModel::class.java] as? EpoxyModelPreloader<EpoxyModel<*>, ViewMetadata?, P>
-//          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#modelPreloaders.
 //          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getModelPreloaders().
+//          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#modelPreloaders.
 //                          ^^^^^^^^^^ reference local 10
 //                                            ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/jvm/JvmClassMappingKt#java.
 //                                                      ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#
@@ -549,8 +549,8 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
                 ?: return
 
         viewDataCache
-//      ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#viewDataCache.
 //      ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getViewDataCache().
+//      ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#viewDataCache.
             .dataForModel(preloader, epoxyModel, position)
 //           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#dataForModel().
 //                        ^^^^^^^^^ reference local 11
@@ -563,8 +563,8 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
                 val preloadTarget = requestHolderFactory.next()
 //                  ^^^^^^^^^^^^^ definition local 13
 //                                documentation ```kt\nval preloadTarget: P\n```
-//                                  ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#requestHolderFactory.
 //                                  ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getRequestHolderFactory().
+//                                  ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#requestHolderFactory.
 //                                                       ^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#next().
                 preloader.startPreload(epoxyModel, preloadTarget, viewData)
 //              ^^^^^^^^^ reference local 11
@@ -582,8 +582,8 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //      ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#cancelPreloadRequests().
 //                            documentation ```kt\npublic final fun cancelPreloadRequests()\n```\n\n----\n\n\n Cancels all current preload requests in progress.\n
         requestHolderFactory.clearAll()
-//      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#requestHolderFactory.
 //      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getRequestHolderFactory().
+//      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#requestHolderFactory.
 //                           ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#clearAll().
     }
 
@@ -788,38 +788,38 @@ class ViewData<out U : ViewMetadata?>(
 //                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#
     @IdRes val viewId: Int,
 //   ^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/IdRes#`<init>`().
-//             ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#viewId.
-//                    documentation ```kt\npublic final val viewId: kotlin.Int\n```
-//             ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#getViewId().
-//                    documentation ```kt\npublic final val viewId: kotlin.Int\n```
 //             ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#`<init>`().(viewId)
 //                    documentation ```kt\nvalue-parameter viewId: kotlin.Int\n```
+//             ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#getViewId().
+//                    documentation ```kt\npublic final val viewId: kotlin.Int\n```
+//             ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#viewId.
+//                    documentation ```kt\npublic final val viewId: kotlin.Int\n```
 //                     ^^^ reference semanticdb maven . . kotlin/Int#
     @Px val width: Int,
 //   ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#`<init>`().
-//          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#width.
-//                documentation ```kt\npublic final val width: kotlin.Int\n```
-//          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#getWidth().
-//                documentation ```kt\npublic final val width: kotlin.Int\n```
 //          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#`<init>`().(width)
 //                documentation ```kt\nvalue-parameter width: kotlin.Int\n```
+//          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#getWidth().
+//                documentation ```kt\npublic final val width: kotlin.Int\n```
+//          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#width.
+//                documentation ```kt\npublic final val width: kotlin.Int\n```
 //                 ^^^ reference semanticdb maven . . kotlin/Int#
     @Px val height: Int,
 //   ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#`<init>`().
-//          ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#height.
-//                 documentation ```kt\npublic final val height: kotlin.Int\n```
-//          ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#getHeight().
-//                 documentation ```kt\npublic final val height: kotlin.Int\n```
 //          ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#`<init>`().(height)
 //                 documentation ```kt\nvalue-parameter height: kotlin.Int\n```
+//          ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#getHeight().
+//                 documentation ```kt\npublic final val height: kotlin.Int\n```
+//          ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#height.
+//                 documentation ```kt\npublic final val height: kotlin.Int\n```
 //                  ^^^ reference semanticdb maven . . kotlin/Int#
     val metadata: U
-//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#metadata.
-//               documentation ```kt\npublic final val metadata: U\n```
-//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#getMetadata().
-//               documentation ```kt\npublic final val metadata: U\n```
 //      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#`<init>`().(metadata)
 //               documentation ```kt\nvalue-parameter metadata: U\n```
+//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#getMetadata().
+//               documentation ```kt\npublic final val metadata: U\n```
+//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewData#metadata.
+//               documentation ```kt\npublic final val metadata: U\n```
 //                ^ reference semanticdb maven . . com/airbnb/epoxy/preload/ViewData#[U]
 )
 
@@ -856,11 +856,11 @@ open class ImageViewMetadata(
 //         ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ImageViewMetadata#`<init>`().
 //                           documentation ```kt\npublic constructor ImageViewMetadata(scaleType: [ERROR : ImageView.ScaleType])\n```
     val scaleType: ImageView.ScaleType
-//      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ImageViewMetadata#scaleType.
-//                documentation ```kt\npublic final val scaleType: [ERROR : ImageView.ScaleType]\n```
-//      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ImageViewMetadata#getScaleType().
-//                documentation ```kt\npublic final val scaleType: [ERROR : ImageView.ScaleType]\n```
 //      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ImageViewMetadata#`<init>`().(scaleType)
 //                documentation ```kt\nvalue-parameter scaleType: [ERROR : ImageView.ScaleType]\n```
+//      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ImageViewMetadata#getScaleType().
+//                documentation ```kt\npublic final val scaleType: [ERROR : ImageView.ScaleType]\n```
+//      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ImageViewMetadata#scaleType.
+//                documentation ```kt\npublic final val scaleType: [ERROR : ImageView.ScaleType]\n```
 ) : ViewMetadata
 //  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#

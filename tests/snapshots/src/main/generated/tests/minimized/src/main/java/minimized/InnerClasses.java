@@ -165,10 +165,10 @@ public class InnerClasses {
   public static void testEnum(InnerEnum magicEnum) {
 //                   ^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#testEnum().
 //                            documentation ```java\npublic static void testEnum(InnerEnum magicEnum)\n```
-//                            ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
-//                            ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
-//                            ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
 //                            ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#
+//                            ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
+//                            ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
+//                            ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
 //                                      ^^^^^^^^^ definition local 6
 //                                                documentation ```java\nInnerEnum magicEnum\n```
     if (System.nanoTime() > System.currentTimeMillis()) {

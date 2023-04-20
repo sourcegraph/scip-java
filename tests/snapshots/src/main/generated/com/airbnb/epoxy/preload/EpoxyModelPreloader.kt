@@ -32,12 +32,12 @@ abstract class EpoxyModelPreloader<T : EpoxyModel<*>, U : ViewMetadata?, P : Pre
 //                                                                           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadRequestHolder#
 
     val modelType: Class<T>,
-//      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#modelType.
-//                documentation ```kt\npublic final val modelType: java.lang.Class<T>\n```
-//      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#getModelType().
-//                documentation ```kt\npublic final val modelType: java.lang.Class<T>\n```
 //      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#`<init>`().(modelType)
 //                documentation ```kt\nvalue-parameter modelType: java.lang.Class<T>\n```
+//      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#getModelType().
+//                documentation ```kt\npublic final val modelType: java.lang.Class<T>\n```
+//      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#modelType.
+//                documentation ```kt\npublic final val modelType: java.lang.Class<T>\n```
 //                 ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                       ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#[T]
 
@@ -46,12 +46,12 @@ abstract class EpoxyModelPreloader<T : EpoxyModel<*>, U : ViewMetadata?, P : Pre
      * This should be left empty if the EpoxyModel's type uses the [Preloadable] interface.
      */
     val preloadableViewIds: List<Int>
-//      ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#preloadableViewIds.
-//                         documentation ```kt\npublic final val preloadableViewIds: kotlin.collections.List<kotlin.Int>\n```\n\n----\n\n\n A list of view ids, one for each view that should be preloaded.\n This should be left empty if the EpoxyModel's type uses the [Preloadable] interface.\n
-//      ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#getPreloadableViewIds().
-//                         documentation ```kt\npublic final val preloadableViewIds: kotlin.collections.List<kotlin.Int>\n```\n\n----\n\n\n A list of view ids, one for each view that should be preloaded.\n This should be left empty if the EpoxyModel's type uses the [Preloadable] interface.\n
 //      ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#`<init>`().(preloadableViewIds)
 //                         documentation ```kt\nvalue-parameter preloadableViewIds: kotlin.collections.List<kotlin.Int>\n```\n\n----\n\n\n A list of view ids, one for each view that should be preloaded.\n This should be left empty if the EpoxyModel's type uses the [Preloadable] interface.\n
+//      ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#getPreloadableViewIds().
+//                         documentation ```kt\npublic final val preloadableViewIds: kotlin.collections.List<kotlin.Int>\n```\n\n----\n\n\n A list of view ids, one for each view that should be preloaded.\n This should be left empty if the EpoxyModel's type uses the [Preloadable] interface.\n
+//      ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#preloadableViewIds.
+//                         documentation ```kt\npublic final val preloadableViewIds: kotlin.collections.List<kotlin.Int>\n```\n\n----\n\n\n A list of view ids, one for each view that should be preloaded.\n This should be left empty if the EpoxyModel's type uses the [Preloadable] interface.\n
 //                          ^^^^ reference semanticdb maven . . kotlin/collections/List#
 //                               ^^^ reference semanticdb maven . . kotlin/Int#
 ) {
@@ -208,9 +208,9 @@ abstract class EpoxyModelPreloader<T : EpoxyModel<*>, U : ViewMetadata?, P : Pre
             noinline viewSignature: (T) -> Any? = { _ -> null },
 //                   ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#Companion#with(+1).(viewSignature)
 //                                 documentation ```kt\nvalue-parameter noinline viewSignature: (T) -> kotlin.Any? = ...\n```
+//                                   ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#Companion#with(+1).[T]
 //                                   ^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#Companion#with(+1).`<no name provided>`.
 //                                     documentation ```kt\nval <no name provided>: T\n```
-//                                   ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#Companion#with(+1).[T]
 //                                         ^^^ reference semanticdb maven . . kotlin/Any#
 //                                                  ^ definition local 1
 //                                                    documentation ```kt\nvalue-parameter <anonymous parameter 0>: T\n```
@@ -293,9 +293,9 @@ abstract class EpoxyModelPreloader<T : EpoxyModel<*>, U : ViewMetadata?, P : Pre
             viewSignature: (T) -> Any? = { _ -> null },
 //          ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#Companion#with(+2).(viewSignature)
 //                        documentation ```kt\nvalue-parameter viewSignature: (T) -> kotlin.Any? = ...\n```
+//                          ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#Companion#with(+2).[T]
 //                          ^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#Companion#with(+2).`<no name provided>`.
 //                            documentation ```kt\nval <no name provided>: T\n```
-//                          ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#Companion#with(+2).[T]
 //                                ^^^ reference semanticdb maven . . kotlin/Any#
 //                                         ^ definition local 2
 //                                           documentation ```kt\nvalue-parameter <anonymous parameter 0>: T\n```

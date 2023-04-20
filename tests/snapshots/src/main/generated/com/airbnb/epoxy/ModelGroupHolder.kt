@@ -26,29 +26,29 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
 //                     documentation ```kt\npublic final class ModelGroupHolder\n```
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#`<init>`().
 //                     documentation ```kt\npublic constructor ModelGroupHolder(modelGroupParent: [ERROR : ViewParent])\n```
-//                                 ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#modelGroupParent.
-//                                                  documentation ```kt\nprivate final val modelGroupParent: [ERROR : ViewParent]\n```
-//                                 ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getModelGroupParent().
-//                                                  documentation ```kt\nprivate final val modelGroupParent: [ERROR : ViewParent]\n```
 //                                 ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#`<init>`().(modelGroupParent)
 //                                                  documentation ```kt\nvalue-parameter modelGroupParent: [ERROR : ViewParent]\n```
+//                                 ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getModelGroupParent().
+//                                                  documentation ```kt\nprivate final val modelGroupParent: [ERROR : ViewParent]\n```
+//                                 ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#modelGroupParent.
+//                                                  documentation ```kt\nprivate final val modelGroupParent: [ERROR : ViewParent]\n```
     val viewHolders = ArrayList<EpoxyViewHolder>(4)
-//      ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
-//                  documentation ```kt\npublic final val viewHolders: [ERROR : Type for ArrayList<EpoxyViewHolder>(4)]\n```
 //      ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getViewHolders().
+//                  documentation ```kt\npublic final val viewHolders: [ERROR : Type for ArrayList<EpoxyViewHolder>(4)]\n```
+//      ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
 //                  documentation ```kt\npublic final val viewHolders: [ERROR : Type for ArrayList<EpoxyViewHolder>(4)]\n```
 
     /** Use parent pool or create a local pool */
     @VisibleForTesting
 //   ^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/VisibleForTesting#`<init>`().
     val viewPool = findViewPool(modelGroupParent)
-//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewPool.
-//               documentation ```kt\npublic final val viewPool: [ERROR : RecyclerView.RecycledViewPool]\n```\n\n----\n\n Use parent pool or create a local pool
 //      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getViewPool().
 //               documentation ```kt\npublic final val viewPool: [ERROR : RecyclerView.RecycledViewPool]\n```\n\n----\n\n Use parent pool or create a local pool
+//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewPool.
+//               documentation ```kt\npublic final val viewPool: [ERROR : RecyclerView.RecycledViewPool]\n```\n\n----\n\n Use parent pool or create a local pool
 //                 ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#Companion#findViewPool().
-//                              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#modelGroupParent.
 //                              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getModelGroupParent().
+//                              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#modelGroupParent.
 
     /**
      * Get the root view group (aka
@@ -57,9 +57,9 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
      * changes to the root view.
      */
     lateinit var rootView: ViewGroup
-//               ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#rootView.
-//                        documentation ```kt\npublic final lateinit var rootView: [ERROR : ViewGroup]\n```\n\n----\n\n\n Get the root view group (aka\n [androidx.recyclerview.widget.RecyclerView.ViewHolder.itemView].\n You can override [EpoxyModelGroup.bind] and use this method to make custom\n changes to the root view.\n
 //               ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getRootView().
+//                        documentation ```kt\npublic final lateinit var rootView: [ERROR : ViewGroup]\n```\n\n----\n\n\n Get the root view group (aka\n [androidx.recyclerview.widget.RecyclerView.ViewHolder.itemView].\n You can override [EpoxyModelGroup.bind] and use this method to make custom\n changes to the root view.\n
+//               ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#rootView.
 //                        documentation ```kt\npublic final lateinit var rootView: [ERROR : ViewGroup]\n```\n\n----\n\n\n Get the root view group (aka\n [androidx.recyclerview.widget.RecyclerView.ViewHolder.itemView].\n You can override [EpoxyModelGroup.bind] and use this method to make custom\n changes to the root view.\n
         private set
 //              ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#setRootView().
@@ -73,11 +73,11 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
 //                       ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#setChildContainer().
 //                                      documentation ```kt\nprivate final lateinit var childContainer: [ERROR : ViewGroup]\n```
     private lateinit var stubs: List<ViewStubData>
-//                       ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
-//                             documentation ```kt\nprivate final lateinit var stubs: kotlin.collections.List<com.airbnb.epoxy.ViewStubData>\n```
 //                       ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getStubs().
 //                             documentation ```kt\nprivate final lateinit var stubs: kotlin.collections.List<com.airbnb.epoxy.ViewStubData>\n```
 //                       ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#setStubs().
+//                             documentation ```kt\nprivate final lateinit var stubs: kotlin.collections.List<com.airbnb.epoxy.ViewStubData>\n```
+//                       ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
 //                             documentation ```kt\nprivate final lateinit var stubs: kotlin.collections.List<com.airbnb.epoxy.ViewStubData>\n```
 //                              ^^^^ reference semanticdb maven . . kotlin/collections/List#
 //                                   ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#
@@ -93,9 +93,9 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
 //              ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#usingStubs().
 //                         documentation ```kt\nprivate final fun usingStubs(): kotlin.Boolean\n```
 //                            ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
-//                                      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
 //                                      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getStubs().
 //                                      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#setStubs().
+//                                      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
 //                                            ^^^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#isNotEmpty(+9).
 
     override fun bindView(itemView: View) {
@@ -112,21 +112,21 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
         }
 
         rootView = itemView
-//      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#rootView.
 //      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getRootView().
+//      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#rootView.
 //                 ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#bindView().(itemView)
         childContainer = findChildContainer(rootView)
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#childContainer.
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getChildContainer().
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#setChildContainer().
 //                       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#findChildContainer().
-//                                          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#rootView.
 //                                          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getRootView().
+//                                          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#rootView.
 
         stubs = if (childContainer.childCount != 0) {
-//      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
 //      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getStubs().
 //      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#setStubs().
+//      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
 //                  ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#childContainer.
 //                  ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getChildContainer().
 //                  ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#setChildContainer().
@@ -284,26 +284,26 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
 
         if (usingStubs() && stubs.size < modelCount) {
 //          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#usingStubs().
-//                          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
 //                          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getStubs().
 //                          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#setStubs().
-//                                ^^^^ reference semanticdb maven . . kotlin/collections/List#size.
+//                          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
 //                                ^^^^ reference semanticdb maven . . kotlin/collections/List#getSize().
+//                                ^^^^ reference semanticdb maven . . kotlin/collections/List#size.
 //                                       ^^^^^^^^^^ reference local 6
             throw IllegalStateException(
 //                ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/IllegalStateException#`<init>`(+1).
                 "Insufficient view stubs for EpoxyModelGroup. $modelCount models were provided but only ${stubs.size} view stubs exist."
 //                                                             ^^^^^^^^^^ reference local 6
-//                                                                                                        ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
 //                                                                                                        ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getStubs().
 //                                                                                                        ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#setStubs().
-//                                                                                                              ^^^^ reference semanticdb maven . . kotlin/collections/List#size.
+//                                                                                                        ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
 //                                                                                                              ^^^^ reference semanticdb maven . . kotlin/collections/List#getSize().
+//                                                                                                              ^^^^ reference semanticdb maven . . kotlin/collections/List#size.
             )
         }
         viewHolders.ensureCapacity(modelCount)
-//      ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
 //      ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getViewHolders().
+//      ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
 //                                 ^^^^^^^^^^ reference local 6
 
         for (i in 0 until modelCount) {
@@ -324,17 +324,17 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
             val stubData = stubs.getOrNull(i)
 //              ^^^^^^^^ definition local 10
 //                       documentation ```kt\nval stubData: com.airbnb.epoxy.ViewStubData?\n```
-//                         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
 //                         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getStubs().
 //                         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#setStubs().
+//                         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
 //                               ^^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#getOrNull(+9).
 //                                         ^ reference local 7
             val parent = stubData?.viewGroup ?: childContainer
 //              ^^^^^^ definition local 11
 //                     documentation ```kt\nval parent: ???\n```
 //                       ^^^^^^^^ reference local 10
-//                                 ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
 //                                 ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getViewGroup().
+//                                 ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
 //                                              ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#childContainer.
 //                                              ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getChildContainer().
 //                                              ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#setChildContainer().
@@ -380,8 +380,8 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
             }
 
             viewHolders.add(i, holder)
-//          ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
 //          ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getViewHolders().
+//          ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
 //                          ^ reference local 7
 //                             ^^^^^^ reference local 12
         }
@@ -414,8 +414,8 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
         val recycledView = viewPool.getRecycledView(viewType)
 //          ^^^^^^^^^^^^ definition local 14
 //                       documentation ```kt\nval recycledView: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
-//                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewPool.
 //                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getViewPool().
+//                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewPool.
 //                                                  ^^^^^^^^ reference local 13
 
         return recycledView as? EpoxyViewHolder
@@ -425,8 +425,8 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
 //             ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#Companion#getHELPER_ADAPTER().
 //                            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#createViewHolder().
                 modelGroupParent,
-//              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#modelGroupParent.
 //              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getModelGroupParent().
+//              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#modelGroupParent.
                 model,
 //              ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getViewHolder().(model)
                 parent,
@@ -449,13 +449,13 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
 
         repeat(viewHolders.size) {
 //      ^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/StandardKt#repeat().
-//             ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
 //             ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getViewHolders().
+//             ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
             // Remove from the end for more efficient list actions
             removeAndRecycleView(viewHolders.size - 1)
 //          ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#removeAndRecycleView().
-//                               ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
 //                               ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getViewHolders().
+//                               ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
         }
 
         boundGroup = null
@@ -473,9 +473,9 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
         if (usingStubs()) {
 //          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#usingStubs().
             stubs[modelPosition].resetStub()
-//          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
 //          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getStubs().
 //          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#setStubs().
+//          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#stubs.
 //                ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#removeAndRecycleView().(modelPosition)
 //                               ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#resetStub().
         } else {
@@ -489,14 +489,14 @@ class ModelGroupHolder(private val modelGroupParent: ViewParent) : EpoxyHolder()
         val viewHolder = viewHolders.removeAt(modelPosition)
 //          ^^^^^^^^^^ definition local 15
 //                     documentation ```kt\nval viewHolder: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
-//                       ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
 //                       ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getViewHolders().
+//                       ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
 //                                            ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#removeAndRecycleView().(modelPosition)
         viewHolder.unbind()
 //      ^^^^^^^^^^ reference local 15
         viewPool.putRecycledView(viewHolder)
-//      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewPool.
 //      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getViewPool().
+//      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewPool.
 //                               ^^^^^^^^^^ reference local 15
     }
 
@@ -555,26 +555,26 @@ private class ViewStubData(
 //            ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#`<init>`().
 //                         documentation ```kt\npublic constructor ViewStubData(viewGroup: [ERROR : ViewGroup], viewStub: [ERROR : ViewStub], position: kotlin.Int)\n```
     val viewGroup: ViewGroup,
-//      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
-//                documentation ```kt\npublic final val viewGroup: [ERROR : ViewGroup]\n```
-//      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#getViewGroup().
-//                documentation ```kt\npublic final val viewGroup: [ERROR : ViewGroup]\n```
 //      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#`<init>`().(viewGroup)
 //                documentation ```kt\nvalue-parameter viewGroup: [ERROR : ViewGroup]\n```
+//      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#getViewGroup().
+//                documentation ```kt\npublic final val viewGroup: [ERROR : ViewGroup]\n```
+//      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
+//                documentation ```kt\npublic final val viewGroup: [ERROR : ViewGroup]\n```
     val viewStub: ViewStub,
-//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewStub.
-//               documentation ```kt\npublic final val viewStub: [ERROR : ViewStub]\n```
-//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#getViewStub().
-//               documentation ```kt\npublic final val viewStub: [ERROR : ViewStub]\n```
 //      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#`<init>`().(viewStub)
 //               documentation ```kt\nvalue-parameter viewStub: [ERROR : ViewStub]\n```
+//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#getViewStub().
+//               documentation ```kt\npublic final val viewStub: [ERROR : ViewStub]\n```
+//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewStub.
+//               documentation ```kt\npublic final val viewStub: [ERROR : ViewStub]\n```
     val position: Int
-//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#position.
-//               documentation ```kt\npublic final val position: kotlin.Int\n```
-//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#getPosition().
-//               documentation ```kt\npublic final val position: kotlin.Int\n```
 //      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#`<init>`().(position)
 //               documentation ```kt\nvalue-parameter position: kotlin.Int\n```
+//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#getPosition().
+//               documentation ```kt\npublic final val position: kotlin.Int\n```
+//      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewStubData#position.
+//               documentation ```kt\npublic final val position: kotlin.Int\n```
 //                ^^^ reference semanticdb maven . . kotlin/Int#
 ) {
 
@@ -593,8 +593,8 @@ private class ViewStubData(
         val inflatedId = viewStub.inflatedId
 //          ^^^^^^^^^^ definition local 18
 //                     documentation ```kt\nval inflatedId: [ERROR : <ERROR PROPERTY TYPE>]\n```
-//                       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewStub.
 //                       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getViewStub().
+//                       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewStub.
         if (inflatedId != View.NO_ID) {
 //          ^^^^^^^^^^ reference local 18
             view.id = inflatedId
@@ -605,20 +605,20 @@ private class ViewStubData(
         if (useStubLayoutParams) {
 //          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#setView().(useStubLayoutParams)
             viewGroup.addView(view, position, viewStub.layoutParams)
-//          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
 //          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getViewGroup().
+//          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
 //                            ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#setView().(view)
-//                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#position.
 //                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getPosition().
-//                                            ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewStub.
+//                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#position.
 //                                            ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getViewStub().
+//                                            ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewStub.
         } else {
             viewGroup.addView(view, position)
-//          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
 //          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getViewGroup().
+//          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
 //                            ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#setView().(view)
-//                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#position.
 //                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getPosition().
+//                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#position.
         }
     }
 
@@ -628,12 +628,12 @@ private class ViewStubData(
         removeCurrentView()
 //      ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#removeCurrentView().
         viewGroup.addView(viewStub, position)
-//      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
 //      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getViewGroup().
-//                        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewStub.
+//      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
 //                        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getViewStub().
-//                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#position.
+//                        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewStub.
 //                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getPosition().
+//                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#position.
     }
 
     private fun removeCurrentView() {
@@ -642,17 +642,17 @@ private class ViewStubData(
         val view = viewGroup.getChildAt(position)
 //          ^^^^ definition local 19
 //               documentation ```kt\nval view: kotlin.Nothing\n```
-//                 ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
 //                 ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getViewGroup().
-//                                      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#position.
+//                 ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
 //                                      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getPosition().
+//                                      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#position.
             ?: throw IllegalStateException("No view exists at position $position")
 //                   ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/IllegalStateException#`<init>`(+1).
-//                                                                      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#position.
 //                                                                      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getPosition().
+//                                                                      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#position.
         viewGroup.removeView(view)
-//      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
 //      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#getViewGroup().
+//      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewStubData#viewGroup.
 //                           ^^^^ reference local 19
     }
 }
@@ -677,16 +677,16 @@ private class HelperAdapter : RecyclerView.Adapter<EpoxyViewHolder>() {
 //                          documentation ```kt\npublic constructor HelperAdapter()\n```\n\n----\n\n\n A viewholder's viewtype can only be set internally in an adapter when the viewholder\n is created. To work around that we do the creation in an adapter.\n
 
     private var model: EpoxyModel<*>? = null
-//              ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HelperAdapter#model.
-//                    documentation ```kt\nprivate final var model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>?\n```
 //              ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HelperAdapter#getModel().
+//                    documentation ```kt\nprivate final var model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>?\n```
+//              ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HelperAdapter#model.
 //                    documentation ```kt\nprivate final var model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>?\n```
 //              ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HelperAdapter#setModel().
 //                    documentation ```kt\nprivate final var model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>?\n```
     private var modelGroupParent: ViewParent? = null
-//              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HelperAdapter#modelGroupParent.
-//                               documentation ```kt\nprivate final var modelGroupParent: [ERROR : ViewParent]?\n```
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HelperAdapter#getModelGroupParent().
+//                               documentation ```kt\nprivate final var modelGroupParent: [ERROR : ViewParent]?\n```
+//              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HelperAdapter#modelGroupParent.
 //                               documentation ```kt\nprivate final var modelGroupParent: [ERROR : ViewParent]?\n```
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HelperAdapter#setModelGroupParent().
 //                               documentation ```kt\nprivate final var modelGroupParent: [ERROR : ViewParent]?\n```
@@ -710,14 +710,14 @@ private class HelperAdapter : RecyclerView.Adapter<EpoxyViewHolder>() {
     ): EpoxyViewHolder {
         this.model = model
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#
-//           ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#model.
 //           ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#getModel().
+//           ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#model.
 //           ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#setModel().
 //                   ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#createViewHolder().(model)
         this.modelGroupParent = modelGroupParent
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#
-//           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#modelGroupParent.
 //           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#getModelGroupParent().
+//           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#modelGroupParent.
 //           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#setModelGroupParent().
 //                              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#createViewHolder().(modelGroupParent)
         val viewHolder = createViewHolder(parent, viewType)
@@ -728,13 +728,13 @@ private class HelperAdapter : RecyclerView.Adapter<EpoxyViewHolder>() {
 //                                                ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#createViewHolder().(viewType)
         this.model = null
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#
-//           ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#model.
 //           ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#getModel().
+//           ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#model.
 //           ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#setModel().
         this.modelGroupParent = null
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#
-//           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#modelGroupParent.
 //           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#getModelGroupParent().
+//           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#modelGroupParent.
 //           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#setModelGroupParent().
         return viewHolder
 //             ^^^^^^^^^^ reference local 20
@@ -749,15 +749,15 @@ private class HelperAdapter : RecyclerView.Adapter<EpoxyViewHolder>() {
 //                                                              documentation ```kt\nvalue-parameter viewType: kotlin.Int\n```
 //                                                               ^^^ reference semanticdb maven . . kotlin/Int#
         return EpoxyViewHolder(modelGroupParent, model!!.buildView(parent), model!!.shouldSaveViewState())
-//                             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#modelGroupParent.
 //                             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#getModelGroupParent().
+//                             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#modelGroupParent.
 //                             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#setModelGroupParent().
-//                                               ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#model.
 //                                               ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#getModel().
+//                                               ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#model.
 //                                               ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#setModel().
 //                                                                 ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#onCreateViewHolder().(parent)
-//                                                                          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#model.
 //                                                                          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#getModel().
+//                                                                          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#model.
 //                                                                          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HelperAdapter#setModel().
     }
 

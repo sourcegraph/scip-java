@@ -27,9 +27,9 @@ internal class PreloadTargetProvider<P : PreloadRequestHolder>(
 //                              ^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#[P]
 ) {
     private val queue = ArrayDeque<P>((0 until maxPreload).map { requestHolderFactory() })
-//              ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#queue.
-//                    documentation ```kt\nprivate final val queue: java.util.ArrayDeque<P>\n```
 //              ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#getQueue().
+//                    documentation ```kt\nprivate final val queue: java.util.ArrayDeque<P>\n```
+//              ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#queue.
 //                    documentation ```kt\nprivate final val queue: java.util.ArrayDeque<P>\n```
 //                      ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayDeque#`<init>`(+2).
 //                                 ^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#[P]
@@ -45,12 +45,12 @@ internal class PreloadTargetProvider<P : PreloadRequestHolder>(
         val result = queue.poll()
 //          ^^^^^^ definition local 0
 //                 documentation ```kt\nval result: P!\n```
-//                   ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#queue.
 //                   ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#getQueue().
+//                   ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#queue.
 //                         ^^^^ reference semanticdb maven jdk 11 java/util/ArrayDeque#poll().
         queue.offer(result)
-//      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#queue.
 //      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#getQueue().
+//      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#queue.
 //            ^^^^^ reference semanticdb maven jdk 11 java/util/ArrayDeque#offer().
 //                  ^^^^^^ reference local 0
         result.clear()
@@ -64,8 +64,8 @@ internal class PreloadTargetProvider<P : PreloadRequestHolder>(
 //      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#clearAll().
 //               documentation ```kt\npublic final fun clearAll()\n```
         queue.forEach { it.clear() }
-//      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#queue.
 //      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#getQueue().
+//      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadTargetProvider#queue.
 //            ^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#forEach(+10).
 //                      ^^ reference local 1
 //                         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadRequestHolder#clear().

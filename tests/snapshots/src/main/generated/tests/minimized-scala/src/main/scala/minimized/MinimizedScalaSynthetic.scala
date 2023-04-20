@@ -10,8 +10,8 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 //     ^^^^^ reference semanticdb maven . . scala/
 //           ^^^^^^^^^^ reference semanticdb maven . . scala/concurrent/
-//                      ^^^^^^ reference semanticdb maven . . scala/concurrent/Future.
 //                      ^^^^^^ reference semanticdb maven . . scala/concurrent/Future#
+//                      ^^^^^^ reference semanticdb maven . . scala/concurrent/Future.
 
 class MinimizedScalaSynthetic {
 //    ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedScalaSynthetic#
@@ -87,18 +87,18 @@ class MinimizedScalaSynthetic {
 //              ^ reference local 1
 //                ^ reference semanticdb maven . . scala/Int#`+`(+4).
 //                  ^ reference local 2
-//                   ^ reference semanticdb maven . . scala/concurrent/ExecutionContext.Implicits.global().
-//                   ^ reference semanticdb maven . . scala/concurrent/Future#flatMap().
 //                   ^ reference local 0
-//                   ^ reference semanticdb maven . . scala/concurrent/Future#withFilter().
 //                   ^ reference local 1
-//                   ^ reference semanticdb maven . . scala/concurrent/ExecutionContext.Implicits.global().
-//                   ^ reference semanticdb maven . . scala/concurrent/Future#flatMap().
 //                   ^ reference local 1
-//                   ^ reference semanticdb maven . . scala/concurrent/ExecutionContext.Implicits.global().
-//                   ^ reference semanticdb maven . . scala/concurrent/Future#map().
 //                   ^ reference local 2
 //                   ^ reference semanticdb maven . . scala/concurrent/ExecutionContext.Implicits.global().
 //                   ^ reference semanticdb maven . . scala/concurrent/ExecutionContext.Implicits.global().
 //                   ^ reference semanticdb maven . . scala/concurrent/ExecutionContext.Implicits.global().
+//                   ^ reference semanticdb maven . . scala/concurrent/ExecutionContext.Implicits.global().
+//                   ^ reference semanticdb maven . . scala/concurrent/ExecutionContext.Implicits.global().
+//                   ^ reference semanticdb maven . . scala/concurrent/ExecutionContext.Implicits.global().
+//                   ^ reference semanticdb maven . . scala/concurrent/Future#flatMap().
+//                   ^ reference semanticdb maven . . scala/concurrent/Future#flatMap().
+//                   ^ reference semanticdb maven . . scala/concurrent/Future#map().
+//                   ^ reference semanticdb maven . . scala/concurrent/Future#withFilter().
 }

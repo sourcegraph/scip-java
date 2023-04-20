@@ -41,19 +41,19 @@ internal class PreloadableViewDataProvider(
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#`<init>`().
 //                                         documentation ```kt\npublic constructor PreloadableViewDataProvider(adapter: [ERROR : BaseEpoxyAdapter], errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */)\n```
     val adapter: BaseEpoxyAdapter,
+//      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#`<init>`().(adapter)
+//              documentation ```kt\nvalue-parameter adapter: [ERROR : BaseEpoxyAdapter]\n```
 //      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#adapter.
 //              documentation ```kt\npublic final val adapter: [ERROR : BaseEpoxyAdapter]\n```
 //      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#getAdapter().
 //              documentation ```kt\npublic final val adapter: [ERROR : BaseEpoxyAdapter]\n```
-//      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#`<init>`().(adapter)
-//              documentation ```kt\nvalue-parameter adapter: [ERROR : BaseEpoxyAdapter]\n```
     val errorHandler: PreloadErrorHandler
+//      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#`<init>`().(errorHandler)
+//                   documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#errorHandler.
 //                   documentation ```kt\npublic final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#getErrorHandler().
 //                   documentation ```kt\npublic final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
-//      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#`<init>`().(errorHandler)
-//                   documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //                    ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
 ) {
 
@@ -67,37 +67,37 @@ internal class PreloadableViewDataProvider(
 //                     ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#`<init>`().
 //                              documentation ```kt\npublic constructor CacheKey(epoxyModelClass: java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>, spanSize: kotlin.Int, viewType: kotlin.Int, signature: kotlin.Any?)\n```
         val epoxyModelClass: Class<out EpoxyModel<*>>,
+//          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#`<init>`().(epoxyModelClass)
+//                          documentation ```kt\nvalue-parameter epoxyModelClass: java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>\n```
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#epoxyModelClass.
 //                          documentation ```kt\npublic final val epoxyModelClass: java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>\n```
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#getEpoxyModelClass().
 //                          documentation ```kt\npublic final val epoxyModelClass: java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>\n```
-//          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#`<init>`().(epoxyModelClass)
-//                          documentation ```kt\nvalue-parameter epoxyModelClass: java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>\n```
 //                           ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
         val spanSize: Int,
-//          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#spanSize.
-//                   documentation ```kt\npublic final val spanSize: kotlin.Int\n```
-//          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#getSpanSize().
-//                   documentation ```kt\npublic final val spanSize: kotlin.Int\n```
 //          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#`<init>`().(spanSize)
 //                   documentation ```kt\nvalue-parameter spanSize: kotlin.Int\n```
+//          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#getSpanSize().
+//                   documentation ```kt\npublic final val spanSize: kotlin.Int\n```
+//          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#spanSize.
+//                   documentation ```kt\npublic final val spanSize: kotlin.Int\n```
 //                    ^^^ reference semanticdb maven . . kotlin/Int#
         val viewType: Int,
-//          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#viewType.
-//                   documentation ```kt\npublic final val viewType: kotlin.Int\n```
-//          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#getViewType().
-//                   documentation ```kt\npublic final val viewType: kotlin.Int\n```
 //          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#`<init>`().(viewType)
 //                   documentation ```kt\nvalue-parameter viewType: kotlin.Int\n```
+//          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#getViewType().
+//                   documentation ```kt\npublic final val viewType: kotlin.Int\n```
+//          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#viewType.
+//                   documentation ```kt\npublic final val viewType: kotlin.Int\n```
 //                    ^^^ reference semanticdb maven . . kotlin/Int#
         /** An optional, custom signature provided by the model preloader. This allows the user to specify custom cache mixins */
         val signature: Any?
-//          ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#signature.
-//                    documentation ```kt\npublic final val signature: kotlin.Any?\n```\n\n----\n\n An optional, custom signature provided by the model preloader. This allows the user to specify custom cache mixins
-//          ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#getSignature().
-//                    documentation ```kt\npublic final val signature: kotlin.Any?\n```\n\n----\n\n An optional, custom signature provided by the model preloader. This allows the user to specify custom cache mixins
 //          ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#`<init>`().(signature)
 //                    documentation ```kt\nvalue-parameter signature: kotlin.Any?\n```\n\n----\n\n An optional, custom signature provided by the model preloader. This allows the user to specify custom cache mixins
+//          ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#getSignature().
+//                    documentation ```kt\npublic final val signature: kotlin.Any?\n```\n\n----\n\n An optional, custom signature provided by the model preloader. This allows the user to specify custom cache mixins
+//          ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#signature.
+//                    documentation ```kt\npublic final val signature: kotlin.Any?\n```\n\n----\n\n An optional, custom signature provided by the model preloader. This allows the user to specify custom cache mixins
 //                     ^^^ reference semanticdb maven . . kotlin/Any#
     )
 
@@ -302,15 +302,15 @@ internal class PreloadableViewDataProvider(
 //                            ^^^^ reference semanticdb maven . . kotlin/collections/List#
             preloader.preloadableViewIds.isNotEmpty() -> rootView.findViews(
 //          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViewData().(preloader)
-//                    ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#preloadableViewIds.
 //                    ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#getPreloadableViewIds().
+//                    ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#preloadableViewIds.
 //                                       ^^^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#isNotEmpty(+9).
 //                                                       ^^^^^^^^ reference local 4
 //                                                                ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViews().
                 preloader.preloadableViewIds,
 //              ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViewData().(preloader)
-//                        ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#preloadableViewIds.
 //                        ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#getPreloadableViewIds().
+//                        ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#preloadableViewIds.
                 epoxyModel
 //              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViewData().(epoxyModel)
             )
@@ -391,8 +391,8 @@ internal class PreloadableViewDataProvider(
 //                 ^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#recursePreloadableViews().
 //                         ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/Preloadable#
             viewsToPreload.flatMap { it.recursePreloadableViews() }
-//          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/Preloadable#viewsToPreload.
 //          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/Preloadable#getViewsToPreload().
+//          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/Preloadable#viewsToPreload.
 //                         ^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#flatMap(+10).
 //                                   ^^ reference local 9
         } else {

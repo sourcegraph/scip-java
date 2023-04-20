@@ -899,10 +899,10 @@ public class Carousel extends EpoxyRecyclerView {
 //                                ^^^^^^^^^^ reference local 38
 //                                            ^^^^^^^^^^ reference local 38
 //                                                        ^^^^^^^^^^^^^^ reference local 39
-//                                                                        ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#PaddingType#`<init>`().
-//                                                                        ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#PaddingType#`<init>`().
-//                                                                        ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#PaddingType#`<init>`().
 //                                                                        ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#PaddingType#
+//                                                                        ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#PaddingType#`<init>`().
+//                                                                        ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#PaddingType#`<init>`().
+//                                                                        ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#PaddingType#`<init>`().
 //                                                                                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#PaddingType#RESOURCE.
     }
 

@@ -3,8 +3,8 @@ package ujson
 import upickle.core.Visitor
 //     ^^^^^^^ reference semanticdb maven . . upickle/
 //             ^^^^ reference semanticdb maven . . upickle/core/
-//                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
 //                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
 
 trait Transformer[I] {
 //    ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#

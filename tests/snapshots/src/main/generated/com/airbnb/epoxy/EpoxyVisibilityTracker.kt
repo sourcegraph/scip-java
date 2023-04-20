@@ -58,9 +58,9 @@ class EpoxyVisibilityTracker {
      * Used to listen to [RecyclerView.ItemAnimator] ending animations.
      */
     private val itemAnimatorFinishedListener =
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#itemAnimatorFinishedListener.
-//                                           documentation ```kt\nprivate final val itemAnimatorFinishedListener: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```\n\n----\n\n\n Used to listen to [RecyclerView.ItemAnimator] ending animations.\n
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getItemAnimatorFinishedListener().
+//                                           documentation ```kt\nprivate final val itemAnimatorFinishedListener: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```\n\n----\n\n\n Used to listen to [RecyclerView.ItemAnimator] ending animations.\n
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#itemAnimatorFinishedListener.
 //                                           documentation ```kt\nprivate final val itemAnimatorFinishedListener: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```\n\n----\n\n\n Used to listen to [RecyclerView.ItemAnimator] ending animations.\n
         RecyclerView.ItemAnimator.ItemAnimatorFinishedListener {
             processChangeEvent(
@@ -72,15 +72,15 @@ class EpoxyVisibilityTracker {
 
     /** Maintain visibility item indexed by view id (identity hashcode)  */
     private val visibilityIdToItemMap = SparseArray<EpoxyVisibilityItem>()
-//              ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
-//                                    documentation ```kt\nprivate final val visibilityIdToItemMap: [ERROR : Type for SparseArray<EpoxyVisibilityItem>()]\n```\n\n----\n\n Maintain visibility item indexed by view id (identity hashcode)
 //              ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItemMap().
+//                                    documentation ```kt\nprivate final val visibilityIdToItemMap: [ERROR : Type for SparseArray<EpoxyVisibilityItem>()]\n```\n\n----\n\n Maintain visibility item indexed by view id (identity hashcode)
+//              ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
 //                                    documentation ```kt\nprivate final val visibilityIdToItemMap: [ERROR : Type for SparseArray<EpoxyVisibilityItem>()]\n```\n\n----\n\n Maintain visibility item indexed by view id (identity hashcode)
 //                                                  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#
     private val visibilityIdToItems: MutableList<EpoxyVisibilityItem> = ArrayList()
-//              ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
-//                                  documentation ```kt\nprivate final val visibilityIdToItems: kotlin.collections.MutableList<com.airbnb.epoxy.EpoxyVisibilityItem>\n```
 //              ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
+//                                  documentation ```kt\nprivate final val visibilityIdToItems: kotlin.collections.MutableList<com.airbnb.epoxy.EpoxyVisibilityItem>\n```
+//              ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
 //                                  documentation ```kt\nprivate final val visibilityIdToItems: kotlin.collections.MutableList<com.airbnb.epoxy.EpoxyVisibilityItem>\n```
 //                                   ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#
 //                                               ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#
@@ -88,17 +88,17 @@ class EpoxyVisibilityTracker {
 
     /** listener used to process scroll, layout and attach events  */
     private val listener = Listener()
-//              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
-//                       documentation ```kt\nprivate final val listener: com.airbnb.epoxy.EpoxyVisibilityTracker.Listener\n```\n\n----\n\n listener used to process scroll, layout and attach events
 //              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getListener().
+//                       documentation ```kt\nprivate final val listener: com.airbnb.epoxy.EpoxyVisibilityTracker.Listener\n```\n\n----\n\n listener used to process scroll, layout and attach events
+//              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
 //                       documentation ```kt\nprivate final val listener: com.airbnb.epoxy.EpoxyVisibilityTracker.Listener\n```\n\n----\n\n listener used to process scroll, layout and attach events
 //                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#`<init>`().
 
     /** listener used to process data events  */
     private val observer = DataObserver()
-//              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#observer.
-//                       documentation ```kt\nprivate final val observer: com.airbnb.epoxy.EpoxyVisibilityTracker.DataObserver\n```\n\n----\n\n listener used to process data events
 //              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getObserver().
+//                       documentation ```kt\nprivate final val observer: com.airbnb.epoxy.EpoxyVisibilityTracker.DataObserver\n```\n\n----\n\n listener used to process data events
+//              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#observer.
 //                       documentation ```kt\nprivate final val observer: com.airbnb.epoxy.EpoxyVisibilityTracker.DataObserver\n```\n\n----\n\n listener used to process data events
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#`<init>`().
 
@@ -111,18 +111,18 @@ class EpoxyVisibilityTracker {
 //                                   documentation ```kt\nprivate final var attachedRecyclerView: [ERROR : RecyclerView]?\n```
 
     private var lastAdapterSeen: RecyclerView.Adapter<*>? = null
-//              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#lastAdapterSeen.
-//                              documentation ```kt\nprivate final var lastAdapterSeen: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?\n```
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getLastAdapterSeen().
+//                              documentation ```kt\nprivate final var lastAdapterSeen: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?\n```
+//              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#lastAdapterSeen.
 //                              documentation ```kt\nprivate final var lastAdapterSeen: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?\n```
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setLastAdapterSeen().
 //                              documentation ```kt\nprivate final var lastAdapterSeen: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?\n```
 
     /** All nested visibility trackers  */
     private val nestedTrackers: MutableMap<RecyclerView, EpoxyVisibilityTracker> = HashMap()
-//              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#nestedTrackers.
-//                             documentation ```kt\nprivate final val nestedTrackers: kotlin.collections.MutableMap<[ERROR : RecyclerView], com.airbnb.epoxy.EpoxyVisibilityTracker>\n```\n\n----\n\n All nested visibility trackers
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getNestedTrackers().
+//                             documentation ```kt\nprivate final val nestedTrackers: kotlin.collections.MutableMap<[ERROR : RecyclerView], com.airbnb.epoxy.EpoxyVisibilityTracker>\n```\n\n----\n\n All nested visibility trackers
+//              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#nestedTrackers.
 //                             documentation ```kt\nprivate final val nestedTrackers: kotlin.collections.MutableMap<[ERROR : RecyclerView], com.airbnb.epoxy.EpoxyVisibilityTracker>\n```\n\n----\n\n All nested visibility trackers
 //                              ^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#
 //                                                       ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#
@@ -131,11 +131,11 @@ class EpoxyVisibilityTracker {
     /** This flag is for optimizing the process on detach. If detach is from data changed then it
      * need to re-process all views, else no need (ex: scroll). */
     private var visibleDataChanged = false
-//              ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
-//                                 documentation ```kt\nprivate final var visibleDataChanged: kotlin.Boolean\n```\n\n----\n\n This flag is for optimizing the process on detach. If detach is from data changed then it\n need to re-process all views, else no need (ex: scroll).
 //              ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibleDataChanged().
 //                                 documentation ```kt\nprivate final var visibleDataChanged: kotlin.Boolean\n```\n\n----\n\n This flag is for optimizing the process on detach. If detach is from data changed then it\n need to re-process all views, else no need (ex: scroll).
 //              ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setVisibleDataChanged().
+//                                 documentation ```kt\nprivate final var visibleDataChanged: kotlin.Boolean\n```\n\n----\n\n This flag is for optimizing the process on detach. If detach is from data changed then it\n need to re-process all views, else no need (ex: scroll).
+//              ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
 //                                 documentation ```kt\nprivate final var visibleDataChanged: kotlin.Boolean\n```\n\n----\n\n This flag is for optimizing the process on detach. If detach is from data changed then it\n need to re-process all views, else no need (ex: scroll).
 
     /**
@@ -147,9 +147,9 @@ class EpoxyVisibilityTracker {
      * @see OnModelVisibilityChangedListener
      */
     var onChangedEnabled = true
-//      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#onChangedEnabled.
-//                       documentation ```kt\npublic final var onChangedEnabled: kotlin.Boolean\n```\n\n----\n\n\n Enable or disable visibility changed event. Default is `true`, disable it if you don't need\n (triggered by every pixel scrolled).\n\n @see OnVisibilityChanged\n\n @see OnModelVisibilityChangedListener\n
 //      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getOnChangedEnabled().
+//                       documentation ```kt\npublic final var onChangedEnabled: kotlin.Boolean\n```\n\n----\n\n\n Enable or disable visibility changed event. Default is `true`, disable it if you don't need\n (triggered by every pixel scrolled).\n\n @see OnVisibilityChanged\n\n @see OnModelVisibilityChangedListener\n
+//      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#onChangedEnabled.
 //                       documentation ```kt\npublic final var onChangedEnabled: kotlin.Boolean\n```\n\n----\n\n\n Enable or disable visibility changed event. Default is `true`, disable it if you don't need\n (triggered by every pixel scrolled).\n\n @see OnVisibilityChanged\n\n @see OnModelVisibilityChangedListener\n
 //      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setOnChangedEnabled().
 //                       documentation ```kt\npublic final var onChangedEnabled: kotlin.Boolean\n```\n\n----\n\n\n Enable or disable visibility changed event. Default is `true`, disable it if you don't need\n (triggered by every pixel scrolled).\n\n @see OnVisibilityChanged\n\n @see OnModelVisibilityChangedListener\n
@@ -167,9 +167,9 @@ class EpoxyVisibilityTracker {
 //            ^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/IntRange#`<init>`().(from)
 //                      ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/IntRange#`<init>`().(to)
     var partialImpressionThresholdPercentage: Int? = null
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#partialImpressionThresholdPercentage.
-//                                           documentation ```kt\npublic final var partialImpressionThresholdPercentage: kotlin.Int?\n```\n\n----\n\n\n Set the threshold of percentage visible area to identify the partial impression view state.\n\n @param thresholdPercentage Percentage of visible area of an element in the range [0..100].\n Defaults to `null`, which disables\n [VisibilityState.PARTIAL_IMPRESSION_VISIBLE] and\n [VisibilityState.PARTIAL_IMPRESSION_INVISIBLE] events.\n
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getPartialImpressionThresholdPercentage().
+//                                           documentation ```kt\npublic final var partialImpressionThresholdPercentage: kotlin.Int?\n```\n\n----\n\n\n Set the threshold of percentage visible area to identify the partial impression view state.\n\n @param thresholdPercentage Percentage of visible area of an element in the range [0..100].\n Defaults to `null`, which disables\n [VisibilityState.PARTIAL_IMPRESSION_VISIBLE] and\n [VisibilityState.PARTIAL_IMPRESSION_INVISIBLE] events.\n
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#partialImpressionThresholdPercentage.
 //                                           documentation ```kt\npublic final var partialImpressionThresholdPercentage: kotlin.Int?\n```\n\n----\n\n\n Set the threshold of percentage visible area to identify the partial impression view state.\n\n @param thresholdPercentage Percentage of visible area of an element in the range [0..100].\n Defaults to `null`, which disables\n [VisibilityState.PARTIAL_IMPRESSION_VISIBLE] and\n [VisibilityState.PARTIAL_IMPRESSION_INVISIBLE] events.\n
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setPartialImpressionThresholdPercentage().
 //                                           documentation ```kt\npublic final var partialImpressionThresholdPercentage: kotlin.Int?\n```\n\n----\n\n\n Set the threshold of percentage visible area to identify the partial impression view state.\n\n @param thresholdPercentage Percentage of visible area of an element in the range [0..100].\n Defaults to `null`, which disables\n [VisibilityState.PARTIAL_IMPRESSION_VISIBLE] and\n [VisibilityState.PARTIAL_IMPRESSION_INVISIBLE] events.\n
@@ -192,16 +192,16 @@ class EpoxyVisibilityTracker {
 //                             ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#attach().(recyclerView)
         recyclerView.addOnScrollListener(listener)
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#attach().(recyclerView)
-//                                       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
 //                                       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getListener().
+//                                       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
         recyclerView.addOnLayoutChangeListener(listener)
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#attach().(recyclerView)
-//                                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
 //                                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getListener().
+//                                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
         recyclerView.addOnChildAttachStateChangeListener(listener)
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#attach().(recyclerView)
-//                                                       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
 //                                                       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getListener().
+//                                                       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
         setTracker(recyclerView, this)
 //      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#setTracker().
 //                 ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#attach().(recyclerView)
@@ -220,16 +220,16 @@ class EpoxyVisibilityTracker {
 //                          documentation ```kt\nvalue-parameter recyclerView: [ERROR : RecyclerView]\n```
         recyclerView.removeOnScrollListener(listener)
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#detach().(recyclerView)
-//                                          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
 //                                          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getListener().
+//                                          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
         recyclerView.removeOnLayoutChangeListener(listener)
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#detach().(recyclerView)
-//                                                ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
 //                                                ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getListener().
+//                                                ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
         recyclerView.removeOnChildAttachStateChangeListener(listener)
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#detach().(recyclerView)
-//                                                          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
 //                                                          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getListener().
+//                                                          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
         setTracker(recyclerView, null)
 //      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#setTracker().
 //                 ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#detach().(recyclerView)
@@ -249,11 +249,11 @@ class EpoxyVisibilityTracker {
 //                            documentation ```kt\npublic final fun clearVisibilityStates()\n```\n\n----\n\n\n The tracker is storing visibility states internally and is using if to send events, only the\n difference is sent. Use this method to clear the states and thus regenerate the visibility\n events. This may be useful when you change the adapter on the [RecyclerView].\n
         // Clear our visibility items
         visibilityIdToItemMap.clear()
-//      ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
 //      ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItemMap().
+//      ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
         visibilityIdToItems.clear()
-//      ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
 //      ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
+//      ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
 //                          ^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#clear().
     }
 
@@ -308,8 +308,8 @@ class EpoxyVisibilityTracker {
             // - If the animations are not running `onAnimationsFinished` will be invoked right away.
             if (itemAnimator.isRunning(itemAnimatorFinishedListener)) {
 //              ^^^^^^^^^^^^ reference local 1
-//                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#itemAnimatorFinishedListener.
 //                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getItemAnimatorFinishedListener().
+//                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#itemAnimatorFinishedListener.
                 // If running process visibility now as `onAnimationsFinished` was not yet called
                 processChangeEventWithDetachedView(null, debug)
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEventWithDetachedView().
@@ -388,25 +388,25 @@ class EpoxyVisibilityTracker {
 //                                           ^^^^^^^ definition local 5
 //                                                   documentation ```kt\nvalue-parameter adapter: [ERROR : <Unknown lambda parameter type>]\n```
             if (lastAdapterSeen != adapter) {
-//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#lastAdapterSeen.
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getLastAdapterSeen().
+//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#lastAdapterSeen.
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setLastAdapterSeen().
 //                                 ^^^^^^^ reference local 5
                 // Unregister the old adapter
                 lastAdapterSeen?.unregisterAdapterDataObserver(observer)
-//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#lastAdapterSeen.
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getLastAdapterSeen().
+//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#lastAdapterSeen.
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setLastAdapterSeen().
-//                                                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#observer.
 //                                                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getObserver().
+//                                                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#observer.
                 // Register the new adapter
                 adapter.registerAdapterDataObserver(observer)
 //              ^^^^^^^ reference local 5
-//                                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#observer.
 //                                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getObserver().
+//                                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#observer.
                 lastAdapterSeen = adapter
-//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#lastAdapterSeen.
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getLastAdapterSeen().
+//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#lastAdapterSeen.
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setLastAdapterSeen().
 //                                ^^^^^^^ reference local 5
             }
@@ -514,8 +514,8 @@ class EpoxyVisibilityTracker {
 //           ^^^^^^^^^^^^^^^^ definition local 10
 //                            documentation ```kt\nval groupChildHolder: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
 //                               ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(epoxyHolder)
-//                                           ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
 //                                           ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getViewHolders().
+//                                           ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#viewHolders.
             // Since the group is likely using a ViewGroup other than a RecyclerView, handle the
             // potential of a nested RecyclerView. This cannot be done through the normal flow
             // without recursively searching through the view children.
@@ -595,8 +595,8 @@ class EpoxyVisibilityTracker {
 //          ^^^^^^^ reference local 11
 //                     ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(child)
             nestedTrackers[child]?.processChangeEvent("parent")
-//          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#nestedTrackers.
 //          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getNestedTrackers().
+//          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#nestedTrackers.
 //                         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(child)
 //                                 ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().
         }
@@ -665,8 +665,8 @@ class EpoxyVisibilityTracker {
         var vi = visibilityIdToItemMap[id]
 //          ^^ definition local 14
 //             documentation ```kt\nvar vi: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
-//               ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
 //               ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItemMap().
+//               ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
 //                                     ^^ reference local 13
         if (vi == null) {
 //          ^^ reference local 14
@@ -676,13 +676,13 @@ class EpoxyVisibilityTracker {
 //               ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#`<init>`().
 //                                   ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(epoxyHolder)
             visibilityIdToItemMap.put(id, vi)
-//          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
 //          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItemMap().
+//          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
 //                                    ^^ reference local 13
 //                                        ^^ reference local 14
             visibilityIdToItems.add(vi)
-//          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
 //          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
+//          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
 //                              ^^^ reference semanticdb maven . . kotlin/collections/MutableList#add().
 //                                  ^^ reference local 14
         } else if (epoxyHolder.adapterPosition != RecyclerView.NO_POSITION &&
@@ -710,8 +710,8 @@ class EpoxyVisibilityTracker {
 //                           ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(epoxyHolder)
 //                                        ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(detachEvent)
             partialImpressionThresholdPercentage?.let { percentage ->
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#partialImpressionThresholdPercentage.
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getPartialImpressionThresholdPercentage().
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#partialImpressionThresholdPercentage.
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setPartialImpressionThresholdPercentage().
 //                                                ^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/StandardKt#let().
 //                                                      ^^^^^^^^^^ definition local 16
@@ -737,8 +737,8 @@ class EpoxyVisibilityTracker {
 //          ^^^^^^^ reference local 15
 //                    ^^ reference local 14
 //                                     ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(epoxyHolder)
-//                                                  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#onChangedEnabled.
 //                                                  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getOnChangedEnabled().
+//                                                  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#onChangedEnabled.
 //                                                  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setOnChangedEnabled().
         }
         return changed
@@ -763,11 +763,11 @@ class EpoxyVisibilityTracker {
 //                                                                                           documentation ```kt\nvalue-parameter nested: com.airbnb.epoxy.EpoxyVisibilityTracker\n```
             nested.partialImpressionThresholdPercentage = partialImpressionThresholdPercentage
 //          ^^^^^^ reference local 18
-//                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#partialImpressionThresholdPercentage.
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getPartialImpressionThresholdPercentage().
+//                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#partialImpressionThresholdPercentage.
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setPartialImpressionThresholdPercentage().
-//                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#partialImpressionThresholdPercentage.
 //                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getPartialImpressionThresholdPercentage().
+//                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#partialImpressionThresholdPercentage.
 //                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setPartialImpressionThresholdPercentage().
             nested.attach(childRecyclerView)
 //          ^^^^^^ reference local 18
@@ -777,8 +777,8 @@ class EpoxyVisibilityTracker {
 //          ^^^^^^ reference local 18
         }
         nestedTrackers[childRecyclerView] = tracker
-//      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#nestedTrackers.
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getNestedTrackers().
+//      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#nestedTrackers.
 //                     ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewAttached().(childRecyclerView)
 //                                          ^^^^^^^ reference local 17
     }
@@ -789,8 +789,8 @@ class EpoxyVisibilityTracker {
 //                                               ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewDetached().(childRecyclerView)
 //                                                                 documentation ```kt\nvalue-parameter childRecyclerView: [ERROR : RecyclerView]\n```
         nestedTrackers.remove(childRecyclerView)
-//      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#nestedTrackers.
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getNestedTrackers().
+//      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#nestedTrackers.
 //                     ^^^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#remove().
 //                            ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewDetached().(childRecyclerView)
     }
@@ -893,18 +893,18 @@ class EpoxyVisibilityTracker {
 //                                               ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewDetachedFromWindow().(child)
             }
             if (visibleDataChanged) {
-//              ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
 //              ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibleDataChanged().
 //              ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setVisibleDataChanged().
+//              ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
                 // On detach event caused by data set changed we need to re-process all children because
                 // the removal caused the others views to changes.
                 processChangeEventWithDetachedView(child, "onChildViewDetachedFromWindow")
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEventWithDetachedView().
 //                                                 ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewDetachedFromWindow().(child)
                 visibleDataChanged = false
-//              ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
 //              ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibleDataChanged().
 //              ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setVisibleDataChanged().
+//              ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
             } else {
                 processChild(child, true, "onChildViewDetachedFromWindow")
 //              ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().
@@ -943,16 +943,16 @@ class EpoxyVisibilityTracker {
 //                    ^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTAG().
             }
             visibilityIdToItemMap.clear()
-//          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
 //          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItemMap().
+//          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
             visibilityIdToItems.clear()
-//          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
 //          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
+//          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
 //                              ^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#clear().
             visibleDataChanged = true
-//          ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
 //          ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibleDataChanged().
 //          ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setVisibleDataChanged().
+//          ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
         }
 
         /**
@@ -987,17 +987,17 @@ class EpoxyVisibilityTracker {
             for (item in visibilityIdToItems) {
 //               ^^^^ definition local 19
 //                    documentation ```kt\nval item: com.airbnb.epoxy.EpoxyVisibilityItem\n```
-//                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
 //                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
+//                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
                 if (item.adapterPosition >= positionStart) {
 //                  ^^^^ reference local 19
 //                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#adapterPosition.
 //                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#getAdapterPosition().
 //                                          ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeInserted().(positionStart)
                     visibleDataChanged = true
-//                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
 //                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibleDataChanged().
 //                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setVisibleDataChanged().
+//                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
                     item.shiftBy(itemCount)
 //                  ^^^^ reference local 19
 //                       ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#shiftBy().
@@ -1038,17 +1038,17 @@ class EpoxyVisibilityTracker {
             for (item in visibilityIdToItems) {
 //               ^^^^ definition local 20
 //                    documentation ```kt\nval item: com.airbnb.epoxy.EpoxyVisibilityItem\n```
-//                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
 //                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
+//                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
                 if (item.adapterPosition >= positionStart) {
 //                  ^^^^ reference local 20
 //                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#adapterPosition.
 //                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#getAdapterPosition().
 //                                          ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeRemoved().(positionStart)
                     visibleDataChanged = true
-//                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
 //                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibleDataChanged().
 //                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setVisibleDataChanged().
+//                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
                     item.shiftBy(-itemCount)
 //                  ^^^^ reference local 20
 //                       ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#shiftBy().
@@ -1128,8 +1128,8 @@ class EpoxyVisibilityTracker {
             for (item in visibilityIdToItems) {
 //               ^^^^ definition local 22
 //                    documentation ```kt\nval item: com.airbnb.epoxy.EpoxyVisibilityItem\n```
-//                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
 //                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
+//                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
                 val position = item.adapterPosition
 //                  ^^^^^^^^ definition local 23
 //                           documentation ```kt\nval position: [ERROR : <ERROR PROPERTY TYPE>]\n```
@@ -1147,9 +1147,9 @@ class EpoxyVisibilityTracker {
 //                                          ^ reference semanticdb maven . . kotlin/Int#minus(+3).
 //                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemMoved().(fromPosition)
                     visibleDataChanged = true
-//                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
 //                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibleDataChanged().
 //                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setVisibleDataChanged().
+//                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
                 } else if (fromPosition < toPosition) {
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemMoved().(fromPosition)
 //                                      ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
@@ -1168,9 +1168,9 @@ class EpoxyVisibilityTracker {
 //                           ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#shiftBy().
 //                                   ^ reference semanticdb maven . . kotlin/Int#unaryMinus().
                         visibleDataChanged = true
-//                      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
 //                      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibleDataChanged().
 //                      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setVisibleDataChanged().
+//                      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
                     }
                 } else if (fromPosition > toPosition) {
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemMoved().(fromPosition)
@@ -1188,9 +1188,9 @@ class EpoxyVisibilityTracker {
 //                      ^^^^ reference local 22
 //                           ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#shiftBy().
                         visibleDataChanged = true
-//                      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
 //                      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibleDataChanged().
 //                      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setVisibleDataChanged().
+//                      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
                     }
                 }
             }

@@ -71,65 +71,65 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     // Translation for header
     private var translationX: Float = 0f
-//              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
-//                           documentation ```kt\nprivate final var translationX: kotlin.Float\n```
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationX().
 //                           documentation ```kt\nprivate final var translationX: kotlin.Float\n```
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationX().
 //                           documentation ```kt\nprivate final var translationX: kotlin.Float\n```
+//              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
+//                           documentation ```kt\nprivate final var translationX: kotlin.Float\n```
 //                            ^^^^^ reference semanticdb maven . . kotlin/Float#
     private var translationY: Float = 0f
-//              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
-//                           documentation ```kt\nprivate final var translationY: kotlin.Float\n```
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationY().
 //                           documentation ```kt\nprivate final var translationY: kotlin.Float\n```
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationY().
+//                           documentation ```kt\nprivate final var translationY: kotlin.Float\n```
+//              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
 //                           documentation ```kt\nprivate final var translationY: kotlin.Float\n```
 //                            ^^^^^ reference semanticdb maven . . kotlin/Float#
 
     // Header positions for the currently displayed list and their observer.
     private val headerPositions = mutableListOf<Int>()
-//              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
-//                              documentation ```kt\nprivate final val headerPositions: kotlin.collections.MutableList<kotlin.Int>\n```
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                              documentation ```kt\nprivate final val headerPositions: kotlin.collections.MutableList<kotlin.Int>\n```
+//              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                              documentation ```kt\nprivate final val headerPositions: kotlin.collections.MutableList<kotlin.Int>\n```
 //                                ^^^^^^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#mutableListOf().
 //                                              ^^^ reference semanticdb maven . . kotlin/Int#
     private val headerPositionsObserver = HeaderPositionsAdapterDataObserver()
-//              ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositionsObserver.
-//                                      documentation ```kt\nprivate final val headerPositionsObserver: com.airbnb.epoxy.stickyheader.StickyHeaderLinearLayoutManager.HeaderPositionsAdapterDataObserver\n```
 //              ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositionsObserver().
+//                                      documentation ```kt\nprivate final val headerPositionsObserver: com.airbnb.epoxy.stickyheader.StickyHeaderLinearLayoutManager.HeaderPositionsAdapterDataObserver\n```
+//              ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositionsObserver.
 //                                      documentation ```kt\nprivate final val headerPositionsObserver: com.airbnb.epoxy.stickyheader.StickyHeaderLinearLayoutManager.HeaderPositionsAdapterDataObserver\n```
 //                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#`<init>`().
 
     // Sticky header's ViewHolder and dirty state.
     private var stickyHeader: View? = null
-//              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
-//                           documentation ```kt\nprivate final var stickyHeader: [ERROR : View]?\n```
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                           documentation ```kt\nprivate final var stickyHeader: [ERROR : View]?\n```
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
 //                           documentation ```kt\nprivate final var stickyHeader: [ERROR : View]?\n```
+//              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
+//                           documentation ```kt\nprivate final var stickyHeader: [ERROR : View]?\n```
     private var stickyHeaderPosition = RecyclerView.NO_POSITION
-//              ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
-//                                   documentation ```kt\nprivate final var stickyHeaderPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
 //              ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeaderPosition().
 //                                   documentation ```kt\nprivate final var stickyHeaderPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
 //              ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderPosition().
 //                                   documentation ```kt\nprivate final var stickyHeaderPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//              ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
+//                                   documentation ```kt\nprivate final var stickyHeaderPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
 
     // Save / Restore scroll state
     private var scrollPosition = RecyclerView.NO_POSITION
-//              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
-//                             documentation ```kt\nprivate final var scrollPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollPosition().
+//                             documentation ```kt\nprivate final var scrollPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
 //                             documentation ```kt\nprivate final var scrollPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollPosition().
 //                             documentation ```kt\nprivate final var scrollPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
     private var scrollOffset = 0
-//              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollOffset.
-//                           documentation ```kt\nprivate final var scrollOffset: kotlin.Int\n```
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollOffset().
+//                           documentation ```kt\nprivate final var scrollOffset: kotlin.Int\n```
+//              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollOffset.
 //                           documentation ```kt\nprivate final var scrollOffset: kotlin.Int\n```
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollOffset().
 //                           documentation ```kt\nprivate final var scrollOffset: kotlin.Int\n```
@@ -174,8 +174,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //      ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#adapter.
 //      ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getAdapter().
 //      ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().
-//                                             ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositionsObserver.
 //                                             ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositionsObserver().
+//                                             ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositionsObserver.
         if (newAdapter is BaseEpoxyAdapter) {
 //          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().(newAdapter)
             adapter = newAdapter
@@ -187,11 +187,11 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //          ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#adapter.
 //          ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getAdapter().
 //          ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().
-//                                               ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositionsObserver.
 //                                               ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositionsObserver().
+//                                               ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositionsObserver.
             headerPositionsObserver.onChanged()
-//          ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositionsObserver.
 //          ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositionsObserver().
+//          ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositionsObserver.
 //                                  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onChanged().
         } else {
             adapter = null
@@ -199,8 +199,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //          ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getAdapter().
 //          ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().
             headerPositions.clear()
-//          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                          ^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#clear().
         }
     }
@@ -215,13 +215,13 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                       ^^^^^ reference semanticdb maven . . kotlin/Any#
             scrollPosition = scrollPosition,
 //          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().(scrollPosition)
-//                           ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
 //                           ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollPosition().
+//                           ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
 //                           ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollPosition().
             scrollOffset = scrollOffset
 //          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().(scrollOffset)
-//                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollOffset.
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollOffset().
+//                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollOffset.
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollOffset().
         )
     }
@@ -236,24 +236,24 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                 ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#
 //                              ^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/StandardKt#let().
             scrollPosition = it.scrollPosition
-//          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
 //          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollPosition().
+//          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
 //          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollPosition().
 //                           ^^ reference local 0
-//                              ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#scrollPosition.
 //                              ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getScrollPosition().
+//                              ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#scrollPosition.
             scrollOffset = it.scrollOffset
-//          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollOffset.
 //          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollOffset().
+//          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollOffset.
 //          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollOffset().
 //                         ^^ reference local 0
-//                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#scrollOffset.
 //                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getScrollOffset().
+//                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#scrollOffset.
             super.onRestoreInstanceState(it.superState)
 //          ^^^^^ reference semanticdb maven . . kotlin/Any#
 //                                       ^^ reference local 0
-//                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#superState.
 //                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getSuperState().
+//                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#superState.
         }
     }
 
@@ -424,24 +424,24 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
         // Current sticky header is the same as at the position. Adjust the scroll offset and reset pending scroll.
         if (stickyHeader != null && headerIndex == findHeaderIndex(stickyHeaderPosition)) {
-//          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                  ^^^^^^^^^^^ reference local 3
 //                                              ^^ reference semanticdb maven . . kotlin/Int#equals().
 //                                                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndex().
-//                                                                 ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
 //                                                                 ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeaderPosition().
 //                                                                 ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderPosition().
+//                                                                 ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
             val adjustedOffset = (if (offset != INVALID_OFFSET) offset else 0) + stickyHeader!!.height
 //              ^^^^^^^^^^^^^^ definition local 4
 //                             documentation ```kt\nval adjustedOffset: [ERROR : Type for (if (offset != INVALID_OFFSET) offset else 0) + stickyHeader!!.height]\n```
 //                                    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(offset)
 //                                           ^^ reference semanticdb maven . . kotlin/Int#equals().
 //                                                              ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(offset)
-//                                                                               ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                                                               ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                                                                               ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//                                                                               ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
             super.scrollToPositionWithOffset(position, adjustedOffset)
 //          ^^^^^ reference semanticdb maven . . kotlin/Any#
 //                                           ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(position)
@@ -571,18 +571,18 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                               ^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().[T]
 //                                                   ^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().[T]
         stickyHeader?.let(this::detachView)
-//      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                        ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#
         val result = operation()
 //          ^^^^^^ definition local 5
 //                 documentation ```kt\nval result: T\n```
 //                   ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().(operation)
         stickyHeader?.let(this::attachView)
-//      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                        ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#
         return result
 //             ^^^^^^ reference local 5
@@ -601,9 +601,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                ^^^^^ reference semanticdb maven . . kotlin/Float#
         this.translationY = translationY
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#
-//           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
 //           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationY().
 //           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationY().
+//           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
 //                          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderTranslationY().(translationY)
         requestLayout()
     }
@@ -619,9 +619,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                ^^^^^ reference semanticdb maven . . kotlin/Float#
         this.translationX = translationX
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#
-//           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
 //           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationX().
 //           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationX().
+//           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
 //                          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderTranslationX().(translationX)
         requestLayout()
     }
@@ -636,9 +636,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                          documentation ```kt\nvalue-parameter view: [ERROR : View]\n```
 //                                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                            ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isStickyHeader().(view)
-//                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 
     /**
      * Updates the sticky header state (creation, binding, display), to be called whenever there's a layout or scroll
@@ -654,10 +654,10 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
         val headerCount = headerPositions.size
 //          ^^^^^^^^^^^ definition local 6
 //                      documentation ```kt\nval headerCount: kotlin.Int\n```
-//                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
-//                                        ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
+//                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                        ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#getSize().
+//                                        ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
         val childCount = childCount
 //          ^^^^^^^^^^ definition local 7
 //                     documentation ```kt\nval childCount: [ERROR : Type for childCount]\n```
@@ -722,8 +722,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                  ^^^^^^^^^^^ reference local 14
 //                                              ^^ reference semanticdb maven . . kotlin/Int#equals().
 //                                                 ^ reference semanticdb maven . . kotlin/Int#unaryMinus().
-//                                                     ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                                     ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                                                     ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                                                     ^^^^^^^^^^^ reference local 14
 //                                                                                       ^ reference semanticdb maven . . kotlin/Int#unaryMinus().
                 val nextHeaderPos = if (headerCount > headerIndex + 1) headerPositions[headerIndex + 1] else -1
@@ -733,8 +733,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                  ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
 //                                                    ^^^^^^^^^^^ reference local 14
 //                                                                ^ reference semanticdb maven . . kotlin/Int#plus(+3).
-//                                                                     ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                                                     ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                                                                     ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                                                                     ^^^^^^^^^^^ reference local 14
 //                                                                                                 ^ reference semanticdb maven . . kotlin/Int#plus(+3).
 //                                                                                                           ^ reference semanticdb maven . . kotlin/Int#unaryMinus().
@@ -761,12 +761,12 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                 ) {
                     // 1. Ensure existing sticky header, if any, is of correct type.
                     if (stickyHeader != null && getItemViewType(stickyHeader!!) != adapter?.getItemViewType(headerPos)) {
-//                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
-//                                                              ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
+//                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//                                                              ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                                                                 ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#adapter.
 //                                                                                 ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getAdapter().
 //                                                                                 ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().
@@ -779,32 +779,32 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
                     // 2. Ensure sticky header is created, if absent, or bound, if being laid out or the position changed.
                     if (stickyHeader == null) createStickyHeader(recycler, headerPos)
-//                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                            ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().
 //                                                               ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#updateStickyHeader().(recycler)
 //                                                                         ^^^^^^^^^ reference local 15
                     // 3. Bind the sticky header
                     if (layout || getPosition(stickyHeader!!) != headerPos) bindStickyHeader(recycler, stickyHeader!!, headerPos)
 //                      ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#updateStickyHeader().(layout)
-//                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                                               ^^^^^^^^^ reference local 15
 //                                                                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().
 //                                                                                           ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#updateStickyHeader().(recycler)
-//                                                                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                                                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                                                                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//                                                                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                                                                                                     ^^^^^^^^^ reference local 15
 
                     // 4. Draw the sticky header using translation values which depend on orientation, direction and
                     // position of the next header view.
                     stickyHeader?.let {
-//                  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//                  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
                         val nextHeaderView: View? = if (nextHeaderPos != -1) {
 //                          ^^^^^^^^^^^^^^ definition local 17
 //                                         documentation ```kt\nval nextHeaderView: [ERROR : View]?\n```
@@ -822,9 +822,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                             // The header view itself is added to the RecyclerView. Discard it if it comes up.
                             if (nextHeaderView === stickyHeader) null else nextHeaderView
 //                              ^^^^^^^^^^^^^^ reference local 18
-//                                                 ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                                 ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                                                 ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//                                                 ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                                                         ^^^^^^^^^^^^^^ reference local 18
                         } else null
                         it.translationX = getX(it, nextHeaderView)
@@ -840,9 +840,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
         }
 
         if (stickyHeader != null) {
-//          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
             scrapStickyHeader(recycler)
 //          ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrapStickyHeader().
 //                            ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#updateStickyHeader().(recycler)
@@ -888,15 +888,15 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
         this.stickyHeader = stickyHeader
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#
-//           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                          ^^^^^^^^^^^^ reference local 19
         this.stickyHeaderPosition = position
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#
-//           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
 //           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeaderPosition().
 //           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderPosition().
+//           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
 //                                  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().(position)
     }
 
@@ -919,9 +919,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(stickyHeader)
 //                                                ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(position)
         stickyHeaderPosition = position
-//      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
 //      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeaderPosition().
 //      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderPosition().
+//      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
 //                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(position)
         measureAndLayout(stickyHeader)
 //      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#measureAndLayout().
@@ -929,8 +929,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
         // If we have a pending scroll wait until the end of layout and scroll again.
         if (scrollPosition != RecyclerView.NO_POSITION) {
-//          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
 //          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollPosition().
+//          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
 //          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollPosition().
             stickyHeader.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
 //          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(stickyHeader)
@@ -944,16 +944,16 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                       ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(stickyHeader)
 //                                                                                  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().`<no name provided>`#
                     if (scrollPosition != RecyclerView.NO_POSITION) {
-//                      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
 //                      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollPosition().
+//                      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
 //                      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollPosition().
                         scrollToPositionWithOffset(scrollPosition, scrollOffset)
 //                      ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset().
-//                                                 ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
 //                                                 ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollPosition().
+//                                                 ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
 //                                                 ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollPosition().
-//                                                                 ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollOffset.
 //                                                                 ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollOffset().
+//                                                                 ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollOffset.
 //                                                                 ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollOffset().
                         setScrollState(RecyclerView.NO_POSITION, INVALID_OFFSET)
 //                      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollState().
@@ -997,19 +997,19 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
         val stickyHeader = stickyHeader ?: return
 //          ^^^^^^^^^^^^ definition local 21
 //                       documentation ```kt\nval stickyHeader: kotlin.Nothing\n```
-//                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
         this.stickyHeader = null
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#
-//           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
         this.stickyHeaderPosition = RecyclerView.NO_POSITION
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#
-//           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
 //           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeaderPosition().
 //           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderPosition().
+//           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
 
         // Revert translation values.
         stickyHeader.translationX = 0f
@@ -1055,29 +1055,29 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                     reverseLayout -> view.top + view.translationY <= height + translationY
 //                                   ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(view)
 //                                              ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(view)
-//                                                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
 //                                                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationY().
 //                                                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationY().
+//                                                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
                     else -> view.bottom - view.translationY >= translationY
 //                          ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(view)
 //                                        ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(view)
-//                                                             ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
 //                                                             ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationY().
 //                                                             ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationY().
+//                                                             ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
                 }
                 else -> when {
                     reverseLayout -> view.left + view.translationX <= width + translationX
 //                                   ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(view)
 //                                               ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(view)
-//                                                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
 //                                                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationX().
 //                                                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationX().
+//                                                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
                     else -> view.right - view.translationX >= translationX
 //                          ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(view)
 //                                       ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(view)
-//                                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
 //                                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationX().
 //                                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationX().
+//                                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
                 }
             }
             else -> false
@@ -1098,29 +1098,29 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                 reverseLayout -> view.bottom - view.translationY > height + translationY
 //                               ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary().(view)
 //                                             ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary().(view)
-//                                                                          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
 //                                                                          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationY().
 //                                                                          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationY().
+//                                                                          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
                 else -> view.top + view.translationY < translationY
 //                      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary().(view)
 //                                 ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary().(view)
-//                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
 //                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationY().
 //                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationY().
+//                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
             }
             else -> when {
                 reverseLayout -> view.right - view.translationX > width + translationX
 //                               ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary().(view)
 //                                            ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary().(view)
-//                                                                        ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
 //                                                                        ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationX().
 //                                                                        ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationX().
+//                                                                        ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
                 else -> view.left + view.translationX < translationX
 //                      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary().(view)
 //                                  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary().(view)
-//                                                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
 //                                                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationX().
 //                                                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationX().
+//                                                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
             }
         }
     }
@@ -1142,9 +1142,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                 var y = translationY
 //                  ^ definition local 22
 //                    documentation ```kt\nvar y: kotlin.Float\n```
-//                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
 //                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationY().
 //                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationY().
+//                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
                 if (reverseLayout) {
                     y += (height - headerView.height).toFloat()
 //                  ^ reference local 22
@@ -1177,9 +1177,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                     ^ reference local 22
             }
             else -> return translationY
-//                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationY().
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationY().
+//                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationY.
         }
     }
 
@@ -1200,9 +1200,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                 var x = translationX
 //                  ^ definition local 25
 //                    documentation ```kt\nvar x: kotlin.Float\n```
-//                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
 //                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationX().
 //                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationX().
+//                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
                 if (reverseLayout) {
                     x += (width - headerView.width).toFloat()
 //                  ^ reference local 25
@@ -1235,9 +1235,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                     ^ reference local 25
             }
             else -> return translationX
-//                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getTranslationX().
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setTranslationX().
+//                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#translationX.
         }
     }
 
@@ -1257,10 +1257,10 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
         var high = headerPositions.size - 1
 //          ^^^^ definition local 29
 //               documentation ```kt\nvar high: kotlin.Int\n```
-//                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
-//                                 ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
+//                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                 ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#getSize().
+//                                 ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
 //                                      ^ reference semanticdb maven . . kotlin/Int#minus(+3).
         while (low <= high) {
 //             ^^^ reference local 28
@@ -1275,8 +1275,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                    ^ reference semanticdb maven . . kotlin/Int#div(+3).
             when {
                 headerPositions[middle] > position -> high = middle - 1
-//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                              ^^^^^^ reference local 30
 //                                      ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
 //                                        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndex().(position)
@@ -1284,8 +1284,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                           ^^^^^^ reference local 30
 //                                                                  ^ reference semanticdb maven . . kotlin/Int#minus(+3).
                 headerPositions[middle] < position -> low = middle + 1
-//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                              ^^^^^^ reference local 30
 //                                      ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
 //                                        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndex().(position)
@@ -1316,10 +1316,10 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
         var high = headerPositions.size - 1
 //          ^^^^ definition local 32
 //               documentation ```kt\nvar high: kotlin.Int\n```
-//                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
-//                                 ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
+//                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                 ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#getSize().
+//                                 ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
 //                                      ^ reference semanticdb maven . . kotlin/Int#minus(+3).
         while (low <= high) {
 //             ^^^ reference local 31
@@ -1334,8 +1334,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                    ^ reference semanticdb maven . . kotlin/Int#div(+3).
             when {
                 headerPositions[middle] > position -> high = middle - 1
-//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                              ^^^^^^ reference local 33
 //                                      ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
 //                                        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrBefore().(position)
@@ -1345,13 +1345,13 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                 middle < headerPositions.size - 1 && headerPositions[middle + 1] <= position -> low = middle + 1
 //              ^^^^^^ reference local 33
 //                     ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
-//                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
-//                                       ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
+//                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                       ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#getSize().
+//                                       ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
 //                                            ^ reference semanticdb maven . . kotlin/Int#minus(+3).
-//                                                   ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                                   ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                                                   ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                                                   ^^^^^^ reference local 33
 //                                                                          ^ reference semanticdb maven . . kotlin/Int#plus(+3).
 //                                                                               ^^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
@@ -1383,10 +1383,10 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
         var high = headerPositions.size - 1
 //          ^^^^ definition local 35
 //               documentation ```kt\nvar high: kotlin.Int\n```
-//                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
-//                                 ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
+//                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                 ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#getSize().
+//                                 ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
 //                                      ^ reference semanticdb maven . . kotlin/Int#minus(+3).
         while (low <= high) {
 //             ^^^ reference local 34
@@ -1403,8 +1403,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                 middle > 0 && headerPositions[middle - 1] >= position -> high = middle - 1
 //              ^^^^^^ reference local 36
 //                     ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
-//                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                            ^^^^^^ reference local 36
 //                                                   ^ reference semanticdb maven . . kotlin/Int#minus(+3).
 //                                                        ^^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
@@ -1413,8 +1413,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                                              ^^^^^^ reference local 36
 //                                                                                     ^ reference semanticdb maven . . kotlin/Int#minus(+3).
                 headerPositions[middle] < position -> low = middle + 1
-//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                              ^^^^^^ reference local 36
 //                                      ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
 //                                        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#findHeaderIndexOrNext().(position)
@@ -1439,13 +1439,13 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                   documentation ```kt\nvalue-parameter offset: kotlin.Int\n```
 //                                                    ^^^ reference semanticdb maven . . kotlin/Int#
         scrollPosition = position
-//      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollPosition().
+//      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollPosition().
 //                       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollState().(position)
         scrollOffset = offset
-//      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollOffset.
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollOffset().
+//      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollOffset.
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollOffset().
 //                     ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollState().(offset)
     }
@@ -1462,27 +1462,27 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //             ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().
 //                        documentation ```kt\npublic constructor SavedState(superState: [ERROR : Parcelable]?, scrollPosition: kotlin.Int, scrollOffset: kotlin.Int)\n```
         val superState: Parcelable?,
-//          ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#superState.
-//                     documentation ```kt\npublic final val superState: [ERROR : Parcelable]?\n```
-//          ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getSuperState().
-//                     documentation ```kt\npublic final val superState: [ERROR : Parcelable]?\n```
 //          ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().(superState)
 //                     documentation ```kt\nvalue-parameter superState: [ERROR : Parcelable]?\n```
+//          ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getSuperState().
+//                     documentation ```kt\npublic final val superState: [ERROR : Parcelable]?\n```
+//          ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#superState.
+//                     documentation ```kt\npublic final val superState: [ERROR : Parcelable]?\n```
         val scrollPosition: Int,
-//          ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#scrollPosition.
-//                         documentation ```kt\npublic final val scrollPosition: kotlin.Int\n```
-//          ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getScrollPosition().
-//                         documentation ```kt\npublic final val scrollPosition: kotlin.Int\n```
 //          ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().(scrollPosition)
 //                         documentation ```kt\nvalue-parameter scrollPosition: kotlin.Int\n```
+//          ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getScrollPosition().
+//                         documentation ```kt\npublic final val scrollPosition: kotlin.Int\n```
+//          ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#scrollPosition.
+//                         documentation ```kt\npublic final val scrollPosition: kotlin.Int\n```
 //                          ^^^ reference semanticdb maven . . kotlin/Int#
         val scrollOffset: Int
-//          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#scrollOffset.
-//                       documentation ```kt\npublic final val scrollOffset: kotlin.Int\n```
-//          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getScrollOffset().
-//                       documentation ```kt\npublic final val scrollOffset: kotlin.Int\n```
 //          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().(scrollOffset)
 //                       documentation ```kt\nvalue-parameter scrollOffset: kotlin.Int\n```
+//          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getScrollOffset().
+//                       documentation ```kt\npublic final val scrollOffset: kotlin.Int\n```
+//          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#scrollOffset.
+//                       documentation ```kt\npublic final val scrollOffset: kotlin.Int\n```
 //                        ^^^ reference semanticdb maven . . kotlin/Int#
     ) : Parcelable
 
@@ -1501,8 +1501,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                             documentation ```kt\npublic open fun onChanged()\n```
             // There's no hint at what changed, so go through the adapter.
             headerPositions.clear()
-//          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                          ^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#clear().
             val itemCount = adapter?.itemCount ?: 0
 //              ^^^^^^^^^ definition local 37
@@ -1525,8 +1525,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                 if (isSticky) {
 //                  ^^^^^^^^ reference local 39
                     headerPositions.add(i)
-//                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                  ^^^ reference semanticdb maven . . kotlin/collections/MutableList#add().
 //                                      ^ reference local 38
                 }
@@ -1534,16 +1534,16 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
             // Remove sticky header immediately if the entry it represents has been removed. A layout will follow.
             if (stickyHeader != null && !headerPositions.contains(stickyHeaderPosition)) {
-//              ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //              ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //              ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//              ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                      ^ reference semanticdb maven . . kotlin/Boolean#not().
-//                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                                       ^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#contains().
-//                                                                ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
 //                                                                ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeaderPosition().
 //                                                                ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderPosition().
+//                                                                ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
                 scrapStickyHeader(null)
 //              ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrapStickyHeader().
             }
@@ -1562,10 +1562,10 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
             val headerCount = headerPositions.size
 //              ^^^^^^^^^^^ definition local 40
 //                          documentation ```kt\nval headerCount: kotlin.Int\n```
-//                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
-//                                            ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
+//                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                            ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#getSize().
+//                                            ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
             if (headerCount > 0) {
 //              ^^^^^^^^^^^ reference local 40
 //                          ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
@@ -1582,11 +1582,11 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                  ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
 //                                    ^^^^^^^^^^^ reference local 40
                     headerPositions[i] = headerPositions[i] + itemCount
-//                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                  ^ reference local 41
-//                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                                       ^ reference local 41
 //                                                          ^ reference semanticdb maven . . kotlin/Int#plus(+3).
 //                                                            ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeInserted().(itemCount)
@@ -1624,15 +1624,15 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                  ^^ reference semanticdb maven . . kotlin/Int#equals().
 //                                     ^ reference semanticdb maven . . kotlin/Int#unaryMinus().
                         headerPositions.add(headerIndex, i)
-//                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                      ^^^ reference semanticdb maven . . kotlin/collections/MutableList#add(+1).
 //                                          ^^^^^^^^^^^ reference local 44
 //                                                       ^ reference local 42
                     } else {
                         headerPositions.add(i)
-//                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                      ^^^ reference semanticdb maven . . kotlin/collections/MutableList#add().
 //                                          ^ reference local 42
                     }
@@ -1652,10 +1652,10 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
             var headerCount = headerPositions.size
 //              ^^^^^^^^^^^ definition local 45
 //                          documentation ```kt\nvar headerCount: kotlin.Int\n```
-//                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
-//                                            ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
+//                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                            ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#getSize().
+//                                            ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
             if (headerCount > 0) {
 //              ^^^^^^^^^^^ reference local 45
 //                          ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
@@ -1679,8 +1679,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                            ^^ reference semanticdb maven . . kotlin/Int#equals().
 //                               ^ reference semanticdb maven . . kotlin/Int#unaryMinus().
                         headerPositions.removeAt(index)
-//                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                      ^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#removeAt().
 //                                               ^^^^^ reference local 47
                         headerCount--
@@ -1691,16 +1691,16 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
                 // Remove sticky header immediately if the entry it represents has been removed. A layout will follow.
                 if (stickyHeader != null && !headerPositions.contains(stickyHeaderPosition)) {
-//                  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
 //                  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
+//                  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
 //                                          ^ reference semanticdb maven . . kotlin/Boolean#not().
-//                                           ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                           ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                                           ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                                           ^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#contains().
-//                                                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
 //                                                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeaderPosition().
 //                                                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderPosition().
+//                                                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
                     scrapStickyHeader(null)
 //                  ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrapStickyHeader().
                 }
@@ -1721,11 +1721,11 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                  ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
 //                                    ^^^^^^^^^^^ reference local 45
                     headerPositions[i] = headerPositions[i] - itemCount
-//                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                  ^ reference local 48
-//                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                                       ^ reference local 48
 //                                                          ^ reference semanticdb maven . . kotlin/Int#minus(+3).
 //                                                            ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeRemoved().(itemCount)
@@ -1753,10 +1753,10 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
             val headerCount = headerPositions.size
 //              ^^^^^^^^^^^ definition local 49
 //                          documentation ```kt\nval headerCount: kotlin.Int\n```
-//                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
-//                                            ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
+//                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                            ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#getSize().
+//                                            ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
             if (headerCount > 0) {
 //              ^^^^^^^^^^^ reference local 49
 //                          ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
@@ -1779,8 +1779,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                         val headerPos = headerPositions[i]
 //                          ^^^^^^^^^ definition local 51
 //                                    documentation ```kt\nval headerPos: kotlin.Int\n```
-//                                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                                      ^ reference local 50
                         if (headerPos >= fromPosition && headerPos < fromPosition + itemCount) {
 //                          ^^^^^^^^^ reference local 51
@@ -1792,8 +1792,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                                                ^ reference semanticdb maven . . kotlin/Int#plus(+3).
 //                                                                                  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().(itemCount)
                             headerPositions[i] = headerPos - (toPosition - fromPosition)
-//                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                          ^ reference local 50
 //                                               ^^^^^^^^^ reference local 51
 //                                                         ^ reference semanticdb maven . . kotlin/Int#minus(+3).
@@ -1813,8 +1813,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                                                    ^^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
 //                                                                                       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().(toPosition)
                             headerPositions[i] = headerPos - itemCount
-//                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                          ^ reference local 50
 //                                               ^^^^^^^^^ reference local 51
 //                                                         ^ reference semanticdb maven . . kotlin/Int#minus(+3).
@@ -1845,8 +1845,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
                         val headerPos = headerPositions[i]
 //                          ^^^^^^^^^ definition local 53
 //                                    documentation ```kt\nval headerPos: kotlin.Int\n```
-//                                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                                      ^ reference local 52
                         when {
                             headerPos >= fromPosition && headerPos < fromPosition + itemCount -> {
@@ -1859,8 +1859,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                                                ^ reference semanticdb maven . . kotlin/Int#plus(+3).
 //                                                                                  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().(itemCount)
                                 headerPositions[i] = headerPos + (toPosition - fromPosition)
-//                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                              ^ reference local 52
 //                                                   ^^^^^^^^^ reference local 53
 //                                                             ^ reference semanticdb maven . . kotlin/Int#plus(+3).
@@ -1878,8 +1878,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                 ^^ reference semanticdb maven . . kotlin/Int#rangeTo(+1).
 //                                                   ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#onItemRangeMoved().(fromPosition)
                                 headerPositions[i] = headerPos + itemCount
-//                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                              ^ reference local 52
 //                                                   ^^^^^^^^^ reference local 53
 //                                                             ^ reference semanticdb maven . . kotlin/Int#plus(+3).
@@ -1907,8 +1907,8 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
             val headerPos = headerPositions.removeAt(index)
 //              ^^^^^^^^^ definition local 54
 //                        documentation ```kt\nval headerPos: kotlin.Int\n```
-//                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                                          ^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#removeAt().
 //                                                   ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#HeaderPositionsAdapterDataObserver#sortHeaderAtIndex().(index)
             val headerIndex = findHeaderIndexOrNext(headerPos)
@@ -1921,15 +1921,15 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                          ^^ reference semanticdb maven . . kotlin/Int#equals().
 //                             ^ reference semanticdb maven . . kotlin/Int#unaryMinus().
                 headerPositions.add(headerIndex, headerPos)
-//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                              ^^^ reference semanticdb maven . . kotlin/collections/MutableList#add(+1).
 //                                  ^^^^^^^^^^^ reference local 55
 //                                               ^^^^^^^^^ reference local 54
             } else {
                 headerPositions.add(headerPos)
-//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getHeaderPositions().
+//              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#headerPositions.
 //                              ^^^ reference semanticdb maven . . kotlin/collections/MutableList#add().
 //                                  ^^^^^^^^^ reference local 54
             }

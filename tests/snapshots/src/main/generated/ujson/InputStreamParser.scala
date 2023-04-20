@@ -14,11 +14,11 @@ import java.nio.ByteBuffer
 import upickle.core.{BufferingInputStreamParser, ObjArrVisitor, Visitor}
 //     ^^^^^^^ reference semanticdb maven . . upickle/
 //             ^^^^ reference semanticdb maven . . upickle/core/
-//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingInputStreamParser.
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingInputStreamParser#
+//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingInputStreamParser.
 //                                               ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
-//                                                              ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
 //                                                              ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                                              ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
 /**
   * Parser that reads in bytes from an InputStream, buffering them in memory
   * until a `reset` call discards them.
@@ -35,29 +35,29 @@ final class InputStreamParser[J](val inputStream: java.io.InputStream,
 //                              documentation ```scala\nJ\n```
 //                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/InputStreamParser#`<init>`().
 //                                documentation ```scala\ndef this(inputStream: InputStream, minBufferStartSize: Int, maxBufferStartSize: Int)\n```
+//                                   ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/InputStreamParser#`<init>`().(inputStream)
+//                                               documentation ```scala\ninputStream: InputStream \n```
 //                                   ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/InputStreamParser#inputStream.
 //                                               documentation ```scala\nval inputStream: InputStream\n```
 //                                               relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingInputStreamParser#inputStream().
-//                                   ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/InputStreamParser#`<init>`().(inputStream)
-//                                               documentation ```scala\ninputStream: InputStream \n```
 //                                                ^^^^ reference semanticdb maven . . java/
 //                                                     ^^ reference semanticdb maven . . java/io/
 //                                                        ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/io/InputStream#
                                  val minBufferStartSize: Int = BufferingInputStreamParser.defaultMinBufferStartSize,
+//                                   ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/InputStreamParser#`<init>`().(minBufferStartSize)
+//                                                      documentation ```scala\ndefault minBufferStartSize: Int \n```
 //                                   ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/InputStreamParser#minBufferStartSize.
 //                                                      documentation ```scala\nval minBufferStartSize: Int\n```
 //                                                      relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingInputStreamParser#minBufferStartSize().
-//                                   ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/InputStreamParser#`<init>`().(minBufferStartSize)
-//                                                      documentation ```scala\ndefault minBufferStartSize: Int \n```
 //                                                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingInputStreamParser.
 //                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingInputStreamParser.defaultMinBufferStartSize.
                                  val maxBufferStartSize: Int = BufferingInputStreamParser.defaultMaxBufferStartSize)
+//                                   ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/InputStreamParser#`<init>`().(maxBufferStartSize)
+//                                                      documentation ```scala\ndefault maxBufferStartSize: Int \n```
 //                                   ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/InputStreamParser#maxBufferStartSize.
 //                                                      documentation ```scala\nval maxBufferStartSize: Int\n```
 //                                                      relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingInputStreamParser#maxBufferStartSize().
-//                                   ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/InputStreamParser#`<init>`().(maxBufferStartSize)
-//                                                      documentation ```scala\ndefault maxBufferStartSize: Int \n```
 //                                                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingInputStreamParser.
 //                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingInputStreamParser.defaultMaxBufferStartSize.

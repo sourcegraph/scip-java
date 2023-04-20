@@ -4,8 +4,8 @@ import upickle.core.{ObjArrVisitor, Visitor}
 //     ^^^^^^^ reference semanticdb maven . . upickle/
 //             ^^^^ reference semanticdb maven . . upickle/core/
 //                   ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
-//                                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
 //                                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
 
 import scala.annotation.{switch, tailrec}
 //     ^^^^^ reference semanticdb maven . . scala/
@@ -39,10 +39,10 @@ final class ByteBufferParser[J](src: ByteBuffer) extends ByteParser[J]{
 //                             documentation ```scala\nJ\n```
 //                             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#`<init>`().
 //                               documentation ```scala\ndef this(src: ByteBuffer)\n```
-//                              ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#src.
-//                                  documentation ```scala\nprivate[this] val src: ByteBuffer\n```
 //                              ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#`<init>`().(src)
 //                                  documentation ```scala\nsrc: ByteBuffer \n```
+//                              ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#src.
+//                                  documentation ```scala\nprivate[this] val src: ByteBuffer\n```
 //                                   ^^^^^^^^^^ reference semanticdb maven jdk 11 java/nio/ByteBuffer#
 //                                                       ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#
 //                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#[J]

@@ -5,8 +5,8 @@ import upickle.core.{ObjArrVisitor, Visitor}
 //     ^^^^^^^ reference semanticdb maven . . upickle/
 //             ^^^^ reference semanticdb maven . . upickle/core/
 //                   ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
-//                                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
 //                                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
 /**
  * Lazy character sequence parsing.
  *
@@ -20,10 +20,10 @@ private[ujson] final class CharSequenceParser[J](cs: CharSequence) extends CharP
 //                                              documentation ```scala\nJ\n```
 //                                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#`<init>`().
 //                                                documentation ```scala\ndef this(cs: CharSequence)\n```
-//                                               ^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#cs.
-//                                                  documentation ```scala\nprivate[this] val cs: CharSequence\n```
 //                                               ^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#`<init>`().(cs)
 //                                                  documentation ```scala\ncs: CharSequence \n```
+//                                               ^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#cs.
+//                                                  documentation ```scala\nprivate[this] val cs: CharSequence\n```
 //                                                   ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                                                         ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#
 //                                                                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#[J]

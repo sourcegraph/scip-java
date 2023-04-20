@@ -13,8 +13,8 @@ import java.nio.channels.ReadableByteChannel
 import upickle.core.{Visitor, ObjArrVisitor}
 //     ^^^^^^^ reference semanticdb maven . . upickle/
 //             ^^^^ reference semanticdb maven . . upickle/core/
-//                   ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
 //                   ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                   ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
 //                            ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
 trait Readable {
 //    ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#
@@ -44,32 +44,32 @@ object Readable extends ReadableLowPri{
 //           ^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#productElement().
 //                           documentation ```scala\ndef productElement(x$1: Int): Any\n```
 //                           relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
-//           ^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().
-//                           documentation ```scala\ndef apply(t: T, w: Transformer[T]): fromTransformer[T]\n```
-//           ^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.
-//                           documentation ```scala\nobject fromTransformer\n```
 //           ^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#productElementName().
 //                           documentation ```scala\ndef productElementName(x$1: Int): String\n```
 //                           relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//           ^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.
+//                           documentation ```scala\nobject fromTransformer\n```
+//           ^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().
+//                           documentation ```scala\ndef apply(t: T, w: Transformer[T]): fromTransformer[T]\n```
 //                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#[T]
 //                             documentation ```scala\nT\n```
 //                             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().
 //                               documentation ```scala\ndef this(t: T, w: Transformer[T])\n```
-//                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#t.
-//                                documentation ```scala\nval t: T\n```
-//                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#copy().(t)
-//                                documentation ```scala\ndefault t: T \n```
 //                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().(t)
 //                                documentation ```scala\nt: T \n```
+//                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#copy().(t)
+//                                documentation ```scala\ndefault t: T \n```
+//                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#t.
+//                                documentation ```scala\nval t: T\n```
 //                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().(t)
 //                                documentation ```scala\nt: T \n```
 //                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#[T]
-//                                    ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#w.
-//                                      documentation ```scala\nval w: Transformer[T]\n```
-//                                    ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#copy().(w)
-//                                      documentation ```scala\ndefault w: Transformer[T] \n```
 //                                    ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().(w)
 //                                      documentation ```scala\nw: Transformer[T] \n```
+//                                    ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#copy().(w)
+//                                      documentation ```scala\ndefault w: Transformer[T] \n```
+//                                    ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#w.
+//                                      documentation ```scala\nval w: Transformer[T]\n```
 //                                    ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().(w)
 //                                      documentation ```scala\nw: Transformer[T] \n```
 //                                       ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#

@@ -7,22 +7,22 @@ package minimized
 case class MinimizedCaseClass(value: String) {
 //         ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedCaseClass#
 //                            documentation ```scala\ncase class MinimizedCaseClass(value: String)\n```
+//         ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedCaseClass#copy().
+//                            documentation ```scala\ndef copy(value: String): MinimizedCaseClass\n```
 //         ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedCaseClass#productElement().
 //                            documentation ```scala\ndef productElement(x$1: Int): Any\n```
 //                            relationship is_reference is_implementation semanticdb maven . . scala/Product#productElement().
 //         ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedCaseClass#productElementName().
 //                            documentation ```scala\ndef productElementName(x$1: Int): String\n```
 //                            relationship is_reference is_implementation semanticdb maven . . scala/Product#productElementName().
-//         ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedCaseClass#copy().
-//                            documentation ```scala\ndef copy(value: String): MinimizedCaseClass\n```
 //                           ^ definition semanticdb maven . . minimized/MinimizedCaseClass#`<init>`().
 //                             documentation ```scala\ndef this(value: String)\n```
-//                            ^^^^^ definition semanticdb maven . . minimized/MinimizedCaseClass#value.
-//                                  documentation ```scala\nval value: String\n```
-//                            ^^^^^ definition semanticdb maven . . minimized/MinimizedCaseClass#copy().(value)
-//                                  documentation ```scala\ndefault value: String \n```
 //                            ^^^^^ definition semanticdb maven . . minimized/MinimizedCaseClass#`<init>`().(value)
 //                                  documentation ```scala\nvalue: String \n```
+//                            ^^^^^ definition semanticdb maven . . minimized/MinimizedCaseClass#copy().(value)
+//                                  documentation ```scala\ndefault value: String \n```
+//                            ^^^^^ definition semanticdb maven . . minimized/MinimizedCaseClass#value.
+//                                  documentation ```scala\nval value: String\n```
 //                            ^^^^^ definition semanticdb maven . . minimized/MinimizedCaseClass.apply().(value)
 //                                  documentation ```scala\nvalue: String \n```
 //                                   ^^^^^^ reference semanticdb maven . . scala/Predef.String#

@@ -33,22 +33,22 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
 //                                       ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.
 //                                               ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharOps.Output#
                       (out: T,
-//                     ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#out.
-//                         documentation ```scala\nprivate[this] val out: T\n```
 //                     ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#`<init>`().(out)
 //                         documentation ```scala\nout: T \n```
+//                     ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#out.
+//                         documentation ```scala\nprivate[this] val out: T\n```
 //                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#[T]
                        indent: Int = -1,
-//                     ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#indent.
-//                            documentation ```scala\nprivate[this] val indent: Int\n```
 //                     ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#`<init>`().(indent)
 //                            documentation ```scala\ndefault indent: Int \n```
+//                     ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#indent.
+//                            documentation ```scala\nprivate[this] val indent: Int\n```
 //                             ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
                        escapeUnicode: Boolean = false) extends JsVisitor[T, T]{
-//                     ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#escapeUnicode.
-//                                   documentation ```scala\nprivate[this] val escapeUnicode: Boolean\n```
 //                     ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#`<init>`().(escapeUnicode)
 //                                   documentation ```scala\ndefault escapeUnicode: Boolean \n```
+//                     ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#escapeUnicode.
+//                                   documentation ```scala\nprivate[this] val escapeUnicode: Boolean\n```
 //                                    ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
 //                                                             ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#
 //                                                                       ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#[T]
@@ -80,18 +80,18 @@ class BaseCharRenderer[T <: upickle.core.CharOps.Output]
   }
 
   private[this] var depth: Int = 0
-//                  ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#depth().
-//                        documentation ```scala\nprivate[this] var depth: Int\n```
 //                  ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#`depth_=`().
 //                        documentation ```scala\nprivate[this] var depth_=(x$1: Int): Unit\n```
+//                  ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#depth().
+//                        documentation ```scala\nprivate[this] var depth: Int\n```
 //                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 
 
   private[this] var commaBuffered = false
-//                  ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#commaBuffered().
-//                                documentation ```scala\nprivate[this] var commaBuffered: Boolean\n```
 //                  ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#`commaBuffered_=`().
 //                                documentation ```scala\nprivate[this] var commaBuffered_=(x$1: Boolean): Unit\n```
+//                  ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#commaBuffered().
+//                                documentation ```scala\nprivate[this] var commaBuffered: Boolean\n```
 
   def flushBuffer() = {
 //    ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#flushBuffer().

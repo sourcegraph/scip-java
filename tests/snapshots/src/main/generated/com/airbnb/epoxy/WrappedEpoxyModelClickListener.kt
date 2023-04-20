@@ -24,16 +24,16 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
     // Save the original click listener to call back to when clicked.
     // This also lets us call back to the original hashCode and equals methods
     private val originalClickListener: OnModelClickListener<T, V>?
-//              ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
-//                                    documentation ```kt\nprivate final val originalClickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?\n```
 //              ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalClickListener().
+//                                    documentation ```kt\nprivate final val originalClickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?\n```
+//              ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
 //                                    documentation ```kt\nprivate final val originalClickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?\n```
 //                                                          ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T]
 //                                                             ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[V]
     private val originalLongClickListener: OnModelLongClickListener<T, V>?
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
-//                                        documentation ```kt\nprivate final val originalLongClickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?\n```
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalLongClickListener().
+//                                        documentation ```kt\nprivate final val originalLongClickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?\n```
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
 //                                        documentation ```kt\nprivate final val originalLongClickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?\n```
 //                                                                  ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T]
 //                                                                     ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[V]
@@ -53,12 +53,12 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
 
         this.originalClickListener = clickListener
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#
-//           ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
 //           ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalClickListener().
+//           ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
 //                                   ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`().(clickListener)
         originalLongClickListener = null
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalLongClickListener().
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
     }
 
     constructor(clickListener: OnModelLongClickListener<T, V>?) {
@@ -76,12 +76,12 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
 
         this.originalLongClickListener = clickListener
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#
-//           ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalLongClickListener().
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
 //                                       ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`(+1).(clickListener)
         originalClickListener = null
-//      ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
 //      ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalClickListener().
+//      ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
     }
 
     override fun onClick(view: View) {
@@ -98,12 +98,12 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
         @Suppress("UNCHECKED_CAST")
 //       ^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/Suppress#`<init>`().
         originalClickListener?.onClick(
-//      ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
 //      ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalClickListener().
+//      ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
             modelInfo.model as T,
 //          ^^^^^^^^^ reference local 0
-//                    ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#model.
 //                    ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#getModel().
+//                    ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#model.
 //                             ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T]
             modelInfo.boundObject as V,
 //          ^^^^^^^^^ reference local 0
@@ -135,12 +135,12 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
         @Suppress("UNCHECKED_CAST")
 //       ^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/Suppress#`<init>`().
         return originalLongClickListener?.onLongClick(
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalLongClickListener().
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
             modelInfo.model as T,
 //          ^^^^^^^^^ reference local 1
-//                    ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#model.
 //                    ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#getModel().
+//                    ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#model.
 //                             ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T]
             modelInfo.boundObject as V,
 //          ^^^^^^^^^ reference local 1
@@ -222,27 +222,27 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
 //                ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().
 //                                 documentation ```kt\npublic constructor ClickedModelInfo(model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>, adapterPosition: kotlin.Int, boundObject: kotlin.Any)\n```
         val model: EpoxyModel<*>,
-//          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#model.
-//                documentation ```kt\npublic final val model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>\n```
-//          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#getModel().
-//                documentation ```kt\npublic final val model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>\n```
 //          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().(model)
 //                documentation ```kt\nvalue-parameter model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>\n```
+//          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#getModel().
+//                documentation ```kt\npublic final val model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>\n```
+//          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#model.
+//                documentation ```kt\npublic final val model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>\n```
         val adapterPosition: Int,
+//          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().(adapterPosition)
+//                          documentation ```kt\nvalue-parameter adapterPosition: kotlin.Int\n```
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#adapterPosition.
 //                          documentation ```kt\npublic final val adapterPosition: kotlin.Int\n```
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#getAdapterPosition().
 //                          documentation ```kt\npublic final val adapterPosition: kotlin.Int\n```
-//          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().(adapterPosition)
-//                          documentation ```kt\nvalue-parameter adapterPosition: kotlin.Int\n```
 //                           ^^^ reference semanticdb maven . . kotlin/Int#
         val boundObject: Any
+//          ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().(boundObject)
+//                      documentation ```kt\nvalue-parameter boundObject: kotlin.Any\n```
 //          ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#boundObject.
 //                      documentation ```kt\npublic final val boundObject: kotlin.Any\n```
 //          ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#getBoundObject().
 //                      documentation ```kt\npublic final val boundObject: kotlin.Any\n```
-//          ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().(boundObject)
-//                      documentation ```kt\nvalue-parameter boundObject: kotlin.Any\n```
 //                       ^^^ reference semanticdb maven . . kotlin/Any#
     )
 
@@ -337,37 +337,37 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
         }
 
         if (if (originalClickListener != null) {
-//              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
 //              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalClickListener().
+//              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
             originalClickListener != other.originalClickListener
-//          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
 //          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalClickListener().
+//          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
 //                                   ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#equals().(other)
-//                                         ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
 //                                         ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalClickListener().
+//                                         ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
         } else {
                 other.originalClickListener != null
 //              ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#equals().(other)
-//                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
 //                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalClickListener().
+//                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
             }
         ) {
             return false
         }
         return if (originalLongClickListener != null) {
-//                 ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalLongClickListener().
+//                 ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
             originalLongClickListener == other.originalLongClickListener
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalLongClickListener().
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
 //                                       ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#equals().(other)
-//                                             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
 //                                             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalLongClickListener().
+//                                             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
         } else {
             other.originalLongClickListener == null
 //          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#equals().(other)
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalLongClickListener().
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
         }
     }
 
@@ -378,14 +378,14 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
         var result = originalClickListener?.hashCode() ?: 0
 //          ^^^^^^ definition local 13
 //                 documentation ```kt\nvar result: kotlin.Int\n```
-//                   ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
 //                   ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalClickListener().
+//                   ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
         result = 31 * result + (originalLongClickListener?.hashCode() ?: 0)
 //      ^^^^^^ reference local 13
 //                  ^ reference semanticdb maven . . kotlin/Int#times(+3).
 //                    ^^^^^^ reference local 13
-//                              ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
 //                              ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalLongClickListener().
+//                              ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
         return result
 //             ^^^^^^ reference local 13
     }
