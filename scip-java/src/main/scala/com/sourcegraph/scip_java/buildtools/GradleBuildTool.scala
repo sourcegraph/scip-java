@@ -10,6 +10,7 @@ import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
+import org.intellij.lang.annotations.Language
 import os.CommandResult
 
 class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
@@ -73,7 +74,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     val script = initScript(toolchains, toolchains.tmp).toString
     val buildCommand = ListBuffer.empty[String]
     buildCommand += toolchains.gradleCommand
-    buildCommand += s"--no-daemon"
+    buildCommand += "--no-daemon"
     buildCommand += "--init-script"
     buildCommand += script
     if (toolchains.toolchains.nonEmpty) {
@@ -82,6 +83,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
       buildCommand +=
         s"-Porg.gradle.java.installations.paths=${toolchains.paths()}"
     }
+    buildCommand += "-Pkotlin.compiler.execution.strategy=in-process"
     buildCommand ++=
       index.finalBuildCommand(
         List[Option[String]](
@@ -168,6 +170,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     val dependenciesPath = targetroot.resolve("dependencies.txt")
     val kotlinSemanticdbVersion = BuildInfo.semanticdbKotlincVersion
     Files.deleteIfExists(dependenciesPath)
+    @Language("Groovy")
     val script =
       s"""|allprojects {
           |  gradle.projectsEvaluated {
@@ -246,40 +249,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |      }
           |    }
           |  }
-          |  task $scipJavaDependencies {
-          |    def depsOut = java.nio.file.Paths.get(
-          |      java.net.URI.create('${dependenciesPath.toUri}'))
-          |    doLast {
-          |      java.nio.file.Files.createDirectories(depsOut.getParent())
-          |      tasks.withType(JavaCompile) {
-          |        try {
-          |          configurations.each { config ->
-          |              def artifactType = org.gradle.api.attributes.Attribute.of("artifactType", String.class)
-          |              def attributeType = "jar"
-          |              if (config.canBeResolved) {
-          |                def artifacts = config.incoming.artifactView { view ->
-          |                  view.lenient = true
-          |                  view.attributes { container ->
-          |                    container.attribute(artifactType, attributeType)
-          |                  }
-          |                }.artifacts
-          |                def lines = artifacts.collect {
-          |                    def id = it.id.componentIdentifier
-          |                    return "$$id.group\t$$id.module\t$$id.version\t$$it.file"
-          |                }
-          |                java.nio.file.Files.write(
-          |                    depsOut,
-          |                    lines.unique(false),
-          |                    java.nio.file.StandardOpenOption.APPEND,
-          |                    java.nio.file.StandardOpenOption.CREATE)
-          |              }
-          |          }
-          |        } catch (Exception e) {
-          |          // Ignore errors.
-          |        }
-          |      }
-          |    }
-          |  }
+          |  task $scipJavaDependencies(type: WriteDependencies)
           |}
           |def scipJavaSemanticdbScalacVersions(scalaVersion) {
           |  ${semanticdbScalacGroovySyntax()}[scalaVersion]
@@ -302,6 +272,35 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
           |    }
           |  }
           |  return null
+          |}
+          |
+          |class WriteDependencies extends DefaultTask {
+          |    @TaskAction
+          |    void printResolvedDependencies() {
+          |        def depsOut = java.nio.file.Paths.get(
+          |            java.net.URI.create('${dependenciesPath.toUri}'))
+          |        java.nio.file.Files.createDirectories(depsOut.getParent())
+          |        def configurations = project.configurations
+          |        configurations.each { configuration ->
+          |            if (!configuration.canBeResolved || java.lang.reflect.Modifier.isAbstract(configuration.getClass().getModifiers())) {
+          |                return
+          |            }
+          |            try {
+          |                def resolvedConfiguration = configuration.resolvedConfiguration
+          |                def lines = resolvedConfiguration.resolvedArtifacts.collect { artifact ->
+          |                    return "$$artifact.moduleVersion.id.group\t$$artifact.moduleVersion.id.name\t$$artifact.moduleVersion.id.version\t$$artifact.file.absolutePath"
+          |                }
+          |                java.nio.file.Files.write(
+          |                    depsOut,
+          |                    lines.unique(false),
+          |                    java.nio.file.StandardOpenOption.APPEND,
+          |                    java.nio.file.StandardOpenOption.CREATE)
+          |            } catch (Exception e) {
+          |                println "Skipping configuration '$$configuration.name' due to resolution failure: $$e.message"
+          |                return
+          |            }
+          |        }
+          |    }
           |}
           |""".stripMargin
     Files.write(

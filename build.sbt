@@ -14,13 +14,13 @@ lazy val V =
     val coursier = "2.0.8"
     val bsp = "2.0.0-M13"
     val moped = "0.1.11"
-    def scala213 = "2.13.6"
-    def scala212 = "2.12.14"
+    def scala213 = "2.13.10"
+    def scala212 = "2.12.17"
     def scala211 = "2.11.12"
-    def scala3 = "3.0.1"
-    def metals = "0.10.6-M1"
-    def scalameta = "4.5.11"
-    def semanticdbKotlinc = "0.2.0"
+    def scala3 = "3.2.2"
+    def metals = "0.11.11"
+    def scalameta = "4.7.6"
+    def semanticdbKotlinc = "0.3.0"
     def testcontainers = "0.39.3"
     def requests = "0.6.5"
     def minimalMillVersion = "0.10.0"
@@ -311,7 +311,7 @@ lazy val minimizedSettings = List[Def.Setting[_]](
   (run / fork) := true,
   (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
   libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.22"),
-  (Compile / javacOptions) ++=
+  javacOptions ++=
     List[String](
       s"-Arandomtimestamp=${System.nanoTime()}",
       List(
@@ -327,13 +327,13 @@ lazy val minimizedSettings = List[Def.Setting[_]](
 
 lazy val minimized = project
   .in(file("tests/minimized/.j11"))
-  .settings(minimizedSettings)
+  .settings(minimizedSettings, javaOnlySettings)
   .dependsOn(agent, plugin)
   .disablePlugins(JavaFormatterPlugin)
 
 lazy val minimized8 = project
   .in(file("tests/minimized/.j8"))
-  .settings(minimizedSettings, javaToolchainVersion := "8")
+  .settings(minimizedSettings, javaToolchainVersion := "8", javaOnlySettings)
   .dependsOn(agent, plugin)
   .disablePlugins(JavaFormatterPlugin)
 
@@ -354,6 +354,7 @@ def javacModuleOptions =
 lazy val minimized17 = project
   .in(file("tests/minimized/.j17"))
   .settings(
+    javaOnlySettings,
     minimizedSettings,
     javaToolchainVersion := "17",
     javacOptions ++= javacModuleOptions
@@ -452,7 +453,7 @@ lazy val docs = project
 lazy val javaOnlySettings = List[Def.Setting[_]](
   autoScalaLibrary := false,
   incOptions ~= { old =>
-    old.withEnabled(false)
+    old.withEnabled(false).withApiDebug(true)
   },
   crossPaths := false
 )

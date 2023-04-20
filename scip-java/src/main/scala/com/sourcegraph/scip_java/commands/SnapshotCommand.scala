@@ -1,23 +1,22 @@
 package com.sourcegraph.scip_java.commands
 
+import java.net.URI
 import java.nio.charset.StandardCharsets
 import java.nio.file._
 import java.nio.file.attribute.BasicFileAttributes
 
-import scala.collection.mutable.ListBuffer
 import scala.jdk.CollectionConverters._
 
+import com.sourcegraph.Scip
 import com.sourcegraph.io.DeleteVisitor
-import com.sourcegraph.scip_java.SemanticdbPrinters
-import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
-import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocuments
+import com.sourcegraph.scip_java.ScipPrinters
 import moped.annotations._
 import moped.cli.Application
 import moped.cli.Command
 import moped.cli.CommandParser
 
 @Description(
-  "Generates annotated snapshots for each SemanticDB file in the given target roots."
+  "Generates annotated snapshots for each `*.scip` file in the given target roots."
 )
 @Usage("scip-java snapshot [OPTIONS ...] [POSITIONAL ARGUMENTS ...]")
 @ExampleUsage(
@@ -26,23 +25,23 @@ import moped.cli.CommandParser
 @CommandName("snapshot")
 case class SnapshotCommand(
     @PositionalArguments
-    @Description(
-      "List of directories containing SemanticDB files"
-    ) targetroot: List[Path] = Nil,
+    @Description("List of directories containing SCIP files") targetroot: List[
+      Path
+    ] = Nil,
     @Description("Output directory for the annotated snapshots") output: Path =
       Paths.get("generated"),
+    cleanup: Boolean = true,
     @Inline() app: Application = Application.default
 ) extends Command {
   def sourceroot: Path = app.env.workingDirectory
 
   override def run(): Int = {
-    val semanticdbPattern = FileSystems
-      .getDefault
-      .getPathMatcher("glob:**.semanticdb")
-    Files.walkFileTree(output, new DeleteVisitor())
+    val scipPattern = FileSystems.getDefault.getPathMatcher("glob:**.scip")
+    if (cleanup) {
+      Files.walkFileTree(output, new DeleteVisitor())
+    }
     Files.createDirectories(output)
-    val semanticdbFiles = ListBuffer.empty[TextDocument]
-
+    var foundScipFile = false
     targetroot.foreach { root =>
       Files.walkFileTree(
         root,
@@ -51,20 +50,28 @@ case class SnapshotCommand(
               file: Path,
               attrs: BasicFileAttributes
           ): FileVisitResult = {
-            if (semanticdbPattern.matches(file)) {
-              val docs = TextDocuments.parseFrom(Files.readAllBytes(file))
-              docs
+            if (scipPattern.matches(file)) {
+              foundScipFile = true
+              val index = Scip.Index.parseFrom(Files.readAllBytes(file))
+              val root = URI.create(index.getMetadata.getProjectRoot)
+              index
                 .getDocumentsList
                 .asScala
                 .foreach { doc =>
-                  val sourcepath = sourceroot.resolve(doc.getUri)
+                  val sourcepath = Paths.get(root.resolve(doc.getRelativePath))
                   val source =
                     new String(
                       Files.readAllBytes(sourcepath),
                       StandardCharsets.UTF_8
                     )
-                  semanticdbFiles +=
-                    TextDocument.newBuilder(doc).setText(source).build()
+                  val document = ScipPrinters
+                    .printTextDocument(doc, source, CommentSyntax.default)
+                  val snapshotOutput = output.resolve(doc.getRelativePath)
+                  Files.createDirectories(snapshotOutput.getParent)
+                  Files.write(
+                    snapshotOutput,
+                    document.getBytes(StandardCharsets.UTF_8)
+                  )
                 }
             }
             super.visitFile(file, attrs)
@@ -72,25 +79,18 @@ case class SnapshotCommand(
         }
       )
     }
-
-    semanticdbFiles.foreach { doc =>
-      SnapshotCommand.writeSnapshot(doc, output)
+    if (foundScipFile) {
+      0
+    } else {
+      app.error(
+        s"no SCIP files found. To fix this problem, make sure that one of the directories " +
+          s"in ${targetroot.mkString(", ")} contains a `*.scip` file."
+      )
+      1
     }
-
-    0
   }
 }
 
 object SnapshotCommand {
-  def writeSnapshot(
-      doc: TextDocument,
-      outputDirectory: Path,
-      commentSyntax: CommentSyntax = CommentSyntax.default
-  ): Unit = {
-    val document = SemanticdbPrinters.printTextDocument(doc, commentSyntax)
-    val snapshotOutput = outputDirectory.resolve(doc.getUri)
-    Files.createDirectories(snapshotOutput.getParent)
-    Files.write(snapshotOutput, document.getBytes(StandardCharsets.UTF_8))
-  }
   implicit val parser = CommandParser.derive(SnapshotCommand())
 }

@@ -13,6 +13,7 @@ import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.Dependencies
 import com.sourcegraph.scip_semanticdb.JavaVersion
 import moped.annotations.DeprecatedName
+import moped.annotations.Description
 import moped.annotations.Hidden
 import moped.cli.Command
 import moped.cli.CommandParser
@@ -25,6 +26,9 @@ final case class IndexDependencyCommand(
     snapshotCommand: SnapshotCommand = SnapshotCommand(),
     dependency: String = "",
     provided: List[String] = Nil,
+    @Description(
+      "If true, deletes temporary files that are created during indexing"
+    ) cleanup: Boolean = true,
     snapshot: Boolean = false
 ) extends Command {
   def app = index.app
@@ -32,10 +36,10 @@ final case class IndexDependencyCommand(
     .of(output, app.env.workingDirectory)
     .resolve(dependency.replace(":", "__"))
   private val indexTarget =
-    if (!snapshot)
-      absoluteTarget
-    else
+    if (snapshot)
       Files.createTempDirectory("scip-java-index")
+    else
+      absoluteTarget
   private val snapshotTarget = absoluteTarget
   def run(): Int = {
     if (dependency == "") {
@@ -70,12 +74,16 @@ final case class IndexDependencyCommand(
                       snapshotCommand
                         .copy(
                           output = snapshotTarget,
+                          cleanup = cleanup,
+                          targetroot = List(indexTarget),
                           app = app
                             .withEnv(app.env.withWorkingDirectory(indexTarget))
                         )
                         .run()
                     } finally {
-                      Files.walkFileTree(indexTarget, new DeleteVisitor())
+                      if (cleanup) {
+                        Files.walkFileTree(indexTarget, new DeleteVisitor())
+                      }
                     }
                   } else {
                     exit
@@ -104,6 +112,7 @@ final case class IndexDependencyCommand(
     index
       .copy(
         buildTool = Some("scip"),
+        cleanup = cleanup,
         app = app.withEnv(app.env.withWorkingDirectory(indexTarget))
       )
       .run()

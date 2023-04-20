@@ -26,7 +26,7 @@ object JavaToolchainPlugin extends AutoPlugin {
   }
   import autoImport._
 
-  lazy val configSettings = List(
+  override lazy val projectSettings: Seq[Def.Setting[_]] = List(
     javacOptions ++=
       List(
         "-target",
@@ -39,21 +39,14 @@ object JavaToolchainPlugin extends AutoPlugin {
     (doc / javacOptions) --= List("-target", "1.8"),
     (doc / javacOptions) --= bootclasspathSettings(javaToolchainVersion.value),
     (doc / javacOptions) --= List("-g"),
-    javaHome :=
-      Some(
-        getJavaHome(javaToolchainVersion.value, javaToolchainJvmIndex.value)
-      ),
     javacOptions ++= bootclasspathSettings(javaToolchainVersion.value),
-    javaOptions ++= bootclasspathSettings(javaToolchainVersion.value)
+    javaOptions ++= bootclasspathSettings(javaToolchainVersion.value),
+    fork := true,
+    javaToolchainVersion := "11",
+    javaToolchainJvmIndex := None,
+    javaHome :=
+      Some(getJavaHome(javaToolchainVersion.value, javaToolchainJvmIndex.value))
   )
-
-  override lazy val projectSettings: Seq[Def.Setting[_]] =
-    List(Compile, Test).flatMap(c => inConfig(c)(configSettings)) ++
-      List(
-        fork := true,
-        javaToolchainVersion := "11",
-        javaToolchainJvmIndex := None
-      )
 
   /**
    * For Java 8, we need to manually add the Java compiler to the boot

@@ -9,6 +9,7 @@ import scala.jdk.CollectionConverters._
 
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
+import org.intellij.lang.annotations.Language
 
 case class GradleJavaToolchains(
     toolchains: List[GradleJavaCompiler],
@@ -82,8 +83,11 @@ object GradleJavaToolchains {
       .resolve("kotlin-multiplatform-enabled.txt")
     val gradleVersionPath = tmp.resolve("gradle-version.txt")
     val taskName = "scipDetectJavaToolchains"
+
     val scalaPluginName = "org.gradle.api.plugins.scala.ScalaPlugin"
     val javaPluginName = "org.gradle.api.plugins.JavaPlugin"
+
+    @Language("Groovy")
     val script =
       s"""|
           |try {

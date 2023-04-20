@@ -114,7 +114,7 @@ message SymbolInformation {
     ENUM = 0x4000;
     DEFAULT = 0x8000;
   }
-  reserved 2, 6, 7, 8, 9, 10, 11, 12, 14, 15;
+  reserved 2, 6, 7, 8, 9, 10, 11, 12, 14;//  15;
   string symbol = 1;
   Language language = 16;
   Kind kind = 3;
@@ -127,6 +127,10 @@ message SymbolInformation {
   Access access = 18;
   repeated string overridden_symbols = 19;
   Documentation documentation = 20;
+
+  // -- OUT OF SPEC -- //
+  repeated string definition_relationships = 15;
+  // -- OUT OF SPEC -- //
 }
 
 message Access {
