@@ -41,6 +41,7 @@ case class SnapshotCommand(
       Files.walkFileTree(output, new DeleteVisitor())
     }
     Files.createDirectories(output)
+    var foundScipFile = false
     targetroot.foreach { root =>
       Files.walkFileTree(
         root,
@@ -50,6 +51,7 @@ case class SnapshotCommand(
               attrs: BasicFileAttributes
           ): FileVisitResult = {
             if (scipPattern.matches(file)) {
+              foundScipFile = true
               val index = Scip.Index.parseFrom(Files.readAllBytes(file))
               val root = URI.create(index.getMetadata.getProjectRoot)
               index
@@ -77,8 +79,15 @@ case class SnapshotCommand(
         }
       )
     }
-
-    0
+    if (foundScipFile) {
+      0
+    } else {
+      app.error(
+        s"no SCIP files found. To fix this problem, make sure that one of the directories " +
+          s"in ${targetroot.mkString(", ")} contains a `*.scip` file."
+      )
+      1
+    }
   }
 }
 
