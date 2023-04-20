@@ -179,10 +179,9 @@ object ScipPrinters {
             .append("\n")
         }
 
-        val relationships =
-          Vector
-            .tabulate(info.getRelationshipsCount())(info.getRelationships)
-            .sortBy(_.getSymbol())
+        val relationships = Vector
+          .tabulate(info.getRelationshipsCount())(info.getRelationships)
+          .sortBy(_.getSymbol())
 
         relationships.foreach { relationship =>
           out.append(prefix).append("relationship")
