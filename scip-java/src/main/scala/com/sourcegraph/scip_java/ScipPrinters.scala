@@ -166,33 +166,38 @@ object ScipPrinters {
       case Some(info) if isDefinition =>
         val prefix =
           comment + (" " * indent.length) + (" " * carets.length) + " "
-        0.until(info.getDocumentationCount)
-          .foreach { n =>
-            val documentation = info.getDocumentation(n)
-            out
-              .append(prefix)
-              .append("documentation ")
-              .append(documentation.replace("\n", "\\n").replace("\t", "\\t"))
-              .append("\n")
+        val docs =
+          0.until(info.getDocumentationCount).map(info.getDocumentation).sorted
+
+        docs.foreach { documentation =>
+          out
+            .append(prefix)
+            .append("documentation ")
+            .append(documentation.replace("\n", "\\n").replace("\t", "\\t"))
+            .append("\n")
+        }
+
+        val relationships = 0
+          .until(info.getRelationshipsCount())
+          .map(info.getRelationships)
+          .sortBy(_.getSymbol())
+
+        relationships.foreach { relationship =>
+          out.append(prefix).append("relationship")
+          if (relationship.getIsReference) {
+            out.append(" is_reference")
           }
-        0.until(info.getRelationshipsCount)
-          .foreach { n =>
-            val relationship = info.getRelationships(n)
-            out.append(prefix).append("relationship")
-            if (relationship.getIsReference) {
-              out.append(" is_reference")
-            }
-            if (relationship.getIsDefinition) {
-              out.append(" is_definition")
-            }
-            if (relationship.getIsImplementation) {
-              out.append(" is_implementation")
-            }
-            if (relationship.getIsTypeDefinition) {
-              out.append(" is_type_definition")
-            }
-            out.append(" ").append(relationship.getSymbol).append("\n")
+          if (relationship.getIsDefinition) {
+            out.append(" is_definition")
           }
+          if (relationship.getIsImplementation) {
+            out.append(" is_implementation")
+          }
+          if (relationship.getIsTypeDefinition) {
+            out.append(" is_type_definition")
+          }
+          out.append(" ").append(relationship.getSymbol).append("\n")
+        }
       case _ =>
     }
   }
