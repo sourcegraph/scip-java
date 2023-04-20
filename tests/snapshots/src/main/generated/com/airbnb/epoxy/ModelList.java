@@ -1,42 +1,42 @@
 package com.airbnb.epoxy;
 
 import java.util.AbstractList;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^^^^^^^^^^ reference java/util/AbstractList#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#
 import java.util.ArrayList;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^^^^^^^ reference java/util/ArrayList#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
 import java.util.Collection;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^^^^^^^^ reference java/util/Collection#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#
 import java.util.ConcurrentModificationException;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#
 import java.util.Iterator;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^^^^^^ reference java/util/Iterator#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
 import java.util.List;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^^ reference java/util/List#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^^ reference semanticdb maven jdk 11 java/util/List#
 import java.util.ListIterator;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^^^^^^^^^^ reference java/util/ListIterator#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#
 import java.util.NoSuchElementException;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/NoSuchElementException#
 
 import androidx.annotation.NonNull;
-//     ^^^^^^^^ reference androidx/
-//              ^^^^^^^^^^ reference androidx/annotation/
-//                         ^^^^^^^ reference androidx/annotation/NonNull#
+//     ^^^^^^^^ reference semanticdb maven . . androidx/
+//              ^^^^^^^^^^ reference semanticdb maven . . androidx/annotation/
+//                         ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 
 /**
  * Used by our {@link EpoxyAdapter} to track models. It simply wraps ArrayList and notifies an
@@ -44,363 +44,479 @@ import androidx.annotation.NonNull;
  * diffing since we have a knowledge of what changed in the list.
  */
 class ModelList extends ArrayList<EpoxyModel<?>> {
-//    ^^^^^^^^^ definition com/airbnb/epoxy/ModelList# class ModelList
-//                      ^^^^^^^^^ reference java/util/ArrayList#
-//                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//    ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#
+//              documentation ```java\nclass ModelList\n```
+//              documentation  Used by our {@link EpoxyAdapter} to track models. It simply wraps ArrayList and notifies an\n observer when remove or insertion operations are done on the list. This allows us to optimize\n diffing since we have a knowledge of what changed in the list.\n
+//              relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
+//              relationship is_implementation semanticdb maven jdk 11 java/lang/Cloneable#
+//              relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
+//              relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
+//              relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/AbstractList#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/ArrayList#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/List#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/List#
+//              relationship is_implementation semanticdb maven jdk 11 java/util/RandomAccess#
+//                      ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
+//                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 
   ModelList(int expectedModelCount) {
-//^^^^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`(). ModelList(int expectedModelCount)
-//              ^^^^^^^^^^^^^^^^^^ definition local0 int expectedModelCount
+//^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#`<init>`().
+//          documentation ```java\nModelList(int expectedModelCount)\n```
+//              ^^^^^^^^^^^^^^^^^^ definition local 0
+//                                 documentation ```java\nint expectedModelCount\n```
     super(expectedModelCount);
-//  ^^^^^ reference java/util/ArrayList#`<init>`().
-//        ^^^^^^^^^^^^^^^^^^ reference local0
+//  ^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`().
+//        ^^^^^^^^^^^^^^^^^^ reference local 0
   }
 
   ModelList() {
-//^^^^^^^^^ definition com/airbnb/epoxy/ModelList#`<init>`(+1). ModelList()
+//^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#`<init>`(+1).
+//          documentation ```java\nModelList()\n```
 
   }
 
   interface ModelListObserver {
-//          ^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver# interface ModelListObserver
+//          ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#ModelListObserver#
+//                            documentation ```java\ninterface ModelListObserver\n```
     void onItemRangeInserted(int positionStart, int itemCount);
-//       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeInserted(). public abstract void onItemRangeInserted(int positionStart, int itemCount)
-//                               ^^^^^^^^^^^^^ definition local1 int positionStart
-//                                                  ^^^^^^^^^ definition local2 int itemCount
+//       ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeInserted().
+//                           documentation ```java\npublic abstract void onItemRangeInserted(int positionStart, int itemCount)\n```
+//                               ^^^^^^^^^^^^^ definition local 1
+//                                             documentation ```java\nint positionStart\n```
+//                                                  ^^^^^^^^^ definition local 2
+//                                                            documentation ```java\nint itemCount\n```
     void onItemRangeRemoved(int positionStart, int itemCount);
-//       ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeRemoved(). public abstract void onItemRangeRemoved(int positionStart, int itemCount)
-//                              ^^^^^^^^^^^^^ definition local3 int positionStart
-//                                                 ^^^^^^^^^ definition local4 int itemCount
+//       ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeRemoved().
+//                          documentation ```java\npublic abstract void onItemRangeRemoved(int positionStart, int itemCount)\n```
+//                              ^^^^^^^^^^^^^ definition local 3
+//                                            documentation ```java\nint positionStart\n```
+//                                                 ^^^^^^^^^ definition local 4
+//                                                           documentation ```java\nint itemCount\n```
   }
 
   private boolean notificationsPaused;
-//                ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#notificationsPaused. private boolean notificationsPaused
+//                ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#notificationsPaused.
+//                                    documentation ```java\nprivate boolean notificationsPaused\n```
   private ModelListObserver observer;
-//        ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
-//                          ^^^^^^^^ definition com/airbnb/epoxy/ModelList#observer. private ModelListObserver observer
+//        ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#ModelListObserver#
+//                          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#observer.
+//                                   documentation ```java\nprivate ModelListObserver observer\n```
 
   void pauseNotifications() {
-//     ^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#pauseNotifications(). void pauseNotifications()
+//     ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#pauseNotifications().
+//                        documentation ```java\nvoid pauseNotifications()\n```
     if (notificationsPaused) {
-//      ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notificationsPaused.
+//      ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notificationsPaused.
       throw new IllegalStateException("Notifications already paused");
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
+//              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IllegalStateException#`<init>`(+1).
     }
     notificationsPaused = true;
-//  ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notificationsPaused.
+//  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notificationsPaused.
   }
 
   void resumeNotifications() {
-//     ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#resumeNotifications(). void resumeNotifications()
+//     ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#resumeNotifications().
+//                         documentation ```java\nvoid resumeNotifications()\n```
     if (!notificationsPaused) {
-//       ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notificationsPaused.
+//       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notificationsPaused.
       throw new IllegalStateException("Notifications already resumed");
-//              ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`(+1).
+//              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IllegalStateException#`<init>`(+1).
     }
     notificationsPaused = false;
-//  ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notificationsPaused.
+//  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notificationsPaused.
   }
 
   void setObserver(ModelListObserver observer) {
-//     ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#setObserver(). void setObserver(ModelListObserver observer)
-//                 ^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#
-//                                   ^^^^^^^^ definition local5 ModelListObserver observer
+//     ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#setObserver().
+//                 documentation ```java\nvoid setObserver(ModelListObserver observer)\n```
+//                 ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#ModelListObserver#
+//                                   ^^^^^^^^ definition local 5
+//                                            documentation ```java\nModelListObserver observer\n```
     this.observer = observer;
-//       ^^^^^^^^ reference com/airbnb/epoxy/ModelList#observer.
-//                  ^^^^^^^^ reference local5
+//       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#observer.
+//                  ^^^^^^^^ reference local 5
   }
 
   private void notifyInsertion(int positionStart, int itemCount) {
-//             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#notifyInsertion(). private void notifyInsertion(int positionStart, int itemCount)
-//                                 ^^^^^^^^^^^^^ definition local6 int positionStart
-//                                                    ^^^^^^^^^ definition local7 int itemCount
+//             ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#notifyInsertion().
+//                             documentation ```java\nprivate void notifyInsertion(int positionStart, int itemCount)\n```
+//                                 ^^^^^^^^^^^^^ definition local 6
+//                                               documentation ```java\nint positionStart\n```
+//                                                    ^^^^^^^^^ definition local 7
+//                                                              documentation ```java\nint itemCount\n```
     if (!notificationsPaused && observer != null) {
-//       ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notificationsPaused.
-//                              ^^^^^^^^ reference com/airbnb/epoxy/ModelList#observer.
+//       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notificationsPaused.
+//                              ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#observer.
       observer.onItemRangeInserted(positionStart, itemCount);
-//    ^^^^^^^^ reference com/airbnb/epoxy/ModelList#observer.
-//             ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeInserted().
-//                                 ^^^^^^^^^^^^^ reference local6
-//                                                ^^^^^^^^^ reference local7
+//    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#observer.
+//             ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeInserted().
+//                                 ^^^^^^^^^^^^^ reference local 6
+//                                                ^^^^^^^^^ reference local 7
     }
   }
 
   private void notifyRemoval(int positionStart, int itemCount) {
-//             ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#notifyRemoval(). private void notifyRemoval(int positionStart, int itemCount)
-//                               ^^^^^^^^^^^^^ definition local8 int positionStart
-//                                                  ^^^^^^^^^ definition local9 int itemCount
+//             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#notifyRemoval().
+//                           documentation ```java\nprivate void notifyRemoval(int positionStart, int itemCount)\n```
+//                               ^^^^^^^^^^^^^ definition local 8
+//                                             documentation ```java\nint positionStart\n```
+//                                                  ^^^^^^^^^ definition local 9
+//                                                            documentation ```java\nint itemCount\n```
     if (!notificationsPaused && observer != null) {
-//       ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notificationsPaused.
-//                              ^^^^^^^^ reference com/airbnb/epoxy/ModelList#observer.
+//       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notificationsPaused.
+//                              ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#observer.
       observer.onItemRangeRemoved(positionStart, itemCount);
-//    ^^^^^^^^ reference com/airbnb/epoxy/ModelList#observer.
-//             ^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeRemoved().
-//                                ^^^^^^^^^^^^^ reference local8
-//                                               ^^^^^^^^^ reference local9
+//    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#observer.
+//             ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeRemoved().
+//                                ^^^^^^^^^^^^^ reference local 8
+//                                               ^^^^^^^^^ reference local 9
     }
   }
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public EpoxyModel<?> set(int index, EpoxyModel<?> element) {
-//       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                     ^^^ definition com/airbnb/epoxy/ModelList#set(). @Override public EpoxyModel<?> set(int index, EpoxyModel<?> element)
-//                             ^^^^^ definition local10 int index
-//                                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                  ^^^^^^^ definition local11 EpoxyModel<?> element
+//       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                     ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#set().
+//                         documentation ```java\n@Override\npublic EpoxyModel<?> set(int index, EpoxyModel<?> element)\n```
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#set().
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#set().
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#set().
+//                             ^^^^^ definition local 10
+//                                   documentation ```java\nint index\n```
+//                                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                                  ^^^^^^^ definition local 11
+//                                                          documentation ```java\nEpoxyModel<?> element\n```
     EpoxyModel<?> previousModel = super.set(index, element);
-//  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                ^^^^^^^^^^^^^ definition local12 EpoxyModel<?> previousModel
-//                                ^^^^^ reference com/airbnb/epoxy/ModelList#super.
-//                                      ^^^ reference java/util/ArrayList#set().
-//                                          ^^^^^ reference local10
-//                                                 ^^^^^^^ reference local11
+//  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                ^^^^^^^^^^^^^ definition local 12
+//                              documentation ```java\nEpoxyModel<?> previousModel\n```
+//                                ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#super.
+//                                      ^^^ reference semanticdb maven jdk 11 java/util/ArrayList#set().
+//                                          ^^^^^ reference local 10
+//                                                 ^^^^^^^ reference local 11
 
     if (previousModel.id() != element.id()) {
-//      ^^^^^^^^^^^^^ reference local12
-//                    ^^ reference com/airbnb/epoxy/EpoxyModel#id().
-//                            ^^^^^^^ reference local11
-//                                    ^^ reference com/airbnb/epoxy/EpoxyModel#id().
+//      ^^^^^^^^^^^^^ reference local 12
+//                    ^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id().
+//                            ^^^^^^^ reference local 11
+//                                    ^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id().
       notifyRemoval(index, 1);
-//    ^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyRemoval().
-//                  ^^^^^ reference local10
+//    ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notifyRemoval().
+//                  ^^^^^ reference local 10
       notifyInsertion(index, 1);
-//    ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyInsertion().
-//                    ^^^^^ reference local10
+//    ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notifyInsertion().
+//                    ^^^^^ reference local 10
     }
 
     return previousModel;
-//         ^^^^^^^^^^^^^ reference local12
+//         ^^^^^^^^^^^^^ reference local 12
   }
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public boolean add(EpoxyModel<?> epoxyModel) {
-//               ^^^ definition com/airbnb/epoxy/ModelList#add(). @Override public boolean add(EpoxyModel<?> epoxyModel)
-//                   ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                 ^^^^^^^^^^ definition local13 EpoxyModel<?> epoxyModel
+//               ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#add().
+//                   documentation ```java\n@Override\npublic boolean add(EpoxyModel<?> epoxyModel)\n```
+//                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#add().
+//                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#add().
+//                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#add().
+//                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#add().
+//                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#add().
+//                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                 ^^^^^^^^^^ definition local 13
+//                                            documentation ```java\nEpoxyModel<?> epoxyModel\n```
     notifyInsertion(size(), 1);
-//  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyInsertion().
-//                  ^^^^ reference java/util/ArrayList#size().
+//  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notifyInsertion().
+//                  ^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#size().
     return super.add(epoxyModel);
-//         ^^^^^ reference com/airbnb/epoxy/ModelList#super.
-//               ^^^ reference java/util/ArrayList#add().
-//                   ^^^^^^^^^^ reference local13
+//         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#super.
+//               ^^^ reference semanticdb maven jdk 11 java/util/ArrayList#add().
+//                   ^^^^^^^^^^ reference local 13
   }
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void add(int index, EpoxyModel<?> element) {
-//            ^^^ definition com/airbnb/epoxy/ModelList#add(+1). @Override public void add(int index, EpoxyModel<?> element)
-//                    ^^^^^ definition local14 int index
-//                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                         ^^^^^^^ definition local15 EpoxyModel<?> element
+//            ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#add(+1).
+//                documentation ```java\n@Override\npublic void add(int index, EpoxyModel<?> element)\n```
+//                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#add(+1).
+//                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#add(+1).
+//                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#add(+1).
+//                    ^^^^^ definition local 14
+//                          documentation ```java\nint index\n```
+//                           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                         ^^^^^^^ definition local 15
+//                                                 documentation ```java\nEpoxyModel<?> element\n```
     notifyInsertion(index, 1);
-//  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyInsertion().
-//                  ^^^^^ reference local14
+//  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notifyInsertion().
+//                  ^^^^^ reference local 14
     super.add(index, element);
-//  ^^^^^ reference com/airbnb/epoxy/ModelList#super.
-//        ^^^ reference java/util/ArrayList#add(+1).
-//            ^^^^^ reference local14
-//                   ^^^^^^^ reference local15
+//  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#super.
+//        ^^^ reference semanticdb maven jdk 11 java/util/ArrayList#add(+1).
+//            ^^^^^ reference local 14
+//                   ^^^^^^^ reference local 15
   }
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public boolean addAll(Collection<? extends EpoxyModel<?>> c) {
-//               ^^^^^^ definition com/airbnb/epoxy/ModelList#addAll(). @Override public boolean addAll(Collection<? extends EpoxyModel<?>> c)
-//                      ^^^^^^^^^^ reference java/util/Collection#
-//                                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                          ^ definition local16 Collection<? extends EpoxyModel<?>> c
+//               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#addAll().
+//                      documentation ```java\n@Override\npublic boolean addAll(Collection<? extends EpoxyModel<?>> c)\n```
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#addAll().
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#addAll().
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#addAll().
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#addAll().
+//                      ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#
+//                                           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                                          ^ definition local 16
+//                                                            documentation ```java\nCollection<? extends EpoxyModel<?>> c\n```
     notifyInsertion(size(), c.size());
-//  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyInsertion().
-//                  ^^^^ reference java/util/ArrayList#size().
-//                          ^ reference local16
-//                            ^^^^ reference java/util/Collection#size().
+//  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notifyInsertion().
+//                  ^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#size().
+//                          ^ reference local 16
+//                            ^^^^ reference semanticdb maven jdk 11 java/util/Collection#size().
     return super.addAll(c);
-//         ^^^^^ reference com/airbnb/epoxy/ModelList#super.
-//               ^^^^^^ reference java/util/ArrayList#addAll().
-//                      ^ reference local16
+//         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#super.
+//               ^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#addAll().
+//                      ^ reference local 16
   }
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public boolean addAll(int index, Collection<? extends EpoxyModel<?>> c) {
-//               ^^^^^^ definition com/airbnb/epoxy/ModelList#addAll(+1). @Override public boolean addAll(int index, Collection<? extends EpoxyModel<?>> c)
-//                          ^^^^^ definition local17 int index
-//                                 ^^^^^^^^^^ reference java/util/Collection#
-//                                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                                     ^ definition local18 Collection<? extends EpoxyModel<?>> c
+//               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#addAll(+1).
+//                      documentation ```java\n@Override\npublic boolean addAll(int index, Collection<? extends EpoxyModel<?>> c)\n```
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#addAll().
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#addAll(+1).
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#addAll(+1).
+//                          ^^^^^ definition local 17
+//                                documentation ```java\nint index\n```
+//                                 ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#
+//                                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                                                     ^ definition local 18
+//                                                                       documentation ```java\nCollection<? extends EpoxyModel<?>> c\n```
     notifyInsertion(index, c.size());
-//  ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyInsertion().
-//                  ^^^^^ reference local17
-//                         ^ reference local18
-//                           ^^^^ reference java/util/Collection#size().
+//  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notifyInsertion().
+//                  ^^^^^ reference local 17
+//                         ^ reference local 18
+//                           ^^^^ reference semanticdb maven jdk 11 java/util/Collection#size().
     return super.addAll(index, c);
-//         ^^^^^ reference com/airbnb/epoxy/ModelList#super.
-//               ^^^^^^ reference java/util/ArrayList#addAll(+1).
-//                      ^^^^^ reference local17
-//                             ^ reference local18
+//         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#super.
+//               ^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#addAll(+1).
+//                      ^^^^^ reference local 17
+//                             ^ reference local 18
   }
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public EpoxyModel<?> remove(int index) {
-//       ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                     ^^^^^^ definition com/airbnb/epoxy/ModelList#remove(). @Override public EpoxyModel<?> remove(int index)
-//                                ^^^^^ definition local19 int index
+//       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                     ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#remove().
+//                            documentation ```java\n@Override\npublic EpoxyModel<?> remove(int index)\n```
+//                            relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#remove().
+//                            relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#remove().
+//                            relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#remove(+1).
+//                                ^^^^^ definition local 19
+//                                      documentation ```java\nint index\n```
     notifyRemoval(index, 1);
-//  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyRemoval().
-//                ^^^^^ reference local19
+//  ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notifyRemoval().
+//                ^^^^^ reference local 19
     return super.remove(index);
-//         ^^^^^ reference com/airbnb/epoxy/ModelList#super.
-//               ^^^^^^ reference java/util/ArrayList#remove().
-//                      ^^^^^ reference local19
+//         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#super.
+//               ^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#remove().
+//                      ^^^^^ reference local 19
   }
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public boolean remove(Object o) {
-//               ^^^^^^ definition com/airbnb/epoxy/ModelList#remove(+1). @Override public boolean remove(Object o)
-//                      ^^^^^^ reference java/lang/Object#
-//                             ^ definition local20 Object o
+//               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#remove(+1).
+//                      documentation ```java\n@Override\npublic boolean remove(Object o)\n```
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#remove().
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#remove(+1).
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#remove().
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#remove().
+//                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
+//                             ^ definition local 20
+//                               documentation ```java\nObject o\n```
     int index = indexOf(o);
-//      ^^^^^ definition local21 int index
-//              ^^^^^^^ reference java/util/ArrayList#indexOf().
-//                      ^ reference local20
+//      ^^^^^ definition local 21
+//            documentation ```java\nint index\n```
+//              ^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#indexOf().
+//                      ^ reference local 20
 
     if (index == -1) {
-//      ^^^^^ reference local21
+//      ^^^^^ reference local 21
       return false;
     }
 
     notifyRemoval(index, 1);
-//  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyRemoval().
-//                ^^^^^ reference local21
+//  ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notifyRemoval().
+//                ^^^^^ reference local 21
     super.remove(index);
-//  ^^^^^ reference com/airbnb/epoxy/ModelList#super.
-//        ^^^^^^ reference java/util/ArrayList#remove().
-//               ^^^^^ reference local21
+//  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#super.
+//        ^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#remove().
+//               ^^^^^ reference local 21
     return true;
   }
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void clear() {
-//            ^^^^^ definition com/airbnb/epoxy/ModelList#clear(). @Override public void clear()
+//            ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#clear().
+//                  documentation ```java\n@Override\npublic void clear()\n```
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#clear().
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#clear().
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#clear().
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#clear().
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#clear().
     if (!isEmpty()) {
-//       ^^^^^^^ reference java/util/ArrayList#isEmpty().
+//       ^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#isEmpty().
       notifyRemoval(0, size());
-//    ^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyRemoval().
-//                     ^^^^ reference java/util/ArrayList#size().
+//    ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notifyRemoval().
+//                     ^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#size().
       super.clear();
-//    ^^^^^ reference com/airbnb/epoxy/ModelList#super.
-//          ^^^^^ reference java/util/ArrayList#clear().
+//    ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#super.
+//          ^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#clear().
     }
   }
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   protected void removeRange(int fromIndex, int toIndex) {
-//               ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#removeRange(). @Override protected void removeRange(int fromIndex, int toIndex)
-//                               ^^^^^^^^^ definition local22 int fromIndex
-//                                              ^^^^^^^ definition local23 int toIndex
+//               ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#removeRange().
+//                           documentation ```java\n@Override\nprotected void removeRange(int fromIndex, int toIndex)\n```
+//                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#removeRange().
+//                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#removeRange().
+//                               ^^^^^^^^^ definition local 22
+//                                         documentation ```java\nint fromIndex\n```
+//                                              ^^^^^^^ definition local 23
+//                                                      documentation ```java\nint toIndex\n```
     if (fromIndex == toIndex) {
-//      ^^^^^^^^^ reference local22
-//                   ^^^^^^^ reference local23
+//      ^^^^^^^^^ reference local 22
+//                   ^^^^^^^ reference local 23
       return;
     }
 
     notifyRemoval(fromIndex, toIndex - fromIndex);
-//  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#notifyRemoval().
-//                ^^^^^^^^^ reference local22
-//                           ^^^^^^^ reference local23
-//                                     ^^^^^^^^^ reference local22
+//  ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#notifyRemoval().
+//                ^^^^^^^^^ reference local 22
+//                           ^^^^^^^ reference local 23
+//                                     ^^^^^^^^^ reference local 22
     super.removeRange(fromIndex, toIndex);
-//  ^^^^^ reference com/airbnb/epoxy/ModelList#super.
-//        ^^^^^^^^^^^ reference java/util/ArrayList#removeRange().
-//                    ^^^^^^^^^ reference local22
-//                               ^^^^^^^ reference local23
+//  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#super.
+//        ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#removeRange().
+//                    ^^^^^^^^^ reference local 22
+//                               ^^^^^^^ reference local 23
   }
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public boolean removeAll(Collection<?> collection) {
-//               ^^^^^^^^^ definition com/airbnb/epoxy/ModelList#removeAll(). @Override public boolean removeAll(Collection<?> collection)
-//                         ^^^^^^^^^^ reference java/util/Collection#
-//                                       ^^^^^^^^^^ definition local24 Collection<?> collection
+//               ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#removeAll().
+//                         documentation ```java\n@Override\npublic boolean removeAll(Collection<?> collection)\n```
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#removeAll().
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#removeAll().
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#removeAll().
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#removeAll().
+//                         ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#
+//                                       ^^^^^^^^^^ definition local 24
+//                                                  documentation ```java\nCollection<?> collection\n```
     // Using this implementation from the Android ArrayList since the Java 1.8 ArrayList
     // doesn't call through to remove. Calling through to remove lets us leverage the notification
     // done there
     boolean result = false;
-//          ^^^^^^ definition local25 boolean result
+//          ^^^^^^ definition local 25
+//                 documentation ```java\nboolean result\n```
     Iterator<?> it = iterator();
-//  ^^^^^^^^ reference java/util/Iterator#
-//              ^^ definition local26 Iterator<?> it
-//                   ^^^^^^^^ reference com/airbnb/epoxy/ModelList#iterator().
+//  ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
+//              ^^ definition local 26
+//                 documentation ```java\nIterator<?> it\n```
+//                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#iterator().
     while (it.hasNext()) {
-//         ^^ reference local26
-//            ^^^^^^^ reference java/util/Iterator#hasNext().
+//         ^^ reference local 26
+//            ^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#hasNext().
       if (collection.contains(it.next())) {
-//        ^^^^^^^^^^ reference local24
-//                   ^^^^^^^^ reference java/util/Collection#contains().
-//                            ^^ reference local26
-//                               ^^^^ reference java/util/Iterator#next().
+//        ^^^^^^^^^^ reference local 24
+//                   ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#contains().
+//                            ^^ reference local 26
+//                               ^^^^ reference semanticdb maven jdk 11 java/util/Iterator#next().
         it.remove();
-//      ^^ reference local26
-//         ^^^^^^ reference java/util/Iterator#remove().
+//      ^^ reference local 26
+//         ^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#remove().
         result = true;
-//      ^^^^^^ reference local25
+//      ^^^^^^ reference local 25
       }
     }
     return result;
-//         ^^^^^^ reference local25
+//         ^^^^^^ reference local 25
   }
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public boolean retainAll(Collection<?> collection) {
-//               ^^^^^^^^^ definition com/airbnb/epoxy/ModelList#retainAll(). @Override public boolean retainAll(Collection<?> collection)
-//                         ^^^^^^^^^^ reference java/util/Collection#
-//                                       ^^^^^^^^^^ definition local27 Collection<?> collection
+//               ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#retainAll().
+//                         documentation ```java\n@Override\npublic boolean retainAll(Collection<?> collection)\n```
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#retainAll().
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#retainAll().
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#retainAll().
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#retainAll().
+//                         ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#
+//                                       ^^^^^^^^^^ definition local 27
+//                                                  documentation ```java\nCollection<?> collection\n```
     // Using this implementation from the Android ArrayList since the Java 1.8 ArrayList
     // doesn't call through to remove. Calling through to remove lets us leverage the notification
     // done there
     boolean result = false;
-//          ^^^^^^ definition local28 boolean result
+//          ^^^^^^ definition local 28
+//                 documentation ```java\nboolean result\n```
     Iterator<?> it = iterator();
-//  ^^^^^^^^ reference java/util/Iterator#
-//              ^^ definition local29 Iterator<?> it
-//                   ^^^^^^^^ reference com/airbnb/epoxy/ModelList#iterator().
+//  ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
+//              ^^ definition local 29
+//                 documentation ```java\nIterator<?> it\n```
+//                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#iterator().
     while (it.hasNext()) {
-//         ^^ reference local29
-//            ^^^^^^^ reference java/util/Iterator#hasNext().
+//         ^^ reference local 29
+//            ^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#hasNext().
       if (!collection.contains(it.next())) {
-//         ^^^^^^^^^^ reference local27
-//                    ^^^^^^^^ reference java/util/Collection#contains().
-//                             ^^ reference local29
-//                                ^^^^ reference java/util/Iterator#next().
+//         ^^^^^^^^^^ reference local 27
+//                    ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#contains().
+//                             ^^ reference local 29
+//                                ^^^^ reference semanticdb maven jdk 11 java/util/Iterator#next().
         it.remove();
-//      ^^ reference local29
-//         ^^^^^^ reference java/util/Iterator#remove().
+//      ^^ reference local 29
+//         ^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#remove().
         result = true;
-//      ^^^^^^ reference local28
+//      ^^^^^^ reference local 28
       }
     }
     return result;
-//         ^^^^^^ reference local28
+//         ^^^^^^ reference local 28
   }
 
   @NonNull
-// ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public Iterator<EpoxyModel<?>> iterator() {
-//       ^^^^^^^^ reference java/util/Iterator#
-//                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                               ^^^^^^^^ definition com/airbnb/epoxy/ModelList#iterator(). @NonNull @Override public Iterator<EpoxyModel<?>> iterator()
+//       ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
+//                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                               ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#iterator().
+//                                        documentation ```java\n@NonNull\n@Override\npublic Iterator<EpoxyModel<?>> iterator()\n```
+//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Iterable#iterator().
+//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#iterator().
+//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#iterator().
+//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#iterator().
+//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#iterator().
+//                                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#iterator().
     return new Itr();
-//             ^^^ reference com/airbnb/epoxy/ModelList#Itr#`<init>`().
+//             ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#`<init>`().
   }
 
   /**
@@ -410,115 +526,140 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
    * the parent methods so that the proper notifications are done.
    */
   private class Itr implements Iterator<EpoxyModel<?>> {
-//              ^^^ definition com/airbnb/epoxy/ModelList#Itr# private class Itr
-//              ^^^ definition com/airbnb/epoxy/ModelList#Itr#`<init>`(). private Itr()
-//                             ^^^^^^^^ reference java/util/Iterator#
-//                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//              ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#
+//                  documentation ```java\nprivate class Itr\n```
+//                  documentation  An Iterator implementation that calls through to the parent list's methods for modification.\n Some implementations, like the Android ArrayList.ArrayListIterator class, modify the list data\n directly instead of calling into the parent list's methods. We need the implementation to call\n the parent methods so that the proper notifications are done.\n
+//                  relationship is_implementation semanticdb maven jdk 11 java/util/Iterator#
+//              ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#`<init>`().
+//                  documentation ```java\nprivate Itr()\n```
+//                             ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
+//                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
     int cursor;       // index of next element to return
-//      ^^^^^^ definition com/airbnb/epoxy/ModelList#Itr#cursor. int cursor
+//      ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
+//             documentation ```java\nint cursor\n```
     int lastRet = -1; // index of last element returned; -1 if no such
-//      ^^^^^^^ definition com/airbnb/epoxy/ModelList#Itr#lastRet. int lastRet
+//      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#lastRet.
+//              documentation ```java\nint lastRet\n```
     int expectedModCount = modCount;
-//      ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#Itr#expectedModCount. int expectedModCount
-//                         ^^^^^^^^ reference java/util/AbstractList#modCount.
+//      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#expectedModCount.
+//                       documentation ```java\nint expectedModCount\n```
+//                         ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
 
     public boolean hasNext() {
-//                 ^^^^^^^ definition com/airbnb/epoxy/ModelList#Itr#hasNext(). public boolean hasNext()
+//                 ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#hasNext().
+//                         documentation ```java\npublic boolean hasNext()\n```
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Iterator#hasNext().
       return cursor != size();
-//           ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
-//                     ^^^^ reference java/util/ArrayList#size().
+//           ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
+//                     ^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#size().
     }
 
     @SuppressWarnings("unchecked")
-//   ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
+//   ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
     public EpoxyModel<?> next() {
-//         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                       ^^^^ definition com/airbnb/epoxy/ModelList#Itr#next(). @SuppressWarnings("unchecked") public EpoxyModel<?> next()
+//         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                       ^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#next().
+//                            documentation ```java\n@SuppressWarnings("unchecked")\npublic EpoxyModel<?> next()\n```
+//                            relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Iterator#next().
       checkForComodification();
-//    ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#checkForComodification().
+//    ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#checkForComodification().
       int i = cursor;
-//        ^ definition local30 int i
-//            ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
+//        ^ definition local 30
+//          documentation ```java\nint i\n```
+//            ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
       cursor = i + 1;
-//    ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
-//             ^ reference local30
+//    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
+//             ^ reference local 30
       lastRet = i;
-//    ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
-//              ^ reference local30
+//    ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#lastRet.
+//              ^ reference local 30
       return ModelList.this.get(i);
-//           ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
-//                     ^^^^ reference com/airbnb/epoxy/ModelList#this.
-//                          ^^^ reference java/util/ArrayList#get().
-//                              ^ reference local30
+//           ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#
+//                     ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#this.
+//                          ^^^ reference semanticdb maven jdk 11 java/util/ArrayList#get().
+//                              ^ reference local 30
     }
 
     public void remove() {
-//              ^^^^^^ definition com/airbnb/epoxy/ModelList#Itr#remove(). public void remove()
+//              ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#remove().
+//                     documentation ```java\npublic void remove()\n```
+//                     relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Iterator#remove().
       if (lastRet < 0) {
-//        ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
+//        ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#lastRet.
         throw new IllegalStateException();
-//                ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IllegalStateException#`<init>`().
       }
       checkForComodification();
-//    ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#checkForComodification().
+//    ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#checkForComodification().
 
       try {
         ModelList.this.remove(lastRet);
-//      ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
-//                ^^^^ reference com/airbnb/epoxy/ModelList#this.
-//                     ^^^^^^ reference com/airbnb/epoxy/ModelList#remove().
-//                            ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
+//      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#
+//                ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#this.
+//                     ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#remove().
+//                            ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#lastRet.
         cursor = lastRet;
-//      ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
-//               ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
+//      ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
+//               ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#lastRet.
         lastRet = -1;
-//      ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
+//      ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#lastRet.
         expectedModCount = modCount;
-//      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#expectedModCount.
-//                         ^^^^^^^^ reference java/util/AbstractList#modCount.
+//      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#expectedModCount.
+//                         ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
       } catch (IndexOutOfBoundsException ex) {
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
-//                                       ^^ definition local31 IndexOutOfBoundsException ex
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IndexOutOfBoundsException#
+//                                       ^^ definition local 31
+//                                          documentation ```java\nIndexOutOfBoundsException ex\n```
         throw new ConcurrentModificationException();
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#`<init>`().
       }
     }
 
     final void checkForComodification() {
-//             ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#Itr#checkForComodification(). final void checkForComodification()
+//             ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#checkForComodification().
+//                                    documentation ```java\nfinal void checkForComodification()\n```
       if (modCount != expectedModCount) {
-//        ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                    ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#expectedModCount.
+//        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#expectedModCount.
         throw new ConcurrentModificationException();
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#`<init>`().
       }
     }
   }
 
   @NonNull
-// ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public ListIterator<EpoxyModel<?>> listIterator() {
-//       ^^^^^^^^^^^^ reference java/util/ListIterator#
-//                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                   ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#listIterator(). @NonNull @Override public ListIterator<EpoxyModel<?>> listIterator()
+//       ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#
+//                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                   ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#listIterator().
+//                                                documentation ```java\n@NonNull\n@Override\npublic ListIterator<EpoxyModel<?>> listIterator()\n```
+//                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#listIterator().
+//                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#listIterator(+1).
+//                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#listIterator().
     return new ListItr(0);
-//             ^^^^^^^ reference com/airbnb/epoxy/ModelList#ListItr#`<init>`().
+//             ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#ListItr#`<init>`().
   }
 
   @NonNull
-// ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public ListIterator<EpoxyModel<?>> listIterator(int index) {
-//       ^^^^^^^^^^^^ reference java/util/ListIterator#
-//                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                   ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#listIterator(+1). @NonNull @Override public ListIterator<EpoxyModel<?>> listIterator(int index)
-//                                                    ^^^^^ definition local32 int index
+//       ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#
+//                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                   ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#listIterator(+1).
+//                                                documentation ```java\n@NonNull\n@Override\npublic ListIterator<EpoxyModel<?>> listIterator(int index)\n```
+//                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#listIterator(+1).
+//                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#listIterator().
+//                                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#listIterator(+1).
+//                                                    ^^^^^ definition local 32
+//                                                          documentation ```java\nint index\n```
     return new ListItr(index);
-//             ^^^^^^^ reference com/airbnb/epoxy/ModelList#ListItr#`<init>`().
-//                     ^^^^^ reference local32
+//             ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#ListItr#`<init>`().
+//                     ^^^^^ reference local 32
   }
 
   /**
@@ -528,153 +669,185 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
    * notifications are done.
    */
   private class ListItr extends Itr implements ListIterator<EpoxyModel<?>> {
-//              ^^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr# private class ListItr
-//                              ^^^ reference com/airbnb/epoxy/ModelList#Itr#
-//                                             ^^^^^^^^^^^^ reference java/util/ListIterator#
-//                                                          ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#ListItr#
+//                      documentation ```java\nprivate class ListItr\n```
+//                      documentation  A ListIterator implementation that calls through to the parent list's methods for modification.\n Some implementations may modify the list data directly instead of calling into the parent\n list's methods. We need the implementation to call the parent methods so that the proper\n notifications are done.\n
+//                      relationship is_implementation semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#
+//                      relationship is_implementation semanticdb maven jdk 11 java/util/Iterator#
+//                      relationship is_implementation semanticdb maven jdk 11 java/util/Iterator#
+//                      relationship is_implementation semanticdb maven jdk 11 java/util/ListIterator#
+//                              ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#
+//                                             ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#
+//                                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
     ListItr(int index) {
-//  ^^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr#`<init>`(). ListItr(int index)
-//              ^^^^^ definition local33 int index
+//  ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#ListItr#`<init>`().
+//          documentation ```java\nListItr(int index)\n```
+//              ^^^^^ definition local 33
+//                    documentation ```java\nint index\n```
       cursor = index;
-//    ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
-//             ^^^^^ reference local33
+//    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
+//             ^^^^^ reference local 33
     }
 
     public boolean hasPrevious() {
-//                 ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr#hasPrevious(). public boolean hasPrevious()
+//                 ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#ListItr#hasPrevious().
+//                             documentation ```java\npublic boolean hasPrevious()\n```
+//                             relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#hasPrevious().
       return cursor != 0;
-//           ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
+//           ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
     }
 
     public int nextIndex() {
-//             ^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr#nextIndex(). public int nextIndex()
+//             ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#ListItr#nextIndex().
+//                       documentation ```java\npublic int nextIndex()\n```
+//                       relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#nextIndex().
       return cursor;
-//           ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
+//           ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
     }
 
     public int previousIndex() {
-//             ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr#previousIndex(). public int previousIndex()
+//             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#ListItr#previousIndex().
+//                           documentation ```java\npublic int previousIndex()\n```
+//                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#previousIndex().
       return cursor - 1;
-//           ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
+//           ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
     }
 
     @SuppressWarnings("unchecked")
-//   ^^^^^^^^^^^^^^^^ reference java/lang/SuppressWarnings#
+//   ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
     public EpoxyModel<?> previous() {
-//         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                       ^^^^^^^^ definition com/airbnb/epoxy/ModelList#ListItr#previous(). @SuppressWarnings("unchecked") public EpoxyModel<?> previous()
+//         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                       ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#ListItr#previous().
+//                                documentation ```java\n@SuppressWarnings("unchecked")\npublic EpoxyModel<?> previous()\n```
+//                                relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#previous().
       checkForComodification();
-//    ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#checkForComodification().
+//    ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#checkForComodification().
       int i = cursor - 1;
-//        ^ definition local34 int i
-//            ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
+//        ^ definition local 34
+//          documentation ```java\nint i\n```
+//            ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
       if (i < 0) {
-//        ^ reference local34
+//        ^ reference local 34
         throw new NoSuchElementException();
-//                ^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/NoSuchElementException#`<init>`().
       }
 
       cursor = i;
-//    ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
-//             ^ reference local34
+//    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
+//             ^ reference local 34
       lastRet = i;
-//    ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
-//              ^ reference local34
+//    ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#lastRet.
+//              ^ reference local 34
       return ModelList.this.get(i);
-//           ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
-//                     ^^^^ reference com/airbnb/epoxy/ModelList#this.
-//                          ^^^ reference java/util/ArrayList#get().
-//                              ^ reference local34
+//           ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#
+//                     ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#this.
+//                          ^^^ reference semanticdb maven jdk 11 java/util/ArrayList#get().
+//                              ^ reference local 34
     }
 
     public void set(EpoxyModel<?> e) {
-//              ^^^ definition com/airbnb/epoxy/ModelList#ListItr#set(). public void set(EpoxyModel<?> e)
-//                  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                ^ definition local35 EpoxyModel<?> e
+//              ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#ListItr#set().
+//                  documentation ```java\npublic void set(EpoxyModel<?> e)\n```
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#set().
+//                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                ^ definition local 35
+//                                  documentation ```java\nEpoxyModel<?> e\n```
       if (lastRet < 0) {
-//        ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
+//        ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#lastRet.
         throw new IllegalStateException();
-//                ^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalStateException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IllegalStateException#`<init>`().
       }
       checkForComodification();
-//    ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#checkForComodification().
+//    ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#checkForComodification().
 
       try {
         ModelList.this.set(lastRet, e);
-//      ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
-//                ^^^^ reference com/airbnb/epoxy/ModelList#this.
-//                     ^^^ reference com/airbnb/epoxy/ModelList#set().
-//                         ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
-//                                  ^ reference local35
+//      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#
+//                ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#this.
+//                     ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#set().
+//                         ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#lastRet.
+//                                  ^ reference local 35
       } catch (IndexOutOfBoundsException ex) {
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
-//                                       ^^ definition local36 IndexOutOfBoundsException ex
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IndexOutOfBoundsException#
+//                                       ^^ definition local 36
+//                                          documentation ```java\nIndexOutOfBoundsException ex\n```
         throw new ConcurrentModificationException();
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#`<init>`().
       }
     }
 
     public void add(EpoxyModel<?> e) {
-//              ^^^ definition com/airbnb/epoxy/ModelList#ListItr#add(). public void add(EpoxyModel<?> e)
-//                  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                ^ definition local37 EpoxyModel<?> e
+//              ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#ListItr#add().
+//                  documentation ```java\npublic void add(EpoxyModel<?> e)\n```
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#add().
+//                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                ^ definition local 37
+//                                  documentation ```java\nEpoxyModel<?> e\n```
       checkForComodification();
-//    ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#checkForComodification().
+//    ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#checkForComodification().
 
       try {
         int i = cursor;
-//          ^ definition local38 int i
-//              ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
+//          ^ definition local 38
+//            documentation ```java\nint i\n```
+//              ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
         ModelList.this.add(i, e);
-//      ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
-//                ^^^^ reference com/airbnb/epoxy/ModelList#this.
-//                     ^^^ reference com/airbnb/epoxy/ModelList#add(+1).
-//                         ^ reference local38
-//                            ^ reference local37
+//      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#
+//                ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#this.
+//                     ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#add(+1).
+//                         ^ reference local 38
+//                            ^ reference local 37
         cursor = i + 1;
-//      ^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#cursor.
-//               ^ reference local38
+//      ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
+//               ^ reference local 38
         lastRet = -1;
-//      ^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#lastRet.
+//      ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#lastRet.
         expectedModCount = modCount;
-//      ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#Itr#expectedModCount.
-//                         ^^^^^^^^ reference java/util/AbstractList#modCount.
+//      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#expectedModCount.
+//                         ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
       } catch (IndexOutOfBoundsException ex) {
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#
-//                                       ^^ definition local39 IndexOutOfBoundsException ex
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IndexOutOfBoundsException#
+//                                       ^^ definition local 39
+//                                          documentation ```java\nIndexOutOfBoundsException ex\n```
         throw new ConcurrentModificationException();
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#`<init>`().
       }
     }
   }
 
   @NonNull
-// ^^^^^^^ reference androidx/annotation/NonNull#
+// ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public List<EpoxyModel<?>> subList(int start, int end) {
-//       ^^^^ reference java/util/List#
-//            ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                           ^^^^^^^ definition com/airbnb/epoxy/ModelList#subList(). @NonNull @Override public List<EpoxyModel<?>> subList(int start, int end)
-//                                       ^^^^^ definition local40 int start
-//                                                  ^^^ definition local41 int end
+//       ^^^^ reference semanticdb maven jdk 11 java/util/List#
+//            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                           ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#subList().
+//                                   documentation ```java\n@NonNull\n@Override\npublic List<EpoxyModel<?>> subList(int start, int end)\n```
+//                                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#subList().
+//                                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ArrayList#subList().
+//                                   relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#subList().
+//                                       ^^^^^ definition local 40
+//                                             documentation ```java\nint start\n```
+//                                                  ^^^ definition local 41
+//                                                      documentation ```java\nint end\n```
     if (start >= 0 && end <= size()) {
-//      ^^^^^ reference local40
-//                    ^^^ reference local41
-//                           ^^^^ reference java/util/ArrayList#size().
+//      ^^^^^ reference local 40
+//                    ^^^ reference local 41
+//                           ^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#size().
       if (start <= end) {
-//        ^^^^^ reference local40
-//                 ^^^ reference local41
+//        ^^^^^ reference local 40
+//                 ^^^ reference local 41
         return new SubList(this, start, end);
-//                 ^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#`<init>`().
-//                               ^^^^^ reference local40
-//                                      ^^^ reference local41
+//                 ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#`<init>`().
+//                               ^^^^^ reference local 40
+//                                      ^^^ reference local 41
       }
       throw new IllegalArgumentException();
-//              ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IllegalArgumentException#`<init>`().
     }
     throw new IndexOutOfBoundsException();
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IndexOutOfBoundsException#`<init>`().
   }
 
   /**
@@ -684,509 +857,612 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
    * the implementation to call the parent methods so that the proper notifications are done.
    */
   private static class SubList extends AbstractList<EpoxyModel<?>> {
-//                     ^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList# private static class SubList
-//                                     ^^^^^^^^^^^^ reference java/util/AbstractList#
-//                                                  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//                     ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#
+//                             documentation ```java\nprivate static class SubList\n```
+//                             documentation  A SubList implementation from Android's AbstractList class. It's copied here to make sure the\n implementation doesn't change, since some implementations, like the Java 1.8 ArrayList.SubList\n class, modify the list data directly instead of calling into the parent list's methods. We need\n the implementation to call the parent methods so that the proper notifications are done.\n
+//                             relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
+//                             relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
+//                             relationship is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#
+//                             relationship is_implementation semanticdb maven jdk 11 java/util/AbstractList#
+//                             relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
+//                             relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
+//                             relationship is_implementation semanticdb maven jdk 11 java/util/List#
+//                                     ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#
+//                                                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
     private final ModelList fullList;
-//                ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
-//                          ^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#fullList. private final ModelList fullList
+//                ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#
+//                          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                                   documentation ```java\nprivate final ModelList fullList\n```
     private int offset;
-//              ^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#offset. private int offset
+//              ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#offset.
+//                     documentation ```java\nprivate int offset\n```
     private int size;
-//              ^^^^ definition com/airbnb/epoxy/ModelList#SubList#size. private int size
+//              ^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
+//                   documentation ```java\nprivate int size\n```
 
     private static final class SubListIterator implements ListIterator<EpoxyModel<?>> {
-//                             ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator# private static final class SubListIterator
-//                                                        ^^^^^^^^^^^^ reference java/util/ListIterator#
-//                                                                     ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
+//                             ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#
+//                                             documentation ```java\nprivate static final class SubListIterator\n```
+//                                             relationship is_implementation semanticdb maven jdk 11 java/util/Iterator#
+//                                             relationship is_implementation semanticdb maven jdk 11 java/util/ListIterator#
+//                                                        ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#
+//                                                                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
       private final SubList subList;
-//                  ^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#
-//                          ^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#subList. private final SubList subList
+//                  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#
+//                          ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#subList.
+//                                  documentation ```java\nprivate final SubList subList\n```
       private final ListIterator<EpoxyModel<?>> iterator;
-//                  ^^^^^^^^^^^^ reference java/util/ListIterator#
-//                               ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                              ^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator. private final ListIterator<EpoxyModel<?>> iterator
+//                  ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#
+//                               ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
+//                                                       documentation ```java\nprivate final ListIterator<EpoxyModel<?>> iterator\n```
       private int start;
-//                ^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#start. private int start
+//                ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
+//                      documentation ```java\nprivate int start\n```
       private int end;
-//                ^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#end. private int end
+//                ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#end.
+//                    documentation ```java\nprivate int end\n```
 
       SubListIterator(ListIterator<EpoxyModel<?>> it, SubList list, int offset, int length) {
-//    ^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#`<init>`(). SubListIterator(ListIterator<EpoxyModel<?>> it, SubList list, int offset, int length)
-//                    ^^^^^^^^^^^^ reference java/util/ListIterator#
-//                                 ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                ^^ definition local42 ListIterator<EpoxyModel<?>> it
-//                                                    ^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#
-//                                                            ^^^^ definition local43 SubList list
-//                                                                      ^^^^^^ definition local44 int offset
-//                                                                                  ^^^^^^ definition local45 int length
+//    ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#`<init>`().
+//                    documentation ```java\nSubListIterator(ListIterator<EpoxyModel<?>> it, SubList list, int offset, int length)\n```
+//                    ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#
+//                                 ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                                ^^ definition local 42
+//                                                   documentation ```java\nListIterator<EpoxyModel<?>> it\n```
+//                                                    ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#
+//                                                            ^^^^ definition local 43
+//                                                                 documentation ```java\nSubList list\n```
+//                                                                      ^^^^^^ definition local 44
+//                                                                             documentation ```java\nint offset\n```
+//                                                                                  ^^^^^^ definition local 45
+//                                                                                         documentation ```java\nint length\n```
         iterator = it;
-//      ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
-//                 ^^ reference local42
+//      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
+//                 ^^ reference local 42
         subList = list;
-//      ^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#subList.
-//                ^^^^ reference local43
+//      ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#subList.
+//                ^^^^ reference local 43
         start = offset;
-//      ^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
-//              ^^^^^^ reference local44
+//      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
+//              ^^^^^^ reference local 44
         end = start + length;
-//      ^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#end.
-//            ^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
-//                    ^^^^^^ reference local45
+//      ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#end.
+//            ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
+//                    ^^^^^^ reference local 45
       }
 
       public void add(EpoxyModel<?> object) {
-//                ^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#add(). public void add(EpoxyModel<?> object)
-//                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                  ^^^^^^ definition local46 EpoxyModel<?> object
+//                ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#add().
+//                    documentation ```java\npublic void add(EpoxyModel<?> object)\n```
+//                    relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#add().
+//                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                  ^^^^^^ definition local 46
+//                                         documentation ```java\nEpoxyModel<?> object\n```
         iterator.add(object);
-//      ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
-//               ^^^ reference java/util/ListIterator#add().
-//                   ^^^^^^ reference local46
+//      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
+//               ^^^ reference semanticdb maven jdk 11 java/util/ListIterator#add().
+//                   ^^^^^^ reference local 46
         subList.sizeChanged(true);
-//      ^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#subList.
-//              ^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#sizeChanged().
+//      ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#subList.
+//              ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#sizeChanged().
         end++;
-//      ^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#end.
+//      ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#end.
       }
 
       public boolean hasNext() {
-//                   ^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#hasNext(). public boolean hasNext()
+//                   ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#hasNext().
+//                           documentation ```java\npublic boolean hasNext()\n```
+//                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Iterator#hasNext().
+//                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#hasNext().
         return iterator.nextIndex() < end;
-//             ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
-//                      ^^^^^^^^^ reference java/util/ListIterator#nextIndex().
-//                                    ^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#end.
+//             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
+//                      ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#nextIndex().
+//                                    ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#end.
       }
 
       public boolean hasPrevious() {
-//                   ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#hasPrevious(). public boolean hasPrevious()
+//                   ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#hasPrevious().
+//                               documentation ```java\npublic boolean hasPrevious()\n```
+//                               relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#hasPrevious().
         return iterator.previousIndex() >= start;
-//             ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
-//                      ^^^^^^^^^^^^^ reference java/util/ListIterator#previousIndex().
-//                                         ^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
+//             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
+//                      ^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#previousIndex().
+//                                         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
       }
 
       public EpoxyModel<?> next() {
-//           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                         ^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#next(). public EpoxyModel<?> next()
+//           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                         ^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#next().
+//                              documentation ```java\npublic EpoxyModel<?> next()\n```
+//                              relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Iterator#next().
+//                              relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#next().
         if (iterator.nextIndex() < end) {
-//          ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
-//                   ^^^^^^^^^ reference java/util/ListIterator#nextIndex().
-//                                 ^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#end.
+//          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
+//                   ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#nextIndex().
+//                                 ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#end.
           return iterator.next();
-//               ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
-//                        ^^^^ reference java/util/ListIterator#next().
+//               ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
+//                        ^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#next().
         }
         throw new NoSuchElementException();
-//                ^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/NoSuchElementException#`<init>`().
       }
 
       public int nextIndex() {
-//               ^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#nextIndex(). public int nextIndex()
+//               ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#nextIndex().
+//                         documentation ```java\npublic int nextIndex()\n```
+//                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#nextIndex().
         return iterator.nextIndex() - start;
-//             ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
-//                      ^^^^^^^^^ reference java/util/ListIterator#nextIndex().
-//                                    ^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
+//             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
+//                      ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#nextIndex().
+//                                    ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
       }
 
       public EpoxyModel<?> previous() {
-//           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                         ^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#previous(). public EpoxyModel<?> previous()
+//           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                         ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#previous().
+//                                  documentation ```java\npublic EpoxyModel<?> previous()\n```
+//                                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#previous().
         if (iterator.previousIndex() >= start) {
-//          ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
-//                   ^^^^^^^^^^^^^ reference java/util/ListIterator#previousIndex().
-//                                      ^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
+//          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
+//                   ^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#previousIndex().
+//                                      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
           return iterator.previous();
-//               ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
-//                        ^^^^^^^^ reference java/util/ListIterator#previous().
+//               ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
+//                        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#previous().
         }
         throw new NoSuchElementException();
-//                ^^^^^^^^^^^^^^^^^^^^^^ reference java/util/NoSuchElementException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/NoSuchElementException#`<init>`().
       }
 
       public int previousIndex() {
-//               ^^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#previousIndex(). public int previousIndex()
+//               ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#previousIndex().
+//                             documentation ```java\npublic int previousIndex()\n```
+//                             relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#previousIndex().
         int previous = iterator.previousIndex();
-//          ^^^^^^^^ definition local47 int previous
-//                     ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
-//                              ^^^^^^^^^^^^^ reference java/util/ListIterator#previousIndex().
+//          ^^^^^^^^ definition local 47
+//                   documentation ```java\nint previous\n```
+//                     ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
+//                              ^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#previousIndex().
         if (previous >= start) {
-//          ^^^^^^^^ reference local47
-//                      ^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
+//          ^^^^^^^^ reference local 47
+//                      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
           return previous - start;
-//               ^^^^^^^^ reference local47
-//                          ^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
+//               ^^^^^^^^ reference local 47
+//                          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#start.
         }
         return -1;
       }
 
       public void remove() {
-//                ^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#remove(). public void remove()
+//                ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#remove().
+//                       documentation ```java\npublic void remove()\n```
+//                       relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Iterator#remove().
+//                       relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#remove().
         iterator.remove();
-//      ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
-//               ^^^^^^ reference java/util/ListIterator#remove().
+//      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
+//               ^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#remove().
         subList.sizeChanged(false);
-//      ^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#subList.
-//              ^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#sizeChanged().
+//      ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#subList.
+//              ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#sizeChanged().
         end--;
-//      ^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#end.
+//      ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#end.
       }
 
       public void set(EpoxyModel<?> object) {
-//                ^^^ definition com/airbnb/epoxy/ModelList#SubList#SubListIterator#set(). public void set(EpoxyModel<?> object)
-//                    ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                  ^^^^^^ definition local48 EpoxyModel<?> object
+//                ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#set().
+//                    documentation ```java\npublic void set(EpoxyModel<?> object)\n```
+//                    relationship is_reference is_implementation semanticdb maven jdk 11 java/util/ListIterator#set().
+//                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                  ^^^^^^ definition local 48
+//                                         documentation ```java\nEpoxyModel<?> object\n```
         iterator.set(object);
-//      ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
-//               ^^^ reference java/util/ListIterator#set().
-//                   ^^^^^^ reference local48
+//      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
+//               ^^^ reference semanticdb maven jdk 11 java/util/ListIterator#set().
+//                   ^^^^^^ reference local 48
       }
     }
 
     SubList(ModelList list, int start, int end) {
-//  ^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#`<init>`(). SubList(ModelList list, int start, int end)
-//          ^^^^^^^^^ reference com/airbnb/epoxy/ModelList#
-//                    ^^^^ definition local49 ModelList list
-//                              ^^^^^ definition local50 int start
-//                                         ^^^ definition local51 int end
+//  ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#`<init>`().
+//          documentation ```java\nSubList(ModelList list, int start, int end)\n```
+//          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#
+//                    ^^^^ definition local 49
+//                         documentation ```java\nModelList list\n```
+//                              ^^^^^ definition local 50
+//                                    documentation ```java\nint start\n```
+//                                         ^^^ definition local 51
+//                                             documentation ```java\nint end\n```
       fullList = list;
-//    ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//               ^^^^ reference local49
+//    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//               ^^^^ reference local 49
       modCount = fullList.modCount;
-//    ^^^^^^^^ reference java/util/AbstractList#modCount.
-//               ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                        ^^^^^^^^ reference java/util/AbstractList#modCount.
+//    ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//               ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
       offset = start;
-//    ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
-//             ^^^^^ reference local50
+//    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#offset.
+//             ^^^^^ reference local 50
       size = end - start;
-//    ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
-//           ^^^ reference local51
-//                 ^^^^^ reference local50
+//    ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
+//           ^^^ reference local 51
+//                 ^^^^^ reference local 50
     }
 
     @Override
-//   ^^^^^^^^ reference java/lang/Override#
+//   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public void add(int location, EpoxyModel<?> object) {
-//              ^^^ definition com/airbnb/epoxy/ModelList#SubList#add(). @Override public void add(int location, EpoxyModel<?> object)
-//                      ^^^^^^^^ definition local52 int location
-//                                ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                              ^^^^^^ definition local53 EpoxyModel<?> object
+//              ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#add().
+//                  documentation ```java\n@Override\npublic void add(int location, EpoxyModel<?> object)\n```
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#add(+1).
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#add(+1).
+//                      ^^^^^^^^ definition local 52
+//                               documentation ```java\nint location\n```
+//                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                              ^^^^^^ definition local 53
+//                                                     documentation ```java\nEpoxyModel<?> object\n```
       if (modCount == fullList.modCount) {
-//        ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                             ^^^^^^^^ reference java/util/AbstractList#modCount.
+//        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                             ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
         if (location >= 0 && location <= size) {
-//          ^^^^^^^^ reference local52
-//                           ^^^^^^^^ reference local52
-//                                       ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
+//          ^^^^^^^^ reference local 52
+//                           ^^^^^^^^ reference local 52
+//                                       ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
           fullList.add(location + offset, object);
-//        ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                 ^^^ reference com/airbnb/epoxy/ModelList#add(+1).
-//                     ^^^^^^^^ reference local52
-//                                ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
-//                                        ^^^^^^ reference local53
+//        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                 ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#add(+1).
+//                     ^^^^^^^^ reference local 52
+//                                ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#offset.
+//                                        ^^^^^^ reference local 53
           size++;
-//        ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
+//        ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
           modCount = fullList.modCount;
-//        ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                   ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                            ^^^^^^^^ reference java/util/AbstractList#modCount.
+//        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                            ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
         } else {
           throw new IndexOutOfBoundsException();
-//                  ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
+//                  ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IndexOutOfBoundsException#`<init>`().
         }
       } else {
         throw new ConcurrentModificationException();
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#`<init>`().
       }
     }
 
     @Override
-//   ^^^^^^^^ reference java/lang/Override#
+//   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public boolean addAll(int location, Collection<? extends EpoxyModel<?>> collection) {
-//                 ^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#addAll(). @Override public boolean addAll(int location, Collection<? extends EpoxyModel<?>> collection)
-//                            ^^^^^^^^ definition local54 int location
-//                                      ^^^^^^^^^^ reference java/util/Collection#
-//                                                           ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                                          ^^^^^^^^^^ definition local55 Collection<? extends EpoxyModel<?>> collection
+//                 ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#addAll().
+//                        documentation ```java\n@Override\npublic boolean addAll(int location, Collection<? extends EpoxyModel<?>> collection)\n```
+//                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#addAll().
+//                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#addAll(+1).
+//                            ^^^^^^^^ definition local 54
+//                                     documentation ```java\nint location\n```
+//                                      ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#
+//                                                           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                                                          ^^^^^^^^^^ definition local 55
+//                                                                                     documentation ```java\nCollection<? extends EpoxyModel<?>> collection\n```
       if (modCount == fullList.modCount) {
-//        ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                             ^^^^^^^^ reference java/util/AbstractList#modCount.
+//        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                             ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
         if (location >= 0 && location <= size) {
-//          ^^^^^^^^ reference local54
-//                           ^^^^^^^^ reference local54
-//                                       ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
+//          ^^^^^^^^ reference local 54
+//                           ^^^^^^^^ reference local 54
+//                                       ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
           boolean result = fullList.addAll(location + offset, collection);
-//                ^^^^^^ definition local56 boolean result
-//                         ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                                  ^^^^^^ reference com/airbnb/epoxy/ModelList#addAll(+1).
-//                                         ^^^^^^^^ reference local54
-//                                                    ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
-//                                                            ^^^^^^^^^^ reference local55
+//                ^^^^^^ definition local 56
+//                       documentation ```java\nboolean result\n```
+//                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                                  ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#addAll(+1).
+//                                         ^^^^^^^^ reference local 54
+//                                                    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#offset.
+//                                                            ^^^^^^^^^^ reference local 55
           if (result) {
-//            ^^^^^^ reference local56
+//            ^^^^^^ reference local 56
             size += collection.size();
-//          ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
-//                  ^^^^^^^^^^ reference local55
-//                             ^^^^ reference java/util/Collection#size().
+//          ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
+//                  ^^^^^^^^^^ reference local 55
+//                             ^^^^ reference semanticdb maven jdk 11 java/util/Collection#size().
             modCount = fullList.modCount;
-//          ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                     ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                              ^^^^^^^^ reference java/util/AbstractList#modCount.
+//          ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                     ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                              ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
           }
           return result;
-//               ^^^^^^ reference local56
+//               ^^^^^^ reference local 56
         }
         throw new IndexOutOfBoundsException();
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IndexOutOfBoundsException#`<init>`().
       }
       throw new ConcurrentModificationException();
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#`<init>`().
     }
 
     @Override
-//   ^^^^^^^^ reference java/lang/Override#
+//   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public boolean addAll(@NonNull Collection<? extends EpoxyModel<?>> collection) {
-//                 ^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#addAll(+1). @Override public boolean addAll(Collection<? extends EpoxyModel<?>> collection)
-//                         ^^^^^^^ reference androidx/annotation/NonNull#
-//                                 ^^^^^^^^^^ reference java/util/Collection#
-//                                                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                                     ^^^^^^^^^^ definition local57 @NonNull Collection<? extends EpoxyModel<?>> collection
+//                 ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#addAll(+1).
+//                        documentation ```java\n@Override\npublic boolean addAll(Collection<? extends EpoxyModel<?>> collection)\n```
+//                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#addAll().
+//                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#addAll().
+//                        relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#addAll().
+//                         ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
+//                                 ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#
+//                                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                                                     ^^^^^^^^^^ definition local 57
+//                                                                                documentation ```java\n@NonNull\nCollection<? extends EpoxyModel<?>> collection\n```
       if (modCount == fullList.modCount) {
-//        ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                             ^^^^^^^^ reference java/util/AbstractList#modCount.
+//        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                             ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
         boolean result = fullList.addAll(offset + size, collection);
-//              ^^^^^^ definition local58 boolean result
-//                       ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                                ^^^^^^ reference com/airbnb/epoxy/ModelList#addAll(+1).
-//                                       ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
-//                                                ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
-//                                                      ^^^^^^^^^^ reference local57
+//              ^^^^^^ definition local 58
+//                     documentation ```java\nboolean result\n```
+//                       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                                ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#addAll(+1).
+//                                       ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#offset.
+//                                                ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
+//                                                      ^^^^^^^^^^ reference local 57
         if (result) {
-//          ^^^^^^ reference local58
+//          ^^^^^^ reference local 58
           size += collection.size();
-//        ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
-//                ^^^^^^^^^^ reference local57
-//                           ^^^^ reference java/util/Collection#size().
+//        ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
+//                ^^^^^^^^^^ reference local 57
+//                           ^^^^ reference semanticdb maven jdk 11 java/util/Collection#size().
           modCount = fullList.modCount;
-//        ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                   ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                            ^^^^^^^^ reference java/util/AbstractList#modCount.
+//        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                            ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
         }
         return result;
-//             ^^^^^^ reference local58
+//             ^^^^^^ reference local 58
       }
       throw new ConcurrentModificationException();
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#`<init>`().
     }
 
     @Override
-//   ^^^^^^^^ reference java/lang/Override#
+//   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public EpoxyModel<?> get(int location) {
-//         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                       ^^^ definition com/airbnb/epoxy/ModelList#SubList#get(). @Override public EpoxyModel<?> get(int location)
-//                               ^^^^^^^^ definition local59 int location
+//         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                       ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#get().
+//                           documentation ```java\n@Override\npublic EpoxyModel<?> get(int location)\n```
+//                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#get().
+//                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#get().
+//                               ^^^^^^^^ definition local 59
+//                                        documentation ```java\nint location\n```
       if (modCount == fullList.modCount) {
-//        ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                             ^^^^^^^^ reference java/util/AbstractList#modCount.
+//        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                             ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
         if (location >= 0 && location < size) {
-//          ^^^^^^^^ reference local59
-//                           ^^^^^^^^ reference local59
-//                                      ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
+//          ^^^^^^^^ reference local 59
+//                           ^^^^^^^^ reference local 59
+//                                      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
           return fullList.get(location + offset);
-//               ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                        ^^^ reference java/util/ArrayList#get().
-//                            ^^^^^^^^ reference local59
-//                                       ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
+//               ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                        ^^^ reference semanticdb maven jdk 11 java/util/ArrayList#get().
+//                            ^^^^^^^^ reference local 59
+//                                       ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#offset.
         }
         throw new IndexOutOfBoundsException();
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IndexOutOfBoundsException#`<init>`().
       }
       throw new ConcurrentModificationException();
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#`<init>`().
     }
 
     @NonNull
-//   ^^^^^^^ reference androidx/annotation/NonNull#
+//   ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
     @Override
-//   ^^^^^^^^ reference java/lang/Override#
+//   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public Iterator<EpoxyModel<?>> iterator() {
-//         ^^^^^^^^ reference java/util/Iterator#
-//                  ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                 ^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#iterator(). @NonNull @Override public Iterator<EpoxyModel<?>> iterator()
+//         ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
+//                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                 ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#iterator().
+//                                          documentation ```java\n@NonNull\n@Override\npublic Iterator<EpoxyModel<?>> iterator()\n```
+//                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Iterable#iterator().
+//                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#iterator().
+//                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#iterator().
+//                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#iterator().
+//                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#iterator().
       return listIterator(0);
-//           ^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#listIterator().
+//           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#listIterator().
     }
 
     @NonNull
-//   ^^^^^^^ reference androidx/annotation/NonNull#
+//   ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
     @Override
-//   ^^^^^^^^ reference java/lang/Override#
+//   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public ListIterator<EpoxyModel<?>> listIterator(int location) {
-//         ^^^^^^^^^^^^ reference java/util/ListIterator#
-//                      ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                     ^^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#listIterator(). @NonNull @Override public ListIterator<EpoxyModel<?>> listIterator(int location)
-//                                                      ^^^^^^^^ definition local60 int location
+//         ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#
+//                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                     ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#listIterator().
+//                                                  documentation ```java\n@NonNull\n@Override\npublic ListIterator<EpoxyModel<?>> listIterator(int location)\n```
+//                                                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#listIterator(+1).
+//                                                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#listIterator(+1).
+//                                                      ^^^^^^^^ definition local 60
+//                                                               documentation ```java\nint location\n```
       if (modCount == fullList.modCount) {
-//        ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                             ^^^^^^^^ reference java/util/AbstractList#modCount.
+//        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                             ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
         if (location >= 0 && location <= size) {
-//          ^^^^^^^^ reference local60
-//                           ^^^^^^^^ reference local60
-//                                       ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
+//          ^^^^^^^^ reference local 60
+//                           ^^^^^^^^ reference local 60
+//                                       ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
           return new SubListIterator(fullList.listIterator(location + offset), this, offset, size);
-//                   ^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#SubListIterator#`<init>`().
-//                                   ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                                            ^^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#listIterator(+1).
-//                                                         ^^^^^^^^ reference local60
-//                                                                    ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
-//                                                                                   ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
-//                                                                                           ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
+//                   ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#`<init>`().
+//                                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                                            ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#listIterator(+1).
+//                                                         ^^^^^^^^ reference local 60
+//                                                                    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#offset.
+//                                                                                   ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#offset.
+//                                                                                           ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
         }
         throw new IndexOutOfBoundsException();
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IndexOutOfBoundsException#`<init>`().
       }
       throw new ConcurrentModificationException();
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#`<init>`().
     }
 
     @Override
-//   ^^^^^^^^ reference java/lang/Override#
+//   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public EpoxyModel<?> remove(int location) {
-//         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                       ^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#remove(). @Override public EpoxyModel<?> remove(int location)
-//                                  ^^^^^^^^ definition local61 int location
+//         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                       ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#remove().
+//                              documentation ```java\n@Override\npublic EpoxyModel<?> remove(int location)\n```
+//                              relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#remove().
+//                              relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#remove(+1).
+//                                  ^^^^^^^^ definition local 61
+//                                           documentation ```java\nint location\n```
       if (modCount == fullList.modCount) {
-//        ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                             ^^^^^^^^ reference java/util/AbstractList#modCount.
+//        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                             ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
         if (location >= 0 && location < size) {
-//          ^^^^^^^^ reference local61
-//                           ^^^^^^^^ reference local61
-//                                      ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
+//          ^^^^^^^^ reference local 61
+//                           ^^^^^^^^ reference local 61
+//                                      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
           EpoxyModel<?> result = fullList.remove(location + offset);
-//        ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                      ^^^^^^ definition local62 EpoxyModel<?> result
-//                               ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                                        ^^^^^^ reference com/airbnb/epoxy/ModelList#remove().
-//                                               ^^^^^^^^ reference local61
-//                                                          ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
+//        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                      ^^^^^^ definition local 62
+//                             documentation ```java\nEpoxyModel<?> result\n```
+//                               ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                                        ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#remove().
+//                                               ^^^^^^^^ reference local 61
+//                                                          ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#offset.
           size--;
-//        ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
+//        ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
           modCount = fullList.modCount;
-//        ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                   ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                            ^^^^^^^^ reference java/util/AbstractList#modCount.
+//        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                            ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
           return result;
-//               ^^^^^^ reference local62
+//               ^^^^^^ reference local 62
         }
         throw new IndexOutOfBoundsException();
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IndexOutOfBoundsException#`<init>`().
       }
       throw new ConcurrentModificationException();
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#`<init>`().
     }
 
     @Override
-//   ^^^^^^^^ reference java/lang/Override#
+//   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     protected void removeRange(int start, int end) {
-//                 ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#removeRange(). @Override protected void removeRange(int start, int end)
-//                                 ^^^^^ definition local63 int start
-//                                            ^^^ definition local64 int end
+//                 ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#removeRange().
+//                             documentation ```java\n@Override\nprotected void removeRange(int start, int end)\n```
+//                             relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#removeRange().
+//                                 ^^^^^ definition local 63
+//                                       documentation ```java\nint start\n```
+//                                            ^^^ definition local 64
+//                                                documentation ```java\nint end\n```
       if (start != end) {
-//        ^^^^^ reference local63
-//                 ^^^ reference local64
+//        ^^^^^ reference local 63
+//                 ^^^ reference local 64
         if (modCount == fullList.modCount) {
-//          ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                      ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                               ^^^^^^^^ reference java/util/AbstractList#modCount.
+//          ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                               ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
           fullList.removeRange(start + offset, end + offset);
-//        ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                 ^^^^^^^^^^^ reference com/airbnb/epoxy/ModelList#removeRange().
-//                             ^^^^^ reference local63
-//                                     ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
-//                                             ^^^ reference local64
-//                                                   ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
+//        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                 ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#removeRange().
+//                             ^^^^^ reference local 63
+//                                     ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#offset.
+//                                             ^^^ reference local 64
+//                                                   ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#offset.
           size -= end - start;
-//        ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
-//                ^^^ reference local64
-//                      ^^^^^ reference local63
+//        ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
+//                ^^^ reference local 64
+//                      ^^^^^ reference local 63
           modCount = fullList.modCount;
-//        ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                   ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                            ^^^^^^^^ reference java/util/AbstractList#modCount.
+//        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                            ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
         } else {
           throw new ConcurrentModificationException();
-//                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
+//                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#`<init>`().
         }
       }
     }
 
     @Override
-//   ^^^^^^^^ reference java/lang/Override#
+//   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public EpoxyModel<?> set(int location, EpoxyModel<?> object) {
-//         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                       ^^^ definition com/airbnb/epoxy/ModelList#SubList#set(). @Override public EpoxyModel<?> set(int location, EpoxyModel<?> object)
-//                               ^^^^^^^^ definition local65 int location
-//                                         ^^^^^^^^^^ reference com/airbnb/epoxy/EpoxyModel#
-//                                                       ^^^^^^ definition local66 EpoxyModel<?> object
+//         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                       ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#set().
+//                           documentation ```java\n@Override\npublic EpoxyModel<?> set(int location, EpoxyModel<?> object)\n```
+//                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractList#set().
+//                           relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#set().
+//                               ^^^^^^^^ definition local 65
+//                                        documentation ```java\nint location\n```
+//                                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
+//                                                       ^^^^^^ definition local 66
+//                                                              documentation ```java\nEpoxyModel<?> object\n```
       if (modCount == fullList.modCount) {
-//        ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                             ^^^^^^^^ reference java/util/AbstractList#modCount.
+//        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                             ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
         if (location >= 0 && location < size) {
-//          ^^^^^^^^ reference local65
-//                           ^^^^^^^^ reference local65
-//                                      ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
+//          ^^^^^^^^ reference local 65
+//                           ^^^^^^^^ reference local 65
+//                                      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
           return fullList.set(location + offset, object);
-//               ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                        ^^^ reference com/airbnb/epoxy/ModelList#set().
-//                            ^^^^^^^^ reference local65
-//                                       ^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#offset.
-//                                               ^^^^^^ reference local66
+//               ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                        ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#set().
+//                            ^^^^^^^^ reference local 65
+//                                       ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#offset.
+//                                               ^^^^^^ reference local 66
         }
         throw new IndexOutOfBoundsException();
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IndexOutOfBoundsException#`<init>`().
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IndexOutOfBoundsException#`<init>`().
       }
       throw new ConcurrentModificationException();
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#`<init>`().
     }
 
     @Override
-//   ^^^^^^^^ reference java/lang/Override#
+//   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public int size() {
-//             ^^^^ definition com/airbnb/epoxy/ModelList#SubList#size(). @Override public int size()
+//             ^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size().
+//                  documentation ```java\n@Override\npublic int size()\n```
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#size().
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Collection#size().
+//                  relationship is_reference is_implementation semanticdb maven jdk 11 java/util/List#size().
       if (modCount == fullList.modCount) {
-//        ^^^^^^^^ reference java/util/AbstractList#modCount.
-//                    ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                             ^^^^^^^^ reference java/util/AbstractList#modCount.
+//        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                             ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
         return size;
-//             ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
+//             ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
       }
       throw new ConcurrentModificationException();
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference java/util/ConcurrentModificationException#`<init>`().
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ConcurrentModificationException#`<init>`().
     }
 
     void sizeChanged(boolean increment) {
-//       ^^^^^^^^^^^ definition com/airbnb/epoxy/ModelList#SubList#sizeChanged(). void sizeChanged(boolean increment)
-//                           ^^^^^^^^^ definition local67 boolean increment
+//       ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#sizeChanged().
+//                   documentation ```java\nvoid sizeChanged(boolean increment)\n```
+//                           ^^^^^^^^^ definition local 67
+//                                     documentation ```java\nboolean increment\n```
       if (increment) {
-//        ^^^^^^^^^ reference local67
+//        ^^^^^^^^^ reference local 67
         size++;
-//      ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
+//      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
       } else {
         size--;
-//      ^^^^ reference com/airbnb/epoxy/ModelList#SubList#size.
+//      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#size.
       }
       modCount = fullList.modCount;
-//    ^^^^^^^^ reference java/util/AbstractList#modCount.
-//               ^^^^^^^^ reference com/airbnb/epoxy/ModelList#SubList#fullList.
-//                        ^^^^^^^^ reference java/util/AbstractList#modCount.
+//    ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
+//               ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
+//                        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#modCount.
     }
   }
 }

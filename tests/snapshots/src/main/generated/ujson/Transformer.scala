@@ -1,29 +1,38 @@
 package ujson
-//      ^^^^^ definition ujson/
+//      ^^^^^ definition semanticdb maven . . ujson/
 import upickle.core.Visitor
-//     ^^^^^^^ reference upickle/
-//             ^^^^ reference upickle/core/
-//                  ^^^^^^^ reference upickle/core/Visitor.
-//                  ^^^^^^^ reference upickle/core/Visitor#
+//     ^^^^^^^ reference semanticdb maven . . upickle/
+//             ^^^^ reference semanticdb maven . . upickle/core/
+//                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor.
 
 trait Transformer[I] {
-//    ^^^^^^^^^^^ definition ujson/Transformer# trait Transformer[I]
-//                ^ definition ujson/Transformer#[I] I
+//    ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#
+//                documentation ```scala\ntrait Transformer[I]\n```
+//                ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#[I]
+//                  documentation ```scala\nI\n```
   def transform[T](j: I, f: Visitor[_, T]): T
-//    ^^^^^^^^^ definition ujson/Transformer#transform(). def transform(j: I, f: Visitor[local0, T[): T
-//              ^ definition ujson/Transformer#transform().[T] T
-//                 ^ definition ujson/Transformer#transform().(j) j: I
-//                    ^ reference ujson/Transformer#[I]
-//                       ^ definition ujson/Transformer#transform().(f) f: Visitor[local0, T[
-//                          ^^^^^^^ reference upickle/core/Visitor#
-//                                     ^ reference ujson/Transformer#transform().[T]
-//                                          ^ reference ujson/Transformer#transform().[T]
+//    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().
+//              documentation ```scala\ndef transform(j: I, f: Visitor[local0, T[): T\n```
+//              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().[T]
+//                documentation ```scala\nT\n```
+//                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().(j)
+//                   documentation ```scala\nj: I \n```
+//                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#[I]
+//                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().(f)
+//                         documentation ```scala\nf: Visitor[local0, T[ \n```
+//                          ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
+//                                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().[T]
+//                                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().[T]
   def transformable[T](j: I) = Readable.fromTransformer(j, this)
-//    ^^^^^^^^^^^^^ definition ujson/Transformer#transformable(). def transformable(j: I): fromTransformer[I]
-//                  ^ definition ujson/Transformer#transformable().[T] T
-//                     ^ definition ujson/Transformer#transformable().(j) j: I
-//                        ^ reference ujson/Transformer#[I]
-//                             ^^^^^^^^ reference ujson/Readable.
-//                                      ^^^^^^^^^^^^^^^ reference ujson/Readable.fromTransformer.
-//                                                      ^ reference ujson/Transformer#transformable().(j)
+//    ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transformable().
+//                  documentation ```scala\ndef transformable(j: I): fromTransformer[I]\n```
+//                  ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transformable().[T]
+//                    documentation ```scala\nT\n```
+//                     ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transformable().(j)
+//                       documentation ```scala\nj: I \n```
+//                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#[I]
+//                             ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.
+//                                      ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.
+//                                                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transformable().(j)
 }

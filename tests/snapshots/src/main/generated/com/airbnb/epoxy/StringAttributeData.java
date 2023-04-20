@@ -1,331 +1,366 @@
 package com.airbnb.epoxy;
 
 import android.content.Context;
-//     ^^^^^^^ reference android/
-//             ^^^^^^^ reference android/content/
-//                     ^^^^^^^ reference android/content/Context#
+//     ^^^^^^^ reference semanticdb maven . . android/
+//             ^^^^^^^ reference semanticdb maven . . android/content/
+//                     ^^^^^^^ reference semanticdb maven . . android/content/Context#
 
 import java.util.Arrays;
-//     ^^^^ reference java/
-//          ^^^^ reference java/util/
-//               ^^^^^^ reference java/util/Arrays#
+//     ^^^^ reference semanticdb maven . . java/
+//          ^^^^ reference semanticdb maven . . java/util/
+//               ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#
 
 import androidx.annotation.Nullable;
-//     ^^^^^^^^ reference androidx/
-//              ^^^^^^^^^^ reference androidx/annotation/
-//                         ^^^^^^^^ reference androidx/annotation/Nullable#
+//     ^^^^^^^^ reference semanticdb maven . . androidx/
+//              ^^^^^^^^^^ reference semanticdb maven . . androidx/annotation/
+//                         ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 import androidx.annotation.PluralsRes;
-//     ^^^^^^^^ reference androidx/
-//              ^^^^^^^^^^ reference androidx/annotation/
-//                         ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
+//     ^^^^^^^^ reference semanticdb maven . . androidx/
+//              ^^^^^^^^^^ reference semanticdb maven . . androidx/annotation/
+//                         ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/PluralsRes#
 import androidx.annotation.StringRes;
-//     ^^^^^^^^ reference androidx/
-//              ^^^^^^^^^^ reference androidx/annotation/
-//                         ^^^^^^^^^ reference androidx/annotation/StringRes#
+//     ^^^^^^^^ reference semanticdb maven . . androidx/
+//              ^^^^^^^^^^ reference semanticdb maven . . androidx/annotation/
+//                         ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/StringRes#
 
 public class StringAttributeData {
-//           ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData# public class StringAttributeData
+//           ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#
+//                               documentation ```java\npublic class StringAttributeData\n```
   private final boolean hasDefault;
-//                      ^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#hasDefault. private final boolean hasDefault
+//                      ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hasDefault.
+//                                 documentation ```java\nprivate final boolean hasDefault\n```
   @Nullable private final CharSequence defaultString;
-// ^^^^^^^^ reference androidx/annotation/Nullable#
-//                        ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                     ^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#defaultString. @Nullable private final CharSequence defaultString
+// ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
+//                        ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
+//                                     ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#defaultString.
+//                                                   documentation ```java\n@Nullable\nprivate final CharSequence defaultString\n```
   @StringRes private final int defaultStringRes;
-// ^^^^^^^^^ reference androidx/annotation/StringRes#
-//                             ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#defaultStringRes. @StringRes private final int defaultStringRes
+// ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/StringRes#
+//                             ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#defaultStringRes.
+//                                              documentation ```java\n@StringRes\nprivate final int defaultStringRes\n```
 
   @Nullable private CharSequence string;
-// ^^^^^^^^ reference androidx/annotation/Nullable#
-//                  ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                               ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#string. @Nullable private CharSequence string
+// ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
+//                  ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
+//                               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
+//                                      documentation ```java\n@Nullable\nprivate CharSequence string\n```
   @StringRes private int stringRes;
-// ^^^^^^^^^ reference androidx/annotation/StringRes#
-//                       ^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#stringRes. @StringRes private int stringRes
+// ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/StringRes#
+//                       ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
+//                                 documentation ```java\n@StringRes\nprivate int stringRes\n```
   @PluralsRes private int pluralRes;
-// ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
-//                        ^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#pluralRes. @PluralsRes private int pluralRes
+// ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/PluralsRes#
+//                        ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
+//                                  documentation ```java\n@PluralsRes\nprivate int pluralRes\n```
   private int quantity;
-//            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#quantity. private int quantity
+//            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#quantity.
+//                     documentation ```java\nprivate int quantity\n```
   @Nullable private Object[] formatArgs;
-// ^^^^^^^^ reference androidx/annotation/Nullable#
-//                  ^^^^^^ reference java/lang/Object#
-//                           ^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#formatArgs. @Nullable private Object[] formatArgs
+// ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
+//                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
+//                           ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
+//                                      documentation ```java\n@Nullable\nprivate Object[] formatArgs\n```
 
   public StringAttributeData() {
-//       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#`<init>`(). public StringAttributeData()
+//       ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#`<init>`().
+//                           documentation ```java\npublic StringAttributeData()\n```
     hasDefault = false;
-//  ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#hasDefault.
+//  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hasDefault.
     defaultString = null;
-//  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#defaultString.
+//  ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#defaultString.
     defaultStringRes = 0;
-//  ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#defaultStringRes.
+//  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#defaultStringRes.
   }
 
   public StringAttributeData(@Nullable CharSequence defaultString) {
-//       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#`<init>`(+1). public StringAttributeData(CharSequence defaultString)
-//                            ^^^^^^^^ reference androidx/annotation/Nullable#
-//                                     ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                                  ^^^^^^^^^^^^^ definition local0 @Nullable CharSequence defaultString
+//       ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#`<init>`(+1).
+//                           documentation ```java\npublic StringAttributeData(CharSequence defaultString)\n```
+//                            ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
+//                                     ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
+//                                                  ^^^^^^^^^^^^^ definition local 0
+//                                                                documentation ```java\n@Nullable\nCharSequence defaultString\n```
     hasDefault = true;
-//  ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#hasDefault.
+//  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hasDefault.
     this.defaultString = defaultString;
-//       ^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#defaultString.
-//                       ^^^^^^^^^^^^^ reference local0
+//       ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#defaultString.
+//                       ^^^^^^^^^^^^^ reference local 0
     string = defaultString;
-//  ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.
-//           ^^^^^^^^^^^^^ reference local0
+//  ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
+//           ^^^^^^^^^^^^^ reference local 0
     defaultStringRes = 0;
-//  ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#defaultStringRes.
+//  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#defaultStringRes.
   }
 
   public StringAttributeData(@StringRes int defaultStringRes) {
-//       ^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#`<init>`(+2). public StringAttributeData(int defaultStringRes)
-//                            ^^^^^^^^^ reference androidx/annotation/StringRes#
-//                                          ^^^^^^^^^^^^^^^^ definition local1 @StringRes int defaultStringRes
+//       ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#`<init>`(+2).
+//                           documentation ```java\npublic StringAttributeData(int defaultStringRes)\n```
+//                            ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/StringRes#
+//                                          ^^^^^^^^^^^^^^^^ definition local 1
+//                                                           documentation ```java\n@StringRes\nint defaultStringRes\n```
     hasDefault = true;
-//  ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#hasDefault.
+//  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hasDefault.
     this.defaultStringRes = defaultStringRes;
-//       ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#defaultStringRes.
-//                          ^^^^^^^^^^^^^^^^ reference local1
+//       ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#defaultStringRes.
+//                          ^^^^^^^^^^^^^^^^ reference local 1
     stringRes = defaultStringRes;
-//  ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#stringRes.
-//              ^^^^^^^^^^^^^^^^ reference local1
+//  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
+//              ^^^^^^^^^^^^^^^^ reference local 1
     defaultString = null;
-//  ^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#defaultString.
+//  ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#defaultString.
   }
 
   public void setValue(@Nullable CharSequence string) {
-//            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#setValue(). public void setValue(CharSequence string)
-//                      ^^^^^^^^ reference androidx/annotation/Nullable#
-//                               ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                                            ^^^^^^ definition local2 @Nullable CharSequence string
+//            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue().
+//                     documentation ```java\npublic void setValue(CharSequence string)\n```
+//                      ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
+//                               ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
+//                                            ^^^^^^ definition local 2
+//                                                   documentation ```java\n@Nullable\nCharSequence string\n```
     this.string = string;
-//       ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.
-//                ^^^^^^ reference local2
+//       ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
+//                ^^^^^^ reference local 2
     stringRes = 0;
-//  ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#stringRes.
+//  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
     pluralRes = 0;
-//  ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#pluralRes.
+//  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
   }
 
   public void setValue(@StringRes int stringRes) {
-//            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#setValue(+1). public void setValue(int stringRes)
-//                      ^^^^^^^^^ reference androidx/annotation/StringRes#
-//                                    ^^^^^^^^^ definition local3 @StringRes int stringRes
+//            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+1).
+//                     documentation ```java\npublic void setValue(int stringRes)\n```
+//                      ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/StringRes#
+//                                    ^^^^^^^^^ definition local 3
+//                                              documentation ```java\n@StringRes\nint stringRes\n```
     setValue(stringRes, null);
-//  ^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#setValue(+2).
-//           ^^^^^^^^^ reference local3
+//  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+2).
+//           ^^^^^^^^^ reference local 3
   }
 
   public void setValue(@StringRes int stringRes, @Nullable Object[] formatArgs) {
-//            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#setValue(+2). public void setValue(int stringRes, Object[] formatArgs)
-//                      ^^^^^^^^^ reference androidx/annotation/StringRes#
-//                                    ^^^^^^^^^ definition local4 @StringRes int stringRes
-//                                                ^^^^^^^^ reference androidx/annotation/Nullable#
-//                                                         ^^^^^^ reference java/lang/Object#
-//                                                                  ^^^^^^^^^^ definition local5 @Nullable Object[] formatArgs
+//            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+2).
+//                     documentation ```java\npublic void setValue(int stringRes, Object[] formatArgs)\n```
+//                      ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/StringRes#
+//                                    ^^^^^^^^^ definition local 4
+//                                              documentation ```java\n@StringRes\nint stringRes\n```
+//                                                ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
+//                                                         ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
+//                                                                  ^^^^^^^^^^ definition local 5
+//                                                                             documentation ```java\n@Nullable\nObject[] formatArgs\n```
     if (stringRes != 0) {
-//      ^^^^^^^^^ reference local4
+//      ^^^^^^^^^ reference local 4
       this.stringRes = stringRes;
-//         ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#stringRes.
-//                     ^^^^^^^^^ reference local4
+//         ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
+//                     ^^^^^^^^^ reference local 4
       this.formatArgs = formatArgs;
-//         ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#formatArgs.
-//                      ^^^^^^^^^^ reference local5
+//         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
+//                      ^^^^^^^^^^ reference local 5
       string = null;
-//    ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.
+//    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
       pluralRes = 0;
-//    ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#pluralRes.
+//    ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
     } else {
       handleInvalidStringRes();
-//    ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#handleInvalidStringRes().
+//    ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#handleInvalidStringRes().
     }
   }
 
   private void handleInvalidStringRes() {
-//             ^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#handleInvalidStringRes(). private void handleInvalidStringRes()
+//             ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#handleInvalidStringRes().
+//                                    documentation ```java\nprivate void handleInvalidStringRes()\n```
     if (hasDefault) {
-//      ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#hasDefault.
+//      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hasDefault.
       if (defaultStringRes != 0) {
-//        ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#defaultStringRes.
+//        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#defaultStringRes.
         setValue(defaultStringRes);
-//      ^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#setValue(+1).
-//               ^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#defaultStringRes.
+//      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+1).
+//               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#defaultStringRes.
       } else {
         setValue(defaultString);
-//      ^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#setValue().
-//               ^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#defaultString.
+//      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue().
+//               ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#defaultString.
       }
     } else {
       throw new IllegalArgumentException("0 is an invalid value for required strings.");
-//              ^^^^^^^^^^^^^^^^^^^^^^^^ reference java/lang/IllegalArgumentException#`<init>`(+1).
+//              ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IllegalArgumentException#`<init>`(+1).
     }
   }
 
   public void setValue(@PluralsRes int pluralRes, int quantity, @Nullable Object[] formatArgs) {
-//            ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#setValue(+3). public void setValue(int pluralRes, int quantity, Object[] formatArgs)
-//                      ^^^^^^^^^^ reference androidx/annotation/PluralsRes#
-//                                     ^^^^^^^^^ definition local6 @PluralsRes int pluralRes
-//                                                    ^^^^^^^^ definition local7 int quantity
-//                                                               ^^^^^^^^ reference androidx/annotation/Nullable#
-//                                                                        ^^^^^^ reference java/lang/Object#
-//                                                                                 ^^^^^^^^^^ definition local8 @Nullable Object[] formatArgs
+//            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+3).
+//                     documentation ```java\npublic void setValue(int pluralRes, int quantity, Object[] formatArgs)\n```
+//                      ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/PluralsRes#
+//                                     ^^^^^^^^^ definition local 6
+//                                               documentation ```java\n@PluralsRes\nint pluralRes\n```
+//                                                    ^^^^^^^^ definition local 7
+//                                                             documentation ```java\nint quantity\n```
+//                                                               ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
+//                                                                        ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
+//                                                                                 ^^^^^^^^^^ definition local 8
+//                                                                                            documentation ```java\n@Nullable\nObject[] formatArgs\n```
     if (pluralRes != 0) {
-//      ^^^^^^^^^ reference local6
+//      ^^^^^^^^^ reference local 6
       this.pluralRes = pluralRes;
-//         ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#pluralRes.
-//                     ^^^^^^^^^ reference local6
+//         ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
+//                     ^^^^^^^^^ reference local 6
       this.quantity = quantity;
-//         ^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#quantity.
-//                    ^^^^^^^^ reference local7
+//         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#quantity.
+//                    ^^^^^^^^ reference local 7
       this.formatArgs = formatArgs;
-//         ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#formatArgs.
-//                      ^^^^^^^^^^ reference local8
+//         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
+//                      ^^^^^^^^^^ reference local 8
       string = null;
-//    ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.
+//    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
       stringRes = 0;
-//    ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#stringRes.
+//    ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
     } else {
       handleInvalidStringRes();
-//    ^^^^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#handleInvalidStringRes().
+//    ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#handleInvalidStringRes().
     }
   }
 
   public CharSequence toString(Context context) {
-//       ^^^^^^^^^^^^ reference java/lang/CharSequence#
-//                    ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#toString(). public CharSequence toString(unresolved_type context)
-//                             ^^^^^^^ reference _root_/
-//                                     ^^^^^^^ definition local9 unresolved_type context
+//       ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
+//                    ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#toString().
+//                             documentation ```java\npublic CharSequence toString(unresolved_type context)\n```
+//                             ^^^^^^^ reference semanticdb maven . . _root_/
+//                                     ^^^^^^^ definition local 9
+//                                             documentation ```java\nunresolved_type context\n```
     if (pluralRes != 0) {
-//      ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#pluralRes.
+//      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
       if (formatArgs != null) {
-//        ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#formatArgs.
+//        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
         return context.getResources().getQuantityString(pluralRes, quantity, formatArgs);
-//             ^^^^^^^ reference local9
-//                     ^^^^^^^^^^^^ reference getResources#
-//                                    ^^^^^^^^^^^^^^^^^ reference getResources#getQuantityString#
-//                                                      ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#pluralRes.
-//                                                                 ^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#quantity.
-//                                                                           ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#formatArgs.
+//             ^^^^^^^ reference local 9
+//                     ^^^^^^^^^^^^ reference semanticdb maven . . getResources#
+//                                    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . getResources#getQuantityString#
+//                                                      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
+//                                                                 ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#quantity.
+//                                                                           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
       } else {
         return context.getResources().getQuantityString(pluralRes, quantity);
-//             ^^^^^^^ reference local9
-//                     ^^^^^^^^^^^^ reference getResources#
-//                                    ^^^^^^^^^^^^^^^^^ reference getResources#getQuantityString#
-//                                                      ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#pluralRes.
-//                                                                 ^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#quantity.
+//             ^^^^^^^ reference local 9
+//                     ^^^^^^^^^^^^ reference semanticdb maven . . getResources#
+//                                    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . getResources#getQuantityString#
+//                                                      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
+//                                                                 ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#quantity.
       }
     } else if (stringRes != 0) {
-//             ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#stringRes.
+//             ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
       if (formatArgs != null) {
-//        ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#formatArgs.
+//        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
         return context.getResources().getString(stringRes, formatArgs);
-//             ^^^^^^^ reference local9
-//                     ^^^^^^^^^^^^ reference getResources#
-//                                    ^^^^^^^^^ reference getResources#getString#
-//                                              ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#stringRes.
-//                                                         ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#formatArgs.
+//             ^^^^^^^ reference local 9
+//                     ^^^^^^^^^^^^ reference semanticdb maven . . getResources#
+//                                    ^^^^^^^^^ reference semanticdb maven . . getResources#getString#
+//                                              ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
+//                                                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
       } else {
         return context.getResources().getText(stringRes);
-//             ^^^^^^^ reference local9
-//                     ^^^^^^^^^^^^ reference getResources#
-//                                    ^^^^^^^ reference getResources#getText#
-//                                            ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#stringRes.
+//             ^^^^^^^ reference local 9
+//                     ^^^^^^^^^^^^ reference semanticdb maven . . getResources#
+//                                    ^^^^^^^ reference semanticdb maven . . getResources#getText#
+//                                            ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
       }
     } else {
       return string;
-//           ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.
+//           ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
     }
   }
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public boolean equals(Object o) {
-//               ^^^^^^ definition com/airbnb/epoxy/StringAttributeData#equals(). @Override public boolean equals(Object o)
-//                      ^^^^^^ reference java/lang/Object#
-//                             ^ definition local10 Object o
+//               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#equals().
+//                      documentation ```java\n@Override\npublic boolean equals(Object o)\n```
+//                      relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#equals().
+//                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
+//                             ^ definition local 10
+//                               documentation ```java\nObject o\n```
     if (this == o) {
-//              ^ reference local10
+//              ^ reference local 10
       return true;
     }
     if (!(o instanceof StringAttributeData)) {
-//        ^ reference local10
-//                     ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#
+//        ^ reference local 10
+//                     ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#
       return false;
     }
 
     StringAttributeData that = (StringAttributeData) o;
-//  ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#
-//                      ^^^^ definition local11 StringAttributeData that
-//                              ^^^^^^^^^^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#
-//                                                   ^ reference local10
+//  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#
+//                      ^^^^ definition local 11
+//                           documentation ```java\nStringAttributeData that\n```
+//                              ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#
+//                                                   ^ reference local 10
 
     if (stringRes != that.stringRes) {
-//      ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#stringRes.
-//                   ^^^^ reference local11
-//                        ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#stringRes.
+//      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
+//                   ^^^^ reference local 11
+//                        ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
       return false;
     }
     if (pluralRes != that.pluralRes) {
-//      ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#pluralRes.
-//                   ^^^^ reference local11
-//                        ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#pluralRes.
+//      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
+//                   ^^^^ reference local 11
+//                        ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
       return false;
     }
     if (quantity != that.quantity) {
-//      ^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#quantity.
-//                  ^^^^ reference local11
-//                       ^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#quantity.
+//      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#quantity.
+//                  ^^^^ reference local 11
+//                       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#quantity.
       return false;
     }
     if (string != null ? !string.equals(that.string) : that.string != null) {
-//      ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.
-//                        ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.
-//                               ^^^^^^ reference java/lang/Object#equals().
-//                                      ^^^^ reference local11
-//                                           ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.
-//                                                     ^^^^ reference local11
-//                                                          ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.
+//      ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
+//                        ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
+//                               ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#equals().
+//                                      ^^^^ reference local 11
+//                                           ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
+//                                                     ^^^^ reference local 11
+//                                                          ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
       return false;
     }
 
     return Arrays.equals(formatArgs, that.formatArgs);
-//         ^^^^^^ reference java/util/Arrays#
-//                ^^^^^^ reference java/util/Arrays#equals(+8).
-//                       ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#formatArgs.
-//                                   ^^^^ reference local11
-//                                        ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#formatArgs.
+//         ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#
+//                ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#equals(+8).
+//                       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
+//                                   ^^^^ reference local 11
+//                                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
   }
 
   @Override
-// ^^^^^^^^ reference java/lang/Override#
+// ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public int hashCode() {
-//           ^^^^^^^^ definition com/airbnb/epoxy/StringAttributeData#hashCode(). @Override public int hashCode()
+//           ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hashCode().
+//                    documentation ```java\n@Override\npublic int hashCode()\n```
+//                    relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#hashCode().
     int result = string != null ? string.hashCode() : 0;
-//      ^^^^^^ definition local12 int result
-//               ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.
-//                                ^^^^^^ reference com/airbnb/epoxy/StringAttributeData#string.
-//                                       ^^^^^^^^ reference java/lang/Object#hashCode().
+//      ^^^^^^ definition local 12
+//             documentation ```java\nint result\n```
+//               ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
+//                                ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
+//                                       ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#hashCode().
     result = 31 * result + stringRes;
-//  ^^^^^^ reference local12
-//                ^^^^^^ reference local12
-//                         ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#stringRes.
+//  ^^^^^^ reference local 12
+//                ^^^^^^ reference local 12
+//                         ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
     result = 31 * result + pluralRes;
-//  ^^^^^^ reference local12
-//                ^^^^^^ reference local12
-//                         ^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#pluralRes.
+//  ^^^^^^ reference local 12
+//                ^^^^^^ reference local 12
+//                         ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
     result = 31 * result + quantity;
-//  ^^^^^^ reference local12
-//                ^^^^^^ reference local12
-//                         ^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#quantity.
+//  ^^^^^^ reference local 12
+//                ^^^^^^ reference local 12
+//                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#quantity.
     result = 31 * result + Arrays.hashCode(formatArgs);
-//  ^^^^^^ reference local12
-//                ^^^^^^ reference local12
-//                         ^^^^^^ reference java/util/Arrays#
-//                                ^^^^^^^^ reference java/util/Arrays#hashCode(+8).
-//                                         ^^^^^^^^^^ reference com/airbnb/epoxy/StringAttributeData#formatArgs.
+//  ^^^^^^ reference local 12
+//                ^^^^^^ reference local 12
+//                         ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#
+//                                ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#hashCode(+8).
+//                                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
     return result;
-//         ^^^^^^ reference local12
+//         ^^^^^^ reference local 12
   }
 }

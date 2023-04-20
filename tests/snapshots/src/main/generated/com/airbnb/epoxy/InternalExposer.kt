@@ -1,23 +1,28 @@
 package com.airbnb.epoxy
-//      ^^^ reference com/
-//          ^^^^^^ reference com/airbnb/
-//                 ^^^^^ reference com/airbnb/epoxy/
+//      ^^^ reference semanticdb maven . . com/
+//          ^^^^^^ reference semanticdb maven . . com/airbnb/
+//                 ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/
 
 /**
  * Exposes package private things as internal so files in other packages can use them.
  */
 
 internal fun EpoxyViewHolder.objectToBindInternal() = objectToBind()
-//                           ^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/InternalExposerKt#objectToBindInternal(). internal fun [ERROR : EpoxyViewHolder].objectToBindInternal(): [ERROR : <ERROR FUNCTION RETURN TYPE>]
+//                           ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/InternalExposerKt#objectToBindInternal().
+//                                                documentation ```kt\ninternal fun [ERROR : EpoxyViewHolder].objectToBindInternal(): [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```\n\n----\n\n\n Exposes package private things as internal so files in other packages can use them.\n
 
 internal fun EpoxyModel<*>.viewTypeInternal() = viewType
-//                         ^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/InternalExposerKt#viewTypeInternal(). internal fun [ERROR : EpoxyModel<*>]<out [ERROR : *]>.viewTypeInternal(): [ERROR : <ERROR PROPERTY TYPE>]
+//                         ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/InternalExposerKt#viewTypeInternal().
+//                                          documentation ```kt\ninternal fun [ERROR : EpoxyModel<*>]<out [ERROR : *]>.viewTypeInternal(): [ERROR : <ERROR PROPERTY TYPE>]\n```
 internal fun BaseEpoxyAdapter.boundViewHoldersInternal() = boundViewHolders
-//                            ^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/InternalExposerKt#boundViewHoldersInternal(). internal fun [ERROR : BaseEpoxyAdapter].boundViewHoldersInternal(): [ERROR : <ERROR PROPERTY TYPE>]
+//                            ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/InternalExposerKt#boundViewHoldersInternal().
+//                                                     documentation ```kt\ninternal fun [ERROR : BaseEpoxyAdapter].boundViewHoldersInternal(): [ERROR : <ERROR PROPERTY TYPE>]\n```
 internal fun BaseEpoxyAdapter.getModelForPositionInternal(position: Int): EpoxyModel<*>? {
-//                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition com/airbnb/epoxy/InternalExposerKt#getModelForPositionInternal(). internal fun [ERROR : BaseEpoxyAdapter].getModelForPositionInternal(position: kotlin.Int): [ERROR : EpoxyModel<*>]<out [ERROR : *]>?
-//                                                        ^^^^^^^^ definition com/airbnb/epoxy/InternalExposerKt#getModelForPositionInternal().(position) value-parameter position: kotlin.Int
-//                                                                  ^^^ reference kotlin/Int#
+//                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/InternalExposerKt#getModelForPositionInternal().
+//                                                        documentation ```kt\ninternal fun [ERROR : BaseEpoxyAdapter].getModelForPositionInternal(position: kotlin.Int): [ERROR : EpoxyModel<*>]<out [ERROR : *]>?\n```
+//                                                        ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/InternalExposerKt#getModelForPositionInternal().(position)
+//                                                                 documentation ```kt\nvalue-parameter position: kotlin.Int\n```
+//                                                                  ^^^ reference semanticdb maven . . kotlin/Int#
     return getModelForPosition(position)
-//                             ^^^^^^^^ reference com/airbnb/epoxy/InternalExposerKt#getModelForPositionInternal().(position)
+//                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/InternalExposerKt#getModelForPositionInternal().(position)
 }

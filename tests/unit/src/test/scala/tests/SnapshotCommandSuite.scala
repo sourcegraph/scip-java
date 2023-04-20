@@ -28,22 +28,37 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
       .compileSemanticdb(List(Input.VirtualFile("main/Sample.java", code)))
 
     val generatedpath = workingDirectory.resolve("generated")
-    val exitCode = app().run(
+
+    val indexExit = app().run(
+      List(
+        "index-semanticdb",
+        "--output",
+        targetroot.resolve("index.scip").toString,
+        targetroot.toString
+      )
+    )
+    assertEquals(indexExit, 0, clues(app.capturedOutput))
+
+    val snapshotExit = app().run(
       List("snapshot", "--output", generatedpath.toString, targetroot.toString)
     )
-    assertEquals(exitCode, 0, clues(app.capturedOutput))
+    assertEquals(snapshotExit, 0, clues(app.capturedOutput))
     assertNoDiff(
       FileLayout.asString(generatedpath),
       """|/main/Sample.java
          |package main;
          |
          |public class Sample {
-         |//           ^^^^^^ definition main/Sample# public class Sample
-         |//           ^^^^^^ definition main/Sample#`<init>`(). public Sample()
+         |//           ^^^^^^ definition semanticdb maven . . main/Sample#
+         |//                  documentation ```java\npublic class Sample\n```
+         |//           ^^^^^^ definition semanticdb maven . . main/Sample#`<init>`().
+         |//                  documentation ```java\npublic Sample()\n```
          |   public static void main(String[] asdf) {}
-         |//                    ^^^^ definition main/Sample#main(). public static void main(String[] asdf)
-         |//                         ^^^^^^ reference java/lang/String#
-         |//                                  ^^^^ definition local0 String[] asdf
+         |//                    ^^^^ definition semanticdb maven . . main/Sample#main().
+         |//                         documentation ```java\npublic static void main(String[] asdf)\n```
+         |//                         ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+         |//                                  ^^^^ definition local 0
+         |//                                       documentation ```java\nString[] asdf\n```
          |}
          |""".stripMargin
     )
