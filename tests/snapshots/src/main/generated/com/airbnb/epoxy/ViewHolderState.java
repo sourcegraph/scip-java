@@ -60,11 +60,11 @@ import androidx.collection.LongSparseArray;
 //^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
 class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //    ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#
-//                    documentation ```java\n@SuppressWarnings("WeakerAccess")\nclass ViewHolderState\n```
 //                    documentation  Helper for {@link EpoxyAdapter} to store the state of Views in the adapter. This is useful for\n saving changes due to user input, such as text input or selection, when a view is scrolled off\n screen or if the adapter needs to be recreated.\n <p/>\n This saved state is separate from the state represented by a {@link EpoxyModel}, which should\n represent the more permanent state of the data shown in the view. This class stores transient\n state that is added to the View after it is bound to a {@link EpoxyModel}. For example, a {@link\n EpoxyModel} may inflate and bind an EditText and then be responsible for styling it and attaching\n listeners. If the user then inputs text, scrolls the view offscreen and then scrolls back, this\n class will preserve the inputted text without the {@link EpoxyModel} needing to be aware of its\n existence.\n <p/>\n This class relies on the adapter having stable ids, as the state of a view is mapped to the id of\n the {@link EpoxyModel}.\n
-//                    relationship is_implementation semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#
-//                    relationship is_implementation semanticdb maven jdk 11 java/lang/Cloneable#
+//                    documentation ```java\n@SuppressWarnings("WeakerAccess")\nclass ViewHolderState\n```
 //                    relationship is_implementation semanticdb maven . . ``/Parcelable#
+//                    relationship is_implementation semanticdb maven jdk 11 java/lang/Cloneable#
+//                    relationship is_implementation semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#
 //                            ^^^^^^^^^^^^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#
 //                                            ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#
 //                                                                  ^^^^^^^^^^ reference semanticdb maven . . _root_/
@@ -185,8 +185,8 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
   /** Save the state of the view bound to the given holder. */
   public void save(EpoxyViewHolder holder) {
 //            ^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#save(+1).
-//                 documentation ```java\npublic void save(EpoxyViewHolder holder)\n```
 //                 documentation Save the state of the view bound to the given holder. 
+//                 documentation ```java\npublic void save(EpoxyViewHolder holder)\n```
 //                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                 ^^^^^^ definition local 8
 //                                        documentation ```java\nEpoxyViewHolder holder\n```
@@ -232,8 +232,8 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
    */
   public void restore(EpoxyViewHolder holder) {
 //            ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#restore().
-//                    documentation ```java\npublic void restore(EpoxyViewHolder holder)\n```
 //                    documentation  If a state was previously saved for this view holder via {@link #save} it will be restored\n here.\n
+//                    documentation ```java\npublic void restore(EpoxyViewHolder holder)\n```
 //                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                    ^^^^^^ definition local 10
 //                                           documentation ```java\nEpoxyViewHolder holder\n```
@@ -273,10 +273,10 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
    */
   public static class ViewState extends SparseArray<Parcelable> implements Parcelable {
 //                    ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#
-//                              documentation ```java\npublic static class ViewState\n```
 //                              documentation  A wrapper around a sparse array as a helper to save the state of a view. This also adds\n parcelable support.\n
-//                              relationship is_implementation semanticdb maven . . ``/SparseArray#
+//                              documentation ```java\npublic static class ViewState\n```
 //                              relationship is_implementation semanticdb maven . . ``/Parcelable#
+//                              relationship is_implementation semanticdb maven . . ``/SparseArray#
 //                                      ^^^^^^^^^^^ reference semanticdb maven . . _root_/
 //                                                  ^^^^^^^^^^ reference semanticdb maven . . _root_/
 //                                                                         ^^^^^^^^^^ reference semanticdb maven . . _root_/
@@ -369,8 +369,8 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
      */
     private void setIdIfNoneExists(View view) {
 //               ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#setIdIfNoneExists().
-//                                 documentation ```java\nprivate void setIdIfNoneExists(unresolved_type view)\n```
 //                                 documentation  If a view hasn't had an id set we need to set a temporary one in order to save state, since a\n view won't save its state unless it has an id. The view's id is also the key into the sparse\n array for its saved state, so the temporary one we choose just needs to be consistent between\n saving and restoring state.\n
+//                                 documentation ```java\nprivate void setIdIfNoneExists(unresolved_type view)\n```
 //                                 ^^^^ reference semanticdb maven . . _root_/
 //                                      ^^^^ definition local 20
 //                                           documentation ```java\nunresolved_type view\n```

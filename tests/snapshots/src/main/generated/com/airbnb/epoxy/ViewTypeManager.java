@@ -39,8 +39,8 @@ class ViewTypeManager {
   EpoxyModel<?> lastModelForViewTypeLookup;
 //^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewTypeManager#lastModelForViewTypeLookup.
-//                                         documentation ```java\n@Nullable\nEpoxyModel<?> lastModelForViewTypeLookup\n```
 //                                         documentation  The last model that had its view type looked up. This is stored so in most cases we can quickly\n look up what view type belongs to which model.\n
+//                                         documentation ```java\n@Nullable\nEpoxyModel<?> lastModelForViewTypeLookup\n```
 
   /**
    * The type map is static so that models of the same class share the same views across different
@@ -52,8 +52,8 @@ class ViewTypeManager {
 // ^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/VisibleForTesting#
   void resetMapForTesting() {
 //     ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewTypeManager#resetMapForTesting().
-//                        documentation ```java\n@VisibleForTesting\nvoid resetMapForTesting()\n```
 //                        documentation  The type map is static so that models of the same class share the same views across different\n adapters. This is useful for view recycling when the adapter instance changes, or when there\n are multiple adapters. For testing purposes though it is good to be able to clear the map so we\n don't carry over values across tests.\n
+//                        documentation ```java\n@VisibleForTesting\nvoid resetMapForTesting()\n```
     VIEW_TYPE_MAP.clear();
 //  ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewTypeManager#VIEW_TYPE_MAP.
 //                ^^^^^ reference semanticdb maven jdk 11 java/util/Map#clear().
@@ -142,8 +142,8 @@ class ViewTypeManager {
   EpoxyModel<?> getModelForViewType(BaseEpoxyAdapter adapter, int viewType) {
 //^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //              ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewTypeManager#getModelForViewType().
-//                                  documentation ```java\nEpoxyModel<?> getModelForViewType(BaseEpoxyAdapter adapter, int viewType)\n```
 //                                  documentation  Find the model that has the given view type so we can create a view for that model. In most\n cases this value is a layout resource and we could simply inflate it, but to support {@link\n EpoxyModelWithView} we can't assume the view type is a layout. In that case we need to lookup\n the model so we can ask it to create a new view for itself.\n <p>\n To make this efficient, we rely on the RecyclerView implementation detail that {@link\n BaseEpoxyAdapter#getItemViewType(int)} is called immediately before {@link\n BaseEpoxyAdapter#onCreateViewHolder(android.view.ViewGroup, int)} . We cache the last model\n that had its view type looked up, and unless that implementation changes we expect to have a\n very fast lookup for the correct model.\n <p>\n To be safe, we fallback to searching through all models for a view type match. This is slow and\n shouldn't be needed, but is a guard against recyclerview behavior changing.\n
+//                                  documentation ```java\nEpoxyModel<?> getModelForViewType(BaseEpoxyAdapter adapter, int viewType)\n```
 //                                  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
 //                                                   ^^^^^^^ definition local 5
 //                                                           documentation ```java\nBaseEpoxyAdapter adapter\n```

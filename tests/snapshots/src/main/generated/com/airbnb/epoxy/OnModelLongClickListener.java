@@ -24,8 +24,8 @@ public interface OnModelLongClickListener<T extends EpoxyModel<?>, V> {
    */
   boolean onLongClick(T model, V parentView, View clickedView, int position);
 //        ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelLongClickListener#onLongClick().
-//                    documentation ```java\npublic abstract boolean onLongClick(T model, V parentView, unresolved_type clickedView, int position)\n```
 //                    documentation  Called when the view bound to the model is clicked.\n\n @param model       The model that the view is bound to.\n @param parentView  The view bound to the model which received the click.\n @param clickedView The view that received the click. This is either a child of the parentView\n                    or the parentView itself\n @param position    The position of the model in the adapter.\n
+//                    documentation ```java\npublic abstract boolean onLongClick(T model, V parentView, unresolved_type clickedView, int position)\n```
 //                    ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelLongClickListener#[T]
 //                      ^^^^^ definition local 0
 //                            documentation ```java\nT model\n```

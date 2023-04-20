@@ -36,8 +36,8 @@ import androidx.annotation.MainThread;
  */
 public final class EpoxyAsyncUtil {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#
-//                                documentation ```java\npublic final class EpoxyAsyncUtil\n```
 //                                documentation  Various helpers for running Epoxy operations off the main thread.\n
+//                                documentation ```java\npublic final class EpoxyAsyncUtil\n```
   private EpoxyAsyncUtil() {
 //        ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#`<init>`().
 //                       documentation ```java\nprivate EpoxyAsyncUtil()\n```
@@ -49,8 +49,8 @@ public final class EpoxyAsyncUtil {
   public static final Handler MAIN_THREAD_HANDLER =
 //                    ^^^^^^^ reference semanticdb maven . . _root_/
 //                            ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#MAIN_THREAD_HANDLER.
-//                                                documentation ```java\npublic static final unresolved_type MAIN_THREAD_HANDLER\n```
 //                                                documentation  A Handler class that uses the main thread's Looper.\n
+//                                                documentation ```java\npublic static final unresolved_type MAIN_THREAD_HANDLER\n```
       createHandler(Looper.getMainLooper(), false);
 //    ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#createHandler().
 //                  ^^^^^^ reference semanticdb maven . . _root_/
@@ -64,8 +64,8 @@ public final class EpoxyAsyncUtil {
   public static final Handler AYSNC_MAIN_THREAD_HANDLER =
 //                    ^^^^^^^ reference semanticdb maven . . _root_/
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#AYSNC_MAIN_THREAD_HANDLER.
-//                                                      documentation ```java\npublic static final unresolved_type AYSNC_MAIN_THREAD_HANDLER\n```
 //                                                      documentation  A Handler class that uses the main thread's Looper. Additionally, this handler calls\n {@link Message#setAsynchronous(boolean)} for\n each {@link Message} that is sent to it or {@link Runnable} that is posted to it\n
+//                                                      documentation ```java\npublic static final unresolved_type AYSNC_MAIN_THREAD_HANDLER\n```
       createHandler(Looper.getMainLooper(), true);
 //    ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#createHandler().
 //                  ^^^^^^ reference semanticdb maven . . _root_/
@@ -86,8 +86,8 @@ public final class EpoxyAsyncUtil {
   public static Handler getAsyncBackgroundHandler() {
 //              ^^^^^^^ reference semanticdb maven . . _root_/
 //                      ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#getAsyncBackgroundHandler().
-//                                                documentation ```java\n@MainThread\npublic static unresolved_type getAsyncBackgroundHandler()\n```
 //                                                documentation  A Handler class that uses a separate background thread dedicated to Epoxy. Additionally,\n this handler calls {@link Message#setAsynchronous(boolean)} for\n each {@link Message} that is sent to it or {@link Runnable} that is posted to it\n
+//                                                documentation ```java\n@MainThread\npublic static unresolved_type getAsyncBackgroundHandler()\n```
     // This is initialized lazily so we don't create the thread unless it will be used.
     // It isn't synchronized so it should only be accessed on the main thread.
     if (asyncBackgroundHandler == null) {
@@ -111,8 +111,8 @@ public final class EpoxyAsyncUtil {
   public static Handler createHandler(Looper looper, boolean async) {
 //              ^^^^^^^ reference semanticdb maven . . _root_/
 //                      ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#createHandler().
-//                                    documentation ```java\npublic static unresolved_type createHandler(unresolved_type looper, boolean async)\n```
 //                                    documentation  Create a Handler with the given Looper\n\n @param async If true the Handler will calls {@link Message#setAsynchronous(boolean)} for\n              each {@link Message} that is sent to it or {@link Runnable} that is posted to it.\n
+//                                    documentation ```java\npublic static unresolved_type createHandler(unresolved_type looper, boolean async)\n```
 //                                    ^^^^^^ reference semanticdb maven . . _root_/
 //                                           ^^^^^^ definition local 0
 //                                                  documentation ```java\nunresolved_type looper\n```
@@ -171,8 +171,8 @@ public final class EpoxyAsyncUtil {
   public static Looper buildBackgroundLooper(String threadName) {
 //              ^^^^^^ reference semanticdb maven . . _root_/
 //                     ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#buildBackgroundLooper().
-//                                           documentation ```java\npublic static unresolved_type buildBackgroundLooper(String threadName)\n```
 //                                           documentation  Create a new looper that runs on a new background thread.\n
+//                                           documentation ```java\npublic static unresolved_type buildBackgroundLooper(String threadName)\n```
 //                                           ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                                  ^^^^^^^^^^ definition local 3
 //                                                             documentation ```java\nString threadName\n```

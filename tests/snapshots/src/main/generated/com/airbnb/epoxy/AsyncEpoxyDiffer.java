@@ -51,8 +51,8 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback;
  */
 class AsyncEpoxyDiffer {
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#
-//                     documentation ```java\nclass AsyncEpoxyDiffer\n```
 //                     documentation  An adaptation of Google's {@link androidx.recyclerview.widget.AsyncListDiffer}\n that adds support for payloads in changes.\n <p>\n Also adds support for canceling an in progress diff, and makes everything thread safe.\n
+//                     documentation ```java\nclass AsyncEpoxyDiffer\n```
 
   interface ResultCallback {
 //          ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#
@@ -136,8 +136,8 @@ class AsyncEpoxyDiffer {
 //                 ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                               ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#readOnlyList.
-//                                                            documentation ```java\n@NonNull\nprivate List<? extends EpoxyModel<?>> readOnlyList\n```
 //                                                            documentation  Non-null, unmodifiable version of list.\n <p>\n Collections.emptyList when list is null, wrapped by Collections.unmodifiableList otherwise\n
+//                                                            documentation ```java\n@NonNull\nprivate List<? extends EpoxyModel<?>> readOnlyList\n```
 //                                                              ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collections#
 //                                                                          ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collections#emptyList().
 
@@ -160,8 +160,8 @@ class AsyncEpoxyDiffer {
 //       ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                     ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#getCurrentList().
-//                                                    documentation ```java\n@AnyThread\n@NonNull\npublic List<? extends EpoxyModel<?>> getCurrentList()\n```
 //                                                    documentation  Get the current List - any diffing to present this list has already been computed and\n dispatched via the ListUpdateCallback.\n <p>\n If a <code>null</code> List, or no List has been submitted, an empty list will be returned.\n <p>\n The returned list may not be mutated - mutations to content must be done through\n {@link #submitList(List)}.\n\n @return current List.\n
+//                                                    documentation ```java\n@AnyThread\n@NonNull\npublic List<? extends EpoxyModel<?>> getCurrentList()\n```
     return readOnlyList;
 //         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#readOnlyList.
   }
@@ -176,8 +176,8 @@ class AsyncEpoxyDiffer {
 // ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/AnyThread#
   public boolean cancelDiff() {
 //               ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#cancelDiff().
-//                          documentation ```java\n@SuppressWarnings("WeakerAccess")\n@AnyThread\npublic boolean cancelDiff()\n```
 //                          documentation  Prevents any ongoing diff from dispatching results. Returns true if there was an ongoing\n diff to cancel, false otherwise.\n
+//                          documentation ```java\n@SuppressWarnings("WeakerAccess")\n@AnyThread\npublic boolean cancelDiff()\n```
     return generationTracker.finishMaxGeneration();
 //         ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#generationTracker.
 //                           ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#finishMaxGeneration().
@@ -192,8 +192,8 @@ class AsyncEpoxyDiffer {
 // ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/AnyThread#
   public boolean isDiffInProgress() {
 //               ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#isDiffInProgress().
-//                                documentation ```java\n@SuppressWarnings("WeakerAccess")\n@AnyThread\npublic boolean isDiffInProgress()\n```
 //                                documentation  @return True if a diff operation is in progress.\n
+//                                documentation ```java\n@SuppressWarnings("WeakerAccess")\n@AnyThread\npublic boolean isDiffInProgress()\n```
     return generationTracker.hasUnfinishedGeneration();
 //         ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#generationTracker.
 //                           ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#hasUnfinishedGeneration().
@@ -209,8 +209,8 @@ class AsyncEpoxyDiffer {
 // ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/AnyThread#
   public synchronized boolean forceListOverride(@Nullable List<EpoxyModel<?>> newList) {
 //                            ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#forceListOverride().
-//                                              documentation ```java\n@AnyThread\npublic boolean forceListOverride(List<EpoxyModel<?>> newList)\n```
 //                                              documentation  Set the current list without performing any diffing. Cancels any diff in progress.\n <p>\n This can be used if you notified a change to the adapter manually and need this list to be\n synced.\n
+//                                              documentation ```java\n@AnyThread\npublic boolean forceListOverride(List<EpoxyModel<?>> newList)\n```
 //                                               ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                                        ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
@@ -250,8 +250,8 @@ class AsyncEpoxyDiffer {
 // ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
   public void submitList(@Nullable final List<? extends EpoxyModel<?>> newList) {
 //            ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#submitList().
-//                       documentation ```java\n@AnyThread\n@SuppressWarnings("WeakerAccess")\npublic void submitList(List<? extends EpoxyModel<?>> newList)\n```
 //                       documentation  Set a new List representing your latest data.\n <p>\n A diff will be computed between this list and the last list set. If this has not previously\n been called then an empty list is used as the previous list.\n <p>\n The diff computation will be done on the thread given by the handler in the constructor.\n When the diff is done it will be applied (dispatched to the result callback),\n and the new List will be swapped in.\n
+//                       documentation ```java\n@AnyThread\n@SuppressWarnings("WeakerAccess")\npublic void submitList(List<? extends EpoxyModel<?>> newList)\n```
 //                        ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                       ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
@@ -434,8 +434,8 @@ class AsyncEpoxyDiffer {
 // ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/AnyThread#
   private synchronized boolean tryLatchList(@Nullable List<? extends EpoxyModel<?>> newList,
 //                             ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#tryLatchList().
-//                                          documentation ```java\n@AnyThread\nprivate boolean tryLatchList(List<? extends EpoxyModel<?>> newList, int runGeneration)\n```
 //                                          documentation  Marks the generation as done, and updates the list if the generation is the most recent.\n\n @return True if the given generation is the most recent, in which case the given list was\n set. False if the generation is old and the list was ignored.\n
+//                                          documentation ```java\n@AnyThread\nprivate boolean tryLatchList(List<? extends EpoxyModel<?>> newList, int runGeneration)\n```
 //                                           ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                                    ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
@@ -485,8 +485,8 @@ class AsyncEpoxyDiffer {
    */
   private static class GenerationTracker {
 //                     ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#
-//                                       documentation ```java\nprivate static class GenerationTracker\n```
 //                                       documentation  The concept of a "generation" is used to associate a diff result with a point in time when\n it was created. This allows us to handle list updates concurrently, and ignore outdated diffs.\n <p>\n We track the highest start generation, and the highest finished generation, and these must\n be kept in sync, so all access to this class is synchronized.\n <p>\n The general synchronization strategy for this class is that when a generation number\n is queried that action must be synchronized with accessing the current list, so that the\n generation number is synced with the list state at the time it was created.\n
+//                                       documentation ```java\nprivate static class GenerationTracker\n```
 //                     ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#`<init>`().
 //                                       documentation ```java\nprivate GenerationTracker()\n```
 

@@ -25,8 +25,8 @@ public interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V> {
    */
   void onChecked(T model, V parentView,
 //     ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked().
-//               documentation ```java\npublic abstract void onChecked(T model, V parentView, unresolved_type checkedView, boolean isChecked, int position)\n```
 //               documentation  Called when the view bound to the model is checked.\n\n @param model       The model that the view is bound to.\n @param parentView  The view bound to the model which received the click.\n @param checkedView The view that received the click. This is either a child of the parentView\n                    or the parentView itself\n @param isChecked   The new value for isChecked property.\n @param position    The position of the model in the adapter.\n
+//               documentation ```java\npublic abstract void onChecked(T model, V parentView, unresolved_type checkedView, boolean isChecked, int position)\n```
 //               ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#[T]
 //                 ^^^^^ definition local 0
 //                       documentation ```java\nT model\n```

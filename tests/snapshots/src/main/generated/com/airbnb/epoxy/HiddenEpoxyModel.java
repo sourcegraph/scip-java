@@ -19,8 +19,8 @@ import com.airbnb.viewmodeladapter.R;
  */
 class HiddenEpoxyModel extends EpoxyModel<Space> {
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#
-//                     documentation ```java\nclass HiddenEpoxyModel\n```
 //                     documentation  Used by the {@link EpoxyAdapter} as a placeholder for when {@link EpoxyModel#isShown()} is false.\n Using a zero height and width {@link Space} view, as well as 0 span size, to exclude itself from\n view.\n
+//                     documentation ```java\nclass HiddenEpoxyModel\n```
 //                     relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
 //                     documentation ```java\nHiddenEpoxyModel()\n```

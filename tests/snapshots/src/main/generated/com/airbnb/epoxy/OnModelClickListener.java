@@ -8,8 +8,8 @@ import android.view.View;
 /** Used to register a click listener on a generated model. */
 public interface OnModelClickListener<T extends EpoxyModel<?>, V> {
 //               ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#
-//                                    documentation ```java\npublic interface OnModelClickListener<T extends EpoxyModel<?>, V>\n```
 //                                    documentation Used to register a click listener on a generated model. 
+//                                    documentation ```java\npublic interface OnModelClickListener<T extends EpoxyModel<?>, V>\n```
 //                                    ^ definition semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#[T]
 //                                      documentation ```java\nT extends EpoxyModel<?>\n```
 //                                              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
@@ -26,8 +26,8 @@ public interface OnModelClickListener<T extends EpoxyModel<?>, V> {
    */
   void onClick(T model, V parentView, View clickedView, int position);
 //     ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#onClick().
-//             documentation ```java\npublic abstract void onClick(T model, V parentView, unresolved_type clickedView, int position)\n```
 //             documentation  Called when the view bound to the model is clicked.\n\n @param model       The model that the view is bound to.\n @param parentView  The view bound to the model which received the click.\n @param clickedView The view that received the click. This is either a child of the parentView\n                    or the parentView itself\n @param position    The position of the model in the adapter.\n
+//             documentation ```java\npublic abstract void onClick(T model, V parentView, unresolved_type clickedView, int position)\n```
 //             ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#[T]
 //               ^^^^^ definition local 0
 //                     documentation ```java\nT model\n```

@@ -29,8 +29,8 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
  */
 public class EpoxyDiffLogger extends AdapterDataObserver {
 //           ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#
-//                           documentation ```java\npublic class EpoxyDiffLogger\n```
 //                           documentation  This data observer can be registered with an Epoxy adapter or controller to log all item change\n events. This may be useful to use in debug builds in order to observe model updates and monitor\n for issues.\n <p>\n You may want to look for unexpected item updates to catch improper hashCode/equals\n implementations in your models.\n <p>\n Additionally, you may want to look for frequent or unnecessary updates as an opportunity for\n optimization.\n
+//                           documentation ```java\npublic class EpoxyDiffLogger\n```
 //                           relationship is_implementation semanticdb maven . . ``/AdapterDataObserver#
 //                                   ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
   private final String tag;

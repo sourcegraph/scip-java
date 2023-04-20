@@ -11,11 +11,11 @@ import java.util.List;
  */
 public class SimpleEpoxyController extends EpoxyController {
 //           ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#
-//                                 documentation ```java\npublic class SimpleEpoxyController\n```
 //                                 documentation  A small wrapper around {@link com.airbnb.epoxy.EpoxyController} that lets you set a list of\n models directly.\n
-//                                 relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#
+//                                 documentation ```java\npublic class SimpleEpoxyController\n```
 //                                 relationship is_implementation semanticdb maven . . ``/ModelCollector#
 //                                 relationship is_implementation semanticdb maven . . ``/StickyHeaderCallbacks#
+//                                 relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //           ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#`<init>`().
 //                                 documentation ```java\npublic SimpleEpoxyController()\n```
 //                                         ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
@@ -34,8 +34,8 @@ public class SimpleEpoxyController extends EpoxyController {
    */
   public void setModels(List<? extends EpoxyModel<?>> models) {
 //            ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#setModels().
-//                      documentation ```java\npublic void setModels(List<? extends EpoxyModel<?>> models)\n```
 //                      documentation  Set the models to add to this controller. Clears any previous models and adds this new list\n .\n
+//                      documentation ```java\npublic void setModels(List<? extends EpoxyModel<?>> models)\n```
 //                      ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                    ^^^^^^ definition local 0

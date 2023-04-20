@@ -24,8 +24,8 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
    */
   int getMovementFlagsForModel(T model, int adapterPosition);
 //    ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#getMovementFlagsForModel().
-//                             documentation ```java\npublic abstract int getMovementFlagsForModel(T model, int adapterPosition)\n```
 //                             documentation  Should return a composite flag which defines the enabled move directions in each state\n (idle, swiping, dragging) for the given model.\n <p>\n Return 0 to disable movement for the model.\n\n @param model           The model being targeted for movement.\n @param adapterPosition The current adapter position of the targeted model\n @see androidx.recyclerview.widget.ItemTouchHelper.Callback#getMovementFlags\n
+//                             documentation ```java\npublic abstract int getMovementFlagsForModel(T model, int adapterPosition)\n```
 //                             ^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
 //                               ^^^^^ definition local 0
 //                                     documentation ```java\nT model\n```
@@ -44,8 +44,8 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
    */
   void clearView(T model, View itemView);
 //     ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView().
-//               documentation ```java\npublic abstract void clearView(T model, unresolved_type itemView)\n```
 //               documentation  Called when the user interaction with a view is over and the view has\n completed its animation. This is a good place to clear all changes on the view that were done\n in other previous touch callbacks (such as on touch start, change, release, etc).\n <p>\n This is the last callback in the lifecycle of a touch event.\n\n @param model    The model whose view is being cleared.\n @param itemView The view being cleared.\n
+//               documentation ```java\npublic abstract void clearView(T model, unresolved_type itemView)\n```
 //               ^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
 //                 ^^^^^ definition local 2
 //                       documentation ```java\nT model\n```

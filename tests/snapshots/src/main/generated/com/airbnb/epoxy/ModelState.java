@@ -3,8 +3,8 @@ package com.airbnb.epoxy;
 /** Helper to store relevant information about a model that we need to determine if it changed. */
 class ModelState {
 //    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#
-//               documentation ```java\nclass ModelState\n```
 //               documentation Helper to store relevant information about a model that we need to determine if it changed. 
+//               documentation ```java\nclass ModelState\n```
 //    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#`<init>`().
 //               documentation ```java\nModelState()\n```
   long id;
@@ -29,8 +29,8 @@ class ModelState {
   ModelState pair;
 //^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
 //           ^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
-//                documentation ```java\nModelState pair\n```
 //                documentation  A link to the item with the same id in the other list when diffing two lists. This will be null\n if the item doesn't exist, in the case of insertions or removals. This is an optimization to\n prevent having to look up the matching pair in a hash map every time.\n
+//                documentation ```java\nModelState pair\n```
 
   /**
    * How many movement operations have been applied to this item in order to update its position. As
@@ -42,8 +42,8 @@ class ModelState {
    */
   int lastMoveOp;
 //    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#lastMoveOp.
-//               documentation ```java\nint lastMoveOp\n```
 //               documentation  How many movement operations have been applied to this item in order to update its position. As\n we find more item movements we need to update the position of affected items in the list in\n order to correctly calculate the next movement. Instead of iterating through all items in the\n list every time a movement operation happens we keep track of how many of these operations have\n been applied to an item, and apply all new operations in order when we need to get this item's\n up to date position.\n
+//               documentation ```java\nint lastMoveOp\n```
 
   static ModelState build(EpoxyModel<?> model, int position, boolean immutableModel) {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
@@ -102,8 +102,8 @@ class ModelState {
    */
   void pairWithSelf() {
 //     ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#pairWithSelf().
-//                  documentation ```java\nvoid pairWithSelf()\n```
 //                  documentation  Used for an item inserted into the new list when we need to track moves that effect the\n inserted item in the old list.\n
+//                  documentation ```java\nvoid pairWithSelf()\n```
     if (pair != null) {
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
       throw new IllegalStateException("Already paired.");

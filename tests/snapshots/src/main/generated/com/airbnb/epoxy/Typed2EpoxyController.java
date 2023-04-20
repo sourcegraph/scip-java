@@ -21,11 +21,11 @@ import android.os.Handler;
  */
 public abstract class Typed2EpoxyController<T, U> extends EpoxyController {
 //                    ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#
-//                                          documentation ```java\npublic abstract class Typed2EpoxyController<T, U>\n```
 //                                          documentation  This is a wrapper around {@link com.airbnb.epoxy.EpoxyController} to simplify how data is\n accessed. Use this if the data required to build your models is represented by two objects.\n <p>\n To use this, create a subclass typed with your data object. Then, call {@link #setData}\n whenever that data changes. This class will handle calling {@link #buildModels} with the\n latest data.\n <p>\n You should NOT call {@link #requestModelBuild()} directly.\n\n @see TypedEpoxyController\n @see Typed3EpoxyController\n @see Typed4EpoxyController\n
-//                                          relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#
+//                                          documentation ```java\npublic abstract class Typed2EpoxyController<T, U>\n```
 //                                          relationship is_implementation semanticdb maven . . ``/ModelCollector#
 //                                          relationship is_implementation semanticdb maven . . ``/StickyHeaderCallbacks#
+//                                          relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                                          ^ definition semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#[T]
 //                                            documentation ```java\nT\n```
 //                                             ^ definition semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#[U]
@@ -70,8 +70,8 @@ public abstract class Typed2EpoxyController<T, U> extends EpoxyController {
    */
   public void setData(T data1, U data2) {
 //            ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#setData().
-//                    documentation ```java\npublic void setData(T data1, U data2)\n```
 //                    documentation  Call this with the latest data when you want models to be rebuilt. The data will be passed on\n to {@link #buildModels(Object, Object)}\n
+//                    documentation ```java\npublic void setData(T data1, U data2)\n```
 //                    ^ reference semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#[T]
 //                      ^^^^^ definition local 2
 //                            documentation ```java\nT data1\n```

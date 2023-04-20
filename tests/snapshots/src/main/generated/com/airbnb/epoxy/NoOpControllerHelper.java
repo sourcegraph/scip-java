@@ -6,8 +6,8 @@ package com.airbnb.epoxy;
  */
 class NoOpControllerHelper extends ControllerHelper<EpoxyController> {
 //    ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NoOpControllerHelper#
-//                         documentation ```java\nclass NoOpControllerHelper\n```
 //                         documentation  A {@link ControllerHelper} implementation for adapters with no {@link\n com.airbnb.epoxy.AutoModel} usage.\n
+//                         documentation ```java\nclass NoOpControllerHelper\n```
 //                         relationship is_implementation semanticdb maven . . com/airbnb/epoxy/ControllerHelper#
 //    ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NoOpControllerHelper#`<init>`().
 //                         documentation ```java\nNoOpControllerHelper()\n```

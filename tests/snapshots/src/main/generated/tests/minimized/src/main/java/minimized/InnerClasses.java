@@ -33,9 +33,9 @@ public class InnerClasses {
   public enum InnerEnum {
 //            ^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerEnum#
 //                      documentation ```java\npublic enum InnerEnum\n```
-//                      relationship is_implementation semanticdb maven jdk 11 java/lang/Enum#
-//                      relationship is_implementation semanticdb maven jdk 11 java/lang/Comparable#
 //                      relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
+//                      relationship is_implementation semanticdb maven jdk 11 java/lang/Comparable#
+//                      relationship is_implementation semanticdb maven jdk 11 java/lang/Enum#
 //            ^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
 //                      documentation ```java\nprivate InnerEnum()\n```
     A,

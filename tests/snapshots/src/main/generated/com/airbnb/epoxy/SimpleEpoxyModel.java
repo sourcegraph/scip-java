@@ -26,8 +26,8 @@ import androidx.annotation.NonNull;
  */
 public class SimpleEpoxyModel extends EpoxyModel<View> {
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#
-//                            documentation ```java\npublic class SimpleEpoxyModel\n```
 //                            documentation  Helper class for cases where you don't need to do anything special when binding the view. This\n allows you to just provide the layout instead of needing to create a separate {@link EpoxyModel}\n subclass. This is useful for static layouts. You can also specify an onClick listener and the\n span size.\n
+//                            documentation ```java\npublic class SimpleEpoxyModel\n```
 //                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                               ^^^^ reference semanticdb maven . . _root_/

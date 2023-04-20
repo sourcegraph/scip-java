@@ -28,8 +28,8 @@ import androidx.annotation.Nullable;
 /** Defines an operation that makes a change to the epoxy model list. */
 class UpdateOp {
 //    ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#
-//             documentation ```java\nclass UpdateOp\n```
 //             documentation Defines an operation that makes a change to the epoxy model list. 
+//             documentation ```java\nclass UpdateOp\n```
 
   @IntDef({ADD, REMOVE, UPDATE, MOVE})
 // ^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/IntDef#
@@ -70,8 +70,8 @@ class UpdateOp {
   /** Holds the target position if this is a MOVE */
   int itemCount;
 //    ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#itemCount.
-//              documentation ```java\nint itemCount\n```
 //              documentation Holds the target position if this is a MOVE 
+//              documentation ```java\nint itemCount\n```
   ArrayList<EpoxyModel<?>> payloads;
 //^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
 //          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
@@ -130,8 +130,8 @@ class UpdateOp {
   /** Returns the index one past the last item in the affected range. */
   int positionEnd() {
 //    ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionEnd().
-//                documentation ```java\nint positionEnd()\n```
 //                documentation Returns the index one past the last item in the affected range. 
+//                documentation ```java\nint positionEnd()\n```
     return positionStart + itemCount;
 //         ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionStart.
 //                         ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#itemCount.

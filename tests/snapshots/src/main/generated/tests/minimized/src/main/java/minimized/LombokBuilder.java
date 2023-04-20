@@ -8,8 +8,8 @@ package minimized;
 //^^^^^^^ definition local 1
 //        documentation ```java\nfinal String message\n```
 //^^^^^^^ definition semanticdb maven . . minimized/Hello#HelloBuilder#message().
-//        documentation ```java\n@SuppressWarnings("all")\npublic HelloBuilder message(String message)\n```
 //        documentation @return {@code this}.
+//        documentation ```java\n@SuppressWarnings("all")\npublic HelloBuilder message(String message)\n```
 //^^^^^^^ definition semanticdb maven . . minimized/Hello#HelloBuilder#message.
 //        documentation ```java\n@SuppressWarnings("all")\nprivate String message\n```
 //^^^^^^^ definition semanticdb maven . . minimized/Hello#builder().

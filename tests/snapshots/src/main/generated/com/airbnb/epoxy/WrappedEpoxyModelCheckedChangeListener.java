@@ -22,8 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#
-//                                                  documentation ```java\npublic class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>\n```
 //                                                  documentation  Used in the generated models to transform normal checked change listener to model\n checked change.\n
+//                                                  documentation ```java\npublic class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>\n```
 //                                                  relationship is_implementation semanticdb maven . . ``/OnCheckedChangeListener#
 //                                                  ^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[T]
 //                                                    documentation ```java\nT extends EpoxyModel<?>\n```

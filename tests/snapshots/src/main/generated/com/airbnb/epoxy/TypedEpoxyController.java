@@ -25,11 +25,11 @@ import androidx.annotation.Nullable;
  */
 public abstract class TypedEpoxyController<T> extends EpoxyController {
 //                    ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#
-//                                         documentation ```java\npublic abstract class TypedEpoxyController<T>\n```
 //                                         documentation  This is a wrapper around {@link com.airbnb.epoxy.EpoxyController} to simplify how data is\n accessed. Use this if the data required to build your models is represented by a single object.\n <p>\n To use this, create a subclass typed with your data object. Then, call {@link #setData(Object)}\n whenever that data changes. This class will handle calling {@link #buildModels(Object)} with the\n latest data.\n <p>\n You should NOT call {@link #requestModelBuild()} directly.\n\n @see Typed2EpoxyController\n @see Typed3EpoxyController\n @see Typed4EpoxyController\n
-//                                         relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#
+//                                         documentation ```java\npublic abstract class TypedEpoxyController<T>\n```
 //                                         relationship is_implementation semanticdb maven . . ``/ModelCollector#
 //                                         relationship is_implementation semanticdb maven . . ``/StickyHeaderCallbacks#
+//                                         relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                                         ^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#[T]
 //                                           documentation ```java\nT\n```
 //                                                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#

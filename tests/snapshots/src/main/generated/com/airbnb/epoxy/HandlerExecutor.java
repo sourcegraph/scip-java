@@ -28,8 +28,8 @@ import androidx.annotation.NonNull;
  */
 class HandlerExecutor implements Executor {
 //    ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#
-//                    documentation ```java\nclass HandlerExecutor\n```
 //                    documentation  An executor that does it's work via posting to a Handler.\n <p>\n A key feature of this is the runnable is executed synchronously if the current thread is the\n same as the handler's thread.\n
+//                    documentation ```java\nclass HandlerExecutor\n```
 //                    relationship is_implementation semanticdb maven jdk 11 java/util/concurrent/Executor#
 //                               ^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/Executor#
   final Handler handler;

@@ -16,12 +16,12 @@ import java.util.List;
  */
 public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //           ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#
-//                              documentation ```java\npublic class SimpleEpoxyAdapter\n```
 //                              documentation  A non-abstract version of {@link com.airbnb.epoxy.EpoxyAdapter} that exposes all methods and\n models as public. Use this if you don't want to create your own adapter subclass and instead want\n to modify the adapter from elsewhere, such as from an activity.\n
-//                              relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#
-//                              relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
+//                              documentation ```java\npublic class SimpleEpoxyAdapter\n```
 //                              relationship is_implementation semanticdb maven . . RecyclerView/Adapter#
 //                              relationship is_implementation semanticdb maven . . ``/StickyHeaderCallbacks#
+//                              relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
+//                              relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#
 //           ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#`<init>`().
 //                              documentation ```java\npublic SimpleEpoxyAdapter()\n```
 //                                      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#

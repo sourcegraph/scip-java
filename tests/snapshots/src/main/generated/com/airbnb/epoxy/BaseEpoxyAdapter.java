@@ -92,8 +92,8 @@ public abstract class BaseEpoxyAdapter
   private final BoundViewHolders boundViewHolders = new BoundViewHolders();
 //              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#
 //                               ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#boundViewHolders.
-//                                                documentation ```java\nprivate final BoundViewHolders boundViewHolders\n```
 //                                                documentation  Keeps track of view holders that are currently bound so we can save their state in {@link\n #onSaveInstanceState(Bundle)}.\n
+//                                                documentation ```java\nprivate final BoundViewHolders boundViewHolders\n```
 //                                                      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#`<init>`().
   private ViewHolderState viewHolderState = new ViewHolderState();
 //        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#
@@ -143,8 +143,8 @@ public abstract class BaseEpoxyAdapter
    */
   protected void onExceptionSwallowed(RuntimeException exception) {
 //               ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onExceptionSwallowed().
-//                                    documentation ```java\nprotected void onExceptionSwallowed(RuntimeException exception)\n```
 //                                    documentation  This is called when recoverable exceptions happen at runtime. They can be ignored and Epoxy\n will recover, but you can override this to be aware of when they happen.\n
+//                                    documentation ```java\nprotected void onExceptionSwallowed(RuntimeException exception)\n```
 //                                    ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/RuntimeException#
 //                                                     ^^^^^^^^^ definition local 0
 //                                                               documentation ```java\nRuntimeException exception\n```
@@ -166,8 +166,8 @@ public abstract class BaseEpoxyAdapter
 //         ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                       ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
-//                                                        documentation ```java\nabstract List<? extends EpoxyModel<?>> getCurrentModels()\n```
 //                                                        documentation Return the models currently being used by the adapter to populate the recyclerview. 
+//                                                        documentation ```java\nabstract List<? extends EpoxyModel<?>> getCurrentModels()\n```
 
   public boolean isEmpty() {
 //               ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#isEmpty().
@@ -350,8 +350,8 @@ public abstract class BaseEpoxyAdapter
    */
   protected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position,
 //               ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onModelBound().
-//                            documentation ```java\nprotected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position, List<Object> payloads)\n```
 //                            documentation  Called immediately after a model is bound to a view holder. Subclasses can override this if\n they want alerts on when a model is bound.\n
+//                            documentation ```java\nprotected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position, List<Object> payloads)\n```
 //                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                            ^^^^^^ definition local 14
 //                                                   documentation ```java\nEpoxyViewHolder holder\n```
@@ -402,8 +402,8 @@ public abstract class BaseEpoxyAdapter
    */
   protected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position) {
 //               ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onModelBound(+2).
-//                            documentation ```java\nprotected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position)\n```
 //                            documentation  Called immediately after a model is bound to a view holder. Subclasses can override this if\n they want alerts on when a model is bound.\n
+//                            documentation ```java\nprotected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position)\n```
 //                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                            ^^^^^^ definition local 22
 //                                                   documentation ```java\nEpoxyViewHolder holder\n```
@@ -423,8 +423,8 @@ public abstract class BaseEpoxyAdapter
   protected BoundViewHolders getBoundViewHolders() {
 //          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#
 //                           ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getBoundViewHolders().
-//                                               documentation ```java\nprotected BoundViewHolders getBoundViewHolders()\n```
 //                                               documentation  Returns an object that manages the view holders currently bound to the RecyclerView. This\n object is mainly used by the base Epoxy adapter to save view states, but you may find it useful\n to help access views or models currently shown in the RecyclerView.\n
+//                                               documentation ```java\nprotected BoundViewHolders getBoundViewHolders()\n```
     return boundViewHolders;
 //         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#boundViewHolders.
   }
@@ -498,8 +498,8 @@ public abstract class BaseEpoxyAdapter
    */
   protected void onModelUnbound(EpoxyViewHolder holder, EpoxyModel<?> model) {
 //               ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onModelUnbound().
-//                              documentation ```java\nprotected void onModelUnbound(EpoxyViewHolder holder, EpoxyModel<?> model)\n```
 //                              documentation  Called immediately after a model is unbound from a view holder. Subclasses can override this if\n they want alerts on when a model is unbound.\n
+//                              documentation ```java\nprotected void onModelUnbound(EpoxyViewHolder holder, EpoxyModel<?> model)\n```
 //                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                              ^^^^^^ definition local 29
 //                                                     documentation ```java\nEpoxyViewHolder holder\n```
@@ -647,8 +647,8 @@ public abstract class BaseEpoxyAdapter
    */
   protected int getModelPosition(EpoxyModel<?> model) {
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
-//                               documentation ```java\nprotected int getModelPosition(EpoxyModel<?> model)\n```
 //                               documentation  Finds the position of the given model in the list. Doesn't use indexOf to avoid unnecessary\n equals() calls since we're looking for the same object instance.\n\n @return The position of the given model in the current models list, or -1 if the model can't be\n found.\n
+//                               documentation ```java\nprotected int getModelPosition(EpoxyModel<?> model)\n```
 //                               ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                             ^^^^^ definition local 37
 //                                                   documentation ```java\nEpoxyModel<?> model\n```
@@ -685,8 +685,8 @@ public abstract class BaseEpoxyAdapter
   public SpanSizeLookup getSpanSizeLookup() {
 //       ^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
 //                      ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getSpanSizeLookup().
-//                                        documentation ```java\npublic unresolved_type getSpanSizeLookup()\n```
 //                                        documentation  For use with a grid layout manager - use this to get the {@link SpanSizeLookup} for models in\n this adapter. This will delegate span look up calls to each model's {@link\n EpoxyModel#getSpanSize(int, int, int)}. Make sure to also call {@link #setSpanCount(int)} so\n the span count is correct.\n
+//                                        documentation ```java\npublic unresolved_type getSpanSizeLookup()\n```
     return spanSizeLookup;
 //         ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#spanSizeLookup.
   }
@@ -700,8 +700,8 @@ public abstract class BaseEpoxyAdapter
    */
   public void setSpanCount(int spanCount) {
 //            ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#setSpanCount().
-//                         documentation ```java\npublic void setSpanCount(int spanCount)\n```
 //                         documentation  If you are using a grid layout manager you must call this to set the span count of the grid.\n This span count will be passed on to the models so models can choose what span count to be.\n\n @see #getSpanSizeLookup()\n @see EpoxyModel#getSpanSize(int, int, int)\n
+//                         documentation ```java\npublic void setSpanCount(int spanCount)\n```
 //                             ^^^^^^^^^ definition local 40
 //                                       documentation ```java\nint spanCount\n```
     this.spanCount = spanCount;
@@ -736,8 +736,8 @@ public abstract class BaseEpoxyAdapter
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void setupStickyHeaderView(@NotNull View stickyHeader) {
 //            ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#setupStickyHeaderView().
-//                                  documentation ```java\n@Override\npublic void setupStickyHeaderView(unresolved_type stickyHeader)\n```
 //                                  documentation  Optional callback to setup the sticky view,\n by default it doesn't do anything.\n <p>\n The sub-classes should override the function if they are\n using sticky header feature.\n
+//                                  documentation ```java\n@Override\npublic void setupStickyHeaderView(unresolved_type stickyHeader)\n```
 //                                   ^^^^^^^ reference semanticdb maven maven/org.jetbrains/annotations 13.0 org/jetbrains/annotations/NotNull#
 //                                           ^^^^ reference semanticdb maven . . _root_/
 //                                                ^^^^^^^^^^^^ definition local 41
@@ -756,8 +756,8 @@ public abstract class BaseEpoxyAdapter
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void teardownStickyHeaderView(@NotNull View stickyHeader) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#teardownStickyHeaderView().
-//                                     documentation ```java\n@Override\npublic void teardownStickyHeaderView(unresolved_type stickyHeader)\n```
 //                                     documentation  Optional callback to perform tear down operation on the\n sticky view, by default it doesn't do anything.\n <p>\n The sub-classes should override the function if they are\n using sticky header feature.\n
+//                                     documentation ```java\n@Override\npublic void teardownStickyHeaderView(unresolved_type stickyHeader)\n```
 //                                      ^^^^^^^ reference semanticdb maven maven/org.jetbrains/annotations 13.0 org/jetbrains/annotations/NotNull#
 //                                              ^^^^ reference semanticdb maven . . _root_/
 //                                                   ^^^^^^^^^^^^ definition local 42
@@ -776,8 +776,8 @@ public abstract class BaseEpoxyAdapter
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public boolean isStickyHeader(int position) {
 //               ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#isStickyHeader().
-//                              documentation ```java\n@Override\npublic boolean isStickyHeader(int position)\n```
 //                              documentation  Called to check if the item at the position is a sticky item,\n by default returns false.\n <p>\n The sub-classes should override the function if they are\n using sticky header feature.\n
+//                              documentation ```java\n@Override\npublic boolean isStickyHeader(int position)\n```
 //                                  ^^^^^^^^ definition local 43
 //                                           documentation ```java\nint position\n```
     return false;

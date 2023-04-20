@@ -58,8 +58,8 @@ import androidx.recyclerview.widget.RecyclerView.State;
  */
 public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyItemSpacingDecorator#
-//                                     documentation ```java\npublic class EpoxyItemSpacingDecorator\n```
 //                                     documentation  Modifies item spacing in a recycler view so that items are equally spaced no matter where they\n are on the grid. Only designed to work with standard linear or grid layout managers.\n
+//                                     documentation ```java\npublic class EpoxyItemSpacingDecorator\n```
 //                                     relationship is_implementation semanticdb maven . . RecyclerView/ItemDecoration#
 //                                             ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView/
 //                                                          ^^^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView/ItemDecoration#

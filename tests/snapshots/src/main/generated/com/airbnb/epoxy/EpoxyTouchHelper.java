@@ -64,8 +64,8 @@ import static androidx.recyclerview.widget.ItemTouchHelper.Callback.makeMovement
  */
 public abstract class EpoxyTouchHelper {
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#
-//                                     documentation ```java\npublic abstract class EpoxyTouchHelper\n```
 //                                     documentation  A simple way to set up drag or swipe interactions with Epoxy.\n <p>\n Drag events work with the EpoxyController and automatically update the controller and\n RecyclerView when an item is moved. You just need to implement a callback to update your data to\n reflect the change.\n <p>\n Both swipe and drag events implement a small lifecycle to help you style the views as they are\n moved. You can register callbacks for the lifecycle events you care about.\n <p>\n If you want to set up multiple drag and swipe rules for the same RecyclerView, you can use this\n class multiple times to specify different targets or swipe and drag directions and callbacks.\n <p>\n If you want more control over configuration and handling, you can opt to not use this class and\n instead you can implement {@link EpoxyModelTouchCallback} directly with your own {@link\n ItemTouchHelper}. That class provides an interface that makes it easier to work with Epoxy models\n and simplifies touch callbacks.\n <p>\n If you want even more control you can implement {@link EpoxyTouchHelperCallback}. This is just a\n light layer over the normal RecyclerView touch callbacks, but it converts all view holders to\n Epoxy view holders to remove some boilerplate for you.\n
+//                                     documentation ```java\npublic abstract class EpoxyTouchHelper\n```
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#`<init>`().
 //                                     documentation ```java\npublic EpoxyTouchHelper()\n```
 
@@ -79,8 +79,8 @@ public abstract class EpoxyTouchHelper {
   public static DragBuilder initDragging(EpoxyController controller) {
 //              ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder#
 //                          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#initDragging().
-//                                       documentation ```java\npublic static DragBuilder initDragging(EpoxyController controller)\n```
 //                                       documentation  The entry point for setting up drag support.\n\n @param controller The EpoxyController with the models that will be dragged. The controller will\n                   be updated for you when a model is dragged and moved by a user's touch\n                   interaction.\n
+//                                       documentation ```java\npublic static DragBuilder initDragging(EpoxyController controller)\n```
 //                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                                                       ^^^^^^^^^^ definition local 0
 //                                                                  documentation ```java\nEpoxyController controller\n```
@@ -117,8 +117,8 @@ public abstract class EpoxyTouchHelper {
     public DragBuilder2 withRecyclerView(RecyclerView recyclerView) {
 //         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#
 //                      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder#withRecyclerView().
-//                                       documentation ```java\npublic DragBuilder2 withRecyclerView(unresolved_type recyclerView)\n```
 //                                       documentation  The recyclerview that the EpoxyController has its adapter added to. An {@link\n androidx.recyclerview.widget.ItemTouchHelper} will be created and configured for you, and\n attached to this RecyclerView.\n
+//                                       documentation ```java\npublic DragBuilder2 withRecyclerView(unresolved_type recyclerView)\n```
 //                                       ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
 //                                                    ^^^^^^^^^^^^ definition local 2
 //                                                                 documentation ```java\nunresolved_type recyclerView\n```
@@ -163,8 +163,8 @@ public abstract class EpoxyTouchHelper {
     public DragBuilder3 forVerticalList() {
 //         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#
 //                      ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#forVerticalList().
-//                                      documentation ```java\npublic DragBuilder3 forVerticalList()\n```
 //                                      documentation Enable dragging vertically, up and down. 
+//                                      documentation ```java\npublic DragBuilder3 forVerticalList()\n```
       return withDirections(ItemTouchHelper.UP | ItemTouchHelper.DOWN);
 //           ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#withDirections().
 //                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
@@ -177,8 +177,8 @@ public abstract class EpoxyTouchHelper {
     public DragBuilder3 forHorizontalList() {
 //         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#
 //                      ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#forHorizontalList().
-//                                        documentation ```java\npublic DragBuilder3 forHorizontalList()\n```
 //                                        documentation Enable dragging horizontally, left and right. 
+//                                        documentation ```java\npublic DragBuilder3 forHorizontalList()\n```
       return withDirections(ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
 //           ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#withDirections().
 //                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
@@ -191,8 +191,8 @@ public abstract class EpoxyTouchHelper {
     public DragBuilder3 forGrid() {
 //         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#
 //                      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#forGrid().
-//                              documentation ```java\npublic DragBuilder3 forGrid()\n```
 //                              documentation Enable dragging in all directions. 
+//                              documentation ```java\npublic DragBuilder3 forGrid()\n```
       return withDirections(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT
 //           ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#withDirections().
 //                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
@@ -218,8 +218,8 @@ public abstract class EpoxyTouchHelper {
     public DragBuilder3 withDirections(int directionFlags) {
 //         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#
 //                      ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder2#withDirections().
-//                                     documentation ```java\npublic DragBuilder3 withDirections(int directionFlags)\n```
 //                                     documentation  Set custom movement flags to dictate which drag directions should be allowed.\n <p>\n Can be any of {@link ItemTouchHelper#LEFT}, {@link ItemTouchHelper#RIGHT}, {@link\n ItemTouchHelper#UP}, {@link ItemTouchHelper#DOWN}, {@link ItemTouchHelper#START}, {@link\n ItemTouchHelper#END}\n <p>\n Flags can be OR'd together to allow multiple directions.\n
+//                                     documentation ```java\npublic DragBuilder3 withDirections(int directionFlags)\n```
 //                                         ^^^^^^^^^^^^^^ definition local 5
 //                                                        documentation ```java\nint directionFlags\n```
       return new DragBuilder3(controller, recyclerView, makeMovementFlags(directionFlags, 0));
@@ -280,8 +280,8 @@ public abstract class EpoxyTouchHelper {
 //                                ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#
 //                                             ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#withTarget().[U]
 //                                                ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#withTarget().
-//                                                           documentation ```java\npublic <U extends EpoxyModel> DragBuilder4<U> withTarget(Class<U> targetModelClass)\n```
 //                                                           documentation  Set the type of Epoxy model that is draggable. This approach works well if you only have one\n draggable type.\n
+//                                                           documentation ```java\npublic <U extends EpoxyModel> DragBuilder4<U> withTarget(Class<U> targetModelClass)\n```
 //                                                           ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                                                 ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#withTarget().[U]
 //                                                                    ^^^^^^^^^^^^^^^^ definition local 9
@@ -318,8 +318,8 @@ public abstract class EpoxyTouchHelper {
 //         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#
 //                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                  ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#withTargets().
-//                                              documentation ```java\npublic DragBuilder4<EpoxyModel> withTargets(Class<? extends EpoxyModel>[] targetModelClasses)\n```
 //                                              documentation  Specify which Epoxy model types are draggable. Use this if you have more than one type that\n is draggable.\n <p>\n If you only have one draggable type you should use {@link #withTarget(Class)}\n
+//                                              documentation ```java\npublic DragBuilder4<EpoxyModel> withTargets(Class<? extends EpoxyModel>[] targetModelClasses)\n```
 //                                              ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                                              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                             ^^^^^^^^^^^^^^^^^^ definition local 11
@@ -347,8 +347,8 @@ public abstract class EpoxyTouchHelper {
 //         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#
 //                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                  ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#forAllModels().
-//                                               documentation ```java\npublic DragBuilder4<EpoxyModel> forAllModels()\n```
 //                                               documentation  Use this if all models in the controller should be draggable, and if there are multiple types\n of models in the controller.\n <p>\n If you only have one model type you should use {@link #withTarget(Class)}\n
+//                                               documentation ```java\npublic DragBuilder4<EpoxyModel> forAllModels()\n```
       return withTarget(EpoxyModel.class);
 //           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#withTarget().
 //                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
@@ -443,8 +443,8 @@ public abstract class EpoxyTouchHelper {
     public ItemTouchHelper andCallbacks(final DragCallbacks<U> callbacks) {
 //         ^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
 //                         ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#andCallbacks().
-//                                      documentation ```java\npublic unresolved_type andCallbacks(DragCallbacks<U> callbacks)\n```
 //                                      documentation  Set callbacks to handle drag actions and lifecycle events.\n <p>\n You MUST implement {@link DragCallbacks#onModelMoved(int, int, EpoxyModel,\n View)} to update your data to reflect an item move.\n <p>\n You can optionally implement the other callbacks to modify the view being dragged. This is\n useful if you want to change things like the view background, size, color, etc\n\n @return An {@link ItemTouchHelper} instance that has been initialized and attached to a\n recyclerview. The touch helper has already been fully set up and can be ignored, but you may\n want to hold a reference to it if you need to later detach the recyclerview to disable touch\n events via setting null on {@link ItemTouchHelper#attachToRecyclerView(RecyclerView)}\n
+//                                      documentation ```java\npublic unresolved_type andCallbacks(DragCallbacks<U> callbacks)\n```
 //                                            ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#
 //                                                          ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                                             ^^^^^^^^^ definition local 17
@@ -512,8 +512,8 @@ public abstract class EpoxyTouchHelper {
             public void onDragStarted(U model, View itemView, int adapterPosition) {
 //                      ^^^^^^^^^^^^^ definition local 23
 //                                    documentation ```java\n@Override\npublic void onDragStarted(U model, unresolved_type itemView, int adapterPosition)\n```
-//                                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragStarted().
 //                                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onDragStarted().
+//                                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragStarted().
 //                                    ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                      ^^^^^ definition local 32
 //                                            documentation ```java\nU model\n```
@@ -535,8 +535,8 @@ public abstract class EpoxyTouchHelper {
             public void onDragReleased(U model, View itemView) {
 //                      ^^^^^^^^^^^^^^ definition local 24
 //                                     documentation ```java\n@Override\npublic void onDragReleased(U model, unresolved_type itemView)\n```
-//                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragReleased().
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onDragReleased().
+//                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragReleased().
 //                                     ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                       ^^^^^ definition local 35
 //                                             documentation ```java\nU model\n```
@@ -555,8 +555,8 @@ public abstract class EpoxyTouchHelper {
             public void onModelMoved(int fromPosition, int toPosition, U modelBeingMoved,
 //                      ^^^^^^^^^^^^ definition local 25
 //                                   documentation ```java\n@Override\npublic void onModelMoved(int fromPosition, int toPosition, U modelBeingMoved, unresolved_type itemView)\n```
-//                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onModelMoved().
 //                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onModelMoved().
+//                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onModelMoved().
 //                                       ^^^^^^^^^^^^ definition local 37
 //                                                    documentation ```java\nint fromPosition\n```
 //                                                         ^^^^^^^^^^ definition local 38
@@ -582,11 +582,11 @@ public abstract class EpoxyTouchHelper {
             public void clearView(U model, View itemView) {
 //                      ^^^^^^^^^ definition local 26
 //                                documentation ```java\n@Override\npublic void clearView(U model, unresolved_type itemView)\n```
-//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(+1).
-//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView().
 //                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView().
-//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(+1).
+//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView().
+//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(+1).
 //                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView().
+//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(+1).
 //                                ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
 //                                  ^^^^^ definition local 41
 //                                        documentation ```java\nU model\n```
@@ -614,8 +614,8 @@ public abstract class EpoxyTouchHelper {
   public abstract static class DragCallbacks<T extends EpoxyModel>
 //                             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#
 //                                           documentation ```java\npublic abstract static class DragCallbacks<T extends EpoxyModel>\n```
-//                                           relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#
 //                                           relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
+//                                           relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#
 //                             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#`<init>`().
 //                                           documentation ```java\npublic DragCallbacks()\n```
 //                                           ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#[T]
@@ -697,8 +697,8 @@ public abstract class EpoxyTouchHelper {
      */
     public boolean isDragEnabledForModel(T model) {
 //                 ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#isDragEnabledForModel().
-//                                       documentation ```java\npublic boolean isDragEnabledForModel(T model)\n```
 //                                       documentation  Whether the given model should be draggable.\n <p>\n True by default. You may override this to toggle draggability for a model.\n
+//                                       documentation ```java\npublic boolean isDragEnabledForModel(T model)\n```
 //                                       ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#[T]
 //                                         ^^^^^ definition local 54
 //                                               documentation ```java\nT model\n```
@@ -728,8 +728,8 @@ public abstract class EpoxyTouchHelper {
   public static SwipeBuilder initSwiping(RecyclerView recyclerView) {
 //              ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#
 //                           ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#initSwiping().
-//                                       documentation ```java\npublic static SwipeBuilder initSwiping(unresolved_type recyclerView)\n```
 //                                       documentation  The entry point for setting up swipe support for a RecyclerView. The RecyclerView must be set\n with an Epoxy adapter or controller.\n
+//                                       documentation ```java\npublic static SwipeBuilder initSwiping(unresolved_type recyclerView)\n```
 //                                       ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
 //                                                    ^^^^^^^^^^^^ definition local 57
 //                                                                 documentation ```java\nunresolved_type recyclerView\n```
@@ -762,8 +762,8 @@ public abstract class EpoxyTouchHelper {
     public SwipeBuilder2 right() {
 //         ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#
 //                       ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#right().
-//                             documentation ```java\npublic SwipeBuilder2 right()\n```
 //                             documentation Enable swiping right. 
+//                             documentation ```java\npublic SwipeBuilder2 right()\n```
       return withDirections(ItemTouchHelper.RIGHT);
 //           ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#withDirections().
 //                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
@@ -774,8 +774,8 @@ public abstract class EpoxyTouchHelper {
     public SwipeBuilder2 left() {
 //         ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#
 //                       ^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#left().
-//                            documentation ```java\npublic SwipeBuilder2 left()\n```
 //                            documentation Enable swiping left. 
+//                            documentation ```java\npublic SwipeBuilder2 left()\n```
       return withDirections(ItemTouchHelper.LEFT);
 //           ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#withDirections().
 //                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
@@ -786,8 +786,8 @@ public abstract class EpoxyTouchHelper {
     public SwipeBuilder2 leftAndRight() {
 //         ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#
 //                       ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#leftAndRight().
-//                                    documentation ```java\npublic SwipeBuilder2 leftAndRight()\n```
 //                                    documentation Enable swiping horizontally, left and right. 
+//                                    documentation ```java\npublic SwipeBuilder2 leftAndRight()\n```
       return withDirections(ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
 //           ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#withDirections().
 //                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
@@ -808,8 +808,8 @@ public abstract class EpoxyTouchHelper {
     public SwipeBuilder2 withDirections(int directionFlags) {
 //         ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#
 //                       ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder#withDirections().
-//                                      documentation ```java\npublic SwipeBuilder2 withDirections(int directionFlags)\n```
 //                                      documentation  Set custom movement flags to dictate which swipe directions should be allowed.\n <p>\n Can be any of {@link ItemTouchHelper#LEFT}, {@link ItemTouchHelper#RIGHT}, {@link\n ItemTouchHelper#UP}, {@link ItemTouchHelper#DOWN}, {@link ItemTouchHelper#START}, {@link\n ItemTouchHelper#END}\n <p>\n Flags can be OR'd together to allow multiple directions.\n
+//                                      documentation ```java\npublic SwipeBuilder2 withDirections(int directionFlags)\n```
 //                                          ^^^^^^^^^^^^^^ definition local 59
 //                                                         documentation ```java\nint directionFlags\n```
       return new SwipeBuilder2(recyclerView, makeMovementFlags(0, directionFlags));
@@ -860,8 +860,8 @@ public abstract class EpoxyTouchHelper {
 //                                ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#
 //                                              ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#withTarget().[U]
 //                                                 ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#withTarget().
-//                                                            documentation ```java\npublic <U extends EpoxyModel> SwipeBuilder3<U> withTarget(Class<U> targetModelClass)\n```
 //                                                            documentation  Set the type of Epoxy model that is swipable. Use this if you only have one\n swipable type.\n
+//                                                            documentation ```java\npublic <U extends EpoxyModel> SwipeBuilder3<U> withTarget(Class<U> targetModelClass)\n```
 //                                                            ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                                                  ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#withTarget().[U]
 //                                                                     ^^^^^^^^^^^^^^^^ definition local 62
@@ -897,8 +897,8 @@ public abstract class EpoxyTouchHelper {
 //         ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#
 //                       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#withTargets().
-//                                               documentation ```java\npublic SwipeBuilder3<EpoxyModel> withTargets(Class<? extends EpoxyModel>[] targetModelClasses)\n```
 //                                               documentation  Specify which Epoxy model types are swipable. Use this if you have more than one type that\n is swipable.\n <p>\n If you only have one swipable type you should use {@link #withTarget(Class)}\n
+//                                               documentation ```java\npublic SwipeBuilder3<EpoxyModel> withTargets(Class<? extends EpoxyModel>[] targetModelClasses)\n```
         Class<? extends EpoxyModel>... targetModelClasses) {
 //      ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
@@ -926,8 +926,8 @@ public abstract class EpoxyTouchHelper {
 //         ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#
 //                       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#forAllModels().
-//                                                documentation ```java\npublic SwipeBuilder3<EpoxyModel> forAllModels()\n```
 //                                                documentation  Use this if all models in the controller should be swipable, and if there are multiple types\n of models in the controller.\n <p>\n If you only have one model type you should use {@link #withTarget(Class)}\n
+//                                                documentation ```java\npublic SwipeBuilder3<EpoxyModel> forAllModels()\n```
       return withTarget(EpoxyModel.class);
 //           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#withTarget().
 //                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
@@ -1011,8 +1011,8 @@ public abstract class EpoxyTouchHelper {
     public ItemTouchHelper andCallbacks(final SwipeCallbacks<U> callbacks) {
 //         ^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
 //                         ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#andCallbacks().
-//                                      documentation ```java\npublic unresolved_type andCallbacks(SwipeCallbacks<U> callbacks)\n```
 //                                      documentation  Set callbacks to handle swipe actions and lifecycle events.\n <p>\n You MUST implement {@link SwipeCallbacks#onSwipeCompleted(EpoxyModel, View, int, int)} to\n remove the swiped item from your data and request a model build.\n <p>\n You can optionally implement the other callbacks to modify the view as it is being swiped.\n\n @return An {@link ItemTouchHelper} instance that has been initialized and attached to a\n recyclerview. The touch helper has already been fully set up and can be ignored, but you may\n want to hold a reference to it if you need to later detach the recyclerview to disable touch\n events via setting null on {@link ItemTouchHelper#attachToRecyclerView(RecyclerView)}\n
+//                                      documentation ```java\npublic unresolved_type andCallbacks(SwipeCallbacks<U> callbacks)\n```
 //                                            ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#
 //                                                           ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
 //                                                              ^^^^^^^^^ definition local 69
@@ -1176,11 +1176,11 @@ public abstract class EpoxyTouchHelper {
             public void clearView(U model, View itemView) {
 //                      ^^^^^^^^^ definition local 79
 //                                documentation ```java\n@Override\npublic void clearView(U model, unresolved_type itemView)\n```
-//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(+1).
-//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView().
 //                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView().
-//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(+1).
+//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView().
+//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(+1).
 //                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView().
+//                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(+1).
 //                                ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
 //                                  ^^^^^ definition local 98
 //                                        documentation ```java\nU model\n```
@@ -1208,8 +1208,8 @@ public abstract class EpoxyTouchHelper {
   public abstract static class SwipeCallbacks<T extends EpoxyModel>
 //                             ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#
 //                                            documentation ```java\npublic abstract static class SwipeCallbacks<T extends EpoxyModel>\n```
-//                                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#
 //                                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
+//                                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#
 //                             ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#`<init>`().
 //                                            documentation ```java\npublic SwipeCallbacks()\n```
 //                                            ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#[T]
@@ -1311,8 +1311,8 @@ public abstract class EpoxyTouchHelper {
      */
     public boolean isSwipeEnabledForModel(T model) {
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#isSwipeEnabledForModel().
-//                                        documentation ```java\npublic boolean isSwipeEnabledForModel(T model)\n```
 //                                        documentation  Whether the given model should be swipable.\n <p>\n True by default. You may override this to toggle swipabaility for a model.\n
+//                                        documentation ```java\npublic boolean isSwipeEnabledForModel(T model)\n```
 //                                        ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#[T]
 //                                          ^^^^^ definition local 115
 //                                                documentation ```java\nT model\n```

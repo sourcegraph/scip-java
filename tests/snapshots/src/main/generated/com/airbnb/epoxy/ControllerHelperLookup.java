@@ -31,8 +31,8 @@ import androidx.annotation.Nullable;
  */
 class ControllerHelperLookup {
 //    ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#
-//                           documentation ```java\nclass ControllerHelperLookup\n```
 //                           documentation  Looks up a generated {@link ControllerHelper} implementation for a given adapter.\n If the adapter has no {@link com.airbnb.epoxy.AutoModel} models then a No-Op implementation will\n be returned.\n
+//                           documentation ```java\nclass ControllerHelperLookup\n```
 //    ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#`<init>`().
 //                           documentation ```java\nControllerHelperLookup()\n```
   private static final String GENERATED_HELPER_CLASS_SUFFIX = "_EpoxyHelper";

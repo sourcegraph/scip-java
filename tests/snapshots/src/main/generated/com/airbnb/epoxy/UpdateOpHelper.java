@@ -45,8 +45,8 @@ import static com.airbnb.epoxy.UpdateOp.UPDATE;
 /** Helper class to collect changes in a diff, batching when possible. */
 class UpdateOpHelper {
 //    ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
-//                   documentation ```java\nclass UpdateOpHelper\n```
 //                   documentation Helper class to collect changes in a diff, batching when possible. 
+//                   documentation ```java\nclass UpdateOpHelper\n```
 //    ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#`<init>`().
 //                   documentation ```java\nUpdateOpHelper()\n```
   final List<UpdateOp> opList = new ArrayList<>();

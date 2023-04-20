@@ -3,8 +3,8 @@ package minimized;
 /** Example from https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.4 */
 public class TypeVariables {
 //           ^^^^^^^^^^^^^ definition semanticdb maven . . minimized/TypeVariables#
-//                         documentation ```java\npublic class TypeVariables\n```
 //                         documentation Example from https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.4 
+//                         documentation ```java\npublic class TypeVariables\n```
 //           ^^^^^^^^^^^^^ definition semanticdb maven . . minimized/TypeVariables#`<init>`().
 //                         documentation ```java\npublic TypeVariables()\n```
   static class C {

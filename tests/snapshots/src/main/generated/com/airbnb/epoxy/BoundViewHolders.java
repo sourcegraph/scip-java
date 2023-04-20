@@ -24,8 +24,8 @@ import androidx.collection.LongSparseArray;
 //^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
 public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#
-//                            documentation ```java\n@SuppressWarnings("WeakerAccess")\npublic class BoundViewHolders\n```
 //                            documentation Helper class for keeping track of {@link EpoxyViewHolder}s that are currently bound. 
+//                            documentation ```java\n@SuppressWarnings("WeakerAccess")\npublic class BoundViewHolders\n```
 //                            relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#`<init>`().
 //                            documentation ```java\npublic BoundViewHolders()\n```

@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
  */
 class NotifyBlocker extends AdapterDataObserver {
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#
-//                  documentation ```java\nclass NotifyBlocker\n```
 //                  documentation  We don't allow any data change notifications except the ones done though diffing. Forcing\n changes to happen through diffing reduces the chance for developer error when implementing an\n adapter.\n <p>\n This observer throws upon any changes done outside of diffing.\n
+//                  documentation ```java\nclass NotifyBlocker\n```
 //                  relationship is_implementation semanticdb maven . . ``/AdapterDataObserver#
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#`<init>`().
 //                  documentation ```java\nNotifyBlocker()\n```

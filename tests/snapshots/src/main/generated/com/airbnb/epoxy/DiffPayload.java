@@ -30,8 +30,8 @@ import androidx.collection.LongSparseArray;
  */
 public class DiffPayload {
 //           ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#
-//                       documentation ```java\npublic class DiffPayload\n```
 //                       documentation  A helper class for tracking changed models found by the {@link com.airbnb.epoxy.DiffHelper} to\n be included as a payload in the\n {@link androidx.recyclerview.widget.RecyclerView.Adapter#notifyItemChanged(int, Object)}\n call.\n
+//                       documentation ```java\npublic class DiffPayload\n```
   private final EpoxyModel<?> singleModel;
 //              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#singleModel.
@@ -116,8 +116,8 @@ public class DiffPayload {
   public static EpoxyModel<?> getModelFromPayload(List<Object> payloads, long modelId) {
 //              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#getModelFromPayload().
-//                                                documentation ```java\n@Nullable\npublic static EpoxyModel<?> getModelFromPayload(List<Object> payloads, long modelId)\n```
 //                                                documentation  Looks through the payloads list and returns the first model found with the given model id. This\n assumes that the payloads list will only contain objects of type {@link DiffPayload}, and will\n throw if an unexpected type is found.\n
+//                                                documentation ```java\n@Nullable\npublic static EpoxyModel<?> getModelFromPayload(List<Object> payloads, long modelId)\n```
 //                                                ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                     ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                                                             ^^^^^^^^ definition local 4

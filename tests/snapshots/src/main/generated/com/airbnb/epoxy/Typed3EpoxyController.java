@@ -21,11 +21,11 @@ import android.os.Handler;
  */
 public abstract class Typed3EpoxyController<T, U, V> extends EpoxyController {
 //                    ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/Typed3EpoxyController#
-//                                          documentation ```java\npublic abstract class Typed3EpoxyController<T, U, V>\n```
 //                                          documentation  This is a wrapper around {@link com.airbnb.epoxy.EpoxyController} to simplify how data is\n accessed. Use this if the data required to build your models is represented by three objects.\n <p>\n To use this, create a subclass typed with your data object. Then, call {@link #setData}\n whenever that data changes. This class will handle calling {@link #buildModels} with the\n latest data.\n <p>\n You should NOT call {@link #requestModelBuild()} directly.\n\n @see TypedEpoxyController\n @see Typed2EpoxyController\n @see Typed4EpoxyController\n
-//                                          relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#
+//                                          documentation ```java\npublic abstract class Typed3EpoxyController<T, U, V>\n```
 //                                          relationship is_implementation semanticdb maven . . ``/ModelCollector#
 //                                          relationship is_implementation semanticdb maven . . ``/StickyHeaderCallbacks#
+//                                          relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                                          ^ definition semanticdb maven . . com/airbnb/epoxy/Typed3EpoxyController#[T]
 //                                            documentation ```java\nT\n```
 //                                             ^ definition semanticdb maven . . com/airbnb/epoxy/Typed3EpoxyController#[U]
@@ -76,8 +76,8 @@ public abstract class Typed3EpoxyController<T, U, V> extends EpoxyController {
    */
   public void setData(T data1, U data2, V data3) {
 //            ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/Typed3EpoxyController#setData().
-//                    documentation ```java\npublic void setData(T data1, U data2, V data3)\n```
 //                    documentation  Call this with the latest data when you want models to be rebuilt. The data will be passed on\n to {@link #buildModels(Object, Object, Object)}\n
+//                    documentation ```java\npublic void setData(T data1, U data2, V data3)\n```
 //                    ^ reference semanticdb maven . . com/airbnb/epoxy/Typed3EpoxyController#[T]
 //                      ^^^^^ definition local 2
 //                            documentation ```java\nT data1\n```

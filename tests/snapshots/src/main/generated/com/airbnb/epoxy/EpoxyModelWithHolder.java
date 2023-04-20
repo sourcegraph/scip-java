@@ -36,8 +36,8 @@ import androidx.annotation.Px;
  */
 public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyModel<T> {
 //                    ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#
-//                                         documentation ```java\npublic abstract class EpoxyModelWithHolder<T extends EpoxyHolder>\n```
 //                                         documentation  A version of {@link com.airbnb.epoxy.EpoxyModel} that allows you to use a view holder pattern\n instead of a specific view when binding to your model.\n
+//                                         documentation ```java\npublic abstract class EpoxyModelWithHolder<T extends EpoxyHolder>\n```
 //                                         relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                         ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 //                                           documentation ```java\nT extends EpoxyHolder\n```
@@ -64,8 +64,8 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
   protected abstract T createNewHolder(@NonNull ViewParent parent);
 //                   ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 //                     ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#createNewHolder().
-//                                     documentation ```java\nprotected abstract T createNewHolder(unresolved_type parent)\n```
 //                                     documentation This should return a new instance of your {@link com.airbnb.epoxy.EpoxyHolder} class. 
+//                                     documentation ```java\nprotected abstract T createNewHolder(unresolved_type parent)\n```
 //                                      ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                              ^^^^^^^^^^ reference semanticdb maven . . _root_/
 //                                                         ^^^^^^ definition local 1

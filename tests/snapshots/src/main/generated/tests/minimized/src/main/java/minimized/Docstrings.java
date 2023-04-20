@@ -3,16 +3,16 @@ package minimized;
 /** Example class docstring. */
 public class Docstrings {
 //           ^^^^^^^^^^ definition semanticdb maven . . minimized/Docstrings#
-//                      documentation ```java\npublic class Docstrings\n```
 //                      documentation Example class docstring. 
+//                      documentation ```java\npublic class Docstrings\n```
 //           ^^^^^^^^^^ definition semanticdb maven . . minimized/Docstrings#`<init>`().
 //                      documentation ```java\npublic Docstrings()\n```
 
   /** Example field docstring. */
   public static int field = 42;
 //                  ^^^^^ definition semanticdb maven . . minimized/Docstrings#field.
-//                        documentation ```java\npublic static int field\n```
 //                        documentation Example field docstring. 
+//                        documentation ```java\npublic static int field\n```
 
   /**
    * Example method docstring.
@@ -21,8 +21,8 @@ public class Docstrings {
    */
   public static int method() {
 //                  ^^^^^^ definition semanticdb maven . . minimized/Docstrings#method().
-//                         documentation ```java\npublic static int method()\n```
 //                         documentation  Example method docstring.\n\n @return 42.\n
+//                         documentation ```java\npublic static int method()\n```
     return 42;
   }
 
@@ -34,8 +34,8 @@ public class Docstrings {
    */
   public static int methodParameter(int n) {
 //                  ^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Docstrings#methodParameter().
-//                                  documentation ```java\npublic static int methodParameter(int n)\n```
 //                                  documentation  Example method parameter docstring.\n\n @param n The parameter.\n @return The number + 42.\n
+//                                  documentation ```java\npublic static int methodParameter(int n)\n```
 //                                      ^ definition local 0
 //                                        documentation ```java\nint n\n```
     return n + 42;

@@ -10,12 +10,12 @@ import androidx.annotation.NonNull;
  */
 class ImmutableModelException extends RuntimeException {
 //    ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#
-//                            documentation ```java\nclass ImmutableModelException\n```
 //                            documentation  Thrown if a model is changed after it is added to an {@link com.airbnb.epoxy.EpoxyController}.\n
-//                            relationship is_implementation semanticdb maven jdk 11 java/lang/RuntimeException#
-//                            relationship is_implementation semanticdb maven jdk 11 java/lang/Exception#
-//                            relationship is_implementation semanticdb maven jdk 11 java/lang/Throwable#
+//                            documentation ```java\nclass ImmutableModelException\n```
 //                            relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
+//                            relationship is_implementation semanticdb maven jdk 11 java/lang/Exception#
+//                            relationship is_implementation semanticdb maven jdk 11 java/lang/RuntimeException#
+//                            relationship is_implementation semanticdb maven jdk 11 java/lang/Throwable#
 //                                    ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/RuntimeException#
   private static final String MODEL_CANNOT_BE_CHANGED_MESSAGE =
 //                     ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#

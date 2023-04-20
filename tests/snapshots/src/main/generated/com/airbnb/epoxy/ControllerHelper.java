@@ -12,8 +12,8 @@ import java.util.List;
  */
 public abstract class ControllerHelper<T extends EpoxyController> {
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#
-//                                     documentation ```java\npublic abstract class ControllerHelper<T extends EpoxyController>\n```
 //                                     documentation  A helper class for {@link EpoxyController} to handle {@link\n com.airbnb.epoxy.AutoModel} models. This is only implemented by the generated classes created the\n annotation processor.\n
+//                                     documentation ```java\npublic abstract class ControllerHelper<T extends EpoxyController>\n```
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#`<init>`().
 //                                     documentation ```java\npublic ControllerHelper()\n```
 //                                     ^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#[T]
