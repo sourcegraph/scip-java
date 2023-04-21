@@ -27,7 +27,8 @@ jobs:
       - name: Upload index.scip
         uses: actions/upload-artifact@master
         with:
-          path: index.scip
+          path: target/sbt-sourcegraph/index.scip
+          name: index.scip
           if-no-files-found: error
 
       - name: Install src
