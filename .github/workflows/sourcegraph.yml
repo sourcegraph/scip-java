@@ -1,10 +1,10 @@
 name: Sourcegraph
 on:
   push:
-    branches:
-      - main
-
+    branches: ["main"]
+    tags: ["v*"]
   pull_request:
+    branches: ["*"]
 
 jobs:
   scip:
@@ -18,13 +18,24 @@ jobs:
           java-version: 8
           cache: 'sbt'
 
-      - name: Install src
-        run: yarn global add @sourcegraph/src
-
       - name: Publish CLI locally
         run: sbt publishLocal dumpScipJavaVersion
 
+      - name: Produce SCIP data of scip-java repository
+        run: sbt -Dscip-java-version=$(cat VERSION) sourcegraphCompile
+
+      - name: Upload index.scip
+        uses: actions/upload-artifact@master
+        with:
+          path: index.scip
+          if-no-files-found: error
+
+      - name: Install src
+        if: startsWith(github.ref, 'refs/tags/v') || (github.ref == 'refs/heads/main')
+        run: yarn global add @sourcegraph/src
+
       - name: Upload sourcegraph data
+        if: startsWith(github.ref, 'refs/tags/v') || (github.ref == 'refs/heads/main')
         run: sbt -Dscip-java-version=$(cat VERSION) sourcegraphUpload
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
