@@ -12,10 +12,9 @@ object Issue414 {
 //        documentation ```scala\ndef b(): Unit\n```
 //           ^^^^ reference semanticdb maven . . scala/Unit#
   }
-  val a: A =
-//    ^ definition semanticdb maven . . minimized/Issue414.a.
-//      documentation ```scala\nval a: A\n```
-//       ^ reference semanticdb maven . . minimized/Issue414.A#
+  val a1 =
+//    ^^ definition semanticdb maven . . minimized/Issue414.a1.
+//       documentation ```scala\nval a1: {}\n```
     new A {
 //      ^ definition local 0
 //        documentation ```scala\nfinal class $anon\n```
@@ -30,8 +29,17 @@ object Issue414 {
 //      ^^^^^ reference semanticdb maven . . scala/Predef.print().
       }
     }
-  println(a.b())
+  val a2: A = a1
+//    ^^ definition semanticdb maven . . minimized/Issue414.a2.
+//       documentation ```scala\nval a2: A\n```
+//        ^ reference semanticdb maven . . minimized/Issue414.A#
+//            ^^ reference semanticdb maven . . minimized/Issue414.a1.
+  println(a1.b())
 //^^^^^^^ reference semanticdb maven . . scala/Predef.println(+1).
-//        ^ reference semanticdb maven . . minimized/Issue414.a.
-//          ^ reference semanticdb maven . . minimized/Issue414.A#b().
+//        ^^ reference semanticdb maven . . minimized/Issue414.a1.
+//           ^ reference semanticdb maven . . minimized/Issue414.A#b().
+  println(a2.b())
+//^^^^^^^ reference semanticdb maven . . scala/Predef.println(+1).
+//        ^^ reference semanticdb maven . . minimized/Issue414.a2.
+//           ^ reference semanticdb maven . . minimized/Issue414.A#b().
 }
