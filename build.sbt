@@ -436,6 +436,8 @@ lazy val bench = project
 lazy val docs = project
   .in(file("scip-java-docs"))
   .settings(
+    publishLocal / skip := true,
+    publish / skip := true,
     moduleName := "scip-java-docs",
     mdocOut :=
       (ThisBuild / baseDirectory).value / "website" / "target" / "docs",
@@ -525,3 +527,12 @@ lazy val fatjarPackageSettings = List[Def.Setting[_]](
     ).transform(node).head
   }
 )
+
+lazy val dumpScipJavaVersion = taskKey[Unit](
+  "Dump the version of scip-java tool to a VERSION file"
+)
+dumpScipJavaVersion := {
+  val versionValue = (cli / version).value
+
+  IO.write((ThisBuild / baseDirectory).value / "VERSION", versionValue)
+}

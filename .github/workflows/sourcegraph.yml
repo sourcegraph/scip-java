@@ -21,8 +21,10 @@ jobs:
       - name: Install src
         run: yarn global add @sourcegraph/src
 
-      - name: sbt sourcegraphUpload
-        run: sbt sourcegraphUpload
+      - name: Publish CLI locally
+        run: sbt publishLocal dumpScipJavaVersion
 
+      - name: Upload sourcegraph data
+        run: sbt -Dscip-java-version=$(cat VERSION) sourcegraphUpload
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
