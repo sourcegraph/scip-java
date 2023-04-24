@@ -30,6 +30,7 @@ private[ujson] final class StringParser[J](s: String) extends CharParser[J]{
 //                                          documentation ```scala\ndef this(s: String)\n```
 //                                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#s.
 //                                           documentation ```scala\nprivate[this] val s: String\n```
+//                                           relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#`<init>`().(s)
 //                                         _ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#`<init>`().(s)
 //                                           documentation ```scala\ns: String \n```
 //                                           relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#s.

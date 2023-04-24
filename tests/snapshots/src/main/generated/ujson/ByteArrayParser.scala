@@ -41,6 +41,7 @@ final class ByteArrayParser[J](src: Array[Byte]) extends ByteParser[J]{
 //                              documentation ```scala\ndef this(src: Array[Byte])\n```
 //                             ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteArrayParser#src.
 //                                 documentation ```scala\nprivate[this] val src: Array[Byte]\n```
+//                                 relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteArrayParser#`<init>`().(src)
 //                             ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteArrayParser#`<init>`().(src)
 //                                 documentation ```scala\nsrc: Array[Byte] \n```
 //                                 relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteArrayParser#src.
