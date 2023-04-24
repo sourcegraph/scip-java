@@ -13,6 +13,14 @@ public class ScipTextDocument {
   public int id;
   public final Map<String, Semanticdb.SymbolInformation> symbols;
   public final Map<String, ResultIds> localSymbols;
+  // Map from symbols that have a definition occurrence to the list of symbols that have
+  // `is_definition` relationships to that symbol.
+  // This map is used to add `is_reference` relationships between all symbols in the list so that
+  // doing "Find references"
+  // on any of those symbols returns occurrences for all of the symbols in the "clique" (per
+  // https://en.wikipedia.org/wiki/Clique_(graph_theory)).
+  // See https://github.com/sourcegraph/sourcegraph/issues/50927 for more details.
+  public final Map<String, ArrayList<String>> definitionCliques = new HashMap<>();
 
   public ScipTextDocument(
       Path semanticdbPath, Semanticdb.TextDocument semanticdb, Path sourceroot) {
@@ -79,7 +87,7 @@ public class ScipTextDocument {
     }
   }
 
-  public static Semanticdb.TextDocument manifestOccurrencesForSyntheticSymbols(
+  public Semanticdb.TextDocument manifestOccurrencesForSyntheticSymbols(
       Semanticdb.TextDocument semanticdb) {
     if (semanticdb.getLanguage() != Semanticdb.Language.SCALA) {
       // It's only semanticdb-scalac that emits SymbolInformation for symbols that have no
@@ -98,6 +106,7 @@ public class ScipTextDocument {
       Semanticdb.SymbolInformation.Builder newInfo = Semanticdb.SymbolInformation.newBuilder(info);
       Semanticdb.SymbolOccurrence definition = definitionOccurrences.get(info.getSymbol());
       if (definition != null) {
+        // This symbol has a definition so it doesn't need an is_definition relationship.
         builder.addSymbols(newInfo);
         continue;
       }
@@ -105,6 +114,10 @@ public class ScipTextDocument {
         Semanticdb.SymbolOccurrence alternativeDefinition =
             definitionOccurrences.get(alternativeSymbol.getSymbol());
         if (alternativeDefinition != null) {
+          ArrayList<String> clique =
+              this.definitionCliques.computeIfAbsent(
+                  alternativeSymbol.getSymbol(), k -> new ArrayList<>());
+          clique.add(info.getSymbol());
           newInfo.addDefinitionRelationships(alternativeDefinition.getSymbol());
           break;
         }

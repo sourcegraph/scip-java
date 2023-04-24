@@ -125,6 +125,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                        documentation ```scala\ndef this(build: (T) => I)(factory: Factory[(String, I), T])\n```
 //                       ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#build.
 //                             documentation ```scala\nprivate[this] val build: (T) => I\n```
+//                             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#`<init>`().(build)
 //                       _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#`<init>`().(build)
 //                             documentation ```scala\nbuild: (T) => I \n```
 //                             relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#build.
@@ -133,6 +134,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
                         (implicit factory: Factory[(String, I), T])extends ObjVisitor[I, I] {
 //                                ^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#factory.
 //                                        documentation ```scala\nprivate[this] implicit val factory: Factory[(String, I), T]\n```
+//                                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#`<init>`().(factory)
 //                                _______ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#`<init>`().(factory)
 //                                        documentation ```scala\nimplicit factory: Factory[(String, I), T] \n```
 //                                        relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#factory.
@@ -221,6 +223,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                           documentation ```scala\ndef this(build: (T[I]) => I)(factory: Factory[I, T[I]])\n```
 //                          ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#build.
 //                                documentation ```scala\nprivate[this] val build: (T[I]) => I\n```
+//                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#`<init>`().(build)
 //                          _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#`<init>`().(build)
 //                                documentation ```scala\nbuild: (T[I]) => I \n```
 //                                relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#build.
@@ -230,6 +233,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
                            (implicit factory: Factory[I, T[I]]) extends ArrVisitor[I, I]{
 //                                   ^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#factory.
 //                                           documentation ```scala\nprivate[this] implicit val factory: Factory[I, T[I]]\n```
+//                                           relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#`<init>`().(factory)
 //                                   _______ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#`<init>`().(factory)
 //                                           documentation ```scala\nimplicit factory: Factory[I, T[I]] \n```
 //                                           relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#factory.

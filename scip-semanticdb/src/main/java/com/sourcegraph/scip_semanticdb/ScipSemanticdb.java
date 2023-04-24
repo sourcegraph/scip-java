@@ -9,6 +9,7 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
 import com.sourcegraph.Scip;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.*;
@@ -126,7 +127,7 @@ public class ScipSemanticdb {
           continue;
         }
         Package pkg = packages.packageForSymbol(info.getSymbol()).orElse(Package.EMPTY);
-        Scip.SymbolInformation.Builder tinfo =
+        Scip.SymbolInformation.Builder scipInfo =
             Scip.SymbolInformation.newBuilder().setSymbol(typedSymbol(info.getSymbol(), pkg));
 
         for (int i = 0; i < info.getDefinitionRelationshipsCount(); i++) {
@@ -137,7 +138,8 @@ public class ScipSemanticdb {
           Package definitionSymbolPkg =
               packages.packageForSymbol(definitionSymbol).orElse(Package.EMPTY);
           SymbolInformation definitionInfo = symtab.symbols.get(definitionSymbol);
-          tinfo.addRelationships(
+
+          scipInfo.addRelationships(
               Scip.Relationship.newBuilder()
                   .setSymbol(typedSymbol(definitionSymbol, definitionSymbolPkg))
                   .setIsDefinition(true)
@@ -145,7 +147,14 @@ public class ScipSemanticdb {
                       definitionInfo != null
                           && definitionInfo.getDisplayName().equals(info.getDisplayName())
                           && supportsReferenceRelationship(info)));
+
+          addReferenceRelationships(
+              symtab, info, scipInfo, doc.definitionCliques.get(definitionSymbol), packages);
         }
+
+        addReferenceRelationships(
+            symtab, info, scipInfo, doc.definitionCliques.get(info.getSymbol()), packages);
+
         for (int i = 0; i < info.getOverriddenSymbolsCount(); i++) {
           String overriddenSymbol = info.getOverriddenSymbols(i);
           if (overriddenSymbol.isEmpty()) {
@@ -156,7 +165,7 @@ public class ScipSemanticdb {
           }
           Package overriddenSymbolPkg =
               packages.packageForSymbol(overriddenSymbol).orElse(Package.EMPTY);
-          tinfo.addRelationships(
+          scipInfo.addRelationships(
               Scip.Relationship.newBuilder()
                   .setSymbol(typedSymbol(overriddenSymbol, overriddenSymbolPkg))
                   .setIsImplementation(true)
@@ -166,15 +175,42 @@ public class ScipSemanticdb {
           String language =
               doc.semanticdb.getLanguage().toString().toLowerCase(Locale.ROOT).intern();
           String signature = new SignatureFormatter(info, symtab).formatSymbol();
-          tinfo.addDocumentation("```" + language + "\n" + signature + "\n```");
+          scipInfo.addDocumentation("```" + language + "\n" + signature + "\n```");
         }
         String documentation = info.getDocumentation().getMessage();
         if (!documentation.isEmpty()) {
-          tinfo.addDocumentation(documentation);
+          scipInfo.addDocumentation(documentation);
         }
-        tdoc.addSymbols(tinfo);
+        tdoc.addSymbols(scipInfo);
       }
       writer.emitTyped(Scip.Index.newBuilder().addDocuments(tdoc).build());
+    }
+  }
+
+  private void addReferenceRelationships(
+      Symtab symtab,
+      SymbolInformation info,
+      Scip.SymbolInformation.Builder scipInfo,
+      @Nullable ArrayList<String> clique,
+      PackageTable packages) {
+    if (clique == null) {
+      return;
+    }
+    for (String symbol : clique) {
+      if (symbol.equals(info.getSymbol())) {
+        continue;
+      }
+      SymbolInformation otherInfo = symtab.symbols.get(symbol);
+      if (otherInfo == null) {
+        continue;
+      }
+      if (!symbol.endsWith(".apply().")
+          && !otherInfo.getDisplayName().equals(info.getDisplayName())) {
+        continue;
+      }
+      Package pkg = packages.packageForSymbol(symbol).orElse(Package.EMPTY);
+      scipInfo.addRelationships(
+          Scip.Relationship.newBuilder().setSymbol(typedSymbol(symbol, pkg)).setIsReference(true));
     }
   }
 

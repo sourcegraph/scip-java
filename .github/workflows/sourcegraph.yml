@@ -17,9 +17,9 @@ jobs:
 
       - uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: "temurin"
           java-version: 8
-          cache: 'sbt'
+          cache: "sbt"
 
       - name: Publish CLI locally
         run: sbt publishLocal dumpScipJavaVersion
@@ -35,11 +35,9 @@ jobs:
           if-no-files-found: error
 
       - name: Install src
-        if: startsWith(github.ref, 'refs/tags/v') || (github.ref == 'refs/heads/main')
         run: yarn global add @sourcegraph/src
 
       - name: Upload sourcegraph data
-        if: startsWith(github.ref, 'refs/tags/v') || (github.ref == 'refs/heads/main')
         run: sbt -Dscip-java-version=$(cat VERSION) sourcegraphUpload
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

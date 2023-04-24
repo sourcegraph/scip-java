@@ -22,14 +22,23 @@ case class MinimizedCaseClass(value: String) {
 //                             documentation ```scala\ndef this(value: String)\n```
 //                            ^^^^^ definition semanticdb maven . . minimized/MinimizedCaseClass#value.
 //                                  documentation ```scala\nval value: String\n```
+//                                  relationship is_reference semanticdb maven . . minimized/MinimizedCaseClass#`<init>`().(value)
+//                                  relationship is_reference semanticdb maven . . minimized/MinimizedCaseClass#copy().(value)
+//                                  relationship is_reference semanticdb maven . . minimized/MinimizedCaseClass.apply().(value)
 //                            _____ synthetic_definition semanticdb maven . . minimized/MinimizedCaseClass#copy().(value)
 //                                  documentation ```scala\ndefault value: String \n```
+//                                  relationship is_reference semanticdb maven . . minimized/MinimizedCaseClass#`<init>`().(value)
 //                                  relationship is_reference is_definition semanticdb maven . . minimized/MinimizedCaseClass#value.
+//                                  relationship is_reference semanticdb maven . . minimized/MinimizedCaseClass.apply().(value)
 //                            _____ synthetic_definition semanticdb maven . . minimized/MinimizedCaseClass#`<init>`().(value)
 //                                  documentation ```scala\nvalue: String \n```
+//                                  relationship is_reference semanticdb maven . . minimized/MinimizedCaseClass#copy().(value)
 //                                  relationship is_reference is_definition semanticdb maven . . minimized/MinimizedCaseClass#value.
+//                                  relationship is_reference semanticdb maven . . minimized/MinimizedCaseClass.apply().(value)
 //                            _____ synthetic_definition semanticdb maven . . minimized/MinimizedCaseClass.apply().(value)
 //                                  documentation ```scala\nvalue: String \n```
+//                                  relationship is_reference semanticdb maven . . minimized/MinimizedCaseClass#`<init>`().(value)
+//                                  relationship is_reference semanticdb maven . . minimized/MinimizedCaseClass#copy().(value)
 //                                  relationship is_reference is_definition semanticdb maven . . minimized/MinimizedCaseClass#value.
 //                                   ^^^^^^ reference semanticdb maven . . scala/Predef.String#
   def this() = this(value = "value")
@@ -41,6 +50,7 @@ case class MinimizedCaseClass(value: String) {
 object MinimizedCaseClass {
 //     ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedCaseClass.
 //                        documentation ```scala\nobject MinimizedCaseClass\n```
+//                        relationship is_reference semanticdb maven . . minimized/MinimizedCaseClass.apply().
 //     __________________ synthetic_definition semanticdb maven . . minimized/MinimizedCaseClass.apply().
 //                        documentation ```scala\ndef apply(value: String): MinimizedCaseClass\n```
 //                        relationship is_definition semanticdb maven . . minimized/MinimizedCaseClass.
