@@ -95,11 +95,11 @@ class SemanticdbGradlePluginFunctionalTest {
     @ParameterizedTest()
     @ValueSource(strings = [
         "7.3.1_8",
-//        "7.3.1_11",
-//        "7.3.1_17",
+        "7.3.1_11",
+        "7.3.1_17",
         "8.1.1_8",
-//        "8.1.1_11",
-//        "8.1.1_17"
+        "8.1.1_11",
+        "8.1.1_17"
     ])
     fun `mixed java and scala project`(versions: String) {
         var splits = versions.split('_')
@@ -121,7 +121,7 @@ class SemanticdbGradlePluginFunctionalTest {
                 
             }
             dependencies {
-                implementation 'org.scala-lang:scala-library:2.13.10'
+                implementation 'org.scala-lang:scala-library:2.13.8'
             }
         """.trimIndent())
 
@@ -152,17 +152,16 @@ class SemanticdbGradlePluginFunctionalTest {
 
         // Run the build
         val runner = GradleRunner.create()
-        runner.forwardOutput()
-        runner.withPluginClasspath()
-        runner.withArguments("compileJava", "compileScala")
-        runner.withProjectDir(projectDir)
-        runner.withGradleVersion(gradleVersion)
+        .forwardOutput()
+        .withPluginClasspath()
+        .withArguments("compileJava", "compileScala")
+        .withProjectDir(projectDir)
+        .withGradleVersion(gradleVersion)
 
         runner.run()
 
         val targetroot = projectDir.resolve("semanticdb-targetroot")
         val semanticdbFiles = java.nio.file.Files.walk(targetroot.toPath()).toList().filter { path -> path.toFile().isFile && path.fileName.toString().endsWith(".semanticdb") }
-        println(semanticdbFiles.toList())
 
         assertEquals(2, semanticdbFiles.count())
     }

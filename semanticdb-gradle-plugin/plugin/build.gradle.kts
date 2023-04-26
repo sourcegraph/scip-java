@@ -20,14 +20,9 @@ repositories {
     mavenCentral()
 }
 
+
 testing {
     suites {
-        // Configure the built-in test suite
-        val test by getting(JvmTestSuite::class) {
-            // Use Kotlin Test test framework
-            useKotlinTest("1.8.10")
-        }
-
         // Create a new test suite
         val functionalTest by registering(JvmTestSuite::class) {
             // Use Kotlin Test test framework
@@ -38,7 +33,7 @@ testing {
                 implementation(project())
             }
 
-            dependencies{
+            dependencies {
                 implementation("org.junit.jupiter:junit-jupiter-params:5.1.0")
 
             }
@@ -46,7 +41,7 @@ testing {
             targets {
                 all {
                     // This test suite should run after the built-in test suite has run its tests
-                    testTask.configure { shouldRunAfter(test) } 
+//                    testTask.configure { shouldRunAfter(test) }
                 }
             }
         }

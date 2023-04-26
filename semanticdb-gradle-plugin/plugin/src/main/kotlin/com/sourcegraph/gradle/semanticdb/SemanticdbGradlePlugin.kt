@@ -15,25 +15,12 @@ import java.lang.Runtime.Version
  */
 class SemanticdbGradlePlugin : Plugin<Project> {
     override fun apply(project: Project) {
-        val exports = arrayOf(
-                "--add-exports",
-                "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-                "--add-exports",
-                "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-                "--add-exports",
-                "jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-                "--add-exports",
-                "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-                "--add-exports",
-                "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
-        )
-
-        val semanticdbJavacVersion = System.getProperties().getOrDefault("semanticdb.javac.version", "0.8.16")
+        val semanticdbJavacVersion =
+                System.getProperties().getOrDefault("semanticdb.javac.version", PluginConfig.defaultSemanticdbJavacVersion)
 
         project.repositories.add(project.repositories.mavenCentral())
         project.dependencies.add("compileOnly", "com.sourcegraph:semanticdb-javac:$semanticdbJavacVersion")
         project.dependencies.add("testCompileOnly", "com.sourcegraph:semanticdb-javac:$semanticdbJavacVersion")
-
 
 
         val targetRoot = project.rootDir.resolve("semanticdb-targetroot")
@@ -49,9 +36,9 @@ class SemanticdbGradlePlugin : Plugin<Project> {
                     val version = Version.parse(metadata.javaRuntimeVersion)
                     if (version.feature() >= 17) {
                         if (task.options.forkOptions.jvmArgs != null) {
-                            task.options.forkOptions.jvmArgs!!.addAll(exports)
+                            task.options.forkOptions.jvmArgs!!.addAll(PluginConfig.javacModuleExports)
                         } else {
-                            task.options.forkOptions.jvmArgs = exports.toList()
+                            task.options.forkOptions.jvmArgs = PluginConfig.javacModuleExports.toList()
                         }
                     }
                 }
@@ -66,7 +53,7 @@ class SemanticdbGradlePlugin : Plugin<Project> {
 
 
             val scalaVersion = findScalaVersion(project)
-            val semanticdbVersion = "4.5.13" // TODO: pick up from system properties
+            val semanticdbVersion = PluginConfig.semanticdbScalacVersions[scalaVersion]!!
             val semanticdbScalacDependency = "org.scalameta:semanticdb-scalac_$scalaVersion:$semanticdbVersion"
             val semanticdbScalac = project.configurations.detachedConfiguration(project.dependencies.create(semanticdbScalacDependency)).files.toList()[0]
 
