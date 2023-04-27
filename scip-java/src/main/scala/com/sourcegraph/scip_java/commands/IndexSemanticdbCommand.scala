@@ -36,6 +36,10 @@ final case class IndexSemanticdbCommand(
     @Description(
       "Whether to infer the location of SemanticDB files based as produced by Bazel"
     ) bazel: Boolean = true,
+    @Description(
+      "Whether to emit parent->child relationships for 'Find references' and 'Find implementations'. " +
+        "This flag exists as a workaround for the issue https://github.com/sourcegraph/sourcegraph/issues/50927"
+    ) emitInverseRelationships: Boolean = true,
     @Description("URL to a PackageHub instance")
     @Hidden
     packagehub: Option[String] = None,
@@ -85,7 +89,8 @@ final case class IndexSemanticdbCommand(
         format,
         parallel,
         packages.map(_.toPackageInformation).asJava,
-        buildKind
+        buildKind,
+        emitInverseRelationships
       )
     ScipSemanticdb.run(options)
     postPackages(packages)

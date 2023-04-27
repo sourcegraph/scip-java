@@ -60,6 +60,7 @@ class AsyncEpoxyDiffer {
     void onResult(@NonNull DiffResult result);
 //       ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#onResult().
 //                documentation ```java\npublic abstract void onResult(DiffResult result)\n```
+//                relationship is_reference is_implementation com/airbnb/epoxy/EpoxyControllerAdapter#onResult().
 //                 ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#
 //                                    ^^^^^^ definition local 0

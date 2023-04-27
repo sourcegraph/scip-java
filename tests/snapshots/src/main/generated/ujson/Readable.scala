@@ -22,6 +22,8 @@ trait Readable {
   def transform[T](f: Visitor[_, T]): T
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#transform().
 //              documentation ```scala\ndef transform(f: Visitor[local0, T[): T\n```
+//              relationship is_reference is_implementation ujson/Readable.fromTransformer#transform().
+//              relationship is_reference is_implementation ujson/Value#transform().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#transform().[T]
 //                documentation ```scala\nT\n```
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#transform().(f)

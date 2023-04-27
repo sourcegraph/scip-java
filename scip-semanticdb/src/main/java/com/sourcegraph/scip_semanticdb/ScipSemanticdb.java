@@ -65,7 +65,8 @@ public class ScipSemanticdb {
 
   private void runTyped(List<Path> files, PackageTable packages) {
     writer.emitTyped(typedMetadata());
-    filesStream(files).forEach(document -> processTypedDocument(document, packages));
+    InverseReferenceRelationships references = inverseReferenceRelationships(files);
+    filesStream(files).forEach(document -> processTypedDocument(document, packages, references));
   }
 
   private String typedSymbol(String symbol, Package pkg) {
@@ -82,7 +83,8 @@ public class ScipSemanticdb {
     return role == Role.DEFINITION || role == Role.SYNTHETIC_DEFINITION;
   }
 
-  private void processTypedDocument(Path path, PackageTable packages) {
+  private void processTypedDocument(
+      Path path, PackageTable packages, InverseReferenceRelationships references) {
     for (ScipTextDocument doc : parseTextDocument(path).collect(Collectors.toList())) {
       if (doc.semanticdb.getOccurrencesCount() == 0) {
         continue;
@@ -129,6 +131,19 @@ public class ScipSemanticdb {
         Package pkg = packages.packageForSymbol(info.getSymbol()).orElse(Package.EMPTY);
         Scip.SymbolInformation.Builder scipInfo =
             Scip.SymbolInformation.newBuilder().setSymbol(typedSymbol(info.getSymbol(), pkg));
+
+        // TODO: this can be removed once https://github.com/sourcegraph/sourcegraph/issues/50927 is
+        // fixed.
+        ArrayList<String> inverseReferences = references.map.get(info.getSymbol());
+        if (inverseReferences != null) {
+          for (String inverseReference : inverseReferences) {
+            scipInfo.addRelationships(
+                Scip.Relationship.newBuilder()
+                    .setSymbol(inverseReference)
+                    .setIsImplementation(true)
+                    .setIsReference(true));
+          }
+        }
 
         for (int i = 0; i < info.getDefinitionRelationshipsCount(); i++) {
           String definitionSymbol = info.getDefinitionRelationships(i);
@@ -243,6 +258,50 @@ public class ScipSemanticdb {
 
   private Stream<Path> filesStream(List<Path> files) {
     return options.parallel ? files.parallelStream() : files.stream();
+  }
+
+  private static class InverseReferenceRelationships {
+    public final Map<String, ArrayList<String>> map;
+
+    private InverseReferenceRelationships(Map<String, ArrayList<String>> map) {
+      this.map = map;
+    }
+  }
+
+  private InverseReferenceRelationships inverseReferenceRelationships(List<Path> files) {
+    if (!options.emitInverseRelationships) {
+        return new InverseReferenceRelationships(Collections.emptyMap());
+    }
+    return new InverseReferenceRelationships(
+        filesStream(files)
+            .flatMap(this::parseTextDocument)
+            .flatMap(this::referenceRelationships)
+            .collect(
+                Collectors.groupingBy(
+                    SymbolRelationship::getTo,
+                    Collectors.mapping(
+                        SymbolRelationship::getFrom, Collectors.toCollection(ArrayList::new)))));
+  }
+
+  private Stream<SymbolRelationship> referenceRelationships(ScipTextDocument document) {
+    ArrayList<SymbolRelationship> relationships = new ArrayList<>();
+    for (int i = 0; i < document.semanticdb.getSymbolsCount(); i++) {
+      SymbolInformation info = document.semanticdb.getSymbols(i);
+      if (!supportsReferenceRelationship(info)) {
+        continue;
+      }
+      if (info.getSymbol().isEmpty() || SemanticdbSymbols.isLocal(info.getSymbol())) {
+        continue;
+      }
+      for (int j = 0; j < info.getOverriddenSymbolsCount(); j++) {
+        String overriddenSymbol = info.getOverriddenSymbols(j);
+        if (SemanticdbSymbols.isLocal(overriddenSymbol)) {
+          continue;
+        }
+        relationships.add(new SymbolRelationship(info.getSymbol(), overriddenSymbol));
+      }
+    }
+    return relationships.stream();
   }
 
   private Set<String> exportSymbols(List<Path> files) {

@@ -185,6 +185,7 @@ public abstract class EpoxyModel<T> {
 //              ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getViewType().
 //                          documentation ```java\nprotected int getViewType()\n```
 //                          documentation  Get the view type to associate with this model in the recyclerview. For models that use a\n layout resource, the view type is simply the layout resource value by default.\n <p>\n If this returns 0 Epoxy will assign a unique view type for this model at run time.\n\n @see androidx.recyclerview.widget.RecyclerView.Adapter#getItemViewType(int)\n
+//                          relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelWithView#getViewType().
     return getLayout();
 //         ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getLayout().
   }
@@ -198,6 +199,7 @@ public abstract class EpoxyModel<T> {
 //               ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#buildView().
 //                         documentation ```java\nprotected unresolved_type buildView(unresolved_type parent)\n```
 //                         documentation  Create and return a new instance of a view for this model. By default a view is created by\n inflating the layout resource.\n
+//                         relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelWithView#buildView().
 //                          ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                  ^^^^^^^^^ reference semanticdb maven . . _root_/
 //                                            ^^^^^^ definition local 1
@@ -220,6 +222,9 @@ public abstract class EpoxyModel<T> {
 //            ^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#bind().
 //                 documentation ```java\npublic void bind(T view)\n```
 //                 documentation  Binds the current data to the given view. You should bind all fields including unset/empty\n fields to ensure proper recycling.\n
+//                 relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelGroup#bind().
+//                 relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelWithHolder#bind().
+//                 relationship is_reference is_implementation com/airbnb/epoxy/SimpleEpoxyModel#bind().
 //                  ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                          ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#[T]
 //                            ^^^^ definition local 2
@@ -239,6 +244,8 @@ public abstract class EpoxyModel<T> {
 //            ^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#bind(+1).
 //                 documentation ```java\npublic void bind(T view, List<Object> payloads)\n```
 //                 documentation  Similar to {@link #bind(Object)}, but provides a non null, non empty list of payloads\n describing what changed. This is the payloads list specified in the adapter's notifyItemChanged\n method. This is a useful optimization to allow you to only change part of a view instead of\n updating the whole thing, which may prevent unnecessary layout calls. If there are no payloads\n then {@link #bind(Object)} is called instead. This will only be used if the model is used with\n an {@link EpoxyAdapter}\n
+//                 relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelGroup#bind(+1).
+//                 relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelWithHolder#bind(+1).
 //                  ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                          ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#[T]
 //                            ^^^^ definition local 3
@@ -288,6 +295,8 @@ public abstract class EpoxyModel<T> {
 //            ^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#bind(+2).
 //                 documentation ```java\npublic void bind(T view, EpoxyModel<?> previouslyBoundModel)\n```
 //                 documentation  Similar to {@link #bind(Object)}, but provides a non null model which was previously bound to\n this view. This will only be called if the model is used with an {@link EpoxyController}.\n\n @param previouslyBoundModel This is a model with the same id that was previously bound. You can\n                             compare this previous model with the current one to see exactly\n                             what changed.\n                             <p>\n                             This model and the previously bound model are guaranteed to have\n                             the same id, but will not necessarily be of the same type depending\n                             on your implementation of {@link EpoxyController#buildModels()}.\n                             With common usage patterns of Epoxy they should be the same type,\n                             and will only differ if you are using different model classes with\n                             the same id.\n                             <p>\n                             Comparing the newly bound model with the previous model allows you\n                             to be more intelligent when binding your view. This may help you\n                             optimize view binding, or make it easier to work with animations.\n                             <p>\n                             If the new model and the previous model have the same view type\n                             (given by {@link EpoxyModel#getViewType()}), and if you are using\n                             the default ReyclerView item animator, the same view will be\n                             reused. This means that you only need to update the view to reflect\n                             the data that changed. If you are using a custom item animator then\n                             the view will be the same if the animator returns true in\n                             canReuseUpdatedViewHolder.\n                             <p>\n                             This previously bound model is taken as a payload from the diffing\n                             process, and follows the same general conditions for all\n                             recyclerview change payloads.\n
+//                 relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelGroup#bind(+2).
+//                 relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelWithHolder#bind(+2).
 //                  ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                          ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#[T]
 //                            ^^^^ definition local 5
@@ -315,6 +324,9 @@ public abstract class EpoxyModel<T> {
 //            ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#unbind().
 //                   documentation ```java\npublic void unbind(T view)\n```
 //                   documentation  Called when the view bound to this model is recycled. Subclasses can override this if their\n view should release resources when it's recycled.\n <p>\n Note that {@link #bind(Object)} can be called multiple times without an unbind call in between\n if the view has remained on screen to be reused across item changes. This means that you should\n not rely on unbind to clear a view or model's state before bind is called again.\n\n @see EpoxyAdapter#onViewRecycled(EpoxyViewHolder)\n
+//                   relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelGroup#unbind().
+//                   relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelWithHolder#unbind().
+//                   relationship is_reference is_implementation com/airbnb/epoxy/SimpleEpoxyModel#unbind().
 //                    ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                            ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#[T]
 //                              ^^^^ definition local 7
@@ -330,6 +342,7 @@ public abstract class EpoxyModel<T> {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#onVisibilityStateChanged().
 //                                     documentation ```java\npublic void onVisibilityStateChanged(int visibilityState, T view)\n```
 //                                     documentation  TODO link to the wiki\n\n @see OnVisibilityStateChanged annotation\n
+//                                     relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelWithHolder#onVisibilityStateChanged().
 //                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/VisibilityState#Visibility#
 //                                                     ^^^^^^^^^^^^^^^ definition local 8
 //                                                                     documentation ```java\n@Visibility\nint visibilityState\n```
@@ -348,6 +361,7 @@ public abstract class EpoxyModel<T> {
 //            ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#onVisibilityChanged().
 //                                documentation ```java\npublic void onVisibilityChanged(float percentVisibleHeight, float percentVisibleWidth, int visibleHeight, int visibleWidth, T view)\n```
 //                                documentation  TODO link to the wiki\n\n @see OnVisibilityChanged annotation\n
+//                                relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelWithHolder#onVisibilityChanged().
       @FloatRange(from = 0.0f, to = 100.0f) float percentVisibleHeight,
 //     ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#
 //                ^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#from().
@@ -615,6 +629,10 @@ public abstract class EpoxyModel<T> {
 //                       ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getDefaultLayout().
 //                                        documentation ```java\n@LayoutRes\nprotected abstract int getDefaultLayout()\n```
 //                                        documentation  Return the default layout resource to be used when creating views for this model. The resource\n will be inflated to create a view for the model; additionally the layout int is used as the\n views type in the RecyclerView.\n <p>\n This can be left unimplemented if you use the {@link EpoxyModelClass} annotation to define a\n layout.\n <p>\n This default value can be overridden with {@link #layout(int)} at runtime to change the layout\n dynamically.\n
+//                                        relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelGroup#getDefaultLayout().
+//                                        relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelWithView#getDefaultLayout().
+//                                        relationship is_reference is_implementation com/airbnb/epoxy/HiddenEpoxyModel#getDefaultLayout().
+//                                        relationship is_reference is_implementation com/airbnb/epoxy/SimpleEpoxyModel#getDefaultLayout().
 
   @NonNull
 // ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
@@ -623,6 +641,7 @@ public abstract class EpoxyModel<T> {
 //                  ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#[T]
 //                     ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#layout().
 //                            documentation ```java\n@NonNull\npublic EpoxyModel<T> layout(int layoutRes)\n```
+//                            relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelWithView#layout().
 //                             ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/LayoutRes#
 //                                           ^^^^^^^^^ definition local 30
 //                                                     documentation ```java\n@LayoutRes\nint layoutRes\n```
@@ -949,6 +968,8 @@ public abstract class EpoxyModel<T> {
   public boolean equals(Object o) {
 //               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#equals().
 //                      documentation ```java\n@Override\npublic boolean equals(Object o)\n```
+//                      relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelGroup#equals().
+//                      relationship is_reference is_implementation com/airbnb/epoxy/SimpleEpoxyModel#equals().
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#equals().
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                             ^ definition local 47
@@ -993,6 +1014,8 @@ public abstract class EpoxyModel<T> {
   public int hashCode() {
 //           ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#hashCode().
 //                    documentation ```java\n@Override\npublic int hashCode()\n```
+//                    relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelGroup#hashCode().
+//                    relationship is_reference is_implementation com/airbnb/epoxy/SimpleEpoxyModel#hashCode().
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#hashCode().
     int result = (int) (id ^ (id >>> 32));
 //      ^^^^^^ definition local 49
@@ -1023,6 +1046,9 @@ public abstract class EpoxyModel<T> {
 //           ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getSpanSize().
 //                       documentation ```java\npublic int getSpanSize(int totalSpanCount, int position, int itemCount)\n```
 //                       documentation  Subclasses can override this if they want their view to take up more than one span in a grid\n layout.\n\n @param totalSpanCount The number of spans in the grid\n @param position       The position of the model\n @param itemCount      The total number of items in the adapter\n
+//                       relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelGroup#getSpanSize().
+//                       relationship is_reference is_implementation com/airbnb/epoxy/HiddenEpoxyModel#getSpanSize().
+//                       relationship is_reference is_implementation com/airbnb/epoxy/SimpleEpoxyModel#getSpanSize().
 //                           ^^^^^^^^^^^^^^ definition local 50
 //                                          documentation ```java\nint totalSpanCount\n```
 //                                               ^^^^^^^^ definition local 51
@@ -1168,6 +1194,7 @@ public abstract class EpoxyModel<T> {
 //               ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#shouldSaveViewState().
 //                                   documentation ```java\npublic boolean shouldSaveViewState()\n```
 //                                   documentation  Whether the adapter should save the state of the view bound to this model.\n
+//                                   relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelGroup#shouldSaveViewState(+1).
     return false;
   }
 
@@ -1184,6 +1211,7 @@ public abstract class EpoxyModel<T> {
 //               ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#onFailedToRecycleView().
 //                                     documentation ```java\npublic boolean onFailedToRecycleView(T view)\n```
 //                                     documentation  Called if the RecyclerView failed to recycle this model's view. You can take this opportunity\n to clear the animation(s) that affect the View's transient state and return <code>true</code>\n so that the View can be recycled. Keep in mind that the View in question is already removed\n from the RecyclerView.\n\n @return True if the View should be recycled, false otherwise\n @see EpoxyAdapter#onFailedToRecycleView(androidx.recyclerview.widget.RecyclerView.ViewHolder)\n
+//                                     relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelWithHolder#onFailedToRecycleView().
 //                                      ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                              ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#[T]
 //                                                ^^^^ definition local 61
@@ -1200,6 +1228,8 @@ public abstract class EpoxyModel<T> {
 //            ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#onViewAttachedToWindow().
 //                                   documentation ```java\npublic void onViewAttachedToWindow(T view)\n```
 //                                   documentation  Called when this model's view is attached to the window.\n\n @see EpoxyAdapter#onViewAttachedToWindow(androidx.recyclerview.widget.RecyclerView.ViewHolder)\n
+//                                   relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelGroup#onViewAttachedToWindow().
+//                                   relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelWithHolder#onViewAttachedToWindow().
 //                                    ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                            ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#[T]
 //                                              ^^^^ definition local 62
@@ -1217,6 +1247,8 @@ public abstract class EpoxyModel<T> {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#onViewDetachedFromWindow().
 //                                     documentation ```java\npublic void onViewDetachedFromWindow(T view)\n```
 //                                     documentation  Called when this model's view is detached from the the window.\n\n @see EpoxyAdapter#onViewDetachedFromWindow(androidx.recyclerview.widget.RecyclerView\n .ViewHolder)\n
+//                                     relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelGroup#onViewDetachedFromWindow().
+//                                     relationship is_reference is_implementation com/airbnb/epoxy/EpoxyModelWithHolder#onViewDetachedFromWindow().
 //                                      ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                              ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#[T]
 //                                                ^^^^ definition local 63

@@ -7,10 +7,12 @@ trait Issue413 {
   val b: Int
 //    ^ definition semanticdb maven . . minimized/Issue413#b.
 //      documentation ```scala\nval b: Int\n```
+//      relationship is_reference is_implementation minimized/Issue413Subclass#b.
 //       ^^^ reference semanticdb maven . . scala/Int#
   val c: Int
 //    ^ definition semanticdb maven . . minimized/Issue413#c.
 //      documentation ```scala\nval c: Int\n```
+//      relationship is_reference is_implementation minimized/Issue413Subclass#c.
 //       ^^^ reference semanticdb maven . . scala/Int#
 }
 object Issue413 {
