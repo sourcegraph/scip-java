@@ -270,7 +270,7 @@ public class ScipSemanticdb {
 
   private InverseReferenceRelationships inverseReferenceRelationships(List<Path> files) {
     if (!options.emitInverseRelationships) {
-        return new InverseReferenceRelationships(Collections.emptyMap());
+      return new InverseReferenceRelationships(Collections.emptyMap());
     }
     return new InverseReferenceRelationships(
         filesStream(files)
