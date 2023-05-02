@@ -43,6 +43,14 @@ sealed trait Value extends Readable with geny.Writable{
   def value: Any
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#value().
 //          documentation ```scala\ndef value: Any\n```
+//          relationship is_reference is_implementation ujson/Arr#value.
+//          relationship is_reference is_implementation ujson/Bool#value().
+//          relationship is_reference is_implementation ujson/False.value().
+//          relationship is_reference is_implementation ujson/Null.value().
+//          relationship is_reference is_implementation ujson/Num#value.
+//          relationship is_reference is_implementation ujson/Obj#value.
+//          relationship is_reference is_implementation ujson/Str#value.
+//          relationship is_reference is_implementation ujson/True.value().
 //           ^^^ reference semanticdb maven . . scala/Any#
 
   /**
@@ -360,6 +368,8 @@ object Value extends AstTransformer[Value]{
     def apply(x: Value): Value
 //      ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#apply().
 //            documentation ```scala\ndef apply(x: Value): Value\n```
+//            relationship is_reference is_implementation ujson/Value.Selector.IntSelector#apply().
+//            relationship is_reference is_implementation ujson/Value.Selector.StringSelector#apply().
 //            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#apply().(x)
 //              documentation ```scala\nx: Value \n```
 //               ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
@@ -367,6 +377,8 @@ object Value extends AstTransformer[Value]{
     def update(x: Value, y: Value): Unit
 //      ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#update().
 //             documentation ```scala\ndef update(x: Value, y: Value): Unit\n```
+//             relationship is_reference is_implementation ujson/Value.Selector.IntSelector#update().
+//             relationship is_reference is_implementation ujson/Value.Selector.StringSelector#update().
 //             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#update().(x)
 //               documentation ```scala\nx: Value \n```
 //                ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
@@ -1355,6 +1367,8 @@ sealed abstract class Bool extends Value{
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool#value().
 //          documentation ```scala\ndef value: Boolean\n```
 //          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#value().
+//          relationship is_reference is_implementation ujson/False.value().
+//          relationship is_reference is_implementation ujson/True.value().
 //           ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
 }
 object Bool{

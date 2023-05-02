@@ -16,4 +16,5 @@ public abstract class AbstractClasses {
 //                ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                       ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AbstractClasses#abstractImplementation().
 //                                              documentation ```java\npublic abstract String abstractImplementation()\n```
+//                                              relationship is_reference is_implementation minimized/SubClasses#abstractImplementation().
 }

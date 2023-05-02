@@ -344,6 +344,11 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //            ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyController#requestModelBuild().
 //                              documentation ```java\npublic void requestModelBuild()\n```
 //                              documentation  Call this to request a model update. The controller will schedule a call to {@link\n #buildModels()} so that models can be rebuilt for the current data. Once a build is requested\n all subsequent requests are ignored until the model build runs. Therefore, the calling code\n need not worry about calling this multiple times in a row.\n <p>\n The exception is that the first time this is called on a new instance of {@link\n EpoxyController} it is run synchronously. This allows state to be restored and the initial view\n to be draw quicker.\n <p>\n If you would like to be alerted when models have finished building use\n {@link #addModelBuildListener(OnModelBuildFinishedListener)}\n
+//                              relationship is_reference is_implementation com/airbnb/epoxy/SimpleEpoxyController#requestModelBuild().
+//                              relationship is_reference is_implementation com/airbnb/epoxy/Typed2EpoxyController#requestModelBuild().
+//                              relationship is_reference is_implementation com/airbnb/epoxy/Typed3EpoxyController#requestModelBuild().
+//                              relationship is_reference is_implementation com/airbnb/epoxy/Typed4EpoxyController#requestModelBuild().
+//                              relationship is_reference is_implementation com/airbnb/epoxy/TypedEpoxyController#requestModelBuild().
     if (isBuildingModels()) {
 //      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#isBuildingModels().
       throw new IllegalEpoxyUsage("Cannot call `requestModelBuild` from inside `buildModels`");
@@ -450,6 +455,10 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                         ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyController#requestDelayedModelBuild().
 //                                                  documentation ```java\npublic void requestDelayedModelBuild(int delayMs)\n```
 //                                                  documentation  Call this to request a delayed model update. The controller will schedule a call to {@link\n #buildModels()} so that models can be rebuilt for the current data.\n <p>\n Using this to delay a model update may be helpful in cases where user input is causing many\n rapid changes in the models, such as typing. In that case, the view is already updated on\n screen and constantly rebuilding models is potentially slow and unnecessary. The downside to\n delaying the model build too long is that models will not be in sync with the data or view, and\n scrolling the view offscreen and back onscreen will cause the model to bind old data.\n <p>\n If a previous request is still pending it will be removed in favor of this new delay\n <p>\n Any call to {@link #requestModelBuild()} will override a delayed request.\n <p>\n In most cases you should use {@link #requestModelBuild()} instead of this.\n\n @param delayMs The time in milliseconds to delay the model build by. Should be greater than or\n                equal to 0. A value of 0 is equivalent to calling {@link #requestModelBuild()}\n
+//                                                  relationship is_reference is_implementation com/airbnb/epoxy/Typed2EpoxyController#requestDelayedModelBuild().
+//                                                  relationship is_reference is_implementation com/airbnb/epoxy/Typed3EpoxyController#requestDelayedModelBuild().
+//                                                  relationship is_reference is_implementation com/airbnb/epoxy/Typed4EpoxyController#requestDelayedModelBuild().
+//                                                  relationship is_reference is_implementation com/airbnb/epoxy/TypedEpoxyController#requestDelayedModelBuild().
 //                                                      ^^^^^^^ definition local 4
 //                                                              documentation ```java\nint delayMs\n```
     if (isBuildingModels()) {
@@ -648,6 +657,11 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                        ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyController#buildModels().
 //                                    documentation ```java\nprotected abstract void buildModels()\n```
 //                                    documentation  Subclasses should implement this to describe what models should be shown for the current state.\n Implementations should call either {@link #add(EpoxyModel)}, {@link\n EpoxyModel#addTo(EpoxyController)}, or {@link EpoxyModel#addIf(boolean, EpoxyController)} with\n the models that should be shown, in the order that is desired.\n <p>\n Once a model is added to the controller it should be treated as immutable and never modified\n again. This is necessary for adapter updates to be accurate. If "validateEpoxyModelUsage" is\n enabled then runtime validations will be done to make sure models are not changed.\n <p>\n You CANNOT call this method directly. Instead, call {@link #requestModelBuild()} to have the\n controller schedule an update.\n
+//                                    relationship is_reference is_implementation com/airbnb/epoxy/SimpleEpoxyController#buildModels().
+//                                    relationship is_reference is_implementation com/airbnb/epoxy/Typed2EpoxyController#buildModels().
+//                                    relationship is_reference is_implementation com/airbnb/epoxy/Typed3EpoxyController#buildModels().
+//                                    relationship is_reference is_implementation com/airbnb/epoxy/Typed4EpoxyController#buildModels().
+//                                    relationship is_reference is_implementation com/airbnb/epoxy/TypedEpoxyController#buildModels().
 
   int getFirstIndexOfModelInBuildingList(EpoxyModel<?> model) {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyController#getFirstIndexOfModelInBuildingList().
@@ -1397,6 +1411,10 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //            ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyController#moveModel().
 //                      documentation ```java\npublic void moveModel(int fromPosition, int toPosition)\n```
 //                      documentation  An optimized way to move a model from one position to another without rebuilding all models.\n This is intended to be used with {@link androidx.recyclerview.widget.ItemTouchHelper} to\n allow for efficient item dragging and rearranging. It cannot be\n <p>\n If you call this you MUST also update the data backing your models as necessary.\n <p>\n This will immediately change the model's position and notify the change to the RecyclerView.\n However, a delayed request to rebuild models will be scheduled for the future to guarantee that\n models are in sync with data.\n\n @param fromPosition Previous position of the item.\n @param toPosition   New position of the item.\n
+//                      relationship is_reference is_implementation com/airbnb/epoxy/Typed2EpoxyController#moveModel().
+//                      relationship is_reference is_implementation com/airbnb/epoxy/Typed3EpoxyController#moveModel().
+//                      relationship is_reference is_implementation com/airbnb/epoxy/Typed4EpoxyController#moveModel().
+//                      relationship is_reference is_implementation com/airbnb/epoxy/TypedEpoxyController#moveModel().
 //                          ^^^^^^^^^^^^ definition local 50
 //                                       documentation ```java\nint fromPosition\n```
 //                                            ^^^^^^^^^^ definition local 51

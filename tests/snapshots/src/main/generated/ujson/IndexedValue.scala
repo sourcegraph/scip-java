@@ -34,6 +34,14 @@ sealed trait IndexedValue {
   def index: Int
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue#index().
 //          documentation ```scala\ndef index: Int\n```
+//          relationship is_reference is_implementation ujson/IndexedValue.Arr#index.
+//          relationship is_reference is_implementation ujson/IndexedValue.False#index.
+//          relationship is_reference is_implementation ujson/IndexedValue.Null#index.
+//          relationship is_reference is_implementation ujson/IndexedValue.Num#index.
+//          relationship is_reference is_implementation ujson/IndexedValue.NumRaw#index.
+//          relationship is_reference is_implementation ujson/IndexedValue.Obj#index.
+//          relationship is_reference is_implementation ujson/IndexedValue.Str#index.
+//          relationship is_reference is_implementation ujson/IndexedValue.True#index.
 //           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 }
 

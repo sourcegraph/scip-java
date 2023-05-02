@@ -8,7 +8,6 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.PathMatcher;
-import java.sql.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -48,7 +47,8 @@ public class BazelBuildTool {
             ScipOutputFormat.TYPED_PROTOBUF,
             options.parallel,
             mavenPackages,
-            "");
+            "",
+            true);
     ScipSemanticdb.run(scipOptions);
     if (!scipOptions.reporter.hasErrors()) {
       System.out.println("done: " + scipOptions.output);

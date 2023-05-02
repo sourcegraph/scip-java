@@ -60,6 +60,7 @@ public class InnerClasses {
 //  ^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#[B]
 //    ^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerInterface#apply().
 //          documentation ```java\npublic abstract B apply(A a)\n```
+//          relationship is_reference is_implementation minimized/InnerClasses#InnerClass#apply().
 //          ^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#[A]
 //            ^ definition local 1
 //              documentation ```java\nA a\n```

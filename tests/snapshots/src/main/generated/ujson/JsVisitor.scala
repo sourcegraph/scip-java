@@ -27,6 +27,10 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 //    ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64().
 //                 documentation ```scala\ndef visitFloat64(d: Double, index: Int): J\n```
 //                 relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitFloat64().
+//                 relationship is_reference is_implementation ujson/BaseByteRenderer#visitFloat64().
+//                 relationship is_reference is_implementation ujson/BaseCharRenderer#visitFloat64().
+//                 relationship is_reference is_implementation ujson/IndexedValue.Builder.visitFloat64().
+//                 relationship is_reference is_implementation ujson/Value.visitFloat64().
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64().(d)
 //                   documentation ```scala\nd: Double \n```
 //                    ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Double#

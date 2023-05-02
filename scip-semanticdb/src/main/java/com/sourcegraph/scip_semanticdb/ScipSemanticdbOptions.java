@@ -17,6 +17,7 @@ public class ScipSemanticdbOptions {
   public final boolean parallel;
   public final List<MavenPackage> packages;
   public final String buildKind;
+  public final boolean emitInverseRelationships;
 
   public ScipSemanticdbOptions(
       List<Path> targetroots,
@@ -28,7 +29,8 @@ public class ScipSemanticdbOptions {
       ScipOutputFormat format,
       boolean parallel,
       List<MavenPackage> packages,
-      String buildKind) {
+      String buildKind,
+      boolean emitInverseRelationships) {
     this.targetroots = targetroots;
     this.output = output;
     this.sourceroot = sourceroot;
@@ -39,5 +41,6 @@ public class ScipSemanticdbOptions {
     this.parallel = parallel;
     this.packages = packages;
     this.buildKind = buildKind;
+    this.emitInverseRelationships = emitInverseRelationships;
   }
 }
