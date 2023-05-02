@@ -193,6 +193,18 @@ lazy val cli = project
         "org.scalameta" %% "ascii-graphs" % "0.1.2",
         "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % "1.5.21"
       ),
+    Compile / resourceGenerators +=
+      Def.task[Seq[File]] {
+        val gradlePluginSource = (ThisBuild / baseDirectory).value /
+          "semanticdb-gradle-plugin/plugin/src/main/kotlin/com/sourcegraph/gradle/semanticdb/SemanticdbGradlePlugin.kt"
+        val dest = (Compile / managedResourceDirectories).value.head
+
+        val pluginFile = dest / "SemanticdbGradlePlugin.kt"
+        IO.copyFile(gradlePluginSource, pluginFile)
+
+        Seq(pluginFile)
+
+      },
     (Compile / resourceGenerators) +=
       Def
         .task[Seq[File]] {

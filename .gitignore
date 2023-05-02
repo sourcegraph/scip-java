@@ -63,3 +63,5 @@ bazel-testlogs
 bazel-lsif-java
 
 VERSION
+
+semanticdb-gradle-plugin/gradle

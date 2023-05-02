@@ -10,6 +10,7 @@
 plugins {
     // Apply the Java Gradle plugin development plugin to add support for developing Gradle plugins
     `java-gradle-plugin`
+    `maven-publish`
 
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.8.10"
@@ -19,6 +20,22 @@ repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
+
+
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "com.sourcegraph.scip.gradle"
+            artifactId = "semanticdb-gradle-plugin"
+            version = "1.0.0"
+
+            from(components["java"])
+        }
+    }
+}
+
+
 
 
 testing {
