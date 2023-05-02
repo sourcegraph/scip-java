@@ -107,8 +107,8 @@ abstract class CharParser[J] extends upickle.core.BufferingCharParser{
   protected[this] def close(): Unit
 //                    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#close().
 //                          documentation ```scala\ndef close(): Unit\n```
-//                          relationship is_reference is_implementation ujson/CharSequenceParser#close().
-//                          relationship is_reference is_implementation ujson/StringParser#close().
+//                          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#close().
+//                          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#close().
 //                             ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
 
   /**

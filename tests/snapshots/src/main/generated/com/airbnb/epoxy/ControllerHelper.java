@@ -22,7 +22,7 @@ public abstract class ControllerHelper<T extends EpoxyController> {
   public abstract void resetAutoModels();
 //                     ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#resetAutoModels().
 //                                     documentation ```java\npublic abstract void resetAutoModels()\n```
-//                                     relationship is_reference is_implementation com/airbnb/epoxy/NoOpControllerHelper#resetAutoModels().
+//                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/NoOpControllerHelper#resetAutoModels().
 
   protected void validateModelHashCodesHaveNotChanged(T controller) {
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#validateModelHashCodesHaveNotChanged().

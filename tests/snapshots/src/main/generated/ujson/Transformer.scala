@@ -14,13 +14,13 @@ trait Transformer[I] {
   def transform[T](j: I, f: Visitor[_, T]): T
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().
 //              documentation ```scala\ndef transform(j: I, f: Visitor[local0, T[): T\n```
-//              relationship is_reference is_implementation ujson/ByteArrayParser.transform().
-//              relationship is_reference is_implementation ujson/ByteBufferParser.transform().
-//              relationship is_reference is_implementation ujson/CharSequenceParser.transform().
-//              relationship is_reference is_implementation ujson/IndexedValue.transform().
-//              relationship is_reference is_implementation ujson/InputStreamParser.transform().
-//              relationship is_reference is_implementation ujson/StringParser.transform().
-//              relationship is_reference is_implementation ujson/Value.transform().
+//              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteArrayParser.transform().
+//              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser.transform().
+//              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser.transform().
+//              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.transform().
+//              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/InputStreamParser.transform().
+//              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser.transform().
+//              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.transform().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().[T]
 //                documentation ```scala\nT\n```
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().(j)
