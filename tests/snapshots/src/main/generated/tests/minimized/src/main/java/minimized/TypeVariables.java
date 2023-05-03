@@ -31,7 +31,7 @@ public class TypeVariables {
     void mI();
 //       ^^ definition semanticdb maven . . minimized/TypeVariables#I#mI().
 //          documentation ```java\npublic abstract void mI()\n```
-//          relationship is_reference is_implementation minimized/TypeVariables#CT#mI().
+//          relationship is_reference is_implementation semanticdb maven . . minimized/TypeVariables#CT#mI().
   }
 
   static class CT extends C implements I {

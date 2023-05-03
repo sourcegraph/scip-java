@@ -137,9 +137,11 @@ public class ScipSemanticdb {
         ArrayList<String> inverseReferences = references.map.get(info.getSymbol());
         if (inverseReferences != null) {
           for (String inverseReference : inverseReferences) {
+            Package inverseReferencePkg =
+                packages.packageForSymbol(inverseReference).orElse(Package.EMPTY);
             scipInfo.addRelationships(
                 Scip.Relationship.newBuilder()
-                    .setSymbol(inverseReference)
+                    .setSymbol(typedSymbol(inverseReference, inverseReferencePkg))
                     .setIsImplementation(true)
                     .setIsReference(true));
           }

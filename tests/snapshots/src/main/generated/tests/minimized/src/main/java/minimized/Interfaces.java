@@ -11,7 +11,7 @@ public interface Interfaces {
 //^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //       ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Interfaces#abstractInterfaceMethod().
 //                               documentation ```java\npublic abstract String abstractInterfaceMethod()\n```
-//                               relationship is_reference is_implementation minimized/SubClasses#abstractInterfaceMethod().
+//                               relationship is_reference is_implementation semanticdb maven . . minimized/SubClasses#abstractInterfaceMethod().
 
   default String defaultInterfaceMethod() {
 //        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#

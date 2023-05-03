@@ -149,6 +149,10 @@ object ScipPrinters {
         caretCharacter * width
 
     val symbol = syntheticDefinition.fold(occ.getSymbol)(_.getSymbol)
+
+    // Fail the tests if the index contains symbols that don't parse as valid SCIP symbols.
+    val _ = ScipSymbol.parseOrThrowExceptionIfInvalid(symbol)
+
     out
       .append(comment)
       .append(indent)

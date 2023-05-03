@@ -107,9 +107,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
   protected[this] def close(): Unit
 //                    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#close().
 //                          documentation ```scala\ndef close(): Unit\n```
-//                          relationship is_reference is_implementation ujson/ByteArrayParser#close().
-//                          relationship is_reference is_implementation ujson/ByteBufferParser#close().
-//                          relationship is_reference is_implementation ujson/InputStreamParser#close().
+//                          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteArrayParser#close().
+//                          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#close().
+//                          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/InputStreamParser#close().
 //                             ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
 
   /**
