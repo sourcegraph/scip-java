@@ -73,7 +73,7 @@ public final class SemanticdbTaskListener implements TaskListener {
                 String.valueOf(e.getSourceFile().toUri().toString()), throwable);
       }
       reporter.exception(throwable, e.getCompilationUnit(), e.getCompilationUnit());
-      throw new RuntimeException("boom", throwable);
+      throw new RuntimeException(ex.getMessage(), throwable);
     }
   }
 
