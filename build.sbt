@@ -114,9 +114,8 @@ lazy val gradlePlugin = project
     libraryDependencies ++=
       List(
         "dev.gradleplugins" % "gradle-api" % V.gradle % Provided,
-        "dev.gradleplugins" % "gradle-test-kit" % V.gradle % Provided
-//        "org.gradle" % "gradle-core" % V.gradle % Provided,
-        //       "org.gradle" % "gradle-tooling-api" % V.gradle % Provided,
+        "dev.gradleplugins" % "gradle-test-kit" % V.gradle % Provided,
+        "org.jetbrains.kotlin" % "kotlin-gradle-plugin" % "1.5.31" % Provided
       ),
     buildInfoKeys :=
       Seq[BuildInfoKey](

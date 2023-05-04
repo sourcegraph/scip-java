@@ -45,21 +45,8 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         triggers += "compileJava"
         triggers += "compileTestJava"
 
-        project.getDependencies()
-
-        project
-          .getDependencies()
-          .add(
-            "compileOnly",
-            javacDep
-            // s"com.sourcegraph:semanticdb-javac:${javacPluginVersion}"
-          )
-        project
-          .getDependencies()
-          .add(
-            "testCompileOnly",
-            s"com.sourcegraph:semanticdb-javac:${javacPluginVersion}"
-          )
+        project.getDependencies().add("compileOnly", javacDep)
+        project.getDependencies().add("testCompileOnly", javacDep)
 
         project
           .getTasks()
@@ -173,8 +160,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                 .toList
                 .head
 
-            val args = java
-              .util
+            val args = ju
               .List
               .of(
                 s"-Xplugin:$semanticdbScalac",
@@ -185,16 +171,84 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                 "-Xplugin-require:semanticdb"
               )
 
+            val mutableArgs = new ju.ArrayList[String](args)
+
             val scalaCompileOptions = task.getScalaCompileOptions()
 
             if (scalaCompileOptions.getAdditionalParameters == null)
-              scalaCompileOptions.setAdditionalParameters(args)
+              scalaCompileOptions.setAdditionalParameters(mutableArgs)
             else
               scalaCompileOptions.getAdditionalParameters.addAll(args)
 
           }
 
       }
+
+      if (project.getPlugins().hasPlugin("kotlin")) {
+        triggers += "compileKotlin"
+        triggers += "compileTestKotlin"
+
+        project
+          .getTasks
+          .configureEach { task =>
+            if (task.getClass().getSimpleName().contains("KotlinCompile")) {
+
+              /**
+               * I we actually refer to KotlinCompile at _any_ point here, then
+               * plugin fails with NoClassDefFoundError - because the plugin
+               * classpath is murky
+               *
+               * We also don't want to bundle kotlin plugin with this one as it
+               * can cause all sorts of troubles.
+               *
+               * Instead, we commit the sins of reflection for our limited
+               * needs.
+               */
+              val compilerArgs = task
+                .asInstanceOf[{
+                    def getKotlinOptions(): {
+                      def getFreeCompilerArgs(): ju.List[String]
+                      def setFreeCompilerArgs(args: ju.List[String]): Unit
+                    }
+                  }
+                ]
+                .getKotlinOptions()
+
+              val semanticdbkotlincDependency =
+                s"com.sourcegraph:semanticdb-kotlinc:${BuildInfo.semanticdbKotlincVersion}"
+
+              val semanticdbKotlinc =
+                project
+                  .getConfigurations()
+                  .detachedConfiguration(
+                    project.getDependencies.create(semanticdbkotlincDependency)
+                  )
+                  .getFiles()
+                  .asScala
+                  .toList
+                  .head
+
+              val newArgs =
+                new ju.ArrayList[String](
+                  compilerArgs.getFreeCompilerArgs().size + 5
+                )
+              newArgs.addAll(compilerArgs.getFreeCompilerArgs())
+              newArgs.addAll(
+                ju.List
+                  .of(
+                    "-Xplugin=" + semanticdbKotlinc,
+                    "-P",
+                    s"plugin:semanticdb-kotlinc:sourceroot=$sourceRoot",
+                    "-P",
+                    s"plugin:semanticdb-kotlinc:targetroot=$targetRoot"
+                  )
+              )
+
+              compilerArgs.setFreeCompilerArgs(newArgs)
+            }
+          }
+      }
+
       tasks.register(
         "scipCompileAll",
         { task =>
