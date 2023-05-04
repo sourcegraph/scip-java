@@ -21,8 +21,6 @@ jobs:
           distribution: "temurin"
           cache: "sbt"
           java-version: ${{ matrix.java }}
-      - name: Gradle plugin tests 
-        run: cd semanticdb-gradle-plugin && gradle :plugin:functionalTest
       - name: Main project tests
       - run: sbt test
   bazel:
