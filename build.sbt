@@ -252,11 +252,7 @@ lazy val cli = project
             (agent / Compile / Keys.`package`).value,
             "semanticdb-agent.jar"
           )
-          addJar(
-            (gradlePlugin / Compile / assembly).value,
-            "gradle-plugin.jar"
-          )
-
+          addJar((gradlePlugin / Compile / assembly).value, "gradle-plugin.jar")
 
           IO.copy(outs)
           val props = new Properties()

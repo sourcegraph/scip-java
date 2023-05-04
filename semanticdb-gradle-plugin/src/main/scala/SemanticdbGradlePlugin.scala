@@ -19,10 +19,20 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
       project.getRepositories().add(project.getRepositories().mavenLocal())
 
       val extra = project.getExtensions().getExtraProperties()
+
       val targetRoot = extra
         .getProperties()
         .asScala
         .getOrElse("semanticdbTarget", project.getBuildDir())
+
+      val javacPluginVersion = BuildInfo.version
+      val javacDep = extra
+        .getProperties()
+        .asScala
+        .get("javacPluginJar")
+        .map(_.asInstanceOf[String])
+        .map[Object](jar => project.files(jar))
+        .getOrElse(s"com.sourcegraph:semanticdb-javac:${javacPluginVersion}")
 
       val sourceRoot = project.getRootDir()
 
@@ -30,19 +40,19 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
 
       val triggers = List.newBuilder[String]
 
-      project.files()
-
       if (project.getPlugins().hasPlugin("java")) {
 
         triggers += "compileJava"
         triggers += "compileTestJava"
 
-        val javacPluginVersion = BuildInfo.version
+        project.getDependencies()
+
         project
           .getDependencies()
           .add(
             "compileOnly",
-            s"com.sourcegraph:semanticdb-javac:${javacPluginVersion}"
+            javacDep
+            // s"com.sourcegraph:semanticdb-javac:${javacPluginVersion}"
           )
         project
           .getDependencies()

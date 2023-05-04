@@ -111,14 +111,6 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
   }
 
   private def initScript(tmp: Path): Path = {
-    // val executable =
-    //   toolchains.executableJavacPath() match {
-    //     case Some(path) =>
-    //       s"options.forkOptions.executable = '$path'"
-    //     case None =>
-    //       ""
-    //   }
-
     val agentpath = Embedded.agentJar(tmp)
     val pluginpath = Embedded.semanticdbJar(tmp)
     val gradlePluginPath = Embedded.gradlePluginJar(tmp)
@@ -138,6 +130,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
          |
          | allprojects {
          |   project.extra["semanticdbTarget"] = "$targetroot"
+         |   project.extra["javacPluginJar"] = "$pluginpath"
          |   apply<SemanticdbGradlePlugin>()
          | }
       """.stripMargin.trim
