@@ -14,6 +14,7 @@ lazy val V =
     val coursier = "2.0.8"
     val bsp = "2.0.0-M13"
     val moped = "0.1.11"
+    def gradle = "5.0"
     def scala213 = "2.13.10"
     def scala212 = "2.12.17"
     def scala211 = "2.11.12"
@@ -104,8 +105,48 @@ lazy val agent = project
         "Premain-Class" -> "com.sourcegraph.semanticdb_javac.SemanticdbAgent"
       )
   )
+lazy val gradlePlugin = project
+  .in(file("semanticdb-gradle-plugin"))
+  .settings(
+    name := "semanticdb-gradle",
+    scalaVersion := V.scala213,
+    buildInfoPackage := "com.sourcegraph.scip_java",
+    libraryDependencies ++=
+      List(
+        "dev.gradleplugins" % "gradle-api" % V.gradle % Provided,
+        "dev.gradleplugins" % "gradle-test-kit" % V.gradle % Provided
+//        "org.gradle" % "gradle-core" % V.gradle % Provided,
+        //       "org.gradle" % "gradle-tooling-api" % V.gradle % Provided,
+      ),
+    buildInfoKeys :=
+      Seq[BuildInfoKey](
+        version,
+        sbtVersion,
+        scalaVersion,
+        "javacModuleOptions" -> javacModuleOptions,
+        "semanticdbScalacVersions" ->
+          com
+            .sourcegraph
+            .sbtsourcegraph
+            .Versions
+            .cachedSemanticdbVersionsByScalaVersion,
+        "sbtSourcegraphVersion" ->
+          com.sourcegraph.sbtsourcegraph.BuildInfo.version,
+        "semanticdbVersion" -> V.scalameta,
+        "semanticdbKotlincVersion" -> V.semanticdbKotlinc,
+        "mtagsVersion" -> V.metals,
+        "scala211" -> V.scala211,
+        "scala212" -> V.scala212,
+        "scala213" -> V.scala213,
+        "scala3" -> V.scala3,
+        "bspVersion" -> V.bsp,
+        "minimalMillVersion" -> V.minimalMillVersion,
+        "millScipVersion" -> V.millScipVersion
+      )
+  )
+  .enablePlugins(BuildInfoPlugin)
 
-lazy val plugin = project
+lazy val javacPlugin = project
   .in(file("semanticdb-javac"))
   .settings(
     fatjarPackageSettings,
@@ -216,7 +257,7 @@ lazy val cli = project
           }
 
           addJar(
-            (plugin / Compile / Keys.`package`).value,
+            (javacPlugin / Compile / Keys.`package`).value,
             "semanticdb-plugin.jar"
           )
           addJar(
@@ -340,13 +381,13 @@ lazy val minimizedSettings = List[Def.Setting[_]](
 lazy val minimized = project
   .in(file("tests/minimized/.j11"))
   .settings(minimizedSettings, javaOnlySettings)
-  .dependsOn(agent, plugin)
+  .dependsOn(agent, javacPlugin)
   .disablePlugins(JavaFormatterPlugin)
 
 lazy val minimized8 = project
   .in(file("tests/minimized/.j8"))
   .settings(minimizedSettings, javaToolchainVersion := "8", javaOnlySettings)
-  .dependsOn(agent, plugin)
+  .dependsOn(agent, javacPlugin)
   .disablePlugins(JavaFormatterPlugin)
 
 def javacModuleOptions =
@@ -371,7 +412,7 @@ lazy val minimized17 = project
     javaToolchainVersion := "17",
     javacOptions ++= javacModuleOptions
   )
-  .dependsOn(agent, plugin)
+  .dependsOn(agent, javacPlugin)
   .disablePlugins(JavaFormatterPlugin)
 
 lazy val minimizedScala = project
@@ -404,7 +445,7 @@ lazy val unit = project
       ),
     buildInfoPackage := "tests"
   )
-  .dependsOn(plugin, cli)
+  .dependsOn(javacPlugin, cli)
   .enablePlugins(BuildInfoPlugin)
 
 lazy val buildTools = project
@@ -414,7 +455,7 @@ lazy val buildTools = project
     (Test / javaOptions) ++=
       List(
         s"-javaagent:${(agent / Compile / Keys.`package`).value}",
-        s"-Dsemanticdb.pluginpath=${(plugin / Compile / Keys.`package`).value}",
+        s"-Dsemanticdb.pluginpath=${(javacPlugin / Compile / Keys.`package`).value}",
         s"-Dsemanticdb.sourceroot=${(ThisBuild / baseDirectory).value}",
         s"-Dsemanticdb.targetroot=${(agent / Compile / target).value / "semanticdb-targetroot"}"
       )
@@ -548,3 +589,5 @@ dumpScipJavaVersion := {
 
   IO.write((ThisBuild / baseDirectory).value / "VERSION", versionValue)
 }
+
+ThisBuild / version := sys.env.get("CI").fold("dev")(_ => version.value)
