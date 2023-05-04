@@ -7,14 +7,16 @@ import org.gradle.api.tasks.scala.ScalaCompile
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 import com.sourcegraph.scip_java.BuildInfo
 import org.gradle.api.artifacts.Dependency
+import scala.jdk.CollectionConverters._
+
+import java.{util => ju}
 
 class SemanticdbGradlePlugin extends Plugin[Project] {
   override def apply(project: Project) = {
+    val gradle = new GradleVersion(project.getGradle().getGradleVersion())
+    println(gradle)
     project.afterEvaluate { project =>
       project.getRepositories().add(project.getRepositories().mavenCentral())
-
-      println(project.getName())
-      println(project.getPlugins())
 
       val targetRoot = project
         .getRootDir()
@@ -42,28 +44,40 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
           .getTasks()
           .withType(classOf[JavaCompile])
           .configureEach { task =>
-            // task.doFirst { task =>
-            println(
-              "Performing some setup before any other plugins are applied..."
-            )
+            if (gradle.is5 || (gradle.is6 && !gradle.is6_7_plus))
+              println(
+                task
+                  .asInstanceOf[{
+                      def getToolChain(): Any
+                    }
+                  ]
+                  .getToolChain()
+              )
+            else {
+              val version = task
+                .getJavaCompiler()
+                .get()
+                .getMetadata()
+                .getLanguageVersion()
+                .asInt()
 
-            // println(task.getToolChain())
-            // if (!metadata.javaRuntimeVersion.startsWith("1.8")) {
+              if (version >= 17) {
+                val newValue = task.getOptions().getForkOptions()
+                val jvmArgs =
+                  BuildInfo.javacModuleOptions.map(_.stripPrefix("-J")).asJava
 
-            //     val version = Version.parse(metadata.javaRuntimeVersion)
-            //     if (version.feature() >= 17) {
-            //         if (task.options.forkOptions.jvmArgs != null) {
-            //             task.options.forkOptions.jvmArgs!!.addAll(PluginConfig.javacModuleExports)
-            //         } else {
-            //             task.options.forkOptions.jvmArgs = PluginConfig.javacModuleExports.toList()
-            //         }
-            //     }
-            // }
-            // task.options.fork(emptyMap())
-            // task.options.compilerArgs.add("-Xplugin:semanticdb -targetroot:$targetRoot -sourceroot:$sourceRoot")
-            // }
+                newValue.getJvmArgs() match {
+                  case null =>
+                    newValue.setJvmArgs(jvmArgs)
+                  case other =>
+                    newValue.getJvmArgs().addAll(jvmArgs)
+
+                }
+              }
+            }
 
             task.getOptions().setFork(true)
+            task.getOptions().setIncremental(false)
             task
               .getOptions()
               .getCompilerArgs()
@@ -110,7 +124,6 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
           val semanticdbScalacDependency =
             s"org.scalameta:semanticdb-scalac_$scalaVersion:$semanticdbVersion"
 
-          import scala.jdk.CollectionConverters._
           val semanticdbScalac =
             project
               .getConfigurations()
@@ -143,7 +156,25 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
 
         }
 
-      println(targetRoot)
     }
+  }
+
+  class GradleVersion(ver: String) {
+    override def toString(): String = s"[GradleVersion: $ver]"
+    def is7 = ver.startsWith("7.")
+    def is6 = ver.startsWith("6.")
+    // 6.7 introduced toolchains support https://blog.gradle.org/java-toolchains
+    // And javaCompiler property
+    def is6_7_plus = {
+      ver match {
+        case s"6.$x.$y" if x.toInt >= 7 =>
+          true
+        case s"6.$x" if x.toInt >= 7 =>
+          true
+        case _ =>
+          false
+      }
+    }
+    def is5 = ver.startsWith("5.")
   }
 }
