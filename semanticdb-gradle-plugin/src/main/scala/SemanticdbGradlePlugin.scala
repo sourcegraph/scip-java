@@ -14,14 +14,10 @@ import java.{util => ju}
 class SemanticdbGradlePlugin extends Plugin[Project] {
   override def apply(project: Project) = {
     val gradle = new GradleVersion(project.getGradle().getGradleVersion())
-    println(gradle)
     project.afterEvaluate { project =>
       project.getRepositories().add(project.getRepositories().mavenCentral())
 
-      val targetRoot = project
-        .getRootDir()
-        .toPath
-        .resolve("semanticdb-targetroot")
+      val targetRoot = project.getBuildDir()
       val sourceRoot = project.getRootDir()
 
       if (project.getPlugins().hasPlugin("java")) {
