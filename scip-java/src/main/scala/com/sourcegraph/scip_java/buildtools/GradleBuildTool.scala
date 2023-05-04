@@ -10,7 +10,6 @@ import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
-import org.intellij.lang.annotations.Language
 import os.CommandResult
 
 class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
@@ -140,24 +139,16 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
 
     val agentpath = Embedded.agentJar(tmp)
     val pluginpath = Embedded.semanticdbJar(tmp)
-    def handleExceptionGroovySyntax(): String =
-      if (index.verbose)
-        "e.printStackTrace()"
-      else
-        ""
+    val gradlePluginPath = Embedded.gradlePluginJar(tmp)
     val dependenciesPath = targetroot.resolve("dependencies.txt")
     val kotlinSemanticdbVersion = BuildInfo.semanticdbKotlincVersion
     Files.deleteIfExists(dependenciesPath)
 
     val script =
-      """
+      s"""
         | initscript {
-        |     repositories {
-        |         mavenLocal()
-        |         mavenCentral()
-        |     }
         |     dependencies{ 
-        |         classpath("com.sourcegraph:semanticdb-gradle_2.13:dev")
+        |         classpath(files("${gradlePluginPath}"))
         |     }
         | }
         |
@@ -241,29 +232,6 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     //       |  }
     //       |  task $scipJavaDependencies(type: WriteDependencies)
     //       |}
-    //       |def scipJavaSemanticdbScalacVersions(scalaVersion) {
-    //       |  ${semanticdbScalacGroovySyntax()}[scalaVersion]
-    //       |}
-    //       |def scipJavaScalaVersion(project, configurations) {
-    //       |  for (config in configurations) {
-    //       |    if (config.name == "zinc") continue
-    //       |    if (config.canBeResolved) {
-    //       |      def artifacts = config.incoming.artifactView { view ->
-    //       |        view.lenient = true
-    //       |      }.artifacts
-    //       |      for (artifact in artifacts) {
-    //       |        def id = artifact.id.componentIdentifier
-    //       |        if (id instanceof org.gradle.api.artifacts.component.ModuleComponentIdentifier
-    //       |              && id.group == "org.scala-lang"
-    //       |              && id.module == "scala-library") {
-    //       |          return id.version
-    //       |        }
-    //       |      }
-    //       |    }
-    //       |  }
-    //       |  return null
-    //       |}
-    //       |
     //       |class WriteDependencies extends DefaultTask {
     //       |    @TaskAction
     //       |    void printResolvedDependencies() {

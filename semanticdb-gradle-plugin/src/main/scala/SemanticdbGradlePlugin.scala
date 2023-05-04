@@ -1,15 +1,15 @@
 package com.sourcegraph.gradle.semanticdb
 
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-import org.gradle.api.tasks.compile.JavaCompile
-import org.gradle.api.tasks.scala.ScalaCompile
-import org.gradle.api.artifacts.component.ModuleComponentIdentifier
-import com.sourcegraph.scip_java.BuildInfo
-import org.gradle.api.artifacts.Dependency
+import java.{util => ju}
+
 import scala.jdk.CollectionConverters._
 
-import java.{util => ju}
+import com.sourcegraph.scip_java.BuildInfo
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.api.artifacts.component.ModuleComponentIdentifier
+import org.gradle.api.tasks.compile.JavaCompile
+import org.gradle.api.tasks.scala.ScalaCompile
 
 class SemanticdbGradlePlugin extends Plugin[Project] {
   override def apply(project: Project) = {
