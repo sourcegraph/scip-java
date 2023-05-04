@@ -16,13 +16,28 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
     val gradle = new GradleVersion(project.getGradle().getGradleVersion())
     project.afterEvaluate { project =>
       project.getRepositories().add(project.getRepositories().mavenCentral())
+      project.getRepositories().add(project.getRepositories().mavenLocal())
 
-      val targetRoot = project.getBuildDir()
+      val extra = project.getExtensions().getExtraProperties()
+      val targetRoot = extra
+        .getProperties()
+        .asScala
+        .getOrElse("semanticdbTarget", project.getBuildDir())
+
       val sourceRoot = project.getRootDir()
+
+      val tasks = project.getTasks()
+
+      val triggers = List.newBuilder[String]
+
+      project.files()
 
       if (project.getPlugins().hasPlugin("java")) {
 
-        val javacPluginVersion = "0.8.18" //BuildInfo.version
+        triggers += "compileJava"
+        triggers += "compileTestJava"
+
+        val javacPluginVersion = BuildInfo.version
         project
           .getDependencies()
           .add(
@@ -50,26 +65,35 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                   .getToolChain()
               )
             else {
-              val version = task
-                .getJavaCompiler()
-                .get()
-                .getMetadata()
-                .getLanguageVersion()
-                .asInt()
+              val toolchainCompiler = Option(task.getJavaCompiler().getOrNull())
+                .map(_.getMetadata().getLanguageVersion().asInt())
 
-              if (version >= 17) {
-                val newValue = task.getOptions().getForkOptions()
-                val jvmArgs =
-                  BuildInfo.javacModuleOptions.map(_.stripPrefix("-J")).asJava
+              val host = System
+                .getProperty("java.version")
+                .split("\\.")
+                .headOption
+                .map(_.toInt)
 
-                newValue.getJvmArgs() match {
-                  case null =>
-                    newValue.setJvmArgs(jvmArgs)
-                  case other =>
-                    newValue.getJvmArgs().addAll(jvmArgs)
+              toolchainCompiler
+                .orElse(host)
+                .foreach { version =>
+                  if (version >= 17) {
+                    val newValue = task.getOptions().getForkOptions()
+                    val jvmArgs =
+                      BuildInfo
+                        .javacModuleOptions
+                        .map(_.stripPrefix("-J"))
+                        .asJava
 
+                    newValue.getJvmArgs() match {
+                      case null =>
+                        newValue.setJvmArgs(jvmArgs)
+                      case other =>
+                        newValue.getJvmArgs().addAll(jvmArgs)
+
+                    }
+                  }
                 }
-              }
             }
 
             task.getOptions().setFork(true)
@@ -88,75 +112,93 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
           }
       }
 
-      project
-        .getTasks()
-        .withType(classOf[ScalaCompile])
-        .configureEach { task =>
-          // Detect scala version
-          var foundScalaVersion = Option.empty[String]
-          project
-            .getConfigurations()
-            .forEach { conf =>
-              if (conf.isCanBeResolved() && conf.getName != "zinc") {
-                conf
-                  .getIncoming()
-                  .artifactView(view => view.lenient(true))
-                  .getArtifacts()
-                  .forEach { artif =>
-                    val id = artif.getId().getComponentIdentifier()
-                    id match {
-                      case id: ModuleComponentIdentifier =>
-                        if (
-                          id.getGroup() == "org.scala-lang" &&
-                          id.getModule() == "scala-library"
-                        )
-                          foundScalaVersion = Some(id.getVersion())
-                      case _ =>
-                    }
-                  }
-              }
-            }
+      if (project.getPlugins().hasPlugin("scala")) {
+        triggers += "compileScala"
+        triggers += "compileTestScala"
 
-          val scalaVersion = foundScalaVersion.get
-
-          val semanticdbVersion = BuildInfo
-            .semanticdbScalacVersions(scalaVersion)
-          val semanticdbScalacDependency =
-            s"org.scalameta:semanticdb-scalac_$scalaVersion:$semanticdbVersion"
-
-          val semanticdbScalac =
+        project
+          .getTasks()
+          .withType(classOf[ScalaCompile])
+          .configureEach { task =>
+            // Detect scala version
+            var foundScalaVersion = Option.empty[String]
             project
               .getConfigurations()
-              .detachedConfiguration(
-                project.getDependencies.create(semanticdbScalacDependency)
+              .forEach { conf =>
+                if (conf.isCanBeResolved() && conf.getName != "zinc") {
+                  conf
+                    .getIncoming()
+                    .artifactView(view => view.lenient(true))
+                    .getArtifacts()
+                    .forEach { artif =>
+                      val id = artif.getId().getComponentIdentifier()
+                      id match {
+                        case id: ModuleComponentIdentifier =>
+                          if (
+                            id.getGroup() == "org.scala-lang" &&
+                            id.getModule() == "scala-library"
+                          )
+                            foundScalaVersion = Some(id.getVersion())
+                        case _ =>
+                      }
+                    }
+                }
+              }
+
+            val scalaVersion = foundScalaVersion.get
+
+            val semanticdbVersion = BuildInfo
+              .semanticdbScalacVersions(scalaVersion)
+            val semanticdbScalacDependency =
+              s"org.scalameta:semanticdb-scalac_$scalaVersion:$semanticdbVersion"
+
+            val semanticdbScalac =
+              project
+                .getConfigurations()
+                .detachedConfiguration(
+                  project.getDependencies.create(semanticdbScalacDependency)
+                )
+                .getFiles()
+                .asScala
+                .toList
+                .head
+
+            val args = java
+              .util
+              .List
+              .of(
+                s"-Xplugin:$semanticdbScalac",
+                s"-P:semanticdb:sourceroot:$sourceRoot",
+                s"-P:semanticdb:targetroot:$targetRoot",
+                s"-P:semanticdb:exclude:(src/play/twirl|src/play/routes|src/${System.currentTimeMillis()})", // Ignore autogenerated Playframework files
+                "-P:semanticdb:failures:warning",
+                "-Xplugin-require:semanticdb"
               )
-              .getFiles()
-              .asScala
-              .toList
-              .head
 
-          val args = java
-            .util
-            .List
-            .of(
-              s"-Xplugin:$semanticdbScalac",
-              s"-P:semanticdb:sourceroot:$sourceRoot",
-              s"-P:semanticdb:targetroot:$targetRoot",
-              s"-P:semanticdb:exclude:(src/play/twirl|src/play/routes|src/${System.currentTimeMillis()})", // Ignore autogenerated Playframework files
-              "-P:semanticdb:failures:warning",
-              "-Xplugin-require:semanticdb"
-            )
+            val scalaCompileOptions = task.getScalaCompileOptions()
 
-          val scalaCompileOptions = task.getScalaCompileOptions()
+            if (scalaCompileOptions.getAdditionalParameters == null)
+              scalaCompileOptions.setAdditionalParameters(args)
+            else
+              scalaCompileOptions.getAdditionalParameters.addAll(args)
 
-          if (scalaCompileOptions.getAdditionalParameters == null)
-            scalaCompileOptions.setAdditionalParameters(args)
-          else
-            scalaCompileOptions.getAdditionalParameters.addAll(args)
+          }
+
+      }
+      tasks.register(
+        "scipCompileAll",
+        { task =>
+          triggers
+            .result()
+            .foldLeft(task) { case (tsk, trig) =>
+              tsk.dependsOn(tasks.getByName(trig))
+            }
 
         }
+      )
 
     }
+
   }
 
   class GradleVersion(ver: String) {

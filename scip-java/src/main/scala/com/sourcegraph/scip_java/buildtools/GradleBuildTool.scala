@@ -48,70 +48,52 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
         "gradle"
 
     TemporaryFiles.withDirectory(index) { tmp =>
-      val toolchains = GradleJavaToolchains
-        .fromWorkspace(this, index, gradleCommand, tmp)
-      toolchains.gradleVersion match {
-        case Some(gradleVersion)
-            if gradleVersion.startsWith("6.7") &&
-              toolchains.toolchains.nonEmpty =>
-          index
-            .app
-            .error(
-              "scip-java does not support Gradle 6.7 when used together with Java toolchains. " +
-                "To fix this problem, upgrade to Gradle version 6.8 or newer and try again."
-            )
-          CommandResult(1, Nil)
-        case _ =>
-          runCompileCommand(toolchains)
-      }
+      // val toolchains = GradleJavaToolchains
+      //   .fromWorkspace(this, index, gradleCommand, tmp)
+      // toolchains.gradleVersion match {
+      //   case Some(gradleVersion)
+      //       if gradleVersion.startsWith("6.7") &&
+      //         toolchains.toolchains.nonEmpty =>
+      //     index
+      //       .app
+      //       .error(
+      //         "scip-java does not support Gradle 6.7 when used together with Java toolchains. " +
+      //           "To fix this problem, upgrade to Gradle version 6.8 or newer and try again."
+      //       )
+      //     CommandResult(1, Nil)
+      //   case _ =>
+      runCompileCommand(tmp, gradleCommand)
+      // }
     }
   }
 
   private def runCompileCommand(
-      toolchains: GradleJavaToolchains
+      // toolchains: GradleJavaToolchains,
+      tmp: Path,
+      gradleCommand: String
   ): CommandResult = {
-    val script = initScript(toolchains, toolchains.tmp).toString
+    val script = initScript(tmp).toString
     val buildCommand = ListBuffer.empty[String]
-    buildCommand += toolchains.gradleCommand
+    buildCommand += gradleCommand
     buildCommand += "--no-daemon"
     buildCommand += "--init-script"
     buildCommand += script
-    if (toolchains.toolchains.nonEmpty) {
-      buildCommand += "-Porg.gradle.java.installations.auto-detect=false"
-      buildCommand += "-Porg.gradle.java.installations.auto-download=false"
-      buildCommand +=
-        s"-Porg.gradle.java.installations.paths=${toolchains.paths()}"
-    }
+    // if (toolchains.toolchains.nonEmpty) {
+    //   buildCommand += "-Porg.gradle.java.installations.auto-detect=false"
+    //   buildCommand += "-Porg.gradle.java.installations.auto-download=false"
+    //   buildCommand +=
+    //     s"-Porg.gradle.java.installations.paths=${toolchains.paths()}"
+    // }
     buildCommand += "-Pkotlin.compiler.execution.strategy=in-process"
-    buildCommand ++=
-      index.finalBuildCommand(
-        List[Option[String]](
-          Some("clean"),
-          if (toolchains.isJavaEnabled)
-            Some("compileTestJava")
-          else
-            None,
-          if (toolchains.isScalaEnabled)
-            Some("compileTestScala")
-          else
-            None,
-          if (toolchains.isKotlinEnabled)
-            Some("compileTestKotlin")
-          else
-            None,
-          if (toolchains.isKotlinMultiplatformEnabled)
-            Some("compileTestKotlinJvm")
-          else
-            None
-        ).flatten
-      )
-    buildCommand += scipJavaDependencies
+    buildCommand += s"-Dsemanticdb.targetroot=$targetroot"
+    buildCommand ++= index.finalBuildCommand(List("clean", "scipCompileAll"))
+    // buildCommand += scipJavaDependencies
 
     Files.walkFileTree(targetroot, new DeleteVisitor())
     val result = index.process(buildCommand, env = Map("TERM" -> "dumb"))
-    printDebugLogs(toolchains.tmp)
+    printDebugLogs(tmp)
     Embedded
-      .reportUnexpectedJavacErrors(index.app.reporter, toolchains.tmp)
+      .reportUnexpectedJavacErrors(index.app.reporter, tmp)
       .getOrElse(result)
   }
 
@@ -128,14 +110,14 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     }
   }
 
-  private def initScript(toolchains: GradleJavaToolchains, tmp: Path): Path = {
-    val executable =
-      toolchains.executableJavacPath() match {
-        case Some(path) =>
-          s"options.forkOptions.executable = '$path'"
-        case None =>
-          ""
-      }
+  private def initScript(tmp: Path): Path = {
+    // val executable =
+    //   toolchains.executableJavacPath() match {
+    //     case Some(path) =>
+    //       s"options.forkOptions.executable = '$path'"
+    //     case None =>
+    //       ""
+    //   }
 
     val agentpath = Embedded.agentJar(tmp)
     val pluginpath = Embedded.semanticdbJar(tmp)
@@ -146,17 +128,18 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
 
     val script =
       s"""
-        | initscript {
-        |     dependencies{ 
-        |         classpath(files("${gradlePluginPath}"))
-        |     }
-        | }
-        |
-        | import com.sourcegraph.gradle.semanticdb.SemanticdbGradlePlugin
-        |
-        | allprojects {
-        |   apply<SemanticdbGradlePlugin>()
-        | }
+         | initscript {
+         |     dependencies{ 
+         |         classpath(files("${gradlePluginPath}"))
+         |     }
+         | }
+         |
+         | import com.sourcegraph.gradle.semanticdb.SemanticdbGradlePlugin
+         |
+         | allprojects {
+         |   project.extra["semanticdbTarget"] = "$targetroot"
+         |   apply<SemanticdbGradlePlugin>()
+         | }
       """.stripMargin.trim
 
     // @Language("Groovy")
