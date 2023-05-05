@@ -114,6 +114,7 @@ lazy val gradlePlugin = project
     buildInfoPackage := "com.sourcegraph.scip_java",
     publish / skip := true,
     javaToolchainVersion := "8",
+    scalacOptions ++= Seq("-target:8", "-release", "8"),
     libraryDependencies ++=
       List(
         "dev.gradleplugins" % "gradle-api" % V.gradle % Provided,
