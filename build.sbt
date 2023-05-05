@@ -25,7 +25,7 @@ lazy val V =
     val testcontainers = "0.39.3"
     val requests = "0.6.5"
     val minimalMillVersion = "0.10.0"
-    val millScipVersion = "0.3.0"
+    val millScipVersion = "0.3.2"
     val kotlinGradlePlugin = "1.5.31"
   }
 
