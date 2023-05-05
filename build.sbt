@@ -92,6 +92,7 @@ lazy val agent = project
   .settings(
     fatjarPackageSettings,
     javaOnlySettings,
+    javaToolchainVersion := "8",
     moduleName := "semanticdb-agent",
     libraryDependencies ++=
       List(
