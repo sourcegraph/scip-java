@@ -10,6 +10,10 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.scala.ScalaCompile
+import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.TaskAction
+import java.nio.file.Paths
+import java.nio.file.Files
 
 class SemanticdbGradlePlugin extends Plugin[Project] {
   override def apply(project: Project) = {
@@ -269,6 +273,8 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         }
       )
 
+      tasks.register("scipPrintDependencies", classOf[WriteDependencies])
+
     }
 
   }
@@ -290,5 +296,63 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
       }
     }
     def is5 = ver.startsWith("5.")
+  }
+}
+
+class WriteDependencies extends DefaultTask {
+  @TaskAction
+  def printResolvedDependencies() = {
+
+    val depsOut = Option(
+      getProject().getExtensions().getExtraProperties().get("dependenciesOut")
+    ).map(_.toString).map(Paths.get(_))
+
+    depsOut
+      .foreach(path => java.nio.file.Files.createDirectories(path.getParent()))
+
+    val deps = List.newBuilder[String]
+
+    getProject()
+      .getConfigurations()
+      .forEach { conf =>
+        if (conf.isCanBeResolved()) {
+          try {
+            val resolved = conf.getResolvedConfiguration()
+            resolved
+              .getResolvedArtifacts()
+              .forEach { artif =>
+                deps +=
+                  List(
+                    artif.getModuleVersion().getId().getGroup(),
+                    artif.getModuleVersion().getId().getName(),
+                    artif.getModuleVersion().getId().getVersion(),
+                    artif.getFile().getAbsolutePath()
+                  ).mkString("\t")
+
+              }
+          } catch {
+            case exc: Exception =>
+              println(
+                s"Skipping configuration '${conf
+                  .getName()}' due to resolution failure: ${exc.getMessage()}"
+              )
+          }
+
+        }
+      }
+
+    val dependencies = deps.result().distinct
+
+    depsOut match {
+      case None =>
+        dependencies.foreach(println)
+      case Some(path) =>
+        Files.write(
+          path,
+          dependencies.asJava,
+          java.nio.file.StandardOpenOption.APPEND,
+          java.nio.file.StandardOpenOption.CREATE
+        )
+    }
   }
 }

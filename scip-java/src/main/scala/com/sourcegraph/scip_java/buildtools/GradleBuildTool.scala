@@ -48,22 +48,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
         "gradle"
 
     TemporaryFiles.withDirectory(index) { tmp =>
-      // val toolchains = GradleJavaToolchains
-      //   .fromWorkspace(this, index, gradleCommand, tmp)
-      // toolchains.gradleVersion match {
-      //   case Some(gradleVersion)
-      //       if gradleVersion.startsWith("6.7") &&
-      //         toolchains.toolchains.nonEmpty =>
-      //     index
-      //       .app
-      //       .error(
-      //         "scip-java does not support Gradle 6.7 when used together with Java toolchains. " +
-      //           "To fix this problem, upgrade to Gradle version 6.8 or newer and try again."
-      //       )
-      //     CommandResult(1, Nil)
-      //   case _ =>
       runCompileCommand(tmp, gradleCommand)
-      // }
     }
   }
 
@@ -78,16 +63,12 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     buildCommand += "--no-daemon"
     buildCommand += "--init-script"
     buildCommand += script
-    // if (toolchains.toolchains.nonEmpty) {
-    //   buildCommand += "-Porg.gradle.java.installations.auto-detect=false"
-    //   buildCommand += "-Porg.gradle.java.installations.auto-download=false"
-    //   buildCommand +=
-    //     s"-Porg.gradle.java.installations.paths=${toolchains.paths()}"
-    // }
     buildCommand += "-Pkotlin.compiler.execution.strategy=in-process"
     buildCommand += s"-Dsemanticdb.targetroot=$targetroot"
-    buildCommand ++= index.finalBuildCommand(List("clean", "scipCompileAll"))
-    // buildCommand += scipJavaDependencies
+    buildCommand ++=
+      index.finalBuildCommand(
+        List("clean", "scipCompileAll", "scipPrintDependencies")
+      )
 
     Files.walkFileTree(targetroot, new DeleteVisitor())
     val result = index.process(buildCommand, env = Map("TERM" -> "dumb"))
@@ -131,6 +112,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
          | allprojects {
          |   project.extra["semanticdbTarget"] = "$targetroot"
          |   project.extra["javacPluginJar"] = "$pluginpath"
+         |   project.extra["dependenciesOut"] = "$dependenciesPath"
          |   apply<SemanticdbGradlePlugin>()
          | }
       """.stripMargin.trim
