@@ -43,7 +43,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
         val testName = title.withName(title.name + s"-gradle$gradleV")
         checkBuild(
           if (gradleV.startsWith("6."))
-            testName.tag(Java8_Or_11)
+            testName.tag(Java8Only)
           else
             testName,
           setup,
