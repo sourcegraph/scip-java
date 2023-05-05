@@ -39,14 +39,20 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
       extraArguments: List[String] = Nil
   ) = {
     gradleVersions.foreach { gradleV =>
-      checkBuild(
-        title.withName(title.name + s"-gradle$gradleV"),
-        setup,
-        expectedSemanticdbFiles = expectedSemanticdbFiles,
-        expectedPackages = expectedPackages,
-        initCommand = gradleVersion(gradleV),
-        extraArguments = extraArguments
-      )
+      {
+        val testName = title.withName(title.name + s"-gradle$gradleV")
+        checkBuild(
+          if (gradleV.startsWith("6."))
+            testName.tag(Java8_Or_11)
+          else
+            testName,
+          setup,
+          expectedSemanticdbFiles = expectedSemanticdbFiles,
+          expectedPackages = expectedPackages,
+          initCommand = gradleVersion(gradleV),
+          extraArguments = extraArguments
+        )
+      }
     }
   }
 
