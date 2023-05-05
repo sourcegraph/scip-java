@@ -111,6 +111,7 @@ lazy val gradlePlugin = project
     name := "semanticdb-gradle",
     scalaVersion := V.scala213,
     buildInfoPackage := "com.sourcegraph.scip_java",
+    javaToolchainVersion := "8",
     libraryDependencies ++=
       List(
         "dev.gradleplugins" % "gradle-api" % V.gradle % Provided,
