@@ -2,8 +2,16 @@ package tests
 
 import java.nio.file.Files
 import java.nio.file.StandardOpenOption
+import munit.TestOptions
 
 class GradleBuildToolSuite extends BaseBuildToolSuite {
+
+  val Gradle8 = "8.1.1"
+  val Gradle7 = "7.6.1"
+  val Gradle67 = "6.7"
+
+  val allGradle = List(Gradle8, Gradle7, Gradle67)
+  val allJava = List("8", "11", "17")
 
   def gradleVersion(version: String = ""): List[String] = {
     createEmptyBuildScript()
@@ -24,6 +32,24 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
       StandardOpenOption.TRUNCATE_EXISTING,
       StandardOpenOption.CREATE
     )
+  }
+
+  def checkGradleBuild(
+      title: TestOptions,
+      setup: String,
+      gradleVersions: List[String] = allGradle,
+      expectedSemanticdbFiles: Int = 0,
+      expectedPackages: String = ""
+  ) = {
+    gradleVersions.foreach { gradleV =>
+      checkBuild(
+        title.withName(title.name + s"-gradle$gradleV"),
+        setup,
+        expectedSemanticdbFiles = expectedSemanticdbFiles,
+        expectedPackages = expectedPackages,
+        initCommand = gradleVersion(gradleV)
+      )
+    }
   }
 
   List("latest" -> "implementation", "4.0" -> "compile").foreach {
@@ -119,21 +145,25 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
     initCommand = gradleVersion("6.7")
   )
 
-  checkBuild(
-    "toolchains-6.8".tag(Java8Only),
-    """|/build.gradle
-       |apply plugin: 'java'
-       |java {
-       |  toolchain {
-       |    languageVersion = JavaLanguageVersion.of(8)
-       |  }
-       |}
-       |/src/main/java/Example.java
-       |public class Example {}
-       |""".stripMargin,
-    expectedSemanticdbFiles = 1,
-    initCommand = gradleVersion("6.8")
-  )
+  allJava.foreach { java =>
+    checkGradleBuild(
+      if (java == "8")
+        s"toolchains-$java".tag(Java8Only)
+      else
+        s"toolchains-$java",
+      s"""|/build.gradle
+          |apply plugin: 'java'
+          |java {
+          |  toolchain {
+          |    languageVersion = JavaLanguageVersion.of($java)
+          |  }
+          |}
+          |/src/main/java/Example.java
+          |public class Example {}
+          |""".stripMargin,
+      expectedSemanticdbFiles = 1
+    )
+  }
 
   checkBuild(
     "explicit",
@@ -242,8 +272,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
     initCommand = gradleVersion("6.8.3")
   )
 
-  checkBuild(
-    "scala",
+  checkGradleBuild(
+    s"scala",
     """|/build.gradle
        |plugins {
        |    id 'scala'
@@ -267,11 +297,10 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |package foo
        |class ExampleSuite {}
        |""".stripMargin,
-    4,
-    initCommand = gradleVersion()
+    expectedSemanticdbFiles = 4
   )
 
-  checkBuild(
+  checkGradleBuild(
     "kotlin",
     """|/build.gradle
        |plugins {
@@ -293,11 +322,11 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |package foo
        |class ExampleSuite {}
        |""".stripMargin,
-    4,
-    initCommand = gradleVersion()
+    expectedSemanticdbFiles = 4,
+    gradleVersions = List(Gradle67, Gradle7)
   )
 
-  checkBuild(
+  checkGradleBuild(
     "implementation-deps",
     """|/settings.gradle
        |rootProject.name = 'marklogic-examples'
@@ -339,8 +368,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
          |maven:org.jetbrains.kotlin:kotlin-stdlib:1.6.20
          |maven:org.jetbrains:annotations:13.0
          |maven:org.slf4j:slf4j-api:1.7.36
-         |""".stripMargin,
-    initCommand = gradleVersion()
+         |""".stripMargin
   )
 
   List("8", "11").foreach { version =>
