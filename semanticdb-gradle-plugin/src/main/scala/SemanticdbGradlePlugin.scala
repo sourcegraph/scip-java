@@ -184,26 +184,34 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
 
       }
 
-      if (project.getPlugins().hasPlugin("kotlin")) {
-        triggers += "compileKotlin"
-        triggers += "compileTestKotlin"
+      val isKotlinMultiplatform = project
+        .getPlugins()
+        .asScala
+        .exists(_.getClass().getName().contains("KotlinMultiplatform"))
+
+      if (project.getPlugins().hasPlugin("kotlin") || isKotlinMultiplatform) {
+        if (isKotlinMultiplatform) {
+          triggers += "compileKotlinJvm"
+          triggers += "compileTestKotlinJvm"
+        } else {
+          triggers += "compileKotlin"
+          triggers += "compileTestKotlin"
+        }
 
         project
           .getTasks
           .configureEach { task =>
             if (task.getClass().getSimpleName().contains("KotlinCompile")) {
 
-              /**
-               * I we actually refer to KotlinCompile at _any_ point here, then
-               * plugin fails with NoClassDefFoundError - because the plugin
-               * classpath is murky
-               *
-               * We also don't want to bundle kotlin plugin with this one as it
-               * can cause all sorts of troubles.
-               *
-               * Instead, we commit the sins of reflection for our limited
-               * needs.
-               */
+              // I we actually refer to KotlinCompile at _any_ point here, then
+              // plugin fails with NoClassDefFoundError - because the plugin
+              // classpath is murky
+              //
+              // We also don't want to bundle kotlin plugin with this one as it
+              // can cause all sorts of troubles.
+              //
+              // Instead, we commit the sins of reflection for our limited
+              // needs.
               val compilerArgs = task
                 .asInstanceOf[{
                     def getKotlinOptions(): {
