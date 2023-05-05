@@ -22,7 +22,7 @@ jobs:
           cache: "sbt"
           java-version: ${{ matrix.java }}
       - name: Main project tests
-      - run: sbt test
+        run: sbt test
   bazel:
     runs-on: ubuntu-latest
     steps:
