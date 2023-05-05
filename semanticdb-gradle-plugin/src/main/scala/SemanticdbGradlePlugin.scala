@@ -32,9 +32,11 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
 
       val javacPluginVersion = BuildInfo.version
 
-      val javacDep = extraProperties
+      val javacPluginJar = extraProperties
         .get("javacPluginJar")
         .map(_.asInstanceOf[String])
+
+      val javacDep = javacPluginJar
         .map[Object](jar => project.files(jar))
         .getOrElse(s"com.sourcegraph:semanticdb-javac:${javacPluginVersion}")
 
@@ -50,8 +52,20 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         triggers += "compileJava"
         triggers += "compileTestJava"
 
-        project.getDependencies().add("compileOnly", javacDep)
-        project.getDependencies().add("testCompileOnly", javacDep)
+        val compilerPluginAdded =
+          try {
+            project.getDependencies().add("compileOnly", javacDep)
+            project.getDependencies().add("testCompileOnly", javacDep)
+            true
+          } catch {
+            case exc: Exception =>
+              System
+                .err
+                .println(
+                  s"Failed to add compiler plugin to javac, will go through the agent route: ${exc.getMessage()}"
+                )
+              false
+          }
 
         project
           .getTasks()
@@ -100,15 +114,32 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
 
             task.getOptions().setFork(true)
             task.getOptions().setIncremental(false)
-            task
-              .getOptions()
-              .getCompilerArgs()
-              .addAll(
-                List(
-                  s"-Arandomtimestamp=${System.currentTimeMillis()}",
-                  s"-Xplugin:semanticdb -targetroot:$targetRoot -sourceroot:$sourceRoot"
-                ).asJava
-              )
+
+            if (compilerPluginAdded)
+              task
+                .getOptions()
+                .getCompilerArgs()
+                .addAll(
+                  List(
+                    s"-Arandomtimestamp=${System.currentTimeMillis()}",
+                    s"-Xplugin:semanticdb -targetroot:$targetRoot -sourceroot:$sourceRoot"
+                  ).asJava
+                )
+            else
+              agentJar.foreach { agentpath =>
+                javacPluginJar.foreach { pluginpath =>
+                  val jvmArgs = task.getOptions.getForkOptions.getJvmArgs
+
+                  jvmArgs.addAll(
+                    List(
+                      s"-javaagent:$agentpath",
+                      s"-Dsemanticdb.pluginpath=$pluginpath",
+                      s"-Dsemanticdb.sourceroot=$sourceRoot",
+                      s"-Dsemanticdb.targetroot=$targetRoot"
+                    ).asJava
+                  )
+                }
+              }
 
           }
       }
@@ -181,14 +212,16 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
             val jvmArgs = forkOptions.getJvmArgs()
 
             agentJar.foreach { agentpath =>
-              jvmArgs.addAll(
-                List(
-                  s"-javaagent:$agentpath",
-                  "-Dsemanticdb.pluginpath=$pluginpath",
-                  "-Dsemanticdb.sourceroot=$sourceroot",
-                  "-Dsemanticdb.targetroot=$targetroot"
-                ).asJava
-              )
+              javacPluginJar.foreach { pluginpath =>
+                jvmArgs.addAll(
+                  List(
+                    s"-javaagent:$agentpath",
+                    s"-Dsemanticdb.pluginpath=$pluginpath",
+                    s"-Dsemanticdb.sourceroot=$sourceRoot",
+                    s"-Dsemanticdb.targetroot=$targetRoot"
+                  ).asJava
+                )
+              }
             }
 
             if (scalaCompileOptions.getAdditionalParameters == null)
