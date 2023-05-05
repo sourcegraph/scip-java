@@ -14,18 +14,19 @@ lazy val V =
     val coursier = "2.0.8"
     val bsp = "2.0.0-M13"
     val moped = "0.1.11"
-    def gradle = "7.0"
-    def scala213 = "2.13.10"
-    def scala212 = "2.12.17"
-    def scala211 = "2.11.12"
-    def scala3 = "3.2.2"
-    def metals = "0.11.11"
-    def scalameta = "4.7.6"
-    def semanticdbKotlinc = "0.3.0"
-    def testcontainers = "0.39.3"
-    def requests = "0.6.5"
-    def minimalMillVersion = "0.10.0"
-    def millScipVersion = "0.3.0"
+    val gradle = "7.0"
+    val scala213 = "2.13.10"
+    val scala212 = "2.12.17"
+    val scala211 = "2.11.12"
+    val scala3 = "3.2.2"
+    val metals = "0.11.11"
+    val scalameta = "4.7.6"
+    val semanticdbKotlinc = "0.3.0"
+    val testcontainers = "0.39.3"
+    val requests = "0.6.5"
+    val minimalMillVersion = "0.10.0"
+    val millScipVersion = "0.3.0"
+    val kotlinGradlePlugin = "1.5.31"
   }
 
 inThisBuild(
@@ -117,7 +118,8 @@ lazy val gradlePlugin = project
       List(
         "dev.gradleplugins" % "gradle-api" % V.gradle % Provided,
         "dev.gradleplugins" % "gradle-test-kit" % V.gradle % Provided,
-        "org.jetbrains.kotlin" % "kotlin-gradle-plugin" % "1.5.31" % Provided
+        "org.jetbrains.kotlin" % "kotlin-gradle-plugin" % V.kotlinGradlePlugin %
+          Provided
       ),
     buildInfoKeys :=
       Seq[BuildInfoKey](
