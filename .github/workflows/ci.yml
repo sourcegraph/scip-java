@@ -22,7 +22,7 @@ jobs:
           cache: "sbt"
           java-version: ${{ matrix.java }}
       - name: Main project tests
-        run: sbt 'buildTools/testOnly tests.GradleBuildToolSuite -- *-gradle6'
+        run: sbt 'buildTools/testOnly tests.GradleBuildToolSuite -- *explicit-gradle6.7'
   bazel:
     runs-on: ubuntu-latest
     steps:
