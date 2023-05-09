@@ -318,6 +318,11 @@ lazy val cli = project
         env("PATH", "/opt/maven/bin:${PATH}")
         env("PATH", "/root/.local/share/coursier/bin:${PATH}")
 
+        // Mark all directories as safe for Git, so that it doesn't
+        // trigger this check and error:
+        // `detected dubious ownership in repository at <folder>`
+        run("git", "config", "--global", "--add", "safe.directory", "*")
+
         // Install `scip-java` binary.
         add(scipJavaWrapper, "/usr/local/bin/scip-java")
         add(binaryDistribution, "/app/scip-java")
