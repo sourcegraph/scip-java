@@ -46,10 +46,10 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
       val agentJar = extraProperties.get("javacAgentPath").map(_.toString)
 
       val tasks = project.getTasks()
-      
+
       // List of compilation commands that we will need to trigger
       // to index all the sources in the project we care about.
-      // This list is built progressively as we check for java, kotlin, and 
+      // This list is built progressively as we check for java, kotlin, and
       // scala plugins
       val triggers = List.newBuilder[String]
 
@@ -131,7 +131,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                   List(
                     // We add this to ensure that the sources are _always_
                     // recompiled, so that Gradle doesn't cache any state
-                    // TODO: before this plugin is published to Maven Central, 
+                    // TODO: before this plugin is published to Maven Central,
                     // we will need to revert this change - as it can have detrimental
                     // effect on people's builds
                     s"-Arandomtimestamp=${System.currentTimeMillis()}",
