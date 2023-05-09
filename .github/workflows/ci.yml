@@ -21,7 +21,18 @@ jobs:
           distribution: "temurin"
           cache: "sbt"
           java-version: ${{ matrix.java }}
-      - run: sbt test
+      - run: sbt test cli/docker
+
+      - name: Docker integration tests
+        run: |
+          gh repo clone scalameta/munit
+          gh repo clone circe/circe
+
+          docker run -v $PWD:/sources -w /sources sourcegraph/scip-java:latest index
+          file index.scip || (echo "index.scip doesn't exist!"; exit 1) 
+          
+          docker run -v $PWD:/sources -w /sources sourcegraph/scip-java:latest index
+          file index.scip || (echo "index.scip doesn't exist!"; exit 1) 
   bazel:
     runs-on: ubuntu-latest
     steps:
