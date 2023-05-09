@@ -7,6 +7,7 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    name: Tests
     strategy:
       fail-fast: false
       matrix:
@@ -22,6 +23,33 @@ jobs:
           cache: "sbt"
           java-version: ${{ matrix.java }}
       - run: sbt test
+
+  docker_test:
+    runs-on: ${{ matrix.os }}
+    name: Docker CLI tests
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          cache: "sbt"
+          java-version: 17
+
+      - name: Build Dockerised CLI
+        run: sbt cli/docker
+
+      - run: |
+          git clone https://github.com/circe/circe.git
+
+          docker run -v $PWD:/sources -w /sources sourcegraph/scip-java:latest scip-java index --cwd circe
+          file circe/index.scip || (echo "circe SCIP index doesn't exist!"; exit 1) 
+
+
   bazel:
     runs-on: ubuntu-latest
     steps:
@@ -36,6 +64,7 @@ jobs:
         working-directory: examples/bazel-example
       - run: du -h index.scip
         working-directory: examples/bazel-example
+
   check:
     runs-on: ubuntu-latest
     steps:
@@ -45,4 +74,4 @@ jobs:
           distribution: "temurin"
           java-version: 17
           cache: "sbt"
-      - run: sbt checkAll cli/docker
+      - run: sbt checkAll
