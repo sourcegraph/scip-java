@@ -16,7 +16,7 @@ import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.scala.ScalaCompile
 
 class SemanticdbGradlePlugin extends Plugin[Project] {
-  override def apply(project: Project) = {
+  override def apply(project: Project): Unit = {
     val gradle = new GradleVersion(project.getGradle().getGradleVersion())
     project.afterEvaluate { project =>
       project.getRepositories().add(project.getRepositories().mavenCentral())
@@ -38,13 +38,19 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
 
       val javacDep = javacPluginJar
         .map[Object](jar => project.files(jar))
+        // we fallback to javac plugin published to maven if there is no jar specified
+        // the JAR would usually be provided by auto-indexer
         .getOrElse(s"com.sourcegraph:semanticdb-javac:${javacPluginVersion}")
 
       val sourceRoot = project.getRootDir()
       val agentJar = extraProperties.get("javacAgentPath").map(_.toString)
 
       val tasks = project.getTasks()
-
+      
+      // List of compilation commands that we will need to trigger
+      // to index all the sources in the project we care about.
+      // This list is built progressively as we check for java, kotlin, and 
+      // scala plugins
       val triggers = List.newBuilder[String]
 
       if (project.getPlugins().hasPlugin("java")) {
@@ -59,6 +65,8 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
             true
           } catch {
             case exc: Exception =>
+              // If the `compileOnly` configuration has already been evaluated
+              // by the build, we need to fallback on agent injected into javac
               System
                 .err
                 .println(
@@ -121,6 +129,11 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                 .getCompilerArgs()
                 .addAll(
                   List(
+                    // We add this to ensure that the sources are _always_
+                    // recompiled, so that Gradle doesn't cache any state
+                    // TODO: before this plugin is published to Maven Central, 
+                    // we will need to revert this change - as it can have detrimental
+                    // effect on people's builds
                     s"-Arandomtimestamp=${System.currentTimeMillis()}",
                     s"-Xplugin:semanticdb -targetroot:$targetRoot -sourceroot:$sourceRoot"
                   ).asJava
@@ -345,7 +358,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
 
 class WriteDependencies extends DefaultTask {
   @TaskAction
-  def printResolvedDependencies() = {
+  def printResolvedDependencies(): Unit = {
 
     val depsOut = Option(
       getProject().getExtensions().getExtraProperties().get("dependenciesOut")
