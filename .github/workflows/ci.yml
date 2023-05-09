@@ -7,6 +7,7 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    name: Tests
     strategy:
       fail-fast: false
       matrix:
@@ -21,10 +22,28 @@ jobs:
           distribution: "temurin"
           cache: "sbt"
           java-version: ${{ matrix.java }}
-      - run: sbt test cli/docker
+      - run: sbt test
 
-      - name: Docker integration tests
-        run: |
+  docker_test:
+    runs-on: ${{ matrix.os }}
+    name: Docker CLI tests
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          cache: "sbt"
+          java-version: 17
+
+      - name: Build Dockerised CLI
+        run: sbt cli/docker
+
+      - run: |
           gh repo clone scalameta/munit
           gh repo clone circe/circe
 
@@ -33,6 +52,8 @@ jobs:
           
           docker run -v $PWD:/sources -w /sources sourcegraph/scip-java:latest index
           file index.scip || (echo "index.scip doesn't exist!"; exit 1) 
+
+
   bazel:
     runs-on: ubuntu-latest
     steps:
@@ -47,6 +68,7 @@ jobs:
         working-directory: examples/bazel-example
       - run: du -h index.scip
         working-directory: examples/bazel-example
+
   check:
     runs-on: ubuntu-latest
     steps:
@@ -56,4 +78,4 @@ jobs:
           distribution: "temurin"
           java-version: 17
           cache: "sbt"
-      - run: sbt checkAll cli/docker
+      - run: sbt checkAll
