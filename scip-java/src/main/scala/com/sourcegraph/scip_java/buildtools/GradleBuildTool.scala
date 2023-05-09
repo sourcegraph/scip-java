@@ -67,7 +67,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     buildCommand += s"-Dsemanticdb.targetroot=$targetroot"
     buildCommand ++=
       index.finalBuildCommand(
-        List("clean", "scipCompileAll", "scipPrintDependencies")
+        List("clean", "scipPrintDependencies", "scipCompileAll")
       )
 
     Files.walkFileTree(targetroot, new DeleteVisitor())
