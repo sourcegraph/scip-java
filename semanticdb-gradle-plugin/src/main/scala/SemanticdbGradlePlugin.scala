@@ -11,10 +11,10 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.scala.ScalaCompile
-import org.gradle.api.provider.Property
 
 class SemanticdbGradlePlugin extends Plugin[Project] {
   override def apply(project: Project): Unit = {
