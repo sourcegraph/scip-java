@@ -122,68 +122,11 @@ case class IndexCommand(
 
     buildTool match {
       case Some(auto) if auto.equalsIgnoreCase("auto") =>
-        val usedInOrder = BuildTool
-          .autoOrdered(this)
-          .filter(_.usedInCurrentDirectory())
-
-        usedInOrder match {
-          case Nil =>
-            app.error(
-              "Build tool mode set to `auto`, but no supported build tools were detected"
-            )
-            1
-          case first :: rest =>
-            val restMessage = rest
-              .map(_.name)
-              .mkString(", other tools that were detected:  [", ", ", "]")
-
-            app.info(
-              s"Auto mode: `${first.name}` will be used in this workspace${restMessage}"
-            )
-
-            first.generateScip()
-        }
-
+        runAutoBuildTool()
       case _ =>
         matchingBuildTools match {
           case Nil =>
-            buildTool match {
-              case Some(explicit) if usedBuildTools.nonEmpty =>
-                val toFix =
-                  Levenshtein.closestCandidate(
-                    explicit,
-                    usedBuildTools.map(_.name)
-                  ) match {
-                    case Some(closest) =>
-                      s"Did you mean --build-tool=$closest?"
-                    case None =>
-                      "To fix this problem, run again with the --build-tool flag set to one of the detected build tools."
-                  }
-                val autoDetected = usedBuildTools.map(_.name).mkString(", ")
-                app.error(
-                  s"Automatically detected the build tool(s) $autoDetected but none of them match the explicitly provided flag '--build-tool=$explicit'. " +
-                    toFix
-                )
-              case _ =>
-                if (Files.isDirectory(workingDirectory)) {
-                  app.error(
-                    s"No build tool detected in workspace '$workingDirectory'. " +
-                      s"At the moment, the only supported build tools are: ${BuildTool.allNames}."
-                  )
-                } else {
-                  val cause =
-                    if (Files.exists(workingDirectory)) {
-                      s"Workspace '$workingDirectory' is not a directory"
-                    } else {
-                      s"The directory '$workingDirectory' does not exist"
-                    }
-                  app.error(
-                    cause +
-                      s". To fix this problem, make sure the working directory is an actual directory."
-                  )
-                }
-            }
-            1
+            unknownBuildTool(buildTool, usedBuildTools)
           case tool :: Nil =>
             tool.generateScip()
           case many =>
@@ -196,6 +139,73 @@ case class IndexCommand(
         }
     }
   }
+
+  private def unknownBuildTool(
+      buildTool: Option[String],
+      usedBuildTools: List[BuildTool]
+  ): Int = {
+    buildTool match {
+      case Some(explicit) if usedBuildTools.nonEmpty =>
+        val toFix =
+          Levenshtein
+            .closestCandidate(explicit, usedBuildTools.map(_.name)) match {
+            case Some(closest) =>
+              s"Did you mean --build-tool=$closest?"
+            case None =>
+              "To fix this problem, run again with the --build-tool flag set to one of the detected build tools."
+          }
+        val autoDetected = usedBuildTools.map(_.name).mkString(", ")
+        app.error(
+          s"Automatically detected the build tool(s) $autoDetected but none of them match the explicitly provided flag '--build-tool=$explicit'. " +
+            toFix
+        )
+      case _ =>
+        if (Files.isDirectory(workingDirectory)) {
+          app.error(
+            s"No build tool detected in workspace '$workingDirectory'. " +
+              s"At the moment, the only supported build tools are: ${BuildTool.allNames}."
+          )
+        } else {
+          val cause =
+            if (Files.exists(workingDirectory)) {
+              s"Workspace '$workingDirectory' is not a directory"
+            } else {
+              s"The directory '$workingDirectory' does not exist"
+            }
+          app.error(
+            cause +
+              s". To fix this problem, make sure the working directory is an actual directory."
+          )
+        }
+    }
+
+    1
+  }
+
+  private def runAutoBuildTool(): Int = {
+    val usedInOrder = BuildTool
+      .autoOrdered(this)
+      .filter(_.usedInCurrentDirectory())
+
+    usedInOrder match {
+      case Nil =>
+        app.error(
+          "Build tool mode set to `auto`, but no supported build tools were detected"
+        )
+        1
+      case first :: rest =>
+        val restMessage = rest
+          .map(_.name)
+          .mkString(", other tools that were detected:  [", ", ", "]")
+
+        app.info(
+          s"Auto mode: `${first.name}` will be used in this workspace${restMessage}"
+        )
+
+        first.generateScip()
+    }
+  }
+
 }
 
 object IndexCommand {
