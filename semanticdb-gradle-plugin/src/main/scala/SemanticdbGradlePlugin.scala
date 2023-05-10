@@ -11,6 +11,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.scala.ScalaCompile
@@ -79,18 +80,32 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
           .getTasks()
           .withType(classOf[JavaCompile])
           .configureEach { task =>
-            if (gradle.is5 || (gradle.is6 && !gradle.is6_7_plus))
-              println(
+            // If we run on JDK 17, we need to add special flags to the JVM
+            // to allow access to the compiler.
+
+            // JDK 17 support was only introduced in 7.3 so
+            // we don't need to do it for earlier versions
+            // https://docs.gradle.org/current/userguide/compatibility.html
+            if (!gradle.is5 && !gradle.is6) {
+              type JavaCompiler = {
+                type Metadata = {
+                  type LangVersion = {
+                    def asInt(): Int
+                  }
+                  def getLanguageVersion(): LangVersion
+                }
+                def getMetadata(): Metadata
+              }
+              type HasCompilerProperty = {
+                def getJavaCompiler(): Property[JavaCompiler]
+              }
+
+              val toolchainCompiler = Option(
                 task
-                  .asInstanceOf[{
-                      def getToolChain(): Any
-                    }
-                  ]
-                  .getToolChain()
-              )
-            else {
-              val toolchainCompiler = Option(task.getJavaCompiler().getOrNull())
-                .map(_.getMetadata().getLanguageVersion().asInt())
+                  .asInstanceOf[HasCompilerProperty]
+                  .getJavaCompiler()
+                  .getOrNull()
+              ).map(_.getMetadata().getLanguageVersion().asInt())
 
               val host = System
                 .getProperty("java.version")
@@ -339,6 +354,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
   class GradleVersion(ver: String) {
     override def toString(): String = s"[GradleVersion: $ver]"
     def is7 = ver.startsWith("7.")
+    def is8 = ver.startsWith("8.")
     def is6 = ver.startsWith("6.")
     // 6.7 introduced toolchains support https://blog.gradle.org/java-toolchains
     // And javaCompiler property
