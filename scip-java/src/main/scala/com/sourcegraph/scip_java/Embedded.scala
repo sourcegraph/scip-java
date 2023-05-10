@@ -14,6 +14,9 @@ object Embedded {
   def semanticdbJar(tmpDir: Path): Path =
     copyFile(tmpDir, "semanticdb-plugin.jar")
 
+  def gradlePluginJar(tmpDir: Path): Path =
+    copyFile(tmpDir, "gradle-plugin.jar")
+
   def agentJar(tmpDir: Path): Path = copyFile(tmpDir, "semanticdb-agent.jar")
   def coursier(tmpDir: Path): Path = {
     val result = copyFile(tmpDir, "scip-java/coursier")

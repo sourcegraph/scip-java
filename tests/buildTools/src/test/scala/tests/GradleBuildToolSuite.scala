@@ -3,16 +3,20 @@ package tests
 import java.nio.file.Files
 import java.nio.file.StandardOpenOption
 
+import munit.TestOptions
+
 class GradleBuildToolSuite extends BaseBuildToolSuite {
 
-  def gradleVersion(version: String = ""): List[String] = {
+  val Gradle8 = "8.1.1"
+  val Gradle7 = "7.6.1"
+  val Gradle67 = "6.7"
+
+  val allGradle = List(Gradle8, Gradle7, Gradle67)
+  val allJava = List("8", "11", "17")
+
+  def gradleVersion(version: String): List[String] = {
     createEmptyBuildScript()
-    if (version.isEmpty || version == "latest")
-      // Hardcode v7.6.1 since auto-indexing does not work for Gradle v8 at the moment.
-      // See https://github.com/sourcegraph/scip-java/issues/544
-      List("gradle", "wrapper", "--gradle-version", "7.6.1")
-    else
-      List("gradle", "wrapper", "--gradle-version", version)
+    List("gradle", "wrapper", "--gradle-version", version)
   }
 
   def createEmptyBuildScript(): Unit = {
@@ -24,6 +28,32 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
       StandardOpenOption.TRUNCATE_EXISTING,
       StandardOpenOption.CREATE
     )
+  }
+
+  def checkGradleBuild(
+      title: TestOptions,
+      setup: String,
+      gradleVersions: List[String] = allGradle,
+      expectedSemanticdbFiles: Int = 0,
+      expectedPackages: String = "",
+      extraArguments: List[String] = Nil
+  ) = {
+    gradleVersions.foreach { gradleV =>
+      {
+        val testName = title.withName(title.name + s"-gradle$gradleV")
+        checkBuild(
+          if (gradleV.startsWith("6."))
+            testName.tag(Java8Only)
+          else
+            testName,
+          setup,
+          expectedSemanticdbFiles = expectedSemanticdbFiles,
+          expectedPackages = expectedPackages,
+          initCommand = gradleVersion(gradleV),
+          extraArguments = extraArguments
+        )
+      }
+    }
   }
 
   List("latest" -> "implementation", "4.0" -> "compile").foreach {
@@ -74,68 +104,27 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
     )
   }
 
-  checkBuild(
-    "toolchains-latest",
-    """|/build.gradle
-       |apply plugin: 'java'
-       |java {
-       |  toolchain {
-       |    languageVersion = JavaLanguageVersion.of(8)
-       |  }
-       |}
-       |repositories { mavenCentral() }
-       |dependencies { implementation "junit:junit:4.13.1" }
-       |/src/main/java/Example.java
-       |import org.junit.Assert;
-       |public class Example {}
-       |/src/test/java/ExampleSuite.java
-       |public class ExampleSuite {}
-       |""".stripMargin,
-    2,
-    initCommand = gradleVersion()
-  )
+  allJava.foreach { java =>
+    checkGradleBuild(
+      if (java == "8")
+        s"toolchains-$java".tag(Java8Only)
+      else
+        s"toolchains-$java",
+      s"""|/build.gradle
+          |apply plugin: 'java'
+          |java {
+          |  toolchain {
+          |    languageVersion = JavaLanguageVersion.of($java)
+          |  }
+          |}
+          |/src/main/java/Example.java
+          |public class Example {}
+          |""".stripMargin,
+      expectedSemanticdbFiles = 1
+    )
+  }
 
-  checkBuild(
-    "toolchains-6.7".tag(Java8Only),
-    """|/build.gradle
-       |apply plugin: 'java'
-       |java {
-       |  toolchain {
-       |    languageVersion = JavaLanguageVersion.of(8)
-       |  }
-       |}
-       |repositories { mavenCentral() }
-       |dependencies { implementation "junit:junit:4.13.1" }
-       |/src/main/java/Example.java
-       |public class Example {}
-       |""".stripMargin,
-    expectedError = Some { error =>
-      assert(
-        clue(error).contains(
-          """error: scip-java does not support Gradle 6.7 when used together with Java toolchains. To fix this problem, upgrade to Gradle version 6.8 or newer and try again."""
-        )
-      )
-    },
-    initCommand = gradleVersion("6.7")
-  )
-
-  checkBuild(
-    "toolchains-6.8".tag(Java8Only),
-    """|/build.gradle
-       |apply plugin: 'java'
-       |java {
-       |  toolchain {
-       |    languageVersion = JavaLanguageVersion.of(8)
-       |  }
-       |}
-       |/src/main/java/Example.java
-       |public class Example {}
-       |""".stripMargin,
-    expectedSemanticdbFiles = 1,
-    initCommand = gradleVersion("6.8")
-  )
-
-  checkBuild(
+  checkGradleBuild(
     "explicit",
     """|/build.gradle
        |apply plugin: 'java'
@@ -146,12 +135,11 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |/pom.xml
        |<hello/>
        |""".stripMargin,
-    2,
-    extraArguments = List("--build-tool", "gradle"),
-    initCommand = gradleVersion()
+    expectedSemanticdbFiles = 2,
+    extraArguments = List("--build-tool", "gradle")
   )
 
-  checkBuild(
+  checkGradleBuild(
     "build-command",
     """|/build.gradle
        |apply plugin: 'java'
@@ -160,9 +148,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |/src/test/java/ExampleSuite.java
        |public class ExampleSuite {}
        |""".stripMargin,
-    1,
-    extraArguments = List("--", "compileJava"),
-    initCommand = gradleVersion()
+    expectedSemanticdbFiles = 1,
+    extraArguments = List("--", "compileJava")
   )
 
   checkBuild(
@@ -212,7 +199,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |/conf/routes
        |GET / controllers.HomeController.index
        |""".stripMargin,
-    2, // Two files because `conf/routes` generates a Java file.
+    expectedSemanticdbFiles =
+      2, // Two files because `conf/routes` generates a Java file.
     initCommand = gradleVersion("6.8")
   )
 
@@ -242,8 +230,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
     initCommand = gradleVersion("6.8.3")
   )
 
-  checkBuild(
-    "scala",
+  checkGradleBuild(
+    s"scala",
     """|/build.gradle
        |plugins {
        |    id 'scala'
@@ -267,11 +255,10 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |package foo
        |class ExampleSuite {}
        |""".stripMargin,
-    4,
-    initCommand = gradleVersion()
+    expectedSemanticdbFiles = 4
   )
 
-  checkBuild(
+  checkGradleBuild(
     "kotlin",
     """|/build.gradle
        |plugins {
@@ -293,11 +280,11 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |package foo
        |class ExampleSuite {}
        |""".stripMargin,
-    4,
-    initCommand = gradleVersion()
+    expectedSemanticdbFiles = 4,
+    gradleVersions = List(Gradle67, Gradle7)
   )
 
-  checkBuild(
+  checkGradleBuild(
     "implementation-deps",
     """|/settings.gradle
        |rootProject.name = 'marklogic-examples'
@@ -339,13 +326,12 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
          |maven:org.jetbrains.kotlin:kotlin-stdlib:1.6.20
          |maven:org.jetbrains:annotations:13.0
          |maven:org.slf4j:slf4j-api:1.7.36
-         |""".stripMargin,
-    initCommand = gradleVersion()
+         |""".stripMargin
   )
 
-  List("8", "11").foreach { version =>
-    checkBuild(
-      s"kotlin-jvm-toolchains-jdk-$version",
+  List("8", "11").foreach { java =>
+    checkGradleBuild(
+      s"kotlin-jvm-toolchains-jdk$java",
       s"""|/build.gradle
           |plugins {
           |    id 'java'
@@ -353,7 +339,7 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
           |}
           |java {
           |  toolchain {
-          |    languageVersion = JavaLanguageVersion.of($version)
+          |    languageVersion = JavaLanguageVersion.of($java)
           |  }
           |}
           |repositories { mavenCentral() }
@@ -361,14 +347,16 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
           |package foo
           |object Example {}
           |""".stripMargin,
-      1,
-      initCommand = gradleVersion()
+      expectedSemanticdbFiles = 1,
+      // Older Kotlin gradle plugins don't support Gradle 8:
+      // https://youtrack.jetbrains.com/issue/KT-55704/Cannot-use-TaskAction-annotation-on-method-AbstractKotlinCompile.execute-error-while-using-Gradle-8.0-rc-with-KGP-1.5.32
+      gradleVersions = List(Gradle67, Gradle7)
     )
   }
 
   List("jvm()" -> 2, "jvm { withJava() }" -> 4).foreach {
     case (jvmSettings, expectedSemanticdbFiles) =>
-      checkBuild(
+      checkGradleBuild(
         s"kotlin-multiplatform-$jvmSettings",
         s"""|/build.gradle
             |plugins {
@@ -402,8 +390,10 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
             |package foo
             |class ExampleJvmSuite {}
             |""".stripMargin,
-        expectedSemanticdbFiles,
-        initCommand = gradleVersion()
+        expectedSemanticdbFiles = expectedSemanticdbFiles,
+        // Older Kotlin gradle plugins don't support Gradle 8:
+        // https://youtrack.jetbrains.com/issue/KT-55704/Cannot-use-TaskAction-annotation-on-method-AbstractKotlinCompile.execute-error-while-using-Gradle-8.0-rc-with-KGP-1.5.32
+        gradleVersions = List(Gradle67, Gradle7)
       )
   }
 }
