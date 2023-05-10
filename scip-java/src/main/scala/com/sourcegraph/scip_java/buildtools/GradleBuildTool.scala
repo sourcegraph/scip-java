@@ -15,10 +15,14 @@ import os.CommandResult
 class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
 
   override def usedInCurrentDirectory(): Boolean = {
-    Files.isRegularFile(index.workingDirectory.resolve("settings.gradle")) ||
-    Files.isRegularFile(index.workingDirectory.resolve("gradlew")) ||
-    Files.isRegularFile(index.workingDirectory.resolve("build.gradle")) ||
-    Files.isRegularFile(index.workingDirectory.resolve("build.gradle.kts"))
+    val gradleFiles = List(
+      "settings.gradle",
+      "gradlew",
+      "build.gradle",
+      "build.gradle.kts"
+    )
+    gradleFiles
+      .exists(name => Files.isRegularFile(index.workingDirectory.resolve(name)))
   }
 
   override def generateScip(): Int = {

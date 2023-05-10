@@ -6,7 +6,7 @@ class MissingBuildToolSuite extends BaseBuildToolSuite {
     "basic",
     List("index"),
     expectedOutput =
-      s"""|error: No build tool detected in workspace '${java.io.File.separator}workingDirectory'. At the moment, the only supported build tools are: Gradle, Maven, sbt, mill.
+      s"""|error: No build tool detected in workspace '${java.io.File.separator}workingDirectory'. At the moment, the only supported build tools are: Maven, Gradle, sbt, mill.
           |""".stripMargin,
     workingDirectoryLayout = ""
   )
@@ -15,7 +15,7 @@ class MissingBuildToolSuite extends BaseBuildToolSuite {
     "ambiguous",
     List("index"),
     expectedOutput =
-      """|error: Multiple build tools detected: Gradle, Maven. To fix this problem, use the '--build-tool=BUILD_TOOL_NAME' flag to specify which build tool to run.
+      """|error: Multiple build tools detected: Maven, Gradle. To fix this problem, use the '--build-tool=BUILD_TOOL_NAME' flag to specify which build tool to run.
          |""".stripMargin,
     workingDirectoryLayout =
       """|/pom.xml

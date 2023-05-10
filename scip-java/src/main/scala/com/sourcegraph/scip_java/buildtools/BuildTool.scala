@@ -19,11 +19,24 @@ abstract class BuildTool(val name: String, index: IndexCommand) {
 
 object BuildTool {
   def all(index: IndexCommand): List[BuildTool] =
+    // We don't support Bazel for auto-indexing, but if it's
+    // detected, we should at least give a meaningful error message
+    autoOrdered(index) :+ new BazelBuildTool(index)
+
+  def autoOrdered(index: IndexCommand): List[BuildTool] =
     List(
-      new BazelBuildTool(index),
-      new GradleBuildTool(index),
-      new MavenBuildTool(index),
+      // The order in this list is important -
+      // first detected build tool will be used in `auto` mode
+      // Bazel is missing because it isn't supported by auto-indexing
+
+      // first as it indicates user's intent to use SCIP auto-indexing
       new ScipBuildTool(index),
+      // Maven first, then Gradle, then SBT
+      // To match the order indicated in IntelliJ Java and Scala developer surveys 2022:
+      // 1. https://www.jetbrains.com/lp/devecosystem-2022/java/#which-build-systems-do-you-regularly-use-if-any-
+      // 2. https://www.jetbrains.com/lp/devecosystem-2022/scala/#which-build-systems-do-you-regularly-use-if-any-
+      new MavenBuildTool(index),
+      new GradleBuildTool(index),
       new SbtBuildTool(index),
       new MillBuildTool(index)
     )
