@@ -19,14 +19,9 @@ abstract class BuildTool(val name: String, index: IndexCommand) {
 
 object BuildTool {
   def all(index: IndexCommand): List[BuildTool] =
-    List(
-      new ScipBuildTool(index),
-      new BazelBuildTool(index),
-      new GradleBuildTool(index),
-      new MavenBuildTool(index),
-      new SbtBuildTool(index),
-      new MillBuildTool(index)
-    )
+    // We don't support Bazel for auto-indexing, but if it's
+    // detected, we should at least give a meaningful error message
+    autoOrdered(index) :+ new BazelBuildTool(index)
 
   def autoOrdered(index: IndexCommand): List[BuildTool] =
     List(
