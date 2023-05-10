@@ -19,7 +19,6 @@ import munit.TestOptions
 import os.Shellable
 
 object Java8Only extends munit.Tag("Java8Only")
-object Java11Only extends munit.Tag("Java11Only")
 
 abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
   override def environmentVariables: Map[String, String] = sys.env
@@ -33,14 +32,6 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
           "Java8Only",
           t =>
             if (Properties.isJavaAtLeast(9) && t.tags(Java8Only))
-              t.tag(munit.Ignore)
-            else
-              t
-        ),
-        new TestTransform(
-          "Java11Only",
-          t =>
-            if (Properties.isJavaAtLeast(12) && t.tags(Java11Only))
               t.tag(munit.Ignore)
             else
               t
