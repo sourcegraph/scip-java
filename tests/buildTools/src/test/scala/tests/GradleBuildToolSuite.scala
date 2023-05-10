@@ -9,7 +9,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
 
   val Gradle8 = "8.1.1"
   val Gradle7 = "7.6.1"
-  val Gradle67 = "6.7"
+  val Gradle67 = "6.7" // Introduced toolchains
+  val Gradle5 = "5.6.4"
 
   val allGradle = List(Gradle8, Gradle7, Gradle67)
   val allJava = List("8", "11", "17")
@@ -42,8 +43,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
       {
         val testName = title.withName(title.name + s"-gradle$gradleV")
         checkBuild(
-          if (gradleV.startsWith("6."))
-            testName.tag(Java8Only)
+          if (gradleV.startsWith("6.") || gradleV.startsWith("5."))
+            testName.tag(Java11Only)
           else
             testName,
           setup,
@@ -56,37 +57,61 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
     }
   }
 
-  List("latest" -> "implementation", "4.0" -> "compile").foreach {
-    case (version, config) =>
-      checkBuild(
-        if (version == "latest")
-          "basic-latest"
-        else
-          s"basic-$version".tag(Java8Only),
-        s"""|/build.gradle
-            |apply plugin: 'java'
-            |repositories {
-            |  mavenCentral()
-            |}
-            |dependencies {
-            |  $config 'junit:junit:4.13.1'
-            |}
-            |/src/main/java/Example.java
-            |import org.junit.Assert;
-            |public class Example {}
-            |/src/test/java/ExampleSuite.java
-            |public class ExampleSuite {}
-            |""".stripMargin,
-        expectedSemanticdbFiles = 2,
-        expectedPackages =
-          """|maven:junit:junit:4.13.1
-             |maven:org.hamcrest:hamcrest-core:1.3
-             |""".stripMargin,
-        initCommand = {
-          gradleVersion(version)
-        }
-      )
-  }
+  // This is the most basic test for Java/Scala support
+  // We run it for an extended list of Gradle versions
+  checkGradleBuild(
+    "basic",
+    """|/build.gradle
+       |plugins {
+       |    // Apply the application plugin to add support for building a CLI application in Java.
+       |    id 'application'
+       |    id 'java'
+       |    id 'scala'
+       |}
+
+       |repositories {
+       |    // Use Maven Central for resolving dependencies.
+       |    mavenCentral()
+       |}
+
+       |dependencies {
+       |    // This dependency is used by the application.
+       |    implementation 'com.google.guava:guava:31.1-jre'
+       |    implementation 'org.scala-lang:scala-library:2.13.8'
+       |    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+       |    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+       |}
+
+       |test {
+       |    useJUnitPlatform()
+       |}
+       |/src/main/java/App.java
+       | package gradle.sample.project;
+       | public class App {
+       |     public String getGreeting() {
+       |         return "Hello World!";
+       |     }
+       |     public static void main(String[] args) {
+       |         System.out.println(new App().getGreeting());
+       |     }
+       | }
+       |/src/test/java/AppTest.java
+       | package gradle.sample.project;
+       | import org.junit.jupiter.api.Test;
+       | import static org.junit.jupiter.api.Assertions.assertEquals;
+       | import static org.junit.jupiter.api.Assertions.assertNotNull;
+       | public class AppTest {
+       |     @Test public void appHasAGreeting() {
+       |         App classUnderTest = new App();
+       |         assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+       |     }
+       | }
+       |/src/main/scala/Howdy.scala
+       |case class Howdy(a: Int)
+       |""".stripMargin,
+    expectedSemanticdbFiles = 3,
+    gradleVersions = allGradle :+ Gradle5
+  )
 
   List("3.3", "2.2.1").foreach { version =>
     checkBuild(
