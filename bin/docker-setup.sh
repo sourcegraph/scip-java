@@ -6,6 +6,10 @@ coursier setup --yes
 
 curl -fLo maven.zip https://archive.apache.org/dist/maven/maven-3/3.9.1/binaries/apache-maven-3.9.1-bin.zip 
 unzip -d /opt/maven maven.zip
+rm maven.zip
 mv /opt/maven/*/* /opt/maven
 
-rm maven.zip
+curl -fLo gradle.zip https://services.gradle.org/distributions/gradle-7.6.1-bin.zip
+unzip -d /opt/gradle gradle.zip 
+rm gradle.zip
+mv /opt/gradle/*/* /opt/gradle
