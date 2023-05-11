@@ -45,10 +45,15 @@ jobs:
         run: sbt cli/docker
 
       - run: |
-          git clone https://github.com/circe/circe.git
+          set -eu
+          for REPO in circe/circe indeedeng/proctor
+          do 
+            mkdir -p .repos/$REPO
+            git clone https://github.com/$REPO.git .repos/$REPO
 
-          docker run -v $PWD:/sources -w /sources sourcegraph/scip-java:latest scip-java index --cwd circe
-          file circe/index.scip || (echo "circe SCIP index doesn't exist!"; exit 1) 
+            docker run -v $PWD/.repos/$REPO:/sources -w /sources sourcegraph/scip-java:latest scip-java index
+            file .repos/$REPO/index.scip || (echo "$REPO SCIP index doesn't exist!"; exit 1) 
+          done
 
   bazel:
     runs-on: ubuntu-latest

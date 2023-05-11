@@ -284,7 +284,7 @@ lazy val cli = project
       val dockerSetup = (ThisBuild / baseDirectory).value / "bin" /
         "docker-setup.sh"
       new Dockerfile {
-        from("gradle:7.2.0-jdk17")
+        from("eclipse-temurin:17")
 
         // Setup system dependencies.
         run("apt-get", "update")
@@ -316,6 +316,7 @@ lazy val cli = project
         run("bash", "/docker-setup.sh")
 
         env("PATH", "/opt/maven/bin:${PATH}")
+        env("PATH", "/opt/gradle/bin:${PATH}")
         env("PATH", "/root/.local/share/coursier/bin:${PATH}")
 
         // Mark all directories as safe for Git, so that it doesn't
