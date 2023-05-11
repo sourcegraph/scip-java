@@ -1,10 +1,5 @@
 package tests
 
-import java.nio.file.Files
-import java.nio.file.StandardOpenOption
-import munit.TestOptions
-import GradleBuildToolSuite._
-
 class LegacyGradleBuiltToolSuite
     extends GradleBuildToolSuiteBase(List("3.3", "2.2.1")) {
   checkGradleBuild(
@@ -22,4 +17,3 @@ class LegacyGradleBuiltToolSuite
   )
 
 }
-

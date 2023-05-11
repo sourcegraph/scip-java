@@ -2,6 +2,7 @@ package tests
 
 import java.nio.file.Files
 import java.nio.file.StandardOpenOption
+
 import munit.TestOptions
 
 abstract class GradleBuildToolSuiteBase(val allGradle: List[String])
@@ -31,22 +32,23 @@ abstract class GradleBuildToolSuiteBase(val allGradle: List[String])
       expectedPackages: String = "",
       extraArguments: List[String] = Nil
   ) = {
-    gradleVersions.filter(allGradle.contains(_)).foreach { gradleV =>
-      {
-        val testName = title.withName(title.name + s"-gradle$gradleV")
-        checkBuild(
-          if (gradleV.startsWith("6.") || gradleV.startsWith("5."))
-            testName.tag(Java8Only)
-          else
-            testName,
-          setup,
-          expectedSemanticdbFiles = expectedSemanticdbFiles,
-          expectedPackages = expectedPackages,
-          initCommand = gradleVersion(gradleV),
-          extraArguments = extraArguments
-        )
+    gradleVersions
+      .filter(allGradle.contains(_))
+      .foreach { gradleV =>
+        {
+          val testName = title.withName(title.name + s"-gradle$gradleV")
+          checkBuild(
+            if (gradleV.startsWith("6.") || gradleV.startsWith("5."))
+              testName.tag(Java8Only)
+            else
+              testName,
+            setup,
+            expectedSemanticdbFiles = expectedSemanticdbFiles,
+            expectedPackages = expectedPackages,
+            initCommand = gradleVersion(gradleV),
+            extraArguments = extraArguments
+          )
+        }
       }
-    }
   }
 }
-
