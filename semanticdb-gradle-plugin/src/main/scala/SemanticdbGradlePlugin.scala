@@ -73,8 +73,6 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
           !isEmpty
         }
 
-        println(s"Has annotation path: $hasAnnotationPath")
-
         val compilerPluginAdded =
           try {
             project.getDependencies().add("compileOnly", javacDep)
