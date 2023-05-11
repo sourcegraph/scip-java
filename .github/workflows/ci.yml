@@ -45,15 +45,21 @@ jobs:
         run: sbt cli/docker
 
       - run: |
+
           set -eu
-          for REPO in circe/circe indeedeng/proctor
-          do 
+          check_repo() {
+            REPO=$1
             mkdir -p .repos/$REPO
             git clone https://github.com/$REPO.git .repos/$REPO
 
             docker run -v $PWD/.repos/$REPO:/sources -w /sources sourcegraph/scip-java:latest scip-java index
             file .repos/$REPO/index.scip || (echo "$REPO SCIP index doesn't exist!"; exit 1) 
-          done
+          }
+          
+          sudo apt install parallel
+          export -f check_repo
+
+          parallel -j4 check_repo ::: circe/circe indeedeng/proctor indeedend/iwf-java-sdk
 
   bazel:
     runs-on: ubuntu-latest
