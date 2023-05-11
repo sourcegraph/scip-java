@@ -57,6 +57,37 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
     }
   }
 
+  checkGradleBuild(
+    "annotation-path",
+    """|/build.gradle
+       |plugins {
+       |    id 'java'
+       |}
+       |repositories {
+       |    // Use Maven Central for resolving dependencies.
+       |    mavenCentral()
+       |}
+       |dependencies {
+       |  compileOnly 'org.immutables:value:2.9.2'
+       |  annotationProcessor 'org.immutables:value:2.9.2'
+       |}
+       |/src/main/java/WorkflowOptions.java
+       |package test;
+       |import org.immutables.value.Value;
+       |import java.util.Optional;
+       |@Value.Immutable
+       |public abstract class WorkflowOptions {
+       |    public abstract Optional<String> getWorkflowIdReusePolicy();
+       |}
+    """.stripMargin,
+    /*
+    An immutable version will be generated along with the original class:
+    - build/generated/sources/annotationProcessor/java/main/test/ImmutableWorkflowOptions.java.semanticdb
+    - /META-INF/semanticdb/src/main/java/WorkflowOptions.java.semanticdb
+     */
+    expectedSemanticdbFiles = 2
+  )
+
   // This is the most basic test for Java/Scala support
   // We run it for an extended list of Gradle versions
   checkGradleBuild(

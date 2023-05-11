@@ -60,18 +60,20 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         triggers += "compileTestJava"
 
         val hasAnnotationPath = {
-          var result = false
+          var isEmpty = true
           tasks
             .withType(classOf[JavaCompile])
-            .configureEach { task =>
-              result =
-                result ||
-                  !task.getOptions().getAnnotationProcessorPath().isEmpty()
+            .forEach { task =>
+              println(isEmpty)
+              isEmpty =
+                isEmpty &&
+                  task.getOptions().getAnnotationProcessorPath().isEmpty()
             }
 
-          result
-
+          !isEmpty
         }
+
+        println(s"Has annotation path: $hasAnnotationPath")
 
         val compilerPluginAdded =
           try {

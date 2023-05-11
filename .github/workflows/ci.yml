@@ -59,7 +59,7 @@ jobs:
           sudo apt install parallel
           export -f check_repo
 
-          parallel -j4 check_repo ::: circe/circe indeedeng/proctor indeedend/iwf-java-sdk
+          parallel -j4 check_repo ::: circe/circe indeedeng/iwf-java-sdk
 
   bazel:
     runs-on: ubuntu-latest
