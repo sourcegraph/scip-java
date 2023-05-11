@@ -1,61 +1,22 @@
 package tests
 
-import java.nio.file.Files
-import java.nio.file.StandardOpenOption
+import tests.GradleBuildToolSuite._
 
-import munit.TestOptions
+class Gradle_8_BuildToolSuite extends GradleBuildToolSuite(List(Gradle8))
+class Gradle_7_BuildToolSuite extends GradleBuildToolSuite(List(Gradle7))
+class Gradle_6_BuildToolSuite extends GradleBuildToolSuite(List(Gradle67))
+class Gradle_5_BuildToolSuite extends GradleBuildToolSuite(List(Gradle5))
 
-class GradleBuildToolSuite extends BaseBuildToolSuite {
-
+object GradleBuildToolSuite {
   val Gradle8 = "8.1.1"
   val Gradle7 = "7.6.1"
   val Gradle67 = "6.7" // Introduced toolchains
   val Gradle5 = "5.6.4"
+}
 
-  val allGradle = List(Gradle8, Gradle7, Gradle67)
+abstract class GradleBuildToolSuite(allGradle: List[String])
+    extends GradleBuildToolSuiteBase(allGradle) {
   val allJava = List("8", "11", "17")
-
-  def gradleVersion(version: String): List[String] = {
-    createEmptyBuildScript()
-    List("gradle", "wrapper", "--gradle-version", version)
-  }
-
-  def createEmptyBuildScript(): Unit = {
-    val script = workingDirectory.resolve("build.gradle")
-    Files.createDirectories(script.getParent)
-    Files.write(
-      script,
-      Array.emptyByteArray,
-      StandardOpenOption.TRUNCATE_EXISTING,
-      StandardOpenOption.CREATE
-    )
-  }
-
-  def checkGradleBuild(
-      title: TestOptions,
-      setup: String,
-      gradleVersions: List[String] = allGradle,
-      expectedSemanticdbFiles: Int = 0,
-      expectedPackages: String = "",
-      extraArguments: List[String] = Nil
-  ) = {
-    gradleVersions.foreach { gradleV =>
-      {
-        val testName = title.withName(title.name + s"-gradle$gradleV")
-        checkBuild(
-          if (gradleV.startsWith("6.") || gradleV.startsWith("5."))
-            testName.tag(Java8Only)
-          else
-            testName,
-          setup,
-          expectedSemanticdbFiles = expectedSemanticdbFiles,
-          expectedPackages = expectedPackages,
-          initCommand = gradleVersion(gradleV),
-          extraArguments = extraArguments
-        )
-      }
-    }
-  }
 
   checkGradleBuild(
     "annotation-path",
@@ -85,7 +46,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
     - build/generated/sources/annotationProcessor/java/main/test/ImmutableWorkflowOptions.java.semanticdb
     - /META-INF/semanticdb/src/main/java/WorkflowOptions.java.semanticdb
      */
-    expectedSemanticdbFiles = 2
+    expectedSemanticdbFiles = 2,
+    gradleVersions = List(Gradle8, Gradle7, Gradle67)
   )
 
   // This is the most basic test for Java/Scala support
@@ -141,24 +103,9 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |case class Howdy(a: Int)
        |""".stripMargin,
     expectedSemanticdbFiles = 3,
-    gradleVersions = allGradle :+ Gradle5
+    // Only add this test on Gradle 5 in the gradle 6 suite
+    gradleVersions = List(Gradle8, Gradle7, Gradle67, Gradle5)
   )
-
-  List("3.3", "2.2.1").foreach { version =>
-    checkBuild(
-      s"legacy-$version".tag(Java8Only),
-      s"""|/build.gradle
-          |apply plugin: 'java'
-          |/src/main/java/Example.java
-          |public class Example {}
-          |/src/test/java/ExampleSuite.java
-          |public class ExampleSuite {}
-          |""".stripMargin,
-      expectedSemanticdbFiles = 2,
-      initCommand = gradleVersion(version)
-      // NOTE(olafur): no packages because we use more modern APIs.
-    )
-  }
 
   allJava.foreach { java =>
     checkGradleBuild(
@@ -176,7 +123,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
           |/src/main/java/Example.java
           |public class Example {}
           |""".stripMargin,
-      expectedSemanticdbFiles = 1
+      expectedSemanticdbFiles = 1,
+      gradleVersions = List(Gradle8, Gradle7, Gradle67)
     )
   }
 
@@ -192,7 +140,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |<hello/>
        |""".stripMargin,
     expectedSemanticdbFiles = 2,
-    extraArguments = List("--build-tool", "gradle")
+    extraArguments = List("--build-tool", "gradle"),
+    gradleVersions = List(Gradle8, Gradle7, Gradle67)
   )
 
   checkGradleBuild(
@@ -205,10 +154,11 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |public class ExampleSuite {}
        |""".stripMargin,
     expectedSemanticdbFiles = 1,
-    extraArguments = List("--", "compileJava")
+    extraArguments = List("--", "compileJava"),
+    gradleVersions = List(Gradle8, Gradle7, Gradle67)
   )
 
-  checkBuild(
+  checkGradleBuild(
     "playframework".tag(Java8Only),
     """|/build.gradle
        |plugins {
@@ -257,10 +207,10 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |""".stripMargin,
     expectedSemanticdbFiles =
       2, // Two files because `conf/routes` generates a Java file.
-    initCommand = gradleVersion("6.8")
+    gradleVersions = List(Gradle67)
   )
 
-  checkBuild(
+  checkGradleBuild(
     "checkerframework".tag(Java8Only),
     """|/build.gradle
        |plugins {
@@ -282,8 +232,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |package foo;
        |public class ExampleSuite {}
        |""".stripMargin,
-    2,
-    initCommand = gradleVersion("6.8.3")
+    expectedSemanticdbFiles = 2,
+    gradleVersions = List(Gradle67)
   )
 
   checkGradleBuild(
@@ -311,9 +261,9 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
        |package foo
        |class ExampleSuite {}
        |""".stripMargin,
-    expectedSemanticdbFiles = 4
+    expectedSemanticdbFiles = 4,
+    gradleVersions = List(Gradle8, Gradle7, Gradle67)
   )
-
   checkGradleBuild(
     "kotlin",
     """|/build.gradle
@@ -382,7 +332,8 @@ class GradleBuildToolSuite extends BaseBuildToolSuite {
          |maven:org.jetbrains.kotlin:kotlin-stdlib:1.6.20
          |maven:org.jetbrains:annotations:13.0
          |maven:org.slf4j:slf4j-api:1.7.36
-         |""".stripMargin
+         |""".stripMargin,
+    gradleVersions = List(Gradle8, Gradle7, Gradle67)
   )
 
   List("8", "11").foreach { java =>
