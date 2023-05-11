@@ -64,7 +64,6 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
           tasks
             .withType(classOf[JavaCompile])
             .forEach { task =>
-              println(isEmpty)
               isEmpty =
                 isEmpty &&
                   task.getOptions().getAnnotationProcessorPath().isEmpty()
