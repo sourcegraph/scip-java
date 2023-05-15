@@ -59,9 +59,21 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         triggers += "compileJava"
         triggers += "compileTestJava"
 
+        val hasAnnotationPath = {
+          val apConfig = project
+            .getConfigurations()
+            .getByName("annotationProcessor")
+          if (apConfig.isCanBeResolved()) {
+            apConfig.getDependencies().size() > 0
+          } else
+            false
+        }
+
         val compilerPluginAdded =
           try {
             project.getDependencies().add("compileOnly", javacDep)
+            if (hasAnnotationPath)
+              project.getDependencies().add("annotationProcessor", javacDep)
             project.getDependencies().add("testCompileOnly", javacDep)
             true
           } catch {
