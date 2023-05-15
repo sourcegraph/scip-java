@@ -318,6 +318,10 @@ lazy val cli = project
         env("PATH", "/opt/maven/bin:${PATH}")
         env("PATH", "/opt/gradle/bin:${PATH}")
         env("PATH", "/root/.local/share/coursier/bin:${PATH}")
+        env(
+          "JAVA_TOOL_OPTIONS",
+          "-XX:MaxRAMPercentage=80.0 -XX:+UseContainerSupport"
+        )
 
         // Mark all directories as safe for Git, so that it doesn't
         // trigger this check and error:
