@@ -15,8 +15,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Callback hook that generates SemanticDB when the compiler has completed typechecking a Java
- * source file.
+ * Callback hook that generates SemanticDB when the compiler has completed loading types required by Java
+ * sources.
  */
 public final class SemanticdbTaskListener implements TaskListener {
   private final SemanticdbJavacOptions options;
@@ -45,7 +45,7 @@ public final class SemanticdbTaskListener implements TaskListener {
 
   @Override
   public void finished(TaskEvent e) {
-    if (e.getKind() != TaskEvent.Kind.ANALYZE) return;
+    if (e.getKind() != TaskEvent.Kind.ENTER) return;
     if (!options.errors.isEmpty()) {
       if (!options.alreadyReportedErrors) {
         options.alreadyReportedErrors = true;
@@ -61,7 +61,7 @@ public final class SemanticdbTaskListener implements TaskListener {
     }
     inferBazelSourceroot(e.getSourceFile());
     try {
-      onFinishedAnalyze(e);
+      onFinishedEnter(e);
     } catch (Throwable ex) {
       // Catch exceptions because we don't want to stop the compilation even if this plugin has a
       // bug. We report the full stack trace because it's helpful for bug reports. Exceptions
@@ -77,7 +77,7 @@ public final class SemanticdbTaskListener implements TaskListener {
     }
   }
 
-  private void onFinishedAnalyze(TaskEvent e) {
+  private void onFinishedEnter(TaskEvent e) {
     Result<Path, String> path = semanticdbOutputPath(options, e);
     if (path.isOk()) {
       Semanticdb.TextDocument textDocument =
