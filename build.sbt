@@ -272,11 +272,28 @@ lazy val cli = project
           propsFile :: copiedJars.toList
         }
         .taskValue,
-    docker / imageNames :=
-      List(
-        ImageName("sourcegraph/scip-java:latest"),
-        ImageName(s"sourcegraph/scip-java:${version.value}")
-      ),
+    docker / imageNames := {
+      val latest = {
+        val label =
+          if (isSnapshot.value)
+            "latest-snapshot"
+          else
+            "latest"
+
+        List(ImageName(s"sourcegraph/scip-java:$label"))
+      }
+
+      // Don't publish a separately tagged image for snapshots -
+      // only latest-snapshot
+      val versioned =
+        if (isSnapshot.value)
+          Nil
+        else
+          List(ImageName(s"sourcegraph/scip-java:${version.value}"))
+
+      latest ++ versioned
+
+    },
     docker / dockerfile := {
       val binaryDistribution = pack.value
       val scipJavaWrapper = (ThisBuild / baseDirectory).value / "bin" /
