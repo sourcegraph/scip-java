@@ -384,7 +384,7 @@ lazy val minimizedSettings = List[Def.Setting[_]](
   (publish / skip) := true,
   (run / fork) := true,
   (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
-  libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.22"),
+  libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.28"),
   javacOptions ++=
     List[String](
       s"-Arandomtimestamp=${System.nanoTime()}",

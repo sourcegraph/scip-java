@@ -51,7 +51,7 @@ maven_install(
     artifacts = [
         "com.google.protobuf:protobuf-java:3.15.6",
         "com.google.protobuf:protobuf-java-util:3.15.6",
-        "org.projectlombok:lombok:1.18.22",
+        "org.projectlombok:lombok:1.18.28",
     ],
     repositories = [
          "https://repo1.maven.org/maven2",
