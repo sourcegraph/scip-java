@@ -111,6 +111,7 @@ public class ScipSemanticdb {
         tdoc.addOccurrences(
             Scip.Occurrence.newBuilder()
                 .addAllRange(range)
+                .setOwner(occ.getContainer())
                 .setSymbol(typedSymbol(occ.getSymbol(), pkg))
                 .setSymbolRoles(role));
       }

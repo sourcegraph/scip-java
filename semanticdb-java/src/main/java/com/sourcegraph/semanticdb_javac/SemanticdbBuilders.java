@@ -52,11 +52,15 @@ public class SemanticdbBuilders {
   // SemanticDB Symbols
 
   public static Semanticdb.SymbolOccurrence symbolOccurrence(
-      String symbol, Semanticdb.Range range, Semanticdb.SymbolOccurrence.Role role) {
+      String symbol,
+      Semanticdb.Range range,
+      Semanticdb.SymbolOccurrence.Role role,
+      String container) {
     return Semanticdb.SymbolOccurrence.newBuilder()
         .setSymbol(symbol)
         .setRange(range)
         .setRole(role)
+        .setContainer(container)
         .build();
   }
 

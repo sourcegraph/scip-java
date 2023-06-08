@@ -177,6 +177,7 @@ message SymbolOccurrence {
   Range range = 1;
   string symbol = 2;
   Role role = 3;
+  string container = 4;
 }
 
 message Scope {

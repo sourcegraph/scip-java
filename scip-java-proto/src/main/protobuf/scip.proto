@@ -335,6 +335,8 @@ message Occurrence {
   SyntaxKind syntax_kind = 5;
   // Diagnostics that have been reported for this specific range.
   repeated Diagnostic diagnostics = 6;
+
+  string owner = 7;
 }
 
 // Represents a diagnostic, such as a compiler error or warning, which should be

@@ -40,6 +40,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   private final ArrayList<Semanticdb.SymbolOccurrence> occurrences;
   private final ArrayList<Semanticdb.SymbolInformation> symbolInfos;
   private String source;
+  private Deque<Symbol> methodStack;
 
   public SemanticdbVisitor(
       JavacTask task,
@@ -47,6 +48,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       TaskEvent event,
       SemanticdbJavacOptions options,
       JavacTypes javacTypes) {
+    this.methodStack = new ArrayDeque<>();
     this.task = task;
     this.globals = globals; // Reused cache between compilation units.
     this.locals = new LocalSymbolsCache(); // Fresh cache per compilation unit.
@@ -177,10 +179,21 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   public Void visitMethod(MethodTree node, Void unused) {
     if (node instanceof JCTree.JCMethodDecl) {
       JCTree.JCMethodDecl meth = (JCTree.JCMethodDecl) node;
-      if (meth.sym == null) return super.visitMethod(node, unused);
+
+      methodStack.add(meth.sym);
+
+      if (meth.sym == null) {
+        super.visitMethod(node, unused);
+        methodStack.pop();
+        return null;
+      }
       CompilerRange range = CompilerRange.FROM_POINT_TO_SYMBOL_NAME;
       if (meth.sym.isConstructor()) {
-        if (meth.sym.owner.isAnonymous()) return null;
+        if (meth.sym.owner.isAnonymous()) {
+          super.visitMethod(node, unused);
+          methodStack.pop();
+          return null;
+        }
         range = CompilerRange.FROM_POINT_WITH_TEXT_SEARCH;
       }
       emitSymbolOccurrence(meth.sym, meth, Role.DEFINITION, range);
@@ -196,7 +209,10 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         i++;
       }
     }
-    return super.visitMethod(node, unused);
+
+    super.visitMethod(node, unused);
+    methodStack.pop();
+    return null;
   }
 
   @Override
@@ -341,8 +357,16 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     Optional<Semanticdb.Range> range = semanticdbRange(pos, kind, sym);
     if (range.isPresent()) {
       String ssym = semanticdbSymbol(sym);
+
+      String container = "";
+      if (role == Role.REFERENCE && sym.type instanceof Type.MethodType) {
+        if (!methodStack.isEmpty()) {
+          container = semanticdbSymbol(methodStack.getLast());
+        }
+      }
+
       if (!ssym.equals(SemanticdbSymbols.NONE)) {
-        Semanticdb.SymbolOccurrence occ = symbolOccurrence(ssym, range.get(), role);
+        Semanticdb.SymbolOccurrence occ = symbolOccurrence(ssym, range.get(), role, container);
         return Optional.of(occ);
       } else {
         return Optional.empty();
@@ -351,6 +375,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       return Optional.empty();
     }
   }
+
+  //  private String semanticdbContainer(Symbol sym)
 
   private String semanticdbText() {
     if (source != null) return source;
