@@ -99,16 +99,16 @@ Docker image with a pre-installed Java version.</p>
 <pre><code class="hljs css language-sh"><span class="hljs-comment"># macOS/Linux</span>
 curl -fLo coursier https://git.io/coursier-cli \
   &amp;&amp; chmod +x coursier \
-  &amp;&amp; ./coursier launch com.sourcegraph:scip-java_2.13:0.1.0 -- --<span class="hljs-built_in">help</span>
+  &amp;&amp; ./coursier launch com.sourcegraph:scip-java_2.13:0.8.19 -- --<span class="hljs-built_in">help</span>
 
 <span class="hljs-comment"># Windows</span>
 bitsadmin /transfer downloadCoursierCli https://git.io/coursier-cli <span class="hljs-string">"%cd%\coursier"</span>
 bitsadmin /transfer downloadCoursierBat https://git.io/coursier-bat <span class="hljs-string">"%cd%\coursier.bat"</span>
-./coursier launch com.sourcegraph:scip-java_2.13:0.1.0 -- --<span class="hljs-built_in">help</span>
+./coursier launch com.sourcegraph:scip-java_2.13:0.8.19 -- --<span class="hljs-built_in">help</span>
 
 <span class="hljs-comment"># macOS Homebrew</span>
 brew install coursier/formulas/coursier \
- &amp;&amp; coursier launch com.sourcegraph:scip-java_2.13:0.1.0 -- --<span class="hljs-built_in">help</span>
+ &amp;&amp; coursier launch com.sourcegraph:scip-java_2.13:0.8.19 -- --<span class="hljs-built_in">help</span>
 </code></pre>
 <p>The Java launcher uses
 <a href="https://get-coursier.io/docs/cli-installation.html">Coursier</a> to download
@@ -124,13 +124,13 @@ you still need a Java installation to run the <code>scip-java</code> binary.</p>
 <pre><code class="hljs css language-sh"><span class="hljs-comment"># macOS/Linux</span>
 curl -fLo coursier https://git.io/coursier-cli \
   &amp;&amp; chmod +x coursier \
-  &amp;&amp; ./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java_2.13:0.1.0 --main com.sourcegraph.scip_java.ScipJava
+  &amp;&amp; ./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java_2.13:0.8.19 --main com.sourcegraph.scip_java.ScipJava
 ./scip-java --<span class="hljs-built_in">help</span>
 
 <span class="hljs-comment"># Windows</span>
 bitsadmin /transfer downloadCoursierCli https://git.io/coursier-cli <span class="hljs-string">"%cd%\coursier"</span>
 bitsadmin /transfer downloadCoursierBat https://git.io/coursier-bat <span class="hljs-string">"%cd%\coursier.bat"</span>
-./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java_2.13:0.1.0
+./coursier bootstrap --standalone -o scip-java com.sourcegraph:scip-java_2.13:0.8.19
 ./scip-java --<span class="hljs-built_in">help</span>
 </code></pre>
 <p>The fat jar uses the <a href="https://get-coursier.io/docs/cli-installation">Coursier</a>
@@ -143,18 +143,18 @@ run the command-line interface as a library by directly invoking the <code>main(
 method on the <code>com.sourcegraph.scip_java.ScipJava</code> class.</p>
 <p><a href="https://repo1.maven.org/maven2/com/sourcegraph/scip-java_2.13/"><img src="https://img.shields.io/maven-central/v/com.sourcegraph/scip-java_2.13" alt=""></a></p>
 <p>If you're using Gradle.</p>
-<pre><code class="hljs css language-groovy">implementation <span class="hljs-string">group:</span> <span class="hljs-string">'com.sourcegraph'</span>, <span class="hljs-string">name:</span> <span class="hljs-string">'scip-java_2.13'</span>, <span class="hljs-string">version:</span> <span class="hljs-string">'0.1.0'</span>
+<pre><code class="hljs css language-groovy">implementation <span class="hljs-string">group:</span> <span class="hljs-string">'com.sourcegraph'</span>, <span class="hljs-string">name:</span> <span class="hljs-string">'scip-java_2.13'</span>, <span class="hljs-string">version:</span> <span class="hljs-string">'0.8.19'</span>
 </code></pre>
 <p>If you're using Maven.</p>
 <pre><code class="hljs css language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.sourcegraph<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>scip-java_2.13<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>0.1.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>0.8.19<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
 <p>If you're using sbt.</p>
 <pre><code class="hljs css language-scala">scalaVersion <span class="token operator">:</span><span class="token operator">=</span> <span class="token string">"2.13.10"</span> <span class="token comment">// Only Scala 2.13 is supported.</span>
-libraryDependencies <span class="token operator">+=</span> <span class="token string">"com.sourcegraph"</span> <span class="token operator">%</span><span class="token operator">%</span> <span class="token string">"scip-java"</span> <span class="token operator">%</span> <span class="token string">"0.1.0"</span>
+libraryDependencies <span class="token operator">+=</span> <span class="token string">"com.sourcegraph"</span> <span class="token operator">%</span><span class="token operator">%</span> <span class="token string">"scip-java"</span> <span class="token operator">%</span> <span class="token string">"0.8.19"</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="run-scip-java-index"></a><a href="#run-scip-java-index" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Run <code>scip-java index</code></h2>
 <blockquote>
