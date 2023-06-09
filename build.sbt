@@ -382,6 +382,7 @@ def minimizedSourceDirectory =
 lazy val minimizedSettings = List[Def.Setting[_]](
   autoScalaLibrary := false,
   (publish / skip) := true,
+  (publishLocal / skip) := true,
   (run / fork) := true,
   (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
   libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.22"),
@@ -610,4 +611,3 @@ dumpScipJavaVersion := {
 
   IO.write((ThisBuild / baseDirectory).value / "VERSION", versionValue)
 }
-
