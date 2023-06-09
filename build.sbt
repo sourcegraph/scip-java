@@ -611,4 +611,3 @@ dumpScipJavaVersion := {
   IO.write((ThisBuild / baseDirectory).value / "VERSION", versionValue)
 }
 
-ThisBuild / version := sys.env.get("CI").fold("dev")(_ => version.value)
