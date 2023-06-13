@@ -50,7 +50,7 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
     else
       "idn fail, we don't cover this scala version"
 
-  val supportedMillVersions = List("0.10.0")
+  val supportedMillVersions = List("0.10.6", "0.11.0")
   val supportedScalaVersion = List("2.12.16", "2.13.8", "3.1.3")
 
   val testGroupings =
@@ -68,7 +68,7 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
           |import mill._, scalalib._
           |object minimal extends ScalaModule {
           |  def scalaVersion = "${scalaVersion}"
-          |  object test extends Tests with TestModule.Munit {
+          |  object test extends ScalaModuleTests with TestModule.Munit {
           |    def ivyDeps = Agg(ivy"org.scalameta::munit:1.0.0-M6")
           | }
           |}
