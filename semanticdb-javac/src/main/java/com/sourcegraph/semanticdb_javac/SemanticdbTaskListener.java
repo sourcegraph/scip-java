@@ -114,15 +114,19 @@ public final class SemanticdbTaskListener implements TaskListener {
     } else if (options.uriScheme == UriScheme.BAZEL) {
       String toString = file.toString();
       // This solution is hacky, and it would be very nice to use a dedicated API instead.
-      // The Bazel Java compiler constructs `SimpleFileObject` with a "user-friendly" name that
-      // points to the original source file and an underlying/actual file path in a temporary
-      // directory. We're constrained by having to use only public APIs of the Java compiler
-      // and `toString()` seems to be the only way to access the user-friendly path.
-      if (toString.startsWith("SimpleFileObject[") && toString.endsWith("]")) {
-        return Paths.get(toString.substring("SimpleFileObject[".length(), toString.length() - 1));
-      } else {
-        throw new IllegalArgumentException("unsupported source file: " + toString);
+      // The Bazel Java compiler constructs `SimpleFileObject/DirectoryFileObject` with a
+      // "user-friendly" name that points to the original source file and an underlying/actual
+      // file path in a temporary directory. We're constrained by having to use only public APIs of
+      // the Java compiler and `toString()` seems to be the only way to access the user-friendly
+      // path.
+      String[] knownBazelToStringPatterns =
+          new String[] {"SimpleFileObject[", "DirectoryFileObject["};
+      for (String pattern : knownBazelToStringPatterns) {
+        if (toString.startsWith(pattern) && toString.endsWith("]")) {
+          return Paths.get(toString.substring(pattern.length(), toString.length() - 1));
+        }
       }
+      throw new IllegalArgumentException("unsupported source file: " + toString);
     } else {
       return Paths.get(uri);
     }

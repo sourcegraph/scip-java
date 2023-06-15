@@ -328,9 +328,8 @@ projects, with the following caveats:
 
 ### Bazel
 
-Bazel is supported by scip-java but it requires custom configuration to work
-correctly. Note that the `scip-java index` command does not automatically index
-Bazel builds.
+Bazel is supported by scip-java, but it requires custom configuration to work
+correctly. The `scip-java index` command does not automatically index Bazel builds.
 
 The Bazel integration for scip-java is specifically designed to be compatible
 with the Bazel build cache to enable incremental indexing. To achieve this,
@@ -342,6 +341,38 @@ repository contains an example for how to configure everything.
 - [BUILD](https://github.com/sourcegraph/scip-java/blob/main/examples/bazel-example/src/main/java/example/BUILD):
   configured `java_library` and `java_binary` targets to be indexed with
   scip-java.
+
+Once configured, build the codebase with the SemanticDB compiler plugin.
+```sh
+bazel build //... --@scip_java//semanticdb-javac:enabled=true
+```
+
+Next, run the following command to generate the SCIP index (`index.scip`).
+
+```
+bazel run @scip_java//scip-semanticdb:bazel -- --sourceroot $PWD
+
+# (optional) Validate that SemanticDB files were generated.
+# The command below works for the `examples/bazel-example` directory in the sourcegraph/scip-java repository.
+❯ jar tf bazel-bin/src/main/java/example/libexample.jar | grep semanticdb$
+META-INF/semanticdb/src/main/java/example/Example.java.semanticdb
+ ```
+
+Finally, run the following commands to upload the SCIP index to Sourcegraph.
+
+```
+# 1. Install src
+npm install -g @sourcegraph/src # Or yarn global add @sourcegraph/src
+
+# 2. Authenticate with Sourcegraph
+export SRC_ACCESS_TOKEN=sgp_YOUR_ACCESS_TOKEN
+export SRC_ENDPOINT=https://sourcegraph.example.com
+src login # validate the token authenticates correctly
+
+# 3. Upload SCIP index to Sourcegraph
+src code-intel upload # requires index.scip file to exist
+```
+
 
 Don't hesitate to open an issue in the
 [scip-java repository](https://github.com/sourcegraph/scip-java) if you have any
