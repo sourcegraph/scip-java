@@ -22,7 +22,15 @@ local_repository(
     name = "scip_java",
     path = "../.."
 )
-# TODO: add commented out `http_archive` example once this workspace file is available on GitHub.
+
+# Copy and paste this, not the local_repository:
+# 
+# SCIP_JAVA_VERSION="0.8.20"
+# http_archive(
+#   name = "scip_java",
+#   url = "https://github.com/sourcegraph/scip-java/archive/refs/tags/v{}.zip".format(SCIP_JAVA_VERSION),
+#   strip_prefix = "scip-java-{}".format(SCIP_JAVA_VERSION),
+# )
 
 ##########
 # Protobuf
