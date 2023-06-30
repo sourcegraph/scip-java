@@ -85,7 +85,7 @@ public final class SemanticdbTaskListener implements TaskListener {
                 .buildTextDocument(e.getCompilationUnit());
         writeSemanticdb(e, path.getOrThrow(), textDocument);
       } else {
-        reporter.error(path.getErrorOrThrow(), e)
+        reporter.error(path.getErrorOrThrow(), e);
       }
     }
   }
