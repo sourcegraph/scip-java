@@ -45,6 +45,7 @@ public class SemanticdbJavacOptions {
 
   public static SemanticdbJavacOptions parse(String[] args, Context ctx) {
     SemanticdbJavacOptions result = new SemanticdbJavacOptions();
+
     boolean useJavacClassesDir = false;
     for (String arg : args) {
       if (arg.startsWith("-targetroot:")) {
@@ -122,6 +123,6 @@ public class SemanticdbJavacOptions {
               JAVAC_CLASSES_DIR_ARG, out.toString());
       result.errors.add(errorMsg);
     }
-    return new TargetPaths(classOutputDir, sourceOutputDir);
+    return (new TargetPaths(classOutputDir, sourceOutputDir));
   }
 }

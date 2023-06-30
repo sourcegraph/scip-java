@@ -59,9 +59,12 @@ public final class SemanticdbTaskListener implements TaskListener {
     try {
       onFinishedAnalyze(e);
     } catch (Throwable ex) {
-      // Catch exceptions because we don't want to stop the compilation even if this plugin has a
-      // bug. We report the full stack trace because it's helpful for bug reports. Exceptions
-      // should only happen in *exceptional* situations and they should be reported upstream.
+      // Catch exceptions because we don't want to stop the compilation even if this
+      // plugin has a
+      // bug. We report the full stack trace because it's helpful for bug reports.
+      // Exceptions
+      // should only happen in *exceptional* situations and they should be reported
+      // upstream.
       Throwable throwable = ex;
       if (e.getSourceFile() != null) {
         throwable =
@@ -110,12 +113,17 @@ public final class SemanticdbTaskListener implements TaskListener {
         throw new IllegalArgumentException("unsupported URI: " + uri);
       }
     } else if (options.uriScheme == UriScheme.BAZEL) {
-      // This solution is hacky, and it would be very nice to use a dedicated API instead.
-      // The Bazel Java compiler constructs `SimpleFileObject/DirectoryFileObject` with a
-      // "user-friendly" name that points to the original source file and an underlying/actual
-      // file path in a temporary directory. We're constrained by having to use only public APIs of
-      // the Java compiler and `toString()` seems to be the only way to access the user-friendly
       String toString = file.toString().replace(":", "/");
+      // This solution is hacky, and it would be very nice to use a dedicated API
+      // instead.
+      // The Bazel Java compiler constructs `SimpleFileObject/DirectoryFileObject`
+      // with a
+      // "user-friendly" name that points to the original source file and an
+      // underlying/actual
+      // file path in a temporary directory. We're constrained by having to use only
+      // public APIs of
+      // the Java compiler and `toString()` seems to be the only way to access the
+      // user-friendly
       // path.
       String[] knownBazelToStringPatterns =
           new String[] {"SimpleFileObject[", "DirectoryFileObject["};
@@ -144,11 +152,11 @@ public final class SemanticdbTaskListener implements TaskListener {
     // /private/var/tmp/com/example/Hello.java
     //
     // We infer sourceroot by iterating the names of both files in reverse order
-    // and stop at the first entry where  the two paths are different. For the
+    // and stop at the first entry where the two paths are different. For the
     // example above, we compare "Hello.java", then "example", then "com", and
     // when we reach "repo" != "tmp" then we guess that "/home/repo" is the
-    // sourceroot. This logic is brittle  and it would be nice to use more
-    // dedicated APIs, but Bazel actively makes an effort to  sandbox
+    // sourceroot. This logic is brittle and it would be nice to use more
+    // dedicated APIs, but Bazel actively makes an effort to sandbox
     // compilation and hide access to the original workspace, which is why we
     // resort to solutions like this.
     int relativePathDepth = 0;
@@ -199,6 +207,7 @@ public final class SemanticdbTaskListener implements TaskListener {
           // TODO:
         }
       }
+
       return Result.error(
           String.format(
               "sourceroot '%s does not contain path '%s'. To fix this problem, update the -sourceroot flag to "
