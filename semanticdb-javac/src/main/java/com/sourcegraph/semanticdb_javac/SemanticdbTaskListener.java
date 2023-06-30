@@ -50,11 +50,7 @@ public final class SemanticdbTaskListener implements TaskListener {
       if (!options.alreadyReportedErrors) {
         options.alreadyReportedErrors = true;
         for (String error : options.errors) {
-          trees.printMessage(
-              Diagnostic.Kind.ERROR,
-              "semanticdb-javac: " + error,
-              e.getCompilationUnit(),
-              e.getCompilationUnit());
+          reporter.error(error, e);
         }
       }
       return;
@@ -79,13 +75,15 @@ public final class SemanticdbTaskListener implements TaskListener {
 
   private void onFinishedAnalyze(TaskEvent e) {
     Result<Path, String> path = semanticdbOutputPath(options, e);
-    if (path.isOk()) {
-      Semanticdb.TextDocument textDocument =
-          new SemanticdbVisitor(task, globals, e, options, javacTypes)
-              .buildTextDocument(e.getCompilationUnit());
-      writeSemanticdb(e, path.getOrThrow(), textDocument);
-    } else {
-      reporter.error(path.getErrorOrThrow(), e.getCompilationUnit(), e.getCompilationUnit());
+    if (path != null) {
+      if (path.isOk()) {
+        Semanticdb.TextDocument textDocument =
+            new SemanticdbVisitor(task, globals, e, options, javacTypes)
+                .buildTextDocument(e.getCompilationUnit());
+        writeSemanticdb(e, path.getOrThrow(), textDocument);
+      } else {
+        reporter.error(path.getErrorOrThrow(), e)
+      }
     }
   }
 
@@ -112,12 +110,12 @@ public final class SemanticdbTaskListener implements TaskListener {
         throw new IllegalArgumentException("unsupported URI: " + uri);
       }
     } else if (options.uriScheme == UriScheme.BAZEL) {
-      String toString = file.toString();
       // This solution is hacky, and it would be very nice to use a dedicated API instead.
       // The Bazel Java compiler constructs `SimpleFileObject/DirectoryFileObject` with a
       // "user-friendly" name that points to the original source file and an underlying/actual
       // file path in a temporary directory. We're constrained by having to use only public APIs of
       // the Java compiler and `toString()` seems to be the only way to access the user-friendly
+      String toString = file.toString().replace(":", "/");
       // path.
       String[] knownBazelToStringPatterns =
           new String[] {"SimpleFileObject[", "DirectoryFileObject["};
@@ -184,6 +182,23 @@ public final class SemanticdbTaskListener implements TaskListener {
               .resolveSibling(filename);
       return Result.ok(semanticdbOutputPath);
     } else {
+
+      if (options.uriScheme == UriScheme.BAZEL && options.generatedTargetRoot != null) {
+        try {
+          if (absolutePath.toRealPath().startsWith(options.generatedTargetRoot)) {
+            reporter.info(
+                String.format(
+                    "Path '%s' belongs to the root for generated source files, "
+                        + "as reported by javac ('%s'), therefore a SemanticDB file for it won't be generated",
+                    absolutePath, options.generatedTargetRoot),
+                e);
+
+            return null;
+          }
+        } catch (IOException ioe) {
+          // TODO:
+        }
+      }
       return Result.error(
           String.format(
               "sourceroot '%s does not contain path '%s'. To fix this problem, update the -sourceroot flag to "

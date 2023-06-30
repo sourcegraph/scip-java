@@ -12,6 +12,7 @@ import javax.tools.JavaFileObject;
 import com.sun.tools.javac.util.Context;
 
 import static javax.tools.StandardLocation.CLASS_OUTPUT;
+import static javax.tools.StandardLocation.SOURCE_OUTPUT;
 
 /** Settings that can be configured alongside the -Xplugin compiler option. */
 public class SemanticdbJavacOptions {
@@ -25,6 +26,7 @@ public class SemanticdbJavacOptions {
   public final ArrayList<String> errors;
   public boolean alreadyReportedErrors = false;
   public UriScheme uriScheme = UriScheme.DEFAULT;
+  public Path generatedTargetRoot;
 
   public static String stubClassName = "META-INF-semanticdb-stub";
 
@@ -49,7 +51,7 @@ public class SemanticdbJavacOptions {
         String argValue = arg.substring("-targetroot:".length());
         if (argValue.equals(JAVAC_CLASSES_DIR_ARG)) {
           useJavacClassesDir = true;
-          result.targetroot = getJavacClassesDir(result, ctx);
+          result.targetroot = getJavacClassesDir(result, ctx).classes;
         } else {
           result.targetroot = Paths.get(argValue);
         }
@@ -60,7 +62,9 @@ public class SemanticdbJavacOptions {
       } else if (arg.equals("-build-tool:bazel")) {
         result.uriScheme = UriScheme.BAZEL;
         useJavacClassesDir = true;
-        result.targetroot = getJavacClassesDir(result, ctx);
+        TargetPaths paths = getJavacClassesDir(result, ctx);
+        result.targetroot = paths.classes;
+        result.generatedTargetRoot = paths.sources;
       } else if (arg.equals("-text:on")) {
         result.includeText = true;
       } else if (arg.equals("-text:off")) {
@@ -79,9 +83,11 @@ public class SemanticdbJavacOptions {
       result.errors.add(missingRequiredDirectoryOption("targetroot"));
     }
     if (!isSourcerootDefined(result)) {
-      // When using -build-tool:bazel, the sourceroot is automatically inferred from the first
+      // When using -build-tool:bazel, the sourceroot is automatically inferred from
+      // the first
       // compilation unit.
-      // See `SemanticdbTaskListener.inferBazelSourceroot()` for the method that infers the
+      // See `SemanticdbTaskListener.inferBazelSourceroot()` for the method that
+      // infers the
       // sourceroot.
       result.errors.add(missingRequiredDirectoryOption("sourceroot"));
     }
@@ -95,14 +101,18 @@ public class SemanticdbJavacOptions {
     return options.sourceroot != null;
   }
 
-  private static Path getJavacClassesDir(SemanticdbJavacOptions result, Context ctx) {
+  private static TargetPaths getJavacClassesDir(SemanticdbJavacOptions result, Context ctx) {
     // I'm not aware of a better way to get the class output directory from javac
-    Path outputDir = null;
+    Path classOutputDir = null;
+    Path sourceOutputDir = null;
     try {
       JavaFileManager fm = ctx.get(JavaFileManager.class);
-      FileObject outputDirStub =
+      FileObject sourceOutputDirStub =
+          fm.getJavaFileForOutput(SOURCE_OUTPUT, stubClassName, JavaFileObject.Kind.SOURCE, null);
+      FileObject clasSOutputDirStub =
           fm.getJavaFileForOutput(CLASS_OUTPUT, stubClassName, JavaFileObject.Kind.CLASS, null);
-      outputDir = Paths.get(outputDirStub.toUri()).toAbsolutePath().getParent();
+      classOutputDir = Paths.get(clasSOutputDirStub.toUri()).toAbsolutePath().getParent();
+      sourceOutputDir = Paths.get(sourceOutputDirStub.toUri()).toAbsolutePath().getParent();
     } catch (Exception e) {
       ByteArrayOutputStream out = new ByteArrayOutputStream();
       e.printStackTrace(new PrintStream(out));
@@ -112,6 +122,6 @@ public class SemanticdbJavacOptions {
               JAVAC_CLASSES_DIR_ARG, out.toString());
       result.errors.add(errorMsg);
     }
-    return outputDir;
+    return new TargetPaths(classOutputDir, sourceOutputDir);
   }
 }
