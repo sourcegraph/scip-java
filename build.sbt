@@ -97,7 +97,7 @@ lazy val agent = project
     libraryDependencies ++=
       List(
         "net.bytebuddy" % "byte-buddy" % "1.11.9",
-        "net.bytebuddy" % "byte-buddy-agent" % "1.11.21"
+        "net.bytebuddy" % "byte-buddy-agent" % "1.14.5"
       ),
     Compile / packageBin / packageOptions +=
       Package.ManifestAttributes(
