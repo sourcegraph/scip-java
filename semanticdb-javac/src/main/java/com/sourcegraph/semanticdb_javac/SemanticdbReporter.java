@@ -31,6 +31,10 @@ public class SemanticdbReporter {
     trees.printMessage(Diagnostic.Kind.ERROR, baos.toString(), tree, root);
   }
 
+  public void exception(Throwable e, TaskEvent task) {
+    this.exception(e, task.getCompilationUnit(), task.getCompilationUnit());
+  }
+
   public void info(String message, TaskEvent e) {
     trees.printMessage(
         Diagnostic.Kind.NOTE,

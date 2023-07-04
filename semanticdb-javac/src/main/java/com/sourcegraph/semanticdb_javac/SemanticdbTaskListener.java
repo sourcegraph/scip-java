@@ -25,6 +25,7 @@ public final class SemanticdbTaskListener implements TaskListener {
   private final SemanticdbReporter reporter;
   private final JavacTypes javacTypes;
   private final Trees trees;
+  private boolean sourceGeneratorsMessageIsLogged = false;
 
   public SemanticdbTaskListener(
       SemanticdbJavacOptions options,
@@ -194,17 +195,19 @@ public final class SemanticdbTaskListener implements TaskListener {
       if (options.uriScheme == UriScheme.BAZEL && options.generatedTargetRoot != null) {
         try {
           if (absolutePath.toRealPath().startsWith(options.generatedTargetRoot)) {
-            reporter.info(
-                String.format(
-                    "Path '%s' belongs to the root for generated source files, "
-                        + "as reported by javac ('%s'), therefore a SemanticDB file for it won't be generated",
-                    absolutePath, options.generatedTargetRoot),
-                e);
+            if (!sourceGeneratorsMessageIsLogged) {
+              sourceGeneratorsMessageIsLogged = true;
+              reporter.info(
+                  "Usage of source generators detected - scip-java does not produce SemanticDB files for generated files.\n"
+                      + "This message is logged only once",
+                  e);
+            }
 
             return null;
           }
-        } catch (IOException ioe) {
-          // TODO:
+        } catch (IOException exc) {
+          reporter.exception(exc, e);
+          return null;
         }
       }
 

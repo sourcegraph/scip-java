@@ -123,6 +123,6 @@ public class SemanticdbJavacOptions {
               JAVAC_CLASSES_DIR_ARG, out.toString());
       result.errors.add(errorMsg);
     }
-    return (new TargetPaths(classOutputDir, sourceOutputDir));
+    return new TargetPaths(classOutputDir, sourceOutputDir);
   }
 }
