@@ -3,6 +3,7 @@ package com.sourcegraph.semanticdb_javac;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.Tree;
 import com.sun.source.util.Trees;
+import com.sun.source.util.TaskEvent;
 
 import javax.tools.Diagnostic;
 import java.io.ByteArrayOutputStream;
@@ -30,8 +31,29 @@ public class SemanticdbReporter {
     trees.printMessage(Diagnostic.Kind.ERROR, baos.toString(), tree, root);
   }
 
+  public void exception(Throwable e, TaskEvent task) {
+    this.exception(e, task.getCompilationUnit(), task.getCompilationUnit());
+  }
+
+  public void info(String message, TaskEvent e) {
+    trees.printMessage(
+        Diagnostic.Kind.NOTE,
+        "semanticdb-javac: " + message,
+        e.getCompilationUnit(),
+        e.getCompilationUnit());
+  }
+
+  public void error(String message, TaskEvent e) {
+    trees.printMessage(
+        Diagnostic.Kind.ERROR,
+        "semanticdb-javac: " + message,
+        e.getCompilationUnit(),
+        e.getCompilationUnit());
+  }
+
   public void error(String message, Tree tree, CompilationUnitTree root) {
-    // NOTE(olafur): ideally, this message should be reported as a compiler diagnostic, but I dind't
+    // NOTE(olafur): ideally, this message should be reported as a compiler
+    // diagnostic, but I dind't
     // find
     // the reporter API so the message goes to stderr instead for now.
     trees.printMessage(

@@ -25,6 +25,7 @@ public final class SemanticdbTaskListener implements TaskListener {
   private final SemanticdbReporter reporter;
   private final JavacTypes javacTypes;
   private final Trees trees;
+  private boolean sourceGeneratorsMessageIsLogged = false;
 
   public SemanticdbTaskListener(
       SemanticdbJavacOptions options,
@@ -50,11 +51,7 @@ public final class SemanticdbTaskListener implements TaskListener {
       if (!options.alreadyReportedErrors) {
         options.alreadyReportedErrors = true;
         for (String error : options.errors) {
-          trees.printMessage(
-              Diagnostic.Kind.ERROR,
-              "semanticdb-javac: " + error,
-              e.getCompilationUnit(),
-              e.getCompilationUnit());
+          reporter.error(error, e);
         }
       }
       return;
@@ -63,9 +60,12 @@ public final class SemanticdbTaskListener implements TaskListener {
     try {
       onFinishedAnalyze(e);
     } catch (Throwable ex) {
-      // Catch exceptions because we don't want to stop the compilation even if this plugin has a
-      // bug. We report the full stack trace because it's helpful for bug reports. Exceptions
-      // should only happen in *exceptional* situations and they should be reported upstream.
+      // Catch exceptions because we don't want to stop the compilation even if this
+      // plugin has a
+      // bug. We report the full stack trace because it's helpful for bug reports.
+      // Exceptions
+      // should only happen in *exceptional* situations and they should be reported
+      // upstream.
       Throwable throwable = ex;
       if (e.getSourceFile() != null) {
         throwable =
@@ -79,13 +79,15 @@ public final class SemanticdbTaskListener implements TaskListener {
 
   private void onFinishedAnalyze(TaskEvent e) {
     Result<Path, String> path = semanticdbOutputPath(options, e);
-    if (path.isOk()) {
-      Semanticdb.TextDocument textDocument =
-          new SemanticdbVisitor(task, globals, e, options, javacTypes)
-              .buildTextDocument(e.getCompilationUnit());
-      writeSemanticdb(e, path.getOrThrow(), textDocument);
-    } else {
-      reporter.error(path.getErrorOrThrow(), e.getCompilationUnit(), e.getCompilationUnit());
+    if (path != null) {
+      if (path.isOk()) {
+        Semanticdb.TextDocument textDocument =
+            new SemanticdbVisitor(task, globals, e, options, javacTypes)
+                .buildTextDocument(e.getCompilationUnit());
+        writeSemanticdb(e, path.getOrThrow(), textDocument);
+      } else {
+        reporter.error(path.getErrorOrThrow(), e);
+      }
     }
   }
 
@@ -112,12 +114,17 @@ public final class SemanticdbTaskListener implements TaskListener {
         throw new IllegalArgumentException("unsupported URI: " + uri);
       }
     } else if (options.uriScheme == UriScheme.BAZEL) {
-      String toString = file.toString();
-      // This solution is hacky, and it would be very nice to use a dedicated API instead.
-      // The Bazel Java compiler constructs `SimpleFileObject/DirectoryFileObject` with a
-      // "user-friendly" name that points to the original source file and an underlying/actual
-      // file path in a temporary directory. We're constrained by having to use only public APIs of
-      // the Java compiler and `toString()` seems to be the only way to access the user-friendly
+      String toString = file.toString().replace(":", "/");
+      // This solution is hacky, and it would be very nice to use a dedicated API
+      // instead.
+      // The Bazel Java compiler constructs `SimpleFileObject/DirectoryFileObject`
+      // with a
+      // "user-friendly" name that points to the original source file and an
+      // underlying/actual
+      // file path in a temporary directory. We're constrained by having to use only
+      // public APIs of
+      // the Java compiler and `toString()` seems to be the only way to access the
+      // user-friendly
       // path.
       String[] knownBazelToStringPatterns =
           new String[] {"SimpleFileObject[", "DirectoryFileObject["};
@@ -146,11 +153,11 @@ public final class SemanticdbTaskListener implements TaskListener {
     // /private/var/tmp/com/example/Hello.java
     //
     // We infer sourceroot by iterating the names of both files in reverse order
-    // and stop at the first entry where  the two paths are different. For the
+    // and stop at the first entry where the two paths are different. For the
     // example above, we compare "Hello.java", then "example", then "com", and
     // when we reach "repo" != "tmp" then we guess that "/home/repo" is the
-    // sourceroot. This logic is brittle  and it would be nice to use more
-    // dedicated APIs, but Bazel actively makes an effort to  sandbox
+    // sourceroot. This logic is brittle and it would be nice to use more
+    // dedicated APIs, but Bazel actively makes an effort to sandbox
     // compilation and hide access to the original workspace, which is why we
     // resort to solutions like this.
     int relativePathDepth = 0;
@@ -184,6 +191,26 @@ public final class SemanticdbTaskListener implements TaskListener {
               .resolveSibling(filename);
       return Result.ok(semanticdbOutputPath);
     } else {
+
+      if (options.uriScheme == UriScheme.BAZEL && options.generatedTargetRoot != null) {
+        try {
+          if (absolutePath.toRealPath().startsWith(options.generatedTargetRoot)) {
+            if (!sourceGeneratorsMessageIsLogged) {
+              sourceGeneratorsMessageIsLogged = true;
+              reporter.info(
+                  "Usage of source generators detected - scip-java does not produce SemanticDB files for generated files.\n"
+                      + "This message is logged only once",
+                  e);
+            }
+
+            return null;
+          }
+        } catch (IOException exc) {
+          reporter.exception(exc, e);
+          return null;
+        }
+      }
+
       return Result.error(
           String.format(
               "sourceroot '%s does not contain path '%s'. To fix this problem, update the -sourceroot flag to "
