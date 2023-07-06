@@ -32,25 +32,26 @@ public class BazelBuildTool {
 
     List<MavenPackage> mavenPackages = mavenPackages(options);
     ScipSemanticdbReporter reporter =
-            new ScipSemanticdbReporter() {
-              private boolean hasErrors = false;
-              @Override
-              public void error(Throwable e) {
-                e.printStackTrace(System.err);
-                hasErrors = true;
-              }
+        new ScipSemanticdbReporter() {
+          private boolean hasErrors = false;
 
-              @Override
-              public void error(String message) {
-                System.err.println("ERROR[scip-semanticdb]: " + message);
-                hasErrors = true;
-              }
+          @Override
+          public void error(Throwable e) {
+            e.printStackTrace(System.err);
+            hasErrors = true;
+          }
 
-              @Override
-              public boolean hasErrors() {
-                return this.hasErrors;
-              }
-            };
+          @Override
+          public void error(String message) {
+            System.err.println("ERROR[scip-semanticdb]: " + message);
+            hasErrors = true;
+          }
+
+          @Override
+          public boolean hasErrors() {
+            return this.hasErrors;
+          }
+        };
     ScipSemanticdbOptions scipOptions =
         new ScipSemanticdbOptions(
             options.targetroots,
@@ -67,11 +68,11 @@ public class BazelBuildTool {
     ScipSemanticdb.run(scipOptions);
 
     if (!scipOptions.reporter.hasErrors()) {
-        System.out.println("done: " + scipOptions.output);
-        return 0;
+      System.out.println("done: " + scipOptions.output);
+      return 0;
     } else {
-        System.out.println("SCIP index generation failed");
-        return 1;
+      System.out.println("SCIP index generation failed");
+      return 1;
     }
   }
 
