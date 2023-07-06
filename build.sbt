@@ -20,12 +20,12 @@ lazy val V =
     val scala211 = "2.11.12"
     val scala3 = "3.2.2"
     val metals = "0.11.11"
-    val scalameta = "4.7.6"
+    val scalameta = "4.8.1"
     val semanticdbKotlinc = "0.3.0"
     val testcontainers = "0.39.3"
     val requests = "0.6.5"
     val minimalMillVersion = "0.10.0"
-    val millScipVersion = "0.3.4"
+    val millScipVersion = "0.3.5"
     val kotlinGradlePlugin = "1.5.31"
   }
 
