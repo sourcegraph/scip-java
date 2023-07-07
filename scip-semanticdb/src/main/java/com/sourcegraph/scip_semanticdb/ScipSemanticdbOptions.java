@@ -18,6 +18,7 @@ public class ScipSemanticdbOptions {
   public final List<MavenPackage> packages;
   public final String buildKind;
   public final boolean emitInverseRelationships;
+  public final boolean allowEmptyIndex;
 
   public ScipSemanticdbOptions(
       List<Path> targetroots,
@@ -30,7 +31,8 @@ public class ScipSemanticdbOptions {
       boolean parallel,
       List<MavenPackage> packages,
       String buildKind,
-      boolean emitInverseRelationships) {
+      boolean emitInverseRelationships,
+      boolean allowEmptyIndex) {
     this.targetroots = targetroots;
     this.output = output;
     this.sourceroot = sourceroot;
@@ -42,5 +44,6 @@ public class ScipSemanticdbOptions {
     this.packages = packages;
     this.buildKind = buildKind;
     this.emitInverseRelationships = emitInverseRelationships;
+    this.allowEmptyIndex = allowEmptyIndex;
   }
 }

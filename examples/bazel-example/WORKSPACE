@@ -1,5 +1,6 @@
 # This is an end-to-end example of how to consume scip-java from an external repository.
 workspace(name = "scip_java_example")
+
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 ##############
@@ -20,11 +21,11 @@ http_archive(
 ##############
 local_repository(
     name = "scip_java",
-    path = "../.."
+    path = "../..",
 )
 
 # Copy and paste this, not the local_repository:
-# 
+#
 # SCIP_JAVA_VERSION="0.8.20"
 # http_archive(
 #   name = "scip_java",
@@ -44,8 +45,11 @@ http_archive(
         "https://github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0-3.20.0.tar.gz",
     ],
 )
+
 load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
+
 rules_proto_dependencies()
+
 rules_proto_toolchains()
 
 ##############
@@ -53,27 +57,35 @@ rules_proto_toolchains()
 ##############
 # To update this version, copy-paste instructions from https://github.com/bazelbuild/rules_jvm_external/releases
 RULES_JVM_EXTERNAL_TAG = "4.2"
+
 RULES_JVM_EXTERNAL_SHA = "cd1a77b7b02e8e008439ca76fd34f5b07aecb8c752961f9640dea15e9e5ba1ca"
+
 http_archive(
     name = "rules_jvm_external",
-    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
     sha256 = RULES_JVM_EXTERNAL_SHA,
+    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
     url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
 )
+
 load("@rules_jvm_external//:repositories.bzl", "rules_jvm_external_deps")
+
 rules_jvm_external_deps()
+
 load("@rules_jvm_external//:setup.bzl", "rules_jvm_external_setup")
+
 rules_jvm_external_setup()
+
 load("@rules_jvm_external//:defs.bzl", "maven_install")
+
 maven_install(
     artifacts = [
-        "com.google.protobuf:protobuf-java:3.15.6", # Required dependency by scip-java.
-        "com.google.protobuf:protobuf-java-util:3.15.6", # Required dependency by scip-java.
+        "com.google.protobuf:protobuf-java:3.15.6",  # Required dependency by scip-java.
+        "com.google.protobuf:protobuf-java-util:3.15.6",  # Required dependency by scip-java.
         # These dependencies are only required for the tests
-        "com.google.guava:guava:31.0-jre", 
+        "com.google.guava:guava:31.0-jre",
         "com.google.auto.value:auto-value:1.5.3",
     ],
     repositories = [
-         "https://repo1.maven.org/maven2",
+        "https://repo1.maven.org/maven2",
     ],
 )

@@ -10,7 +10,7 @@ public abstract class ScipSemanticdbReporter {
   public void error(Throwable e) {}
 
   public void error(String message) {
-    error(new RuntimeException(message));
+    error(new MessageOnlyException(message));
   }
 
   public void startProcessing(int taskSize) {}

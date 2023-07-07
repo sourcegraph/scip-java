@@ -163,7 +163,14 @@ lazy val javacPlugin = project
       Seq(
         ShadeRule
           .rename(
+            // Don't rename SemanticdbPlugin since the fully-qualified name is
+            // referenced from META-INF/services/com.sun.source.util.Plugin
+            "com.sourcegraph.semanticdb_javac.SemanticdbPlugin" ->
+              "com.sourcegraph.semanticdb_javac.SemanticdbPlugin",
             "com.google.**" -> "com.sourcegraph.shaded.com.google.@1",
+            // Need to shade the semanticdb-javac compiler plugin in order to be
+            // able to index the plugin code itself.
+            "com.sourcegraph.**" -> "com.sourcegraph.shaded.com.sourcegraph.@1",
             "google.**" -> "com.sourcegraph.shaded.google.@1",
             "org.relaxng.**" -> "com.sourcegraph.shaded.relaxng.@1"
           )
@@ -250,7 +257,7 @@ lazy val cli = project
           }
 
           addJar(
-            (javacPlugin / Compile / Keys.`package`).value,
+            (javacPlugin / Compile / assembly).value,
             "semanticdb-plugin.jar"
           )
           addJar(
@@ -259,7 +266,12 @@ lazy val cli = project
           )
           addJar((gradlePlugin / Compile / assembly).value, "gradle-plugin.jar")
 
-          IO.copy(outs)
+          IO.copy(
+            outs,
+            overwrite = true,
+            preserveLastModified = false,
+            preserveExecutable = true
+          )
           val props = new Properties()
           val propsFile = out.resolve("scip-java.properties").toFile
           val copiedJars = outs.collect { case (_, out) =>

@@ -55,7 +55,7 @@ jobs:
             docker run -v $PWD/.repos/$REPO:/sources -w /sources sourcegraph/scip-java:latest scip-java index
             file .repos/$REPO/index.scip || (echo "$REPO SCIP index doesn't exist!"; exit 1) 
           }
-          
+
           sudo apt install parallel
           export -f check_repo
 
@@ -72,6 +72,22 @@ jobs:
       - run: bazel build //... --@scip_java//semanticdb-javac:enabled=true
         working-directory: examples/bazel-example
       - run: bazel run @scip_java//scip-semanticdb:bazel -- --sourceroot "$PWD"
+        working-directory: examples/bazel-example
+      - run: du -h index.scip
+        working-directory: examples/bazel-example
+
+  bazel_aspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn global add @bazel/bazelisk
+      - run: sbt cli/pack
+      - run: echo "$PWD/scip-java/target/pack/bin" >> $GITHUB_PATH
+      - run: |
+          scip-java index --build-tool=bazel --bazel-scip-java-binary=$(which scip-java)
+      - run: du -h index.scip
+      - run: |
+          scip-java index --build-tool=bazel --bazel-scip-java-binary=$(which scip-java)
         working-directory: examples/bazel-example
       - run: du -h index.scip
         working-directory: examples/bazel-example

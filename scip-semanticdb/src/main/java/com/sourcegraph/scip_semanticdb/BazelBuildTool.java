@@ -64,6 +64,7 @@ public class BazelBuildTool {
             options.parallel,
             mavenPackages,
             "",
+            true,
             true);
     ScipSemanticdb.run(scipOptions);
 

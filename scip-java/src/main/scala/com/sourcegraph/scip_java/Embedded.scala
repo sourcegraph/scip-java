@@ -112,6 +112,14 @@ object Embedded {
     }
   }
 
+  def bazelAspectFile(tmpDir: Path): String = {
+    val tmpFile = copyFile(tmpDir, "scip-java/scip_java.bzl")
+    val contents =
+      new String(Files.readAllBytes(tmpFile), StandardCharsets.UTF_8)
+    Files.deleteIfExists(tmpFile)
+    contents
+  }
+
   private def copyFile(tmpDir: Path, filename: String): Path = {
     val in = this.getClass.getResourceAsStream(s"/$filename")
     val out = tmpDir.resolve(filename)
