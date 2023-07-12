@@ -1,18 +1,20 @@
 """Java rules that automatically register the SemanticDB compiler plugin based on the presence of a string flag."""
-load("@rules_java//java:defs.bzl", native_java_library="java_library", native_java_binary="java_binary")
 
-def java_library(javacopts=[], plugins=[],**kwargs):
+load("@rules_java//java:defs.bzl", native_java_binary = "java_binary", native_java_library = "java_library")
+
+def java_library(javacopts = [], plugins = [], **kwargs):
     native_java_library(
-	    javacopts=_actual_javacopts(javacopts),
-	    plugins=_actual_plugins(plugins),
-	    **kwargs)
+        javacopts = _actual_javacopts(javacopts),
+        plugins = _actual_plugins(plugins),
+        **kwargs
+    )
 
-
-def java_binary(javacopts=[], plugins=[],**kwargs):
+def java_binary(javacopts = [], plugins = [], **kwargs):
     native_java_binary(
-	    javacopts=_actual_javacopts(javacopts),
-	    plugins=_actual_plugins(plugins),
-	    **kwargs)
+        javacopts = _actual_javacopts(javacopts),
+        plugins = _actual_plugins(plugins),
+        **kwargs
+    )
 
 def _actual_javacopts(javacopts):
     return select({

@@ -436,15 +436,22 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
   private String semanticdbUri() {
     Path absolutePath = SemanticdbTaskListener.absolutePathFromUri(options, event.getSourceFile());
-    Path relativePath = options.sourceroot.relativize(absolutePath);
+    Path uriPath =
+        absolutePath.startsWith(options.sourceroot)
+            ? options.sourceroot.relativize(absolutePath)
+            : absolutePath;
     StringBuilder out = new StringBuilder();
-    Iterator<Path> it = relativePath.iterator();
+    Iterator<Path> it = uriPath.iterator();
     if (it.hasNext()) out.append(it.next().getFileName().toString());
     while (it.hasNext()) {
       Path part = it.next();
       out.append('/').append(part.getFileName().toString());
     }
     return out.toString();
+  }
+
+  private Path semanticdbPath() {
+    return SemanticdbTaskListener.absolutePathFromUri(options, event.getSourceFile());
   }
 
   private Semanticdb.Documentation semanticdbDocumentation(Symbol sym) {

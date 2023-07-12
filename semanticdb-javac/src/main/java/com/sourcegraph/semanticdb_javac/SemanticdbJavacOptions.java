@@ -5,6 +5,8 @@ import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import javax.tools.FileObject;
 import javax.tools.JavaFileManager;
 import javax.tools.JavaFileObject;
@@ -26,6 +28,7 @@ public class SemanticdbJavacOptions {
   public final ArrayList<String> errors;
   public boolean alreadyReportedErrors = false;
   public UriScheme uriScheme = UriScheme.DEFAULT;
+  public NoRelativePathMode noRelativePath = NoRelativePathMode.INDEX_ANYWAY;
   public Path generatedTargetRoot;
 
   public static String stubClassName = "META-INF-semanticdb-stub";
@@ -60,6 +63,31 @@ public class SemanticdbJavacOptions {
         result.sourceroot = Paths.get(arg.substring("-sourceroot:".length())).normalize();
       } else if (arg.equals("-build-tool:sbt") || arg.equals("-build-tool:mill")) {
         result.uriScheme = UriScheme.ZINC;
+      } else if (arg.startsWith("-no-relative-path:")) {
+        String value = arg.substring("-no-relative-path:".length());
+        switch (value) {
+          case "index_anyway":
+            result.noRelativePath = NoRelativePathMode.INDEX_ANYWAY;
+            break;
+          case "skip":
+            result.noRelativePath = NoRelativePathMode.SKIP;
+            break;
+          case "error":
+            result.noRelativePath = NoRelativePathMode.ERROR;
+            break;
+          case "warning":
+            result.noRelativePath = NoRelativePathMode.WARNING;
+            break;
+          default:
+            String validValues =
+                Arrays.stream(NoRelativePathMode.values())
+                    .map(NoRelativePathMode::toString)
+                    .collect(Collectors.joining(", "));
+            result.errors.add(
+                String.format(
+                    "unknown -no-relative-path mode '%s'. Valid values are %s.",
+                    value, validValues));
+        }
       } else if (arg.equals("-build-tool:bazel")) {
         result.uriScheme = UriScheme.BAZEL;
         useJavacClassesDir = true;

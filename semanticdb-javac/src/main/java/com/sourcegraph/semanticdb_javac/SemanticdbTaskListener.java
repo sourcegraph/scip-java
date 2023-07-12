@@ -6,7 +6,6 @@ import com.sun.source.util.TaskListener;
 import com.sun.source.util.Trees;
 import com.sun.tools.javac.model.JavacTypes;
 
-import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 import java.io.IOException;
 import java.net.URI;
@@ -25,7 +24,7 @@ public final class SemanticdbTaskListener implements TaskListener {
   private final SemanticdbReporter reporter;
   private final JavacTypes javacTypes;
   private final Trees trees;
-  private boolean sourceGeneratorsMessageIsLogged = false;
+  private int noRelativePathCounter = 0;
 
   public SemanticdbTaskListener(
       SemanticdbJavacOptions options,
@@ -130,7 +129,11 @@ public final class SemanticdbTaskListener implements TaskListener {
           new String[] {"SimpleFileObject[", "DirectoryFileObject["};
       for (String pattern : knownBazelToStringPatterns) {
         if (toString.startsWith(pattern) && toString.endsWith("]")) {
-          return Paths.get(toString.substring(pattern.length(), toString.length() - 1));
+          Path path = Paths.get(toString.substring(pattern.length(), toString.length() - 1));
+          if (path.isAbsolute()) {
+            return path;
+          }
+          return options.sourceroot.resolve(path);
         }
       }
       throw new IllegalArgumentException("unsupported source file: " + toString);
@@ -190,32 +193,41 @@ public final class SemanticdbTaskListener implements TaskListener {
               .resolve(relativePath)
               .resolveSibling(filename);
       return Result.ok(semanticdbOutputPath);
-    } else {
+    }
 
-      if (options.uriScheme == UriScheme.BAZEL && options.generatedTargetRoot != null) {
-        try {
-          if (absolutePath.toRealPath().startsWith(options.generatedTargetRoot)) {
-            if (!sourceGeneratorsMessageIsLogged) {
-              sourceGeneratorsMessageIsLogged = true;
-              reporter.info(
-                  "Usage of source generators detected - scip-java does not produce SemanticDB files for generated files.\n"
-                      + "This message is logged only once",
-                  e);
-            }
-
-            return null;
-          }
-        } catch (IOException exc) {
-          reporter.exception(exc, e);
-          return null;
-        }
-      }
-
-      return Result.error(
-          String.format(
-              "sourceroot '%s does not contain path '%s'. To fix this problem, update the -sourceroot flag to "
-                  + "be a parent directory of this source file.",
-              options.sourceroot, absolutePath));
+    switch (options.noRelativePath) {
+      case INDEX_ANYWAY:
+        // Come up with a unique relative path for this file even if it's not under the sourceroot.
+        // By indexing auto-generated files, we collect SymbolInformation for auto-generated symbol,
+        // which results in more useful hover tooltips in the editor.
+        // In the future, we may want to additionally embed the full text contents of these files
+        // so that it's possible to browse generated files with precise code navigation.
+        String uniqueFilename =
+            String.format("%d.%s.semanticdb", ++noRelativePathCounter, absolutePath.getFileName());
+        Path semanticdbOutputPath =
+            options
+                .targetroot
+                .resolve("META-INF")
+                .resolve("semanticdb")
+                .resolve("no-relative-path")
+                .resolve(uniqueFilename);
+        return Result.ok(semanticdbOutputPath);
+      case WARNING:
+        reporter.info(
+            String.format(
+                "Skipping file '%s' because it is not under the sourceroot '%s'",
+                absolutePath, options.sourceroot),
+            e);
+      case SKIP:
+        return null;
+      case ERROR:
+      default:
+        return Result.error(
+            String.format(
+                "Unable to detect the relative path of '%s'. A common reason for this error is that the file is that this file is auto-generated. "
+                    + "To fix this problem, either configure the -sourceroot:PATH flag to be the parent directory of all indexed files, or "
+                    + "configure -no-relative-path:VALUE flag to have one of the following values: index_anyway, skip, warning.",
+                absolutePath));
     }
   }
 }
