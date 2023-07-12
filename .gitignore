@@ -65,3 +65,4 @@ bazel-lsif-java
 VERSION
 
 semanticdb-gradle-plugin/gradle
+aspects/scip_java.bzl

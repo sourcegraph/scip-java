@@ -167,6 +167,10 @@ lazy val javacPlugin = project
             // referenced from META-INF/services/com.sun.source.util.Plugin
             "com.sourcegraph.semanticdb_javac.SemanticdbPlugin" ->
               "com.sourcegraph.semanticdb_javac.SemanticdbPlugin",
+            "com.sourcegraph.semanticdb_javac.PrintJavaVersion" ->
+              "com.sourcegraph.semanticdb_javac.PrintJavaVersion",
+            "com.sourcegraph.semanticdb_javac.InjectSemanticdbOptions" ->
+              "com.sourcegraph.semanticdb_javac.InjectSemanticdbOptions",
             "com.google.**" -> "com.sourcegraph.shaded.com.google.@1",
             // Need to shade the semanticdb-javac compiler plugin in order to be
             // able to index the plugin code itself.
@@ -257,7 +261,7 @@ lazy val cli = project
           }
 
           addJar(
-            (javacPlugin / Compile / assembly).value,
+            (javacPlugin / Compile / Keys.`package`).value,
             "semanticdb-plugin.jar"
           )
           addJar(

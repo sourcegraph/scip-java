@@ -1,2 +1,2 @@
-aspects/scip_java.bzl
 bazel-bazel-example
+aspects/scip_java.bzl

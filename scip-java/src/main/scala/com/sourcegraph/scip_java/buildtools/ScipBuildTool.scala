@@ -186,7 +186,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
     val compileAttempts = ListBuffer.empty[Try[Unit]]
     compileAttempts += compileJavaFiles(tmp, deps, config, javaFiles)
-    compileAttempts += compileScalaFiles(deps, scalaFiles)
+    compileAttempts += compileScalaFiles(deps, scalaFiles, tmp)
     compileAttempts += compileKotlinFiles(deps, config, kotlinFiles)
     val errors = compileAttempts.collect { case Failure(exception) =>
       exception
@@ -347,11 +347,12 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
   private def compileScalaFiles(
       deps: Dependencies,
-      allScalaFiles: List[Path]
+      allScalaFiles: List[Path],
+      tmp: Path
   ): Try[Unit] =
     Try {
       if (deps.dependencies.nonEmpty && allScalaFiles.nonEmpty)
-        withScalaPresentationCompiler(deps) { compiler =>
+        withScalaPresentationCompiler(deps, tmp) { compiler =>
           allScalaFiles.foreach { path =>
             try compileScalaFile(compiler, path)
             catch {
@@ -393,9 +394,9 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     )
   }
 
-  private def withScalaPresentationCompiler[T](
-      deps: Dependencies
-  )(fn: PresentationCompiler => T): T = {
+  private def withScalaPresentationCompiler[T](deps: Dependencies, tmp: Path)(
+      fn: PresentationCompiler => T
+  ): T = {
     val scalaVersion = deps
       .classpath
       .iterator
@@ -423,7 +424,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       .iterator()
     if (compilers.hasNext) {
       val classpath = deps.classpath ++ scalaLibrary
-      val argsfile = targetroot.resolve("javacopts.txt")
+      val argsfile = tmp.resolve("javacopts.txt")
       Files.createDirectories(argsfile.getParent)
       Files.write(
         argsfile,
@@ -491,7 +492,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
           AbsolutePath.of(Paths.get(path), index.workingDirectory).toString
         )
     actualClasspath ++= deps.classpath.map(_.toString)
-    val argsfile = targetroot.resolve("javacopts.txt")
+    val argsfile = tmp.resolve("javacopts.txt")
     val arguments = ListBuffer.empty[String]
     arguments += "-encoding"
     arguments += "utf8"
@@ -677,7 +678,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       !pathString.startsWith("bazel-bin") && !pathString.startsWith("bazel-out")
     ) {
       path = AbsolutePath
-        .of(Paths.get("bazel-out", pathString), workingDirectory)
+        .of(Paths.get("bazel-bin", pathString), workingDirectory)
 
       if (Files.isRegularFile(path))
         return Some(path)
@@ -758,7 +759,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       processorpath: List[String] = Nil,
       processors: List[String] = Nil,
       javacOptions: List[String] = Nil,
-      jvm: String = "8",
+      jvm: String = "17",
       kind: String = ""
   )
   private object Config {

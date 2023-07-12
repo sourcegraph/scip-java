@@ -8,12 +8,12 @@ import java.nio.file.Path
 import java.nio.file.SimpleFileVisitor
 import java.nio.file.StandardOpenOption
 import java.nio.file.attribute.BasicFileAttributes
-
 import scala.collection.mutable.ListBuffer
-
 import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
+import moped.cli.Application
+import os.ProcessOutput.Readlines
 
 class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
 
@@ -31,6 +31,8 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
         val buildCommand = ListBuffer.empty[String]
         buildCommand += "bazel"
         buildCommand += "build"
+        buildCommand += "--noshow_progress"
+        buildCommand += "--sandbox_debug"
 
         val targetSpecs = ListBuffer.empty[String]
         if (index.buildCommand.isEmpty) {
@@ -72,12 +74,18 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
         }
         buildCommand += s"--define=scip_java_binary=$scipJavaBinary"
 
+        val sandbox = new SandboxCommandExtractor(index.app)
         index.app.info(buildCommand.mkString(" "))
         val commandResult = index
           .app
           .process(buildCommand.toList)
-          .call(check = false)
+          .call(check = false, stderr = Readlines(sandbox))
         if (commandResult.exitCode != 0) {
+          // Automatically run the sandbox command to help the user debug the problem.
+          index
+            .app
+            .process("bash", "-c", sandbox.commandLines().mkString("\n"))
+            .call(check = false, stdout = os.Inherit, stderr = os.Inherit)
           index
             .app
             .error(
@@ -124,6 +132,35 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
           }
         )
         0
+    }
+  }
+
+  /**
+   * Callback to `os.ProcessOutput.Readlines` that processes the stderr output
+   * of a running Bazel process and extract the sandbox command. When the
+   * --sandbox_debug flag is enabled, Bazel prints out the sandbox command that
+   * failed but it doesn't show the stdout/stderr of that command. This
+   * extractor captures the command so that we can automatically re-run the
+   * command to print out the stdout/stderr.
+   */
+  private class SandboxCommandExtractor(app: Application)
+      extends (String => Unit) {
+    private var isSandboxCommandPrinting = false
+    private val lines = ListBuffer.empty[String]
+    def commandLines(): List[String] = lines.toList
+    def command(): List[String] = List("bash", "-c", lines.mkString("\n"))
+    override def apply(line: String): Unit = {
+      if (
+        !isSandboxCommandPrinting && line.startsWith("ERROR:") &&
+        line.endsWith("error executing command ")
+      ) {
+        isSandboxCommandPrinting = true
+      } else if (isSandboxCommandPrinting && !line.startsWith("  ")) {
+        isSandboxCommandPrinting = false
+      } else if (isSandboxCommandPrinting) {
+        lines += line
+      }
+      app.env.standardError.println(line)
     }
   }
 

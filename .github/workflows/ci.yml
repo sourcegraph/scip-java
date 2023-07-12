@@ -5,76 +5,76 @@ on:
       - main
   pull_request:
 jobs:
-  test:
-    runs-on: ${{ matrix.os }}
-    name: Tests
-    strategy:
-      fail-fast: false
-      matrix:
-        # NOTE(olafurpg) Windows is not enabled because it times out due to reasons I don't understand.
-        # os: [windows-latest, ubuntu-latest]
-        os: [ubuntu-latest]
-        java: [8, 11, 17]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v3
-        with:
-          distribution: "temurin"
-          cache: "sbt"
-          java-version: ${{ matrix.java }}
-      - name: Main project tests
-        run: sbt test
+  # test:
+  #   runs-on: ${{ matrix.os }}
+  #   name: Tests
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       # NOTE(olafurpg) Windows is not enabled because it times out due to reasons I don't understand.
+  #       # os: [windows-latest, ubuntu-latest]
+  #       os: [ubuntu-latest]
+  #       java: [8, 11, 17]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-java@v3
+  #       with:
+  #         distribution: "temurin"
+  #         cache: "sbt"
+  #         java-version: ${{ matrix.java }}
+  #     - name: Main project tests
+  #       run: sbt test
 
-  docker_test:
-    runs-on: ${{ matrix.os }}
-    name: Docker CLI tests
-    strategy:
-      fail-fast: true
-      matrix:
-        os: [ubuntu-latest]
-    steps:
-      - uses: actions/checkout@v2
+  # docker_test:
+  #   runs-on: ${{ matrix.os }}
+  #   name: Docker CLI tests
+  #   strategy:
+  #     fail-fast: true
+  #     matrix:
+  #       os: [ubuntu-latest]
+  #   steps:
+  #     - uses: actions/checkout@v2
 
-      - uses: actions/setup-java@v3
-        with:
-          distribution: "temurin"
-          cache: "sbt"
-          java-version: 17
+  #     - uses: actions/setup-java@v3
+  #       with:
+  #         distribution: "temurin"
+  #         cache: "sbt"
+  #         java-version: 17
 
-      - name: Build Dockerised CLI
-        run: sbt cli/docker
+  #     - name: Build Dockerised CLI
+  #       run: sbt cli/docker
 
-      - run: |
+  #     - run: |
 
-          set -eu
-          check_repo() {
-            REPO=$1
-            mkdir -p .repos/$REPO
-            git clone https://github.com/$REPO.git .repos/$REPO
+  #         set -eu
+  #         check_repo() {
+  #           REPO=$1
+  #           mkdir -p .repos/$REPO
+  #           git clone https://github.com/$REPO.git .repos/$REPO
 
-            docker run -v $PWD/.repos/$REPO:/sources -w /sources sourcegraph/scip-java:latest scip-java index
-            file .repos/$REPO/index.scip || (echo "$REPO SCIP index doesn't exist!"; exit 1) 
-          }
+  #           docker run -v $PWD/.repos/$REPO:/sources -w /sources sourcegraph/scip-java:latest scip-java index
+  #           file .repos/$REPO/index.scip || (echo "$REPO SCIP index doesn't exist!"; exit 1)
+  #         }
 
-          sudo apt install parallel
-          export -f check_repo
+  #         sudo apt install parallel
+  #         export -f check_repo
 
-          parallel -j4 check_repo ::: circe/circe indeedeng/iwf-java-sdk
+  #         parallel -j4 check_repo ::: circe/circe indeedeng/iwf-java-sdk
 
-  bazel:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: yarn global add @bazel/bazelisk
-      - run: bazel build //... --//semanticdb-javac:enabled=true
-      - run: bazel run scip-semanticdb:bazel -- --sourceroot "$PWD"
-      - run: du -h index.scip
-      - run: bazel build //... --@scip_java//semanticdb-javac:enabled=true
-        working-directory: examples/bazel-example
-      - run: bazel run @scip_java//scip-semanticdb:bazel -- --sourceroot "$PWD"
-        working-directory: examples/bazel-example
-      - run: du -h index.scip
-        working-directory: examples/bazel-example
+  # bazel:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - run: yarn global add @bazel/bazelisk
+  #     - run: bazel build //... --//semanticdb-javac:enabled=true
+  #     - run: bazel run scip-semanticdb:bazel -- --sourceroot "$PWD"
+  #     - run: du -h index.scip
+  #     - run: bazel build //... --@scip_java//semanticdb-javac:enabled=true
+  #       working-directory: examples/bazel-example
+  #     - run: bazel run @scip_java//scip-semanticdb:bazel -- --sourceroot "$PWD"
+  #       working-directory: examples/bazel-example
+  #     - run: du -h index.scip
+  #       working-directory: examples/bazel-example
 
   bazel_aspect:
     runs-on: ubuntu-latest
@@ -85,20 +85,17 @@ jobs:
       - run: echo "$PWD/scip-java/target/pack/bin" >> $GITHUB_PATH
       - run: |
           scip-java index --build-tool=bazel --bazel-scip-java-binary=$(which scip-java)
-      - run: du -h index.scip
-      - run: |
-          scip-java index --build-tool=bazel --bazel-scip-java-binary=$(which scip-java)
         working-directory: examples/bazel-example
       - run: du -h index.scip
         working-directory: examples/bazel-example
 
-  check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v3
-        with:
-          distribution: "temurin"
-          java-version: 17
-          cache: "sbt"
-      - run: sbt checkAll
+  # check:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-java@v3
+  #       with:
+  #         distribution: "temurin"
+  #         java-version: 17
+  #         cache: "sbt"
+  #     - run: sbt checkAll

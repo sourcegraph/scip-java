@@ -82,6 +82,8 @@ def _scip_java(target, ctx):
         output = build_config_path,
         content = build_config.to_json(),
     )
+
+    deps = [javac_action.inputs, annotations.processor_classpath]
     ctx.actions.run_shell(
         command = "\"{}\" index --no-cleanup --index-semanticdb.allow-empty-index --cwd \"{}\" --targetroot {} --scip-config \"{}\" --output \"{}\"".format(
             ctx.var["scip_java_binary"],
@@ -94,7 +96,7 @@ def _scip_java(target, ctx):
             "JAVA_HOME": ctx.var["java_home"],
             "NO_PROGRESS_BAR": "true",
         },
-        inputs = [build_config_path],
+        inputs = depset([build_config_path], transitive = deps),
         outputs = [scip_output, targetroot],
     )
 
