@@ -32,7 +32,10 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
         buildCommand += "bazel"
         buildCommand += "build"
         buildCommand += "--noshow_progress"
-        buildCommand += "--sandbox_debug"
+
+        // The local strategy is required for now because we write SemanticDB and SCIP files
+        // to the provided targetroot directory.
+        buildCommand += "--spawn_strategy=local"
 
         val targetSpecs = ListBuffer.empty[String]
         if (index.buildCommand.isEmpty) {

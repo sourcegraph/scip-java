@@ -424,7 +424,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       .iterator()
     if (compilers.hasNext) {
       val classpath = deps.classpath ++ scalaLibrary
-      val argsfile = tmp.resolve("javacopts.txt")
+      val argsfile = targetroot.resolve("javacopts.txt")
       Files.createDirectories(argsfile.getParent)
       Files.write(
         argsfile,
@@ -492,7 +492,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
           AbsolutePath.of(Paths.get(path), index.workingDirectory).toString
         )
     actualClasspath ++= deps.classpath.map(_.toString)
-    val argsfile = tmp.resolve("javacopts.txt")
+    val argsfile = targetroot.resolve("javacopts.txt")
     val arguments = ListBuffer.empty[String]
     arguments += "-encoding"
     arguments += "utf8"

@@ -7,7 +7,9 @@ import com.sun.source.util.Trees;
 import com.sun.tools.javac.model.JavacTypes;
 
 import javax.tools.JavaFileObject;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -71,9 +73,18 @@ public final class SemanticdbTaskListener implements TaskListener {
             new CompilationUnitException(
                 String.valueOf(e.getSourceFile().toUri().toString()), throwable);
       }
-      reporter.exception(throwable, e.getCompilationUnit(), e.getCompilationUnit());
+      this.reportException(throwable, e);
       throw new RuntimeException(ex.getMessage(), throwable);
     }
+  }
+
+  // Uses reporter.error with the full stack trace of the exception instead of reporter.exception
+  // because reporter.exception doesn't seem to print any meaningful information about the
+  // exception, it just prints the location with an empty message.
+  private void reportException(Throwable exception, TaskEvent e) {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    exception.printStackTrace(new PrintWriter(baos));
+    reporter.error(baos.toString(), e.getCompilationUnit(), e.getCompilationUnit());
   }
 
   private void onFinishedAnalyze(TaskEvent e) {
@@ -97,7 +108,7 @@ public final class SemanticdbTaskListener implements TaskListener {
       Files.createDirectories(output.getParent());
       Files.write(output, bytes);
     } catch (IOException e) {
-      reporter.exception(e, event.getCompilationUnit(), event.getCompilationUnit());
+      this.reportException(e, event);
     }
   }
 
