@@ -528,16 +528,13 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       arguments += processors.mkString(",")
     }
     arguments ++=
-      config
-        .javacOptions
-        .filterNot(option =>
-          option.startsWith("-Xep") ||
-            option
-              .startsWith("-Xplugin:semanticdb") || option.startsWith("-XD") ||
-            index
-              .scipIgnoredJavacOptionPrefixes
-              .exists(prefix => option.startsWith(prefix))
-        )
+      fixJavacOptions(config.javacOptions).filterNot(option =>
+        option.startsWith("-Xep") || option.startsWith("-Xplugin:semanticdb") ||
+          option.startsWith("-XD") ||
+          index
+            .scipIgnoredJavacOptionPrefixes
+            .exists(prefix => option.startsWith(prefix))
+      )
     if (config.kind == "jdk" && moduleInfos.nonEmpty) {
       moduleInfos.foreach { module =>
         arguments += "--module"
@@ -576,6 +573,16 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     else
       Failure(SubprocessException(result))
   }
+
+  private def fixJavacOptions(options: List[String]): List[String] =
+    options match {
+      case "--release" :: _ :: rest =>
+        fixJavacOptions(rest)
+      case option :: rest =>
+        option :: fixJavacOptions(rest)
+      case Nil =>
+        Nil
+    }
 
   private def javacPath(config: Config, tmp: Path): Path = {
     config.javaHome match {

@@ -39,12 +39,11 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
         // to the provided targetroot directory.
         buildCommand += "--spawn_strategy=local"
 
-        val targetSpecs = ListBuffer.empty[String]
-        if (index.buildCommand.isEmpty) {
-          targetSpecs += "//..."
-        } else {
-          targetSpecs ++= index.buildCommand
-        }
+        val targetSpecs =
+          if (index.buildCommand.isEmpty)
+            List("//...")
+          else
+            index.buildCommand
         buildCommand ++= targetSpecs
 
         buildCommand += "--aspects"
@@ -86,11 +85,17 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
           .process(buildCommand.toList)
           .call(check = false, stderr = Readlines(sandbox))
         if (commandResult.exitCode != 0) {
-          // Automatically run the sandbox command to help the user debug the problem.
-          index
-            .app
-            .process("bash", "-c", sandbox.commandLines().mkString("\n"))
-            .call(check = false, stdout = os.Inherit, stderr = os.Inherit)
+          if (index.bazelAutorunSandboxCommand) {
+            index
+              .app
+              .info(
+                "Automatically re-running sandbox command to help debug the problem."
+              )
+            index
+              .app
+              .process("bash", "-c", sandbox.commandLines().mkString("\n"))
+              .call(check = false, stdout = os.Inherit, stderr = os.Inherit)
+          }
           index
             .app
             .error(
@@ -105,6 +110,7 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
             )
           return commandResult.exitCode
         }
+
         // Final step after running the aspect: aggregate all the generated `*.scip` files into a single index.scip file.
         // We have to do this step outside of Bazel because Bazel does not allow actions to generate outputs outside
         // of the bazel-out directory. Ideally, we should be able to implement the aggregation step inside Bazel
@@ -114,10 +120,20 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
         Files.deleteIfExists(index.finalOutput)
         Files.createDirectories(index.finalOutput.getParent)
         val scipPattern = FileSystems.getDefault.getPathMatcher("glob:**.scip")
-        val binDirectory = Files
-          .readSymbolicLink(index.workingDirectory.resolve("bazel-bin"))
+        val bazelOut = index.workingDirectory.resolve("bazel-out")
+        if (!Files.exists(bazelOut)) {
+          index
+            .app
+            .error(
+              s"doing nothing, the directory $bazelOut does not exist. " +
+                s"The most likely cause for this problem is that there are no Java targets in this Bazel workspace. " +
+                s"Please report an issue to the scip-java issue tracker if the command `bazel query 'kind(java_*, //...)'` returns non-empty output."
+            )
+          return 0
+        }
+        val bazelOutLink = Files.readSymbolicLink(bazelOut)
         Files.walkFileTree(
-          binDirectory,
+          bazelOutLink,
           new SimpleFileVisitor[Path] {
             override def visitFile(
                 file: Path,
@@ -153,11 +169,10 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
     private var isSandboxCommandPrinting = false
     private val lines = ListBuffer.empty[String]
     def commandLines(): List[String] = lines.toList
-    def command(): List[String] = List("bash", "-c", lines.mkString("\n"))
     override def apply(line: String): Unit = {
       if (
         !isSandboxCommandPrinting && line.startsWith("ERROR:") &&
-        line.endsWith("error executing command ")
+        line.contains("error executing command")
       ) {
         isSandboxCommandPrinting = true
       } else if (isSandboxCommandPrinting && !line.startsWith("  ")) {

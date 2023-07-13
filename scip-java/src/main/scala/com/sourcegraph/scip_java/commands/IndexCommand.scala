@@ -76,6 +76,9 @@ case class IndexCommand(
       "If true, overwrites the existing Bazel aspect file (if any)"
     ) bazelOverwriteAspectFile: Boolean = false,
     @Description(
+      "If true, automatically tries to extract the printed out sandbox command and re-run the command to reveal the underlying problem."
+    ) bazelAutorunSandboxCommand: Boolean = true,
+    @Description(
       "Optional. The build command to use to compile all sources. " +
         "Defaults to a build-specific command. For example, the default command for Maven command is 'clean verify -DskipTests'." +
         "To override the default, pass in the build command after a double dash: 'scip-java index -- compile test:compile'"

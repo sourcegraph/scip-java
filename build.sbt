@@ -167,13 +167,19 @@ lazy val javacPlugin = project
             // referenced from META-INF/services/com.sun.source.util.Plugin
             "com.sourcegraph.semanticdb_javac.SemanticdbPlugin" ->
               "com.sourcegraph.semanticdb_javac.SemanticdbPlugin",
+            // Don't rename PrintJavaVersion because we load it via FQN to
+            // detect the Java of a JVM installation.
             "com.sourcegraph.semanticdb_javac.PrintJavaVersion" ->
               "com.sourcegraph.semanticdb_javac.PrintJavaVersion",
+            // Don't rename InjectSemanticdbOptions because we load it via FQN to
+            // process a list of Java compiler options.
             "com.sourcegraph.semanticdb_javac.InjectSemanticdbOptions" ->
               "com.sourcegraph.semanticdb_javac.InjectSemanticdbOptions",
             "com.google.**" -> "com.sourcegraph.shaded.com.google.@1",
-            // Need to shade the semanticdb-javac compiler plugin in order to be
-            // able to index the plugin code itself.
+            // Shade everything else in the semanticdb-javac compiler plugin in
+            // order to be able to index the plugin code itself. Without this step,
+            // we can't add the plugin to the classpath while compiling the source
+            // code of the plugin itself because it results in cryptic compile errors.
             "com.sourcegraph.**" -> "com.sourcegraph.shaded.com.sourcegraph.@1",
             "google.**" -> "com.sourcegraph.shaded.google.@1",
             "org.relaxng.**" -> "com.sourcegraph.shaded.relaxng.@1"

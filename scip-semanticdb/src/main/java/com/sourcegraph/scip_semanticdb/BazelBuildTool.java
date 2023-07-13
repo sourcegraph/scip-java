@@ -63,9 +63,9 @@ public class BazelBuildTool {
             ScipOutputFormat.TYPED_PROTOBUF,
             options.parallel,
             mavenPackages,
-            "",
-            true,
-            true);
+            /* buildKind */ "",
+            /* emitInverseRelationships */ true,
+            /* allowEmptyIndex */ true);
     ScipSemanticdb.run(scipOptions);
 
     if (!scipOptions.reporter.hasErrors()) {
@@ -109,7 +109,7 @@ public class BazelBuildTool {
               String[] parts = tag.substring("maven_coordinates=".length()).split(":");
               if (parts.length == 3) {
                 // The jar part is populated via `withJar()` below.
-                basePackage = new MavenPackage(/* jar = */ null, parts[0], parts[1], parts[2]);
+                basePackage = new MavenPackage(/* jar= */ null, parts[0], parts[1], parts[2]);
               }
             }
           }
