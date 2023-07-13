@@ -233,12 +233,18 @@ public final class SemanticdbTaskListener implements TaskListener {
         return null;
       case ERROR:
       default:
-        return Result.error(
+        String baseMessage =
             String.format(
                 "Unable to detect the relative path of '%s'. A common reason for this error is that the file is that this file is auto-generated. "
-                    + "To fix this problem, either configure the -sourceroot:PATH flag to be the parent directory of all indexed files, or "
-                    + "configure -no-relative-path:VALUE flag to have one of the following values: index_anyway, skip, warning.",
-                absolutePath));
+                    + "To fix this problem update the flag -no-relative-path:VALUE to have one of the following values: %s.",
+                absolutePath, NoRelativePathMode.validStringValuesWithoutError());
+        if (options.uriScheme == UriScheme.BAZEL) {
+          return Result.error(baseMessage);
+        }
+
+        return Result.error(
+            baseMessage
+                + " Alternatively, configure the -sourceroot:PATH flag to point to a directory path that is the parent of all indexed files.");
     }
   }
 }

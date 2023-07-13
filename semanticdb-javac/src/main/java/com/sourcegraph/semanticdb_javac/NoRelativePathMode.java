@@ -1,5 +1,8 @@
 package com.sourcegraph.semanticdb_javac;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * Configuration options to determine how semanticdb-javac should handle files that have no good
  * relative paths.
@@ -24,5 +27,18 @@ public enum NoRelativePathMode {
   ERROR,
 
   /** Ignore the file, but print a message explaining it's ignored. */
-  WARNING
+  WARNING;
+
+  public static String validStringValuesWithoutError() {
+    return Arrays.stream(NoRelativePathMode.values())
+        .filter(mode -> !mode.equals(ERROR))
+        .map(NoRelativePathMode::toString)
+        .collect(Collectors.joining(", "));
+  }
+
+  public static String validStringValues() {
+    return Arrays.stream(NoRelativePathMode.values())
+        .map(NoRelativePathMode::toString)
+        .collect(Collectors.joining(", "));
+  }
 }
