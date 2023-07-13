@@ -136,8 +136,8 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
         .app
         .error(
           s"doing nothing, the directory $bazelOut does not exist. " +
-            s"The most likely cause for this problem is that there are no Java targets in this Bazel workspace. " +
-            s"Please report an issue to the scip-java issue tracker if the command `bazel query 'kind(java_*, //...)'` returns non-empty output."
+            "The most likely cause for this problem is that there are no Java targets in this Bazel workspace. " +
+            "Please report an issue to the scip-java issue tracker if the command `bazel query 'kind(java_*, //...)'` returns non-empty output."
         )
     } else {
       val bazelOutLink = Files.readSymbolicLink(bazelOut)
