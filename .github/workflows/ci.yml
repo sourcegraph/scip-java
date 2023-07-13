@@ -83,7 +83,12 @@ jobs:
       - run: yarn global add @bazel/bazelisk
       - run: sbt cli/pack
       - run: echo "$PWD/scip-java/target/pack/bin" >> $GITHUB_PATH
-      - run: |
+      - name: Auto-index scip-java codebase
+        run: |
+          scip-java index --build-tool=bazel --bazel-scip-java-binary=$(which scip-java)
+      - run: du -h index.scip
+      - name: Auto-index example/bazel-workspace
+        run: |
           scip-java index --build-tool=bazel --bazel-scip-java-binary=$(which scip-java)
         working-directory: examples/bazel-example
       - run: du -h index.scip
