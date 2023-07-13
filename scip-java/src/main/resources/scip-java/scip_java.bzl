@@ -79,6 +79,7 @@ def _scip_java(target, ctx):
         "processors": processors,
         "processorpath": processorpath,
         "bootclasspath": bootclasspath,
+        "reportWarningOnEmptyIndex": False,
     })
     build_config_path = ctx.actions.declare_file(ctx.label.name + ".scip.json")
 

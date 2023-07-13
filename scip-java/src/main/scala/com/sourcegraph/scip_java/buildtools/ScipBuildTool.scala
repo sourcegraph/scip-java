@@ -175,12 +175,13 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     val scalaFiles = allSourceFiles.filter(scalaPattern.matches)
     val kotlinFiles = allSourceFiles.filter(kotlinPattern.matches)
     if (javaFiles.isEmpty && scalaFiles.isEmpty && kotlinFiles.isEmpty) {
-      if (config.sourceFiles.isEmpty)
+      if (config.reportWarningOnEmptyIndex) {
         index
           .app
           .warning(
             s"doing nothing, no files matching pattern '$sourceroot/**.{java,scala,kt}'"
           )
+      }
       return CommandResult(0, Nil)
     }
 
@@ -527,14 +528,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       arguments += "-processor"
       arguments += processors.mkString(",")
     }
-    arguments ++=
-      fixJavacOptions(config.javacOptions).filterNot(option =>
-        option.startsWith("-Xep") || option.startsWith("-Xplugin:semanticdb") ||
-          option.startsWith("-XD") ||
-          index
-            .scipIgnoredJavacOptionPrefixes
-            .exists(prefix => option.startsWith(prefix))
-      )
+    arguments ++= fixJavacOptions(config.javacOptions)
     if (config.kind == "jdk" && moduleInfos.nonEmpty) {
       moduleInfos.foreach { module =>
         arguments += "--module"
@@ -577,9 +571,27 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   private def fixJavacOptions(options: List[String]): List[String] =
     options match {
       case "--release" :: _ :: rest =>
+        // Skip --release because it's not strictly needed for indexing,
+        // and it fails the build if -source/-target are also provided.
+        // In real-world testing, there were some builds that defined
+        // both -source/-target and --release even if javac rejects
+        // this combination of flags (because --release implies -source/-target).
+        // It could be that the Java rules have built-in support to automatically
+        // exclude duplicate -source/-target/--release flags.
         fixJavacOptions(rest)
       case option :: rest =>
-        option :: fixJavacOptions(rest)
+        val isIgnored =
+          option.startsWith("-Xep") || // ErrorProne flag, which fails the build
+            option.startsWith("-Xplugin:semanticdb") || // Redundant SemanticDB
+            option.startsWith("-XD") || // unsure what this one does
+            index // User-provided flag
+              .scipIgnoredJavacOptionPrefixes
+              .exists(prefix => option.startsWith(prefix))
+
+        if (isIgnored)
+          fixJavacOptions(rest)
+        else
+          option :: fixJavacOptions(rest)
       case Nil =>
         Nil
     }
@@ -758,6 +770,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
   /** Gets parsed from lsif-java.json files. */
   private case class Config(
+      reportWarningOnEmptyIndex: Boolean = true,
       javaHome: Option[String] = None,
       dependencies: List[Dependency] = Nil,
       sourceFiles: List[String] = Nil,
@@ -785,7 +798,6 @@ object ScipBuildTool {
   // default for how we support cross-repo navigation with scip-java.
   val ConfigFileNames = List("scip-java.json", "lsif-java.json")
   val isIgnoredAnnotationProcessor = Set(
-    "",
     "org.openjdk.jmh.generators.BenchmarkProcessor"
   )
 }

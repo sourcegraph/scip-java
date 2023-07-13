@@ -25,134 +25,142 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
     Files.isRegularFile(index.workingDirectory.resolve("WORKSPACE"))
   }
 
-  override def generateScip(): Int = {
-    this.generateAspectFile() match {
-      case None =>
-        1
-      case Some(aspectLabel) =>
-        val buildCommand = ListBuffer.empty[String]
-        buildCommand += "bazel"
-        buildCommand += "build"
-        buildCommand += "--noshow_progress"
+  private def targetSpecs =
+    if (index.buildCommand.isEmpty)
+      List("//...")
+    else
+      index.buildCommand
 
+  override def generateScip(): Int = {
+    val aspectLabel = this.generateAspectFile().getOrElse("")
+    if (aspectLabel.isEmpty) {
+      return 1
+    }
+
+    val scipJavaBinary = index.bazelScipJavaBinary.getOrElse("")
+    if (scipJavaBinary.isEmpty) {
+      index
+        .app
+        .error(
+          "the flag --bazel-scip-java-binary is required to index Bazel codebases. To fix this problem, run scip-java index again with the flag --scip-java-binary=/path/to/scip-java"
+        )
+      return 1
+    }
+
+    val javaHome = index.app.env.environmentVariables.getOrElse("JAVA_HOME", "")
+    if (javaHome.isEmpty) {
+      index
+        .app
+        .error(
+          "environment variable JAVA_HOME is not set. " +
+            "To fix this problem run `export JAVA_HOME=/path/to/java` and run scip-java index again."
+        )
+      return 1
+    }
+
+    val buildCommand =
+      List(
+        "bazel",
+        "build",
+        "--noshow_progress",
         // The local strategy is required for now because we write SemanticDB and SCIP files
         // to the provided targetroot directory.
-        buildCommand += "--spawn_strategy=local"
+        "--spawn_strategy=local",
+        "--aspects",
+        s"$aspectLabel%scip_java_aspect",
+        "--output_groups=scip",
+        s"--define=sourceroot=${index.workingDirectory}",
+        s"--define=java_home=$javaHome",
+        s"--define=scip_java_binary=$scipJavaBinary"
+      ) ++ targetSpecs
 
-        val targetSpecs =
-          if (index.buildCommand.isEmpty)
-            List("//...")
-          else
-            index.buildCommand
-        buildCommand ++= targetSpecs
+    val buildExitCode = runBazelBuild(buildCommand)
+    if (buildExitCode != 0) {
+      buildExitCode
+    } else {
+      aggregateScipFiles()
+      0
+    }
+  }
 
-        buildCommand += "--aspects"
-        buildCommand += s"$aspectLabel%scip_java_aspect"
-        buildCommand += "--output_groups=scip"
-        buildCommand += s"--define=sourceroot=${index.workingDirectory}"
-
-        val javaHome = index
+  private def runBazelBuild(buildCommand: List[String]): Int = {
+    val sandbox = new SandboxCommandExtractor(index.app)
+    index.app.info(buildCommand.mkString(" "))
+    val commandResult = index
+      .app
+      .process(buildCommand)
+      .call(check = false, stderr = Readlines(sandbox))
+    if (commandResult.exitCode != 0) {
+      if (index.bazelAutorunSandboxCommand && sandbox.commandLines().nonEmpty) {
+        index
           .app
-          .env
-          .environmentVariables
-          .getOrElse("JAVA_HOME", "")
-        if (javaHome.isEmpty) {
-          index
-            .app
-            .error(
-              "environment variable JAVA_HOME is not set. " +
-                "To fix this problem run `export JAVA_HOME=/path/to/java` and run scip-java index again."
-            )
-          return 1
-        }
-        buildCommand += s"--define=java_home=$javaHome"
-
-        val scipJavaBinary = index.bazelScipJavaBinary.getOrElse("")
-        if (scipJavaBinary.isEmpty) {
-          index
-            .app
-            .error(
-              "the flag --bazel-scip-java-binary is required to index Bazel codebases. To fix this problem, run scip-java index again with the flag --scip-java-binary=/path/to/scip-java"
-            )
-          return 1
-        }
-        buildCommand += s"--define=scip_java_binary=$scipJavaBinary"
-
-        val sandbox = new SandboxCommandExtractor(index.app)
-        index.app.info(buildCommand.mkString(" "))
-        val commandResult = index
+          .info(
+            "Automatically re-running sandbox command to help debug the problem."
+          )
+        index
           .app
-          .process(buildCommand.toList)
-          .call(check = false, stderr = Readlines(sandbox))
-        if (commandResult.exitCode != 0) {
-          if (index.bazelAutorunSandboxCommand) {
-            index
-              .app
-              .info(
-                "Automatically re-running sandbox command to help debug the problem."
-              )
-            index
-              .app
-              .process("bash", "-c", sandbox.commandLines().mkString("\n"))
-              .call(check = false, stdout = os.Inherit, stderr = os.Inherit)
-          }
-          index
-            .app
-            .error(
-              s"""To reproduce the failed Bazel command without scip-java, run the following command:
-                 |
-                 |  bazel build ${targetSpecs.mkString(" ")}
-                 |
-                 |To narrow the set of targets to index or pass additional flags to Bazel, include extra arguments index after -- like below:
-                 |
-                 |  scip-java index --bazel-scip-java-binary=... -- //custom/target --sandbox_debug
-                 |""".stripMargin
-            )
-          return commandResult.exitCode
-        }
-
-        // Final step after running the aspect: aggregate all the generated `*.scip` files into a single index.scip file.
-        // We have to do this step outside of Bazel because Bazel does not allow actions to generate outputs outside
-        // of the bazel-out directory. Ideally, we should be able to implement the aggregation step inside Bazel
-        // and only copy the resulting index.scip file into the root of the workspace. However, to begin with, we
-        // walk the bazel-bin/ directory to concatenate the `*.scip` files even if this is not the idiomatic way to
-        // do it (in general, scanning the bazel-bin/ directory is a big no no).
-        Files.deleteIfExists(index.finalOutput)
-        Files.createDirectories(index.finalOutput.getParent)
-        val scipPattern = FileSystems.getDefault.getPathMatcher("glob:**.scip")
-        val bazelOut = index.workingDirectory.resolve("bazel-out")
-        if (!Files.exists(bazelOut)) {
-          index
-            .app
-            .error(
-              s"doing nothing, the directory $bazelOut does not exist. " +
-                s"The most likely cause for this problem is that there are no Java targets in this Bazel workspace. " +
-                s"Please report an issue to the scip-java issue tracker if the command `bazel query 'kind(java_*, //...)'` returns non-empty output."
-            )
-          return 0
-        }
-        val bazelOutLink = Files.readSymbolicLink(bazelOut)
-        Files.walkFileTree(
-          bazelOutLink,
-          new SimpleFileVisitor[Path] {
-            override def visitFile(
-                file: Path,
-                attrs: BasicFileAttributes
-            ): FileVisitResult = {
-              if (scipPattern.matches(file)) {
-                val bytes = Files.readAllBytes(file)
-                Files.write(
-                  index.finalOutput,
-                  bytes,
-                  StandardOpenOption.APPEND,
-                  StandardOpenOption.CREATE
-                )
-              }
-              super.visitFile(file, attrs)
-            }
-          }
+          .process("bash", "-c", sandbox.commandLines().mkString("\n"))
+          .call(check = false, stdout = os.Inherit, stderr = os.Inherit)
+      }
+      index
+        .app
+        .error(
+          s"""To reproduce the failed Bazel command without scip-java, run the following command:
+             |
+             |  bazel build ${targetSpecs.mkString(" ")}
+             |
+             |To narrow the set of targets to index or pass additional flags to Bazel, include extra arguments index after -- like below:
+             |
+             |  scip-java index --bazel-scip-java-binary=... -- //custom/target --sandbox_debug
+             |""".stripMargin
         )
-        0
+      commandResult.exitCode
+    } else {
+      0
+    }
+  }
+
+  private def aggregateScipFiles(): Unit = {
+    // Final step after running the aspect: aggregate all the generated `*.scip` files into a single index.scip file.
+    // We have to do this step outside of Bazel because Bazel does not allow actions to generate outputs outside
+    // of the bazel-out directory. Ideally, we should be able to implement the aggregation step inside Bazel
+    // and only copy the resulting index.scip file into the root of the workspace. However, to begin with, we
+    // walk the bazel-bin/ directory to concatenate the `*.scip` files even if this is not the idiomatic way to
+    // do it (in general, scanning the bazel-bin/ directory is a big no no).
+    Files.deleteIfExists(index.finalOutput)
+    Files.createDirectories(index.finalOutput.getParent)
+    val scipPattern = FileSystems.getDefault.getPathMatcher("glob:**.scip")
+    val bazelOut = index.workingDirectory.resolve("bazel-out")
+    if (!Files.exists(bazelOut)) {
+      index
+        .app
+        .error(
+          s"doing nothing, the directory $bazelOut does not exist. " +
+            s"The most likely cause for this problem is that there are no Java targets in this Bazel workspace. " +
+            s"Please report an issue to the scip-java issue tracker if the command `bazel query 'kind(java_*, //...)'` returns non-empty output."
+        )
+    } else {
+      val bazelOutLink = Files.readSymbolicLink(bazelOut)
+      Files.walkFileTree(
+        bazelOutLink,
+        new SimpleFileVisitor[Path] {
+          override def visitFile(
+              file: Path,
+              attrs: BasicFileAttributes
+          ): FileVisitResult = {
+            if (scipPattern.matches(file)) {
+              val bytes = Files.readAllBytes(file)
+              Files.write(
+                index.finalOutput,
+                bytes,
+                StandardOpenOption.APPEND,
+                StandardOpenOption.CREATE
+              )
+            }
+            super.visitFile(file, attrs)
+          }
+        }
+      )
     }
   }
 
@@ -214,7 +222,7 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
         .app
         .reporter
         .error(
-          "path $aspectPath already exists and is not a file. To fix this problem, remove this path and try again."
+          s"path $aspectPath already exists and is not a file. To fix this problem, remove this path and try again."
         )
       return None
     }
