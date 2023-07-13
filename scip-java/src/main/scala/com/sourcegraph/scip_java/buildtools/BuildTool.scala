@@ -4,7 +4,6 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 import com.sourcegraph.scip_java.commands.IndexCommand
-import com.sourcegraph.scip_java.commands.IndexSemanticdbCommand
 import os.CommandResult
 
 /**
@@ -56,13 +55,16 @@ object BuildTool {
     } else if (generateSemanticdbResult.exitCode != 0) {
       generateSemanticdbResult.exitCode
     } else {
-      IndexSemanticdbCommand(
-        output = index.finalOutput,
-        targetroot = List(targetroot),
-        packagehub = index.packagehub,
-        buildKind = buildKind,
-        app = index.app
-      ).run()
+      index
+        .indexSemanticdb
+        .copy(
+          output = index.finalOutput,
+          targetroot = List(targetroot),
+          packagehub = index.packagehub,
+          buildKind = buildKind,
+          app = index.app
+        )
+        .run()
     }
   }
 }

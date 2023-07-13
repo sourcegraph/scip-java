@@ -48,6 +48,10 @@ final case class IndexSemanticdbCommand(
     @Description(
       "The kind of this build, one of: empty string, jdk, maven"
     ) buildKind: String = "",
+    @Description(
+      "If true, don't report an error when no documents have been indexed. " +
+        "The resulting SCIP index will silently be empty instead."
+    ) allowEmptyIndex: Boolean = false,
     @Inline() app: Application = Application.default
 ) extends Command {
   def sourceroot: Path = AbsolutePath.of(app.env.workingDirectory)
@@ -90,7 +94,8 @@ final case class IndexSemanticdbCommand(
         parallel,
         packages.map(_.toPackageInformation).asJava,
         buildKind,
-        emitInverseRelationships
+        emitInverseRelationships,
+        allowEmptyIndex
       )
     ScipSemanticdb.run(options)
     postPackages(packages)

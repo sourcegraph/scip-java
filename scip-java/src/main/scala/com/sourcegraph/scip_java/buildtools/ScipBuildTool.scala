@@ -20,6 +20,7 @@ import java.util.ServiceLoader
 import java.util.concurrent.TimeUnit
 import java.util.jar.JarFile
 
+import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.ListBuffer
 import scala.jdk.CollectionConverters._
 import scala.language.postfixOps
@@ -31,6 +32,7 @@ import scala.util.control.NonFatal
 import scala.meta.pc.PresentationCompiler
 import scala.meta.pc.PresentationCompilerConfig
 
+import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.Dependencies
@@ -92,7 +94,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   private val moduleInfo = Paths.get("module-info.java")
 
   override def usedInCurrentDirectory(): Boolean =
-    Files.isRegularFile(configFile)
+    configFiles.exists(path => Files.isRegularFile(path))
   override def isHidden: Boolean = true
   override def generateScip(): Int = {
     BuildTool.generateScipFromTargetroot(
@@ -105,8 +107,11 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
   private def targetroot: Path = index.finalTargetroot(defaultTargetroot)
   private def defaultTargetroot: Path = Paths.get("target")
-  private def configFile =
-    index.workingDirectory.resolve(ScipBuildTool.ConfigFileName)
+  private def configFiles =
+    index.scipConfig.toList ++
+      ScipBuildTool
+        .ConfigFileNames
+        .map(name => index.workingDirectory.resolve(name))
   private def buildKind: String = parsedConfig.fold(_.kind, _ => "")
   private def generateSemanticdb(): CommandResult = {
     parsedConfig match {
@@ -133,12 +138,23 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
   /** Parses the lsif-java.json file into a Config object. */
   private def parsedConfig: Result[Config] = {
-    val input = Input.path(configFile)
-    JsonParser
-      .parse(input)
-      .flatMap(json =>
-        Config.codec.decode(DecodingContext(json).withFatalUnknownFields(true))
-      )
+    configFiles.find(path => Files.isRegularFile(path)) match {
+      case None =>
+        ErrorResult(
+          Diagnostic.error(
+            s"no config file found. To fix this problem, create a config file in the path '${configFiles.head}'"
+          )
+        )
+      case Some(configFile) =>
+        val input = Input.path(configFile)
+        JsonParser
+          .parse(input)
+          .flatMap(json =>
+            Config
+              .codec
+              .decode(DecodingContext(json).withFatalUnknownFields(true))
+          )
+    }
   }
 
   /**
@@ -154,22 +170,24 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     if (!Files.isDirectory(sourceroot)) {
       throw new NoSuchFileException(sourceroot.toString)
     }
-    val allSourceFiles = collectAllSourceFiles(sourceroot)
+    val allSourceFiles = collectAllSourceFiles(config, sourceroot)
     val javaFiles = allSourceFiles.filter(javaPattern.matches)
     val scalaFiles = allSourceFiles.filter(scalaPattern.matches)
     val kotlinFiles = allSourceFiles.filter(kotlinPattern.matches)
     if (javaFiles.isEmpty && scalaFiles.isEmpty && kotlinFiles.isEmpty) {
-      index
-        .app
-        .warning(
-          s"doing nothing, no files matching pattern '$sourceroot/**.{java,scala,kt}'"
-        )
+      if (config.reportWarningOnEmptyIndex) {
+        index
+          .app
+          .warning(
+            s"doing nothing, no files matching pattern '$sourceroot/**.{java,scala,kt}'"
+          )
+      }
       return CommandResult(0, Nil)
     }
 
     val compileAttempts = ListBuffer.empty[Try[Unit]]
     compileAttempts += compileJavaFiles(tmp, deps, config, javaFiles)
-    compileAttempts += compileScalaFiles(deps, scalaFiles)
+    compileAttempts += compileScalaFiles(deps, scalaFiles, tmp)
     compileAttempts += compileKotlinFiles(deps, config, kotlinFiles)
     val errors = compileAttempts.collect { case Failure(exception) =>
       exception
@@ -208,7 +226,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       config: Config,
       allKotlinFiles: List[Path]
   ): Try[Unit] = {
-    if (allKotlinFiles.isEmpty)
+    if (allKotlinFiles.isEmpty || config.dependencies.isEmpty)
       return Success()
     val filesPaths = allKotlinFiles.map(_.toString)
 
@@ -330,11 +348,12 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
   private def compileScalaFiles(
       deps: Dependencies,
-      allScalaFiles: List[Path]
+      allScalaFiles: List[Path],
+      tmp: Path
   ): Try[Unit] =
     Try {
-      if (allScalaFiles.nonEmpty)
-        withScalaPresentationCompiler(deps) { compiler =>
+      if (deps.dependencies.nonEmpty && allScalaFiles.nonEmpty)
+        withScalaPresentationCompiler(deps, tmp) { compiler =>
           allScalaFiles.foreach { path =>
             try compileScalaFile(compiler, path)
             catch {
@@ -376,9 +395,9 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     )
   }
 
-  private def withScalaPresentationCompiler[T](
-      deps: Dependencies
-  )(fn: PresentationCompiler => T): T = {
+  private def withScalaPresentationCompiler[T](deps: Dependencies, tmp: Path)(
+      fn: PresentationCompiler => T
+  ): T = {
     val scalaVersion = deps
       .classpath
       .iterator
@@ -465,8 +484,15 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     if (javaFiles.isEmpty)
       return Success(())
     val semanticdbJar = Embedded.semanticdbJar(tmp)
-    val coursier = Embedded.coursier(tmp)
-    val actualClasspath = deps.classpath :+ semanticdbJar
+    val actualClasspath = ArrayBuffer.empty[String]
+    actualClasspath += semanticdbJar.toString
+    actualClasspath ++=
+      config
+        .classpath
+        .map(path =>
+          AbsolutePath.of(Paths.get(path), index.workingDirectory).toString
+        )
+    actualClasspath ++= deps.classpath.map(_.toString)
     val argsfile = targetroot.resolve("javacopts.txt")
     val arguments = ListBuffer.empty[String]
     arguments += "-encoding"
@@ -478,10 +504,31 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     arguments += generatedDir(tmp, "s")
     arguments += "-h"
     arguments += generatedDir(tmp, "h")
-    arguments += "-classpath"
-    arguments += actualClasspath.mkString(File.pathSeparator)
+    if (actualClasspath.nonEmpty) {
+      arguments += "-classpath"
+      arguments += actualClasspath.mkString(File.pathSeparator)
+    }
     arguments +=
       s"-Xplugin:semanticdb -targetroot:$targetroot -sourceroot:$sourceroot"
+    if (config.processorpath.nonEmpty) {
+      arguments += "-processorpath"
+      val processorpath =
+        semanticdbJar.toString ::
+          config
+            .processorpath
+            .flatMap(path => guessBazelJar(path, index.workingDirectory))
+            .map(_.toString)
+      arguments += processorpath.mkString(File.pathSeparator)
+    }
+    val isIgnoredAnnotationProcessor =
+      ScipBuildTool.isIgnoredAnnotationProcessor ++
+        index.scipIgnoredAnnotationProcessors
+    val processors = config.processors.filterNot(isIgnoredAnnotationProcessor)
+    if (processors.nonEmpty) {
+      arguments += "-processor"
+      arguments += processors.mkString(",")
+    }
+    arguments ++= fixJavacOptions(config.javacOptions)
     if (config.kind == "jdk" && moduleInfos.nonEmpty) {
       moduleInfos.foreach { module =>
         arguments += "--module"
@@ -500,21 +547,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     val pipe = Readlines(line => {
       index.app.reporter.info(line)
     })
-    val javac = Paths.get(
-      os.proc(
-          coursier.toString,
-          "java-home",
-          "--jvm",
-          config.jvm,
-          "--architecture",
-          jvmArchitecture
-        )
-        .call()
-        .out
-        .trim(),
-      "bin",
-      "javac"
-    )
+    val javac = javacPath(config, tmp)
     index.app.reporter.info(s"$$ $javac @$argsfile")
     val javacModuleOptions: Seq[String] =
       if (config.jvm != "8")
@@ -535,6 +568,63 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       Failure(SubprocessException(result))
   }
 
+  private def fixJavacOptions(options: List[String]): List[String] =
+    options match {
+      case "--release" :: _ :: rest =>
+        // Skip --release because it's not strictly needed for indexing,
+        // and it fails the build if -source/-target are also provided.
+        // In real-world testing, there were some builds that defined
+        // both -source/-target and --release even if javac rejects
+        // this combination of flags (because --release implies -source/-target).
+        // It could be that the Java rules have built-in support to automatically
+        // exclude duplicate -source/-target/--release flags.
+        fixJavacOptions(rest)
+      case option :: rest =>
+        val isIgnored =
+          option.startsWith("-Xep") || // ErrorProne flag, which fails the build
+            option.startsWith("-Xplugin:semanticdb") || // Redundant SemanticDB
+            option.startsWith("-XD") || // unsure what this one does
+            index // User-provided flag
+              .scipIgnoredJavacOptionPrefixes
+              .exists(prefix => option.startsWith(prefix))
+
+        if (isIgnored)
+          fixJavacOptions(rest)
+        else
+          option :: fixJavacOptions(rest)
+      case Nil =>
+        Nil
+    }
+
+  private def javacPath(config: Config, tmp: Path): Path = {
+    config.javaHome match {
+      case Some(home) =>
+        Paths.get(home, "bin", "javac")
+      case None =>
+        javacPathViaCoursier(config.jvm, tmp)
+    }
+  }
+
+  private def javacPathViaCoursier(jvmVersion: String, tmp: Path): Path = {
+    val coursier = Embedded.coursier(tmp)
+    Paths.get(
+      os.proc(
+          coursier.toString,
+          "java-home",
+          "--jvm",
+          jvmVersion,
+          "--architecture",
+          jvmArchitecture
+        )
+        .call()
+        .out
+        .trim(),
+      "bin",
+      "javac"
+    )
+
+  }
+
   private def jvmArchitecture: String =
     if (scala.util.Properties.isMac && sys.props("os.arch") == "aarch64")
       "amd64"
@@ -553,7 +643,13 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   }
 
   /** Recursively collects all Java files in the working directory */
-  private def collectAllSourceFiles(dir: Path): List[Path] = {
+  private def collectAllSourceFiles(config: Config, dir: Path): List[Path] = {
+    if (config.sourceFiles.nonEmpty) {
+      return config
+        .sourceFiles
+        .map(path => AbsolutePath.of(Paths.get(path), dir))
+        .filter(path => Files.isRegularFile(path))
+    }
     val buf = ListBuffer.empty[Path]
     Files.walkFileTree(
       dir,
@@ -583,6 +679,41 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       }
     )
     buf.toList
+  }
+
+  // HACK(olafurpg): I haven't figured out a reliable way to get annotation processor jars on the processorpath.
+  // The Bazel aspect sometimes says a NAME.jar file is on the processorpath when it doesn't exist but processed_NAME.jar or header_NAME.jar exists.
+  // The long-term solution is figuring out how to get the exact same processorpath as Bazel uses for compilation.
+  private def guessBazelJar(
+      pathString: String,
+      workingDirectory: Path
+  ): Option[Path] = {
+    var path = AbsolutePath.of(Paths.get(pathString), workingDirectory)
+    if (Files.isRegularFile(path))
+      return Some(path)
+
+    // In some cases, the bazel-out/ prefix is missing from the path that Bazel gives us.
+    if (
+      !pathString.startsWith("bazel-bin") && !pathString.startsWith("bazel-out")
+    ) {
+      path = AbsolutePath
+        .of(Paths.get("bazel-bin", pathString), workingDirectory)
+
+      if (Files.isRegularFile(path))
+        return Some(path)
+    }
+
+    val processed = path
+      .resolveSibling("processed_" + path.getFileName.toString)
+    if (Files.isRegularFile(processed))
+      return Some(processed)
+
+    val header = path.resolveSibling("header_" + path.getFileName.toString)
+    if (Files.isRegularFile(header))
+      return Some(header)
+
+    index.app.warning("annotation processor jar does not exist: " + path)
+    None
   }
 
   private def generatedDir(tmp: Path, name: String): String = {
@@ -639,8 +770,16 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
   /** Gets parsed from lsif-java.json files. */
   private case class Config(
+      reportWarningOnEmptyIndex: Boolean = true,
+      javaHome: Option[String] = None,
       dependencies: List[Dependency] = Nil,
-      jvm: String = "8",
+      sourceFiles: List[String] = Nil,
+      classpath: List[String] = Nil,
+      bootclasspath: List[String] = Nil,
+      processorpath: List[String] = Nil,
+      processors: List[String] = Nil,
+      javacOptions: List[String] = Nil,
+      jvm: String = "17",
       kind: String = ""
   )
   private object Config {
@@ -657,5 +796,8 @@ object ScipBuildTool {
   // canonical URLs will become 404 links. The lsif-java.json file is not
   // supposed to be written by end-users anyways. It's mostly an implementation
   // default for how we support cross-repo navigation with scip-java.
-  val ConfigFileName = "lsif-java.json"
+  val ConfigFileNames = List("scip-java.json", "lsif-java.json")
+  val isIgnoredAnnotationProcessor = Set(
+    "org.openjdk.jmh.generators.BenchmarkProcessor"
+  )
 }

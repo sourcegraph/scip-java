@@ -6,6 +6,7 @@ import java.nio.file.Paths
 
 import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.scip_java.buildtools.BuildTool
+import com.sourcegraph.scip_java.buildtools.ScipBuildTool
 import fansi.Color
 import moped.annotations._
 import moped.cli.Application
@@ -52,12 +53,39 @@ case class IndexCommand(
     packagehub: Option[String] = None,
     @Hidden // Hidden because it's only used for testing purposes
     temporaryDirectory: Option[Path] = None,
+    @Section("SCIP Build Tool")
+    @Description(
+      "List of Java compiler option prefixes that should be excluded from compilation during indexing. " +
+        "This flag is only used when indexing via scip-java.json files or Bazel."
+    ) scipIgnoredJavacOptionPrefixes: List[String] = Nil,
+    @Description(
+      "List of fully qualified annotation processors that should be ignored when indexing a codebase. " +
+        "This flag is only used when indexing via scip-java.json files or Bazel."
+    ) scipIgnoredAnnotationProcessors: List[String] = Nil,
+    @Description(
+      "Path to a scip-java.json file with build configuration. By default, the path scip-java.json is used."
+    ) scipConfig: Option[Path] = None,
+    @Section("Bazel")
+    @Description(
+      "Optional path to a `scip-java` binary. Required to index a Bazel codebase."
+    ) bazelScipJavaBinary: Option[String] = None,
+    @Description(
+      "Relative path to a Bazel aspect file with an aspect named 'scip_java_aspect'."
+    ) bazelAspect: Path = Paths.get("aspects/scip_java.bzl"),
+    @Description(
+      "If true, overwrites the existing Bazel aspect file (if any)"
+    ) bazelOverwriteAspectFile: Boolean = false,
+    @Description(
+      "If true, automatically tries to extract the printed out sandbox command and re-run the command to reveal the underlying problem."
+    ) bazelAutorunSandboxCommand: Boolean = true,
     @Description(
       "Optional. The build command to use to compile all sources. " +
         "Defaults to a build-specific command. For example, the default command for Maven command is 'clean verify -DskipTests'." +
         "To override the default, pass in the build command after a double dash: 'scip-java index -- compile test:compile'"
     )
     @TrailingArguments() buildCommand: List[String] = Nil,
+    @Hidden
+    indexSemanticdb: IndexSemanticdbCommand = IndexSemanticdbCommand(),
     @Inline
     app: Application = Application.default
 ) extends Command {
@@ -129,13 +157,17 @@ case class IndexCommand(
             unknownBuildTool(buildTool, usedBuildTools)
           case tool :: Nil =>
             tool.generateScip()
-          case many =>
-            val names = many.map(_.name).mkString(", ")
-            app.error(
-              s"Multiple build tools detected: $names. " +
-                s"To fix this problem, use the '--build-tool=BUILD_TOOL_NAME' flag to specify which build tool to run."
-            )
-            1
+          case many @ (first :: rest) =>
+            if (first.isInstanceOf[ScipBuildTool] && scipConfig.isDefined) {
+              first.generateScip()
+            } else {
+              val names = many.map(_.name).mkString(", ")
+              app.error(
+                s"Multiple build tools detected: $names. " +
+                  s"To fix this problem, use the '--build-tool=BUILD_TOOL_NAME' flag to specify which build tool to run."
+              )
+              1
+            }
         }
     }
   }

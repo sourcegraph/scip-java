@@ -112,6 +112,19 @@ object Embedded {
     }
   }
 
+  /**
+   * Returns the string contents of the scip_java.bzl file on disk.
+   */
+  def bazelAspectFile(tmpDir: Path): String = {
+    // We could in theory load the resource straight into a string but it was
+    // easier to copy it to a file and read it from there.
+    val tmpFile = copyFile(tmpDir, "scip-java/scip_java.bzl")
+    val contents =
+      new String(Files.readAllBytes(tmpFile), StandardCharsets.UTF_8)
+    Files.deleteIfExists(tmpFile)
+    contents
+  }
+
   private def copyFile(tmpDir: Path, filename: String): Path = {
     val in = this.getClass.getResourceAsStream(s"/$filename")
     val out = tmpDir.resolve(filename)

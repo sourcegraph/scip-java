@@ -4,8 +4,8 @@ title: Getting started
 ---
 
 By following the instructions on this page, you should be able to generate a
-[SCIP](https://github.com/sourcegraph/scip)
-index of your Java codebase using Gradle or Maven. See
+[SCIP](https://github.com/sourcegraph/scip) index of your Java codebase using
+Gradle, Maven, sbt, or Bazel. See
 [Supported build tools](#supported-build-tools) for an overview of other build
 tools that we're planning to support in the future.
 
@@ -328,13 +328,41 @@ projects, with the following caveats:
 
 ### Bazel
 
-Bazel is supported by scip-java, but it requires custom configuration to work
-correctly. The `scip-java index` command does not automatically index Bazel builds.
+There are two approaches to index Bazel/Java codebases: automatic and manual.
 
-The Bazel integration for scip-java is specifically designed to be compatible
-with the Bazel build cache to enable incremental indexing. To achieve this,
-scip-java must be configured in `WORKSPACE` and `BUILD` files. The scip-java
-repository contains an example for how to configure everything.
+Don't hesitate to open an issue in the
+[scip-java repository](https://github.com/sourcegraph/scip-java) if you have any
+questions about using scip-java with Bazel builds.
+
+#### Automatic - `aspect`
+
+Since scip-java v0.8.24, it's possible to automatically index Bazel/Java
+codebases via `scip-java index`.
+
+```sh
+scip-java index "--bazel-scip-java-binary=$(which scip-java)"
+```
+
+When using this approach, indexing happens mostly inside the Bazel action graph,
+benefitting from parallel compilation and the Bazel build cache.
+
+The `--bazel-scip-java-binary` argument is required due to implementation
+details, scip-java runs an [aspect](https://bazel.build/extending/aspects) that
+requires the absolute path to the `scip-java` binary.
+
+> The current solution for automatic indexing step is not yet 100% hermetic and,
+> therefore, relies on `--spawn_strategy=local` under the hood. Depending on
+> your use-case, this might be OK or not. If there is demand for it, it's should
+> be possible to make the indexing fully hermetic and compatible with Bazel's
+> sandbox with some extra work.
+
+#### Manual - `select`
+
+It's possible to index Bazel codebases by integrating scip-java directly into
+the build configuration. To achieve this, scip-java must be configured in
+`WORKSPACE` and `BUILD` files. The scip-java repository contains an example for
+how to configure everything, including how to build scip-java itself from
+source.
 
 - [WORKSPACE](https://github.com/sourcegraph/scip-java/blob/main/examples/bazel-example/WORKSPACE):
   adds the required dependencies to be able to run scip-java itself.
@@ -343,6 +371,7 @@ repository contains an example for how to configure everything.
   scip-java.
 
 Once configured, build the codebase with the SemanticDB compiler plugin.
+
 ```sh
 bazel build //... --@scip_java//semanticdb-javac:enabled=true
 ```
@@ -356,7 +385,7 @@ bazel run @scip_java//scip-semanticdb:bazel -- --sourceroot $PWD
 # The command below works for the `examples/bazel-example` directory in the sourcegraph/scip-java repository.
 ❯ jar tf bazel-bin/src/main/java/example/libexample.jar | grep semanticdb$
 META-INF/semanticdb/src/main/java/example/Example.java.semanticdb
- ```
+```
 
 Finally, run the following commands to upload the SCIP index to Sourcegraph.
 
@@ -372,8 +401,3 @@ src login # validate the token authenticates correctly
 # 3. Upload SCIP index to Sourcegraph
 src code-intel upload # requires index.scip file to exist
 ```
-
-
-Don't hesitate to open an issue in the
-[scip-java repository](https://github.com/sourcegraph/scip-java) if you have any
-questions about using scip-java with Bazel builds.

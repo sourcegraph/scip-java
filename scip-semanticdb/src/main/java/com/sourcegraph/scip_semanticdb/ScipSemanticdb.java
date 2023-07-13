@@ -43,7 +43,7 @@ public class ScipSemanticdb {
     List<Path> files = SemanticdbWalker.findSemanticdbFiles(options);
     Collections.sort(files);
     if (options.reporter.hasErrors()) return;
-    if (files.isEmpty()) {
+    if (files.isEmpty() && !options.allowEmptyIndex) {
       options.reporter.error(
           "No SemanticDB files found. "
               + "This typically means that `scip-java` is unable to automatically "
