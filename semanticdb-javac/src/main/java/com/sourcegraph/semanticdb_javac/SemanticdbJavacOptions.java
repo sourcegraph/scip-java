@@ -79,14 +79,10 @@ public class SemanticdbJavacOptions {
             result.noRelativePath = NoRelativePathMode.WARNING;
             break;
           default:
-            String validValues =
-                Arrays.stream(NoRelativePathMode.values())
-                    .map(NoRelativePathMode::toString)
-                    .collect(Collectors.joining(", "));
             result.errors.add(
                 String.format(
                     "unknown -no-relative-path mode '%s'. Valid values are %s.",
-                    value, validValues));
+                    value, NoRelativePathMode.validStringValues()));
         }
       } else if (arg.equals("-build-tool:bazel")) {
         result.uriScheme = UriScheme.BAZEL;
