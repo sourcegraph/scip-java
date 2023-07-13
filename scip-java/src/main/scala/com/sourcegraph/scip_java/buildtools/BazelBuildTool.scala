@@ -8,7 +8,9 @@ import java.nio.file.Path
 import java.nio.file.SimpleFileVisitor
 import java.nio.file.StandardOpenOption
 import java.nio.file.attribute.BasicFileAttributes
+
 import scala.collection.mutable.ListBuffer
+
 import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
