@@ -55,8 +55,8 @@
               }
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/sourcegraph/scip-java/edit/main/docs/getting-started.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Getting started</h1></header><article><div><span><p>By following the instructions on this page, you should be able to generate a
-<a href="https://github.com/sourcegraph/scip">SCIP</a>
-index of your Java codebase using Gradle or Maven. See
+<a href="https://github.com/sourcegraph/scip">SCIP</a> index of your Java codebase using
+Gradle, Maven, sbt, or Bazel. See
 <a href="#supported-build-tools">Supported build tools</a> for an overview of other build
 tools that we're planning to support in the future.</p>
 <h2><a class="anchor" aria-hidden="true" id="install-scip-java"></a><a href="#install-scip-java" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install <code>scip-java</code></h2>
@@ -202,23 +202,84 @@ DESCRIPTION
   Automatically generate an SCIP index in the current working directory.
 
 OPTIONS
-  --help: Boolean                 Print this help message
-  --output: Path = "index.scip"   The path where to generate the SCIP index.
-  --targetroot: Option[Path]      The directory where to generate SemanticDB
-                                  files. Defaults to a build-specific path. For
-                                  example, the default value for Gradle is
-                                  'build/semanticdb-targetroot' and for Maven
-                                  it's 'target/semanticdb-targetroot'
-  --[no-]verbose: Boolean = false Whether to enable the -verbose flag in the
-                                  SemanticDB compiler plugin.
-  --[no-]text: Boolean = false    Whether to enable the -text:on flag in the
-                                  SemanticDB compiler plugin.
-  --build-tool: Option[String]    Explicitly specify which build tool to use. By
-                                  default, the build tool is automatically
-                                  detected. Use this flag if the automatic build
-                                  tool detection is not working correctly.
-  --[no-]cleanup: Boolean = true  Whether to remove generated temporary files on
-                                  exit.
+  --help: Boolean                                         Print this help
+                                                          message
+  --output: Path = "index.scip"                           The path where to
+                                                          generate the SCIP
+                                                          index.
+  --targetroot: Option[Path]                              The directory where to
+                                                          generate SemanticDB
+                                                          files. Defaults to a
+                                                          build-specific path.
+                                                          For example, the
+                                                          default value for
+                                                          Gradle is
+                                                          'build/semanticdb-targetroot'
+                                                          and for Maven it's
+                                                          'target/semanticdb-targetroot'
+  --[no-]verbose: Boolean = false                         Whether to enable the
+                                                          -verbose flag in the
+                                                          SemanticDB compiler
+                                                          plugin.
+  --[no-]text: Boolean = false                            Whether to enable the
+                                                          -text:on flag in the
+                                                          SemanticDB compiler
+                                                          plugin.
+  --build-tool: Option[String]                            Explicitly specify
+                                                          which build tool to
+                                                          use. By default, the
+                                                          build tool is
+                                                          automatically
+                                                          detected. Use this
+                                                          flag if the automatic
+                                                          build tool detection
+                                                          is not working
+                                                          correctly.
+  --[no-]cleanup: Boolean = true                          Whether to remove
+                                                          generated temporary
+                                                          files on exit.
+  --scip-ignored-javac-option-prefixes: List[String] = [] List of Java compiler
+                                                          option prefixes that
+                                                          should be excluded
+                                                          from compilation
+                                                          during indexing. This
+                                                          flag is only used when
+                                                          indexing via
+                                                          scip-java.json files
+                                                          or Bazel.
+  --scip-ignored-annotation-processors: List[String] = [] List of fully
+                                                          qualified annotation
+                                                          processors that should
+                                                          be ignored when
+                                                          indexing a codebase.
+                                                          This flag is only used
+                                                          when indexing via
+                                                          scip-java.json files
+                                                          or Bazel.
+  --scip-config: Option[Path]                             Path to a
+                                                          scip-java.json file
+                                                          with build
+                                                          configuration. By
+                                                          default, the path
+                                                          scip-java.json is
+                                                          used.
+  --bazel-scip-java-binary: Option[String]                Optional path to a
+                                                          `scip-java` binary.
+                                                          Required to index a
+                                                          Bazel codebase.
+  --bazel-aspect: Path = "aspects/scip_java.bzl"          Relative path to a
+                                                          Bazel aspect file with
+                                                          an aspect named
+                                                          'scip_java_aspect'.
+  --[no-]bazel-overwrite-aspect-file: Boolean = false     If true, overwrites
+                                                          the existing Bazel
+                                                          aspect file (if any)
+  --[no-]bazel-autorun-sandbox-command: Boolean = true    If true, automatically
+                                                          tries to extract the
+                                                          printed out sandbox
+                                                          command and re-run the
+                                                          command to reveal the
+                                                          underlying problem.
 
 TRAILING ARGUMENTS
   Optional. The build command to use to compile all sources. Defaults to a
@@ -376,12 +437,33 @@ projects, with the following caveats:</p>
 </tbody>
 </table>
 <h3><a class="anchor" aria-hidden="true" id="bazel"></a><a href="#bazel" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bazel</h3>
-<p>Bazel is supported by scip-java, but it requires custom configuration to work
-correctly. The <code>scip-java index</code> command does not automatically index Bazel builds.</p>
-<p>The Bazel integration for scip-java is specifically designed to be compatible
-with the Bazel build cache to enable incremental indexing. To achieve this,
-scip-java must be configured in <code>WORKSPACE</code> and <code>BUILD</code> files. The scip-java
-repository contains an example for how to configure everything.</p>
+<p>There are two approaches to index Bazel/Java codebases: automatic and manual.</p>
+<p>Don't hesitate to open an issue in the
+<a href="https://github.com/sourcegraph/scip-java">scip-java repository</a> if you have any
+questions about using scip-java with Bazel builds.</p>
+<h4><a class="anchor" aria-hidden="true" id="automatic---aspect"></a><a href="#automatic---aspect" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Automatic - <code>aspect</code></h4>
+<p>Since scip-java v0.8.24, it's possible to automatically index Bazel/Java
+codebases via <code>scip-java index</code>.</p>
+<pre><code class="hljs css language-sh">scip-java index <span class="hljs-string">"--bazel-scip-java-binary=<span class="hljs-variable">$(which scip-java)</span>"</span>
+</code></pre>
+<p>When using this approach, indexing happens mostly inside the Bazel action graph,
+benefitting from parallel compilation and the Bazel build cache.</p>
+<p>The <code>--bazel-scip-java-binary</code> argument is required due to implementation
+details, scip-java runs an <a href="https://bazel.build/extending/aspects">aspect</a> that
+requires the absolute path to the <code>scip-java</code> binary.</p>
+<blockquote>
+<p>The current solution for automatic indexing step is not yet 100% hermetic and,
+therefore, relies on <code>--spawn_strategy=local</code> under the hood. Depending on
+your use-case, this might be OK or not. If there is demand for it, it's should
+be possible to make the indexing fully hermetic and compatible with Bazel's
+sandbox with some extra work.</p>
+</blockquote>
+<h4><a class="anchor" aria-hidden="true" id="manual---select"></a><a href="#manual---select" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Manual - <code>select</code></h4>
+<p>It's possible to index Bazel codebases by integrating scip-java directly into
+the build configuration. To achieve this, scip-java must be configured in
+<code>WORKSPACE</code> and <code>BUILD</code> files. The scip-java repository contains an example for
+how to configure everything, including how to build scip-java itself from
+source.</p>
 <ul>
 <li><a href="https://github.com/sourcegraph/scip-java/blob/main/examples/bazel-example/WORKSPACE">WORKSPACE</a>:
 adds the required dependencies to be able to run scip-java itself.</li>
@@ -412,7 +494,4 @@ src login # validate the token authenticates correctly
 <span class="hljs-comment"># 3. Upload SCIP index to Sourcegraph</span>
 src code-intel upload # requires index.scip file <span class="hljs-keyword">to</span> exist
 </code></pre>
-<p>Don't hesitate to open an issue in the
-<a href="https://github.com/sourcegraph/scip-java">scip-java repository</a> if you have any
-questions about using scip-java with Bazel builds.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/scip-java/docs/manual-configuration.html"><span>Manual configuration</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install-scip-java">Install <code>scip-java</code></a><ul class="toc-headings"><li><a href="#docker-image">Docker image</a></li><li><a href="#java-launcher">Java launcher</a></li><li><a href="#java-fat-jar">Java fat jar</a></li><li><a href="#java-library">Java library</a></li></ul></li><li><a href="#run-scip-java-index">Run <code>scip-java index</code></a></li><li><a href="#supported-programming-languages">Supported programming languages</a><ul class="toc-headings"><li><a href="#java">Java</a></li><li><a href="#scala">Scala</a></li><li><a href="#kotlin">Kotlin</a></li></ul></li><li><a href="#supported-build-tools">Supported build tools</a><ul class="toc-headings"><li><a href="#automatic-configuration">Automatic configuration</a></li><li><a href="#manual-configuration">Manual configuration</a></li><li><a href="#gradle">Gradle</a></li><li><a href="#maven">Maven</a></li><li><a href="#sbt">sbt</a></li><li><a href="#mill">Mill</a></li><li><a href="#bazel">Bazel</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#664100"><section class="sitemap"><a href="/scip-java/" class="nav-home"><img src="/scip-java/img/scip-java.png" alt="scip-java" width="66" height="58"/></a><div><h5>Docs</h5><a href="/scip-java/docs/installation.html">Get started</a></div><div><h5>Community</h5><a href="https://discord.gg/hJbyNrRJWr" target="_blank">Chat on Discord</a></div><div><h5>More</h5><a href="https://github.com/sourcegraph/scip-java" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2023 scip-java developers</section></footer></div></body></html>
