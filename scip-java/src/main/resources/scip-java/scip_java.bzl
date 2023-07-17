@@ -103,6 +103,7 @@ def _scip_java(target, ctx):
             "JAVA_HOME": ctx.var["java_home"],
             "NO_PROGRESS_BAR": "true",
         },
+        mnemonic = "ScipJavaIndex",
         inputs = depset([build_config_path], transitive = deps),
         outputs = [scip_output, targetroot],
     )
