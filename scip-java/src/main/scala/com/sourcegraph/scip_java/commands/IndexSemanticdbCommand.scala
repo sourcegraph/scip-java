@@ -57,7 +57,7 @@ final case class IndexSemanticdbCommand(
         "If true, symbols inside directory entries are allowed to be publicly visible outside of the generated SCIP index. " +
         "If false, symbols inside directory entries are only visible inside the generated SCIP index. " +
         "The practical consequences of making this flag false is that cross-index (or cross-repository) navigation does not work between " +
-        "Maven->Maven or Gradle->Gradle projects because those build tools compile sources to classfiles izelinside directories."
+        "Maven->Maven or Gradle->Gradle projects because those build tools compile sources to classfiles inside directories."
     ) allowExportingGlobalSymbolsFromDirectoryEntries: Boolean = true,
     @Inline() app: Application = Application.default
 ) extends Command {
