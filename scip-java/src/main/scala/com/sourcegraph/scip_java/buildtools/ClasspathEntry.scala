@@ -12,8 +12,9 @@ import scala.jdk.CollectionConverters._
 import com.sourcegraph.scip_semanticdb.MavenPackage
 
 /**
- * Represents a single jar file on the classpath of a project, used to emit SCIP
- * "packageInformation" nodes.
+ * Represents a single classpath entry on the classpath of a project, used to
+ * emit SCIP "packageInformation" nodes. A classpath entry can either be a jar
+ * file or a directory path.
  */
 case class ClasspathEntry(
     entry: Path,
