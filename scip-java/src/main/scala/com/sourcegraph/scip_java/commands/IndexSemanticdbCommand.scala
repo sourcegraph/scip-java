@@ -52,6 +52,13 @@ final case class IndexSemanticdbCommand(
       "If true, don't report an error when no documents have been indexed. " +
         "The resulting SCIP index will silently be empty instead."
     ) allowEmptyIndex: Boolean = false,
+    @Description(
+      "Determines how to index symbols that are compiled to classfiles inside directories. " +
+        "If true, symbols inside directory entries are allowed to be publicly visible outside of the generated SCIP index. " +
+        "If false, symbols inside directory entries are only visible inside the generated SCIP index. " +
+        "The practical consequences of making this flag false is that cross-index (or cross-repository) navigation does not work between " +
+        "Maven->Maven or Gradle->Gradle projects because those build tools compile sources to classfiles izelinside directories."
+    ) allowExportingGlobalSymbolsFromDirectoryEntries: Boolean = true,
     @Inline() app: Application = Application.default
 ) extends Command {
   def sourceroot: Path = AbsolutePath.of(app.env.workingDirectory)
@@ -75,7 +82,9 @@ final case class IndexSemanticdbCommand(
     val packages =
       absoluteTargetroots
         .iterator
-        .flatMap(ClasspathEntry.fromTargetroot)
+        .flatMap(targetroot =>
+          ClasspathEntry.fromTargetroot(targetroot, sourceroot)
+        )
         .distinct
         .toList
     val options =
@@ -95,7 +104,8 @@ final case class IndexSemanticdbCommand(
         packages.map(_.toPackageInformation).asJava,
         buildKind,
         emitInverseRelationships,
-        allowEmptyIndex
+        allowEmptyIndex,
+        allowExportingGlobalSymbolsFromDirectoryEntries
       )
     ScipSemanticdb.run(options)
     postPackages(packages)

@@ -111,7 +111,7 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
       }
       if (expectedPackages.nonEmpty) {
         val obtainedPackages = ClasspathEntry
-          .fromTargetroot(targetroot)
+          .fromTargetroot(targetroot, workingDirectory)
           .map(_.toPackageHubId)
           .sorted
           .distinct

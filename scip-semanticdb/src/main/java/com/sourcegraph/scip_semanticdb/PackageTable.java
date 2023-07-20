@@ -3,11 +3,8 @@ package com.sourcegraph.scip_semanticdb;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.PathMatcher;
-import java.nio.file.Paths;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,13 +25,17 @@ public class PackageTable implements Function<Package, Integer> {
   private final Map<Package, Integer> scip = new ConcurrentHashMap<>();
   private final JavaVersion javaVersion;
   private final ScipWriter writer;
+  private final boolean indexDirectoryEntries;
 
+  private static final PathMatcher CLASS_PATTERN =
+      FileSystems.getDefault().getPathMatcher("glob:**.class");
   private static final PathMatcher JAR_PATTERN =
       FileSystems.getDefault().getPathMatcher("glob:**.jar");
 
   public PackageTable(ScipSemanticdbOptions options, ScipWriter writer) throws IOException {
     this.writer = writer;
     this.javaVersion = new JavaVersion();
+    this.indexDirectoryEntries = options.allowExportingGlobalSymbolsFromDirectoryEntries;
     // NOTE: it's important that we index the JDK before maven packages. Some maven packages
     // redefine classes from the JDK and we want those maven packages to take precedence over
     // the JDK. The motivation to prioritize maven packages over the JDK is that we only want
@@ -68,13 +69,29 @@ public class PackageTable implements Function<Package, Integer> {
   }
 
   private void indexPackage(MavenPackage pkg) throws IOException {
-    if (!JAR_PATTERN.matches(pkg.jar)) {
-      return;
+    if (JAR_PATTERN.matches(pkg.jar) && Files.isRegularFile(pkg.jar)) {
+      indexJarFile(pkg.jar, pkg);
+    } else if (this.indexDirectoryEntries && Files.isDirectory(pkg.jar)) {
+      indexDirectoryPackage(pkg);
     }
-    if (!Files.isRegularFile(pkg.jar)) {
-      return;
-    }
-    indexJarFile(pkg.jar, pkg);
+  }
+
+  private void indexDirectoryPackage(MavenPackage pkg) throws IOException {
+    Files.walkFileTree(
+        pkg.jar,
+        new SimpleFileVisitor<Path>() {
+          @Override
+          public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+              throws IOException {
+            if (CLASS_PATTERN.matches(file)) {
+              String classfile = pkg.jar.relativize(file).toString();
+              if (!classfile.contains("$")) {
+                byClassfile.put(classfile, pkg);
+              }
+            }
+            return super.visitFile(file, attrs);
+          }
+        });
   }
 
   private void indexJarFile(Path file, Package pkg) throws IOException {

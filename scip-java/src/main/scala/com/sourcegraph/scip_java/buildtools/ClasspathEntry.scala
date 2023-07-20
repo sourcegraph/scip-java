@@ -6,6 +6,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
+import scala.annotation.tailrec
 import scala.jdk.CollectionConverters._
 
 import com.sourcegraph.scip_semanticdb.MavenPackage
@@ -15,7 +16,7 @@ import com.sourcegraph.scip_semanticdb.MavenPackage
  * "packageInformation" nodes.
  */
 case class ClasspathEntry(
-    jar: Path,
+    entry: Path,
     sources: Option[Path],
     groupId: String,
     artifactId: String,
@@ -23,7 +24,7 @@ case class ClasspathEntry(
 ) {
   def toPackageHubId: String = s"maven:$groupId:$artifactId:$version"
   def toPackageInformation: MavenPackage =
-    new MavenPackage(jar, groupId, artifactId, version)
+    new MavenPackage(entry, groupId, artifactId, version)
 }
 
 object ClasspathEntry {
@@ -39,13 +40,16 @@ object ClasspathEntry {
    * @param targetroot
    *   @return
    */
-  def fromTargetroot(targetroot: Path): List[ClasspathEntry] = {
+  def fromTargetroot(
+      targetroot: Path,
+      sourceroot: Path
+  ): List[ClasspathEntry] = {
     val javacopts = targetroot.resolve("javacopts.txt")
     val dependencies = targetroot.resolve("dependencies.txt")
     if (Files.isRegularFile(dependencies)) {
       fromDependencies(dependencies)
     } else if (Files.isRegularFile(javacopts)) {
-      fromJavacopts(javacopts)
+      fromJavacopts(javacopts, sourceroot)
     } else {
       Nil
     }
@@ -55,7 +59,8 @@ object ClasspathEntry {
    * Parses ClasspathEntry from a "dependencies.txt" file in the targetroot.
    *
    * Every line of the file is a tab separated value with the following columns:
-   * groupId, artifactId, version, path to the jar file.
+   * groupId, artifactId, version, path to the jar file OR classes directory
+   * path.
    */
   private def fromDependencies(dependencies: Path): List[ClasspathEntry] = {
     Files
@@ -63,9 +68,9 @@ object ClasspathEntry {
       .asScala
       .iterator
       .map(_.split("\t"))
-      .collect { case Array(groupId, artifactId, version, jar) =>
+      .collect { case Array(groupId, artifactId, version, entry) =>
         ClasspathEntry(
-          jar = Paths.get(jar),
+          entry = Paths.get(entry),
           sources = None,
           groupId = groupId,
           artifactId = artifactId,
@@ -81,29 +86,54 @@ object ClasspathEntry {
    * Every line of the file represents a Java compiler options, such as
    * "-classpath" or "-encoding".
    */
-  private def fromJavacopts(javacopts: Path): List[ClasspathEntry] = {
+  private def fromJavacopts(
+      javacopts: Path,
+      sourceroot: Path
+  ): List[ClasspathEntry] = {
     Files
       .readAllLines(javacopts, StandardCharsets.UTF_8)
       .asScala
       .iterator
       .map(_.stripPrefix("\"").stripSuffix("\""))
       .sliding(2)
-      .collect { case Seq("-cp" | "-classpath", classpath) =>
-        classpath.split(File.pathSeparator).iterator
+      .collect {
+        case Seq("-d", classesDirectory) =>
+          fromClassesDirectory(Paths.get(classesDirectory), sourceroot).toList
+        case Seq("-cp" | "-classpath", classpath) =>
+          classpath
+            .split(File.pathSeparator)
+            .iterator
+            .map(Paths.get(_))
+            .flatMap(ClasspathEntry.fromClasspathJarFile)
+            .toList
       }
       .flatten
-      .map(Paths.get(_))
-      .toSet
-      .iterator
-      .flatMap(ClasspathEntry.fromPom)
       .toList
+  }
+
+  private def fromClassesDirectory(
+      classesDirectory: Path,
+      sourceroot: Path
+  ): Option[ClasspathEntry] = {
+    @tailrec
+    def loop(dir: Path): Option[ClasspathEntry] = {
+      if (dir == null || !dir.startsWith(sourceroot))
+        return None
+      fromPomXml(dir.resolve("pom.xml"), classesDirectory, None) match {
+        case None =>
+          loop(dir.getParent())
+        case Some(value) =>
+          Some(value)
+      }
+    }
+    loop(classesDirectory.getParent())
   }
 
   /**
    * Tries to parse a ClasspathEntry from the POM file that lies next to the
    * given jar file.
    */
-  private def fromPom(jar: Path): Option[ClasspathEntry] = {
+  private def fromClasspathJarFile(jar: Path): Option[ClasspathEntry] = {
     val pom = jar
       .resolveSibling(jar.getFileName.toString.stripSuffix(".jar") + ".pom")
     val sources = Option(
@@ -111,6 +141,14 @@ object ClasspathEntry {
         jar.getFileName.toString.stripSuffix(".jar") + ".sources"
       )
     ).filter(Files.isRegularFile(_))
+    fromPomXml(pom, jar, sources)
+  }
+
+  private def fromPomXml(
+      pom: Path,
+      classpathEntry: Path,
+      sources: Option[Path]
+  ): Option[ClasspathEntry] = {
     if (Files.isRegularFile(pom)) {
       val xml = scala.xml.XML.loadFile(pom.toFile)
       def xmlValue(key: String): String = {
@@ -123,7 +161,9 @@ object ClasspathEntry {
       val groupId = xmlValue("groupId")
       val artifactId = xmlValue("artifactId")
       val version = xmlValue("version")
-      Some(ClasspathEntry(jar, sources, groupId, artifactId, version))
+      Some(
+        ClasspathEntry(classpathEntry, sources, groupId, artifactId, version)
+      )
     } else {
       None
     }

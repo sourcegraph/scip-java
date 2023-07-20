@@ -5,6 +5,7 @@ import java.nio.file.Paths
 import java.{util => ju}
 
 import scala.jdk.CollectionConverters._
+import scala.util.Try
 
 import com.sourcegraph.scip_java.BuildInfo
 import org.gradle.api.DefaultTask
@@ -12,6 +13,9 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 import org.gradle.api.provider.Property
+import org.gradle.api.publish.PublishingExtension
+import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.scala.ScalaCompile
@@ -396,8 +400,43 @@ class WriteDependencies extends DefaultTask {
       .foreach(path => java.nio.file.Files.createDirectories(path.getParent()))
 
     val deps = List.newBuilder[String]
+    val project = getProject()
 
-    getProject()
+    // List the project itself as a dependency so that we can assign project name/version to symbols that are defined in this project.
+    // The code below is roughly equivalent to the following with Groovy:
+    //   deps += "$publication.groupId $publication.artifactId $publication.version $sourceSets.main.output.classesDirectory"
+    Try(
+      project
+        .getExtensions()
+        .getByType(classOf[SourceSetContainer])
+        .getByName("main")
+        .getOutput()
+        .getClassesDirs()
+        .getFiles()
+        .asScala
+        .toList
+        .map(_.getAbsolutePath())
+        .sorted
+        .headOption
+    ).collect { case Some(classesDirectory) =>
+      project
+        .getExtensions()
+        .findByType(classOf[PublishingExtension])
+        .getPublications()
+        .withType(classOf[MavenPublication])
+        .asScala
+        .foreach { publication =>
+          deps +=
+            List(
+              publication.getGroupId(),
+              publication.getArtifactId(),
+              publication.getVersion(),
+              classesDirectory
+            ).mkString("\t")
+        }
+    }
+
+    project
       .getConfigurations()
       .forEach { conf =>
         if (conf.isCanBeResolved()) {
