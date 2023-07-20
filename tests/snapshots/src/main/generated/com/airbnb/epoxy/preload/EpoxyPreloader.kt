@@ -755,6 +755,9 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 class EpoxyPreloadException(errorMessage: String) : RuntimeException(errorMessage)
 //    ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloadException#
 //                          documentation ```kt\npublic final class EpoxyPreloadException : kotlin.RuntimeException /* = java.lang.RuntimeException */\n```
+//                          relationship is_reference is_implementation semanticdb maven . . kotlin/Throwable#
+//                          relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Exception#
+//                          relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/RuntimeException#
 //    ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloadException#`<init>`().
 //                          documentation ```kt\npublic constructor EpoxyPreloadException(errorMessage: kotlin.String)\n```
 //                          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloadException#`<init>`().(errorMessage)
@@ -826,6 +829,7 @@ class ViewData<out U : ViewMetadata?>(
 interface ViewMetadata {
 //        ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#
 //                     documentation ```kt\npublic interface ViewMetadata\n```
+//                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/preload/ImageViewMetadata#
     companion object {
 //            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#Companion# 1:0
 //                     documentation ```kt\npublic companion object\n```
@@ -853,6 +857,7 @@ interface ViewMetadata {
 open class ImageViewMetadata(
 //         ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ImageViewMetadata#
 //                           documentation ```kt\npublic open class ImageViewMetadata : com.airbnb.epoxy.preload.ViewMetadata\n```\n\n----\n\n\n Default implementation of [ViewMetadata] for an ImageView.\n This data can help the preload request know how to configure itself.\n
+//                           relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#
 //         ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ImageViewMetadata#`<init>`().
 //                           documentation ```kt\npublic constructor ImageViewMetadata(scaleType: [ERROR : ImageView.ScaleType])\n```
     val scaleType: ImageView.ScaleType

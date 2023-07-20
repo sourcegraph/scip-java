@@ -333,6 +333,7 @@ abstract class EpoxyModelPreloader<T : EpoxyModel<*>, U : ViewMetadata?, P : Pre
             override fun buildViewMetadata(view: View) = viewMetadata(view)
 //                       ^^^^^^^^^^^^^^^^^ definition local 3
 //                                         documentation ```kt\npublic open fun buildViewMetadata(view: [ERROR : View]): U\n```
+//                                         relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#buildViewMetadata().
 //                                         ^^^^ definition local 4
 //                                              documentation ```kt\nvalue-parameter view: [ERROR : View]\n```
 //                                                       ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#Companion#with(+2).(viewMetadata)
@@ -341,6 +342,7 @@ abstract class EpoxyModelPreloader<T : EpoxyModel<*>, U : ViewMetadata?, P : Pre
             override fun viewSignature(epoxyModel: T) = viewSignature(epoxyModel)
 //                       ^^^^^^^^^^^^^ definition local 5
 //                                     documentation ```kt\npublic open fun viewSignature(epoxyModel: T): kotlin.Any?\n```
+//                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#viewSignature().
 //                                     ^^^^^^^^^^ definition local 6
 //                                                documentation ```kt\nvalue-parameter epoxyModel: T\n```
 //                                                 ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#Companion#with(+2).[T]
@@ -350,6 +352,7 @@ abstract class EpoxyModelPreloader<T : EpoxyModel<*>, U : ViewMetadata?, P : Pre
             override fun startPreload(epoxyModel: T, preloadTarget: P, viewData: ViewData<U>) {
 //                       ^^^^^^^^^^^^ definition local 7
 //                                    documentation ```kt\npublic open fun startPreload(epoxyModel: T, preloadTarget: P, viewData: com.airbnb.epoxy.preload.ViewData<U>)\n```
+//                                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#startPreload().
 //                                    ^^^^^^^^^^ definition local 8
 //                                               documentation ```kt\nvalue-parameter epoxyModel: T\n```
 //                                                ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#Companion#with(+2).[T]

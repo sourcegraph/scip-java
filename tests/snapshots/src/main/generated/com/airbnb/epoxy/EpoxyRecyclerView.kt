@@ -981,6 +981,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
             override fun buildModels(controller: EpoxyController) {
 //                       ^^^^^^^^^^^ definition local 13
 //                                   documentation ```kt\npublic open fun buildModels(controller: [ERROR : EpoxyController])\n```
+//                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#buildModels().
 //                                   ^^^^^^^^^^ definition local 14
 //                                              documentation ```kt\nvalue-parameter controller: [ERROR : EpoxyController]\n```
             }
