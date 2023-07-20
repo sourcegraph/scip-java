@@ -119,13 +119,14 @@ object ClasspathEntry {
     @tailrec
     def loop(dir: Path): Option[ClasspathEntry] = {
       if (dir == null || !dir.startsWith(sourceroot))
-        return None
-      fromPomXml(dir.resolve("pom.xml"), classesDirectory, None) match {
-        case None =>
-          loop(dir.getParent())
-        case Some(value) =>
-          Some(value)
-      }
+        None
+      else
+        fromPomXml(dir.resolve("pom.xml"), classesDirectory, None) match {
+          case None =>
+            loop(dir.getParent())
+          case Some(value) =>
+            Some(value)
+        }
     }
     loop(classesDirectory.getParent())
   }
