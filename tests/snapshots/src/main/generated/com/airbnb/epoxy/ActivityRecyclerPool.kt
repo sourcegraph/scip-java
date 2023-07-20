@@ -186,6 +186,7 @@ internal class ActivityRecyclerPool {
 internal class PoolReference(
 //             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/PoolReference#
 //                           documentation ```kt\ninternal final class PoolReference : androidx.lifecycle.LifecycleObserver\n```
+//                           relationship is_reference is_implementation semanticdb maven maven/androidx.lifecycle/lifecycle-common 2.0.0 androidx/lifecycle/LifecycleObserver#
 //             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/PoolReference#`<init>`().
 //                           documentation ```kt\npublic constructor PoolReference(context: [ERROR : Context], viewPool: [ERROR : RecyclerView.RecycledViewPool], parent: com.airbnb.epoxy.ActivityRecyclerPool)\n```
     context: Context,

@@ -280,6 +280,7 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
             override fun iterator() = this@children.iterator()
 //                       ^^^^^^^^ definition local 6
 //                                documentation ```kt\npublic open fun iterator(): [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
+//                                relationship is_reference is_implementation semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/sequences/Sequence#iterator().
 //                                    ^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#children.
         }
 
@@ -298,12 +299,16 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
         override fun hasNext() = index < childCount
 //                   ^^^^^^^ definition local 10
 //                           documentation ```kt\npublic open fun hasNext(): [ERROR : Error function type]\n```
+//                           relationship is_reference is_implementation semanticdb maven . . kotlin/collections/Iterator#hasNext().
+//                           relationship is_reference is_implementation semanticdb maven . . kotlin/collections/MutableIterator#hasNext().
 //                               ^^^^^ reference local 7
 //                               ^^^^^ reference local 8
 //                               ^^^^^ reference local 9
         override fun next() = getChildAt(index++) ?: throw IndexOutOfBoundsException()
 //                   ^^^^ definition local 11
 //                        documentation ```kt\npublic open fun next(): kotlin.Nothing\n```
+//                        relationship is_reference is_implementation semanticdb maven . . kotlin/collections/Iterator#next().
+//                        relationship is_reference is_implementation semanticdb maven . . kotlin/collections/MutableIterator#next().
 //                                       ^^^^^ reference local 7
 //                                       ^^^^^ reference local 8
 //                                       ^^^^^ reference local 9
@@ -311,6 +316,7 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
         override fun remove() = removeViewAt(--index)
 //                   ^^^^^^ definition local 12
 //                          documentation ```kt\npublic open fun remove(): [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
+//                          relationship is_reference is_implementation semanticdb maven . . kotlin/collections/MutableIterator#remove().
 //                                           ^^ reference semanticdb maven . . kotlin/Int#dec().
 //                                             ^^^^^ reference local 7
 //                                             ^^^^^ reference local 8
@@ -320,6 +326,7 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
     override fun equals(other: Any?): Boolean {
 //               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#equals().
 //                      documentation ```kt\npublic open fun equals(other: kotlin.Any?): kotlin.Boolean\n```
+//                      relationship is_reference is_implementation semanticdb maven . . kotlin/Any#equals().
 //                      ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#equals().(other)
 //                            documentation ```kt\nvalue-parameter other: kotlin.Any?\n```
 //                             ^^^ reference semanticdb maven . . kotlin/Any#
@@ -374,6 +381,7 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
     override fun hashCode(): Int {
 //               ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#hashCode().
 //                        documentation ```kt\npublic open fun hashCode(): kotlin.Int\n```
+//                        relationship is_reference is_implementation semanticdb maven . . kotlin/Any#hashCode().
 //                           ^^^ reference semanticdb maven . . kotlin/Int#
         var result = originalClickListener?.hashCode() ?: 0
 //          ^^^^^^ definition local 13
