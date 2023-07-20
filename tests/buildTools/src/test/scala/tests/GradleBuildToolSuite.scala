@@ -50,6 +50,35 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
     gradleVersions = List(Gradle8, Gradle7, Gradle67)
   )
 
+  checkGradleBuild(
+    "publishing",
+    """|/build.gradle
+       |plugins {
+       |    id 'java'
+       |    id 'maven-publish'
+       |}
+       |repositories {
+       |    // Use Maven Central for resolving dependencies.
+       |    mavenCentral()
+       |}
+       |publishing {
+       |    publications {
+       |        maven(MavenPublication) {
+       |            groupId = 'com.sourcegraph'
+       |            artifactId = 'example-library'
+       |            version = '1.1'
+       |        }
+       |    }
+       |}
+       |/src/main/java/test/ExampleClass.java
+       |package test;
+       |public abstract class ExampleClass {}
+    """.stripMargin,
+    expectedSemanticdbFiles = 1,
+    gradleVersions = List(Gradle8, Gradle7, Gradle67),
+    expectedPackages = "maven:com.sourcegraph:example-library:1.1"
+  )
+
   // This is the most basic test for Java/Scala support
   // We run it for an extended list of Gradle versions
   checkGradleBuild(

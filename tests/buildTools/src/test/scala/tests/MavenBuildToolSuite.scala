@@ -24,7 +24,8 @@ class MavenBuildToolSuite extends BaseBuildToolSuite {
         |""".stripMargin,
     2,
     expectedPackages =
-      """|maven:junit:junit:4.11
+      """|maven:com.sourcegraph:example:1.0-SNAPSHOT
+         |maven:junit:junit:4.11
          |maven:org.hamcrest:hamcrest-core:1.3
          |""".stripMargin
   )
