@@ -7,7 +7,7 @@ import java.{util => ju}
 import scala.jdk.CollectionConverters._
 import scala.util.control.NonFatal
 
-import com.sourcegraph.scip_java.BuildInfo
+import com.sourcegraph.internal.scip_java.BuildInfo
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project

@@ -9,8 +9,8 @@ import scala.util.Properties
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
-import com.sourcegraph.scip_java.ScipJava
-import com.sourcegraph.scip_java.buildtools.ClasspathEntry
+import com.sourcegraph.internal.scip_java.ScipJava
+import com.sourcegraph.internal.scip_java.buildtools.ClasspathEntry
 import moped.testkit.DeleteVisitor
 import moped.testkit.FileLayout
 import moped.testkit.MopedSuite

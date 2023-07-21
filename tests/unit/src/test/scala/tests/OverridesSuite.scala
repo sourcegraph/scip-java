@@ -4,7 +4,7 @@ import java.util.stream.Collectors
 
 import scala.meta.Input
 
-import com.sourcegraph.scip_semanticdb.Symtab
+import com.sourcegraph.internal.scip_semanticdb.Symtab
 import munit.FunSuite
 import munit.TestOptions
 

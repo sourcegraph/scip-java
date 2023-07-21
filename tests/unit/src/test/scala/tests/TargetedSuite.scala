@@ -7,8 +7,8 @@ import scala.meta.Input
 import scala.meta.Position
 import scala.meta.internal.inputs._
 
-import com.sourcegraph.semanticdb_javac.Semanticdb
-import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
+import com.sourcegraph.internal.semanticdb_javac.Semanticdb
+import com.sourcegraph.internal.semanticdb_javac.Semanticdb.TextDocument
 import munit.FunSuite
 import munit.TestOptions
 

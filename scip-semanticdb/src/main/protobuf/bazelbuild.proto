@@ -21,7 +21,7 @@ package bazel_query;
 
 // option cc_api_version = 2;
 // option java_api_version = 1;
-option java_package = "com.sourcegraph.scip_java";
+option java_package = "com.sourcegraph.internal.scip_java";
 
 message License {
   repeated string license_type = 1;

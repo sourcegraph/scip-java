@@ -112,7 +112,7 @@ lazy val gradlePlugin = project
   .settings(
     name := "semanticdb-gradle",
     scalaVersion := V.scala213,
-    buildInfoPackage := "com.sourcegraph.scip_java",
+    buildInfoPackage := "com.sourcegraph.internal.scip_java",
     publish / skip := true,
     javaToolchainVersion := "8",
     scalacOptions ++= Seq("-target:8", "-release", "8"),
@@ -245,7 +245,7 @@ lazy val cli = project
         "minimalMillVersion" -> V.minimalMillVersion,
         "millScipVersion" -> V.millScipVersion
       ),
-    buildInfoPackage := "com.sourcegraph.scip_java",
+    buildInfoPackage := "com.sourcegraph.internal.scip_java",
     libraryDependencies ++=
       List(
         "io.get-coursier" %% "coursier" % V.coursier,

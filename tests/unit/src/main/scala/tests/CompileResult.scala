@@ -1,6 +1,6 @@
 package tests
 
-import com.sourcegraph.semanticdb_javac.Semanticdb
+import com.sourcegraph.internal.semanticdb_javac.Semanticdb
 
 case class CompileResult(
     byteCode: Array[Byte],

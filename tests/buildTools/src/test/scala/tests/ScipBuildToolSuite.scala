@@ -1,6 +1,6 @@
 package tests
 
-import com.sourcegraph.scip_java.{BuildInfo => V}
+import com.sourcegraph.internal.scip_java.{BuildInfo => V}
 
 class ScipBuildToolSuite extends BaseBuildToolSuite {
   override def tags = List(SkipWindows)

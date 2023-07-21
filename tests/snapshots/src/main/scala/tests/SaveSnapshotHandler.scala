@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentLinkedDeque
 
 import scala.jdk.CollectionConverters._
 
-import com.sourcegraph.io.DeleteVisitor
+import com.sourcegraph.internal.io.DeleteVisitor
 
 class SaveSnapshotHandler extends SnapshotHandler {
   private val writtenTests = new ConcurrentLinkedDeque[Path]()

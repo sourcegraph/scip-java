@@ -1,5 +1,9 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.internal.semanticdb_javac.GlobalSymbolsCache;
+import com.sourcegraph.internal.semanticdb_javac.SemanticdbJavacOptions;
+import com.sourcegraph.internal.semanticdb_javac.SemanticdbReporter;
+import com.sourcegraph.internal.semanticdb_javac.SemanticdbTaskListener;
 import com.sun.source.util.*;
 import com.sun.tools.javac.api.BasicJavacTask;
 import com.sun.tools.javac.model.JavacTypes;

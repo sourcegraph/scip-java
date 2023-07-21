@@ -17,9 +17,9 @@ import scala.meta.io.AbsolutePath
 import scala.meta.io.Classpath
 import scala.meta.pc.PresentationCompiler
 
-import com.sourcegraph.semanticdb_javac.Semanticdb
-import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
-import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocuments
+import com.sourcegraph.internal.semanticdb_javac.Semanticdb
+import com.sourcegraph.internal.semanticdb_javac.Semanticdb.TextDocument
+import com.sourcegraph.internal.semanticdb_javac.Semanticdb.TextDocuments
 
 object TestCompiler {
   val PROCESSOR_PATH = System.getProperty("java.class.path")

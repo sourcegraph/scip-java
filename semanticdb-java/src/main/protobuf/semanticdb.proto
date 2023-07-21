@@ -5,7 +5,7 @@
 
 syntax = "proto3";
 
-package com.sourcegraph.semanticdb_javac;
+package com.sourcegraph.internal.semanticdb_javac;
 
 enum Schema {
   LEGACY = 0;

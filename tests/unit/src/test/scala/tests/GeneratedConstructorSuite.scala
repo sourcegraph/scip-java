@@ -2,7 +2,7 @@ package tests
 
 import scala.meta.inputs.Input
 
-import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
+import com.sourcegraph.internal.semanticdb_javac.Semanticdb.TextDocument
 import munit.FunSuite
 import munit.TestOptions
 
