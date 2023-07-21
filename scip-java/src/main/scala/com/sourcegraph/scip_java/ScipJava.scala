@@ -1,12 +1,13 @@
 package com.sourcegraph.scip_java
 
-import java.io.PrintStream
+import com.sourcegraph.internal.scip_java.BuildInfo
 
-import com.sourcegraph.scip_java.commands.IndexCommand
-import com.sourcegraph.scip_java.commands.IndexDependencyCommand
-import com.sourcegraph.scip_java.commands.IndexSemanticdbCommand
-import com.sourcegraph.scip_java.commands.SnapshotCommand
-import com.sourcegraph.scip_java.commands.SnapshotLsifCommand
+import java.io.PrintStream
+import com.sourcegraph.internal.scip_java.commands.IndexCommand
+import com.sourcegraph.internal.scip_java.commands.IndexDependencyCommand
+import com.sourcegraph.internal.scip_java.commands.IndexSemanticdbCommand
+import com.sourcegraph.internal.scip_java.commands.SnapshotCommand
+import com.sourcegraph.internal.scip_java.commands.SnapshotLsifCommand
 import moped.cli.Application
 import moped.cli.CommandParser
 import moped.commands.HelpCommand

@@ -4,9 +4,9 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.concurrent.TimeUnit
 
-import com.sourcegraph.io.DeleteVisitor
-import com.sourcegraph.scip_java.Dependencies
-import com.sourcegraph.scip_java.ScipJava
+import com.sourcegraph.internal.io.DeleteVisitor
+import com.sourcegraph.internal.scip_java.Dependencies
+import com.sourcegraph.internal.scip_java.ScipJava
 import org.openjdk.jmh.annotations._
 import tests.TestCompiler
 

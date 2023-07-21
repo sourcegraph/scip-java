@@ -1,5 +1,7 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.internal.semanticdb_javac.SemanticdbOptionBuilder;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;

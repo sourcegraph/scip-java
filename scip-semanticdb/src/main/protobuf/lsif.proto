@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option java_multiple_files = true;
 
-package com.sourcegraph.lsif_protocol;
+package com.sourcegraph.internal.lsif_protocol;
 
 message LsifObject {
   int32 id = 1;

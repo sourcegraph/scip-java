@@ -12,7 +12,7 @@ import java.nio.file.attribute.BasicFileAttributes
 
 import scala.util.Properties
 
-import com.sourcegraph.scip_java.ScipJava
+import com.sourcegraph.internal.scip_java.ScipJava
 import moped.reporters.ConsoleReporter
 
 class LibrarySnapshotGenerator extends SnapshotGenerator {

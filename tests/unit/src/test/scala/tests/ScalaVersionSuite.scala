@@ -2,8 +2,8 @@ package tests
 
 import java.nio.file.Paths
 
-import com.sourcegraph.scip_java.buildtools.ScalaVersion
-import com.sourcegraph.scip_java.{BuildInfo => V}
+import com.sourcegraph.internal.scip_java.buildtools.ScalaVersion
+import com.sourcegraph.internal.scip_java.{BuildInfo => V}
 import munit.FunSuite
 import munit.TestOptions
 
