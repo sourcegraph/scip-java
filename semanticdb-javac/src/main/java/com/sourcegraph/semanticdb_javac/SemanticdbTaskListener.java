@@ -146,10 +146,10 @@ public final class SemanticdbTaskListener implements TaskListener {
           return options.sourceroot.resolve(path);
         }
       }
-      throw new IllegalArgumentException("unsupported source file: " + toString);
-    } else {
-      return Paths.get(uri);
+      // Fallback to default behavior.
     }
+
+    return Paths.get(uri);
   }
 
   // Infers the `-sourceroot:` flag from the provided file.
