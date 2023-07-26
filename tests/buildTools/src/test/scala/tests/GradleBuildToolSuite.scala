@@ -297,7 +297,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
     "kotlin",
     """|/build.gradle
        |plugins {
-       |    id 'org.jetbrains.kotlin.jvm' version '1.5.31'
+       |    id 'org.jetbrains.kotlin.jvm' version '1.8.0'
        |}
        |repositories {
        |    mavenCentral()
@@ -371,7 +371,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
       s"""|/build.gradle
           |plugins {
           |    id 'java'
-          |    id 'org.jetbrains.kotlin.jvm' version '1.5.31'
+          |    id 'org.jetbrains.kotlin.jvm' version '1.8.0'
           |}
           |java {
           |  toolchain {
@@ -396,7 +396,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
         s"kotlin-multiplatform-$jvmSettings",
         s"""|/build.gradle
             |plugins {
-            |    id 'org.jetbrains.kotlin.multiplatform' version '1.5.31'
+            |    id 'org.jetbrains.kotlin.multiplatform' version '1.8.0'
             |}
             |repositories {
             |    mavenCentral()

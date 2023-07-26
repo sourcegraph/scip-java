@@ -48,10 +48,10 @@ abstract class GroupModel : EpoxyModelGroup, ModelCollector {
 
     override fun add(model: EpoxyModel<*>) {
 //               ^^^ definition semanticdb maven . . com/airbnb/epoxy/GroupModel#add().
-//                   documentation ```kt\npublic open fun add(model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>)\n```
+//                   documentation ```kt\npublic open fun add(model: [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>)\n```
 //                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/ModelCollector#add().
 //                   ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/GroupModel#add().(model)
-//                         documentation ```kt\nvalue-parameter model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>\n```
+//                         documentation ```kt\nvalue-parameter model: [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>\n```
         super.addModel(model)
 //      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelCollector#
 //                     ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/GroupModel#add().(model)

@@ -59,13 +59,13 @@ internal class ActivityRecyclerPool {
 //   ^^^^^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/jvm/JvmOverloads#`<init>`().
     fun getPool(
 //      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ActivityRecyclerPool#getPool().
-//              documentation ```kt\npublic final fun getPool(context: [ERROR : Context], poolFactory: () -> [ERROR : RecyclerView.RecycledViewPool]): com.airbnb.epoxy.PoolReference\n```
+//              documentation ```kt\npublic final fun getPool(context: [Error type: Unresolved type for Context], poolFactory: () -> [Error type: Unresolved type for RecyclerView.RecycledViewPool]): com.airbnb.epoxy.PoolReference\n```
         context: Context,
 //      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ActivityRecyclerPool#getPool().(context)
-//              documentation ```kt\nvalue-parameter context: [ERROR : Context]\n```
+//              documentation ```kt\nvalue-parameter context: [Error type: Unresolved type for Context]\n```
         poolFactory: () -> RecyclerView.RecycledViewPool
 //      ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ActivityRecyclerPool#getPool().(poolFactory)
-//                  documentation ```kt\nvalue-parameter poolFactory: () -> [ERROR : RecyclerView.RecycledViewPool]\n```
+//                  documentation ```kt\nvalue-parameter poolFactory: () -> [Error type: Unresolved type for RecyclerView.RecycledViewPool]\n```
     ): PoolReference {
 //     ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/PoolReference#
 
@@ -166,7 +166,7 @@ internal class ActivityRecyclerPool {
 
     private fun Context.lifecycle(): Lifecycle? {
 //                      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ActivityRecyclerPool#lifecycle().
-//                                documentation ```kt\nprivate final fun [ERROR : Context].lifecycle(): androidx.lifecycle.Lifecycle?\n```
+//                                documentation ```kt\nprivate final fun [Error type: Unresolved type for Context].lifecycle(): androidx.lifecycle.Lifecycle?\n```
 //                                   ^^^^^^^^^ reference semanticdb maven maven/androidx.lifecycle/lifecycle-common 2.0.0 androidx/lifecycle/Lifecycle#
         if (this is LifecycleOwner) {
 //          ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ActivityRecyclerPool#lifecycle().
@@ -188,17 +188,17 @@ internal class PoolReference(
 //                           documentation ```kt\ninternal final class PoolReference : androidx.lifecycle.LifecycleObserver\n```
 //                           relationship is_reference is_implementation semanticdb maven maven/androidx.lifecycle/lifecycle-common 2.0.0 androidx/lifecycle/LifecycleObserver#
 //             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/PoolReference#`<init>`().
-//                           documentation ```kt\npublic constructor PoolReference(context: [ERROR : Context], viewPool: [ERROR : RecyclerView.RecycledViewPool], parent: com.airbnb.epoxy.ActivityRecyclerPool)\n```
+//                           documentation ```kt\npublic constructor PoolReference(context: [Error type: Unresolved type for Context], viewPool: [Error type: Unresolved type for RecyclerView.RecycledViewPool], parent: com.airbnb.epoxy.ActivityRecyclerPool)\n```
     context: Context,
 //  ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/PoolReference#`<init>`().(context)
-//          documentation ```kt\nvalue-parameter context: [ERROR : Context]\n```
+//          documentation ```kt\nvalue-parameter context: [Error type: Unresolved type for Context]\n```
     val viewPool: RecyclerView.RecycledViewPool,
 //      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/PoolReference#`<init>`().(viewPool)
-//               documentation ```kt\nvalue-parameter viewPool: [ERROR : RecyclerView.RecycledViewPool]\n```
+//               documentation ```kt\nvalue-parameter viewPool: [Error type: Unresolved type for RecyclerView.RecycledViewPool]\n```
 //      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/PoolReference#getViewPool().
-//               documentation ```kt\npublic final val viewPool: [ERROR : RecyclerView.RecycledViewPool]\n```
+//               documentation ```kt\npublic final val viewPool: [Error type: Unresolved type for RecyclerView.RecycledViewPool]\n```
 //      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/PoolReference#viewPool.
-//               documentation ```kt\npublic final val viewPool: [ERROR : RecyclerView.RecycledViewPool]\n```
+//               documentation ```kt\npublic final val viewPool: [Error type: Unresolved type for RecyclerView.RecycledViewPool]\n```
     private val parent: ActivityRecyclerPool
 //              ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/PoolReference#`<init>`().(parent)
 //                     documentation ```kt\nvalue-parameter parent: com.airbnb.epoxy.ActivityRecyclerPool\n```
@@ -211,18 +211,18 @@ internal class PoolReference(
 //  ^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/androidx.lifecycle/lifecycle-common 2.0.0 androidx/lifecycle/LifecycleObserver#
     private val contextReference: WeakReference<Context> = WeakReference(context)
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/PoolReference#contextReference.
-//                               documentation ```kt\nprivate final val contextReference: java.lang.ref.WeakReference<[ERROR : Context]>\n```
+//                               documentation ```kt\nprivate final val contextReference: java.lang.ref.WeakReference<[Error type: Unresolved type for Context]>\n```
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/PoolReference#getContextReference().
-//                               documentation ```kt\nprivate final val contextReference: java.lang.ref.WeakReference<[ERROR : Context]>\n```
+//                               documentation ```kt\nprivate final val contextReference: java.lang.ref.WeakReference<[Error type: Unresolved type for Context]>\n```
 //                                ^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/ref/WeakReference#
 //                                                         ^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/ref/WeakReference#`<init>`().
 //                                                                       ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/PoolReference#`<init>`().(context)
 
     val context: Context? get() = contextReference.get()
 //      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/PoolReference#context.
-//              documentation ```kt\npublic final val context: [ERROR : Context]?\n```
+//              documentation ```kt\npublic final val context: [Error type: Unresolved type for Context]?\n```
 //                        ^^^ definition semanticdb maven . . com/airbnb/epoxy/PoolReference#getContext().
-//                            documentation ```kt\npublic final fun <get-context>(): [ERROR : Context]?\n```
+//                            documentation ```kt\npublic final fun `<get-context>`(): [Error type: Unresolved type for Context]?\n```
 //                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/PoolReference#contextReference.
 //                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/PoolReference#getContextReference().
 //                                                 ^^^ reference semanticdb maven jdk 11 java/lang/ref/WeakReference#get().
@@ -252,7 +252,7 @@ internal class PoolReference(
 
 internal fun Context?.isActivityDestroyed(): Boolean {
 //                    ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ActivityRecyclerPoolKt#isActivityDestroyed().
-//                                        documentation ```kt\ninternal fun [ERROR : Context]?.isActivityDestroyed(): kotlin.Boolean\n```
+//                                        documentation ```kt\ninternal fun [Error type: Unresolved type for Context]?.isActivityDestroyed(): kotlin.Boolean\n```
 //                                           ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
     if (this == null) {
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ActivityRecyclerPoolKt#isActivityDestroyed().

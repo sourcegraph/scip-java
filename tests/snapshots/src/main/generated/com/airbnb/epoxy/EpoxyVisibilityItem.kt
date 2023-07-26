@@ -48,18 +48,18 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
 
     private val localVisibleRect = Rect()
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#getLocalVisibleRect().
-//                               documentation ```kt\nprivate final val localVisibleRect: [ERROR : Type for Rect()]\n```
+//                               documentation ```kt\nprivate final val localVisibleRect: [Error type: Not found recorded type for Rect()]\n```
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#localVisibleRect.
-//                               documentation ```kt\nprivate final val localVisibleRect: [ERROR : Type for Rect()]\n```
+//                               documentation ```kt\nprivate final val localVisibleRect: [Error type: Not found recorded type for Rect()]\n```
 
     var adapterPosition = RecyclerView.NO_POSITION
 //      ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#adapterPosition.
-//                      documentation ```kt\npublic final var adapterPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//                      documentation ```kt\npublic final var adapterPosition: [Error type: Error property type]\n```
 //      ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#getAdapterPosition().
-//                      documentation ```kt\npublic final var adapterPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//                      documentation ```kt\npublic final var adapterPosition: [Error type: Error property type]\n```
         private set
 //              ^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#setAdapterPosition().
-//                  documentation ```kt\nprivate final fun <set-adapterPosition>(<set-?>: [ERROR : <ERROR PROPERTY TYPE>])\n```
+//                  documentation ```kt\nprivate final fun `<set-adapterPosition>`(`<set-?>`: [Error type: Error property type])\n```
 
     @Px
 //   ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#`<init>`().
@@ -150,11 +150,11 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
 //                             documentation ```kt\nprivate final var focusedVisible: kotlin.Boolean\n```
     private var viewVisibility = View.GONE
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#getViewVisibility().
-//                             documentation ```kt\nprivate final var viewVisibility: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//                             documentation ```kt\nprivate final var viewVisibility: [Error type: Error property type]\n```
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#setViewVisibility().
-//                             documentation ```kt\nprivate final var viewVisibility: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//                             documentation ```kt\nprivate final var viewVisibility: [Error type: Error property type]\n```
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#viewVisibility.
-//                             documentation ```kt\nprivate final var viewVisibility: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//                             documentation ```kt\nprivate final var viewVisibility: [Error type: Error property type]\n```
 
     /** Store last value for de-duping  */
     private var lastVisibleHeightNotified: Int? = null
@@ -201,11 +201,11 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
      */
     fun update(view: View, parent: ViewGroup, detachEvent: Boolean): Boolean {
 //      ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#update().
-//             documentation ```kt\npublic final fun update(view: [ERROR : View], parent: [ERROR : ViewGroup], detachEvent: kotlin.Boolean): kotlin.Boolean\n```\n\n----\n\n\n Update the visibility item according the current layout.\n\n @param view        the current [com.airbnb.epoxy.EpoxyViewHolder]'s itemView\n @param parent      the [android.view.ViewGroup]\n @return true if the view has been measured\n
+//             documentation ```kt\npublic final fun update(view: [Error type: Unresolved type for View], parent: [Error type: Unresolved type for ViewGroup], detachEvent: kotlin.Boolean): kotlin.Boolean\n```\n\n----\n\n\n Update the visibility item according the current layout.\n\n @param view        the current [com.airbnb.epoxy.EpoxyViewHolder]'s itemView\n @param parent      the [android.view.ViewGroup]\n @return true if the view has been measured\n
 //             ^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#update().(view)
-//                  documentation ```kt\nvalue-parameter view: [ERROR : View]\n```
+//                  documentation ```kt\nvalue-parameter view: [Error type: Unresolved type for View]\n```
 //                         ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#update().(parent)
-//                                documentation ```kt\nvalue-parameter parent: [ERROR : ViewGroup]\n```
+//                                documentation ```kt\nvalue-parameter parent: [Error type: Unresolved type for ViewGroup]\n```
 //                                            ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#update().(detachEvent)
 //                                                        documentation ```kt\nvalue-parameter detachEvent: kotlin.Boolean\n```
 //                                                         ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
@@ -310,9 +310,9 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
 
     fun handleVisible(epoxyHolder: EpoxyViewHolder, detachEvent: Boolean) {
 //      ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handleVisible().
-//                    documentation ```kt\npublic final fun handleVisible(epoxyHolder: [ERROR : EpoxyViewHolder], detachEvent: kotlin.Boolean)\n```
+//                    documentation ```kt\npublic final fun handleVisible(epoxyHolder: [Error type: Unresolved type for EpoxyViewHolder], detachEvent: kotlin.Boolean)\n```
 //                    ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handleVisible().(epoxyHolder)
-//                                documentation ```kt\nvalue-parameter epoxyHolder: [ERROR : EpoxyViewHolder]\n```
+//                                documentation ```kt\nvalue-parameter epoxyHolder: [Error type: Unresolved type for EpoxyViewHolder]\n```
 //                                                  ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handleVisible().(detachEvent)
 //                                                              documentation ```kt\nvalue-parameter detachEvent: kotlin.Boolean\n```
 //                                                               ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
@@ -350,9 +350,9 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
 
     fun handleFocus(epoxyHolder: EpoxyViewHolder, detachEvent: Boolean) {
 //      ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handleFocus().
-//                  documentation ```kt\npublic final fun handleFocus(epoxyHolder: [ERROR : EpoxyViewHolder], detachEvent: kotlin.Boolean)\n```
+//                  documentation ```kt\npublic final fun handleFocus(epoxyHolder: [Error type: Unresolved type for EpoxyViewHolder], detachEvent: kotlin.Boolean)\n```
 //                  ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handleFocus().(epoxyHolder)
-//                              documentation ```kt\nvalue-parameter epoxyHolder: [ERROR : EpoxyViewHolder]\n```
+//                              documentation ```kt\nvalue-parameter epoxyHolder: [Error type: Unresolved type for EpoxyViewHolder]\n```
 //                                                ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handleFocus().(detachEvent)
 //                                                            documentation ```kt\nvalue-parameter detachEvent: kotlin.Boolean\n```
 //                                                             ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
@@ -390,10 +390,10 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
 
     fun handlePartialImpressionVisible(
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handlePartialImpressionVisible().
-//                                     documentation ```kt\npublic final fun handlePartialImpressionVisible(epoxyHolder: [ERROR : EpoxyViewHolder], detachEvent: kotlin.Boolean, thresholdPercentage: kotlin.Int)\n```
+//                                     documentation ```kt\npublic final fun handlePartialImpressionVisible(epoxyHolder: [Error type: Unresolved type for EpoxyViewHolder], detachEvent: kotlin.Boolean, thresholdPercentage: kotlin.Int)\n```
         epoxyHolder: EpoxyViewHolder,
 //      ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handlePartialImpressionVisible().(epoxyHolder)
-//                  documentation ```kt\nvalue-parameter epoxyHolder: [ERROR : EpoxyViewHolder]\n```
+//                  documentation ```kt\nvalue-parameter epoxyHolder: [Error type: Unresolved type for EpoxyViewHolder]\n```
         detachEvent: Boolean,
 //      ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handlePartialImpressionVisible().(detachEvent)
 //                  documentation ```kt\nvalue-parameter detachEvent: kotlin.Boolean\n```
@@ -441,9 +441,9 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
 
     fun handleFullImpressionVisible(epoxyHolder: EpoxyViewHolder, detachEvent: Boolean) {
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handleFullImpressionVisible().
-//                                  documentation ```kt\npublic final fun handleFullImpressionVisible(epoxyHolder: [ERROR : EpoxyViewHolder], detachEvent: kotlin.Boolean)\n```
+//                                  documentation ```kt\npublic final fun handleFullImpressionVisible(epoxyHolder: [Error type: Unresolved type for EpoxyViewHolder], detachEvent: kotlin.Boolean)\n```
 //                                  ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handleFullImpressionVisible().(epoxyHolder)
-//                                              documentation ```kt\nvalue-parameter epoxyHolder: [ERROR : EpoxyViewHolder]\n```
+//                                              documentation ```kt\nvalue-parameter epoxyHolder: [Error type: Unresolved type for EpoxyViewHolder]\n```
 //                                                                ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handleFullImpressionVisible().(detachEvent)
 //                                                                            documentation ```kt\nvalue-parameter detachEvent: kotlin.Boolean\n```
 //                                                                             ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
@@ -478,9 +478,9 @@ class EpoxyVisibilityItem(adapterPosition: Int? = null) {
 
     fun handleChanged(epoxyHolder: EpoxyViewHolder, visibilityChangedEnabled: Boolean): Boolean {
 //      ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handleChanged().
-//                    documentation ```kt\npublic final fun handleChanged(epoxyHolder: [ERROR : EpoxyViewHolder], visibilityChangedEnabled: kotlin.Boolean): kotlin.Boolean\n```
+//                    documentation ```kt\npublic final fun handleChanged(epoxyHolder: [Error type: Unresolved type for EpoxyViewHolder], visibilityChangedEnabled: kotlin.Boolean): kotlin.Boolean\n```
 //                    ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handleChanged().(epoxyHolder)
-//                                documentation ```kt\nvalue-parameter epoxyHolder: [ERROR : EpoxyViewHolder]\n```
+//                                documentation ```kt\nvalue-parameter epoxyHolder: [Error type: Unresolved type for EpoxyViewHolder]\n```
 //                                                  ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#handleChanged().(visibilityChangedEnabled)
 //                                                                           documentation ```kt\nvalue-parameter visibilityChangedEnabled: kotlin.Boolean\n```
 //                                                                            ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#

@@ -66,21 +66,21 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //                     documentation ```kt\n<P : com.airbnb.epoxy.preload.PreloadRequestHolder>\n```
 //                       ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadRequestHolder#
 //                                                     ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`().
-//                                                                 documentation ```kt\nprivate constructor EpoxyPreloader<P : com.airbnb.epoxy.preload.PreloadRequestHolder>(adapter: [ERROR : BaseEpoxyAdapter], preloadTargetFactory: () -> P, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, maxItemsToPreload: kotlin.Int, modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>)\n```
+//                                                                 documentation ```kt\nprivate constructor EpoxyPreloader<P : com.airbnb.epoxy.preload.PreloadRequestHolder>(adapter: [Error type: Unresolved type for BaseEpoxyAdapter], preloadTargetFactory: () -> P, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, maxItemsToPreload: kotlin.Int, modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>)\n```
     private val adapter: BaseEpoxyAdapter,
 //              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`().(adapter)
-//                      documentation ```kt\nvalue-parameter adapter: [ERROR : BaseEpoxyAdapter]\n```
+//                      documentation ```kt\nvalue-parameter adapter: [Error type: Unresolved type for BaseEpoxyAdapter]\n```
 //              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#adapter.
-//                      documentation ```kt\nprivate final val adapter: [ERROR : BaseEpoxyAdapter]\n```
+//                      documentation ```kt\nprivate final val adapter: [Error type: Unresolved type for BaseEpoxyAdapter]\n```
 //              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getAdapter().
-//                      documentation ```kt\nprivate final val adapter: [ERROR : BaseEpoxyAdapter]\n```
+//                      documentation ```kt\nprivate final val adapter: [Error type: Unresolved type for BaseEpoxyAdapter]\n```
     preloadTargetFactory: () -> P,
 //  ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`().(preloadTargetFactory)
 //                       documentation ```kt\nvalue-parameter preloadTargetFactory: () -> P\n```
 //                              ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#[P]
     errorHandler: PreloadErrorHandler,
 //  ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`().(errorHandler)
-//               documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
+//               documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //                ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
     private val maxItemsToPreload: Int,
 //              ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`().(maxItemsToPreload)
@@ -139,9 +139,9 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 
     private val modelPreloaders: Map<Class<out EpoxyModel<*>>, EpoxyModelPreloader<*, *, out P>> =
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getModelPreloaders().
-//                              documentation ```kt\nprivate final val modelPreloaders: kotlin.collections.Map<java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>, com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>\n```
+//                              documentation ```kt\nprivate final val modelPreloaders: kotlin.collections.Map<java.lang.Class<out [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>>, com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>\n```
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#modelPreloaders.
-//                              documentation ```kt\nprivate final val modelPreloaders: kotlin.collections.Map<java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>, com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>\n```
+//                              documentation ```kt\nprivate final val modelPreloaders: kotlin.collections.Map<java.lang.Class<out [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>>, com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>\n```
 //                               ^^^ reference semanticdb maven . . kotlin/collections/Map#
 //                                   ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                                             ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#
@@ -176,17 +176,17 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 
     constructor(
 //  ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`(+1).
-//              documentation ```kt\npublic constructor EpoxyPreloader<P : com.airbnb.epoxy.preload.PreloadRequestHolder>(epoxyController: [ERROR : EpoxyController], requestHolderFactory: () -> P, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, maxItemsToPreload: kotlin.Int, modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>)\n```
+//              documentation ```kt\npublic constructor EpoxyPreloader<P : com.airbnb.epoxy.preload.PreloadRequestHolder>(epoxyController: [Error type: Unresolved type for EpoxyController], requestHolderFactory: () -> P, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, maxItemsToPreload: kotlin.Int, modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>)\n```
         epoxyController: EpoxyController,
 //      ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`(+1).(epoxyController)
-//                      documentation ```kt\nvalue-parameter epoxyController: [ERROR : EpoxyController]\n```
+//                      documentation ```kt\nvalue-parameter epoxyController: [Error type: Unresolved type for EpoxyController]\n```
         requestHolderFactory: () -> P,
 //      ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`(+1).(requestHolderFactory)
 //                           documentation ```kt\nvalue-parameter requestHolderFactory: () -> P\n```
 //                                  ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#[P]
         errorHandler: PreloadErrorHandler,
 //      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`(+1).(errorHandler)
-//                   documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
+//                   documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //                    ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
         maxItemsToPreload: Int,
 //      ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`(+1).(maxItemsToPreload)
@@ -213,17 +213,17 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 
     constructor(
 //  ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`(+2).
-//              documentation ```kt\npublic constructor EpoxyPreloader<P : com.airbnb.epoxy.preload.PreloadRequestHolder>(adapter: [ERROR : EpoxyAdapter], requestHolderFactory: () -> P, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, maxItemsToPreload: kotlin.Int, modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>)\n```
+//              documentation ```kt\npublic constructor EpoxyPreloader<P : com.airbnb.epoxy.preload.PreloadRequestHolder>(adapter: [Error type: Unresolved type for EpoxyAdapter], requestHolderFactory: () -> P, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, maxItemsToPreload: kotlin.Int, modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<*, *, out P>>)\n```
         adapter: EpoxyAdapter,
 //      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`(+2).(adapter)
-//              documentation ```kt\nvalue-parameter adapter: [ERROR : EpoxyAdapter]\n```
+//              documentation ```kt\nvalue-parameter adapter: [Error type: Unresolved type for EpoxyAdapter]\n```
         requestHolderFactory: () -> P,
 //      ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`(+2).(requestHolderFactory)
 //                           documentation ```kt\nvalue-parameter requestHolderFactory: () -> P\n```
 //                                  ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#[P]
         errorHandler: PreloadErrorHandler,
 //      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`(+2).(errorHandler)
-//                   documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
+//                   documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //                    ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
         maxItemsToPreload: Int,
 //      ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#`<init>`(+2).(maxItemsToPreload)
@@ -262,9 +262,9 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 
     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
 //               ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#onScrollStateChanged().
-//                                    documentation ```kt\npublic open fun onScrollStateChanged(recyclerView: [ERROR : RecyclerView], newState: kotlin.Int)\n```
+//                                    documentation ```kt\npublic open fun onScrollStateChanged(recyclerView: [Error type: Unresolved type for RecyclerView], newState: kotlin.Int)\n```
 //                                    ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#onScrollStateChanged().(recyclerView)
-//                                                 documentation ```kt\nvalue-parameter recyclerView: [ERROR : RecyclerView]\n```
+//                                                 documentation ```kt\nvalue-parameter recyclerView: [Error type: Unresolved type for RecyclerView]\n```
 //                                                                ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#onScrollStateChanged().(newState)
 //                                                                         documentation ```kt\nvalue-parameter newState: kotlin.Int\n```
 //                                                                          ^^^ reference semanticdb maven . . kotlin/Int#
@@ -277,9 +277,9 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 //               ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#onScrolled().
-//                          documentation ```kt\npublic open fun onScrolled(recyclerView: [ERROR : RecyclerView], dx: kotlin.Int, dy: kotlin.Int)\n```
+//                          documentation ```kt\npublic open fun onScrolled(recyclerView: [Error type: Unresolved type for RecyclerView], dx: kotlin.Int, dy: kotlin.Int)\n```
 //                          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#onScrolled().(recyclerView)
-//                                       documentation ```kt\nvalue-parameter recyclerView: [ERROR : RecyclerView]\n```
+//                                       documentation ```kt\nvalue-parameter recyclerView: [Error type: Unresolved type for RecyclerView]\n```
 //                                                      ^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#onScrolled().(dx)
 //                                                         documentation ```kt\nvalue-parameter dx: kotlin.Int\n```
 //                                                          ^^^ reference semanticdb maven . . kotlin/Int#
@@ -317,15 +317,15 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 
         val layoutManager = recyclerView.layoutManager as LinearLayoutManager
 //          ^^^^^^^^^^^^^ definition local 1
-//                        documentation ```kt\nval layoutManager: [ERROR : LinearLayoutManager]\n```
+//                        documentation ```kt\nval layoutManager: [Error type: Unresolved type for LinearLayoutManager]\n```
 //                          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#onScrolled().(recyclerView)
         val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
 //          ^^^^^^^^^^^^^^^^^^^^ definition local 2
-//                               documentation ```kt\nval firstVisiblePosition: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
+//                               documentation ```kt\nval firstVisiblePosition: [Error type: Return type for function cannot be resolved]\n```
 //                                 ^^^^^^^^^^^^^ reference local 1
         val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
 //          ^^^^^^^^^^^^^^^^^^^ definition local 3
-//                              documentation ```kt\nval lastVisiblePosition: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
+//                              documentation ```kt\nval lastVisiblePosition: [Error type: Return type for function cannot be resolved]\n```
 //                                ^^^^^^^^^^^^^ reference local 1
 
         if (firstVisiblePosition.isInvalid() || lastVisiblePosition.isInvalid()) {
@@ -537,7 +537,7 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //       ^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/Suppress#`<init>`().
         val preloader =
 //          ^^^^^^^^^ definition local 11
-//                    documentation ```kt\nval preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<[ERROR : EpoxyModel<*>]<out [ERROR : *]>, com.airbnb.epoxy.preload.ViewMetadata?, P>\n```
+//                    documentation ```kt\nval preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<[Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>, com.airbnb.epoxy.preload.ViewMetadata?, P>\n```
             modelPreloaders[epoxyModel::class.java] as? EpoxyModelPreloader<EpoxyModel<*>, ViewMetadata?, P>
 //          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#getModelPreloaders().
 //          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#modelPreloaders.
@@ -618,17 +618,17 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //             documentation ```kt\n<P : com.airbnb.epoxy.preload.PreloadRequestHolder>\n```
 //               ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadRequestHolder#
 //                                     ^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with().
-//                                          documentation ```kt\npublic final fun <P : com.airbnb.epoxy.preload.PreloadRequestHolder> with(epoxyController: [ERROR : EpoxyController], requestHolderFactory: () -> P, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, maxItemsToPreload: kotlin.Int, modelPreloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>, out com.airbnb.epoxy.preload.ViewMetadata?, out P>): com.airbnb.epoxy.preload.EpoxyPreloader<P>\n```\n\n----\n\n\n Helper to create a preload scroll listener. Add the result to your RecyclerView.\n for different models or content types.\n\n @param maxItemsToPreload How many items to prefetch ahead of the last bound item\n @param errorHandler Called when the preloader encounters an exception. By default this throws only\n if the app is not in a debuggle model\n @param modelPreloader Describes how view content for the EpoxyModel should be preloaded\n @param requestHolderFactory Should create and return a new [PreloadRequestHolder] each time it is invoked\n
+//                                          documentation ```kt\npublic final fun <P : com.airbnb.epoxy.preload.PreloadRequestHolder> with(epoxyController: [Error type: Unresolved type for EpoxyController], requestHolderFactory: () -> P, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, maxItemsToPreload: kotlin.Int, modelPreloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<out [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>, out com.airbnb.epoxy.preload.ViewMetadata?, out P>): com.airbnb.epoxy.preload.EpoxyPreloader<P>\n```\n\n----\n\n\n Helper to create a preload scroll listener. Add the result to your RecyclerView.\n for different models or content types.\n\n @param maxItemsToPreload How many items to prefetch ahead of the last bound item\n @param errorHandler Called when the preloader encounters an exception. By default this throws only\n if the app is not in a debuggle model\n @param modelPreloader Describes how view content for the EpoxyModel should be preloaded\n @param requestHolderFactory Should create and return a new [PreloadRequestHolder] each time it is invoked\n
             epoxyController: EpoxyController,
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with().(epoxyController)
-//                          documentation ```kt\nvalue-parameter epoxyController: [ERROR : EpoxyController]\n```
+//                          documentation ```kt\nvalue-parameter epoxyController: [Error type: Unresolved type for EpoxyController]\n```
             requestHolderFactory: () -> P,
 //          ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with().(requestHolderFactory)
 //                               documentation ```kt\nvalue-parameter requestHolderFactory: () -> P\n```
 //                                      ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with().[P]
             errorHandler: PreloadErrorHandler,
 //          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with().(errorHandler)
-//                       documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
+//                       documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //                        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
             maxItemsToPreload: Int,
 //          ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with().(maxItemsToPreload)
@@ -636,7 +636,7 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //                             ^^^ reference semanticdb maven . . kotlin/Int#
             modelPreloader: EpoxyModelPreloader<out EpoxyModel<*>, out ViewMetadata?, out P>
 //          ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with().(modelPreloader)
-//                         documentation ```kt\nvalue-parameter modelPreloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>, out com.airbnb.epoxy.preload.ViewMetadata?, out P>\n```
+//                         documentation ```kt\nvalue-parameter modelPreloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<out [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>, out com.airbnb.epoxy.preload.ViewMetadata?, out P>\n```
 //                          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#
 //                                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#
 //                                                                                        ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with().[P]
@@ -662,17 +662,17 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //             documentation ```kt\n<P : com.airbnb.epoxy.preload.PreloadRequestHolder>\n```
 //               ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadRequestHolder#
 //                                     ^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+1).
-//                                          documentation ```kt\npublic final fun <P : com.airbnb.epoxy.preload.PreloadRequestHolder> with(epoxyController: [ERROR : EpoxyController], requestHolderFactory: () -> P, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, maxItemsToPreload: kotlin.Int, modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>, out com.airbnb.epoxy.preload.ViewMetadata?, out P>>): com.airbnb.epoxy.preload.EpoxyPreloader<P>\n```
+//                                          documentation ```kt\npublic final fun <P : com.airbnb.epoxy.preload.PreloadRequestHolder> with(epoxyController: [Error type: Unresolved type for EpoxyController], requestHolderFactory: () -> P, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, maxItemsToPreload: kotlin.Int, modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<out [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>, out com.airbnb.epoxy.preload.ViewMetadata?, out P>>): com.airbnb.epoxy.preload.EpoxyPreloader<P>\n```
             epoxyController: EpoxyController,
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+1).(epoxyController)
-//                          documentation ```kt\nvalue-parameter epoxyController: [ERROR : EpoxyController]\n```
+//                          documentation ```kt\nvalue-parameter epoxyController: [Error type: Unresolved type for EpoxyController]\n```
             requestHolderFactory: () -> P,
 //          ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+1).(requestHolderFactory)
 //                               documentation ```kt\nvalue-parameter requestHolderFactory: () -> P\n```
 //                                      ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+1).[P]
             errorHandler: PreloadErrorHandler,
 //          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+1).(errorHandler)
-//                       documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
+//                       documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //                        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
             maxItemsToPreload: Int,
 //          ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+1).(maxItemsToPreload)
@@ -680,7 +680,7 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //                             ^^^ reference semanticdb maven . . kotlin/Int#
             modelPreloaders: List<EpoxyModelPreloader<out EpoxyModel<*>, out ViewMetadata?, out P>>
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+1).(modelPreloaders)
-//                          documentation ```kt\nvalue-parameter modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>, out com.airbnb.epoxy.preload.ViewMetadata?, out P>>\n```
+//                          documentation ```kt\nvalue-parameter modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<out [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>, out com.airbnb.epoxy.preload.ViewMetadata?, out P>>\n```
 //                           ^^^^ reference semanticdb maven . . kotlin/collections/List#
 //                                ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#
 //                                                                           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#
@@ -709,17 +709,17 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //             documentation ```kt\n<P : com.airbnb.epoxy.preload.PreloadRequestHolder>\n```
 //               ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadRequestHolder#
 //                                     ^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+2).
-//                                          documentation ```kt\npublic final fun <P : com.airbnb.epoxy.preload.PreloadRequestHolder> with(epoxyAdapter: [ERROR : EpoxyAdapter], requestHolderFactory: () -> P, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, maxItemsToPreload: kotlin.Int, modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>, out com.airbnb.epoxy.preload.ViewMetadata?, out P>>): com.airbnb.epoxy.preload.EpoxyPreloader<P>\n```\n\n----\n\n Helper to create a preload scroll listener. Add the result to your RecyclerView.
+//                                          documentation ```kt\npublic final fun <P : com.airbnb.epoxy.preload.PreloadRequestHolder> with(epoxyAdapter: [Error type: Unresolved type for EpoxyAdapter], requestHolderFactory: () -> P, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, maxItemsToPreload: kotlin.Int, modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<out [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>, out com.airbnb.epoxy.preload.ViewMetadata?, out P>>): com.airbnb.epoxy.preload.EpoxyPreloader<P>\n```\n\n----\n\n Helper to create a preload scroll listener. Add the result to your RecyclerView.
             epoxyAdapter: EpoxyAdapter,
 //          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+2).(epoxyAdapter)
-//                       documentation ```kt\nvalue-parameter epoxyAdapter: [ERROR : EpoxyAdapter]\n```
+//                       documentation ```kt\nvalue-parameter epoxyAdapter: [Error type: Unresolved type for EpoxyAdapter]\n```
             requestHolderFactory: () -> P,
 //          ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+2).(requestHolderFactory)
 //                               documentation ```kt\nvalue-parameter requestHolderFactory: () -> P\n```
 //                                      ^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+2).[P]
             errorHandler: PreloadErrorHandler,
 //          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+2).(errorHandler)
-//                       documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
+//                       documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //                        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
             maxItemsToPreload: Int,
 //          ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+2).(maxItemsToPreload)
@@ -727,7 +727,7 @@ class EpoxyPreloader<P : PreloadRequestHolder> private constructor(
 //                             ^^^ reference semanticdb maven . . kotlin/Int#
             modelPreloaders: List<EpoxyModelPreloader<out EpoxyModel<*>, out ViewMetadata?, out P>>
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#Companion#with(+2).(modelPreloaders)
-//                          documentation ```kt\nvalue-parameter modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>, out com.airbnb.epoxy.preload.ViewMetadata?, out P>>\n```
+//                          documentation ```kt\nvalue-parameter modelPreloaders: kotlin.collections.List<com.airbnb.epoxy.preload.EpoxyModelPreloader<out [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>, out com.airbnb.epoxy.preload.ViewMetadata?, out P>>\n```
 //                           ^^^^ reference semanticdb maven . . kotlin/collections/List#
 //                                ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#
 //                                                                           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#
@@ -768,11 +768,11 @@ class EpoxyPreloadException(errorMessage: String) : RuntimeException(errorMessag
 
 typealias PreloadErrorHandler = (Context, RuntimeException) -> Unit
 //        ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
-//                            documentation ```kt\npublic typealias PreloadErrorHandler = ([ERROR : Context], kotlin.RuntimeException) -> kotlin.Unit\n```
+//                            documentation ```kt\npublic typealias PreloadErrorHandler = ([Error type: Unresolved type for Context], kotlin.RuntimeException) -> kotlin.Unit\n```
 //                               ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloaderKt#`<no name provided>`.
-//                                       documentation ```kt\nval <no name provided>: kotlin.RuntimeException\n```
+//                                       documentation ```kt\nval `<no name provided>`: kotlin.RuntimeException\n```
 //                                        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloaderKt#`<no name provided>`.
-//                                                         documentation ```kt\nval <no name provided>: kotlin.RuntimeException\n```
+//                                                         documentation ```kt\nval `<no name provided>`: kotlin.RuntimeException\n```
 //                                        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/RuntimeException#
 //                                                             ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/Unit#
 
@@ -835,9 +835,9 @@ interface ViewMetadata {
 //                     documentation ```kt\npublic companion object\n```
         fun getDefault(view: View): ViewMetadata? {
 //          ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#Companion#getDefault().
-//                     documentation ```kt\npublic final fun getDefault(view: [ERROR : View]): com.airbnb.epoxy.preload.ViewMetadata?\n```
+//                     documentation ```kt\npublic final fun getDefault(view: [Error type: Unresolved type for View]): com.airbnb.epoxy.preload.ViewMetadata?\n```
 //                     ^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#Companion#getDefault().(view)
-//                          documentation ```kt\nvalue-parameter view: [ERROR : View]\n```
+//                          documentation ```kt\nvalue-parameter view: [Error type: Unresolved type for View]\n```
 //                                  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#
             return when (view) {
 //                       ^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#Companion#getDefault().(view)
@@ -859,13 +859,13 @@ open class ImageViewMetadata(
 //                           documentation ```kt\npublic open class ImageViewMetadata : com.airbnb.epoxy.preload.ViewMetadata\n```\n\n----\n\n\n Default implementation of [ViewMetadata] for an ImageView.\n This data can help the preload request know how to configure itself.\n
 //                           relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#
 //         ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ImageViewMetadata#`<init>`().
-//                           documentation ```kt\npublic constructor ImageViewMetadata(scaleType: [ERROR : ImageView.ScaleType])\n```
+//                           documentation ```kt\npublic constructor ImageViewMetadata(scaleType: [Error type: Unresolved type for ImageView.ScaleType])\n```
     val scaleType: ImageView.ScaleType
 //      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ImageViewMetadata#`<init>`().(scaleType)
-//                documentation ```kt\nvalue-parameter scaleType: [ERROR : ImageView.ScaleType]\n```
+//                documentation ```kt\nvalue-parameter scaleType: [Error type: Unresolved type for ImageView.ScaleType]\n```
 //      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ImageViewMetadata#getScaleType().
-//                documentation ```kt\npublic final val scaleType: [ERROR : ImageView.ScaleType]\n```
+//                documentation ```kt\npublic final val scaleType: [Error type: Unresolved type for ImageView.ScaleType]\n```
 //      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/ImageViewMetadata#scaleType.
-//                documentation ```kt\npublic final val scaleType: [ERROR : ImageView.ScaleType]\n```
+//                documentation ```kt\npublic final val scaleType: [Error type: Unresolved type for ImageView.ScaleType]\n```
 ) : ViewMetadata
 //  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#

@@ -39,21 +39,21 @@ internal class PreloadableViewDataProvider(
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#
 //                                         documentation ```kt\ninternal final class PreloadableViewDataProvider\n```\n\n----\n\n\n In order to preload content we need to know the size of the view that they it be loaded into.\n This class provides the view size, as well as other view metadata that might be necessary to construct the preload request.\n
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#`<init>`().
-//                                         documentation ```kt\npublic constructor PreloadableViewDataProvider(adapter: [ERROR : BaseEpoxyAdapter], errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */)\n```
+//                                         documentation ```kt\npublic constructor PreloadableViewDataProvider(adapter: [Error type: Unresolved type for BaseEpoxyAdapter], errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */)\n```
     val adapter: BaseEpoxyAdapter,
 //      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#`<init>`().(adapter)
-//              documentation ```kt\nvalue-parameter adapter: [ERROR : BaseEpoxyAdapter]\n```
+//              documentation ```kt\nvalue-parameter adapter: [Error type: Unresolved type for BaseEpoxyAdapter]\n```
 //      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#adapter.
-//              documentation ```kt\npublic final val adapter: [ERROR : BaseEpoxyAdapter]\n```
+//              documentation ```kt\npublic final val adapter: [Error type: Unresolved type for BaseEpoxyAdapter]\n```
 //      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#getAdapter().
-//              documentation ```kt\npublic final val adapter: [ERROR : BaseEpoxyAdapter]\n```
+//              documentation ```kt\npublic final val adapter: [Error type: Unresolved type for BaseEpoxyAdapter]\n```
     val errorHandler: PreloadErrorHandler
 //      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#`<init>`().(errorHandler)
-//                   documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
+//                   documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#errorHandler.
-//                   documentation ```kt\npublic final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
+//                   documentation ```kt\npublic final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#getErrorHandler().
-//                   documentation ```kt\npublic final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
+//                   documentation ```kt\npublic final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //                    ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
 ) {
 
@@ -65,14 +65,14 @@ internal class PreloadableViewDataProvider(
 //                     ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#
 //                              documentation ```kt\nprivate final data class CacheKey\n```\n\n----\n\n\n A given model class might have different sized preloadable views depending on configuration.\n We use this cache key to separate view configurations.\n
 //                     ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#`<init>`().
-//                              documentation ```kt\npublic constructor CacheKey(epoxyModelClass: java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>, spanSize: kotlin.Int, viewType: kotlin.Int, signature: kotlin.Any?)\n```
+//                              documentation ```kt\npublic constructor CacheKey(epoxyModelClass: java.lang.Class<out [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>>, spanSize: kotlin.Int, viewType: kotlin.Int, signature: kotlin.Any?)\n```
         val epoxyModelClass: Class<out EpoxyModel<*>>,
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#`<init>`().(epoxyModelClass)
-//                          documentation ```kt\nvalue-parameter epoxyModelClass: java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>\n```
+//                          documentation ```kt\nvalue-parameter epoxyModelClass: java.lang.Class<out [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>>\n```
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#epoxyModelClass.
-//                          documentation ```kt\npublic final val epoxyModelClass: java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>\n```
+//                          documentation ```kt\npublic final val epoxyModelClass: java.lang.Class<out [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>>\n```
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#getEpoxyModelClass().
-//                          documentation ```kt\npublic final val epoxyModelClass: java.lang.Class<out [ERROR : EpoxyModel<*>]<out [ERROR : *]>>\n```
+//                          documentation ```kt\npublic final val epoxyModelClass: java.lang.Class<out [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>>\n```
 //                           ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
         val spanSize: Int,
 //          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#CacheKey#`<init>`().(spanSize)
@@ -260,12 +260,12 @@ internal class PreloadableViewDataProvider(
 
         val holderMatch = adapter.boundViewHoldersInternal().find {
 //          ^^^^^^^^^^^ definition local 2
-//                      documentation ```kt\nval holderMatch: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
+//                      documentation ```kt\nval holderMatch: [Error type: Return type for function cannot be resolved]\n```
 //                        ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#adapter.
 //                        ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#getAdapter().
             val boundModel = it.model
 //              ^^^^^^^^^^ definition local 3
-//                         documentation ```kt\nval boundModel: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//                         documentation ```kt\nval boundModel: [Error type: Error property type]\n```
             if (boundModel::class == epoxyModel::class) {
 //              ^^^^^^^^^^ reference local 3
 //                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViewData().(epoxyModel)
@@ -293,12 +293,12 @@ internal class PreloadableViewDataProvider(
 
         val boundObject = holderMatch.objectToBindInternal() // Allows usage of view holder models
 //          ^^^^^^^^^^^ definition local 5
-//                      documentation ```kt\nval boundObject: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
+//                      documentation ```kt\nval boundObject: [Error type: Return type for function cannot be resolved]\n```
 //                        ^^^^^^^^^^^ reference local 2
 
         val preloadableViews: List<View> = when {
 //          ^^^^^^^^^^^^^^^^ definition local 6
-//                           documentation ```kt\nval preloadableViews: kotlin.collections.List<[ERROR : View]>\n```
+//                           documentation ```kt\nval preloadableViews: kotlin.collections.List<[Error type: Unresolved type for View]>\n```
 //                            ^^^^ reference semanticdb maven . . kotlin/collections/List#
             preloader.preloadableViewIds.isNotEmpty() -> rootView.findViews(
 //          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViewData().(preloader)
@@ -340,8 +340,6 @@ internal class PreloadableViewDataProvider(
         return preloadableViews
 //             ^^^^^^^^^^^^^^^^ reference local 6
             .flatMap { it.recursePreloadableViews() }
-//           ^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#flatMap(+10).
-//                     ^^ reference local 7
             .mapNotNull { it.buildData(preloader, epoxyModel) }
 //                                     ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViewData().(preloader)
 //                                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViewData().(epoxyModel)
@@ -352,7 +350,7 @@ internal class PreloadableViewDataProvider(
 //               ^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViews().[T]
 //                 documentation ```kt\n<T>\n```
 //                                       ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViews().
-//                                                 documentation ```kt\nprivate final fun <T> [ERROR : View].findViews(viewIds: kotlin.collections.List<kotlin.Int>, epoxyModel: T): kotlin.collections.List<[ERROR : View]>\n```\n\n----\n\n Returns child views with the given view ids.
+//                                                 documentation ```kt\nprivate final fun <T> [Error type: Unresolved type for View].findViews(viewIds: kotlin.collections.List<kotlin.Int>, epoxyModel: T): kotlin.collections.List<[Error type: Unresolved type for View]>\n```\n\n----\n\n Returns child views with the given view ids.
         viewIds: List<Int>,
 //      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViews().(viewIds)
 //              documentation ```kt\nvalue-parameter viewIds: kotlin.collections.List<kotlin.Int>\n```
@@ -367,13 +365,13 @@ internal class PreloadableViewDataProvider(
         return viewIds.mapNotNull { id ->
 //             ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViews().(viewIds)
 //                     ^^^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#mapNotNull(+1).
-//                                  ^^ definition local 8
+//                                  ^^ definition local 7
 //                                     documentation ```kt\nvalue-parameter id: kotlin.Int\n```
             findViewById<View>(id).apply {
-//                             ^^ reference local 8
+//                             ^^ reference local 7
                 if (this == null) errorHandler(context, EpoxyPreloadException("View with id $id in ${epoxyModel.javaClass.simpleName} could not be found."))
 //                  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViews().
-//                                                                                           ^^ reference local 8
+//                                                                                           ^^ reference local 7
 //                                                                                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#findViews().(epoxyModel)
             }
         }
@@ -385,7 +383,7 @@ internal class PreloadableViewDataProvider(
 //                 documentation ```kt\n<T>\n```
 //                         ^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#recursePreloadableViews().[T]
 //                           ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#recursePreloadableViews().
-//                                                   documentation ```kt\nprivate final fun <T> T.recursePreloadableViews(): kotlin.collections.List<[ERROR : View]>\n```\n\n----\n\n If a View with the [Preloadable] interface is used we want to get all of the preloadable views contained in that Preloadable instead.
+//                                                   documentation ```kt\nprivate final fun <T> T.recursePreloadableViews(): kotlin.collections.List<[Error type: Unresolved type for View]>\n```\n\n----\n\n If a View with the [Preloadable] interface is used we want to get all of the preloadable views contained in that Preloadable instead.
 //                                                      ^^^^ reference semanticdb maven . . kotlin/collections/List#
         return if (this is Preloadable) {
 //                 ^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#recursePreloadableViews().
@@ -393,8 +391,6 @@ internal class PreloadableViewDataProvider(
             viewsToPreload.flatMap { it.recursePreloadableViews() }
 //          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/Preloadable#getViewsToPreload().
 //          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/Preloadable#viewsToPreload.
-//                         ^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#flatMap(+10).
-//                                   ^^ reference local 9
         } else {
             listOf(this)
 //          ^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#listOf().
@@ -412,7 +408,7 @@ internal class PreloadableViewDataProvider(
 //                                                       documentation ```kt\n<P : com.airbnb.epoxy.preload.PreloadRequestHolder>\n```
 //                                                         ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadRequestHolder#
 //                                                                                    ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#buildData().
-//                                                                                              documentation ```kt\nprivate final fun <T, U : com.airbnb.epoxy.preload.ViewMetadata?, P : com.airbnb.epoxy.preload.PreloadRequestHolder> [ERROR : View].buildData(preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>, epoxyModel: T): com.airbnb.epoxy.preload.ViewData<U>?\n```
+//                                                                                              documentation ```kt\nprivate final fun <T, U : com.airbnb.epoxy.preload.ViewMetadata?, P : com.airbnb.epoxy.preload.PreloadRequestHolder> [Error type: Unresolved type for View].buildData(preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>, epoxyModel: T): com.airbnb.epoxy.preload.ViewData<U>?\n```
         preloader: EpoxyModelPreloader<T, U, P>,
 //      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#buildData().(preloader)
 //                documentation ```kt\nvalue-parameter preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>\n```
@@ -431,15 +427,15 @@ internal class PreloadableViewDataProvider(
         // Glide's internal size determiner takes view dimensions and subtracts padding to get target size.
         // TODO: We could support size overrides by allowing the preloader to specify a size override callback
         val width = width - paddingLeft - paddingRight
-//          ^^^^^ definition local 10
-//                documentation ```kt\nval width: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
+//          ^^^^^ definition local 8
+//                documentation ```kt\nval width: [Error type: Return type for function cannot be resolved]\n```
         val height = height - paddingTop - paddingBottom
-//          ^^^^^^ definition local 11
-//                 documentation ```kt\nval height: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
+//          ^^^^^^ definition local 9
+//                 documentation ```kt\nval height: [Error type: Return type for function cannot be resolved]\n```
 
         if (width <= 0 || height <= 0) {
-//          ^^^^^ reference local 10
-//                        ^^^^^^ reference local 11
+//          ^^^^^ reference local 8
+//                        ^^^^^^ reference local 9
             // If no placeholder or aspect ratio is used then the view might be empty before its content loads
             errorHandler(context, EpoxyPreloadException("${this.javaClass.simpleName} in ${epoxyModel.javaClass.simpleName} has zero size. A size must be set to allow preloading."))
 //                                                         ^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#buildData().
@@ -450,9 +446,9 @@ internal class PreloadableViewDataProvider(
         return ViewData(
             id,
             width,
-//          ^^^^^ reference local 10
+//          ^^^^^ reference local 8
             height,
-//          ^^^^^^ reference local 11
+//          ^^^^^^ reference local 9
             preloader.buildViewMetadata(this)
 //          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadableViewDataProvider#buildData().(preloader)
 //                    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#buildViewMetadata().

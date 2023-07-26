@@ -99,13 +99,13 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //                           documentation ```kt\npublic open class EpoxyRecyclerView\n```\n\n----\n\n\n A RecyclerView implementation that makes for easier integration with Epoxy. The goal of this\n class is to reduce boilerplate in setting up a RecyclerView by applying common defaults.\n Additionally, several performance optimizations are made.\n\n Improvements in this class are:\n\n 1. A single view pool is automatically shared between all [EpoxyRecyclerView] instances in\n the same activity. This should increase view recycling potential and increase performance when\n nested RecyclerViews are used. See [.initViewPool].\n\n 2. A layout manager is automatically added with assumed defaults. See [createLayoutManager]\n\n 3. Fixed size is enabled if this view's size is MATCH_PARENT\n\n 4. If a [GridLayoutManager] is used this will automatically sync the span count with the\n [EpoxyController]. See [syncSpanCount]\n\n 5. Helper methods like [withModels], [setModels], [buildModelsWith]\n make it simpler to set up simple RecyclerViews.\n\n 6. Set an EpoxyController and build models in one step -\n [setControllerAndBuildModels] or [withModels]\n\n 7. Support for automatic item spacing. See [.setItemSpacingPx]\n\n 8. Defaults for usage as a nested recyclerview are provided in [Carousel].\n\n 9. [setClipToPadding] is set to false by default since that behavior is commonly\n desired in a scrolling list\n
 //                            ^^^^^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/jvm/JvmOverloads#`<init>`().
 //                                         ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().
-//                                                     documentation ```kt\npublic constructor EpoxyRecyclerView(context: [ERROR : Context], attrs: [ERROR : AttributeSet]? = ..., defStyleAttr: kotlin.Int = ...)\n```
+//                                                     documentation ```kt\npublic constructor EpoxyRecyclerView(context: [Error type: Unresolved type for Context], attrs: [Error type: Unresolved type for AttributeSet]? = ..., defStyleAttr: kotlin.Int = ...)\n```
     context: Context,
 //  ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(context)
-//          documentation ```kt\nvalue-parameter context: [ERROR : Context]\n```
+//          documentation ```kt\nvalue-parameter context: [Error type: Unresolved type for Context]\n```
     attrs: AttributeSet? = null,
 //  ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(attrs)
-//        documentation ```kt\nvalue-parameter attrs: [ERROR : AttributeSet]? = ...\n```
+//        documentation ```kt\nvalue-parameter attrs: [Error type: Unresolved type for AttributeSet]? = ...\n```
     defStyleAttr: Int = 0
 //  ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(defStyleAttr)
 //               documentation ```kt\nvalue-parameter defStyleAttr: kotlin.Int = ...\n```
@@ -117,17 +117,17 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     protected val spacingDecorator = EpoxyItemSpacingDecorator()
 //                ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getSpacingDecorator().
-//                                 documentation ```kt\nprotected final val spacingDecorator: [ERROR : Type for EpoxyItemSpacingDecorator()]\n```
+//                                 documentation ```kt\nprotected final val spacingDecorator: [Error type: Not found recorded type for EpoxyItemSpacingDecorator()]\n```
 //                ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#spacingDecorator.
-//                                 documentation ```kt\nprotected final val spacingDecorator: [ERROR : Type for EpoxyItemSpacingDecorator()]\n```
+//                                 documentation ```kt\nprotected final val spacingDecorator: [Error type: Not found recorded type for EpoxyItemSpacingDecorator()]\n```
 
     private var epoxyController: EpoxyController? = null
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
-//                              documentation ```kt\nprivate final var epoxyController: [ERROR : EpoxyController]?\n```
+//                              documentation ```kt\nprivate final var epoxyController: [Error type: Unresolved type for EpoxyController]?\n```
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
-//                              documentation ```kt\nprivate final var epoxyController: [ERROR : EpoxyController]?\n```
+//                              documentation ```kt\nprivate final var epoxyController: [Error type: Unresolved type for EpoxyController]?\n```
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setEpoxyController().
-//                              documentation ```kt\nprivate final var epoxyController: [ERROR : EpoxyController]?\n```
+//                              documentation ```kt\nprivate final var epoxyController: [Error type: Unresolved type for EpoxyController]?\n```
 
     /**
      * The adapter that was removed because the RecyclerView was detached from the window. We save it
@@ -145,11 +145,11 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     private var removedAdapter: RecyclerView.Adapter<*>? = null
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getRemovedAdapter().
-//                             documentation ```kt\nprivate final var removedAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?\n```\n\n----\n\n\n The adapter that was removed because the RecyclerView was detached from the window. We save it\n so we can reattach it if the RecyclerView is reattached to window. This allows us to\n automatically restore the adapter, without risking leaking the RecyclerView if this view is\n never used again.\n\n Since the adapter is removed this recyclerview won't get adapter changes, but that's fine since\n the view isn't attached to window and isn't being drawn.\n\n This reference is cleared if another adapter is manually set, so we don't override the user's\n adapter choice.\n\n @see .setRemoveAdapterWhenDetachedFromWindow\n
+//                             documentation ```kt\nprivate final var removedAdapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```\n\n----\n\n\n The adapter that was removed because the RecyclerView was detached from the window. We save it\n so we can reattach it if the RecyclerView is reattached to window. This allows us to\n automatically restore the adapter, without risking leaking the RecyclerView if this view is\n never used again.\n\n Since the adapter is removed this recyclerview won't get adapter changes, but that's fine since\n the view isn't attached to window and isn't being drawn.\n\n This reference is cleared if another adapter is manually set, so we don't override the user's\n adapter choice.\n\n @see .setRemoveAdapterWhenDetachedFromWindow\n
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#removedAdapter.
-//                             documentation ```kt\nprivate final var removedAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?\n```\n\n----\n\n\n The adapter that was removed because the RecyclerView was detached from the window. We save it\n so we can reattach it if the RecyclerView is reattached to window. This allows us to\n automatically restore the adapter, without risking leaking the RecyclerView if this view is\n never used again.\n\n Since the adapter is removed this recyclerview won't get adapter changes, but that's fine since\n the view isn't attached to window and isn't being drawn.\n\n This reference is cleared if another adapter is manually set, so we don't override the user's\n adapter choice.\n\n @see .setRemoveAdapterWhenDetachedFromWindow\n
+//                             documentation ```kt\nprivate final var removedAdapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```\n\n----\n\n\n The adapter that was removed because the RecyclerView was detached from the window. We save it\n so we can reattach it if the RecyclerView is reattached to window. This allows us to\n automatically restore the adapter, without risking leaking the RecyclerView if this view is\n never used again.\n\n Since the adapter is removed this recyclerview won't get adapter changes, but that's fine since\n the view isn't attached to window and isn't being drawn.\n\n This reference is cleared if another adapter is manually set, so we don't override the user's\n adapter choice.\n\n @see .setRemoveAdapterWhenDetachedFromWindow\n
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setRemovedAdapter().
-//                             documentation ```kt\nprivate final var removedAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?\n```\n\n----\n\n\n The adapter that was removed because the RecyclerView was detached from the window. We save it\n so we can reattach it if the RecyclerView is reattached to window. This allows us to\n automatically restore the adapter, without risking leaking the RecyclerView if this view is\n never used again.\n\n Since the adapter is removed this recyclerview won't get adapter changes, but that's fine since\n the view isn't attached to window and isn't being drawn.\n\n This reference is cleared if another adapter is manually set, so we don't override the user's\n adapter choice.\n\n @see .setRemoveAdapterWhenDetachedFromWindow\n
+//                             documentation ```kt\nprivate final var removedAdapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```\n\n----\n\n\n The adapter that was removed because the RecyclerView was detached from the window. We save it\n so we can reattach it if the RecyclerView is reattached to window. This allows us to\n automatically restore the adapter, without risking leaking the RecyclerView if this view is\n never used again.\n\n Since the adapter is removed this recyclerview won't get adapter changes, but that's fine since\n the view isn't attached to window and isn't being drawn.\n\n This reference is cleared if another adapter is manually set, so we don't override the user's\n adapter choice.\n\n @see .setRemoveAdapterWhenDetachedFromWindow\n
 
     private var removeAdapterWhenDetachedFromWindow = true
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getRemoveAdapterWhenDetachedFromWindow().
@@ -226,7 +226,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //                ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#
 //                              documentation ```kt\nprivate final class PreloadConfig<T, U : com.airbnb.epoxy.preload.ViewMetadata?, P : com.airbnb.epoxy.preload.PreloadRequestHolder>\n```
 //                ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().
-//                              documentation ```kt\npublic constructor PreloadConfig<T, U : com.airbnb.epoxy.preload.ViewMetadata?, P : com.airbnb.epoxy.preload.PreloadRequestHolder>(maxPreload: kotlin.Int, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>, requestHolderFactory: () -> P)\n```
+//                              documentation ```kt\npublic constructor PreloadConfig<T, U : com.airbnb.epoxy.preload.ViewMetadata?, P : com.airbnb.epoxy.preload.PreloadRequestHolder>(maxPreload: kotlin.Int, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>, requestHolderFactory: () -> P)\n```
 //                              ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[T]
 //                                documentation ```kt\n<T>\n```
 //                                                 ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[U]
@@ -245,11 +245,11 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //                      ^^^ reference semanticdb maven . . kotlin/Int#
         val errorHandler: PreloadErrorHandler,
 //          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(errorHandler)
-//                       documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
+//                       documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#errorHandler.
-//                       documentation ```kt\npublic final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
+//                       documentation ```kt\npublic final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#getErrorHandler().
-//                       documentation ```kt\npublic final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
+//                       documentation ```kt\npublic final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //                        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
         val preloader: EpoxyModelPreloader<T, U, P>,
 //          ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(preloader)
@@ -295,14 +295,14 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //                                               documentation ```kt\n<P : com.airbnb.epoxy.preload.PreloadRequestHolder>\n```
 //                                                 ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadRequestHolder#
 //                                                                       ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().
-//                                                                                    documentation ```kt\npublic final fun <T, U : com.airbnb.epoxy.preload.ViewMetadata?, P : com.airbnb.epoxy.preload.PreloadRequestHolder> addPreloader(maxPreloadDistance: kotlin.Int = ..., errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>, requestHolderFactory: () -> P)\n```\n\n----\n\n\n Setup a preloader to fetch content for a model's view before it is bound.\n This can be called multiple times if you would like to add separate preloaders\n for different models or content types.\n\n Preloaders are automatically attached and run, and are updated if the adapter changes.\n\n @param maxPreloadDistance How many items to prefetch ahead of the last bound item\n @param errorHandler Called when the preloader encounters an exception. We recommend throwing an\n exception in debug builds, and logging an error in production.\n @param preloader Describes how view content for the EpoxyModel should be preloaded\n @param requestHolderFactory Should create and return a new [PreloadRequestHolder] each time it is invoked\n
+//                                                                                    documentation ```kt\npublic final fun <T, U : com.airbnb.epoxy.preload.ViewMetadata?, P : com.airbnb.epoxy.preload.PreloadRequestHolder> addPreloader(maxPreloadDistance: kotlin.Int = ..., errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>, requestHolderFactory: () -> P)\n```\n\n----\n\n\n Setup a preloader to fetch content for a model's view before it is bound.\n This can be called multiple times if you would like to add separate preloaders\n for different models or content types.\n\n Preloaders are automatically attached and run, and are updated if the adapter changes.\n\n @param maxPreloadDistance How many items to prefetch ahead of the last bound item\n @param errorHandler Called when the preloader encounters an exception. We recommend throwing an\n exception in debug builds, and logging an error in production.\n @param preloader Describes how view content for the EpoxyModel should be preloaded\n @param requestHolderFactory Should create and return a new [PreloadRequestHolder] each time it is invoked\n
         maxPreloadDistance: Int = 3,
 //      ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(maxPreloadDistance)
 //                         documentation ```kt\nvalue-parameter maxPreloadDistance: kotlin.Int = ...\n```
 //                          ^^^ reference semanticdb maven . . kotlin/Int#
         errorHandler: PreloadErrorHandler,
 //      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(errorHandler)
-//                   documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([ERROR : Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
+//                   documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //                    ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
         preloader: EpoxyModelPreloader<T, U, P>,
 //      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(preloader)
@@ -365,7 +365,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //                             ^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#clear().
         val currAdapter = adapter ?: return
 //          ^^^^^^^^^^^ definition local 1
-//                      documentation ```kt\nval currAdapter: [ERROR : Type for adapter ?: return]\n```
+//                      documentation ```kt\nval currAdapter: [Error type: Not found recorded type for adapter ?: return]\n```
 
         preloadConfigs.forEach { preloadConfig ->
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getPreloadConfigs().
@@ -494,7 +494,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(attrs)
             val a = context.obtainStyledAttributes(
 //              ^ definition local 3
-//                documentation ```kt\nval a: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
+//                documentation ```kt\nval a: [Error type: Return type for function cannot be resolved]\n```
 //                  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(context)
                 attrs, R.styleable.EpoxyRecyclerView,
 //              ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(attrs)
@@ -563,7 +563,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     protected open fun createViewPool(): RecyclerView.RecycledViewPool {
 //                     ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#createViewPool().
-//                                    documentation ```kt\nprotected open fun createViewPool(): [ERROR : RecyclerView.RecycledViewPool]\n```\n\n----\n\n\n Create a new instance of a view pool to use with this recyclerview. By default a [ ] is used.\n
+//                                    documentation ```kt\nprotected open fun createViewPool(): [Error type: Unresolved type for RecyclerView.RecycledViewPool]\n```\n\n----\n\n\n Create a new instance of a view pool to use with this recyclerview. By default a [ ] is used.\n
         return UnboundedViewPool()
 //             ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#`<init>`().
     }
@@ -581,9 +581,9 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     override fun setLayoutParams(params: ViewGroup.LayoutParams) {
 //               ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setLayoutParams().
-//                               documentation ```kt\npublic open fun setLayoutParams(params: [ERROR : ViewGroup.LayoutParams])\n```
+//                               documentation ```kt\npublic open fun setLayoutParams(params: [Error type: Unresolved type for ViewGroup.LayoutParams])\n```
 //                               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setLayoutParams().(params)
-//                                      documentation ```kt\nvalue-parameter params: [ERROR : ViewGroup.LayoutParams]\n```
+//                                      documentation ```kt\nvalue-parameter params: [Error type: Unresolved type for ViewGroup.LayoutParams]\n```
         val isFirstParams = layoutParams == null
 //          ^^^^^^^^^^^^^ definition local 4
 //                        documentation ```kt\nval isFirstParams: kotlin.Boolean\n```
@@ -617,10 +617,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     protected open fun createLayoutManager(): RecyclerView.LayoutManager {
 //                     ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#createLayoutManager().
-//                                         documentation ```kt\nprotected open fun createLayoutManager(): [ERROR : RecyclerView.LayoutManager]\n```\n\n----\n\n\n Create a new [androidx.recyclerview.widget.RecyclerView.LayoutManager]\n instance to use for this RecyclerView.\n\n By default a LinearLayoutManager is used, and a reasonable default is chosen for scrolling\n direction based on layout params.\n\n If the RecyclerView is set to match parent size then the scrolling orientation is set to\n vertical and [.setHasFixedSize] is set to true.\n\n If the height is set to wrap_content then the scrolling orientation is set to horizontal, and\n [.setClipToPadding] is set to false.\n
+//                                         documentation ```kt\nprotected open fun createLayoutManager(): [Error type: Unresolved type for RecyclerView.LayoutManager]\n```\n\n----\n\n\n Create a new [androidx.recyclerview.widget.RecyclerView.LayoutManager]\n instance to use for this RecyclerView.\n\n By default a LinearLayoutManager is used, and a reasonable default is chosen for scrolling\n direction based on layout params.\n\n If the RecyclerView is set to match parent size then the scrolling orientation is set to\n vertical and [.setHasFixedSize] is set to true.\n\n If the height is set to wrap_content then the scrolling orientation is set to horizontal, and\n [.setClipToPadding] is set to false.\n
         val layoutParams = layoutParams
 //          ^^^^^^^^^^^^ definition local 5
-//                       documentation ```kt\nval layoutParams: [ERROR : Type for layoutParams]\n```
+//                       documentation ```kt\nval layoutParams: [Error type: Not found recorded type for layoutParams]\n```
 
         // 0 represents matching constraints in a LinearLayout or ConstraintLayout
         if (layoutParams.height == RecyclerView.LayoutParams.MATCH_PARENT || layoutParams.height == 0) {
@@ -645,9 +645,9 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     override fun setLayoutManager(layout: RecyclerView.LayoutManager?) {
 //               ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setLayoutManager().
-//                                documentation ```kt\npublic open fun setLayoutManager(layout: [ERROR : RecyclerView.LayoutManager]?)\n```
+//                                documentation ```kt\npublic open fun setLayoutManager(layout: [Error type: Unresolved type for RecyclerView.LayoutManager]?)\n```
 //                                ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setLayoutManager().(layout)
-//                                       documentation ```kt\nvalue-parameter layout: [ERROR : RecyclerView.LayoutManager]?\n```
+//                                       documentation ```kt\nvalue-parameter layout: [Error type: Unresolved type for RecyclerView.LayoutManager]?\n```
         super.setLayoutManager(layout)
 //      ^^^^^ reference semanticdb maven . . kotlin/Any#
 //                             ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setLayoutManager().(layout)
@@ -664,10 +664,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //                            documentation ```kt\nprivate final fun syncSpanCount()\n```\n\n----\n\n\n If a grid layout manager is set we sync the span count between the layout and the epoxy\n adapter automatically.\n
         val layout = layoutManager
 //          ^^^^^^ definition local 6
-//                 documentation ```kt\nval layout: [ERROR : Type for layoutManager]\n```
+//                 documentation ```kt\nval layout: [Error type: Not found recorded type for layoutManager]\n```
         val controller = epoxyController
 //          ^^^^^^^^^^ definition local 7
-//                     documentation ```kt\nval controller: [ERROR : EpoxyController]?\n```
+//                     documentation ```kt\nval controller: [Error type: Unresolved type for EpoxyController]?\n```
 //                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
 //                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
 //                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setEpoxyController().
@@ -780,9 +780,9 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     open fun setModels(models: List<EpoxyModel<*>>) {
 //           ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setModels().
-//                     documentation ```kt\npublic open fun setModels(models: kotlin.collections.List<[ERROR : EpoxyModel<*>]<out [ERROR : *]>>)\n```\n\n----\n\n\n Set a list of [EpoxyModel]'s to show in this RecyclerView.\n\n Alternatively you can set an [EpoxyController] to handle building models dynamically.\n\n @see withModels\n @see setController\n @see setControllerAndBuildModels\n @see buildModelsWith\n
+//                     documentation ```kt\npublic open fun setModels(models: kotlin.collections.List<[Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>>)\n```\n\n----\n\n\n Set a list of [EpoxyModel]'s to show in this RecyclerView.\n\n Alternatively you can set an [EpoxyController] to handle building models dynamically.\n\n @see withModels\n @see setController\n @see setControllerAndBuildModels\n @see buildModelsWith\n
 //                     ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setModels().(models)
-//                            documentation ```kt\nvalue-parameter models: kotlin.collections.List<[ERROR : EpoxyModel<*>]<out [ERROR : *]>>\n```
+//                            documentation ```kt\nvalue-parameter models: kotlin.collections.List<[Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>>\n```
 //                             ^^^^ reference semanticdb maven . . kotlin/collections/List#
         val controller = (epoxyController as? SimpleEpoxyController)
 //          ^^^^^^^^^^ definition local 8
@@ -819,9 +819,9 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     fun setController(controller: EpoxyController) {
 //      ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setController().
-//                    documentation ```kt\npublic final fun setController(controller: [ERROR : EpoxyController])\n```\n\n----\n\n\n Set an EpoxyController to populate this RecyclerView. This does not make the controller build\n its models, that must be done separately via [requestModelBuild].\n\n Use this if you don't want [requestModelBuild] called automatically. Common cases\n are if you are using [TypedEpoxyController] (in which case you must call setData on the\n controller), or if you have not otherwise populated your controller's data yet.\n\n Otherwise if you want models built automatically for you use [setControllerAndBuildModels]\n\n The controller can be cleared with [clear]\n\n @see .setControllerAndBuildModels\n @see .buildModelsWith\n @see .setModels\n
+//                    documentation ```kt\npublic final fun setController(controller: [Error type: Unresolved type for EpoxyController])\n```\n\n----\n\n\n Set an EpoxyController to populate this RecyclerView. This does not make the controller build\n its models, that must be done separately via [requestModelBuild].\n\n Use this if you don't want [requestModelBuild] called automatically. Common cases\n are if you are using [TypedEpoxyController] (in which case you must call setData on the\n controller), or if you have not otherwise populated your controller's data yet.\n\n Otherwise if you want models built automatically for you use [setControllerAndBuildModels]\n\n The controller can be cleared with [clear]\n\n @see .setControllerAndBuildModels\n @see .buildModelsWith\n @see .setModels\n
 //                    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setController().(controller)
-//                               documentation ```kt\nvalue-parameter controller: [ERROR : EpoxyController]\n```
+//                               documentation ```kt\nvalue-parameter controller: [Error type: Unresolved type for EpoxyController]\n```
         epoxyController = controller
 //      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
 //      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
@@ -845,9 +845,9 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     fun setControllerAndBuildModels(controller: EpoxyController) {
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setControllerAndBuildModels().
-//                                  documentation ```kt\npublic final fun setControllerAndBuildModels(controller: [ERROR : EpoxyController])\n```\n\n----\n\n\n Set an EpoxyController to populate this RecyclerView, and tell the controller to build\n models.\n\n The controller can be cleared with [clear]\n\n @see setController\n @see buildModelsWith\n @see setModels\n
+//                                  documentation ```kt\npublic final fun setControllerAndBuildModels(controller: [Error type: Unresolved type for EpoxyController])\n```\n\n----\n\n\n Set an EpoxyController to populate this RecyclerView, and tell the controller to build\n models.\n\n The controller can be cleared with [clear]\n\n @see setController\n @see buildModelsWith\n @see setModels\n
 //                                  ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setControllerAndBuildModels().(controller)
-//                                             documentation ```kt\nvalue-parameter controller: [ERROR : EpoxyController]\n```
+//                                             documentation ```kt\nvalue-parameter controller: [Error type: Unresolved type for EpoxyController]\n```
         controller.requestModelBuild()
 //      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setControllerAndBuildModels().(controller)
         setController(controller)
@@ -867,9 +867,9 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     fun withModels(buildModels: EpoxyController.() -> Unit) {
 //      ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#withModels().
-//                 documentation ```kt\npublic final fun withModels(buildModels: [ERROR : EpoxyController].() -> kotlin.Unit)\n```\n\n----\n\n\n The simplest way to add models to the RecyclerView without needing to create an EpoxyController.\n This is intended for Kotlin usage, and has the EpoxyController as the lambda receiver so\n models can be added easily.\n\n Multiple calls to this will reuse the same underlying EpoxyController so views in the\n RecyclerView will be reused.\n\n The Java equivalent is [buildModelsWith].\n
+//                 documentation ```kt\npublic final fun withModels(buildModels: [Error type: Unresolved type for EpoxyController].() -> kotlin.Unit)\n```\n\n----\n\n\n The simplest way to add models to the RecyclerView without needing to create an EpoxyController.\n This is intended for Kotlin usage, and has the EpoxyController as the lambda receiver so\n models can be added easily.\n\n Multiple calls to this will reuse the same underlying EpoxyController so views in the\n RecyclerView will be reused.\n\n The Java equivalent is [buildModelsWith].\n
 //                 ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#withModels().(buildModels)
-//                             documentation ```kt\nvalue-parameter buildModels: [ERROR : EpoxyController].() -> kotlin.Unit\n```
+//                             documentation ```kt\nvalue-parameter buildModels: [Error type: Unresolved type for EpoxyController].() -> kotlin.Unit\n```
 //                                                    ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/Unit#
         val controller = (epoxyController as? WithModelsController)
 //          ^^^^^^^^^^ definition local 9
@@ -901,11 +901,11 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //                                     documentation ```kt\npublic constructor WithModelsController()\n```
         var callback: EpoxyController.() -> Unit = {}
 //          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#callback.
-//                   documentation ```kt\npublic final var callback: [ERROR : EpoxyController].() -> kotlin.Unit\n```
+//                   documentation ```kt\npublic final var callback: [Error type: Unresolved type for EpoxyController].() -> kotlin.Unit\n```
 //          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#getCallback().
-//                   documentation ```kt\npublic final var callback: [ERROR : EpoxyController].() -> kotlin.Unit\n```
+//                   documentation ```kt\npublic final var callback: [Error type: Unresolved type for EpoxyController].() -> kotlin.Unit\n```
 //          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#setCallback().
-//                   documentation ```kt\npublic final var callback: [ERROR : EpoxyController].() -> kotlin.Unit\n```
+//                   documentation ```kt\npublic final var callback: [Error type: Unresolved type for EpoxyController].() -> kotlin.Unit\n```
 //                                          ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/Unit#
 
         override fun buildModels() {
@@ -980,10 +980,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //                                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#
             override fun buildModels(controller: EpoxyController) {
 //                       ^^^^^^^^^^^ definition local 13
-//                                   documentation ```kt\npublic open fun buildModels(controller: [ERROR : EpoxyController])\n```
+//                                   documentation ```kt\npublic open fun buildModels(controller: [Error type: Unresolved type for EpoxyController])\n```
 //                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#buildModels().
 //                                   ^^^^^^^^^^ definition local 14
-//                                              documentation ```kt\nvalue-parameter controller: [ERROR : EpoxyController]\n```
+//                                              documentation ```kt\nvalue-parameter controller: [Error type: Unresolved type for EpoxyController]\n```
             }
         }
 
@@ -1012,9 +1012,9 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
          */
         fun buildModels(controller: EpoxyController)
 //          ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#buildModels().
-//                      documentation ```kt\npublic abstract fun buildModels(controller: [ERROR : EpoxyController])\n```\n\n----\n\n\n Analagous to [EpoxyController.buildModels]. You should create new model instances and\n add them to the given controller. [AutoModel] cannot be used with models added this\n way.\n
+//                      documentation ```kt\npublic abstract fun buildModels(controller: [Error type: Unresolved type for EpoxyController])\n```\n\n----\n\n\n Analagous to [EpoxyController.buildModels]. You should create new model instances and\n add them to the given controller. [AutoModel] cannot be used with models added this\n way.\n
 //                      ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#buildModels().(controller)
-//                                 documentation ```kt\nvalue-parameter controller: [ERROR : EpoxyController]\n```
+//                                 documentation ```kt\nvalue-parameter controller: [Error type: Unresolved type for EpoxyController]\n```
     }
 
     /**
@@ -1115,9 +1115,9 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     override fun setAdapter(adapter: RecyclerView.Adapter<*>?) {
 //               ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setAdapter().
-//                          documentation ```kt\npublic open fun setAdapter(adapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?)\n```
+//                          documentation ```kt\npublic open fun setAdapter(adapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?)\n```
 //                          ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setAdapter().(adapter)
-//                                  documentation ```kt\nvalue-parameter adapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?\n```
+//                                  documentation ```kt\nvalue-parameter adapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```
         super.setAdapter(adapter)
 //      ^^^^^ reference semanticdb maven . . kotlin/Any#
 //                       ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setAdapter().(adapter)
@@ -1130,10 +1130,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     override fun swapAdapter(
 //               ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#swapAdapter().
-//                           documentation ```kt\npublic open fun swapAdapter(adapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?, removeAndRecycleExistingViews: kotlin.Boolean)\n```
+//                           documentation ```kt\npublic open fun swapAdapter(adapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?, removeAndRecycleExistingViews: kotlin.Boolean)\n```
         adapter: RecyclerView.Adapter<*>?,
 //      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#swapAdapter().(adapter)
-//              documentation ```kt\nvalue-parameter adapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?\n```
+//              documentation ```kt\nvalue-parameter adapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```
         removeAndRecycleExistingViews: Boolean
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#swapAdapter().(removeAndRecycleExistingViews)
 //                                    documentation ```kt\nvalue-parameter removeAndRecycleExistingViews: kotlin.Boolean\n```
@@ -1218,7 +1218,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //                            documentation ```kt\nprivate final fun removeAdapter()\n```
         val currentAdapter = adapter
 //          ^^^^^^^^^^^^^^ definition local 16
-//                         documentation ```kt\nval currentAdapter: [ERROR : Type for adapter]\n```
+//                         documentation ```kt\nval currentAdapter: [Error type: Not found recorded type for adapter]\n```
         if (currentAdapter != null) {
 //          ^^^^^^^^^^^^^^ reference local 16
             // Clear the adapter so the adapter releases its reference to this RecyclerView.

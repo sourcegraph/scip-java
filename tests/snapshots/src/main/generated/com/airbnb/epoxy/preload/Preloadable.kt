@@ -17,8 +17,8 @@ interface Preloadable {
 //                    documentation ```kt\npublic interface Preloadable\n```\n\n----\n\n\n Declares Views that should be preloaded. This can either be implemented by a custom view or by an [EpoxyHolder].\n\n The preloadable views can be recursive ie if [Preloadable.viewsToPreload] includes any views that are themselves Preloadable those nested\n views will instead by used.\n
     val viewsToPreload: List<View>
 //      ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/Preloadable#getViewsToPreload().
-//                     documentation ```kt\npublic abstract val viewsToPreload: kotlin.collections.List<[ERROR : View]>\n```
+//                     documentation ```kt\npublic abstract val viewsToPreload: kotlin.collections.List<[Error type: Unresolved type for View]>\n```
 //      ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/preload/Preloadable#viewsToPreload.
-//                     documentation ```kt\npublic abstract val viewsToPreload: kotlin.collections.List<[ERROR : View]>\n```
+//                     documentation ```kt\npublic abstract val viewsToPreload: kotlin.collections.List<[Error type: Unresolved type for View]>\n```
 //                      ^^^^ reference semanticdb maven . . kotlin/collections/List#
 }
