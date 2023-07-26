@@ -9,10 +9,9 @@ import javax.tools.ForwardingJavaFileManager;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 
-import com.sourcegraph.semanticdb_javac.SemanticdbJavacOptions;
+import com.sourcegraph.semanticdb_javac.SemanticdbPlugin;
 
-public class SimpleFileManager
-    extends ForwardingJavaFileManager<StandardJavaFileManager> {
+public class SimpleFileManager extends ForwardingJavaFileManager<StandardJavaFileManager> {
 
   public final List<SimpleClassFile> compiled = new ArrayList<>();
   public final Path targetroot;
@@ -25,15 +24,13 @@ public class SimpleFileManager
   // standard constructors/getters
 
   @Override
-  public JavaFileObject getJavaFileForOutput(Location location,
-                                             String className, JavaFileObject.Kind kind, FileObject sibling) {
+  public JavaFileObject getJavaFileForOutput(
+      Location location, String className, JavaFileObject.Kind kind, FileObject sibling) {
     URI uri = targetroot.resolve(className).toUri();
     SimpleClassFile result = new SimpleClassFile(uri);
-    if (!className.equals(SemanticdbJavacOptions.stubClassName)) {
+    if (!className.equals(SemanticdbPlugin.stubClassName)) {
       compiled.add(result);
     }
     return result;
   }
-
 }
-

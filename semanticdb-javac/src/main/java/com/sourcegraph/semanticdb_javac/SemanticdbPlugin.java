@@ -9,6 +9,8 @@ import com.sun.tools.javac.util.Options;
 /** Entrypoint of the semanticdb-javac compiler plugin. */
 public class SemanticdbPlugin implements Plugin {
 
+  public static String stubClassName = "META-INF-semanticdb-stub";
+
   @Override
   public String getName() {
     return "semanticdb";
