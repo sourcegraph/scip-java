@@ -44,7 +44,8 @@ class TargetedSuite extends FunSuite with TempDirectories {
           })
           .toList
       val result = compiler.compileSemanticdb(List(input))
-      val occurrences = result.textDocument.getOccurrencesList.asScala.toList
+      val textDocument = result.textDocument.orNull
+      val occurrences = textDocument.getOccurrencesList.asScala.toList
       val symbols: List[String] = positions.map { pos =>
         val posRange = Semanticdb
           .Range
@@ -74,7 +75,7 @@ class TargetedSuite extends FunSuite with TempDirectories {
             )
         }
       }
-      fn(result.textDocument, symbols)
+      fn(textDocument, symbols)
     }
   }
 

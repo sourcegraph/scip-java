@@ -25,6 +25,19 @@ jobs:
       - name: Main project tests
         run: sbt test
 
+  benchmarks-test:
+    runs-on: ubuntu-latest
+    name: Benchmark tests
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          cache: "sbt"
+          java-version: 17
+      - name: Run sample benchmarks
+        run: sbt 'bench/Jmh/run -i 1 -f1 -t1 -foe true'
+
   docker_test:
     runs-on: ${{ matrix.os }}
     name: Docker CLI tests

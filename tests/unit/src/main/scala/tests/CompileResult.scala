@@ -8,8 +8,10 @@ case class CompileResult(
     textDocuments: Semanticdb.TextDocuments,
     isSuccess: Boolean
 ) {
-  def textDocument: Semanticdb.TextDocument = {
-    textDocuments.getDocuments(0)
+  def textDocument: Option[Semanticdb.TextDocument] = {
+    Option.when(textDocuments.getDocumentsCount() > 0) {
+      textDocuments.getDocuments(0)
+    }
   }
 
   def merge(other: CompileResult): CompileResult = {

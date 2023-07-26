@@ -62,7 +62,11 @@ class CompileBench {
   @OutputTimeUnit(TimeUnit.MILLISECONDS)
   def compileSemanticdb(): Long = {
     CompileBench.foreachSource(deps) { inputs =>
-      compiler.compileSemanticdb(inputs).textDocument.getOccurrencesCount
+      compiler
+        .compileSemanticdb(inputs)
+        .textDocument
+        .map(_.getOccurrencesCount)
+        .getOrElse(0)
     }
   }
 
@@ -74,10 +78,9 @@ object CompileBench {
   def foreachSource(
       deps: Dependencies
   )(fn: Seq[Input.VirtualFile] => Int): Long = {
-    var sum = 0L
     deps
       .sources
-      .foreach { source =>
+      .map { source =>
         val path = AbsolutePath(source)
         FileIO.withJarFileSystem(path, create = false, close = true) { root =>
           val files =
@@ -91,9 +94,10 @@ object CompileBench {
             val relativePath = source.toString().stripPrefix("/")
             Input.VirtualFile(relativePath, text)
           }
-          sum += fn(inputs)
+
+          fn(inputs)
         }
       }
-    sum
+      .sum
   }
 }

@@ -48,16 +48,6 @@ class ScipSemanticdbBench {
   @OutputTimeUnit(TimeUnit.MILLISECONDS)
   def json(): Unit = run("index.scip", parallel = false)
 
-  @Benchmark
-  @BenchmarkMode(Array(Mode.SingleShotTime))
-  @OutputTimeUnit(TimeUnit.MILLISECONDS)
-  def protobufParallel(): Unit = run("index.scip-protobuf", parallel = true)
-
-  @Benchmark
-  @BenchmarkMode(Array(Mode.SingleShotTime))
-  @OutputTimeUnit(TimeUnit.MILLISECONDS)
-  def protobuf(): Unit = run("index.scip-protobuf", parallel = false)
-
   private def run(filename: String, parallel: Boolean): Unit = {
     val output = Files.createTempFile("scip-java", filename)
     val parallelFlag =

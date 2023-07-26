@@ -26,7 +26,7 @@ class OverridesSuite extends FunSuite with TempDirectories {
       val relativePath = "example.Parent".replace('.', '/') + ".java"
       val input = Input.VirtualFile(relativePath, source)
       val result = compiler.compileSemanticdb(List(input))
-      val symtab = new Symtab(result.textDocument)
+      val symtab = new Symtab(result.textDocument.orNull)
 
       val expectedSyms = expectedSymbols.mkString("\n")
       val syms = symtab
