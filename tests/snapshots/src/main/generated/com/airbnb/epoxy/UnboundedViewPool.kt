@@ -31,9 +31,9 @@ internal class UnboundedViewPool : RecycledViewPool() {
 
     private val scrapHeaps = SparseArray<Queue<ViewHolder>>()
 //              ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps().
-//                         documentation ```kt\nprivate final val scrapHeaps: [ERROR : Type for SparseArray<Queue<ViewHolder>>()]\n```
+//                         documentation ```kt\nprivate final val scrapHeaps: [Error type: Not found recorded type for SparseArray<Queue<ViewHolder>>()]\n```
 //              ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
-//                         documentation ```kt\nprivate final val scrapHeaps: [ERROR : Type for SparseArray<Queue<ViewHolder>>()]\n```
+//                         documentation ```kt\nprivate final val scrapHeaps: [Error type: Not found recorded type for SparseArray<Queue<ViewHolder>>()]\n```
 //                                       ^^^^^ reference semanticdb maven jdk 11 java/util/Queue#
 
     override fun clear() {
@@ -61,13 +61,13 @@ internal class UnboundedViewPool : RecycledViewPool() {
 
     override fun getRecycledView(viewType: Int): ViewHolder? {
 //               ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getRecycledView().
-//                               documentation ```kt\npublic open fun getRecycledView(viewType: kotlin.Int): [ERROR : ViewHolder]?\n```
+//                               documentation ```kt\npublic open fun getRecycledView(viewType: kotlin.Int): [Error type: Unresolved type for ViewHolder]?\n```
 //                               ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getRecycledView().(viewType)
 //                                        documentation ```kt\nvalue-parameter viewType: kotlin.Int\n```
 //                                         ^^^ reference semanticdb maven . . kotlin/Int#
         val scrapHeap = scrapHeaps.get(viewType)
 //          ^^^^^^^^^ definition local 0
-//                    documentation ```kt\nval scrapHeap: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
+//                    documentation ```kt\nval scrapHeap: [Error type: Return type for function cannot be resolved]\n```
 //                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps().
 //                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.
 //                                     ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getRecycledView().(viewType)
@@ -77,9 +77,9 @@ internal class UnboundedViewPool : RecycledViewPool() {
 
     override fun putRecycledView(viewHolder: ViewHolder) {
 //               ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#putRecycledView().
-//                               documentation ```kt\npublic open fun putRecycledView(viewHolder: [ERROR : ViewHolder])\n```
+//                               documentation ```kt\npublic open fun putRecycledView(viewHolder: [Error type: Unresolved type for ViewHolder])\n```
 //                               ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#putRecycledView().(viewHolder)
-//                                          documentation ```kt\nvalue-parameter viewHolder: [ERROR : ViewHolder]\n```
+//                                          documentation ```kt\nvalue-parameter viewHolder: [Error type: Unresolved type for ViewHolder]\n```
         getScrapHeapForType(viewHolder.itemViewType).add(viewHolder)
 //      ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeapForType().
 //                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#putRecycledView().(viewHolder)
@@ -102,14 +102,14 @@ internal class UnboundedViewPool : RecycledViewPool() {
 
     private fun getScrapHeapForType(viewType: Int): Queue<ViewHolder> {
 //              ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeapForType().
-//                                  documentation ```kt\nprivate final fun getScrapHeapForType(viewType: kotlin.Int): java.util.Queue<[ERROR : ViewHolder]>\n```
+//                                  documentation ```kt\nprivate final fun getScrapHeapForType(viewType: kotlin.Int): java.util.Queue<[Error type: Unresolved type for ViewHolder]>\n```
 //                                  ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeapForType().(viewType)
 //                                           documentation ```kt\nvalue-parameter viewType: kotlin.Int\n```
 //                                            ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                  ^^^^^ reference semanticdb maven jdk 11 java/util/Queue#
         var scrapHeap: Queue<ViewHolder>? = scrapHeaps.get(viewType)
 //          ^^^^^^^^^ definition local 1
-//                    documentation ```kt\nvar scrapHeap: java.util.Queue<[ERROR : ViewHolder]>?\n```
+//                    documentation ```kt\nvar scrapHeap: java.util.Queue<[Error type: Unresolved type for ViewHolder]>?\n```
 //                     ^^^^^ reference semanticdb maven jdk 11 java/util/Queue#
 //                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#getScrapHeaps().
 //                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#scrapHeaps.

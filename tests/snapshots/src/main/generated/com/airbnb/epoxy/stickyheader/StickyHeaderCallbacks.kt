@@ -40,9 +40,9 @@ interface StickyHeaderCallbacks {
      */
     fun setupStickyHeaderView(stickyHeader: View) = Unit
 //      ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#setupStickyHeaderView().
-//                            documentation ```kt\npublic open fun setupStickyHeaderView(stickyHeader: [ERROR : View])\n```\n\n----\n\n\n Callback to adjusts any necessary properties of the [stickyHeader] view\n that is being used as a sticky, eg. elevation.\n Default behaviour is no-op.\n\n [teardownStickyHeaderView] will be called sometime after this method\n and before any other calls to this method go through.\n
+//                            documentation ```kt\npublic open fun setupStickyHeaderView(stickyHeader: [Error type: Unresolved type for View])\n```\n\n----\n\n\n Callback to adjusts any necessary properties of the [stickyHeader] view\n that is being used as a sticky, eg. elevation.\n Default behaviour is no-op.\n\n [teardownStickyHeaderView] will be called sometime after this method\n and before any other calls to this method go through.\n
 //                            ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#setupStickyHeaderView().(stickyHeader)
-//                                         documentation ```kt\nvalue-parameter stickyHeader: [ERROR : View]\n```
+//                                         documentation ```kt\nvalue-parameter stickyHeader: [Error type: Unresolved type for View]\n```
 //                                                  ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/Unit#
 
     /**
@@ -53,9 +53,9 @@ interface StickyHeaderCallbacks {
      */
     fun teardownStickyHeaderView(stickyHeader: View) = Unit
 //      ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#teardownStickyHeaderView().
-//                               documentation ```kt\npublic open fun teardownStickyHeaderView(stickyHeader: [ERROR : View])\n```\n\n----\n\n\n Callback to revert any properties changed in [setupStickyHeaderView].\n Default behaviour is no-op.\n\n Called after [setupStickyHeaderView].\n
+//                               documentation ```kt\npublic open fun teardownStickyHeaderView(stickyHeader: [Error type: Unresolved type for View])\n```\n\n----\n\n\n Callback to revert any properties changed in [setupStickyHeaderView].\n Default behaviour is no-op.\n\n Called after [setupStickyHeaderView].\n
 //                               ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderCallbacks#teardownStickyHeaderView().(stickyHeader)
-//                                            documentation ```kt\nvalue-parameter stickyHeader: [ERROR : View]\n```
+//                                            documentation ```kt\nvalue-parameter stickyHeader: [Error type: Unresolved type for View]\n```
 //                                                     ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/Unit#
 
     //endregion

@@ -25,24 +25,24 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
     // This also lets us call back to the original hashCode and equals methods
     private val originalClickListener: OnModelClickListener<T, V>?
 //              ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalClickListener().
-//                                    documentation ```kt\nprivate final val originalClickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?\n```
+//                                    documentation ```kt\nprivate final val originalClickListener: [Error type: Unresolved type for OnModelClickListener<T, V>]<T, V>?\n```
 //              ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalClickListener.
-//                                    documentation ```kt\nprivate final val originalClickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?\n```
+//                                    documentation ```kt\nprivate final val originalClickListener: [Error type: Unresolved type for OnModelClickListener<T, V>]<T, V>?\n```
 //                                                          ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T]
 //                                                             ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[V]
     private val originalLongClickListener: OnModelLongClickListener<T, V>?
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getOriginalLongClickListener().
-//                                        documentation ```kt\nprivate final val originalLongClickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?\n```
+//                                        documentation ```kt\nprivate final val originalLongClickListener: [Error type: Unresolved type for OnModelLongClickListener<T, V>]<T, V>?\n```
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#originalLongClickListener.
-//                                        documentation ```kt\nprivate final val originalLongClickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?\n```
+//                                        documentation ```kt\nprivate final val originalLongClickListener: [Error type: Unresolved type for OnModelLongClickListener<T, V>]<T, V>?\n```
 //                                                                  ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T]
 //                                                                     ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[V]
 
     constructor(clickListener: OnModelClickListener<T, V>?) {
 //  ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`().
-//              documentation ```kt\npublic constructor WrappedEpoxyModelClickListener<T, V>(clickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?)\n```
+//              documentation ```kt\npublic constructor WrappedEpoxyModelClickListener<T, V>(clickListener: [Error type: Unresolved type for OnModelClickListener<T, V>]<T, V>?)\n```
 //              ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`().(clickListener)
-//                            documentation ```kt\nvalue-parameter clickListener: [ERROR : OnModelClickListener<T, V>]<T, V>?\n```
+//                            documentation ```kt\nvalue-parameter clickListener: [Error type: Unresolved type for OnModelClickListener<T, V>]<T, V>?\n```
 //                                                  ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T]
 //                                                     ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[V]
         requireNotNull(clickListener) {
@@ -63,9 +63,9 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
 
     constructor(clickListener: OnModelLongClickListener<T, V>?) {
 //  ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`(+1).
-//              documentation ```kt\npublic constructor WrappedEpoxyModelClickListener<T, V>(clickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?)\n```
+//              documentation ```kt\npublic constructor WrappedEpoxyModelClickListener<T, V>(clickListener: [Error type: Unresolved type for OnModelLongClickListener<T, V>]<T, V>?)\n```
 //              ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#`<init>`(+1).(clickListener)
-//                            documentation ```kt\nvalue-parameter clickListener: [ERROR : OnModelLongClickListener<T, V>]<T, V>?\n```
+//                            documentation ```kt\nvalue-parameter clickListener: [Error type: Unresolved type for OnModelLongClickListener<T, V>]<T, V>?\n```
 //                                                      ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[T]
 //                                                         ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#[V]
         requireNotNull(clickListener) {
@@ -86,9 +86,9 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
 
     override fun onClick(view: View) {
 //               ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#onClick().
-//                       documentation ```kt\npublic open fun onClick(view: [ERROR : View])\n```
+//                       documentation ```kt\npublic open fun onClick(view: [Error type: Unresolved type for View])\n```
 //                       ^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#onClick().(view)
-//                            documentation ```kt\nvalue-parameter view: [ERROR : View]\n```
+//                            documentation ```kt\nvalue-parameter view: [Error type: Unresolved type for View]\n```
         val modelInfo = getClickedModelInfo(view) ?: return
 //          ^^^^^^^^^ definition local 0
 //                    documentation ```kt\nval modelInfo: com.airbnb.epoxy.WrappedEpoxyModelClickListener.ClickedModelInfo\n```
@@ -122,9 +122,9 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
 
     override fun onLongClick(view: View): Boolean {
 //               ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#onLongClick().
-//                           documentation ```kt\npublic open fun onLongClick(view: [ERROR : View]): kotlin.Boolean\n```
+//                           documentation ```kt\npublic open fun onLongClick(view: [Error type: Unresolved type for View]): kotlin.Boolean\n```
 //                           ^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#onLongClick().(view)
-//                                documentation ```kt\nvalue-parameter view: [ERROR : View]\n```
+//                                documentation ```kt\nvalue-parameter view: [Error type: Unresolved type for View]\n```
 //                                        ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
         val modelInfo = getClickedModelInfo(view) ?: return false
 //          ^^^^^^^^^ definition local 1
@@ -159,9 +159,9 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
 
     private fun getClickedModelInfo(view: View): ClickedModelInfo? {
 //              ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getClickedModelInfo().
-//                                  documentation ```kt\nprivate final fun getClickedModelInfo(view: [ERROR : View]): com.airbnb.epoxy.WrappedEpoxyModelClickListener.ClickedModelInfo?\n```
+//                                  documentation ```kt\nprivate final fun getClickedModelInfo(view: [Error type: Unresolved type for View]): com.airbnb.epoxy.WrappedEpoxyModelClickListener.ClickedModelInfo?\n```
 //                                  ^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getClickedModelInfo().(view)
-//                                       documentation ```kt\nvalue-parameter view: [ERROR : View]\n```
+//                                       documentation ```kt\nvalue-parameter view: [Error type: Unresolved type for View]\n```
 //                                               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#
         val epoxyHolder = ListenersUtils.getEpoxyHolderForChildView(view)
 //          ^^^^^^^^^^^ definition local 2
@@ -172,14 +172,14 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
 
         val adapterPosition = epoxyHolder.adapterPosition
 //          ^^^^^^^^^^^^^^^ definition local 3
-//                          documentation ```kt\nval adapterPosition: [ERROR : Type for epoxyHolder.adapterPosition]\n```
+//                          documentation ```kt\nval adapterPosition: [Error type: Not found recorded type for epoxyHolder.adapterPosition]\n```
 //                            ^^^^^^^^^^^ reference local 2
         if (adapterPosition == RecyclerView.NO_POSITION) return null
 //          ^^^^^^^^^^^^^^^ reference local 3
 
         val boundObject = epoxyHolder.objectToBind()
 //          ^^^^^^^^^^^ definition local 4
-//                      documentation ```kt\nval boundObject: [ERROR : Type for epoxyHolder.objectToBind()]\n```
+//                      documentation ```kt\nval boundObject: [Error type: Not found recorded type for epoxyHolder.objectToBind()]\n```
 //                        ^^^^^^^^^^^ reference local 2
 
         val holderToUse = if (boundObject is ModelGroupHolder) {
@@ -220,14 +220,14 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
 //                ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#
 //                                 documentation ```kt\nprivate final class ClickedModelInfo\n```
 //                ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().
-//                                 documentation ```kt\npublic constructor ClickedModelInfo(model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>, adapterPosition: kotlin.Int, boundObject: kotlin.Any)\n```
+//                                 documentation ```kt\npublic constructor ClickedModelInfo(model: [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>, adapterPosition: kotlin.Int, boundObject: kotlin.Any)\n```
         val model: EpoxyModel<*>,
 //          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().(model)
-//                documentation ```kt\nvalue-parameter model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>\n```
+//                documentation ```kt\nvalue-parameter model: [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>\n```
 //          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#getModel().
-//                documentation ```kt\npublic final val model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>\n```
+//                documentation ```kt\npublic final val model: [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>\n```
 //          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#model.
-//                documentation ```kt\npublic final val model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>\n```
+//                documentation ```kt\npublic final val model: [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>\n```
         val adapterPosition: Int,
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#ClickedModelInfo#`<init>`().(adapterPosition)
 //                          documentation ```kt\nvalue-parameter adapterPosition: kotlin.Int\n```
@@ -251,11 +251,11 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
      */
     private val View.allViewsInHierarchy: Sequence<View>
 //                   ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#allViewsInHierarchy.
-//                                       documentation ```kt\nprivate final val [ERROR : View].allViewsInHierarchy: kotlin.sequences.Sequence<[ERROR : View]>\n```\n\n----\n\n\n Returns a sequence of this View plus any and all children, recursively.\n
+//                                       documentation ```kt\nprivate final val [Error type: Unresolved type for View].allViewsInHierarchy: kotlin.sequences.Sequence<[Error type: Unresolved type for View]>\n```\n\n----\n\n\n Returns a sequence of this View plus any and all children, recursively.\n
 //                                        ^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/sequences/Sequence#
         get() {
 //      ^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getAllViewsInHierarchy().
-//          documentation ```kt\nprivate final fun [ERROR : View].<get-allViewsInHierarchy>(): kotlin.sequences.Sequence<[ERROR : View]>\n```
+//          documentation ```kt\nprivate final fun [Error type: Unresolved type for View].`<get-allViewsInHierarchy>`(): kotlin.sequences.Sequence<[Error type: Unresolved type for View]>\n```
             return if (this is ViewGroup) {
 //                     ^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#allViewsInHierarchy.
                 children.flatMap {
@@ -271,15 +271,15 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
     /** Returns a [Sequence] over the child views in this view group. */
     internal val ViewGroup.children: Sequence<View>
 //                         ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#children.
-//                                  documentation ```kt\ninternal final val [ERROR : ViewGroup].children: kotlin.sequences.Sequence<[ERROR : View]>\n```\n\n----\n\n Returns a [Sequence] over the child views in this view group.
+//                                  documentation ```kt\ninternal final val [Error type: Unresolved type for ViewGroup].children: kotlin.sequences.Sequence<[Error type: Unresolved type for View]>\n```\n\n----\n\n Returns a [Sequence] over the child views in this view group.
 //                                   ^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/sequences/Sequence#
         get() = object : Sequence<View> {
 //      ^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#getChildren().
-//          documentation ```kt\ninternal final fun [ERROR : ViewGroup].<get-children>(): kotlin.sequences.Sequence<[ERROR : View]>\n```
+//          documentation ```kt\ninternal final fun [Error type: Unresolved type for ViewGroup].`<get-children>`(): kotlin.sequences.Sequence<[Error type: Unresolved type for View]>\n```
 //                       ^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/sequences/Sequence#
             override fun iterator() = this@children.iterator()
 //                       ^^^^^^^^ definition local 6
-//                                documentation ```kt\npublic open fun iterator(): [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
+//                                documentation ```kt\npublic open fun iterator(): [Error type: Return type for function cannot be resolved]\n```
 //                                relationship is_reference is_implementation semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/sequences/Sequence#iterator().
 //                                    ^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#children.
         }
@@ -287,7 +287,7 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
     /** Returns a [MutableIterator] over the views in this view group. */
     internal operator fun ViewGroup.iterator() = object : MutableIterator<View> {
 //                                  ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelClickListener#iterator().
-//                                           documentation ```kt\ninternal final operator fun [ERROR : ViewGroup].iterator(): kotlin.collections.MutableIterator<[ERROR : View]>\n```\n\n----\n\n Returns a [MutableIterator] over the views in this view group.
+//                                           documentation ```kt\ninternal final operator fun [Error type: Unresolved type for ViewGroup].iterator(): kotlin.collections.MutableIterator<[Error type: Unresolved type for View]>\n```\n\n----\n\n Returns a [MutableIterator] over the views in this view group.
 //                                                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableIterator#
         private var index = 0
 //                  ^^^^^ definition local 7
@@ -298,7 +298,7 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
 //                        documentation ```kt\nprivate final var index: kotlin.Int\n```
         override fun hasNext() = index < childCount
 //                   ^^^^^^^ definition local 10
-//                           documentation ```kt\npublic open fun hasNext(): [ERROR : Error function type]\n```
+//                           documentation ```kt\npublic open fun hasNext(): [Error type: Return type for function cannot be resolved]\n```
 //                           relationship is_reference is_implementation semanticdb maven . . kotlin/collections/Iterator#hasNext().
 //                           relationship is_reference is_implementation semanticdb maven . . kotlin/collections/MutableIterator#hasNext().
 //                               ^^^^^ reference local 7
@@ -315,7 +315,7 @@ class WrappedEpoxyModelClickListener<T : EpoxyModel<*>, V> : OnClickListener, On
 //                                            ^^ reference semanticdb maven . . kotlin/Int#inc().
         override fun remove() = removeViewAt(--index)
 //                   ^^^^^^ definition local 12
-//                          documentation ```kt\npublic open fun remove(): [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
+//                          documentation ```kt\npublic open fun remove(): [Error type: Return type for function cannot be resolved]\n```
 //                          relationship is_reference is_implementation semanticdb maven . . kotlin/collections/MutableIterator#remove().
 //                                           ^^ reference semanticdb maven . . kotlin/Int#dec().
 //                                             ^^^^^ reference local 7

@@ -311,7 +311,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
     args ++= filesPaths ++ commonKotlinFiles.map(_.toAbsolutePath.toString)
 
-    parseCommandLineArguments(args.asJava, kargs)
+    parseCommandLineArguments(args.asJava, kargs, false)
 
     val exit = new K2JVMCompiler().exec(
       new MessageCollector {

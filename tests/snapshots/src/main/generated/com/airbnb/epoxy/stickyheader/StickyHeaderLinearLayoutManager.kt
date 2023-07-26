@@ -44,10 +44,10 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                    documentation ```kt\npublic final class StickyHeaderLinearLayoutManager\n```\n\n----\n\n\n Adds sticky headers capabilities to your [RecyclerView.Adapter].\n The adapter / controller must override [StickyHeaderCallbacks.isStickyHeader] to\n indicate which items are sticky.\n\n Example usage:\n ```\n  class StickyHeaderController() : EpoxyController() {\n      override fun isStickyHeader(position: Int) {\n          // Write your logic to tell which item is sticky.\n      }\n  }\n ```\n
 //                                     ^^^^^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/jvm/JvmOverloads#`<init>`().
 //                                                  ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#`<init>`().
-//                                                              documentation ```kt\npublic constructor StickyHeaderLinearLayoutManager(context: [ERROR : Context], orientation: kotlin.Int = ..., reverseLayout: kotlin.Boolean = ...)\n```
+//                                                              documentation ```kt\npublic constructor StickyHeaderLinearLayoutManager(context: [Error type: Unresolved type for Context], orientation: kotlin.Int = ..., reverseLayout: kotlin.Boolean = ...)\n```
     context: Context,
 //  ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#`<init>`().(context)
-//          documentation ```kt\nvalue-parameter context: [ERROR : Context]\n```
+//          documentation ```kt\nvalue-parameter context: [Error type: Unresolved type for Context]\n```
     orientation: Int = RecyclerView.VERTICAL,
 //  ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#`<init>`().(orientation)
 //              documentation ```kt\nvalue-parameter orientation: kotlin.Int = ...\n```
@@ -63,11 +63,11 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     private var adapter: BaseEpoxyAdapter? = null
 //              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#adapter.
-//                      documentation ```kt\nprivate final var adapter: [ERROR : BaseEpoxyAdapter]?\n```
+//                      documentation ```kt\nprivate final var adapter: [Error type: Unresolved type for BaseEpoxyAdapter]?\n```
 //              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getAdapter().
-//                      documentation ```kt\nprivate final var adapter: [ERROR : BaseEpoxyAdapter]?\n```
+//                      documentation ```kt\nprivate final var adapter: [Error type: Unresolved type for BaseEpoxyAdapter]?\n```
 //              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().
-//                      documentation ```kt\nprivate final fun setAdapter(newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?)\n```
+//                      documentation ```kt\nprivate final fun setAdapter(newAdapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?)\n```
 
     // Translation for header
     private var translationX: Float = 0f
@@ -105,27 +105,27 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
     // Sticky header's ViewHolder and dirty state.
     private var stickyHeader: View? = null
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
-//                           documentation ```kt\nprivate final var stickyHeader: [ERROR : View]?\n```
+//                           documentation ```kt\nprivate final var stickyHeader: [Error type: Unresolved type for View]?\n```
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeader().
-//                           documentation ```kt\nprivate final var stickyHeader: [ERROR : View]?\n```
+//                           documentation ```kt\nprivate final var stickyHeader: [Error type: Unresolved type for View]?\n```
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
-//                           documentation ```kt\nprivate final var stickyHeader: [ERROR : View]?\n```
+//                           documentation ```kt\nprivate final var stickyHeader: [Error type: Unresolved type for View]?\n```
     private var stickyHeaderPosition = RecyclerView.NO_POSITION
 //              ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeaderPosition().
-//                                   documentation ```kt\nprivate final var stickyHeaderPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//                                   documentation ```kt\nprivate final var stickyHeaderPosition: [Error type: Error property type]\n```
 //              ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setStickyHeaderPosition().
-//                                   documentation ```kt\nprivate final var stickyHeaderPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//                                   documentation ```kt\nprivate final var stickyHeaderPosition: [Error type: Error property type]\n```
 //              ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
-//                                   documentation ```kt\nprivate final var stickyHeaderPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//                                   documentation ```kt\nprivate final var stickyHeaderPosition: [Error type: Error property type]\n```
 
     // Save / Restore scroll state
     private var scrollPosition = RecyclerView.NO_POSITION
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollPosition().
-//                             documentation ```kt\nprivate final var scrollPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//                             documentation ```kt\nprivate final var scrollPosition: [Error type: Error property type]\n```
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollPosition.
-//                             documentation ```kt\nprivate final var scrollPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//                             documentation ```kt\nprivate final var scrollPosition: [Error type: Error property type]\n```
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setScrollPosition().
-//                             documentation ```kt\nprivate final var scrollPosition: [ERROR : <ERROR PROPERTY TYPE>]\n```
+//                             documentation ```kt\nprivate final var scrollPosition: [Error type: Error property type]\n```
     private var scrollOffset = 0
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getScrollOffset().
 //                           documentation ```kt\nprivate final var scrollOffset: kotlin.Int\n```
@@ -136,9 +136,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun onAttachedToWindow(recyclerView: RecyclerView) {
 //               ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAttachedToWindow().
-//                                  documentation ```kt\npublic open fun onAttachedToWindow(recyclerView: [ERROR : RecyclerView])\n```
+//                                  documentation ```kt\npublic open fun onAttachedToWindow(recyclerView: [Error type: Unresolved type for RecyclerView])\n```
 //                                  ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAttachedToWindow().(recyclerView)
-//                                               documentation ```kt\nvalue-parameter recyclerView: [ERROR : RecyclerView]\n```
+//                                               documentation ```kt\nvalue-parameter recyclerView: [Error type: Unresolved type for RecyclerView]\n```
         super.onAttachedToWindow(recyclerView)
 //      ^^^^^ reference semanticdb maven . . kotlin/Any#
 //                               ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAttachedToWindow().(recyclerView)
@@ -149,11 +149,11 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun onAdapterChanged(oldAdapter: RecyclerView.Adapter<*>?, newAdapter: RecyclerView.Adapter<*>?) {
 //               ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAdapterChanged().
-//                                documentation ```kt\npublic open fun onAdapterChanged(oldAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?, newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?)\n```
+//                                documentation ```kt\npublic open fun onAdapterChanged(oldAdapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?, newAdapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?)\n```
 //                                ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAdapterChanged().(oldAdapter)
-//                                           documentation ```kt\nvalue-parameter oldAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?\n```
+//                                           documentation ```kt\nvalue-parameter oldAdapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```
 //                                                                      ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAdapterChanged().(newAdapter)
-//                                                                                 documentation ```kt\nvalue-parameter newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?\n```
+//                                                                                 documentation ```kt\nvalue-parameter newAdapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```
         super.onAdapterChanged(oldAdapter, newAdapter)
 //      ^^^^^ reference semanticdb maven . . kotlin/Any#
 //                             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onAdapterChanged().(oldAdapter)
@@ -167,9 +167,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //   ^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/Suppress#`<init>`().
     private fun setAdapter(newAdapter: RecyclerView.Adapter<*>?) {
 //              ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().
-//                         documentation ```kt\nprivate final fun setAdapter(newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?)\n```
+//                         documentation ```kt\nprivate final fun setAdapter(newAdapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?)\n```
 //                         ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#setAdapter().(newAdapter)
-//                                    documentation ```kt\nvalue-parameter newAdapter: [ERROR : RecyclerView.Adapter<*>]<out [ERROR : *]>?\n```
+//                                    documentation ```kt\nvalue-parameter newAdapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```
         adapter?.unregisterAdapterDataObserver(headerPositionsObserver)
 //      ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#adapter.
 //      ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getAdapter().
@@ -207,7 +207,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun onSaveInstanceState(): Parcelable {
 //               ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onSaveInstanceState().
-//                                   documentation ```kt\npublic open fun onSaveInstanceState(): [ERROR : Parcelable]\n```
+//                                   documentation ```kt\npublic open fun onSaveInstanceState(): [Error type: Unresolved type for Parcelable]\n```
         return SavedState(
 //             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().
             superState = super.onSaveInstanceState(),
@@ -228,9 +228,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun onRestoreInstanceState(state: Parcelable?) {
 //               ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onRestoreInstanceState().
-//                                      documentation ```kt\npublic open fun onRestoreInstanceState(state: [ERROR : Parcelable]?)\n```
+//                                      documentation ```kt\npublic open fun onRestoreInstanceState(state: [Error type: Unresolved type for Parcelable]?)\n```
 //                                      ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onRestoreInstanceState().(state)
-//                                            documentation ```kt\nvalue-parameter state: [ERROR : Parcelable]?\n```
+//                                            documentation ```kt\nvalue-parameter state: [Error type: Unresolved type for Parcelable]?\n```
         (state as? SavedState)?.let {
 //       ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onRestoreInstanceState().(state)
 //                 ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#
@@ -259,14 +259,14 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun scrollVerticallyBy(dy: Int, recycler: RecyclerView.Recycler, state: RecyclerView.State?): Int {
 //               ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollVerticallyBy().
-//                                  documentation ```kt\npublic open fun scrollVerticallyBy(dy: kotlin.Int, recycler: [ERROR : RecyclerView.Recycler], state: [ERROR : RecyclerView.State]?): kotlin.Int\n```
+//                                  documentation ```kt\npublic open fun scrollVerticallyBy(dy: kotlin.Int, recycler: [Error type: Unresolved type for RecyclerView.Recycler], state: [Error type: Unresolved type for RecyclerView.State]?): kotlin.Int\n```
 //                                  ^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollVerticallyBy().(dy)
 //                                     documentation ```kt\nvalue-parameter dy: kotlin.Int\n```
 //                                      ^^^ reference semanticdb maven . . kotlin/Int#
 //                                           ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollVerticallyBy().(recycler)
-//                                                    documentation ```kt\nvalue-parameter recycler: [ERROR : RecyclerView.Recycler]\n```
+//                                                    documentation ```kt\nvalue-parameter recycler: [Error type: Unresolved type for RecyclerView.Recycler]\n```
 //                                                                            ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollVerticallyBy().(state)
-//                                                                                  documentation ```kt\nvalue-parameter state: [ERROR : RecyclerView.State]?\n```
+//                                                                                  documentation ```kt\nvalue-parameter state: [Error type: Unresolved type for RecyclerView.State]?\n```
 //                                                                                                         ^^^ reference semanticdb maven . . kotlin/Int#
         val scrolled = restoreView { super.scrollVerticallyBy(dy, recycler, state) }
 //          ^^^^^^^^ definition local 1
@@ -289,14 +289,14 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun scrollHorizontallyBy(dx: Int, recycler: RecyclerView.Recycler, state: RecyclerView.State?): Int {
 //               ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollHorizontallyBy().
-//                                    documentation ```kt\npublic open fun scrollHorizontallyBy(dx: kotlin.Int, recycler: [ERROR : RecyclerView.Recycler], state: [ERROR : RecyclerView.State]?): kotlin.Int\n```
+//                                    documentation ```kt\npublic open fun scrollHorizontallyBy(dx: kotlin.Int, recycler: [Error type: Unresolved type for RecyclerView.Recycler], state: [Error type: Unresolved type for RecyclerView.State]?): kotlin.Int\n```
 //                                    ^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollHorizontallyBy().(dx)
 //                                       documentation ```kt\nvalue-parameter dx: kotlin.Int\n```
 //                                        ^^^ reference semanticdb maven . . kotlin/Int#
 //                                             ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollHorizontallyBy().(recycler)
-//                                                      documentation ```kt\nvalue-parameter recycler: [ERROR : RecyclerView.Recycler]\n```
+//                                                      documentation ```kt\nvalue-parameter recycler: [Error type: Unresolved type for RecyclerView.Recycler]\n```
 //                                                                              ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollHorizontallyBy().(state)
-//                                                                                    documentation ```kt\nvalue-parameter state: [ERROR : RecyclerView.State]?\n```
+//                                                                                    documentation ```kt\nvalue-parameter state: [Error type: Unresolved type for RecyclerView.State]?\n```
 //                                                                                                           ^^^ reference semanticdb maven . . kotlin/Int#
         val scrolled = restoreView { super.scrollHorizontallyBy(dx, recycler, state) }
 //          ^^^^^^^^ definition local 2
@@ -319,11 +319,11 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: RecyclerView.State) {
 //               ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onLayoutChildren().
-//                                documentation ```kt\npublic open fun onLayoutChildren(recycler: [ERROR : RecyclerView.Recycler], state: [ERROR : RecyclerView.State])\n```
+//                                documentation ```kt\npublic open fun onLayoutChildren(recycler: [Error type: Unresolved type for RecyclerView.Recycler], state: [Error type: Unresolved type for RecyclerView.State])\n```
 //                                ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onLayoutChildren().(recycler)
-//                                         documentation ```kt\nvalue-parameter recycler: [ERROR : RecyclerView.Recycler]\n```
+//                                         documentation ```kt\nvalue-parameter recycler: [Error type: Unresolved type for RecyclerView.Recycler]\n```
 //                                                                 ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onLayoutChildren().(state)
-//                                                                       documentation ```kt\nvalue-parameter state: [ERROR : RecyclerView.State]\n```
+//                                                                       documentation ```kt\nvalue-parameter state: [Error type: Unresolved type for RecyclerView.State]\n```
         restoreView { super.onLayoutChildren(recycler, state) }
 //      ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                    ^^^^^ reference semanticdb maven . . kotlin/Any#
@@ -435,7 +435,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                                                 ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeaderPosition.
             val adjustedOffset = (if (offset != INVALID_OFFSET) offset else 0) + stickyHeader!!.height
 //              ^^^^^^^^^^^^^^ definition local 4
-//                             documentation ```kt\nval adjustedOffset: [ERROR : Type for (if (offset != INVALID_OFFSET) offset else 0) + stickyHeader!!.height]\n```
+//                             documentation ```kt\nval adjustedOffset: [Error type: Not found recorded type for (if (offset != INVALID_OFFSET) offset else 0) + stickyHeader!!.height]\n```
 //                                    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(offset)
 //                                           ^^ reference semanticdb maven . . kotlin/Int#equals().
 //                                                              ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrollToPositionWithOffset(+1).(offset)
@@ -465,9 +465,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun computeVerticalScrollExtent(state: RecyclerView.State): Int = restoreView { super.computeVerticalScrollExtent(state) }
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollExtent().
-//                                           documentation ```kt\npublic open fun computeVerticalScrollExtent(state: [ERROR : RecyclerView.State]): kotlin.Int\n```
+//                                           documentation ```kt\npublic open fun computeVerticalScrollExtent(state: [Error type: Unresolved type for RecyclerView.State]): kotlin.Int\n```
 //                                           ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollExtent().(state)
-//                                                 documentation ```kt\nvalue-parameter state: [ERROR : RecyclerView.State]\n```
+//                                                 documentation ```kt\nvalue-parameter state: [Error type: Unresolved type for RecyclerView.State]\n```
 //                                                                       ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                                             ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                                                                           ^^^^^ reference semanticdb maven . . kotlin/Any#
@@ -475,9 +475,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun computeVerticalScrollOffset(state: RecyclerView.State): Int = restoreView { super.computeVerticalScrollOffset(state) }
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollOffset().
-//                                           documentation ```kt\npublic open fun computeVerticalScrollOffset(state: [ERROR : RecyclerView.State]): kotlin.Int\n```
+//                                           documentation ```kt\npublic open fun computeVerticalScrollOffset(state: [Error type: Unresolved type for RecyclerView.State]): kotlin.Int\n```
 //                                           ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollOffset().(state)
-//                                                 documentation ```kt\nvalue-parameter state: [ERROR : RecyclerView.State]\n```
+//                                                 documentation ```kt\nvalue-parameter state: [Error type: Unresolved type for RecyclerView.State]\n```
 //                                                                       ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                                             ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                                                                           ^^^^^ reference semanticdb maven . . kotlin/Any#
@@ -485,9 +485,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun computeVerticalScrollRange(state: RecyclerView.State): Int = restoreView { super.computeVerticalScrollRange(state) }
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollRange().
-//                                          documentation ```kt\npublic open fun computeVerticalScrollRange(state: [ERROR : RecyclerView.State]): kotlin.Int\n```
+//                                          documentation ```kt\npublic open fun computeVerticalScrollRange(state: [Error type: Unresolved type for RecyclerView.State]): kotlin.Int\n```
 //                                          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeVerticalScrollRange().(state)
-//                                                documentation ```kt\nvalue-parameter state: [ERROR : RecyclerView.State]\n```
+//                                                documentation ```kt\nvalue-parameter state: [Error type: Unresolved type for RecyclerView.State]\n```
 //                                                                      ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                                            ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                                                                          ^^^^^ reference semanticdb maven . . kotlin/Any#
@@ -495,9 +495,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun computeHorizontalScrollExtent(state: RecyclerView.State): Int = restoreView { super.computeHorizontalScrollExtent(state) }
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollExtent().
-//                                             documentation ```kt\npublic open fun computeHorizontalScrollExtent(state: [ERROR : RecyclerView.State]): kotlin.Int\n```
+//                                             documentation ```kt\npublic open fun computeHorizontalScrollExtent(state: [Error type: Unresolved type for RecyclerView.State]): kotlin.Int\n```
 //                                             ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollExtent().(state)
-//                                                   documentation ```kt\nvalue-parameter state: [ERROR : RecyclerView.State]\n```
+//                                                   documentation ```kt\nvalue-parameter state: [Error type: Unresolved type for RecyclerView.State]\n```
 //                                                                         ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                                               ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                                                                             ^^^^^ reference semanticdb maven . . kotlin/Any#
@@ -505,9 +505,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun computeHorizontalScrollOffset(state: RecyclerView.State): Int = restoreView { super.computeHorizontalScrollOffset(state) }
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollOffset().
-//                                             documentation ```kt\npublic open fun computeHorizontalScrollOffset(state: [ERROR : RecyclerView.State]): kotlin.Int\n```
+//                                             documentation ```kt\npublic open fun computeHorizontalScrollOffset(state: [Error type: Unresolved type for RecyclerView.State]): kotlin.Int\n```
 //                                             ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollOffset().(state)
-//                                                   documentation ```kt\nvalue-parameter state: [ERROR : RecyclerView.State]\n```
+//                                                   documentation ```kt\nvalue-parameter state: [Error type: Unresolved type for RecyclerView.State]\n```
 //                                                                         ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                                               ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                                                                             ^^^^^ reference semanticdb maven . . kotlin/Any#
@@ -515,9 +515,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun computeHorizontalScrollRange(state: RecyclerView.State): Int = restoreView { super.computeHorizontalScrollRange(state) }
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollRange().
-//                                            documentation ```kt\npublic open fun computeHorizontalScrollRange(state: [ERROR : RecyclerView.State]): kotlin.Int\n```
+//                                            documentation ```kt\npublic open fun computeHorizontalScrollRange(state: [Error type: Unresolved type for RecyclerView.State]): kotlin.Int\n```
 //                                            ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeHorizontalScrollRange().(state)
-//                                                  documentation ```kt\nvalue-parameter state: [ERROR : RecyclerView.State]\n```
+//                                                  documentation ```kt\nvalue-parameter state: [Error type: Unresolved type for RecyclerView.State]\n```
 //                                                                        ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                                              ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                                                                                            ^^^^^ reference semanticdb maven . . kotlin/Any#
@@ -525,7 +525,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun computeScrollVectorForPosition(targetPosition: Int): PointF? = restoreView { super.computeScrollVectorForPosition(targetPosition) }
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeScrollVectorForPosition().
-//                                              documentation ```kt\npublic open fun computeScrollVectorForPosition(targetPosition: kotlin.Int): [ERROR : PointF]?\n```
+//                                              documentation ```kt\npublic open fun computeScrollVectorForPosition(targetPosition: kotlin.Int): [Error type: Unresolved type for PointF]?\n```
 //                                              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#computeScrollVectorForPosition().(targetPosition)
 //                                                             documentation ```kt\nvalue-parameter targetPosition: kotlin.Int\n```
 //                                                              ^^^ reference semanticdb maven . . kotlin/Int#
@@ -535,20 +535,20 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 
     override fun onFocusSearchFailed(
 //               ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().
-//                                   documentation ```kt\npublic open fun onFocusSearchFailed(focused: [ERROR : View], focusDirection: kotlin.Int, recycler: [ERROR : RecyclerView.Recycler], state: [ERROR : RecyclerView.State]): [ERROR : View]?\n```
+//                                   documentation ```kt\npublic open fun onFocusSearchFailed(focused: [Error type: Unresolved type for View], focusDirection: kotlin.Int, recycler: [Error type: Unresolved type for RecyclerView.Recycler], state: [Error type: Unresolved type for RecyclerView.State]): [Error type: Unresolved type for View]?\n```
         focused: View,
 //      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().(focused)
-//              documentation ```kt\nvalue-parameter focused: [ERROR : View]\n```
+//              documentation ```kt\nvalue-parameter focused: [Error type: Unresolved type for View]\n```
         focusDirection: Int,
 //      ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().(focusDirection)
 //                     documentation ```kt\nvalue-parameter focusDirection: kotlin.Int\n```
 //                      ^^^ reference semanticdb maven . . kotlin/Int#
         recycler: RecyclerView.Recycler,
 //      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().(recycler)
-//               documentation ```kt\nvalue-parameter recycler: [ERROR : RecyclerView.Recycler]\n```
+//               documentation ```kt\nvalue-parameter recycler: [Error type: Unresolved type for RecyclerView.Recycler]\n```
         state: RecyclerView.State
 //      ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#onFocusSearchFailed().(state)
-//            documentation ```kt\nvalue-parameter state: [ERROR : RecyclerView.State]\n```
+//            documentation ```kt\nvalue-parameter state: [Error type: Unresolved type for RecyclerView.State]\n```
     ): View? = restoreView { super.onFocusSearchFailed(focused, focusDirection, recycler, state) }
 //             ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#restoreView().
 //                           ^^^^^ reference semanticdb maven . . kotlin/Any#
@@ -631,9 +631,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      */
     fun isStickyHeader(view: View): Boolean = view === stickyHeader
 //      ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isStickyHeader().
-//                     documentation ```kt\npublic final fun isStickyHeader(view: [ERROR : View]): kotlin.Boolean\n```\n\n----\n\n\n Returns true if `view` is the current sticky header.\n
+//                     documentation ```kt\npublic final fun isStickyHeader(view: [Error type: Unresolved type for View]): kotlin.Boolean\n```\n\n----\n\n\n Returns true if `view` is the current sticky header.\n
 //                     ^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isStickyHeader().(view)
-//                          documentation ```kt\nvalue-parameter view: [ERROR : View]\n```
+//                          documentation ```kt\nvalue-parameter view: [Error type: Unresolved type for View]\n```
 //                                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                            ^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isStickyHeader().(view)
 //                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getStickyHeader().
@@ -645,9 +645,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      */
     private fun updateStickyHeader(recycler: RecyclerView.Recycler, layout: Boolean) {
 //              ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#updateStickyHeader().
-//                                 documentation ```kt\nprivate final fun updateStickyHeader(recycler: [ERROR : RecyclerView.Recycler], layout: kotlin.Boolean)\n```\n\n----\n\n\n Updates the sticky header state (creation, binding, display), to be called whenever there's a layout or scroll\n
+//                                 documentation ```kt\nprivate final fun updateStickyHeader(recycler: [Error type: Unresolved type for RecyclerView.Recycler], layout: kotlin.Boolean)\n```\n\n----\n\n\n Updates the sticky header state (creation, binding, display), to be called whenever there's a layout or scroll\n
 //                                 ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#updateStickyHeader().(recycler)
-//                                          documentation ```kt\nvalue-parameter recycler: [ERROR : RecyclerView.Recycler]\n```
+//                                          documentation ```kt\nvalue-parameter recycler: [Error type: Unresolved type for RecyclerView.Recycler]\n```
 //                                                                  ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#updateStickyHeader().(layout)
 //                                                                         documentation ```kt\nvalue-parameter layout: kotlin.Boolean\n```
 //                                                                          ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
@@ -660,7 +660,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                                        ^^^^ reference semanticdb maven . . kotlin/collections/MutableList#size.
         val childCount = childCount
 //          ^^^^^^^^^^ definition local 7
-//                     documentation ```kt\nval childCount: [ERROR : Type for childCount]\n```
+//                     documentation ```kt\nval childCount: [Error type: Not found recorded type for childCount]\n```
         if (headerCount > 0 && childCount > 0) {
 //          ^^^^^^^^^^^ reference local 6
 //                      ^ reference semanticdb maven . . kotlin/Int#compareTo(+3).
@@ -668,7 +668,7 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
             // Find first valid child.
             var anchorView: View? = null
 //              ^^^^^^^^^^ definition local 8
-//                         documentation ```kt\nvar anchorView: [ERROR : View]?\n```
+//                         documentation ```kt\nvar anchorView: [Error type: Unresolved type for View]?\n```
             var anchorIndex = -1
 //              ^^^^^^^^^^^ definition local 9
 //                          documentation ```kt\nvar anchorIndex: kotlin.Int\n```
@@ -684,11 +684,11 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                            ^^^^^^^^^^ reference local 7
                 val child = getChildAt(i)
 //                  ^^^^^ definition local 12
-//                        documentation ```kt\nval child: [ERROR : Type for getChildAt(i)]\n```
+//                        documentation ```kt\nval child: [Error type: Not found recorded type for getChildAt(i)]\n```
 //                                     ^ reference local 11
                 val params = child!!.layoutParams as RecyclerView.LayoutParams
 //                  ^^^^^^ definition local 13
-//                         documentation ```kt\nval params: [ERROR : RecyclerView.LayoutParams]\n```
+//                         documentation ```kt\nval params: [Error type: Unresolved type for RecyclerView.LayoutParams]\n```
 //                           ^^^^^ reference local 12
                 if (isViewValidAnchor(child, params)) {
 //                  ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().
@@ -807,13 +807,13 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //                  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#stickyHeader.
                         val nextHeaderView: View? = if (nextHeaderPos != -1) {
 //                          ^^^^^^^^^^^^^^ definition local 17
-//                                         documentation ```kt\nval nextHeaderView: [ERROR : View]?\n```
+//                                         documentation ```kt\nval nextHeaderView: [Error type: Unresolved type for View]?\n```
 //                                                      ^^^^^^^^^^^^^ reference local 16
 //                                                                    ^^ reference semanticdb maven . . kotlin/Int#equals().
 //                                                                       ^ reference semanticdb maven . . kotlin/Int#unaryMinus().
                             val nextHeaderView = getChildAt(anchorIndex + (nextHeaderPos - anchorPos))
 //                              ^^^^^^^^^^^^^^ definition local 18
-//                                             documentation ```kt\nval nextHeaderView: [ERROR : Type for getChildAt(anchorIndex + (nextHeaderPos - anchorPos))]\n```
+//                                             documentation ```kt\nval nextHeaderView: [Error type: Not found recorded type for getChildAt(anchorIndex + (nextHeaderPos - anchorPos))]\n```
 //                                                          ^^^^^^^^^^^ reference local 9
 //                                                                      ^ reference semanticdb maven . . kotlin/Int#plus(+3).
 //                                                                         ^^^^^^^^^^^^^ reference local 16
@@ -855,15 +855,15 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      */
     private fun createStickyHeader(recycler: RecyclerView.Recycler, position: Int) {
 //              ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().
-//                                 documentation ```kt\nprivate final fun createStickyHeader(recycler: [ERROR : RecyclerView.Recycler], position: kotlin.Int)\n```\n\n----\n\n\n Creates [RecyclerView.ViewHolder] for [position], including measure / layout, and assigns it to\n [stickyHeader].\n
+//                                 documentation ```kt\nprivate final fun createStickyHeader(recycler: [Error type: Unresolved type for RecyclerView.Recycler], position: kotlin.Int)\n```\n\n----\n\n\n Creates [RecyclerView.ViewHolder] for [position], including measure / layout, and assigns it to\n [stickyHeader].\n
 //                                 ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().(recycler)
-//                                          documentation ```kt\nvalue-parameter recycler: [ERROR : RecyclerView.Recycler]\n```
+//                                          documentation ```kt\nvalue-parameter recycler: [Error type: Unresolved type for RecyclerView.Recycler]\n```
 //                                                                  ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().(position)
 //                                                                           documentation ```kt\nvalue-parameter position: kotlin.Int\n```
 //                                                                            ^^^ reference semanticdb maven . . kotlin/Int#
         val stickyHeader = recycler.getViewForPosition(position)
 //          ^^^^^^^^^^^^ definition local 19
-//                       documentation ```kt\nval stickyHeader: [ERROR : <ERROR FUNCTION RETURN TYPE>]\n```
+//                       documentation ```kt\nval stickyHeader: [Error type: Return type for function cannot be resolved]\n```
 //                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().(recycler)
 //                                                     ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#createStickyHeader().(position)
 
@@ -905,11 +905,11 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      */
     private fun bindStickyHeader(recycler: RecyclerView.Recycler, stickyHeader: View, position: Int) {
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().
-//                               documentation ```kt\nprivate final fun bindStickyHeader(recycler: [ERROR : RecyclerView.Recycler], stickyHeader: [ERROR : View], position: kotlin.Int)\n```\n\n----\n\n\n Binds the [stickyHeader] for the given [position].\n
+//                               documentation ```kt\nprivate final fun bindStickyHeader(recycler: [Error type: Unresolved type for RecyclerView.Recycler], stickyHeader: [Error type: Unresolved type for View], position: kotlin.Int)\n```\n\n----\n\n\n Binds the [stickyHeader] for the given [position].\n
 //                               ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(recycler)
-//                                        documentation ```kt\nvalue-parameter recycler: [ERROR : RecyclerView.Recycler]\n```
+//                                        documentation ```kt\nvalue-parameter recycler: [Error type: Unresolved type for RecyclerView.Recycler]\n```
 //                                                                ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(stickyHeader)
-//                                                                             documentation ```kt\nvalue-parameter stickyHeader: [ERROR : View]\n```
+//                                                                             documentation ```kt\nvalue-parameter stickyHeader: [Error type: Unresolved type for View]\n```
 //                                                                                    ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#bindStickyHeader().(position)
 //                                                                                             documentation ```kt\nvalue-parameter position: kotlin.Int\n```
 //                                                                                              ^^^ reference semanticdb maven . . kotlin/Int#
@@ -968,9 +968,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      */
     private fun measureAndLayout(stickyHeader: View) {
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#measureAndLayout().
-//                               documentation ```kt\nprivate final fun measureAndLayout(stickyHeader: [ERROR : View])\n```\n\n----\n\n\n Measures and lays out [stickyHeader].\n
+//                               documentation ```kt\nprivate final fun measureAndLayout(stickyHeader: [Error type: Unresolved type for View])\n```\n\n----\n\n\n Measures and lays out [stickyHeader].\n
 //                               ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#measureAndLayout().(stickyHeader)
-//                                            documentation ```kt\nvalue-parameter stickyHeader: [ERROR : View]\n```
+//                                            documentation ```kt\nvalue-parameter stickyHeader: [Error type: Unresolved type for View]\n```
         measureChildWithMargins(stickyHeader, 0, 0)
 //                              ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#measureAndLayout().(stickyHeader)
         when (orientation) {
@@ -991,9 +991,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      */
     private fun scrapStickyHeader(recycler: RecyclerView.Recycler?) {
 //              ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrapStickyHeader().
-//                                documentation ```kt\nprivate final fun scrapStickyHeader(recycler: [ERROR : RecyclerView.Recycler]?)\n```\n\n----\n\n\n Returns [stickyHeader] to the [RecyclerView]'s [RecyclerView.RecycledViewPool], assigning it\n to `null`.\n\n @param recycler If passed, the sticky header will be returned to the recycled view pool.\n
+//                                documentation ```kt\nprivate final fun scrapStickyHeader(recycler: [Error type: Unresolved type for RecyclerView.Recycler]?)\n```\n\n----\n\n\n Returns [stickyHeader] to the [RecyclerView]'s [RecyclerView.RecycledViewPool], assigning it\n to `null`.\n\n @param recycler If passed, the sticky header will be returned to the recycled view pool.\n
 //                                ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#scrapStickyHeader().(recycler)
-//                                         documentation ```kt\nvalue-parameter recycler: [ERROR : RecyclerView.Recycler]?\n```
+//                                         documentation ```kt\nvalue-parameter recycler: [Error type: Unresolved type for RecyclerView.Recycler]?\n```
         val stickyHeader = stickyHeader ?: return
 //          ^^^^^^^^^^^^ definition local 21
 //                       documentation ```kt\nval stickyHeader: kotlin.Nothing\n```
@@ -1041,11 +1041,11 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      */
     private fun isViewValidAnchor(view: View, params: RecyclerView.LayoutParams): Boolean {
 //              ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().
-//                                documentation ```kt\nprivate final fun isViewValidAnchor(view: [ERROR : View], params: [ERROR : RecyclerView.LayoutParams]): kotlin.Boolean\n```\n\n----\n\n\n Returns true when `view` is a valid anchor, ie. the first view to be valid and visible.\n
+//                                documentation ```kt\nprivate final fun isViewValidAnchor(view: [Error type: Unresolved type for View], params: [Error type: Unresolved type for RecyclerView.LayoutParams]): kotlin.Boolean\n```\n\n----\n\n\n Returns true when `view` is a valid anchor, ie. the first view to be valid and visible.\n
 //                                ^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(view)
-//                                     documentation ```kt\nvalue-parameter view: [ERROR : View]\n```
+//                                     documentation ```kt\nvalue-parameter view: [Error type: Unresolved type for View]\n```
 //                                            ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewValidAnchor().(params)
-//                                                   documentation ```kt\nvalue-parameter params: [ERROR : RecyclerView.LayoutParams]\n```
+//                                                   documentation ```kt\nvalue-parameter params: [Error type: Unresolved type for RecyclerView.LayoutParams]\n```
 //                                                                                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
         return when {
             !params.isItemRemoved && !params.isViewInvalid -> when (orientation) {
@@ -1089,9 +1089,9 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      */
     private fun isViewOnBoundary(view: View): Boolean {
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary().
-//                               documentation ```kt\nprivate final fun isViewOnBoundary(view: [ERROR : View]): kotlin.Boolean\n```\n\n----\n\n\n Returns true when the `view` is at the edge of the parent [RecyclerView].\n
+//                               documentation ```kt\nprivate final fun isViewOnBoundary(view: [Error type: Unresolved type for View]): kotlin.Boolean\n```\n\n----\n\n\n Returns true when the `view` is at the edge of the parent [RecyclerView].\n
 //                               ^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#isViewOnBoundary().(view)
-//                                    documentation ```kt\nvalue-parameter view: [ERROR : View]\n```
+//                                    documentation ```kt\nvalue-parameter view: [Error type: Unresolved type for View]\n```
 //                                            ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
         return when (orientation) {
             VERTICAL -> when {
@@ -1131,11 +1131,11 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      */
     private fun getY(headerView: View, nextHeaderView: View?): Float {
 //              ^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getY().
-//                   documentation ```kt\nprivate final fun getY(headerView: [ERROR : View], nextHeaderView: [ERROR : View]?): kotlin.Float\n```\n\n----\n\n\n Returns the position in the Y axis to position the header appropriately, depending on orientation, direction and\n [android.R.attr.clipToPadding].\n
+//                   documentation ```kt\nprivate final fun getY(headerView: [Error type: Unresolved type for View], nextHeaderView: [Error type: Unresolved type for View]?): kotlin.Float\n```\n\n----\n\n\n Returns the position in the Y axis to position the header appropriately, depending on orientation, direction and\n [android.R.attr.clipToPadding].\n
 //                   ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getY().(headerView)
-//                              documentation ```kt\nvalue-parameter headerView: [ERROR : View]\n```
+//                              documentation ```kt\nvalue-parameter headerView: [Error type: Unresolved type for View]\n```
 //                                     ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getY().(nextHeaderView)
-//                                                    documentation ```kt\nvalue-parameter nextHeaderView: [ERROR : View]?\n```
+//                                                    documentation ```kt\nvalue-parameter nextHeaderView: [Error type: Unresolved type for View]?\n```
 //                                                             ^^^^^ reference semanticdb maven . . kotlin/Float#
         when (orientation) {
             VERTICAL -> {
@@ -1189,11 +1189,11 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
      */
     private fun getX(headerView: View, nextHeaderView: View?): Float {
 //              ^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getX().
-//                   documentation ```kt\nprivate final fun getX(headerView: [ERROR : View], nextHeaderView: [ERROR : View]?): kotlin.Float\n```\n\n----\n\n\n Returns the position in the X axis to position the header appropriately, depending on orientation, direction and\n [android.R.attr.clipToPadding].\n
+//                   documentation ```kt\nprivate final fun getX(headerView: [Error type: Unresolved type for View], nextHeaderView: [Error type: Unresolved type for View]?): kotlin.Float\n```\n\n----\n\n\n Returns the position in the X axis to position the header appropriately, depending on orientation, direction and\n [android.R.attr.clipToPadding].\n
 //                   ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getX().(headerView)
-//                              documentation ```kt\nvalue-parameter headerView: [ERROR : View]\n```
+//                              documentation ```kt\nvalue-parameter headerView: [Error type: Unresolved type for View]\n```
 //                                     ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#getX().(nextHeaderView)
-//                                                    documentation ```kt\nvalue-parameter nextHeaderView: [ERROR : View]?\n```
+//                                                    documentation ```kt\nvalue-parameter nextHeaderView: [Error type: Unresolved type for View]?\n```
 //                                                             ^^^^^ reference semanticdb maven . . kotlin/Float#
         when (orientation) {
             HORIZONTAL -> {
@@ -1460,14 +1460,14 @@ class StickyHeaderLinearLayoutManager @JvmOverloads constructor(
 //             ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#
 //                        documentation ```kt\npublic final data class SavedState\n```\n\n----\n\n\n Save / restore existing [RecyclerView] state and\n scrolling position and offset.\n
 //             ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().
-//                        documentation ```kt\npublic constructor SavedState(superState: [ERROR : Parcelable]?, scrollPosition: kotlin.Int, scrollOffset: kotlin.Int)\n```
+//                        documentation ```kt\npublic constructor SavedState(superState: [Error type: Unresolved type for Parcelable]?, scrollPosition: kotlin.Int, scrollOffset: kotlin.Int)\n```
         val superState: Parcelable?,
 //          ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().(superState)
-//                     documentation ```kt\nvalue-parameter superState: [ERROR : Parcelable]?\n```
+//                     documentation ```kt\nvalue-parameter superState: [Error type: Unresolved type for Parcelable]?\n```
 //          ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#getSuperState().
-//                     documentation ```kt\npublic final val superState: [ERROR : Parcelable]?\n```
+//                     documentation ```kt\npublic final val superState: [Error type: Unresolved type for Parcelable]?\n```
 //          ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#superState.
-//                     documentation ```kt\npublic final val superState: [ERROR : Parcelable]?\n```
+//                     documentation ```kt\npublic final val superState: [Error type: Unresolved type for Parcelable]?\n```
         val scrollPosition: Int,
 //          ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/stickyheader/StickyHeaderLinearLayoutManager#SavedState#`<init>`().(scrollPosition)
 //                         documentation ```kt\nvalue-parameter scrollPosition: kotlin.Int\n```

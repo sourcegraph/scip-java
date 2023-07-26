@@ -14,8 +14,8 @@ interface ModelCollector {
 
     fun add(model: EpoxyModel<*>)
 //      ^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelCollector#add().
-//          documentation ```kt\npublic abstract fun add(model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>)\n```
+//          documentation ```kt\npublic abstract fun add(model: [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>)\n```
 //          relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/GroupModel#add().
 //          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelCollector#add().(model)
-//                documentation ```kt\nvalue-parameter model: [ERROR : EpoxyModel<*>]<out [ERROR : *]>\n```
+//                documentation ```kt\nvalue-parameter model: [Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>\n```
 }
