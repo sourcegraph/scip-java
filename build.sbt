@@ -21,7 +21,7 @@ lazy val V =
     val scala3 = "3.2.2"
     val metals = "0.11.11"
     val scalameta = "4.8.1"
-    val semanticdbKotlinc = "0.3.1"
+    val semanticdbKotlinc = "0.3.2"
     val testcontainers = "0.39.3"
     val requests = "0.6.5"
     val minimalMillVersion = "0.10.0"
@@ -254,7 +254,7 @@ lazy val cli = project
         "com.lihaoyi" %% "requests" % V.requests,
         "org.scalameta" %% "moped" % V.moped,
         "org.scalameta" %% "ascii-graphs" % "0.1.2",
-        "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % "1.5.21"
+        "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % "1.8.21"
       ),
     (Compile / resourceGenerators) +=
       Def
