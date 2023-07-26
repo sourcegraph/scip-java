@@ -5,8 +5,6 @@ import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 import javax.tools.FileObject;
 import javax.tools.JavaFileManager;
 import javax.tools.JavaFileObject;
@@ -30,8 +28,6 @@ public class SemanticdbJavacOptions {
   public UriScheme uriScheme = UriScheme.DEFAULT;
   public NoRelativePathMode noRelativePath = NoRelativePathMode.INDEX_ANYWAY;
   public Path generatedTargetRoot;
-
-  public static String stubClassName = "META-INF-semanticdb-stub";
 
   public SemanticdbJavacOptions() {
     errors = new ArrayList<>();
@@ -133,9 +129,11 @@ public class SemanticdbJavacOptions {
     try {
       JavaFileManager fm = ctx.get(JavaFileManager.class);
       FileObject sourceOutputDirStub =
-          fm.getJavaFileForOutput(SOURCE_OUTPUT, stubClassName, JavaFileObject.Kind.SOURCE, null);
+          fm.getJavaFileForOutput(
+              SOURCE_OUTPUT, SemanticdbPlugin.stubClassName, JavaFileObject.Kind.SOURCE, null);
       FileObject clasSOutputDirStub =
-          fm.getJavaFileForOutput(CLASS_OUTPUT, stubClassName, JavaFileObject.Kind.CLASS, null);
+          fm.getJavaFileForOutput(
+              CLASS_OUTPUT, SemanticdbPlugin.stubClassName, JavaFileObject.Kind.CLASS, null);
       classOutputDir = Paths.get(clasSOutputDirStub.toUri()).toAbsolutePath().getParent();
       sourceOutputDir = Paths.get(sourceOutputDirStub.toUri()).toAbsolutePath().getParent();
     } catch (Exception e) {
