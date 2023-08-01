@@ -8,6 +8,7 @@ import coursier.Repositories
 import coursier.Resolve
 import coursier.core._
 import coursier.maven.MavenRepository
+import coursier.LocalRepositories
 
 case class Dependencies(
     dependencies: List[Dependency],
@@ -38,12 +39,13 @@ object Dependencies {
       case None =>
         Resolve.defaultRepositories.toList ++ defaultExtraRepositories
       case Some(value) =>
-        value.map {
-          case "central" =>
-            Repositories.central
-          case other =>
-            MavenRepository(other): Repository
-        }
+        LocalRepositories.ivy2Local +:
+          value.map {
+            case "central" =>
+              Repositories.central
+            case other =>
+              MavenRepository(other): Repository
+          }
 
     }
 
