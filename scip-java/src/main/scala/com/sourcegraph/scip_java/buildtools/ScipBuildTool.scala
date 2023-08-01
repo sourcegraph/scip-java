@@ -36,6 +36,7 @@ import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.Dependencies
+import com.sourcegraph.scip_java.DependenciesResolver
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
 import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
@@ -62,7 +63,6 @@ import org.jetbrains.kotlin.config.Services
 import os.CommandResult
 import os.ProcessOutput.Readlines
 import os.SubprocessException
-import com.sourcegraph.scip_java.DependenciesResolver
 
 /**
  * A custom build tool that is specifically made for scip-java.

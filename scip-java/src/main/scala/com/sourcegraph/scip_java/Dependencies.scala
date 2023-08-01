@@ -4,11 +4,11 @@ import java.io.File
 import java.nio.file.Path
 
 import coursier.Fetch
+import coursier.LocalRepositories
 import coursier.Repositories
 import coursier.Resolve
 import coursier.core._
 import coursier.maven.MavenRepository
-import coursier.LocalRepositories
 
 case class Dependencies(
     dependencies: List[Dependency],

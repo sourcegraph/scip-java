@@ -1,14 +1,16 @@
 package com.sourcegraph.scip_java
 
+import java.io.File
+import java.nio.file.Path
+
+import scala.concurrent.duration.Duration
+import scala.util.Try
+import scala.xml.XML
+
 import coursier._
 import coursier.cache._
-import coursier.util.Task
-import scala.concurrent.duration.Duration
-import java.nio.file.Path
-import scala.util.Try
-import java.io.File
-import scala.xml.XML
 import coursier.parse.DependencyParser
+import coursier.util.Task
 
 class DependenciesResolver(repositories: List[Repository]) {
   private val cache: FileCache[Task] = FileCache[Task]()

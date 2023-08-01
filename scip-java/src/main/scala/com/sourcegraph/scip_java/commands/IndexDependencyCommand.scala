@@ -15,9 +15,9 @@ import com.sourcegraph.scip_semanticdb.JavaVersion
 import moped.annotations.DeprecatedName
 import moped.annotations.Description
 import moped.annotations.Hidden
+import moped.annotations.Repeated
 import moped.cli.Command
 import moped.cli.CommandParser
-import moped.annotations.Repeated
 
 final case class IndexDependencyCommand(
     @DeprecatedName("target", "Use --output instead", "0.6.10") output: Path =
