@@ -62,6 +62,7 @@ import org.jetbrains.kotlin.config.Services
 import os.CommandResult
 import os.ProcessOutput.Readlines
 import os.SubprocessException
+import com.sourcegraph.scip_java.DependenciesResolver
 
 /**
  * A custom build tool that is specifically made for scip-java.
@@ -165,7 +166,8 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     val tmp = Files.createTempDirectory("scip-java")
     Files.createDirectories(tmp)
     Files.createDirectories(targetroot)
-    val deps = Dependencies.resolveDependencies(config.dependencies.map(_.repr))
+    val resolver = Dependencies.resolver(config.repositories)
+    val deps = resolver.resolveDependencies(config.dependencies.map(_.repr))
     val sourceroot = index.workingDirectory
     if (!Files.isDirectory(sourceroot)) {
       throw new NoSuchFileException(sourceroot.toString)
@@ -186,9 +188,9 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     }
 
     val compileAttempts = ListBuffer.empty[Try[Unit]]
-    compileAttempts += compileJavaFiles(tmp, deps, config, javaFiles)
-    compileAttempts += compileScalaFiles(deps, scalaFiles, tmp)
-    compileAttempts += compileKotlinFiles(deps, config, kotlinFiles)
+    compileAttempts += compileJavaFiles(tmp, deps, resolver, config, javaFiles)
+    compileAttempts += compileScalaFiles(deps, resolver, scalaFiles, tmp)
+    compileAttempts += compileKotlinFiles(deps, resolver, config, kotlinFiles)
     val errors = compileAttempts.collect { case Failure(exception) =>
       exception
     }
@@ -223,6 +225,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
   private def compileKotlinFiles(
       deps: Dependencies,
+      resolver: DependenciesResolver,
       config: Config,
       allKotlinFiles: List[Path]
   ): Try[Unit] = {
@@ -231,7 +234,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     val filesPaths = allKotlinFiles.map(_.toString)
 
     val plugin =
-      Dependencies
+      resolver
         .resolveDependencies(
           List(
             s"com.sourcegraph:semanticdb-kotlinc:${BuildInfo.semanticdbKotlincVersion}"
@@ -243,7 +246,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
     val self = config.dependencies.head
     val commonKotlinFiles: List[Path] =
-      Dependencies
+      resolver
         .kotlinMPPCommon(self.groupId, self.artifactId, self.version) match {
         case Some(common) =>
           val outdir = Files.createTempDirectory("scipjava-kotlin")
@@ -348,12 +351,13 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
   private def compileScalaFiles(
       deps: Dependencies,
+      resolver: DependenciesResolver,
       allScalaFiles: List[Path],
       tmp: Path
   ): Try[Unit] =
     Try {
       if (deps.dependencies.nonEmpty && allScalaFiles.nonEmpty)
-        withScalaPresentationCompiler(deps, tmp) { compiler =>
+        withScalaPresentationCompiler(deps, resolver, tmp) { compiler =>
           allScalaFiles.foreach { path =>
             try compileScalaFile(compiler, path)
             catch {
@@ -395,9 +399,11 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     )
   }
 
-  private def withScalaPresentationCompiler[T](deps: Dependencies, tmp: Path)(
-      fn: PresentationCompiler => T
-  ): T = {
+  private def withScalaPresentationCompiler[T](
+      deps: Dependencies,
+      resolver: DependenciesResolver,
+      tmp: Path
+  )(fn: PresentationCompiler => T): T = {
     val scalaVersion = deps
       .classpath
       .iterator
@@ -410,7 +416,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
             s"\n\nTo fix this, consider adding 'org.scala-lang:scala-library:${BuildInfo.scalaVersion}' to the list of dependencies."
         )
       }
-    val mtags = Dependencies.resolveDependencies(
+    val mtags = resolver.resolveDependencies(
       List(s"org.scalameta:mtags_${scalaVersion}:${BuildInfo.mtagsVersion}")
     )
     val scalaLibrary = mtags
@@ -476,6 +482,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   private def compileJavaFiles(
       tmp: Path,
       deps: Dependencies,
+      resolver: DependenciesResolver,
       config: Config,
       allJavaFiles: List[Path]
   ): Try[Unit] = {
@@ -773,6 +780,9 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       reportWarningOnEmptyIndex: Boolean = true,
       javaHome: Option[String] = None,
       dependencies: List[Dependency] = Nil,
+      // If repositories aren't provided at all, use all the defaults
+      // if repositories are set, we only use the ones provided explicitly
+      repositories: Option[List[String]] = None,
       sourceFiles: List[String] = Nil,
       classpath: List[String] = Nil,
       bootclasspath: List[String] = Nil,

@@ -17,6 +17,7 @@ import moped.annotations.Description
 import moped.annotations.Hidden
 import moped.cli.Command
 import moped.cli.CommandParser
+import moped.annotations.Repeated
 
 final case class IndexDependencyCommand(
     @DeprecatedName("target", "Use --output instead", "0.6.10") output: Path =
@@ -24,6 +25,8 @@ final case class IndexDependencyCommand(
     index: IndexCommand = IndexCommand(),
     @Hidden
     snapshotCommand: SnapshotCommand = SnapshotCommand(),
+    @Repeated
+    repositories: Option[List[String]] = None,
     dependency: String = "",
     provided: List[String] = Nil,
     @Description(
@@ -42,11 +45,12 @@ final case class IndexDependencyCommand(
       absoluteTarget
   private val snapshotTarget = absoluteTarget
   def run(): Int = {
+    val resolver = Dependencies.resolver(repositories)
     if (dependency == "") {
       app.reporter.error("dependency can't be empty")
       1
     } else {
-      val deps = Dependencies
+      val deps = resolver
         .resolveDependencies(dependency :: provided, transitive = false)
       deps.sources.headOption match {
         case None =>
@@ -68,7 +72,7 @@ final case class IndexDependencyCommand(
                     )
                   1
                 case Some(jvmVersion) =>
-                  val exit = indexJar(jvmVersion)
+                  val exit = indexJar(jvmVersion, repositories)
                   if (exit == 0 && snapshot) {
                     try {
                       snapshotCommand
@@ -99,9 +103,21 @@ final case class IndexDependencyCommand(
       .map(JavaVersion.roundToNearestStableRelease(_))
   }
 
-  private def indexJar(jvmVersion: Int): Int = {
-    val config =
-      s"""{"kind":"maven","jvm":"$jvmVersion","dependencies":["$dependency"]}"""
+  private def indexJar(
+      jvmVersion: Int,
+      repositories: Option[List[String]]
+  ): Int = {
+    val configJson = ujson.Obj(
+      "kind" -> ujson.Str("maven"),
+      "jvm" -> ujson.Str(jvmVersion.toString),
+      "dependencies" -> ujson.Arr(ujson.Str(dependency))
+    )
+
+    repositories.foreach { repos =>
+      configJson("repositories") = ujson.Arr(repos.map(ujson.Str): _*)
+    }
+
+    val config = configJson.render()
     Files.createDirectories(indexTarget)
     Files.write(
       indexTarget.resolve("lsif-java.json"),
