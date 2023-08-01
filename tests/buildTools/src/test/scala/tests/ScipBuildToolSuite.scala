@@ -23,6 +23,49 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
          |""".stripMargin
   )
 
+  checkBuild(
+    "remove-all-repositories",
+    """|/lsif-java.json
+       |{"dependencies": ["junit:junit:4.13.1"], "repositories": []}
+       |""".stripMargin,
+    expectedError = Some(
+      all(
+        hasMention("Error downloading"),
+        doesntMention("repo1.maven.org"),
+        doesntMention("jitpack")
+      )
+    )
+  )
+
+  checkBuild(
+    "only-maven-central",
+    """|/lsif-java.json
+       |{"dependencies": ["junit-bla-bla-bla:junit:4.13.1"], "repositories": ["central"]}
+       |""".stripMargin,
+    expectedError = Some(
+      all(
+        hasMention("not found"),
+        hasMention("repo1.maven.org"),
+        doesntMention("jitpack")
+      )
+    )
+  )
+
+  checkBuild(
+    "override-repositories",
+    """|/lsif-java.json
+       |{"dependencies": ["junit:junit:4.13.1"], "repositories": ["http://localhost"]}
+       |""".stripMargin,
+    expectedError = Some(
+      all(
+        doesntMention("repo1.maven.org"),
+        doesntMention("jitpack"),
+        hasMention("localhost"),
+        hasMention("not found:")
+      )
+    )
+  )
+
   case class ScalaCombination(
       binaryVersion: String,
       fullVersion: String,
@@ -57,4 +100,22 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
             |""".stripMargin
     )
   }
+
+  private def hasMention(name: String) =
+    (out: String) => {
+      assert(out.contains(name), s"Expected output to mention [$name]")
+    }
+
+  private def doesntMention(name: String) =
+    (out: String) =>
+      assert(!out.contains(name), s"Expected output to not mention [$name]")
+
+  private def all(errorAsserts: String => Unit*) =
+    errorAsserts.reduce((a, b) =>
+      str => {
+        a(str);
+        b(str)
+      }
+    )
+
 }
