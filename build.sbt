@@ -250,7 +250,7 @@ lazy val cli = project
       List(
         "io.get-coursier" %% "coursier" % V.coursier,
         "org.scalameta" % "mtags-interfaces" % V.metals,
-        "org.scala-lang.modules" %% "scala-xml" % "1.3.0",
+        "org.scala-lang.modules" %% "scala-xml" % "1.3.1",
         "com.lihaoyi" %% "requests" % V.requests,
         "org.scalameta" %% "moped" % V.moped,
         "org.scalameta" %% "ascii-graphs" % "0.1.2",
