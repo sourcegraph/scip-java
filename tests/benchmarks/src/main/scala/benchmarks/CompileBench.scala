@@ -33,7 +33,7 @@ class CompileBench {
   @Setup()
   def setup(): Unit = {
     tmp = Files.createTempDirectory("benchmarks")
-    deps = Dependencies.resolveDependencies(List(libs(lib)))
+    deps = Dependencies.resolver(None).resolveDependencies(List(libs(lib)))
     compiler =
       new TestCompiler(
         deps.classpathSyntax,
