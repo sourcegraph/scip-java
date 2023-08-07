@@ -639,7 +639,3 @@ dumpScipJavaVersion := {
 
   IO.write((ThisBuild / baseDirectory).value / "VERSION", versionValue)
 }
-
-//lazy val cachedPackCli = taskKey[File]("")
-
-//cachedPackCli := {}

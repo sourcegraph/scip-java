@@ -24,11 +24,7 @@ case class PasswordProtectedServer(user: String, pwd: String) {
         .asScala
         .toMap
         .flatMap { case (k, v) =>
-          v.asScala
-            .headOption
-            .map { h =>
-              k -> h // TODO: make safer
-            }
+          v.asScala.headOption.map(k -> _)
         }
 
       val url = t.getRequestURI()
