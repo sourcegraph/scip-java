@@ -29,10 +29,13 @@ case class Dependencies(
 
 object Dependencies {
   val empty = Dependencies(Nil, Fetch.Result(), Fetch.Result())
+
+  private val cachePolicies = List(CachePolicy.LocalOnly, CachePolicy.Update)
   private val cache: FileCache[Task] = FileCache[Task]()
-    .withCachePolicies(List(CachePolicy.LocalOnly, CachePolicy.Update))
+    .withCachePolicies(cachePolicies)
     .withTtl(Duration.Inf)
     .withChecksums(Nil)
+
   private val defaultExtraRepositories = List[Repository](
     Repositories.google,
     Repositories.clojars,
@@ -78,10 +81,17 @@ object Dependencies {
     val deps = dependencies.map(parseDependency)
     val provided = deps.flatMap(d => resolveProvidedDeps(d))
     def nonTransitiveDeps = deps.map(_.withTransitive(false))
-    val fetch = Fetch[Task](Cache.default)
-      .addDependencies(deps: _*)
-      .addDependencies(provided: _*)
-      .addRepositories(defaultExtraRepositories: _*)
+
+    val fetch = {
+      val fetch0 = Fetch[Task](cache)
+        .addDependencies(deps: _*)
+        .addDependencies(provided: _*)
+
+      if (!sys.env.contains("COURSIER_REPOSITORIES")) {
+        fetch0.addRepositories(defaultExtraRepositories: _*)
+      } else
+        fetch0
+    }
 
     val classpath = fetch.runResult()
     val sources = fetch
@@ -101,11 +111,16 @@ object Dependencies {
   }
 
   def resolveProvidedDeps(dep: Dependency): Seq[Dependency] = {
-    val artifacts = Resolve[Task](Cache.default)
-      .addDependencies(dep)
-      .addRepositories(defaultExtraRepositories: _*)
-      .run()
-      .artifacts()
+    val resolve = {
+      val resolve0 = Resolve[Task](cache).addDependencies(dep)
+      if (!sys.env.contains("COURSIER_REPOSITORIES")) {
+        resolve0.addRepositories(defaultExtraRepositories: _*)
+      } else
+        resolve0
+    }
+
+    val artifacts = resolve.run().artifacts()
+
     for {
       artifact <- artifacts
       metadata <- artifact.extra.get("metadata").toList
