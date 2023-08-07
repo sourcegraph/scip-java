@@ -4,6 +4,71 @@ import com.sourcegraph.scip_java.{BuildInfo => V}
 
 class ScipBuildToolSuite extends BaseBuildToolSuite {
   override def tags = List(SkipWindows)
+
+  test("COURSIER_CREDENTIALS and COURSIER_REPOSITORIES are respected") {
+
+    val cli = sys.env.getOrElse("SCIP_JAVA_CLI", fail("wwaaaa"))
+
+    val Username = "hello"
+    val Password = "world"
+
+    val (requests, _) = PasswordProtectedServer(Username, Password).runWith {
+      run =>
+        val env = Map(
+          "COURSIER_REPOSITORIES" -> run.address.toString(),
+          "COURSIER_CREDENTIALS" -> s"localhost $Username:$Password"
+        )
+
+        val tmp = os.temp.dir(prefix = "scip-java")
+        os.write(
+          tmp / "lsif-java.json",
+          // We use non-existent library to make sure caches are never used
+          s"""   {"dependencies": ["bla.bla.nonexistent-library:junit:4.13.1"]}  """
+            .trim
+        )
+        os.write(
+          tmp / "foo" / "Example.java",
+          "package foo;\npublic class Example{}",
+          createFolders = true
+        )
+
+        val result = os
+          .proc(cli, "index", "--build-tool=scip")
+          .call(cwd = tmp, env = env, check = false)
+
+        os.remove.all(tmp)
+
+        assertNotEquals(result.exitCode, 0)
+    }
+
+    assert(
+      requests.nonEmpty,
+      "No requests were sent to the local server - suggesting that COURSIER_REPOSITORIES is not respected by ScipBuildTool"
+    )
+
+    assert(
+      clue(requests)
+        .filter { r =>
+          r.simpleHeaders.contains("Authorization")
+        }
+        .nonEmpty,
+      "No requests with Authorization header were sent to local server - suggesting that COURSIER_CREDENTIALS is not respected"
+    )
+
+    requests.flatMap(_.simpleHeaders.get("Authorization")).distinct match {
+      case List(value) =>
+        assertEquals(clue(value), "Basic " + base64("hello:world"))
+      case other =>
+        fail(
+          s"Multiple credential variations were passed to local server: $other"
+        )
+    }
+
+  }
+
+  private def base64(str: String) =
+    new String(java.util.Base64.getEncoder().encode(str.getBytes))
+
   checkBuild(
     "basic",
     """|/lsif-java.json

@@ -11,7 +11,8 @@ lazy val V =
     val protobuf = "3.15.6"
     val protoc =
       "3.17.3" // the oldest protoc version with Apple M1 support, see https://github.com/scalapb/ScalaPB/issues/1024#issuecomment-860126568
-    val coursier = "2.0.8"
+    val coursier = "2.1.5"
+    val scalaXml = "2.1.0"
     val bsp = "2.0.0-M13"
     val moped = "0.1.11"
     val gradle = "7.0"
@@ -250,7 +251,7 @@ lazy val cli = project
       List(
         "io.get-coursier" %% "coursier" % V.coursier,
         "org.scalameta" % "mtags-interfaces" % V.metals,
-        "org.scala-lang.modules" %% "scala-xml" % "1.3.0",
+        "org.scala-lang.modules" %% "scala-xml" % V.scalaXml,
         "com.lihaoyi" %% "requests" % V.requests,
         "org.scalameta" %% "moped" % V.moped,
         "org.scalameta" %% "ascii-graphs" % "0.1.2",
@@ -502,7 +503,12 @@ lazy val buildTools = project
         s"-Dsemanticdb.pluginpath=${(javacPlugin / Compile / Keys.`package`).value}",
         s"-Dsemanticdb.sourceroot=${(ThisBuild / baseDirectory).value}",
         s"-Dsemanticdb.targetroot=${(agent / Compile / target).value / "semanticdb-targetroot"}"
-      )
+      ),
+    Test / envVars ++=
+      Map(
+        "SCIP_JAVA_CLI" -> ((cli / pack).value / "bin" / "scip-java").toString
+      ),
+    Test / fork := true
   )
   .dependsOn(agent, unit)
 
