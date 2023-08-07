@@ -6,11 +6,6 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
   override def tags = List(SkipWindows)
 
   test("COURSIER_CREDENTIALS and COURSIER_REPOSITORIES are respected") {
-    import java.net.http._
-    val client = HttpClient
-      .newBuilder()
-      .connectTimeout(java.time.Duration.ofSeconds(2))
-      .build();
 
     val cli = sys.env.getOrElse("SCIP_JAVA_CLI", fail("wwaaaa"))
 
