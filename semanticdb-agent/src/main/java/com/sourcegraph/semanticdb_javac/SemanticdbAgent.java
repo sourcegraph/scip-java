@@ -24,20 +24,20 @@ public class SemanticdbAgent {
 
   public static void premain(String agentArgs, Instrumentation inst) {
     // NOTE(olafur): Uncoment below if you want see all the loaded classes.
-    //    PrintStream logger = newLogger();
-    //    inst.addTransformer(
-    //        new ClassFileTransformer() {
-    //          @Override
-    //          public byte[] transform(
-    //              ClassLoader loader,
-    //              String className,
-    //              Class<?> classBeingRedefined,
-    //              ProtectionDomain protectionDomain,
-    //              byte[] classfileBuffer) {
-    //            logger.println(className);
-    //            return classfileBuffer;
-    //          }
-    //        });
+    // PrintStream logger = newLogger();
+    // inst.addTransformer(
+    // new ClassFileTransformer() {
+    // @Override
+    // public byte[] transform(
+    // ClassLoader loader,
+    // String className,
+    // Class<?> classBeingRedefined,
+    // ProtectionDomain protectionDomain,
+    // byte[] classfileBuffer) {
+    // logger.println(className);
+    // return classfileBuffer;
+    // }
+    // });
     new AgentBuilder.Default()
         .disableClassFormatChanges()
         .type(
@@ -156,6 +156,7 @@ public class SemanticdbAgent {
       }
 
       boolean isProcessorpathUpdated = false;
+      boolean semanticdbAlreadyAdded = false;
       String previousOption = "";
 
       ArrayList<String> newOptions = new ArrayList<>();
@@ -172,6 +173,10 @@ public class SemanticdbAgent {
           case "-Xlint":
             break;
           default:
+            if (option.startsWith("-Xplugin:semanticdb")) {
+              semanticdbAlreadyAdded = true;
+              break;
+            }
             if (option.startsWith("-Xplugin:ErrorProne")) {
               break;
             }
@@ -180,33 +185,36 @@ public class SemanticdbAgent {
         }
         previousOption = option;
       }
-      if (!isProcessorpathUpdated) {
-        newOptions.add("-classpath");
-        newOptions.add(PLUGINPATH);
-      }
-      newOptions.add(
-          String.format(
-              "-Xplugin:semanticdb -sourceroot:%s -targetroot:%s", SOURCEROOT, TARGETROOT));
+      if (!semanticdbAlreadyAdded) {
 
-      if (DEBUGPATH != null) {
-        ArrayList<String> debuglines = new ArrayList<>();
-        debuglines.add("============== Java Home: " + System.getProperty("java.home"));
-        debuglines.add("============== Old Options");
-        debuglines.addAll(arguments);
-        debuglines.add("============== New Options");
-        debuglines.addAll(newOptions);
-
-        try {
-          Files.write(
-              Paths.get(DEBUGPATH),
-              debuglines,
-              StandardOpenOption.CREATE,
-              StandardOpenOption.APPEND);
-        } catch (IOException e) {
+        if (!isProcessorpathUpdated) {
+          newOptions.add("-classpath");
+          newOptions.add(PLUGINPATH);
         }
-      }
+        newOptions.add(
+            String.format(
+                "-Xplugin:semanticdb -sourceroot:%s -targetroot:%s", SOURCEROOT, TARGETROOT));
 
-      arguments = newOptions;
+        if (DEBUGPATH != null) {
+          ArrayList<String> debuglines = new ArrayList<>();
+          debuglines.add("============== Java Home: " + System.getProperty("java.home"));
+          debuglines.add("============== Old Options");
+          debuglines.addAll(arguments);
+          debuglines.add("============== New Options");
+          debuglines.addAll(newOptions);
+
+          try {
+            Files.write(
+                Paths.get(DEBUGPATH),
+                debuglines,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.APPEND);
+          } catch (IOException e) {
+          }
+        }
+
+        arguments = newOptions;
+      }
     }
   }
 }

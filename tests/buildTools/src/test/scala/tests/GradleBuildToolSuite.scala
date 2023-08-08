@@ -158,6 +158,44 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
   }
 
   checkGradleBuild(
+    "protobuf-generator",
+    """|/build.gradle
+       |plugins {
+       |  id "java"
+       |  id "com.google.protobuf" version "0.9.4"
+       |}
+       |dependencies {
+       |  implementation 'com.google.protobuf:protobuf-javalite:3.8.0'
+       |}
+       |protobuf {
+       |  protoc {
+       |    artifact = 'com.google.protobuf:protoc:3.23.4'
+       |  }
+       |  generateProtoTasks {
+       |    all().configureEach { task ->
+       |      task.builtins {
+       |        java {
+       |          option "lite"
+       |        }
+       |      }
+       |    }
+       |  }
+       |}
+       |/src/main/proto/message.proto
+       |syntax = "proto3";
+       |message SearchRequest {
+       |  string query = 1;
+       |  int32 page_number = 2;
+       |  int32 results_per_page = 3;
+       |}
+       |/src/main/java/Example.java
+       |public class Example {}
+       |""".stripMargin,
+    expectedSemanticdbFiles = 2,
+    gradleVersions = List(Gradle8, Gradle7, Gradle67)
+  )
+
+  checkGradleBuild(
     "explicit",
     """|/build.gradle
        |apply plugin: 'java'
