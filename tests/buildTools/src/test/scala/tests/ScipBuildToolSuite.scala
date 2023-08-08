@@ -44,7 +44,7 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
     )
   }
 
-  test("COURSIER_CREDENTIALS and COURSIER_REPOSITORIES are respected") {
+  test("respect-coursier-credentials-and-repositories") {
 
     val Username = "hello"
     val Password = "world"
