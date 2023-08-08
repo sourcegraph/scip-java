@@ -154,7 +154,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
             task.getOptions().setFork(true)
             task.getOptions().setIncremental(false)
 
-            if (compilerPluginAdded)
+            if (compilerPluginAdded) {
               task
                 .getOptions()
                 .getCompilerArgs()
@@ -169,21 +169,21 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                     s"-Xplugin:semanticdb -targetroot:$targetRoot -sourceroot:$sourceRoot"
                   ).asJava
                 )
-            else
-              agentJar.foreach { agentpath =>
-                javacPluginJar.foreach { pluginpath =>
-                  val jvmArgs = task.getOptions.getForkOptions.getJvmArgs
+            }
+            agentJar.foreach { agentpath =>
+              javacPluginJar.foreach { pluginpath =>
+                val jvmArgs = task.getOptions.getForkOptions.getJvmArgs
 
-                  jvmArgs.addAll(
-                    List(
-                      s"-javaagent:$agentpath",
-                      s"-Dsemanticdb.pluginpath=$pluginpath",
-                      s"-Dsemanticdb.sourceroot=$sourceRoot",
-                      s"-Dsemanticdb.targetroot=$targetRoot"
-                    ).asJava
-                  )
-                }
+                jvmArgs.addAll(
+                  List(
+                    s"-javaagent:$agentpath",
+                    s"-Dsemanticdb.pluginpath=$pluginpath",
+                    s"-Dsemanticdb.sourceroot=$sourceRoot",
+                    s"-Dsemanticdb.targetroot=$targetRoot"
+                  ).asJava
+                )
               }
+            }
 
           }
       }
