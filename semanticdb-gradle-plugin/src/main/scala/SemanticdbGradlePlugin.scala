@@ -170,6 +170,17 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                   ).asJava
                 )
             }
+
+            /**
+             * In some yet to be understood cases we see that compiler plugin
+             * can be added successfully, but the correct flags are still not
+             * propagated.
+             *
+             * To work around it, we enable the agent unconditionally, and then
+             * if necessary deduplicate the arguments.
+             *
+             * TODO: figure out why this is necessary
+             */
             agentJar.foreach { agentpath =>
               javacPluginJar.foreach { pluginpath =>
                 val jvmArgs = task.getOptions.getForkOptions.getJvmArgs
