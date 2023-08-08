@@ -636,7 +636,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
           indexChannel = jvmChannel
             .getOrElse(JvmChannel.url(JvmIndex.defaultIndexUrl))
         )
-        .withArchitecture(jvmArchitecture)
+        .withArchitecture(jvmArchitecture(jvmVersion))
     )
 
     val javaExecutable = Await.result(
@@ -655,11 +655,17 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
   }
 
-  private def jvmArchitecture: String =
-    if (scala.util.Properties.isMac && sys.props("os.arch") == "aarch64")
+  private def jvmArchitecture(jvm: String): String =
+    if (
+      // Hack only for local development on ARM64 Mac OS X
+      // won't affect any other system
+      scala.util.Properties.isMac && sys.props("os.arch") == "aarch64" &&
+      (jvm.startsWith("8") || jvm.startsWith("1.8"))
+    )
       "amd64"
     else
       JvmIndex.defaultArchitecture()
+
   def defaultCoursierJVMArchitecture: String =
     sys.props("os.arch") match {
       case "x86_64" =>
