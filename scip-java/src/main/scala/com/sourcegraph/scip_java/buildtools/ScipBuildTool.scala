@@ -22,6 +22,9 @@ import java.util.jar.JarFile
 
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.ListBuffer
+import scala.concurrent.Await
+import scala.concurrent.ExecutionContext
+import scala.concurrent.duration.Duration
 import scala.jdk.CollectionConverters._
 import scala.language.postfixOps
 import scala.util.Failure
@@ -40,6 +43,7 @@ import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
 import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
 import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocuments
+import coursier.jvm.JvmIndex
 import moped.json.DecodingContext
 import moped.json.ErrorResult
 import moped.json.JsonCodec
@@ -606,22 +610,48 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   }
 
   private def javacPathViaCoursier(jvmVersion: String, tmp: Path): Path = {
-    val coursier = Embedded.coursier(tmp)
-    Paths.get(
-      os.proc(
-          coursier.toString,
-          "java-home",
-          "--jvm",
-          jvmVersion,
-          "--architecture",
-          jvmArchitecture
+    import _root_.coursier.jvm._
+
+    val jvmChannel = index
+      .app
+      .env
+      .environmentVariables
+      .get("COURSIER_JVM_INDEX")
+      .map { idx =>
+        JvmChannel
+          .parse(idx)
+          .fold(
+            msg =>
+              throw new RuntimeException(
+                s"Malformed COURSIER_JVM_INDEX environment variable variable: $msg"
+              ),
+            identity
+          )
+      }
+
+    val home = JavaHome().withCache(
+      JvmCache()
+        .withIndexChannel(
+          repositories = Seq.empty,
+          indexChannel = jvmChannel
+            .getOrElse(JvmChannel.url(JvmIndex.defaultIndexUrl))
         )
-        .call()
-        .out
-        .trim(),
-      "bin",
-      "javac"
+        .withArchitecture(jvmArchitecture)
     )
+
+    val javaExecutable = Await.result(
+      home.javaBin(jvmVersion).value(ExecutionContext.global),
+      Duration.Inf
+    )
+
+    javaExecutable
+      .getParent()
+      .resolve {
+        if (scala.util.Properties.isWin)
+          "javac.exe"
+        else
+          "javac"
+      }
 
   }
 
@@ -629,7 +659,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     if (scala.util.Properties.isMac && sys.props("os.arch") == "aarch64")
       "amd64"
     else
-      defaultCoursierJVMArchitecture
+      JvmIndex.defaultArchitecture()
   def defaultCoursierJVMArchitecture: String =
     sys.props("os.arch") match {
       case "x86_64" =>

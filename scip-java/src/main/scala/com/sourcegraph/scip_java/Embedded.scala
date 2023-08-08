@@ -18,11 +18,6 @@ object Embedded {
     copyFile(tmpDir, "gradle-plugin.jar")
 
   def agentJar(tmpDir: Path): Path = copyFile(tmpDir, "semanticdb-agent.jar")
-  def coursier(tmpDir: Path): Path = {
-    val result = copyFile(tmpDir, "scip-java/coursier")
-    result.toFile().setExecutable(true)
-    result
-  }
 
   private def javacErrorpath(tmp: Path) = tmp.resolve("errorpath.txt")
 
