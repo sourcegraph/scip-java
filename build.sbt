@@ -250,6 +250,7 @@ lazy val cli = project
     libraryDependencies ++=
       List(
         "io.get-coursier" %% "coursier" % V.coursier,
+        "io.get-coursier" %% "coursier-jvm" % V.coursier,
         "org.scalameta" % "mtags-interfaces" % V.metals,
         "org.scala-lang.modules" %% "scala-xml" % V.scalaXml,
         "com.lihaoyi" %% "requests" % V.requests,

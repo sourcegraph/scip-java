@@ -1,45 +1,76 @@
 package tests
 
 import com.sourcegraph.scip_java.{BuildInfo => V}
+import moped.testkit.FileLayout
 
 class ScipBuildToolSuite extends BaseBuildToolSuite {
   override def tags = List(SkipWindows)
 
-  test("COURSIER_CREDENTIALS and COURSIER_REPOSITORIES are respected") {
+  test("respect-coursier-jvm-index") {
 
-    val cli = sys.env.getOrElse("SCIP_JAVA_CLI", fail("wwaaaa"))
+    val (requests, _) = TracingServer.run { run =>
+      val env = Map(
+        "COURSIER_JVM_INDEX" -> s"${run.address.toString}/index.json"
+      )
+
+      val tmp = FileLayout
+        .fromString("""
+                      |/lsif-java.json
+                      |{"dependencies": ["junit:junit:4.13.1"],"jvm": "17"}
+                      |/src/main/java/Example.java
+                      |package foo;\npublic class Example{}
+        """.stripMargin)
+
+      val result = os
+        .proc(scipJavaCli(), "index", "--build-tool=scip")
+        .call(cwd = os.Path(tmp), env = env, check = false)
+
+      assertNotEquals(result.exitCode, 0)
+    }
+
+    assert(
+      requests.nonEmpty,
+      "No requests were sent to the local server - suggesting that COURSIER_JVM_INDEX is not respected by ScipBuildTool"
+    )
+
+    assert(
+      clue(requests)
+        .collectFirst {
+          case req if req.url.getPath() == "/index.json" =>
+            req
+        }
+        .nonEmpty,
+      "No requests were sent to the local server - suggesting that COURSIER_JVM_INDEX is not respected by ScipBuildTool"
+    )
+  }
+
+  test("respect-coursier-credentials-and-repositories") {
 
     val Username = "hello"
     val Password = "world"
 
-    val (requests, _) = PasswordProtectedServer(Username, Password).runWith {
-      run =>
+    val (requests, _) =
+      TracingServer.runWithAuth(Username, Password) { run =>
         val env = Map(
           "COURSIER_REPOSITORIES" -> run.address.toString(),
           "COURSIER_CREDENTIALS" -> s"localhost $Username:$Password"
         )
 
-        val tmp = os.temp.dir(prefix = "scip-java")
-        os.write(
-          tmp / "lsif-java.json",
-          // We use non-existent library to make sure caches are never used
-          s"""   {"dependencies": ["bla.bla.nonexistent-library:junit:4.13.1"]}  """
-            .trim
-        )
-        os.write(
-          tmp / "foo" / "Example.java",
-          "package foo;\npublic class Example{}",
-          createFolders = true
+        val tmp = FileLayout.fromString(
+          """
+            |/lsif-java.json
+            |{"dependencies": ["bla.bla.nonexistent-library:junit:4.13.1"]}
+            |/src/main/java/Example.java
+            |package foo;\npublic class Example{}
+        """.stripMargin
         )
 
         val result = os
-          .proc(cli, "index", "--build-tool=scip")
-          .call(cwd = tmp, env = env, check = false)
-
-        os.remove.all(tmp)
+          .proc(scipJavaCli(), "index", "--build-tool=scip")
+          .call(cwd = os.Path(tmp), env = env, check = false)
 
         assertNotEquals(result.exitCode, 0)
-    }
+      }
 
     assert(
       requests.nonEmpty,
@@ -68,6 +99,16 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
 
   private def base64(str: String) =
     new String(java.util.Base64.getEncoder().encode(str.getBytes))
+
+  private def scipJavaCli() =
+    sys
+      .env
+      .getOrElse(
+        "SCIP_JAVA_CLI",
+        fail(
+          "SCIP_JAVA_CLI env variable is not set, perhaps the build is misconfigured"
+        )
+      )
 
   checkBuild(
     "basic",
