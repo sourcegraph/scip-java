@@ -50,15 +50,10 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //              relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
 //              relationship is_implementation semanticdb maven jdk 11 java/lang/Cloneable#
 //              relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
-//              relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
-//              relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
 //              relationship is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#
 //              relationship is_implementation semanticdb maven jdk 11 java/util/AbstractList#
 //              relationship is_implementation semanticdb maven jdk 11 java/util/ArrayList#
 //              relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//              relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//              relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//              relationship is_implementation semanticdb maven jdk 11 java/util/List#
 //              relationship is_implementation semanticdb maven jdk 11 java/util/List#
 //              relationship is_implementation semanticdb maven jdk 11 java/util/RandomAccess#
 //                      ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
@@ -674,7 +669,6 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                      documentation  A ListIterator implementation that calls through to the parent list's methods for modification.\n Some implementations may modify the list data directly instead of calling into the parent\n list's methods. We need the implementation to call the parent methods so that the proper\n notifications are done.\n
 //                      relationship is_implementation semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#
 //                      relationship is_implementation semanticdb maven jdk 11 java/util/Iterator#
-//                      relationship is_implementation semanticdb maven jdk 11 java/util/Iterator#
 //                      relationship is_implementation semanticdb maven jdk 11 java/util/ListIterator#
 //                              ^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#
 //                                             ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#
@@ -861,10 +855,8 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                             documentation ```java\nprivate static class SubList\n```
 //                             documentation  A SubList implementation from Android's AbstractList class. It's copied here to make sure the\n implementation doesn't change, since some implementations, like the Java 1.8 ArrayList.SubList\n class, modify the list data directly instead of calling into the parent list's methods. We need\n the implementation to call the parent methods so that the proper notifications are done.\n
 //                             relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
-//                             relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
 //                             relationship is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#
 //                             relationship is_implementation semanticdb maven jdk 11 java/util/AbstractList#
-//                             relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
 //                             relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
 //                             relationship is_implementation semanticdb maven jdk 11 java/util/List#
 //                                     ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/AbstractList#

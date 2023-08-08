@@ -138,33 +138,33 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   public void getItemOffsets(Rect outRect, View view, RecyclerView parent, State state) {
 //            ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyItemSpacingDecorator#getItemOffsets().
 //                           documentation ```java\n@Override\npublic void getItemOffsets(unresolved_type outRect, unresolved_type view, unresolved_type parent, unresolved_type state)\n```
-//                           ^^^^ reference semanticdb maven . . _root_/
+//                           ^^^^ reference semanticdb maven . . Rect#
 //                                ^^^^^^^ definition local 2
 //                                        documentation ```java\nunresolved_type outRect\n```
-//                                         ^^^^ reference semanticdb maven . . _root_/
+//                                         ^^^^ reference semanticdb maven . . View#
 //                                              ^^^^ definition local 3
 //                                                   documentation ```java\nunresolved_type view\n```
-//                                                    ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                                    ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                                                 ^^^^^^ definition local 4
 //                                                                        documentation ```java\nunresolved_type parent\n```
-//                                                                         ^^^^^ reference semanticdb maven . . _root_/
+//                                                                         ^^^^^ reference semanticdb maven . . State#
 //                                                                               ^^^^^ definition local 5
 //                                                                                     documentation ```java\nunresolved_type state\n```
     // Zero everything out for the common case
     outRect.setEmpty();
 //  ^^^^^^^ reference local 2
-//          ^^^^^^^^ reference semanticdb maven . . setEmpty#
+//          ^^^^^^^^ reference semanticdb maven . . Rect#setEmpty#
 
     int position = parent.getChildAdapterPosition(view);
 //      ^^^^^^^^ definition local 6
 //               documentation ```java\nint position\n```
 //                 ^^^^^^ reference local 4
-//                        ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . getChildAdapterPosition#
+//                        ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#getChildAdapterPosition#
 //                                                ^^^^ reference local 3
     if (position == RecyclerView.NO_POSITION) {
 //      ^^^^^^^^ reference local 6
-//                  ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
-//                               ^^^^^^^^^^^ reference semanticdb maven . . NO_POSITION#
+//                  ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
+//                               ^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#NO_POSITION#
       // View is not shown
       return;
     }
@@ -175,7 +175,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //                             ^^^^^^ definition local 7
 //                                    documentation ```java\nunresolved_type layout\n```
 //                                      ^^^^^^ reference local 4
-//                                             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . getLayoutManager#
+//                                             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#getLayoutManager#
     calculatePositionDetails(parent, position, layout);
 //  ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyItemSpacingDecorator#calculatePositionDetails().
 //                           ^^^^^^ reference local 4
@@ -237,22 +237,22 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyItemSpacingDecorator#pxBetweenItems.
     outRect.right = right ? padding : 0;
 //  ^^^^^^^ reference local 2
-//          ^^^^^ reference semanticdb maven . . right#
+//          ^^^^^ reference semanticdb maven . . Rect#right#
 //                  ^^^^^ reference local 9
 //                          ^^^^^^^ reference local 14
     outRect.left = left ? padding : 0;
 //  ^^^^^^^ reference local 2
-//          ^^^^ reference semanticdb maven . . left#
+//          ^^^^ reference semanticdb maven . . Rect#left#
 //                 ^^^^ reference local 8
 //                        ^^^^^^^ reference local 14
     outRect.top = top ? padding : 0;
 //  ^^^^^^^ reference local 2
-//          ^^^ reference semanticdb maven . . top#
+//          ^^^ reference semanticdb maven . . Rect#top#
 //                ^^^ reference local 10
 //                      ^^^^^^^ reference local 14
     outRect.bottom = bottom ? padding : 0;
 //  ^^^^^^^ reference local 2
-//          ^^^^^^ reference semanticdb maven . . bottom#
+//          ^^^^^^ reference semanticdb maven . . Rect#bottom#
 //                   ^^^^^^ reference local 11
 //                            ^^^^^^^ reference local 14
   }
@@ -260,20 +260,20 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   private void calculatePositionDetails(RecyclerView parent, int position, LayoutManager layout) {
 //             ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyItemSpacingDecorator#calculatePositionDetails().
 //                                      documentation ```java\nprivate void calculatePositionDetails(unresolved_type parent, int position, unresolved_type layout)\n```
-//                                      ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                      ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                                   ^^^^^^ definition local 15
 //                                                          documentation ```java\nunresolved_type parent\n```
 //                                                               ^^^^^^^^ definition local 16
 //                                                                        documentation ```java\nint position\n```
-//                                                                         ^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                                                         ^^^^^^^^^^^^^ reference semanticdb maven . . LayoutManager#
 //                                                                                       ^^^^^^ definition local 17
 //                                                                                              documentation ```java\nunresolved_type layout\n```
     int itemCount = parent.getAdapter().getItemCount();
 //      ^^^^^^^^^ definition local 18
 //                documentation ```java\nint itemCount\n```
 //                  ^^^^^^ reference local 15
-//                         ^^^^^^^^^^ reference semanticdb maven . . getAdapter#
-//                                      ^^^^^^^^^^^^ reference semanticdb maven . . getAdapter#getItemCount#
+//                         ^^^^^^^^^^ reference semanticdb maven . . RecyclerView#getAdapter#
+//                                      ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#getAdapter#getItemCount#
     firstItem = position == 0;
 //  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyItemSpacingDecorator#firstItem.
 //              ^^^^^^^^ reference local 16
@@ -284,46 +284,46 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
     horizontallyScrolling = layout.canScrollHorizontally();
 //  ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyItemSpacingDecorator#horizontallyScrolling.
 //                          ^^^^^^ reference local 17
-//                                 ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . canScrollHorizontally#
+//                                 ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . LayoutManager#canScrollHorizontally#
     verticallyScrolling = layout.canScrollVertically();
 //  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyItemSpacingDecorator#verticallyScrolling.
 //                        ^^^^^^ reference local 17
-//                               ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . canScrollVertically#
+//                               ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . LayoutManager#canScrollVertically#
     grid = layout instanceof GridLayoutManager;
 //  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyItemSpacingDecorator#grid.
 //         ^^^^^^ reference local 17
-//                           ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                           ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . GridLayoutManager#
 
     if (grid) {
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyItemSpacingDecorator#grid.
       GridLayoutManager grid = (GridLayoutManager) layout;
-//    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . GridLayoutManager#
 //                      ^^^^ definition local 19
 //                           documentation ```java\nunresolved_type grid\n```
-//                              ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                              ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . GridLayoutManager#
 //                                                 ^^^^^^ reference local 17
       final SpanSizeLookup spanSizeLookup = grid.getSpanSizeLookup();
-//          ^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//          ^^^^^^^^^^^^^^ reference semanticdb maven . . SpanSizeLookup#
 //                         ^^^^^^^^^^^^^^ definition local 20
 //                                        documentation ```java\nfinal unresolved_type spanSizeLookup\n```
 //                                          ^^^^ reference local 19
-//                                               ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . getSpanSizeLookup#
+//                                               ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . GridLayoutManager#getSpanSizeLookup#
       int spanSize = spanSizeLookup.getSpanSize(position);
 //        ^^^^^^^^ definition local 21
 //                 documentation ```java\nint spanSize\n```
 //                   ^^^^^^^^^^^^^^ reference local 20
-//                                  ^^^^^^^^^^^ reference semanticdb maven . . getSpanSize#
+//                                  ^^^^^^^^^^^ reference semanticdb maven . . SpanSizeLookup#getSpanSize#
 //                                              ^^^^^^^^ reference local 16
       int spanCount = grid.getSpanCount();
 //        ^^^^^^^^^ definition local 22
 //                  documentation ```java\nint spanCount\n```
 //                    ^^^^ reference local 19
-//                         ^^^^^^^^^^^^ reference semanticdb maven . . getSpanCount#
+//                         ^^^^^^^^^^^^ reference semanticdb maven . . GridLayoutManager#getSpanCount#
       int spanIndex = spanSizeLookup.getSpanIndex(position, spanCount);
 //        ^^^^^^^^^ definition local 23
 //                  documentation ```java\nint spanIndex\n```
 //                    ^^^^^^^^^^^^^^ reference local 20
-//                                   ^^^^^^^^^^^^ reference semanticdb maven . . getSpanIndex#
+//                                   ^^^^^^^^^^^^ reference semanticdb maven . . SpanSizeLookup#getSpanIndex#
 //                                                ^^^^^^^^ reference local 16
 //                                                          ^^^^^^^^^ reference local 22
       isFirstItemInRow = spanIndex == 0;
@@ -355,7 +355,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
   private static boolean shouldReverseLayout(LayoutManager layout, boolean horizontallyScrolling) {
 //                       ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyItemSpacingDecorator#shouldReverseLayout().
 //                                           documentation ```java\nprivate static boolean shouldReverseLayout(unresolved_type layout, boolean horizontallyScrolling)\n```
-//                                           ^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                           ^^^^^^^^^^^^^ reference semanticdb maven . . LayoutManager#
 //                                                         ^^^^^^ definition local 24
 //                                                                documentation ```java\nunresolved_type layout\n```
 //                                                                         ^^^^^^^^^^^^^^^^^^^^^ definition local 25
@@ -365,17 +365,17 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //                        documentation ```java\nboolean reverseLayout\n```
         layout instanceof LinearLayoutManager && ((LinearLayoutManager) layout).getReverseLayout();
 //      ^^^^^^ reference local 24
-//                        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
-//                                                 ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . LinearLayoutManager#
+//                                                 ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . LinearLayoutManager#
 //                                                                      ^^^^^^ reference local 24
-//                                                                              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . getReverseLayout#
+//                                                                              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . LinearLayoutManager#getReverseLayout#
     boolean rtl = layout.getLayoutDirection() == ViewCompat.LAYOUT_DIRECTION_RTL;
 //          ^^^ definition local 27
 //              documentation ```java\nboolean rtl\n```
 //                ^^^^^^ reference local 24
-//                       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . getLayoutDirection#
-//                                               ^^^^^^^^^^ reference semanticdb maven . . _root_/
-//                                                          ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . LAYOUT_DIRECTION_RTL#
+//                       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . LayoutManager#getLayoutDirection#
+//                                               ^^^^^^^^^^ reference semanticdb maven . . ViewCompat#
+//                                                          ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . ViewCompat#LAYOUT_DIRECTION_RTL#
     if (horizontallyScrolling && rtl) {
 //      ^^^^^^^^^^^^^^^^^^^^^ reference local 25
 //                               ^^^ reference local 27
@@ -466,7 +466,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //                                    documentation ```java\nprivate static boolean isInFirstRow(int position, unresolved_type spanSizeLookup, int spanCount)\n```
 //                                        ^^^^^^^^ definition local 28
 //                                                 documentation ```java\nint position\n```
-//                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . SpanSizeLookup#
 //                                                                 ^^^^^^^^^^^^^^ definition local 29
 //                                                                                documentation ```java\nunresolved_type spanSizeLookup\n```
 //                                                                                     ^^^^^^^^^ definition local 30
@@ -483,7 +483,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
       totalSpan += spanSizeLookup.getSpanSize(i);
 //    ^^^^^^^^^ reference local 31
 //                 ^^^^^^^^^^^^^^ reference local 29
-//                                ^^^^^^^^^^^ reference semanticdb maven . . getSpanSize#
+//                                ^^^^^^^^^^^ reference semanticdb maven . . SpanSizeLookup#getSpanSize#
 //                                            ^ reference local 32
       if (totalSpan > spanCount) {
 //        ^^^^^^^^^ reference local 31
@@ -502,7 +502,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
 //                                                documentation ```java\nint position\n```
 //                                                     ^^^^^^^^^ definition local 34
 //                                                               documentation ```java\nint itemCount\n```
-//                                                                ^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                                                ^^^^^^^^^^^^^^ reference semanticdb maven . . SpanSizeLookup#
 //                                                                               ^^^^^^^^^^^^^^ definition local 35
 //                                                                                              documentation ```java\nunresolved_type spanSizeLookup\n```
       int spanCount) {
@@ -521,7 +521,7 @@ public class EpoxyItemSpacingDecorator extends RecyclerView.ItemDecoration {
       totalSpan += spanSizeLookup.getSpanSize(i);
 //    ^^^^^^^^^ reference local 37
 //                 ^^^^^^^^^^^^^^ reference local 35
-//                                ^^^^^^^^^^^ reference semanticdb maven . . getSpanSize#
+//                                ^^^^^^^^^^^ reference semanticdb maven . . SpanSizeLookup#getSpanSize#
 //                                            ^ reference local 38
       if (totalSpan > spanCount) {
 //        ^^^^^^^^^ reference local 37

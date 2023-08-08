@@ -32,14 +32,14 @@ public class AnonymousClasses {
 //         ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
           public Integer apply(Integer integer) {
 //               ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
-//                       ^^^^^ definition local 4
+//                       ^^^^^ definition local 3
 //                             documentation ```java\n@Override\npublic Integer apply(Integer integer)\n```
 //                             relationship is_reference is_implementation semanticdb maven jdk 11 java/util/function/Function#apply().
 //                             ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
-//                                     ^^^^^^^ definition local 5
+//                                     ^^^^^^^ definition local 4
 //                                             documentation ```java\nInteger integer\n```
             return integer + n;
-//                 ^^^^^^^ reference local 5
+//                 ^^^^^^^ reference local 4
 //                           ^ reference local 0
           }
         };

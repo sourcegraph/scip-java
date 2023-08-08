@@ -4,7 +4,8 @@ import com.sun.source.util.JavacTask;
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
 import com.sun.source.util.Trees;
-import com.sun.tools.javac.model.JavacTypes;
+import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 
 import javax.tools.JavaFileObject;
 import java.io.ByteArrayOutputStream;
@@ -21,25 +22,25 @@ import java.nio.file.Paths;
  */
 public final class SemanticdbTaskListener implements TaskListener {
   private final SemanticdbJavacOptions options;
-  private final JavacTask task;
   private final GlobalSymbolsCache globals;
   private final SemanticdbReporter reporter;
-  private final JavacTypes javacTypes;
+  private final Types types;
   private final Trees trees;
+  private final Elements elements;
   private int noRelativePathCounter = 0;
 
   public SemanticdbTaskListener(
       SemanticdbJavacOptions options,
       JavacTask task,
+      Trees trees,
       GlobalSymbolsCache globals,
-      SemanticdbReporter reporter,
-      JavacTypes javacTypes) {
+      SemanticdbReporter reporter) {
     this.options = options;
-    this.task = task;
     this.globals = globals;
     this.reporter = reporter;
-    this.javacTypes = javacTypes;
-    this.trees = Trees.instance(task);
+    this.types = task.getTypes();
+    this.trees = trees;
+    this.elements = task.getElements();
   }
 
   @Override
@@ -91,7 +92,7 @@ public final class SemanticdbTaskListener implements TaskListener {
     if (path != null) {
       if (path.isOk()) {
         Semanticdb.TextDocument textDocument =
-            new SemanticdbVisitor(task, globals, e, options, javacTypes)
+            new SemanticdbVisitor(globals, e.getCompilationUnit(), options, types, trees, elements)
                 .buildTextDocument(e.getCompilationUnit());
         writeSemanticdb(e, path.getOrThrow(), textDocument);
       } else {

@@ -63,13 +63,13 @@ public abstract class BaseEpoxyAdapter
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
 //                                     documentation ```java\npublic abstract class BaseEpoxyAdapter\n```
 //                                     relationship is_implementation semanticdb maven . . RecyclerView/Adapter#
-//                                     relationship is_implementation semanticdb maven . . ``/StickyHeaderCallbacks#
+//                                     relationship is_implementation semanticdb maven . . StickyHeaderCallbacks#
     extends RecyclerView.Adapter<EpoxyViewHolder>
 //          ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView/
 //                       ^^^^^^^ reference semanticdb maven . . RecyclerView/Adapter#
 //                               ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
     implements StickyHeaderCallbacks {
-//             ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//             ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . StickyHeaderCallbacks#
 
   private static final String SAVED_STATE_ARG_VIEW_HOLDERS = "saved_state_view_holders";
 //                     ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
@@ -102,9 +102,10 @@ public abstract class BaseEpoxyAdapter
 //                                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#`<init>`().
 
   private final SpanSizeLookup spanSizeLookup = new SpanSizeLookup() {
-//              ^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//              ^^^^^^^^^^^^^^ reference semanticdb maven . . SpanSizeLookup#
 //                             ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#spanSizeLookup.
 //                                            documentation ```java\nprivate final unresolved_type spanSizeLookup\n```
+//                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . SpanSizeLookup#
 
     @Override
     public int getSpanSize(int position) {
@@ -134,7 +135,7 @@ public abstract class BaseEpoxyAdapter
 //  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#setHasStableIds#
     spanSizeLookup.setSpanIndexCacheEnabled(true);
 //  ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#spanSizeLookup.
-//                 ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . setSpanIndexCacheEnabled#
+//                 ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . SpanSizeLookup#setSpanIndexCacheEnabled#
   }
 
   /**
@@ -218,7 +219,7 @@ public abstract class BaseEpoxyAdapter
 //       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                       ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onCreateViewHolder().
 //                                          documentation ```java\n@Override\npublic EpoxyViewHolder onCreateViewHolder(unresolved_type parent, int viewType)\n```
-//                                          ^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                          ^^^^^^^^^ reference semanticdb maven . . ViewGroup#
 //                                                    ^^^^^^ definition local 3
 //                                                           documentation ```java\nunresolved_type parent\n```
 //                                                                ^^^^^^^^ definition local 4
@@ -231,7 +232,7 @@ public abstract class BaseEpoxyAdapter
 //                                        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewTypeManager#getModelForViewType().
 //                                                                  ^^^^^^^^ reference local 4
     View view = model.buildView(parent);
-//  ^^^^ reference semanticdb maven . . _root_/
+//  ^^^^ reference semanticdb maven . . View#
 //       ^^^^ definition local 6
 //            documentation ```java\nunresolved_type view\n```
 //              ^^^^^ reference local 5
@@ -491,7 +492,7 @@ public abstract class BaseEpoxyAdapter
 //                                       documentation ```java\n@CallSuper\n@Override\npublic void onDetachedFromRecyclerView(unresolved_type recyclerView)\n```
 //                                       relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#onDetachedFromRecyclerView().
 //                                        ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
-//                                                ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                                ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                                             ^^^^^^^^^^^^ definition local 28
 //                                                                          documentation ```java\n@NonNull\nunresolved_type recyclerView\n```
     // The last model is saved for optimization, but holding onto it can leak anything saved inside
@@ -585,7 +586,7 @@ public abstract class BaseEpoxyAdapter
   public void onSaveInstanceState(Bundle outState) {
 //            ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onSaveInstanceState().
 //                                documentation ```java\npublic void onSaveInstanceState(unresolved_type outState)\n```
-//                                ^^^^^^ reference semanticdb maven . . _root_/
+//                                ^^^^^^ reference semanticdb maven . . Bundle#
 //                                       ^^^^^^^^ definition local 34
 //                                                documentation ```java\nunresolved_type outState\n```
     // Save the state of currently bound views first so they are included. Views that were
@@ -612,7 +613,7 @@ public abstract class BaseEpoxyAdapter
 
     outState.putParcelable(SAVED_STATE_ARG_VIEW_HOLDERS, viewHolderState);
 //  ^^^^^^^^ reference local 34
-//           ^^^^^^^^^^^^^ reference semanticdb maven . . putParcelable#
+//           ^^^^^^^^^^^^^ reference semanticdb maven . . Bundle#putParcelable#
 //                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#SAVED_STATE_ARG_VIEW_HOLDERS.
 //                                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#viewHolderState.
   }
@@ -621,7 +622,7 @@ public abstract class BaseEpoxyAdapter
 //            ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onRestoreInstanceState().
 //                                   documentation ```java\npublic void onRestoreInstanceState(unresolved_type inState)\n```
 //                                    ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
-//                                             ^^^^^^ reference semanticdb maven . . _root_/
+//                                             ^^^^^^ reference semanticdb maven . . Bundle#
 //                                                    ^^^^^^^ definition local 36
 //                                                            documentation ```java\n@Nullable\nunresolved_type inState\n```
     // To simplify things we enforce that state is restored before views are bound, otherwise it
@@ -640,7 +641,7 @@ public abstract class BaseEpoxyAdapter
       viewHolderState = inState.getParcelable(SAVED_STATE_ARG_VIEW_HOLDERS);
 //    ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#viewHolderState.
 //                      ^^^^^^^ reference local 36
-//                              ^^^^^^^^^^^^^ reference semanticdb maven . . getParcelable#
+//                              ^^^^^^^^^^^^^ reference semanticdb maven . . Bundle#getParcelable#
 //                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#SAVED_STATE_ARG_VIEW_HOLDERS.
       if (viewHolderState == null) {
 //        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#viewHolderState.
@@ -698,7 +699,7 @@ public abstract class BaseEpoxyAdapter
    * the span count is correct.
    */
   public SpanSizeLookup getSpanSizeLookup() {
-//       ^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//       ^^^^^^^^^^^^^^ reference semanticdb maven . . SpanSizeLookup#
 //                      ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getSpanSizeLookup().
 //                                        documentation ```java\npublic unresolved_type getSpanSizeLookup()\n```
 //                                        documentation  For use with a grid layout manager - use this to get the {@link SpanSizeLookup} for models in\n this adapter. This will delegate span look up calls to each model's {@link\n EpoxyModel#getSpanSize(int, int, int)}. Make sure to also call {@link #setSpanCount(int)} so\n the span count is correct.\n
@@ -755,7 +756,7 @@ public abstract class BaseEpoxyAdapter
 //                                  documentation  Optional callback to setup the sticky view,\n by default it doesn't do anything.\n <p>\n The sub-classes should override the function if they are\n using sticky header feature.\n
 //                                  relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#setupStickyHeaderView().
 //                                   ^^^^^^^ reference semanticdb maven maven/org.jetbrains/annotations 13.0 org/jetbrains/annotations/NotNull#
-//                                           ^^^^ reference semanticdb maven . . _root_/
+//                                           ^^^^ reference semanticdb maven . . View#
 //                                                ^^^^^^^^^^^^ definition local 41
 //                                                             documentation ```java\n@NotNull\nunresolved_type stickyHeader\n```
     // no-op
@@ -776,7 +777,7 @@ public abstract class BaseEpoxyAdapter
 //                                     documentation  Optional callback to perform tear down operation on the\n sticky view, by default it doesn't do anything.\n <p>\n The sub-classes should override the function if they are\n using sticky header feature.\n
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#teardownStickyHeaderView().
 //                                      ^^^^^^^ reference semanticdb maven maven/org.jetbrains/annotations 13.0 org/jetbrains/annotations/NotNull#
-//                                              ^^^^ reference semanticdb maven . . _root_/
+//                                              ^^^^ reference semanticdb maven . . View#
 //                                                   ^^^^^^^^^^^^ definition local 42
 //                                                                documentation ```java\n@NotNull\nunresolved_type stickyHeader\n```
     // no-op

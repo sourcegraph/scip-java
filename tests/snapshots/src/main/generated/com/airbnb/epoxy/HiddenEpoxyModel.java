@@ -25,7 +25,7 @@ class HiddenEpoxyModel extends EpoxyModel<Space> {
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
 //                     documentation ```java\nHiddenEpoxyModel()\n```
 //                             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
-//                                        ^^^^^ reference semanticdb maven . . _root_/
+//                                        ^^^^^ reference semanticdb maven . . Space#
   @Override
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public int getDefaultLayout() {

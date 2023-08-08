@@ -68,7 +68,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                     documentation This should return a new instance of your {@link com.airbnb.epoxy.EpoxyHolder} class. 
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#createNewHolder().
 //                                      ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
-//                                              ^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                              ^^^^^^^^^^ reference semanticdb maven . . ViewParent#
 //                                                         ^^^^^^ definition local 1
 //                                                                documentation ```java\n@NonNull\nunresolved_type parent\n```
 

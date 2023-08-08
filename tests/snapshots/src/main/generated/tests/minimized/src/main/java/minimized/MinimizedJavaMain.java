@@ -18,6 +18,7 @@ public class MinimizedJavaMain {
     TypeVariables.app(new TypeVariables.CT());
 //  ^^^^^^^^^^^^^ reference semanticdb maven . . minimized/TypeVariables#
 //                ^^^ reference semanticdb maven . . minimized/TypeVariables#app().
+//                        ^^^^^^^^^^^^^ reference semanticdb maven . . minimized/TypeVariables#
 //                                      ^^ reference semanticdb maven . . minimized/TypeVariables#CT#`<init>`().
     System.out.println(
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
@@ -46,6 +47,8 @@ public class MinimizedJavaMain {
 //                       ^^^ reference semanticdb maven . . minimized/Primitives#app().
             + new ParameterizedTypes<Integer, String>().app(42, "42")
 //                ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/ParameterizedTypes#`<init>`().
+//                                   ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
+//                                            ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                                      ^^^ reference semanticdb maven . . minimized/ParameterizedTypes#app().
             + RawTypes.x.toString()
 //            ^^^^^^^^ reference semanticdb maven . . minimized/RawTypes#

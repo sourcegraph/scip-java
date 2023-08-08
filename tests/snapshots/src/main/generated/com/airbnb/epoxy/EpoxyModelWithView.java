@@ -43,7 +43,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
 //                                       documentation ```java\npublic EpoxyModelWithView()\n```
 //                                       ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#[T]
 //                                         documentation ```java\nT extends unresolved_type\n```
-//                                                 ^^^^ reference semanticdb maven . . _root_/
+//                                                 ^^^^ reference semanticdb maven . . View#
 //                                                               ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                          ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#[T]
 
@@ -78,7 +78,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
 //                               documentation  Create and return a new instance of a view for this model. If no layout params are set on the\n returned view then default layout params will be used.\n\n @param parent The parent ViewGroup that the returned view will be added to.\n
 //                               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#buildView().
 //                                ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
-//                                        ^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                        ^^^^^^^^^ reference semanticdb maven . . ViewGroup#
 //                                                  ^^^^^^ definition local 0
 //                                                         documentation ```java\n@NonNull\nunresolved_type parent\n```
 

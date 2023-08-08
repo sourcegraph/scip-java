@@ -88,8 +88,8 @@ class DebugTimer implements Timer {
 //                             ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/System#nanoTime().
 //                                          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DebugTimer#startTime.
     Log.d(tag, String.format(sectionName + ": %.3fms", durationMs));
-//  ^^^ reference semanticdb maven . . _root_/
-//      ^ reference semanticdb maven . . d#
+//  ^^^ reference semanticdb maven . . Log#
+//      ^ reference semanticdb maven . . Log#d#
 //        ^^^ reference semanticdb maven . . com/airbnb/epoxy/DebugTimer#tag.
 //             ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                    ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#format().

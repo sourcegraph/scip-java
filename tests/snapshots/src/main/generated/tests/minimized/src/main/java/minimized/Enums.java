@@ -1,5 +1,4 @@
 package minimized;
-//^^^^^ reference semanticdb maven . . minimized/Enums#
 
 import java.util.Arrays;
 //     ^^^^ reference semanticdb maven . . java/
@@ -20,21 +19,21 @@ enum Enums {
   A("A", 420),
 //^ definition semanticdb maven . . minimized/Enums#A.
 //  documentation ```java\nEnums.A("A", 420) /* ordinal 0 */\n```
+//^ reference semanticdb maven . . minimized/Enums#`<init>`().
   B("B", 1),
 //^ definition semanticdb maven . . minimized/Enums#B.
 //  documentation ```java\nEnums.B("B", 1) /* ordinal 1 */\n```
+//^ reference semanticdb maven . . minimized/Enums#`<init>`().
   C("C", 5);
 //^ definition semanticdb maven . . minimized/Enums#C.
 //  documentation ```java\nEnums.C("C", 5) /* ordinal 2 */\n```
+//^ reference semanticdb maven . . minimized/Enums#`<init>`().
   public String value;
 //       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //              ^^^^^ definition semanticdb maven . . minimized/Enums#value.
 //                    documentation ```java\npublic String value\n```
 
   Enums(String value, int a) {
-//^^^^^ reference semanticdb maven . . minimized/Enums#`<init>`().
-//^^^^^ reference semanticdb maven . . minimized/Enums#`<init>`().
-//^^^^^ reference semanticdb maven . . minimized/Enums#`<init>`().
 //^^^^^ definition semanticdb maven . . minimized/Enums#`<init>`().
 //      documentation ```java\nprivate Enums(String value, int a)\n```
 //      ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#

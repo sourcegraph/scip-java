@@ -61,6 +61,7 @@ public class Fields {
 //  ^^^^^^^^^^^ reference semanticdb maven . . minimized/Fields#InnerFields#
 //              ^^^^^^^^^^^ definition local 1
 //                          documentation ```java\nInnerFields innerFields\n```
+//                            ^^^^^^ reference local 0
 //                                       ^^^^^^^^^^^ reference semanticdb maven . . minimized/Fields#InnerFields#`<init>`().
     InnerStaticFields innerStaticFields = new InnerStaticFields();
 //  ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/Fields#InnerStaticFields#

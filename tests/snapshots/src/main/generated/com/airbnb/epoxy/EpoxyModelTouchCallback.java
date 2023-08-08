@@ -44,7 +44,6 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                            documentation  A wrapper around {@link androidx.recyclerview.widget.ItemTouchHelper.Callback} to enable\n easier touch support when working with Epoxy models.\n <p>\n For simplicity you can use {@link EpoxyTouchHelper} to set up touch handling via this class for\n you instead of using this class directly. However, you may choose to use this class directly with\n your own {@link ItemTouchHelper} if you need extra flexibility or customization.\n
 //                                            relationship is_implementation semanticdb maven . . ItemTouchHelper/Callback#
 //                                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
-//                                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
 //                                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#
 //                                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#
 //                                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#
@@ -107,7 +106,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                               documentation ```java\n@Override\nprotected int getMovementFlags(unresolved_type recyclerView, EpoxyViewHolder viewHolder)\n```
 //                               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#getMovementFlags().
 //                               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#getMovementFlags(+1).
-//                               ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                               ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                            ^^^^^^^^^^^^ definition local 2
 //                                                         documentation ```java\nunresolved_type recyclerView\n```
 //                                                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
@@ -157,7 +156,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                              documentation ```java\n@Override\nprotected boolean canDropOver(unresolved_type recyclerView, EpoxyViewHolder current, EpoxyViewHolder target)\n```
 //                              relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#canDropOver().
 //                              relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#canDropOver(+1).
-//                              ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                              ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                           ^^^^^^^^^^^^ definition local 6
 //                                                        documentation ```java\nunresolved_type recyclerView\n```
 //                                                         ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
@@ -193,7 +192,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                         documentation ```java\n@Override\nprotected boolean onMove(unresolved_type recyclerView, EpoxyViewHolder viewHolder, EpoxyViewHolder target)\n```
 //                         relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#onMove().
 //                         relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#onMove(+1).
-//                         ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                         ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                      ^^^^^^^^^^^^ definition local 10
 //                                                   documentation ```java\nunresolved_type recyclerView\n```
 //                                                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
@@ -268,7 +267,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                                           ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
 //                                                             ^^^^^^^^^^^^^^^ definition local 18
 //                                                                             documentation ```java\nT modelBeingMoved\n```
-//                                                                              ^^^^ reference semanticdb maven . . _root_/
+//                                                                              ^^^^ reference semanticdb maven . . View#
 //                                                                                   ^^^^^^^^ definition local 19
 //                                                                                            documentation ```java\nunresolved_type itemView\n```
 
@@ -292,7 +291,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                        ^^^^^^^^^^ reference local 20
 //                                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getModel().
     View view = viewHolder.itemView;
-//  ^^^^ reference semanticdb maven . . _root_/
+//  ^^^^ reference semanticdb maven . . View#
 //       ^^^^ definition local 23
 //            documentation ```java\nunresolved_type view\n```
 //              ^^^^^^^^^^ reference local 20
@@ -332,7 +331,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                             ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
 //                               ^^^^^ definition local 25
 //                                     documentation ```java\nT model\n```
-//                                      ^^^^ reference semanticdb maven . . _root_/
+//                                      ^^^^ reference semanticdb maven . . View#
 //                                           ^^^^^^^^ definition local 26
 //                                                    documentation ```java\nunresolved_type itemView\n```
 //                                                         ^^^^^^^^ definition local 27
@@ -380,15 +379,15 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 
       markRecyclerViewHasSelection((RecyclerView) viewHolder.itemView.getParent());
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#markRecyclerViewHasSelection().
-//                                  ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                  ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                                ^^^^^^^^^^ reference local 29
 //                                                           ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#itemView#
 //                                                                    ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#itemView#getParent#
 
       if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
 //        ^^^^^^^^^^^ reference local 30
-//                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
-//                                       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . ACTION_STATE_SWIPE#
+//                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . ItemTouchHelper#
+//                                       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . ItemTouchHelper#ACTION_STATE_SWIPE#
         holderBeingSwiped = viewHolder;
 //      ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#holderBeingSwiped.
 //                          ^^^^^^^^^^ reference local 29
@@ -403,8 +402,8 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                                                ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getAdapterPosition#
       } else if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
 //               ^^^^^^^^^^^ reference local 30
-//                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
-//                                              ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . ACTION_STATE_DRAG#
+//                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . ItemTouchHelper#
+//                                              ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . ItemTouchHelper#ACTION_STATE_DRAG#
         holderBeingDragged = viewHolder;
 //      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#holderBeingDragged.
 //                           ^^^^^^^^^^ reference local 29
@@ -448,12 +447,12 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   private void markRecyclerViewHasSelection(RecyclerView recyclerView) {
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#markRecyclerViewHasSelection().
 //                                          documentation ```java\nprivate void markRecyclerViewHasSelection(unresolved_type recyclerView)\n```
-//                                          ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                          ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                                       ^^^^^^^^^^^^ definition local 32
 //                                                                    documentation ```java\nunresolved_type recyclerView\n```
     recyclerView.setTag(R.id.epoxy_touch_helper_selection_status, Boolean.TRUE);
 //  ^^^^^^^^^^^^ reference local 32
-//               ^^^^^^ reference semanticdb maven . . setTag#
+//               ^^^^^^ reference semanticdb maven . . RecyclerView#setTag#
 //                      ^ reference semanticdb maven . . R/
 //                        ^^ reference semanticdb maven . . R/id#
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . R/id#epoxy_touch_helper_selection_status#
@@ -464,12 +463,12 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   private boolean recyclerViewHasSelection(RecyclerView recyclerView) {
 //                ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#recyclerViewHasSelection().
 //                                         documentation ```java\nprivate boolean recyclerViewHasSelection(unresolved_type recyclerView)\n```
-//                                         ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                         ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                                      ^^^^^^^^^^^^ definition local 33
 //                                                                   documentation ```java\nunresolved_type recyclerView\n```
     return recyclerView.getTag(R.id.epoxy_touch_helper_selection_status) != null;
 //         ^^^^^^^^^^^^ reference local 33
-//                      ^^^^^^ reference semanticdb maven . . getTag#
+//                      ^^^^^^ reference semanticdb maven . . RecyclerView#getTag#
 //                             ^ reference semanticdb maven . . R/
 //                               ^^ reference semanticdb maven . . R/id#
 //                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . R/id#epoxy_touch_helper_selection_status#
@@ -478,12 +477,12 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
   private void clearRecyclerViewSelectionMarker(RecyclerView recyclerView) {
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearRecyclerViewSelectionMarker().
 //                                              documentation ```java\nprivate void clearRecyclerViewSelectionMarker(unresolved_type recyclerView)\n```
-//                                              ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                              ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                                           ^^^^^^^^^^^^ definition local 34
 //                                                                        documentation ```java\nunresolved_type recyclerView\n```
     recyclerView.setTag(R.id.epoxy_touch_helper_selection_status, null);
 //  ^^^^^^^^^^^^ reference local 34
-//               ^^^^^^ reference semanticdb maven . . setTag#
+//               ^^^^^^ reference semanticdb maven . . RecyclerView#setTag#
 //                      ^ reference semanticdb maven . . R/
 //                        ^^ reference semanticdb maven . . R/id#
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . R/id#epoxy_touch_helper_selection_status#
@@ -498,7 +497,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                           ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
 //                             ^^^^^ definition local 35
 //                                   documentation ```java\nT model\n```
-//                                    ^^^^ reference semanticdb maven . . _root_/
+//                                    ^^^^ reference semanticdb maven . . View#
 //                                         ^^^^^^^^ definition local 36
 //                                                  documentation ```java\nunresolved_type itemView\n```
 //                                                       ^^^^^^^^^^^^^^^ definition local 37
@@ -515,7 +514,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                            ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
 //                              ^^^^^ definition local 38
 //                                    documentation ```java\nT model\n```
-//                                     ^^^^ reference semanticdb maven . . _root_/
+//                                     ^^^^ reference semanticdb maven . . View#
 //                                          ^^^^^^^^ definition local 39
 //                                                   documentation ```java\nunresolved_type itemView\n```
 
@@ -530,7 +529,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                          ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
 //                            ^^^^^ definition local 40
 //                                  documentation ```java\nT model\n```
-//                                   ^^^^ reference semanticdb maven . . _root_/
+//                                   ^^^^ reference semanticdb maven . . View#
 //                                        ^^^^^^^^ definition local 41
 //                                                 documentation ```java\nunresolved_type itemView\n```
 //                                                      ^^^^^^^^^^^^^^^ definition local 42
@@ -547,7 +546,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                           ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
 //                             ^^^^^ definition local 43
 //                                   documentation ```java\nT model\n```
-//                                    ^^^^ reference semanticdb maven . . _root_/
+//                                    ^^^^ reference semanticdb maven . . View#
 //                                         ^^^^^^^^ definition local 44
 //                                                  documentation ```java\nunresolved_type itemView\n```
 
@@ -561,7 +560,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                         relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView().
 //                         relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView().
 //                         relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(+1).
-//                               ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                               ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                            ^^^^^^^^^^^^ definition local 45
 //                                                         documentation ```java\nfinal unresolved_type recyclerView\n```
 //                                                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
@@ -588,12 +587,12 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
     // touch event ends.
     recyclerView.postDelayed(new Runnable() {
 //  ^^^^^^^^^^^^ reference local 45
-//               ^^^^^^^^^^^ reference semanticdb maven . . postDelayed#
+//               ^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#postDelayed#
 //                               ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Runnable#
       @Override
 //     ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
       public void run() {
-//                ^^^ definition local 49
+//                ^^^ definition local 48
 //                    documentation ```java\n@Override\npublic void run()\n```
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Runnable#run().
         clearRecyclerViewSelectionMarker(recyclerView);
@@ -613,10 +612,10 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                      relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView().
 //                      relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView(+1).
 //                      ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
-//                        ^^^^^ definition local 50
+//                        ^^^^^ definition local 49
 //                              documentation ```java\nT model\n```
-//                               ^^^^ reference semanticdb maven . . _root_/
-//                                    ^^^^^^^^ definition local 51
+//                               ^^^^ reference semanticdb maven . . View#
+//                                    ^^^^^^^^ definition local 50
 //                                             documentation ```java\nunresolved_type itemView\n```
 
   }
@@ -628,99 +627,99 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                           documentation ```java\n@Override\nprotected void onChildDraw(unresolved_type c, unresolved_type recyclerView, EpoxyViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive)\n```
 //                           relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#onChildDraw().
 //                           relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#onChildDraw(+1).
-//                           ^^^^^^ reference semanticdb maven . . _root_/
-//                                  ^ definition local 52
+//                           ^^^^^^ reference semanticdb maven . . Canvas#
+//                                  ^ definition local 51
 //                                    documentation ```java\nunresolved_type c\n```
-//                                     ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
-//                                                  ^^^^^^^^^^^^ definition local 53
+//                                     ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
+//                                                  ^^^^^^^^^^^^ definition local 52
 //                                                               documentation ```java\nunresolved_type recyclerView\n```
 //                                                                ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
-//                                                                                ^^^^^^^^^^ definition local 54
+//                                                                                ^^^^^^^^^^ definition local 53
 //                                                                                           documentation ```java\nEpoxyViewHolder viewHolder\n```
       float dX, float dY, int actionState, boolean isCurrentlyActive) {
-//          ^^ definition local 55
+//          ^^ definition local 54
 //             documentation ```java\nfloat dX\n```
-//                    ^^ definition local 56
+//                    ^^ definition local 55
 //                       documentation ```java\nfloat dY\n```
-//                            ^^^^^^^^^^^ definition local 57
+//                            ^^^^^^^^^^^ definition local 56
 //                                        documentation ```java\nint actionState\n```
-//                                                 ^^^^^^^^^^^^^^^^^ definition local 58
+//                                                 ^^^^^^^^^^^^^^^^^ definition local 57
 //                                                                   documentation ```java\nboolean isCurrentlyActive\n```
     super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#super.
 //        ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#onChildDraw().
-//                    ^ reference local 52
-//                       ^^^^^^^^^^^^ reference local 53
-//                                     ^^^^^^^^^^ reference local 54
-//                                                 ^^ reference local 55
-//                                                     ^^ reference local 56
-//                                                         ^^^^^^^^^^^ reference local 57
-//                                                                      ^^^^^^^^^^^^^^^^^ reference local 58
+//                    ^ reference local 51
+//                       ^^^^^^^^^^^^ reference local 52
+//                                     ^^^^^^^^^^ reference local 53
+//                                                 ^^ reference local 54
+//                                                     ^^ reference local 55
+//                                                         ^^^^^^^^^^^ reference local 56
+//                                                                      ^^^^^^^^^^^^^^^^^ reference local 57
 
     EpoxyModel<?> model = viewHolder.getModel();
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
-//                ^^^^^ definition local 59
+//                ^^^^^ definition local 58
 //                      documentation ```java\nEpoxyModel<?> model\n```
-//                        ^^^^^^^^^^ reference local 54
+//                        ^^^^^^^^^^ reference local 53
 //                                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getModel().
     if (!isTouchableModel(model)) {
 //       ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#isTouchableModel().
-//                        ^^^^^ reference local 59
+//                        ^^^^^ reference local 58
       throw new IllegalStateException(
 //              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IllegalStateException#`<init>`(+1).
           "A model was selected that is not a valid target: " + model.getClass());
-//                                                              ^^^^^ reference local 59
+//                                                              ^^^^^ reference local 58
 //                                                                    ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#getClass().
     }
 
     View itemView = viewHolder.itemView;
-//  ^^^^ reference semanticdb maven . . _root_/
-//       ^^^^^^^^ definition local 60
+//  ^^^^ reference semanticdb maven . . View#
+//       ^^^^^^^^ definition local 59
 //                documentation ```java\nunresolved_type itemView\n```
-//                  ^^^^^^^^^^ reference local 54
+//                  ^^^^^^^^^^ reference local 53
 //                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#itemView#
 
     float swipeProgress;
-//        ^^^^^^^^^^^^^ definition local 61
+//        ^^^^^^^^^^^^^ definition local 60
 //                      documentation ```java\nfloat swipeProgress\n```
     if (Math.abs(dX) > Math.abs(dY)) {
 //      ^^^^ reference semanticdb maven jdk 11 java/lang/Math#
 //           ^^^ reference semanticdb maven jdk 11 java/lang/Math#abs(+2).
-//               ^^ reference local 55
+//               ^^ reference local 54
 //                     ^^^^ reference semanticdb maven jdk 11 java/lang/Math#
 //                          ^^^ reference semanticdb maven jdk 11 java/lang/Math#abs(+2).
-//                              ^^ reference local 56
+//                              ^^ reference local 55
       swipeProgress = dX / itemView.getWidth();
-//    ^^^^^^^^^^^^^ reference local 61
-//                    ^^ reference local 55
-//                         ^^^^^^^^ reference local 60
-//                                  ^^^^^^^^ reference semanticdb maven . . getWidth#
+//    ^^^^^^^^^^^^^ reference local 60
+//                    ^^ reference local 54
+//                         ^^^^^^^^ reference local 59
+//                                  ^^^^^^^^ reference semanticdb maven . . View#getWidth#
     } else {
       swipeProgress = dY / itemView.getHeight();
-//    ^^^^^^^^^^^^^ reference local 61
-//                    ^^ reference local 56
-//                         ^^^^^^^^ reference local 60
-//                                  ^^^^^^^^^ reference semanticdb maven . . getHeight#
+//    ^^^^^^^^^^^^^ reference local 60
+//                    ^^ reference local 55
+//                         ^^^^^^^^ reference local 59
+//                                  ^^^^^^^^^ reference semanticdb maven . . View#getHeight#
     }
 
     // Clamp to 1/-1 in the case of side padding where the view can be swiped extra
     float clampedProgress = Math.max(-1f, Math.min(1f, swipeProgress));
-//        ^^^^^^^^^^^^^^^ definition local 62
+//        ^^^^^^^^^^^^^^^ definition local 61
 //                        documentation ```java\nfloat clampedProgress\n```
 //                          ^^^^ reference semanticdb maven jdk 11 java/lang/Math#
 //                               ^^^ reference semanticdb maven jdk 11 java/lang/Math#max(+2).
 //                                        ^^^^ reference semanticdb maven jdk 11 java/lang/Math#
 //                                             ^^^ reference semanticdb maven jdk 11 java/lang/Math#min(+2).
-//                                                     ^^^^^^^^^^^^^ reference local 61
+//                                                     ^^^^^^^^^^^^^ reference local 60
 
     //noinspection unchecked
     onSwipeProgressChanged((T) model, itemView, clampedProgress, c);
 //  ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeProgressChanged().
 //                          ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
-//                             ^^^^^ reference local 59
-//                                    ^^^^^^^^ reference local 60
-//                                              ^^^^^^^^^^^^^^^ reference local 62
-//                                                               ^ reference local 52
+//                             ^^^^^ reference local 58
+//                                    ^^^^^^^^ reference local 59
+//                                              ^^^^^^^^^^^^^^^ reference local 61
+//                                                               ^ reference local 51
   }
 
   @Override
@@ -730,16 +729,16 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                   documentation ```java\n@Override\npublic void onSwipeProgressChanged(T model, unresolved_type itemView, float swipeProgress, unresolved_type canvas)\n```
 //                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeProgressChanged().
 //                                   ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
-//                                     ^^^^^ definition local 63
+//                                     ^^^^^ definition local 62
 //                                           documentation ```java\nT model\n```
-//                                            ^^^^ reference semanticdb maven . . _root_/
-//                                                 ^^^^^^^^ definition local 64
+//                                            ^^^^ reference semanticdb maven . . View#
+//                                                 ^^^^^^^^ definition local 63
 //                                                          documentation ```java\nunresolved_type itemView\n```
-//                                                                 ^^^^^^^^^^^^^ definition local 65
+//                                                                 ^^^^^^^^^^^^^ definition local 64
 //                                                                               documentation ```java\nfloat swipeProgress\n```
       Canvas canvas) {
-//    ^^^^^^ reference semanticdb maven . . _root_/
-//           ^^^^^^ definition local 66
+//    ^^^^^^ reference semanticdb maven . . Canvas#
+//           ^^^^^^ definition local 65
 //                  documentation ```java\nunresolved_type canvas\n```
 
   }

@@ -205,7 +205,7 @@ public class DiffResult {
   public void dispatchTo(Adapter adapter) {
 //            ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffResult#dispatchTo().
 //                       documentation ```java\npublic void dispatchTo(unresolved_type adapter)\n```
-//                       ^^^^^^^ reference semanticdb maven . . _root_/
+//                       ^^^^^^^ reference semanticdb maven . . Adapter#
 //                               ^^^^^^^ definition local 9
 //                                       documentation ```java\nunresolved_type adapter\n```
     dispatchTo(new AdapterListUpdateCallback(adapter));
@@ -216,7 +216,7 @@ public class DiffResult {
   public void dispatchTo(ListUpdateCallback callback) {
 //            ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffResult#dispatchTo(+1).
 //                       documentation ```java\npublic void dispatchTo(unresolved_type callback)\n```
-//                       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . ListUpdateCallback#
 //                                          ^^^^^^^^ definition local 10
 //                                                   documentation ```java\nunresolved_type callback\n```
     if (differResult != null) {
@@ -232,7 +232,7 @@ public class DiffResult {
 //                                                    ^^^^^^^ reference semanticdb maven jdk 11 java/util/List#isEmpty().
       callback.onRemoved(0, previousModels.size());
 //    ^^^^^^^^ reference local 10
-//             ^^^^^^^^^ reference semanticdb maven . . onRemoved#
+//             ^^^^^^^^^ reference semanticdb maven . . ListUpdateCallback#onRemoved#
 //                          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#previousModels.
 //                                         ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
     } else if (!newModels.isEmpty() && previousModels.isEmpty()) {
@@ -242,7 +242,7 @@ public class DiffResult {
 //                                                    ^^^^^^^ reference semanticdb maven jdk 11 java/util/List#isEmpty().
       callback.onInserted(0, newModels.size());
 //    ^^^^^^^^ reference local 10
-//             ^^^^^^^^^^ reference semanticdb maven . . onInserted#
+//             ^^^^^^^^^^ reference semanticdb maven . . ListUpdateCallback#onInserted#
 //                           ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#newModels.
 //                                     ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
     }

@@ -1,11 +1,15 @@
 package com.sourcegraph.semanticdb_javac;
 
-import com.sun.tools.javac.code.Symbol;
-import com.sun.tools.javac.code.Type;
 import com.sourcegraph.semanticdb_javac.Semanticdb.*;
 
 import javax.lang.model.element.Element;
-import javax.lang.model.type.*;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.VariableElement;
+import javax.lang.model.element.TypeParameterElement;
+import javax.lang.model.type.TypeVariable;
+import javax.lang.model.type.TypeMirror;
+import javax.lang.model.util.Types;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,43 +19,38 @@ import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.UNRESOLVED_
 public final class SemanticdbSignatures {
   private final GlobalSymbolsCache cache;
   private final LocalSymbolsCache locals;
+  private final Types types;
 
-  public SemanticdbSignatures(GlobalSymbolsCache cache, LocalSymbolsCache locals) {
+  public SemanticdbSignatures(GlobalSymbolsCache cache, LocalSymbolsCache locals, Types types) {
     this.cache = cache;
     this.locals = locals;
+    this.types = types;
   }
 
-  public Signature generateSignature(Symbol sym) {
-    if (sym instanceof Symbol.ClassSymbol) {
-      return generateClassSignature((Symbol.ClassSymbol) sym);
-    } else if (sym instanceof Symbol.MethodSymbol) {
-      return generateMethodSignature((Symbol.MethodSymbol) sym);
-    } else if (sym instanceof Symbol.VarSymbol) {
-      return generateFieldSignature((Symbol.VarSymbol) sym);
-    } else if (sym instanceof Symbol.TypeVariableSymbol) {
-      return generateTypeSignature((Symbol.TypeVariableSymbol) sym);
+  public Signature generateSignature(Element sym) {
+    if (sym instanceof TypeElement) {
+      return generateClassSignature((TypeElement) sym);
+    } else if (sym instanceof ExecutableElement) {
+      return generateMethodSignature((ExecutableElement) sym);
+    } else if (sym instanceof VariableElement) {
+      return generateFieldSignature((VariableElement) sym);
+    } else if (sym instanceof TypeParameterElement) {
+      return generateTypeSignature((TypeParameterElement) sym);
     }
     return null;
   }
 
-  private Signature generateClassSignature(Symbol.ClassSymbol sym) {
+  private Signature generateClassSignature(TypeElement sym) {
     ClassSignature.Builder builder = ClassSignature.newBuilder();
 
     builder.setTypeParameters(generateScope(sym.getTypeParameters()));
 
-    if (sym.getSuperclass() != Type.noType) {
-      Semanticdb.Type superType = generateType(sym.getSuperclass());
-      if (superType == null) {
-        superType = UNRESOLVED_TYPE_REF;
+    for (TypeMirror superType : types.directSupertypes(sym.asType())) {
+      Semanticdb.Type semanticdbType = generateType(superType);
+      if (semanticdbType == null) {
+        semanticdbType = UNRESOLVED_TYPE_REF;
       }
-      builder.addParents(superType);
-    }
-    for (Type iType : sym.getInterfaces()) {
-      Semanticdb.Type type = generateType(iType);
-      if (type == null) {
-        type = UNRESOLVED_TYPE_REF;
-      }
-      builder.addParents(type);
+      builder.addParents(semanticdbType);
     }
 
     builder.setDeclarations(generateScope(sym.getEnclosedElements()));
@@ -59,12 +58,12 @@ public final class SemanticdbSignatures {
     return signature(builder);
   }
 
-  private Signature generateMethodSignature(Symbol.MethodSymbol sym) {
+  private Signature generateMethodSignature(ExecutableElement sym) {
     MethodSignature.Builder builder = MethodSignature.newBuilder();
 
     builder.setTypeParameters(generateScope(sym.getTypeParameters()));
 
-    builder.addParameterLists(generateScope(sym.params()));
+    builder.addParameterLists(generateScope(sym.getParameters()));
 
     Semanticdb.Type returnType = generateType(sym.getReturnType());
     if (returnType != null) {
@@ -78,22 +77,27 @@ public final class SemanticdbSignatures {
     return signature(builder);
   }
 
-  private Signature generateFieldSignature(Symbol.VarSymbol sym) {
-    Semanticdb.Type generateType = generateType(sym.type);
+  private Signature generateFieldSignature(VariableElement sym) {
+    Semanticdb.Type generateType = generateType(sym.asType());
     if (generateType == null) {
       generateType = UNRESOLVED_TYPE_REF;
     }
     return signature(ValueSignature.newBuilder().setTpe(generateType));
   }
 
-  private Signature generateTypeSignature(Symbol.TypeVariableSymbol sym) {
+  private Signature generateTypeSignature(TypeParameterElement sym) {
     TypeSignature.Builder builder = TypeSignature.newBuilder();
 
-    builder.setTypeParameters(generateScope(sym.getTypeParameters()));
+    if (sym instanceof TypeElement) {
+      builder.setTypeParameters(generateScope(((TypeElement) sym).getTypeParameters()));
+    }
 
-    Semanticdb.Type upperBound = generateType(sym.type.getUpperBound());
-    if (upperBound != null) builder.setUpperBound(upperBound);
-    else builder.setUpperBound(UNRESOLVED_TYPE_REF);
+    TypeMirror varType = sym.asType();
+    if (varType instanceof TypeVariable) {
+      Semanticdb.Type upperBound = generateType(((TypeVariable) varType).getUpperBound());
+      if (upperBound != null) builder.setUpperBound(upperBound);
+      else builder.setUpperBound(UNRESOLVED_TYPE_REF);
+    } else builder.setUpperBound(UNRESOLVED_TYPE_REF);
 
     return signature(builder);
   }
@@ -107,6 +111,6 @@ public final class SemanticdbSignatures {
   }
 
   private Semanticdb.Type generateType(TypeMirror mirror) {
-    return new SemanticdbTypeVisitor(cache, locals).semanticdbType(mirror);
+    return new SemanticdbTypeVisitor(cache, locals, types).semanticdbType(mirror);
   }
 }

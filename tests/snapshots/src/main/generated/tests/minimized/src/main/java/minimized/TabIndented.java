@@ -16,11 +16,11 @@ public class TabIndented {
 →→→@Override
 //  ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
 →→→public boolean equals(Object other) {
-//                ^^^^^^ definition local 3
+//                ^^^^^^ definition local 2
 //                       documentation ```java\n@Override\npublic boolean equals(Object other)\n```
 //                       relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#equals().
 //                       ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
-//                              ^^^^^ definition local 6
+//                              ^^^^^ definition local 3
 //                                    documentation ```java\nObject other\n```
 →→→→return false;
 →→→}

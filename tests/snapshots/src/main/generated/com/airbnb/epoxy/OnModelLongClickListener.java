@@ -32,7 +32,7 @@ public interface OnModelLongClickListener<T extends EpoxyModel<?>, V> {
 //                             ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelLongClickListener#[V]
 //                               ^^^^^^^^^^ definition local 1
 //                                          documentation ```java\nV parentView\n```
-//                                           ^^^^ reference semanticdb maven . . _root_/
+//                                           ^^^^ reference semanticdb maven . . View#
 //                                                ^^^^^^^^^^^ definition local 2
 //                                                            documentation ```java\nunresolved_type clickedView\n```
 //                                                                 ^^^^^^^^ definition local 3

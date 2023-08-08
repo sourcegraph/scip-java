@@ -18,10 +18,10 @@ class NotifyBlocker extends AdapterDataObserver {
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#
 //                  documentation ```java\nclass NotifyBlocker\n```
 //                  documentation  We don't allow any data change notifications except the ones done though diffing. Forcing\n changes to happen through diffing reduces the chance for developer error when implementing an\n adapter.\n <p>\n This observer throws upon any changes done outside of diffing.\n
-//                  relationship is_implementation semanticdb maven . . ``/AdapterDataObserver#
+//                  relationship is_implementation semanticdb maven . . AdapterDataObserver#
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#`<init>`().
 //                  documentation ```java\nNotifyBlocker()\n```
-//                          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . AdapterDataObserver#
 
   private boolean changesAllowed;
 //                ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#changesAllowed.

@@ -1,25 +1,30 @@
 package com.sourcegraph.semanticdb_javac;
 
-import com.sun.tools.javac.code.Symbol;
-
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
-import java.util.*;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.PackageElement;
+import javax.lang.model.element.TypeParameterElement;
+import javax.lang.model.element.VariableElement;
+import javax.lang.model.element.QualifiedNameable;
+import javax.lang.model.type.NoType;
+import java.util.IdentityHashMap;
+import java.util.ArrayList;
 
 import static com.sourcegraph.semanticdb_javac.Debugging.pprint;
 
 /** Cache of SemanticDB symbols that can be referenced between files. */
 public final class GlobalSymbolsCache {
 
-  private final IdentityHashMap<Symbol, String> globals = new IdentityHashMap<>();
+  private final IdentityHashMap<Element, String> globals = new IdentityHashMap<>();
   private final SemanticdbJavacOptions options;
 
   public GlobalSymbolsCache(SemanticdbJavacOptions options) {
     this.options = options;
   }
 
-  public String semanticdbSymbol(Symbol sym, LocalSymbolsCache locals) {
+  public String semanticdbSymbol(Element sym, LocalSymbolsCache locals) {
     String result = globals.get(sym);
     if (result != null) return result;
     String localResult = locals.get(sym);
@@ -31,25 +36,46 @@ public final class GlobalSymbolsCache {
     return result;
   }
 
-  public String semanticdbSymbol(Element element, LocalSymbolsCache locals) {
-    return semanticdbSymbol((Symbol) element, locals);
-  }
-
-  public boolean isNone(Symbol sym) {
+  public boolean isNone(Element sym) {
     return sym == null;
   }
 
-  private String uncachedSemanticdbSymbol(Symbol sym, LocalSymbolsCache locals) {
-    if (isNone(sym)) return SemanticdbSymbols.NONE;
-    String owner = semanticdbSymbol(sym.owner, locals);
-    if (owner.equals(SemanticdbSymbols.NONE)) {
-      return SemanticdbSymbols.ROOT_PACKAGE;
-    } else if (SemanticdbSymbols.isLocal(owner) || isAnonymousClass(sym) || isLocalVariable(sym)) {
-      return locals.put(sym);
-    }
+  private String uncachedSemanticdbSymbol(Element sym, LocalSymbolsCache locals) {
+    if (isNone(sym)) return SemanticdbSymbols.ROOT_PACKAGE;
+
+    if (sym instanceof PackageElement) {
+      if (((PackageElement) sym).isUnnamed()) return SemanticdbSymbols.ROOT_PACKAGE;
+
+      StringBuilder sb = new StringBuilder();
+      String qualifiedName = ((PackageElement) sym).getQualifiedName().toString();
+      int i = 0;
+      int j = 0;
+      while (j < qualifiedName.length()) {
+        if (i == qualifiedName.length() || qualifiedName.charAt(i) == '.') {
+          final String name = qualifiedName.substring(j, i);
+          SemanticdbSymbols.Descriptor desc =
+              new SemanticdbSymbols.Descriptor(SemanticdbSymbols.Descriptor.Kind.Package, name);
+          sb.append(desc.encode());
+          j = i + 1;
+        }
+        i++;
+      }
+
+      return sb.toString();
+    } else
+    // check for Module without referring to Module as it doesn't exist < JDK 9
+    if (sym.asType() instanceof NoType) return SemanticdbSymbols.ROOT_PACKAGE;
+
+    if (isAnonymousClass(sym) || isLocalVariable(sym)) return locals.put(sym);
+
+    String owner = semanticdbSymbol(sym.getEnclosingElement(), locals);
+    if (SemanticdbSymbols.isLocal(owner)) return locals.put(sym);
+
     SemanticdbSymbols.Descriptor desc = semanticdbDescriptor(sym);
     if (options.verboseEnabled && desc.kind == SemanticdbSymbols.Descriptor.Kind.None) {
-      pprint(sym.getQualifiedName().toString());
+      if (sym instanceof QualifiedNameable)
+        pprint(((QualifiedNameable) sym).getQualifiedName().toString());
+      else pprint(sym.getSimpleName().toString());
       pprint(
           String.format(
               "sym: %s (%s - superclass %s)", sym, sym.getClass(), sym.getClass().getSuperclass()));
@@ -57,7 +83,7 @@ public final class GlobalSymbolsCache {
     return SemanticdbSymbols.global(owner, desc);
   }
 
-  private boolean isLocalVariable(Symbol sym) {
+  private boolean isLocalVariable(Element sym) {
     switch (sym.getKind()) {
       case PARAMETER:
       case EXCEPTION_PARAMETER:
@@ -68,28 +94,25 @@ public final class GlobalSymbolsCache {
     }
   }
 
-  private boolean isAnonymousClass(Symbol sym) {
-    return sym instanceof Symbol.ClassSymbol && sym.name.isEmpty();
+  private boolean isAnonymousClass(Element sym) {
+    return sym instanceof TypeElement && sym.getSimpleName().length() == 0;
   }
 
-  private SemanticdbSymbols.Descriptor semanticdbDescriptor(Symbol sym) {
-    if (sym instanceof Symbol.ClassSymbol) {
+  private SemanticdbSymbols.Descriptor semanticdbDescriptor(Element sym) {
+    if (sym instanceof TypeElement) {
       return new SemanticdbSymbols.Descriptor(
-          SemanticdbSymbols.Descriptor.Kind.Type, sym.name.toString());
-    } else if (sym instanceof Symbol.MethodSymbol) {
+          SemanticdbSymbols.Descriptor.Kind.Type, sym.getSimpleName().toString());
+    } else if (sym instanceof ExecutableElement) {
       return new SemanticdbSymbols.Descriptor(
           SemanticdbSymbols.Descriptor.Kind.Method,
-          sym.name.toString(),
-          methodDisambiguator((Symbol.MethodSymbol) sym));
-    } else if (sym instanceof Symbol.PackageSymbol) {
+          sym.getSimpleName().toString(),
+          methodDisambiguator((ExecutableElement) sym));
+    } else if (sym instanceof TypeParameterElement) {
       return new SemanticdbSymbols.Descriptor(
-          SemanticdbSymbols.Descriptor.Kind.Package, sym.name.toString());
-    } else if (sym instanceof Symbol.TypeVariableSymbol) {
+          SemanticdbSymbols.Descriptor.Kind.TypeParameter, sym.getSimpleName().toString());
+    } else if (sym instanceof VariableElement) {
       return new SemanticdbSymbols.Descriptor(
-          SemanticdbSymbols.Descriptor.Kind.TypeParameter, sym.name.toString());
-    } else if (sym instanceof Symbol.VarSymbol) {
-      return new SemanticdbSymbols.Descriptor(
-          SemanticdbSymbols.Descriptor.Kind.Term, sym.name.toString());
+          SemanticdbSymbols.Descriptor.Kind.Term, sym.getSimpleName().toString());
     } else {
       return SemanticdbSymbols.Descriptor.NONE;
     }
@@ -113,11 +136,11 @@ public final class GlobalSymbolsCache {
    * <p><a href="https://scalameta.org/docs/semanticdb/specification.html#symbol-2">Link to
    * SemanticDB spec</a>.
    */
-  private String methodDisambiguator(Symbol.MethodSymbol sym) {
-    Iterable<? extends Element> elements = sym.owner.getEnclosedElements();
+  private String methodDisambiguator(ExecutableElement sym) {
+    Iterable<? extends Element> elements = sym.getEnclosingElement().getEnclosedElements();
     ArrayList<ExecutableElement> methods = new ArrayList<>();
     for (Element e : elements) {
-      if (e instanceof ExecutableElement && e.getSimpleName() == sym.name) {
+      if (e instanceof ExecutableElement && e.getSimpleName() == sym.getSimpleName()) {
         methods.add((ExecutableElement) e);
       }
     }

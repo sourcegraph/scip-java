@@ -19,6 +19,12 @@ public enum CompilerRange {
   FROM_START_TO_END,
 
   /**
+   * Map the compiler point position to SemanticDB end and use (point - symbol name length) for the
+   * SemanticDB start position.
+   */
+  FROM_END_TO_SYMBOL_NAME,
+
+  /**
    * Map the compiler point position to SemanticDB start and use (point + symbol name length) for
    * the SemanticDB end position.
    */
@@ -59,11 +65,30 @@ public enum CompilerRange {
     }
   }
 
+  public boolean isFromEndPoint() {
+    switch (this) {
+      case FROM_END_TO_SYMBOL_NAME:
+      case FROM_END_WITH_TEXT_SEARCH:
+        return true;
+      default:
+        return false;
+    }
+  }
+
   public boolean isFromTextSearch() {
     switch (this) {
       case FROM_TEXT_SEARCH:
       case FROM_END_WITH_TEXT_SEARCH:
       case FROM_POINT_WITH_TEXT_SEARCH:
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  public boolean isPlusOne() {
+    switch (this) {
+      case FROM_POINT_TO_SYMBOL_NAME_PLUS_ONE:
         return true;
       default:
         return false;

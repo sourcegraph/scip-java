@@ -49,7 +49,7 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
 //                    ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#[T]
 //                      ^^^^^ definition local 0
 //                            documentation ```java\nT model\n```
-//                             ^^^^ reference semanticdb maven . . _root_/
+//                             ^^^^ reference semanticdb maven . . View#
 //                                  ^^^^^^^^ definition local 1
 //                                           documentation ```java\nunresolved_type itemView\n```
 //                                                ^^^^^^^^^^^^^^^ definition local 2
@@ -78,13 +78,13 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
 //                            ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#[T]
 //                              ^^^^^ definition local 3
 //                                    documentation ```java\nT model\n```
-//                                     ^^^^ reference semanticdb maven . . _root_/
+//                                     ^^^^ reference semanticdb maven . . View#
 //                                          ^^^^^^^^ definition local 4
 //                                                   documentation ```java\nunresolved_type itemView\n```
 //                                                          ^^^^^^^^^^^^^ definition local 5
 //                                                                        documentation ```java\nfloat swipeProgress\n```
       Canvas canvas);
-//    ^^^^^^ reference semanticdb maven . . _root_/
+//    ^^^^^^ reference semanticdb maven . . Canvas#
 //           ^^^^^^ definition local 6
 //                  documentation ```java\nunresolved_type canvas\n```
 
@@ -106,7 +106,7 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
 //                     ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#[T]
 //                       ^^^^^ definition local 7
 //                             documentation ```java\nT model\n```
-//                              ^^^^ reference semanticdb maven . . _root_/
+//                              ^^^^ reference semanticdb maven . . View#
 //                                   ^^^^^^^^ definition local 8
 //                                            documentation ```java\nunresolved_type itemView\n```
 
@@ -136,7 +136,7 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
 //                      ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#[T]
 //                        ^^^^^ definition local 9
 //                              documentation ```java\nT model\n```
-//                               ^^^^ reference semanticdb maven . . _root_/
+//                               ^^^^ reference semanticdb maven . . View#
 //                                    ^^^^^^^^ definition local 10
 //                                             documentation ```java\nunresolved_type itemView\n```
 //                                                  ^^^^^^^^ definition local 11

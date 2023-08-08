@@ -59,7 +59,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#
 //                                        documentation ```java\npublic final class EpoxyControllerAdapter\n```
 //                                        relationship is_implementation semanticdb maven . . RecyclerView/Adapter#
-//                                        relationship is_implementation semanticdb maven . . ``/StickyHeaderCallbacks#
+//                                        relationship is_implementation semanticdb maven . . StickyHeaderCallbacks#
 //                                        relationship is_implementation semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#
 //                                        relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
 //                                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
@@ -94,7 +94,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                                ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                                                ^^^^^^^^^^^^^^^ definition local 0
 //                                                                documentation ```java\n@NonNull\nEpoxyController epoxyController\n```
-//                                                                 ^^^^^^^ reference semanticdb maven . . _root_/
+//                                                                 ^^^^^^^ reference semanticdb maven . . Handler#
 //                                                                         ^^^^^^^^^^^^^^ definition local 1
 //                                                                                        documentation ```java\nunresolved_type diffingHandler\n```
     this.epoxyController = epoxyController;
@@ -311,7 +311,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#onAttachedToRecyclerView().
 //                                     documentation ```java\n@Override\npublic void onAttachedToRecyclerView(unresolved_type recyclerView)\n```
 //                                      ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
-//                                              ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                              ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                                           ^^^^^^^^^^^^ definition local 11
 //                                                                        documentation ```java\n@NonNull\nunresolved_type recyclerView\n```
     super.onAttachedToRecyclerView(recyclerView);
@@ -331,7 +331,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                                       documentation ```java\n@Override\npublic void onDetachedFromRecyclerView(unresolved_type recyclerView)\n```
 //                                       relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onDetachedFromRecyclerView().
 //                                        ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
-//                                                ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                                ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                                             ^^^^^^^^^^^^ definition local 12
 //                                                                          documentation ```java\n@NonNull\nunresolved_type recyclerView\n```
     super.onDetachedFromRecyclerView(recyclerView);
@@ -654,11 +654,13 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   }
 
   private static final ItemCallback<EpoxyModel<?>> ITEM_CALLBACK =
-//                     ^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                     ^^^^^^^^^^^^ reference semanticdb maven . . ItemCallback#
 //                                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                 ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#ITEM_CALLBACK.
 //                                                               documentation ```java\nprivate static final unresolved_type ITEM_CALLBACK\n```
       new ItemCallback<EpoxyModel<?>>() {
+//        ^^^^^^^^^^^^ reference semanticdb maven . . ItemCallback#
+//                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
         @Override
         public boolean areItemsTheSame(EpoxyModel<?> oldItem, EpoxyModel<?> newItem) {
           return oldItem.id() == newItem.id();
@@ -706,7 +708,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                                  documentation  Delegates the callbacks received in the adapter\n to the controller.\n
 //                                  relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#setupStickyHeaderView().
 //                                   ^^^^^^^ reference semanticdb maven maven/org.jetbrains/annotations 13.0 org/jetbrains/annotations/NotNull#
-//                                           ^^^^ reference semanticdb maven . . _root_/
+//                                           ^^^^ reference semanticdb maven . . View#
 //                                                ^^^^^^^^^^^^ definition local 36
 //                                                             documentation ```java\n@NotNull\nunresolved_type stickyHeader\n```
     epoxyController.setupStickyHeaderView(stickyHeader);
@@ -727,7 +729,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                                     documentation  Delegates the callbacks received in the adapter\n to the controller.\n
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#teardownStickyHeaderView().
 //                                      ^^^^^^^ reference semanticdb maven maven/org.jetbrains/annotations 13.0 org/jetbrains/annotations/NotNull#
-//                                              ^^^^ reference semanticdb maven . . _root_/
+//                                              ^^^^ reference semanticdb maven . . View#
 //                                                   ^^^^^^^^^^^^ definition local 37
 //                                                                documentation ```java\n@NotNull\nunresolved_type stickyHeader\n```
     epoxyController.teardownStickyHeaderView(stickyHeader);

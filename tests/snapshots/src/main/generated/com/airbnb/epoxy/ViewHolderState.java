@@ -62,12 +62,12 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //    ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#
 //                    documentation ```java\n@SuppressWarnings("WeakerAccess")\nclass ViewHolderState\n```
 //                    documentation  Helper for {@link EpoxyAdapter} to store the state of Views in the adapter. This is useful for\n saving changes due to user input, such as text input or selection, when a view is scrolled off\n screen or if the adapter needs to be recreated.\n <p/>\n This saved state is separate from the state represented by a {@link EpoxyModel}, which should\n represent the more permanent state of the data shown in the view. This class stores transient\n state that is added to the View after it is bound to a {@link EpoxyModel}. For example, a {@link\n EpoxyModel} may inflate and bind an EditText and then be responsible for styling it and attaching\n listeners. If the user then inputs text, scrolls the view offscreen and then scrolls back, this\n class will preserve the inputted text without the {@link EpoxyModel} needing to be aware of its\n existence.\n <p/>\n This class relies on the adapter having stable ids, as the state of a view is mapped to the id of\n the {@link EpoxyModel}.\n
-//                    relationship is_implementation semanticdb maven . . ``/Parcelable#
+//                    relationship is_implementation semanticdb maven . . Parcelable#
 //                    relationship is_implementation semanticdb maven jdk 11 java/lang/Cloneable#
 //                    relationship is_implementation semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#
 //                            ^^^^^^^^^^^^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#
 //                                            ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#
-//                                                                  ^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                                                  ^^^^^^^^^^ reference semanticdb maven . . Parcelable#
   ViewHolderState() {
 //^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#`<init>`().
 //                documentation ```java\nViewHolderState()\n```
@@ -96,7 +96,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
   public void writeToParcel(Parcel dest, int flags) {
 //            ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#writeToParcel().
 //                          documentation ```java\n@Override\npublic void writeToParcel(unresolved_type dest, int flags)\n```
-//                          ^^^^^^ reference semanticdb maven . . _root_/
+//                          ^^^^^^ reference semanticdb maven . . Parcel#
 //                                 ^^^^ definition local 1
 //                                      documentation ```java\nunresolved_type dest\n```
 //                                           ^^^^^ definition local 2
@@ -107,7 +107,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                   ^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#size().
     dest.writeInt(size);
 //  ^^^^ reference local 1
-//       ^^^^^^^^ reference semanticdb maven . . writeInt#
+//       ^^^^^^^^ reference semanticdb maven . . Parcel#writeInt#
 //                ^^^^ reference local 3
     for (int i = 0; i < size; i++) {
 //           ^ definition local 4
@@ -117,22 +117,24 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                            ^ reference local 4
       dest.writeLong(keyAt(i));
 //    ^^^^ reference local 1
-//         ^^^^^^^^^ reference semanticdb maven . . writeLong#
+//         ^^^^^^^^^ reference semanticdb maven . . Parcel#writeLong#
 //                   ^^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#keyAt().
 //                         ^ reference local 4
       dest.writeParcelable(valueAt(i), 0);
 //    ^^^^ reference local 1
-//         ^^^^^^^^^^^^^^^ reference semanticdb maven . . writeParcelable#
+//         ^^^^^^^^^^^^^^^ reference semanticdb maven . . Parcel#writeParcelable#
 //                         ^^^^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#valueAt().
 //                                 ^ reference local 4
     }
   }
 
   public static final Creator<ViewHolderState> CREATOR = new Creator<ViewHolderState>() {
-//                    ^^^^^^^ reference semanticdb maven . . _root_/
+//                    ^^^^^^^ reference semanticdb maven . . Creator#
 //                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#
 //                                             ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#CREATOR.
 //                                                     documentation ```java\npublic static final unresolved_type CREATOR\n```
+//                                                           ^^^^^^^ reference semanticdb maven . . Creator#
+//                                                                   ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#
 
     public ViewHolderState[] newArray(int size) {
       return new ViewHolderState[size];
@@ -275,11 +277,11 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                    ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#
 //                              documentation ```java\npublic static class ViewState\n```
 //                              documentation  A wrapper around a sparse array as a helper to save the state of a view. This also adds\n parcelable support.\n
-//                              relationship is_implementation semanticdb maven . . ``/Parcelable#
-//                              relationship is_implementation semanticdb maven . . ``/SparseArray#
-//                                      ^^^^^^^^^^^ reference semanticdb maven . . _root_/
-//                                                  ^^^^^^^^^^ reference semanticdb maven . . _root_/
-//                                                                         ^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                              relationship is_implementation semanticdb maven . . Parcelable#
+//                              relationship is_implementation semanticdb maven . . SparseArray#
+//                                      ^^^^^^^^^^^ reference semanticdb maven . . SparseArray#
+//                                                  ^^^^^^^^^^ reference semanticdb maven . . Parcelable#
+//                                                                         ^^^^^^^^^^ reference semanticdb maven . . Parcelable#
 
     ViewState() {
 //  ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`().
@@ -293,7 +295,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                             documentation ```java\nint size\n```
 //                                    ^^^^ definition local 13
 //                                         documentation ```java\nint[] keys\n```
-//                                          ^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                          ^^^^^^^^^^ reference semanticdb maven . . Parcelable#
 //                                                       ^^^^^^ definition local 14
 //                                                              documentation ```java\nunresolved_type[] values\n```
       super(size);
@@ -316,48 +318,48 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
     public void save(View view) {
 //              ^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#save().
 //                   documentation ```java\npublic void save(unresolved_type view)\n```
-//                   ^^^^ reference semanticdb maven . . _root_/
+//                   ^^^^ reference semanticdb maven . . View#
 //                        ^^^^ definition local 16
 //                             documentation ```java\nunresolved_type view\n```
       int originalId = view.getId();
 //        ^^^^^^^^^^ definition local 17
 //                   documentation ```java\nint originalId\n```
 //                     ^^^^ reference local 16
-//                          ^^^^^ reference semanticdb maven . . getId#
+//                          ^^^^^ reference semanticdb maven . . View#getId#
       setIdIfNoneExists(view);
 //    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#setIdIfNoneExists().
 //                      ^^^^ reference local 16
 
       view.saveHierarchyState(this);
 //    ^^^^ reference local 16
-//         ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . saveHierarchyState#
+//         ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . View#saveHierarchyState#
       view.setId(originalId);
 //    ^^^^ reference local 16
-//         ^^^^^ reference semanticdb maven . . setId#
+//         ^^^^^ reference semanticdb maven . . View#setId#
 //               ^^^^^^^^^^ reference local 17
     }
 
     public void restore(View view) {
 //              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#restore().
 //                      documentation ```java\npublic void restore(unresolved_type view)\n```
-//                      ^^^^ reference semanticdb maven . . _root_/
+//                      ^^^^ reference semanticdb maven . . View#
 //                           ^^^^ definition local 18
 //                                documentation ```java\nunresolved_type view\n```
       int originalId = view.getId();
 //        ^^^^^^^^^^ definition local 19
 //                   documentation ```java\nint originalId\n```
 //                     ^^^^ reference local 18
-//                          ^^^^^ reference semanticdb maven . . getId#
+//                          ^^^^^ reference semanticdb maven . . View#getId#
       setIdIfNoneExists(view);
 //    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#setIdIfNoneExists().
 //                      ^^^^ reference local 18
 
       view.restoreHierarchyState(this);
 //    ^^^^ reference local 18
-//         ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . restoreHierarchyState#
+//         ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . View#restoreHierarchyState#
       view.setId(originalId);
 //    ^^^^ reference local 18
-//         ^^^^^ reference semanticdb maven . . setId#
+//         ^^^^^ reference semanticdb maven . . View#setId#
 //               ^^^^^^^^^^ reference local 19
     }
 
@@ -371,17 +373,17 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //               ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#setIdIfNoneExists().
 //                                 documentation ```java\nprivate void setIdIfNoneExists(unresolved_type view)\n```
 //                                 documentation  If a view hasn't had an id set we need to set a temporary one in order to save state, since a\n view won't save its state unless it has an id. The view's id is also the key into the sparse\n array for its saved state, so the temporary one we choose just needs to be consistent between\n saving and restoring state.\n
-//                                 ^^^^ reference semanticdb maven . . _root_/
+//                                 ^^^^ reference semanticdb maven . . View#
 //                                      ^^^^ definition local 20
 //                                           documentation ```java\nunresolved_type view\n```
       if (view.getId() == View.NO_ID) {
 //        ^^^^ reference local 20
-//             ^^^^^ reference semanticdb maven . . getId#
-//                        ^^^^ reference semanticdb maven . . _root_/
-//                             ^^^^^ reference semanticdb maven . . NO_ID#
+//             ^^^^^ reference semanticdb maven . . View#getId#
+//                        ^^^^ reference semanticdb maven . . View#
+//                             ^^^^^ reference semanticdb maven . . View#NO_ID#
         view.setId(R.id.view_model_state_saving_id);
 //      ^^^^ reference local 20
-//           ^^^^^ reference semanticdb maven . . setId#
+//           ^^^^^ reference semanticdb maven . . View#setId#
 //                 ^ reference semanticdb maven . . R/
 //                   ^^ reference semanticdb maven . . R/id#
 //                      ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . R/id#view_model_state_saving_id#
@@ -401,7 +403,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
     public void writeToParcel(Parcel parcel, int flags) {
 //              ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#writeToParcel().
 //                            documentation ```java\n@Override\npublic void writeToParcel(unresolved_type parcel, int flags)\n```
-//                            ^^^^^^ reference semanticdb maven . . _root_/
+//                            ^^^^^^ reference semanticdb maven . . Parcel#
 //                                   ^^^^^^ definition local 21
 //                                          documentation ```java\nunresolved_type parcel\n```
 //                                               ^^^^^ definition local 22
@@ -415,10 +417,10 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //               documentation ```java\nint[] keys\n```
 //                         ^^^^ reference local 23
       Parcelable[] values = new Parcelable[size];
-//    ^^^^^^^^^^ reference semanticdb maven . . _root_/
+//    ^^^^^^^^^^ reference semanticdb maven . . Parcelable#
 //                 ^^^^^^ definition local 25
 //                        documentation ```java\nunresolved_type[] values\n```
-//                              ^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                              ^^^^^^^^^^ reference semanticdb maven . . Parcelable#
 //                                         ^^^^ reference local 23
       for (int i = 0; i < size; ++i) {
 //             ^ definition local 26
@@ -439,25 +441,28 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
       }
       parcel.writeInt(size);
 //    ^^^^^^ reference local 21
-//           ^^^^^^^^ reference semanticdb maven . . writeInt#
+//           ^^^^^^^^ reference semanticdb maven . . Parcel#writeInt#
 //                    ^^^^ reference local 23
       parcel.writeIntArray(keys);
 //    ^^^^^^ reference local 21
-//           ^^^^^^^^^^^^^ reference semanticdb maven . . writeIntArray#
+//           ^^^^^^^^^^^^^ reference semanticdb maven . . Parcel#writeIntArray#
 //                         ^^^^ reference local 24
       parcel.writeParcelableArray(values, flags);
 //    ^^^^^^ reference local 21
-//           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . writeParcelableArray#
+//           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . Parcel#writeParcelableArray#
 //                                ^^^^^^ reference local 25
 //                                        ^^^^^ reference local 22
     }
 
     public static final Creator<ViewState> CREATOR =
-//                      ^^^^^^^ reference semanticdb maven . . _root_/
+//                      ^^^^^^^ reference semanticdb maven . . Creator#
 //                              ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#
 //                                         ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#CREATOR.
 //                                                 documentation ```java\npublic static final unresolved_type CREATOR\n```
         new Parcelable.ClassLoaderCreator<ViewState>() {
+//          ^^^^^^^^^^ reference semanticdb maven . . Parcelable/
+//                     ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . Parcelable/ClassLoaderCreator#
+//                                        ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#
           @Override
           public ViewState createFromParcel(Parcel source, ClassLoader loader) {
             int size = source.readInt();

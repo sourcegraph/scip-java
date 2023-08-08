@@ -30,7 +30,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                            documentation  Helper class for cases where you don't need to do anything special when binding the view. This\n allows you to just provide the layout instead of needing to create a separate {@link EpoxyModel}\n subclass. This is useful for static layouts. You can also specify an onClick listener and the\n span size.\n
 //                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
-//                                               ^^^^ reference semanticdb maven . . _root_/
+//                                               ^^^^ reference semanticdb maven . . View#
   @LayoutRes private final int layoutRes;
 // ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/LayoutRes#
 //                             ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#layoutRes.
@@ -90,7 +90,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                 documentation ```java\n@CallSuper\n@Override\npublic void bind(unresolved_type view)\n```
 //                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#bind().
 //                  ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
-//                          ^^^^ reference semanticdb maven . . _root_/
+//                          ^^^^ reference semanticdb maven . . View#
 //                               ^^^^ definition local 3
 //                                    documentation ```java\n@NonNull\nunresolved_type view\n```
     super.bind(view);
@@ -99,11 +99,11 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //             ^^^^ reference local 3
     view.setOnClickListener(onClickListener);
 //  ^^^^ reference local 3
-//       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . setOnClickListener#
+//       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . View#setOnClickListener#
 //                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#onClickListener.
     view.setClickable(onClickListener != null);
 //  ^^^^ reference local 3
-//       ^^^^^^^^^^^^ reference semanticdb maven . . setClickable#
+//       ^^^^^^^^^^^^ reference semanticdb maven . . View#setClickable#
 //                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#onClickListener.
   }
 
@@ -116,7 +116,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                   documentation ```java\n@CallSuper\n@Override\npublic void unbind(unresolved_type view)\n```
 //                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#unbind().
 //                    ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
-//                            ^^^^ reference semanticdb maven . . _root_/
+//                            ^^^^ reference semanticdb maven . . View#
 //                                 ^^^^ definition local 4
 //                                      documentation ```java\n@NonNull\nunresolved_type view\n```
     super.unbind(view);
@@ -125,7 +125,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //               ^^^^ reference local 4
     view.setOnClickListener(null);
 //  ^^^^ reference local 4
-//       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . setOnClickListener#
+//       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . View#setOnClickListener#
   }
 
   @Override
