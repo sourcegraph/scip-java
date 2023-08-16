@@ -473,7 +473,7 @@ lazy val minimizedScala = project
 lazy val unit = project
   .in(file("tests/unit"))
   .settings(
-    testSettings(),
+    testSettings,
     //javaOptions ++= Seq(   "-Xdebug",   "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"),
     buildInfoKeys :=
       Seq[BuildInfoKey](
@@ -497,7 +497,7 @@ lazy val unit = project
 lazy val buildTools = project
   .in(file("tests/buildTools"))
   .settings(
-    testSettings(runInParallel = true),
+    testSettings,
     (Test / javaOptions) ++=
       List(
         s"-javaagent:${(agent / Compile / Keys.`package`).value}",
@@ -510,14 +510,16 @@ lazy val buildTools = project
         "SCIP_JAVA_CLI" -> ((cli / pack).value / "bin" / "scip-java").toString
       ),
     Test / fork := true,
-    Test / testForkedParallel := true
+    // Our CI set up is a couple of measly vCPUs so parallelising tests there makes
+    // everything worse
+    Test / testForkedParallel := !sys.env.contains("CI")
   )
   .dependsOn(agent, unit)
 
 lazy val snapshots = project
   .in(file("tests/snapshots"))
   .settings(
-    testSettings(),
+    testSettings,
     buildInfoKeys :=
       Seq[BuildInfoKey](
         "snapshotDirectory" -> (Compile / sourceDirectory).value / "generated"
@@ -565,26 +567,28 @@ lazy val javaOnlySettings = List[Def.Setting[_]](
   crossPaths := false
 )
 
-def testSettings(runInParallel: Boolean = false) =
-  List(
-    (publish / skip) := true,
-    autoScalaLibrary := true,
-    testFrameworks := List(TestFrameworks.MUnit),
-    testOptions ++=
+val testSettings = List(
+  (publish / skip) := true,
+  autoScalaLibrary := true,
+  testFrameworks := List(TestFrameworks.MUnit),
+  testOptions ++= {
+    if (!(Test / testForkedParallel).value)
       List(Tests.Argument(TestFrameworks.MUnit, "-b"))
-        .filter(_ => !runInParallel),
-    libraryDependencies ++=
-      List(
-        "org.scalameta" %% "munit" % "0.7.29",
-        "org.scalameta" %% "mtags" % V.metals cross CrossVersion.full,
-        "com.dimafeng" %% "testcontainers-scala-munit" % V.testcontainers,
-        "com.dimafeng" %% "testcontainers-scala-postgresql" % V.testcontainers,
-        "org.scalameta" %% "moped-testkit" % V.moped,
-        "org.scalameta" %% "scalameta" % V.scalameta,
-        "io.get-coursier" %% "coursier" % V.coursier,
-        "com.lihaoyi" %% "pprint" % "0.6.6"
-      )
-  )
+    else
+      Nil
+  },
+  libraryDependencies ++=
+    List(
+      "org.scalameta" %% "munit" % "0.7.29",
+      "org.scalameta" %% "mtags" % V.metals cross CrossVersion.full,
+      "com.dimafeng" %% "testcontainers-scala-munit" % V.testcontainers,
+      "com.dimafeng" %% "testcontainers-scala-postgresql" % V.testcontainers,
+      "org.scalameta" %% "moped-testkit" % V.moped,
+      "org.scalameta" %% "scalameta" % V.scalameta,
+      "io.get-coursier" %% "coursier" % V.coursier,
+      "com.lihaoyi" %% "pprint" % "0.6.6"
+    )
+)
 
 lazy val fatjarPackageSettings = List[Def.Setting[_]](
   (assembly / assemblyMergeStrategy) := {
