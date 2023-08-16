@@ -21,6 +21,7 @@ import os.Shellable
 object Java8Only extends munit.Tag("Java8Only")
 
 abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
+  self =>
   override def environmentVariables: Map[String, String] = sys.env
 
   def tags = List.empty[Tag]
@@ -49,8 +50,15 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
   // NOTE(olafur): workaround for https://github.com/scalameta/moped/issues/18
   override val temporaryDirectory: DirectoryFixture =
     new DirectoryFixture {
-      private val path = BuildInfo.temporaryDirectory.toPath
-      override def apply(): Path = path
+      private val path = BuildInfo
+        .temporaryDirectory
+        .toPath
+        .resolve(self.getClass().getSimpleName())
+
+      override def apply(): Path = {
+        Files.createDirectories(path)
+        path
+      }
       override def beforeEach(context: BeforeEach): Unit = {
         DeleteVisitor.deleteRecursively(path)
       }
