@@ -1,7 +1,5 @@
 package tests
 
-import munit.IgnoreSuite
-
 abstract class SbtBuildToolSuite(sbtVersion: String)
     extends BaseBuildToolSuite {
   List("2.11.9", "2.12.18", "2.13.11", "3.3.0").foreach { scalaVersion =>
