@@ -12,6 +12,7 @@ import java.util.Objects;
 public final class SemanticdbSymbols {
 
   public static String NONE = "";
+  public static String NONE_STUB = "<?>";
   public static String ROOT_PACKAGE = "_root_/";
 
   /** Creates a new global SemanticDB symbol. */
@@ -28,6 +29,10 @@ public final class SemanticdbSymbols {
 
   public static boolean isLocal(String symbol) {
     return symbol.startsWith("local");
+  }
+
+  public static boolean isNone(String symbol) {
+    return NONE.equals(symbol) || NONE_STUB.equals(symbol);
   }
 
   public static boolean isGlobal(String symbol) {
