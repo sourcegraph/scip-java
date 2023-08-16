@@ -509,7 +509,10 @@ lazy val buildTools = project
       Map(
         "SCIP_JAVA_CLI" -> ((cli / pack).value / "bin" / "scip-java").toString
       ),
-    Test / fork := true
+    Test / fork := true,
+    // Our CI set up is a couple of measly vCPUs so parallelising tests there makes
+    // everything worse
+    Test / testForkedParallel := !sys.env.contains("CI")
   )
   .dependsOn(agent, unit)
 
@@ -564,11 +567,16 @@ lazy val javaOnlySettings = List[Def.Setting[_]](
   crossPaths := false
 )
 
-lazy val testSettings = List(
+val testSettings = List(
   (publish / skip) := true,
   autoScalaLibrary := true,
   testFrameworks := List(TestFrameworks.MUnit),
-  testOptions ++= List(Tests.Argument(TestFrameworks.MUnit, "-b")),
+  testOptions ++= {
+    if (!(Test / testForkedParallel).value)
+      List(Tests.Argument(TestFrameworks.MUnit, "-b"))
+    else
+      Nil
+  },
   libraryDependencies ++=
     List(
       "org.scalameta" %% "munit" % "0.7.29",
