@@ -120,8 +120,8 @@ class OverridesSuite extends FunSuite with TempDirectories {
       |}
       |""".stripMargin,
     "example/Parent#Child#toString().",
-    """example/Parent#toString().
-      |java/lang/Object#toString().
+    """java/lang/Object#toString().
+      |example/Parent#toString().
       |""".stripMargin
   )
 

@@ -222,7 +222,7 @@ public class StringAttributeData {
 //       ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                    ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#toString().
 //                             documentation ```java\npublic CharSequence toString(unresolved_type context)\n```
-//                             ^^^^^^^ reference semanticdb maven . . _root_/
+//                             ^^^^^^^ reference semanticdb maven . . Context#
 //                                     ^^^^^^^ definition local 9
 //                                             documentation ```java\nunresolved_type context\n```
     if (pluralRes != 0) {
@@ -231,16 +231,16 @@ public class StringAttributeData {
 //        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
         return context.getResources().getQuantityString(pluralRes, quantity, formatArgs);
 //             ^^^^^^^ reference local 9
-//                     ^^^^^^^^^^^^ reference semanticdb maven . . getResources#
-//                                    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . getResources#getQuantityString#
+//                     ^^^^^^^^^^^^ reference semanticdb maven . . Context#getResources#
+//                                    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . Context#getResources#getQuantityString#
 //                                                      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
 //                                                                 ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#quantity.
 //                                                                           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
       } else {
         return context.getResources().getQuantityString(pluralRes, quantity);
 //             ^^^^^^^ reference local 9
-//                     ^^^^^^^^^^^^ reference semanticdb maven . . getResources#
-//                                    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . getResources#getQuantityString#
+//                     ^^^^^^^^^^^^ reference semanticdb maven . . Context#getResources#
+//                                    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . Context#getResources#getQuantityString#
 //                                                      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
 //                                                                 ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#quantity.
       }
@@ -250,15 +250,15 @@ public class StringAttributeData {
 //        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
         return context.getResources().getString(stringRes, formatArgs);
 //             ^^^^^^^ reference local 9
-//                     ^^^^^^^^^^^^ reference semanticdb maven . . getResources#
-//                                    ^^^^^^^^^ reference semanticdb maven . . getResources#getString#
+//                     ^^^^^^^^^^^^ reference semanticdb maven . . Context#getResources#
+//                                    ^^^^^^^^^ reference semanticdb maven . . Context#getResources#getString#
 //                                              ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
 //                                                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
       } else {
         return context.getResources().getText(stringRes);
 //             ^^^^^^^ reference local 9
-//                     ^^^^^^^^^^^^ reference semanticdb maven . . getResources#
-//                                    ^^^^^^^ reference semanticdb maven . . getResources#getText#
+//                     ^^^^^^^^^^^^ reference semanticdb maven . . Context#getResources#
+//                                    ^^^^^^^ reference semanticdb maven . . Context#getResources#getText#
 //                                            ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
       }
     } else {

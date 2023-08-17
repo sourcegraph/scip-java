@@ -31,8 +31,8 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //           ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#
 //                           documentation ```java\npublic class EpoxyDiffLogger\n```
 //                           documentation  This data observer can be registered with an Epoxy adapter or controller to log all item change\n events. This may be useful to use in debug builds in order to observe model updates and monitor\n for issues.\n <p>\n You may want to look for unexpected item updates to catch improper hashCode/equals\n implementations in your models.\n <p>\n Additionally, you may want to look for frequent or unnecessary updates as an opportunity for\n optimization.\n
-//                           relationship is_implementation semanticdb maven . . ``/AdapterDataObserver#
-//                                   ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                           relationship is_implementation semanticdb maven . . AdapterDataObserver#
+//                                   ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . AdapterDataObserver#
   private final String tag;
 //              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                     ^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#tag.
@@ -59,8 +59,8 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //                                                      ^^^^^^^^^ definition local 2
 //                                                                documentation ```java\nint itemCount\n```
     Log.d(tag, "Item range changed. Start: " + positionStart + " Count: " + itemCount);
-//  ^^^ reference semanticdb maven . . _root_/
-//      ^ reference semanticdb maven . . d#
+//  ^^^ reference semanticdb maven . . Log#
+//      ^ reference semanticdb maven . . Log#d#
 //        ^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#tag.
 //                                             ^^^^^^^^^^^^^ reference local 1
 //                                                                          ^^^^^^^^^ reference local 2
@@ -87,8 +87,8 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //                                      ^^^^^^^^^ reference local 4
     } else {
       Log.d(tag,
-//    ^^^ reference semanticdb maven . . _root_/
-//        ^ reference semanticdb maven . . d#
+//    ^^^ reference semanticdb maven . . Log#
+//        ^ reference semanticdb maven . . Log#d#
 //          ^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#tag.
           "Item range changed with payloads. Start: " + positionStart + " Count: " + itemCount);
 //                                                      ^^^^^^^^^^^^^ reference local 3
@@ -106,8 +106,8 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //                                                       ^^^^^^^^^ definition local 7
 //                                                                 documentation ```java\nint itemCount\n```
     Log.d(tag, "Item range inserted. Start: " + positionStart + " Count: " + itemCount);
-//  ^^^ reference semanticdb maven . . _root_/
-//      ^ reference semanticdb maven . . d#
+//  ^^^ reference semanticdb maven . . Log#
+//      ^ reference semanticdb maven . . Log#d#
 //        ^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#tag.
 //                                              ^^^^^^^^^^^^^ reference local 6
 //                                                                           ^^^^^^^^^ reference local 7
@@ -123,8 +123,8 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //                                                      ^^^^^^^^^ definition local 9
 //                                                                documentation ```java\nint itemCount\n```
     Log.d(tag, "Item range removed. Start: " + positionStart + " Count: " + itemCount);
-//  ^^^ reference semanticdb maven . . _root_/
-//      ^ reference semanticdb maven . . d#
+//  ^^^ reference semanticdb maven . . Log#
+//      ^ reference semanticdb maven . . Log#d#
 //        ^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#tag.
 //                                             ^^^^^^^^^^^^^ reference local 8
 //                                                                          ^^^^^^^^^ reference local 9
@@ -142,8 +142,8 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //                                                                   ^^^^^^^^^ definition local 12
 //                                                                             documentation ```java\nint itemCount\n```
     Log.d(tag, "Item moved. From: " + fromPosition + " To: " + toPosition);
-//  ^^^ reference semanticdb maven . . _root_/
-//      ^ reference semanticdb maven . . d#
+//  ^^^ reference semanticdb maven . . Log#
+//      ^ reference semanticdb maven . . Log#d#
 //        ^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#tag.
 //                                    ^^^^^^^^^^^^ reference local 10
 //                                                             ^^^^^^^^^^ reference local 11

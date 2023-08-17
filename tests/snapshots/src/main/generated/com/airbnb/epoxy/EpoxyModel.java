@@ -195,20 +195,20 @@ public abstract class EpoxyModel<T> {
    * inflating the layout resource.
    */
   protected View buildView(@NonNull ViewGroup parent) {
-//          ^^^^ reference semanticdb maven . . _root_/
+//          ^^^^ reference semanticdb maven . . View#
 //               ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#buildView().
 //                         documentation ```java\nprotected unresolved_type buildView(unresolved_type parent)\n```
 //                         documentation  Create and return a new instance of a view for this model. By default a view is created by\n inflating the layout resource.\n
 //                         relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#buildView().
 //                          ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
-//                                  ^^^^^^^^^ reference semanticdb maven . . _root_/
+//                                  ^^^^^^^^^ reference semanticdb maven . . ViewGroup#
 //                                            ^^^^^^ definition local 1
 //                                                   documentation ```java\n@NonNull\nunresolved_type parent\n```
     return LayoutInflater.from(parent.getContext()).inflate(getLayout(), parent, false);
-//         ^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
-//                        ^^^^ reference semanticdb maven . . from#
+//         ^^^^^^^^^^^^^^ reference semanticdb maven . . LayoutInflater#
+//                        ^^^^ reference semanticdb maven . . LayoutInflater#from#
 //                             ^^^^^^ reference local 1
-//                                    ^^^^^^^^^^ reference semanticdb maven . . getContext#
+//                                    ^^^^^^^^^^ reference semanticdb maven . . ViewGroup#getContext#
 //                                                  ^^^^^^^ reference semanticdb maven . . `<any>`#inflate#
 //                                                          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getLayout().
 //                                                                       ^^^^^^ reference local 1
@@ -826,11 +826,11 @@ public abstract class EpoxyModel<T> {
         @Override
 //       ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
         public void onInterceptorsStarted(EpoxyController controller) {
-//                  ^^^^^^^^^^^^^^^^^^^^^ definition local 39
+//                  ^^^^^^^^^^^^^^^^^^^^^ definition local 38
 //                                        documentation ```java\n@Override\npublic void onInterceptorsStarted(EpoxyController controller)\n```
 //                                        relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#onInterceptorsStarted().
 //                                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
-//                                                        ^^^^^^^^^^ definition local 41
+//                                                        ^^^^^^^^^^ definition local 39
 //                                                                   documentation ```java\nEpoxyController controller\n```
           currentlyInInterceptors = true;
 //        ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#currentlyInInterceptors.
@@ -843,7 +843,7 @@ public abstract class EpoxyModel<T> {
 //                                         documentation ```java\n@Override\npublic void onInterceptorsFinished(EpoxyController controller)\n```
 //                                         relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#onInterceptorsFinished().
 //                                         ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
-//                                                         ^^^^^^^^^^ definition local 42
+//                                                         ^^^^^^^^^^ definition local 41
 //                                                                    documentation ```java\nEpoxyController controller\n```
           hashCodeWhenAdded = EpoxyModel.this.hashCode();
 //        ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#hashCodeWhenAdded.
@@ -904,30 +904,30 @@ public abstract class EpoxyModel<T> {
 //                               documentation ```java\nprivate static int getPosition(EpoxyController controller, EpoxyModel<?> model)\n```
 //                                ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
-//                                                        ^^^^^^^^^^ definition local 43
+//                                                        ^^^^^^^^^^ definition local 42
 //                                                                   documentation ```java\n@NonNull\nEpoxyController controller\n```
       @NonNull EpoxyModel<?> model) {
 //     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
-//                           ^^^^^ definition local 44
+//                           ^^^^^ definition local 43
 //                                 documentation ```java\n@NonNull\nEpoxyModel<?> model\n```
     // If the model was added to multiple controllers, or was removed from the controller and then
     // modified, this won't be correct. But those should be very rare cases that we don't need to
     // worry about
     if (controller.isBuildingModels()) {
-//      ^^^^^^^^^^ reference local 43
+//      ^^^^^^^^^^ reference local 42
 //                 ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#isBuildingModels().
       return controller.getFirstIndexOfModelInBuildingList(model);
-//           ^^^^^^^^^^ reference local 43
+//           ^^^^^^^^^^ reference local 42
 //                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#getFirstIndexOfModelInBuildingList().
-//                                                         ^^^^^ reference local 44
+//                                                         ^^^^^ reference local 43
     }
 
     return controller.getAdapter().getModelPosition(model);
-//         ^^^^^^^^^^ reference local 43
+//         ^^^^^^^^^^ reference local 42
 //                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#getAdapter().
 //                                 ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getModelPosition().
-//                                                  ^^^^^ reference local 44
+//                                                  ^^^^^ reference local 43
   }
 
   /**
@@ -944,10 +944,10 @@ public abstract class EpoxyModel<T> {
 //                                                          documentation ```java\nprotected final void validateStateHasNotChangedSinceAdded(String descriptionOfChange, int modelPosition)\n```
 //                                                          documentation  This is used internally by generated models to do validation checking when\n "validateEpoxyModelUsage" is enabled and the model is used with a {@link EpoxyController}. This\n method validates that the model's hashCode hasn't been changed since it was added to the\n controller. This is similar to {@link #onMutation()}, but that method is only used for\n specific model changes such as calling a setter. By checking the hashCode, this method allows\n us to catch more subtle changes, such as through setting a field directly or through changing\n an object that is set on the model.\n
 //                                                          ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
-//                                                                 ^^^^^^^^^^^^^^^^^^^ definition local 45
+//                                                                 ^^^^^^^^^^^^^^^^^^^ definition local 44
 //                                                                                     documentation ```java\nString descriptionOfChange\n```
       int modelPosition) {
-//        ^^^^^^^^^^^^^ definition local 46
+//        ^^^^^^^^^^^^^ definition local 45
 //                      documentation ```java\nint modelPosition\n```
     if (isDebugValidationEnabled()
 //      ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#isDebugValidationEnabled().
@@ -958,8 +958,8 @@ public abstract class EpoxyModel<T> {
 //                              ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#hashCode().
       throw new ImmutableModelException(this, descriptionOfChange, modelPosition);
 //              ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#`<init>`(+1).
-//                                            ^^^^^^^^^^^^^^^^^^^ reference local 45
-//                                                                 ^^^^^^^^^^^^^ reference local 46
+//                                            ^^^^^^^^^^^^^^^^^^^ reference local 44
+//                                                                 ^^^^^^^^^^^^^ reference local 45
     }
   }
 
@@ -972,40 +972,40 @@ public abstract class EpoxyModel<T> {
 //                      relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#equals().
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#equals().
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
-//                             ^ definition local 47
+//                             ^ definition local 46
 //                               documentation ```java\nObject o\n```
     if (this == o) {
-//              ^ reference local 47
+//              ^ reference local 46
       return true;
     }
     if (!(o instanceof EpoxyModel)) {
-//        ^ reference local 47
+//        ^ reference local 46
 //                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
       return false;
     }
 
     EpoxyModel<?> that = (EpoxyModel<?>) o;
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
-//                ^^^^ definition local 48
+//                ^^^^ definition local 47
 //                     documentation ```java\nEpoxyModel<?> that\n```
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
-//                                       ^ reference local 47
+//                                       ^ reference local 46
 
     if (id != that.id) {
 //      ^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id.
-//            ^^^^ reference local 48
+//            ^^^^ reference local 47
 //                 ^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id.
       return false;
     }
     if (getViewType() != that.getViewType()) {
 //      ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getViewType().
-//                       ^^^^ reference local 48
+//                       ^^^^ reference local 47
 //                            ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getViewType().
       return false;
     }
     return shown == that.shown;
 //         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#shown.
-//                  ^^^^ reference local 48
+//                  ^^^^ reference local 47
 //                       ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#shown.
   }
 
@@ -1018,20 +1018,20 @@ public abstract class EpoxyModel<T> {
 //                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#hashCode().
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#hashCode().
     int result = (int) (id ^ (id >>> 32));
-//      ^^^^^^ definition local 49
+//      ^^^^^^ definition local 48
 //             documentation ```java\nint result\n```
 //                      ^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id.
 //                            ^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id.
     result = 31 * result + getViewType();
-//  ^^^^^^ reference local 49
-//                ^^^^^^ reference local 49
+//  ^^^^^^ reference local 48
+//                ^^^^^^ reference local 48
 //                         ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getViewType().
     result = 31 * result + (shown ? 1 : 0);
-//  ^^^^^^ reference local 49
-//                ^^^^^^ reference local 49
+//  ^^^^^^ reference local 48
+//                ^^^^^^ reference local 48
 //                          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#shown.
     return result;
-//         ^^^^^^ reference local 49
+//         ^^^^^^ reference local 48
   }
 
   /**
@@ -1049,11 +1049,11 @@ public abstract class EpoxyModel<T> {
 //                       relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#getSpanSize().
 //                       relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#getSpanSize().
 //                       relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#getSpanSize().
-//                           ^^^^^^^^^^^^^^ definition local 50
+//                           ^^^^^^^^^^^^^^ definition local 49
 //                                          documentation ```java\nint totalSpanCount\n```
-//                                               ^^^^^^^^ definition local 51
+//                                               ^^^^^^^^ definition local 50
 //                                                        documentation ```java\nint position\n```
-//                                                             ^^^^^^^^^ definition local 52
+//                                                             ^^^^^^^^^ definition local 51
 //                                                                       documentation ```java\nint itemCount\n```
     return 1;
   }
@@ -1065,11 +1065,11 @@ public abstract class EpoxyModel<T> {
 //                                      documentation ```java\npublic EpoxyModel<T> spanSizeOverride(SpanSizeOverrideCallback spanSizeCallback)\n```
 //                                       ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                                ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#
-//                                                                         ^^^^^^^^^^^^^^^^ definition local 53
+//                                                                         ^^^^^^^^^^^^^^^^ definition local 52
 //                                                                                          documentation ```java\n@Nullable\nSpanSizeOverrideCallback spanSizeCallback\n```
     this.spanSizeOverride = spanSizeCallback;
 //       ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#spanSizeOverride.
-//                          ^^^^^^^^^^^^^^^^ reference local 53
+//                          ^^^^^^^^^^^^^^^^ reference local 52
     return this;
   }
 
@@ -1079,11 +1079,11 @@ public abstract class EpoxyModel<T> {
     int getSpanSize(int totalSpanCount, int position, int itemCount);
 //      ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#getSpanSize().
 //                  documentation ```java\npublic abstract int getSpanSize(int totalSpanCount, int position, int itemCount)\n```
-//                      ^^^^^^^^^^^^^^ definition local 54
+//                      ^^^^^^^^^^^^^^ definition local 53
 //                                     documentation ```java\nint totalSpanCount\n```
-//                                          ^^^^^^^^ definition local 55
+//                                          ^^^^^^^^ definition local 54
 //                                                   documentation ```java\nint position\n```
-//                                                        ^^^^^^^^^ definition local 56
+//                                                        ^^^^^^^^^ definition local 55
 //                                                                  documentation ```java\nint itemCount\n```
   }
 
@@ -1095,27 +1095,27 @@ public abstract class EpoxyModel<T> {
 //                 ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#spanSize().
 //                          documentation ```java\npublic final int spanSize(int totalSpanCount, int position, int itemCount)\n```
 //                          documentation  Returns the actual span size of this model, using the {@link SpanSizeOverrideCallback} if one\n was set, otherwise using the value from {@link #getSpanSize(int, int, int)}\n
-//                              ^^^^^^^^^^^^^^ definition local 57
+//                              ^^^^^^^^^^^^^^ definition local 56
 //                                             documentation ```java\nint totalSpanCount\n```
-//                                                  ^^^^^^^^ definition local 58
+//                                                  ^^^^^^^^ definition local 57
 //                                                           documentation ```java\nint position\n```
-//                                                                ^^^^^^^^^ definition local 59
+//                                                                ^^^^^^^^^ definition local 58
 //                                                                          documentation ```java\nint itemCount\n```
     if (spanSizeOverride != null) {
 //      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#spanSizeOverride.
       return spanSizeOverride.getSpanSize(totalSpanCount, position, itemCount);
 //           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#spanSizeOverride.
 //                            ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#SpanSizeOverrideCallback#getSpanSize().
-//                                        ^^^^^^^^^^^^^^ reference local 57
-//                                                        ^^^^^^^^ reference local 58
-//                                                                  ^^^^^^^^^ reference local 59
+//                                        ^^^^^^^^^^^^^^ reference local 56
+//                                                        ^^^^^^^^ reference local 57
+//                                                                  ^^^^^^^^^ reference local 58
     }
 
     return getSpanSize(totalSpanCount, position, itemCount);
 //         ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getSpanSize().
-//                     ^^^^^^^^^^^^^^ reference local 57
-//                                     ^^^^^^^^ reference local 58
-//                                               ^^^^^^^^^ reference local 59
+//                     ^^^^^^^^^^^^^^ reference local 56
+//                                     ^^^^^^^^ reference local 57
+//                                               ^^^^^^^^^ reference local 58
   }
 
   /**
@@ -1148,13 +1148,13 @@ public abstract class EpoxyModel<T> {
 //                     ^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModel#show(+1).
 //                          documentation ```java\n@NonNull\npublic EpoxyModel<T> show(boolean show)\n```
 //                          documentation  Change the visibility of the model's view. This only works if the model is\n used in {@link EpoxyAdapter} or a {@link EpoxyModelGroup}, but is not supported in {@link\n EpoxyController}\n
-//                                  ^^^^ definition local 60
+//                                  ^^^^ definition local 59
 //                                       documentation ```java\nboolean show\n```
     onMutation();
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#onMutation().
     shown = show;
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#shown.
-//          ^^^^ reference local 60
+//          ^^^^ reference local 59
     return this;
   }
 
@@ -1214,7 +1214,7 @@ public abstract class EpoxyModel<T> {
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onFailedToRecycleView().
 //                                      ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                              ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#[T]
-//                                                ^^^^ definition local 61
+//                                                ^^^^ definition local 60
 //                                                     documentation ```java\n@NonNull\nT view\n```
     return false;
   }
@@ -1232,7 +1232,7 @@ public abstract class EpoxyModel<T> {
 //                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onViewAttachedToWindow().
 //                                    ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                            ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#[T]
-//                                              ^^^^ definition local 62
+//                                              ^^^^ definition local 61
 //                                                   documentation ```java\n@NonNull\nT view\n```
 
   }
@@ -1251,7 +1251,7 @@ public abstract class EpoxyModel<T> {
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onViewDetachedFromWindow().
 //                                      ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                              ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#[T]
-//                                                ^^^^ definition local 63
+//                                                ^^^^ definition local 62
 //                                                     documentation ```java\n@NonNull\nT view\n```
 
   }

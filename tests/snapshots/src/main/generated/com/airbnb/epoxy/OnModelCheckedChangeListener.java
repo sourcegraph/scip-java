@@ -34,7 +34,7 @@ public interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V> {
 //                          ^^^^^^^^^^ definition local 1
 //                                     documentation ```java\nV parentView\n```
       CompoundButton checkedView, boolean isChecked, int position);
-//    ^^^^^^^^^^^^^^ reference semanticdb maven . . _root_/
+//    ^^^^^^^^^^^^^^ reference semanticdb maven . . CompoundButton#
 //                   ^^^^^^^^^^^ definition local 2
 //                               documentation ```java\nunresolved_type checkedView\n```
 //                                        ^^^^^^^^^ definition local 3

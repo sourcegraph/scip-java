@@ -41,12 +41,15 @@ public class InnerClasses {
     A,
 //  ^ definition semanticdb maven . . minimized/InnerClasses#InnerEnum#A.
 //    documentation ```java\nInnerEnum.A /* ordinal 0 */\n```
+//  ^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
     B,
 //  ^ definition semanticdb maven . . minimized/InnerClasses#InnerEnum#B.
 //    documentation ```java\nInnerEnum.B /* ordinal 1 */\n```
+//  ^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
     C
 //  ^ definition semanticdb maven . . minimized/InnerClasses#InnerEnum#C.
 //    documentation ```java\nInnerEnum.C /* ordinal 2 */\n```
+//  ^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
   }
 
   public interface InnerInterface<A, B> {
@@ -167,9 +170,6 @@ public class InnerClasses {
 //                   ^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#testEnum().
 //                            documentation ```java\npublic static void testEnum(InnerEnum magicEnum)\n```
 //                            ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#
-//                            ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
-//                            ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
-//                            ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
 //                                      ^^^^^^^^^ definition local 6
 //                                                documentation ```java\nInnerEnum magicEnum\n```
     if (System.nanoTime() > System.currentTimeMillis()) {
@@ -238,14 +238,14 @@ public class InnerClasses {
 //         ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
           public String apply(String s) {
 //               ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
-//                      ^^^^^ definition local 10
+//                      ^^^^^ definition local 9
 //                            documentation ```java\n@Override\npublic String apply(String s)\n```
 //                            relationship is_reference is_implementation semanticdb maven . . minimized/InnerClasses#InnerInterface#apply().
 //                            ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
-//                                   ^ definition local 11
+//                                   ^ definition local 10
 //                                     documentation ```java\nString s\n```
             return s + "b";
-//                 ^ reference local 11
+//                 ^ reference local 10
           }
         };
     System.out.println(fn.apply("a"));
@@ -261,33 +261,34 @@ public class InnerClasses {
 //                     ^^^ definition semanticdb maven . . minimized/InnerClasses#app().
 //                         documentation ```java\npublic static String app()\n```
     int a = 42;
-//      ^ definition local 12
+//      ^ definition local 11
 //        documentation ```java\nint a\n```
     InnerStaticClass.innerStaticMethod();
 //  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerStaticClass#
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerStaticClass#innerStaticMethod().
     InnerClasses innerClasses = new InnerClasses(a);
 //  ^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#
-//               ^^^^^^^^^^^^ definition local 13
+//               ^^^^^^^^^^^^ definition local 12
 //                            documentation ```java\nInnerClasses innerClasses\n```
 //                                  ^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#`<init>`().
-//                                               ^ reference local 12
+//                                               ^ reference local 11
     InnerClass innerClass = innerClasses.new InnerClass(a);
 //  ^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerClass#
-//             ^^^^^^^^^^ definition local 14
+//             ^^^^^^^^^^ definition local 13
 //                        documentation ```java\nInnerClass innerClass\n```
+//                          ^^^^^^^^^^^^ reference local 12
 //                                           ^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerClass#`<init>`().
-//                                                      ^ reference local 12
+//                                                      ^ reference local 11
     innerClass.innerMethod();
-//  ^^^^^^^^^^ reference local 14
+//  ^^^^^^^^^^ reference local 13
 //             ^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerClass#innerMethod().
     System.out.println(runInnerInterface(innerClass, a));
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
 //         ^^^ reference semanticdb maven jdk 11 java/lang/System#out.
 //             ^^^^^^^ reference semanticdb maven jdk 11 java/io/PrintStream#println(+9).
 //                     ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#runInnerInterface().
-//                                       ^^^^^^^^^^ reference local 14
-//                                                   ^ reference local 12
+//                                       ^^^^^^^^^^ reference local 13
+//                                                   ^ reference local 11
     testEnum(InnerEnum.A);
 //  ^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#testEnum().
 //           ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#

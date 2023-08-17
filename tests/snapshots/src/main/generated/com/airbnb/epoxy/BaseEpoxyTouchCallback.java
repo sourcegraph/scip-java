@@ -57,7 +57,7 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
 //               ^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
 //                 ^^^^^ definition local 2
 //                       documentation ```java\nT model\n```
-//                        ^^^^ reference semanticdb maven . . _root_/
+//                        ^^^^ reference semanticdb maven . . View#
 //                             ^^^^^^^^ definition local 3
 //                                      documentation ```java\nunresolved_type itemView\n```
 }

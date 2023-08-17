@@ -39,7 +39,7 @@ public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchC
 //                   ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#[T]
 //                     ^^^^^ definition local 0
 //                           documentation ```java\nT model\n```
-//                            ^^^^ reference semanticdb maven . . _root_/
+//                            ^^^^ reference semanticdb maven . . View#
 //                                 ^^^^^^^^ definition local 1
 //                                          documentation ```java\nunresolved_type itemView\n```
 //                                               ^^^^^^^^^^^^^^^ definition local 2
@@ -72,7 +72,7 @@ public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchC
 //                                                    ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#[T]
 //                                                      ^^^^^^^^^^^^^^^ definition local 5
 //                                                                      documentation ```java\nT modelBeingMoved\n```
-//                                                                       ^^^^ reference semanticdb maven . . _root_/
+//                                                                       ^^^^ reference semanticdb maven . . View#
 //                                                                            ^^^^^^^^ definition local 6
 //                                                                                     documentation ```java\nunresolved_type itemView\n```
 
@@ -99,7 +99,7 @@ public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchC
 //                    ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#[T]
 //                      ^^^^^ definition local 7
 //                            documentation ```java\nT model\n```
-//                             ^^^^ reference semanticdb maven . . _root_/
+//                             ^^^^ reference semanticdb maven . . View#
 //                                  ^^^^^^^^ definition local 8
 //                                           documentation ```java\nunresolved_type itemView\n```
 }

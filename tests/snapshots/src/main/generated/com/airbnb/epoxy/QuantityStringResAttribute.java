@@ -102,24 +102,24 @@ public class QuantityStringResAttribute {
 //       ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                    ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#toString().
 //                             documentation ```java\npublic CharSequence toString(unresolved_type context)\n```
-//                             ^^^^^^^ reference semanticdb maven . . _root_/
+//                             ^^^^^^^ reference semanticdb maven . . Context#
 //                                     ^^^^^^^ definition local 5
 //                                             documentation ```java\nunresolved_type context\n```
     if (formatArgs == null || formatArgs.length == 0) {
 //      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.
 //                            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.
-//                                       ^^^^^^ reference semanticdb maven . . length.
+//                                       ^^^^^^ reference semanticdb maven . . Array#length.
       return context.getResources().getQuantityString(id, quantity);
 //           ^^^^^^^ reference local 5
-//                   ^^^^^^^^^^^^ reference semanticdb maven . . getResources#
-//                                  ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . getResources#getQuantityString#
+//                   ^^^^^^^^^^^^ reference semanticdb maven . . Context#getResources#
+//                                  ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . Context#getResources#getQuantityString#
 //                                                    ^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#id.
 //                                                        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#quantity.
     } else {
       return context.getResources().getQuantityString(id, quantity, formatArgs);
 //           ^^^^^^^ reference local 5
-//                   ^^^^^^^^^^^^ reference semanticdb maven . . getResources#
-//                                  ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . getResources#getQuantityString#
+//                   ^^^^^^^^^^^^ reference semanticdb maven . . Context#getResources#
+//                                  ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . Context#getResources#getQuantityString#
 //                                                    ^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#id.
 //                                                        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#quantity.
 //                                                                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.

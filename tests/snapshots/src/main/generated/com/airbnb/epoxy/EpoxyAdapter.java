@@ -39,7 +39,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 //                                 documentation ```java\n@SuppressWarnings("WeakerAccess")\npublic abstract class EpoxyAdapter\n```
 //                                 documentation  Allows you to easily combine different view types in the same adapter, and handles view holder\n creation, binding, and ids for you. Subclasses just need to add their desired {@link EpoxyModel}\n objects and the rest is done automatically.\n <p/>\n {@link androidx.recyclerview.widget.RecyclerView.Adapter#setHasStableIds(boolean)} is set to true\n by default, since {@link EpoxyModel} makes it easy to support unique ids. If you don't want to\n support this then disable it in your base class (not recommended).\n
 //                                 relationship is_implementation semanticdb maven . . RecyclerView/Adapter#
-//                                 relationship is_implementation semanticdb maven . . ``/StickyHeaderCallbacks#
+//                                 relationship is_implementation semanticdb maven . . StickyHeaderCallbacks#
 //                                 relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
 //                    ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#`<init>`().
 //                                 documentation ```java\npublic EpoxyAdapter()\n```
@@ -262,7 +262,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 //      ^^^^^^^^^^^^^^ definition local 10
 //                     documentation ```java\nint numModelsToAdd\n```
 //                       ^^^^^^^^^^^ reference local 8
-//                                   ^^^^^^ reference semanticdb maven . . length.
+//                                   ^^^^^^ reference semanticdb maven . . Array#length.
 
     ((ModelList) models).ensureCapacity(initialSize + numModelsToAdd);
 //    ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#

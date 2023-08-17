@@ -1,10 +1,8 @@
 package com.sourcegraph.semanticdb_javac;
 
-import com.sun.source.util.*;
-import com.sun.tools.javac.api.BasicJavacTask;
-import com.sun.tools.javac.model.JavacTypes;
-import com.sun.tools.javac.util.Context;
-import com.sun.tools.javac.util.Options;
+import com.sun.source.util.Plugin;
+import com.sun.source.util.JavacTask;
+import com.sun.source.util.Trees;
 
 /** Entrypoint of the semanticdb-javac compiler plugin. */
 public class SemanticdbPlugin implements Plugin {
@@ -18,12 +16,10 @@ public class SemanticdbPlugin implements Plugin {
 
   @Override
   public void init(JavacTask task, String... args) {
-    Context ctx = ((BasicJavacTask) task).getContext();
-
-    SemanticdbReporter reporter = new SemanticdbReporter(Trees.instance(task));
-    SemanticdbJavacOptions options = SemanticdbJavacOptions.parse(args, ctx);
+    Trees trees = Trees.instance(task);
+    SemanticdbReporter reporter = new SemanticdbReporter(trees);
+    SemanticdbJavacOptions options = SemanticdbJavacOptions.parse(args, task);
     GlobalSymbolsCache globals = new GlobalSymbolsCache(options);
-    JavacTypes javacTypes = JavacTypes.instance(ctx);
-    task.addTaskListener(new SemanticdbTaskListener(options, task, globals, reporter, javacTypes));
+    task.addTaskListener(new SemanticdbTaskListener(options, task, trees, globals, reporter));
   }
 }

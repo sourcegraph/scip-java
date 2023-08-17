@@ -15,15 +15,10 @@ class ControllerModelList extends ModelList {
 //                        relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
 //                        relationship is_implementation semanticdb maven jdk 11 java/lang/Cloneable#
 //                        relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
-//                        relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
-//                        relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
 //                        relationship is_implementation semanticdb maven jdk 11 java/util/AbstractCollection#
 //                        relationship is_implementation semanticdb maven jdk 11 java/util/AbstractList#
 //                        relationship is_implementation semanticdb maven jdk 11 java/util/ArrayList#
 //                        relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//                        relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//                        relationship is_implementation semanticdb maven jdk 11 java/util/Collection#
-//                        relationship is_implementation semanticdb maven jdk 11 java/util/List#
 //                        relationship is_implementation semanticdb maven jdk 11 java/util/List#
 //                        relationship is_implementation semanticdb maven jdk 11 java/util/RandomAccess#
 //                                ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#
@@ -36,12 +31,12 @@ class ControllerModelList extends ModelList {
     @Override
 //   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public void onItemRangeInserted(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^^ definition local 2
+//              ^^^^^^^^^^^^^^^^^^^ definition local 1
 //                                  documentation ```java\n@Override\npublic void onItemRangeInserted(int positionStart, int itemCount)\n```
 //                                  relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeInserted().
-//                                      ^^^^^^^^^^^^^ definition local 4
+//                                      ^^^^^^^^^^^^^ definition local 2
 //                                                    documentation ```java\nint positionStart\n```
-//                                                         ^^^^^^^^^ definition local 5
+//                                                         ^^^^^^^^^ definition local 3
 //                                                                   documentation ```java\nint itemCount\n```
       throw new IllegalStateException(
 //              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IllegalStateException#`<init>`(+1).
@@ -51,12 +46,12 @@ class ControllerModelList extends ModelList {
     @Override
 //   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public void onItemRangeRemoved(int positionStart, int itemCount) {
-//              ^^^^^^^^^^^^^^^^^^ definition local 3
+//              ^^^^^^^^^^^^^^^^^^ definition local 4
 //                                 documentation ```java\n@Override\npublic void onItemRangeRemoved(int positionStart, int itemCount)\n```
 //                                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeRemoved().
-//                                     ^^^^^^^^^^^^^ definition local 6
+//                                     ^^^^^^^^^^^^^ definition local 5
 //                                                   documentation ```java\nint positionStart\n```
-//                                                        ^^^^^^^^^ definition local 7
+//                                                        ^^^^^^^^^ definition local 6
 //                                                                  documentation ```java\nint itemCount\n```
       throw new IllegalStateException(
 //              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IllegalStateException#`<init>`(+1).
@@ -67,11 +62,11 @@ class ControllerModelList extends ModelList {
   ControllerModelList(int expectedModelCount) {
 //^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerModelList#`<init>`().
 //                    documentation ```java\nControllerModelList(int expectedModelCount)\n```
-//                        ^^^^^^^^^^^^^^^^^^ definition local 8
+//                        ^^^^^^^^^^^^^^^^^^ definition local 7
 //                                           documentation ```java\nint expectedModelCount\n```
     super(expectedModelCount);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#`<init>`().
-//        ^^^^^^^^^^^^^^^^^^ reference local 8
+//        ^^^^^^^^^^^^^^^^^^ reference local 7
     pauseNotifications();
 //  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#pauseNotifications().
   }

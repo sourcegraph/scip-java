@@ -101,6 +101,8 @@ class DiffHelper {
 //                           ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView/AdapterDataObserver#
 //                                               ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#observer.
 //                                                        documentation ```java\nprivate final unresolved_type observer\n```
+//                                                              ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView/
+//                                                                           ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView/AdapterDataObserver#
     @Override
     public void onChanged() {
       throw new UnsupportedOperationException(

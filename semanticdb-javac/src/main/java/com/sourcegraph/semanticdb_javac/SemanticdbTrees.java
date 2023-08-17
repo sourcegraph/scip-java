@@ -1,9 +1,26 @@
 package com.sourcegraph.semanticdb_javac;
 
 import com.sun.source.tree.Tree;
-import com.sun.tools.javac.code.Type;
-import com.sun.tools.javac.tree.JCTree;
+import com.sun.source.util.Trees;
+import javax.lang.model.element.Element;
+import javax.lang.model.util.Types;
+import com.sun.source.util.TreePath;
+import com.sun.source.tree.Tree;
+import com.sun.source.tree.Tree.Kind;
+import com.sun.source.tree.BinaryTree;
+import com.sun.source.tree.AssignmentTree;
+import com.sun.source.tree.MemberSelectTree;
+import com.sun.source.tree.ClassTree;
+import com.sun.source.tree.VariableTree;
+import com.sun.source.tree.MethodTree;
+import com.sun.source.tree.ModifiersTree;
+import com.sun.source.tree.IdentifierTree;
+import com.sun.source.tree.ExpressionTree;
+import com.sun.source.tree.LiteralTree;
+import com.sun.source.tree.NewArrayTree;
+import com.sun.source.tree.AnnotationTree;
 
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,135 +30,127 @@ import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.ARRAY_SYMBO
 
 public class SemanticdbTrees {
   public SemanticdbTrees(
-      GlobalSymbolsCache globals, LocalSymbolsCache locals, String semanticdbUri) {
+      GlobalSymbolsCache globals,
+      LocalSymbolsCache locals,
+      String semanticdbUri,
+      Types types,
+      Trees trees,
+      HashMap<Tree, TreePath> nodes) {
     this.globals = globals;
     this.locals = locals;
     this.semanticdbUri = semanticdbUri;
+    this.types = types;
+    this.trees = trees;
+    this.nodes = nodes;
   }
 
   private final GlobalSymbolsCache globals;
   private final LocalSymbolsCache locals;
   private final String semanticdbUri;
+  private final Types types;
+  private final Trees trees;
+  private final HashMap<Tree, TreePath> nodes;
 
-  public List<Semanticdb.AnnotationTree> annotations(JCTree node) {
-    if (!(node instanceof JCTree.JCClassDecl)
-        && !(node instanceof JCTree.JCVariableDecl)
-        && !(node instanceof JCTree.JCMethodDecl)) return null;
+  public List<Semanticdb.AnnotationTree> annotations(Tree node) {
+    if (!(node instanceof ClassTree)
+        && !(node instanceof MethodTree)
+        && !(node instanceof VariableTree)) return null;
 
     List<Semanticdb.AnnotationTree> annotations = new ArrayList<>();
 
-    JCTree.JCModifiers mods;
-    if (node instanceof JCTree.JCClassDecl) {
-      mods = ((JCTree.JCClassDecl) node).getModifiers();
-    } else if (node instanceof JCTree.JCMethodDecl) {
-      mods = ((JCTree.JCMethodDecl) node).getModifiers();
+    ModifiersTree mods;
+    if (node instanceof ClassTree) {
+      mods = ((ClassTree) node).getModifiers();
+    } else if (node instanceof MethodTree) {
+      mods = ((MethodTree) node).getModifiers();
     } else {
-      mods = ((JCTree.JCVariableDecl) node).getModifiers();
+      mods = ((VariableTree) node).getModifiers();
     }
 
-    for (JCTree.JCAnnotation annotation : mods.getAnnotations()) {
+    for (AnnotationTree annotation : mods.getAnnotations()) {
       annotations.add(annotationBuilder(annotation));
     }
 
     return annotations;
   }
 
-  private Semanticdb.AnnotationTree annotationBuilder(JCTree.JCAnnotation annotation) {
-    ArrayList<Semanticdb.Tree> params = new ArrayList<>(annotation.args.size());
+  public Semanticdb.AnnotationTree annotationBuilder(AnnotationTree annotation) {
+    ArrayList<Semanticdb.Tree> params = new ArrayList<>(annotation.getArguments().size());
 
-    for (JCTree.JCExpression param : annotation.args) {
-      // anecdotally not always JCAssign in some situations when a compilation unit can't resolve
-      // symbols fully
-      if (param instanceof JCTree.JCAssign) {
-        JCTree.JCAssign assign = (JCTree.JCAssign) param;
-        JCTree.JCExpression assignValue = assign.rhs;
-
-        String symbol = globals.semanticdbSymbol(((JCTree.JCIdent) assign.lhs).sym, locals);
+    for (ExpressionTree param : annotation.getArguments()) {
+      // anecdotally not always AssignmentTree in some situations when a compilation unit can't
+      // resolve symbols fully
+      if (param instanceof AssignmentTree) {
+        AssignmentTree assign = (AssignmentTree) param;
+        ExpressionTree assignValue = assign.getExpression();
+        TreePath variableTreePath = nodes.get(assign.getVariable());
+        Element variableSym = trees.getElement(variableTreePath);
+        String symbol = globals.semanticdbSymbol(variableSym, locals);
         params.add(tree(assignTree(tree(idTree(symbol)), annotationParameter(assignValue))));
       } else {
         params.add(annotationParameter(param));
       }
     }
 
+    TreePath annotationTreePath = nodes.get(annotation);
+    Element annotationSym = trees.getElement(annotationTreePath);
+
     Semanticdb.Type type =
-        new SemanticdbTypeVisitor(globals, locals).semanticdbType(annotation.type);
+        new SemanticdbTypeVisitor(globals, locals, types).semanticdbType(annotationSym.asType());
     return annotationTree(type, params);
   }
 
-  private Semanticdb.Tree annotationParameter(JCTree.JCExpression expr) {
-    if (expr instanceof JCTree.JCFieldAccess) {
-      JCTree.JCFieldAccess rhs = (JCTree.JCFieldAccess) expr;
-
+  private Semanticdb.Tree annotationParameter(ExpressionTree expr) {
+    if (expr instanceof MemberSelectTree) {
+      TreePath expressionTreePath = nodes.get(expr);
+      Element expressionSym = trees.getElement(expressionTreePath);
       return tree(
           selectTree(
-              tree(idTree(globals.semanticdbSymbol(rhs.sym.owner, locals))),
-              idTree(globals.semanticdbSymbol(rhs.sym, locals))));
-    } else if (expr instanceof JCTree.JCNewArray) {
-      JCTree.JCNewArray rhs = (JCTree.JCNewArray) expr;
+              tree(idTree(globals.semanticdbSymbol(expressionSym.getEnclosingElement(), locals))),
+              idTree(globals.semanticdbSymbol(expressionSym, locals))));
+    } else if (expr instanceof NewArrayTree) {
+      NewArrayTree rhs = (NewArrayTree) expr;
       return tree(
           applyTree(
               tree(idTree(ARRAY_SYMBOL)),
-              rhs.elems.stream().map(this::annotationParameter).collect(Collectors.toList())));
-    } else if (expr instanceof JCTree.JCLiteral) {
+              rhs.getInitializers().stream()
+                  .map(this::annotationParameter)
+                  .collect(Collectors.toList())));
+    } else if (expr instanceof LiteralTree) {
       // Literals can either be a primitive or String
-      JCTree.JCLiteral rhs = (JCTree.JCLiteral) expr;
-
-      if (rhs.type instanceof Type.JCPrimitiveType) {
-        Type.JCPrimitiveType type = (Type.JCPrimitiveType) rhs.type;
-        switch (type.getKind()) {
-          case BOOLEAN:
-            return tree(literalTree(booleanConst(((Integer) rhs.value) == 1)));
-          case BYTE:
-            return tree(literalTree(byteConst((Byte) rhs.value)));
-          case SHORT:
-            return tree(literalTree(shortConst((Short) rhs.value)));
-          case INT:
-            return tree(literalTree(intConst((Integer) rhs.value)));
-          case LONG:
-            return tree(literalTree(longConst((Long) rhs.value)));
-          case CHAR:
-            return tree(literalTree(charConst((Character.forDigit((Integer) rhs.value, 10)))));
-          case FLOAT:
-            return tree(literalTree(floatConst((Float) rhs.value)));
-          case DOUBLE:
-            return tree(literalTree(doubleConst((Double) rhs.value)));
-        }
-      } else if (rhs.type instanceof Type.ClassType) {
-        if (rhs.value instanceof String) {
-          return tree(literalTree(stringConst((String) rhs.value)));
-        } else {
-          throw new IllegalStateException(
-              semanticdbUri
-                  + ": annotation parameter rhs was of unexpected class type "
-                  + rhs.value.getClass()
-                  + "\n"
-                  + rhs.value);
-        }
-      } else if (rhs.type instanceof Type.UnknownType) {
-        return tree(literalTree(stringConst("UNRESOLVED")));
-      } else {
+      Object value = ((LiteralTree) expr).getValue();
+      final Semanticdb.Constant constant;
+      if (value instanceof String) constant = stringConst((String) value);
+      else if (value instanceof Boolean) constant = booleanConst((Boolean) value);
+      else if (value instanceof Byte) constant = byteConst((Byte) value);
+      else if (value instanceof Short) constant = shortConst((Short) value);
+      else if (value instanceof Integer) constant = intConst((Integer) value);
+      else if (value instanceof Long) constant = longConst((Long) value);
+      else if (value instanceof Character) constant = charConst((Character) value);
+      else if (value instanceof Float) constant = floatConst((Float) value);
+      else if (value instanceof Double) constant = doubleConst((Double) value);
+      else
         throw new IllegalStateException(
             semanticdbUri
-                + ": annotation parameter rhs was of unexpected type "
-                + rhs.type.getClass()
+                + ": annotation parameter rhs was of unexpected class type "
+                + value.getClass()
                 + "\n"
-                + rhs.type
-                + " "
-                + rhs);
-      }
-    } else if (expr instanceof JCTree.JCAnnotation) {
-      return tree(annotationBuilder((JCTree.JCAnnotation) expr));
-    } else if (expr instanceof JCTree.JCIdent) {
-      return tree(idTree(globals.semanticdbSymbol(((JCTree.JCIdent) expr).sym, locals)));
-    } else if (expr instanceof JCTree.JCBinary) {
-      JCTree.JCBinary binExpr = (JCTree.JCBinary) expr;
+                + value);
+      return tree(literalTree(constant));
+    } else if (expr instanceof AnnotationTree) {
+      return tree(annotationBuilder((AnnotationTree) expr));
+    } else if (expr instanceof IdentifierTree) {
+      TreePath expressionTreePath = nodes.get(expr);
+      Element expressionSym = trees.getElement(expressionTreePath);
+      return tree(idTree(globals.semanticdbSymbol(expressionSym, locals)));
+    } else if (expr instanceof BinaryTree) {
+      BinaryTree binExpr = (BinaryTree) expr;
       return tree(
           binopTree(
-              annotationParameter(binExpr.lhs),
+              annotationParameter(binExpr.getLeftOperand()),
               semanticdbBinaryOperator(expr.getKind()),
-              annotationParameter(binExpr.rhs)));
+              annotationParameter(binExpr.getRightOperand())));
     }
-
     throw new IllegalArgumentException(
         semanticdbUri
             + ": annotation parameter rhs was of unexpected tree node type "

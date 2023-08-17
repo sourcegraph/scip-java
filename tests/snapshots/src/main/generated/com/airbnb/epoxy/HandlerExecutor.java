@@ -33,14 +33,14 @@ class HandlerExecutor implements Executor {
 //                    relationship is_implementation semanticdb maven jdk 11 java/util/concurrent/Executor#
 //                               ^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/Executor#
   final Handler handler;
-//      ^^^^^^^ reference semanticdb maven . . _root_/
+//      ^^^^^^^ reference semanticdb maven . . Handler#
 //              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#handler.
 //                      documentation ```java\nfinal unresolved_type handler\n```
 
   HandlerExecutor(Handler handler) {
 //^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#`<init>`().
 //                documentation ```java\nHandlerExecutor(unresolved_type handler)\n```
-//                ^^^^^^^ reference semanticdb maven . . _root_/
+//                ^^^^^^^ reference semanticdb maven . . Handler#
 //                        ^^^^^^^ definition local 0
 //                                documentation ```java\nunresolved_type handler\n```
     this.handler = handler;
@@ -60,17 +60,17 @@ class HandlerExecutor implements Executor {
 //                                              documentation ```java\n@NonNull\nRunnable command\n```
     // If we're already on the same thread then we can execute this synchronously
     if (Looper.myLooper() == handler.getLooper()) {
-//      ^^^^^^ reference semanticdb maven . . _root_/
-//             ^^^^^^^^ reference semanticdb maven . . myLooper#
+//      ^^^^^^ reference semanticdb maven . . Looper#
+//             ^^^^^^^^ reference semanticdb maven . . Looper#myLooper#
 //                           ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#handler.
-//                                   ^^^^^^^^^ reference semanticdb maven . . getLooper#
+//                                   ^^^^^^^^^ reference semanticdb maven . . Handler#getLooper#
       command.run();
 //    ^^^^^^^ reference local 1
 //            ^^^ reference semanticdb maven jdk 11 java/lang/Runnable#run().
     } else {
       handler.post(command);
 //    ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#handler.
-//            ^^^^ reference semanticdb maven . . post#
+//            ^^^^ reference semanticdb maven . . Handler#post#
 //                 ^^^^^^^ reference local 1
     }
   }

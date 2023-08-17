@@ -80,17 +80,17 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 
   // Once the EpoxyHolder is created parent will be set to null.
   private ViewParent parent;
-//        ^^^^^^^^^^ reference semanticdb maven . . _root_/
+//        ^^^^^^^^^^ reference semanticdb maven . . ViewParent#
 //                   ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#parent.
 //                          documentation ```java\nprivate unresolved_type parent\n```
 
   public EpoxyViewHolder(ViewParent parent, View view, boolean saveInitialState) {
 //       ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#`<init>`().
 //                       documentation ```java\npublic EpoxyViewHolder(unresolved_type parent, unresolved_type view, boolean saveInitialState)\n```
-//                       ^^^^^^^^^^ reference semanticdb maven . . _root_/
+//                       ^^^^^^^^^^ reference semanticdb maven . . ViewParent#
 //                                  ^^^^^^ definition local 0
 //                                         documentation ```java\nunresolved_type parent\n```
-//                                          ^^^^ reference semanticdb maven . . _root_/
+//                                          ^^^^ reference semanticdb maven . . View#
 //                                               ^^^^ definition local 1
 //                                                    documentation ```java\nunresolved_type view\n```
 //                                                             ^^^^^^^^^^^^^^^^ definition local 2
@@ -112,7 +112,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
       initialViewState.save(itemView);
 //    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#initialViewState.
 //                     ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#save().
-//                          ^^^^^^^^ reference semanticdb maven . . _root_/
+//                          ^^^^^^^^ reference semanticdb maven . . itemView#
     }
   }
 
@@ -124,7 +124,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
       initialViewState.restore(itemView);
 //    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#initialViewState.
 //                     ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#restore().
-//                             ^^^^^^^^ reference semanticdb maven . . _root_/
+//                             ^^^^^^^^ reference semanticdb maven . . itemView#
     }
   }
 
@@ -163,7 +163,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
       epoxyHolder.bindView(itemView);
 //    ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#epoxyHolder.
 //                ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#bindView().
-//                         ^^^^^^^^ reference semanticdb maven . . _root_/
+//                         ^^^^^^^^ reference semanticdb maven . . itemView#
     }
     // Safe to set to null as it is only used for createNewHolder method
     parent = null;
@@ -234,7 +234,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
     return epoxyHolder != null ? epoxyHolder : itemView;
 //         ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#epoxyHolder.
 //                               ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#epoxyHolder.
-//                                             ^^^^^^^^ reference semanticdb maven . . _root_/
+//                                             ^^^^^^^^ reference semanticdb maven . . itemView#
   }
 
   public void unbind() {
@@ -359,10 +359,10 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
         + "epoxyModel=" + epoxyModel
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#epoxyModel.
         + ", view=" + itemView
-//                    ^^^^^^^^ reference semanticdb maven . . _root_/
+//                    ^^^^^^^^ reference semanticdb maven . . itemView#
         + ", super=" + super.toString()
-//                     ^^^^^ reference semanticdb maven . . _root_/
-//                           ^^^^^^^^ reference semanticdb maven . . toString#
+//                     ^^^^^ reference semanticdb maven . . super#
+//                           ^^^^^^^^ reference semanticdb maven . . super#toString#
         + '}';
   }
 }

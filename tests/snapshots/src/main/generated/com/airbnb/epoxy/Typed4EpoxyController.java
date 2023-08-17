@@ -23,8 +23,8 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
 //                    ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#
 //                                          documentation ```java\npublic abstract class Typed4EpoxyController<T, U, V, W>\n```
 //                                          documentation  This is a wrapper around {@link com.airbnb.epoxy.EpoxyController} to simplify how data is\n accessed. Use this if the data required to build your models is represented by four objects.\n <p>\n To use this, create a subclass typed with your data object. Then, call {@link #setData}\n whenever that data changes. This class will handle calling {@link #buildModels} with the\n latest data.\n <p>\n You should NOT call {@link #requestModelBuild()} directly.\n\n @see TypedEpoxyController\n @see Typed2EpoxyController\n @see Typed3EpoxyController\n
-//                                          relationship is_implementation semanticdb maven . . ``/ModelCollector#
-//                                          relationship is_implementation semanticdb maven . . ``/StickyHeaderCallbacks#
+//                                          relationship is_implementation semanticdb maven . . ModelCollector#
+//                                          relationship is_implementation semanticdb maven . . StickyHeaderCallbacks#
 //                                          relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                                          ^ definition semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#[T]
 //                                            documentation ```java\nT\n```
@@ -64,10 +64,10 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
   public Typed4EpoxyController(Handler modelBuildingHandler, Handler diffingHandler) {
 //       ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#`<init>`(+1).
 //                             documentation ```java\npublic Typed4EpoxyController(unresolved_type modelBuildingHandler, unresolved_type diffingHandler)\n```
-//                             ^^^^^^^ reference semanticdb maven . . _root_/
+//                             ^^^^^^^ reference semanticdb maven . . Handler#
 //                                     ^^^^^^^^^^^^^^^^^^^^ definition local 0
 //                                                          documentation ```java\nunresolved_type modelBuildingHandler\n```
-//                                                           ^^^^^^^ reference semanticdb maven . . _root_/
+//                                                           ^^^^^^^ reference semanticdb maven . . Handler#
 //                                                                   ^^^^^^^^^^^^^^ definition local 1
 //                                                                                  documentation ```java\nunresolved_type diffingHandler\n```
     super(modelBuildingHandler, diffingHandler);

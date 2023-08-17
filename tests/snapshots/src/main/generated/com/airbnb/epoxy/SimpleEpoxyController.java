@@ -13,8 +13,8 @@ public class SimpleEpoxyController extends EpoxyController {
 //           ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#
 //                                 documentation ```java\npublic class SimpleEpoxyController\n```
 //                                 documentation  A small wrapper around {@link com.airbnb.epoxy.EpoxyController} that lets you set a list of\n models directly.\n
-//                                 relationship is_implementation semanticdb maven . . ``/ModelCollector#
-//                                 relationship is_implementation semanticdb maven . . ``/StickyHeaderCallbacks#
+//                                 relationship is_implementation semanticdb maven . . ModelCollector#
+//                                 relationship is_implementation semanticdb maven . . StickyHeaderCallbacks#
 //                                 relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //           ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#`<init>`().
 //                                 documentation ```java\npublic SimpleEpoxyController()\n```
