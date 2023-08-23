@@ -1,3 +1,4 @@
+import sbtdocker.DockerfileBase
 import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
 import scala.xml.transform.{RewriteRule, RuleTransformer}
 import java.io.File
@@ -318,62 +319,8 @@ lazy val cli = project
       latest ++ versioned
 
     },
-    docker / dockerfile := {
-      val binaryDistribution = pack.value
-      val scipJavaWrapper = (ThisBuild / baseDirectory).value / "bin" /
-        "scip-java-docker-script.sh"
-      val dockerSetup = (ThisBuild / baseDirectory).value / "bin" /
-        "docker-setup.sh"
-      new Dockerfile {
-        from("eclipse-temurin:17")
-
-        // Setup system dependencies.
-        run("apt-get", "update")
-        run(
-          "apt-get",
-          "install",
-          "--yes",
-          "jq",
-          "wget",
-          "curl",
-          "zip",
-          "unzip",
-          "git",
-          // C++ and Python dependencies that may be needed by some random JVM
-          // builds.
-          "python3",
-          "python3-pip",
-          "autoconf",
-          "automake",
-          "libtool",
-          "build-essential",
-          "libtool",
-          "make",
-          "g++"
-        )
-
-        // Install SDKMAN
-        add(dockerSetup, "/docker-setup.sh")
-        run("bash", "/docker-setup.sh")
-
-        env("PATH", "/opt/maven/bin:${PATH}")
-        env("PATH", "/opt/gradle/bin:${PATH}")
-        env("PATH", "/root/.local/share/coursier/bin:${PATH}")
-        env(
-          "JAVA_TOOL_OPTIONS",
-          "-XX:MaxRAMPercentage=80.0 -XX:+UseContainerSupport"
-        )
-
-        // Mark all directories as safe for Git, so that it doesn't
-        // trigger this check and error:
-        // `detected dubious ownership in repository at <folder>`
-        run("git", "config", "--global", "--add", "safe.directory", "*")
-
-        // Install `scip-java` binary.
-        add(scipJavaWrapper, "/usr/local/bin/scip-java")
-        add(binaryDistribution, "/app/scip-java")
-      }
-    }
+    docker / dockerfile :=
+      NativeDockerfile((ThisBuild / baseDirectory).value / "Dockerfile")
   )
   .enablePlugins(PackPlugin, DockerPlugin, BuildInfoPlugin)
   .dependsOn(scip)

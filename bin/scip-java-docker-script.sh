@@ -32,7 +32,7 @@ do
 		eval "$(coursier java --jvm "$JVM_VERSION" --env --jvm-index https://github.com/coursier/jvm-index/blob/master/index.json)"
 
 		java -version
-		if /app/scip-java/bin/scip-java "$@"; then 
+		if /app/scip-java "$@"; then 
 			LAST_CODE="0"
 		else 
 			LAST_CODE=$?

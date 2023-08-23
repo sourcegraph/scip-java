@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -eux
-curl -fLo /usr/local/bin/coursier https://github.com/coursier/coursier/releases/download/v2.1.0-RC5/coursier
+curl -fLo /usr/local/bin/coursier https://github.com/coursier/coursier/releases/download/v2.1.5/coursier
 chmod +x /usr/local/bin/coursier
 coursier setup --yes
 
