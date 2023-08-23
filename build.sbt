@@ -319,8 +319,8 @@ lazy val cli = project
       latest ++ versioned
 
     },
-    docker / dockerfile := NativeDockerfile((ThisBuild / baseDirectory).value / "Dockerfile")
-
+    docker / dockerfile :=
+      NativeDockerfile((ThisBuild / baseDirectory).value / "Dockerfile")
   )
   .enablePlugins(PackPlugin, DockerPlugin, BuildInfoPlugin)
   .dependsOn(scip)
