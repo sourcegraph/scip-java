@@ -25,5 +25,3 @@ COPY ./bin/scip-java-docker-script.sh /usr/bin/scip-java
 WORKDIR /sources
 
 RUN rm -rf /workdir
-
-ENTRYPOINT ["scip-java"]
