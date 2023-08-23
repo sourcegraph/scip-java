@@ -91,9 +91,7 @@ object JavaToolchainPlugin extends AutoPlugin {
             coursier.toString,
             "java-home",
             "--jvm",
-            jvmName(v),
-            "--architecture",
-            jvmArchitecture
+            jvmName(v)
           ) ++ index
 
         new File(Process(arguments).!!.trim)
