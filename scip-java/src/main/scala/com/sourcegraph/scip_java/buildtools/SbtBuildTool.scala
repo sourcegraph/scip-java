@@ -51,7 +51,7 @@ class SbtBuildTool(index: IndexCommand) extends BuildTool("sbt", index) {
         .resolve("sbt-sourcegraph")
         .resolve("index.scip")
       if (sourcegraphScip.exitCode == 0 && Files.isRegularFile(inputDump)) {
-        val outputDump = index.workingDirectory.resolve("index.scip")
+        val outputDump = index.workingDirectory.resolve(index.output)
         Files.copy(inputDump, outputDump, StandardCopyOption.REPLACE_EXISTING)
         index.app.info(outputDump.toString)
       }
