@@ -43,8 +43,14 @@ class SbtBuildTool(index: IndexCommand) extends BuildTool("sbt", index) {
 
   private def unconditionallyGenerateScip(): Int =
     Using.resource(sourcegraphSbtPluginFile()) { _ =>
+      val buildCommand =
+        if (index.buildCommand.isEmpty)
+          List("sourcegraphScip")
+        else
+          index.buildCommand
+
       val sourcegraphScip = index
-        .process(List("sbt", "sourcegraphEnable", "sourcegraphScip"))
+        .process(List("sbt", "sourcegraphEnable") ++ buildCommand)
       val inputDump = index
         .workingDirectory
         .resolve("target")
