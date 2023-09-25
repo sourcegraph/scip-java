@@ -2,7 +2,18 @@ package tests
 
 abstract class SbtBuildToolSuite(val sbtVersion: String)
     extends BaseBuildToolSuite {
-  List("2.11.9", "2.12.18", "2.13.11", "3.3.0").foreach { scalaVersion =>
+  val scala2Versions = List("2.11.9", "2.12.18", "2.13.11")
+  val scala3Versions = List("3.3.1")
+
+  val versions =
+    sbtVersion match {
+      case s"0.13.$any" =>
+        scala2Versions
+      case s"1.$any" =>
+        scala2Versions ++ scala3Versions
+    }
+
+  versions.foreach { scalaVersion =>
     checkBuild(
       s"basic-sbt=$sbtVersion-scala=$scalaVersion",
       s"""|/build.sbt
