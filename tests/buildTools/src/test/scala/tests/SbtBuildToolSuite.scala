@@ -5,15 +5,7 @@ abstract class SbtBuildToolSuite(val sbtVersion: String)
   val scala2Versions = List("2.11.9", "2.12.18", "2.13.11")
   val scala3Versions = List("3.3.1")
 
-  val versions =
-    sbtVersion match {
-      case s"0.13.$any" =>
-        scala2Versions
-      case s"1.$any" =>
-        scala2Versions ++ scala3Versions
-    }
-
-  versions.foreach { scalaVersion =>
+  (scala2Versions ++ scala3Versions).foreach { scalaVersion =>
     checkBuild(
       s"basic-sbt=$sbtVersion-scala=$scalaVersion",
       s"""|/build.sbt
@@ -64,5 +56,3 @@ class Sbt_1_BuildToolSuite extends SbtBuildToolSuite("1.5.2") {
     targetRoot = Some("bla/target")
   )
 }
-
-class Sbt_013_BuildToolSuite extends SbtBuildToolSuite("0.13.17")
