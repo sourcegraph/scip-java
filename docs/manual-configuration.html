@@ -173,8 +173,8 @@ repository. You can optionally enable cross-repository navigation by creating
 one of the following files in the SemanticDB <em>targetroot</em> directory (the path in
 <code>-Xplugin:semanticdb -targeroot:PATH</code>).</p>
 <ul>
-<li><code>javacopts.txt</code>: line-separated list of Java compiler options that got passed
-to the compiler. For example,
+<li><p><code>javacopts.txt</code>: line-separated list of Java compiler options that got passed
+to the compiler. For example,</p>
 <pre><code class="hljs css language-sh">$ cat <span class="hljs-variable">$TARGETROOT</span>/javacopts.txt
 -Xlint
 -classpath
@@ -183,21 +183,20 @@ to the compiler. For example,
 /path/to/classes/directory
 /path/to/com/example/Main.java
 </code></pre>
-The <code>javacopts.txt</code> file format can only be used if the jars on the dependency
+<p>The <code>javacopts.txt</code> file format can only be used if the jars on the dependency
 classpath have sibling <code>.pom</code> files. In some build tools like Gradle, the POM
 files are not siblings to the jars on the classpath so the <code>javacopts.txt</code>
-format cannot be used.</li>
-<li><code>dependencies.txt</code>: a tab-separated values file where the columns are: group
-ID, artifact ID, version and jar path. For example,
+format cannot be used.</p></li>
+<li><p><code>dependencies.txt</code>: a tab-separated values file where the columns are: group
+ID, artifact ID, version and jar path. For example,</p>
 <pre><code class="hljs css language-sh">$ cat <span class="hljs-variable">$TARGETROOT</span>/dependencies.txt
 junit junit 4.13.2  /path/to/junit.jar
 org.hamcrest hamcrest-core 1.3  /path/to/hamcrest-core.jar
 </code></pre>
-The <code>dependencies.txt</code> format is used by scip-java to map symbols such as
-<code>org.junit.Assert</code> to Maven co-ordinates like <code>junit:junit:4.13.2</code>. As long as
+<p>The <code>dependencies.txt</code> format is used by scip-java to map symbols such as
+<code>org.junit.Assert</code> to Maven coordinates like <code>junit:junit:4.13.2</code>. As long as
 your Sourcegraph instance has another repository that defines that symbol, the
-cross-repository navigation should succeed. Only jar files are supported at
-the moment, classes directories are ignored.</li>
+cross-repository navigation should succeed.</p></li>
 </ul>
 <p>Cross-repository navigation is a feature that allows &quot;goto definition&quot; and &quot;find
 references&quot; to show results from multiple repositories.</p>
