@@ -5,7 +5,7 @@ import java.nio.file.Paths
 import java.{util => ju}
 
 import scala.jdk.CollectionConverters._
-import scala.util.control.NonFatal
+import scala.util._
 
 import com.sourcegraph.scip_java.BuildInfo
 import org.gradle.api.DefaultTask
@@ -19,7 +19,6 @@ import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.scala.ScalaCompile
-import scala.util._
 
 class SemanticdbGradlePlugin extends Plugin[Project] {
   override def apply(project: Project): Unit = {
