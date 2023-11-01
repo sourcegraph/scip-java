@@ -5,7 +5,7 @@ import java.nio.file.Paths
 import java.{util => ju}
 
 import scala.jdk.CollectionConverters._
-import scala.util.control.NonFatal
+import scala.util._
 
 import com.sourcegraph.scip_java.BuildInfo
 import org.gradle.api.DefaultTask
@@ -416,42 +416,56 @@ class WriteDependencies extends DefaultTask {
     // List the project itself as a dependency so that we can assign project name/version to symbols that are defined in this project.
     // The code below is roughly equivalent to the following with Groovy:
     //   deps += "$publication.groupId $publication.artifactId $publication.version $sourceSets.main.output.classesDirectory"
-    try {
-      for {
-        classesDirectory <- project
-          .getExtensions()
-          .getByType(classOf[SourceSetContainer])
-          .getByName("main")
-          .getOutput()
-          .getClassesDirs()
-          .getFiles()
-          .asScala
-          .toList
-          .map(_.getAbsolutePath())
-          .sorted
-          .take(1)
-        publication <-
+
+    Try(
+      project
+        .getExtensions()
+        .findByType(classOf[PublishingExtension])
+        .getPublications()
+        .withType(classOf[MavenPublication])
+        .asScala
+    ) match {
+      case Failure(exception) =>
+        System
+          .err
+          .println(
+            s"""
+               |Failed to extract Maven publication from the project `${project
+              .getName()}`. 
+               |This will not prevent a SCIP index from being created, but the symbols 
+               |extracted from this project won't be available for cross-repository navigation,
+               |as this project doesn't define any Maven coordinates by which it can be referred back to.
+               |See here for more details: https://sourcegraph.github.io/scip-java/docs/manual-configuration.html#step-5-optional-enable-cross-repository-navigation
+               |Here's the raw error message:
+               |  "${exception.getMessage()}"
+               |Continuing without cross-repository support.
+          """.stripMargin.trim()
+          )
+
+      case Success(publications) =>
+        publications.foreach { publication =>
           project
             .getExtensions()
-            .findByType(classOf[PublishingExtension])
-            .getPublications()
-            .withType(classOf[MavenPublication])
+            .getByType(classOf[SourceSetContainer])
+            .getByName("main")
+            .getOutput()
+            .getClassesDirs()
+            .getFiles()
             .asScala
-      } {
-        deps +=
-          List(
-            publication.getGroupId(),
-            publication.getArtifactId(),
-            publication.getVersion(),
-            classesDirectory
-          ).mkString("\t")
-      }
-    } catch {
-      case NonFatal(ex) =>
-        println(
-          s"Failed to extract publication from project ${project.getName()}"
-        )
-        ex.printStackTrace()
+            .toList
+            .map(_.getAbsolutePath())
+            .sorted
+            .take(1)
+            .foreach { classesDirectory =>
+              deps +=
+                List(
+                  publication.getGroupId(),
+                  publication.getArtifactId(),
+                  publication.getVersion(),
+                  classesDirectory
+                ).mkString("\t")
+            }
+        }
     }
 
     project

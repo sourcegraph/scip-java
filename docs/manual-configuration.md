@@ -163,6 +163,7 @@ one of the following files in the SemanticDB _targetroot_ directory (the path in
 
 - `javacopts.txt`: line-separated list of Java compiler options that got passed
   to the compiler. For example,
+
   ```sh
   $ cat $TARGETROOT/javacopts.txt
   -Xlint
@@ -172,22 +173,25 @@ one of the following files in the SemanticDB _targetroot_ directory (the path in
   /path/to/classes/directory
   /path/to/com/example/Main.java
   ```
+
   The `javacopts.txt` file format can only be used if the jars on the dependency
   classpath have sibling `.pom` files. In some build tools like Gradle, the POM
   files are not siblings to the jars on the classpath so the `javacopts.txt`
   format cannot be used.
+
 - `dependencies.txt`: a tab-separated values file where the columns are: group
   ID, artifact ID, version and jar path. For example,
+
   ```sh
   $ cat $TARGETROOT/dependencies.txt
   junit junit 4.13.2  /path/to/junit.jar
   org.hamcrest hamcrest-core 1.3  /path/to/hamcrest-core.jar
   ```
+
   The `dependencies.txt` format is used by scip-java to map symbols such as
-  `org.junit.Assert` to Maven co-ordinates like `junit:junit:4.13.2`. As long as
+  `org.junit.Assert` to Maven coordinates like `junit:junit:4.13.2`. As long as
   your Sourcegraph instance has another repository that defines that symbol, the
-  cross-repository navigation should succeed. Only jar files are supported at
-  the moment, classes directories are ignored.
+  cross-repository navigation should succeed. 
 
 Cross-repository navigation is a feature that allows "goto definition" and "find
 references" to show results from multiple repositories.
