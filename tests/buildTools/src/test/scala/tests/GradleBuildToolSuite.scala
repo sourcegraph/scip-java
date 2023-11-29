@@ -51,6 +51,27 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
   )
 
   checkGradleBuild(
+    "build-with-Werror",
+    """|/build.gradle
+       |plugins {
+       |    id 'java'
+       |}
+       |repositories {
+       |    // Use Maven Central for resolving dependencies.
+       |    mavenCentral()
+       |}
+       |compileJava {
+       | options.compilerArgs << "-Werror"
+       |}
+       |/src/main/java/main/ExampleClass.java
+       |package test;
+       |public abstract class ExampleClass {}
+    """.stripMargin,
+    expectedSemanticdbFiles = 1,
+    gradleVersions = List(Gradle8, Gradle7, Gradle67)
+  )
+
+  checkGradleBuild(
     "publishing",
     """|/build.gradle
        |plugins {
