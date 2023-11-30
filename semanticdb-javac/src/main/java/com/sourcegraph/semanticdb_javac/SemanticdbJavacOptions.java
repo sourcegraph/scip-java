@@ -97,6 +97,7 @@ public class SemanticdbJavacOptions {
         result.verboseEnabled = true;
       } else if (arg.equals("-verbose:off")) {
         result.verboseEnabled = false;
+      } else if (arg.startsWith("-randomtimestamp")) {
       } else {
         result.errors.add(String.format("unknown flag '%s'\n", arg));
       }
@@ -126,8 +127,10 @@ public class SemanticdbJavacOptions {
   // warning - use of internal API
   // requires --add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
   private static TargetPaths getJavacClassesDir(SemanticdbJavacOptions result, JavacTask task) {
-    // both Context and BasicJavacTask are internal JDK classes so not exported under >= JDK 17
-    //  com.sun.tools.javac.util.Context ctx = ((com.sun.tools.javac.api.BasicJavacTask)
+    // both Context and BasicJavacTask are internal JDK classes so not exported
+    // under >= JDK 17
+    // com.sun.tools.javac.util.Context ctx =
+    // ((com.sun.tools.javac.api.BasicJavacTask)
     // task).getContext();
     // I'm not aware of a better way to get the class output directory from javac
     Path classOutputDir = null;

@@ -357,18 +357,16 @@ lazy val minimizedSettings = List[Def.Setting[_]](
   (run / fork) := true,
   (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
   libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.22"),
-  javacOptions ++=
-    List[String](
-      s"-Arandomtimestamp=${System.nanoTime()}",
-      List(
-        s"-Xplugin:semanticdb",
-        s"-build-tool:sbt",
-        s"-text:on",
-        s"-verbose",
-        s"-sourceroot:${(ThisBuild / baseDirectory).value}",
-        s"-targetroot:${(Compile / semanticdbTargetRoot).value}"
-      ).mkString(" ")
-    )
+  javacOptions +=
+    List(
+      s"-Xplugin:semanticdb",
+      s"-build-tool:sbt",
+      s"-text:on",
+      s"-verbose",
+      s"-sourceroot:${(ThisBuild / baseDirectory).value}",
+      s"-targetroot:${(Compile / semanticdbTargetRoot).value}",
+      s"-randomtimestamp=${System.nanoTime()}"
+    ).mkString(" ")
 )
 
 lazy val minimized = project
