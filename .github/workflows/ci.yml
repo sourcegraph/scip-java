@@ -17,7 +17,7 @@ jobs:
         java: [8, 11, 17]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           cache: "sbt"
@@ -30,7 +30,7 @@ jobs:
     name: Benchmark tests
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           cache: "sbt"
@@ -48,7 +48,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           cache: "sbt"
@@ -111,7 +111,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           java-version: 17
