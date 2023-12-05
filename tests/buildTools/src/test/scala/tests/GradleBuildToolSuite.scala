@@ -60,14 +60,25 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
        |    // Use Maven Central for resolving dependencies.
        |    mavenCentral()
        |}
+       |dependencies {
+       |  compileOnly 'org.immutables:value:2.9.2'
+       |  annotationProcessor 'org.immutables:value:2.9.2'
+       |}
        |compileJava {
        | options.compilerArgs << "-Werror"
        |}
        |/src/main/java/main/bla/ExampleClass.java
-       |package bla;
-       |public abstract class ExampleClass {}
+       |package test;
+       |import org.immutables.value.Value;
+       |import java.util.Optional;
+       |@Value.Immutable
+       |public abstract class ExampleClass {
+       |    public abstract Optional<String> getWorkflowIdReusePolicy();
+       |}
     """.stripMargin,
-    expectedSemanticdbFiles = 1,
+    // See comment about immutable annotation processor above,
+    // it explains why we expecte 2 semanticdb files
+    expectedSemanticdbFiles = 2,
     gradleVersions = List(Gradle8, Gradle7, Gradle67)
   )
 
