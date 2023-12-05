@@ -165,8 +165,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                     // TODO: before this plugin is published to Maven Central,
                     // we will need to revert this change - as it can have detrimental
                     // effect on people's builds
-                    s"-Arandomtimestamp=${System.currentTimeMillis()}",
-                    s"-Xplugin:semanticdb -targetroot:$targetRoot -sourceroot:$sourceRoot"
+                    s"-Xplugin:semanticdb -targetroot:$targetRoot -sourceroot:$sourceRoot -randomtimestamp=${System.nanoTime()}"
                   ).asJava
                 )
             }
