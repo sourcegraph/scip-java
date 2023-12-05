@@ -54,30 +54,17 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
     "build-with-Werror",
     """|/build.gradle
        |plugins {
-<<<<<<< Updated upstream
-       |    id 'java'
-=======
        |    id 'java-library'
->>>>>>> Stashed changes
        |}
        |repositories {
        |    // Use Maven Central for resolving dependencies.
        |    mavenCentral()
        |}
-<<<<<<< Updated upstream
        |compileJava {
        | options.compilerArgs << "-Werror"
        |}
-       |/src/main/java/main/ExampleClass.java
-=======
-       |allprojects {
-       |   tasks.withType(JavaCompile) {
-       |       options.compilerArgs += ['-Xlint:deprecation', '-Werror']
-       |   }
-       |}
-       |/src/main/java/ExampleClass.java
->>>>>>> Stashed changes
-       |package test;
+       |/src/main/java/main/bla/ExampleClass.java
+       |package bla;
        |public abstract class ExampleClass {}
     """.stripMargin,
     expectedSemanticdbFiles = 1,
