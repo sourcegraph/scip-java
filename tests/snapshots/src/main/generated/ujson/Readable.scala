@@ -19,19 +19,19 @@ import upickle.core.{Visitor, ObjArrVisitor}
 trait Readable {
 //    ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#
 //             display_name Readable
-//             documentation ```scala\ntrait Readable\n```
+//             signature_documentation scala trait Readable
   def transform[T](f: Visitor[_, T]): T
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#transform().
 //              display_name transform
-//              documentation ```scala\ndef transform(f: Visitor[local0, T[): T\n```
+//              signature_documentation scala def transform(f: Visitor[local0, T[): T
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#transform().
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#transform().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#transform().[T]
 //                display_name T
-//                documentation ```scala\nT\n```
+//                signature_documentation scala T
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#transform().(f)
 //                   display_name f
-//                   documentation ```scala\nf: Visitor[local0, T[ \n```
+//                   signature_documentation scala f: Visitor[local0, T[ 
 //                    ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#transform().[T]
 //                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#transform().[T]
@@ -40,93 +40,93 @@ trait Readable {
 object Readable extends ReadableLowPri{
 //     ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.
 //              display_name Readable
-//              documentation ```scala\nobject Readable\n```
+//              signature_documentation scala object Readable
 //                      ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ReadableLowPri#
 //                                    ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
   case class fromTransformer[T](t: T, w: Transformer[T]) extends Readable{
 //           ^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //                           display_name fromTransformer
-//                           documentation ```scala\ncase class fromTransformer(t: T, w: Transformer[T])[T] extends Readable\n```
+//                           signature_documentation scala case class fromTransformer(t: T, w: Transformer[T])[T] extends Readable
 //                           relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.
 //                           relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().
 //           _______________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#copy().
 //                           display_name copy
-//                           documentation ```scala\ndef copy(t: T, w: Transformer[T]): fromTransformer[T]\n```
+//                           signature_documentation scala def copy(t: T, w: Transformer[T]): fromTransformer[T]
 //                           relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //                           relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().
 //           _______________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#productElement().
 //                           display_name productElement
-//                           documentation ```scala\ndef productElement(x$1: Int): Any\n```
+//                           signature_documentation scala def productElement(x$1: Int): Any
 //                           relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //                           relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().
-//                           relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
+//                           relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
 //           _______________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().
 //                           display_name apply
-//                           documentation ```scala\ndef apply(t: T, w: Transformer[T]): fromTransformer[T]\n```
+//                           signature_documentation scala def apply(t: T, w: Transformer[T]): fromTransformer[T]
 //                           relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //           _______________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.
 //                           display_name fromTransformer
-//                           documentation ```scala\nobject fromTransformer\n```
+//                           signature_documentation scala object fromTransformer
 //                           relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //                           relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().
 //           _______________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#productElementName().
 //                           display_name productElementName
-//                           documentation ```scala\ndef productElementName(x$1: Int): String\n```
+//                           signature_documentation scala def productElementName(x$1: Int): String
 //                           relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //                           relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().
-//                           relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
+//                           relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
 //                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#[T]
 //                             display_name T
-//                             documentation ```scala\nT\n```
+//                             signature_documentation scala T
 //                             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().
 //                               display_name <init>
-//                               documentation ```scala\ndef this(t: T, w: Transformer[T])\n```
+//                               signature_documentation scala def this(t: T, w: Transformer[T])
 //                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#t.
 //                                display_name t
-//                                documentation ```scala\nval t: T\n```
+//                                signature_documentation scala val t: T
 //                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().(t)
 //                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#copy().(t)
 //                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().(t)
 //                              _ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#copy().(t)
 //                                display_name t
-//                                documentation ```scala\ndefault t: T \n```
+//                                signature_documentation scala default t: T 
 //                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().(t)
 //                                relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#t.
 //                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().(t)
 //                              _ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().(t)
 //                                display_name t
-//                                documentation ```scala\nt: T \n```
+//                                signature_documentation scala t: T 
 //                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#copy().(t)
 //                                relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#t.
 //                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().(t)
 //                              _ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().(t)
 //                                display_name t
-//                                documentation ```scala\nt: T \n```
+//                                signature_documentation scala t: T 
 //                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().(t)
 //                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#copy().(t)
 //                                relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#t.
 //                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#[T]
 //                                    ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#w.
 //                                      display_name w
-//                                      documentation ```scala\nval w: Transformer[T]\n```
+//                                      signature_documentation scala val w: Transformer[T]
 //                                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().(w)
 //                                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#copy().(w)
 //                                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().(w)
 //                                    _ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#copy().(w)
 //                                      display_name w
-//                                      documentation ```scala\ndefault w: Transformer[T] \n```
+//                                      signature_documentation scala default w: Transformer[T] 
 //                                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().(w)
 //                                      relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#w.
 //                                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().(w)
 //                                    _ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().(w)
 //                                      display_name w
-//                                      documentation ```scala\nw: Transformer[T] \n```
+//                                      signature_documentation scala w: Transformer[T] 
 //                                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#copy().(w)
 //                                      relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#w.
 //                                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().(w)
 //                                    _ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().(w)
 //                                      display_name w
-//                                      documentation ```scala\nw: Transformer[T] \n```
+//                                      signature_documentation scala w: Transformer[T] 
 //                                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().(w)
 //                                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#copy().(w)
 //                                      relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#w.
@@ -137,14 +137,14 @@ object Readable extends ReadableLowPri{
     def transform[T](f: Visitor[_, T]): T = {
 //      ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#transform().
 //                display_name transform
-//                documentation ```scala\ndef transform(f: Visitor[local1, T[): T\n```
+//                signature_documentation scala def transform(f: Visitor[local1, T[): T
 //                relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#transform().
 //                ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#transform().[T]
 //                  display_name T
-//                  documentation ```scala\nT\n```
+//                  signature_documentation scala T
 //                   ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#transform().(f)
 //                     display_name f
-//                     documentation ```scala\nf: Visitor[local1, T[ \n```
+//                     signature_documentation scala f: Visitor[local1, T[ 
 //                      ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#transform().[T]
 //                                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#transform().[T]
@@ -158,13 +158,13 @@ object Readable extends ReadableLowPri{
   implicit def fromString(s: String): fromTransformer[String] = new fromTransformer(s, StringParser)
 //             ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromString().
 //                        display_name fromString
-//                        documentation ```scala\nimplicit def fromString(s: String): fromTransformer[String]\n```
+//                        signature_documentation scala implicit def fromString(s: String): fromTransformer[String]
 //                        ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromString().(s)
 //                          display_name s
-//                          documentation ```scala\ns: String \n```
-//                           ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
+//                          signature_documentation scala s: String 
+//                           ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
 //                                    ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
-//                                                    ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
+//                                                    ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
 //                                                                  ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //                                                                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().
 //                                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromString().(s)
@@ -172,10 +172,10 @@ object Readable extends ReadableLowPri{
   implicit def fromCharSequence(s: CharSequence): fromTransformer[CharSequence] = new fromTransformer(s, CharSequenceParser)
 //             ^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromCharSequence().
 //                              display_name fromCharSequence
-//                              documentation ```scala\nimplicit def fromCharSequence(s: CharSequence): fromTransformer[CharSequence]\n```
+//                              signature_documentation scala implicit def fromCharSequence(s: CharSequence): fromTransformer[CharSequence]
 //                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromCharSequence().(s)
 //                                display_name s
-//                                documentation ```scala\ns: CharSequence \n```
+//                                signature_documentation scala s: CharSequence 
 //                                 ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                                ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //                                                                ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
@@ -186,10 +186,10 @@ object Readable extends ReadableLowPri{
   implicit def fromPath(s: java.nio.file.Path): Readable = new Readable {
 //             ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromPath().
 //                      display_name fromPath
-//                      documentation ```scala\nimplicit def fromPath(s: Path): Readable\n```
+//                      signature_documentation scala implicit def fromPath(s: Path): Readable
 //                      ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromPath().(s)
 //                        display_name s
-//                        documentation ```scala\ns: Path \n```
+//                        signature_documentation scala s: Path 
 //                         ^^^^ reference semanticdb maven . . java/
 //                              ^^^ reference semanticdb maven . . java/nio/
 //                                  ^^^^ reference semanticdb maven . . java/nio/file/
@@ -197,26 +197,26 @@ object Readable extends ReadableLowPri{
 //                                              ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#
 //                                                             ^ definition local 3
 //                                                               display_name $anon
-//                                                               documentation ```scala\nfinal class $anon\n```
+//                                                               signature_documentation scala final class $anon
 //                                                             ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#
 //                                                                      ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
     override def transform[T](f: Visitor[_, T]) = {
 //               ^^^^^^^^^ definition local 4
 //                         display_name transform
-//                         documentation ```scala\ndef transform(f: Visitor[local7, local6[): local6\n```
+//                         signature_documentation scala def transform(f: Visitor[local7, local6[): local6
 //                         relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#transform().
 //                         ^ definition local 6
 //                           display_name T
-//                           documentation ```scala\nT\n```
+//                           signature_documentation scala T
 //                            ^ definition local 5
 //                              display_name f
-//                              documentation ```scala\nf: Visitor[local7, local6[ \n```
+//                              signature_documentation scala f: Visitor[local7, local6[ 
 //                               ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                          ^ reference local 6
       val inputStream = java.nio.file.Files.newInputStream(s)
 //        ^^^^^^^^^^^ definition local 8
 //                    display_name inputStream
-//                    documentation ```scala\ninputStream: InputStream \n```
+//                    signature_documentation scala inputStream: InputStream 
 //                      ^^^^ reference semanticdb maven . . java/
 //                           ^^^ reference semanticdb maven . . java/nio/
 //                               ^^^^ reference semanticdb maven . . java/nio/file/
@@ -236,10 +236,10 @@ object Readable extends ReadableLowPri{
   implicit def fromFile(s: java.io.File): Readable = fromPath(s.toPath)
 //             ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromFile().
 //                      display_name fromFile
-//                      documentation ```scala\nimplicit def fromFile(s: File): Readable\n```
+//                      signature_documentation scala implicit def fromFile(s: File): Readable
 //                      ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromFile().(s)
 //                        display_name s
-//                        documentation ```scala\ns: File \n```
+//                        signature_documentation scala s: File 
 //                         ^^^^ reference semanticdb maven . . java/
 //                              ^^ reference semanticdb maven . . java/io/
 //                                 ^^^^ reference semanticdb maven jdk 11 java/io/File#
@@ -250,10 +250,10 @@ object Readable extends ReadableLowPri{
   implicit def fromByteBuffer(s: ByteBuffer): fromTransformer[ByteBuffer] = new fromTransformer(s, ByteBufferParser)
 //             ^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromByteBuffer().
 //                            display_name fromByteBuffer
-//                            documentation ```scala\nimplicit def fromByteBuffer(s: ByteBuffer): fromTransformer[ByteBuffer]\n```
+//                            signature_documentation scala implicit def fromByteBuffer(s: ByteBuffer): fromTransformer[ByteBuffer]
 //                            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromByteBuffer().(s)
 //                              display_name s
-//                              documentation ```scala\ns: ByteBuffer \n```
+//                              signature_documentation scala s: ByteBuffer 
 //                               ^^^^^^^^^^ reference semanticdb maven jdk 11 java/nio/ByteBuffer#
 //                                            ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //                                                            ^^^^^^^^^^ reference semanticdb maven jdk 11 java/nio/ByteBuffer#
@@ -264,15 +264,15 @@ object Readable extends ReadableLowPri{
   implicit def fromByteArray(s: Array[Byte]): fromTransformer[Array[Byte]] = new fromTransformer(s, ByteArrayParser)
 //             ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromByteArray().
 //                           display_name fromByteArray
-//                           documentation ```scala\nimplicit def fromByteArray(s: Array[Byte]): fromTransformer[Array[Byte]]\n```
+//                           signature_documentation scala implicit def fromByteArray(s: Array[Byte]): fromTransformer[Array[Byte]]
 //                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromByteArray().(s)
 //                             display_name s
-//                             documentation ```scala\ns: Array[Byte] \n```
-//                              ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Array#
-//                                    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Byte#
+//                             signature_documentation scala s: Array[Byte] 
+//                              ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Array#
+//                                    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Byte#
 //                                            ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
-//                                                            ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Array#
-//                                                                  ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Byte#
+//                                                            ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Array#
+//                                                                  ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Byte#
 //                                                                               ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //                                                                                              ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().
 //                                                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromByteArray().(s)
@@ -282,41 +282,41 @@ object Readable extends ReadableLowPri{
 trait ReadableLowPri{
 //    ^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ReadableLowPri#
 //                   display_name ReadableLowPri
-//                   documentation ```scala\ntrait ReadableLowPri\n```
+//                   signature_documentation scala trait ReadableLowPri
   implicit def fromReadable[T](s: T)(implicit conv: T => geny.Readable): Readable = new Readable{
 //             ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ReadableLowPri#fromReadable().
 //                          display_name fromReadable
-//                          documentation ```scala\nimplicit def fromReadable(s: T)(conv: (T) => Readable): Readable\n```
+//                          signature_documentation scala implicit def fromReadable(s: T)(conv: (T) => Readable): Readable
 //                          ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ReadableLowPri#fromReadable().[T]
 //                            display_name T
-//                            documentation ```scala\nT\n```
+//                            signature_documentation scala T
 //                             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ReadableLowPri#fromReadable().(s)
 //                               display_name s
-//                               documentation ```scala\ns: T \n```
+//                               signature_documentation scala s: T 
 //                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ReadableLowPri#fromReadable().[T]
 //                                            ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ReadableLowPri#fromReadable().(conv)
 //                                                 display_name conv
-//                                                 documentation ```scala\nimplicit conv: (T) => Readable \n```
+//                                                 signature_documentation scala implicit conv: (T) => Readable 
 //                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ReadableLowPri#fromReadable().[T]
 //                                                       ^^^^ reference semanticdb maven . . geny/
 //                                                            ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/geny_2.13 0.6.10 geny/Readable#
 //                                                                       ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#
 //                                                                                      ^ definition local 9
 //                                                                                        display_name $anon
-//                                                                                        documentation ```scala\nfinal class $anon\n```
+//                                                                                        signature_documentation scala final class $anon
 //                                                                                      ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#
 //                                                                                              ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
     def transform[T](f: Visitor[_, T]): T = conv(s).readBytesThrough(InputStreamParser.transform(_, f))
 //      ^^^^^^^^^ definition local 10
 //                display_name transform
-//                documentation ```scala\ndef transform(f: Visitor[local13, local12[): local12\n```
+//                signature_documentation scala def transform(f: Visitor[local13, local12[): local12
 //                relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#transform().
 //                ^ definition local 12
 //                  display_name T
-//                  documentation ```scala\nT\n```
+//                  signature_documentation scala T
 //                   ^ definition local 11
 //                     display_name f
-//                     documentation ```scala\nf: Visitor[local13, local12[ \n```
+//                     signature_documentation scala f: Visitor[local13, local12[ 
 //                      ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                 ^ reference local 12
 //                                      ^ reference local 12

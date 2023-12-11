@@ -3,24 +3,24 @@ package minimized;
 public interface Interfaces {
 //               ^^^^^^^^^^ definition semanticdb maven . . minimized/Interfaces#
 //                          display_name Interfaces
-//                          documentation ```java\npublic interface Interfaces\n```
+//                          signature_documentation java public interface Interfaces
   static void staticInterfaceMethod() {}
 //            ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Interfaces#staticInterfaceMethod().
 //                                  display_name staticInterfaceMethod
-//                                  documentation ```java\npublic static void staticInterfaceMethod()\n```
+//                                  signature_documentation java public static void staticInterfaceMethod()
 
   String abstractInterfaceMethod();
 //^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //       ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Interfaces#abstractInterfaceMethod().
 //                               display_name abstractInterfaceMethod
-//                               documentation ```java\npublic abstract String abstractInterfaceMethod()\n```
+//                               signature_documentation java public abstract String abstractInterfaceMethod()
 //                               relationship is_reference is_implementation semanticdb maven . . minimized/SubClasses#abstractInterfaceMethod().
 
   default String defaultInterfaceMethod() {
 //        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //               ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Interfaces#defaultInterfaceMethod().
 //                                      display_name defaultInterfaceMethod
-//                                      documentation ```java\npublic default String defaultInterfaceMethod()\n```
+//                                      signature_documentation java public default String defaultInterfaceMethod()
     return "default";
   }
 }

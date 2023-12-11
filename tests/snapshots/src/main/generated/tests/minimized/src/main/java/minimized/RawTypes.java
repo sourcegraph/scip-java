@@ -14,15 +14,15 @@ import java.util.List;
 public class RawTypes {
 //           ^^^^^^^^ definition semanticdb maven . . minimized/RawTypes#
 //                    display_name RawTypes
-//                    documentation ```java\n@SuppressWarnings("ALL")\npublic class RawTypes\n```
+//                    signature_documentation java @SuppressWarnings("ALL")\npublic class RawTypes
 //           ^^^^^^^^ definition semanticdb maven . . minimized/RawTypes#`<init>`().
 //                    display_name <init>
-//                    documentation ```java\npublic RawTypes()\n```
+//                    signature_documentation java public RawTypes()
   public static final List x = Collections.singletonList(42);
 //                    ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                         ^ definition semanticdb maven . . minimized/RawTypes#x.
 //                           display_name x
-//                           documentation ```java\npublic static final List x\n```
+//                           signature_documentation java public static final List x
 //                             ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collections#
 //                                         ^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collections#singletonList().
 }

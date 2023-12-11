@@ -3,33 +3,33 @@ package minimized;
 public class Arrays {
 //           ^^^^^^ definition semanticdb maven . . minimized/Arrays#
 //                  display_name Arrays
-//                  documentation ```java\npublic class Arrays\n```
+//                  signature_documentation java public class Arrays
 //           ^^^^^^ definition semanticdb maven . . minimized/Arrays#`<init>`().
 //                  display_name <init>
-//                  documentation ```java\npublic Arrays()\n```
+//                  signature_documentation java public Arrays()
   public static String app() {
 //              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                     ^^^ definition semanticdb maven . . minimized/Arrays#app().
 //                         display_name app
-//                         documentation ```java\npublic static String app()\n```
+//                         signature_documentation java public static String app()
     int[] a = {1, 2, 3};
 //        ^ definition local 0
 //          display_name a
-//          documentation ```java\nint[] a\n```
+//          signature_documentation java int[] a
     String[] b = {"1", "2", "3"};
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //           ^ definition local 1
 //             display_name b
-//             documentation ```java\nString[] b\n```
+//             signature_documentation java String[] b
     int[][] c = {{1}, {2}, {3}};
 //          ^ definition local 2
 //            display_name c
-//            documentation ```java\nint[][] c\n```
+//            signature_documentation java int[][] c
     String[][] d = {{"1"}, {"2"}, {"3"}};
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //             ^ definition local 3
 //               display_name d
-//               documentation ```java\nString[][] d\n```
+//               signature_documentation java String[][] d
     return b[0] + a[0] + c[1][0] + d[1][0];
 //         ^ reference local 1
 //                ^ reference local 0

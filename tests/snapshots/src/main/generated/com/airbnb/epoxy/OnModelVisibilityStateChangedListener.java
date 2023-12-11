@@ -11,16 +11,16 @@ import com.airbnb.epoxy.VisibilityState.Visibility;
 public interface OnModelVisibilityStateChangedListener<T extends EpoxyModel<V>, V> {
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityStateChangedListener#
 //                                                     display_name OnModelVisibilityStateChangedListener
-//                                                     documentation ```java\npublic interface OnModelVisibilityStateChangedListener<T extends EpoxyModel<V>, V>\n```
+//                                                     signature_documentation java public interface OnModelVisibilityStateChangedListener<T extends EpoxyModel<V>, V>
 //                                                     documentation Used to register an onVisibilityChanged callback with a generated model. 
 //                                                     ^ definition semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityStateChangedListener#[T]
 //                                                       display_name T
-//                                                       documentation ```java\nT extends EpoxyModel<V>\n```
+//                                                       signature_documentation java T extends EpoxyModel<V>
 //                                                               ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                          ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityStateChangedListener#[V]
 //                                                                              ^ definition semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityStateChangedListener#[V]
 //                                                                                display_name V
-//                                                                                documentation ```java\nV\n```
+//                                                                                signature_documentation java V
 
   /**
    * This will be called once the visibility changed.
@@ -34,18 +34,18 @@ public interface OnModelVisibilityStateChangedListener<T extends EpoxyModel<V>, 
   void onVisibilityStateChanged(T model, V view, @Visibility int visibilityState);
 //     ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityStateChangedListener#onVisibilityStateChanged().
 //                              display_name onVisibilityStateChanged
-//                              documentation ```java\npublic abstract void onVisibilityStateChanged(T model, V view, int visibilityState)\n```
+//                              signature_documentation java public abstract void onVisibilityStateChanged(T model, V view, int visibilityState)
 //                              documentation  This will be called once the visibility changed.\n <p>\n @param model           The model being bound\n @param view            The view that is being bound to the model\n @param visibilityState The new visibility\n <p>\n @see VisibilityState\n
 //                              ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityStateChangedListener#[T]
 //                                ^^^^^ definition local 0
 //                                      display_name model
-//                                      documentation ```java\nT model\n```
+//                                      signature_documentation java T model
 //                                       ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityStateChangedListener#[V]
 //                                         ^^^^ definition local 1
 //                                              display_name view
-//                                              documentation ```java\nV view\n```
+//                                              signature_documentation java V view
 //                                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/VisibilityState#Visibility#
 //                                                               ^^^^^^^^^^^^^^^ definition local 2
 //                                                                               display_name visibilityState
-//                                                                               documentation ```java\n@Visibility\nint visibilityState\n```
+//                                                                               signature_documentation java @Visibility\nint visibilityState
 }

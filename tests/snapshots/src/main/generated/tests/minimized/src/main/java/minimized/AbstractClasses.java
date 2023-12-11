@@ -3,15 +3,15 @@ package minimized;
 public abstract class AbstractClasses {
 //                    ^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AbstractClasses#
 //                                    display_name AbstractClasses
-//                                    documentation ```java\npublic abstract class AbstractClasses\n```
+//                                    signature_documentation java public abstract class AbstractClasses
 //                    ^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AbstractClasses#`<init>`().
 //                                    display_name <init>
-//                                    documentation ```java\npublic AbstractClasses()\n```
+//                                    signature_documentation java public AbstractClasses()
   public String defaultImplementation() {
 //       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //              ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AbstractClasses#defaultImplementation().
 //                                    display_name defaultImplementation
-//                                    documentation ```java\npublic String defaultImplementation()\n```
+//                                    signature_documentation java public String defaultImplementation()
     return "";
   }
 
@@ -19,6 +19,6 @@ public abstract class AbstractClasses {
 //                ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                       ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AbstractClasses#abstractImplementation().
 //                                              display_name abstractImplementation
-//                                              documentation ```java\npublic abstract String abstractImplementation()\n```
+//                                              signature_documentation java public abstract String abstractImplementation()
 //                                              relationship is_reference is_implementation semanticdb maven . . minimized/SubClasses#abstractImplementation().
 }

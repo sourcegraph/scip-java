@@ -37,20 +37,20 @@ import androidx.annotation.Nullable;
 public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 //                    ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#
 //                                 display_name EpoxyAdapter
-//                                 documentation ```java\n@SuppressWarnings("WeakerAccess")\npublic abstract class EpoxyAdapter\n```
+//                                 signature_documentation java @SuppressWarnings("WeakerAccess")\npublic abstract class EpoxyAdapter
 //                                 documentation  Allows you to easily combine different view types in the same adapter, and handles view holder\n creation, binding, and ids for you. Subclasses just need to add their desired {@link EpoxyModel}\n objects and the rest is done automatically.\n <p/>\n {@link androidx.recyclerview.widget.RecyclerView.Adapter#setHasStableIds(boolean)} is set to true\n by default, since {@link EpoxyModel} makes it easy to support unique ids. If you don't want to\n support this then disable it in your base class (not recommended).\n
 //                                 relationship is_implementation semanticdb maven . . RecyclerView/Adapter#
 //                                 relationship is_implementation semanticdb maven . . StickyHeaderCallbacks#
 //                                 relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
 //                    ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#`<init>`().
 //                                 display_name <init>
-//                                 documentation ```java\npublic EpoxyAdapter()\n```
+//                                 signature_documentation java public EpoxyAdapter()
 //                                         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
   private final HiddenEpoxyModel hiddenModel = new HiddenEpoxyModel();
 //              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#
 //                               ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#hiddenModel.
 //                                           display_name hiddenModel
-//                                           documentation ```java\nprivate final HiddenEpoxyModel hiddenModel\n```
+//                                           signature_documentation java private final HiddenEpoxyModel hiddenModel
 //                                                 ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
 
   /**
@@ -62,14 +62,14 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 //                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                    ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#models.
 //                                           display_name models
-//                                           documentation ```java\nprotected final List<EpoxyModel<?>> models\n```
+//                                           signature_documentation java protected final List<EpoxyModel<?>> models
 //                                           documentation  Subclasses should modify this list as necessary with the models they want to show. Subclasses\n are responsible for notifying data changes whenever this list is changed.\n
 //                                                 ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#`<init>`(+1).
   private DiffHelper diffHelper;
 //        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#
 //                   ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#diffHelper.
 //                              display_name diffHelper
-//                              documentation ```java\nprivate DiffHelper diffHelper\n```
+//                              signature_documentation java private DiffHelper diffHelper
 
   @Override
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
@@ -78,7 +78,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 //     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#getCurrentModels().
 //                                     display_name getCurrentModels
-//                                     documentation ```java\n@Override\nList<EpoxyModel<?>> getCurrentModels()\n```
+//                                     signature_documentation java @Override\nList<EpoxyModel<?>> getCurrentModels()
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
     return models;
 //         ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#models.
@@ -93,7 +93,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void enableDiffing() {
 //               ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#enableDiffing().
 //                             display_name enableDiffing
-//                             documentation ```java\nprotected void enableDiffing()\n```
+//                             signature_documentation java protected void enableDiffing()
 //                             documentation  Enables support for automatically notifying model changes via {@link #notifyModelsChanged()}.\n If used, this should be called in the constructor, before any models are changed.\n\n @see #notifyModelsChanged()\n
 //                             relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#enableDiffing().
     if (diffHelper != null) {
@@ -126,16 +126,16 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 //^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //              ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#getModelForPosition().
 //                                  display_name getModelForPosition
-//                                  documentation ```java\n@Override\nEpoxyModel<?> getModelForPosition(int position)\n```
+//                                  signature_documentation java @Override\nEpoxyModel<?> getModelForPosition(int position)
 //                                  relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getModelForPosition().
 //                                      ^^^^^^^^ definition local 0
 //                                               display_name position
-//                                               documentation ```java\nint position\n```
+//                                               signature_documentation java int position
     EpoxyModel<?> model = models.get(position);
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                ^^^^^ definition local 1
 //                      display_name model
-//                      documentation ```java\nEpoxyModel<?> model\n```
+//                      signature_documentation java EpoxyModel<?> model
 //                        ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#models.
 //                               ^^^ reference semanticdb maven jdk 11 java/util/List#get().
 //                                   ^^^^^^^^ reference local 0
@@ -162,7 +162,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void notifyModelsChanged() {
 //               ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#notifyModelsChanged().
 //                                   display_name notifyModelsChanged
-//                                   documentation ```java\nprotected void notifyModelsChanged()\n```
+//                                   signature_documentation java protected void notifyModelsChanged()
 //                                   documentation  Intelligently notify item changes by comparing the current {@link #models} list against the\n previous so you don't have to micromanage notification calls yourself. This may be\n prohibitively slow for large model lists (in the hundreds), in which case consider doing\n notification calls yourself. If you use this, all your view models must implement {@link\n EpoxyModel#hashCode()} and {@link EpoxyModel#equals(Object)} to completely identify their\n state, so that changes to a model's content can be detected. Before using this you must enable\n it with {@link #enableDiffing()}, since keeping track of the model state adds extra computation\n time to all other data change notifications.\n\n @see #enableDiffing()\n
 //                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#notifyModelsChanged().
     if (diffHelper == null) {
@@ -183,13 +183,13 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void notifyModelChanged(EpoxyModel<?> model) {
 //               ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#notifyModelChanged().
 //                                  display_name notifyModelChanged
-//                                  documentation ```java\nprotected void notifyModelChanged(EpoxyModel<?> model)\n```
+//                                  signature_documentation java protected void notifyModelChanged(EpoxyModel<?> model)
 //                                  documentation  Notify that the given model has had its data changed. It should only be called if the model\n retained the same position.\n
 //                                  relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#notifyModelChanged().
 //                                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                ^^^^^ definition local 2
 //                                                      display_name model
-//                                                      documentation ```java\nEpoxyModel<?> model\n```
+//                                                      signature_documentation java EpoxyModel<?> model
     notifyModelChanged(model, null);
 //  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#notifyModelChanged(+1).
 //                     ^^^^^ reference local 2
@@ -202,21 +202,21 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void notifyModelChanged(EpoxyModel<?> model, @Nullable Object payload) {
 //               ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#notifyModelChanged(+1).
 //                                  display_name notifyModelChanged
-//                                  documentation ```java\nprotected void notifyModelChanged(EpoxyModel<?> model, Object payload)\n```
+//                                  signature_documentation java protected void notifyModelChanged(EpoxyModel<?> model, Object payload)
 //                                  documentation  Notify that the given model has had its data changed. It should only be called if the model\n retained the same position.\n
 //                                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                ^^^^^ definition local 3
 //                                                      display_name model
-//                                                      documentation ```java\nEpoxyModel<?> model\n```
+//                                                      signature_documentation java EpoxyModel<?> model
 //                                                        ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                                                 ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                                                                        ^^^^^^^ definition local 4
 //                                                                                display_name payload
-//                                                                                documentation ```java\n@Nullable\nObject payload\n```
+//                                                                                signature_documentation java @Nullable\nObject payload
     int index = getModelPosition(model);
 //      ^^^^^ definition local 5
 //            display_name index
-//            documentation ```java\nint index\n```
+//            signature_documentation java int index
 //              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
 //                               ^^^^^ reference local 3
     if (index != -1) {
@@ -234,16 +234,16 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void addModel(EpoxyModel<?> modelToAdd) {
 //               ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#addModel().
 //                        display_name addModel
-//                        documentation ```java\nprotected void addModel(EpoxyModel<?> modelToAdd)\n```
+//                        signature_documentation java protected void addModel(EpoxyModel<?> modelToAdd)
 //                        documentation  Adds the model to the end of the {@link #models} list and notifies that the item was inserted.\n
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                      ^^^^^^^^^^ definition local 6
 //                                                 display_name modelToAdd
-//                                                 documentation ```java\nEpoxyModel<?> modelToAdd\n```
+//                                                 signature_documentation java EpoxyModel<?> modelToAdd
     int initialSize = models.size();
 //      ^^^^^^^^^^^ definition local 7
 //                  display_name initialSize
-//                  documentation ```java\nint initialSize\n```
+//                  signature_documentation java int initialSize
 //                    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#models.
 //                           ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
 
@@ -268,23 +268,23 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void addModels(EpoxyModel<?>... modelsToAdd) {
 //               ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#addModels().
 //                         display_name addModels
-//                         documentation ```java\nprotected void addModels(EpoxyModel<?>[] modelsToAdd)\n```
+//                         signature_documentation java protected void addModels(EpoxyModel<?>[] modelsToAdd)
 //                         documentation  Adds the models to the end of the {@link #models} list and notifies that the items were\n inserted.\n
 //                         relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#addModels().
 //                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                          ^^^^^^^^^^^ definition local 8
 //                                                      display_name modelsToAdd
-//                                                      documentation ```java\nEpoxyModel<?>[] modelsToAdd\n```
+//                                                      signature_documentation java EpoxyModel<?>[] modelsToAdd
     int initialSize = models.size();
 //      ^^^^^^^^^^^ definition local 9
 //                  display_name initialSize
-//                  documentation ```java\nint initialSize\n```
+//                  signature_documentation java int initialSize
 //                    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#models.
 //                           ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
     int numModelsToAdd = modelsToAdd.length;
 //      ^^^^^^^^^^^^^^ definition local 10
 //                     display_name numModelsToAdd
-//                     documentation ```java\nint numModelsToAdd\n```
+//                     signature_documentation java int numModelsToAdd
 //                       ^^^^^^^^^^^ reference local 8
 //                                   ^^^^^^ reference semanticdb maven . . Array#length.
 
@@ -318,18 +318,18 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void addModels(Collection<? extends EpoxyModel<?>> modelsToAdd) {
 //               ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#addModels(+1).
 //                         display_name addModels
-//                         documentation ```java\nprotected void addModels(Collection<? extends EpoxyModel<?>> modelsToAdd)\n```
+//                         signature_documentation java protected void addModels(Collection<? extends EpoxyModel<?>> modelsToAdd)
 //                         documentation  Adds the models to the end of the {@link #models} list and notifies that the items were\n inserted.\n
 //                         relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#addModels(+1).
 //                         ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collection#
 //                                              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                             ^^^^^^^^^^^ definition local 11
 //                                                                         display_name modelsToAdd
-//                                                                         documentation ```java\nCollection<? extends EpoxyModel<?>> modelsToAdd\n```
+//                                                                         signature_documentation java Collection<? extends EpoxyModel<?>> modelsToAdd
     int initialSize = models.size();
 //      ^^^^^^^^^^^ definition local 12
 //                  display_name initialSize
-//                  documentation ```java\nint initialSize\n```
+//                  signature_documentation java int initialSize
 //                    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#models.
 //                           ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
 
@@ -356,21 +356,21 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void insertModelBefore(EpoxyModel<?> modelToInsert, EpoxyModel<?> modelToInsertBefore) {
 //               ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#insertModelBefore().
 //                                 display_name insertModelBefore
-//                                 documentation ```java\nprotected void insertModelBefore(EpoxyModel<?> modelToInsert, EpoxyModel<?> modelToInsertBefore)\n```
+//                                 signature_documentation java protected void insertModelBefore(EpoxyModel<?> modelToInsert, EpoxyModel<?> modelToInsertBefore)
 //                                 documentation  Inserts the given model before the other in the {@link #models} list, and notifies that the\n item was inserted.\n
 //                                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#insertModelBefore().
 //                                 ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                               ^^^^^^^^^^^^^ definition local 13
 //                                                             display_name modelToInsert
-//                                                             documentation ```java\nEpoxyModel<?> modelToInsert\n```
+//                                                             signature_documentation java EpoxyModel<?> modelToInsert
 //                                                              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                            ^^^^^^^^^^^^^^^^^^^ definition local 14
 //                                                                                                display_name modelToInsertBefore
-//                                                                                                documentation ```java\nEpoxyModel<?> modelToInsertBefore\n```
+//                                                                                                signature_documentation java EpoxyModel<?> modelToInsertBefore
     int targetIndex = getModelPosition(modelToInsertBefore);
 //      ^^^^^^^^^^^ definition local 15
 //                  display_name targetIndex
-//                  documentation ```java\nint targetIndex\n```
+//                  signature_documentation java int targetIndex
 //                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
 //                                     ^^^^^^^^^^^^^^^^^^^ reference local 14
     if (targetIndex == -1) {
@@ -402,21 +402,21 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void insertModelAfter(EpoxyModel<?> modelToInsert, EpoxyModel<?> modelToInsertAfter) {
 //               ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#insertModelAfter().
 //                                display_name insertModelAfter
-//                                documentation ```java\nprotected void insertModelAfter(EpoxyModel<?> modelToInsert, EpoxyModel<?> modelToInsertAfter)\n```
+//                                signature_documentation java protected void insertModelAfter(EpoxyModel<?> modelToInsert, EpoxyModel<?> modelToInsertAfter)
 //                                documentation  Inserts the given model after the other in the {@link #models} list, and notifies that the item\n was inserted.\n
 //                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#insertModelAfter().
 //                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                              ^^^^^^^^^^^^^ definition local 16
 //                                                            display_name modelToInsert
-//                                                            documentation ```java\nEpoxyModel<?> modelToInsert\n```
+//                                                            signature_documentation java EpoxyModel<?> modelToInsert
 //                                                             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                           ^^^^^^^^^^^^^^^^^^ definition local 17
 //                                                                                              display_name modelToInsertAfter
-//                                                                                              documentation ```java\nEpoxyModel<?> modelToInsertAfter\n```
+//                                                                                              signature_documentation java EpoxyModel<?> modelToInsertAfter
     int modelIndex = getModelPosition(modelToInsertAfter);
 //      ^^^^^^^^^^ definition local 18
 //                 display_name modelIndex
-//                 documentation ```java\nint modelIndex\n```
+//                 signature_documentation java int modelIndex
 //                   ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
 //                                    ^^^^^^^^^^^^^^^^^^ reference local 17
     if (modelIndex == -1) {
@@ -429,7 +429,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
     int targetIndex = modelIndex + 1;
 //      ^^^^^^^^^^^ definition local 19
 //                  display_name targetIndex
-//                  documentation ```java\nint targetIndex\n```
+//                  signature_documentation java int targetIndex
 //                    ^^^^^^^^^^ reference local 18
     pauseModelListNotifications();
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#pauseModelListNotifications().
@@ -453,17 +453,17 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void removeModel(EpoxyModel<?> model) {
 //               ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#removeModel().
 //                           display_name removeModel
-//                           documentation ```java\nprotected void removeModel(EpoxyModel<?> model)\n```
+//                           signature_documentation java protected void removeModel(EpoxyModel<?> model)
 //                           documentation  If the given model exists it is removed and an item removal is notified. Otherwise this does\n nothing.\n
 //                           relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#removeModel().
 //                           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                         ^^^^^ definition local 20
 //                                               display_name model
-//                                               documentation ```java\nEpoxyModel<?> model\n```
+//                                               signature_documentation java EpoxyModel<?> model
     int index = getModelPosition(model);
 //      ^^^^^ definition local 21
 //            display_name index
-//            documentation ```java\nint index\n```
+//            signature_documentation java int index
 //              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
 //                               ^^^^^ reference local 20
     if (index != -1) {
@@ -489,13 +489,13 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void removeAllModels() {
 //               ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#removeAllModels().
 //                               display_name removeAllModels
-//                               documentation ```java\nprotected void removeAllModels()\n```
+//                               signature_documentation java protected void removeAllModels()
 //                               documentation  Removes all models\n
 //                               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#removeAllModels().
     int numModelsRemoved = models.size();
 //      ^^^^^^^^^^^^^^^^ definition local 22
 //                       display_name numModelsRemoved
-//                       documentation ```java\nint numModelsRemoved\n```
+//                       signature_documentation java int numModelsRemoved
 //                         ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#models.
 //                                ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
 
@@ -520,31 +520,31 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void removeAllAfterModel(EpoxyModel<?> model) {
 //               ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#removeAllAfterModel().
 //                                   display_name removeAllAfterModel
-//                                   documentation ```java\nprotected void removeAllAfterModel(EpoxyModel<?> model)\n```
+//                                   signature_documentation java protected void removeAllAfterModel(EpoxyModel<?> model)
 //                                   documentation  Removes all models after the given model, which must have already been added. An example use\n case is you want to keep a header but clear everything else, like in the case of refreshing\n data.\n
 //                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#removeAllAfterModel().
 //                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                 ^^^^^ definition local 23
 //                                                       display_name model
-//                                                       documentation ```java\nEpoxyModel<?> model\n```
+//                                                       signature_documentation java EpoxyModel<?> model
     List<EpoxyModel<?>> modelsToRemove = getAllModelsAfter(model);
 //  ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                      ^^^^^^^^^^^^^^ definition local 24
 //                                     display_name modelsToRemove
-//                                     documentation ```java\nList<EpoxyModel<?>> modelsToRemove\n```
+//                                     signature_documentation java List<EpoxyModel<?>> modelsToRemove
 //                                       ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#getAllModelsAfter().
 //                                                         ^^^^^ reference local 23
     int numModelsRemoved = modelsToRemove.size();
 //      ^^^^^^^^^^^^^^^^ definition local 25
 //                       display_name numModelsRemoved
-//                       documentation ```java\nint numModelsRemoved\n```
+//                       signature_documentation java int numModelsRemoved
 //                         ^^^^^^^^^^^^^^ reference local 24
 //                                        ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
     int initialModelCount = models.size();
 //      ^^^^^^^^^^^^^^^^^ definition local 26
 //                        display_name initialModelCount
-//                        documentation ```java\nint initialModelCount\n```
+//                        signature_documentation java int initialModelCount
 //                          ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#models.
 //                                 ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
 
@@ -574,16 +574,16 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void showModel(EpoxyModel<?> model, boolean show) {
 //               ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModel().
 //                         display_name showModel
-//                         documentation ```java\nprotected void showModel(EpoxyModel<?> model, boolean show)\n```
+//                         signature_documentation java protected void showModel(EpoxyModel<?> model, boolean show)
 //                         documentation  Sets the visibility of the given model, and notifies that the item changed if the new\n visibility is different from the previous.\n\n @param model The model to show. It should already be added to the {@link #models} list.\n @param show  True to show the model, false to hide it.\n
 //                         relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModel().
 //                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                       ^^^^^ definition local 27
 //                                             display_name model
-//                                             documentation ```java\nEpoxyModel<?> model\n```
+//                                             signature_documentation java EpoxyModel<?> model
 //                                                      ^^^^ definition local 28
 //                                                           display_name show
-//                                                           documentation ```java\nboolean show\n```
+//                                                           signature_documentation java boolean show
     if (model.isShown() == show) {
 //      ^^^^^ reference local 27
 //            ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#isShown().
@@ -608,13 +608,13 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void showModel(EpoxyModel<?> model) {
 //               ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModel(+1).
 //                         display_name showModel
-//                         documentation ```java\nprotected void showModel(EpoxyModel<?> model)\n```
+//                         signature_documentation java protected void showModel(EpoxyModel<?> model)
 //                         documentation  Shows the given model, and notifies that the item changed if the item wasn't already shown.\n\n @param model The model to show. It should already be added to the {@link #models} list.\n
 //                         relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModel(+1).
 //                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                       ^^^^^ definition local 29
 //                                             display_name model
-//                                             documentation ```java\nEpoxyModel<?> model\n```
+//                                             signature_documentation java EpoxyModel<?> model
     showModel(model, true);
 //  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModel().
 //            ^^^^^ reference local 29
@@ -628,13 +628,13 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void showModels(EpoxyModel<?>... models) {
 //               ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModels().
 //                          display_name showModels
-//                          documentation ```java\nprotected void showModels(EpoxyModel<?>[] models)\n```
+//                          signature_documentation java protected void showModels(EpoxyModel<?>[] models)
 //                          documentation  Shows the given models, and notifies that each item changed if the item wasn't already shown.\n\n @param models The models to show. They should already be added to the {@link #models} list.\n
 //                          relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModels().
 //                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                           ^^^^^^ definition local 30
 //                                                  display_name models
-//                                                  documentation ```java\nEpoxyModel<?>[] models\n```
+//                                                  signature_documentation java EpoxyModel<?>[] models
     showModels(Arrays.asList(models));
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModels(+2).
 //             ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#
@@ -652,16 +652,16 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void showModels(boolean show, EpoxyModel<?>... models) {
 //               ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModels(+1).
 //                          display_name showModels
-//                          documentation ```java\nprotected void showModels(boolean show, EpoxyModel<?>[] models)\n```
+//                          signature_documentation java protected void showModels(boolean show, EpoxyModel<?>[] models)
 //                          documentation  Sets the visibility of the given models, and notifies that the items changed if the new\n visibility is different from the previous.\n\n @param models The models to show. They should already be added to the {@link #models} list.\n @param show   True to show the models, false to hide them.\n
 //                          relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(+1).
 //                                  ^^^^ definition local 31
 //                                       display_name show
-//                                       documentation ```java\nboolean show\n```
+//                                       signature_documentation java boolean show
 //                                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                         ^^^^^^ definition local 32
 //                                                                display_name models
-//                                                                documentation ```java\nEpoxyModel<?>[] models\n```
+//                                                                signature_documentation java EpoxyModel<?>[] models
     showModels(Arrays.asList(models), show);
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModels(+3).
 //             ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#
@@ -678,14 +678,14 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void showModels(Iterable<EpoxyModel<?>> models) {
 //               ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModels(+2).
 //                          display_name showModels
-//                          documentation ```java\nprotected void showModels(Iterable<EpoxyModel<?>> models)\n```
+//                          signature_documentation java protected void showModels(Iterable<EpoxyModel<?>> models)
 //                          documentation  Shows the given models, and notifies that each item changed if the item wasn't already shown.\n\n @param models The models to show. They should already be added to the {@link #models} list.\n
 //                          relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(+2).
 //                          ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Iterable#
 //                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                  ^^^^^^ definition local 33
 //                                                         display_name models
-//                                                         documentation ```java\nIterable<EpoxyModel<?>> models\n```
+//                                                         signature_documentation java Iterable<EpoxyModel<?>> models
     showModels(models, true);
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModels(+3).
 //             ^^^^^^ reference local 33
@@ -701,22 +701,22 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void showModels(Iterable<EpoxyModel<?>> models, boolean show) {
 //               ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModels(+3).
 //                          display_name showModels
-//                          documentation ```java\nprotected void showModels(Iterable<EpoxyModel<?>> models, boolean show)\n```
+//                          signature_documentation java protected void showModels(Iterable<EpoxyModel<?>> models, boolean show)
 //                          documentation  Sets the visibility of the given models, and notifies that the items changed if the new\n visibility is different from the previous.\n\n @param models The models to show. They should already be added to the {@link #models} list.\n @param show   True to show the models, false to hide them.\n
 //                          relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(+3).
 //                          ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Iterable#
 //                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                  ^^^^^^ definition local 34
 //                                                         display_name models
-//                                                         documentation ```java\nIterable<EpoxyModel<?>> models\n```
+//                                                         signature_documentation java Iterable<EpoxyModel<?>> models
 //                                                                  ^^^^ definition local 35
 //                                                                       display_name show
-//                                                                       documentation ```java\nboolean show\n```
+//                                                                       signature_documentation java boolean show
     for (EpoxyModel<?> model : models) {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                     ^^^^^ definition local 36
 //                           display_name model
-//                           documentation ```java\nEpoxyModel<?> model\n```
+//                           signature_documentation java EpoxyModel<?> model
 //                             ^^^^^^ reference local 34
       showModel(model, show);
 //    ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModel().
@@ -733,13 +733,13 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void hideModel(EpoxyModel<?> model) {
 //               ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#hideModel().
 //                         display_name hideModel
-//                         documentation ```java\nprotected void hideModel(EpoxyModel<?> model)\n```
+//                         signature_documentation java protected void hideModel(EpoxyModel<?> model)
 //                         documentation  Hides the given model, and notifies that the item changed if the item wasn't already hidden.\n\n @param model The model to hide. This should already be added to the {@link #models} list.\n
 //                         relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#hideModel().
 //                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                       ^^^^^ definition local 37
 //                                             display_name model
-//                                             documentation ```java\nEpoxyModel<?> model\n```
+//                                             signature_documentation java EpoxyModel<?> model
     showModel(model, false);
 //  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModel().
 //            ^^^^^ reference local 37
@@ -753,14 +753,14 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void hideModels(Iterable<EpoxyModel<?>> models) {
 //               ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#hideModels().
 //                          display_name hideModels
-//                          documentation ```java\nprotected void hideModels(Iterable<EpoxyModel<?>> models)\n```
+//                          signature_documentation java protected void hideModels(Iterable<EpoxyModel<?>> models)
 //                          documentation  Hides the given models, and notifies that each item changed if the item wasn't already hidden.\n\n @param models The models to hide. They should already be added to the {@link #models} list.\n
 //                          relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#hideModels().
 //                          ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Iterable#
 //                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                  ^^^^^^ definition local 38
 //                                                         display_name models
-//                                                         documentation ```java\nIterable<EpoxyModel<?>> models\n```
+//                                                         signature_documentation java Iterable<EpoxyModel<?>> models
     showModels(models, false);
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModels(+3).
 //             ^^^^^^ reference local 38
@@ -774,13 +774,13 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void hideModels(EpoxyModel<?>... models) {
 //               ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#hideModels(+1).
 //                          display_name hideModels
-//                          documentation ```java\nprotected void hideModels(EpoxyModel<?>[] models)\n```
+//                          signature_documentation java protected void hideModels(EpoxyModel<?>[] models)
 //                          documentation  Hides the given models, and notifies that each item changed if the item wasn't already hidden.\n\n @param models The models to hide. They should already be added to the {@link #models} list.\n
 //                          relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#hideModels(+1).
 //                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                           ^^^^^^ definition local 39
 //                                                  display_name models
-//                                                  documentation ```java\nEpoxyModel<?>[] models\n```
+//                                                  signature_documentation java EpoxyModel<?>[] models
     hideModels(Arrays.asList(models));
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#hideModels().
 //             ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#
@@ -796,13 +796,13 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   protected void hideAllAfterModel(EpoxyModel<?> model) {
 //               ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#hideAllAfterModel().
 //                                 display_name hideAllAfterModel
-//                                 documentation ```java\nprotected void hideAllAfterModel(EpoxyModel<?> model)\n```
+//                                 signature_documentation java protected void hideAllAfterModel(EpoxyModel<?> model)
 //                                 documentation  Hides all models currently located after the given model in the {@link #models} list.\n\n @param model The model after which to hide. It must exist in the {@link #models} list.\n
 //                                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#hideAllAfterModel().
 //                                 ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                               ^^^^^ definition local 40
 //                                                     display_name model
-//                                                     documentation ```java\nEpoxyModel<?> model\n```
+//                                                     signature_documentation java EpoxyModel<?> model
     hideModels(getAllModelsAfter(model));
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#hideModels().
 //             ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#getAllModelsAfter().
@@ -821,17 +821,17 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
 //               ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                              ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#getAllModelsAfter().
 //                                                display_name getAllModelsAfter
-//                                                documentation ```java\nprotected List<EpoxyModel<?>> getAllModelsAfter(EpoxyModel<?> model)\n```
+//                                                signature_documentation java protected List<EpoxyModel<?>> getAllModelsAfter(EpoxyModel<?> model)
 //                                                documentation  Returns a sub list of all items in {@link #models} that occur after the given model. This list\n is backed by the original models list, any changes to the returned list will be reflected in\n the original {@link #models} list.\n\n @param model Must exist in {@link #models}.\n
 //                                                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#getAllModelsAfter().
 //                                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                              ^^^^^ definition local 41
 //                                                                    display_name model
-//                                                                    documentation ```java\nEpoxyModel<?> model\n```
+//                                                                    signature_documentation java EpoxyModel<?> model
     int index = getModelPosition(model);
 //      ^^^^^ definition local 42
 //            display_name index
-//            documentation ```java\nint index\n```
+//            signature_documentation java int index
 //              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
 //                               ^^^^^ reference local 41
     if (index == -1) {
@@ -856,7 +856,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   private void pauseModelListNotifications() {
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#pauseModelListNotifications().
 //                                         display_name pauseModelListNotifications
-//                                         documentation ```java\nprivate void pauseModelListNotifications()\n```
+//                                         signature_documentation java private void pauseModelListNotifications()
 //                                         documentation  We pause the list's notifications when we modify models internally, since we already do the\n proper adapter notifications for those modifications. By pausing these list notifications we\n prevent the differ having to do work to track them.\n
     ((ModelList) models).pauseNotifications();
 //    ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#
@@ -867,7 +867,7 @@ public abstract class EpoxyAdapter extends BaseEpoxyAdapter {
   private void resumeModelListNotifications() {
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#resumeModelListNotifications().
 //                                          display_name resumeModelListNotifications
-//                                          documentation ```java\nprivate void resumeModelListNotifications()\n```
+//                                          signature_documentation java private void resumeModelListNotifications()
     ((ModelList) models).resumeNotifications();
 //    ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#
 //               ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#models.

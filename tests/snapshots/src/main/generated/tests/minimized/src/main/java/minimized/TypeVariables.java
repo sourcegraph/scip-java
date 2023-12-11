@@ -4,76 +4,76 @@ package minimized;
 public class TypeVariables {
 //           ^^^^^^^^^^^^^ definition semanticdb maven . . minimized/TypeVariables#
 //                         display_name TypeVariables
-//                         documentation ```java\npublic class TypeVariables\n```
+//                         signature_documentation java public class TypeVariables
 //                         documentation Example from https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.4 
 //           ^^^^^^^^^^^^^ definition semanticdb maven . . minimized/TypeVariables#`<init>`().
 //                         display_name <init>
-//                         documentation ```java\npublic TypeVariables()\n```
+//                         signature_documentation java public TypeVariables()
   static class C {
 //             ^ definition semanticdb maven . . minimized/TypeVariables#C#
 //               display_name C
-//               documentation ```java\nstatic class C\n```
+//               signature_documentation java static class C
 //             ^ definition semanticdb maven . . minimized/TypeVariables#C#`<init>`().
 //               display_name <init>
-//               documentation ```java\nC()\n```
+//               signature_documentation java C()
     public void mCPublic() {}
 //              ^^^^^^^^ definition semanticdb maven . . minimized/TypeVariables#C#mCPublic().
 //                       display_name mCPublic
-//                       documentation ```java\npublic void mCPublic()\n```
+//                       signature_documentation java public void mCPublic()
 
     protected void mCProtected() {}
 //                 ^^^^^^^^^^^ definition semanticdb maven . . minimized/TypeVariables#C#mCProtected().
 //                             display_name mCProtected
-//                             documentation ```java\nprotected void mCProtected()\n```
+//                             signature_documentation java protected void mCProtected()
 
     void mCPackage() {}
 //       ^^^^^^^^^ definition semanticdb maven . . minimized/TypeVariables#C#mCPackage().
 //                 display_name mCPackage
-//                 documentation ```java\nvoid mCPackage()\n```
+//                 signature_documentation java void mCPackage()
   }
 
   interface I {
 //          ^ definition semanticdb maven . . minimized/TypeVariables#I#
 //            display_name I
-//            documentation ```java\ninterface I\n```
+//            signature_documentation java interface I
     void mI();
 //       ^^ definition semanticdb maven . . minimized/TypeVariables#I#mI().
 //          display_name mI
-//          documentation ```java\npublic abstract void mI()\n```
+//          signature_documentation java public abstract void mI()
 //          relationship is_reference is_implementation semanticdb maven . . minimized/TypeVariables#CT#mI().
   }
 
   static class CT extends C implements I {
 //             ^^ definition semanticdb maven . . minimized/TypeVariables#CT#
 //                display_name CT
-//                documentation ```java\nstatic class CT\n```
+//                signature_documentation java static class CT
 //                relationship is_implementation semanticdb maven . . minimized/TypeVariables#C#
 //                relationship is_implementation semanticdb maven . . minimized/TypeVariables#I#
 //             ^^ definition semanticdb maven . . minimized/TypeVariables#CT#`<init>`().
 //                display_name <init>
-//                documentation ```java\nCT()\n```
+//                signature_documentation java CT()
 //                        ^ reference semanticdb maven . . minimized/TypeVariables#C#
 //                                     ^ reference semanticdb maven . . minimized/TypeVariables#I#
     public void mI() {}
 //              ^^ definition semanticdb maven . . minimized/TypeVariables#CT#mI().
 //                 display_name mI
-//                 documentation ```java\npublic void mI()\n```
+//                 signature_documentation java public void mI()
 //                 relationship is_reference is_implementation semanticdb maven . . minimized/TypeVariables#I#mI().
   }
 
   public static <T extends C & I> void app(T t) {
 //               ^ definition semanticdb maven . . minimized/TypeVariables#app().[T]
 //                 display_name T
-//                 documentation ```java\nT extends C & I\n```
+//                 signature_documentation java T extends C & I
 //                         ^ reference semanticdb maven . . minimized/TypeVariables#C#
 //                             ^ reference semanticdb maven . . minimized/TypeVariables#I#
 //                                     ^^^ definition semanticdb maven . . minimized/TypeVariables#app().
 //                                         display_name app
-//                                         documentation ```java\npublic static <T extends C & I> void app(T t)\n```
+//                                         signature_documentation java public static <T extends C & I> void app(T t)
 //                                         ^ reference semanticdb maven . . minimized/TypeVariables#app().[T]
 //                                           ^ definition local 0
 //                                             display_name t
-//                                             documentation ```java\nT t\n```
+//                                             signature_documentation java T t
     t.mI();
 //  ^ reference local 0
 //    ^^ reference semanticdb maven . . minimized/TypeVariables#I#mI().

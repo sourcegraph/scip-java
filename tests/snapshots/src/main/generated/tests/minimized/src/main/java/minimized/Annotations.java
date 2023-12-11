@@ -53,18 +53,18 @@ import static java.lang.annotation.ElementType.*;
 public @interface Annotations {
 //                ^^^^^^^^^^^ definition semanticdb maven . . minimized/Annotations#
 //                            display_name Annotations
-//                            documentation ```java\n@Documented\n@Retention(RetentionPolicy.RUNTIME)\n@Target({CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})\npublic @interface Annotations\n```
-//                            relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//                            signature_documentation java @Documented\n@Retention(RetentionPolicy.RUNTIME)\n@Target({CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})\npublic @interface Annotations
+//                            relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
 
   String value() default "";
 //^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //       ^^^^^ definition semanticdb maven . . minimized/Annotations#value().
 //             display_name value
-//             documentation ```java\npublic abstract String value()\n```
+//             signature_documentation java public abstract String value()
 
   String format() default "";
 //^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //       ^^^^^^ definition semanticdb maven . . minimized/Annotations#format().
 //              display_name format
-//              documentation ```java\npublic abstract String format()\n```
+//              signature_documentation java public abstract String format()
 }

@@ -4,31 +4,31 @@ package minimized
 object Issue414 {
 //     ^^^^^^^^ definition semanticdb maven . . minimized/Issue414.
 //              display_name Issue414
-//              documentation ```scala\nobject Issue414\n```
+//              signature_documentation scala object Issue414
   trait A {
 //      ^ definition semanticdb maven . . minimized/Issue414.A#
 //        display_name A
-//        documentation ```scala\ntrait A\n```
+//        signature_documentation scala trait A
     def b(): Unit
 //      ^ definition semanticdb maven . . minimized/Issue414.A#b().
 //        display_name b
-//        documentation ```scala\ndef b(): Unit\n```
+//        signature_documentation scala def b(): Unit
 //           ^^^^ reference semanticdb maven . . scala/Unit#
   }
   val a1 =
 //    ^^ definition semanticdb maven . . minimized/Issue414.a1.
 //       display_name a1
-//       documentation ```scala\nval a1: {}\n```
+//       signature_documentation scala val a1: {}
     new A {
 //      ^ definition local 0
 //        display_name $anon
-//        documentation ```scala\nfinal class $anon\n```
+//        signature_documentation scala final class $anon
 //      ^ reference semanticdb maven . . minimized/Issue414.A#
 //        ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
       override def b(): Unit = {
 //                 ^ definition local 1
 //                   display_name b
-//                   documentation ```scala\ndef b(): Unit\n```
+//                   signature_documentation scala def b(): Unit
 //                   relationship is_reference is_implementation semanticdb maven . . minimized/Issue414.A#b().
 //                      ^^^^ reference semanticdb maven . . scala/Unit#
         print("Hello")
@@ -38,7 +38,7 @@ object Issue414 {
   val a2: A = a1
 //    ^^ definition semanticdb maven . . minimized/Issue414.a2.
 //       display_name a2
-//       documentation ```scala\nval a2: A\n```
+//       signature_documentation scala val a2: A
 //        ^ reference semanticdb maven . . minimized/Issue414.A#
 //            ^^ reference semanticdb maven . . minimized/Issue414.a1.
   println(a1.b())

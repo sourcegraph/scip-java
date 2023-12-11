@@ -177,6 +177,15 @@ object ScipPrinters {
             .append(info.getDisplayName)
             .append("\n")
         }
+        if (info.hasSignatureDocumentation) {
+          out
+            .append(prefix)
+            .append("signature_documentation ")
+            .append(info.getSignatureDocumentation.getLanguage)
+            .append(" ")
+            .append(info.getSignatureDocumentation.getText.replace("\n", "\\n").replace("\t", "\\t"))
+            .append("\n")
+        }
         0.until(info.getDocumentationCount)
           .foreach { n =>
             val documentation = info.getDocumentation(n)
