@@ -7,6 +7,7 @@ import android.util.Log;
 
 class DebugTimer implements Timer {
 //    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#
+//               display_name DebugTimer
 //               documentation ```java\nclass DebugTimer\n```
 //               relationship is_implementation semanticdb maven . . com/airbnb/epoxy/Timer#
 //                          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Timer#
@@ -14,20 +15,25 @@ class DebugTimer implements Timer {
   private final String tag;
 //              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                     ^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#tag.
+//                         display_name tag
 //                         documentation ```java\nprivate final String tag\n```
   private long startTime;
 //             ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#startTime.
+//                       display_name startTime
 //                       documentation ```java\nprivate long startTime\n```
   private String sectionName;
 //        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //               ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#sectionName.
+//                           display_name sectionName
 //                           documentation ```java\nprivate String sectionName\n```
 
   DebugTimer(String tag) {
 //^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#`<init>`().
+//           display_name <init>
 //           documentation ```java\nDebugTimer(String tag)\n```
 //           ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                  ^^^ definition local 0
+//                      display_name tag
 //                      documentation ```java\nString tag\n```
     this.tag = tag;
 //       ^^^ reference semanticdb maven . . com/airbnb/epoxy/DebugTimer#tag.
@@ -38,6 +44,7 @@ class DebugTimer implements Timer {
 
   private void reset() {
 //             ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#reset().
+//                   display_name reset
 //                   documentation ```java\nprivate void reset()\n```
     startTime = -1;
 //  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DebugTimer#startTime.
@@ -49,10 +56,12 @@ class DebugTimer implements Timer {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void start(String sectionName) {
 //            ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#start().
+//                  display_name start
 //                  documentation ```java\n@Override\npublic void start(String sectionName)\n```
 //                  relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/Timer#start().
 //                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                         ^^^^^^^^^^^ definition local 1
+//                                     display_name sectionName
 //                                     documentation ```java\nString sectionName\n```
     if (startTime != -1) {
 //      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DebugTimer#startTime.
@@ -73,6 +82,7 @@ class DebugTimer implements Timer {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void stop() {
 //            ^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#stop().
+//                 display_name stop
 //                 documentation ```java\n@Override\npublic void stop()\n```
 //                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/Timer#stop().
     if (startTime == -1) {
@@ -83,6 +93,7 @@ class DebugTimer implements Timer {
 
     float durationMs = (System.nanoTime() - startTime) / 1000000f;
 //        ^^^^^^^^^^ definition local 2
+//                   display_name durationMs
 //                   documentation ```java\nfloat durationMs\n```
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
 //                             ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/System#nanoTime().

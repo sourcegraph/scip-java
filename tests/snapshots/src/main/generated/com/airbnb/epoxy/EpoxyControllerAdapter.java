@@ -57,6 +57,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements ResultCallback {
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#
+//                                        display_name EpoxyControllerAdapter
 //                                        documentation ```java\npublic final class EpoxyControllerAdapter\n```
 //                                        relationship is_implementation semanticdb maven . . RecyclerView/Adapter#
 //                                        relationship is_implementation semanticdb maven . . StickyHeaderCallbacks#
@@ -67,35 +68,43 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   private final NotifyBlocker notifyBlocker = new NotifyBlocker();
 //              ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#
 //                            ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#notifyBlocker.
+//                                          display_name notifyBlocker
 //                                          documentation ```java\nprivate final NotifyBlocker notifyBlocker\n```
 //                                                ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#`<init>`().
   private final AsyncEpoxyDiffer differ;
 //              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#
 //                               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#differ.
+//                                      display_name differ
 //                                      documentation ```java\nprivate final AsyncEpoxyDiffer differ\n```
   private final EpoxyController epoxyController;
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
+//                                              display_name epoxyController
 //                                              documentation ```java\nprivate final EpoxyController epoxyController\n```
   private int itemCount;
 //            ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#itemCount.
+//                      display_name itemCount
 //                      documentation ```java\nprivate int itemCount\n```
   private final List<OnModelBuildFinishedListener> modelBuildListeners = new ArrayList<>();
 //              ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/OnModelBuildFinishedListener#
 //                                                 ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#modelBuildListeners.
+//                                                                     display_name modelBuildListeners
 //                                                                     documentation ```java\nprivate final List<OnModelBuildFinishedListener> modelBuildListeners\n```
 //                                                                           ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`(+1).
 
   EpoxyControllerAdapter(@NonNull EpoxyController epoxyController, Handler diffingHandler) {
 //^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#`<init>`().
+//                       display_name <init>
 //                       documentation ```java\nEpoxyControllerAdapter(EpoxyController epoxyController, unresolved_type diffingHandler)\n```
 //                        ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                                                ^^^^^^^^^^^^^^^ definition local 0
+//                                                                display_name epoxyController
 //                                                                documentation ```java\n@NonNull\nEpoxyController epoxyController\n```
 //                                                                 ^^^^^^^ reference semanticdb maven . . Handler#
 //                                                                         ^^^^^^^^^^^^^^ definition local 1
+//                                                                                        display_name diffingHandler
 //                                                                                        documentation ```java\nunresolved_type diffingHandler\n```
     this.epoxyController = epoxyController;
 //       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
@@ -118,11 +127,13 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   protected void onExceptionSwallowed(@NonNull RuntimeException exception) {
 //               ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#onExceptionSwallowed().
+//                                    display_name onExceptionSwallowed
 //                                    documentation ```java\n@Override\nprotected void onExceptionSwallowed(RuntimeException exception)\n```
 //                                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onExceptionSwallowed().
 //                                     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                             ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/RuntimeException#
 //                                                              ^^^^^^^^^ definition local 2
+//                                                                        display_name exception
 //                                                                        documentation ```java\n@NonNull\nRuntimeException exception\n```
     epoxyController.onExceptionSwallowed(exception);
 //  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
@@ -138,6 +149,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //^^^^ reference semanticdb maven jdk 11 java/util/List#
 //               ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
+//                                               display_name getCurrentModels
 //                                               documentation ```java\n@NonNull\n@Override\nList<? extends EpoxyModel<?>> getCurrentModels()\n```
 //                                               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
     return differ.getCurrentList();
@@ -149,6 +161,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public int getItemCount() {
 //           ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getItemCount().
+//                        display_name getItemCount
 //                        documentation ```java\n@Override\npublic int getItemCount()\n```
 //                        relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getItemCount().
     // RecyclerView calls this A LOT. The base class implementation does
@@ -161,11 +174,13 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   /** This is set from whatever thread model building happened on, so must be thread safe. */
   void setModels(@NonNull ControllerModelList models) {
 //     ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#setModels().
+//               display_name setModels
 //               documentation ```java\nvoid setModels(ControllerModelList models)\n```
 //               documentation This is set from whatever thread model building happened on, so must be thread safe. 
 //                ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ControllerModelList#
 //                                            ^^^^^^ definition local 3
+//                                                   display_name models
 //                                                   documentation ```java\n@NonNull\nControllerModelList models\n```
     // If debug model validations are on then we should help detect the error case where models
     // were incorrectly mutated once they were added. That check is also done before and after
@@ -180,6 +195,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //  ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                 ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                ^^^^^^^^^^^^^ definition local 4
+//                                              display_name currentModels
 //                                              documentation ```java\nList<? extends EpoxyModel<?>> currentModels\n```
 //                                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
     if (!currentModels.isEmpty() && currentModels.get(0).isDebugValidationEnabled()) {
@@ -190,6 +206,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                                                       ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#isDebugValidationEnabled().
       for (int i = 0; i < currentModels.size(); i++) {
 //             ^ definition local 5
+//               display_name i
 //               documentation ```java\nint i\n```
 //                    ^ reference local 5
 //                        ^^^^^^^^^^^^^ reference local 4
@@ -198,6 +215,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
         EpoxyModel<?> model = currentModels.get(i);
 //      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                    ^^^^^ definition local 6
+//                          display_name model
 //                          documentation ```java\nEpoxyModel<?> model\n```
 //                            ^^^^^^^^^^^^^ reference local 4
 //                                          ^^^ reference semanticdb maven jdk 11 java/util/List#get().
@@ -223,6 +241,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
    */
   public boolean isDiffInProgress() {
 //               ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#isDiffInProgress().
+//                                display_name isDiffInProgress
 //                                documentation ```java\npublic boolean isDiffInProgress()\n```
 //                                documentation  @return True if a diff operation is in progress.\n
     return differ.isDiffInProgress();
@@ -235,11 +254,13 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void onResult(@NonNull DiffResult result) {
 //            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#onResult().
+//                     display_name onResult
 //                     documentation ```java\n@Override\npublic void onResult(DiffResult result)\n```
 //                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#onResult().
 //                      ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#
 //                                         ^^^^^^ definition local 7
+//                                                display_name result
 //                                                documentation ```java\n@NonNull\nDiffResult result\n```
     itemCount = result.newModels.size();
 //  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#itemCount.
@@ -258,6 +279,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 
     for (int i = modelBuildListeners.size() - 1; i >= 0; i--) {
 //           ^ definition local 8
+//             display_name i
 //             documentation ```java\nint i\n```
 //               ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#modelBuildListeners.
 //                                   ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
@@ -274,9 +296,11 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 
   public void addModelBuildListener(OnModelBuildFinishedListener listener) {
 //            ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#addModelBuildListener().
+//                                  display_name addModelBuildListener
 //                                  documentation ```java\npublic void addModelBuildListener(OnModelBuildFinishedListener listener)\n```
 //                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/OnModelBuildFinishedListener#
 //                                                               ^^^^^^^^ definition local 9
+//                                                                        display_name listener
 //                                                                        documentation ```java\nOnModelBuildFinishedListener listener\n```
     modelBuildListeners.add(listener);
 //  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#modelBuildListeners.
@@ -286,9 +310,11 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 
   public void removeModelBuildListener(OnModelBuildFinishedListener listener) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#removeModelBuildListener().
+//                                     display_name removeModelBuildListener
 //                                     documentation ```java\npublic void removeModelBuildListener(OnModelBuildFinishedListener listener)\n```
 //                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/OnModelBuildFinishedListener#
 //                                                                  ^^^^^^^^ definition local 10
+//                                                                           display_name listener
 //                                                                           documentation ```java\nOnModelBuildFinishedListener listener\n```
     modelBuildListeners.remove(listener);
 //  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#modelBuildListeners.
@@ -300,6 +326,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   boolean diffPayloadsEnabled() {
 //        ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#diffPayloadsEnabled().
+//                            display_name diffPayloadsEnabled
 //                            documentation ```java\n@Override\nboolean diffPayloadsEnabled()\n```
 //                            relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#diffPayloadsEnabled().
     return true;
@@ -309,10 +336,12 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#onAttachedToRecyclerView().
+//                                     display_name onAttachedToRecyclerView
 //                                     documentation ```java\n@Override\npublic void onAttachedToRecyclerView(unresolved_type recyclerView)\n```
 //                                      ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                                           ^^^^^^^^^^^^ definition local 11
+//                                                                        display_name recyclerView
 //                                                                        documentation ```java\n@NonNull\nunresolved_type recyclerView\n```
     super.onAttachedToRecyclerView(recyclerView);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#super.
@@ -328,11 +357,13 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#onDetachedFromRecyclerView().
+//                                       display_name onDetachedFromRecyclerView
 //                                       documentation ```java\n@Override\npublic void onDetachedFromRecyclerView(unresolved_type recyclerView)\n```
 //                                       relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onDetachedFromRecyclerView().
 //                                        ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                                ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                                             ^^^^^^^^^^^^ definition local 12
+//                                                                          display_name recyclerView
 //                                                                          documentation ```java\n@NonNull\nunresolved_type recyclerView\n```
     super.onDetachedFromRecyclerView(recyclerView);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#super.
@@ -348,11 +379,13 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void onViewAttachedToWindow(@NonNull EpoxyViewHolder holder) {
 //            ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#onViewAttachedToWindow().
+//                                   display_name onViewAttachedToWindow
 //                                   documentation ```java\n@Override\npublic void onViewAttachedToWindow(EpoxyViewHolder holder)\n```
 //                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onViewAttachedToWindow().
 //                                    ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                            ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                                            ^^^^^^ definition local 13
+//                                                                   display_name holder
 //                                                                   documentation ```java\n@NonNull\nEpoxyViewHolder holder\n```
     super.onViewAttachedToWindow(holder);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#super.
@@ -370,11 +403,13 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void onViewDetachedFromWindow(@NonNull EpoxyViewHolder holder) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#onViewDetachedFromWindow().
+//                                     display_name onViewDetachedFromWindow
 //                                     documentation ```java\n@Override\npublic void onViewDetachedFromWindow(EpoxyViewHolder holder)\n```
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onViewDetachedFromWindow().
 //                                      ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                                              ^^^^^^ definition local 14
+//                                                                     display_name holder
 //                                                                     documentation ```java\n@NonNull\nEpoxyViewHolder holder\n```
     super.onViewDetachedFromWindow(holder);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#super.
@@ -392,22 +427,27 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   protected void onModelBound(@NonNull EpoxyViewHolder holder, @NonNull EpoxyModel<?> model,
 //               ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#onModelBound().
+//                            display_name onModelBound
 //                            documentation ```java\n@Override\nprotected void onModelBound(EpoxyViewHolder holder, EpoxyModel<?> model, int position, EpoxyModel<?> previouslyBoundModel)\n```
 //                            relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onModelBound(+1).
 //                             ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                     ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                                     ^^^^^^ definition local 15
+//                                                            display_name holder
 //                                                            documentation ```java\n@NonNull\nEpoxyViewHolder holder\n```
 //                                                              ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                                    ^^^^^ definition local 16
+//                                                                                          display_name model
 //                                                                                          documentation ```java\n@NonNull\nEpoxyModel<?> model\n```
       int position, @Nullable EpoxyModel<?> previouslyBoundModel) {
 //        ^^^^^^^^ definition local 17
+//                 display_name position
 //                 documentation ```java\nint position\n```
 //                   ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                          ^^^^^^^^^^^^^^^^^^^^ definition local 18
+//                                                               display_name previouslyBoundModel
 //                                                               documentation ```java\n@Nullable\nEpoxyModel<?> previouslyBoundModel\n```
     epoxyController.onModelBound(holder, model, position, previouslyBoundModel);
 //  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
@@ -422,15 +462,18 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   protected void onModelUnbound(@NonNull EpoxyViewHolder holder, @NonNull EpoxyModel<?> model) {
 //               ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#onModelUnbound().
+//                              display_name onModelUnbound
 //                              documentation ```java\n@Override\nprotected void onModelUnbound(EpoxyViewHolder holder, EpoxyModel<?> model)\n```
 //                              relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onModelUnbound().
 //                               ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                                       ^^^^^^ definition local 19
+//                                                              display_name holder
 //                                                              documentation ```java\n@NonNull\nEpoxyViewHolder holder\n```
 //                                                                ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                                                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                                      ^^^^^ definition local 20
+//                                                                                            display_name model
 //                                                                                            documentation ```java\n@NonNull\nEpoxyModel<?> model\n```
     epoxyController.onModelUnbound(holder, model);
 //  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
@@ -446,6 +489,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //       ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                           ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCopyOfModels().
+//                                           display_name getCopyOfModels
 //                                           documentation ```java\n@NonNull\npublic List<EpoxyModel<?>> getCopyOfModels()\n```
 //                                           documentation Get an unmodifiable copy of the current models set on the adapter. 
     //noinspection unchecked
@@ -464,9 +508,11 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   public EpoxyModel<?> getModelAtPosition(int position) {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                     ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getModelAtPosition().
+//                                        display_name getModelAtPosition
 //                                        documentation ```java\n@NonNull\npublic EpoxyModel<?> getModelAtPosition(int position)\n```
 //                                        documentation  @throws IndexOutOfBoundsException If the given position is out of range of the current model\n                                   list.\n
 //                                            ^^^^^^^^ definition local 21
+//                                                     display_name position
 //                                                     documentation ```java\nint position\n```
     return getCurrentModels().get(position);
 //         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
@@ -483,13 +529,16 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   public EpoxyModel<?> getModelById(long id) {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                     ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getModelById().
+//                                  display_name getModelById
 //                                  documentation ```java\n@Nullable\npublic EpoxyModel<?> getModelById(long id)\n```
 //                                  documentation  Searches the current model list for the model with the given id. Returns the matching model if\n one is found, otherwise null is returned.\n
 //                                       ^^ definition local 22
+//                                          display_name id
 //                                          documentation ```java\nlong id\n```
     for (EpoxyModel<?> model : getCurrentModels()) {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                     ^^^^^ definition local 23
+//                           display_name model
 //                           documentation ```java\nEpoxyModel<?> model\n```
 //                             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
       if (model.id() == id) {
@@ -508,19 +557,23 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public int getModelPosition(@NonNull EpoxyModel<?> targetModel) {
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getModelPosition().
+//                            display_name getModelPosition
 //                            documentation ```java\n@Override\npublic int getModelPosition(EpoxyModel<?> targetModel)\n```
 //                            relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
 //                             ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                   ^^^^^^^^^^^ definition local 24
+//                                                               display_name targetModel
 //                                                               documentation ```java\n@NonNull\nEpoxyModel<?> targetModel\n```
     int size = getCurrentModels().size();
 //      ^^^^ definition local 25
+//           display_name size
 //           documentation ```java\nint size\n```
 //             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
 //                                ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
     for (int i = 0; i < size; i++) {
 //           ^ definition local 26
+//             display_name i
 //             documentation ```java\nint i\n```
 //                  ^ reference local 26
 //                      ^^^^ reference local 25
@@ -528,6 +581,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
       EpoxyModel<?> model = getCurrentModels().get(i);
 //    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                  ^^^^^ definition local 27
+//                        display_name model
 //                        documentation ```java\nEpoxyModel<?> model\n```
 //                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
 //                                             ^^^ reference semanticdb maven jdk 11 java/util/List#get().
@@ -552,6 +606,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
   public BoundViewHolders getBoundViewHolders() {
 //       ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#
 //                        ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getBoundViewHolders().
+//                                            display_name getBoundViewHolders
 //                                            documentation ```java\n@NonNull\n@Override\npublic BoundViewHolders getBoundViewHolders()\n```
 //                                            relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getBoundViewHolders().
     return super.getBoundViewHolders();
@@ -563,15 +618,19 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/UiThread#
   void moveModel(int fromPosition, int toPosition) {
 //     ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#moveModel().
+//               display_name moveModel
 //               documentation ```java\n@UiThread\nvoid moveModel(int fromPosition, int toPosition)\n```
 //                   ^^^^^^^^^^^^ definition local 28
+//                                display_name fromPosition
 //                                documentation ```java\nint fromPosition\n```
 //                                     ^^^^^^^^^^ definition local 29
+//                                                display_name toPosition
 //                                                documentation ```java\nint toPosition\n```
     ArrayList<EpoxyModel<?>> updatedList = new ArrayList<>(getCurrentModels());
 //  ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
 //            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                           ^^^^^^^^^^^ definition local 30
+//                                       display_name updatedList
 //                                       documentation ```java\nArrayList<EpoxyModel<?>> updatedList\n```
 //                                             ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`(+2).
 //                                                         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
@@ -596,6 +655,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 
     boolean interruptedDiff = differ.forceListOverride(updatedList);
 //          ^^^^^^^^^^^^^^^ definition local 31
+//                          display_name interruptedDiff
 //                          documentation ```java\nboolean interruptedDiff\n```
 //                            ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#differ.
 //                                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#forceListOverride().
@@ -615,13 +675,16 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/UiThread#
   void notifyModelChanged(int position) {
 //     ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#notifyModelChanged().
+//                        display_name notifyModelChanged
 //                        documentation ```java\n@UiThread\nvoid notifyModelChanged(int position)\n```
 //                            ^^^^^^^^ definition local 32
+//                                     display_name position
 //                                     documentation ```java\nint position\n```
     ArrayList<EpoxyModel<?>> updatedList = new ArrayList<>(getCurrentModels());
 //  ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
 //            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                           ^^^^^^^^^^^ definition local 33
+//                                       display_name updatedList
 //                                       documentation ```java\nArrayList<EpoxyModel<?>> updatedList\n```
 //                                             ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`(+2).
 //                                                         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
@@ -638,6 +701,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 
     boolean interruptedDiff = differ.forceListOverride(updatedList);
 //          ^^^^^^^^^^^^^^^ definition local 34
+//                          display_name interruptedDiff
 //                          documentation ```java\nboolean interruptedDiff\n```
 //                            ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#differ.
 //                                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#forceListOverride().
@@ -657,6 +721,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                     ^^^^^^^^^^^^ reference semanticdb maven . . ItemCallback#
 //                                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                 ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#ITEM_CALLBACK.
+//                                                               display_name ITEM_CALLBACK
 //                                                               documentation ```java\nprivate static final unresolved_type ITEM_CALLBACK\n```
       new ItemCallback<EpoxyModel<?>>() {
 //        ^^^^^^^^^^^^ reference semanticdb maven . . ItemCallback#
@@ -685,10 +750,12 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public boolean isStickyHeader(int position) {
 //               ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#isStickyHeader().
+//                              display_name isStickyHeader
 //                              documentation ```java\n@Override\npublic boolean isStickyHeader(int position)\n```
 //                              documentation  Delegates the callbacks received in the adapter\n to the controller.\n
 //                              relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#isStickyHeader().
 //                                  ^^^^^^^^ definition local 35
+//                                           display_name position
 //                                           documentation ```java\nint position\n```
     return epoxyController.isStickyHeader(position);
 //         ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
@@ -704,12 +771,14 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void setupStickyHeaderView(@NotNull View stickyHeader) {
 //            ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#setupStickyHeaderView().
+//                                  display_name setupStickyHeaderView
 //                                  documentation ```java\n@Override\npublic void setupStickyHeaderView(unresolved_type stickyHeader)\n```
 //                                  documentation  Delegates the callbacks received in the adapter\n to the controller.\n
 //                                  relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#setupStickyHeaderView().
 //                                   ^^^^^^^ reference semanticdb maven maven/org.jetbrains/annotations 13.0 org/jetbrains/annotations/NotNull#
 //                                           ^^^^ reference semanticdb maven . . View#
 //                                                ^^^^^^^^^^^^ definition local 36
+//                                                             display_name stickyHeader
 //                                                             documentation ```java\n@NotNull\nunresolved_type stickyHeader\n```
     epoxyController.setupStickyHeaderView(stickyHeader);
 //  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.
@@ -725,12 +794,14 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void teardownStickyHeaderView(@NotNull View stickyHeader) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#teardownStickyHeaderView().
+//                                     display_name teardownStickyHeaderView
 //                                     documentation ```java\n@Override\npublic void teardownStickyHeaderView(unresolved_type stickyHeader)\n```
 //                                     documentation  Delegates the callbacks received in the adapter\n to the controller.\n
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#teardownStickyHeaderView().
 //                                      ^^^^^^^ reference semanticdb maven maven/org.jetbrains/annotations 13.0 org/jetbrains/annotations/NotNull#
 //                                              ^^^^ reference semanticdb maven . . View#
 //                                                   ^^^^^^^^^^^^ definition local 37
+//                                                                display_name stickyHeader
 //                                                                documentation ```java\n@NotNull\nunresolved_type stickyHeader\n```
     epoxyController.teardownStickyHeaderView(stickyHeader);
 //  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#epoxyController.

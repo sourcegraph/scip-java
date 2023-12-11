@@ -170,6 +170,13 @@ object ScipPrinters {
       case Some(info) if isDefinition =>
         val prefix =
           comment + (" " * indent.length) + (" " * carets.length) + " "
+        if (!info.getDisplayName.isEmpty) {
+          out
+            .append(prefix)
+            .append("display_name ")
+            .append(info.getDisplayName)
+            .append("\n")
+        }
         0.until(info.getDocumentationCount)
           .foreach { n =>
             val documentation = info.getDocumentation(n)

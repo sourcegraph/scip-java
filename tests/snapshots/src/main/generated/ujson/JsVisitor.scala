@@ -15,16 +15,20 @@ import upickle.core.{ArrVisitor, ObjVisitor, Visitor}
   */
 trait JsVisitor[-T, +J] extends Visitor[T, J]{
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#
+//              display_name JsVisitor
 //              documentation ```scala\ntrait JsVisitor[T, J]\n```
 //               ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#[T]
+//                 display_name T
 //                 documentation ```scala\nT\n```
 //                   ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#[J]
+//                     display_name J
 //                     documentation ```scala\nJ\n```
 //                              ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#[T]
 //                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#[J]
   def visitFloat64(d: Double, index: Int): J = {
 //    ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64().
+//                 display_name visitFloat64
 //                 documentation ```scala\ndef visitFloat64(d: Double, index: Int): J\n```
 //                 relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitFloat64().
 //                 relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#visitFloat64().
@@ -32,14 +36,17 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 //                 relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitFloat64().
 //                 relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitFloat64().
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64().(d)
+//                   display_name d
 //                   documentation ```scala\nd: Double \n```
 //                    ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Double#
 //                            ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64().(index)
+//                                  display_name index
 //                                  documentation ```scala\nindex: Int \n```
 //                                   ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#[J]
     val i = d.toLong
 //      ^ definition local 0
+//        display_name i
 //        documentation ```scala\ni: Long \n```
 //          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64().(d)
 //            ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Double#toLong().
@@ -61,12 +68,15 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 
   def visitFloat32(d: Float, index: Int): J = visitFloat64(d, index)
 //    ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat32().
+//                 display_name visitFloat32
 //                 documentation ```scala\ndef visitFloat32(d: Float, index: Int): J\n```
 //                 relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitFloat32().
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat32().(d)
+//                   display_name d
 //                   documentation ```scala\nd: Float \n```
 //                    ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Float#
 //                           ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat32().(index)
+//                                 display_name index
 //                                 documentation ```scala\nindex: Int \n```
 //                                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#[J]
@@ -75,12 +85,15 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 //                                                            ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat32().(index)
   def visitInt32(i: Int, index: Int): J = visitFloat64(i, index)
 //    ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitInt32().
+//               display_name visitInt32
 //               documentation ```scala\ndef visitInt32(i: Int, index: Int): J\n```
 //               relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitInt32().
 //               ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitInt32().(i)
+//                 display_name i
 //                 documentation ```scala\ni: Int \n```
 //                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                       ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitInt32().(index)
+//                             display_name index
 //                             documentation ```scala\nindex: Int \n```
 //                              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#[J]
@@ -89,12 +102,15 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 //                                                        ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitInt32().(index)
   def visitInt64(i: Long, index: Int): J = {
 //    ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitInt64().
+//               display_name visitInt64
 //               documentation ```scala\ndef visitInt64(i: Long, index: Int): J\n```
 //               relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitInt64().
 //               ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitInt64().(i)
+//                 display_name i
 //                 documentation ```scala\ni: Long \n```
 //                  ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Long#
 //                        ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitInt64().(index)
+//                              display_name index
 //                              documentation ```scala\nindex: Int \n```
 //                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#[J]
@@ -119,12 +135,15 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
   }
   def visitUInt64(i: Long, index: Int): J = {
 //    ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitUInt64().
+//                display_name visitUInt64
 //                documentation ```scala\ndef visitUInt64(i: Long, index: Int): J\n```
 //                relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitUInt64().
 //                ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitUInt64().(i)
+//                  display_name i
 //                  documentation ```scala\ni: Long \n```
 //                   ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Long#
 //                         ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitUInt64().(index)
+//                               display_name index
 //                               documentation ```scala\nindex: Int \n```
 //                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#[J]
@@ -151,12 +170,15 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 
   def visitFloat64String(s: String, index: Int): J = {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64String().
+//                       display_name visitFloat64String
 //                       documentation ```scala\ndef visitFloat64String(s: String, index: Int): J\n```
 //                       relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitFloat64String().
 //                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64String().(s)
+//                         display_name s
 //                         documentation ```scala\ns: String \n```
 //                          ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
 //                                  ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64String().(index)
+//                                        display_name index
 //                                        documentation ```scala\nindex: Int \n```
 //                                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#[J]
@@ -175,6 +197,7 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 //                   ^^^^^^^ reference semanticdb maven jdk 11 java/lang/String#indexOf().
         case n => n
 //           ^ definition local 1
+//             display_name n
 //             documentation ```scala\nn: Int \n```
 //                ^ reference local 1
       },
@@ -184,30 +207,37 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 
   def visitBinary(bytes: Array[Byte], offset: Int, len: Int, index: Int): J = {
 //    ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitBinary().
+//                display_name visitBinary
 //                documentation ```scala\ndef visitBinary(bytes: Array[Byte], offset: Int, len: Int, index: Int): J\n```
 //                relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitBinary().
 //                ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitBinary().(bytes)
+//                      display_name bytes
 //                      documentation ```scala\nbytes: Array[Byte] \n```
 //                       ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Array#
 //                             ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Byte#
 //                                    ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitBinary().(offset)
+//                                           display_name offset
 //                                           documentation ```scala\noffset: Int \n```
 //                                            ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                                 ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitBinary().(len)
+//                                                     display_name len
 //                                                     documentation ```scala\nlen: Int \n```
 //                                                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                                           ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitBinary().(index)
+//                                                                 display_name index
 //                                                                 documentation ```scala\nindex: Int \n```
 //                                                                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#[J]
     val arr = visitArray(len, index)
 //      ^^^ definition local 2
+//          display_name arr
 //          documentation ```scala\narr: ArrVisitor[T, J] \n```
 //            ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitArray().
 //                       ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitBinary().(len)
 //                            ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitBinary().(index)
     var i = 0
 //      ^ definition local 3
+//        display_name i
 //        documentation ```scala\ni: Int \n```
     while (i < len){
 //         ^ reference local 3
@@ -239,14 +269,18 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 
   def visitFloat64StringParts(s: CharSequence, decIndex: Int, expIndex: Int): J = visitFloat64StringParts(s, decIndex, expIndex, -1)
 //    ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64StringParts().
+//                            display_name visitFloat64StringParts
 //                            documentation ```scala\ndef visitFloat64StringParts(s: CharSequence, decIndex: Int, expIndex: Int): J\n```
 //                            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64StringParts().(s)
+//                              display_name s
 //                              documentation ```scala\ns: CharSequence \n```
 //                               ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                             ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64StringParts().(decIndex)
+//                                                      display_name decIndex
 //                                                      documentation ```scala\ndecIndex: Int \n```
 //                                                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                                            ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64StringParts().(expIndex)
+//                                                                     display_name expIndex
 //                                                                     documentation ```scala\nexpIndex: Int \n```
 //                                                                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#[J]
@@ -257,27 +291,34 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 
   def visitExt(tag: Byte, bytes: Array[Byte], offset: Int, len: Int, index: Int): J = {
 //    ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitExt().
+//             display_name visitExt
 //             documentation ```scala\ndef visitExt(tag: Byte, bytes: Array[Byte], offset: Int, len: Int, index: Int): J\n```
 //             relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitExt().
 //             ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitExt().(tag)
+//                 display_name tag
 //                 documentation ```scala\ntag: Byte \n```
 //                  ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Byte#
 //                        ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitExt().(bytes)
+//                              display_name bytes
 //                              documentation ```scala\nbytes: Array[Byte] \n```
 //                               ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Array#
 //                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Byte#
 //                                            ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitExt().(offset)
+//                                                   display_name offset
 //                                                   documentation ```scala\noffset: Int \n```
 //                                                    ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                                         ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitExt().(len)
+//                                                             display_name len
 //                                                             documentation ```scala\nlen: Int \n```
 //                                                              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                                                   ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitExt().(index)
+//                                                                         display_name index
 //                                                                         documentation ```scala\nindex: Int \n```
 //                                                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                                                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#[J]
     val arr = visitArray(-1, index)
 //      ^^^ definition local 5
+//          display_name arr
 //          documentation ```scala\narr: ArrVisitor[T, J] \n```
 //            ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitArray().
 //                           ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitExt().(index)
@@ -306,12 +347,15 @@ trait JsVisitor[-T, +J] extends Visitor[T, J]{
 
   def visitChar(s: Char, index: Int) = visitString(s.toString, index)
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitChar().
+//              display_name visitChar
 //              documentation ```scala\ndef visitChar(s: Char, index: Int): J\n```
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitChar().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitChar().(s)
+//                display_name s
 //                documentation ```scala\ns: Char \n```
 //                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#
 //                       ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitChar().(index)
+//                             display_name index
 //                             documentation ```scala\nindex: Int \n```
 //                              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                     ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitString().

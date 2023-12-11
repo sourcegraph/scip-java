@@ -10,10 +10,12 @@ import android.view.View;
  */
 public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchCallback<T> {
 //               ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#
+//                                 display_name EpoxyDragCallback
 //                                 documentation ```java\npublic interface EpoxyDragCallback<T extends EpoxyModel>\n```
 //                                 documentation  For use with {@link EpoxyModelTouchCallback}\n
 //                                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
 //                                 ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#[T]
+//                                   display_name T
 //                                   documentation ```java\nT extends EpoxyModel\n```
 //                                           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                               ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
@@ -32,17 +34,21 @@ public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchC
    */
   void onDragStarted(T model, View itemView, int adapterPosition);
 //     ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onDragStarted().
+//                   display_name onDragStarted
 //                   documentation ```java\npublic abstract void onDragStarted(T model, unresolved_type itemView, int adapterPosition)\n```
 //                   documentation  Called when the view switches from an idle state to a dragged state, as the user begins a drag\n interaction with it. You can use this callback to modify the view to indicate it is being\n dragged.\n <p>\n This is the first callback in the lifecycle of a drag event.\n\n @param model           The model representing the view that is being dragged\n @param itemView        The view that is being dragged\n @param adapterPosition The adapter position of the model\n
 //                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragStarted().
 //                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#onDragStarted().
 //                   ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#[T]
 //                     ^^^^^ definition local 0
+//                           display_name model
 //                           documentation ```java\nT model\n```
 //                            ^^^^ reference semanticdb maven . . View#
 //                                 ^^^^^^^^ definition local 1
+//                                          display_name itemView
 //                                          documentation ```java\nunresolved_type itemView\n```
 //                                               ^^^^^^^^^^^^^^^ definition local 2
+//                                                               display_name adapterPosition
 //                                                               documentation ```java\nint adapterPosition\n```
 
   /**
@@ -61,19 +67,24 @@ public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchC
    */
   void onModelMoved(int fromPosition, int toPosition, T modelBeingMoved, View itemView);
 //     ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onModelMoved().
+//                  display_name onModelMoved
 //                  documentation ```java\npublic abstract void onModelMoved(int fromPosition, int toPosition, T modelBeingMoved, unresolved_type itemView)\n```
 //                  documentation  Called after {@link #onDragStarted(EpoxyModel, View, int)} when the dragged view is dropped to\n a new position. The EpoxyController will be updated automatically for you to reposition the\n models and notify the RecyclerView of the change.\n <p>\n You MUST use this callback to modify your data backing the models to reflect the change.\n <p>\n The next callback in the drag lifecycle will be {@link #onDragStarted(EpoxyModel, View, int)}\n\n @param modelBeingMoved The model representing the view that was moved\n @param itemView        The view that was moved\n @param fromPosition    The adapter position that the model came from\n @param toPosition      The new adapter position of the model\n
 //                  relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onModelMoved().
 //                  relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#onModelMoved().
 //                      ^^^^^^^^^^^^ definition local 3
+//                                   display_name fromPosition
 //                                   documentation ```java\nint fromPosition\n```
 //                                        ^^^^^^^^^^ definition local 4
+//                                                   display_name toPosition
 //                                                   documentation ```java\nint toPosition\n```
 //                                                    ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#[T]
 //                                                      ^^^^^^^^^^^^^^^ definition local 5
+//                                                                      display_name modelBeingMoved
 //                                                                      documentation ```java\nT modelBeingMoved\n```
 //                                                                       ^^^^ reference semanticdb maven . . View#
 //                                                                            ^^^^^^^^ definition local 6
+//                                                                                     display_name itemView
 //                                                                                     documentation ```java\nunresolved_type itemView\n```
 
   /**
@@ -92,14 +103,17 @@ public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchC
    */
   void onDragReleased(T model, View itemView);
 //     ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onDragReleased().
+//                    display_name onDragReleased
 //                    documentation ```java\npublic abstract void onDragReleased(T model, unresolved_type itemView)\n```
 //                    documentation  Called after {@link #onDragStarted(EpoxyModel, View, int)} when the view being dragged is\n released. If the view was dragged to a new, valid location then {@link #onModelMoved(int, int,\n EpoxyModel, View)} will be called before this and the view will settle to the new location.\n Otherwise the view will animate back to its original position.\n <p>\n You can use this callback to modify the view as it animates back into position.\n <p>\n {@link BaseEpoxyTouchCallback#clearView(EpoxyModel, View)} will be called after this, when the\n view has finished animating. Final cleanup of the view should be done there.\n\n @param model    The model representing the view that is being released\n @param itemView The view that was being dragged\n
 //                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragReleased().
 //                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#onDragReleased().
 //                    ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#[T]
 //                      ^^^^^ definition local 7
+//                            display_name model
 //                            documentation ```java\nT model\n```
 //                             ^^^^ reference semanticdb maven . . View#
 //                                  ^^^^^^^^ definition local 8
+//                                           display_name itemView
 //                                           documentation ```java\nunresolved_type itemView\n```
 }

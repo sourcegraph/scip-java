@@ -36,12 +36,15 @@ import androidx.annotation.NonNull;
  */
 public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
 //                    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#
+//                                       display_name EpoxyModelWithView
 //                                       documentation ```java\npublic abstract class EpoxyModelWithView<T extends unresolved_type>\n```
 //                                       documentation  A model that allows its view to be built programmatically instead of by inflating a layout\n resource. Just implement {@link #buildView} so the adapter can create a new view for this model\n when needed.\n <p>\n {@link #getViewType()} is used by the adapter to know how to reuse views for this model. This\n means that all models that return the same type should be able to share the same view, and the\n view won't be shared with models of any other type.\n <p>\n If it is left unimplemented then at runtime a unique view type will be created to use for all\n models of that class. The generated view type will be negative so that it cannot collide with\n values from resource files, which are used in normal Epoxy models. If you would like to share\n the same view between models of different classes you can have those classes return the same view\n type. A good way to manually create a view type value is by creating an R.id. value in an ids\n resource file.\n
 //                                       relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#`<init>`().
+//                                       display_name <init>
 //                                       documentation ```java\npublic EpoxyModelWithView()\n```
 //                                       ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#[T]
+//                                         display_name T
 //                                         documentation ```java\nT extends unresolved_type\n```
 //                                                 ^^^^ reference semanticdb maven . . View#
 //                                                               ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
@@ -57,6 +60,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   protected int getViewType() {
 //              ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#getViewType().
+//                          display_name getViewType
 //                          documentation ```java\n@Override\nprotected int getViewType()\n```
 //                          documentation  Get the view type associated with this model's view. Any models with the same view type will\n have views recycled between them.\n\n @see androidx.recyclerview.widget.RecyclerView.Adapter#getItemViewType(int)\n
 //                          relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getViewType().
@@ -74,18 +78,21 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
   protected abstract T buildView(@NonNull ViewGroup parent);
 //                   ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#[T]
 //                     ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#buildView().
+//                               display_name buildView
 //                               documentation ```java\n@Override\nprotected abstract T buildView(unresolved_type parent)\n```
 //                               documentation  Create and return a new instance of a view for this model. If no layout params are set on the\n returned view then default layout params will be used.\n\n @param parent The parent ViewGroup that the returned view will be added to.\n
 //                               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#buildView().
 //                                ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                        ^^^^^^^^^ reference semanticdb maven . . ViewGroup#
 //                                                  ^^^^^^ definition local 0
+//                                                         display_name parent
 //                                                         documentation ```java\n@NonNull\nunresolved_type parent\n```
 
   @Override
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   protected final int getDefaultLayout() {
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#getDefaultLayout().
+//                                     display_name getDefaultLayout
 //                                     documentation ```java\n@Override\nprotected final int getDefaultLayout()\n```
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getDefaultLayout().
     throw new UnsupportedOperationException(
@@ -99,10 +106,12 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                  ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#[T]
 //                     ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#layout().
+//                            display_name layout
 //                            documentation ```java\n@Override\npublic EpoxyModel<T> layout(int layoutRes)\n```
 //                            relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#layout().
 //                             ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/LayoutRes#
 //                                           ^^^^^^^^^ definition local 1
+//                                                     display_name layoutRes
 //                                                     documentation ```java\n@LayoutRes\nint layoutRes\n```
     throw new UnsupportedOperationException(
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/UnsupportedOperationException#`<init>`(+1).

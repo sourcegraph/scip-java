@@ -30,24 +30,29 @@ import androidx.collection.LongSparseArray;
  */
 public class DiffPayload {
 //           ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#
+//                       display_name DiffPayload
 //                       documentation ```java\npublic class DiffPayload\n```
 //                       documentation  A helper class for tracking changed models found by the {@link com.airbnb.epoxy.DiffHelper} to\n be included as a payload in the\n {@link androidx.recyclerview.widget.RecyclerView.Adapter#notifyItemChanged(int, Object)}\n call.\n
   private final EpoxyModel<?> singleModel;
 //              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#singleModel.
+//                                        display_name singleModel
 //                                        documentation ```java\nprivate final EpoxyModel<?> singleModel\n```
   private final LongSparseArray<EpoxyModel<?>> modelsById;
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#
 //                              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                             ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#modelsById.
+//                                                        display_name modelsById
 //                                                        documentation ```java\nprivate final LongSparseArray<EpoxyModel<?>> modelsById\n```
 
   DiffPayload(List<? extends EpoxyModel<?>> models) {
 //^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#`<init>`().
+//            display_name <init>
 //            documentation ```java\nDiffPayload(List<? extends EpoxyModel<?>> models)\n```
 //            ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                          ^^^^^^ definition local 0
+//                                                 display_name models
 //                                                 documentation ```java\nList<? extends EpoxyModel<?>> models\n```
     if (models.isEmpty()) {
 //      ^^^^^^ reference local 0
@@ -58,6 +63,7 @@ public class DiffPayload {
 
     int modelCount = models.size();
 //      ^^^^^^^^^^ definition local 1
+//                 display_name modelCount
 //                 documentation ```java\nint modelCount\n```
 //                   ^^^^^^ reference local 0
 //                          ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
@@ -81,6 +87,7 @@ public class DiffPayload {
       for (EpoxyModel<?> model : models) {
 //         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                       ^^^^^ definition local 2
+//                             display_name model
 //                             documentation ```java\nEpoxyModel<?> model\n```
 //                               ^^^^^^ reference local 0
         modelsById.put(model.id(), model);
@@ -95,9 +102,11 @@ public class DiffPayload {
 
   public DiffPayload(EpoxyModel<?> changedItem) {
 //       ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#`<init>`(+1).
+//                   display_name <init>
 //                   documentation ```java\npublic DiffPayload(EpoxyModel<?> changedItem)\n```
 //                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                 ^^^^^^^^^^^ definition local 3
+//                                             display_name changedItem
 //                                             documentation ```java\nEpoxyModel<?> changedItem\n```
     this(Collections.singletonList(changedItem));
 //  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#`<init>`().
@@ -116,13 +125,16 @@ public class DiffPayload {
   public static EpoxyModel<?> getModelFromPayload(List<Object> payloads, long modelId) {
 //              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#getModelFromPayload().
+//                                                display_name getModelFromPayload
 //                                                documentation ```java\n@Nullable\npublic static EpoxyModel<?> getModelFromPayload(List<Object> payloads, long modelId)\n```
 //                                                documentation  Looks through the payloads list and returns the first model found with the given model id. This\n assumes that the payloads list will only contain objects of type {@link DiffPayload}, and will\n throw if an unexpected type is found.\n
 //                                                ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                     ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                                                             ^^^^^^^^ definition local 4
+//                                                                      display_name payloads
 //                                                                      documentation ```java\nList<Object> payloads\n```
 //                                                                            ^^^^^^^ definition local 5
+//                                                                                    display_name modelId
 //                                                                                    documentation ```java\nlong modelId\n```
     if (payloads.isEmpty()) {
 //      ^^^^^^^^ reference local 4
@@ -133,11 +145,13 @@ public class DiffPayload {
     for (Object payload : payloads) {
 //       ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //              ^^^^^^^ definition local 6
+//                      display_name payload
 //                      documentation ```java\nObject payload\n```
 //                        ^^^^^^^^ reference local 4
       DiffPayload diffPayload = (DiffPayload) payload;
 //    ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#
 //                ^^^^^^^^^^^ definition local 7
+//                            display_name diffPayload
 //                            documentation ```java\nDiffPayload diffPayload\n```
 //                               ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#
 //                                            ^^^^^^^ reference local 6
@@ -158,6 +172,7 @@ public class DiffPayload {
         EpoxyModel<?> modelForId = diffPayload.modelsById.get(modelId);
 //      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                    ^^^^^^^^^^ definition local 8
+//                               display_name modelForId
 //                               documentation ```java\nEpoxyModel<?> modelForId\n```
 //                                 ^^^^^^^^^^^ reference local 7
 //                                             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#modelsById.
@@ -178,9 +193,11 @@ public class DiffPayload {
 // ^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/VisibleForTesting#
   boolean equalsForTesting(DiffPayload that) {
 //        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#equalsForTesting().
+//                         display_name equalsForTesting
 //                         documentation ```java\n@VisibleForTesting\nboolean equalsForTesting(DiffPayload that)\n```
 //                         ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#
 //                                     ^^^^ definition local 9
+//                                          display_name that
 //                                          documentation ```java\nDiffPayload that\n```
     if (singleModel != null) {
 //      ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#singleModel.
@@ -192,11 +209,13 @@ public class DiffPayload {
 
     int thisSize = modelsById.size();
 //      ^^^^^^^^ definition local 10
+//               display_name thisSize
 //               documentation ```java\nint thisSize\n```
 //                 ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#modelsById.
 //                            ^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#size().
     int thatSize = that.modelsById.size();
 //      ^^^^^^^^ definition local 11
+//               display_name thatSize
 //               documentation ```java\nint thatSize\n```
 //                 ^^^^ reference local 9
 //                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#modelsById.
@@ -210,18 +229,21 @@ public class DiffPayload {
 
     for (int i = 0; i < thisSize; i++) {
 //           ^ definition local 12
+//             display_name i
 //             documentation ```java\nint i\n```
 //                  ^ reference local 12
 //                      ^^^^^^^^ reference local 10
 //                                ^ reference local 12
       long thisKey = modelsById.keyAt(i);
 //         ^^^^^^^ definition local 13
+//                 display_name thisKey
 //                 documentation ```java\nlong thisKey\n```
 //                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#modelsById.
 //                              ^^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#keyAt().
 //                                    ^ reference local 12
       long thatKey = that.modelsById.keyAt(i);
 //         ^^^^^^^ definition local 14
+//                 display_name thatKey
 //                 documentation ```java\nlong thatKey\n```
 //                   ^^^^ reference local 9
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#modelsById.
@@ -237,6 +259,7 @@ public class DiffPayload {
       EpoxyModel<?> thisModel = modelsById.valueAt(i);
 //    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                  ^^^^^^^^^ definition local 15
+//                            display_name thisModel
 //                            documentation ```java\nEpoxyModel<?> thisModel\n```
 //                              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#modelsById.
 //                                         ^^^^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#valueAt().
@@ -244,6 +267,7 @@ public class DiffPayload {
       EpoxyModel<?> thatModel = that.modelsById.valueAt(i);
 //    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                  ^^^^^^^^^ definition local 16
+//                            display_name thatModel
 //                            documentation ```java\nEpoxyModel<?> thatModel\n```
 //                              ^^^^ reference local 9
 //                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#modelsById.

@@ -3,14 +3,17 @@ package minimized;
 /** Example class docstring. */
 public class Docstrings {
 //           ^^^^^^^^^^ definition semanticdb maven . . minimized/Docstrings#
+//                      display_name Docstrings
 //                      documentation ```java\npublic class Docstrings\n```
 //                      documentation Example class docstring. 
 //           ^^^^^^^^^^ definition semanticdb maven . . minimized/Docstrings#`<init>`().
+//                      display_name <init>
 //                      documentation ```java\npublic Docstrings()\n```
 
   /** Example field docstring. */
   public static int field = 42;
 //                  ^^^^^ definition semanticdb maven . . minimized/Docstrings#field.
+//                        display_name field
 //                        documentation ```java\npublic static int field\n```
 //                        documentation Example field docstring. 
 
@@ -21,6 +24,7 @@ public class Docstrings {
    */
   public static int method() {
 //                  ^^^^^^ definition semanticdb maven . . minimized/Docstrings#method().
+//                         display_name method
 //                         documentation ```java\npublic static int method()\n```
 //                         documentation  Example method docstring.\n\n @return 42.\n
     return 42;
@@ -34,9 +38,11 @@ public class Docstrings {
    */
   public static int methodParameter(int n) {
 //                  ^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Docstrings#methodParameter().
+//                                  display_name methodParameter
 //                                  documentation ```java\npublic static int methodParameter(int n)\n```
 //                                  documentation  Example method parameter docstring.\n\n @param n The parameter.\n @return The number + 42.\n
 //                                      ^ definition local 0
+//                                        display_name n
 //                                        documentation ```java\nint n\n```
     return n + 42;
 //         ^ reference local 0
@@ -45,6 +51,7 @@ public class Docstrings {
   public static String app() {
 //              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                     ^^^ definition semanticdb maven . . minimized/Docstrings#app().
+//                         display_name app
 //                         documentation ```java\npublic static String app()\n```
     return String.format("%s%s%s", field, method(), methodParameter(42));
 //         ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#

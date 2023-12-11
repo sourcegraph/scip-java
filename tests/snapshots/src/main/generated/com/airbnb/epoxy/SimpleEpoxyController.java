@@ -11,21 +11,25 @@ import java.util.List;
  */
 public class SimpleEpoxyController extends EpoxyController {
 //           ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#
+//                                 display_name SimpleEpoxyController
 //                                 documentation ```java\npublic class SimpleEpoxyController\n```
 //                                 documentation  A small wrapper around {@link com.airbnb.epoxy.EpoxyController} that lets you set a list of\n models directly.\n
 //                                 relationship is_implementation semanticdb maven . . ModelCollector#
 //                                 relationship is_implementation semanticdb maven . . StickyHeaderCallbacks#
 //                                 relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //           ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#`<init>`().
+//                                 display_name <init>
 //                                 documentation ```java\npublic SimpleEpoxyController()\n```
 //                                         ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
   private List<? extends EpoxyModel<?>> currentModels;
 //        ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                      ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#currentModels.
+//                                                    display_name currentModels
 //                                                    documentation ```java\nprivate List<? extends EpoxyModel<?>> currentModels\n```
   private boolean insideSetModels;
 //                ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#insideSetModels.
+//                                display_name insideSetModels
 //                                documentation ```java\nprivate boolean insideSetModels\n```
 
   /**
@@ -34,11 +38,13 @@ public class SimpleEpoxyController extends EpoxyController {
    */
   public void setModels(List<? extends EpoxyModel<?>> models) {
 //            ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#setModels().
+//                      display_name setModels
 //                      documentation ```java\npublic void setModels(List<? extends EpoxyModel<?>> models)\n```
 //                      documentation  Set the models to add to this controller. Clears any previous models and adds this new list\n .\n
 //                      ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                    ^^^^^^ definition local 0
+//                                                           display_name models
 //                                                           documentation ```java\nList<? extends EpoxyModel<?>> models\n```
     currentModels = models;
 //  ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#currentModels.
@@ -55,6 +61,7 @@ public class SimpleEpoxyController extends EpoxyController {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public final void requestModelBuild() {
 //                  ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#requestModelBuild().
+//                                    display_name requestModelBuild
 //                                    documentation ```java\n@Override\npublic final void requestModelBuild()\n```
 //                                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#requestModelBuild().
     if (!insideSetModels) {
@@ -72,6 +79,7 @@ public class SimpleEpoxyController extends EpoxyController {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   protected final void buildModels() {
 //                     ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#buildModels().
+//                                 display_name buildModels
 //                                 documentation ```java\n@Override\nprotected final void buildModels()\n```
 //                                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#buildModels().
     if (!isBuildingModels()) {

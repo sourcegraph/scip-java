@@ -44,6 +44,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
  */
 public class DiffResult {
 //           ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffResult#
+//                      display_name DiffResult
 //                      documentation ```java\npublic class DiffResult\n```
 //                      documentation  Wraps the result of {@link AsyncEpoxyDiffer#submitList(List)}.\n
   @NonNull final List<? extends EpoxyModel<?>> previousModels;
@@ -51,12 +52,14 @@ public class DiffResult {
 //               ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                             ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffResult#previousModels.
+//                                                            display_name previousModels
 //                                                            documentation ```java\n@NonNull\nfinal List<? extends EpoxyModel<?>> previousModels\n```
   @NonNull final List<? extends EpoxyModel<?>> newModels;
 // ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //               ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                             ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffResult#newModels.
+//                                                       display_name newModels
 //                                                       documentation ```java\n@NonNull\nfinal List<? extends EpoxyModel<?>> newModels\n```
 
   /**
@@ -69,6 +72,7 @@ public class DiffResult {
 //                ^^^^^^^^ reference semanticdb maven . . DiffUtil/
 //                         ^^^^^^^^^^ reference semanticdb maven . . DiffUtil/DiffResult#
 //                                    ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffResult#differResult.
+//                                                 display_name differResult
 //                                                 documentation ```java\n@Nullable\nfinal unresolved_type differResult\n```
 //                                                 documentation  If this is non null it means the full differ ran and the result is contained\n in this object. If it is null, it means that either the old list or the new list was empty, so\n we can simply add all or clear all items and skipped running the full diffing.\n
 
@@ -76,12 +80,14 @@ public class DiffResult {
   static DiffResult noOp(@Nullable List<? extends EpoxyModel<?>> models) {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#
 //                  ^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffResult#noOp().
+//                       display_name noOp
 //                       documentation ```java\nstatic DiffResult noOp(List<? extends EpoxyModel<?>> models)\n```
 //                       documentation No changes were made to the models. 
 //                        ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                 ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                               ^^^^^^ definition local 0
+//                                                                      display_name models
 //                                                                      documentation ```java\n@Nullable\nList<? extends EpoxyModel<?>> models\n```
     if (models == null) {
 //      ^^^^^^ reference local 0
@@ -100,12 +106,14 @@ public class DiffResult {
   static DiffResult inserted(@NonNull List<? extends EpoxyModel<?>> newModels) {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#
 //                  ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffResult#inserted().
+//                           display_name inserted
 //                           documentation ```java\nstatic DiffResult inserted(List<? extends EpoxyModel<?>> newModels)\n```
 //                           documentation The previous list was empty and the given non empty list was inserted. 
 //                            ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                    ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                  ^^^^^^^^^ definition local 1
+//                                                                            display_name newModels
 //                                                                            documentation ```java\n@NonNull\nList<? extends EpoxyModel<?>> newModels\n```
     //noinspection unchecked
     return new DiffResult(Collections.EMPTY_LIST, newModels, null);
@@ -119,12 +127,14 @@ public class DiffResult {
   static DiffResult clear(@NonNull List<? extends EpoxyModel<?>> previousModels) {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#
 //                  ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffResult#clear().
+//                        display_name clear
 //                        documentation ```java\nstatic DiffResult clear(List<? extends EpoxyModel<?>> previousModels)\n```
 //                        documentation The previous list was non empty and the new list is empty. 
 //                         ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                 ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                               ^^^^^^^^^^^^^^ definition local 2
+//                                                                              display_name previousModels
 //                                                                              documentation ```java\n@NonNull\nList<? extends EpoxyModel<?>> previousModels\n```
     //noinspection unchecked
     return new DiffResult(previousModels, Collections.EMPTY_LIST, null);
@@ -141,6 +151,7 @@ public class DiffResult {
   static DiffResult diff(
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#
 //                  ^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffResult#diff().
+//                       display_name diff
 //                       documentation ```java\nstatic DiffResult diff(List<? extends EpoxyModel<?>> previousModels, List<? extends EpoxyModel<?>> newModels, unresolved_type differResult)\n```
 //                       documentation  The previous and new models are both non empty and a full differ pass was run on them.\n There may be no changes, however.\n
       @NonNull List<? extends EpoxyModel<?>> previousModels,
@@ -148,18 +159,21 @@ public class DiffResult {
 //             ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                           ^^^^^^^^^^^^^^ definition local 3
+//                                                          display_name previousModels
 //                                                          documentation ```java\n@NonNull\nList<? extends EpoxyModel<?>> previousModels\n```
       @NonNull List<? extends EpoxyModel<?>> newModels,
 //     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //             ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                           ^^^^^^^^^ definition local 4
+//                                                     display_name newModels
 //                                                     documentation ```java\n@NonNull\nList<? extends EpoxyModel<?>> newModels\n```
       @NonNull DiffUtil.DiffResult differResult
 //     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //             ^^^^^^^^ reference semanticdb maven . . DiffUtil/
 //                      ^^^^^^^^^^ reference semanticdb maven . . DiffUtil/DiffResult#
 //                                 ^^^^^^^^^^^^ definition local 5
+//                                              display_name differResult
 //                                              documentation ```java\n@NonNull\nunresolved_type differResult\n```
   ) {
     return new DiffResult(previousModels, newModels, differResult);
@@ -171,24 +185,28 @@ public class DiffResult {
 
   private DiffResult(
 //        ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffResult#`<init>`().
+//                   display_name <init>
 //                   documentation ```java\nprivate DiffResult(List<? extends EpoxyModel<?>> previousModels, List<? extends EpoxyModel<?>> newModels, unresolved_type differResult)\n```
       @NonNull List<? extends EpoxyModel<?>> previousModels,
 //     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //             ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                           ^^^^^^^^^^^^^^ definition local 6
+//                                                          display_name previousModels
 //                                                          documentation ```java\n@NonNull\nList<? extends EpoxyModel<?>> previousModels\n```
       @NonNull List<? extends EpoxyModel<?>> newModels,
 //     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //             ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                           ^^^^^^^^^ definition local 7
+//                                                     display_name newModels
 //                                                     documentation ```java\n@NonNull\nList<? extends EpoxyModel<?>> newModels\n```
       @Nullable DiffUtil.DiffResult differResult
 //     ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //              ^^^^^^^^ reference semanticdb maven . . DiffUtil/
 //                       ^^^^^^^^^^ reference semanticdb maven . . DiffUtil/DiffResult#
 //                                  ^^^^^^^^^^^^ definition local 8
+//                                               display_name differResult
 //                                               documentation ```java\n@Nullable\nunresolved_type differResult\n```
   ) {
     this.previousModels = previousModels;
@@ -204,9 +222,11 @@ public class DiffResult {
 
   public void dispatchTo(Adapter adapter) {
 //            ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffResult#dispatchTo().
+//                       display_name dispatchTo
 //                       documentation ```java\npublic void dispatchTo(unresolved_type adapter)\n```
 //                       ^^^^^^^ reference semanticdb maven . . Adapter#
 //                               ^^^^^^^ definition local 9
+//                                       display_name adapter
 //                                       documentation ```java\nunresolved_type adapter\n```
     dispatchTo(new AdapterListUpdateCallback(adapter));
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#dispatchTo().
@@ -215,9 +235,11 @@ public class DiffResult {
 
   public void dispatchTo(ListUpdateCallback callback) {
 //            ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffResult#dispatchTo(+1).
+//                       display_name dispatchTo
 //                       documentation ```java\npublic void dispatchTo(unresolved_type callback)\n```
 //                       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . ListUpdateCallback#
 //                                          ^^^^^^^^ definition local 10
+//                                                   display_name callback
 //                                                   documentation ```java\nunresolved_type callback\n```
     if (differResult != null) {
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#differResult.

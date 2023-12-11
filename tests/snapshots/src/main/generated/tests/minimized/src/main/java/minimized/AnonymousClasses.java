@@ -10,19 +10,24 @@ import java.util.function.Function;
 //^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
 public class AnonymousClasses {
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnonymousClasses#
+//                            display_name AnonymousClasses
 //                            documentation ```java\n@SuppressWarnings("ALL")\npublic class AnonymousClasses\n```
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnonymousClasses#`<init>`().
+//                            display_name <init>
 //                            documentation ```java\npublic AnonymousClasses()\n```
   public static int app(int n) {
 //                  ^^^ definition semanticdb maven . . minimized/AnonymousClasses#app().
+//                      display_name app
 //                      documentation ```java\npublic static int app(int n)\n```
 //                          ^ definition local 0
+//                            display_name n
 //                            documentation ```java\nint n\n```
     Function<Integer, Integer> fn =
 //  ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
 //           ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
 //                    ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
 //                             ^^ definition local 1
+//                                display_name fn
 //                                documentation ```java\nFunction<Integer, Integer> fn\n```
         new Function<Integer, Integer>() {
 //          ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
@@ -33,10 +38,12 @@ public class AnonymousClasses {
           public Integer apply(Integer integer) {
 //               ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
 //                       ^^^^^ definition local 3
+//                             display_name apply
 //                             documentation ```java\n@Override\npublic Integer apply(Integer integer)\n```
 //                             relationship is_reference is_implementation semanticdb maven jdk 11 java/util/function/Function#apply().
 //                             ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
 //                                     ^^^^^^^ definition local 4
+//                                             display_name integer
 //                                             documentation ```java\nInteger integer\n```
             return integer + n;
 //                 ^^^^^^^ reference local 4
