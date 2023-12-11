@@ -12,28 +12,35 @@ import java.util.List;
  */
 public abstract class ControllerHelper<T extends EpoxyController> {
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#
+//                                     display_name ControllerHelper
 //                                     documentation ```java\npublic abstract class ControllerHelper<T extends EpoxyController>\n```
 //                                     documentation  A helper class for {@link EpoxyController} to handle {@link\n com.airbnb.epoxy.AutoModel} models. This is only implemented by the generated classes created the\n annotation processor.\n
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#`<init>`().
+//                                     display_name <init>
 //                                     documentation ```java\npublic ControllerHelper()\n```
 //                                     ^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#[T]
+//                                       display_name T
 //                                       documentation ```java\nT extends EpoxyController\n```
 //                                               ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
   public abstract void resetAutoModels();
 //                     ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#resetAutoModels().
+//                                     display_name resetAutoModels
 //                                     documentation ```java\npublic abstract void resetAutoModels()\n```
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/NoOpControllerHelper#resetAutoModels().
 
   protected void validateModelHashCodesHaveNotChanged(T controller) {
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#validateModelHashCodesHaveNotChanged().
+//                                                    display_name validateModelHashCodesHaveNotChanged
 //                                                    documentation ```java\nprotected void validateModelHashCodesHaveNotChanged(T controller)\n```
 //                                                    ^ reference semanticdb maven . . com/airbnb/epoxy/ControllerHelper#[T]
 //                                                      ^^^^^^^^^^ definition local 0
+//                                                                 display_name controller
 //                                                                 documentation ```java\nT controller\n```
     List<EpoxyModel<?>> currentModels = controller.getAdapter().getCopyOfModels();
 //  ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                      ^^^^^^^^^^^^^ definition local 1
+//                                    display_name currentModels
 //                                    documentation ```java\nList<EpoxyModel<?>> currentModels\n```
 //                                      ^^^^^^^^^^ reference local 0
 //                                                 ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#getAdapter().
@@ -41,6 +48,7 @@ public abstract class ControllerHelper<T extends EpoxyController> {
 
     for (int i = 0; i < currentModels.size(); i++) {
 //           ^ definition local 2
+//             display_name i
 //             documentation ```java\nint i\n```
 //                  ^ reference local 2
 //                      ^^^^^^^^^^^^^ reference local 1
@@ -49,6 +57,7 @@ public abstract class ControllerHelper<T extends EpoxyController> {
       EpoxyModel model = currentModels.get(i);
 //    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //               ^^^^^ definition local 3
+//                     display_name model
 //                     documentation ```java\nEpoxyModel model\n```
 //                       ^^^^^^^^^^^^^ reference local 1
 //                                     ^^^ reference semanticdb maven jdk 11 java/util/List#get().
@@ -63,12 +72,15 @@ public abstract class ControllerHelper<T extends EpoxyController> {
 
   protected void setControllerToStageTo(EpoxyModel<?> model, T controller) {
 //               ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#setControllerToStageTo().
+//                                      display_name setControllerToStageTo
 //                                      documentation ```java\nprotected void setControllerToStageTo(EpoxyModel<?> model, T controller)\n```
 //                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                    ^^^^^ definition local 4
+//                                                          display_name model
 //                                                          documentation ```java\nEpoxyModel<?> model\n```
 //                                                           ^ reference semanticdb maven . . com/airbnb/epoxy/ControllerHelper#[T]
 //                                                             ^^^^^^^^^^ definition local 5
+//                                                                        display_name controller
 //                                                                        documentation ```java\nT controller\n```
     model.controllerToStageTo = controller;
 //  ^^^^^ reference local 4

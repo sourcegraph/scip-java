@@ -3,6 +3,7 @@ package minimized
 
 object Issue414Reference {
 //     ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Issue414Reference.
+//                       display_name Issue414Reference
 //                       documentation ```scala\nobject Issue414Reference\n```
   println(Issue414.a1.b())
 //^^^^^^^ reference semanticdb maven . . scala/Predef.println(+1).

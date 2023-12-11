@@ -6,14 +6,18 @@ package minimized;
 //                            ^^^^^^ reference semanticdb maven . . minimized/Annotations#format().
 public class MinimizedJavaMain {
 //           ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#
+//                             display_name MinimizedJavaMain
 //                             documentation ```java\n@Annotations(value = "value", format = "format")\npublic class MinimizedJavaMain\n```
 //           ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#`<init>`().
+//                             display_name <init>
 //                             documentation ```java\npublic MinimizedJavaMain()\n```
   public static void main(String[] args) {
 //                   ^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#main().
+//                        display_name main
 //                        documentation ```java\npublic static void main(String[] args)\n```
 //                        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                 ^^^^ definition local 0
+//                                      display_name args
 //                                      documentation ```java\nString[] args\n```
     TypeVariables.app(new TypeVariables.CT());
 //  ^^^^^^^^^^^^^ reference semanticdb maven . . minimized/TypeVariables#

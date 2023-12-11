@@ -31,17 +31,20 @@ import scala.collection.mutable.ArrayBuffer
 
 sealed trait Value extends Readable with geny.Writable{
 //           ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#
+//                 display_name Value
 //                 documentation ```scala\nsealed trait Value\n```
 //                         ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#
 //                                       ^^^^ reference semanticdb maven . . geny/
 //                                            ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/geny_2.13 0.6.10 geny/Writable#
   override def httpContentType = Some("application/json")
 //             ^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#httpContentType().
+//                             display_name httpContentType
 //                             documentation ```scala\ndef httpContentType: Some[String]\n```
 //                             relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/geny_2.13 0.6.10 geny/Writable#httpContentType().
 //                               ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Some.
   def value: Any
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#value().
+//          display_name value
 //          documentation ```scala\ndef value: Any\n```
 //          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#value.
 //          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool#value().
@@ -59,11 +62,13 @@ sealed trait Value extends Readable with geny.Writable{
     */
   def str = this match{
 //    ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#str().
+//        display_name str
 //        documentation ```scala\ndef str: String\n```
     case ujson.Str(value) => value
 //       ^^^^^ reference semanticdb maven . . ujson/
 //             ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.
 //                 ^^^^^ definition local 0
+//                       display_name value
 //                       documentation ```scala\nvalue: String \n```
 //                           ^^^^^ reference local 0
     case _ => throw Value.InvalidData(this, "Expected ujson.Str")
@@ -76,10 +81,12 @@ sealed trait Value extends Readable with geny.Writable{
     */
   def strOpt = this match{
 //    ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#strOpt().
+//           display_name strOpt
 //           documentation ```scala\ndef strOpt: Option[String]\n```
     case Str(value) => Some(value)
 //       ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.
 //           ^^^^^ definition local 1
+//                 display_name value
 //                 documentation ```scala\nvalue: String \n```
 //                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Some.
 //                          ^^^^^ reference local 1
@@ -93,11 +100,13 @@ sealed trait Value extends Readable with geny.Writable{
     */
   def obj = this match{
 //    ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#obj().
+//        display_name obj
 //        documentation ```scala\ndef obj: LinkedHashMap[String, Value]\n```
     case ujson.Obj(value) => value
 //       ^^^^^ reference semanticdb maven . . ujson/
 //             ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.
 //                 ^^^^^ definition local 2
+//                       display_name value
 //                       documentation ```scala\nvalue: LinkedHashMap[String, Value] \n```
 //                           ^^^^^ reference local 2
     case _ => throw Value.InvalidData(this, "Expected ujson.Obj")
@@ -109,10 +118,12 @@ sealed trait Value extends Readable with geny.Writable{
     */
   def objOpt = this match{
 //    ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#objOpt().
+//           display_name objOpt
 //           documentation ```scala\ndef objOpt: Option[LinkedHashMap[String, Value]]\n```
     case Obj(value) => Some(value)
 //       ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.
 //           ^^^^^ definition local 3
+//                 display_name value
 //                 documentation ```scala\nvalue: LinkedHashMap[String, Value] \n```
 //                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Some.
 //                          ^^^^^ reference local 3
@@ -125,11 +136,13 @@ sealed trait Value extends Readable with geny.Writable{
     */
   def arr = this match{
 //    ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#arr().
+//        display_name arr
 //        documentation ```scala\ndef arr: ArrayBuffer[Value]\n```
     case ujson.Arr(value) => value
 //       ^^^^^ reference semanticdb maven . . ujson/
 //             ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.
 //                 ^^^^^ definition local 4
+//                       display_name value
 //                       documentation ```scala\nvalue: ArrayBuffer[Value] \n```
 //                           ^^^^^ reference local 4
     case _ => throw Value.InvalidData(this, "Expected ujson.Arr")
@@ -141,10 +154,12 @@ sealed trait Value extends Readable with geny.Writable{
     */
   def arrOpt = this match{
 //    ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#arrOpt().
+//           display_name arrOpt
 //           documentation ```scala\ndef arrOpt: Option[ArrayBuffer[Value]]\n```
     case Arr(value) => Some(value)
 //       ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.
 //           ^^^^^ definition local 5
+//                 display_name value
 //                 documentation ```scala\nvalue: ArrayBuffer[Value] \n```
 //                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Some.
 //                          ^^^^^ reference local 5
@@ -157,11 +172,13 @@ sealed trait Value extends Readable with geny.Writable{
     */
   def num = this match{
 //    ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#num().
+//        display_name num
 //        documentation ```scala\ndef num: Double\n```
     case ujson.Num(value) => value
 //       ^^^^^ reference semanticdb maven . . ujson/
 //             ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.
 //                 ^^^^^ definition local 6
+//                       display_name value
 //                       documentation ```scala\nvalue: Double \n```
 //                           ^^^^^ reference local 6
     case _ => throw Value.InvalidData(this, "Expected ujson.Num")
@@ -173,10 +190,12 @@ sealed trait Value extends Readable with geny.Writable{
     */
   def numOpt = this match{
 //    ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#numOpt().
+//           display_name numOpt
 //           documentation ```scala\ndef numOpt: Option[Double]\n```
     case Num(value) => Some(value)
 //       ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.
 //           ^^^^^ definition local 7
+//                 display_name value
 //                 documentation ```scala\nvalue: Double \n```
 //                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Some.
 //                          ^^^^^ reference local 7
@@ -189,11 +208,13 @@ sealed trait Value extends Readable with geny.Writable{
     */
   def bool = this match{
 //    ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#bool().
+//         display_name bool
 //         documentation ```scala\ndef bool: Boolean\n```
     case ujson.Bool(value) => value
 //       ^^^^^ reference semanticdb maven . . ujson/
 //             ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool.
 //                  ^^^^^ definition local 8
+//                        display_name value
 //                        documentation ```scala\nvalue: Boolean \n```
 //                            ^^^^^ reference local 8
     case _ => throw Value.InvalidData(this, "Expected ujson.Bool")
@@ -205,10 +226,12 @@ sealed trait Value extends Readable with geny.Writable{
     */
   def boolOpt = this match{
 //    ^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#boolOpt().
+//            display_name boolOpt
 //            documentation ```scala\ndef boolOpt: Option[Boolean]\n```
     case Bool(value) => Some(value)
 //       ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool.
 //            ^^^^^ definition local 9
+//                  display_name value
 //                  documentation ```scala\nvalue: Boolean \n```
 //                      ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Some.
 //                           ^^^^^ reference local 9
@@ -220,6 +243,7 @@ sealed trait Value extends Readable with geny.Writable{
     */
   def isNull = this match {
 //    ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#isNull().
+//           display_name isNull
 //           documentation ```scala\ndef isNull: Boolean\n```
     case ujson.Null => true
 //       ^^^^^ reference semanticdb maven . . ujson/
@@ -229,8 +253,10 @@ sealed trait Value extends Readable with geny.Writable{
 
   def apply(s: Value.Selector): Value = s(this)
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#apply().
+//          display_name apply
 //          documentation ```scala\ndef apply(s: Selector): Value\n```
 //          ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#apply().(s)
+//            display_name s
 //            documentation ```scala\ns: Selector \n```
 //             ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.
 //                   ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#
@@ -238,12 +264,15 @@ sealed trait Value extends Readable with geny.Writable{
 //                                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#apply().(s)
   def update(s: Value.Selector, v: Value): Unit = s(this) = v
 //    ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#update().
+//           display_name update
 //           documentation ```scala\ndef update(s: Selector, v: Value): Unit\n```
 //           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#update().(s)
+//             display_name s
 //             documentation ```scala\ns: Selector \n```
 //              ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.
 //                    ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#
 //                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#update().(v)
+//                                display_name v
 //                                documentation ```scala\nv: Value \n```
 //                                 ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#
 //                                         ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
@@ -259,12 +288,15 @@ sealed trait Value extends Readable with geny.Writable{
     */
   def update(s: Value.Selector, f: Value => Value): Unit = s(this) = f(s(this))
 //    ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#update(+1).
+//           display_name update
 //           documentation ```scala\ndef update(s: Selector, f: (Value) => Value): Unit\n```
 //           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#update(+1).(s)
+//             display_name s
 //             documentation ```scala\ns: Selector \n```
 //              ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.
 //                    ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#
 //                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#update(+1).(f)
+//                                display_name f
 //                                documentation ```scala\nf: (Value) => Value \n```
 //                                 ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#
 //                                          ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#
@@ -275,11 +307,14 @@ sealed trait Value extends Readable with geny.Writable{
 
   def transform[T](f: Visitor[_, T]) = Value.transform(this, f)
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#transform().
+//              display_name transform
 //              documentation ```scala\ndef transform(f: Visitor[local10, T[): T\n```
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#transform().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#transform().[T]
+//                display_name T
 //                documentation ```scala\nT\n```
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#transform().(f)
+//                   display_name f
 //                   documentation ```scala\nf: Visitor[local10, T[ \n```
 //                    ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#transform().[T]
@@ -288,17 +323,21 @@ sealed trait Value extends Readable with geny.Writable{
 //                                                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#transform().(f)
   override def toString = render()
 //             ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#toString().
+//                      display_name toString
 //                      documentation ```scala\ndef toString(): String\n```
 //                      relationship is_reference is_implementation semanticdb maven . . scala/Any#toString().
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#toString().
 //                        ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#render().
   def render(indent: Int = -1, escapeUnicode: Boolean = false) = this.transform(StringRenderer(indent, escapeUnicode)).toString
 //    ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#render().
+//           display_name render
 //           documentation ```scala\ndef render(indent: Int, escapeUnicode: Boolean): String\n```
 //           ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#render().(indent)
+//                  display_name indent
 //                  documentation ```scala\ndefault indent: Int \n```
 //                   ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                             ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#render().(escapeUnicode)
+//                                           display_name escapeUnicode
 //                                           documentation ```scala\ndefault escapeUnicode: Boolean \n```
 //                                            ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
 //                                                                    ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#transform().
@@ -309,16 +348,20 @@ sealed trait Value extends Readable with geny.Writable{
 
   def writeBytesTo(out: java.io.OutputStream, indent: Int = -1, escapeUnicode: Boolean = false): Unit = {
 //    ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#writeBytesTo().
+//                 display_name writeBytesTo
 //                 documentation ```scala\ndef writeBytesTo(out: OutputStream, indent: Int, escapeUnicode: Boolean): Unit\n```
 //                 ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#writeBytesTo().(out)
+//                     display_name out
 //                     documentation ```scala\nout: OutputStream \n```
 //                      ^^^^ reference semanticdb maven . . java/
 //                           ^^ reference semanticdb maven . . java/io/
 //                              ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/io/OutputStream#
 //                                            ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#writeBytesTo().(indent)
+//                                                   display_name indent
 //                                                   documentation ```scala\ndefault indent: Int \n```
 //                                                    ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                              ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#writeBytesTo().(escapeUnicode)
+//                                                                            display_name escapeUnicode
 //                                                                            documentation ```scala\ndefault escapeUnicode: Boolean \n```
 //                                                                             ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
 //                                                                                               ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
@@ -333,9 +376,11 @@ sealed trait Value extends Readable with geny.Writable{
   }
   def writeBytesTo(out: java.io.OutputStream): Unit = writeBytesTo(out, -1, false)
 //    ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#writeBytesTo(+1).
+//                 display_name writeBytesTo
 //                 documentation ```scala\ndef writeBytesTo(out: OutputStream): Unit\n```
 //                 relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/geny_2.13 0.6.10 geny/Writable#writeBytesTo().
 //                 ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#writeBytesTo(+1).(out)
+//                     display_name out
 //                     documentation ```scala\nout: OutputStream \n```
 //                      ^^^^ reference semanticdb maven . . java/
 //                           ^^ reference semanticdb maven . . java/io/
@@ -353,52 +398,65 @@ sealed trait Value extends Readable with geny.Writable{
 */
 object Value extends AstTransformer[Value]{
 //     ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.
+//           display_name Value
 //           documentation ```scala\nobject Value\n```
 //                   ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#
 //                                  ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#
 //                                        ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
   type Value = ujson.Value
 //     ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
+//           display_name Value
 //           documentation ```scala\ntype Value >: Value <: Value\n```
 //             ^^^^^ reference semanticdb maven . . ujson/
 //                   ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#
   sealed trait Selector{
 //             ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#
+//                      display_name Selector
 //                      documentation ```scala\nsealed trait Selector\n```
     def apply(x: Value): Value
 //      ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#apply().
+//            display_name apply
 //            documentation ```scala\ndef apply(x: Value): Value\n```
 //            relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#apply().
 //            relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#apply().
 //            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#apply().(x)
+//              display_name x
 //              documentation ```scala\nx: Value \n```
 //               ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
 //                       ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
     def update(x: Value, y: Value): Unit
 //      ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#update().
+//             display_name update
 //             documentation ```scala\ndef update(x: Value, y: Value): Unit\n```
 //             relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#update().
 //             relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#update().
 //             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#update().(x)
+//               display_name x
 //               documentation ```scala\nx: Value \n```
 //                ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
 //                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#update().(y)
+//                         display_name y
 //                         documentation ```scala\ny: Value \n```
 //                          ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
 //                                  ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
   }
   object Selector{
 //       ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.
+//                display_name Selector
 //                documentation ```scala\nobject Selector\n```
     implicit class IntSelector(i: Int) extends Selector{
 //                 ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#
+//                             display_name IntSelector
 //                             documentation ```scala\nimplicit class IntSelector\n```
 //                            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#`<init>`().
+//                              display_name <init>
 //                              documentation ```scala\ndef this(i: Int)\n```
 //                             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#i.
+//                               display_name i
 //                               documentation ```scala\nprivate[this] val i: Int\n```
 //                               relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#`<init>`().(i)
 //                             _ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#`<init>`().(i)
+//                               display_name i
 //                               documentation ```scala\ni: Int \n```
 //                               relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#i.
 //                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
@@ -406,9 +464,11 @@ object Value extends AstTransformer[Value]{
 //                                                     ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
       def apply(x: Value): Value = x.arr(i)
 //        ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#apply().
+//              display_name apply
 //              documentation ```scala\ndef apply(x: Value): Value\n```
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#apply().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#apply().(x)
+//                display_name x
 //                documentation ```scala\nx: Value \n```
 //                 ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
 //                         ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
@@ -417,12 +477,15 @@ object Value extends AstTransformer[Value]{
 //                                       ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#i.
       def update(x: Value, y: Value) = x.arr(i) = y
 //        ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#update().
+//               display_name update
 //               documentation ```scala\ndef update(x: Value, y: Value): Unit\n```
 //               relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#update().
 //               ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#update().(x)
+//                 display_name x
 //                 documentation ```scala\nx: Value \n```
 //                  ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
 //                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#update().(y)
+//                           display_name y
 //                           documentation ```scala\ny: Value \n```
 //                            ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
 //                                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.IntSelector#update().(x)
@@ -432,13 +495,17 @@ object Value extends AstTransformer[Value]{
     }
     implicit class StringSelector(i: String) extends Selector{
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#
+//                                display_name StringSelector
 //                                documentation ```scala\nimplicit class StringSelector\n```
 //                               ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#`<init>`().
+//                                 display_name <init>
 //                                 documentation ```scala\ndef this(i: String)\n```
 //                                ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#i.
+//                                  display_name i
 //                                  documentation ```scala\nprivate[this] val i: String\n```
 //                                  relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#`<init>`().(i)
 //                                _ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#`<init>`().(i)
+//                                  display_name i
 //                                  documentation ```scala\ni: String \n```
 //                                  relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#i.
 //                                   ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
@@ -446,9 +513,11 @@ object Value extends AstTransformer[Value]{
 //                                                           ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
       def apply(x: Value): Value = x.obj(i)
 //        ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#apply().
+//              display_name apply
 //              documentation ```scala\ndef apply(x: Value): Value\n```
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#apply().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#apply().(x)
+//                display_name x
 //                documentation ```scala\nx: Value \n```
 //                 ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
 //                         ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
@@ -457,12 +526,15 @@ object Value extends AstTransformer[Value]{
 //                                       ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#i.
       def update(x: Value, y: Value) = x.obj(i) = y
 //        ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#update().
+//               display_name update
 //               documentation ```scala\ndef update(x: Value, y: Value): Unit\n```
 //               relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector#update().
 //               ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#update().(x)
+//                 display_name x
 //                 documentation ```scala\nx: Value \n```
 //                  ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
 //                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#update().(y)
+//                           display_name y
 //                           documentation ```scala\ny: Value \n```
 //                            ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
 //                                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Selector.StringSelector#update().(x)
@@ -477,6 +549,7 @@ object Value extends AstTransformer[Value]{
 //           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   val Str = ujson.Str
 //    ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Str.
+//        display_name Str
 //        documentation ```scala\n@deprecated\nval Str: Str.type\n```
 //          ^^^^^ reference semanticdb maven . . ujson/
 //                ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.
@@ -485,6 +558,7 @@ object Value extends AstTransformer[Value]{
 //           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   type Str = ujson.Str
 //     ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Str#
+//         display_name Str
 //         documentation ```scala\ntype Str >: Str <: Str\n```
 //           ^^^^^ reference semanticdb maven . . ujson/
 //                 ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#
@@ -493,6 +567,7 @@ object Value extends AstTransformer[Value]{
 //           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   val Obj = ujson.Obj
 //    ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Obj.
+//        display_name Obj
 //        documentation ```scala\n@deprecated\nval Obj: Obj.type\n```
 //          ^^^^^ reference semanticdb maven . . ujson/
 //                ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.
@@ -501,6 +576,7 @@ object Value extends AstTransformer[Value]{
 //           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   type Obj = ujson.Obj
 //     ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Obj#
+//         display_name Obj
 //         documentation ```scala\ntype Obj >: Obj <: Obj\n```
 //           ^^^^^ reference semanticdb maven . . ujson/
 //                 ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#
@@ -509,6 +585,7 @@ object Value extends AstTransformer[Value]{
 //           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   val Arr = ujson.Arr
 //    ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Arr.
+//        display_name Arr
 //        documentation ```scala\n@deprecated\nval Arr: Arr.type\n```
 //          ^^^^^ reference semanticdb maven . . ujson/
 //                ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.
@@ -517,6 +594,7 @@ object Value extends AstTransformer[Value]{
 //           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   type Arr = ujson.Arr
 //     ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Arr#
+//         display_name Arr
 //         documentation ```scala\ntype Arr >: Arr <: Arr\n```
 //           ^^^^^ reference semanticdb maven . . ujson/
 //                 ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#
@@ -525,6 +603,7 @@ object Value extends AstTransformer[Value]{
 //           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   val Num = ujson.Num
 //    ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Num.
+//        display_name Num
 //        documentation ```scala\n@deprecated\nval Num: Num.type\n```
 //          ^^^^^ reference semanticdb maven . . ujson/
 //                ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.
@@ -533,6 +612,7 @@ object Value extends AstTransformer[Value]{
 //           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   type Num = ujson.Num
 //     ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Num#
+//         display_name Num
 //         documentation ```scala\ntype Num >: Num <: Num\n```
 //           ^^^^^ reference semanticdb maven . . ujson/
 //                 ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#
@@ -541,6 +621,7 @@ object Value extends AstTransformer[Value]{
 //           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   val Bool = ujson.Bool
 //    ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Bool.
+//         display_name Bool
 //         documentation ```scala\n@deprecated\nval Bool: Bool.type\n```
 //           ^^^^^ reference semanticdb maven . . ujson/
 //                 ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool.
@@ -549,6 +630,7 @@ object Value extends AstTransformer[Value]{
 //           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   type Bool = ujson.Bool
 //     ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Bool#
+//          display_name Bool
 //          documentation ```scala\ntype Bool >: Bool <: Bool\n```
 //            ^^^^^ reference semanticdb maven . . ujson/
 //                  ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool#
@@ -557,6 +639,7 @@ object Value extends AstTransformer[Value]{
 //           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   val True = ujson.True
 //    ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.True.
+//         display_name True
 //         documentation ```scala\n@deprecated\nval True: True.type\n```
 //           ^^^^^ reference semanticdb maven . . ujson/
 //                 ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/True.
@@ -565,6 +648,7 @@ object Value extends AstTransformer[Value]{
 //           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   val False = ujson.False
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.False.
+//          display_name False
 //          documentation ```scala\n@deprecated\nval False: False.type\n```
 //            ^^^^^ reference semanticdb maven . . ujson/
 //                  ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/False.
@@ -573,20 +657,25 @@ object Value extends AstTransformer[Value]{
 //           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   val Null = ujson.Null
 //    ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Null.
+//         display_name Null
 //         documentation ```scala\n@deprecated\nval Null: Null.type\n```
 //           ^^^^^ reference semanticdb maven . . ujson/
 //                 ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Null.
   implicit def JsonableSeq[T](items: TraversableOnce[T])
 //             ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableSeq().
+//                         display_name JsonableSeq
 //                         documentation ```scala\nimplicit def JsonableSeq(items: TraversableOnce[T])(f: (T) => Value): Arr\n```
 //                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableSeq().[T]
+//                           display_name T
 //                           documentation ```scala\nT\n```
 //                            ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableSeq().(items)
+//                                  display_name items
 //                                  documentation ```scala\nitems: TraversableOnce[T] \n```
 //                                   ^^^^^^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/package.TraversableOnce#
 //                                                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableSeq().[T]
                              (implicit f: T => Value): Arr = Arr.from(items.map(f))
 //                                     ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableSeq().(f)
+//                                       display_name f
 //                                       documentation ```scala\nimplicit f: (T) => Value \n```
 //                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableSeq().[T]
 //                                             ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
@@ -598,16 +687,20 @@ object Value extends AstTransformer[Value]{
 //                                                                              ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableSeq().(f)
   implicit def JsonableDict[T](items: TraversableOnce[(String, T)])
 //             ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableDict().
+//                          display_name JsonableDict
 //                          documentation ```scala\nimplicit def JsonableDict(items: TraversableOnce[(String, T)])(f: (T) => Value): Obj\n```
 //                          ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableDict().[T]
+//                            display_name T
 //                            documentation ```scala\nT\n```
 //                             ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableDict().(items)
+//                                   display_name items
 //                                   documentation ```scala\nitems: TraversableOnce[(String, T)] \n```
 //                                    ^^^^^^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/package.TraversableOnce#
 //                                                     ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
 //                                                             ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableDict().[T]
                               (implicit f: T => Value): Obj = Obj.from(items.map(x => (x._1, f(x._2))))
 //                                      ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableDict().(f)
+//                                        display_name f
 //                                        documentation ```scala\nimplicit f: (T) => Value \n```
 //                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableDict().[T]
 //                                              ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
@@ -617,6 +710,7 @@ object Value extends AstTransformer[Value]{
 //                                                                     ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableDict().(items)
 //                                                                           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/IterableOnceExtensionMethods#map().
 //                                                                               ^ definition local 11
+//                                                                                 display_name x
 //                                                                                 documentation ```scala\nx: (String, T) \n```
 //                                                                                     ^ reference local 11
 //                                                                                       ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Tuple2#_1.
@@ -625,8 +719,10 @@ object Value extends AstTransformer[Value]{
 //                                                                                               ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Tuple2#_2.
   implicit def JsonableBoolean(i: Boolean): Bool = if (i) ujson.True else ujson.False
 //             ^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableBoolean().
+//                             display_name JsonableBoolean
 //                             documentation ```scala\nimplicit def JsonableBoolean(i: Boolean): Bool\n```
 //                             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableBoolean().(i)
+//                               display_name i
 //                               documentation ```scala\ni: Boolean \n```
 //                                ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
 //                                          ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Bool#
@@ -637,8 +733,10 @@ object Value extends AstTransformer[Value]{
 //                                                                              ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/False.
   implicit def JsonableByte(i: Byte): Num = Num(i)
 //             ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableByte().
+//                          display_name JsonableByte
 //                          documentation ```scala\nimplicit def JsonableByte(i: Byte): Num\n```
 //                          ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableByte().(i)
+//                            display_name i
 //                            documentation ```scala\ni: Byte \n```
 //                             ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Byte#
 //                                    ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Num#
@@ -646,8 +744,10 @@ object Value extends AstTransformer[Value]{
 //                                              ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableByte().(i)
   implicit def JsonableShort(i: Short): Num = Num(i)
 //             ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableShort().
+//                           display_name JsonableShort
 //                           documentation ```scala\nimplicit def JsonableShort(i: Short): Num\n```
 //                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableShort().(i)
+//                             display_name i
 //                             documentation ```scala\ni: Short \n```
 //                              ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Short#
 //                                      ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Num#
@@ -655,8 +755,10 @@ object Value extends AstTransformer[Value]{
 //                                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableShort().(i)
   implicit def JsonableInt(i: Int): Num = Num(i)
 //             ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableInt().
+//                         display_name JsonableInt
 //                         documentation ```scala\nimplicit def JsonableInt(i: Int): Num\n```
 //                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableInt().(i)
+//                           display_name i
 //                           documentation ```scala\ni: Int \n```
 //                            ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                  ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Num#
@@ -664,8 +766,10 @@ object Value extends AstTransformer[Value]{
 //                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableInt().(i)
   implicit def JsonableLong(i: Long): Str = Str(i.toString)
 //             ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableLong().
+//                          display_name JsonableLong
 //                          documentation ```scala\nimplicit def JsonableLong(i: Long): Str\n```
 //                          ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableLong().(i)
+//                            display_name i
 //                            documentation ```scala\ni: Long \n```
 //                             ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Long#
 //                                    ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Str#
@@ -674,8 +778,10 @@ object Value extends AstTransformer[Value]{
 //                                                ^^^^^^^^ reference semanticdb maven . . scala/Any#toString().
   implicit def JsonableFloat(i: Float): Num = Num(i)
 //             ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableFloat().
+//                           display_name JsonableFloat
 //                           documentation ```scala\nimplicit def JsonableFloat(i: Float): Num\n```
 //                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableFloat().(i)
+//                             display_name i
 //                             documentation ```scala\ni: Float \n```
 //                              ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Float#
 //                                      ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Num#
@@ -683,8 +789,10 @@ object Value extends AstTransformer[Value]{
 //                                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableFloat().(i)
   implicit def JsonableDouble(i: Double): Num = Num(i)
 //             ^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableDouble().
+//                            display_name JsonableDouble
 //                            documentation ```scala\nimplicit def JsonableDouble(i: Double): Num\n```
 //                            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableDouble().(i)
+//                              display_name i
 //                              documentation ```scala\ni: Double \n```
 //                               ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Double#
 //                                        ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Num#
@@ -692,16 +800,20 @@ object Value extends AstTransformer[Value]{
 //                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableDouble().(i)
   implicit def JsonableNull(i: Null): Null.type = Null
 //             ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableNull().
+//                          display_name JsonableNull
 //                          documentation ```scala\nimplicit def JsonableNull(i: Null): Null.type\n```
 //                          ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableNull().(i)
+//                            display_name i
 //                            documentation ```scala\ni: Null \n```
 //                             ^^^^ reference semanticdb maven . . scala/Null#
 //                                    ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Null.
 //                                                ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Null.
   implicit def JsonableString(s: CharSequence): Str = Str(s.toString)
 //             ^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableString().
+//                            display_name JsonableString
 //                            documentation ```scala\nimplicit def JsonableString(s: CharSequence): Str\n```
 //                            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.JsonableString().(s)
+//                              display_name s
 //                              documentation ```scala\ns: CharSequence \n```
 //                               ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                              ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Str#
@@ -712,14 +824,18 @@ object Value extends AstTransformer[Value]{
 
   def transform[T](j: Value, f: Visitor[_, T]): T = {
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.transform().
+//              display_name transform
 //              documentation ```scala\ndef transform(j: Value, f: Visitor[local12, T[): T\n```
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.transform().[T]
+//                display_name T
 //                documentation ```scala\nT\n```
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.transform().(j)
+//                   display_name j
 //                   documentation ```scala\nj: Value \n```
 //                    ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
 //                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.transform().(f)
+//                             display_name f
 //                             documentation ```scala\nf: Visitor[local12, T[ \n```
 //                              ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.transform().[T]
@@ -745,6 +861,7 @@ object Value extends AstTransformer[Value]{
 //         ^^^^^ reference semanticdb maven . . ujson/
 //               ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.
 //                   ^ definition local 13
+//                     display_name s
 //                     documentation ```scala\ns: String \n```
 //                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.transform().(f)
 //                           ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitString().
@@ -753,6 +870,7 @@ object Value extends AstTransformer[Value]{
 //         ^^^^^ reference semanticdb maven . . ujson/
 //               ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.
 //                   ^ definition local 14
+//                     display_name d
 //                     documentation ```scala\nd: Double \n```
 //                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.transform().(f)
 //                           ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitFloat64().
@@ -761,6 +879,7 @@ object Value extends AstTransformer[Value]{
 //         ^^^^^ reference semanticdb maven . . ujson/
 //               ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.
 //                   ^^^^^ definition local 15
+//                         display_name items
 //                         documentation ```scala\nitems: ArrayBuffer[Value] \n```
 //                             ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#transformArray().
 //                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.transform().(f)
@@ -769,6 +888,7 @@ object Value extends AstTransformer[Value]{
 //         ^^^^^ reference semanticdb maven . . ujson/
 //               ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.
 //                   ^^^^^ definition local 16
+//                         display_name items
 //                         documentation ```scala\nitems: LinkedHashMap[String, Value] \n```
 //                             ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#transformObject().
 //                                             ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.transform().(f)
@@ -778,18 +898,22 @@ object Value extends AstTransformer[Value]{
 
   def visitArray(length: Int, index: Int) = new AstArrVisitor[ArrayBuffer](xs => ujson.Arr(xs))
 //    ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitArray().
+//               display_name visitArray
 //               documentation ```scala\ndef visitArray(length: Int, index: Int): AstArrVisitor[ArrayBuffer]\n```
 //               relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitArray().
 //               ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitArray().(length)
+//                      display_name length
 //                      documentation ```scala\nlength: Int \n```
 //                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                            ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitArray().(index)
+//                                  display_name index
 //                                  documentation ```scala\nindex: Int \n```
 //                                   ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                              ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#
 //                                                            ^^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/mutable/ArrayBuffer#
 //                                                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#`<init>`().
 //                                                                         ^^ definition local 17
+//                                                                            display_name xs
 //                                                                            documentation ```scala\nxs: ArrayBuffer[Value] \n```
 //                                                                               ^^^^^ reference semanticdb maven . . ujson/
 //                                                                                     ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.
@@ -797,12 +921,15 @@ object Value extends AstTransformer[Value]{
 
   def visitObject(length: Int, index: Int) = new AstObjVisitor[mutable.LinkedHashMap[String, Value]](xs => ujson.Obj(xs))
 //    ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitObject().
+//                display_name visitObject
 //                documentation ```scala\ndef visitObject(length: Int, index: Int): AstObjVisitor[LinkedHashMap[String, Value]]\n```
 //                relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitObject().
 //                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitObject().(length)
+//                       display_name length
 //                       documentation ```scala\nlength: Int \n```
 //                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                             ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitObject().(index)
+//                                   display_name index
 //                                   documentation ```scala\nindex: Int \n```
 //                                    ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                               ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#
@@ -812,6 +939,7 @@ object Value extends AstTransformer[Value]{
 //                                                                                           ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
 //                                                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#`<init>`().
 //                                                                                                   ^^ definition local 18
+//                                                                                                      display_name xs
 //                                                                                                      documentation ```scala\nxs: LinkedHashMap[String, Value] \n```
 //                                                                                                         ^^^^^ reference semanticdb maven . . ujson/
 //                                                                                                               ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.
@@ -819,9 +947,11 @@ object Value extends AstTransformer[Value]{
 
   def visitNull(index: Int) = ujson.Null
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitNull().
+//              display_name visitNull
 //              documentation ```scala\ndef visitNull(index: Int): Null\n```
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitNull().
 //              ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitNull().(index)
+//                    display_name index
 //                    documentation ```scala\nindex: Int \n```
 //                     ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                            ^^^^^ reference semanticdb maven . . ujson/
@@ -829,9 +959,11 @@ object Value extends AstTransformer[Value]{
 
   def visitFalse(index: Int) = ujson.False
 //    ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitFalse().
+//               display_name visitFalse
 //               documentation ```scala\ndef visitFalse(index: Int): False\n```
 //               relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitFalse().
 //               ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitFalse().(index)
+//                     display_name index
 //                     documentation ```scala\nindex: Int \n```
 //                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                             ^^^^^ reference semanticdb maven . . ujson/
@@ -839,9 +971,11 @@ object Value extends AstTransformer[Value]{
 
   def visitTrue(index: Int) = True
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitTrue().
+//              display_name visitTrue
 //              documentation ```scala\ndef visitTrue(index: Int): True\n```
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitTrue().
 //              ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitTrue().(index)
+//                    display_name index
 //                    documentation ```scala\nindex: Int \n```
 //                     ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                            ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.True.
@@ -849,18 +983,23 @@ object Value extends AstTransformer[Value]{
 
   override def visitFloat64StringParts(s: CharSequence, decIndex: Int, expIndex: Int, index: Int) = {
 //             ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitFloat64StringParts().
+//                                     display_name visitFloat64StringParts
 //                                     documentation ```scala\ndef visitFloat64StringParts(s: CharSequence, decIndex: Int, expIndex: Int, index: Int): Num\n```
 //                                     relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitFloat64StringParts().
 //                                     ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitFloat64StringParts().(s)
+//                                       display_name s
 //                                       documentation ```scala\ns: CharSequence \n```
 //                                        ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                                      ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitFloat64StringParts().(decIndex)
+//                                                               display_name decIndex
 //                                                               documentation ```scala\ndecIndex: Int \n```
 //                                                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                                     ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitFloat64StringParts().(expIndex)
+//                                                                              display_name expIndex
 //                                                                              documentation ```scala\nexpIndex: Int \n```
 //                                                                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                                                    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitFloat64StringParts().(index)
+//                                                                                          display_name index
 //                                                                                          documentation ```scala\nindex: Int \n```
 //                                                                                           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     ujson.Num(
@@ -887,13 +1026,16 @@ object Value extends AstTransformer[Value]{
 
   override def visitFloat64(d: Double, index: Int) = ujson.Num(d)
 //             ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitFloat64().
+//                          display_name visitFloat64
 //                          documentation ```scala\ndef visitFloat64(d: Double, index: Int): Num\n```
 //                          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64().
 //                          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitFloat64().
 //                          ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitFloat64().(d)
+//                            display_name d
 //                            documentation ```scala\nd: Double \n```
 //                             ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Double#
 //                                     ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitFloat64().(index)
+//                                           display_name index
 //                                           documentation ```scala\nindex: Int \n```
 //                                            ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                   ^^^^^ reference semanticdb maven . . ujson/
@@ -902,12 +1044,15 @@ object Value extends AstTransformer[Value]{
 
   def visitString(s: CharSequence, index: Int) = ujson.Str(s.toString)
 //    ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitString().
+//                display_name visitString
 //                documentation ```scala\ndef visitString(s: CharSequence, index: Int): Str\n```
 //                relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitString().
 //                ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitString().(s)
+//                  display_name s
 //                  documentation ```scala\ns: CharSequence \n```
 //                   ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                 ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.visitString().(index)
+//                                       display_name index
 //                                       documentation ```scala\nindex: Int \n```
 //                                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                               ^^^^^ reference semanticdb maven . . ujson/
@@ -925,70 +1070,85 @@ object Value extends AstTransformer[Value]{
     */
   case class InvalidData(data: Value, msg: String)
 //           ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#
+//                       display_name InvalidData
 //                       documentation ```scala\ncase class InvalidData(data: Value, msg: String) extends Exception\n```
 //                       relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.
 //                       relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().
 //           ___________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#copy().
+//                       display_name copy
 //                       documentation ```scala\ndef copy(data: Value, msg: String): InvalidData\n```
 //                       relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#
 //                       relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().
 //           ___________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.
+//                       display_name InvalidData
 //                       documentation ```scala\nobject InvalidData\n```
 //                       relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#
 //                       relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().
 //           ___________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().
+//                       display_name apply
 //                       documentation ```scala\ndef apply(data: Value, msg: String): InvalidData\n```
 //                       relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#
 //                       relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function2#apply().
 //           ___________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#productElementName().
+//                       display_name productElementName
 //                       documentation ```scala\ndef productElementName(x$1: Int): String\n```
 //                       relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#
 //                       relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().
 //                       relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //           ___________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#productElement().
+//                       display_name productElement
 //                       documentation ```scala\ndef productElement(x$1: Int): Any\n```
 //                       relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#
 //                       relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().
 //                       relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //                      ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#`<init>`().
+//                        display_name <init>
 //                        documentation ```scala\ndef this(data: Value, msg: String)\n```
 //                       ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#data.
+//                            display_name data
 //                            documentation ```scala\nval data: Value\n```
 //                            relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#`<init>`().(data)
 //                            relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#copy().(data)
 //                            relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().(data)
 //                       ____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().(data)
+//                            display_name data
 //                            documentation ```scala\ndata: Value \n```
 //                            relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#`<init>`().(data)
 //                            relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#copy().(data)
 //                            relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#data.
 //                       ____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#`<init>`().(data)
+//                            display_name data
 //                            documentation ```scala\ndata: Value \n```
 //                            relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#copy().(data)
 //                            relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#data.
 //                            relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().(data)
 //                       ____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#copy().(data)
+//                            display_name data
 //                            documentation ```scala\ndefault data: Value \n```
 //                            relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#`<init>`().(data)
 //                            relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#data.
 //                            relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().(data)
 //                             ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
 //                                    ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#msg.
+//                                        display_name msg
 //                                        documentation ```scala\nval msg: String\n```
 //                                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#`<init>`().(msg)
 //                                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#copy().(msg)
 //                                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().(msg)
 //                                    ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#`<init>`().(msg)
+//                                        display_name msg
 //                                        documentation ```scala\nmsg: String \n```
 //                                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#copy().(msg)
 //                                        relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#msg.
 //                                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().(msg)
 //                                    ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#copy().(msg)
+//                                        display_name msg
 //                                        documentation ```scala\ndefault msg: String \n```
 //                                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#`<init>`().(msg)
 //                                        relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#msg.
 //                                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().(msg)
 //                                    ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData.apply().(msg)
+//                                        display_name msg
 //                                        documentation ```scala\nmsg: String \n```
 //                                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#`<init>`().(msg)
 //                                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.InvalidData#copy().(msg)
@@ -1004,50 +1164,61 @@ object Value extends AstTransformer[Value]{
 
 case class Str(value: String) extends Value
 //         ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#
+//             display_name Str
 //             documentation ```scala\ncase class Str(value: String) extends Value\n```
 //             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.
 //             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.apply().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#productElement().
+//             display_name productElement
 //             documentation ```scala\ndef productElement(x$1: Int): Any\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#
 //             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.apply().
 //             relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#copy().
+//             display_name copy
 //             documentation ```scala\ndef copy(value: String): Str\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#
 //             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.apply().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.
+//             display_name Str
 //             documentation ```scala\nobject Str\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#
 //             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.apply().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#productElementName().
+//             display_name productElementName
 //             documentation ```scala\ndef productElementName(x$1: Int): String\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#
 //             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.apply().
 //             relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.apply().
+//             display_name apply
 //             documentation ```scala\ndef apply(value: String): Str\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#
 //             relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function1#apply().
 //            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#`<init>`().
+//              display_name <init>
 //              documentation ```scala\ndef this(value: String)\n```
 //             ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#value.
+//                   display_name value
 //                   documentation ```scala\nval value: String\n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#`<init>`().(value)
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#copy().(value)
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.apply().(value)
 //                   relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#value().
 //             _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.apply().(value)
+//                   display_name value
 //                   documentation ```scala\nvalue: String \n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#`<init>`().(value)
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#copy().(value)
 //                   relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#value.
 //             _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#`<init>`().(value)
+//                   display_name value
 //                   documentation ```scala\nvalue: String \n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#copy().(value)
 //                   relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#value.
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str.apply().(value)
 //             _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#copy().(value)
+//                   display_name value
 //                   documentation ```scala\ndefault value: String \n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#`<init>`().(value)
 //                   relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Str#value.
@@ -1057,37 +1228,46 @@ case class Str(value: String) extends Value
 //                                         ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
 case class Obj(value: mutable.LinkedHashMap[String, Value]) extends Value
 //         ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#
+//             display_name Obj
 //             documentation ```scala\ncase class Obj(value: LinkedHashMap[String, Value]) extends Value\n```
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#productElementName().
+//             display_name productElementName
 //             documentation ```scala\ndef productElementName(x$1: Int): String\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#
 //             relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#productElement().
+//             display_name productElement
 //             documentation ```scala\ndef productElement(x$1: Int): Any\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#
 //             relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#copy().
+//             display_name copy
 //             documentation ```scala\ndef copy(value: LinkedHashMap[String, Value]): Obj\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#
 //            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#`<init>`().
+//              display_name <init>
 //              documentation ```scala\ndef this(value: LinkedHashMap[String, Value])\n```
 //             ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#value.
+//                   display_name value
 //                   documentation ```scala\nval value: LinkedHashMap[String, Value]\n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#`<init>`().(value)
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#copy().(value)
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.apply(+2).(value)
 //                   relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#value().
 //             _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.apply(+2).(value)
+//                   display_name value
 //                   documentation ```scala\nvalue: LinkedHashMap[String, Value] \n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#`<init>`().(value)
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#copy().(value)
 //                   relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#value.
 //             _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#`<init>`().(value)
+//                   display_name value
 //                   documentation ```scala\nvalue: LinkedHashMap[String, Value] \n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#copy().(value)
 //                   relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#value.
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.apply(+2).(value)
 //             _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#copy().(value)
+//                   display_name value
 //                   documentation ```scala\ndefault value: LinkedHashMap[String, Value] \n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#`<init>`().(value)
 //                   relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#value.
@@ -1101,14 +1281,18 @@ case class Obj(value: mutable.LinkedHashMap[String, Value]) extends Value
 //^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
 object Obj{
 //     ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.
+//         display_name Obj
 //         documentation ```scala\nobject Obj\n```
 //     ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.apply(+2).
+//         display_name apply
 //         documentation ```scala\ndef apply(value: LinkedHashMap[String, Value]): Obj\n```
 //         relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.
   implicit def from(items: TraversableOnce[(String, Value)]): Obj = {
 //             ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.from().
+//                  display_name from
 //                  documentation ```scala\nimplicit def from(items: TraversableOnce[(String, Value)]): Obj\n```
 //                  ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.from().(items)
+//                        display_name items
 //                        documentation ```scala\nitems: TraversableOnce[(String, Value)] \n```
 //                         ^^^^^^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/package.TraversableOnce#
 //                                          ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
@@ -1127,25 +1311,31 @@ object Obj{
   // https://github.com/lihaoyi/upickle/issues/230
   def apply[V](item: (String, V),
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.apply().
+//          display_name apply
 //          documentation ```scala\ndef apply(item: (String, V), items: (String, Value)*)(conv: (V) => Value): Obj\n```
 //          ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.apply().[V]
+//            display_name V
 //            documentation ```scala\nV\n```
 //             ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.apply().(item)
+//                  display_name item
 //                  documentation ```scala\nitem: (String, V) \n```
 //                    ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
 //                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.apply().[V]
                         items: (String, Value)*)(implicit conv: V => Value): Obj = {
 //                      ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.apply().(items)
+//                            display_name items
 //                            documentation ```scala\nitems: (String, Value)* \n```
 //                              ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
 //                                      ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#
 //                                                        ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.apply().(conv)
+//                                                             display_name conv
 //                                                             documentation ```scala\nimplicit conv: (V) => Value \n```
 //                                                              ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.apply().[V]
 //                                                                   ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#
 //                                                                           ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#
     val map = new mutable.LinkedHashMap[String, Value]()
 //      ^^^ definition local 22
+//          display_name map
 //          documentation ```scala\nmap: LinkedHashMap[String, Value] \n```
 //                ^^^^^^^ reference semanticdb maven . . scala/collection/mutable/
 //                        ^^^^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/mutable/LinkedHashMap#
@@ -1162,6 +1352,7 @@ object Obj{
 //                             ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Tuple2#_2.
     for (i <- items) map.put(i._1, i._2)
 //       ^ definition local 23
+//         display_name i
 //         documentation ```scala\ni: (String, Value) \n```
 //            ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.apply().(items)
 //                   ^^^ reference local 22
@@ -1177,6 +1368,7 @@ object Obj{
 
   def apply(): Obj = Obj(new mutable.LinkedHashMap[String, Value]())
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.apply(+1).
+//          display_name apply
 //          documentation ```scala\ndef apply(): Obj\n```
 //             ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj#
 //                   ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Obj.
@@ -1188,37 +1380,46 @@ object Obj{
 }
 case class Arr(value: ArrayBuffer[Value]) extends Value
 //         ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#
+//             display_name Arr
 //             documentation ```scala\ncase class Arr(value: ArrayBuffer[Value]) extends Value\n```
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#productElement().
+//             display_name productElement
 //             documentation ```scala\ndef productElement(x$1: Int): Any\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#
 //             relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#productElementName().
+//             display_name productElementName
 //             documentation ```scala\ndef productElementName(x$1: Int): String\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#
 //             relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#copy().
+//             display_name copy
 //             documentation ```scala\ndef copy(value: ArrayBuffer[Value]): Arr\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#
 //            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#`<init>`().
+//              display_name <init>
 //              documentation ```scala\ndef this(value: ArrayBuffer[Value])\n```
 //             ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#value.
+//                   display_name value
 //                   documentation ```scala\nval value: ArrayBuffer[Value]\n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#`<init>`().(value)
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#copy().(value)
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.apply(+1).(value)
 //                   relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#value().
 //             _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#`<init>`().(value)
+//                   display_name value
 //                   documentation ```scala\nvalue: ArrayBuffer[Value] \n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#copy().(value)
 //                   relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#value.
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.apply(+1).(value)
 //             _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#copy().(value)
+//                   display_name value
 //                   documentation ```scala\ndefault value: ArrayBuffer[Value] \n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#`<init>`().(value)
 //                   relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#value.
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.apply(+1).(value)
 //             _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.apply(+1).(value)
+//                   display_name value
 //                   documentation ```scala\nvalue: ArrayBuffer[Value] \n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#`<init>`().(value)
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#copy().(value)
@@ -1230,26 +1431,33 @@ case class Arr(value: ArrayBuffer[Value]) extends Value
 //^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
 object Arr{
 //     ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.
+//         display_name Arr
 //         documentation ```scala\nobject Arr\n```
 //     ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.apply(+1).
+//         display_name apply
 //         documentation ```scala\ndef apply(value: ArrayBuffer[Value]): Arr\n```
 //         relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.
   implicit def from[T](items: TraversableOnce[T])(implicit conv: T => Value): Arr = {
 //             ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.from().
+//                  display_name from
 //                  documentation ```scala\nimplicit def from(items: TraversableOnce[T])(conv: (T) => Value): Arr\n```
 //                  ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.from().[T]
+//                    display_name T
 //                    documentation ```scala\nT\n```
 //                     ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.from().(items)
+//                           display_name items
 //                           documentation ```scala\nitems: TraversableOnce[T] \n```
 //                            ^^^^^^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/package.TraversableOnce#
 //                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.from().[T]
 //                                                         ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.from().(conv)
+//                                                              display_name conv
 //                                                              documentation ```scala\nimplicit conv: (T) => Value \n```
 //                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.from().[T]
 //                                                                    ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#
 //                                                                            ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#
     val buf = new mutable.ArrayBuffer[Value]()
 //      ^^^ definition local 25
+//          display_name buf
 //          documentation ```scala\nbuf: ArrayBuffer[Value] \n```
 //                ^^^^^^^ reference semanticdb maven . . scala/collection/mutable/
 //                        ^^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/mutable/ArrayBuffer#
@@ -1259,6 +1467,7 @@ object Arr{
 //  ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.from().(items)
 //        ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/IterableOnceExtensionMethods#foreach().
 //                 ^^^^ definition local 26
+//                      display_name item
 //                      documentation ```scala\nitem: T \n```
       buf += (conv(item): Value)
 //    ^^^ reference local 25
@@ -1274,13 +1483,16 @@ object Arr{
 
   def apply(items: Value*): Arr = {
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.apply().
+//          display_name apply
 //          documentation ```scala\ndef apply(items: Value*): Arr\n```
 //          ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.apply().(items)
+//                display_name items
 //                documentation ```scala\nitems: Value* \n```
 //                 ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#
 //                          ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr#
     val buf = new mutable.ArrayBuffer[Value](items.length)
 //      ^^^ definition local 27
+//          display_name buf
 //          documentation ```scala\nbuf: ArrayBuffer[Value] \n```
 //                ^^^^^^^ reference semanticdb maven . . scala/collection/mutable/
 //                        ^^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/mutable/ArrayBuffer#
@@ -1292,6 +1504,7 @@ object Arr{
 //  ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Arr.apply().(items)
 //        ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/IterableOnceOps#foreach().
 //                 ^^^^ definition local 28
+//                      display_name item
 //                      documentation ```scala\nitem: Value \n```
       buf += item
 //    ^^^ reference local 27
@@ -1305,50 +1518,61 @@ object Arr{
 }
 case class Num(value: Double) extends Value
 //         ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#
+//             display_name Num
 //             documentation ```scala\ncase class Num(value: Double) extends Value\n```
 //             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.
 //             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.apply().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#productElement().
+//             display_name productElement
 //             documentation ```scala\ndef productElement(x$1: Int): Any\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#
 //             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.apply().
 //             relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#copy().
+//             display_name copy
 //             documentation ```scala\ndef copy(value: Double): Num\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#
 //             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.apply().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.apply().
+//             display_name apply
 //             documentation ```scala\ndef apply(value: Double): Num\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#
 //             relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function1#apply().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#productElementName().
+//             display_name productElementName
 //             documentation ```scala\ndef productElementName(x$1: Int): String\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#
 //             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.apply().
 //             relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //         ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.
+//             display_name Num
 //             documentation ```scala\nobject Num\n```
 //             relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#
 //             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.apply().
 //            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#`<init>`().
+//              display_name <init>
 //              documentation ```scala\ndef this(value: Double)\n```
 //             ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#value.
+//                   display_name value
 //                   documentation ```scala\nval value: Double\n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#`<init>`().(value)
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#copy().(value)
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.apply().(value)
 //                   relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#value().
 //             _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.apply().(value)
+//                   display_name value
 //                   documentation ```scala\nvalue: Double \n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#`<init>`().(value)
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#copy().(value)
 //                   relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#value.
 //             _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#copy().(value)
+//                   display_name value
 //                   documentation ```scala\ndefault value: Double \n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#`<init>`().(value)
 //                   relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#value.
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num.apply().(value)
 //             _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#`<init>`().(value)
+//                   display_name value
 //                   documentation ```scala\nvalue: Double \n```
 //                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#copy().(value)
 //                   relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Num#value.
@@ -1358,13 +1582,16 @@ case class Num(value: Double) extends Value
 //                                         ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
 sealed abstract class Bool extends Value{
 //                    ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool#
+//                         display_name Bool
 //                         documentation ```scala\nabstract sealed class Bool\n```
 //                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool#`<init>`().
+//                           display_name <init>
 //                           documentation ```scala\ndef this()\n```
 //                                 ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#
 //                                      ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
   def value: Boolean
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool#value().
+//          display_name value
 //          documentation ```scala\ndef value: Boolean\n```
 //          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/False.value().
 //          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/True.value().
@@ -1373,11 +1600,14 @@ sealed abstract class Bool extends Value{
 }
 object Bool{
 //     ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool.
+//          display_name Bool
 //          documentation ```scala\nobject Bool\n```
   def apply(value: Boolean): Bool = if (value) True else False
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool.apply().
+//          display_name apply
 //          documentation ```scala\ndef apply(value: Boolean): Bool\n```
 //          ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool.apply().(value)
+//                display_name value
 //                documentation ```scala\nvalue: Boolean \n```
 //                 ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
 //                           ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool#
@@ -1386,8 +1616,10 @@ object Bool{
 //                                                       ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/False.
   def unapply(bool: Bool): Option[Boolean] = Some(bool.value)
 //    ^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool.unapply().
+//            display_name unapply
 //            documentation ```scala\ndef unapply(bool: Bool): Option[Boolean]\n```
 //            ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool.unapply().(bool)
+//                 display_name bool
 //                 documentation ```scala\nbool: Bool \n```
 //                  ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool#
 //                         ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Option#
@@ -1398,8 +1630,10 @@ object Bool{
 }
 case object False extends Bool{
 //          ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/False.
+//                display_name False
 //                documentation ```scala\ncase object False\n```
 //          _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/False.productElement().
+//                display_name productElement
 //                documentation ```scala\ndef productElement(x$1: Int): Any\n```
 //                relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/False.
 //                relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
@@ -1407,14 +1641,17 @@ case object False extends Bool{
 //                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool#`<init>`().
   def value = false
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/False.value().
+//          display_name value
 //          documentation ```scala\ndef value: Boolean\n```
 //          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool#value().
 //          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#value().
 }
 case object True extends Bool{
 //          ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/True.
+//               display_name True
 //               documentation ```scala\ncase object True\n```
 //          ____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/True.productElement().
+//               display_name productElement
 //               documentation ```scala\ndef productElement(x$1: Int): Any\n```
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/True.
 //               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
@@ -1422,14 +1659,17 @@ case object True extends Bool{
 //                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool#`<init>`().
   def value = true
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/True.value().
+//          display_name value
 //          documentation ```scala\ndef value: Boolean\n```
 //          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Bool#value().
 //          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#value().
 }
 case object Null extends Value{
 //          ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Null.
+//               display_name Null
 //               documentation ```scala\ncase object Null\n```
 //          ____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Null.productElement().
+//               display_name productElement
 //               documentation ```scala\ndef productElement(x$1: Int): Any\n```
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Null.
 //               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
@@ -1437,6 +1677,7 @@ case object Null extends Value{
 //                            ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
   def value = null
 //    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Null.value().
+//          display_name value
 //          documentation ```scala\ndef value: Null\n```
 //          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#value().
 }

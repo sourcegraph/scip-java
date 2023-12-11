@@ -4,11 +4,14 @@ package minimized
 // format: off
 object MinimizedScalaMain {
 //     ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedScalaMain.
+//                        display_name MinimizedScalaMain
 //                        documentation ```scala\nobject MinimizedScalaMain\n```
   def main(args: Array[String]): Unit = {
 //    ^^^^ definition semanticdb maven . . minimized/MinimizedScalaMain.main().
+//         display_name main
 //         documentation ```scala\ndef main(args: Array[String]): Unit\n```
 //         ^^^^ definition semanticdb maven . . minimized/MinimizedScalaMain.main().(args)
+//              display_name args
 //              documentation ```scala\nargs: Array[String] \n```
 //               ^^^^^ reference semanticdb maven . . scala/Array#
 //                     ^^^^^^ reference semanticdb maven . . scala/Predef.String#

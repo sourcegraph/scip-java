@@ -23,15 +23,20 @@ import upickle.core.{ObjArrVisitor, Visitor}
 private[ujson] final class StringParser[J](s: String) extends CharParser[J]{
 //      ^^^^^ reference semanticdb maven . . ujson/
 //                         ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#
+//                                      display_name StringParser
 //                                      documentation ```scala\nprotected[ujson] final class StringParser[J]\n```
 //                                      ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#[J]
+//                                        display_name J
 //                                        documentation ```scala\nJ\n```
 //                                        ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#`<init>`().
+//                                          display_name <init>
 //                                          documentation ```scala\ndef this(s: String)\n```
 //                                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#s.
+//                                           display_name s
 //                                           documentation ```scala\nprivate[this] val s: String\n```
 //                                           relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#`<init>`().(s)
 //                                         _ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#`<init>`().(s)
+//                                           display_name s
 //                                           documentation ```scala\ns: String \n```
 //                                           relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#s.
 //                                            ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
@@ -40,26 +45,32 @@ private[ujson] final class StringParser[J](s: String) extends CharParser[J]{
 //                                                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#`<init>`().
   private[this] val sLength = s.length
 //                  ^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#sLength.
+//                          display_name sLength
 //                          documentation ```scala\nprivate[this] val sLength: Int\n```
 //                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#s.
 //                              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#length().
   override def growBuffer(until: Int): Unit = ()
 //             ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#growBuffer().
+//                        display_name growBuffer
 //                        documentation ```scala\ndef growBuffer(until: Int): Unit\n```
 //                        relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#growBuffer().
 //                        ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#growBuffer().(until)
+//                              display_name until
 //                              documentation ```scala\nuntil: Int \n```
 //                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
   def readDataIntoBuffer(buffer: Array[Char], bufferOffset: Int) = {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#readDataIntoBuffer().
+//                       display_name readDataIntoBuffer
 //                       documentation ```scala\ndef readDataIntoBuffer(buffer: Array[Char], bufferOffset: Int): (Array[Char], Boolean, Int)\n```
 //                       relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#readDataIntoBuffer().
 //                       ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#readDataIntoBuffer().(buffer)
+//                              display_name buffer
 //                              documentation ```scala\nbuffer: Array[Char] \n```
 //                               ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Array#
 //                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Char#
 //                                            ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#readDataIntoBuffer().(bufferOffset)
+//                                                         display_name bufferOffset
 //                                                         documentation ```scala\nbufferOffset: Int \n```
 //                                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     if(buffer == null) (s.toCharArray, sLength == 0, sLength)
@@ -75,26 +86,32 @@ private[ujson] final class StringParser[J](s: String) extends CharParser[J]{
   }
   final def close() = ()
 //          ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser#close().
+//                display_name close
 //                documentation ```scala\nfinal def close(): Unit\n```
 //                relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#close().
 }
 
 object StringParser extends Transformer[String]{
 //     ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser.
+//                  display_name StringParser
 //                  documentation ```scala\nobject StringParser\n```
 //                          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#
 //                                      ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
 //                                             ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
   def transform[T](j: String, f: Visitor[_, T]) = new StringParser(j).parse(f)
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser.transform().
+//              display_name transform
 //              documentation ```scala\ndef transform(j: String, f: Visitor[local0, T[): T\n```
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser.transform().[T]
+//                display_name T
 //                documentation ```scala\nT\n```
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser.transform().(j)
+//                   display_name j
 //                   documentation ```scala\nj: String \n```
 //                    ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
 //                            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser.transform().(f)
+//                              display_name f
 //                              documentation ```scala\nf: Visitor[local0, T[ \n```
 //                               ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser.transform().[T]

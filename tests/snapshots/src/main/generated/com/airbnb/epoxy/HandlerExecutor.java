@@ -28,6 +28,7 @@ import androidx.annotation.NonNull;
  */
 class HandlerExecutor implements Executor {
 //    ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#
+//                    display_name HandlerExecutor
 //                    documentation ```java\nclass HandlerExecutor\n```
 //                    documentation  An executor that does it's work via posting to a Handler.\n <p>\n A key feature of this is the runnable is executed synchronously if the current thread is the\n same as the handler's thread.\n
 //                    relationship is_implementation semanticdb maven jdk 11 java/util/concurrent/Executor#
@@ -35,13 +36,16 @@ class HandlerExecutor implements Executor {
   final Handler handler;
 //      ^^^^^^^ reference semanticdb maven . . Handler#
 //              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#handler.
+//                      display_name handler
 //                      documentation ```java\nfinal unresolved_type handler\n```
 
   HandlerExecutor(Handler handler) {
 //^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#`<init>`().
+//                display_name <init>
 //                documentation ```java\nHandlerExecutor(unresolved_type handler)\n```
 //                ^^^^^^^ reference semanticdb maven . . Handler#
 //                        ^^^^^^^ definition local 0
+//                                display_name handler
 //                                documentation ```java\nunresolved_type handler\n```
     this.handler = handler;
 //       ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#handler.
@@ -52,11 +56,13 @@ class HandlerExecutor implements Executor {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void execute(@NonNull Runnable command) {
 //            ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#execute().
+//                    display_name execute
 //                    documentation ```java\n@Override\npublic void execute(Runnable command)\n```
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/util/concurrent/Executor#execute().
 //                     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                             ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Runnable#
 //                                      ^^^^^^^ definition local 1
+//                                              display_name command
 //                                              documentation ```java\n@NonNull\nRunnable command\n```
     // If we're already on the same thread then we can execute this synchronously
     if (Looper.myLooper() == handler.getLooper()) {

@@ -13,6 +13,7 @@ import static com.airbnb.epoxy.EpoxyAsyncUtil.MAIN_THREAD_HANDLER;
 
 class MainThreadExecutor extends HandlerExecutor {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/MainThreadExecutor#
+//                       display_name MainThreadExecutor
 //                       documentation ```java\nclass MainThreadExecutor\n```
 //                       relationship is_implementation semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#
 //                       relationship is_implementation semanticdb maven jdk 11 java/util/concurrent/Executor#
@@ -20,18 +21,22 @@ class MainThreadExecutor extends HandlerExecutor {
   static final MainThreadExecutor INSTANCE = new MainThreadExecutor(false);
 //             ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/MainThreadExecutor#
 //                                ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/MainThreadExecutor#INSTANCE.
+//                                         display_name INSTANCE
 //                                         documentation ```java\nstatic final MainThreadExecutor INSTANCE\n```
 //                                               ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/MainThreadExecutor#`<init>`().
   static final MainThreadExecutor ASYNC_INSTANCE = new MainThreadExecutor(true);
 //             ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/MainThreadExecutor#
 //                                ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/MainThreadExecutor#ASYNC_INSTANCE.
+//                                               display_name ASYNC_INSTANCE
 //                                               documentation ```java\nstatic final MainThreadExecutor ASYNC_INSTANCE\n```
 //                                                     ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/MainThreadExecutor#`<init>`().
 
   MainThreadExecutor(boolean async) {
 //^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/MainThreadExecutor#`<init>`().
+//                   display_name <init>
 //                   documentation ```java\nMainThreadExecutor(boolean async)\n```
 //                           ^^^^^ definition local 0
+//                                 display_name async
 //                                 documentation ```java\nboolean async\n```
     super(async ? AYSNC_MAIN_THREAD_HANDLER : MAIN_THREAD_HANDLER);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#`<init>`().

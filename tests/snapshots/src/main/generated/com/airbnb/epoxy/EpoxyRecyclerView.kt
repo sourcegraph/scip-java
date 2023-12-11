@@ -96,18 +96,23 @@ import com.airbnb.viewmodeladapter.R
  */
 open class EpoxyRecyclerView @JvmOverloads constructor(
 //         ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#
+//                           display_name EpoxyRecyclerView
 //                           documentation ```kt\npublic open class EpoxyRecyclerView\n```\n\n----\n\n\n A RecyclerView implementation that makes for easier integration with Epoxy. The goal of this\n class is to reduce boilerplate in setting up a RecyclerView by applying common defaults.\n Additionally, several performance optimizations are made.\n\n Improvements in this class are:\n\n 1. A single view pool is automatically shared between all [EpoxyRecyclerView] instances in\n the same activity. This should increase view recycling potential and increase performance when\n nested RecyclerViews are used. See [.initViewPool].\n\n 2. A layout manager is automatically added with assumed defaults. See [createLayoutManager]\n\n 3. Fixed size is enabled if this view's size is MATCH_PARENT\n\n 4. If a [GridLayoutManager] is used this will automatically sync the span count with the\n [EpoxyController]. See [syncSpanCount]\n\n 5. Helper methods like [withModels], [setModels], [buildModelsWith]\n make it simpler to set up simple RecyclerViews.\n\n 6. Set an EpoxyController and build models in one step -\n [setControllerAndBuildModels] or [withModels]\n\n 7. Support for automatic item spacing. See [.setItemSpacingPx]\n\n 8. Defaults for usage as a nested recyclerview are provided in [Carousel].\n\n 9. [setClipToPadding] is set to false by default since that behavior is commonly\n desired in a scrolling list\n
 //                            ^^^^^^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/jvm/JvmOverloads#`<init>`().
 //                                         ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().
+//                                                     display_name EpoxyRecyclerView
 //                                                     documentation ```kt\npublic constructor EpoxyRecyclerView(context: [Error type: Unresolved type for Context], attrs: [Error type: Unresolved type for AttributeSet]? = ..., defStyleAttr: kotlin.Int = ...)\n```
     context: Context,
 //  ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(context)
+//          display_name context
 //          documentation ```kt\nvalue-parameter context: [Error type: Unresolved type for Context]\n```
     attrs: AttributeSet? = null,
 //  ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(attrs)
+//        display_name attrs
 //        documentation ```kt\nvalue-parameter attrs: [Error type: Unresolved type for AttributeSet]? = ...\n```
     defStyleAttr: Int = 0
 //  ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(defStyleAttr)
+//               display_name defStyleAttr
 //               documentation ```kt\nvalue-parameter defStyleAttr: kotlin.Int = ...\n```
 //                ^^^ reference semanticdb maven . . kotlin/Int#
 ) : RecyclerView(context, attrs, defStyleAttr) {
@@ -117,16 +122,21 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     protected val spacingDecorator = EpoxyItemSpacingDecorator()
 //                ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getSpacingDecorator().
+//                                 display_name spacingDecorator
 //                                 documentation ```kt\nprotected final val spacingDecorator: [Error type: Not found recorded type for EpoxyItemSpacingDecorator()]\n```
 //                ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#spacingDecorator.
+//                                 display_name spacingDecorator
 //                                 documentation ```kt\nprotected final val spacingDecorator: [Error type: Not found recorded type for EpoxyItemSpacingDecorator()]\n```
 
     private var epoxyController: EpoxyController? = null
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
+//                              display_name epoxyController
 //                              documentation ```kt\nprivate final var epoxyController: [Error type: Unresolved type for EpoxyController]?\n```
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
+//                              display_name epoxyController
 //                              documentation ```kt\nprivate final var epoxyController: [Error type: Unresolved type for EpoxyController]?\n```
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setEpoxyController().
+//                              display_name epoxyController
 //                              documentation ```kt\nprivate final var epoxyController: [Error type: Unresolved type for EpoxyController]?\n```
 
     /**
@@ -145,26 +155,35 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     private var removedAdapter: RecyclerView.Adapter<*>? = null
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getRemovedAdapter().
+//                             display_name removedAdapter
 //                             documentation ```kt\nprivate final var removedAdapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```\n\n----\n\n\n The adapter that was removed because the RecyclerView was detached from the window. We save it\n so we can reattach it if the RecyclerView is reattached to window. This allows us to\n automatically restore the adapter, without risking leaking the RecyclerView if this view is\n never used again.\n\n Since the adapter is removed this recyclerview won't get adapter changes, but that's fine since\n the view isn't attached to window and isn't being drawn.\n\n This reference is cleared if another adapter is manually set, so we don't override the user's\n adapter choice.\n\n @see .setRemoveAdapterWhenDetachedFromWindow\n
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#removedAdapter.
+//                             display_name removedAdapter
 //                             documentation ```kt\nprivate final var removedAdapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```\n\n----\n\n\n The adapter that was removed because the RecyclerView was detached from the window. We save it\n so we can reattach it if the RecyclerView is reattached to window. This allows us to\n automatically restore the adapter, without risking leaking the RecyclerView if this view is\n never used again.\n\n Since the adapter is removed this recyclerview won't get adapter changes, but that's fine since\n the view isn't attached to window and isn't being drawn.\n\n This reference is cleared if another adapter is manually set, so we don't override the user's\n adapter choice.\n\n @see .setRemoveAdapterWhenDetachedFromWindow\n
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setRemovedAdapter().
+//                             display_name removedAdapter
 //                             documentation ```kt\nprivate final var removedAdapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```\n\n----\n\n\n The adapter that was removed because the RecyclerView was detached from the window. We save it\n so we can reattach it if the RecyclerView is reattached to window. This allows us to\n automatically restore the adapter, without risking leaking the RecyclerView if this view is\n never used again.\n\n Since the adapter is removed this recyclerview won't get adapter changes, but that's fine since\n the view isn't attached to window and isn't being drawn.\n\n This reference is cleared if another adapter is manually set, so we don't override the user's\n adapter choice.\n\n @see .setRemoveAdapterWhenDetachedFromWindow\n
 
     private var removeAdapterWhenDetachedFromWindow = true
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getRemoveAdapterWhenDetachedFromWindow().
+//                                                  display_name removeAdapterWhenDetachedFromWindow
 //                                                  documentation ```kt\nprivate final var removeAdapterWhenDetachedFromWindow: kotlin.Boolean\n```
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#removeAdapterWhenDetachedFromWindow.
+//                                                  display_name removeAdapterWhenDetachedFromWindow
 //                                                  documentation ```kt\nprivate final var removeAdapterWhenDetachedFromWindow: kotlin.Boolean\n```
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setRemoveAdapterWhenDetachedFromWindow().
+//                                                  display_name setRemoveAdapterWhenDetachedFromWindow
 //                                                  documentation ```kt\npublic final fun setRemoveAdapterWhenDetachedFromWindow(removeAdapterWhenDetachedFromWindow: kotlin.Boolean)\n```\n\n----\n\n\n If set to true, any adapter set on this recyclerview will be removed when this view is detached\n from the window. This is useful to prevent leaking a reference to this RecyclerView. This is\n useful in cases where the same adapter can be used across multiple views (views which can be\n destroyed and recreated), such as with fragments. In that case the adapter is not necessarily\n cleared from previous RecyclerViews, so the adapter will continue to hold a reference to those\n views and leak them. More details at https://github.com/airbnb/epoxy/wiki/Avoiding-Memory-Leaks#parent-view\n\n The default is true, but you can disable this if you don't want your adapter detached\n automatically.\n\n If the adapter is removed via this setting, it will be re-set on the RecyclerView if the\n RecyclerView is re-attached to the window at a later point.\n
 
     private var delayMsWhenRemovingAdapterOnDetach: Int = DEFAULT_ADAPTER_REMOVAL_DELAY_MS
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#delayMsWhenRemovingAdapterOnDetach.
+//                                                 display_name delayMsWhenRemovingAdapterOnDetach
 //                                                 documentation ```kt\nprivate final var delayMsWhenRemovingAdapterOnDetach: kotlin.Int\n```
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getDelayMsWhenRemovingAdapterOnDetach().
+//                                                 display_name delayMsWhenRemovingAdapterOnDetach
 //                                                 documentation ```kt\nprivate final var delayMsWhenRemovingAdapterOnDetach: kotlin.Int\n```
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setDelayMsWhenRemovingAdapterOnDetach().
+//                                                 display_name setDelayMsWhenRemovingAdapterOnDetach
 //                                                 documentation ```kt\npublic final fun setDelayMsWhenRemovingAdapterOnDetach(delayMsWhenRemovingAdapterOnDetach: kotlin.Int)\n```\n\n----\n\n\n If [.setRemoveAdapterWhenDetachedFromWindow] is set to true, this is the delay\n in milliseconds between when [.onDetachedFromWindow] is called and when the adapter is\n actually removed.\n\n By default a delay of {@value #DEFAULT_ADAPTER_REMOVAL_DELAY_MS} ms is used so that view\n transitions can complete before the adapter is removed. Otherwise if the adapter is removed\n before transitions finish it can clear the screen and break the transition. A notable case is\n fragment transitions, in which the fragment view is detached from window before the transition\n ends.\n
 //                                                  ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#Companion#DEFAULT_ADAPTER_REMOVAL_DELAY_MS.
@@ -177,16 +196,21 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     private var isRemoveAdapterRunnablePosted: Boolean = false
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getIsRemoveAdapterRunnablePosted().
+//                                            display_name isRemoveAdapterRunnablePosted
 //                                            documentation ```kt\nprivate final var isRemoveAdapterRunnablePosted: kotlin.Boolean\n```\n\n----\n\n\n Tracks whether [.removeAdapterRunnable] has been posted to run\n later. This lets us know if we should cancel the runnable at certain times. This removes the\n overhead of needlessly attempting to remove the runnable when it isn't posted.\n
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#isRemoveAdapterRunnablePosted.
+//                                            display_name isRemoveAdapterRunnablePosted
 //                                            documentation ```kt\nprivate final var isRemoveAdapterRunnablePosted: kotlin.Boolean\n```\n\n----\n\n\n Tracks whether [.removeAdapterRunnable] has been posted to run\n later. This lets us know if we should cancel the runnable at certain times. This removes the\n overhead of needlessly attempting to remove the runnable when it isn't posted.\n
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setIsRemoveAdapterRunnablePosted().
+//                                            display_name isRemoveAdapterRunnablePosted
 //                                            documentation ```kt\nprivate final var isRemoveAdapterRunnablePosted: kotlin.Boolean\n```\n\n----\n\n\n Tracks whether [.removeAdapterRunnable] has been posted to run\n later. This lets us know if we should cancel the runnable at certain times. This removes the\n overhead of needlessly attempting to remove the runnable when it isn't posted.\n
 //                                             ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
     private val removeAdapterRunnable = Runnable {
 //              ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getRemoveAdapterRunnable().
+//                                    display_name removeAdapterRunnable
 //                                    documentation ```kt\nprivate final val removeAdapterRunnable: java.lang.Runnable\n```
 //              ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#removeAdapterRunnable.
+//                                    display_name removeAdapterRunnable
 //                                    documentation ```kt\nprivate final val removeAdapterRunnable: java.lang.Runnable\n```
 //                                      ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Runnable#
         if (isRemoveAdapterRunnablePosted) {
@@ -206,8 +230,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     private val preloadScrollListeners: MutableList<EpoxyPreloader<*>> = mutableListOf()
 //              ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getPreloadScrollListeners().
+//                                     display_name preloadScrollListeners
 //                                     documentation ```kt\nprivate final val preloadScrollListeners: kotlin.collections.MutableList<com.airbnb.epoxy.preload.EpoxyPreloader<*>>\n```
 //              ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#preloadScrollListeners.
+//                                     display_name preloadScrollListeners
 //                                     documentation ```kt\nprivate final val preloadScrollListeners: kotlin.collections.MutableList<com.airbnb.epoxy.preload.EpoxyPreloader<*>>\n```
 //                                      ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#
 //                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyPreloader#
@@ -215,8 +241,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     private val preloadConfigs: MutableList<PreloadConfig<*, *, *>> = mutableListOf()
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getPreloadConfigs().
+//                             display_name preloadConfigs
 //                             documentation ```kt\nprivate final val preloadConfigs: kotlin.collections.MutableList<com.airbnb.epoxy.EpoxyRecyclerView.PreloadConfig<*, *, *>>\n```
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#preloadConfigs.
+//                             display_name preloadConfigs
 //                             documentation ```kt\nprivate final val preloadConfigs: kotlin.collections.MutableList<com.airbnb.epoxy.EpoxyRecyclerView.PreloadConfig<*, *, *>>\n```
 //                              ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#
 //                                          ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#
@@ -224,39 +252,53 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     private class PreloadConfig<T : EpoxyModel<*>, U : ViewMetadata?, P : PreloadRequestHolder>(
 //                ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#
+//                              display_name PreloadConfig
 //                              documentation ```kt\nprivate final class PreloadConfig<T, U : com.airbnb.epoxy.preload.ViewMetadata?, P : com.airbnb.epoxy.preload.PreloadRequestHolder>\n```
 //                ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().
+//                              display_name PreloadConfig
 //                              documentation ```kt\npublic constructor PreloadConfig<T, U : com.airbnb.epoxy.preload.ViewMetadata?, P : com.airbnb.epoxy.preload.PreloadRequestHolder>(maxPreload: kotlin.Int, errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>, requestHolderFactory: () -> P)\n```
 //                              ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[T]
+//                                display_name T
 //                                documentation ```kt\n<T>\n```
 //                                                 ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[U]
+//                                                   display_name U
 //                                                   documentation ```kt\n<U : com.airbnb.epoxy.preload.ViewMetadata?>\n```
 //                                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#
 //                                                                    ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[P]
+//                                                                      display_name P
 //                                                                      documentation ```kt\n<P : com.airbnb.epoxy.preload.PreloadRequestHolder>\n```
 //                                                                        ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadRequestHolder#
         val maxPreload: Int,
 //          ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(maxPreload)
+//                     display_name maxPreload
 //                     documentation ```kt\nvalue-parameter maxPreload: kotlin.Int\n```
 //          ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#getMaxPreload().
+//                     display_name maxPreload
 //                     documentation ```kt\npublic final val maxPreload: kotlin.Int\n```
 //          ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#maxPreload.
+//                     display_name maxPreload
 //                     documentation ```kt\npublic final val maxPreload: kotlin.Int\n```
 //                      ^^^ reference semanticdb maven . . kotlin/Int#
         val errorHandler: PreloadErrorHandler,
 //          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(errorHandler)
+//                       display_name errorHandler
 //                       documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#errorHandler.
+//                       display_name errorHandler
 //                       documentation ```kt\npublic final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#getErrorHandler().
+//                       display_name errorHandler
 //                       documentation ```kt\npublic final val errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //                        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
         val preloader: EpoxyModelPreloader<T, U, P>,
 //          ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(preloader)
+//                    display_name preloader
 //                    documentation ```kt\nvalue-parameter preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>\n```
 //          ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#getPreloader().
+//                    display_name preloader
 //                    documentation ```kt\npublic final val preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>\n```
 //          ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#preloader.
+//                    display_name preloader
 //                    documentation ```kt\npublic final val preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>\n```
 //                     ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#
 //                                         ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[T]
@@ -264,10 +306,13 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //                                               ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[P]
         val requestHolderFactory: () -> P
 //          ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#`<init>`().(requestHolderFactory)
+//                               display_name requestHolderFactory
 //                               documentation ```kt\nvalue-parameter requestHolderFactory: () -> P\n```
 //          ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#getRequestHolderFactory().
+//                               display_name requestHolderFactory
 //                               documentation ```kt\npublic final val requestHolderFactory: () -> P\n```
 //          ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#requestHolderFactory.
+//                               display_name requestHolderFactory
 //                               documentation ```kt\npublic final val requestHolderFactory: () -> P\n```
 //                                      ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#PreloadConfig#[P]
     )
@@ -287,25 +332,32 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     fun <T : EpoxyModel<*>, U : ViewMetadata?, P : PreloadRequestHolder> addPreloader(
 //       ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[T]
+//         display_name T
 //         documentation ```kt\n<T>\n```
 //                          ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[U]
+//                            display_name U
 //                            documentation ```kt\n<U : com.airbnb.epoxy.preload.ViewMetadata?>\n```
 //                              ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/ViewMetadata#
 //                                             ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[P]
+//                                               display_name P
 //                                               documentation ```kt\n<P : com.airbnb.epoxy.preload.PreloadRequestHolder>\n```
 //                                                 ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadRequestHolder#
 //                                                                       ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().
+//                                                                                    display_name addPreloader
 //                                                                                    documentation ```kt\npublic final fun <T, U : com.airbnb.epoxy.preload.ViewMetadata?, P : com.airbnb.epoxy.preload.PreloadRequestHolder> addPreloader(maxPreloadDistance: kotlin.Int = ..., errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */, preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>, requestHolderFactory: () -> P)\n```\n\n----\n\n\n Setup a preloader to fetch content for a model's view before it is bound.\n This can be called multiple times if you would like to add separate preloaders\n for different models or content types.\n\n Preloaders are automatically attached and run, and are updated if the adapter changes.\n\n @param maxPreloadDistance How many items to prefetch ahead of the last bound item\n @param errorHandler Called when the preloader encounters an exception. We recommend throwing an\n exception in debug builds, and logging an error in production.\n @param preloader Describes how view content for the EpoxyModel should be preloaded\n @param requestHolderFactory Should create and return a new [PreloadRequestHolder] each time it is invoked\n
         maxPreloadDistance: Int = 3,
 //      ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(maxPreloadDistance)
+//                         display_name maxPreloadDistance
 //                         documentation ```kt\nvalue-parameter maxPreloadDistance: kotlin.Int = ...\n```
 //                          ^^^ reference semanticdb maven . . kotlin/Int#
         errorHandler: PreloadErrorHandler,
 //      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(errorHandler)
+//                   display_name errorHandler
 //                   documentation ```kt\nvalue-parameter errorHandler: com.airbnb.epoxy.preload.PreloadErrorHandler /* = ([Error type: Unresolved type for Context], kotlin.RuntimeException /* = java.lang.RuntimeException */) -> kotlin.Unit */\n```
 //                    ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/PreloadErrorHandler#
         preloader: EpoxyModelPreloader<T, U, P>,
 //      ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(preloader)
+//                display_name preloader
 //                documentation ```kt\nvalue-parameter preloader: com.airbnb.epoxy.preload.EpoxyModelPreloader<T, U, P>\n```
 //                 ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/preload/EpoxyModelPreloader#
 //                                     ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[T]
@@ -313,6 +365,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //                                           ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[P]
         requestHolderFactory: () -> P
 //      ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().(requestHolderFactory)
+//                           display_name requestHolderFactory
 //                           documentation ```kt\nvalue-parameter requestHolderFactory: () -> P\n```
 //                                  ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#addPreloader().[P]
     ) {
@@ -342,6 +395,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     fun clearPreloaders() {
 //      ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#clearPreloaders().
+//                      display_name clearPreloaders
 //                      documentation ```kt\npublic final fun clearPreloaders()\n```\n\n----\n\n\n Clears all preloaders added with [addPreloader]\n
         preloadConfigs.clear()
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getPreloadConfigs().
@@ -353,6 +407,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     private fun updatePreloaders() {
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#updatePreloaders().
+//                               display_name updatePreloaders
 //                               documentation ```kt\nprivate final fun updatePreloaders()\n```
         preloadScrollListeners.forEach { removeOnScrollListener(it) }
 //      ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getPreloadScrollListeners().
@@ -365,6 +420,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //                             ^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#clear().
         val currAdapter = adapter ?: return
 //          ^^^^^^^^^^^ definition local 1
+//                      display_name currAdapter
 //                      documentation ```kt\nval currAdapter: [Error type: Not found recorded type for adapter ?: return]\n```
 
         preloadConfigs.forEach { preloadConfig ->
@@ -372,6 +428,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#preloadConfigs.
 //                     ^^^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/collections/CollectionsKt#forEach(+10).
 //                               ^^^^^^^^^^^^^ definition local 2
+//                                             display_name preloadConfig
 //                                             documentation ```kt\nvalue-parameter preloadConfig: com.airbnb.epoxy.EpoxyRecyclerView.PreloadConfig<*, *, *>\n```
 
             if (currAdapter is EpoxyAdapter) {
@@ -451,8 +508,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     fun setRemoveAdapterWhenDetachedFromWindow(removeAdapterWhenDetachedFromWindow: Boolean) {
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setRemoveAdapterWhenDetachedFromWindow().
+//                                             display_name setRemoveAdapterWhenDetachedFromWindow
 //                                             documentation ```kt\npublic final fun setRemoveAdapterWhenDetachedFromWindow(removeAdapterWhenDetachedFromWindow: kotlin.Boolean)\n```\n\n----\n\n\n If set to true, any adapter set on this recyclerview will be removed when this view is detached\n from the window. This is useful to prevent leaking a reference to this RecyclerView. This is\n useful in cases where the same adapter can be used across multiple views (views which can be\n destroyed and recreated), such as with fragments. In that case the adapter is not necessarily\n cleared from previous RecyclerViews, so the adapter will continue to hold a reference to those\n views and leak them. More details at https://github.com/airbnb/epoxy/wiki/Avoiding-Memory-Leaks#parent-view\n\n The default is true, but you can disable this if you don't want your adapter detached\n automatically.\n\n If the adapter is removed via this setting, it will be re-set on the RecyclerView if the\n RecyclerView is re-attached to the window at a later point.\n
 //                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setRemoveAdapterWhenDetachedFromWindow().(removeAdapterWhenDetachedFromWindow)
+//                                                                                 display_name removeAdapterWhenDetachedFromWindow
 //                                                                                 documentation ```kt\nvalue-parameter removeAdapterWhenDetachedFromWindow: kotlin.Boolean\n```
 //                                                                                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
         this.removeAdapterWhenDetachedFromWindow = removeAdapterWhenDetachedFromWindow
@@ -476,8 +535,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     fun setDelayMsWhenRemovingAdapterOnDetach(delayMsWhenRemovingAdapterOnDetach: Int) {
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setDelayMsWhenRemovingAdapterOnDetach().
+//                                            display_name setDelayMsWhenRemovingAdapterOnDetach
 //                                            documentation ```kt\npublic final fun setDelayMsWhenRemovingAdapterOnDetach(delayMsWhenRemovingAdapterOnDetach: kotlin.Int)\n```\n\n----\n\n\n If [.setRemoveAdapterWhenDetachedFromWindow] is set to true, this is the delay\n in milliseconds between when [.onDetachedFromWindow] is called and when the adapter is\n actually removed.\n\n By default a delay of {@value #DEFAULT_ADAPTER_REMOVAL_DELAY_MS} ms is used so that view\n transitions can complete before the adapter is removed. Otherwise if the adapter is removed\n before transitions finish it can clear the screen and break the transition. A notable case is\n fragment transitions, in which the fragment view is detached from window before the transition\n ends.\n
 //                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setDelayMsWhenRemovingAdapterOnDetach().(delayMsWhenRemovingAdapterOnDetach)
+//                                                                               display_name delayMsWhenRemovingAdapterOnDetach
 //                                                                               documentation ```kt\nvalue-parameter delayMsWhenRemovingAdapterOnDetach: kotlin.Int\n```
 //                                                                                ^^^ reference semanticdb maven . . kotlin/Int#
         this.delayMsWhenRemovingAdapterOnDetach = delayMsWhenRemovingAdapterOnDetach
@@ -494,6 +555,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(attrs)
             val a = context.obtainStyledAttributes(
 //              ^ definition local 3
+//                display_name a
 //                documentation ```kt\nval a: [Error type: Return type for function cannot be resolved]\n```
 //                  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#`<init>`().(context)
                 attrs, R.styleable.EpoxyRecyclerView,
@@ -521,6 +583,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //   ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/CallSuper#`<init>`().
     protected open fun init() {
 //                     ^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#init().
+//                          display_name init
 //                          documentation ```kt\nprotected open fun init()\n```
         clipToPadding = false
         initViewPool()
@@ -536,6 +599,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     private fun initViewPool() {
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#initViewPool().
+//                           display_name initViewPool
 //                           documentation ```kt\nprivate final fun initViewPool()\n```\n\n----\n\n\n Get or create a view pool to use for this RecyclerView. By default the same pool is shared for\n all [EpoxyRecyclerView] usages in the same Activity.\n\n @see .createViewPool\n @see .shouldShareViewPoolAcrossContext\n
         if (!shouldShareViewPoolAcrossContext()) {
 //          ^ reference semanticdb maven . . kotlin/Boolean#not().
@@ -563,6 +627,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     protected open fun createViewPool(): RecyclerView.RecycledViewPool {
 //                     ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#createViewPool().
+//                                    display_name createViewPool
 //                                    documentation ```kt\nprotected open fun createViewPool(): [Error type: Unresolved type for RecyclerView.RecycledViewPool]\n```\n\n----\n\n\n Create a new instance of a view pool to use with this recyclerview. By default a [ ] is used.\n
         return UnboundedViewPool()
 //             ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UnboundedViewPool#`<init>`().
@@ -574,6 +639,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     open fun shouldShareViewPoolAcrossContext(): Boolean {
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#shouldShareViewPoolAcrossContext().
+//                                            display_name shouldShareViewPoolAcrossContext
 //                                            documentation ```kt\npublic open fun shouldShareViewPoolAcrossContext(): kotlin.Boolean\n```\n\n----\n\n\n To maximize view recycling by default we share the same view pool across all instances in the same Activity. This behavior can be disabled by returning\n false here.\n
 //                                               ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
         return true
@@ -581,11 +647,14 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     override fun setLayoutParams(params: ViewGroup.LayoutParams) {
 //               ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setLayoutParams().
+//                               display_name setLayoutParams
 //                               documentation ```kt\npublic open fun setLayoutParams(params: [Error type: Unresolved type for ViewGroup.LayoutParams])\n```
 //                               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setLayoutParams().(params)
+//                                      display_name params
 //                                      documentation ```kt\nvalue-parameter params: [Error type: Unresolved type for ViewGroup.LayoutParams]\n```
         val isFirstParams = layoutParams == null
 //          ^^^^^^^^^^^^^ definition local 4
+//                        display_name isFirstParams
 //                        documentation ```kt\nval isFirstParams: kotlin.Boolean\n```
         super.setLayoutParams(params)
 //      ^^^^^ reference semanticdb maven . . kotlin/Any#
@@ -617,9 +686,11 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     protected open fun createLayoutManager(): RecyclerView.LayoutManager {
 //                     ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#createLayoutManager().
+//                                         display_name createLayoutManager
 //                                         documentation ```kt\nprotected open fun createLayoutManager(): [Error type: Unresolved type for RecyclerView.LayoutManager]\n```\n\n----\n\n\n Create a new [androidx.recyclerview.widget.RecyclerView.LayoutManager]\n instance to use for this RecyclerView.\n\n By default a LinearLayoutManager is used, and a reasonable default is chosen for scrolling\n direction based on layout params.\n\n If the RecyclerView is set to match parent size then the scrolling orientation is set to\n vertical and [.setHasFixedSize] is set to true.\n\n If the height is set to wrap_content then the scrolling orientation is set to horizontal, and\n [.setClipToPadding] is set to false.\n
         val layoutParams = layoutParams
 //          ^^^^^^^^^^^^ definition local 5
+//                       display_name layoutParams
 //                       documentation ```kt\nval layoutParams: [Error type: Not found recorded type for layoutParams]\n```
 
         // 0 represents matching constraints in a LinearLayout or ConstraintLayout
@@ -645,8 +716,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     override fun setLayoutManager(layout: RecyclerView.LayoutManager?) {
 //               ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setLayoutManager().
+//                                display_name setLayoutManager
 //                                documentation ```kt\npublic open fun setLayoutManager(layout: [Error type: Unresolved type for RecyclerView.LayoutManager]?)\n```
 //                                ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setLayoutManager().(layout)
+//                                       display_name layout
 //                                       documentation ```kt\nvalue-parameter layout: [Error type: Unresolved type for RecyclerView.LayoutManager]?\n```
         super.setLayoutManager(layout)
 //      ^^^^^ reference semanticdb maven . . kotlin/Any#
@@ -661,12 +734,15 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     private fun syncSpanCount() {
 //              ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#syncSpanCount().
+//                            display_name syncSpanCount
 //                            documentation ```kt\nprivate final fun syncSpanCount()\n```\n\n----\n\n\n If a grid layout manager is set we sync the span count between the layout and the epoxy\n adapter automatically.\n
         val layout = layoutManager
 //          ^^^^^^ definition local 6
+//                 display_name layout
 //                 documentation ```kt\nval layout: [Error type: Not found recorded type for layoutManager]\n```
         val controller = epoxyController
 //          ^^^^^^^^^^ definition local 7
+//                     display_name controller
 //                     documentation ```kt\nval controller: [Error type: Unresolved type for EpoxyController]?\n```
 //                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
 //                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
@@ -692,6 +768,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     override fun requestLayout() {
 //               ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#requestLayout().
+//                             display_name requestLayout
 //                             documentation ```kt\npublic open fun requestLayout()\n```
         // Grid layout manager calls this when the span count is changed. Its the easiest way to
         // detect a span count change and update our controller accordingly.
@@ -703,9 +780,11 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     fun setItemSpacingRes(@DimenRes itemSpacingRes: Int) {
 //      ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingRes().
+//                        display_name setItemSpacingRes
 //                        documentation ```kt\npublic final fun setItemSpacingRes(itemSpacingRes: kotlin.Int)\n```
 //                         ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/DimenRes#`<init>`().
 //                                  ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingRes().(itemSpacingRes)
+//                                                 display_name itemSpacingRes
 //                                                 documentation ```kt\nvalue-parameter itemSpacingRes: kotlin.Int\n```
 //                                                  ^^^ reference semanticdb maven . . kotlin/Int#
         setItemSpacingPx(resToPx(itemSpacingRes))
@@ -716,12 +795,14 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     fun setItemSpacingDp(@Dimension(unit = Dimension.DP) dp: Int) {
 //      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingDp().
+//                       display_name setItemSpacingDp
 //                       documentation ```kt\npublic final fun setItemSpacingDp(dp: kotlin.Int)\n```
 //                        ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Dimension#`<init>`().
 //                                  ^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Dimension#`<init>`().(unit)
 //                                         ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Dimension#
 //                                                   ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Dimension#DP.
 //                                                       ^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingDp().(dp)
+//                                                          display_name dp
 //                                                          documentation ```kt\nvalue-parameter dp: kotlin.Int\n```
 //                                                           ^^^ reference semanticdb maven . . kotlin/Int#
         setItemSpacingPx(dpToPx(dp))
@@ -745,9 +826,11 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     open fun setItemSpacingPx(@Px spacingPx: Int) {
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingPx().
+//                            display_name setItemSpacingPx
 //                            documentation ```kt\npublic open fun setItemSpacingPx(spacingPx: kotlin.Int)\n```\n\n----\n\n\n Set a pixel value to use as spacing between items. If this is a positive number an item\n decoration will be added to space all items this far apart from each other. If the value is 0\n or negative no extra spacing will be used, and any previous spacing will be removed.\n\n This only works if a [LinearLayoutManager] or [GridLayoutManager] is used with this\n RecyclerView.\n\n This can also be set via the `app:itemSpacing` styleable attribute.\n\n @see .setItemSpacingDp\n @see .setItemSpacingRes\n
 //                             ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#`<init>`().
 //                                ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setItemSpacingPx().(spacingPx)
+//                                          display_name spacingPx
 //                                          documentation ```kt\nvalue-parameter spacingPx: kotlin.Int\n```
 //                                           ^^^ reference semanticdb maven . . kotlin/Int#
         removeItemDecoration(spacingDecorator)
@@ -780,12 +863,15 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     open fun setModels(models: List<EpoxyModel<*>>) {
 //           ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setModels().
+//                     display_name setModels
 //                     documentation ```kt\npublic open fun setModels(models: kotlin.collections.List<[Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>>)\n```\n\n----\n\n\n Set a list of [EpoxyModel]'s to show in this RecyclerView.\n\n Alternatively you can set an [EpoxyController] to handle building models dynamically.\n\n @see withModels\n @see setController\n @see setControllerAndBuildModels\n @see buildModelsWith\n
 //                     ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setModels().(models)
+//                            display_name models
 //                            documentation ```kt\nvalue-parameter models: kotlin.collections.List<[Error type: Unresolved type for EpoxyModel<*>]<out [Error type: Error type projection]>>\n```
 //                             ^^^^ reference semanticdb maven . . kotlin/collections/List#
         val controller = (epoxyController as? SimpleEpoxyController)
 //          ^^^^^^^^^^ definition local 8
+//                     display_name controller
 //                     documentation ```kt\nval controller: ???\n```
 //                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
 //                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
@@ -819,8 +905,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     fun setController(controller: EpoxyController) {
 //      ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setController().
+//                    display_name setController
 //                    documentation ```kt\npublic final fun setController(controller: [Error type: Unresolved type for EpoxyController])\n```\n\n----\n\n\n Set an EpoxyController to populate this RecyclerView. This does not make the controller build\n its models, that must be done separately via [requestModelBuild].\n\n Use this if you don't want [requestModelBuild] called automatically. Common cases\n are if you are using [TypedEpoxyController] (in which case you must call setData on the\n controller), or if you have not otherwise populated your controller's data yet.\n\n Otherwise if you want models built automatically for you use [setControllerAndBuildModels]\n\n The controller can be cleared with [clear]\n\n @see .setControllerAndBuildModels\n @see .buildModelsWith\n @see .setModels\n
 //                    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setController().(controller)
+//                               display_name controller
 //                               documentation ```kt\nvalue-parameter controller: [Error type: Unresolved type for EpoxyController]\n```
         epoxyController = controller
 //      ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
@@ -845,8 +933,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     fun setControllerAndBuildModels(controller: EpoxyController) {
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setControllerAndBuildModels().
+//                                  display_name setControllerAndBuildModels
 //                                  documentation ```kt\npublic final fun setControllerAndBuildModels(controller: [Error type: Unresolved type for EpoxyController])\n```\n\n----\n\n\n Set an EpoxyController to populate this RecyclerView, and tell the controller to build\n models.\n\n The controller can be cleared with [clear]\n\n @see setController\n @see buildModelsWith\n @see setModels\n
 //                                  ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setControllerAndBuildModels().(controller)
+//                                             display_name controller
 //                                             documentation ```kt\nvalue-parameter controller: [Error type: Unresolved type for EpoxyController]\n```
         controller.requestModelBuild()
 //      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setControllerAndBuildModels().(controller)
@@ -867,12 +957,15 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     fun withModels(buildModels: EpoxyController.() -> Unit) {
 //      ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#withModels().
+//                 display_name withModels
 //                 documentation ```kt\npublic final fun withModels(buildModels: [Error type: Unresolved type for EpoxyController].() -> kotlin.Unit)\n```\n\n----\n\n\n The simplest way to add models to the RecyclerView without needing to create an EpoxyController.\n This is intended for Kotlin usage, and has the EpoxyController as the lambda receiver so\n models can be added easily.\n\n Multiple calls to this will reuse the same underlying EpoxyController so views in the\n RecyclerView will be reused.\n\n The Java equivalent is [buildModelsWith].\n
 //                 ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#withModels().(buildModels)
+//                             display_name buildModels
 //                             documentation ```kt\nvalue-parameter buildModels: [Error type: Unresolved type for EpoxyController].() -> kotlin.Unit\n```
 //                                                    ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/Unit#
         val controller = (epoxyController as? WithModelsController)
 //          ^^^^^^^^^^ definition local 9
+//                     display_name controller
 //                     documentation ```kt\nval controller: com.airbnb.epoxy.EpoxyRecyclerView.WithModelsController\n```
 //                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
 //                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
@@ -896,20 +989,26 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     private class WithModelsController : EpoxyController() {
 //                ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#
+//                                     display_name WithModelsController
 //                                     documentation ```kt\nprivate final class WithModelsController\n```
 //                ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#`<init>`().
+//                                     display_name WithModelsController
 //                                     documentation ```kt\npublic constructor WithModelsController()\n```
         var callback: EpoxyController.() -> Unit = {}
 //          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#callback.
+//                   display_name callback
 //                   documentation ```kt\npublic final var callback: [Error type: Unresolved type for EpoxyController].() -> kotlin.Unit\n```
 //          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#getCallback().
+//                   display_name callback
 //                   documentation ```kt\npublic final var callback: [Error type: Unresolved type for EpoxyController].() -> kotlin.Unit\n```
 //          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#setCallback().
+//                   display_name callback
 //                   documentation ```kt\npublic final var callback: [Error type: Unresolved type for EpoxyController].() -> kotlin.Unit\n```
 //                                          ^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/Unit#
 
         override fun buildModels() {
 //                   ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#buildModels().
+//                               display_name buildModels
 //                               documentation ```kt\npublic open fun buildModels()\n```
             callback(this)
 //          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#WithModelsController#callback.
@@ -937,12 +1036,15 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     fun buildModelsWith(callback: ModelBuilderCallback) {
 //      ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#buildModelsWith().
+//                      display_name buildModelsWith
 //                      documentation ```kt\npublic final fun buildModelsWith(callback: com.airbnb.epoxy.EpoxyRecyclerView.ModelBuilderCallback)\n```\n\n----\n\n\n Allows you to build models via a callback instead of needing to create a new EpoxyController\n class. This is useful if your models are simple and you would like to simply declare them in\n your activity/fragment.\n\n Multiple calls to this will reuse the same underlying EpoxyController so views in the\n RecyclerView will be reused.\n\n Another useful pattern is having your Activity or Fragment implement [ModelBuilderCallback].\n\n If you're using Kotlin, prefer [withModels].\n\n @see setController\n @see setControllerAndBuildModels\n @see setModels\n
 //                      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#buildModelsWith().(callback)
+//                               display_name callback
 //                               documentation ```kt\nvalue-parameter callback: com.airbnb.epoxy.EpoxyRecyclerView.ModelBuilderCallback\n```
 //                                ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#
         val controller = (epoxyController as? ModelBuilderCallbackController)
 //          ^^^^^^^^^^ definition local 11
+//                     display_name controller
 //                     documentation ```kt\nval controller: com.airbnb.epoxy.EpoxyRecyclerView.ModelBuilderCallbackController\n```
 //                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
 //                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getEpoxyController().
@@ -966,29 +1068,37 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     private class ModelBuilderCallbackController : EpoxyController() {
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#
+//                                               display_name ModelBuilderCallbackController
 //                                               documentation ```kt\nprivate final class ModelBuilderCallbackController\n```
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#`<init>`().
+//                                               display_name ModelBuilderCallbackController
 //                                               documentation ```kt\npublic constructor ModelBuilderCallbackController()\n```
         var callback: ModelBuilderCallback = object : ModelBuilderCallback {
 //          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#callback.
+//                   display_name callback
 //                   documentation ```kt\npublic final var callback: com.airbnb.epoxy.EpoxyRecyclerView.ModelBuilderCallback\n```
 //          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#getCallback().
+//                   display_name callback
 //                   documentation ```kt\npublic final var callback: com.airbnb.epoxy.EpoxyRecyclerView.ModelBuilderCallback\n```
 //          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#setCallback().
+//                   display_name callback
 //                   documentation ```kt\npublic final var callback: com.airbnb.epoxy.EpoxyRecyclerView.ModelBuilderCallback\n```
 //                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#
 //                                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#
             override fun buildModels(controller: EpoxyController) {
 //                       ^^^^^^^^^^^ definition local 13
+//                                   display_name buildModels
 //                                   documentation ```kt\npublic open fun buildModels(controller: [Error type: Unresolved type for EpoxyController])\n```
 //                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#buildModels().
 //                                   ^^^^^^^^^^ definition local 14
+//                                              display_name controller
 //                                              documentation ```kt\nvalue-parameter controller: [Error type: Unresolved type for EpoxyController]\n```
             }
         }
 
         override fun buildModels() {
 //                   ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#buildModels().
+//                               display_name buildModels
 //                               documentation ```kt\npublic open fun buildModels()\n```
             callback.buildModels(this)
 //          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallbackController#callback.
@@ -1004,6 +1114,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     interface ModelBuilderCallback {
 //            ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#
+//                                 display_name ModelBuilderCallback
 //                                 documentation ```kt\npublic interface ModelBuilderCallback\n```\n\n----\n\n\n A callback for creating models without needing a custom EpoxyController class. Used with [buildModelsWith]\n
         /**
          * Analagous to [EpoxyController.buildModels]. You should create new model instances and
@@ -1012,8 +1123,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
          */
         fun buildModels(controller: EpoxyController)
 //          ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#buildModels().
+//                      display_name buildModels
 //                      documentation ```kt\npublic abstract fun buildModels(controller: [Error type: Unresolved type for EpoxyController])\n```\n\n----\n\n\n Analagous to [EpoxyController.buildModels]. You should create new model instances and\n add them to the given controller. [AutoModel] cannot be used with models added this\n way.\n
 //                      ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#ModelBuilderCallback#buildModels().(controller)
+//                                 display_name controller
 //                                 documentation ```kt\nvalue-parameter controller: [Error type: Unresolved type for EpoxyController]\n```
     }
 
@@ -1027,6 +1140,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     fun requestModelBuild() {
 //      ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#requestModelBuild().
+//                        display_name requestModelBuild
 //                        documentation ```kt\npublic final fun requestModelBuild()\n```\n\n----\n\n\n Request that the currently set EpoxyController has its models rebuilt. You can use this to\n avoid saving your controller as a field.\n\n You cannot use this if your controller is a [TypedEpoxyController] or if you set\n models via [setModels]. In that case you must set data directly on the\n controller or set models again.\n
         if (epoxyController == null) {
 //          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#epoxyController.
@@ -1059,6 +1173,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
      */
     open fun clear() {
 //           ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#clear().
+//                 display_name clear
 //                 documentation ```kt\npublic open fun clear()\n```\n\n----\n\n\n Clear the currently set EpoxyController or Adapter as well as any models that are displayed.\n\n Any pending requests to the EpoxyController to build models are canceled.\n\n Any existing child views are recycled to the view pool.\n
         // The controller is cleared so the next time models are set we can create a fresh one.
         epoxyController?.cancelPendingModelBuild()
@@ -1081,12 +1196,14 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //   ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#`<init>`().
     protected fun dpToPx(@Dimension(unit = Dimension.DP) dp: Int): Int {
 //                ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#dpToPx().
+//                       display_name dpToPx
 //                       documentation ```kt\nprotected final fun dpToPx(dp: kotlin.Int): kotlin.Int\n```
 //                        ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Dimension#`<init>`().
 //                                  ^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Dimension#`<init>`().(unit)
 //                                         ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Dimension#
 //                                                   ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Dimension#DP.
 //                                                       ^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#dpToPx().(dp)
+//                                                          display_name dp
 //                                                          documentation ```kt\nvalue-parameter dp: kotlin.Int\n```
 //                                                           ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                                 ^^^ reference semanticdb maven . . kotlin/Int#
@@ -1103,9 +1220,11 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 //   ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#`<init>`().
     protected fun resToPx(@DimenRes itemSpacingRes: Int): Int {
 //                ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#resToPx().
+//                        display_name resToPx
 //                        documentation ```kt\nprotected final fun resToPx(itemSpacingRes: kotlin.Int): kotlin.Int\n```
 //                         ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/DimenRes#`<init>`().
 //                                  ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#resToPx().(itemSpacingRes)
+//                                                 display_name itemSpacingRes
 //                                                 documentation ```kt\nvalue-parameter itemSpacingRes: kotlin.Int\n```
 //                                                  ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                        ^^^ reference semanticdb maven . . kotlin/Int#
@@ -1115,8 +1234,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     override fun setAdapter(adapter: RecyclerView.Adapter<*>?) {
 //               ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setAdapter().
+//                          display_name setAdapter
 //                          documentation ```kt\npublic open fun setAdapter(adapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?)\n```
 //                          ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#setAdapter().(adapter)
+//                                  display_name adapter
 //                                  documentation ```kt\nvalue-parameter adapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```
         super.setAdapter(adapter)
 //      ^^^^^ reference semanticdb maven . . kotlin/Any#
@@ -1130,12 +1251,15 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     override fun swapAdapter(
 //               ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#swapAdapter().
+//                           display_name swapAdapter
 //                           documentation ```kt\npublic open fun swapAdapter(adapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?, removeAndRecycleExistingViews: kotlin.Boolean)\n```
         adapter: RecyclerView.Adapter<*>?,
 //      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#swapAdapter().(adapter)
+//              display_name adapter
 //              documentation ```kt\nvalue-parameter adapter: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```
         removeAndRecycleExistingViews: Boolean
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#swapAdapter().(removeAndRecycleExistingViews)
+//                                    display_name removeAndRecycleExistingViews
 //                                    documentation ```kt\nvalue-parameter removeAndRecycleExistingViews: kotlin.Boolean\n```
 //                                     ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
     ) {
@@ -1152,6 +1276,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     public override fun onAttachedToWindow() {
 //                      ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#onAttachedToWindow().
+//                                         display_name onAttachedToWindow
 //                                         documentation ```kt\npublic open fun onAttachedToWindow()\n```
         super.onAttachedToWindow()
 //      ^^^^^ reference semanticdb maven . . kotlin/Any#
@@ -1173,6 +1298,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     public override fun onDetachedFromWindow() {
 //                      ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#onDetachedFromWindow().
+//                                           display_name onDetachedFromWindow
 //                                           documentation ```kt\npublic open fun onDetachedFromWindow()\n```
         super.onDetachedFromWindow()
 //      ^^^^^ reference semanticdb maven . . kotlin/Any#
@@ -1215,9 +1341,11 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     private fun removeAdapter() {
 //              ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#removeAdapter().
+//                            display_name removeAdapter
 //                            documentation ```kt\nprivate final fun removeAdapter()\n```
         val currentAdapter = adapter
 //          ^^^^^^^^^^^^^^ definition local 16
+//                         display_name currentAdapter
 //                         documentation ```kt\nval currentAdapter: [Error type: Not found recorded type for adapter]\n```
         if (currentAdapter != null) {
 //          ^^^^^^^^^^^^^^ reference local 16
@@ -1242,6 +1370,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     private fun clearRemovedAdapterAndCancelRunnable() {
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#clearRemovedAdapterAndCancelRunnable().
+//                                                   display_name clearRemovedAdapterAndCancelRunnable
 //                                                   documentation ```kt\nprivate final fun clearRemovedAdapterAndCancelRunnable()\n```
         removedAdapter = null
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#getRemovedAdapter().
@@ -1263,6 +1392,7 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     private fun clearPoolIfActivityIsDestroyed() {
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#clearPoolIfActivityIsDestroyed().
+//                                             display_name clearPoolIfActivityIsDestroyed
 //                                             documentation ```kt\nprivate final fun clearPoolIfActivityIsDestroyed()\n```
         // Views in the pool hold context references which can keep the activity from being GC'd,
         // plus they can hold significant memory resources. We should clear it asap after the pool
@@ -1274,11 +1404,14 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
 
     companion object {
 //            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#Companion# 1:0
+//                     display_name Companion
 //                     documentation ```kt\npublic companion object\n```
         private const val DEFAULT_ADAPTER_REMOVAL_DELAY_MS = 2000
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#Companion#DEFAULT_ADAPTER_REMOVAL_DELAY_MS.
+//                                                         display_name DEFAULT_ADAPTER_REMOVAL_DELAY_MS
 //                                                         documentation ```kt\nprivate const final val DEFAULT_ADAPTER_REMOVAL_DELAY_MS: kotlin.Int\n```
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#Companion#getDEFAULT_ADAPTER_REMOVAL_DELAY_MS().
+//                                                         display_name DEFAULT_ADAPTER_REMOVAL_DELAY_MS
 //                                                         documentation ```kt\nprivate const final val DEFAULT_ADAPTER_REMOVAL_DELAY_MS: kotlin.Int\n```
 
         /**
@@ -1287,8 +1420,10 @@ open class EpoxyRecyclerView @JvmOverloads constructor(
          */
         private val ACTIVITY_RECYCLER_POOL = ActivityRecyclerPool()
 //                  ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#Companion#ACTIVITY_RECYCLER_POOL.
+//                                         display_name ACTIVITY_RECYCLER_POOL
 //                                         documentation ```kt\nprivate final val ACTIVITY_RECYCLER_POOL: com.airbnb.epoxy.ActivityRecyclerPool\n```\n\n----\n\n\n Store one unique pool per activity. They are cleared out when activities are destroyed, so this\n only needs to hold pools for active activities.\n
 //                  ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyRecyclerView#Companion#getACTIVITY_RECYCLER_POOL().
+//                                         display_name ACTIVITY_RECYCLER_POOL
 //                                         documentation ```kt\nprivate final val ACTIVITY_RECYCLER_POOL: com.airbnb.epoxy.ActivityRecyclerPool\n```\n\n----\n\n\n Store one unique pool per activity. They are cleared out when activities are destroyed, so this\n only needs to hold pools for active activities.\n
 //                                           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ActivityRecyclerPool#`<init>`().
     }

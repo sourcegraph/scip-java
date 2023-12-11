@@ -24,10 +24,12 @@ import androidx.collection.LongSparseArray;
 //^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
 public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#
+//                            display_name BoundViewHolders
 //                            documentation ```java\n@SuppressWarnings("WeakerAccess")\npublic class BoundViewHolders\n```
 //                            documentation Helper class for keeping track of {@link EpoxyViewHolder}s that are currently bound. 
 //                            relationship is_implementation semanticdb maven jdk 11 java/lang/Iterable#
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#`<init>`().
+//                            display_name <init>
 //                            documentation ```java\npublic BoundViewHolders()\n```
 //                                       ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Iterable#
 //                                                ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
@@ -35,6 +37,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#
 //                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                               ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#holders.
+//                                                       display_name holders
 //                                                       documentation ```java\nprivate final LongSparseArray<EpoxyViewHolder> holders\n```
 //                                                             ^^^^^^^^^^^^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#`<init>`().
 
@@ -43,9 +46,11 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
   public EpoxyViewHolder get(EpoxyViewHolder holder) {
 //       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                       ^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#get().
+//                           display_name get
 //                           documentation ```java\n@Nullable\npublic EpoxyViewHolder get(EpoxyViewHolder holder)\n```
 //                           ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                           ^^^^^^ definition local 0
+//                                                  display_name holder
 //                                                  documentation ```java\nEpoxyViewHolder holder\n```
     return holders.get(holder.getItemId());
 //         ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#holders.
@@ -56,9 +61,11 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 
   public void put(EpoxyViewHolder holder) {
 //            ^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#put().
+//                display_name put
 //                documentation ```java\npublic void put(EpoxyViewHolder holder)\n```
 //                ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                ^^^^^^ definition local 1
+//                                       display_name holder
 //                                       documentation ```java\nEpoxyViewHolder holder\n```
     holders.put(holder.getItemId(), holder);
 //  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#holders.
@@ -70,9 +77,11 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 
   public void remove(EpoxyViewHolder holder) {
 //            ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#remove().
+//                   display_name remove
 //                   documentation ```java\npublic void remove(EpoxyViewHolder holder)\n```
 //                   ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                   ^^^^^^ definition local 2
+//                                          display_name holder
 //                                          documentation ```java\nEpoxyViewHolder holder\n```
     holders.remove(holder.getItemId());
 //  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#holders.
@@ -83,6 +92,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 
   public int size() {
 //           ^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#size().
+//                display_name size
 //                documentation ```java\npublic int size()\n```
     return holders.size();
 //         ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#holders.
@@ -95,6 +105,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //       ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
 //                ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                 ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#iterator().
+//                                          display_name iterator
 //                                          documentation ```java\n@Override\npublic Iterator<EpoxyViewHolder> iterator()\n```
 //                                          relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Iterable#iterator().
     return new HolderIterator();
@@ -106,9 +117,11 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
   public EpoxyViewHolder getHolderForModel(EpoxyModel<?> model) {
 //       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                       ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#getHolderForModel().
+//                                         display_name getHolderForModel
 //                                         documentation ```java\n@Nullable\npublic EpoxyViewHolder getHolderForModel(EpoxyModel<?> model)\n```
 //                                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                       ^^^^^ definition local 3
+//                                                             display_name model
 //                                                             documentation ```java\nEpoxyModel<?> model\n```
     return holders.get(model.id());
 //         ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#holders.
@@ -119,20 +132,24 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 
   private class HolderIterator implements Iterator<EpoxyViewHolder> {
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#HolderIterator#
+//                             display_name HolderIterator
 //                             documentation ```java\nprivate class HolderIterator\n```
 //                             relationship is_implementation semanticdb maven jdk 11 java/util/Iterator#
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#HolderIterator#`<init>`().
+//                             display_name <init>
 //                             documentation ```java\nprivate HolderIterator()\n```
 //                                        ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
 //                                                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
     private int position = 0;
 //              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#HolderIterator#position.
+//                       display_name position
 //                       documentation ```java\nprivate int position\n```
 
     @Override
 //   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public boolean hasNext() {
 //                 ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#HolderIterator#hasNext().
+//                         display_name hasNext
 //                         documentation ```java\n@Override\npublic boolean hasNext()\n```
 //                         relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Iterator#hasNext().
       return position < holders.size();
@@ -146,6 +163,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
     public EpoxyViewHolder next() {
 //         ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                         ^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#HolderIterator#next().
+//                              display_name next
 //                              documentation ```java\n@Override\npublic EpoxyViewHolder next()\n```
 //                              relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Iterator#next().
       if (!hasNext()) {
@@ -163,6 +181,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public void remove() {
 //              ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#HolderIterator#remove().
+//                     display_name remove
 //                     documentation ```java\n@Override\npublic void remove()\n```
 //                     relationship is_reference is_implementation semanticdb maven jdk 11 java/util/Iterator#remove().
       throw new UnsupportedOperationException();

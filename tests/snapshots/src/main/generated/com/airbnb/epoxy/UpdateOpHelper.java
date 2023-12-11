@@ -45,14 +45,17 @@ import static com.airbnb.epoxy.UpdateOp.UPDATE;
 /** Helper class to collect changes in a diff, batching when possible. */
 class UpdateOpHelper {
 //    ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
+//                   display_name UpdateOpHelper
 //                   documentation ```java\nclass UpdateOpHelper\n```
 //                   documentation Helper class to collect changes in a diff, batching when possible. 
 //    ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#`<init>`().
+//                   display_name <init>
 //                   documentation ```java\nUpdateOpHelper()\n```
   final List<UpdateOp> opList = new ArrayList<>();
 //      ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //           ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
 //                     ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#opList.
+//                            display_name opList
 //                            documentation ```java\nfinal List<UpdateOp> opList\n```
 //                                  ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`(+1).
   // We have to be careful to update all item positions in the list when we
@@ -63,27 +66,34 @@ class UpdateOpHelper {
 //      ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //           ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
 //                     ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#moves.
+//                           display_name moves
 //                           documentation ```java\nfinal List<UpdateOp> moves\n```
 //                                 ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`(+1).
   private UpdateOp lastOp;
 //        ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
 //                 ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#lastOp.
+//                        display_name lastOp
 //                        documentation ```java\nprivate UpdateOp lastOp\n```
   private int numInsertions;
 //            ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#numInsertions.
+//                          display_name numInsertions
 //                          documentation ```java\nprivate int numInsertions\n```
   private int numInsertionBatches;
 //            ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#numInsertionBatches.
+//                                display_name numInsertionBatches
 //                                documentation ```java\nprivate int numInsertionBatches\n```
   private int numRemovals;
 //            ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#numRemovals.
+//                        display_name numRemovals
 //                        documentation ```java\nprivate int numRemovals\n```
   private int numRemovalBatches;
 //            ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#numRemovalBatches.
+//                              display_name numRemovalBatches
 //                              documentation ```java\nprivate int numRemovalBatches\n```
 
   void reset() {
 //     ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#reset().
+//           display_name reset
 //           documentation ```java\nvoid reset()\n```
     opList.clear();
 //  ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#opList.
@@ -105,8 +115,10 @@ class UpdateOpHelper {
 
   void add(int indexToInsert) {
 //     ^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#add().
+//         display_name add
 //         documentation ```java\nvoid add(int indexToInsert)\n```
 //             ^^^^^^^^^^^^^ definition local 0
+//                           display_name indexToInsert
 //                           documentation ```java\nint indexToInsert\n```
     add(indexToInsert, 1);
 //  ^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#add(+1).
@@ -115,10 +127,13 @@ class UpdateOpHelper {
 
   void add(int startPosition, int itemCount) {
 //     ^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#add(+1).
+//         display_name add
 //         documentation ```java\nvoid add(int startPosition, int itemCount)\n```
 //             ^^^^^^^^^^^^^ definition local 1
+//                           display_name startPosition
 //                           documentation ```java\nint startPosition\n```
 //                                ^^^^^^^^^ definition local 2
+//                                          display_name itemCount
 //                                          documentation ```java\nint itemCount\n```
     numInsertions += itemCount;
 //  ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#numInsertions.
@@ -128,6 +143,7 @@ class UpdateOpHelper {
     // range of the previous batch batch
     boolean batchWithLast = isLastOp(ADD)
 //          ^^^^^^^^^^^^^ definition local 3
+//                        display_name batchWithLast
 //                        documentation ```java\nboolean batchWithLast\n```
 //                          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#isLastOp().
 //                                   ^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#ADD.
@@ -157,8 +173,10 @@ class UpdateOpHelper {
 
   void update(int indexToChange) {
 //     ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#update().
+//            display_name update
 //            documentation ```java\nvoid update(int indexToChange)\n```
 //                ^^^^^^^^^^^^^ definition local 4
+//                              display_name indexToChange
 //                              documentation ```java\nint indexToChange\n```
     update(indexToChange, null);
 //  ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#update(+1).
@@ -167,11 +185,14 @@ class UpdateOpHelper {
 
   void update(final int indexToChange, EpoxyModel<?> payload) {
 //     ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#update(+1).
+//            display_name update
 //            documentation ```java\nvoid update(int indexToChange, EpoxyModel<?> payload)\n```
 //                      ^^^^^^^^^^^^^ definition local 5
+//                                    display_name indexToChange
 //                                    documentation ```java\nfinal int indexToChange\n```
 //                                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                   ^^^^^^^ definition local 6
+//                                                           display_name payload
 //                                                           documentation ```java\nEpoxyModel<?> payload\n```
     if (isLastOp(UPDATE)) {
 //      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#isLastOp().
@@ -224,8 +245,10 @@ class UpdateOpHelper {
 
   void remove(int indexToRemove) {
 //     ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#remove().
+//            display_name remove
 //            documentation ```java\nvoid remove(int indexToRemove)\n```
 //                ^^^^^^^^^^^^^ definition local 7
+//                              display_name indexToRemove
 //                              documentation ```java\nint indexToRemove\n```
     remove(indexToRemove, 1);
 //  ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#remove(+1).
@@ -234,10 +257,13 @@ class UpdateOpHelper {
 
   void remove(int startPosition, int itemCount) {
 //     ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#remove(+1).
+//            display_name remove
 //            documentation ```java\nvoid remove(int startPosition, int itemCount)\n```
 //                ^^^^^^^^^^^^^ definition local 8
+//                              display_name startPosition
 //                              documentation ```java\nint startPosition\n```
 //                                   ^^^^^^^^^ definition local 9
+//                                             display_name itemCount
 //                                             documentation ```java\nint itemCount\n```
     numRemovals += itemCount;
 //  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#numRemovals.
@@ -245,6 +271,7 @@ class UpdateOpHelper {
 
     boolean batchWithLast = false;
 //          ^^^^^^^^^^^^^ definition local 10
+//                        display_name batchWithLast
 //                        documentation ```java\nboolean batchWithLast\n```
     if (isLastOp(REMOVE)) {
 //      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#isLastOp().
@@ -293,10 +320,12 @@ class UpdateOpHelper {
 
   private boolean isLastOp(@UpdateOp.Type int updateType) {
 //                ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#isLastOp().
+//                         display_name isLastOp
 //                         documentation ```java\nprivate boolean isLastOp(int updateType)\n```
 //                          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
 //                                   ^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#Type#
 //                                            ^^^^^^^^^^ definition local 11
+//                                                       display_name updateType
 //                                                       documentation ```java\n@Type\nint updateType\n```
     return lastOp != null && lastOp.type == updateType;
 //         ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#lastOp.
@@ -307,13 +336,17 @@ class UpdateOpHelper {
 
   private void addNewOperation(@Type int type, int position, int itemCount) {
 //             ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#addNewOperation().
+//                             display_name addNewOperation
 //                             documentation ```java\nprivate void addNewOperation(int type, int position, int itemCount)\n```
 //                              ^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#Type#
 //                                       ^^^^ definition local 12
+//                                            display_name type
 //                                            documentation ```java\n@Type\nint type\n```
 //                                                 ^^^^^^^^ definition local 13
+//                                                          display_name position
 //                                                          documentation ```java\nint position\n```
 //                                                               ^^^^^^^^^ definition local 14
+//                                                                         display_name itemCount
 //                                                                         documentation ```java\nint itemCount\n```
     addNewOperation(type, position, itemCount, null);
 //  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#addNewOperation(+1).
@@ -324,18 +357,23 @@ class UpdateOpHelper {
 
   private void addNewOperation(@Type int type, int position, int itemCount,
 //             ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#addNewOperation(+1).
+//                             display_name addNewOperation
 //                             documentation ```java\nprivate void addNewOperation(int type, int position, int itemCount, EpoxyModel<?> payload)\n```
 //                              ^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#Type#
 //                                       ^^^^ definition local 15
+//                                            display_name type
 //                                            documentation ```java\n@Type\nint type\n```
 //                                                 ^^^^^^^^ definition local 16
+//                                                          display_name position
 //                                                          documentation ```java\nint position\n```
 //                                                               ^^^^^^^^^ definition local 17
+//                                                                         display_name itemCount
 //                                                                         documentation ```java\nint itemCount\n```
       @Nullable EpoxyModel<?> payload) {
 //     ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^ definition local 18
+//                                    display_name payload
 //                                    documentation ```java\n@Nullable\nEpoxyModel<?> payload\n```
     lastOp = UpdateOp.instance(type, position, itemCount, payload);
 //  ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#lastOp.
@@ -353,11 +391,14 @@ class UpdateOpHelper {
 
   private void addItemsToLastOperation(int numItemsToAdd, EpoxyModel<?> payload) {
 //             ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#addItemsToLastOperation().
+//                                     display_name addItemsToLastOperation
 //                                     documentation ```java\nprivate void addItemsToLastOperation(int numItemsToAdd, EpoxyModel<?> payload)\n```
 //                                         ^^^^^^^^^^^^^ definition local 19
+//                                                       display_name numItemsToAdd
 //                                                       documentation ```java\nint numItemsToAdd\n```
 //                                                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                      ^^^^^^^ definition local 20
+//                                                                              display_name payload
 //                                                                              documentation ```java\nEpoxyModel<?> payload\n```
     lastOp.itemCount += numItemsToAdd;
 //  ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#lastOp.
@@ -371,10 +412,13 @@ class UpdateOpHelper {
 
   void move(int from, int to) {
 //     ^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#move().
+//          display_name move
 //          documentation ```java\nvoid move(int from, int to)\n```
 //              ^^^^ definition local 21
+//                   display_name from
 //                   documentation ```java\nint from\n```
 //                        ^^ definition local 22
+//                           display_name to
 //                           documentation ```java\nint to\n```
     // We can't batch moves
     lastOp = null;
@@ -382,6 +426,7 @@ class UpdateOpHelper {
     UpdateOp op = UpdateOp.instance(MOVE, from, to, null);
 //  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
 //           ^^ definition local 23
+//              display_name op
 //              documentation ```java\nUpdateOp op\n```
 //                ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
 //                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#instance().
@@ -400,6 +445,7 @@ class UpdateOpHelper {
 
   int getNumRemovals() {
 //    ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#getNumRemovals().
+//                   display_name getNumRemovals
 //                   documentation ```java\nint getNumRemovals()\n```
     return numRemovals;
 //         ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#numRemovals.
@@ -407,6 +453,7 @@ class UpdateOpHelper {
 
   boolean hasRemovals() {
 //        ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#hasRemovals().
+//                    display_name hasRemovals
 //                    documentation ```java\nboolean hasRemovals()\n```
     return numRemovals > 0;
 //         ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#numRemovals.
@@ -414,6 +461,7 @@ class UpdateOpHelper {
 
   int getNumInsertions() {
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#getNumInsertions().
+//                     display_name getNumInsertions
 //                     documentation ```java\nint getNumInsertions()\n```
     return numInsertions;
 //         ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#numInsertions.
@@ -421,6 +469,7 @@ class UpdateOpHelper {
 
   boolean hasInsertions() {
 //        ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#hasInsertions().
+//                      display_name hasInsertions
 //                      documentation ```java\nboolean hasInsertions()\n```
     return numInsertions > 0;
 //         ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#numInsertions.
@@ -428,6 +477,7 @@ class UpdateOpHelper {
 
   int getNumMoves() {
 //    ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#getNumMoves().
+//                display_name getNumMoves
 //                documentation ```java\nint getNumMoves()\n```
     return moves.size();
 //         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#moves.
@@ -436,6 +486,7 @@ class UpdateOpHelper {
 
   int getNumInsertionBatches() {
 //    ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#getNumInsertionBatches().
+//                           display_name getNumInsertionBatches
 //                           documentation ```java\nint getNumInsertionBatches()\n```
     return numInsertionBatches;
 //         ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#numInsertionBatches.
@@ -443,6 +494,7 @@ class UpdateOpHelper {
 
   int getNumRemovalBatches() {
 //    ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#getNumRemovalBatches().
+//                         display_name getNumRemovalBatches
 //                         documentation ```java\nint getNumRemovalBatches()\n```
     return numRemovalBatches;
 //         ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#numRemovalBatches.

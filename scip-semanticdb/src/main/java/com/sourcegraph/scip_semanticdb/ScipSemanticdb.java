@@ -132,6 +132,8 @@ public class ScipSemanticdb {
         Scip.SymbolInformation.Builder scipInfo =
             Scip.SymbolInformation.newBuilder().setSymbol(typedSymbol(info.getSymbol(), pkg));
 
+        scipInfo.setDisplayName(info.getDisplayName());
+
         // TODO: this can be removed once https://github.com/sourcegraph/sourcegraph/issues/50927 is
         // fixed.
         ArrayList<String> inverseReferences = references.map.get(info.getSymbol());

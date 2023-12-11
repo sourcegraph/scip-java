@@ -6,10 +6,12 @@ package com.airbnb.epoxy;
  */
 class NoOpControllerHelper extends ControllerHelper<EpoxyController> {
 //    ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NoOpControllerHelper#
+//                         display_name NoOpControllerHelper
 //                         documentation ```java\nclass NoOpControllerHelper\n```
 //                         documentation  A {@link ControllerHelper} implementation for adapters with no {@link\n com.airbnb.epoxy.AutoModel} usage.\n
 //                         relationship is_implementation semanticdb maven . . com/airbnb/epoxy/ControllerHelper#
 //    ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NoOpControllerHelper#`<init>`().
+//                         display_name <init>
 //                         documentation ```java\nNoOpControllerHelper()\n```
 //                                 ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ControllerHelper#
 //                                                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
@@ -18,6 +20,7 @@ class NoOpControllerHelper extends ControllerHelper<EpoxyController> {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void resetAutoModels() {
 //            ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NoOpControllerHelper#resetAutoModels().
+//                            display_name resetAutoModels
 //                            documentation ```java\n@Override\npublic void resetAutoModels()\n```
 //                            relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/ControllerHelper#resetAutoModels().
     // No - Op

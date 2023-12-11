@@ -3,23 +3,29 @@ package minimized
 
 class Issue412 {
 //    ^^^^^^^^ definition semanticdb maven . . minimized/Issue412#
+//             display_name Issue412
 //             documentation ```scala\nclass Issue412\n```
 //             ^ definition semanticdb maven . . minimized/Issue412#`<init>`().
+//               display_name <init>
 //               documentation ```scala\ndef this()\n```
   val a: Int = 5
 //    ^ definition semanticdb maven . . minimized/Issue412#a.
+//      display_name a
 //      documentation ```scala\nval a: Int\n```
 //       ^^^ reference semanticdb maven . . scala/Int#
   val b: Long = a
 //    ^ definition semanticdb maven . . minimized/Issue412#b.
+//      display_name b
 //      documentation ```scala\nval b: Long\n```
 //       ^^^^ reference semanticdb maven . . scala/Long#
 //              ^ reference semanticdb maven . . minimized/Issue412#a.
 
   def a(b: Long): Unit = {
 //    ^ definition semanticdb maven . . minimized/Issue412#a().
+//      display_name a
 //      documentation ```scala\ndef a(b: Long): Unit\n```
 //      ^ definition semanticdb maven . . minimized/Issue412#a().(b)
+//        display_name b
 //        documentation ```scala\nb: Long \n```
 //         ^^^^ reference semanticdb maven . . scala/Long#
 //                ^^^^ reference semanticdb maven . . scala/Unit#
