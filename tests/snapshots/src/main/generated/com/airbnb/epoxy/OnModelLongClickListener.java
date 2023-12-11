@@ -8,14 +8,14 @@ import android.view.View;
 public interface OnModelLongClickListener<T extends EpoxyModel<?>, V> {
 //               ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelLongClickListener#
 //                                        display_name OnModelLongClickListener
-//                                        documentation ```java\npublic interface OnModelLongClickListener<T extends EpoxyModel<?>, V>\n```
+//                                        signature_documentation java public interface OnModelLongClickListener<T extends EpoxyModel<?>, V>
 //                                        ^ definition semanticdb maven . . com/airbnb/epoxy/OnModelLongClickListener#[T]
 //                                          display_name T
-//                                          documentation ```java\nT extends EpoxyModel<?>\n```
+//                                          signature_documentation java T extends EpoxyModel<?>
 //                                                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                 ^ definition semanticdb maven . . com/airbnb/epoxy/OnModelLongClickListener#[V]
 //                                                                   display_name V
-//                                                                   documentation ```java\nV\n```
+//                                                                   signature_documentation java V
   /**
    * Called when the view bound to the model is clicked.
    *
@@ -28,21 +28,21 @@ public interface OnModelLongClickListener<T extends EpoxyModel<?>, V> {
   boolean onLongClick(T model, V parentView, View clickedView, int position);
 //        ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelLongClickListener#onLongClick().
 //                    display_name onLongClick
-//                    documentation ```java\npublic abstract boolean onLongClick(T model, V parentView, unresolved_type clickedView, int position)\n```
+//                    signature_documentation java public abstract boolean onLongClick(T model, V parentView, unresolved_type clickedView, int position)
 //                    documentation  Called when the view bound to the model is clicked.\n\n @param model       The model that the view is bound to.\n @param parentView  The view bound to the model which received the click.\n @param clickedView The view that received the click. This is either a child of the parentView\n                    or the parentView itself\n @param position    The position of the model in the adapter.\n
 //                    ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelLongClickListener#[T]
 //                      ^^^^^ definition local 0
 //                            display_name model
-//                            documentation ```java\nT model\n```
+//                            signature_documentation java T model
 //                             ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelLongClickListener#[V]
 //                               ^^^^^^^^^^ definition local 1
 //                                          display_name parentView
-//                                          documentation ```java\nV parentView\n```
+//                                          signature_documentation java V parentView
 //                                           ^^^^ reference semanticdb maven . . View#
 //                                                ^^^^^^^^^^^ definition local 2
 //                                                            display_name clickedView
-//                                                            documentation ```java\nunresolved_type clickedView\n```
+//                                                            signature_documentation java unresolved_type clickedView
 //                                                                 ^^^^^^^^ definition local 3
 //                                                                          display_name position
-//                                                                          documentation ```java\nint position\n```
+//                                                                          signature_documentation java int position
 }

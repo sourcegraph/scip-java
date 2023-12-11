@@ -10,7 +10,7 @@ package com.airbnb.epoxy;
 class ControllerModelList extends ModelList {
 //    ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerModelList#
 //                        display_name ControllerModelList
-//                        documentation ```java\nclass ControllerModelList\n```
+//                        signature_documentation java class ControllerModelList
 //                        documentation  This ArrayList subclass enforces that no changes are made to the list after {@link #freeze()} is\n called. This prevents model interceptors from storing the list and trying to change it later. We\n could copy the list before diffing, but that would waste memory to make the copy for every\n buildModels cycle, plus the interceptors could still try to modify the list and be confused about\n why it doesn't do anything.\n
 //                        relationship is_implementation semanticdb maven . . com/airbnb/epoxy/ModelList#
 //                        relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
@@ -28,21 +28,21 @@ class ControllerModelList extends ModelList {
 //                     ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#ModelListObserver#
 //                                       ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerModelList#OBSERVER.
 //                                                display_name OBSERVER
-//                                                documentation ```java\nprivate static final ModelListObserver OBSERVER\n```
+//                                                signature_documentation java private static final ModelListObserver OBSERVER
 //                                                      ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#ModelListObserver#
     @Override
 //   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public void onItemRangeInserted(int positionStart, int itemCount) {
 //              ^^^^^^^^^^^^^^^^^^^ definition local 1
 //                                  display_name onItemRangeInserted
-//                                  documentation ```java\n@Override\npublic void onItemRangeInserted(int positionStart, int itemCount)\n```
+//                                  signature_documentation java @Override\npublic void onItemRangeInserted(int positionStart, int itemCount)
 //                                  relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeInserted().
 //                                      ^^^^^^^^^^^^^ definition local 2
 //                                                    display_name positionStart
-//                                                    documentation ```java\nint positionStart\n```
+//                                                    signature_documentation java int positionStart
 //                                                         ^^^^^^^^^ definition local 3
 //                                                                   display_name itemCount
-//                                                                   documentation ```java\nint itemCount\n```
+//                                                                   signature_documentation java int itemCount
       throw new IllegalStateException(
 //              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IllegalStateException#`<init>`(+1).
           "Models cannot be changed once they are added to the controller");
@@ -53,14 +53,14 @@ class ControllerModelList extends ModelList {
     public void onItemRangeRemoved(int positionStart, int itemCount) {
 //              ^^^^^^^^^^^^^^^^^^ definition local 4
 //                                 display_name onItemRangeRemoved
-//                                 documentation ```java\n@Override\npublic void onItemRangeRemoved(int positionStart, int itemCount)\n```
+//                                 signature_documentation java @Override\npublic void onItemRangeRemoved(int positionStart, int itemCount)
 //                                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/ModelList#ModelListObserver#onItemRangeRemoved().
 //                                     ^^^^^^^^^^^^^ definition local 5
 //                                                   display_name positionStart
-//                                                   documentation ```java\nint positionStart\n```
+//                                                   signature_documentation java int positionStart
 //                                                        ^^^^^^^^^ definition local 6
 //                                                                  display_name itemCount
-//                                                                  documentation ```java\nint itemCount\n```
+//                                                                  signature_documentation java int itemCount
       throw new IllegalStateException(
 //              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IllegalStateException#`<init>`(+1).
           "Models cannot be changed once they are added to the controller");
@@ -70,10 +70,10 @@ class ControllerModelList extends ModelList {
   ControllerModelList(int expectedModelCount) {
 //^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerModelList#`<init>`().
 //                    display_name <init>
-//                    documentation ```java\nControllerModelList(int expectedModelCount)\n```
+//                    signature_documentation java ControllerModelList(int expectedModelCount)
 //                        ^^^^^^^^^^^^^^^^^^ definition local 7
 //                                           display_name expectedModelCount
-//                                           documentation ```java\nint expectedModelCount\n```
+//                                           signature_documentation java int expectedModelCount
     super(expectedModelCount);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#`<init>`().
 //        ^^^^^^^^^^^^^^^^^^ reference local 7
@@ -84,7 +84,7 @@ class ControllerModelList extends ModelList {
   void freeze() {
 //     ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerModelList#freeze().
 //            display_name freeze
-//            documentation ```java\nvoid freeze()\n```
+//            signature_documentation java void freeze()
     setObserver(OBSERVER);
 //  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#setObserver().
 //              ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ControllerModelList#OBSERVER.

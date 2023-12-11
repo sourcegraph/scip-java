@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 class ImmutableModelException extends RuntimeException {
 //    ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#
 //                            display_name ImmutableModelException
-//                            documentation ```java\nclass ImmutableModelException\n```
+//                            signature_documentation java class ImmutableModelException
 //                            documentation  Thrown if a model is changed after it is added to an {@link com.airbnb.epoxy.EpoxyController}.\n
 //                            relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
 //                            relationship is_implementation semanticdb maven jdk 11 java/lang/Exception#
@@ -22,7 +22,7 @@ class ImmutableModelException extends RuntimeException {
 //                     ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#MODEL_CANNOT_BE_CHANGED_MESSAGE.
 //                                                            display_name MODEL_CANNOT_BE_CHANGED_MESSAGE
-//                                                            documentation ```java\nprivate static final String MODEL_CANNOT_BE_CHANGED_MESSAGE\n```
+//                                                            signature_documentation java private static final String MODEL_CANNOT_BE_CHANGED_MESSAGE
       "Epoxy attribute fields on a model cannot be changed once the model is added to a "
           + "controller. Check that these fields are not updated, or that the assigned objects "
           + "are not mutated, outside of the buildModels method. The only exception is if "
@@ -34,14 +34,14 @@ class ImmutableModelException extends RuntimeException {
   ImmutableModelException(EpoxyModel model, int modelPosition) {
 //^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#`<init>`().
 //                        display_name <init>
-//                        documentation ```java\nImmutableModelException(EpoxyModel model, int modelPosition)\n```
+//                        signature_documentation java ImmutableModelException(EpoxyModel model, int modelPosition)
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local 0
 //                                         display_name model
-//                                         documentation ```java\nEpoxyModel model\n```
+//                                         signature_documentation java EpoxyModel model
 //                                              ^^^^^^^^^^^^^ definition local 1
 //                                                            display_name modelPosition
-//                                                            documentation ```java\nint modelPosition\n```
+//                                                            signature_documentation java int modelPosition
     this(model, "", modelPosition);
 //  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#`<init>`(+1).
 //       ^^^^^ reference local 0
@@ -51,19 +51,19 @@ class ImmutableModelException extends RuntimeException {
   ImmutableModelException(EpoxyModel model,
 //^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#`<init>`(+1).
 //                        display_name <init>
-//                        documentation ```java\nImmutableModelException(EpoxyModel model, String descriptionOfWhenChangeHappened, int modelPosition)\n```
+//                        signature_documentation java ImmutableModelException(EpoxyModel model, String descriptionOfWhenChangeHappened, int modelPosition)
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local 2
 //                                         display_name model
-//                                         documentation ```java\nEpoxyModel model\n```
+//                                         signature_documentation java EpoxyModel model
       String descriptionOfWhenChangeHappened, int modelPosition) {
 //    ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 3
 //                                           display_name descriptionOfWhenChangeHappened
-//                                           documentation ```java\nString descriptionOfWhenChangeHappened\n```
+//                                           signature_documentation java String descriptionOfWhenChangeHappened
 //                                                ^^^^^^^^^^^^^ definition local 4
 //                                                              display_name modelPosition
-//                                                              documentation ```java\nint modelPosition\n```
+//                                                              signature_documentation java int modelPosition
     super(buildMessage(model, descriptionOfWhenChangeHappened, modelPosition));
 //  ^^^^^ reference semanticdb maven jdk 11 java/lang/RuntimeException#`<init>`(+1).
 //        ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#buildMessage().
@@ -78,19 +78,19 @@ class ImmutableModelException extends RuntimeException {
 //               ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#buildMessage().
 //                                   display_name buildMessage
-//                                   documentation ```java\n@NonNull\nprivate static String buildMessage(EpoxyModel model, String descriptionOfWhenChangeHappened, int modelPosition)\n```
+//                                   signature_documentation java @NonNull\nprivate static String buildMessage(EpoxyModel model, String descriptionOfWhenChangeHappened, int modelPosition)
 //                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                              ^^^^^ definition local 5
 //                                                    display_name model
-//                                                    documentation ```java\nEpoxyModel model\n```
+//                                                    signature_documentation java EpoxyModel model
       String descriptionOfWhenChangeHappened, int modelPosition) {
 //    ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 6
 //                                           display_name descriptionOfWhenChangeHappened
-//                                           documentation ```java\nString descriptionOfWhenChangeHappened\n```
+//                                           signature_documentation java String descriptionOfWhenChangeHappened
 //                                                ^^^^^^^^^^^^^ definition local 7
 //                                                              display_name modelPosition
-//                                                              documentation ```java\nint modelPosition\n```
+//                                                              signature_documentation java int modelPosition
     return new StringBuilder(descriptionOfWhenChangeHappened)
 //             ^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/StringBuilder#`<init>`(+2).
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference local 6

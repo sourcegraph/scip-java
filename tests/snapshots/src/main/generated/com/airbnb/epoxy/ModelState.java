@@ -4,28 +4,28 @@ package com.airbnb.epoxy;
 class ModelState {
 //    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#
 //               display_name ModelState
-//               documentation ```java\nclass ModelState\n```
+//               signature_documentation java class ModelState
 //               documentation Helper to store relevant information about a model that we need to determine if it changed. 
 //    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#`<init>`().
 //               display_name <init>
-//               documentation ```java\nModelState()\n```
+//               signature_documentation java ModelState()
   long id;
 //     ^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#id.
 //        display_name id
-//        documentation ```java\nlong id\n```
+//        signature_documentation java long id
   int hashCode;
 //    ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#hashCode.
 //             display_name hashCode
-//             documentation ```java\nint hashCode\n```
+//             signature_documentation java int hashCode
   int position;
 //    ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#position.
 //             display_name position
-//             documentation ```java\nint position\n```
+//             signature_documentation java int position
   EpoxyModel<?> model;
 //^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //              ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#model.
 //                    display_name model
-//                    documentation ```java\nEpoxyModel<?> model\n```
+//                    signature_documentation java EpoxyModel<?> model
 
   /**
    * A link to the item with the same id in the other list when diffing two lists. This will be null
@@ -36,7 +36,7 @@ class ModelState {
 //^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
 //           ^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
 //                display_name pair
-//                documentation ```java\nModelState pair\n```
+//                signature_documentation java ModelState pair
 //                documentation  A link to the item with the same id in the other list when diffing two lists. This will be null\n if the item doesn't exist, in the case of insertions or removals. This is an optimization to\n prevent having to look up the matching pair in a hash map every time.\n
 
   /**
@@ -50,29 +50,29 @@ class ModelState {
   int lastMoveOp;
 //    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#lastMoveOp.
 //               display_name lastMoveOp
-//               documentation ```java\nint lastMoveOp\n```
+//               signature_documentation java int lastMoveOp
 //               documentation  How many movement operations have been applied to this item in order to update its position. As\n we find more item movements we need to update the position of affected items in the list in\n order to correctly calculate the next movement. Instead of iterating through all items in the\n list every time a movement operation happens we keep track of how many of these operations have\n been applied to an item, and apply all new operations in order when we need to get this item's\n up to date position.\n
 
   static ModelState build(EpoxyModel<?> model, int position, boolean immutableModel) {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
 //                  ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#build().
 //                        display_name build
-//                        documentation ```java\nstatic ModelState build(EpoxyModel<?> model, int position, boolean immutableModel)\n```
+//                        signature_documentation java static ModelState build(EpoxyModel<?> model, int position, boolean immutableModel)
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                      ^^^^^ definition local 0
 //                                            display_name model
-//                                            documentation ```java\nEpoxyModel<?> model\n```
+//                                            signature_documentation java EpoxyModel<?> model
 //                                                 ^^^^^^^^ definition local 1
 //                                                          display_name position
-//                                                          documentation ```java\nint position\n```
+//                                                          signature_documentation java int position
 //                                                                   ^^^^^^^^^^^^^^ definition local 2
 //                                                                                  display_name immutableModel
-//                                                                                  documentation ```java\nboolean immutableModel\n```
+//                                                                                  signature_documentation java boolean immutableModel
     ModelState state = new ModelState();
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
 //             ^^^^^ definition local 3
 //                   display_name state
-//                   documentation ```java\nModelState state\n```
+//                   signature_documentation java ModelState state
 //                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#`<init>`().
 
     state.lastMoveOp = 0;
@@ -116,7 +116,7 @@ class ModelState {
   void pairWithSelf() {
 //     ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#pairWithSelf().
 //                  display_name pairWithSelf
-//                  documentation ```java\nvoid pairWithSelf()\n```
+//                  signature_documentation java void pairWithSelf()
 //                  documentation  Used for an item inserted into the new list when we need to track moves that effect the\n inserted item in the old list.\n
     if (pair != null) {
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
@@ -157,7 +157,7 @@ class ModelState {
 //       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#toString().
 //                       display_name toString
-//                       documentation ```java\n@Override\npublic String toString()\n```
+//                       signature_documentation java @Override\npublic String toString()
 //                       relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#toString().
     return "ModelState{"
         + "id=" + id

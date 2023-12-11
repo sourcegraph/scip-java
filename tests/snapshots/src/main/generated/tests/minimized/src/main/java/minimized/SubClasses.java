@@ -3,12 +3,12 @@ package minimized;
 public class SubClasses extends AbstractClasses implements Interfaces {
 //           ^^^^^^^^^^ definition semanticdb maven . . minimized/SubClasses#
 //                      display_name SubClasses
-//                      documentation ```java\npublic class SubClasses\n```
+//                      signature_documentation java public class SubClasses
 //                      relationship is_implementation semanticdb maven . . minimized/AbstractClasses#
 //                      relationship is_implementation semanticdb maven . . minimized/Interfaces#
 //           ^^^^^^^^^^ definition semanticdb maven . . minimized/SubClasses#`<init>`().
 //                      display_name <init>
-//                      documentation ```java\npublic SubClasses()\n```
+//                      signature_documentation java public SubClasses()
 //                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/AbstractClasses#
 //                                                         ^^^^^^^^^^ reference semanticdb maven . . minimized/Interfaces#
 
@@ -18,7 +18,7 @@ public class SubClasses extends AbstractClasses implements Interfaces {
 //       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //              ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/SubClasses#abstractImplementation().
 //                                     display_name abstractImplementation
-//                                     documentation ```java\n@Override\npublic String abstractImplementation()\n```
+//                                     signature_documentation java @Override\npublic String abstractImplementation()
 //                                     relationship is_reference is_implementation semanticdb maven . . minimized/AbstractClasses#abstractImplementation().
     return "abstract";
   }
@@ -29,7 +29,7 @@ public class SubClasses extends AbstractClasses implements Interfaces {
 //       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //              ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/SubClasses#abstractInterfaceMethod().
 //                                      display_name abstractInterfaceMethod
-//                                      documentation ```java\n@Override\npublic String abstractInterfaceMethod()\n```
+//                                      signature_documentation java @Override\npublic String abstractInterfaceMethod()
 //                                      relationship is_reference is_implementation semanticdb maven . . minimized/Interfaces#abstractInterfaceMethod().
     return "abstractInterface";
   }
@@ -38,12 +38,12 @@ public class SubClasses extends AbstractClasses implements Interfaces {
 //              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                     ^^^ definition semanticdb maven . . minimized/SubClasses#app().
 //                         display_name app
-//                         documentation ```java\npublic static String app()\n```
+//                         signature_documentation java public static String app()
     SubClasses s = new SubClasses();
 //  ^^^^^^^^^^ reference semanticdb maven . . minimized/SubClasses#
 //             ^ definition local 0
 //               display_name s
-//               documentation ```java\nSubClasses s\n```
+//               signature_documentation java SubClasses s
 //                     ^^^^^^^^^^ reference semanticdb maven . . minimized/SubClasses#`<init>`().
     return s.abstractImplementation()
 //         ^ reference local 0

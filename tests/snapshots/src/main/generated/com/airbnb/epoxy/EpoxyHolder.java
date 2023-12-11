@@ -21,18 +21,18 @@ import androidx.annotation.NonNull;
 public abstract class EpoxyHolder {
 //                    ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#
 //                                display_name EpoxyHolder
-//                                documentation ```java\npublic abstract class EpoxyHolder\n```
+//                                signature_documentation java public abstract class EpoxyHolder
 //                                documentation  Used in conjunction with {@link com.airbnb.epoxy.EpoxyModelWithHolder} to provide a view holder\n pattern when binding to a model.\n
 
   public EpoxyHolder(@NonNull ViewParent parent) {
 //       ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#`<init>`().
 //                   display_name <init>
-//                   documentation ```java\npublic EpoxyHolder(unresolved_type parent)\n```
+//                   signature_documentation java public EpoxyHolder(unresolved_type parent)
 //                    ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                            ^^^^^^^^^^ reference semanticdb maven . . ViewParent#
 //                                       ^^^^^^ definition local 0
 //                                              display_name parent
-//                                              documentation ```java\n@NonNull\nunresolved_type parent\n```
+//                                              signature_documentation java @NonNull\nunresolved_type parent
     this();
 //  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#`<init>`(+1).
   }
@@ -40,7 +40,7 @@ public abstract class EpoxyHolder {
   public EpoxyHolder() {
 //       ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#`<init>`(+1).
 //                   display_name <init>
-//                   documentation ```java\npublic EpoxyHolder()\n```
+//                   signature_documentation java public EpoxyHolder()
   }
 
   /**
@@ -54,11 +54,11 @@ public abstract class EpoxyHolder {
   protected abstract void bindView(@NonNull View itemView);
 //                        ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#bindView().
 //                                 display_name bindView
-//                                 documentation ```java\nprotected abstract void bindView(unresolved_type itemView)\n```
+//                                 signature_documentation java protected abstract void bindView(unresolved_type itemView)
 //                                 documentation  Called when this holder is created, with the view that it should hold. You can use this\n opportunity to find views by id, and do any other initialization you need. This is called only\n once for the lifetime of the class.\n\n @param itemView A view inflated from the layout provided by\n {@link EpoxyModelWithHolder#getLayout()}\n
 //                                  ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                          ^^^^ reference semanticdb maven . . View#
 //                                               ^^^^^^^^ definition local 1
 //                                                        display_name itemView
-//                                                        documentation ```java\n@NonNull\nunresolved_type itemView\n```
+//                                                        signature_documentation java @NonNull\nunresolved_type itemView
 }

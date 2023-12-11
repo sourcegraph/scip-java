@@ -13,16 +13,16 @@ import androidx.annotation.Px;
 public interface OnModelVisibilityChangedListener<T extends EpoxyModel<V>, V> {
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#
 //                                                display_name OnModelVisibilityChangedListener
-//                                                documentation ```java\npublic interface OnModelVisibilityChangedListener<T extends EpoxyModel<V>, V>\n```
+//                                                signature_documentation java public interface OnModelVisibilityChangedListener<T extends EpoxyModel<V>, V>
 //                                                documentation Used to register an onVisibilityChanged callback with a generated model. 
 //                                                ^ definition semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#[T]
 //                                                  display_name T
-//                                                  documentation ```java\nT extends EpoxyModel<V>\n```
+//                                                  signature_documentation java T extends EpoxyModel<V>
 //                                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                     ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#[V]
 //                                                                         ^ definition semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#[V]
 //                                                                           display_name V
-//                                                                           documentation ```java\nV\n```
+//                                                                           signature_documentation java V
 
   /**
    * This will be called once the view visible part changes.
@@ -42,37 +42,37 @@ public interface OnModelVisibilityChangedListener<T extends EpoxyModel<V>, V> {
   void onVisibilityChanged(T model, V view,
 //     ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#onVisibilityChanged().
 //                         display_name onVisibilityChanged
-//                         documentation ```java\npublic abstract void onVisibilityChanged(T model, V view, float percentVisibleHeight, float percentVisibleWidth, int heightVisible, int widthVisible)\n```
+//                         signature_documentation java public abstract void onVisibilityChanged(T model, V view, float percentVisibleHeight, float percentVisibleWidth, int heightVisible, int widthVisible)
 //                         documentation  This will be called once the view visible part changes.\n <p>\n OnModelVisibilityChangedListener should be used with particular care since they will be\n dispatched on every frame while scrolling. No heavy work should be done inside the\n implementation. Using {@link OnModelVisibilityStateChangedListener} is recommended whenever\n possible.\n <p>\n @param model                The model being bound\n @param view                 The view that is being bound to the model\n @param percentVisibleHeight The percentage of height visible (0-100)\n @param percentVisibleWidth  The percentage of width visible (0-100)\n @param heightVisible        The visible height in pixel\n @param widthVisible         The visible width in pixel\n
 //                         ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#[T]
 //                           ^^^^^ definition local 0
 //                                 display_name model
-//                                 documentation ```java\nT model\n```
+//                                 signature_documentation java T model
 //                                  ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#[V]
 //                                    ^^^^ definition local 1
 //                                         display_name view
-//                                         documentation ```java\nV view\n```
+//                                         signature_documentation java V view
       @FloatRange(from = 0, to = 100) float percentVisibleHeight,
 //     ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#
 //                ^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#from().
 //                          ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#to().
 //                                          ^^^^^^^^^^^^^^^^^^^^ definition local 2
 //                                                               display_name percentVisibleHeight
-//                                                               documentation ```java\n@FloatRange(from = 0, to = 100)\nfloat percentVisibleHeight\n```
+//                                                               signature_documentation java @FloatRange(from = 0, to = 100)\nfloat percentVisibleHeight
       @FloatRange(from = 0, to = 100) float percentVisibleWidth,
 //     ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#
 //                ^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#from().
 //                          ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#to().
 //                                          ^^^^^^^^^^^^^^^^^^^ definition local 3
 //                                                              display_name percentVisibleWidth
-//                                                              documentation ```java\n@FloatRange(from = 0, to = 100)\nfloat percentVisibleWidth\n```
+//                                                              signature_documentation java @FloatRange(from = 0, to = 100)\nfloat percentVisibleWidth
       @Px int heightVisible, @Px int widthVisible);
 //     ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#
 //            ^^^^^^^^^^^^^ definition local 4
 //                          display_name heightVisible
-//                          documentation ```java\n@Px\nint heightVisible\n```
+//                          signature_documentation java @Px\nint heightVisible
 //                            ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#
 //                                   ^^^^^^^^^^^^ definition local 5
 //                                                display_name widthVisible
-//                                                documentation ```java\n@Px\nint widthVisible\n```
+//                                                signature_documentation java @Px\nint widthVisible
 }

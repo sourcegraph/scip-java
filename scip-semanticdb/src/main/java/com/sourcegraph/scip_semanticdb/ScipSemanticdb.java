@@ -194,7 +194,12 @@ public class ScipSemanticdb {
           String language =
               doc.semanticdb.getLanguage().toString().toLowerCase(Locale.ROOT).intern();
           String signature = new SignatureFormatter(info, symtab).formatSymbol();
-          scipInfo.addDocumentation("```" + language + "\n" + signature + "\n```");
+          Scip.Document.Builder signatureDocumentation =
+              Scip.Document.newBuilder()
+                  .setRelativePath(relativePath)
+                  .setLanguage(language)
+                  .setText(signature);
+          scipInfo.setSignatureDocumentation(signatureDocumentation);
         }
         String documentation = info.getDocumentation().getMessage();
         if (!documentation.isEmpty()) {

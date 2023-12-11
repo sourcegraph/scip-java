@@ -4,60 +4,60 @@ package minimized
 case class Issue396(a: Int)
 //         ^^^^^^^^ definition semanticdb maven . . minimized/Issue396#
 //                  display_name Issue396
-//                  documentation ```scala\ncase class Issue396(a: Int)\n```
+//                  signature_documentation scala case class Issue396(a: Int)
 //                  relationship is_reference semanticdb maven . . minimized/Issue396.
 //                  relationship is_reference semanticdb maven . . minimized/Issue396.apply().
 //         ________ synthetic_definition semanticdb maven . . minimized/Issue396#copy().
 //                  display_name copy
-//                  documentation ```scala\ndef copy(a: Int): Issue396\n```
+//                  signature_documentation scala def copy(a: Int): Issue396
 //                  relationship is_definition semanticdb maven . . minimized/Issue396#
 //                  relationship is_reference semanticdb maven . . minimized/Issue396.apply().
 //         ________ synthetic_definition semanticdb maven . . minimized/Issue396#productElement().
 //                  display_name productElement
-//                  documentation ```scala\ndef productElement(x$1: Int): Any\n```
+//                  signature_documentation scala def productElement(x$1: Int): Any
 //                  relationship is_definition semanticdb maven . . minimized/Issue396#
 //                  relationship is_reference semanticdb maven . . minimized/Issue396.apply().
 //                  relationship is_reference is_implementation semanticdb maven . . scala/Product#productElement().
 //         ________ synthetic_definition semanticdb maven . . minimized/Issue396.
 //                  display_name Issue396
-//                  documentation ```scala\nobject Issue396\n```
+//                  signature_documentation scala object Issue396
 //                  relationship is_definition semanticdb maven . . minimized/Issue396#
 //                  relationship is_reference semanticdb maven . . minimized/Issue396.apply().
 //         ________ synthetic_definition semanticdb maven . . minimized/Issue396.apply().
 //                  display_name apply
-//                  documentation ```scala\ndef apply(a: Int): Issue396\n```
+//                  signature_documentation scala def apply(a: Int): Issue396
 //                  relationship is_definition semanticdb maven . . minimized/Issue396#
 //                  relationship is_reference is_implementation semanticdb maven . . scala/Function1#apply().
 //         ________ synthetic_definition semanticdb maven . . minimized/Issue396#productElementName().
 //                  display_name productElementName
-//                  documentation ```scala\ndef productElementName(x$1: Int): String\n```
+//                  signature_documentation scala def productElementName(x$1: Int): String
 //                  relationship is_definition semanticdb maven . . minimized/Issue396#
 //                  relationship is_reference semanticdb maven . . minimized/Issue396.apply().
 //                  relationship is_reference is_implementation semanticdb maven . . scala/Product#productElementName().
 //                 ^ definition semanticdb maven . . minimized/Issue396#`<init>`().
 //                   display_name <init>
-//                   documentation ```scala\ndef this(a: Int)\n```
+//                   signature_documentation scala def this(a: Int)
 //                  ^ definition semanticdb maven . . minimized/Issue396#a.
 //                    display_name a
-//                    documentation ```scala\nval a: Int\n```
+//                    signature_documentation scala val a: Int
 //                    relationship is_reference semanticdb maven . . minimized/Issue396#`<init>`().(a)
 //                    relationship is_reference semanticdb maven . . minimized/Issue396#copy().(a)
 //                    relationship is_reference semanticdb maven . . minimized/Issue396.apply().(a)
 //                  _ synthetic_definition semanticdb maven . . minimized/Issue396.apply().(a)
 //                    display_name a
-//                    documentation ```scala\na: Int \n```
+//                    signature_documentation scala a: Int 
 //                    relationship is_reference semanticdb maven . . minimized/Issue396#`<init>`().(a)
 //                    relationship is_reference is_definition semanticdb maven . . minimized/Issue396#a.
 //                    relationship is_reference semanticdb maven . . minimized/Issue396#copy().(a)
 //                  _ synthetic_definition semanticdb maven . . minimized/Issue396#`<init>`().(a)
 //                    display_name a
-//                    documentation ```scala\na: Int \n```
+//                    signature_documentation scala a: Int 
 //                    relationship is_reference is_definition semanticdb maven . . minimized/Issue396#a.
 //                    relationship is_reference semanticdb maven . . minimized/Issue396#copy().(a)
 //                    relationship is_reference semanticdb maven . . minimized/Issue396.apply().(a)
 //                  _ synthetic_definition semanticdb maven . . minimized/Issue396#copy().(a)
 //                    display_name a
-//                    documentation ```scala\ndefault a: Int \n```
+//                    signature_documentation scala default a: Int 
 //                    relationship is_reference semanticdb maven . . minimized/Issue396#`<init>`().(a)
 //                    relationship is_reference is_definition semanticdb maven . . minimized/Issue396#a.
 //                    relationship is_reference semanticdb maven . . minimized/Issue396.apply().(a)
@@ -65,7 +65,7 @@ case class Issue396(a: Int)
 object Issue396App {
 //     ^^^^^^^^^^^ definition semanticdb maven . . minimized/Issue396App.
 //                 display_name Issue396App
-//                 documentation ```scala\nobject Issue396App\n```
+//                 signature_documentation scala object Issue396App
   println(Issue396)
 //^^^^^^^ reference semanticdb maven . . scala/Predef.println(+1).
 //        ^^^^^^^^ reference semanticdb maven . . minimized/Issue396.

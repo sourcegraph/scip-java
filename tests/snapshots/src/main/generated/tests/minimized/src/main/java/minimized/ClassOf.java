@@ -3,15 +3,15 @@ package minimized;
 public class ClassOf {
 //           ^^^^^^^ definition semanticdb maven . . minimized/ClassOf#
 //                   display_name ClassOf
-//                   documentation ```java\npublic class ClassOf\n```
+//                   signature_documentation java public class ClassOf
 //           ^^^^^^^ definition semanticdb maven . . minimized/ClassOf#`<init>`().
 //                   display_name <init>
-//                   documentation ```java\npublic ClassOf()\n```
+//                   signature_documentation java public ClassOf()
   public static String app() {
 //              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                     ^^^ definition semanticdb maven . . minimized/ClassOf#app().
 //                         display_name app
-//                         documentation ```java\npublic static String app()\n```
+//                         signature_documentation java public static String app()
     return ClassOf.class.getName();
 //         ^^^^^^^ reference semanticdb maven . . minimized/ClassOf#
 //                 ^^^^^ reference semanticdb maven . . minimized/ClassOf#class.
