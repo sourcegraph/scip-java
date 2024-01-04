@@ -74,6 +74,7 @@ public class TypeVariables {
 //                                           ^ definition local 0
 //                                             display_name t
 //                                             signature_documentation java T t
+//                                             enclosing_symbol semanticdb maven . . minimized/TypeVariables#app().
     t.mI();
 //  ^ reference local 0
 //    ^^ reference semanticdb maven . . minimized/TypeVariables#I#mI().

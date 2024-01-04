@@ -87,6 +87,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
 //                                                  ^^^^^^ definition local 0
 //                                                         display_name parent
 //                                                         signature_documentation java @NonNull\nunresolved_type parent
+//                                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#buildView().
 
   @Override
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
@@ -113,6 +114,7 @@ public abstract class EpoxyModelWithView<T extends View> extends EpoxyModel<T> {
 //                                           ^^^^^^^^^ definition local 1
 //                                                     display_name layoutRes
 //                                                     signature_documentation java @LayoutRes\nint layoutRes
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithView#layout().
     throw new UnsupportedOperationException(
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/UnsupportedOperationException#`<init>`(+1).
         "Layout resources are unsupported. Views must be created with `buildView`");

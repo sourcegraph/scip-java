@@ -59,10 +59,12 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //                                    ^^^^^^^^^^^^^^^^^^^^ definition local 0
 //                                                         display_name modelBuildingHandler
 //                                                         signature_documentation java unresolved_type modelBuildingHandler
+//                                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#`<init>`(+1).
 //                                                          ^^^^^^^ reference semanticdb maven . . Handler#
 //                                                                  ^^^^^^^^^^^^^^ definition local 1
 //                                                                                 display_name diffingHandler
 //                                                                                 signature_documentation java unresolved_type diffingHandler
+//                                                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#`<init>`(+1).
     super(modelBuildingHandler, diffingHandler);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#`<init>`(+1).
 //        ^^^^^^^^^^^^^^^^^^^^ reference local 0
@@ -77,6 +79,7 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //                            ^^^^ definition local 2
 //                                 display_name data
 //                                 signature_documentation java T data
+//                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#setData().
     currentData = data;
 //  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#currentData.
 //                ^^^^ reference local 2
@@ -117,9 +120,11 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //                          ^^^^^^^^^^^^ definition local 3
 //                                       display_name fromPosition
 //                                       signature_documentation java int fromPosition
+//                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#moveModel().
 //                                            ^^^^^^^^^^ definition local 4
 //                                                       display_name toPosition
 //                                                       signature_documentation java int toPosition
+//                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#moveModel().
     allowModelBuildRequests = true;
 //  ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#allowModelBuildRequests.
     super.moveModel(fromPosition, toPosition);
@@ -141,6 +146,7 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //                                         ^^^^^^^ definition local 5
 //                                                 display_name delayMs
 //                                                 signature_documentation java int delayMs
+//                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#requestDelayedModelBuild().
     if (!allowModelBuildRequests) {
 //       ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#allowModelBuildRequests.
       throw new IllegalStateException(
@@ -192,4 +198,5 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //                                      ^^^^ definition local 6
 //                                           display_name data
 //                                           signature_documentation java T data
+//                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#buildModels(+1).
 }

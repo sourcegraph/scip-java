@@ -20,4 +20,5 @@ public interface StyleBuilderCallback<T> {
 //                  ^^^^^^^ definition local 0
 //                          display_name builder
 //                          signature_documentation java T builder
+//                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StyleBuilderCallback#buildStyle().
 }

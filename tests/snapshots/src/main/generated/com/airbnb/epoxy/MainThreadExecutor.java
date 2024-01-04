@@ -38,6 +38,7 @@ class MainThreadExecutor extends HandlerExecutor {
 //                           ^^^^^ definition local 0
 //                                 display_name async
 //                                 signature_documentation java boolean async
+//                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/MainThreadExecutor#`<init>`().
     super(async ? AYSNC_MAIN_THREAD_HANDLER : MAIN_THREAD_HANDLER);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#`<init>`().
 //        ^^^^^ reference local 0

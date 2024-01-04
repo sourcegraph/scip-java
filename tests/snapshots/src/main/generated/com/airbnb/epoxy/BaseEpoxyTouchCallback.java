@@ -37,9 +37,11 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
 //                               ^^^^^ definition local 0
 //                                     display_name model
 //                                     signature_documentation java T model
+//                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#getMovementFlagsForModel().
 //                                          ^^^^^^^^^^^^^^^ definition local 1
 //                                                          display_name adapterPosition
 //                                                          signature_documentation java int adapterPosition
+//                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#getMovementFlagsForModel().
 
   /**
    * Called when the user interaction with a view is over and the view has
@@ -64,8 +66,10 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
 //                 ^^^^^ definition local 2
 //                       display_name model
 //                       signature_documentation java T model
+//                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView().
 //                        ^^^^ reference semanticdb maven . . View#
 //                             ^^^^^^^^ definition local 3
 //                                      display_name itemView
 //                                      signature_documentation java unresolved_type itemView
+//                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView().
 }

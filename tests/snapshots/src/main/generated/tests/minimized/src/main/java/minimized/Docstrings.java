@@ -44,6 +44,7 @@ public class Docstrings {
 //                                      ^ definition local 0
 //                                        display_name n
 //                                        signature_documentation java int n
+//                                        enclosing_symbol semanticdb maven . . minimized/Docstrings#methodParameter().
     return n + 42;
 //         ^ reference local 0
   }

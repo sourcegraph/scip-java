@@ -79,9 +79,11 @@ class Hello {
 //              ^^^^^^^ definition local 0
 //                      display_name message
 //                      signature_documentation java final String message
+//                      enclosing_symbol semanticdb maven . . minimized/Hello#`<init>`().
 //              ^^^^^^^ definition local 1
 //                      display_name message
 //                      signature_documentation java final String message
+//                      enclosing_symbol semanticdb maven . . minimized/Hello#HelloBuilder#message().
 //              ^^^^^^^ definition semanticdb maven . . minimized/Hello#HelloBuilder#message().
 //                      display_name message
 //                      signature_documentation java @SuppressWarnings("all")\npublic HelloBuilder message(String message)

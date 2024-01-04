@@ -22,6 +22,7 @@ public class AnonymousClasses {
 //                          ^ definition local 0
 //                            display_name n
 //                            signature_documentation java int n
+//                            enclosing_symbol semanticdb maven . . minimized/AnonymousClasses#app().
     Function<Integer, Integer> fn =
 //  ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
 //           ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
@@ -29,6 +30,7 @@ public class AnonymousClasses {
 //                             ^^ definition local 1
 //                                display_name fn
 //                                signature_documentation java Function<Integer, Integer> fn
+//                                enclosing_symbol semanticdb maven . . minimized/AnonymousClasses#app().
         new Function<Integer, Integer>() {
 //          ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
 //                   ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
@@ -40,11 +42,13 @@ public class AnonymousClasses {
 //                       ^^^^^ definition local 3
 //                             display_name apply
 //                             signature_documentation java @Override\npublic Integer apply(Integer integer)
+//                             enclosing_symbol local 2
 //                             relationship is_reference is_implementation semanticdb maven jdk 11 java/util/function/Function#apply().
 //                             ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
 //                                     ^^^^^^^ definition local 4
 //                                             display_name integer
 //                                             signature_documentation java Integer integer
+//                                             enclosing_symbol local 3
             return integer + n;
 //                 ^^^^^^^ reference local 4
 //                           ^ reference local 0

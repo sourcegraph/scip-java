@@ -64,10 +64,12 @@ public abstract class Typed2EpoxyController<T, U> extends EpoxyController {
 //                                     ^^^^^^^^^^^^^^^^^^^^ definition local 0
 //                                                          display_name modelBuildingHandler
 //                                                          signature_documentation java unresolved_type modelBuildingHandler
+//                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#`<init>`(+1).
 //                                                           ^^^^^^^ reference semanticdb maven . . Handler#
 //                                                                   ^^^^^^^^^^^^^^ definition local 1
 //                                                                                  display_name diffingHandler
 //                                                                                  signature_documentation java unresolved_type diffingHandler
+//                                                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#`<init>`(+1).
     super(modelBuildingHandler, diffingHandler);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#`<init>`(+1).
 //        ^^^^^^^^^^^^^^^^^^^^ reference local 0
@@ -87,10 +89,12 @@ public abstract class Typed2EpoxyController<T, U> extends EpoxyController {
 //                      ^^^^^ definition local 2
 //                            display_name data1
 //                            signature_documentation java T data1
+//                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#setData().
 //                             ^ reference semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#[U]
 //                               ^^^^^ definition local 3
 //                                     display_name data2
 //                                     signature_documentation java U data2
+//                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#setData().
     this.data1 = data1;
 //       ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#data1.
 //               ^^^^^ reference local 2
@@ -134,9 +138,11 @@ public abstract class Typed2EpoxyController<T, U> extends EpoxyController {
 //                          ^^^^^^^^^^^^ definition local 4
 //                                       display_name fromPosition
 //                                       signature_documentation java int fromPosition
+//                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#moveModel().
 //                                            ^^^^^^^^^^ definition local 5
 //                                                       display_name toPosition
 //                                                       signature_documentation java int toPosition
+//                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#moveModel().
     allowModelBuildRequests = true;
 //  ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#allowModelBuildRequests.
     super.moveModel(fromPosition, toPosition);
@@ -158,6 +164,7 @@ public abstract class Typed2EpoxyController<T, U> extends EpoxyController {
 //                                         ^^^^^^^ definition local 6
 //                                                 display_name delayMs
 //                                                 signature_documentation java int delayMs
+//                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#requestDelayedModelBuild().
     if (!allowModelBuildRequests) {
 //       ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#allowModelBuildRequests.
       throw new IllegalStateException(
@@ -199,8 +206,10 @@ public abstract class Typed2EpoxyController<T, U> extends EpoxyController {
 //                                      ^^^^^ definition local 7
 //                                            display_name data1
 //                                            signature_documentation java T data1
+//                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#buildModels(+1).
 //                                             ^ reference semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#[U]
 //                                               ^^^^^ definition local 8
 //                                                     display_name data2
 //                                                     signature_documentation java U data2
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed2EpoxyController#buildModels(+1).
 }

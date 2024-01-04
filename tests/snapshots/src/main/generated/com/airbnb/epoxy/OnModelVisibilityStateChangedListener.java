@@ -40,12 +40,15 @@ public interface OnModelVisibilityStateChangedListener<T extends EpoxyModel<V>, 
 //                                ^^^^^ definition local 0
 //                                      display_name model
 //                                      signature_documentation java T model
+//                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityStateChangedListener#onVisibilityStateChanged().
 //                                       ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityStateChangedListener#[V]
 //                                         ^^^^ definition local 1
 //                                              display_name view
 //                                              signature_documentation java V view
+//                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityStateChangedListener#onVisibilityStateChanged().
 //                                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/VisibilityState#Visibility#
 //                                                               ^^^^^^^^^^^^^^^ definition local 2
 //                                                                               display_name visibilityState
 //                                                                               signature_documentation java @Visibility\nint visibilityState
+//                                                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityStateChangedListener#onVisibilityStateChanged().
 }

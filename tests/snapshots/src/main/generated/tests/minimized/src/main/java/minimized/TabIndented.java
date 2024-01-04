@@ -16,6 +16,7 @@ public class TabIndented {
 //       ^ definition local 0
 //         display_name o
 //         signature_documentation java Object o
+//         enclosing_symbol semanticdb maven . . minimized/TabIndented#app().
 //               ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 →→→@Override
 //  ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
@@ -23,11 +24,13 @@ public class TabIndented {
 //                ^^^^^^ definition local 2
 //                       display_name equals
 //                       signature_documentation java @Override\npublic boolean equals(Object other)
+//                       enclosing_symbol local 1
 //                       relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#equals().
 //                       ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                              ^^^^^ definition local 3
 //                                    display_name other
 //                                    signature_documentation java Object other
+//                                    enclosing_symbol local 2
 →→→→return false;
 →→→}
 
@@ -37,6 +40,7 @@ public class TabIndented {
 //            ^^^^^^^^ definition local 4
 //                     display_name hashCode
 //                     signature_documentation java @Override\npublic int hashCode()
+//                     enclosing_symbol local 1
 //                     relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#hashCode().
 →→→→return System.identityHashCode(this);
 //         ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
@@ -50,6 +54,7 @@ public class TabIndented {
 //               ^^^^^^^^ definition local 5
 //                        display_name toString
 //                        signature_documentation java @Override\npublic String toString()
+//                        enclosing_symbol local 1
 //                        relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#toString().
 →→→→return "";
 →→→}

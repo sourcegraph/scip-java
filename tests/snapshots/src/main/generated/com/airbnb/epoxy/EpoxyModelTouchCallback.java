@@ -96,11 +96,13 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                                         ^^^^^^^^^^ definition local 0
 //                                                                    display_name controller
 //                                                                    signature_documentation java @Nullable\nEpoxyController controller
+//                                                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#`<init>`().
 //                                                                     ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                                                           ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
 //                                                                              ^^^^^^^^^^^^^^^^ definition local 1
 //                                                                                               display_name targetModelClass
 //                                                                                               signature_documentation java Class<T> targetModelClass
+//                                                                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#`<init>`().
     this.controller = controller;
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#controller.
 //                    ^^^^^^^^^^ reference local 0
@@ -121,15 +123,18 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                            ^^^^^^^^^^^^ definition local 2
 //                                                         display_name recyclerView
 //                                                         signature_documentation java unresolved_type recyclerView
+//                                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#getMovementFlags().
 //                                                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                                                          ^^^^^^^^^^ definition local 3
 //                                                                                     display_name viewHolder
 //                                                                                     signature_documentation java EpoxyViewHolder viewHolder
+//                                                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#getMovementFlags().
     EpoxyModel<?> model = viewHolder.getModel();
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                ^^^^^ definition local 4
 //                      display_name model
 //                      signature_documentation java EpoxyModel<?> model
+//                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#getMovementFlags().
 //                        ^^^^^^^^^^ reference local 3
 //                                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getModel().
 
@@ -140,6 +145,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //          ^^^^^^^^^^^^^^^^^^^^^ definition local 5
 //                                display_name isOtherCallbackActive
 //                                signature_documentation java boolean isOtherCallbackActive
+//                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#getMovementFlags().
         holderBeingDragged == null
 //      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#holderBeingDragged.
             && holderBeingSwiped == null
@@ -176,15 +182,18 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                           ^^^^^^^^^^^^ definition local 6
 //                                                        display_name recyclerView
 //                                                        signature_documentation java unresolved_type recyclerView
+//                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#canDropOver().
 //                                                         ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                                                         ^^^^^^^ definition local 7
 //                                                                                 display_name current
 //                                                                                 signature_documentation java EpoxyViewHolder current
+//                                                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#canDropOver().
       EpoxyViewHolder target) {
 //    ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                    ^^^^^^ definition local 8
 //                           display_name target
 //                           signature_documentation java EpoxyViewHolder target
+//                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#canDropOver().
     // By default we don't allow dropping on a model that isn't a drag target
     return isTouchableModel(target.getModel());
 //         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#isTouchableModel().
@@ -200,6 +209,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                                 ^^^^^ definition local 9
 //                                                       display_name model
 //                                                       signature_documentation java EpoxyModel<?> model
+//                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#isTouchableModel().
     return targetModelClass.isInstance(model);
 //         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#targetModelClass.
 //                          ^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Class#isInstance().
@@ -218,15 +228,18 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                      ^^^^^^^^^^^^ definition local 10
 //                                                   display_name recyclerView
 //                                                   signature_documentation java unresolved_type recyclerView
+//                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onMove().
 //                                                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                                                    ^^^^^^^^^^ definition local 11
 //                                                                               display_name viewHolder
 //                                                                               signature_documentation java EpoxyViewHolder viewHolder
+//                                                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onMove().
       EpoxyViewHolder target) {
 //    ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                    ^^^^^^ definition local 12
 //                           display_name target
 //                           signature_documentation java EpoxyViewHolder target
+//                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onMove().
 
     if (controller == null) {
 //      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#controller.
@@ -239,12 +252,14 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //      ^^^^^^^^^^^^ definition local 13
 //                   display_name fromPosition
 //                   signature_documentation java int fromPosition
+//                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onMove().
 //                     ^^^^^^^^^^ reference local 11
 //                                ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getAdapterPosition#
     int toPosition = target.getAdapterPosition();
 //      ^^^^^^^^^^ definition local 14
 //                 display_name toPosition
 //                 signature_documentation java int toPosition
+//                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onMove().
 //                   ^^^^^^ reference local 12
 //                          ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getAdapterPosition#
     controller.moveModel(fromPosition, toPosition);
@@ -258,6 +273,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                ^^^^^ definition local 15
 //                      display_name model
 //                      signature_documentation java EpoxyModel<?> model
+//                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onMove().
 //                        ^^^^^^^^^^ reference local 11
 //                                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getModel().
     if (!isTouchableModel(model)) {
@@ -292,17 +308,21 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                             ^^^^^^^^^^^^ definition local 16
 //                                          display_name fromPosition
 //                                          signature_documentation java int fromPosition
+//                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onModelMoved().
 //                                               ^^^^^^^^^^ definition local 17
 //                                                          display_name toPosition
 //                                                          signature_documentation java int toPosition
+//                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onModelMoved().
 //                                                           ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#[T]
 //                                                             ^^^^^^^^^^^^^^^ definition local 18
 //                                                                             display_name modelBeingMoved
 //                                                                             signature_documentation java T modelBeingMoved
+//                                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onModelMoved().
 //                                                                              ^^^^ reference semanticdb maven . . View#
 //                                                                                   ^^^^^^^^ definition local 19
 //                                                                                            display_name itemView
 //                                                                                            signature_documentation java unresolved_type itemView
+//                                                                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onModelMoved().
 
   }
 
@@ -317,14 +337,17 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                        ^^^^^^^^^^ definition local 20
 //                                                   display_name viewHolder
 //                                                   signature_documentation java EpoxyViewHolder viewHolder
+//                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwiped().
 //                                                        ^^^^^^^^^ definition local 21
 //                                                                  display_name direction
 //                                                                  signature_documentation java int direction
+//                                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwiped().
     EpoxyModel<?> model = viewHolder.getModel();
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                ^^^^^ definition local 22
 //                      display_name model
 //                      signature_documentation java EpoxyModel<?> model
+//                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwiped().
 //                        ^^^^^^^^^^ reference local 20
 //                                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getModel().
     View view = viewHolder.itemView;
@@ -332,12 +355,14 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //       ^^^^ definition local 23
 //            display_name view
 //            signature_documentation java unresolved_type view
+//            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwiped().
 //              ^^^^^^^^^^ reference local 20
 //                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#itemView#
     int position = viewHolder.getAdapterPosition();
 //      ^^^^^^^^ definition local 24
 //               display_name position
 //               signature_documentation java int position
+//               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwiped().
 //                 ^^^^^^^^^^ reference local 20
 //                            ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getAdapterPosition#
 
@@ -372,16 +397,20 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                               ^^^^^ definition local 25
 //                                     display_name model
 //                                     signature_documentation java T model
+//                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeCompleted().
 //                                      ^^^^ reference semanticdb maven . . View#
 //                                           ^^^^^^^^ definition local 26
 //                                                    display_name itemView
 //                                                    signature_documentation java unresolved_type itemView
+//                                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeCompleted().
 //                                                         ^^^^^^^^ definition local 27
 //                                                                  display_name position
 //                                                                  signature_documentation java int position
+//                                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeCompleted().
 //                                                                       ^^^^^^^^^ definition local 28
 //                                                                                 display_name direction
 //                                                                                 signature_documentation java int direction
+//                                                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeCompleted().
 
   }
 
@@ -397,9 +426,11 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                                           ^^^^^^^^^^ definition local 29
 //                                                                      display_name viewHolder
 //                                                                      signature_documentation java @Nullable\nEpoxyViewHolder viewHolder
+//                                                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSelectedChanged().
 //                                                                           ^^^^^^^^^^^ definition local 30
 //                                                                                       display_name actionState
 //                                                                                       signature_documentation java int actionState
+//                                                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSelectedChanged().
     super.onSelectedChanged(viewHolder, actionState);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#super.
 //        ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#onSelectedChanged().
@@ -413,6 +444,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                  ^^^^^ definition local 31
 //                        display_name model
 //                        signature_documentation java EpoxyModel<?> model
+//                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSelectedChanged().
 //                          ^^^^^^^^^^ reference local 29
 //                                     ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getModel().
       if (!isTouchableModel(model)) {
@@ -500,6 +532,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                                       ^^^^^^^^^^^^ definition local 32
 //                                                                    display_name recyclerView
 //                                                                    signature_documentation java unresolved_type recyclerView
+//                                                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#markRecyclerViewHasSelection().
     recyclerView.setTag(R.id.epoxy_touch_helper_selection_status, Boolean.TRUE);
 //  ^^^^^^^^^^^^ reference local 32
 //               ^^^^^^ reference semanticdb maven . . RecyclerView#setTag#
@@ -518,6 +551,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                                      ^^^^^^^^^^^^ definition local 33
 //                                                                   display_name recyclerView
 //                                                                   signature_documentation java unresolved_type recyclerView
+//                                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#recyclerViewHasSelection().
     return recyclerView.getTag(R.id.epoxy_touch_helper_selection_status) != null;
 //         ^^^^^^^^^^^^ reference local 33
 //                      ^^^^^^ reference semanticdb maven . . RecyclerView#getTag#
@@ -534,6 +568,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                                           ^^^^^^^^^^^^ definition local 34
 //                                                                        display_name recyclerView
 //                                                                        signature_documentation java unresolved_type recyclerView
+//                                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearRecyclerViewSelectionMarker().
     recyclerView.setTag(R.id.epoxy_touch_helper_selection_status, null);
 //  ^^^^^^^^^^^^ reference local 34
 //               ^^^^^^ reference semanticdb maven . . RecyclerView#setTag#
@@ -553,13 +588,16 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                             ^^^^^ definition local 35
 //                                   display_name model
 //                                   signature_documentation java T model
+//                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeStarted().
 //                                    ^^^^ reference semanticdb maven . . View#
 //                                         ^^^^^^^^ definition local 36
 //                                                  display_name itemView
 //                                                  signature_documentation java unresolved_type itemView
+//                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeStarted().
 //                                                       ^^^^^^^^^^^^^^^ definition local 37
 //                                                                       display_name adapterPosition
 //                                                                       signature_documentation java int adapterPosition
+//                                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeStarted().
 
   }
 
@@ -574,10 +612,12 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                              ^^^^^ definition local 38
 //                                    display_name model
 //                                    signature_documentation java T model
+//                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeReleased().
 //                                     ^^^^ reference semanticdb maven . . View#
 //                                          ^^^^^^^^ definition local 39
 //                                                   display_name itemView
 //                                                   signature_documentation java unresolved_type itemView
+//                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeReleased().
 
   }
 
@@ -592,13 +632,16 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                            ^^^^^ definition local 40
 //                                  display_name model
 //                                  signature_documentation java T model
+//                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragStarted().
 //                                   ^^^^ reference semanticdb maven . . View#
 //                                        ^^^^^^^^ definition local 41
 //                                                 display_name itemView
 //                                                 signature_documentation java unresolved_type itemView
+//                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragStarted().
 //                                                      ^^^^^^^^^^^^^^^ definition local 42
 //                                                                      display_name adapterPosition
 //                                                                      signature_documentation java int adapterPosition
+//                                                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragStarted().
 
   }
 
@@ -613,10 +656,12 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                             ^^^^^ definition local 43
 //                                   display_name model
 //                                   signature_documentation java T model
+//                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragReleased().
 //                                    ^^^^ reference semanticdb maven . . View#
 //                                         ^^^^^^^^ definition local 44
 //                                                  display_name itemView
 //                                                  signature_documentation java unresolved_type itemView
+//                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onDragReleased().
 
   }
 
@@ -633,10 +678,12 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                            ^^^^^^^^^^^^ definition local 45
 //                                                         display_name recyclerView
 //                                                         signature_documentation java final unresolved_type recyclerView
+//                                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView().
 //                                                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                                                          ^^^^^^^^^^ definition local 46
 //                                                                                     display_name viewHolder
 //                                                                                     signature_documentation java EpoxyViewHolder viewHolder
+//                                                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView().
     super.clearView(recyclerView, viewHolder);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#super.
 //        ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#clearView().
@@ -666,6 +713,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                ^^^ definition local 48
 //                    display_name run
 //                    signature_documentation java @Override\npublic void run()
+//                    enclosing_symbol local 47
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Runnable#run().
         clearRecyclerViewSelectionMarker(recyclerView);
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearRecyclerViewSelectionMarker().
@@ -688,10 +736,12 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                        ^^^^^ definition local 49
 //                              display_name model
 //                              signature_documentation java T model
+//                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(+1).
 //                               ^^^^ reference semanticdb maven . . View#
 //                                    ^^^^^^^^ definition local 50
 //                                             display_name itemView
 //                                             signature_documentation java unresolved_type itemView
+//                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(+1).
 
   }
 
@@ -707,27 +757,34 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                  ^ definition local 51
 //                                    display_name c
 //                                    signature_documentation java unresolved_type c
+//                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onChildDraw().
 //                                     ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //                                                  ^^^^^^^^^^^^ definition local 52
 //                                                               display_name recyclerView
 //                                                               signature_documentation java unresolved_type recyclerView
+//                                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onChildDraw().
 //                                                                ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                                                                                ^^^^^^^^^^ definition local 53
 //                                                                                           display_name viewHolder
 //                                                                                           signature_documentation java EpoxyViewHolder viewHolder
+//                                                                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onChildDraw().
       float dX, float dY, int actionState, boolean isCurrentlyActive) {
 //          ^^ definition local 54
 //             display_name dX
 //             signature_documentation java float dX
+//             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onChildDraw().
 //                    ^^ definition local 55
 //                       display_name dY
 //                       signature_documentation java float dY
+//                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onChildDraw().
 //                            ^^^^^^^^^^^ definition local 56
 //                                        display_name actionState
 //                                        signature_documentation java int actionState
+//                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onChildDraw().
 //                                                 ^^^^^^^^^^^^^^^^^ definition local 57
 //                                                                   display_name isCurrentlyActive
 //                                                                   signature_documentation java boolean isCurrentlyActive
+//                                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onChildDraw().
     super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#super.
 //        ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelperCallback#onChildDraw().
@@ -744,6 +801,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                ^^^^^ definition local 58
 //                      display_name model
 //                      signature_documentation java EpoxyModel<?> model
+//                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onChildDraw().
 //                        ^^^^^^^^^^ reference local 53
 //                                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getModel().
     if (!isTouchableModel(model)) {
@@ -761,6 +819,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //       ^^^^^^^^ definition local 59
 //                display_name itemView
 //                signature_documentation java unresolved_type itemView
+//                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onChildDraw().
 //                  ^^^^^^^^^^ reference local 53
 //                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#itemView#
 
@@ -768,6 +827,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //        ^^^^^^^^^^^^^ definition local 60
 //                      display_name swipeProgress
 //                      signature_documentation java float swipeProgress
+//                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onChildDraw().
     if (Math.abs(dX) > Math.abs(dY)) {
 //      ^^^^ reference semanticdb maven jdk 11 java/lang/Math#
 //           ^^^ reference semanticdb maven jdk 11 java/lang/Math#abs(+2).
@@ -793,6 +853,7 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //        ^^^^^^^^^^^^^^^ definition local 61
 //                        display_name clampedProgress
 //                        signature_documentation java float clampedProgress
+//                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onChildDraw().
 //                          ^^^^ reference semanticdb maven jdk 11 java/lang/Math#
 //                               ^^^ reference semanticdb maven jdk 11 java/lang/Math#max(+2).
 //                                        ^^^^ reference semanticdb maven jdk 11 java/lang/Math#
@@ -820,18 +881,22 @@ public abstract class EpoxyModelTouchCallback<T extends EpoxyModel>
 //                                     ^^^^^ definition local 62
 //                                           display_name model
 //                                           signature_documentation java T model
+//                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeProgressChanged().
 //                                            ^^^^ reference semanticdb maven . . View#
 //                                                 ^^^^^^^^ definition local 63
 //                                                          display_name itemView
 //                                                          signature_documentation java unresolved_type itemView
+//                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeProgressChanged().
 //                                                                 ^^^^^^^^^^^^^ definition local 64
 //                                                                               display_name swipeProgress
 //                                                                               signature_documentation java float swipeProgress
+//                                                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeProgressChanged().
       Canvas canvas) {
 //    ^^^^^^ reference semanticdb maven . . Canvas#
 //           ^^^^^^ definition local 65
 //                  display_name canvas
 //                  signature_documentation java unresolved_type canvas
+//                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeProgressChanged().
 
   }
 }

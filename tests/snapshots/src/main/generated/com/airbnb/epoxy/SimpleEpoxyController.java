@@ -46,6 +46,7 @@ public class SimpleEpoxyController extends EpoxyController {
 //                                                    ^^^^^^ definition local 0
 //                                                           display_name models
 //                                                           signature_documentation java List<? extends EpoxyModel<?>> models
+//                                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#setModels().
     currentModels = models;
 //  ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#currentModels.
 //                  ^^^^^^ reference local 0

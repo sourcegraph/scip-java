@@ -47,15 +47,18 @@ public class QuantityStringResAttribute {
 //                                                  ^^ definition local 0
 //                                                     display_name id
 //                                                     signature_documentation java @PluralsRes\nint id
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`().
 //                                                          ^^^^^^^^ definition local 1
 //                                                                   display_name quantity
 //                                                                   signature_documentation java int quantity
+//                                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`().
       @Nullable Object[] formatArgs) {
 //     ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //              ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                       ^^^^^^^^^^ definition local 2
 //                                  display_name formatArgs
 //                                  signature_documentation java @Nullable\nObject[] formatArgs
+//                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`().
     this.quantity = quantity;
 //       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#quantity.
 //                  ^^^^^^^^ reference local 1
@@ -74,9 +77,11 @@ public class QuantityStringResAttribute {
 //                                      ^^ definition local 3
 //                                         display_name id
 //                                         signature_documentation java int id
+//                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`(+1).
 //                                              ^^^^^^^^ definition local 4
 //                                                       display_name quantity
 //                                                       signature_documentation java int quantity
+//                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`(+1).
     this(id, quantity, null);
 //  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`().
 //       ^^ reference local 3
@@ -121,6 +126,7 @@ public class QuantityStringResAttribute {
 //                                     ^^^^^^^ definition local 5
 //                                             display_name context
 //                                             signature_documentation java unresolved_type context
+//                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#toString().
     if (formatArgs == null || formatArgs.length == 0) {
 //      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.
 //                            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.
@@ -153,6 +159,7 @@ public class QuantityStringResAttribute {
 //                             ^ definition local 6
 //                               display_name o
 //                               signature_documentation java Object o
+//                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#equals().
     if (this == o) {
 //              ^ reference local 6
       return true;
@@ -168,6 +175,7 @@ public class QuantityStringResAttribute {
 //                             ^^^^ definition local 7
 //                                  display_name that
 //                                  signature_documentation java QuantityStringResAttribute that
+//                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#equals().
 //                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#
 //                                                                 ^ reference local 6
 
@@ -203,6 +211,7 @@ public class QuantityStringResAttribute {
 //      ^^^^^^ definition local 8
 //             display_name result
 //             signature_documentation java int result
+//             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#hashCode().
 //               ^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#id.
     result = 31 * result + quantity;
 //  ^^^^^^ reference local 8

@@ -35,19 +35,24 @@ public interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V> {
 //                 ^^^^^ definition local 0
 //                       display_name model
 //                       signature_documentation java T model
+//                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked().
 //                        ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#[V]
 //                          ^^^^^^^^^^ definition local 1
 //                                     display_name parentView
 //                                     signature_documentation java V parentView
+//                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked().
       CompoundButton checkedView, boolean isChecked, int position);
 //    ^^^^^^^^^^^^^^ reference semanticdb maven . . CompoundButton#
 //                   ^^^^^^^^^^^ definition local 2
 //                               display_name checkedView
 //                               signature_documentation java unresolved_type checkedView
+//                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked().
 //                                        ^^^^^^^^^ definition local 3
 //                                                  display_name isChecked
 //                                                  signature_documentation java boolean isChecked
+//                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked().
 //                                                       ^^^^^^^^ definition local 4
 //                                                                display_name position
 //                                                                signature_documentation java int position
+//                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked().
 }

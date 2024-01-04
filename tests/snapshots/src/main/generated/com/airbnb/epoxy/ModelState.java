@@ -62,17 +62,21 @@ class ModelState {
 //                                      ^^^^^ definition local 0
 //                                            display_name model
 //                                            signature_documentation java EpoxyModel<?> model
+//                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelState#build().
 //                                                 ^^^^^^^^ definition local 1
 //                                                          display_name position
 //                                                          signature_documentation java int position
+//                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelState#build().
 //                                                                   ^^^^^^^^^^^^^^ definition local 2
 //                                                                                  display_name immutableModel
 //                                                                                  signature_documentation java boolean immutableModel
+//                                                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelState#build().
     ModelState state = new ModelState();
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
 //             ^^^^^ definition local 3
 //                   display_name state
 //                   signature_documentation java ModelState state
+//                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelState#build().
 //                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#`<init>`().
 
     state.lastMoveOp = 0;

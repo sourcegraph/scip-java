@@ -52,6 +52,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //                                           ^^^^^^ definition local 0
 //                                                  display_name holder
 //                                                  signature_documentation java EpoxyViewHolder holder
+//                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#get().
     return holders.get(holder.getItemId());
 //         ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#holders.
 //                 ^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#get().
@@ -67,6 +68,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //                                ^^^^^^ definition local 1
 //                                       display_name holder
 //                                       signature_documentation java EpoxyViewHolder holder
+//                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#put().
     holders.put(holder.getItemId(), holder);
 //  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#holders.
 //          ^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#put().
@@ -83,6 +85,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //                                   ^^^^^^ definition local 2
 //                                          display_name holder
 //                                          signature_documentation java EpoxyViewHolder holder
+//                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#remove().
     holders.remove(holder.getItemId());
 //  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#holders.
 //          ^^^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#remove().
@@ -123,6 +126,7 @@ public class BoundViewHolders implements Iterable<EpoxyViewHolder> {
 //                                                       ^^^^^ definition local 3
 //                                                             display_name model
 //                                                             signature_documentation java EpoxyModel<?> model
+//                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#getHolderForModel().
     return holders.get(model.id());
 //         ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BoundViewHolders#holders.
 //                 ^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#get().

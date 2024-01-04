@@ -56,6 +56,7 @@ public abstract class AsyncEpoxyController extends EpoxyController {
 //                                    ^^^^^^^^^^^ definition local 0
 //                                                display_name enableAsync
 //                                                signature_documentation java boolean enableAsync
+//                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+1).
     this(enableAsync, enableAsync);
 //  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+2).
 //       ^^^^^^^^^^^ reference local 0
@@ -73,9 +74,11 @@ public abstract class AsyncEpoxyController extends EpoxyController {
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^ definition local 1
 //                                                             display_name enableAsyncModelBuilding
 //                                                             signature_documentation java boolean enableAsyncModelBuilding
+//                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+2).
 //                                                                      ^^^^^^^^^^^^^^^^^^ definition local 2
 //                                                                                         display_name enableAsyncDiffing
 //                                                                                         signature_documentation java boolean enableAsyncDiffing
+//                                                                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+2).
     super(getHandler(enableAsyncModelBuilding), getHandler(enableAsyncDiffing));
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#`<init>`(+1).
 //        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#getHandler().
@@ -92,6 +95,7 @@ public abstract class AsyncEpoxyController extends EpoxyController {
 //                                          ^^^^^^^^^^^ definition local 3
 //                                                      display_name enableAsync
 //                                                      signature_documentation java boolean enableAsync
+//                                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#getHandler().
     return enableAsync ? getAsyncBackgroundHandler() : MAIN_THREAD_HANDLER;
 //         ^^^^^^^^^^^ reference local 3
 //                       ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#getAsyncBackgroundHandler().

@@ -48,10 +48,12 @@ public interface OnModelVisibilityChangedListener<T extends EpoxyModel<V>, V> {
 //                           ^^^^^ definition local 0
 //                                 display_name model
 //                                 signature_documentation java T model
+//                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#onVisibilityChanged().
 //                                  ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#[V]
 //                                    ^^^^ definition local 1
 //                                         display_name view
 //                                         signature_documentation java V view
+//                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#onVisibilityChanged().
       @FloatRange(from = 0, to = 100) float percentVisibleHeight,
 //     ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#
 //                ^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#from().
@@ -59,6 +61,7 @@ public interface OnModelVisibilityChangedListener<T extends EpoxyModel<V>, V> {
 //                                          ^^^^^^^^^^^^^^^^^^^^ definition local 2
 //                                                               display_name percentVisibleHeight
 //                                                               signature_documentation java @FloatRange(from = 0, to = 100)\nfloat percentVisibleHeight
+//                                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#onVisibilityChanged().
       @FloatRange(from = 0, to = 100) float percentVisibleWidth,
 //     ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#
 //                ^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#from().
@@ -66,13 +69,16 @@ public interface OnModelVisibilityChangedListener<T extends EpoxyModel<V>, V> {
 //                                          ^^^^^^^^^^^^^^^^^^^ definition local 3
 //                                                              display_name percentVisibleWidth
 //                                                              signature_documentation java @FloatRange(from = 0, to = 100)\nfloat percentVisibleWidth
+//                                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#onVisibilityChanged().
       @Px int heightVisible, @Px int widthVisible);
 //     ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#
 //            ^^^^^^^^^^^^^ definition local 4
 //                          display_name heightVisible
 //                          signature_documentation java @Px\nint heightVisible
+//                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#onVisibilityChanged().
 //                            ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#
 //                                   ^^^^^^^^^^^^ definition local 5
 //                                                display_name widthVisible
 //                                                signature_documentation java @Px\nint widthVisible
+//                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#onVisibilityChanged().
 }

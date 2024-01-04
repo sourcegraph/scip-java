@@ -36,15 +36,19 @@ public interface OnModelClickListener<T extends EpoxyModel<?>, V> {
 //               ^^^^^ definition local 0
 //                     display_name model
 //                     signature_documentation java T model
+//                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#onClick().
 //                      ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#[V]
 //                        ^^^^^^^^^^ definition local 1
 //                                   display_name parentView
 //                                   signature_documentation java V parentView
+//                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#onClick().
 //                                    ^^^^ reference semanticdb maven . . View#
 //                                         ^^^^^^^^^^^ definition local 2
 //                                                     display_name clickedView
 //                                                     signature_documentation java unresolved_type clickedView
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#onClick().
 //                                                          ^^^^^^^^ definition local 3
 //                                                                   display_name position
 //                                                                   signature_documentation java int position
+//                                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#onClick().
 }

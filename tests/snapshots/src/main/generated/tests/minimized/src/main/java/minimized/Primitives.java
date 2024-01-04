@@ -22,53 +22,62 @@ public class Primitives {
 //         ^^^^^^ definition local 0
 //                display_name random
 //                signature_documentation java Random random
+//                enclosing_symbol semanticdb maven . . minimized/Primitives#app().
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/util/Random#`<init>`().
     byte a = (byte) random.nextInt();
 //       ^ definition local 1
 //         display_name a
 //         signature_documentation java byte a
+//         enclosing_symbol semanticdb maven . . minimized/Primitives#app().
 //                  ^^^^^^ reference local 0
 //                         ^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextInt().
     short b = (short) random.nextInt();
 //        ^ definition local 2
 //          display_name b
 //          signature_documentation java short b
+//          enclosing_symbol semanticdb maven . . minimized/Primitives#app().
 //                    ^^^^^^ reference local 0
 //                           ^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextInt().
     int c = random.nextInt();
 //      ^ definition local 3
 //        display_name c
 //        signature_documentation java int c
+//        enclosing_symbol semanticdb maven . . minimized/Primitives#app().
 //          ^^^^^^ reference local 0
 //                 ^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextInt().
     long d = random.nextLong();
 //       ^ definition local 4
 //         display_name d
 //         signature_documentation java long d
+//         enclosing_symbol semanticdb maven . . minimized/Primitives#app().
 //           ^^^^^^ reference local 0
 //                  ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextLong().
     char e = (char) random.nextInt();
 //       ^ definition local 5
 //         display_name e
 //         signature_documentation java char e
+//         enclosing_symbol semanticdb maven . . minimized/Primitives#app().
 //                  ^^^^^^ reference local 0
 //                         ^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextInt().
     float f = (float) random.nextDouble();
 //        ^ definition local 6
 //          display_name f
 //          signature_documentation java float f
+//          enclosing_symbol semanticdb maven . . minimized/Primitives#app().
 //                    ^^^^^^ reference local 0
 //                           ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextDouble().
     double g = (double) random.nextDouble();
 //         ^ definition local 7
 //           display_name g
 //           signature_documentation java double g
+//           enclosing_symbol semanticdb maven . . minimized/Primitives#app().
 //                      ^^^^^^ reference local 0
 //                             ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextDouble().
     boolean h = random.nextBoolean();
 //          ^ definition local 8
 //            display_name h
 //            signature_documentation java boolean h
+//            enclosing_symbol semanticdb maven . . minimized/Primitives#app().
 //              ^^^^^^ reference local 0
 //                     ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextBoolean().
     return "" + a + b + c + d + e + f + g + h;

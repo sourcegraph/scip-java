@@ -47,6 +47,7 @@ public class ParameterizedTypes<A, B extends String> {
 //                                                                       ^^^^ definition local 0
 //                                                                            display_name list
 //                                                                            signature_documentation java List<T> list
+//                                                                            enclosing_symbol semanticdb maven . . minimized/ParameterizedTypes#iteratorable().
 
   public String app(A a, B b) {
 //       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
@@ -57,10 +58,12 @@ public class ParameterizedTypes<A, B extends String> {
 //                    ^ definition local 1
 //                      display_name a
 //                      signature_documentation java A a
+//                      enclosing_symbol semanticdb maven . . minimized/ParameterizedTypes#app().
 //                       ^ reference semanticdb maven . . minimized/ParameterizedTypes#[B]
 //                         ^ definition local 2
 //                           display_name b
 //                           signature_documentation java B b
+//                           enclosing_symbol semanticdb maven . . minimized/ParameterizedTypes#app().
     return a.toString() + b;
 //         ^ reference local 1
 //           ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#toString().

@@ -56,6 +56,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                                       ^^^^^^^^^ definition local 0
 //                                                 display_name layoutRes
 //                                                 signature_documentation java @LayoutRes\nint layoutRes
+//                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#`<init>`().
     this.layoutRes = layoutRes;
 //       ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#layoutRes.
 //                   ^^^^^^^^^ reference local 0
@@ -71,6 +72,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                                                     ^^^^^^^^ definition local 1
 //                                                              display_name listener
 //                                                              signature_documentation java unresolved_type listener
+//                                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#onClick().
     this.onClickListener = listener;
 //       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#onClickListener.
 //                         ^^^^^^^^ reference local 1
@@ -85,6 +87,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                                 ^^^^ definition local 2
 //                                      display_name span
 //                                      signature_documentation java int span
+//                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#span().
     spanCount = span;
 //  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#spanCount.
 //              ^^^^ reference local 2
@@ -105,6 +108,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                               ^^^^ definition local 3
 //                                    display_name view
 //                                    signature_documentation java @NonNull\nunresolved_type view
+//                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#bind().
     super.bind(view);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#super.
 //        ^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#bind().
@@ -133,6 +137,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                                 ^^^^ definition local 4
 //                                      display_name view
 //                                      signature_documentation java @NonNull\nunresolved_type view
+//                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#unbind().
     super.unbind(view);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#super.
 //        ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#unbind().
@@ -163,12 +168,15 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                           ^^^^^^^^^^^^^^ definition local 5
 //                                          display_name totalSpanCount
 //                                          signature_documentation java int totalSpanCount
+//                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#getSpanSize().
 //                                               ^^^^^^^^ definition local 6
 //                                                        display_name position
 //                                                        signature_documentation java int position
+//                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#getSpanSize().
 //                                                             ^^^^^^^^^ definition local 7
 //                                                                       display_name itemCount
 //                                                                       signature_documentation java int itemCount
+//                                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#getSpanSize().
     return spanCount;
 //         ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#spanCount.
   }
@@ -185,6 +193,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                             ^ definition local 8
 //                               display_name o
 //                               signature_documentation java Object o
+//                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#equals().
     if (this == o) {
 //              ^ reference local 8
       return true;
@@ -206,6 +215,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                   ^^^^ definition local 9
 //                        display_name that
 //                        signature_documentation java SimpleEpoxyModel that
+//                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#equals().
 //                           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#
 //                                             ^ reference local 8
 
@@ -244,6 +254,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //      ^^^^^^ definition local 10
 //             display_name result
 //             signature_documentation java int result
+//             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#hashCode().
 //               ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#super.
 //                     ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#hashCode().
     result = 31 * result + layoutRes;

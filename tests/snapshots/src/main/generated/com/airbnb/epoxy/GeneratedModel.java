@@ -24,13 +24,16 @@ public interface GeneratedModel<T> {
 //                                   ^^^^^^ definition local 0
 //                                          display_name holder
 //                                          signature_documentation java EpoxyViewHolder holder
+//                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/GeneratedModel#handlePreBind().
 //                                           ^ reference semanticdb maven . . com/airbnb/epoxy/GeneratedModel#[T]
 //                                             ^^^^^^^^^^^^ definition local 1
 //                                                          display_name objectToBind
 //                                                          signature_documentation java T objectToBind
+//                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/GeneratedModel#handlePreBind().
 //                                                               ^^^^^^^^ definition local 2
 //                                                                        display_name position
 //                                                                        signature_documentation java int position
+//                                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/GeneratedModel#handlePreBind().
   /**
    * Called on the generated model immediately after the main model onBind method has been called.
    * This let's the generated model handle binding of its own and dispatch calls to its onBind
@@ -49,7 +52,9 @@ public interface GeneratedModel<T> {
 //                      ^^^^^^^^^^^^ definition local 3
 //                                   display_name objectToBind
 //                                   signature_documentation java T objectToBind
+//                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/GeneratedModel#handlePostBind().
 //                                        ^^^^^^^^ definition local 4
 //                                                 display_name position
 //                                                 signature_documentation java int position
+//                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/GeneratedModel#handlePostBind().
 }

@@ -51,12 +51,15 @@ class HiddenEpoxyModel extends EpoxyModel<Space> {
 //                           ^^^^^^^^^ definition local 0
 //                                     display_name spanCount
 //                                     signature_documentation java int spanCount
+//                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#getSpanSize().
 //                                          ^^^^^^^^ definition local 1
 //                                                   display_name position
 //                                                   signature_documentation java int position
+//                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#getSpanSize().
 //                                                        ^^^^^^^^^ definition local 2
 //                                                                  display_name itemCount
 //                                                                  signature_documentation java int itemCount
+//                                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#getSpanSize().
     return 0;
   }
 }

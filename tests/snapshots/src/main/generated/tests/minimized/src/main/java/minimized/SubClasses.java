@@ -44,6 +44,7 @@ public class SubClasses extends AbstractClasses implements Interfaces {
 //             ^ definition local 0
 //               display_name s
 //               signature_documentation java SubClasses s
+//               enclosing_symbol semanticdb maven . . minimized/SubClasses#app().
 //                     ^^^^^^^^^^ reference semanticdb maven . . minimized/SubClasses#`<init>`().
     return s.abstractImplementation()
 //         ^ reference local 0
