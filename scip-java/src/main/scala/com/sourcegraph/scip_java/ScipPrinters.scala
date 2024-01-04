@@ -186,6 +186,13 @@ object ScipPrinters {
             .append(info.getSignatureDocumentation.getText.replace("\n", "\\n").replace("\t", "\\t"))
             .append("\n")
         }
+        if (!info.getEnclosingSymbol.isEmpty) {
+          out
+            .append(prefix)
+            .append("enclosing_symbol ")
+            .append(info.getEnclosingSymbol)
+            .append("\n")
+        }
         0.until(info.getDocumentationCount)
           .foreach { n =>
             val documentation = info.getDocumentation(n)

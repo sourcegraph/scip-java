@@ -133,6 +133,9 @@ public class ScipSemanticdb {
             Scip.SymbolInformation.newBuilder().setSymbol(typedSymbol(info.getSymbol(), pkg));
 
         scipInfo.setDisplayName(info.getDisplayName());
+        if (!info.getEnclosingSymbol().isEmpty()) {
+          scipInfo.setEnclosingSymbol(typedSymbol(info.getEnclosingSymbol(), pkg));
+        }
 
         // TODO: this can be removed once https://github.com/sourcegraph/sourcegraph/issues/50927 is
         // fixed.
