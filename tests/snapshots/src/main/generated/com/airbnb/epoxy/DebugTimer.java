@@ -35,6 +35,7 @@ class DebugTimer implements Timer {
 //                  ^^^ definition local 0
 //                      display_name tag
 //                      signature_documentation java String tag
+//                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DebugTimer#`<init>`().
     this.tag = tag;
 //       ^^^ reference semanticdb maven . . com/airbnb/epoxy/DebugTimer#tag.
 //             ^^^ reference local 0
@@ -63,6 +64,7 @@ class DebugTimer implements Timer {
 //                         ^^^^^^^^^^^ definition local 1
 //                                     display_name sectionName
 //                                     signature_documentation java String sectionName
+//                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DebugTimer#start().
     if (startTime != -1) {
 //      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DebugTimer#startTime.
       throw new IllegalStateException("Timer was already started");
@@ -95,6 +97,7 @@ class DebugTimer implements Timer {
 //        ^^^^^^^^^^ definition local 2
 //                   display_name durationMs
 //                   signature_documentation java float durationMs
+//                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DebugTimer#stop().
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
 //                             ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/System#nanoTime().
 //                                          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DebugTimer#startTime.

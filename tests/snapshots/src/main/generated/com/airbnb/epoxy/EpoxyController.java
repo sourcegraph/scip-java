@@ -286,10 +286,12 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                               ^^^^^^^^^^^^^^^^^^^^ definition local 0
 //                                                    display_name modelBuildingHandler
 //                                                    signature_documentation java unresolved_type modelBuildingHandler
+//                                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#`<init>`(+1).
 //                                                     ^^^^^^^ reference semanticdb maven . . Handler#
 //                                                             ^^^^^^^^^^^^^^ definition local 1
 //                                                                            display_name diffingHandler
 //                                                                            signature_documentation java unresolved_type diffingHandler
+//                                                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#`<init>`(+1).
     adapter = new EpoxyControllerAdapter(this, diffingHandler);
 //  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#adapter.
 //                ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#`<init>`().
@@ -441,6 +443,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                               ^^^^^^^^ definition local 2
 //                                                                        display_name listener
 //                                                                        signature_documentation java OnModelBuildFinishedListener listener
+//                                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#addModelBuildListener().
     adapter.addModelBuildListener(listener);
 //  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#adapter.
 //          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#addModelBuildListener().
@@ -461,6 +464,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                                  ^^^^^^^^ definition local 3
 //                                                                           display_name listener
 //                                                                           signature_documentation java OnModelBuildFinishedListener listener
+//                                                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#removeModelBuildListener().
     adapter.removeModelBuildListener(listener);
 //  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#adapter.
 //          ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#removeModelBuildListener().
@@ -498,6 +502,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                      ^^^^^^^ definition local 4
 //                                                              display_name delayMs
 //                                                              signature_documentation java int delayMs
+//                                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#requestDelayedModelBuild().
     if (isBuildingModels()) {
 //      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#isBuildingModels().
       throw new IllegalEpoxyUsage(
@@ -576,6 +581,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //              ^^^ definition local 6
 //                  display_name run
 //                  signature_documentation java @Override\npublic void run()
+//                  enclosing_symbol local 5
 //                  relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Runnable#run().
       // Do this first to mark the controller as being in the model building process.
       threadBuildingModels = Thread.currentThread();
@@ -615,6 +621,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                       ^^^^^^^^^ definition local 7
 //                                 display_name throwable
 //                                 signature_documentation java Throwable throwable
+//                                 enclosing_symbol local 6
         timer.stop();
 //      ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#timer.
 //            ^^^^ reference semanticdb maven . . com/airbnb/epoxy/Timer#stop().
@@ -676,6 +683,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //      ^^^^^^^^^^^^^^^^^ definition local 8
 //                        display_name currentModelCount
 //                        signature_documentation java int currentModelCount
+//                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#getExpectedModelCount().
 //                          ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#adapter.
 //                                  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getItemCount().
     return currentModelCount != 0 ? currentModelCount : 25;
@@ -715,6 +723,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                     ^^^^^ definition local 9
 //                                                           display_name model
 //                                                           signature_documentation java EpoxyModel<?> model
+//                                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#getFirstIndexOfModelInBuildingList().
     assertIsBuildingModels();
 //  ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#assertIsBuildingModels().
 
@@ -722,12 +731,14 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //      ^^^^ definition local 10
 //           display_name size
 //           signature_documentation java int size
+//           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#getFirstIndexOfModelInBuildingList().
 //             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#modelsBeingBuilt.
 //                              ^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#size().
     for (int i = 0; i < size; i++) {
 //           ^ definition local 11
 //             display_name i
 //             signature_documentation java int i
+//             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#getFirstIndexOfModelInBuildingList().
 //                  ^ reference local 11
 //                      ^^^^ reference local 10
 //                            ^ reference local 11
@@ -752,6 +763,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                ^^^^^ definition local 12
 //                                                      display_name model
 //                                                      signature_documentation java EpoxyModel<?> model
+//                                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#isModelAddedMultipleTimes().
     assertIsBuildingModels();
 //  ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#assertIsBuildingModels().
 
@@ -759,16 +771,19 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //      ^^^^^^^^^^ definition local 13
 //                 display_name modelCount
 //                 signature_documentation java int modelCount
+//                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#isModelAddedMultipleTimes().
     int size = modelsBeingBuilt.size();
 //      ^^^^ definition local 14
 //           display_name size
 //           signature_documentation java int size
+//           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#isModelAddedMultipleTimes().
 //             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#modelsBeingBuilt.
 //                              ^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#size().
     for (int i = 0; i < size; i++) {
 //           ^ definition local 15
 //             display_name i
 //             signature_documentation java int i
+//             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#isModelAddedMultipleTimes().
 //                  ^ reference local 15
 //                      ^^^^ reference local 14
 //                            ^ reference local 15
@@ -794,6 +809,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                          ^^^^^^^^ definition local 16
 //                                                                   display_name callback
 //                                                                   signature_documentation java ModelInterceptorCallback callback
+//                                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#addAfterInterceptorCallback().
     assertIsBuildingModels();
 //  ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#assertIsBuildingModels().
 
@@ -827,6 +843,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                             ^^^^^^^^^^ definition local 17
 //                                                        display_name controller
 //                                                        signature_documentation java EpoxyController controller
+//                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#onInterceptorsStarted().
     void onInterceptorsFinished(EpoxyController controller);
 //       ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#onInterceptorsFinished().
 //                              display_name onInterceptorsFinished
@@ -835,6 +852,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                              ^^^^^^^^^^ definition local 18
 //                                                         display_name controller
 //                                                         signature_documentation java EpoxyController controller
+//                                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#ModelInterceptorCallback#onInterceptorsFinished().
   }
 
   private void runInterceptors() {
@@ -851,6 +869,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                    ^^^^^^^^ definition local 19
 //                                             display_name callback
 //                                             signature_documentation java ModelInterceptorCallback callback
+//                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#runInterceptors().
 //                                               ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#modelInterceptorCallbacks.
           callback.onInterceptorsStarted(this);
 //        ^^^^^^^^ reference local 19
@@ -867,6 +886,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                     ^^^^^^^^^^^ definition local 20
 //                                 display_name interceptor
 //                                 signature_documentation java Interceptor interceptor
+//                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#runInterceptors().
 //                                   ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#interceptors.
         interceptor.intercept(modelsBeingBuilt);
 //      ^^^^^^^^^^^ reference local 20
@@ -885,6 +905,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                    ^^^^^^^^ definition local 21
 //                                             display_name callback
 //                                             signature_documentation java ModelInterceptorCallback callback
+//                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#runInterceptors().
 //                                               ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#modelInterceptorCallbacks.
           callback.onInterceptorsFinished(this);
 //        ^^^^^^^^ reference local 21
@@ -927,6 +948,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                              ^^^^^^ definition local 22
 //                                                     display_name models
 //                                                     signature_documentation java @NonNull\nList<EpoxyModel<?>> models
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#Interceptor#intercept().
   }
 
   /**
@@ -947,6 +969,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                ^^^^^^^^^^^ definition local 23
 //                                                            display_name interceptor
 //                                                            signature_documentation java @NonNull\nInterceptor interceptor
+//                                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#addInterceptor().
     interceptors.add(interceptor);
 //  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#interceptors.
 //               ^^^ reference semanticdb maven jdk 11 java/util/List#add().
@@ -964,6 +987,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                   ^^^^^^^^^^^ definition local 24
 //                                                               display_name interceptor
 //                                                               signature_documentation java @NonNull\nInterceptor interceptor
+//                                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#removeInterceptor().
     interceptors.remove(interceptor);
 //  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#interceptors.
 //               ^^^^^^ reference semanticdb maven jdk 11 java/util/List#remove().
@@ -1026,6 +1050,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                       ^^^^^ definition local 25
 //                                             display_name model
 //                                             signature_documentation java @NonNull\nEpoxyModel<?> model
+//                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#add().
     model.addTo(this);
 //  ^^^^^ reference local 25
 //        ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#addTo().
@@ -1045,6 +1070,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                             ^^^^^^^^^^^ definition local 26
 //                                                         display_name modelsToAdd
 //                                                         signature_documentation java @NonNull\nEpoxyModel<?>[] modelsToAdd
+//                                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#add(+1).
     modelsBeingBuilt.ensureCapacity(modelsBeingBuilt.size() + modelsToAdd.length);
 //  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#modelsBeingBuilt.
 //                   ^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#ensureCapacity().
@@ -1058,6 +1084,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                     ^^^^^ definition local 27
 //                           display_name model
 //                           signature_documentation java EpoxyModel<?> model
+//                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#add(+1).
 //                             ^^^^^^^^^^^ reference local 26
       add(model);
 //    ^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#add().
@@ -1080,6 +1107,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                          ^^^^^^^^^^^ definition local 28
 //                                                                      display_name modelsToAdd
 //                                                                      signature_documentation java @NonNull\nList<? extends EpoxyModel<?>> modelsToAdd
+//                                                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#add(+2).
     modelsBeingBuilt.ensureCapacity(modelsBeingBuilt.size() + modelsToAdd.size());
 //  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#modelsBeingBuilt.
 //                   ^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#ensureCapacity().
@@ -1093,6 +1121,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                     ^^^^^ definition local 29
 //                           display_name model
 //                           signature_documentation java EpoxyModel<?> model
+//                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#add(+2).
 //                             ^^^^^^^^^^^ reference local 28
       add(model);
 //    ^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#add().
@@ -1113,6 +1142,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                               ^^^^^^^^^^ definition local 30
 //                                          display_name modelToAdd
 //                                          signature_documentation java EpoxyModel<?> modelToAdd
+//                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#addInternal().
     assertIsBuildingModels();
 //  ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#assertIsBuildingModels().
 
@@ -1167,6 +1197,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                  ^^^^^ definition local 31
 //                                        display_name model
 //                                        signature_documentation java EpoxyModel<?> model
+//                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#setStagedModel().
     if (model != stagedModel) {
 //      ^^^^^ reference local 31
 //               ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#stagedModel.
@@ -1201,6 +1232,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                         ^^^^^ definition local 32
 //                                               display_name model
 //                                               signature_documentation java EpoxyModel<?> model
+//                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#clearModelFromStaging().
     if (stagedModel != model) {
 //      ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#stagedModel.
 //                     ^^^^^ reference local 32
@@ -1232,6 +1264,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                          ^^^^^^ definition local 33
 //                                                                 display_name models
 //                                                                 signature_documentation java List<EpoxyModel<?>> models
+//                                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#filterDuplicatesIfNeeded().
     if (!filterDuplicates) {
 //       ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#filterDuplicates.
       return;
@@ -1246,6 +1279,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //            ^^^^^^^^ definition local 34
 //                     display_name modelIds
 //                     signature_documentation java Set<Long> modelIds
+//                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#filterDuplicatesIfNeeded().
 //                           ^^^^^^^ reference semanticdb maven jdk 11 java/util/HashSet#`<init>`(+3).
 //                                     ^^^^^^ reference local 33
 //                                            ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
@@ -1256,6 +1290,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                              ^^^^^^^^^^^^^ definition local 35
 //                                            display_name modelIterator
 //                                            signature_documentation java ListIterator<EpoxyModel<?>> modelIterator
+//                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#filterDuplicatesIfNeeded().
 //                                              ^^^^^^ reference local 33
 //                                                     ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/List#listIterator().
     while (modelIterator.hasNext()) {
@@ -1266,6 +1301,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                  ^^^^^ definition local 36
 //                        display_name model
 //                        signature_documentation java EpoxyModel<?> model
+//                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#filterDuplicatesIfNeeded().
 //                          ^^^^^^^^^^^^^ reference local 35
 //                                        ^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#next().
       if (!modelIds.add(model.id())) {
@@ -1277,6 +1313,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //          ^^^^^^^^^^^^^^^^ definition local 37
 //                           display_name indexOfDuplicate
 //                           signature_documentation java int indexOfDuplicate
+//                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#filterDuplicatesIfNeeded().
 //                             ^^^^^^^^^^^^^ reference local 35
 //                                           ^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#previousIndex().
         modelIterator.remove();
@@ -1287,6 +1324,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //          ^^^^^^^^^^^^^^^ definition local 38
 //                          display_name indexOfOriginal
 //                          signature_documentation java int indexOfOriginal
+//                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#filterDuplicatesIfNeeded().
 //                            ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#findPositionOfDuplicate().
 //                                                    ^^^^^^ reference local 33
 //                                                            ^^^^^ reference local 36
@@ -1295,6 +1333,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                    ^^^^^^^^^^^^^ definition local 39
 //                                  display_name originalModel
 //                                  signature_documentation java EpoxyModel<?> originalModel
+//                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#filterDuplicatesIfNeeded().
 //                                    ^^^^^^ reference local 33
 //                                           ^^^ reference semanticdb maven jdk 11 java/util/List#get().
 //                                               ^^^^^^^^^^^^^^^ reference local 38
@@ -1334,20 +1373,24 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                        ^^^^^^ definition local 40
 //                                                               display_name models
 //                                                               signature_documentation java List<EpoxyModel<?>> models
+//                                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#findPositionOfDuplicate().
 //                                                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                              ^^^^^^^^^^^^^^ definition local 41
 //                                                                                             display_name duplicateModel
 //                                                                                             signature_documentation java EpoxyModel<?> duplicateModel
+//                                                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#findPositionOfDuplicate().
     int size = models.size();
 //      ^^^^ definition local 42
 //           display_name size
 //           signature_documentation java int size
+//           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#findPositionOfDuplicate().
 //             ^^^^^^ reference local 40
 //                    ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
     for (int i = 0; i < size; i++) {
 //           ^ definition local 43
 //             display_name i
 //             signature_documentation java int i
+//             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#findPositionOfDuplicate().
 //                  ^ reference local 43
 //                      ^^^^ reference local 42
 //                            ^ reference local 43
@@ -1356,6 +1399,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                  ^^^^^ definition local 44
 //                        display_name model
 //                        signature_documentation java EpoxyModel<?> model
+//                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#findPositionOfDuplicate().
 //                          ^^^^^^ reference local 40
 //                                 ^^^ reference semanticdb maven jdk 11 java/util/List#get().
 //                                     ^ reference local 43
@@ -1391,6 +1435,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                        ^^^^^^^^^^^^^^^^ definition local 45
 //                                                         display_name filterDuplicates
 //                                                         signature_documentation java boolean filterDuplicates
+//                                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#setFilterDuplicates().
     this.filterDuplicates = filterDuplicates;
 //       ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#filterDuplicates.
 //                          ^^^^^^^^^^^^^^^^ reference local 45
@@ -1417,6 +1462,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 46
 //                                                                                        display_name filterDuplicatesByDefault
 //                                                                                        signature_documentation java boolean filterDuplicatesByDefault
+//                                                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#setGlobalDuplicateFilteringDefault().
     EpoxyController.filterDuplicatesDefault = filterDuplicatesByDefault;
 //  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                  ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#filterDuplicatesDefault.
@@ -1442,6 +1488,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                           ^^^^^^^ definition local 47
 //                                                   display_name enabled
 //                                                   signature_documentation java boolean enabled
+//                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#setDebugLoggingEnabled().
     assertNotBuildingModels();
 //  ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#assertNotBuildingModels().
 
@@ -1501,6 +1548,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 48
 //                                                                                  display_name globalDebugLoggingEnabled
 //                                                                                  signature_documentation java boolean globalDebugLoggingEnabled
+//                                                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#setGlobalDebugLoggingEnabled().
     EpoxyController.globalDebugLoggingEnabled = globalDebugLoggingEnabled;
 //  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#globalDebugLoggingEnabled.
@@ -1533,9 +1581,11 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                          ^^^^^^^^^^^^ definition local 49
 //                                       display_name fromPosition
 //                                       signature_documentation java int fromPosition
+//                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#moveModel().
 //                                            ^^^^^^^^^^ definition local 50
 //                                                       display_name toPosition
 //                                                       signature_documentation java int toPosition
+//                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#moveModel().
     assertNotBuildingModels();
 //  ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#assertNotBuildingModels().
 
@@ -1566,6 +1616,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                   ^^^^^^^^ definition local 51
 //                                            display_name position
 //                                            signature_documentation java int position
+//                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#notifyModelChanged().
     assertNotBuildingModels();
 //  ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#assertNotBuildingModels().
 
@@ -1601,6 +1652,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                ^^^^^^^^ definition local 52
 //                                                         display_name outState
 //                                                         signature_documentation java @NonNull\nunresolved_type outState
+//                                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onSaveInstanceState().
     adapter.onSaveInstanceState(outState);
 //  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#adapter.
 //          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onSaveInstanceState().
@@ -1616,6 +1668,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                    ^^^^^^^ definition local 53
 //                                                            display_name inState
 //                                                            signature_documentation java @Nullable\nunresolved_type inState
+//                                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onRestoreInstanceState().
     adapter.onRestoreInstanceState(inState);
 //  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#adapter.
 //          ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onRestoreInstanceState().
@@ -1656,6 +1709,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                             ^^^^^^^^^ definition local 54
 //                                       display_name spanCount
 //                                       signature_documentation java int spanCount
+//                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#setSpanCount().
     adapter.setSpanCount(spanCount);
 //  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#adapter.
 //          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#setSpanCount().
@@ -1702,6 +1756,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                              ^^^^^^^^^ definition local 55
 //                                                                        display_name exception
 //                                                                        signature_documentation java @NonNull\nRuntimeException exception
+//                                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onExceptionSwallowed().
     globalExceptionHandler.onException(this, exception);
 //  ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#globalExceptionHandler.
 //                         ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#ExceptionHandler#onException().
@@ -1727,18 +1782,21 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                  ^^^^^^^^^^^ definition local 57
 //                              display_name onException
 //                              signature_documentation java @Override\npublic void onException(EpoxyController controller, RuntimeException exception)
+//                              enclosing_symbol local 56
 //                              relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#ExceptionHandler#onException().
 //                               ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                                                       ^^^^^^^^^^ definition local 58
 //                                                                  display_name controller
 //                                                                  signature_documentation java @NonNull\nEpoxyController controller
+//                                                                  enclosing_symbol local 57
             @NonNull RuntimeException exception) {
 //           ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                   ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/RuntimeException#
 //                                    ^^^^^^^^^ definition local 59
 //                                              display_name exception
 //                                              signature_documentation java @NonNull\nRuntimeException exception
+//                                              enclosing_symbol local 57
           // Ignore exceptions as the default
         }
       };
@@ -1768,6 +1826,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                              ^^^^^^^^^^^^^^^^^^^^^^ definition local 60
 //                                                     display_name globalExceptionHandler
 //                                                     signature_documentation java @NonNull\nExceptionHandler globalExceptionHandler
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#setGlobalExceptionHandler().
     EpoxyController.globalExceptionHandler = globalExceptionHandler;
 //  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                  ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#globalExceptionHandler.
@@ -1797,11 +1856,13 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                            ^^^^^^^^^^ definition local 61
 //                                                       display_name controller
 //                                                       signature_documentation java @NonNull\nEpoxyController controller
+//                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#ExceptionHandler#onException().
 //                                                         ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                                                 ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/RuntimeException#
 //                                                                                  ^^^^^^^^^ definition local 62
 //                                                                                            display_name exception
 //                                                                                            signature_documentation java @NonNull\nRuntimeException exception
+//                                                                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#ExceptionHandler#onException().
   }
 
   void onAttachedToRecyclerViewInternal(RecyclerView recyclerView) {
@@ -1812,6 +1873,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                   ^^^^^^^^^^^^ definition local 63
 //                                                                display_name recyclerView
 //                                                                signature_documentation java unresolved_type recyclerView
+//                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onAttachedToRecyclerViewInternal().
     recyclerViewAttachCount++;
 //  ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#recyclerViewAttachCount.
 
@@ -1829,6 +1891,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                  ^^^ definition local 65
 //                      display_name run
 //                      signature_documentation java @Override\npublic void run()
+//                      enclosing_symbol local 64
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Runnable#run().
           // Only warn if there are still multiple adapters attached after a delay, to allow for
           // a grace period
@@ -1866,6 +1929,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                     ^^^^^^^^^^^^ definition local 66
 //                                                                  display_name recyclerView
 //                                                                  signature_documentation java unresolved_type recyclerView
+//                                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onDetachedFromRecyclerViewInternal().
     recyclerViewAttachCount--;
 //  ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#recyclerViewAttachCount.
     onDetachedFromRecyclerView(recyclerView);
@@ -1884,6 +1948,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                              ^^^^^^^^^^^^ definition local 67
 //                                                                           display_name recyclerView
 //                                                                           signature_documentation java @NonNull\nunresolved_type recyclerView
+//                                                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onAttachedToRecyclerView().
 
   }
 
@@ -1898,6 +1963,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                                ^^^^^^^^^^^^ definition local 68
 //                                                                             display_name recyclerView
 //                                                                             signature_documentation java @NonNull\nunresolved_type recyclerView
+//                                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onDetachedFromRecyclerView().
 
   }
 
@@ -1944,21 +2010,25 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                     ^^^^^^ definition local 69
 //                                                            display_name holder
 //                                                            signature_documentation java @NonNull\nEpoxyViewHolder holder
+//                                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onModelBound().
 //                                                              ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                                    ^^^^^^^^^^ definition local 70
 //                                                                                               display_name boundModel
 //                                                                                               signature_documentation java @NonNull\nEpoxyModel<?> boundModel
+//                                                                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onModelBound().
       int position,
 //        ^^^^^^^^ definition local 71
 //                 display_name position
 //                 signature_documentation java int position
+//                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onModelBound().
       @Nullable EpoxyModel<?> previouslyBoundModel) {
 //     ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^^^^^^^^^^^^^^ definition local 72
 //                                                 display_name previouslyBoundModel
 //                                                 signature_documentation java @Nullable\nEpoxyModel<?> previouslyBoundModel
+//                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onModelBound().
   }
 
   /**
@@ -1976,11 +2046,13 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                       ^^^^^^ definition local 73
 //                                                              display_name holder
 //                                                              signature_documentation java @NonNull\nEpoxyViewHolder holder
+//                                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onModelUnbound().
 //                                                                ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                                                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                                      ^^^^^ definition local 74
 //                                                                                            display_name model
 //                                                                                            signature_documentation java @NonNull\nEpoxyModel<?> model
+//                                                                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onModelUnbound().
 
   }
 
@@ -2000,12 +2072,14 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                               ^^^^^^ definition local 75
 //                                                                      display_name holder
 //                                                                      signature_documentation java @NonNull\nEpoxyViewHolder holder
+//                                                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onViewAttachedToWindow().
       @NonNull EpoxyModel<?> model) {
 //     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                           ^^^^^ definition local 76
 //                                 display_name model
 //                                 signature_documentation java @NonNull\nEpoxyModel<?> model
+//                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onViewAttachedToWindow().
 
   }
 
@@ -2025,12 +2099,14 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                                 ^^^^^^ definition local 77
 //                                                                        display_name holder
 //                                                                        signature_documentation java @NonNull\nEpoxyViewHolder holder
+//                                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onViewDetachedFromWindow().
       @NonNull EpoxyModel<?> model) {
 //     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                           ^^^^^ definition local 78
 //                                 display_name model
 //                                 signature_documentation java @NonNull\nEpoxyModel<?> model
+//                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#onViewDetachedFromWindow().
 
   }
 
@@ -2055,6 +2131,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                ^^^^^^^^^^^^ definition local 79
 //                                                             display_name stickyHeader
 //                                                             signature_documentation java @NotNull\nunresolved_type stickyHeader
+//                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#setupStickyHeaderView().
     // no-op
   }
 
@@ -2077,6 +2154,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                                   ^^^^^^^^^^^^ definition local 80
 //                                                                display_name stickyHeader
 //                                                                signature_documentation java @NotNull\nunresolved_type stickyHeader
+//                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#teardownStickyHeaderView().
     // no-op
   }
 
@@ -2097,6 +2175,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                  ^^^^^^^^ definition local 81
 //                                           display_name position
 //                                           signature_documentation java int position
+//                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyController#isStickyHeader().
     return false;
   }
 

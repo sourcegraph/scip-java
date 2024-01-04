@@ -103,23 +103,28 @@ class UpdateOp {
 //                                   ^^^^ definition local 0
 //                                        display_name type
 //                                        signature_documentation java @Type\nint type
+//                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/UpdateOp#instance().
 //                                             ^^^^^^^^^^^^^ definition local 1
 //                                                           display_name positionStart
 //                                                           signature_documentation java int positionStart
+//                                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/UpdateOp#instance().
 //                                                                ^^^^^^^^^ definition local 2
 //                                                                          display_name itemCount
 //                                                                          signature_documentation java int itemCount
+//                                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/UpdateOp#instance().
       @Nullable EpoxyModel<?> payload) {
 //     ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^ definition local 3
 //                                    display_name payload
 //                                    signature_documentation java @Nullable\nEpoxyModel<?> payload
+//                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/UpdateOp#instance().
     UpdateOp op = new UpdateOp();
 //  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
 //           ^^ definition local 4
 //              display_name op
 //              signature_documentation java UpdateOp op
+//              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/UpdateOp#instance().
 //                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#`<init>`().
 
     op.type = type;
@@ -162,6 +167,7 @@ class UpdateOp {
 //                    ^^^^^^^^ definition local 5
 //                             display_name position
 //                             signature_documentation java int position
+//                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/UpdateOp#isAfter().
     return position < positionStart;
 //         ^^^^^^^^ reference local 5
 //                    ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionStart.
@@ -174,6 +180,7 @@ class UpdateOp {
 //                     ^^^^^^^^ definition local 6
 //                              display_name position
 //                              signature_documentation java int position
+//                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/UpdateOp#isBefore().
     return position >= positionEnd();
 //         ^^^^^^^^ reference local 6
 //                     ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionEnd().
@@ -186,6 +193,7 @@ class UpdateOp {
 //                     ^^^^^^^^ definition local 7
 //                              display_name position
 //                              signature_documentation java int position
+//                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/UpdateOp#contains().
     return position >= positionStart && position < positionEnd();
 //         ^^^^^^^^ reference local 7
 //                     ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionStart.
@@ -202,6 +210,7 @@ class UpdateOp {
 //                                        ^^^^^^^ definition local 8
 //                                                display_name payload
 //                                                signature_documentation java @Nullable\nEpoxyModel<?> payload
+//                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/UpdateOp#addPayload().
     if (payload == null) {
 //      ^^^^^^^ reference local 8
       return;

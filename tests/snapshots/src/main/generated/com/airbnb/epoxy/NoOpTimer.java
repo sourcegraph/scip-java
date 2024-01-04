@@ -20,6 +20,7 @@ class NoOpTimer implements Timer {
 //                         ^^^^^^^^^^^ definition local 0
 //                                     display_name sectionName
 //                                     signature_documentation java String sectionName
+//                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NoOpTimer#start().
 
   }
 

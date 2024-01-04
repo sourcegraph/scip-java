@@ -80,10 +80,12 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
 //                                     ^^^^^^^^^^^^^^^^^^^^ definition local 0
 //                                                          display_name modelBuildingHandler
 //                                                          signature_documentation java unresolved_type modelBuildingHandler
+//                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#`<init>`(+1).
 //                                                           ^^^^^^^ reference semanticdb maven . . Handler#
 //                                                                   ^^^^^^^^^^^^^^ definition local 1
 //                                                                                  display_name diffingHandler
 //                                                                                  signature_documentation java unresolved_type diffingHandler
+//                                                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#`<init>`(+1).
     super(modelBuildingHandler, diffingHandler);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#`<init>`(+1).
 //        ^^^^^^^^^^^^^^^^^^^^ reference local 0
@@ -103,18 +105,22 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
 //                      ^^^^^ definition local 2
 //                            display_name data1
 //                            signature_documentation java T data1
+//                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#setData().
 //                             ^ reference semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#[U]
 //                               ^^^^^ definition local 3
 //                                     display_name data2
 //                                     signature_documentation java U data2
+//                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#setData().
 //                                      ^ reference semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#[V]
 //                                        ^^^^^ definition local 4
 //                                              display_name data3
 //                                              signature_documentation java V data3
+//                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#setData().
 //                                               ^ reference semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#[W]
 //                                                 ^^^^^ definition local 5
 //                                                       display_name data4
 //                                                       signature_documentation java W data4
+//                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#setData().
     this.data1 = data1;
 //       ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#data1.
 //               ^^^^^ reference local 2
@@ -164,9 +170,11 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
 //                          ^^^^^^^^^^^^ definition local 6
 //                                       display_name fromPosition
 //                                       signature_documentation java int fromPosition
+//                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#moveModel().
 //                                            ^^^^^^^^^^ definition local 7
 //                                                       display_name toPosition
 //                                                       signature_documentation java int toPosition
+//                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#moveModel().
     allowModelBuildRequests = true;
 //  ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#allowModelBuildRequests.
     super.moveModel(fromPosition, toPosition);
@@ -188,6 +196,7 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
 //                                         ^^^^^^^ definition local 8
 //                                                 display_name delayMs
 //                                                 signature_documentation java int delayMs
+//                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#requestDelayedModelBuild().
     if (!allowModelBuildRequests) {
 //       ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#allowModelBuildRequests.
       throw new IllegalStateException(
@@ -231,17 +240,21 @@ public abstract class Typed4EpoxyController<T, U, V, W> extends EpoxyController 
 //                                      ^^^^^ definition local 9
 //                                            display_name data1
 //                                            signature_documentation java T data1
+//                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#buildModels(+1).
 //                                             ^ reference semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#[U]
 //                                               ^^^^^ definition local 10
 //                                                     display_name data2
 //                                                     signature_documentation java U data2
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#buildModels(+1).
 //                                                      ^ reference semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#[V]
 //                                                        ^^^^^ definition local 11
 //                                                              display_name data3
 //                                                              signature_documentation java V data3
+//                                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#buildModels(+1).
 //                                                               ^ reference semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#[W]
 //                                                                 ^^^^^ definition local 12
 //                                                                       display_name data4
 //                                                                       signature_documentation java W data4
+//                                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Typed4EpoxyController#buildModels(+1).
 }
 

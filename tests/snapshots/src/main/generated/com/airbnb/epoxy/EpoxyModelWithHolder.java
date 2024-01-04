@@ -60,6 +60,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                 ^^ definition local 0
 //                                    display_name id
 //                                    signature_documentation java long id
+//                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#`<init>`(+1).
     super(id);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#`<init>`().
 //        ^^ reference local 0
@@ -78,6 +79,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                                         ^^^^^^ definition local 1
 //                                                                display_name parent
 //                                                                signature_documentation java @NonNull\nunresolved_type parent
+//                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#createNewHolder().
 
   @Override
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
@@ -92,6 +94,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                            ^^^^^^ definition local 2
 //                                   display_name holder
 //                                   signature_documentation java @NonNull\nT holder
+//                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#bind().
     super.bind(holder);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#super.
 //        ^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#bind().
@@ -111,12 +114,14 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                            ^^^^^^ definition local 3
 //                                   display_name holder
 //                                   signature_documentation java @NonNull\nT holder
+//                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#bind(+1).
 //                                     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                             ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                                                          ^^^^^^^^ definition local 4
 //                                                                   display_name payloads
 //                                                                   signature_documentation java @NonNull\nList<Object> payloads
+//                                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#bind(+1).
     super.bind(holder, payloads);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#super.
 //        ^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#bind(+1).
@@ -137,11 +142,13 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                            ^^^^^^ definition local 5
 //                                   display_name holder
 //                                   signature_documentation java @NonNull\nT holder
+//                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#bind(+2).
 //                                     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                           ^^^^^^^^^^^^^^^^^^^^ definition local 6
 //                                                                                display_name previouslyBoundModel
 //                                                                                signature_documentation java @NonNull\nEpoxyModel<?> previouslyBoundModel
+//                                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#bind(+2).
     super.bind(holder, previouslyBoundModel);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#super.
 //        ^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#bind(+2).
@@ -162,6 +169,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                              ^^^^^^ definition local 7
 //                                     display_name holder
 //                                     signature_documentation java @NonNull\nT holder
+//                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#unbind().
     super.unbind(holder);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#super.
 //        ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#unbind().
@@ -180,11 +188,13 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                                     ^^^^^^^^^^^^^^^ definition local 8
 //                                                                     display_name visibilityState
 //                                                                     signature_documentation java @Visibility\nint visibilityState
+//                                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onVisibilityStateChanged().
 //                                                                       ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                                                               ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 //                                                                                 ^^^^^^ definition local 9
 //                                                                                        display_name holder
 //                                                                                        signature_documentation java @NonNull\nT holder
+//                                                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onVisibilityStateChanged().
     super.onVisibilityStateChanged(visibilityState, holder);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#super.
 //        ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#onVisibilityStateChanged().
@@ -206,6 +216,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                          ^^^^^^^^^^^^^^^^^^^^ definition local 10
 //                                                               display_name percentVisibleHeight
 //                                                               signature_documentation java @FloatRange(from = 0, to = 100)\nfloat percentVisibleHeight
+//                                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onVisibilityChanged().
       @FloatRange(from = 0, to = 100) float percentVisibleWidth,
 //     ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#
 //                ^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#from().
@@ -213,21 +224,25 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                          ^^^^^^^^^^^^^^^^^^^ definition local 11
 //                                                              display_name percentVisibleWidth
 //                                                              signature_documentation java @FloatRange(from = 0, to = 100)\nfloat percentVisibleWidth
+//                                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onVisibilityChanged().
       @Px int visibleHeight, @Px int visibleWidth,
 //     ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#
 //            ^^^^^^^^^^^^^ definition local 12
 //                          display_name visibleHeight
 //                          signature_documentation java @Px\nint visibleHeight
+//                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onVisibilityChanged().
 //                            ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#
 //                                   ^^^^^^^^^^^^ definition local 13
 //                                                display_name visibleWidth
 //                                                signature_documentation java @Px\nint visibleWidth
+//                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onVisibilityChanged().
       @NonNull T holder) {
 //     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //             ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#[T]
 //               ^^^^^^ definition local 14
 //                      display_name holder
 //                      signature_documentation java @NonNull\nT holder
+//                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onVisibilityChanged().
     super.onVisibilityChanged(
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#super.
 //        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#onVisibilityChanged().
@@ -252,6 +267,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                       ^^^^^^ definition local 15
 //                                              display_name holder
 //                                              signature_documentation java T holder
+//                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onFailedToRecycleView().
     return super.onFailedToRecycleView(holder);
 //         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#super.
 //               ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#onFailedToRecycleView().
@@ -270,6 +286,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                     ^^^^^^ definition local 16
 //                                            display_name holder
 //                                            signature_documentation java T holder
+//                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onViewAttachedToWindow().
     super.onViewAttachedToWindow(holder);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#super.
 //        ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#onViewAttachedToWindow().
@@ -288,6 +305,7 @@ public abstract class EpoxyModelWithHolder<T extends EpoxyHolder> extends EpoxyM
 //                                       ^^^^^^ definition local 17
 //                                              display_name holder
 //                                              signature_documentation java T holder
+//                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onViewDetachedFromWindow().
     super.onViewDetachedFromWindow(holder);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#super.
 //        ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#onViewDetachedFromWindow().

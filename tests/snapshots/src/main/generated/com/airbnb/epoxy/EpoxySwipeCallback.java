@@ -53,13 +53,16 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
 //                      ^^^^^ definition local 0
 //                            display_name model
 //                            signature_documentation java T model
+//                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeStarted().
 //                             ^^^^ reference semanticdb maven . . View#
 //                                  ^^^^^^^^ definition local 1
 //                                           display_name itemView
 //                                           signature_documentation java unresolved_type itemView
+//                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeStarted().
 //                                                ^^^^^^^^^^^^^^^ definition local 2
 //                                                                display_name adapterPosition
 //                                                                signature_documentation java int adapterPosition
+//                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeStarted().
 
   /**
    * Once a view has begun swiping with {@link #onSwipeStarted(EpoxyModel, View, int)} it will
@@ -86,18 +89,22 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
 //                              ^^^^^ definition local 3
 //                                    display_name model
 //                                    signature_documentation java T model
+//                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeProgressChanged().
 //                                     ^^^^ reference semanticdb maven . . View#
 //                                          ^^^^^^^^ definition local 4
 //                                                   display_name itemView
 //                                                   signature_documentation java unresolved_type itemView
+//                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeProgressChanged().
 //                                                          ^^^^^^^^^^^^^ definition local 5
 //                                                                        display_name swipeProgress
 //                                                                        signature_documentation java float swipeProgress
+//                                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeProgressChanged().
       Canvas canvas);
 //    ^^^^^^ reference semanticdb maven . . Canvas#
 //           ^^^^^^ definition local 6
 //                  display_name canvas
 //                  signature_documentation java unresolved_type canvas
+//                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeProgressChanged().
 
   /**
    * Called when the user has released their touch on the view. If the displacement passed the swipe
@@ -119,10 +126,12 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
 //                       ^^^^^ definition local 7
 //                             display_name model
 //                             signature_documentation java T model
+//                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeReleased().
 //                              ^^^^ reference semanticdb maven . . View#
 //                                   ^^^^^^^^ definition local 8
 //                                            display_name itemView
 //                                            signature_documentation java unresolved_type itemView
+//                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeReleased().
 
   /**
    * Called after {@link #onSwipeReleased(EpoxyModel, View)} if the swipe surpassed the threshold to
@@ -152,14 +161,18 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
 //                        ^^^^^ definition local 9
 //                              display_name model
 //                              signature_documentation java T model
+//                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeCompleted().
 //                               ^^^^ reference semanticdb maven . . View#
 //                                    ^^^^^^^^ definition local 10
 //                                             display_name itemView
 //                                             signature_documentation java unresolved_type itemView
+//                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeCompleted().
 //                                                  ^^^^^^^^ definition local 11
 //                                                           display_name position
 //                                                           signature_documentation java int position
+//                                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeCompleted().
 //                                                                ^^^^^^^^^ definition local 12
 //                                                                          display_name direction
 //                                                                          signature_documentation java int direction
+//                                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeCompleted().
 }

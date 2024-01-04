@@ -28,4 +28,5 @@ public interface OnModelBuildFinishedListener {
 //                                              ^^^^^^ definition local 0
 //                                                     display_name result
 //                                                     signature_documentation java @NonNull\nDiffResult result
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelBuildFinishedListener#onModelBuildFinished().
 }

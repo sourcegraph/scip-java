@@ -82,6 +82,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                            ^^^^ definition local 0
 //                                 display_name size
 //                                 signature_documentation java int size
+//                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#`<init>`(+1).
     super(size);
 //  ^^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#`<init>`(+1).
 //        ^^^^ reference local 0
@@ -106,13 +107,16 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                                 ^^^^ definition local 1
 //                                      display_name dest
 //                                      signature_documentation java unresolved_type dest
+//                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#writeToParcel().
 //                                           ^^^^^ definition local 2
 //                                                 display_name flags
 //                                                 signature_documentation java int flags
+//                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#writeToParcel().
     final int size = size();
 //            ^^^^ definition local 3
 //                 display_name size
 //                 signature_documentation java final int size
+//                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#writeToParcel().
 //                   ^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#size().
     dest.writeInt(size);
 //  ^^^^ reference local 1
@@ -122,6 +126,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //           ^ definition local 4
 //             display_name i
 //             signature_documentation java int i
+//             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#writeToParcel().
 //                  ^ reference local 4
 //                      ^^^^ reference local 3
 //                            ^ reference local 4
@@ -173,6 +178,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                                                 ^^^^^^ definition local 5
 //                                                        display_name holder
 //                                                        signature_documentation java EpoxyViewHolder holder
+//                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#hasStateForHolder().
     return get(holder.getItemId()) != null;
 //         ^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#get().
 //             ^^^^^^ reference local 5
@@ -188,11 +194,13 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                                             ^^^^^^^ definition local 6
 //                                                     display_name holders
 //                                                     signature_documentation java Collection<EpoxyViewHolder> holders
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#save().
     for (EpoxyViewHolder holder : holders) {
 //       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                       ^^^^^^ definition local 7
 //                              display_name holder
 //                              signature_documentation java EpoxyViewHolder holder
+//                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#save().
 //                                ^^^^^^^ reference local 6
       save(holder);
 //    ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#save(+1).
@@ -210,6 +218,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                                 ^^^^^^ definition local 8
 //                                        display_name holder
 //                                        signature_documentation java EpoxyViewHolder holder
+//                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#save(+1).
     if (!holder.getModel().shouldSaveViewState()) {
 //       ^^^^^^ reference local 8
 //              ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getModel().
@@ -225,6 +234,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //            ^^^^^ definition local 9
 //                  display_name state
 //                  signature_documentation java ViewState state
+//                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#save(+1).
 //                    ^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#get().
 //                        ^^^^^^ reference local 8
 //                               ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getItemId#
@@ -260,6 +270,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                                    ^^^^^^ definition local 10
 //                                           display_name holder
 //                                           signature_documentation java EpoxyViewHolder holder
+//                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#restore().
     if (!holder.getModel().shouldSaveViewState()) {
 //       ^^^^^^ reference local 10
 //              ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getModel().
@@ -272,6 +283,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //            ^^^^^ definition local 11
 //                  display_name state
 //                  signature_documentation java ViewState state
+//                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#restore().
 //                    ^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#get().
 //                        ^^^^^^ reference local 10
 //                               ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getItemId#
@@ -319,19 +331,23 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                        ^^^^ definition local 12
 //                             display_name size
 //                             signature_documentation java int size
+//                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`(+1).
 //                                    ^^^^ definition local 13
 //                                         display_name keys
 //                                         signature_documentation java int[] keys
+//                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`(+1).
 //                                          ^^^^^^^^^^ reference semanticdb maven . . Parcelable#
 //                                                       ^^^^^^ definition local 14
 //                                                              display_name values
 //                                                              signature_documentation java unresolved_type[] values
+//                                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`(+1).
       super(size);
 //          ^^^^ reference local 12
       for (int i = 0; i < size; ++i) {
 //             ^ definition local 15
 //               display_name i
 //               signature_documentation java int i
+//               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#`<init>`(+1).
 //                    ^ reference local 15
 //                        ^^^^ reference local 12
 //                                ^ reference local 15
@@ -352,10 +368,12 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                        ^^^^ definition local 16
 //                             display_name view
 //                             signature_documentation java unresolved_type view
+//                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#save().
       int originalId = view.getId();
 //        ^^^^^^^^^^ definition local 17
 //                   display_name originalId
 //                   signature_documentation java int originalId
+//                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#save().
 //                     ^^^^ reference local 16
 //                          ^^^^^ reference semanticdb maven . . View#getId#
       setIdIfNoneExists(view);
@@ -379,10 +397,12 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                           ^^^^ definition local 18
 //                                display_name view
 //                                signature_documentation java unresolved_type view
+//                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#restore().
       int originalId = view.getId();
 //        ^^^^^^^^^^ definition local 19
 //                   display_name originalId
 //                   signature_documentation java int originalId
+//                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#restore().
 //                     ^^^^ reference local 18
 //                          ^^^^^ reference semanticdb maven . . View#getId#
       setIdIfNoneExists(view);
@@ -413,6 +433,7 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                                      ^^^^ definition local 20
 //                                           display_name view
 //                                           signature_documentation java unresolved_type view
+//                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#setIdIfNoneExists().
       if (view.getId() == View.NO_ID) {
 //        ^^^^ reference local 20
 //             ^^^^^ reference semanticdb maven . . View#getId#
@@ -446,30 +467,36 @@ class ViewHolderState extends LongSparseArray<ViewState> implements Parcelable {
 //                                   ^^^^^^ definition local 21
 //                                          display_name parcel
 //                                          signature_documentation java unresolved_type parcel
+//                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#writeToParcel().
 //                                               ^^^^^ definition local 22
 //                                                     display_name flags
 //                                                     signature_documentation java int flags
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#writeToParcel().
       int size = size();
 //        ^^^^ definition local 23
 //             display_name size
 //             signature_documentation java int size
+//             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#writeToParcel().
 //               ^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#size().
       int[] keys = new int[size];
 //          ^^^^ definition local 24
 //               display_name keys
 //               signature_documentation java int[] keys
+//               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#writeToParcel().
 //                         ^^^^ reference local 23
       Parcelable[] values = new Parcelable[size];
 //    ^^^^^^^^^^ reference semanticdb maven . . Parcelable#
 //                 ^^^^^^ definition local 25
 //                        display_name values
 //                        signature_documentation java unresolved_type[] values
+//                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#writeToParcel().
 //                              ^^^^^^^^^^ reference semanticdb maven . . Parcelable#
 //                                         ^^^^ reference local 23
       for (int i = 0; i < size; ++i) {
 //             ^ definition local 26
 //               display_name i
 //               signature_documentation java int i
+//               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#writeToParcel().
 //                    ^ reference local 26
 //                        ^^^^ reference local 23
 //                                ^ reference local 26

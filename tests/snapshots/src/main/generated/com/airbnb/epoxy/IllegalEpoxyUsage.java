@@ -17,6 +17,7 @@ public class IllegalEpoxyUsage extends RuntimeException {
 //                                ^^^^^^^ definition local 0
 //                                        display_name message
 //                                        signature_documentation java String message
+//                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/IllegalEpoxyUsage#`<init>`().
     super(message);
 //  ^^^^^ reference semanticdb maven jdk 11 java/lang/RuntimeException#`<init>`(+1).
 //        ^^^^^^^ reference local 0

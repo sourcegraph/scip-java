@@ -46,9 +46,11 @@ enum Enums {
 //             ^^^^^ definition local 0
 //                   display_name value
 //                   signature_documentation java String value
+//                   enclosing_symbol semanticdb maven . . minimized/Enums#`<init>`().
 //                        ^ definition local 1
 //                          display_name a
 //                          signature_documentation java int a
+//                          enclosing_symbol semanticdb maven . . minimized/Enums#`<init>`().
     this.value = value;
 //       ^^^^^ reference semanticdb maven . . minimized/Enums#value.
 //               ^^^^^ reference local 0
@@ -64,6 +66,7 @@ enum Enums {
 //         ^^^ definition local 2
 //             display_name all
 //             signature_documentation java String all
+//             enclosing_symbol semanticdb maven . . minimized/Enums#app().
 //               ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#stream().
 //                             ^^^^^^ reference semanticdb maven . . minimized/Enums#values().
@@ -71,6 +74,7 @@ enum Enums {
 //                                           ^ definition local 3
 //                                             display_name e
 //                                             signature_documentation java Enums e
+//                                             enclosing_symbol semanticdb maven . . minimized/Enums#app().
 //                                                ^ reference local 3
 //                                                  ^^^^^ reference semanticdb maven . . minimized/Enums#value.
 //                                                         ^^^ reference semanticdb maven jdk 11 java/util/stream/Stream#map().

@@ -35,6 +35,7 @@ public final class IdUtils {
 //                                      ^^^^^ definition local 0
 //                                            display_name value
 //                                            signature_documentation java long value
+//                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/IdUtils#hashLong64Bit().
     value ^= (value << 21);
 //  ^^^^^ reference local 0
 //            ^^^^^ reference local 0
@@ -67,6 +68,7 @@ public final class IdUtils {
 //                                                          ^^^ definition local 1
 //                                                              display_name str
 //                                                              signature_documentation java @Nullable\nCharSequence str
+//                                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/IdUtils#hashString64Bit().
     if (str == null) {
 //      ^^^ reference local 1
       return 0;
@@ -76,16 +78,19 @@ public final class IdUtils {
 //       ^^^^^^ definition local 2
 //              display_name result
 //              signature_documentation java long result
+//              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/IdUtils#hashString64Bit().
     final int len = str.length();
 //            ^^^ definition local 3
 //                display_name len
 //                signature_documentation java final int len
+//                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/IdUtils#hashString64Bit().
 //                  ^^^ reference local 1
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#length().
     for (int i = 0; i < len; i++) {
 //           ^ definition local 4
 //             display_name i
 //             signature_documentation java int i
+//             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/IdUtils#hashString64Bit().
 //                  ^ reference local 4
 //                      ^^^ reference local 3
 //                           ^ reference local 4

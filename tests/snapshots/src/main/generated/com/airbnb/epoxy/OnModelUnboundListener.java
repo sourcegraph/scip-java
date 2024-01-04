@@ -26,8 +26,10 @@ public interface OnModelUnboundListener<T extends EpoxyModel<?>, V> {
 //                      ^^^^^ definition local 0
 //                            display_name model
 //                            signature_documentation java T model
+//                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelUnboundListener#onModelUnbound().
 //                             ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelUnboundListener#[V]
 //                               ^^^^ definition local 1
 //                                    display_name view
 //                                    signature_documentation java V view
+//                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelUnboundListener#onModelUnbound().
 }

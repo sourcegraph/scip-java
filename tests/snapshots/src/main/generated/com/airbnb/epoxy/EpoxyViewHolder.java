@@ -98,13 +98,16 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //                                  ^^^^^^ definition local 0
 //                                         display_name parent
 //                                         signature_documentation java unresolved_type parent
+//                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#`<init>`().
 //                                          ^^^^ reference semanticdb maven . . View#
 //                                               ^^^^ definition local 1
 //                                                    display_name view
 //                                                    signature_documentation java unresolved_type view
+//                                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#`<init>`().
 //                                                             ^^^^^^^^^^^^^^^^ definition local 2
 //                                                                              display_name saveInitialState
 //                                                                              signature_documentation java boolean saveInitialState
+//                                                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#`<init>`().
     super(view);
 //        ^^^^ reference local 1
 
@@ -148,20 +151,24 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //                                                          ^^^^^ definition local 3
 //                                                                display_name model
 //                                                                signature_documentation java @SuppressWarnings("rawtypes")\nEpoxyModel model
+//                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#bind().
       @Nullable EpoxyModel<?> previouslyBoundModel, List<Object> payloads, int position) {
 //     ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^^^^^^^^^^^^^^ definition local 4
 //                                                 display_name previouslyBoundModel
 //                                                 signature_documentation java @Nullable\nEpoxyModel<?> previouslyBoundModel
+//                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#bind().
 //                                                  ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                       ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                                                               ^^^^^^^^ definition local 5
 //                                                                        display_name payloads
 //                                                                        signature_documentation java List<Object> payloads
+//                                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#bind().
 //                                                                             ^^^^^^^^ definition local 6
 //                                                                                      display_name position
 //                                                                                      signature_documentation java int position
+//                                                                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#bind().
     this.payloads = payloads;
 //       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#payloads.
 //                  ^^^^^^^^ reference local 5
@@ -280,6 +287,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //                                                   ^^^^^^^^^^^^^^^ definition local 7
 //                                                                   display_name visibilityState
 //                                                                   signature_documentation java @Visibility\nint visibilityState
+//                                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#visibilityStateChanged().
     assertBound();
 //  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#assertBound().
     // noinspection unchecked
@@ -301,6 +309,7 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //                                                ^^^^^^^^^^^^^^^^^^^^ definition local 8
 //                                                                     display_name percentVisibleHeight
 //                                                                     signature_documentation java @FloatRange(from = 0.0f, to = 100.0f)\nfloat percentVisibleHeight
+//                                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#visibilityChanged().
       @FloatRange(from = 0.0f, to = 100.0f) float percentVisibleWidth,
 //     ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#
 //                ^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#from().
@@ -308,16 +317,19 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //                                                ^^^^^^^^^^^^^^^^^^^ definition local 9
 //                                                                    display_name percentVisibleWidth
 //                                                                    signature_documentation java @FloatRange(from = 0.0f, to = 100.0f)\nfloat percentVisibleWidth
+//                                                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#visibilityChanged().
       @Px int visibleHeight,
 //     ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#
 //            ^^^^^^^^^^^^^ definition local 10
 //                          display_name visibleHeight
 //                          signature_documentation java @Px\nint visibleHeight
+//                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#visibilityChanged().
       @Px int visibleWidth
 //     ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#
 //            ^^^^^^^^^^^^ definition local 11
 //                         display_name visibleWidth
 //                         signature_documentation java @Px\nint visibleWidth
+//                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#visibilityChanged().
   ) {
     assertBound();
 //  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#assertBound().

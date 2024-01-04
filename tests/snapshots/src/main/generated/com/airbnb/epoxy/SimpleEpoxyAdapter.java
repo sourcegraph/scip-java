@@ -86,6 +86,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                             ^^^^^ definition local 0
 //                                                   display_name model
 //                                                   signature_documentation java EpoxyModel<?> model
+//                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#notifyModelChanged().
     super.notifyModelChanged(model);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#notifyModelChanged().
@@ -103,6 +104,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                       ^^^^^^^^^^^ definition local 1
 //                                                   display_name modelsToAdd
 //                                                   signature_documentation java EpoxyModel<?>[] modelsToAdd
+//                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#addModels().
     super.addModels(modelsToAdd);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#addModels().
@@ -121,6 +123,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                                          ^^^^^^^^^^^ definition local 2
 //                                                                      display_name modelsToAdd
 //                                                                      signature_documentation java Collection<? extends EpoxyModel<?>> modelsToAdd
+//                                                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#addModels(+1).
     super.addModels(modelsToAdd);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#addModels(+1).
@@ -138,10 +141,12 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                            ^^^^^^^^^^^^^ definition local 3
 //                                                          display_name modelToInsert
 //                                                          signature_documentation java EpoxyModel<?> modelToInsert
+//                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#insertModelBefore().
 //                                                           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                         ^^^^^^^^^^^^^^^^^^^ definition local 4
 //                                                                                             display_name modelToInsertBefore
 //                                                                                             signature_documentation java EpoxyModel<?> modelToInsertBefore
+//                                                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#insertModelBefore().
     super.insertModelBefore(modelToInsert, modelToInsertBefore);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#insertModelBefore().
@@ -160,10 +165,12 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                           ^^^^^^^^^^^^^ definition local 5
 //                                                         display_name modelToInsert
 //                                                         signature_documentation java EpoxyModel<?> modelToInsert
+//                                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#insertModelAfter().
 //                                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                        ^^^^^^^^^^^^^^^^^^ definition local 6
 //                                                                                           display_name modelToInsertAfter
 //                                                                                           signature_documentation java EpoxyModel<?> modelToInsertAfter
+//                                                                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#insertModelAfter().
     super.insertModelAfter(modelToInsert, modelToInsertAfter);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#insertModelAfter().
@@ -182,6 +189,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                      ^^^^^ definition local 7
 //                                            display_name model
 //                                            signature_documentation java EpoxyModel<?> model
+//                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#removeModel().
     super.removeModel(model);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#removeModel().
@@ -211,6 +219,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                              ^^^^^ definition local 8
 //                                                    display_name model
 //                                                    signature_documentation java EpoxyModel<?> model
+//                                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#removeAllAfterModel().
     super.removeAllAfterModel(model);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#removeAllAfterModel().
@@ -228,9 +237,11 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                    ^^^^^ definition local 9
 //                                          display_name model
 //                                          signature_documentation java EpoxyModel<?> model
+//                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModel().
 //                                                   ^^^^ definition local 10
 //                                                        display_name show
 //                                                        signature_documentation java boolean show
+//                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModel().
     super.showModel(model, show);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModel().
@@ -249,6 +260,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                    ^^^^^ definition local 11
 //                                          display_name model
 //                                          signature_documentation java EpoxyModel<?> model
+//                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModel(+1).
     super.showModel(model);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModel(+1).
@@ -266,6 +278,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                        ^^^^^^ definition local 12
 //                                               display_name models
 //                                               signature_documentation java EpoxyModel<?>[] models
+//                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModels().
     super.showModels(models);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModels().
@@ -282,10 +295,12 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                               ^^^^ definition local 13
 //                                    display_name show
 //                                    signature_documentation java boolean show
+//                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(+1).
 //                                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                      ^^^^^^ definition local 14
 //                                                             display_name models
 //                                                             signature_documentation java EpoxyModel<?>[] models
+//                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(+1).
     super.showModels(show, models);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModels(+1).
@@ -305,6 +320,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                               ^^^^^^^^^^^ definition local 15
 //                                                           display_name epoxyModels
 //                                                           signature_documentation java Iterable<EpoxyModel<?>> epoxyModels
+//                                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(+2).
     super.showModels(epoxyModels);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModels(+2).
@@ -323,9 +339,11 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                               ^^^^^^^^^^^ definition local 16
 //                                                           display_name epoxyModels
 //                                                           signature_documentation java Iterable<EpoxyModel<?>> epoxyModels
+//                                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(+3).
 //                                                                    ^^^^ definition local 17
 //                                                                         display_name show
 //                                                                         signature_documentation java boolean show
+//                                                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#showModels(+3).
     super.showModels(epoxyModels, show);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#showModels(+3).
@@ -344,6 +362,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                    ^^^^^ definition local 18
 //                                          display_name model
 //                                          signature_documentation java EpoxyModel<?> model
+//                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#hideModel().
     super.hideModel(model);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#hideModel().
@@ -362,6 +381,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                               ^^^^^^^^^^^ definition local 19
 //                                                           display_name epoxyModels
 //                                                           signature_documentation java Iterable<EpoxyModel<?>> epoxyModels
+//                                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#hideModels().
     super.hideModels(epoxyModels);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#hideModels().
@@ -379,6 +399,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                        ^^^^^^ definition local 20
 //                                               display_name models
 //                                               signature_documentation java EpoxyModel<?>[] models
+//                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#hideModels(+1).
     super.hideModels(models);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#hideModels(+1).
@@ -396,6 +417,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                            ^^^^^ definition local 21
 //                                                  display_name model
 //                                                  signature_documentation java EpoxyModel<?> model
+//                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#hideAllAfterModel().
     super.hideAllAfterModel(model);
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //        ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#hideAllAfterModel().
@@ -415,6 +437,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                                           ^^^^^ definition local 22
 //                                                                 display_name model
 //                                                                 signature_documentation java EpoxyModel<?> model
+//                                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#getAllModelsAfter().
     return super.getAllModelsAfter(model);
 //         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //               ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAdapter#getAllModelsAfter().
@@ -432,6 +455,7 @@ public class SimpleEpoxyAdapter extends EpoxyAdapter {
 //                                          ^^^^^ definition local 23
 //                                                display_name model
 //                                                signature_documentation java EpoxyModel<?> model
+//                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#getModelPosition().
     return super.getModelPosition(model);
 //         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyAdapter#super.
 //               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().

@@ -47,6 +47,7 @@ class HandlerExecutor implements Executor {
 //                        ^^^^^^^ definition local 0
 //                                display_name handler
 //                                signature_documentation java unresolved_type handler
+//                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#`<init>`().
     this.handler = handler;
 //       ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#handler.
 //                 ^^^^^^^ reference local 0
@@ -64,6 +65,7 @@ class HandlerExecutor implements Executor {
 //                                      ^^^^^^^ definition local 1
 //                                              display_name command
 //                                              signature_documentation java @NonNull\nRunnable command
+//                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#execute().
     // If we're already on the same thread then we can execute this synchronously
     if (Looper.myLooper() == handler.getLooper()) {
 //      ^^^^^^ reference semanticdb maven . . Looper#

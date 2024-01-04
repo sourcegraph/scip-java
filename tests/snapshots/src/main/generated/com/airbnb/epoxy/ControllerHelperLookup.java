@@ -66,11 +66,13 @@ class ControllerHelperLookup {
 //                                                               ^^^^^^^^^^ definition local 0
 //                                                                          display_name controller
 //                                                                          signature_documentation java EpoxyController controller
+//                                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#getHelperForController().
     Constructor<?> constructor = findConstructorForClass(controller.getClass());
 //  ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/reflect/Constructor#
 //                 ^^^^^^^^^^^ definition local 1
 //                             display_name constructor
 //                             signature_documentation java Constructor<?> constructor
+//                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#getHelperForController().
 //                               ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().
 //                                                       ^^^^^^^^^^ reference local 0
 //                                                                  ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#getClass().
@@ -91,6 +93,7 @@ class ControllerHelperLookup {
 //                                  ^ definition local 2
 //                                    display_name e
 //                                    signature_documentation java IllegalAccessException e
+//                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#getHelperForController().
       throw new RuntimeException("Unable to invoke " + constructor, e);
 //              ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/RuntimeException#`<init>`(+2).
 //                                                     ^^^^^^^^^^^ reference local 1
@@ -100,6 +103,7 @@ class ControllerHelperLookup {
 //                                  ^ definition local 3
 //                                    display_name e
 //                                    signature_documentation java InstantiationException e
+//                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#getHelperForController().
       throw new RuntimeException("Unable to invoke " + constructor, e);
 //              ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/RuntimeException#`<init>`(+2).
 //                                                     ^^^^^^^^^^^ reference local 1
@@ -109,11 +113,13 @@ class ControllerHelperLookup {
 //                                     ^ definition local 4
 //                                       display_name e
 //                                       signature_documentation java InvocationTargetException e
+//                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#getHelperForController().
       Throwable cause = e.getCause();
 //    ^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Throwable#
 //              ^^^^^ definition local 5
 //                    display_name cause
 //                    signature_documentation java Throwable cause
+//                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#getHelperForController().
 //                      ^ reference local 4
 //                        ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/reflect/InvocationTargetException#getCause().
       if (cause instanceof RuntimeException) {
@@ -147,11 +153,13 @@ class ControllerHelperLookup {
 //                                                               ^^^^^^^^^^^^^^^ definition local 6
 //                                                                               display_name controllerClass
 //                                                                               signature_documentation java Class<?> controllerClass
+//                                                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().
     Constructor<?> helperCtor = BINDINGS.get(controllerClass);
 //  ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/reflect/Constructor#
 //                 ^^^^^^^^^^ definition local 7
 //                            display_name helperCtor
 //                            signature_documentation java Constructor<?> helperCtor
+//                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().
 //                              ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#BINDINGS.
 //                                       ^^^ reference semanticdb maven jdk 11 java/util/Map#get().
 //                                           ^^^^^^^^^^^^^^^ reference local 6
@@ -169,6 +177,7 @@ class ControllerHelperLookup {
 //         ^^^^^^^ definition local 8
 //                 display_name clsName
 //                 signature_documentation java String clsName
+//                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().
 //                   ^^^^^^^^^^^^^^^ reference local 6
 //                                   ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Class#getName().
     if (clsName.startsWith("android.") || clsName.startsWith("java.")) {
@@ -185,6 +194,7 @@ class ControllerHelperLookup {
 //             ^^^^^^^^^^^^ definition local 9
 //                          display_name bindingClass
 //                          signature_documentation java Class<?> bindingClass
+//                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().
 //                            ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                  ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Class#forName().
 //                                          ^^^^^^^ reference local 8
@@ -200,6 +210,7 @@ class ControllerHelperLookup {
 //                                  ^ definition local 10
 //                                    display_name e
 //                                    signature_documentation java ClassNotFoundException e
+//                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().
       helperCtor = findConstructorForClass(controllerClass.getSuperclass());
 //    ^^^^^^^^^^ reference local 7
 //                 ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().
@@ -210,6 +221,7 @@ class ControllerHelperLookup {
 //                                 ^ definition local 11
 //                                   display_name e
 //                                   signature_documentation java NoSuchMethodException e
+//                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().
       throw new RuntimeException("Unable to find Epoxy Helper constructor for " + clsName, e);
 //              ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/RuntimeException#`<init>`(+2).
 //                                                                                ^^^^^^^ reference local 8

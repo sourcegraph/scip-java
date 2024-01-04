@@ -33,6 +33,7 @@ public abstract class EpoxyHolder {
 //                                       ^^^^^^ definition local 0
 //                                              display_name parent
 //                                              signature_documentation java @NonNull\nunresolved_type parent
+//                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#`<init>`().
     this();
 //  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#`<init>`(+1).
   }
@@ -61,4 +62,5 @@ public abstract class EpoxyHolder {
 //                                               ^^^^^^^^ definition local 1
 //                                                        display_name itemView
 //                                                        signature_documentation java @NonNull\nunresolved_type itemView
+//                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#bindView().
 }

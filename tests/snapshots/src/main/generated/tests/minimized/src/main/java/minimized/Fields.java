@@ -73,12 +73,14 @@ public class Fields {
 //         ^^^^^^ definition local 0
 //                display_name fields
 //                signature_documentation java Fields fields
+//                enclosing_symbol semanticdb maven . . minimized/Fields#app().
 //                      ^^^^^^ reference semanticdb maven . . minimized/Fields#`<init>`().
     InnerFields innerFields = fields.new InnerFields();
 //  ^^^^^^^^^^^ reference semanticdb maven . . minimized/Fields#InnerFields#
 //              ^^^^^^^^^^^ definition local 1
 //                          display_name innerFields
 //                          signature_documentation java InnerFields innerFields
+//                          enclosing_symbol semanticdb maven . . minimized/Fields#app().
 //                            ^^^^^^ reference local 0
 //                                       ^^^^^^^^^^^ reference semanticdb maven . . minimized/Fields#InnerFields#`<init>`().
     InnerStaticFields innerStaticFields = new InnerStaticFields();
@@ -86,6 +88,7 @@ public class Fields {
 //                    ^^^^^^^^^^^^^^^^^ definition local 2
 //                                      display_name innerStaticFields
 //                                      signature_documentation java InnerStaticFields innerStaticFields
+//                                      enclosing_symbol semanticdb maven . . minimized/Fields#app().
 //                                            ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/Fields#InnerStaticFields#`<init>`().
     return String.valueOf(fields.privateField)
 //         ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#

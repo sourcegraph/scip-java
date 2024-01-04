@@ -44,11 +44,13 @@ public class ListenersUtils {
 //                                                       ^ definition local 0
 //                                                         display_name v
 //                                                         signature_documentation java unresolved_type v
+//                                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ListenersUtils#getEpoxyHolderForChildView().
     RecyclerView recyclerView = findParentRecyclerView(v);
 //  ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#
 //               ^^^^^^^^^^^^ definition local 1
 //                            display_name recyclerView
 //                            signature_documentation java unresolved_type recyclerView
+//                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ListenersUtils#getEpoxyHolderForChildView().
 //                              ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ListenersUtils#findParentRecyclerView().
 //                                                     ^ reference local 0
     if (recyclerView == null) {
@@ -61,6 +63,7 @@ public class ListenersUtils {
 //             ^^^^^^^^^^ definition local 2
 //                        display_name viewHolder
 //                        signature_documentation java unresolved_type viewHolder
+//                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ListenersUtils#getEpoxyHolderForChildView().
 //                          ^^^^^^^^^^^^ reference local 1
 //                                       ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#findContainingViewHolder#
 //                                                                ^ reference local 0
@@ -92,6 +95,7 @@ public class ListenersUtils {
 //                                                                  ^ definition local 3
 //                                                                    display_name v
 //                                                                    signature_documentation java @Nullable\nunresolved_type v
+//                                                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ListenersUtils#findParentRecyclerView().
     if (v == null) {
 //      ^ reference local 3
       return null;
@@ -102,6 +106,7 @@ public class ListenersUtils {
 //             ^^^^^^ definition local 4
 //                    display_name parent
 //                    signature_documentation java unresolved_type parent
+//                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ListenersUtils#findParentRecyclerView().
 //                      ^ reference local 3
 //                        ^^^^^^^^^ reference semanticdb maven . . View#getParent#
     if (parent instanceof RecyclerView) {

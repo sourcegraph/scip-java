@@ -19,6 +19,7 @@ public class MinimizedJavaMain {
 //                                 ^^^^ definition local 0
 //                                      display_name args
 //                                      signature_documentation java String[] args
+//                                      enclosing_symbol semanticdb maven . . minimized/MinimizedJavaMain#main().
     TypeVariables.app(new TypeVariables.CT());
 //  ^^^^^^^^^^^^^ reference semanticdb maven . . minimized/TypeVariables#
 //                ^^^ reference semanticdb maven . . minimized/TypeVariables#app().

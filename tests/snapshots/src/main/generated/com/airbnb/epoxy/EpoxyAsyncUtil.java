@@ -124,9 +124,11 @@ public final class EpoxyAsyncUtil {
 //                                           ^^^^^^ definition local 0
 //                                                  display_name looper
 //                                                  signature_documentation java unresolved_type looper
+//                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#createHandler().
 //                                                           ^^^^^ definition local 1
 //                                                                 display_name async
 //                                                                 signature_documentation java boolean async
+//                                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#createHandler().
     if (!async) {
 //       ^^^^^ reference local 1
       return new Handler(looper);
@@ -168,6 +170,7 @@ public final class EpoxyAsyncUtil {
 //                       ^^^^^^^ definition local 2
 //                               display_name ignored
 //                               signature_documentation java Throwable ignored
+//                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#createHandler().
       }
     }
 
@@ -188,11 +191,13 @@ public final class EpoxyAsyncUtil {
 //                                                  ^^^^^^^^^^ definition local 3
 //                                                             display_name threadName
 //                                                             signature_documentation java String threadName
+//                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#buildBackgroundLooper().
     HandlerThread handlerThread = new HandlerThread(threadName);
 //  ^^^^^^^^^^^^^ reference semanticdb maven . . HandlerThread#
 //                ^^^^^^^^^^^^^ definition local 4
 //                              display_name handlerThread
 //                              signature_documentation java unresolved_type handlerThread
+//                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#buildBackgroundLooper().
 //                                                  ^^^^^^^^^^ reference local 3
     handlerThread.start();
 //  ^^^^^^^^^^^^^ reference local 4

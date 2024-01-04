@@ -43,13 +43,16 @@ public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchC
 //                     ^^^^^ definition local 0
 //                           display_name model
 //                           signature_documentation java T model
+//                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onDragStarted().
 //                            ^^^^ reference semanticdb maven . . View#
 //                                 ^^^^^^^^ definition local 1
 //                                          display_name itemView
 //                                          signature_documentation java unresolved_type itemView
+//                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onDragStarted().
 //                                               ^^^^^^^^^^^^^^^ definition local 2
 //                                                               display_name adapterPosition
 //                                                               signature_documentation java int adapterPosition
+//                                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onDragStarted().
 
   /**
    * Called after {@link #onDragStarted(EpoxyModel, View, int)} when the dragged view is dropped to
@@ -75,17 +78,21 @@ public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchC
 //                      ^^^^^^^^^^^^ definition local 3
 //                                   display_name fromPosition
 //                                   signature_documentation java int fromPosition
+//                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onModelMoved().
 //                                        ^^^^^^^^^^ definition local 4
 //                                                   display_name toPosition
 //                                                   signature_documentation java int toPosition
+//                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onModelMoved().
 //                                                    ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#[T]
 //                                                      ^^^^^^^^^^^^^^^ definition local 5
 //                                                                      display_name modelBeingMoved
 //                                                                      signature_documentation java T modelBeingMoved
+//                                                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onModelMoved().
 //                                                                       ^^^^ reference semanticdb maven . . View#
 //                                                                            ^^^^^^^^ definition local 6
 //                                                                                     display_name itemView
 //                                                                                     signature_documentation java unresolved_type itemView
+//                                                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onModelMoved().
 
   /**
    * Called after {@link #onDragStarted(EpoxyModel, View, int)} when the view being dragged is
@@ -112,8 +119,10 @@ public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchC
 //                      ^^^^^ definition local 7
 //                            display_name model
 //                            signature_documentation java T model
+//                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onDragReleased().
 //                             ^^^^ reference semanticdb maven . . View#
 //                                  ^^^^^^^^ definition local 8
 //                                           display_name itemView
 //                                           signature_documentation java unresolved_type itemView
+//                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#onDragReleased().
 }
