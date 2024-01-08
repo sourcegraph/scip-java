@@ -12,6 +12,7 @@ class ImmutableModelException extends RuntimeException {
 //    ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#
 //                            display_name ImmutableModelException
 //                            signature_documentation java class ImmutableModelException
+//                            kind Class
 //                            documentation  Thrown if a model is changed after it is added to an {@link com.airbnb.epoxy.EpoxyController}.\n
 //                            relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
 //                            relationship is_implementation semanticdb maven jdk 11 java/lang/Exception#
@@ -23,6 +24,7 @@ class ImmutableModelException extends RuntimeException {
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#MODEL_CANNOT_BE_CHANGED_MESSAGE.
 //                                                            display_name MODEL_CANNOT_BE_CHANGED_MESSAGE
 //                                                            signature_documentation java private static final String MODEL_CANNOT_BE_CHANGED_MESSAGE
+//                                                            kind StaticField
       "Epoxy attribute fields on a model cannot be changed once the model is added to a "
           + "controller. Check that these fields are not updated, or that the assigned objects "
           + "are not mutated, outside of the buildModels method. The only exception is if "
@@ -35,6 +37,7 @@ class ImmutableModelException extends RuntimeException {
 //^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#`<init>`().
 //                        display_name <init>
 //                        signature_documentation java ImmutableModelException(EpoxyModel model, int modelPosition)
+//                        kind Constructor
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local 0
 //                                         display_name model
@@ -54,6 +57,7 @@ class ImmutableModelException extends RuntimeException {
 //^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#`<init>`(+1).
 //                        display_name <init>
 //                        signature_documentation java ImmutableModelException(EpoxyModel model, String descriptionOfWhenChangeHappened, int modelPosition)
+//                        kind Constructor
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local 2
 //                                         display_name model
@@ -84,6 +88,7 @@ class ImmutableModelException extends RuntimeException {
 //                      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ImmutableModelException#buildMessage().
 //                                   display_name buildMessage
 //                                   signature_documentation java @NonNull\nprivate static String buildMessage(EpoxyModel model, String descriptionOfWhenChangeHappened, int modelPosition)
+//                                   kind StaticMethod
 //                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                              ^^^^^ definition local 5
 //                                                    display_name model

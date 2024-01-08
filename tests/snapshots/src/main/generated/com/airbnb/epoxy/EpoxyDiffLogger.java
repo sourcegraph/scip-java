@@ -31,6 +31,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //           ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#
 //                           display_name EpoxyDiffLogger
 //                           signature_documentation java public class EpoxyDiffLogger
+//                           kind Class
 //                           documentation  This data observer can be registered with an Epoxy adapter or controller to log all item change\n events. This may be useful to use in debug builds in order to observe model updates and monitor\n for issues.\n <p>\n You may want to look for unexpected item updates to catch improper hashCode/equals\n implementations in your models.\n <p>\n Additionally, you may want to look for frequent or unnecessary updates as an opportunity for\n optimization.\n
 //                           relationship is_implementation semanticdb maven . . AdapterDataObserver#
 //                                   ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . AdapterDataObserver#
@@ -39,11 +40,13 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //                     ^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#tag.
 //                         display_name tag
 //                         signature_documentation java private final String tag
+//                         kind Field
 
   public EpoxyDiffLogger(String tag) {
 //       ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#`<init>`().
 //                       display_name <init>
 //                       signature_documentation java public EpoxyDiffLogger(String tag)
+//                       kind Constructor
 //                       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                              ^^^ definition local 0
 //                                  display_name tag
@@ -60,6 +63,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //            ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeChanged().
 //                               display_name onItemRangeChanged
 //                               signature_documentation java @Override\npublic void onItemRangeChanged(int positionStart, int itemCount)
+//                               kind Method
 //                                   ^^^^^^^^^^^^^ definition local 1
 //                                                 display_name positionStart
 //                                                 signature_documentation java int positionStart
@@ -82,6 +86,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //            ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeChanged(+1).
 //                               display_name onItemRangeChanged
 //                               signature_documentation java @Override\npublic void onItemRangeChanged(int positionStart, int itemCount, Object payload)
+//                               kind Method
 //                                   ^^^^^^^^^^^^^ definition local 3
 //                                                 display_name positionStart
 //                                                 signature_documentation java int positionStart
@@ -119,6 +124,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //            ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeInserted().
 //                                display_name onItemRangeInserted
 //                                signature_documentation java @Override\npublic void onItemRangeInserted(int positionStart, int itemCount)
+//                                kind Method
 //                                    ^^^^^^^^^^^^^ definition local 6
 //                                                  display_name positionStart
 //                                                  signature_documentation java int positionStart
@@ -141,6 +147,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //            ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeRemoved().
 //                               display_name onItemRangeRemoved
 //                               signature_documentation java @Override\npublic void onItemRangeRemoved(int positionStart, int itemCount)
+//                               kind Method
 //                                   ^^^^^^^^^^^^^ definition local 8
 //                                                 display_name positionStart
 //                                                 signature_documentation java int positionStart
@@ -163,6 +170,7 @@ public class EpoxyDiffLogger extends AdapterDataObserver {
 //            ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDiffLogger#onItemRangeMoved().
 //                             display_name onItemRangeMoved
 //                             signature_documentation java @Override\npublic void onItemRangeMoved(int fromPosition, int toPosition, int itemCount)
+//                             kind Method
 //                                 ^^^^^^^^^^^^ definition local 10
 //                                              display_name fromPosition
 //                                              signature_documentation java int fromPosition

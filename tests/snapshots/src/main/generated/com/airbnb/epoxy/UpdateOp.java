@@ -30,6 +30,7 @@ class UpdateOp {
 //    ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#
 //             display_name UpdateOp
 //             signature_documentation java class UpdateOp
+//             kind Class
 //             documentation Defines an operation that makes a change to the epoxy model list. 
 
   @IntDef({ADD, REMOVE, UPDATE, MOVE})
@@ -46,6 +47,7 @@ class UpdateOp {
 //           ^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#Type#
 //                display_name Type
 //                signature_documentation java @IntDef({ADD, REMOVE, UPDATE, MOVE})\n@Retention(RetentionPolicy.SOURCE)\n@interface Type
+//                kind Interface
 //                relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
   }
 
@@ -53,33 +55,40 @@ class UpdateOp {
 //                 ^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#ADD.
 //                     display_name ADD
 //                     signature_documentation java static final int ADD
+//                     kind StaticField
   static final int REMOVE = 1;
 //                 ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#REMOVE.
 //                        display_name REMOVE
 //                        signature_documentation java static final int REMOVE
+//                        kind StaticField
   static final int UPDATE = 2;
 //                 ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#UPDATE.
 //                        display_name UPDATE
 //                        signature_documentation java static final int UPDATE
+//                        kind StaticField
   static final int MOVE = 3;
 //                 ^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#MOVE.
 //                      display_name MOVE
 //                      signature_documentation java static final int MOVE
+//                      kind StaticField
 
   @Type int type;
 // ^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#Type#
 //          ^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#type.
 //               display_name type
 //               signature_documentation java @Type\nint type
+//               kind Field
   int positionStart;
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionStart.
 //                  display_name positionStart
 //                  signature_documentation java int positionStart
+//                  kind Field
   /** Holds the target position if this is a MOVE */
   int itemCount;
 //    ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#itemCount.
 //              display_name itemCount
 //              signature_documentation java int itemCount
+//              kind Field
 //              documentation Holds the target position if this is a MOVE 
   ArrayList<EpoxyModel<?>> payloads;
 //^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
@@ -87,11 +96,13 @@ class UpdateOp {
 //                         ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#payloads.
 //                                  display_name payloads
 //                                  signature_documentation java ArrayList<EpoxyModel<?>> payloads
+//                                  kind Field
 
   private UpdateOp() {
 //        ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#`<init>`().
 //                 display_name <init>
 //                 signature_documentation java private UpdateOp()
+//                 kind Constructor
   }
 
   static UpdateOp instance(@Type int type, int positionStart, int itemCount,
@@ -99,6 +110,7 @@ class UpdateOp {
 //                ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#instance().
 //                         display_name instance
 //                         signature_documentation java static UpdateOp instance(int type, int positionStart, int itemCount, EpoxyModel<?> payload)
+//                         kind StaticMethod
 //                          ^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#Type#
 //                                   ^^^^ definition local 0
 //                                        display_name type
@@ -154,6 +166,7 @@ class UpdateOp {
 //    ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionEnd().
 //                display_name positionEnd
 //                signature_documentation java int positionEnd()
+//                kind Method
 //                documentation Returns the index one past the last item in the affected range. 
     return positionStart + itemCount;
 //         ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionStart.
@@ -164,6 +177,7 @@ class UpdateOp {
 //        ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#isAfter().
 //                display_name isAfter
 //                signature_documentation java boolean isAfter(int position)
+//                kind Method
 //                    ^^^^^^^^ definition local 5
 //                             display_name position
 //                             signature_documentation java int position
@@ -177,6 +191,7 @@ class UpdateOp {
 //        ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#isBefore().
 //                 display_name isBefore
 //                 signature_documentation java boolean isBefore(int position)
+//                 kind Method
 //                     ^^^^^^^^ definition local 6
 //                              display_name position
 //                              signature_documentation java int position
@@ -190,6 +205,7 @@ class UpdateOp {
 //        ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#contains().
 //                 display_name contains
 //                 signature_documentation java boolean contains(int position)
+//                 kind Method
 //                     ^^^^^^^^ definition local 7
 //                              display_name position
 //                              signature_documentation java int position
@@ -205,6 +221,7 @@ class UpdateOp {
 //     ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#addPayload().
 //                display_name addPayload
 //                signature_documentation java void addPayload(EpoxyModel<?> payload)
+//                kind Method
 //                 ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                        ^^^^^^^ definition local 8
@@ -245,6 +262,7 @@ class UpdateOp {
 //              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#toString().
 //                       display_name toString
 //                       signature_documentation java @Override\npublic String toString()
+//                       kind Method
 //                       relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#toString().
     return "UpdateOp{"
         + "type=" + type

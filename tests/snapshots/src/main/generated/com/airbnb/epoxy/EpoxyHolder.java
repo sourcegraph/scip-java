@@ -22,12 +22,14 @@ public abstract class EpoxyHolder {
 //                    ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#
 //                                display_name EpoxyHolder
 //                                signature_documentation java public abstract class EpoxyHolder
+//                                kind Class
 //                                documentation  Used in conjunction with {@link com.airbnb.epoxy.EpoxyModelWithHolder} to provide a view holder\n pattern when binding to a model.\n
 
   public EpoxyHolder(@NonNull ViewParent parent) {
 //       ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#`<init>`().
 //                   display_name <init>
 //                   signature_documentation java public EpoxyHolder(unresolved_type parent)
+//                   kind Constructor
 //                    ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                            ^^^^^^^^^^ reference semanticdb maven . . ViewParent#
 //                                       ^^^^^^ definition local 0
@@ -42,6 +44,7 @@ public abstract class EpoxyHolder {
 //       ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#`<init>`(+1).
 //                   display_name <init>
 //                   signature_documentation java public EpoxyHolder()
+//                   kind Constructor
   }
 
   /**
@@ -56,6 +59,7 @@ public abstract class EpoxyHolder {
 //                        ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#bindView().
 //                                 display_name bindView
 //                                 signature_documentation java protected abstract void bindView(unresolved_type itemView)
+//                                 kind AbstractMethod
 //                                 documentation  Called when this holder is created, with the view that it should hold. You can use this\n opportunity to find views by id, and do any other initialization you need. This is called only\n once for the lifetime of the class.\n\n @param itemView A view inflated from the layout provided by\n {@link EpoxyModelWithHolder#getLayout()}\n
 //                                  ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                          ^^^^ reference semanticdb maven . . View#

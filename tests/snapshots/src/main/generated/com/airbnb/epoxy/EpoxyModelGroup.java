@@ -100,6 +100,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //           ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#
 //                           display_name EpoxyModelGroup
 //                           signature_documentation java @SuppressWarnings("rawtypes")\npublic class EpoxyModelGroup
+//                           kind Class
 //                           documentation  An {@link EpoxyModel} that contains other models, and allows you to combine those models in\n whatever view configuration you want.\n <p>\n The constructors take a list of models and a layout resource. The layout must have a viewgroup as\n its top level view; it determines how the view of each model is laid out. There are two ways to\n specify this\n <p>\n 1. Leave the viewgroup empty. The view for each model will be inflated and added in order. This\n works fine if you don't need to include any other views, your model views don't need their layout\n params changed, and your views don't need ids (eg for saving state).\n <p>\n Alternatively you can have nested view groups, with the innermost viewgroup given the id\n "epoxy_model_group_child_container" to mark it as the viewgroup that should have the model views\n added to it. The viewgroup marked with this id should be empty. This allows you to nest\n viewgroups, such as a LinearLayout inside of a CardView.\n <p>\n 2. Include a {@link ViewStub} for each of the models in the list. There should be at least as\n many view stubs as models. Extra stubs will be ignored. Each model will have its view replace the\n stub in order of the view stub's position in the view group. That is, the view group's children\n will be iterated through in order. The first view stub found will be used for the first model in\n the models list, the second view stub will be used for the second model, and so on. A depth first\n recursive search through nested viewgroups is done to find these viewstubs.\n <p>\n The layout can be of any ViewGroup subclass, and can have arbitrary other child views besides the\n view stubs. It can arrange the views and view stubs however is needed.\n <p>\n Any layout param options set on the view stubs will be transferred to the corresponding model\n view by default. If you want a model to keep the layout params from it's own layout resource you\n can override {@link #useViewStubLayoutParams(EpoxyModel, int)}\n <p>\n If you want to override the id used for a model's view you can set {@link\n ViewStub#setInflatedId(int)} via xml. That id will be transferred over to the view taking that\n stub's place. This is necessary if you want your model to save view state, since without this the\n model's view won't have an id to associate the saved state with.\n <p>\n By default this model inherits the same id as the first model in the list. Call {@link #id(long)}\n to override that if needed.\n <p>\n When a model group is recycled, its child views are automatically recycled to a pool that is\n shared with all other model groups in the activity. This enables model groups to more efficiently\n manage their children. The shared pool is cleaned up when the activity is destroyed.\n
 //                           relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                           relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#
@@ -112,11 +113,13 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                                    ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#models.
 //                                           display_name models
 //                                           signature_documentation java protected final List<EpoxyModel<?>> models
+//                                           kind Field
 
   private boolean shouldSaveViewStateDefault = false;
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#shouldSaveViewStateDefault.
 //                                           display_name shouldSaveViewStateDefault
 //                                           signature_documentation java private boolean shouldSaveViewStateDefault
+//                                           kind Field
 
   @Nullable
 // ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
@@ -125,6 +128,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#shouldSaveViewState.
 //                                    display_name shouldSaveViewState
 //                                    signature_documentation java @Nullable\nprivate Boolean shouldSaveViewState
+//                                    kind Field
 
   /**
    * @param layoutRes The layout to use with these models.
@@ -134,6 +138,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //       ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#`<init>`().
 //                       display_name <init>
 //                       signature_documentation java public EpoxyModelGroup(int layoutRes, Collection<? extends EpoxyModel<?>> models)
+//                       kind Constructor
 //                       documentation  @param layoutRes The layout to use with these models.\n @param models    The models that will be used to bind the views in the given layout.\n
 //                        ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/LayoutRes#
 //                                      ^^^^^^^^^ definition local 0
@@ -161,6 +166,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //       ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+1).
 //                       display_name <init>
 //                       signature_documentation java public EpoxyModelGroup(int layoutRes, EpoxyModel<?>[] models)
+//                       kind Constructor
 //                       documentation  @param layoutRes The layout to use with these models.\n @param models    The models that will be used to bind the views in the given layout.\n
 //                        ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/LayoutRes#
 //                                      ^^^^^^^^^ definition local 2
@@ -189,6 +195,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //        ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+2).
 //                        display_name <init>
 //                        signature_documentation java private EpoxyModelGroup(int layoutRes, List<EpoxyModel<?>> models)
+//                        kind Constructor
 //                        documentation  @param layoutRes The layout to use with these models.\n @param models    The models that will be used to bind the views in the given layout.\n
 //                         ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/LayoutRes#
 //                                       ^^^^^^^^^ definition local 4
@@ -253,6 +260,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+3).
 //                          display_name <init>
 //                          signature_documentation java protected EpoxyModelGroup()
+//                          kind Constructor
 //                          documentation  Constructor use for DSL\n
     models = new ArrayList<>();
 //  ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#models.
@@ -268,6 +276,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+4).
 //                          display_name <init>
 //                          signature_documentation java protected EpoxyModelGroup(int layoutRes)
+//                          kind Constructor
 //                          documentation  Constructor use for DSL\n
 //                           ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/LayoutRes#
 //                                         ^^^^^^^^^ definition local 8
@@ -285,6 +294,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //               ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#addModel().
 //                        display_name addModel
 //                        signature_documentation java protected void addModel(EpoxyModel<?> model)
+//                        kind Method
 //                         ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                 ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                               ^^^^^ definition local 9
@@ -310,6 +320,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //            ^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#bind().
 //                 display_name bind
 //                 signature_documentation java @CallSuper\n@Override\npublic void bind(unresolved_type holder)
+//                 kind Method
 //                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#bind().
 //                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#bind().
 //                  ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
@@ -329,6 +340,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                        display_name onModel
 //                        signature_documentation java @Override\npublic void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex)
 //                        enclosing_symbol local 11
+//                        kind Method
 //                        relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#onModel().
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local 13
@@ -367,6 +379,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //            ^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#bind(+1).
 //                 display_name bind
 //                 signature_documentation java @CallSuper\n@Override\npublic void bind(unresolved_type holder, List<Object> payloads)
+//                 kind Method
 //                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#bind(+1).
 //                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#bind(+1).
 //                  ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
@@ -393,6 +406,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                        display_name onModel
 //                        signature_documentation java @Override\npublic void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex)
 //                        enclosing_symbol local 18
+//                        kind Method
 //                        relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#onModel().
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local 20
@@ -429,6 +443,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //            ^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#bind(+2).
 //                 display_name bind
 //                 signature_documentation java @Override\npublic void bind(unresolved_type holder, EpoxyModel<?> previouslyBoundModel)
+//                 kind Method
 //                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#bind(+2).
 //                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#bind(+2).
 //                  ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
@@ -472,6 +487,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                        display_name onModel
 //                        signature_documentation java @Override\npublic void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex)
 //                        enclosing_symbol local 26
+//                        kind Method
 //                        relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#onModel().
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local 28
@@ -539,6 +555,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                    ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#setViewVisibility().
 //                                      display_name setViewVisibility
 //                                      signature_documentation java private static void setViewVisibility(EpoxyModel model, EpoxyViewHolder viewHolder)
+//                                      kind StaticMethod
 //                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                 ^^^^^ definition local 32
 //                                                       display_name model
@@ -576,6 +593,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //            ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#unbind().
 //                   display_name unbind
 //                   signature_documentation java @CallSuper\n@Override\npublic void unbind(unresolved_type holder)
+//                   kind Method
 //                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#unbind().
 //                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#unbind().
 //                    ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
@@ -597,6 +615,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //            ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#onViewAttachedToWindow().
 //                                   display_name onViewAttachedToWindow
 //                                   signature_documentation java @CallSuper\n@Override\npublic void onViewAttachedToWindow(unresolved_type holder)
+//                                   kind Method
 //                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#onViewAttachedToWindow().
 //                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onViewAttachedToWindow().
 //                                   ^^^^^^^^^^^^^^^^ reference semanticdb maven . . ModelGroupHolder#
@@ -615,6 +634,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                        display_name onModel
 //                        signature_documentation java @Override\npublic void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex)
 //                        enclosing_symbol local 36
+//                        kind Method
 //                        relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#onModel().
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local 38
@@ -648,6 +668,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#onViewDetachedFromWindow().
 //                                     display_name onViewDetachedFromWindow
 //                                     signature_documentation java @CallSuper\n@Override\npublic void onViewDetachedFromWindow(unresolved_type holder)
+//                                     kind Method
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#onViewDetachedFromWindow().
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#onViewDetachedFromWindow().
 //                                     ^^^^^^^^^^^^^^^^ reference semanticdb maven . . ModelGroupHolder#
@@ -666,6 +687,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                        display_name onModel
 //                        signature_documentation java @Override\npublic void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex)
 //                        enclosing_symbol local 42
+//                        kind Method
 //                        relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#onModel().
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                   ^^^^^ definition local 44
@@ -695,6 +717,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#iterateModels().
 //                           display_name iterateModels
 //                           signature_documentation java private void iterateModels(unresolved_type holder, IterateModelsCallback callback)
+//                           kind Method
 //                           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . ModelGroupHolder#
 //                                            ^^^^^^ definition local 47
 //                                                   display_name holder
@@ -742,10 +765,12 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                  ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#
 //                                        display_name IterateModelsCallback
 //                                        signature_documentation java private interface IterateModelsCallback
+//                                        kind Interface
     void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex);
 //       ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#IterateModelsCallback#onModel().
 //               display_name onModel
 //               signature_documentation java public abstract void onModel(EpoxyModel model, EpoxyViewHolder viewHolder, int modelIndex)
+//               kind AbstractMethod
 //               ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                          ^^^^^ definition local 51
 //                                display_name model
@@ -768,6 +793,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //           ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#getSpanSize().
 //                       display_name getSpanSize
 //                       signature_documentation java @Override\npublic int getSpanSize(int totalSpanCount, int position, int itemCount)
+//                       kind Method
 //                       relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getSpanSize().
 //                           ^^^^^^^^^^^^^^ definition local 54
 //                                          display_name totalSpanCount
@@ -797,6 +823,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#getDefaultLayout().
 //                                     display_name getDefaultLayout
 //                                     signature_documentation java @Override\nprotected final int getDefaultLayout()
+//                                     kind Method
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getDefaultLayout().
     throw new UnsupportedOperationException(
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/UnsupportedOperationException#`<init>`(+1).
@@ -810,6 +837,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                       ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#shouldSaveViewState().
 //                                           display_name shouldSaveViewState
 //                                           signature_documentation java @NonNull\npublic EpoxyModelGroup shouldSaveViewState(boolean shouldSaveViewState)
+//                                           kind Method
 //                                                   ^^^^^^^^^^^^^^^^^^^ definition local 57
 //                                                                       display_name shouldSaveViewState
 //                                                                       signature_documentation java boolean shouldSaveViewState
@@ -828,6 +856,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //               ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#shouldSaveViewState(+1).
 //                                   display_name shouldSaveViewState
 //                                   signature_documentation java @Override\npublic boolean shouldSaveViewState()
+//                                   kind Method
 //                                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#shouldSaveViewState().
     // By default state is saved if any of the models have saved state enabled.
     // Override this if you need custom behavior.
@@ -854,6 +883,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                  ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#useViewStubLayoutParams().
 //                                          display_name useViewStubLayoutParams
 //                                          signature_documentation java protected boolean useViewStubLayoutParams(EpoxyModel<?> model, int modelPosition)
+//                                          kind Method
 //                                          documentation  Whether the layout params set on the view stub for the given model should be carried over to\n the model's view. Default is true\n <p>\n Set this to false if you want the layout params on the model's layout resource to be kept.\n\n @param model         The model who's view is being created\n @param modelPosition The position of the model in the models list\n
 //                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                        ^^^^^ definition local 58
@@ -874,6 +904,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                                 ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#createNewHolder().
 //                                                 display_name createNewHolder
 //                                                 signature_documentation java @Override\nprotected final unresolved_type createNewHolder(unresolved_type parent)
+//                                                 kind Method
 //                                                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelWithHolder#createNewHolder().
 //                                                  ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                                          ^^^^^^^^^^ reference semanticdb maven . . ViewParent#
@@ -891,6 +922,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#equals().
 //                      display_name equals
 //                      signature_documentation java @Override\npublic boolean equals(Object o)
+//                      kind Method
 //                      relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#equals().
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#equals().
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
@@ -936,6 +968,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //           ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#hashCode().
 //                    display_name hashCode
 //                    signature_documentation java @Override\npublic int hashCode()
+//                    kind Method
 //                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#hashCode().
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#hashCode().
     int result = super.hashCode();

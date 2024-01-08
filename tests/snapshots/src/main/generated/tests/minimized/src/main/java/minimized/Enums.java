@@ -14,6 +14,7 @@ enum Enums {
 //   ^^^^^ definition semanticdb maven . . minimized/Enums#
 //         display_name Enums
 //         signature_documentation java enum Enums
+//         kind Enum
 //         relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
 //         relationship is_implementation semanticdb maven jdk 11 java/lang/Comparable#
 //         relationship is_implementation semanticdb maven jdk 11 java/lang/Enum#
@@ -37,11 +38,13 @@ enum Enums {
 //              ^^^^^ definition semanticdb maven . . minimized/Enums#value.
 //                    display_name value
 //                    signature_documentation java public String value
+//                    kind Field
 
   Enums(String value, int a) {
 //^^^^^ definition semanticdb maven . . minimized/Enums#`<init>`().
 //      display_name <init>
 //      signature_documentation java private Enums(String value, int a)
+//      kind Constructor
 //      ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //             ^^^^^ definition local 0
 //                   display_name value
@@ -61,6 +64,7 @@ enum Enums {
 //                     ^^^ definition semanticdb maven . . minimized/Enums#app().
 //                         display_name app
 //                         signature_documentation java public static String app()
+//                         kind StaticMethod
     String all = Arrays.stream(values()).map(e -> e.value).map(Enums::valueOf).collect(Collectors.toList()).toString();
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //         ^^^ definition local 2

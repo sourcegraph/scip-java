@@ -14,15 +14,18 @@ public interface OnModelVisibilityChangedListener<T extends EpoxyModel<V>, V> {
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#
 //                                                display_name OnModelVisibilityChangedListener
 //                                                signature_documentation java public interface OnModelVisibilityChangedListener<T extends EpoxyModel<V>, V>
+//                                                kind Interface
 //                                                documentation Used to register an onVisibilityChanged callback with a generated model. 
 //                                                ^ definition semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#[T]
 //                                                  display_name T
 //                                                  signature_documentation java T extends EpoxyModel<V>
+//                                                  kind TypeParameter
 //                                                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                     ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#[V]
 //                                                                         ^ definition semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#[V]
 //                                                                           display_name V
 //                                                                           signature_documentation java V
+//                                                                           kind TypeParameter
 
   /**
    * This will be called once the view visible part changes.
@@ -43,6 +46,7 @@ public interface OnModelVisibilityChangedListener<T extends EpoxyModel<V>, V> {
 //     ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#onVisibilityChanged().
 //                         display_name onVisibilityChanged
 //                         signature_documentation java public abstract void onVisibilityChanged(T model, V view, float percentVisibleHeight, float percentVisibleWidth, int heightVisible, int widthVisible)
+//                         kind AbstractMethod
 //                         documentation  This will be called once the view visible part changes.\n <p>\n OnModelVisibilityChangedListener should be used with particular care since they will be\n dispatched on every frame while scrolling. No heavy work should be done inside the\n implementation. Using {@link OnModelVisibilityStateChangedListener} is recommended whenever\n possible.\n <p>\n @param model                The model being bound\n @param view                 The view that is being bound to the model\n @param percentVisibleHeight The percentage of height visible (0-100)\n @param percentVisibleWidth  The percentage of width visible (0-100)\n @param heightVisible        The visible height in pixel\n @param widthVisible         The visible width in pixel\n
 //                         ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelVisibilityChangedListener#[T]
 //                           ^^^^^ definition local 0

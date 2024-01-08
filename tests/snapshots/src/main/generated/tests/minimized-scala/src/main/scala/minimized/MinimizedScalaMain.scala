@@ -6,13 +6,16 @@ object MinimizedScalaMain {
 //     ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedScalaMain.
 //                        display_name MinimizedScalaMain
 //                        signature_documentation scala object MinimizedScalaMain
+//                        kind Object
   def main(args: Array[String]): Unit = {
 //    ^^^^ definition semanticdb maven . . minimized/MinimizedScalaMain.main().
 //         display_name main
 //         signature_documentation scala def main(args: Array[String]): Unit
+//         kind Method
 //         ^^^^ definition semanticdb maven . . minimized/MinimizedScalaMain.main().(args)
 //              display_name args
 //              signature_documentation scala args: Array[String] 
+//              kind Parameter
 //               ^^^^^ reference semanticdb maven . . scala/Array#
 //                     ^^^^^^ reference semanticdb maven . . scala/Predef.String#
 //                               ^^^^ reference semanticdb maven . . scala/Unit#

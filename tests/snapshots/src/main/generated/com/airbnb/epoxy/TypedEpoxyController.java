@@ -27,6 +27,7 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //                    ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#
 //                                         display_name TypedEpoxyController
 //                                         signature_documentation java public abstract class TypedEpoxyController<T>
+//                                         kind Class
 //                                         documentation  This is a wrapper around {@link com.airbnb.epoxy.EpoxyController} to simplify how data is\n accessed. Use this if the data required to build your models is represented by a single object.\n <p>\n To use this, create a subclass typed with your data object. Then, call {@link #setData(Object)}\n whenever that data changes. This class will handle calling {@link #buildModels(Object)} with the\n latest data.\n <p>\n You should NOT call {@link #requestModelBuild()} directly.\n\n @see Typed2EpoxyController\n @see Typed3EpoxyController\n @see Typed4EpoxyController\n
 //                                         relationship is_implementation semanticdb maven . . ModelCollector#
 //                                         relationship is_implementation semanticdb maven . . StickyHeaderCallbacks#
@@ -34,27 +35,32 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //                                         ^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#[T]
 //                                           display_name T
 //                                           signature_documentation java T
+//                                           kind TypeParameter
 //                                                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
   private T currentData;
 //        ^ reference semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#[T]
 //          ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#currentData.
 //                      display_name currentData
 //                      signature_documentation java private T currentData
+//                      kind Field
   private boolean allowModelBuildRequests;
 //                ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#allowModelBuildRequests.
 //                                        display_name allowModelBuildRequests
 //                                        signature_documentation java private boolean allowModelBuildRequests
+//                                        kind Field
 
   public TypedEpoxyController() {
 //       ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#`<init>`().
 //                            display_name <init>
 //                            signature_documentation java public TypedEpoxyController()
+//                            kind Constructor
   }
 
   public TypedEpoxyController(Handler modelBuildingHandler, Handler diffingHandler) {
 //       ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#`<init>`(+1).
 //                            display_name <init>
 //                            signature_documentation java public TypedEpoxyController(unresolved_type modelBuildingHandler, unresolved_type diffingHandler)
+//                            kind Constructor
 //                            ^^^^^^^ reference semanticdb maven . . Handler#
 //                                    ^^^^^^^^^^^^^^^^^^^^ definition local 0
 //                                                         display_name modelBuildingHandler
@@ -75,6 +81,7 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //                  ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#setData().
 //                          display_name setData
 //                          signature_documentation java public final void setData(T data)
+//                          kind Method
 //                          ^ reference semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#[T]
 //                            ^^^^ definition local 2
 //                                 display_name data
@@ -97,6 +104,7 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //                  ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#requestModelBuild().
 //                                    display_name requestModelBuild
 //                                    signature_documentation java @Override\npublic final void requestModelBuild()
+//                                    kind Method
 //                                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#requestModelBuild().
     if (!allowModelBuildRequests) {
 //       ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#allowModelBuildRequests.
@@ -116,6 +124,7 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //            ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#moveModel().
 //                      display_name moveModel
 //                      signature_documentation java @Override\npublic void moveModel(int fromPosition, int toPosition)
+//                      kind Method
 //                      relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#moveModel().
 //                          ^^^^^^^^^^^^ definition local 3
 //                                       display_name fromPosition
@@ -142,6 +151,7 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#requestDelayedModelBuild().
 //                                     display_name requestDelayedModelBuild
 //                                     signature_documentation java @Override\npublic void requestDelayedModelBuild(int delayMs)
+//                                     kind Method
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#requestDelayedModelBuild().
 //                                         ^^^^^^^ definition local 5
 //                                                 display_name delayMs
@@ -167,6 +177,7 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //               ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#getCurrentData().
 //                              display_name getCurrentData
 //                              signature_documentation java @Nullable\npublic final T getCurrentData()
+//                              kind Method
     return currentData;
 //         ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#currentData.
   }
@@ -177,6 +188,7 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //                     ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#buildModels().
 //                                 display_name buildModels
 //                                 signature_documentation java @Override\nprotected final void buildModels()
+//                                 kind Method
 //                                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#buildModels().
     if (!isBuildingModels()) {
 //       ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#isBuildingModels().
@@ -194,6 +206,7 @@ public abstract class TypedEpoxyController<T> extends EpoxyController {
 //                        ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#buildModels(+1).
 //                                    display_name buildModels
 //                                    signature_documentation java protected abstract void buildModels(T data)
+//                                    kind AbstractMethod
 //                                    ^ reference semanticdb maven . . com/airbnb/epoxy/TypedEpoxyController#[T]
 //                                      ^^^^ definition local 6
 //                                           display_name data

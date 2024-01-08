@@ -4,13 +4,16 @@ public class TabIndented {
 //           ^^^^^^^^^^^ definition semanticdb maven . . minimized/TabIndented#
 //                       display_name TabIndented
 //                       signature_documentation java public class TabIndented
+//                       kind Class
 //           ^^^^^^^^^^^ definition semanticdb maven . . minimized/TabIndented#`<init>`().
 //                       display_name <init>
 //                       signature_documentation java public TabIndented()
+//                       kind Constructor
 →public void app() {
 //           ^^^ definition semanticdb maven . . minimized/TabIndented#app().
 //               display_name app
 //               signature_documentation java public void app()
+//               kind Method
 →→Object o = new Object() {
 //^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //       ^ definition local 0
@@ -25,6 +28,7 @@ public class TabIndented {
 //                       display_name equals
 //                       signature_documentation java @Override\npublic boolean equals(Object other)
 //                       enclosing_symbol local 1
+//                       kind Method
 //                       relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#equals().
 //                       ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                              ^^^^^ definition local 3
@@ -41,6 +45,7 @@ public class TabIndented {
 //                     display_name hashCode
 //                     signature_documentation java @Override\npublic int hashCode()
 //                     enclosing_symbol local 1
+//                     kind Method
 //                     relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#hashCode().
 →→→→return System.identityHashCode(this);
 //         ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
@@ -55,6 +60,7 @@ public class TabIndented {
 //                        display_name toString
 //                        signature_documentation java @Override\npublic String toString()
 //                        enclosing_symbol local 1
+//                        kind Method
 //                        relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#toString().
 →→→→return "";
 →→→}

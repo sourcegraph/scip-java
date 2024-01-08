@@ -29,9 +29,11 @@ public class ListenersUtils {
 //           ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ListenersUtils#
 //                          display_name ListenersUtils
 //                          signature_documentation java public class ListenersUtils
+//                          kind Class
 //           ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ListenersUtils#`<init>`().
 //                          display_name <init>
 //                          signature_documentation java public ListenersUtils()
+//                          kind Constructor
 
   @Nullable
 // ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
@@ -40,6 +42,7 @@ public class ListenersUtils {
 //                       ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ListenersUtils#getEpoxyHolderForChildView().
 //                                                  display_name getEpoxyHolderForChildView
 //                                                  signature_documentation java @Nullable\nstatic EpoxyViewHolder getEpoxyHolderForChildView(unresolved_type v)
+//                                                  kind StaticMethod
 //                                                  ^^^^ reference semanticdb maven . . View#
 //                                                       ^ definition local 0
 //                                                         display_name v
@@ -90,6 +93,7 @@ public class ListenersUtils {
 //                            ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ListenersUtils#findParentRecyclerView().
 //                                                   display_name findParentRecyclerView
 //                                                   signature_documentation java @Nullable\nprivate static unresolved_type findParentRecyclerView(unresolved_type v)
+//                                                   kind StaticMethod
 //                                                    ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                                             ^^^^ reference semanticdb maven . . View#
 //                                                                  ^ definition local 3

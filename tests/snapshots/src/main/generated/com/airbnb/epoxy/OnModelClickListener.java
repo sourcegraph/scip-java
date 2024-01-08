@@ -10,14 +10,17 @@ public interface OnModelClickListener<T extends EpoxyModel<?>, V> {
 //               ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#
 //                                    display_name OnModelClickListener
 //                                    signature_documentation java public interface OnModelClickListener<T extends EpoxyModel<?>, V>
+//                                    kind Interface
 //                                    documentation Used to register a click listener on a generated model. 
 //                                    ^ definition semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#[T]
 //                                      display_name T
 //                                      signature_documentation java T extends EpoxyModel<?>
+//                                      kind TypeParameter
 //                                              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                             ^ definition semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#[V]
 //                                                               display_name V
 //                                                               signature_documentation java V
+//                                                               kind TypeParameter
   /**
    * Called when the view bound to the model is clicked.
    *
@@ -31,6 +34,7 @@ public interface OnModelClickListener<T extends EpoxyModel<?>, V> {
 //     ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#onClick().
 //             display_name onClick
 //             signature_documentation java public abstract void onClick(T model, V parentView, unresolved_type clickedView, int position)
+//             kind AbstractMethod
 //             documentation  Called when the view bound to the model is clicked.\n\n @param model       The model that the view is bound to.\n @param parentView  The view bound to the model which received the click.\n @param clickedView The view that received the click. This is either a child of the parentView\n                    or the parentView itself\n @param position    The position of the model in the adapter.\n
 //             ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelClickListener#[T]
 //               ^^^^^ definition local 0

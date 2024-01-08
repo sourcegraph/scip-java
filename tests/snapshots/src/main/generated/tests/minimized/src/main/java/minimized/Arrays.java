@@ -4,14 +4,17 @@ public class Arrays {
 //           ^^^^^^ definition semanticdb maven . . minimized/Arrays#
 //                  display_name Arrays
 //                  signature_documentation java public class Arrays
+//                  kind Class
 //           ^^^^^^ definition semanticdb maven . . minimized/Arrays#`<init>`().
 //                  display_name <init>
 //                  signature_documentation java public Arrays()
+//                  kind Constructor
   public static String app() {
 //              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                     ^^^ definition semanticdb maven . . minimized/Arrays#app().
 //                         display_name app
 //                         signature_documentation java public static String app()
+//                         kind StaticMethod
     int[] a = {1, 2, 3};
 //        ^ definition local 0
 //          display_name a

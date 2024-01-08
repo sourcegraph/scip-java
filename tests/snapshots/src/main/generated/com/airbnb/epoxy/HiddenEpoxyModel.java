@@ -21,11 +21,13 @@ class HiddenEpoxyModel extends EpoxyModel<Space> {
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#
 //                     display_name HiddenEpoxyModel
 //                     signature_documentation java class HiddenEpoxyModel
+//                     kind Class
 //                     documentation  Used by the {@link EpoxyAdapter} as a placeholder for when {@link EpoxyModel#isShown()} is false.\n Using a zero height and width {@link Space} view, as well as 0 span size, to exclude itself from\n view.\n
 //                     relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
 //                     display_name <init>
 //                     signature_documentation java HiddenEpoxyModel()
+//                     kind Constructor
 //                             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                        ^^^^^ reference semanticdb maven . . Space#
   @Override
@@ -34,6 +36,7 @@ class HiddenEpoxyModel extends EpoxyModel<Space> {
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#getDefaultLayout().
 //                            display_name getDefaultLayout
 //                            signature_documentation java @Override\npublic int getDefaultLayout()
+//                            kind Method
 //                            relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getDefaultLayout().
     return R.layout.view_holder_empty_view;
 //         ^ reference semanticdb maven . . R/
@@ -47,6 +50,7 @@ class HiddenEpoxyModel extends EpoxyModel<Space> {
 //           ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#getSpanSize().
 //                       display_name getSpanSize
 //                       signature_documentation java @Override\npublic int getSpanSize(int spanCount, int position, int itemCount)
+//                       kind Method
 //                       relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getSpanSize().
 //                           ^^^^^^^^^ definition local 0
 //                                     display_name spanCount

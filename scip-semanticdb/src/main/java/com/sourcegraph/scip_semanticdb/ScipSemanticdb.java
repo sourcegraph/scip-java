@@ -4,6 +4,8 @@ import com.google.protobuf.CodedInputStream;
 import com.sourcegraph.lsif_protocol.MarkupKind;
 import com.sourcegraph.semanticdb_javac.Semanticdb;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation;
+import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Kind;
+import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
@@ -79,6 +81,73 @@ public class ScipSemanticdb {
     return "semanticdb maven " + pkg.repoName() + " " + pkg.version() + " " + symbol;
   }
 
+  private static Scip.SymbolInformation.Kind scipKind(SymbolInformation info) {
+    Kind kind = info.getKind();
+    int properties = info.getProperties();
+    boolean isStatic = (properties & Property.STATIC_VALUE) > 0;
+    boolean isAbstract = (properties & Property.ABSTRACT_VALUE) > 0;
+    boolean isEnum = (properties & Property.ENUM_VALUE) > 0;
+
+    switch (kind) {
+      case CLASS:
+        if (isEnum) {
+          return Scip.SymbolInformation.Kind.Enum;
+        } else {
+          return Scip.SymbolInformation.Kind.Class;
+        }
+      case CONSTRUCTOR:
+        return Scip.SymbolInformation.Kind.Constructor;
+      case FIELD:
+        if (isStatic) {
+          return Scip.SymbolInformation.Kind.StaticField;
+        } else {
+          return Scip.SymbolInformation.Kind.Field;
+        }
+      case INTERFACE:
+        return Scip.SymbolInformation.Kind.Interface;
+      case LOCAL:
+        if (isStatic) {
+          return Scip.SymbolInformation.Kind.StaticVariable;
+        } else {
+          return Scip.SymbolInformation.Kind.Variable;
+        }
+      case MACRO:
+        return Scip.SymbolInformation.Kind.Macro;
+      case METHOD:
+        if (isStatic) {
+          return Scip.SymbolInformation.Kind.StaticMethod;
+        } else if (isAbstract) {
+          return Scip.SymbolInformation.Kind.AbstractMethod;
+        } else {
+          return Scip.SymbolInformation.Kind.Method;
+        }
+      case OBJECT:
+        return Scip.SymbolInformation.Kind.Object;
+      case PACKAGE:
+        return Scip.SymbolInformation.Kind.Package;
+      case PACKAGE_OBJECT:
+        return Scip.SymbolInformation.Kind.PackageObject;
+      case PARAMETER:
+        return Scip.SymbolInformation.Kind.Parameter;
+      case SELF_PARAMETER:
+        return Scip.SymbolInformation.Kind.SelfParameter;
+      case TRAIT:
+        return Scip.SymbolInformation.Kind.Trait;
+      case TYPE:
+        if (isEnum) {
+          return Scip.SymbolInformation.Kind.Enum;
+        } else {
+          return Scip.SymbolInformation.Kind.Type;
+        }
+      case TYPE_PARAMETER:
+        return Scip.SymbolInformation.Kind.TypeParameter;
+      case UNKNOWN_KIND:
+        return Scip.SymbolInformation.Kind.UnspecifiedKind;
+    }
+
+    return Scip.SymbolInformation.Kind.UnspecifiedKind;
+  }
+
   public static boolean isDefinitionRole(Role role) {
     return role == Role.DEFINITION || role == Role.SYNTHETIC_DEFINITION;
   }
@@ -136,6 +205,8 @@ public class ScipSemanticdb {
         if (!info.getEnclosingSymbol().isEmpty()) {
           scipInfo.setEnclosingSymbol(typedSymbol(info.getEnclosingSymbol(), pkg));
         }
+
+        scipInfo.setKind(scipKind(info));
 
         // TODO: this can be removed once https://github.com/sourcegraph/sourcegraph/issues/50927 is
         // fixed.

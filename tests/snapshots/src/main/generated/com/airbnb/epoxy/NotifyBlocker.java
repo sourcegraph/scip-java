@@ -18,22 +18,26 @@ class NotifyBlocker extends AdapterDataObserver {
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#
 //                  display_name NotifyBlocker
 //                  signature_documentation java class NotifyBlocker
+//                  kind Class
 //                  documentation  We don't allow any data change notifications except the ones done though diffing. Forcing\n changes to happen through diffing reduces the chance for developer error when implementing an\n adapter.\n <p>\n This observer throws upon any changes done outside of diffing.\n
 //                  relationship is_implementation semanticdb maven . . AdapterDataObserver#
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#`<init>`().
 //                  display_name <init>
 //                  signature_documentation java NotifyBlocker()
+//                  kind Constructor
 //                          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . AdapterDataObserver#
 
   private boolean changesAllowed;
 //                ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#changesAllowed.
 //                               display_name changesAllowed
 //                               signature_documentation java private boolean changesAllowed
+//                               kind Field
 
   void allowChanges() {
 //     ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#allowChanges().
 //                  display_name allowChanges
 //                  signature_documentation java void allowChanges()
+//                  kind Method
     changesAllowed = true;
 //  ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#changesAllowed.
   }
@@ -42,6 +46,7 @@ class NotifyBlocker extends AdapterDataObserver {
 //     ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#blockChanges().
 //                  display_name blockChanges
 //                  signature_documentation java void blockChanges()
+//                  kind Method
     changesAllowed = false;
 //  ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#changesAllowed.
   }
@@ -52,6 +57,7 @@ class NotifyBlocker extends AdapterDataObserver {
 //            ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onChanged().
 //                      display_name onChanged
 //                      signature_documentation java @Override\npublic void onChanged()
+//                      kind Method
     if (!changesAllowed) {
 //       ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#changesAllowed.
       throw new IllegalStateException(
@@ -66,6 +72,7 @@ class NotifyBlocker extends AdapterDataObserver {
 //            ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeChanged().
 //                               display_name onItemRangeChanged
 //                               signature_documentation java @Override\npublic void onItemRangeChanged(int positionStart, int itemCount)
+//                               kind Method
 //                                   ^^^^^^^^^^^^^ definition local 0
 //                                                 display_name positionStart
 //                                                 signature_documentation java int positionStart
@@ -84,6 +91,7 @@ class NotifyBlocker extends AdapterDataObserver {
 //            ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeChanged(+1).
 //                               display_name onItemRangeChanged
 //                               signature_documentation java @Override\npublic void onItemRangeChanged(int positionStart, int itemCount, Object payload)
+//                               kind Method
 //                                   ^^^^^^^^^^^^^ definition local 2
 //                                                 display_name positionStart
 //                                                 signature_documentation java int positionStart
@@ -107,6 +115,7 @@ class NotifyBlocker extends AdapterDataObserver {
 //            ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeInserted().
 //                                display_name onItemRangeInserted
 //                                signature_documentation java @Override\npublic void onItemRangeInserted(int positionStart, int itemCount)
+//                                kind Method
 //                                    ^^^^^^^^^^^^^ definition local 5
 //                                                  display_name positionStart
 //                                                  signature_documentation java int positionStart
@@ -125,6 +134,7 @@ class NotifyBlocker extends AdapterDataObserver {
 //            ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeRemoved().
 //                               display_name onItemRangeRemoved
 //                               signature_documentation java @Override\npublic void onItemRangeRemoved(int positionStart, int itemCount)
+//                               kind Method
 //                                   ^^^^^^^^^^^^^ definition local 7
 //                                                 display_name positionStart
 //                                                 signature_documentation java int positionStart
@@ -143,6 +153,7 @@ class NotifyBlocker extends AdapterDataObserver {
 //            ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeMoved().
 //                             display_name onItemRangeMoved
 //                             signature_documentation java @Override\npublic void onItemRangeMoved(int fromPosition, int toPosition, int itemCount)
+//                             kind Method
 //                                 ^^^^^^^^^^^^ definition local 9
 //                                              display_name fromPosition
 //                                              signature_documentation java int fromPosition

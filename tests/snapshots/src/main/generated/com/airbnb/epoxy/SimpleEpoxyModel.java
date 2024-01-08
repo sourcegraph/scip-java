@@ -28,6 +28,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#
 //                            display_name SimpleEpoxyModel
 //                            signature_documentation java public class SimpleEpoxyModel
+//                            kind Class
 //                            documentation  Helper class for cases where you don't need to do anything special when binding the view. This\n allows you to just provide the layout instead of needing to create a separate {@link EpoxyModel}\n subclass. This is useful for static layouts. You can also specify an onClick listener and the\n span size.\n
 //                            relationship is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
@@ -37,21 +38,25 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                             ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#layoutRes.
 //                                       display_name layoutRes
 //                                       signature_documentation java @LayoutRes\nprivate final int layoutRes
+//                                       kind Field
   private View.OnClickListener onClickListener;
 //        ^^^^ reference semanticdb maven . . View/
 //             ^^^^^^^^^^^^^^^ reference semanticdb maven . . View/OnClickListener#
 //                             ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#onClickListener.
 //                                             display_name onClickListener
 //                                             signature_documentation java private unresolved_type onClickListener
+//                                             kind Field
   private int spanCount = 1;
 //            ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#spanCount.
 //                      display_name spanCount
 //                      signature_documentation java private int spanCount
+//                      kind Field
 
   public SimpleEpoxyModel(@LayoutRes int layoutRes) {
 //       ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#`<init>`().
 //                        display_name <init>
 //                        signature_documentation java public SimpleEpoxyModel(int layoutRes)
+//                        kind Constructor
 //                         ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/LayoutRes#
 //                                       ^^^^^^^^^ definition local 0
 //                                                 display_name layoutRes
@@ -67,6 +72,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                        ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#onClick().
 //                                display_name onClick
 //                                signature_documentation java public SimpleEpoxyModel onClick(unresolved_type listener)
+//                                kind Method
 //                                ^^^^ reference semanticdb maven . . View/
 //                                     ^^^^^^^^^^^^^^^ reference semanticdb maven . . View/OnClickListener#
 //                                                     ^^^^^^^^ definition local 1
@@ -84,6 +90,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                        ^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#span().
 //                             display_name span
 //                             signature_documentation java public SimpleEpoxyModel span(int span)
+//                             kind Method
 //                                 ^^^^ definition local 2
 //                                      display_name span
 //                                      signature_documentation java int span
@@ -102,6 +109,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //            ^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#bind().
 //                 display_name bind
 //                 signature_documentation java @CallSuper\n@Override\npublic void bind(unresolved_type view)
+//                 kind Method
 //                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#bind().
 //                  ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                          ^^^^ reference semanticdb maven . . View#
@@ -131,6 +139,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //            ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#unbind().
 //                   display_name unbind
 //                   signature_documentation java @CallSuper\n@Override\npublic void unbind(unresolved_type view)
+//                   kind Method
 //                   relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#unbind().
 //                    ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                            ^^^^ reference semanticdb maven . . View#
@@ -153,6 +162,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#getDefaultLayout().
 //                               display_name getDefaultLayout
 //                               signature_documentation java @Override\nprotected int getDefaultLayout()
+//                               kind Method
 //                               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getDefaultLayout().
     return layoutRes;
 //         ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#layoutRes.
@@ -164,6 +174,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //           ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#getSpanSize().
 //                       display_name getSpanSize
 //                       signature_documentation java @Override\npublic int getSpanSize(int totalSpanCount, int position, int itemCount)
+//                       kind Method
 //                       relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getSpanSize().
 //                           ^^^^^^^^^^^^^^ definition local 5
 //                                          display_name totalSpanCount
@@ -187,6 +198,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#equals().
 //                      display_name equals
 //                      signature_documentation java @Override\npublic boolean equals(Object o)
+//                      kind Method
 //                      relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#equals().
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#equals().
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
@@ -248,6 +260,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //           ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#hashCode().
 //                    display_name hashCode
 //                    signature_documentation java @Override\npublic int hashCode()
+//                    kind Method
 //                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModel#hashCode().
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#hashCode().
     int result = super.hashCode();

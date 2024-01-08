@@ -39,6 +39,7 @@ class DiffHelper {
 //    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#
 //               display_name DiffHelper
 //               signature_documentation java class DiffHelper
+//               kind Class
 //               documentation  Helper to track changes in the models list.\n
   private ArrayList<ModelState> oldStateList = new ArrayList<>();
 //        ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
@@ -46,6 +47,7 @@ class DiffHelper {
 //                              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
 //                                           display_name oldStateList
 //                                           signature_documentation java private ArrayList<ModelState> oldStateList
+//                                           kind Field
 //                                                 ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`(+1).
   // Using a HashMap instead of a LongSparseArray to
   // have faster look up times at the expense of memory
@@ -56,6 +58,7 @@ class DiffHelper {
 //                              ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateMap.
 //                                          display_name oldStateMap
 //                                          signature_documentation java private Map<Long, ModelState> oldStateMap
+//                                          kind Field
 //                                                ^^^^^^^ reference semanticdb maven jdk 11 java/util/HashMap#`<init>`(+2).
   private ArrayList<ModelState> currentStateList = new ArrayList<>();
 //        ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
@@ -63,6 +66,7 @@ class DiffHelper {
 //                              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateList.
 //                                               display_name currentStateList
 //                                               signature_documentation java private ArrayList<ModelState> currentStateList
+//                                               kind Field
 //                                                     ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`(+1).
   private Map<Long, ModelState> currentStateMap = new HashMap<>();
 //        ^^^ reference semanticdb maven jdk 11 java/util/Map#
@@ -71,22 +75,26 @@ class DiffHelper {
 //                              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateMap.
 //                                              display_name currentStateMap
 //                                              signature_documentation java private Map<Long, ModelState> currentStateMap
+//                                              kind Field
 //                                                    ^^^^^^^ reference semanticdb maven jdk 11 java/util/HashMap#`<init>`(+2).
   private final BaseEpoxyAdapter adapter;
 //              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
 //                               ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
 //                                       display_name adapter
 //                                       signature_documentation java private final BaseEpoxyAdapter adapter
+//                                       kind Field
   private final boolean immutableModels;
 //                      ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#immutableModels.
 //                                      display_name immutableModels
 //                                      signature_documentation java private final boolean immutableModels
+//                                      kind Field
 
 
   DiffHelper(BaseEpoxyAdapter adapter, boolean immutableModels) {
 //^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#`<init>`().
 //           display_name <init>
 //           signature_documentation java DiffHelper(BaseEpoxyAdapter adapter, boolean immutableModels)
+//           kind Constructor
 //           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#
 //                            ^^^^^^^ definition local 0
 //                                    display_name adapter
@@ -114,6 +122,7 @@ class DiffHelper {
 //                                               ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#observer.
 //                                                        display_name observer
 //                                                        signature_documentation java private final unresolved_type observer
+//                                                        kind Field
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView/
 //                                                                           ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView/AdapterDataObserver#
     @Override
@@ -216,6 +225,7 @@ class DiffHelper {
 //     ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#notifyModelChanges().
 //                        display_name notifyModelChanges
 //                        signature_documentation java void notifyModelChanges()
+//                        kind Method
 //                        documentation  Set the current list of models. The diff callbacks will be notified of the changes between the\n current list and the last list that was set.\n
     UpdateOpHelper updateOpHelper = new UpdateOpHelper();
 //  ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
@@ -248,6 +258,7 @@ class DiffHelper {
 //             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#notifyChanges().
 //                           display_name notifyChanges
 //                           signature_documentation java private void notifyChanges(UpdateOpHelper opHelper)
+//                           kind Method
 //                           ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
 //                                          ^^^^^^^^ definition local 3
 //                                                   display_name opHelper
@@ -343,6 +354,7 @@ class DiffHelper {
 //                       ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#buildDiff().
 //                                 display_name buildDiff
 //                                 signature_documentation java private UpdateOpHelper buildDiff(UpdateOpHelper updateOpHelper)
+//                                 kind Method
 //                                 documentation  Create a list of operations that define the difference between {@link #oldStateList} and {@link\n #currentStateList}.\n
 //                                 ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
 //                                                ^^^^^^^^^^^^^^ definition local 5
@@ -399,6 +411,7 @@ class DiffHelper {
 //             ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#resetOldState().
 //                           display_name resetOldState
 //                           signature_documentation java private void resetOldState()
+//                           kind Method
     oldStateList.clear();
 //  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
 //               ^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#clear().
@@ -411,6 +424,7 @@ class DiffHelper {
 //             ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#prepareStateForDiff().
 //                                 display_name prepareStateForDiff
 //                                 signature_documentation java private void prepareStateForDiff()
+//                                 kind Method
     // We use a list of the models as well as a map by their id,
     // so we can easily find them by both position and id
 
@@ -501,6 +515,7 @@ class DiffHelper {
 //                   ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#createStateForPosition().
 //                                          display_name createStateForPosition
 //                                          signature_documentation java private ModelState createStateForPosition(int position)
+//                                          kind Method
 //                                              ^^^^^^^^ definition local 12
 //                                                       display_name position
 //                                                       signature_documentation java int position
@@ -583,6 +598,7 @@ class DiffHelper {
 //             ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectRemovals().
 //                             display_name collectRemovals
 //                             signature_documentation java private void collectRemovals(UpdateOpHelper helper)
+//                             kind Method
 //                             documentation  Find all removal operations and add them to the result list. The general strategy here is to\n walk through the {@link #oldStateList} and check for items that don't exist in the new list.\n Walking through it in order makes it easy to batch adjacent removals.\n
 //                             ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
 //                                            ^^^^^^ definition local 18
@@ -642,6 +658,7 @@ class DiffHelper {
 //             ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectInsertions().
 //                               display_name collectInsertions
 //                               signature_documentation java private void collectInsertions(UpdateOpHelper helper)
+//                               kind Method
 //                               documentation  Find all insertion operations and add them to the result list. The general strategy here is to\n walk through the {@link #currentStateList} and check for items that don't exist in the old\n list. Walking through it in order makes it easy to batch adjacent insertions.\n
 //                               ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
 //                                              ^^^^^^ definition local 20
@@ -703,6 +720,7 @@ class DiffHelper {
 //             ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectChanges().
 //                            display_name collectChanges
 //                            signature_documentation java private void collectChanges(UpdateOpHelper helper)
+//                            kind Method
 //                            documentation  Check if any items have had their values changed, batching if possible.\n
 //                            ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
 //                                           ^^^^^^ definition local 24
@@ -790,6 +808,7 @@ class DiffHelper {
 //             ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectMoves().
 //                          display_name collectMoves
 //                          signature_documentation java private void collectMoves(UpdateOpHelper helper)
+//                          kind Method
 //                          documentation  Check which items have had a position changed. Recyclerview does not support batching these.\n
 //                          ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#
 //                                         ^^^^^^ definition local 28
@@ -1000,6 +1019,7 @@ class DiffHelper {
 //             ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#updateItemPosition().
 //                                display_name updateItemPosition
 //                                signature_documentation java private void updateItemPosition(ModelState item, List<UpdateOp> moveOps)
+//                                kind Method
 //                                documentation  Apply the movement operations to the given item to update its position. Only applies the\n operations that have not been applied yet, and stores how many operations have been applied so\n we know which ones to apply next time.\n
 //                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
 //                                           ^^^^ definition local 34
@@ -1093,6 +1113,7 @@ class DiffHelper {
 //                   ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffHelper#getNextItemWithPair().
 //                                       display_name getNextItemWithPair
 //                                       signature_documentation java @Nullable\nprivate ModelState getNextItemWithPair(Iterator<ModelState> iterator)
+//                                       kind Method
 //                                       documentation  Gets the next item in the list that has a pair, meaning it wasn't inserted or removed.\n
 //                                       ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
 //                                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#

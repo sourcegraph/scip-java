@@ -25,14 +25,17 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#
 //                     display_name BaseByteRenderer
 //                     signature_documentation scala class BaseByteRenderer[T <: Output]
+//                     kind Class
 //                     relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer.
 //    ________________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer.
 //                     display_name BaseByteRenderer
 //                     signature_documentation scala object BaseByteRenderer
+//                     kind Object
 //                     relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#
 //                     ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#[T]
 //                       display_name T
 //                       signature_documentation scala T <: Output
+//                       kind TypeParameter
 //                          ^^^^^^^ reference semanticdb maven . . upickle/
 //                                  ^^^^ reference semanticdb maven . . upickle/core/
 //                                       ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ByteOps.
@@ -41,30 +44,36 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //                     ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#out.
 //                         display_name out
 //                         signature_documentation scala private[this] val out: T
+//                         kind Method
 //                         relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#`<init>`().(out)
 //                     ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#`<init>`().(out)
 //                         display_name out
 //                         signature_documentation scala out: T 
+//                         kind Parameter
 //                         relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#out.
 //                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#[T]
                        indent: Int = -1,
 //                     ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#indent.
 //                            display_name indent
 //                            signature_documentation scala private[this] val indent: Int
+//                            kind Method
 //                            relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#`<init>`().(indent)
 //                     ______ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#`<init>`().(indent)
 //                            display_name indent
 //                            signature_documentation scala default indent: Int 
+//                            kind Parameter
 //                            relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#indent.
 //                             ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
                        escapeUnicode: Boolean = false) extends JsVisitor[T, T]{
 //                     ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#escapeUnicode.
 //                                   display_name escapeUnicode
 //                                   signature_documentation scala private[this] val escapeUnicode: Boolean
+//                                   kind Method
 //                                   relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#`<init>`().(escapeUnicode)
 //                     _____________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#`<init>`().(escapeUnicode)
 //                                   display_name escapeUnicode
 //                                   signature_documentation scala default escapeUnicode: Boolean 
+//                                   kind Parameter
 //                                   relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#escapeUnicode.
 //                                    ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
 //                                                             ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#
@@ -75,6 +84,7 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //                  ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#elemBuilder.
 //                              display_name elemBuilder
 //                              signature_documentation scala private[this] val elemBuilder: ByteBuilder
+//                              kind Method
 //                                    ^^^^^^^ reference semanticdb maven . . upickle/
 //                                            ^^^^ reference semanticdb maven . . upickle/core/
 //                                                 ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ByteBuilder#
@@ -83,6 +93,7 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //                  ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#unicodeCharBuilder.
 //                                     display_name unicodeCharBuilder
 //                                     signature_documentation scala private[this] val unicodeCharBuilder: CharBuilder
+//                                     kind Method
 //                                           ^^^^^^^ reference semanticdb maven . . upickle/
 //                                                   ^^^^ reference semanticdb maven . . upickle/core/
 //                                                        ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/CharBuilder#
@@ -91,6 +102,7 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#flushByteBuilder().
 //                     display_name flushByteBuilder
 //                     signature_documentation scala def flushByteBuilder(): Unit
+//                     kind Method
     elemBuilder.writeOutToIfLongerThan(out, if (depth == 0) 0 else 1000)
 //  ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#elemBuilder.
 //              ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ByteBuilder#writeOutToIfLongerThan().
@@ -103,9 +115,11 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //                  ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#depth().
 //                        display_name depth
 //                        signature_documentation scala private[this] var depth: Int
+//                        kind Method
 //                  _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#`depth_=`().
 //                        display_name depth_=
 //                        signature_documentation scala private[this] var depth_=(x$1: Int): Unit
+//                        kind Method
 //                        relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#depth().
 //                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 
@@ -114,15 +128,18 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //                  ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#commaBuffered().
 //                                display_name commaBuffered
 //                                signature_documentation scala private[this] var commaBuffered: Boolean
+//                                kind Method
 //                  _____________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#`commaBuffered_=`().
 //                                display_name commaBuffered_=
 //                                signature_documentation scala private[this] var commaBuffered_=(x$1: Boolean): Unit
+//                                kind Method
 //                                relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#commaBuffered().
 
   def flushBuffer() = {
 //    ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#flushBuffer().
 //                display_name flushBuffer
 //                signature_documentation scala def flushBuffer(): Unit
+//                kind Method
     if (commaBuffered) {
 //      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#commaBuffered().
       commaBuffered = false
@@ -138,18 +155,22 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //    ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitArray().
 //               display_name visitArray
 //               signature_documentation scala def visitArray(length: Int, index: Int): { def subVisitor: BaseByteRenderer[T] }
+//               kind Method
 //               relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitArray().
 //               ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitArray().(length)
 //                      display_name length
 //                      signature_documentation scala length: Int 
+//                      kind Parameter
 //                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                            ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitArray().(index)
 //                                  display_name index
 //                                  signature_documentation scala index: Int 
+//                                  kind Parameter
 //                                   ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                              ^ definition local 1
 //                                                display_name $anon
 //                                                signature_documentation scala final class $anon
+//                                                kind Class
 //                                              ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ArrVisitor#
 //                                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#[T]
 //                                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#[T]
@@ -169,20 +190,24 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //      ^^^^^^^^^^ definition local 0
 //                 display_name subVisitor
 //                 signature_documentation scala def subVisitor: BaseByteRenderer[T]
+//                 kind Method
 //                 relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#subVisitor().
 //                   ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#
     def visitValue(v: T, index: Int): Unit = {
 //      ^^^^^^^^^^ definition local 2
 //                 display_name visitValue
 //                 signature_documentation scala def visitValue(v: T, index: Int): Unit
+//                 kind Method
 //                 relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#visitValue().
 //                 ^ definition local 4
 //                   display_name v
 //                   signature_documentation scala v: T 
+//                   kind Parameter
 //                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#[T]
 //                       ^^^^^ definition local 5
 //                             display_name index
 //                             signature_documentation scala index: Int 
+//                             kind Parameter
 //                              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
       flushBuffer()
@@ -194,10 +219,12 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //      ^^^^^^^^ definition local 3
 //               display_name visitEnd
 //               signature_documentation scala def visitEnd(index: Int): T
+//               kind Method
 //               relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#visitEnd().
 //               ^^^^^ definition local 6
 //                     display_name index
 //                     signature_documentation scala index: Int 
+//                     kind Parameter
 //                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
       commaBuffered = false
 //    ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#commaBuffered().
@@ -220,18 +247,22 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //    ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitObject().
 //                display_name visitObject
 //                signature_documentation scala def visitObject(length: Int, index: Int): { def subVisitor: BaseByteRenderer[T]; def visitKey(index: Int): BaseByteRenderer[T] }
+//                kind Method
 //                relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitObject().
 //                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitObject().(length)
 //                       display_name length
 //                       signature_documentation scala length: Int 
+//                       kind Parameter
 //                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                             ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitObject().(index)
 //                                   display_name index
 //                                   signature_documentation scala index: Int 
+//                                   kind Parameter
 //                                    ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                               ^ definition local 10
 //                                                 display_name $anon
 //                                                 signature_documentation scala final class $anon
+//                                                 kind Class
 //                                               ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjVisitor#
 //                                                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#[T]
 //                                                             ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#[T]
@@ -250,26 +281,31 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //      ^^^^^^^^^^ definition local 7
 //                 display_name subVisitor
 //                 signature_documentation scala def subVisitor: BaseByteRenderer[T]
+//                 kind Method
 //                 relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#subVisitor().
 //                   ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#
     def visitKey(index: Int) = BaseByteRenderer.this
 //      ^^^^^^^^ definition local 8
 //               display_name visitKey
 //               signature_documentation scala def visitKey(index: Int): BaseByteRenderer[T]
+//               kind Method
 //               relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjVisitor#visitKey().
 //               ^^^^^ definition local 9
 //                     display_name index
 //                     signature_documentation scala index: Int 
+//                     kind Parameter
 //                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                             ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#
     def visitKeyValue(s: Any): Unit = {
 //      ^^^^^^^^^^^^^ definition local 11
 //                    display_name visitKeyValue
 //                    signature_documentation scala def visitKeyValue(s: Any): Unit
+//                    kind Method
 //                    relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjVisitor#visitKeyValue().
 //                    ^ definition local 14
 //                      display_name s
 //                      signature_documentation scala s: Any 
+//                      kind Parameter
 //                       ^^^ reference semanticdb maven . . scala/Any#
 //                             ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
       elemBuilder.append(':')
@@ -285,14 +321,17 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //      ^^^^^^^^^^ definition local 12
 //                 display_name visitValue
 //                 signature_documentation scala def visitValue(v: T, index: Int): Unit
+//                 kind Method
 //                 relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#visitValue().
 //                 ^ definition local 15
 //                   display_name v
 //                   signature_documentation scala v: T 
+//                   kind Parameter
 //                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#[T]
 //                       ^^^^^ definition local 16
 //                             display_name index
 //                             signature_documentation scala index: Int 
+//                             kind Parameter
 //                              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
       commaBuffered = true
@@ -302,10 +341,12 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //      ^^^^^^^^ definition local 13
 //               display_name visitEnd
 //               signature_documentation scala def visitEnd(index: Int): T
+//               kind Method
 //               relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#visitEnd().
 //               ^^^^^ definition local 17
 //                     display_name index
 //                     signature_documentation scala index: Int 
+//                     kind Parameter
 //                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
       commaBuffered = false
 //    ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#commaBuffered().
@@ -328,10 +369,12 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitNull().
 //              display_name visitNull
 //              signature_documentation scala def visitNull(index: Int): T
+//              kind Method
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitNull().
 //              ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitNull().(index)
 //                    display_name index
 //                    signature_documentation scala index: Int 
+//                    kind Parameter
 //                     ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     flushBuffer()
 //  ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#flushBuffer().
@@ -360,10 +403,12 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //    ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitFalse().
 //               display_name visitFalse
 //               signature_documentation scala def visitFalse(index: Int): T
+//               kind Method
 //               relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitFalse().
 //               ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitFalse().(index)
 //                     display_name index
 //                     signature_documentation scala index: Int 
+//                     kind Parameter
 //                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     flushBuffer()
 //  ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#flushBuffer().
@@ -395,10 +440,12 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitTrue().
 //              display_name visitTrue
 //              signature_documentation scala def visitTrue(index: Int): T
+//              kind Method
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitTrue().
 //              ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitTrue().(index)
 //                    display_name index
 //                    signature_documentation scala index: Int 
+//                    kind Parameter
 //                     ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     flushBuffer()
 //  ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#flushBuffer().
@@ -427,22 +474,27 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //    ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitFloat64StringParts().
 //                            display_name visitFloat64StringParts
 //                            signature_documentation scala def visitFloat64StringParts(s: CharSequence, decIndex: Int, expIndex: Int, index: Int): T
+//                            kind Method
 //                            relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitFloat64StringParts().
 //                            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitFloat64StringParts().(s)
 //                              display_name s
 //                              signature_documentation scala s: CharSequence 
+//                              kind Parameter
 //                               ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                             ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitFloat64StringParts().(decIndex)
 //                                                      display_name decIndex
 //                                                      signature_documentation scala decIndex: Int 
+//                                                      kind Parameter
 //                                                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                                            ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitFloat64StringParts().(expIndex)
 //                                                                     display_name expIndex
 //                                                                     signature_documentation scala expIndex: Int 
+//                                                                     kind Parameter
 //                                                                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 //                                                                           ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitFloat64StringParts().(index)
 //                                                                                 display_name index
 //                                                                                 signature_documentation scala index: Int 
+//                                                                                 kind Parameter
 //                                                                                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     flushBuffer()
 //  ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#flushBuffer().
@@ -455,10 +507,12 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //      ^ definition local 18
 //        display_name i
 //        signature_documentation scala i: Int 
+//        kind Variable
     val sLength = s.length
 //      ^^^^^^^ definition local 19
 //              display_name sLength
 //              signature_documentation scala sLength: Int 
+//              kind Variable
 //                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitFloat64StringParts().(s)
 //                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#length().
     while(i < sLength){
@@ -485,15 +539,18 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //             ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitFloat64().
 //                          display_name visitFloat64
 //                          signature_documentation scala def visitFloat64(d: Double, index: Int): T
+//                          kind Method
 //                          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/JsVisitor#visitFloat64().
 //                          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitFloat64().
 //                          ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitFloat64().(d)
 //                            display_name d
 //                            signature_documentation scala d: Double 
+//                            kind Parameter
 //                             ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Double#
 //                                     ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitFloat64().(index)
 //                                           display_name index
 //                                           signature_documentation scala index: Int 
+//                                           kind Parameter
 //                                            ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     d match{
 //  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitFloat64().(d)
@@ -509,6 +566,7 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //         ^ definition local 21
 //           display_name d
 //           signature_documentation scala d: Double 
+//           kind Variable
 //              ^^^^ reference semanticdb maven . . java/
 //                   ^^^^ reference semanticdb maven . . java/lang/
 //                        ^^^^^^ reference semanticdb maven jdk 11 java/lang/Double#
@@ -519,10 +577,12 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //         ^ definition local 22
 //           display_name d
 //           signature_documentation scala d: Double 
+//           kind Variable
         val i = d.toInt
 //          ^ definition local 23
 //            display_name i
 //            signature_documentation scala i: Int 
+//            kind Variable
 //              ^ reference local 22
 //                ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Double#toInt().
         if (d == i) visitFloat64StringParts(i.toString, -1, -1, index)
@@ -551,14 +611,17 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //    ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitString().
 //                display_name visitString
 //                signature_documentation scala def visitString(s: CharSequence, index: Int): T
+//                kind Method
 //                relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitString().
 //                ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitString().(s)
 //                  display_name s
 //                  signature_documentation scala s: CharSequence 
+//                  kind Parameter
 //                   ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                 ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitString().(index)
 //                                       display_name index
 //                                       signature_documentation scala index: Int 
+//                                       kind Parameter
 //                                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
 
     if (s eq null) visitNull(index)
@@ -576,13 +639,16 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitNonNullString().
 //                       display_name visitNonNullString
 //                       signature_documentation scala def visitNonNullString(s: CharSequence, index: Int): T
+//                       kind Method
 //                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitNonNullString().(s)
 //                         display_name s
 //                         signature_documentation scala s: CharSequence 
+//                         kind Parameter
 //                          ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                        ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#visitNonNullString().(index)
 //                                              display_name index
 //                                              signature_documentation scala index: Int 
+//                                              kind Parameter
 //                                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
     flushBuffer()
 //  ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#flushBuffer().
@@ -605,6 +671,7 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //          ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#renderIndent().
 //                       display_name renderIndent
 //                       signature_documentation scala final def renderIndent(): Unit
+//                       kind Method
     if (indent == -1) ()
 //      ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#indent.
 //             ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`==`(+3).
@@ -613,6 +680,7 @@ class BaseByteRenderer[T <: upickle.core.ByteOps.Output]
 //        ^ definition local 24
 //          display_name i
 //          signature_documentation scala i: Int 
+//          kind Variable
 //            ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#indent.
 //                   ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`*`(+3).
 //                     ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#depth().
