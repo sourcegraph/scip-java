@@ -14,24 +14,29 @@ public abstract class ControllerHelper<T extends EpoxyController> {
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#
 //                                     display_name ControllerHelper
 //                                     signature_documentation java public abstract class ControllerHelper<T extends EpoxyController>
+//                                     kind Class
 //                                     documentation  A helper class for {@link EpoxyController} to handle {@link\n com.airbnb.epoxy.AutoModel} models. This is only implemented by the generated classes created the\n annotation processor.\n
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#`<init>`().
 //                                     display_name <init>
 //                                     signature_documentation java public ControllerHelper()
+//                                     kind Constructor
 //                                     ^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#[T]
 //                                       display_name T
 //                                       signature_documentation java T extends EpoxyController
+//                                       kind TypeParameter
 //                                               ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
   public abstract void resetAutoModels();
 //                     ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#resetAutoModels().
 //                                     display_name resetAutoModels
 //                                     signature_documentation java public abstract void resetAutoModels()
+//                                     kind AbstractMethod
 //                                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/NoOpControllerHelper#resetAutoModels().
 
   protected void validateModelHashCodesHaveNotChanged(T controller) {
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#validateModelHashCodesHaveNotChanged().
 //                                                    display_name validateModelHashCodesHaveNotChanged
 //                                                    signature_documentation java protected void validateModelHashCodesHaveNotChanged(T controller)
+//                                                    kind Method
 //                                                    ^ reference semanticdb maven . . com/airbnb/epoxy/ControllerHelper#[T]
 //                                                      ^^^^^^^^^^ definition local 0
 //                                                                 display_name controller
@@ -78,6 +83,7 @@ public abstract class ControllerHelper<T extends EpoxyController> {
 //               ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelper#setControllerToStageTo().
 //                                      display_name setControllerToStageTo
 //                                      signature_documentation java protected void setControllerToStageTo(EpoxyModel<?> model, T controller)
+//                                      kind Method
 //                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                    ^^^^^ definition local 4
 //                                                          display_name model

@@ -193,6 +193,13 @@ object ScipPrinters {
             .append(info.getEnclosingSymbol)
             .append("\n")
         }
+        if (info.getKind != Scip.SymbolInformation.Kind.UnspecifiedKind) {
+          out
+            .append(prefix)
+            .append("kind ")
+            .append(info.getKind)
+            .append("\n")
+        }
         0.until(info.getDocumentationCount)
           .foreach { n =>
             val documentation = info.getDocumentation(n)

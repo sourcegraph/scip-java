@@ -32,23 +32,27 @@ public class DiffPayload {
 //           ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#
 //                       display_name DiffPayload
 //                       signature_documentation java public class DiffPayload
+//                       kind Class
 //                       documentation  A helper class for tracking changed models found by the {@link com.airbnb.epoxy.DiffHelper} to\n be included as a payload in the\n {@link androidx.recyclerview.widget.RecyclerView.Adapter#notifyItemChanged(int, Object)}\n call.\n
   private final EpoxyModel<?> singleModel;
 //              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#singleModel.
 //                                        display_name singleModel
 //                                        signature_documentation java private final EpoxyModel<?> singleModel
+//                                        kind Field
   private final LongSparseArray<EpoxyModel<?>> modelsById;
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven maven/androidx.collection/collection 1.0.0 androidx/collection/LongSparseArray#
 //                              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                             ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#modelsById.
 //                                                        display_name modelsById
 //                                                        signature_documentation java private final LongSparseArray<EpoxyModel<?>> modelsById
+//                                                        kind Field
 
   DiffPayload(List<? extends EpoxyModel<?>> models) {
 //^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#`<init>`().
 //            display_name <init>
 //            signature_documentation java DiffPayload(List<? extends EpoxyModel<?>> models)
+//            kind Constructor
 //            ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                          ^^^^^^ definition local 0
@@ -107,6 +111,7 @@ public class DiffPayload {
 //       ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#`<init>`(+1).
 //                   display_name <init>
 //                   signature_documentation java public DiffPayload(EpoxyModel<?> changedItem)
+//                   kind Constructor
 //                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                 ^^^^^^^^^^^ definition local 3
 //                                             display_name changedItem
@@ -131,6 +136,7 @@ public class DiffPayload {
 //                            ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#getModelFromPayload().
 //                                                display_name getModelFromPayload
 //                                                signature_documentation java @Nullable\npublic static EpoxyModel<?> getModelFromPayload(List<Object> payloads, long modelId)
+//                                                kind StaticMethod
 //                                                documentation  Looks through the payloads list and returns the first model found with the given model id. This\n assumes that the payloads list will only contain objects of type {@link DiffPayload}, and will\n throw if an unexpected type is found.\n
 //                                                ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                     ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
@@ -204,6 +210,7 @@ public class DiffPayload {
 //        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DiffPayload#equalsForTesting().
 //                         display_name equalsForTesting
 //                         signature_documentation java @VisibleForTesting\nboolean equalsForTesting(DiffPayload that)
+//                         kind Method
 //                         ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffPayload#
 //                                     ^^^^ definition local 9
 //                                          display_name that

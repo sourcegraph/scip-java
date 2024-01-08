@@ -33,15 +33,18 @@ class ControllerHelperLookup {
 //    ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#
 //                           display_name ControllerHelperLookup
 //                           signature_documentation java class ControllerHelperLookup
+//                           kind Class
 //                           documentation  Looks up a generated {@link ControllerHelper} implementation for a given adapter.\n If the adapter has no {@link com.airbnb.epoxy.AutoModel} models then a No-Op implementation will\n be returned.\n
 //    ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#`<init>`().
 //                           display_name <init>
 //                           signature_documentation java ControllerHelperLookup()
+//                           kind Constructor
   private static final String GENERATED_HELPER_CLASS_SUFFIX = "_EpoxyHelper";
 //                     ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#GENERATED_HELPER_CLASS_SUFFIX.
 //                                                          display_name GENERATED_HELPER_CLASS_SUFFIX
 //                                                          signature_documentation java private static final String GENERATED_HELPER_CLASS_SUFFIX
+//                                                          kind StaticField
   private static final Map<Class<?>, Constructor<?>> BINDINGS = new LinkedHashMap<>();
 //                     ^^^ reference semanticdb maven jdk 11 java/util/Map#
 //                         ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
@@ -49,12 +52,14 @@ class ControllerHelperLookup {
 //                                                   ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#BINDINGS.
 //                                                            display_name BINDINGS
 //                                                            signature_documentation java private static final Map<Class<?>, Constructor<?>> BINDINGS
+//                                                            kind StaticField
 //                                                                  ^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/LinkedHashMap#`<init>`(+2).
   private static final NoOpControllerHelper NO_OP_CONTROLLER_HELPER = new NoOpControllerHelper();
 //                     ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NoOpControllerHelper#
 //                                          ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#NO_OP_CONTROLLER_HELPER.
 //                                                                  display_name NO_OP_CONTROLLER_HELPER
 //                                                                  signature_documentation java private static final NoOpControllerHelper NO_OP_CONTROLLER_HELPER
+//                                                                  kind StaticField
 //                                                                        ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NoOpControllerHelper#`<init>`().
 
   static ControllerHelper getHelperForController(EpoxyController controller) {
@@ -62,6 +67,7 @@ class ControllerHelperLookup {
 //                        ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#getHelperForController().
 //                                               display_name getHelperForController
 //                                               signature_documentation java static ControllerHelper getHelperForController(EpoxyController controller)
+//                                               kind StaticMethod
 //                                               ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
 //                                                               ^^^^^^^^^^ definition local 0
 //                                                                          display_name controller
@@ -149,6 +155,7 @@ class ControllerHelperLookup {
 //                              ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ControllerHelperLookup#findConstructorForClass().
 //                                                      display_name findConstructorForClass
 //                                                      signature_documentation java @Nullable\nprivate static Constructor<?> findConstructorForClass(Class<?> controllerClass)
+//                                                      kind StaticMethod
 //                                                      ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                                               ^^^^^^^^^^^^^^^ definition local 6
 //                                                                               display_name controllerClass

@@ -13,6 +13,7 @@ public interface OnModelBuildFinishedListener {
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelBuildFinishedListener#
 //                                            display_name OnModelBuildFinishedListener
 //                                            signature_documentation java public interface OnModelBuildFinishedListener
+//                                            kind Interface
 //                                            documentation  Used with {@link EpoxyController#addModelBuildListener(OnModelBuildFinishedListener)} to be\n alerted to new model changes.\n
   /**
    * Called after {@link EpoxyController#buildModels()} has run and changes have been notified to
@@ -22,6 +23,7 @@ public interface OnModelBuildFinishedListener {
 //     ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelBuildFinishedListener#onModelBuildFinished().
 //                          display_name onModelBuildFinished
 //                          signature_documentation java public abstract void onModelBuildFinished(DiffResult result)
+//                          kind AbstractMethod
 //                          documentation  Called after {@link EpoxyController#buildModels()} has run and changes have been notified to\n the adapter. This will be called even if no changes existed.\n
 //                           ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#

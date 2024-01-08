@@ -13,6 +13,7 @@ public class SimpleEpoxyController extends EpoxyController {
 //           ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#
 //                                 display_name SimpleEpoxyController
 //                                 signature_documentation java public class SimpleEpoxyController
+//                                 kind Class
 //                                 documentation  A small wrapper around {@link com.airbnb.epoxy.EpoxyController} that lets you set a list of\n models directly.\n
 //                                 relationship is_implementation semanticdb maven . . ModelCollector#
 //                                 relationship is_implementation semanticdb maven . . StickyHeaderCallbacks#
@@ -20,6 +21,7 @@ public class SimpleEpoxyController extends EpoxyController {
 //           ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#`<init>`().
 //                                 display_name <init>
 //                                 signature_documentation java public SimpleEpoxyController()
+//                                 kind Constructor
 //                                         ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#
   private List<? extends EpoxyModel<?>> currentModels;
 //        ^^^^ reference semanticdb maven jdk 11 java/util/List#
@@ -27,10 +29,12 @@ public class SimpleEpoxyController extends EpoxyController {
 //                                      ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#currentModels.
 //                                                    display_name currentModels
 //                                                    signature_documentation java private List<? extends EpoxyModel<?>> currentModels
+//                                                    kind Field
   private boolean insideSetModels;
 //                ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#insideSetModels.
 //                                display_name insideSetModels
 //                                signature_documentation java private boolean insideSetModels
+//                                kind Field
 
   /**
    * Set the models to add to this controller. Clears any previous models and adds this new list
@@ -40,6 +44,7 @@ public class SimpleEpoxyController extends EpoxyController {
 //            ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#setModels().
 //                      display_name setModels
 //                      signature_documentation java public void setModels(List<? extends EpoxyModel<?>> models)
+//                      kind Method
 //                      documentation  Set the models to add to this controller. Clears any previous models and adds this new list\n .\n
 //                      ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
@@ -64,6 +69,7 @@ public class SimpleEpoxyController extends EpoxyController {
 //                  ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#requestModelBuild().
 //                                    display_name requestModelBuild
 //                                    signature_documentation java @Override\npublic final void requestModelBuild()
+//                                    kind Method
 //                                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#requestModelBuild().
     if (!insideSetModels) {
 //       ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#insideSetModels.
@@ -82,6 +88,7 @@ public class SimpleEpoxyController extends EpoxyController {
 //                     ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyController#buildModels().
 //                                 display_name buildModels
 //                                 signature_documentation java @Override\nprotected final void buildModels()
+//                                 kind Method
 //                                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyController#buildModels().
     if (!isBuildingModels()) {
 //       ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#isBuildingModels().

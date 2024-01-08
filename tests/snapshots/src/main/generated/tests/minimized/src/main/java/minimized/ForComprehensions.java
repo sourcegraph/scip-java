@@ -13,13 +13,16 @@ public class ForComprehensions {
 //           ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/ForComprehensions#
 //                             display_name ForComprehensions
 //                             signature_documentation java public class ForComprehensions
+//                             kind Class
 //           ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/ForComprehensions#`<init>`().
 //                             display_name <init>
 //                             signature_documentation java public ForComprehensions()
+//                             kind Constructor
   public static int app(int n) {
 //                  ^^^ definition semanticdb maven . . minimized/ForComprehensions#app().
 //                      display_name app
 //                      signature_documentation java public static int app(int n)
+//                      kind StaticMethod
 //                          ^ definition local 0
 //                            display_name n
 //                            signature_documentation java int n

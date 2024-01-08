@@ -12,11 +12,13 @@ public final class IdUtils {
 //                 ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/IdUtils#
 //                         display_name IdUtils
 //                         signature_documentation java public final class IdUtils
+//                         kind Class
 //                         documentation  Utilities for generating 64-bit long IDs from types such as {@link CharSequence}.\n
   private IdUtils() {
 //        ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/IdUtils#`<init>`().
 //                display_name <init>
 //                signature_documentation java private IdUtils()
+//                kind Constructor
   }
 
   /**
@@ -31,6 +33,7 @@ public final class IdUtils {
 //                   ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/IdUtils#hashLong64Bit().
 //                                 display_name hashLong64Bit
 //                                 signature_documentation java public static long hashLong64Bit(long value)
+//                                 kind StaticMethod
 //                                 documentation  Hash a long into 64 bits instead of the normal 32. This uses a xor shift implementation to\n attempt psuedo randomness so object ids have an even spread for less chance of collisions.\n <p>\n From http://stackoverflow.com/a/11554034\n <p>\n http://www.javamex.com/tutorials/random_numbers/xorshift.shtml\n
 //                                      ^^^^^ definition local 0
 //                                            display_name value
@@ -62,6 +65,7 @@ public final class IdUtils {
 //                   ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/IdUtils#hashString64Bit().
 //                                   display_name hashString64Bit
 //                                   signature_documentation java public static long hashString64Bit(CharSequence str)
+//                                   kind StaticMethod
 //                                   documentation  Hash a string into 64 bits instead of the normal 32. This allows us to better use strings as a\n model id with less chance of collisions. This uses the FNV-1a algorithm for a good mix of speed\n and distribution.\n <p>\n Performance comparisons found at http://stackoverflow.com/a/1660613\n <p>\n Hash implementation from http://www.isthe.com/chongo/tech/comp/fnv/index.html#FNV-1a\n
 //                                    ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                             ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#

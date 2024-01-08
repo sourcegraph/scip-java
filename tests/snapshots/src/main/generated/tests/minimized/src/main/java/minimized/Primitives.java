@@ -9,14 +9,17 @@ public class Primitives {
 //           ^^^^^^^^^^ definition semanticdb maven . . minimized/Primitives#
 //                      display_name Primitives
 //                      signature_documentation java public class Primitives
+//                      kind Class
 //           ^^^^^^^^^^ definition semanticdb maven . . minimized/Primitives#`<init>`().
 //                      display_name <init>
 //                      signature_documentation java public Primitives()
+//                      kind Constructor
   public static String app() {
 //              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                     ^^^ definition semanticdb maven . . minimized/Primitives#app().
 //                         display_name app
 //                         signature_documentation java public static String app()
+//                         kind StaticMethod
     Random random = new Random();
 //  ^^^^^^ reference semanticdb maven jdk 11 java/util/Random#
 //         ^^^^^^ definition local 0
@@ -95,4 +98,5 @@ public class Primitives {
 //                   ^^^^ definition semanticdb maven . . minimized/Primitives#test().
 //                        display_name test
 //                        signature_documentation java public static void test()
+//                        kind StaticMethod
 }

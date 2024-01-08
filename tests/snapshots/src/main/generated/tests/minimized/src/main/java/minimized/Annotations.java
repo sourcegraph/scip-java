@@ -54,6 +54,7 @@ public @interface Annotations {
 //                ^^^^^^^^^^^ definition semanticdb maven . . minimized/Annotations#
 //                            display_name Annotations
 //                            signature_documentation java @Documented\n@Retention(RetentionPolicy.RUNTIME)\n@Target({CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})\npublic @interface Annotations
+//                            kind Interface
 //                            relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
 
   String value() default "";
@@ -61,10 +62,12 @@ public @interface Annotations {
 //       ^^^^^ definition semanticdb maven . . minimized/Annotations#value().
 //             display_name value
 //             signature_documentation java public abstract String value()
+//             kind AbstractMethod
 
   String format() default "";
 //^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //       ^^^^^^ definition semanticdb maven . . minimized/Annotations#format().
 //              display_name format
 //              signature_documentation java public abstract String format()
+//              kind AbstractMethod
 }

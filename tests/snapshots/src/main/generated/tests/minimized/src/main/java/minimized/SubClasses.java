@@ -4,11 +4,13 @@ public class SubClasses extends AbstractClasses implements Interfaces {
 //           ^^^^^^^^^^ definition semanticdb maven . . minimized/SubClasses#
 //                      display_name SubClasses
 //                      signature_documentation java public class SubClasses
+//                      kind Class
 //                      relationship is_implementation semanticdb maven . . minimized/AbstractClasses#
 //                      relationship is_implementation semanticdb maven . . minimized/Interfaces#
 //           ^^^^^^^^^^ definition semanticdb maven . . minimized/SubClasses#`<init>`().
 //                      display_name <init>
 //                      signature_documentation java public SubClasses()
+//                      kind Constructor
 //                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/AbstractClasses#
 //                                                         ^^^^^^^^^^ reference semanticdb maven . . minimized/Interfaces#
 
@@ -19,6 +21,7 @@ public class SubClasses extends AbstractClasses implements Interfaces {
 //              ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/SubClasses#abstractImplementation().
 //                                     display_name abstractImplementation
 //                                     signature_documentation java @Override\npublic String abstractImplementation()
+//                                     kind Method
 //                                     relationship is_reference is_implementation semanticdb maven . . minimized/AbstractClasses#abstractImplementation().
     return "abstract";
   }
@@ -30,6 +33,7 @@ public class SubClasses extends AbstractClasses implements Interfaces {
 //              ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/SubClasses#abstractInterfaceMethod().
 //                                      display_name abstractInterfaceMethod
 //                                      signature_documentation java @Override\npublic String abstractInterfaceMethod()
+//                                      kind Method
 //                                      relationship is_reference is_implementation semanticdb maven . . minimized/Interfaces#abstractInterfaceMethod().
     return "abstractInterface";
   }
@@ -39,6 +43,7 @@ public class SubClasses extends AbstractClasses implements Interfaces {
 //                     ^^^ definition semanticdb maven . . minimized/SubClasses#app().
 //                         display_name app
 //                         signature_documentation java public static String app()
+//                         kind StaticMethod
     SubClasses s = new SubClasses();
 //  ^^^^^^^^^^ reference semanticdb maven . . minimized/SubClasses#
 //             ^ definition local 0

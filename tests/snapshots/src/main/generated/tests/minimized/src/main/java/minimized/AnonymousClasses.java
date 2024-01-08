@@ -12,13 +12,16 @@ public class AnonymousClasses {
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnonymousClasses#
 //                            display_name AnonymousClasses
 //                            signature_documentation java @SuppressWarnings("ALL")\npublic class AnonymousClasses
+//                            kind Class
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnonymousClasses#`<init>`().
 //                            display_name <init>
 //                            signature_documentation java public AnonymousClasses()
+//                            kind Constructor
   public static int app(int n) {
 //                  ^^^ definition semanticdb maven . . minimized/AnonymousClasses#app().
 //                      display_name app
 //                      signature_documentation java public static int app(int n)
+//                      kind StaticMethod
 //                          ^ definition local 0
 //                            display_name n
 //                            signature_documentation java int n
@@ -43,6 +46,7 @@ public class AnonymousClasses {
 //                             display_name apply
 //                             signature_documentation java @Override\npublic Integer apply(Integer integer)
 //                             enclosing_symbol local 2
+//                             kind Method
 //                             relationship is_reference is_implementation semanticdb maven jdk 11 java/util/function/Function#apply().
 //                             ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
 //                                     ^^^^^^^ definition local 4

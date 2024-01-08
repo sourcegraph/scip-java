@@ -4,6 +4,7 @@ public class IllegalEpoxyUsage extends RuntimeException {
 //           ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/IllegalEpoxyUsage#
 //                             display_name IllegalEpoxyUsage
 //                             signature_documentation java public class IllegalEpoxyUsage
+//                             kind Class
 //                             relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
 //                             relationship is_implementation semanticdb maven jdk 11 java/lang/Exception#
 //                             relationship is_implementation semanticdb maven jdk 11 java/lang/RuntimeException#
@@ -13,6 +14,7 @@ public class IllegalEpoxyUsage extends RuntimeException {
 //       ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/IllegalEpoxyUsage#`<init>`().
 //                         display_name <init>
 //                         signature_documentation java public IllegalEpoxyUsage(String message)
+//                         kind Constructor
 //                         ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                ^^^^^^^ definition local 0
 //                                        display_name message

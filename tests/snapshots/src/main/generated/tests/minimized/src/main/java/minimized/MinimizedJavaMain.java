@@ -8,13 +8,16 @@ public class MinimizedJavaMain {
 //           ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#
 //                             display_name MinimizedJavaMain
 //                             signature_documentation java @Annotations(value = "value", format = "format")\npublic class MinimizedJavaMain
+//                             kind Class
 //           ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#`<init>`().
 //                             display_name <init>
 //                             signature_documentation java public MinimizedJavaMain()
+//                             kind Constructor
   public static void main(String[] args) {
 //                   ^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#main().
 //                        display_name main
 //                        signature_documentation java public static void main(String[] args)
+//                        kind StaticMethod
 //                        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                 ^^^^ definition local 0
 //                                      display_name args

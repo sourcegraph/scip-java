@@ -4,13 +4,16 @@ public class Methods {
 //           ^^^^^^^ definition semanticdb maven . . minimized/Methods#
 //                   display_name Methods
 //                   signature_documentation java public class Methods
+//                   kind Class
 //           ^^^^^^^ definition semanticdb maven . . minimized/Methods#`<init>`().
 //                   display_name <init>
 //                   signature_documentation java public Methods()
+//                   kind Constructor
   private int overload(int value) {
 //            ^^^^^^^^ definition semanticdb maven . . minimized/Methods#overload().
 //                     display_name overload
 //                     signature_documentation java private int overload(int value)
+//                     kind Method
 //                         ^^^^^ definition local 0
 //                               display_name value
 //                               signature_documentation java int value
@@ -24,6 +27,7 @@ public class Methods {
 //               ^^^^^^^^ definition semanticdb maven . . minimized/Methods#overload(+1).
 //                        display_name overload
 //                        signature_documentation java private String overload(String value)
+//                        kind Method
 //                        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                               ^^^^^ definition local 1
 //                                     display_name value
@@ -37,6 +41,7 @@ public class Methods {
 //                   ^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Methods#staticOverload().
 //                                  display_name staticOverload
 //                                  signature_documentation java private static int staticOverload(int value)
+//                                  kind StaticMethod
 //                                      ^^^^^ definition local 2
 //                                            display_name value
 //                                            signature_documentation java int value
@@ -50,6 +55,7 @@ public class Methods {
 //                      ^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Methods#staticOverload(+1).
 //                                     display_name staticOverload
 //                                     signature_documentation java private static String staticOverload(String value)
+//                                     kind StaticMethod
 //                                     ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                            ^^^^^ definition local 3
 //                                                  display_name value
@@ -64,6 +70,7 @@ public class Methods {
 //                     ^^^ definition semanticdb maven . . minimized/Methods#app().
 //                         display_name app
 //                         signature_documentation java public static String app(int n, String m) throws RuntimeException, IndexOutOfBoundsException
+//                         kind StaticMethod
 //                             ^ definition local 4
 //                               display_name n
 //                               signature_documentation java int n

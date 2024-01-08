@@ -30,6 +30,7 @@ class HandlerExecutor implements Executor {
 //    ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#
 //                    display_name HandlerExecutor
 //                    signature_documentation java class HandlerExecutor
+//                    kind Class
 //                    documentation  An executor that does it's work via posting to a Handler.\n <p>\n A key feature of this is the runnable is executed synchronously if the current thread is the\n same as the handler's thread.\n
 //                    relationship is_implementation semanticdb maven jdk 11 java/util/concurrent/Executor#
 //                               ^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/Executor#
@@ -38,11 +39,13 @@ class HandlerExecutor implements Executor {
 //              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#handler.
 //                      display_name handler
 //                      signature_documentation java final unresolved_type handler
+//                      kind Field
 
   HandlerExecutor(Handler handler) {
 //^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#`<init>`().
 //                display_name <init>
 //                signature_documentation java HandlerExecutor(unresolved_type handler)
+//                kind Constructor
 //                ^^^^^^^ reference semanticdb maven . . Handler#
 //                        ^^^^^^^ definition local 0
 //                                display_name handler
@@ -59,6 +62,7 @@ class HandlerExecutor implements Executor {
 //            ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#execute().
 //                    display_name execute
 //                    signature_documentation java @Override\npublic void execute(Runnable command)
+//                    kind Method
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/util/concurrent/Executor#execute().
 //                     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                             ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Runnable#

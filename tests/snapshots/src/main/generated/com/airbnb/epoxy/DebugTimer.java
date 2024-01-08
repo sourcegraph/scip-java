@@ -9,6 +9,7 @@ class DebugTimer implements Timer {
 //    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#
 //               display_name DebugTimer
 //               signature_documentation java class DebugTimer
+//               kind Class
 //               relationship is_implementation semanticdb maven . . com/airbnb/epoxy/Timer#
 //                          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Timer#
 
@@ -17,20 +18,24 @@ class DebugTimer implements Timer {
 //                     ^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#tag.
 //                         display_name tag
 //                         signature_documentation java private final String tag
+//                         kind Field
   private long startTime;
 //             ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#startTime.
 //                       display_name startTime
 //                       signature_documentation java private long startTime
+//                       kind Field
   private String sectionName;
 //        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //               ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#sectionName.
 //                           display_name sectionName
 //                           signature_documentation java private String sectionName
+//                           kind Field
 
   DebugTimer(String tag) {
 //^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#`<init>`().
 //           display_name <init>
 //           signature_documentation java DebugTimer(String tag)
+//           kind Constructor
 //           ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                  ^^^ definition local 0
 //                      display_name tag
@@ -47,6 +52,7 @@ class DebugTimer implements Timer {
 //             ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#reset().
 //                   display_name reset
 //                   signature_documentation java private void reset()
+//                   kind Method
     startTime = -1;
 //  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DebugTimer#startTime.
     sectionName = null;
@@ -59,6 +65,7 @@ class DebugTimer implements Timer {
 //            ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#start().
 //                  display_name start
 //                  signature_documentation java @Override\npublic void start(String sectionName)
+//                  kind Method
 //                  relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/Timer#start().
 //                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                         ^^^^^^^^^^^ definition local 1
@@ -86,6 +93,7 @@ class DebugTimer implements Timer {
 //            ^^^^ definition semanticdb maven . . com/airbnb/epoxy/DebugTimer#stop().
 //                 display_name stop
 //                 signature_documentation java @Override\npublic void stop()
+//                 kind Method
 //                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/Timer#stop().
     if (startTime == -1) {
 //      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DebugTimer#startTime.
