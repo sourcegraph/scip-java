@@ -3,23 +3,35 @@ package com.airbnb.epoxy;
 /** Helper to store relevant information about a model that we need to determine if it changed. */
 class ModelState {
 //    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#
-//               documentation ```java\nclass ModelState\n```
+//               display_name ModelState
+//               signature_documentation java class ModelState
+//               kind Class
 //               documentation Helper to store relevant information about a model that we need to determine if it changed. 
 //    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#`<init>`().
-//               documentation ```java\nModelState()\n```
+//               display_name <init>
+//               signature_documentation java ModelState()
+//               kind Constructor
   long id;
 //     ^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#id.
-//        documentation ```java\nlong id\n```
+//        display_name id
+//        signature_documentation java long id
+//        kind Field
   int hashCode;
 //    ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#hashCode.
-//             documentation ```java\nint hashCode\n```
+//             display_name hashCode
+//             signature_documentation java int hashCode
+//             kind Field
   int position;
 //    ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#position.
-//             documentation ```java\nint position\n```
+//             display_name position
+//             signature_documentation java int position
+//             kind Field
   EpoxyModel<?> model;
 //^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //              ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#model.
-//                    documentation ```java\nEpoxyModel<?> model\n```
+//                    display_name model
+//                    signature_documentation java EpoxyModel<?> model
+//                    kind Field
 
   /**
    * A link to the item with the same id in the other list when diffing two lists. This will be null
@@ -29,7 +41,9 @@ class ModelState {
   ModelState pair;
 //^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
 //           ^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
-//                documentation ```java\nModelState pair\n```
+//                display_name pair
+//                signature_documentation java ModelState pair
+//                kind Field
 //                documentation  A link to the item with the same id in the other list when diffing two lists. This will be null\n if the item doesn't exist, in the case of insertions or removals. This is an optimization to\n prevent having to look up the matching pair in a hash map every time.\n
 
   /**
@@ -42,24 +56,37 @@ class ModelState {
    */
   int lastMoveOp;
 //    ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#lastMoveOp.
-//               documentation ```java\nint lastMoveOp\n```
+//               display_name lastMoveOp
+//               signature_documentation java int lastMoveOp
+//               kind Field
 //               documentation  How many movement operations have been applied to this item in order to update its position. As\n we find more item movements we need to update the position of affected items in the list in\n order to correctly calculate the next movement. Instead of iterating through all items in the\n list every time a movement operation happens we keep track of how many of these operations have\n been applied to an item, and apply all new operations in order when we need to get this item's\n up to date position.\n
 
   static ModelState build(EpoxyModel<?> model, int position, boolean immutableModel) {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
 //                  ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#build().
-//                        documentation ```java\nstatic ModelState build(EpoxyModel<?> model, int position, boolean immutableModel)\n```
+//                        display_name build
+//                        signature_documentation java static ModelState build(EpoxyModel<?> model, int position, boolean immutableModel)
+//                        kind StaticMethod
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                      ^^^^^ definition local 0
-//                                            documentation ```java\nEpoxyModel<?> model\n```
+//                                            display_name model
+//                                            signature_documentation java EpoxyModel<?> model
+//                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelState#build().
 //                                                 ^^^^^^^^ definition local 1
-//                                                          documentation ```java\nint position\n```
+//                                                          display_name position
+//                                                          signature_documentation java int position
+//                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelState#build().
 //                                                                   ^^^^^^^^^^^^^^ definition local 2
-//                                                                                  documentation ```java\nboolean immutableModel\n```
+//                                                                                  display_name immutableModel
+//                                                                                  signature_documentation java boolean immutableModel
+//                                                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelState#build().
     ModelState state = new ModelState();
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
 //             ^^^^^ definition local 3
-//                   documentation ```java\nModelState state\n```
+//                   display_name state
+//                   signature_documentation java ModelState state
+//                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelState#build().
+//                   kind Variable
 //                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#`<init>`().
 
     state.lastMoveOp = 0;
@@ -102,7 +129,9 @@ class ModelState {
    */
   void pairWithSelf() {
 //     ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#pairWithSelf().
-//                  documentation ```java\nvoid pairWithSelf()\n```
+//                  display_name pairWithSelf
+//                  signature_documentation java void pairWithSelf()
+//                  kind Method
 //                  documentation  Used for an item inserted into the new list when we need to track moves that effect the\n inserted item in the old list.\n
     if (pair != null) {
 //      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
@@ -142,7 +171,9 @@ class ModelState {
   public String toString() {
 //       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/ModelState#toString().
-//                       documentation ```java\n@Override\npublic String toString()\n```
+//                       display_name toString
+//                       signature_documentation java @Override\npublic String toString()
+//                       kind Method
 //                       relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#toString().
     return "ModelState{"
         + "id=" + id

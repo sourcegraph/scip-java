@@ -2,14 +2,22 @@ package minimized;
 
 public class Methods {
 //           ^^^^^^^ definition semanticdb maven . . minimized/Methods#
-//                   documentation ```java\npublic class Methods\n```
+//                   display_name Methods
+//                   signature_documentation java public class Methods
+//                   kind Class
 //           ^^^^^^^ definition semanticdb maven . . minimized/Methods#`<init>`().
-//                   documentation ```java\npublic Methods()\n```
+//                   display_name <init>
+//                   signature_documentation java public Methods()
+//                   kind Constructor
   private int overload(int value) {
 //            ^^^^^^^^ definition semanticdb maven . . minimized/Methods#overload().
-//                     documentation ```java\nprivate int overload(int value)\n```
+//                     display_name overload
+//                     signature_documentation java private int overload(int value)
+//                     kind Method
 //                         ^^^^^ definition local 0
-//                               documentation ```java\nint value\n```
+//                               display_name value
+//                               signature_documentation java int value
+//                               enclosing_symbol semanticdb maven . . minimized/Methods#overload().
     return value + 1;
 //         ^^^^^ reference local 0
   }
@@ -17,19 +25,27 @@ public class Methods {
   private String overload(String value) {
 //        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //               ^^^^^^^^ definition semanticdb maven . . minimized/Methods#overload(+1).
-//                        documentation ```java\nprivate String overload(String value)\n```
+//                        display_name overload
+//                        signature_documentation java private String overload(String value)
+//                        kind Method
 //                        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                               ^^^^^ definition local 1
-//                                     documentation ```java\nString value\n```
+//                                     display_name value
+//                                     signature_documentation java String value
+//                                     enclosing_symbol semanticdb maven . . minimized/Methods#overload(+1).
     return value + "1";
 //         ^^^^^ reference local 1
   }
 
   private static int staticOverload(int value) {
 //                   ^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Methods#staticOverload().
-//                                  documentation ```java\nprivate static int staticOverload(int value)\n```
+//                                  display_name staticOverload
+//                                  signature_documentation java private static int staticOverload(int value)
+//                                  kind StaticMethod
 //                                      ^^^^^ definition local 2
-//                                            documentation ```java\nint value\n```
+//                                            display_name value
+//                                            signature_documentation java int value
+//                                            enclosing_symbol semanticdb maven . . minimized/Methods#staticOverload().
     return value + 1;
 //         ^^^^^ reference local 2
   }
@@ -37,10 +53,14 @@ public class Methods {
   private static String staticOverload(String value) {
 //               ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                      ^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Methods#staticOverload(+1).
-//                                     documentation ```java\nprivate static String staticOverload(String value)\n```
+//                                     display_name staticOverload
+//                                     signature_documentation java private static String staticOverload(String value)
+//                                     kind StaticMethod
 //                                     ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                            ^^^^^ definition local 3
-//                                                  documentation ```java\nString value\n```
+//                                                  display_name value
+//                                                  signature_documentation java String value
+//                                                  enclosing_symbol semanticdb maven . . minimized/Methods#staticOverload(+1).
     return value + "1";
 //         ^^^^^ reference local 3
   }
@@ -48,40 +68,61 @@ public class Methods {
   public static String app(int n, String m) throws RuntimeException, IndexOutOfBoundsException {
 //              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                     ^^^ definition semanticdb maven . . minimized/Methods#app().
-//                         documentation ```java\npublic static String app(int n, String m) throws RuntimeException, IndexOutOfBoundsException\n```
+//                         display_name app
+//                         signature_documentation java public static String app(int n, String m) throws RuntimeException, IndexOutOfBoundsException
+//                         kind StaticMethod
 //                             ^ definition local 4
-//                               documentation ```java\nint n\n```
+//                               display_name n
+//                               signature_documentation java int n
+//                               enclosing_symbol semanticdb maven . . minimized/Methods#app().
 //                                ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                       ^ definition local 5
-//                                         documentation ```java\nString m\n```
+//                                         display_name m
+//                                         signature_documentation java String m
+//                                         enclosing_symbol semanticdb maven . . minimized/Methods#app().
 //                                                 ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/RuntimeException#
 //                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IndexOutOfBoundsException#
     Methods methods = new Methods();
 //  ^^^^^^^ reference semanticdb maven . . minimized/Methods#
 //          ^^^^^^^ definition local 6
-//                  documentation ```java\nMethods methods\n```
+//                  display_name methods
+//                  signature_documentation java Methods methods
+//                  enclosing_symbol semanticdb maven . . minimized/Methods#app().
+//                  kind Variable
 //                        ^^^^^^^ reference semanticdb maven . . minimized/Methods#`<init>`().
     int a = staticOverload(n);
 //      ^ definition local 7
-//        documentation ```java\nint a\n```
+//        display_name a
+//        signature_documentation java int a
+//        enclosing_symbol semanticdb maven . . minimized/Methods#app().
+//        kind Variable
 //          ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/Methods#staticOverload().
 //                         ^ reference local 4
     String b = staticOverload(m);
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //         ^ definition local 8
-//           documentation ```java\nString b\n```
+//           display_name b
+//           signature_documentation java String b
+//           enclosing_symbol semanticdb maven . . minimized/Methods#app().
+//           kind Variable
 //             ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/Methods#staticOverload(+1).
 //                            ^ reference local 5
     int c = methods.overload(n);
 //      ^ definition local 9
-//        documentation ```java\nint c\n```
+//        display_name c
+//        signature_documentation java int c
+//        enclosing_symbol semanticdb maven . . minimized/Methods#app().
+//        kind Variable
 //          ^^^^^^^ reference local 6
 //                  ^^^^^^^^ reference semanticdb maven . . minimized/Methods#overload().
 //                           ^ reference local 4
     String d = methods.overload(m);
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //         ^ definition local 10
-//           documentation ```java\nString d\n```
+//           display_name d
+//           signature_documentation java String d
+//           enclosing_symbol semanticdb maven . . minimized/Methods#app().
+//           kind Variable
 //             ^^^^^^^ reference local 6
 //                     ^^^^^^^^ reference semanticdb maven . . minimized/Methods#overload(+1).
 //                              ^ reference local 5

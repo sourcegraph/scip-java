@@ -51,60 +51,84 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback;
  */
 class AsyncEpoxyDiffer {
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#
-//                     documentation ```java\nclass AsyncEpoxyDiffer\n```
+//                     display_name AsyncEpoxyDiffer
+//                     signature_documentation java class AsyncEpoxyDiffer
+//                     kind Class
 //                     documentation  An adaptation of Google's {@link androidx.recyclerview.widget.AsyncListDiffer}\n that adds support for payloads in changes.\n <p>\n Also adds support for canceling an in progress diff, and makes everything thread safe.\n
 
   interface ResultCallback {
 //          ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#
-//                         documentation ```java\ninterface ResultCallback\n```
+//                         display_name ResultCallback
+//                         signature_documentation java interface ResultCallback
+//                         kind Interface
     void onResult(@NonNull DiffResult result);
 //       ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#onResult().
-//                documentation ```java\npublic abstract void onResult(DiffResult result)\n```
+//                display_name onResult
+//                signature_documentation java public abstract void onResult(DiffResult result)
+//                kind AbstractMethod
 //                relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#onResult().
 //                 ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#
 //                                    ^^^^^^ definition local 0
-//                                           documentation ```java\n@NonNull\nDiffResult result\n```
+//                                           display_name result
+//                                           signature_documentation java @NonNull\nDiffResult result
+//                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#onResult().
   }
 
   private final Executor executor;
 //              ^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/Executor#
 //                       ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#executor.
-//                                documentation ```java\nprivate final Executor executor\n```
+//                                display_name executor
+//                                signature_documentation java private final Executor executor
+//                                kind Field
   private final ResultCallback resultCallback;
 //              ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#
 //                             ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#resultCallback.
-//                                            documentation ```java\nprivate final ResultCallback resultCallback\n```
+//                                            display_name resultCallback
+//                                            signature_documentation java private final ResultCallback resultCallback
+//                                            kind Field
   private final ItemCallback<EpoxyModel<?>> diffCallback;
 //              ^^^^^^^^^^^^ reference semanticdb maven . . ItemCallback#
 //                           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#diffCallback.
-//                                                       documentation ```java\nprivate final unresolved_type diffCallback\n```
+//                                                       display_name diffCallback
+//                                                       signature_documentation java private final unresolved_type diffCallback
+//                                                       kind Field
   private final GenerationTracker generationTracker = new GenerationTracker();
 //              ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#
 //                                ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#generationTracker.
-//                                                  documentation ```java\nprivate final GenerationTracker generationTracker\n```
+//                                                  display_name generationTracker
+//                                                  signature_documentation java private final GenerationTracker generationTracker
+//                                                  kind Field
 //                                                        ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#`<init>`().
 
   AsyncEpoxyDiffer(
 //^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#`<init>`().
-//                 documentation ```java\nAsyncEpoxyDiffer(unresolved_type handler, ResultCallback resultCallback, unresolved_type diffCallback)\n```
+//                 display_name <init>
+//                 signature_documentation java AsyncEpoxyDiffer(unresolved_type handler, ResultCallback resultCallback, unresolved_type diffCallback)
+//                 kind Constructor
       @NonNull Handler handler,
 //     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //             ^^^^^^^ reference semanticdb maven . . Handler#
 //                     ^^^^^^^ definition local 1
-//                             documentation ```java\n@NonNull\nunresolved_type handler\n```
+//                             display_name handler
+//                             signature_documentation java @NonNull\nunresolved_type handler
+//                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#`<init>`().
       @NonNull ResultCallback resultCallback,
 //     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //             ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#ResultCallback#
 //                            ^^^^^^^^^^^^^^ definition local 2
-//                                           documentation ```java\n@NonNull\nResultCallback resultCallback\n```
+//                                           display_name resultCallback
+//                                           signature_documentation java @NonNull\nResultCallback resultCallback
+//                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#`<init>`().
       @NonNull ItemCallback<EpoxyModel<?>> diffCallback
 //     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //             ^^^^^^^^^^^^ reference semanticdb maven . . ItemCallback#
 //                          ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                         ^^^^^^^^^^^^ definition local 3
-//                                                      documentation ```java\n@NonNull\nunresolved_type diffCallback\n```
+//                                                      display_name diffCallback
+//                                                      signature_documentation java @NonNull\nunresolved_type diffCallback
+//                                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#`<init>`().
   ) {
     this.executor = new HandlerExecutor(handler);
 //       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#executor.
@@ -124,7 +148,9 @@ class AsyncEpoxyDiffer {
 //                 ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                               ^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#list.
-//                                                    documentation ```java\n@Nullable\nprivate List<? extends EpoxyModel<?>> list\n```
+//                                                    display_name list
+//                                                    signature_documentation java @Nullable\nprivate List<? extends EpoxyModel<?>> list
+//                                                    kind Field
 
   /**
    * Non-null, unmodifiable version of list.
@@ -137,7 +163,9 @@ class AsyncEpoxyDiffer {
 //                 ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                               ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#readOnlyList.
-//                                                            documentation ```java\n@NonNull\nprivate List<? extends EpoxyModel<?>> readOnlyList\n```
+//                                                            display_name readOnlyList
+//                                                            signature_documentation java @NonNull\nprivate List<? extends EpoxyModel<?>> readOnlyList
+//                                                            kind Field
 //                                                            documentation  Non-null, unmodifiable version of list.\n <p>\n Collections.emptyList when list is null, wrapped by Collections.unmodifiableList otherwise\n
 //                                                              ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collections#
 //                                                                          ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collections#emptyList().
@@ -161,7 +189,9 @@ class AsyncEpoxyDiffer {
 //       ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                     ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#getCurrentList().
-//                                                    documentation ```java\n@AnyThread\n@NonNull\npublic List<? extends EpoxyModel<?>> getCurrentList()\n```
+//                                                    display_name getCurrentList
+//                                                    signature_documentation java @AnyThread\n@NonNull\npublic List<? extends EpoxyModel<?>> getCurrentList()
+//                                                    kind Method
 //                                                    documentation  Get the current List - any diffing to present this list has already been computed and\n dispatched via the ListUpdateCallback.\n <p>\n If a <code>null</code> List, or no List has been submitted, an empty list will be returned.\n <p>\n The returned list may not be mutated - mutations to content must be done through\n {@link #submitList(List)}.\n\n @return current List.\n
     return readOnlyList;
 //         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#readOnlyList.
@@ -177,7 +207,9 @@ class AsyncEpoxyDiffer {
 // ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/AnyThread#
   public boolean cancelDiff() {
 //               ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#cancelDiff().
-//                          documentation ```java\n@SuppressWarnings("WeakerAccess")\n@AnyThread\npublic boolean cancelDiff()\n```
+//                          display_name cancelDiff
+//                          signature_documentation java @SuppressWarnings("WeakerAccess")\n@AnyThread\npublic boolean cancelDiff()
+//                          kind Method
 //                          documentation  Prevents any ongoing diff from dispatching results. Returns true if there was an ongoing\n diff to cancel, false otherwise.\n
     return generationTracker.finishMaxGeneration();
 //         ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#generationTracker.
@@ -193,7 +225,9 @@ class AsyncEpoxyDiffer {
 // ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/AnyThread#
   public boolean isDiffInProgress() {
 //               ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#isDiffInProgress().
-//                                documentation ```java\n@SuppressWarnings("WeakerAccess")\n@AnyThread\npublic boolean isDiffInProgress()\n```
+//                                display_name isDiffInProgress
+//                                signature_documentation java @SuppressWarnings("WeakerAccess")\n@AnyThread\npublic boolean isDiffInProgress()
+//                                kind Method
 //                                documentation  @return True if a diff operation is in progress.\n
     return generationTracker.hasUnfinishedGeneration();
 //         ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#generationTracker.
@@ -210,21 +244,31 @@ class AsyncEpoxyDiffer {
 // ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/AnyThread#
   public synchronized boolean forceListOverride(@Nullable List<EpoxyModel<?>> newList) {
 //                            ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#forceListOverride().
-//                                              documentation ```java\n@AnyThread\npublic boolean forceListOverride(List<EpoxyModel<?>> newList)\n```
+//                                              display_name forceListOverride
+//                                              signature_documentation java @AnyThread\npublic boolean forceListOverride(List<EpoxyModel<?>> newList)
+//                                              kind Method
 //                                              documentation  Set the current list without performing any diffing. Cancels any diff in progress.\n <p>\n This can be used if you notified a change to the adapter manually and need this list to be\n synced.\n
 //                                               ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                                        ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                            ^^^^^^^ definition local 4
-//                                                                                    documentation ```java\n@Nullable\nList<EpoxyModel<?>> newList\n```
+//                                                                                    display_name newList
+//                                                                                    signature_documentation java @Nullable\nList<EpoxyModel<?>> newList
+//                                                                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#forceListOverride().
     // We need to make sure that generation changes and list updates are synchronized
     final boolean interruptedDiff = cancelDiff();
 //                ^^^^^^^^^^^^^^^ definition local 5
-//                                documentation ```java\nfinal boolean interruptedDiff\n```
+//                                display_name interruptedDiff
+//                                signature_documentation java final boolean interruptedDiff
+//                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#forceListOverride().
+//                                kind Variable
 //                                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#cancelDiff().
     int generation = generationTracker.incrementAndGetNextScheduled();
 //      ^^^^^^^^^^ definition local 6
-//                 documentation ```java\nint generation\n```
+//                 display_name generation
+//                 signature_documentation java int generation
+//                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#forceListOverride().
+//                 kind Variable
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#generationTracker.
 //                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#incrementAndGetNextScheduled().
     tryLatchList(newList, generation);
@@ -251,22 +295,32 @@ class AsyncEpoxyDiffer {
 // ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
   public void submitList(@Nullable final List<? extends EpoxyModel<?>> newList) {
 //            ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#submitList().
-//                       documentation ```java\n@AnyThread\n@SuppressWarnings("WeakerAccess")\npublic void submitList(List<? extends EpoxyModel<?>> newList)\n```
+//                       display_name submitList
+//                       signature_documentation java @AnyThread\n@SuppressWarnings("WeakerAccess")\npublic void submitList(List<? extends EpoxyModel<?>> newList)
+//                       kind Method
 //                       documentation  Set a new List representing your latest data.\n <p>\n A diff will be computed between this list and the last list set. If this has not previously\n been called then an empty list is used as the previous list.\n <p>\n The diff computation will be done on the thread given by the handler in the constructor.\n When the diff is done it will be applied (dispatched to the result callback),\n and the new List will be swapped in.\n
 //                        ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                       ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                     ^^^^^^^ definition local 7
-//                                                                             documentation ```java\n@Nullable\nfinal List<? extends EpoxyModel<?>> newList\n```
+//                                                                             display_name newList
+//                                                                             signature_documentation java @Nullable\nfinal List<? extends EpoxyModel<?>> newList
+//                                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#submitList().
     final int runGeneration;
 //            ^^^^^^^^^^^^^ definition local 8
-//                          documentation ```java\nfinal int runGeneration\n```
+//                          display_name runGeneration
+//                          signature_documentation java final int runGeneration
+//                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#submitList().
+//                          kind Variable
     @Nullable final List<? extends EpoxyModel<?>> previousList;
 //   ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                  ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                 ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                ^^^^^^^^^^^^ definition local 9
-//                                                             documentation ```java\n@Nullable\nfinal List<? extends EpoxyModel<?>> previousList\n```
+//                                                             display_name previousList
+//                                                             signature_documentation java @Nullable\nfinal List<? extends EpoxyModel<?>> previousList
+//                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#submitList().
+//                                                             kind Variable
 
     synchronized (this) {
       // Incrementing generation means any currently-running diffs are discarded when they finish
@@ -302,7 +356,10 @@ class AsyncEpoxyDiffer {
       DiffResult result = null;
 //    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#
 //               ^^^^^^ definition local 10
-//                      documentation ```java\nDiffResult result\n```
+//                      display_name result
+//                      signature_documentation java DiffResult result
+//                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#submitList().
+//                      kind Variable
       if (previousList != null && !previousList.isEmpty()) {
 //        ^^^^^^^^^^^^ reference local 9
 //                                 ^^^^^^^^^^^^ reference local 9
@@ -338,7 +395,10 @@ class AsyncEpoxyDiffer {
     final DiffCallback wrappedCallback = new DiffCallback(previousList, newList, diffCallback);
 //        ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#
 //                     ^^^^^^^^^^^^^^^ definition local 11
-//                                     documentation ```java\nfinal DiffCallback wrappedCallback\n```
+//                                     display_name wrappedCallback
+//                                     signature_documentation java final DiffCallback wrappedCallback
+//                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#submitList().
+//                                     kind Variable
 //                                           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#`<init>`().
 //                                                        ^^^^^^^^^^^^ reference local 9
 //                                                                      ^^^^^^^ reference local 7
@@ -352,13 +412,19 @@ class AsyncEpoxyDiffer {
 //     ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
       public void run() {
 //                ^^^ definition local 13
-//                    documentation ```java\n@Override\npublic void run()\n```
+//                    display_name run
+//                    signature_documentation java @Override\npublic void run()
+//                    enclosing_symbol local 12
+//                    kind Method
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Runnable#run().
         DiffUtil.DiffResult result = DiffUtil.calculateDiff(wrappedCallback);
 //      ^^^^^^^^ reference semanticdb maven . . DiffUtil/
 //               ^^^^^^^^^^ reference semanticdb maven . . DiffUtil/DiffResult#
 //                          ^^^^^^ definition local 14
-//                                 documentation ```java\nunresolved_type result\n```
+//                                 display_name result
+//                                 signature_documentation java unresolved_type result
+//                                 enclosing_symbol local 13
+//                                 kind Variable
 //                                   ^^^^^^^^ reference semanticdb maven . . DiffUtil#
 //                                            ^^^^^^^^^^^^^ reference semanticdb maven . . DiffUtil#calculateDiff#
 //                                                          ^^^^^^^^^^^^^^^ reference local 11
@@ -377,21 +443,29 @@ class AsyncEpoxyDiffer {
 
   private void onRunCompleted(
 //             ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#onRunCompleted().
-//                            documentation ```java\nprivate void onRunCompleted(int runGeneration, List<? extends EpoxyModel<?>> newList, DiffResult result)\n```
+//                            display_name onRunCompleted
+//                            signature_documentation java private void onRunCompleted(int runGeneration, List<? extends EpoxyModel<?>> newList, DiffResult result)
+//                            kind Method
       final int runGeneration,
 //              ^^^^^^^^^^^^^ definition local 15
-//                            documentation ```java\nfinal int runGeneration\n```
+//                            display_name runGeneration
+//                            signature_documentation java final int runGeneration
+//                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#onRunCompleted().
       @Nullable final List<? extends EpoxyModel<?>> newList,
 //     ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                    ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                  ^^^^^^^ definition local 16
-//                                                          documentation ```java\n@Nullable\nfinal List<? extends EpoxyModel<?>> newList\n```
+//                                                          display_name newList
+//                                                          signature_documentation java @Nullable\nfinal List<? extends EpoxyModel<?>> newList
+//                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#onRunCompleted().
       @Nullable final DiffResult result
 //     ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#
 //                               ^^^^^^ definition local 17
-//                                      documentation ```java\n@Nullable\nfinal DiffResult result\n```
+//                                      display_name result
+//                                      signature_documentation java @Nullable\nfinal DiffResult result
+//                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#onRunCompleted().
   ) {
 
     // We use an asynchronous handler so that the Runnable can be posted directly back to the main
@@ -405,11 +479,17 @@ class AsyncEpoxyDiffer {
 //     ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
       public void run() {
 //                ^^^ definition local 19
-//                    documentation ```java\n@Override\npublic void run()\n```
+//                    display_name run
+//                    signature_documentation java @Override\npublic void run()
+//                    enclosing_symbol local 18
+//                    kind Method
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Runnable#run().
         final boolean dispatchResult = tryLatchList(newList, runGeneration);
 //                    ^^^^^^^^^^^^^^ definition local 20
-//                                   documentation ```java\nfinal boolean dispatchResult\n```
+//                                   display_name dispatchResult
+//                                   signature_documentation java final boolean dispatchResult
+//                                   enclosing_symbol local 19
+//                                   kind Variable
 //                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#tryLatchList().
 //                                                  ^^^^^^^ reference local 16
 //                                                           ^^^^^^^^^^^^^ reference local 15
@@ -435,16 +515,22 @@ class AsyncEpoxyDiffer {
 // ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/AnyThread#
   private synchronized boolean tryLatchList(@Nullable List<? extends EpoxyModel<?>> newList,
 //                             ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#tryLatchList().
-//                                          documentation ```java\n@AnyThread\nprivate boolean tryLatchList(List<? extends EpoxyModel<?>> newList, int runGeneration)\n```
+//                                          display_name tryLatchList
+//                                          signature_documentation java @AnyThread\nprivate boolean tryLatchList(List<? extends EpoxyModel<?>> newList, int runGeneration)
+//                                          kind Method
 //                                          documentation  Marks the generation as done, and updates the list if the generation is the most recent.\n\n @return True if the given generation is the most recent, in which case the given list was\n set. False if the generation is old and the list was ignored.\n
 //                                           ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                                    ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                                  ^^^^^^^ definition local 21
-//                                                                                          documentation ```java\n@Nullable\nList<? extends EpoxyModel<?>> newList\n```
+//                                                                                          display_name newList
+//                                                                                          signature_documentation java @Nullable\nList<? extends EpoxyModel<?>> newList
+//                                                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#tryLatchList().
       int runGeneration) {
 //        ^^^^^^^^^^^^^ definition local 22
-//                      documentation ```java\nint runGeneration\n```
+//                      display_name runGeneration
+//                      signature_documentation java int runGeneration
+//                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#tryLatchList().
     if (generationTracker.finishGeneration(runGeneration)) {
 //      ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#generationTracker.
 //                        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#finishGeneration().
@@ -486,32 +572,47 @@ class AsyncEpoxyDiffer {
    */
   private static class GenerationTracker {
 //                     ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#
-//                                       documentation ```java\nprivate static class GenerationTracker\n```
+//                                       display_name GenerationTracker
+//                                       signature_documentation java private static class GenerationTracker
+//                                       kind Class
 //                                       documentation  The concept of a "generation" is used to associate a diff result with a point in time when\n it was created. This allows us to handle list updates concurrently, and ignore outdated diffs.\n <p>\n We track the highest start generation, and the highest finished generation, and these must\n be kept in sync, so all access to this class is synchronized.\n <p>\n The general synchronization strategy for this class is that when a generation number\n is queried that action must be synchronized with accessing the current list, so that the\n generation number is synced with the list state at the time it was created.\n
 //                     ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#`<init>`().
-//                                       documentation ```java\nprivate GenerationTracker()\n```
+//                                       display_name <init>
+//                                       signature_documentation java private GenerationTracker()
+//                                       kind Constructor
 
     // Max generation of currently scheduled runnable
     private volatile int maxScheduledGeneration;
 //                       ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#maxScheduledGeneration.
-//                                              documentation ```java\nprivate int maxScheduledGeneration\n```
+//                                              display_name maxScheduledGeneration
+//                                              signature_documentation java private int maxScheduledGeneration
+//                                              kind Field
     private volatile int maxFinishedGeneration;
 //                       ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#maxFinishedGeneration.
-//                                             documentation ```java\nprivate int maxFinishedGeneration\n```
+//                                             display_name maxFinishedGeneration
+//                                             signature_documentation java private int maxFinishedGeneration
+//                                             kind Field
 
     synchronized int incrementAndGetNextScheduled() {
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#incrementAndGetNextScheduled().
-//                                                documentation ```java\nint incrementAndGetNextScheduled()\n```
+//                                                display_name incrementAndGetNextScheduled
+//                                                signature_documentation java int incrementAndGetNextScheduled()
+//                                                kind Method
       return ++maxScheduledGeneration;
 //             ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#maxScheduledGeneration.
     }
 
     synchronized boolean finishMaxGeneration() {
 //                       ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#finishMaxGeneration().
-//                                           documentation ```java\nboolean finishMaxGeneration()\n```
+//                                           display_name finishMaxGeneration
+//                                           signature_documentation java boolean finishMaxGeneration()
+//                                           kind Method
       boolean isInterrupting = hasUnfinishedGeneration();
 //            ^^^^^^^^^^^^^^ definition local 23
-//                           documentation ```java\nboolean isInterrupting\n```
+//                           display_name isInterrupting
+//                           signature_documentation java boolean isInterrupting
+//                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#finishMaxGeneration().
+//                           kind Variable
 //                             ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#hasUnfinishedGeneration().
       maxFinishedGeneration = maxScheduledGeneration;
 //    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#maxFinishedGeneration.
@@ -522,7 +623,9 @@ class AsyncEpoxyDiffer {
 
     synchronized boolean hasUnfinishedGeneration() {
 //                       ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#hasUnfinishedGeneration().
-//                                               documentation ```java\nboolean hasUnfinishedGeneration()\n```
+//                                               display_name hasUnfinishedGeneration
+//                                               signature_documentation java boolean hasUnfinishedGeneration()
+//                                               kind Method
       return maxScheduledGeneration > maxFinishedGeneration;
 //           ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#maxScheduledGeneration.
 //                                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#maxFinishedGeneration.
@@ -530,12 +633,19 @@ class AsyncEpoxyDiffer {
 
     synchronized boolean finishGeneration(int runGeneration) {
 //                       ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#finishGeneration().
-//                                        documentation ```java\nboolean finishGeneration(int runGeneration)\n```
+//                                        display_name finishGeneration
+//                                        signature_documentation java boolean finishGeneration(int runGeneration)
+//                                        kind Method
 //                                            ^^^^^^^^^^^^^ definition local 24
-//                                                          documentation ```java\nint runGeneration\n```
+//                                                          display_name runGeneration
+//                                                          signature_documentation java int runGeneration
+//                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#finishGeneration().
       boolean isLatestGeneration =
 //            ^^^^^^^^^^^^^^^^^^ definition local 25
-//                               documentation ```java\nboolean isLatestGeneration\n```
+//                               display_name isLatestGeneration
+//                               signature_documentation java boolean isLatestGeneration
+//                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#finishGeneration().
+//                               kind Variable
           maxScheduledGeneration == runGeneration && runGeneration > maxFinishedGeneration;
 //        ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#maxScheduledGeneration.
 //                                  ^^^^^^^^^^^^^ reference local 24
@@ -556,7 +666,9 @@ class AsyncEpoxyDiffer {
 
   private static class DiffCallback extends DiffUtil.Callback {
 //                     ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#
-//                                  documentation ```java\nprivate static class DiffCallback\n```
+//                                  display_name DiffCallback
+//                                  signature_documentation java private static class DiffCallback
+//                                  kind Class
 //                                  relationship is_implementation semanticdb maven . . DiffUtil/Callback#
 //                                          ^^^^^^^^ reference semanticdb maven . . DiffUtil/
 //                                                   ^^^^^^^^ reference semanticdb maven . . DiffUtil/Callback#
@@ -565,34 +677,48 @@ class AsyncEpoxyDiffer {
 //        ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#oldList.
-//                                              documentation ```java\nfinal List<? extends EpoxyModel<?>> oldList\n```
+//                                              display_name oldList
+//                                              signature_documentation java final List<? extends EpoxyModel<?>> oldList
+//                                              kind Field
     final List<? extends EpoxyModel<?>> newList;
 //        ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                      ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#newList.
-//                                              documentation ```java\nfinal List<? extends EpoxyModel<?>> newList\n```
+//                                              display_name newList
+//                                              signature_documentation java final List<? extends EpoxyModel<?>> newList
+//                                              kind Field
     private final ItemCallback<EpoxyModel<?>> diffCallback;
 //                ^^^^^^^^^^^^ reference semanticdb maven . . ItemCallback#
 //                             ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                            ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#diffCallback.
-//                                                         documentation ```java\nprivate final unresolved_type diffCallback\n```
+//                                                         display_name diffCallback
+//                                                         signature_documentation java private final unresolved_type diffCallback
+//                                                         kind Field
 
     DiffCallback(List<? extends EpoxyModel<?>> oldList, List<? extends EpoxyModel<?>> newList,
 //  ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#`<init>`().
-//               documentation ```java\nDiffCallback(List<? extends EpoxyModel<?>> oldList, List<? extends EpoxyModel<?>> newList, unresolved_type diffCallback)\n```
+//               display_name <init>
+//               signature_documentation java DiffCallback(List<? extends EpoxyModel<?>> oldList, List<? extends EpoxyModel<?>> newList, unresolved_type diffCallback)
+//               kind Constructor
 //               ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                             ^^^^^^^ definition local 26
-//                                                     documentation ```java\nList<? extends EpoxyModel<?>> oldList\n```
+//                                                     display_name oldList
+//                                                     signature_documentation java List<? extends EpoxyModel<?>> oldList
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#`<init>`().
 //                                                      ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                                    ^^^^^^^ definition local 27
-//                                                                                            documentation ```java\nList<? extends EpoxyModel<?>> newList\n```
+//                                                                                            display_name newList
+//                                                                                            signature_documentation java List<? extends EpoxyModel<?>> newList
+//                                                                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#`<init>`().
         ItemCallback<EpoxyModel<?>> diffCallback) {
 //      ^^^^^^^^^^^^ reference semanticdb maven . . ItemCallback#
 //                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                  ^^^^^^^^^^^^ definition local 28
-//                                               documentation ```java\nunresolved_type diffCallback\n```
+//                                               display_name diffCallback
+//                                               signature_documentation java unresolved_type diffCallback
+//                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#`<init>`().
       this.oldList = oldList;
 //         ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#oldList.
 //                   ^^^^^^^ reference local 26
@@ -608,7 +734,9 @@ class AsyncEpoxyDiffer {
 //   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public int getOldListSize() {
 //             ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#getOldListSize().
-//                            documentation ```java\n@Override\npublic int getOldListSize()\n```
+//                            display_name getOldListSize
+//                            signature_documentation java @Override\npublic int getOldListSize()
+//                            kind Method
       return oldList.size();
 //           ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#oldList.
 //                   ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
@@ -618,7 +746,9 @@ class AsyncEpoxyDiffer {
 //   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public int getNewListSize() {
 //             ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#getNewListSize().
-//                            documentation ```java\n@Override\npublic int getNewListSize()\n```
+//                            display_name getNewListSize
+//                            signature_documentation java @Override\npublic int getNewListSize()
+//                            kind Method
       return newList.size();
 //           ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#newList.
 //                   ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
@@ -628,11 +758,17 @@ class AsyncEpoxyDiffer {
 //   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
 //                 ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#areItemsTheSame().
-//                                 documentation ```java\n@Override\npublic boolean areItemsTheSame(int oldItemPosition, int newItemPosition)\n```
+//                                 display_name areItemsTheSame
+//                                 signature_documentation java @Override\npublic boolean areItemsTheSame(int oldItemPosition, int newItemPosition)
+//                                 kind Method
 //                                     ^^^^^^^^^^^^^^^ definition local 29
-//                                                     documentation ```java\nint oldItemPosition\n```
+//                                                     display_name oldItemPosition
+//                                                     signature_documentation java int oldItemPosition
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#areItemsTheSame().
 //                                                          ^^^^^^^^^^^^^^^ definition local 30
-//                                                                          documentation ```java\nint newItemPosition\n```
+//                                                                          display_name newItemPosition
+//                                                                          signature_documentation java int newItemPosition
+//                                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#areItemsTheSame().
       return diffCallback.areItemsTheSame(
 //           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#diffCallback.
 //                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . `<any>`#areItemsTheSame#
@@ -651,11 +787,17 @@ class AsyncEpoxyDiffer {
 //   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
 //                 ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#areContentsTheSame().
-//                                    documentation ```java\n@Override\npublic boolean areContentsTheSame(int oldItemPosition, int newItemPosition)\n```
+//                                    display_name areContentsTheSame
+//                                    signature_documentation java @Override\npublic boolean areContentsTheSame(int oldItemPosition, int newItemPosition)
+//                                    kind Method
 //                                        ^^^^^^^^^^^^^^^ definition local 31
-//                                                        documentation ```java\nint oldItemPosition\n```
+//                                                        display_name oldItemPosition
+//                                                        signature_documentation java int oldItemPosition
+//                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#areContentsTheSame().
 //                                                             ^^^^^^^^^^^^^^^ definition local 32
-//                                                                             documentation ```java\nint newItemPosition\n```
+//                                                                             display_name newItemPosition
+//                                                                             signature_documentation java int newItemPosition
+//                                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#areContentsTheSame().
       return diffCallback.areContentsTheSame(
 //           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#diffCallback.
 //                        ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . `<any>`#areContentsTheSame#
@@ -677,11 +819,17 @@ class AsyncEpoxyDiffer {
     public Object getChangePayload(int oldItemPosition, int newItemPosition) {
 //         ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#getChangePayload().
-//                                 documentation ```java\n@Nullable\n@Override\npublic Object getChangePayload(int oldItemPosition, int newItemPosition)\n```
+//                                 display_name getChangePayload
+//                                 signature_documentation java @Nullable\n@Override\npublic Object getChangePayload(int oldItemPosition, int newItemPosition)
+//                                 kind Method
 //                                     ^^^^^^^^^^^^^^^ definition local 33
-//                                                     documentation ```java\nint oldItemPosition\n```
+//                                                     display_name oldItemPosition
+//                                                     signature_documentation java int oldItemPosition
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#getChangePayload().
 //                                                          ^^^^^^^^^^^^^^^ definition local 34
-//                                                                          documentation ```java\nint newItemPosition\n```
+//                                                                          display_name newItemPosition
+//                                                                          signature_documentation java int newItemPosition
+//                                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#getChangePayload().
       return diffCallback.getChangePayload(
 //           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#diffCallback.
 //                        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . `<any>`#getChangePayload#

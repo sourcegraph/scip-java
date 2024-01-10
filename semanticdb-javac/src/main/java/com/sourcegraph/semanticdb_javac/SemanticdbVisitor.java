@@ -129,6 +129,10 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     if (documentation != null) builder.setDocumentation(documentation);
     Semanticdb.Signature signature = semanticdbSignature(sym);
     if (signature != null) builder.setSignature(signature);
+    if (SemanticdbSymbols.isLocal(symbol)) {
+      String enclosingSymbol = semanticdbSymbol(sym.getEnclosingElement());
+      if (enclosingSymbol != null) builder.setEnclosingSymbol(enclosingSymbol);
+    }
 
     List<Semanticdb.AnnotationTree> annotations =
         new SemanticdbTrees(globals, locals, uri, types, trees, nodes).annotations(tree);
@@ -173,6 +177,10 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
                     .collect(Collectors.joining(", "));
         if (!args.isEmpty())
           builder.setDisplayName(sym.getSimpleName().toString() + "(" + args + ")");
+        break;
+      case LOCAL_VARIABLE:
+        builder.setKind(Kind.LOCAL);
+        break;
     }
 
     Semanticdb.SymbolInformation info = builder.build();

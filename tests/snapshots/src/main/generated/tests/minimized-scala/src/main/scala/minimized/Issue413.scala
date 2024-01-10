@@ -3,33 +3,47 @@ package minimized
 
 trait Issue413 {
 //    ^^^^^^^^ definition semanticdb maven . . minimized/Issue413#
-//             documentation ```scala\ntrait Issue413\n```
+//             display_name Issue413
+//             signature_documentation scala trait Issue413
+//             kind Trait
   val b: Int
 //    ^ definition semanticdb maven . . minimized/Issue413#b.
-//      documentation ```scala\nval b: Int\n```
+//      display_name b
+//      signature_documentation scala val b: Int
+//      kind AbstractMethod
 //      relationship is_reference is_implementation semanticdb maven . . minimized/Issue413Subclass#b.
 //       ^^^ reference semanticdb maven . . scala/Int#
   val c: Int
 //    ^ definition semanticdb maven . . minimized/Issue413#c.
-//      documentation ```scala\nval c: Int\n```
+//      display_name c
+//      signature_documentation scala val c: Int
+//      kind AbstractMethod
 //      relationship is_reference is_implementation semanticdb maven . . minimized/Issue413Subclass#c.
 //       ^^^ reference semanticdb maven . . scala/Int#
 }
 object Issue413 {
 //     ^^^^^^^^ definition semanticdb maven . . minimized/Issue413.
-//              documentation ```scala\nobject Issue413\n```
+//              display_name Issue413
+//              signature_documentation scala object Issue413
+//              kind Object
   def main(): Unit = {
 //    ^^^^ definition semanticdb maven . . minimized/Issue413.main().
-//         documentation ```scala\ndef main(): Unit\n```
+//         display_name main
+//         signature_documentation scala def main(): Unit
+//         kind Method
 //            ^^^^ reference semanticdb maven . . scala/Unit#
     val a = new Issue413Subclass()
 //      ^ definition local 0
-//        documentation ```scala\na: Issue413Subclass \n```
+//        display_name a
+//        signature_documentation scala a: Issue413Subclass 
+//        kind Variable
 //              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/Issue413Subclass#
 //                              ^ reference semanticdb maven . . minimized/Issue413Subclass#`<init>`().
     val b: Issue413 = a
 //      ^ definition local 1
-//        documentation ```scala\nb: Issue413 \n```
+//        display_name b
+//        signature_documentation scala b: Issue413 
+//        kind Variable
 //         ^^^^^^^^ reference semanticdb maven . . minimized/Issue413#
 //                    ^ reference local 0
     println(a.b + b.b)
@@ -44,17 +58,25 @@ object Issue413 {
 
 class Issue413Subclass extends Issue413 {
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Issue413Subclass#
-//                     documentation ```scala\nclass Issue413Subclass\n```
+//                     display_name Issue413Subclass
+//                     signature_documentation scala class Issue413Subclass
+//                     kind Class
 //                     ^ definition semanticdb maven . . minimized/Issue413Subclass#`<init>`().
-//                       documentation ```scala\ndef this()\n```
+//                       display_name <init>
+//                       signature_documentation scala def this()
+//                       kind Constructor
 //                             ^^^^^^^^ reference semanticdb maven . . minimized/Issue413#
 //                                      ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
   override val b = 10
 //             ^ definition semanticdb maven . . minimized/Issue413Subclass#b.
-//               documentation ```scala\nval b: Int\n```
+//               display_name b
+//               signature_documentation scala val b: Int
+//               kind Method
 //               relationship is_reference is_implementation semanticdb maven . . minimized/Issue413#b.
   override val c = 10
 //             ^ definition semanticdb maven . . minimized/Issue413Subclass#c.
-//               documentation ```scala\nval c: Int\n```
+//               display_name c
+//               signature_documentation scala val c: Int
+//               kind Method
 //               relationship is_reference is_implementation semanticdb maven . . minimized/Issue413#c.
 }

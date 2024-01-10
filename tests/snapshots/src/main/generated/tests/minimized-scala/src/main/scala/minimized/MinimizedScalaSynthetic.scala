@@ -15,19 +15,27 @@ import scala.concurrent.Future
 
 class MinimizedScalaSynthetic {
 //    ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedScalaSynthetic#
-//                            documentation ```scala\nclass MinimizedScalaSynthetic\n```
+//                            display_name MinimizedScalaSynthetic
+//                            signature_documentation scala class MinimizedScalaSynthetic
+//                            kind Class
 //                            ^ definition semanticdb maven . . minimized/MinimizedScalaSynthetic#`<init>`().
-//                              documentation ```scala\ndef this()\n```
+//                              display_name <init>
+//                              signature_documentation scala def this()
+//                              kind Constructor
   def everything(): Unit = Future(1)
 //    ^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedScalaSynthetic#everything().
-//               documentation ```scala\ndef everything(): Unit\n```
+//               display_name everything
+//               signature_documentation scala def everything(): Unit
+//               kind Method
 //                  ^^^^ reference semanticdb maven . . scala/Unit#
 //                         ^^^^^^ reference semanticdb maven . . scala/concurrent/Future.
 //                               ^ reference semanticdb maven . . scala/concurrent/Future.apply().
 //                                  ^ reference semanticdb maven . . scala/concurrent/ExecutionContext.Implicits.global().
   def applyTree(): Unit = Future.apply[Int](1)
 //    ^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedScalaSynthetic#applyTree().
-//              documentation ```scala\ndef applyTree(): Unit\n```
+//              display_name applyTree
+//              signature_documentation scala def applyTree(): Unit
+//              kind Method
 //                 ^^^^ reference semanticdb maven . . scala/Unit#
 //                        ^^^^^^ reference semanticdb maven . . scala/concurrent/Future.
 //                               ^^^^^ reference semanticdb maven . . scala/concurrent/Future.apply().
@@ -35,7 +43,9 @@ class MinimizedScalaSynthetic {
 //                                            ^ reference semanticdb maven . . scala/concurrent/ExecutionContext.Implicits.global().
   def applyTree2(): Unit = List.apply[Int](1).sorted
 //    ^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedScalaSynthetic#applyTree2().
-//               documentation ```scala\ndef applyTree2(): Unit\n```
+//               display_name applyTree2
+//               signature_documentation scala def applyTree2(): Unit
+//               kind Method
 //                  ^^^^ reference semanticdb maven . . scala/Unit#
 //                         ^^^^ reference semanticdb maven . . scala/package.List.
 //                              ^^^^^ reference semanticdb maven . . scala/collection/IterableFactory#apply().
@@ -44,7 +54,9 @@ class MinimizedScalaSynthetic {
 //                                                  ^ reference semanticdb maven . . scala/math/Ordering.Int.
   def selectTree(): Unit = Future[Int](1)
 //    ^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedScalaSynthetic#selectTree().
-//               documentation ```scala\ndef selectTree(): Unit\n```
+//               display_name selectTree
+//               signature_documentation scala def selectTree(): Unit
+//               kind Method
 //                  ^^^^ reference semanticdb maven . . scala/Unit#
 //                         ^^^^^^ reference semanticdb maven . . scala/concurrent/Future.
 //                               ^ reference semanticdb maven . . scala/concurrent/Future.apply().
@@ -52,24 +64,32 @@ class MinimizedScalaSynthetic {
 //                                       ^ reference semanticdb maven . . scala/concurrent/ExecutionContext.Implicits.global().
   def typeApplyTree(): Unit = Future.apply(1)
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedScalaSynthetic#typeApplyTree().
-//                  documentation ```scala\ndef typeApplyTree(): Unit\n```
+//                  display_name typeApplyTree
+//                  signature_documentation scala def typeApplyTree(): Unit
+//                  kind Method
 //                     ^^^^ reference semanticdb maven . . scala/Unit#
 //                            ^^^^^^ reference semanticdb maven . . scala/concurrent/Future.
 //                                   ^^^^^ reference semanticdb maven . . scala/concurrent/Future.apply().
 //                                           ^ reference semanticdb maven . . scala/concurrent/ExecutionContext.Implicits.global().
   def forComprehensions(): Unit =
 //    ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedScalaSynthetic#forComprehensions().
-//                      documentation ```scala\ndef forComprehensions(): Unit\n```
+//                      display_name forComprehensions
+//                      signature_documentation scala def forComprehensions(): Unit
+//                      kind Method
 //                         ^^^^ reference semanticdb maven . . scala/Unit#
     for {
       x <- Future(1)
 //    ^ definition local 0
-//      documentation ```scala\nx: Int \n```
+//      display_name x
+//      signature_documentation scala x: Int 
+//      kind Parameter
 //         ^^^^^^ reference semanticdb maven . . scala/concurrent/Future.
 //               ^ reference semanticdb maven . . scala/concurrent/Future.apply().
       y <- Future.successful(1)
 //    ^ definition local 1
-//      documentation ```scala\ny: Int \n```
+//      display_name y
+//      signature_documentation scala y: Int 
+//      kind Parameter
 //         ^^^^^^ reference semanticdb maven . . scala/concurrent/Future.
 //                ^^^^^^^^^^ reference semanticdb maven . . scala/concurrent/Future.successful().
       if y < 2
@@ -77,7 +97,9 @@ class MinimizedScalaSynthetic {
 //         ^ reference semanticdb maven . . scala/Int#`<`(+3).
       z <- Future.apply[Int](1)
 //    ^ definition local 2
-//      documentation ```scala\nz: Int \n```
+//      display_name z
+//      signature_documentation scala z: Int 
+//      kind Parameter
 //         ^^^^^^ reference semanticdb maven . . scala/concurrent/Future.
 //                ^^^^^ reference semanticdb maven . . scala/concurrent/Future.apply().
 //                      ^^^ reference semanticdb maven . . scala/Int#

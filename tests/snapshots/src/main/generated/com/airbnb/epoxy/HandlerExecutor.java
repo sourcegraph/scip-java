@@ -28,21 +28,29 @@ import androidx.annotation.NonNull;
  */
 class HandlerExecutor implements Executor {
 //    ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#
-//                    documentation ```java\nclass HandlerExecutor\n```
+//                    display_name HandlerExecutor
+//                    signature_documentation java class HandlerExecutor
+//                    kind Class
 //                    documentation  An executor that does it's work via posting to a Handler.\n <p>\n A key feature of this is the runnable is executed synchronously if the current thread is the\n same as the handler's thread.\n
 //                    relationship is_implementation semanticdb maven jdk 11 java/util/concurrent/Executor#
 //                               ^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/Executor#
   final Handler handler;
 //      ^^^^^^^ reference semanticdb maven . . Handler#
 //              ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#handler.
-//                      documentation ```java\nfinal unresolved_type handler\n```
+//                      display_name handler
+//                      signature_documentation java final unresolved_type handler
+//                      kind Field
 
   HandlerExecutor(Handler handler) {
 //^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#`<init>`().
-//                documentation ```java\nHandlerExecutor(unresolved_type handler)\n```
+//                display_name <init>
+//                signature_documentation java HandlerExecutor(unresolved_type handler)
+//                kind Constructor
 //                ^^^^^^^ reference semanticdb maven . . Handler#
 //                        ^^^^^^^ definition local 0
-//                                documentation ```java\nunresolved_type handler\n```
+//                                display_name handler
+//                                signature_documentation java unresolved_type handler
+//                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#`<init>`().
     this.handler = handler;
 //       ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#handler.
 //                 ^^^^^^^ reference local 0
@@ -52,12 +60,16 @@ class HandlerExecutor implements Executor {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void execute(@NonNull Runnable command) {
 //            ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#execute().
-//                    documentation ```java\n@Override\npublic void execute(Runnable command)\n```
+//                    display_name execute
+//                    signature_documentation java @Override\npublic void execute(Runnable command)
+//                    kind Method
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/util/concurrent/Executor#execute().
 //                     ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                             ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Runnable#
 //                                      ^^^^^^^ definition local 1
-//                                              documentation ```java\n@NonNull\nRunnable command\n```
+//                                              display_name command
+//                                              signature_documentation java @NonNull\nRunnable command
+//                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/HandlerExecutor#execute().
     // If we're already on the same thread then we can execute this synchronously
     if (Looper.myLooper() == handler.getLooper()) {
 //      ^^^^^^ reference semanticdb maven . . Looper#

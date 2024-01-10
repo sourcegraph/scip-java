@@ -2,26 +2,40 @@ package minimized;
 
 public class TabIndented {
 //           ^^^^^^^^^^^ definition semanticdb maven . . minimized/TabIndented#
-//                       documentation ```java\npublic class TabIndented\n```
+//                       display_name TabIndented
+//                       signature_documentation java public class TabIndented
+//                       kind Class
 //           ^^^^^^^^^^^ definition semanticdb maven . . minimized/TabIndented#`<init>`().
-//                       documentation ```java\npublic TabIndented()\n```
+//                       display_name <init>
+//                       signature_documentation java public TabIndented()
+//                       kind Constructor
 →public void app() {
 //           ^^^ definition semanticdb maven . . minimized/TabIndented#app().
-//               documentation ```java\npublic void app()\n```
+//               display_name app
+//               signature_documentation java public void app()
+//               kind Method
 →→Object o = new Object() {
 //^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //       ^ definition local 0
-//         documentation ```java\nObject o\n```
+//         display_name o
+//         signature_documentation java Object o
+//         enclosing_symbol semanticdb maven . . minimized/TabIndented#app().
+//         kind Variable
 //               ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 →→→@Override
 //  ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
 →→→public boolean equals(Object other) {
 //                ^^^^^^ definition local 2
-//                       documentation ```java\n@Override\npublic boolean equals(Object other)\n```
+//                       display_name equals
+//                       signature_documentation java @Override\npublic boolean equals(Object other)
+//                       enclosing_symbol local 1
+//                       kind Method
 //                       relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#equals().
 //                       ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                              ^^^^^ definition local 3
-//                                    documentation ```java\nObject other\n```
+//                                    display_name other
+//                                    signature_documentation java Object other
+//                                    enclosing_symbol local 2
 →→→→return false;
 →→→}
 
@@ -29,7 +43,10 @@ public class TabIndented {
 //  ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
 →→→public int hashCode() {
 //            ^^^^^^^^ definition local 4
-//                     documentation ```java\n@Override\npublic int hashCode()\n```
+//                     display_name hashCode
+//                     signature_documentation java @Override\npublic int hashCode()
+//                     enclosing_symbol local 1
+//                     kind Method
 //                     relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#hashCode().
 →→→→return System.identityHashCode(this);
 //         ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
@@ -41,7 +58,10 @@ public class TabIndented {
 →→→public String toString() {
 //        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //               ^^^^^^^^ definition local 5
-//                        documentation ```java\n@Override\npublic String toString()\n```
+//                        display_name toString
+//                        signature_documentation java @Override\npublic String toString()
+//                        enclosing_symbol local 1
+//                        kind Method
 //                        relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#toString().
 →→→→return "";
 →→→}

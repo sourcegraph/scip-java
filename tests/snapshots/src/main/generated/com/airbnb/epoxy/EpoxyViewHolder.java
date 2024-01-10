@@ -53,7 +53,9 @@ import androidx.recyclerview.widget.RecyclerView;
 //^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
 public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //           ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
-//                           documentation ```java\n@SuppressWarnings("WeakerAccess")\npublic class EpoxyViewHolder\n```
+//                           display_name EpoxyViewHolder
+//                           signature_documentation java @SuppressWarnings("WeakerAccess")\npublic class EpoxyViewHolder
+//                           kind Class
 //                           relationship is_implementation semanticdb maven . . RecyclerView/ViewHolder#
 //                                   ^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView/
 //                                                ^^^^^^^^^^ reference semanticdb maven . . RecyclerView/ViewHolder#
@@ -61,40 +63,58 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 // ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
 //                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                 ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#epoxyModel.
-//                                                            documentation ```java\n@SuppressWarnings("rawtypes")\nprivate EpoxyModel epoxyModel\n```
+//                                                            display_name epoxyModel
+//                                                            signature_documentation java @SuppressWarnings("rawtypes")\nprivate EpoxyModel epoxyModel
+//                                                            kind Field
   private List<Object> payloads;
 //        ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //             ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                     ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#payloads.
-//                              documentation ```java\nprivate List<Object> payloads\n```
+//                              display_name payloads
+//                              signature_documentation java private List<Object> payloads
+//                              kind Field
   private EpoxyHolder epoxyHolder;
 //        ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#
 //                    ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#epoxyHolder.
-//                                documentation ```java\nprivate EpoxyHolder epoxyHolder\n```
+//                                display_name epoxyHolder
+//                                signature_documentation java private EpoxyHolder epoxyHolder
+//                                kind Field
   @Nullable ViewHolderState.ViewState initialViewState;
 // ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#
 //                          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewHolderState#ViewState#
 //                                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#initialViewState.
-//                                                     documentation ```java\n@Nullable\nViewState initialViewState\n```
+//                                                     display_name initialViewState
+//                                                     signature_documentation java @Nullable\nViewState initialViewState
+//                                                     kind Field
 
   // Once the EpoxyHolder is created parent will be set to null.
   private ViewParent parent;
 //        ^^^^^^^^^^ reference semanticdb maven . . ViewParent#
 //                   ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#parent.
-//                          documentation ```java\nprivate unresolved_type parent\n```
+//                          display_name parent
+//                          signature_documentation java private unresolved_type parent
+//                          kind Field
 
   public EpoxyViewHolder(ViewParent parent, View view, boolean saveInitialState) {
 //       ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#`<init>`().
-//                       documentation ```java\npublic EpoxyViewHolder(unresolved_type parent, unresolved_type view, boolean saveInitialState)\n```
+//                       display_name <init>
+//                       signature_documentation java public EpoxyViewHolder(unresolved_type parent, unresolved_type view, boolean saveInitialState)
+//                       kind Constructor
 //                       ^^^^^^^^^^ reference semanticdb maven . . ViewParent#
 //                                  ^^^^^^ definition local 0
-//                                         documentation ```java\nunresolved_type parent\n```
+//                                         display_name parent
+//                                         signature_documentation java unresolved_type parent
+//                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#`<init>`().
 //                                          ^^^^ reference semanticdb maven . . View#
 //                                               ^^^^ definition local 1
-//                                                    documentation ```java\nunresolved_type view\n```
+//                                                    display_name view
+//                                                    signature_documentation java unresolved_type view
+//                                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#`<init>`().
 //                                                             ^^^^^^^^^^^^^^^^ definition local 2
-//                                                                              documentation ```java\nboolean saveInitialState\n```
+//                                                                              display_name saveInitialState
+//                                                                              signature_documentation java boolean saveInitialState
+//                                                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#`<init>`().
     super(view);
 //        ^^^^ reference local 1
 
@@ -118,7 +138,9 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 
   void restoreInitialViewState() {
 //     ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#restoreInitialViewState().
-//                             documentation ```java\nvoid restoreInitialViewState()\n```
+//                             display_name restoreInitialViewState
+//                             signature_documentation java void restoreInitialViewState()
+//                             kind Method
     if (initialViewState != null) {
 //      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#initialViewState.
       initialViewState.restore(itemView);
@@ -130,22 +152,32 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 
   public void bind(@SuppressWarnings("rawtypes") EpoxyModel model,
 //            ^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#bind().
-//                 documentation ```java\npublic void bind(EpoxyModel model, EpoxyModel<?> previouslyBoundModel, List<Object> payloads, int position)\n```
+//                 display_name bind
+//                 signature_documentation java public void bind(EpoxyModel model, EpoxyModel<?> previouslyBoundModel, List<Object> payloads, int position)
+//                 kind Method
 //                  ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
 //                                               ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                          ^^^^^ definition local 3
-//                                                                documentation ```java\n@SuppressWarnings("rawtypes")\nEpoxyModel model\n```
+//                                                                display_name model
+//                                                                signature_documentation java @SuppressWarnings("rawtypes")\nEpoxyModel model
+//                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#bind().
       @Nullable EpoxyModel<?> previouslyBoundModel, List<Object> payloads, int position) {
 //     ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //              ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                            ^^^^^^^^^^^^^^^^^^^^ definition local 4
-//                                                 documentation ```java\n@Nullable\nEpoxyModel<?> previouslyBoundModel\n```
+//                                                 display_name previouslyBoundModel
+//                                                 signature_documentation java @Nullable\nEpoxyModel<?> previouslyBoundModel
+//                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#bind().
 //                                                  ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                       ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                                                               ^^^^^^^^ definition local 5
-//                                                                        documentation ```java\nList<Object> payloads\n```
+//                                                                        display_name payloads
+//                                                                        signature_documentation java List<Object> payloads
+//                                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#bind().
 //                                                                             ^^^^^^^^ definition local 6
-//                                                                                      documentation ```java\nint position\n```
+//                                                                                      display_name position
+//                                                                                      signature_documentation java int position
+//                                                                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#bind().
     this.payloads = payloads;
 //       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#payloads.
 //                  ^^^^^^^^ reference local 5
@@ -230,7 +262,9 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   Object objectToBind() {
 //^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //       ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#objectToBind().
-//                    documentation ```java\n@NonNull\nObject objectToBind()\n```
+//                    display_name objectToBind
+//                    signature_documentation java @NonNull\nObject objectToBind()
+//                    kind Method
     return epoxyHolder != null ? epoxyHolder : itemView;
 //         ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#epoxyHolder.
 //                               ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#epoxyHolder.
@@ -239,7 +273,9 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 
   public void unbind() {
 //            ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#unbind().
-//                   documentation ```java\npublic void unbind()\n```
+//                   display_name unbind
+//                   signature_documentation java public void unbind()
+//                   kind Method
     assertBound();
 //  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#assertBound().
     // noinspection unchecked
@@ -256,10 +292,14 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 
   public void visibilityStateChanged(@Visibility int visibilityState) {
 //            ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#visibilityStateChanged().
-//                                   documentation ```java\npublic void visibilityStateChanged(int visibilityState)\n```
+//                                   display_name visibilityStateChanged
+//                                   signature_documentation java public void visibilityStateChanged(int visibilityState)
+//                                   kind Method
 //                                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/VisibilityState#Visibility#
 //                                                   ^^^^^^^^^^^^^^^ definition local 7
-//                                                                   documentation ```java\n@Visibility\nint visibilityState\n```
+//                                                                   display_name visibilityState
+//                                                                   signature_documentation java @Visibility\nint visibilityState
+//                                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#visibilityStateChanged().
     assertBound();
 //  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#assertBound().
     // noinspection unchecked
@@ -272,27 +312,37 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 
   public void visibilityChanged(
 //            ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#visibilityChanged().
-//                              documentation ```java\npublic void visibilityChanged(float percentVisibleHeight, float percentVisibleWidth, int visibleHeight, int visibleWidth)\n```
+//                              display_name visibilityChanged
+//                              signature_documentation java public void visibilityChanged(float percentVisibleHeight, float percentVisibleWidth, int visibleHeight, int visibleWidth)
+//                              kind Method
       @FloatRange(from = 0.0f, to = 100.0f) float percentVisibleHeight,
 //     ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#
 //                ^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#from().
 //                             ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#to().
 //                                                ^^^^^^^^^^^^^^^^^^^^ definition local 8
-//                                                                     documentation ```java\n@FloatRange(from = 0.0f, to = 100.0f)\nfloat percentVisibleHeight\n```
+//                                                                     display_name percentVisibleHeight
+//                                                                     signature_documentation java @FloatRange(from = 0.0f, to = 100.0f)\nfloat percentVisibleHeight
+//                                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#visibilityChanged().
       @FloatRange(from = 0.0f, to = 100.0f) float percentVisibleWidth,
 //     ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#
 //                ^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#from().
 //                             ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/FloatRange#to().
 //                                                ^^^^^^^^^^^^^^^^^^^ definition local 9
-//                                                                    documentation ```java\n@FloatRange(from = 0.0f, to = 100.0f)\nfloat percentVisibleWidth\n```
+//                                                                    display_name percentVisibleWidth
+//                                                                    signature_documentation java @FloatRange(from = 0.0f, to = 100.0f)\nfloat percentVisibleWidth
+//                                                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#visibilityChanged().
       @Px int visibleHeight,
 //     ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#
 //            ^^^^^^^^^^^^^ definition local 10
-//                          documentation ```java\n@Px\nint visibleHeight\n```
+//                          display_name visibleHeight
+//                          signature_documentation java @Px\nint visibleHeight
+//                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#visibilityChanged().
       @Px int visibleWidth
 //     ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Px#
 //            ^^^^^^^^^^^^ definition local 11
-//                         documentation ```java\n@Px\nint visibleWidth\n```
+//                         display_name visibleWidth
+//                         signature_documentation java @Px\nint visibleWidth
+//                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#visibilityChanged().
   ) {
     assertBound();
 //  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#assertBound().
@@ -312,7 +362,9 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 //       ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //            ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                    ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getPayloads().
-//                                documentation ```java\npublic List<Object> getPayloads()\n```
+//                                display_name getPayloads
+//                                signature_documentation java public List<Object> getPayloads()
+//                                kind Method
     assertBound();
 //  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#assertBound().
     return payloads;
@@ -322,7 +374,9 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   public EpoxyModel<?> getModel() {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                     ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getModel().
-//                              documentation ```java\npublic EpoxyModel<?> getModel()\n```
+//                              display_name getModel
+//                              signature_documentation java public EpoxyModel<?> getModel()
+//                              kind Method
     assertBound();
 //  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#assertBound().
     return epoxyModel;
@@ -332,7 +386,9 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   public EpoxyHolder getHolder() {
 //       ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyHolder#
 //                   ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getHolder().
-//                             documentation ```java\npublic EpoxyHolder getHolder()\n```
+//                             display_name getHolder
+//                             signature_documentation java public EpoxyHolder getHolder()
+//                             kind Method
     assertBound();
 //  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#assertBound().
     return epoxyHolder;
@@ -341,7 +397,9 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
 
   private void assertBound() {
 //             ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#assertBound().
-//                         documentation ```java\nprivate void assertBound()\n```
+//                         display_name assertBound
+//                         signature_documentation java private void assertBound()
+//                         kind Method
     if (epoxyModel == null) {
 //      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#epoxyModel.
       throw new IllegalStateException("This holder is not currently bound.");
@@ -354,7 +412,9 @@ public class EpoxyViewHolder extends RecyclerView.ViewHolder {
   public String toString() {
 //       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#toString().
-//                       documentation ```java\n@Override\npublic String toString()\n```
+//                       display_name toString
+//                       signature_documentation java @Override\npublic String toString()
+//                       kind Method
     return "EpoxyViewHolder{"
         + "epoxyModel=" + epoxyModel
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#epoxyModel.

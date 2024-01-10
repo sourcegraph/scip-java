@@ -3,26 +3,38 @@ package minimized
 
 object Issue414 {
 //     ^^^^^^^^ definition semanticdb maven . . minimized/Issue414.
-//              documentation ```scala\nobject Issue414\n```
+//              display_name Issue414
+//              signature_documentation scala object Issue414
+//              kind Object
   trait A {
 //      ^ definition semanticdb maven . . minimized/Issue414.A#
-//        documentation ```scala\ntrait A\n```
+//        display_name A
+//        signature_documentation scala trait A
+//        kind Trait
     def b(): Unit
 //      ^ definition semanticdb maven . . minimized/Issue414.A#b().
-//        documentation ```scala\ndef b(): Unit\n```
+//        display_name b
+//        signature_documentation scala def b(): Unit
+//        kind AbstractMethod
 //           ^^^^ reference semanticdb maven . . scala/Unit#
   }
   val a1 =
 //    ^^ definition semanticdb maven . . minimized/Issue414.a1.
-//       documentation ```scala\nval a1: {}\n```
+//       display_name a1
+//       signature_documentation scala val a1: {}
+//       kind Method
     new A {
 //      ^ definition local 0
-//        documentation ```scala\nfinal class $anon\n```
+//        display_name $anon
+//        signature_documentation scala final class $anon
+//        kind Class
 //      ^ reference semanticdb maven . . minimized/Issue414.A#
 //        ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
       override def b(): Unit = {
 //                 ^ definition local 1
-//                   documentation ```scala\ndef b(): Unit\n```
+//                   display_name b
+//                   signature_documentation scala def b(): Unit
+//                   kind Method
 //                   relationship is_reference is_implementation semanticdb maven . . minimized/Issue414.A#b().
 //                      ^^^^ reference semanticdb maven . . scala/Unit#
         print("Hello")
@@ -31,7 +43,9 @@ object Issue414 {
     }
   val a2: A = a1
 //    ^^ definition semanticdb maven . . minimized/Issue414.a2.
-//       documentation ```scala\nval a2: A\n```
+//       display_name a2
+//       signature_documentation scala val a2: A
+//       kind Method
 //        ^ reference semanticdb maven . . minimized/Issue414.A#
 //            ^^ reference semanticdb maven . . minimized/Issue414.a1.
   println(a1.b())

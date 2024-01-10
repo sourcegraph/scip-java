@@ -6,15 +6,23 @@ package minimized;
 //                            ^^^^^^ reference semanticdb maven . . minimized/Annotations#format().
 public class MinimizedJavaMain {
 //           ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#
-//                             documentation ```java\n@Annotations(value = "value", format = "format")\npublic class MinimizedJavaMain\n```
+//                             display_name MinimizedJavaMain
+//                             signature_documentation java @Annotations(value = "value", format = "format")\npublic class MinimizedJavaMain
+//                             kind Class
 //           ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#`<init>`().
-//                             documentation ```java\npublic MinimizedJavaMain()\n```
+//                             display_name <init>
+//                             signature_documentation java public MinimizedJavaMain()
+//                             kind Constructor
   public static void main(String[] args) {
 //                   ^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#main().
-//                        documentation ```java\npublic static void main(String[] args)\n```
+//                        display_name main
+//                        signature_documentation java public static void main(String[] args)
+//                        kind StaticMethod
 //                        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                 ^^^^ definition local 0
-//                                      documentation ```java\nString[] args\n```
+//                                      display_name args
+//                                      signature_documentation java String[] args
+//                                      enclosing_symbol semanticdb maven . . minimized/MinimizedJavaMain#main().
     TypeVariables.app(new TypeVariables.CT());
 //  ^^^^^^^^^^^^^ reference semanticdb maven . . minimized/TypeVariables#
 //                ^^^ reference semanticdb maven . . minimized/TypeVariables#app().

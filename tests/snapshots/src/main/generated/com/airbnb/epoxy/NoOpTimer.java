@@ -2,20 +2,28 @@ package com.airbnb.epoxy;
 
 class NoOpTimer implements Timer {
 //    ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NoOpTimer#
-//              documentation ```java\nclass NoOpTimer\n```
+//              display_name NoOpTimer
+//              signature_documentation java class NoOpTimer
+//              kind Class
 //              relationship is_implementation semanticdb maven . . com/airbnb/epoxy/Timer#
 //    ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NoOpTimer#`<init>`().
-//              documentation ```java\nNoOpTimer()\n```
+//              display_name <init>
+//              signature_documentation java NoOpTimer()
+//              kind Constructor
 //                         ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Timer#
   @Override
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void start(String sectionName) {
 //            ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NoOpTimer#start().
-//                  documentation ```java\n@Override\npublic void start(String sectionName)\n```
+//                  display_name start
+//                  signature_documentation java @Override\npublic void start(String sectionName)
+//                  kind Method
 //                  relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/Timer#start().
 //                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                         ^^^^^^^^^^^ definition local 0
-//                                     documentation ```java\nString sectionName\n```
+//                                     display_name sectionName
+//                                     signature_documentation java String sectionName
+//                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NoOpTimer#start().
 
   }
 
@@ -23,7 +31,9 @@ class NoOpTimer implements Timer {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void stop() {
 //            ^^^^ definition semanticdb maven . . com/airbnb/epoxy/NoOpTimer#stop().
-//                 documentation ```java\n@Override\npublic void stop()\n```
+//                 display_name stop
+//                 signature_documentation java @Override\npublic void stop()
+//                 kind Method
 //                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/Timer#stop().
 
   }

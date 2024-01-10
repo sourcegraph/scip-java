@@ -16,27 +16,37 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
  */
 class NotifyBlocker extends AdapterDataObserver {
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#
-//                  documentation ```java\nclass NotifyBlocker\n```
+//                  display_name NotifyBlocker
+//                  signature_documentation java class NotifyBlocker
+//                  kind Class
 //                  documentation  We don't allow any data change notifications except the ones done though diffing. Forcing\n changes to happen through diffing reduces the chance for developer error when implementing an\n adapter.\n <p>\n This observer throws upon any changes done outside of diffing.\n
 //                  relationship is_implementation semanticdb maven . . AdapterDataObserver#
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#`<init>`().
-//                  documentation ```java\nNotifyBlocker()\n```
+//                  display_name <init>
+//                  signature_documentation java NotifyBlocker()
+//                  kind Constructor
 //                          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . AdapterDataObserver#
 
   private boolean changesAllowed;
 //                ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#changesAllowed.
-//                               documentation ```java\nprivate boolean changesAllowed\n```
+//                               display_name changesAllowed
+//                               signature_documentation java private boolean changesAllowed
+//                               kind Field
 
   void allowChanges() {
 //     ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#allowChanges().
-//                  documentation ```java\nvoid allowChanges()\n```
+//                  display_name allowChanges
+//                  signature_documentation java void allowChanges()
+//                  kind Method
     changesAllowed = true;
 //  ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#changesAllowed.
   }
 
   void blockChanges() {
 //     ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#blockChanges().
-//                  documentation ```java\nvoid blockChanges()\n```
+//                  display_name blockChanges
+//                  signature_documentation java void blockChanges()
+//                  kind Method
     changesAllowed = false;
 //  ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#changesAllowed.
   }
@@ -45,7 +55,9 @@ class NotifyBlocker extends AdapterDataObserver {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void onChanged() {
 //            ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onChanged().
-//                      documentation ```java\n@Override\npublic void onChanged()\n```
+//                      display_name onChanged
+//                      signature_documentation java @Override\npublic void onChanged()
+//                      kind Method
     if (!changesAllowed) {
 //       ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#changesAllowed.
       throw new IllegalStateException(
@@ -58,11 +70,17 @@ class NotifyBlocker extends AdapterDataObserver {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void onItemRangeChanged(int positionStart, int itemCount) {
 //            ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeChanged().
-//                               documentation ```java\n@Override\npublic void onItemRangeChanged(int positionStart, int itemCount)\n```
+//                               display_name onItemRangeChanged
+//                               signature_documentation java @Override\npublic void onItemRangeChanged(int positionStart, int itemCount)
+//                               kind Method
 //                                   ^^^^^^^^^^^^^ definition local 0
-//                                                 documentation ```java\nint positionStart\n```
+//                                                 display_name positionStart
+//                                                 signature_documentation java int positionStart
+//                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeChanged().
 //                                                      ^^^^^^^^^ definition local 1
-//                                                                documentation ```java\nint itemCount\n```
+//                                                                display_name itemCount
+//                                                                signature_documentation java int itemCount
+//                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeChanged().
     onChanged();
 //  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onChanged().
   }
@@ -71,14 +89,22 @@ class NotifyBlocker extends AdapterDataObserver {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
 //            ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeChanged(+1).
-//                               documentation ```java\n@Override\npublic void onItemRangeChanged(int positionStart, int itemCount, Object payload)\n```
+//                               display_name onItemRangeChanged
+//                               signature_documentation java @Override\npublic void onItemRangeChanged(int positionStart, int itemCount, Object payload)
+//                               kind Method
 //                                   ^^^^^^^^^^^^^ definition local 2
-//                                                 documentation ```java\nint positionStart\n```
+//                                                 display_name positionStart
+//                                                 signature_documentation java int positionStart
+//                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeChanged(+1).
 //                                                      ^^^^^^^^^ definition local 3
-//                                                                documentation ```java\nint itemCount\n```
+//                                                                display_name itemCount
+//                                                                signature_documentation java int itemCount
+//                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeChanged(+1).
 //                                                                 ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                                                                        ^^^^^^^ definition local 4
-//                                                                                documentation ```java\nObject payload\n```
+//                                                                                display_name payload
+//                                                                                signature_documentation java Object payload
+//                                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeChanged(+1).
     onChanged();
 //  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onChanged().
   }
@@ -87,11 +113,17 @@ class NotifyBlocker extends AdapterDataObserver {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void onItemRangeInserted(int positionStart, int itemCount) {
 //            ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeInserted().
-//                                documentation ```java\n@Override\npublic void onItemRangeInserted(int positionStart, int itemCount)\n```
+//                                display_name onItemRangeInserted
+//                                signature_documentation java @Override\npublic void onItemRangeInserted(int positionStart, int itemCount)
+//                                kind Method
 //                                    ^^^^^^^^^^^^^ definition local 5
-//                                                  documentation ```java\nint positionStart\n```
+//                                                  display_name positionStart
+//                                                  signature_documentation java int positionStart
+//                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeInserted().
 //                                                       ^^^^^^^^^ definition local 6
-//                                                                 documentation ```java\nint itemCount\n```
+//                                                                 display_name itemCount
+//                                                                 signature_documentation java int itemCount
+//                                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeInserted().
     onChanged();
 //  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onChanged().
   }
@@ -100,11 +132,17 @@ class NotifyBlocker extends AdapterDataObserver {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void onItemRangeRemoved(int positionStart, int itemCount) {
 //            ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeRemoved().
-//                               documentation ```java\n@Override\npublic void onItemRangeRemoved(int positionStart, int itemCount)\n```
+//                               display_name onItemRangeRemoved
+//                               signature_documentation java @Override\npublic void onItemRangeRemoved(int positionStart, int itemCount)
+//                               kind Method
 //                                   ^^^^^^^^^^^^^ definition local 7
-//                                                 documentation ```java\nint positionStart\n```
+//                                                 display_name positionStart
+//                                                 signature_documentation java int positionStart
+//                                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeRemoved().
 //                                                      ^^^^^^^^^ definition local 8
-//                                                                documentation ```java\nint itemCount\n```
+//                                                                display_name itemCount
+//                                                                signature_documentation java int itemCount
+//                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeRemoved().
     onChanged();
 //  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onChanged().
   }
@@ -113,13 +151,21 @@ class NotifyBlocker extends AdapterDataObserver {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
 //            ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeMoved().
-//                             documentation ```java\n@Override\npublic void onItemRangeMoved(int fromPosition, int toPosition, int itemCount)\n```
+//                             display_name onItemRangeMoved
+//                             signature_documentation java @Override\npublic void onItemRangeMoved(int fromPosition, int toPosition, int itemCount)
+//                             kind Method
 //                                 ^^^^^^^^^^^^ definition local 9
-//                                              documentation ```java\nint fromPosition\n```
+//                                              display_name fromPosition
+//                                              signature_documentation java int fromPosition
+//                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeMoved().
 //                                                   ^^^^^^^^^^ definition local 10
-//                                                              documentation ```java\nint toPosition\n```
+//                                                              display_name toPosition
+//                                                              signature_documentation java int toPosition
+//                                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeMoved().
 //                                                                   ^^^^^^^^^ definition local 11
-//                                                                             documentation ```java\nint itemCount\n```
+//                                                                             display_name itemCount
+//                                                                             signature_documentation java int itemCount
+//                                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onItemRangeMoved().
     onChanged();
 //  ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/NotifyBlocker#onChanged().
   }
