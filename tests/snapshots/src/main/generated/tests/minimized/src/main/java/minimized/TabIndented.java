@@ -20,6 +20,7 @@ public class TabIndented {
 //         display_name o
 //         signature_documentation java Object o
 //         enclosing_symbol semanticdb maven . . minimized/TabIndented#app().
+//         kind Variable
 //               ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 →→→@Override
 //  ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#

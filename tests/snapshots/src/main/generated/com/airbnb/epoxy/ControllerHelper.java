@@ -49,6 +49,7 @@ public abstract class ControllerHelper<T extends EpoxyController> {
 //                                    display_name currentModels
 //                                    signature_documentation java List<EpoxyModel<?>> currentModels
 //                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelper#validateModelHashCodesHaveNotChanged().
+//                                    kind Variable
 //                                      ^^^^^^^^^^ reference local 0
 //                                                 ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#getAdapter().
 //                                                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCopyOfModels().
@@ -58,6 +59,7 @@ public abstract class ControllerHelper<T extends EpoxyController> {
 //             display_name i
 //             signature_documentation java int i
 //             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelper#validateModelHashCodesHaveNotChanged().
+//             kind Variable
 //                  ^ reference local 2
 //                      ^^^^^^^^^^^^^ reference local 1
 //                                    ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
@@ -68,6 +70,7 @@ public abstract class ControllerHelper<T extends EpoxyController> {
 //                     display_name model
 //                     signature_documentation java EpoxyModel model
 //                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ControllerHelper#validateModelHashCodesHaveNotChanged().
+//                     kind Variable
 //                       ^^^^^^^^^^^^^ reference local 1
 //                                     ^^^ reference semanticdb maven jdk 11 java/util/List#get().
 //                                         ^ reference local 2

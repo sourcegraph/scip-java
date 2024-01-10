@@ -213,6 +213,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                                              display_name currentModels
 //                                              signature_documentation java List<? extends EpoxyModel<?>> currentModels
 //                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#setModels().
+//                                              kind Variable
 //                                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
     if (!currentModels.isEmpty() && currentModels.get(0).isDebugValidationEnabled()) {
 //       ^^^^^^^^^^^^^ reference local 4
@@ -225,6 +226,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //               display_name i
 //               signature_documentation java int i
 //               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#setModels().
+//               kind Variable
 //                    ^ reference local 5
 //                        ^^^^^^^^^^^^^ reference local 4
 //                                      ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
@@ -235,6 +237,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                          display_name model
 //                          signature_documentation java EpoxyModel<?> model
 //                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#setModels().
+//                          kind Variable
 //                            ^^^^^^^^^^^^^ reference local 4
 //                                          ^^^ reference semanticdb maven jdk 11 java/util/List#get().
 //                                              ^ reference local 5
@@ -303,6 +306,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //             display_name i
 //             signature_documentation java int i
 //             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#onResult().
+//             kind Variable
 //               ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#modelBuildListeners.
 //                                   ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
 //                                               ^ reference local 8
@@ -589,6 +593,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                           display_name model
 //                           signature_documentation java EpoxyModel<?> model
 //                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getModelById().
+//                           kind Variable
 //                             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
       if (model.id() == id) {
 //        ^^^^^ reference local 23
@@ -621,6 +626,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //           display_name size
 //           signature_documentation java int size
 //           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getModelPosition().
+//           kind Variable
 //             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
 //                                ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
     for (int i = 0; i < size; i++) {
@@ -628,6 +634,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //             display_name i
 //             signature_documentation java int i
 //             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getModelPosition().
+//             kind Variable
 //                  ^ reference local 26
 //                      ^^^^ reference local 25
 //                            ^ reference local 26
@@ -637,6 +644,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                        display_name model
 //                        signature_documentation java EpoxyModel<?> model
 //                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getModelPosition().
+//                        kind Variable
 //                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
 //                                             ^^^ reference semanticdb maven jdk 11 java/util/List#get().
 //                                                 ^ reference local 26
@@ -691,6 +699,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                                       display_name updatedList
 //                                       signature_documentation java ArrayList<EpoxyModel<?>> updatedList
 //                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#moveModel().
+//                                       kind Variable
 //                                             ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`(+2).
 //                                                         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
 
@@ -717,6 +726,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                          display_name interruptedDiff
 //                          signature_documentation java boolean interruptedDiff
 //                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#moveModel().
+//                          kind Variable
 //                            ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#differ.
 //                                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#forceListOverride().
 //                                                     ^^^^^^^^^^^ reference local 30
@@ -749,6 +759,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                                       display_name updatedList
 //                                       signature_documentation java ArrayList<EpoxyModel<?>> updatedList
 //                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#notifyModelChanged().
+//                                       kind Variable
 //                                             ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`(+2).
 //                                                         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#getCurrentModels().
 
@@ -767,6 +778,7 @@ public final class EpoxyControllerAdapter extends BaseEpoxyAdapter implements Re
 //                          display_name interruptedDiff
 //                          signature_documentation java boolean interruptedDiff
 //                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#notifyModelChanged().
+//                          kind Variable
 //                            ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyControllerAdapter#differ.
 //                                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#forceListOverride().
 //                                                     ^^^^^^^^^^^ reference local 33

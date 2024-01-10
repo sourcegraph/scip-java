@@ -106,6 +106,7 @@ class DebugTimer implements Timer {
 //                   display_name durationMs
 //                   signature_documentation java float durationMs
 //                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DebugTimer#stop().
+//                   kind Variable
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
 //                             ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/System#nanoTime().
 //                                          ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DebugTimer#startTime.

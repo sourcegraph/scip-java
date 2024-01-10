@@ -233,6 +233,7 @@ class DiffHelper {
 //                                display_name updateOpHelper
 //                                signature_documentation java UpdateOpHelper updateOpHelper
 //                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#notifyModelChanges().
+//                                kind Variable
 //                                      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#`<init>`().
 
     buildDiff(updateOpHelper);
@@ -270,6 +271,7 @@ class DiffHelper {
 //                   display_name op
 //                   signature_documentation java UpdateOp op
 //                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#notifyChanges().
+//                   kind Variable
 //                     ^^^^^^^^ reference local 3
 //                              ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#opList.
       switch (op.type) {
@@ -379,6 +381,7 @@ class DiffHelper {
 //                        display_name hasInsertions
 //                        signature_documentation java boolean hasInsertions
 //                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#buildDiff().
+//                        kind Variable
         oldStateList.size() - updateOpHelper.getNumRemovals() != currentStateList.size();
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
 //                   ^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#size().
@@ -443,6 +446,7 @@ class DiffHelper {
 //                                 display_name tempList
 //                                 signature_documentation java ArrayList<ModelState> tempList
 //                                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#prepareStateForDiff().
+//                                 kind Variable
 //                                   ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
     oldStateList = currentStateList;
 //  ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
@@ -459,6 +463,7 @@ class DiffHelper {
 //                                display_name tempMap
 //                                signature_documentation java Map<Long, ModelState> tempMap
 //                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#prepareStateForDiff().
+//                                kind Variable
 //                                  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateMap.
     oldStateMap = currentStateMap;
 //  ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateMap.
@@ -475,6 +480,7 @@ class DiffHelper {
 //                             display_name modelState
 //                             signature_documentation java ModelState modelState
 //                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#prepareStateForDiff().
+//                             kind Variable
 //                               ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
       modelState.pair = null;
 //    ^^^^^^^^^^ reference local 9
@@ -486,6 +492,7 @@ class DiffHelper {
 //                 display_name modelCount
 //                 signature_documentation java int modelCount
 //                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#prepareStateForDiff().
+//                 kind Variable
 //                   ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
 //                           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
 //                                              ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
@@ -499,6 +506,7 @@ class DiffHelper {
 //             display_name i
 //             signature_documentation java int i
 //             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#prepareStateForDiff().
+//             kind Variable
 //                  ^ reference local 11
 //                      ^^^^^^^^^^ reference local 10
 //                                  ^ reference local 11
@@ -526,6 +534,7 @@ class DiffHelper {
 //                      display_name model
 //                      signature_documentation java EpoxyModel<?> model
 //                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#createStateForPosition().
+//                      kind Variable
 //                        ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
 //                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
 //                                                   ^^^ reference semanticdb maven jdk 11 java/util/List#get().
@@ -539,6 +548,7 @@ class DiffHelper {
 //                   display_name state
 //                   signature_documentation java ModelState state
 //                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#createStateForPosition().
+//                   kind Variable
 //                     ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
 //                                ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#build().
 //                                      ^^^^^ reference local 13
@@ -551,6 +561,7 @@ class DiffHelper {
 //                           display_name previousValue
 //                           signature_documentation java ModelState previousValue
 //                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#createStateForPosition().
+//                           kind Variable
 //                             ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateMap.
 //                                             ^^^ reference semanticdb maven jdk 11 java/util/Map#put().
 //                                                 ^^^^^ reference local 14
@@ -563,6 +574,7 @@ class DiffHelper {
 //                         display_name previousPosition
 //                         signature_documentation java int previousPosition
 //                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#createStateForPosition().
+//                         kind Variable
 //                           ^^^^^^^^^^^^^ reference local 15
 //                                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
       EpoxyModel<?> previousModel = adapter.getCurrentModels().get(previousPosition);
@@ -571,6 +583,7 @@ class DiffHelper {
 //                                display_name previousModel
 //                                signature_documentation java EpoxyModel<?> previousModel
 //                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#createStateForPosition().
+//                                kind Variable
 //                                  ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#adapter.
 //                                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
 //                                                             ^^^ reference semanticdb maven jdk 11 java/util/List#get().
@@ -611,6 +624,7 @@ class DiffHelper {
 //                        display_name state
 //                        signature_documentation java ModelState state
 //                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectRemovals().
+//                        kind Variable
 //                          ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
       // Update the position of the item to take into account previous removals,
       // so that future operations will reference the correct position
@@ -672,6 +686,7 @@ class DiffHelper {
 //                                       display_name oldItemIterator
 //                                       signature_documentation java Iterator<ModelState> oldItemIterator
 //                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectInsertions().
+//                                       kind Variable
 //                                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
 //                                                      ^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#iterator().
 
@@ -681,6 +696,7 @@ class DiffHelper {
 //                               display_name itemToInsert
 //                               signature_documentation java ModelState itemToInsert
 //                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectInsertions().
+//                               kind Variable
 //                                 ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateList.
       if (itemToInsert.pair != null) {
 //        ^^^^^^^^^^^^ reference local 22
@@ -692,6 +708,7 @@ class DiffHelper {
 //                             display_name nextOldItem
 //                             signature_documentation java ModelState nextOldItem
 //                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectInsertions().
+//                             kind Variable
 //                               ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#getNextItemWithPair().
 //                                                   ^^^^^^^^^^^^^^^ reference local 21
         if (nextOldItem != null) {
@@ -733,6 +750,7 @@ class DiffHelper {
 //                          display_name newItem
 //                          signature_documentation java ModelState newItem
 //                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectChanges().
+//                          kind Variable
 //                            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateList.
       ModelState previousItem = newItem.pair;
 //    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
@@ -740,6 +758,7 @@ class DiffHelper {
 //                            display_name previousItem
 //                            signature_documentation java ModelState previousItem
 //                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectChanges().
+//                            kind Variable
 //                              ^^^^^^^ reference local 25
 //                                      ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
       if (previousItem == null) {
@@ -754,6 +773,7 @@ class DiffHelper {
 //                         display_name modelChanged
 //                         signature_documentation java boolean modelChanged
 //                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectChanges().
+//                         kind Variable
       if (immutableModels) {
 //        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#immutableModels.
         // Make sure that the old model hasn't changed, otherwise comparing it with the new one
@@ -823,6 +843,7 @@ class DiffHelper {
 //                                       display_name oldItemIterator
 //                                       signature_documentation java Iterator<ModelState> oldItemIterator
 //                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectMoves().
+//                                       kind Variable
 //                                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#oldStateList.
 //                                                      ^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#iterator().
     ModelState nextOldItem = null;
@@ -831,6 +852,7 @@ class DiffHelper {
 //                         display_name nextOldItem
 //                         signature_documentation java ModelState nextOldItem
 //                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectMoves().
+//                         kind Variable
 
     for (ModelState newItem : currentStateList) {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#
@@ -838,6 +860,7 @@ class DiffHelper {
 //                          display_name newItem
 //                          signature_documentation java ModelState newItem
 //                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectMoves().
+//                          kind Variable
 //                            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffHelper#currentStateList.
       if (newItem.pair == null) {
 //        ^^^^^^^ reference local 31
@@ -929,6 +952,7 @@ class DiffHelper {
 //                          display_name newItemDistance
 //                          signature_documentation java int newItemDistance
 //                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectMoves().
+//                          kind Variable
 //                            ^^^^^^^ reference local 31
 //                                    ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
 //                                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
@@ -939,6 +963,7 @@ class DiffHelper {
 //                          display_name oldItemDistance
 //                          signature_documentation java int oldItemDistance
 //                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#collectMoves().
+//                          kind Variable
 //                            ^^^^^^^^^^^ reference local 30
 //                                        ^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#pair.
 //                                             ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#position.
@@ -1037,6 +1062,7 @@ class DiffHelper {
 //           display_name size
 //           signature_documentation java int size
 //           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#updateItemPosition().
+//           kind Variable
 //             ^^^^^^^ reference local 35
 //                     ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
 
@@ -1045,6 +1071,7 @@ class DiffHelper {
 //             display_name i
 //             signature_documentation java int i
 //             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#updateItemPosition().
+//             kind Variable
 //               ^^^^ reference local 34
 //                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#lastMoveOp.
 //                                ^ reference local 37
@@ -1056,6 +1083,7 @@ class DiffHelper {
 //                    display_name moveOp
 //                    signature_documentation java UpdateOp moveOp
 //                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#updateItemPosition().
+//                    kind Variable
 //                      ^^^^^^^ reference local 35
 //                              ^^^ reference semanticdb maven jdk 11 java/util/List#get().
 //                                  ^ reference local 37
@@ -1064,6 +1092,7 @@ class DiffHelper {
 //                     display_name fromPosition
 //                     signature_documentation java int fromPosition
 //                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#updateItemPosition().
+//                     kind Variable
 //                       ^^^^^^ reference local 38
 //                              ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#positionStart.
       int toPosition = moveOp.itemCount;
@@ -1071,6 +1100,7 @@ class DiffHelper {
 //                   display_name toPosition
 //                   signature_documentation java int toPosition
 //                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#updateItemPosition().
+//                   kind Variable
 //                     ^^^^^^ reference local 38
 //                            ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#itemCount.
 
@@ -1127,6 +1157,7 @@ class DiffHelper {
 //                      display_name nextItem
 //                      signature_documentation java ModelState nextItem
 //                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/DiffHelper#getNextItemWithPair().
+//                      kind Variable
     while (nextItem == null && iterator.hasNext()) {
 //         ^^^^^^^^ reference local 42
 //                             ^^^^^^^^ reference local 41

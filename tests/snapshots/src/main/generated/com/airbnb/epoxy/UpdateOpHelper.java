@@ -161,6 +161,7 @@ class UpdateOpHelper {
 //                        display_name batchWithLast
 //                        signature_documentation java boolean batchWithLast
 //                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#add(+1).
+//                        kind Variable
 //                          ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#isLastOp().
 //                                   ^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#ADD.
         && (lastOp.contains(startPosition) || lastOp.positionEnd() == startPosition);
@@ -300,6 +301,7 @@ class UpdateOpHelper {
 //                        display_name batchWithLast
 //                        signature_documentation java boolean batchWithLast
 //                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#remove(+1).
+//                        kind Variable
     if (isLastOp(REMOVE)) {
 //      ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#isLastOp().
 //               ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#REMOVE.
@@ -473,6 +475,7 @@ class UpdateOpHelper {
 //              display_name op
 //              signature_documentation java UpdateOp op
 //              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/UpdateOpHelper#move().
+//              kind Variable
 //                ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#
 //                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#instance().
 //                                  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#MOVE.

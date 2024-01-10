@@ -34,6 +34,7 @@ public class ForComprehensions {
 //                         display_name integers
 //                         signature_documentation java List<Integer> integers
 //                         enclosing_symbol semanticdb maven . . minimized/ForComprehensions#app().
+//                         kind Variable
 //                           ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collections#
 //                                       ^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collections#singletonList().
 //                                                     ^ reference local 0
@@ -42,11 +43,13 @@ public class ForComprehensions {
 //             display_name result
 //             signature_documentation java int result
 //             enclosing_symbol semanticdb maven . . minimized/ForComprehensions#app().
+//             kind Variable
     for (int i : integers) {
 //           ^ definition local 3
 //             display_name i
 //             signature_documentation java int i
 //             enclosing_symbol semanticdb maven . . minimized/ForComprehensions#app().
+//             kind Variable
 //               ^^^^^^^^ reference local 1
       result += i;
 //    ^^^^^^ reference local 2

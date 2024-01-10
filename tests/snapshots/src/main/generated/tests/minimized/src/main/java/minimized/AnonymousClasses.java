@@ -34,6 +34,7 @@ public class AnonymousClasses {
 //                                display_name fn
 //                                signature_documentation java Function<Integer, Integer> fn
 //                                enclosing_symbol semanticdb maven . . minimized/AnonymousClasses#app().
+//                                kind Variable
         new Function<Integer, Integer>() {
 //          ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
 //                   ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#

@@ -177,6 +177,10 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
                     .collect(Collectors.joining(", "));
         if (!args.isEmpty())
           builder.setDisplayName(sym.getSimpleName().toString() + "(" + args + ")");
+        break;
+      case LOCAL_VARIABLE:
+        builder.setKind(Kind.LOCAL);
+        break;
     }
 
     Semanticdb.SymbolInformation info = builder.build();
