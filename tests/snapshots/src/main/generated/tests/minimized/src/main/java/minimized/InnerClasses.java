@@ -303,6 +303,7 @@ public class InnerClasses {
 //                                    display_name fn
 //                                    signature_documentation java InnerInterface<String, String> fn
 //                                    enclosing_symbol semanticdb maven . . minimized/InnerClasses#testAnon().
+//                                    kind Variable
         new InnerInterface<String, String>() {
 //          ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#
 //                         ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
@@ -345,6 +346,7 @@ public class InnerClasses {
 //        display_name a
 //        signature_documentation java int a
 //        enclosing_symbol semanticdb maven . . minimized/InnerClasses#app().
+//        kind Variable
     InnerStaticClass.innerStaticMethod();
 //  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerStaticClass#
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerStaticClass#innerStaticMethod().
@@ -354,6 +356,7 @@ public class InnerClasses {
 //                            display_name innerClasses
 //                            signature_documentation java InnerClasses innerClasses
 //                            enclosing_symbol semanticdb maven . . minimized/InnerClasses#app().
+//                            kind Variable
 //                                  ^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#`<init>`().
 //                                               ^ reference local 11
     InnerClass innerClass = innerClasses.new InnerClass(a);
@@ -362,6 +365,7 @@ public class InnerClasses {
 //                        display_name innerClass
 //                        signature_documentation java InnerClass innerClass
 //                        enclosing_symbol semanticdb maven . . minimized/InnerClasses#app().
+//                        kind Variable
 //                          ^^^^^^^^^^^^ reference local 12
 //                                           ^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerClass#`<init>`().
 //                                                      ^ reference local 11

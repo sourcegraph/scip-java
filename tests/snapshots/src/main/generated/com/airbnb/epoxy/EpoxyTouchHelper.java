@@ -358,6 +358,7 @@ public abstract class EpoxyTouchHelper {
 //                                                    display_name targetClasses
 //                                                    signature_documentation java List<Class<? extends EpoxyModel>> targetClasses
 //                                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder3#withTarget().
+//                                                    kind Variable
 //                                                          ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`().
       targetClasses.add(targetModelClass);
 //    ^^^^^^^^^^^^^ reference local 10
@@ -557,6 +558,7 @@ public abstract class EpoxyTouchHelper {
 //                                    display_name itemTouchHelper
 //                                    signature_documentation java unresolved_type itemTouchHelper
 //                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#andCallbacks().
+//                                    kind Variable
           new ItemTouchHelper(new EpoxyModelTouchCallback<U>(controller, targetModelClass) {
 //                                ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#
 //                                                        ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#[U]
@@ -604,6 +606,7 @@ public abstract class EpoxyTouchHelper {
 //                                 display_name isTargetType
 //                                 signature_documentation java boolean isTargetType
 //                                 enclosing_symbol local 26
+//                                 kind Variable
 //                                   ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragBuilder4#targetModelClasses.
 //                                                      ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
                   ? super.isTouchableModel(model)
@@ -1120,6 +1123,7 @@ public abstract class EpoxyTouchHelper {
 //                                                    display_name targetClasses
 //                                                    signature_documentation java List<Class<? extends EpoxyModel>> targetClasses
 //                                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder2#withTarget().
+//                                                    kind Variable
 //                                                          ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`().
       targetClasses.add(targetModelClass);
 //    ^^^^^^^^^^^^^ reference local 65
@@ -1303,6 +1307,7 @@ public abstract class EpoxyTouchHelper {
 //                                    display_name itemTouchHelper
 //                                    signature_documentation java unresolved_type itemTouchHelper
 //                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#andCallbacks().
+//                                    kind Variable
           new ItemTouchHelper(new EpoxyModelTouchCallback<U>(null, targetModelClass) {
 //                                ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#
 //                                                        ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#[U]
@@ -1349,6 +1354,7 @@ public abstract class EpoxyTouchHelper {
 //                                 display_name isTargetType
 //                                 signature_documentation java boolean isTargetType
 //                                 enclosing_symbol local 80
+//                                 kind Variable
 //                                   ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeBuilder3#targetModelClasses.
 //                                                      ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
                   ? super.isTouchableModel(model)

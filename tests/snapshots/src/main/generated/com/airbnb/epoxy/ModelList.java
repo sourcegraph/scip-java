@@ -245,6 +245,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                              display_name previousModel
 //                              signature_documentation java EpoxyModel<?> previousModel
 //                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelList#set().
+//                              kind Variable
 //                                ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#super.
 //                                      ^^^ reference semanticdb maven jdk 11 java/util/ArrayList#set().
 //                                          ^^^^^ reference local 10
@@ -427,6 +428,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //            display_name index
 //            signature_documentation java int index
 //            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelList#remove(+1).
+//            kind Variable
 //              ^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#indexOf().
 //                      ^ reference local 20
 
@@ -527,12 +529,14 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                 display_name result
 //                 signature_documentation java boolean result
 //                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelList#removeAll().
+//                 kind Variable
     Iterator<?> it = iterator();
 //  ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
 //              ^^ definition local 26
 //                 display_name it
 //                 signature_documentation java Iterator<?> it
 //                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelList#removeAll().
+//                 kind Variable
 //                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#iterator().
     while (it.hasNext()) {
 //         ^^ reference local 26
@@ -577,12 +581,14 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                 display_name result
 //                 signature_documentation java boolean result
 //                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelList#retainAll().
+//                 kind Variable
     Iterator<?> it = iterator();
 //  ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
 //              ^^ definition local 29
 //                 display_name it
 //                 signature_documentation java Iterator<?> it
 //                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelList#retainAll().
+//                 kind Variable
 //                   ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#iterator().
     while (it.hasNext()) {
 //         ^^ reference local 29
@@ -687,6 +693,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //          display_name i
 //          signature_documentation java int i
 //          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#next().
+//          kind Variable
 //            ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
       cursor = i + 1;
 //    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
@@ -873,6 +880,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //          display_name i
 //          signature_documentation java int i
 //          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelList#ListItr#previous().
+//          kind Variable
 //            ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
       if (i < 0) {
 //        ^ reference local 34
@@ -950,6 +958,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //            display_name i
 //            signature_documentation java int i
 //            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelList#ListItr#add().
+//            kind Variable
 //              ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#Itr#cursor.
         ModelList.this.add(i, e);
 //      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#
@@ -1235,6 +1244,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                   display_name previous
 //                   signature_documentation java int previous
 //                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#previousIndex().
+//                   kind Variable
 //                     ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#SubListIterator#iterator.
 //                              ^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ListIterator#previousIndex().
         if (previous >= start) {
@@ -1396,6 +1406,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                       display_name result
 //                       signature_documentation java boolean result
 //                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#addAll().
+//                       kind Variable
 //                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
 //                                  ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#addAll(+1).
 //                                         ^^^^^^^^ reference local 54
@@ -1448,6 +1459,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                     display_name result
 //                     signature_documentation java boolean result
 //                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#addAll(+1).
+//                     kind Variable
 //                       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
 //                                ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#addAll(+1).
 //                                       ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#offset.
@@ -1595,6 +1607,7 @@ class ModelList extends ArrayList<EpoxyModel<?>> {
 //                             display_name result
 //                             signature_documentation java EpoxyModel<?> result
 //                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#remove().
+//                             kind Variable
 //                               ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#SubList#fullList.
 //                                        ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelList#remove().
 //                                               ^^^^^^^^ reference local 61

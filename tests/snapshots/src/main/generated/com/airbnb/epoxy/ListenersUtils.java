@@ -54,6 +54,7 @@ public class ListenersUtils {
 //                            display_name recyclerView
 //                            signature_documentation java unresolved_type recyclerView
 //                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ListenersUtils#getEpoxyHolderForChildView().
+//                            kind Variable
 //                              ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ListenersUtils#findParentRecyclerView().
 //                                                     ^ reference local 0
     if (recyclerView == null) {
@@ -67,6 +68,7 @@ public class ListenersUtils {
 //                        display_name viewHolder
 //                        signature_documentation java unresolved_type viewHolder
 //                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ListenersUtils#getEpoxyHolderForChildView().
+//                        kind Variable
 //                          ^^^^^^^^^^^^ reference local 1
 //                                       ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . RecyclerView#findContainingViewHolder#
 //                                                                ^ reference local 0
@@ -111,6 +113,7 @@ public class ListenersUtils {
 //                    display_name parent
 //                    signature_documentation java unresolved_type parent
 //                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ListenersUtils#findParentRecyclerView().
+//                    kind Variable
 //                      ^ reference local 3
 //                        ^^^^^^^^^ reference semanticdb maven . . View#getParent#
     if (parent instanceof RecyclerView) {

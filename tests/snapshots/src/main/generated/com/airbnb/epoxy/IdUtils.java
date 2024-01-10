@@ -83,11 +83,13 @@ public final class IdUtils {
 //              display_name result
 //              signature_documentation java long result
 //              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/IdUtils#hashString64Bit().
+//              kind Variable
     final int len = str.length();
 //            ^^^ definition local 3
 //                display_name len
 //                signature_documentation java final int len
 //                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/IdUtils#hashString64Bit().
+//                kind Variable
 //                  ^^^ reference local 1
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#length().
     for (int i = 0; i < len; i++) {
@@ -95,6 +97,7 @@ public final class IdUtils {
 //             display_name i
 //             signature_documentation java int i
 //             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/IdUtils#hashString64Bit().
+//             kind Variable
 //                  ^ reference local 4
 //                      ^^^ reference local 3
 //                           ^ reference local 4

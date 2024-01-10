@@ -71,6 +71,7 @@ enum Enums {
 //             display_name all
 //             signature_documentation java String all
 //             enclosing_symbol semanticdb maven . . minimized/Enums#app().
+//             kind Variable
 //               ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#stream().
 //                             ^^^^^^ reference semanticdb maven . . minimized/Enums#values().

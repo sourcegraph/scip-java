@@ -228,6 +228,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //                        display_name that
 //                        signature_documentation java SimpleEpoxyModel that
 //                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#equals().
+//                        kind Variable
 //                           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#
 //                                             ^ reference local 8
 
@@ -268,6 +269,7 @@ public class SimpleEpoxyModel extends EpoxyModel<View> {
 //             display_name result
 //             signature_documentation java int result
 //             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#hashCode().
+//             kind Variable
 //               ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/SimpleEpoxyModel#super.
 //                     ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#hashCode().
     result = 31 * result + layoutRes;

@@ -206,6 +206,7 @@ public final class EpoxyAsyncUtil {
 //                              display_name handlerThread
 //                              signature_documentation java unresolved_type handlerThread
 //                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#buildBackgroundLooper().
+//                              kind Variable
 //                                                  ^^^^^^^^^^ reference local 3
     handlerThread.start();
 //  ^^^^^^^^^^^^^ reference local 4

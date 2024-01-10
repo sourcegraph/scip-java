@@ -352,6 +352,7 @@ public class StringAttributeData {
 //                           display_name that
 //                           signature_documentation java StringAttributeData that
 //                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#equals().
+//                           kind Variable
 //                              ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#
 //                                                   ^ reference local 10
 
@@ -405,6 +406,7 @@ public class StringAttributeData {
 //             display_name result
 //             signature_documentation java int result
 //             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hashCode().
+//             kind Variable
 //               ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
 //                                ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
 //                                       ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#hashCode().

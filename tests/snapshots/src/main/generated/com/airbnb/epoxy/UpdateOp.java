@@ -137,6 +137,7 @@ class UpdateOp {
 //              display_name op
 //              signature_documentation java UpdateOp op
 //              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/UpdateOp#instance().
+//              kind Variable
 //                    ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/UpdateOp#`<init>`().
 
     op.type = type;

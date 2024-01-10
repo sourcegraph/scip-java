@@ -537,6 +537,7 @@ public abstract class EpoxyModel<T> {
 //              display_name result
 //              signature_documentation java long result
 //              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id(+2).
+//              kind Variable
     if (ids != null) {
 //      ^^^ reference local 16
       for (@Nullable Number id : ids) {
@@ -546,6 +547,7 @@ public abstract class EpoxyModel<T> {
 //                             display_name id
 //                             signature_documentation java @Nullable\nNumber id
 //                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id(+2).
+//                             kind Variable
 //                               ^^^ reference local 16
         result = 31 * result + hashLong64Bit(id == null ? 0 : id.hashCode());
 //      ^^^^^^ reference local 17
@@ -588,6 +590,7 @@ public abstract class EpoxyModel<T> {
 //              display_name result
 //              signature_documentation java long result
 //              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id(+3).
+//              kind Variable
 //                ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/IdUtils#hashLong64Bit().
 //                              ^^^ reference local 19
     result = 31 * result + hashLong64Bit(id2);
@@ -663,6 +666,7 @@ public abstract class EpoxyModel<T> {
 //              display_name result
 //              signature_documentation java long result
 //              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id(+5).
+//              kind Variable
 //                ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/IdUtils#hashString64Bit().
 //                                ^^^ reference local 23
     if (otherKeys != null) {
@@ -673,6 +677,7 @@ public abstract class EpoxyModel<T> {
 //                               display_name otherKey
 //                               signature_documentation java CharSequence otherKey
 //                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id(+5).
+//                               kind Variable
 //                                 ^^^^^^^^^ reference local 24
         result = 31 * result + hashString64Bit(otherKey);
 //      ^^^^^^ reference local 25
@@ -721,6 +726,7 @@ public abstract class EpoxyModel<T> {
 //              display_name result
 //              signature_documentation java long result
 //              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id(+6).
+//              kind Variable
 //                ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/IdUtils#hashString64Bit().
 //                                ^^^ reference local 27
     result = 31 * result + hashLong64Bit(id);
@@ -1176,6 +1182,7 @@ public abstract class EpoxyModel<T> {
 //                     display_name that
 //                     signature_documentation java EpoxyModel<?> that
 //                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModel#equals().
+//                     kind Variable
 //                        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                       ^ reference local 46
 
@@ -1212,6 +1219,7 @@ public abstract class EpoxyModel<T> {
 //             display_name result
 //             signature_documentation java int result
 //             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModel#hashCode().
+//             kind Variable
 //                      ^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id.
 //                            ^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#id.
     result = 31 * result + getViewType();

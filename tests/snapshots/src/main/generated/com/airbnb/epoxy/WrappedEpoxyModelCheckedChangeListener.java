@@ -95,6 +95,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //                              display_name epoxyHolder
 //                              signature_documentation java EpoxyViewHolder epoxyHolder
 //                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#onCheckedChanged().
+//                              kind Variable
 //                                ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ListenersUtils#
 //                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ListenersUtils#getEpoxyHolderForChildView().
 //                                                                          ^^^^^^ reference local 1
@@ -114,6 +115,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //                            display_name adapterPosition
 //                            signature_documentation java final int adapterPosition
 //                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#onCheckedChanged().
+//                            kind Variable
 //                              ^^^^^^^^^^^ reference local 3
 //                                          ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getAdapterPosition#
     if (adapterPosition != RecyclerView.NO_POSITION) {
@@ -167,6 +169,7 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //           display_name that
 //           signature_documentation java WrappedEpoxyModelCheckedChangeListener<?, ?> that
 //           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#equals().
+//           kind Variable
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#
 //                                                            ^ reference local 5
 

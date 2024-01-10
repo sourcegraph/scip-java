@@ -270,6 +270,7 @@ public abstract class BaseEpoxyAdapter
 //                      display_name model
 //                      signature_documentation java EpoxyModel<?> model
 //                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onCreateViewHolder().
+//                      kind Variable
 //                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#viewTypeManager.
 //                                        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewTypeManager#getModelForViewType().
 //                                                                  ^^^^^^^^ reference local 4
@@ -279,6 +280,7 @@ public abstract class BaseEpoxyAdapter
 //            display_name view
 //            signature_documentation java unresolved_type view
 //            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onCreateViewHolder().
+//            kind Variable
 //              ^^^^^ reference local 5
 //                    ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#buildView().
 //                              ^^^^^^ reference local 3
@@ -342,6 +344,7 @@ public abstract class BaseEpoxyAdapter
 //                            display_name modelToShow
 //                            signature_documentation java EpoxyModel<?> modelToShow
 //                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onBindViewHolder(+1).
+//                            kind Variable
 //                              ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getModelForPosition().
 //                                                  ^^^^^^^^ reference local 10
 
@@ -351,6 +354,7 @@ public abstract class BaseEpoxyAdapter
 //                                     display_name previouslyBoundModel
 //                                     signature_documentation java EpoxyModel<?> previouslyBoundModel
 //                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onBindViewHolder(+1).
+//                                     kind Variable
     if (diffPayloadsEnabled()) {
 //      ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#diffPayloadsEnabled().
       previouslyBoundModel = DiffPayload.getModelFromPayload(payloads, getItemId(position));
@@ -576,6 +580,7 @@ public abstract class BaseEpoxyAdapter
 //                      display_name model
 //                      signature_documentation java EpoxyModel<?> model
 //                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onViewRecycled().
+//                      kind Variable
 //                        ^^^^^^ reference local 26
 //                               ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getModel().
     holder.unbind();
@@ -728,6 +733,7 @@ public abstract class BaseEpoxyAdapter
 //                              display_name holder
 //                              signature_documentation java EpoxyViewHolder holder
 //                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#onSaveInstanceState().
+//                              kind Variable
 //                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#boundViewHolders.
       viewHolderState.save(holder);
 //    ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#viewHolderState.
@@ -813,6 +819,7 @@ public abstract class BaseEpoxyAdapter
 //           display_name size
 //           signature_documentation java int size
 //           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
+//           kind Variable
 //             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
 //                                ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
     for (int i = 0; i < size; i++) {
@@ -820,6 +827,7 @@ public abstract class BaseEpoxyAdapter
 //             display_name i
 //             signature_documentation java int i
 //             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getModelPosition().
+//             kind Variable
 //                  ^ reference local 39
 //                      ^^^^ reference local 38
 //                            ^ reference local 39

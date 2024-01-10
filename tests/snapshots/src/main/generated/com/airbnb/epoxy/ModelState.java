@@ -86,6 +86,7 @@ class ModelState {
 //                   display_name state
 //                   signature_documentation java ModelState state
 //                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ModelState#build().
+//                   kind Variable
 //                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelState#`<init>`().
 
     state.lastMoveOp = 0;

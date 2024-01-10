@@ -232,12 +232,14 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                    display_name saveState
 //                    signature_documentation java boolean saveState
 //                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+2).
+//                    kind Variable
     for (EpoxyModel<?> model : models) {
 //       ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                     ^^^^^ definition local 7
 //                           display_name model
 //                           signature_documentation java EpoxyModel<?> model
 //                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#`<init>`(+2).
+//                           kind Variable
 //                             ^^^^^^ reference local 5
       if (model.shouldSaveViewState()) {
 //        ^^^^^ reference local 7
@@ -473,6 +475,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                                      display_name previousGroup
 //                                      signature_documentation java final EpoxyModelGroup previousGroup
 //                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#bind(+2).
+//                                      kind Variable
 //                                         ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#
 //                                                          ^^^^^^^^^^^^^^^^^^^^ reference local 24
 
@@ -519,6 +522,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                                    display_name previousModel
 //                                    signature_documentation java EpoxyModel<?> previousModel
 //                                    enclosing_symbol local 27
+//                                    kind Variable
 //                                      ^^^^^^^^^^^^^ reference local 25
 //                                                    ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#models.
 //                                                           ^^^ reference semanticdb maven jdk 11 java/util/List#get().
@@ -736,6 +740,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                 display_name modelCount
 //                 signature_documentation java int modelCount
 //                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#iterateModels().
+//                 kind Variable
 //                   ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#models.
 //                          ^^^^ reference semanticdb maven jdk 11 java/util/List#size().
 
@@ -744,6 +749,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //             display_name i
 //             signature_documentation java int i
 //             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#iterateModels().
+//             kind Variable
 //                  ^ reference local 50
 //                      ^^^^^^^^^^ reference local 49
 //                                  ^ reference local 50
@@ -952,6 +958,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //                       display_name that
 //                       signature_documentation java EpoxyModelGroup that
 //                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#equals().
+//                       kind Variable
 //                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#
 //                                           ^ reference local 61
 
@@ -976,6 +983,7 @@ public class EpoxyModelGroup extends EpoxyModelWithHolder<ModelGroupHolder> {
 //             display_name result
 //             signature_documentation java int result
 //             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#hashCode().
+//             kind Variable
 //               ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModelGroup#super.
 //                     ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#hashCode().
     result = 31 * result + models.hashCode();

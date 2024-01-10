@@ -261,12 +261,14 @@ class AsyncEpoxyDiffer {
 //                                display_name interruptedDiff
 //                                signature_documentation java final boolean interruptedDiff
 //                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#forceListOverride().
+//                                kind Variable
 //                                  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#cancelDiff().
     int generation = generationTracker.incrementAndGetNextScheduled();
 //      ^^^^^^^^^^ definition local 6
 //                 display_name generation
 //                 signature_documentation java int generation
 //                 enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#forceListOverride().
+//                 kind Variable
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#generationTracker.
 //                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#incrementAndGetNextScheduled().
     tryLatchList(newList, generation);
@@ -309,6 +311,7 @@ class AsyncEpoxyDiffer {
 //                          display_name runGeneration
 //                          signature_documentation java final int runGeneration
 //                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#submitList().
+//                          kind Variable
     @Nullable final List<? extends EpoxyModel<?>> previousList;
 //   ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                  ^^^^ reference semanticdb maven jdk 11 java/util/List#
@@ -317,6 +320,7 @@ class AsyncEpoxyDiffer {
 //                                                             display_name previousList
 //                                                             signature_documentation java @Nullable\nfinal List<? extends EpoxyModel<?>> previousList
 //                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#submitList().
+//                                                             kind Variable
 
     synchronized (this) {
       // Incrementing generation means any currently-running diffs are discarded when they finish
@@ -355,6 +359,7 @@ class AsyncEpoxyDiffer {
 //                      display_name result
 //                      signature_documentation java DiffResult result
 //                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#submitList().
+//                      kind Variable
       if (previousList != null && !previousList.isEmpty()) {
 //        ^^^^^^^^^^^^ reference local 9
 //                                 ^^^^^^^^^^^^ reference local 9
@@ -393,6 +398,7 @@ class AsyncEpoxyDiffer {
 //                                     display_name wrappedCallback
 //                                     signature_documentation java final DiffCallback wrappedCallback
 //                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#submitList().
+//                                     kind Variable
 //                                           ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#DiffCallback#`<init>`().
 //                                                        ^^^^^^^^^^^^ reference local 9
 //                                                                      ^^^^^^^ reference local 7
@@ -418,6 +424,7 @@ class AsyncEpoxyDiffer {
 //                                 display_name result
 //                                 signature_documentation java unresolved_type result
 //                                 enclosing_symbol local 13
+//                                 kind Variable
 //                                   ^^^^^^^^ reference semanticdb maven . . DiffUtil#
 //                                            ^^^^^^^^^^^^^ reference semanticdb maven . . DiffUtil#calculateDiff#
 //                                                          ^^^^^^^^^^^^^^^ reference local 11
@@ -482,6 +489,7 @@ class AsyncEpoxyDiffer {
 //                                   display_name dispatchResult
 //                                   signature_documentation java final boolean dispatchResult
 //                                   enclosing_symbol local 19
+//                                   kind Variable
 //                                     ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#tryLatchList().
 //                                                  ^^^^^^^ reference local 16
 //                                                           ^^^^^^^^^^^^^ reference local 15
@@ -604,6 +612,7 @@ class AsyncEpoxyDiffer {
 //                           display_name isInterrupting
 //                           signature_documentation java boolean isInterrupting
 //                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#finishMaxGeneration().
+//                           kind Variable
 //                             ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#hasUnfinishedGeneration().
       maxFinishedGeneration = maxScheduledGeneration;
 //    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#maxFinishedGeneration.
@@ -636,6 +645,7 @@ class AsyncEpoxyDiffer {
 //                               display_name isLatestGeneration
 //                               signature_documentation java boolean isLatestGeneration
 //                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#finishGeneration().
+//                               kind Variable
           maxScheduledGeneration == runGeneration && runGeneration > maxFinishedGeneration;
 //        ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyDiffer#GenerationTracker#maxScheduledGeneration.
 //                                  ^^^^^^^^^^^^^ reference local 24

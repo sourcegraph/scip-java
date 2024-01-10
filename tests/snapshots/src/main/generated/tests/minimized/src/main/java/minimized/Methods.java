@@ -88,12 +88,14 @@ public class Methods {
 //                  display_name methods
 //                  signature_documentation java Methods methods
 //                  enclosing_symbol semanticdb maven . . minimized/Methods#app().
+//                  kind Variable
 //                        ^^^^^^^ reference semanticdb maven . . minimized/Methods#`<init>`().
     int a = staticOverload(n);
 //      ^ definition local 7
 //        display_name a
 //        signature_documentation java int a
 //        enclosing_symbol semanticdb maven . . minimized/Methods#app().
+//        kind Variable
 //          ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/Methods#staticOverload().
 //                         ^ reference local 4
     String b = staticOverload(m);
@@ -102,6 +104,7 @@ public class Methods {
 //           display_name b
 //           signature_documentation java String b
 //           enclosing_symbol semanticdb maven . . minimized/Methods#app().
+//           kind Variable
 //             ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/Methods#staticOverload(+1).
 //                            ^ reference local 5
     int c = methods.overload(n);
@@ -109,6 +112,7 @@ public class Methods {
 //        display_name c
 //        signature_documentation java int c
 //        enclosing_symbol semanticdb maven . . minimized/Methods#app().
+//        kind Variable
 //          ^^^^^^^ reference local 6
 //                  ^^^^^^^^ reference semanticdb maven . . minimized/Methods#overload().
 //                           ^ reference local 4
@@ -118,6 +122,7 @@ public class Methods {
 //           display_name d
 //           signature_documentation java String d
 //           enclosing_symbol semanticdb maven . . minimized/Methods#app().
+//           kind Variable
 //             ^^^^^^^ reference local 6
 //                     ^^^^^^^^ reference semanticdb maven . . minimized/Methods#overload(+1).
 //                              ^ reference local 5

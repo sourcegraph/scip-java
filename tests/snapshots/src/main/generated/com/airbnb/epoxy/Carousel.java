@@ -247,6 +247,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                       display_name defaultSpacingDp
 //                       signature_documentation java int defaultSpacingDp
 //                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#init().
+//                       kind Variable
 //                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#getDefaultSpacingBetweenItemsDp().
 
     if (defaultSpacingDp >= 0) {
@@ -276,6 +277,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                                      display_name snapHelperFactory
 //                                      signature_documentation java SnapHelperFactory snapHelperFactory
 //                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#init().
+//                                      kind Variable
 //                                        ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#getSnapHelperFactory().
     if (snapHelperFactory != null) {
 //      ^^^^^^^^^^^^^^^^^ reference local 10
@@ -439,6 +441,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                    display_name prefetchCount
 //                    signature_documentation java int prefetchCount
 //                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#setInitialPrefetchItemCount().
+//                    kind Variable
 //                      ^^^^^^^^^^^^^^^^^^ reference local 14
 //                                                    ^^^^^^^^^^^^^^^^^^ reference local 14
 
@@ -448,6 +451,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                              display_name layoutManager
 //                              signature_documentation java unresolved_type layoutManager
 //                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#setInitialPrefetchItemCount().
+//                              kind Variable
 //                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#getLayoutManager#
     if (layoutManager instanceof LinearLayoutManager) {
 //      ^^^^^^^^^^^^^ reference local 16
@@ -481,6 +485,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                                             display_name childLayoutParams
 //                                             signature_documentation java unresolved_type childLayoutParams
 //                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#onChildAttachedToWindow().
+//                                             kind Variable
 //                                               ^^^^^ reference local 17
 //                                                     ^^^^^^^^^^^^^^^ reference semanticdb maven . . View#getLayoutParams#
       child.setTag(R.id.epoxy_recycler_view_child_initial_size_id, childLayoutParams.width);
@@ -497,6 +502,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                      display_name itemSpacingPx
 //                      signature_documentation java int itemSpacingPx
 //                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#onChildAttachedToWindow().
+//                      kind Variable
 //                        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#getSpacingDecorator#
 //                                              ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#getSpacingDecorator#getPxBetweenItems#
       int spaceBetweenItems = 0;
@@ -504,6 +510,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                          display_name spaceBetweenItems
 //                          signature_documentation java int spaceBetweenItems
 //                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#onChildAttachedToWindow().
+//                          kind Variable
       if (itemSpacingPx > 0) {
 //        ^^^^^^^^^^^^^ reference local 19
         // The item decoration space is not counted in the width of the view
@@ -518,6 +525,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                                    display_name isScrollingHorizontally
 //                                    signature_documentation java boolean isScrollingHorizontally
 //                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#onChildAttachedToWindow().
+//                                    kind Variable
 //                                      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#getLayoutManager#
 //                                                         ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#getLayoutManager#canScrollHorizontally#
       int itemSizeInScrollingDirection =
@@ -525,6 +533,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                                     display_name itemSizeInScrollingDirection
 //                                     signature_documentation java int itemSizeInScrollingDirection
 //                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#onChildAttachedToWindow().
+//                                     kind Variable
           (int)
               ((getSpaceForChildren(isScrollingHorizontally) - spaceBetweenItems)
 //              ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#getSpaceForChildren().
@@ -618,6 +627,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                         display_name metrics
 //                         signature_documentation java unresolved_type metrics
 //                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#getTotalWidthPx().
+//                         kind Variable
 //                           ^^^^ reference local 24
 //                                ^^^^^^^^^^ reference semanticdb maven . . View#getContext#
 //                                             ^^^^^^^^^^^^ reference semanticdb maven . . View#getContext#getResources#
@@ -662,6 +672,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                         display_name metrics
 //                         signature_documentation java unresolved_type metrics
 //                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#getTotalHeightPx().
+//                         kind Variable
 //                           ^^^^ reference local 26
 //                                ^^^^^^^^^^ reference semanticdb maven . . View#getContext#
 //                                             ^^^^^^^^^^^^ reference semanticdb maven . . View#getContext#getResources#
@@ -690,6 +701,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                      display_name initialWidth
 //                      signature_documentation java Object initialWidth
 //                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#onChildDetachedFromWindow().
+//                      kind Variable
 //                        ^^^^^ reference local 28
 //                              ^^^^^^ reference semanticdb maven . . View#getTag#
 //                                     ^ reference semanticdb maven . . R/
@@ -706,6 +718,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                                  display_name params
 //                                  signature_documentation java unresolved_type params
 //                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#onChildDetachedFromWindow().
+//                                  kind Variable
 //                                    ^^^^^ reference local 28
 //                                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . View#getLayoutParams#
       params.width = (int) initialWidth;
@@ -789,6 +802,7 @@ public class Carousel extends EpoxyRecyclerView {
 //         display_name px
 //         signature_documentation java int px
 //         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#setPaddingRes().
+//         kind Variable
 //           ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#resToPx#
 //                   ^^^^^^^^^^ reference local 32
     setPadding(px, px, px, px);
@@ -831,6 +845,7 @@ public class Carousel extends EpoxyRecyclerView {
 //         display_name px
 //         signature_documentation java int px
 //         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#setPaddingDp().
+//         kind Variable
 //           ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#dpToPx#
 //                  ^^^^^^^^^ reference local 34
 //                               ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#NO_VALUE_SET.
@@ -1401,6 +1416,7 @@ public class Carousel extends EpoxyRecyclerView {
 //                    display_name padding
 //                    signature_documentation java Padding padding
 //                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#equals().
+//                    kind Variable
 //                       ^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#
 //                                ^ reference local 64
 
@@ -1447,6 +1463,7 @@ public class Carousel extends EpoxyRecyclerView {
 //               display_name result
 //               signature_documentation java int result
 //               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#hashCode().
+//               kind Variable
 //                 ^^^^ reference semanticdb maven . . com/airbnb/epoxy/Carousel#Padding#left.
       result = 31 * result + top;
 //    ^^^^^^ reference local 66

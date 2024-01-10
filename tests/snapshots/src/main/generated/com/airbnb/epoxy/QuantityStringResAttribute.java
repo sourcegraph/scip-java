@@ -187,6 +187,7 @@ public class QuantityStringResAttribute {
 //                                  display_name that
 //                                  signature_documentation java QuantityStringResAttribute that
 //                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#equals().
+//                                  kind Variable
 //                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#
 //                                                                 ^ reference local 6
 
@@ -224,6 +225,7 @@ public class QuantityStringResAttribute {
 //             display_name result
 //             signature_documentation java int result
 //             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#hashCode().
+//             kind Variable
 //               ^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#id.
     result = 31 * result + quantity;
 //  ^^^^^^ reference local 8

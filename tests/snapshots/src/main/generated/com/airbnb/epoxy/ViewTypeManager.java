@@ -102,6 +102,7 @@ class ViewTypeManager {
 //                      display_name defaultViewType
 //                      signature_documentation java int defaultViewType
 //                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewTypeManager#getViewType().
+//                      kind Variable
 //                        ^^^^^ reference local 1
 //                              ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#getViewType().
     if (defaultViewType != 0) {
@@ -118,6 +119,7 @@ class ViewTypeManager {
 //                   display_name modelClass
 //                   signature_documentation java Class modelClass
 //                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewTypeManager#getViewType().
+//                   kind Variable
 //                     ^^^^^ reference local 1
 //                           ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#getClass().
 
@@ -127,6 +129,7 @@ class ViewTypeManager {
 //                   display_name viewType
 //                   signature_documentation java Integer viewType
 //                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewTypeManager#getViewType().
+//                   kind Variable
 //                     ^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ViewTypeManager#VIEW_TYPE_MAP.
 //                                   ^^^ reference semanticdb maven jdk 11 java/util/Map#get().
 //                                       ^^^^^^^^^^ reference local 3
@@ -203,6 +206,7 @@ class ViewTypeManager {
 //                           display_name model
 //                           signature_documentation java EpoxyModel<?> model
 //                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewTypeManager#getModelForViewType().
+//                           kind Variable
 //                             ^^^^^^^ reference local 5
 //                                     ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyAdapter#getCurrentModels().
       if (getViewType(model) == viewType) {
@@ -221,6 +225,7 @@ class ViewTypeManager {
 //                                    display_name hiddenEpoxyModel
 //                                    signature_documentation java HiddenEpoxyModel hiddenEpoxyModel
 //                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/ViewTypeManager#getModelForViewType().
+//                                    kind Variable
 //                                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/HiddenEpoxyModel#`<init>`().
     if (viewType == hiddenEpoxyModel.getViewType()) {
 //      ^^^^^^^^ reference local 6
