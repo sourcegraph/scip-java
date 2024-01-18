@@ -257,7 +257,7 @@ lazy val cli = project
         "com.lihaoyi" %% "requests" % V.requests,
         "org.scalameta" %% "moped" % V.moped,
         "org.scalameta" %% "ascii-graphs" % "0.1.2",
-        "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % "1.8.21"
+        "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % "1.9.22"
       ),
     (Compile / resourceGenerators) +=
       Def
