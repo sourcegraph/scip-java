@@ -12,7 +12,7 @@ public interface EpoxyDragCallback<T extends EpoxyModel> extends BaseEpoxyTouchC
 //               ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#
 //                                 documentation ```java\npublic interface EpoxyDragCallback<T extends EpoxyModel>\n```
 //                                 documentation  For use with {@link EpoxyModelTouchCallback}\n
-//                                 relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
+//                                 relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
 //                                 ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#[T]
 //                                   documentation ```java\nT extends EpoxyModel\n```
 //                                           ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#

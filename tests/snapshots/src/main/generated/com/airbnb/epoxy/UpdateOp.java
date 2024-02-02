@@ -44,7 +44,7 @@ class UpdateOp {
   @interface Type {
 //           ^^^^ definition semanticdb maven . . com/airbnb/epoxy/UpdateOp#Type#
 //                documentation ```java\n@IntDef({ADD, REMOVE, UPDATE, MOVE})\n@Retention(RetentionPolicy.SOURCE)\n@interface Type\n```
-//                relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//                relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
   }
 
   static final int ADD = 0;

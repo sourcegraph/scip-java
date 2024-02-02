@@ -22,7 +22,7 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
 //               ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#
 //                                  documentation ```java\npublic interface EpoxySwipeCallback<T extends EpoxyModel>\n```
 //                                  documentation  For use with {@link EpoxyModelTouchCallback}\n
-//                                  relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
+//                                  relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
 //                                  ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#[T]
 //                                    documentation ```java\nT extends EpoxyModel\n```
 //                                            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#

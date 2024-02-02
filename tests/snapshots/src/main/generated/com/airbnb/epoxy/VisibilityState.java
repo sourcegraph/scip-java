@@ -44,7 +44,7 @@ public final class VisibilityState {
   public @interface Visibility {
 //                  ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/VisibilityState#Visibility#
 //                             documentation ```java\n@Retention(RetentionPolicy.SOURCE)\n@IntDef({VISIBLE, INVISIBLE, FOCUSED_VISIBLE, UNFOCUSED_VISIBLE, FULL_IMPRESSION_VISIBLE, PARTIAL_IMPRESSION_VISIBLE, PARTIAL_IMPRESSION_INVISIBLE})\npublic @interface Visibility\n```
-//                             relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//                             relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
   }
 
   /**
