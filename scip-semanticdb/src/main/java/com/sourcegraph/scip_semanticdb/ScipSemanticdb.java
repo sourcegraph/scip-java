@@ -441,6 +441,8 @@ public class ScipSemanticdb {
 
   private static boolean supportsReferenceRelationship(SymbolInformation info) {
     switch (info.getKind()) {
+      case INTERFACE:
+      case TYPE:
       case CLASS:
       case OBJECT:
       case PACKAGE_OBJECT:

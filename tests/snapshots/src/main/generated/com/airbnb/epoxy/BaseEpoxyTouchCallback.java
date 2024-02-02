@@ -8,8 +8,6 @@ import android.view.View;
 interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
 //        ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
 //                               documentation ```java\ninterface BaseEpoxyTouchCallback<T extends EpoxyModel>\n```
-//                               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#
-//                               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#
 //                               ^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
 //                                 documentation ```java\nT extends EpoxyModel\n```
 //                                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#

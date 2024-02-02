@@ -53,7 +53,7 @@ import static java.lang.annotation.ElementType.*;
 public @interface Annotations {
 //                ^^^^^^^^^^^ definition semanticdb maven . . minimized/Annotations#
 //                            documentation ```java\n@Documented\n@Retention(RetentionPolicy.RUNTIME)\n@Target({CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})\npublic @interface Annotations\n```
-//                            relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//                            relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
 
   String value() default "";
 //^^^^^^ reference semanticdb maven jdk 11 java/lang/String#

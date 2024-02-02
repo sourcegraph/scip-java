@@ -302,7 +302,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 // ^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/IntDef#
 //         ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#
 //                                 documentation ```java\n@Retention(RetentionPolicy.SOURCE)\n@IntDef({RequestedModelBuildType.NONE, RequestedModelBuildType.NEXT_FRAME, RequestedModelBuildType.DELAYED})\nprivate @interface RequestedModelBuildType\n```
-//                                 relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//                                 relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
 //         ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#
 //                                 ^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#NONE.
       RequestedModelBuildType.NEXT_FRAME,
