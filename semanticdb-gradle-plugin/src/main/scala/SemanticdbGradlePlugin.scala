@@ -52,7 +52,6 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
       val sourceRoot = project.getRootDir()
       val agentJar = extraProperties.get("javacAgentPath").map(_.toString)
 
-
       val tasks = project.getTasks()
 
       // List of compilation commands that we will need to trigger
@@ -79,19 +78,23 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         val compilerPluginAdded =
           try {
             project.getDependencies().add("compileOnly", javacPluginDep)
-            if (hasAnnotationPath)
-              project.getDependencies().add("annotationProcessor", javacPluginDep)
+
+            if (hasAnnotationPath) {
+              project
+                .getDependencies()
+                .add("annotationProcessor", javacPluginDep)
+            }
+
             project.getDependencies().add("testCompileOnly", javacPluginDep)
+
             true
           } catch {
             case exc: Exception =>
               // If the `compileOnly` configuration has already been evaluated
               // by the build, we need to fallback on agent injected into javac
-              System
-                .err
-                .println(
-                  s"Failed to add compiler plugin to javac, will go through the agent route: ${exc.getMessage()}"
-                )
+              warn(
+                s"Failed to add compiler plugin to javac, will go through the agent route: ${exc.getMessage()}"
+              )
               false
           }
 
@@ -158,10 +161,12 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
             task.getOptions().setIncremental(false)
 
             if (compilerPluginAdded) {
-              task
-                .getOptions()
-                .getCompilerArgs()
-                .addAll(
+              val args = task.getOptions().getCompilerArgs()
+
+              // It's important we don't add the plugin configuration more than
+              // once, as javac considers that an error
+              if (!args.asScala.exists(_.startsWith("-Xplugin:semanticdb"))) {
+                args.addAll(
                   List(
                     // We add this to ensure that the sources are _always_
                     // recompiled, so that Gradle doesn't cache any state
@@ -171,6 +176,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                     s"-Xplugin:semanticdb -targetroot:$targetRoot -sourceroot:$sourceRoot -randomtimestamp=${System.nanoTime()}"
                   ).asJava
                 )
+              }
             }
 
             /**
