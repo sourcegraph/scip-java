@@ -21,6 +21,8 @@ import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.scala.ScalaCompile
 
 class SemanticdbGradlePlugin extends Plugin[Project] {
+  import Logging._
+
   override def apply(project: Project): Unit = {
     val gradle = new GradleVersion(project.getGradle().getGradleVersion())
     project.afterEvaluate { project =>
@@ -41,7 +43,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         .get("javacPluginJar")
         .map(_.asInstanceOf[String])
 
-      val javacDep = javacPluginJar
+      val javacPluginDep = javacPluginJar
         .map[Object](jar => project.files(jar))
         // we fallback to javac plugin published to maven if there is no jar specified
         // the JAR would usually be provided by auto-indexer
@@ -49,6 +51,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
 
       val sourceRoot = project.getRootDir()
       val agentJar = extraProperties.get("javacAgentPath").map(_.toString)
+
 
       val tasks = project.getTasks()
 
@@ -75,10 +78,10 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
 
         val compilerPluginAdded =
           try {
-            project.getDependencies().add("compileOnly", javacDep)
+            project.getDependencies().add("compileOnly", javacPluginDep)
             if (hasAnnotationPath)
-              project.getDependencies().add("annotationProcessor", javacDep)
-            project.getDependencies().add("testCompileOnly", javacDep)
+              project.getDependencies().add("annotationProcessor", javacPluginDep)
+            project.getDependencies().add("testCompileOnly", javacPluginDep)
             true
           } catch {
             case exc: Exception =>
@@ -399,6 +402,8 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
 }
 
 class WriteDependencies extends DefaultTask {
+  import Logging._
+
   @TaskAction
   def printResolvedDependencies(): Unit = {
 
@@ -411,10 +416,19 @@ class WriteDependencies extends DefaultTask {
 
     val deps = List.newBuilder[String]
     val project = getProject()
+    val projectName = project.getName()
 
     // List the project itself as a dependency so that we can assign project name/version to symbols that are defined in this project.
     // The code below is roughly equivalent to the following with Groovy:
     //   deps += "$publication.groupId $publication.artifactId $publication.version $sourceSets.main.output.classesDirectory"
+
+    val crossRepoBanner =
+      """
+      |This will not prevent a SCIP index from being created, but the symbols 
+      |extracted from this project won't be available for cross-repository navigation,
+      |as this project doesn't define any Maven coordinates by which it can be referred back to.
+      |See here for more details: https://sourcegraph.github.io/scip-java/docs/manual-configuration.html#step-5-optional-enable-cross-repository-navigation
+      """
 
     Try(
       project
@@ -425,45 +439,58 @@ class WriteDependencies extends DefaultTask {
         .asScala
     ) match {
       case Failure(exception) =>
-        System
-          .err
-          .println(
-            s"""
-               |Failed to extract Maven publication from the project `${project
-              .getName()}`. 
-               |This will not prevent a SCIP index from being created, but the symbols 
-               |extracted from this project won't be available for cross-repository navigation,
-               |as this project doesn't define any Maven coordinates by which it can be referred back to.
-               |See here for more details: https://sourcegraph.github.io/scip-java/docs/manual-configuration.html#step-5-optional-enable-cross-repository-navigation
-               |Here's the raw error message:
-               |  "${exception.getMessage()}"
-               |Continuing without cross-repository support.
-          """.stripMargin.trim()
-          )
+        warn(s"""
+                |Failed to extract Maven publication from the project `$projectName`. 
+                $crossRepoBanner
+                |Here's the raw error message:
+                |  "${exception.getMessage()}"
+                |Continuing without cross-repository support.
+          """.stripMargin.trim())
 
       case Success(publications) =>
         publications.foreach { publication =>
-          project
-            .getExtensions()
-            .getByType(classOf[SourceSetContainer])
-            .getByName("main")
-            .getOutput()
-            .getClassesDirs()
-            .getFiles()
-            .asScala
-            .toList
-            .map(_.getAbsolutePath())
-            .sorted
-            .take(1)
-            .foreach { classesDirectory =>
-              deps +=
-                List(
-                  publication.getGroupId(),
-                  publication.getArtifactId(),
-                  publication.getVersion(),
-                  classesDirectory
-                ).mkString("\t")
-            }
+          Try(
+            project
+              .getExtensions()
+              .getByType(classOf[SourceSetContainer])
+              .getByName("main")
+          ) match {
+            case Failure(exception) =>
+              val publicationName = List(
+                publication.getGroupId(),
+                publication.getArtifactId(),
+                publication.getVersion()
+              ).mkString(":")
+
+              warn(s"""
+                      |Failed to extract `main` source set from publication `${publicationName}` in project `$projectName``. 
+                            $crossRepoBanner
+                      |Here's the raw error message:
+                      |  "${exception.getMessage()}"
+                      |Continuing without cross-repository support.
+                """.stripMargin.trim())
+
+            case Success(value) =>
+              value
+                .getOutput()
+                .getClassesDirs()
+                .getFiles()
+                .asScala
+                .toList
+                .map(_.getAbsolutePath())
+                .sorted
+                .take(1)
+                .foreach { classesDirectory =>
+                  deps +=
+                    List(
+                      publication.getGroupId(),
+                      publication.getArtifactId(),
+                      publication.getVersion(),
+                      classesDirectory
+                    ).mkString("\t")
+                }
+
+          }
         }
     }
 
@@ -510,4 +537,13 @@ class WriteDependencies extends DefaultTask {
         )
     }
   }
+}
+
+private object Logging {
+  def info(msg: Any*) =
+    System.err.println(s"[INFO] [scip-java.gradle] ${msg.mkString(" ")}")
+
+  def warn(msg: Any*) =
+    System.err.println(s"[INFO] [scip-java.gradle] ${msg.mkString(" ")}")
+
 }
