@@ -550,6 +550,6 @@ private object Logging {
     System.err.println(s"[INFO] [scip-java.gradle] ${msg.mkString(" ")}")
 
   def warn(msg: Any*) =
-    System.err.println(s"[INFO] [scip-java.gradle] ${msg.mkString(" ")}")
+    System.err.println(s"[WARNING] [scip-java.gradle] ${msg.mkString(" ")}")
 
 }
