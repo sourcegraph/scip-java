@@ -84,9 +84,11 @@ public class SemanticdbTrees {
         AssignmentTree assign = (AssignmentTree) param;
         ExpressionTree assignValue = assign.getExpression();
         TreePath variableTreePath = nodes.get(assign.getVariable());
-        Element variableSym = trees.getElement(variableTreePath);
-        String symbol = globals.semanticdbSymbol(variableSym, locals);
-        params.add(tree(assignTree(tree(idTree(symbol)), annotationParameter(assignValue))));
+        if (variableTreePath != null) {
+          Element variableSym = trees.getElement(variableTreePath);
+          String symbol = globals.semanticdbSymbol(variableSym, locals);
+          params.add(tree(assignTree(tree(idTree(symbol)), annotationParameter(assignValue))));
+        }
       } else {
         params.add(annotationParameter(param));
       }
