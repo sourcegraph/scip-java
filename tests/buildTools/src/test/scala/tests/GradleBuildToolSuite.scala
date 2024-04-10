@@ -8,7 +8,7 @@ class Gradle_6_BuildToolSuite extends GradleBuildToolSuite(List(Gradle67))
 class Gradle_5_BuildToolSuite extends GradleBuildToolSuite(List(Gradle5))
 
 object GradleBuildToolSuite {
-  val Gradle8 = "8.1.1"
+  val Gradle8 = "8.7" // Java 21 support from 8.4
   val Gradle7 = "7.6.1"
   val Gradle67 = "6.7" // Introduced toolchains
   val Gradle5 = "5.6.4"
@@ -16,7 +16,7 @@ object GradleBuildToolSuite {
 
 abstract class GradleBuildToolSuite(allGradle: List[String])
     extends GradleBuildToolSuiteBase(allGradle) {
-  val allJava = List("8", "11", "17")
+  val allJava = List(8, 11, 17, 21)
 
   checkGradleBuild(
     "annotation-path",

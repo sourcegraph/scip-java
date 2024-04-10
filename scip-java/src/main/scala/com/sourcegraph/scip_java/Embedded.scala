@@ -101,7 +101,7 @@ object Embedded {
         .forEach { line =>
           reporter.error(line)
         }
-      Some(CommandResult(1, Nil))
+      Some(CommandResult(Nil, 1, Nil))
     } else {
       None
     }

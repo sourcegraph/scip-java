@@ -128,7 +128,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
         } catch {
           case NonFatal(e) =>
             e.printStackTrace(index.app.out)
-            CommandResult(1, Nil)
+            CommandResult(Nil, 1, Nil)
         }
       case ErrorResult(error) =>
         error
@@ -136,7 +136,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
           .foreach { d =>
             index.app.error(d.message)
           }
-        CommandResult(1, Nil)
+        CommandResult(Nil, 1, Nil)
     }
   }
 
@@ -186,7 +186,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
             s"doing nothing, no files matching pattern '$sourceroot/**.{java,scala,kt}'"
           )
       }
-      return CommandResult(0, Nil)
+      return CommandResult(Nil, 0, Nil)
     }
 
     val compileAttempts = ListBuffer.empty[Try[Unit]]
@@ -206,7 +206,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       errors.foreach { error =>
         index.app.reporter.log(Diagnostic.exception(error))
       }
-      CommandResult(1, Nil)
+      CommandResult(Nil, 1, Nil)
     } else {
       if (errors.nonEmpty && isSemanticdbGenerated) {
         index
@@ -221,7 +221,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
           index.app.reporter.info(error.getMessage())
         }
       }
-      CommandResult(0, Nil)
+      CommandResult(Nil, 0, Nil)
     }
   }
 
