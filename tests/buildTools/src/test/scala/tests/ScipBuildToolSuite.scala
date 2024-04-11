@@ -139,7 +139,9 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
     ScalaCombination("2.11", V.scala211, V.scala211),
     ScalaCombination("2.12", V.scala212, V.scala212),
     ScalaCombination("2.13", V.scala213, V.scala213),
-    ScalaCombination("3", V.scala3, V.scala213)
+    // The Scala 2.13 version of the build and the Scala 2.13 version of 
+    // Scala 3's standard library are not necessarily aligned
+    ScalaCombination("3", V.scala3, "2.13.12")
   ).foreach { scala =>
     checkBuild(
       s"scala-${scala.fullVersion}",

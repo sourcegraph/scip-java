@@ -170,7 +170,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
 
   allJava.foreach { java =>
     checkGradleBuild(
-      if (java == "8")
+      if (java == 8)
         s"toolchains-$java".tag(Java8Only)
       else
         s"toolchains-$java",

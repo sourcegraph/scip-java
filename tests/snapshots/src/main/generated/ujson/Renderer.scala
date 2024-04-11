@@ -17,7 +17,7 @@ import upickle.core.{ArrVisitor, ObjVisitor, Visitor}
 import scala.annotation.switch
 //     ^^^^^ reference semanticdb maven . . scala/
 //           ^^^^^^^^^^ reference semanticdb maven . . scala/annotation/
-//                      ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/annotation/switch#
+//                      ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/annotation/switch#
 
 case class BytesRenderer(indent: Int = -1, escapeUnicode: Boolean = false)
 //         ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#
@@ -28,12 +28,12 @@ case class BytesRenderer(indent: Int = -1, escapeUnicode: Boolean = false)
 //                       documentation ```scala\ndef productElement(x$1: Int): Any\n```
 //                       relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#
 //                       relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer.apply().
-//                       relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//                       relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //         _____________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#productElementName().
 //                       documentation ```scala\ndef productElementName(x$1: Int): String\n```
 //                       relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#
 //                       relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer.apply().
-//                       relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//                       relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //         _____________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer.
 //                       documentation ```scala\nobject BytesRenderer\n```
 //                       relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#
@@ -45,7 +45,7 @@ case class BytesRenderer(indent: Int = -1, escapeUnicode: Boolean = false)
 //         _____________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer.apply().
 //                       documentation ```scala\ndef apply(indent: Int, escapeUnicode: Boolean): BytesRenderer\n```
 //                       relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#
-//                       relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Function2#apply().
+//                       relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function2#apply().
 //                      ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#`<init>`().
 //                        documentation ```scala\ndef this(indent: Int, escapeUnicode: Boolean)\n```
 //                       ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#indent.
@@ -68,7 +68,7 @@ case class BytesRenderer(indent: Int = -1, escapeUnicode: Boolean = false)
 //                              relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#`<init>`().(indent)
 //                              relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#copy().(indent)
 //                              relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#indent.
-//                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                         ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#escapeUnicode.
 //                                                       documentation ```scala\nval escapeUnicode: Boolean\n```
 //                                                       relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#`<init>`().(escapeUnicode)
@@ -89,7 +89,7 @@ case class BytesRenderer(indent: Int = -1, escapeUnicode: Boolean = false)
 //                                                       relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#copy().(escapeUnicode)
 //                                                       relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer#escapeUnicode.
 //                                                       relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BytesRenderer.apply().(escapeUnicode)
-//                                                        ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
+//                                                        ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
   extends BaseByteRenderer(new ByteArrayOutputStream(), indent, escapeUnicode){
 //        ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#
 //                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseByteRenderer#`<init>`().
@@ -116,17 +116,17 @@ case class StringRenderer(indent: Int = -1,
 //         ______________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer.apply().
 //                        documentation ```scala\ndef apply(indent: Int, escapeUnicode: Boolean): StringRenderer\n```
 //                        relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer#
-//                        relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Function2#apply().
+//                        relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function2#apply().
 //         ______________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer#productElement().
 //                        documentation ```scala\ndef productElement(x$1: Int): Any\n```
 //                        relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer#
 //                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer.apply().
-//                        relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//                        relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //         ______________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer#productElementName().
 //                        documentation ```scala\ndef productElementName(x$1: Int): String\n```
 //                        relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer#
 //                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer.apply().
-//                        relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//                        relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer#`<init>`().
 //                         documentation ```scala\ndef this(indent: Int, escapeUnicode: Boolean)\n```
 //                        ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer#indent.
@@ -149,7 +149,7 @@ case class StringRenderer(indent: Int = -1,
 //                               relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer#`<init>`().(indent)
 //                               relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer#copy().(indent)
 //                               relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer#indent.
-//                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
                           escapeUnicode: Boolean = false)
 //                        ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer#escapeUnicode.
 //                                      documentation ```scala\nval escapeUnicode: Boolean\n```
@@ -171,7 +171,7 @@ case class StringRenderer(indent: Int = -1,
 //                                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer#copy().(escapeUnicode)
 //                                      relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer#escapeUnicode.
 //                                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringRenderer.apply().(escapeUnicode)
-//                                       ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
+//                                       ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
   extends BaseCharRenderer(new java.io.StringWriter(), indent, escapeUnicode)
 //        ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#
 //                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#`<init>`().
@@ -194,12 +194,12 @@ case class Renderer(out: java.io.Writer,
 //         ________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer.apply().
 //                  documentation ```scala\ndef apply(out: Writer, indent: Int, escapeUnicode: Boolean): Renderer\n```
 //                  relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#
-//                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Function3#apply().
+//                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function3#apply().
 //         ________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#productElementName().
 //                  documentation ```scala\ndef productElementName(x$1: Int): String\n```
 //                  relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#
 //                  relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer.apply().
-//                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //         ________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#copy().
 //                  documentation ```scala\ndef copy(out: Writer, indent: Int, escapeUnicode: Boolean): Renderer\n```
 //                  relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#
@@ -208,7 +208,7 @@ case class Renderer(out: java.io.Writer,
 //                  documentation ```scala\ndef productElement(x$1: Int): Any\n```
 //                  relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#
 //                  relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer.apply().
-//                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#`<init>`().
 //                   documentation ```scala\ndef this(out: Writer, indent: Int, escapeUnicode: Boolean)\n```
 //                  ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#out.
@@ -255,7 +255,7 @@ case class Renderer(out: java.io.Writer,
 //                         relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#`<init>`().(indent)
 //                         relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#copy().(indent)
 //                         relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#indent.
-//                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
                     escapeUnicode: Boolean = false)
 //                  ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#escapeUnicode.
 //                                documentation ```scala\nval escapeUnicode: Boolean\n```
@@ -277,7 +277,7 @@ case class Renderer(out: java.io.Writer,
 //                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#copy().(escapeUnicode)
 //                                relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer#escapeUnicode.
 //                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Renderer.apply().(escapeUnicode)
-//                                 ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
+//                                 ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
   extends BaseCharRenderer(out, indent, escapeUnicode)
 //        ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#
 //                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/BaseCharRenderer#`<init>`().
