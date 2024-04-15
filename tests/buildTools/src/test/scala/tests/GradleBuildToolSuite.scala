@@ -1,21 +1,16 @@
 package tests
 
-import tests.GradleBuildToolSuite._
+import tests.Tool._
 
-class Gradle_8_BuildToolSuite extends GradleBuildToolSuite(List(Gradle8))
-class Gradle_7_BuildToolSuite extends GradleBuildToolSuite(List(Gradle7))
-class Gradle_6_BuildToolSuite extends GradleBuildToolSuite(List(Gradle67))
-class Gradle_5_BuildToolSuite extends GradleBuildToolSuite(List(Gradle5))
+class Gradle_8_BuildToolSuite extends GradleBuildToolSuite(Gradle8)
+class Gradle_7_BuildToolSuite extends GradleBuildToolSuite(Gradle7)
+class Gradle_6_BuildToolSuite extends GradleBuildToolSuite(Gradle6)
+class Gradle_5_BuildToolSuite extends GradleBuildToolSuite(Gradle5)
+class Gradle_3_BuildToolSuite extends GradleBuildToolSuite(Gradle3)
+class Gradle_2_BuildToolSuite extends GradleBuildToolSuite(Gradle2)
 
-object GradleBuildToolSuite {
-  val Gradle8 = "8.7" // Java 21 support from 8.4
-  val Gradle7 = "7.6.1"
-  val Gradle67 = "6.7" // Introduced toolchains
-  val Gradle5 = "5.6.4"
-}
-
-abstract class GradleBuildToolSuite(allGradle: List[String])
-    extends GradleBuildToolSuiteBase(allGradle) {
+abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
+    extends GradleBuildToolSuiteBase(gradle) {
   val allJava = List(8, 11, 17, 21)
 
   checkGradleBuild(
@@ -47,7 +42,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
     - /META-INF/semanticdb/src/main/java/WorkflowOptions.java.semanticdb
      */
     expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle8, Gradle7, Gradle67)
+    gradleVersions = List(Gradle8, Gradle7, Gradle6)
   )
 
   checkGradleBuild(
@@ -79,7 +74,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
     // See comment about immutable annotation processor above,
     // it explains why we expecte 2 semanticdb files
     expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle8, Gradle7, Gradle67)
+    gradleVersions = List(Gradle8, Gradle7, Gradle6)
   )
 
   checkGradleBuild(
@@ -107,7 +102,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
        |public abstract class ExampleClass {}
     """.stripMargin,
     expectedSemanticdbFiles = 1,
-    gradleVersions = List(Gradle8, Gradle7, Gradle67),
+    gradleVersions = List(Gradle8, Gradle7, Gradle6),
     expectedPackages = "maven:com.sourcegraph:example-library:1.1"
   )
 
@@ -165,7 +160,8 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
        |""".stripMargin,
     expectedSemanticdbFiles = 3,
     // Only add this test on Gradle 5 in the gradle 6 suite
-    gradleVersions = List(Gradle8, Gradle7, Gradle67, Gradle5)
+    gradleVersions = List(Gradle8, Gradle7, Gradle6, Gradle5),
+    tools = List(Scala2_13_8)
   )
 
   allJava.foreach { java =>
@@ -185,7 +181,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
           |public class Example {}
           |""".stripMargin,
       expectedSemanticdbFiles = 1,
-      gradleVersions = List(Gradle8, Gradle7, Gradle67)
+      gradleVersions = List(Gradle8, Gradle7, Gradle6)
     )
   }
 
@@ -224,7 +220,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
        |public class Example {}
        |""".stripMargin,
     expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle8, Gradle7, Gradle67)
+    gradleVersions = List(Gradle8, Gradle7, Gradle6)
   )
 
   checkGradleBuild(
@@ -240,7 +236,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
        |""".stripMargin,
     expectedSemanticdbFiles = 2,
     extraArguments = List("--build-tool", "gradle"),
-    gradleVersions = List(Gradle8, Gradle7, Gradle67)
+    gradleVersions = List(Gradle8, Gradle7, Gradle6)
   )
 
   checkGradleBuild(
@@ -254,7 +250,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
        |""".stripMargin,
     expectedSemanticdbFiles = 1,
     extraArguments = List("--", "compileJava"),
-    gradleVersions = List(Gradle8, Gradle7, Gradle67)
+    gradleVersions = List(Gradle8, Gradle7, Gradle6)
   )
 
   checkGradleBuild(
@@ -306,7 +302,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
        |""".stripMargin,
     expectedSemanticdbFiles =
       2, // Two files because `conf/routes` generates a Java file.
-    gradleVersions = List(Gradle67)
+    gradleVersions = List(Gradle6)
   )
 
   checkGradleBuild(
@@ -332,7 +328,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
        |public class ExampleSuite {}
        |""".stripMargin,
     expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle67)
+    gradleVersions = List(Gradle6)
   )
 
   checkGradleBuild(
@@ -361,7 +357,8 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
        |class ExampleSuite {}
        |""".stripMargin,
     expectedSemanticdbFiles = 4,
-    gradleVersions = List(Gradle8, Gradle7, Gradle67)
+    gradleVersions = List(Gradle8, Gradle7, Gradle6),
+    tools = List(Scala2_12_12)
   )
   checkGradleBuild(
     "kotlin",
@@ -386,7 +383,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
        |class ExampleSuite {}
        |""".stripMargin,
     expectedSemanticdbFiles = 4,
-    gradleVersions = List(Gradle67, Gradle7)
+    gradleVersions = List(Gradle6, Gradle7)
   )
 
   checkGradleBuild(
@@ -432,7 +429,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
          |maven:org.jetbrains:annotations:13.0
          |maven:org.slf4j:slf4j-api:1.7.36
          |""".stripMargin,
-    gradleVersions = List(Gradle8, Gradle7, Gradle67)
+    gradleVersions = List(Gradle8, Gradle7, Gradle6)
   )
 
   List("8", "11").foreach { java =>
@@ -456,7 +453,7 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
       expectedSemanticdbFiles = 1,
       // Older Kotlin gradle plugins don't support Gradle 8:
       // https://youtrack.jetbrains.com/issue/KT-55704/Cannot-use-TaskAction-annotation-on-method-AbstractKotlinCompile.execute-error-while-using-Gradle-8.0-rc-with-KGP-1.5.32
-      gradleVersions = List(Gradle67, Gradle7)
+      gradleVersions = List(Gradle6, Gradle7)
     )
   }
 
@@ -499,7 +496,22 @@ abstract class GradleBuildToolSuite(allGradle: List[String])
         expectedSemanticdbFiles = expectedSemanticdbFiles,
         // Older Kotlin gradle plugins don't support Gradle 8:
         // https://youtrack.jetbrains.com/issue/KT-55704/Cannot-use-TaskAction-annotation-on-method-AbstractKotlinCompile.execute-error-while-using-Gradle-8.0-rc-with-KGP-1.5.32
-        gradleVersions = List(Gradle67, Gradle7)
+        gradleVersions = List(Gradle6, Gradle7)
       )
   }
+
+  checkGradleBuild(
+    "legacy",
+    s"""|/build.gradle
+        |apply plugin: 'java'
+        |/src/main/java/Example.java
+        |public class Example {}
+        |/src/test/java/ExampleSuite.java
+        |public class ExampleSuite {}
+        |""".stripMargin,
+    expectedSemanticdbFiles = 2,
+    gradleVersions = List(Gradle3, Gradle2)
+    // NOTE(olafur): no packages because we use more modern APIs.
+  )
+
 }
