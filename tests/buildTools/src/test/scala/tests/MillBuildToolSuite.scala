@@ -6,7 +6,8 @@ import java.nio.file.StandardCopyOption
 import java.nio.file.attribute.PosixFilePermission
 
 import scala.jdk.CollectionConverters._
-import Tool._
+
+import tests.Tool._
 
 class MillBuildToolSuite extends BaseBuildToolSuite {
 
