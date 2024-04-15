@@ -7,7 +7,7 @@ abstract class SbtBuildToolSuite(sbt: Tool.SBT) extends BaseBuildToolSuite {
   import Tool._
 
   for {
-    scala <- List(Scala211, Scala212, Scala213, Scala3)
+    scala <- List(Scala211, Scala2_12_12, Scala2_13_8, Scala3)
   } yield {
     checkBuild(
       s"basic-${sbt.name}-${scala.name}",

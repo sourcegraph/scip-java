@@ -79,7 +79,7 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
       targetRoot: Option[String] = None,
       tools: List[Tool] = Nil
   ): Unit = {
-    val minJDK = Tool.minimalSupportedJdk(tools)
+    val minJDK = Tool.minimumSupportedJdk(tools)
     val maxJDK = Tool.maximumSupportedJdk(tools).getOrElse(Int.MaxValue)
     val externalJDKVersion = BaseBuildToolSuite.externalJavaVersion
 
