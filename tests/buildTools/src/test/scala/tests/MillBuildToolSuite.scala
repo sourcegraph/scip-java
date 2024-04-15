@@ -6,6 +6,7 @@ import java.nio.file.StandardCopyOption
 import java.nio.file.attribute.PosixFilePermission
 
 import scala.jdk.CollectionConverters._
+import Tool._
 
 class MillBuildToolSuite extends BaseBuildToolSuite {
 
@@ -30,13 +31,13 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
   def scalaLibrary(scalaVersion: String) =
     if (scalaVersion.startsWith("3"))
       List(
-        "maven:org.scala-lang:scala-library:2.13.8",
-        "maven:org.scala-lang:scala3-library_3:3.1.3"
+        "maven:org.scala-lang:scala-library:2.13.12",
+        "maven:org.scala-lang:scala3-library_3:3.3.3"
       ).mkString("\n")
     else if (scalaVersion.startsWith("2.13"))
       "maven:org.scala-lang:scala-library:2.13.8"
     else if (scalaVersion.startsWith("2.12"))
-      "maven:org.scala-lang:scala-library:2.12.16"
+      "maven:org.scala-lang:scala-library:2.12.19"
     else
       "idn fail, we don't cover this scala version"
 
@@ -50,24 +51,19 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
     else
       "idn fail, we don't cover this scala version"
 
-  val supportedMillVersions = List("0.10.6", "0.11.0")
-  val supportedScalaVersion = List("2.12.16", "2.13.8", "3.1.3")
+  for {
+    mill <- List(Mill0_10, Mill0_11)
+    scala <- List(Scala212, Scala2_13_8, Scala3)
+  } yield {
 
-  val testGroupings =
-    for {
-      millVersion <- supportedMillVersions
-      scalaVersion <- supportedScalaVersion
-    } yield (millVersion, scalaVersion)
-
-  testGroupings.foreach { case (millVersion, scalaVersion) =>
     checkBuild(
-      s"minimal-${millVersion}-${scalaVersion}",
+      s"minimal-${mill.name}-${scala.name}",
       s"""|/.mill-version
-          |${millVersion}
+          |${mill.version}
           |/build.sc
           |import mill._, scalalib._
           |object minimal extends ScalaModule {
-          |  def scalaVersion = "${scalaVersion}"
+          |  def scalaVersion = "${scala.version}"
           |  object test extends ScalaModuleTests with TestModule.Munit {
           |    def ivyDeps = Agg(ivy"org.scalameta::munit:1.0.0-M6")
           | }
@@ -87,20 +83,21 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
       expectedPackages =
         s"""|maven:junit:junit:4.13.2
             |maven:org.hamcrest:hamcrest-core:1.3
-            |${scalaLibrary(scalaVersion)}
+            |${scalaLibrary(scala.version)}
             |maven:org.scala-sbt:test-interface:1.0
             |maven:org.scalameta:junit-interface:1.0.0-M6
-            |maven:org.scalameta:munit_${scalaBinaryVersion(scalaVersion)}:1.0.0-M6
+            |maven:org.scalameta:munit_${scalaBinaryVersion(scala.version)}:1.0.0-M6
             |""".stripMargin,
-      initCommand = setupMill(millVersion),
-      targetRoot = Some("out/io/kipp/mill/scip/Scip/generate.dest")
+      initCommand = setupMill(mill.version),
+      targetRoot = Some("out/io/kipp/mill/scip/Scip/generate.dest"),
+      tools = List(mill, scala)
     )
   }
 
   checkBuild(
     "java-module",
     s"""|/.mill-version
-        |0.10.7
+        |${Mill0_10.version}
         |/build.sc
         |import mill._, scalalib._
         |object minimal extends JavaModule
@@ -115,26 +112,28 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
         |}
         |""".stripMargin,
     expectedSemanticdbFiles = 1,
-    initCommand = setupMill("0.10.7"),
-    targetRoot = Some("out/io/kipp/mill/scip/Scip/generate.dest")
+    initCommand = setupMill(Mill0_10.version),
+    targetRoot = Some("out/io/kipp/mill/scip/Scip/generate.dest"),
+    tools = List(Mill0_10)
   )
 
   checkBuild(
-    "lsif-output",
+    "output",
     s"""|/.mill-version
-        |0.10.7
+        |${Mill0_10.version}
         |/build.sc
         |import mill._, scalalib._
         |object minimal extends ScalaModule {
-        |  def scalaVersion = "3.1.3"
+        |  def scalaVersion = "3.3.3"
         |}
         |/minimal/src/Main.scala
         |package minimal
         |@main def hello = ()
         |""".stripMargin,
     expectedSemanticdbFiles = 1,
-    initCommand = setupMill("0.10.7"),
+    initCommand = setupMill(Mill0_10.version),
     targetRoot = Some("out/io/kipp/mill/scip/Scip/generate.dest"),
-    extraArguments = List("--output", "dump.lsif")
+    extraArguments = List("--output", "dump.scip"),
+    tools = List(Mill0_10)
   )
 }

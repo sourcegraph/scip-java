@@ -86,12 +86,19 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
     val JDKSupported =
       externalJDKVersion >= minJDK && externalJDKVersion <= maxJDK
 
+    val ignoreMsg =
+      s"Test ${options.name} was ignored because the external JDK version doesn't match the toolset requirements: " +
+        s"Tools: $tools, min JDK = $minJDK, max JDK = $maxJDK, detected JDK = $externalJDKVersion"
+
     test(options.withTags(options.tags ++ tags)) {
-      assume(
-        JDKSupported,
-        "Test was ignored because the external JDK version doesn't match the toolset requirements: " +
-          s"Tools: $tools, min JDK = $minJDK, max JDK = $maxJDK, detected JDK = $externalJDKVersion"
-      )
+      // Unfortunately, MUnit doesn't seem to handle the ignore messages the
+      // way we'd want: https://github.com/scalameta/munit/issues/549#issuecomment-2056751821
+      // So instead, to give some indication that the test was actually ignored,
+      // we print this message
+      if (!JDKSupported)
+        System.err.println(ignoreMsg)
+
+      assume(JDKSupported, ignoreMsg)
 
       if (initCommand.nonEmpty) {
         os.proc(Shellable(initCommand)).call(os.Path(workingDirectory))
