@@ -83,17 +83,16 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
     val maxJDK = Tool.maximumSupportedJdk(tools).getOrElse(Int.MaxValue)
     val externalJDKVersion = BaseBuildToolSuite.externalJavaVersion
 
-    val shouldBeIgnored =
-      minJDK > externalJDKVersion || externalJDKVersion > maxJDK
+    val JDKSupported =
+      externalJDKVersion >= minJDK && externalJDKVersion <= maxJDK
 
-    val opts = options.withTags(options.tags ++ tags)
+    test(options.withTags(options.tags ++ tags)) {
+      assume(
+        JDKSupported,
+        "Test was ignored because the external JDK version doesn't match the toolset requirements: " +
+          s"Tools: $tools, min JDK = $minJDK, max JDK = $maxJDK, detected JDK = $externalJDKVersion"
+      )
 
-    test(
-      if (shouldBeIgnored)
-        opts.ignore
-      else
-        opts
-    ) {
       if (initCommand.nonEmpty) {
         os.proc(Shellable(initCommand)).call(os.Path(workingDirectory))
       }

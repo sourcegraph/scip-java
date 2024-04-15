@@ -33,19 +33,18 @@ abstract class GradleBuildToolSuiteBase(gradle: Tool.Gradle)
       gradleVersions: List[Tool.Gradle] = Nil,
       tools: List[Tool] = Nil
   ) = {
-    val testName = title.withName(title.name + s"-${gradle.name}")
+    if (gradleVersions.contains(gradle)) {
+      val testName = title.withName(title.name + s"-${gradle.name}")
 
-    checkBuild(
-      if (gradleVersions.contains(gradle))
-        testName
-      else
-        testName.ignore,
-      setup,
-      expectedSemanticdbFiles = expectedSemanticdbFiles,
-      expectedPackages = expectedPackages,
-      initCommand = gradleVersion(gradle.version),
-      extraArguments = extraArguments,
-      tools = tools :+ gradle
-    )
+      checkBuild(
+        testName,
+        setup,
+        expectedSemanticdbFiles = expectedSemanticdbFiles,
+        expectedPackages = expectedPackages,
+        initCommand = gradleVersion(gradle.version),
+        extraArguments = extraArguments,
+        tools = tools :+ gradle
+      )
+    }
   }
 }
