@@ -35,7 +35,7 @@ package object ujson{
 //            ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#
 //                      ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.read().(trace)
 //                            documentation ```scala\ndefault trace: Boolean \n```
-//                             ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
+//                             ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
 //                                               ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.
 //                                                     ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.Value#
     upickle.core.TraceVisitor.withTrace(trace, Value)(transform(s, _))
@@ -74,12 +74,12 @@ package object ujson{
             indent: Int = -1,
 //          ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.write().(indent)
 //                 documentation ```scala\ndefault indent: Int \n```
-//                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
             escapeUnicode: Boolean = false): String = {
 //          ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.write().(escapeUnicode)
 //                        documentation ```scala\ndefault escapeUnicode: Boolean \n```
-//                         ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
-//                                           ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
+//                         ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
+//                                           ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
     val writer = new java.io.StringWriter
 //      ^^^^^^ definition local 1
 //             documentation ```scala\nwriter: StringWriter \n```
@@ -117,12 +117,12 @@ package object ujson{
               indent: Int = -1,
 //            ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.writeTo().(indent)
 //                   documentation ```scala\ndefault indent: Int \n```
-//                    ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                    ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
               escapeUnicode: Boolean = false): Unit = {
 //            ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.writeTo().(escapeUnicode)
 //                          documentation ```scala\ndefault escapeUnicode: Boolean \n```
-//                           ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
-//                                             ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
+//                           ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
+//                                             ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
     transform(t, Renderer(out, indent, escapeUnicode))
 //  ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.transform().
 //            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.writeTo().(t)
@@ -147,12 +147,12 @@ package object ujson{
                           indent: Int = -1,
 //                        ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.writeToOutputStream().(indent)
 //                               documentation ```scala\ndefault indent: Int \n```
-//                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
                           escapeUnicode: Boolean = false): Unit = {
 //                        ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.writeToOutputStream().(escapeUnicode)
 //                                      documentation ```scala\ndefault escapeUnicode: Boolean \n```
-//                                       ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
-//                                                         ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
+//                                       ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
+//                                                         ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
     transform(t, new BaseByteRenderer(out, indent, escapeUnicode))
 //  ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.transform().
 //            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.writeToOutputStream().(t)
@@ -173,11 +173,11 @@ package object ujson{
                        indent: Int = -1,
 //                     ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.writeToByteArray().(indent)
 //                            documentation ```scala\ndefault indent: Int \n```
-//                             ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                             ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
                        escapeUnicode: Boolean = false) = {
 //                     ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.writeToByteArray().(escapeUnicode)
 //                                   documentation ```scala\ndefault escapeUnicode: Boolean \n```
-//                                    ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
+//                                    ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
     val baos = new java.io.ByteArrayOutputStream
 //      ^^^^ definition local 2
 //           documentation ```scala\nbaos: ByteArrayOutputStream \n```
@@ -205,7 +205,7 @@ package object ujson{
 //             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.validate().(s)
 //               documentation ```scala\ns: Readable \n```
 //                ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#
-//                           ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
+//                           ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
 //                                  ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.transform().
 //                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.validate().(s)
 //                                               ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/NoOpVisitor.
@@ -221,11 +221,11 @@ package object ujson{
 //                ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable#
 //                          ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.reformat().(indent)
 //                                 documentation ```scala\ndefault indent: Int \n```
-//                                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                            ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.reformat().(escapeUnicode)
 //                                                          documentation ```scala\ndefault escapeUnicode: Boolean \n```
-//                                                           ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
-//                                                                             ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
+//                                                           ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
+//                                                                             ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
     val writer = new java.io.StringWriter()
 //      ^^^^^^ definition local 3
 //             documentation ```scala\nwriter: StringWriter \n```
@@ -260,11 +260,11 @@ package object ujson{
 //                                         ^^^^^^ reference semanticdb maven jdk 11 java/io/Writer#
 //                                                 ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.reformatTo().(indent)
 //                                                        documentation ```scala\ndefault indent: Int \n```
-//                                                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                                   ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.reformatTo().(escapeUnicode)
 //                                                                                 documentation ```scala\ndefault escapeUnicode: Boolean \n```
-//                                                                                  ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
-//                                                                                                    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
+//                                                                                  ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
+//                                                                                                    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
     transform(s, Renderer(out, indent, escapeUnicode))
 //  ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.transform().
 //            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.reformatTo().(s)
@@ -292,12 +292,12 @@ package object ujson{
                              indent: Int = -1,
 //                           ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.reformatToOutputStream().(indent)
 //                                  documentation ```scala\ndefault indent: Int \n```
-//                                   ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                   ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
                              escapeUnicode: Boolean = false): Unit = {
 //                           ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.reformatToOutputStream().(escapeUnicode)
 //                                         documentation ```scala\ndefault escapeUnicode: Boolean \n```
-//                                          ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
-//                                                            ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
+//                                          ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
+//                                                            ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
     transform(s, new BaseByteRenderer(out, indent, escapeUnicode))
 //  ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.transform().
 //            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.reformatToOutputStream().(s)
@@ -316,11 +316,11 @@ package object ujson{
                           indent: Int = -1,
 //                        ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.reformatToByteArray().(indent)
 //                               documentation ```scala\ndefault indent: Int \n```
-//                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
                           escapeUnicode: Boolean = false) = {
 //                        ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.reformatToByteArray().(escapeUnicode)
 //                                      documentation ```scala\ndefault escapeUnicode: Boolean \n```
-//                                       ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Boolean#
+//                                       ^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#
     val baos = new java.io.ByteArrayOutputStream
 //      ^^^^ definition local 4
 //           documentation ```scala\nbaos: ByteArrayOutputStream \n```
@@ -340,15 +340,15 @@ package object ujson{
   }
   // End ujson
   @deprecated("use ujson.Value")
-// ^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/deprecated#
-//           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/deprecated#`<init>`().
+// ^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#
+//           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   type Js = Value
 //     ^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.Js#
 //        documentation ```scala\ntype Js >: Value <: Value\n```
 //          ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value#
   @deprecated("use ujson.Value")
-// ^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/deprecated#
-//           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/deprecated#`<init>`().
+// ^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#
+//           ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/deprecated#`<init>`().
   val Js = Value
 //    ^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/package.Js.
 //       documentation ```scala\n@deprecated\nval Js: \n```

@@ -11,6 +11,7 @@ import com.sourcegraph.scip_java.BuildInfo
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 import org.gradle.api.provider.Property
 import org.gradle.api.publish.PublishingExtension
@@ -65,15 +66,16 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         triggers += "compileJava"
         triggers += "compileTestJava"
 
-        val hasAnnotationPath = {
-          val apConfig = project
-            .getConfigurations()
-            .getByName("annotationProcessor")
-          if (apConfig.isCanBeResolved()) {
-            apConfig.getDependencies().size() > 0
-          } else
-            false
-        }
+        val hasAnnotationPath = Try(
+          project.getConfigurations().getByName("annotationProcessor")
+        ).map(apConfig =>
+            if (apConfig.isCanBeResolved()) {
+              apConfig.getDependencies().size() > 0
+            } else
+              false
+          )
+          .toOption
+          .contains(true)
 
         val compilerPluginAdded =
           try {
@@ -93,7 +95,8 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
               // If the `compileOnly` configuration has already been evaluated
               // by the build, we need to fallback on agent injected into javac
               warn(
-                s"Failed to add compiler plugin to javac, will go through the agent route: ${exc.getMessage()}"
+                s"Failed to add compiler plugin to javac, will go through the agent route (${exc
+                  .getClass()}): ${exc.getMessage()}"
               )
               false
           }
@@ -101,14 +104,14 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         project
           .getTasks()
           .withType(classOf[JavaCompile])
-          .configureEach { task =>
+          .all { task =>
             // If we run on JDK 17, we need to add special flags to the JVM
             // to allow access to the compiler.
 
             // JDK 17 support was only introduced in 7.3 so
             // we don't need to do it for earlier versions
             // https://docs.gradle.org/current/userguide/compatibility.html
-            if (!gradle.is5 && !gradle.is6) {
+            if (!gradle.is3 && !gradle.is2 && !gradle.is5 && !gradle.is6) {
               type JavaCompiler = {
                 type Metadata = {
                   type LangVersion = {
@@ -118,6 +121,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                 }
                 def getMetadata(): Metadata
               }
+
               type HasCompilerProperty = {
                 def getJavaCompiler(): Property[JavaCompiler]
               }
@@ -320,7 +324,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
               // classpath is murky
               //
               // We also don't want to bundle kotlin plugin with this one as it
-              // can cause all sorts of troubles.
+              // can cause all sorts of troubles).
               //
               // Instead, we commit the sins of reflection for our limited
               // needs.
@@ -368,7 +372,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
           }
       }
 
-      tasks.register(
+      tasks.create(
         "scipCompileAll",
         { task =>
           triggers
@@ -380,31 +384,34 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         }
       )
 
-      tasks.register("scipPrintDependencies", classOf[WriteDependencies])
+      tasks.create("scipPrintDependencies", classOf[WriteDependencies])
 
     }
 
   }
 
-  class GradleVersion(ver: String) {
-    override def toString(): String = s"[GradleVersion: $ver]"
-    def is7 = ver.startsWith("7.")
-    def is8 = ver.startsWith("8.")
-    def is6 = ver.startsWith("6.")
-    // 6.7 introduced toolchains support https://blog.gradle.org/java-toolchains
-    // And javaCompiler property
-    def is6_7_plus = {
-      ver match {
-        case s"6.$x.$y" if x.toInt >= 7 =>
-          true
-        case s"6.$x" if x.toInt >= 7 =>
-          true
-        case _ =>
-          false
-      }
+}
+
+class GradleVersion(ver: String) {
+  override def toString(): String = s"[GradleVersion: $ver]"
+  def is7 = ver.startsWith("7.")
+  def is8 = ver.startsWith("8.")
+  def is6 = ver.startsWith("6.")
+  // 6.7 introduced toolchains support https://blog.gradle.org/java-toolchains
+  // And javaCompiler property
+  def is6_7_plus = {
+    ver match {
+      case s"6.$x.$y" if x.toInt >= 7 =>
+        true
+      case s"6.$x" if x.toInt >= 7 =>
+        true
+      case _ =>
+        false
     }
-    def is5 = ver.startsWith("5.")
   }
+  def is5 = ver.startsWith("5.")
+  def is3 = ver.startsWith("3.")
+  def is2 = ver.startsWith("2.")
 }
 
 class WriteDependencies extends DefaultTask {
@@ -423,6 +430,8 @@ class WriteDependencies extends DefaultTask {
     val deps = List.newBuilder[String]
     val project = getProject()
     val projectName = project.getName()
+
+    val gradle = new GradleVersion(project.getGradle().getGradleVersion())
 
     // List the project itself as a dependency so that we can assign project name/version to symbols that are defined in this project.
     // The code below is roughly equivalent to the following with Groovy:
@@ -448,7 +457,7 @@ class WriteDependencies extends DefaultTask {
         warn(s"""
                 |Failed to extract Maven publication from the project `$projectName`. 
                 $crossRepoBanner
-                |Here's the raw error message:
+                |Here's the raw error message (${exception.getClass()}):
                 |  "${exception.getMessage()}"
                 |Continuing without cross-repository support.
           """.stripMargin.trim())
@@ -500,10 +509,16 @@ class WriteDependencies extends DefaultTask {
         }
     }
 
+    def canBeResolved(conf: Configuration) =
+      if (gradle.is2)
+        !conf.isEmpty()
+      else
+        conf.isCanBeResolved()
+
     project
       .getConfigurations()
       .forEach { conf =>
-        if (conf.isCanBeResolved()) {
+        if (canBeResolved(conf)) {
           try {
             val resolved = conf.getResolvedConfiguration()
             resolved

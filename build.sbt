@@ -12,20 +12,20 @@ lazy val V =
     val protobuf = "3.15.6"
     val protoc =
       "3.17.3" // the oldest protoc version with Apple M1 support, see https://github.com/scalapb/ScalaPB/issues/1024#issuecomment-860126568
-    val coursier = "2.1.5"
+    val coursier = "2.1.9"
     val scalaXml = "2.1.0"
     val bsp = "2.0.0-M13"
-    val moped = "0.1.11"
+    val moped = "0.2.0"
     val gradle = "7.0"
-    val scala213 = "2.13.10"
-    val scala212 = "2.12.17"
+    val scala213 = "2.13.13"
+    val scala212 = "2.12.19"
     val scala211 = "2.11.12"
-    val scala3 = "3.2.2"
-    val metals = "0.11.11"
-    val scalameta = "4.8.1"
+    val scala3 = "3.3.3"
+    val metals = "1.2.2"
+    val scalameta = "4.9.3"
     val semanticdbKotlinc = "0.4.0"
     val testcontainers = "0.39.3"
-    val requests = "0.6.5"
+    val requests = "0.8.0"
     val minimalMillVersion = "0.10.0"
     val millScipVersion = "0.3.6"
     val kotlinVersion = "1.9.22"
@@ -35,8 +35,6 @@ inThisBuild(
   List(
     scalaVersion := V.scala213,
     crossScalaVersions := List(V.scala213),
-    scalafixDependencies +=
-      "com.github.liancheng" %% "organize-imports" % "0.6.0",
     scalafixCaching := true,
     scalacOptions ++= List("-Wunused:imports"),
     semanticdbEnabled := true,
@@ -401,6 +399,17 @@ lazy val minimized17 = project
     javaOnlySettings,
     minimizedSettings,
     javaToolchainVersion := "17",
+    javacOptions ++= javacModuleOptions
+  )
+  .dependsOn(agent, javacPlugin)
+  .disablePlugins(JavaFormatterPlugin)
+
+lazy val minimized21 = project
+  .in(file("tests/minimized/.j21"))
+  .settings(
+    javaOnlySettings,
+    minimizedSettings,
+    javaToolchainVersion := "21",
     javacOptions ++= javacModuleOptions
   )
   .dependsOn(agent, javacPlugin)

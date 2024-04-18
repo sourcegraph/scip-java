@@ -76,15 +76,39 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
       expectedError: Option[String => Unit] = None,
       expectedPackages: String = "",
       initCommand: => List[String] = Nil,
-      targetRoot: Option[String] = None
+      targetRoot: Option[String] = None,
+      tools: List[Tool] = Nil
   ): Unit = {
+    val minJDK = Tool.minimumSupportedJdk(tools)
+    val maxJDK = Tool.maximumSupportedJdk(tools).getOrElse(Int.MaxValue)
+    val externalJDKVersion = BaseBuildToolSuite.externalJavaVersion
+
+    val JDKSupported =
+      externalJDKVersion >= minJDK && externalJDKVersion <= maxJDK
+
+    val ignoreMsg =
+      s"Test ${options.name} was ignored because the external JDK version doesn't match the toolset requirements: " +
+        s"Tools: $tools, min JDK = $minJDK, max JDK = $maxJDK, detected JDK = $externalJDKVersion"
+
     test(options.withTags(options.tags ++ tags)) {
+      // Unfortunately, MUnit doesn't seem to handle the ignore messages the
+      // way we'd want: https://github.com/scalameta/munit/issues/549#issuecomment-2056751821
+      // So instead, to give some indication that the test was actually ignored,
+      // we print this message
+      if (!JDKSupported)
+        System.err.println(ignoreMsg)
+
+      assume(JDKSupported, ignoreMsg)
+
       if (initCommand.nonEmpty) {
         os.proc(Shellable(initCommand)).call(os.Path(workingDirectory))
       }
+
       FileLayout.fromString(original, root = workingDirectory)
+
       val targetroot = workingDirectory
         .resolve(targetRoot.getOrElse("targetroot"))
+
       val arguments =
         List[String](
           "index",
@@ -129,4 +153,57 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
     }
   }
 
+}
+
+object BaseBuildToolSuite {
+  lazy val externalJavaVersion: Int = {
+    val tmpDir = os.temp.dir()
+    var version = Option.empty[String]
+    try {
+      os.write(tmpDir / "PrintJavaVersion.java", PrintJavaVersion)
+
+      os.proc("javac", "PrintJavaVersion.java").call(cwd = tmpDir)
+
+      version = Some(
+        os.proc("java", "PrintJavaVersion").call(cwd = tmpDir).out.text()
+      )
+    } finally {
+      os.remove.all(tmpDir)
+    }
+
+    version
+      .map(parseJavaVersion)
+      .getOrElse(sys.error("Failed to detect external JDK version"))
+  }
+
+  private def parseJavaVersion(raw: String) = {
+    val prop = raw.takeWhile(c => c.isDigit || c == '.')
+
+    val segments = prop.split("\\.").toList
+
+    segments match {
+      // Java 1.6 - 1.8
+      case "1" :: lessThan8 :: _ :: Nil =>
+        lessThan8.toInt
+      // Java 17.0.1, 11.0.20.1, ..
+      case modern :: _ :: _ :: rest =>
+        modern.toInt
+      // Java 12
+      case modern :: Nil =>
+        modern.toInt
+      case other =>
+        sys.error(
+          s"Cannot process [java.version] property, unknown format: [$raw]"
+        )
+    }
+  }
+
+  private val PrintJavaVersion = """
+      public class PrintJavaVersion {
+        public static void main(String[] args) {
+          System.out.print(System.getProperty("java.version"));
+        }
+      }
+
+  """
 }

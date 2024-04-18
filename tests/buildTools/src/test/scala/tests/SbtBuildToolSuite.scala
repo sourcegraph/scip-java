@@ -1,18 +1,21 @@
 package tests
 
-abstract class SbtBuildToolSuite(val sbtVersion: String)
-    extends BaseBuildToolSuite {
-  val scala2Versions = List("2.11.9", "2.12.18", "2.13.11")
-  val scala3Versions = List("3.3.1")
+import tests.Tool.SBT15
 
-  (scala2Versions ++ scala3Versions).foreach { scalaVersion =>
+abstract class SbtBuildToolSuite(sbt: Tool.SBT) extends BaseBuildToolSuite {
+
+  import Tool._
+
+  for {
+    scala <- List(Scala211, Scala2_12_12, Scala2_13_8, Scala3)
+  } yield {
     checkBuild(
-      s"basic-sbt=$sbtVersion-scala=$scalaVersion",
+      s"basic-${sbt.name}-${scala.name}",
       s"""|/build.sbt
-          |scalaVersion := "$scalaVersion"
+          |scalaVersion := "${scala.version}"
           |libraryDependencies += "junit" % "junit" % "4.13.2"
           |/project/build.properties
-          |sbt.version=$sbtVersion
+          |sbt.version=${sbt.version}
           |/src/main/java/example/ExampleJava.java
           |package example;
           |import org.junit.Assert;
@@ -29,21 +32,20 @@ abstract class SbtBuildToolSuite(val sbtVersion: String)
           |class ExampleSuite() {}
           |""".stripMargin,
       expectedSemanticdbFiles = 4,
-      targetRoot = Some("target")
+      targetRoot = Some("target"),
+      tools = List(scala, sbt)
     )
   }
-}
 
-class Sbt_1_BuildToolSuite extends SbtBuildToolSuite("1.5.2") {
   checkBuild(
-    s"custom-sbt-command=$sbtVersion",
+    s"custom-sbt-command-${sbt.name}",
     s"""|/build.sbt
         |lazy val bla = project.in(file("bla"))
         |lazy val blaJS = project.in(file("bla-js")).enablePlugins(ScalaJSPlugin)
         |/project/plugins.sbt
         |addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.14.0")
         |/project/build.properties
-        |sbt.version=$sbtVersion
+        |sbt.version=${sbt.version}
         |/bla/src/main/scala/example/ExampleScala.scala
         |package example
         |class ExampleScala()
@@ -53,6 +55,12 @@ class Sbt_1_BuildToolSuite extends SbtBuildToolSuite("1.5.2") {
         |""".stripMargin,
     expectedSemanticdbFiles = 1,
     extraArguments = List("--", "bla/compile"),
-    targetRoot = Some("bla/target")
+    targetRoot = Some("bla/target"),
+    tools = List(sbt)
   )
 }
+
+import Tool._
+
+class Sbt_15_BuildToolSuite extends SbtBuildToolSuite(SBT15)
+class Sbt_19_BuildToolSuite extends SbtBuildToolSuite(SBT19)

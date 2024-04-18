@@ -36,19 +36,19 @@ private[ujson] final class CharSequenceParser[J](cs: CharSequence) extends CharP
 //                        relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#growBuffer().
 //                        ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#growBuffer().(until)
 //                              documentation ```scala\nuntil: Int \n```
-//                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
-//                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
+//                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
+//                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
   def readDataIntoBuffer(buffer: Array[Char], bufferOffset: Int) = {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#readDataIntoBuffer().
 //                       documentation ```scala\ndef readDataIntoBuffer(buffer: Array[Char], bufferOffset: Int): (Array[Char], Boolean, Int)\n```
 //                       relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#readDataIntoBuffer().
 //                       ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#readDataIntoBuffer().(buffer)
 //                              documentation ```scala\nbuffer: Array[Char] \n```
-//                               ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Array#
-//                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#
+//                               ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Array#
+//                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Char#
 //                                            ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#readDataIntoBuffer().(bufferOffset)
 //                                                         documentation ```scala\nbufferOffset: Int \n```
-//                                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     if(buffer == null) (cs.toString.toCharArray, cs.length == 0, cs.length)
 //     ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#readDataIntoBuffer().(buffer)
 //            ^^ reference semanticdb maven jdk 11 java/lang/Object#`==`().
@@ -57,7 +57,7 @@ private[ujson] final class CharSequenceParser[J](cs: CharSequence) extends CharP
 //                                  ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/String#toCharArray().
 //                                               ^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#cs.
 //                                                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#length().
-//                                                         ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`==`(+3).
+//                                                         ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#`==`(+3).
 //                                                               ^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#cs.
 //                                                                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#length().
     else (buffer, true, -1)

@@ -14,10 +14,10 @@ jobs:
         # NOTE(olafurpg) Windows is not enabled because it times out due to reasons I don't understand.
         # os: [windows-latest, ubuntu-latest]
         os: [ubuntu-latest]
-        java: [8, 11, 17]
+        java: [8, 11, 17, 21]
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           cache: "sbt"
@@ -29,8 +29,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Benchmark tests
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           cache: "sbt"

@@ -5,7 +5,7 @@ import java.nio.file.StandardOpenOption
 
 import munit.TestOptions
 
-abstract class GradleBuildToolSuiteBase(val allGradle: List[String])
+abstract class GradleBuildToolSuiteBase(gradle: Tool.Gradle)
     extends BaseBuildToolSuite {
 
   def gradleVersion(version: String): List[String] = {
@@ -27,28 +27,24 @@ abstract class GradleBuildToolSuiteBase(val allGradle: List[String])
   def checkGradleBuild(
       title: TestOptions,
       setup: String,
-      gradleVersions: List[String],
       expectedSemanticdbFiles: Int = 0,
       expectedPackages: String = "",
-      extraArguments: List[String] = Nil
+      extraArguments: List[String] = Nil,
+      gradleVersions: List[Tool.Gradle] = Nil,
+      tools: List[Tool] = Nil
   ) = {
-    gradleVersions
-      .filter(allGradle.contains(_))
-      .foreach { gradleV =>
-        {
-          val testName = title.withName(title.name + s"-gradle$gradleV")
-          checkBuild(
-            if (gradleV.startsWith("6.") || gradleV.startsWith("5."))
-              testName.tag(Java8Only)
-            else
-              testName,
-            setup,
-            expectedSemanticdbFiles = expectedSemanticdbFiles,
-            expectedPackages = expectedPackages,
-            initCommand = gradleVersion(gradleV),
-            extraArguments = extraArguments
-          )
-        }
-      }
+    if (gradleVersions.contains(gradle)) {
+      val testName = title.withName(title.name + s"-${gradle.name}")
+
+      checkBuild(
+        testName,
+        setup,
+        expectedSemanticdbFiles = expectedSemanticdbFiles,
+        expectedPackages = expectedPackages,
+        initCommand = gradleVersion(gradle.version),
+        extraArguments = extraArguments,
+        tools = tools :+ gradle
+      )
+    }
   }
 }
