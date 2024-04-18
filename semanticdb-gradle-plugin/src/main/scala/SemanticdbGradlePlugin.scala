@@ -19,6 +19,8 @@ import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.scala.ScalaCompile
+import org.gradle.api.artifacts.Configuration
+import org.gradle.api.artifacts.dsl.DependencyHandler
 
 class SemanticdbGradlePlugin extends Plugin[Project] {
   import Logging._
@@ -78,23 +80,24 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
 
         val compilerPluginAdded =
           try {
-            project.getDependencies().add("compileOnly", javacPluginDep)
+              project.getDependencies().add("compileOnly", javacPluginDep)
 
-            if (hasAnnotationPath) {
-              project
-                .getDependencies()
-                .add("annotationProcessor", javacPluginDep)
-            }
+              if (hasAnnotationPath) {
+                project
+                  .getDependencies()
+                  .add("annotationProcessor", javacPluginDep)
+              }
 
-            project.getDependencies().add("testCompileOnly", javacPluginDep)
+              project.getDependencies().add("testCompileOnly", javacPluginDep)
 
-            true
+              true
           } catch {
             case exc: Exception =>
               // If the `compileOnly` configuration has already been evaluated
               // by the build, we need to fallback on agent injected into javac
               warn(
-                s"Failed to add compiler plugin to javac, will go through the agent route: ${exc.getMessage()}"
+                s"Failed to add compiler plugin to javac, will go through the agent route (${exc
+                  .getClass()}): ${exc.getMessage()}"
               )
               false
           }
@@ -119,6 +122,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                 }
                 def getMetadata(): Metadata
               }
+
               type HasCompilerProperty = {
                 def getJavaCompiler(): Property[JavaCompiler]
               }
@@ -454,7 +458,7 @@ class WriteDependencies extends DefaultTask {
         warn(s"""
                 |Failed to extract Maven publication from the project `$projectName`. 
                 $crossRepoBanner
-                |Here's the raw error message:
+                |Here's the raw error message (${exception.getClass()}):
                 |  "${exception.getMessage()}"
                 |Continuing without cross-repository support.
           """.stripMargin.trim())
@@ -506,10 +510,16 @@ class WriteDependencies extends DefaultTask {
         }
     }
 
+    def canBeResolved(conf: Configuration) =
+      if (gradle.is2)
+        !conf.isEmpty()
+      else
+        conf.isCanBeResolved()
+
     project
       .getConfigurations()
       .forEach { conf =>
-        if (conf.isCanBeResolved()) {
+        if (canBeResolved(conf)) {
           try {
             val resolved = conf.getResolvedConfiguration()
             resolved
