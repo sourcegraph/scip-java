@@ -11,6 +11,7 @@ import com.sourcegraph.scip_java.BuildInfo
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 import org.gradle.api.provider.Property
 import org.gradle.api.publish.PublishingExtension
@@ -19,8 +20,6 @@ import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.scala.ScalaCompile
-import org.gradle.api.artifacts.Configuration
-import org.gradle.api.artifacts.dsl.DependencyHandler
 
 class SemanticdbGradlePlugin extends Plugin[Project] {
   import Logging._
@@ -80,17 +79,17 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
 
         val compilerPluginAdded =
           try {
-              project.getDependencies().add("compileOnly", javacPluginDep)
+            project.getDependencies().add("compileOnly", javacPluginDep)
 
-              if (hasAnnotationPath) {
-                project
-                  .getDependencies()
-                  .add("annotationProcessor", javacPluginDep)
-              }
+            if (hasAnnotationPath) {
+              project
+                .getDependencies()
+                .add("annotationProcessor", javacPluginDep)
+            }
 
-              project.getDependencies().add("testCompileOnly", javacPluginDep)
+            project.getDependencies().add("testCompileOnly", javacPluginDep)
 
-              true
+            true
           } catch {
             case exc: Exception =>
               // If the `compileOnly` configuration has already been evaluated
