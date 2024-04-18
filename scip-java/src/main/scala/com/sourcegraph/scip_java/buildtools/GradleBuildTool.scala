@@ -114,16 +114,16 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
          | import com.sourcegraph.gradle.semanticdb.SemanticdbGradlePlugin
          |
          | allprojects {
-         |   project.extra["semanticdbTarget"] = "$targetroot"
-         |   project.extra["javacPluginJar"] = "$pluginpath"
-         |   project.extra["dependenciesOut"] = "$dependenciesPath"
-         |   project.extra["javacAgentPath"] = "$agentpath"
-         |   apply<SemanticdbGradlePlugin>()
+         |   project.ext["semanticdbTarget"] = "$targetroot"
+         |   project.ext["javacPluginJar"] = "$pluginpath"
+         |   project.ext["dependenciesOut"] = "$dependenciesPath"
+         |   project.ext["javacAgentPath"] = "$agentpath"
+         |   apply plugin: SemanticdbGradlePlugin
          | }
       """.stripMargin.trim
 
     Files.write(
-      tmp.resolve("init-script.gradle.kts"),
+      tmp.resolve("init-script.gradle"),
       script.getBytes(StandardCharsets.UTF_8)
     )
   }

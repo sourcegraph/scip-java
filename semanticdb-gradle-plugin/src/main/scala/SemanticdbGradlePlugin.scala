@@ -65,15 +65,16 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         triggers += "compileJava"
         triggers += "compileTestJava"
 
-        val hasAnnotationPath = {
-          val apConfig = project
-            .getConfigurations()
-            .getByName("annotationProcessor")
-          if (apConfig.isCanBeResolved()) {
-            apConfig.getDependencies().size() > 0
-          } else
-            false
-        }
+        val hasAnnotationPath = Try(
+          project.getConfigurations().getByName("annotationProcessor")
+        ).map(apConfig =>
+            if (apConfig.isCanBeResolved()) {
+              apConfig.getDependencies().size() > 0
+            } else
+              false
+          )
+          .toOption
+          .contains(true)
 
         val compilerPluginAdded =
           try {
@@ -101,14 +102,14 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         project
           .getTasks()
           .withType(classOf[JavaCompile])
-          .configureEach { task =>
+          .all { task =>
             // If we run on JDK 17, we need to add special flags to the JVM
             // to allow access to the compiler.
 
             // JDK 17 support was only introduced in 7.3 so
             // we don't need to do it for earlier versions
             // https://docs.gradle.org/current/userguide/compatibility.html
-            if (!gradle.is5 && !gradle.is6) {
+            if (!gradle.is3 && !gradle.is2 && !gradle.is5 && !gradle.is6) {
               type JavaCompiler = {
                 type Metadata = {
                   type LangVersion = {
@@ -320,7 +321,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
               // classpath is murky
               //
               // We also don't want to bundle kotlin plugin with this one as it
-              // can cause all sorts of troubles.
+              // can cause all sorts of troubles).
               //
               // Instead, we commit the sins of reflection for our limited
               // needs.
@@ -368,7 +369,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
           }
       }
 
-      tasks.register(
+      tasks.create(
         "scipCompileAll",
         { task =>
           triggers
@@ -380,31 +381,34 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         }
       )
 
-      tasks.register("scipPrintDependencies", classOf[WriteDependencies])
+      tasks.create("scipPrintDependencies", classOf[WriteDependencies])
 
     }
 
   }
 
-  class GradleVersion(ver: String) {
-    override def toString(): String = s"[GradleVersion: $ver]"
-    def is7 = ver.startsWith("7.")
-    def is8 = ver.startsWith("8.")
-    def is6 = ver.startsWith("6.")
-    // 6.7 introduced toolchains support https://blog.gradle.org/java-toolchains
-    // And javaCompiler property
-    def is6_7_plus = {
-      ver match {
-        case s"6.$x.$y" if x.toInt >= 7 =>
-          true
-        case s"6.$x" if x.toInt >= 7 =>
-          true
-        case _ =>
-          false
-      }
+}
+
+class GradleVersion(ver: String) {
+  override def toString(): String = s"[GradleVersion: $ver]"
+  def is7 = ver.startsWith("7.")
+  def is8 = ver.startsWith("8.")
+  def is6 = ver.startsWith("6.")
+  // 6.7 introduced toolchains support https://blog.gradle.org/java-toolchains
+  // And javaCompiler property
+  def is6_7_plus = {
+    ver match {
+      case s"6.$x.$y" if x.toInt >= 7 =>
+        true
+      case s"6.$x" if x.toInt >= 7 =>
+        true
+      case _ =>
+        false
     }
-    def is5 = ver.startsWith("5.")
   }
+  def is5 = ver.startsWith("5.")
+  def is3 = ver.startsWith("3.")
+  def is2 = ver.startsWith("2.")
 }
 
 class WriteDependencies extends DefaultTask {
@@ -423,6 +427,8 @@ class WriteDependencies extends DefaultTask {
     val deps = List.newBuilder[String]
     val project = getProject()
     val projectName = project.getName()
+
+    val gradle = new GradleVersion(project.getGradle().getGradleVersion())
 
     // List the project itself as a dependency so that we can assign project name/version to symbols that are defined in this project.
     // The code below is roughly equivalent to the following with Groovy:
