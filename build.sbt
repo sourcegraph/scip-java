@@ -218,7 +218,6 @@ lazy val cli = project
   .in(file("scip-java"))
   .settings(
     moduleName := "scip-java",
-    resolvers ++= Resolver.sonatypeOssRepos("snapshots"),
     (Compile / mainClass) := Some("com.sourcegraph.scip_java.ScipJava"),
     (run / baseDirectory) := (ThisBuild / baseDirectory).value,
     buildInfoKeys :=

@@ -20,5 +20,3 @@ libraryDependencies ++=
 
 ThisBuild / libraryDependencySchemes ++=
   Seq("org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always)
-
-addDependencyTreePlugin
