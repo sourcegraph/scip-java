@@ -79,6 +79,42 @@ public class ScipSemanticdb {
     return "semanticdb maven " + pkg.repoName() + " " + pkg.version() + " " + symbol;
   }
 
+  private static com.sourcegraph.Scip.SymbolInformation.Kind toScipKind(
+      Semanticdb.SymbolInformation.Kind kind) {
+    switch (kind) {
+      case FIELD:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.Field;
+      case METHOD:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.Method;
+      case CONSTRUCTOR:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.Constructor;
+      case MACRO:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.Macro;
+      case TYPE:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.Type;
+      case PARAMETER:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.Parameter;
+      case SELF_PARAMETER:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.SelfParameter;
+      case TYPE_PARAMETER:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.TypeParameter;
+      case OBJECT:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.Object;
+      case PACKAGE:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.Package;
+      case PACKAGE_OBJECT:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.PackageObject;
+      case CLASS:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.Class;
+      case TRAIT:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.Trait;
+      case INTERFACE:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.Interface;
+      default:
+        return com.sourcegraph.Scip.SymbolInformation.Kind.UnspecifiedKind;
+    }
+  }
+
   public static boolean isDefinitionRole(Role role) {
     return role == Role.DEFINITION || role == Role.SYNTHETIC_DEFINITION;
   }
@@ -130,7 +166,9 @@ public class ScipSemanticdb {
         }
         Package pkg = packages.packageForSymbol(info.getSymbol()).orElse(Package.EMPTY);
         Scip.SymbolInformation.Builder scipInfo =
-            Scip.SymbolInformation.newBuilder().setSymbol(typedSymbol(info.getSymbol(), pkg));
+            Scip.SymbolInformation.newBuilder()
+                .setSymbol(typedSymbol(info.getSymbol(), pkg))
+                .setKind(toScipKind(info.getKind()));
 
         // TODO: this can be removed once https://github.com/sourcegraph/sourcegraph/issues/50927 is
         // fixed.
