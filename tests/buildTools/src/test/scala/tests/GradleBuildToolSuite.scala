@@ -360,11 +360,40 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     gradleVersions = List(Gradle8, Gradle7, Gradle6),
     tools = List(Scala2_12_12)
   )
+
   checkGradleBuild(
     "kotlin",
-    """|/build.gradle
+    s"""|/build.gradle
        |plugins {
-       |    id 'org.jetbrains.kotlin.jvm' version '1.8.0'
+       |    id 'org.jetbrains.kotlin.jvm' version '${Kotlin18.version}'
+       |}
+       |repositories {
+       |    mavenCentral()
+       |}
+       |/src/main/java/foo/JExample.java
+       |package foo;
+       ||public class JExample {}
+       |/src/main/kotlin/foo/Example.kt
+       |package foo
+       |object Example {}
+       |/src/test/java/foo/JExampleSuite.java
+       |package foo;
+       |public class JExampleSuite {}
+       |/src/test/kotlin/foo/ExampleSuite.kt
+       |package foo
+       |class ExampleSuite {}
+       |""".stripMargin,
+    expectedSemanticdbFiles = 4,
+    gradleVersions = List(Gradle6, Gradle7, Gradle8),
+    tools = List(Kotlin18)
+  )
+
+  checkGradleBuild(
+    "kotlin-k2",
+    s"""|/build.gradle.kts
+       |plugins {
+       |    `kotlin-dsl`
+       |    kotlin("jvm") version "${Kotlin192.version}"
        |}
        |repositories {
        |    mavenCentral()
@@ -383,8 +412,10 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |class ExampleSuite {}
        |""".stripMargin,
     expectedSemanticdbFiles = 4,
-    gradleVersions = List(Gradle6, Gradle7)
+    gradleVersions = List(Gradle8),
+    tools = List(Kotlin192)
   )
+
 
   checkGradleBuild(
     "implementation-deps",

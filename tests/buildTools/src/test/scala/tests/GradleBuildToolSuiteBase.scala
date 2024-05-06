@@ -14,7 +14,10 @@ abstract class GradleBuildToolSuiteBase(gradle: Tool.Gradle)
   }
 
   def createEmptyBuildScript(): Unit = {
-    val script = workingDirectory.resolve("build.gradle")
+    // We're using settings.gradle instead of build.gradle because it's enough for
+    // gradle to create a wrapper, and doesn't conflict if the test case uses build.gradle.kts.
+    // Turns out gradle produces a very confusing error message if you have both build.gradle and build.gradle.kts
+    val script = workingDirectory.resolve("settings.gradle")
     Files.createDirectories(script.getParent)
     Files.write(
       script,

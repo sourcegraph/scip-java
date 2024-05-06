@@ -57,6 +57,12 @@ object Tool {
   case object Scala211 extends Scala("2.11.9", atMostJava(11))
   case object Scala3 extends Scala("3.3.3", noRestrictions)
 
+  sealed abstract class Kotlin(version: String, support: JVMSupport)
+      extends Tool("kotlin", version, support)
+  // See https://stackoverflow.com/a/77179226
+  case object Kotlin18 extends Kotlin("1.8.0", atMostJava(19))
+  case object Kotlin192 extends Kotlin("1.9.20", atMostJava(21))
+
   sealed abstract class Mill(version: String, support: JVMSupport)
       extends Tool("mill", version, support)
   // See https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html#build-tool-compatibility-table
