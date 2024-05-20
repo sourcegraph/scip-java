@@ -28,7 +28,9 @@ import java.util.function.Function;
 
 public interface AnnotationsOnParameterizedTypes {
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnnotationsOnParameterizedTypes#
-//                                               documentation ```java\npublic interface AnnotationsOnParameterizedTypes\n```
+//                                               display_name AnnotationsOnParameterizedTypes
+//                                               signature_documentation java public interface AnnotationsOnParameterizedTypes
+//                                               kind Interface
 
   public static AnnotationsOnParameterizedTypes getInstance() {
     return new AnnotationsOnParameterizedTypesImpl();
@@ -40,47 +42,66 @@ public interface AnnotationsOnParameterizedTypes {
 
 class AnnotationsOnParameterizedTypesImpl implements AnnotationsOnParameterizedTypes {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#
-//                                        documentation ```java\nclass AnnotationsOnParameterizedTypesImpl\n```
+//                                        display_name AnnotationsOnParameterizedTypesImpl
+//                                        signature_documentation java class AnnotationsOnParameterizedTypesImpl
+//                                        kind Class
 //                                        relationship is_implementation semanticdb maven . . minimized/AnnotationsOnParameterizedTypes#
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#`<init>`().
-//                                        documentation ```java\nAnnotationsOnParameterizedTypesImpl()\n```
+//                                        display_name <init>
+//                                        signature_documentation java AnnotationsOnParameterizedTypesImpl()
+//                                        kind Constructor
 //                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypes#
   private ConcurrentMap<Class<?>, Constructor<?>> proxyConstructors = new ConcurrentHashMap<>();
 //        ^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/ConcurrentMap#
 //                      ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/reflect/Constructor#
 //                                                ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#proxyConstructors.
-//                                                                  documentation ```java\nprivate ConcurrentMap<Class<?>, Constructor<?>> proxyConstructors\n```
+//                                                                  display_name proxyConstructors
+//                                                                  signature_documentation java private ConcurrentMap<Class<?>, Constructor<?>> proxyConstructors
+//                                                                  kind Field
 //                                                                        ^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/ConcurrentHashMap#`<init>`().
 
   @Override
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass) {
 //        ^ definition semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
-//          documentation ```java\nC\n```
+//          display_name C
+//          signature_documentation java C
+//          kind TypeParameter
 //           ^ definition semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[W]
-//             documentation ```java\nW\n```
+//             display_name W
+//             signature_documentation java W
+//             kind TypeParameter
 //              ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
 //                       ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[W]
 //                          ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
 //                             ^^^^^^^ definition semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
-//                                     documentation ```java\n@Override\npublic <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass)\n```
+//                                     display_name adapter
+//                                     signature_documentation java @Override\npublic <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass)
+//                                     kind Method
 //                                     relationship is_reference is_implementation semanticdb maven . . minimized/AnnotationsOnParameterizedTypes#adapter().
 //                                     ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                           ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
 //                                              ^^^^^^^^ definition local 0
-//                                                       documentation ```java\nClass<C> contract\n```
+//                                                       display_name contract
+//                                                       signature_documentation java Class<C> contract
+//                                                       enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
 //                                                        ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                                              ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[W]
 //                                                                 ^^^^^^^^^^^^ definition local 1
-//                                                                              documentation ```java\nClass<W> wrappedClass\n```
+//                                                                              display_name wrappedClass
+//                                                                              signature_documentation java Class<W> wrappedClass
+//                                                                              enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
 
     Function<InvocationHandler, C> constructor = getConstructor(contract);
 //  ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
 //           ^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/reflect/InvocationHandler#
 //                              ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
 //                                 ^^^^^^^^^^^ definition local 2
-//                                             documentation ```java\nFunction<InvocationHandler, C> constructor\n```
+//                                             display_name constructor
+//                                             signature_documentation java Function<InvocationHandler, C> constructor
+//                                             enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
+//                                             kind Variable
 //                                               ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
 //                                                              ^^^^^^^^ reference local 0
 
@@ -95,30 +116,41 @@ class AnnotationsOnParameterizedTypesImpl implements AnnotationsOnParameterizedT
 
   private <T> Function<InvocationHandler, T> getConstructor(Class<T> contract) {
 //         ^ definition semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
-//           documentation ```java\nT\n```
+//           display_name T
+//           signature_documentation java T
+//           kind TypeParameter
 //            ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
 //                     ^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/reflect/InvocationHandler#
 //                                        ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                                           ^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
-//                                                          documentation ```java\nprivate <T> Function<InvocationHandler, T> getConstructor(Class<T> contract)\n```
+//                                                          display_name getConstructor
+//                                                          signature_documentation java private <T> Function<InvocationHandler, T> getConstructor(Class<T> contract)
+//                                                          kind Method
 //                                                          ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                                                ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                                                                   ^^^^^^^^ definition local 3
-//                                                                            documentation ```java\nClass<T> contract\n```
+//                                                                            display_name contract
+//                                                                            signature_documentation java Class<T> contract
+//                                                                            enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
     @SuppressWarnings("unchecked")
 //   ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
     Constructor<T> constructor = (Constructor<T>) proxyConstructors.computeIfAbsent(contract, c -> {
 //  ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/reflect/Constructor#
 //              ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                 ^^^^^^^^^^^ definition local 4
-//                             documentation ```java\n@SuppressWarnings("unchecked")\nConstructor<T> constructor\n```
+//                             display_name constructor
+//                             signature_documentation java @SuppressWarnings("unchecked")\nConstructor<T> constructor
+//                             enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
+//                             kind Variable
 //                                ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/reflect/Constructor#
 //                                            ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                                                ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#proxyConstructors.
 //                                                                  ^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/ConcurrentMap#computeIfAbsent().
 //                                                                                  ^^^^^^^^ reference local 3
 //                                                                                            ^ definition local 5
-//                                                                                              documentation ```java\nClass<?> c\n```
+//                                                                                              display_name c
+//                                                                                              signature_documentation java Class<?> c
+//                                                                                              enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
       return null;
     });
 

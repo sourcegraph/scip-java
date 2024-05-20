@@ -48,7 +48,7 @@ class UpdateOp {
 //                display_name Type
 //                signature_documentation java @IntDef({ADD, REMOVE, UPDATE, MOVE})\n@Retention(RetentionPolicy.SOURCE)\n@interface Type
 //                kind Interface
-//                relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//                relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
   }
 
   static final int ADD = 0;

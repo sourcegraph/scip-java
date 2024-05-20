@@ -105,7 +105,7 @@ public class InnerClasses {
 //                                  display_name InnerAnnotation
 //                                  signature_documentation java public @interface InnerAnnotation
 //                                  kind Interface
-//                                  relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//                                  relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
     int value();
 //      ^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerAnnotation#value().
 //            display_name value

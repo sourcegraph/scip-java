@@ -67,7 +67,7 @@ object Readable extends ReadableLowPri{
 //                           kind Method
 //                           relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //                           relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().
-//                           relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//                           relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //           _______________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().
 //                           display_name apply
 //                           signature_documentation scala def apply(t: T, w: Transformer[T]): fromTransformer[T]
@@ -85,7 +85,7 @@ object Readable extends ReadableLowPri{
 //                           kind Method
 //                           relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //                           relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.apply().
-//                           relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//                           relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#[T]
 //                             display_name T
 //                             signature_documentation scala T
@@ -188,9 +188,9 @@ object Readable extends ReadableLowPri{
 //                          display_name s
 //                          signature_documentation scala s: String 
 //                          kind Parameter
-//                           ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
+//                           ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
 //                                    ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
-//                                                    ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
+//                                                    ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
 //                                                                  ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //                                                                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().
 //                                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromString().(s)
@@ -309,11 +309,11 @@ object Readable extends ReadableLowPri{
 //                             display_name s
 //                             signature_documentation scala s: Array[Byte] 
 //                             kind Parameter
-//                              ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Array#
-//                                    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Byte#
+//                              ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Array#
+//                                    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Byte#
 //                                            ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
-//                                                            ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Array#
-//                                                                  ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Byte#
+//                                                            ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Array#
+//                                                                  ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Byte#
 //                                                                               ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#
 //                                                                                              ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer#`<init>`().
 //                                                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromByteArray().(s)

@@ -7,7 +7,7 @@ sealed trait ParsingFailedException extends Exception
 //                                  display_name ParsingFailedException
 //                                  signature_documentation scala sealed trait ParsingFailedException
 //                                  kind Trait
-//                                          ^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/package.Exception#
+//                                          ^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/package.Exception#
 
 case class ParseException(clue: String, index: Int)
 //         ^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException#
@@ -22,13 +22,13 @@ case class ParseException(clue: String, index: Int)
 //                        kind Method
 //                        relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException#
 //                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException.apply().
-//                        relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//                        relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //         ______________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException.apply().
 //                        display_name apply
 //                        signature_documentation scala def apply(clue: String, index: Int): ParseException
 //                        kind Method
 //                        relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException#
-//                        relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Function2#apply().
+//                        relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function2#apply().
 //         ______________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException.
 //                        display_name ParseException
 //                        signature_documentation scala object ParseException
@@ -47,7 +47,7 @@ case class ParseException(clue: String, index: Int)
 //                        kind Method
 //                        relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException#
 //                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException.apply().
-//                        relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//                        relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException#`<init>`().
 //                         display_name <init>
 //                         signature_documentation scala def this(clue: String, index: Int)
@@ -80,7 +80,7 @@ case class ParseException(clue: String, index: Int)
 //                             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException#`<init>`().(clue)
 //                             relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException#clue.
 //                             relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException.apply().(clue)
-//                              ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
+//                              ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
 //                                      ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException#index.
 //                                            display_name index
 //                                            signature_documentation scala val index: Int
@@ -109,9 +109,9 @@ case class ParseException(clue: String, index: Int)
 //                                            relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException#`<init>`().(index)
 //                                            relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException#index.
 //                                            relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException.apply().(index)
-//                                             ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                             ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
   extends Exception(clue + " at index " + index) with ParsingFailedException
-//        ^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/package.Exception#
+//        ^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/package.Exception#
 //                 ^ reference semanticdb maven jdk 11 java/lang/Exception#`<init>`(+1).
 //                  ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParseException#`<init>`().(clue)
 //                       ^ reference semanticdb maven jdk 11 java/lang/String#`+`().
@@ -132,13 +132,13 @@ case class IncompleteParseException(msg: String)
 //                                  kind Method
 //                                  relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException#
 //                                  relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException.apply().
-//                                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//                                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //         ________________________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException.apply().
 //                                  display_name apply
 //                                  signature_documentation scala def apply(msg: String): IncompleteParseException
 //                                  kind Method
 //                                  relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException#
-//                                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Function1#apply().
+//                                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function1#apply().
 //         ________________________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException#copy().
 //                                  display_name copy
 //                                  signature_documentation scala def copy(msg: String): IncompleteParseException
@@ -151,7 +151,7 @@ case class IncompleteParseException(msg: String)
 //                                  kind Method
 //                                  relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException#
 //                                  relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException.apply().
-//                                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//                                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //         ________________________ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException.
 //                                  display_name IncompleteParseException
 //                                  signature_documentation scala object IncompleteParseException
@@ -190,9 +190,9 @@ case class IncompleteParseException(msg: String)
 //                                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException#copy().(msg)
 //                                      relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException#msg.
 //                                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException.apply().(msg)
-//                                       ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
+//                                       ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
   extends Exception(msg) with ParsingFailedException
-//        ^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/package.Exception#
+//        ^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/package.Exception#
 //                 ^ reference semanticdb maven jdk 11 java/lang/Exception#`<init>`(+1).
 //                  ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IncompleteParseException#`<init>`().(msg)
 //                            ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ParsingFailedException#

@@ -50,8 +50,8 @@ private[ujson] final class CharSequenceParser[J](cs: CharSequence) extends CharP
 //                              display_name until
 //                              signature_documentation scala until: Int 
 //                              kind Parameter
-//                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
-//                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
+//                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
+//                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
   def readDataIntoBuffer(buffer: Array[Char], bufferOffset: Int) = {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#readDataIntoBuffer().
 //                       display_name readDataIntoBuffer
@@ -62,13 +62,13 @@ private[ujson] final class CharSequenceParser[J](cs: CharSequence) extends CharP
 //                              display_name buffer
 //                              signature_documentation scala buffer: Array[Char] 
 //                              kind Parameter
-//                               ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Array#
-//                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Char#
+//                               ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Array#
+//                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Char#
 //                                            ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#readDataIntoBuffer().(bufferOffset)
 //                                                         display_name bufferOffset
 //                                                         signature_documentation scala bufferOffset: Int 
 //                                                         kind Parameter
-//                                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     if(buffer == null) (cs.toString.toCharArray, cs.length == 0, cs.length)
 //     ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#readDataIntoBuffer().(buffer)
 //            ^^ reference semanticdb maven jdk 11 java/lang/Object#`==`().
@@ -77,7 +77,7 @@ private[ujson] final class CharSequenceParser[J](cs: CharSequence) extends CharP
 //                                  ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/String#toCharArray().
 //                                               ^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#cs.
 //                                                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#length().
-//                                                         ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#`==`(+3).
+//                                                         ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#`==`(+3).
 //                                                               ^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#cs.
 //                                                                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#length().
     else (buffer, true, -1)

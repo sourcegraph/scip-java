@@ -10,8 +10,6 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
 //                               display_name BaseEpoxyTouchCallback
 //                               signature_documentation java interface BaseEpoxyTouchCallback<T extends EpoxyModel>
 //                               kind Interface
-//                               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyDragCallback#
-//                               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#
 //                               ^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
 //                                 display_name T
 //                                 signature_documentation java T extends EpoxyModel

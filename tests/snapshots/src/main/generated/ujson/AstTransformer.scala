@@ -56,7 +56,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                                              display_name items
 //                                              signature_documentation scala items: Iterable[I] 
 //                                              kind Parameter
-//                                               ^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/package.Iterable#
+//                                               ^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/package.Iterable#
 //                                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#[I]
     val ctx = f.visitArray(items.size, -1).narrow
 //      ^^^ definition local 1
@@ -66,7 +66,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#transformArray().(f)
 //              ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitArray().
 //                         ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#transformArray().(items)
-//                               ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/IterableOnceOps#size().
+//                               ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/IterableOnceOps#size().
 //                                         ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ArrVisitor#narrow().
     for(item <- items) ctx.visitValue(transform(item, ctx.subVisitor), -1)
 //      ^^^^ definition local 2
@@ -103,8 +103,8 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                                               display_name items
 //                                               signature_documentation scala items: Iterable[(String, I)] 
 //                                               kind Parameter
-//                                                ^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/package.Iterable#
-//                                                          ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
+//                                                ^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/package.Iterable#
+//                                                          ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
 //                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#[I]
     val ctx = f.visitObject(items.size, -1).narrow
 //      ^^^ definition local 4
@@ -114,7 +114,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#transformObject().(f)
 //              ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitObject().
 //                          ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#transformObject().(items)
-//                                ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/IterableOnceOps#size().
+//                                ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/IterableOnceOps#size().
 //                                          ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjVisitor#narrow().
     for(kv <- items) {
 //      ^^ definition local 5
@@ -135,13 +135,13 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                      ^^^^^^^^^^ reference local 6
 //                                 ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitString().
 //                                             ^^ reference local 5
-//                                                ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Tuple2#_1.
+//                                                ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Tuple2#_1.
       ctx.visitValue(transform(kv._2, ctx.subVisitor), -1)
 //    ^^^ reference local 4
 //        ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#visitValue().
 //                   ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().
 //                             ^^ reference local 5
-//                                ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Tuple2#_2.
+//                                ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Tuple2#_2.
 //                                    ^^^ reference local 4
 //                                        ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#subVisitor().
     }
@@ -187,7 +187,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                                        kind Parameter
 //                                        relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#factory.
 //                                         ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/compat/package.Factory#
-//                                                  ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
+//                                                  ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
 //                                                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#[I]
 //                                                              ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#[T]
 //                                                                         ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjVisitor#
@@ -205,14 +205,14 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                        signature_documentation scala private[this] var key_=(x$1: String): Unit
 //                        kind Method
 //                        relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#key().
-//                         ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
+//                         ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
     private[this] val vs = factory.newBuilder
 //                    ^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#vs.
 //                       display_name vs
 //                       signature_documentation scala private[this] val vs: Builder[(String, I), T]
 //                       kind Method
 //                         ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#factory.
-//                                 ^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/Factory#newBuilder().
+//                                 ^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/Factory#newBuilder().
     def subVisitor = AstTransformer.this
 //      ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#subVisitor().
 //                 display_name subVisitor
@@ -230,7 +230,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                     display_name index
 //                     signature_documentation scala index: Int 
 //                     kind Parameter
-//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                             ^^^^^^^ reference semanticdb maven . . upickle/
 //                                     ^^^^ reference semanticdb maven . . upickle/core/
 //                                          ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/StringVisitor.
@@ -245,7 +245,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                      signature_documentation scala s: Any 
 //                      kind Parameter
 //                       ^^^ reference semanticdb maven . . scala/Any#
-//                             ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
+//                             ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
 //                                    ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#key().
 //                                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#visitKeyValue().(s)
 //                                            ^^^^^^^^ reference semanticdb maven . . scala/Any#toString().
@@ -265,12 +265,12 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                             display_name index
 //                             signature_documentation scala index: Int 
 //                             kind Parameter
-//                              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
-//                                    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
+//                              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
+//                                    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
 //                                           ^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#vs.
-//                                              ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/mutable/Growable#`+=`().
+//                                              ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/mutable/Growable#`+=`().
 //                                                  ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#key().
-//                                                      ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.ArrowAssoc#`->`().
+//                                                      ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.ArrowAssoc#`->`().
 //                                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#visitValue().(v)
 
     def visitEnd(index: Int) = build(vs.result)
@@ -283,10 +283,10 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                     display_name index
 //                     signature_documentation scala index: Int 
 //                     kind Parameter
-//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                             ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#build.
 //                                   ^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstObjVisitor#vs.
-//                                      ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/mutable/Builder#result().
+//                                      ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/mutable/Builder#result().
   }
   class AstArrVisitor[T[_]](build: T[I] => I)
 //      ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#
@@ -346,7 +346,7 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                       signature_documentation scala private[this] val vs: Builder[I, T[I]]
 //                       kind Method
 //                         ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#factory.
-//                                 ^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/Factory#newBuilder().
+//                                 ^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/Factory#newBuilder().
     def visitValue(v: I, index: Int): Unit = vs += v
 //      ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#visitValue().
 //                 display_name visitValue
@@ -362,10 +362,10 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                             display_name index
 //                             signature_documentation scala index: Int 
 //                             kind Parameter
-//                              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
-//                                    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
+//                              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
+//                                    ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
 //                                           ^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#vs.
-//                                              ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/mutable/Growable#`+=`().
+//                                              ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/mutable/Growable#`+=`().
 //                                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#visitValue().(v)
 
     def visitEnd(index: Int) = build(vs.result())
@@ -378,9 +378,9 @@ trait AstTransformer[I] extends Transformer[I] with JsVisitor[I, I]{
 //                     display_name index
 //                     signature_documentation scala index: Int 
 //                     kind Parameter
-//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                             ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#build.
 //                                   ^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/AstTransformer#AstArrVisitor#vs.
-//                                      ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/mutable/Builder#result().
+//                                      ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/mutable/Builder#result().
   }
 }

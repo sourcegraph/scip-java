@@ -46,7 +46,7 @@ sealed trait IndexedValue {
 //          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj#index.
 //          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str#index.
 //          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.True#index.
-//           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 }
 
 object IndexedValue extends Transformer[IndexedValue]{
@@ -76,7 +76,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //               signature_documentation scala def apply(index: Int, value0: CharSequence): Str
 //               kind Method
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str#
-//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Function2#apply().
+//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function2#apply().
 //           ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str.
 //               display_name Str
 //               signature_documentation scala object Str
@@ -89,14 +89,14 @@ object IndexedValue extends Transformer[IndexedValue]{
 //               kind Method
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str#
 //               relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str.apply().
-//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //           ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str#productElementName().
 //               display_name productElementName
 //               signature_documentation scala def productElementName(x$1: Int): String
 //               kind Method
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str#
 //               relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str.apply().
-//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str#`<init>`().
 //                display_name <init>
 //                signature_documentation scala def this(index: Int, value0: CharSequence)
@@ -130,7 +130,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                     relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str#`<init>`().(index)
 //                     relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str#copy().(index)
 //                     relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str#index.
-//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                           ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str#value0.
 //                                  display_name value0
 //                                  signature_documentation scala val value0: CharSequence
@@ -176,14 +176,14 @@ object IndexedValue extends Transformer[IndexedValue]{
 //               signature_documentation scala def apply(index: Int, value0: (CharSequence, IndexedValue)*): Obj
 //               kind Method
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj#
-//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Function2#apply().
+//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function2#apply().
 //           ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj#productElement().
 //               display_name productElement
 //               signature_documentation scala def productElement(x$1: Int): Any
 //               kind Method
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj#
 //               relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj.apply().
-//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //           ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj.
 //               display_name Obj
 //               signature_documentation scala object Obj
@@ -196,7 +196,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //               kind Method
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj#
 //               relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj.apply().
-//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj#`<init>`().
 //                display_name <init>
 //                signature_documentation scala def this(index: Int, value0: (CharSequence, IndexedValue)*)
@@ -220,7 +220,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                     kind Parameter
 //                     relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj#`<init>`().(index)
 //                     relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj#index.
-//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                           ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj#value0.
 //                                  display_name value0
 //                                  signature_documentation scala val value0: (CharSequence, IndexedValue)*
@@ -258,14 +258,14 @@ object IndexedValue extends Transformer[IndexedValue]{
 //               kind Method
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Arr#
 //               relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Arr.apply().
-//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //           ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Arr#productElement().
 //               display_name productElement
 //               signature_documentation scala def productElement(x$1: Int): Any
 //               kind Method
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Arr#
 //               relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Arr.apply().
-//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //           ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Arr.
 //               display_name Arr
 //               signature_documentation scala object Arr
@@ -277,7 +277,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //               signature_documentation scala def apply(index: Int, value: IndexedValue*): Arr
 //               kind Method
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Arr#
-//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Function2#apply().
+//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function2#apply().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Arr#`<init>`().
 //                display_name <init>
 //                signature_documentation scala def this(index: Int, value: IndexedValue*)
@@ -301,7 +301,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                     kind Parameter
 //                     relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Arr#index.
 //                     relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Arr.apply().(index)
-//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                           ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Arr#value.
 //                                 display_name value
 //                                 signature_documentation scala val value: IndexedValue*
@@ -348,20 +348,20 @@ object IndexedValue extends Transformer[IndexedValue]{
 //               kind Method
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#
 //               relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num.apply().
-//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //           ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#productElementName().
 //               display_name productElementName
 //               signature_documentation scala def productElementName(x$1: Int): String
 //               kind Method
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#
 //               relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num.apply().
-//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //           ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num.apply().
 //               display_name apply
 //               signature_documentation scala def apply(index: Int, s: CharSequence, decIndex: Int, expIndex: Int): Num
 //               kind Method
 //               relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#
-//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Function4#apply().
+//               relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function4#apply().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#`<init>`().
 //                display_name <init>
 //                signature_documentation scala def this(index: Int, s: CharSequence, decIndex: Int, expIndex: Int)
@@ -395,7 +395,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                     relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#`<init>`().(index)
 //                     relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#copy().(index)
 //                     relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#index.
-//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#s.
 //                             display_name s
 //                             signature_documentation scala val s: CharSequence
@@ -453,7 +453,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                                     relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#copy().(decIndex)
 //                                                     relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#decIndex.
 //                                                     relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num.apply().(decIndex)
-//                                                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                           ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#expIndex.
 //                                                                    display_name expIndex
 //                                                                    signature_documentation scala val expIndex: Int
@@ -482,7 +482,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                                                    relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#`<init>`().(expIndex)
 //                                                                    relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num#expIndex.
 //                                                                    relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num.apply().(expIndex)
-//                                                                     ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                                     ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                                                  ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue#
 //                                                                                              ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
   case class NumRaw(index: Int, d: Double) extends IndexedValue
@@ -510,20 +510,20 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                  kind Method
 //                  relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw#
 //                  relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw.apply().
-//                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //           ______ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw.apply().
 //                  display_name apply
 //                  signature_documentation scala def apply(index: Int, d: Double): NumRaw
 //                  kind Method
 //                  relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw#
-//                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Function2#apply().
+//                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function2#apply().
 //           ______ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw#productElementName().
 //                  display_name productElementName
 //                  signature_documentation scala def productElementName(x$1: Int): String
 //                  kind Method
 //                  relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw#
 //                  relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw.apply().
-//                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//                  relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw#`<init>`().
 //                   display_name <init>
 //                   signature_documentation scala def this(index: Int, d: Double)
@@ -557,7 +557,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw#`<init>`().(index)
 //                        relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw#index.
 //                        relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw.apply().(index)
-//                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw#d.
 //                                display_name d
 //                                signature_documentation scala val d: Double
@@ -586,7 +586,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw#copy().(d)
 //                                relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw#d.
 //                                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw.apply().(d)
-//                                 ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Double#
+//                                 ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Double#
 //                                                 ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue#
 //                                                             ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
   case class False(index: Int) extends IndexedValue{
@@ -608,20 +608,20 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                 kind Method
 //                 relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.False#
 //                 relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.False.apply().
-//                 relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//                 relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //           _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.False.apply().
 //                 display_name apply
 //                 signature_documentation scala def apply(index: Int): False
 //                 kind Method
 //                 relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.False#
-//                 relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Function1#apply().
+//                 relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function1#apply().
 //           _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.False#productElement().
 //                 display_name productElement
 //                 signature_documentation scala def productElement(x$1: Int): Any
 //                 kind Method
 //                 relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.False#
 //                 relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.False.apply().
-//                 relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//                 relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //           _____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.False#copy().
 //                 display_name copy
 //                 signature_documentation scala def copy(index: Int): False
@@ -661,7 +661,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                       relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.False#copy().(index)
 //                       relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.False#index.
 //                       relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.False.apply().(index)
-//                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                     ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue#
 //                                                 ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
     def value = false
@@ -683,7 +683,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                kind Method
 //                relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.True#
 //                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.True.apply().
-//                relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//                relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //           ____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.True.
 //                display_name True
 //                signature_documentation scala object True
@@ -701,14 +701,14 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                signature_documentation scala def apply(index: Int): True
 //                kind Method
 //                relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.True#
-//                relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Function1#apply().
+//                relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function1#apply().
 //           ____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.True#productElementName().
 //                display_name productElementName
 //                signature_documentation scala def productElementName(x$1: Int): String
 //                kind Method
 //                relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.True#
 //                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.True.apply().
-//                relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//                relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //               ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.True#`<init>`().
 //                 display_name <init>
 //                 signature_documentation scala def this(index: Int)
@@ -742,7 +742,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.True#`<init>`().(index)
 //                      relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.True#index.
 //                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.True.apply().(index)
-//                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                    ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue#
 //                                                ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
     def value = true
@@ -770,20 +770,20 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                kind Method
 //                relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Null#
 //                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Null.apply().
-//                relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElement().
+//                relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElement().
 //           ____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Null#productElementName().
 //                display_name productElementName
 //                signature_documentation scala def productElementName(x$1: Int): String
 //                kind Method
 //                relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Null#
 //                relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Null.apply().
-//                relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Product#productElementName().
+//                relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Product#productElementName().
 //           ____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Null.apply().
 //                display_name apply
 //                signature_documentation scala def apply(index: Int): Null
 //                kind Method
 //                relationship is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Null#
-//                relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Function1#apply().
+//                relationship is_reference is_implementation semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Function1#apply().
 //           ____ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Null.
 //                display_name Null
 //                signature_documentation scala object Null
@@ -823,7 +823,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Null#`<init>`().(index)
 //                      relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Null#index.
 //                      relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Null.apply().(index)
-//                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                    ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue#
 //                                                ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
     def value = null
@@ -1010,7 +1010,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                   display_name item
 //                   signature_documentation scala item: IndexedValue 
 //                   kind Variable
-//                       ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/IterableOps#withFilter().
+//                       ^^^^^ reference local 35
           val keyVisitor = try ctx.visitKey(i) catch reject(i)
 //            ^^^^^^^^^^ definition local 40
 //                       display_name keyVisitor
@@ -1072,12 +1072,12 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                        display_name length
 //                        signature_documentation scala length: Int 
 //                        kind Parameter
-//                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.visitArray().(i)
 //                                display_name i
 //                                signature_documentation scala i: Int 
 //                                kind Parameter
-//                                 ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                 ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                            ^ definition local 49
 //                                              display_name $anon
 //                                              signature_documentation scala final class $anon
@@ -1093,8 +1093,8 @@ object IndexedValue extends Transformer[IndexedValue]{
 //            signature_documentation scala private val out: Buffer[IndexedValue]
 //            kind Method
 //              ^^^^^^^ reference semanticdb maven . . scala/collection/mutable/
-//                      ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/mutable/Buffer.
-//                             ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/SeqFactory.Delegate#empty().
+//                      ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/mutable/Buffer.
+//                             ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/SeqFactory.Delegate#empty().
 //                                   ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue#
       def subVisitor = Builder
 //        ^^^^^^^^^^ definition local 48
@@ -1118,11 +1118,11 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                          display_name index
 //                                          signature_documentation scala index: Int 
 //                                          kind Parameter
-//                                           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
-//                                                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
+//                                           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
+//                                                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
         out.append(v)
 //      ^^^ reference local 50
-//          ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/mutable/Buffer#append().
+//          ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/mutable/Buffer#append().
 //                 ^ reference local 53
       }
       def visitEnd(index: Int): IndexedValue.Arr = IndexedValue.Arr(i, out.toSeq:_*)
@@ -1135,14 +1135,14 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                       display_name index
 //                       signature_documentation scala index: Int 
 //                       kind Parameter
-//                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                              ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.
 //                                           ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Arr#
 //                                                 ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.
 //                                                              ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Arr.
 //                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.visitArray().(i)
 //                                                                     ^^^ reference local 50
-//                                                                         ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/IterableOnceOps#toSeq().
+//                                                                         ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/IterableOnceOps#toSeq().
     }
 
     def visitObject(length: Int, i: Int) = new ObjVisitor[IndexedValue, IndexedValue.Obj] {
@@ -1155,12 +1155,12 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                         display_name length
 //                         signature_documentation scala length: Int 
 //                         kind Parameter
-//                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                               ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.visitObject().(i)
 //                                 display_name i
 //                                 signature_documentation scala i: Int 
 //                                 kind Parameter
-//                                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                             ^ definition local 59
 //                                               display_name $anon
 //                                               signature_documentation scala final class $anon
@@ -1176,16 +1176,16 @@ object IndexedValue extends Transformer[IndexedValue]{
 //            signature_documentation scala private val out: Buffer[(String, IndexedValue)]
 //            kind Method
 //              ^^^^^^^ reference semanticdb maven . . scala/collection/mutable/
-//                      ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/mutable/Buffer.
-//                             ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/SeqFactory.Delegate#empty().
-//                                    ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
+//                      ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/mutable/Buffer.
+//                             ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/SeqFactory.Delegate#empty().
+//                                    ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
 //                                            ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue#
       var currentKey: String = _
 //        ^^^^^^^^^^ definition local 61
 //                   display_name currentKey
 //                   signature_documentation scala private var currentKey: String
 //                   kind Method
-//                    ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Predef.String#
+//                    ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
       def subVisitor = Builder
 //        ^^^^^^^^^^ definition local 56
 //                   display_name subVisitor
@@ -1203,7 +1203,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                       display_name index
 //                       signature_documentation scala index: Int 
 //                       kind Parameter
-//                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                               ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.
 //                                            ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.
       def visitKeyValue(s: Any): Unit = currentKey = s.asInstanceOf[IndexedValue.Str].value0.toString
@@ -1217,7 +1217,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                        signature_documentation scala s: Any 
 //                        kind Parameter
 //                         ^^^ reference semanticdb maven . . scala/Any#
-//                               ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
+//                               ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
 //                                      ^^^^^^^^^^ reference local 62
 //                                                   ^ reference local 67
 //                                                     ^^^^^^^^^^^^ reference semanticdb maven . . scala/Any#asInstanceOf().
@@ -1240,11 +1240,11 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                          display_name index
 //                                          signature_documentation scala index: Int 
 //                                          kind Parameter
-//                                           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
-//                                                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Unit#
+//                                           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
+//                                                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
         out.append((currentKey, v))
 //      ^^^ reference local 60
-//          ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/mutable/Buffer#append().
+//          ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/mutable/Buffer#append().
 //                  ^^^^^^^^^^ reference local 61
 //                              ^ reference local 68
       }
@@ -1258,14 +1258,14 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                       display_name index
 //                       signature_documentation scala index: Int 
 //                       kind Parameter
-//                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                              ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.
 //                                           ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj#
 //                                                 ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.
 //                                                              ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Obj.
 //                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.visitObject().(i)
 //                                                                     ^^^ reference local 60
-//                                                                         ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/collection/IterableOnceOps#toSeq().
+//                                                                         ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/IterableOnceOps#toSeq().
     }
 
     def visitNull(i: Int) = IndexedValue.Null(i)
@@ -1278,7 +1278,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                  display_name i
 //                  signature_documentation scala i: Int 
 //                  kind Parameter
-//                   ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                   ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                          ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.
 //                                       ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Null.
 //                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.visitNull().(i)
@@ -1293,7 +1293,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                   display_name i
 //                   signature_documentation scala i: Int 
 //                   kind Parameter
-//                    ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                    ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                           ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.
 //                                        ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.False.
 //                                              ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.visitFalse().(i)
@@ -1308,7 +1308,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                  display_name i
 //                  signature_documentation scala i: Int 
 //                  kind Parameter
-//                   ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                   ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                          ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.
 //                                       ^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.True.
 //                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.visitTrue().(i)
@@ -1328,17 +1328,17 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                                        display_name decIndex
 //                                                        signature_documentation scala decIndex: Int 
 //                                                        kind Parameter
-//                                                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                              ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.visitFloat64StringParts().(expIndex)
 //                                                                       display_name expIndex
 //                                                                       signature_documentation scala expIndex: Int 
 //                                                                       kind Parameter
-//                                                                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                                             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.visitFloat64StringParts().(i)
 //                                                                               display_name i
 //                                                                               signature_documentation scala i: Int 
 //                                                                               kind Parameter
-//                                                                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                                                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                                                       ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.
 //                                                                                                    ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Num.
 //                                                                                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.visitFloat64StringParts().(i)
@@ -1356,12 +1356,12 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                              display_name d
 //                              signature_documentation scala d: Double 
 //                              kind Parameter
-//                               ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Double#
+//                               ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Double#
 //                                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.visitFloat64().(i)
 //                                         display_name i
 //                                         signature_documentation scala i: Int 
 //                                         kind Parameter
-//                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                 ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.
 //                                                              ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.NumRaw.
 //                                                                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.visitFloat64().(i)
@@ -1382,7 +1382,7 @@ object IndexedValue extends Transformer[IndexedValue]{
 //                                     display_name i
 //                                     signature_documentation scala i: Int 
 //                                     kind Parameter
-//                                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.10 scala/Int#
+//                                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                             ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.
 //                                                          ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Str.
 //                                                              ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/IndexedValue.Builder.visitString().(i)

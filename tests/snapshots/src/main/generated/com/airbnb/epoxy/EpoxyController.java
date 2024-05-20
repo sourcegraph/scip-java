@@ -354,7 +354,7 @@ public abstract class EpoxyController implements ModelCollector, StickyHeaderCal
 //                                 display_name RequestedModelBuildType
 //                                 signature_documentation java @Retention(RetentionPolicy.SOURCE)\n@IntDef({RequestedModelBuildType.NONE, RequestedModelBuildType.NEXT_FRAME, RequestedModelBuildType.DELAYED})\nprivate @interface RequestedModelBuildType
 //                                 kind Interface
-//                                 relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//                                 relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
 //         ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#
 //                                 ^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#RequestedModelBuildType#NONE.
       RequestedModelBuildType.NEXT_FRAME,

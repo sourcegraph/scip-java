@@ -50,7 +50,7 @@ public final class VisibilityState {
 //                             display_name Visibility
 //                             signature_documentation java @Retention(RetentionPolicy.SOURCE)\n@IntDef({VISIBLE, INVISIBLE, FOCUSED_VISIBLE, UNFOCUSED_VISIBLE, FULL_IMPRESSION_VISIBLE, PARTIAL_IMPRESSION_VISIBLE, PARTIAL_IMPRESSION_INVISIBLE})\npublic @interface Visibility
 //                             kind Interface
-//                             relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//                             relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
   }
 
   /**
