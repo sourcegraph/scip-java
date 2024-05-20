@@ -13,8 +13,13 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
     FileLayout.fromString(
       """/main/Sample.java
         |package main;
-        |
+        | /**
+        |  * Sample class
+        |  */
         |public class Sample {
+        |   /**
+        |    * Main application entry point
+        |    */
         |   public static void main(String[] asdf) {}
         |}
         |""".stripMargin,
@@ -37,6 +42,7 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
         targetroot.toString
       )
     )
+
     assertEquals(indexExit, 0, clues(app.capturedOutput))
 
     val snapshotExit = app().run(
@@ -47,18 +53,33 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
       FileLayout.asString(generatedpath),
       """|/main/Sample.java
          |package main;
-         |
+         | /**
+         |  * Sample class
+         |  */
          |public class Sample {
          |//           ^^^^^^ definition semanticdb maven . . main/Sample#
-         |//                  documentation ```java\npublic class Sample\n```
+         |//                  display_name Sample
+         |//                  signature_documentation java public class Sample
+         |//                  kind Class
+         |//                  documentation  Sample class\n
          |//           ^^^^^^ definition semanticdb maven . . main/Sample#`<init>`().
-         |//                  documentation ```java\npublic Sample()\n```
+         |//                  display_name <init>
+         |//                  signature_documentation java public Sample()
+         |//                  kind Constructor
+         |   /**
+         |    * Main application entry point
+         |    */
          |   public static void main(String[] asdf) {}
          |//                    ^^^^ definition semanticdb maven . . main/Sample#main().
-         |//                         documentation ```java\npublic static void main(String[] asdf)\n```
+         |//                         display_name main
+         |//                         signature_documentation java public static void main(String[] asdf)
+         |//                         kind StaticMethod
+         |//                         documentation  Main application entry point\n
          |//                         ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
          |//                                  ^^^^ definition local 0
-         |//                                       documentation ```java\nString[] asdf\n```
+         |//                                       display_name asdf
+         |//                                       signature_documentation java String[] asdf
+         |//                                       enclosing_symbol semanticdb maven . . main/Sample#main().
          |}
          |""".stripMargin
     )

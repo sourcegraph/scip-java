@@ -183,7 +183,13 @@ object ScipPrinters {
             .append("signature_documentation ")
             .append(info.getSignatureDocumentation.getLanguage)
             .append(" ")
-            .append(info.getSignatureDocumentation.getText.replace("\n", "\\n").replace("\t", "\\t"))
+            .append(
+              info
+                .getSignatureDocumentation
+                .getText
+                .replace("\n", "\\n")
+                .replace("\t", "\\t")
+            )
             .append("\n")
         }
         if (!info.getEnclosingSymbol.isEmpty) {
@@ -194,11 +200,7 @@ object ScipPrinters {
             .append("\n")
         }
         if (info.getKind != Scip.SymbolInformation.Kind.UnspecifiedKind) {
-          out
-            .append(prefix)
-            .append("kind ")
-            .append(info.getKind)
-            .append("\n")
+          out.append(prefix).append("kind ").append(info.getKind).append("\n")
         }
         0.until(info.getDocumentationCount)
           .foreach { n =>
