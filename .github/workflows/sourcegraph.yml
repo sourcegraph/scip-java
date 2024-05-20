@@ -41,3 +41,5 @@ jobs:
         run: sbt -Dscip-java-version=$(cat VERSION) sourcegraphUpload
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SRC_ENDPOINT: https://sourcegraph.com/
+          SRC_ACCESS_TOKEN: ${{ secrets.SRC_ACCESS_TOKEN_DOTCOM }}
