@@ -63,8 +63,13 @@ class SbtBuildTool(index: IndexCommand) extends BuildTool("sbt", index) {
     }
 
   private def isSupportedSbtVersion(version: String): Boolean = {
-    (!version.startsWith("0.13") || version.startsWith("0.13.17")) &&
-    !version.startsWith("1.0") && !version.startsWith("1.1")
+    SbtBuildTool.isSupportedSbtVersion(version) match {
+      case Left(message) =>
+        index.app.error(message)
+        false
+      case Right(value) =>
+        value
+    }
   }
 
   private def sbtVersion(): Option[String] = {
@@ -95,4 +100,31 @@ class SbtBuildTool(index: IndexCommand) extends BuildTool("sbt", index) {
          |""".stripMargin
     )
   }
+}
+
+object SbtBuildTool {
+  def isSupportedSbtVersion(version: String): Either[String, Boolean] = {
+    SbtVersionParser.versionSegments(version) match {
+      case major :: minor :: patch :: _ =>
+        Right {
+          (major == 0 && minor == 13 && patch >= 17) ||
+          (major == 1 && minor >= 2)
+        }
+
+      case _ =>
+        Left(
+          s"Failed to parse SBT version: [$version]. Only SBT 0.13.17+ or SBT 1.2+ are supported"
+        )
+
+    }
+  }
+}
+
+object SbtVersionParser {
+  def versionSegments(raw: String) =
+    raw
+      .takeWhile(c => c.isDigit || c == '.')
+      .split("\\.", 3)
+      .toList
+      .flatMap(_.toIntOption)
 }

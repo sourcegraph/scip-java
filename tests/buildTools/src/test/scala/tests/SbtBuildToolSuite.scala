@@ -63,4 +63,4 @@ abstract class SbtBuildToolSuite(sbt: Tool.SBT) extends BaseBuildToolSuite {
 import Tool._
 
 class Sbt_15_BuildToolSuite extends SbtBuildToolSuite(SBT15)
-class Sbt_19_BuildToolSuite extends SbtBuildToolSuite(SBT19)
+class Sbt_110_BuildToolSuite extends SbtBuildToolSuite(SBT110)
