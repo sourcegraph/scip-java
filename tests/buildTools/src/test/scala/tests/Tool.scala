@@ -45,7 +45,7 @@ object Tool {
       extends Tool("sbt", version, support)
   // See https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html#build-tool-compatibility-table
   case object SBT15 extends SBT("1.5.2", atMostJava(17))
-  case object SBT19 extends SBT("1.9.9", noRestrictions)
+  case object SBT110 extends SBT("1.10.0", noRestrictions)
 
   sealed abstract class Scala(version: String, support: JVMSupport)
       extends Tool("scala", version, support)
