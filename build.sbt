@@ -533,7 +533,7 @@ val testSettings = List(
   },
   libraryDependencies ++=
     List(
-      "org.scalameta" %% "munit" % "0.7.29",
+      "org.scalameta" %% "munit" % "1.0.0",
       "org.scalameta" %% "mtags" % V.metals cross CrossVersion.full,
       "com.dimafeng" %% "testcontainers-scala-munit" % V.testcontainers,
       "com.dimafeng" %% "testcontainers-scala-postgresql" % V.testcontainers,
