@@ -12,35 +12,48 @@ import java.util.stream.Collectors;
 
 enum Enums {
 //   ^^^^^ definition semanticdb maven . . minimized/Enums#
-//         documentation ```java\nenum Enums\n```
+//         display_name Enums
+//         signature_documentation java enum Enums
+//         kind Enum
 //         relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
 //         relationship is_implementation semanticdb maven jdk 11 java/lang/Comparable#
 //         relationship is_implementation semanticdb maven jdk 11 java/lang/Enum#
   A("A", 420),
 //^ definition semanticdb maven . . minimized/Enums#A.
-//  documentation ```java\nEnums.A("A", 420) /* ordinal 0 */\n```
+//  display_name A("A", 420)
+//  signature_documentation java Enums.A("A", 420) /* ordinal 0 */
 //^ reference semanticdb maven . . minimized/Enums#`<init>`().
   B("B", 1),
 //^ definition semanticdb maven . . minimized/Enums#B.
-//  documentation ```java\nEnums.B("B", 1) /* ordinal 1 */\n```
+//  display_name B("B", 1)
+//  signature_documentation java Enums.B("B", 1) /* ordinal 1 */
 //^ reference semanticdb maven . . minimized/Enums#`<init>`().
   C("C", 5);
 //^ definition semanticdb maven . . minimized/Enums#C.
-//  documentation ```java\nEnums.C("C", 5) /* ordinal 2 */\n```
+//  display_name C("C", 5)
+//  signature_documentation java Enums.C("C", 5) /* ordinal 2 */
 //^ reference semanticdb maven . . minimized/Enums#`<init>`().
   public String value;
 //       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //              ^^^^^ definition semanticdb maven . . minimized/Enums#value.
-//                    documentation ```java\npublic String value\n```
+//                    display_name value
+//                    signature_documentation java public String value
+//                    kind Field
 
   Enums(String value, int a) {
 //^^^^^ definition semanticdb maven . . minimized/Enums#`<init>`().
-//      documentation ```java\nprivate Enums(String value, int a)\n```
+//      display_name <init>
+//      signature_documentation java private Enums(String value, int a)
+//      kind Constructor
 //      ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //             ^^^^^ definition local 0
-//                   documentation ```java\nString value\n```
+//                   display_name value
+//                   signature_documentation java String value
+//                   enclosing_symbol semanticdb maven . . minimized/Enums#`<init>`().
 //                        ^ definition local 1
-//                          documentation ```java\nint a\n```
+//                          display_name a
+//                          signature_documentation java int a
+//                          enclosing_symbol semanticdb maven . . minimized/Enums#`<init>`().
     this.value = value;
 //       ^^^^^ reference semanticdb maven . . minimized/Enums#value.
 //               ^^^^^ reference local 0
@@ -49,17 +62,24 @@ enum Enums {
   public static String app() {
 //              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                     ^^^ definition semanticdb maven . . minimized/Enums#app().
-//                         documentation ```java\npublic static String app()\n```
+//                         display_name app
+//                         signature_documentation java public static String app()
+//                         kind StaticMethod
     String all = Arrays.stream(values()).map(e -> e.value).map(Enums::valueOf).collect(Collectors.toList()).toString();
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //         ^^^ definition local 2
-//             documentation ```java\nString all\n```
+//             display_name all
+//             signature_documentation java String all
+//             enclosing_symbol semanticdb maven . . minimized/Enums#app().
+//             kind Variable
 //               ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#stream().
 //                             ^^^^^^ reference semanticdb maven . . minimized/Enums#values().
 //                                       ^^^ reference semanticdb maven jdk 11 java/util/stream/Stream#map().
 //                                           ^ definition local 3
-//                                             documentation ```java\nEnums e\n```
+//                                             display_name e
+//                                             signature_documentation java Enums e
+//                                             enclosing_symbol semanticdb maven . . minimized/Enums#app().
 //                                                ^ reference local 3
 //                                                  ^^^^^ reference semanticdb maven . . minimized/Enums#value.
 //                                                         ^^^ reference semanticdb maven jdk 11 java/util/stream/Stream#map().

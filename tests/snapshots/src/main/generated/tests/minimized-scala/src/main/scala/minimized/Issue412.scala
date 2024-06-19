@@ -3,24 +3,36 @@ package minimized
 
 class Issue412 {
 //    ^^^^^^^^ definition semanticdb maven . . minimized/Issue412#
-//             documentation ```scala\nclass Issue412\n```
+//             display_name Issue412
+//             signature_documentation scala class Issue412
+//             kind Class
 //             ^ definition semanticdb maven . . minimized/Issue412#`<init>`().
-//               documentation ```scala\ndef this()\n```
+//               display_name <init>
+//               signature_documentation scala def this()
+//               kind Constructor
   val a: Int = 5
 //    ^ definition semanticdb maven . . minimized/Issue412#a.
-//      documentation ```scala\nval a: Int\n```
+//      display_name a
+//      signature_documentation scala val a: Int
+//      kind Method
 //       ^^^ reference semanticdb maven . . scala/Int#
   val b: Long = a
 //    ^ definition semanticdb maven . . minimized/Issue412#b.
-//      documentation ```scala\nval b: Long\n```
+//      display_name b
+//      signature_documentation scala val b: Long
+//      kind Method
 //       ^^^^ reference semanticdb maven . . scala/Long#
 //              ^ reference semanticdb maven . . minimized/Issue412#a.
 
   def a(b: Long): Unit = {
 //    ^ definition semanticdb maven . . minimized/Issue412#a().
-//      documentation ```scala\ndef a(b: Long): Unit\n```
+//      display_name a
+//      signature_documentation scala def a(b: Long): Unit
+//      kind Method
 //      ^ definition semanticdb maven . . minimized/Issue412#a().(b)
-//        documentation ```scala\nb: Long \n```
+//        display_name b
+//        signature_documentation scala b: Long 
+//        kind Parameter
 //         ^^^^ reference semanticdb maven . . scala/Long#
 //                ^^^^ reference semanticdb maven . . scala/Unit#
     println(b)

@@ -7,12 +7,18 @@ import android.widget.CompoundButton;
 
 public interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V> {
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#
-//                                            documentation ```java\npublic interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V>\n```
+//                                            display_name OnModelCheckedChangeListener
+//                                            signature_documentation java public interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V>
+//                                            kind Interface
 //                                            ^ definition semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#[T]
-//                                              documentation ```java\nT extends EpoxyModel<?>\n```
+//                                              display_name T
+//                                              signature_documentation java T extends EpoxyModel<?>
+//                                              kind TypeParameter
 //                                                      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                     ^ definition semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#[V]
-//                                                                       documentation ```java\nV\n```
+//                                                                       display_name V
+//                                                                       signature_documentation java V
+//                                                                       kind TypeParameter
   /**
    * Called when the view bound to the model is checked.
    *
@@ -25,20 +31,32 @@ public interface OnModelCheckedChangeListener<T extends EpoxyModel<?>, V> {
    */
   void onChecked(T model, V parentView,
 //     ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked().
-//               documentation ```java\npublic abstract void onChecked(T model, V parentView, unresolved_type checkedView, boolean isChecked, int position)\n```
+//               display_name onChecked
+//               signature_documentation java public abstract void onChecked(T model, V parentView, unresolved_type checkedView, boolean isChecked, int position)
+//               kind AbstractMethod
 //               documentation  Called when the view bound to the model is checked.\n\n @param model       The model that the view is bound to.\n @param parentView  The view bound to the model which received the click.\n @param checkedView The view that received the click. This is either a child of the parentView\n                    or the parentView itself\n @param isChecked   The new value for isChecked property.\n @param position    The position of the model in the adapter.\n
 //               ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#[T]
 //                 ^^^^^ definition local 0
-//                       documentation ```java\nT model\n```
+//                       display_name model
+//                       signature_documentation java T model
+//                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked().
 //                        ^ reference semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#[V]
 //                          ^^^^^^^^^^ definition local 1
-//                                     documentation ```java\nV parentView\n```
+//                                     display_name parentView
+//                                     signature_documentation java V parentView
+//                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked().
       CompoundButton checkedView, boolean isChecked, int position);
 //    ^^^^^^^^^^^^^^ reference semanticdb maven . . CompoundButton#
 //                   ^^^^^^^^^^^ definition local 2
-//                               documentation ```java\nunresolved_type checkedView\n```
+//                               display_name checkedView
+//                               signature_documentation java unresolved_type checkedView
+//                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked().
 //                                        ^^^^^^^^^ definition local 3
-//                                                  documentation ```java\nboolean isChecked\n```
+//                                                  display_name isChecked
+//                                                  signature_documentation java boolean isChecked
+//                                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked().
 //                                                       ^^^^^^^^ definition local 4
-//                                                                documentation ```java\nint position\n```
+//                                                                display_name position
+//                                                                signature_documentation java int position
+//                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#onChecked().
 }

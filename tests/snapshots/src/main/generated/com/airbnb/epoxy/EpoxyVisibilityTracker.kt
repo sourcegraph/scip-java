@@ -50,8 +50,10 @@ import java.util.HashMap
  */
 class EpoxyVisibilityTracker {
 //    ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#
+//                           display_name EpoxyVisibilityTracker
 //                           documentation ```kt\npublic final class EpoxyVisibilityTracker\n```\n\n----\n\n\n A simple way to track visibility events on [com.airbnb.epoxy.EpoxyModel].\n\n [EpoxyVisibilityTracker] works with any [androidx.recyclerview.widget.RecyclerView]\n backed by an Epoxy controller. Once attached the events will be forwarded to the Epoxy model (or\n to the Epoxy view when using annotations).\n\n Note that support for visibility events on an [EpoxyModelGroup] is somewhat limited. Only model\n additions will receive visibility events. Models that are removed from the group will not receive\n events (e.g. [VisibilityState.INVISIBLE]) because the model group does not keep a reference,\n nor does it get notified of model removals.\n\n @see OnVisibilityChanged\n\n @see OnVisibilityStateChanged\n\n @see OnModelVisibilityChangedListener\n\n @see OnModelVisibilityStateChangedListener\n
 //    ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#`<init>`().
+//                           display_name EpoxyVisibilityTracker
 //                           documentation ```kt\npublic constructor EpoxyVisibilityTracker()\n```\n\n----\n\n\n A simple way to track visibility events on [com.airbnb.epoxy.EpoxyModel].\n\n [EpoxyVisibilityTracker] works with any [androidx.recyclerview.widget.RecyclerView]\n backed by an Epoxy controller. Once attached the events will be forwarded to the Epoxy model (or\n to the Epoxy view when using annotations).\n\n Note that support for visibility events on an [EpoxyModelGroup] is somewhat limited. Only model\n additions will receive visibility events. Models that are removed from the group will not receive\n events (e.g. [VisibilityState.INVISIBLE]) because the model group does not keep a reference,\n nor does it get notified of model removals.\n\n @see OnVisibilityChanged\n\n @see OnVisibilityStateChanged\n\n @see OnModelVisibilityChangedListener\n\n @see OnModelVisibilityStateChangedListener\n
 
     /**
@@ -59,8 +61,10 @@ class EpoxyVisibilityTracker {
      */
     private val itemAnimatorFinishedListener =
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getItemAnimatorFinishedListener().
+//                                           display_name itemAnimatorFinishedListener
 //                                           documentation ```kt\nprivate final val itemAnimatorFinishedListener: [Error type: Return type for function cannot be resolved]\n```\n\n----\n\n\n Used to listen to [RecyclerView.ItemAnimator] ending animations.\n
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#itemAnimatorFinishedListener.
+//                                           display_name itemAnimatorFinishedListener
 //                                           documentation ```kt\nprivate final val itemAnimatorFinishedListener: [Error type: Return type for function cannot be resolved]\n```\n\n----\n\n\n Used to listen to [RecyclerView.ItemAnimator] ending animations.\n
         RecyclerView.ItemAnimator.ItemAnimatorFinishedListener {
             processChangeEvent(
@@ -73,14 +77,18 @@ class EpoxyVisibilityTracker {
     /** Maintain visibility item indexed by view id (identity hashcode)  */
     private val visibilityIdToItemMap = SparseArray<EpoxyVisibilityItem>()
 //              ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItemMap().
+//                                    display_name visibilityIdToItemMap
 //                                    documentation ```kt\nprivate final val visibilityIdToItemMap: [Error type: Not found recorded type for SparseArray<EpoxyVisibilityItem>()]\n```\n\n----\n\n Maintain visibility item indexed by view id (identity hashcode)
 //              ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
+//                                    display_name visibilityIdToItemMap
 //                                    documentation ```kt\nprivate final val visibilityIdToItemMap: [Error type: Not found recorded type for SparseArray<EpoxyVisibilityItem>()]\n```\n\n----\n\n Maintain visibility item indexed by view id (identity hashcode)
 //                                                  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#
     private val visibilityIdToItems: MutableList<EpoxyVisibilityItem> = ArrayList()
 //              ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
+//                                  display_name visibilityIdToItems
 //                                  documentation ```kt\nprivate final val visibilityIdToItems: kotlin.collections.MutableList<com.airbnb.epoxy.EpoxyVisibilityItem>\n```
 //              ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
+//                                  display_name visibilityIdToItems
 //                                  documentation ```kt\nprivate final val visibilityIdToItems: kotlin.collections.MutableList<com.airbnb.epoxy.EpoxyVisibilityItem>\n```
 //                                   ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#
 //                                               ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#
@@ -89,40 +97,52 @@ class EpoxyVisibilityTracker {
     /** listener used to process scroll, layout and attach events  */
     private val listener = Listener()
 //              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getListener().
+//                       display_name listener
 //                       documentation ```kt\nprivate final val listener: com.airbnb.epoxy.EpoxyVisibilityTracker.Listener\n```\n\n----\n\n listener used to process scroll, layout and attach events
 //              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#listener.
+//                       display_name listener
 //                       documentation ```kt\nprivate final val listener: com.airbnb.epoxy.EpoxyVisibilityTracker.Listener\n```\n\n----\n\n listener used to process scroll, layout and attach events
 //                         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#`<init>`().
 
     /** listener used to process data events  */
     private val observer = DataObserver()
 //              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getObserver().
+//                       display_name observer
 //                       documentation ```kt\nprivate final val observer: com.airbnb.epoxy.EpoxyVisibilityTracker.DataObserver\n```\n\n----\n\n listener used to process data events
 //              ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#observer.
+//                       display_name observer
 //                       documentation ```kt\nprivate final val observer: com.airbnb.epoxy.EpoxyVisibilityTracker.DataObserver\n```\n\n----\n\n listener used to process data events
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#`<init>`().
 
     private var attachedRecyclerView: RecyclerView? = null
 //              ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView.
+//                                   display_name attachedRecyclerView
 //                                   documentation ```kt\nprivate final var attachedRecyclerView: [Error type: Unresolved type for RecyclerView]?\n```
 //              ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getAttachedRecyclerView().
+//                                   display_name attachedRecyclerView
 //                                   documentation ```kt\nprivate final var attachedRecyclerView: [Error type: Unresolved type for RecyclerView]?\n```
 //              ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setAttachedRecyclerView().
+//                                   display_name attachedRecyclerView
 //                                   documentation ```kt\nprivate final var attachedRecyclerView: [Error type: Unresolved type for RecyclerView]?\n```
 
     private var lastAdapterSeen: RecyclerView.Adapter<*>? = null
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getLastAdapterSeen().
+//                              display_name lastAdapterSeen
 //                              documentation ```kt\nprivate final var lastAdapterSeen: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#lastAdapterSeen.
+//                              display_name lastAdapterSeen
 //                              documentation ```kt\nprivate final var lastAdapterSeen: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```
 //              ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setLastAdapterSeen().
+//                              display_name lastAdapterSeen
 //                              documentation ```kt\nprivate final var lastAdapterSeen: [Error type: Unresolved type for RecyclerView.Adapter<*>]<out [Error type: Error type projection]>?\n```
 
     /** All nested visibility trackers  */
     private val nestedTrackers: MutableMap<RecyclerView, EpoxyVisibilityTracker> = HashMap()
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getNestedTrackers().
+//                             display_name nestedTrackers
 //                             documentation ```kt\nprivate final val nestedTrackers: kotlin.collections.MutableMap<[Error type: Unresolved type for RecyclerView], com.airbnb.epoxy.EpoxyVisibilityTracker>\n```\n\n----\n\n All nested visibility trackers
 //              ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#nestedTrackers.
+//                             display_name nestedTrackers
 //                             documentation ```kt\nprivate final val nestedTrackers: kotlin.collections.MutableMap<[Error type: Unresolved type for RecyclerView], com.airbnb.epoxy.EpoxyVisibilityTracker>\n```\n\n----\n\n All nested visibility trackers
 //                              ^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#
 //                                                       ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#
@@ -132,10 +152,13 @@ class EpoxyVisibilityTracker {
      * need to re-process all views, else no need (ex: scroll). */
     private var visibleDataChanged = false
 //              ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibleDataChanged().
+//                                 display_name visibleDataChanged
 //                                 documentation ```kt\nprivate final var visibleDataChanged: kotlin.Boolean\n```\n\n----\n\n This flag is for optimizing the process on detach. If detach is from data changed then it\n need to re-process all views, else no need (ex: scroll).
 //              ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setVisibleDataChanged().
+//                                 display_name visibleDataChanged
 //                                 documentation ```kt\nprivate final var visibleDataChanged: kotlin.Boolean\n```\n\n----\n\n This flag is for optimizing the process on detach. If detach is from data changed then it\n need to re-process all views, else no need (ex: scroll).
 //              ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibleDataChanged.
+//                                 display_name visibleDataChanged
 //                                 documentation ```kt\nprivate final var visibleDataChanged: kotlin.Boolean\n```\n\n----\n\n This flag is for optimizing the process on detach. If detach is from data changed then it\n need to re-process all views, else no need (ex: scroll).
 
     /**
@@ -148,10 +171,13 @@ class EpoxyVisibilityTracker {
      */
     var onChangedEnabled = true
 //      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getOnChangedEnabled().
+//                       display_name onChangedEnabled
 //                       documentation ```kt\npublic final var onChangedEnabled: kotlin.Boolean\n```\n\n----\n\n\n Enable or disable visibility changed event. Default is `true`, disable it if you don't need\n (triggered by every pixel scrolled).\n\n @see OnVisibilityChanged\n\n @see OnModelVisibilityChangedListener\n
 //      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#onChangedEnabled.
+//                       display_name onChangedEnabled
 //                       documentation ```kt\npublic final var onChangedEnabled: kotlin.Boolean\n```\n\n----\n\n\n Enable or disable visibility changed event. Default is `true`, disable it if you don't need\n (triggered by every pixel scrolled).\n\n @see OnVisibilityChanged\n\n @see OnModelVisibilityChangedListener\n
 //      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setOnChangedEnabled().
+//                       display_name onChangedEnabled
 //                       documentation ```kt\npublic final var onChangedEnabled: kotlin.Boolean\n```\n\n----\n\n\n Enable or disable visibility changed event. Default is `true`, disable it if you don't need\n (triggered by every pixel scrolled).\n\n @see OnVisibilityChanged\n\n @see OnModelVisibilityChangedListener\n
 
     /**
@@ -168,10 +194,13 @@ class EpoxyVisibilityTracker {
 //                      ^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/IntRange#`<init>`().(to)
     var partialImpressionThresholdPercentage: Int? = null
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getPartialImpressionThresholdPercentage().
+//                                           display_name partialImpressionThresholdPercentage
 //                                           documentation ```kt\npublic final var partialImpressionThresholdPercentage: kotlin.Int?\n```\n\n----\n\n\n Set the threshold of percentage visible area to identify the partial impression view state.\n\n @param thresholdPercentage Percentage of visible area of an element in the range [0..100].\n Defaults to `null`, which disables\n [VisibilityState.PARTIAL_IMPRESSION_VISIBLE] and\n [VisibilityState.PARTIAL_IMPRESSION_INVISIBLE] events.\n
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#partialImpressionThresholdPercentage.
+//                                           display_name partialImpressionThresholdPercentage
 //                                           documentation ```kt\npublic final var partialImpressionThresholdPercentage: kotlin.Int?\n```\n\n----\n\n\n Set the threshold of percentage visible area to identify the partial impression view state.\n\n @param thresholdPercentage Percentage of visible area of an element in the range [0..100].\n Defaults to `null`, which disables\n [VisibilityState.PARTIAL_IMPRESSION_VISIBLE] and\n [VisibilityState.PARTIAL_IMPRESSION_INVISIBLE] events.\n
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setPartialImpressionThresholdPercentage().
+//                                           display_name partialImpressionThresholdPercentage
 //                                           documentation ```kt\npublic final var partialImpressionThresholdPercentage: kotlin.Int?\n```\n\n----\n\n\n Set the threshold of percentage visible area to identify the partial impression view state.\n\n @param thresholdPercentage Percentage of visible area of an element in the range [0..100].\n Defaults to `null`, which disables\n [VisibilityState.PARTIAL_IMPRESSION_VISIBLE] and\n [VisibilityState.PARTIAL_IMPRESSION_INVISIBLE] events.\n
 //                                            ^^^ reference semanticdb maven . . kotlin/Int#
 
@@ -182,8 +211,10 @@ class EpoxyVisibilityTracker {
      */
     fun attach(recyclerView: RecyclerView) {
 //      ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#attach().
+//             display_name attach
 //             documentation ```kt\npublic final fun attach(recyclerView: [Error type: Unresolved type for RecyclerView])\n```\n\n----\n\n\n Attach the tracker.\n\n @param recyclerView The recyclerview that the EpoxyController has its adapter added to.\n
 //             ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#attach().(recyclerView)
+//                          display_name recyclerView
 //                          documentation ```kt\nvalue-parameter recyclerView: [Error type: Unresolved type for RecyclerView]\n```
         attachedRecyclerView = recyclerView
 //      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView.
@@ -215,8 +246,10 @@ class EpoxyVisibilityTracker {
      */
     fun detach(recyclerView: RecyclerView) {
 //      ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#detach().
+//             display_name detach
 //             documentation ```kt\npublic final fun detach(recyclerView: [Error type: Unresolved type for RecyclerView])\n```\n\n----\n\n\n Detach the tracker\n\n @param recyclerView The recycler view that the EpoxyController has its adapter added to.\n
 //             ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#detach().(recyclerView)
+//                          display_name recyclerView
 //                          documentation ```kt\nvalue-parameter recyclerView: [Error type: Unresolved type for RecyclerView]\n```
         recyclerView.removeOnScrollListener(listener)
 //      ^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#detach().(recyclerView)
@@ -246,6 +279,7 @@ class EpoxyVisibilityTracker {
      */
     fun clearVisibilityStates() {
 //      ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#clearVisibilityStates().
+//                            display_name clearVisibilityStates
 //                            documentation ```kt\npublic final fun clearVisibilityStates()\n```\n\n----\n\n\n The tracker is storing visibility states internally and is using if to send events, only the\n difference is sent. Use this method to clear the states and thus regenerate the visibility\n events. This may be useful when you change the adapter on the [RecyclerView].\n
         // Clear our visibility items
         visibilityIdToItemMap.clear()
@@ -268,6 +302,7 @@ class EpoxyVisibilityTracker {
      */
     fun requestVisibilityCheck() {
 //      ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#requestVisibilityCheck().
+//                             display_name requestVisibilityCheck
 //                             documentation ```kt\npublic final fun requestVisibilityCheck()\n```\n\n----\n\n\n Calling this method will make the visibility tracking check and trigger events if necessary. It\n is particularly useful when the visibility of an Epoxy model is changed outside of an Epoxy\n RecyclerView.\n\n An example is when you nest an horizontal Epoxy backed RecyclerView in a non Epoxy vertical\n RecyclerView. When the vertical RecyclerView scroll you want to notify the visibility tracker\n attached on the horizontal RecyclerView.\n
         processChangeEvent("requestVisibilityCheck")
 //      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().
@@ -280,17 +315,21 @@ class EpoxyVisibilityTracker {
      */
     private fun processChangeEvent(debug: String, checkItemAnimator: Boolean = true) {
 //              ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().
+//                                 display_name processChangeEvent
 //                                 documentation ```kt\nprivate final fun processChangeEvent(debug: kotlin.String, checkItemAnimator: kotlin.Boolean = ...)\n```\n\n----\n\n\n Process a change event.\n @param debug: string for debug usually the source of the call\n @param checkItemAnimator: true if it need to check if ItemAnimator is running\n
 //                                 ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().(debug)
+//                                       display_name debug
 //                                       documentation ```kt\nvalue-parameter debug: kotlin.String\n```
 //                                        ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEvent().(checkItemAnimator)
+//                                                                  display_name checkItemAnimator
 //                                                                  documentation ```kt\nvalue-parameter checkItemAnimator: kotlin.Boolean = ...\n```
 //                                                                   ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 
         // Only if attached
         val recyclerView = attachedRecyclerView ?: return
 //          ^^^^^^^^^^^^ definition local 0
+//                       display_name recyclerView
 //                       documentation ```kt\nval recyclerView: kotlin.Nothing\n```
 //                         ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView.
 //                         ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getAttachedRecyclerView().
@@ -298,6 +337,7 @@ class EpoxyVisibilityTracker {
 
         val itemAnimator = recyclerView.itemAnimator
 //          ^^^^^^^^^^^^ definition local 1
+//                       display_name itemAnimator
 //                       documentation ```kt\nval itemAnimator: [Error type: Not found recorded type for recyclerView.itemAnimator]\n```
 //                         ^^^^^^^^^^^^ reference local 0
         if (checkItemAnimator && itemAnimator != null) {
@@ -324,16 +364,20 @@ class EpoxyVisibilityTracker {
 
     private fun processChangeEventWithDetachedView(detachedView: View?, debug: String) {
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEventWithDetachedView().
+//                                                 display_name processChangeEventWithDetachedView
 //                                                 documentation ```kt\nprivate final fun processChangeEventWithDetachedView(detachedView: [Error type: Unresolved type for View]?, debug: kotlin.String)\n```
 //                                                 ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEventWithDetachedView().(detachedView)
+//                                                              display_name detachedView
 //                                                              documentation ```kt\nvalue-parameter detachedView: [Error type: Unresolved type for View]?\n```
 //                                                                      ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChangeEventWithDetachedView().(debug)
+//                                                                            display_name debug
 //                                                                            documentation ```kt\nvalue-parameter debug: kotlin.String\n```
 //                                                                             ^^^^^^ reference semanticdb maven . . kotlin/String#
 
         // Only if attached
         val recyclerView = attachedRecyclerView ?: return
 //          ^^^^^^^^^^^^ definition local 2
+//                       display_name recyclerView
 //                       documentation ```kt\nval recyclerView: kotlin.Nothing\n```
 //                         ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView.
 //                         ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getAttachedRecyclerView().
@@ -352,11 +396,13 @@ class EpoxyVisibilityTracker {
         // Process all attached children
         for (i in 0 until recyclerView.childCount) {
 //           ^ definition local 3
+//             display_name i
 //             documentation ```kt\nval i: kotlin.Int\n```
 //                  ^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/RangesKt#until(+6).
 //                        ^^^^^^^^^^^^ reference local 2
             val child = recyclerView.getChildAt(i)
 //              ^^^^^ definition local 4
+//                    display_name child
 //                    documentation ```kt\nval child: [Error type: Not found recorded type for recyclerView.getChildAt(i)]\n```
 //                      ^^^^^^^^^^^^ reference local 2
 //                                              ^ reference local 3
@@ -380,12 +426,14 @@ class EpoxyVisibilityTracker {
      */
     private fun processNewAdapterIfNecessary() {
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processNewAdapterIfNecessary().
+//                                           display_name processNewAdapterIfNecessary
 //                                           documentation ```kt\nprivate final fun processNewAdapterIfNecessary()\n```\n\n----\n\n\n If there is a new adapter on the attached RecyclerView it will register the data observer and\n clear the current visibility states\n
         attachedRecyclerView?.adapter?.let { adapter ->
 //      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView.
 //      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getAttachedRecyclerView().
 //      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setAttachedRecyclerView().
 //                                           ^^^^^^^ definition local 5
+//                                                   display_name adapter
 //                                                   documentation ```kt\nvalue-parameter adapter: [Error type: Cannot infer a lambda parameter type]\n```
             if (lastAdapterSeen != adapter) {
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getLastAdapterSeen().
@@ -423,19 +471,24 @@ class EpoxyVisibilityTracker {
      */
     private fun processChild(child: View, detachEvent: Boolean, eventOriginForDebug: String) {
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().
+//                           display_name processChild
 //                           documentation ```kt\nprivate final fun processChild(child: [Error type: Unresolved type for View], detachEvent: kotlin.Boolean, eventOriginForDebug: kotlin.String)\n```\n\n----\n\n\n Don't call this method directly, it is called from\n [EpoxyVisibilityTracker.processVisibilityEvents]\n\n @param child               the view to process for visibility event\n @param detachEvent         true if the child was just detached\n @param eventOriginForDebug a debug strings used for logs\n
 //                           ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(child)
+//                                 display_name child
 //                                 documentation ```kt\nvalue-parameter child: [Error type: Unresolved type for View]\n```
 //                                        ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(detachEvent)
+//                                                    display_name detachEvent
 //                                                    documentation ```kt\nvalue-parameter detachEvent: kotlin.Boolean\n```
 //                                                     ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                              ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(eventOriginForDebug)
+//                                                                                  display_name eventOriginForDebug
 //                                                                                  documentation ```kt\nvalue-parameter eventOriginForDebug: kotlin.String\n```
 //                                                                                   ^^^^^^ reference semanticdb maven . . kotlin/String#
 
         // Only if attached
         val recyclerView = attachedRecyclerView ?: return
 //          ^^^^^^^^^^^^ definition local 6
+//                       display_name recyclerView
 //                       documentation ```kt\nval recyclerView: kotlin.Nothing\n```
 //                         ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#attachedRecyclerView.
 //                         ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getAttachedRecyclerView().
@@ -445,12 +498,14 @@ class EpoxyVisibilityTracker {
         // `getChildViewHolder`.
         val isParentValid = child.parent == null || child.parent === recyclerView
 //          ^^^^^^^^^^^^^ definition local 7
+//                        display_name isParentValid
 //                        documentation ```kt\nval isParentValid: kotlin.Boolean\n```
 //                          ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(child)
 //                                                  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild().(child)
 //                                                                   ^^^^^^^^^^^^ reference local 6
         val viewHolder = if (isParentValid) recyclerView.getChildViewHolder(child) else null
 //          ^^^^^^^^^^ definition local 8
+//                     display_name viewHolder
 //                     documentation ```kt\nval viewHolder: kotlin.Nothing?\n```
 //                           ^^^^^^^^^^^^^ reference local 7
 //                                          ^^^^^^^^^^^^ reference local 6
@@ -459,6 +514,7 @@ class EpoxyVisibilityTracker {
 //          ^^^^^^^^^^ reference local 8
             val epoxyHolder = viewHolder.holder
 //              ^^^^^^^^^^^ definition local 9
+//                          display_name epoxyHolder
 //                          documentation ```kt\nval epoxyHolder: [Error type: Not found recorded type for viewHolder.holder]\n```
 //                            ^^^^^^^^^^ reference local 8
             processChild(recyclerView, child, detachEvent, eventOriginForDebug, viewHolder)
@@ -492,26 +548,32 @@ class EpoxyVisibilityTracker {
      */
     private fun processModelGroupChildren(
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().
+//                                        display_name processModelGroupChildren
 //                                        documentation ```kt\nprivate final fun processModelGroupChildren(recyclerView: [Error type: Unresolved type for RecyclerView], epoxyHolder: com.airbnb.epoxy.ModelGroupHolder, detachEvent: kotlin.Boolean, eventOriginForDebug: kotlin.String)\n```\n\n----\n\n\n Loop through the children of the model group and process visibility events on each one in\n relation to the model group's layout. This will attach or detach trackers to any nested\n [RecyclerView]s.\n\n @param epoxyHolder         the [ModelGroupHolder] with children to process\n @param detachEvent         true if the child was just detached\n @param eventOriginForDebug a debug strings used for logs\n
         recyclerView: RecyclerView,
 //      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(recyclerView)
+//                   display_name recyclerView
 //                   documentation ```kt\nvalue-parameter recyclerView: [Error type: Unresolved type for RecyclerView]\n```
         epoxyHolder: ModelGroupHolder,
 //      ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(epoxyHolder)
+//                  display_name epoxyHolder
 //                  documentation ```kt\nvalue-parameter epoxyHolder: com.airbnb.epoxy.ModelGroupHolder\n```
 //                   ^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#
         detachEvent: Boolean,
 //      ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(detachEvent)
+//                  display_name detachEvent
 //                  documentation ```kt\nvalue-parameter detachEvent: kotlin.Boolean\n```
 //                   ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
         eventOriginForDebug: String
 //      ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(eventOriginForDebug)
+//                          display_name eventOriginForDebug
 //                          documentation ```kt\nvalue-parameter eventOriginForDebug: kotlin.String\n```
 //                           ^^^^^^ reference semanticdb maven . . kotlin/String#
     ) {
         // Iterate through models in the group and process each of them instead of the group
         for (groupChildHolder in epoxyHolder.viewHolders) {
 //           ^^^^^^^^^^^^^^^^ definition local 10
+//                            display_name groupChildHolder
 //                            documentation ```kt\nval groupChildHolder: [Error type: Return type for function cannot be resolved]\n```
 //                               ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processModelGroupChildren().(epoxyHolder)
 //                                           ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ModelGroupHolder#getViewHolders().
@@ -559,27 +621,34 @@ class EpoxyVisibilityTracker {
      */
     private fun processChild(
 //              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).
+//                           display_name processChild
 //                           documentation ```kt\nprivate final fun processChild(recyclerView: [Error type: Unresolved type for RecyclerView], child: [Error type: Unresolved type for View], detachEvent: kotlin.Boolean, eventOriginForDebug: kotlin.String, viewHolder: [Error type: Unresolved type for EpoxyViewHolder])\n```\n\n----\n\n\n Process visibility events for a view and propagate to a nested tracker if the view is a\n [RecyclerView].\n\n @param child               the view to process for visibility event\n @param detachEvent         true if the child was just detached\n @param eventOriginForDebug a debug strings used for logs\n @param viewHolder          the view holder for the child view\n
         recyclerView: RecyclerView,
 //      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(recyclerView)
+//                   display_name recyclerView
 //                   documentation ```kt\nvalue-parameter recyclerView: [Error type: Unresolved type for RecyclerView]\n```
         child: View,
 //      ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(child)
+//            display_name child
 //            documentation ```kt\nvalue-parameter child: [Error type: Unresolved type for View]\n```
         detachEvent: Boolean,
 //      ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(detachEvent)
+//                  display_name detachEvent
 //                  documentation ```kt\nvalue-parameter detachEvent: kotlin.Boolean\n```
 //                   ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
         eventOriginForDebug: String,
 //      ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(eventOriginForDebug)
+//                          display_name eventOriginForDebug
 //                          documentation ```kt\nvalue-parameter eventOriginForDebug: kotlin.String\n```
 //                           ^^^^^^ reference semanticdb maven . . kotlin/String#
         viewHolder: EpoxyViewHolder
 //      ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChild(+1).(viewHolder)
+//                 display_name viewHolder
 //                 documentation ```kt\nvalue-parameter viewHolder: [Error type: Unresolved type for EpoxyViewHolder]\n```
     ) {
         val changed = processVisibilityEvents(
 //          ^^^^^^^ definition local 11
+//                  display_name changed
 //                  documentation ```kt\nval changed: kotlin.Boolean\n```
 //                    ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().
             recyclerView,
@@ -615,19 +684,24 @@ class EpoxyVisibilityTracker {
      */
     private fun processVisibilityEvents(
 //              ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().
+//                                      display_name processVisibilityEvents
 //                                      documentation ```kt\nprivate final fun processVisibilityEvents(recyclerView: [Error type: Unresolved type for RecyclerView], epoxyHolder: [Error type: Unresolved type for EpoxyViewHolder], detachEvent: kotlin.Boolean, eventOriginForDebug: kotlin.String): kotlin.Boolean\n```\n\n----\n\n\n Call this methods every time something related to ui (scroll, layout, ...) or something related\n to data changed.\n\n @param recyclerView        the recycler view\n @param epoxyHolder         the [RecyclerView]\n @param detachEvent         true if the event originated from a view detached from the\n recycler view\n @param eventOriginForDebug a debug strings used for logs\n @return true if changed\n
         recyclerView: RecyclerView,
 //      ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(recyclerView)
+//                   display_name recyclerView
 //                   documentation ```kt\nvalue-parameter recyclerView: [Error type: Unresolved type for RecyclerView]\n```
         epoxyHolder: EpoxyViewHolder,
 //      ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(epoxyHolder)
+//                  display_name epoxyHolder
 //                  documentation ```kt\nvalue-parameter epoxyHolder: [Error type: Unresolved type for EpoxyViewHolder]\n```
         detachEvent: Boolean,
 //      ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(detachEvent)
+//                  display_name detachEvent
 //                  documentation ```kt\nvalue-parameter detachEvent: kotlin.Boolean\n```
 //                   ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
         eventOriginForDebug: String
 //      ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(eventOriginForDebug)
+//                          display_name eventOriginForDebug
 //                          documentation ```kt\nvalue-parameter eventOriginForDebug: kotlin.String\n```
 //                           ^^^^^^ reference semanticdb maven . . kotlin/String#
     ): Boolean {
@@ -654,16 +728,19 @@ class EpoxyVisibilityTracker {
         }
         val itemView = epoxyHolder.itemView
 //          ^^^^^^^^ definition local 12
+//                   display_name itemView
 //                   documentation ```kt\nval itemView: [Error type: Error property type]\n```
 //                     ^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processVisibilityEvents().(epoxyHolder)
         val id = System.identityHashCode(itemView)
 //          ^^ definition local 13
+//             display_name id
 //             documentation ```kt\nval id: kotlin.Int\n```
 //               ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
 //                      ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/System#identityHashCode().
 //                                       ^^^^^^^^ reference local 12
         var vi = visibilityIdToItemMap[id]
 //          ^^ definition local 14
+//             display_name vi
 //             documentation ```kt\nvar vi: [Error type: Return type for function cannot be resolved]\n```
 //               ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItemMap().
 //               ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItemMap.
@@ -698,6 +775,7 @@ class EpoxyVisibilityTracker {
         }
         var changed = false
 //          ^^^^^^^ definition local 15
+//                  display_name changed
 //                  documentation ```kt\nvar changed: kotlin.Boolean\n```
         if (vi.update(itemView, recyclerView, detachEvent)) {
 //          ^^ reference local 14
@@ -715,6 +793,7 @@ class EpoxyVisibilityTracker {
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#setPartialImpressionThresholdPercentage().
 //                                                ^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/StandardKt#let().
 //                                                      ^^^^^^^^^^ definition local 16
+//                                                                 display_name percentage
 //                                                                 documentation ```kt\nvalue-parameter percentage: kotlin.Int\n```
                 vi.handlePartialImpressionVisible(
 //              ^^ reference local 14
@@ -747,19 +826,23 @@ class EpoxyVisibilityTracker {
 
     private fun processChildRecyclerViewAttached(childRecyclerView: RecyclerView) {
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewAttached().
+//                                               display_name processChildRecyclerViewAttached
 //                                               documentation ```kt\nprivate final fun processChildRecyclerViewAttached(childRecyclerView: [Error type: Unresolved type for RecyclerView])\n```
 //                                               ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewAttached().(childRecyclerView)
+//                                                                 display_name childRecyclerView
 //                                                                 documentation ```kt\nvalue-parameter childRecyclerView: [Error type: Unresolved type for RecyclerView]\n```
         // Register itself in the EpoxyVisibilityTracker. This will take care of nested list
         // tracking (ex: carousel)
         val tracker = getTracker(childRecyclerView) ?: EpoxyVisibilityTracker().let { nested ->
 //          ^^^^^^^ definition local 17
+//                  display_name tracker
 //                  documentation ```kt\nval tracker: com.airbnb.epoxy.EpoxyVisibilityTracker\n```
 //                    ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTracker().
 //                               ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewAttached().(childRecyclerView)
 //                                                     ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#`<init>`().
 //                                                                              ^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/StandardKt#let().
 //                                                                                    ^^^^^^ definition local 18
+//                                                                                           display_name nested
 //                                                                                           documentation ```kt\nvalue-parameter nested: com.airbnb.epoxy.EpoxyVisibilityTracker\n```
             nested.partialImpressionThresholdPercentage = partialImpressionThresholdPercentage
 //          ^^^^^^ reference local 18
@@ -785,8 +868,10 @@ class EpoxyVisibilityTracker {
 
     private fun processChildRecyclerViewDetached(childRecyclerView: RecyclerView) {
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewDetached().
+//                                               display_name processChildRecyclerViewDetached
 //                                               documentation ```kt\nprivate final fun processChildRecyclerViewDetached(childRecyclerView: [Error type: Unresolved type for RecyclerView])\n```
 //                                               ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#processChildRecyclerViewDetached().(childRecyclerView)
+//                                                                 display_name childRecyclerView
 //                                                                 documentation ```kt\nvalue-parameter childRecyclerView: [Error type: Unresolved type for RecyclerView]\n```
         nestedTrackers.remove(childRecyclerView)
 //      ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getNestedTrackers().
@@ -801,48 +886,60 @@ class EpoxyVisibilityTracker {
      */
     private inner class Listener :
 //                      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#
+//                               display_name Listener
 //                               documentation ```kt\nprivate final inner class Listener\n```\n\n----\n\n\n Helper class that host the [androidx.recyclerview.widget.RecyclerView] listener\n implementations\n
 //                      ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#`<init>`().
+//                               display_name Listener
 //                               documentation ```kt\npublic constructor Listener()\n```\n\n----\n\n\n Helper class that host the [androidx.recyclerview.widget.RecyclerView] listener\n implementations\n
         RecyclerView.OnScrollListener(),
         View.OnLayoutChangeListener,
         RecyclerView.OnChildAttachStateChangeListener {
         override fun onLayoutChange(
 //                   ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().
+//                                  display_name onLayoutChange
 //                                  documentation ```kt\npublic open fun onLayoutChange(recyclerView: [Error type: Unresolved type for View], left: kotlin.Int, top: kotlin.Int, right: kotlin.Int, bottom: kotlin.Int, oldLeft: kotlin.Int, oldTop: kotlin.Int, oldRight: kotlin.Int, oldBottom: kotlin.Int)\n```
             recyclerView: View,
 //          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(recyclerView)
+//                       display_name recyclerView
 //                       documentation ```kt\nvalue-parameter recyclerView: [Error type: Unresolved type for View]\n```
             left: Int,
 //          ^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(left)
+//               display_name left
 //               documentation ```kt\nvalue-parameter left: kotlin.Int\n```
 //                ^^^ reference semanticdb maven . . kotlin/Int#
             top: Int,
 //          ^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(top)
+//              display_name top
 //              documentation ```kt\nvalue-parameter top: kotlin.Int\n```
 //               ^^^ reference semanticdb maven . . kotlin/Int#
             right: Int,
 //          ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(right)
+//                display_name right
 //                documentation ```kt\nvalue-parameter right: kotlin.Int\n```
 //                 ^^^ reference semanticdb maven . . kotlin/Int#
             bottom: Int,
 //          ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(bottom)
+//                 display_name bottom
 //                 documentation ```kt\nvalue-parameter bottom: kotlin.Int\n```
 //                  ^^^ reference semanticdb maven . . kotlin/Int#
             oldLeft: Int,
 //          ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(oldLeft)
+//                  display_name oldLeft
 //                  documentation ```kt\nvalue-parameter oldLeft: kotlin.Int\n```
 //                   ^^^ reference semanticdb maven . . kotlin/Int#
             oldTop: Int,
 //          ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(oldTop)
+//                 display_name oldTop
 //                 documentation ```kt\nvalue-parameter oldTop: kotlin.Int\n```
 //                  ^^^ reference semanticdb maven . . kotlin/Int#
             oldRight: Int,
 //          ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(oldRight)
+//                   display_name oldRight
 //                   documentation ```kt\nvalue-parameter oldRight: kotlin.Int\n```
 //                    ^^^ reference semanticdb maven . . kotlin/Int#
             oldBottom: Int
 //          ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onLayoutChange().(oldBottom)
+//                    display_name oldBottom
 //                    documentation ```kt\nvalue-parameter oldBottom: kotlin.Int\n```
 //                     ^^^ reference semanticdb maven . . kotlin/Int#
         ) {
@@ -852,13 +949,17 @@ class EpoxyVisibilityTracker {
 
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 //                   ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onScrolled().
+//                              display_name onScrolled
 //                              documentation ```kt\npublic open fun onScrolled(recyclerView: [Error type: Unresolved type for RecyclerView], dx: kotlin.Int, dy: kotlin.Int)\n```
 //                              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onScrolled().(recyclerView)
+//                                           display_name recyclerView
 //                                           documentation ```kt\nvalue-parameter recyclerView: [Error type: Unresolved type for RecyclerView]\n```
 //                                                          ^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onScrolled().(dx)
+//                                                             display_name dx
 //                                                             documentation ```kt\nvalue-parameter dx: kotlin.Int\n```
 //                                                              ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                                   ^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onScrolled().(dy)
+//                                                                      display_name dy
 //                                                                      documentation ```kt\nvalue-parameter dy: kotlin.Int\n```
 //                                                                       ^^^ reference semanticdb maven . . kotlin/Int#
             processChangeEvent("onScrolled")
@@ -867,8 +968,10 @@ class EpoxyVisibilityTracker {
 
         override fun onChildViewAttachedToWindow(child: View) {
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewAttachedToWindow().
+//                                               display_name onChildViewAttachedToWindow
 //                                               documentation ```kt\npublic open fun onChildViewAttachedToWindow(child: [Error type: Unresolved type for View])\n```
 //                                               ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewAttachedToWindow().(child)
+//                                                     display_name child
 //                                                     documentation ```kt\nvalue-parameter child: [Error type: Unresolved type for View]\n```
             if (child is RecyclerView) {
 //              ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewAttachedToWindow().(child)
@@ -883,8 +986,10 @@ class EpoxyVisibilityTracker {
 
         override fun onChildViewDetachedFromWindow(child: View) {
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewDetachedFromWindow().
+//                                                 display_name onChildViewDetachedFromWindow
 //                                                 documentation ```kt\npublic open fun onChildViewDetachedFromWindow(child: [Error type: Unresolved type for View])\n```
 //                                                 ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewDetachedFromWindow().(child)
+//                                                       display_name child
 //                                                       documentation ```kt\nvalue-parameter child: [Error type: Unresolved type for View]\n```
             if (child is RecyclerView) {
 //              ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Listener#onChildViewDetachedFromWindow().(child)
@@ -919,14 +1024,17 @@ class EpoxyVisibilityTracker {
      */
     internal inner class DataObserver : RecyclerView.AdapterDataObserver() {
 //                       ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#
+//                                    display_name DataObserver
 //                                    documentation ```kt\ninternal final inner class DataObserver\n```\n\n----\n\n\n The layout/scroll events are not enough to detect all sort of visibility changes. We also\n need to look at the data events from the adapter.\n
 //                       ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#`<init>`().
+//                                    display_name DataObserver
 //                                    documentation ```kt\npublic constructor DataObserver()\n```\n\n----\n\n\n The layout/scroll events are not enough to detect all sort of visibility changes. We also\n need to look at the data events from the adapter.\n
         /**
          * Clear the current visibility statues
          */
         override fun onChanged() {
 //                   ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onChanged().
+//                             display_name onChanged
 //                             documentation ```kt\npublic open fun onChanged()\n```\n\n----\n\n\n Clear the current visibility statues\n
             if (notEpoxyManaged(attachedRecyclerView)) {
 //              ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#notEpoxyManaged().
@@ -961,11 +1069,14 @@ class EpoxyVisibilityTracker {
          */
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
 //                   ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeInserted().
+//                                       display_name onItemRangeInserted
 //                                       documentation ```kt\npublic open fun onItemRangeInserted(positionStart: kotlin.Int, itemCount: kotlin.Int)\n```\n\n----\n\n\n For all items after the inserted range shift each [EpoxyVisibilityTracker] adapter\n position by inserted item count.\n
 //                                       ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeInserted().(positionStart)
+//                                                     display_name positionStart
 //                                                     documentation ```kt\nvalue-parameter positionStart: kotlin.Int\n```
 //                                                      ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                           ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeInserted().(itemCount)
+//                                                                     display_name itemCount
 //                                                                     documentation ```kt\nvalue-parameter itemCount: kotlin.Int\n```
 //                                                                      ^^^ reference semanticdb maven . . kotlin/Int#
             if (notEpoxyManaged(attachedRecyclerView)) {
@@ -986,6 +1097,7 @@ class EpoxyVisibilityTracker {
             }
             for (item in visibilityIdToItems) {
 //               ^^^^ definition local 19
+//                    display_name item
 //                    documentation ```kt\nval item: com.airbnb.epoxy.EpoxyVisibilityItem\n```
 //                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
 //                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
@@ -1012,11 +1124,14 @@ class EpoxyVisibilityTracker {
          */
         override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
 //                   ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeRemoved().
+//                                      display_name onItemRangeRemoved
 //                                      documentation ```kt\npublic open fun onItemRangeRemoved(positionStart: kotlin.Int, itemCount: kotlin.Int)\n```\n\n----\n\n\n For all items after the removed range reverse-shift each [EpoxyVisibilityTracker]\n adapter position by removed item count\n
 //                                      ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeRemoved().(positionStart)
+//                                                    display_name positionStart
 //                                                    documentation ```kt\nvalue-parameter positionStart: kotlin.Int\n```
 //                                                     ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                          ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeRemoved().(itemCount)
+//                                                                    display_name itemCount
 //                                                                    documentation ```kt\nvalue-parameter itemCount: kotlin.Int\n```
 //                                                                     ^^^ reference semanticdb maven . . kotlin/Int#
             if (notEpoxyManaged(attachedRecyclerView)) {
@@ -1037,6 +1152,7 @@ class EpoxyVisibilityTracker {
             }
             for (item in visibilityIdToItems) {
 //               ^^^^ definition local 20
+//                    display_name item
 //                    documentation ```kt\nval item: com.airbnb.epoxy.EpoxyVisibilityItem\n```
 //                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
 //                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
@@ -1067,14 +1183,18 @@ class EpoxyVisibilityTracker {
          */
         override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
 //                   ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved().
+//                                    display_name onItemRangeMoved
 //                                    documentation ```kt\npublic open fun onItemRangeMoved(fromPosition: kotlin.Int, toPosition: kotlin.Int, itemCount: kotlin.Int)\n```\n\n----\n\n\n This is a bit more complex, for move we need to first swap the moved position then shift the\n items between the swap. To simplify we split any range passed to individual item moved.\n\n ps: anyway [androidx.recyclerview.widget.AdapterListUpdateCallback]\n does not seem to use range for moved items.\n
 //                                    ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved().(fromPosition)
+//                                                 display_name fromPosition
 //                                                 documentation ```kt\nvalue-parameter fromPosition: kotlin.Int\n```
 //                                                  ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                       ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved().(toPosition)
+//                                                                  display_name toPosition
 //                                                                  documentation ```kt\nvalue-parameter toPosition: kotlin.Int\n```
 //                                                                   ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                                        ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved().(itemCount)
+//                                                                                  display_name itemCount
 //                                                                                  documentation ```kt\nvalue-parameter itemCount: kotlin.Int\n```
 //                                                                                   ^^^ reference semanticdb maven . . kotlin/Int#
             if (notEpoxyManaged(attachedRecyclerView)) {
@@ -1086,6 +1206,7 @@ class EpoxyVisibilityTracker {
             }
             for (i in 0 until itemCount) {
 //               ^ definition local 21
+//                 display_name i
 //                 documentation ```kt\nval i: kotlin.Int\n```
 //                      ^^^^^ reference semanticdb maven maven/org.jetbrains.kotlin/kotlin-stdlib 1.4.20-RC kotlin/ranges/RangesKt#until(+6).
 //                            ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemRangeMoved().(itemCount)
@@ -1102,11 +1223,14 @@ class EpoxyVisibilityTracker {
 
         private fun onItemMoved(fromPosition: Int, toPosition: Int) {
 //                  ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemMoved().
+//                              display_name onItemMoved
 //                              documentation ```kt\nprivate final fun onItemMoved(fromPosition: kotlin.Int, toPosition: kotlin.Int)\n```
 //                              ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemMoved().(fromPosition)
+//                                           display_name fromPosition
 //                                           documentation ```kt\nvalue-parameter fromPosition: kotlin.Int\n```
 //                                            ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                 ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#onItemMoved().(toPosition)
+//                                                            display_name toPosition
 //                                                            documentation ```kt\nvalue-parameter toPosition: kotlin.Int\n```
 //                                                             ^^^ reference semanticdb maven . . kotlin/Int#
             if (notEpoxyManaged(attachedRecyclerView)) {
@@ -1127,11 +1251,13 @@ class EpoxyVisibilityTracker {
             }
             for (item in visibilityIdToItems) {
 //               ^^^^ definition local 22
+//                    display_name item
 //                    documentation ```kt\nval item: com.airbnb.epoxy.EpoxyVisibilityItem\n```
 //                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#getVisibilityIdToItems().
 //                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#visibilityIdToItems.
                 val position = item.adapterPosition
 //                  ^^^^^^^^ definition local 23
+//                           display_name position
 //                           documentation ```kt\nval position: [Error type: Error property type]\n```
 //                             ^^^^ reference local 22
 //                                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityItem#adapterPosition.
@@ -1202,8 +1328,10 @@ class EpoxyVisibilityTracker {
          */
         private fun notEpoxyManaged(recyclerView: RecyclerView?): Boolean {
 //                  ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#notEpoxyManaged().
+//                                  display_name notEpoxyManaged
 //                                  documentation ```kt\nprivate final fun notEpoxyManaged(recyclerView: [Error type: Unresolved type for RecyclerView]?): kotlin.Boolean\n```\n\n----\n\n\n @param recyclerView the recycler view\n @return true if managed by an [BaseEpoxyAdapter]\n
 //                                  ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#DataObserver#notEpoxyManaged().(recyclerView)
+//                                               display_name recyclerView
 //                                               documentation ```kt\nvalue-parameter recyclerView: [Error type: Unresolved type for RecyclerView]?\n```
 //                                                                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
             return recyclerView == null || recyclerView.adapter !is BaseEpoxyAdapter
@@ -1214,19 +1342,24 @@ class EpoxyVisibilityTracker {
 
     companion object {
 //            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion# 1:0
+//                     display_name Companion
 //                     documentation ```kt\npublic companion object\n```
         private const val TAG = "EpoxyVisibilityTracker"
 //                        ^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#TAG.
+//                            display_name TAG
 //                            documentation ```kt\nprivate const final val TAG: kotlin.String\n```
 //                        ^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTAG().
+//                            display_name TAG
 //                            documentation ```kt\nprivate const final val TAG: kotlin.String\n```
 
         @IdRes
 //       ^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/IdRes#`<init>`().
         private val TAG_ID = R.id.epoxy_visibility_tracker
 //                  ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#TAG_ID.
+//                         display_name TAG_ID
 //                         documentation ```kt\nprivate final val TAG_ID: [Error type: Error property type]\n```
 //                  ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTAG_ID().
+//                         display_name TAG_ID
 //                         documentation ```kt\nprivate final val TAG_ID: [Error type: Error property type]\n```
 
         /**
@@ -1235,8 +1368,10 @@ class EpoxyVisibilityTracker {
          */
         private fun getTracker(recyclerView: RecyclerView): EpoxyVisibilityTracker? {
 //                  ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTracker().
+//                             display_name getTracker
 //                             documentation ```kt\nprivate final fun getTracker(recyclerView: [Error type: Unresolved type for RecyclerView]): com.airbnb.epoxy.EpoxyVisibilityTracker?\n```\n\n----\n\n\n @param recyclerView the view.\n @return the tracker for the given [RecyclerView]. Null if no tracker was attached.\n
 //                             ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getTracker().(recyclerView)
+//                                          display_name recyclerView
 //                                          documentation ```kt\nvalue-parameter recyclerView: [Error type: Unresolved type for RecyclerView]\n```
 //                                                          ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#
             return recyclerView.getTag(TAG_ID) as EpoxyVisibilityTracker?
@@ -1253,12 +1388,15 @@ class EpoxyVisibilityTracker {
          */
         private fun setTracker(
 //                  ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#setTracker().
+//                             display_name setTracker
 //                             documentation ```kt\nprivate final fun setTracker(recyclerView: [Error type: Unresolved type for RecyclerView], tracker: com.airbnb.epoxy.EpoxyVisibilityTracker?)\n```\n\n----\n\n\n Store the tracker for the given [RecyclerView].\n @param recyclerView the view\n @param tracker the tracker\n
             recyclerView: RecyclerView,
 //          ^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#setTracker().(recyclerView)
+//                       display_name recyclerView
 //                       documentation ```kt\nvalue-parameter recyclerView: [Error type: Unresolved type for RecyclerView]\n```
             tracker: EpoxyVisibilityTracker?
 //          ^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#setTracker().(tracker)
+//                  display_name tracker
 //                  documentation ```kt\nvalue-parameter tracker: com.airbnb.epoxy.EpoxyVisibilityTracker?\n```
 //                   ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#
         ) {
@@ -1272,8 +1410,10 @@ class EpoxyVisibilityTracker {
         // Not actionable at runtime. It is only useful for internal test-troubleshooting.
         const val DEBUG_LOG = false
 //                ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#DEBUG_LOG.
+//                          display_name DEBUG_LOG
 //                          documentation ```kt\npublic const final val DEBUG_LOG: kotlin.Boolean\n```
 //                ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxyVisibilityTracker#Companion#getDEBUG_LOG().
+//                          display_name DEBUG_LOG
 //                          documentation ```kt\npublic const final val DEBUG_LOG: kotlin.Boolean\n```
     }
 }

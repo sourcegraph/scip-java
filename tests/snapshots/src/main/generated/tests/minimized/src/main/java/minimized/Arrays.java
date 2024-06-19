@@ -2,27 +2,45 @@ package minimized;
 
 public class Arrays {
 //           ^^^^^^ definition semanticdb maven . . minimized/Arrays#
-//                  documentation ```java\npublic class Arrays\n```
+//                  display_name Arrays
+//                  signature_documentation java public class Arrays
+//                  kind Class
 //           ^^^^^^ definition semanticdb maven . . minimized/Arrays#`<init>`().
-//                  documentation ```java\npublic Arrays()\n```
+//                  display_name <init>
+//                  signature_documentation java public Arrays()
+//                  kind Constructor
   public static String app() {
 //              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                     ^^^ definition semanticdb maven . . minimized/Arrays#app().
-//                         documentation ```java\npublic static String app()\n```
+//                         display_name app
+//                         signature_documentation java public static String app()
+//                         kind StaticMethod
     int[] a = {1, 2, 3};
 //        ^ definition local 0
-//          documentation ```java\nint[] a\n```
+//          display_name a
+//          signature_documentation java int[] a
+//          enclosing_symbol semanticdb maven . . minimized/Arrays#app().
+//          kind Variable
     String[] b = {"1", "2", "3"};
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //           ^ definition local 1
-//             documentation ```java\nString[] b\n```
+//             display_name b
+//             signature_documentation java String[] b
+//             enclosing_symbol semanticdb maven . . minimized/Arrays#app().
+//             kind Variable
     int[][] c = {{1}, {2}, {3}};
 //          ^ definition local 2
-//            documentation ```java\nint[][] c\n```
+//            display_name c
+//            signature_documentation java int[][] c
+//            enclosing_symbol semanticdb maven . . minimized/Arrays#app().
+//            kind Variable
     String[][] d = {{"1"}, {"2"}, {"3"}};
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //             ^ definition local 3
-//               documentation ```java\nString[][] d\n```
+//               display_name d
+//               signature_documentation java String[][] d
+//               enclosing_symbol semanticdb maven . . minimized/Arrays#app().
+//               kind Variable
     return b[0] + a[0] + c[1][0] + d[1][0];
 //         ^ reference local 1
 //                ^ reference local 0

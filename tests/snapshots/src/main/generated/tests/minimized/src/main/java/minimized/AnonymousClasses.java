@@ -10,20 +10,31 @@ import java.util.function.Function;
 //^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
 public class AnonymousClasses {
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnonymousClasses#
-//                            documentation ```java\n@SuppressWarnings("ALL")\npublic class AnonymousClasses\n```
+//                            display_name AnonymousClasses
+//                            signature_documentation java @SuppressWarnings("ALL")\npublic class AnonymousClasses
+//                            kind Class
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnonymousClasses#`<init>`().
-//                            documentation ```java\npublic AnonymousClasses()\n```
+//                            display_name <init>
+//                            signature_documentation java public AnonymousClasses()
+//                            kind Constructor
   public static int app(int n) {
 //                  ^^^ definition semanticdb maven . . minimized/AnonymousClasses#app().
-//                      documentation ```java\npublic static int app(int n)\n```
+//                      display_name app
+//                      signature_documentation java public static int app(int n)
+//                      kind StaticMethod
 //                          ^ definition local 0
-//                            documentation ```java\nint n\n```
+//                            display_name n
+//                            signature_documentation java int n
+//                            enclosing_symbol semanticdb maven . . minimized/AnonymousClasses#app().
     Function<Integer, Integer> fn =
 //  ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
 //           ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
 //                    ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
 //                             ^^ definition local 1
-//                                documentation ```java\nFunction<Integer, Integer> fn\n```
+//                                display_name fn
+//                                signature_documentation java Function<Integer, Integer> fn
+//                                enclosing_symbol semanticdb maven . . minimized/AnonymousClasses#app().
+//                                kind Variable
         new Function<Integer, Integer>() {
 //          ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
 //                   ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
@@ -33,11 +44,16 @@ public class AnonymousClasses {
           public Integer apply(Integer integer) {
 //               ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
 //                       ^^^^^ definition local 3
-//                             documentation ```java\n@Override\npublic Integer apply(Integer integer)\n```
+//                             display_name apply
+//                             signature_documentation java @Override\npublic Integer apply(Integer integer)
+//                             enclosing_symbol local 2
+//                             kind Method
 //                             relationship is_reference is_implementation semanticdb maven jdk 11 java/util/function/Function#apply().
 //                             ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
 //                                     ^^^^^^^ definition local 4
-//                                             documentation ```java\nInteger integer\n```
+//                                             display_name integer
+//                                             signature_documentation java Integer integer
+//                                             enclosing_symbol local 3
             return integer + n;
 //                 ^^^^^^^ reference local 4
 //                           ^ reference local 0

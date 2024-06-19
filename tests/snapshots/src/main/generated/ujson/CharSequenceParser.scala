@@ -15,16 +15,26 @@ import upickle.core.{ObjArrVisitor, Visitor}
 private[ujson] final class CharSequenceParser[J](cs: CharSequence) extends CharParser[J]{
 //      ^^^^^ reference semanticdb maven . . ujson/
 //                         ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#
-//                                            documentation ```scala\nprotected[ujson] final class CharSequenceParser[J]\n```
+//                                            display_name CharSequenceParser
+//                                            signature_documentation scala protected[ujson] final class CharSequenceParser[J]
+//                                            kind Class
 //                                            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#[J]
-//                                              documentation ```scala\nJ\n```
+//                                              display_name J
+//                                              signature_documentation scala J
+//                                              kind TypeParameter
 //                                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#`<init>`().
-//                                                documentation ```scala\ndef this(cs: CharSequence)\n```
+//                                                display_name <init>
+//                                                signature_documentation scala def this(cs: CharSequence)
+//                                                kind Constructor
 //                                               ^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#cs.
-//                                                  documentation ```scala\nprivate[this] val cs: CharSequence\n```
+//                                                  display_name cs
+//                                                  signature_documentation scala private[this] val cs: CharSequence
+//                                                  kind Method
 //                                                  relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#`<init>`().(cs)
 //                                               __ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#`<init>`().(cs)
-//                                                  documentation ```scala\ncs: CharSequence \n```
+//                                                  display_name cs
+//                                                  signature_documentation scala cs: CharSequence 
+//                                                  kind Parameter
 //                                                  relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#cs.
 //                                                   ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                                                         ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#
@@ -32,22 +42,32 @@ private[ujson] final class CharSequenceParser[J](cs: CharSequence) extends CharP
 //                                                                                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#`<init>`().
   override def growBuffer(until: Int): Unit = ()
 //             ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#growBuffer().
-//                        documentation ```scala\ndef growBuffer(until: Int): Unit\n```
+//                        display_name growBuffer
+//                        signature_documentation scala def growBuffer(until: Int): Unit
+//                        kind Method
 //                        relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#growBuffer().
 //                        ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#growBuffer().(until)
-//                              documentation ```scala\nuntil: Int \n```
+//                              display_name until
+//                              signature_documentation scala until: Int 
+//                              kind Parameter
 //                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
   def readDataIntoBuffer(buffer: Array[Char], bufferOffset: Int) = {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#readDataIntoBuffer().
-//                       documentation ```scala\ndef readDataIntoBuffer(buffer: Array[Char], bufferOffset: Int): (Array[Char], Boolean, Int)\n```
+//                       display_name readDataIntoBuffer
+//                       signature_documentation scala def readDataIntoBuffer(buffer: Array[Char], bufferOffset: Int): (Array[Char], Boolean, Int)
+//                       kind Method
 //                       relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingCharParser#readDataIntoBuffer().
 //                       ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#readDataIntoBuffer().(buffer)
-//                              documentation ```scala\nbuffer: Array[Char] \n```
+//                              display_name buffer
+//                              signature_documentation scala buffer: Array[Char] 
+//                              kind Parameter
 //                               ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Array#
 //                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Char#
 //                                            ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#readDataIntoBuffer().(bufferOffset)
-//                                                         documentation ```scala\nbufferOffset: Int \n```
+//                                                         display_name bufferOffset
+//                                                         signature_documentation scala bufferOffset: Int 
+//                                                         kind Parameter
 //                                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     if(buffer == null) (cs.toString.toCharArray, cs.length == 0, cs.length)
 //     ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#readDataIntoBuffer().(buffer)
@@ -65,27 +85,39 @@ private[ujson] final class CharSequenceParser[J](cs: CharSequence) extends CharP
   }
   final def close() = ()
 //          ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#close().
-//                documentation ```scala\nfinal def close(): Unit\n```
+//                display_name close
+//                signature_documentation scala final def close(): Unit
+//                kind Method
 //                relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharParser#close().
 }
 
 object CharSequenceParser extends Transformer[CharSequence]{
 //     ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser.
-//                        documentation ```scala\nobject CharSequenceParser\n```
+//                        display_name CharSequenceParser
+//                        signature_documentation scala object CharSequenceParser
+//                        kind Object
 //                                ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#
 //                                            ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                                         ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
   def transform[T](j: CharSequence, f: Visitor[_, T]) = new CharSequenceParser(j).parse(f)
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser.transform().
-//              documentation ```scala\ndef transform(j: CharSequence, f: Visitor[local0, T[): T\n```
+//              display_name transform
+//              signature_documentation scala def transform(j: CharSequence, f: Visitor[local0, T[): T
+//              kind Method
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser.transform().[T]
-//                documentation ```scala\nT\n```
+//                display_name T
+//                signature_documentation scala T
+//                kind TypeParameter
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser.transform().(j)
-//                   documentation ```scala\nj: CharSequence \n```
+//                   display_name j
+//                   signature_documentation scala j: CharSequence 
+//                   kind Parameter
 //                    ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                  ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser.transform().(f)
-//                                    documentation ```scala\nf: Visitor[local0, T[ \n```
+//                                    display_name f
+//                                    signature_documentation scala f: Visitor[local0, T[ 
+//                                    kind Parameter
 //                                     ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser.transform().[T]
 //                                                          ^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser#

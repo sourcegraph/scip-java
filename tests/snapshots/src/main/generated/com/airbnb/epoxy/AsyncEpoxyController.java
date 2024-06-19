@@ -24,7 +24,9 @@ import static com.airbnb.epoxy.EpoxyAsyncUtil.getAsyncBackgroundHandler;
  */
 public abstract class AsyncEpoxyController extends EpoxyController {
 //                    ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#
-//                                         documentation ```java\npublic abstract class AsyncEpoxyController\n```
+//                                         display_name AsyncEpoxyController
+//                                         signature_documentation java public abstract class AsyncEpoxyController
+//                                         kind Class
 //                                         documentation  A subclass of {@link EpoxyController} that makes it easy to do model building and diffing in\n the background.\n <p>\n See https://github.com/airbnb/epoxy/wiki/Epoxy-Controller#asynchronous-support\n
 //                                         relationship is_implementation semanticdb maven . . ModelCollector#
 //                                         relationship is_implementation semanticdb maven . . StickyHeaderCallbacks#
@@ -36,7 +38,9 @@ public abstract class AsyncEpoxyController extends EpoxyController {
    */
   public AsyncEpoxyController() {
 //       ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#`<init>`().
-//                            documentation ```java\npublic AsyncEpoxyController()\n```
+//                            display_name <init>
+//                            signature_documentation java public AsyncEpoxyController()
+//                            kind Constructor
 //                            documentation  A new instance that does model building and diffing asynchronously.\n
     this(true);
 //  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+1).
@@ -48,10 +52,14 @@ public abstract class AsyncEpoxyController extends EpoxyController {
    */
   public AsyncEpoxyController(boolean enableAsync) {
 //       ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+1).
-//                            documentation ```java\npublic AsyncEpoxyController(boolean enableAsync)\n```
+//                            display_name <init>
+//                            signature_documentation java public AsyncEpoxyController(boolean enableAsync)
+//                            kind Constructor
 //                            documentation  @param enableAsync True to do model building and diffing asynchronously, false to do them\n                    both on the main thread.\n
 //                                    ^^^^^^^^^^^ definition local 0
-//                                                documentation ```java\nboolean enableAsync\n```
+//                                                display_name enableAsync
+//                                                signature_documentation java boolean enableAsync
+//                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+1).
     this(enableAsync, enableAsync);
 //  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+2).
 //       ^^^^^^^^^^^ reference local 0
@@ -63,12 +71,18 @@ public abstract class AsyncEpoxyController extends EpoxyController {
    */
   public AsyncEpoxyController(boolean enableAsyncModelBuilding, boolean enableAsyncDiffing) {
 //       ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+2).
-//                            documentation ```java\npublic AsyncEpoxyController(boolean enableAsyncModelBuilding, boolean enableAsyncDiffing)\n```
+//                            display_name <init>
+//                            signature_documentation java public AsyncEpoxyController(boolean enableAsyncModelBuilding, boolean enableAsyncDiffing)
+//                            kind Constructor
 //                            documentation  Individually control whether model building and diffing are done async or on the main thread.\n
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^ definition local 1
-//                                                             documentation ```java\nboolean enableAsyncModelBuilding\n```
+//                                                             display_name enableAsyncModelBuilding
+//                                                             signature_documentation java boolean enableAsyncModelBuilding
+//                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+2).
 //                                                                      ^^^^^^^^^^^^^^^^^^ definition local 2
-//                                                                                         documentation ```java\nboolean enableAsyncDiffing\n```
+//                                                                                         display_name enableAsyncDiffing
+//                                                                                         signature_documentation java boolean enableAsyncDiffing
+//                                                                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#`<init>`(+2).
     super(getHandler(enableAsyncModelBuilding), getHandler(enableAsyncDiffing));
 //  ^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyController#`<init>`(+1).
 //        ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#getHandler().
@@ -80,9 +94,13 @@ public abstract class AsyncEpoxyController extends EpoxyController {
   private static Handler getHandler(boolean enableAsync) {
 //               ^^^^^^^ reference semanticdb maven . . Handler#
 //                       ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#getHandler().
-//                                  documentation ```java\nprivate static unresolved_type getHandler(boolean enableAsync)\n```
+//                                  display_name getHandler
+//                                  signature_documentation java private static unresolved_type getHandler(boolean enableAsync)
+//                                  kind StaticMethod
 //                                          ^^^^^^^^^^^ definition local 3
-//                                                      documentation ```java\nboolean enableAsync\n```
+//                                                      display_name enableAsync
+//                                                      signature_documentation java boolean enableAsync
+//                                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/AsyncEpoxyController#getHandler().
     return enableAsync ? getAsyncBackgroundHandler() : MAIN_THREAD_HANDLER;
 //         ^^^^^^^^^^^ reference local 3
 //                       ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyAsyncUtil#getAsyncBackgroundHandler().

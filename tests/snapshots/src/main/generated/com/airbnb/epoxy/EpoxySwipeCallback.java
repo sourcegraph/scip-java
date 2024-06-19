@@ -20,11 +20,15 @@ import androidx.recyclerview.widget.ItemTouchHelper;
  */
 public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouchCallback<T> {
 //               ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#
-//                                  documentation ```java\npublic interface EpoxySwipeCallback<T extends EpoxyModel>\n```
+//                                  display_name EpoxySwipeCallback
+//                                  signature_documentation java public interface EpoxySwipeCallback<T extends EpoxyModel>
+//                                  kind Interface
 //                                  documentation  For use with {@link EpoxyModelTouchCallback}\n
 //                                  relationship is_implementation semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
 //                                  ^ definition semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#[T]
-//                                    documentation ```java\nT extends EpoxyModel\n```
+//                                    display_name T
+//                                    signature_documentation java T extends EpoxyModel
+//                                    kind TypeParameter
 //                                            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
 //                                                                                       ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#[T]
@@ -42,18 +46,26 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
    */
   void onSwipeStarted(T model, View itemView, int adapterPosition);
 //     ^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeStarted().
-//                    documentation ```java\npublic abstract void onSwipeStarted(T model, unresolved_type itemView, int adapterPosition)\n```
+//                    display_name onSwipeStarted
+//                    signature_documentation java public abstract void onSwipeStarted(T model, unresolved_type itemView, int adapterPosition)
+//                    kind AbstractMethod
 //                    documentation  Called when the view switches from an idle state to a swiped state, as the user begins a swipe\n interaction with it. You can use this callback to modify the view to indicate it is being\n swiped.\n <p>\n This is the first callback made in the lifecycle of a swipe event.\n\n @param model           The model representing the view that is being swiped\n @param itemView        The view that is being swiped\n @param adapterPosition The adapter position of the model\n
 //                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeStarted().
 //                    relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#onSwipeStarted().
 //                    ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#[T]
 //                      ^^^^^ definition local 0
-//                            documentation ```java\nT model\n```
+//                            display_name model
+//                            signature_documentation java T model
+//                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeStarted().
 //                             ^^^^ reference semanticdb maven . . View#
 //                                  ^^^^^^^^ definition local 1
-//                                           documentation ```java\nunresolved_type itemView\n```
+//                                           display_name itemView
+//                                           signature_documentation java unresolved_type itemView
+//                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeStarted().
 //                                                ^^^^^^^^^^^^^^^ definition local 2
-//                                                                documentation ```java\nint adapterPosition\n```
+//                                                                display_name adapterPosition
+//                                                                signature_documentation java int adapterPosition
+//                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeStarted().
 
   /**
    * Once a view has begun swiping with {@link #onSwipeStarted(EpoxyModel, View, int)} it will
@@ -71,22 +83,32 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
    */
   void onSwipeProgressChanged(T model, View itemView, float swipeProgress,
 //     ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeProgressChanged().
-//                            documentation ```java\npublic abstract void onSwipeProgressChanged(T model, unresolved_type itemView, float swipeProgress, unresolved_type canvas)\n```
+//                            display_name onSwipeProgressChanged
+//                            signature_documentation java public abstract void onSwipeProgressChanged(T model, unresolved_type itemView, float swipeProgress, unresolved_type canvas)
+//                            kind AbstractMethod
 //                            documentation  Once a view has begun swiping with {@link #onSwipeStarted(EpoxyModel, View, int)} it will\n receive this callback as the swipe distance changes. This can be called multiple times as the\n swipe interaction progresses.\n\n @param model         The model representing the view that is being swiped\n @param itemView      The view that is being swiped\n @param swipeProgress A float from -1 to 1 representing the percentage that the view has been\n                      swiped relative to its width. This will be positive if the view is being\n                      swiped to the right and negative if it is swiped to the left. For\n                      example,\n @param canvas        The canvas on which RecyclerView is drawing its children. You can draw to\n                      this to support custom swipe animations.\n
 //                            relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeProgressChanged().
 //                            relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#onSwipeProgressChanged().
 //                            ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#[T]
 //                              ^^^^^ definition local 3
-//                                    documentation ```java\nT model\n```
+//                                    display_name model
+//                                    signature_documentation java T model
+//                                    enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeProgressChanged().
 //                                     ^^^^ reference semanticdb maven . . View#
 //                                          ^^^^^^^^ definition local 4
-//                                                   documentation ```java\nunresolved_type itemView\n```
+//                                                   display_name itemView
+//                                                   signature_documentation java unresolved_type itemView
+//                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeProgressChanged().
 //                                                          ^^^^^^^^^^^^^ definition local 5
-//                                                                        documentation ```java\nfloat swipeProgress\n```
+//                                                                        display_name swipeProgress
+//                                                                        signature_documentation java float swipeProgress
+//                                                                        enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeProgressChanged().
       Canvas canvas);
 //    ^^^^^^ reference semanticdb maven . . Canvas#
 //           ^^^^^^ definition local 6
-//                  documentation ```java\nunresolved_type canvas\n```
+//                  display_name canvas
+//                  signature_documentation java unresolved_type canvas
+//                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeProgressChanged().
 
   /**
    * Called when the user has released their touch on the view. If the displacement passed the swipe
@@ -99,16 +121,22 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
    */
   void onSwipeReleased(T model, View itemView);
 //     ^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeReleased().
-//                     documentation ```java\npublic abstract void onSwipeReleased(T model, unresolved_type itemView)\n```
+//                     display_name onSwipeReleased
+//                     signature_documentation java public abstract void onSwipeReleased(T model, unresolved_type itemView)
+//                     kind AbstractMethod
 //                     documentation  Called when the user has released their touch on the view. If the displacement passed the swipe\n threshold then {@link #onSwipeCompleted(EpoxyModel, View, int, int)} will be called after this\n and the view will be animated off screen. Otherwise the view will animate back to its original\n position.\n\n @param model    The model representing the view that was being swiped\n @param itemView The view that was being swiped\n
 //                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeReleased().
 //                     relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#onSwipeReleased().
 //                     ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#[T]
 //                       ^^^^^ definition local 7
-//                             documentation ```java\nT model\n```
+//                             display_name model
+//                             signature_documentation java T model
+//                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeReleased().
 //                              ^^^^ reference semanticdb maven . . View#
 //                                   ^^^^^^^^ definition local 8
-//                                            documentation ```java\nunresolved_type itemView\n```
+//                                            display_name itemView
+//                                            signature_documentation java unresolved_type itemView
+//                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeReleased().
 
   /**
    * Called after {@link #onSwipeReleased(EpoxyModel, View)} if the swipe surpassed the threshold to
@@ -129,18 +157,28 @@ public interface EpoxySwipeCallback<T extends EpoxyModel> extends BaseEpoxyTouch
    */
   void onSwipeCompleted(T model, View itemView, int position, int direction);
 //     ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeCompleted().
-//                      documentation ```java\npublic abstract void onSwipeCompleted(T model, unresolved_type itemView, int position, int direction)\n```
+//                      display_name onSwipeCompleted
+//                      signature_documentation java public abstract void onSwipeCompleted(T model, unresolved_type itemView, int position, int direction)
+//                      kind AbstractMethod
 //                      documentation  Called after {@link #onSwipeReleased(EpoxyModel, View)} if the swipe surpassed the threshold to\n be considered a full swipe. The view will now be animated off screen.\n <p>\n You MUST use this callback to remove this item from your backing data and request a model\n update.\n <p>\n {@link #clearView(EpoxyModel, View)} will be called after this.\n\n @param model     The model representing the view that was being swiped\n @param itemView  The view that was being swiped\n @param position  The adapter position of the model\n @param direction The direction that the view was swiped. Can be any of {@link\n                  ItemTouchHelper#LEFT}, {@link ItemTouchHelper#RIGHT}, {@link\n                  ItemTouchHelper#UP}, {@link ItemTouchHelper#DOWN} depending on what swipe\n                  directions were enabled.\n
 //                      relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#onSwipeCompleted().
 //                      relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#onSwipeCompleted().
 //                      ^ reference semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#[T]
 //                        ^^^^^ definition local 9
-//                              documentation ```java\nT model\n```
+//                              display_name model
+//                              signature_documentation java T model
+//                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeCompleted().
 //                               ^^^^ reference semanticdb maven . . View#
 //                                    ^^^^^^^^ definition local 10
-//                                             documentation ```java\nunresolved_type itemView\n```
+//                                             display_name itemView
+//                                             signature_documentation java unresolved_type itemView
+//                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeCompleted().
 //                                                  ^^^^^^^^ definition local 11
-//                                                           documentation ```java\nint position\n```
+//                                                           display_name position
+//                                                           signature_documentation java int position
+//                                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeCompleted().
 //                                                                ^^^^^^^^^ definition local 12
-//                                                                          documentation ```java\nint direction\n```
+//                                                                          display_name direction
+//                                                                          signature_documentation java int direction
+//                                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/EpoxySwipeCallback#onSwipeCompleted().
 }

@@ -39,23 +39,33 @@ import scala.annotation.{switch, tailrec}
   */
 abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //             ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#
-//                        documentation ```scala\nabstract class ByteParser[J]\n```
+//                        display_name ByteParser
+//                        signature_documentation scala abstract class ByteParser[J]
+//                        kind Class
 //                        ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
-//                          documentation ```scala\nJ\n```
+//                          display_name J
+//                          signature_documentation scala J
+//                          kind TypeParameter
 //                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#`<init>`().
-//                             documentation ```scala\ndef this()\n```
+//                             display_name <init>
+//                             signature_documentation scala def this()
+//                             kind Constructor
 //                                   ^^^^^^^ reference semanticdb maven . . upickle/
 //                                           ^^^^ reference semanticdb maven . . upickle/core/
 //                                                ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingByteParser#
   private[this] val elemOps = upickle.core.ByteOps
 //                  ^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#elemOps.
-//                          documentation ```scala\nprivate[this] val elemOps: \n```
+//                          display_name elemOps
+//                          signature_documentation scala private[this] val elemOps: 
+//                          kind Method
 //                            ^^^^^^^ reference semanticdb maven . . upickle/
 //                                    ^^^^ reference semanticdb maven . . upickle/core/
 //                                         ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ByteOps.
   private[this] val outputBuilder = new upickle.core.ByteBuilder()
 //                  ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#outputBuilder.
-//                                documentation ```scala\nprivate[this] val outputBuilder: ByteBuilder\n```
+//                                display_name outputBuilder
+//                                signature_documentation scala private[this] val outputBuilder: ByteBuilder
+//                                kind Method
 //                                      ^^^^^^^ reference semanticdb maven . . upickle/
 //                                              ^^^^ reference semanticdb maven . . upickle/core/
 //                                                   ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ByteBuilder#
@@ -63,9 +73,13 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 
   def requestUntilOrThrow(i: Int) = {
 //    ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#requestUntilOrThrow().
-//                        documentation ```scala\ndef requestUntilOrThrow(i: Int): Unit\n```
+//                        display_name requestUntilOrThrow
+//                        signature_documentation scala def requestUntilOrThrow(i: Int): Unit
+//                        kind Method
 //                        ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#requestUntilOrThrow().(i)
-//                          documentation ```scala\ni: Int \n```
+//                          display_name i
+//                          signature_documentation scala i: Int 
+//                          kind Parameter
 //                           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     if (requestUntil(i)) throw new IncompleteParseException("exhausted input")
 //      ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingByteParser#requestUntil().
@@ -75,10 +89,14 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
   }
   override def getByteSafe(i: Int): Byte = {
 //             ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#getByteSafe().
-//                         documentation ```scala\ndef getByteSafe(i: Int): Byte\n```
+//                         display_name getByteSafe
+//                         signature_documentation scala def getByteSafe(i: Int): Byte
+//                         kind Method
 //                         relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingByteParser#getByteSafe().
 //                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#getByteSafe().(i)
-//                           documentation ```scala\ni: Int \n```
+//                           display_name i
+//                           signature_documentation scala i: Int 
+//                           kind Parameter
 //                            ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                  ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Byte#
     requestUntilOrThrow(i)
@@ -94,9 +112,13 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
    */
   protected[this] def atEof(i: Int) = requestUntil(i)
 //                    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#atEof().
-//                          documentation ```scala\ndef atEof(i: Int): Boolean\n```
+//                          display_name atEof
+//                          signature_documentation scala def atEof(i: Int): Boolean
+//                          kind Method
 //                          ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#atEof().(i)
-//                            documentation ```scala\ni: Int \n```
+//                            display_name i
+//                            signature_documentation scala i: Int 
+//                            kind Parameter
 //                             ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                    ^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingByteParser#requestUntil().
 //                                                 ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#atEof().(i)
@@ -106,7 +128,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
    */
   protected[this] def close(): Unit
 //                    ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#close().
-//                          documentation ```scala\ndef close(): Unit\n```
+//                          display_name close
+//                          signature_documentation scala def close(): Unit
+//                          kind AbstractMethod
 //                          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteArrayParser#close().
 //                          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#close().
 //                          relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/InputStreamParser#close().
@@ -119,37 +143,51 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 // ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#
 //        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#`<init>`().
 //                                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#ARRBEG.
-//                                       documentation ```scala\n@inline\nprivate[this] final val ARRBEG: 6\n```
+//                                       display_name ARRBEG
+//                                       signature_documentation scala @inline\nprivate[this] final val ARRBEG: 6
+//                                       kind Method
   @inline private[this] final val OBJBEG = 7
 // ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#
 //        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#`<init>`().
 //                                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#OBJBEG.
-//                                       documentation ```scala\n@inline\nprivate[this] final val OBJBEG: 7\n```
+//                                       display_name OBJBEG
+//                                       signature_documentation scala @inline\nprivate[this] final val OBJBEG: 7
+//                                       kind Method
   @inline private[this] final val DATA = 1
 // ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#
 //        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#`<init>`().
 //                                ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#DATA.
-//                                     documentation ```scala\n@inline\nprivate[this] final val DATA: 1\n```
+//                                     display_name DATA
+//                                     signature_documentation scala @inline\nprivate[this] final val DATA: 1
+//                                     kind Method
   @inline private[this] final val KEY = 2
 // ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#
 //        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#`<init>`().
 //                                ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#KEY.
-//                                    documentation ```scala\n@inline\nprivate[this] final val KEY: 2\n```
+//                                    display_name KEY
+//                                    signature_documentation scala @inline\nprivate[this] final val KEY: 2
+//                                    kind Method
   @inline private[this] final val COLON = 3
 // ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#
 //        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#`<init>`().
 //                                ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#COLON.
-//                                      documentation ```scala\n@inline\nprivate[this] final val COLON: 3\n```
+//                                      display_name COLON
+//                                      signature_documentation scala @inline\nprivate[this] final val COLON: 3
+//                                      kind Method
   @inline private[this] final val ARREND = 4
 // ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#
 //        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#`<init>`().
 //                                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#ARREND.
-//                                       documentation ```scala\n@inline\nprivate[this] final val ARREND: 4\n```
+//                                       display_name ARREND
+//                                       signature_documentation scala @inline\nprivate[this] final val ARREND: 4
+//                                       kind Method
   @inline private[this] final val OBJEND = 5
 // ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#
 //        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/inline#`<init>`().
 //                                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#OBJEND.
-//                                       documentation ```scala\n@inline\nprivate[this] final val OBJEND: 5\n```
+//                                       display_name OBJEND
+//                                       signature_documentation scala @inline\nprivate[this] final val OBJEND: 5
+//                                       kind Method
 
   /**
     * Parse the JSON document into a single JSON value.
@@ -160,22 +198,32 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     */
   final def parse(facade: Visitor[_, J]): J = {
 //          ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parse().
-//                documentation ```scala\nfinal def parse(facade: Visitor[local0, J[): J\n```
+//                display_name parse
+//                signature_documentation scala final def parse(facade: Visitor[local0, J[): J
+//                kind Method
 //                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parse().(facade)
-//                       documentation ```scala\nfacade: Visitor[local0, J[ \n```
+//                       display_name facade
+//                       signature_documentation scala facade: Visitor[local0, J[ 
+//                       kind Parameter
 //                        ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
     val (value, i) = parseTopLevel(0, facade)
 //       ^^^^^ definition local 2
-//             documentation ```scala\nvalue: J \n```
+//             display_name value
+//             signature_documentation scala value: J 
+//             kind Variable
 //              ^ definition local 3
-//                documentation ```scala\ni: Int \n```
+//                display_name i
+//                signature_documentation scala i: Int 
+//                kind Variable
 //                   ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseTopLevel().
 //                                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parse().(facade)
     var j = i
 //      ^ definition local 4
-//        documentation ```scala\nj: Int \n```
+//        display_name j
+//        signature_documentation scala j: Int 
+//        kind Variable
 //          ^ reference local 3
     while (!atEof(j)) {
 //         ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Boolean#`unary_!`().
@@ -209,17 +257,25 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
    */
   protected[this] def die(i: Int, msg: String): Nothing = {
 //                    ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#die().
-//                        documentation ```scala\ndef die(i: Int, msg: String): Nothing\n```
+//                        display_name die
+//                        signature_documentation scala def die(i: Int, msg: String): Nothing
+//                        kind Method
 //                        ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#die().(i)
-//                          documentation ```scala\ni: Int \n```
+//                          display_name i
+//                          signature_documentation scala i: Int 
+//                          kind Parameter
 //                           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#die().(msg)
-//                                    documentation ```scala\nmsg: String \n```
+//                                    display_name msg
+//                                    signature_documentation scala msg: String 
+//                                    kind Parameter
 //                                     ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Predef.String#
 //                                              ^^^^^^^ reference semanticdb maven . . scala/Nothing#
     val out = new upickle.core.ByteBuilder()
 //      ^^^ definition local 6
-//          documentation ```scala\nout: ByteBuilder \n```
+//          display_name out
+//          signature_documentation scala out: ByteBuilder 
+//          kind Variable
 //                ^^^^^^^ reference semanticdb maven . . upickle/
 //                        ^^^^ reference semanticdb maven . . upickle/core/
 //                             ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ByteBuilder#
@@ -250,7 +306,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     )
     val s = "%s got %s" format (msg, out.makeString())
 //      ^ definition local 7
-//        documentation ```scala\ns: String \n```
+//        display_name s
+//        signature_documentation scala s: String 
+//        kind Variable
 //                      ^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/StringOps#format().
 //                              ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#die().(msg)
 //                                   ^^^ reference local 6
@@ -273,35 +331,51 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
    */
   protected[this] final def parseNum(i: Int, ctxt: ObjArrVisitor[Any, J], facade: Visitor[_, J]): Int = {
 //                          ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNum().
-//                                   documentation ```scala\nfinal def parseNum(i: Int, ctxt: ObjArrVisitor[Any, J], facade: Visitor[local8, J[): Int\n```
+//                                   display_name parseNum
+//                                   signature_documentation scala final def parseNum(i: Int, ctxt: ObjArrVisitor[Any, J], facade: Visitor[local8, J[): Int
+//                                   kind Method
 //                                   ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNum().(i)
-//                                     documentation ```scala\ni: Int \n```
+//                                     display_name i
+//                                     signature_documentation scala i: Int 
+//                                     kind Parameter
 //                                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                           ^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNum().(ctxt)
-//                                                documentation ```scala\nctxt: ObjArrVisitor[Any, J] \n```
+//                                                display_name ctxt
+//                                                signature_documentation scala ctxt: ObjArrVisitor[Any, J] 
+//                                                kind Parameter
 //                                                 ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
 //                                                               ^^^ reference semanticdb maven . . scala/Any#
 //                                                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                                        ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNum().(facade)
-//                                                                               documentation ```scala\nfacade: Visitor[local8, J[ \n```
+//                                                                               display_name facade
+//                                                                               signature_documentation scala facade: Visitor[local8, J[ 
+//                                                                               kind Parameter
 //                                                                                ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                                                                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                                                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     var j = i
 //      ^ definition local 9
-//        documentation ```scala\nj: Int \n```
+//        display_name j
+//        signature_documentation scala j: Int 
+//        kind Variable
 //          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNum().(i)
     var c = getByteSafe(j)
 //      ^ definition local 10
-//        documentation ```scala\nc: Byte \n```
+//        display_name c
+//        signature_documentation scala c: Byte 
+//        kind Variable
 //          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#getByteSafe().
 //                      ^ reference local 9
     var decIndex = -1
 //      ^^^^^^^^ definition local 11
-//               documentation ```scala\ndecIndex: Int \n```
+//               display_name decIndex
+//               signature_documentation scala decIndex: Int 
+//               kind Variable
     var expIndex = -1
 //      ^^^^^^^^ definition local 12
-//               documentation ```scala\nexpIndex: Int \n```
+//               display_name expIndex
+//               signature_documentation scala expIndex: Int 
+//               kind Variable
 
     if (c == '-') {
 //      ^ reference local 10
@@ -327,7 +401,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     } else {
       val j0 = j
 //        ^^ definition local 13
-//           documentation ```scala\nj0: Int \n```
+//           display_name j0
+//           signature_documentation scala j0: Int 
+//           kind Variable
 //             ^ reference local 9
       while (elemOps.within('0', c, '9')) {
 //           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#elemOps.
@@ -366,7 +442,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                    ^ reference local 9
       val j0 = j
 //        ^^ definition local 15
-//           documentation ```scala\nj0: Int \n```
+//           display_name j0
+//           signature_documentation scala j0: Int 
+//           kind Variable
 //             ^ reference local 9
       while (elemOps.within('0', c, '9')) {
 //           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#elemOps.
@@ -422,7 +500,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
       }
       val j0 = j
 //        ^^ definition local 17
-//           documentation ```scala\nj0: Int \n```
+//           display_name j0
+//           signature_documentation scala j0: Int 
+//           kind Variable
 //             ^ reference local 9
       while (elemOps.within('0', c, '9')) {
 //           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#elemOps.
@@ -460,26 +540,38 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 
   def visitFloat64StringPartsWithWrapper(facade: Visitor[_, J],
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitFloat64StringPartsWithWrapper().
-//                                       documentation ```scala\ndef visitFloat64StringPartsWithWrapper(facade: Visitor[local19, J[, decIndex: Int, expIndex: Int, i: Int, j: Int): J\n```
+//                                       display_name visitFloat64StringPartsWithWrapper
+//                                       signature_documentation scala def visitFloat64StringPartsWithWrapper(facade: Visitor[local19, J[, decIndex: Int, expIndex: Int, i: Int, j: Int): J
+//                                       kind Method
 //                                       ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitFloat64StringPartsWithWrapper().(facade)
-//                                              documentation ```scala\nfacade: Visitor[local19, J[ \n```
+//                                              display_name facade
+//                                              signature_documentation scala facade: Visitor[local19, J[ 
+//                                              kind Parameter
 //                                               ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
                                          decIndex: Int,
 //                                       ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitFloat64StringPartsWithWrapper().(decIndex)
-//                                                documentation ```scala\ndecIndex: Int \n```
+//                                                display_name decIndex
+//                                                signature_documentation scala decIndex: Int 
+//                                                kind Parameter
 //                                                 ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
                                          expIndex: Int,
 //                                       ^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitFloat64StringPartsWithWrapper().(expIndex)
-//                                                documentation ```scala\nexpIndex: Int \n```
+//                                                display_name expIndex
+//                                                signature_documentation scala expIndex: Int 
+//                                                kind Parameter
 //                                                 ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
                                          i: Int,
 //                                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitFloat64StringPartsWithWrapper().(i)
-//                                         documentation ```scala\ni: Int \n```
+//                                         display_name i
+//                                         signature_documentation scala i: Int 
+//                                         kind Parameter
 //                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
                                          j: Int) = {
 //                                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitFloat64StringPartsWithWrapper().(j)
-//                                         documentation ```scala\nj: Int \n```
+//                                         display_name j
+//                                         signature_documentation scala j: Int 
+//                                         kind Parameter
 //                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     facade.visitFloat64StringParts(
 //  ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitFloat64StringPartsWithWrapper().(facade)
@@ -515,31 +607,45 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
    */
   protected[this] final def parseNumTopLevel(i: Int, facade: Visitor[_, J]): (J, Int) = {
 //                          ^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNumTopLevel().
-//                                           documentation ```scala\nfinal def parseNumTopLevel(i: Int, facade: Visitor[local20, J[): (J, Int)\n```
+//                                           display_name parseNumTopLevel
+//                                           signature_documentation scala final def parseNumTopLevel(i: Int, facade: Visitor[local20, J[): (J, Int)
+//                                           kind Method
 //                                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNumTopLevel().(i)
-//                                             documentation ```scala\ni: Int \n```
+//                                             display_name i
+//                                             signature_documentation scala i: Int 
+//                                             kind Parameter
 //                                              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                   ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNumTopLevel().(facade)
-//                                                          documentation ```scala\nfacade: Visitor[local20, J[ \n```
+//                                                          display_name facade
+//                                                          signature_documentation scala facade: Visitor[local20, J[ 
+//                                                          kind Parameter
 //                                                           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                                                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     var j = i
 //      ^ definition local 21
-//        documentation ```scala\nj: Int \n```
+//        display_name j
+//        signature_documentation scala j: Int 
+//        kind Variable
 //          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNumTopLevel().(i)
     var c = getByteSafe(j)
 //      ^ definition local 22
-//        documentation ```scala\nc: Byte \n```
+//        display_name c
+//        signature_documentation scala c: Byte 
+//        kind Variable
 //          ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#getByteSafe().
 //                      ^ reference local 21
     var decIndex = -1
 //      ^^^^^^^^ definition local 23
-//               documentation ```scala\ndecIndex: Int \n```
+//               display_name decIndex
+//               signature_documentation scala decIndex: Int 
+//               kind Variable
     var expIndex = -1
 //      ^^^^^^^^ definition local 24
-//               documentation ```scala\nexpIndex: Int \n```
+//               display_name expIndex
+//               signature_documentation scala expIndex: Int 
+//               kind Variable
 
     if (c == '-') {
 //      ^ reference local 22
@@ -578,7 +684,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     } else {
       val j0 = j
 //        ^^ definition local 25
-//           documentation ```scala\nj0: Int \n```
+//           display_name j0
+//           signature_documentation scala j0: Int 
+//           kind Variable
 //             ^ reference local 21
       while (elemOps.within('0', c, '9')) {
 //           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#elemOps.
@@ -630,7 +738,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                    ^ reference local 21
       val j0 = j
 //        ^^ definition local 27
-//           documentation ```scala\nj0: Int \n```
+//           display_name j0
+//           signature_documentation scala j0: Int 
+//           kind Variable
 //             ^ reference local 21
       while (elemOps.within('0', c, '9')) {
 //           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#elemOps.
@@ -699,7 +809,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
       }
       val j0 = j
 //        ^^ definition local 29
-//           documentation ```scala\nj0: Int \n```
+//           display_name j0
+//           signature_documentation scala j0: Int 
+//           kind Variable
 //             ^ reference local 21
       while (elemOps.within('0', c, '9')) {
 //           ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#elemOps.
@@ -751,9 +863,13 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
    */
   protected[this] final def descape(i: Int): Char = {
 //                          ^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#descape().
-//                                  documentation ```scala\nfinal def descape(i: Int): Char\n```
+//                                  display_name descape
+//                                  signature_documentation scala final def descape(i: Int): Char
+//                                  kind Method
 //                                  ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#descape().(i)
-//                                    documentation ```scala\ni: Int \n```
+//                                    display_name i
+//                                    signature_documentation scala i: Int 
+//                                    kind Parameter
 //                                     ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                           ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Char#
     import upickle.core.RenderUtils.hex
@@ -763,7 +879,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                                  ^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/RenderUtils.hex().
     var x = 0
 //      ^ definition local 31
-//        documentation ```scala\nx: Int \n```
+//        display_name x
+//        signature_documentation scala x: Int 
+//        kind Variable
     x = (x << 4) | hex(getByteSafe(i+2).toInt)
 //  ^ reference local 31
 //       ^ reference local 31
@@ -817,12 +935,18 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
    */
   protected[this] final def parseTrue(i: Int, facade: Visitor[_, J]): J = {
 //                          ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseTrue().
-//                                    documentation ```scala\nfinal def parseTrue(i: Int, facade: Visitor[local32, J[): J\n```
+//                                    display_name parseTrue
+//                                    signature_documentation scala final def parseTrue(i: Int, facade: Visitor[local32, J[): J
+//                                    kind Method
 //                                    ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseTrue().(i)
-//                                      documentation ```scala\ni: Int \n```
+//                                      display_name i
+//                                      signature_documentation scala i: Int 
+//                                      kind Parameter
 //                                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                            ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseTrue().(facade)
-//                                                   documentation ```scala\nfacade: Visitor[local32, J[ \n```
+//                                                   display_name facade
+//                                                   signature_documentation scala facade: Visitor[local32, J[ 
+//                                                   kind Parameter
 //                                                    ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
@@ -863,12 +987,18 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
    */
   protected[this] final def parseFalse(i: Int, facade: Visitor[_, J]): J = {
 //                          ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseFalse().
-//                                     documentation ```scala\nfinal def parseFalse(i: Int, facade: Visitor[local33, J[): J\n```
+//                                     display_name parseFalse
+//                                     signature_documentation scala final def parseFalse(i: Int, facade: Visitor[local33, J[): J
+//                                     kind Method
 //                                     ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseFalse().(i)
-//                                       documentation ```scala\ni: Int \n```
+//                                       display_name i
+//                                       signature_documentation scala i: Int 
+//                                       kind Parameter
 //                                        ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                             ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseFalse().(facade)
-//                                                    documentation ```scala\nfacade: Visitor[local33, J[ \n```
+//                                                    display_name facade
+//                                                    signature_documentation scala facade: Visitor[local33, J[ 
+//                                                    kind Parameter
 //                                                     ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
@@ -915,12 +1045,18 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
    */
   protected[this] final def parseNull(i: Int, facade: Visitor[_, J]): J = {
 //                          ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNull().
-//                                    documentation ```scala\nfinal def parseNull(i: Int, facade: Visitor[local34, J[): J\n```
+//                                    display_name parseNull
+//                                    signature_documentation scala final def parseNull(i: Int, facade: Visitor[local34, J[): J
+//                                    kind Method
 //                                    ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNull().(i)
-//                                      documentation ```scala\ni: Int \n```
+//                                      display_name i
+//                                      signature_documentation scala i: Int 
+//                                      kind Parameter
 //                                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                            ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNull().(facade)
-//                                                   documentation ```scala\nfacade: Visitor[local34, J[ \n```
+//                                                   display_name facade
+//                                                   signature_documentation scala facade: Visitor[local34, J[ 
+//                                                   kind Parameter
 //                                                    ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
@@ -956,12 +1092,18 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 
   protected[this] final def parseTopLevel(i: Int, facade: Visitor[_, J]): (J, Int) = {
 //                          ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseTopLevel().
-//                                        documentation ```scala\nfinal def parseTopLevel(i: Int, facade: Visitor[local35, J[): (J, Int)\n```
+//                                        display_name parseTopLevel
+//                                        signature_documentation scala final def parseTopLevel(i: Int, facade: Visitor[local35, J[): (J, Int)
+//                                        kind Method
 //                                        ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseTopLevel().(i)
-//                                          documentation ```scala\ni: Int \n```
+//                                          display_name i
+//                                          signature_documentation scala i: Int 
+//                                          kind Parameter
 //                                           ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseTopLevel().(facade)
-//                                                       documentation ```scala\nfacade: Visitor[local35, J[ \n```
+//                                                       display_name facade
+//                                                       signature_documentation scala facade: Visitor[local35, J[ 
+//                                                       kind Parameter
 //                                                        ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                                                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
@@ -982,12 +1124,18 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/annotation/tailrec#`<init>`().
   protected[this] final def parseTopLevel0(i: Int, facade: Visitor[_, J]): (J, Int) = {
 //                          ^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseTopLevel0().
-//                                         documentation ```scala\n@tailrec\nfinal def parseTopLevel0(i: Int, facade: Visitor[local38, J[): (J, Int)\n```
+//                                         display_name parseTopLevel0
+//                                         signature_documentation scala @tailrec\nfinal def parseTopLevel0(i: Int, facade: Visitor[local38, J[): (J, Int)
+//                                         kind Method
 //                                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseTopLevel0().(i)
-//                                           documentation ```scala\ni: Int \n```
+//                                           display_name i
+//                                           signature_documentation scala i: Int 
+//                                           kind Parameter
 //                                            ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                 ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseTopLevel0().(facade)
-//                                                        documentation ```scala\nfacade: Visitor[local38, J[ \n```
+//                                                        display_name facade
+//                                                        signature_documentation scala facade: Visitor[local38, J[ 
+//                                                        kind Parameter
 //                                                         ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
@@ -1069,18 +1217,26 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 
   def reject(j: Int): PartialFunction[Throwable, Nothing] = {
 //    ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#reject().
-//           documentation ```scala\ndef reject(j: Int): PartialFunction[Throwable, Nothing]\n```
+//           display_name reject
+//           signature_documentation scala def reject(j: Int): PartialFunction[Throwable, Nothing]
+//           kind Method
 //           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#reject().(j)
-//             documentation ```scala\nj: Int \n```
+//             display_name j
+//             signature_documentation scala j: Int 
+//             kind Parameter
 //              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                    ^^^^^^^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/PartialFunction#
 //                                    ^^^^^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/package.Throwable#
 //                                               ^^^^^^^ reference semanticdb maven . . scala/Nothing#
 //                                                          ^ definition local 39
-//                                                            documentation ```scala\n@SerialVersionUID\nfinal class $anonfun\n```
+//                                                            display_name $anonfun
+//                                                            signature_documentation scala @SerialVersionUID\nfinal class $anonfun
+//                                                            kind Class
     case e: Abort =>
 //       ^ definition local 46
-//         documentation ```scala\ne: Abort \n```
+//         display_name e
+//         signature_documentation scala e: Abort 
+//         kind Variable
 //          ^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Abort#
       throw new AbortException(e.msg, j, -1, -1, e)
 //              ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/AbortException#
@@ -1112,22 +1268,32 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/annotation/tailrec#`<init>`().
   protected[this] final def parseNested(state: Int,
 //                          ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().
-//                                      documentation ```scala\n@tailrec\nfinal def parseNested(state: Int, i: Int, stackHead: ObjArrVisitor[local50, J[, stackTail: List[ObjArrVisitor[local51, J[]): (J, Int)\n```
+//                                      display_name parseNested
+//                                      signature_documentation scala @tailrec\nfinal def parseNested(state: Int, i: Int, stackHead: ObjArrVisitor[local50, J[, stackTail: List[ObjArrVisitor[local51, J[]): (J, Int)
+//                                      kind Method
 //                                      ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(state)
-//                                            documentation ```scala\nstate: Int \n```
+//                                            display_name state
+//                                            signature_documentation scala state: Int 
+//                                            kind Parameter
 //                                             ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
                                         i: Int,
 //                                      ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(i)
-//                                        documentation ```scala\ni: Int \n```
+//                                        display_name i
+//                                        signature_documentation scala i: Int 
+//                                        kind Parameter
 //                                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
                                         stackHead: ObjArrVisitor[_, J],
 //                                      ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(stackHead)
-//                                                documentation ```scala\nstackHead: ObjArrVisitor[local50, J[ \n```
+//                                                display_name stackHead
+//                                                signature_documentation scala stackHead: ObjArrVisitor[local50, J[ 
+//                                                kind Parameter
 //                                                 ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
 //                                                                  ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
                                         stackTail: List[ObjArrVisitor[_, J]]) : (J, Int) = {
 //                                      ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(stackTail)
-//                                                documentation ```scala\nstackTail: List[ObjArrVisitor[local51, J[] \n```
+//                                                display_name stackTail
+//                                                signature_documentation scala stackTail: List[ObjArrVisitor[local51, J[] 
+//                                                kind Parameter
 //                                                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/package.List#
 //                                                      ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
 //                                                                       ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
@@ -1153,7 +1319,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                   ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#OBJBEG.
             val nextJ = try parseStringKey(i, stackHead) catch reject(i)
 //              ^^^^^ definition local 52
-//                    documentation ```scala\nnextJ: Int \n```
+//                    display_name nextJ
+//                    signature_documentation scala nextJ: Int 
+//                    kind Variable
 //                          ^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringKey().
 //                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(i)
 //                                            ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(stackHead)
@@ -1171,7 +1339,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                    ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#ARRBEG.
             val nextJ = try parseStringValue(i, stackHead) catch reject(i)
 //              ^^^^^ definition local 55
-//                    documentation ```scala\nnextJ: Int \n```
+//                    display_name nextJ
+//                    signature_documentation scala nextJ: Int 
+//                    kind Variable
 //                          ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringValue().
 //                                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(i)
 //                                              ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(stackHead)
@@ -1216,7 +1386,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(i)
         val ctx =
 //          ^^^ definition local 58
-//              documentation ```scala\nctx: ArrVisitor[local59, J[ \n```
+//              display_name ctx
+//              signature_documentation scala ctx: ArrVisitor[local59, J[ 
+//              kind Variable
           try stackHead.subVisitor.asInstanceOf[Visitor[_, J]].visitArray(-1, i)
 //            ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(stackHead)
 //                      ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#subVisitor().
@@ -1245,7 +1417,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(i)
         val ctx =
 //          ^^^ definition local 63
-//              documentation ```scala\nctx: ObjVisitor[local64, J[ \n```
+//              display_name ctx
+//              signature_documentation scala ctx: ObjVisitor[local64, J[ 
+//              kind Variable
           try stackHead.subVisitor.asInstanceOf[Visitor[_, J]].visitObject(-1, i)
 //            ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(stackHead)
 //                      ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#subVisitor().
@@ -1274,7 +1448,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                           ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(i)
         val ctx =
 //          ^^^ definition local 68
-//              documentation ```scala\nctx: Int \n```
+//              display_name ctx
+//              signature_documentation scala ctx: Int 
+//              kind Variable
           try parseNum(i, stackHead.narrow, stackHead.subVisitor.asInstanceOf[Visitor[_, J]])
 //            ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNum().
 //                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(i)
@@ -1434,13 +1610,17 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
               case Some(t) => t
 //                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Some.
 //                      ^ definition local 77
-//                        documentation ```scala\nt: (J, Int) \n```
+//                        display_name t
+//                        signature_documentation scala t: (J, Int) 
+//                        kind Variable
 //                            ^ reference local 77
               case None =>
 //                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/None.
                 val stackTailHead = stackTail.head
 //                  ^^^^^^^^^^^^^ definition local 78
-//                                documentation ```scala\nstackTailHead: ObjArrVisitor[local51, J[ \n```
+//                                display_name stackTailHead
+//                                signature_documentation scala stackTailHead: ObjArrVisitor[local51, J[ 
+//                                kind Variable
 //                                  ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(stackTail)
 //                                            ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/IterableOps#head().
                 parseNested(collectionEndFor(stackTailHead), i + 1, stackTailHead, stackTail.tail)
@@ -1473,13 +1653,17 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
               case Some(t) => t
 //                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Some.
 //                      ^ definition local 79
-//                        documentation ```scala\nt: (J, Int) \n```
+//                        display_name t
+//                        signature_documentation scala t: (J, Int) 
+//                        kind Variable
 //                            ^ reference local 79
               case None =>
 //                 ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/None.
                 val stackTailHead = stackTail.head
 //                  ^^^^^^^^^^^^^ definition local 80
-//                                documentation ```scala\nstackTailHead: ObjArrVisitor[local51, J[ \n```
+//                                display_name stackTailHead
+//                                signature_documentation scala stackTailHead: ObjArrVisitor[local51, J[ 
+//                                kind Variable
 //                                  ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseNested().(stackTail)
 //                                            ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/IterableOps#head().
                 parseNested(collectionEndFor(stackTailHead), i + 1, stackTailHead, stackTail.tail)
@@ -1508,16 +1692,24 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 
   def dieWithFailureMessage(i: Int, state: Int) = {
 //    ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#dieWithFailureMessage().
-//                          documentation ```scala\ndef dieWithFailureMessage(i: Int, state: Int): Nothing\n```
+//                          display_name dieWithFailureMessage
+//                          signature_documentation scala def dieWithFailureMessage(i: Int, state: Int): Nothing
+//                          kind Method
 //                          ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#dieWithFailureMessage().(i)
-//                            documentation ```scala\ni: Int \n```
+//                            display_name i
+//                            signature_documentation scala i: Int 
+//                            kind Parameter
 //                             ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                  ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#dieWithFailureMessage().(state)
-//                                        documentation ```scala\nstate: Int \n```
+//                                        display_name state
+//                                        signature_documentation scala state: Int 
+//                                        kind Parameter
 //                                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     val expected = state match{
 //      ^^^^^^^^ definition local 81
-//               documentation ```scala\nexpected: String \n```
+//               display_name expected
+//               signature_documentation scala expected: String 
+//               kind Variable
 //                 ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#dieWithFailureMessage().(state)
       case ARRBEG => "json value or ]"
 //         ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#ARRBEG.
@@ -1543,12 +1735,18 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 
   def failIfNotData(state: Int, i: Int) = (state: @switch) match{
 //    ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#failIfNotData().
-//                  documentation ```scala\ndef failIfNotData(state: Int, i: Int): Unit\n```
+//                  display_name failIfNotData
+//                  signature_documentation scala def failIfNotData(state: Int, i: Int): Unit
+//                  kind Method
 //                  ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#failIfNotData().(state)
-//                        documentation ```scala\nstate: Int \n```
+//                        display_name state
+//                        signature_documentation scala state: Int 
+//                        kind Parameter
 //                         ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#failIfNotData().(i)
-//                                documentation ```scala\ni: Int \n```
+//                                display_name i
+//                                signature_documentation scala i: Int 
+//                                kind Parameter
 //                                 ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                         ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#failIfNotData().(state)
     case DATA | ARRBEG => // do nothing
@@ -1562,18 +1760,26 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 
   def tryCloseCollection(stackHead: ObjArrVisitor[_, J], stackTail: List[ObjArrVisitor[_, J]], i: Int) = {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#tryCloseCollection().
-//                       documentation ```scala\ndef tryCloseCollection(stackHead: ObjArrVisitor[local82, J[, stackTail: List[ObjArrVisitor[local83, J[], i: Int): Option[(J, Int)]\n```
+//                       display_name tryCloseCollection
+//                       signature_documentation scala def tryCloseCollection(stackHead: ObjArrVisitor[local82, J[, stackTail: List[ObjArrVisitor[local83, J[], i: Int): Option[(J, Int)]
+//                       kind Method
 //                       ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#tryCloseCollection().(stackHead)
-//                                 documentation ```scala\nstackHead: ObjArrVisitor[local82, J[ \n```
+//                                 display_name stackHead
+//                                 signature_documentation scala stackHead: ObjArrVisitor[local82, J[ 
+//                                 kind Parameter
 //                                  ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
 //                                                   ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                       ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#tryCloseCollection().(stackTail)
-//                                                                 documentation ```scala\nstackTail: List[ObjArrVisitor[local83, J[] \n```
+//                                                                 display_name stackTail
+//                                                                 signature_documentation scala stackTail: List[ObjArrVisitor[local83, J[] 
+//                                                                 kind Parameter
 //                                                                  ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/package.List#
 //                                                                       ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
 //                                                                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                                                             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#tryCloseCollection().(i)
-//                                                                                               documentation ```scala\ni: Int \n```
+//                                                                                               display_name i
+//                                                                                               signature_documentation scala i: Int 
+//                                                                                               kind Parameter
 //                                                                                                ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     if (stackTail.isEmpty) {
 //      ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#tryCloseCollection().(stackTail)
@@ -1590,7 +1796,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     } else {
       val ctxt2 = stackTail.head.narrow
 //        ^^^^^ definition local 86
-//              documentation ```scala\nctxt2: ObjArrVisitor[Any, J] \n```
+//              display_name ctxt2
+//              signature_documentation scala ctxt2: ObjArrVisitor[Any, J] 
+//              kind Variable
 //                ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#tryCloseCollection().(stackTail)
 //                          ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/collection/IterableOps#head().
 //                               ^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#narrow().
@@ -1610,9 +1818,13 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
   }
   def collectionEndFor(stackHead: ObjArrVisitor[_, _]) = {
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#collectionEndFor().
-//                     documentation ```scala\ndef collectionEndFor(stackHead: ObjArrVisitor[local89, local90[): Int\n```
+//                     display_name collectionEndFor
+//                     signature_documentation scala def collectionEndFor(stackHead: ObjArrVisitor[local89, local90[): Int
+//                     kind Method
 //                     ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#collectionEndFor().(stackHead)
-//                               documentation ```scala\nstackHead: ObjArrVisitor[local89, local90[ \n```
+//                               display_name stackHead
+//                               signature_documentation scala stackHead: ObjArrVisitor[local89, local90[ 
+//                               kind Parameter
 //                                ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
     if (stackHead.isObj) OBJEND
 //      ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#collectionEndFor().(stackHead)
@@ -1631,18 +1843,26 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     */
   protected[this] final def parseStringSimple(i: Int): Int = {
 //                          ^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringSimple().
-//                                            documentation ```scala\nfinal def parseStringSimple(i: Int): Int\n```
+//                                            display_name parseStringSimple
+//                                            signature_documentation scala final def parseStringSimple(i: Int): Int
+//                                            kind Method
 //                                            ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringSimple().(i)
-//                                              documentation ```scala\ni: Int \n```
+//                                              display_name i
+//                                              signature_documentation scala i: Int 
+//                                              kind Parameter
 //                                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                     ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     var j = i
 //      ^ definition local 91
-//        documentation ```scala\nj: Int \n```
+//        display_name j
+//        signature_documentation scala j: Int 
+//        kind Variable
 //          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringSimple().(i)
     var c = elemOps.toUnsignedInt(getByteSafe(j))
 //      ^ definition local 92
-//        documentation ```scala\nc: Int \n```
+//        display_name c
+//        signature_documentation scala c: Int 
+//        kind Variable
 //          ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#elemOps.
 //                  ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ByteOps.toUnsignedInt().
 //                                ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#getByteSafe().
@@ -1685,18 +1905,26 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     */
   protected[this] final def parseStringComplex(i0: Int): Int = {
 //                          ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringComplex().
-//                                             documentation ```scala\nfinal def parseStringComplex(i0: Int): Int\n```
+//                                             display_name parseStringComplex
+//                                             signature_documentation scala final def parseStringComplex(i0: Int): Int
+//                                             kind Method
 //                                             ^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringComplex().(i0)
-//                                                documentation ```scala\ni0: Int \n```
+//                                                display_name i0
+//                                                signature_documentation scala i0: Int 
+//                                                kind Parameter
 //                                                 ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                       ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     var i = i0
 //      ^ definition local 94
-//        documentation ```scala\ni: Int \n```
+//        display_name i
+//        signature_documentation scala i: Int 
+//        kind Variable
 //          ^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringComplex().(i0)
     var c = elemOps.toUnsignedInt(getByteSafe(i))
 //      ^ definition local 95
-//        documentation ```scala\nc: Int \n```
+//        display_name c
+//        signature_documentation scala c: Int 
+//        kind Variable
 //          ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#elemOps.
 //                  ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ByteOps.toUnsignedInt().
 //                                ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#getByteSafe().
@@ -1765,7 +1993,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
           case 'u' =>
             val d = descape(i)
 //              ^ definition local 97
-//                documentation ```scala\nd: Char \n```
+//                display_name d
+//                signature_documentation scala d: Char 
+//                kind Variable
 //                  ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#descape().
 //                          ^ reference local 94
             outputBuilder.appendC(d)
@@ -1779,7 +2009,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 
           case c => die(i + 1, s"illegal escape sequence after \\")
 //             ^ definition local 98
-//               documentation ```scala\nc: Byte \n```
+//               display_name c
+//               signature_documentation scala c: Byte 
+//               kind Variable
 //                  ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#die().
 //                      ^ reference local 94
 //                        ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#`+`(+4).
@@ -1822,19 +2054,27 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     */
   protected[this] final def parseStringValue(i: Int, stackHead: ObjArrVisitor[_, J]): Int = {
 //                          ^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringValue().
-//                                           documentation ```scala\nfinal def parseStringValue(i: Int, stackHead: ObjArrVisitor[local99, J[): Int\n```
+//                                           display_name parseStringValue
+//                                           signature_documentation scala final def parseStringValue(i: Int, stackHead: ObjArrVisitor[local99, J[): Int
+//                                           kind Method
 //                                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringValue().(i)
-//                                             documentation ```scala\ni: Int \n```
+//                                             display_name i
+//                                             signature_documentation scala i: Int 
+//                                             kind Parameter
 //                                              ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                   ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringValue().(stackHead)
-//                                                             documentation ```scala\nstackHead: ObjArrVisitor[local99, J[ \n```
+//                                                             display_name stackHead
+//                                                             signature_documentation scala stackHead: ObjArrVisitor[local99, J[ 
+//                                                             kind Parameter
 //                                                              ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
 //                                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                                                    ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 
     val k = parseStringSimple(i + 1)
 //      ^ definition local 100
-//        documentation ```scala\nk: Int \n```
+//        display_name k
+//        signature_documentation scala k: Int 
+//        kind Variable
 //          ^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringSimple().
 //                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringValue().(i)
 //                              ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#`+`(+4).
@@ -1857,7 +2097,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     } else {
       val k2 = parseStringToOutputBuilder(i, k)
 //        ^^ definition local 101
-//           documentation ```scala\nk2: Int \n```
+//           display_name k2
+//           signature_documentation scala k2: Int 
+//           kind Variable
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringToOutputBuilder().
 //                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringValue().(i)
 //                                           ^ reference local 100
@@ -1874,19 +2116,27 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 
   protected[this] final def parseStringKey(i: Int, stackHead: ObjArrVisitor[_, J]): Int = {
 //                          ^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringKey().
-//                                         documentation ```scala\nfinal def parseStringKey(i: Int, stackHead: ObjArrVisitor[local102, J[): Int\n```
+//                                         display_name parseStringKey
+//                                         signature_documentation scala final def parseStringKey(i: Int, stackHead: ObjArrVisitor[local102, J[): Int
+//                                         kind Method
 //                                         ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringKey().(i)
-//                                           documentation ```scala\ni: Int \n```
+//                                           display_name i
+//                                           signature_documentation scala i: Int 
+//                                           kind Parameter
 //                                            ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                 ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringKey().(stackHead)
-//                                                           documentation ```scala\nstackHead: ObjArrVisitor[local102, J[ \n```
+//                                                           display_name stackHead
+//                                                           signature_documentation scala stackHead: ObjArrVisitor[local102, J[ 
+//                                                           kind Parameter
 //                                                            ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
 //                                                                             ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                                                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 
     val k = parseStringSimple(i + 1)
 //      ^ definition local 103
-//        documentation ```scala\nk: Int \n```
+//        display_name k
+//        signature_documentation scala k: Int 
+//        kind Variable
 //          ^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringSimple().
 //                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringKey().(i)
 //                              ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#`+`(+4).
@@ -1909,7 +2159,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     } else {
       val k2 = parseStringToOutputBuilder(i, k)
 //        ^^ definition local 104
-//           documentation ```scala\nk2: Int \n```
+//           display_name k2
+//           signature_documentation scala k2: Int 
+//           kind Variable
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringToOutputBuilder().
 //                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringKey().(i)
 //                                           ^ reference local 103
@@ -1927,12 +2179,18 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 
   def parseStringToOutputBuilder(i: Int, k: Int) = {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringToOutputBuilder().
-//                               documentation ```scala\ndef parseStringToOutputBuilder(i: Int, k: Int): Int\n```
+//                               display_name parseStringToOutputBuilder
+//                               signature_documentation scala def parseStringToOutputBuilder(i: Int, k: Int): Int
+//                               kind Method
 //                               ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringToOutputBuilder().(i)
-//                                 documentation ```scala\ni: Int \n```
+//                                 display_name i
+//                                 signature_documentation scala i: Int 
+//                                 kind Parameter
 //                                  ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringToOutputBuilder().(k)
-//                                         documentation ```scala\nk: Int \n```
+//                                         display_name k
+//                                         signature_documentation scala k: Int 
+//                                         kind Parameter
 //                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
     outputBuilder.reset()
 //  ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#outputBuilder.
@@ -1949,7 +2207,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //                                                      ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringToOutputBuilder().(i)
     val k2 = parseStringComplex(-k - 1)
 //      ^^ definition local 105
-//         documentation ```scala\nk2: Int \n```
+//         display_name k2
+//         signature_documentation scala k2: Int 
+//         kind Variable
 //           ^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringComplex().
 //                              ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#`unary_-`().
 //                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringToOutputBuilder().(k)
@@ -1960,20 +2220,30 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 
   def visitString(i: Int, s: CharSequence, stackHead: ObjArrVisitor[_, J]) = {
 //    ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitString().
-//                documentation ```scala\ndef visitString(i: Int, s: CharSequence, stackHead: ObjArrVisitor[local106, J[): Unit\n```
+//                display_name visitString
+//                signature_documentation scala def visitString(i: Int, s: CharSequence, stackHead: ObjArrVisitor[local106, J[): Unit
+//                kind Method
 //                ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitString().(i)
-//                  documentation ```scala\ni: Int \n```
+//                  display_name i
+//                  signature_documentation scala i: Int 
+//                  kind Parameter
 //                   ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                        ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitString().(s)
-//                          documentation ```scala\ns: CharSequence \n```
+//                          display_name s
+//                          signature_documentation scala s: CharSequence 
+//                          kind Parameter
 //                           ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                         ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitString().(stackHead)
-//                                                   documentation ```scala\nstackHead: ObjArrVisitor[local106, J[ \n```
+//                                                   display_name stackHead
+//                                                   signature_documentation scala stackHead: ObjArrVisitor[local106, J[ 
+//                                                   kind Parameter
 //                                                    ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
 //                                                                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
     val v = stackHead.subVisitor.visitString(s, i)
 //      ^ definition local 107
-//        documentation ```scala\nv: Any \n```
+//        display_name v
+//        signature_documentation scala v: Any 
+//        kind Variable
 //          ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitString().(stackHead)
 //                    ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#subVisitor().
 //                               ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitString().
@@ -1988,27 +2258,39 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
   }
   def visitStringKey(i: Int, s: CharSequence, stackHead: ObjArrVisitor[_, J]) = {
 //    ^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitStringKey().
-//                   documentation ```scala\ndef visitStringKey(i: Int, s: CharSequence, stackHead: ObjArrVisitor[local108, J[): Unit\n```
+//                   display_name visitStringKey
+//                   signature_documentation scala def visitStringKey(i: Int, s: CharSequence, stackHead: ObjArrVisitor[local108, J[): Unit
+//                   kind Method
 //                   ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitStringKey().(i)
-//                     documentation ```scala\ni: Int \n```
+//                     display_name i
+//                     signature_documentation scala i: Int 
+//                     kind Parameter
 //                      ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitStringKey().(s)
-//                             documentation ```scala\ns: CharSequence \n```
+//                             display_name s
+//                             signature_documentation scala s: CharSequence 
+//                             kind Parameter
 //                              ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                            ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitStringKey().(stackHead)
-//                                                      documentation ```scala\nstackHead: ObjArrVisitor[local108, J[ \n```
+//                                                      display_name stackHead
+//                                                      signature_documentation scala stackHead: ObjArrVisitor[local108, J[ 
+//                                                      kind Parameter
 //                                                       ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjArrVisitor#
 //                                                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
     val obj = stackHead.asInstanceOf[ObjVisitor[Any, _]]
 //      ^^^ definition local 109
-//          documentation ```scala\nobj: ObjVisitor[Any, Any] \n```
+//          display_name obj
+//          signature_documentation scala obj: ObjVisitor[Any, Any] 
+//          kind Variable
 //            ^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitStringKey().(stackHead)
 //                      ^^^^^^^^^^^^ reference semanticdb maven . . scala/Any#asInstanceOf().
 //                                   ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjVisitor#
 //                                              ^^^ reference semanticdb maven . . scala/Any#
     val keyVisitor = obj.visitKey(i)
 //      ^^^^^^^^^^ definition local 110
-//                 documentation ```scala\nkeyVisitor: Visitor[local111, Any[ \n```
+//                 display_name keyVisitor
+//                 signature_documentation scala keyVisitor: Visitor[local111, Any[ 
+//                 kind Variable
 //                   ^^^ reference local 109
 //                       ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/ObjVisitor#visitKey().
 //                                ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#visitStringKey().(i)
@@ -2024,12 +2306,18 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 
   protected[this] final def parseStringTopLevel(i: Int, facade: Visitor[_, J]): (J, Int) = {
 //                          ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringTopLevel().
-//                                              documentation ```scala\nfinal def parseStringTopLevel(i: Int, facade: Visitor[local112, J[): (J, Int)\n```
+//                                              display_name parseStringTopLevel
+//                                              signature_documentation scala final def parseStringTopLevel(i: Int, facade: Visitor[local112, J[): (J, Int)
+//                                              kind Method
 //                                              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringTopLevel().(i)
-//                                                documentation ```scala\ni: Int \n```
+//                                                display_name i
+//                                                signature_documentation scala i: Int 
+//                                                kind Parameter
 //                                                 ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                                      ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringTopLevel().(facade)
-//                                                             documentation ```scala\nfacade: Visitor[local112, J[ \n```
+//                                                             display_name facade
+//                                                             signature_documentation scala facade: Visitor[local112, J[ 
+//                                                             kind Parameter
 //                                                              ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                                                         ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
 //                                                                               ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#[J]
@@ -2037,7 +2325,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 
     val k = parseStringSimple(i + 1)
 //      ^ definition local 113
-//        documentation ```scala\nk: Int \n```
+//        display_name k
+//        signature_documentation scala k: Int 
+//        kind Variable
 //          ^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringSimple().
 //                            ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringTopLevel().(i)
 //                              ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#`+`(+4).
@@ -2046,7 +2336,9 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
 //        ^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#`>=`(+3).
       val res = facade.visitString(unsafeCharSeqForRange(i + 1, k - i - 2), i)
 //        ^^^ definition local 114
-//            documentation ```scala\nres: J \n```
+//            display_name res
+//            signature_documentation scala res: J 
+//            kind Variable
 //              ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringTopLevel().(facade)
 //                     ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitString().
 //                                 ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingByteParser#unsafeCharSeqForRange().
@@ -2063,13 +2355,17 @@ abstract class ByteParser[J] extends upickle.core.BufferingByteParser{
     } else {
       val k2 = parseStringToOutputBuilder(i, k)
 //        ^^ definition local 115
-//           documentation ```scala\nk2: Int \n```
+//           display_name k2
+//           signature_documentation scala k2: Int 
+//           kind Variable
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringToOutputBuilder().
 //                                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringTopLevel().(i)
 //                                           ^ reference local 113
       val res = facade.visitString(outputBuilder.makeString(), i)
 //        ^^^ definition local 116
-//            documentation ```scala\nres: J \n```
+//            display_name res
+//            signature_documentation scala res: J 
+//            kind Variable
 //              ^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#parseStringTopLevel().(facade)
 //                     ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#visitString().
 //                                 ^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#outputBuilder.

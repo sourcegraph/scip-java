@@ -7,9 +7,13 @@ import android.view.View;
 
 interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
 //        ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#
-//                               documentation ```java\ninterface BaseEpoxyTouchCallback<T extends EpoxyModel>\n```
+//                               display_name BaseEpoxyTouchCallback
+//                               signature_documentation java interface BaseEpoxyTouchCallback<T extends EpoxyModel>
+//                               kind Interface
 //                               ^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
-//                                 documentation ```java\nT extends EpoxyModel\n```
+//                                 display_name T
+//                                 signature_documentation java T extends EpoxyModel
+//                                 kind TypeParameter
 //                                         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 
   /**
@@ -24,15 +28,21 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
    */
   int getMovementFlagsForModel(T model, int adapterPosition);
 //    ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#getMovementFlagsForModel().
-//                             documentation ```java\npublic abstract int getMovementFlagsForModel(T model, int adapterPosition)\n```
+//                             display_name getMovementFlagsForModel
+//                             signature_documentation java public abstract int getMovementFlagsForModel(T model, int adapterPosition)
+//                             kind AbstractMethod
 //                             documentation  Should return a composite flag which defines the enabled move directions in each state\n (idle, swiping, dragging) for the given model.\n <p>\n Return 0 to disable movement for the model.\n\n @param model           The model being targeted for movement.\n @param adapterPosition The current adapter position of the targeted model\n @see androidx.recyclerview.widget.ItemTouchHelper.Callback#getMovementFlags\n
 //                             relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#DragCallbacks#getMovementFlagsForModel().
 //                             relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#getMovementFlagsForModel().
 //                             ^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
 //                               ^^^^^ definition local 0
-//                                     documentation ```java\nT model\n```
+//                                     display_name model
+//                                     signature_documentation java T model
+//                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#getMovementFlagsForModel().
 //                                          ^^^^^^^^^^^^^^^ definition local 1
-//                                                          documentation ```java\nint adapterPosition\n```
+//                                                          display_name adapterPosition
+//                                                          signature_documentation java int adapterPosition
+//                                                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#getMovementFlagsForModel().
 
   /**
    * Called when the user interaction with a view is over and the view has
@@ -46,7 +56,9 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
    */
   void clearView(T model, View itemView);
 //     ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView().
-//               documentation ```java\npublic abstract void clearView(T model, unresolved_type itemView)\n```
+//               display_name clearView
+//               signature_documentation java public abstract void clearView(T model, unresolved_type itemView)
+//               kind AbstractMethod
 //               documentation  Called when the user interaction with a view is over and the view has\n completed its animation. This is a good place to clear all changes on the view that were done\n in other previous touch callbacks (such as on touch start, change, release, etc).\n <p>\n This is the last callback in the lifecycle of a touch event.\n\n @param model    The model whose view is being cleared.\n @param itemView The view being cleared.\n
 //               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView().
 //               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyModelTouchCallback#clearView(+1).
@@ -54,8 +66,12 @@ interface BaseEpoxyTouchCallback<T extends EpoxyModel> {
 //               relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/EpoxyTouchHelper#SwipeCallbacks#clearView().
 //               ^ reference semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#[T]
 //                 ^^^^^ definition local 2
-//                       documentation ```java\nT model\n```
+//                       display_name model
+//                       signature_documentation java T model
+//                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView().
 //                        ^^^^ reference semanticdb maven . . View#
 //                             ^^^^^^^^ definition local 3
-//                                      documentation ```java\nunresolved_type itemView\n```
+//                                      display_name itemView
+//                                      signature_documentation java unresolved_type itemView
+//                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/BaseEpoxyTouchCallback#clearView().
 }

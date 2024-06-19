@@ -2,21 +2,29 @@ package minimized;
 
 public interface Interfaces {
 //               ^^^^^^^^^^ definition semanticdb maven . . minimized/Interfaces#
-//                          documentation ```java\npublic interface Interfaces\n```
+//                          display_name Interfaces
+//                          signature_documentation java public interface Interfaces
+//                          kind Interface
   static void staticInterfaceMethod() {}
 //            ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Interfaces#staticInterfaceMethod().
-//                                  documentation ```java\npublic static void staticInterfaceMethod()\n```
+//                                  display_name staticInterfaceMethod
+//                                  signature_documentation java public static void staticInterfaceMethod()
+//                                  kind StaticMethod
 
   String abstractInterfaceMethod();
 //^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //       ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Interfaces#abstractInterfaceMethod().
-//                               documentation ```java\npublic abstract String abstractInterfaceMethod()\n```
+//                               display_name abstractInterfaceMethod
+//                               signature_documentation java public abstract String abstractInterfaceMethod()
+//                               kind AbstractMethod
 //                               relationship is_reference is_implementation semanticdb maven . . minimized/SubClasses#abstractInterfaceMethod().
 
   default String defaultInterfaceMethod() {
 //        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //               ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Interfaces#defaultInterfaceMethod().
-//                                      documentation ```java\npublic default String defaultInterfaceMethod()\n```
+//                                      display_name defaultInterfaceMethod
+//                                      signature_documentation java public default String defaultInterfaceMethod()
+//                                      kind Method
     return "default";
   }
 }

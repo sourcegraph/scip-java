@@ -8,12 +8,18 @@ import upickle.core.Visitor
 
 trait Transformer[I] {
 //    ^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#
-//                documentation ```scala\ntrait Transformer[I]\n```
+//                display_name Transformer
+//                signature_documentation scala trait Transformer[I]
+//                kind Trait
 //                ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#[I]
-//                  documentation ```scala\nI\n```
+//                  display_name I
+//                  signature_documentation scala I
+//                  kind TypeParameter
   def transform[T](j: I, f: Visitor[_, T]): T
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().
-//              documentation ```scala\ndef transform(j: I, f: Visitor[local0, T[): T\n```
+//              display_name transform
+//              signature_documentation scala def transform(j: I, f: Visitor[local0, T[): T
+//              kind AbstractMethod
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteArrayParser.transform().
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser.transform().
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/CharSequenceParser.transform().
@@ -22,22 +28,34 @@ trait Transformer[I] {
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/StringParser.transform().
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Value.transform().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().[T]
-//                documentation ```scala\nT\n```
+//                display_name T
+//                signature_documentation scala T
+//                kind TypeParameter
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().(j)
-//                   documentation ```scala\nj: I \n```
+//                   display_name j
+//                   signature_documentation scala j: I 
+//                   kind Parameter
 //                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#[I]
 //                       ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().(f)
-//                         documentation ```scala\nf: Visitor[local0, T[ \n```
+//                         display_name f
+//                         signature_documentation scala f: Visitor[local0, T[ 
+//                         kind Parameter
 //                          ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                     ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().[T]
 //                                          ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().[T]
   def transformable[T](j: I) = Readable.fromTransformer(j, this)
 //    ^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transformable().
-//                  documentation ```scala\ndef transformable(j: I): fromTransformer[I]\n```
+//                  display_name transformable
+//                  signature_documentation scala def transformable(j: I): fromTransformer[I]
+//                  kind Method
 //                  ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transformable().[T]
-//                    documentation ```scala\nT\n```
+//                    display_name T
+//                    signature_documentation scala T
+//                    kind TypeParameter
 //                     ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transformable().(j)
-//                       documentation ```scala\nj: I \n```
+//                       display_name j
+//                       signature_documentation scala j: I 
+//                       kind Parameter
 //                        ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#[I]
 //                             ^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.
 //                                      ^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Readable.fromTransformer.

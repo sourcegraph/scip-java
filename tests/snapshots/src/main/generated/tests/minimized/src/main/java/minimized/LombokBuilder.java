@@ -50,34 +50,58 @@ package minimized;
 //^^^^^ reference semanticdb maven . . lombok/
 //      ^^^^^^^ reference semanticdb maven . . lombok/Builder#
 //              definition semanticdb maven . . minimized/Hello#HelloBuilder#build(). 1:4
-//              documentation ```java\n@SuppressWarnings("all")\npublic Hello build()\n```
+//              display_name build
+//              signature_documentation java @SuppressWarnings("all")\npublic Hello build()
+//              kind Method
 //              definition semanticdb maven . . minimized/Hello#builder(). 1:6
-//              documentation ```java\n@SuppressWarnings("all")\npublic static HelloBuilder builder()\n```
+//              display_name builder
+//              signature_documentation java @SuppressWarnings("all")\npublic static HelloBuilder builder()
+//              kind StaticMethod
 //              definition semanticdb maven . . minimized/Hello#HelloBuilder#toString(). 1:7
-//              documentation ```java\n@Override\n@SuppressWarnings("all")\npublic String toString()\n```
+//              display_name toString
+//              signature_documentation java @Override\n@SuppressWarnings("all")\npublic String toString()
+//              kind Method
 //              relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#toString().
 //              definition semanticdb maven . . minimized/Hello#HelloBuilder# 1:11
-//              documentation ```java\n@SuppressWarnings("all")\npublic static class HelloBuilder\n```
+//              display_name HelloBuilder
+//              signature_documentation java @SuppressWarnings("all")\npublic static class HelloBuilder
+//              kind Class
 //              definition semanticdb maven . . minimized/Hello#HelloBuilder#`<init>`(). 1:11
-//              documentation ```java\n@SuppressWarnings("all")\nHelloBuilder()\n```
+//              display_name <init>
+//              signature_documentation java @SuppressWarnings("all")\nHelloBuilder()
+//              kind Constructor
 //              reference semanticdb maven . . minimized/Hello#HelloBuilder#`<init>`(). 1:11
 class Hello {
 //    ^^^^^ definition semanticdb maven . . minimized/Hello#
-//          documentation ```java\n@Builder\nclass Hello\n```
+//          display_name Hello
+//          signature_documentation java @Builder\nclass Hello
+//          kind Class
 //    ^^^^^ definition semanticdb maven . . minimized/Hello#`<init>`().
-//          documentation ```java\n@SuppressWarnings("all")\nHello(String message)\n```
+//          display_name <init>
+//          signature_documentation java @SuppressWarnings("all")\nHello(String message)
+//          kind Constructor
 //    ^^^^^ reference semanticdb maven . . minimized/Hello#`<init>`().
 →private String message;
 //       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //              ^^^^^^^ definition local 0
-//                      documentation ```java\nfinal String message\n```
+//                      display_name message
+//                      signature_documentation java final String message
+//                      enclosing_symbol semanticdb maven . . minimized/Hello#`<init>`().
 //              ^^^^^^^ definition local 1
-//                      documentation ```java\nfinal String message\n```
+//                      display_name message
+//                      signature_documentation java final String message
+//                      enclosing_symbol semanticdb maven . . minimized/Hello#HelloBuilder#message().
 //              ^^^^^^^ definition semanticdb maven . . minimized/Hello#HelloBuilder#message().
-//                      documentation ```java\n@SuppressWarnings("all")\npublic HelloBuilder message(String message)\n```
+//                      display_name message
+//                      signature_documentation java @SuppressWarnings("all")\npublic HelloBuilder message(String message)
+//                      kind Method
 //                      documentation @return {@code this}.
 //              ^^^^^^^ definition semanticdb maven . . minimized/Hello#HelloBuilder#message.
-//                      documentation ```java\n@SuppressWarnings("all")\nprivate String message\n```
+//                      display_name message
+//                      signature_documentation java @SuppressWarnings("all")\nprivate String message
+//                      kind Field
 //              ^^^^^^^ definition semanticdb maven . . minimized/Hello#message.
-//                      documentation ```java\nprivate String message\n```
+//                      display_name message
+//                      signature_documentation java private String message
+//                      kind Field
 }

@@ -3,50 +3,72 @@ package minimized
 
 case class Issue403(value: String)
 //         ^^^^^^^^ definition semanticdb maven . . minimized/Issue403#
-//                  documentation ```scala\ncase class Issue403(value: String)\n```
+//                  display_name Issue403
+//                  signature_documentation scala case class Issue403(value: String)
+//                  kind Class
 //                  relationship is_reference semanticdb maven . . minimized/Issue403.
 //                  relationship is_reference semanticdb maven . . minimized/Issue403.apply().
 //         ________ synthetic_definition semanticdb maven . . minimized/Issue403#productElementName().
-//                  documentation ```scala\ndef productElementName(x$1: Int): String\n```
+//                  display_name productElementName
+//                  signature_documentation scala def productElementName(x$1: Int): String
+//                  kind Method
 //                  relationship is_definition semanticdb maven . . minimized/Issue403#
 //                  relationship is_reference semanticdb maven . . minimized/Issue403.apply().
 //                  relationship is_reference is_implementation semanticdb maven . . scala/Product#productElementName().
 //         ________ synthetic_definition semanticdb maven . . minimized/Issue403.apply().
-//                  documentation ```scala\ndef apply(value: String): Issue403\n```
+//                  display_name apply
+//                  signature_documentation scala def apply(value: String): Issue403
+//                  kind Method
 //                  relationship is_definition semanticdb maven . . minimized/Issue403#
 //                  relationship is_reference is_implementation semanticdb maven . . scala/Function1#apply().
 //         ________ synthetic_definition semanticdb maven . . minimized/Issue403.
-//                  documentation ```scala\nobject Issue403\n```
+//                  display_name Issue403
+//                  signature_documentation scala object Issue403
+//                  kind Object
 //                  relationship is_definition semanticdb maven . . minimized/Issue403#
 //                  relationship is_reference semanticdb maven . . minimized/Issue403.apply().
 //         ________ synthetic_definition semanticdb maven . . minimized/Issue403#productElement().
-//                  documentation ```scala\ndef productElement(x$1: Int): Any\n```
+//                  display_name productElement
+//                  signature_documentation scala def productElement(x$1: Int): Any
+//                  kind Method
 //                  relationship is_definition semanticdb maven . . minimized/Issue403#
 //                  relationship is_reference semanticdb maven . . minimized/Issue403.apply().
 //                  relationship is_reference is_implementation semanticdb maven . . scala/Product#productElement().
 //         ________ synthetic_definition semanticdb maven . . minimized/Issue403#copy().
-//                  documentation ```scala\ndef copy(value: String): Issue403\n```
+//                  display_name copy
+//                  signature_documentation scala def copy(value: String): Issue403
+//                  kind Method
 //                  relationship is_definition semanticdb maven . . minimized/Issue403#
 //                  relationship is_reference semanticdb maven . . minimized/Issue403.apply().
 //                 ^ definition semanticdb maven . . minimized/Issue403#`<init>`().
-//                   documentation ```scala\ndef this(value: String)\n```
+//                   display_name <init>
+//                   signature_documentation scala def this(value: String)
+//                   kind Constructor
 //                  ^^^^^ definition semanticdb maven . . minimized/Issue403#value.
-//                        documentation ```scala\nval value: String\n```
+//                        display_name value
+//                        signature_documentation scala val value: String
+//                        kind Method
 //                        relationship is_reference semanticdb maven . . minimized/Issue403#`<init>`().(value)
 //                        relationship is_reference semanticdb maven . . minimized/Issue403#copy().(value)
 //                        relationship is_reference semanticdb maven . . minimized/Issue403.apply().(value)
 //                  _____ synthetic_definition semanticdb maven . . minimized/Issue403#copy().(value)
-//                        documentation ```scala\ndefault value: String \n```
+//                        display_name value
+//                        signature_documentation scala default value: String 
+//                        kind Parameter
 //                        relationship is_reference semanticdb maven . . minimized/Issue403#`<init>`().(value)
 //                        relationship is_reference is_definition semanticdb maven . . minimized/Issue403#value.
 //                        relationship is_reference semanticdb maven . . minimized/Issue403.apply().(value)
 //                  _____ synthetic_definition semanticdb maven . . minimized/Issue403.apply().(value)
-//                        documentation ```scala\nvalue: String \n```
+//                        display_name value
+//                        signature_documentation scala value: String 
+//                        kind Parameter
 //                        relationship is_reference semanticdb maven . . minimized/Issue403#`<init>`().(value)
 //                        relationship is_reference semanticdb maven . . minimized/Issue403#copy().(value)
 //                        relationship is_reference is_definition semanticdb maven . . minimized/Issue403#value.
 //                  _____ synthetic_definition semanticdb maven . . minimized/Issue403#`<init>`().(value)
-//                        documentation ```scala\nvalue: String \n```
+//                        display_name value
+//                        signature_documentation scala value: String 
+//                        kind Parameter
 //                        relationship is_reference semanticdb maven . . minimized/Issue403#copy().(value)
 //                        relationship is_reference is_definition semanticdb maven . . minimized/Issue403#value.
 //                        relationship is_reference semanticdb maven . . minimized/Issue403.apply().(value)
@@ -54,10 +76,14 @@ case class Issue403(value: String)
 
 object Issue403App {
 //     ^^^^^^^^^^^ definition semanticdb maven . . minimized/Issue403App.
-//                 documentation ```scala\nobject Issue403App\n```
+//                 display_name Issue403App
+//                 signature_documentation scala object Issue403App
+//                 kind Object
   def instantiations(): Unit = {
 //    ^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Issue403App.instantiations().
-//                   documentation ```scala\ndef instantiations(): Unit\n```
+//                   display_name instantiations
+//                   signature_documentation scala def instantiations(): Unit
+//                   kind Method
 //                      ^^^^ reference semanticdb maven . . scala/Unit#
     println(Issue403("a").value)
 //  ^^^^^^^ reference semanticdb maven . . scala/Predef.println(+1).
@@ -81,7 +107,9 @@ object Issue403App {
       case Issue403(value) =>
 //         ^^^^^^^^ reference semanticdb maven . . minimized/Issue403.
 //                  ^^^^^ definition local 1
-//                        documentation ```scala\nvalue: String \n```
+//                        display_name value
+//                        signature_documentation scala value: String 
+//                        kind Variable
         println(value)
 //      ^^^^^^^ reference semanticdb maven . . scala/Predef.println(+1).
 //              ^^^^^ reference local 1

@@ -25,45 +25,65 @@ import androidx.annotation.StringRes;
 
 public class StringAttributeData {
 //           ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#
-//                               documentation ```java\npublic class StringAttributeData\n```
+//                               display_name StringAttributeData
+//                               signature_documentation java public class StringAttributeData
+//                               kind Class
   private final boolean hasDefault;
 //                      ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hasDefault.
-//                                 documentation ```java\nprivate final boolean hasDefault\n```
+//                                 display_name hasDefault
+//                                 signature_documentation java private final boolean hasDefault
+//                                 kind Field
   @Nullable private final CharSequence defaultString;
 // ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                        ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                     ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#defaultString.
-//                                                   documentation ```java\n@Nullable\nprivate final CharSequence defaultString\n```
+//                                                   display_name defaultString
+//                                                   signature_documentation java @Nullable\nprivate final CharSequence defaultString
+//                                                   kind Field
   @StringRes private final int defaultStringRes;
 // ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/StringRes#
 //                             ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#defaultStringRes.
-//                                              documentation ```java\n@StringRes\nprivate final int defaultStringRes\n```
+//                                              display_name defaultStringRes
+//                                              signature_documentation java @StringRes\nprivate final int defaultStringRes
+//                                              kind Field
 
   @Nullable private CharSequence string;
 // ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                  ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
-//                                      documentation ```java\n@Nullable\nprivate CharSequence string\n```
+//                                      display_name string
+//                                      signature_documentation java @Nullable\nprivate CharSequence string
+//                                      kind Field
   @StringRes private int stringRes;
 // ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/StringRes#
 //                       ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#stringRes.
-//                                 documentation ```java\n@StringRes\nprivate int stringRes\n```
+//                                 display_name stringRes
+//                                 signature_documentation java @StringRes\nprivate int stringRes
+//                                 kind Field
   @PluralsRes private int pluralRes;
 // ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/PluralsRes#
 //                        ^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
-//                                  documentation ```java\n@PluralsRes\nprivate int pluralRes\n```
+//                                  display_name pluralRes
+//                                  signature_documentation java @PluralsRes\nprivate int pluralRes
+//                                  kind Field
   private int quantity;
 //            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#quantity.
-//                     documentation ```java\nprivate int quantity\n```
+//                     display_name quantity
+//                     signature_documentation java private int quantity
+//                     kind Field
   @Nullable private Object[] formatArgs;
 // ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                           ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#formatArgs.
-//                                      documentation ```java\n@Nullable\nprivate Object[] formatArgs\n```
+//                                      display_name formatArgs
+//                                      signature_documentation java @Nullable\nprivate Object[] formatArgs
+//                                      kind Field
 
   public StringAttributeData() {
 //       ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#`<init>`().
-//                           documentation ```java\npublic StringAttributeData()\n```
+//                           display_name <init>
+//                           signature_documentation java public StringAttributeData()
+//                           kind Constructor
     hasDefault = false;
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hasDefault.
     defaultString = null;
@@ -74,11 +94,15 @@ public class StringAttributeData {
 
   public StringAttributeData(@Nullable CharSequence defaultString) {
 //       ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#`<init>`(+1).
-//                           documentation ```java\npublic StringAttributeData(CharSequence defaultString)\n```
+//                           display_name <init>
+//                           signature_documentation java public StringAttributeData(CharSequence defaultString)
+//                           kind Constructor
 //                            ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                     ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                                  ^^^^^^^^^^^^^ definition local 0
-//                                                                documentation ```java\n@Nullable\nCharSequence defaultString\n```
+//                                                                display_name defaultString
+//                                                                signature_documentation java @Nullable\nCharSequence defaultString
+//                                                                enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#`<init>`(+1).
     hasDefault = true;
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hasDefault.
     this.defaultString = defaultString;
@@ -93,10 +117,14 @@ public class StringAttributeData {
 
   public StringAttributeData(@StringRes int defaultStringRes) {
 //       ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#`<init>`(+2).
-//                           documentation ```java\npublic StringAttributeData(int defaultStringRes)\n```
+//                           display_name <init>
+//                           signature_documentation java public StringAttributeData(int defaultStringRes)
+//                           kind Constructor
 //                            ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/StringRes#
 //                                          ^^^^^^^^^^^^^^^^ definition local 1
-//                                                           documentation ```java\n@StringRes\nint defaultStringRes\n```
+//                                                           display_name defaultStringRes
+//                                                           signature_documentation java @StringRes\nint defaultStringRes
+//                                                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#`<init>`(+2).
     hasDefault = true;
 //  ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hasDefault.
     this.defaultStringRes = defaultStringRes;
@@ -111,11 +139,15 @@ public class StringAttributeData {
 
   public void setValue(@Nullable CharSequence string) {
 //            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue().
-//                     documentation ```java\npublic void setValue(CharSequence string)\n```
+//                     display_name setValue
+//                     signature_documentation java public void setValue(CharSequence string)
+//                     kind Method
 //                      ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                               ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                                            ^^^^^^ definition local 2
-//                                                   documentation ```java\n@Nullable\nCharSequence string\n```
+//                                                   display_name string
+//                                                   signature_documentation java @Nullable\nCharSequence string
+//                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue().
     this.string = string;
 //       ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
 //                ^^^^^^ reference local 2
@@ -127,10 +159,14 @@ public class StringAttributeData {
 
   public void setValue(@StringRes int stringRes) {
 //            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+1).
-//                     documentation ```java\npublic void setValue(int stringRes)\n```
+//                     display_name setValue
+//                     signature_documentation java public void setValue(int stringRes)
+//                     kind Method
 //                      ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/StringRes#
 //                                    ^^^^^^^^^ definition local 3
-//                                              documentation ```java\n@StringRes\nint stringRes\n```
+//                                              display_name stringRes
+//                                              signature_documentation java @StringRes\nint stringRes
+//                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+1).
     setValue(stringRes, null);
 //  ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+2).
 //           ^^^^^^^^^ reference local 3
@@ -138,14 +174,20 @@ public class StringAttributeData {
 
   public void setValue(@StringRes int stringRes, @Nullable Object[] formatArgs) {
 //            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+2).
-//                     documentation ```java\npublic void setValue(int stringRes, Object[] formatArgs)\n```
+//                     display_name setValue
+//                     signature_documentation java public void setValue(int stringRes, Object[] formatArgs)
+//                     kind Method
 //                      ^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/StringRes#
 //                                    ^^^^^^^^^ definition local 4
-//                                              documentation ```java\n@StringRes\nint stringRes\n```
+//                                              display_name stringRes
+//                                              signature_documentation java @StringRes\nint stringRes
+//                                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+2).
 //                                                ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                                         ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                                                                  ^^^^^^^^^^ definition local 5
-//                                                                             documentation ```java\n@Nullable\nObject[] formatArgs\n```
+//                                                                             display_name formatArgs
+//                                                                             signature_documentation java @Nullable\nObject[] formatArgs
+//                                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+2).
     if (stringRes != 0) {
 //      ^^^^^^^^^ reference local 4
       this.stringRes = stringRes;
@@ -166,7 +208,9 @@ public class StringAttributeData {
 
   private void handleInvalidStringRes() {
 //             ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#handleInvalidStringRes().
-//                                    documentation ```java\nprivate void handleInvalidStringRes()\n```
+//                                    display_name handleInvalidStringRes
+//                                    signature_documentation java private void handleInvalidStringRes()
+//                                    kind Method
     if (hasDefault) {
 //      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hasDefault.
       if (defaultStringRes != 0) {
@@ -187,16 +231,24 @@ public class StringAttributeData {
 
   public void setValue(@PluralsRes int pluralRes, int quantity, @Nullable Object[] formatArgs) {
 //            ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+3).
-//                     documentation ```java\npublic void setValue(int pluralRes, int quantity, Object[] formatArgs)\n```
+//                     display_name setValue
+//                     signature_documentation java public void setValue(int pluralRes, int quantity, Object[] formatArgs)
+//                     kind Method
 //                      ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/PluralsRes#
 //                                     ^^^^^^^^^ definition local 6
-//                                               documentation ```java\n@PluralsRes\nint pluralRes\n```
+//                                               display_name pluralRes
+//                                               signature_documentation java @PluralsRes\nint pluralRes
+//                                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+3).
 //                                                    ^^^^^^^^ definition local 7
-//                                                             documentation ```java\nint quantity\n```
+//                                                             display_name quantity
+//                                                             signature_documentation java int quantity
+//                                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+3).
 //                                                               ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                                                                        ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                                                                                 ^^^^^^^^^^ definition local 8
-//                                                                                            documentation ```java\n@Nullable\nObject[] formatArgs\n```
+//                                                                                            display_name formatArgs
+//                                                                                            signature_documentation java @Nullable\nObject[] formatArgs
+//                                                                                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#setValue(+3).
     if (pluralRes != 0) {
 //      ^^^^^^^^^ reference local 6
       this.pluralRes = pluralRes;
@@ -221,10 +273,14 @@ public class StringAttributeData {
   public CharSequence toString(Context context) {
 //       ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                    ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#toString().
-//                             documentation ```java\npublic CharSequence toString(unresolved_type context)\n```
+//                             display_name toString
+//                             signature_documentation java public CharSequence toString(unresolved_type context)
+//                             kind Method
 //                             ^^^^^^^ reference semanticdb maven . . Context#
 //                                     ^^^^^^^ definition local 9
-//                                             documentation ```java\nunresolved_type context\n```
+//                                             display_name context
+//                                             signature_documentation java unresolved_type context
+//                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#toString().
     if (pluralRes != 0) {
 //      ^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#pluralRes.
       if (formatArgs != null) {
@@ -271,11 +327,15 @@ public class StringAttributeData {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public boolean equals(Object o) {
 //               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#equals().
-//                      documentation ```java\n@Override\npublic boolean equals(Object o)\n```
+//                      display_name equals
+//                      signature_documentation java @Override\npublic boolean equals(Object o)
+//                      kind Method
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#equals().
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                             ^ definition local 10
-//                               documentation ```java\nObject o\n```
+//                               display_name o
+//                               signature_documentation java Object o
+//                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#equals().
     if (this == o) {
 //              ^ reference local 10
       return true;
@@ -289,7 +349,10 @@ public class StringAttributeData {
     StringAttributeData that = (StringAttributeData) o;
 //  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#
 //                      ^^^^ definition local 11
-//                           documentation ```java\nStringAttributeData that\n```
+//                           display_name that
+//                           signature_documentation java StringAttributeData that
+//                           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#equals().
+//                           kind Variable
 //                              ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#
 //                                                   ^ reference local 10
 
@@ -334,11 +397,16 @@ public class StringAttributeData {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public int hashCode() {
 //           ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hashCode().
-//                    documentation ```java\n@Override\npublic int hashCode()\n```
+//                    display_name hashCode
+//                    signature_documentation java @Override\npublic int hashCode()
+//                    kind Method
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#hashCode().
     int result = string != null ? string.hashCode() : 0;
 //      ^^^^^^ definition local 12
-//             documentation ```java\nint result\n```
+//             display_name result
+//             signature_documentation java int result
+//             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StringAttributeData#hashCode().
+//             kind Variable
 //               ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
 //                                ^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/StringAttributeData#string.
 //                                       ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#hashCode().

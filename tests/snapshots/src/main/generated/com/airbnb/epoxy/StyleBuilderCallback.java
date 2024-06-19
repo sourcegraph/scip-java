@@ -6,14 +6,22 @@ package com.airbnb.epoxy;
  */
 public interface StyleBuilderCallback<T> {
 //               ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StyleBuilderCallback#
-//                                    documentation ```java\npublic interface StyleBuilderCallback<T>\n```
+//                                    display_name StyleBuilderCallback
+//                                    signature_documentation java public interface StyleBuilderCallback<T>
+//                                    kind Interface
 //                                    documentation  Used for specifying dynamic styling for a view when creating a model. This is only used if the\n view is set up to be styled with the Paris library.\n
 //                                    ^ definition semanticdb maven . . com/airbnb/epoxy/StyleBuilderCallback#[T]
-//                                      documentation ```java\nT\n```
+//                                      display_name T
+//                                      signature_documentation java T
+//                                      kind TypeParameter
   void buildStyle(T builder);
 //     ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/StyleBuilderCallback#buildStyle().
-//                documentation ```java\npublic abstract void buildStyle(T builder)\n```
+//                display_name buildStyle
+//                signature_documentation java public abstract void buildStyle(T builder)
+//                kind AbstractMethod
 //                ^ reference semanticdb maven . . com/airbnb/epoxy/StyleBuilderCallback#[T]
 //                  ^^^^^^^ definition local 0
-//                          documentation ```java\nT builder\n```
+//                          display_name builder
+//                          signature_documentation java T builder
+//                          enclosing_symbol semanticdb maven . . com/airbnb/epoxy/StyleBuilderCallback#buildStyle().
 }

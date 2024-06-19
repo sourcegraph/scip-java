@@ -19,38 +19,58 @@ import java.util.Map;
 
 public class ParameterizedTypes<A, B extends String> {
 //           ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/ParameterizedTypes#
-//                              documentation ```java\npublic class ParameterizedTypes<A, B extends String>\n```
+//                              display_name ParameterizedTypes
+//                              signature_documentation java public class ParameterizedTypes<A, B extends String>
+//                              kind Class
 //           ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/ParameterizedTypes#`<init>`().
-//                              documentation ```java\npublic ParameterizedTypes()\n```
+//                              display_name <init>
+//                              signature_documentation java public ParameterizedTypes()
+//                              kind Constructor
 //                              ^ definition semanticdb maven . . minimized/ParameterizedTypes#[A]
-//                                documentation ```java\nA\n```
+//                                display_name A
+//                                signature_documentation java A
+//                                kind TypeParameter
 //                                 ^ definition semanticdb maven . . minimized/ParameterizedTypes#[B]
-//                                   documentation ```java\nB extends String\n```
+//                                   display_name B
+//                                   signature_documentation java B extends String
+//                                   kind TypeParameter
 //                                           ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
   public <T extends Iterable<A> & Iterator<B>> void iteratorable(List<T> list) {}
 //        ^ definition semanticdb maven . . minimized/ParameterizedTypes#iteratorable().[T]
-//          documentation ```java\nT extends Iterable<A> & Iterator<B>\n```
+//          display_name T
+//          signature_documentation java T extends Iterable<A> & Iterator<B>
+//          kind TypeParameter
 //                  ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Iterable#
 //                           ^ reference semanticdb maven . . minimized/ParameterizedTypes#[A]
 //                                ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Iterator#
 //                                         ^ reference semanticdb maven . . minimized/ParameterizedTypes#[B]
 //                                                  ^^^^^^^^^^^^ definition semanticdb maven . . minimized/ParameterizedTypes#iteratorable().
-//                                                               documentation ```java\npublic <T extends Iterable<A> & Iterator<B>> void iteratorable(List<T> list)\n```
+//                                                               display_name iteratorable
+//                                                               signature_documentation java public <T extends Iterable<A> & Iterator<B>> void iteratorable(List<T> list)
+//                                                               kind Method
 //                                                               ^^^^ reference semanticdb maven jdk 11 java/util/List#
 //                                                                    ^ reference semanticdb maven . . minimized/ParameterizedTypes#iteratorable().[T]
 //                                                                       ^^^^ definition local 0
-//                                                                            documentation ```java\nList<T> list\n```
+//                                                                            display_name list
+//                                                                            signature_documentation java List<T> list
+//                                                                            enclosing_symbol semanticdb maven . . minimized/ParameterizedTypes#iteratorable().
 
   public String app(A a, B b) {
 //       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //              ^^^ definition semanticdb maven . . minimized/ParameterizedTypes#app().
-//                  documentation ```java\npublic String app(A a, B b)\n```
+//                  display_name app
+//                  signature_documentation java public String app(A a, B b)
+//                  kind Method
 //                  ^ reference semanticdb maven . . minimized/ParameterizedTypes#[A]
 //                    ^ definition local 1
-//                      documentation ```java\nA a\n```
+//                      display_name a
+//                      signature_documentation java A a
+//                      enclosing_symbol semanticdb maven . . minimized/ParameterizedTypes#app().
 //                       ^ reference semanticdb maven . . minimized/ParameterizedTypes#[B]
 //                         ^ definition local 2
-//                           documentation ```java\nB b\n```
+//                           display_name b
+//                           signature_documentation java B b
+//                           enclosing_symbol semanticdb maven . . minimized/ParameterizedTypes#app().
     return a.toString() + b;
 //         ^ reference local 1
 //           ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#toString().
@@ -61,7 +81,9 @@ public class ParameterizedTypes<A, B extends String> {
 //       ^^^ reference semanticdb maven jdk 11 java/util/Map#
 //                     ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                ^^^^^^^ definition semanticdb maven . . minimized/ParameterizedTypes#doStuff().
-//                                        documentation ```java\npublic Map<? extends String, ?> doStuff()\n```
+//                                        display_name doStuff
+//                                        signature_documentation java public Map<? extends String, ?> doStuff()
+//                                        kind Method
 
   public Quadruplet<String, ?, Object, ? super Integer> createQuadruplet() { return null; }
 //       ^^^^^^^^^^ reference semanticdb maven . . minimized/ParameterizedTypes#Quadruplet#
@@ -69,19 +91,33 @@ public class ParameterizedTypes<A, B extends String> {
 //                             ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                                             ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
 //                                                      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/ParameterizedTypes#createQuadruplet().
-//                                                                       documentation ```java\npublic Quadruplet<String, ?, Object, ? super Integer> createQuadruplet()\n```
+//                                                                       display_name createQuadruplet
+//                                                                       signature_documentation java public Quadruplet<String, ?, Object, ? super Integer> createQuadruplet()
+//                                                                       kind Method
 
   public static class Quadruplet<T, S, X, Y> {}
 //                    ^^^^^^^^^^ definition semanticdb maven . . minimized/ParameterizedTypes#Quadruplet#
-//                               documentation ```java\npublic static class Quadruplet<T, S, X, Y>\n```
+//                               display_name Quadruplet
+//                               signature_documentation java public static class Quadruplet<T, S, X, Y>
+//                               kind Class
 //                    ^^^^^^^^^^ definition semanticdb maven . . minimized/ParameterizedTypes#Quadruplet#`<init>`().
-//                               documentation ```java\npublic Quadruplet()\n```
+//                               display_name <init>
+//                               signature_documentation java public Quadruplet()
+//                               kind Constructor
 //                               ^ definition semanticdb maven . . minimized/ParameterizedTypes#Quadruplet#[T]
-//                                 documentation ```java\nT\n```
+//                                 display_name T
+//                                 signature_documentation java T
+//                                 kind TypeParameter
 //                                  ^ definition semanticdb maven . . minimized/ParameterizedTypes#Quadruplet#[S]
-//                                    documentation ```java\nS\n```
+//                                    display_name S
+//                                    signature_documentation java S
+//                                    kind TypeParameter
 //                                     ^ definition semanticdb maven . . minimized/ParameterizedTypes#Quadruplet#[X]
-//                                       documentation ```java\nX\n```
+//                                       display_name X
+//                                       signature_documentation java X
+//                                       kind TypeParameter
 //                                        ^ definition semanticdb maven . . minimized/ParameterizedTypes#Quadruplet#[Y]
-//                                          documentation ```java\nY\n```
+//                                          display_name Y
+//                                          signature_documentation java Y
+//                                          kind TypeParameter
 }

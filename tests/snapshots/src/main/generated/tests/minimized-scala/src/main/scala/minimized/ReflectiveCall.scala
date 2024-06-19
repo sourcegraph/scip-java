@@ -8,19 +8,29 @@ import scala.language.reflectiveCalls
 
 class ReflectiveCall {
 //    ^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/ReflectiveCall#
-//                   documentation ```scala\nclass ReflectiveCall\n```
+//                   display_name ReflectiveCall
+//                   signature_documentation scala class ReflectiveCall
+//                   kind Class
 //                   ^ definition semanticdb maven . . minimized/ReflectiveCall#`<init>`().
-//                     documentation ```scala\ndef this()\n```
+//                     display_name <init>
+//                     signature_documentation scala def this()
+//                     kind Constructor
   // Reproduction for https://github.com/scalameta/scalameta/issues/2788
   val a =
 //    ^ definition semanticdb maven . . minimized/ReflectiveCall#a.
-//      documentation ```scala\nval a: { val b: Int }\n```
+//      display_name a
+//      signature_documentation scala val a: { val b: Int }
+//      kind Method
     new {
 //      ^ definition local 0
-//        documentation ```scala\nfinal class $anon\n```
+//        display_name $anon
+//        signature_documentation scala final class $anon
+//        kind Class
       val b = 1
 //        ^ definition local 1
-//          documentation ```scala\nval b: Int\n```
+//          display_name b
+//          signature_documentation scala val b: Int
+//          kind Method
     }
   println(a.b)
 //^^^^^^^ reference semanticdb maven . . scala/Predef.println(+1).

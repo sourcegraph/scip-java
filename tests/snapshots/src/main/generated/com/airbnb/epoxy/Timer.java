@@ -2,18 +2,26 @@ package com.airbnb.epoxy;
 
 interface Timer {
 //        ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/Timer#
-//              documentation ```java\ninterface Timer\n```
+//              display_name Timer
+//              signature_documentation java interface Timer
+//              kind Interface
   void start(String sectionName);
 //     ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/Timer#start().
-//           documentation ```java\npublic abstract void start(String sectionName)\n```
+//           display_name start
+//           signature_documentation java public abstract void start(String sectionName)
+//           kind AbstractMethod
 //           relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/DebugTimer#start().
 //           relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/NoOpTimer#start().
 //           ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                  ^^^^^^^^^^^ definition local 0
-//                              documentation ```java\nString sectionName\n```
+//                              display_name sectionName
+//                              signature_documentation java String sectionName
+//                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/Timer#start().
   void stop();
 //     ^^^^ definition semanticdb maven . . com/airbnb/epoxy/Timer#stop().
-//          documentation ```java\npublic abstract void stop()\n```
+//          display_name stop
+//          signature_documentation java public abstract void stop()
+//          kind AbstractMethod
 //          relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/DebugTimer#stop().
 //          relationship is_reference is_implementation semanticdb maven . . com/airbnb/epoxy/NoOpTimer#stop().
 }

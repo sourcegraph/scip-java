@@ -22,14 +22,20 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#
-//                                                  documentation ```java\npublic class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>\n```
+//                                                  display_name WrappedEpoxyModelCheckedChangeListener
+//                                                  signature_documentation java public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
+//                                                  kind Class
 //                                                  documentation  Used in the generated models to transform normal checked change listener to model\n checked change.\n
 //                                                  relationship is_implementation semanticdb maven . . OnCheckedChangeListener#
 //                                                  ^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[T]
-//                                                    documentation ```java\nT extends EpoxyModel<?>\n```
+//                                                    display_name T
+//                                                    signature_documentation java T extends EpoxyModel<?>
+//                                                    kind TypeParameter
 //                                                            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyModel#
 //                                                                           ^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[V]
-//                                                                             documentation ```java\nV\n```
+//                                                                             display_name V
+//                                                                             signature_documentation java V
+//                                                                             kind TypeParameter
     implements OnCheckedChangeListener {
 //             ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . OnCheckedChangeListener#
 
@@ -38,17 +44,23 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //                                           ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[T]
 //                                              ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[V]
 //                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#originalCheckedChangeListener.
-//                                                                               documentation ```java\nprivate final OnModelCheckedChangeListener<T, V> originalCheckedChangeListener\n```
+//                                                                               display_name originalCheckedChangeListener
+//                                                                               signature_documentation java private final OnModelCheckedChangeListener<T, V> originalCheckedChangeListener
+//                                                                               kind Field
 
   public WrappedEpoxyModelCheckedChangeListener(
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#`<init>`().
-//                                              documentation ```java\npublic WrappedEpoxyModelCheckedChangeListener(OnModelCheckedChangeListener<T, V> checkedListener)\n```
+//                                              display_name <init>
+//                                              signature_documentation java public WrappedEpoxyModelCheckedChangeListener(OnModelCheckedChangeListener<T, V> checkedListener)
+//                                              kind Constructor
       OnModelCheckedChangeListener<T, V> checkedListener
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/OnModelCheckedChangeListener#
 //                                 ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[T]
 //                                    ^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#[V]
 //                                       ^^^^^^^^^^^^^^^ definition local 0
-//                                                       documentation ```java\nOnModelCheckedChangeListener<T, V> checkedListener\n```
+//                                                       display_name checkedListener
+//                                                       signature_documentation java OnModelCheckedChangeListener<T, V> checkedListener
+//                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#`<init>`().
   ) {
     if (checkedListener == null) {
 //      ^^^^^^^^^^^^^^^ reference local 0
@@ -65,16 +77,25 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public void onCheckedChanged(CompoundButton button, boolean isChecked) {
 //            ^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#onCheckedChanged().
-//                             documentation ```java\n@Override\npublic void onCheckedChanged(unresolved_type button, boolean isChecked)\n```
+//                             display_name onCheckedChanged
+//                             signature_documentation java @Override\npublic void onCheckedChanged(unresolved_type button, boolean isChecked)
+//                             kind Method
 //                             ^^^^^^^^^^^^^^ reference semanticdb maven . . CompoundButton#
 //                                            ^^^^^^ definition local 1
-//                                                   documentation ```java\nunresolved_type button\n```
+//                                                   display_name button
+//                                                   signature_documentation java unresolved_type button
+//                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#onCheckedChanged().
 //                                                            ^^^^^^^^^ definition local 2
-//                                                                      documentation ```java\nboolean isChecked\n```
+//                                                                      display_name isChecked
+//                                                                      signature_documentation java boolean isChecked
+//                                                                      enclosing_symbol semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#onCheckedChanged().
     EpoxyViewHolder epoxyHolder = ListenersUtils.getEpoxyHolderForChildView(button);
 //  ^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#
 //                  ^^^^^^^^^^^ definition local 3
-//                              documentation ```java\nEpoxyViewHolder epoxyHolder\n```
+//                              display_name epoxyHolder
+//                              signature_documentation java EpoxyViewHolder epoxyHolder
+//                              enclosing_symbol semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#onCheckedChanged().
+//                              kind Variable
 //                                ^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ListenersUtils#
 //                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/ListenersUtils#getEpoxyHolderForChildView().
 //                                                                          ^^^^^^ reference local 1
@@ -91,7 +112,10 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 
     final int adapterPosition = epoxyHolder.getAdapterPosition();
 //            ^^^^^^^^^^^^^^^ definition local 4
-//                            documentation ```java\nfinal int adapterPosition\n```
+//                            display_name adapterPosition
+//                            signature_documentation java final int adapterPosition
+//                            enclosing_symbol semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#onCheckedChanged().
+//                            kind Variable
 //                              ^^^^^^^^^^^ reference local 3
 //                                          ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/EpoxyViewHolder#getAdapterPosition#
     if (adapterPosition != RecyclerView.NO_POSITION) {
@@ -119,11 +143,15 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public boolean equals(Object o) {
 //               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#equals().
-//                      documentation ```java\n@Override\npublic boolean equals(Object o)\n```
+//                      display_name equals
+//                      signature_documentation java @Override\npublic boolean equals(Object o)
+//                      kind Method
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#equals().
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                             ^ definition local 5
-//                               documentation ```java\nObject o\n```
+//                               display_name o
+//                               signature_documentation java Object o
+//                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#equals().
     if (this == o) {
 //              ^ reference local 5
       return true;
@@ -138,7 +166,10 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#
         that = (WrappedEpoxyModelCheckedChangeListener<?, ?>) o;
 //      ^^^^ definition local 6
-//           documentation ```java\nWrappedEpoxyModelCheckedChangeListener<?, ?> that\n```
+//           display_name that
+//           signature_documentation java WrappedEpoxyModelCheckedChangeListener<?, ?> that
+//           enclosing_symbol semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#equals().
+//           kind Variable
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#
 //                                                            ^ reference local 5
 
@@ -153,7 +184,9 @@ public class WrappedEpoxyModelCheckedChangeListener<T extends EpoxyModel<?>, V>
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public int hashCode() {
 //           ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#hashCode().
-//                    documentation ```java\n@Override\npublic int hashCode()\n```
+//                    display_name hashCode
+//                    signature_documentation java @Override\npublic int hashCode()
+//                    kind Method
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#hashCode().
     return originalCheckedChangeListener.hashCode();
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/WrappedEpoxyModelCheckedChangeListener#originalCheckedChangeListener.

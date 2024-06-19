@@ -34,16 +34,26 @@ import java.nio.charset.StandardCharsets
  */
 final class ByteBufferParser[J](src: ByteBuffer) extends ByteParser[J]{
 //          ^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#
-//                           documentation ```scala\nfinal class ByteBufferParser[J]\n```
+//                           display_name ByteBufferParser
+//                           signature_documentation scala final class ByteBufferParser[J]
+//                           kind Class
 //                           ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#[J]
-//                             documentation ```scala\nJ\n```
+//                             display_name J
+//                             signature_documentation scala J
+//                             kind TypeParameter
 //                             ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#`<init>`().
-//                               documentation ```scala\ndef this(src: ByteBuffer)\n```
+//                               display_name <init>
+//                               signature_documentation scala def this(src: ByteBuffer)
+//                               kind Constructor
 //                              ^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#src.
-//                                  documentation ```scala\nprivate[this] val src: ByteBuffer\n```
+//                                  display_name src
+//                                  signature_documentation scala private[this] val src: ByteBuffer
+//                                  kind Method
 //                                  relationship is_reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#`<init>`().(src)
 //                              ___ synthetic_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#`<init>`().(src)
-//                                  documentation ```scala\nsrc: ByteBuffer \n```
+//                                  display_name src
+//                                  signature_documentation scala src: ByteBuffer 
+//                                  kind Parameter
 //                                  relationship is_reference is_definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#src.
 //                                   ^^^^^^^^^^ reference semanticdb maven jdk 11 java/nio/ByteBuffer#
 //                                                       ^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#
@@ -51,12 +61,16 @@ final class ByteBufferParser[J](src: ByteBuffer) extends ByteParser[J]{
 //                                                                    ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#`<init>`().
   private[this] final val start = src.position()
 //                        ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#start.
-//                              documentation ```scala\nprivate[this] final val start: Int\n```
+//                              display_name start
+//                              signature_documentation scala private[this] final val start: Int
+//                              kind Method
 //                                ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#src.
 //                                    ^^^^^^^^ reference semanticdb maven jdk 11 java/nio/Buffer#position().
   private[this] final val limit = src.limit() - start
 //                        ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#limit.
-//                              documentation ```scala\nprivate[this] final val limit: Int\n```
+//                              display_name limit
+//                              signature_documentation scala private[this] final val limit: Int
+//                              kind Method
 //                                ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#src.
 //                                    ^^^^^ reference semanticdb maven jdk 11 java/nio/Buffer#limit().
 //                                            ^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#`-`(+3).
@@ -65,29 +79,41 @@ final class ByteBufferParser[J](src: ByteBuffer) extends ByteParser[J]{
 
   protected[this] final def close() = { src.position(start) }
 //                          ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#close().
-//                                documentation ```scala\nfinal def close(): Unit\n```
+//                                display_name close
+//                                signature_documentation scala final def close(): Unit
+//                                kind Method
 //                                relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteParser#close().
 //                                      ^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#src.
 //                                          ^^^^^^^^ reference semanticdb maven jdk 11 java/nio/ByteBuffer#position().
 //                                                   ^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#start.
   override def growBuffer(until: Int): Unit = ()
 //             ^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#growBuffer().
-//                        documentation ```scala\ndef growBuffer(until: Int): Unit\n```
+//                        display_name growBuffer
+//                        signature_documentation scala def growBuffer(until: Int): Unit
+//                        kind Method
 //                        relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingByteParser#growBuffer().
 //                        ^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#growBuffer().(until)
-//                              documentation ```scala\nuntil: Int \n```
+//                              display_name until
+//                              signature_documentation scala until: Int 
+//                              kind Parameter
 //                               ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 //                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Unit#
   def readDataIntoBuffer(buffer: Array[Byte], bufferOffset: Int) = {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#readDataIntoBuffer().
-//                       documentation ```scala\ndef readDataIntoBuffer(buffer: Array[Byte], bufferOffset: Int): (Array[Byte], Boolean, Int)\n```
+//                       display_name readDataIntoBuffer
+//                       signature_documentation scala def readDataIntoBuffer(buffer: Array[Byte], bufferOffset: Int): (Array[Byte], Boolean, Int)
+//                       kind Method
 //                       relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/BufferingByteParser#readDataIntoBuffer().
 //                       ^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#readDataIntoBuffer().(buffer)
-//                              documentation ```scala\nbuffer: Array[Byte] \n```
+//                              display_name buffer
+//                              signature_documentation scala buffer: Array[Byte] 
+//                              kind Parameter
 //                               ^^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Array#
 //                                     ^^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Byte#
 //                                            ^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#readDataIntoBuffer().(bufferOffset)
-//                                                         documentation ```scala\nbufferOffset: Int \n```
+//                                                         display_name bufferOffset
+//                                                         signature_documentation scala bufferOffset: Int 
+//                                                         kind Parameter
 //                                                          ^^^ reference semanticdb maven maven/org.scala-lang/scala-library 2.13.13 scala/Int#
 
     if(buffer == null) (java.util.Arrays.copyOfRange(src.array(), start, src.limit()), limit == 0, limit)
@@ -113,21 +139,31 @@ final class ByteBufferParser[J](src: ByteBuffer) extends ByteParser[J]{
 
 object ByteBufferParser extends Transformer[ByteBuffer]{
 //     ^^^^^^^^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser.
-//                      documentation ```scala\nobject ByteBufferParser\n```
+//                      display_name ByteBufferParser
+//                      signature_documentation scala object ByteBufferParser
+//                      kind Object
 //                              ^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#
 //                                          ^^^^^^^^^^ reference semanticdb maven jdk 11 java/nio/ByteBuffer#
 //                                                     ^ reference semanticdb maven jdk 11 java/lang/Object#`<init>`().
   def transform[T](j: ByteBuffer, f: Visitor[_, T]) = new ByteBufferParser(j).parse(f)
 //    ^^^^^^^^^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser.transform().
-//              documentation ```scala\ndef transform(j: ByteBuffer, f: Visitor[local0, T[): T\n```
+//              display_name transform
+//              signature_documentation scala def transform(j: ByteBuffer, f: Visitor[local0, T[): T
+//              kind Method
 //              relationship is_reference is_implementation semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/Transformer#transform().
 //              ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser.transform().[T]
-//                documentation ```scala\nT\n```
+//                display_name T
+//                signature_documentation scala T
+//                kind TypeParameter
 //                 ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser.transform().(j)
-//                   documentation ```scala\nj: ByteBuffer \n```
+//                   display_name j
+//                   signature_documentation scala j: ByteBuffer 
+//                   kind Parameter
 //                    ^^^^^^^^^^ reference semanticdb maven jdk 11 java/nio/ByteBuffer#
 //                                ^ definition semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser.transform().(f)
-//                                  documentation ```scala\nf: Visitor[local0, T[ \n```
+//                                  display_name f
+//                                  signature_documentation scala f: Visitor[local0, T[ 
+//                                  kind Parameter
 //                                   ^^^^^^^ reference semanticdb maven maven/com.lihaoyi/upickle-core_2.13 1.4.0 upickle/core/Visitor#
 //                                              ^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser.transform().[T]
 //                                                        ^^^^^^^^^^^^^^^^ reference semanticdb maven maven/com.lihaoyi/ujson_2.13 1.4.0 ujson/ByteBufferParser#

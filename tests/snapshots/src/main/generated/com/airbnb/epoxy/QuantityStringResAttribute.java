@@ -21,33 +21,49 @@ import androidx.annotation.PluralsRes;
 
 public class QuantityStringResAttribute {
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#
-//                                      documentation ```java\npublic class QuantityStringResAttribute\n```
+//                                      display_name QuantityStringResAttribute
+//                                      signature_documentation java public class QuantityStringResAttribute
+//                                      kind Class
   @PluralsRes private final int id;
 // ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/PluralsRes#
 //                              ^^ definition semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#id.
-//                                 documentation ```java\n@PluralsRes\nprivate final int id\n```
+//                                 display_name id
+//                                 signature_documentation java @PluralsRes\nprivate final int id
+//                                 kind Field
   private final int quantity;
 //                  ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#quantity.
-//                           documentation ```java\nprivate final int quantity\n```
+//                           display_name quantity
+//                           signature_documentation java private final int quantity
+//                           kind Field
   @Nullable private final Object[] formatArgs;
 // ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //                        ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                                 ^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.
-//                                            documentation ```java\n@Nullable\nprivate final Object[] formatArgs\n```
+//                                            display_name formatArgs
+//                                            signature_documentation java @Nullable\nprivate final Object[] formatArgs
+//                                            kind Field
 
   public QuantityStringResAttribute(@PluralsRes int id, int quantity,
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`().
-//                                  documentation ```java\npublic QuantityStringResAttribute(int id, int quantity, Object[] formatArgs)\n```
+//                                  display_name <init>
+//                                  signature_documentation java public QuantityStringResAttribute(int id, int quantity, Object[] formatArgs)
+//                                  kind Constructor
 //                                   ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/PluralsRes#
 //                                                  ^^ definition local 0
-//                                                     documentation ```java\n@PluralsRes\nint id\n```
+//                                                     display_name id
+//                                                     signature_documentation java @PluralsRes\nint id
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`().
 //                                                          ^^^^^^^^ definition local 1
-//                                                                   documentation ```java\nint quantity\n```
+//                                                                   display_name quantity
+//                                                                   signature_documentation java int quantity
+//                                                                   enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`().
       @Nullable Object[] formatArgs) {
 //     ^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/Nullable#
 //              ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                       ^^^^^^^^^^ definition local 2
-//                                  documentation ```java\n@Nullable\nObject[] formatArgs\n```
+//                                  display_name formatArgs
+//                                  signature_documentation java @Nullable\nObject[] formatArgs
+//                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`().
     this.quantity = quantity;
 //       ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#quantity.
 //                  ^^^^^^^^ reference local 1
@@ -61,11 +77,17 @@ public class QuantityStringResAttribute {
 
   public QuantityStringResAttribute(int id, int quantity) {
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`(+1).
-//                                  documentation ```java\npublic QuantityStringResAttribute(int id, int quantity)\n```
+//                                  display_name <init>
+//                                  signature_documentation java public QuantityStringResAttribute(int id, int quantity)
+//                                  kind Constructor
 //                                      ^^ definition local 3
-//                                         documentation ```java\nint id\n```
+//                                         display_name id
+//                                         signature_documentation java int id
+//                                         enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`(+1).
 //                                              ^^^^^^^^ definition local 4
-//                                                       documentation ```java\nint quantity\n```
+//                                                       display_name quantity
+//                                                       signature_documentation java int quantity
+//                                                       enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`(+1).
     this(id, quantity, null);
 //  ^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#`<init>`().
 //       ^^ reference local 3
@@ -76,14 +98,18 @@ public class QuantityStringResAttribute {
 // ^^^^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/PluralsRes#
   public int getId() {
 //           ^^^^^ definition semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#getId().
-//                 documentation ```java\n@PluralsRes\npublic int getId()\n```
+//                 display_name getId
+//                 signature_documentation java @PluralsRes\npublic int getId()
+//                 kind Method
     return id;
 //         ^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#id.
   }
 
   public int getQuantity() {
 //           ^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#getQuantity().
-//                       documentation ```java\npublic int getQuantity()\n```
+//                       display_name getQuantity
+//                       signature_documentation java public int getQuantity()
+//                       kind Method
     return quantity;
 //         ^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#quantity.
   }
@@ -93,7 +119,9 @@ public class QuantityStringResAttribute {
   public Object[] getFormatArgs() {
 //       ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                ^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#getFormatArgs().
-//                              documentation ```java\n@Nullable\npublic Object[] getFormatArgs()\n```
+//                              display_name getFormatArgs
+//                              signature_documentation java @Nullable\npublic Object[] getFormatArgs()
+//                              kind Method
     return formatArgs;
 //         ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.
   }
@@ -101,10 +129,14 @@ public class QuantityStringResAttribute {
   public CharSequence toString(Context context) {
 //       ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
 //                    ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#toString().
-//                             documentation ```java\npublic CharSequence toString(unresolved_type context)\n```
+//                             display_name toString
+//                             signature_documentation java public CharSequence toString(unresolved_type context)
+//                             kind Method
 //                             ^^^^^^^ reference semanticdb maven . . Context#
 //                                     ^^^^^^^ definition local 5
-//                                             documentation ```java\nunresolved_type context\n```
+//                                             display_name context
+//                                             signature_documentation java unresolved_type context
+//                                             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#toString().
     if (formatArgs == null || formatArgs.length == 0) {
 //      ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.
 //                            ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#formatArgs.
@@ -130,11 +162,15 @@ public class QuantityStringResAttribute {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public boolean equals(Object o) {
 //               ^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#equals().
-//                      documentation ```java\n@Override\npublic boolean equals(Object o)\n```
+//                      display_name equals
+//                      signature_documentation java @Override\npublic boolean equals(Object o)
+//                      kind Method
 //                      relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#equals().
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#
 //                             ^ definition local 6
-//                               documentation ```java\nObject o\n```
+//                               display_name o
+//                               signature_documentation java Object o
+//                               enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#equals().
     if (this == o) {
 //              ^ reference local 6
       return true;
@@ -148,7 +184,10 @@ public class QuantityStringResAttribute {
     QuantityStringResAttribute that = (QuantityStringResAttribute) o;
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#
 //                             ^^^^ definition local 7
-//                                  documentation ```java\nQuantityStringResAttribute that\n```
+//                                  display_name that
+//                                  signature_documentation java QuantityStringResAttribute that
+//                                  enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#equals().
+//                                  kind Variable
 //                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#
 //                                                                 ^ reference local 6
 
@@ -177,11 +216,16 @@ public class QuantityStringResAttribute {
 // ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
   public int hashCode() {
 //           ^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#hashCode().
-//                    documentation ```java\n@Override\npublic int hashCode()\n```
+//                    display_name hashCode
+//                    signature_documentation java @Override\npublic int hashCode()
+//                    kind Method
 //                    relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#hashCode().
     int result = id;
 //      ^^^^^^ definition local 8
-//             documentation ```java\nint result\n```
+//             display_name result
+//             signature_documentation java int result
+//             enclosing_symbol semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#hashCode().
+//             kind Variable
 //               ^^ reference semanticdb maven . . com/airbnb/epoxy/QuantityStringResAttribute#id.
     result = 31 * result + quantity;
 //  ^^^^^^ reference local 8

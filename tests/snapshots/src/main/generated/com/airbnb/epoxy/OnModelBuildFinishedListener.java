@@ -11,7 +11,9 @@ import androidx.annotation.NonNull;
  */
 public interface OnModelBuildFinishedListener {
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelBuildFinishedListener#
-//                                            documentation ```java\npublic interface OnModelBuildFinishedListener\n```
+//                                            display_name OnModelBuildFinishedListener
+//                                            signature_documentation java public interface OnModelBuildFinishedListener
+//                                            kind Interface
 //                                            documentation  Used with {@link EpoxyController#addModelBuildListener(OnModelBuildFinishedListener)} to be\n alerted to new model changes.\n
   /**
    * Called after {@link EpoxyController#buildModels()} has run and changes have been notified to
@@ -19,10 +21,14 @@ public interface OnModelBuildFinishedListener {
    */
   void onModelBuildFinished(@NonNull DiffResult result);
 //     ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . com/airbnb/epoxy/OnModelBuildFinishedListener#onModelBuildFinished().
-//                          documentation ```java\npublic abstract void onModelBuildFinished(DiffResult result)\n```
+//                          display_name onModelBuildFinished
+//                          signature_documentation java public abstract void onModelBuildFinished(DiffResult result)
+//                          kind AbstractMethod
 //                          documentation  Called after {@link EpoxyController#buildModels()} has run and changes have been notified to\n the adapter. This will be called even if no changes existed.\n
 //                           ^^^^^^^ reference semanticdb maven maven/androidx.annotation/annotation 1.1.0 androidx/annotation/NonNull#
 //                                   ^^^^^^^^^^ reference semanticdb maven . . com/airbnb/epoxy/DiffResult#
 //                                              ^^^^^^ definition local 0
-//                                                     documentation ```java\n@NonNull\nDiffResult result\n```
+//                                                     display_name result
+//                                                     signature_documentation java @NonNull\nDiffResult result
+//                                                     enclosing_symbol semanticdb maven . . com/airbnb/epoxy/OnModelBuildFinishedListener#onModelBuildFinished().
 }
