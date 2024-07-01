@@ -354,7 +354,7 @@ lazy val minimizedSettings = List[Def.Setting[_]](
   (publishLocal / skip) := true,
   (run / fork) := true,
   (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
-  libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.22"),
+  libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.34"),
   javacOptions +=
     List(
       s"-Xplugin:semanticdb",
