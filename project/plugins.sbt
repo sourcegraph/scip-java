@@ -8,7 +8,7 @@ addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.12.0")
 addSbtPlugin("com.thesamet" % "sbt-protoc" % "1.0.6")
 addSbtPlugin("com.sourcegraph" % "sbt-sourcegraph" % "0.4.3")
 addSbtPlugin("com.lightbend.sbt" % "sbt-java-formatter" % "0.6.1")
-addSbtPlugin("pl.project13.scala" % "sbt-jmh" % "0.4.3")
+addSbtPlugin("pl.project13.scala" % "sbt-jmh" % "0.4.7")
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.15.0")
 addSbtPlugin("io.spray" % "sbt-revolver" % "0.9.1")
 // sbt-jdi-tools appears to fix an error related to this message:
