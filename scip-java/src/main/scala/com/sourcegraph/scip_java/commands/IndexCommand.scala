@@ -88,7 +88,6 @@ case class IndexCommand(
     @Description(
       "Fail command invocation if compiler produces any errors"
     ) strictCompilation: Boolean = false,
-
     @TrailingArguments() buildCommand: List[String] = Nil,
     @Hidden
     indexSemanticdb: IndexSemanticdbCommand = IndexSemanticdbCommand(),
