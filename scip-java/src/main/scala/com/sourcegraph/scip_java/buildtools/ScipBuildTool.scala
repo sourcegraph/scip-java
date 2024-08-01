@@ -202,7 +202,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     }
     val isSemanticdbGenerated = Files
       .isDirectory(targetroot.resolve("META-INF"))
-    if (errors.nonEmpty && !isSemanticdbGenerated) {
+    if (errors.nonEmpty && (index.strictCompilation || !isSemanticdbGenerated)) {
       errors.foreach { error =>
         index.app.reporter.log(Diagnostic.exception(error))
       }
