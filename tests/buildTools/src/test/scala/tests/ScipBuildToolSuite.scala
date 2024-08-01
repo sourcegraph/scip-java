@@ -111,6 +111,23 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
       )
 
   checkBuild(
+    "jvm-args",
+    """|/lsif-java.json
+       |{"dependencies": ["junit:junit:4.13.1"], "javacOptions": ["-J-add-exports java.base/sun.util=ALL-UNNAMED"]}
+       |/foo/Example.java
+       |package foo;
+       |import org.junit.Assert;
+       |import sun.util.BuddhistCalendar;
+       |public class Example {
+       |  public static void hello() {
+       |    BuddhistCalendar calendar = new BuddhistCalendar();
+       |  }
+       |}
+       |""".stripMargin,
+    expectedSemanticdbFiles = 2
+  )
+
+  checkBuild(
     "basic",
     """|/lsif-java.json
        |{"dependencies": ["junit:junit:4.13.1"]}
