@@ -83,6 +83,11 @@ case class IndexCommand(
         "Defaults to a build-specific command. For example, the default command for Maven command is 'clean verify -DskipTests'." +
         "To override the default, pass in the build command after a double dash: 'scip-java index -- compile test:compile'"
     )
+
+    @Hidden
+    @Description(
+      "Fail command invocation if compiler produces any errors"
+    ) strictCompilation: Boolean = false,
     @TrailingArguments() buildCommand: List[String] = Nil,
     @Hidden
     indexSemanticdb: IndexSemanticdbCommand = IndexSemanticdbCommand(),

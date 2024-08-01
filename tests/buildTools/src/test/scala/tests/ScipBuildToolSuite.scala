@@ -111,6 +111,49 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
       )
 
   checkBuild(
+    "jvm-args", {
+      // In this test we verify that JVM args and Javac options are passed
+      // correctly.
+      // Lombok modules need to be passed with -J prefix, and javacOptions should
+      // be passed unchanged
+      // For this test to work the lombok version HAS to be relatively old,
+      // so that it requires all these opens.
+      // The list is taken from here: https://github.com/projectlombok/lombok/issues/2681#issuecomment-748616687
+      val lombokModules = """
+        --add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED
+        --add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED
+        --add-opens=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED
+        --add-opens=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED
+        --add-opens=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED
+        --add-opens=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED
+        --add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED
+        --add-opens=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
+        --add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+        --add-opens=jdk.compiler/com.sun.tools.javac.jvm=ALL-UNNAMED
+        """.trim.split("\n").map(_.trim).mkString("\"", "\", \"", "\"")
+
+      s"""|/lsif-java.json
+          |{"jvmOptions": [$lombokModules], "javacOptions": ["--add-exports=java.base/sun.util=ALL-UNNAMED"], "dependencies": ["org.projectlombok:lombok:1.18.16"]}
+          |/foo/Example.java
+          |package foo;
+          |import sun.util.BuddhistCalendar;
+          |public class Example extends BuddhistCalendar {
+          |  public static void hello() {
+          |    BuddhistCalendar calendar = new BuddhistCalendar();
+          |  }
+          |}
+          |""".stripMargin
+    },
+    expectedSemanticdbFiles = 1,
+    // somehow it seems the actual compilation error from javac
+    // does not stop semanticdb-javac from producing the file.
+    // we explicitly disable this lenient mode so that if there
+    // are any compilation errors, it will be reflected in failed
+    // CLI command.
+    extraArguments = List("--strict-compilation")
+  )
+
+  checkBuild(
     "basic",
     """|/lsif-java.json
        |{"dependencies": ["junit:junit:4.13.1"]}

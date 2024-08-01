@@ -202,7 +202,9 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     }
     val isSemanticdbGenerated = Files
       .isDirectory(targetroot.resolve("META-INF"))
-    if (errors.nonEmpty && !isSemanticdbGenerated) {
+    if (
+      errors.nonEmpty && (index.strictCompilation || !isSemanticdbGenerated)
+    ) {
       errors.foreach { error =>
         index.app.reporter.log(Diagnostic.exception(error))
       }
@@ -558,8 +560,11 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
         BuildInfo.javacModuleOptions
       else
         Nil
+
+    val jvmOptions = config.jvmOptions.map("-J" + _)
+
     val result = os
-      .proc(javac.toString, s"@$argsfile", javacModuleOptions)
+      .proc(javac.toString, s"@$argsfile", javacModuleOptions, jvmOptions)
       .call(
         stdout = pipe,
         stderr = pipe,
@@ -815,6 +820,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       processorpath: List[String] = Nil,
       processors: List[String] = Nil,
       javacOptions: List[String] = Nil,
+      jvmOptions: List[String] = Nil,
       jvm: String = "17",
       kind: String = ""
   )

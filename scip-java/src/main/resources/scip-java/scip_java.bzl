@@ -71,11 +71,20 @@ def _scip_java(target, ctx):
         processorpath += [j.path for j in annotations.processor_classpath.to_list()]
         processors = annotations.processor_classnames
 
+    launcher_javac_flags = []
+    compiler_javac_flags = []
+    for value in compilation.javac_options:
+        if value.startswith("-J"):
+            launcher_javac_flags.append(value)
+        else:
+            compiler_javac_flags.append(value)
+
     build_config = struct(**{
         "javaHome": ctx.var["java_home"],
         "classpath": classpath,
         "sourceFiles": source_files,
-        "javacOptions": compilation.javac_options,
+        "javacOptions": compiler_javac_flags,
+        "jvmOptions": launcher_javac_flags,
         "processors": processors,
         "processorpath": processorpath,
         "bootclasspath": bootclasspath,
