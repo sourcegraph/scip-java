@@ -9,6 +9,7 @@ interface Foo {
    double test();
 
    @Bar(~5)
+   @SuppressWarnings(value = "unchecked")
    double test2();
 
    @BarB(!true)
