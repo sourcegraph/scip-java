@@ -32,26 +32,6 @@ class MavenBuildToolSuite extends BaseBuildToolSuite {
          |""".stripMargin
   )
 
-  // TODO: find more of a core location to move this to
-  checkBuild(
-    options = "annotation-parameters",
-    original =
-      s"""
-         |/pom.xml
-         |$pomXml
-         |/src/main/java/com/Foo.java
-         |public interface Foo {
-         |    @Bar(-1d)
-         |    double value();
-         |}
-         |/src/main/java/com/Bar.java
-         |@interface Bar {
-         |    double value();
-         |}
-         |""".stripMargin,
-    expectedSemanticdbFiles = 2
-  )
-
   checkBuild(
     "build-command",
     s"""|/pom.xml

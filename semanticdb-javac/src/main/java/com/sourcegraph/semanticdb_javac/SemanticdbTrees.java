@@ -220,6 +220,27 @@ public class SemanticdbTrees {
       case UNARY_MINUS:
         return Semanticdb.UnaryOperator.UNARY_MINUS;
 
+      case UNARY_PLUS:
+        return Semanticdb.UnaryOperator.UNARY_PLUS;
+
+      case POSTFIX_INCREMENT:
+        return Semanticdb.UnaryOperator.UNARY_POSTFIX_INCREMENT;
+
+      case POSTFIX_DECREMENT:
+        return Semanticdb.UnaryOperator.UNARY_POSTFIX_DECREMENT;
+
+      case PREFIX_INCREMENT:
+        return Semanticdb.UnaryOperator.UNARY_PREFIX_INCREMENT;
+
+      case PREFIX_DECREMENT:
+        return Semanticdb.UnaryOperator.UNARY_PREFIX_DECREMENT;
+
+      case BITWISE_COMPLEMENT:
+        return Semanticdb.UnaryOperator.UNARY_BITWISE_COMPLEMENT;
+
+      case LOGICAL_COMPLEMENT:
+        return Semanticdb.UnaryOperator.UNARY_LOGICAL_COMPLEMENT;
+
       default:
         throw new IllegalStateException(
             semanticdbUri + ": unexpected unary expression operator kind " + kind);
