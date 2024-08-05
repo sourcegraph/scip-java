@@ -297,6 +297,7 @@ message Tree {
     AnnotationTree annotation_tree = 9;
     AssignTree assign_tree = 10;
     BinaryOperatorTree binop_tree = 11;
+    UnaryOperatorTree unaryop_tree = 12;
     // -- OUT OF SPEC -- //
   }
 }
@@ -377,6 +378,22 @@ enum BinaryOperator {
   NOT_EQUAL_TO = 16;
   GREATER_THAN_EQUAL = 17;
   LESS_THAN_EQUAL = 18;
+}
+
+message UnaryOperatorTree {
+  UnaryOperator op = 1;
+  Tree tree = 2;
+}
+
+enum UnaryOperator {
+  UNARY_MINUS = 0;
+  UNARY_PLUS = 1;
+  UNARY_POSTFIX_INCREMENT = 2;
+  UNARY_POSTFIX_DECREMENT = 3;
+  UNARY_PREFIX_DECREMENT = 4;
+  UNARY_PREFIX_INCREMENT = 5;
+  UNARY_BITWISE_COMPLEMENT = 6;
+  UNARY_LOGICAL_COMPLEMENT = 7;
 }
 // -- OUT OF SPEC -- //
 

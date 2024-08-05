@@ -8,6 +8,7 @@ import com.sun.source.util.TreePath;
 import com.sun.source.tree.Tree;
 import com.sun.source.tree.Tree.Kind;
 import com.sun.source.tree.BinaryTree;
+import com.sun.source.tree.UnaryTree;
 import com.sun.source.tree.AssignmentTree;
 import com.sun.source.tree.MemberSelectTree;
 import com.sun.source.tree.ClassTree;
@@ -78,7 +79,8 @@ public class SemanticdbTrees {
     ArrayList<Semanticdb.Tree> params = new ArrayList<>(annotation.getArguments().size());
 
     for (ExpressionTree param : annotation.getArguments()) {
-      // anecdotally not always AssignmentTree in some situations when a compilation unit can't
+      // anecdotally not always AssignmentTree in some situations when a compilation
+      // unit can't
       // resolve symbols fully
       if (param instanceof AssignmentTree) {
         AssignmentTree assign = (AssignmentTree) param;
@@ -152,6 +154,12 @@ public class SemanticdbTrees {
               annotationParameter(binExpr.getLeftOperand()),
               semanticdbBinaryOperator(expr.getKind()),
               annotationParameter(binExpr.getRightOperand())));
+    } else if (expr instanceof UnaryTree) {
+      UnaryTree unaryExpr = (UnaryTree) expr;
+      return tree(
+          unaryOpTree(
+              semanticdbUnaryOperator(unaryExpr.getKind()),
+              annotationParameter(unaryExpr.getExpression())));
     }
     throw new IllegalArgumentException(
         semanticdbUri
@@ -204,6 +212,17 @@ public class SemanticdbTrees {
       default:
         throw new IllegalStateException(
             semanticdbUri + ": unexpected binary expression operator kind " + kind);
+    }
+  }
+
+  private Semanticdb.UnaryOperator semanticdbUnaryOperator(Tree.Kind kind) {
+    switch (kind) {
+      case UNARY_MINUS:
+        return Semanticdb.UnaryOperator.UNARY_MINUS;
+
+      default:
+        throw new IllegalStateException(
+            semanticdbUri + ": unexpected unary expression operator kind " + kind);
     }
   }
 }
