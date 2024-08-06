@@ -1,23 +1,28 @@
 package minimized;
 
-
 @interface Bar {
-   double value();
+	double value();
 }
 
 @interface BarB {
-   boolean value();
+	boolean value();
+}
+
+@interface Nullable {
+	String value() default "";
 }
 
 interface Foo {
-   @Bar(-1d)
-   double test();
+	@Bar(-1d)
+	double test();
 
-   @Bar(~5)
-   @SuppressWarnings(value = "unchecked")
-   double test2();
+	@Bar(~5)
+	@SuppressWarnings(value = "unchecked")
+	double test2();
 
-   @BarB(!true)
-   double test3();
+	@BarB(!true)
+	double test3();
+
+	@Nullable(("what"))
+	Foo test4();
 }
-
