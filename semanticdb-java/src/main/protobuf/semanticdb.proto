@@ -380,6 +380,7 @@ enum BinaryOperator {
   LESS_THAN_EQUAL = 18;
 }
 
+// https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.15
 message UnaryOperatorTree {
   UnaryOperator op = 1;
   Tree tree = 2;
