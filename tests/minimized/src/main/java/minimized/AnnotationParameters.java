@@ -1,5 +1,14 @@
 package minimized;
 
+
+@interface Bar {
+   double value();
+}
+
+@interface BarB {
+   boolean value();
+}
+
 interface Foo {
    @Bar(-1d)
    double test();
@@ -12,10 +21,3 @@ interface Foo {
    double test3();
 }
 
-@interface Bar {
-   double value();
-}
-
-@interface BarB {
-   boolean value();
-}
