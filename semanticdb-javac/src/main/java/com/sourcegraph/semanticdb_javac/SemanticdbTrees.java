@@ -162,11 +162,8 @@ public class SemanticdbTrees {
               semanticdbUnaryOperator(unaryExpr.getKind()),
               annotationParameter(unaryExpr.getExpression())));
     } else if (expr instanceof ParenthesizedTree) {
-      ParenthesizedTree unaryExpr = (ParenthesizedTree) expr;
-      return annotationParameter(unaryExpr.getExpression());
-      // unaryOpTree(
-      //     semanticdbUnaryOperator(unaryExpr.getKind()),
-      //     annotationParameter(unaryExpr.getExpression())));
+      ParenthesizedTree parenExpr = (ParenthesizedTree) expr;
+      return annotationParameter(parenExpr.getExpression());
     }
     throw new IllegalArgumentException(
         semanticdbUri
