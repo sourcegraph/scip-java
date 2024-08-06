@@ -83,7 +83,9 @@ public final class SemanticdbTaskListener implements TaskListener {
   // exception, it just prints the location with an empty message.
   private void reportException(Throwable exception, TaskEvent e) {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    exception.printStackTrace(new PrintWriter(baos));
+    PrintWriter pw = new PrintWriter(baos);
+    exception.printStackTrace(pw);
+    pw.close();
     reporter.error(baos.toString(), e.getCompilationUnit(), e.getCompilationUnit());
   }
 

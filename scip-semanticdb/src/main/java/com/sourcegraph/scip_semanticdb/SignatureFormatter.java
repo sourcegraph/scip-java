@@ -468,9 +468,37 @@ public class SignatureFormatter {
       return formatTree(tree.getAssignTree().getLhs())
           + " = "
           + formatTree(tree.getAssignTree().getRhs());
+    } else if (tree.hasUnaryopTree()) {
+      return formatUnaryOperation(tree.getUnaryopTree());
     }
 
     throw new IllegalArgumentException("tree was of unexpected type " + tree);
+  }
+
+  private String formatUnaryOperation(UnaryOperatorTree tree) {
+    String formattedValue = formatTree(tree.getTree());
+    switch (tree.getOp()) {
+      case UNARY_MINUS:
+        return "-" + formattedValue;
+      case UNARY_PLUS:
+        return "-" + formattedValue;
+      case UNARY_POSTFIX_INCREMENT:
+        return formattedValue + "++";
+      case UNARY_POSTFIX_DECREMENT:
+        return formattedValue + "--";
+      case UNARY_PREFIX_DECREMENT:
+        return "--" + formattedValue;
+      case UNARY_PREFIX_INCREMENT:
+        return "++" + formattedValue;
+
+      case UNARY_BITWISE_COMPLEMENT:
+        return "~" + formattedValue;
+      case UNARY_LOGICAL_COMPLEMENT:
+        return "!" + formattedValue;
+    }
+
+    throw new IllegalArgumentException(
+        "unary operation of unexpected type" + tree.getOp().toString());
   }
 
   private String formatConstant(Constant constant) {
