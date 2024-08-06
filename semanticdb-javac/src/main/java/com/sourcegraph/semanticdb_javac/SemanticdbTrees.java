@@ -20,6 +20,7 @@ import com.sun.source.tree.ExpressionTree;
 import com.sun.source.tree.LiteralTree;
 import com.sun.source.tree.NewArrayTree;
 import com.sun.source.tree.AnnotationTree;
+import com.sun.source.tree.ParenthesizedTree;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -160,6 +161,12 @@ public class SemanticdbTrees {
           unaryOpTree(
               semanticdbUnaryOperator(unaryExpr.getKind()),
               annotationParameter(unaryExpr.getExpression())));
+    } else if (expr instanceof ParenthesizedTree) {
+      ParenthesizedTree unaryExpr = (ParenthesizedTree) expr;
+      return annotationParameter(unaryExpr.getExpression());
+      // unaryOpTree(
+      //     semanticdbUnaryOperator(unaryExpr.getKind()),
+      //     annotationParameter(unaryExpr.getExpression())));
     }
     throw new IllegalArgumentException(
         semanticdbUri
