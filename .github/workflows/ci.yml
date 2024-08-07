@@ -84,7 +84,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: yarn global add @bazel/bazelisk
       - run: sbt build
-      - run: echo "out/bin" >> $GITHUB_PATH
+      - run: echo "$PWD/out/bin" >> $GITHUB_PATH
       - name: Auto-index scip-java codebase
         run: |
           scip-java index --build-tool=bazel --bazel-scip-java-binary=$(which scip-java)
