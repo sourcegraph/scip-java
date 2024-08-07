@@ -17,26 +17,15 @@ jobs:
         java: [8, 11, 17, 21]
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           cache: "sbt"
           java-version: ${{ matrix.java }}
-      - name: Main project tests
-        run: sbt test
 
-  benchmarks-test:
-    runs-on: ubuntu-latest
-    name: Benchmark tests
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: "temurin"
-          cache: "sbt"
-          java-version: 17
-      - name: Run sample benchmarks
-        run: sbt 'bench/Jmh/run -i 1 -f1 -t1 -foe true'
+      - name: Main project tests
+        run: sbt test 
 
   docker_test:
     runs-on: ${{ matrix.os }}
@@ -116,4 +105,10 @@ jobs:
           distribution: "temurin"
           java-version: 17
           cache: "sbt"
+
       - run: sbt checkAll
+
+      - name: Run sample benchmarks
+        run: sbt 'bench/Jmh/run -i 1 -f1 -t1 -foe true'
+
+
