@@ -114,7 +114,7 @@ jobs:
 
   maven:
     runs-on: ubuntu-latest
-    name: Tests
+    name: Maven tests
     strategy:
       fail-fast: false
       matrix:
@@ -128,9 +128,16 @@ jobs:
           cache: "sbt"
           java-version: ${{ matrix.java }}
 
+
       - run: sbt build publishM2 dumpScipJavaVersion
+
       - run: |
           mvn clean verify -DskipTests -Dscip-java.version=$(cat VERSION) sourcegraph:sourcegraphDependencies
+        working-directory: examples/maven-example
+
       - run: out/bin/scip-java index-semanticdb target/semanticdb-root
+        working-directory: examples/maven-example
+
       - run: du -h index.scip
+        working-directory: examples/maven-example
 
