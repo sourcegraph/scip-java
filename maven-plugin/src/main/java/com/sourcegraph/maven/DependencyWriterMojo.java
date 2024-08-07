@@ -97,6 +97,6 @@ public class DependencyWriterMojo extends AbstractMojo {
 
   private String summariseArtifact(Artifact artifact) {
     return String.format(
-        "%:%:%", artifact.getGroupId(), artifact.getArtifactId(), artifact.getVersion());
+        "%s:%s:%s", artifact.getGroupId(), artifact.getArtifactId(), artifact.getVersion());
   }
 }
