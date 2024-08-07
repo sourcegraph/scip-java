@@ -129,13 +129,16 @@ jobs:
           java-version: ${{ matrix.java }}
 
 
-      - run: sbt build publishM2 dumpScipJavaVersion
+      - run: |
+          sbt build publishM2 publishLocal dumpScipJavaVersion
+          echo "SCIP_JAVA_VERSION=$(cat VERSION)" >> $GITHUB_ENV
+          echo "SCIP_JAVA_CLI=$PWD/out/bin/scip-java" >> $GITHUB_ENV
 
       - run: |
-          mvn clean verify -DskipTests -Dscip-java.version=$(cat VERSION) sourcegraph:sourcegraphDependencies
+          mvn clean verify -DskipTests -Dscip-java.version=$SCIP_JAVA_VERSION sourcegraph:sourcegraphDependencies
         working-directory: examples/maven-example
 
-      - run: out/bin/scip-java index-semanticdb target/semanticdb-root
+      - run: $SCIP_JAVA_CLI index-semanticdb target/semanticdb-root
         working-directory: examples/maven-example
 
       - run: du -h index.scip
