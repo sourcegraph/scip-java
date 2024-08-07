@@ -634,13 +634,12 @@ dumpScipJavaVersion := {
   IO.write((ThisBuild / baseDirectory).value / "VERSION", versionValue)
 }
 
-
 lazy val build = taskKey[Unit](
   "Build `scip-java` CLI and place it in the out/bin/scip-java. "
 )
 
 build := {
   val source = (cli / pack).value
-  val newValue = (ThisBuild / baseDirectory).value / "out"
-  IO.copyDirectory(source, newValue) 
+  val destination = (ThisBuild / baseDirectory).value / "out"
+  IO.copyDirectory(source, destination)
 }

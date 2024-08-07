@@ -138,7 +138,13 @@ jobs:
           mvn clean verify -DskipTests -Dscip-java.version=$SCIP_JAVA_VERSION sourcegraph:sourcegraphDependencies
         working-directory: examples/maven-example
 
-      - run: $SCIP_JAVA_CLI index-semanticdb target/semanticdb-root
+      - run: $SCIP_JAVA_CLI index-semanticdb target/semanticdb-targetroot
+        working-directory: examples/maven-example
+
+      - run: |
+          set -e
+          grep org.hamcrest target/semanticdb-targetroot/dependencies.txt
+          grep $PWD/src/main/java target/semanticdb-targetroot/dependencies.txt
         working-directory: examples/maven-example
 
       - run: du -h index.scip
