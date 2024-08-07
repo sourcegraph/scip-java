@@ -234,7 +234,10 @@ lazy val mavenPlugin = project
           "META-INF" / "maven"
         IO.createDirectory(dir)
         val file = dir / "plugin.xml"
-        val template = IO.read((Compile / resourceDirectory).value / "META-INF" / "maven" / "plugin.template.xml")
+        val template = IO.read(
+          (Compile / resourceDirectory).value / "META-INF" / "maven" /
+            "plugin.template.xml"
+        )
 
         IO.write(file, template.replace("@VERSION@", version.value))
 
@@ -629,4 +632,15 @@ dumpScipJavaVersion := {
   val versionValue = (cli / version).value
 
   IO.write((ThisBuild / baseDirectory).value / "VERSION", versionValue)
+}
+
+
+lazy val build = taskKey[Unit](
+  "Build `scip-java` CLI and place it in the out/bin/scip-java. "
+)
+
+build := {
+  val source = (cli / pack).value
+  val newValue = (ThisBuild / baseDirectory).value / "out"
+  IO.copyDirectory(source, newValue) 
 }
