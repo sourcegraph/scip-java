@@ -83,8 +83,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: yarn global add @bazel/bazelisk
-      - run: sbt cli/pack
-      - run: echo "$PWD/scip-java/target/pack/bin" >> $GITHUB_PATH
+      - run: sbt build
+      - run: echo "out/bin" >> $GITHUB_PATH
       - name: Auto-index scip-java codebase
         run: |
           scip-java index --build-tool=bazel --bazel-scip-java-binary=$(which scip-java)
@@ -111,4 +111,26 @@ jobs:
       - name: Run sample benchmarks
         run: sbt 'bench/Jmh/run -i 1 -f1 -t1 -foe true'
 
+
+  maven:
+    runs-on: ubuntu-latest
+    name: Tests
+    strategy:
+      fail-fast: false
+      matrix:
+        java: [8, 11, 17, 21]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          cache: "sbt"
+          java-version: ${{ matrix.java }}
+
+      - run: sbt build publishM2 dumpScipJavaVersion
+      - run: |
+          mvn clean verify -DskipTests -Dscip-java.version=$(cat VERSION) sourcegraph:sourcegraphDependencies
+      - run: out/bin/scip-java index-semanticdb target/semanticdb-root
+      - run: du -h index.scip
 
