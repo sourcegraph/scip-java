@@ -1,7 +1,6 @@
 package com.sourcegraph.maven;
 
 import org.apache.maven.artifact.Artifact;
-import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -10,8 +9,6 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
-
-import static java.lang.System.*;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -65,13 +62,21 @@ public class DependencyWriterMojo extends AbstractMojo {
     for (Object dep : artifacts) {
       if (dep instanceof Artifact) {
         Artifact artifact = (Artifact) dep;
-        builder.append(
-            String.format(
-                "%s\t%s\t%s\t%s\n",
-                artifact.getGroupId(),
-                artifact.getArtifactId(),
-                artifact.getVersion(),
-                artifact.getFile()));
+        if (artifact.getFile() != null) {
+          builder.append(
+              String.format(
+                  "%s\t%s\t%s\t%s\n",
+                  artifact.getGroupId(),
+                  artifact.getArtifactId(),
+                  artifact.getVersion(),
+                  artifact.getFile()));
+        } else {
+          getLog()
+              .warn(
+                  "Dependency "
+                      + summariseArtifact(artifact)
+                      + " does not have a resolved file, so it won't be added to the dependencies.txt");
+        }
       }
     }
 
@@ -88,5 +93,10 @@ public class DependencyWriterMojo extends AbstractMojo {
     }
 
     getLog().info("Dependencies were written to " + dependenciesFile.toAbsolutePath().toString());
+  }
+
+  private String summariseArtifact(Artifact artifact) {
+    return String.format(
+        "%:%:%", artifact.getGroupId(), artifact.getArtifactId(), artifact.getVersion());
   }
 }
