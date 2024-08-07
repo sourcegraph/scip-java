@@ -7,8 +7,6 @@ import java.util.Properties
 import scala.collection.mutable.ListBuffer
 import scala.util.control.NoStackTrace
 
-ThisBuild / version := sys.env.get("CI").fold("dev")(_ => version.value)
-
 lazy val V =
   new {
     val protobuf = "3.15.6"
