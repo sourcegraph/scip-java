@@ -49,7 +49,6 @@ public class DependencyWriterMojo extends AbstractMojo {
                   + "See here for more details: https://sourcegraph.github.io/scip-java/docs/manual-configuration.html#step-5-optional-enable-cross-repository-navigation\n");
     } else {
       for (Object root : sourceRoots) {
-        getLog().info(root.toString());
         if (root instanceof String) {
           String rootString = (String) root;
           builder.append(
