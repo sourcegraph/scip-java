@@ -87,8 +87,7 @@ public class DependencyWriterMojo extends AbstractMojo {
         writer.write(builder.toString());
       }
     } catch (IOException e) {
-      throw new MojoFailureException(
-          "Failed to write dependencies to file " + dependenciesFile, e);
+      throw new MojoFailureException("Failed to write dependencies to file " + dependenciesFile, e);
     }
 
     getLog().info("Dependencies were written to " + dependenciesFile.toAbsolutePath());
