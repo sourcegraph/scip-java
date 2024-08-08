@@ -156,6 +156,9 @@ index.scip: JSON data
 
 ## Step 5 (optional): Enable cross-repository navigation
 
+Cross-repository navigation is a feature that allows "goto definition" and "find
+references" to show results from multiple repositories.
+
 By default, the `index.scip` file only enables navigation within the local
 repository. You can optionally enable cross-repository navigation by creating
 one of the following files in the SemanticDB _targetroot_ directory (the path in
@@ -192,6 +195,36 @@ one of the following files in the SemanticDB _targetroot_ directory (the path in
   `org.junit.Assert` to Maven coordinates like `junit:junit:4.13.2`. As long as
   your Sourcegraph instance has another repository that defines that symbol, the
   cross-repository navigation should succeed. 
+
+### Maven plugin
+
+To simplify setting up cross-repo navigation for Maven projects, we provide a 
+plugin that can dump the project's dependencies in a format that scip-java understands.
+
+You can either use it directly from commandline:
+
+```
+$ mvn com.sourcegraph:maven-plugin:@STABLE_VERSION@:sourcegraphDependencies
+```
+
+Or add it to your build like any other maven plugin:
+
+```xml
+<plugin>
+    <groupId>com.sourcegraph</groupId>
+    <artifactId>maven-plugin</artifactId>
+    <version>@STABLE_VERSION@</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>sourcegraphDependencies</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+
+Which allows you to invoke it by simply running `mvn sourcegraph:sourcegraphDependencies`.
 
 Cross-repository navigation is a feature that allows "goto definition" and "find
 references" to show results from multiple repositories.
