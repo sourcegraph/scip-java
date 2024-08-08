@@ -143,8 +143,8 @@ jobs:
 
       - run: |
           set -e
-          grep org.hamcrest target/semanticdb-targetroot/dependencies.txt
-          grep $PWD/src/main/java target/semanticdb-targetroot/dependencies.txt
+          grep org.hamcrest target/semanticdb-targetroot/*dependencies.txt
+          grep $PWD/src/main/java target/semanticdb-targetroot/*dependencies.txt
         working-directory: examples/maven-example
 
       - run: du -h index.scip
