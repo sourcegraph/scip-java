@@ -38,6 +38,9 @@ object ClasspathEntry {
    *   - javacopts.txt: line-separated list of Java compiler options.
    *   - dependencies.txt: line-separated list of dependency information.
    *
+   * Note that the targetroot can contain several files with names ending in
+   * "dependencies.txt" - for example if they come from a multi-module build.
+   *
    * @param targetroot
    *   @return
    */
@@ -46,18 +49,34 @@ object ClasspathEntry {
       sourceroot: Path
   ): List[ClasspathEntry] = {
     val javacopts = targetroot.resolve("javacopts.txt")
-    val dependencies = targetroot.resolve("dependencies.txt")
-    if (Files.isRegularFile(dependencies)) {
-      fromDependencies(dependencies)
-    } else if (Files.isRegularFile(javacopts)) {
+    if (Files.isRegularFile(javacopts))
       fromJavacopts(javacopts, sourceroot)
-    } else {
-      Nil
-    }
+    else
+      discoverDependenciesFromFiles(targetroot)
   }
 
   /**
-   * Parses ClasspathEntry from a "dependencies.txt" file in the targetroot.
+   * Discover all files that end in "dependencies.txt" directly under
+   * targetroot. There can be many files because we will be writing dependencies
+   * for multiple projects.
+   *
+   * @param targetroot
+   *   @return classpath entries read from the discovered files
+   */
+  private def discoverDependenciesFromFiles(
+      targetroot: Path
+  ): List[ClasspathEntry] = {
+    os.list
+      .stream(os.Path(targetroot))
+      .filter(p => os.isFile(p) && p.last.endsWith("dependencies.txt"))
+      .map(path => fromDependencies(path.toNIO))
+      .toList
+      .flatten
+      .distinct
+  }
+
+  /**
+   * Parses ClasspathEntry from a "dependencies.txt" file
    *
    * Every line of the file is a tab separated value with the following columns:
    * groupId, artifactId, version, path to the jar file OR classes directory
