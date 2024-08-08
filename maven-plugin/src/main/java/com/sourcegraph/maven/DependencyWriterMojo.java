@@ -4,10 +4,7 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
-import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.plugins.annotations.ResolutionScope;
+import org.apache.maven.plugins.annotations.*;
 import org.apache.maven.project.MavenProject;
 
 import java.io.BufferedWriter;
@@ -21,7 +18,7 @@ import java.util.Set;
 @Mojo(
     name = "sourcegraphDependencies",
     defaultPhase = LifecyclePhase.COMPILE,
-    requiresDependencyResolution = ResolutionScope.COMPILE,
+    requiresDependencyResolution = ResolutionScope.TEST,
     requiresProject = true)
 public class DependencyWriterMojo extends AbstractMojo {
   @Parameter(defaultValue = "${project}", required = true, readonly = true)
@@ -33,6 +30,7 @@ public class DependencyWriterMojo extends AbstractMojo {
   private String targetRoot;
 
   public void execute() throws MojoExecutionException, MojoFailureException {
+    String sanitisedProjectId = project.getId().replaceAll("[^0-9_a-zA-Z()%\\-.]", "_");
     Set artifacts = project.getArtifacts();
     StringBuilder builder = new StringBuilder();
 
@@ -51,6 +49,7 @@ public class DependencyWriterMojo extends AbstractMojo {
                   + "See here for more details: https://sourcegraph.github.io/scip-java/docs/manual-configuration.html#step-5-optional-enable-cross-repository-navigation\n");
     } else {
       for (Object root : sourceRoots) {
+        getLog().info(root.toString());
         if (root instanceof String) {
           String rootString = (String) root;
           builder.append(
@@ -80,7 +79,7 @@ public class DependencyWriterMojo extends AbstractMojo {
       }
     }
 
-    Path dependenciesFile = Paths.get(targetRoot).resolve("dependencies.txt");
+    Path dependenciesFile = Paths.get(targetRoot).resolve(sanitisedProjectId + ".dependencies.txt");
 
     try {
       Files.createDirectories(dependenciesFile.getParent());
@@ -89,10 +88,10 @@ public class DependencyWriterMojo extends AbstractMojo {
       }
     } catch (IOException e) {
       throw new MojoFailureException(
-          "Failed to write dependencies to file " + dependenciesFile.toString(), e);
+          "Failed to write dependencies to file " + dependenciesFile, e);
     }
 
-    getLog().info("Dependencies were written to " + dependenciesFile.toAbsolutePath().toString());
+    getLog().info("Dependencies were written to " + dependenciesFile.toAbsolutePath());
   }
 
   private String summariseArtifact(Artifact artifact) {
