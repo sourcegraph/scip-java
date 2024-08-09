@@ -205,6 +205,7 @@ lazy val scipProto = project
 lazy val scip = project
   .in(file("scip-semanticdb"))
   .settings(
+    publishMavenStyle := true,
     moduleName := "scip-semanticdb",
     javaToolchainVersion := "8",
     javaOnlySettings,
@@ -213,6 +214,36 @@ lazy val scip = project
     Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
   )
   .dependsOn(semanticdb, scipProto)
+
+lazy val mavenPlugin = project
+  .in(file("maven-plugin"))
+  .settings(
+    moduleName := "maven-plugin",
+    javaToolchainVersion := "8",
+    javaOnlySettings,
+    libraryDependencies ++=
+      Seq(
+        "org.apache.maven" % "maven-plugin-api" % "3.6.3",
+        "org.apache.maven.plugin-tools" % "maven-plugin-annotations" % "3.6.4" %
+          Provided,
+        "org.apache.maven" % "maven-project" % "2.2.1"
+      ),
+    Compile / resourceGenerators +=
+      Def.task {
+        val dir = (Compile / managedResourceDirectories).value.head /
+          "META-INF" / "maven"
+        IO.createDirectory(dir)
+        val file = dir / "plugin.xml"
+        val template = IO.read(
+          (Compile / resourceDirectory).value / "META-INF" / "maven" /
+            "plugin.template.xml"
+        )
+
+        IO.write(file, template.replace("@VERSION@", version.value))
+
+        Seq(file)
+      }
+  )
 
 lazy val cli = project
   .in(file("scip-java"))
@@ -601,4 +632,14 @@ dumpScipJavaVersion := {
   val versionValue = (cli / version).value
 
   IO.write((ThisBuild / baseDirectory).value / "VERSION", versionValue)
+}
+
+lazy val build = taskKey[Unit](
+  "Build `scip-java` CLI and place it in the out/bin/scip-java. "
+)
+
+build := {
+  val source = (cli / pack).value
+  val destination = (ThisBuild / baseDirectory).value / "out"
+  IO.copyDirectory(source, destination)
 }

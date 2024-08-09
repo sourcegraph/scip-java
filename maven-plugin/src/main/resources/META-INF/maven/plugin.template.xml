@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Written by hand by Anton, send help -->
+
+<plugin>
+  <name>Sourcegraph scip-java Maven plugin</name>
+  <description>A Maven plugin which exports your project's dependencies in a format scip-java can understand</description>
+  <groupId>com.sourcegraph</groupId>
+  <artifactId>maven-plugin</artifactId>
+  <version>@VERSION@</version>
+  <goalPrefix>sourcegraph</goalPrefix>
+  <isolatedRealm>false</isolatedRealm>
+  <inheritedByDefault>true</inheritedByDefault>
+  <requiredJavaVersion>1.8</requiredJavaVersion>
+  <requiredMavenVersion>3.9.5</requiredMavenVersion>
+  <mojos>
+    <mojo>
+      <goal>sourcegraphDependencies</goal>
+      <requiresDirectInvocation>false</requiresDirectInvocation>
+      <requiresProject>true</requiresProject>
+      <requiresReports>false</requiresReports>
+      <aggregator>false</aggregator>
+      <requiresOnline>false</requiresOnline>
+      <inheritedByDefault>true</inheritedByDefault>
+      <phase>generate-resources</phase>
+      <implementation>com.sourcegraph.maven.DependencyWriterMojo</implementation>
+      <language>java</language>
+      <instantiationStrategy>per-lookup</instantiationStrategy>
+      <executionStrategy>once-per-session</executionStrategy>
+      <requiresDependencyResolution>test</requiresDependencyResolution>
+      <threadSafe>true</threadSafe>
+      <parameters>
+        <parameter>
+          <name>project</name>
+          <type>org.apache.maven.project.MavenProject</type>
+          <required>true</required>
+          <editable>false</editable>
+          <description>The maven project.</description>
+        </parameter>
+        <parameter>
+          <name>targetRoot</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Location where `dependencies.txt` file will be written (should match the Semanticdb targetroot option)</description>
+        </parameter>
+      </parameters>
+      <configuration>
+        <project implementation="org.apache.maven.project.MavenProject">${project}</project>
+        <targetRoot implementation="java.lang.String">${session.executionRootDirectory}/target/semanticdb-targetroot</targetRoot>
+      </configuration>
+      <requirements>
+      </requirements>
+    </mojo>
+  </mojos>
+  <dependencies>
+  </dependencies>
+</plugin>
