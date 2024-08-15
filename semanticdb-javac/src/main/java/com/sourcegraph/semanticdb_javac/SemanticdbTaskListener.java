@@ -93,6 +93,7 @@ public final class SemanticdbTaskListener implements TaskListener {
     Result<Path, String> path = semanticdbOutputPath(options, e);
     if (path != null) {
       if (path.isOk()) {
+        System.out.println("Triggering for " + path.getOrThrow() + e.toString());
         Semanticdb.TextDocument textDocument =
             new SemanticdbVisitor(globals, e.getCompilationUnit(), options, types, trees, elements)
                 .buildTextDocument(e.getCompilationUnit());

@@ -93,6 +93,9 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
     resolveNodes();
 
+    System.out.println(
+        "Finally: " + symbolInfos.stream().map(e -> e.getSymbol()).collect(Collectors.toList()));
+
     return Semanticdb.TextDocument.newBuilder()
         .setSchema(Semanticdb.Schema.SEMANTICDB4)
         .setLanguage(Semanticdb.Language.JAVA)
@@ -185,6 +188,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
     Semanticdb.SymbolInformation info = builder.build();
 
+    // System.out.println(info.toString());
+
     symbolInfos.add(info);
   }
 
@@ -223,6 +228,10 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
           resolveMemberSelectTree((MemberSelectTree) node, entry.getValue());
         } else if (node instanceof NewClassTree) {
           resolveNewClassTree((NewClassTree) node, entry.getValue());
+        } else {
+          // System.out.println(node.getClass());
+
+          // System.out.println(entry.getValue().getLeaf());
         }
       }
     }
