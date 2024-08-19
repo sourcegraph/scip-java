@@ -93,8 +93,10 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
     resolveNodes();
 
-    System.out.println(
-        "Finally: " + symbolInfos.stream().map(e -> e.getSymbol()).collect(Collectors.toList()));
+    // System.out.println(
+    //     "Finally: "
+    //         + tree.getKind()
+    //         + symbolInfos.stream().map(e -> e.getSymbol()).collect(Collectors.toList()));
 
     return Semanticdb.TextDocument.newBuilder()
         .setSchema(Semanticdb.Schema.SEMANTICDB4)

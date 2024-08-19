@@ -545,6 +545,7 @@ lazy val docs = project
   .enablePlugins(DocusaurusPlugin)
 
 lazy val javaOnlySettings = List[Def.Setting[_]](
+  javafmtOnCompile := false,
   autoScalaLibrary := false,
   incOptions ~= { old =>
     old.withEnabled(false).withApiDebug(true)

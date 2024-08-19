@@ -8,13 +8,14 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 
 import javax.tools.JavaFileObject;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Callback hook that generates SemanticDB when the compiler has completed typechecking a Java
@@ -48,6 +49,7 @@ public final class SemanticdbTaskListener implements TaskListener {
 
   @Override
   public void finished(TaskEvent e) {
+    // System.out.println("Finishing " + e.getKind() + " on " + e.getSourceFile());
     if (e.getKind() != TaskEvent.Kind.ANALYZE) return;
     if (!options.errors.isEmpty()) {
       if (!options.alreadyReportedErrors) {
@@ -78,8 +80,10 @@ public final class SemanticdbTaskListener implements TaskListener {
     }
   }
 
-  // Uses reporter.error with the full stack trace of the exception instead of reporter.exception
-  // because reporter.exception doesn't seem to print any meaningful information about the
+  // Uses reporter.error with the full stack trace of the exception instead of
+  // reporter.exception
+  // because reporter.exception doesn't seem to print any meaningful information
+  // about the
   // exception, it just prints the location with an empty message.
   private void reportException(Throwable exception, TaskEvent e) {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -93,7 +97,7 @@ public final class SemanticdbTaskListener implements TaskListener {
     Result<Path, String> path = semanticdbOutputPath(options, e);
     if (path != null) {
       if (path.isOk()) {
-        System.out.println("Triggering for " + path.getOrThrow() + e.toString());
+        // System.out.println("Triggering for " + path.getOrThrow() + e.toString());
         Semanticdb.TextDocument textDocument =
             new SemanticdbVisitor(globals, e.getCompilationUnit(), options, types, trees, elements)
                 .buildTextDocument(e.getCompilationUnit());
@@ -105,13 +109,54 @@ public final class SemanticdbTaskListener implements TaskListener {
   }
 
   private void writeSemanticdb(TaskEvent event, Path output, Semanticdb.TextDocument textDocument) {
-    try {
+    if (output.toFile().exists()) {
+      // APPEND
+      Semanticdb.TextDocuments documents = null;
+      try (InputStream is = Files.newInputStream(output.toFile().toPath())) {
+
+        documents = Semanticdb.TextDocuments.parseFrom(is);
+
+      } catch (IOException e) {
+        this.reportException(e, event);
+        System.out.println(e);
+        return;
+      }
+
+      Semanticdb.TextDocument document = documents.getDocuments(0);
+
+      Set<Semanticdb.SymbolInformation> symbols = new HashSet<>(document.getSymbolsList());
+      Set<Semanticdb.SymbolOccurrence> occurrences = new HashSet<>(document.getOccurrencesList());
+
+      symbols.addAll(textDocument.getSymbolsList());
+      occurrences.addAll(textDocument.getOccurrencesList());
+
+      Semanticdb.TextDocument finalDocument =
+          document
+              .toBuilder()
+              .clearOccurrences()
+              .addAllOccurrences(occurrences)
+              .clearSymbols()
+              .addAllSymbols(symbols)
+              .build();
+
       byte[] bytes =
-          Semanticdb.TextDocuments.newBuilder().addDocuments(textDocument).build().toByteArray();
-      Files.createDirectories(output.getParent());
-      Files.write(output, bytes);
-    } catch (IOException e) {
-      this.reportException(e, event);
+              Semanticdb.TextDocuments.newBuilder().addDocuments(finalDocument).build().toByteArray();
+
+      try {
+        Files.createDirectories(output.getParent());
+        Files.write(output, bytes);
+      } catch (IOException e) {
+        this.reportException(e, event);
+      }
+    } else { // OVERWRITE
+      try {
+        byte[] bytes =
+            Semanticdb.TextDocuments.newBuilder().addDocuments(textDocument).build().toByteArray();
+        Files.createDirectories(output.getParent());
+        Files.write(output, bytes);
+      } catch (IOException e) {
+        this.reportException(e, event);
+      }
     }
   }
 
@@ -211,10 +256,13 @@ public final class SemanticdbTaskListener implements TaskListener {
 
     switch (options.noRelativePath) {
       case INDEX_ANYWAY:
-        // Come up with a unique relative path for this file even if it's not under the sourceroot.
-        // By indexing auto-generated files, we collect SymbolInformation for auto-generated symbol,
+        // Come up with a unique relative path for this file even if it's not under the
+        // sourceroot.
+        // By indexing auto-generated files, we collect SymbolInformation for
+        // auto-generated symbol,
         // which results in more useful hover tooltips in the editor.
-        // In the future, we may want to additionally embed the full text contents of these files
+        // In the future, we may want to additionally embed the full text contents of
+        // these files
         // so that it's possible to browse generated files with precise code navigation.
         String uniqueFilename =
             String.format("%d.%s.semanticdb", ++noRelativePathCounter, absolutePath.getFileName());

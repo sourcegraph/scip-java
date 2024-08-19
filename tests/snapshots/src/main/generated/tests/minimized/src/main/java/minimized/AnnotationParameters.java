@@ -7,6 +7,10 @@ package minimized;
 //             kind Interface
 //             relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
 →double value();
+//      ^^^^^ definition semanticdb maven . . minimized/Bar#value().
+//            display_name value
+//            signature_documentation java public abstract double value()
+//            kind AbstractMethod
 }
 
 @interface BarB {
@@ -16,6 +20,10 @@ package minimized;
 //              kind Interface
 //              relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
 →boolean value();
+//       ^^^^^ definition semanticdb maven . . minimized/BarB#value().
+//             display_name value
+//             signature_documentation java public abstract boolean value()
+//             kind AbstractMethod
 }
 
 @interface Nullable {
@@ -25,6 +33,11 @@ package minimized;
 //                  kind Interface
 //                  relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
 →String value() default "";
+//^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//      ^^^^^ definition semanticdb maven . . minimized/Nullable#value().
+//            display_name value
+//            signature_documentation java public abstract String value()
+//            kind AbstractMethod
 }
 
 interface Foo {
