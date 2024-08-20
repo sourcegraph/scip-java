@@ -49,21 +49,20 @@ public final class SemanticdbTaskListener implements TaskListener {
     // Upon first encounter with a file (before any other tasks are run)
     // we remove the semanticdb file for this source file to ensure
     // stale data doesn't cause problems
-    if(e.getKind() == TaskEvent.Kind.ENTER) {
+    if (e.getKind() == TaskEvent.Kind.ENTER) {
       Result<Path, String> semanticdbPath = semanticdbOutputPath(options, e);
-      if(semanticdbPath.isOk()) {
-          try {
-              Files.deleteIfExists(semanticdbPath.getOrThrow());
-          } catch (IOException ex) {
-            this.reportException(ex, e);
-          }
+      if (semanticdbPath.isOk()) {
+        try {
+          Files.deleteIfExists(semanticdbPath.getOrThrow());
+        } catch (IOException ex) {
+          this.reportException(ex, e);
+        }
       }
     }
   }
 
   @Override
   public void finished(TaskEvent e) {
-    // System.out.println("Finishing " + e.getKind() + " on " + e.getSourceFile());
     if (e.getKind() != TaskEvent.Kind.ANALYZE) return;
     if (!options.errors.isEmpty()) {
       if (!options.alreadyReportedErrors) {
@@ -165,10 +164,18 @@ public final class SemanticdbTaskListener implements TaskListener {
         occurrences.addAll(document.getOccurrencesList());
         synthetics.addAll(document.getSyntheticsList());
 
-        documents.toBuilder().addDocuments(
+        documents
+            .toBuilder()
+            .addDocuments(
                 documentIndex,
-                document.toBuilder().clearOccurrences().addAllOccurrences(occurrences).clearSymbols().addAllSymbols(symbols).clearSynthetics().addAllSynthetics(synthetics)
-        );
+                document
+                    .toBuilder()
+                    .clearOccurrences()
+                    .addAllOccurrences(occurrences)
+                    .clearSymbols()
+                    .addAllSymbols(symbols)
+                    .clearSynthetics()
+                    .addAllSynthetics(synthetics));
 
       } else {
         // If no prior document was found, we can just add the incoming one to the collection
