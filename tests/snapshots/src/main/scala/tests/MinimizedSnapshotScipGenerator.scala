@@ -76,6 +76,7 @@ class MinimizedSnapshotScipGenerator extends SnapshotGenerator {
                   document.getRelativePath
                 ).mkString("/")
               )
+
               val absolutePath = AbsolutePath(Paths.get(uri))
               val text = FileIO.slurp(absolutePath, StandardCharsets.UTF_8)
               ScipPrinters.printTextDocument(document, text)

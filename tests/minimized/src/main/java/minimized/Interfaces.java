@@ -9,3 +9,15 @@ public interface Interfaces {
     return "default";
   }
 }
+
+interface BookService {
+  void checkPages();
+}
+
+interface MyService {
+  BookService bookService();
+
+  default void example() {
+    bookService().checkPages();
+  }
+}
