@@ -50,6 +50,7 @@ public final class SemanticdbTaskListener implements TaskListener {
     // we remove the semanticdb file for this source file to ensure
     // stale data doesn't cause problems
     if (e.getKind() == TaskEvent.Kind.ENTER) {
+      inferBazelSourceroot(e.getSourceFile());
       Result<Path, String> semanticdbPath = semanticdbOutputPath(options, e);
       if (semanticdbPath.isOk()) {
         try {
@@ -283,8 +284,6 @@ public final class SemanticdbTaskListener implements TaskListener {
 
   private Result<Path, String> semanticdbOutputPath(SemanticdbJavacOptions options, TaskEvent e) {
     Path absolutePath = absolutePathFromUri(options, e.getSourceFile());
-    if (absolutePath == null)
-      return Result.error("Failed to produce absolute path for " + e.getSourceFile());
     if (absolutePath.startsWith(options.sourceroot)) {
       Path relativePath = options.sourceroot.relativize(absolutePath);
       String filename = relativePath.getFileName().toString() + ".semanticdb";
