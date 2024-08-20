@@ -59,7 +59,6 @@ public interface AnnotationsOnParameterizedTypes {
 //                              signature_documentation java public abstract <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass)
 //                              kind AbstractMethod
 //                              relationship is_reference is_implementation semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
-//                              relationship is_reference is_implementation semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
 //                              ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                    ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypes#adapter().[C]
 //                                       ^^^^^^^^ definition local 0
@@ -112,52 +111,38 @@ class AnnotationsOnParameterizedTypesImpl implements AnnotationsOnParameterizedT
 //                          ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
 //                             ^^^^^^^ definition semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
 //                                     display_name adapter
-//                                     signature_documentation java @Override\npublic <C, W> Function<W, C> adapter(Class<C> contract, Class<T> contract)
+//                                     signature_documentation java @Override\npublic <C, W> Function<W, C> adapter(Class<C> contract, Class<W> wrappedClass)
 //                                     kind Method
 //                                     relationship is_reference is_implementation semanticdb maven . . minimized/AnnotationsOnParameterizedTypes#adapter().
 //                                     ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                           ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
-//                                              ^^^^^^^^ definition local 0
-//                                                       display_name contract
-//                                                       signature_documentation java Class<C> contract
-//                                                       enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypes#adapter().
 //                                              ^^^^^^^^ definition local 2
 //                                                       display_name contract
 //                                                       signature_documentation java Class<C> contract
 //                                                       enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
 //                                                        ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                                              ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[W]
-//                                                                 ^^^^^^^^^^^^ definition local 1
+//                                                                 ^^^^^^^^^^^^ definition local 3
 //                                                                              display_name wrappedClass
 //                                                                              signature_documentation java Class<W> wrappedClass
-//                                                                              enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypes#adapter().
-//                                                                 ^^^^^^^^^^^^ definition local 3
-//                                                                              display_name contract
-//                                                                              signature_documentation java Class<T> contract
-//                                                                              enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
+//                                                                              enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
 
     Function<InvocationHandler, C> constructor = getConstructor(contract);
 //  ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
 //           ^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/reflect/InvocationHandler#
 //                              ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().[C]
-//                                 ^^^^^^^^^^^ definition local 2
-//                                             display_name contract
-//                                             signature_documentation java Class<C> contract
-//                                             enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
 //                                 ^^^^^^^^^^^ definition local 4
 //                                             display_name constructor
-//                                             signature_documentation java @SuppressWarnings("unchecked")\nConstructor<T> constructor
-//                                             enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
+//                                             signature_documentation java Function<InvocationHandler, C> constructor
+//                                             enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#adapter().
 //                                             kind Variable
 //                                               ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
-//                                                              ^^^^^^^^ reference local 0
 //                                                              ^^^^^^^^ reference local 2
 
     System.out.println(constructor);
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
 //         ^^^ reference semanticdb maven jdk 11 java/lang/System#out.
 //             ^^^^^^^ reference semanticdb maven jdk 11 java/io/PrintStream#println(+9).
-//                     ^^^^^^^^^^^ reference local 2
 //                     ^^^^^^^^^^^ reference local 4
 
     return null;
@@ -177,10 +162,6 @@ class AnnotationsOnParameterizedTypesImpl implements AnnotationsOnParameterizedT
 //                                                          kind Method
 //                                                          ^^^^^ reference semanticdb maven jdk 11 java/lang/Class#
 //                                                                ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
-//                                                                   ^^^^^^^^ definition local 3
-//                                                                            display_name contract
-//                                                                            signature_documentation java Class<T> contract
-//                                                                            enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
 //                                                                   ^^^^^^^^ definition local 5
 //                                                                            display_name contract
 //                                                                            signature_documentation java Class<T> contract
@@ -190,11 +171,6 @@ class AnnotationsOnParameterizedTypesImpl implements AnnotationsOnParameterizedT
     Constructor<T> constructor = (Constructor<T>) proxyConstructors.computeIfAbsent(contract, c -> {
 //  ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/reflect/Constructor#
 //              ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
-//                 ^^^^^^^^^^^ definition local 4
-//                             display_name constructor
-//                             signature_documentation java @SuppressWarnings("unchecked")\nConstructor<T> constructor
-//                             enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
-//                             kind Variable
 //                 ^^^^^^^^^^^ definition local 6
 //                             display_name constructor
 //                             signature_documentation java @SuppressWarnings\nConstructor<T> constructor
@@ -204,12 +180,7 @@ class AnnotationsOnParameterizedTypesImpl implements AnnotationsOnParameterizedT
 //                                            ^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().[T]
 //                                                ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#proxyConstructors.
 //                                                                  ^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/ConcurrentMap#computeIfAbsent().
-//                                                                                  ^^^^^^^^ reference local 3
 //                                                                                  ^^^^^^^^ reference local 5
-//                                                                                            ^ definition local 5
-//                                                                                              display_name contract
-//                                                                                              signature_documentation java Class<T> contract
-//                                                                                              enclosing_symbol semanticdb maven . . minimized/AnnotationsOnParameterizedTypesImpl#getConstructor().
 //                                                                                            ^ definition local 7
 //                                                                                              display_name c
 //                                                                                              signature_documentation java Class<?> c
@@ -221,7 +192,6 @@ class AnnotationsOnParameterizedTypesImpl implements AnnotationsOnParameterizedT
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
 //         ^^^ reference semanticdb maven jdk 11 java/lang/System#out.
 //             ^^^^^^^ reference semanticdb maven jdk 11 java/io/PrintStream#println(+9).
-//                     ^^^^^^^^^^^ reference local 4
 //                     ^^^^^^^^^^^ reference local 6
 
     return null;
