@@ -106,13 +106,13 @@ jobs:
           java-version: 11
           cache: "sbt"
 
-      - run: sbt checkAll
+      - run: sbt --client checkAll
 
       - name: Run sample benchmarks
-        run: sbt 'bench/Jmh/run -i 1 -f1 -t1 -foe true'
+        run: sbt --client 'bench/Jmh/run -i 1 -f1 -t1 -foe true'
 
       - name: Check documentation builds
-        run: docs/docusaurusCreateSite
+        run: sbt --client docs/docusaurusCreateSite
 
 
   maven:
