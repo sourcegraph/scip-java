@@ -114,7 +114,9 @@ public final class SemanticdbTaskListener implements TaskListener {
         Semanticdb.TextDocument textDocument =
             new SemanticdbVisitor(globals, e.getCompilationUnit(), options, types, trees, elements)
                 .buildTextDocument(e.getCompilationUnit());
-        writeSemanticdb(e, path.getOrThrow(), textDocument);
+        Path output = path.getOrThrow();
+        if (Files.exists(output)) appendSemanticdb(e, output, textDocument);
+        else writeSemanticdb(e, output, textDocument);
       } else {
         reporter.error(path.getErrorOrThrow(), e);
       }
@@ -122,84 +124,85 @@ public final class SemanticdbTaskListener implements TaskListener {
   }
 
   private void writeSemanticdb(TaskEvent event, Path output, Semanticdb.TextDocument textDocument) {
-    if (Files.exists(output)) {
-      /*
-       * If there already is a semanticdb file at the given path,
-       * we do the following:
-       * - Read a documents collection
-       * - Try to find the document with the matching relative path (matching the incoming textDocument)
-       * - Then, depending on whether a matching document already exists in the collection:
-       *   - if YES, mutate it in place to only add entries from the incoming document
-       *   - if NO, simply add the incoming text document to the collection
-       * - Write the collection back to disk
-       * */
-      Semanticdb.TextDocument document = null;
-      int documentIndex = -1;
-      Semanticdb.TextDocuments documents = null;
+    try {
+      byte[] bytes =
+          Semanticdb.TextDocuments.newBuilder().addDocuments(textDocument).build().toByteArray();
+      Files.createDirectories(output.getParent());
+      Files.write(output, bytes);
+    } catch (IOException e) {
+      this.reportException(e, event);
+    }
+  }
 
-      try (InputStream is = Files.newInputStream(output.toFile().toPath())) {
-        documents = Semanticdb.TextDocuments.parseFrom(is);
+  private void appendSemanticdb(
+      TaskEvent event, Path output, Semanticdb.TextDocument textDocument) {
+    /*
+     * If there already is a semanticdb file at the given path,
+     * we do the following:
+     * - Read a documents collection
+     * - Try to find the document with the matching relative path (matching the incoming textDocument)
+     * - Then, depending on whether a matching document already exists in the collection:
+     *   - if YES, mutate it in place to only add entries from the incoming document
+     *   - if NO, simply add the incoming text document to the collection
+     * - Write the collection back to disk
+     * */
+    Semanticdb.TextDocument document = null;
+    int documentIndex = -1;
+    Semanticdb.TextDocuments documents = null;
 
-        for (int i = 0; i < documents.getDocumentsCount(); i++) {
-          Semanticdb.TextDocument candidate = documents.getDocuments(i);
-          if (document == null && candidate.getUri().equals(textDocument.getUri())) {
-            document = candidate;
-            documentIndex = i;
-          }
+    try (InputStream is = Files.newInputStream(output.toFile().toPath())) {
+      documents = Semanticdb.TextDocuments.parseFrom(is);
+
+      for (int i = 0; i < documents.getDocumentsCount(); i++) {
+        Semanticdb.TextDocument candidate = documents.getDocuments(i);
+        if (document == null && candidate.getUri().equals(textDocument.getUri())) {
+          document = candidate;
+          documentIndex = i;
         }
-
-      } catch (IOException e) {
-        this.reportException(e, event);
-        return;
       }
 
-      if (document != null) {
-        // If there is a previous semanticdb document at this path, we need
-        // to deduplicate symbols and occurrences and mutate the document in place
-        Set<Semanticdb.SymbolInformation> symbols = new HashSet<>(textDocument.getSymbolsList());
-        Set<Semanticdb.SymbolOccurrence> occurrences =
-            new HashSet<>(textDocument.getOccurrencesList());
-        Set<Semanticdb.Synthetic> synthetics = new HashSet<>(textDocument.getSyntheticsList());
+    } catch (IOException e) {
+      this.reportException(e, event);
+      return;
+    }
 
-        symbols.addAll(document.getSymbolsList());
-        occurrences.addAll(document.getOccurrencesList());
-        synthetics.addAll(document.getSyntheticsList());
+    if (document != null) {
+      // If there is a previous semanticdb document at this path, we need
+      // to deduplicate symbols and occurrences and mutate the document in place
+      Set<Semanticdb.SymbolInformation> symbols = new HashSet<>(textDocument.getSymbolsList());
+      Set<Semanticdb.SymbolOccurrence> occurrences =
+          new HashSet<>(textDocument.getOccurrencesList());
+      Set<Semanticdb.Synthetic> synthetics = new HashSet<>(textDocument.getSyntheticsList());
 
-        documents
-            .toBuilder()
-            .addDocuments(
-                documentIndex,
-                document
-                    .toBuilder()
-                    .clearOccurrences()
-                    .addAllOccurrences(occurrences)
-                    .clearSymbols()
-                    .addAllSymbols(symbols)
-                    .clearSynthetics()
-                    .addAllSynthetics(synthetics));
+      symbols.addAll(document.getSymbolsList());
+      occurrences.addAll(document.getOccurrencesList());
+      synthetics.addAll(document.getSyntheticsList());
 
-      } else {
-        // If no prior document was found, we can just add the incoming one to the collection
-        documents = documents.toBuilder().addDocuments(textDocument).build();
-      }
+      documents
+          .toBuilder()
+          .addDocuments(
+              documentIndex,
+              document
+                  .toBuilder()
+                  .clearOccurrences()
+                  .addAllOccurrences(occurrences)
+                  .clearSymbols()
+                  .addAllSymbols(symbols)
+                  .clearSynthetics()
+                  .addAllSynthetics(synthetics));
 
-      byte[] bytes = documents.toByteArray();
+    } else {
+      // If no prior document was found, we can just add the incoming one to the collection
+      documents = documents.toBuilder().addDocuments(textDocument).build();
+    }
 
-      try {
-        Files.createDirectories(output.getParent());
-        Files.write(output, bytes);
-      } catch (IOException e) {
-        this.reportException(e, event);
-      }
-    } else { // OVERWRITE
-      try {
-        byte[] bytes =
-            Semanticdb.TextDocuments.newBuilder().addDocuments(textDocument).build().toByteArray();
-        Files.createDirectories(output.getParent());
-        Files.write(output, bytes);
-      } catch (IOException e) {
-        this.reportException(e, event);
-      }
+    byte[] bytes = documents.toByteArray();
+
+    try {
+      Files.createDirectories(output.getParent());
+      Files.write(output, bytes);
+    } catch (IOException e) {
+      this.reportException(e, event);
     }
   }
 
