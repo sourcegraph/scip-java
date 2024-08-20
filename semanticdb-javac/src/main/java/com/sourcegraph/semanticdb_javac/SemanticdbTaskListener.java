@@ -111,7 +111,6 @@ public final class SemanticdbTaskListener implements TaskListener {
     Result<Path, String> path = semanticdbOutputPath(options, e);
     if (path != null) {
       if (path.isOk()) {
-        // System.out.println("Triggering for " + path.getOrThrow() + e.toString());
         Semanticdb.TextDocument textDocument =
             new SemanticdbVisitor(globals, e.getCompilationUnit(), options, types, trees, elements)
                 .buildTextDocument(e.getCompilationUnit());
@@ -123,38 +122,60 @@ public final class SemanticdbTaskListener implements TaskListener {
   }
 
   private void writeSemanticdb(TaskEvent event, Path output, Semanticdb.TextDocument textDocument) {
-    if (output.toFile().exists()) {
-      // APPEND
+    if (Files.exists(output)) {
+      /*
+       * If there already is a semanticdb file at the given path,
+       * we do the following:
+       * - Read a documents collection
+       * - Try to find the document with the matching relative path (matching the incoming textDocument)
+       * - Then, depending on whether a matching document already exists in the collection:
+       *   - if YES, mutate it in place to only add entries from the incoming document
+       *   - if NO, simply add the incoming text document to the collection
+       * - Write the collection back to disk
+       * */
+      Semanticdb.TextDocument document = null;
+      int documentIndex = -1;
       Semanticdb.TextDocuments documents = null;
-      try (InputStream is = Files.newInputStream(output.toFile().toPath())) {
 
+      try (InputStream is = Files.newInputStream(output.toFile().toPath())) {
         documents = Semanticdb.TextDocuments.parseFrom(is);
+
+        for (int i = 0; i < documents.getDocumentsCount(); i++) {
+          Semanticdb.TextDocument candidate = documents.getDocuments(i);
+          if (document == null && candidate.getUri().equals(textDocument.getUri())) {
+            document = candidate;
+            documentIndex = i;
+          }
+        }
 
       } catch (IOException e) {
         this.reportException(e, event);
-        System.out.println(e);
         return;
       }
 
-      Semanticdb.TextDocument document = documents.getDocuments(0);
+      if (document != null) {
+        // If there is a previous semanticdb document at this path, we need
+        // to deduplicate symbols and occurrences and mutate the document in place
+        Set<Semanticdb.SymbolInformation> symbols = new HashSet<>(textDocument.getSymbolsList());
+        Set<Semanticdb.SymbolOccurrence> occurrences =
+            new HashSet<>(textDocument.getOccurrencesList());
+        Set<Semanticdb.Synthetic> synthetics = new HashSet<>(textDocument.getSyntheticsList());
 
-      Set<Semanticdb.SymbolInformation> symbols = new HashSet<>(document.getSymbolsList());
-      Set<Semanticdb.SymbolOccurrence> occurrences = new HashSet<>(document.getOccurrencesList());
+        symbols.addAll(document.getSymbolsList());
+        occurrences.addAll(document.getOccurrencesList());
+        synthetics.addAll(document.getSyntheticsList());
 
-      symbols.addAll(textDocument.getSymbolsList());
-      occurrences.addAll(textDocument.getOccurrencesList());
+        documents.toBuilder().addDocuments(
+                documentIndex,
+                document.toBuilder().clearOccurrences().addAllOccurrences(occurrences).clearSymbols().addAllSymbols(symbols).clearSynthetics().addAllSynthetics(synthetics)
+        );
 
-      Semanticdb.TextDocument finalDocument =
-          document
-              .toBuilder()
-              .clearOccurrences()
-              .addAllOccurrences(occurrences)
-              .clearSymbols()
-              .addAllSymbols(symbols)
-              .build();
+      } else {
+        // If no prior document was found, we can just add the incoming one to the collection
+        documents = documents.toBuilder().addDocuments(textDocument).build();
+      }
 
-      byte[] bytes =
-              Semanticdb.TextDocuments.newBuilder().addDocuments(finalDocument).build().toByteArray();
+      byte[] bytes = documents.toByteArray();
 
       try {
         Files.createDirectories(output.getParent());

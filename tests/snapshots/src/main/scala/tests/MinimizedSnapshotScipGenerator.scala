@@ -70,7 +70,6 @@ class MinimizedSnapshotScipGenerator extends SnapshotGenerator {
             context,
             expectOutput,
             () => {
-              println(document.getRelativePath)
               val uri = URI.create(
                 List(
                   index.getMetadata.getProjectRoot.stripSuffix("/"),
@@ -79,7 +78,6 @@ class MinimizedSnapshotScipGenerator extends SnapshotGenerator {
               )
 
               val absolutePath = AbsolutePath(Paths.get(uri))
-              //println(absolutePath)
               val text = FileIO.slurp(absolutePath, StandardCharsets.UTF_8)
               ScipPrinters.printTextDocument(document, text)
             }
