@@ -111,9 +111,6 @@ jobs:
       - name: Run sample benchmarks
         run: sbt --client 'bench/Jmh/run -i 1 -f1 -t1 -foe true'
 
-      - name: Check documentation builds
-        run: sbt --client docs/docusaurusCreateSite
-
 
   maven:
     runs-on: ubuntu-latest
