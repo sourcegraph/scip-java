@@ -103,13 +103,13 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: "temurin"
-          java-version: 17
+          java-version: 11
           cache: "sbt"
 
-      - run: sbt checkAll
+      - run: sbt --client checkAll
 
       - name: Run sample benchmarks
-        run: sbt 'bench/Jmh/run -i 1 -f1 -t1 -foe true'
+        run: sbt --client 'bench/Jmh/run -i 1 -f1 -t1 -foe true'
 
 
   maven:
