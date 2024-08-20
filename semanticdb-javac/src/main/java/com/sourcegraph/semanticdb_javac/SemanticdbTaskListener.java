@@ -283,6 +283,8 @@ public final class SemanticdbTaskListener implements TaskListener {
 
   private Result<Path, String> semanticdbOutputPath(SemanticdbJavacOptions options, TaskEvent e) {
     Path absolutePath = absolutePathFromUri(options, e.getSourceFile());
+    if (absolutePath == null)
+      return Result.error("Failed to produce absolute path for " + e.getSourceFile());
     if (absolutePath.startsWith(options.sourceroot)) {
       Path relativePath = options.sourceroot.relativize(absolutePath);
       String filename = relativePath.getFileName().toString() + ".semanticdb";
