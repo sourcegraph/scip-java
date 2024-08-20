@@ -430,6 +430,15 @@ class WriteDependencies extends DefaultTask {
     val deps = List.newBuilder[String]
     val project = getProject()
     val projectName = project.getName()
+    val projectPath = project.getPath().replaceAll("[^a-z0-9A-Z_-]", "_")
+    val dependenciesPath = depsOut.map { path =>
+      val filename = path.getFileName()
+      if (filename.endsWith("dependencies.txt")) {
+        val last = projectPath + "." + path.getFileName().toString()
+        path.getParent().resolve(last)
+      } else
+        path
+    }
 
     val gradle = new GradleVersion(project.getGradle().getGradleVersion())
 
@@ -546,7 +555,7 @@ class WriteDependencies extends DefaultTask {
 
     val dependencies = deps.result().distinct
 
-    depsOut match {
+    dependenciesPath match {
       case None =>
         dependencies.foreach(println)
       case Some(path) =>
