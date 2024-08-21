@@ -140,21 +140,8 @@ build/semanticdb-targetroot/META-INF/semanticdb/j8/src/main/java/example/Example
 ...
 ```
 
-## Step 4: Generate SCIP index from SemanticDB files
 
-First, install the `scip-java` command-line tool according to the instructions
-in the [getting started guide](getting-started.md).
-
-Next, run the `scip-java index-semanticdb` command to convert SemanticDB files
-into SCIP.
-
-```sh
-❯ scip-java index-semanticdb $TARGETROOT
-❯ file index.scip
-index.scip: JSON data
-```
-
-## Step 5 (optional): Enable cross-repository navigation
+## Step 4 (optional): Enable cross-repository navigation
 
 Cross-repository navigation is a feature that allows "goto definition" and "find
 references" to show results from multiple repositories.
@@ -228,3 +215,18 @@ Which allows you to invoke it by simply running `mvn sourcegraph:sourcegraphDepe
 
 Cross-repository navigation is a feature that allows "goto definition" and "find
 references" to show results from multiple repositories.
+
+## Step 5: Generate SCIP index from SemanticDB files
+
+First, install the `scip-java` command-line tool according to the instructions
+in the [getting started guide](getting-started.md).
+
+Next, run the `scip-java index-semanticdb` command to convert SemanticDB files
+into SCIP.
+
+```sh
+❯ scip-java index-semanticdb $TARGETROOT
+❯ file index.scip
+index.scip: JSON data
+```
+
