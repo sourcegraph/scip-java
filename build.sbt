@@ -223,7 +223,7 @@ lazy val mavenPlugin = project
     javaOnlySettings,
     libraryDependencies ++=
       Seq(
-        "org.apache.maven" % "maven-plugin-api" % "3.6.3",
+        "org.apache.maven" % "maven-plugin-api" % "3.9.9",
         "org.apache.maven.plugin-tools" % "maven-plugin-annotations" % "3.6.4" %
           Provided,
         "org.apache.maven" % "maven-project" % "2.2.1"
