@@ -1,26 +1,13 @@
 package com.sourcegraph.semanticdb_javac;
 
-import com.sun.source.tree.Tree;
+import com.sun.source.tree.*;
 import com.sun.source.util.Trees;
 import javax.lang.model.element.Element;
 import javax.lang.model.util.Types;
+import javax.lang.model.type.TypeMirror;
 import com.sun.source.util.TreePath;
 import com.sun.source.tree.Tree;
 import com.sun.source.tree.Tree.Kind;
-import com.sun.source.tree.BinaryTree;
-import com.sun.source.tree.UnaryTree;
-import com.sun.source.tree.AssignmentTree;
-import com.sun.source.tree.MemberSelectTree;
-import com.sun.source.tree.ClassTree;
-import com.sun.source.tree.VariableTree;
-import com.sun.source.tree.MethodTree;
-import com.sun.source.tree.ModifiersTree;
-import com.sun.source.tree.IdentifierTree;
-import com.sun.source.tree.ExpressionTree;
-import com.sun.source.tree.LiteralTree;
-import com.sun.source.tree.NewArrayTree;
-import com.sun.source.tree.AnnotationTree;
-import com.sun.source.tree.ParenthesizedTree;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -44,6 +31,7 @@ public class SemanticdbTrees {
     this.types = types;
     this.trees = trees;
     this.nodes = nodes;
+    this.typeVisitor = new SemanticdbTypeVisitor(globals, locals, types);
   }
 
   private final GlobalSymbolsCache globals;
@@ -52,6 +40,7 @@ public class SemanticdbTrees {
   private final Types types;
   private final Trees trees;
   private final HashMap<Tree, TreePath> nodes;
+  private final SemanticdbTypeVisitor typeVisitor;
 
   public List<Semanticdb.AnnotationTree> annotations(Tree node) {
     if (!(node instanceof ClassTree)
@@ -101,9 +90,17 @@ public class SemanticdbTrees {
     Element annotationSym = trees.getElement(annotationTreePath);
 
     Semanticdb.Type type =
-        new SemanticdbTypeVisitor(globals, locals, types).semanticdbType(annotationSym.asType());
+        typeVisitor.semanticdbType(annotationSym.asType());
     return annotationTree(type, params);
   }
+
+  private TypeMirror getTreeType(Tree tree) {
+    TreePath path = nodes.get(tree);
+    System.out.println("Path: " + path);
+    Element sym = trees.getElement(path);
+    System.out.println("SYM: " + sym);
+    return sym.asType();
+  } 
 
   private Semanticdb.Tree annotationParameter(ExpressionTree expr) {
     if (expr instanceof MemberSelectTree) {
@@ -164,6 +161,10 @@ public class SemanticdbTrees {
     } else if (expr instanceof ParenthesizedTree) {
       ParenthesizedTree parenExpr = (ParenthesizedTree) expr;
       return annotationParameter(parenExpr.getExpression());
+    } else if (expr instanceof TypeCastTree) {
+      TypeCastTree tree = (TypeCastTree) expr;
+      System.out.println(typeVisitor.semanticdbType(getTreeType(tree.getType())));
+//      tree.getType()
     }
     throw new IllegalArgumentException(
         semanticdbUri
