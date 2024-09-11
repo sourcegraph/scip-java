@@ -25,4 +25,7 @@ interface Foo {
 
 	@Nullable(("what"))
 	Foo test4();
+
+	@Bar((double) -1)
+	double test();
 }

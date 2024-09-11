@@ -298,6 +298,7 @@ message Tree {
     AssignTree assign_tree = 10;
     BinaryOperatorTree binop_tree = 11;
     UnaryOperatorTree unaryop_tree = 12;
+    CastTree cast_tree = 13;
     // -- OUT OF SPEC -- //
   }
 }
@@ -345,6 +346,12 @@ message TypeApplyTree {
 message AnnotationTree {
   Type tpe = 1;
   repeated Tree parameters = 2;
+}
+
+
+message CastTree {
+  Type tpe = 1;
+  Tree value = 2;
 }
 
 message AssignTree {

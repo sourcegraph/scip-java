@@ -15,6 +15,7 @@ import com.sun.source.tree.LineMap;
 import com.sun.source.tree.ExpressionTree;
 import com.sun.source.tree.NewClassTree;
 import com.sun.source.tree.MemberSelectTree;
+import com.sun.source.tree.TypeCastTree;
 import com.sun.source.tree.TypeParameterTree;
 import com.sun.source.tree.ParameterizedTypeTree;
 
@@ -223,6 +224,9 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
           resolveMemberSelectTree((MemberSelectTree) node, entry.getValue());
         } else if (node instanceof NewClassTree) {
           resolveNewClassTree((NewClassTree) node, entry.getValue());
+        } else if (node instanceof TypeCastTree) {
+          resolveCastTree((TypeCastTree) node, entry.getValue());
+          System.out.println("Skipping resolution of [[\n" + node.getClass() + node.toString() + "\n]]");
         }
       }
     }
@@ -336,6 +340,31 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
           sym, node, sym.getSimpleName(), Role.REFERENCE, CompilerRange.FROM_END_TO_SYMBOL_NAME);
     }
   }
+
+
+  private void resolveCastTree(TypeCastTree node, TreePath treePath) {
+    // ignore anonymous classes - otherwise there will be a local reference to itself
+    System.out.println("helo");
+    // if (node.getIdentifier() != null && node.getClassBody() == null) {
+    //   Element sym = trees.getElement(treePath);
+    //   if (sym != null) {
+    //     TreePath parentPath = treePath.getParentPath();
+    //     Element parentSym = trees.getElement(parentPath);
+
+    //     if (parentSym == null || parentSym.getKind() != ElementKind.ENUM_CONSTANT) {
+    //       TreePath identifierTreePath = nodes.get(node.getIdentifier());
+    //       Element identifierSym = trees.getElement(identifierTreePath);
+    //       emitSymbolOccurrence(
+    //           sym,
+    //           node,
+    //           identifierSym.getSimpleName(),
+    //           Role.REFERENCE,
+    //           CompilerRange.FROM_TEXT_SEARCH);
+    //     }
+    //   }
+    // }
+  }
+
 
   private void resolveNewClassTree(NewClassTree node, TreePath treePath) {
     // ignore anonymous classes - otherwise there will be a local reference to itself
