@@ -1,3 +1,5 @@
+import java.nio.file.StandardCopyOption
+import java.nio.file.CopyOption
 import sbtdocker.DockerfileBase
 import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
 import scala.xml.transform.{RewriteRule, RuleTransformer}
@@ -591,19 +593,11 @@ lazy val fatjarPackageSettings = List[Def.Setting[_]](
       oldStrategy(x)
   },
   (Compile / Keys.`package`) := {
-    val slimJar = (Compile / Keys.`package`).value
-    val fatJar = crossTarget.value / (assembly / assemblyJarName).value
-    val _ = assembly.value
-    IO.copyFile(fatJar, slimJar, CopyOptions().withOverwrite(true))
-    slimJar
+    assembly.value
   },
   (Compile / packageBin / packagedArtifact) := {
-    val (art, slimJar) = (Compile / packageBin / packagedArtifact).value
-    val fatJar =
-      new File(crossTarget.value + "/" + (assembly / assemblyJarName).value)
-    val _ = assembly.value
-    IO.copy(List(fatJar -> slimJar), CopyOptions().withOverwrite(true))
-    (art, slimJar)
+    val (artifact, _) = (Compile / packageBin / packagedArtifact).value
+    (artifact, assembly.value)
   },
   pomPostProcess := { node =>
     new RuleTransformer(
