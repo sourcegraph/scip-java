@@ -1,5 +1,3 @@
-import java.nio.file.StandardCopyOption
-import java.nio.file.CopyOption
 import sbtdocker.DockerfileBase
 import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
 import scala.xml.transform.{RewriteRule, RuleTransformer}
