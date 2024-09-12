@@ -54,6 +54,10 @@ docker run -v $(pwd):/sources --env JVM_VERSION=11 sourcegraph/scip-java:latest 
 
 # Java 17 (default)
 docker run -v $(pwd):/sources --env JVM_VERSION=17 sourcegraph/scip-java:latest scip-java index
+
+# Java 21
+docker run -v $(pwd):/sources --env JVM_VERSION=21 sourcegraph/scip-java:latest scip-java index
+
 ```
 
 ### Java launcher
