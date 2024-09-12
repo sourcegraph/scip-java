@@ -46,13 +46,14 @@ jobs:
       - name: Build Dockerised CLI
         run: sbt cli/docker
 
-      - run: |
-
+      - name: Test repos
+        shell: bash
+        run: |
           set -eu
           check_repo() {
             REPO=$1
             mkdir -p .repos/$REPO
-            git clone https://github.com/$REPO.git .repos/$REPO
+            git clone https://github.com/$REPO.git .repos/$REPO && cd .repos/$REPO && git submodule update --init
 
             docker run -v $PWD/.repos/$REPO:/sources -w /sources sourcegraph/scip-java:latest scip-java index
             file .repos/$REPO/index.scip || (echo "$REPO SCIP index doesn't exist!"; exit 1)
