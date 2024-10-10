@@ -57,10 +57,36 @@ def _scip_java(target, ctx):
     annotations = info.annotation_processing
 
     source_files = []
+    source_jars = []
     for src in ctx.rule.files.srcs:
-        source_files.append(src.path)
+        if src.path.endswith(".java"):
+            source_files.append(src.path)
+        elif src.path.endswith(".srcjar"):
+            source_jars.append(src)
+
     if len(source_files) == 0:
         return None
+    
+    output_dir = []
+
+    for source_jar in source_jars:
+        dir = ctx.actions.declare_directory("extracted_" + source_jar.basename)
+        output_dir.append(dir)
+    
+        ctx.actions.run_shell(
+            inputs = javac_action.inputs,
+            outputs = [dir],
+            mnemonic = "ExtractSourceJars",
+            command = """
+                unzip {input_file} -d {output_dir}
+            """.format(
+                output_dir = dir.path,
+                input_file = source_jar.path,
+            ),
+            progress_message = "Extracting source jar {jar}".format(jar = source_jar.path),
+        )
+
+        source_files.append(dir.path)
 
     classpath = [j.path for j in compilation.compilation_classpath.to_list()]
     bootclasspath = [j.path for j in compilation.boot_classpath]
@@ -73,11 +99,16 @@ def _scip_java(target, ctx):
 
     launcher_javac_flags = []
     compiler_javac_flags = []
-    for value in compilation.javac_options:
-        if value.startswith("-J"):
-            launcher_javac_flags.append(value)
-        else:
-            compiler_javac_flags.append(value)
+
+    for value in compilation.javac_options_list:
+        # NOTE(Anton): for some bizarre reason I see empty string starting the list of 
+        # javac options - which then gets propagated into the JSON config, and ends up
+        # crashing the actual javac invokation.
+        if value != "":
+            if value.startswith("-J"):
+                launcher_javac_flags.append(value)
+            else:
+                compiler_javac_flags.append(value)
 
     build_config = struct(**{
         "javaHome": ctx.var["java_home"],
@@ -100,6 +131,7 @@ def _scip_java(target, ctx):
     )
 
     deps = [javac_action.inputs, annotations.processor_classpath]
+
     ctx.actions.run_shell(
         command = "\"{}\" index --no-cleanup --index-semanticdb.allow-empty-index --cwd \"{}\" --targetroot {} --scip-config \"{}\" --output \"{}\"".format(
             ctx.var["scip_java_binary"],
@@ -113,7 +145,7 @@ def _scip_java(target, ctx):
             "NO_PROGRESS_BAR": "true",
         },
         mnemonic = "ScipJavaIndex",
-        inputs = depset([build_config_path], transitive = deps),
+        inputs = depset([build_config_path] + output_dir, transitive = deps),
         outputs = [scip_output, targetroot],
     )
 
