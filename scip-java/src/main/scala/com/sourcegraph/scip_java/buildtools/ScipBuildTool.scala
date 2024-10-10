@@ -718,7 +718,6 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   /** Recursively collects all Java files in the working directory */
   private def collectAllSourceFiles(config: Config, dir: Path): List[Path] = {
     if (config.sourceFiles.nonEmpty) {
-      println(config.sourceFiles)
       config
         .sourceFiles
         .flatMap { relativePath =>

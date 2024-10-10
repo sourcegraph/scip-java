@@ -70,7 +70,7 @@ def _scip_java(target, ctx):
     output_dir = []
 
     for source_jar in source_jars:
-        dir = ctx.actions.declare_directory("extracted_" + source_jar.basename)
+        dir = ctx.actions.declare_directory("extracted_srcjar/" + source_jar.short_path)
         output_dir.append(dir)
     
         ctx.actions.run_shell(
@@ -99,8 +99,15 @@ def _scip_java(target, ctx):
 
     launcher_javac_flags = []
     compiler_javac_flags = []
+    
+    # In different versions of bazel javac options are either a nested set or a depset or a list...
+    javac_options = []
+    if hasattr(compilation, "javac_options_list"):
+        javac_options = compilation.javac_options_list
+    else:
+        javac_options = compilation.javac_options.to_list()
 
-    for value in compilation.javac_options_list:
+    for value in javac_options:
         # NOTE(Anton): for some bizarre reason I see empty string starting the list of 
         # javac options - which then gets propagated into the JSON config, and ends up
         # crashing the actual javac invokation.
