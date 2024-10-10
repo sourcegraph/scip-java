@@ -683,15 +683,8 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     Files.walkFileTree(targetroot, new DeleteVisitor)
   }
 
-  /** Recursively collects all Java files in the working directory */
-  private def collectAllSourceFiles(config: Config, dir: Path): List[Path] = {
-    if (config.sourceFiles.nonEmpty) {
-      return config
-        .sourceFiles
-        .map(path => AbsolutePath.of(Paths.get(path), dir))
-        .filter(path => Files.isRegularFile(path))
-    }
-    val buf = ListBuffer.empty[Path]
+  private def collectAllSourceFiles(dir: Path) = {
+    val buf = List.newBuilder[Path]
     Files.walkFileTree(
       dir,
       new SimpleFileVisitor[Path] {
@@ -719,7 +712,27 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
         ): FileVisitResult = FileVisitResult.CONTINUE
       }
     )
-    buf.toList
+    buf.result()
+  }
+
+  /** Recursively collects all Java files in the working directory */
+  private def collectAllSourceFiles(config: Config, dir: Path): List[Path] = {
+    if (config.sourceFiles.nonEmpty) {
+      println(config.sourceFiles)
+      config
+        .sourceFiles
+        .flatMap { relativePath =>
+          val path = AbsolutePath.of(Paths.get(relativePath), dir)
+
+          if (Files.isRegularFile(path) && allPatterns.matches(path))
+            List(path)
+          else if (Files.isDirectory(path))
+            collectAllSourceFiles(path)
+          else
+            Nil
+        }
+    } else
+      collectAllSourceFiles(dir)
   }
 
   // HACK(olafurpg): I haven't figured out a reliable way to get annotation processor jars on the processorpath.
