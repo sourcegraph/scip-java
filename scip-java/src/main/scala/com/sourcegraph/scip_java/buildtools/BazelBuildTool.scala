@@ -71,7 +71,8 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
         "--output_groups=scip",
         s"--define=sourceroot=${index.workingDirectory}",
         s"--define=java_home=$javaHome",
-        s"--define=scip_java_binary=$scipJavaBinary"
+        s"--define=scip_java_binary=$scipJavaBinary",
+        "--verbose_failures"
       ) ++ targetSpecs
 
     val buildExitCode = runBazelBuild(buildCommand)
