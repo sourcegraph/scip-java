@@ -105,7 +105,7 @@ def _scip_java(target, ctx):
     if hasattr(compilation, "javac_options_list"):
         javac_options = compilation.javac_options_list
     else:
-        javac_options = compilation.javac_options.to_list()
+        javac_options = compilation.javac_options
 
     for value in javac_options:
         # NOTE(Anton): for some bizarre reason I see empty string starting the list of 
