@@ -163,6 +163,13 @@ public class SemanticdbBuilders {
     return Semanticdb.AssignTree.newBuilder().setLhs(lhs).setRhs(rhs).build();
   }
 
+  public static Semanticdb.CastTree castTree(
+      Semanticdb.Type type, Semanticdb.Tree value) {
+    return Semanticdb.CastTree.newBuilder().setTpe(type).setValue(value).build();
+  }
+  // SemanticDB Constants
+
+
   public static Semanticdb.AnnotationTree annotationTree(
       Semanticdb.Type type, Iterable<Semanticdb.Tree> parameters) {
     return Semanticdb.AnnotationTree.newBuilder().setTpe(type).addAllParameters(parameters).build();
