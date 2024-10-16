@@ -24,6 +24,8 @@ jobs:
           cache: "sbt"
           java-version: ${{ matrix.java }}
 
+      - uses: sbt/setup-sbt@v1
+
       - name: Main project tests
         run: sbt test 
 
@@ -42,6 +44,8 @@ jobs:
           distribution: "temurin"
           cache: "sbt"
           java-version: 17
+
+      - uses: sbt/setup-sbt@v1
 
       - name: Build Dockerised CLI
         run: sbt cli/docker
@@ -107,6 +111,8 @@ jobs:
           java-version: 11
           cache: "sbt"
 
+      - uses: sbt/setup-sbt@v1
+
       - run: sbt --client checkAll
 
       - name: Run sample benchmarks
@@ -129,6 +135,7 @@ jobs:
           cache: "sbt"
           java-version: ${{ matrix.java }}
 
+      - uses: sbt/setup-sbt@v1
 
       - run: |
           sbt build publishM2 publishLocal dumpScipJavaVersion
