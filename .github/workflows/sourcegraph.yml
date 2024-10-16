@@ -21,6 +21,8 @@ jobs:
           java-version: 8
           cache: "sbt"
 
+      - uses: sbt/setup-sbt@v1
+
       - name: Publish CLI locally
         run: sbt publishLocal dumpScipJavaVersion
 
