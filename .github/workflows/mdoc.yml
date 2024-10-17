@@ -15,6 +15,7 @@ jobs:
           distribution: 'temurin'
           java-version: 11
           cache: 'sbt'
+      - uses: sbt/setup-sbt@v1
       - run: sbt docs/docusaurusPublishGhpages
         env:
           GIT_DEPLOY_KEY: ${{ secrets.GIT_DEPLOY_KEY }}
