@@ -27,5 +27,5 @@ interface Foo {
 	Foo test4();
 
 	@Bar((double) -1)
-	double test();
+	double testCast();
 }

@@ -150,6 +150,11 @@ public class SemanticdbBuilders {
     return Semanticdb.Tree.newBuilder().setUnaryopTree(unaryOperatorTree).build();
   }
 
+  public static Semanticdb.Tree tree(Semanticdb.CastTree castTree) {
+    return Semanticdb.Tree.newBuilder().setCastTree(castTree).build();
+  }
+
+
   public static Semanticdb.UnaryOperatorTree unaryOpTree(
       Semanticdb.UnaryOperator operator, Semanticdb.Tree rhs) {
     return Semanticdb.UnaryOperatorTree.newBuilder().setOp(operator).setTree(rhs).build();

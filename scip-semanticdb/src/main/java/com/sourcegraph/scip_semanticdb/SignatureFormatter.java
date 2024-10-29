@@ -470,6 +470,8 @@ public class SignatureFormatter {
           + formatTree(tree.getAssignTree().getRhs());
     } else if (tree.hasUnaryopTree()) {
       return formatUnaryOperation(tree.getUnaryopTree());
+    } else if (tree.hasCastTree()) {
+      return "FIX ME";
     }
 
     throw new IllegalArgumentException("tree was of unexpected type " + tree);

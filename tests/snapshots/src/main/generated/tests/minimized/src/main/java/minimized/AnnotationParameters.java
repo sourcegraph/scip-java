@@ -80,4 +80,12 @@ interface Foo {
 //         display_name test4
 //         signature_documentation java @Nullable("what")\npublic abstract Foo test4()
 //         kind AbstractMethod
+
+→@Bar((double) -1)
+//^^^ reference semanticdb maven . . minimized/Bar#
+→double testCast();
+//      ^^^^^^^^ definition semanticdb maven . . minimized/Foo#testCast().
+//               display_name testCast
+//               signature_documentation java @Bar(FIX ME)\npublic abstract double testCast()
+//               kind AbstractMethod
 }

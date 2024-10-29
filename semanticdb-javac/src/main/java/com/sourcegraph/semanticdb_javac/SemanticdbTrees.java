@@ -96,10 +96,11 @@ public class SemanticdbTrees {
 
   private TypeMirror getTreeType(Tree tree) {
     TreePath path = nodes.get(tree);
-    System.out.println("Path: " + path);
-    Element sym = trees.getElement(path);
-    System.out.println("SYM: " + sym);
-    return sym.asType();
+    System.out.println("Path: " + path.getLeaf());
+    // System.out.println("TM:" + trees.getTypeMirror(path));
+    // Element sym = trees.getElement(path);
+    // System.out.println("SYM: " + sym);
+    return trees.getTypeMirror(path);
   } 
 
   private Semanticdb.Tree annotationParameter(ExpressionTree expr) {
@@ -164,14 +165,16 @@ public class SemanticdbTrees {
     } else if (expr instanceof TypeCastTree) {
       TypeCastTree tree = (TypeCastTree) expr;
       System.out.println(typeVisitor.semanticdbType(getTreeType(tree.getType())));
+      return tree(castTree(typeVisitor.semanticdbType(getTreeType(tree.getType())), annotationParameter(tree.getExpression())));
 //      tree.getType()
-    }
+    } else {
     throw new IllegalArgumentException(
         semanticdbUri
             + ": annotation parameter rhs was of unexpected tree node type "
             + expr.getClass()
             + "\n"
             + expr);
+    }
   }
 
   private Semanticdb.BinaryOperator semanticdbBinaryOperator(Tree.Kind kind) {
