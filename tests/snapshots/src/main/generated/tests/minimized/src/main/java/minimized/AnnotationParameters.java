@@ -86,6 +86,6 @@ interface Foo {
 →double testCast();
 //      ^^^^^^^^ definition semanticdb maven . . minimized/Foo#testCast().
 //               display_name testCast
-//               signature_documentation java @Bar(FIX ME)\npublic abstract double testCast()
+//               signature_documentation java @Bar((double) -1)\npublic abstract double testCast()
 //               kind AbstractMethod
 }
