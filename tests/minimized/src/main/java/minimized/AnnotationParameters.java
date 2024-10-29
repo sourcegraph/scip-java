@@ -12,6 +12,11 @@ package minimized;
 	String value() default "";
 }
 
+
+@interface BarRef{
+	SuppressWarnings value();
+}
+
 interface Foo {
 	@Bar(-1d)
 	double test();
@@ -28,4 +33,9 @@ interface Foo {
 
 	@Bar((double) -1)
 	double testCast();
+}
+
+interface TestRef {
+	@BarRef(@SuppressWarnings(value = "unchecked"))
+	abstract double testCase();
 }

@@ -40,6 +40,21 @@ package minimized;
 //            kind AbstractMethod
 }
 
+
+@interface BarRef{
+//         ^^^^^^ definition semanticdb maven . . minimized/BarRef#
+//                display_name BarRef
+//                signature_documentation java @interface BarRef
+//                kind Interface
+//                relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+→SuppressWarnings value();
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
+//                ^^^^^ definition semanticdb maven . . minimized/BarRef#value().
+//                      display_name value
+//                      signature_documentation java public abstract SuppressWarnings value()
+//                      kind AbstractMethod
+}
+
 interface Foo {
 //        ^^^ definition semanticdb maven . . minimized/Foo#
 //            display_name Foo
@@ -88,4 +103,20 @@ interface Foo {
 //               display_name testCast
 //               signature_documentation java @Bar((double) -1)\npublic abstract double testCast()
 //               kind AbstractMethod
+}
+
+interface TestRef {
+//        ^^^^^^^ definition semanticdb maven . . minimized/TestRef#
+//                display_name TestRef
+//                signature_documentation java interface TestRef
+//                kind Interface
+→@BarRef(@SuppressWarnings(value = "unchecked"))
+//^^^^^^ reference semanticdb maven . . minimized/BarRef#
+//        ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
+//                         ^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#value().
+→abstract double testCase();
+//               ^^^^^^^^ definition semanticdb maven . . minimized/TestRef#testCase().
+//                        display_name testCase
+//                        signature_documentation java @BarRef(@SuppressWarnings("unchecked"))\npublic abstract double testCase()
+//                        kind AbstractMethod
 }
