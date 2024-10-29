@@ -15,6 +15,7 @@ import com.sun.source.tree.LineMap;
 import com.sun.source.tree.ExpressionTree;
 import com.sun.source.tree.NewClassTree;
 import com.sun.source.tree.MemberSelectTree;
+import com.sun.source.tree.TypeCastTree;
 import com.sun.source.tree.TypeParameterTree;
 import com.sun.source.tree.ParameterizedTypeTree;
 

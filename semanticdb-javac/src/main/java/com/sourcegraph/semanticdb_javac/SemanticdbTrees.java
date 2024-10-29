@@ -1,26 +1,13 @@
 package com.sourcegraph.semanticdb_javac;
 
-import com.sun.source.tree.Tree;
+import com.sun.source.tree.*;
 import com.sun.source.util.Trees;
 import javax.lang.model.element.Element;
 import javax.lang.model.util.Types;
+import javax.lang.model.type.TypeMirror;
 import com.sun.source.util.TreePath;
 import com.sun.source.tree.Tree;
 import com.sun.source.tree.Tree.Kind;
-import com.sun.source.tree.BinaryTree;
-import com.sun.source.tree.UnaryTree;
-import com.sun.source.tree.AssignmentTree;
-import com.sun.source.tree.MemberSelectTree;
-import com.sun.source.tree.ClassTree;
-import com.sun.source.tree.VariableTree;
-import com.sun.source.tree.MethodTree;
-import com.sun.source.tree.ModifiersTree;
-import com.sun.source.tree.IdentifierTree;
-import com.sun.source.tree.ExpressionTree;
-import com.sun.source.tree.LiteralTree;
-import com.sun.source.tree.NewArrayTree;
-import com.sun.source.tree.AnnotationTree;
-import com.sun.source.tree.ParenthesizedTree;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -44,6 +31,7 @@ public class SemanticdbTrees {
     this.types = types;
     this.trees = trees;
     this.nodes = nodes;
+    this.typeVisitor = new SemanticdbTypeVisitor(globals, locals, types);
   }
 
   private final GlobalSymbolsCache globals;
@@ -52,6 +40,7 @@ public class SemanticdbTrees {
   private final Types types;
   private final Trees trees;
   private final HashMap<Tree, TreePath> nodes;
+  private final SemanticdbTypeVisitor typeVisitor;
 
   public List<Semanticdb.AnnotationTree> annotations(Tree node) {
     if (!(node instanceof ClassTree)
@@ -100,9 +89,13 @@ public class SemanticdbTrees {
     TreePath annotationTreePath = nodes.get(annotation);
     Element annotationSym = trees.getElement(annotationTreePath);
 
-    Semanticdb.Type type =
-        new SemanticdbTypeVisitor(globals, locals, types).semanticdbType(annotationSym.asType());
+    Semanticdb.Type type = typeVisitor.semanticdbType(annotationSym.asType());
     return annotationTree(type, params);
+  }
+
+  private TypeMirror getTreeType(Tree tree) {
+    TreePath path = nodes.get(tree);
+    return trees.getTypeMirror(path);
   }
 
   private Semanticdb.Tree annotationParameter(ExpressionTree expr) {
@@ -125,7 +118,12 @@ public class SemanticdbTrees {
       // Literals can either be a primitive or String
       Object value = ((LiteralTree) expr).getValue();
       final Semanticdb.Constant constant;
-      if (value instanceof String) constant = stringConst((String) value);
+      // Technically, annotation parameter values cannot be null,
+      // according to JLS: https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls-9.7.1
+      // But this codepath is still possible to hit when compiling invalid code - and
+      // we should handle the null const case in order to fail more gracefully
+      if (value == null) constant = nullConst();
+      else if (value instanceof String) constant = stringConst((String) value);
       else if (value instanceof Boolean) constant = booleanConst((Boolean) value);
       else if (value instanceof Byte) constant = byteConst((Byte) value);
       else if (value instanceof Short) constant = shortConst((Short) value);
@@ -164,13 +162,20 @@ public class SemanticdbTrees {
     } else if (expr instanceof ParenthesizedTree) {
       ParenthesizedTree parenExpr = (ParenthesizedTree) expr;
       return annotationParameter(parenExpr.getExpression());
+    } else if (expr instanceof TypeCastTree) {
+      TypeCastTree tree = (TypeCastTree) expr;
+      return tree(
+          castTree(
+              typeVisitor.semanticdbType(getTreeType(tree.getType())),
+              annotationParameter(tree.getExpression())));
+    } else {
+      throw new IllegalArgumentException(
+          semanticdbUri
+              + ": annotation parameter rhs was of unexpected tree node type "
+              + expr.getClass()
+              + "\n"
+              + expr);
     }
-    throw new IllegalArgumentException(
-        semanticdbUri
-            + ": annotation parameter rhs was of unexpected tree node type "
-            + expr.getClass()
-            + "\n"
-            + expr);
   }
 
   private Semanticdb.BinaryOperator semanticdbBinaryOperator(Tree.Kind kind) {

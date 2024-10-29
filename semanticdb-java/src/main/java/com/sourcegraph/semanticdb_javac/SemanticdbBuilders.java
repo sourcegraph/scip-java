@@ -150,6 +150,10 @@ public class SemanticdbBuilders {
     return Semanticdb.Tree.newBuilder().setUnaryopTree(unaryOperatorTree).build();
   }
 
+  public static Semanticdb.Tree tree(Semanticdb.CastTree castTree) {
+    return Semanticdb.Tree.newBuilder().setCastTree(castTree).build();
+  }
+
   public static Semanticdb.UnaryOperatorTree unaryOpTree(
       Semanticdb.UnaryOperator operator, Semanticdb.Tree rhs) {
     return Semanticdb.UnaryOperatorTree.newBuilder().setOp(operator).setTree(rhs).build();
@@ -163,10 +167,15 @@ public class SemanticdbBuilders {
     return Semanticdb.AssignTree.newBuilder().setLhs(lhs).setRhs(rhs).build();
   }
 
+  public static Semanticdb.CastTree castTree(Semanticdb.Type type, Semanticdb.Tree value) {
+    return Semanticdb.CastTree.newBuilder().setTpe(type).setValue(value).build();
+  }
+
   public static Semanticdb.AnnotationTree annotationTree(
       Semanticdb.Type type, Iterable<Semanticdb.Tree> parameters) {
     return Semanticdb.AnnotationTree.newBuilder().setTpe(type).addAllParameters(parameters).build();
   }
+
   // SemanticDB Constants
 
   public static Semanticdb.Constant stringConst(String value) {
@@ -178,6 +187,12 @@ public class SemanticdbBuilders {
   public static Semanticdb.Constant doubleConst(Double value) {
     return Semanticdb.Constant.newBuilder()
         .setDoubleConstant(Semanticdb.DoubleConstant.newBuilder().setValue(value))
+        .build();
+  }
+
+  public static Semanticdb.Constant nullConst() {
+    return Semanticdb.Constant.newBuilder()
+        .setNullConstant(Semanticdb.NullConstant.newBuilder())
         .build();
   }
 
