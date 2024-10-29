@@ -96,10 +96,6 @@ public class SemanticdbTrees {
 
   private TypeMirror getTreeType(Tree tree) {
     TreePath path = nodes.get(tree);
-    System.out.println("Path: " + path.getLeaf());
-    // System.out.println("TM:" + trees.getTypeMirror(path));
-    // Element sym = trees.getElement(path);
-    // System.out.println("SYM: " + sym);
     return trees.getTypeMirror(path);
   } 
 
@@ -164,9 +160,7 @@ public class SemanticdbTrees {
       return annotationParameter(parenExpr.getExpression());
     } else if (expr instanceof TypeCastTree) {
       TypeCastTree tree = (TypeCastTree) expr;
-      System.out.println(typeVisitor.semanticdbType(getTreeType(tree.getType())));
       return tree(castTree(typeVisitor.semanticdbType(getTreeType(tree.getType())), annotationParameter(tree.getExpression())));
-//      tree.getType()
     } else {
     throw new IllegalArgumentException(
         semanticdbUri
