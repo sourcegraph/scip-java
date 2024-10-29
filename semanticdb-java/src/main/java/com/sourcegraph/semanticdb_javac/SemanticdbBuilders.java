@@ -190,6 +190,12 @@ public class SemanticdbBuilders {
         .build();
   }
 
+  public static Semanticdb.Constant nullConst() {
+    return Semanticdb.Constant.newBuilder()
+        .setNullConstant(Semanticdb.NullConstant.newBuilder())
+        .build();
+  }
+
   public static Semanticdb.Constant floatConst(Float value) {
     return Semanticdb.Constant.newBuilder()
         .setFloatConstant(Semanticdb.FloatConstant.newBuilder().setValue(value))

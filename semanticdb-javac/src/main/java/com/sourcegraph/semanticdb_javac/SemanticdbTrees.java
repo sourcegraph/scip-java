@@ -118,7 +118,12 @@ public class SemanticdbTrees {
       // Literals can either be a primitive or String
       Object value = ((LiteralTree) expr).getValue();
       final Semanticdb.Constant constant;
-      if (value instanceof String) constant = stringConst((String) value);
+      // Technically, annotation parameter values cannot be null,
+      // according to JLS: https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls-9.7.1
+      // But this codepath is still possible to hit when compiling invalid code - and
+      // we should handle the null const case in order to fail more gracefully
+      if (value == null) constant = nullConst();
+      else if (value instanceof String) constant = stringConst((String) value);
       else if (value instanceof Boolean) constant = booleanConst((Boolean) value);
       else if (value instanceof Byte) constant = byteConst((Byte) value);
       else if (value instanceof Short) constant = shortConst((Short) value);
