@@ -224,7 +224,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
           resolveMemberSelectTree((MemberSelectTree) node, entry.getValue());
         } else if (node instanceof NewClassTree) {
           resolveNewClassTree((NewClassTree) node, entry.getValue());
-        } 
+        }
       }
     }
   }
@@ -337,7 +337,6 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
           sym, node, sym.getSimpleName(), Role.REFERENCE, CompilerRange.FROM_END_TO_SYMBOL_NAME);
     }
   }
-
 
   private void resolveNewClassTree(NewClassTree node, TreePath treePath) {
     // ignore anonymous classes - otherwise there will be a local reference to itself

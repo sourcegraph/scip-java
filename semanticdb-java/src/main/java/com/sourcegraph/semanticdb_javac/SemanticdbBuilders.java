@@ -154,7 +154,6 @@ public class SemanticdbBuilders {
     return Semanticdb.Tree.newBuilder().setCastTree(castTree).build();
   }
 
-
   public static Semanticdb.UnaryOperatorTree unaryOpTree(
       Semanticdb.UnaryOperator operator, Semanticdb.Tree rhs) {
     return Semanticdb.UnaryOperatorTree.newBuilder().setOp(operator).setTree(rhs).build();
@@ -168,12 +167,10 @@ public class SemanticdbBuilders {
     return Semanticdb.AssignTree.newBuilder().setLhs(lhs).setRhs(rhs).build();
   }
 
-  public static Semanticdb.CastTree castTree(
-      Semanticdb.Type type, Semanticdb.Tree value) {
+  public static Semanticdb.CastTree castTree(Semanticdb.Type type, Semanticdb.Tree value) {
     return Semanticdb.CastTree.newBuilder().setTpe(type).setValue(value).build();
   }
   // SemanticDB Constants
-
 
   public static Semanticdb.AnnotationTree annotationTree(
       Semanticdb.Type type, Iterable<Semanticdb.Tree> parameters) {

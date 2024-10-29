@@ -89,15 +89,14 @@ public class SemanticdbTrees {
     TreePath annotationTreePath = nodes.get(annotation);
     Element annotationSym = trees.getElement(annotationTreePath);
 
-    Semanticdb.Type type =
-        typeVisitor.semanticdbType(annotationSym.asType());
+    Semanticdb.Type type = typeVisitor.semanticdbType(annotationSym.asType());
     return annotationTree(type, params);
   }
 
   private TypeMirror getTreeType(Tree tree) {
     TreePath path = nodes.get(tree);
     return trees.getTypeMirror(path);
-  } 
+  }
 
   private Semanticdb.Tree annotationParameter(ExpressionTree expr) {
     if (expr instanceof MemberSelectTree) {
@@ -160,14 +159,17 @@ public class SemanticdbTrees {
       return annotationParameter(parenExpr.getExpression());
     } else if (expr instanceof TypeCastTree) {
       TypeCastTree tree = (TypeCastTree) expr;
-      return tree(castTree(typeVisitor.semanticdbType(getTreeType(tree.getType())), annotationParameter(tree.getExpression())));
+      return tree(
+          castTree(
+              typeVisitor.semanticdbType(getTreeType(tree.getType())),
+              annotationParameter(tree.getExpression())));
     } else {
-    throw new IllegalArgumentException(
-        semanticdbUri
-            + ": annotation parameter rhs was of unexpected tree node type "
-            + expr.getClass()
-            + "\n"
-            + expr);
+      throw new IllegalArgumentException(
+          semanticdbUri
+              + ": annotation parameter rhs was of unexpected tree node type "
+              + expr.getClass()
+              + "\n"
+              + expr);
     }
   }
 
