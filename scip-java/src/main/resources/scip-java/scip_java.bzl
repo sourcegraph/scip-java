@@ -78,7 +78,7 @@ def _scip_java(target, ctx):
             outputs = [dir],
             mnemonic = "ExtractSourceJars",
             command = """
-                unzip {input_file} -d {output_dir}
+                [ "$(unzip -q -l {input_file} | wc -l)" -eq 0 ] || unzip {input_file} -d {output_dir}
             """.format(
                 output_dir = dir.path,
                 input_file = source_jar.path,
