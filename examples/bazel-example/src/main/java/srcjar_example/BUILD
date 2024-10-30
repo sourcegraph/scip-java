@@ -11,3 +11,12 @@ java_library(
         ":generated-srcjar",
     ],
 )
+
+java_library(
+    name = "other_library",
+    srcs = [
+        "Baz.java", # create a new file in source at test/Baz.java, alongside test/Foo.java
+        ":generated-srcjar",
+    ],
+)
+

@@ -70,7 +70,7 @@ def _scip_java(target, ctx):
     output_dir = []
 
     for source_jar in source_jars:
-        dir = ctx.actions.declare_directory("extracted_srcjar/" + source_jar.short_path)
+        dir = ctx.actions.declare_directory(ctx.label.name + "/extracted_srcjar/" + source_jar.short_path)
         output_dir.append(dir)
     
         ctx.actions.run_shell(
