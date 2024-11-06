@@ -70,7 +70,7 @@ def _scip_java(target, ctx):
     output_dir = []
 
     for source_jar in source_jars:
-        dir = ctx.actions.declare_directory("extracted_srcjar/" + source_jar.short_path)
+        dir = ctx.actions.declare_directory(ctx.label.name + "/extracted_srcjar/" + source_jar.short_path)
         output_dir.append(dir)
     
         ctx.actions.run_shell(
@@ -78,7 +78,7 @@ def _scip_java(target, ctx):
             outputs = [dir],
             mnemonic = "ExtractSourceJars",
             command = """
-                unzip {input_file} -d {output_dir}
+                [ "$(unzip -q -l {input_file} | wc -l)" -eq 0 ] || unzip {input_file} -d {output_dir}
             """.format(
                 output_dir = dir.path,
                 input_file = source_jar.path,
