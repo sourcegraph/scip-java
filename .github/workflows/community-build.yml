@@ -49,7 +49,7 @@ jobs:
       matrix:
         include:
           - repo: spring-projects/spring-data-relational
-            jdk: 11
+            jdk: 17
             cache: maven
     steps:
       - name: Download binaries
