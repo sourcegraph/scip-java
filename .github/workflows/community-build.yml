@@ -61,13 +61,24 @@ jobs:
       - name: List downloaded binaries
         run: ls -R binaries
 
+      - name: Unpack scip-java build
+        run: |
+          unzip binaries/scip-java-binary/scip-java.zip
+          ls -R scip-java
+
       - uses: actions/checkout@v3
         with:
           repository: ${{ matrix.repo }}
+          path: sources
 
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.jdk }}
           cache: ${{ matrix.cache }}
+
+      - run: ../scip-java/bin/scip-java index
+        working-directory: sources
+
+
 
