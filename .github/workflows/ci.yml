@@ -48,7 +48,7 @@ jobs:
       - uses: sbt/setup-sbt@v1
 
       - name: Build Dockerised CLI
-        run: sbt cli/docker dumpScipJavaVersion
+        run: sbt cli/docker 
 
       - uses: actions/checkout@v3
         with:
@@ -56,7 +56,7 @@ jobs:
           repository: spring-projects/spring-boot
           
       - run: | 
-          docker run -v $PWD/sources:/sources -w /sources sourcegraph/scip-java:$(cat VERSION) scip-java index
+          docker run -v $PWD/sources:/sources -w /sources sourcegraph/scip-java:latest-snapshot scip-java index
 
   bazel:
     runs-on: ubuntu-latest
