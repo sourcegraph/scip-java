@@ -68,7 +68,7 @@ jobs:
           - repo: spring-projects/spring-boot
             jdk: 17
             group: full
-    if: inputs.runGroup == matrix.group
+    if: ${{ inputs.runGroup == matrix.group }}
     steps:
       - name: Download binaries
         uses: actions/download-artifact@v4
