@@ -7,10 +7,19 @@ on:
   workflow_dispatch:
     inputs:
       scipJavaVersion:
-        description: 'Version of bindgen to run (if empty, main branch will be republished)'
+        description: 'Version of scip-java to run (if empty, main branch will be republished)'
         required: false
         default: ''
         type: string
+      runGroup:
+        description: 'Which set of repos to run (quick runs a small number of small repos, full runs all)'
+        required: false
+        default: quick
+        type: choice
+        options:
+          - quick
+          - full
+
 
 jobs:
   build_from_source:
@@ -50,12 +59,16 @@ jobs:
         include:
           - repo: spring-projects/spring-data-relational
             jdk: 17
+            group: quick
 
           - repo: spring-projects/spring-framework
             jdk: 17
+            group: full
 
           - repo: spring-projects/spring-boot
             jdk: 17
+            group: full
+    if: inputs.runGroup == matrix.group
     steps:
       - name: Download binaries
         uses: actions/download-artifact@v4
