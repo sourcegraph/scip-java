@@ -1,0 +1,101 @@
+name: Community build
+on:
+  push:
+    branches: [main]
+    tags: ["*"]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      scipJavaVersion:
+        description: 'Version of scip-java to run (if empty, main branch will be republished)'
+        required: false
+        default: ''
+        type: string
+      runGroup:
+        description: 'Which set of repos to run (quick runs a small number of small repos, full runs all)'
+        required: false
+        default: quick
+        type: choice
+        options:
+          - quick
+          - full
+
+
+jobs:
+  build_from_source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 11
+          cache: 'sbt'
+
+      - uses: sbt/setup-sbt@v1
+
+      - run: sbt cli/pack
+
+      - run: |
+          cd scip-java/target/pack && zip -r ../../../scip-java.zip .
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          path: scip-java.zip
+          name: scip-java-binary
+          if-no-files-found: error
+
+
+  community_build:
+    runs-on: ubuntu-latest
+    needs: [build_from_source]
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - repo: spring-projects/spring-data-relational
+            jdk: 17
+            group: quick
+
+          - repo: spring-projects/spring-framework
+            jdk: 17
+            group: full
+
+          - repo: spring-projects/spring-boot
+            jdk: 17
+            group: full
+    steps:
+      - name: Download binaries
+        uses: actions/download-artifact@v4
+        id: scip-java-binary
+        if: ${{ inputs.runGroup == matrix.group }}
+        with:
+          path: binaries
+
+      - name: Unpack scip-java build
+        if: ${{ inputs.runGroup == matrix.group }}
+        run: |
+          unzip binaries/scip-java-binary/scip-java.zip -d scip-java
+
+      - uses: actions/checkout@v3
+        if: ${{ inputs.runGroup == matrix.group }}
+        with:
+          repository: ${{ matrix.repo }}
+          path: sources
+
+      - uses: actions/setup-java@v3
+        if: ${{ inputs.runGroup == matrix.group }}
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.jdk }}
+
+      - run: ../scip-java/bin/scip-java index
+        if: ${{ inputs.runGroup == matrix.group }}
+        working-directory: sources
+
+
+
