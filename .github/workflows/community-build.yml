@@ -64,7 +64,7 @@ jobs:
       - name: Unpack scip-java build
         run: |
           unzip binaries/scip-java-binary/scip-java.zip
-          ls -R scip-java
+        working-directory: scip-java
 
       - uses: actions/checkout@v3
         with:
