@@ -68,32 +68,33 @@ jobs:
           - repo: spring-projects/spring-boot
             jdk: 17
             group: full
-    if: ${{ inputs.runGroup == matrix.group }}
     steps:
       - name: Download binaries
         uses: actions/download-artifact@v4
         id: scip-java-binary
+        if: ${{ inputs.runGroup == matrix.group }}
         with:
           path: binaries
 
-      - name: List downloaded binaries
-        run: ls -R binaries
-
       - name: Unpack scip-java build
+        if: ${{ inputs.runGroup == matrix.group }}
         run: |
           unzip binaries/scip-java-binary/scip-java.zip -d scip-java
 
       - uses: actions/checkout@v3
+        if: ${{ inputs.runGroup == matrix.group }}
         with:
           repository: ${{ matrix.repo }}
           path: sources
 
       - uses: actions/setup-java@v3
+        if: ${{ inputs.runGroup == matrix.group }}
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.jdk }}
 
       - run: ../scip-java/bin/scip-java index
+        if: ${{ inputs.runGroup == matrix.group }}
         working-directory: sources
 
 
