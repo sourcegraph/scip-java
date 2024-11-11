@@ -50,15 +50,12 @@ jobs:
         include:
           - repo: spring-projects/spring-data-relational
             jdk: 17
-            cache: maven
 
           - repo: spring-projects/spring-framework
             jdk: 17
-            cache: maven
 
           - repo: spring-projects/spring-boot
             jdk: 17
-            cache: maven
     steps:
       - name: Download binaries
         uses: actions/download-artifact@v4
@@ -82,7 +79,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.jdk }}
-          cache: ${{ matrix.cache }}
 
       - run: ../scip-java/bin/scip-java index
         working-directory: sources
