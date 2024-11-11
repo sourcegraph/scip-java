@@ -22,7 +22,7 @@ jobs:
       - run: sbt cli/pack
 
       - run: |
-          zip -r scip-java.zip ./scip-java/target/pack 
+          cd scip-java/target/pack && zip -r scip-java.zip .
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
