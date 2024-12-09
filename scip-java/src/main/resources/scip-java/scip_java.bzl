@@ -9,7 +9,7 @@ different contents.
 This aspect is needed for scip-java to inspect the structure of the Bazel build
 and register actions to index all java_library/java_test/java_binary targets.
 The result of running this aspect is that your bazel-bin/ directory will contain
-many *.scip (https://github.com/sourcegraph/scip) and 
+many *.scip (https://github.com/sourcegraph/scip) and
 *.semanticdb (https://scalameta.org/docs/semanticdb/specification.html) files.
 These files encode information about which symbols are referenced from which
 locations in your source code.
@@ -66,13 +66,13 @@ def _scip_java(target, ctx):
 
     if len(source_files) == 0:
         return None
-    
+
     output_dir = []
 
     for source_jar in source_jars:
-        dir = ctx.actions.declare_directory(ctx.label.name + "/extracted_srcjar/" + source_jar.short_path)
+        dir = ctx.actions.declare_directory(ctx.label.name + ".extracted_srcjar/" + source_jar.short_path)
         output_dir.append(dir)
-    
+
         ctx.actions.run_shell(
             inputs = javac_action.inputs,
             outputs = [dir],
@@ -99,7 +99,7 @@ def _scip_java(target, ctx):
 
     launcher_javac_flags = []
     compiler_javac_flags = []
-    
+
     # In different versions of bazel javac options are either a nested set or a depset or a list...
     javac_options = []
     if hasattr(compilation, "javac_options_list"):
@@ -108,7 +108,7 @@ def _scip_java(target, ctx):
         javac_options = compilation.javac_options
 
     for value in javac_options:
-        # NOTE(Anton): for some bizarre reason I see empty string starting the list of 
+        # NOTE(Anton): for some bizarre reason I see empty string starting the list of
         # javac options - which then gets propagated into the JSON config, and ends up
         # crashing the actual javac invokation.
         if value != "":

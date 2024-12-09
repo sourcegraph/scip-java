@@ -26,3 +26,12 @@ java_library(
         ":generated-srcjar",
     ],
 )
+
+java_test(
+    name = "testing_test",
+    srcs = [
+        "Foo.java",
+        ":generated-srcjar",
+    ],
+    test_class = "Foo",
+)
