@@ -49,8 +49,8 @@ rules_jvm_external_setup()
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 maven_install(
     artifacts = [
-        "com.google.protobuf:protobuf-java:3.15.6",
-        "com.google.protobuf:protobuf-java-util:3.15.6",
+        "com.google.protobuf:protobuf-java:4.29.3",
+        "com.google.protobuf:protobuf-java-util:4.29.3",
         "org.projectlombok:lombok:1.18.22",
     ],
     repositories = [
