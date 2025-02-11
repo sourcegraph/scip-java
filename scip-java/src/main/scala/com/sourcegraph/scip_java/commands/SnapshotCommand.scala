@@ -92,5 +92,5 @@ case class SnapshotCommand(
 }
 
 object SnapshotCommand {
-  implicit val parser = CommandParser.derive(SnapshotCommand())
+  implicit val parser: moped.cli.CommandParser[SnapshotCommand] = CommandParser.derive(SnapshotCommand())
 }

@@ -17,11 +17,11 @@ lazy val V =
     val bsp = "2.0.0-M13"
     val moped = "0.2.0"
     val gradle = "7.0"
-    val scala213 = "2.13.13"
-    val scala212 = "2.12.19"
+    val scala213 = "2.13.15"
+    val scala212 = "2.12.20"
     val scala211 = "2.11.12"
     val scala3 = "3.3.3"
-    val metals = "1.2.2"
+    val metals = "1.4.2"
     val scalameta = "4.9.3"
     val semanticdbKotlinc = "0.4.0"
     val testcontainers = "0.39.3"
@@ -565,7 +565,7 @@ val testSettings = List(
   },
   libraryDependencies ++=
     List(
-      "org.scalameta" %% "munit" % "0.7.29",
+      "org.scalameta" %% "munit" % "1.0.2",
       "org.scalameta" %% "mtags" % V.metals cross CrossVersion.full,
       "com.dimafeng" %% "testcontainers-scala-munit" % V.testcontainers,
       "com.dimafeng" %% "testcontainers-scala-postgresql" % V.testcontainers,

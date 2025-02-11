@@ -798,7 +798,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
           None
       }
     val automatic = moped.macros.deriveCodec(Dependency())
-    implicit lazy val codec =
+    implicit lazy val codec: moped.json.JsonCodec[ScipBuildTool.this.Dependency] =
       new JsonCodec[Dependency] {
         def decode(context: DecodingContext): Result[Dependency] =
           context.json match {
@@ -837,7 +837,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       kind: String = ""
   )
   private object Config {
-    implicit lazy val codec = moped.macros.deriveCodec(Config())
+    implicit lazy val codec: moped.json.JsonCodec[ScipBuildTool.this.Config] = moped.macros.deriveCodec(Config())
   }
 
 }

@@ -139,5 +139,5 @@ final case class IndexDependencyCommand(
 }
 
 object IndexDependencyCommand {
-  implicit val parser = CommandParser.derive(IndexDependencyCommand())
+  implicit val parser: moped.cli.CommandParser[IndexDependencyCommand] = CommandParser.derive(IndexDependencyCommand())
 }

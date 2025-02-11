@@ -26,5 +26,5 @@ case class SnapshotLsifCommand(
 
 object SnapshotLsifCommand {
   val default = SnapshotLsifCommand()
-  implicit val parser = CommandParser.derive(default)
+  implicit val parser: moped.cli.CommandParser[SnapshotLsifCommand] = CommandParser.derive(default)
 }

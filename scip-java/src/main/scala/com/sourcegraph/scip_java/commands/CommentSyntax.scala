@@ -14,5 +14,5 @@ case class CommentSyntax(value: String) {
 }
 object CommentSyntax {
   val default = CommentSyntax("py,# sql,-- yaml,# yml,#")
-  implicit val codec = moped.macros.deriveCodec(default)
+  implicit val codec: moped.json.JsonCodec[com.sourcegraph.scip_java.commands.CommentSyntax] = moped.macros.deriveCodec(default)
 }
