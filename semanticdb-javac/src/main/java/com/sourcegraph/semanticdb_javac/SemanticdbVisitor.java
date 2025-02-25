@@ -362,7 +362,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
           // More complex case, where the type is annotated: `new @TypeParameters String()`
           else if (node.getIdentifier().getKind() == com.sun.source.tree.Tree.Kind.ANNOTATED_TYPE) {
             AnnotatedTypeTree annotatedTypeTree = (AnnotatedTypeTree) node.getIdentifier();
-            if (annotatedTypeTree.getUnderlyingType().getKind() == com.sun.source.tree.Tree.Kind.IDENTIFIER) {
+            if (annotatedTypeTree.getUnderlyingType().getKind()
+                == com.sun.source.tree.Tree.Kind.IDENTIFIER) {
               IdentifierTree ident = (IdentifierTree) annotatedTypeTree.getUnderlyingType();
               emitSymbolOccurrence(
                   sym, ident, ident.getName(), Role.REFERENCE, CompilerRange.FROM_TEXT_SEARCH);
