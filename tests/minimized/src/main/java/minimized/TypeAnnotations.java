@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
     int integer() default 1;
 }
 
+// FIXME(issue: GRAPH-1122): Definition range for T below is incorrect
 class ClassProcessed<@TypeAnnotation T extends Number> {
 
     public ClassProcessed() {
