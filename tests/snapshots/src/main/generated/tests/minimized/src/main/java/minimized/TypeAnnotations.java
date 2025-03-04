@@ -28,6 +28,7 @@ import java.lang.annotation.Target;
 //              kind AbstractMethod
 }
 
+// FIXME(issue: GRAPH-1122): Definition range for T below is incorrect
 class ClassProcessed<@TypeAnnotation T extends Number> {
 //    ^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/ClassProcessed#
 //                   display_name ClassProcessed
