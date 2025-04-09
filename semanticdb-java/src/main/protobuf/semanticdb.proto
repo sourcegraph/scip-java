@@ -7,6 +7,8 @@ syntax = "proto3";
 
 package com.sourcegraph.semanticdb_javac;
 
+option java_multiple_files = true;
+
 enum Schema {
   LEGACY = 0;
   SEMANTICDB3 = 3;

@@ -9,7 +9,7 @@ import scala.util.control.NoStackTrace
 
 lazy val V =
   new {
-    val protobuf = "3.15.6"
+    val protobuf = "3.25.6"
     val protoc =
       "3.17.3" // the oldest protoc version with Apple M1 support, see https://github.com/scalapb/ScalaPB/issues/1024#issuecomment-860126568
     val coursier = "2.1.9"
@@ -107,6 +107,31 @@ lazy val agent = project
         "Premain-Class" -> "com.sourcegraph.semanticdb_javac.SemanticdbAgent"
       )
   )
+
+import kotlin.Keys._
+lazy val kotlincPlugin = project
+  .in(file("semanticdb-kotlinc"))
+  .enablePlugins(KotlinPlugin)
+  .settings(
+    kotlinVersion := "2.0.21",
+    kotlincJvmTarget := "1.8",
+    kotlinLib("stdlib"),
+    kotlinLib("compiler-embeddable"),
+    // the source generator that sbt-protoc adds only includes java and scala files
+    Compile / sourceGenerators +=
+      (Compile / PB.generate)
+        .map(
+          _.filter { file =>
+            file.getName.endsWith(".kt")
+          }
+        )
+        .taskValue,
+    (Compile / PB.protoSources) :=
+      Seq((semanticdb / Compile / sourceDirectory).value / "protobuf"),
+    (Compile / PB.targets) :=
+      Seq(PB.gens.kotlin(V.protobuf) -> (Compile / sourceManaged).value)
+  )
+
 lazy val gradlePlugin = project
   .in(file("semanticdb-gradle-plugin"))
   .settings(
