@@ -240,7 +240,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       Dependencies
         .resolveDependencies(
           List(
-            s"com.sourcegraph:semanticdb-kotlinc:${BuildInfo.semanticdbKotlincVersion}"
+            s"com.sourcegraph:semanticdb-kotlinc:${BuildInfo.semanticdbKotlinc2Version}"
           ),
           transitive = false
         )

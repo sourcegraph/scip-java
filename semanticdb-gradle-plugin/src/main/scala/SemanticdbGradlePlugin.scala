@@ -339,7 +339,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                 .getKotlinOptions()
 
               val semanticdbkotlincDependency =
-                s"com.sourcegraph:semanticdb-kotlinc:${BuildInfo.semanticdbKotlincVersion}"
+                s"com.sourcegraph:semanticdb-kotlinc:${BuildInfo.semanticdbKotlinc1Version}"
 
               val semanticdbKotlinc =
                 project

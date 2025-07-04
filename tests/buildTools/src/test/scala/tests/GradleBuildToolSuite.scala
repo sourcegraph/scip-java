@@ -387,6 +387,33 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
   )
 
   checkGradleBuild(
+    "kotlin2",
+    """|/build.gradle
+       |plugins {
+       |    id 'org.jetbrains.kotlin.jvm' version '2.1.20'
+       |}
+       |repositories {
+       |    mavenCentral()
+       |}
+       |/src/main/java/foo/JExample.java
+       |package foo;
+       |public class JExample {}
+       |/src/main/kotlin/foo/Example.kt
+       |package foo
+       |object Example {}
+       |/src/test/java/foo/JExampleSuite.java
+       |package foo;
+       |public class JExampleSuite {}
+       |/src/test/kotlin/foo/ExampleSuite.kt
+       |package foo
+       |class ExampleSuite {}
+       |""".stripMargin,
+    expectedSemanticdbFiles = 4,
+    gradleVersions = List(Gradle8)
+  )
+
+
+  checkGradleBuild(
     "implementation-deps",
     """|/settings.gradle
        |rootProject.name = 'marklogic-examples'
