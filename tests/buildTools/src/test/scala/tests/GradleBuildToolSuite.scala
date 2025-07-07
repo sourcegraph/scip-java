@@ -386,7 +386,6 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     gradleVersions = List(Gradle8)
   )
 
-
   checkGradleBuild(
     "implementation-deps",
     """|/settings.gradle
