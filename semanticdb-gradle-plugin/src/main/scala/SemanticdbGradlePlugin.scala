@@ -333,13 +333,14 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                     def getKotlinOptions(): {
                       def getFreeCompilerArgs(): ju.List[String]
                       def setFreeCompilerArgs(args: ju.List[String]): Unit
+                      // def getLanguageVersion(): Any
                     }
                   }
                 ]
                 .getKotlinOptions()
 
               val semanticdbkotlincDependency =
-                s"com.sourcegraph:semanticdb-kotlinc:${BuildInfo.semanticdbKotlinc1Version}"
+                s"com.sourcegraph:semanticdb-kotlinc:${BuildInfo.semanticdbKotlincVersion}"
 
               val semanticdbKotlinc =
                 project

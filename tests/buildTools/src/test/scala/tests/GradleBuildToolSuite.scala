@@ -361,32 +361,6 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     tools = List(Scala2_12_12)
   )
   checkGradleBuild(
-    "kotlin",
-    """|/build.gradle
-       |plugins {
-       |    id 'org.jetbrains.kotlin.jvm' version '1.8.0'
-       |}
-       |repositories {
-       |    mavenCentral()
-       |}
-       |/src/main/java/foo/JExample.java
-       |package foo;
-       |public class JExample {}
-       |/src/main/kotlin/foo/Example.kt
-       |package foo
-       |object Example {}
-       |/src/test/java/foo/JExampleSuite.java
-       |package foo;
-       |public class JExampleSuite {}
-       |/src/test/kotlin/foo/ExampleSuite.kt
-       |package foo
-       |class ExampleSuite {}
-       |""".stripMargin,
-    expectedSemanticdbFiles = 4,
-    gradleVersions = List(Gradle6, Gradle7)
-  )
-
-  checkGradleBuild(
     "kotlin2",
     """|/build.gradle
        |plugins {
@@ -465,7 +439,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
       s"""|/build.gradle
           |plugins {
           |    id 'java'
-          |    id 'org.jetbrains.kotlin.jvm' version '1.8.0'
+          |    id 'org.jetbrains.kotlin.jvm' version '2.1.20'
           |}
           |java {
           |  toolchain {
@@ -478,9 +452,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
           |object Example {}
           |""".stripMargin,
       expectedSemanticdbFiles = 1,
-      // Older Kotlin gradle plugins don't support Gradle 8:
-      // https://youtrack.jetbrains.com/issue/KT-55704/Cannot-use-TaskAction-annotation-on-method-AbstractKotlinCompile.execute-error-while-using-Gradle-8.0-rc-with-KGP-1.5.32
-      gradleVersions = List(Gradle6, Gradle7)
+      gradleVersions = List(Gradle8)
     )
   }
 
@@ -490,7 +462,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
         s"kotlin-multiplatform-$jvmSettings",
         s"""|/build.gradle
             |plugins {
-            |    id 'org.jetbrains.kotlin.multiplatform' version '1.8.0'
+            |    id 'org.jetbrains.kotlin.multiplatform' version '2.1.20'
             |}
             |repositories {
             |    mavenCentral()
