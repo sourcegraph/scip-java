@@ -100,7 +100,6 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     val pluginpath = Embedded.semanticdbJar(tmp)
     val gradlePluginPath = Embedded.gradlePluginJar(tmp)
     val dependenciesPath = targetroot.resolve("dependencies.txt")
-    val kotlinSemanticdbVersion = BuildInfo.semanticdbKotlincVersion
     Files.deleteIfExists(dependenciesPath)
 
     val script =

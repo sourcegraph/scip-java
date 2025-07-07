@@ -23,7 +23,7 @@ lazy val V =
     val scala3 = "3.3.3"
     val metals = "1.2.2"
     val scalameta = "4.9.3"
-    val semanticdbKotlinc = "0.4.0"
+    val semanticdbKotlin = "0.5.0"
     val testcontainers = "0.39.3"
     val requests = "0.8.0"
     val minimalMillVersion = "0.10.0"
@@ -138,7 +138,7 @@ lazy val gradlePlugin = project
         "sbtSourcegraphVersion" ->
           com.sourcegraph.sbtsourcegraph.BuildInfo.version,
         "semanticdbVersion" -> V.scalameta,
-        "semanticdbKotlincVersion" -> V.semanticdbKotlinc,
+        "semanticdbKotlincVersion" -> V.semanticdbKotlin,
         "mtagsVersion" -> V.metals,
         "scala211" -> V.scala211,
         "scala212" -> V.scala212,
@@ -266,7 +266,7 @@ lazy val cli = project
         "sbtSourcegraphVersion" ->
           com.sourcegraph.sbtsourcegraph.BuildInfo.version,
         "semanticdbVersion" -> V.scalameta,
-        "semanticdbKotlincVersion" -> V.semanticdbKotlinc,
+        "semanticdbKotlincVersion" -> V.semanticdbKotlin,
         "mtagsVersion" -> V.metals,
         "scala211" -> V.scala211,
         "scala212" -> V.scala212,

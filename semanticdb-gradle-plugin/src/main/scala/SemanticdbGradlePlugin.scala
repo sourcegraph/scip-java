@@ -333,6 +333,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                     def getKotlinOptions(): {
                       def getFreeCompilerArgs(): ju.List[String]
                       def setFreeCompilerArgs(args: ju.List[String]): Unit
+                      // def getLanguageVersion(): Any
                     }
                   }
                 ]
