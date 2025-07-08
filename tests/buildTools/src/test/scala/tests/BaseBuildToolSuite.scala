@@ -87,7 +87,8 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
       externalJDKVersion >= minJDK && externalJDKVersion <= maxJDK
 
     val ignoreMsg =
-      s"Test ${options.name} was ignored because the external JDK version doesn't match the toolset requirements: " +
+      s"Test ${options
+          .name} was ignored because the external JDK version doesn't match the toolset requirements: " +
         s"Tools: $tools, min JDK = $minJDK, max JDK = $maxJDK, detected JDK = $externalJDKVersion"
 
     test(options.withTags(options.tags ++ tags)) {
@@ -106,8 +107,9 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
 
       FileLayout.fromString(original, root = workingDirectory)
 
-      val targetroot = workingDirectory
-        .resolve(targetRoot.getOrElse("targetroot"))
+      val targetroot = workingDirectory.resolve(
+        targetRoot.getOrElse("targetroot")
+      )
 
       val arguments =
         List[String](

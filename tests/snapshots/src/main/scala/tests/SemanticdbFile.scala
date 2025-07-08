@@ -16,11 +16,10 @@ case class SemanticdbFile(
     targetroot: AbsolutePath
 ) {
   def javaPath: AbsolutePath = sourceroot.resolve(relativePath)
-  def semanticdbPath: AbsolutePath =
-    targetroot
-      .resolve("META-INF")
-      .resolve("semanticdb")
-      .resolve(relativePath.toString() + ".semanticdb")
+  def semanticdbPath: AbsolutePath = targetroot
+    .resolve("META-INF")
+    .resolve("semanticdb")
+    .resolve(relativePath.toString() + ".semanticdb")
   def textDocument: TextDocument = {
     val docs = TextDocuments.parseFrom(Files.readAllBytes(semanticdbPath.toNIO))
     if (docs.getDocumentsCount == 0)

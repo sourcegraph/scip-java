@@ -29,8 +29,9 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
     val targetroot = workingDirectory.resolve("target/main")
     val sourcepath = workingDirectory.resolve("main/Sample.java")
     val code = new String(Files.readAllBytes(sourcepath))
-    new TestCompiler(targetroot)
-      .compileSemanticdb(List(Input.VirtualFile("main/Sample.java", code)))
+    new TestCompiler(targetroot).compileSemanticdb(
+      List(Input.VirtualFile("main/Sample.java", code))
+    )
 
     val generatedpath = workingDirectory.resolve("generated")
 

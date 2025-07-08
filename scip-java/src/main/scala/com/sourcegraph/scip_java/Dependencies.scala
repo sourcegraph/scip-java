@@ -62,14 +62,16 @@ object Dependencies {
         .addRepositories(defaultExtraRepositories: _*)
 
       if (artifact.endsWith("-jvm")) {
-        val dependency = Dependencies
-          .parseDependency(s"$group:${artifact.stripSuffix("-jvm")}:$version")
+        val dependency = Dependencies.parseDependency(
+          s"$group:${artifact.stripSuffix("-jvm")}:$version"
+        )
         val result = task.addDependencies(dependency).runResult()
         return Some(result.files.head.toPath)
       }
 
-      val dependency = Dependencies
-        .parseDependency(s"$group:$artifact-common:$version")
+      val dependency = Dependencies.parseDependency(
+        s"$group:$artifact-common:$version"
+      )
       val result = task.addDependencies(dependency).runResult()
       result.files.head.toPath
     }.toOption
@@ -145,8 +147,10 @@ object Dependencies {
   }.toList
 
   def parseDependencyEither(lib: String): Either[String, Dependency] = {
-    DependencyParser
-      .dependency(lib, defaultScalaVersion = BuildInfo.scalaVersion)
+    DependencyParser.dependency(
+      lib,
+      defaultScalaVersion = BuildInfo.scalaVersion
+    )
   }
 
   private def parseDependency(lib: String): Dependency = {

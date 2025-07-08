@@ -97,8 +97,9 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     .getPathMatcher("glob:**.{java,scala,kt}")
   private val moduleInfo = Paths.get("module-info.java")
 
-  override def usedInCurrentDirectory(): Boolean =
-    configFiles.exists(path => Files.isRegularFile(path))
+  override def usedInCurrentDirectory(): Boolean = configFiles.exists(path =>
+    Files.isRegularFile(path)
+  )
   override def isHidden: Boolean = true
   override def generateScip(): Int = {
     BuildTool.generateScipFromTargetroot(
@@ -146,7 +147,8 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       case None =>
         ErrorResult(
           Diagnostic.error(
-            s"no config file found. To fix this problem, create a config file in the path '${configFiles.head}'"
+            s"no config file found. To fix this problem, create a config file in the path '${configFiles
+                .head}'"
           )
         )
       case Some(configFile) =>
@@ -200,8 +202,9 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     if (index.cleanup) {
       Files.walkFileTree(tmp, new DeleteVisitor)
     }
-    val isSemanticdbGenerated = Files
-      .isDirectory(targetroot.resolve("META-INF"))
+    val isSemanticdbGenerated = Files.isDirectory(
+      targetroot.resolve("META-INF")
+    )
     if (
       errors.nonEmpty && (index.strictCompilation || !isSemanticdbGenerated)
     ) {
@@ -240,7 +243,8 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       Dependencies
         .resolveDependencies(
           List(
-            s"com.sourcegraph:semanticdb-kotlinc:${BuildInfo.semanticdbKotlincVersion}"
+            s"com.sourcegraph:semanticdb-kotlinc:${BuildInfo
+                .semanticdbKotlincVersion}"
           ),
           transitive = false
         )
@@ -249,8 +253,11 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
     val self = config.dependencies.head
     val commonKotlinFiles: List[Path] =
-      Dependencies
-        .kotlinMPPCommon(self.groupId, self.artifactId, self.version) match {
+      Dependencies.kotlinMPPCommon(
+        self.groupId,
+        self.artifactId,
+        self.version
+      ) match {
         case Some(common) =>
           val outdir = Files.createTempDirectory("scipjava-kotlin")
           val file = common.toFile
@@ -312,7 +319,9 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
     if (commonKotlinFiles.nonEmpty) {
       args +=
-        s"-Xcommon-sources=${commonKotlinFiles.map(_.toAbsolutePath.toString).mkString(",")}"
+        s"-Xcommon-sources=${commonKotlinFiles
+            .map(_.toAbsolutePath.toString)
+            .mkString(",")}"
     }
 
     args ++= filesPaths ++ commonKotlinFiles.map(_.toAbsolutePath.toString)
@@ -356,21 +365,20 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       deps: Dependencies,
       allScalaFiles: List[Path],
       tmp: Path
-  ): Try[Unit] =
-    Try {
-      if (deps.dependencies.nonEmpty && allScalaFiles.nonEmpty)
-        withScalaPresentationCompiler(deps, tmp) { compiler =>
-          allScalaFiles.foreach { path =>
-            try compileScalaFile(compiler, path)
-            catch {
-              case NonFatal(e) =>
-                // We want to try and index as much as possible so we don't fail the entire
-                // compilation even if a single file fails to compile.
-                index.app.reporter.log(Diagnostic.exception(e))
-            }
+  ): Try[Unit] = Try {
+    if (deps.dependencies.nonEmpty && allScalaFiles.nonEmpty)
+      withScalaPresentationCompiler(deps, tmp) { compiler =>
+        allScalaFiles.foreach { path =>
+          try compileScalaFile(compiler, path)
+          catch {
+            case NonFatal(e) =>
+              // We want to try and index as much as possible so we don't fail the entire
+              // compilation even if a single file fails to compile.
+              index.app.reporter.log(Diagnostic.exception(e))
           }
         }
-    }
+      }
+  }
 
   private def compileScalaFile(
       compiler: PresentationCompiler,
@@ -413,7 +421,8 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
         throw new IllegalArgumentException(
           s"failed to infer the Scala version from the dependencies: " +
             pprint.PPrinter.BlackWhite.tokenize(deps.classpath).mkString +
-            s"\n\nTo fix this, consider adding 'org.scala-lang:scala-library:${BuildInfo.scalaVersion}' to the list of dependencies."
+            s"\n\nTo fix this, consider adding 'org.scala-lang:scala-library:${BuildInfo
+                .scalaVersion}' to the list of dependencies."
         )
       }
     val mtags = Dependencies.resolveDependencies(
@@ -444,10 +453,10 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
         .newInstance("scip-java", classpath.asJava, List[String]().asJava)
         .withConfiguration(
           new PresentationCompilerConfig {
-            override def parameterHintsCommand(): Optional[String] =
-              Optional.empty()
-            override def completionCommand(): Optional[String] =
-              Optional.empty()
+            override def parameterHintsCommand(): Optional[String] = Optional
+              .empty()
+            override def completionCommand(): Optional[String] = Optional
+              .empty()
             override def symbolPrefixes(): util.Map[String, String] =
               Collections.emptyMap()
             override def isDefaultSymbolPrefixes: Boolean = false
@@ -485,8 +494,9 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       config: Config,
       allJavaFiles: List[Path]
   ): Try[Unit] = {
-    val (moduleInfos, javaFiles) = allJavaFiles
-      .partition(_.endsWith(moduleInfo))
+    val (moduleInfos, javaFiles) = allJavaFiles.partition(
+      _.endsWith(moduleInfo)
+    )
     if (javaFiles.isEmpty)
       return Success(())
     val semanticdbJar = Embedded.semanticdbJar(tmp)
@@ -638,8 +648,9 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       JvmCache()
         .withIndexChannel(
           repositories = Seq.empty,
-          indexChannel = jvmChannel
-            .getOrElse(JvmChannel.url(JvmIndex.defaultIndexUrl))
+          indexChannel = jvmChannel.getOrElse(
+            JvmChannel.url(JvmIndex.defaultIndexUrl)
+          )
         )
         .withArchitecture(jvmArchitecture(jvmVersion))
     )
@@ -749,15 +760,18 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     if (
       !pathString.startsWith("bazel-bin") && !pathString.startsWith("bazel-out")
     ) {
-      path = AbsolutePath
-        .of(Paths.get("bazel-bin", pathString), workingDirectory)
+      path = AbsolutePath.of(
+        Paths.get("bazel-bin", pathString),
+        workingDirectory
+      )
 
       if (Files.isRegularFile(path))
         return Some(path)
     }
 
-    val processed = path
-      .resolveSibling("processed_" + path.getFileName.toString)
+    val processed = path.resolveSibling(
+      "processed_" + path.getFileName.toString
+    )
     if (Files.isRegularFile(processed))
       return Some(processed)
 

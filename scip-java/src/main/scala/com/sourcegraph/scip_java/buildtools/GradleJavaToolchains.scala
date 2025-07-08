@@ -29,8 +29,10 @@ case class GradleJavaToolchains(
 
   def isJavaAtLeast(version: Int): Boolean = {
     val actualVersion = javaVersion.getOrElse(sys.props("java.version"))
-    GradleJavaToolchains
-      .isJavaAtLeast(actualVersion, math.max(version, 0).toString())
+    GradleJavaToolchains.isJavaAtLeast(
+      actualVersion,
+      math.max(version, 0).toString()
+    )
   }
 
   def executableJavacPath(): Option[Path] = {
@@ -79,8 +81,9 @@ object GradleJavaToolchains {
     val scalaEnabledPath = tmp.resolve("scala-enabled.txt")
     val kotlinEnabledPath = tmp.resolve("kotlin-enabled.txt")
     val javaVersionPath = tmp.resolve("java-version.txt")
-    val kotlinMultiplatformEnabledPath = tmp
-      .resolve("kotlin-multiplatform-enabled.txt")
+    val kotlinMultiplatformEnabledPath = tmp.resolve(
+      "kotlin-multiplatform-enabled.txt"
+    )
     val gradleVersionPath = tmp.resolve("gradle-version.txt")
     val taskName = "scipDetectJavaToolchains"
     @Language("Groovy")
@@ -186,8 +189,9 @@ object GradleJavaToolchains {
       isJavaEnabled = Files.isRegularFile(javaEnabledPath),
       isScalaEnabled = Files.isRegularFile(scalaEnabledPath),
       isKotlinEnabled = Files.isRegularFile(kotlinEnabledPath),
-      isKotlinMultiplatformEnabled = Files
-        .isRegularFile(kotlinMultiplatformEnabledPath),
+      isKotlinMultiplatformEnabled = Files.isRegularFile(
+        kotlinMultiplatformEnabledPath
+      ),
       gradleCommand = gradleCommand,
       tmp = tmp
     )

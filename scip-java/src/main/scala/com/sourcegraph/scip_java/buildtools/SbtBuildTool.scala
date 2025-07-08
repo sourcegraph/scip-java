@@ -24,14 +24,16 @@ class SbtBuildTool(index: IndexCommand) extends BuildTool("sbt", index) {
         } else {
           failFast(
             s"Unsupported sbt version '$version'. " +
-              s"To fix this problem, upgrade to sbt ${BuildInfo.sbtVersion} and try again."
+              s"To fix this problem, upgrade to sbt ${BuildInfo
+                  .sbtVersion} and try again."
           )
         }
       case None =>
         failFast(
           s"No sbt version detected. " +
             s"To fix this problem, run the following command and try again: " +
-            s"echo 'sbt.version=${BuildInfo.sbtVersion}' >> project/build.properties"
+            s"echo 'sbt.version=${BuildInfo
+                .sbtVersion}' >> project/build.properties"
         )
     }
   }
@@ -45,8 +47,9 @@ class SbtBuildTool(index: IndexCommand) extends BuildTool("sbt", index) {
     Using.resource(sourcegraphSbtPluginFile()) { _ =>
       val buildCommand = index.finalBuildCommand(List("sourcegraphScip"))
 
-      val sourcegraphScip = index
-        .process(List("sbt", "sourcegraphEnable") ++ buildCommand)
+      val sourcegraphScip = index.process(
+        List("sbt", "sourcegraphEnable") ++ buildCommand
+      )
 
       val inputDump = index
         .workingDirectory
@@ -121,10 +124,9 @@ object SbtBuildTool {
 }
 
 object SbtVersionParser {
-  def versionSegments(raw: String) =
-    raw
-      .takeWhile(c => c.isDigit || c == '.')
-      .split("\\.", 3)
-      .toList
-      .flatMap(_.toIntOption)
+  def versionSegments(raw: String) = raw
+    .takeWhile(c => c.isDigit || c == '.')
+    .split("\\.", 3)
+    .toList
+    .flatMap(_.toIntOption)
 }

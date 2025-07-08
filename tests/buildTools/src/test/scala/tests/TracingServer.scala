@@ -13,8 +13,10 @@ object TracingServer {
   case class RunningServer(address: URI, shutdown: () => Unit)
 
   private def runImpl[A](handler: MyHandler)(f: RunningServer => A) = {
-    val server = HttpServer
-      .create(new java.net.InetSocketAddress("localhost", 0), 0);
+    val server = HttpServer.create(
+      new java.net.InetSocketAddress("localhost", 0),
+      0
+    );
     val result =
       try {
         server.createContext("/", handler)
@@ -23,7 +25,9 @@ object TracingServer {
         f(
           RunningServer(
             new URI(
-              s"http://${server.getAddress().getHostName()}:${server.getAddress().getPort()}"
+              s"http://${server.getAddress().getHostName()}:${server
+                  .getAddress()
+                  .getPort()}"
             ),
             () => server.stop(0)
           )

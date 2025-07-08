@@ -42,7 +42,7 @@ object ClasspathEntry {
    * "dependencies.txt" - for example if they come from a multi-module build.
    *
    * @param targetroot
-   *   @return
+   * @return
    */
   def fromTargetroot(
       targetroot: Path,
@@ -61,7 +61,8 @@ object ClasspathEntry {
    * for multiple projects.
    *
    * @param targetroot
-   *   @return classpath entries read from the discovered files
+   * @return
+   *   classpath entries read from the discovered files
    */
   private def discoverDependenciesFromFiles(
       targetroot: Path
@@ -155,8 +156,9 @@ object ClasspathEntry {
    * given jar file.
    */
   private def fromClasspathJarFile(jar: Path): Option[ClasspathEntry] = {
-    val pom = jar
-      .resolveSibling(jar.getFileName.toString.stripSuffix(".jar") + ".pom")
+    val pom = jar.resolveSibling(
+      jar.getFileName.toString.stripSuffix(".jar") + ".pom"
+    )
     val sources = Option(
       jar.resolveSibling(
         jar.getFileName.toString.stripSuffix(".jar") + ".sources"

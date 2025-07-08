@@ -49,5 +49,5 @@ object MinimizedScalaSignatures extends MinimizedScalaSignatures with Comparable
   type TypeBound
   type TypeUpperBound <: String
   type TypeLowerBound >: CharSequence
-  type TypeLowerUpperBound >: String <: CharSequence 
+  type TypeLowerUpperBound >: String <: CharSequence
 }

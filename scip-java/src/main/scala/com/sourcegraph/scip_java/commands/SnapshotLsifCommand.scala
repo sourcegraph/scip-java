@@ -12,8 +12,10 @@ import moped.cli.CommandParser
 
 @CommandName("snapshot-lsif")
 case class SnapshotLsifCommand(
-    @Inline() app: Application = Application.default,
-    @PositionalArguments() input: List[Path] = List(Paths.get("dump.lsif"))
+    @Inline()
+    app: Application = Application.default,
+    @PositionalArguments()
+    input: List[Path] = List(Paths.get("dump.lsif"))
 ) extends Command {
   def run(): Int = {
     app.error(

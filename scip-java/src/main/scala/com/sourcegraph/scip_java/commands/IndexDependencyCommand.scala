@@ -19,8 +19,8 @@ import moped.cli.Command
 import moped.cli.CommandParser
 
 final case class IndexDependencyCommand(
-    @DeprecatedName("target", "Use --output instead", "0.6.10") output: Path =
-      Paths.get("maven"),
+    @DeprecatedName("target", "Use --output instead", "0.6.10")
+    output: Path = Paths.get("maven"),
     index: IndexCommand = IndexCommand(),
     @Hidden
     snapshotCommand: SnapshotCommand = SnapshotCommand(),
@@ -28,7 +28,8 @@ final case class IndexDependencyCommand(
     provided: List[String] = Nil,
     @Description(
       "If true, deletes temporary files that are created during indexing"
-    ) cleanup: Boolean = true,
+    )
+    cleanup: Boolean = true,
     snapshot: Boolean = false
 ) extends Command {
   def app = index.app
@@ -46,8 +47,10 @@ final case class IndexDependencyCommand(
       app.reporter.error("dependency can't be empty")
       1
     } else {
-      val deps = Dependencies
-        .resolveDependencies(dependency :: provided, transitive = false)
+      val deps = Dependencies.resolveDependencies(
+        dependency :: provided,
+        transitive = false
+      )
       deps.sources.headOption match {
         case None =>
           app.reporter.error(s"no sources for dependency '$dependency'")
@@ -76,8 +79,9 @@ final case class IndexDependencyCommand(
                           output = snapshotTarget,
                           cleanup = cleanup,
                           targetroot = List(indexTarget),
-                          app = app
-                            .withEnv(app.env.withWorkingDirectory(indexTarget))
+                          app = app.withEnv(
+                            app.env.withWorkingDirectory(indexTarget)
+                          )
                         )
                         .run()
                     } finally {
@@ -95,8 +99,9 @@ final case class IndexDependencyCommand(
   }
 
   private def inferJvmVersion(jar: Path): Option[Int] = {
-    Option(JavaVersion.classfileJvmVersion(jar).orElse(8))
-      .map(JavaVersion.roundToNearestStableRelease(_))
+    Option(JavaVersion.classfileJvmVersion(jar).orElse(8)).map(
+      JavaVersion.roundToNearestStableRelease(_)
+    )
   }
 
   private def indexJar(jvmVersion: Int): Int = {

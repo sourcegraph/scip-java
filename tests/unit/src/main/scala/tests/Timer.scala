@@ -13,8 +13,10 @@ class Timer(val clock: Clock = Clock.systemDefaultZone()) {
   def duration(): Duration = Duration.between(start, clock.instant())
 
   def format(): String = Timer.formatDuration(start, clock.instant())
-  def formatPadded(): String =
-    Timer.formatDurationPadded(start, clock.instant())
+  def formatPadded(): String = Timer.formatDurationPadded(
+    start,
+    clock.instant()
+  )
   override def toString: String = format()
 }
 

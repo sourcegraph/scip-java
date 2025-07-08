@@ -26,28 +26,31 @@ import os.Shellable
      |$ scip-java index""".stripMargin
 )
 case class IndexCommand(
-    @Description("The path where to generate the SCIP index.") output: Path =
-      Paths.get("index.scip"),
+    @Description("The path where to generate the SCIP index.")
+    output: Path = Paths.get("index.scip"),
     @Description(
       "The directory where to generate SemanticDB files. " +
         "Defaults to a build-specific path. " +
         "For example, the default value for Gradle is 'build/semanticdb-targetroot' and for Maven it's 'target/semanticdb-targetroot'"
-    ) targetroot: Option[Path] = None,
+    )
+    targetroot: Option[Path] = None,
     @Description(
       "Whether to enable the -verbose flag in the SemanticDB compiler plugin."
-    ) verbose: Boolean = false,
+    )
+    verbose: Boolean = false,
     @Description(
       "Whether to enable the -text:on flag in the SemanticDB compiler plugin."
-    ) text: Boolean = false,
+    )
+    text: Boolean = false,
     @Description(
       "Explicitly specify which build tool to use. " +
         "By default, the build tool is automatically detected. " +
         "Use this flag if the automatic build tool detection is not working correctly."
     )
-    @ExampleValue("Gradle") buildTool: Option[String] = None,
-    @Description(
-      "Whether to remove generated temporary files on exit."
-    ) cleanup: Boolean = true,
+    @ExampleValue("Gradle")
+    buildTool: Option[String] = None,
+    @Description("Whether to remove generated temporary files on exit.")
+    cleanup: Boolean = true,
     @Description("URL to a PackageHub instance")
     @Hidden // Hidden because it's not supposed to be used yet by normal users.
     packagehub: Option[String] = None,
@@ -57,27 +60,32 @@ case class IndexCommand(
     @Description(
       "List of Java compiler option prefixes that should be excluded from compilation during indexing. " +
         "This flag is only used when indexing via scip-java.json files or Bazel."
-    ) scipIgnoredJavacOptionPrefixes: List[String] = Nil,
+    )
+    scipIgnoredJavacOptionPrefixes: List[String] = Nil,
     @Description(
       "List of fully qualified annotation processors that should be ignored when indexing a codebase. " +
         "This flag is only used when indexing via scip-java.json files or Bazel."
-    ) scipIgnoredAnnotationProcessors: List[String] = Nil,
+    )
+    scipIgnoredAnnotationProcessors: List[String] = Nil,
     @Description(
       "Path to a scip-java.json file with build configuration. By default, the path scip-java.json is used."
-    ) scipConfig: Option[Path] = None,
+    )
+    scipConfig: Option[Path] = None,
     @Section("Bazel")
     @Description(
       "Optional path to a `scip-java` binary. Required to index a Bazel codebase."
-    ) bazelScipJavaBinary: Option[String] = None,
+    )
+    bazelScipJavaBinary: Option[String] = None,
     @Description(
       "Relative path to a Bazel aspect file with an aspect named 'scip_java_aspect'."
-    ) bazelAspect: Path = Paths.get("aspects/scip_java.bzl"),
-    @Description(
-      "If true, overwrites the existing Bazel aspect file (if any)"
-    ) bazelOverwriteAspectFile: Boolean = false,
+    )
+    bazelAspect: Path = Paths.get("aspects/scip_java.bzl"),
+    @Description("If true, overwrites the existing Bazel aspect file (if any)")
+    bazelOverwriteAspectFile: Boolean = false,
     @Description(
       "If true, automatically tries to extract the printed out sandbox command and re-run the command to reveal the underlying problem."
-    ) bazelAutorunSandboxCommand: Boolean = true,
+    )
+    bazelAutorunSandboxCommand: Boolean = true,
     @Description(
       "Optional. The build command to use to compile all sources. " +
         "Defaults to a build-specific command. For example, the default command for Maven command is 'clean verify -DskipTests'." +
@@ -85,10 +93,10 @@ case class IndexCommand(
     )
 
     @Hidden
-    @Description(
-      "Fail command invocation if compiler produces any errors"
-    ) strictCompilation: Boolean = false,
-    @TrailingArguments() buildCommand: List[String] = Nil,
+    @Description("Fail command invocation if compiler produces any errors")
+    strictCompilation: Boolean = false,
+    @TrailingArguments()
+    buildCommand: List[String] = Nil,
     @Hidden
     indexSemanticdb: IndexSemanticdbCommand = IndexSemanticdbCommand(),
     @Inline
@@ -132,8 +140,10 @@ case class IndexCommand(
       ""
 
   def workingDirectory: Path = AbsolutePath.of(app.env.workingDirectory)
-  def finalTargetroot(default: Path): Path =
-    AbsolutePath.of(targetroot.getOrElse(default), workingDirectory)
+  def finalTargetroot(default: Path): Path = AbsolutePath.of(
+    targetroot.getOrElse(default),
+    workingDirectory
+  )
   def finalOutput: Path = AbsolutePath.of(output, workingDirectory)
   def finalBuildCommand(default: List[String]): List[String] =
     if (buildCommand.isEmpty)
@@ -184,8 +194,10 @@ case class IndexCommand(
     buildTool match {
       case Some(explicit) if usedBuildTools.nonEmpty =>
         val toFix =
-          Levenshtein
-            .closestCandidate(explicit, usedBuildTools.map(_.name)) match {
+          Levenshtein.closestCandidate(
+            explicit,
+            usedBuildTools.map(_.name)
+          ) match {
             case Some(closest) =>
               s"Did you mean --build-tool=$closest?"
             case None =>
@@ -200,7 +212,8 @@ case class IndexCommand(
         if (Files.isDirectory(workingDirectory)) {
           app.error(
             s"No build tool detected in workspace '$workingDirectory'. " +
-              s"At the moment, the only supported build tools are: ${BuildTool.allNames}."
+              s"At the moment, the only supported build tools are: ${BuildTool
+                  .allNames}."
           )
         } else {
           val cause =
@@ -236,7 +249,8 @@ case class IndexCommand(
           .mkString(", other tools that were detected:  [", ", ", "]")
 
         app.info(
-          s"Auto mode: `${first.name}` will be used in this workspace${restMessage}"
+          s"Auto mode: `${first
+              .name}` will be used in this workspace${restMessage}"
         )
 
         first.generateScip()
@@ -247,6 +261,7 @@ case class IndexCommand(
 
 object IndexCommand {
   val default: IndexCommand = IndexCommand()
-  implicit val parser: CommandParser[IndexCommand] = CommandParser
-    .derive(default)
+  implicit val parser: CommandParser[IndexCommand] = CommandParser.derive(
+    default
+  )
 }
