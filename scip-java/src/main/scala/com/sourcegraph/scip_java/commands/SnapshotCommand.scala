@@ -25,13 +25,13 @@ import moped.cli.CommandParser
 @CommandName("snapshot")
 case class SnapshotCommand(
     @PositionalArguments
-    @Description("List of directories containing SCIP files") targetroot: List[
-      Path
-    ] = Nil,
-    @Description("Output directory for the annotated snapshots") output: Path =
-      Paths.get("generated"),
+    @Description("List of directories containing SCIP files")
+    targetroot: List[Path] = Nil,
+    @Description("Output directory for the annotated snapshots")
+    output: Path = Paths.get("generated"),
     cleanup: Boolean = true,
-    @Inline() app: Application = Application.default
+    @Inline()
+    app: Application = Application.default
 ) extends Command {
   def sourceroot: Path = app.env.workingDirectory
 
@@ -64,8 +64,11 @@ case class SnapshotCommand(
                       Files.readAllBytes(sourcepath),
                       StandardCharsets.UTF_8
                     )
-                  val document = ScipPrinters
-                    .printTextDocument(doc, source, CommentSyntax.default)
+                  val document = ScipPrinters.printTextDocument(
+                    doc,
+                    source,
+                    CommentSyntax.default
+                  )
                   val snapshotOutput = output.resolve(doc.getRelativePath)
                   Files.createDirectories(snapshotOutput.getParent)
                   Files.write(

@@ -12,8 +12,9 @@ import os.CommandResult
 
 class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
 
-  override def usedInCurrentDirectory(): Boolean =
-    Files.isRegularFile(index.workingDirectory.resolve("pom.xml"))
+  override def usedInCurrentDirectory(): Boolean = Files.isRegularFile(
+    index.workingDirectory.resolve("pom.xml")
+  )
 
   override def generateScip(): Int = {
     BuildTool.generateScipFromTargetroot(
@@ -23,8 +24,10 @@ class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
     )
   }
 
-  private def defaultTargetroot: Path =
-    Paths.get("target", "semanticdb-targetroot")
+  private def defaultTargetroot: Path = Paths.get(
+    "target",
+    "semanticdb-targetroot"
+  )
 
   private def generateSemanticdb(): CommandResult = {
     TemporaryFiles.withDirectory(index) { tmp =>

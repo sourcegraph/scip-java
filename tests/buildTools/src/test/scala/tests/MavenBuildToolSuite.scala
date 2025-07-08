@@ -7,8 +7,9 @@ class MavenBuildToolSuite extends BaseBuildToolSuite {
 
   lazy val pomXml =
     new String(
-      InputStreamIO
-        .readBytes(this.getClass.getResourceAsStream("/example-maven-pom.xml"))
+      InputStreamIO.readBytes(
+        this.getClass.getResourceAsStream("/example-maven-pom.xml")
+      )
     )
 
   checkBuild(

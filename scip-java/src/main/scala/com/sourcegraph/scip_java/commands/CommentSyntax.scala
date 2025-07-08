@@ -9,8 +9,10 @@ case class CommentSyntax(value: String) {
         a -> b
       }
       .toMap
-  def extensionSyntax(fileExtension: String): String =
-    map.getOrElse(fileExtension, "//")
+  def extensionSyntax(fileExtension: String): String = map.getOrElse(
+    fileExtension,
+    "//"
+  )
 }
 object CommentSyntax {
   val default = CommentSyntax("py,# sql,-- yaml,# yml,#")

@@ -87,7 +87,9 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
             |${scalaLibrary(scala.version)}
             |maven:org.scala-sbt:test-interface:1.0
             |maven:org.scalameta:junit-interface:1.0.0-M6
-            |maven:org.scalameta:munit_${scalaBinaryVersion(scala.version)}:1.0.0-M6
+            |maven:org.scalameta:munit_${scalaBinaryVersion(
+             scala.version
+           )}:1.0.0-M6
             |""".stripMargin,
       initCommand = setupMill(mill.version),
       targetRoot = Some("out/io/kipp/mill/scip/Scip/generate.dest"),

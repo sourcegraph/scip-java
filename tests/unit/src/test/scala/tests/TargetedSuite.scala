@@ -69,8 +69,10 @@ class TargetedSuite extends FunSuite with TempDirectories {
             sym.getSymbol
           case many =>
             fail(
-              pos
-                .formatMessage("error", s"ambiguous symbols for this position"),
+              pos.formatMessage(
+                "error",
+                s"ambiguous symbols for this position"
+              ),
               clues(many, occurrences, posRange)
             )
         }

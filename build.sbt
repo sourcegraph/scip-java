@@ -410,19 +410,18 @@ lazy val minimized8 = project
   .dependsOn(agent, javacPlugin)
   .disablePlugins(JavaFormatterPlugin)
 
-def javacModuleOptions =
-  List(
-    "-J--add-exports",
-    "-Jjdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-    "-J--add-exports",
-    "-Jjdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-    "-J--add-exports",
-    "-Jjdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
-    "-J--add-exports",
-    "-Jjdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-    "-J--add-exports",
-    "-Jjdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
-  )
+def javacModuleOptions = List(
+  "-J--add-exports",
+  "-Jjdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+  "-J--add-exports",
+  "-Jjdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+  "-J--add-exports",
+  "-Jjdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+  "-J--add-exports",
+  "-Jjdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+  "-J--add-exports",
+  "-Jjdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+)
 
 lazy val minimized17 = project
   .in(file("tests/minimized/.j17"))
@@ -459,7 +458,7 @@ lazy val unit = project
   .in(file("tests/unit"))
   .settings(
     testSettings,
-    //javaOptions ++= Seq(   "-Xdebug",   "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"),
+    // javaOptions ++= Seq(   "-Xdebug",   "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"),
     buildInfoKeys :=
       Seq[BuildInfoKey](
         version,
@@ -486,9 +485,11 @@ lazy val buildTools = project
     (Test / javaOptions) ++=
       List(
         s"-javaagent:${(agent / Compile / Keys.`package`).value}",
-        s"-Dsemanticdb.pluginpath=${(javacPlugin / Compile / Keys.`package`).value}",
+        s"-Dsemanticdb.pluginpath=${(javacPlugin / Compile / Keys.`package`)
+            .value}",
         s"-Dsemanticdb.sourceroot=${(ThisBuild / baseDirectory).value}",
-        s"-Dsemanticdb.targetroot=${(agent / Compile / target).value / "semanticdb-targetroot"}"
+        s"-Dsemanticdb.targetroot=${(agent / Compile / target).value /
+            "semanticdb-targetroot"}"
       ),
     Test / envVars ++=
       Map(

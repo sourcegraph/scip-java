@@ -25,8 +25,10 @@ sealed abstract class Tool(
 object Tool {
   import JVMSupport._
 
-  def minimumSupportedJdk(tools: Seq[Tool]): Int =
-    tools.map(_.support.minJava).minOption.getOrElse(8)
+  def minimumSupportedJdk(tools: Seq[Tool]): Int = tools
+    .map(_.support.minJava)
+    .minOption
+    .getOrElse(8)
 
   def maximumSupportedJdk(tools: Seq[Tool]): Option[Int] =
     tools.flatMap(_.support.maxJava).minOption

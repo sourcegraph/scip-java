@@ -12,8 +12,9 @@ import com.sourcegraph.scip_java.commands.IndexCommand
 
 class MillBuildTool(index: IndexCommand) extends BuildTool("mill", index) {
 
-  override def usedInCurrentDirectory(): Boolean =
-    Files.isRegularFile(index.workingDirectory.resolve("build.sc"))
+  override def usedInCurrentDirectory(): Boolean = Files.isRegularFile(
+    index.workingDirectory.resolve("build.sc")
+  )
 
   override def generateScip(): Int =
     millVersion() match {

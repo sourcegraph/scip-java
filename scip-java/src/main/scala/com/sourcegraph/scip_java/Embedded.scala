@@ -11,11 +11,15 @@ import os.CommandResult
 
 object Embedded {
 
-  def semanticdbJar(tmpDir: Path): Path =
-    copyFile(tmpDir, "semanticdb-plugin.jar")
+  def semanticdbJar(tmpDir: Path): Path = copyFile(
+    tmpDir,
+    "semanticdb-plugin.jar"
+  )
 
-  def gradlePluginJar(tmpDir: Path): Path =
-    copyFile(tmpDir, "gradle-plugin.jar")
+  def gradlePluginJar(tmpDir: Path): Path = copyFile(
+    tmpDir,
+    "gradle-plugin.jar"
+  )
 
   def agentJar(tmpDir: Path): Path = copyFile(tmpDir, "semanticdb-agent.jar")
 

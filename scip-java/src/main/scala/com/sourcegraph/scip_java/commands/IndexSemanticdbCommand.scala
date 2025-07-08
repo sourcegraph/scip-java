@@ -28,38 +28,42 @@ import ujson.Obj
 )
 @CommandName("index-semanticdb")
 final case class IndexSemanticdbCommand(
-    @Description("The name of the output file.") output: Path = Paths
-      .get("index.scip"),
-    @Description(
-      "Whether to process the SemanticDB files in parallel"
-    ) parallel: Boolean = true,
+    @Description("The name of the output file.")
+    output: Path = Paths.get("index.scip"),
+    @Description("Whether to process the SemanticDB files in parallel")
+    parallel: Boolean = true,
     @Description(
       "Whether to infer the location of SemanticDB files based as produced by Bazel"
-    ) bazel: Boolean = true,
+    )
+    bazel: Boolean = true,
     @Description(
       "Whether to emit parent->child relationships for 'Find references' and 'Find implementations'. " +
         "This flag exists as a workaround for the issue https://github.com/sourcegraph/sourcegraph/issues/50927"
-    ) emitInverseRelationships: Boolean = true,
+    )
+    emitInverseRelationships: Boolean = true,
     @Description("URL to a PackageHub instance")
     @Hidden
     packagehub: Option[String] = None,
     @Description("Directories that contain SemanticDB files.")
-    @PositionalArguments() targetroot: List[Path] = Nil,
-    @Description(
-      "The kind of this build, one of: empty string, jdk, maven"
-    ) buildKind: String = "",
+    @PositionalArguments()
+    targetroot: List[Path] = Nil,
+    @Description("The kind of this build, one of: empty string, jdk, maven")
+    buildKind: String = "",
     @Description(
       "If true, don't report an error when no documents have been indexed. " +
         "The resulting SCIP index will silently be empty instead."
-    ) allowEmptyIndex: Boolean = false,
+    )
+    allowEmptyIndex: Boolean = false,
     @Description(
       "Determines how to index symbols that are compiled to classfiles inside directories. " +
         "If true, symbols inside directory entries are allowed to be publicly visible outside of the generated SCIP index. " +
         "If false, symbols inside directory entries are only visible inside the generated SCIP index. " +
         "The practical consequences of making this flag false is that cross-index (or cross-repository) navigation does not work between " +
         "Maven->Maven or Gradle->Gradle projects because those build tools compile sources to classfiles inside directories."
-    ) allowExportingGlobalSymbolsFromDirectoryEntries: Boolean = true,
-    @Inline() app: Application = Application.default
+    )
+    allowExportingGlobalSymbolsFromDirectoryEntries: Boolean = true,
+    @Inline()
+    app: Application = Application.default
 ) extends Command {
   def sourceroot: Path = AbsolutePath.of(app.env.workingDirectory)
   def absoluteTargetroots: List[Path] =

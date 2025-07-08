@@ -13,13 +13,14 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
         "COURSIER_JVM_INDEX" -> s"${run.address.toString}/index.json"
       )
 
-      val tmp = FileLayout
-        .fromString("""
-                      |/lsif-java.json
-                      |{"dependencies": ["junit:junit:4.13.1"],"jvm": "17"}
-                      |/src/main/java/Example.java
-                      |package foo;\npublic class Example{}
-        """.stripMargin)
+      val tmp = FileLayout.fromString(
+        """
+          |/lsif-java.json
+          |{"dependencies": ["junit:junit:4.13.1"],"jvm": "17"}
+          |/src/main/java/Example.java
+          |package foo;\npublic class Example{}
+        """.stripMargin
+      )
 
       val result = os
         .proc(scipJavaCli(), "index", "--build-tool=scip")
@@ -100,15 +101,14 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
   private def base64(str: String) =
     new String(java.util.Base64.getEncoder().encode(str.getBytes))
 
-  private def scipJavaCli() =
-    sys
-      .env
-      .getOrElse(
-        "SCIP_JAVA_CLI",
-        fail(
-          "SCIP_JAVA_CLI env variable is not set, perhaps the build is misconfigured"
-        )
+  private def scipJavaCli() = sys
+    .env
+    .getOrElse(
+      "SCIP_JAVA_CLI",
+      fail(
+        "SCIP_JAVA_CLI env variable is not set, perhaps the build is misconfigured"
       )
+    )
 
   checkBuild(
     "jvm-args", {

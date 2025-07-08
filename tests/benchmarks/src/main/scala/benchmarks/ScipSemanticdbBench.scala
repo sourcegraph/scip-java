@@ -19,8 +19,9 @@ class ScipSemanticdbBench {
   @Setup
   def setup(): Unit = {
     targetroot = Files.createTempDirectory("scip-java")
-    deps = Dependencies
-      .resolveDependencies(List("com.google.guava:guava:30.1-jre"))
+    deps = Dependencies.resolveDependencies(
+      List("com.google.guava:guava:30.1-jre")
+    )
     val compiler =
       new TestCompiler(
         deps.classpathSyntax,
