@@ -235,21 +235,22 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       config: Config,
       allKotlinFiles: List[Path]
   ): Try[Unit] = {
+    println(allKotlinFiles)
     if (allKotlinFiles.isEmpty || config.dependencies.isEmpty)
       return Success()
     val filesPaths = allKotlinFiles.map(_.toString)
 
+    val kotlinPluginVersion = BuildInfo.semanticdbKotlincVersion
     val plugin =
       Dependencies
         .resolveDependencies(
-          List(
-            s"com.sourcegraph:semanticdb-kotlinc:${BuildInfo
-                .semanticdbKotlincVersion}"
-          ),
+          List(s"com.sourcegraph:semanticdb-kotlinc:$kotlinPluginVersion"),
           transitive = false
         )
         .classpath
         .head
+
+    println(plugin)
 
     val self = config.dependencies.head
     val commonKotlinFiles: List[Path] =
@@ -302,11 +303,12 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       "-no-stdlib",
       "-Xmulti-platform",
       "-Xno-check-actual",
-      "-Xopt-in=kotlin.RequiresOptIn",
-      "-Xopt-in=kotlin.ExperimentalUnsignedTypes",
-      "-Xopt-in=kotlin.ExperimentalStdlibApi",
-      "-Xopt-in=kotlin.ExperimentalMultiplatform",
-      "-Xopt-in=kotlin.contracts.ExperimentalContracts",
+      "-verbose:class",
+      "-opt-in=kotlin.RequiresOptIn",
+      "-opt-in=kotlin.ExperimentalUnsignedTypes",
+      "-opt-in=kotlin.ExperimentalStdlibApi",
+      "-opt-in=kotlin.ExperimentalMultiplatform",
+      "-opt-in=kotlin.contracts.ExperimentalContracts",
       "-Xallow-kotlin-package",
       s"-Xplugin=$plugin",
       "-P",
@@ -318,10 +320,10 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     )
 
     if (commonKotlinFiles.nonEmpty) {
-      args +=
-        s"-Xcommon-sources=${commonKotlinFiles
-            .map(_.toAbsolutePath.toString)
-            .mkString(",")}"
+      val commonSources = commonKotlinFiles
+        .map(_.toAbsolutePath.toString)
+        .mkString(",")
+      args += s"-Xcommon-sources=$commonSources"
     }
 
     args ++= filesPaths ++ commonKotlinFiles.map(_.toAbsolutePath.toString)

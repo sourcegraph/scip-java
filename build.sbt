@@ -28,7 +28,7 @@ lazy val V =
     val requests = "0.8.0"
     val minimalMillVersion = "0.10.0"
     val millScipVersion = "0.3.6"
-    val kotlinVersion = "1.9.22"
+    val kotlinVersion = "2.1.20"
   }
 
 inThisBuild(
@@ -286,7 +286,13 @@ lazy val cli = project
         "com.lihaoyi" %% "requests" % V.requests,
         "org.scalameta" %% "moped" % V.moped,
         "org.scalameta" %% "ascii-graphs" % "0.1.2",
-        "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion
+        "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion,
+        "org.jetbrains.kotlin" % "kotlin-scripting-common" % V.kotlinVersion,
+        "org.jetbrains.kotlin" % "kotlin-scripting-jvm" % V.kotlinVersion,
+        "org.jetbrains.kotlin" % "kotlin-scripting-dependencies" %
+          V.kotlinVersion,
+        "org.jetbrains.kotlin" % "kotlin-scripting-dependencies-maven" %
+          V.kotlinVersion
       ),
     (Compile / resourceGenerators) +=
       Def
