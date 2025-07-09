@@ -29,11 +29,11 @@ object MinimizedScalaMain {
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
 //         ^^^ reference semanticdb maven jdk 11 java/lang/System#out.
 //             ^^^^^^^ reference semanticdb maven jdk 11 java/io/PrintStream#println(+8).
-        Methods.app(42, "42") + 
+        Methods.app(42, "42") +
 //      ^^^^^^^ reference semanticdb maven . . minimized/Methods#
 //              ^^^ reference semanticdb maven . . minimized/Methods#app().
 //                            ^ reference semanticdb maven jdk 11 java/lang/String#`+`().
-          Enums.app() + 
+          Enums.app() +
 //        ^^^^^ reference semanticdb maven . . minimized/Enums#
 //              ^^^ reference semanticdb maven . . minimized/Enums#app().
 //                    ^ reference semanticdb maven jdk 11 java/lang/String#`+`().
@@ -41,7 +41,7 @@ object MinimizedScalaMain {
 //        ^^^^^^^^^^ reference semanticdb maven . . minimized/Docstrings#
 //                   ^^^ reference semanticdb maven . . minimized/Docstrings#app().
 //                         ^ reference semanticdb maven jdk 11 java/lang/String#`+`().
-          InnerClasses.app() + 
+          InnerClasses.app() +
 //        ^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#
 //                     ^^^ reference semanticdb maven . . minimized/InnerClasses#app().
 //                           ^ reference semanticdb maven jdk 11 java/lang/String#`+`().
@@ -49,7 +49,7 @@ object MinimizedScalaMain {
 //        ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/ForComprehensions#
 //                          ^^^ reference semanticdb maven . . minimized/ForComprehensions#app().
 //                                  ^ reference semanticdb maven jdk 11 java/lang/String#`+`().
-          AnonymousClasses.app(42) + 
+          AnonymousClasses.app(42) +
 //        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/AnonymousClasses#
 //                         ^^^ reference semanticdb maven . . minimized/AnonymousClasses#app().
 //                                 ^ reference semanticdb maven jdk 11 java/lang/String#`+`().
@@ -66,16 +66,16 @@ object MinimizedScalaMain {
 //           ^^^ reference semanticdb maven . . minimized/ParameterizedTypes#app().
 //                 ^ reference semanticdb maven . . scala/Predef.int2Integer().
 //                         ^ reference semanticdb maven jdk 11 java/lang/String#`+`().
-          RawTypes.x.toString + 
+          RawTypes.x.toString +
 //        ^^^^^^^^ reference semanticdb maven . . minimized/RawTypes#
 //                 ^ reference semanticdb maven . . minimized/RawTypes#x.
 //                   ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#toString().
 //                            ^ reference semanticdb maven jdk 11 java/lang/String#`+`().
-          ClassOf.app() + 
+          ClassOf.app() +
 //        ^^^^^^^ reference semanticdb maven . . minimized/ClassOf#
 //                ^^^ reference semanticdb maven . . minimized/ClassOf#app().
 //                      ^ reference semanticdb maven jdk 11 java/lang/String#`+`().
-          SubClasses.app() + 
+          SubClasses.app() +
 //        ^^^^^^^^^^ reference semanticdb maven . . minimized/SubClasses#
 //                   ^^^ reference semanticdb maven . . minimized/SubClasses#app().
 //                         ^ reference semanticdb maven jdk 11 java/lang/String#`+`().

@@ -39,7 +39,7 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
 
   override def run(context: SnapshotContext, handler: SnapshotHandler): Unit = {
     val gen = new Gen(context, handler)
-    gen.checkLibrary("com.airbnb.android:epoxy:4.3.1")
+    gen.checkLibrary("org.jetbrains.exposed:exposed-core:1.0.0-beta-4")
     gen.checkLibrary(
       "com.lihaoyi:ujson_2.13:1.4.0",
       provided = List(

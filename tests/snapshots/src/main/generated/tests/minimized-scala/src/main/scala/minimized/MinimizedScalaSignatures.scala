@@ -407,7 +407,7 @@ object MinimizedScalaSignatures extends MinimizedScalaSignatures with Comparable
 //                    signature_documentation scala type TypeLowerBound >: CharSequence
 //                    kind Type
 //                       ^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/CharSequence#
-  type TypeLowerUpperBound >: String <: CharSequence 
+  type TypeLowerUpperBound >: String <: CharSequence
 //     ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedScalaSignatures.TypeLowerUpperBound#
 //                         display_name TypeLowerUpperBound
 //                         signature_documentation scala type TypeLowerUpperBound >: String <: CharSequence
