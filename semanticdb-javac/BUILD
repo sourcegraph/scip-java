@@ -18,7 +18,7 @@ string_flag(
 
 java_import(
     name = "javac-import",
-    jars = ["@bazel_tools//third_party/java/jdk/langtools:javac_jar"],
+    jars = ["@bazel_tools//tools/jdk:current_java_runtime"],
 )
 
 java_plugin(
