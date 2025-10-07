@@ -117,10 +117,11 @@ public class ScipGradlePlugin implements Plugin<Project> {
       Project project, Object javacPluginDep, boolean hasAnnotationPath) {
     try {
       project.getDependencies().add("compileOnly", javacPluginDep);
+      project.getDependencies().add("testCompileOnly", javacPluginDep);
       if (hasAnnotationPath) {
         project.getDependencies().add("annotationProcessor", javacPluginDep);
+        project.getDependencies().add("testAnnotationProcessor", javacPluginDep);
       }
-      project.getDependencies().add("testCompileOnly", javacPluginDep);
       return true;
     } catch (Exception exc) {
       // The `compileOnly` configuration has likely already been resolved by
