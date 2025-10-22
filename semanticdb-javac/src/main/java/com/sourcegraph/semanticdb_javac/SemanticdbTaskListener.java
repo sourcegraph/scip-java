@@ -211,9 +211,9 @@ public final class SemanticdbTaskListener implements TaskListener {
     if ((options.uriScheme == UriScheme.SBT || options.uriScheme == UriScheme.ZINC)
         && uri.getScheme().equals("vf")
         && uri.toString().startsWith("vf://tmp/")) {
-      String[] parts = uri.toString().split("/", 5);
-      if (parts.length == 5) {
-        return options.sourceroot.resolve(Paths.get(parts[4]));
+      String[] parts = uri.toString().split("/", 4);
+      if (parts.length == 4) {
+        return options.sourceroot.resolve(Paths.get(parts[3]));
       } else {
         throw new IllegalArgumentException("unsupported URI: " + uri);
       }
