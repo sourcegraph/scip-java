@@ -16,7 +16,7 @@ jobs:
         os: [ubuntu-latest]
         java: [8, 11, 17, 21]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: actions/setup-java@v4
         with:
@@ -42,7 +42,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
 
       - uses: actions/setup-java@v3
         with:
@@ -76,7 +76,7 @@ jobs:
   bazel:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
       - run: yarn global add @bazel/bazelisk
       - run: bazel build //... --//semanticdb-javac:enabled=true
       - run: bazel run scip-semanticdb:bazel -- --sourceroot "$PWD"
@@ -91,7 +91,7 @@ jobs:
   bazel_aspect:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
       - run: yarn global add @bazel/bazelisk
 
       - uses: actions/setup-java@v3
@@ -118,7 +118,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
 
       - uses: actions/setup-java@v3
         with:
@@ -142,7 +142,7 @@ jobs:
       matrix:
         java: [8, 11, 17, 21]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: actions/setup-java@v4
         with:
