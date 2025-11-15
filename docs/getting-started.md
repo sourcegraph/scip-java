@@ -354,12 +354,6 @@ The `--bazel-scip-java-binary` argument is required due to implementation
 details, scip-java runs an [aspect](https://bazel.build/extending/aspects) that
 requires the absolute path to the `scip-java` binary.
 
-> The current solution for automatic indexing step is not yet 100% hermetic and,
-> therefore, relies on `--spawn_strategy=local` under the hood. Depending on
-> your use-case, this might be OK or not. If there is demand for it, it's should
-> be possible to make the indexing fully hermetic and compatible with Bazel's
-> sandbox with some extra work.
-
 #### Manual - `select`
 
 It's possible to index Bazel codebases by integrating scip-java directly into

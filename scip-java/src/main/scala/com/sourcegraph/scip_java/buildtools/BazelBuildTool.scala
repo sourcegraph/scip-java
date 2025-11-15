@@ -63,13 +63,9 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
         "bazel",
         "build",
         "--noshow_progress",
-        // The local strategy is required for now because we write SemanticDB and SCIP files
-        // to the provided targetroot directory.
-        "--spawn_strategy=local",
         "--aspects",
         s"$aspectLabel%scip_java_aspect",
         "--output_groups=scip",
-        s"--define=sourceroot=${index.workingDirectory}",
         s"--define=java_home=$javaHome",
         s"--define=scip_java_binary=$scipJavaBinary",
         "--verbose_failures"
