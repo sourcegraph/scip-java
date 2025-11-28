@@ -186,11 +186,30 @@ public class ScipSemanticdb {
                     occ.getRange().getEndLine(),
                     occ.getRange().getEndCharacter());
         Package pkg = packages.packageForSymbol(occ.getSymbol()).orElse(Package.EMPTY);
-        tdoc.addOccurrences(
+        Scip.Occurrence.Builder occBuilder =
             Scip.Occurrence.newBuilder()
                 .addAllRange(range)
                 .setSymbol(typedSymbol(occ.getSymbol(), pkg))
-                .setSymbolRoles(role));
+                .setSymbolRoles(role);
+        // Add enclosing_range if it exists
+        if (occ.hasEnclosingRange()) {
+          Semanticdb.Range enclosingRange = occ.getEnclosingRange();
+          boolean isEnclosingSingleLine = 
+              enclosingRange.getStartLine() == enclosingRange.getEndLine();
+          Iterable<Integer> enclosingRangeInts =
+              isEnclosingSingleLine
+                  ? Arrays.asList(
+                      enclosingRange.getStartLine(),
+                      enclosingRange.getStartCharacter(),
+                      enclosingRange.getEndCharacter())
+                  : Arrays.asList(
+                      enclosingRange.getStartLine(),
+                      enclosingRange.getStartCharacter(),
+                      enclosingRange.getEndLine(),
+                      enclosingRange.getEndCharacter());
+          occBuilder.addAllEnclosingRange(enclosingRangeInts);
+        }
+        tdoc.addOccurrences(occBuilder);
       }
       Symtab symtab = new Symtab(doc.semanticdb);
       for (SymbolInformation info : doc.semanticdb.getSymbolsList()) {

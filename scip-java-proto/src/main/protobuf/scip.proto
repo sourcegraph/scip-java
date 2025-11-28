@@ -569,6 +569,59 @@ message Occurrence {
   SyntaxKind syntax_kind = 5;
   // Diagnostics that have been reported for this specific range.
   repeated Diagnostic diagnostics = 6;
+  // (optional) Using the same encoding as the sibling `range` field, half-open
+  // source range of the nearest non-trivial enclosing AST node. This range must
+  // enclose the `range` field. Example applications that make use of the
+  // enclosing_range field:
+  //
+  // - Call hierarchies: to determine what symbols are references from the body
+  //   of a function
+  // - Symbol outline: to display breadcrumbs from the cursor position to the
+  //   root of the file
+  // - Expand selection: to select the nearest enclosing AST node.
+  // - Highlight range: to indicate the AST expression that is associated with a
+  //   hover popover
+  //
+  // For definition occurrences, the enclosing range should indicate the
+  // start/end bounds of the entire definition AST node, including
+  // documentation.
+  // ```
+  // const n = 3
+  //       ^ range
+  // ^^^^^^^^^^^ enclosing_range
+  //
+  // /** Parses the string into something */
+  // ^ enclosing_range start --------------------------------------|
+  // function parse(input string): string {                        |
+  //          ^^^^^ range                                          |
+  //     return input.slice(n)                                     |
+  // }                                                             |
+  // ^ enclosing_range end <---------------------------------------|
+  // ```
+  //
+  // Any attributes/decorators/attached macros should also be part of the
+  // enclosing range.
+  //
+  // ```python
+  // @cache
+  // ^ enclosing_range start---------------------|
+  // def factorial(n):                           |
+  //     return n * factorial(n-1) if n else 1   |
+  // < enclosing_range end-----------------------|
+  //
+  // ```
+  //
+  // For reference occurrences, the enclosing range should indicate the start/end
+  // bounds of the parent expression.
+  // ```
+  // const a = a.b
+  //             ^ range
+  //           ^^^ enclosing_range
+  // const b = a.b(41).f(42).g(43)
+  //                   ^ range
+  //           ^^^^^^^^^^^^^ enclosing_range
+  // ```
+  repeated int32 enclosing_range = 7;
 }
 
 // Represents a diagnostic, such as a compiler error or warning, which should be
