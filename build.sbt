@@ -248,6 +248,7 @@ lazy val mavenPlugin = project
 lazy val cli = project
   .in(file("scip-java"))
   .settings(
+    fatjarPackageSettings,
     moduleName := "scip-java",
     (Compile / mainClass) := Some("com.sourcegraph.scip_java.ScipJava"),
     (run / baseDirectory) := (ThisBuild / baseDirectory).value,
@@ -591,8 +592,18 @@ lazy val fatjarPackageSettings = List[Def.Setting[_]](
       MergeStrategy.discard
     case PathList("sun", _ @_*) =>
       MergeStrategy.discard
+    case "BUILD" =>
+      MergeStrategy.discard
+    case PathList("META-INF", f) if f.endsWith(".kotlin_module") =>
+      MergeStrategy.first
+    case PathList("META-INF", "sisu", "javax.inject.Named") =>
+      MergeStrategy.concat
     case PathList("META-INF", "versions", "9", "module-info.class") =>
       MergeStrategy.discard
+    case PathList("org", "codehaus", "plexus", _ @_*) =>
+      MergeStrategy.first
+    case "overview.html" =>
+      MergeStrategy.first
     case x =>
       val oldStrategy = (assembly / assemblyMergeStrategy).value
       oldStrategy(x)
