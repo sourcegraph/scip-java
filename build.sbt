@@ -23,12 +23,12 @@ lazy val V =
     val scala3 = "3.3.3"
     val metals = "1.2.2"
     val scalameta = "4.9.3"
-    val semanticdbKotlin = "0.5.0"
+    val semanticdbKotlin = "0.6.0"
     val testcontainers = "0.39.3"
     val requests = "0.8.0"
     val minimalMillVersion = "0.10.0"
     val millScipVersion = "0.3.6"
-    val kotlinVersion = "2.1.20"
+    val kotlinVersion = "2.2.10"
   }
 
 inThisBuild(

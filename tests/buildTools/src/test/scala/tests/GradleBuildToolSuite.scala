@@ -364,7 +364,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     "kotlin2",
     """|/build.gradle
        |plugins {
-       |    id 'org.jetbrains.kotlin.jvm' version '2.1.20'
+       |    id 'org.jetbrains.kotlin.jvm' version '2.2.10'
        |}
        |repositories {
        |    mavenCentral()
@@ -438,7 +438,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
       s"""|/build.gradle
           |plugins {
           |    id 'java'
-          |    id 'org.jetbrains.kotlin.jvm' version '2.1.20'
+          |    id 'org.jetbrains.kotlin.jvm' version '2.2.10'
           |}
           |java {
           |  toolchain {
