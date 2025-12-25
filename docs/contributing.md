@@ -9,12 +9,16 @@ This page documents tips and tricks for contributing to the
 
 ## System dependencies
 
-- `java`: any version should work
+- [`sbt`](https://www.scala-sbt.org/): `brew install sbt` or see [sbt installation guide](https://www.scala-sbt.org/download/)
+- `java`: Java 11 is recommended
+  - If you start sbt using the provided `./sbt` script, it will automatically use the correct version of Java
 - `git`: any version should work
 - `gradle`: `brew install gradle`, or see
   [general installation guide](https://gradle.org/install/).
 - `mvn`: `brew install maven`, or see
   [general installation guide](https://www.baeldung.com/install-maven-on-windows-linux-mac).
+- _optional_ `coursier`: `brew install coursier/formulas/coursier`, or see
+  [general installation guide](https://get-coursier.io/docs/cli-installation.html).
 
 ## Project structure
 
@@ -32,13 +36,26 @@ These are the main components of the project.
 - `cli/src/main/scala`: implementation of the `scip-java` command-line
   interface.
 - `build.sbt`: the sbt build definition.
-- `project/plugins.sbt`: plugins for the sbt build.
+- `semanticdb-gradle-plugin/src/main/scala`: Gradle plugin for auto-indexing
+- `semanticdb-maven-plugin/src/main/java`: Maven plugin for auto-indexing
+- `semanticdb-agent`: [Java agent](https://www.baeldung.com/java-instrumentation) for auto-indexing – it's used as a fallback mechanism for when injecting code into the build failed
+- `examples`: Bazel and Maven sample projects, used for demonstration and are validated on CI
+- `project/plugins.sbt`: plugins for the sbt build ([sbt is recursive](https://www.scala-sbt.org/1.x/docs/Organizing-Build.html#sbt+is+recursive))
+
+## Development guidelines
+
+The main build tool used by this project is sbt. The most important aspect worth knowing about sbt is that it's a REPL – start it once, and issue the [commands](#helpful-commands) in the REPL.
+It should not be used as a CLI tool (e.g. running `sbt test` every time), as it takes quite a bit of time to start up.
+
+For basics of working with sbt, see [sbt by example](https://www.scala-sbt.org/1.x/docs/sbt-by-example.html)
 
 ## Helpful commands
 
 | Command                                                             | Where    | Description                                                                         |
 | ------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------- |
 | `./sbt`                                                             | terminal | Start interactive sbt shell with Java 11. Takes a while to load on the first run.   |
+| `projects`                                                             | sbt | List all projects in the build    |
+| `show cli/pack`                                                         | sbt      | Run fast unit tests.                                                                |
 | `unit/test`                                                         | sbt      | Run fast unit tests.                                                                |
 | `~unit/test`                                                        | sbt      | Start watch mode to run tests on file save, good for local edit-and-test workflows. |
 | `buildTools/test`                                                   | sbt      | Run slow build tool tests (Gradle, Maven).                                          |
@@ -47,7 +64,7 @@ These are the main components of the project.
 | `snapshots/testOnly tests.LibrarySnapshotSuite`                     | sbt      | Runs slow snapshot tests. Indexes a corpus of external Java libraries.              |
 | `snapshots/test`                                                    | sbt      | Runs all snapshot tests.                                                            |
 | `snapshots/run`                                                     | sbt      | Update snapshot tests. Use this command after you have fixed a bug.                 |
-| `cli/run --cwd DIRECTORY`                                           | sbt      | Run `scip-java` command-line tool against a given Gradle/Maven build.               |
+| `cli/run --cwd DIRECTORY`                                           | sbt      | Run `scip-java` command-line tool against a given folder with any supported build tool.               |
 | `cd website && yarn install && yarn start`                          | terminal | Start live-reload preview of the website at http://localhost:3000/scip-java.        |
 | `docs/mdoc --watch`                                                 | sbt      | Re-generate markdown files in the `docs/` directory.                                |
 | `fixAll`                                                            | sbt      | Run Scalafmt, Scalafix and Javafmt on all sources. Run this before opening a PR.    |
