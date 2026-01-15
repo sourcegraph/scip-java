@@ -1,6 +1,5 @@
 package com.sourcegraph.scip_semanticdb;
 
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.FileSystems;
@@ -11,18 +10,19 @@ import java.util.Enumeration;
 import java.util.Optional;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.io.DataInputStream;
 
 public class JavaVersion {
   public final boolean isJava8;
   public final JdkPackage pkg;
-  private static final PathMatcher CLASS_PATTERN =
-      FileSystems.getDefault().getPathMatcher("glob:**.class");
-  private static final PathMatcher JAR_PATTERN =
-      FileSystems.getDefault().getPathMatcher("glob:**.jar");
+  private static final PathMatcher CLASS_PATTERN = FileSystems.getDefault().getPathMatcher("glob:**.class");
+  private static final PathMatcher JAR_PATTERN = FileSystems.getDefault().getPathMatcher("glob:**.jar");
 
   public static final int JAVA8_VERSION = 8;
   public static final int JAVA11_VERSION = 11;
   public static final int JAVA17_VERSION = 17;
+  public static final int JAVA21_VERSION = 21;
+  public static final int JAVA25_VERSION = 25;
   public static final int DEFAULT_JAVA_VERSION = JAVA8_VERSION;
 
   @SuppressWarnings("FieldCanBeLocal")
@@ -38,28 +38,41 @@ public class JavaVersion {
   }
 
   private String javaVersion(String version) {
-    if (version.startsWith("1.8")) return "8";
+    if (version.startsWith("1.8"))
+      return "8";
     String[] parts = version.split("\\.");
-    if (parts.length > 0) return parts[0];
-    else return version;
+    if (parts.length > 0)
+      return parts[0];
+    else
+      return version;
   }
 
   @SuppressWarnings("ManualMinMaxCalculation")
   public static int roundToNearestStableRelease(int version) {
-    if (version <= JAVA8_VERSION) return JAVA8_VERSION;
-    if (version <= JAVA11_VERSION) return JAVA11_VERSION;
-    if (version <= JAVA17_VERSION) return JAVA17_VERSION;
+    if (version <= JAVA8_VERSION)
+      return JAVA8_VERSION;
+    if (version <= JAVA11_VERSION)
+      return JAVA11_VERSION;
+    if (version <= JAVA17_VERSION)
+      return JAVA17_VERSION;
+    if (version <= JAVA21_VERSION)
+      return JAVA21_VERSION;
+    if (version <= JAVA25_VERSION)
+      return JAVA25_VERSION;
     return version;
   }
 
   /**
    * Return the JVM version of the given jar/class file.
    *
-   * <p>The JVM version is determined by reading the 5-8th bytes of classfiles, according to the
+   * <p>
+   * The JVM version is determined by reading the 5-8th bytes of classfiles,
+   * according to the
    * Java Language spec. See
    * https://docs.oracle.com/javase/specs/jvms/se16/html/jvms-4.html#jvms-4.1
    *
-   * @return the JVM version such as <code>8</code> for Java 8 and <code>11</code> for Java 11.
+   * @return the JVM version such as <code>8</code> for Java 8 and <code>11</code>
+   *         for Java 11.
    */
   public static Optional<Integer> classfileJvmVersion(Path file) {
     try {
@@ -92,7 +105,8 @@ public class JavaVersion {
     DataInputStream in = new DataInputStream(classfileBytes);
     // See https://docs.oracle.com/javase/specs/jvms/se16/html/jvms-4.html#jvms-4.1
     int magic = in.readInt(); // u4 magic
-    if (magic != 0xCAFEBABE) return -1;
+    if (magic != 0xCAFEBABE)
+      return -1;
     in.readUnsignedShort(); // u2 minor_version
     return in.readUnsignedShort(); // u2 major_version
   }

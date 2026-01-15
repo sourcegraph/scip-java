@@ -7,18 +7,18 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
-    name: Tests
+    name: Tests (JDK ${{ matrix.java }})
     strategy:
       fail-fast: false
       matrix:
         # NOTE(olafurpg) Windows is not enabled because it times out due to reasons I don't understand.
         # os: [windows-latest, ubuntu-latest]
         os: [ubuntu-latest]
-        java: [8, 11, 17, 21]
+        java: [8, 11, 17, 21, 25]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: "temurin"
           cache: "sbt"
@@ -26,13 +26,8 @@ jobs:
 
       - uses: sbt/setup-sbt@v1
 
-      - name: Setup Gradle 8.10
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.10' 
-
       - name: Main project tests
-        run: sbt test 
+        run: sbt test
 
   docker_test:
     runs-on: ${{ matrix.os }}
@@ -42,9 +37,9 @@ jobs:
       matrix:
         os: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v5
         with:
           distribution: "temurin"
           cache: "sbt"
@@ -76,7 +71,7 @@ jobs:
   bazel:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
       - run: yarn global add @bazel/bazelisk
       - run: bazel build //... --//semanticdb-javac:enabled=true
       - run: bazel run scip-semanticdb:bazel -- --sourceroot "$PWD"
@@ -91,10 +86,10 @@ jobs:
   bazel_aspect:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
       - run: yarn global add @bazel/bazelisk
 
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v5
         with:
           distribution: "temurin"
           cache: "sbt"
@@ -133,18 +128,17 @@ jobs:
       - name: Run sample benchmarks
         run: sbt --client 'bench/Jmh/run -i 1 -f1 -t1 -foe true'
 
-
   maven:
     runs-on: ubuntu-latest
     name: Maven tests
     strategy:
       fail-fast: false
       matrix:
-        java: [8, 11, 17, 21]
+        java: [8, 11, 17, 21, 25]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: "temurin"
           cache: "sbt"
@@ -172,4 +166,3 @@ jobs:
 
       - run: du -h index.scip
         working-directory: examples/maven-example
-
