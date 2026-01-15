@@ -32,13 +32,11 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
   def scalaLibrary(scalaVersion: String) =
     if (scalaVersion.startsWith("3"))
       List(
-        "maven:org.scala-lang:scala-library:2.13.12",
-        "maven:org.scala-lang:scala3-library_3:3.3.3"
+        "maven:org.scala-lang:scala-library:2.13.16",
+        s"maven:org.scala-lang:scala3-library_3:$scalaVersion"
       ).mkString("\n")
     else if (scalaVersion.startsWith("2.13"))
-      "maven:org.scala-lang:scala-library:2.13.8"
-    else if (scalaVersion.startsWith("2.12"))
-      "maven:org.scala-lang:scala-library:2.12.19"
+      s"maven:org.scala-lang:scala-library:$scalaVersion"
     else
       "idn fail, we don't cover this scala version"
 
@@ -47,14 +45,12 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
       "3"
     else if (scalaVersion.startsWith("2.13"))
       "2.13"
-    else if (scalaVersion.startsWith("2.12"))
-      "2.12"
     else
       "idn fail, we don't cover this scala version"
 
   for {
-    mill <- List(Mill0_10, Mill0_11)
-    scala <- List(Scala212, Scala2_13_8, Scala3)
+    mill <- List(Mill)
+    scala <- List(Scala2_13, Scala_LTS, Scala_Next)
   } yield {
 
     checkBuild(
@@ -100,7 +96,7 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
   checkBuild(
     "java-module",
     s"""|/.mill-version
-        |${Mill0_10.version}
+        |${Mill.version}
         |/build.sc
         |import mill._, scalalib._
         |object minimal extends JavaModule
@@ -115,15 +111,15 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
         |}
         |""".stripMargin,
     expectedSemanticdbFiles = 1,
-    initCommand = setupMill(Mill0_10.version),
+    initCommand = setupMill(Mill.version),
     targetRoot = Some("out/io/kipp/mill/scip/Scip/generate.dest"),
-    tools = List(Mill0_10)
+    tools = List(Mill)
   )
 
   checkBuild(
     "output",
     s"""|/.mill-version
-        |${Mill0_10.version}
+        |${Mill.version}
         |/build.sc
         |import mill._, scalalib._
         |object minimal extends ScalaModule {
@@ -134,9 +130,9 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
         |@main def hello = ()
         |""".stripMargin,
     expectedSemanticdbFiles = 1,
-    initCommand = setupMill(Mill0_10.version),
+    initCommand = setupMill(Mill.version),
     targetRoot = Some("out/io/kipp/mill/scip/Scip/generate.dest"),
     extraArguments = List("--output", "dump.scip"),
-    tools = List(Mill0_10)
+    tools = List(Mill)
   )
 }

@@ -1,13 +1,13 @@
 package tests
 
-import tests.Tool.SBT15
+import tests.Tool.SBT112
 
 abstract class SbtBuildToolSuite(sbt: Tool.SBT) extends BaseBuildToolSuite {
 
   import Tool._
 
   for {
-    scala <- List(Scala211, Scala2_12_12, Scala2_13_8, Scala3)
+    scala <- List(Scala2_11, Scala2_13, Scala_LTS, Scala_Next)
   } yield {
     checkBuild(
       s"basic-${sbt.name}-${scala.name}",
@@ -62,5 +62,4 @@ abstract class SbtBuildToolSuite(sbt: Tool.SBT) extends BaseBuildToolSuite {
 
 import Tool._
 
-class Sbt_15_BuildToolSuite extends SbtBuildToolSuite(SBT15)
-class Sbt_110_BuildToolSuite extends SbtBuildToolSuite(SBT110)
+class Sbt_112_BuildToolSuite extends SbtBuildToolSuite(SBT112)

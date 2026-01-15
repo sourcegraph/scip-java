@@ -2,12 +2,8 @@ package tests
 
 import tests.Tool._
 
+class Gradle_9_BuildToolSuite extends GradleBuildToolSuite(Gradle9)
 class Gradle_8_BuildToolSuite extends GradleBuildToolSuite(Gradle8)
-class Gradle_7_BuildToolSuite extends GradleBuildToolSuite(Gradle7)
-class Gradle_6_BuildToolSuite extends GradleBuildToolSuite(Gradle6)
-class Gradle_5_BuildToolSuite extends GradleBuildToolSuite(Gradle5)
-class Gradle_3_BuildToolSuite extends GradleBuildToolSuite(Gradle3)
-class Gradle_2_BuildToolSuite extends GradleBuildToolSuite(Gradle2)
 
 abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     extends GradleBuildToolSuiteBase(gradle) {
@@ -42,7 +38,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     - /META-INF/semanticdb/src/main/java/WorkflowOptions.java.semanticdb
      */
     expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle8, Gradle7, Gradle6)
+    gradleVersions = List(Gradle9, Gradle8)
   )
 
   checkGradleBuild(
@@ -74,7 +70,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     // See comment about immutable annotation processor above,
     // it explains why we expecte 2 semanticdb files
     expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle8, Gradle7, Gradle6)
+    gradleVersions = List(Gradle9, Gradle8)
   )
 
   checkGradleBuild(
@@ -102,7 +98,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |public abstract class ExampleClass {}
     """.stripMargin,
     expectedSemanticdbFiles = 1,
-    gradleVersions = List(Gradle8, Gradle7, Gradle6),
+    gradleVersions = List(Gradle9, Gradle8),
     expectedPackages = "maven:com.sourcegraph:example-library:1.1"
   )
 
@@ -160,8 +156,8 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |""".stripMargin,
     expectedSemanticdbFiles = 3,
     // Only add this test on Gradle 5 in the gradle 6 suite
-    gradleVersions = List(Gradle8, Gradle7, Gradle6, Gradle5),
-    tools = List(Scala2_13_8)
+    gradleVersions = List(Gradle9, Gradle8),
+    tools = List(Scala2_13)
   )
 
   allJava.foreach { java =>
@@ -181,7 +177,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
           |public class Example {}
           |""".stripMargin,
       expectedSemanticdbFiles = 1,
-      gradleVersions = List(Gradle8, Gradle7, Gradle6)
+      gradleVersions = List(Gradle9, Gradle8)
     )
   }
 
@@ -220,7 +216,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |public class Example {}
        |""".stripMargin,
     expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle8, Gradle7, Gradle6)
+    gradleVersions = List(Gradle9, Gradle8)
   )
 
   checkGradleBuild(
@@ -236,7 +232,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |""".stripMargin,
     expectedSemanticdbFiles = 2,
     extraArguments = List("--build-tool", "gradle"),
-    gradleVersions = List(Gradle8, Gradle7, Gradle6)
+    gradleVersions = List(Gradle9, Gradle8)
   )
 
   checkGradleBuild(
@@ -250,7 +246,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |""".stripMargin,
     expectedSemanticdbFiles = 1,
     extraArguments = List("--", "compileJava"),
-    gradleVersions = List(Gradle8, Gradle7, Gradle6)
+    gradleVersions = List(Gradle9, Gradle8)
   )
 
   checkGradleBuild(
@@ -302,7 +298,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |""".stripMargin,
     expectedSemanticdbFiles =
       2, // Two files because `conf/routes` generates a Java file.
-    gradleVersions = List(Gradle6)
+    gradleVersions = List(Gradle8)
   )
 
   checkGradleBuild(
@@ -328,7 +324,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |public class ExampleSuite {}
        |""".stripMargin,
     expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle6)
+    gradleVersions = List(Gradle8)
   )
 
   checkGradleBuild(
@@ -341,7 +337,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |    mavenCentral()
        |}
        |dependencies {
-       |  implementation 'org.scala-lang:scala-library:2.12.12'
+       |  implementation 'org.scala-lang:scala-library:2.13.18'
        |}
        |/src/main/java/foo/JExample.java
        |package foo;
@@ -357,8 +353,8 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |class ExampleSuite {}
        |""".stripMargin,
     expectedSemanticdbFiles = 4,
-    gradleVersions = List(Gradle8, Gradle7, Gradle6),
-    tools = List(Scala2_12_12)
+    gradleVersions = List(Gradle9, Gradle8),
+    tools = List(Scala2_13)
   )
   checkGradleBuild(
     "kotlin2",
@@ -429,7 +425,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
          |maven:org.jetbrains:annotations:13.0
          |maven:org.slf4j:slf4j-api:1.7.36
          |""".stripMargin,
-    gradleVersions = List(Gradle8, Gradle7, Gradle6)
+    gradleVersions = List(Gradle9, Gradle8)
   )
 
   List("8", "11").foreach { java =>
@@ -507,7 +503,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
         |public class ExampleSuite {}
         |""".stripMargin,
     expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle3, Gradle2)
+    gradleVersions = List(Gradle9, Gradle8)
     // NOTE(olafur): no packages because we use more modern APIs.
   )
 
