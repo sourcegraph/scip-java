@@ -19,6 +19,8 @@ import munit.TestOptions
 import os.Shellable
 
 object Java8Only extends munit.Tag("Java8Only")
+case class JVMCompatibility(tools: List[Tool])
+    extends munit.Tag("JVMCompatibility")
 
 abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
   self =>
@@ -44,6 +46,26 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
               t.tag(munit.Ignore)
             else
               t
+        ),
+        new TestTransform(
+          "JVMCompatibility",
+          t =>
+            t.tags
+              .collectFirst { case JVMCompatibility(tools) =>
+                tools
+              }
+              .map { tools =>
+                val minJDK = Tool.minimumSupportedJdk(tools)
+                val maxJDK = Tool
+                  .maximumSupportedJdk(tools)
+                  .getOrElse(Int.MaxValue)
+                val javaVersion = BaseBuildToolSuite.externalJavaVersion
+                if (javaVersion < minJDK || javaVersion > maxJDK)
+                  t.tag(munit.Ignore)
+                else
+                  t
+              }
+              .getOrElse(t)
         )
       )
 
@@ -79,28 +101,13 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
       targetRoot: Option[String] = None,
       tools: List[Tool] = Nil
   ): Unit = {
-    val minJDK = Tool.minimumSupportedJdk(tools)
-    val maxJDK = Tool.maximumSupportedJdk(tools).getOrElse(Int.MaxValue)
-    val externalJDKVersion = BaseBuildToolSuite.externalJavaVersion
+    val testTags =
+      if (tools.nonEmpty)
+        options.tags ++ tags + JVMCompatibility(tools)
+      else
+        options.tags ++ tags
 
-    val JDKSupported =
-      externalJDKVersion >= minJDK && externalJDKVersion <= maxJDK
-
-    val ignoreMsg =
-      s"Test ${options
-          .name} was ignored because the external JDK version doesn't match the toolset requirements: " +
-        s"Tools: $tools, min JDK = $minJDK, max JDK = $maxJDK, detected JDK = $externalJDKVersion"
-
-    test(options.withTags(options.tags ++ tags)) {
-      // Unfortunately, MUnit doesn't seem to handle the ignore messages the
-      // way we'd want: https://github.com/scalameta/munit/issues/549#issuecomment-2056751821
-      // So instead, to give some indication that the test was actually ignored,
-      // we print this message
-      if (!JDKSupported)
-        System.err.println(ignoreMsg)
-
-      assume(JDKSupported, ignoreMsg)
-
+    test(options.withTags(testTags)) {
       if (initCommand.nonEmpty) {
         os.proc(Shellable(initCommand)).call(os.Path(workingDirectory))
       }
