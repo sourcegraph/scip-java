@@ -122,7 +122,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |dependencies {
        |    // This dependency is used by the application.
        |    implementation 'com.google.guava:guava:31.1-jre'
-       |    implementation 'org.scala-lang:scala-library:2.13.8'
+       |    implementation 'org.scala-lang:scala-library:2.13.18'
        |    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
        |    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
        |}
