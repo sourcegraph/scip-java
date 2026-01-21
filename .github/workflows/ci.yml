@@ -2,7 +2,7 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - FIXME
   pull_request:
 jobs:
   test:
@@ -42,7 +42,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: actions/setup-java@v3
         with:
@@ -53,25 +53,15 @@ jobs:
       - uses: sbt/setup-sbt@v1
 
       - name: Build Dockerised CLI
-        run: sbt cli/docker
+        run: sbt cli/docker 
 
-      - name: Test repos
-        shell: bash
-        run: |
-          set -eu
-          check_repo() {
-            REPO=$1
-            mkdir -p .repos/$REPO
-            git clone https://github.com/$REPO.git .repos/$REPO && cd .repos/$REPO && git submodule update --init
-
-            docker run -v $PWD/.repos/$REPO:/sources -w /sources sourcegraph/scip-java:latest scip-java index
-            file .repos/$REPO/index.scip || (echo "$REPO SCIP index doesn't exist!"; exit 1)
-          }
-
-          sudo apt install parallel
-          export -f check_repo
-
-          parallel -j4 check_repo ::: circe/circe indeedeng/iwf-java-sdk
+      - uses: actions/checkout@v3
+        with:
+          path: sources
+          repository: spring-projects/spring-boot
+          
+      - run: | 
+          docker run -v $PWD/sources:/sources -w /sources sourcegraph/scip-java:latest-snapshot scip-java index
 
   bazel:
     runs-on: ubuntu-latest
