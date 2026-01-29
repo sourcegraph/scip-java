@@ -66,3 +66,5 @@ VERSION
 
 semanticdb-gradle-plugin/gradle
 aspects/scip_java.bzl
+
+tests/snapshots/META-INF/
