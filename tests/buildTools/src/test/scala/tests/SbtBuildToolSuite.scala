@@ -1,7 +1,5 @@
 package tests
 
-import tests.Tool.SBT15
-
 abstract class SbtBuildToolSuite(sbt: Tool.SBT) extends BaseBuildToolSuite {
 
   import Tool._
@@ -62,5 +60,4 @@ abstract class SbtBuildToolSuite(sbt: Tool.SBT) extends BaseBuildToolSuite {
 
 import Tool._
 
-class Sbt_15_BuildToolSuite extends SbtBuildToolSuite(SBT15)
 class Sbt_110_BuildToolSuite extends SbtBuildToolSuite(SBT110)
