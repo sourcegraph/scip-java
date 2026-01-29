@@ -6,8 +6,8 @@ import java.util.concurrent.TimeUnit
 
 import scala.jdk.CollectionConverters._
 
+import com.sourcegraph.Scip
 import com.sourcegraph.io.AbsolutePath
-import com.sourcegraph.lsif_protocol.LsifToolInfo
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.buildtools.ClasspathEntry
 import com.sourcegraph.scip_semanticdb.ConsoleScipSemanticdbReporter
@@ -47,8 +47,6 @@ final case class IndexSemanticdbCommand(
     @Description("Directories that contain SemanticDB files.")
     @PositionalArguments()
     targetroot: List[Path] = Nil,
-    @Description("The kind of this build, one of: empty string, jdk, maven")
-    buildKind: String = "",
     @Description(
       "If true, don't report an error when no documents have been indexed. " +
         "The resulting SCIP index will silently be empty instead."
@@ -79,7 +77,7 @@ final case class IndexSemanticdbCommand(
     if (format == ScipOutputFormat.UNKNOWN) {
       app.error(
         s"unknown output format for filename '$outputFilename'. " +
-          s"Supported file extension are `*.scip`, `*scip '"
+          s"Supported file extensions are `*.scip` and `*.scip.ndjson`"
       )
       return 1
     }
@@ -97,16 +95,15 @@ final case class IndexSemanticdbCommand(
         AbsolutePath.of(output, sourceroot),
         sourceroot,
         reporter,
-        LsifToolInfo
+        Scip
+          .ToolInfo
           .newBuilder()
           .setName("scip-java")
           .setVersion(BuildInfo.version)
           .build(),
-        "java",
         format,
         parallel,
         packages.map(_.toPackageInformation).asJava,
-        buildKind,
         emitInverseRelationships,
         allowEmptyIndex,
         allowExportingGlobalSymbolsFromDirectoryEntries

@@ -105,8 +105,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     BuildTool.generateScipFromTargetroot(
       generateSemanticdb(),
       index.finalTargetroot(defaultTargetroot),
-      index,
-      buildKind
+      index
     )
   }
 
@@ -117,7 +116,6 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       ScipBuildTool
         .ConfigFileNames
         .map(name => index.workingDirectory.resolve(name))
-  private def buildKind: String = parsedConfig.fold(_.kind, _ => "")
   private def generateSemanticdb(): CommandResult = {
     parsedConfig match {
       case ValueResult(value) =>

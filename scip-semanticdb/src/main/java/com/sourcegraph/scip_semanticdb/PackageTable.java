@@ -8,23 +8,17 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.regex.Pattern;
 
-public class PackageTable implements Function<Package, Integer> {
+public class PackageTable {
 
   private final Map<String, Package> byClassfile = new HashMap<>();
   private final Set<String> cachedJdkSymbols = new HashSet<>();
-  private final Map<Package, Integer> scip = new ConcurrentHashMap<>();
   private final JavaVersion javaVersion;
-  private final ScipWriter writer;
   private final boolean indexDirectoryEntries;
 
   private static final PathMatcher CLASS_PATTERN =
@@ -32,8 +26,7 @@ public class PackageTable implements Function<Package, Integer> {
   private static final PathMatcher JAR_PATTERN =
       FileSystems.getDefault().getPathMatcher("glob:**.jar");
 
-  public PackageTable(ScipSemanticdbOptions options, ScipWriter writer) throws IOException {
-    this.writer = writer;
+  public PackageTable(ScipSemanticdbOptions options) throws IOException {
     this.javaVersion = new JavaVersion();
     this.indexDirectoryEntries = options.allowExportingGlobalSymbolsFromDirectoryEntries;
     // NOTE: it's important that we index the JDK before maven packages. Some maven packages
@@ -44,11 +37,6 @@ public class PackageTable implements Function<Package, Integer> {
     for (MavenPackage pkg : options.packages) {
       indexPackage(pkg);
     }
-  }
-
-  public void writeMonikerPackage(int monikerId, Package pkg) {
-    int pkgId = scip.computeIfAbsent(pkg, this);
-    writer.emitPackageInformationEdge(monikerId, pkgId);
   }
 
   public Optional<Package> packageForSymbol(String symbol) {
@@ -147,10 +135,5 @@ public class PackageTable implements Function<Package, Integer> {
         }
       }
     }
-  }
-
-  @Override
-  public Integer apply(Package pkg) {
-    return writer.emitpackageinformationVertex(pkg);
   }
 }
