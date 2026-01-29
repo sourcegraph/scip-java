@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit
 import scala.jdk.CollectionConverters._
 
 import com.sourcegraph.io.AbsolutePath
-import com.sourcegraph.lsif_protocol.LsifToolInfo
+import com.sourcegraph.Scip
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.buildtools.ClasspathEntry
 import com.sourcegraph.scip_semanticdb.ConsoleScipSemanticdbReporter
@@ -79,7 +79,7 @@ final case class IndexSemanticdbCommand(
     if (format == ScipOutputFormat.UNKNOWN) {
       app.error(
         s"unknown output format for filename '$outputFilename'. " +
-          s"Supported file extension are `*.scip`, `*scip '"
+          s"Supported file extensions are `*.scip` and `*.scip.ndjson`"
       )
       return 1
     }
@@ -97,7 +97,7 @@ final case class IndexSemanticdbCommand(
         AbsolutePath.of(output, sourceroot),
         sourceroot,
         reporter,
-        LsifToolInfo
+        Scip.ToolInfo
           .newBuilder()
           .setName("scip-java")
           .setVersion(BuildInfo.version)

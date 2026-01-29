@@ -1,7 +1,7 @@
 package com.sourcegraph.scip_semanticdb;
 
 import com.sourcegraph.scip_java.Bazelbuild;
-import com.sourcegraph.lsif_protocol.LsifToolInfo;
+import com.sourcegraph.Scip;
 
 import java.io.*;
 import java.nio.file.FileSystems;
@@ -58,7 +58,7 @@ public class BazelBuildTool {
             options.output,
             options.sourceroot,
             reporter,
-            LsifToolInfo.newBuilder().setName("scip-java").setVersion("HEAD").build(),
+            Scip.ToolInfo.newBuilder().setName("scip-java").setVersion("HEAD").build(),
             "java",
             ScipOutputFormat.TYPED_PROTOBUF,
             options.parallel,

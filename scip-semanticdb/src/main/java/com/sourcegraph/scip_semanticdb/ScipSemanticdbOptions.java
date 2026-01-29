@@ -1,6 +1,6 @@
 package com.sourcegraph.scip_semanticdb;
 
-import com.sourcegraph.lsif_protocol.LsifToolInfo;
+import com.sourcegraph.Scip;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class ScipSemanticdbOptions {
   public final Path output;
   public final Path sourceroot;
   public final ScipSemanticdbReporter reporter;
-  public final LsifToolInfo toolInfo;
+  public final Scip.ToolInfo toolInfo;
   public final String language;
   public final ScipOutputFormat format;
   public final boolean parallel;
@@ -26,7 +26,7 @@ public class ScipSemanticdbOptions {
       Path output,
       Path sourceroot,
       ScipSemanticdbReporter reporter,
-      LsifToolInfo toolInfo,
+      Scip.ToolInfo toolInfo,
       String language,
       ScipOutputFormat format,
       boolean parallel,

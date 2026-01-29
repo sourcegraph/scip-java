@@ -1,7 +1,6 @@
 package com.sourcegraph.scip_semanticdb;
 
 import com.google.protobuf.CodedInputStream;
-import com.sourcegraph.lsif_protocol.MarkupKind;
 import com.sourcegraph.semanticdb_javac.Semanticdb;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Kind;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.file.*;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
@@ -27,12 +26,10 @@ import java.util.stream.StreamSupport;
 public class ScipSemanticdb {
   private final ScipWriter writer;
   private final ScipSemanticdbOptions options;
-  private final Map<String, ResultIds> globals;
 
   public ScipSemanticdb(ScipWriter writer, ScipSemanticdbOptions options) {
     this.writer = writer;
     this.options = options;
-    this.globals = new ConcurrentHashMap<>();
   }
 
   public static void run(ScipSemanticdbOptions options) throws IOException {
@@ -41,7 +38,7 @@ public class ScipSemanticdb {
   }
 
   private void run() throws IOException {
-    PackageTable packages = new PackageTable(options, writer);
+    PackageTable packages = new PackageTable(options);
     List<Path> files = SemanticdbWalker.findSemanticdbFiles(options);
     Collections.sort(files);
     if (options.reporter.hasErrors()) return;
@@ -56,11 +53,7 @@ public class ScipSemanticdb {
       return;
     }
     options.reporter.startProcessing(files.size());
-    if (options.format.isTyped()) {
-      runTyped(files, packages);
-    } else {
-      runGraph(files, packages);
-    }
+    runTyped(files, packages);
     writer.build();
     options.reporter.endProcessing();
   }
@@ -323,20 +316,8 @@ public class ScipSemanticdb {
                     Scip.ToolInfo.newBuilder()
                         .setName(options.toolInfo.getName())
                         .setVersion(options.toolInfo.getVersion())
-                        .addAllArguments(options.toolInfo.getArgsList())))
+                        .addAllArguments(options.toolInfo.getArgumentsList())))
         .build();
-  }
-
-  private void runGraph(List<Path> files, PackageTable packages) {
-    writer.emitMetaData();
-    int projectId = writer.emitProject(options.language);
-
-    Set<String> isExportedSymbol = exportSymbols(files);
-    List<Integer> documentIds =
-        filesStream(files)
-            .flatMap(d -> processPath(d, isExportedSymbol, packages))
-            .collect(Collectors.toList());
-    writer.emitContains(projectId, documentIds);
   }
 
   private Stream<Path> filesStream(List<Path> files) {
@@ -385,139 +366,6 @@ public class ScipSemanticdb {
       }
     }
     return relationships.stream();
-  }
-
-  private Set<String> exportSymbols(List<Path> files) {
-    return filesStream(files)
-        .flatMap(this::parseTextDocument)
-        .flatMap(
-            d ->
-                d.semanticdb.getOccurrencesList().stream()
-                    .filter(occ -> isDefinitionRole(occ.getRole()))
-                    .map(SymbolOccurrence::getSymbol)
-                    .filter(SemanticdbSymbols::isGlobal))
-        .collect(Collectors.toSet());
-  }
-
-  private Stream<Integer> processPath(
-      Path path, Set<String> isExportedSymbol, PackageTable packages) {
-    return parseTextDocument(path).flatMap(d -> processDocument(d, isExportedSymbol, packages));
-  }
-
-  private Stream<Integer> processDocument(
-      ScipTextDocument doc, Set<String> isExportedSymbol, PackageTable packages) {
-    try {
-      return Stream.of(processDocumentUnsafe(doc, isExportedSymbol, packages));
-    } catch (Exception e) {
-      options.reporter.error(new ScipProcessingException(doc, e));
-      return Stream.empty();
-    }
-  }
-
-  private Integer processDocumentUnsafe(
-      ScipTextDocument doc, Set<String> isExportedSymbol, PackageTable packages) {
-    Symtab symtab = new Symtab(doc.semanticdb);
-
-    int documentId = writer.emitDocument(doc);
-    Set<String> localDefinitions =
-        doc.semanticdb.getOccurrencesList().stream()
-            .filter(
-                occ ->
-                    isDefinitionRole(occ.getRole()) && SemanticdbSymbols.isLocal(occ.getSymbol()))
-            .map(SymbolOccurrence::getSymbol)
-            .collect(Collectors.toSet());
-    doc.id = documentId;
-    ResultSets results =
-        new ResultSets(writer, globals, isExportedSymbol, localDefinitions, packages, options);
-    Set<Integer> rangeIds = new LinkedHashSet<>();
-
-    for (SymbolOccurrence occ : doc.sortedSymbolOccurrences()) {
-      for (String symbol : occ.getSymbol().split(";")) {
-        SymbolInformation symbolInformation =
-            doc.symbols.getOrDefault(symbol, SymbolInformation.getDefaultInstance());
-        ResultIds ids = results.getOrInsertResultSet(symbol);
-        int rangeId = writer.emitRange(occ.getRange());
-        rangeIds.add(rangeId);
-
-        // Range
-        if (occ.getRole() != Role.SYNTHETIC_DEFINITION) {
-          writer.emitNext(rangeId, ids.resultSet);
-        }
-
-        // Reference
-        writer.emitItem(ids.referenceResult, rangeId, doc.id);
-
-        // Definition
-        if (isDefinitionRole(occ.getRole())) {
-          if (ids.isDefinitionDefined()) {
-            writer.emitItem(ids.definitionResult, rangeId, doc.id);
-          } else {
-            options.reporter.error(
-                new NoSuchElementException(
-                    String.format("no definition ID for symbol '%s'", symbol)));
-          }
-
-          // Hover 1: signature
-          String documentation = symbolInformation.getDocumentation().getMessage();
-          StringBuilder markupContent = new StringBuilder(documentation.length());
-          if (symbolInformation.hasSignature()) {
-            String language =
-                doc.semanticdb.getLanguage().toString().toLowerCase(Locale.ROOT).intern();
-            String signature = new SignatureFormatter(symbolInformation, symtab).formatSymbol();
-            markupContent
-                .append("```")
-                .append(language)
-                .append('\n')
-                .append(signature)
-                .append("\n```");
-          }
-
-          // Hover 2: docstring
-          if (!documentation.isEmpty()) {
-            if (markupContent.length() != 0) markupContent.append("\n---\n");
-            markupContent.append(documentation.replaceAll("\n", "\n\n"));
-          }
-
-          if (markupContent.length() == 0) {
-            // Always emit a non-empty hover message to prevent Sourcegraph from falling
-            // back to
-            // Search-Based hover messages.
-            markupContent.append(symbolInformation.getDisplayName());
-          }
-
-          int hoverId =
-              writer.emitHoverResult(
-                  new MarkupContent(MarkupKind.MARKDOWN, markupContent.toString()));
-          writer.emitHoverEdge(ids.resultSet, hoverId);
-        }
-
-        // Overrides
-        if (symbolInformation.getOverriddenSymbolsCount() > 0
-            && supportsReferenceRelationship(symbolInformation)
-            && occ.getRole() == Role.DEFINITION) {
-          List<Integer> overriddenReferenceResultIds =
-              new ArrayList<>(symbolInformation.getOverriddenSymbolsCount());
-          for (int i = 0; i < symbolInformation.getOverriddenSymbolsCount(); i++) {
-            String overriddenSymbol = symbolInformation.getOverriddenSymbols(i);
-            if (isIgnoredOverriddenSymbol(overriddenSymbol)) {
-              continue;
-            }
-            ResultIds overriddenIds = results.getOrInsertResultSet(overriddenSymbol);
-            overriddenReferenceResultIds.add(overriddenIds.referenceResult);
-            writer.emitReferenceResultsItemEdge(
-                overriddenIds.referenceResult, Collections.singletonList(rangeId), doc.id);
-          }
-          if (overriddenReferenceResultIds.size() > 0) {
-            writer.emitReferenceResultsItemEdge(
-                ids.referenceResult, overriddenReferenceResultIds, doc.id);
-          }
-        }
-      }
-    }
-    writer.emitContains(doc.id, new ArrayList<>(rangeIds));
-    writer.flush();
-    options.reporter.processedOneItem();
-    return documentId;
   }
 
   private static boolean supportsReferenceRelationship(SymbolInformation info) {

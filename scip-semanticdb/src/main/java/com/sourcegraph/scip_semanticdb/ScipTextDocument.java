@@ -10,9 +10,7 @@ import java.util.*;
 public class ScipTextDocument {
   public final Path semanticdbPath;
   public Semanticdb.TextDocument semanticdb;
-  public int id;
   public final Map<String, Semanticdb.SymbolInformation> symbols;
-  public final Map<String, ResultIds> localSymbols;
   // Map from symbols that have a definition occurrence to the list of symbols that have
   // `is_definition` relationships to that symbol.
   // This map is used to add `is_reference` relationships between all symbols in the list so that
@@ -26,7 +24,6 @@ public class ScipTextDocument {
       Path semanticdbPath, Semanticdb.TextDocument semanticdb, Path sourceroot) {
     this.semanticdbPath = semanticdbPath;
     this.symbols = new HashMap<>();
-    this.localSymbols = new HashMap<>();
     String uri = sourceroot.resolve(semanticdb.getUri()).toUri().toString();
     setSemanticdb(Semanticdb.TextDocument.newBuilder(semanticdb).setUri(uri).build());
   }
@@ -38,8 +35,6 @@ public class ScipTextDocument {
         + semanticdbPath
         + ", semanticdb="
         + semanticdb
-        + ", id="
-        + id
         + '}';
   }
 
