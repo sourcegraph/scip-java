@@ -341,7 +341,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |    mavenCentral()
        |}
        |dependencies {
-       |  implementation 'org.scala-lang:scala-library:2.12.12'
+       |  implementation 'org.scala-lang:scala-library:2.13.13'
        |}
        |/src/main/java/foo/JExample.java
        |package foo;
@@ -358,7 +358,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |""".stripMargin,
     expectedSemanticdbFiles = 4,
     gradleVersions = List(Gradle8, Gradle7, Gradle6),
-    tools = List(Scala2_12_12)
+    tools = List(Scala213)
   )
   checkGradleBuild(
     "kotlin2",

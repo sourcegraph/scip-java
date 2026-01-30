@@ -230,9 +230,8 @@ by [Metals](https://scalameta.org/metals), the Scala language server.
 
 | Scala version | Goto definition | Find references | Hover |
 | ------------- | --------------- | --------------- | ----- |
-| Scala 2.10.x  | ❌              | ❌              | ❌    |
-| Scala 2.11.x  | ✅              | ✅              | ✅    |
-| Scala 2.12.x  | ✅              | ✅              | ✅    |
+| Scala 2.11.x  | ❌              | ❌              | ❌    |
+| Scala 2.12.x  | ❌              | ❌              | ❌    |
 | Scala 2.13.x  | ✅              | ✅              | ✅    |
 | Scala 3.x     | ✅              | ✅              | ❌    |
 

@@ -37,24 +37,20 @@ class MillBuildToolSuite extends BaseBuildToolSuite {
       ).mkString("\n")
     else if (scalaVersion.startsWith("2.13"))
       "maven:org.scala-lang:scala-library:2.13.8"
-    else if (scalaVersion.startsWith("2.12"))
-      "maven:org.scala-lang:scala-library:2.12.19"
     else
-      "idn fail, we don't cover this scala version"
+      throw new IllegalArgumentException(s"Unsupported Scala version: $scalaVersion")
 
   def scalaBinaryVersion(scalaVersion: String) =
     if (scalaVersion.startsWith("3"))
       "3"
     else if (scalaVersion.startsWith("2.13"))
       "2.13"
-    else if (scalaVersion.startsWith("2.12"))
-      "2.12"
     else
-      "idn fail, we don't cover this scala version"
+      throw new IllegalArgumentException(s"Unsupported Scala version: $scalaVersion")
 
   for {
     mill <- List(Mill0_10, Mill0_11)
-    scala <- List(Scala212, Scala2_13_8, Scala3)
+    scala <- List(Scala2_13_8, Scala3)
   } yield {
 
     checkBuild(

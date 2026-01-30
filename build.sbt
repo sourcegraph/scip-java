@@ -18,8 +18,6 @@ lazy val V =
     val moped = "0.2.0"
     val gradle = "7.0"
     val scala213 = "2.13.13"
-    val scala212 = "2.12.19"
-    val scala211 = "2.11.12"
     val scala3 = "3.3.3"
     val metals = "1.2.2"
     val scalameta = "4.9.3"
@@ -140,8 +138,6 @@ lazy val gradlePlugin = project
         "semanticdbVersion" -> V.scalameta,
         "semanticdbKotlincVersion" -> V.semanticdbKotlin,
         "mtagsVersion" -> V.metals,
-        "scala211" -> V.scala211,
-        "scala212" -> V.scala212,
         "scala213" -> V.scala213,
         "scala3" -> V.scala3,
         "bspVersion" -> V.bsp,
@@ -268,8 +264,6 @@ lazy val cli = project
         "semanticdbVersion" -> V.scalameta,
         "semanticdbKotlincVersion" -> V.semanticdbKotlin,
         "mtagsVersion" -> V.metals,
-        "scala211" -> V.scala211,
-        "scala212" -> V.scala212,
         "scala213" -> V.scala213,
         "scala3" -> V.scala3,
         "bspVersion" -> V.bsp,
