@@ -27,7 +27,7 @@ jobs:
       - uses: sbt/setup-sbt@v1
 
       - name: Setup Gradle 8.10
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v5
         with:
           gradle-version: '8.10' 
 
