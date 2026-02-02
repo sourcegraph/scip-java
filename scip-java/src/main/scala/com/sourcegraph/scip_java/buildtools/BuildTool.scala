@@ -46,8 +46,7 @@ object BuildTool {
   def generateScipFromTargetroot(
       generateSemanticdbResult: CommandResult,
       targetroot: Path,
-      index: IndexCommand,
-      buildKind: String = ""
+      index: IndexCommand
   ): Int = {
     if (!Files.isDirectory(targetroot)) {
       generateSemanticdbResult.exitCode
@@ -62,7 +61,6 @@ object BuildTool {
           output = index.finalOutput,
           targetroot = List(targetroot),
           packagehub = index.packagehub,
-          buildKind = buildKind,
           app = index.app
         )
         .run()

@@ -1,7 +1,7 @@
 package com.sourcegraph.scip_semanticdb;
 
 import com.sourcegraph.scip_java.Bazelbuild;
-import com.sourcegraph.lsif_protocol.LsifToolInfo;
+import com.sourcegraph.Scip;
 
 import java.io.*;
 import java.nio.file.FileSystems;
@@ -58,12 +58,10 @@ public class BazelBuildTool {
             options.output,
             options.sourceroot,
             reporter,
-            LsifToolInfo.newBuilder().setName("scip-java").setVersion("HEAD").build(),
-            "java",
+            Scip.ToolInfo.newBuilder().setName("scip-java").setVersion("HEAD").build(),
             ScipOutputFormat.TYPED_PROTOBUF,
             options.parallel,
             mavenPackages,
-            /* buildKind */ "",
             /* emitInverseRelationships */ true,
             /* allowEmptyIndex */ true,
             /* indexDirectoryEntries */ false // because Bazel only compiles to jar files.

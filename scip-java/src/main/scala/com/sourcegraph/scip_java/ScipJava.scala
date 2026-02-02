@@ -6,7 +6,6 @@ import com.sourcegraph.scip_java.commands.IndexCommand
 import com.sourcegraph.scip_java.commands.IndexDependencyCommand
 import com.sourcegraph.scip_java.commands.IndexSemanticdbCommand
 import com.sourcegraph.scip_java.commands.SnapshotCommand
-import com.sourcegraph.scip_java.commands.SnapshotLsifCommand
 import moped.cli.Application
 import moped.cli.CommandParser
 import moped.commands.HelpCommand
@@ -23,8 +22,7 @@ object ScipJava {
       CommandParser[IndexCommand],
       CommandParser[IndexSemanticdbCommand],
       CommandParser[IndexDependencyCommand],
-      CommandParser[SnapshotCommand],
-      CommandParser[SnapshotLsifCommand]
+      CommandParser[SnapshotCommand]
     )
   )
   def main(args: Array[String]): Unit = {
