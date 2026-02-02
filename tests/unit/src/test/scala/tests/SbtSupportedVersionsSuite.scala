@@ -29,14 +29,13 @@ class SbtVersionParserSuite extends munit.FunSuite {
     }
 
     checkSupported("1.10.0-RC1")
-    checkSupported("0.13.17")
     checkSupported("1.5.6")
     checkSupported("1.9.7")
+    checkSupported("1.2.0")
 
     checkUnsupported("1.0.0-RC1")
-    checkUnsupported("0.13.16")
     checkUnsupported("1.1.6")
-    checkUnsupported("0.12.15")
+    checkUnsupported("0.13.16")
 
     checkFailed("1.0-RC1")
     checkFailed("0.13")

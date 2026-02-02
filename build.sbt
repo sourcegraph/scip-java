@@ -14,7 +14,6 @@ lazy val V =
       "3.17.3" // the oldest protoc version with Apple M1 support, see https://github.com/scalapb/ScalaPB/issues/1024#issuecomment-860126568
     val coursier = "2.1.9"
     val scalaXml = "2.1.0"
-    val bsp = "2.0.0-M13"
     val moped = "0.2.0"
     val gradle = "7.0"
     val scala213 = "2.13.13"
@@ -24,7 +23,6 @@ lazy val V =
     val metals = "1.2.2"
     val scalameta = "4.9.3"
     val semanticdbKotlin = "0.5.0"
-    val testcontainers = "0.39.3"
     val requests = "0.8.0"
     val minimalMillVersion = "0.10.0"
     val millScipVersion = "0.3.6"
@@ -48,16 +46,16 @@ inThisBuild(
     developers :=
       List(
         Developer(
-          "olafurpg",
-          "Ólafur Páll Geirsson",
-          "olafurpg@sourcegraph.com",
-          url("https://github.com/olafurpg")
+          "jupblb",
+          "Michal Kielbowicz",
+          "michal.kielbowicz@sourcegraph.com",
+          url("https://github.com/jupblb")
         ),
         Developer(
-          "Strum355",
-          "Noah Santschi-Cooney",
-          "noah@sourcegraph.com",
-          url("https://github.com/Strum355")
+          "chrapkowski-sg",
+          "Adam Chrapkowski",
+          "adam.chrapkowski@sourcegraph.com",
+          url("https://github.com/chrapkowski-sg")
         )
       )
   )
@@ -144,7 +142,6 @@ lazy val gradlePlugin = project
         "scala212" -> V.scala212,
         "scala213" -> V.scala213,
         "scala3" -> V.scala3,
-        "bspVersion" -> V.bsp,
         "minimalMillVersion" -> V.minimalMillVersion,
         "millScipVersion" -> V.millScipVersion
       )
@@ -272,7 +269,6 @@ lazy val cli = project
         "scala212" -> V.scala212,
         "scala213" -> V.scala213,
         "scala3" -> V.scala3,
-        "bspVersion" -> V.bsp,
         "minimalMillVersion" -> V.minimalMillVersion,
         "millScipVersion" -> V.millScipVersion
       ),
@@ -359,18 +355,6 @@ lazy val cli = project
   )
   .enablePlugins(PackPlugin, DockerPlugin, BuildInfoPlugin)
   .dependsOn(scip)
-
-def commitAll(): Unit = {
-  import scala.sys.process._
-  "git add .".!!
-  "git commit --allow-empty -m WIP".!!
-
-}
-commands +=
-  Command.command("commitall") { s =>
-    commitAll()
-    s
-  }
 
 commands +=
   Command.command("nativeImageProfiled") { s =>
@@ -574,8 +558,6 @@ val testSettings = List(
     List(
       "org.scalameta" %% "munit" % "0.7.29",
       "org.scalameta" %% "mtags" % V.metals cross CrossVersion.full,
-      "com.dimafeng" %% "testcontainers-scala-munit" % V.testcontainers,
-      "com.dimafeng" %% "testcontainers-scala-postgresql" % V.testcontainers,
       "org.scalameta" %% "moped-testkit" % V.moped,
       "org.scalameta" %% "scalameta" % V.scalameta,
       "io.get-coursier" %% "coursier" % V.coursier,
