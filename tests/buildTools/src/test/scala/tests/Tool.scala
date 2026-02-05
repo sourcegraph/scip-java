@@ -52,10 +52,7 @@ object Tool {
       extends Tool("scala", version, support)
   // See https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html
   case object Scala213 extends Scala("2.13.13", noRestrictions)
-  case object Scala212 extends Scala("2.12.19", noRestrictions)
-  case object Scala2_12_12 extends Scala("2.12.12", atMostJava(11))
   case object Scala2_13_8 extends Scala("2.13.8", atMostJava(17))
-  case object Scala211 extends Scala("2.11.9", atMostJava(11))
   case object Scala3 extends Scala("3.3.3", noRestrictions)
 
   sealed abstract class Mill(version: String, support: JVMSupport)
