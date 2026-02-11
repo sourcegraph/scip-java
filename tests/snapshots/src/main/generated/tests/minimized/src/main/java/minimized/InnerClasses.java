@@ -4,12 +4,14 @@ public class InnerClasses {
 //           ^^^^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#
 //                        display_name InnerClasses
 //                        signature_documentation java public class InnerClasses
+//                        enclosing_range 2 0 98 1
 //                        kind Class
 
   private final int exampleField;
 //                  ^^^^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#exampleField.
 //                               display_name exampleField
 //                               signature_documentation java private final int exampleField
+//                               enclosing_range 4 2 33
 //                               kind Field
 
   private static final String STRING = "asdf";
@@ -17,28 +19,33 @@ public class InnerClasses {
 //                            ^^^^^^ definition semanticdb maven . . minimized/InnerClasses#STRING.
 //                                   display_name STRING
 //                                   signature_documentation java private static final String STRING
+//                                   enclosing_range 6 2 46
 //                                   kind StaticField
 
   private static final int top = 5;
 //                         ^^^ definition semanticdb maven . . minimized/InnerClasses#top.
 //                             display_name top
 //                             signature_documentation java private static final int top
+//                             enclosing_range 8 2 35
 //                             kind StaticField
   private static final int bottom = 10;
 //                         ^^^^^^ definition semanticdb maven . . minimized/InnerClasses#bottom.
 //                                display_name bottom
 //                                signature_documentation java private static final int bottom
+//                                enclosing_range 9 2 39
 //                                kind StaticField
 
   public InnerClasses(int exampleField) {
 //       ^^^^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#`<init>`().
 //                    display_name <init>
 //                    signature_documentation java public InnerClasses(int exampleField)
+//                    enclosing_range 11 2 13 3
 //                    kind Constructor
 //                        ^^^^^^^^^^^^ definition local 0
 //                                     display_name exampleField
 //                                     signature_documentation java int exampleField
 //                                     enclosing_symbol semanticdb maven . . minimized/InnerClasses#`<init>`().
+//                                     enclosing_range 11 22 38
     this.exampleField = exampleField;
 //       ^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#exampleField.
 //                      ^^^^^^^^^^^^ reference local 0
@@ -48,6 +55,7 @@ public class InnerClasses {
 //            ^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerEnum#
 //                      display_name InnerEnum
 //                      signature_documentation java public enum InnerEnum
+//                      enclosing_range 15 2 19 3
 //                      kind Enum
 //                      relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
 //                      relationship is_implementation semanticdb maven jdk 11 java/lang/Comparable#
@@ -60,16 +68,19 @@ public class InnerClasses {
 //  ^ definition semanticdb maven . . minimized/InnerClasses#InnerEnum#A.
 //    display_name A
 //    signature_documentation java InnerEnum.A /* ordinal 0 */
+//    enclosing_range 16 4 5
 //  ^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
     B,
 //  ^ definition semanticdb maven . . minimized/InnerClasses#InnerEnum#B.
 //    display_name B
 //    signature_documentation java InnerEnum.B /* ordinal 1 */
+//    enclosing_range 17 4 5
 //  ^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
     C
 //  ^ definition semanticdb maven . . minimized/InnerClasses#InnerEnum#C.
 //    display_name C
 //    signature_documentation java InnerEnum.C /* ordinal 2 */
+//    enclosing_range 18 4 5
 //  ^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
   }
 
@@ -77,20 +88,24 @@ public class InnerClasses {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerInterface#
 //                                display_name InnerInterface
 //                                signature_documentation java public interface InnerInterface<A, B>
+//                                enclosing_range 21 2 23 3
 //                                kind Interface
 //                                ^ definition semanticdb maven . . minimized/InnerClasses#InnerInterface#[A]
 //                                  display_name A
 //                                  signature_documentation java A
+//                                  enclosing_range 21 2 23 3
 //                                  kind TypeParameter
 //                                   ^ definition semanticdb maven . . minimized/InnerClasses#InnerInterface#[B]
 //                                     display_name B
 //                                     signature_documentation java B
+//                                     enclosing_range 21 2 23 3
 //                                     kind TypeParameter
     B apply(A a);
 //  ^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#[B]
 //    ^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerInterface#apply().
 //          display_name apply
 //          signature_documentation java public abstract B apply(A a)
+//          enclosing_range 22 4 17
 //          kind AbstractMethod
 //          relationship is_reference is_implementation semanticdb maven . . minimized/InnerClasses#InnerClass#apply().
 //          ^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#[A]
@@ -98,18 +113,21 @@ public class InnerClasses {
 //              display_name a
 //              signature_documentation java A a
 //              enclosing_symbol semanticdb maven . . minimized/InnerClasses#InnerInterface#apply().
+//              enclosing_range 22 12 15
   }
 
   public @interface InnerAnnotation {
 //                  ^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerAnnotation#
 //                                  display_name InnerAnnotation
 //                                  signature_documentation java public @interface InnerAnnotation
+//                                  enclosing_range 25 2 27 3
 //                                  kind Interface
 //                                  relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
     int value();
 //      ^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerAnnotation#value().
 //            display_name value
 //            signature_documentation java public abstract int value()
+//            enclosing_range 26 4 16
 //            kind AbstractMethod
   }
 
@@ -124,6 +142,7 @@ public class InnerClasses {
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerStaticClass#
 //                                     display_name InnerStaticClass
 //                                     signature_documentation java @SuppressWarnings(STRING + " ")\n@InnerAnnotation(top / bottom)\npublic static class InnerStaticClass
+//                                     enclosing_range 29 2 34 3
 //                                     kind Class
 //                    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerStaticClass#`<init>`().
 //                                     display_name <init>
@@ -134,6 +153,7 @@ public class InnerClasses {
 //                     ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerStaticClass#innerStaticMethod().
 //                                       display_name innerStaticMethod
 //                                       signature_documentation java public static void innerStaticMethod()
+//                                       enclosing_range 33 4 45
 //                                       kind StaticMethod
   }
 
@@ -141,6 +161,7 @@ public class InnerClasses {
 //             ^^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerClass#
 //                        display_name InnerClass
 //                        signature_documentation java public class InnerClass
+//                        enclosing_range 36 2 51 3
 //                        kind Class
 //                        relationship is_implementation semanticdb maven . . minimized/InnerClasses#InnerInterface#
 //                                   ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#
@@ -150,17 +171,20 @@ public class InnerClasses {
 //                    ^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerClass#field.
 //                          display_name field
 //                          signature_documentation java private final int field
+//                          enclosing_range 37 4 28
 //                          kind Field
 
     public InnerClass(int field) {
 //         ^^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerClass#`<init>`().
 //                    display_name <init>
 //                    signature_documentation java public InnerClass(int field)
+//                    enclosing_range 39 4 41 5
 //                    kind Constructor
 //                        ^^^^^ definition local 2
 //                              display_name field
 //                              signature_documentation java int field
 //                              enclosing_symbol semanticdb maven . . minimized/InnerClasses#InnerClass#`<init>`().
+//                              enclosing_range 39 22 31
       this.field = field;
 //         ^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerClass#field.
 //                 ^^^^^ reference local 2
@@ -170,6 +194,7 @@ public class InnerClasses {
 //              ^^^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerClass#innerMethod().
 //                          display_name innerMethod
 //                          signature_documentation java public void innerMethod()
+//                          enclosing_range 43 4 45 5
 //                          kind Method
       System.out.println(field + exampleField);
 //    ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
@@ -186,6 +211,7 @@ public class InnerClasses {
 //                 ^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerClass#apply().
 //                       display_name apply
 //                       signature_documentation java @Override\npublic Integer apply(Integer integer)
+//                       enclosing_range 47 4 50 5
 //                       kind Method
 //                       relationship is_reference is_implementation semanticdb maven . . minimized/InnerClasses#InnerInterface#apply().
 //                       ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
@@ -193,6 +219,7 @@ public class InnerClasses {
 //                                       display_name integer
 //                                       signature_documentation java Integer integer
 //                                       enclosing_symbol semanticdb maven . . minimized/InnerClasses#InnerClass#apply().
+//                                       enclosing_range 48 25 40
       return field * integer;
 //           ^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerClass#field.
 //                   ^^^^^^^ reference local 3
@@ -203,15 +230,18 @@ public class InnerClasses {
 //                ^ definition semanticdb maven . . minimized/InnerClasses#runInnerInterface().[A]
 //                  display_name A
 //                  signature_documentation java A
+//                  enclosing_range 53 2 55 3
 //                  kind TypeParameter
 //                   ^ definition semanticdb maven . . minimized/InnerClasses#runInnerInterface().[B]
 //                     display_name B
 //                     signature_documentation java B
+//                     enclosing_range 53 2 55 3
 //                     kind TypeParameter
 //                      ^ reference semanticdb maven . . minimized/InnerClasses#runInnerInterface().[B]
 //                        ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#runInnerInterface().
 //                                          display_name runInnerInterface
 //                                          signature_documentation java private static <A, B> B runInnerInterface(InnerInterface<A, B> fn, A a)
+//                                          enclosing_range 53 2 55 3
 //                                          kind StaticMethod
 //                                          ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#
 //                                                         ^ reference semanticdb maven . . minimized/InnerClasses#runInnerInterface().[A]
@@ -220,11 +250,13 @@ public class InnerClasses {
 //                                                                  display_name fn
 //                                                                  signature_documentation java InnerInterface<A, B> fn
 //                                                                  enclosing_symbol semanticdb maven . . minimized/InnerClasses#runInnerInterface().
+//                                                                  enclosing_range 53 44 67
 //                                                                   ^ reference semanticdb maven . . minimized/InnerClasses#runInnerInterface().[A]
 //                                                                     ^ definition local 5
 //                                                                       display_name a
 //                                                                       signature_documentation java A a
 //                                                                       enclosing_symbol semanticdb maven . . minimized/InnerClasses#runInnerInterface().
+//                                                                       enclosing_range 53 69 72
     return fn.apply(a);
 //         ^^ reference local 4
 //            ^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#apply().
@@ -235,12 +267,14 @@ public class InnerClasses {
 //                   ^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#testEnum().
 //                            display_name testEnum
 //                            signature_documentation java public static void testEnum(InnerEnum magicEnum)
+//                            enclosing_range 57 2 74 3
 //                            kind StaticMethod
 //                            ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#
 //                                      ^^^^^^^^^ definition local 6
 //                                                display_name magicEnum
 //                                                signature_documentation java InnerEnum magicEnum
 //                                                enclosing_symbol semanticdb maven . . minimized/InnerClasses#testEnum().
+//                                                enclosing_range 57 30 49
     if (System.nanoTime() > System.currentTimeMillis()) {
 //      ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
 //             ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/System#nanoTime().
@@ -294,6 +328,7 @@ public class InnerClasses {
 //                   ^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#testAnon().
 //                            display_name testAnon
 //                            signature_documentation java public static void testAnon()
+//                            enclosing_range 76 2 85 3
 //                            kind StaticMethod
     InnerInterface<String, String> fn =
 //  ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#
@@ -303,6 +338,7 @@ public class InnerClasses {
 //                                    display_name fn
 //                                    signature_documentation java InnerInterface<String, String> fn
 //                                    enclosing_symbol semanticdb maven . . minimized/InnerClasses#testAnon().
+//                                    enclosing_range 77 4 83 10
 //                                    kind Variable
         new InnerInterface<String, String>() {
 //          ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#
@@ -316,6 +352,7 @@ public class InnerClasses {
 //                            display_name apply
 //                            signature_documentation java @Override\npublic String apply(String s)
 //                            enclosing_symbol local 8
+//                            enclosing_range 79 10 82 11
 //                            kind Method
 //                            relationship is_reference is_implementation semanticdb maven . . minimized/InnerClasses#InnerInterface#apply().
 //                            ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
@@ -323,6 +360,7 @@ public class InnerClasses {
 //                                     display_name s
 //                                     signature_documentation java String s
 //                                     enclosing_symbol local 9
+//                                     enclosing_range 80 30 38
             return s + "b";
 //                 ^ reference local 10
           }
@@ -340,12 +378,14 @@ public class InnerClasses {
 //                     ^^^ definition semanticdb maven . . minimized/InnerClasses#app().
 //                         display_name app
 //                         signature_documentation java public static String app()
+//                         enclosing_range 87 2 97 3
 //                         kind StaticMethod
     int a = 42;
 //      ^ definition local 11
 //        display_name a
 //        signature_documentation java int a
 //        enclosing_symbol semanticdb maven . . minimized/InnerClasses#app().
+//        enclosing_range 88 4 15
 //        kind Variable
     InnerStaticClass.innerStaticMethod();
 //  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerStaticClass#
@@ -356,6 +396,7 @@ public class InnerClasses {
 //                            display_name innerClasses
 //                            signature_documentation java InnerClasses innerClasses
 //                            enclosing_symbol semanticdb maven . . minimized/InnerClasses#app().
+//                            enclosing_range 90 4 52
 //                            kind Variable
 //                                  ^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#`<init>`().
 //                                               ^ reference local 11
@@ -365,6 +406,7 @@ public class InnerClasses {
 //                        display_name innerClass
 //                        signature_documentation java InnerClass innerClass
 //                        enclosing_symbol semanticdb maven . . minimized/InnerClasses#app().
+//                        enclosing_range 91 4 59
 //                        kind Variable
 //                          ^^^^^^^^^^^^ reference local 12
 //                                           ^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerClass#`<init>`().

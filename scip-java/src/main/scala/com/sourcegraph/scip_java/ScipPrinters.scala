@@ -199,6 +199,13 @@ object ScipPrinters {
             .append(info.getEnclosingSymbol)
             .append("\n")
         }
+        if (occ.getEnclosingRangeCount > 0) {
+          out
+            .append(prefix)
+            .append("enclosing_range ")
+            .append(occ.getEnclosingRangeList.asScala.mkString(" "))
+            .append("\n")
+        }
         if (info.getKind != Scip.SymbolInformation.Kind.UnspecifiedKind) {
           out.append(prefix).append("kind ").append(info.getKind).append("\n")
         }

@@ -8,6 +8,7 @@ public class MinimizedJavaMain {
 //           ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#
 //                             display_name MinimizedJavaMain
 //                             signature_documentation java @Annotations(value = "value", format = "format")\npublic class MinimizedJavaMain
+//                             enclosing_range 2 0 20 1
 //                             kind Class
 //           ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#`<init>`().
 //                             display_name <init>
@@ -17,12 +18,14 @@ public class MinimizedJavaMain {
 //                   ^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#main().
 //                        display_name main
 //                        signature_documentation java public static void main(String[] args)
+//                        enclosing_range 4 2 19 3
 //                        kind StaticMethod
 //                        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                 ^^^^ definition local 0
 //                                      display_name args
 //                                      signature_documentation java String[] args
 //                                      enclosing_symbol semanticdb maven . . minimized/MinimizedJavaMain#main().
+//                                      enclosing_range 4 26 39
     TypeVariables.app(new TypeVariables.CT());
 //  ^^^^^^^^^^^^^ reference semanticdb maven . . minimized/TypeVariables#
 //                ^^^ reference semanticdb maven . . minimized/TypeVariables#app().

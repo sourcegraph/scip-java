@@ -9,6 +9,7 @@ public class Primitives {
 //           ^^^^^^^^^^ definition semanticdb maven . . minimized/Primitives#
 //                      display_name Primitives
 //                      signature_documentation java public class Primitives
+//                      enclosing_range 4 0 19 1
 //                      kind Class
 //           ^^^^^^^^^^ definition semanticdb maven . . minimized/Primitives#`<init>`().
 //                      display_name <init>
@@ -19,6 +20,7 @@ public class Primitives {
 //                     ^^^ definition semanticdb maven . . minimized/Primitives#app().
 //                         display_name app
 //                         signature_documentation java public static String app()
+//                         enclosing_range 5 2 16 3
 //                         kind StaticMethod
     Random random = new Random();
 //  ^^^^^^ reference semanticdb maven jdk 11 java/util/Random#
@@ -26,6 +28,7 @@ public class Primitives {
 //                display_name random
 //                signature_documentation java Random random
 //                enclosing_symbol semanticdb maven . . minimized/Primitives#app().
+//                enclosing_range 6 4 33
 //                kind Variable
 //                      ^^^^^^ reference semanticdb maven jdk 11 java/util/Random#`<init>`().
     byte a = (byte) random.nextInt();
@@ -33,6 +36,7 @@ public class Primitives {
 //         display_name a
 //         signature_documentation java byte a
 //         enclosing_symbol semanticdb maven . . minimized/Primitives#app().
+//         enclosing_range 7 4 37
 //         kind Variable
 //                  ^^^^^^ reference local 0
 //                         ^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextInt().
@@ -41,6 +45,7 @@ public class Primitives {
 //          display_name b
 //          signature_documentation java short b
 //          enclosing_symbol semanticdb maven . . minimized/Primitives#app().
+//          enclosing_range 8 4 39
 //          kind Variable
 //                    ^^^^^^ reference local 0
 //                           ^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextInt().
@@ -49,6 +54,7 @@ public class Primitives {
 //        display_name c
 //        signature_documentation java int c
 //        enclosing_symbol semanticdb maven . . minimized/Primitives#app().
+//        enclosing_range 9 4 29
 //        kind Variable
 //          ^^^^^^ reference local 0
 //                 ^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextInt().
@@ -57,6 +63,7 @@ public class Primitives {
 //         display_name d
 //         signature_documentation java long d
 //         enclosing_symbol semanticdb maven . . minimized/Primitives#app().
+//         enclosing_range 10 4 31
 //         kind Variable
 //           ^^^^^^ reference local 0
 //                  ^^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextLong().
@@ -65,6 +72,7 @@ public class Primitives {
 //         display_name e
 //         signature_documentation java char e
 //         enclosing_symbol semanticdb maven . . minimized/Primitives#app().
+//         enclosing_range 11 4 37
 //         kind Variable
 //                  ^^^^^^ reference local 0
 //                         ^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextInt().
@@ -73,6 +81,7 @@ public class Primitives {
 //          display_name f
 //          signature_documentation java float f
 //          enclosing_symbol semanticdb maven . . minimized/Primitives#app().
+//          enclosing_range 12 4 42
 //          kind Variable
 //                    ^^^^^^ reference local 0
 //                           ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextDouble().
@@ -81,6 +90,7 @@ public class Primitives {
 //           display_name g
 //           signature_documentation java double g
 //           enclosing_symbol semanticdb maven . . minimized/Primitives#app().
+//           enclosing_range 13 4 44
 //           kind Variable
 //                      ^^^^^^ reference local 0
 //                             ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextDouble().
@@ -89,6 +99,7 @@ public class Primitives {
 //            display_name h
 //            signature_documentation java boolean h
 //            enclosing_symbol semanticdb maven . . minimized/Primitives#app().
+//            enclosing_range 14 4 37
 //            kind Variable
 //              ^^^^^^ reference local 0
 //                     ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Random#nextBoolean().
@@ -107,5 +118,6 @@ public class Primitives {
 //                   ^^^^ definition semanticdb maven . . minimized/Primitives#test().
 //                        display_name test
 //                        signature_documentation java public static void test()
+//                        enclosing_range 18 2 30
 //                        kind StaticMethod
 }
