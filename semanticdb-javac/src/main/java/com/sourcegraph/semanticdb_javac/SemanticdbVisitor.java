@@ -110,12 +110,13 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       Element sym, Tree tree, Name name, Role role, CompilerRange kind) {
     if (sym == null || name == null) return Optional.empty();
     Optional<Semanticdb.Range> range = semanticdbRange(tree, kind, sym, name.toString());
-    Optional<Semanticdb.Range> enclosingRange = computeEnclosingRange(tree);
-    emitSymbolOccurrence(sym, range, role, enclosingRange);
     if (role == Role.DEFINITION) {
+      emitSymbolOccurrence(sym, range, role, computeEnclosingRange(tree));
       // Only emit SymbolInformation for symbols that are defined in this compilation unit.
       emitSymbolInformation(sym, tree);
+      return range;
     }
+    emitSymbolOccurrence(sym, range, role, Optional.empty());
     return range;
   }
 

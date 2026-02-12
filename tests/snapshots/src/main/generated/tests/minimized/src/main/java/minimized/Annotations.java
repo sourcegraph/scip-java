@@ -27,6 +27,7 @@
 //                        ^^^^^^^^^^ reference semanticdb maven . . java/lang/annotation/
 //                                   ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/annotation/ElementType#
   
+//⌄ enclosing_range_start semanticdb maven . . minimized/Annotations#
   @Documented
 // ^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/annotation/Documented#
   @Retention(RetentionPolicy.RUNTIME)
@@ -54,23 +55,25 @@
 //                  ^^^^^^^^^^^ definition semanticdb maven . . minimized/Annotations#
 //                              display_name Annotations
 //                              signature_documentation java @Documented\n@Retention(RetentionPolicy.RUNTIME)\n@Target({CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})\npublic @interface Annotations
-//                              enclosing_range 9 0 24 1
 //                              kind Interface
 //                              relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
   
+//  ⌄ enclosing_range_start semanticdb maven . . minimized/Annotations#value().
     String value() default "";
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //         ^^^^^ definition semanticdb maven . . minimized/Annotations#value().
 //               display_name value
 //               signature_documentation java public abstract String value()
-//               enclosing_range 21 2 28
 //               kind AbstractMethod
+//                           ⌃ enclosing_range_end semanticdb maven . . minimized/Annotations#value().
   
+//  ⌄ enclosing_range_start semanticdb maven . . minimized/Annotations#format().
     String format() default "";
 //  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //         ^^^^^^ definition semanticdb maven . . minimized/Annotations#format().
 //                display_name format
 //                signature_documentation java public abstract String format()
-//                enclosing_range 23 2 29
 //                kind AbstractMethod
+//                            ⌃ enclosing_range_end semanticdb maven . . minimized/Annotations#format().
   }
+//⌃ enclosing_range_end semanticdb maven . . minimized/Annotations#

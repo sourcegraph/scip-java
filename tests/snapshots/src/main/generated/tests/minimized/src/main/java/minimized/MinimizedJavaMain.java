@@ -1,5 +1,6 @@
   package minimized;
   
+//⌄ enclosing_range_start semanticdb maven . . minimized/MinimizedJavaMain#
   @Annotations(value = "value", format = "format")
 // ^^^^^^^^^^ reference semanticdb maven . . minimized/Annotations#
 //             ^^^^^ reference semanticdb maven . . minimized/Annotations#value().
@@ -8,24 +9,24 @@
 //             ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#
 //                               display_name MinimizedJavaMain
 //                               signature_documentation java @Annotations(value = "value", format = "format")\npublic class MinimizedJavaMain
-//                               enclosing_range 2 0 20 1
 //                               kind Class
 //             ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#`<init>`().
 //                               display_name <init>
 //                               signature_documentation java public MinimizedJavaMain()
 //                               kind Constructor
+//  ⌄ enclosing_range_start semanticdb maven . . minimized/MinimizedJavaMain#main().
+//                          ⌄ enclosing_range_start local 0
     public static void main(String[] args) {
 //                     ^^^^ definition semanticdb maven . . minimized/MinimizedJavaMain#main().
 //                          display_name main
 //                          signature_documentation java public static void main(String[] args)
-//                          enclosing_range 4 2 19 3
 //                          kind StaticMethod
 //                          ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                   ^^^^ definition local 0
 //                                        display_name args
 //                                        signature_documentation java String[] args
 //                                        enclosing_symbol semanticdb maven . . minimized/MinimizedJavaMain#main().
-//                                        enclosing_range 4 26 39
+//                                      ⌃ enclosing_range_end local 0
       TypeVariables.app(new TypeVariables.CT());
 //    ^^^^^^^^^^^^^ reference semanticdb maven . . minimized/TypeVariables#
 //                  ^^^ reference semanticdb maven . . minimized/TypeVariables#app().
@@ -75,4 +76,6 @@
 //              ^^^^^^ reference semanticdb maven . . minimized/Fields#
 //                     ^^^ reference semanticdb maven . . minimized/Fields#app().
     }
+//  ⌃ enclosing_range_end semanticdb maven . . minimized/MinimizedJavaMain#main().
   }
+//⌃ enclosing_range_end semanticdb maven . . minimized/MinimizedJavaMain#
