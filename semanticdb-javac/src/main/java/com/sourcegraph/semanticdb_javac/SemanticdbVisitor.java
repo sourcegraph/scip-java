@@ -119,9 +119,14 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     return range;
   }
 
-  private void emitSymbolOccurrence(Element sym, Optional<Semanticdb.Range> range, Role role, Optional<Semanticdb.Range> enclosingRange) {
+  private void emitSymbolOccurrence(
+      Element sym,
+      Optional<Semanticdb.Range> range,
+      Role role,
+      Optional<Semanticdb.Range> enclosingRange) {
     if (sym == null) return;
-    Optional<Semanticdb.SymbolOccurrence> occ = semanticdbOccurrence(sym, range, role, enclosingRange);
+    Optional<Semanticdb.SymbolOccurrence> occ =
+        semanticdbOccurrence(sym, range, role, enclosingRange);
     occ.ifPresent(occurrences::add);
   }
 
@@ -463,7 +468,10 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   }
 
   private Optional<Semanticdb.SymbolOccurrence> semanticdbOccurrence(
-      Element sym, Optional<Semanticdb.Range> range, Role role, Optional<Semanticdb.Range> enclosingRange) {
+      Element sym,
+      Optional<Semanticdb.Range> range,
+      Role role,
+      Optional<Semanticdb.Range> enclosingRange) {
     if (range.isPresent()) {
       String ssym = semanticdbSymbol(sym);
       if (!ssym.equals(SemanticdbSymbols.NONE)) {
@@ -478,10 +486,9 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   }
 
   /**
-   * Computes the enclosing range for the given tree node.
-   * Returns the range of the nearest non-trivial enclosing AST node.
-   * For definition occurrences, this includes the entire definition including documentation.
-   * For reference occurrences, this includes the parent expression bounds.
+   * Computes the enclosing range for the given tree node. Returns the range of the nearest
+   * non-trivial enclosing AST node. For definition occurrences, this includes the entire definition
+   * including documentation. For reference occurrences, this includes the parent expression bounds.
    */
   private Optional<Semanticdb.Range> computeEnclosingRange(Tree tree) {
     if (tree == null) return Optional.empty();
@@ -492,14 +499,16 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     // For method, class, and variable definitions, use the tree itself as the enclosing range
     // since we're processing the definition node
     Tree enclosingTree = tree;
-    if (!(tree instanceof MethodTree || tree instanceof ClassTree || tree instanceof VariableTree)) {
+    if (!(tree instanceof MethodTree
+        || tree instanceof ClassTree
+        || tree instanceof VariableTree)) {
       // For non-definition nodes (like references), use the parent
       TreePath parentPath = path.getParentPath();
       if (parentPath == null) return Optional.empty();
       enclosingTree = parentPath.getLeaf();
       if (enclosingTree == null || enclosingTree == compUnitTree) return Optional.empty();
     }
-    
+
     SourcePositions sourcePositions = trees.getSourcePositions();
     int start = (int) sourcePositions.getStartPosition(compUnitTree, enclosingTree);
     int end = (int) sourcePositions.getEndPosition(compUnitTree, enclosingTree);

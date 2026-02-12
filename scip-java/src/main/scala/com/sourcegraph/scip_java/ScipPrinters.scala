@@ -12,6 +12,12 @@ import moped.reporters.Position
 
 object ScipPrinters {
 
+  /**
+   * Indent prefix prepended to each source line so that caret-based indicators
+   * in snapshot comments can point at arbitrary columns.
+   */
+  val sourceIndent = "  "
+
   def printTextDocument(
       doc: Scip.Document,
       text: String,
@@ -55,7 +61,7 @@ object ScipPrinters {
       .linesWithSeparators
       .zipWithIndex
       .foreach { case (line, i) =>
-        out.append(line.replace("\t", "→"))
+        out.append(sourceIndent).append(line.replace("\t", "  "))
         val occurrences = occurrencesByLine
           .getOrElse(i, Nil)
           .toSeq
@@ -133,8 +139,8 @@ object ScipPrinters {
       else
         "reference"
     val indent =
-      if (pos.startColumn > comment.length)
-        " " * (pos.startColumn - comment.length)
+      if (pos.startColumn + sourceIndent.length > comment.length)
+        " " * (pos.startColumn + sourceIndent.length - comment.length)
       else
         ""
     val caretCharacter =

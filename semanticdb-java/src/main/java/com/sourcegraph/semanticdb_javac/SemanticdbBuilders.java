@@ -52,12 +52,12 @@ public class SemanticdbBuilders {
   // SemanticDB Symbols
 
   public static Semanticdb.SymbolOccurrence symbolOccurrence(
-      String symbol, Semanticdb.Range range, Semanticdb.SymbolOccurrence.Role role, 
+      String symbol,
+      Semanticdb.Range range,
+      Semanticdb.SymbolOccurrence.Role role,
       java.util.Optional<Semanticdb.Range> enclosingRange) {
-    Semanticdb.SymbolOccurrence.Builder builder = Semanticdb.SymbolOccurrence.newBuilder()
-        .setSymbol(symbol)
-        .setRange(range)
-        .setRole(role);
+    Semanticdb.SymbolOccurrence.Builder builder =
+        Semanticdb.SymbolOccurrence.newBuilder().setSymbol(symbol).setRange(range).setRole(role);
     enclosingRange.ifPresent(builder::setEnclosingRange);
     return builder.build();
   }

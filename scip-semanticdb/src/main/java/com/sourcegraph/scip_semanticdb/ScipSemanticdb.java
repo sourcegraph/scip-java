@@ -187,7 +187,7 @@ public class ScipSemanticdb {
         // Add enclosing_range if it exists
         if (occ.hasEnclosingRange()) {
           Semanticdb.Range enclosingRange = occ.getEnclosingRange();
-          boolean isEnclosingSingleLine = 
+          boolean isEnclosingSingleLine =
               enclosingRange.getStartLine() == enclosingRange.getEndLine();
           Iterable<Integer> enclosingRangeInts =
               isEnclosingSingleLine
