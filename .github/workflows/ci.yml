@@ -53,7 +53,7 @@ jobs:
       - uses: sbt/setup-sbt@v1
 
       - name: Build Dockerised CLI
-        run: sbt cli/docker
+        run: DOCKER_BUILDKIT=0 sbt cli/docker
 
       - name: Test repos
         shell: bash
@@ -172,4 +172,3 @@ jobs:
 
       - run: du -h index.scip
         working-directory: examples/maven-example
-
