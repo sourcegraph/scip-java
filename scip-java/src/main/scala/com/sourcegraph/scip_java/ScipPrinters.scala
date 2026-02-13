@@ -12,6 +12,12 @@ import moped.reporters.Position
 
 object ScipPrinters {
 
+  /**
+   * Indent prefix prepended to each source line so that caret-based indicators
+   * in snapshot comments can point at arbitrary columns.
+   */
+  val sourceIndent = "  "
+
   def printTextDocument(
       doc: Scip.Document,
       text: String,
@@ -51,11 +57,58 @@ object ScipPrinters {
     val extension = doc.getRelativePath.split("\\.").lastOption.getOrElse("")
     val commentSyntax = comments.extensionSyntax(extension)
     val input = Input.filename(doc.getRelativePath, text)
+
+    // Collect enclosing ranges from all occurrences, grouped by start/end line.
+    case class EnclosingRange(
+        startLine: Int,
+        startChar: Int,
+        endLine: Int,
+        endChar: Int,
+        symbol: String
+    )
+    val allEnclosingRanges =
+      doc
+        .getOccurrencesList
+        .asScala
+        .flatMap { occ =>
+          occ.getEnclosingRangeList.asScala.map(_.toInt).toList match {
+            case List(sl, sc, ec) =>
+              Some(EnclosingRange(sl, sc, sl, ec, occ.getSymbol))
+            case List(sl, sc, el, ec) =>
+              Some(EnclosingRange(sl, sc, el, ec, occ.getSymbol))
+            case _ =>
+              None
+          }
+        }
+        .toList
+    val enclosingByStartLine =
+      allEnclosingRanges
+        .groupBy(_.startLine)
+        .view
+        .mapValues(_.sortBy(_.startChar))
+        .toMap
+    val enclosingByEndLine =
+      allEnclosingRanges
+        .groupBy(_.endLine)
+        .view
+        .mapValues(_.sortBy(_.endChar))
+        .toMap
+
     text
       .linesWithSeparators
       .zipWithIndex
       .foreach { case (line, i) =>
-        out.append(line.replace("\t", "→"))
+        enclosingByStartLine
+          .getOrElse(i, Nil)
+          .foreach { er =>
+            out
+              .append(commentSyntax)
+              .append(" " * er.startChar)
+              .append("⌄ enclosing_range_start ")
+              .append(er.symbol)
+              .append("\n")
+          }
+        out.append(sourceIndent).append(line.replace("\t", "  "))
         val occurrences = occurrencesByLine
           .getOrElse(i, Nil)
           .toSeq
@@ -80,6 +133,17 @@ object ScipPrinters {
               }
           }
         }
+        enclosingByEndLine
+          .getOrElse(i, Nil)
+          .foreach { er =>
+            val indent = math.max(0, er.endChar - 1)
+            out
+              .append(commentSyntax)
+              .append(" " * indent)
+              .append("⌃ enclosing_range_end ")
+              .append(er.symbol)
+              .append("\n")
+          }
       }
     out.toString()
   }
@@ -133,8 +197,8 @@ object ScipPrinters {
       else
         "reference"
     val indent =
-      if (pos.startColumn > comment.length)
-        " " * (pos.startColumn - comment.length)
+      if (pos.startColumn + sourceIndent.length > comment.length)
+        " " * (pos.startColumn + sourceIndent.length - comment.length)
       else
         ""
     val caretCharacter =

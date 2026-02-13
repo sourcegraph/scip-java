@@ -110,17 +110,24 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       Element sym, Tree tree, Name name, Role role, CompilerRange kind) {
     if (sym == null || name == null) return Optional.empty();
     Optional<Semanticdb.Range> range = semanticdbRange(tree, kind, sym, name.toString());
-    emitSymbolOccurrence(sym, range, role);
     if (role == Role.DEFINITION) {
+      emitSymbolOccurrence(sym, range, role, computeEnclosingRange(tree));
       // Only emit SymbolInformation for symbols that are defined in this compilation unit.
       emitSymbolInformation(sym, tree);
+      return range;
     }
+    emitSymbolOccurrence(sym, range, role, Optional.empty());
     return range;
   }
 
-  private void emitSymbolOccurrence(Element sym, Optional<Semanticdb.Range> range, Role role) {
+  private void emitSymbolOccurrence(
+      Element sym,
+      Optional<Semanticdb.Range> range,
+      Role role,
+      Optional<Semanticdb.Range> enclosingRange) {
     if (sym == null) return;
-    Optional<Semanticdb.SymbolOccurrence> occ = semanticdbOccurrence(sym, range, role);
+    Optional<Semanticdb.SymbolOccurrence> occ =
+        semanticdbOccurrence(sym, range, role, enclosingRange);
     occ.ifPresent(occurrences::add);
   }
 
@@ -298,7 +305,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       if (sym.getKind() == ElementKind.ENUM_CONSTANT) {
         TreePath typeTreePath = nodes.get(node.getInitializer());
         Element typeSym = trees.getElement(typeTreePath);
-        if (typeSym != null) emitSymbolOccurrence(typeSym, range, Role.REFERENCE);
+        if (typeSym != null) emitSymbolOccurrence(typeSym, range, Role.REFERENCE, Optional.empty());
       }
     }
   }
@@ -462,11 +469,14 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   }
 
   private Optional<Semanticdb.SymbolOccurrence> semanticdbOccurrence(
-      Element sym, Optional<Semanticdb.Range> range, Role role) {
+      Element sym,
+      Optional<Semanticdb.Range> range,
+      Role role,
+      Optional<Semanticdb.Range> enclosingRange) {
     if (range.isPresent()) {
       String ssym = semanticdbSymbol(sym);
       if (!ssym.equals(SemanticdbSymbols.NONE)) {
-        Semanticdb.SymbolOccurrence occ = symbolOccurrence(ssym, range.get(), role);
+        Semanticdb.SymbolOccurrence occ = symbolOccurrence(ssym, range.get(), role, enclosingRange);
         return Optional.of(occ);
       } else {
         return Optional.empty();
@@ -474,6 +484,52 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     } else {
       return Optional.empty();
     }
+  }
+
+  /**
+   * Computes the enclosing range for the given tree node. Returns the range of the nearest
+   * non-trivial enclosing AST node. For definition occurrences, this includes the entire definition
+   * including documentation. For reference occurrences, this includes the parent expression bounds.
+   */
+  private Optional<Semanticdb.Range> computeEnclosingRange(Tree tree) {
+    if (tree == null) return Optional.empty();
+
+    TreePath path = nodes.get(tree);
+    if (path == null) return Optional.empty();
+
+    // For method, class, and variable definitions, use the tree itself as the enclosing range
+    // since we're processing the definition node
+    Tree enclosingTree = tree;
+    if (!(tree instanceof MethodTree
+        || tree instanceof ClassTree
+        || tree instanceof VariableTree)) {
+      // For non-definition nodes (like references), use the parent
+      TreePath parentPath = path.getParentPath();
+      if (parentPath == null) return Optional.empty();
+      enclosingTree = parentPath.getLeaf();
+      if (enclosingTree == null || enclosingTree == compUnitTree) return Optional.empty();
+    }
+
+    SourcePositions sourcePositions = trees.getSourcePositions();
+    int start = (int) sourcePositions.getStartPosition(compUnitTree, enclosingTree);
+    int end = (int) sourcePositions.getEndPosition(compUnitTree, enclosingTree);
+
+    if (start != Diagnostic.NOPOS && end != Diagnostic.NOPOS && end > start) {
+      LineMap lineMap = compUnitTree.getLineMap();
+      Semanticdb.Range range =
+          Semanticdb.Range.newBuilder()
+              .setStartLine((int) lineMap.getLineNumber(start) - 1)
+              .setStartCharacter((int) lineMap.getColumnNumber(start) - 1)
+              .setEndLine((int) lineMap.getLineNumber(end) - 1)
+              .setEndCharacter((int) lineMap.getColumnNumber(end) - 1)
+              .build();
+
+      range = correctForTabs(range, lineMap, start);
+
+      return Optional.of(range);
+    }
+
+    return Optional.empty();
   }
 
   private String semanticdbText() {
