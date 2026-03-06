@@ -511,4 +511,37 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     // NOTE(olafur): no packages because we use more modern APIs.
   )
 
+  // Regression test: projects that lazily register custom source sets (e.g. intTest)
+  // with a Java toolchain would fail because the eager `.all {}` API in the plugin
+  // caused the javaCompiler property to be finalized before Gradle finished
+  // configuring the task.
+  checkGradleBuild(
+    "lazy-sourceset-with-toolchain",
+    s"""|/build.gradle
+        |plugins {
+        |    id 'java'
+        |}
+        |java {
+        |  toolchain {
+        |    languageVersion = JavaLanguageVersion.of(11)
+        |  }
+        |}
+        |sourceSets {
+        |  intTest {
+        |    compileClasspath += sourceSets.main.output
+        |    runtimeClasspath += sourceSets.main.output
+        |  }
+        |}
+        |configurations {
+        |  intTestImplementation.extendsFrom implementation
+        |}
+        |/src/main/java/Example.java
+        |public class Example {}
+        |/src/intTest/java/ExampleIntTest.java
+        |public class ExampleIntTest {}
+        |""".stripMargin,
+    expectedSemanticdbFiles = 1,
+    gradleVersions = List(Gradle8, Gradle7)
+  )
+
 }
