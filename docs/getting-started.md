@@ -152,6 +152,8 @@ libraryDependencies += "com.sourcegraph" %% "scip-java" % "@STABLE_VERSION@"
 > [Supported build tools](#supported-build-tools) for more details about other
 > build tools.
 
+> For cross-repository navigation, additional dependency metadata is required (for Gradle, enable `maven-publish`); see [Cross-Repository Navigation (Optional)](#cross-repository-navigation-optional).
+
 Run the `scip-java index` command to generate a SCIP index for your codebase.
 This command should automatically infer the structure of your codebase and
 configure your build tool to generate SCIP.
@@ -179,6 +181,22 @@ scip-java index -- --batch-mode -DskipTests package
 ```
 
 The `index.scip` file contains the SCIP index and is ready to be used.
+
+### Cross-Repository Navigation (Optional)
+
+By default, `scip-java index` enables navigation within the local repository.
+To enable cross-repository navigation, `scip-java` needs dependency metadata
+from your build.
+
+For Gradle builds, this requires enabling `maven-publish` and defining a Maven
+publication (for example, from `components["java"]`) in `build.gradle` or
+`build.gradle.kts`.
+
+If this is not configured, indexing may still succeed, but cross-repository
+definitions/references may not resolve.
+
+See [Manual configuration: Step 4 (optional): Enable cross-repository navigation](manual-configuration.md#step-4-optional-enable-cross-repository-navigation)
+for detailed setup options.
 
 > Running `scip-java index` may perform side-effects on your build like cleaning
 > the compile cache before indexing. This is done to make sure that all source
