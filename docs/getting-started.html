@@ -166,6 +166,9 @@ libraryDependencies <span class="token operator">+=</span> <span class="token st
 <a href="#supported-build-tools">Supported build tools</a> for more details about other
 build tools.</p>
 </blockquote>
+<blockquote>
+<p>For cross-repository navigation, additional dependency metadata is required (for Gradle, enable <code>maven-publish</code>); see <a href="#cross-repository-navigation-optional">Cross-Repository Navigation (Optional)</a>.</p>
+</blockquote>
 <p>Run the <code>scip-java index</code> command to generate a SCIP index for your codebase.
 This command should automatically infer the structure of your codebase and
 configure your build tool to generate SCIP.</p>
@@ -191,6 +194,17 @@ info: /path/to/index.scip
 scip-java index -- --batch-mode -DskipTests package
 </code></pre>
 <p>The <code>index.scip</code> file contains the SCIP index and is ready to be used.</p>
+<h3><a class="anchor" aria-hidden="true" id="cross-repository-navigation-optional"></a><a href="#cross-repository-navigation-optional" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cross-Repository Navigation (Optional)</h3>
+<p>By default, <code>scip-java index</code> enables navigation within the local repository.
+To enable cross-repository navigation, <code>scip-java</code> needs dependency metadata
+from your build.</p>
+<p>For Gradle builds, this requires enabling <code>maven-publish</code> and defining a Maven
+publication (for example, from <code>components[&quot;java&quot;]</code>) in <code>build.gradle</code> or
+<code>build.gradle.kts</code>.</p>
+<p>If this is not configured, indexing may still succeed, but cross-repository
+definitions/references may not resolve.</p>
+<p>See <a href="/scip-java/docs/manual-configuration.html#step-4-optional-enable-cross-repository-navigation">Manual configuration: Step 4 (optional): Enable cross-repository navigation</a>
+for detailed setup options.</p>
 <blockquote>
 <p>Running <code>scip-java index</code> may perform side-effects on your build like cleaning
 the compile cache before indexing. This is done to make sure that all source
@@ -491,4 +505,4 @@ src login # validate the token authenticates correctly
 <span class="hljs-comment"># 3. Upload SCIP index to Sourcegraph</span>
 src code-intel upload # requires index.scip file <span class="hljs-keyword">to</span> exist
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/scip-java/docs/manual-configuration.html"><span>Manual configuration</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install-scip-java">Install <code>scip-java</code></a><ul class="toc-headings"><li><a href="#docker-image">Docker image</a></li><li><a href="#java-launcher">Java launcher</a></li><li><a href="#java-fat-jar">Java fat jar</a></li><li><a href="#java-library">Java library</a></li></ul></li><li><a href="#run-scip-java-index">Run <code>scip-java index</code></a></li><li><a href="#supported-programming-languages">Supported programming languages</a><ul class="toc-headings"><li><a href="#java">Java</a></li><li><a href="#scala">Scala</a></li><li><a href="#kotlin">Kotlin</a></li></ul></li><li><a href="#supported-build-tools">Supported build tools</a><ul class="toc-headings"><li><a href="#automatic-configuration">Automatic configuration</a></li><li><a href="#manual-configuration">Manual configuration</a></li><li><a href="#gradle">Gradle</a></li><li><a href="#maven">Maven</a></li><li><a href="#sbt">sbt</a></li><li><a href="#mill">Mill</a></li><li><a href="#bazel">Bazel</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#664100"><section class="sitemap"><a href="/scip-java/" class="nav-home"><img src="/scip-java/img/scip-java.png" alt="scip-java" width="66" height="58"/></a><div><h5>Docs</h5><a href="/scip-java/docs/installation.html">Get started</a></div><div><h5>Community</h5><a href="https://discord.gg/hJbyNrRJWr" target="_blank">Chat on Discord</a></div><div><h5>More</h5><a href="https://github.com/sourcegraph/scip-java" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2026 scip-java developers</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/scip-java/docs/manual-configuration.html"><span>Manual configuration</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install-scip-java">Install <code>scip-java</code></a><ul class="toc-headings"><li><a href="#docker-image">Docker image</a></li><li><a href="#java-launcher">Java launcher</a></li><li><a href="#java-fat-jar">Java fat jar</a></li><li><a href="#java-library">Java library</a></li></ul></li><li><a href="#run-scip-java-index">Run <code>scip-java index</code></a><ul class="toc-headings"><li><a href="#cross-repository-navigation-optional">Cross-Repository Navigation (Optional)</a></li></ul></li><li><a href="#supported-programming-languages">Supported programming languages</a><ul class="toc-headings"><li><a href="#java">Java</a></li><li><a href="#scala">Scala</a></li><li><a href="#kotlin">Kotlin</a></li></ul></li><li><a href="#supported-build-tools">Supported build tools</a><ul class="toc-headings"><li><a href="#automatic-configuration">Automatic configuration</a></li><li><a href="#manual-configuration">Manual configuration</a></li><li><a href="#gradle">Gradle</a></li><li><a href="#maven">Maven</a></li><li><a href="#sbt">sbt</a></li><li><a href="#mill">Mill</a></li><li><a href="#bazel">Bazel</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#664100"><section class="sitemap"><a href="/scip-java/" class="nav-home"><img src="/scip-java/img/scip-java.png" alt="scip-java" width="66" height="58"/></a><div><h5>Docs</h5><a href="/scip-java/docs/installation.html">Get started</a></div><div><h5>Community</h5><a href="https://discord.gg/hJbyNrRJWr" target="_blank">Chat on Discord</a></div><div><h5>More</h5><a href="https://github.com/sourcegraph/scip-java" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2026 scip-java developers</section></footer></div></body></html>
