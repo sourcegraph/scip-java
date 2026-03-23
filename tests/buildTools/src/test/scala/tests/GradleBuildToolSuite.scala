@@ -6,8 +6,6 @@ class Gradle_8_BuildToolSuite extends GradleBuildToolSuite(Gradle8)
 class Gradle_7_BuildToolSuite extends GradleBuildToolSuite(Gradle7)
 class Gradle_6_BuildToolSuite extends GradleBuildToolSuite(Gradle6)
 class Gradle_5_BuildToolSuite extends GradleBuildToolSuite(Gradle5)
-class Gradle_3_BuildToolSuite extends GradleBuildToolSuite(Gradle3)
-class Gradle_2_BuildToolSuite extends GradleBuildToolSuite(Gradle2)
 
 abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     extends GradleBuildToolSuiteBase(gradle) {
@@ -497,19 +495,6 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
   //     )
   // }
 
-  checkGradleBuild(
-    "legacy",
-    s"""|/build.gradle
-        |apply plugin: 'java'
-        |/src/main/java/Example.java
-        |public class Example {}
-        |/src/test/java/ExampleSuite.java
-        |public class ExampleSuite {}
-        |""".stripMargin,
-    expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle3, Gradle2)
-    // NOTE(olafur): no packages because we use more modern APIs.
-  )
 
   // Regression test: projects that lazily register custom source sets (e.g. intTest)
   // with a Java toolchain would fail because the eager `.all {}` API in the plugin
