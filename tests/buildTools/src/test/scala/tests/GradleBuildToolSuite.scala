@@ -495,7 +495,6 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
   //     )
   // }
 
-
   // Regression test: projects that lazily register custom source sets (e.g. intTest)
   // with a Java toolchain would fail because the eager `.all {}` API in the plugin
   // caused the javaCompiler property to be finalized before Gradle finished
