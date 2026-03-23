@@ -104,7 +104,7 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
         project
           .getTasks()
           .withType(classOf[JavaCompile])
-          .all { task =>
+          .configureEach { task =>
             // If we run on JDK 17, we need to add special flags to the JVM
             // to allow access to the compiler.
 
