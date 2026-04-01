@@ -1,0 +1,93 @@
+name: Release CLI
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: Git tag to release assets for.
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: refs/tags/${{ inputs.tag }}
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 8
+
+      - uses: coursier/setup-action@v3
+        with:
+          apps: ''
+
+      - name: Build standalone launcher
+        shell: bash
+        env:
+          TAG: ${{ inputs.tag }}
+          VERSION: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+
+          VERSION=${VERSION#v}
+          ARTIFACT="com.sourcegraph:scip-java_2.13:${VERSION}"
+
+          for attempt in {1..10}; do
+            if cs resolve "$ARTIFACT" >/dev/null 2>&1; then
+              break
+            fi
+
+            if [ "$attempt" -eq 10 ]; then
+              echo "Artifact $ARTIFACT was not resolvable after 10 attempts" >&2
+              exit 1
+            fi
+
+            sleep 30
+          done
+
+          cs bootstrap \
+            --standalone \
+            --bat=true \
+            -o scip-java \
+            "$ARTIFACT" \
+            --main com.sourcegraph.scip_java.ScipJava
+
+          chmod +x scip-java
+          ./scip-java --help >/dev/null
+
+          mv scip-java "scip-java-${TAG}"
+          mv scip-java.bat "scip-java-${TAG}.bat"
+          shasum -a 256 "scip-java-${TAG}" "scip-java-${TAG}.bat" > "scip-java-${TAG}.sha256"
+
+      - name: Ensure GitHub release exists
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --verify-tag --title "$TAG" --notes ""
+          fi
+
+      - name: Upload release assets
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+
+          gh release upload "$TAG" \
+            "scip-java-${TAG}" \
+            "scip-java-${TAG}.bat" \
+            "scip-java-${TAG}.sha256" \
+            --clobber
