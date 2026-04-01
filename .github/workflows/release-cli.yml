@@ -13,12 +13,9 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      OUT_DIR: ${{ runner.temp }}/release-cli
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: refs/tags/${{ inputs.tag }}
-
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -35,6 +32,9 @@ jobs:
           VERSION: ${{ inputs.tag }}
         run: |
           set -euo pipefail
+
+          mkdir -p "$OUT_DIR"
+          cd "$OUT_DIR"
 
           VERSION=${VERSION#v}
           ARTIFACT="com.sourcegraph:scip-java_2.13:${VERSION}"
@@ -66,7 +66,8 @@ jobs:
           mv scip-java.bat "scip-java-${TAG}.bat"
           shasum -a 256 "scip-java-${TAG}" "scip-java-${TAG}.bat" > "scip-java-${TAG}.sha256"
 
-      - name: Ensure GitHub release exists
+      - name: Check for GitHub release
+        id: release
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -74,20 +75,27 @@ jobs:
         run: |
           set -euo pipefail
 
-          if ! gh release view "$TAG" >/dev/null 2>&1; then
-            gh release create "$TAG" --verify-tag --title "$TAG" --notes ""
+          if gh release view "$TAG" --repo "sourcegraph/scip-java" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "GitHub release $TAG does not exist in sourcegraph/scip-java; skipping asset upload."
           fi
 
       - name: Upload release assets
+        if: steps.release.outputs.exists == 'true'
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ inputs.tag }}
         run: |
           set -euo pipefail
+
+          cd "$OUT_DIR"
 
           gh release upload "$TAG" \
             "scip-java-${TAG}" \
             "scip-java-${TAG}.bat" \
             "scip-java-${TAG}.sha256" \
+            --repo "sourcegraph/scip-java"
             --clobber
