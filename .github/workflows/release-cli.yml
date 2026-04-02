@@ -13,8 +13,6 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    env:
-      OUT_DIR: ${{ runner.temp }}/release-cli
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -28,6 +26,7 @@ jobs:
       - name: Build standalone launcher
         shell: bash
         env:
+          OUT_DIR: ${{ runner.temp }}/release-cli
           TAG: ${{ inputs.tag }}
           VERSION: ${{ inputs.tag }}
         run: |
@@ -86,6 +85,7 @@ jobs:
         if: steps.release.outputs.exists == 'true'
         shell: bash
         env:
+          OUT_DIR: ${{ runner.temp }}/release-cli
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ inputs.tag }}
         run: |
