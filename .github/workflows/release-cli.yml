@@ -97,5 +97,5 @@ jobs:
             "scip-java-${TAG}" \
             "scip-java-${TAG}.bat" \
             "scip-java-${TAG}.sha256" \
-            --repo "sourcegraph/scip-java"
+            --repo "sourcegraph/scip-java" \
             --clobber
