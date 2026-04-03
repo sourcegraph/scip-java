@@ -59,7 +59,7 @@ public class SymbolDescriptor {
       if (SemanticdbSymbols.isLocal(symbol)) {
         return new SymbolDescriptor(Descriptor.local(symbol), SemanticdbSymbols.NONE);
       }
-      if (SemanticdbSymbols.NONE.equals(symbol)) {
+      if (SemanticdbSymbols.isNone(symbol)) {
         return SymbolDescriptor.NONE;
       }
       readChar();
