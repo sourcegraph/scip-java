@@ -217,7 +217,7 @@ lazy val mavenPlugin = project
     libraryDependencies ++=
       Seq(
         "org.apache.maven" % "maven-plugin-api" % "3.6.3",
-        "org.apache.maven.plugin-tools" % "maven-plugin-annotations" % "3.6.4" %
+        "org.apache.maven.plugin-tools" % "maven-plugin-annotations" % "3.15.2" %
           Provided,
         "org.apache.maven" % "maven-project" % "2.2.1"
       ),
