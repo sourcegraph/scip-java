@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17@sha256:6eca72bb4cd5fb8cd215f2579a4dfffd24b0f47effb6c868b7e92b7f0422fa9f
+FROM eclipse-temurin:17@sha256:aae0b1494a5637b2c1b933080088ccc196dec7ffb83ce1cd524211ea4f640ff4
 
 RUN apt-get update && apt-get install --yes jq wget curl zip unzip git python3 python3-pip autoconf automake libtool build-essential libtool make g++
 
