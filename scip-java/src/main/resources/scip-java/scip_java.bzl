@@ -14,12 +14,6 @@ many *.scip (https://github.com/sourcegraph/scip) and
 These files encode information about which symbols are referenced from which
 locations in your source code.
 
-This aspect only works on Linux when using the `local` spawn strategy because
-the `run_shell` action writes SemanticDB and SCIP files to the provided
---targetroot argument. It should be possible to avoid this requirement
-in the future if there's a strong desire to make the aspect work with the
-default (sandboxed) spawn strategy.
-
 Use the command below to merge all of these SCIP files into a single index:
 
     find bazel-bin/ -type f -name '*.scip' | xargs cat > index.scip
@@ -34,7 +28,7 @@ Use `src code-intel upload` to upload the unified SCIP file to Sourcegraph:
 
 Example command to run this aspect directly:
 
-    bazel build //... --spawn_strategy=local  --aspects path/to/scip_java.bzl%scip_java_aspect --output_groups=scip --define=sourceroot=$(pwd) --define=scip_java_binary=$(which scip-java) --define=java_home=$JAVA_HOME
+    bazel build //... --aspects path/to/scip_java.bzl%scip_java_aspect --output_groups=scip --define=scip_java_binary=$(which scip-java) --define=java_home=$JAVA_HOME
 
 To learn more about aspects: https://bazel.build/extending/aspects
 """
@@ -140,9 +134,8 @@ def _scip_java(target, ctx):
     deps = [javac_action.inputs, annotations.processor_classpath]
 
     ctx.actions.run_shell(
-        command = "\"{}\" index --no-cleanup --index-semanticdb.allow-empty-index --cwd \"{}\" --targetroot {} --scip-config \"{}\" --output \"{}\"".format(
+        command = "\"{}\" index --no-cleanup --index-semanticdb.allow-empty-index --targetroot {} --scip-config \"{}\" --output \"{}\"".format(
             ctx.var["scip_java_binary"],
-            ctx.var["sourceroot"],
             targetroot.path,
             build_config_path.path,
             scip_output.path,
