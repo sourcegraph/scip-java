@@ -42,7 +42,7 @@ object JavaToolchainPlugin extends AutoPlugin {
     javacOptions ++= bootclasspathSettings(javaToolchainVersion.value),
     javaOptions ++= bootclasspathSettings(javaToolchainVersion.value),
     fork := true,
-    javaToolchainVersion := "11",
+    javaToolchainVersion := "25",
     javaToolchainJvmIndex := None,
     javaHome :=
       Some(getJavaHome(javaToolchainVersion.value, javaToolchainJvmIndex.value))
