@@ -847,7 +847,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       processors: List[String] = Nil,
       javacOptions: List[String] = Nil,
       jvmOptions: List[String] = Nil,
-      jvm: String = "17",
+      jvm: String = "25",
       kind: String = ""
   )
   private object Config {

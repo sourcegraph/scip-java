@@ -23,6 +23,8 @@ public class JavaVersion {
   public static final int JAVA8_VERSION = 8;
   public static final int JAVA11_VERSION = 11;
   public static final int JAVA17_VERSION = 17;
+  public static final int JAVA21_VERSION = 21;
+  public static final int JAVA25_VERSION = 25;
   public static final int DEFAULT_JAVA_VERSION = JAVA8_VERSION;
 
   @SuppressWarnings("FieldCanBeLocal")
@@ -49,6 +51,8 @@ public class JavaVersion {
     if (version <= JAVA8_VERSION) return JAVA8_VERSION;
     if (version <= JAVA11_VERSION) return JAVA11_VERSION;
     if (version <= JAVA17_VERSION) return JAVA17_VERSION;
+    if (version <= JAVA21_VERSION) return JAVA21_VERSION;
+    if (version <= JAVA25_VERSION) return JAVA25_VERSION;
     return version;
   }
 

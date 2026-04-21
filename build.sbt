@@ -429,6 +429,17 @@ lazy val minimized21 = project
   .dependsOn(agent, javacPlugin)
   .disablePlugins(JavaFormatterPlugin)
 
+lazy val minimized25 = project
+  .in(file("tests/minimized/.j25"))
+  .settings(
+    javaOnlySettings,
+    minimizedSettings,
+    javaToolchainVersion := "25",
+    javacOptions ++= javacModuleOptions
+  )
+  .dependsOn(agent, javacPlugin)
+  .disablePlugins(JavaFormatterPlugin)
+
 lazy val minimizedScala = project
   .in(file("tests/minimized-scala"))
   .settings(

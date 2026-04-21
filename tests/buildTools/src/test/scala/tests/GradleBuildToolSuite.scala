@@ -9,7 +9,7 @@ class Gradle_5_BuildToolSuite extends GradleBuildToolSuite(Gradle5)
 
 abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     extends GradleBuildToolSuiteBase(gradle) {
-  val allJava = List(8, 11, 17, 21)
+  val allJava = List(8, 11, 17, 21, 25)
 
   checkGradleBuild(
     "annotation-path",
