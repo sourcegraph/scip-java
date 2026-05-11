@@ -135,8 +135,8 @@ targetroot directory.
 
 ```
 ❯ find $TARGETROOT -type f
-build/semanticdb-targetroot/META-INF/semanticdb/j8/src/test/java/example/ExampleTest.java.semanticdb
-build/semanticdb-targetroot/META-INF/semanticdb/j8/src/main/java/example/Example.java.semanticdb
+build/semanticdb-targetroot/META-INF/semanticdb/j11/src/test/java/example/ExampleTest.java.semanticdb
+build/semanticdb-targetroot/META-INF/semanticdb/j11/src/main/java/example/Example.java.semanticdb
 ...
 ```
 

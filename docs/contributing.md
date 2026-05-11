@@ -95,6 +95,4 @@ write tests because:
   [snapshot testing](https://jestjs.io/docs/en/snapshot-testing), which is a
   testing technique that's heavily used in this codebase.
 - Multiline literal strings in Scala make it easy to write unit tests for source
-  code (which is always multiline). Modern versions of Java support multiline
-  string literals, but they're not supported in Java 8, which is supported by
-  scip-java.
+  code (which is always multiline).

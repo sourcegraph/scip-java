@@ -99,7 +99,7 @@ final case class IndexDependencyCommand(
   }
 
   private def inferJvmVersion(jar: Path): Option[Int] = {
-    Option(JavaVersion.classfileJvmVersion(jar).orElse(8)).map(
+    Option(JavaVersion.classfileJvmVersion(jar).orElse(11)).map(
       JavaVersion.roundToNearestStableRelease(_)
     )
   }

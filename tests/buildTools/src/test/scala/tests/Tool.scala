@@ -6,8 +6,8 @@ case class JVMSupport(minJava: Int, maxJava: Option[Int] = None) {
       (maxJava.isEmpty || maxJava.exists(javaVersion <= _))
 }
 object JVMSupport {
-  val noRestrictions = JVMSupport(8, None)
-  def atMostJava(j: Int) = JVMSupport(8, Some(j))
+  val noRestrictions = JVMSupport(11, None)
+  def atMostJava(j: Int) = JVMSupport(11, Some(j))
   def atLeastJava(j: Int) = JVMSupport(j, None)
   def javaBetween(min: Int, max: Int) = JVMSupport(min, Some(max))
 
@@ -28,7 +28,7 @@ object Tool {
   def minimumSupportedJdk(tools: Seq[Tool]): Int = tools
     .map(_.support.minJava)
     .minOption
-    .getOrElse(8)
+    .getOrElse(11)
 
   def maximumSupportedJdk(tools: Seq[Tool]): Option[Int] =
     tools.flatMap(_.support.maxJava).minOption
