@@ -667,8 +667,8 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
   }
 
-  private def jvmArchitecture(jvm: String): String =
-    JvmIndex.defaultArchitecture()
+  private def jvmArchitecture(jvm: String): String = JvmIndex
+    .defaultArchitecture()
 
   def defaultCoursierJVMArchitecture: String =
     sys.props("os.arch") match {
