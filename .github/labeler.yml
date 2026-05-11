@@ -2,3 +2,5 @@ team/graph:
     - '/.*/'
 graph/scip-java:
     - '/.*/'
+graph/scip-kotlin:
+    - '/(?i)(kotlin|kotlinc|semanticdb-kotlinc|scip-kotlin)/'

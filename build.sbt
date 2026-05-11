@@ -1,3 +1,4 @@
+import _root_.kotlin.Keys._
 import sbtdocker.DockerfileBase
 import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
 import scala.xml.transform.{RewriteRule, RuleTransformer}
@@ -25,6 +26,11 @@ lazy val V =
     val minimalMillVersion = "0.10.0"
     val millScipVersion = "0.3.6"
     val kotlinVersion = "2.1.20"
+    // Versions used by the merged-in scip-kotlin compiler plugin.
+    val kotlinPlugin = "2.2.0"
+    val kotest = "4.6.3"
+    val kctfork = "0.7.1"
+    val kotlincProtobuf = "3.17.3"
   }
 
 inThisBuild(
@@ -237,6 +243,244 @@ lazy val mavenPlugin = project
         Seq(file)
       }
   )
+
+// The Kotlin compiler plugin that emits SemanticDB. Merged in from the
+// previously separate scip-kotlin repository.
+//
+// NOTE: `test / aggregate := false` keeps `sbt test` (run across the JDK 8/
+// 11/17/21 matrix in CI) from invoking `kotlinc/test` — kotlinc 2.2.0
+// requires JDK 11+ to run, so the kotlinc tests live in a dedicated CI job
+// (.github/workflows/ci.yml :: kotlin) instead.
+lazy val kotlinc = project
+  .in(file("semanticdb-kotlinc"))
+  .enablePlugins(KotlinPlugin)
+  .settings(
+    name := "semanticdb-kotlinc",
+    moduleName := "semanticdb-kotlinc",
+    description := "A kotlinc plugin to emit SemanticDB information",
+    crossPaths := false,
+    autoScalaLibrary := false,
+    test / aggregate := false,
+    compile / aggregate := false,
+    kotlinVersion := V.kotlinPlugin,
+    kotlincJvmTarget := "1.8",
+    kotlincOptions ++= Seq("-Xinline-classes", "-Xcontext-parameters"),
+
+    // sbt-kotlin-plugin defaults to adding `kotlin-scripting-compiler-embeddable`
+    // (and its transitive kotlin-stdlib) as a regular dependency. Mark them
+    // Provided — kotlinc supplies them at runtime, and we don't want them
+    // bundled into the fat-jar.
+    kotlinRuntimeProvided := true,
+
+    // kotlin-stdlib is supplied by kotlinc at runtime — keep on compile
+    // classpath via Provided so the assembled fat-jar does not bundle it.
+    libraryDependencies +=
+      "org.jetbrains.kotlin" % "kotlin-stdlib" % V.kotlinPlugin % Provided,
+
+    // protobuf java codegen — proto file lives at src/main/proto/...
+    Compile / PB.protoSources :=
+      Seq((Compile / sourceDirectory).value / "proto"),
+    Compile / PB.targets :=
+      Seq(PB.gens.java(V.kotlincProtobuf) -> (Compile / sourceManaged).value),
+    libraryDependencies +=
+      "com.google.protobuf" % "protobuf-java" % V.kotlincProtobuf,
+
+    // kotlin-compiler-embeddable is supplied by kotlinc at runtime
+    libraryDependencies +=
+      "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" %
+        V.kotlinPlugin % Provided,
+
+    // ---- sbt-assembly fat-jar ---------------------------------------------
+    // Mirrors scip-java's `fatjarPackageSettings`. Produces a shaded jar that
+    // replaces the slim `packageBin` so `publishLocal` ships the shaded
+    // artifact (the same artifact Gradle's shadowJar produced previously).
+    assembly / assemblyShadeRules :=
+      Seq(
+        // Relocate any IntelliJ classes the same way kotlin-compiler-embeddable
+        // does internally. Do NOT rename `com.sourcegraph.**` — the
+        // META-INF/services files reference those FQNs.
+        ShadeRule
+          .rename("com.intellij.**" -> "org.jetbrains.kotlin.com.intellij.@1")
+          .inAll
+      ),
+    Compile / packageBin := assembly.value,
+    // Strip every <dependency> from the POM — the fat-jar absorbs the
+    // protobuf runtime, and the kotlin-* deps are Provided by kotlinc.
+    pomPostProcess := { node =>
+      new RuleTransformer(new RewriteRule {
+        override def transform(n: XmlNode): XmlNodeSeq =
+          if (n.label == "dependency")
+            XmlNodeSeq.Empty
+          else
+            n
+      }).transform(node).head
+    },
+
+    // tests
+    libraryDependencies ++=
+      Seq(
+        "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" %
+          V.kotlinPlugin % Test,
+        "org.jetbrains.kotlin" % "kotlin-test" % V.kotlinPlugin % Test,
+        "org.jetbrains.kotlin" % "kotlin-test-junit5" % V.kotlinPlugin % Test,
+        "org.jetbrains.kotlin" % "kotlin-reflect" % V.kotlinPlugin % Test,
+        "io.kotest" % "kotest-assertions-core-jvm" % V.kotest % Test,
+        "dev.zacsweers.kctfork" % "core" % V.kctfork % Test,
+        "com.github.sbt.junit" % "jupiter-interface" %
+          JupiterKeys.jupiterVersion.value % Test
+      ),
+    Test / fork := true,
+    Test / javaOptions += "-Xmx2g",
+
+    // sbt-kotlin-plugin 3.1.6 inspects every jar on the kotlinc classpath and
+    // moves any jar containing META-INF/services/org.jetbrains.kotlin.compiler.plugin.*
+    // entries into the compiler-plugin classpath, removing it from the regular
+    // classpath. kctfork ships such service files for its own internal use as a
+    // KAPT/registrar shim, which makes its public API (com.tschuchort.compiletesting.*)
+    // invisible to our test sources. Workaround: pre-extract kctfork to a
+    // directory and add that directory to the test classpath — sbt-kotlin-plugin
+    // only inspects .jar files, so directories pass through unmodified.
+    Test / unmanagedJars += {
+      val report = update.value
+      val files = report.allFiles
+      val jar = files
+        .find(_.getName == s"core-${V.kctfork}.jar")
+        .getOrElse(
+          sys.error(s"kctfork core-${V.kctfork}.jar not found in update report")
+        )
+      val dir = target.value / s"kctfork-${V.kctfork}-extracted"
+      val marker = dir / ".extracted"
+      if (!marker.exists()) {
+        IO.delete(dir)
+        IO.unzip(jar, dir)
+        IO.touch(marker)
+      }
+      Attributed.blank(dir)
+    }
+  )
+
+// `kotlincMinimized` is the SemanticDB/SCIP snapshot fixture project for the
+// merged-in kotlinc plugin (named differently from the existing `minimized`
+// project to avoid collision). It compiles a small set of Kotlin and Java
+// fixtures with the assembled `kotlinc` plugin attached, producing
+// *.semanticdb files which the `kotlincSnapshots` task converts to SCIP and
+// renders as the human-readable golden snapshots checked into
+// semanticdb-kotlinc/minimized/src/generatedSnapshots/resources/.
+lazy val kotlincMinimized = project
+  .in(file("semanticdb-kotlinc/minimized"))
+  .enablePlugins(KotlinPlugin)
+  .settings(
+    publish / skip := true,
+    crossPaths := false,
+    autoScalaLibrary := false,
+    // kotlincMinimized's compile invokes kotlinc 2.2.0 which requires JDK 11+,
+    // so keep it out of the aggregated `sbt test` (which runs on the JDK 8/11/
+    // 17/21 matrix in CI). The dedicated `kotlin` CI job below targets it
+    // explicitly via `sbt kotlincMinimized/kotlincSnapshots`.
+    test / aggregate := false,
+    compile / aggregate := false,
+    kotlinVersion := V.kotlinPlugin,
+    kotlincJvmTarget := "1.8",
+    kotlinLib("stdlib"),
+
+    // Force javac to fork. Two reasons:
+    //   1. JDK 9+ strongly encapsulates jdk.compiler internals; semanticdb-javac
+    //      reflectively touches them and needs --add-exports flags. With a
+    //      forked javac we can pass `-J--add-exports=...` (mirrors scip-java).
+    //   2. sbt's in-process javac receives `vf://` virtual-file URIs from the
+    //      MappedFileConverter, which semanticdb-javac cannot resolve via
+    //      java.nio.file.Path.of. Forked javac is invoked with absolute file
+    //      paths instead, so the plugin sees real paths.
+    // Setting javaHome to Some(<current JVM home>) flips
+    // ZincUtil.compilers/JavaTools.directOrFork from direct → fork.
+    javaHome := Some(file(System.getProperty("java.home"))),
+    Compile / javacOptions ++=
+      Seq(
+        "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+        "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+      ),
+
+    // Attach the assembled kotlinc fat-jar to the compile classpath.
+    // sbt-kotlin-plugin's AnalyzingKotlinCompiler partitions the classpath:
+    // any jar containing META-INF/services/org.jetbrains.kotlin.compiler.plugin*
+    // entries (which our fat-jar does, for both CommandLineProcessor and
+    // CompilerPluginRegistrar) is moved into args.pluginClasspaths and removed
+    // from the regular classpath. So no `-Xplugin=<path>` is needed and we
+    // don't have to predict the assembled jar's filename. The .value reference
+    // also gives us the right task ordering — assembly runs before compile.
+    Compile / unmanagedJars +=
+      Attributed.blank((kotlinc / Compile / packageBin).value),
+    // Attach the locally-built semanticdb-javac fat-jar so that `-Xplugin:semanticdb`
+    // (set in javacOptions below) loads our plugin via its META-INF/services/
+    // com.sun.source.util.Plugin entry. Using the local jar instead of the
+    // published `com.sourcegraph:semanticdb-javac:<old>` artifact keeps this
+    // module compatible with whichever JDK scip-java itself is built against.
+    //
+    // NOTE: must use `Keys.\`package\`` (which `fatjarPackageSettings`
+    // overrides to return `assembly.value`), not `packageBin` — the latter
+    // produces the slim, unshaded jar that is missing the bundled protobuf
+    // runtime classes referenced by SemanticdbVisitor at runtime.
+    Compile / unmanagedJars +=
+      Attributed.blank((javacPlugin / Compile / Keys.`package`).value),
+    Compile / kotlincPluginOptions ++= {
+      val srcRoot = (ThisBuild / baseDirectory).value.getAbsolutePath
+      val tgtRoot = (target.value / "semanticdb-targetroot").getAbsolutePath
+      Seq(
+        s"plugin:semanticdb-kotlinc:sourceroot=$srcRoot",
+        s"plugin:semanticdb-kotlinc:targetroot=$tgtRoot"
+      )
+    },
+
+    // The semanticdb javac plugin parses its own argument string, so
+    // `-Xplugin:semanticdb -sourceroot:<...> -targetroot:<...>` MUST be passed
+    // as a single javac argument (matches the existing Gradle behavior).
+    Compile / javacOptions += {
+      val srcRoot = (ThisBuild / baseDirectory).value
+      val tgtRoot = target.value / "semanticdb-targetroot"
+      s"-Xplugin:semanticdb -sourceroot:${srcRoot.getAbsolutePath} " +
+        s"-targetroot:${tgtRoot.getAbsolutePath}"
+    },
+
+    // ----- snapshots regeneration task -----
+    // Invokes `com.sourcegraph.scip_java.ScipJava.main` twice in the cli JVM
+    // (forked — ScipJava.main calls System.exit on failure). First pass
+    // converts the *.semanticdb files under target/semanticdb-targetroot/
+    // into an index.scip; second pass renders that index as the human-readable
+    // golden snapshots.
+    kotlincSnapshots := Def.taskDyn {
+      val srcRoot = (ThisBuild / baseDirectory).value.getAbsolutePath
+      val tgtRoot = (target.value / "semanticdb-targetroot").getAbsolutePath
+      val snapDir =
+        (baseDirectory.value / "src" / "generatedSnapshots" / "resources")
+          .getAbsolutePath
+      val scipOut = s"$tgtRoot/index.scip"
+      val mainCls = "com.sourcegraph.scip_java.ScipJava"
+      Def.sequential(
+        Compile / compile,
+        (cli / Compile / runMain).toTask(
+          s" $mainCls index-semanticdb --no-emit-inverse-relationships --cwd $srcRoot --output $scipOut $tgtRoot"
+        ),
+        (cli / Compile / runMain).toTask(
+          s" $mainCls snapshot --cwd $srcRoot --output $snapDir $tgtRoot"
+        )
+      )
+    }.value
+  )
+  // The Java fixture files under semanticdb-kotlinc/minimized/src/main/java/
+  // are intentionally hand-formatted (4-space indent, etc.) — disable
+  // sbt-java-formatter so it doesn't rewrite them and break the golden
+  // SCIP snapshots.
+  .disablePlugins(JavaFormatterPlugin)
+
+// Regenerates the golden SemanticDB/SCIP snapshots checked into
+// semanticdb-kotlinc/minimized/src/generatedSnapshots/resources/. Defined at
+// the top level so it is in scope for the `kotlincMinimized` project above.
+lazy val kotlincSnapshots = taskKey[Unit](
+  "Run the SCIP snapshot generator over the kotlinc minimized project"
+)
 
 lazy val cli = project
   .in(file("scip-java"))

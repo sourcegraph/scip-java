@@ -14,6 +14,10 @@ addSbtPlugin("io.spray" % "sbt-revolver" % "0.9.1")
 // sbt-jdi-tools appears to fix an error related to this message:
 // [error] (plugin / Compile / compileIncremental) java.lang.NoClassDefFoundError: com/sun/tools/javac/code/Symbol
 addSbtPlugin("org.scala-debugger" % "sbt-jdi-tools" % "1.1.1")
+// Used by the semanticdb-kotlinc compiler plugin (merged from scip-kotlin).
+addSbtPlugin("org.jetbrains.scala" % "sbt-kotlin-plugin" % "3.1.6")
+// Provides the JUnit 5 (Jupiter) test interface used by semanticdb-kotlinc tests.
+addSbtPlugin("com.github.sbt.junit" % "sbt-jupiter-interface" % "0.15.1")
 
 libraryDependencies ++=
   List("com.thesamet.scalapb" %% "compilerplugin" % "0.11.11")

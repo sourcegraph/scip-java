@@ -68,3 +68,7 @@ semanticdb-gradle-plugin/gradle
 aspects/scip_java.bzl
 
 tests/snapshots/META-INF/
+
+# kctfork-based tests run kotlinc with our plugin, which writes
+# META-INF/semanticdb/sources/Test.kt.semanticdb relative to the test cwd.
+/semanticdb-kotlinc/META-INF/
