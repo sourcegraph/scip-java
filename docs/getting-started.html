@@ -76,7 +76,7 @@ finished indexing the project.</p>
 <blockquote>
 <p>The <code>sourcegraph/scip-java</code> Docker image is made available for convenience at
 the cost of performance. The <code>sourcegraph/scip-java</code> image is a big download
-because it includes pre-installed versions of Java 8, Java 11, and Java 17.
+because it includes pre-installed versions of Java 11, Java 17, and Java 21.
 The <code>sourcegraph/scip-java</code> image has slow performance because it needs to
 download all external dependencies of your codebase on every invocation.</p>
 <p>For better performance, we recommend using your own Docker image together with
@@ -84,10 +84,7 @@ the <a href="#java-launcher">Java launcher</a> option.</p>
 </blockquote>
 <p>Java 17 is the default Java version in the <code>sourcegraph/scip-java</code> Docker image.
 Use the following commands to use a different JVM version:</p>
-<pre><code class="hljs css language-sh"><span class="hljs-comment"># Java 8</span>
-docker run -v $(<span class="hljs-built_in">pwd</span>):/sources --env JVM_VERSION=8 sourcegraph/scip-java:latest scip-java index
-
-<span class="hljs-comment"># Java 11</span>
+<pre><code class="hljs css language-sh"><span class="hljs-comment"># Java 11</span>
 docker run -v $(<span class="hljs-built_in">pwd</span>):/sources --env JVM_VERSION=11 sourcegraph/scip-java:latest scip-java index
 
 <span class="hljs-comment"># Java 17 (default)</span>
@@ -325,9 +322,10 @@ of Java versions.</p>
 </thead>
 <tbody>
 <tr><td>Java 7</td><td>❌</td><td></td></tr>
-<tr><td>Java 8</td><td>✅</td><td></td></tr>
+<tr><td>Java 8</td><td>❌</td><td></td></tr>
 <tr><td>Java 11</td><td>✅</td><td></td></tr>
 <tr><td>Java 17</td><td>✅, requires <code>--add-exports</code></td><td></td></tr>
+<tr><td>Java 21</td><td>✅, requires <code>--add-exports</code></td><td></td></tr>
 </tbody>
 </table>
 <p>For Java 17 and newer versions, the following JVM options are required:</p>
