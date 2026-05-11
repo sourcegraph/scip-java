@@ -11,7 +11,7 @@
   <goalPrefix>sourcegraph</goalPrefix>
   <isolatedRealm>false</isolatedRealm>
   <inheritedByDefault>true</inheritedByDefault>
-  <requiredJavaVersion>1.8</requiredJavaVersion>
+  <requiredJavaVersion>11</requiredJavaVersion>
   <requiredMavenVersion>3.9.5</requiredMavenVersion>
   <mojos>
     <mojo>

@@ -9,7 +9,7 @@ class Gradle_5_BuildToolSuite extends GradleBuildToolSuite(Gradle5)
 
 abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     extends GradleBuildToolSuiteBase(gradle) {
-  val allJava = List(8, 11, 17, 21)
+  val allJava = List(11, 17, 21)
 
   checkGradleBuild(
     "annotation-path",
@@ -164,10 +164,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
 
   allJava.foreach { java =>
     checkGradleBuild(
-      if (java == 8)
-        s"toolchains-$java".tag(Java8Only)
-      else
-        s"toolchains-$java",
+      s"toolchains-$java",
       s"""|/build.gradle
           |apply plugin: 'java'
           |java {
@@ -249,84 +246,6 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     expectedSemanticdbFiles = 1,
     extraArguments = List("--", "compileJava"),
     gradleVersions = List(Gradle8, Gradle7, Gradle6)
-  )
-
-  checkGradleBuild(
-    "playframework".tag(Java8Only),
-    """|/build.gradle
-       |plugins {
-       |  id 'org.gradle.playframework' version '0.11'
-       |  id 'idea'
-       |}
-       |
-       |play {
-       |  platform {
-       |    playVersion = '2.6.7'
-       |    scalaVersion = '2.12'
-       |    javaVersion = JavaVersion.VERSION_1_8
-       |  }
-       |  injectedRoutesGenerator = true
-       |}
-       |dependencies {
-       |  implementation "com.typesafe.play:play-guice_2.12:2.6.7"
-       |}
-       |
-       |repositories {
-       |  mavenCentral()
-       |  maven {
-       |    name "lightbend-maven-releases"
-       |    url "https://repo.lightbend.com/lightbend/maven-release"
-       |  }
-       |  ivy {
-       |    name "lightbend-ivy-release"
-       |    url "https://repo.lightbend.com/lightbend/ivy-releases"
-       |    layout "ivy"
-       |  }
-       |}
-       |/app/controllers/HomeController.java
-       |package controllers;
-       |import play.mvc.*;
-       |import views.html.*;
-       |public class HomeController extends Controller {
-       |    public Result index() {
-       |        return ok(index.render("Your new application is ready."));
-       |    }
-       |}
-       |/app/views/index.scala.html
-       |@(message: String)
-       |<h1>@message</h1>
-       |/conf/routes
-       |GET / controllers.HomeController.index
-       |""".stripMargin,
-    expectedSemanticdbFiles =
-      2, // Two files because `conf/routes` generates a Java file.
-    gradleVersions = List(Gradle6)
-  )
-
-  checkGradleBuild(
-    "checkerframework".tag(Java8Only),
-    """|/build.gradle
-       |plugins {
-       |    id 'java'
-       |    id 'org.checkerframework' version '0.5.24'
-       |}
-       |repositories {
-       |    mavenCentral()
-       |}
-       |java {
-       |  toolchain {
-       |    languageVersion = JavaLanguageVersion.of(8)
-       |  }
-       |}
-       |/src/main/java/foo/Example.java
-       |package foo;
-       |public class Example {}
-       |/src/test/java/foo/ExampleSuite.java
-       |package foo;
-       |public class ExampleSuite {}
-       |""".stripMargin,
-    expectedSemanticdbFiles = 2,
-    gradleVersions = List(Gradle6)
   )
 
   checkGradleBuild(
@@ -430,7 +349,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     gradleVersions = List(Gradle8, Gradle7, Gradle6)
   )
 
-  List("8", "11").foreach { java =>
+  List("11", "17").foreach { java =>
     checkGradleBuild(
       s"kotlin-jvm-toolchains-jdk$java",
       s"""|/build.gradle

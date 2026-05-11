@@ -1,6 +1,5 @@
 package com.sourcegraph.scip_semanticdb;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.*;
@@ -33,7 +32,6 @@ public class PackageTable {
     // redefine classes from the JDK and we want those maven packages to take precedence over
     // the JDK. The motivation to prioritize maven packages over the JDK is that we only want
     // to exports monikers against the JDK when indexing the JDK repo.
-    indexJdk();
     for (MavenPackage pkg : options.packages) {
       indexPackage(pkg);
     }
@@ -52,7 +50,7 @@ public class PackageTable {
 
     Package result = byClassfile.get(classfile);
     if (result != null) return Optional.of(result);
-    if (!javaVersion.isJava8 && isJrtClassfile(classfile)) return Optional.of(javaVersion.pkg);
+    if (isJrtClassfile(classfile)) return Optional.of(javaVersion.pkg);
     return Optional.empty();
   }
 
@@ -94,12 +92,6 @@ public class PackageTable {
     }
   }
 
-  private void indexJdk() throws IOException {
-    if (javaVersion.isJava8) {
-      indexBootstrapClasspath();
-    }
-  }
-
   /**
    * The JRT classpath contains classfiles for the JDK for Java versions 9+.
    *
@@ -114,26 +106,5 @@ public class PackageTable {
       cachedJdkSymbols.add(classfile);
     }
     return isJrt;
-  }
-
-  /**
-   * The boot classpath contains jar files for the JDK in Java 8.
-   *
-   * <p>The bootclasspath is normal jar files on disk that can live under $JAVA_HOME.
-   */
-  private void indexBootstrapClasspath() throws IOException {
-    for (Object keyObject : System.getProperties().keySet()) {
-      Package jdk = new JdkPackage("8");
-      if (!(keyObject instanceof String)) continue;
-      String key = (String) keyObject;
-      if (!key.endsWith(".boot.class.path")) continue;
-      String value = System.getProperty(key);
-      for (String entry : value.split(File.pathSeparator)) {
-        Path path = Paths.get(entry);
-        if (JAR_PATTERN.matches(path) && Files.isRegularFile(path)) {
-          indexJarFile(path, jdk);
-        }
-      }
-    }
   }
 }

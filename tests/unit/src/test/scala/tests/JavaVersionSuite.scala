@@ -12,7 +12,7 @@ class JavaVersionSuite extends FunSuite {
     }
   }
 
-  checkVersion("1.8.0_272", "8")
   checkVersion("11.0.9", "11")
+  checkVersion("17.0.5", "17")
 
 }

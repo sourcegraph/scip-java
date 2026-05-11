@@ -88,7 +88,6 @@ lazy val agent = project
   .settings(
     fatjarPackageSettings,
     javaOnlySettings,
-    javaToolchainVersion := "8",
     moduleName := "semanticdb-agent",
     libraryDependencies ++=
       List(
@@ -110,8 +109,7 @@ lazy val gradlePlugin = project
     scalaVersion := V.scala213,
     buildInfoPackage := "com.sourcegraph.scip_java",
     publish / skip := true,
-    javaToolchainVersion := "8",
-    scalacOptions ++= Seq("-target:8", "-release", "8"),
+    scalacOptions ++= Seq("-target:11", "-release", "11"),
     libraryDependencies ++=
       List(
         "dev.gradleplugins" % "gradle-api" % V.gradle % Provided,
@@ -150,7 +148,6 @@ lazy val javacPlugin = project
     fatjarPackageSettings,
     javaOnlySettings,
     moduleName := "semanticdb-javac",
-    javaToolchainVersion := "8",
     javacOptions += "-g",
     (assembly / assemblyShadeRules) :=
       Seq(
@@ -186,7 +183,6 @@ lazy val scipProto = project
   .in(file("scip-java-proto"))
   .settings(
     moduleName := "scip-java-proto",
-    javaToolchainVersion := "8",
     javaOnlySettings,
     libraryDependencies +=
       "com.google.protobuf" % "protobuf-java-util" % V.protobuf,
@@ -200,7 +196,6 @@ lazy val scip = project
   .settings(
     publishMavenStyle := true,
     moduleName := "scip-semanticdb",
-    javaToolchainVersion := "8",
     javaOnlySettings,
     (Compile / PB.targets) :=
       Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
@@ -212,7 +207,6 @@ lazy val mavenPlugin = project
   .in(file("maven-plugin"))
   .settings(
     moduleName := "maven-plugin",
-    javaToolchainVersion := "8",
     javaOnlySettings,
     libraryDependencies ++=
       Seq(
@@ -385,12 +379,6 @@ lazy val minimizedSettings = List[Def.Setting[_]](
 lazy val minimized = project
   .in(file("tests/minimized/.j11"))
   .settings(minimizedSettings, javaOnlySettings)
-  .dependsOn(agent, javacPlugin)
-  .disablePlugins(JavaFormatterPlugin)
-
-lazy val minimized8 = project
-  .in(file("tests/minimized/.j8"))
-  .settings(minimizedSettings, javaToolchainVersion := "8", javaOnlySettings)
   .dependsOn(agent, javacPlugin)
   .disablePlugins(JavaFormatterPlugin)
 

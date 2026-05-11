@@ -77,7 +77,7 @@ import os.SubprocessException
  * {{{
  *   {
  *     "dependencies": ["junit:junit:4.13.1"],
- *     "jvm": "8"
+ *     "jvm": "11"
  *   }
  * }}}
  */
@@ -565,11 +565,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     })
     val javac = javacPath(config, tmp)
     index.app.reporter.info(s"$$ $javac @$argsfile")
-    val javacModuleOptions: Seq[String] =
-      if (config.jvm != "8")
-        BuildInfo.javacModuleOptions
-      else
-        Nil
+    val javacModuleOptions: Seq[String] = BuildInfo.javacModuleOptions
 
     val jvmOptions = config.jvmOptions.map("-J" + _)
 
@@ -672,15 +668,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   }
 
   private def jvmArchitecture(jvm: String): String =
-    if (
-      // Hack only for local development on ARM64 Mac OS X
-      // won't affect any other system
-      scala.util.Properties.isMac && sys.props("os.arch") == "aarch64" &&
-      (jvm.startsWith("8") || jvm.startsWith("1.8"))
-    )
-      "amd64"
-    else
-      JvmIndex.defaultArchitecture()
+    JvmIndex.defaultArchitecture()
 
   def defaultCoursierJVMArchitecture: String =
     sys.props("os.arch") match {
