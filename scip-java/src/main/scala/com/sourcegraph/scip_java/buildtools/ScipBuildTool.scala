@@ -192,7 +192,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     val compileAttempts = ListBuffer.empty[Try[Unit]]
     compileAttempts += compileJavaFiles(tmp, deps, config, javaFiles)
     compileAttempts += compileScalaFiles(deps, scalaFiles, tmp)
-    compileAttempts += compileKotlinFiles(deps, config, kotlinFiles)
+    compileAttempts += compileKotlinFiles(deps, config, kotlinFiles, tmp)
     val errors = compileAttempts.collect { case Failure(exception) =>
       exception
     }
@@ -231,24 +231,18 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   private def compileKotlinFiles(
       deps: Dependencies,
       config: Config,
-      allKotlinFiles: List[Path]
+      allKotlinFiles: List[Path],
+      tmp: Path
   ): Try[Unit] = {
-    println(allKotlinFiles)
     if (allKotlinFiles.isEmpty || config.dependencies.isEmpty)
       return Success()
     val filesPaths = allKotlinFiles.map(_.toString)
 
-    val kotlinPluginVersion = BuildInfo.semanticdbKotlincVersion
-    val plugin =
-      Dependencies
-        .resolveDependencies(
-          List(s"com.sourcegraph:semanticdb-kotlinc:$kotlinPluginVersion"),
-          transitive = false
-        )
-        .classpath
-        .head
-
-    println(plugin)
+    // The semanticdb-kotlinc compiler plugin is now built and shipped together
+    // with the scip-java CLI as an embedded resource (see Embedded.scala and
+    // the cli/resourceGenerators task in build.sbt), so we no longer need to
+    // resolve a separately-published artifact from Maven Central.
+    val plugin = Embedded.semanticdbKotlincJar(tmp)
 
     val self = config.dependencies.head
     val commonKotlinFiles: List[Path] =

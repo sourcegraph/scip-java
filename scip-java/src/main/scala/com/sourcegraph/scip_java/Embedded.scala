@@ -23,6 +23,11 @@ object Embedded {
 
   def agentJar(tmpDir: Path): Path = copyFile(tmpDir, "semanticdb-agent.jar")
 
+  def semanticdbKotlincJar(tmpDir: Path): Path = copyFile(
+    tmpDir,
+    "semanticdb-kotlinc.jar"
+  )
+
   private def javacErrorpath(tmp: Path) = tmp.resolve("errorpath.txt")
 
   def customJavac(

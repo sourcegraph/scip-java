@@ -105,6 +105,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
     val agentpath = Embedded.agentJar(tmp)
     val pluginpath = Embedded.semanticdbJar(tmp)
     val gradlePluginPath = Embedded.gradlePluginJar(tmp)
+    val semanticdbKotlincPath = Embedded.semanticdbKotlincJar(tmp)
     val dependenciesPath = targetroot.resolve("dependencies.txt")
     Files.deleteIfExists(dependenciesPath)
 
@@ -123,6 +124,7 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
          |   project.ext["javacPluginJar"] = "$pluginpath"
          |   project.ext["dependenciesOut"] = "$dependenciesPath"
          |   project.ext["javacAgentPath"] = "$agentpath"
+         |   project.ext["semanticdbKotlincJar"] = "$semanticdbKotlincPath"
          |   apply plugin: SemanticdbGradlePlugin
          | }
       """.stripMargin.trim
