@@ -356,7 +356,13 @@ lazy val cli = project
   .enablePlugins(PackPlugin, DockerPlugin, BuildInfoPlugin)
   .dependsOn(scip)
 
-import SemanticdbKotlincKeys._
+// Task key for regenerating the SCIP/SemanticDB golden snapshots emitted by
+// the semanticdb-kotlinc compiler plugin over the Kotlin minimized fixtures.
+// We deliberately do NOT call this `snapshots` to avoid colliding with the
+// existing top-level `snapshots` test project (`lazy val snapshots = project`).
+lazy val kotlincSnapshots = taskKey[Unit](
+  "Run the SCIP snapshot generator over the semanticdb-kotlinc minimized project"
+)
 
 // The semanticdb-kotlinc compiler plugin. Built as a fat-jar that is later
 // embedded into the scip-java CLI distribution (see cli's resourceGenerators)
@@ -539,9 +545,8 @@ lazy val semanticdbKotlincMinimized = project
     // into an index.scip; second pass renders that index as the human-readable
     // golden snapshots.
     //
-    // We use `kotlincSnapshots` (defined in project/SemanticdbKotlincKeys.scala)
-    // instead of `snapshots` to avoid colliding with the existing top-level
-    // `snapshots` test project.
+    // We use `kotlincSnapshots` instead of `snapshots` to avoid colliding
+    // with the existing top-level `snapshots` test project.
     kotlincSnapshots :=
       Def
         .taskDyn {
