@@ -59,12 +59,16 @@
 //                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/
 //                                             ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/h2Mode.
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#
   /**
    * Represents the SQL statement that either inserts a new row into a table, or, if insertion would violate a unique constraint,
    * first deletes the existing row before inserting a new row.
    *
    * @param table Table to either insert values into or delete values from then insert into.
    */
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#[Key]
+//                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#`<init>`().
+//                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#`<init>`().(table)
   open class ReplaceStatement<Key : Any>(table: Table) : InsertStatement<Key>(table) {
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#
 //                            display_name ReplaceStatement
@@ -82,6 +86,12 @@
 //                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
 //                                                       ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertStatement#
 //                                                                            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#`<init>`().(table)
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#[Key]
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#`<init>`().(table)
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#prepareSQL().
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#prepareSQL().(transaction)
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#prepareSQL().(prepared)
       override fun prepareSQL(transaction: Transaction, prepared: Boolean): String {
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#prepareSQL().
 //                            display_name prepareSQL
@@ -96,6 +106,9 @@
 //                                                               documentation ```kotlin\nprepared: Boolean\n```
 //                                                                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#prepareSQL().(transaction)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#prepareSQL().(prepared)
+//        ⌄ enclosing_range_start local 0
           val values = arguments!!.first()
 //            ^^^^^^ definition local 0
 //                   display_name values
@@ -104,6 +117,8 @@
 //                     ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#getArguments().
 //                     ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#setArguments().
 //                                 ^^^^^ reference semanticdb maven . . kotlin/collections/first(+19).
+//                                       ⌃ enclosing_range_end local 0
+//        ⌄ enclosing_range_start local 1
           val valuesSql = values.toSqlString(prepared)
 //            ^^^^^^^^^ definition local 1
 //                      display_name valuesSql
@@ -111,6 +126,8 @@
 //                        ^^^^^^ reference local 0
 //                               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#toSqlString().
 //                                           ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#prepareSQL().(prepared)
+//                                                   ⌃ enclosing_range_end local 1
+//        ⌄ enclosing_range_start local 2
           val dialect = transaction.db.dialect
 //            ^^^^^^^ definition local 2
 //                    display_name dialect
@@ -120,13 +137,20 @@
 //                                  ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getDb().
 //                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialect.
 //                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDialect().
+//                                           ⌃ enclosing_range_end local 2
+//        ⌄ enclosing_range_start local 3
+//                                     ⌄ enclosing_range_start local 4
           val functionProvider = when (dialect.h2Mode) {
 //            ^^^^^^^^^^^^^^^^ definition local 3
 //                             display_name functionProvider
 //                             documentation ```kotlin\nlocal val functionProvider: FunctionProvider\n```
 //                                     ^^^^^^^ reference local 2
+//                                     ^^^^^^^^^^^^^^ definition local 4
+//                                                    display_name <when-subject>
+//                                                    documentation ```kotlin\nlocal val <when-subject>: H2Dialect.H2CompatibilityMode?\n```
 //                                             ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getH2Mode().
 //                                             ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/h2Mode.
+//                                                  ⌃ enclosing_range_end local 4
               H2Dialect.H2CompatibilityMode.MySQL, H2Dialect.H2CompatibilityMode.MariaDB -> MysqlFunctionProvider.INSTANCE
 //                                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#MySQL.
 //                                                                               ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#MariaDB.
@@ -137,6 +161,7 @@
 //                            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#functionProvider.
 //                            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getFunctionProvider().
           }
+//        ⌃ enclosing_range_end local 3
           return functionProvider.replace(table, values.unzip().first, valuesSql, transaction, prepared)
 //               ^^^^^^^^^^^^^^^^ reference local 3
 //                                ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#replace().
@@ -150,8 +175,11 @@
 //                                                                                ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#prepareSQL().(transaction)
 //                                                                                             ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#prepareSQL().(prepared)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#prepareSQL().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceStatement#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#
   /**
    * Represents the SQL statement that uses data retrieved from a [selectQuery] to either insert a new row into a table,
    * or, if insertion would violate a unique constraint, first delete the existing row before inserting a new row.
@@ -159,6 +187,7 @@
    * @param columns Columns to either insert values into or delete values from then insert into.
    * @param selectQuery Source SELECT query that provides the values to insert.
    */
+//                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#`<init>`().
   open class ReplaceSelectStatement(
 //           ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#
 //                                  display_name ReplaceSelectStatement
@@ -167,20 +196,28 @@
 //           ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#`<init>`().
 //                                  display_name ReplaceSelectStatement
 //                                  documentation ```kotlin\npublic constructor(columns: List<Column<*>>, selectQuery: AbstractQuery<*>): ReplaceSelectStatement\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#`<init>`().(columns)
       columns: List<Column<*>>,
 //    ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#`<init>`().(columns)
 //            display_name columns
 //            documentation ```kotlin\ncolumns: List<Column<*>>\n```
 //             ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#`<init>`().(columns)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#`<init>`().(selectQuery)
       selectQuery: AbstractQuery<*>
 //    ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#`<init>`().(selectQuery)
 //                display_name selectQuery
 //                documentation ```kotlin\nselectQuery: AbstractQuery<*>\n```
 //                 ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#`<init>`().(selectQuery)
   ) : InsertSelectStatement(columns, selectQuery) {
 //    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#
 //                          ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#`<init>`().(columns)
 //                                   ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#`<init>`().(selectQuery)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#prepareSQL().
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#prepareSQL().(transaction)
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#prepareSQL().(prepared)
       override fun prepareSQL(transaction: Transaction, prepared: Boolean): String {
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#prepareSQL().
 //                            display_name prepareSQL
@@ -195,8 +232,11 @@
 //                                                               documentation ```kotlin\nprepared: Boolean\n```
 //                                                                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#prepareSQL().(transaction)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#prepareSQL().(prepared)
+//        ⌄ enclosing_range_start local 5
           val querySql = selectQuery.prepareSQL(transaction, prepared)
-//            ^^^^^^^^ definition local 4
+//            ^^^^^^^^ definition local 5
 //                     display_name querySql
 //                     documentation ```kotlin\nlocal val querySql: String\n```
 //                       ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#getSelectQuery().
@@ -204,8 +244,10 @@
 //                                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#prepareSQL().
 //                                              ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#prepareSQL().(transaction)
 //                                                           ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#prepareSQL().(prepared)
+//                                                                   ⌃ enclosing_range_end local 5
+//        ⌄ enclosing_range_start local 6
           val dialect = transaction.db.dialect
-//            ^^^^^^^ definition local 5
+//            ^^^^^^^ definition local 6
 //                    display_name dialect
 //                    documentation ```kotlin\nlocal val dialect: DatabaseDialect\n```
 //                      ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#prepareSQL().(transaction)
@@ -213,33 +255,43 @@
 //                                  ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getDb().
 //                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialect.
 //                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDialect().
+//                                           ⌃ enclosing_range_end local 6
+//        ⌄ enclosing_range_start local 7
+//                                     ⌄ enclosing_range_start local 8
           val functionProvider = when (dialect.h2Mode) {
-//            ^^^^^^^^^^^^^^^^ definition local 6
+//            ^^^^^^^^^^^^^^^^ definition local 7
 //                             display_name functionProvider
 //                             documentation ```kotlin\nlocal val functionProvider: FunctionProvider\n```
-//                                     ^^^^^^^ reference local 5
+//                                     ^^^^^^^ reference local 6
+//                                     ^^^^^^^^^^^^^^ definition local 8
+//                                                    display_name <when-subject>
+//                                                    documentation ```kotlin\nlocal val <when-subject>: H2Dialect.H2CompatibilityMode?\n```
 //                                             ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getH2Mode().
 //                                             ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/h2Mode.
+//                                                  ⌃ enclosing_range_end local 8
               H2Dialect.H2CompatibilityMode.MySQL, H2Dialect.H2CompatibilityMode.MariaDB -> MysqlFunctionProvider.INSTANCE
 //                                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#MySQL.
 //                                                                               ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#MariaDB.
 //                                                                                                                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlFunctionProvider#Companion#INSTANCE.
 //                                                                                                                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlFunctionProvider#Companion#getINSTANCE().
               else -> dialect.functionProvider
-//                    ^^^^^^^ reference local 5
+//                    ^^^^^^^ reference local 6
 //                            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#functionProvider.
 //                            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getFunctionProvider().
           }
+//        ⌃ enclosing_range_end local 7
           return functionProvider.replace(targets.single(), columns, querySql, transaction, prepared)
-//               ^^^^^^^^^^^^^^^^ reference local 6
+//               ^^^^^^^^^^^^^^^^ reference local 7
 //                                ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#replace().
 //                                        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#getTargets().
 //                                        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#targets.
 //                                                ^^^^^^ reference semanticdb maven . . kotlin/collections/single(+19).
 //                                                          ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#columns.
 //                                                          ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#getColumns().
-//                                                                   ^^^^^^^^ reference local 4
+//                                                                   ^^^^^^^^ reference local 5
 //                                                                             ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#prepareSQL().(transaction)
 //                                                                                          ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#prepareSQL().(prepared)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#prepareSQL().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReplaceSelectStatement#

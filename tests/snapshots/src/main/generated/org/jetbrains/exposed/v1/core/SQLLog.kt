@@ -51,6 +51,7 @@
 //           ^^^^^ reference semanticdb maven . . org/slf4j/
 //                 ^^^^^^^^^^^^^ reference semanticdb maven . . org/slf4j/LoggerFactory#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#
   /** Base class representing a provider of log messages. */
   interface SqlLogger {
 //          ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#
@@ -59,7 +60,10 @@
 //                    relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#
 //                    relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/Slf4jSqlDebugLogger#
 //                    relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#log().
       /** Determines how a log message is routed. */
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#log().(context)
+//                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#log().(transaction)
       fun log(context: StatementContext, transaction: Transaction)
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#log().
 //            display_name log
@@ -75,8 +79,14 @@
 //                                                   display_name transaction
 //                                                   documentation ```kotlin\ntransaction: Transaction\n```
 //                                                    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#log().(context)
+//                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#log().(transaction)
+//                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#log().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/exposedLogger.
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/getExposedLogger().
   /** Returns a [org.slf4j.Logger] named specifically for Exposed log messages.  */
   val exposedLogger = LoggerFactory.getLogger("Exposed")!!
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/exposedLogger.
@@ -86,7 +96,11 @@
 //                  display_name exposedLogger
 //                  documentation ```kotlin\npublic get(): Logger\n```\n\n----\n\n Returns a [org.slf4j.Logger] named specifically for Exposed log messages.
 //                                  ^^^^^^^^^ reference semanticdb maven . . org/slf4j/LoggerFactory#getLogger().
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/exposedLogger.
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/getExposedLogger().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#`<init>`().
   /** Class representing a provider of log messages sent to standard output stream. */
   object StdOutSqlLogger : SqlLogger {
 //       ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#
@@ -97,7 +111,10 @@
 //                       display_name StdOutSqlLogger
 //                       documentation ```kotlin\nprivate constructor(): StdOutSqlLogger\n```\n\n----\n\n Class representing a provider of log messages sent to standard output stream.
 //                         ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#log().
       /** Prints a log message containing the string representation of a complete SQL statement. */
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#log().(context)
+//                                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#log().(transaction)
       override fun log(context: StatementContext, transaction: Transaction) {
 //                 ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#log().
 //                     display_name log
@@ -111,14 +128,21 @@
 //                                                            display_name transaction
 //                                                            documentation ```kotlin\ntransaction: Transaction\n```
 //                                                             ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#log().(context)
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#log().(transaction)
           println("SQL: ${context.expandArgs(transaction)}")
 //        ^^^^^^^ reference semanticdb maven . . kotlin/io/println().
 //                        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#log().(context)
 //                                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/expandArgs().
 //                                           ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#log().(transaction)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#log().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/StdOutSqlLogger#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Slf4jSqlDebugLogger#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Slf4jSqlDebugLogger#`<init>`().
   /** Class representing a provider of log messages at DEBUG level. */
   object Slf4jSqlDebugLogger : SqlLogger {
 //       ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Slf4jSqlDebugLogger#
@@ -129,11 +153,14 @@
 //                           display_name Slf4jSqlDebugLogger
 //                           documentation ```kotlin\nprivate constructor(): Slf4jSqlDebugLogger\n```\n\n----\n\n Class representing a provider of log messages at DEBUG level.
 //                             ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Slf4jSqlDebugLogger#log().
       /**
        * Logs a message containing the string representation of a complete SQL statement.
        *
        * **Note:** This is only logged if DEBUG level is currently enabled.
        */
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Slf4jSqlDebugLogger#log().(context)
+//                                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Slf4jSqlDebugLogger#log().(transaction)
       override fun log(context: StatementContext, transaction: Transaction) {
 //                 ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Slf4jSqlDebugLogger#log().
 //                     display_name log
@@ -147,6 +174,8 @@
 //                                                            display_name transaction
 //                                                            documentation ```kotlin\ntransaction: Transaction\n```
 //                                                             ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Slf4jSqlDebugLogger#log().(context)
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Slf4jSqlDebugLogger#log().(transaction)
           @OptIn(InternalApi::class)
           if (exposedLogger.isDebugEnabled) {
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/exposedLogger.
@@ -162,8 +191,13 @@
 //                                                                          ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentTransaction().
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Slf4jSqlDebugLogger#log().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Slf4jSqlDebugLogger#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Slf4jSqlDebugLogger#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#`<init>`().
   /** Class representing one or more [SqlLogger]s. */
   class CompositeSqlLogger : SqlLogger, StatementInterceptor {
 //      ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#
@@ -176,6 +210,8 @@
 //                         documentation ```kotlin\npublic constructor(): CompositeSqlLogger\n```\n\n----\n\n Class representing one or more [SqlLogger]s.
 //                           ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#
 //                                      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#loggers.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#getLoggers().
       private val loggers: ArrayList<SqlLogger> = ArrayList(2)
 //                ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#getLoggers().
 //                        display_name loggers
@@ -185,8 +221,12 @@
 //                        documentation ```kotlin\nprivate final val loggers: {kotlin/collections/ArrayList<org/jetbrains/exposed/v1/core/SqlLogger>=} ArrayList<SqlLogger>\n```
 //                         ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#
 //                                                ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`().
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#loggers.
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#getLoggers().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#addLogger().
       /** Adds an [SqlLogger] instance. */
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#addLogger().(logger)
       fun addLogger(logger: SqlLogger) {
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#addLogger().
 //                  display_name addLogger
@@ -195,14 +235,18 @@
 //                         display_name logger
 //                         documentation ```kotlin\nlogger: SqlLogger\n```
 //                          ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#addLogger().(logger)
           loggers.add(logger)
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#getLoggers().
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#loggers.
 //                ^^^ reference semanticdb maven jdk 11 java/util/ArrayList#add().
 //                    ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#addLogger().(logger)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#addLogger().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#removeLogger().
       /** Removes an [SqlLogger] instance. */
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#removeLogger().(logger)
       fun removeLogger(logger: SqlLogger) {
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#removeLogger().
 //                     display_name removeLogger
@@ -211,13 +255,18 @@
 //                            display_name logger
 //                            documentation ```kotlin\nlogger: SqlLogger\n```
 //                             ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#removeLogger().(logger)
           loggers.remove(logger)
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#getLoggers().
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#loggers.
 //                ^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#remove().
 //                       ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#removeLogger().(logger)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#removeLogger().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#log().
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#log().(context)
+//                                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#log().(transaction)
       override fun log(context: StatementContext, transaction: Transaction) {
 //                 ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#log().
 //                     display_name log
@@ -231,6 +280,10 @@
 //                                                            display_name transaction
 //                                                            documentation ```kotlin\ntransaction: Transaction\n```
 //                                                             ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#log().(context)
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#log().(transaction)
+//             ⌄ enclosing_range_start local 1
+//                       ⌄ enclosing_range_start local 0
           for (logger in loggers) {
 //             ^^^^^^ definition local 1
 //                    display_name logger
@@ -244,6 +297,8 @@
 //                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#getLoggers().
 //                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#loggers.
 //                       ^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#iterator().
+//                  ⌃ enclosing_range_end local 1
+//                             ⌃ enclosing_range_end local 0
               logger.log(context, transaction)
 //            ^^^^^^ reference local 1
 //                   ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#log().
@@ -251,7 +306,12 @@
 //                                ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#log().(transaction)
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#log().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#afterExecution().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#afterExecution().(transaction)
+//                                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#afterExecution().(contexts)
+//                                                                                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#afterExecution().(executedStatement)
       override fun afterExecution(transaction: Transaction, contexts: List<StatementContext>, executedStatement: PreparedStatementApi) {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#afterExecution().
 //                                display_name afterExecution
@@ -269,16 +329,24 @@
 //                                                                                                              display_name executedStatement
 //                                                                                                              documentation ```kotlin\nexecutedStatement: PreparedStatementApi\n```
 //                                                                                                               ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/PreparedStatementApi#
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#afterExecution().(transaction)
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#afterExecution().(contexts)
+//                                                                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#afterExecution().(executedStatement)
+//                         ⌄ enclosing_range_start local 2
           contexts.forEach {
 //        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#afterExecution().(contexts)
 //                 ^^^^^^^ reference semanticdb maven . . kotlin/collections/forEach(+10).
-//                         ^ definition semanticdb maven . . (it) 2:9
+//                         ^ definition local 2 2:9
 //                           display_name it
 //                           documentation ```kotlin\nit: StatementContext\n```
               log(it, transaction)
 //            ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#log().
-//                ^^ reference semanticdb maven . . (it)
+//                ^^ reference local 2
 //                    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#afterExecution().(transaction)
           }
+//        ⌃ enclosing_range_end local 2
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#afterExecution().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#`<init>`().

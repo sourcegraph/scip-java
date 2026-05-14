@@ -45,6 +45,7 @@
 //                                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/
 //                                           ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/throwUnsupportedException().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#
   /**
    * Represents the SQL statement that deletes one or more rows of a table.
    *
@@ -56,6 +57,7 @@
    * @param targetTables List of specific tables from [targetsSet] to delete rows from.
    */
   @Suppress("ForbiddenComment", "AnnotationSpacing")
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().
   open class DeleteStatement(
 //           ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#
 //                           display_name DeleteStatement
@@ -64,6 +66,9 @@
 //           ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().
 //                           display_name DeleteStatement
 //                           documentation ```kotlin\npublic constructor(targetsSet: ColumnSet, where: Op<Boolean>? = ..., isIgnore: Boolean = ..., limit: Int? = ..., targetTables: List<Table> = ...): DeleteStatement\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(targetsSet)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#targetsSet.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getTargetsSet().
       val targetsSet: ColumnSet,
 //        ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(targetsSet)
 //                   display_name targetsSet
@@ -76,6 +81,12 @@
 //                   display_name targetsSet
 //                   documentation ```kotlin\npublic final val targetsSet: ColumnSet\n```
 //                    ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnSet#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(targetsSet)
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#targetsSet.
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getTargetsSet().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(where)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#where.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getWhere().
       val where: Op<Boolean>? = null,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(where)
 //              display_name where
@@ -88,6 +99,12 @@
 //              display_name where
 //              documentation ```kotlin\npublic final val where: Op<Boolean>?\n```
 //               ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(where)
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#where.
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getWhere().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(isIgnore)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#isIgnore.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getIsIgnore().
       val isIgnore: Boolean = false,
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(isIgnore)
 //                 display_name isIgnore
@@ -100,6 +117,12 @@
 //                 display_name isIgnore
 //                 documentation ```kotlin\npublic final val isIgnore: Boolean\n```
 //                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(isIgnore)
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#isIgnore.
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getIsIgnore().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(limit)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#limit.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getLimit().
       val limit: Int? = null,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(limit)
 //              display_name limit
@@ -112,6 +135,12 @@
 //              display_name limit
 //              documentation ```kotlin\npublic final val limit: Int?\n```
 //               ^^^^ reference semanticdb maven . . kotlin/Int#
+//                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(limit)
+//                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#limit.
+//                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getLimit().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(targetTables)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#targetTables.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getTargetTables().
       val targetTables: List<Table> = emptyList(),
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(targetTables)
 //                     display_name targetTables
@@ -125,11 +154,16 @@
 //                     documentation ```kotlin\npublic final val targetTables: List<Table>\n```
 //                      ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
 //                                    ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/emptyList().
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(targetTables)
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#targetTables.
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getTargetTables().
   ) : Statement<Int>(StatementType.DELETE, targetsSet.targetTables()) {
 //    ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/Statement#
 //                                 ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementType#DELETE.
 //                                         ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().(targetsSet)
 //                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/targetTables().
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).
       @Deprecated(
 //    ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1). 12:56
 //                 display_name DeleteStatement
@@ -142,38 +176,51 @@
       )
       @Suppress("UnusedPrivateProperty")
       constructor(
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(table)
           table: Table,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(table)
 //              display_name table
 //              documentation ```kotlin\ntable: Table\n```
 //               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(table)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(where)
           where: Op<Boolean>?,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(where)
 //              display_name where
 //              documentation ```kotlin\nwhere: Op<Boolean>?\n```
 //               ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(where)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(isIgnore)
           isIgnore: Boolean,
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(isIgnore)
 //                 display_name isIgnore
 //                 documentation ```kotlin\nisIgnore: Boolean\n```
 //                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(isIgnore)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(limit)
           limit: Int?,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(limit)
 //              display_name limit
 //              documentation ```kotlin\nlimit: Int?\n```
 //               ^^^^ reference semanticdb maven . . kotlin/Int#
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(limit)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(offset)
           offset: Long?
 //        ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(offset)
 //               display_name offset
 //               documentation ```kotlin\noffset: Long?\n```
 //                ^^^^^ reference semanticdb maven . . kotlin/Long#
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(offset)
       ) : this(table, where, isIgnore, limit, emptyList())
 //             ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(table)
 //                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(where)
 //                           ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(isIgnore)
 //                                     ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).(limit)
 //                                            ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/emptyList().
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#`<init>`(+1).
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#table.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getTable().
       @Deprecated(
           "This property will be removed in future releases and replaced with a property that stores a `ColumnSet`," +
               "which may be a `Table` or a `Join`. To access the table(s) to which the columns belong, use `ColumnSet.targetTables()`",
@@ -193,7 +240,11 @@
 //                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getTargets().
 //                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#targets.
 //                               ^^^^^ reference semanticdb maven . . kotlin/collections/first(+19).
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#table.
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getTable().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#offset.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getOffset().
       @Deprecated(
           "This property is not being used and will be removed in future releases. Please leave a comment on " +
               "[YouTrack](https://youtrack.jetbrains.com/issue/EXPOSED-550/DeleteStatement-holds-unused-offset-property) " +
@@ -209,7 +260,12 @@
 //               display_name offset
 //               documentation ```kotlin\n@Deprecated(...) public final val offset: Long?\n```
 //                ^^^^^ reference semanticdb maven . . kotlin/Long#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#offset.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getOffset().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#prepareSQL().
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#prepareSQL().(transaction)
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#prepareSQL().(prepared)
       override fun prepareSQL(transaction: Transaction, prepared: Boolean): String {
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#prepareSQL().
 //                            display_name prepareSQL
@@ -224,6 +280,9 @@
 //                                                               documentation ```kotlin\nprepared: Boolean\n```
 //                                                                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#prepareSQL().(transaction)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#prepareSQL().(prepared)
+//        ⌄ enclosing_range_start local 0
           val dialect = transaction.db.dialect
 //            ^^^^^^^ definition local 0
 //                    display_name dialect
@@ -233,14 +292,22 @@
 //                                  ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getDb().
 //                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialect.
 //                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDialect().
+//                                           ⌃ enclosing_range_end local 0
+//                     ⌄ enclosing_range_start local 1
           return when (targetsSet) {
+//                     ^^^^^^^^^^ definition local 1
+//                                display_name <when-subject>
+//                                documentation ```kotlin\nlocal val <when-subject>: ColumnSet\n```
 //                     ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getTargetsSet().
 //                     ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#targetsSet.
+//                              ⌃ enclosing_range_end local 1
               is Table -> dialect.functionProvider.delete(
+//               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
 //                        ^^^^^^^ reference local 0
 //                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#functionProvider.
 //                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getFunctionProvider().
 //                                                 ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#delete().
+//                                                 ⌄ enclosing_range_start local 2
                   isIgnore, targetsSet, where?.let { QueryBuilder(prepared).append(it).toString() }, limit, transaction
 //                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getIsIgnore().
 //                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#isIgnore.
@@ -249,26 +316,34 @@
 //                                      ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getWhere().
 //                                      ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#where.
 //                                             ^^^ reference semanticdb maven . . kotlin/let().
-//                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 2
 //                                                                                                  display_name it
-//                                                                                                  documentation ```kotlin\nit: Join.JoinPart\n```
+//                                                                                                  documentation ```kotlin\nit: Op<Boolean>\n```
 //                                                   ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#`<init>`().
 //                                                                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#prepareSQL().(prepared)
 //                                                                          ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+2).
-//                                                                                 ^^ reference semanticdb maven . . (it)
+//                                                                                 ^^ reference local 2
 //                                                                                     ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#toString().
 //                                                                                                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getLimit().
 //                                                                                                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#limit.
 //                                                                                                          ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#prepareSQL().(transaction)
+//                                                                                                ⌃ enclosing_range_end local 2
               )
               is Join -> {
+//               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#
+//                ⌄ enclosing_range_start local 3
+//                                             ⌄ enclosing_range_start local 4
                   val functionProvider = when (dialect.h2Mode) {
-//                    ^^^^^^^^^^^^^^^^ definition local 1
+//                    ^^^^^^^^^^^^^^^^ definition local 3
 //                                     display_name functionProvider
 //                                     documentation ```kotlin\nlocal val functionProvider: FunctionProvider\n```
 //                                             ^^^^^^^ reference local 0
+//                                             ^^^^^^^^^^^^^^ definition local 4
+//                                                            display_name <when-subject>
+//                                                            documentation ```kotlin\nlocal val <when-subject>: H2Dialect.H2CompatibilityMode?\n```
 //                                                     ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getH2Mode().
 //                                                     ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/h2Mode.
+//                                                          ⌃ enclosing_range_end local 4
                       H2CompatibilityMode.PostgreSQL, H2CompatibilityMode.Oracle, H2CompatibilityMode.SQLServer -> H2FunctionProvider
 //                                        ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#PostgreSQL.
 //                                                                        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#Oracle.
@@ -278,8 +353,9 @@
 //                                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#functionProvider.
 //                                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getFunctionProvider().
                   }
+//                ⌃ enclosing_range_end local 3
                   functionProvider.delete(isIgnore, targetsSet, targetTables, where, limit, transaction)
-//                ^^^^^^^^^^^^^^^^ reference local 1
+//                ^^^^^^^^^^^^^^^^ reference local 3
 //                                 ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#delete(+1).
 //                                        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getIsIgnore().
 //                                        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#isIgnore.
@@ -302,7 +378,9 @@
 //                                                                                           ^^^^^^^^^^ reference semanticdb maven . . kotlin/reflect/KClass#simpleName.
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#prepareSQL().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#arguments().
       override fun arguments(): Iterable<Iterable<Pair<IColumnType<*>, Any?>>> = QueryBuilder(true).run {
 //                 ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#arguments().
 //                           display_name arguments
@@ -314,29 +392,33 @@
           if (targetsSet is Join) {
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getTargetsSet().
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#targetsSet.
+//                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#
+//                                         ⌄ enclosing_range_start local 5
               targetsSet.joinParts.forEach {
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getTargetsSet().
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#targetsSet.
 //                       ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#getJoinParts().
 //                       ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#joinParts.
 //                                 ^^^^^^^ reference semanticdb maven . . kotlin/collections/forEach(+10).
-//                                         ^ definition semanticdb maven . . (it) 3:13
+//                                         ^ definition local 5 3:13
 //                                           display_name it
 //                                           documentation ```kotlin\nit: Join.JoinPart\n```
                   (it.joinPart as? QueryAlias)?.query?.prepareSQL(this)
-//                 ^^ reference semanticdb maven . . (it)
+//                 ^^ reference local 5
 //                    ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#JoinPart#getJoinPart().
 //                    ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#JoinPart#joinPart.
+//                                 ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryAlias#
 //                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryAlias#getQuery().
 //                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryAlias#query.
 //                                                     ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#prepareSQL().
                   it.additionalConstraint?.invoke(SqlExpressionBuilder)?.toQueryBuilder(this)
-//                ^^ reference semanticdb maven . . (it)
+//                ^^ reference local 5
 //                   ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#JoinPart#additionalConstraint.
 //                   ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#JoinPart#getAdditionalConstraint().
 //                                         ^^^^^^ reference semanticdb maven . . kotlin/Function1#invoke().
 //                                                                       ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#toQueryBuilder().
               }
+//            ⌃ enclosing_range_end local 5
           }
           where?.toQueryBuilder(this)
 //        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#getWhere().
@@ -347,7 +429,10 @@
 //               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#args.
 //               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#getArgs().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#arguments().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#`<init>`().
       companion object {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion# 34:5
 //                       display_name Companion
@@ -355,6 +440,7 @@
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#`<init>`(). 34:5
 //                       display_name Companion
 //                       documentation ```kotlin\nprivate constructor(): DeleteStatement.Companion\n```
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#where().
           @Suppress("FunctionOnlyReturningConstant", "UnusedParameter")
           @Deprecated(
               message = """
@@ -372,6 +458,11 @@
               level = DeprecationLevel.ERROR
 //                                     ^^^^^ reference semanticdb maven . . kotlin/DeprecationLevel#ERROR.
           )
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#where().(transaction)
+//                                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#where().(table)
+//                                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#where().(op)
+//                                                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#where().(isIgnore)
+//                                                                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#where().(limit)
           fun where(transaction: Transaction, table: Table, op: Op<Boolean>, isIgnore: Boolean = false, limit: Int? = null): Int = 0
 //            ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#where().
 //                  display_name where
@@ -397,7 +488,14 @@
 //                                                                                                            documentation ```kotlin\nlimit: Int? = ...\n```
 //                                                                                                             ^^^^ reference semanticdb maven . . kotlin/Int#
 //                                                                                                                           ^^^ reference semanticdb maven . . kotlin/Int#
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#where().(transaction)
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#where().(table)
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#where().(op)
+//                                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#where().(isIgnore)
+//                                                                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#where().(limit)
+//                                                                                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#where().
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#all().
           @Suppress("FunctionOnlyReturningConstant", "UnusedParameter")
           @Deprecated(
               message = """
@@ -413,6 +511,8 @@
               level = DeprecationLevel.ERROR
 //                                     ^^^^^ reference semanticdb maven . . kotlin/DeprecationLevel#ERROR.
           )
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#all().(transaction)
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#all().(table)
           fun all(transaction: Transaction, table: Table): Int = 0
 //            ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#all().
 //                display_name all
@@ -426,5 +526,11 @@
 //                                                documentation ```kotlin\ntable: Table\n```
 //                                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
 //                                                         ^^^ reference semanticdb maven . . kotlin/Int#
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#all().(transaction)
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#all().(table)
+//                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#all().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#Companion#`<init>`().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/DeleteStatement#

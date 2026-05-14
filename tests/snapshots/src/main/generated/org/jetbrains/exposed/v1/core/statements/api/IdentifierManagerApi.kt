@@ -47,6 +47,8 @@
 //                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/
 //                                             ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#`<init>`().
   /** Base class responsible for the parsing and processing of identifier tokens in SQL command syntax. */
   abstract class IdentifierManagerApi {
 //               ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#
@@ -55,6 +57,8 @@
 //               ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#`<init>`().
 //                                    display_name IdentifierManagerApi
 //                                    documentation ```kotlin\npublic constructor(): IdentifierManagerApi\n```\n\n----\n\n Base class responsible for the parsing and processing of identifier tokens in SQL command syntax.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteString.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getQuoteString().
       /** The string used to quote SQL identifiers for the database. */
       abstract val quoteString: String
 //                 ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getQuoteString().
@@ -64,7 +68,11 @@
 //                             display_name quoteString
 //                             documentation ```kotlin\npublic abstract val quoteString: String\n```\n\n----\n\n The string used to quote SQL identifiers for the database.
 //                              ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteString.
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getQuoteString().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isUpperCaseIdentifiers.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsUpperCaseIdentifiers().
       /** Whether the database treats mixed case unquoted identifiers as case-insensitive and stores them in upper case. */
       protected abstract val isUpperCaseIdentifiers: Boolean
 //                           ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsUpperCaseIdentifiers().
@@ -74,7 +82,11 @@
 //                                                  display_name isUpperCaseIdentifiers
 //                                                  documentation ```kotlin\nprotected abstract val isUpperCaseIdentifiers: Boolean\n```\n\n----\n\n Whether the database treats mixed case unquoted identifiers as case-insensitive and stores them in upper case.
 //                                                   ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isUpperCaseIdentifiers.
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsUpperCaseIdentifiers().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isUpperCaseQuotedIdentifiers.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsUpperCaseQuotedIdentifiers().
       /** Whether the database treats mixed case quoted identifiers as case-insensitive and stores them in upper case. */
       protected abstract val isUpperCaseQuotedIdentifiers: Boolean
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsUpperCaseQuotedIdentifiers().
@@ -84,7 +96,11 @@
 //                                                        display_name isUpperCaseQuotedIdentifiers
 //                                                        documentation ```kotlin\nprotected abstract val isUpperCaseQuotedIdentifiers: Boolean\n```\n\n----\n\n Whether the database treats mixed case quoted identifiers as case-insensitive and stores them in upper case.
 //                                                         ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isUpperCaseQuotedIdentifiers.
+//                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsUpperCaseQuotedIdentifiers().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isLowerCaseIdentifiers.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsLowerCaseIdentifiers().
       /** Whether the database treats mixed case unquoted identifiers as case-insensitive and stores them in lower case. */
       protected abstract val isLowerCaseIdentifiers: Boolean
 //                           ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsLowerCaseIdentifiers().
@@ -94,7 +110,11 @@
 //                                                  display_name isLowerCaseIdentifiers
 //                                                  documentation ```kotlin\nprotected abstract val isLowerCaseIdentifiers: Boolean\n```\n\n----\n\n Whether the database treats mixed case unquoted identifiers as case-insensitive and stores them in lower case.
 //                                                   ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isLowerCaseIdentifiers.
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsLowerCaseIdentifiers().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isLowerCaseQuotedIdentifiers.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsLowerCaseQuotedIdentifiers().
       /** Whether the database treats mixed case quoted identifiers as case-insensitive and stores them in lower case. */
       protected abstract val isLowerCaseQuotedIdentifiers: Boolean
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsLowerCaseQuotedIdentifiers().
@@ -104,7 +124,11 @@
 //                                                        display_name isLowerCaseQuotedIdentifiers
 //                                                        documentation ```kotlin\nprotected abstract val isLowerCaseQuotedIdentifiers: Boolean\n```\n\n----\n\n Whether the database treats mixed case quoted identifiers as case-insensitive and stores them in lower case.
 //                                                         ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isLowerCaseQuotedIdentifiers.
+//                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsLowerCaseQuotedIdentifiers().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#supportsMixedIdentifiers.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getSupportsMixedIdentifiers().
       /** Whether the database treats and stores mixed case unquoted identifiers as case-sensitive. */
       protected abstract val supportsMixedIdentifiers: Boolean
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getSupportsMixedIdentifiers().
@@ -114,7 +138,11 @@
 //                                                    display_name supportsMixedIdentifiers
 //                                                    documentation ```kotlin\nprotected abstract val supportsMixedIdentifiers: Boolean\n```\n\n----\n\n Whether the database treats and stores mixed case unquoted identifiers as case-sensitive.
 //                                                     ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#supportsMixedIdentifiers.
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getSupportsMixedIdentifiers().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#supportsMixedQuotedIdentifiers.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getSupportsMixedQuotedIdentifiers().
       /** Whether the database treats and stores mixed case quoted identifiers as case-sensitive. */
       protected abstract val supportsMixedQuotedIdentifiers: Boolean
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getSupportsMixedQuotedIdentifiers().
@@ -124,14 +152,20 @@
 //                                                          display_name supportsMixedQuotedIdentifiers
 //                                                          documentation ```kotlin\nprotected abstract val supportsMixedQuotedIdentifiers: Boolean\n```\n\n----\n\n Whether the database treats and stores mixed case quoted identifiers as case-sensitive.
 //                                                           ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#supportsMixedQuotedIdentifiers.
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getSupportsMixedQuotedIdentifiers().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#dbKeywords().
       /** Returns all keywords for the database beyond the [ANSI_SQL_2003_KEYWORDS]. */
       protected abstract fun dbKeywords(): List<String>
 //                           ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#dbKeywords().
 //                                      display_name dbKeywords
 //                                      documentation ```kotlin\nprotected abstract fun dbKeywords(): List<String>\n\n```\n\n----\n\n Returns all keywords for the database beyond the [ANSI_SQL_2003_KEYWORDS].
 //                                         ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#dbKeywords().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#keywords.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getKeywords().
       /** All keywords for the database, including [ANSI_SQL_2003_KEYWORDS] and database-specific keywords. */
       val keywords by lazy {
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getKeywords().
@@ -159,7 +193,11 @@
 //                                                                                 ^ reference semanticdb maven . . kotlin/collections/plus(+42).
 //                                                                                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#dbKeywords().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#keywords.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getKeywords().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#extraNameCharacters.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getExtraNameCharacters().
       /** The database-specific special characters that can be additionally used in unquoted identifiers. */
       protected abstract val extraNameCharacters: String
 //                           ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#extraNameCharacters.
@@ -169,7 +207,11 @@
 //                                               display_name extraNameCharacters
 //                                               documentation ```kotlin\nprotected get(): String\n```\n\n----\n\n The database-specific special characters that can be additionally used in unquoted identifiers.
 //                                                ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#extraNameCharacters.
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getExtraNameCharacters().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#oracleVersion.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getOracleVersion().
       /** The [OracleVersion] of the database, if Oracle is the underlying DBMS; otherwise, [OracleVersion.NonOracle]. */
       protected abstract val oracleVersion: OracleVersion
 //                           ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getOracleVersion().
@@ -179,7 +221,11 @@
 //                                         display_name oracleVersion
 //                                         documentation ```kotlin\nprotected abstract val oracleVersion: IdentifierManagerApi.OracleVersion\n```\n\n----\n\n The [OracleVersion] of the database, if Oracle is the underlying DBMS; otherwise, [OracleVersion.NonOracle].
 //                                          ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#oracleVersion.
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getOracleVersion().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#maxColumnNameLength.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getMaxColumnNameLength().
       /** The maximum number of characters in a column name allowed by the database. */
       protected abstract val maxColumnNameLength: Int
 //                           ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getMaxColumnNameLength().
@@ -189,7 +235,16 @@
 //                                               display_name maxColumnNameLength
 //                                               documentation ```kotlin\nprotected abstract val maxColumnNameLength: Int\n```\n\n----\n\n The maximum number of characters in a column name allowed by the database.
 //                                                ^^^ reference semanticdb maven . . kotlin/Int#
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#maxColumnNameLength.
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getMaxColumnNameLength().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#values().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#valueOf().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#valueOf().(value)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#entries.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/getEntries().
       /** Oracle version number classifier. */
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Enum# 1:90
       protected enum class OracleVersion { Oracle11g, Oracle12_1g, Oracle12plus, NonOracle }
@@ -215,7 +270,16 @@
 //                         ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/getEntries().
 //                                       display_name entries
 //                                       documentation ```kotlin\npublic get(): EnumEntries<IdentifierManagerApi.OracleVersion>\n```\n\n----\n\n Oracle version number classifier.
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#`<init>`().
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#values().
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#valueOf().
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#valueOf().(value)
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#entries.
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/getEntries().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#identifierLengthLimit.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIdentifierLengthLimit().
       /** The maximum number of characters in an identifier allowed by the database. */
       protected val identifierLengthLimit by lazy {
 //                  ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIdentifierLengthLimit().
@@ -229,28 +293,39 @@
 //                                           ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIdentifierLengthLimit(). 7:5
 //                                           ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#identifierLengthLimit. 7:5
           @Suppress("MagicNumber")
+//              ⌄ enclosing_range_start local 0
           when (oracleVersion) {
+//              ^^^^^^^^^^^^^ definition local 0
+//                            display_name <when-subject>
+//                            documentation ```kotlin\nlocal val <when-subject>: IdentifierManagerApi.OracleVersion\n```
 //              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getOracleVersion().
 //              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#oracleVersion.
+//                          ⌃ enclosing_range_end local 0
               OracleVersion.Oracle11g, OracleVersion.Oracle12_1g -> 30
 //                          ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#Oracle11g.
 //                                                   ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#Oracle12_1g.
               OracleVersion.Oracle12plus -> 128
 //                          ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#OracleVersion#Oracle12plus.
+//                                               ⌄ enclosing_range_start local 1
               else -> maxColumnNameLength.takeIf { it > 0 } ?: Int.MAX_VALUE
 //                    ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getMaxColumnNameLength().
 //                    ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#maxColumnNameLength.
 //                                        ^^^^^^ reference semanticdb maven . . kotlin/takeIf().
-//                                               ^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                               ^^^^^^^^^^ definition local 1
 //                                                          display_name it
-//                                                          documentation ```kotlin\nit: String\n```
-//                                                 ^^ reference semanticdb maven . . (it)
+//                                                          documentation ```kotlin\nit: Int\n```
+//                                                 ^^ reference local 1
 //                                                    ^ reference semanticdb maven . . kotlin/Int#compareTo(+2).
 //                                                                 ^^^^^^^^^ reference semanticdb maven . . kotlin/Int#Companion#MAX_VALUE.
 //                                                                 ^^^^^^^^^ reference semanticdb maven . . kotlin/Int#Companion#getMAX_VALUE().
+//                                                        ⌃ enclosing_range_end local 1
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#identifierLengthLimit.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIdentifierLengthLimit().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#checkedIdentitiesCache.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getCheckedIdentitiesCache().
       private val checkedIdentitiesCache = IdentifiersCache<Boolean>()
 //                ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#checkedIdentitiesCache.
 //                                       display_name checkedIdentitiesCache
@@ -259,6 +334,10 @@
 //                                       display_name checkedIdentitiesCache
 //                                       documentation ```kotlin\nprivate get(): IdentifiersCache<Boolean>\n```
 //                                         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#`<init>`().
+//                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#checkedIdentitiesCache.
+//                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getCheckedIdentitiesCache().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#checkedKeywordsCache.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getCheckedKeywordsCache().
       private val checkedKeywordsCache = IdentifiersCache<Boolean>()
 //                ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#checkedKeywordsCache.
 //                                     display_name checkedKeywordsCache
@@ -267,6 +346,10 @@
 //                                     display_name checkedKeywordsCache
 //                                     documentation ```kotlin\nprivate get(): IdentifiersCache<Boolean>\n```
 //                                       ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#`<init>`().
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#checkedKeywordsCache.
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getCheckedKeywordsCache().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifiersCache.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getShouldQuoteIdentifiersCache().
       private val shouldQuoteIdentifiersCache = IdentifiersCache<Boolean>()
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getShouldQuoteIdentifiersCache().
 //                                            display_name shouldQuoteIdentifiersCache
@@ -275,6 +358,10 @@
 //                                            display_name shouldQuoteIdentifiersCache
 //                                            documentation ```kotlin\nprivate final val shouldQuoteIdentifiersCache: IdentifiersCache<Boolean>\n```
 //                                              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#`<init>`().
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifiersCache.
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getShouldQuoteIdentifiersCache().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#identifiersInProperCaseCache.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIdentifiersInProperCaseCache().
       private val identifiersInProperCaseCache = IdentifiersCache<String>()
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIdentifiersInProperCaseCache().
 //                                             display_name identifiersInProperCaseCache
@@ -283,6 +370,10 @@
 //                                             display_name identifiersInProperCaseCache
 //                                             documentation ```kotlin\nprivate final val identifiersInProperCaseCache: IdentifiersCache<String>\n```
 //                                               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#`<init>`().
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#identifiersInProperCaseCache.
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIdentifiersInProperCaseCache().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quotedIdentifiersCache.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getQuotedIdentifiersCache().
       private val quotedIdentifiersCache = IdentifiersCache<String>()
 //                ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getQuotedIdentifiersCache().
 //                                       display_name quotedIdentifiersCache
@@ -291,7 +382,11 @@
 //                                       display_name quotedIdentifiersCache
 //                                       documentation ```kotlin\nprivate final val quotedIdentifiersCache: IdentifiersCache<String>\n```
 //                                         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#`<init>`().
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quotedIdentifiersCache.
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getQuotedIdentifiersCache().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isIdentifier().
+//                                                                                           ⌄ enclosing_range_start local 2
       private fun String.isIdentifier() = isNotEmpty() && first().isIdentifierStart() && all { it.isIdentifierStart() || it in '0'..'9' }
 //                       ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isIdentifier().
 //                                    display_name isIdentifier
@@ -300,14 +395,17 @@
 //                                                        ^^^^^ reference semanticdb maven . . kotlin/text/first().
 //                                                                ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isIdentifierStart().
 //                                                                                       ^^^ reference semanticdb maven . . kotlin/text/all().
-//                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 2
 //                                                                                                                                        display_name it
-//                                                                                                                                        documentation ```kotlin\nit: String\n```
-//                                                                                             ^^ reference semanticdb maven . . (it)
+//                                                                                                                                        documentation ```kotlin\nit: Char\n```
+//                                                                                             ^^ reference local 2
 //                                                                                                ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isIdentifierStart().
-//                                                                                                                       ^^ reference semanticdb maven . . (it)
+//                                                                                                                       ^^ reference local 2
 //                                                                                                                          ^^ reference semanticdb maven . . kotlin/ranges/CharRange#contains().
 //                                                                                                                                ^^ reference semanticdb maven . . kotlin/Char#rangeTo().
+//                                                                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isIdentifier().
+//                                                                                                                                      ⌃ enclosing_range_end local 2
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isIdentifierStart().
       private fun Char.isIdentifierStart(): Boolean = this in 'a'..'z' || this in 'A'..'Z' || this == '_' || this in extraNameCharacters
 //                     ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isIdentifierStart().
 //                                       display_name isIdentifierStart
@@ -320,7 +418,9 @@
 //                                                                                                                ^^ reference semanticdb maven . . kotlin/text/contains(+1).
 //                                                                                                                   ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#extraNameCharacters.
 //                                                                                                                   ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getExtraNameCharacters().
+//                                                                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isIdentifierStart().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isAKeyword().
       private fun String.isAKeyword(): Boolean = checkedKeywordsCache.getOrPut(lowercase()) {
 //                       ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isAKeyword().
 //                                  display_name isAKeyword
@@ -330,17 +430,22 @@
 //                                               ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getCheckedKeywordsCache().
 //                                                                    ^^^^^^^^ reference semanticdb maven . . kotlin/collections/getOrPut(+1).
 //                                                                             ^^^^^^^^^ reference semanticdb maven . . kotlin/text/lowercase(+2).
+//                     ⌄ enclosing_range_start local 3
           keywords.any { this.equals(it, true) }
 //        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getKeywords().
 //        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#keywords.
 //                 ^^^ reference semanticdb maven . . kotlin/collections/any(+19).
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 3
 //                                               display_name it
 //                                               documentation ```kotlin\nit: String\n```
 //                            ^^^^^^ reference semanticdb maven . . kotlin/text/equals(+1).
-//                                   ^^ reference semanticdb maven . . (it)
+//                                   ^^ reference local 3
+//                                             ⌃ enclosing_range_end local 3
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isAKeyword().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldPreserveKeywordCasing.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getShouldPreserveKeywordCasing().
       @Deprecated(
           message = "This will be removed in future releases when the opt-out flag is removed in DatabaseConfig",
           level = DeprecationLevel.WARNING
@@ -367,8 +472,12 @@
 //                                                                       ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getPreserveKeywordCasing().
 //                                                                       ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#preserveKeywordCasing.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldPreserveKeywordCasing.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getShouldPreserveKeywordCasing().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#needQuotes().
       /** Returns whether an SQL token should be wrapped in quotations and caches the returned value. */
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#needQuotes().(identity)
       fun needQuotes(identity: String): Boolean {
 //        ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#needQuotes().
 //                   display_name needQuotes
@@ -378,6 +487,7 @@
 //                            documentation ```kotlin\nidentity: String\n```
 //                             ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                      ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#needQuotes().(identity)
           return checkedIdentitiesCache.getOrPut(identity.lowercase()) {
 //               ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#checkedIdentitiesCache.
 //               ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getCheckedIdentitiesCache().
@@ -395,7 +505,9 @@
 //                                                                               ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isIdentifier().
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#needQuotes().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isAlreadyQuoted().
       private fun String.isAlreadyQuoted() = startsWith(quoteString) && endsWith(quoteString)
 //                       ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isAlreadyQuoted().
 //                                       display_name isAlreadyQuoted
@@ -406,8 +518,11 @@
 //                                                                      ^^^^^^^^ reference semanticdb maven . . kotlin/text/endsWith().
 //                                                                               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getQuoteString().
 //                                                                               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteString.
+//                                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isAlreadyQuoted().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifier().
       /** Returns whether an [identity] should be wrapped in quotations and caches the returned value. */
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifier().(identity)
       fun shouldQuoteIdentifier(identity: String): Boolean = shouldQuoteIdentifiersCache.getOrPut(identity) {
 //        ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifier().
 //                              display_name shouldQuoteIdentifier
@@ -421,29 +536,36 @@
 //                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifiersCache.
 //                                                                                       ^^^^^^^^ reference semanticdb maven . . kotlin/collections/getOrPut(+1).
 //                                                                                                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifier().(identity)
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifier().(identity)
+//        ⌄ enclosing_range_start local 4
           val alreadyQuoted = identity.isAlreadyQuoted()
-//            ^^^^^^^^^^^^^ definition local 0
+//            ^^^^^^^^^^^^^ definition local 4
 //                          display_name alreadyQuoted
 //                          documentation ```kotlin\nlocal val alreadyQuoted: Boolean\n```
 //                            ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifier().(identity)
 //                                     ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isAlreadyQuoted().
+//                                                     ⌃ enclosing_range_end local 4
+//        ⌄ enclosing_range_start local 5
           val alreadyLower = identity == identity.lowercase()
-//            ^^^^^^^^^^^^ definition local 1
+//            ^^^^^^^^^^^^ definition local 5
 //                         display_name alreadyLower
 //                         documentation ```kotlin\nlocal val alreadyLower: Boolean\n```
 //                           ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifier().(identity)
 //                                       ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifier().(identity)
 //                                                ^^^^^^^^^ reference semanticdb maven . . kotlin/text/lowercase(+2).
+//                                                          ⌃ enclosing_range_end local 5
+//        ⌄ enclosing_range_start local 6
           val alreadyUpper = identity == identity.uppercase()
-//            ^^^^^^^^^^^^ definition local 2
+//            ^^^^^^^^^^^^ definition local 6
 //                         display_name alreadyUpper
 //                         documentation ```kotlin\nlocal val alreadyUpper: Boolean\n```
 //                           ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifier().(identity)
 //                                       ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifier().(identity)
 //                                                ^^^^^^^^^ reference semanticdb maven . . kotlin/text/uppercase(+2).
+//                                                          ⌃ enclosing_range_end local 6
           when {
               alreadyQuoted -> false
-//            ^^^^^^^^^^^^^ reference local 0
+//            ^^^^^^^^^^^^^ reference local 4
               identity.isAKeyword() && shouldPreserveKeywordCasing -> true
 //            ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifier().(identity)
 //                     ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isAKeyword().
@@ -453,11 +575,11 @@
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getSupportsMixedIdentifiers().
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#supportsMixedIdentifiers.
               alreadyLower && isLowerCaseIdentifiers -> false
-//            ^^^^^^^^^^^^ reference local 1
+//            ^^^^^^^^^^^^ reference local 5
 //                            ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsLowerCaseIdentifiers().
 //                            ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isLowerCaseIdentifiers.
               alreadyUpper && isUpperCaseIdentifiers -> false
-//            ^^^^^^^^^^^^ reference local 2
+//            ^^^^^^^^^^^^ reference local 6
 //                            ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsUpperCaseIdentifiers().
 //                            ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isUpperCaseIdentifiers.
               oracleVersion != OracleVersion.NonOracle -> false
@@ -468,17 +590,20 @@
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getSupportsMixedQuotedIdentifiers().
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#supportsMixedQuotedIdentifiers.
 //                                               ^ reference semanticdb maven . . kotlin/Boolean#not().
-//                                                ^^^^^^^^^^^^ reference local 1
+//                                                ^^^^^^^^^^^^ reference local 5
 //                                                                ^ reference semanticdb maven . . kotlin/Boolean#not().
-//                                                                 ^^^^^^^^^^^^ reference local 2
+//                                                                 ^^^^^^^^^^^^ reference local 6
               else -> false
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifier().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#inProperCase().
       /**
        * Returns an [identity] in a casing appropriate for its identifier status and the database,
        * then caches the returned value.
        */
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#inProperCase().(identity)
       fun inProperCase(identity: String): String = identifiersInProperCaseCache.getOrPut(identity) {
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#inProperCase().
 //                     display_name inProperCase
@@ -492,26 +617,29 @@
 //                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#identifiersInProperCaseCache.
 //                                                                              ^^^^^^^^ reference semanticdb maven . . kotlin/collections/getOrPut(+1).
 //                                                                                       ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#inProperCase().(identity)
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#inProperCase().(identity)
+//        ⌄ enclosing_range_start local 7
           val alreadyQuoted = identity.isAlreadyQuoted()
-//            ^^^^^^^^^^^^^ definition local 3
+//            ^^^^^^^^^^^^^ definition local 7
 //                          display_name alreadyQuoted
 //                          documentation ```kotlin\nlocal val alreadyQuoted: Boolean\n```
 //                            ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#inProperCase().(identity)
 //                                     ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isAlreadyQuoted().
+//                                                     ⌃ enclosing_range_end local 7
           when {
               alreadyQuoted && supportsMixedQuotedIdentifiers -> identity
-//            ^^^^^^^^^^^^^ reference local 3
+//            ^^^^^^^^^^^^^ reference local 7
 //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getSupportsMixedQuotedIdentifiers().
 //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#supportsMixedQuotedIdentifiers.
 //                                                               ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#inProperCase().(identity)
               alreadyQuoted && isUpperCaseQuotedIdentifiers -> identity.uppercase()
-//            ^^^^^^^^^^^^^ reference local 3
+//            ^^^^^^^^^^^^^ reference local 7
 //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsUpperCaseQuotedIdentifiers().
 //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isUpperCaseQuotedIdentifiers.
 //                                                             ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#inProperCase().(identity)
 //                                                                      ^^^^^^^^^ reference semanticdb maven . . kotlin/text/uppercase(+2).
               alreadyQuoted && isLowerCaseQuotedIdentifiers -> identity.lowercase()
-//            ^^^^^^^^^^^^^ reference local 3
+//            ^^^^^^^^^^^^^ reference local 7
 //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIsLowerCaseQuotedIdentifiers().
 //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isLowerCaseQuotedIdentifiers.
 //                                                             ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#inProperCase().(identity)
@@ -546,8 +674,11 @@
 //                    ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#inProperCase().(identity)
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#inProperCase().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIfNecessary().
       /** Returns an SQL token wrapped in quotations, if validated as necessary. */
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIfNecessary().(identity)
       fun quoteIfNecessary(identity: String): String {
 //        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIfNecessary().
 //                         display_name quoteIfNecessary
@@ -557,26 +688,32 @@
 //                                  documentation ```kotlin\nidentity: String\n```
 //                                   ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                            ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIfNecessary().(identity)
           return if (isDotPrefixedAndUnquoted(identity)) {
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isDotPrefixedAndUnquoted().
 //                                            ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIfNecessary().(identity)
+//                                                  ⌄ enclosing_range_start local 8
               identity.split('.').joinToString(".") { quoteTokenIfNecessary(it) }
 //            ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIfNecessary().(identity)
 //                     ^^^^^ reference semanticdb maven . . kotlin/text/split(+2).
 //                                ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/joinToString(+9).
-//                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 8
 //                                                                                display_name it
 //                                                                                documentation ```kotlin\nit: String\n```
 //                                                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteTokenIfNecessary().
-//                                                                          ^^ reference semanticdb maven . . (it)
+//                                                                          ^^ reference local 8
+//                                                                              ⌃ enclosing_range_end local 8
           } else {
               quoteTokenIfNecessary(identity)
 //            ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteTokenIfNecessary().
 //                                  ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIfNecessary().(identity)
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIfNecessary().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isDotPrefixedAndUnquoted().
       /** Returns whether an [identity] is both unquoted and contains dot characters. */
+//                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isDotPrefixedAndUnquoted().(identity)
       fun isDotPrefixedAndUnquoted(identity: String): Boolean = identity.contains('.') && !identity.isAlreadyQuoted()
 //        ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isDotPrefixedAndUnquoted().
 //                                 display_name isDotPrefixedAndUnquoted
@@ -591,8 +728,12 @@
 //                                                                                        ^ reference semanticdb maven . . kotlin/Boolean#not().
 //                                                                                         ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isDotPrefixedAndUnquoted().(identity)
 //                                                                                                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isAlreadyQuoted().
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isDotPrefixedAndUnquoted().(identity)
+//                                                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#isDotPrefixedAndUnquoted().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIdentifierWhenWrongCaseOrNecessary().
       /** Returns an [identity] wrapped in quotations, if validated as necessary. */
+//                                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIdentifierWhenWrongCaseOrNecessary().(identity)
       fun quoteIdentifierWhenWrongCaseOrNecessary(identity: String): String {
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIdentifierWhenWrongCaseOrNecessary().
 //                                                display_name quoteIdentifierWhenWrongCaseOrNecessary
@@ -602,16 +743,19 @@
 //                                                         documentation ```kotlin\nidentity: String\n```
 //                                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                                   ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIdentifierWhenWrongCaseOrNecessary().(identity)
+//        ⌄ enclosing_range_start local 9
           val inProperCase = inProperCase(identity)
-//            ^^^^^^^^^^^^ definition local 4
+//            ^^^^^^^^^^^^ definition local 9
 //                         display_name inProperCase
 //                         documentation ```kotlin\nlocal val inProperCase: String\n```
 //                           ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#inProperCase().
 //                                        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIdentifierWhenWrongCaseOrNecessary().(identity)
+//                                                ⌃ enclosing_range_end local 9
           return if (shouldQuoteIdentifier(identity) && inProperCase != identity) {
 //                   ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#shouldQuoteIdentifier().
 //                                         ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIdentifierWhenWrongCaseOrNecessary().(identity)
-//                                                      ^^^^^^^^^^^^ reference local 4
+//                                                      ^^^^^^^^^^^^ reference local 9
 //                                                                      ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIdentifierWhenWrongCaseOrNecessary().(identity)
               quote(identity)
 //            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quote().
@@ -619,11 +763,14 @@
           } else {
               quoteIfNecessary(inProperCase)
 //            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIfNecessary().
-//                             ^^^^^^^^^^^^ reference local 4
+//                             ^^^^^^^^^^^^ reference local 9
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteIdentifierWhenWrongCaseOrNecessary().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#cutIfNecessaryAndQuote().
       /** Returns an [identity] wrapped in quotations and containing no more than the maximum [identifierLengthLimit]. */
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#cutIfNecessaryAndQuote().(identity)
       fun cutIfNecessaryAndQuote(identity: String) = quoteIfNecessary(identity.take(identifierLengthLimit))
 //        ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#cutIfNecessaryAndQuote().
 //                               display_name cutIfNecessaryAndQuote
@@ -637,7 +784,11 @@
 //                                                                             ^^^^ reference semanticdb maven . . kotlin/text/take(+1).
 //                                                                                  ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getIdentifierLengthLimit().
 //                                                                                  ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#identifierLengthLimit.
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#cutIfNecessaryAndQuote().(identity)
+//                                                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#cutIfNecessaryAndQuote().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteTokenIfNecessary().
+//                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteTokenIfNecessary().(token)
       private fun quoteTokenIfNecessary(token: String): String = if (needQuotes(token)) quote(token) else token
 //                ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteTokenIfNecessary().
 //                                      display_name quoteTokenIfNecessary
@@ -652,7 +803,11 @@
 //                                                                                      ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quote().
 //                                                                                            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteTokenIfNecessary().(token)
 //                                                                                                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteTokenIfNecessary().(token)
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteTokenIfNecessary().(token)
+//                                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteTokenIfNecessary().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quote().
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quote().(identity)
       private fun quote(identity: String) = quotedIdentifiersCache.getOrPut(identity) { "$quoteString$identity$quoteString".trim() }
 //                ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quote().
 //                      display_name quote
@@ -671,8 +826,19 @@
 //                                                                                                             ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#getQuoteString().
 //                                                                                                             ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quoteString.
 //                                                                                                                          ^^^^ reference semanticdb maven . . kotlin/text/trim(+5).
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quote().(identity)
+//                                                                                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#quote().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#[V]
+//                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#`<init>`().
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#`<init>`().(initialCapacity)
+//                                                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#`<init>`().(cacheSize)
+//                                                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#cacheSize.
+//                                                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#getCacheSize().
   private class IdentifiersCache<V : Any>(initialCapacity: Int = 100, private val cacheSize: Int = 1000) :
 //              ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#
 //                               display_name IdentifiersCache
@@ -699,9 +865,17 @@
 //                                                                                          display_name cacheSize
 //                                                                                          documentation ```kotlin\nprivate get(): Int\n```
 //                                                                                           ^^^ reference semanticdb maven . . kotlin/Int#
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#[V]
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#`<init>`().(initialCapacity)
+//                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#`<init>`().(cacheSize)
+//                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#cacheSize.
+//                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#getCacheSize().
+//                                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#`<init>`().
       java.util.LinkedHashMap<String, V>(initialCapacity) {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/LinkedHashMap#
 //                                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#`<init>`().(initialCapacity)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#removeEldestEntry().
+//                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#removeEldestEntry().(eldest)
       override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, V>?): Boolean = size >= cacheSize
 //                 ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#removeEldestEntry().
 //                                   display_name removeEldestEntry
@@ -716,4 +890,7 @@
 //                                                                                                ^^ reference semanticdb maven . . kotlin/Int#compareTo(+2).
 //                                                                                                   ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#cacheSize.
 //                                                                                                   ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#getCacheSize().
+//                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#removeEldestEntry().(eldest)
+//                                                                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#removeEldestEntry().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifiersCache#

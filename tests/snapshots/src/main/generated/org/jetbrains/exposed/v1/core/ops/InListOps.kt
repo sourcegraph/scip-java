@@ -37,9 +37,12 @@
 //                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/
 //                                             ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialectIfAvailable.
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#
   /**
    * Represents an SQL operator that checks if [expr] is equals to any element from [list].
    */
+//                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#[V]
+//                                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#`<init>`().
   abstract class InListOrNotInListBaseOp<V>(
 //               ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#
 //                                       display_name InListOrNotInListBaseOp
@@ -56,6 +59,10 @@
 //                                       ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#[V]
 //                                         display_name FirTypeParameterSymbol V
 //                                         documentation ```kotlin\nV\n```
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#[V]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#getExpr().
       /** Returns the expression compared to each element of the list. */
       open val expr: Any,
 //             ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#`<init>`().(expr)
@@ -69,6 +76,12 @@
 //                  display_name expr
 //                  documentation ```kotlin\npublic get(): Any\n```\n\n----\n\n Returns the expression compared to each element of the list.
 //                   ^^^ reference semanticdb maven . . kotlin/Any#
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#`<init>`().(expr)
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#expr.
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#getExpr().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#`<init>`().(list)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#list.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#getList().
       /** Returns the query to check against. */
       val list: Iterable<V>,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#`<init>`().(list)
@@ -82,6 +95,12 @@
 //             display_name list
 //             documentation ```kotlin\npublic final val list: Iterable<V>\n```\n\n----\n\n Returns the query to check against.
 //              ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Iterable#
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#`<init>`().(list)
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#list.
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#getList().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#`<init>`().(isInList)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#isInList.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#getIsInList().
       /** Returns `false` if the check is inverted, `true` otherwise. */
       val isInList: Boolean = true
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#`<init>`().(isInList)
@@ -95,10 +114,16 @@
 //                 display_name isInList
 //                 documentation ```kotlin\npublic final val isInList: Boolean\n```\n\n----\n\n Returns `false` if the check is inverted, `true` otherwise.
 //                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#`<init>`().(isInList)
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#isInList.
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#getIsInList().
   ) : Op<Boolean>(), ComplexExpression {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#`<init>`().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#columnTypes.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#getColumnTypes().
       protected abstract val columnTypes: List<ExpressionWithColumnType<*>>
 //                           ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#columnTypes.
 //                                       display_name columnTypes
@@ -107,7 +132,11 @@
 //                                       display_name columnTypes
 //                                       documentation ```kotlin\nprotected get(): List<ExpressionWithColumnType<*>>\n```
 //                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#columnTypes.
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#getColumnTypes().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -121,6 +150,8 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#toQueryBuilder().(queryBuilder)
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#toQueryBuilder().(queryBuilder)
+//        ⌄ enclosing_range_start local 0
           val iterator = list.iterator()
 //            ^^^^^^^^ definition local 0
 //                     display_name iterator
@@ -128,6 +159,7 @@
 //                       ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#getList().
 //                       ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#list.
 //                            ^^^^^^^^ reference semanticdb maven . . kotlin/collections/Iterable#iterator().
+//                                     ⌃ enclosing_range_end local 0
           if (!iterator.hasNext()) {
 //            ^ reference semanticdb maven . . kotlin/Boolean#not().
 //             ^^^^^^^^ reference local 0
@@ -142,6 +174,7 @@
 //                ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+2).
               }
           } else {
+//            ⌄ enclosing_range_start local 1
               val singleColumn = columnTypes.singleOrNull()
 //                ^^^^^^^^^^^^ definition local 1
 //                             display_name singleColumn
@@ -149,29 +182,34 @@
 //                               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#columnTypes.
 //                               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#getColumnTypes().
 //                                           ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/singleOrNull(+19).
+//                                                        ⌃ enclosing_range_end local 1
               if (singleColumn != null) {
 //                ^^^^^^^^^^^^ reference local 1
                   append(singleColumn)
 //                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+2).
 //                       ^^^^^^^^^^^^ reference local 1
               } else {
+//                                                                  ⌄ enclosing_range_start local 2
                   columnTypes.appendTo(prefix = "(", postfix = ")") { +it }
 //                ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#columnTypes.
 //                ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#getColumnTypes().
 //                            ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#appendTo().
-//                                                                  ^^^^^^^ definition semanticdb maven . . (it)
+//                                                                  ^^^^^^^ definition local 2
 //                                                                          display_name it
 //                                                                          documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
 //                                                                    ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+2).
-//                                                                     ^^ reference semanticdb maven . . (it)
+//                                                                     ^^ reference local 2
+//                                                                        ⌃ enclosing_range_end local 2
               }
   
+//            ⌄ enclosing_range_start local 3
               val firstValue = iterator.next()
-//                ^^^^^^^^^^ definition local 2
+//                ^^^^^^^^^^ definition local 3
 //                           display_name firstValue
 //                           documentation ```kotlin\nlocal val firstValue: V\n```
 //                             ^^^^^^^^ reference local 0
 //                                      ^^^^ reference semanticdb maven . . kotlin/collections/Iterator#next().
+//                                           ⌃ enclosing_range_end local 3
   
               if (!iterator.hasNext() && currentDialectIfAvailable !is OracleDialect) {
 //                ^ reference semanticdb maven . . kotlin/Boolean#not().
@@ -179,6 +217,7 @@
 //                          ^^^^^^^ reference semanticdb maven . . kotlin/collections/Iterator#hasNext().
 //                                       ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialectIfAvailable.
 //                                       ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialectIfAvailable().
+//                                                                     ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDialect#
                   when {
                       isInList -> append(" = ")
 //                    ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#getIsInList().
@@ -189,7 +228,7 @@
                   }
                   registerValues(firstValue)
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#registerValues().
-//                               ^^^^^^^^^^ reference local 2
+//                               ^^^^^^^^^^ reference local 3
               } else {
                   when {
                       isInList -> append(" IN (")
@@ -201,25 +240,30 @@
                   }
                   registerValues(firstValue)
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#registerValues().
-//                               ^^^^^^^^^^ reference local 2
+//                               ^^^^^^^^^^ reference local 3
+//                                   ⌄ enclosing_range_start local 4
                   iterator.forEach { value ->
 //                ^^^^^^^^ reference local 0
 //                         ^^^^^^^ reference semanticdb maven . . kotlin/collections/forEach(+9).
-//                                   ^^^^^ definition semanticdb maven . . (value)
+//                                   ^^^^^ definition local 4
 //                                         display_name value
-//                                         documentation ```kotlin\nvalue: List<*>\n```
+//                                         documentation ```kotlin\nvalue: V\n```
+//                                       ⌃ enclosing_range_end local 4
                       append(", ")
 //                    ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
                       registerValues(value)
 //                    ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#registerValues().
-//                                   ^^^^^ reference semanticdb maven . . (value)
+//                                   ^^^^^ reference local 4
                   }
                   append(')')
 //                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append().
               }
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#registerValues().
+//                                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#registerValues().(values)
       protected abstract fun QueryBuilder.registerValues(values: V)
 //                                        ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#registerValues().
 //                                                       display_name registerValues
@@ -231,13 +275,19 @@
 //                                                       ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#registerValues().(values)
 //                                                              display_name values
 //                                                              documentation ```kotlin\nvalues: V\n```
+//                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#registerValues().(values)
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#registerValues().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#
   /**
    * Represents an SQL operator that checks if a single-value [expr] is equal to any element from [list].
    *
    * To inverse the operator and check if [expr] is **not** in [list], set [isInList] to `false`.
    */
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#[T]
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().
   class SingleValueInListOp<T>(
 //      ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#
 //                          display_name SingleValueInListOp
@@ -249,6 +299,10 @@
 //                          ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#[T]
 //                            display_name FirTypeParameterSymbol T
 //                            documentation ```kotlin\nT\n```
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#getExpr().
       override val expr: ExpressionWithColumnType<out T>,
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().(expr)
 //                      display_name expr
@@ -261,21 +315,31 @@
 //                      display_name expr
 //                      documentation ```kotlin\npublic get(): ExpressionWithColumnType<out T>\n```
 //                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().(expr)
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#expr.
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#getExpr().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().(list)
       list: Iterable<T>,
 //    ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().(list)
 //         display_name list
 //         documentation ```kotlin\nlist: Iterable<T>\n```
 //          ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Iterable#
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().(list)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().(isInList)
       isInList: Boolean = true
 //    ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().(isInList)
 //             display_name isInList
 //             documentation ```kotlin\nisInList: Boolean = ...\n```
 //              ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().(isInList)
   ) : InListOrNotInListBaseOp<T>(expr, list, isInList) {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#
 //                               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().(expr)
 //                                     ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().(list)
 //                                           ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().(isInList)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#columnTypes.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#getColumnTypes().
       override val columnTypes: List<ExpressionWithColumnType<*>> = listOf(expr)
 //                 ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#columnTypes.
 //                             display_name columnTypes
@@ -287,7 +351,11 @@
 //                                                                  ^^^^^^ reference semanticdb maven . . kotlin/collections/listOf().
 //                                                                         ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#expr.
 //                                                                         ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#getExpr().
+//                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#columnTypes.
+//                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#getColumnTypes().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#registerValues().
+//                                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#registerValues().(values)
       override fun QueryBuilder.registerValues(values: T) {
 //                              ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#registerValues().
 //                                             display_name registerValues
@@ -296,6 +364,7 @@
 //                                             ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#registerValues().(values)
 //                                                    display_name values
 //                                                    documentation ```kotlin\nvalues: T\n```
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#registerValues().(values)
           registerArgument(expr.columnType, values)
 //        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#registerArgument(+1).
 //                         ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#expr.
@@ -304,13 +373,19 @@
 //                              ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#getColumnType().
 //                                          ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#registerValues().(values)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#registerValues().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/SingleValueInListOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#
   /**
    * Represents an SQL operator that checks if both values of a `Pair` [expr] match any element from [list].
    *
    * To inverse the operator and check if the `Pair` is **not** in [list], set [isInList] to `false`.
    */
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#[T1]
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#[T2]
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().
   class PairInListOp<T1, T2>(
 //      ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#
 //                   display_name PairInListOp
@@ -325,6 +400,11 @@
 //                       ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#[T2]
 //                          display_name FirTypeParameterSymbol T2
 //                          documentation ```kotlin\nT2\n```
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#[T1]
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#[T2]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#getExpr().
       override val expr: Pair<ExpressionWithColumnType<T1>, ExpressionWithColumnType<T2>>,
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().(expr)
 //                      display_name expr
@@ -337,21 +417,31 @@
 //                      display_name expr
 //                      documentation ```kotlin\npublic get(): Pair<ExpressionWithColumnType<T1>, ExpressionWithColumnType<T2>>\n```
 //                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Pair#
+//                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().(expr)
+//                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#expr.
+//                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#getExpr().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().(list)
       list: Iterable<Pair<T1, T2>>,
 //    ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().(list)
 //         display_name list
 //         documentation ```kotlin\nlist: Iterable<Pair<T1, T2>>\n```
 //          ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Iterable#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().(list)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().(isInList)
       isInList: Boolean = true
 //    ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().(isInList)
 //             display_name isInList
 //             documentation ```kotlin\nisInList: Boolean = ...\n```
 //              ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().(isInList)
   ) : InListOrNotInListBaseOp<Pair<T1, T2>>(expr, list, isInList) {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#
 //                                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().(expr)
 //                                                ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().(list)
 //                                                      ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().(isInList)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#columnTypes.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#getColumnTypes().
       override val columnTypes: List<ExpressionWithColumnType<*>> = listOf(expr.first, expr.second)
 //                 ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#columnTypes.
 //                             display_name columnTypes
@@ -369,7 +459,11 @@
 //                                                                                     ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#getExpr().
 //                                                                                          ^^^^^^ reference semanticdb maven . . kotlin/Pair#getSecond().
 //                                                                                          ^^^^^^ reference semanticdb maven . . kotlin/Pair#second.
+//                                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#columnTypes.
+//                                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#getColumnTypes().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#registerValues().
+//                                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#registerValues().(values)
       override fun QueryBuilder.registerValues(values: Pair<T1, T2>) {
 //                              ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#registerValues().
 //                                             display_name registerValues
@@ -379,6 +473,7 @@
 //                                                    display_name values
 //                                                    documentation ```kotlin\nvalues: Pair<T1, T2>\n```
 //                                                     ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Pair#
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#registerValues().(values)
           append("(")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
           registerArgument(expr.first.columnType, values.first)
@@ -408,13 +503,20 @@
           append(")")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#registerValues().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/PairInListOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#
   /**
    * Represents an SQL operator that checks if all values of a `Triple` [expr] match any element from [list].
    *
    * To inverse the operator and check if the `Triple` is **not** in [list], set [isInList] to `false`.
    */
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#[T1]
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#[T2]
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#[T3]
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().
   class TripleInListOp<T1, T2, T3>(
 //      ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#
 //                     display_name TripleInListOp
@@ -432,6 +534,12 @@
 //                             ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#[T3]
 //                                display_name FirTypeParameterSymbol T3
 //                                documentation ```kotlin\nT3\n```
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#[T1]
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#[T2]
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#[T3]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#getExpr().
       override val expr: Triple<ExpressionWithColumnType<T1>, ExpressionWithColumnType<T2>, ExpressionWithColumnType<T3>>,
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().(expr)
 //                      display_name expr
@@ -444,21 +552,31 @@
 //                      display_name expr
 //                      documentation ```kotlin\npublic get(): Triple<ExpressionWithColumnType<T1>, ExpressionWithColumnType<T2>, ExpressionWithColumnType<T3>>\n```
 //                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Triple#
+//                                                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().(expr)
+//                                                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#expr.
+//                                                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#getExpr().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().(list)
       list: Iterable<Triple<T1, T2, T3>>,
 //    ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().(list)
 //         display_name list
 //         documentation ```kotlin\nlist: Iterable<Triple<T1, T2, T3>>\n```
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Iterable#
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().(list)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().(isInList)
       isInList: Boolean = true
 //    ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().(isInList)
 //             display_name isInList
 //             documentation ```kotlin\nisInList: Boolean = ...\n```
 //              ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().(isInList)
   ) : InListOrNotInListBaseOp<Triple<T1, T2, T3>>(expr, list, isInList) {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#
 //                                                ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().(expr)
 //                                                      ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().(list)
 //                                                            ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().(isInList)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#columnTypes.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#getColumnTypes().
       override val columnTypes: List<ExpressionWithColumnType<*>> = listOf(expr.first, expr.second, expr.third)
 //                 ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#columnTypes.
 //                             display_name columnTypes
@@ -480,7 +598,11 @@
 //                                                                                                  ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#getExpr().
 //                                                                                                       ^^^^^ reference semanticdb maven . . kotlin/Triple#getThird().
 //                                                                                                       ^^^^^ reference semanticdb maven . . kotlin/Triple#third.
+//                                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#columnTypes.
+//                                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#getColumnTypes().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#registerValues().
+//                                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#registerValues().(values)
       override fun QueryBuilder.registerValues(values: Triple<T1, T2, T3>) {
 //                              ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#registerValues().
 //                                             display_name registerValues
@@ -490,6 +612,7 @@
 //                                                    display_name values
 //                                                    documentation ```kotlin\nvalues: Triple<T1, T2, T3>\n```
 //                                                     ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Triple#
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#registerValues().(values)
           append("(")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
           registerArgument(expr.first.columnType, values.first)
@@ -532,14 +655,18 @@
           append(")")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#registerValues().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/TripleInListOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#
   /**
    * Represents an SQL operator that checks if all columns of a `List` [expr] match any of the lists of
    * values from [list].
    *
    * To inverse the operator and check if the `List` of columns is **not** in [list], set [isInList] to `false`.
    */
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().
   class MultipleInListOp(
 //      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#
 //                       display_name MultipleInListOp
@@ -548,6 +675,9 @@
 //      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().
 //                       display_name MultipleInListOp
 //                       documentation ```kotlin\npublic constructor(expr: List<Column<*>>, list: Iterable<List<*>>, isInList: Boolean = ...): MultipleInListOp\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#getExpr().
       override val expr: List<Column<*>>,
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().(expr)
 //                      display_name expr
@@ -560,21 +690,31 @@
 //                      display_name expr
 //                      documentation ```kotlin\npublic get(): List<Column<*>>\n```
 //                       ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().(expr)
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#expr.
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#getExpr().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().(list)
       list: Iterable<List<*>>,
 //    ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().(list)
 //         display_name list
 //         documentation ```kotlin\nlist: Iterable<List<*>>\n```
 //          ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Iterable#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().(list)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().(isInList)
       isInList: Boolean = true
 //    ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().(isInList)
 //             display_name isInList
 //             documentation ```kotlin\nisInList: Boolean = ...\n```
 //              ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().(isInList)
   ) : InListOrNotInListBaseOp<List<*>>(expr, list, isInList) {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#
 //                                     ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().(expr)
 //                                           ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().(list)
 //                                                 ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().(isInList)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#columnTypes.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#getColumnTypes().
       override val columnTypes: List<Column<*>> = expr
 //                 ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#columnTypes.
 //                             display_name columnTypes
@@ -585,7 +725,11 @@
 //                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
 //                                                ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#expr.
 //                                                ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#getExpr().
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#columnTypes.
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#getColumnTypes().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#registerValues().
+//                                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#registerValues().(values)
       override fun QueryBuilder.registerValues(values: List<*>) {
 //                              ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#registerValues().
 //                                             display_name registerValues
@@ -595,28 +739,33 @@
 //                                                    display_name values
 //                                                    documentation ```kotlin\nvalues: List<*>\n```
 //                                                     ^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#registerValues().(values)
           append("(")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
+//                              ⌄ enclosing_range_start local 5
+//                                 ⌄ enclosing_range_start local 6
           expr.forEachIndexed { i, expression ->
 //        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#expr.
 //        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#getExpr().
 //             ^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/forEachIndexed(+9).
-//                              ^ definition semanticdb maven . . (i)
+//                              ^ definition local 5
 //                                display_name i
 //                                documentation ```kotlin\ni: Int\n```
-//                                 ^^^^^^^^^^ definition semanticdb maven . . (expression)
+//                                 ^^^^^^^^^^ definition local 6
 //                                            display_name expression
 //                                            documentation ```kotlin\nexpression: Column<*>\n```
+//                              ⌃ enclosing_range_end local 5
+//                                          ⌃ enclosing_range_end local 6
               registerArgument(expression.columnType, values[i])
 //            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#registerArgument(+1).
-//                             ^^^^^^^^^^ reference semanticdb maven . . (expression)
+//                             ^^^^^^^^^^ reference local 6
 //                                        ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#columnType.
 //                                        ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getColumnType().
 //                                                    ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#registerValues().(values)
 //                                                    ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#get().
-//                                                           ^ reference semanticdb maven . . (i)
+//                                                           ^ reference local 5
               if (i != values.lastIndex) append(", ")
-//                ^ reference semanticdb maven . . (i)
+//                ^ reference local 5
 //                     ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#registerValues().(values)
 //                            ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/getLastIndex().
 //                            ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/lastIndex.
@@ -625,7 +774,10 @@
           append(")")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#registerValues().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -635,26 +787,30 @@
 //                                             display_name queryBuilder
 //                                             documentation ```kotlin\nqueryBuilder: QueryBuilder\n```
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#toQueryBuilder().(queryBuilder)
           // SQL Server does not support IN operator with tuples (or any more than 1 expression on the left-hand side)
           if (currentDialectIfAvailable !is SQLServerDialect) return super.toQueryBuilder(queryBuilder)
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialectIfAvailable.
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialectIfAvailable().
+//                                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDialect#
 //                                                                         ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#toQueryBuilder().
 //                                                                                        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#toQueryBuilder().(queryBuilder)
   
           queryBuilder {
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#toQueryBuilder().(queryBuilder)
+//            ⌄ enclosing_range_start local 7
               val iterator = list.iterator()
-//                ^^^^^^^^ definition local 3
+//                ^^^^^^^^ definition local 7
 //                         display_name iterator
 //                         documentation ```kotlin\nlocal val iterator: Iterator<List<*>>\n```
 //                           ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#getList().
 //                           ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#list.
 //                                ^^^^^^^^ reference semanticdb maven . . kotlin/collections/Iterable#iterator().
+//                                         ⌃ enclosing_range_end local 7
               if (!iterator.hasNext()) {
 //                ^ reference semanticdb maven . . kotlin/Boolean#not().
-//                 ^^^^^^^^ reference local 3
+//                 ^^^^^^^^ reference local 7
 //                          ^^^^^^^ reference semanticdb maven . . kotlin/collections/Iterator#hasNext().
                   if (isInList) {
 //                    ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#getIsInList().
@@ -675,60 +831,72 @@
                   // Alternative: EXISTS (SELECT * FROM (VALUES (...), (...), ...) v(...) WHERE v.?=? AND ...)
                   // Built-in exists(AbstractQuery) cannot be used because above row value constructors are not supported
   
+//                ⌄ enclosing_range_start local 8
                   val valueEqualityOps = mutableListOf<Op<Boolean>>()
-//                    ^^^^^^^^^^^^^^^^ definition local 4
+//                    ^^^^^^^^^^^^^^^^ definition local 8
 //                                     display_name valueEqualityOps
 //                                     documentation ```kotlin\nlocal val valueEqualityOps: MutableList<Op<Boolean>>\n```
 //                                       ^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/mutableListOf().
+//                                                                  ⌃ enclosing_range_end local 8
   
+//                                   ⌄ enclosing_range_start local 9
                   iterator.forEach { value ->
-//                ^^^^^^^^ reference local 3
+//                ^^^^^^^^ reference local 7
 //                         ^^^^^^^ reference semanticdb maven . . kotlin/collections/forEach(+9).
-//                                   ^^^^^ definition semanticdb maven . . (value)
+//                                   ^^^^^ definition local 9
 //                                         display_name value
 //                                         documentation ```kotlin\nvalue: List<*>\n```
+//                                       ⌃ enclosing_range_end local 9
+//                    ⌄ enclosing_range_start local 10
                       val valueEqualityOp = build {
-//                        ^^^^^^^^^^^^^^^ definition local 5
+//                        ^^^^^^^^^^^^^^^ definition local 10
 //                                        display_name valueEqualityOp
 //                                        documentation ```kotlin\nlocal val valueEqualityOp: Op<Boolean>\n```
 //                                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().
+//                                              ⌄ enclosing_range_start local 11
+//                                               ⌄ enclosing_range_start local 12
+//                                                       ⌄ enclosing_range_start local 13
                           expr.zip(value).map { (column, value) ->
 //                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#expr.
 //                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#getExpr().
 //                             ^^^ reference semanticdb maven . . kotlin/collections/zip(+54).
-//                                 ^^^^^ reference semanticdb maven . . (value)
+//                                 ^^^^^ reference local 9
 //                                        ^^^ reference semanticdb maven . . kotlin/collections/map(+9).
-//                                              ^^^^^^^^^^^^^^^ definition semanticdb maven . . (`<destruct>`)
+//                                              ^^^^^^^^^^^^^^^ definition local 11
 //                                                              display_name <destruct>
 //                                                              documentation ```kotlin\n<destruct>: Pair<Column<*>, Any?>\n```
-//                                               ^^^^^^ definition local 6
+//                                               ^^^^^^ reference local 11
+//                                               ^^^^^^ definition local 12
 //                                                      display_name column
 //                                                      documentation ```kotlin\nlocal val column: Column<*>\n```
-//                                               ^^^^^^ reference semanticdb maven . . (`<destruct>`)
 //                                               ^^^^^^ reference semanticdb maven . . kotlin/Pair#component1().
-//                                                       ^^^^^ definition local 7
+//                                                       ^^^^^ reference local 11
+//                                                       ^^^^^ definition local 13
 //                                                             display_name value
 //                                                             documentation ```kotlin\nlocal val value: Any?\n```
-//                                                       ^^^^^ reference semanticdb maven . . (`<destruct>`)
 //                                                       ^^^^^ reference semanticdb maven . . kotlin/Pair#component2().
+//                                                    ⌃ enclosing_range_end local 12
+//                                                           ⌃ enclosing_range_end local 13
+//                                                            ⌃ enclosing_range_end local 11
                               build { EqOp(column, column.wrap(value)) }
 //                            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().
 //                                    ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/EqOp#`<init>`().
-//                                         ^^^^^^ reference local 6
-//                                                 ^^^^^^ reference local 6
+//                                         ^^^^^^ reference local 12
+//                                                 ^^^^^^ reference local 12
 //                                                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ISqlExpressionBuilder#wrap().
-//                                                             ^^^^^ reference local 7
+//                                                             ^^^^^ reference local 13
                           }.compoundAnd()
 //                          ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/compoundAnd().
                       }
+//                    ⌃ enclosing_range_end local 10
                       valueEqualityOps.add(if (isInList) valueEqualityOp else not(valueEqualityOp))
-//                    ^^^^^^^^^^^^^^^^ reference local 4
+//                    ^^^^^^^^^^^^^^^^ reference local 8
 //                                     ^^^ reference semanticdb maven . . kotlin/collections/MutableList#add().
 //                                             ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#getIsInList().
 //                                             ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#isInList.
-//                                                       ^^^^^^^^^^^^^^^ reference local 5
+//                                                       ^^^^^^^^^^^^^^^ reference local 10
 //                                                                            ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/not().
-//                                                                                ^^^^^^^^^^^^^^^ reference local 5
+//                                                                                ^^^^^^^^^^^^^^^ reference local 10
                   }
   
                   if (isInList) {
@@ -736,15 +904,17 @@
 //                    ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#isInList.
                       +valueEqualityOps.compoundOr()
 //                    ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+2).
-//                     ^^^^^^^^^^^^^^^^ reference local 4
+//                     ^^^^^^^^^^^^^^^^ reference local 8
 //                                      ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/compoundOr().
                   } else {
                       +valueEqualityOps.compoundAnd()
 //                    ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+2).
-//                     ^^^^^^^^^^^^^^^^ reference local 4
+//                     ^^^^^^^^^^^^^^^^ reference local 8
 //                                      ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/compoundAnd().
                   }
               }
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/MultipleInListOp#

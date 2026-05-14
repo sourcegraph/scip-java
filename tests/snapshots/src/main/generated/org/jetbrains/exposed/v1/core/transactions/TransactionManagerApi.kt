@@ -44,6 +44,8 @@
 //                            ^^^^^^ reference semanticdb maven . . java/util/concurrent/atomic/
 //                                   ^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/atomic/AtomicReference#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#`<init>`().
   @Suppress("ForbiddenComment")
   // TODO: break down this to a separate files
   
@@ -56,6 +58,10 @@
 //                                                display_name NotInitializedTransactionManager
 //                                                documentation ```kotlin\nprivate constructor(): NotInitializedTransactionManager\n```
 //                                                  ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#defaultReadOnly.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#getDefaultReadOnly().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultReadOnly().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultReadOnly().(value)
       override var defaultReadOnly: Boolean = false
 //                 ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#defaultReadOnly.
 //                                 display_name defaultReadOnly
@@ -70,7 +76,15 @@
 //                                 display_name value
 //                                 documentation ```kotlin\nvalue: Boolean\n```
 //                                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#defaultReadOnly.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#getDefaultReadOnly().
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultReadOnly().
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultReadOnly().(value)
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#defaultMaxAttempts.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#getDefaultMaxAttempts().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultMaxAttempts().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultMaxAttempts().(value)
       override var defaultMaxAttempts: Int = -1
 //                 ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#defaultMaxAttempts.
 //                                    display_name defaultMaxAttempts
@@ -85,7 +99,15 @@
 //                                    display_name value
 //                                    documentation ```kotlin\nvalue: Int\n```
 //                                     ^^^ reference semanticdb maven . . kotlin/Int#
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#defaultMaxAttempts.
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#getDefaultMaxAttempts().
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultMaxAttempts().
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultMaxAttempts().(value)
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#defaultMinRetryDelay.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#getDefaultMinRetryDelay().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultMinRetryDelay().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultMinRetryDelay().(value)
       override var defaultMinRetryDelay: Long = 0
 //                 ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#defaultMinRetryDelay.
 //                                      display_name defaultMinRetryDelay
@@ -100,7 +122,15 @@
 //                                      display_name value
 //                                      documentation ```kotlin\nvalue: Long\n```
 //                                       ^^^^ reference semanticdb maven . . kotlin/Long#
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#defaultMinRetryDelay.
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#getDefaultMinRetryDelay().
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultMinRetryDelay().
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultMinRetryDelay().(value)
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#defaultMaxRetryDelay.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#getDefaultMaxRetryDelay().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultMaxRetryDelay().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultMaxRetryDelay().(value)
       override var defaultMaxRetryDelay: Long = 0
 //                 ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#defaultMaxRetryDelay.
 //                                      display_name defaultMaxRetryDelay
@@ -115,7 +145,12 @@
 //                                      display_name value
 //                                      documentation ```kotlin\nvalue: Long\n```
 //                                       ^^^^ reference semanticdb maven . . kotlin/Long#
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#defaultMaxRetryDelay.
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#getDefaultMaxRetryDelay().
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultMaxRetryDelay().
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#setDefaultMaxRetryDelay().(value)
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#currentOrNull().
       override fun currentOrNull(): Transaction = error(
 //                 ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#currentOrNull().
 //                               display_name currentOrNull
@@ -125,7 +160,10 @@
 //                                                ^^^^^ reference semanticdb maven . . kotlin/error().
           "Please call Database.connect() or R2dbcDatabase.connect() before using this code"
       )
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#currentOrNull().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#bindTransactionToThread().
+//                                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#bindTransactionToThread().(transaction)
       override fun bindTransactionToThread(transaction: Transaction?) {
 //                 ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#bindTransactionToThread().
 //                                         display_name bindTransactionToThread
@@ -135,11 +173,16 @@
 //                                                     display_name transaction
 //                                                     documentation ```kotlin\ntransaction: Transaction?\n```
 //                                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#bindTransactionToThread().(transaction)
           error("Please call Database.connect() or R2dbcDatabase.connect() before using this code")
 //        ^^^^^ reference semanticdb maven . . kotlin/error().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#bindTransactionToThread().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#
   /**
    * Represents the manager registered to a database, which is responsible for creating new transactions
    * and storing data related to the database and its transactions.
@@ -149,6 +192,10 @@
 //                                display_name TransactionManagerApi
 //                                documentation ```kotlin\npublic abstract interface TransactionManagerApi : Any\n```\n\n----\n\n\n Represents the manager registered to a database, which is responsible for creating new transactions\n and storing data related to the database and its transactions.\n
 //                                relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#defaultReadOnly.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#getDefaultReadOnly().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultReadOnly().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultReadOnly().(value)
       /** Whether transactions should be performed in read-only mode. Unless specified, the database default will be used. */
       var defaultReadOnly: Boolean
 //        ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#defaultReadOnly.
@@ -164,7 +211,15 @@
 //                        display_name value
 //                        documentation ```kotlin\nvalue: Boolean\n```\n\n----\n\n Whether transactions should be performed in read-only mode. Unless specified, the database default will be used.
 //                         ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#defaultReadOnly.
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#getDefaultReadOnly().
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultReadOnly().
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultReadOnly().(value)
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#defaultMaxAttempts.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#getDefaultMaxAttempts().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultMaxAttempts().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultMaxAttempts().(value)
       /** The default maximum amount of attempts that will be made to perform a transaction. */
       var defaultMaxAttempts: Int
 //        ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#defaultMaxAttempts.
@@ -180,7 +235,15 @@
 //                           display_name value
 //                           documentation ```kotlin\nvalue: Int\n```\n\n----\n\n The default maximum amount of attempts that will be made to perform a transaction.
 //                            ^^^ reference semanticdb maven . . kotlin/Int#
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#defaultMaxAttempts.
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#getDefaultMaxAttempts().
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultMaxAttempts().
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultMaxAttempts().(value)
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#defaultMinRetryDelay.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#getDefaultMinRetryDelay().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultMinRetryDelay().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultMinRetryDelay().(value)
       /** The default minimum number of milliseconds to wait before retrying a transaction if an exception is thrown. */
       var defaultMinRetryDelay: Long
 //        ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#defaultMinRetryDelay.
@@ -196,7 +259,15 @@
 //                             display_name value
 //                             documentation ```kotlin\nvalue: Long\n```\n\n----\n\n The default minimum number of milliseconds to wait before retrying a transaction if an exception is thrown.
 //                              ^^^^ reference semanticdb maven . . kotlin/Long#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#defaultMinRetryDelay.
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#getDefaultMinRetryDelay().
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultMinRetryDelay().
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultMinRetryDelay().(value)
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#defaultMaxRetryDelay.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#getDefaultMaxRetryDelay().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultMaxRetryDelay().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultMaxRetryDelay().(value)
       /** The default maximum number of milliseconds to wait before retrying a transaction if an exception is thrown. */
       var defaultMaxRetryDelay: Long
 //        ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#defaultMaxRetryDelay.
@@ -212,7 +283,12 @@
 //                             display_name value
 //                             documentation ```kotlin\nvalue: Long\n```\n\n----\n\n The default maximum number of milliseconds to wait before retrying a transaction if an exception is thrown.
 //                              ^^^^ reference semanticdb maven . . kotlin/Long#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#defaultMaxRetryDelay.
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#getDefaultMaxRetryDelay().
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultMaxRetryDelay().
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#setDefaultMaxRetryDelay().(value)
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#currentOrNull().
       /** Returns the current [Transaction], or `null` if none exists. */
       fun currentOrNull(): Transaction?
 //        ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#currentOrNull().
@@ -220,8 +296,11 @@
 //                      documentation ```kotlin\npublic abstract fun currentOrNull(): Transaction?\n\n```\n\n----\n\n Returns the current [Transaction], or `null` if none exists.
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/NotInitializedTransactionManager#currentOrNull().
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#currentOrNull().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#bindTransactionToThread().
       /** Sets the current thread's copy of the manager's thread-local variable to the specified [transaction]. */
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#bindTransactionToThread().(transaction)
       fun bindTransactionToThread(transaction: Transaction?)
 //        ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#bindTransactionToThread().
 //                                display_name bindTransactionToThread
@@ -231,8 +310,13 @@
 //                                            display_name transaction
 //                                            documentation ```kotlin\ntransaction: Transaction?\n```
 //                                             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#bindTransactionToThread().(transaction)
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#bindTransactionToThread().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#`<init>`().
   /**
    * Represents the object responsible for storing internal data related to each registered database
    * and its transaction manager.
@@ -246,6 +330,8 @@
 //       ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#`<init>`().
 //                              display_name CoreTransactionManager
 //                              documentation ```kotlin\nprivate constructor(): CoreTransactionManager\n```\n\n----\n\n\n Represents the object responsible for storing internal data related to each registered database\n and its transaction manager.\n
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#databases.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDatabases().
       private val databases = ConcurrentLinkedDeque<DatabaseApi>()
 //                ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#databases.
 //                          display_name databases
@@ -254,7 +340,11 @@
 //                          display_name databases
 //                          documentation ```kotlin\nprivate get(): ConcurrentLinkedDeque<DatabaseApi>\n```
 //                            ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/ConcurrentLinkedDeque#`<init>`().
+//                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#databases.
+//                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDatabases().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentDefaultDatabase.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentDefaultDatabase().
       private val currentDefaultDatabase = AtomicReference<DatabaseApi>()
 //                ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentDefaultDatabase.
 //                                       display_name currentDefaultDatabase
@@ -263,7 +353,10 @@
 //                                       display_name currentDefaultDatabase
 //                                       documentation ```kotlin\nprivate get(): AtomicReference<DatabaseApi>\n```
 //                                         ^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/atomic/AtomicReference#`<init>`().
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentDefaultDatabase.
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentDefaultDatabase().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDefaultDatabase().
       /** Returns the database that has been set as the default for all transactions. */
       fun getDefaultDatabase(): DatabaseApi? = currentDefaultDatabase.get()
 //        ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDefaultDatabase().
@@ -273,7 +366,9 @@
 //                                             ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentDefaultDatabase.
 //                                             ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentDefaultDatabase().
 //                                                                    ^^^ reference semanticdb maven jdk 11 java/util/concurrent/atomic/AtomicReference#get().
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDefaultDatabase().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDefaultDatabaseOrFirst().
       /**
        * Returns the database that has been set as the default for all transactions, or, if none was set,
        * the last instance created.
@@ -287,8 +382,11 @@
 //                                                                            ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#databases.
 //                                                                            ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDatabases().
 //                                                                                      ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/firstOrNull(+18).
+//                                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDefaultDatabaseOrFirst().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#setDefaultDatabase().
       /** Sets the specified database instance as the default for all transactions. */
+//                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#setDefaultDatabase().(db)
       fun setDefaultDatabase(db: DatabaseApi?) {
 //        ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#setDefaultDatabase().
 //                           display_name setDefaultDatabase
@@ -297,13 +395,17 @@
 //                              display_name db
 //                              documentation ```kotlin\ndb: DatabaseApi?\n```
 //                               ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#setDefaultDatabase().(db)
           currentDefaultDatabase.set(db)
 //        ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentDefaultDatabase.
 //        ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentDefaultDatabase().
 //                               ^^^ reference semanticdb maven jdk 11 java/util/concurrent/atomic/AtomicReference#set().
 //                                   ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#setDefaultDatabase().(db)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#setDefaultDatabase().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registeredDatabases.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getRegisteredDatabases().
       private val registeredDatabases = ConcurrentHashMap<DatabaseApi, TransactionManagerApi>()
 //                ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getRegisteredDatabases().
 //                                    display_name registeredDatabases
@@ -312,11 +414,15 @@
 //                                    display_name registeredDatabases
 //                                    documentation ```kotlin\nprivate final val registeredDatabases: ConcurrentHashMap<DatabaseApi, TransactionManagerApi>\n```
 //                                      ^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/ConcurrentHashMap#`<init>`().
+//                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registeredDatabases.
+//                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getRegisteredDatabases().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDatabaseManager().
       /**
        * Returns the transaction manager instance that is associated with the provided database key,
        * or `null` if  a manager has not been registered for the database.
        */
+//                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDatabaseManager().(db)
       fun getDatabaseManager(db: DatabaseApi): TransactionManagerApi? = registeredDatabases[db]
 //        ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDatabaseManager().
 //                           display_name getDatabaseManager
@@ -330,7 +436,11 @@
 //                                                                      ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registeredDatabases.
 //                                                                      ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/ConcurrentHashMap#get().
 //                                                                                          ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDatabaseManager().(db)
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDatabaseManager().(db)
+//                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDatabaseManager().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentThreadManager.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentThreadManager().
       private val currentThreadManager = TransactionManagerThreadLocal()
 //                ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentThreadManager.
 //                                     display_name currentThreadManager
@@ -339,8 +449,13 @@
 //                                     display_name getCurrentThreadManager
 //                                     documentation ```kotlin\npublic final fun getCurrentThreadManager(): TransactionManagerApi\n```\n\n----\n\n Returns the transaction manager instance stored in the current thread's copy of its thread-local variable.
 //                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#`<init>`().
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentThreadManager.
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentThreadManager().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registerDatabaseManager().
       /** Stores the specified database instance as a key for the provided transaction manager value. */
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registerDatabaseManager().(db)
+//                                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registerDatabaseManager().(manager)
       fun registerDatabaseManager(db: DatabaseApi, manager: TransactionManagerApi) {
 //        ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registerDatabaseManager().
 //                                display_name registerDatabaseManager
@@ -353,6 +468,8 @@
 //                                                         display_name manager
 //                                                         documentation ```kotlin\nmanager: TransactionManagerApi\n```
 //                                                          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registerDatabaseManager().(db)
+//                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registerDatabaseManager().(manager)
           if (getDefaultDatabaseOrFirst() == null) {
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDefaultDatabaseOrFirst().
               currentThreadManager.remove()
@@ -380,11 +497,14 @@
 //                            ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registerDatabaseManager().(db)
 //                                  ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registerDatabaseManager().(manager)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registerDatabaseManager().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#closeAndUnregisterDatabase().
       /**
        * Clears any association between the provided database instance and its transaction manager,
        * and completely removes the database instance from the internal storage.
        */
+//                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#closeAndUnregisterDatabase().(db)
       fun closeAndUnregisterDatabase(db: DatabaseApi) {
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#closeAndUnregisterDatabase().
 //                                   display_name closeAndUnregisterDatabase
@@ -393,18 +513,22 @@
 //                                      display_name db
 //                                      documentation ```kotlin\ndb: DatabaseApi\n```
 //                                       ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#closeAndUnregisterDatabase().(db)
+//        ⌄ enclosing_range_start local 0
           val manager = getDatabaseManager(db)
 //            ^^^^^^^ definition local 0
 //                    display_name manager
 //                    documentation ```kotlin\nlocal val manager: TransactionManagerApi?\n```
 //                      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDatabaseManager().
 //                                         ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#closeAndUnregisterDatabase().(db)
+//                                           ⌃ enclosing_range_end local 0
+//                     ⌄ enclosing_range_start local 1
           manager?.let {
 //        ^^^^^^^ reference local 0
 //                 ^^^ reference semanticdb maven . . kotlin/let().
-//                     ^ definition semanticdb maven . . (it) 7:9
+//                     ^ definition local 1 7:9
 //                       display_name it
-//                       documentation ```kotlin\nit: DatabaseApi\n```
+//                       documentation ```kotlin\nit: TransactionManagerApi\n```
               registeredDatabases.remove(db)
 //            ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getRegisteredDatabases().
 //            ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registeredDatabases.
@@ -427,15 +551,18 @@
 //                                     ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#isInitialized.
 //                                     ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#setIsInitialized().
 //                                                      ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentThreadManager().
-//                                                                                   ^^ reference semanticdb maven . . (it)
+//                                                                                   ^^ reference local 1
                   currentThreadManager.remove()
 //                ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentThreadManager.
 //                ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentThreadManager().
 //                                     ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#remove().
               }
           }
+//        ⌃ enclosing_range_end local 1
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#closeAndUnregisterDatabase().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentThreadManager().
       /** Returns the transaction manager instance stored in the current thread's copy of its thread-local variable. */
       fun getCurrentThreadManager(): TransactionManagerApi = currentThreadManager.get()
 //        ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentThreadManager().
@@ -445,11 +572,14 @@
 //                                                           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentThreadManager.
 //                                                           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentThreadManager().
 //                                                                                ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#get().
+//                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentThreadManager().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#resetCurrentThreadManager().
       /**
        * Sets the current thread's copy of its thread-local variable to the specified [manager] instance,
        * or removes the value entirely if a `null` instance is provided.
        */
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#resetCurrentThreadManager().(manager)
       fun resetCurrentThreadManager(manager: TransactionManagerApi?) {
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#resetCurrentThreadManager().
 //                                  display_name resetCurrentThreadManager
@@ -458,21 +588,26 @@
 //                                          display_name manager
 //                                          documentation ```kotlin\nmanager: TransactionManagerApi?\n```
 //                                           ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#resetCurrentThreadManager().(manager)
+//                     ⌄ enclosing_range_start local 2
           manager?.let { currentThreadManager.set(it) } ?: currentThreadManager.remove()
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#resetCurrentThreadManager().(manager)
 //                 ^^^ reference semanticdb maven . . kotlin/let().
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 2
 //                                                      display_name it
-//                                                      documentation ```kotlin\nit: DatabaseApi\n```
+//                                                      documentation ```kotlin\nit: TransactionManagerApi\n```
 //                       ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentThreadManager.
 //                       ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentThreadManager().
 //                                            ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#set().
-//                                                ^^ reference semanticdb maven . . (it)
+//                                                ^^ reference local 2
 //                                                         ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentThreadManager.
 //                                                         ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentThreadManager().
 //                                                                              ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#remove().
+//                                                    ⌃ enclosing_range_end local 2
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#resetCurrentThreadManager().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentTransactionOrNull().
       /**
        * Returns the current [Transaction] from the current transaction manager instance,
        * or `null` if none exists.
@@ -484,7 +619,9 @@
 //                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
 //                                                   ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getCurrentThreadManager().
 //                                                                             ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#currentOrNull().
+//                                                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentTransactionOrNull().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentTransaction().
       /**
        * Returns the current [Transaction] from the current transaction manager instance.
        *
@@ -497,7 +634,10 @@
 //                              ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
 //                                            ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentTransactionOrNull().
 //                                                                          ^^^^^ reference semanticdb maven . . kotlin/error().
+//                                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentTransaction().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#`<init>`().
       private class TransactionManagerThreadLocal : ThreadLocal<TransactionManagerApi>() {
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#
 //                                                display_name TransactionManagerThreadLocal
@@ -507,6 +647,10 @@
 //                                                display_name TransactionManagerThreadLocal
 //                                                documentation ```kotlin\npublic constructor(): CoreTransactionManager.TransactionManagerThreadLocal\n```
 //                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/ThreadLocal#
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#isInitialized.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#getIsInitialized().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#setIsInitialized().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#setIsInitialized().(value)
           var isInitialized = false
 //            ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#getIsInitialized().
 //                          display_name isInitialized
@@ -520,7 +664,12 @@
 //            ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#setIsInitialized().(value)
 //                          display_name value
 //                          documentation ```kotlin\nvalue: Boolean\n```
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#isInitialized.
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#getIsInitialized().
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#setIsInitialized().
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#setIsInitialized().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#get().
           override fun get(): TransactionManagerApi {
 //                     ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#get().
 //                         display_name get
@@ -530,7 +679,9 @@
               return super.get()
 //                         ^^^ reference semanticdb maven jdk 11 java/lang/ThreadLocal#get().
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#get().
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#initialValue().
           override fun initialValue(): TransactionManagerApi {
 //                     ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#initialValue().
 //                                  display_name initialValue
@@ -541,18 +692,23 @@
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#getIsInitialized().
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#isInitialized.
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#setIsInitialized().
+//                                                    ⌄ enclosing_range_start local 3
               return getDefaultDatabaseOrFirst()?.let { registeredDatabases.getValue(it) } ?: NotInitializedTransactionManager
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getDefaultDatabaseOrFirst().
 //                                                ^^^ reference semanticdb maven . . kotlin/let().
-//                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 3
 //                                                                                         display_name it
 //                                                                                         documentation ```kotlin\nit: DatabaseApi\n```
 //                                                      ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#getRegisteredDatabases().
 //                                                      ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#registeredDatabases.
 //                                                                          ^^^^^^^^ reference semanticdb maven . . kotlin/collections/getValue().
-//                                                                                   ^^ reference semanticdb maven . . (it)
+//                                                                                   ^^ reference local 3
+//                                                                                       ⌃ enclosing_range_end local 3
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#initialValue().
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#set().
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#set().(value)
           override fun set(value: TransactionManagerApi?) {
 //                     ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#set().
 //                         display_name set
@@ -562,6 +718,7 @@
 //                               display_name value
 //                               documentation ```kotlin\nvalue: TransactionManagerApi?\n```
 //                                ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionManagerApi#
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#set().(value)
               isInitialized = true
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#getIsInitialized().
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#isInitialized.
@@ -570,7 +727,9 @@
 //                  ^^^ reference semanticdb maven jdk 11 java/lang/ThreadLocal#set().
 //                      ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#set().(value)
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#set().
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#remove().
           override fun remove() {
 //                     ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#remove().
 //                            display_name remove
@@ -583,5 +742,10 @@
               super.remove()
 //                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/ThreadLocal#remove().
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#remove().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#TransactionManagerThreadLocal#`<init>`().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#`<init>`().

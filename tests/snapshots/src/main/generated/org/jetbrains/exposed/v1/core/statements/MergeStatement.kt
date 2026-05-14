@@ -13,11 +13,16 @@
 //                             ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/
 //                                ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#
   /**
    * The base implementation of SQL merge command that is used by statements like [MergeSelectStatement], [MergeTableStatement]
    *
    * @property table The destination [Table] where records will be merged into.
    */
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#`<init>`().
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#`<init>`().(table)
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#table.
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#getTable().
   abstract class MergeStatement(val table: Table) : Statement<Int>(
 //               ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#
 //                              display_name MergeStatement
@@ -40,11 +45,17 @@
 //                                        documentation ```kotlin\npublic final val table: Table\n```
 //                                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
 //                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/Statement#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#`<init>`().(table)
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#table.
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#getTable().
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#`<init>`().
       StatementType.MERGE, listOf(table)
 //                  ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementType#MERGE.
 //                         ^^^^^^ reference semanticdb maven . . kotlin/collections/listOf().
 //                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#`<init>`().(table)
   ) {
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#clauses.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#getClauses().
       protected val clauses = mutableListOf<Clause>()
 //                  ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#clauses.
 //                          display_name clauses
@@ -53,7 +64,10 @@
 //                          display_name clauses
 //                          documentation ```kotlin\nprotected get(): MutableList<MergeStatement.Clause>\n```
 //                            ^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/mutableListOf().
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#clauses.
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#getClauses().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#arguments().
       override fun arguments(): Iterable<Iterable<Pair<IColumnType<*>, Any?>>> {
 //                 ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#arguments().
 //                           display_name arguments
@@ -61,43 +75,54 @@
 //                           relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#arguments().
 //                           relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/statements/Statement#arguments().
 //                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Iterable#
+//        ⌄ enclosing_range_start local 0
           val result = QueryBuilder(true).run {
 //            ^^^^^^ definition local 0
 //                   display_name result
 //                   documentation ```kotlin\nlocal val result: List<List<Pair<IColumnType<*>, Any?>>>\n```
 //                     ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#`<init>`().
 //                                        ^^^ reference semanticdb maven . . kotlin/run(+1).
+//                            ⌄ enclosing_range_start local 1
+//                                                       ⌄ enclosing_range_start local 2
+//                                                        ⌄ enclosing_range_start local 3
+//                                                                ⌄ enclosing_range_start local 4
               clauses.flatMap { it.arguments }.forEach { (column, value) ->
 //            ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#clauses.
 //            ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#getClauses().
 //                    ^^^^^^^ reference semanticdb maven . . kotlin/collections/flatMap(+10).
-//                            ^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                            ^^^^^^^^^^^^^^^^ definition local 1
 //                                             display_name it
 //                                             documentation ```kotlin\nit: MergeStatement.Clause\n```
-//                              ^^ reference semanticdb maven . . (it)
+//                              ^^ reference local 1
 //                                 ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#arguments.
 //                                 ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getArguments().
 //                                             ^^^^^^^ reference semanticdb maven . . kotlin/collections/forEach(+10).
-//                                                       ^^^^^^^^^^^^^^^ definition semanticdb maven . . (`<destruct>`)
+//                                                       ^^^^^^^^^^^^^^^ definition local 2
 //                                                                       display_name <destruct>
 //                                                                       documentation ```kotlin\n<destruct>: Pair<Column<*>, Any?>\n```
-//                                                        ^^^^^^ definition local 1
+//                                                        ^^^^^^ reference local 2
+//                                                        ^^^^^^ definition local 3
 //                                                               display_name column
 //                                                               documentation ```kotlin\nlocal val column: Column<*>\n```
-//                                                        ^^^^^^ reference semanticdb maven . . (`<destruct>`)
 //                                                        ^^^^^^ reference semanticdb maven . . kotlin/Pair#component1().
-//                                                                ^^^^^ definition local 2
+//                                                                ^^^^^ reference local 2
+//                                                                ^^^^^ definition local 4
 //                                                                      display_name value
 //                                                                      documentation ```kotlin\nlocal val value: Any?\n```
-//                                                                ^^^^^ reference semanticdb maven . . (`<destruct>`)
 //                                                                ^^^^^ reference semanticdb maven . . kotlin/Pair#component2().
+//                                           ⌃ enclosing_range_end local 1
+//                                                             ⌃ enclosing_range_end local 3
+//                                                                    ⌃ enclosing_range_end local 4
+//                                                                     ⌃ enclosing_range_end local 2
                   if (value !is Column<*> && value !is Expression<*>) {
-//                    ^^^^^ reference local 2
-//                                           ^^^^^ reference local 2
+//                    ^^^^^ reference local 4
+//                              ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#
+//                                           ^^^^^ reference local 4
+//                                                     ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
                       registerArgument(column, value)
 //                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#registerArgument().
-//                                     ^^^^^^ reference local 1
-//                                             ^^^^^ reference local 2
+//                                     ^^^^^^ reference local 3
+//                                             ^^^^^ reference local 4
                   }
               }
               if (args.isNotEmpty()) listOf(args) else emptyList()
@@ -109,10 +134,13 @@
 //                                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#getArgs().
 //                                                     ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/emptyList().
           }
+//        ⌃ enclosing_range_end local 0
           return result
 //               ^^^^^^ reference local 0
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#arguments().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().
       /**
        * Defines an insert operation to be performed when there is no matching record in the destination table.
        *
@@ -126,29 +154,38 @@
 //        ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().
 //                             display_name whenNotMatchedInsert
 //                             documentation ```kotlin\npublic final fun whenNotMatchedInsert(and: Op<Boolean>? = ..., overridingUserValue: Boolean = ..., overridingSystemValue: Boolean = ..., body: (InsertStatement<Int>) -> Unit): Unit\n```\n\n----\n\n\n Defines an insert operation to be performed when there is no matching record in the destination table.\n\n @param overridingUserValue Postgres only. Indicates whether to use the `OVERRIDING USER VALUE` clause for the insert.\n @param overridingSystemValue Postgres only. Indicates whether to use the `OVERRIDING SYSTEM VALUE` clause for the insert.\n @param and An additional optional condition [Op<Boolean>] to refine when the insert should take place.\n @param body A lambda to configure the [InsertStatement] in which the required columns and corresponding\n values are specified for the insert operation.\n
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(and)
           and: Op<Boolean>? = null,
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(and)
 //            display_name and
 //            documentation ```kotlin\nand: Op<Boolean>? = ...\n```
 //             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(and)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(overridingUserValue)
           overridingUserValue: Boolean = false,
 //        ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(overridingUserValue)
 //                            display_name overridingUserValue
 //                            documentation ```kotlin\noverridingUserValue: Boolean = ...\n```
 //                             ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(overridingUserValue)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(overridingSystemValue)
           overridingSystemValue: Boolean = false,
 //        ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(overridingSystemValue)
 //                              display_name overridingSystemValue
 //                              documentation ```kotlin\noverridingSystemValue: Boolean = ...\n```
 //                               ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(overridingSystemValue)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(body)
           body: (InsertStatement<Int>) -> Unit
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(body)
 //             display_name body
 //             documentation ```kotlin\nbody: (InsertStatement<Int>) -> Unit\n```
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Function1#
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(body)
       ) {
+//        ⌄ enclosing_range_start local 5
           val arguments = InsertStatement<Int>(table).apply(body).arguments!!.first()
-//            ^^^^^^^^^ definition local 3
+//            ^^^^^^^^^ definition local 5
 //                      display_name arguments
 //                      documentation ```kotlin\nlocal val arguments: List<Pair<Column<*>, Any?>>\n```
 //                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertStatement#`<init>`().
@@ -160,6 +197,7 @@
 //                                                                ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertStatement#getArguments().
 //                                                                ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertStatement#setArguments().
 //                                                                            ^^^^^ reference semanticdb maven . . kotlin/collections/first(+19).
+//                                                                                  ⌃ enclosing_range_end local 5
           clauses.add(
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#clauses.
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#getClauses().
@@ -168,13 +206,15 @@
 //            ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().
 //                                   ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#NOT_MATCHED.
 //                                                             ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#INSERT.
-//                                                                     ^^^^^^^^^ reference local 3
+//                                                                     ^^^^^^^^^ reference local 5
 //                                                                                ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(and)
 //                                                                                           ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(overridingSystemValue)
 //                                                                                                                  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().(overridingUserValue)
           )
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedInsert().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedUpdate().
       /**
        * Defines an update operation to be executed when a matching record is found in the destination table.
        *
@@ -184,6 +224,9 @@
        * @param body A lambda to define the [UpdateStatement] which sets the values of columns in the matching
        * records.
        */
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedUpdate().(and)
+//                                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedUpdate().(deleteWhere)
+//                                                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedUpdate().(body)
       fun whenMatchedUpdate(and: Op<Boolean>? = null, deleteWhere: Op<Boolean>? = null, body: (UpdateStatement) -> Unit) {
 //        ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedUpdate().
 //                          display_name whenMatchedUpdate
@@ -200,8 +243,12 @@
 //                                                                                           display_name body
 //                                                                                           documentation ```kotlin\nbody: (UpdateStatement) -> Unit\n```
 //                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Function1#
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedUpdate().(and)
+//                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedUpdate().(deleteWhere)
+//                                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedUpdate().(body)
+//        ⌄ enclosing_range_start local 6
           val arguments = UpdateStatement(table, limit = 1).apply(body).firstDataSet
-//            ^^^^^^^^^ definition local 4
+//            ^^^^^^^^^ definition local 6
 //                      display_name arguments
 //                      documentation ```kotlin\nlocal val arguments: List<Pair<Column<*>, Any?>>\n```
 //                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#`<init>`().
@@ -211,6 +258,7 @@
 //                                                                ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedUpdate().(body)
 //                                                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#firstDataSet.
 //                                                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getFirstDataSet().
+//                                                                                 ⌃ enclosing_range_end local 6
           clauses.add(Clause(ClauseCondition.MATCHED, ClauseAction.UPDATE, arguments, and, deleteWhere))
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#clauses.
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#getClauses().
@@ -218,17 +266,20 @@
 //                    ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().
 //                                           ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#MATCHED.
 //                                                                 ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#UPDATE.
-//                                                                         ^^^^^^^^^ reference local 4
+//                                                                         ^^^^^^^^^ reference local 6
 //                                                                                    ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedUpdate().(and)
 //                                                                                         ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedUpdate().(deleteWhere)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedUpdate().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedDelete().
       /**
        * Specifies a delete operation to be executed when a matching record is found in the destination table.
        *
        * @param and An additional optional condition [Op<Boolean>] to determine when the delete operation
        * should be performed.
        */
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedDelete().(and)
       fun whenMatchedDelete(and: Op<Boolean>? = null) {
 //        ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedDelete().
 //                          display_name whenMatchedDelete
@@ -237,6 +288,7 @@
 //                              display_name and
 //                              documentation ```kotlin\nand: Op<Boolean>? = ...\n```
 //                               ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedDelete().(and)
           clauses.add(Clause(ClauseCondition.MATCHED, ClauseAction.DELETE, emptyList(), and))
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#clauses.
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#getClauses().
@@ -247,13 +299,16 @@
 //                                                                         ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/emptyList().
 //                                                                                      ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedDelete().(and)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedDelete().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedDoNothing().
       /**
        * Postgres only. Specifies that no operation should be performed when a matching record is found in the destination table.
        *
        * @param and An additional optional condition [Op<Boolean>] to determine when the do-nothing operation
        * should be performed.
        */
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedDoNothing().(and)
       fun whenMatchedDoNothing(and: Op<Boolean>? = null) {
 //        ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedDoNothing().
 //                             display_name whenMatchedDoNothing
@@ -262,6 +317,7 @@
 //                                 display_name and
 //                                 documentation ```kotlin\nand: Op<Boolean>? = ...\n```
 //                                  ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedDoNothing().(and)
           clauses.add(Clause(ClauseCondition.MATCHED, ClauseAction.DO_NOTHING, emptyList(), and))
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#clauses.
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#getClauses().
@@ -272,13 +328,16 @@
 //                                                                             ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/emptyList().
 //                                                                                          ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedDoNothing().(and)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenMatchedDoNothing().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedDoNothing().
       /**
        * Postgres only. Specifies that no operation should be performed when no matching record is found in the destination table.
        *
        * @param and An additional optional condition [Op<Boolean>] to determine when the do-nothing operation
        * should be performed.
        */
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedDoNothing().(and)
       fun whenNotMatchedDoNothing(and: Op<Boolean>? = null) {
 //        ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedDoNothing().
 //                                display_name whenNotMatchedDoNothing
@@ -287,6 +346,7 @@
 //                                    display_name and
 //                                    documentation ```kotlin\nand: Op<Boolean>? = ...\n```
 //                                     ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedDoNothing().(and)
           clauses.add(Clause(ClauseCondition.NOT_MATCHED, ClauseAction.DO_NOTHING, emptyList(), and))
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#clauses.
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#getClauses().
@@ -297,7 +357,11 @@
 //                                                                                 ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/emptyList().
 //                                                                                              ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedDoNothing().(and)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#whenNotMatchedDoNothing().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().
       data class Clause(
 //               ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#
 //                      display_name Clause
@@ -305,9 +369,14 @@
 //               ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().
 //                      display_name Clause
 //                      documentation ```kotlin\npublic constructor(type: MergeStatement.ClauseCondition, action: MergeStatement.ClauseAction, arguments: List<Pair<Column<*>, Any?>>, and: Op<Boolean>?, deleteWhere: Op<Boolean>? = ..., overridingSystemValue: Boolean = ..., overridingUserValue: Boolean = ...): MergeStatement.Clause\n```\n\n----\n\n deleteWhere is applicable only to Oracle SQL database which has no dedicated "when delete" clause
-//               ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().
-//                      display_name copy
-//                      documentation ```kotlin\npublic final fun copy(type: MergeStatement.ClauseCondition = ..., action: MergeStatement.ClauseAction = ..., arguments: List<Pair<Column<*>, Any?>> = ..., and: Op<Boolean>? = ..., deleteWhere: Op<Boolean>? = ..., overridingSystemValue: Boolean = ..., overridingUserValue: Boolean = ...): MergeStatement.Clause\n\n```\n\n----\n\n deleteWhere is applicable only to Oracle SQL database which has no dedicated "when delete" clause
+//                     ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy(). 11:5
+//                       display_name copy
+//                       documentation ```kotlin\npublic final fun copy(type: MergeStatement.ClauseCondition = ..., action: MergeStatement.ClauseAction = ..., arguments: List<Pair<Column<*>, Any?>> = ..., and: Op<Boolean>? = ..., deleteWhere: Op<Boolean>? = ..., overridingSystemValue: Boolean = ..., overridingUserValue: Boolean = ...): MergeStatement.Clause\n\n```\n\n----\n\n deleteWhere is applicable only to Oracle SQL database which has no dedicated "when delete" clause
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(type)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#type.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getType().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component1().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(type)
           val type: ClauseCondition,
 //            ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(type)
 //                 display_name type
@@ -328,6 +397,16 @@
 //                 documentation ```kotlin\npublic final val type: MergeStatement.ClauseCondition\n```
 //            ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#type.
 //                  ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(type)
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#type.
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getType().
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component1().
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(type)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(action)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#action.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getAction().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component2().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(action)
           val action: ClauseAction,
 //            ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(action)
 //                   display_name action
@@ -348,6 +427,16 @@
 //                   documentation ```kotlin\npublic get(): MergeStatement.ClauseAction\n```
 //            ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getAction().
 //                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(action)
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#action.
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getAction().
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component2().
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(action)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(arguments)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#arguments.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getArguments().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component3().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(arguments)
           val arguments: List<Pair<Column<*>, Any?>>,
 //            ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(arguments)
 //                      display_name arguments
@@ -368,6 +457,16 @@
 //                      documentation ```kotlin\npublic get(): List<Pair<Column<*>, Any?>>\n```
 //            ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getArguments().
 //                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(arguments)
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#arguments.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getArguments().
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component3().
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(arguments)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(and)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#and.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getAnd().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component4().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(and)
           val and: Op<Boolean>?,
 //            ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(and)
 //                display_name and
@@ -388,6 +487,16 @@
 //                documentation ```kotlin\npublic get(): Op<Boolean>?\n```
 //            ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getAnd().
 //                 ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(and)
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#and.
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getAnd().
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component4().
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(and)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(deleteWhere)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#deleteWhere.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getDeleteWhere().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component5().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(deleteWhere)
           /** deleteWhere is applicable only to Oracle SQL database which has no dedicated "when delete" clause */
           val deleteWhere: Op<Boolean>? = null,
 //            ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(deleteWhere)
@@ -409,6 +518,16 @@
 //                        documentation ```kotlin\npublic get(): Op<Boolean>?\n```\n\n----\n\n deleteWhere is applicable only to Oracle SQL database which has no dedicated "when delete" clause
 //            ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getDeleteWhere().
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(deleteWhere)
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#deleteWhere.
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getDeleteWhere().
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component5().
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(deleteWhere)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(overridingSystemValue)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#overridingSystemValue.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getOverridingSystemValue().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component6().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(overridingSystemValue)
           /** Postgres clause modifier to override the system value */
           val overridingSystemValue: Boolean = false,
 //            ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(overridingSystemValue)
@@ -430,6 +549,16 @@
 //                                  documentation ```kotlin\npublic final val overridingSystemValue: Boolean\n```\n\n----\n\n Postgres clause modifier to override the system value
 //            ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#overridingSystemValue.
 //                                   ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(overridingSystemValue)
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#overridingSystemValue.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getOverridingSystemValue().
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component6().
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(overridingSystemValue)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(overridingUserValue)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#overridingUserValue.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getOverridingUserValue().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component7().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(overridingUserValue)
           /** Postgres clause modifier to override the user value */
           val overridingUserValue: Boolean = false,
 //            ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(overridingUserValue)
@@ -451,8 +580,23 @@
 //                                documentation ```kotlin\npublic final val overridingUserValue: Boolean\n```\n\n----\n\n Postgres clause modifier to override the user value
 //            ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#overridingUserValue.
 //                                 ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().(overridingUserValue)
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#overridingUserValue.
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#getOverridingUserValue().
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#component7().
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().(overridingUserValue)
       )
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#`<init>`().
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#Clause#copy().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#values().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#valueOf().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#valueOf().(value)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#entries.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/getEntries().
       enum class ClauseCondition {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Enum# 2:5
 //               ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#
@@ -479,7 +623,21 @@
 //                               documentation ```kotlin\npublic get(): EnumEntries<MergeStatement.ClauseAction>\n```
           MATCHED, NOT_MATCHED
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#`<init>`().
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#values().
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#valueOf().
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#valueOf().(value)
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseCondition#entries.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/getEntries().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#values().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#valueOf().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#valueOf().(value)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#entries.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/getEntries().
       enum class ClauseAction {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Enum# 2:5
 //               ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#
@@ -506,8 +664,17 @@
 //                            documentation ```kotlin\npublic get(): EnumEntries<MergeStatement.ClauseAction>\n```
           INSERT, UPDATE, DELETE, DO_NOTHING
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#`<init>`().
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#values().
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#valueOf().
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#valueOf().(value)
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#ClauseAction#entries.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/getEntries().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#
   /**
    * Represents an SQL MERGE statement. It encapsulates the logic to perform conditional updates, insertions,
    * or deletions.
@@ -519,6 +686,7 @@
    * @property source The source [Table] from which records are taken to compare with `dest`.
    * @property on The join condition [Op<Boolean>] that specifies how to match records in both `source` and `dest`.
    */
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#`<init>`().
   open class MergeTableStatement(
 //           ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#
 //                               display_name MergeTableStatement
@@ -527,11 +695,16 @@
 //           ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#`<init>`().
 //                               display_name MergeTableStatement
 //                               documentation ```kotlin\npublic constructor(dest: Table, source: Table, on: Op<Boolean>?): MergeTableStatement\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#`<init>`().(dest)
       dest: Table,
 //    ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#`<init>`().(dest)
 //         display_name dest
 //         documentation ```kotlin\ndest: Table\n```
 //          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
+//              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#`<init>`().(dest)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#`<init>`().(source)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#source.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#getSource().
       private val source: Table,
 //                ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#`<init>`().(source)
 //                       display_name source
@@ -544,6 +717,12 @@
 //                       display_name source
 //                       documentation ```kotlin\nprivate final val source: Table\n```
 //                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#`<init>`().(source)
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#source.
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#getSource().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#`<init>`().(on)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#on.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#getOn().
       private val on: Op<Boolean>?
 //                ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#`<init>`().(on)
 //                   display_name on
@@ -556,9 +735,16 @@
 //                   display_name on
 //                   documentation ```kotlin\nprivate final val on: Op<Boolean>?\n```
 //                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#`<init>`().(on)
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#on.
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#getOn().
   ) : MergeStatement(dest) {
 //    ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#
 //                   ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#`<init>`().(dest)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#prepareSQL().
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#prepareSQL().(transaction)
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#prepareSQL().(prepared)
       override fun prepareSQL(transaction: Transaction, prepared: Boolean): String {
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#prepareSQL().
 //                            display_name prepareSQL
@@ -573,6 +759,8 @@
 //                                                               documentation ```kotlin\nprepared: Boolean\n```
 //                                                                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#prepareSQL().(transaction)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#prepareSQL().(prepared)
           return transaction.db.dialect.functionProvider.merge(table, source, transaction, clauses, on)
 //               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#prepareSQL().(transaction)
 //                           ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#db.
@@ -592,8 +780,11 @@
 //                                                                                                  ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#getOn().
 //                                                                                                  ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#on.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#prepareSQL().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeTableStatement#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#
   /**
    * Represents an SQL MERGE statement. It encapsulates the logic to perform conditional updates, insertions,
    * or deletions.
@@ -605,6 +796,7 @@
    * @property selectQuery The source [QueryAlias] from which records are taken to compare with `dest`.
    * @property on The join condition [Op<Boolean>] that specifies how to match records in both `source` and `dest`.
    */
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#`<init>`().
   open class MergeSelectStatement(
 //           ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#
 //                                display_name MergeSelectStatement
@@ -613,11 +805,16 @@
 //           ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#`<init>`().
 //                                display_name MergeSelectStatement
 //                                documentation ```kotlin\npublic constructor(dest: Table, selectQuery: QueryAlias, on: Op<Boolean>): MergeSelectStatement\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#`<init>`().(dest)
       dest: Table,
 //    ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#`<init>`().(dest)
 //         display_name dest
 //         documentation ```kotlin\ndest: Table\n```
 //          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
+//              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#`<init>`().(dest)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#`<init>`().(selectQuery)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#selectQuery.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#getSelectQuery().
       private val selectQuery: QueryAlias,
 //                ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#`<init>`().(selectQuery)
 //                            display_name selectQuery
@@ -630,6 +827,12 @@
 //                            display_name selectQuery
 //                            documentation ```kotlin\nprivate final val selectQuery: QueryAlias\n```
 //                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryAlias#
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#`<init>`().(selectQuery)
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#selectQuery.
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#getSelectQuery().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#`<init>`().(on)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#on.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#getOn().
       val on: Op<Boolean>
 //        ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#`<init>`().(on)
 //           display_name on
@@ -642,17 +845,23 @@
 //           display_name on
 //           documentation ```kotlin\npublic final val on: Op<Boolean>\n```
 //            ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#`<init>`().(on)
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#on.
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#getOn().
   ) : MergeStatement(dest) {
 //    ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#
 //                   ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#`<init>`().(dest)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#arguments().
       override fun arguments(): Iterable<Iterable<Pair<IColumnType<*>, Any?>>> {
 //                 ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#arguments().
 //                           display_name arguments
 //                           documentation ```kotlin\npublic open override fun arguments(): Iterable<Iterable<Pair<IColumnType<*>, Any?>>>\n```
 //                           relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#arguments().
 //                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Iterable#
+//        ⌄ enclosing_range_start local 7
           val queryArguments = selectQuery.query.arguments().firstOrNull() ?: emptyList()
-//            ^^^^^^^^^^^^^^ definition local 5
+//            ^^^^^^^^^^^^^^ definition local 7
 //                           display_name queryArguments
 //                           documentation ```kotlin\nlocal val queryArguments: List<Pair<IColumnType<*>, Any?>>\n```
 //                             ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#getSelectQuery().
@@ -662,22 +871,29 @@
 //                                               ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#arguments().
 //                                                           ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/firstOrNull(+19).
 //                                                                            ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/emptyList().
+//                                                                                      ⌃ enclosing_range_end local 7
+//        ⌄ enclosing_range_start local 8
           val mergeStatementArguments = super.arguments().firstOrNull() ?: emptyList()
-//            ^^^^^^^^^^^^^^^^^^^^^^^ definition local 6
+//            ^^^^^^^^^^^^^^^^^^^^^^^ definition local 8
 //                                    display_name mergeStatementArguments
 //                                    documentation ```kotlin\nlocal val mergeStatementArguments: Iterable<Pair<IColumnType<*>, Any?>>\n```
 //                                            ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeStatement#arguments().
 //                                                        ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/firstOrNull(+18).
 //                                                                         ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/emptyList().
+//                                                                                   ⌃ enclosing_range_end local 8
           return listOf(
 //               ^^^^^^ reference semanticdb maven . . kotlin/collections/listOf().
               queryArguments + mergeStatementArguments
-//            ^^^^^^^^^^^^^^ reference local 5
+//            ^^^^^^^^^^^^^^ reference local 7
 //                           ^ reference semanticdb maven . . kotlin/collections/plus(+32).
-//                             ^^^^^^^^^^^^^^^^^^^^^^^ reference local 6
+//                             ^^^^^^^^^^^^^^^^^^^^^^^ reference local 8
           )
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#arguments().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#prepareSQL().
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#prepareSQL().(transaction)
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#prepareSQL().(prepared)
       override fun prepareSQL(transaction: Transaction, prepared: Boolean): String {
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#prepareSQL().
 //                            display_name prepareSQL
@@ -692,6 +908,8 @@
 //                                                               documentation ```kotlin\nprepared: Boolean\n```
 //                                                                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#prepareSQL().(transaction)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#prepareSQL().(prepared)
           return transaction.db.dialect.functionProvider.mergeSelect(table, selectQuery, transaction, clauses, on, prepared)
 //               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#prepareSQL().(transaction)
 //                           ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#db.
@@ -712,4 +930,6 @@
 //                                                                                                             ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#on.
 //                                                                                                                 ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#prepareSQL().(prepared)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#prepareSQL().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/MergeSelectStatement#

@@ -5,9 +5,12 @@
 //                              ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/
 //                                 ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#
   /**
    * Represents differences between a column definition and database metadata for the existing column.
    */
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().
   data class ColumnDiff(
 //           ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#
 //                      display_name ColumnDiff
@@ -15,9 +18,14 @@
 //           ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().
 //                      display_name ColumnDiff
 //                      documentation ```kotlin\npublic constructor(nullability: Boolean, type: Boolean, autoInc: Boolean, defaults: Boolean, caseSensitiveName: Boolean, sizeAndScale: Boolean): ColumnDiff\n```\n\n----\n\n Whether there is a mismatch between nullability of the existing column and the defined column.
-//           ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().
-//                      display_name copy
-//                      documentation ```kotlin\npublic final fun copy(nullability: Boolean = ..., type: Boolean = ..., autoInc: Boolean = ..., defaults: Boolean = ..., caseSensitiveName: Boolean = ..., sizeAndScale: Boolean = ...): ColumnDiff\n\n```\n\n----\n\n\n Represents differences between a column definition and database metadata for the existing column.\n
+//                     ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy(). 13:1
+//                       display_name copy
+//                       documentation ```kotlin\npublic final fun copy(nullability: Boolean = ..., type: Boolean = ..., autoInc: Boolean = ..., defaults: Boolean = ..., caseSensitiveName: Boolean = ..., sizeAndScale: Boolean = ...): ColumnDiff\n\n```\n\n----\n\n Whether there is a mismatch between nullability of the existing column and the defined column.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(nullability)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#nullability.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getNullability().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#component1().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().(nullability)
       /** Whether there is a mismatch between nullability of the existing column and the defined column. */
       val nullability: Boolean,
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(nullability)
@@ -39,6 +47,16 @@
 //                    documentation ```kotlin\npublic final val nullability: Boolean\n```\n\n----\n\n Whether there is a mismatch between nullability of the existing column and the defined column.
 //        ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#nullability.
 //                     ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(nullability)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#nullability.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getNullability().
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#component1().
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().(nullability)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(type)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#type.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getType().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#component2().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().(type)
       /** Whether there is a mismatch between type of the existing column and the defined column. */
       val type: Boolean,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(type)
@@ -60,6 +78,16 @@
 //             documentation ```kotlin\npublic final val type: Boolean\n```\n\n----\n\n Whether there is a mismatch between type of the existing column and the defined column.
 //        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#type.
 //              ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(type)
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#type.
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getType().
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#component2().
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().(type)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(autoInc)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#autoInc.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getAutoInc().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#component3().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().(autoInc)
       /** Whether there is a mismatch between auto-increment status of the existing column and the defined column. */
       val autoInc: Boolean,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(autoInc)
@@ -81,6 +109,16 @@
 //                documentation ```kotlin\npublic get(): Boolean\n```\n\n----\n\n Whether there is a mismatch between auto-increment status of the existing column and the defined column.
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getAutoInc().
 //                 ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(autoInc)
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#autoInc.
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getAutoInc().
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#component3().
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().(autoInc)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(defaults)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#defaults.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getDefaults().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#component4().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().(defaults)
       /** Whether the default value of the existing column matches that of the defined column. */
       val defaults: Boolean,
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(defaults)
@@ -102,6 +140,16 @@
 //                 documentation ```kotlin\npublic get(): Boolean\n```\n\n----\n\n Whether the default value of the existing column matches that of the defined column.
 //        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getDefaults().
 //                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(defaults)
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#defaults.
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getDefaults().
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#component4().
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().(defaults)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(caseSensitiveName)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#caseSensitiveName.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getCaseSensitiveName().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#component5().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().(caseSensitiveName)
       /** Whether the existing column identifier matches that of the defined column and has the correct casing. */
       val caseSensitiveName: Boolean,
 //        ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(caseSensitiveName)
@@ -123,6 +171,16 @@
 //                          documentation ```kotlin\npublic get(): Boolean\n```\n\n----\n\n Whether the existing column identifier matches that of the defined column and has the correct casing.
 //        ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getCaseSensitiveName().
 //                           ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(caseSensitiveName)
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#caseSensitiveName.
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getCaseSensitiveName().
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#component5().
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().(caseSensitiveName)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(sizeAndScale)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#sizeAndScale.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getSizeAndScale().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#component6().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().(sizeAndScale)
       /** Whether the size and scale of the existing column, if applicable, match those of the defined column. */
       val sizeAndScale: Boolean,
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(sizeAndScale)
@@ -144,7 +202,15 @@
 //                     documentation ```kotlin\npublic final val sizeAndScale: Boolean\n```\n\n----\n\n Whether the size and scale of the existing column, if applicable, match those of the defined column.
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#sizeAndScale.
 //                      ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().(sizeAndScale)
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#sizeAndScale.
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#getSizeAndScale().
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#component6().
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().(sizeAndScale)
   ) {
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#`<init>`().
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#copy().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#hasDifferences().
       /** Returns `true` if there is a difference between the column definition and the existing column in the database. */
       fun hasDifferences() = this != NoneChanged
 //        ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#hasDifferences().
@@ -152,7 +218,10 @@
 //                       documentation ```kotlin\npublic final fun hasDifferences(): Boolean\n```\n\n----\n\n Returns `true` if there is a difference between the column definition and the existing column in the database.
 //                                   ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#NoneChanged.
 //                                   ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#getNoneChanged().
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#hasDifferences().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#`<init>`().
       companion object {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion# 20:5
 //                       display_name Companion
@@ -160,6 +229,8 @@
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#`<init>`(). 20:5
 //                       display_name Companion
 //                       documentation ```kotlin\nprivate constructor(): ColumnDiff.Companion\n```\n\n----\n\n A [ColumnDiff] with no differences.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#NoneChanged.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#getNoneChanged().
           /** A [ColumnDiff] with no differences. */
           val NoneChanged = ColumnDiff(
 //            ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#NoneChanged.
@@ -176,7 +247,11 @@
               caseSensitiveName = false,
               sizeAndScale = false,
           )
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#NoneChanged.
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#getNoneChanged().
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#AllChanged.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#getAllChanged().
           /** A [ColumnDiff] with differences for every matched property. */
           val AllChanged = ColumnDiff(
 //            ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#AllChanged.
@@ -193,5 +268,10 @@
               caseSensitiveName = true,
               sizeAndScale = true,
           )
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#AllChanged.
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#getAllChanged().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#Companion#`<init>`().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#

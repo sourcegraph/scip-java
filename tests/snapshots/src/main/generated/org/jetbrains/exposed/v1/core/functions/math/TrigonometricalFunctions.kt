@@ -33,9 +33,13 @@
 //            ^^^^ reference semanticdb maven . . java/math/
 //                 ^^^^^^^^^^ reference semanticdb maven jdk 11 java/math/BigDecimal#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ACosFunction#
   /**
    *   Returns the arc cosine of a number
    */
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ACosFunction#[T]
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ACosFunction#`<init>`().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ACosFunction#`<init>`().(expression)
   class ACosFunction<T : Number?>(expression: ExpressionWithColumnType<T>) : CustomFunction<BigDecimal?>(
 //      ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ACosFunction#
 //                   display_name ACosFunction
@@ -52,6 +56,9 @@
 //                                           documentation ```kotlin\nexpression: ExpressionWithColumnType<T>\n```
 //                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
 //                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CustomFunction#
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ACosFunction#[T]
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ACosFunction#`<init>`().(expression)
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ACosFunction#`<init>`().
       functionName = "ACOS",
       columnType = DecimalColumnType.INSTANCE,
 //                                   ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DecimalColumnType#Companion#INSTANCE.
@@ -60,10 +67,15 @@
 //           ^^^^^^^ reference semanticdb maven . . kotlin/arrayOf().
 //                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ACosFunction#`<init>`().(expression)
   )
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ACosFunction#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ASinFunction#
   /**
    *   Returns the arc sine of a number
    */
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ASinFunction#[T]
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ASinFunction#`<init>`().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ASinFunction#`<init>`().(expression)
   class ASinFunction<T : Number?>(expression: ExpressionWithColumnType<T>) : CustomFunction<BigDecimal?>(
 //      ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ASinFunction#
 //                   display_name ASinFunction
@@ -80,6 +92,9 @@
 //                                           documentation ```kotlin\nexpression: ExpressionWithColumnType<T>\n```
 //                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
 //                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CustomFunction#
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ASinFunction#[T]
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ASinFunction#`<init>`().(expression)
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ASinFunction#`<init>`().
       functionName = "ASIN",
       columnType = DecimalColumnType.INSTANCE,
 //                                   ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DecimalColumnType#Companion#INSTANCE.
@@ -88,10 +103,15 @@
 //           ^^^^^^^ reference semanticdb maven . . kotlin/arrayOf().
 //                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ASinFunction#`<init>`().(expression)
   )
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ASinFunction#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ATanFunction#
   /**
    *   Returns the arc tangent of a number
    */
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ATanFunction#[T]
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ATanFunction#`<init>`().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ATanFunction#`<init>`().(expression)
   class ATanFunction<T : Number?>(expression: ExpressionWithColumnType<T>) : CustomFunction<BigDecimal?>(
 //      ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ATanFunction#
 //                   display_name ATanFunction
@@ -108,6 +128,9 @@
 //                                           documentation ```kotlin\nexpression: ExpressionWithColumnType<T>\n```
 //                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
 //                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CustomFunction#
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ATanFunction#[T]
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ATanFunction#`<init>`().(expression)
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ATanFunction#`<init>`().
       functionName = "ATAN",
       columnType = DecimalColumnType.INSTANCE,
 //                                   ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DecimalColumnType#Companion#INSTANCE.
@@ -116,10 +139,15 @@
 //           ^^^^^^^ reference semanticdb maven . . kotlin/arrayOf().
 //                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ATanFunction#`<init>`().(expression)
   )
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/ATanFunction#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CosFunction#
   /**
    *   Returns the cosine of a number
    */
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CosFunction#[T]
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CosFunction#`<init>`().
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CosFunction#`<init>`().(expression)
   class CosFunction<T : Number?>(expression: ExpressionWithColumnType<T>) : CustomFunction<BigDecimal?>(
 //      ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CosFunction#
 //                  display_name CosFunction
@@ -136,6 +164,9 @@
 //                                          documentation ```kotlin\nexpression: ExpressionWithColumnType<T>\n```
 //                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
 //                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CustomFunction#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CosFunction#[T]
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CosFunction#`<init>`().(expression)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CosFunction#`<init>`().
       functionName = "COS",
       columnType = DecimalColumnType.INSTANCE,
 //                                   ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DecimalColumnType#Companion#INSTANCE.
@@ -144,10 +175,15 @@
 //           ^^^^^^^ reference semanticdb maven . . kotlin/arrayOf().
 //                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CosFunction#`<init>`().(expression)
   )
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CosFunction#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CotFunction#
   /**
    * Returns the cotangent of a number
    */
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CotFunction#[T]
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CotFunction#`<init>`().
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CotFunction#`<init>`().(expression)
   class CotFunction<T : Number?>(expression: ExpressionWithColumnType<T>) : CustomFunction<BigDecimal?>(
 //      ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CotFunction#
 //                  display_name CotFunction
@@ -164,6 +200,9 @@
 //                                          documentation ```kotlin\nexpression: ExpressionWithColumnType<T>\n```
 //                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
 //                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CustomFunction#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CotFunction#[T]
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CotFunction#`<init>`().(expression)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CotFunction#`<init>`().
       functionName = "COT",
       columnType = DecimalColumnType.INSTANCE,
 //                                   ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DecimalColumnType#Companion#INSTANCE.
@@ -172,10 +211,15 @@
 //           ^^^^^^^ reference semanticdb maven . . kotlin/arrayOf().
 //                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CotFunction#`<init>`().(expression)
   )
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/CotFunction#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/DegreesFunction#
   /**
    * Convert a radian value into degrees:
    */
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/DegreesFunction#[T]
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/DegreesFunction#`<init>`().
+//                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/DegreesFunction#`<init>`().(expression)
   class DegreesFunction<T : Number?>(expression: ExpressionWithColumnType<T>) : CustomFunction<BigDecimal?>(
 //      ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/DegreesFunction#
 //                      display_name DegreesFunction
@@ -192,6 +236,9 @@
 //                                              documentation ```kotlin\nexpression: ExpressionWithColumnType<T>\n```
 //                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
 //                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CustomFunction#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/DegreesFunction#[T]
+//                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/DegreesFunction#`<init>`().(expression)
+//                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/DegreesFunction#`<init>`().
       functionName = "DEGREES",
       columnType = DecimalColumnType.INSTANCE,
 //                                   ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DecimalColumnType#Companion#INSTANCE.
@@ -200,7 +247,10 @@
 //           ^^^^^^^ reference semanticdb maven . . kotlin/arrayOf().
 //                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/DegreesFunction#`<init>`().(expression)
   )
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/DegreesFunction#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/PiFunction#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/PiFunction#`<init>`().
   /**
    *   Returns the value of PI
    */
@@ -220,10 +270,16 @@
       expr = arrayOf()
 //           ^^^^^^^ reference semanticdb maven . . kotlin/arrayOf().
   )
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/PiFunction#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/PiFunction#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/RadiansFunction#
   /**
    * Convert a radian value into degrees:
    */
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/RadiansFunction#[T]
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/RadiansFunction#`<init>`().
+//                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/RadiansFunction#`<init>`().(expression)
   class RadiansFunction<T : Number?>(expression: ExpressionWithColumnType<T>) : CustomFunction<BigDecimal?>(
 //      ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/RadiansFunction#
 //                      display_name RadiansFunction
@@ -240,6 +296,9 @@
 //                                              documentation ```kotlin\nexpression: ExpressionWithColumnType<T>\n```
 //                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
 //                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CustomFunction#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/RadiansFunction#[T]
+//                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/RadiansFunction#`<init>`().(expression)
+//                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/RadiansFunction#`<init>`().
       functionName = "RADIANS",
       columnType = DecimalColumnType.INSTANCE,
 //                                   ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DecimalColumnType#Companion#INSTANCE.
@@ -248,10 +307,15 @@
 //           ^^^^^^^ reference semanticdb maven . . kotlin/arrayOf().
 //                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/RadiansFunction#`<init>`().(expression)
   )
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/RadiansFunction#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/SinFunction#
   /**
    *   Returns the sine of a number
    */
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/SinFunction#[T]
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/SinFunction#`<init>`().
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/SinFunction#`<init>`().(expression)
   class SinFunction<T : Number?>(expression: ExpressionWithColumnType<T>) : CustomFunction<BigDecimal?>(
 //      ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/SinFunction#
 //                  display_name SinFunction
@@ -268,6 +332,9 @@
 //                                          documentation ```kotlin\nexpression: ExpressionWithColumnType<T>\n```
 //                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
 //                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CustomFunction#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/SinFunction#[T]
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/SinFunction#`<init>`().(expression)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/SinFunction#`<init>`().
       functionName = "SIN",
       columnType = DecimalColumnType.INSTANCE,
 //                                   ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DecimalColumnType#Companion#INSTANCE.
@@ -276,10 +343,15 @@
 //           ^^^^^^^ reference semanticdb maven . . kotlin/arrayOf().
 //                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/SinFunction#`<init>`().(expression)
   )
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/SinFunction#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/TanFunction#
   /**
    *   Returns the tangent of a number
    */
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/TanFunction#[T]
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/TanFunction#`<init>`().
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/TanFunction#`<init>`().(expression)
   class TanFunction<T : Number?>(expression: ExpressionWithColumnType<T>) : CustomFunction<BigDecimal?>(
 //      ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/TanFunction#
 //                  display_name TanFunction
@@ -296,6 +368,9 @@
 //                                          documentation ```kotlin\nexpression: ExpressionWithColumnType<T>\n```
 //                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
 //                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CustomFunction#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/TanFunction#[T]
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/TanFunction#`<init>`().(expression)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/TanFunction#`<init>`().
       functionName = "TAN",
       columnType = DecimalColumnType.INSTANCE,
 //                                   ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DecimalColumnType#Companion#INSTANCE.
@@ -304,3 +379,4 @@
 //           ^^^^^^^ reference semanticdb maven . . kotlin/arrayOf().
 //                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/TanFunction#`<init>`().(expression)
   )
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/functions/math/TanFunction#

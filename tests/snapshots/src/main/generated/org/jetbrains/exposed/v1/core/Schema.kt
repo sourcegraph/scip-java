@@ -29,6 +29,7 @@
 //                                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/
 //                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/UnsupportedByDialectException#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#
   /**
    * Represents a database schema.
    *
@@ -40,6 +41,8 @@
    * @param quota Used only for Oracle schema.
    * @param on Used only for Oracle schema.
    */
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().
   data class Schema(
 //           ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#
 //                  display_name Schema
@@ -47,9 +50,14 @@
 //           ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().
 //                  display_name Schema
 //                  documentation ```kotlin\npublic constructor(name: String, authorization: String? = ..., password: String? = ..., defaultTablespace: String? = ..., temporaryTablespace: String? = ..., quota: String? = ..., on: String? = ...): Schema\n```
-//           ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().
-//                  display_name copy
-//                  documentation ```kotlin\npublic final fun copy(name: String = ..., authorization: String? = ..., password: String? = ..., defaultTablespace: String? = ..., temporaryTablespace: String? = ..., quota: String? = ..., on: String? = ...): Schema\n\n```\n\n----\n\n\n Represents a database schema.\n\n @param name The schema name.\n @param authorization Specifies the name of the database-level principal that will own the schema.\n @param password Used only for Oracle schema.\n @param defaultTablespace Used only for Oracle schema.\n @param temporaryTablespace Used only for Oracle schema.\n @param quota Used only for Oracle schema.\n @param on Used only for Oracle schema.\n
+//                 ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy(). 8:1
+//                   display_name copy
+//                   documentation ```kotlin\npublic final fun copy(name: String = ..., authorization: String? = ..., password: String? = ..., defaultTablespace: String? = ..., temporaryTablespace: String? = ..., quota: String? = ..., on: String? = ...): Schema\n\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(name)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#name.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getName().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component1().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(name)
       private val name: String,
 //                ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(name)
 //                     display_name name
@@ -70,6 +78,16 @@
 //                     documentation ```kotlin\nprivate final val name: String\n```
 //                ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#name.
 //                      ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(name)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#name.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getName().
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component1().
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(name)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(authorization)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#authorization.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getAuthorization().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component2().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(authorization)
       val authorization: String? = null,
 //        ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(authorization)
 //                      display_name authorization
@@ -90,6 +108,16 @@
 //                      documentation ```kotlin\npublic get(): String?\n```
 //        ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getAuthorization().
 //                       ^^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(authorization)
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#authorization.
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getAuthorization().
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component2().
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(authorization)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(password)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#password.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getPassword().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component3().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(password)
       val password: String? = null,
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(password)
 //                 display_name password
@@ -110,6 +138,16 @@
 //                 documentation ```kotlin\npublic final val password: String?\n```
 //        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#password.
 //                  ^^^^^^^ reference semanticdb maven . . kotlin/String#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(password)
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#password.
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getPassword().
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component3().
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(password)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(defaultTablespace)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#defaultTablespace.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getDefaultTablespace().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component4().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(defaultTablespace)
       val defaultTablespace: String? = null,
 //        ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(defaultTablespace)
 //                          display_name defaultTablespace
@@ -130,6 +168,16 @@
 //                          documentation ```kotlin\npublic get(): String?\n```
 //        ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getDefaultTablespace().
 //                           ^^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(defaultTablespace)
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#defaultTablespace.
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getDefaultTablespace().
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component4().
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(defaultTablespace)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(temporaryTablespace)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#temporaryTablespace.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getTemporaryTablespace().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component5().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(temporaryTablespace)
       val temporaryTablespace: String? = null,
 //        ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(temporaryTablespace)
 //                            display_name temporaryTablespace
@@ -150,6 +198,16 @@
 //                            documentation ```kotlin\npublic final val temporaryTablespace: String?\n```
 //        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#temporaryTablespace.
 //                             ^^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(temporaryTablespace)
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#temporaryTablespace.
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getTemporaryTablespace().
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component5().
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(temporaryTablespace)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(quota)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#quota.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getQuota().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component6().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(quota)
       val quota: String? = null,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(quota)
 //              display_name quota
@@ -170,6 +228,16 @@
 //              documentation ```kotlin\npublic final val quota: String?\n```
 //        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#quota.
 //               ^^^^^^^ reference semanticdb maven . . kotlin/String#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(quota)
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#quota.
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getQuota().
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component6().
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(quota)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(on)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#on.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getOn().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component7().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(on)
       val on: String? = null
 //        ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(on)
 //           display_name on
@@ -190,12 +258,21 @@
 //           documentation ```kotlin\npublic final val on: String?\n```
 //        ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#on.
 //            ^^^^^^^ reference semanticdb maven . . kotlin/String#
+//                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().(on)
+//                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#on.
+//                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getOn().
+//                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#component7().
+//                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().(on)
   ) {
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#`<init>`().
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#copy().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#identifier.
       /** This schema's name in proper database casing. */
       val identifier
 //        ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#identifier.
 //                   display_name identifier
 //                   documentation ```kotlin\npublic final val identifier: String\n```\n\n----\n\n This schema's name in proper database casing.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getIdentifier().
           @OptIn(InternalApi::class)
           get() = CoreTransactionManager.currentTransaction().db.identifierManager.cutIfNecessaryAndQuote(name)
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getIdentifier().
@@ -209,19 +286,26 @@
 //                                                                                 ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#cutIfNecessaryAndQuote().
 //                                                                                                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getName().
 //                                                                                                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#name.
+//                                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#identifier.
+//                                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getIdentifier().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#ddl.
       /** The SQL statements that create this schema. */
       val ddl: List<String>
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#ddl.
 //            display_name ddl
 //            documentation ```kotlin\npublic final val ddl: List<String>\n```\n\n----\n\n The SQL statements that create this schema.
 //             ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getDdl().
           get() = createStatement()
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getDdl().
 //            display_name ddl
 //            documentation ```kotlin\npublic get(): List<String>\n```
 //                ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#createStatement().
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#ddl.
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getDdl().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#createStatement().
       /** Returns the SQL statements that create this schema. */
       fun createStatement(): List<String> {
 //        ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#createStatement().
@@ -246,8 +330,11 @@
 //                      ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
 //                                     ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createSchema().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#createStatement().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#dropStatement().
       /** Returns the SQL statements that drop this schema, as well as all its objects if [cascade] is `true`. */
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#dropStatement().(cascade)
       fun dropStatement(cascade: Boolean): List<String> {
 //        ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#dropStatement().
 //                      display_name dropStatement
@@ -257,6 +344,7 @@
 //                              documentation ```kotlin\ncascade: Boolean\n```
 //                               ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                         ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#dropStatement().(cascade)
           if (!currentDialect.supportsCreateSchema) {
 //            ^ reference semanticdb maven . . kotlin/Boolean#not().
 //             ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
@@ -276,7 +364,9 @@
 //                                     ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropSchema().
 //                                                      ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#dropStatement().(cascade)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#dropStatement().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#setSchemaStatement().
       /** Returns the SQL statements that set this schema as the current schema. */
       fun setSchemaStatement(): List<String> {
 //        ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#setSchemaStatement().
@@ -301,9 +391,14 @@
 //                      ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
 //                                     ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#setSchema().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#setSchemaStatement().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/appendIfNotNull().
   /** Appends both [str1] and [str2] to the receiver [StringBuilder] if [str2] is not `null`. */
+//                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/appendIfNotNull().(str1)
+//                                                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/appendIfNotNull().(str2)
   internal fun StringBuilder.appendIfNotNull(str1: String, str2: Any?) = apply {
 //                           ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/appendIfNotNull().
 //                                           display_name appendIfNotNull
@@ -317,6 +412,8 @@
 //                                                              documentation ```kotlin\nstr2: Any?\n```
 //                                                               ^^^^ reference semanticdb maven . . kotlin/Any#
 //                                                                       ^^^^^ reference semanticdb maven . . kotlin/apply().
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/appendIfNotNull().(str1)
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/appendIfNotNull().(str2)
       if (str2 != null) {
 //        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendIfNotNull().(str2)
           this.append("$str1 $str2")
@@ -325,3 +422,4 @@
 //                            ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendIfNotNull().(str2)
       }
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/appendIfNotNull().

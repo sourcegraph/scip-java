@@ -30,6 +30,7 @@
 //                                                ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/
 //                                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/PreparedStatementApi#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#
   /**
    * Represents the processes that should be performed during a statement's lifecycle events in a transaction.
    *
@@ -46,7 +47,10 @@
 //                               documentation ```kotlin\npublic abstract interface StatementInterceptor : Any\n```\n\n----\n\n\n Represents the processes that should be performed during a statement's lifecycle events in a transaction.\n\n In general, statement execution flow works in the following way:\n 1) [beforeExecution] of the statement\n 2) Creation of the prepared statement\n 3) [afterStatementPrepared] using the prepared statement from step 2\n 4) Execution of the SQL query\n 5) [afterExecution]\n
 //                               relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeSqlLogger#
 //                               relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/statements/GlobalStatementInterceptor#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeExecution().
       /** Performs steps before a statement, from the provided [context], is executed in a [transaction]. */
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeExecution().(transaction)
+//                                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeExecution().(context)
       fun beforeExecution(transaction: Transaction, context: StatementContext) {}
 //        ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeExecution().
 //                        display_name beforeExecution
@@ -59,11 +63,17 @@
 //                                                          display_name context
 //                                                          documentation ```kotlin\ncontext: StatementContext\n```
 //                                                           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementContext#
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeExecution().(transaction)
+//                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeExecution().(context)
+//                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeExecution().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterStatementPrepared().
       /**
        * Performs steps after [preparedStatement] has been created in a [transaction], but before the statement
        * has been executed.
        **/
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterStatementPrepared().(transaction)
+//                                                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterStatementPrepared().(preparedStatement)
       fun afterStatementPrepared(transaction: Transaction, preparedStatement: PreparedStatementApi) {}
 //        ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterStatementPrepared().
 //                               display_name afterStatementPrepared
@@ -76,8 +86,15 @@
 //                                                                           display_name preparedStatement
 //                                                                           documentation ```kotlin\npreparedStatement: PreparedStatementApi\n```
 //                                                                            ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/PreparedStatementApi#
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterStatementPrepared().(transaction)
+//                                                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterStatementPrepared().(preparedStatement)
+//                                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterStatementPrepared().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterExecution().
       /** Performs steps after an [executedStatement], from the provided [contexts], is complete in [transaction]. */
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterExecution().(transaction)
+//                                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterExecution().(contexts)
+//                                                                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterExecution().(executedStatement)
       fun afterExecution(transaction: Transaction, contexts: List<StatementContext>, executedStatement: PreparedStatementApi) {}
 //        ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterExecution().
 //                       display_name afterExecution
@@ -95,8 +112,14 @@
 //                                                                                                     display_name executedStatement
 //                                                                                                     documentation ```kotlin\nexecutedStatement: PreparedStatementApi\n```
 //                                                                                                      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/PreparedStatementApi#
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterExecution().(transaction)
+//                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterExecution().(contexts)
+//                                                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterExecution().(executedStatement)
+//                                                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterExecution().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeCommit().
       /** Performs steps before a [transaction] is committed. */
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeCommit().(transaction)
       fun beforeCommit(transaction: Transaction) {}
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeCommit().
 //                     display_name beforeCommit
@@ -105,8 +128,12 @@
 //                                 display_name transaction
 //                                 documentation ```kotlin\ntransaction: Transaction\n```
 //                                  ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeCommit().(transaction)
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeCommit().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterCommit().
       /** Performs steps after a [transaction] is committed. */
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterCommit().(transaction)
       fun afterCommit(transaction: Transaction) {}
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterCommit().
 //                    display_name afterCommit
@@ -115,8 +142,12 @@
 //                                display_name transaction
 //                                documentation ```kotlin\ntransaction: Transaction\n```
 //                                 ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterCommit().(transaction)
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterCommit().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeRollback().
       /** Performs steps before a rollback operation is issued on a [transaction]. */
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeRollback().(transaction)
       fun beforeRollback(transaction: Transaction) {}
 //        ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeRollback().
 //                       display_name beforeRollback
@@ -125,8 +156,12 @@
 //                                   display_name transaction
 //                                   documentation ```kotlin\ntransaction: Transaction\n```
 //                                    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeRollback().(transaction)
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#beforeRollback().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterRollback().
       /** Performs steps after a rollback operation is issued on a [transaction]. */
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterRollback().(transaction)
       fun afterRollback(transaction: Transaction) {}
 //        ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterRollback().
 //                      display_name afterRollback
@@ -135,11 +170,15 @@
 //                                  display_name transaction
 //                                  documentation ```kotlin\ntransaction: Transaction\n```
 //                                   ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterRollback().(transaction)
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#afterRollback().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#keepUserDataInTransactionStoreOnCommit().
       /**
        * Returns a mapping of [userData] that ensures required information is not lost from the transaction scope
        * once the transaction is committed.
        */
+//                                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#keepUserDataInTransactionStoreOnCommit().(userData)
       fun keepUserDataInTransactionStoreOnCommit(userData: Map<Key<*>, Any?>): Map<Key<*>, Any?> = emptyMap()
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#keepUserDataInTransactionStoreOnCommit().
 //                                               display_name keepUserDataInTransactionStoreOnCommit
@@ -150,8 +189,12 @@
 //                                                         ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#
 //                                                                             ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#
 //                                                                                                 ^^^^^^^^ reference semanticdb maven . . kotlin/collections/emptyMap().
+//                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#keepUserDataInTransactionStoreOnCommit().(userData)
+//                                                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#keepUserDataInTransactionStoreOnCommit().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/GlobalStatementInterceptor#
   /** Represents a [StatementInterceptor] that is loaded whenever a [Transaction] instance is initialized. */
   interface GlobalStatementInterceptor : StatementInterceptor
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/GlobalStatementInterceptor#
@@ -159,3 +202,4 @@
 //                                     documentation ```kotlin\npublic abstract interface GlobalStatementInterceptor : StatementInterceptor\n```\n\n----\n\n Represents a [StatementInterceptor] that is loaded whenever a [Transaction] instance is initialized.
 //                                     relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#
 //                                       ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementInterceptor#
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/GlobalStatementInterceptor#

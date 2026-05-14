@@ -34,6 +34,8 @@
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/util/
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#`<init>`().
   /**
    * Provides definitions for all the supported SQL data types.
    * By default, definitions from the SQL standard are provided but if a vendor doesn't support a specific type, or it is
@@ -54,6 +56,7 @@
 //                                documentation ```kotlin\npublic constructor(): DataTypeProvider\n```\n\n----\n\n\n Provides definitions for all the supported SQL data types.\n By default, definitions from the SQL standard are provided but if a vendor doesn't support a specific type, or it is\n implemented differently, the corresponding function should be overridden.\n
       // Numeric types
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#byteType().
       /** Numeric type for storing 1-byte integers. */
       open fun byteType(): String = "TINYINT"
 //             ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#byteType().
@@ -63,7 +66,9 @@
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/PostgreSQLDataTypeProvider#byteType().
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#byteType().
 //                         ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#byteType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#ubyteType().
       /** Numeric type for storing 1-byte unsigned integers.
        *
        * **Note:** If the database being used is not MySQL, MariaDB, or SQL Server, this will represent the 2-byte
@@ -77,7 +82,9 @@
 //                       relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDataTypeProvider#ubyteType().
 //                       relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#ubyteType().
 //                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#ubyteType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#shortType().
       /** Numeric type for storing 2-byte integers. */
       open fun shortType(): String = "SMALLINT"
 //             ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#shortType().
@@ -85,7 +92,9 @@
 //                       documentation ```kotlin\npublic open fun shortType(): String\n```\n\n----\n\n Numeric type for storing 2-byte integers.
 //                       relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDataTypeProvider#shortType().
 //                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#shortType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#ushortType().
       /** Numeric type for storing 2-byte unsigned integers.
        *
        * **Note:** If the database being used is not MySQL or MariaDB, this will represent the 4-byte integer type.
@@ -97,7 +106,9 @@
 //                        relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDataTypeProvider#ushortType().
 //                        relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDataTypeProvider#ushortType().
 //                           ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#ushortType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#integerType().
       /** Numeric type for storing 4-byte integers. */
       open fun integerType(): String = "INT"
 //             ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#integerType().
@@ -105,7 +116,9 @@
 //                         documentation ```kotlin\npublic open fun integerType(): String\n```\n\n----\n\n Numeric type for storing 4-byte integers.
 //                         relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDataTypeProvider#integerType().
 //                            ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#integerType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#uintegerType().
       /** Numeric type for storing 4-byte unsigned integers.
        *
        * **Note:** If the database being used is not MySQL or MariaDB, this will represent the 8-byte integer type.
@@ -117,7 +130,9 @@
 //                          relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDataTypeProvider#uintegerType().
 //                          relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDataTypeProvider#uintegerType().
 //                             ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#uintegerType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#integerAutoincType().
       /** Numeric type for storing 4-byte integers, marked as auto-increment. */
       open fun integerAutoincType(): String = "INT AUTO_INCREMENT"
 //             ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#integerAutoincType().
@@ -128,7 +143,9 @@
 //                                relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#integerAutoincType().
 //                                relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLiteDataTypeProvider#integerAutoincType().
 //                                   ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#integerAutoincType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#uintegerAutoincType().
       /** Numeric type for storing 4-byte unsigned integers, marked as auto-increment.
        *
        * **Note:** If the database being used is not MySQL or MariaDB, this will represent the 8-byte integer type.
@@ -140,7 +157,9 @@
 //                                 relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDataTypeProvider#uintegerAutoincType().
 //                                 relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDataTypeProvider#uintegerAutoincType().
 //                                    ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#uintegerAutoincType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#longType().
       /** Numeric type for storing 8-byte integers. */
       open fun longType(): String = "BIGINT"
 //             ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#longType().
@@ -148,7 +167,9 @@
 //                      documentation ```kotlin\npublic open fun longType(): String\n```\n\n----\n\n Numeric type for storing 8-byte integers.
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDataTypeProvider#longType().
 //                         ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#longType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#ulongType().
       /** Numeric type for storing 8-byte unsigned integers. */
       open fun ulongType(): String = "NUMERIC(20)"
 //             ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#ulongType().
@@ -158,7 +179,9 @@
 //                       relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDataTypeProvider#ulongType().
 //                       relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/PostgreSQLDataTypeProvider#ulongType().
 //                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#ulongType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#longAutoincType().
       /** Numeric type for storing 8-byte integers, and marked as auto-increment. */
       open fun longAutoincType(): String = "BIGINT AUTO_INCREMENT"
 //             ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#longAutoincType().
@@ -169,7 +192,9 @@
 //                             relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#longAutoincType().
 //                             relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLiteDataTypeProvider#longAutoincType().
 //                                ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#longAutoincType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#ulongAutoincType().
       /** Numeric type for storing 8-byte unsigned integers, marked as auto-increment. */
       open fun ulongAutoincType(): String = "NUMERIC(20) AUTO_INCREMENT"
 //             ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#ulongAutoincType().
@@ -181,7 +206,9 @@
 //                              relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#ulongAutoincType().
 //                              relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLiteDataTypeProvider#ulongAutoincType().
 //                                 ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#ulongAutoincType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#floatType().
       /** Numeric type for storing 4-byte (single precision) floating-point numbers. */
       open fun floatType(): String = "FLOAT"
 //             ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#floatType().
@@ -190,17 +217,22 @@
 //                       relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/PostgreSQLDataTypeProvider#floatType().
 //                       relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLiteDataTypeProvider#floatType().
 //                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#floatType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#doubleType().
       /** Numeric type for storing 8-byte (double precision) floating-point numbers. */
       open fun doubleType(): String = "DOUBLE PRECISION"
 //             ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#doubleType().
 //                        display_name doubleType
 //                        documentation ```kotlin\npublic open fun doubleType(): String\n```\n\n----\n\n Numeric type for storing 8-byte (double precision) floating-point numbers.
 //                           ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#doubleType().
   
       // Character types
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#varcharType().
       /** Character type for storing strings of variable length up to a maximum. */
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#varcharType().(colLength)
       open fun varcharType(colLength: Int): String = "VARCHAR($colLength)"
 //             ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#varcharType().
 //                         display_name varcharType
@@ -212,7 +244,10 @@
 //                                    ^^^ reference semanticdb maven . . kotlin/Int#
 //                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                             ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#varcharType().(colLength)
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#varcharType().(colLength)
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#varcharType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#textType().
       /** Character type for storing strings of variable length.
        * Some database (postgresql) use the same data type name to provide virtually _unlimited_ length. */
       open fun textType(): String = "TEXT"
@@ -223,7 +258,9 @@
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDataTypeProvider#textType().
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#textType().
 //                         ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#textType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#mediumTextType().
       /** Character type for storing strings of _medium_ length. */
       open fun mediumTextType(): String = "TEXT"
 //             ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#mediumTextType().
@@ -233,7 +270,9 @@
 //                            relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDataTypeProvider#mediumTextType().
 //                            relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#mediumTextType().
 //                               ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#mediumTextType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#largeTextType().
       /** Character type for storing strings of variable and _large_ length. */
       open fun largeTextType(): String = "TEXT"
 //             ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#largeTextType().
@@ -243,9 +282,11 @@
 //                           relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDataTypeProvider#largeTextType().
 //                           relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#largeTextType().
 //                              ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#largeTextType().
   
       // Binary data types
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#binaryType().
       /** Binary type for storing binary strings of variable and _unlimited_ length. */
       abstract fun binaryType(): String
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#binaryType().
@@ -258,8 +299,11 @@
 //                            relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#binaryType().
 //                            relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLiteDataTypeProvider#binaryType().
 //                               ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#binaryType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#binaryType(+1).
       /** Binary type for storing binary strings of a specific [length]. */
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#binaryType(+1).(length)
       open fun binaryType(length: Int): String = if (length == Int.MAX_VALUE) "VARBINARY(MAX)" else "VARBINARY($length)"
 //             ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#binaryType(+1).
 //                        display_name binaryType
@@ -275,7 +319,10 @@
 //                                                                 ^^^^^^^^^ reference semanticdb maven . . kotlin/Int#Companion#MAX_VALUE.
 //                                                                 ^^^^^^^^^ reference semanticdb maven . . kotlin/Int#Companion#getMAX_VALUE().
 //                                                                                                              ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#binaryType(+1).(length)
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#binaryType(+1).(length)
+//                                                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#binaryType(+1).
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#blobType().
       /** Binary type for storing BLOBs. */
       open fun blobType(): String = "BLOB"
 //             ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#blobType().
@@ -284,7 +331,9 @@
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/PostgreSQLDataTypeProvider#blobType().
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#blobType().
 //                         ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#blobType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#uuidType().
       /** Binary type for storing [UUID]. */
       open fun uuidType(): String = "BINARY(16)"
 //             ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#uuidType().
@@ -295,9 +344,12 @@
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/PostgreSQLDataTypeProvider#uuidType().
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#uuidType().
 //                         ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#uuidType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#uuidToDB().
       /** Returns a database-compatible object from the specified UUID [value]. */
       @Suppress("MagicNumber")
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#uuidToDB().(value)
       open fun uuidToDB(value: UUID): Any =
 //             ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#uuidToDB().
 //                      display_name uuidToDB
@@ -311,6 +363,7 @@
 //                            documentation ```kotlin\nvalue: UUID\n```
 //                             ^^^^ reference semanticdb maven jdk 11 java/util/UUID#
 //                                    ^^^ reference semanticdb maven . . kotlin/Any#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#uuidToDB().(value)
           ByteBuffer.allocate(16).putLong(value.mostSignificantBits).putLong(value.leastSignificantBits).array()
 //                   ^^^^^^^^ reference semanticdb maven jdk 11 java/nio/ByteBuffer#allocate().
 //                                ^^^^^^^ reference semanticdb maven jdk 11 java/nio/ByteBuffer#putLong().
@@ -322,9 +375,11 @@
 //                                                                                 ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/UUID#getLeastSignificantBits().
 //                                                                                 ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/UUID#leastSignificantBits.
 //                                                                                                       ^^^^^ reference semanticdb maven jdk 11 java/nio/ByteBuffer#array().
+//                                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#uuidToDB().
   
       // Date/Time types
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#dateTimeType().
       /** Data type for storing both date and time without a time zone. */
       open fun dateTimeType(): String = "DATETIME"
 //             ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#dateTimeType().
@@ -337,7 +392,9 @@
 //                          relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#dateTimeType().
 //                          relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLiteDataTypeProvider#dateTimeType().
 //                             ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#dateTimeType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#timestampType().
       /** Data type for storing date and time without a time zone, represented as a 'timestamp' (not 'datetime'). */
       open fun timestampType(): String = dateTimeType()
 //             ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#timestampType().
@@ -347,7 +404,9 @@
 //                           relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#timestampType().
 //                              ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                       ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#dateTimeType().
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#timestampType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#timestampWithTimeZoneType().
       /** Data type for storing both date and time with a time zone. */
       open fun timestampWithTimeZoneType(): String = "TIMESTAMP WITH TIME ZONE"
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#timestampWithTimeZoneType().
@@ -358,7 +417,9 @@
 //                                       relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#timestampWithTimeZoneType().
 //                                       relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLiteDataTypeProvider#timestampWithTimeZoneType().
 //                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#timestampWithTimeZoneType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#timeType().
       /** Time type for storing time without a time zone. */
       open fun timeType(): String = "TIME"
 //             ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#timeType().
@@ -366,7 +427,9 @@
 //                      documentation ```kotlin\npublic open fun timeType(): String\n```\n\n----\n\n Time type for storing time without a time zone.
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDataTypeProvider#timeType().
 //                         ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#timeType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#dateType().
       /** Data type for storing date without time or a time zone. */
       open fun dateType(): String = "DATE"
 //             ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#dateType().
@@ -374,9 +437,11 @@
 //                      documentation ```kotlin\npublic open fun dateType(): String\n```\n\n----\n\n Data type for storing date without time or a time zone.
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLiteDataTypeProvider#dateType().
 //                         ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#dateType().
   
       // Boolean type
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanType().
       /** Data type for storing boolean values. */
       open fun booleanType(): String = "BOOLEAN"
 //             ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanType().
@@ -385,8 +450,11 @@
 //                         relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDataTypeProvider#booleanType().
 //                         relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#booleanType().
 //                            ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanToStatementString().
       /** Returns the SQL representation of the specified [bool] value. */
+//                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanToStatementString().(bool)
       open fun booleanToStatementString(bool: Boolean): String = bool.toString().uppercase()
 //             ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanToStatementString().
 //                                      display_name booleanToStatementString
@@ -402,8 +470,12 @@
 //                                                               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanToStatementString().(bool)
 //                                                                    ^^^^^^^^ reference semanticdb maven . . kotlin/Boolean#toString().
 //                                                                               ^^^^^^^^^ reference semanticdb maven . . kotlin/text/uppercase(+2).
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanToStatementString().(bool)
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanToStatementString().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanFromStringToBoolean().
       /** Returns the boolean value of the specified SQL [value]. */
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanFromStringToBoolean().(value)
       open fun booleanFromStringToBoolean(value: String): Boolean = value.toBoolean()
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanFromStringToBoolean().
 //                                        display_name booleanFromStringToBoolean
@@ -417,9 +489,12 @@
 //                                                        ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                                  ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanFromStringToBoolean().(value)
 //                                                                        ^^^^^^^^^ reference semanticdb maven . . kotlin/text/toBoolean().
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanFromStringToBoolean().(value)
+//                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanFromStringToBoolean().
   
       // JSON types
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#jsonType().
       /** Data type for storing JSON in a non-binary text format. */
       open fun jsonType(): String = "JSON"
 //             ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#jsonType().
@@ -429,7 +504,9 @@
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDataTypeProvider#jsonType().
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLiteDataTypeProvider#jsonType().
 //                         ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#jsonType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#jsonBType().
       /** Data type for storing JSON in a decomposed binary format. */
       open fun jsonBType(): String =
 //             ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#jsonBType().
@@ -443,10 +520,13 @@
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/UnsupportedByDialectException#`<init>`().
 //                                                                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                                                                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
+//                                                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#jsonBType().
   
       // Misc.
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#processForDefaultValue().
       /** Returns the SQL representation of the specified expression, for it to be used as a column default value. */
+//                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#processForDefaultValue().(e)
       open fun processForDefaultValue(e: Expression<*>): String = when {
 //             ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#processForDefaultValue().
 //                                    display_name processForDefaultValue
@@ -458,31 +538,42 @@
 //                                      documentation ```kotlin\ne: Expression<*>\n```
 //                                       ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
 //                                                       ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#processForDefaultValue().(e)
           e is LiteralOp<*> -> (e.columnType as IColumnType<Any?>).valueAsDefaultString(e.value)
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#processForDefaultValue().(e)
+//             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#
 //                              ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#processForDefaultValue().(e)
 //                                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#columnType.
 //                                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#getColumnType().
+//                                              ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
 //                                                                 ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#valueAsDefaultString().
 //                                                                                      ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#processForDefaultValue().(e)
 //                                                                                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#getValue().
 //                                                                                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#value.
           e is Function<*> -> "$e"
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#processForDefaultValue().(e)
+//             ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Function#
 //                              ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#processForDefaultValue().(e)
           currentDialect is MysqlDialect -> "$e"
 //        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
+//                          ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#
 //                                            ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#processForDefaultValue().(e)
           currentDialect is SQLServerDialect -> "$e"
 //        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
+//                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDialect#
 //                                                ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#processForDefaultValue().(e)
           else -> "($e)"
 //                   ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#processForDefaultValue().(e)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#processForDefaultValue().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#precessOrderByClause().
       /** Returns the SQL representation of the specified [expression], to be used in an ORDER BY clause. */
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#precessOrderByClause().(queryBuilder)
+//                                                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#precessOrderByClause().(expression)
+//                                                                                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#precessOrderByClause().(sortOrder)
       open fun precessOrderByClause(queryBuilder: QueryBuilder, expression: Expression<*>, sortOrder: SortOrder) {
 //             ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#precessOrderByClause().
 //                                  display_name precessOrderByClause
@@ -501,10 +592,14 @@
 //                                                                                                   display_name sortOrder
 //                                                                                                   documentation ```kotlin\nsortOrder: SortOrder\n```
 //                                                                                                    ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#precessOrderByClause().(queryBuilder)
+//                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#precessOrderByClause().(expression)
+//                                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#precessOrderByClause().(sortOrder)
           queryBuilder.append((expression as? IExpressionAlias<*>)?.alias ?: expression, " ", sortOrder.code)
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#precessOrderByClause().(queryBuilder)
 //                     ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#precessOrderByClause().(expression)
+//                                            ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IExpressionAlias#
 //                                                                  ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IExpressionAlias#alias.
 //                                                                  ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IExpressionAlias#getAlias().
 //                                                                           ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#precessOrderByClause().(expression)
@@ -512,8 +607,11 @@
 //                                                                                                      ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#code.
 //                                                                                                      ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#getCode().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#precessOrderByClause().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#hexToDb().
       /** Returns the hex-encoded value to be inserted into the database. */
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#hexToDb().(hexString)
       abstract fun hexToDb(hexString: String): String
 //                 ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#hexToDb().
 //                         display_name hexToDb
@@ -529,4 +627,8 @@
 //                                   documentation ```kotlin\nhexString: String\n```
 //                                    ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                             ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#hexToDb().(hexString)
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#hexToDb().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#`<init>`().

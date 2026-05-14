@@ -13,10 +13,14 @@
 //                             ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/
 //                                ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#
   /**
    * Represents an SQL operator that checks a value, based on the preceding comparison operator,
    * against elements returned by [subSearch].
    */
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#[T]
+//                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#[SubSearch]
+//                                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#`<init>`().
   abstract class AllAnyFromBaseOp<T, SubSearch>(
 //               ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#
 //                                display_name AllAnyFromBaseOp
@@ -35,6 +39,11 @@
 //                                   ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#[SubSearch]
 //                                             display_name FirTypeParameterSymbol SubSearch
 //                                             documentation ```kotlin\nSubSearch\n```
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#[T]
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#[SubSearch]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#`<init>`().(isAny)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#isAny.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#getIsAny().
       /** Returns `true` if at least 1 comparison must evaluate to `true`, or `false` if all comparisons must be `true`. **/
       val isAny: Boolean,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#`<init>`().(isAny)
@@ -48,6 +57,12 @@
 //              display_name isAny
 //              documentation ```kotlin\npublic final val isAny: Boolean\n```\n\n----\n\n Returns `true` if at least 1 comparison must evaluate to `true`, or `false` if all comparisons must be `true`.
 //               ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#`<init>`().(isAny)
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#isAny.
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#getIsAny().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#`<init>`().(subSearch)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#subSearch.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#getSubSearch().
       /** Returns the source of elements to be compared against. */
       val subSearch: SubSearch
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#`<init>`().(subSearch)
@@ -60,8 +75,14 @@
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#subSearch.
 //                  display_name subSearch
 //                  documentation ```kotlin\npublic final val subSearch: SubSearch\n```\n\n----\n\n Returns the source of elements to be compared against.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#`<init>`().(subSearch)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#subSearch.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#getSubSearch().
   ) : Op<T>() {
 //    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -73,6 +94,7 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#toQueryBuilder().(queryBuilder)
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#toQueryBuilder().(queryBuilder)
           +(if (isAny) "ANY" else "ALL")
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
 //              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#getIsAny().
@@ -86,8 +108,11 @@
           +')'
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#registerSubSearchArgument().
       /** Processes the [subSearch] value for inclusion in the generated query. */
+//                                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#registerSubSearchArgument().(subSearch)
       abstract fun QueryBuilder.registerSubSearchArgument(subSearch: SubSearch)
 //                              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#registerSubSearchArgument().
 //                                                        display_name registerSubSearchArgument
@@ -99,12 +124,18 @@
 //                                                        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#registerSubSearchArgument().(subSearch)
 //                                                                  display_name subSearch
 //                                                                  documentation ```kotlin\nsubSearch: SubSearch\n```
+//                                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#registerSubSearchArgument().(subSearch)
+//                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#registerSubSearchArgument().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#
   /**
    * Represents an SQL operator that checks a value, based on the preceding comparison operator,
    * against results returned by a query.
    */
+//                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#[T]
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#`<init>`().
   class AllAnyFromSubQueryOp<T>(
 //      ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#
 //                           display_name AllAnyFromSubQueryOp
@@ -116,20 +147,28 @@
 //                           ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#[T]
 //                             display_name FirTypeParameterSymbol T
 //                             documentation ```kotlin\nT\n```
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#`<init>`().(isAny)
       isAny: Boolean,
 //    ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#`<init>`().(isAny)
 //          display_name isAny
 //          documentation ```kotlin\nisAny: Boolean\n```
 //           ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#`<init>`().(isAny)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#`<init>`().(subQuery)
       subQuery: AbstractQuery<*>
 //    ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#`<init>`().(subQuery)
 //             display_name subQuery
 //             documentation ```kotlin\nsubQuery: AbstractQuery<*>\n```
 //              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#`<init>`().(subQuery)
   ) : AllAnyFromBaseOp<T, AbstractQuery<*>>(isAny, subQuery) {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#
 //                                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#`<init>`().(isAny)
 //                                                 ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#`<init>`().(subQuery)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#registerSubSearchArgument().
+//                                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#registerSubSearchArgument().(subSearch)
       override fun QueryBuilder.registerSubSearchArgument(subSearch: AbstractQuery<*>) {
 //                              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#registerSubSearchArgument().
 //                                                        display_name registerSubSearchArgument
@@ -139,12 +178,16 @@
 //                                                                  display_name subSearch
 //                                                                  documentation ```kotlin\nsubSearch: AbstractQuery<*>\n```
 //                                                                   ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#
+//                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#registerSubSearchArgument().(subSearch)
           subSearch.prepareSQL(this)
 //        ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#registerSubSearchArgument().(subSearch)
 //                  ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#prepareSQL().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#registerSubSearchArgument().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromSubQueryOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#
   /**
    * Represents an SQL operator that checks a value, based on the preceding comparison operator,
    * against an array of values.
@@ -153,6 +196,8 @@
    *
    * **Note** This operation is supported only for 1 dimensional arrays
    */
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#[T]
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#`<init>`().
   class AllAnyFromArrayOp<T : Any>(
 //      ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#
 //                        display_name AllAnyFromArrayOp
@@ -164,16 +209,24 @@
 //                        ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#[T]
 //                          display_name FirTypeParameterSymbol T
 //                          documentation ```kotlin\nT : Any\n```
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#`<init>`().(isAny)
       isAny: Boolean,
 //    ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#`<init>`().(isAny)
 //          display_name isAny
 //          documentation ```kotlin\nisAny: Boolean\n```
 //           ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#`<init>`().(isAny)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#`<init>`().(array)
       array: List<T>,
 //    ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#`<init>`().(array)
 //          display_name array
 //          documentation ```kotlin\narray: List<T>\n```
 //           ^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#`<init>`().(array)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#`<init>`().(delegateType)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#delegateType.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#getDelegateType().
       private val delegateType: ColumnType<T>
 //                ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#`<init>`().(delegateType)
 //                             display_name delegateType
@@ -186,10 +239,16 @@
 //                             display_name delegateType
 //                             documentation ```kotlin\nprivate get(): ColumnType<T>\n```
 //                              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnType#
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#`<init>`().(delegateType)
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#delegateType.
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#getDelegateType().
   ) : AllAnyFromBaseOp<T, List<T>>(isAny, array) {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#
 //                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#`<init>`().(isAny)
 //                                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#`<init>`().(array)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#registerSubSearchArgument().
+//                                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#registerSubSearchArgument().(subSearch)
       override fun QueryBuilder.registerSubSearchArgument(subSearch: List<T>) {
 //                              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#registerSubSearchArgument().
 //                                                        display_name registerSubSearchArgument
@@ -199,6 +258,7 @@
 //                                                                  display_name subSearch
 //                                                                  documentation ```kotlin\nsubSearch: List<T>\n```
 //                                                                   ^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#registerSubSearchArgument().(subSearch)
           registerArgument(ArrayColumnType<T, List<T>>(delegateType), subSearch)
 //        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#registerArgument(+1).
 //                         ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ArrayColumnType#`<init>`(+1).
@@ -206,14 +266,21 @@
 //                                                     ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#getDelegateType().
 //                                                                    ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#registerSubSearchArgument().(subSearch)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#registerSubSearchArgument().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromArrayOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#
   /**
    * Represents an SQL operator that checks a value, based on the preceding comparison operator,
    * against elements in a single-column table.
    *
    * **Note** This operation is only supported by MySQL, PostgreSQL, and H2 dialects.
    */
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#[T]
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#`<init>`().
+//                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#`<init>`().(isAny)
+//                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#`<init>`().(table)
   class AllAnyFromTableOp<T>(isAny: Boolean, table: Table) : AllAnyFromBaseOp<T, Table>(isAny, table) {
 //      ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#
 //                        display_name AllAnyFromTableOp
@@ -236,6 +303,12 @@
 //                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#
 //                                                                                      ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#`<init>`().(isAny)
 //                                                                                             ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#`<init>`().(table)
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#[T]
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#`<init>`().(isAny)
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#`<init>`().(table)
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#registerSubSearchArgument().
+//                                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#registerSubSearchArgument().(subSearch)
       override fun QueryBuilder.registerSubSearchArgument(subSearch: Table) {
 //                              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#registerSubSearchArgument().
 //                                                        display_name registerSubSearchArgument
@@ -245,6 +318,7 @@
 //                                                                  display_name subSearch
 //                                                                  documentation ```kotlin\nsubSearch: Table\n```
 //                                                                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#registerSubSearchArgument().(subSearch)
           +"TABLE "
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
           +subSearch.tableName
@@ -253,14 +327,20 @@
 //                   ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#getTableName().
 //                   ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#tableName.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#registerSubSearchArgument().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromTableOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#
   /**
    * Represents an SQL operator that checks a value, based on the preceding comparison operator,
    * against a collection of values returned by the provided expression.
    *
    * **Note** This operation is only supported by PostgreSQL and H2 dialects.
    */
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#[E]
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#[T]
+//                                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#`<init>`().
   class AllAnyFromExpressionOp<E, T : List<E>?>(
 //      ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#
 //                             display_name AllAnyFromExpressionOp
@@ -275,20 +355,29 @@
 //                                ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#[T]
 //                                  display_name FirTypeParameterSymbol T
 //                                  documentation ```kotlin\nT : List<E>?\n```
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#[E]
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#`<init>`().(isAny)
       isAny: Boolean,
 //    ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#`<init>`().(isAny)
 //          display_name isAny
 //          documentation ```kotlin\nisAny: Boolean\n```
 //           ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#`<init>`().(isAny)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#`<init>`().(expression)
       expression: Expression<T>
 //    ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#`<init>`().(expression)
 //               display_name expression
 //               documentation ```kotlin\nexpression: Expression<T>\n```
 //                ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#`<init>`().(expression)
   ) : AllAnyFromBaseOp<E, Expression<T>>(isAny, expression) {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromBaseOp#
 //                                       ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#`<init>`().(isAny)
 //                                              ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#`<init>`().(expression)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#registerSubSearchArgument().
+//                                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#registerSubSearchArgument().(subSearch)
       override fun QueryBuilder.registerSubSearchArgument(subSearch: Expression<T>) {
 //                              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#registerSubSearchArgument().
 //                                                        display_name registerSubSearchArgument
@@ -298,8 +387,11 @@
 //                                                                  display_name subSearch
 //                                                                  documentation ```kotlin\nsubSearch: Expression<T>\n```
 //                                                                   ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#registerSubSearchArgument().(subSearch)
           append(subSearch)
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+2).
 //               ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#registerSubSearchArgument().(subSearch)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#registerSubSearchArgument().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/AllAnyFromExpressionOp#

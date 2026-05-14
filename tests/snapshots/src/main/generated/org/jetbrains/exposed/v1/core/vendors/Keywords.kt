@@ -6,6 +6,8 @@
 //                                 ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/
 //                                      ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VENDORS_KEYWORDS.
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getVENDORS_KEYWORDS().
   /** Returns a map of vendor specific keywords. */
   val VENDORS_KEYWORDS: Map<String, List<String>> = mapOf(
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VENDORS_KEYWORDS.
@@ -22,7 +24,11 @@
 //                              ^^ reference semanticdb maven . . kotlin/to().
 //                                 ^^^^^^ reference semanticdb maven . . kotlin/collections/listOf(+1).
   )
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VENDORS_KEYWORDS.
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getVENDORS_KEYWORDS().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ANSI_SQL_2003_KEYWORDS.
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getANSI_SQL_2003_KEYWORDS().
   /** Returns a set with all the keywords that are part of the SQL:2003 standard. */
   val ANSI_SQL_2003_KEYWORDS: Set<String> = setOf(
 //    ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ANSI_SQL_2003_KEYWORDS.
@@ -530,3 +536,5 @@
       "YEAR",
       "ZONE"
   )
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ANSI_SQL_2003_KEYWORDS.
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getANSI_SQL_2003_KEYWORDS().

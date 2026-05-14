@@ -42,10 +42,15 @@
 //            ^^^ reference semanticdb maven . . java/sql/
 //                ^^^^^ reference semanticdb maven jdk 11 java/sql/Types#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#
   /**
    * Base class responsible for shared utility methods needed for retrieving and storing information about
    * the underlying driver and associated [database].
    */
+//                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#`<init>`().
+//                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#`<init>`().(database)
+//                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#database.
+//                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getDatabase().
   abstract class ExposedDatabaseMetadata(val database: String) {
 //               ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#
 //                                       display_name ExposedDatabaseMetadata
@@ -64,12 +69,19 @@
 //                                                    display_name database
 //                                                    documentation ```kotlin\npublic get(): String\n```
 //                                                     ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#`<init>`().(database)
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#database.
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getDatabase().
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#resetCurrentScheme().
       /** Clears and resets any stored information about the database's current schema to default values. */
       abstract fun resetCurrentScheme()
 //                 ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#resetCurrentScheme().
 //                                    display_name resetCurrentScheme
 //                                    documentation ```kotlin\npublic abstract fun resetCurrentScheme(): Unit\n\n```\n\n----\n\n Clears and resets any stored information about the database's current schema to default values.
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#resetCurrentScheme().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#resolveReferenceOption().
       @Suppress("ForbiddenComment")
       // TODO: THIS should become protected after the usage in DatabaseDialect is fully deprecated
       /**
@@ -77,6 +89,7 @@
        * or `null` if the database result is an invalid string without a corresponding match.
        */
       @InternalApi
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#resolveReferenceOption().(refOption)
       abstract fun resolveReferenceOption(refOption: String): ReferenceOption?
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#resolveReferenceOption().
 //                                        display_name resolveReferenceOption
@@ -86,13 +99,19 @@
 //                                                  documentation ```kotlin\nrefOption: String\n```
 //                                                   ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ReferenceOption#
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#resolveReferenceOption().(refOption)
+//                                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#resolveReferenceOption().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#cleanCache().
       /** Clears any cached values. */
       abstract fun cleanCache()
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#cleanCache().
 //                            display_name cleanCache
 //                            documentation ```kotlin\npublic abstract fun cleanCache(): Unit\n\n```\n\n----\n\n Clears any cached values.
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#cleanCache().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#identifierManager.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getIdentifierManager().
       /** The database-specific and metadata-reliant implementation of [IdentifierManagerApi]. */
       abstract val identifierManager: IdentifierManagerApi
 //                 ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getIdentifierManager().
@@ -102,7 +121,10 @@
 //                                   display_name identifierManager
 //                                   documentation ```kotlin\npublic abstract val identifierManager: IdentifierManagerApi\n```\n\n----\n\n The database-specific and metadata-reliant implementation of [IdentifierManagerApi].
 //                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#identifierManager.
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getIdentifierManager().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#sanitizedDefault().
       /**
        * Here is the table of default values which are returned from the column `"COLUMN_DEF"` depending on how it was configured:
        *
@@ -139,6 +161,7 @@
       @Suppress("ForbiddenComment")
       // TODO: move to the utility class, rename
       @InternalApi
+//                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#sanitizedDefault().(defaultValue)
       protected fun sanitizedDefault(defaultValue: String): String? {
 //                  ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#sanitizedDefault().
 //                                   display_name sanitizedDefault
@@ -148,12 +171,16 @@
 //                                                documentation ```kotlin\ndefaultValue: String\n```
 //                                                 ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                          ^^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#sanitizedDefault().(defaultValue)
+//        ⌄ enclosing_range_start local 0
           val dialect = currentDialect
 //            ^^^^^^^ definition local 0
 //                    display_name dialect
 //                    documentation ```kotlin\nlocal val dialect: DatabaseDialect\n```
 //                      ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                      ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
+//                                   ⌃ enclosing_range_end local 0
+//        ⌄ enclosing_range_start local 1
           val h2Mode = dialect.h2Mode
 //            ^^^^^^ definition local 1
 //                   display_name h2Mode
@@ -161,10 +188,12 @@
 //                     ^^^^^^^ reference local 0
 //                             ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getH2Mode().
 //                             ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/h2Mode.
+//                                  ⌃ enclosing_range_end local 1
           return when {
               // Check for MariaDB must be before MySql because MariaDBDialect as a class inherits MysqlDialect
               dialect is MariaDBDialect || h2Mode == H2CompatibilityMode.MariaDB -> when {
 //            ^^^^^^^ reference local 0
+//                       ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#
 //                                         ^^^^^^ reference local 1
 //                                                                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#MariaDB.
                   defaultValue.startsWith("b'") -> defaultValue.substringAfter("b'").trim('\'')
@@ -180,10 +209,12 @@
               // A special case, because MySql returns default string "NULL" as string "NULL", but other DBs return it as "'NULL'"
               dialect is MysqlDialect && defaultValue == "NULL" -> defaultValue
 //            ^^^^^^^ reference local 0
+//                       ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#
 //                                       ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#sanitizedDefault().(defaultValue)
 //                                                                 ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#sanitizedDefault().(defaultValue)
               dialect is MysqlDialect || h2Mode == H2CompatibilityMode.MySQL -> when {
 //            ^^^^^^^ reference local 0
+//                       ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#
 //                                       ^^^^^^ reference local 1
 //                                                                     ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#MySQL.
                   defaultValue.startsWith("b'") -> defaultValue.substringAfter("b'").trim('\'')
@@ -198,11 +229,13 @@
               }
               dialect is SQLServerDialect -> defaultValue.trim('(', ')').extractNullAndStringFromDefaultValue()
 //            ^^^^^^^ reference local 0
+//                       ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDialect#
 //                                           ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#sanitizedDefault().(defaultValue)
 //                                                        ^^^^ reference semanticdb maven . . kotlin/text/trim(+3).
 //                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#extractNullAndStringFromDefaultValue().
               dialect is OracleDialect -> defaultValue.trim().extractNullAndStringFromDefaultValue()
 //            ^^^^^^^ reference local 0
+//                       ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDialect#
 //                                        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#sanitizedDefault().(defaultValue)
 //                                                     ^^^^ reference semanticdb maven . . kotlin/text/trim(+5).
 //                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#extractNullAndStringFromDefaultValue().
@@ -211,7 +244,9 @@
 //                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#extractNullAndStringFromDefaultValue().
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#sanitizedDefault().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#extractNullAndStringFromDefaultValue().
       private fun String.extractNullAndStringFromDefaultValue() = when {
 //                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#extractNullAndStringFromDefaultValue().
 //                                                            display_name extractNullAndStringFromDefaultValue
@@ -224,9 +259,12 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/text/trim(+3).
           else -> this
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#extractNullAndStringFromDefaultValue().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#asColumnMetadata().
       /** Extracts result data about a specific column as [ColumnMetadata]. */
       @InternalApi
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#asColumnMetadata().(prefetchedColumnTypes)
       protected fun RowApi.asColumnMetadata(prefetchedColumnTypes: Map<String, String> = emptyMap()): ColumnMetadata {
 //                         ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#asColumnMetadata().
 //                                          display_name asColumnMetadata
@@ -237,6 +275,9 @@
 //                                                                 ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#
 //                                                                                       ^^^^^^^^ reference semanticdb maven . . kotlin/collections/emptyMap().
 //                                                                                                    ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#
+//                                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#asColumnMetadata().(prefetchedColumnTypes)
+//        ⌄ enclosing_range_start local 2
+//                                                                                                    ⌄ enclosing_range_start local 3
           val defaultDbValue = getObject("COLUMN_DEF", java.lang.String::class.java)?.toString()?.let {
 //            ^^^^^^^^^^^^^^ definition local 2
 //                           display_name defaultDbValue
@@ -246,35 +287,44 @@
 //                                                                             ^^^^ reference semanticdb maven . . kotlin/jvm/java.
 //                                                                                    ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/String#toString().
 //                                                                                                ^^^ reference semanticdb maven . . kotlin/let().
-//                                                                                                    ^ definition semanticdb maven . . (it) 2:9
+//                                                                                                    ^ definition local 3 2:9
 //                                                                                                      display_name it
-//                                                                                                      documentation ```kotlin\nit: Int?\n```
+//                                                                                                      documentation ```kotlin\nit: String\n```
               sanitizedDefault(it)
 //            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#sanitizedDefault().
-//                             ^^ reference semanticdb maven . . (it)
+//                             ^^ reference local 3
           }
+//        ⌃ enclosing_range_end local 2
+//        ⌃ enclosing_range_end local 3
+//        ⌄ enclosing_range_start local 4
           val autoIncrement = getObject("IS_AUTOINCREMENT", java.lang.String::class.java)?.toString() == "YES"
-//            ^^^^^^^^^^^^^ definition local 3
+//            ^^^^^^^^^^^^^ definition local 4
 //                          display_name autoIncrement
 //                          documentation ```kotlin\nlocal val autoIncrement: Boolean\n```
 //                            ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/RowApi#getObject(+3).
 //                                                                                  ^^^^ reference semanticdb maven . . kotlin/jvm/getJava().
 //                                                                                  ^^^^ reference semanticdb maven . . kotlin/jvm/java.
 //                                                                                         ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/String#toString().
+//                                                                                                           ⌃ enclosing_range_end local 4
+//        ⌄ enclosing_range_start local 5
           val type = getObject("DATA_TYPE")?.toString()?.toInt() ?: 0
-//            ^^^^ definition local 4
+//            ^^^^ definition local 5
 //                 display_name type
 //                 documentation ```kotlin\nlocal val type: Int\n```
 //                   ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/RowApi#getObject(+1).
 //                                           ^^^^^^^^ reference semanticdb maven . . kotlin/Any#toString().
 //                                                       ^^^^^ reference semanticdb maven . . kotlin/text/toInt().
+//                                                                  ⌃ enclosing_range_end local 5
+//        ⌄ enclosing_range_start local 6
           val name = getStringOrThrow("COLUMN_NAME")
-//            ^^^^ definition local 5
+//            ^^^^ definition local 6
 //                 display_name name
 //                 documentation ```kotlin\nlocal val name: String\n```
 //                   ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getStringOrThrow().
+//                                                 ⌃ enclosing_range_end local 6
+//        ⌄ enclosing_range_start local 7
           val nullable = getObject("NULLABLE")?.toString()?.lowercase() in listOf("true", "1")
-//            ^^^^^^^^ definition local 6
+//            ^^^^^^^^ definition local 7
 //                     display_name nullable
 //                     documentation ```kotlin\nlocal val nullable: Boolean\n```
 //                       ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/RowApi#getObject(+1).
@@ -282,69 +332,88 @@
 //                                                          ^^^^^^^^^ reference semanticdb maven . . kotlin/text/lowercase(+2).
 //                                                                      ^^ reference semanticdb maven . . kotlin/collections/contains(+9).
 //                                                                         ^^^^^^ reference semanticdb maven . . kotlin/collections/listOf(+1).
+//                                                                                           ⌃ enclosing_range_end local 7
+//        ⌄ enclosing_range_start local 8
+//                                                                        ⌄ enclosing_range_start local 9
           val size = getObject("COLUMN_SIZE")?.toString()?.toInt().takeIf { it != 0 }
-//            ^^^^ definition local 7
+//            ^^^^ definition local 8
 //                 display_name size
 //                 documentation ```kotlin\nlocal val size: Int?\n```
 //                   ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/RowApi#getObject(+1).
 //                                             ^^^^^^^^ reference semanticdb maven . . kotlin/Any#toString().
 //                                                         ^^^^^ reference semanticdb maven . . kotlin/text/toInt().
 //                                                                 ^^^^^^ reference semanticdb maven . . kotlin/takeIf().
-//                                                                        ^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                        ^^^^^^^^^^^ definition local 9
 //                                                                                    display_name it
 //                                                                                    documentation ```kotlin\nit: Int?\n```
-//                                                                          ^^ reference semanticdb maven . . (it)
+//                                                                          ^^ reference local 9
+//                                                                                  ⌃ enclosing_range_end local 8
+//                                                                                  ⌃ enclosing_range_end local 9
+//        ⌄ enclosing_range_start local 10
+//                                                                            ⌄ enclosing_range_start local 11
           val scale = getObject("DECIMAL_DIGITS")?.toString()?.toInt().takeIf { it != 0 }
-//            ^^^^^ definition local 8
+//            ^^^^^ definition local 10
 //                  display_name scale
 //                  documentation ```kotlin\nlocal val scale: Int?\n```
 //                    ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/RowApi#getObject(+1).
 //                                                 ^^^^^^^^ reference semanticdb maven . . kotlin/Any#toString().
 //                                                             ^^^^^ reference semanticdb maven . . kotlin/text/toInt().
 //                                                                     ^^^^^^ reference semanticdb maven . . kotlin/takeIf().
-//                                                                            ^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                            ^^^^^^^^^^^ definition local 11
 //                                                                                        display_name it
 //                                                                                        documentation ```kotlin\nit: Int?\n```
-//                                                                              ^^ reference semanticdb maven . . (it)
+//                                                                              ^^ reference local 11
+//                                                                                      ⌃ enclosing_range_end local 10
+//                                                                                      ⌃ enclosing_range_end local 11
+//        ⌄ enclosing_range_start local 12
           val sqlType = getColumnType(this, prefetchedColumnTypes)
-//            ^^^^^^^ definition local 9
+//            ^^^^^^^ definition local 12
 //                    display_name sqlType
 //                    documentation ```kotlin\nlocal val sqlType: String\n```
 //                      ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getColumnType().
 //                                          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#asColumnMetadata().(prefetchedColumnTypes)
+//                                                               ⌃ enclosing_range_end local 12
   
+//                                                                                                                ⌄ enclosing_range_start local 13
           return ColumnMetadata(name, type, sqlType, nullable, size, scale, autoIncrement, defaultDbValue?.takeIf { !autoIncrement })
 //               ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().
-//                              ^^^^ reference local 5
-//                                    ^^^^ reference local 4
-//                                          ^^^^^^^ reference local 9
-//                                                   ^^^^^^^^ reference local 6
-//                                                             ^^^^ reference local 7
-//                                                                   ^^^^^ reference local 8
-//                                                                          ^^^^^^^^^^^^^ reference local 3
+//                              ^^^^ reference local 6
+//                                    ^^^^ reference local 5
+//                                          ^^^^^^^ reference local 12
+//                                                   ^^^^^^^^ reference local 7
+//                                                             ^^^^ reference local 8
+//                                                                   ^^^^^ reference local 10
+//                                                                          ^^^^^^^^^^^^^ reference local 4
 //                                                                                         ^^^^^^^^^^^^^^ reference local 2
 //                                                                                                         ^^^^^^ reference semanticdb maven . . kotlin/takeIf().
-//                                                                                                                ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                                                                ^^^^^^^^^^^^^^^^^^ definition local 13
 //                                                                                                                                   display_name it
-//                                                                                                                                   documentation ```kotlin\nit: Int?\n```
+//                                                                                                                                   documentation ```kotlin\nit: String\n```
 //                                                                                                                  ^ reference semanticdb maven . . kotlin/Boolean#not().
-//                                                                                                                   ^^^^^^^^^^^^^ reference local 3
+//                                                                                                                   ^^^^^^^^^^^^^ reference local 4
+//                                                                                                                                 ⌃ enclosing_range_end local 13
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#asColumnMetadata().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getStringOrThrow().
       private fun RowApi.getStringOrThrow(
 //                       ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getStringOrThrow().
 //                                        display_name getStringOrThrow
 //                                        documentation ```kotlin\nprivate final fun RowApi.getStringOrThrow(field: String, transform: String.() -> String = ...): String\n```
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getStringOrThrow().(field)
           field: String,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getStringOrThrow().(field)
 //              display_name field
 //              documentation ```kotlin\nfield: String\n```
 //               ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getStringOrThrow().(field)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getStringOrThrow().(transform)
           transform: String.() -> String = { this }
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getStringOrThrow().(transform)
 //                  display_name transform
 //                  documentation ```kotlin\ntransform: String.() -> String = ...\n```
 //                   ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Function1#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getStringOrThrow().(transform)
       ): String {
 //       ^^^^^^ reference semanticdb maven . . kotlin/String#
           return getObject(field, java.lang.String::class.java)
@@ -361,7 +430,11 @@
 //               ^^^^^ reference semanticdb maven . . kotlin/error().
 //                                                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getStringOrThrow().(field)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getStringOrThrow().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getColumnType().
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getColumnType().(result)
+//                                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getColumnType().(prefetchedColumnTypes)
       private fun getColumnType(result: RowApi, prefetchedColumnTypes: Map<String, String>): String {
 //                ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getColumnType().
 //                              display_name getColumnType
@@ -375,58 +448,72 @@
 //                                                                    documentation ```kotlin\nprefetchedColumnTypes: Map<String, String>\n```
 //                                                                     ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#
 //                                                                                           ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getColumnType().(result)
+//                                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getColumnType().(prefetchedColumnTypes)
           if (currentDialect !is H2Dialect) return ""
 //            ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //            ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
+//                               ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#
   
+//        ⌄ enclosing_range_start local 14
           val columnName = result.getStringOrThrow("COLUMN_NAME")
-//            ^^^^^^^^^^ definition local 10
+//            ^^^^^^^^^^ definition local 14
 //                       display_name columnName
 //                       documentation ```kotlin\nlocal val columnName: String\n```
 //                         ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getColumnType().(result)
 //                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getStringOrThrow().
+//                                                              ⌃ enclosing_range_end local 14
+//        ⌄ enclosing_range_start local 15
           val columnType = prefetchedColumnTypes[columnName]
-//            ^^^^^^^^^^ definition local 11
+//            ^^^^^^^^^^ definition local 15
 //                       display_name columnType
 //                       documentation ```kotlin\nlocal val columnType: String\n```
 //                         ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getColumnType().(prefetchedColumnTypes)
 //                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#get().
-//                                               ^^^^^^^^^^ reference local 10
+//                                               ^^^^^^^^^^ reference local 14
               ?: result.getStringOrThrow("TYPE_NAME") { uppercase() }
 //               ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getColumnType().(result)
 //                      ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getStringOrThrow().
 //                                                      ^^^^^^^^^ reference semanticdb maven . . kotlin/text/uppercase(+2).
+//                                                                  ⌃ enclosing_range_end local 15
+//        ⌄ enclosing_range_start local 16
           val dataType = result.getObject("DATA_TYPE")?.toString()?.toInt()
-//            ^^^^^^^^ definition local 12
+//            ^^^^^^^^ definition local 16
 //                     display_name dataType
 //                     documentation ```kotlin\nlocal val dataType: Int?\n```
 //                       ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getColumnType().(result)
 //                              ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/RowApi#getObject(+1).
 //                                                      ^^^^^^^^ reference semanticdb maven . . kotlin/Any#toString().
 //                                                                  ^^^^^ reference semanticdb maven . . kotlin/text/toInt().
+//                                                                        ⌃ enclosing_range_end local 16
           return if (dataType == Types.ARRAY) {
-//                   ^^^^^^^^ reference local 12
+//                   ^^^^^^^^ reference local 16
 //                                     ^^^^^ reference semanticdb maven jdk 11 java/sql/Types#ARRAY.
+//            ⌄ enclosing_range_start local 17
               val baseType = columnType.substringBefore(" ARRAY")
-//                ^^^^^^^^ definition local 13
+//                ^^^^^^^^ definition local 17
 //                         display_name baseType
 //                         documentation ```kotlin\nlocal val baseType: String\n```
-//                           ^^^^^^^^^^ reference local 11
+//                           ^^^^^^^^^^ reference local 15
 //                                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/substringBefore(+1).
+//                                                              ⌃ enclosing_range_end local 17
               normalizedColumnType(baseType) + columnType.replaceBefore(" ARRAY", "")
 //            ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().
-//                                 ^^^^^^^^ reference local 13
+//                                 ^^^^^^^^ reference local 17
 //                                           ^ reference semanticdb maven . . kotlin/String#plus().
-//                                             ^^^^^^^^^^ reference local 11
+//                                             ^^^^^^^^^^ reference local 15
 //                                                        ^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/replaceBefore(+1).
           } else {
               normalizedColumnType(columnType)
 //            ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().
-//                                 ^^^^^^^^^^ reference local 11
+//                                 ^^^^^^^^^^ reference local 15
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#getColumnType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().
       /** Returns the normalized column type. */
+//                                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().(columnType)
       private fun normalizedColumnType(columnType: String): String {
 //                ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().
 //                                     display_name normalizedColumnType
@@ -436,20 +523,28 @@
 //                                                documentation ```kotlin\ncolumnType: String\n```
 //                                                 ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().(columnType)
+//        ⌄ enclosing_range_start local 18
           val h2Mode = currentDialect.h2Mode
-//            ^^^^^^ definition local 14
+//            ^^^^^^ definition local 18
 //                   display_name h2Mode
 //                   documentation ```kotlin\nlocal val h2Mode: H2Dialect.H2CompatibilityMode?\n```
 //                     ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                     ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
 //                                    ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getH2Mode().
 //                                    ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/h2Mode.
+//                                         ⌃ enclosing_range_end local 18
           return when {
+//                                                                                   ⌄ enclosing_range_start local 19
               columnType.matches(Regex("CHARACTER VARYING(?:\\(\\d+\\))?")) -> when (h2Mode) {
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().(columnType)
 //                       ^^^^^^^ reference semanticdb maven . . kotlin/text/matches().
 //                               ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
-//                                                                                   ^^^^^^ reference local 14
+//                                                                                   ^^^^^^ reference local 18
+//                                                                                   ^^^^^^ definition local 19
+//                                                                                          display_name <when-subject>
+//                                                                                          documentation ```kotlin\nlocal val <when-subject>: H2Dialect.H2CompatibilityMode?\n```
+//                                                                                        ⌃ enclosing_range_end local 19
                   H2CompatibilityMode.Oracle -> columnType.replace("CHARACTER VARYING", "VARCHAR2")
 //                                    ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#Oracle.
 //                                              ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().(columnType)
@@ -464,11 +559,16 @@
 //                               ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
 //                                                                     ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().(columnType)
 //                                                                                ^^^^^^^ reference semanticdb maven . . kotlin/text/replace(+1).
+//                                                                                ⌄ enclosing_range_start local 20
               columnType.matches(Regex("BINARY VARYING(?:\\(\\d+\\))?")) -> when (h2Mode) {
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().(columnType)
 //                       ^^^^^^^ reference semanticdb maven . . kotlin/text/matches().
 //                               ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
-//                                                                                ^^^^^^ reference local 14
+//                                                                                ^^^^^^ reference local 18
+//                                                                                ^^^^^^ definition local 20
+//                                                                                       display_name <when-subject>
+//                                                                                       documentation ```kotlin\nlocal val <when-subject>: H2Dialect.H2CompatibilityMode?\n```
+//                                                                                     ⌃ enclosing_range_end local 20
                   H2CompatibilityMode.PostgreSQL -> "bytea"
 //                                    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#PostgreSQL.
                   H2CompatibilityMode.Oracle -> columnType.replace("BINARY VARYING", "RAW")
@@ -479,9 +579,14 @@
 //                        ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().(columnType)
 //                                   ^^^^^^^ reference semanticdb maven . . kotlin/text/replace(+1).
               }
+//                                             ⌄ enclosing_range_start local 21
               columnType == "BOOLEAN" -> when (h2Mode) {
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().(columnType)
-//                                             ^^^^^^ reference local 14
+//                                             ^^^^^^ reference local 18
+//                                             ^^^^^^ definition local 21
+//                                                    display_name <when-subject>
+//                                                    documentation ```kotlin\nlocal val <when-subject>: H2Dialect.H2CompatibilityMode?\n```
+//                                                  ⌃ enclosing_range_end local 21
                   H2CompatibilityMode.SQLServer -> "BIT"
 //                                    ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#SQLServer.
                   else -> columnType
@@ -493,10 +598,12 @@
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().(columnType)
               columnType == "INTEGER" && h2Mode != H2CompatibilityMode.Oracle -> "INT"
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().(columnType)
-//                                       ^^^^^^ reference local 14
+//                                       ^^^^^^ reference local 18
 //                                                                     ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#Oracle.
               else -> columnType
 //                    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().(columnType)
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#normalizedColumnType().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedDatabaseMetadata#

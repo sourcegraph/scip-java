@@ -21,6 +21,7 @@
 //                                     ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/
 //                                                  ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#
   /**
    * Common interface for all database dialects.
    */
@@ -30,6 +31,8 @@
 //                          display_name DatabaseDialect
 //                          documentation ```kotlin\n@Suppress(...) public abstract interface DatabaseDialect : Any\n```\n\n----\n\n\n Common interface for all database dialects.\n
 //                          relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VendorDialect#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#name.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getName().
       /** Name of this dialect. */
       val name: String
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getName().
@@ -39,7 +42,11 @@
 //             display_name name
 //             documentation ```kotlin\npublic abstract val name: String\n```\n\n----\n\n Name of this dialect.
 //              ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#name.
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getName().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dataTypeProvider.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getDataTypeProvider().
       /** Data type provider of this dialect. */
       val dataTypeProvider: DataTypeProvider
 //        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dataTypeProvider.
@@ -49,7 +56,11 @@
 //                         display_name dataTypeProvider
 //                         documentation ```kotlin\npublic get(): DataTypeProvider\n```\n\n----\n\n Data type provider of this dialect.
 //                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dataTypeProvider.
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getDataTypeProvider().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#functionProvider.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getFunctionProvider().
       /** Function provider of this dialect. */
       val functionProvider: FunctionProvider
 //        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#functionProvider.
@@ -59,8 +70,12 @@
 //                         display_name functionProvider
 //                         documentation ```kotlin\npublic get(): FunctionProvider\n```\n\n----\n\n Function provider of this dialect.
 //                          ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#functionProvider.
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getFunctionProvider().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsIfNotExists.
       /** Returns `true` if the dialect supports the `IF EXISTS`/`IF NOT EXISTS` option when creating, altering or dropping objects, `false` otherwise. */
+//                                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsIfNotExists().
       val supportsIfNotExists: Boolean get() = true
 //        ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsIfNotExists.
 //                            display_name supportsIfNotExists
@@ -69,8 +84,12 @@
 //                                     ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsIfNotExists().
 //                                         display_name supportsIfNotExists
 //                                         documentation ```kotlin\npublic get(): Boolean\n```
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsIfNotExists.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsIfNotExists().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsCreateSequence.
       /** Returns `true` if the dialect supports the creation of sequences, `false` otherwise. */
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsCreateSequence().
       val supportsCreateSequence: Boolean get() = true
 //        ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsCreateSequence.
 //                               display_name supportsCreateSequence
@@ -79,8 +98,12 @@
 //                                        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsCreateSequence().
 //                                            display_name supportsCreateSequence
 //                                            documentation ```kotlin\npublic get(): Boolean\n```
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsCreateSequence.
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsCreateSequence().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#needsSequenceToAutoInc.
       /** Returns `true` if the dialect requires the use of a sequence to create an auto-increment column, `false` otherwise. */
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getNeedsSequenceToAutoInc().
       val needsSequenceToAutoInc: Boolean get() = false
 //        ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#needsSequenceToAutoInc.
 //                               display_name needsSequenceToAutoInc
@@ -89,8 +112,12 @@
 //                                        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getNeedsSequenceToAutoInc().
 //                                            display_name needsSequenceToAutoInc
 //                                            documentation ```kotlin\npublic get(): Boolean\n```
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#needsSequenceToAutoInc.
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getNeedsSequenceToAutoInc().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#defaultReferenceOption.
       /** Returns the default reference option for the dialect. */
+//                                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getDefaultReferenceOption().
       val defaultReferenceOption: ReferenceOption get() = ReferenceOption.RESTRICT
 //        ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#defaultReferenceOption.
 //                               display_name defaultReferenceOption
@@ -100,8 +127,12 @@
 //                                                    display_name defaultReferenceOption
 //                                                    documentation ```kotlin\npublic get(): ReferenceOption\n```
 //                                                                        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ReferenceOption#RESTRICT.
+//                                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#defaultReferenceOption.
+//                                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getDefaultReferenceOption().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#needsQuotesWhenSymbolsInNames.
       /** Returns `true` if the dialect requires the use of quotes when using symbols in object names, `false` otherwise. */
+//                                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getNeedsQuotesWhenSymbolsInNames().
       val needsQuotesWhenSymbolsInNames: Boolean get() = true
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#needsQuotesWhenSymbolsInNames.
 //                                      display_name needsQuotesWhenSymbolsInNames
@@ -110,7 +141,11 @@
 //                                               ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getNeedsQuotesWhenSymbolsInNames().
 //                                                   display_name needsQuotesWhenSymbolsInNames
 //                                                   documentation ```kotlin\npublic get(): Boolean\n```
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#needsQuotesWhenSymbolsInNames.
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getNeedsQuotesWhenSymbolsInNames().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsMultipleGeneratedKeys.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsMultipleGeneratedKeys().
       /** Returns `true` if the dialect supports returning multiple generated keys as a result of an insert operation, `false` otherwise. */
       val supportsMultipleGeneratedKeys: Boolean
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsMultipleGeneratedKeys().
@@ -120,8 +155,12 @@
 //                                      display_name supportsMultipleGeneratedKeys
 //                                      documentation ```kotlin\npublic abstract val supportsMultipleGeneratedKeys: Boolean\n```\n\n----\n\n Returns `true` if the dialect supports returning multiple generated keys as a result of an insert operation, `false` otherwise.
 //                                       ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsMultipleGeneratedKeys.
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsMultipleGeneratedKeys().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSequenceAsGeneratedKeys.
       /** Returns `true` if the dialect supports returning generated keys obtained from a sequence. */
+//                                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsSequenceAsGeneratedKeys().
       val supportsSequenceAsGeneratedKeys: Boolean get() = supportsCreateSequence
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSequenceAsGeneratedKeys.
 //                                        display_name supportsSequenceAsGeneratedKeys
@@ -132,8 +171,12 @@
 //                                                     documentation ```kotlin\npublic get(): Boolean\n```
 //                                                         ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsCreateSequence().
 //                                                         ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsCreateSequence.
+//                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSequenceAsGeneratedKeys.
+//                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsSequenceAsGeneratedKeys().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsOnlyIdentifiersInGeneratedKeys.
       /** Returns `true` if the dialect supports only returning generated keys that are identity columns. */
+//                                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsOnlyIdentifiersInGeneratedKeys().
       val supportsOnlyIdentifiersInGeneratedKeys: Boolean get() = false
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsOnlyIdentifiersInGeneratedKeys.
 //                                               display_name supportsOnlyIdentifiersInGeneratedKeys
@@ -142,8 +185,12 @@
 //                                                        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsOnlyIdentifiersInGeneratedKeys().
 //                                                            display_name supportsOnlyIdentifiersInGeneratedKeys
 //                                                            documentation ```kotlin\npublic get(): Boolean\n```
+//                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsOnlyIdentifiersInGeneratedKeys.
+//                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsOnlyIdentifiersInGeneratedKeys().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsTernaryAffectedRowValues.
       /** Returns `true` if the dialect supports an upsert operation returning an affected-row value of 0, 1, or 2. */
+//                                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsTernaryAffectedRowValues().
       val supportsTernaryAffectedRowValues: Boolean get() = false
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsTernaryAffectedRowValues.
 //                                         display_name supportsTernaryAffectedRowValues
@@ -152,8 +199,12 @@
 //                                                  ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsTernaryAffectedRowValues().
 //                                                      display_name supportsTernaryAffectedRowValues
 //                                                      documentation ```kotlin\npublic get(): Boolean\n```
+//                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsTernaryAffectedRowValues.
+//                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsTernaryAffectedRowValues().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsCreateSchema.
       /** Returns`true` if the dialect supports schema creation. */
+//                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsCreateSchema().
       val supportsCreateSchema: Boolean get() = true
 //        ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsCreateSchema.
 //                             display_name supportsCreateSchema
@@ -162,8 +213,12 @@
 //                                      ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsCreateSchema().
 //                                          display_name supportsCreateSchema
 //                                          documentation ```kotlin\npublic get(): Boolean\n```
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsCreateSchema.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsCreateSchema().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSubqueryUnions.
       /** Returns `true` if the dialect supports subqueries within a UNION/EXCEPT/INTERSECT statement. */
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsSubqueryUnions().
       val supportsSubqueryUnions: Boolean get() = false
 //        ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSubqueryUnions.
 //                               display_name supportsSubqueryUnions
@@ -172,8 +227,12 @@
 //                                        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsSubqueryUnions().
 //                                            display_name supportsSubqueryUnions
 //                                            documentation ```kotlin\npublic get(): Boolean\n```
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSubqueryUnions.
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsSubqueryUnions().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsDualTableConcept.
       /** Returns `true` if the dialect provides a special dummy DUAL table, accessible by all users. */
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsDualTableConcept().
       val supportsDualTableConcept: Boolean get() = false
 //        ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsDualTableConcept.
 //                                 display_name supportsDualTableConcept
@@ -182,8 +241,12 @@
 //                                          ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsDualTableConcept().
 //                                              display_name supportsDualTableConcept
 //                                              documentation ```kotlin\npublic get(): Boolean\n```
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsDualTableConcept.
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsDualTableConcept().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsOrderByNullsFirstLast.
       /** Returns `true` if the dialect provides options to configure how nulls are sorted compared to non-null values. */
+//                                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsOrderByNullsFirstLast().
       val supportsOrderByNullsFirstLast: Boolean get() = false
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsOrderByNullsFirstLast.
 //                                      display_name supportsOrderByNullsFirstLast
@@ -192,8 +255,12 @@
 //                                               ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsOrderByNullsFirstLast().
 //                                                   display_name supportsOrderByNullsFirstLast
 //                                                   documentation ```kotlin\npublic get(): Boolean\n```
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsOrderByNullsFirstLast.
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsOrderByNullsFirstLast().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsWindowFrameGroupsMode.
       /** Returns `true` if the dialect supports window function definitions with GROUPS mode in frame clause */
+//                                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsWindowFrameGroupsMode().
       val supportsWindowFrameGroupsMode: Boolean get() = false
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsWindowFrameGroupsMode.
 //                                      display_name supportsWindowFrameGroupsMode
@@ -202,8 +269,12 @@
 //                                               ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsWindowFrameGroupsMode().
 //                                                   display_name supportsWindowFrameGroupsMode
 //                                                   documentation ```kotlin\npublic get(): Boolean\n```
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsWindowFrameGroupsMode.
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsWindowFrameGroupsMode().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsOnUpdate.
       /** Returns `true` if the dialect supports using the ON UPDATE clause with a foreign key constraint. */
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsOnUpdate().
       val supportsOnUpdate: Boolean get() = true
 //        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsOnUpdate.
 //                         display_name supportsOnUpdate
@@ -212,8 +283,12 @@
 //                                  ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsOnUpdate().
 //                                      display_name supportsOnUpdate
 //                                      documentation ```kotlin\npublic get(): Boolean\n```
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsOnUpdate.
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsOnUpdate().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSetDefaultReferenceOption.
       /** Returns `true` if the dialect supports the SET DEFAULT action as part of a foreign key constraint clause. */
+//                                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsSetDefaultReferenceOption().
       val supportsSetDefaultReferenceOption: Boolean get() = true
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSetDefaultReferenceOption.
 //                                          display_name supportsSetDefaultReferenceOption
@@ -222,8 +297,12 @@
 //                                                   ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsSetDefaultReferenceOption().
 //                                                       display_name supportsSetDefaultReferenceOption
 //                                                       documentation ```kotlin\npublic get(): Boolean\n```
+//                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSetDefaultReferenceOption.
+//                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsSetDefaultReferenceOption().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsRestrictReferenceOption.
       /** Returns `true` if the dialect supports the RESTRICT action as part of a foreign key constraint clause. */
+//                                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsRestrictReferenceOption().
       val supportsRestrictReferenceOption: Boolean get() = true
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsRestrictReferenceOption.
 //                                        display_name supportsRestrictReferenceOption
@@ -232,8 +311,12 @@
 //                                                 ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsRestrictReferenceOption().
 //                                                     display_name supportsRestrictReferenceOption
 //                                                     documentation ```kotlin\npublic get(): Boolean\n```
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsRestrictReferenceOption.
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsRestrictReferenceOption().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#likePatternSpecialChars.
       /** Returns a mapping of dialect-specific characters to be escaped when used alongside the LIKE operator. */
+//                                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getLikePatternSpecialChars().
       val likePatternSpecialChars: Map<Char, Char?> get() = defaultLikePatternSpecialChars
 //        ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#likePatternSpecialChars.
 //                                display_name likePatternSpecialChars
@@ -244,8 +327,12 @@
 //                                                      documentation ```kotlin\npublic get(): Map<Char, Char?>\n```
 //                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#Companion#defaultLikePatternSpecialChars.
 //                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#Companion#getDefaultLikePatternSpecialChars().
+//                                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#likePatternSpecialChars.
+//                                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getLikePatternSpecialChars().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#requiresAutoCommitOnCreateDrop.
       /** Returns true if autoCommit should be enabled to create/drop a database. */
+//                                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getRequiresAutoCommitOnCreateDrop().
       val requiresAutoCommitOnCreateDrop: Boolean get() = false
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#requiresAutoCommitOnCreateDrop.
 //                                       display_name requiresAutoCommitOnCreateDrop
@@ -254,8 +341,12 @@
 //                                                ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getRequiresAutoCommitOnCreateDrop().
 //                                                    display_name requiresAutoCommitOnCreateDrop
 //                                                    documentation ```kotlin\npublic get(): Boolean\n```
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#requiresAutoCommitOnCreateDrop.
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getRequiresAutoCommitOnCreateDrop().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#sequenceMaxValue.
       /** Returns the allowed maximum sequence value for a dialect, as a [Long]. */
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSequenceMaxValue().
       val sequenceMaxValue: Long get() = Long.MAX_VALUE
 //        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#sequenceMaxValue.
 //                         display_name sequenceMaxValue
@@ -266,8 +357,12 @@
 //                                   documentation ```kotlin\npublic get(): Long\n```
 //                                            ^^^^^^^^^ reference semanticdb maven . . kotlin/Long#Companion#MAX_VALUE.
 //                                            ^^^^^^^^^ reference semanticdb maven . . kotlin/Long#Companion#getMAX_VALUE().
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#sequenceMaxValue.
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSequenceMaxValue().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsColumnTypeChange.
       /** Returns whether Exposed currently supports column type change in migrations for this dialect. */
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsColumnTypeChange().
       val supportsColumnTypeChange: Boolean get() = false
 //        ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsColumnTypeChange.
 //                                 display_name supportsColumnTypeChange
@@ -276,8 +371,12 @@
 //                                          ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsColumnTypeChange().
 //                                              display_name supportsColumnTypeChange
 //                                              documentation ```kotlin\npublic get(): Boolean\n```
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsColumnTypeChange.
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsColumnTypeChange().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSelectForUpdate.
       /** Returns `true` if the dialect supports `SELECT FOR UPDATE` statements, `false` otherwise. */
+//                                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsSelectForUpdate().
       val supportsSelectForUpdate: Boolean get() = false
 //        ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSelectForUpdate.
 //                                display_name supportsSelectForUpdate
@@ -286,8 +385,12 @@
 //                                         ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsSelectForUpdate().
 //                                             display_name supportsSelectForUpdate
 //                                             documentation ```kotlin\npublic get(): Boolean\n```
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSelectForUpdate.
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsSelectForUpdate().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#isAllowedAsColumnDefault().
       /** Returns `true` if the specified [e] is allowed as a default column value in the dialect, `false` otherwise. */
+//                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#isAllowedAsColumnDefault().(e)
       fun isAllowedAsColumnDefault(e: Expression<*>): Boolean = e is LiteralOp<*>
 //        ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#isAllowedAsColumnDefault().
 //                                 display_name isAllowedAsColumnDefault
@@ -304,10 +407,15 @@
 //                                    ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
 //                                                    ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                              ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#isAllowedAsColumnDefault().(e)
+//                                                                   ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#isAllowedAsColumnDefault().(e)
+//                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#isAllowedAsColumnDefault().
   
       // Specific SQL statements
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createIndex().
       /** Returns the SQL statement that creates the specified [index]. */
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createIndex().(index)
       fun createIndex(index: Index): String
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createIndex().
 //                    display_name createIndex
@@ -318,8 +426,15 @@
 //                          documentation ```kotlin\nindex: Index\n```
 //                           ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#
 //                                   ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createIndex().(index)
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createIndex().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropIndex().
       /** Returns the SQL statement that drops the specified [indexName] from the specified [tableName]. */
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropIndex().(tableName)
+//                                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropIndex().(indexName)
+//                                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropIndex().(isUnique)
+//                                                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropIndex().(isPartialOrFunctional)
       fun dropIndex(tableName: String, indexName: String, isUnique: Boolean, isPartialOrFunctional: Boolean): String
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropIndex().
 //                  display_name dropIndex
@@ -342,8 +457,16 @@
 //                                                                                                 documentation ```kotlin\nisPartialOrFunctional: Boolean\n```
 //                                                                                                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                                                                            ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropIndex().(tableName)
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropIndex().(indexName)
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropIndex().(isUnique)
+//                                                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropIndex().(isPartialOrFunctional)
+//                                                                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropIndex().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#modifyColumn().
       /** Returns the SQL statement that modifies the specified [column]. */
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#modifyColumn().(column)
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#modifyColumn().(columnDiff)
       fun modifyColumn(column: Column<*>, columnDiff: ColumnDiff): List<String>
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#modifyColumn().
 //                     display_name modifyColumn
@@ -358,8 +481,15 @@
 //                                                   documentation ```kotlin\ncolumnDiff: ColumnDiff\n```
 //                                                    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#
 //                                                                 ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#modifyColumn().(column)
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#modifyColumn().(columnDiff)
+//                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#modifyColumn().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#addPrimaryKey().
       /** Returns the SQL statement that adds a primary key specified [pkName] to an existing [table]. */
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#addPrimaryKey().(table)
+//                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#addPrimaryKey().(pkName)
+//                                                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#addPrimaryKey().(pkColumns)
       fun addPrimaryKey(table: Table, pkName: String?, vararg pkColumns: Column<*>): String
 //        ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#addPrimaryKey().
 //                      display_name addPrimaryKey
@@ -378,9 +508,15 @@
 //                                                                      documentation ```kotlin\nvararg pkColumns: Column<*>\n```
 //                                                                       ^^^^^^^^^ reference semanticdb maven . . kotlin/Array#
 //                                                                                   ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#addPrimaryKey().(table)
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#addPrimaryKey().(pkName)
+//                                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#addPrimaryKey().(pkColumns)
+//                                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#addPrimaryKey().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createDatabase().
       /** Returns the SQL statement that creates a database with the specified [name]. */
       @OptIn(InternalApi::class)
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createDatabase().(name)
       fun createDatabase(name: String) = "CREATE DATABASE IF NOT EXISTS ${name.inProperCase()}"
 //        ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createDatabase().
 //                       display_name createDatabase
@@ -396,7 +532,10 @@
 //                             ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createDatabase().(name)
 //                                                                             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/inProperCase().
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createDatabase().(name)
+//                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createDatabase().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#listDatabases().
       /** Returns the SQL query that retrieves a set of existing databases. */
       fun listDatabases(): String = "SHOW DATABASES"
 //        ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#listDatabases().
@@ -408,9 +547,12 @@
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDialect#listDatabases().
 //                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLiteDialect#listDatabases().
 //                         ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#listDatabases().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropDatabase().
       /** Returns the SQL statement that drops the database with the specified [name]. */
       @OptIn(InternalApi::class)
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropDatabase().(name)
       fun dropDatabase(name: String) = "DROP DATABASE IF EXISTS ${name.inProperCase()}"
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropDatabase().
 //                     display_name dropDatabase
@@ -426,8 +568,12 @@
 //                           ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                                ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropDatabase().(name)
 //                                                                     ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/inProperCase().
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropDatabase().(name)
+//                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropDatabase().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#setSchema().
       /** Returns the SQL statement that sets the current schema to the specified [schema]. */
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#setSchema().(schema)
       fun setSchema(schema: Schema): String = "SET SCHEMA ${schema.identifier}"
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#setSchema().
 //                  display_name setSchema
@@ -444,8 +590,12 @@
 //                                                          ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#setSchema().(schema)
 //                                                                 ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getIdentifier().
 //                                                                 ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#identifier.
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#setSchema().(schema)
+//                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#setSchema().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createSchema().
       /** Returns the SQL statement that creates the specified [schema]. */
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createSchema().(schema)
       fun createSchema(schema: Schema): String = buildString {
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createSchema().
 //                     display_name createSchema
@@ -459,6 +609,7 @@
 //                             ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#
 //                                      ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                               ^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/buildString().
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createSchema().(schema)
           append("CREATE SCHEMA IF NOT EXISTS ")
 //        ^^^^^^ reference semanticdb maven jdk 11 java/lang/StringBuilder#append().
           append(schema.identifier)
@@ -472,8 +623,12 @@
 //                                                  ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#authorization.
 //                                                  ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#getAuthorization().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#createSchema().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropSchema().
       /** Returns the SQL statement that drops the specified [schema], as well as all its objects if [cascade] is `true`. */
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropSchema().(schema)
+//                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropSchema().(cascade)
       fun dropSchema(schema: Schema, cascade: Boolean): String = buildString {
 //        ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropSchema().
 //                   display_name dropSchema
@@ -491,6 +646,8 @@
 //                                            ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                      ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                               ^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/buildString().
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropSchema().(schema)
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropSchema().(cascade)
           append("DROP SCHEMA IF EXISTS ", schema.identifier)
 //        ^^^^^^ reference semanticdb maven . . kotlin/text/append(+4).
 //                                         ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropSchema().(schema)
@@ -503,13 +660,18 @@
 //            ^^^^^^ reference semanticdb maven jdk 11 java/lang/StringBuilder#append().
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dropSchema().
   
       // TODO move it to JDBC or R2DBC metadata
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#areEquivalentColumnTypes().
       /** Returns whether the [columnMetadataSqlType] type and the [columnType] are equivalent.
        *
        * [columnMetadataJdbcType], the value of which comes from [java.sql.Types], is taken into consideration if needed by a specific database.
        * @see [H2Dialect.areEquivalentColumnTypes]
        */
+//                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#areEquivalentColumnTypes().(columnMetadataSqlType)
+//                                                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#areEquivalentColumnTypes().(columnMetadataJdbcType)
+//                                                                                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#areEquivalentColumnTypes().(columnType)
       fun areEquivalentColumnTypes(columnMetadataSqlType: String, columnMetadataJdbcType: Int, columnType: String): Boolean =
 //        ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#areEquivalentColumnTypes().
 //                                 display_name areEquivalentColumnTypes
@@ -528,11 +690,17 @@
 //                                                                                                        documentation ```kotlin\ncolumnType: String\n```
 //                                                                                                         ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                                                                                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#areEquivalentColumnTypes().(columnMetadataSqlType)
+//                                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#areEquivalentColumnTypes().(columnMetadataJdbcType)
+//                                                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#areEquivalentColumnTypes().(columnType)
           columnMetadataSqlType.equals(columnType, ignoreCase = true)
 //        ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#areEquivalentColumnTypes().(columnMetadataSqlType)
 //                              ^^^^^^ reference semanticdb maven . . kotlin/text/equals(+1).
 //                                     ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#areEquivalentColumnTypes().(columnType)
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#areEquivalentColumnTypes().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#Companion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#Companion#`<init>`().
       companion object {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#Companion# 2:5
 //                       display_name Companion
@@ -540,6 +708,8 @@
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#Companion#`<init>`(). 2:5
 //                       display_name Companion
 //                       documentation ```kotlin\nprivate constructor(): DatabaseDialect.Companion\n```
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#Companion#defaultLikePatternSpecialChars.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#Companion#getDefaultLikePatternSpecialChars().
           private val defaultLikePatternSpecialChars = mapOf('%' to null, '_' to null)
 //                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#Companion#defaultLikePatternSpecialChars.
 //                                                   display_name defaultLikePatternSpecialChars
@@ -550,9 +720,16 @@
 //                                                     ^^^^^ reference semanticdb maven . . kotlin/collections/mapOf(+1).
 //                                                               ^^ reference semanticdb maven . . kotlin/to().
 //                                                                            ^^ reference semanticdb maven . . kotlin/to().
+//                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#Companion#defaultLikePatternSpecialChars.
+//                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#Companion#getDefaultLikePatternSpecialChars().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#Companion#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#Companion#`<init>`().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/explicitDialect.
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getExplicitDialect().
   private val explicitDialect = ThreadLocal<DatabaseDialect?>()
 //            ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/explicitDialect.
 //                            display_name explicitDialect
@@ -561,7 +738,13 @@
 //                            display_name explicitDialect
 //                            documentation ```kotlin\nprivate get(): ThreadLocal<DatabaseDialect?>\n```
 //                              ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/ThreadLocal#`<init>`().
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/explicitDialect.
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getExplicitDialect().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/withDialect().
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/withDialect().[T]
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/withDialect().(dialect)
+//                                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/withDialect().(body)
   internal fun <T> withDialect(dialect: DatabaseDialect, body: () -> T): T {
 //              ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/withDialect().[T]
 //                display_name FirTypeParameterSymbol T
@@ -577,6 +760,9 @@
 //                                                            display_name body
 //                                                            documentation ```kotlin\nbody: () -> T\n```
 //                                                             ^^^^^^^ reference semanticdb maven . . kotlin/Function0#
+//              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/withDialect().[T]
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/withDialect().(dialect)
+//                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/withDialect().(body)
       return try {
           explicitDialect.set(dialect)
 //        ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/explicitDialect.
@@ -593,13 +779,16 @@
 //                        ^^^ reference semanticdb maven jdk 11 java/lang/ThreadLocal#set().
       }
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/withDialect().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
   /** Returns the dialect used in the current transaction, may throw an exception if there is no current transaction. */
   val currentDialect: DatabaseDialect
 //    ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                   display_name currentDialect
 //                   documentation ```kotlin\npublic final val currentDialect: DatabaseDialect\n```\n\n----\n\n Returns the dialect used in the current transaction, may throw an exception if there is no current transaction.
 //                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
       get() {
 //    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
 //        display_name currentDialect
@@ -615,13 +804,17 @@
 //                                                                                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialect.
 //                                                                                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDialect().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialectIfAvailable.
   @OptIn(InternalApi::class)
   internal val currentDialectIfAvailable: DatabaseDialect?
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialectIfAvailable.
 //                                       display_name currentDialectIfAvailable
 //                                       documentation ```kotlin\n@OptIn(...) internal final val currentDialectIfAvailable: DatabaseDialect?\n```
 //                                        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialectIfAvailable().
       get() = if (CoreTransactionManager.getDefaultDatabaseOrFirst() != null && CoreTransactionManager.currentTransactionOrNull() != null) {
 //    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialectIfAvailable().
 //        display_name currentDialectIfAvailable
@@ -634,7 +827,10 @@
       } else {
           null
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialectIfAvailable.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialectIfAvailable().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/inProperCase().
   @OptIn(InternalApi::class)
   @InternalApi
   fun String.inProperCase(): String =
@@ -649,3 +845,4 @@
 //                                                           ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getIdentifierManager().
 //                                                           ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#identifierManager.
 //                                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#inProperCase().
+//                                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/inProperCase().

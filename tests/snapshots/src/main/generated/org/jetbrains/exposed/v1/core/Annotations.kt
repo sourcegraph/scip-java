@@ -5,6 +5,8 @@
 //                              ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/
 //                                 ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExperimentalDatabaseMigrationApi#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExperimentalDatabaseMigrationApi#`<init>`().
   /**
    * API marked with this annotation is experimental.
    * Any behavior associated with its use is not guaranteed to be stable.
@@ -24,7 +26,11 @@
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExperimentalDatabaseMigrationApi#`<init>`().
 //                                                  display_name ExperimentalDatabaseMigrationApi
 //                                                  documentation ```kotlin\npublic constructor(): ExperimentalDatabaseMigrationApi\n```\n\n----\n\n\n API marked with this annotation is experimental.\n Any behavior associated with its use is not guaranteed to be stable.\n
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExperimentalDatabaseMigrationApi#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExperimentalDatabaseMigrationApi#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExperimentalKeywordApi#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExperimentalKeywordApi#`<init>`().
   /**
    * API marked with this annotation is experimental.
    * Any behavior associated with its use is not guaranteed to be stable.
@@ -44,7 +50,11 @@
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExperimentalKeywordApi#`<init>`().
 //                                        display_name ExperimentalKeywordApi
 //                                        documentation ```kotlin\npublic constructor(): ExperimentalKeywordApi\n```\n\n----\n\n\n API marked with this annotation is experimental.\n Any behavior associated with its use is not guaranteed to be stable.\n
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExperimentalKeywordApi#
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExperimentalKeywordApi#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/InternalApi#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/InternalApi#`<init>`().
   /**
    * API marked with this annotation is internal and should not be used outside Exposed.
    * It may be changed or removed in the future without notice.
@@ -77,3 +87,5 @@
 //                 ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/InternalApi#`<init>`().
 //                             display_name InternalApi
 //                             documentation ```kotlin\npublic constructor(): InternalApi\n```\n\n----\n\n\n API marked with this annotation is internal and should not be used outside Exposed.\n It may be changed or removed in the future without notice.\n Using it outside Exposed may result in undefined and unexpected behaviour.\n
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/InternalApi#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/InternalApi#`<init>`().
