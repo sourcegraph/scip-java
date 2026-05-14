@@ -551,8 +551,7 @@ lazy val semanticdbKotlincMinimized = project
       Def
         .taskDyn {
           val srcRoot = (ThisBuild / baseDirectory).value.getAbsolutePath
-          val tgtRoot = (target.value / "semanticdb-targetroot")
-            .getAbsolutePath
+          val tgtRoot = (target.value / "semanticdb-targetroot").getAbsolutePath
           val snapDir =
             (baseDirectory.value / "src" / "generatedSnapshots" / "resources")
               .getAbsolutePath
