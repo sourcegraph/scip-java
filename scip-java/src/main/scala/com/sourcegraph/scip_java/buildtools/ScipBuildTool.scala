@@ -343,7 +343,15 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
             .PLAIN_FULL_PATHS
             .render(compilerMessageSeverity, s, compilerMessageSourceLocation)
           index.app.reporter.debug(msg)
-          errors.push(msg)
+          // Only treat ERROR / EXCEPTION as failures. Kotlin 2.2.0's
+          // K2JVMCompiler emits LOGGING messages at startup (e.g. about the
+          // missing scripting plugin) and INFO/WARNING messages during
+          // normal compilation; pushing those onto `errors` would cause
+          // hasErrors to return true, which makes the compiler return
+          // COMPILATION_ERROR even when nothing is actually wrong.
+          if (compilerMessageSeverity.isError) {
+            errors.push(msg)
+          }
         }
       },
       Services.EMPTY,
