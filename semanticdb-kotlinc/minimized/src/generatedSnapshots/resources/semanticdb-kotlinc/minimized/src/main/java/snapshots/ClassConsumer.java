@@ -1,5 +1,4 @@
   package snapshots;
-//        ^^^^^^^^^ reference semanticdb maven . . snapshots/
   
 //⌄ enclosing_range_start semanticdb maven . . snapshots/ClassConsumer#
   public class ClassConsumer {
