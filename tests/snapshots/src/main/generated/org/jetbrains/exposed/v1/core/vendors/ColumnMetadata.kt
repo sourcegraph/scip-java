@@ -6,9 +6,12 @@
 //                                 ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/
 //                                      ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#
   /**
    * Represents metadata information about a specific column.
    */
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().
   data class ColumnMetadata(
 //           ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#
 //                          display_name ColumnMetadata
@@ -16,9 +19,14 @@
 //           ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().
 //                          display_name ColumnMetadata
 //                          documentation ```kotlin\npublic constructor(name: String, jdbcType: Int, sqlType: String, nullable: Boolean, size: Int?, scale: Int?, autoIncrement: Boolean, defaultDbValue: String?): ColumnMetadata\n```\n\n----\n\n Name of the column.
-//           ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().
-//                          display_name copy
-//                          documentation ```kotlin\npublic final fun copy(name: String = ..., jdbcType: Int = ..., sqlType: String = ..., nullable: Boolean = ..., size: Int? = ..., scale: Int? = ..., autoIncrement: Boolean = ..., defaultDbValue: String? = ...): ColumnMetadata\n\n```\n\n----\n\n\n Represents metadata information about a specific column.\n
+//                         ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy(). 21:1
+//                           display_name copy
+//                           documentation ```kotlin\npublic final fun copy(name: String = ..., jdbcType: Int = ..., sqlType: String = ..., nullable: Boolean = ..., size: Int? = ..., scale: Int? = ..., autoIncrement: Boolean = ..., defaultDbValue: String? = ...): ColumnMetadata\n\n```\n\n----\n\n Name of the column.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(name)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#name.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getName().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component1().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(name)
       /** Name of the column. */
       val name: String,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(name)
@@ -40,6 +48,16 @@
 //             documentation ```kotlin\npublic final val name: String\n```\n\n----\n\n Name of the column.
 //        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#name.
 //              ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(name)
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#name.
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getName().
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component1().
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(name)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(jdbcType)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#jdbcType.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getJdbcType().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component2().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(jdbcType)
       /**
        * JDBC type of the column.
        *
@@ -65,6 +83,16 @@
 //                 documentation ```kotlin\npublic final val jdbcType: Int\n```\n\n----\n\n\n JDBC type of the column.\n\n @see java.sql.Types\n
 //        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#jdbcType.
 //                  ^^^ reference semanticdb maven . . kotlin/Int#
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(jdbcType)
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#jdbcType.
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getJdbcType().
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component2().
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(jdbcType)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(sqlType)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#sqlType.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getSqlType().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component3().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(sqlType)
       /** SQL type of the column. */
       val sqlType: String,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(sqlType)
@@ -86,6 +114,16 @@
 //                documentation ```kotlin\npublic final val sqlType: String\n```\n\n----\n\n SQL type of the column.
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#sqlType.
 //                 ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(sqlType)
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#sqlType.
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getSqlType().
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component3().
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(sqlType)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(nullable)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#nullable.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getNullable().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component4().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(nullable)
       /** Whether the column is nullable or not. */
       val nullable: Boolean,
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(nullable)
@@ -107,6 +145,16 @@
 //                 documentation ```kotlin\npublic final val nullable: Boolean\n```\n\n----\n\n Whether the column is nullable or not.
 //        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#nullable.
 //                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(nullable)
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#nullable.
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getNullable().
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component4().
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(nullable)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(size)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#size.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getSize().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component5().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(size)
       /** Optional size of the column. */
       val size: Int?,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(size)
@@ -128,6 +176,16 @@
 //             documentation ```kotlin\npublic final val size: Int?\n```\n\n----\n\n Optional size of the column.
 //        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#size.
 //              ^^^^ reference semanticdb maven . . kotlin/Int#
+//                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(size)
+//                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#size.
+//                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getSize().
+//                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component5().
+//                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(size)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(scale)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#scale.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getScale().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component6().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(scale)
       /** Optional amount of fractional digits allowed in the column. */
       val scale: Int?,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(scale)
@@ -149,6 +207,16 @@
 //              documentation ```kotlin\npublic final val scale: Int?\n```\n\n----\n\n Optional amount of fractional digits allowed in the column.
 //        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#scale.
 //               ^^^^ reference semanticdb maven . . kotlin/Int#
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(scale)
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#scale.
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getScale().
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component6().
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(scale)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(autoIncrement)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#autoIncrement.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getAutoIncrement().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component7().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(autoIncrement)
       /** Whether the column is auto-incremented. */
       val autoIncrement: Boolean,
 //        ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(autoIncrement)
@@ -170,6 +238,16 @@
 //                      documentation ```kotlin\npublic get(): Boolean\n```\n\n----\n\n Whether the column is auto-incremented.
 //        ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getAutoIncrement().
 //                       ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(autoIncrement)
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#autoIncrement.
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getAutoIncrement().
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component7().
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(autoIncrement)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(defaultDbValue)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#defaultDbValue.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getDefaultDbValue().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component8().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(defaultDbValue)
       /** Default value of the column. */
       val defaultDbValue: String?,
 //        ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(defaultDbValue)
@@ -191,4 +269,12 @@
 //                       documentation ```kotlin\npublic get(): String?\n```\n\n----\n\n Default value of the column.
 //        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getDefaultDbValue().
 //                        ^^^^^^^ reference semanticdb maven . . kotlin/String#
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().(defaultDbValue)
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#defaultDbValue.
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#getDefaultDbValue().
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#component8().
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().(defaultDbValue)
   )
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#`<init>`().
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/ColumnMetadata#copy().

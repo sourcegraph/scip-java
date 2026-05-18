@@ -7,11 +7,16 @@
 //                                      ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/
 //                                                 ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedSavepoint#
   /**
    * Base class representing a savepoint, with the specified [name], which can be referenced during a
    * rollback operation to undo any changes made after the point in the transaction.
    */
   @Suppress("UnnecessaryAbstractClass")
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedSavepoint#`<init>`().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedSavepoint#`<init>`().(name)
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedSavepoint#name.
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedSavepoint#getName().
   abstract class ExposedSavepoint(val name: String)
 //               ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedSavepoint#
 //                                display_name ExposedSavepoint
@@ -30,3 +35,8 @@
 //                                         display_name name
 //                                         documentation ```kotlin\npublic final val name: String\n```
 //                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedSavepoint#`<init>`().(name)
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedSavepoint#name.
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedSavepoint#getName().
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedSavepoint#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ExposedSavepoint#`<init>`().

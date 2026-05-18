@@ -42,11 +42,13 @@
 //                                ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/
 //                                     ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#
   /**
    * Represents an SQL operator that checks if [expr] is equal to any element from a single-column [table].
    *
    * **Note** This operation is only supported by MySQL, PostgreSQL, and H2 dialects.
    */
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#`<init>`().
   class InTableOp(
 //      ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#
 //                display_name InTableOp
@@ -56,6 +58,9 @@
 //      ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#`<init>`().
 //                display_name InTableOp
 //                documentation ```kotlin\npublic constructor(expr: Expression<*>, table: Table, isInTable: Boolean = ...): InTableOp\n```\n\n----\n\n Returns the expression compared to each element in the table's column.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#getExpr().
       /** Returns the expression compared to each element in the table's column. */
       val expr: Expression<*>,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#`<init>`().(expr)
@@ -69,6 +74,12 @@
 //             display_name expr
 //             documentation ```kotlin\npublic get(): Expression<*>\n```\n\n----\n\n Returns the expression compared to each element in the table's column.
 //              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#`<init>`().(expr)
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#expr.
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#getExpr().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#`<init>`().(table)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#table.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#getTable().
       /** Returns the single-column table to check against. */
       val table: Table,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#`<init>`().(table)
@@ -82,6 +93,12 @@
 //              display_name table
 //              documentation ```kotlin\npublic final val table: Table\n```\n\n----\n\n Returns the single-column table to check against.
 //               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#`<init>`().(table)
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#table.
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#getTable().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#`<init>`().(isInTable)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#isInTable.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#getIsInTable().
       /** Returns `false` if the check is inverted, `true` otherwise. */
       val isInTable: Boolean = true
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#`<init>`().(isInTable)
@@ -95,9 +112,15 @@
 //                  display_name isInTable
 //                  documentation ```kotlin\npublic final val isInTable: Boolean\n```\n\n----\n\n Returns `false` if the check is inverted, `true` otherwise.
 //                   ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#`<init>`().(isInTable)
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#isInTable.
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#getIsInTable().
   ) : Op<Boolean>(), ComplexExpression {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -109,6 +132,7 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#toQueryBuilder().(queryBuilder)
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#toQueryBuilder().(queryBuilder)
           +expr
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+2).
 //         ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#expr.
@@ -132,4 +156,6 @@
           +')'
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#

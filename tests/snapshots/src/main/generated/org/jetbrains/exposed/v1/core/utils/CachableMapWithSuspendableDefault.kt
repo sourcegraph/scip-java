@@ -19,6 +19,9 @@
 //                 ^^^^^^^^^^ reference semanticdb maven . . java/util/concurrent/
 //                            ^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/ConcurrentHashMap#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#
+//                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#[K]
+//                                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#[V]
   interface CacheWithSuspendableDefault<K, V> {
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#
 //                                      display_name CacheWithSuspendableDefault
@@ -30,6 +33,10 @@
 //                                         ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#[V]
 //                                           display_name FirTypeParameterSymbol V
 //                                           documentation ```kotlin\nV\n```
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#[K]
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#[V]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#get().
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#get().(key)
       suspend fun get(key: K): V
 //                ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#get().
 //                    display_name get
@@ -38,9 +45,16 @@
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#get().(key)
 //                        display_name key
 //                        documentation ```kotlin\nkey: K\n```
+//                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#get().(key)
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#get().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#
   @InternalApi
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#[K]
+//                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#[V]
+//                                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#`<init>`().
   class CachableMapWithSuspendableDefault<K, V>(
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#
 //                                        display_name CachableMapWithSuspendableDefault
@@ -55,6 +69,11 @@
 //                                           ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#[V]
 //                                             display_name FirTypeParameterSymbol V
 //                                             documentation ```kotlin\nV\n```
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#[K]
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#[V]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#`<init>`().(map)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#map.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#getMap().
       private val map: MutableMap<K, V> = ConcurrentHashMap<K, V>(),
 //                ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#`<init>`().(map)
 //                    display_name map
@@ -68,6 +87,12 @@
 //                    documentation ```kotlin\nprivate final val map: MutableMap<K, V>\n```
 //                     ^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#
 //                                        ^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/ConcurrentHashMap#`<init>`().
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#`<init>`().(map)
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#map.
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#getMap().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#`<init>`().(default)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#default.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#getDefault().
       val default: suspend (K) -> V
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#`<init>`().(default)
 //                display_name default
@@ -80,8 +105,14 @@
 //                display_name default
 //                documentation ```kotlin\npublic get(): suspend (K) -> V\n```
 //                 ^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/coroutines/SuspendFunction1#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#`<init>`().(default)
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#default.
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#getDefault().
   ) : CacheWithSuspendableDefault<K, V> {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CacheWithSuspendableDefault#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#get().
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#get().(key)
       override suspend fun get(key: K): V {
 //                         ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#get().
 //                             display_name get
@@ -90,6 +121,7 @@
 //                             ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#get().(key)
 //                                 display_name key
 //                                 documentation ```kotlin\nkey: K\n```
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#get().(key)
           return map.getOrPut(key) { default(key) }
 //               ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#getMap().
 //               ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#map.
@@ -100,4 +132,6 @@
 //                                   ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#getDefault().
 //                                           ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#get().(key)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#get().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/utils/CachableMapWithSuspendableDefault#

@@ -35,6 +35,7 @@
 //                                ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/
 //                                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#
   /**
    * Represents the SQL statement that uses data retrieved from a [selectQuery] to insert new rows into a table.
    *
@@ -43,6 +44,7 @@
    * @param isIgnore Whether to ignore errors or not.
    * **Note** [isIgnore] is not supported by all vendors. Please check the documentation.
    */
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#`<init>`().
   open class InsertSelectStatement(
 //           ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#
 //                                 display_name InsertSelectStatement
@@ -52,6 +54,9 @@
 //           ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#`<init>`().
 //                                 display_name InsertSelectStatement
 //                                 documentation ```kotlin\npublic constructor(columns: List<Column<*>>, selectQuery: AbstractQuery<*>, isIgnore: Boolean = ...): InsertSelectStatement\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#`<init>`().(columns)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#columns.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#getColumns().
       val columns: List<Column<*>>,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#`<init>`().(columns)
 //                display_name columns
@@ -64,6 +69,12 @@
 //                display_name columns
 //                documentation ```kotlin\npublic get(): List<Column<*>>\n```
 //                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#`<init>`().(columns)
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#columns.
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#getColumns().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#`<init>`().(selectQuery)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#selectQuery.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#getSelectQuery().
       val selectQuery: AbstractQuery<*>,
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#`<init>`().(selectQuery)
 //                    display_name selectQuery
@@ -76,6 +87,12 @@
 //                    display_name selectQuery
 //                    documentation ```kotlin\npublic final val selectQuery: AbstractQuery<*>\n```
 //                     ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#`<init>`().(selectQuery)
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#selectQuery.
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#getSelectQuery().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#`<init>`().(isIgnore)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#isIgnore.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#getIsIgnore().
       val isIgnore: Boolean = false
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#`<init>`().(isIgnore)
 //                 display_name isIgnore
@@ -88,6 +105,9 @@
 //                 display_name isIgnore
 //                 documentation ```kotlin\npublic final val isIgnore: Boolean\n```
 //                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#`<init>`().(isIgnore)
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#isIgnore.
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#getIsIgnore().
   ) : Statement<Int>(StatementType.INSERT, listOf(columns.first().table)) {
 //    ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/Statement#
 //                                 ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementType#INSERT.
@@ -96,6 +116,7 @@
 //                                                        ^^^^^ reference semanticdb maven . . kotlin/collections/first(+19).
 //                                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getTable().
 //                                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#table.
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#`<init>`().
   
       init {
           if (columns.isEmpty()) error("Can't insert without provided columns")
@@ -103,6 +124,8 @@
 //            ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#getColumns().
 //                    ^^^^^^^ reference semanticdb maven . . kotlin/collections/List#isEmpty().
 //                               ^^^^^ reference semanticdb maven . . kotlin/error().
+//        ⌄ enclosing_range_start local 0
+//                                        ⌄ enclosing_range_start local 1
           val tables = columns.distinctBy { it.table }
 //            ^^^^^^ definition local 0
 //                   display_name tables
@@ -110,12 +133,15 @@
 //                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#columns.
 //                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#getColumns().
 //                             ^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/distinctBy(+9).
-//                                        ^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                        ^^^^^^^^^^^^ definition local 1
 //                                                     display_name it
 //                                                     documentation ```kotlin\nit: Column<*>\n```
-//                                          ^^ reference semanticdb maven . . (it)
+//                                          ^^ reference local 1
 //                                             ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getTable().
 //                                             ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#table.
+//                                                   ⌃ enclosing_range_end local 0
+//                                                   ⌃ enclosing_range_end local 1
+//                                                                                              ⌄ enclosing_range_start local 2
           if (tables.count() > 1) error("Can't insert to different tables ${tables.joinToString { it.name }} from single select")
 //            ^^^^^^ reference local 0
 //                   ^^^^^ reference semanticdb maven . . kotlin/collections/count(+19).
@@ -123,12 +149,13 @@
 //                                ^^^^^ reference semanticdb maven . . kotlin/error().
 //                                                                          ^^^^^^ reference local 0
 //                                                                                 ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/joinToString(+9).
-//                                                                                              ^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                                              ^^^^^^^^^^^ definition local 2
 //                                                                                                          display_name it
 //                                                                                                          documentation ```kotlin\nit: Column<*>\n```
-//                                                                                                ^^ reference semanticdb maven . . (it)
+//                                                                                                ^^ reference local 2
 //                                                                                                   ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getName().
 //                                                                                                   ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#name.
+//                                                                                                        ⌃ enclosing_range_end local 2
           if (columns.size != selectQuery.set.fields.size) error("Columns count doesn't equal to query columns count")
 //            ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#columns.
 //            ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#getColumns().
@@ -145,6 +172,7 @@
 //                                                         ^^^^^ reference semanticdb maven . . kotlin/error().
       }
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#arguments().
       override fun arguments(): Iterable<Iterable<Pair<IColumnType<*>, Any?>>> = selectQuery.arguments()
 //                 ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#arguments().
 //                           display_name arguments
@@ -154,7 +182,11 @@
 //                                                                               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#getSelectQuery().
 //                                                                               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#selectQuery.
 //                                                                                           ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#arguments().
+//                                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#arguments().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#prepareSQL().
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#prepareSQL().(transaction)
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#prepareSQL().(prepared)
       override fun prepareSQL(transaction: Transaction, prepared: Boolean): String =
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#prepareSQL().
 //                            display_name prepareSQL
@@ -170,6 +202,8 @@
 //                                                               documentation ```kotlin\nprepared: Boolean\n```
 //                                                                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#prepareSQL().(transaction)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#prepareSQL().(prepared)
           transaction.db.dialect.functionProvider.insert(isIgnore, targets.single(), columns, selectQuery.prepareSQL(transaction, prepared), transaction)
 //        ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#prepareSQL().(transaction)
 //                    ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#db.
@@ -192,4 +226,6 @@
 //                                                                                                                   ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#prepareSQL().(transaction)
 //                                                                                                                                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#prepareSQL().(prepared)
 //                                                                                                                                           ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#prepareSQL().(transaction)
+//                                                                                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#prepareSQL().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertSelectStatement#

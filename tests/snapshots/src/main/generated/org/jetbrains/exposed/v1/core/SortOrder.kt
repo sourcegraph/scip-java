@@ -5,9 +5,19 @@
 //                              ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/
 //                                 ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#values().
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#valueOf().
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#valueOf().(value)
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#entries.
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/getEntries().
   /** Represents the SQL keywords for defining sort order in an `ORDER BY` clause. */
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Enum# 31:1
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder# 31:1
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#`<init>`().
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#`<init>`().(code)
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#code.
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#getCode().
   enum class SortOrder(val code: String) {
 //           ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#
 //                     display_name SortOrder
@@ -48,6 +58,12 @@
 //                              display_name code
 //                              documentation ```kotlin\npublic get(): String\n```
 //                               ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#`<init>`().(code)
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#code.
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#getCode().
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 168>`#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 168>`#`<init>`().
       /** The SQL keyword `ASC` for sorting records in ascending order. */
       ASC(code = "ASC"),
 //    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 168>`#
@@ -57,7 +73,11 @@
 //    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 168>`#`<init>`().
 //        display_name ASC
 //        documentation ```kotlin\nprivate constructor(): <anonymous>\n```\n\n----\n\n The SQL keyword `ASC` for sorting records in ascending order.
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 168>`#
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 168>`#`<init>`().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 265>`#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 265>`#`<init>`().
       /** The SQL keyword `DESC` for sorting records in descending order. */
       DESC(code = "DESC"),
 //    ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 265>`#
@@ -67,7 +87,11 @@
 //    ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 265>`#`<init>`().
 //         display_name DESC
 //         documentation ```kotlin\nprivate constructor(): <anonymous>\n```\n\n----\n\n The SQL keyword `DESC` for sorting records in descending order.
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 265>`#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 265>`#`<init>`().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 366>`#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 366>`#`<init>`().
       /**
        * The SQL keyword `ASC` for sorting records in ascending order, combined with `NULLS FIRST` to position
        * SQL NULL values at the start.
@@ -80,7 +104,11 @@
 //    ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 366>`#`<init>`().
 //                    display_name ASC_NULLS_FIRST
 //                    documentation ```kotlin\nprivate constructor(): <anonymous>\n```\n\n----\n\n\n The SQL keyword `ASC` for sorting records in ascending order, combined with `NULLS FIRST` to position\n SQL NULL values at the start.\n
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 366>`#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 366>`#`<init>`().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 576>`#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 576>`#`<init>`().
       /**
        * The SQL keyword `DESC` for sorting records in descending order, combined with `NULLS FIRST` to position
        * SQL NULL values at the start preceding non-null records.
@@ -93,7 +121,11 @@
 //    ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 576>`#`<init>`().
 //                     display_name DESC_NULLS_FIRST
 //                     documentation ```kotlin\nprivate constructor(): <anonymous>\n```\n\n----\n\n\n The SQL keyword `DESC` for sorting records in descending order, combined with `NULLS FIRST` to position\n SQL NULL values at the start preceding non-null records.\n
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 576>`#
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 576>`#`<init>`().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 817>`#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 817>`#`<init>`().
       /**
        * The SQL keyword `ASC` for sorting records in ascending order, combined with `NULLS LAST` to position
        * SQL NULL values at the end following non-null records.
@@ -106,7 +138,11 @@
 //    ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 817>`#`<init>`().
 //                   display_name ASC_NULLS_LAST
 //                   documentation ```kotlin\nprivate constructor(): <anonymous>\n```\n\n----\n\n\n The SQL keyword `ASC` for sorting records in ascending order, combined with `NULLS LAST` to position\n SQL NULL values at the end following non-null records.\n
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 817>`#
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 817>`#`<init>`().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 1049>`#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 1049>`#`<init>`().
       /**
        * The SQL keyword `DESC` for sorting records in descending order, combined with `NULLS LAST` to position
        * SQL NULL values at the end.
@@ -119,4 +155,12 @@
 //    ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 1049>`#`<init>`().
 //                    display_name DESC_NULLS_LAST
 //                    documentation ```kotlin\nprivate constructor(): <anonymous>\n```\n\n----\n\n\n The SQL keyword `DESC` for sorting records in descending order, combined with `NULLS LAST` to position\n SQL NULL values at the end.\n
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 1049>`#
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 1049>`#`<init>`().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#values().
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#valueOf().
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#valueOf().(value)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#entries.
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/getEntries().

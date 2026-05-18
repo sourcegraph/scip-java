@@ -52,10 +52,13 @@
 //            ^^^^ reference semanticdb maven . . java/math/
 //                 ^^^^^^^^^^ reference semanticdb maven jdk 11 java/math/BigDecimal#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#`<init>`().
   /**
    * Represents an SQL operator.
    */
   @Suppress("UnnecessaryAbstractClass")
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#[T]
   abstract class Op<T> : Expression<T>() {
 //               ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                  display_name Op
@@ -87,6 +90,9 @@
 //                    display_name FirTypeParameterSymbol T
 //                    documentation ```kotlin\nT\n```
 //                       ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#`<init>`().
       companion object {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion# 5:5
 //                       display_name Companion
@@ -94,7 +100,10 @@
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#`<init>`(). 5:5
 //                       display_name Companion
 //                       documentation ```kotlin\nprivate constructor(): Op.Companion\n```\n\n----\n\n Builds a new operator using provided [op].
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().
           /** Builds a new operator using provided [op]. */
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().[T]
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().(op)
           inline fun <T> build(op: SqlExpressionBuilder.() -> Op<T>): Op<T> = SqlExpressionBuilder.op()
 //                    ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().[T]
 //                      display_name FirTypeParameterSymbol T
@@ -109,7 +118,12 @@
 //                                                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                                                                                                 ^^ reference semanticdb maven . . kotlin/Function1#invoke().
 //                                                                                                 ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().(op)
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().[T]
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().(op)
+//                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#nullOp().
+//             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#nullOp().[T]
           fun <T> nullOp(): Op<T> = NULL as Op<T>
 //             ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#nullOp().[T]
 //               display_name FirTypeParameterSymbol T
@@ -118,8 +132,14 @@
 //                       display_name nullOp
 //                       documentation ```kotlin\npublic final fun <T> nullOp(): Op<T>\n```
 //                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#nullOp().[T]
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#nullOp().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#`<init>`().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
       internal interface OpBoolean
 //                       ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
 //                                 display_name OpBoolean
@@ -138,7 +158,10 @@
 //                                 relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/Op#TRUE#
 //                                 relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#
 //                                 relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#TRUE#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#TRUE#`<init>`().
       /**
        * Boolean operator that always evaluates to the SQL value `TRUE`.
        *
@@ -156,6 +179,8 @@
 //                documentation ```kotlin\nprivate constructor(): Op.TRUE\n```\n\n----\n\n\n Boolean operator that always evaluates to the SQL value `TRUE`.\n\n **Note** Some databases, like SQL Server and Oracle, do not support conditions like `WHERE 1` or `WHERE TRUE`.\n When using these databases, this operator will instead produce the condition `1 = 1`.\n
 //                  ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                                 ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#TRUE#toQueryBuilder().
+//                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#TRUE#toQueryBuilder().(queryBuilder)
           override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                     ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Op#TRUE#toQueryBuilder().
 //                                    display_name toQueryBuilder
@@ -168,12 +193,15 @@
 //                                                                 ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#TRUE#toQueryBuilder().(queryBuilder)
 //                                                                        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#TRUE#toQueryBuilder().(queryBuilder)
               when {
                   currentDialect is SQLServerDialect || currentDialect is OracleDialect || currentDialect.h2Mode == H2Dialect.H2CompatibilityMode.Oracle ->
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
+//                                  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDialect#
 //                                                      ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                                                      ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
+//                                                                        ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDialect#
 //                                                                                         ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                                                                                         ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
 //                                                                                                        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getH2Mode().
@@ -195,8 +223,13 @@
 //                                                               ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanToStatementString().
               }
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#TRUE#toQueryBuilder().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#TRUE#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#TRUE#`<init>`().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#FALSE#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#FALSE#`<init>`().
       /**
        * Boolean operator that always evaluates to the SQL value `FALSE`.
        *
@@ -214,6 +247,8 @@
 //                 documentation ```kotlin\nprivate constructor(): Op.FALSE\n```\n\n----\n\n\n Boolean operator that always evaluates to the SQL value `FALSE`.\n\n **Note** Some databases, like SQL Server and Oracle, do not support conditions like `WHERE 0` or `WHERE FALSE`.\n When using these databases, this operator will instead produce the condition `1 = 0`.\n
 //                   ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                                  ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#FALSE#toQueryBuilder().
+//                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#FALSE#toQueryBuilder().(queryBuilder)
           override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                     ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Op#FALSE#toQueryBuilder().
 //                                    display_name toQueryBuilder
@@ -226,12 +261,15 @@
 //                                                                 ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#FALSE#toQueryBuilder().(queryBuilder)
 //                                                                        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#FALSE#toQueryBuilder().(queryBuilder)
               when {
                   currentDialect is SQLServerDialect || currentDialect is OracleDialect || currentDialect.h2Mode == H2Dialect.H2CompatibilityMode.Oracle ->
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
+//                                  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDialect#
 //                                                      ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                                                      ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
+//                                                                        ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDialect#
 //                                                                                         ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                                                                                         ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
 //                                                                                                        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getH2Mode().
@@ -252,8 +290,13 @@
 //                                                               ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#booleanToStatementString().
               }
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#FALSE#toQueryBuilder().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#FALSE#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#FALSE#`<init>`().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#NULL#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#NULL#`<init>`().
       internal object NULL : Op<Any>() {
 //                    ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Op#NULL#
 //                         display_name NULL
@@ -263,6 +306,8 @@
 //                         display_name NULL
 //                         documentation ```kotlin\nprivate constructor(): Op.NULL\n```
 //                           ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#NULL#toQueryBuilder().
+//                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Op#NULL#toQueryBuilder().(queryBuilder)
           override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                     ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Op#NULL#toQueryBuilder().
 //                                    display_name toQueryBuilder
@@ -275,17 +320,26 @@
 //                                                                 ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#NULL#toQueryBuilder().(queryBuilder)
 //                                                                        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#NULL#toQueryBuilder().(queryBuilder)
               append("NULL")
 //            ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#NULL#toQueryBuilder().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#NULL#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#NULL#`<init>`().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Op#`<init>`().
   
   // Logical Operators
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#
   /**
    * Represents a logical operator that inverts the specified boolean [expr].
    */
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#[T]
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#`<init>`().
   class NotOp<T>(
 //      ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#
 //            display_name NotOp
@@ -298,6 +352,10 @@
 //            ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#[T]
 //              display_name FirTypeParameterSymbol T
 //              documentation ```kotlin\nT\n```
+//            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#getExpr().
       /** Returns the expression being inverted. */
       val expr: Expression<T>
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#`<init>`().(expr)
@@ -311,9 +369,15 @@
 //             display_name expr
 //             documentation ```kotlin\npublic get(): Expression<T>\n```\n\n----\n\n Returns the expression being inverted.
 //              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#`<init>`().(expr)
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#expr.
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#getExpr().
   ) : Op<Boolean>(), Op.OpBoolean {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder { append("NOT (", expr, ")") }
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -329,8 +393,12 @@
 //                                                                                   ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                                                                                                   ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#expr.
 //                                                                                                   ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#getExpr().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#toQueryBuilder().(queryBuilder)
+//                                                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
   /**
    * Marker interface which indicates that expression should be wrapped with braces when used in compound operators
    */
@@ -350,7 +418,9 @@
 //                            relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#
 //                            relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InListOrNotInListBaseOp#
 //                            relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/ops/InTableOp#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#
   /**
    * Represent a logical operator that performs an operation between all the specified [expressions].
    * This is the base class for the `and` and `or` operators:
@@ -358,6 +428,7 @@
    * @see AndOp
    * @see OrOp
    */
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#`<init>`().
   sealed class CompoundBooleanOp(
 //             ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#
 //                               display_name CompoundBooleanOp
@@ -370,6 +441,9 @@
 //             ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#`<init>`().
 //                               display_name CompoundBooleanOp
 //                               documentation ```kotlin\nprotected constructor(operator: String, expressions: List<Expression<Boolean>>): CompoundBooleanOp\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#`<init>`().(operator)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#operator.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getOperator().
       private val operator: String,
 //                ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#`<init>`().(operator)
 //                         display_name operator
@@ -382,6 +456,12 @@
 //                         display_name operator
 //                         documentation ```kotlin\nprivate final val operator: String\n```
 //                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#`<init>`().(operator)
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#operator.
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getOperator().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#`<init>`().(expressions)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#expressions.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getExpressions().
       internal val expressions: List<Expression<Boolean>>
 //                 ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#`<init>`().(expressions)
 //                             display_name expressions
@@ -394,10 +474,16 @@
 //                             display_name expressions
 //                             documentation ```kotlin\ninternal get(): List<Expression<Boolean>>\n```
 //                              ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#`<init>`().(expressions)
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#expressions.
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getExpressions().
   ) : Op<Boolean>(), ComplexExpression, Op.OpBoolean {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
 //                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -410,23 +496,31 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#toQueryBuilder().(queryBuilder)
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#toQueryBuilder().(queryBuilder)
+//                                                         ⌄ enclosing_range_start local 0
           expressions.appendTo(this, separator = operator) { appendExpression(it) }
 //        ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#expressions.
 //        ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getExpressions().
 //                    ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendTo().
 //                                               ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getOperator().
 //                                               ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#operator.
-//                                                         ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                         ^^^^^^^^^^^^^^^^^^^^^^^^ definition local 0
 //                                                                                  display_name it
-//                                                                                  documentation ```kotlin\nit: CompositeID\n```
+//                                                                                  documentation ```kotlin\nit: Expression<Boolean>\n```
 //                                                           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendExpression().
-//                                                                            ^^ reference semanticdb maven . . (it)
+//                                                                            ^^ reference local 0
+//                                                                                ⌃ enclosing_range_end local 0
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#
   /**
    * Represents a logical operator that performs an `and` operation between all the specified [expressions].
    */
+//           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#`<init>`().
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#`<init>`().(expressions)
   class AndOp(expressions: List<Expression<Boolean>>) : CompoundBooleanOp(" AND ", expressions)
 //      ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#
 //            display_name AndOp
@@ -441,10 +535,16 @@
 //                         ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
 //                                                      ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#
 //                                                                                 ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#`<init>`().(expressions)
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#`<init>`().(expressions)
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#`<init>`().
+//                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#
   /**
    * Represents a logical operator that performs an `or` operation between all the specified [expressions].
    */
+//          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#`<init>`().
+//           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#`<init>`().(expressions)
   class OrOp(expressions: List<Expression<Boolean>>) : CompoundBooleanOp(" OR ", expressions)
 //      ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#
 //           display_name OrOp
@@ -459,8 +559,13 @@
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
 //                                                     ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#
 //                                                                               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#`<init>`().(expressions)
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#`<init>`().(expressions)
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#`<init>`().
+//                                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/not().
   /** Returns the inverse of this boolean expression. */
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/not().(op)
   fun not(op: Expression<Boolean>): Op<Boolean> = NotOp(op)
 //    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/not().
 //        display_name not
@@ -472,8 +577,12 @@
 //                                  ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NotOp#`<init>`().
 //                                                      ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/not().(op)
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/not().(op)
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/not().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/and().
   /** Returns the result of performing a logical `and` operation between this expression and the [op]. */
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/and().(op)
   infix fun Expression<Boolean>.and(op: Expression<Boolean>): Op<Boolean> = when {
 //                              ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/and().
 //                                  display_name and
@@ -483,8 +592,11 @@
 //                                     documentation ```kotlin\nop: Expression<Boolean>\n```
 //                                      ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
 //                                                            ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/and().(op)
       this is AndOp && op is AndOp -> AndOp(expressions + op.expressions)
+//            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#
 //                     ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/and().(op)
+//                           ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#
 //                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#`<init>`().
 //                                          ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#expressions.
 //                                          ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getExpressions().
@@ -493,6 +605,7 @@
 //                                                           ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#expressions.
 //                                                           ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getExpressions().
       this is AndOp -> AndOp(expressions + op)
+//            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#
 //                     ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#`<init>`().
 //                           ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#expressions.
 //                           ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getExpressions().
@@ -500,7 +613,9 @@
 //                                         ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/and().(op)
       op is AndOp -> AndOp(
 //    ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/and().(op)
+//          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#
 //                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#`<init>`().
+//                                                                     ⌄ enclosing_range_start local 1
           ArrayList<Expression<Boolean>>(op.expressions.size + 1).also {
 //        ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`().
 //                                       ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/and().(op)
@@ -510,27 +625,31 @@
 //                                                      ^^^^ reference semanticdb maven . . kotlin/collections/List#size.
 //                                                           ^ reference semanticdb maven . . kotlin/Int#plus(+2).
 //                                                                ^^^^ reference semanticdb maven . . kotlin/also().
-//                                                                     ^ definition semanticdb maven . . (it) 3:9
+//                                                                     ^ definition local 1 3:9
 //                                                                       display_name it
-//                                                                       documentation ```kotlin\nit: CompositeID\n```
+//                                                                       documentation ```kotlin\nit: {kotlin/collections/ArrayList<org/jetbrains/exposed/v1/core/Expression<kotlin/Boolean>>=} ArrayList<Expression<Boolean>>\n```
               it.add(this)
-//            ^^ reference semanticdb maven . . (it)
+//            ^^ reference local 1
 //               ^^^ reference semanticdb maven jdk 11 java/util/ArrayList#add().
               it.addAll(op.expressions)
-//            ^^ reference semanticdb maven . . (it)
+//            ^^ reference local 1
 //               ^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#addAll().
 //                      ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/and().(op)
 //                         ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#expressions.
 //                         ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getExpressions().
           }
+//        ⌃ enclosing_range_end local 1
       )
       else -> AndOp(listOf(this, op))
 //            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndOp#`<init>`().
 //                  ^^^^^^ reference semanticdb maven . . kotlin/collections/listOf(+1).
 //                               ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/and().(op)
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/and().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/or().
   /** Returns the result of performing a logical `or` operation between this expression and the [op]. */
+//                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/or().(op)
   infix fun Expression<Boolean>.or(op: Expression<Boolean>): Op<Boolean> = when {
 //                              ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/or().
 //                                 display_name or
@@ -540,8 +659,11 @@
 //                                    documentation ```kotlin\nop: Expression<Boolean>\n```
 //                                     ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
 //                                                           ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/or().(op)
       this is OrOp && op is OrOp -> OrOp(expressions + op.expressions)
+//            ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#
 //                    ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/or().(op)
+//                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#
 //                                  ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#`<init>`().
 //                                       ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#expressions.
 //                                       ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getExpressions().
@@ -550,6 +672,7 @@
 //                                                        ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#expressions.
 //                                                        ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getExpressions().
       this is OrOp -> OrOp(expressions + op)
+//            ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#
 //                    ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#`<init>`().
 //                         ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#expressions.
 //                         ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getExpressions().
@@ -557,7 +680,9 @@
 //                                       ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/or().(op)
       op is OrOp -> OrOp(
 //    ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/or().(op)
+//          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#
 //                  ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#`<init>`().
+//                                                                     ⌄ enclosing_range_start local 2
           ArrayList<Expression<Boolean>>(op.expressions.size + 1).also {
 //        ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`().
 //                                       ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/or().(op)
@@ -567,30 +692,34 @@
 //                                                      ^^^^ reference semanticdb maven . . kotlin/collections/List#size.
 //                                                           ^ reference semanticdb maven . . kotlin/Int#plus(+2).
 //                                                                ^^^^ reference semanticdb maven . . kotlin/also().
-//                                                                     ^ definition semanticdb maven . . (it) 3:9
+//                                                                     ^ definition local 2 3:9
 //                                                                       display_name it
-//                                                                       documentation ```kotlin\nit: CompositeID\n```
+//                                                                       documentation ```kotlin\nit: {kotlin/collections/ArrayList<org/jetbrains/exposed/v1/core/Expression<kotlin/Boolean>>=} ArrayList<Expression<Boolean>>\n```
               it.add(this)
-//            ^^ reference semanticdb maven . . (it)
+//            ^^ reference local 2
 //               ^^^ reference semanticdb maven jdk 11 java/util/ArrayList#add().
               it.addAll(op.expressions)
-//            ^^ reference semanticdb maven . . (it)
+//            ^^ reference local 2
 //               ^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#addAll().
 //                      ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/or().(op)
 //                         ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#expressions.
 //                         ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompoundBooleanOp#getExpressions().
           }
+//        ⌃ enclosing_range_end local 2
       )
       else -> OrOp(listOf(this, op))
 //            ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrOp#`<init>`().
 //                 ^^^^^^ reference semanticdb maven . . kotlin/collections/listOf(+1).
 //                              ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/or().(op)
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/or().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/andIfNotNull().
   /**
    * Returns the result of performing a logical `and` operation between this expression and the [op] **if** [op] is not null.
    * Otherwise, this expression will be returned.
    */
+//                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/andIfNotNull().(op)
   infix fun Op<Boolean>.andIfNotNull(op: Expression<Boolean>?): Op<Boolean> =
 //                      ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/andIfNotNull().
 //                                   display_name andIfNotNull
@@ -600,19 +729,25 @@
 //                                      documentation ```kotlin\nop: Expression<Boolean>?\n```
 //                                       ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
 //                                                              ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/andIfNotNull().(op)
+//            ⌄ enclosing_range_start local 3
       op?.let { this and it } ?: this
 //    ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/andIfNotNull().(op)
 //        ^^^ reference semanticdb maven . . kotlin/let().
-//            ^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//            ^^^^^^^^^^^^^^^ definition local 3
 //                            display_name it
-//                            documentation ```kotlin\nit: CompositeID\n```
+//                            documentation ```kotlin\nit: Expression<Boolean>\n```
 //                   ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/and().
-//                       ^^ reference semanticdb maven . . (it)
+//                       ^^ reference local 3
+//                          ⌃ enclosing_range_end local 3
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/andIfNotNull().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/orIfNotNull().
   /**
    * Returns the result of performing a logical `or` operation between this expression and the [op] **if** [op] is not null.
    * Otherwise, this expression will be returned.
    */
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/orIfNotNull().(op)
   infix fun Op<Boolean>.orIfNotNull(op: Expression<Boolean>?): Op<Boolean> =
 //                      ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/orIfNotNull().
 //                                  display_name orIfNotNull
@@ -622,15 +757,20 @@
 //                                     documentation ```kotlin\nop: Expression<Boolean>?\n```
 //                                      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
 //                                                             ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/orIfNotNull().(op)
+//            ⌄ enclosing_range_start local 4
       op?.let { this or it } ?: this
 //    ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/orIfNotNull().(op)
 //        ^^^ reference semanticdb maven . . kotlin/let().
-//            ^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//            ^^^^^^^^^^^^^^ definition local 4
 //                           display_name it
-//                           documentation ```kotlin\nit: CompositeID\n```
+//                           documentation ```kotlin\nit: Expression<Boolean>\n```
 //                   ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/or().
-//                      ^^ reference semanticdb maven . . (it)
+//                      ^^ reference local 4
+//                         ⌃ enclosing_range_end local 4
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/orIfNotNull().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/compoundAnd().
   /** Reduces this list to a single expression by performing an `and` operation between all the expressions in the list. */
   fun List<Op<Boolean>>.compoundAnd(): Op<Boolean> = reduce(Op<Boolean>::and)
 //                      ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/compoundAnd().
@@ -639,7 +779,9 @@
 //                                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                                                   ^^^^^^ reference semanticdb maven . . kotlin/collections/reduce(+9).
 //                                                                       ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/and().
+//                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/compoundAnd().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/compoundOr().
   /** Reduces this list to a single expression by performing an `or` operation between all the expressions in the list. */
   fun List<Op<Boolean>>.compoundOr(): Op<Boolean> = reduce(Op<Boolean>::or)
 //                      ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/compoundOr().
@@ -648,8 +790,11 @@
 //                                    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                                                  ^^^^^^ reference semanticdb maven . . kotlin/collections/reduce(+9).
 //                                                                      ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/or().
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/compoundOr().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/and(+1).
   /** Returns the result of performing a logical `and` operation between this expression and the [op]. */
+//                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/and(+1).(op)
   inline fun Expression<Boolean>.and(op: SqlExpressionBuilder.() -> Op<Boolean>): Op<Boolean> = and(Op.build(op))
 //                               ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/and(+1).
 //                                   display_name and
@@ -662,8 +807,12 @@
 //                                                                                              ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/and().
 //                                                                                                     ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().
 //                                                                                                           ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/and(+1).(op)
+//                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/and(+1).(op)
+//                                                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/and(+1).
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/or(+1).
   /**  Returns the result of performing a logical `or` operation between this expression and the [op].*/
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/or(+1).(op)
   inline fun Expression<Boolean>.or(op: SqlExpressionBuilder.() -> Op<Boolean>): Op<Boolean> = or(Op.build(op))
 //                               ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/or(+1).
 //                                  display_name or
@@ -676,8 +825,12 @@
 //                                                                                             ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/or().
 //                                                                                                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().
 //                                                                                                         ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/or(+1).(op)
+//                                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/or(+1).(op)
+//                                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/or(+1).
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/andNot().
   /** Returns the result of performing a logical `and` operation between this expression and the negate [op]. */
+//                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/andNot().(op)
   inline fun Expression<Boolean>.andNot(op: SqlExpressionBuilder.() -> Op<Boolean>): Op<Boolean> = and(not(Op.build(op)))
 //                               ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/andNot().
 //                                      display_name andNot
@@ -691,8 +844,12 @@
 //                                                                                                     ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/not().
 //                                                                                                            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().
 //                                                                                                                  ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/andNot().(op)
+//                                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/andNot().(op)
+//                                                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/andNot().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/orNot().
   /** Returns the result of performing a logical `or` operation between this expression and the negate [op]. */
+//                                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/orNot().(op)
   inline fun Expression<Boolean>.orNot(op: SqlExpressionBuilder.() -> Op<Boolean>): Op<Boolean> = or(not(Op.build(op)))
 //                               ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/orNot().
 //                                     display_name orNot
@@ -706,11 +863,15 @@
 //                                                                                                   ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/not().
 //                                                                                                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#Companion#build().
 //                                                                                                                ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/orNot().(op)
+//                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/orNot().(op)
+//                                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/orNot().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/andIfNotNull(+1).
   /**
    * Returns the result of performing a logical `and` operation between this expression and the [op] **if** [op] is not null.
    * Otherwise, this expression will be returned.
    */
+//                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/andIfNotNull(+1).(op)
   inline fun Op<Boolean>.andIfNotNull(op: SqlExpressionBuilder.() -> Op<Boolean>?): Op<Boolean> = andIfNotNull(SqlExpressionBuilder.op())
 //                       ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/andIfNotNull(+1).
 //                                    display_name andIfNotNull
@@ -723,11 +884,15 @@
 //                                                                                                ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/andIfNotNull().
 //                                                                                                                                  ^^ reference semanticdb maven . . kotlin/Function1#invoke().
 //                                                                                                                                  ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/andIfNotNull(+1).(op)
+//                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/andIfNotNull(+1).(op)
+//                                                                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/andIfNotNull(+1).
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/orIfNotNull(+1).
   /**
    * Returns the result of performing a logical `or` operation between this expression and the [op] **if** [op] is not null.
    * Otherwise, this expression will be returned.
    */
+//                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/orIfNotNull(+1).(op)
   inline fun Op<Boolean>.orIfNotNull(op: SqlExpressionBuilder.() -> Op<Boolean>?): Op<Boolean> = orIfNotNull(SqlExpressionBuilder.op())
 //                       ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/orIfNotNull(+1).
 //                                   display_name orIfNotNull
@@ -740,12 +905,16 @@
 //                                                                                               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/orIfNotNull().
 //                                                                                                                                ^^ reference semanticdb maven . . kotlin/Function1#invoke().
 //                                                                                                                                ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/orIfNotNull(+1).(op)
+//                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/orIfNotNull(+1).(op)
+//                                                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/orIfNotNull(+1).
   
   // Comparison Operators
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#
   /**
    * Represents a comparison between [expr1] and [expr2] using the given SQL [opSign].
    */
+//                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#`<init>`().
   abstract class ComparisonOp(
 //               ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#
 //                            display_name ComparisonOp
@@ -763,6 +932,9 @@
 //               ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#`<init>`().
 //                            display_name ComparisonOp
 //                            documentation ```kotlin\npublic constructor(expr1: Expression<*>, expr2: Expression<*>, opSign: String): ComparisonOp\n```\n\n----\n\n Returns the left-hand side operand.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#`<init>`().(expr1)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#expr1.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#getExpr1().
       /** Returns the left-hand side operand. */
       val expr1: Expression<*>,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#`<init>`().(expr1)
@@ -776,6 +948,12 @@
 //              display_name expr1
 //              documentation ```kotlin\npublic get(): Expression<*>\n```\n\n----\n\n Returns the left-hand side operand.
 //               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#`<init>`().(expr1)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#expr1.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#getExpr1().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#`<init>`().(expr2)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#expr2.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#getExpr2().
       /** Returns the right-hand side operand. */
       val expr2: Expression<*>,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#`<init>`().(expr2)
@@ -789,6 +967,12 @@
 //              display_name expr2
 //              documentation ```kotlin\npublic get(): Expression<*>\n```\n\n----\n\n Returns the right-hand side operand.
 //               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#`<init>`().(expr2)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#expr2.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#getExpr2().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#`<init>`().(opSign)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#opSign.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#getOpSign().
       /** Returns the symbol of the comparison operation. */
       val opSign: String
 //        ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#`<init>`().(opSign)
@@ -802,10 +986,16 @@
 //               display_name opSign
 //               documentation ```kotlin\npublic final val opSign: String\n```\n\n----\n\n Returns the symbol of the comparison operation.
 //                ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#`<init>`().(opSign)
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#opSign.
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#getOpSign().
   ) : Op<Boolean>(), ComplexExpression, Op.OpBoolean {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
 //                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -819,6 +1009,7 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#toQueryBuilder().(queryBuilder)
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#toQueryBuilder().(queryBuilder)
           appendComparison(expr1, expr2, opSign)
 //        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().
 //                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#expr1.
@@ -828,11 +1019,17 @@
 //                                       ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#getOpSign().
 //                                       ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#opSign.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/EqOp#
   /**
    * Represents an SQL operator that checks if [expr1] is equals to [expr2].
    */
+//          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/EqOp#`<init>`().
+//           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/EqOp#`<init>`().(expr1)
+//                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/EqOp#`<init>`().(expr2)
   class EqOp(expr1: Expression<*>, expr2: Expression<*>) : ComparisonOp(expr1, expr2, "=")
 //      ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/EqOp#
 //           display_name EqOp
@@ -852,10 +1049,18 @@
 //                                                         ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#
 //                                                                      ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/EqOp#`<init>`().(expr1)
 //                                                                             ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/EqOp#`<init>`().(expr2)
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/EqOp#`<init>`().(expr1)
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/EqOp#`<init>`().(expr2)
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/EqOp#`<init>`().
+//                                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/EqOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NeqOp#
   /**
    * Represents an SQL operator that checks if [expr1] is not equals to [expr2].
    */
+//           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NeqOp#`<init>`().
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NeqOp#`<init>`().(expr1)
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NeqOp#`<init>`().(expr2)
   class NeqOp(expr1: Expression<*>, expr2: Expression<*>) : ComparisonOp(expr1, expr2, "<>")
 //      ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NeqOp#
 //            display_name NeqOp
@@ -875,10 +1080,18 @@
 //                                                          ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#
 //                                                                       ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NeqOp#`<init>`().(expr1)
 //                                                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NeqOp#`<init>`().(expr2)
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NeqOp#`<init>`().(expr1)
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NeqOp#`<init>`().(expr2)
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NeqOp#`<init>`().
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NeqOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessOp#
   /**
    * Represents an SQL operator that checks if [expr1] is less than [expr2].
    */
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessOp#`<init>`().
+//             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessOp#`<init>`().(expr1)
+//                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessOp#`<init>`().(expr2)
   class LessOp(expr1: Expression<*>, expr2: Expression<*>) : ComparisonOp(expr1, expr2, "<")
 //      ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LessOp#
 //             display_name LessOp
@@ -898,10 +1111,18 @@
 //                                                           ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#
 //                                                                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LessOp#`<init>`().(expr1)
 //                                                                               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LessOp#`<init>`().(expr2)
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessOp#`<init>`().(expr1)
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessOp#`<init>`().(expr2)
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessOp#`<init>`().
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqOp#
   /**
    * Represents an SQL operator that checks if [expr1] is less than or equal to [expr2].
    */
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqOp#`<init>`().
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqOp#`<init>`().(expr1)
+//                                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqOp#`<init>`().(expr2)
   class LessEqOp(expr1: Expression<*>, expr2: Expression<*>) : ComparisonOp(expr1, expr2, "<=")
 //      ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqOp#
 //               display_name LessEqOp
@@ -921,10 +1142,18 @@
 //                                                             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#
 //                                                                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqOp#`<init>`().(expr1)
 //                                                                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqOp#`<init>`().(expr2)
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqOp#`<init>`().(expr1)
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqOp#`<init>`().(expr2)
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqOp#`<init>`().
+//                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterOp#
   /**
    * Represents an SQL operator that checks if [expr1] is greater than [expr2].
    */
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterOp#`<init>`().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterOp#`<init>`().(expr1)
+//                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterOp#`<init>`().(expr2)
   class GreaterOp(expr1: Expression<*>, expr2: Expression<*>) : ComparisonOp(expr1, expr2, ">")
 //      ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterOp#
 //                display_name GreaterOp
@@ -944,10 +1173,18 @@
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#
 //                                                                           ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterOp#`<init>`().(expr1)
 //                                                                                  ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterOp#`<init>`().(expr2)
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterOp#`<init>`().(expr1)
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterOp#`<init>`().(expr2)
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterOp#`<init>`().
+//                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqOp#
   /**
    * Represents an SQL operator that checks if [expr1] is greater than or equal to [expr2].
    */
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqOp#`<init>`().
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqOp#`<init>`().(expr1)
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqOp#`<init>`().(expr2)
   class GreaterEqOp(expr1: Expression<*>, expr2: Expression<*>) : ComparisonOp(expr1, expr2, ">=")
 //      ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqOp#
 //                  display_name GreaterEqOp
@@ -967,10 +1204,16 @@
 //                                                                ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#
 //                                                                             ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqOp#`<init>`().(expr1)
 //                                                                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqOp#`<init>`().(expr2)
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqOp#`<init>`().(expr1)
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqOp#`<init>`().(expr2)
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqOp#`<init>`().
+//                                                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Between#
   /**
    * Represents an SQL operator that checks if the specified [expr] is between the values [from] and [to].
    */
+//             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Between#`<init>`().
   class Between(
 //      ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Between#
 //              display_name Between
@@ -981,6 +1224,9 @@
 //      ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Between#`<init>`().
 //              display_name Between
 //              documentation ```kotlin\npublic constructor(expr: Expression<*>, from: Expression<*>, to: Expression<*>): Between\n```\n\n----\n\n The expression being checked.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Between#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Between#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Between#getExpr().
       /** The expression being checked. */
       val expr: Expression<*>,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Between#`<init>`().(expr)
@@ -994,6 +1240,12 @@
 //             display_name expr
 //             documentation ```kotlin\npublic get(): Expression<*>\n```\n\n----\n\n The expression being checked.
 //              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Between#`<init>`().(expr)
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Between#expr.
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Between#getExpr().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Between#`<init>`().(from)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Between#from.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Between#getFrom().
       /** Returns the lower limit of the range to check against. */
       val from: Expression<*>,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Between#`<init>`().(from)
@@ -1007,6 +1259,12 @@
 //             display_name from
 //             documentation ```kotlin\npublic get(): Expression<*>\n```\n\n----\n\n Returns the lower limit of the range to check against.
 //              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Between#`<init>`().(from)
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Between#from.
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Between#getFrom().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Between#`<init>`().(to)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Between#to.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Between#getTo().
       /** Returns the upper limit of the range to check against. */
       val to: Expression<*>
 //        ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Between#`<init>`().(to)
@@ -1020,10 +1278,16 @@
 //           display_name to
 //           documentation ```kotlin\npublic final val to: Expression<*>\n```\n\n----\n\n Returns the upper limit of the range to check against.
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Between#`<init>`().(to)
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Between#to.
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Between#getTo().
   ) : Op<Boolean>(), ComplexExpression, Op.OpBoolean {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
 //                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Between#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Between#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Between#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder { append(expr, " BETWEEN ", from, " AND ", to) }
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Between#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1043,11 +1307,16 @@
 //                                                                                                             ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Between#getFrom().
 //                                                                                                                            ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Between#getTo().
 //                                                                                                                            ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Between#to.
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Between#toQueryBuilder().(queryBuilder)
+//                                                                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Between#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Between#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#
   /**
    * Represents an SQL operator that checks if the specified [expr] is null.
    */
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#`<init>`().
   class IsNullOp(
 //      ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#
 //               display_name IsNullOp
@@ -1058,6 +1327,9 @@
 //      ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#`<init>`().
 //               display_name IsNullOp
 //               documentation ```kotlin\npublic constructor(expr: Expression<*>): IsNullOp\n```\n\n----\n\n The expression being checked.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#getExpr().
       /** The expression being checked. */
       val expr: Expression<*>
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#`<init>`().(expr)
@@ -1071,10 +1343,16 @@
 //             display_name expr
 //             documentation ```kotlin\npublic get(): Expression<*>\n```\n\n----\n\n The expression being checked.
 //              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#`<init>`().(expr)
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#expr.
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#getExpr().
   ) : Op<Boolean>(), ComplexExpression, Op.OpBoolean {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
 //                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder { append(expr, " IS NULL") }
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1090,11 +1368,16 @@
 //                                                                                   ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                                                                                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#expr.
 //                                                                                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#getExpr().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#toQueryBuilder().(queryBuilder)
+//                                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNullOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#
   /**
    * Represents an SQL operator that checks if the specified [expr] is not null.
    */
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#`<init>`().
   class IsNotNullOp(
 //      ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#
 //                  display_name IsNotNullOp
@@ -1105,6 +1388,9 @@
 //      ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#`<init>`().
 //                  display_name IsNotNullOp
 //                  documentation ```kotlin\npublic constructor(expr: Expression<*>): IsNotNullOp\n```\n\n----\n\n The expression being checked.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#getExpr().
       /** The expression being checked. */
       val expr: Expression<*>
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#`<init>`().(expr)
@@ -1118,10 +1404,16 @@
 //             display_name expr
 //             documentation ```kotlin\npublic get(): Expression<*>\n```\n\n----\n\n The expression being checked.
 //              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#`<init>`().(expr)
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#expr.
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#getExpr().
   ) : Op<Boolean>(), ComplexExpression, Op.OpBoolean {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
 //                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder { append(expr, " IS NOT NULL") }
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1137,12 +1429,17 @@
 //                                                                                   ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                                                                                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#expr.
 //                                                                                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#getExpr().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#toQueryBuilder().(queryBuilder)
+//                                                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotNullOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#
   /**
    * Represents an SQL operator that checks if [expression1] is equal to [expression2], with `null` treated as a comparable value.
    * This comparison never returns null.
    */
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#`<init>`().
   class IsNotDistinctFromOp(
 //      ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#
 //                          display_name IsNotDistinctFromOp
@@ -1153,6 +1450,9 @@
 //      ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#`<init>`().
 //                          display_name IsNotDistinctFromOp
 //                          documentation ```kotlin\npublic constructor(expression1: Expression<*>, expression2: Expression<*>): IsNotDistinctFromOp\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#`<init>`().(expression1)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#expression1.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#getExpression1().
       val expression1: Expression<*>,
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#`<init>`().(expression1)
 //                    display_name expression1
@@ -1165,6 +1465,12 @@
 //                    display_name expression1
 //                    documentation ```kotlin\npublic get(): Expression<*>\n```
 //                     ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#`<init>`().(expression1)
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#expression1.
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#getExpression1().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#`<init>`().(expression2)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#expression2.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#getExpression2().
       val expression2: Expression<*>
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#`<init>`().(expression2)
 //                    display_name expression2
@@ -1177,10 +1483,16 @@
 //                    display_name expression2
 //                    documentation ```kotlin\npublic get(): Expression<*>\n```
 //                     ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#`<init>`().(expression2)
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#expression2.
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#getExpression2().
   ) : Op<Boolean>(), ComplexExpression, Op.OpBoolean {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
 //                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1192,22 +1504,32 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#toQueryBuilder().(queryBuilder)
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#toQueryBuilder().(queryBuilder)
+//              ⌄ enclosing_range_start local 5
           when (currentDialectIfAvailable) {
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 5
+//                                        display_name <when-subject>
+//                                        documentation ```kotlin\nlocal val <when-subject>: DatabaseDialect?\n```
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialectIfAvailable.
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialectIfAvailable().
+//                                      ⌃ enclosing_range_end local 5
               is MariaDBDialect, is MysqlDialect -> appendComparison(expression1, expression2, "<=>")
+//               ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#
+//                                  ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#
 //                                                  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().
 //                                                                   ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#expression1.
 //                                                                   ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#getExpression1().
 //                                                                                ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#expression2.
 //                                                                                ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#getExpression2().
               is OracleDialect -> append("DECODE(", expression1, ", ", expression2, ", 1, 0) = 1")
+//               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDialect#
 //                                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                                                  ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#expression1.
 //                                                  ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#getExpression1().
 //                                                                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#expression2.
 //                                                                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#getExpression2().
               is SQLiteDialect -> appendComparison(expression1, expression2, "IS")
+//               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLiteDialect#
 //                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().
 //                                                 ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#expression1.
 //                                                 ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#getExpression1().
@@ -1221,12 +1543,16 @@
 //                                                  ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#getExpression2().
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsNotDistinctFromOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#
   /**
    * Represents an SQL operator that checks if [expression1] is not equal to [expression2], with `null` treated as a comparable value.
    * This comparison never returns null.
    */
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#`<init>`().
   class IsDistinctFromOp(
 //      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#
 //                       display_name IsDistinctFromOp
@@ -1237,6 +1563,9 @@
 //      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#`<init>`().
 //                       display_name IsDistinctFromOp
 //                       documentation ```kotlin\npublic constructor(expression1: Expression<*>, expression2: Expression<*>): IsDistinctFromOp\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#`<init>`().(expression1)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#expression1.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#getExpression1().
       val expression1: Expression<*>,
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#`<init>`().(expression1)
 //                    display_name expression1
@@ -1249,6 +1578,12 @@
 //                    display_name expression1
 //                    documentation ```kotlin\npublic get(): Expression<*>\n```
 //                     ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#`<init>`().(expression1)
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#expression1.
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#getExpression1().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#`<init>`().(expression2)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#expression2.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#getExpression2().
       val expression2: Expression<*>
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#`<init>`().(expression2)
 //                    display_name expression2
@@ -1261,10 +1596,16 @@
 //                    display_name expression2
 //                    documentation ```kotlin\npublic get(): Expression<*>\n```
 //                     ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#`<init>`().(expression2)
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#expression2.
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#getExpression2().
   ) : Op<Boolean>(), ComplexExpression, Op.OpBoolean {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
 //                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1276,10 +1617,18 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#toQueryBuilder().(queryBuilder)
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#toQueryBuilder().(queryBuilder)
+//              ⌄ enclosing_range_start local 6
           when (currentDialectIfAvailable) {
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 6
+//                                        display_name <when-subject>
+//                                        documentation ```kotlin\nlocal val <when-subject>: DatabaseDialect?\n```
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialectIfAvailable.
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialectIfAvailable().
+//                                      ⌃ enclosing_range_end local 6
               is MariaDBDialect, is MysqlDialect -> {
+//               ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#
+//                                  ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#
                   +"NOT("
 //                ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
                   appendComparison(expression1, expression2, "<=>")
@@ -1292,12 +1641,14 @@
 //                ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
               }
               is OracleDialect -> append("DECODE(", expression1, ", ", expression2, ", 1, 0) = 0")
+//               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDialect#
 //                                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                                                  ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#expression1.
 //                                                  ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#getExpression1().
 //                                                                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#expression2.
 //                                                                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#getExpression2().
               is SQLiteDialect -> appendComparison(expression1, expression2, "IS NOT")
+//               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLiteDialect#
 //                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().
 //                                                 ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#expression1.
 //                                                 ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#getExpression1().
@@ -1311,13 +1662,19 @@
 //                                                  ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#getExpression2().
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/IsDistinctFromOp#
   
   // Mathematical Operators
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#
   /**
    * Represents an SQL operator that adds [expr2] to [expr1].
    */
+//             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#[T]
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#[S]
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().
   class PlusOp<T, S : T>(
 //      ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#
 //             display_name PlusOp
@@ -1332,33 +1689,47 @@
 //                ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#[S]
 //                  display_name FirTypeParameterSymbol S
 //                  documentation ```kotlin\nS : T\n```
+//             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#[T]
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#[S]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().(expr1)
       /** The left-hand side operand. */
       expr1: Expression<T>,
 //    ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().(expr1)
 //          display_name expr1
 //          documentation ```kotlin\nexpr1: Expression<T>\n```\n\n----\n\n The left-hand side operand.
 //           ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().(expr1)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().(expr2)
       /** The right-hand side operand. */
       expr2: Expression<S>,
 //    ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().(expr2)
 //          display_name expr2
 //          documentation ```kotlin\nexpr2: Expression<S>\n```\n\n----\n\n The right-hand side operand.
 //           ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().(expr2)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().(columnType)
       /** The column type of this expression. */
       columnType: IColumnType<T & Any>
 //    ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().(columnType)
 //               display_name columnType
 //               documentation ```kotlin\ncolumnType: IColumnType<T & Any>\n```\n\n----\n\n The column type of this expression.
 //                ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().(columnType)
   ) : CustomOperator<T>("+", columnType, expr1, expr2)
 //    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CustomOperator#
 //                           ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().(columnType)
 //                                       ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().(expr1)
 //                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().(expr2)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#`<init>`().
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PlusOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#
   /**
    * Represents an SQL operator that subtracts [expr2] from [expr1].
    */
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#[T]
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#[S]
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().
   class MinusOp<T, S : T>(
 //      ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#
 //              display_name MinusOp
@@ -1373,33 +1744,47 @@
 //                 ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#[S]
 //                   display_name FirTypeParameterSymbol S
 //                   documentation ```kotlin\nS : T\n```
+//              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#[T]
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#[S]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().(expr1)
       /** The left-hand side operand. */
       expr1: Expression<T>,
 //    ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().(expr1)
 //          display_name expr1
 //          documentation ```kotlin\nexpr1: Expression<T>\n```\n\n----\n\n The left-hand side operand.
 //           ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().(expr1)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().(expr2)
       /** The right-hand side operand. */
       expr2: Expression<S>,
 //    ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().(expr2)
 //          display_name expr2
 //          documentation ```kotlin\nexpr2: Expression<S>\n```\n\n----\n\n The right-hand side operand.
 //           ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().(expr2)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().(columnType)
       /** The column type of this expression. */
       columnType: IColumnType<T & Any>
 //    ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().(columnType)
 //               display_name columnType
 //               documentation ```kotlin\ncolumnType: IColumnType<T & Any>\n```\n\n----\n\n The column type of this expression.
 //                ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().(columnType)
   ) : CustomOperator<T>("-", columnType, expr1, expr2)
 //    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CustomOperator#
 //                           ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().(columnType)
 //                                       ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().(expr1)
 //                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().(expr2)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#`<init>`().
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/MinusOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#
   /**
    * Represents an SQL operator that multiplies [expr1] by [expr2].
    */
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#[T]
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#[S]
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().
   class TimesOp<T, S : T>(
 //      ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#
 //              display_name TimesOp
@@ -1414,33 +1799,47 @@
 //                 ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#[S]
 //                   display_name FirTypeParameterSymbol S
 //                   documentation ```kotlin\nS : T\n```
+//              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#[T]
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#[S]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().(expr1)
       /** The left-hand side operand. */
       expr1: Expression<T>,
 //    ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().(expr1)
 //          display_name expr1
 //          documentation ```kotlin\nexpr1: Expression<T>\n```\n\n----\n\n The left-hand side operand.
 //           ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().(expr1)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().(expr2)
       /** The right-hand side operand. */
       expr2: Expression<S>,
 //    ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().(expr2)
 //          display_name expr2
 //          documentation ```kotlin\nexpr2: Expression<S>\n```\n\n----\n\n The right-hand side operand.
 //           ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().(expr2)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().(columnType)
       /** The column type of this expression. */
       columnType: IColumnType<T & Any>
 //    ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().(columnType)
 //               display_name columnType
 //               documentation ```kotlin\ncolumnType: IColumnType<T & Any>\n```\n\n----\n\n The column type of this expression.
 //                ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().(columnType)
   ) : CustomOperator<T>("*", columnType, expr1, expr2)
 //    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CustomOperator#
 //                           ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().(columnType)
 //                                       ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().(expr1)
 //                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().(expr2)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#`<init>`().
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/TimesOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#
   /**
    * Represents an SQL operator that divides [expr1] by [expr2].
    */
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#[T]
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#[S]
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().
   class DivideOp<T, S : T>(
 //      ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#
 //               display_name DivideOp
@@ -1455,6 +1854,11 @@
 //                  ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#[S]
 //                    display_name FirTypeParameterSymbol S
 //                    documentation ```kotlin\nS : T\n```
+//               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#[T]
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#[S]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().(dividend)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#dividend.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#getDividend().
       /** The left-hand side operand. */
       private val dividend: Expression<T>,
 //                ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().(dividend)
@@ -1468,6 +1872,12 @@
 //                         display_name dividend
 //                         documentation ```kotlin\nprivate get(): Expression<T>\n```\n\n----\n\n The left-hand side operand.
 //                          ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().(dividend)
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#dividend.
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#getDividend().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().(divisor)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#divisor.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#getDivisor().
       /** The right-hand side operand. */
       private val divisor: Expression<S>,
 //                ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().(divisor)
@@ -1481,17 +1891,25 @@
 //                        display_name divisor
 //                        documentation ```kotlin\nprivate get(): Expression<S>\n```\n\n----\n\n The right-hand side operand.
 //                         ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().(divisor)
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#divisor.
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#getDivisor().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().(columnType)
       /** The column type of this expression. */
       columnType: IColumnType<T & Any>
 //    ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().(columnType)
 //               display_name columnType
 //               documentation ```kotlin\ncolumnType: IColumnType<T & Any>\n```\n\n----\n\n The column type of this expression.
 //                ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().(columnType)
   ) : CustomOperator<T>("/", columnType, dividend, divisor) {
 //    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CustomOperator#
 //                           ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().(columnType)
 //                                       ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().(dividend)
 //                                                 ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().(divisor)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#`<init>`().
       companion object {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion# 11:5
 //                       display_name Companion
@@ -1499,6 +1917,10 @@
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#`<init>`(). 11:5
 //                       display_name Companion
 //                       documentation ```kotlin\nprivate constructor(): DivideOp.Companion\n```
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#withScale().
+//             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#withScale().[T]
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#withScale().[S]
+//                                                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#withScale().(scale)
           fun <T : BigDecimal?, S : T> DivideOp<T, S>.withScale(scale: Int): DivideOp<T, S> {
 //             ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#withScale().[T]
 //               display_name FirTypeParameterSymbol T
@@ -1514,63 +1936,89 @@
 //                                                                    documentation ```kotlin\nscale: Int\n```
 //                                                                     ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                                           ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#withScale().[T]
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#withScale().[S]
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#withScale().(scale)
+//            ⌄ enclosing_range_start local 7
               val precision = (columnType as DecimalColumnType).precision + scale
-//                ^^^^^^^^^ definition local 0
+//                ^^^^^^^^^ definition local 7
 //                          display_name precision
 //                          documentation ```kotlin\nlocal val precision: Int\n```
 //                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#columnType.
 //                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#getColumnType().
+//                                           ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DecimalColumnType#
 //                                                              ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DecimalColumnType#getPrecision().
 //                                                              ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DecimalColumnType#precision.
 //                                                                        ^ reference semanticdb maven . . kotlin/Int#plus(+2).
 //                                                                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#withScale().(scale)
+//                                                                              ⌃ enclosing_range_end local 7
+//            ⌄ enclosing_range_start local 8
               val decimalColumnType = DecimalColumnType(precision, scale)
-//                ^^^^^^^^^^^^^^^^^ definition local 1
+//                ^^^^^^^^^^^^^^^^^ definition local 8
 //                                  display_name decimalColumnType
 //                                  documentation ```kotlin\nlocal val decimalColumnType: DecimalColumnType\n```
 //                                    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DecimalColumnType#`<init>`().
-//                                                      ^^^^^^^^^ reference local 0
+//                                                      ^^^^^^^^^ reference local 7
 //                                                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#withScale().(scale)
+//                                                                      ⌃ enclosing_range_end local 8
   
+//            ⌄ enclosing_range_start local 9
+//                                                                                    ⌄ enclosing_range_start local 10
+//                                                                                                             ⌄ enclosing_range_start local 11
               val newExpression = (dividend as? LiteralOp<BigDecimal>)?.value?.takeIf { it.scale() == 0 }?.let {
-//                ^^^^^^^^^^^^^ definition local 2
+//                ^^^^^^^^^^^^^ definition local 9
 //                              display_name newExpression
 //                              documentation ```kotlin\nlocal val newExpression: Expression<out BigDecimal?>\n```
 //                                 ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#dividend.
 //                                 ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#getDividend().
+//                                              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#
 //                                                                      ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#getValue().
 //                                                                      ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#value.
 //                                                                             ^^^^^^ reference semanticdb maven . . kotlin/takeIf().
-//                                                                                    ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                                    ^^^^^^^^^^^^^^^^^^^ definition local 10
 //                                                                                                        display_name it
-//                                                                                                        documentation ```kotlin\nit: CompositeID\n```
-//                                                                                      ^^ reference semanticdb maven . . (it)
+//                                                                                                        documentation ```kotlin\nit: BigDecimal\n```
+//                                                                                      ^^ reference local 10
 //                                                                                         ^^^^^ reference semanticdb maven jdk 11 java/math/BigDecimal#scale().
 //                                                                                                         ^^^ reference semanticdb maven . . kotlin/let().
-//                                                                                                             ^ definition semanticdb maven . . (it) 2:13
+//                                                                                                             ^ definition local 11 2:13
 //                                                                                                               display_name it
-//                                                                                                               documentation ```kotlin\nit: CompositeID\n```
+//                                                                                                               documentation ```kotlin\nit: BigDecimal\n```
+//                                                                                                      ⌃ enclosing_range_end local 10
                   decimalLiteral(it.setScale(1)) // it is needed to treat dividend as decimal instead of integer in SQL
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/decimalLiteral().
-//                               ^^ reference semanticdb maven . . (it)
+//                               ^^ reference local 11
 //                                  ^^^^^^^^ reference semanticdb maven jdk 11 java/math/BigDecimal#setScale().
               } ?: dividend
 //                 ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#dividend.
 //                 ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#getDividend().
+//            ⌃ enclosing_range_end local 11
+//                        ⌃ enclosing_range_end local 9
   
               return DivideOp(newExpression as Expression<T>, divisor, decimalColumnType as IColumnType<T & Any>)
 //                   ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#`<init>`().
-//                            ^^^^^^^^^^^^^ reference local 2
+//                            ^^^^^^^^^^^^^ reference local 9
+//                                             ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
 //                                                            ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#divisor.
 //                                                            ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#getDivisor().
-//                                                                     ^^^^^^^^^^^^^^^^^ reference local 1
+//                                                                     ^^^^^^^^^^^^^^^^^ reference local 8
+//                                                                                          ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#withScale().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#Companion#`<init>`().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DivideOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#
   /**
    * Represents an SQL operator that calculates the remainder of dividing [expr1] by [expr2].
    */
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#[T]
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#[S]
+//                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#[R]
+//                                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().
   class ModOp<T : Number?, S : Number?, R : Number?>(
 //      ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#
 //            display_name ModOp
@@ -1588,6 +2036,12 @@
 //                                      ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#[R]
 //                                        display_name FirTypeParameterSymbol R
 //                                        documentation ```kotlin\nR : Number?\n```
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#[T]
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#[S]
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#[R]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().(expr1)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#expr1.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#getExpr1().
       /** Returns the left-hand side operand. */
       val expr1: Expression<T>,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().(expr1)
@@ -1601,6 +2055,12 @@
 //              display_name expr1
 //              documentation ```kotlin\npublic get(): Expression<T>\n```\n\n----\n\n Returns the left-hand side operand.
 //               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().(expr1)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#expr1.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#getExpr1().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().(expr2)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#expr2.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#getExpr2().
       /** Returns the right-hand side operand. */
       val expr2: Expression<S>,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().(expr2)
@@ -1614,6 +2074,12 @@
 //              display_name expr2
 //              documentation ```kotlin\npublic get(): Expression<S>\n```\n\n----\n\n Returns the right-hand side operand.
 //               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().(expr2)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#expr2.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#getExpr2().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().(columnType)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#columnType.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#getColumnType().
       override val columnType: IColumnType<R & Any>
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().(columnType)
 //                            display_name columnType
@@ -1626,9 +2092,15 @@
 //                            display_name columnType
 //                            documentation ```kotlin\npublic get(): IColumnType<R & Any>\n```
 //                             ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().(columnType)
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#columnType.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#getColumnType().
   ) : ExpressionWithColumnType<R>() {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1638,13 +2110,20 @@
 //                                             display_name queryBuilder
 //                                             documentation ```kotlin\nqueryBuilder: QueryBuilder\n```
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#toQueryBuilder().(queryBuilder)
           queryBuilder {
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#toQueryBuilder().(queryBuilder)
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                  ⌄ enclosing_range_start local 12
               when (currentDialectIfAvailable) {
+//                  ^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 12
+//                                            display_name <when-subject>
+//                                            documentation ```kotlin\nlocal val <when-subject>: DatabaseDialect?\n```
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialectIfAvailable.
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialectIfAvailable().
+//                                          ⌃ enclosing_range_end local 12
                   is OracleDialect -> append("MOD(", expr1, ", ", expr2, ")")
+//                   ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDialect#
 //                                    ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                                                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#expr1.
 //                                                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#getExpr1().
@@ -1659,7 +2138,10 @@
               }
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#`<init>`().
       companion object {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion# 29:5
 //                       display_name Companion
@@ -1667,7 +2149,11 @@
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#`<init>`(). 29:5
 //                       display_name Companion
 //                       documentation ```kotlin\nprivate constructor(): ModOp.Companion\n```
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#originalColumn().
           @Suppress("UNCHECKED_CAST")
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#originalColumn().[T]
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#originalColumn().[K]
+//                                                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#originalColumn().(expr1)
           private fun <T : Number?, K : EntityID<T>?> originalColumn(expr1: ExpressionWithColumnType<K>): Column<T> {
 //                     ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#originalColumn().[T]
 //                       display_name FirTypeParameterSymbol T
@@ -1683,14 +2169,24 @@
 //                                                                         documentation ```kotlin\nexpr1: ExpressionWithColumnType<K>\n```
 //                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
 //                                                                                                        ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#originalColumn().[T]
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#originalColumn().[K]
+//                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#originalColumn().(expr1)
               return (expr1.columnType as EntityIDColumnType<*>).idColumn as Column<T>
 //                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#originalColumn().(expr1)
 //                          ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#columnType.
 //                          ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#getColumnType().
+//                                        ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/EntityIDColumnType#
 //                                                               ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/EntityIDColumnType#getIdColumn().
 //                                                               ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/EntityIDColumnType#idColumn.
+//                                                                           ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#originalColumn().
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().[T]
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().[S]
+//                                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().[K]
           internal operator fun <T, S : Number, K : EntityID<T>?> invoke(
 //                               ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().[T]
 //                                 display_name FirTypeParameterSymbol T
@@ -1704,33 +2200,47 @@
 //                                                                ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().
 //                                                                       display_name invoke
 //                                                                       documentation ```kotlin\ninternal final operator fun <T : Number, Comparable<T>, S : Number, K : EntityID<T>?> invoke(expr1: ExpressionWithColumnType<K>, expr2: Expression<S>): ExpressionWithColumnType<T>\n```
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().[T]
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().[S]
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().[K]
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().(expr1)
               expr1: ExpressionWithColumnType<K>,
 //            ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().(expr1)
 //                  display_name expr1
 //                  documentation ```kotlin\nexpr1: ExpressionWithColumnType<K>\n```
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().(expr1)
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().(expr2)
               expr2: Expression<S>
 //            ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().(expr2)
 //                  display_name expr2
 //                  documentation ```kotlin\nexpr2: Expression<S>\n```
 //                   ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().(expr2)
           ): ExpressionWithColumnType<T> where T : Number, T : Comparable<T> {
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//            ⌄ enclosing_range_start local 13
               val column = originalColumn(expr1)
-//                ^^^^^^ definition local 3
+//                ^^^^^^ definition local 13
 //                       display_name column
 //                       documentation ```kotlin\nlocal val column: Column<T>\n```
 //                         ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#originalColumn().
 //                                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().(expr1)
+//                                             ⌃ enclosing_range_end local 13
               return ModOp(column, expr2, column.columnType)
 //                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().
-//                         ^^^^^^ reference local 3
+//                         ^^^^^^ reference local 13
 //                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().(expr2)
-//                                        ^^^^^^ reference local 3
+//                                        ^^^^^^ reference local 13
 //                                               ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#columnType.
 //                                               ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getColumnType().
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke().
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).[T]
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).[S]
+//                                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).[K]
           internal operator fun <T, S : Number, K : EntityID<T>?> invoke(
 //                               ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).[T]
 //                                 display_name FirTypeParameterSymbol T
@@ -1744,33 +2254,47 @@
 //                                                                ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).
 //                                                                       display_name invoke
 //                                                                       documentation ```kotlin\ninternal final operator fun <T : Number, Comparable<T>, S : Number, K : EntityID<T>?> invoke(expr1: Expression<S>, expr2: ExpressionWithColumnType<K>): ExpressionWithColumnType<T>\n```
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).[T]
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).[S]
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).[K]
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).(expr1)
               expr1: Expression<S>,
 //            ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).(expr1)
 //                  display_name expr1
 //                  documentation ```kotlin\nexpr1: Expression<S>\n```
 //                   ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).(expr1)
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).(expr2)
               expr2: ExpressionWithColumnType<K>
 //            ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).(expr2)
 //                  display_name expr2
 //                  documentation ```kotlin\nexpr2: ExpressionWithColumnType<K>\n```
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).(expr2)
           ): ExpressionWithColumnType<T> where T : Number, T : Comparable<T> {
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//            ⌄ enclosing_range_start local 14
               val column = originalColumn(expr2)
-//                ^^^^^^ definition local 4
+//                ^^^^^^ definition local 14
 //                       display_name column
 //                       documentation ```kotlin\nlocal val column: Column<T>\n```
 //                         ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#originalColumn().
 //                                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).(expr2)
+//                                             ⌃ enclosing_range_end local 14
               return ModOp(expr1, column, column.columnType)
 //                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().
 //                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).(expr1)
-//                                ^^^^^^ reference local 4
-//                                        ^^^^^^ reference local 4
+//                                ^^^^^^ reference local 14
+//                                        ^^^^^^ reference local 14
 //                                               ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#columnType.
 //                                               ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getColumnType().
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+1).
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).[T]
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).[S]
+//                                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).[K]
           internal operator fun <T, S : Number, K : EntityID<T>?> invoke(
 //                               ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).[T]
 //                                 display_name FirTypeParameterSymbol T
@@ -1784,37 +2308,54 @@
 //                                                                ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).
 //                                                                       display_name invoke
 //                                                                       documentation ```kotlin\ninternal final operator fun <T : Number, Comparable<T>, S : Number, K : EntityID<T>?> invoke(expr1: ExpressionWithColumnType<K>, expr2: S): ExpressionWithColumnType<T>\n```
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).[T]
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).[S]
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).[K]
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).(expr1)
               expr1: ExpressionWithColumnType<K>,
 //            ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).(expr1)
 //                  display_name expr1
 //                  documentation ```kotlin\nexpr1: ExpressionWithColumnType<K>\n```
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).(expr1)
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).(expr2)
               expr2: S
 //            ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).(expr2)
 //                  display_name expr2
 //                  documentation ```kotlin\nexpr2: S\n```
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).(expr2)
           ): ExpressionWithColumnType<T> where T : Number, T : Comparable<T> {
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//            ⌄ enclosing_range_start local 15
               val column = originalColumn(expr1)
-//                ^^^^^^ definition local 5
+//                ^^^^^^ definition local 15
 //                       display_name column
 //                       documentation ```kotlin\nlocal val column: Column<T>\n```
 //                         ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#originalColumn().
 //                                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).(expr1)
+//                                             ⌃ enclosing_range_end local 15
               return ModOp(column, column.wrap(expr2), column.columnType)
 //                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#`<init>`().
-//                         ^^^^^^ reference local 5
-//                                 ^^^^^^ reference local 5
+//                         ^^^^^^ reference local 15
+//                                 ^^^^^^ reference local 15
 //                                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ISqlExpressionBuilder#wrap().
 //                                             ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).(expr2)
-//                                                     ^^^^^^ reference local 5
+//                                                     ^^^^^^ reference local 15
 //                                                            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#columnType.
 //                                                            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getColumnType().
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#invoke(+2).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#Companion#`<init>`().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ModOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().
   // https://github.com/h2database/h2database/issues/3253
+//             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().[T]
+//                                                                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().(e)
+//                                                                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().(queryBuilder)
   private fun <T> ExpressionWithColumnType<T>.castToExpressionTypeForH2BitWiseIps(e: Expression<out T>, queryBuilder: QueryBuilder) {
 //             ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().[T]
 //               display_name FirTypeParameterSymbol T
@@ -1830,6 +2371,9 @@
 //                                                                                                                   display_name queryBuilder
 //                                                                                                                   documentation ```kotlin\nqueryBuilder: QueryBuilder\n```
 //                                                                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
+//             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().[T]
+//                                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().(e)
+//                                                                                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().(queryBuilder)
       when {
           currentDialect.h2Mode == H2Dialect.H2CompatibilityMode.Oracle -> H2FunctionProvider.cast(e, ByteColumnType(), queryBuilder)
 //        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
@@ -1843,7 +2387,9 @@
 //                                                                                                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().(queryBuilder)
           e is Column<*> || e is LiteralOp<*> -> queryBuilder.append(e)
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().(e)
+//             ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#
 //                          ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().(e)
+//                               ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#
 //                                               ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().(queryBuilder)
 //                                                            ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+2).
 //                                                                   ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().(e)
@@ -1859,10 +2405,15 @@
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().(queryBuilder)
       }
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/castToExpressionTypeForH2BitWiseIps().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#
   /**
    * Represents an SQL operator that performs a bitwise `and` on [expr1] and [expr2].
    */
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#[T]
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#[S]
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#`<init>`().
   class AndBitOp<T, S : T>(
 //      ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#
 //               display_name AndBitOp
@@ -1877,6 +2428,11 @@
 //                  ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#[S]
 //                    display_name FirTypeParameterSymbol S
 //                    documentation ```kotlin\nS : T\n```
+//               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#[T]
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#[S]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#`<init>`().(expr1)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#expr1.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#getExpr1().
       /** The left-hand side operand. */
       val expr1: Expression<T>,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#`<init>`().(expr1)
@@ -1890,6 +2446,12 @@
 //              display_name expr1
 //              documentation ```kotlin\npublic get(): Expression<T>\n```\n\n----\n\n The left-hand side operand.
 //               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#`<init>`().(expr1)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#expr1.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#getExpr1().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#`<init>`().(expr2)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#expr2.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#getExpr2().
       /** The right-hand side operand. */
       val expr2: Expression<S>,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#`<init>`().(expr2)
@@ -1903,6 +2465,12 @@
 //              display_name expr2
 //              documentation ```kotlin\npublic get(): Expression<S>\n```\n\n----\n\n The right-hand side operand.
 //               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#`<init>`().(expr2)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#expr2.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#getExpr2().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#`<init>`().(columnType)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#columnType.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#getColumnType().
       /** The column type of this expression. */
       override val columnType: IColumnType<T & Any>
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#`<init>`().(columnType)
@@ -1916,8 +2484,14 @@
 //                            display_name columnType
 //                            documentation ```kotlin\npublic get(): IColumnType<T & Any>\n```\n\n----\n\n The column type of this expression.
 //                             ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#`<init>`().(columnType)
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#columnType.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#getColumnType().
   ) : ExpressionWithColumnType<T>() {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1930,23 +2504,33 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#toQueryBuilder().(queryBuilder)
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#toQueryBuilder().(queryBuilder)
+//              ⌄ enclosing_range_start local 16
           when (val dialect = currentDialectIfAvailable) {
-//                  ^^^^^^^ definition local 6
+//                  ^^^^^^^ definition local 16
 //                          display_name dialect
 //                          documentation ```kotlin\nlocal val dialect: DatabaseDialect?\n```
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialectIfAvailable.
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialectIfAvailable().
+//                                                    ⌃ enclosing_range_end local 16
               is OracleDialect -> append("BITAND(", expr1, ", ", expr2, ")")
+//               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDialect#
 //                                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                                                  ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#expr1.
 //                                                  ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#getExpr1().
 //                                                               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#expr2.
 //                                                               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#getExpr2().
               is H2Dialect -> {
+//               ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#
+//                      ⌄ enclosing_range_start local 17
                   when (dialect.isSecondVersion) {
-//                      ^^^^^^^ reference local 6
+//                      ^^^^^^^ reference local 16
+//                      ^^^^^^^^^^^^^^^^^^^^^^^ definition local 17
+//                                              display_name <when-subject>
+//                                              documentation ```kotlin\nlocal val <when-subject>: Boolean\n```
 //                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getIsSecondVersion().
 //                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#isSecondVersion.
+//                                            ⌃ enclosing_range_end local 17
                       false -> append("BITAND(", expr1, ", ", expr2, ")")
 //                             ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                                               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#expr1.
@@ -1979,11 +2563,17 @@
 //                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#getExpr2().
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/AndBitOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#
   /**
    * Represents an SQL operator that performs a bitwise `or` on [expr1] and [expr2].
    */
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#[T]
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#[S]
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#`<init>`().
   class OrBitOp<T, S : T>(
 //      ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#
 //              display_name OrBitOp
@@ -1998,6 +2588,11 @@
 //                 ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#[S]
 //                   display_name FirTypeParameterSymbol S
 //                   documentation ```kotlin\nS : T\n```
+//              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#[T]
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#[S]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#`<init>`().(expr1)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#expr1.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#getExpr1().
       /** The left-hand side operand. */
       val expr1: Expression<T>,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#`<init>`().(expr1)
@@ -2011,6 +2606,12 @@
 //              display_name expr1
 //              documentation ```kotlin\npublic get(): Expression<T>\n```\n\n----\n\n The left-hand side operand.
 //               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#`<init>`().(expr1)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#expr1.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#getExpr1().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#`<init>`().(expr2)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#expr2.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#getExpr2().
       /** The right-hand side operand. */
       val expr2: Expression<S>,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#`<init>`().(expr2)
@@ -2024,6 +2625,12 @@
 //              display_name expr2
 //              documentation ```kotlin\npublic get(): Expression<S>\n```\n\n----\n\n The right-hand side operand.
 //               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#`<init>`().(expr2)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#expr2.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#getExpr2().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#`<init>`().(columnType)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#columnType.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#getColumnType().
       /** The column type of this expression. */
       override val columnType: IColumnType<T & Any>
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#`<init>`().(columnType)
@@ -2037,8 +2644,14 @@
 //                            display_name columnType
 //                            documentation ```kotlin\npublic get(): IColumnType<T & Any>\n```\n\n----\n\n The column type of this expression.
 //                             ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#`<init>`().(columnType)
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#columnType.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#getColumnType().
   ) : ExpressionWithColumnType<T>() {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -2051,14 +2664,18 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#toQueryBuilder().(queryBuilder)
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#toQueryBuilder().(queryBuilder)
+//              ⌄ enclosing_range_start local 18
           when (val dialect = currentDialectIfAvailable) {
-//                  ^^^^^^^ definition local 7
+//                  ^^^^^^^ definition local 18
 //                          display_name dialect
 //                          documentation ```kotlin\nlocal val dialect: DatabaseDialect?\n```
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialectIfAvailable.
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialectIfAvailable().
+//                                                    ⌃ enclosing_range_end local 18
               // Oracle doesn't natively support bitwise OR, thus emulate it with 'and'
               is OracleDialect -> append("(", expr1, "+", expr2, "-", AndBitOp(expr1, expr2, columnType), ")")
+//               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDialect#
 //                                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                                            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#expr1.
 //                                            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#getExpr1().
@@ -2072,10 +2689,16 @@
 //                                                                                           ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#columnType.
 //                                                                                           ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#getColumnType().
               is H2Dialect -> {
+//               ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#
+//                      ⌄ enclosing_range_start local 19
                   when (dialect.isSecondVersion) {
-//                      ^^^^^^^ reference local 7
+//                      ^^^^^^^ reference local 18
+//                      ^^^^^^^^^^^^^^^^^^^^^^^ definition local 19
+//                                              display_name <when-subject>
+//                                              documentation ```kotlin\nlocal val <when-subject>: Boolean\n```
 //                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getIsSecondVersion().
 //                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#isSecondVersion.
+//                                            ⌃ enclosing_range_end local 19
                       false -> append("BITOR(", expr1, ", ", expr2, ")")
 //                             ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#expr1.
@@ -2108,11 +2731,17 @@
 //                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#getExpr2().
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#
   /**
    * Represents an SQL operator that performs a bitwise `or` on [expr1] and [expr2].
    */
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#[T]
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#[S]
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#`<init>`().
   class XorBitOp<T, S : T>(
 //      ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#
 //               display_name XorBitOp
@@ -2127,6 +2756,11 @@
 //                  ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#[S]
 //                    display_name FirTypeParameterSymbol S
 //                    documentation ```kotlin\nS : T\n```
+//               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#[T]
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#[S]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#`<init>`().(expr1)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#expr1.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#getExpr1().
       /** The left-hand side operand. */
       val expr1: Expression<T>,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#`<init>`().(expr1)
@@ -2140,6 +2774,12 @@
 //              display_name expr1
 //              documentation ```kotlin\npublic get(): Expression<T>\n```\n\n----\n\n The left-hand side operand.
 //               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#`<init>`().(expr1)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#expr1.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#getExpr1().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#`<init>`().(expr2)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#expr2.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#getExpr2().
       /** The right-hand side operand. */
       val expr2: Expression<S>,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#`<init>`().(expr2)
@@ -2153,6 +2793,12 @@
 //              display_name expr2
 //              documentation ```kotlin\npublic get(): Expression<S>\n```\n\n----\n\n The right-hand side operand.
 //               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#`<init>`().(expr2)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#expr2.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#getExpr2().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#`<init>`().(columnType)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#columnType.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#getColumnType().
       /** The column type of this expression. */
       override val columnType: IColumnType<T & Any>
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#`<init>`().(columnType)
@@ -2166,8 +2812,14 @@
 //                            display_name columnType
 //                            documentation ```kotlin\npublic get(): IColumnType<T & Any>\n```\n\n----\n\n The column type of this expression.
 //                             ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#`<init>`().(columnType)
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#columnType.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#getColumnType().
   ) : ExpressionWithColumnType<T>() {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -2180,14 +2832,19 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#toQueryBuilder().(queryBuilder)
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#toQueryBuilder().(queryBuilder)
+//              ⌄ enclosing_range_start local 20
           when (val dialect = currentDialectIfAvailable) {
-//                  ^^^^^^^ definition local 8
+//                  ^^^^^^^ definition local 20
 //                          display_name dialect
 //                          documentation ```kotlin\nlocal val dialect: DatabaseDialect?\n```
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialectIfAvailable.
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialectIfAvailable().
+//                                                    ⌃ enclosing_range_end local 20
               // Oracle and SQLite don't natively support bitwise XOR, thus emulate it with 'or' and 'and'
               is OracleDialect, is SQLiteDialect -> append(
+//               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDialect#
+//                                 ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLiteDialect#
 //                                                  ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
                   "(", OrBitOp(expr1, expr2, columnType), "-", AndBitOp(expr1, expr2, columnType), ")"
 //                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OrBitOp#`<init>`().
@@ -2206,16 +2863,23 @@
 //                                                                                    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#getColumnType().
               )
               is PostgreSQLDialect -> append('(', expr1, " # ", expr2, ')')
+//               ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/PostgreSQLDialect#
 //                                    ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#expr1.
 //                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#getExpr1().
 //                                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#expr2.
 //                                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#getExpr2().
               is H2Dialect -> {
+//               ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#
+//                      ⌄ enclosing_range_start local 21
                   when (dialect.isSecondVersion) {
-//                      ^^^^^^^ reference local 8
+//                      ^^^^^^^ reference local 20
+//                      ^^^^^^^^^^^^^^^^^^^^^^^ definition local 21
+//                                              display_name <when-subject>
+//                                              documentation ```kotlin\nlocal val <when-subject>: Boolean\n```
 //                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getIsSecondVersion().
 //                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#isSecondVersion.
+//                                            ⌃ enclosing_range_end local 21
                       false -> append("BITXOR(", expr1, ", ", expr2, ")")
 //                             ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                                               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#expr1.
@@ -2248,13 +2912,23 @@
 //                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#getExpr2().
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/XorBitOp#
   
   // Pattern Matching
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#
   /**
    * Represents an SQL operator that checks if [expr1] matches [expr2].
    */
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#`<init>`().
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#`<init>`().(expr1)
+//                                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#`<init>`().(expr2)
+//                                                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#`<init>`().(like)
+//                                                                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#`<init>`().(escapeChar)
+//                                                                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#escapeChar.
+//                                                                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#getEscapeChar().
   class LikeEscapeOp(expr1: Expression<*>, expr2: Expression<*>, like: Boolean, val escapeChar: Char?) :
 //      ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#
 //                   display_name LikeEscapeOp
@@ -2286,11 +2960,20 @@
 //                                                                                             display_name escapeChar
 //                                                                                             documentation ```kotlin\npublic get(): Char?\n```
 //                                                                                              ^^^^^ reference semanticdb maven . . kotlin/Char#
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#`<init>`().(expr1)
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#`<init>`().(expr2)
+//                                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#`<init>`().(like)
+//                                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#`<init>`().(escapeChar)
+//                                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#escapeChar.
+//                                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#getEscapeChar().
+//                                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#`<init>`().
       ComparisonOp(expr1, expr2, if (like) "LIKE" else "NOT LIKE") {
 //    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#
 //                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#`<init>`().(expr1)
 //                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#`<init>`().(expr2)
 //                                   ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#`<init>`().(like)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -2300,6 +2983,7 @@
 //                                             display_name queryBuilder
 //                                             documentation ```kotlin\nqueryBuilder: QueryBuilder\n```
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#toQueryBuilder().(queryBuilder)
           super.toQueryBuilder(queryBuilder)
 //              ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComparisonOp#toQueryBuilder().
 //                             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#toQueryBuilder().(queryBuilder)
@@ -2320,11 +3004,16 @@
               }
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LikeEscapeOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#
   /**
    * Represents an SQL operator that checks if [expr1] matches the regular expression [expr2].
    */
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#[T]
+//                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#`<init>`().
   class RegexpOp<T : String?>(
 //      ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#
 //               display_name RegexpOp
@@ -2338,6 +3027,10 @@
 //               ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#[T]
 //                 display_name FirTypeParameterSymbol T
 //                 documentation ```kotlin\nT : String?\n```
+//                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#`<init>`().(expr1)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#expr1.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#getExpr1().
       /** Returns the expression being checked. */
       val expr1: Expression<T>,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#`<init>`().(expr1)
@@ -2351,6 +3044,12 @@
 //              display_name expr1
 //              documentation ```kotlin\npublic get(): Expression<T>\n```\n\n----\n\n Returns the expression being checked.
 //               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#`<init>`().(expr1)
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#expr1.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#getExpr1().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#`<init>`().(expr2)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#expr2.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#getExpr2().
       /** Returns the regular expression [expr1] is checked against. */
       val expr2: Expression<String>,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#`<init>`().(expr2)
@@ -2364,6 +3063,12 @@
 //              display_name expr2
 //              documentation ```kotlin\npublic get(): Expression<String>\n```\n\n----\n\n Returns the regular expression [expr1] is checked against.
 //               ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#`<init>`().(expr2)
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#expr2.
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#getExpr2().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#`<init>`().(caseSensitive)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#caseSensitive.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#getCaseSensitive().
       /** Returns `true` if the regular expression is case sensitive, `false` otherwise. */
       val caseSensitive: Boolean
 //        ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#`<init>`().(caseSensitive)
@@ -2377,10 +3082,16 @@
 //                      display_name caseSensitive
 //                      documentation ```kotlin\npublic get(): Boolean\n```\n\n----\n\n Returns `true` if the regular expression is case sensitive, `false` otherwise.
 //                       ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#`<init>`().(caseSensitive)
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#caseSensitive.
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#getCaseSensitive().
   ) : Op<Boolean>(), ComplexExpression, Op.OpBoolean {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
 //                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -2390,6 +3101,7 @@
 //                                             display_name queryBuilder
 //                                             documentation ```kotlin\nqueryBuilder: QueryBuilder\n```
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#toQueryBuilder().(queryBuilder)
           currentDialect.functionProvider.regexp(expr1, expr2, caseSensitive, queryBuilder)
 //        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
@@ -2404,13 +3116,17 @@
 //                                                             ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#getCaseSensitive().
 //                                                                            ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#toQueryBuilder().(queryBuilder)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RegexpOp#
   
   // Subquery Expressions
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#
   /**
    * Represents an SQL operator that checks if [query] returns at least one row.
    */
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#`<init>`().
   class Exists(
 //      ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#
 //             display_name Exists
@@ -2420,6 +3136,9 @@
 //      ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#`<init>`().
 //             display_name Exists
 //             documentation ```kotlin\npublic constructor(query: AbstractQuery<*>): Exists\n```\n\n----\n\n Returns the query being checked.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#`<init>`().(query)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#query.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#getQuery().
       /** Returns the query being checked. */
       val query: AbstractQuery<*>
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#`<init>`().(query)
@@ -2433,9 +3152,15 @@
 //              display_name query
 //              documentation ```kotlin\npublic final val query: AbstractQuery<*>\n```\n\n----\n\n Returns the query being checked.
 //               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#`<init>`().(query)
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#query.
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#getQuery().
   ) : Op<Boolean>(), Op.OpBoolean {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -2448,6 +3173,7 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#toQueryBuilder().(queryBuilder)
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#toQueryBuilder().(queryBuilder)
           append("EXISTS (")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
           query.prepareSQL(this)
@@ -2457,9 +3183,13 @@
           append(")")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/exists().
   /** Returns an SQL operator that checks if [query] returns at least one row. */
+//           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/exists().(query)
   fun exists(query: AbstractQuery<*>) = Exists(query)
 //    ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/exists().
 //           display_name exists
@@ -2470,10 +3200,14 @@
 //                  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#
 //                                      ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Exists#`<init>`().
 //                                             ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/exists().(query)
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/exists().(query)
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/exists().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#
   /**
    * Represents an SQL operator that checks if [query] doesn't returns any row.
    */
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#`<init>`().
   class NotExists(
 //      ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#
 //                display_name NotExists
@@ -2483,6 +3217,9 @@
 //      ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#`<init>`().
 //                display_name NotExists
 //                documentation ```kotlin\npublic constructor(query: AbstractQuery<*>): NotExists\n```\n\n----\n\n Returns the query being checked.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#`<init>`().(query)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#query.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#getQuery().
       /** Returns the query being checked. */
       val query: AbstractQuery<*>
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#`<init>`().(query)
@@ -2496,9 +3233,15 @@
 //              display_name query
 //              documentation ```kotlin\npublic final val query: AbstractQuery<*>\n```\n\n----\n\n Returns the query being checked.
 //               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#`<init>`().(query)
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#query.
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#getQuery().
   ) : Op<Boolean>(), Op.OpBoolean {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -2511,6 +3254,7 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#toQueryBuilder().(queryBuilder)
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#toQueryBuilder().(queryBuilder)
           append("NOT EXISTS (")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
           query.prepareSQL(this)
@@ -2520,9 +3264,13 @@
           append(")")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/notExists().
   /** Returns an SQL operator that checks if [query] doesn't returns any row. */
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/notExists().(query)
   fun notExists(query: AbstractQuery<*>) = NotExists(query)
 //    ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/notExists().
 //              display_name notExists
@@ -2533,8 +3281,13 @@
 //                     ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#
 //                                         ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NotExists#`<init>`().
 //                                                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/notExists().(query)
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/notExists().(query)
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/notExists().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#
   /** Represents an SQL operator that compares [expr] to any row returned from [query]. */
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#[T]
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#`<init>`().
   sealed class SubQueryOp<T>(
 //             ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#
 //                        display_name SubQueryOp
@@ -2556,6 +3309,10 @@
 //                        ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#[T]
 //                          display_name FirTypeParameterSymbol T
 //                          documentation ```kotlin\nT\n```
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#`<init>`().(operator)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#operator.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#getOperator().
       /** Returns the string representation of the operator to use in the comparison. */
       val operator: String,
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#`<init>`().(operator)
@@ -2569,6 +3326,12 @@
 //                 display_name operator
 //                 documentation ```kotlin\npublic final val operator: String\n```\n\n----\n\n Returns the string representation of the operator to use in the comparison.
 //                  ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#`<init>`().(operator)
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#operator.
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#getOperator().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#getExpr().
       /** Returns the expression compared to each row of the query result. */
       val expr: Expression<T>,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#`<init>`().(expr)
@@ -2582,6 +3345,12 @@
 //             display_name expr
 //             documentation ```kotlin\npublic get(): Expression<T>\n```\n\n----\n\n Returns the expression compared to each row of the query result.
 //              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#`<init>`().(expr)
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#expr.
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#getExpr().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#`<init>`().(query)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#query.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#getQuery().
       /** Returns the query to check against. */
       val query: AbstractQuery<*>
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#`<init>`().(query)
@@ -2595,10 +3364,16 @@
 //              display_name query
 //              documentation ```kotlin\npublic final val query: AbstractQuery<*>\n```\n\n----\n\n Returns the query to check against.
 //               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#`<init>`().(query)
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#query.
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#getQuery().
   ) : Op<Boolean>(), ComplexExpression, Op.OpBoolean {
 //    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
 //                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#OpBoolean#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -2611,6 +3386,7 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#toQueryBuilder().(queryBuilder)
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#toQueryBuilder().(queryBuilder)
           append(expr, " $operator (")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#expr.
@@ -2624,11 +3400,18 @@
           +")"
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/InSubQueryOp#
   /**
    * Represents an SQL operator that checks if [expr] is equals to any row returned from [query].
    */
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/InSubQueryOp#[T]
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/InSubQueryOp#`<init>`().
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/InSubQueryOp#`<init>`().(expr)
+//                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/InSubQueryOp#`<init>`().(query)
   class InSubQueryOp<T>(expr: Expression<T>, query: AbstractQuery<*>) : SubQueryOp<T>("IN", expr, query)
 //      ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/InSubQueryOp#
 //                   display_name InSubQueryOp
@@ -2651,10 +3434,20 @@
 //                                                                      ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#
 //                                                                                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/InSubQueryOp#`<init>`().(expr)
 //                                                                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/InSubQueryOp#`<init>`().(query)
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/InSubQueryOp#[T]
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/InSubQueryOp#`<init>`().(expr)
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/InSubQueryOp#`<init>`().(query)
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/InSubQueryOp#`<init>`().
+//                                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/InSubQueryOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotInSubQueryOp#
   /**
    * Represents an SQL operator that checks if [expr] is not equals to any row returned from [query].
    */
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotInSubQueryOp#[T]
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotInSubQueryOp#`<init>`().
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotInSubQueryOp#`<init>`().(expr)
+//                                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotInSubQueryOp#`<init>`().(query)
   class NotInSubQueryOp<T>(expr: Expression<T>, query: AbstractQuery<*>) : SubQueryOp<T>("NOT IN", expr, query)
 //      ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NotInSubQueryOp#
 //                      display_name NotInSubQueryOp
@@ -2677,10 +3470,20 @@
 //                                                                         ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#
 //                                                                                                 ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NotInSubQueryOp#`<init>`().(expr)
 //                                                                                                       ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NotInSubQueryOp#`<init>`().(query)
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotInSubQueryOp#[T]
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotInSubQueryOp#`<init>`().(expr)
+//                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotInSubQueryOp#`<init>`().(query)
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotInSubQueryOp#`<init>`().
+//                                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotInSubQueryOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/EqSubQueryOp#
   /**
    * Represents an SQL operator that checks if [expr] is equals to single value returned from [query].
    */
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/EqSubQueryOp#[T]
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/EqSubQueryOp#`<init>`().
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/EqSubQueryOp#`<init>`().(expr)
+//                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/EqSubQueryOp#`<init>`().(query)
   class EqSubQueryOp<T>(expr: Expression<T>, query: AbstractQuery<*>) : SubQueryOp<T>("=", expr, query)
 //      ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/EqSubQueryOp#
 //                   display_name EqSubQueryOp
@@ -2703,10 +3506,20 @@
 //                                                                      ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#
 //                                                                                         ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/EqSubQueryOp#`<init>`().(expr)
 //                                                                                               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/EqSubQueryOp#`<init>`().(query)
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/EqSubQueryOp#[T]
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/EqSubQueryOp#`<init>`().(expr)
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/EqSubQueryOp#`<init>`().(query)
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/EqSubQueryOp#`<init>`().
+//                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/EqSubQueryOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotEqSubQueryOp#
   /**
    * Represents an SQL operator that checks if [expr] is not equals to single value returned from [query].
    */
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotEqSubQueryOp#[T]
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotEqSubQueryOp#`<init>`().
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotEqSubQueryOp#`<init>`().(expr)
+//                                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NotEqSubQueryOp#`<init>`().(query)
   class NotEqSubQueryOp<T>(expr: Expression<T>, query: AbstractQuery<*>) : SubQueryOp<T>("!=", expr, query)
 //      ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NotEqSubQueryOp#
 //                      display_name NotEqSubQueryOp
@@ -2729,10 +3542,20 @@
 //                                                                         ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#
 //                                                                                             ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NotEqSubQueryOp#`<init>`().(expr)
 //                                                                                                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NotEqSubQueryOp#`<init>`().(query)
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotEqSubQueryOp#[T]
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotEqSubQueryOp#`<init>`().(expr)
+//                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotEqSubQueryOp#`<init>`().(query)
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotEqSubQueryOp#`<init>`().
+//                                                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NotEqSubQueryOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessSubQueryOp#
   /**
    * Represents an SQL operator that checks if [expr] is less than the single value returned from [query].
    */
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessSubQueryOp#[T]
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessSubQueryOp#`<init>`().
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessSubQueryOp#`<init>`().(expr)
+//                                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessSubQueryOp#`<init>`().(query)
   class LessSubQueryOp<T>(expr: Expression<T>, query: AbstractQuery<*>) : SubQueryOp<T>("<", expr, query)
 //      ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LessSubQueryOp#
 //                     display_name LessSubQueryOp
@@ -2755,10 +3578,20 @@
 //                                                                        ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#
 //                                                                                           ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LessSubQueryOp#`<init>`().(expr)
 //                                                                                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LessSubQueryOp#`<init>`().(query)
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessSubQueryOp#[T]
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessSubQueryOp#`<init>`().(expr)
+//                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessSubQueryOp#`<init>`().(query)
+//                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessSubQueryOp#`<init>`().
+//                                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessSubQueryOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqSubQueryOp#
   /**
    * Represents an SQL operator that checks if [expr] is less than or equal to the single value returned from [query].
    */
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqSubQueryOp#[T]
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqSubQueryOp#`<init>`().
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqSubQueryOp#`<init>`().(expr)
+//                                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqSubQueryOp#`<init>`().(query)
   class LessEqSubQueryOp<T>(expr: Expression<T>, query: AbstractQuery<*>) : SubQueryOp<T>("<=", expr, query)
 //      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqSubQueryOp#
 //                       display_name LessEqSubQueryOp
@@ -2781,10 +3614,20 @@
 //                                                                          ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#
 //                                                                                              ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqSubQueryOp#`<init>`().(expr)
 //                                                                                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqSubQueryOp#`<init>`().(query)
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqSubQueryOp#[T]
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqSubQueryOp#`<init>`().(expr)
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqSubQueryOp#`<init>`().(query)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqSubQueryOp#`<init>`().
+//                                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LessEqSubQueryOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterSubQueryOp#
   /**
    * Represents an SQL operator that checks if [expr] is greater than the single value returned from [query].
    */
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterSubQueryOp#[T]
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterSubQueryOp#`<init>`().
+//                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterSubQueryOp#`<init>`().(expr)
+//                                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterSubQueryOp#`<init>`().(query)
   class GreaterSubQueryOp<T>(expr: Expression<T>, query: AbstractQuery<*>) : SubQueryOp<T>(">", expr, query)
 //      ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterSubQueryOp#
 //                        display_name GreaterSubQueryOp
@@ -2807,10 +3650,20 @@
 //                                                                           ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#
 //                                                                                              ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterSubQueryOp#`<init>`().(expr)
 //                                                                                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterSubQueryOp#`<init>`().(query)
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterSubQueryOp#[T]
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterSubQueryOp#`<init>`().(expr)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterSubQueryOp#`<init>`().(query)
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterSubQueryOp#`<init>`().
+//                                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterSubQueryOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqSubQueryOp#
   /**
    * Represents an SQL operator that checks if [expr] is greater than or equal to the single value returned from [query].
    */
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqSubQueryOp#[T]
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqSubQueryOp#`<init>`().
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqSubQueryOp#`<init>`().(expr)
+//                                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqSubQueryOp#`<init>`().(query)
   class GreaterEqSubQueryOp<T>(expr: Expression<T>, query: AbstractQuery<*>) : SubQueryOp<T>(">=", expr, query)
 //      ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqSubQueryOp#
 //                          display_name GreaterEqSubQueryOp
@@ -2833,12 +3686,20 @@
 //                                                                             ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SubQueryOp#
 //                                                                                                 ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqSubQueryOp#`<init>`().(expr)
 //                                                                                                       ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqSubQueryOp#`<init>`().(query)
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqSubQueryOp#[T]
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqSubQueryOp#`<init>`().(expr)
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqSubQueryOp#`<init>`().(query)
+//                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqSubQueryOp#`<init>`().
+//                                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/GreaterEqSubQueryOp#
   
   // Literals
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#
   /**
    * Represents the specified [value] as an SQL literal, using the specified [columnType] to convert the value.
    */
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#[T]
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
   class LiteralOp<T>(
 //      ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#
 //                display_name LiteralOp
@@ -2850,6 +3711,10 @@
 //                ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#[T]
 //                  display_name FirTypeParameterSymbol T
 //                  documentation ```kotlin\nT\n```
+//                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().(columnType)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#columnType.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#getColumnType().
       override val columnType: IColumnType<T & Any>,
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().(columnType)
 //                            display_name columnType
@@ -2862,6 +3727,12 @@
 //                            display_name columnType
 //                            documentation ```kotlin\npublic get(): IColumnType<T & Any>\n```
 //                             ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().(columnType)
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#columnType.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#getColumnType().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().(value)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#value.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#getValue().
       /** Returns the value being used as a literal. */
       val value: T
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().(value)
@@ -2874,8 +3745,14 @@
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#value.
 //              display_name value
 //              documentation ```kotlin\npublic final val value: T\n```\n\n----\n\n Returns the value being used as a literal.
+//               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().(value)
+//               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#value.
+//               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#getValue().
   ) : ExpressionWithColumnType<T>() {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder { +columnType.valueToString(value) }
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -2894,9 +3771,14 @@
 //                                                                                               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#valueToString().
 //                                                                                                             ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#getValue().
 //                                                                                                             ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#value.
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#toQueryBuilder().(queryBuilder)
+//                                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/booleanLiteral().
   /** Returns the specified [value] as a boolean literal. */
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/booleanLiteral().(value)
   fun booleanLiteral(value: Boolean): LiteralOp<Boolean> = LiteralOp(BooleanColumnType.INSTANCE, value)
 //    ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/booleanLiteral().
 //                   display_name booleanLiteral
@@ -2910,8 +3792,12 @@
 //                                                                                     ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BooleanColumnType#Companion#INSTANCE.
 //                                                                                     ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BooleanColumnType#Companion#getINSTANCE().
 //                                                                                               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/booleanLiteral().(value)
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/booleanLiteral().(value)
+//                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/booleanLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/byteLiteral().
   /** Returns the specified [value] as a byte literal. */
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/byteLiteral().(value)
   fun byteLiteral(value: Byte): LiteralOp<Byte> = LiteralOp(ByteColumnType(), value)
 //    ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/byteLiteral().
 //                display_name byteLiteral
@@ -2924,8 +3810,12 @@
 //                                                ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
 //                                                          ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ByteColumnType#`<init>`().
 //                                                                            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/byteLiteral().(value)
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/byteLiteral().(value)
+//                                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/byteLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ubyteLiteral().
   /** Returns the specified [value] as a unsigned byte literal. */
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ubyteLiteral().(value)
   fun ubyteLiteral(value: UByte): LiteralOp<UByte> = LiteralOp(UByteColumnType(), value)
 //    ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ubyteLiteral().
 //                 display_name ubyteLiteral
@@ -2938,8 +3828,12 @@
 //                                                   ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
 //                                                             ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/UByteColumnType#`<init>`().
 //                                                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ubyteLiteral().(value)
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ubyteLiteral().(value)
+//                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ubyteLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/shortLiteral().
   /** Returns the specified [value] as a short literal. */
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/shortLiteral().(value)
   fun shortLiteral(value: Short): LiteralOp<Short> = LiteralOp(ShortColumnType(), value)
 //    ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/shortLiteral().
 //                 display_name shortLiteral
@@ -2952,8 +3846,12 @@
 //                                                   ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
 //                                                             ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ShortColumnType#`<init>`().
 //                                                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/shortLiteral().(value)
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/shortLiteral().(value)
+//                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/shortLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ushortLiteral().
   /** Returns the specified [value] as a unsigned short literal. */
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ushortLiteral().(value)
   fun ushortLiteral(value: UShort): LiteralOp<UShort> = LiteralOp(UShortColumnType(), value)
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ushortLiteral().
 //                  display_name ushortLiteral
@@ -2966,8 +3864,12 @@
 //                                                      ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
 //                                                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/UShortColumnType#`<init>`().
 //                                                                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ushortLiteral().(value)
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ushortLiteral().(value)
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ushortLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/intLiteral().
   /** Returns the specified [value] as an int literal. */
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/intLiteral().(value)
   fun intLiteral(value: Int): LiteralOp<Int> = LiteralOp(IntegerColumnType(), value)
 //    ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/intLiteral().
 //               display_name intLiteral
@@ -2980,8 +3882,12 @@
 //                                             ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
 //                                                       ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IntegerColumnType#`<init>`().
 //                                                                            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/intLiteral().(value)
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/intLiteral().(value)
+//                                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/intLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/uintLiteral().
   /** Returns the specified [value] as a unsigned int literal. */
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/uintLiteral().(value)
   fun uintLiteral(value: UInt): LiteralOp<UInt> = LiteralOp(UIntegerColumnType(), value)
 //    ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/uintLiteral().
 //                display_name uintLiteral
@@ -2994,8 +3900,12 @@
 //                                                ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
 //                                                          ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/UIntegerColumnType#`<init>`().
 //                                                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/uintLiteral().(value)
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/uintLiteral().(value)
+//                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/uintLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/longLiteral().
   /** Returns the specified [value] as a long literal. */
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/longLiteral().(value)
   fun longLiteral(value: Long): LiteralOp<Long> = LiteralOp(LongColumnType(), value)
 //    ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/longLiteral().
 //                display_name longLiteral
@@ -3008,8 +3918,12 @@
 //                                                ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
 //                                                          ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LongColumnType#`<init>`().
 //                                                                            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/longLiteral().(value)
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/longLiteral().(value)
+//                                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/longLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ulongLiteral().
   /** Returns the specified [value] as a unsigned long literal. */
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ulongLiteral().(value)
   fun ulongLiteral(value: ULong): LiteralOp<ULong> = LiteralOp(ULongColumnType(), value)
 //    ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ulongLiteral().
 //                 display_name ulongLiteral
@@ -3022,8 +3936,12 @@
 //                                                   ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
 //                                                             ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ULongColumnType#`<init>`().
 //                                                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ulongLiteral().(value)
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ulongLiteral().(value)
+//                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ulongLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/floatLiteral().
   /** Returns the specified [value] as a float literal. */
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/floatLiteral().(value)
   fun floatLiteral(value: Float): LiteralOp<Float> = LiteralOp(FloatColumnType(), value)
 //    ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/floatLiteral().
 //                 display_name floatLiteral
@@ -3036,8 +3954,12 @@
 //                                                   ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
 //                                                             ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/FloatColumnType#`<init>`().
 //                                                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/floatLiteral().(value)
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/floatLiteral().(value)
+//                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/floatLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/doubleLiteral().
   /** Returns the specified [value] as a double literal. */
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/doubleLiteral().(value)
   fun doubleLiteral(value: Double): LiteralOp<Double> = LiteralOp(DoubleColumnType(), value)
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/doubleLiteral().
 //                  display_name doubleLiteral
@@ -3050,8 +3972,12 @@
 //                                                      ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
 //                                                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DoubleColumnType#`<init>`().
 //                                                                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/doubleLiteral().(value)
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/doubleLiteral().(value)
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/doubleLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/stringLiteral().
   /** Returns the specified [value] as a string literal. */
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/stringLiteral().(value)
   fun stringLiteral(value: String): LiteralOp<String> = LiteralOp(TextColumnType(), value)
 //    ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/stringLiteral().
 //                  display_name stringLiteral
@@ -3064,8 +3990,12 @@
 //                                                      ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
 //                                                                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/TextColumnType#`<init>`().
 //                                                                                  ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/stringLiteral().(value)
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/stringLiteral().(value)
+//                                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/stringLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/decimalLiteral().
   /** Returns the specified [value] as a decimal literal. */
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/decimalLiteral().(value)
   fun decimalLiteral(value: BigDecimal): LiteralOp<BigDecimal> = LiteralOp(DecimalColumnType(value.precision(), value.scale()), value)
 //    ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/decimalLiteral().
 //                   display_name decimalLiteral
@@ -3082,7 +4012,10 @@
 //                                                                                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/decimalLiteral().(value)
 //                                                                                                                    ^^^^^ reference semanticdb maven jdk 11 java/math/BigDecimal#scale().
 //                                                                                                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/decimalLiteral().(value)
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/decimalLiteral().(value)
+//                                                                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/decimalLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral().
   /**
    * Returns the specified [value] as an array literal, with elements parsed by the [delegateType] if provided.
    *
@@ -3091,6 +4024,9 @@
    *
    * @throws IllegalStateException If no column type mapping is found and a [delegateType] is not provided.
    */
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral().[T]
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral().(value)
+//                                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral().(delegateType)
   inline fun <reified T : Any> arrayLiteral(value: List<T>, delegateType: ColumnType<T>? = null): LiteralOp<List<T>> =
 //                    ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral().[T]
 //                      display_name FirTypeParameterSymbol T
@@ -3107,11 +4043,16 @@
 //                                                                       documentation ```kotlin\ndelegateType: ColumnType<T>? = ...\n```
 //                                                                        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnType#
 //                                                                                                ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral().[T]
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral().(value)
+//                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral().(delegateType)
       arrayLiteral(value, 1, delegateType)
 //    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).
 //                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral().(value)
 //                           ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral().(delegateType)
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).
   /**
    * Returns the specified [value] as an array literal, with elements parsed by the [delegateType] if provided.
    *
@@ -3124,6 +4065,11 @@
    *
    * @throws IllegalStateException If no column type mapping is found and a [delegateType] is not provided.
    */
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).[T]
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).[R]
+//                                                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).(value)
+//                                                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).(dimensions)
+//                                                                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).(delegateType)
   inline fun <reified T : Any, R : List<Any>> arrayLiteral(value: R, dimensions: Int, delegateType: ColumnType<T>? = null): LiteralOp<R> {
 //                    ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).[T]
 //                      display_name FirTypeParameterSymbol T
@@ -3146,6 +4092,11 @@
 //                                                                                                 documentation ```kotlin\ndelegateType: ColumnType<T>? = ...\n```
 //                                                                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnType#
 //                                                                                                                          ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).[T]
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).[R]
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).(value)
+//                                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).(dimensions)
+//                                                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).(delegateType)
       @OptIn(InternalApi::class)
       return LiteralOp(ArrayColumnType(delegateType ?: resolveColumnType(T::class), dimensions = dimensions), value)
 //           ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#`<init>`().
@@ -3155,12 +4106,16 @@
 //                                                                                               ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).(dimensions)
 //                                                                                                            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).(value)
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayLiteral(+1).
   
   // Query Parameters
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#
   /**
    * Represents the specified [value] as a query parameter, using the specified [sqlType] to convert the value.
    */
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#[T]
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
   class QueryParameter<T>(
 //      ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#
 //                     display_name QueryParameter
@@ -3172,6 +4127,10 @@
 //                     ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#[T]
 //                       display_name FirTypeParameterSymbol T
 //                       documentation ```kotlin\nT\n```
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().(value)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#value.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#getValue().
       /** Returns the value being used as a query parameter. */
       val value: T,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().(value)
@@ -3184,6 +4143,12 @@
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#value.
 //              display_name value
 //              documentation ```kotlin\npublic final val value: T\n```\n\n----\n\n Returns the value being used as a query parameter.
+//               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().(value)
+//               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#value.
+//               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#getValue().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().(sqlType)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#sqlType.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#getSqlType().
       /** Returns the column type of this expression. */
       val sqlType: IColumnType<T & Any>
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().(sqlType)
@@ -3197,8 +4162,14 @@
 //                display_name sqlType
 //                documentation ```kotlin\npublic final val sqlType: IColumnType<T & Any>\n```\n\n----\n\n Returns the column type of this expression.
 //                 ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().(sqlType)
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#sqlType.
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#getSqlType().
   ) : Expression<T>() {
 //    ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#compositeValue.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#getCompositeValue().
       internal val compositeValue: CompositeID? = (value as? EntityID<*>)?.value as? CompositeID
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#compositeValue.
 //                                display_name compositeValue
@@ -3209,9 +4180,15 @@
 //                                 ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeID#
 //                                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#getValue().
 //                                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#value.
+//                                                           ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#
 //                                                                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#getValue().
 //                                                                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#value.
+//                                                                                   ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeID#
+//                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#compositeValue.
+//                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#getCompositeValue().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -3221,42 +4198,50 @@
 //                                             display_name queryBuilder
 //                                             documentation ```kotlin\nqueryBuilder: QueryBuilder\n```
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#toQueryBuilder().(queryBuilder)
           queryBuilder {
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#toQueryBuilder().(queryBuilder)
+//                                ⌄ enclosing_range_start local 22
               compositeValue?.let {
 //            ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#compositeValue.
 //            ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#getCompositeValue().
 //                            ^^^ reference semanticdb maven . . kotlin/let().
-//                                ^ definition semanticdb maven . . (it) 4:13
+//                                ^ definition local 22 4:13
 //                                  display_name it
 //                                  documentation ```kotlin\nit: CompositeID\n```
+//                                             ⌄ enclosing_range_start local 23
+//                                              ⌄ enclosing_range_start local 24
+//                                                      ⌄ enclosing_range_start local 25
                   it.values.entries.appendTo { (column, value) ->
-//                ^^ reference semanticdb maven . . (it)
+//                ^^ reference local 22
 //                   ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeID#getValues().
 //                   ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeID#values.
 //                          ^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#entries.
 //                          ^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#getEntries().
 //                                  ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#appendTo().
-//                                             ^^^^^^^^^^^^^^^ definition semanticdb maven . . (`<destruct>`)
+//                                             ^^^^^^^^^^^^^^^ definition local 23
 //                                                             display_name <destruct>
 //                                                             documentation ```kotlin\n<destruct>: MutableMap.MutableEntry<Column<*>, Any?>\n```
-//                                              ^^^^^^ definition local 9
+//                                              ^^^^^^ reference local 23
+//                                              ^^^^^^ definition local 24
 //                                                     display_name column
 //                                                     documentation ```kotlin\nlocal val column: Column<*>\n```
-//                                              ^^^^^^ reference semanticdb maven . . (`<destruct>`)
 //                                              ^^^^^^ reference semanticdb maven . . kotlin/collections/component1(+10).
-//                                                      ^^^^^ definition local 10
+//                                                      ^^^^^ reference local 23
+//                                                      ^^^^^ definition local 25
 //                                                            display_name value
 //                                                            documentation ```kotlin\nlocal val value: Any?\n```
-//                                                      ^^^^^ reference semanticdb maven . . (`<destruct>`)
 //                                                      ^^^^^ reference semanticdb maven . . kotlin/collections/component2(+10).
+//                                                   ⌃ enclosing_range_end local 24
+//                                                          ⌃ enclosing_range_end local 25
+//                                                           ⌃ enclosing_range_end local 23
                       registerArgument(column.columnType, value)
 //                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#registerArgument(+1).
-//                                     ^^^^^^ reference local 9
+//                                     ^^^^^^ reference local 24
 //                                            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#columnType.
 //                                            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getColumnType().
-//                                                        ^^^^^ reference local 10
+//                                                        ^^^^^ reference local 25
                   }
               } ?: registerArgument(sqlType, value)
 //                 ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#registerArgument(+1).
@@ -3264,11 +4249,18 @@
 //                                  ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#sqlType.
 //                                           ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#getValue().
 //                                           ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#value.
+//            ⌃ enclosing_range_end local 22
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/idParam().
   /** Returns the specified [value] as a query parameter with the same type as [column]. */
+//     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/idParam().[T]
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/idParam().(value)
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/idParam().(column)
   fun <T : Any> idParam(value: EntityID<T>, column: Column<EntityID<T>>): Expression<EntityID<T>> =
 //     ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/idParam().[T]
 //       display_name FirTypeParameterSymbol T
@@ -3285,14 +4277,20 @@
 //                                                 documentation ```kotlin\ncolumn: Column<EntityID<T>>\n```
 //                                                  ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#
 //                                                                        ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/idParam().[T]
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/idParam().(value)
+//                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/idParam().(column)
       QueryParameter(value, column.columnType)
 //    ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
 //                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/idParam().(value)
 //                          ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/idParam().(column)
 //                                 ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#columnType.
 //                                 ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getColumnType().
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/idParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/booleanParam().
   /** Returns the specified [value] as a boolean query parameter. */
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/booleanParam().(value)
   fun booleanParam(value: Boolean): Expression<Boolean> = QueryParameter(value, BooleanColumnType.INSTANCE)
 //    ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/booleanParam().
 //                 display_name booleanParam
@@ -3306,8 +4304,12 @@
 //                                                                       ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/booleanParam().(value)
 //                                                                                                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BooleanColumnType#Companion#INSTANCE.
 //                                                                                                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BooleanColumnType#Companion#getINSTANCE().
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/booleanParam().(value)
+//                                                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/booleanParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/byteParam().
   /** Returns the specified [value] as a byte query parameter. */
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/byteParam().(value)
   fun byteParam(value: Byte): Expression<Byte> = QueryParameter(value, ByteColumnType())
 //    ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/byteParam().
 //              display_name byteParam
@@ -3320,8 +4322,12 @@
 //                                               ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
 //                                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/byteParam().(value)
 //                                                                     ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ByteColumnType#`<init>`().
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/byteParam().(value)
+//                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/byteParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ubyteParam().
   /** Returns the specified [value] as a unsigned byte query parameter. */
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ubyteParam().(value)
   fun ubyteParam(value: UByte): Expression<UByte> = QueryParameter(value, UByteColumnType())
 //    ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ubyteParam().
 //               display_name ubyteParam
@@ -3334,8 +4340,12 @@
 //                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
 //                                                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ubyteParam().(value)
 //                                                                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/UByteColumnType#`<init>`().
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ubyteParam().(value)
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ubyteParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/shortParam().
   /** Returns the specified [value] as a short query parameter. */
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/shortParam().(value)
   fun shortParam(value: Short): Expression<Short> = QueryParameter(value, ShortColumnType())
 //    ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/shortParam().
 //               display_name shortParam
@@ -3348,8 +4358,12 @@
 //                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
 //                                                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/shortParam().(value)
 //                                                                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ShortColumnType#`<init>`().
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/shortParam().(value)
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/shortParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ushortParam().
   /** Returns the specified [value] as a unsigned short query parameter. */
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ushortParam().(value)
   fun ushortParam(value: UShort): Expression<UShort> = QueryParameter(value, UShortColumnType())
 //    ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ushortParam().
 //                display_name ushortParam
@@ -3362,8 +4376,12 @@
 //                                                     ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
 //                                                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ushortParam().(value)
 //                                                                           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/UShortColumnType#`<init>`().
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ushortParam().(value)
+//                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ushortParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/intParam().
   /** Returns the specified [value] as an int query parameter. */
+//             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/intParam().(value)
   fun intParam(value: Int): Expression<Int> = QueryParameter(value, IntegerColumnType())
 //    ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/intParam().
 //             display_name intParam
@@ -3376,8 +4394,12 @@
 //                                            ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
 //                                                           ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/intParam().(value)
 //                                                                  ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IntegerColumnType#`<init>`().
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/intParam().(value)
+//                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/intParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/uintParam().
   /** Returns the specified [value] as a unsigned int query parameter. */
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/uintParam().(value)
   fun uintParam(value: UInt): Expression<UInt> = QueryParameter(value, UIntegerColumnType())
 //    ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/uintParam().
 //              display_name uintParam
@@ -3390,8 +4412,12 @@
 //                                               ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
 //                                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/uintParam().(value)
 //                                                                     ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/UIntegerColumnType#`<init>`().
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/uintParam().(value)
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/uintParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/longParam().
   /** Returns the specified [value] as a long query parameter. */
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/longParam().(value)
   fun longParam(value: Long): Expression<Long> = QueryParameter(value, LongColumnType())
 //    ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/longParam().
 //              display_name longParam
@@ -3404,8 +4430,12 @@
 //                                               ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
 //                                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/longParam().(value)
 //                                                                     ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LongColumnType#`<init>`().
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/longParam().(value)
+//                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/longParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ulongParam().
   /** Returns the specified [value] as a unsigned long query parameter. */
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ulongParam().(value)
   fun ulongParam(value: ULong): Expression<ULong> = QueryParameter(value, ULongColumnType())
 //    ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ulongParam().
 //               display_name ulongParam
@@ -3418,8 +4448,12 @@
 //                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
 //                                                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ulongParam().(value)
 //                                                                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ULongColumnType#`<init>`().
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ulongParam().(value)
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ulongParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/floatParam().
   /** Returns the specified [value] as a float query parameter. */
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/floatParam().(value)
   fun floatParam(value: Float): Expression<Float> = QueryParameter(value, FloatColumnType())
 //    ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/floatParam().
 //               display_name floatParam
@@ -3432,8 +4466,12 @@
 //                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
 //                                                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/floatParam().(value)
 //                                                                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/FloatColumnType#`<init>`().
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/floatParam().(value)
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/floatParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/doubleParam().
   /** Returns the specified [value] as a double query parameter. */
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/doubleParam().(value)
   fun doubleParam(value: Double): Expression<Double> = QueryParameter(value, DoubleColumnType())
 //    ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/doubleParam().
 //                display_name doubleParam
@@ -3446,8 +4484,12 @@
 //                                                     ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
 //                                                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/doubleParam().(value)
 //                                                                           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DoubleColumnType#`<init>`().
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/doubleParam().(value)
+//                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/doubleParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/stringParam().
   /** Returns the specified [value] as a string query parameter. */
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/stringParam().(value)
   fun stringParam(value: String): Expression<String> = QueryParameter(value, TextColumnType())
 //    ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/stringParam().
 //                display_name stringParam
@@ -3460,8 +4502,12 @@
 //                                                     ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
 //                                                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/stringParam().(value)
 //                                                                           ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/TextColumnType#`<init>`().
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/stringParam().(value)
+//                                                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/stringParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/decimalParam().
   /** Returns the specified [value] as a decimal query parameter. */
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/decimalParam().(value)
   fun decimalParam(value: BigDecimal): Expression<BigDecimal> = QueryParameter(value, DecimalColumnType(value.precision(), value.scale()))
 //    ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/decimalParam().
 //                 display_name decimalParam
@@ -3478,13 +4524,18 @@
 //                                                                                                            ^^^^^^^^^ reference semanticdb maven jdk 11 java/math/BigDecimal#precision().
 //                                                                                                                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/decimalParam().(value)
 //                                                                                                                               ^^^^^ reference semanticdb maven jdk 11 java/math/BigDecimal#scale().
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/decimalParam().(value)
+//                                                                                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/decimalParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/blobParam().
   /**
    * Returns the specified [value] as a blob query parameter.
    *
    * Set [useObjectIdentifier] to `true` if the parameter should be processed using an OID column instead of a
    * BYTEA column. This is only supported by PostgreSQL databases.
    */
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/blobParam().(value)
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/blobParam().(useObjectIdentifier)
   fun blobParam(value: ExposedBlob, useObjectIdentifier: Boolean = false): Expression<ExposedBlob> =
 //    ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/blobParam().
 //              display_name blobParam
@@ -3498,12 +4549,16 @@
 //                                                      documentation ```kotlin\nuseObjectIdentifier: Boolean = ...\n```
 //                                                       ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                                         ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/blobParam().(value)
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/blobParam().(useObjectIdentifier)
       QueryParameter(value, BlobColumnType(useObjectIdentifier))
 //    ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
 //                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/blobParam().(value)
 //                          ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BlobColumnType#`<init>`().
 //                                         ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/blobParam().(useObjectIdentifier)
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/blobParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam().
   /**
    * Returns the specified [value] as an array query parameter, with elements parsed by the [delegateType] if provided.
    *
@@ -3512,6 +4567,9 @@
    *
    * @throws IllegalStateException If no column type mapping is found and a [delegateType] is not provided.
    */
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam().[T]
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam().(value)
+//                                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam().(delegateType)
   inline fun <reified T : Any> arrayParam(value: List<T>, delegateType: ColumnType<T>? = null): Expression<List<T>> =
 //                    ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam().[T]
 //                      display_name FirTypeParameterSymbol T
@@ -3528,11 +4586,16 @@
 //                                                                     documentation ```kotlin\ndelegateType: ColumnType<T>? = ...\n```
 //                                                                      ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnType#
 //                                                                                              ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam().[T]
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam().(value)
+//                                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam().(delegateType)
       arrayParam(value, 1, delegateType)
 //    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).
 //               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam().(value)
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam().(delegateType)
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).
   /**
    * Returns the specified [value] as an array query parameter, with elements parsed by the [delegateType] if provided.
    *
@@ -3545,6 +4608,11 @@
    *
    * @throws IllegalStateException If no column type mapping is found and a [delegateType] is not provided.
    */
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).[T]
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).[R]
+//                                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).(value)
+//                                                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).(dimensions)
+//                                                                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).(delegateType)
   inline fun <reified T : Any, R : List<Any>> arrayParam(value: R, dimensions: Int, delegateType: ColumnType<T>? = null): Expression<R> {
 //                    ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).[T]
 //                      display_name FirTypeParameterSymbol T
@@ -3567,6 +4635,11 @@
 //                                                                                               documentation ```kotlin\ndelegateType: ColumnType<T>? = ...\n```
 //                                                                                                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnType#
 //                                                                                                                        ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).[T]
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).[R]
+//                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).(value)
+//                                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).(dimensions)
+//                                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).(delegateType)
       @OptIn(InternalApi::class)
       return QueryParameter(value, ArrayColumnType(delegateType ?: resolveColumnType(T::class), dimensions = dimensions))
 //           ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryParameter#`<init>`().
@@ -3576,13 +4649,18 @@
 //                                                                 ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/resolveColumnType().
 //                                                                                                           ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).(dimensions)
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/arrayParam(+1).
   
   // Misc.
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#
   /**
    * Represents an SQL operator that doesn't perform any operation.
    * This is mainly used to change between column types.
    */
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#[T]
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#[S]
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#`<init>`().
   class NoOpConversion<T, S>(
 //      ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#
 //                     display_name NoOpConversion
@@ -3597,6 +4675,11 @@
 //                        ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#[S]
 //                          display_name FirTypeParameterSymbol S
 //                          documentation ```kotlin\nS\n```
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#[T]
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#[S]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#getExpr().
       /** Returns the expression whose type is being changed. */
       val expr: Expression<T>,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#`<init>`().(expr)
@@ -3610,6 +4693,12 @@
 //             display_name expr
 //             documentation ```kotlin\npublic get(): Expression<T>\n```\n\n----\n\n Returns the expression whose type is being changed.
 //              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#`<init>`().(expr)
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#expr.
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#getExpr().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#`<init>`().(columnType)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#columnType.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#getColumnType().
       override val columnType: IColumnType<S & Any>
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#`<init>`().(columnType)
 //                            display_name columnType
@@ -3622,8 +4711,14 @@
 //                            display_name columnType
 //                            documentation ```kotlin\npublic get(): IColumnType<S & Any>\n```
 //                             ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#`<init>`().(columnType)
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#columnType.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#getColumnType().
   ) : ExpressionWithColumnType<S>() {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder { +expr }
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -3639,9 +4734,14 @@
 //                                                                                   ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+2).
 //                                                                                    ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#expr.
 //                                                                                    ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#getExpr().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#toQueryBuilder().(queryBuilder)
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NoOpConversion#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/appendExpression().
   /** Appends an expression that is wrapped in parentheses (if necessary by [ComplexExpression]). */
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/appendExpression().(expr)
   private fun QueryBuilder.appendExpression(expr: Expression<*>) {
 //                         ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/appendExpression().
 //                                          display_name appendExpression
@@ -3650,8 +4750,10 @@
 //                                               display_name expr
 //                                               documentation ```kotlin\nexpr: Expression<*>\n```
 //                                                ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/appendExpression().(expr)
       if (expr is ComplexExpression) {
 //        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendExpression().(expr)
+//                ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ComplexExpression#
           append("(", expr, ")")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                    ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendExpression().(expr)
@@ -3661,11 +4763,16 @@
 //               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendExpression().(expr)
       }
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/appendExpression().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().
   /**
    * Appends a comparison string between [expr1] and [expr2] using the given SQL [op], for when an operator class
    * cannot directly extend the [ComparisonOp] class.
    */
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().(expr1)
+//                                                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().(expr2)
+//                                                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().(op)
   private fun QueryBuilder.appendComparison(expr1: Expression<*>, expr2: Expression<*>, op: String) {
 //                         ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().
 //                                          display_name appendComparison
@@ -3682,6 +4789,9 @@
 //                                                                                         display_name op
 //                                                                                         documentation ```kotlin\nop: String\n```
 //                                                                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().(expr1)
+//                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().(expr2)
+//                                                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().(op)
       appendExpression(expr1)
 //    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendExpression().
 //                     ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().(expr1)
@@ -3692,3 +4802,4 @@
 //    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendExpression().
 //                     ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().(expr2)
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/appendComparison().

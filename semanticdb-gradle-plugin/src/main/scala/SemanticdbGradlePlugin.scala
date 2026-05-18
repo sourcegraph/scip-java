@@ -341,20 +341,20 @@ class SemanticdbGradlePlugin extends Plugin[Project] {
                 }]
                 .getKotlinOptions()
 
-              val semanticdbkotlincDependency =
-                s"com.sourcegraph:semanticdb-kotlinc:${BuildInfo
-                    .semanticdbKotlincVersion}"
-
-              val semanticdbKotlinc =
-                project
-                  .getConfigurations()
-                  .detachedConfiguration(
-                    project.getDependencies.create(semanticdbkotlincDependency)
+              // The semanticdb-kotlinc compiler plugin is now built and shipped
+              // together with the scip-java CLI. The CLI's init script writes
+              // the absolute path of the embedded jar into the
+              // `semanticdbKotlincJar` extra property so we no longer need to
+              // resolve a separately-published artifact at apply-time.
+              val semanticdbKotlinc = extraProperties
+                .get("semanticdbKotlincJar")
+                .map(_.asInstanceOf[String])
+                .getOrElse {
+                  throw new IllegalStateException(
+                    "semanticdbKotlincJar extra property must be set by the " +
+                      "scip-java init script when indexing Kotlin sources"
                   )
-                  .getFiles()
-                  .asScala
-                  .toList
-                  .head
+                }
 
               val newArgs =
                 new ju.ArrayList[String](

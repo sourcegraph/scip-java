@@ -35,6 +35,8 @@
 //                                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/
 //                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/UnsupportedByDialectException#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#`<init>`().
   internal object MariaDBDataTypeProvider : MysqlDataTypeProvider() {
 //                ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#
 //                                        display_name MariaDBDataTypeProvider
@@ -44,6 +46,7 @@
 //                                        display_name MariaDBDataTypeProvider
 //                                        documentation ```kotlin\nprivate constructor(): MariaDBDataTypeProvider\n```
 //                                          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDataTypeProvider#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#timestampType().
       override fun timestampType(): String = if ((currentDialect as? MariaDBDialect)?.isFractionDateTimeSupported() == true) "TIMESTAMP(6)" else "TIMESTAMP"
 //                 ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#timestampType().
 //                               display_name timestampType
@@ -52,8 +55,11 @@
 //                                  ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                                                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
+//                                                                   ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#
 //                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#isFractionDateTimeSupported().
+//                                                                                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#timestampType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#timestampWithTimeZoneType().
       override fun timestampWithTimeZoneType(): String {
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#timestampWithTimeZoneType().
 //                                           display_name timestampWithTimeZoneType
@@ -65,7 +71,10 @@
 //                                                                                                               ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                                                                                                               ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#timestampWithTimeZoneType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#processForDefaultValue().
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#processForDefaultValue().(e)
       override fun processForDefaultValue(e: Expression<*>): String = when {
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#processForDefaultValue().
 //                                        display_name processForDefaultValue
@@ -76,25 +85,35 @@
 //                                          documentation ```kotlin\ne: Expression<*>\n```
 //                                           ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
 //                                                           ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#processForDefaultValue().(e)
           e is LiteralOp<*> -> (e.columnType as IColumnType<Any?>).valueAsDefaultString(e.value)
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#processForDefaultValue().(e)
+//             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#
 //                              ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#processForDefaultValue().(e)
 //                                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#columnType.
 //                                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#getColumnType().
+//                                              ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
 //                                                                 ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#valueAsDefaultString().
 //                                                                                      ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#processForDefaultValue().(e)
 //                                                                                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#getValue().
 //                                                                                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#value.
           e is Function<*> || currentDialect is MariaDBDialect -> "$e"
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#processForDefaultValue().(e)
+//             ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Function#
 //                            ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                            ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
+//                                              ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#
 //                                                                  ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#processForDefaultValue().(e)
           else -> "($e)"
 //                   ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#processForDefaultValue().(e)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#processForDefaultValue().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDataTypeProvider#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#`<init>`().
   internal object MariaDBFunctionProvider : MysqlFunctionProvider() {
 //                ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#
 //                                        display_name MariaDBFunctionProvider
@@ -104,6 +123,9 @@
 //                                        display_name MariaDBFunctionProvider
 //                                        documentation ```kotlin\nprivate constructor(): MariaDBFunctionProvider\n```
 //                                          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlFunctionProvider#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#nextVal().
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#nextVal().(seq)
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#nextVal().(builder)
       override fun nextVal(seq: Sequence, builder: QueryBuilder) = builder {
 //                 ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#nextVal().
 //                         display_name nextVal
@@ -119,13 +141,18 @@
 //                                                 ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                                 ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //                                                                 ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#nextVal().(builder)
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#nextVal().(seq)
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#nextVal().(builder)
           append("NEXTVAL(", seq.identifier, ")")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                           ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#nextVal().(seq)
 //                               ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getIdentifier().
 //                               ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#identifier.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#nextVal().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().[T]
       override fun <T : String?> regexp(
 //                  ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().[T]
 //                    display_name FirTypeParameterSymbol T
@@ -134,26 +161,35 @@
 //                                      display_name regexp
 //                                      documentation ```kotlin\npublic open override fun <T : String?> regexp(expr1: Expression<T>, pattern: Expression<String>, caseSensitive: Boolean, queryBuilder: QueryBuilder): Unit\n```
 //                                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlFunctionProvider#regexp().
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().[T]
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(expr1)
           expr1: Expression<T>,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(expr1)
 //              display_name expr1
 //              documentation ```kotlin\nexpr1: Expression<T>\n```
 //               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(expr1)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(pattern)
           pattern: Expression<String>,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(pattern)
 //                display_name pattern
 //                documentation ```kotlin\npattern: Expression<String>\n```
 //                 ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(pattern)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(caseSensitive)
           caseSensitive: Boolean,
 //        ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(caseSensitive)
 //                      display_name caseSensitive
 //                      documentation ```kotlin\ncaseSensitive: Boolean\n```
 //                       ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(caseSensitive)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(queryBuilder)
           queryBuilder: QueryBuilder
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(queryBuilder)
 //                     display_name queryBuilder
 //                     documentation ```kotlin\nqueryBuilder: QueryBuilder\n```
 //                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(queryBuilder)
       ): Unit = queryBuilder {
 //       ^^^^ reference semanticdb maven . . kotlin/Unit#
 //              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
@@ -163,7 +199,10 @@
 //               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(expr1)
 //                                  ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().(pattern)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#regexp().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().[T]
       override fun <T : String?> locate(
 //                  ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().[T]
 //                    display_name FirTypeParameterSymbol T
@@ -172,21 +211,28 @@
 //                                      display_name locate
 //                                      documentation ```kotlin\npublic open override fun <T : String?> locate(queryBuilder: QueryBuilder, expr: Expression<T>, substring: String): Unit\n```
 //                                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlFunctionProvider#locate().
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().[T]
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().(queryBuilder)
           queryBuilder: QueryBuilder,
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().(queryBuilder)
 //                     display_name queryBuilder
 //                     documentation ```kotlin\nqueryBuilder: QueryBuilder\n```
 //                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().(queryBuilder)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().(expr)
           expr: Expression<T>,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().(expr)
 //             display_name expr
 //             documentation ```kotlin\nexpr: Expression<T>\n```
 //              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().(expr)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().(substring)
           substring: String
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().(substring)
 //                  display_name substring
 //                  documentation ```kotlin\nsubstring: String\n```
 //                   ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().(substring)
       ) = queryBuilder {
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().(queryBuilder)
@@ -195,39 +241,52 @@
 //                            ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().(substring)
 //                                              ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().(expr)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#locate().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().
       override fun update(
 //                 ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().
 //                        display_name update
 //                        documentation ```kotlin\npublic open override fun update(targets: Join, columnsAndValues: List<Pair<Column<*>, Any?>>, limit: Int?, where: Op<Boolean>?, transaction: Transaction): String\n```
 //                        relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlFunctionProvider#update().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(targets)
           targets: Join,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(targets)
 //                display_name targets
 //                documentation ```kotlin\ntargets: Join\n```
 //                 ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(targets)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(columnsAndValues)
           columnsAndValues: List<Pair<Column<*>, Any?>>,
 //        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(columnsAndValues)
 //                         display_name columnsAndValues
 //                         documentation ```kotlin\ncolumnsAndValues: List<Pair<Column<*>, Any?>>\n```
 //                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(columnsAndValues)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(limit)
           limit: Int?,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(limit)
 //              display_name limit
 //              documentation ```kotlin\nlimit: Int?\n```
 //               ^^^^ reference semanticdb maven . . kotlin/Int#
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(limit)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(where)
           where: Op<Boolean>?,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(where)
 //              display_name where
 //              documentation ```kotlin\nwhere: Op<Boolean>?\n```
 //               ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(where)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(transaction)
           transaction: Transaction
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(transaction)
 //                    display_name transaction
 //                    documentation ```kotlin\ntransaction: Transaction\n```
 //                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(transaction)
       ): String {
 //       ^^^^^^ reference semanticdb maven . . kotlin/String#
+//        ⌄ enclosing_range_start local 0
           val sql = super.update(targets, columnsAndValues, null, where, transaction)
 //            ^^^ definition local 0
 //                display_name sql
@@ -237,40 +296,52 @@
 //                                        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(columnsAndValues)
 //                                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(where)
 //                                                                       ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(transaction)
+//                                                                                  ⌃ enclosing_range_end local 0
           return if (limit != null) "$sql LIMIT $limit" else sql
 //                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(limit)
 //                                    ^^^ reference local 0
 //                                               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().(limit)
 //                                                           ^^^ reference local 0
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#update().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().
       override fun explain(
 //                 ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().
 //                         display_name explain
 //                         documentation ```kotlin\npublic open override fun explain(analyze: Boolean, options: String?, internalStatement: String, transaction: Transaction): String\n```
 //                         relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#explain().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(analyze)
           analyze: Boolean,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(analyze)
 //                display_name analyze
 //                documentation ```kotlin\nanalyze: Boolean\n```
 //                 ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(analyze)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(options)
           options: String?,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(options)
 //                display_name options
 //                documentation ```kotlin\noptions: String?\n```
 //                 ^^^^^^^ reference semanticdb maven . . kotlin/String#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(options)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(internalStatement)
           internalStatement: String,
 //        ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(internalStatement)
 //                          display_name internalStatement
 //                          documentation ```kotlin\ninternalStatement: String\n```
 //                           ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(internalStatement)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(transaction)
           transaction: Transaction
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(transaction)
 //                    display_name transaction
 //                    documentation ```kotlin\ntransaction: Transaction\n```
 //                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(transaction)
       ): String {
 //       ^^^^^^ reference semanticdb maven . . kotlin/String#
+//        ⌄ enclosing_range_start local 1
           val sql = super.explain(analyze, options, internalStatement, transaction)
 //            ^^^ definition local 1
 //                display_name sql
@@ -280,6 +351,7 @@
 //                                         ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(options)
 //                                                  ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(internalStatement)
 //                                                                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(transaction)
+//                                                                                ⌃ enclosing_range_end local 1
           return if (analyze) {
 //                   ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().(analyze)
               sql.substringAfter("EXPLAIN ")
@@ -290,27 +362,35 @@
 //            ^^^ reference local 1
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#explain().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().
       override fun returning(
 //                 ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().
 //                           display_name returning
 //                           documentation ```kotlin\npublic open override fun returning(mainSql: String, returning: List<Expression<*>>, transaction: Transaction): String\n```
 //                           relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#returning().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().(mainSql)
           mainSql: String,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().(mainSql)
 //                display_name mainSql
 //                documentation ```kotlin\nmainSql: String\n```
 //                 ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().(mainSql)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().(returning)
           returning: List<Expression<*>>,
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().(returning)
 //                  display_name returning
 //                  documentation ```kotlin\nreturning: List<Expression<*>>\n```
 //                   ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().(returning)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().(transaction)
           transaction: Transaction
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().(transaction)
 //                    display_name transaction
 //                    documentation ```kotlin\ntransaction: Transaction\n```
 //                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().(transaction)
       ): String {
 //       ^^^^^^ reference semanticdb maven . . kotlin/String#
           return with(QueryBuilder(true)) {
@@ -319,19 +399,24 @@
               +"$mainSql RETURNING "
 //            ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
 //               ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().(mainSql)
+//                               ⌄ enclosing_range_start local 2
               returning.appendTo { +it }
 //            ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().(returning)
 //                      ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#appendTo().
-//                               ^^^^^^^ definition semanticdb maven . . (it)
+//                               ^^^^^^^ definition local 2
 //                                       display_name it
-//                                       documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
+//                                       documentation ```kotlin\nit: Expression<*>\n```
 //                                 ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+2).
-//                                  ^^ reference semanticdb maven . . (it)
+//                                  ^^ reference local 2
+//                                     ⌃ enclosing_range_end local 2
               toString()
 //            ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#toString().
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#returning().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#isUpsertAliasSupported().
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#isUpsertAliasSupported().(dialect)
       override fun isUpsertAliasSupported(dialect: DatabaseDialect): Boolean = false
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#isUpsertAliasSupported().
 //                                        display_name isUpsertAliasSupported
@@ -342,8 +427,14 @@
 //                                                documentation ```kotlin\ndialect: DatabaseDialect\n```
 //                                                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#
 //                                                                   ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#isUpsertAliasSupported().(dialect)
+//                                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#isUpsertAliasSupported().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBFunctionProvider#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#`<init>`().
   /**
    * MariaDB dialect implementation.
    */
@@ -356,6 +447,8 @@
 //                          display_name MariaDBDialect
 //                          documentation ```kotlin\npublic constructor(): MariaDBDialect\n```\n\n----\n\n\n MariaDB dialect implementation.\n
 //                            ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#name.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getName().
       override val name: String = dialectName
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getName().
 //                      display_name name
@@ -366,6 +459,10 @@
 //                       ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VendorDialect#DialectNameProvider#dialectName.
 //                                ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VendorDialect#DialectNameProvider#getDialectName().
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#name.
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getName().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#dataTypeProvider.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getDataTypeProvider().
       override val dataTypeProvider: DataTypeProvider = MariaDBDataTypeProvider
 //                 ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#dataTypeProvider.
 //                                  display_name dataTypeProvider
@@ -374,6 +471,10 @@
 //                                  display_name dataTypeProvider
 //                                  documentation ```kotlin\npublic get(): DataTypeProvider\n```
 //                                   ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#
+//                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#dataTypeProvider.
+//                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getDataTypeProvider().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#functionProvider.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getFunctionProvider().
       override val functionProvider: FunctionProvider = MariaDBFunctionProvider
 //                 ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#functionProvider.
 //                                  display_name functionProvider
@@ -382,6 +483,10 @@
 //                                  display_name functionProvider
 //                                  documentation ```kotlin\npublic get(): FunctionProvider\n```
 //                                   ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#
+//                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#functionProvider.
+//                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getFunctionProvider().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#supportsOnlyIdentifiersInGeneratedKeys.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSupportsOnlyIdentifiersInGeneratedKeys().
       override val supportsOnlyIdentifiersInGeneratedKeys: Boolean = true
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSupportsOnlyIdentifiersInGeneratedKeys().
 //                                                        display_name supportsOnlyIdentifiersInGeneratedKeys
@@ -390,6 +495,10 @@
 //                                                        display_name supportsOnlyIdentifiersInGeneratedKeys
 //                                                        documentation ```kotlin\npublic open override val supportsOnlyIdentifiersInGeneratedKeys: Boolean\n```
 //                                                         ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#supportsOnlyIdentifiersInGeneratedKeys.
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSupportsOnlyIdentifiersInGeneratedKeys().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#supportsSetDefaultReferenceOption.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSupportsSetDefaultReferenceOption().
       override val supportsSetDefaultReferenceOption: Boolean = false
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSupportsSetDefaultReferenceOption().
 //                                                   display_name supportsSetDefaultReferenceOption
@@ -398,6 +507,10 @@
 //                                                   display_name supportsSetDefaultReferenceOption
 //                                                   documentation ```kotlin\npublic open override val supportsSetDefaultReferenceOption: Boolean\n```
 //                                                    ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#supportsSetDefaultReferenceOption.
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSupportsSetDefaultReferenceOption().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#supportsCreateSequence.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSupportsCreateSequence().
       override val supportsCreateSequence: Boolean by lazy {
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSupportsCreateSequence().
 //                                        display_name supportsCreateSequence
@@ -423,7 +536,11 @@
 //                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#SEQUENCE_MIN_MINOR_VERSION.
 //                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#getSEQUENCE_MIN_MINOR_VERSION().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#supportsCreateSequence.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSupportsCreateSequence().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#supportsSequenceAsGeneratedKeys.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSupportsSequenceAsGeneratedKeys().
       // actually MariaDb supports it but jdbc driver prepares statement without RETURNING clause
       override val supportsSequenceAsGeneratedKeys: Boolean = false
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSupportsSequenceAsGeneratedKeys().
@@ -433,7 +550,11 @@
 //                                                 display_name supportsSequenceAsGeneratedKeys
 //                                                 documentation ```kotlin\npublic open override val supportsSequenceAsGeneratedKeys: Boolean\n```
 //                                                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#supportsSequenceAsGeneratedKeys.
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSupportsSequenceAsGeneratedKeys().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#sequenceMaxValue.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSequenceMaxValue().
       @Suppress("MagicNumber")
       override val sequenceMaxValue: Long by lazy {
 //                 ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSequenceMaxValue().
@@ -465,7 +586,10 @@
 //                           ^ reference semanticdb maven . . kotlin/Long#minus(+2).
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#sequenceMaxValue.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#getSequenceMaxValue().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#isFractionDateTimeSupported().
       /** Returns `true` if the MariaDB database version is greater than or equal to 5.3. */
       @Suppress("MagicNumber")
       override fun isFractionDateTimeSupported(): Boolean {
@@ -483,14 +607,19 @@
 //                                                              ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#version.
 //                                                                      ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Version#covers(+3).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#isFractionDateTimeSupported().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#isTimeZoneOffsetSupported().
       override fun isTimeZoneOffsetSupported(): Boolean = false
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#isTimeZoneOffsetSupported().
 //                                           display_name isTimeZoneOffsetSupported
 //                                           documentation ```kotlin\npublic open override fun isTimeZoneOffsetSupported(): Boolean\n```
 //                                           relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#isTimeZoneOffsetSupported().
 //                                              ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#isTimeZoneOffsetSupported().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#isAllowedAsColumnDefault().
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#isAllowedAsColumnDefault().(e)
       override fun isAllowedAsColumnDefault(e: Expression<*>): Boolean {
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#isAllowedAsColumnDefault().
 //                                          display_name isAllowedAsColumnDefault
@@ -501,8 +630,10 @@
 //                                            documentation ```kotlin\ne: Expression<*>\n```
 //                                             ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
 //                                                             ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#isAllowedAsColumnDefault().(e)
           if (e is LiteralOp<*>) return true
 //            ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#isAllowedAsColumnDefault().(e)
+//                 ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LiteralOp#
           if (fullVersion >= "10.2.1") {
 //            ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#fullVersion.
 //            ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#getFullVersion().
@@ -522,7 +653,10 @@
 //                                       ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#getNotAcceptableDefaults().
 //                                       ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#notAcceptableDefaults.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#isAllowedAsColumnDefault().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#createIndex().
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#createIndex().(index)
       override fun createIndex(index: Index): String {
 //                 ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#createIndex().
 //                             display_name createIndex
@@ -533,6 +667,7 @@
 //                                   documentation ```kotlin\nindex: Index\n```
 //                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#
 //                                            ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#createIndex().(index)
           if (index.functions != null) {
 //            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#createIndex().(index)
 //                  ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#functions.
@@ -541,6 +676,7 @@
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/exposedLogger.
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/getExposedLogger().
 //                          ^^^^ reference semanticdb maven . . org/slf4j/Logger#warn().
+//                                                                                                   ⌄ enclosing_range_start local 3
                   "Functional index on ${index.table.tableName} using ${index.functions.joinToString { it.toString() }} can't be created in MariaDB"
 //                                       ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#createIndex().(index)
 //                                             ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#getTable().
@@ -551,11 +687,12 @@
 //                                                                            ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#functions.
 //                                                                            ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#getFunctions().
 //                                                                                      ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/joinToString(+9).
-//                                                                                                   ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                                                   ^^^^^^^^^^^^^^^^^ definition local 3
 //                                                                                                                     display_name it
 //                                                                                                                     documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                                                                                     ^^ reference semanticdb maven . . (it)
+//                                                                                                     ^^ reference local 3
 //                                                                                                        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#toString().
+//                                                                                                                   ⌃ enclosing_range_end local 3
               )
               return ""
           }
@@ -563,7 +700,10 @@
 //                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#createIndex().
 //                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#createIndex().(index)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#createIndex().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#`<init>`().
       companion object : DialectNameProvider("MariaDB") {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion# 3:5
 //                                                        display_name Companion
@@ -573,6 +713,8 @@
 //                                                        display_name Companion
 //                                                        documentation ```kotlin\nprivate constructor(): MariaDBDialect.Companion\n```
 //                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VendorDialect#DialectNameProvider#
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#SEQUENCE_MIN_MAJOR_VERSION.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#getSEQUENCE_MIN_MAJOR_VERSION().
           private const val SEQUENCE_MIN_MAJOR_VERSION = 10
 //                          ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#SEQUENCE_MIN_MAJOR_VERSION.
 //                                                     display_name SEQUENCE_MIN_MAJOR_VERSION
@@ -580,6 +722,10 @@
 //                          ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#getSEQUENCE_MIN_MAJOR_VERSION().
 //                                                     display_name SEQUENCE_MIN_MAJOR_VERSION
 //                                                     documentation ```kotlin\nprivate get(): Int\n```
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#SEQUENCE_MIN_MAJOR_VERSION.
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#getSEQUENCE_MIN_MAJOR_VERSION().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#SEQUENCE_MIN_MINOR_VERSION.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#getSEQUENCE_MIN_MINOR_VERSION().
           private const val SEQUENCE_MIN_MINOR_VERSION = 3
 //                          ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#SEQUENCE_MIN_MINOR_VERSION.
 //                                                     display_name SEQUENCE_MIN_MINOR_VERSION
@@ -587,5 +733,11 @@
 //                          ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#getSEQUENCE_MIN_MINOR_VERSION().
 //                                                     display_name SEQUENCE_MIN_MINOR_VERSION
 //                                                     documentation ```kotlin\nprivate get(): Int\n```
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#SEQUENCE_MIN_MINOR_VERSION.
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#getSEQUENCE_MIN_MINOR_VERSION().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#Companion#`<init>`().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MariaDBDialect#`<init>`().

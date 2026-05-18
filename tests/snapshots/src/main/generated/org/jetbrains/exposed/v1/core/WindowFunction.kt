@@ -18,7 +18,9 @@
 //            ^^^^ reference semanticdb maven . . java/math/
 //                 ^^^^^^^^^^ reference semanticdb maven jdk 11 java/math/BigDecimal#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
   /** Interface for functions that can be used as window functions. */
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#[T]
   interface WindowFunction<T> {
 //          ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
 //                         display_name WindowFunction
@@ -46,6 +48,8 @@
 //                         ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#[T]
 //                           display_name FirTypeParameterSymbol T
 //                           documentation ```kotlin\nT\n```
+//                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#over().
       /** Returns window function definition. */
       fun over(): WindowFunctionDefinition<T>
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#over().
@@ -72,8 +76,11 @@
 //             relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/VarPop#over().
 //             relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/VarSamp#over().
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#over().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#toQueryBuilder().
       /** Appends the SQL representation of this function to the specified [queryBuilder]. */
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#toQueryBuilder().(queryBuilder)
       fun toQueryBuilder(queryBuilder: QueryBuilder)
 //        ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#toQueryBuilder().
 //                       display_name toQueryBuilder
@@ -102,10 +109,16 @@
 //                                    display_name queryBuilder
 //                                    documentation ```kotlin\nqueryBuilder: QueryBuilder\n```
 //                                     ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#toQueryBuilder().(queryBuilder)
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#
   /** Represents an SQL window function with window definition. */
   @Suppress("TooManyFunctions")
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#[T]
+//                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#`<init>`().
   class WindowFunctionDefinition<T>(
 //      ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#
 //                               display_name WindowFunctionDefinition
@@ -117,6 +130,10 @@
 //                               ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#[T]
 //                                 display_name FirTypeParameterSymbol T
 //                                 documentation ```kotlin\nT\n```
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#`<init>`().(columnType)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#columnType.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getColumnType().
       override val columnType: IColumnType<T & Any>,
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#`<init>`().(columnType)
 //                            display_name columnType
@@ -129,6 +146,12 @@
 //                            display_name columnType
 //                            documentation ```kotlin\npublic get(): IColumnType<T & Any>\n```
 //                             ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#`<init>`().(columnType)
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#columnType.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getColumnType().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#`<init>`().(function)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#function.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getFunction().
       /** Returns the function that definition is used for. */
       private val function: WindowFunction<T>
 //                ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#`<init>`().(function)
@@ -142,8 +165,14 @@
 //                         display_name function
 //                         documentation ```kotlin\nprivate get(): WindowFunction<T>\n```\n\n----\n\n Returns the function that definition is used for.
 //                          ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#`<init>`().(function)
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#function.
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getFunction().
   ) : ExpressionWithColumnType<T>() {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#partitionExpressions.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getPartitionExpressions().
       /** Returns expressions in PARTITION BY clause. */
       private val partitionExpressions: List<Expression<*>> = mutableListOf()
 //                ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getPartitionExpressions().
@@ -154,7 +183,11 @@
 //                                     documentation ```kotlin\nprivate final val partitionExpressions: List<Expression<*>>\n```\n\n----\n\n Returns expressions in PARTITION BY clause.
 //                                      ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
 //                                                            ^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/mutableListOf().
+//                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#partitionExpressions.
+//                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getPartitionExpressions().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderByExpressions.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getOrderByExpressions().
       /** Returns expressions in ORDER BY clause. */
       private val orderByExpressions: List<Pair<Expression<*>, SortOrder>> = mutableListOf()
 //                ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getOrderByExpressions().
@@ -165,7 +198,13 @@
 //                                   documentation ```kotlin\nprivate final val orderByExpressions: List<Pair<Expression<*>, SortOrder>>\n```\n\n----\n\n Returns expressions in ORDER BY clause.
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
 //                                                                           ^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/mutableListOf().
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderByExpressions.
+//                                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getOrderByExpressions().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#frameClause.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getFrameClause().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#setFrameClause().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#setFrameClause().(value)
       /** Returns window frame clause. */
       private var frameClause: WindowFrameClause? = null
 //                ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#frameClause.
@@ -181,11 +220,17 @@
 //                            display_name value
 //                            documentation ```kotlin\nvalue: WindowFrameClause?\n```\n\n----\n\n Returns window frame clause.
 //                             ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#frameClause.
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getFrameClause().
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#setFrameClause().
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#setFrameClause().(value)
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#partitionBy().
       /**
        * Groups the rows of the query by specified [expressions] into partitions,
        * which are processed separately by the window function.
        */
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#partitionBy().(expressions)
       fun partitionBy(vararg expressions: Expression<*>): WindowFunctionDefinition<T> = apply {
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#partitionBy().
 //                    display_name partitionBy
@@ -196,17 +241,23 @@
 //                                        ^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Array#
 //                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#
 //                                                                                      ^^^^^ reference semanticdb maven . . kotlin/apply().
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#partitionBy().(expressions)
           (partitionExpressions as MutableList).addAll(expressions)
 //         ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getPartitionExpressions().
 //         ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#partitionExpressions.
+//                                 ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#
 //                                              ^^^^^^ reference semanticdb maven . . kotlin/collections/addAll(+2).
 //                                                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#partitionBy().(expressions)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#partitionBy().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy().
       /**
        * Defines sorting order by [column] and [order] in which the rows of a partition
        * are processed by the window function.
        */
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy().(column)
+//                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy().(order)
       fun orderBy(column: Expression<*>, order: SortOrder = SortOrder.ASC): WindowFunctionDefinition<T> =
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy().
 //                display_name orderBy
@@ -221,16 +272,21 @@
 //                                              ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#
 //                                                                    ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SortOrder#ASC.
 //                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy().(column)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy().(order)
           orderBy(column to order)
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy(+1).
 //                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy().(column)
 //                       ^^ reference semanticdb maven . . kotlin/to().
 //                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy().(order)
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy(+1).
       /**
        * Defines sorting order by column and order pairs [order] in which the rows of a partition
        * are processed by the window function.
        */
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy(+1).(order)
       fun orderBy(vararg order: Pair<Expression<*>, SortOrder>): WindowFunctionDefinition<T> = apply {
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy(+1).
 //                display_name orderBy
@@ -241,13 +297,17 @@
 //                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Array#
 //                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#
 //                                                                                             ^^^^^ reference semanticdb maven . . kotlin/apply().
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy(+1).(order)
           (orderByExpressions as MutableList).addAll(order)
 //         ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getOrderByExpressions().
 //         ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderByExpressions.
+//                               ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableList#
 //                                            ^^^^^^ reference semanticdb maven . . kotlin/collections/addAll(+2).
 //                                                   ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy(+1).(order)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderBy(+1).
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows().
       /**
        * Defines the set of rows constituting the window frame, which is a subset of the current partition.
        * Window frame uses [WindowFrameUnit.ROWS] mode and specified [start] and [end] bounds.
@@ -256,16 +316,20 @@
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows().
 //             display_name rows
 //             documentation ```kotlin\npublic final fun rows(start: WindowFrameBound, end: WindowFrameBound): WindowFunctionDefinition<T>\n```\n\n----\n\n\n Defines the set of rows constituting the window frame, which is a subset of the current partition.\n Window frame uses [WindowFrameUnit.ROWS] mode and specified [start] and [end] bounds.\n
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows().(start)
           start: WindowFrameBound,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows().(start)
 //              display_name start
 //              documentation ```kotlin\nstart: WindowFrameBound\n```
 //               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows().(start)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows().(end)
           end: WindowFrameBound
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows().(end)
 //            display_name end
 //            documentation ```kotlin\nend: WindowFrameBound\n```
 //             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows().(end)
       ): WindowFunctionDefinition<T> = apply {
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#
 //                                     ^^^^^ reference semanticdb maven . . kotlin/apply().
@@ -278,7 +342,9 @@
 //                                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows().(start)
 //                                                                     ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows().(end)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows(+1).
       /**
        * Defines the set of rows constituting the window frame, which is a subset of the current partition.
        * Window frame uses [WindowFrameUnit.ROWS] mode and specified [start] bound.
@@ -287,11 +353,13 @@
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows(+1).
 //             display_name rows
 //             documentation ```kotlin\npublic final fun rows(start: CurrentOrPreceding): WindowFunctionDefinition<T>\n```\n\n----\n\n\n Defines the set of rows constituting the window frame, which is a subset of the current partition.\n Window frame uses [WindowFrameUnit.ROWS] mode and specified [start] bound.\n
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows(+1).(start)
           start: CurrentOrPreceding
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows(+1).(start)
 //              display_name start
 //              documentation ```kotlin\nstart: CurrentOrPreceding\n```
 //               ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrPreceding#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows(+1).(start)
       ): WindowFunctionDefinition<T> = apply {
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#
 //                                     ^^^^^ reference semanticdb maven . . kotlin/apply().
@@ -303,7 +371,9 @@
 //                                                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#ROWS.
 //                                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows(+1).(start)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#rows(+1).
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range().
       /**
        * Defines the set of rows constituting the window frame, which is a subset of the current partition.
        * Window frame uses [WindowFrameUnit.RANGE] mode and specified [start] and [end] bounds.
@@ -312,16 +382,20 @@
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range().
 //              display_name range
 //              documentation ```kotlin\npublic final fun range(start: WindowFrameBound, end: WindowFrameBound): WindowFunctionDefinition<T>\n```\n\n----\n\n\n Defines the set of rows constituting the window frame, which is a subset of the current partition.\n Window frame uses [WindowFrameUnit.RANGE] mode and specified [start] and [end] bounds.\n
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range().(start)
           start: WindowFrameBound,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range().(start)
 //              display_name start
 //              documentation ```kotlin\nstart: WindowFrameBound\n```
 //               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range().(start)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range().(end)
           end: WindowFrameBound
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range().(end)
 //            display_name end
 //            documentation ```kotlin\nend: WindowFrameBound\n```
 //             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range().(end)
       ): WindowFunctionDefinition<T> = apply {
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#
 //                                     ^^^^^ reference semanticdb maven . . kotlin/apply().
@@ -334,7 +408,9 @@
 //                                                               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range().(start)
 //                                                                      ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range().(end)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range(+1).
       /**
        * Defines the set of rows constituting the window frame, which is a subset of the current partition.
        * Window frame uses [WindowFrameUnit.RANGE] mode and specified [start] bound.
@@ -343,11 +419,13 @@
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range(+1).
 //              display_name range
 //              documentation ```kotlin\npublic final fun range(start: CurrentOrPreceding): WindowFunctionDefinition<T>\n```\n\n----\n\n\n Defines the set of rows constituting the window frame, which is a subset of the current partition.\n Window frame uses [WindowFrameUnit.RANGE] mode and specified [start] bound.\n
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range(+1).(start)
           start: CurrentOrPreceding
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range(+1).(start)
 //              display_name start
 //              documentation ```kotlin\nstart: CurrentOrPreceding\n```
 //               ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrPreceding#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range(+1).(start)
       ): WindowFunctionDefinition<T> = apply {
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#
 //                                     ^^^^^ reference semanticdb maven . . kotlin/apply().
@@ -359,7 +437,9 @@
 //                                                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#RANGE.
 //                                                               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range(+1).(start)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#range(+1).
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups().
       /**
        * Defines the set of rows constituting the window frame, which is a subset of the current partition.
        * Window frame uses [WindowFrameUnit.GROUPS] mode and specified [start] and [end] bounds.
@@ -368,16 +448,20 @@
 //        ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups().
 //               display_name groups
 //               documentation ```kotlin\npublic final fun groups(start: WindowFrameBound, end: WindowFrameBound): WindowFunctionDefinition<T>\n```\n\n----\n\n\n Defines the set of rows constituting the window frame, which is a subset of the current partition.\n Window frame uses [WindowFrameUnit.GROUPS] mode and specified [start] and [end] bounds.\n
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups().(start)
           start: WindowFrameBound,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups().(start)
 //              display_name start
 //              documentation ```kotlin\nstart: WindowFrameBound\n```
 //               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups().(start)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups().(end)
           end: WindowFrameBound
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups().(end)
 //            display_name end
 //            documentation ```kotlin\nend: WindowFrameBound\n```
 //             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups().(end)
       ): WindowFunctionDefinition<T> = apply {
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#
 //                                     ^^^^^ reference semanticdb maven . . kotlin/apply().
@@ -390,7 +474,9 @@
 //                                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups().(start)
 //                                                                       ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups().(end)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups(+1).
       /**
        * Defines the set of rows constituting the window frame, which is a subset of the current partition.
        * Window frame uses [WindowFrameUnit.GROUPS] mode and specified [start] bound.
@@ -399,11 +485,13 @@
 //        ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups(+1).
 //               display_name groups
 //               documentation ```kotlin\npublic final fun groups(start: CurrentOrPreceding): WindowFunctionDefinition<T>\n```\n\n----\n\n\n Defines the set of rows constituting the window frame, which is a subset of the current partition.\n Window frame uses [WindowFrameUnit.GROUPS] mode and specified [start] bound.\n
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups(+1).(start)
           start: CurrentOrPreceding,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups(+1).(start)
 //              display_name start
 //              documentation ```kotlin\nstart: CurrentOrPreceding\n```
 //               ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrPreceding#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups(+1).(start)
       ): WindowFunctionDefinition<T> = apply {
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#
 //                                     ^^^^^ reference semanticdb maven . . kotlin/apply().
@@ -415,7 +503,10 @@
 //                                                        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#GROUPS.
 //                                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups(+1).(start)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#groups(+1).
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -427,6 +518,7 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#toQueryBuilder().(queryBuilder)
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#toQueryBuilder().(queryBuilder)
           function.toQueryBuilder(this)
 //        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#function.
 //        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getFunction().
@@ -437,24 +529,28 @@
 //        ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#appendPartitionByClause().
           appendOrderByClause()
 //        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#appendOrderByClause().
+//                         ⌄ enclosing_range_start local 0
           frameClause?.let {
 //        ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#frameClause.
 //        ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getFrameClause().
 //        ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#setFrameClause().
 //                     ^^^ reference semanticdb maven . . kotlin/let().
-//                         ^ definition semanticdb maven . . (it) 3:9
+//                         ^ definition local 0 3:9
 //                           display_name it
-//                           documentation ```kotlin\nit: Expression<*>\n```
+//                           documentation ```kotlin\nit: WindowFrameClause\n```
               +" "
 //            ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
               it.toQueryBuilder(this)
-//            ^^ reference semanticdb maven . . (it)
+//            ^^ reference local 0
 //               ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#toQueryBuilder().
           }
+//        ⌃ enclosing_range_end local 0
           +")"
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#appendPartitionByClause().
       private fun QueryBuilder.appendPartitionByClause() {
 //                             ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#appendPartitionByClause().
 //                                                     display_name appendPartitionByClause
@@ -465,22 +561,27 @@
 //                                 ^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/isNotEmpty(+9).
               +"PARTITION BY "
 //            ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
+//                                          ⌄ enclosing_range_start local 1
               partitionExpressions.appendTo {
 //            ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getPartitionExpressions().
 //            ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#partitionExpressions.
 //                                 ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#appendTo().
-//                                          ^ definition semanticdb maven . . (it) 2:13
+//                                          ^ definition local 1 2:13
 //                                            display_name it
 //                                            documentation ```kotlin\nit: Expression<*>\n```
                   +((it as? IExpressionAlias<*>)?.aliasOnlyExpression() ?: it)
 //                ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+2).
-//                   ^^ reference semanticdb maven . . (it)
+//                   ^^ reference local 1
+//                          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IExpressionAlias#
 //                                                ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IExpressionAlias#aliasOnlyExpression().
-//                                                                         ^^ reference semanticdb maven . . (it)
+//                                                                         ^^ reference local 1
               }
+//            ⌃ enclosing_range_end local 1
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#appendPartitionByClause().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#appendOrderByClause().
       private fun QueryBuilder.appendOrderByClause() {
 //                             ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#appendOrderByClause().
 //                                                 display_name appendOrderByClause
@@ -491,37 +592,47 @@
 //                               ^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/isNotEmpty(+9).
               +" ORDER BY "
 //            ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
+//                                          ⌄ enclosing_range_start local 2
+//                                           ⌄ enclosing_range_start local 3
+//                                                       ⌄ enclosing_range_start local 4
               orderByExpressions.appendTo { (expression, sortOrder) ->
 //            ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#getOrderByExpressions().
 //            ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#orderByExpressions.
 //                               ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#appendTo().
-//                                          ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (`<destruct>`)
+//                                          ^^^^^^^^^^^^^^^^^^^^^^^ definition local 2
 //                                                                  display_name <destruct>
 //                                                                  documentation ```kotlin\n<destruct>: Pair<Expression<*>, SortOrder>\n```
-//                                           ^^^^^^^^^^ definition local 0
+//                                           ^^^^^^^^^^ reference local 2
+//                                           ^^^^^^^^^^ definition local 3
 //                                                      display_name expression
 //                                                      documentation ```kotlin\nlocal val expression: Expression<*>\n```
-//                                           ^^^^^^^^^^ reference semanticdb maven . . (`<destruct>`)
 //                                           ^^^^^^^^^^ reference semanticdb maven . . kotlin/Pair#component1().
-//                                                       ^^^^^^^^^ definition local 1
+//                                                       ^^^^^^^^^ reference local 2
+//                                                       ^^^^^^^^^ definition local 4
 //                                                                 display_name sortOrder
 //                                                                 documentation ```kotlin\nlocal val sortOrder: SortOrder\n```
-//                                                       ^^^^^^^^^ reference semanticdb maven . . (`<destruct>`)
 //                                                       ^^^^^^^^^ reference semanticdb maven . . kotlin/Pair#component2().
+//                                                    ⌃ enclosing_range_end local 3
+//                                                               ⌃ enclosing_range_end local 4
+//                                                                ⌃ enclosing_range_end local 2
                   currentDialect.dataTypeProvider.precessOrderByClause(this, expression, sortOrder)
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
 //                               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dataTypeProvider.
 //                               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getDataTypeProvider().
 //                                                ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#precessOrderByClause().
-//                                                                           ^^^^^^^^^^ reference local 0
-//                                                                                       ^^^^^^^^^ reference local 1
+//                                                                           ^^^^^^^^^^ reference local 3
+//                                                                                       ^^^^^^^^^ reference local 4
               }
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#appendOrderByClause().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#
   /** Represents an SQL window function frame clause */
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#`<init>`().
   class WindowFrameClause(
 //      ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#
 //                        display_name WindowFrameClause
@@ -529,6 +640,9 @@
 //      ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#`<init>`().
 //                        display_name WindowFrameClause
 //                        documentation ```kotlin\npublic constructor(unit: WindowFrameUnit, start: WindowFrameBound, end: WindowFrameBound? = ...): WindowFrameClause\n```\n\n----\n\n Returns frame unit (also called mode).
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#`<init>`().(unit)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#unit.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#getUnit().
       /** Returns frame unit (also called mode). */
       private val unit: WindowFrameUnit,
 //                ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#`<init>`().(unit)
@@ -542,6 +656,12 @@
 //                     display_name unit
 //                     documentation ```kotlin\nprivate final val unit: WindowFrameUnit\n```\n\n----\n\n Returns frame unit (also called mode).
 //                      ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#`<init>`().(unit)
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#unit.
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#getUnit().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#`<init>`().(start)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#start.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#getStart().
       /** Returns frame start bound. */
       private val start: WindowFrameBound,
 //                ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#`<init>`().(start)
@@ -555,6 +675,12 @@
 //                      display_name start
 //                      documentation ```kotlin\nprivate final val start: WindowFrameBound\n```\n\n----\n\n Returns frame start bound.
 //                       ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#`<init>`().(start)
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#start.
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#getStart().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#`<init>`().(end)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#end.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#getEnd().
       /** Returns frame end bound. */
       private val end: WindowFrameBound? = null
 //                ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#`<init>`().(end)
@@ -568,8 +694,14 @@
 //                    display_name end
 //                    documentation ```kotlin\nprivate get(): WindowFrameBound?\n```\n\n----\n\n Returns frame end bound.
 //                     ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#`<init>`().(end)
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#end.
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#getEnd().
   ) {
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#toQueryBuilder().
       /** Appends the SQL representation of this window function clause to the specified [queryBuilder]. */
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#toQueryBuilder().(queryBuilder)
       fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //        ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#toQueryBuilder().
 //                       display_name toQueryBuilder
@@ -580,6 +712,7 @@
 //                                     ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                     ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //                                                     ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#toQueryBuilder().(queryBuilder)
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#toQueryBuilder().(queryBuilder)
           append(unit.name, " ")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#getUnit().
@@ -609,8 +742,17 @@
 //                  ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#toQueryBuilder().
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameClause#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#`<init>`().
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#values().
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#valueOf().
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#valueOf().(value)
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#entries.
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/getEntries().
   /** Represents an SQL window function frame unit (also called mode). */
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Enum# 10:1
   enum class WindowFrameUnit {
@@ -645,7 +787,15 @@
       /** A frame unit based on a logical range of rows around the current row, but with a distinct value count. */
       GROUPS
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#`<init>`().
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#values().
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#valueOf().
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#valueOf().(value)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameUnit#entries.
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/getEntries().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
   /** Represents an SQL window function frame start and end bound. */
   sealed interface WindowFrameBound {
 //                 ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
@@ -656,6 +806,8 @@
 //                                  relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentRowWindowFrameBound#
 //                                  relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#
 //                                  relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#`<init>`().
       companion object {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion# 35:5
 //                       display_name Companion
@@ -663,6 +815,7 @@
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#`<init>`(). 35:5
 //                       display_name Companion
 //                       documentation ```kotlin\nprivate constructor(): WindowFrameBound.Companion\n```\n\n----\n\n Returns UNBOUNDED PRECEDING window function frame bound
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#unboundedPreceding().
           /** Returns UNBOUNDED PRECEDING window function frame bound */
           fun unboundedPreceding(): UnboundedPrecedingWindowFrameBound {
 //            ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#unboundedPreceding().
@@ -672,7 +825,9 @@
               return UnboundedPrecedingWindowFrameBound()
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedPrecedingWindowFrameBound#`<init>`().
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#unboundedPreceding().
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#unboundedFollowing().
           /** Returns UNBOUNDED FOLLOWING window function frame bound */
           fun unboundedFollowing(): UnboundedFollowingWindowFrameBound {
 //            ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#unboundedFollowing().
@@ -682,8 +837,11 @@
               return UnboundedFollowingWindowFrameBound()
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedFollowingWindowFrameBound#`<init>`().
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#unboundedFollowing().
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetPreceding().
           /** Returns [offset] PRECEDING window function frame bound */
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetPreceding().(offset)
           fun offsetPreceding(offset: Expression<Int>): OffsetPrecedingWindowFrameBound {
 //            ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetPreceding().
 //                            display_name offsetPreceding
@@ -693,12 +851,16 @@
 //                                   documentation ```kotlin\noffset: Expression<Int>\n```
 //                                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
 //                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetPreceding().(offset)
               return OffsetPrecedingWindowFrameBound(offset)
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#`<init>`().
 //                                                   ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetPreceding().(offset)
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetPreceding().
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetPreceding(+1).
           /** Returns [offset] PRECEDING window function frame bound */
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetPreceding(+1).(offset)
           fun offsetPreceding(offset: Int): OffsetPrecedingWindowFrameBound {
 //            ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetPreceding(+1).
 //                            display_name offsetPreceding
@@ -708,13 +870,17 @@
 //                                   documentation ```kotlin\noffset: Int\n```
 //                                    ^^^ reference semanticdb maven . . kotlin/Int#
 //                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetPreceding(+1).(offset)
               return OffsetPrecedingWindowFrameBound(intLiteral(offset))
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#`<init>`().
 //                                                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/intLiteral().
 //                                                              ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetPreceding(+1).(offset)
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetPreceding(+1).
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetFollowing().
           /** Returns [offset] FOLLOWING window function frame bound */
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetFollowing().(offset)
           fun offsetFollowing(offset: Expression<Int>): OffsetFollowingWindowFrameBound {
 //            ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetFollowing().
 //                            display_name offsetFollowing
@@ -724,12 +890,16 @@
 //                                   documentation ```kotlin\noffset: Expression<Int>\n```
 //                                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
 //                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetFollowing().(offset)
               return OffsetFollowingWindowFrameBound(offset)
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#`<init>`().
 //                                                   ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetFollowing().(offset)
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetFollowing().
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetFollowing(+1).
           /** Returns [offset] FOLLOWING window function frame bound */
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetFollowing(+1).(offset)
           fun offsetFollowing(offset: Int): OffsetFollowingWindowFrameBound {
 //            ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetFollowing(+1).
 //                            display_name offsetFollowing
@@ -739,12 +909,15 @@
 //                                   documentation ```kotlin\noffset: Int\n```
 //                                    ^^^ reference semanticdb maven . . kotlin/Int#
 //                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetFollowing(+1).(offset)
               return OffsetFollowingWindowFrameBound(intLiteral(offset))
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#`<init>`().
 //                                                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/intLiteral().
 //                                                              ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetFollowing(+1).(offset)
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#offsetFollowing(+1).
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#currentRow().
           /** Returns CURRENT ROW window function frame bound */
           fun currentRow(): CurrentRowWindowFrameBound {
 //            ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#currentRow().
@@ -753,9 +926,14 @@
 //                          ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentRowWindowFrameBound#
               return CurrentRowWindowFrameBound
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#currentRow().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#Companion#`<init>`().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#toQueryBuilder().
       /** Appends the SQL representation of this window function clause to the specified [queryBuilder]. */
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#toQueryBuilder().(queryBuilder)
       fun toQueryBuilder(queryBuilder: QueryBuilder)
 //        ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#toQueryBuilder().
 //                       display_name toQueryBuilder
@@ -767,8 +945,12 @@
 //                                    display_name queryBuilder
 //                                    documentation ```kotlin\nqueryBuilder: QueryBuilder\n```
 //                                     ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#toQueryBuilder().(queryBuilder)
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrPreceding#
   /** Represents an SQL window function frame bound that is CURRENT ROW or one of PRECEDING forms. */
   interface CurrentOrPreceding : WindowFrameBound
 //          ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrPreceding#
@@ -779,7 +961,9 @@
 //                             relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedPrecedingWindowFrameBound#
 //                             relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
 //                               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrPreceding#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrFollowing#
   /** Represents an SQL window function frame bound that is CURRENT ROW or one of FOLLOWING forms. */
   interface CurrentOrFollowing : WindowFrameBound
 //          ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrFollowing#
@@ -790,11 +974,14 @@
 //                             relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedFollowingWindowFrameBound#
 //                             relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
 //                               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrFollowing#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#
   /**
    * Represents UNBOUNDED PRECEDING or FOLLOWING window function frame bound.
    * [direction] specifies whether first or last partition row will be used.
    */
+//                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#`<init>`().
   open class UnboundedWindowFrameBound(
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#
 //                                     display_name UnboundedWindowFrameBound
@@ -805,6 +992,9 @@
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#`<init>`().
 //                                     display_name UnboundedWindowFrameBound
 //                                     documentation ```kotlin\npublic constructor(direction: WindowFrameBoundDirection): UnboundedWindowFrameBound\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#`<init>`().(direction)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#direction.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#getDirection().
       private val direction: WindowFrameBoundDirection
 //                ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#`<init>`().(direction)
 //                          display_name direction
@@ -817,8 +1007,14 @@
 //                          display_name direction
 //                          documentation ```kotlin\nprivate get(): WindowFrameBoundDirection\n```
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#`<init>`().(direction)
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#direction.
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#getDirection().
   ) : WindowFrameBound {
 //    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -830,6 +1026,7 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#toQueryBuilder().(queryBuilder)
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#toQueryBuilder().(queryBuilder)
           append("UNBOUNDED ", direction.name)
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                             ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#direction.
@@ -837,8 +1034,12 @@
 //                                       ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#getName().
 //                                       ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#name.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedWindowFrameBound#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedPrecedingWindowFrameBound#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedPrecedingWindowFrameBound#`<init>`().
   /** Represents UNBOUNDED PRECEDING window function frame bound. */
   class UnboundedPrecedingWindowFrameBound :
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedPrecedingWindowFrameBound#
@@ -854,7 +1055,11 @@
 //                                                        ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#PRECEDING.
       CurrentOrPreceding
 //    ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrPreceding#
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedPrecedingWindowFrameBound#
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedPrecedingWindowFrameBound#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedFollowingWindowFrameBound#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedFollowingWindowFrameBound#`<init>`().
   /** Represents UNBOUNDED FOLLOWING window function frame bound. */
   class UnboundedFollowingWindowFrameBound :
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedFollowingWindowFrameBound#
@@ -870,11 +1075,15 @@
 //                                                        ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#FOLLOWING.
       CurrentOrFollowing
 //    ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrFollowing#
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedFollowingWindowFrameBound#
+//                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/UnboundedFollowingWindowFrameBound#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#
   /**
    * Represents an [offset] PRECEDING or FOLLOWING window function frame bound.
    * [direction] specifies whether previous or next partition rows will be used.
    */
+//                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#`<init>`().
   open class OffsetWindowFrameBound(
 //           ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#
 //                                  display_name OffsetWindowFrameBound
@@ -885,6 +1094,9 @@
 //           ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#`<init>`().
 //                                  display_name OffsetWindowFrameBound
 //                                  documentation ```kotlin\npublic constructor(offset: Expression<Int>, direction: WindowFrameBoundDirection): OffsetWindowFrameBound\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#`<init>`().(offset)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#offset.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#getOffset().
       private val offset: Expression<Int>,
 //                ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#`<init>`().(offset)
 //                       display_name offset
@@ -897,6 +1109,12 @@
 //                       display_name offset
 //                       documentation ```kotlin\nprivate final val offset: Expression<Int>\n```
 //                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#`<init>`().(offset)
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#offset.
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#getOffset().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#`<init>`().(direction)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#direction.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#getDirection().
       private val direction: WindowFrameBoundDirection
 //                ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#`<init>`().(direction)
 //                          display_name direction
@@ -909,8 +1127,14 @@
 //                          display_name direction
 //                          documentation ```kotlin\nprivate get(): WindowFrameBoundDirection\n```
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#`<init>`().(direction)
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#direction.
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#getDirection().
   ) : WindowFrameBound {
 //    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -922,6 +1146,7 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#toQueryBuilder().(queryBuilder)
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#toQueryBuilder().(queryBuilder)
           append(offset, " ", direction.name)
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //               ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#getOffset().
@@ -931,9 +1156,13 @@
 //                                      ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#getName().
 //                                      ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#name.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#
   /** Represents [offset] PRECEDING window function frame bound. */
+//                                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#`<init>`().
   class OffsetPrecedingWindowFrameBound(
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#
 //                                      display_name OffsetPrecedingWindowFrameBound
@@ -943,18 +1172,24 @@
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#`<init>`().
 //                                      display_name OffsetPrecedingWindowFrameBound
 //                                      documentation ```kotlin\npublic constructor(offset: Expression<Int>): OffsetPrecedingWindowFrameBound\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#`<init>`().(offset)
       offset: Expression<Int>
 //    ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#`<init>`().(offset)
 //           display_name offset
 //           documentation ```kotlin\noffset: Expression<Int>\n```
 //            ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#`<init>`().(offset)
   ) : OffsetWindowFrameBound(offset, WindowFrameBoundDirection.PRECEDING), CurrentOrPreceding
 //    ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#
 //                           ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#`<init>`().(offset)
 //                                                             ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#PRECEDING.
 //                                                                         ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrPreceding#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#`<init>`().
+//                                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetPrecedingWindowFrameBound#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#
   /** Represents [offset] FOLLOWING window function frame bound. */
+//                                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#`<init>`().
   class OffsetFollowingWindowFrameBound(
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#
 //                                      display_name OffsetFollowingWindowFrameBound
@@ -964,17 +1199,23 @@
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#`<init>`().
 //                                      display_name OffsetFollowingWindowFrameBound
 //                                      documentation ```kotlin\npublic constructor(offset: Expression<Int>): OffsetFollowingWindowFrameBound\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#`<init>`().(offset)
       offset: Expression<Int>
 //    ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#`<init>`().(offset)
 //           display_name offset
 //           documentation ```kotlin\noffset: Expression<Int>\n```
 //            ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#`<init>`().(offset)
   ) : OffsetWindowFrameBound(offset, WindowFrameBoundDirection.FOLLOWING), CurrentOrFollowing
 //    ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetWindowFrameBound#
 //                           ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#`<init>`().(offset)
 //                                                             ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#FOLLOWING.
 //                                                                         ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrFollowing#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#`<init>`().
+//                                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/OffsetFollowingWindowFrameBound#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentRowWindowFrameBound#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentRowWindowFrameBound#`<init>`().
   /** Represents an CURRENT ROW window function frame bound. */
   object CurrentRowWindowFrameBound : WindowFrameBound, CurrentOrPreceding, CurrentOrFollowing {
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentRowWindowFrameBound#
@@ -989,6 +1230,8 @@
 //                                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBound#
 //                                                      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrPreceding#
 //                                                                          ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentOrFollowing#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentRowWindowFrameBound#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentRowWindowFrameBound#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentRowWindowFrameBound#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1000,11 +1243,22 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentRowWindowFrameBound#toQueryBuilder().(queryBuilder)
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentRowWindowFrameBound#toQueryBuilder().(queryBuilder)
           +"CURRENT ROW"
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentRowWindowFrameBound#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentRowWindowFrameBound#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CurrentRowWindowFrameBound#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#`<init>`().
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#values().
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#valueOf().
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#valueOf().(value)
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#entries.
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/getEntries().
   /** Represents window function frame bound direction. */
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Enum# 7:1
   enum class WindowFrameBoundDirection {
@@ -1036,7 +1290,16 @@
       /** Gets rows after the current row. */
       FOLLOWING
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#`<init>`().
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#values().
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#valueOf().
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#valueOf().(value)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFrameBoundDirection#entries.
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/getEntries().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#`<init>`().
   /** Represents an SQL function that returns the number of the current row within its partition, counting from 1. */
   class RowNumber : WindowFunction<Long> {
 //      ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#
@@ -1047,6 +1310,8 @@
 //                display_name RowNumber
 //                documentation ```kotlin\npublic constructor(): RowNumber\n```\n\n----\n\n Represents an SQL function that returns the number of the current row within its partition, counting from 1.
 //                  ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1059,10 +1324,13 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#toQueryBuilder().(queryBuilder)
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#toQueryBuilder().(queryBuilder)
           +"ROW_NUMBER()"
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#over().
       override fun over(): WindowFunctionDefinition<Long> {
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#over().
 //                      display_name over
@@ -1073,8 +1341,13 @@
 //               ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#`<init>`().
 //                                        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LongColumnType#`<init>`().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#over().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/RowNumber#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Rank#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Rank#`<init>`().
   /**
    * Represents an SQL function that returns the rank of the current row, with gaps; that is, the row_number
    * of the first row in its peer group.
@@ -1088,6 +1361,8 @@
 //           display_name Rank
 //           documentation ```kotlin\npublic constructor(): Rank\n```\n\n----\n\n\n Represents an SQL function that returns the rank of the current row, with gaps; that is, the row_number\n of the first row in its peer group.\n
 //             ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Rank#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Rank#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Rank#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1100,10 +1375,13 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Rank#toQueryBuilder().(queryBuilder)
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Rank#toQueryBuilder().(queryBuilder)
           +"RANK()"
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Rank#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Rank#over().
       override fun over(): WindowFunctionDefinition<Long> {
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Rank#over().
 //                      display_name over
@@ -1114,8 +1392,13 @@
 //               ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#`<init>`().
 //                                        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LongColumnType#`<init>`().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Rank#over().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Rank#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Rank#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DenseRank#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DenseRank#`<init>`().
   /**
    * Represents an SQL function that returns the rank of the current row, without gaps; this function effectively
    * counts peer groups.
@@ -1129,6 +1412,8 @@
 //                display_name DenseRank
 //                documentation ```kotlin\npublic constructor(): DenseRank\n```\n\n----\n\n\n Represents an SQL function that returns the rank of the current row, without gaps; this function effectively\n counts peer groups.\n
 //                  ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DenseRank#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DenseRank#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DenseRank#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1141,10 +1426,13 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DenseRank#toQueryBuilder().(queryBuilder)
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DenseRank#toQueryBuilder().(queryBuilder)
           +"DENSE_RANK()"
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DenseRank#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DenseRank#over().
       override fun over(): WindowFunctionDefinition<Long> {
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DenseRank#over().
 //                      display_name over
@@ -1155,13 +1443,21 @@
 //               ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#`<init>`().
 //                                        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LongColumnType#`<init>`().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DenseRank#over().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DenseRank#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DenseRank#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#
   /**
    * Represents an SQL function that returns the relative rank of the current row, that is (rank - 1) /
    * (total partition rows - 1). The value thus ranges from 0 to 1 inclusive.
    * [scale] represents decimal digits count in the fractional part of result.
    */
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#`<init>`().
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#`<init>`().(scale)
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#scale.
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#getScale().
   class PercentRank(private val scale: Int = 2) : WindowFunction<BigDecimal> {
 //      ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#
 //                  display_name PercentRank
@@ -1182,6 +1478,12 @@
 //                                    documentation ```kotlin\nprivate final val scale: Int\n```
 //                                     ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#`<init>`().(scale)
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#scale.
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#getScale().
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1194,10 +1496,13 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#toQueryBuilder().(queryBuilder)
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#toQueryBuilder().(queryBuilder)
           +"PERCENT_RANK()"
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#over().
       override fun over(): WindowFunctionDefinition<BigDecimal> {
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#over().
 //                      display_name over
@@ -1212,13 +1517,20 @@
 //                                                                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#getScale().
 //                                                                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#scale.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#over().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/PercentRank#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#
   /**
    * Represents an SQL function that Returns the cumulative distribution, that is (number of partition rows preceding
    * or peers with current row) / (total partition rows). The value thus ranges from 1/N to 1.
    * [scale] represents decimal digits count in the fractional part of result.
    */
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#`<init>`().
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#`<init>`().(scale)
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#scale.
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#getScale().
   class CumeDist(private val scale: Int = 2) : WindowFunction<BigDecimal> {
 //      ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#
 //               display_name CumeDist
@@ -1239,6 +1551,12 @@
 //                                 documentation ```kotlin\nprivate final val scale: Int\n```
 //                                  ^^^ reference semanticdb maven . . kotlin/Int#
 //                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#`<init>`().(scale)
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#scale.
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#getScale().
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1251,10 +1569,13 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#toQueryBuilder().(queryBuilder)
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#toQueryBuilder().(queryBuilder)
           +"CUME_DIST()"
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#over().
       override fun over(): WindowFunctionDefinition<BigDecimal> {
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#over().
 //                      display_name over
@@ -1269,9 +1590,13 @@
 //                                                                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#getScale().
 //                                                                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#scale.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#over().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CumeDist#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#
   /** Returns an integer ranging from 1 to the argument value, dividing the partition as equally as possible. */
+//           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#`<init>`().
   class Ntile(
 //      ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#
 //            display_name Ntile
@@ -1280,6 +1605,9 @@
 //      ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#`<init>`().
 //            display_name Ntile
 //            documentation ```kotlin\npublic constructor(numBuckets: ExpressionWithColumnType<Int>): Ntile\n```\n\n----\n\n Returns number of buckets.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#`<init>`().(numBuckets)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#numBuckets.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#getNumBuckets().
       /** Returns number of buckets. */
       val numBuckets: ExpressionWithColumnType<Int>
 //        ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#`<init>`().(numBuckets)
@@ -1293,8 +1621,14 @@
 //                   display_name numBuckets
 //                   documentation ```kotlin\npublic final val numBuckets: ExpressionWithColumnType<Int>\n```\n\n----\n\n Returns number of buckets.
 //                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#`<init>`().(numBuckets)
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#numBuckets.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#getNumBuckets().
   ) : WindowFunction<Int> {
 //    ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder): Unit = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1307,12 +1641,15 @@
 //                                                             ^^^^ reference semanticdb maven . . kotlin/Unit#
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#toQueryBuilder().(queryBuilder)
 //                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#toQueryBuilder().(queryBuilder)
           append("NTILE(", numBuckets, ")")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                         ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#getNumBuckets().
 //                         ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#numBuckets.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#over().
       override fun over(): WindowFunctionDefinition<Int> {
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#over().
 //                      display_name over
@@ -1323,12 +1660,17 @@
 //               ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunctionDefinition#`<init>`().
 //                                        ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IntegerColumnType#`<init>`().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#over().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Ntile#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#
   /**
    * Represents an SQL function that returns value evaluated at the row that is [offset] rows before the current row
    * within the partition; if there is no such row, instead returns [defaultValue].
    */
+//          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#[T]
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#`<init>`().
   class Lag<T>(
 //      ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#
 //          display_name Lag
@@ -1340,6 +1682,10 @@
 //          ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#[T]
 //            display_name FirTypeParameterSymbol T
 //            documentation ```kotlin\nT\n```
+//          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#getExpr().
       /** Returns the expression from which the rows are counted. */
       val expr: ExpressionWithColumnType<T>,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#`<init>`().(expr)
@@ -1353,6 +1699,12 @@
 //             display_name expr
 //             documentation ```kotlin\npublic get(): ExpressionWithColumnType<T>\n```\n\n----\n\n Returns the expression from which the rows are counted.
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#`<init>`().(expr)
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#expr.
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#getExpr().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#`<init>`().(offset)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#offset.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#getOffset().
       /** Returns number of rows before the current row. */
       val offset: ExpressionWithColumnType<Int> = intLiteral(1),
 //        ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#`<init>`().(offset)
@@ -1367,6 +1719,12 @@
 //               documentation ```kotlin\npublic final val offset: ExpressionWithColumnType<Int>\n```\n\n----\n\n Returns number of rows before the current row.
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
 //                                                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/intLiteral().
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#`<init>`().(offset)
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#offset.
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#getOffset().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#`<init>`().(defaultValue)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#defaultValue.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#getDefaultValue().
       /** Returns value that is used if no row found at such offset. */
       val defaultValue: ExpressionWithColumnType<T>? = null
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#`<init>`().(defaultValue)
@@ -1380,8 +1738,14 @@
 //                     display_name defaultValue
 //                     documentation ```kotlin\npublic get(): ExpressionWithColumnType<T>?\n```\n\n----\n\n Returns value that is used if no row found at such offset.
 //                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#`<init>`().(defaultValue)
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#defaultValue.
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#getDefaultValue().
   ) : WindowFunction<T?> {
 //    ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1393,6 +1757,7 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#toQueryBuilder().(queryBuilder)
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#toQueryBuilder().(queryBuilder)
           append("LAG(", expr, ", ", offset)
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                       ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#expr.
@@ -1408,7 +1773,9 @@
           append(")")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#over().
       override fun over(): WindowFunctionDefinition<T?> {
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#over().
 //                      display_name over
@@ -1422,12 +1789,17 @@
 //                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#columnType.
 //                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#getColumnType().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#over().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lag#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#
   /**
    * Represents an SQL function that returns value evaluated at the row that is [offset] rows after the current row
    * within the partition; if there is no such row, instead returns [defaultValue].
    */
+//           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#[T]
+//             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#`<init>`().
   class Lead<T>(
 //      ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#
 //           display_name Lead
@@ -1439,6 +1811,10 @@
 //           ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#[T]
 //             display_name FirTypeParameterSymbol T
 //             documentation ```kotlin\nT\n```
+//           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#getExpr().
       /** Returns the expression from which the rows are counted. */
       val expr: ExpressionWithColumnType<T>,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#`<init>`().(expr)
@@ -1452,6 +1828,12 @@
 //             display_name expr
 //             documentation ```kotlin\npublic get(): ExpressionWithColumnType<T>\n```\n\n----\n\n Returns the expression from which the rows are counted.
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#`<init>`().(expr)
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#expr.
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#getExpr().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#`<init>`().(offset)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#offset.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#getOffset().
       /** Returns number of rows before the current row. */
       val offset: ExpressionWithColumnType<Int> = intLiteral(1),
 //        ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#`<init>`().(offset)
@@ -1466,6 +1848,12 @@
 //               documentation ```kotlin\npublic final val offset: ExpressionWithColumnType<Int>\n```\n\n----\n\n Returns number of rows before the current row.
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
 //                                                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/intLiteral().
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#`<init>`().(offset)
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#offset.
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#getOffset().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#`<init>`().(defaultValue)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#defaultValue.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#getDefaultValue().
       /** Returns value that is used if no row found at such offset. */
       val defaultValue: ExpressionWithColumnType<T>? = null
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#`<init>`().(defaultValue)
@@ -1479,8 +1867,14 @@
 //                     display_name defaultValue
 //                     documentation ```kotlin\npublic get(): ExpressionWithColumnType<T>?\n```\n\n----\n\n Returns value that is used if no row found at such offset.
 //                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#`<init>`().(defaultValue)
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#defaultValue.
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#getDefaultValue().
   ) : WindowFunction<T?> {
 //    ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1492,6 +1886,7 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#toQueryBuilder().(queryBuilder)
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#toQueryBuilder().(queryBuilder)
           append("LEAD(", expr, ", ", offset)
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#expr.
@@ -1507,7 +1902,9 @@
           append(")")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#over().
       override fun over(): WindowFunctionDefinition<T?> {
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#over().
 //                      display_name over
@@ -1521,9 +1918,14 @@
 //                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#columnType.
 //                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#getColumnType().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#over().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Lead#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#
   /** Represents an SQL function that returns [expr] evaluated at the row that is the first row of the window frame. */
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#[T]
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#`<init>`().
   class FirstValue<T>(
 //      ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#
 //                 display_name FirstValue
@@ -1535,6 +1937,10 @@
 //                 ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#[T]
 //                   display_name FirTypeParameterSymbol T
 //                   documentation ```kotlin\nT\n```
+//                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#getExpr().
       /** Returns the expression to evaluate. */
       val expr: ExpressionWithColumnType<T>
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#`<init>`().(expr)
@@ -1548,8 +1954,14 @@
 //             display_name expr
 //             documentation ```kotlin\npublic get(): ExpressionWithColumnType<T>\n```\n\n----\n\n Returns the expression to evaluate.
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#`<init>`().(expr)
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#expr.
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#getExpr().
   ) : WindowFunction<T> {
 //    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1561,12 +1973,15 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#toQueryBuilder().(queryBuilder)
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#toQueryBuilder().(queryBuilder)
           append("FIRST_VALUE(", expr, ")")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#expr.
 //                               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#getExpr().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#over().
       override fun over(): WindowFunctionDefinition<T> {
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#over().
 //                      display_name over
@@ -1580,9 +1995,14 @@
 //                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#columnType.
 //                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#getColumnType().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#over().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/FirstValue#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#
   /** Represents an SQL function that returns [expr] evaluated at the row that is the last row of the window frame. */
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#[T]
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#`<init>`().
   class LastValue<T>(
 //      ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#
 //                display_name LastValue
@@ -1594,6 +2014,10 @@
 //                ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#[T]
 //                  display_name FirTypeParameterSymbol T
 //                  documentation ```kotlin\nT\n```
+//                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#getExpr().
       /** Returns the expression to evaluate. */
       val expr: ExpressionWithColumnType<T>
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#`<init>`().(expr)
@@ -1607,8 +2031,14 @@
 //             display_name expr
 //             documentation ```kotlin\npublic get(): ExpressionWithColumnType<T>\n```\n\n----\n\n Returns the expression to evaluate.
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#`<init>`().(expr)
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#expr.
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#getExpr().
   ) : WindowFunction<T> {
 //    ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1620,12 +2050,15 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#toQueryBuilder().(queryBuilder)
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#toQueryBuilder().(queryBuilder)
           append("LAST_VALUE(", expr, ")")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                              ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#expr.
 //                              ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#getExpr().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#over().
       override fun over(): WindowFunctionDefinition<T> {
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#over().
 //                      display_name over
@@ -1639,12 +2072,17 @@
 //                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#columnType.
 //                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#getColumnType().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#over().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/LastValue#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#
   /**
    * Represents an SQL function that returns [expr] evaluated at the row that is the [n]'th row of the window frame
    * (counting from 1); null if no such row
    */
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#[T]
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#`<init>`().
   class NthValue<T>(
 //      ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#
 //               display_name NthValue
@@ -1656,6 +2094,10 @@
 //               ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#[T]
 //                 display_name FirTypeParameterSymbol T
 //                 documentation ```kotlin\nT\n```
+//               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#`<init>`().(expr)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#expr.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#getExpr().
       /** Returns the expression to evaluate. */
       val expr: ExpressionWithColumnType<T>,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#`<init>`().(expr)
@@ -1669,6 +2111,12 @@
 //             display_name expr
 //             documentation ```kotlin\npublic get(): ExpressionWithColumnType<T>\n```\n\n----\n\n Returns the expression to evaluate.
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#`<init>`().(expr)
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#expr.
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#getExpr().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#`<init>`().(n)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#n.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#getN().
       /** Returns the row n to find. */
       val n: ExpressionWithColumnType<Int>
 //        ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#`<init>`().(n)
@@ -1682,8 +2130,14 @@
 //          display_name n
 //          documentation ```kotlin\npublic final val n: ExpressionWithColumnType<Int>\n```\n\n----\n\n Returns the row n to find.
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#`<init>`().(n)
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#n.
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#getN().
   ) : WindowFunction<T?> {
 //    ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/WindowFunction#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -1695,6 +2149,7 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#toQueryBuilder().(queryBuilder)
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#toQueryBuilder().(queryBuilder)
           append("NTH_VALUE(", expr, ", ", n, ")")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                             ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#expr.
@@ -1702,7 +2157,9 @@
 //                                         ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#getN().
 //                                         ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#n.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#toQueryBuilder().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#over().
       override fun over(): WindowFunctionDefinition<T?> {
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#over().
 //                      display_name over
@@ -1716,4 +2173,6 @@
 //                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#columnType.
 //                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#getColumnType().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#over().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/NthValue#

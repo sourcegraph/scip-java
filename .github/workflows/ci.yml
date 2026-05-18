@@ -115,6 +115,31 @@ jobs:
       - run: du -h index.scip
         working-directory: examples/bazel-example
 
+  kotlin_plugin:
+    runs-on: ubuntu-latest
+    name: semanticdb-kotlinc
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          cache: "sbt"
+          java-version: 11
+
+      - uses: sbt/setup-sbt@v1
+
+      - name: semanticdb-kotlinc tests
+        run: sbt semanticdbKotlinc/test
+
+      - name: Kotlin snapshots
+        run: sbt semanticdbKotlincMinimized/kotlincSnapshots
+
+      - name: Check snapshot drift
+        run: |
+          git diff --exit-code \
+            semanticdb-kotlinc/minimized/src/generatedSnapshots
+
   check:
     runs-on: ubuntu-latest
     steps:

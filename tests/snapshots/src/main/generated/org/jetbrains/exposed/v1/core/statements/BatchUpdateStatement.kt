@@ -78,11 +78,16 @@
 //                                         ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/
 //                                            ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#
   /**
    * Represents the SQL statement that batch updates rows of a table.
    *
    * @param table Identity table to update values from.
    */
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#`<init>`().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#`<init>`().(table)
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#table.
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getTable().
   open class BatchUpdateStatement(val table: IdTable<*>) : UpdateStatement(table, null) {
 //           ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#
 //                                display_name BatchUpdateStatement
@@ -104,6 +109,12 @@
 //                                           ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
 //                                                         ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#
 //                                                                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#`<init>`().(table)
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#`<init>`().(table)
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#table.
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getTable().
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#data.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getData().
       /** The mappings of columns to update with their updated values for each entity in the batch. */
       val data = ArrayList<Pair<EntityID<*>, Map<Column<*>, Any?>>>()
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#data.
@@ -113,6 +124,10 @@
 //             display_name data
 //             documentation ```kotlin\npublic get(): {kotlin/collections/ArrayList<kotlin/Pair<org/jetbrains/exposed/v1/core/dao/id/EntityID<*>, kotlin/collections/Map<org/jetbrains/exposed/v1/core/Column<*>, kotlin/Any?>>>=} ArrayList<Pair<EntityID<*>, Map<Column<*>, Any?>>>\n```\n\n----\n\n The mappings of columns to update with their updated values for each entity in the batch.
 //               ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`().
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#data.
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getData().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#firstDataSet.
+//                                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getFirstDataSet().
       override val firstDataSet: List<Pair<Column<*>, Any?>> get() = data.first().second.toList()
 //                 ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#firstDataSet.
 //                              display_name firstDataSet
@@ -127,11 +142,15 @@
 //                                                                                ^^^^^^ reference semanticdb maven . . kotlin/Pair#getSecond().
 //                                                                                ^^^^^^ reference semanticdb maven . . kotlin/Pair#second.
 //                                                                                       ^^^^^^ reference semanticdb maven . . kotlin/collections/toList(+11).
+//                                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#firstDataSet.
+//                                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getFirstDataSet().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#addBatch().
       /**
        * Adds the specified entity [id] to the current list of update statements, using the mapping of columns to update
        * provided for this `BatchUpdateStatement`.
        */
+//                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#addBatch().(id)
       fun addBatch(id: EntityID<*>) {
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#addBatch().
 //                 display_name addBatch
@@ -140,6 +159,8 @@
 //                    display_name id
 //                    documentation ```kotlin\nid: EntityID<*>\n```
 //                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#addBatch().(id)
+//        ⌄ enclosing_range_start local 0
           val lastBatch = data.lastOrNull()
 //            ^^^^^^^^^ definition local 0
 //                      display_name lastBatch
@@ -147,6 +168,9 @@
 //                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#data.
 //                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getData().
 //                             ^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/lastOrNull(+19).
+//                                        ⌃ enclosing_range_end local 0
+//        ⌄ enclosing_range_start local 1
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getDifferent().
           val different by lazy {
 //            ^^^^^^^^^ definition local 1
 //                      display_name different
@@ -156,9 +180,11 @@
 //                      documentation ```kotlin\nlocal get(): Set<Column<*>>\n```
 //                         ^^^^ reference semanticdb maven . . kotlin/lazy().
 //                         ^^^^^^ reference local 1 4:9
-//                         ^^^^^^ reference local 4 4:9
+//                         ^^^^^^ reference local 5 4:9
 //                         ^^^^^^ reference semanticdb maven . . kotlin/getValue(). 4:9
 //                         ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getDifferent(). 4:9
+//            ⌄ enclosing_range_start local 2
+//                                        ⌄ enclosing_range_start local 3
               val set1 = firstDataSet.map { it.first }.toSet()
 //                ^^^^ definition local 2
 //                     display_name set1
@@ -166,15 +192,18 @@
 //                       ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#firstDataSet.
 //                       ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getFirstDataSet().
 //                                    ^^^ reference semanticdb maven . . kotlin/collections/map(+9).
-//                                        ^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                        ^^^^^^^^^^^^ definition local 3
 //                                                     display_name it
-//                                                     documentation ```kotlin\nit: Map.Entry<Column<*>, Any?>\n```
-//                                          ^^ reference semanticdb maven . . (it)
+//                                                     documentation ```kotlin\nit: Pair<Column<*>, Any?>\n```
+//                                          ^^ reference local 3
 //                                             ^^^^^ reference semanticdb maven . . kotlin/Pair#first.
 //                                             ^^^^^ reference semanticdb maven . . kotlin/Pair#getFirst().
 //                                                     ^^^^^ reference semanticdb maven . . kotlin/collections/toSet(+9).
+//                                                   ⌃ enclosing_range_end local 3
+//                                                           ⌃ enclosing_range_end local 2
+//            ⌄ enclosing_range_start local 4
               val set2 = lastBatch!!.second.keys
-//                ^^^^ definition local 3
+//                ^^^^ definition local 4
 //                     display_name set2
 //                     documentation ```kotlin\nlocal val set2: Set<Column<*>>\n```
 //                       ^^^^^^^^^ reference local 0
@@ -182,15 +211,18 @@
 //                                   ^^^^^^ reference semanticdb maven . . kotlin/Pair#second.
 //                                          ^^^^ reference semanticdb maven . . kotlin/collections/Map#getKeys().
 //                                          ^^^^ reference semanticdb maven . . kotlin/collections/Map#keys.
+//                                             ⌃ enclosing_range_end local 4
               (set1 - set2) + (set2 - set1)
 //             ^^^^ reference local 2
 //                  ^ reference semanticdb maven . . kotlin/collections/minus(+10).
-//                    ^^^^ reference local 3
+//                    ^^^^ reference local 4
 //                          ^ reference semanticdb maven . . kotlin/collections/plus(+42).
-//                             ^^^^ reference local 3
+//                             ^^^^ reference local 4
 //                                  ^ reference semanticdb maven . . kotlin/collections/minus(+10).
 //                                    ^^^^ reference local 2
           }
+//        ⌃ enclosing_range_end local 1
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getDifferent().
   
           if (data.size > 1 && different.isNotEmpty()) {
 //            ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#data.
@@ -245,7 +277,13 @@
 //                       ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getValues().
 //                       ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#values.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#addBatch().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#update().
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#update().[T]
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#update().[S]
+//                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#update().(column)
+//                                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#update().(value)
       override fun <T, S : T?> update(column: Column<T>, value: Expression<S>) = error("Expressions unsupported in batch update")
 //                  ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#update().[T]
 //                    display_name FirTypeParameterSymbol T
@@ -266,7 +304,15 @@
 //                                                             documentation ```kotlin\nvalue: Expression<S>\n```
 //                                                              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
 //                                                                               ^^^^^ reference semanticdb maven . . kotlin/error().
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#update().[T]
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#update().[S]
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#update().(column)
+//                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#update().(value)
+//                                                                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#update().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#prepareSQL().
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#prepareSQL().(transaction)
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#prepareSQL().(prepared)
       override fun prepareSQL(transaction: Transaction, prepared: Boolean): String {
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#prepareSQL().
 //                            display_name prepareSQL
@@ -281,31 +327,39 @@
 //                                                               documentation ```kotlin\nprepared: Boolean\n```
 //                                                                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#prepareSQL().(transaction)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#prepareSQL().(prepared)
+//        ⌄ enclosing_range_start local 6
           val updateSql = super.prepareSQL(transaction, prepared)
-//            ^^^^^^^^^ definition local 5
+//            ^^^^^^^^^ definition local 6
 //                      display_name updateSql
 //                      documentation ```kotlin\nlocal val updateSql: String\n```
 //                              ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#prepareSQL().
 //                                         ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#prepareSQL().(transaction)
 //                                                      ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#prepareSQL().(prepared)
+//                                                              ⌃ enclosing_range_end local 6
+//        ⌄ enclosing_range_start local 7
           val idEqCondition = if (table is CompositeIdTable) {
-//            ^^^^^^^^^^^^^ definition local 6
+//            ^^^^^^^^^^^^^ definition local 7
 //                          display_name idEqCondition
 //                          documentation ```kotlin\nlocal val idEqCondition: String\n```
 //                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getTable().
 //                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#table.
+//                                         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#
+//                                                              ⌄ enclosing_range_start local 8
               table.idColumns.joinToString(separator = " AND ") { "${transaction.identity(it)} = ?" }
 //            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getTable().
 //            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#table.
 //                  ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#getIdColumns().
 //                  ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#idColumns.
 //                            ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/joinToString(+9).
-//                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 8
 //                                                                                                    display_name it
-//                                                                                                    documentation ```kotlin\nit: Map.Entry<Column<*>, Any?>\n```
+//                                                                                                    documentation ```kotlin\nit: Column<out Any>\n```
 //                                                                   ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#prepareSQL().(transaction)
 //                                                                               ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#identity(+1).
-//                                                                                        ^^ reference semanticdb maven . . (it)
+//                                                                                        ^^ reference local 8
+//                                                                                                  ⌃ enclosing_range_end local 8
           } else {
               "${transaction.identity(table.id)} = ?"
 //               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#prepareSQL().(transaction)
@@ -315,11 +369,17 @@
 //                                          ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#getId().
 //                                          ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#id.
           }
+//        ⌃ enclosing_range_end local 7
           return "$updateSql WHERE $idEqCondition"
-//                 ^^^^^^^^^ reference local 5
-//                                  ^^^^^^^^^^^^^ reference local 6
+//                 ^^^^^^^^^ reference local 6
+//                                  ^^^^^^^^^^^^^ reference local 7
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#prepareSQL().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#arguments().
+//                                                                                          ⌄ enclosing_range_start local 9
+//                                                                                           ⌄ enclosing_range_start local 10
+//                                                                                               ⌄ enclosing_range_start local 11
       override fun arguments(): Iterable<Iterable<Pair<IColumnType<*>, Any?>>> = data.map { (id, row) ->
 //                 ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#arguments().
 //                           display_name arguments
@@ -329,40 +389,46 @@
 //                                                                               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#data.
 //                                                                               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getData().
 //                                                                                    ^^^ reference semanticdb maven . . kotlin/collections/map(+9).
-//                                                                                          ^^^^^^^^^ definition semanticdb maven . . (`<destruct>`)
+//                                                                                          ^^^^^^^^^ definition local 9
 //                                                                                                    display_name <destruct>
 //                                                                                                    documentation ```kotlin\n<destruct>: Pair<EntityID<*>, Map<Column<*>, Any?>>\n```
-//                                                                                           ^^ definition local 7
+//                                                                                           ^^ definition local 10
 //                                                                                              display_name id
 //                                                                                              documentation ```kotlin\nlocal val id: EntityID<*>\n```
-//                                                                                           ^^ reference semanticdb maven . . (`<destruct>`)
+//                                                                                           ^^ reference local 9
 //                                                                                           ^^ reference semanticdb maven . . kotlin/Pair#component1().
-//                                                                                               ^^^ definition local 8
+//                                                                                               ^^^ definition local 11
 //                                                                                                   display_name row
 //                                                                                                   documentation ```kotlin\nlocal val row: Map<Column<*>, Any?>\n```
-//                                                                                               ^^^ reference semanticdb maven . . (`<destruct>`)
+//                                                                                               ^^^ reference local 9
 //                                                                                               ^^^ reference semanticdb maven . . kotlin/Pair#component2().
+//                                                                                            ⌃ enclosing_range_end local 10
+//                                                                                                 ⌃ enclosing_range_end local 11
+//                                                                                                  ⌃ enclosing_range_end local 9
+//        ⌄ enclosing_range_start local 12
+//                                                             ⌄ enclosing_range_start local 13
           val idArgs = (id.value as? CompositeID)?.values?.map {
-//            ^^^^^^ definition local 9
+//            ^^^^^^ definition local 12
 //                   display_name idArgs
 //                   documentation ```kotlin\nlocal val idArgs: List<Pair<IColumnType<out Any>, Any?>>\n```
-//                      ^^ reference local 7
+//                      ^^ reference local 10
 //                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#getValue().
 //                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#value.
+//                                   ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeID#
 //                                                 ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeID#getValues().
 //                                                 ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeID#values.
 //                                                         ^^^ reference semanticdb maven . . kotlin/collections/map(+10).
-//                                                             ^ definition semanticdb maven . . (it) 2:9
+//                                                             ^ definition local 13 2:9
 //                                                               display_name it
 //                                                               documentation ```kotlin\nit: Map.Entry<Column<*>, Any?>\n```
               it.key.columnType to it.value
-//            ^^ reference semanticdb maven . . (it)
+//            ^^ reference local 13
 //               ^^^ reference semanticdb maven . . kotlin/collections/Map#Entry#getKey().
 //               ^^^ reference semanticdb maven . . kotlin/collections/Map#Entry#key.
 //                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#columnType.
 //                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getColumnType().
 //                              ^^ reference semanticdb maven . . kotlin/to().
-//                                 ^^ reference semanticdb maven . . (it)
+//                                 ^^ reference local 13
 //                                    ^^^^^ reference semanticdb maven . . kotlin/collections/Map#Entry#getValue().
 //                                    ^^^^^ reference semanticdb maven . . kotlin/collections/Map#Entry#value.
           } ?: listOf(table.id.columnType to id)
@@ -374,26 +440,32 @@
 //                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#columnType.
 //                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getColumnType().
 //                                        ^^ reference semanticdb maven . . kotlin/to().
-//                                           ^^ reference local 7
+//                                           ^^ reference local 10
+//        ⌃ enclosing_range_end local 13
+//                                             ⌃ enclosing_range_end local 12
+//                         ⌄ enclosing_range_start local 14
           firstDataSet.map { it.first.columnType to row[it.first] } + idArgs
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#firstDataSet.
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#getFirstDataSet().
 //                     ^^^ reference semanticdb maven . . kotlin/collections/map(+9).
-//                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 14
 //                                                                  display_name it
-//                                                                  documentation ```kotlin\nit: Map.Entry<Column<*>, Any?>\n```
-//                           ^^ reference semanticdb maven . . (it)
+//                                                                  documentation ```kotlin\nit: Pair<Column<*>, Any?>\n```
+//                           ^^ reference local 14
 //                              ^^^^^ reference semanticdb maven . . kotlin/Pair#first.
 //                              ^^^^^ reference semanticdb maven . . kotlin/Pair#getFirst().
 //                                    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#columnType.
 //                                    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getColumnType().
 //                                               ^^ reference semanticdb maven . . kotlin/to().
-//                                                  ^^^ reference local 8
+//                                                  ^^^ reference local 11
 //                                                  ^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#get().
-//                                                      ^^ reference semanticdb maven . . (it)
+//                                                      ^^ reference local 14
 //                                                         ^^^^^ reference semanticdb maven . . kotlin/Pair#first.
 //                                                         ^^^^^ reference semanticdb maven . . kotlin/Pair#getFirst().
 //                                                                  ^ reference semanticdb maven . . kotlin/collections/plus(+32).
-//                                                                    ^^^^^^ reference local 9
+//                                                                    ^^^^^^ reference local 12
+//                                                                ⌃ enclosing_range_end local 14
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#arguments().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchUpdateStatement#

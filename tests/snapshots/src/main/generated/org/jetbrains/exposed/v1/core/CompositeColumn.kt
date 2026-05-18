@@ -5,11 +5,14 @@
 //                              ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/
 //                                 ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#`<init>`().
   /**
    * Composite column represents multiple tightly related standard columns, which behave like a single column for the user
    *
    * @author Vladislav Kisel
    */
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#[T]
   abstract class CompositeColumn<T> : Expression<T>() {
 //               ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#
 //                               display_name CompositeColumn
@@ -23,6 +26,11 @@
 //                                 display_name FirTypeParameterSymbol T
 //                                 documentation ```kotlin\nT\n```
 //                                    ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#nullable.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#getNullable().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#setNullable().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#setNullable().(value)
       internal var nullable: Boolean = false
 //                 ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#getNullable().
 //                          display_name nullable
@@ -37,12 +45,18 @@
 //                          display_name value
 //                          documentation ```kotlin\nvalue: Boolean\n```
 //                           ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#nullable.
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#getNullable().
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#setNullable().
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#setNullable().(value)
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#getRealColumnsWithValues().
       /**
        * Parses the [compositeValue] and returns a list of real columns with their values.
        *
        * @return Map of real columns as keys to their parsed values.
        */
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#getRealColumnsWithValues().(compositeValue)
       abstract fun getRealColumnsWithValues(compositeValue: T): Map<Column<*>, Any?>
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#getRealColumnsWithValues().
 //                                          display_name getRealColumnsWithValues
@@ -52,7 +66,10 @@
 //                                                         display_name compositeValue
 //                                                         documentation ```kotlin\ncompositeValue: T\n```
 //                                                              ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#getRealColumnsWithValues().(compositeValue)
+//                                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#getRealColumnsWithValues().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#getRealColumns().
       /**
        * Returns a list of real columns, wrapped by this composite column.
        */
@@ -62,10 +79,13 @@
 //                                documentation ```kotlin\npublic abstract fun getRealColumns(): List<Column<*>>\n\n```\n\n----\n\n\n Returns a list of real columns, wrapped by this composite column.\n
 //                                relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getRealColumns().
 //                                   ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#getRealColumns().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#restoreValueFromParts().
       /**
        * Restores the composite value based on its component column values loaded from the database.
        */
+//                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#restoreValueFromParts().(parts)
       abstract fun restoreValueFromParts(parts: Map<Column<*>, Any?>): T
 //                 ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#restoreValueFromParts().
 //                                       display_name restoreValueFromParts
@@ -75,7 +95,11 @@
 //                                             display_name parts
 //                                             documentation ```kotlin\nparts: Map<Column<*>, Any?>\n```
 //                                              ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#restoreValueFromParts().(parts)
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#restoreValueFromParts().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#toQueryBuilder().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#toQueryBuilder().(queryBuilder)
       override fun toQueryBuilder(queryBuilder: QueryBuilder) = queryBuilder {
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#toQueryBuilder().
 //                                display_name toQueryBuilder
@@ -87,20 +111,31 @@
 //                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#toQueryBuilder().(queryBuilder)
 //                                                              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#toQueryBuilder().(queryBuilder)
+//                                  ⌄ enclosing_range_start local 0
           getRealColumns().appendTo { +it }
 //        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#getRealColumns().
 //                         ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#appendTo().
-//                                  ^^^^^^^ definition semanticdb maven . . (it)
+//                                  ^^^^^^^ definition local 0
 //                                          display_name it
 //                                          documentation ```kotlin\nit: Column<*>\n```
 //                                    ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+2).
-//                                     ^^ reference semanticdb maven . . (it)
+//                                     ^^ reference local 0
+//                                        ⌃ enclosing_range_end local 0
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#toQueryBuilder().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#
   /**
    * Extension of [CompositeColumn] that consists of two columns, [column1] and [column2].
    */
+//                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#[C1]
+//                                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#[C2]
+//                                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#[T]
+//                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().
   abstract class BiCompositeColumn<C1, C2, T>(
 //               ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#
 //                                 display_name BiCompositeColumn
@@ -118,6 +153,12 @@
 //                                         ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#[T]
 //                                           display_name FirTypeParameterSymbol T
 //                                           documentation ```kotlin\nT\n```
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#[C1]
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#[C2]
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#[T]
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(column1)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#column1.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getColumn1().
       protected val column1: Column<C1>,
 //                  ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(column1)
 //                          display_name column1
@@ -130,6 +171,12 @@
 //                          display_name column1
 //                          documentation ```kotlin\nprotected get(): Column<C1>\n```
 //                           ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(column1)
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#column1.
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getColumn1().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(column2)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#column2.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getColumn2().
       protected val column2: Column<C2>,
 //                  ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(column2)
 //                          display_name column2
@@ -142,6 +189,12 @@
 //                          display_name column2
 //                          documentation ```kotlin\nprotected get(): Column<C2>\n```
 //                           ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(column2)
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#column2.
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getColumn2().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(transformFromValue)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#transformFromValue.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getTransformFromValue().
       /** Transformation that receives the column's composite value and returns the parsed values of the underlying columns. */
       val transformFromValue: (T) -> Pair<C1?, C2?>,
 //        ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(transformFromValue)
@@ -155,6 +208,12 @@
 //                           display_name transformFromValue
 //                           documentation ```kotlin\npublic final val transformFromValue: (T) -> Pair<C1?, C2?>\n```\n\n----\n\n Transformation that receives the column's composite value and returns the parsed values of the underlying columns.
 //                            ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Function1#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(transformFromValue)
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#transformFromValue.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getTransformFromValue().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(transformToValue)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#transformToValue.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getTransformToValue().
       /** Transformation that receives the retrieved values of [column1] and [column2] and returns a composite value. */
       val transformToValue: (Any?, Any?) -> T,
 //        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(transformToValue)
@@ -168,13 +227,19 @@
 //                         display_name transformToValue
 //                         documentation ```kotlin\npublic final val transformToValue: (Any?, Any?) -> T\n```\n\n----\n\n Transformation that receives the retrieved values of [column1] and [column2] and returns a composite value.
 //                          ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Function2#
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(transformToValue)
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#transformToValue.
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getTransformToValue().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(nullable)
       nullable: Boolean = false
 //    ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(nullable)
 //             display_name nullable
 //             documentation ```kotlin\nnullable: Boolean = ...\n```
 //              ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(nullable)
   ) : CompositeColumn<T>() {
 //    ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/CompositeColumn#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().
       init {
           this.nullable = nullable
 //             ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getNullable().
@@ -183,6 +248,7 @@
 //                        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#`<init>`().(nullable)
       }
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getRealColumns().
       override fun getRealColumns(): List<Column<*>> = listOf(column1, column2)
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getRealColumns().
 //                                display_name getRealColumns
@@ -194,7 +260,10 @@
 //                                                            ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getColumn1().
 //                                                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#column2.
 //                                                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getColumn2().
+//                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getRealColumns().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getRealColumnsWithValues().
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getRealColumnsWithValues().(compositeValue)
       override fun getRealColumnsWithValues(compositeValue: T): Map<Column<*>, Any?> {
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getRealColumnsWithValues().
 //                                          display_name getRealColumnsWithValues
@@ -204,6 +273,7 @@
 //                                                         display_name compositeValue
 //                                                         documentation ```kotlin\ncompositeValue: T\n```
 //                                                              ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getRealColumnsWithValues().(compositeValue)
           require(compositeValue != null || nullable) {
 //        ^^^^^^^ reference semanticdb maven . . kotlin/require(+1).
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getRealColumnsWithValues().(compositeValue)
@@ -214,17 +284,20 @@
 //                                                                ^^^^^^^^^^ reference semanticdb maven . . kotlin/reflect/KClass#getSimpleName().
 //                                                                ^^^^^^^^^^ reference semanticdb maven . . kotlin/reflect/KClass#simpleName.
           }
+//        ⌄ enclosing_range_start local 1
+//             ⌄ enclosing_range_start local 2
+//                 ⌄ enclosing_range_start local 3
           val (v1, v2) = transformFromValue(compositeValue)
-//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 0
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 1
 //                                                          display_name <destruct>
 //                                                          documentation ```kotlin\nlocal val <destruct>: Pair<C1?, C2?>\n```
-//             ^^ reference local 0
-//             ^^ definition local 1
+//             ^^ reference local 1
+//             ^^ definition local 2
 //                display_name v1
 //                documentation ```kotlin\nlocal val v1: C1?\n```
 //             ^^ reference semanticdb maven . . kotlin/Pair#component1().
-//                 ^^ reference local 0
-//                 ^^ definition local 2
+//                 ^^ reference local 1
+//                 ^^ definition local 3
 //                    display_name v2
 //                    documentation ```kotlin\nlocal val v2: C2?\n```
 //                 ^^ reference semanticdb maven . . kotlin/Pair#component2().
@@ -232,18 +305,24 @@
 //                       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getTransformFromValue().
 //                       ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#transformFromValue.
 //                                          ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getRealColumnsWithValues().(compositeValue)
+//              ⌃ enclosing_range_end local 2
+//                  ⌃ enclosing_range_end local 3
+//                                                        ⌃ enclosing_range_end local 1
           return mapOf(column1 to v1, column2 to v2)
 //               ^^^^^ reference semanticdb maven . . kotlin/collections/mapOf(+1).
 //                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#column1.
 //                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getColumn1().
 //                             ^^ reference semanticdb maven . . kotlin/to().
-//                                ^^ reference local 1
+//                                ^^ reference local 2
 //                                    ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#column2.
 //                                    ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getColumn2().
 //                                            ^^ reference semanticdb maven . . kotlin/to().
-//                                               ^^ reference local 2
+//                                               ^^ reference local 3
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getRealColumnsWithValues().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#restoreValueFromParts().
+//                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#restoreValueFromParts().(parts)
       override fun restoreValueFromParts(parts: Map<Column<*>, Any?>): T {
 //                 ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#restoreValueFromParts().
 //                                       display_name restoreValueFromParts
@@ -253,34 +332,41 @@
 //                                             display_name parts
 //                                             documentation ```kotlin\nparts: Map<Column<*>, Any?>\n```
 //                                              ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#restoreValueFromParts().(parts)
+//        ⌄ enclosing_range_start local 4
           val v1 = parts[column1]
-//            ^^ definition local 3
+//            ^^ definition local 4
 //               display_name v1
 //               documentation ```kotlin\nlocal val v1: Any?\n```
 //                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#restoreValueFromParts().(parts)
 //                 ^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#get().
 //                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#column1.
 //                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getColumn1().
+//                              ⌃ enclosing_range_end local 4
+//        ⌄ enclosing_range_start local 5
           val v2 = parts[column2]
-//            ^^ definition local 4
+//            ^^ definition local 5
 //               display_name v2
 //               documentation ```kotlin\nlocal val v2: Any?\n```
 //                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#restoreValueFromParts().(parts)
 //                 ^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#get().
 //                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#column2.
 //                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getColumn2().
+//                              ⌃ enclosing_range_end local 5
+//        ⌄ enclosing_range_start local 6
           val result = transformToValue(v1, v2)
-//            ^^^^^^ definition local 5
+//            ^^^^^^ definition local 6
 //                   display_name result
 //                   documentation ```kotlin\nlocal val result: T\n```
 //                     ^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Function2#invoke().
 //                     ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getTransformToValue().
 //                     ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#transformToValue.
-//                                      ^^ reference local 3
-//                                          ^^ reference local 4
+//                                      ^^ reference local 4
+//                                          ^^ reference local 5
+//                                            ⌃ enclosing_range_end local 6
           check(result != null || nullable) {
 //        ^^^^^ reference semanticdb maven . . kotlin/check(+1).
-//              ^^^^^^ reference local 5
+//              ^^^^^^ reference local 6
 //                                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#getNullable().
 //                                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#nullable.
 //                                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#setNullable().
@@ -289,6 +375,8 @@
 //                                                                        ^^^^^^^^^^ reference semanticdb maven . . kotlin/reflect/KClass#simpleName.
           }
           return result
-//               ^^^^^^ reference local 5
+//               ^^^^^^ reference local 6
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#restoreValueFromParts().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/BiCompositeColumn#

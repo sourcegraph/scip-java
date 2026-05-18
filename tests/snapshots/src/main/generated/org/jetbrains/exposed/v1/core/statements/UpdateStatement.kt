@@ -77,6 +77,7 @@
 //                                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/
 //                                           ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/throwUnsupportedException().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#
   /**
    * Represents the SQL statement that updates rows of a table.
    *
@@ -84,6 +85,16 @@
    * @param limit Maximum number of rows to update.
    * @param where Condition that determines which rows to update.
    */
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#`<init>`().
+//                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#`<init>`().(targetsSet)
+//                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#targetsSet.
+//                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getTargetsSet().
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#`<init>`().(limit)
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#limit.
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getLimit().
+//                                                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#`<init>`().(where)
+//                                                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#where.
+//                                                                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getWhere().
   open class UpdateStatement(val targetsSet: ColumnSet, val limit: Int?, val where: Op<Boolean>? = null) :
 //           ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#
 //                           display_name UpdateStatement
@@ -126,18 +137,30 @@
 //                                                                                 display_name where
 //                                                                                 documentation ```kotlin\npublic final val where: Op<Boolean>?\n```
 //                                                                                  ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#`<init>`().(targetsSet)
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#targetsSet.
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getTargetsSet().
+//                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#`<init>`().(limit)
+//                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#limit.
+//                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getLimit().
+//                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#`<init>`().(where)
+//                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#where.
+//                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getWhere().
+//                                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#`<init>`().
       UpdateBuilder<Int>(StatementType.UPDATE, targetsSet.targetTables()) {
 //    ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateBuilder#
 //                                     ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementType#UPDATE.
 //                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#`<init>`().(targetsSet)
 //                                                        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/targetTables().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#firstDataSet.
       /** The initial list of columns to update with their updated values. */
       open val firstDataSet: List<Pair<Column<*>, Any?>>
 //             ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#firstDataSet.
 //                          display_name firstDataSet
 //                          documentation ```kotlin\npublic open val firstDataSet: List<Pair<Column<*>, Any?>>\n```\n\n----\n\n The initial list of columns to update with their updated values.
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getFirstDataSet().
           get() {
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getFirstDataSet().
 //            display_name firstDataSet
@@ -148,7 +171,12 @@
 //                   ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#values.
 //                          ^^^^^^ reference semanticdb maven . . kotlin/collections/toList(+11).
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#firstDataSet.
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getFirstDataSet().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#prepareSQL().
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#prepareSQL().(transaction)
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#prepareSQL().(prepared)
       override fun prepareSQL(transaction: Transaction, prepared: Boolean): String {
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#prepareSQL().
 //                            display_name prepareSQL
@@ -164,12 +192,15 @@
 //                                                               documentation ```kotlin\nprepared: Boolean\n```
 //                                                                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#prepareSQL().(transaction)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#prepareSQL().(prepared)
           require(firstDataSet.isNotEmpty()) { "Can't prepare UPDATE statement without fields to update" }
 //        ^^^^^^^ reference semanticdb maven . . kotlin/require(+1).
 //                ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#firstDataSet.
 //                ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getFirstDataSet().
 //                             ^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/isNotEmpty(+9).
   
+//        ⌄ enclosing_range_start local 0
           val dialect = transaction.db.dialect
 //            ^^^^^^^ definition local 0
 //                    display_name dialect
@@ -179,10 +210,17 @@
 //                                  ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getDb().
 //                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialect.
 //                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDialect().
+//                                           ⌃ enclosing_range_end local 0
+//                     ⌄ enclosing_range_start local 1
           return when (targetsSet) {
+//                     ^^^^^^^^^^ definition local 1
+//                                display_name <when-subject>
+//                                documentation ```kotlin\nlocal val <when-subject>: ColumnSet\n```
 //                     ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getTargetsSet().
 //                     ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#targetsSet.
+//                              ⌃ enclosing_range_end local 1
               is Table -> dialect.functionProvider.update(targetsSet, firstDataSet, limit, where, transaction)
+//               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
 //                        ^^^^^^^ reference local 0
 //                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#functionProvider.
 //                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getFunctionProvider().
@@ -197,13 +235,20 @@
 //                                                                                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#where.
 //                                                                                                ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#prepareSQL().(transaction)
               is Join -> {
+//               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#
+//                ⌄ enclosing_range_start local 2
+//                                             ⌄ enclosing_range_start local 3
                   val functionProvider = when (dialect.h2Mode) {
-//                    ^^^^^^^^^^^^^^^^ definition local 1
+//                    ^^^^^^^^^^^^^^^^ definition local 2
 //                                     display_name functionProvider
 //                                     documentation ```kotlin\nlocal val functionProvider: FunctionProvider\n```
 //                                             ^^^^^^^ reference local 0
+//                                             ^^^^^^^^^^^^^^ definition local 3
+//                                                            display_name <when-subject>
+//                                                            documentation ```kotlin\nlocal val <when-subject>: H2Dialect.H2CompatibilityMode?\n```
 //                                                     ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getH2Mode().
 //                                                     ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/h2Mode.
+//                                                          ⌃ enclosing_range_end local 3
                       H2CompatibilityMode.PostgreSQL, H2CompatibilityMode.Oracle, H2CompatibilityMode.SQLServer -> H2FunctionProvider
 //                                        ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#PostgreSQL.
 //                                                                        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#Oracle.
@@ -213,8 +258,9 @@
 //                                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#functionProvider.
 //                                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getFunctionProvider().
                   }
+//                ⌃ enclosing_range_end local 2
                   functionProvider.update(targetsSet, firstDataSet, limit, where, transaction)
-//                ^^^^^^^^^^^^^^^^ reference local 1
+//                ^^^^^^^^^^^^^^^^ reference local 2
 //                                 ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#update(+1).
 //                                        ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getTargetsSet().
 //                                        ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#targetsSet.
@@ -235,7 +281,9 @@
 //                                                                                           ^^^^^^^^^^ reference semanticdb maven . . kotlin/reflect/KClass#simpleName.
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#prepareSQL().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#arguments().
       override fun arguments(): Iterable<Iterable<Pair<IColumnType<*>, Any?>>> = QueryBuilder(true).run {
 //                 ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#arguments().
 //                           display_name arguments
@@ -245,17 +293,21 @@
 //                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Iterable#
 //                                                                               ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#`<init>`().
 //                                                                                                  ^^^ reference semanticdb maven . . kotlin/run(+1).
+//        ⌄ enclosing_range_start local 4
           val dialect = currentDialect
-//            ^^^^^^^ definition local 2
+//            ^^^^^^^ definition local 4
 //                    display_name dialect
 //                    documentation ```kotlin\nlocal val dialect: DatabaseDialect\n```
 //                      ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/currentDialect.
 //                      ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
+//                                   ⌃ enclosing_range_end local 4
           when {
               targetsSet is Join && dialect is OracleDialect -> {
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getTargetsSet().
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#targetsSet.
-//                                  ^^^^^^^ reference local 2
+//                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#
+//                                  ^^^^^^^ reference local 4
+//                                             ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/OracleDialect#
                   registerAdditionalArgs(targetsSet)
 //                ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerAdditionalArgs().
 //                                       ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getTargetsSet().
@@ -268,8 +320,11 @@
               targetsSet is Join && (dialect is SQLServerDialect || dialect is PostgreSQLDialect) -> {
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getTargetsSet().
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#targetsSet.
-//                                   ^^^^^^^ reference local 2
-//                                                                  ^^^^^^^ reference local 2
+//                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#
+//                                   ^^^^^^^ reference local 4
+//                                              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/SQLServerDialect#
+//                                                                  ^^^^^^^ reference local 4
+//                                                                             ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/PostgreSQLDialect#
                   registerUpdateArgs()
 //                ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerUpdateArgs().
                   registerAdditionalArgs(targetsSet)
@@ -282,6 +337,7 @@
               targetsSet is Join -> {
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getTargetsSet().
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#targetsSet.
+//                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#
                   registerAdditionalArgs(targetsSet)
 //                ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerAdditionalArgs().
 //                                       ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getTargetsSet().
@@ -307,7 +363,9 @@
 //                                      ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#getArgs().
 //                                                 ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/emptyList().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#arguments().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerWhereArg().
       private fun QueryBuilder.registerWhereArg() {
 //                             ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerWhereArg().
 //                                              display_name registerWhereArg
@@ -317,28 +375,35 @@
 //        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#where.
 //               ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#toQueryBuilder().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerWhereArg().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerUpdateArgs().
       private fun QueryBuilder.registerUpdateArgs() {
 //                             ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerUpdateArgs().
 //                                                display_name registerUpdateArgs
 //                                                documentation ```kotlin\nprivate final fun QueryBuilder.registerUpdateArgs(): Unit\n```
           @OptIn(InternalApi::class)
+//                       ⌄ enclosing_range_start local 5
           values.forEach { registerArgument(it.key, it.value) }
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#getValues().
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#values.
 //               ^^^^^^^ reference semanticdb maven . . kotlin/collections/forEach(+11).
-//                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 5
 //                                                              display_name it
-//                                                              documentation ```kotlin\nit: Join.JoinPart\n```
+//                                                              documentation ```kotlin\nit: Map.Entry<Column<*>, Any?>\n```
 //                         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#registerArgument().
-//                                          ^^ reference semanticdb maven . . (it)
+//                                          ^^ reference local 5
 //                                             ^^^ reference semanticdb maven . . kotlin/collections/Map#Entry#getKey().
 //                                             ^^^ reference semanticdb maven . . kotlin/collections/Map#Entry#key.
-//                                                  ^^ reference semanticdb maven . . (it)
+//                                                  ^^ reference local 5
 //                                                     ^^^^^ reference semanticdb maven . . kotlin/collections/Map#Entry#getValue().
 //                                                     ^^^^^ reference semanticdb maven . . kotlin/collections/Map#Entry#value.
+//                                                            ⌃ enclosing_range_end local 5
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerUpdateArgs().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerAdditionalArgs().
+//                                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerAdditionalArgs().(join)
       private fun QueryBuilder.registerAdditionalArgs(join: Join) {
 //                             ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerAdditionalArgs().
 //                                                    display_name registerAdditionalArgs
@@ -347,27 +412,33 @@
 //                                                         display_name join
 //                                                         documentation ```kotlin\njoin: Join\n```
 //                                                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerAdditionalArgs().(join)
+//                               ⌄ enclosing_range_start local 6
           join.joinParts.forEach {
 //        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerAdditionalArgs().(join)
 //             ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#getJoinParts().
 //             ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#joinParts.
 //                       ^^^^^^^ reference semanticdb maven . . kotlin/collections/forEach(+10).
-//                               ^ definition semanticdb maven . . (it) 3:9
+//                               ^ definition local 6 3:9
 //                                 display_name it
 //                                 documentation ```kotlin\nit: Join.JoinPart\n```
               (it.joinPart as? QueryAlias)?.query?.prepareSQL(this)
-//             ^^ reference semanticdb maven . . (it)
+//             ^^ reference local 6
 //                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#JoinPart#getJoinPart().
 //                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#JoinPart#joinPart.
+//                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryAlias#
 //                                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryAlias#getQuery().
 //                                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryAlias#query.
 //                                                 ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/AbstractQuery#prepareSQL().
               it.additionalConstraint?.invoke(SqlExpressionBuilder)?.toQueryBuilder(this)
-//            ^^ reference semanticdb maven . . (it)
+//            ^^ reference local 6
 //               ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#JoinPart#additionalConstraint.
 //               ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#JoinPart#getAdditionalConstraint().
 //                                     ^^^^^^ reference semanticdb maven . . kotlin/Function1#invoke().
 //                                                                   ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#toQueryBuilder().
           }
+//        ⌃ enclosing_range_end local 6
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#registerAdditionalArgs().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/UpdateStatement#

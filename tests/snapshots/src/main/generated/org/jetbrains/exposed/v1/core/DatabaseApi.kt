@@ -28,12 +28,14 @@
 //                 ^^^^^^^^^^ reference semanticdb maven . . java/util/concurrent/
 //                            ^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/ConcurrentHashMap#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#
   /**
    * Base class representing the underlying database to which connections are made
    * and on which transaction tasks are performed.
    *
    * @param config Configuration holding all parameters that apply to a transaction using this database instance.
    */
+//                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#`<init>`().
   abstract class DatabaseApi protected constructor(
 //               ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#
 //                           display_name DatabaseApi
@@ -41,6 +43,9 @@
 //                                     ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#`<init>`().
 //                                                 display_name DatabaseApi
 //                                                 documentation ```kotlin\nprotected constructor(resolvedVendor: String? = ..., config: DatabaseConfig): DatabaseApi\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#`<init>`().(resolvedVendor)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#resolvedVendor.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getResolvedVendor().
       protected val resolvedVendor: String? = null,
 //                  ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#`<init>`().(resolvedVendor)
 //                                 display_name resolvedVendor
@@ -53,6 +58,12 @@
 //                                 display_name resolvedVendor
 //                                 documentation ```kotlin\nprotected final val resolvedVendor: String?\n```
 //                                  ^^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#`<init>`().(resolvedVendor)
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#resolvedVendor.
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getResolvedVendor().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#`<init>`().(config)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#config.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getConfig().
       val config: DatabaseConfig
 //        ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#`<init>`().(config)
 //               display_name config
@@ -65,7 +76,13 @@
 //               display_name config
 //               documentation ```kotlin\npublic get(): DatabaseConfig\n```
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#`<init>`().(config)
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#config.
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getConfig().
   ) {
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#useNestedTransactions.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getUseNestedTransactions().
       /** Whether nested transaction blocks are configured to act like top-level transactions. */
       val useNestedTransactions: Boolean = config.useNestedTransactions
 //        ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getUseNestedTransactions().
@@ -79,13 +96,17 @@
 //                                         ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getConfig().
 //                                                ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getUseNestedTransactions().
 //                                                ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#useNestedTransactions.
+//                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#useNestedTransactions.
+//                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getUseNestedTransactions().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#toString().
       override fun toString(): String =
 //                 ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#toString().
 //                          display_name toString
 //                          documentation ```kotlin\npublic open override fun toString(): String\n```
 //                          relationship is_reference is_implementation semanticdb maven . . kotlin/Any#toString().
 //                             ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                                                     ⌄ enclosing_range_start local 0
           "ExposedDatabase[${hashCode()}]($resolvedVendor${config.explicitDialect?.let { ", dialect=$it" } ?: ""})"
 //                           ^^^^^^^^ reference semanticdb maven . . kotlin/Any#hashCode().
 //                                         ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getResolvedVendor().
@@ -95,11 +116,15 @@
 //                                                                ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#explicitDialect.
 //                                                                ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getExplicitDialect().
 //                                                                                 ^^^ reference semanticdb maven . . kotlin/let().
-//                                                                                     ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                                     ^^^^^^^^^^^^^^^^^^^ definition local 0
 //                                                                                                         display_name it
 //                                                                                                         documentation ```kotlin\nit: DatabaseDialect\n```
-//                                                                                                   ^^ reference semanticdb maven . . (it)
+//                                                                                                   ^^ reference local 0
+//                                                                                                       ⌃ enclosing_range_end local 0
+//                                                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#toString().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#url.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getUrl().
       /** The connection URL for the database. */
       abstract val url: String
 //                 ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getUrl().
@@ -109,7 +134,11 @@
 //                     display_name url
 //                     documentation ```kotlin\npublic abstract val url: String\n```\n\n----\n\n The connection URL for the database.
 //                      ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#url.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getUrl().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#vendor.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getVendor().
       /** The name of the database based on the name of the underlying driver implementation. */
       abstract val vendor: String
 //                 ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getVendor().
@@ -119,7 +148,11 @@
 //                        display_name vendor
 //                        documentation ```kotlin\npublic abstract val vendor: String\n```\n\n----\n\n The name of the database based on the name of the underlying driver implementation.
 //                         ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#vendor.
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getVendor().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialect.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDialect().
       /** The name of the database as a [DatabaseDialect]. */
       abstract val dialect: DatabaseDialect
 //                 ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialect.
@@ -129,7 +162,11 @@
 //                         display_name dialect
 //                         documentation ```kotlin\npublic get(): DatabaseDialect\n```\n\n----\n\n The name of the database as a [DatabaseDialect].
 //                          ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialect.
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDialect().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialectMode.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDialectMode().
       /** The mode of the database. This currently only applies to H2 databases. */
       abstract val dialectMode: String?
 //                 ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialectMode.
@@ -139,7 +176,11 @@
 //                             display_name dialectMode
 //                             documentation ```kotlin\npublic get(): String?\n```\n\n----\n\n The mode of the database. This currently only applies to H2 databases.
 //                              ^^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialectMode.
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDialectMode().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#version.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getVersion().
       /** The version number of the database as a [Version]. */
       abstract val version: Version
 //                 ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getVersion().
@@ -149,7 +190,11 @@
 //                         display_name version
 //                         documentation ```kotlin\npublic abstract val version: Version\n```\n\n----\n\n The version number of the database as a [Version].
 //                          ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Version#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#version.
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getVersion().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#fullVersion.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getFullVersion().
       /** The full version number of the database as a String. */
       abstract val fullVersion: String
 //                 ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#fullVersion.
@@ -159,7 +204,11 @@
 //                             display_name fullVersion
 //                             documentation ```kotlin\npublic get(): String\n```\n\n----\n\n The full version number of the database as a String.
 //                              ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#fullVersion.
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getFullVersion().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#supportsAlterTableWithAddColumn.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getSupportsAlterTableWithAddColumn().
       /** Whether the database supports ALTER TABLE with an add column clause. */
       abstract val supportsAlterTableWithAddColumn: Boolean
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getSupportsAlterTableWithAddColumn().
@@ -169,7 +218,11 @@
 //                                                 display_name supportsAlterTableWithAddColumn
 //                                                 documentation ```kotlin\npublic abstract val supportsAlterTableWithAddColumn: Boolean\n```\n\n----\n\n Whether the database supports ALTER TABLE with an add column clause.
 //                                                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#supportsAlterTableWithAddColumn.
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getSupportsAlterTableWithAddColumn().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#supportsAlterTableWithDropColumn.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getSupportsAlterTableWithDropColumn().
       /** Whether the database supports ALTER TABLE with a drop column clause. */
       abstract val supportsAlterTableWithDropColumn: Boolean
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getSupportsAlterTableWithDropColumn().
@@ -179,7 +232,11 @@
 //                                                  display_name supportsAlterTableWithDropColumn
 //                                                  documentation ```kotlin\npublic abstract val supportsAlterTableWithDropColumn: Boolean\n```\n\n----\n\n Whether the database supports ALTER TABLE with a drop column clause.
 //                                                   ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#supportsAlterTableWithDropColumn.
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getSupportsAlterTableWithDropColumn().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#supportsMultipleResultSets.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getSupportsMultipleResultSets().
       /** Whether the database supports getting multiple result sets from a single execute. */
       abstract val supportsMultipleResultSets: Boolean
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getSupportsMultipleResultSets().
@@ -189,7 +246,11 @@
 //                                            display_name supportsMultipleResultSets
 //                                            documentation ```kotlin\npublic abstract val supportsMultipleResultSets: Boolean\n```\n\n----\n\n Whether the database supports getting multiple result sets from a single execute.
 //                                             ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#supportsMultipleResultSets.
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getSupportsMultipleResultSets().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#identifierManager.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getIdentifierManager().
       /** The database-specific class responsible for parsing and processing identifier tokens in SQL syntax. */
       abstract val identifierManager: IdentifierManagerApi
 //                 ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getIdentifierManager().
@@ -199,7 +260,11 @@
 //                                   display_name identifierManager
 //                                   documentation ```kotlin\npublic abstract val identifierManager: IdentifierManagerApi\n```\n\n----\n\n The database-specific class responsible for parsing and processing identifier tokens in SQL syntax.
 //                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#identifierManager.
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getIdentifierManager().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#defaultFetchSize.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDefaultFetchSize().
       /** The default number of results that should be fetched when queries are executed. */
       var defaultFetchSize: Int? = config.defaultFetchSize
 //        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#defaultFetchSize.
@@ -213,6 +278,8 @@
 //                                 ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getConfig().
 //                                        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultFetchSize.
 //                                        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultFetchSize().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#setDefaultFetchSize().(value)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#setDefaultFetchSize().
           private set
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#setDefaultFetchSize().(value)
 //                    display_name value
@@ -220,7 +287,13 @@
 //                ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#setDefaultFetchSize().
 //                    display_name defaultFetchSize
 //                    documentation ```kotlin\nprivate set(value: Int?): Unit\n```
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#defaultFetchSize.
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDefaultFetchSize().
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#setDefaultFetchSize().(value)
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#setDefaultFetchSize().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#`<init>`().
       companion object {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion# 10:5
 //                       display_name Companion
@@ -228,6 +301,8 @@
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#`<init>`(). 10:5
 //                       display_name Companion
 //                       documentation ```kotlin\nprivate constructor(): DatabaseApi.Companion\n```\n\n----\n\n Registers a new [DatabaseDialect] with the identifier [prefix].
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#dialects.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#getDialects().
           // TODO Assess whether concurrent hash map is actually needed
           @InternalApi // how to avoid this
           val dialects = ConcurrentHashMap<String, () -> DatabaseDialect>()
@@ -238,8 +313,13 @@
 //                     display_name dialects
 //                     documentation ```kotlin\npublic get(): ConcurrentHashMap<String, Function0<DatabaseDialect>>\n```
 //                       ^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/ConcurrentHashMap#`<init>`().
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#dialects.
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#getDialects().
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#registerDialect().
           /** Registers a new [DatabaseDialect] with the identifier [prefix]. */
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#registerDialect().(prefix)
+//                                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#registerDialect().(dialect)
           fun registerDialect(prefix: String, dialect: () -> DatabaseDialect) {
 //            ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#registerDialect().
 //                            display_name registerDialect
@@ -252,6 +332,8 @@
 //                                                    display_name dialect
 //                                                    documentation ```kotlin\ndialect: () -> DatabaseDialect\n```
 //                                                     ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Function0#
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#registerDialect().(prefix)
+//                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#registerDialect().(dialect)
               @OptIn(InternalApi::class)
               dialects[prefix.lowercase()] = dialect
 //            ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#dialects.
@@ -261,5 +343,9 @@
 //                            ^^^^^^^^^ reference semanticdb maven . . kotlin/text/lowercase(+2).
 //                                           ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#registerDialect().(dialect)
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#registerDialect().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#`<init>`().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#

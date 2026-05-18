@@ -25,13 +25,18 @@
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/util/
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#
   /** Base class representing a producer of [EntityID] instances.  */
   interface EntityIDFactory {
 //          ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#
 //                          display_name EntityIDFactory
 //                          documentation ```kotlin\npublic abstract interface EntityIDFactory : Any\n```\n\n----\n\n Base class representing a producer of [EntityID] instances.
 //                          relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#createEntityID().
       /** Returns a new [EntityID] that holds a [value] of type [T], for the specified [table]. */
+//         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#createEntityID().[T]
+//                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#createEntityID().(value)
+//                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#createEntityID().(table)
       fun <T : Any> createEntityID(value: T, table: IdTable<T>): EntityID<T>
 //         ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#createEntityID().[T]
 //           display_name FirTypeParameterSymbol T
@@ -48,8 +53,15 @@
 //                                                 documentation ```kotlin\ntable: IdTable<T>\n```
 //                                                  ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
 //                                                               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#
+//               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#createEntityID().[T]
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#createEntityID().(value)
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#createEntityID().(table)
+//                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#createEntityID().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#`<init>`().
   /** Class responsible for locating and providing the appropriate functions to produce [EntityID] instances. */
   object EntityIDFunctionProvider {
 //       ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#
@@ -58,6 +70,8 @@
 //       ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#`<init>`().
 //                                display_name EntityIDFunctionProvider
 //                                documentation ```kotlin\nprivate constructor(): EntityIDFunctionProvider\n```\n\n----\n\n Class responsible for locating and providing the appropriate functions to produce [EntityID] instances.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#factory.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#getFactory().
       private val factory: EntityIDFactory
 //                ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#factory.
 //                        display_name factory
@@ -66,6 +80,8 @@
 //                        display_name factory
 //                        documentation ```kotlin\nprivate get(): EntityIDFactory\n```
 //                         ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#factory.
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#getFactory().
       init {
           factory = ServiceLoader.load(EntityIDFactory::class.java, EntityIDFactory::class.java.classLoader).firstOrNull()
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#factory.
@@ -78,6 +94,8 @@
 //                                                                                              ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Class#classLoader.
 //                                                                                              ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Class#getClassLoader().
 //                                                                                                           ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/firstOrNull(+18).
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#
+//               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#`<init>`().
               ?: object : EntityIDFactory {
 //               ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#
 //                      display_name <anonymous>
@@ -87,6 +105,10 @@
 //                      display_name <anonymous>
 //                      documentation ```kotlin\nprivate constructor(): <anonymous>\n```
 //                        ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#createEntityID().
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#createEntityID().[T]
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#createEntityID().(value)
+//                                                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#createEntityID().(table)
                   override fun <T : Any> createEntityID(value: T, table: IdTable<T>): EntityID<T> {
 //                              ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#createEntityID().[T]
 //                                display_name FirTypeParameterSymbol T
@@ -103,15 +125,25 @@
 //                                                                      documentation ```kotlin\ntable: IdTable<T>\n```
 //                                                                       ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
 //                                                                                    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#createEntityID().[T]
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#createEntityID().(value)
+//                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#createEntityID().(table)
                       return EntityID(value, table)
 //                           ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`(+1).
 //                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#createEntityID().(value)
 //                                           ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#createEntityID().(table)
                   }
+//                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#createEntityID().
               }
+//            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#
+//            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 772>`#`<init>`().
       }
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#createEntityID().
       /** Returns a new [EntityID] that holds a [value] of type [T], for the specified [table]. */
+//         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#createEntityID().[T]
+//                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#createEntityID().(value)
+//                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#createEntityID().(table)
       fun <T : Any> createEntityID(value: T, table: IdTable<T>) = factory.createEntityID(value, table)
 //         ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#createEntityID().[T]
 //           display_name FirTypeParameterSymbol T
@@ -131,13 +163,23 @@
 //                                                                        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFactory#createEntityID().
 //                                                                                       ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#createEntityID().(value)
 //                                                                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#createEntityID().(table)
+//               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#createEntityID().[T]
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#createEntityID().(value)
+//                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#createEntityID().(table)
+//                                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#createEntityID().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityIDFunctionProvider#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
   /**
    * Base class for an identity table, which could be referenced from other tables.
    *
    * @param name Table name. By default, this will be resolved from any class name with a "Table" suffix removed (if present).
    */
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#[T]
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#`<init>`().
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#`<init>`().(name)
   abstract class IdTable<T : Any>(name: String = "") : Table(name) {
 //               ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
 //                       display_name IdTable
@@ -161,6 +203,11 @@
 //                                      ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                     ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
 //                                                           ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#`<init>`().(name)
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#[T]
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#`<init>`().(name)
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#id.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#getId().
       /** The identity column of this [IdTable], for storing values of type [T] wrapped as [EntityID] instances. */
       abstract val id: Column<EntityID<T>>
 //                 ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#getId().
@@ -170,7 +217,11 @@
 //                    display_name id
 //                    documentation ```kotlin\npublic abstract val id: Column<EntityID<T>>\n```\n\n----\n\n The identity column of this [IdTable], for storing values of type [T] wrapped as [EntityID] instances.
 //                     ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#id.
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#getId().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#_idColumns.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#get_idColumns().
       private val _idColumns = HashSet<Column<out Any>>()
 //                ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#_idColumns.
 //                           display_name _idColumns
@@ -179,13 +230,17 @@
 //                           display_name _idColumns
 //                           documentation ```kotlin\nprivate get(): HashSet<Column<out Any>>\n```
 //                             ^^^^^^^ reference semanticdb maven jdk 11 java/util/HashSet#`<init>`().
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#_idColumns.
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#get_idColumns().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#idColumns.
       /** All base columns that make up this [IdTable]'s identifier column. */
       val idColumns: Set<Column<out Any>>
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#idColumns.
 //                  display_name idColumns
 //                  documentation ```kotlin\npublic final val idColumns: Set<Column<out Any>>\n```\n\n----\n\n All base columns that make up this [IdTable]'s identifier column.
 //                   ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Set#
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#getIdColumns().
           get() = _idColumns.ifEmpty {
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#getIdColumns().
 //            display_name idColumns
@@ -193,10 +248,12 @@
 //                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#_idColumns.
 //                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#get_idColumns().
 //                           ^^^^^^^ reference semanticdb maven . . kotlin/collections/ifEmpty(+1).
+//            ⌄ enclosing_range_start local 0
               val message = "Table definition must include id columns. Please use Column.entityId() or IdTable.addIdColumn()."
 //                ^^^^^^^ definition local 0
 //                        display_name message
 //                        documentation ```kotlin\nlocal val message: String\n```
+//                                                                                                                           ⌃ enclosing_range_end local 0
               exposedLogger.error(message)
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/exposedLogger.
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/getExposedLogger().
@@ -206,8 +263,13 @@
 //            ^^^^^ reference semanticdb maven . . kotlin/error().
 //                  ^^^^^^^ reference local 0
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#idColumns.
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#getIdColumns().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumn().
       /** Adds a column to [idColumns] so that it can be used as a component of the [id] property. */
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumn().[S]
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumn().(newColumn)
       protected fun <S : Any> addIdColumn(newColumn: Column<EntityID<S>>) {
 //                   ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumn().[S]
 //                     display_name FirTypeParameterSymbol S
@@ -219,14 +281,19 @@
 //                                                  display_name newColumn
 //                                                  documentation ```kotlin\nnewColumn: Column<EntityID<S>>\n```
 //                                                   ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#
+//                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumn().[S]
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumn().(newColumn)
           if (_idColumns.isNotEmpty() && this !is CompositeIdTable) {
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#_idColumns.
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#get_idColumns().
 //                       ^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/isNotEmpty(+9).
+//                                                ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#
+//            ⌄ enclosing_range_start local 1
               val message = "CompositeIdTable should be used if multiple EntityID key columns are required"
 //                ^^^^^^^ definition local 1
 //                        display_name message
 //                        documentation ```kotlin\nlocal val message: String\n```
+//                                                                                                        ⌃ enclosing_range_end local 1
               exposedLogger.error(message)
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/exposedLogger.
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/getExposedLogger().
@@ -242,7 +309,11 @@
 //                   ^^^ reference semanticdb maven jdk 11 java/util/HashSet#add().
 //                       ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumn().(newColumn)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumn().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumnInternal().
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumnInternal().[S]
+//                                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumnInternal().(newColumn)
       internal fun <S : Any> addIdColumnInternal(newColumn: Column<EntityID<S>>) { addIdColumn(newColumn) }
 //                  ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumnInternal().[S]
 //                    display_name FirTypeParameterSymbol S
@@ -256,14 +327,22 @@
 //                                                          ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#
 //                                                                                 ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumn().
 //                                                                                             ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumnInternal().(newColumn)
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumnInternal().[S]
+//                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumnInternal().(newColumn)
+//                                                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#addIdColumnInternal().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#
   /**
    * Identity table with a primary key consisting of an auto-incrementing `Int` value.
    *
    * @param name Table name. By default, this will be resolved from any class name with a "Table" suffix removed (if present).
    * @param columnName Name for the primary key column. By default, "id" is used.
    */
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#`<init>`().
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#`<init>`().(name)
+//                                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#`<init>`().(columnName)
   open class IntIdTable(name: String = "", columnName: String = "id") : IdTable<Int>(name) {
 //           ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#
 //                      display_name IntIdTable
@@ -282,6 +361,11 @@
 //                                                     ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
 //                                                                                   ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#`<init>`().(name)
+//                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#`<init>`().(name)
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#`<init>`().(columnName)
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#id.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#getId().
       /** The identity column of this [IntIdTable], for storing 4-byte integers wrapped as [EntityID] instances. */
       final override val id: Column<EntityID<Int>> = integer(columnName).autoIncrement().entityId()
 //                       ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#getId().
@@ -295,6 +379,10 @@
 //                                                           ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#`<init>`().(columnName)
 //                                                                       ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#autoIncrement().
 //                                                                                       ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#entityId().
+//                                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#id.
+//                                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#getId().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#primaryKey.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#getPrimaryKey().
       final override val primaryKey = PrimaryKey(id)
 //                       ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#getPrimaryKey().
 //                                  display_name primaryKey
@@ -305,14 +393,21 @@
 //                                    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#PrimaryKey#`<init>`(+1).
 //                                               ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#getId().
 //                                               ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#id.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#primaryKey.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#getPrimaryKey().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IntIdTable#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#
   /**
    * Identity table with a primary key consisting of an auto-incrementing `UInt` value.
    *
    * @param name Table name. By default, this will be resolved from any class name with a "Table" suffix removed (if present).
    * @param columnName Name for the primary key column. By default, "id" is used.
    */
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#`<init>`().
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#`<init>`().(name)
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#`<init>`().(columnName)
   open class UIntIdTable(name: String = "", columnName: String = "id") : IdTable<UInt>(name) {
 //           ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#
 //                       display_name UIntIdTable
@@ -331,6 +426,11 @@
 //                                                      ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                                       ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
 //                                                                                     ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#`<init>`().(name)
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#`<init>`().(name)
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#`<init>`().(columnName)
+//                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#id.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#getId().
       /** The identity column of this [IntIdTable], for storing 4-byte unsigned integers wrapped as [EntityID] instances. */
       final override val id: Column<EntityID<UInt>> = uinteger(columnName).autoIncrement().entityId()
 //                       ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#getId().
@@ -344,6 +444,10 @@
 //                                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#`<init>`().(columnName)
 //                                                                         ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#autoIncrement().
 //                                                                                         ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#entityId().
+//                                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#id.
+//                                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#getId().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#primaryKey.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#getPrimaryKey().
       final override val primaryKey = PrimaryKey(id)
 //                       ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#getPrimaryKey().
 //                                  display_name primaryKey
@@ -354,14 +458,21 @@
 //                                    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#PrimaryKey#`<init>`(+1).
 //                                               ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#getId().
 //                                               ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#id.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#primaryKey.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#getPrimaryKey().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UIntIdTable#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#
   /**
    * Identity table with a primary key consisting of an auto-incrementing `Long` value.
    *
    * @param name Table name. By default, this will be resolved from any class name with a "Table" suffix removed (if present).
    * @param columnName Name for the primary key column. By default, "id" is used.
    */
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#`<init>`().
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#`<init>`().(name)
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#`<init>`().(columnName)
   open class LongIdTable(name: String = "", columnName: String = "id") : IdTable<Long>(name) {
 //           ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#
 //                       display_name LongIdTable
@@ -380,6 +491,11 @@
 //                                                      ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                                       ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
 //                                                                                     ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#`<init>`().(name)
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#`<init>`().(name)
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#`<init>`().(columnName)
+//                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#id.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#getId().
       /** The identity column of this [LongIdTable], for storing 8-byte integers wrapped as [EntityID] instances. */
       final override val id: Column<EntityID<Long>> = long(columnName).autoIncrement().entityId()
 //                       ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#getId().
@@ -393,6 +509,10 @@
 //                                                         ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#`<init>`().(columnName)
 //                                                                     ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#autoIncrement().
 //                                                                                     ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#entityId().
+//                                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#id.
+//                                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#getId().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#primaryKey.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#getPrimaryKey().
       final override val primaryKey = PrimaryKey(id)
 //                       ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#getPrimaryKey().
 //                                  display_name primaryKey
@@ -403,14 +523,21 @@
 //                                    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#PrimaryKey#`<init>`(+1).
 //                                               ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#getId().
 //                                               ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#id.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#primaryKey.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#getPrimaryKey().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/LongIdTable#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#
   /**
    * Identity table with a primary key consisting of an auto-incrementing `ULong` value.
    *
    * @param name Table name. By default, this will be resolved from any class name with a "Table" suffix removed (if present).
    * @param columnName Name for the primary key column. By default, "id" is used.
    */
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#`<init>`().
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#`<init>`().(name)
+//                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#`<init>`().(columnName)
   open class ULongIdTable(name: String = "", columnName: String = "id") : IdTable<ULong>(name) {
 //           ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#
 //                        display_name ULongIdTable
@@ -429,6 +556,11 @@
 //                                                       ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                                        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
 //                                                                                       ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#`<init>`().(name)
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#`<init>`().(name)
+//                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#`<init>`().(columnName)
+//                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#id.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#getId().
       /** The identity column of this [ULongIdTable], for storing 8-byte unsigned integers wrapped as [EntityID] instances. */
       final override val id: Column<EntityID<ULong>> = ulong(columnName).autoIncrement().entityId()
 //                       ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#getId().
@@ -442,6 +574,10 @@
 //                                                           ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#`<init>`().(columnName)
 //                                                                       ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#autoIncrement().
 //                                                                                       ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#entityId().
+//                                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#id.
+//                                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#getId().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#primaryKey.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#getPrimaryKey().
       final override val primaryKey = PrimaryKey(id)
 //                       ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#getPrimaryKey().
 //                                  display_name primaryKey
@@ -452,8 +588,12 @@
 //                                    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#PrimaryKey#`<init>`(+1).
 //                                               ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#getId().
 //                                               ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#id.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#primaryKey.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#getPrimaryKey().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/ULongIdTable#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#
   /**
    * Identity table with a primary key consisting of an auto-generating [UUID] value.
    *
@@ -463,6 +603,9 @@
    * @param name Table name. By default, this will be resolved from any class name with a "Table" suffix removed (if present).
    * @param columnName Name for the primary key column. By default, "id" is used.
    */
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#`<init>`().
+//                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#`<init>`().(name)
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#`<init>`().(columnName)
   open class UUIDTable(name: String = "", columnName: String = "id") : IdTable<UUID>(name) {
 //           ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#
 //                     display_name UUIDTable
@@ -481,6 +624,11 @@
 //                                                    ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                                     ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
 //                                                                                   ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#`<init>`().(name)
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#`<init>`().(name)
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#`<init>`().(columnName)
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#id.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#getId().
       /** The identity column of this [UUIDTable], for storing UUIDs wrapped as [EntityID] instances. */
       final override val id: Column<EntityID<UUID>> = uuid(columnName).autoGenerate().entityId()
 //                       ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#getId().
@@ -494,6 +642,10 @@
 //                                                         ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#`<init>`().(columnName)
 //                                                                     ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#autoGenerate().
 //                                                                                    ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#entityId().
+//                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#id.
+//                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#getId().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#primaryKey.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#getPrimaryKey().
       final override val primaryKey = PrimaryKey(id)
 //                       ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#getPrimaryKey().
 //                                  display_name primaryKey
@@ -504,13 +656,19 @@
 //                                    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#PrimaryKey#`<init>`(+1).
 //                                               ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#getId().
 //                                               ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#id.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#primaryKey.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#getPrimaryKey().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/UUIDTable#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#
   /**
    * Identity table with a primary key consisting of a combination of columns.
    *
    * @param name Table name. By default, this will be resolved from any class name with a "Table" suffix removed (if present).
    */
+//                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#`<init>`().
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#`<init>`().(name)
   open class CompositeIdTable(name: String = "") : IdTable<CompositeID>(name) {
 //           ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#
 //                            display_name CompositeIdTable
@@ -525,6 +683,10 @@
 //                                  ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                 ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
 //                                                                      ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#`<init>`().(name)
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#`<init>`().(name)
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#id.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#getId().
       /** The identity column of this [CompositeIdTable], for storing references to all key columns wrapped as [EntityID] instances. */
       final override val id: Column<EntityID<CompositeID>> = compositeIdColumn()
 //                       ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#getId().
@@ -535,12 +697,16 @@
 //                          documentation ```kotlin\npublic final override val id: Column<EntityID<CompositeID>>\n```\n\n----\n\n The identity column of this [CompositeIdTable], for storing references to all key columns wrapped as [EntityID] instances.
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#
 //                                                           ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#compositeIdColumn().
+//                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#id.
+//                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#getId().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#compositeIdColumn().
       private fun compositeIdColumn(): Column<EntityID<CompositeID>> {
 //                ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#compositeIdColumn().
 //                                  display_name compositeIdColumn
 //                                  documentation ```kotlin\nprivate final fun compositeIdColumn(): Column<EntityID<CompositeID>>\n```
 //                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#
+//        ⌄ enclosing_range_start local 2
           val placeholder = Column(
 //            ^^^^^^^^^^^ definition local 2
 //                        display_name placeholder
@@ -548,6 +714,8 @@
 //                          ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#`<init>`().
               this,
               "composite_id",
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 6775>`#
+//            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 6775>`#`<init>`().
               object : ColumnType<CompositeID>() {
 //            ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 6775>`#
 //                   display_name <anonymous>
@@ -557,12 +725,16 @@
 //                   display_name <anonymous>
 //                   documentation ```kotlin\nprivate constructor(): <anonymous>\n```
 //                     ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnType#
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 6775>`#sqlType().
                   override fun sqlType(): String = ""
 //                             ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 6775>`#sqlType().
 //                                     display_name sqlType
 //                                     documentation ```kotlin\npublic open override fun sqlType(): String\n```
 //                                     relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnType#sqlType().
 //                                        ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 6775>`#sqlType().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 6775>`#valueFromDB().
+//                                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 6775>`#valueFromDB().(value)
                   override fun valueFromDB(value: Any): CompositeID? = null
 //                             ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 6775>`#valueFromDB().
 //                                         display_name valueFromDB
@@ -573,8 +745,13 @@
 //                                               documentation ```kotlin\nvalue: Any\n```
 //                                                ^^^ reference semanticdb maven . . kotlin/Any#
 //                                                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeID#
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 6775>`#valueFromDB().(value)
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 6775>`#valueFromDB().
               }
+//            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 6775>`#
+//            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/`<anonymous object at 6775>`#`<init>`().
           )
+//        ⌃ enclosing_range_end local 2
           return Column(this, "composite_id", EntityIDColumnType(placeholder)).apply {
 //               ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#`<init>`().
 //                                            ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/EntityIDColumnType#`<init>`().
@@ -586,40 +763,50 @@
 //            ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#setDefaultValueFun().
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#compositeIdColumn().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdComparison().
       @Suppress("UNCHECKED_CAST")
       override fun mapIdComparison(
 //                 ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdComparison().
 //                                 display_name mapIdComparison
 //                                 documentation ```kotlin\n@Suppress(...) internal open override fun mapIdComparison(toCompare: Any?, booleanOperator: (Column<*>, Expression<*>) -> Op<Boolean>): Op<Boolean>\n```
 //                                 relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/Table#mapIdComparison().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdComparison().(toCompare)
           toCompare: Any?,
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdComparison().(toCompare)
 //                  display_name toCompare
 //                  documentation ```kotlin\ntoCompare: Any?\n```
 //                   ^^^^ reference semanticdb maven . . kotlin/Any#
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdComparison().(toCompare)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdComparison().(booleanOperator)
           booleanOperator: (Column<*>, Expression<*>) -> Op<Boolean>
 //        ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdComparison().(booleanOperator)
 //                        display_name booleanOperator
 //                        documentation ```kotlin\nbooleanOperator: (Column<*>, Expression<*>) -> Op<Boolean>\n```
 //                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Function2#
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdComparison().(booleanOperator)
       ): Op<Boolean> {
 //       ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
           (toCompare as? EntityID<CompositeID>) ?: error("toCompare must be an EntityID<CompositeID> value")
 //         ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdComparison().(toCompare)
+//                       ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#
 //                                                 ^^^^^ reference semanticdb maven . . kotlin/error().
+//                               ⌄ enclosing_range_start local 3
           return idColumns.map { column ->
 //               ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#getIdColumns().
 //               ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#idColumns.
 //                         ^^^ reference semanticdb maven . . kotlin/collections/map(+9).
-//                               ^^^^^^ definition semanticdb maven . . (column)
+//                               ^^^^^^ definition local 3
 //                                      display_name column
 //                                      documentation ```kotlin\ncolumn: Column<out Any>\n```
+//                                    ⌃ enclosing_range_end local 3
+//            ⌄ enclosing_range_start local 4
               val otherValue = if (column in toCompare.value.values) {
-//                ^^^^^^^^^^ definition local 3
+//                ^^^^^^^^^^ definition local 4
 //                           display_name otherValue
 //                           documentation ```kotlin\nlocal val otherValue: EntityID<Any>\n```
-//                                 ^^^^^^ reference semanticdb maven . . (column)
+//                                 ^^^^^^ reference local 3
 //                                        ^^ reference semanticdb maven . . kotlin/collections/contains(+10).
 //                                           ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdComparison().(toCompare)
 //                                                     ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#getValue().
@@ -631,48 +818,59 @@
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeID#get().
 //                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#getValue().
 //                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#value.
-//                                ^^^^^^ reference semanticdb maven . . (column)
+//                                ^^^^^^ reference local 3
+//                                          ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#
               } else {
                   error("Comparison CompositeID is missing a key mapping for ${column.name}")
 //                ^^^^^ reference semanticdb maven . . kotlin/error().
-//                                                                             ^^^^^^ reference semanticdb maven . . (column)
+//                                                                             ^^^^^^ reference local 3
 //                                                                                    ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getName().
 //                                                                                    ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#name.
               }
+//            ⌃ enclosing_range_end local 4
               booleanOperator(column, column.wrap(otherValue.value as? EntityID<*> ?: otherValue))
 //            ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Function2#invoke().
 //            ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdComparison().(booleanOperator)
-//                            ^^^^^^ reference semanticdb maven . . (column)
-//                                    ^^^^^^ reference semanticdb maven . . (column)
+//                            ^^^^^^ reference local 3
+//                                    ^^^^^^ reference local 3
 //                                           ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ISqlExpressionBuilder#wrap().
-//                                                ^^^^^^^^^^ reference local 3
+//                                                ^^^^^^^^^^ reference local 4
 //                                                           ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#getValue().
 //                                                           ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#value.
-//                                                                                    ^^^^^^^^^^ reference local 3
+//                                                                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#
+//                                                                                    ^^^^^^^^^^ reference local 4
           }.compoundAnd()
 //          ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/compoundAnd().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdComparison().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdOperator().
       override fun mapIdOperator(
 //                 ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdOperator().
 //                               display_name mapIdOperator
 //                               documentation ```kotlin\ninternal open override fun mapIdOperator(booleanOperator: (Column<*>) -> Op<Boolean>): Op<Boolean>\n```
 //                               relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/Table#mapIdOperator().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdOperator().(booleanOperator)
           booleanOperator: (Column<*>) -> Op<Boolean>
 //        ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdOperator().(booleanOperator)
 //                        display_name booleanOperator
 //                        documentation ```kotlin\nbooleanOperator: (Column<*>) -> Op<Boolean>\n```
 //                         ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Function1#
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdOperator().(booleanOperator)
+//                                   ⌄ enclosing_range_start local 5
       ): Op<Boolean> = idColumns.map { booleanOperator(it) }.compoundAnd()
 //       ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
 //                     ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#getIdColumns().
 //                     ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#idColumns.
 //                               ^^^ reference semanticdb maven . . kotlin/collections/map(+9).
-//                                   ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                   ^^^^^^^^^^^^^^^^^^^^^^^ definition local 5
 //                                                           display_name it
 //                                                           documentation ```kotlin\nit: Column<out Any>\n```
 //                                     ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Function1#invoke().
 //                                     ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdOperator().(booleanOperator)
-//                                                     ^^ reference semanticdb maven . . (it)
+//                                                     ^^ reference local 5
 //                                                           ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/compoundAnd().
+//                                                         ⌃ enclosing_range_end local 5
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#mapIdOperator().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/CompositeIdTable#

@@ -57,7 +57,10 @@
 //                                     ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/
 //                                                  ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchDataInconsistentException#
   /** An exception thrown when the provided data cannot be validated or processed to prepare a batch statement. */
+//                                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchDataInconsistentException#`<init>`().
+//                                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchDataInconsistentException#`<init>`().(message)
   class BatchDataInconsistentException(message: String) : Exception(message)
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchDataInconsistentException#
 //                                     display_name BatchDataInconsistentException
@@ -72,7 +75,11 @@
 //                                              ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                        ^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Exception#
 //                                                                  ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchDataInconsistentException#`<init>`().(message)
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchDataInconsistentException#`<init>`().(message)
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchDataInconsistentException#`<init>`().
+//                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchDataInconsistentException#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#
   /**
    * Represents the SQL statement that batch inserts new rows into a table.
    *
@@ -80,6 +87,7 @@
    * should be returned. See [Batch Insert](https://github.com/JetBrains/Exposed/wiki/DSL#batch-insert) for more details.
    */
   @Suppress("ForbiddenComment")
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().
   open class BatchInsertStatement(
 //           ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#
 //                                display_name BatchInsertStatement
@@ -91,16 +99,23 @@
 //           ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().
 //                                display_name BatchInsertStatement
 //                                documentation ```kotlin\npublic constructor(table: Table, ignore: Boolean = ..., shouldReturnGeneratedValues: Boolean = ...): BatchInsertStatement\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().(table)
       table: Table,
 //    ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().(table)
 //          display_name table
 //          documentation ```kotlin\ntable: Table\n```
 //           ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
+//               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().(table)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().(ignore)
       ignore: Boolean = false,
 //    ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().(ignore)
 //           display_name ignore
 //           documentation ```kotlin\nignore: Boolean = ...\n```
 //            ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().(ignore)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().(shouldReturnGeneratedValues)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#shouldReturnGeneratedValues.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getShouldReturnGeneratedValues().
       val shouldReturnGeneratedValues: Boolean = true
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().(shouldReturnGeneratedValues)
 //                                    display_name shouldReturnGeneratedValues
@@ -113,10 +128,16 @@
 //                                    display_name shouldReturnGeneratedValues
 //                                    documentation ```kotlin\npublic final val shouldReturnGeneratedValues: Boolean\n```
 //                                     ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().(shouldReturnGeneratedValues)
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#shouldReturnGeneratedValues.
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getShouldReturnGeneratedValues().
   ) : InsertStatement<List<ResultRow>>(table, ignore) {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/InsertStatement#
 //                                     ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().(table)
 //                                            ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().(ignore)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#data.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getData().
       @InternalApi
       val data = ArrayList<MutableMap<Column<*>, Any?>>()
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#data.
@@ -126,7 +147,10 @@
 //             display_name data
 //             documentation ```kotlin\npublic get(): {kotlin/collections/ArrayList<kotlin/collections/MutableMap<org/jetbrains/exposed/v1/core/Column<*>, kotlin/Any?>>=} ArrayList<MutableMap<Column<*>, Any?>>\n```
 //               ^^^^^^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#`<init>`().
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#data.
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getData().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#isDefaultable().
       private fun Column<*>.isDefaultable() = columnType.nullable || defaultValueFun != null || isDatabaseGenerated
 //                          ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#isDefaultable().
 //                                        display_name isDefaultable
@@ -142,7 +166,12 @@
 //                                                                                              ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getIsDatabaseGenerated().
 //                                                                                              ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#isDatabaseGenerated.
 //                                                                                              ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#setIsDatabaseGenerated().
+//                                                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#isDefaultable().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().
+//                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().[S]
+//                                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().(column)
+//                                                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().(value)
       override operator fun <S> set(column: Column<S>, value: S) {
 //                           ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().[S]
 //                             display_name FirTypeParameterSymbol S
@@ -158,6 +187,9 @@
 //                                                     ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().(value)
 //                                                           display_name value
 //                                                           documentation ```kotlin\nvalue: S\n```
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().[S]
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().(column)
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().(value)
           @OptIn(InternalApi::class)
           if (data.size > 1 && column !in data[data.size - 2] && !column.isDefaultable()) {
 //            ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#data.
@@ -179,6 +211,7 @@
 //                                                               ^ reference semanticdb maven . . kotlin/Boolean#not().
 //                                                                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().(column)
 //                                                                       ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#isDefaultable().
+//            ⌄ enclosing_range_start local 0
               val fullIdentity = CoreTransactionManager.currentTransaction().fullIdentity(column)
 //                ^^^^^^^^^^^^ definition local 0
 //                             display_name fullIdentity
@@ -186,6 +219,7 @@
 //                                                      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentTransaction().
 //                                                                           ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#fullIdentity().
 //                                                                                        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().(column)
+//                                                                                              ⌃ enclosing_range_end local 0
               throw BatchDataInconsistentException("Can't set $value for $fullIdentity because previous insertion can't be defaulted for that column.")
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchDataInconsistentException#`<init>`().
 //                                                             ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().(value)
@@ -196,7 +230,9 @@
 //                  ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().(column)
 //                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().(value)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#set().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#addBatch().
       /**
        * Adds the most recent batch to the current list of insert statements.
        *
@@ -255,7 +291,9 @@
 //        ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getArguments().
 //        ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#setArguments().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#addBatch().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#removeLastBatch().
       @OptIn(InternalApi::class)
       fun removeLastBatch() {
 //        ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#removeLastBatch().
@@ -274,18 +312,20 @@
 //        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#allColumnsInDataSet.
 //        ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getAllColumnsInDataSet().
 //                            ^^^^^ reference semanticdb maven . . kotlin/collections/MutableSet#clear().
+//                                            ⌄ enclosing_range_start local 1
           data.flatMapTo(allColumnsInDataSet) { it.keys }
 //        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#data.
 //        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getData().
 //             ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/flatMapTo(+10).
 //                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#allColumnsInDataSet.
 //                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getAllColumnsInDataSet().
-//                                            ^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                            ^^^^^^^^^^^ definition local 1
 //                                                        display_name it
-//                                                        documentation ```kotlin\nit: Table\n```
-//                                              ^^ reference semanticdb maven . . (it)
+//                                                        documentation ```kotlin\nit: MutableMap<Column<*>, Any?>\n```
+//                                              ^^ reference local 1
 //                                                 ^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#getKeys().
 //                                                 ^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#keys.
+//                                                      ⌃ enclosing_range_end local 1
           values.clear()
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getValues().
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#values.
@@ -311,20 +351,26 @@
 //                                ^^^^ reference semanticdb maven jdk 11 java/util/ArrayList#size.
 //                                     ^ reference semanticdb maven . . kotlin/Int#compareTo(+2).
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#removeLastBatch().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#validateLastBatch().
       @InternalApi
       open fun validateLastBatch() {
 //             ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#validateLastBatch().
 //                               display_name validateLastBatch
 //                               documentation ```kotlin\n@InternalApi() public open fun validateLastBatch(): Unit\n```
 //                               relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/statements/SQLServerBatchInsertStatement#validateLastBatch().
+//        ⌄ enclosing_range_start local 2
           val tr = CoreTransactionManager.currentTransaction()
-//            ^^ definition local 1
+//            ^^ definition local 2
 //               display_name tr
 //               documentation ```kotlin\nlocal val tr: Transaction\n```
 //                                        ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentTransaction().
+//                                                           ⌃ enclosing_range_end local 2
+//        ⌄ enclosing_range_start local 3
+//                                                                            ⌄ enclosing_range_start local 4
           val cantBeDefaulted = (allColumnsInDataSet - values.keys).filterNot { it.isDefaultable() }
-//            ^^^^^^^^^^^^^^^ definition local 2
+//            ^^^^^^^^^^^^^^^ definition local 3
 //                            display_name cantBeDefaulted
 //                            documentation ```kotlin\nlocal val cantBeDefaulted: List<Column<*>>\n```
 //                               ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#allColumnsInDataSet.
@@ -335,43 +381,52 @@
 //                                                            ^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#getKeys().
 //                                                            ^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#keys.
 //                                                                  ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/filterNot(+9).
-//                                                                            ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                            ^^^^^^^^^^^^^^^^^^^^^^ definition local 4
 //                                                                                                   display_name it
-//                                                                                                   documentation ```kotlin\nit: Table\n```
-//                                                                              ^^ reference semanticdb maven . . (it)
+//                                                                                                   documentation ```kotlin\nit: Column<*>\n```
+//                                                                              ^^ reference local 4
 //                                                                                 ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#isDefaultable().
+//                                                                                                 ⌃ enclosing_range_end local 3
+//                                                                                                 ⌃ enclosing_range_end local 4
           if (cantBeDefaulted.isNotEmpty()) {
-//            ^^^^^^^^^^^^^^^ reference local 2
+//            ^^^^^^^^^^^^^^^ reference local 3
 //                            ^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/isNotEmpty(+9).
+//            ⌄ enclosing_range_start local 5
+//                                                          ⌄ enclosing_range_start local 6
               val columnList = cantBeDefaulted.joinToString { tr.fullIdentity(it) }
-//                ^^^^^^^^^^ definition local 3
+//                ^^^^^^^^^^ definition local 5
 //                           display_name columnList
 //                           documentation ```kotlin\nlocal val columnList: String\n```
-//                             ^^^^^^^^^^^^^^^ reference local 2
+//                             ^^^^^^^^^^^^^^^ reference local 3
 //                                             ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/joinToString(+9).
-//                                                          ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                          ^^^^^^^^^^^^^^^^^^^^^^^ definition local 6
 //                                                                                  display_name it
-//                                                                                  documentation ```kotlin\nit: Table\n```
-//                                                            ^^ reference local 1
+//                                                                                  documentation ```kotlin\nit: Column<*>\n```
+//                                                            ^^ reference local 2
 //                                                               ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#fullIdentity().
-//                                                                            ^^ reference semanticdb maven . . (it)
+//                                                                            ^^ reference local 6
+//                                                                                ⌃ enclosing_range_end local 5
+//                                                                                ⌃ enclosing_range_end local 6
               throw BatchDataInconsistentException(
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchDataInconsistentException#`<init>`().
                   "Can't add a new batch because columns: $columnList don't have client default values. DB defaults are not supported in batch inserts"
-//                                                         ^^^^^^^^^^ reference local 3
+//                                                         ^^^^^^^^^^ reference local 5
               )
           }
+//        ⌄ enclosing_range_start local 7
+//                                                 ⌄ enclosing_range_start local 8
+//                                                                                      ⌄ enclosing_range_start local 9
           val requiredInTargets = (targets.flatMap { it.columns } - values.keys).filter {
-//            ^^^^^^^^^^^^^^^^^ definition local 4
+//            ^^^^^^^^^^^^^^^^^ definition local 7
 //                              display_name requiredInTargets
 //                              documentation ```kotlin\nlocal val requiredInTargets: List<Column<*>>\n```
 //                                 ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getTargets().
 //                                 ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#targets.
 //                                         ^^^^^^^ reference semanticdb maven . . kotlin/collections/flatMap(+10).
-//                                                 ^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                 ^^^^^^^^^^^^^^ definition local 8
 //                                                                display_name it
 //                                                                documentation ```kotlin\nit: Table\n```
-//                                                   ^^ reference semanticdb maven . . (it)
+//                                                   ^^ reference local 8
 //                                                      ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#columns.
 //                                                      ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#getColumns().
 //                                                                ^ reference semanticdb maven . . kotlin/collections/minus(+2).
@@ -380,50 +435,61 @@
 //                                                                         ^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#getKeys().
 //                                                                         ^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#keys.
 //                                                                               ^^^^^^ reference semanticdb maven . . kotlin/collections/filter(+9).
-//                                                                                      ^ definition semanticdb maven . . (it) 2:9
+//                                                                                      ^ definition local 9 2:9
 //                                                                                        display_name it
-//                                                                                        documentation ```kotlin\nit: Table\n```
+//                                                                                        documentation ```kotlin\nit: Column<*>\n```
+//                                                              ⌃ enclosing_range_end local 8
               !it.isDefaultable() && !it.columnType.isAutoInc && it.dbDefaultValue == null && it.columnType !is EntityIDColumnType<*>
 //            ^ reference semanticdb maven . . kotlin/Boolean#not().
-//             ^^ reference semanticdb maven . . (it)
+//             ^^ reference local 9
 //                ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#isDefaultable().
 //                                   ^ reference semanticdb maven . . kotlin/Boolean#not().
-//                                    ^^ reference semanticdb maven . . (it)
+//                                    ^^ reference local 9
 //                                       ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#columnType.
 //                                       ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getColumnType().
 //                                                  ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/getIsAutoInc().
 //                                                  ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/isAutoInc.
-//                                                               ^^ reference semanticdb maven . . (it)
+//                                                               ^^ reference local 9
 //                                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#dbDefaultValue.
 //                                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getDbDefaultValue().
 //                                                                  ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#setDbDefaultValue().
-//                                                                                            ^^ reference semanticdb maven . . (it)
+//                                                                                            ^^ reference local 9
 //                                                                                               ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#columnType.
 //                                                                                               ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getColumnType().
+//                                                                                                              ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/EntityIDColumnType#
           }
+//        ⌃ enclosing_range_end local 7
+//        ⌃ enclosing_range_end local 9
           if (requiredInTargets.any()) {
-//            ^^^^^^^^^^^^^^^^^ reference local 4
+//            ^^^^^^^^^^^^^^^^^ reference local 7
 //                              ^^^ reference semanticdb maven . . kotlin/collections/any(+18).
+//            ⌄ enclosing_range_start local 10
+//                                                            ⌄ enclosing_range_start local 11
               val columnList = requiredInTargets.joinToString { tr.fullIdentity(it) }
-//                ^^^^^^^^^^ definition local 5
+//                ^^^^^^^^^^ definition local 10
 //                           display_name columnList
 //                           documentation ```kotlin\nlocal val columnList: String\n```
-//                             ^^^^^^^^^^^^^^^^^ reference local 4
+//                             ^^^^^^^^^^^^^^^^^ reference local 7
 //                                               ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/joinToString(+9).
-//                                                            ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                            ^^^^^^^^^^^^^^^^^^^^^^^ definition local 11
 //                                                                                    display_name it
-//                                                                                    documentation ```kotlin\nit: Table\n```
-//                                                              ^^ reference local 1
+//                                                                                    documentation ```kotlin\nit: Column<*>\n```
+//                                                              ^^ reference local 2
 //                                                                 ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#fullIdentity().
-//                                                                              ^^ reference semanticdb maven . . (it)
+//                                                                              ^^ reference local 11
+//                                                                                  ⌃ enclosing_range_end local 10
+//                                                                                  ⌃ enclosing_range_end local 11
               throw BatchDataInconsistentException(
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchDataInconsistentException#`<init>`().
                   "Can't add a new batch because columns: $columnList don't have default values. DB defaults are not supported in batch inserts"
-//                                                         ^^^^^^^^^^ reference local 5
+//                                                         ^^^^^^^^^^ reference local 10
               )
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#validateLastBatch().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#allColumnsInDataSet.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getAllColumnsInDataSet().
       private val allColumnsInDataSet = mutableSetOf<Column<*>>()
 //                ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#allColumnsInDataSet.
 //                                    display_name allColumnsInDataSet
@@ -432,7 +498,10 @@
 //                                    display_name allColumnsInDataSet
 //                                    documentation ```kotlin\nprivate get(): MutableSet<Column<*>>\n```
 //                                      ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/mutableSetOf().
+//                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#allColumnsInDataSet.
+//                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getAllColumnsInDataSet().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#allColumnsInDataSet(+1).
       @OptIn(InternalApi::class)
       private fun allColumnsInDataSet() = allColumnsInDataSet +
 //                ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#allColumnsInDataSet(+1).
@@ -452,7 +521,11 @@
 //                                                                                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#table.
 //                                                                                                                      ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#getTableName().
 //                                                                                                                      ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#tableName.
+//                                                                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#allColumnsInDataSet(+1).
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#arguments.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#setArguments().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#setArguments().(value)
       override var arguments: List<List<Pair<Column<*>, Any?>>>? = null
 //                 ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#arguments.
 //                           display_name arguments
@@ -464,72 +537,82 @@
 //                           display_name value
 //                           documentation ```kotlin\nvalue: List<List<Pair<Column<*>, Any?>>>?\n```
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getArguments().
           get() = field ?: run {
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getArguments().
 //            display_name arguments
 //            documentation ```kotlin\npublic get(): List<List<Pair<Column<*>, Any?>>>?\n```
 //                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/field.
 //                         ^^^ reference semanticdb maven . . kotlin/run(+1).
+//            ⌄ enclosing_range_start local 12
               val columnsToInsert = (allColumnsInDataSet() + clientDefaultColumns()).toSet()
-//                ^^^^^^^^^^^^^^^ definition local 6
+//                ^^^^^^^^^^^^^^^ definition local 12
 //                                display_name columnsToInsert
 //                                documentation ```kotlin\nlocal val columnsToInsert: Set<Column<*>>\n```
 //                                   ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#allColumnsInDataSet(+1).
 //                                                         ^ reference semanticdb maven . . kotlin/collections/plus(+42).
 //                                                           ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#clientDefaultColumns().
 //                                                                                   ^^^^^ reference semanticdb maven . . kotlin/collections/toSet(+9).
+//                                                                                         ⌃ enclosing_range_end local 12
               @OptIn(InternalApi::class)
               data
 //            ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#data.
 //            ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getData().
+//                     ⌄ enclosing_range_start local 13
                   .map { valuesAndClientDefaults(it) as MutableMap }
 //                 ^^^ reference semanticdb maven . . kotlin/collections/map(+9).
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 13
 //                                                                   display_name it
-//                                                                   documentation ```kotlin\nit: Table\n```
+//                                                                   documentation ```kotlin\nit: MutableMap<Column<*>, Any?>\n```
 //                       ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#valuesAndClientDefaults().
-//                                               ^^ reference semanticdb maven . . (it)
+//                                               ^^ reference local 13
+//                                                      ^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#
+//                                                                 ⌃ enclosing_range_end local 13
+//                       ⌄ enclosing_range_start local 14
                   .map { values ->
 //                 ^^^ reference semanticdb maven . . kotlin/collections/map(+9).
-//                       ^^^^^^ definition semanticdb maven . . (values)
+//                       ^^^^^^ definition local 14
 //                              display_name values
 //                              documentation ```kotlin\nvalues: MutableMap<Column<*>, Any?>\n```
+//                            ⌃ enclosing_range_end local 14
+//                                          ⌄ enclosing_range_start local 15
                       columnsToInsert.map { column ->
-//                    ^^^^^^^^^^^^^^^ reference local 6
+//                    ^^^^^^^^^^^^^^^ reference local 12
 //                                    ^^^ reference semanticdb maven . . kotlin/collections/map(+9).
-//                                          ^^^^^^ definition semanticdb maven . . (column)
+//                                          ^^^^^^ definition local 15
 //                                                 display_name column
 //                                                 documentation ```kotlin\ncolumn: Column<*>\n```
+//                                               ⌃ enclosing_range_end local 15
                           column to when {
-//                        ^^^^^^ reference semanticdb maven . . (column)
+//                        ^^^^^^ reference local 15
 //                               ^^ reference semanticdb maven . . kotlin/to().
                               values.contains(column) -> values[column]
-//                            ^^^^^^ reference semanticdb maven . . (values)
+//                            ^^^^^^ reference local 14
 //                                   ^^^^^^^^ reference semanticdb maven . . kotlin/collections/contains(+10).
-//                                            ^^^^^^ reference semanticdb maven . . (column)
-//                                                       ^^^^^^ reference semanticdb maven . . (values)
+//                                            ^^^^^^ reference local 15
+//                                                       ^^^^^^ reference local 14
 //                                                       ^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/MutableMap#get().
-//                                                              ^^^^^^ reference semanticdb maven . . (column)
+//                                                              ^^^^^^ reference local 15
                               column.dbDefaultValue != null || column.isDatabaseGenerated -> DefaultValueMarker
-//                            ^^^^^^ reference semanticdb maven . . (column)
+//                            ^^^^^^ reference local 15
 //                                   ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#dbDefaultValue.
 //                                   ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getDbDefaultValue().
 //                                   ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#setDbDefaultValue().
-//                                                             ^^^^^^ reference semanticdb maven . . (column)
+//                                                             ^^^^^^ reference local 15
 //                                                                    ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getIsDatabaseGenerated().
 //                                                                    ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#isDatabaseGenerated.
 //                                                                    ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#setIsDatabaseGenerated().
                               else -> {
                                   require(column.columnType.nullable) {
 //                                ^^^^^^^ reference semanticdb maven . . kotlin/require(+1).
-//                                        ^^^^^^ reference semanticdb maven . . (column)
+//                                        ^^^^^^ reference local 15
 //                                               ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#columnType.
 //                                               ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getColumnType().
 //                                                          ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#getNullable().
 //                                                          ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#nullable.
 //                                                          ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/IColumnType#setNullable().
                                       "The value for the column ${column.name} was not provided. " +
-//                                                                ^^^^^^ reference semanticdb maven . . (column)
+//                                                                ^^^^^^ reference local 15
 //                                                                       ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getName().
 //                                                                       ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#name.
                                           "The value for non-nullable column without defaults must be specified."
@@ -542,4 +625,9 @@
 //                  ^^^^^ reference semanticdb maven . . kotlin/apply().
 //                          ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/field.
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#arguments.
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#setArguments().
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#setArguments().(value)
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#getArguments().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/BatchInsertStatement#

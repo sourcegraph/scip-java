@@ -21,12 +21,15 @@
 //                                ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/
 //                                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#
   /** Base representation for a unit block of work that is performed on a database. */
   interface TransactionInterface {
 //          ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#
 //                               display_name TransactionInterface
 //                               documentation ```kotlin\npublic abstract interface TransactionInterface : Any\n```\n\n----\n\n Base representation for a unit block of work that is performed on a database.
 //                               relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#db.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getDb().
       /** The database on which the transaction tasks are performed. */
       val db: DatabaseApi
 //        ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#db.
@@ -36,7 +39,11 @@
 //           display_name db
 //           documentation ```kotlin\npublic get(): DatabaseApi\n```\n\n----\n\n The database on which the transaction tasks are performed.
 //            ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#db.
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getDb().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#readOnly.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getReadOnly().
       /** Whether the transaction is in read-only mode. */
       val readOnly: Boolean
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getReadOnly().
@@ -46,7 +53,11 @@
 //                 display_name readOnly
 //                 documentation ```kotlin\npublic abstract val readOnly: Boolean\n```\n\n----\n\n Whether the transaction is in read-only mode.
 //                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#readOnly.
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getReadOnly().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#outerTransaction.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getOuterTransaction().
       /** The parent transaction of a nested transaction; otherwise, `null` if the transaction is a top-level instance. */
       val outerTransaction: Transaction?
 //        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getOuterTransaction().
@@ -56,4 +67,7 @@
 //                         display_name outerTransaction
 //                         documentation ```kotlin\npublic abstract val outerTransaction: Transaction?\n```\n\n----\n\n The parent transaction of a nested transaction; otherwise, `null` if the transaction is a top-level instance.
 //                          ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#outerTransaction.
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getOuterTransaction().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#

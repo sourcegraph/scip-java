@@ -7,6 +7,7 @@
 //                                      ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/
 //                                          ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#
   /**
    * Class representing a wrapper for a stored identity value of type [T].
    *
@@ -18,6 +19,12 @@
    * @sample org.jetbrains.exposed.v1.tests.shared.entities.EntityTestsData.YTable
    * @sample org.jetbrains.exposed.v1.tests.shared.dml.InsertTests.testInsertWithPredefinedId
    */
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#[T]
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`().
+//                                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`().(table)
+//                                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#table.
+//                                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#getTable().
+//                                                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`().(id)
   open class EntityID<T : Any> protected constructor(val table: IdTable<T>, id: T?) {
 //           ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#
 //                    display_name EntityID
@@ -42,6 +49,15 @@
 //                                                                          ^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`().(id)
 //                                                                             display_name id
 //                                                                             documentation ```kotlin\nid: T?\n```
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#[T]
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`().(table)
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#table.
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#getTable().
+//                                                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`().(id)
+//                                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`(+1).
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`(+1).(id)
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`(+1).(table)
       constructor(id: T, table: IdTable<T>) : this(table, id)
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`(+1).
 //                                                            display_name EntityID
@@ -55,7 +71,14 @@
 //                              ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/IdTable#
 //                                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`(+1).(table)
 //                                                        ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`(+1).(id)
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`(+1).(id)
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`(+1).(table)
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`(+1).
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#_value.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#get_value().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#set_value().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#set_value().(value)
       @Suppress("VariableNaming")
       var _value: Any? = id
 //        ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#_value.
@@ -72,12 +95,18 @@
 //               documentation ```kotlin\nvalue: Any?\n```
 //                ^^^^ reference semanticdb maven . . kotlin/Any#
 //                       ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#`<init>`().(id)
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#_value.
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#get_value().
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#set_value().
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#set_value().(value)
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#value.
       /** The identity value of type [T] wrapped by this [EntityID] instance. */
       val value: T
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#value.
 //              display_name value
 //              documentation ```kotlin\npublic final val value: T\n```\n\n----\n\n The identity value of type [T] wrapped by this [EntityID] instance.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#getValue().
           get() {
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#getValue().
 //            display_name value
@@ -101,13 +130,18 @@
 //                   ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#get_value().
 //                   ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#set_value().
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#value.
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#getValue().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#invokeOnNoValue().
       /** Performs steps when the internal [_value] is accessed without first being initialized. */
       protected open fun invokeOnNoValue() {}
 //                       ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#invokeOnNoValue().
 //                                       display_name invokeOnNoValue
 //                                       documentation ```kotlin\nprotected open fun invokeOnNoValue(): Unit\n```\n\n----\n\n Performs steps when the internal [_value] is accessed without first being initialized.
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#invokeOnNoValue().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#toString().
       override fun toString() = value.toString()
 //                 ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#toString().
 //                          display_name toString
@@ -116,7 +150,9 @@
 //                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#getValue().
 //                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#value.
 //                                    ^^^^^^^^ reference semanticdb maven . . kotlin/Any#toString().
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#toString().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#hashCode().
       override fun hashCode() = value.hashCode()
 //                 ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#hashCode().
 //                          display_name hashCode
@@ -125,7 +161,10 @@
 //                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#getValue().
 //                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#value.
 //                                    ^^^^^^^^ reference semanticdb maven . . kotlin/Any#hashCode().
+//                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#hashCode().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#equals().
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#equals().(other)
       override fun equals(other: Any?): Boolean {
 //                 ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#equals().
 //                        display_name equals
@@ -136,8 +175,10 @@
 //                              documentation ```kotlin\nother: Any?\n```
 //                               ^^^^ reference semanticdb maven . . kotlin/Any#
 //                                      ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#equals().(other)
           if (other !is EntityID<*>) return false
 //            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#equals().(other)
+//                      ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#
   
           return other._value == _value && other.table == table
 //               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#equals().(other)
@@ -153,4 +194,6 @@
 //                                                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#getTable().
 //                                                        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#table.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#equals().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/dao/id/EntityID#

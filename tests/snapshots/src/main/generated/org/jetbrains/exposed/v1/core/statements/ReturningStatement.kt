@@ -44,6 +44,7 @@
 //                                                ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/
 //                                                    ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/ResultApi#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#
   /**
    * Represents the underlying SQL [mainStatement] that returns a result with data from any modified rows.
    *
@@ -51,6 +52,7 @@
    * @param returningExpressions Columns or expressions to include in the returned result.
    * @param mainStatement The statement to append the RETURNING clause to. This may be an insert, update, or delete statement.
    */
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().
   open class ReturningStatement(
 //           ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#
 //                              display_name ReturningStatement
@@ -59,6 +61,9 @@
 //           ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().
 //                              display_name ReturningStatement
 //                              documentation ```kotlin\npublic constructor(table: Table, returningExpressions: List<Expression<*>>, mainStatement: Statement<*>): ReturningStatement\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().(table)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#table.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#getTable().
       val table: Table,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().(table)
 //              display_name table
@@ -71,6 +76,12 @@
 //              display_name table
 //              documentation ```kotlin\npublic final val table: Table\n```
 //               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().(table)
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#table.
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#getTable().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().(returningExpressions)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#returningExpressions.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#getReturningExpressions().
       val returningExpressions: List<Expression<*>>,
 //        ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().(returningExpressions)
 //                             display_name returningExpressions
@@ -83,6 +94,12 @@
 //                             display_name returningExpressions
 //                             documentation ```kotlin\npublic final val returningExpressions: List<Expression<*>>\n```
 //                              ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().(returningExpressions)
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#returningExpressions.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#getReturningExpressions().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().(mainStatement)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#mainStatement.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#getMainStatement().
       val mainStatement: Statement<*>
 //        ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().(mainStatement)
 //                      display_name mainStatement
@@ -95,6 +112,9 @@
 //                      display_name mainStatement
 //                      documentation ```kotlin\npublic final val mainStatement: Statement<*>\n```
 //                       ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/Statement#
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().(mainStatement)
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#mainStatement.
+//                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#getMainStatement().
   ) : Statement<ResultApi>(mainStatement.type, listOf(table)) {
 //    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/Statement#
 //                         ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().(mainStatement)
@@ -102,6 +122,8 @@
 //                                       ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/Statement#type.
 //                                             ^^^^^^ reference semanticdb maven . . kotlin/collections/listOf().
 //                                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().(table)
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#arguments().
       override fun arguments(): Iterable<Iterable<Pair<IColumnType<*>, Any?>>> = mainStatement.arguments()
 //                 ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#arguments().
 //                           display_name arguments
@@ -111,7 +133,11 @@
 //                                                                               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#getMainStatement().
 //                                                                               ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#mainStatement.
 //                                                                                             ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/Statement#arguments().
+//                                                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#arguments().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#prepareSQL().
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#prepareSQL().(transaction)
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#prepareSQL().(prepared)
       override fun prepareSQL(transaction: Transaction, prepared: Boolean): String {
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#prepareSQL().
 //                            display_name prepareSQL
@@ -126,6 +152,9 @@
 //                                                               documentation ```kotlin\nprepared: Boolean\n```
 //                                                                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#prepareSQL().(transaction)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#prepareSQL().(prepared)
+//        ⌄ enclosing_range_start local 0
           val mainSql = mainStatement.prepareSQL(transaction, prepared)
 //            ^^^^^^^ definition local 0
 //                    display_name mainSql
@@ -135,6 +164,7 @@
 //                                    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/Statement#prepareSQL().
 //                                               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#prepareSQL().(transaction)
 //                                                            ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#prepareSQL().(prepared)
+//                                                                    ⌃ enclosing_range_end local 0
           return transaction.db.dialect.functionProvider.returning(mainSql, returningExpressions, transaction)
 //               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#prepareSQL().(transaction)
 //                           ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#db.
@@ -149,4 +179,6 @@
 //                                                                          ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#returningExpressions.
 //                                                                                                ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#prepareSQL().(transaction)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#prepareSQL().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/statements/ReturningStatement#

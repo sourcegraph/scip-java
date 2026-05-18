@@ -29,6 +29,7 @@
 //                                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/
 //                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/UnsupportedByDialectException#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#
   /**
    * Represents a database sequence.
    *
@@ -41,6 +42,7 @@
    * an ascending or descending sequence respectively.
    * @param cache Specifies how many sequence numbers are to be pre-allocated and stored in memory for faster access.
    */
+//              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().
   class Sequence(
 //      ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#
 //               display_name Sequence
@@ -48,6 +50,9 @@
 //      ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().
 //               display_name Sequence
 //               documentation ```kotlin\npublic constructor(name: String, startWith: Long? = ..., incrementBy: Long? = ..., minValue: Long? = ..., maxValue: Long? = ..., cycle: Boolean? = ..., cache: Long? = ...): Sequence\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(name)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#name.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getName().
       val name: String,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(name)
 //             display_name name
@@ -60,6 +65,12 @@
 //             display_name name
 //             documentation ```kotlin\npublic final val name: String\n```
 //              ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(name)
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#name.
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getName().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(startWith)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#startWith.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getStartWith().
       val startWith: Long? = null,
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(startWith)
 //                  display_name startWith
@@ -72,6 +83,12 @@
 //                  display_name startWith
 //                  documentation ```kotlin\npublic final val startWith: Long?\n```
 //                   ^^^^^ reference semanticdb maven . . kotlin/Long#
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(startWith)
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#startWith.
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getStartWith().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(incrementBy)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#incrementBy.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getIncrementBy().
       val incrementBy: Long? = null,
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(incrementBy)
 //                    display_name incrementBy
@@ -84,6 +101,12 @@
 //                    display_name incrementBy
 //                    documentation ```kotlin\npublic final val incrementBy: Long?\n```
 //                     ^^^^^ reference semanticdb maven . . kotlin/Long#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(incrementBy)
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#incrementBy.
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getIncrementBy().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(minValue)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#minValue.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getMinValue().
       val minValue: Long? = null,
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(minValue)
 //                 display_name minValue
@@ -96,6 +119,12 @@
 //                 display_name minValue
 //                 documentation ```kotlin\npublic final val minValue: Long?\n```
 //                  ^^^^^ reference semanticdb maven . . kotlin/Long#
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(minValue)
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#minValue.
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getMinValue().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(maxValue)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#maxValue.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getMaxValue().
       val maxValue: Long? = null,
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(maxValue)
 //                 display_name maxValue
@@ -108,6 +137,12 @@
 //                 display_name maxValue
 //                 documentation ```kotlin\npublic final val maxValue: Long?\n```
 //                  ^^^^^ reference semanticdb maven . . kotlin/Long#
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(maxValue)
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#maxValue.
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getMaxValue().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(cycle)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#cycle.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getCycle().
       val cycle: Boolean? = null,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(cycle)
 //              display_name cycle
@@ -120,6 +155,12 @@
 //              display_name cycle
 //              documentation ```kotlin\npublic get(): Boolean?\n```
 //               ^^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(cycle)
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#cycle.
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getCycle().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(cache)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#cache.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getCache().
       val cache: Long? = null
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(cache)
 //              display_name cache
@@ -132,13 +173,19 @@
 //              display_name cache
 //              documentation ```kotlin\npublic get(): Long?\n```
 //               ^^^^^ reference semanticdb maven . . kotlin/Long#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().(cache)
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#cache.
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getCache().
   ) {
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#identifier.
       /** This name of this sequence in proper database casing. */
       val identifier: String
 //        ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#identifier.
 //                   display_name identifier
 //                   documentation ```kotlin\npublic final val identifier: String\n```\n\n----\n\n This name of this sequence in proper database casing.
 //                    ^^^^^^ reference semanticdb maven . . kotlin/String#
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getIdentifier().
           @OptIn(InternalApi::class)
           get() = CoreTransactionManager.currentTransaction().db.identifierManager.cutIfNecessaryAndQuote(name)
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getIdentifier().
@@ -152,7 +199,10 @@
 //                                                                                 ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/IdentifierManagerApi#cutIfNecessaryAndQuote().
 //                                                                                                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getName().
 //                                                                                                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#name.
+//                                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#identifier.
+//                                                                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getIdentifier().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#toString().
       override fun toString(): String = "Sequence(identifier=$identifier)"
 //                 ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#toString().
 //                          display_name toString
@@ -161,19 +211,25 @@
 //                             ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getIdentifier().
 //                                                            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#identifier.
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#toString().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#ddl.
       /** The SQL statements that create this sequence. */
       val ddl: List<String>
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#ddl.
 //            display_name ddl
 //            documentation ```kotlin\npublic final val ddl: List<String>\n```\n\n----\n\n The SQL statements that create this sequence.
 //             ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getDdl().
           get() = createStatement()
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getDdl().
 //            display_name ddl
 //            documentation ```kotlin\npublic get(): List<String>\n```
 //                ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#createStatement().
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#ddl.
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getDdl().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#createStatement().
       /** Returns the SQL statements that create this sequence. */
       fun createStatement(): List<String> {
 //        ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#createStatement().
@@ -192,6 +248,7 @@
 //                                                                                                                 ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
           }
   
+//        ⌄ enclosing_range_start local 0
           val createSequenceDDL = buildString {
 //            ^^^^^^^^^^^^^^^^^ definition local 0
 //                              display_name createSequenceDDL
@@ -240,12 +297,15 @@
 //                                      ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#cache.
 //                                      ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getCache().
           }
+//        ⌃ enclosing_range_end local 0
   
           return listOf(createSequenceDDL)
 //               ^^^^^^ reference semanticdb maven . . kotlin/collections/listOf().
 //                      ^^^^^^^^^^^^^^^^^ reference local 0
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#createStatement().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#dropStatement().
       /** Returns the SQL statements that drop this sequence. */
       fun dropStatement(): List<String> {
 //        ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#dropStatement().
@@ -264,6 +324,7 @@
 //                                                                                                               ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getCurrentDialect().
           }
   
+//        ⌄ enclosing_range_start local 1
           val dropSequenceDDL = buildString {
 //            ^^^^^^^^^^^^^^^ definition local 1
 //                            display_name dropSequenceDDL
@@ -284,9 +345,12 @@
 //                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#getIdentifier().
 //                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#identifier.
           }
+//        ⌃ enclosing_range_end local 1
   
           return listOf(dropSequenceDDL)
 //               ^^^^^^ reference semanticdb maven . . kotlin/collections/listOf().
 //                      ^^^^^^^^^^^^^^^ reference local 1
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#dropStatement().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#

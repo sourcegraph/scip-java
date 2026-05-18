@@ -14,6 +14,8 @@
 //                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/
 //                                             ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DEFAULT_MAX_ATTEMPTS.
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/getDEFAULT_MAX_ATTEMPTS().
   // TODO instead of magic number? put back into DatabaseConfig?
   internal const val DEFAULT_MAX_ATTEMPTS = 3
 //                   ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DEFAULT_MAX_ATTEMPTS.
@@ -22,7 +24,10 @@
 //                   ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/getDEFAULT_MAX_ATTEMPTS().
 //                                        display_name DEFAULT_MAX_ATTEMPTS
 //                                        documentation ```kotlin\ninternal get(): Int\n```
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DEFAULT_MAX_ATTEMPTS.
+//                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/getDEFAULT_MAX_ATTEMPTS().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#
   /**
    * Base configuration for a [DatabaseApi] instance.
    *
@@ -34,6 +39,8 @@
 //                         display_name DatabaseConfig
 //                         documentation ```kotlin\npublic abstract interface DatabaseConfig : Any\n```\n\n----\n\n\n Base configuration for a [DatabaseApi] instance.\n\n Parameters set in this class apply to all transactions that use the [DatabaseApi] instance,\n unless an applicable override is specified in an individual transaction block.\n
 //                         relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#sqlLogger.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getSqlLogger().
       val sqlLogger: SqlLogger
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getSqlLogger().
 //                  display_name sqlLogger
@@ -42,6 +49,10 @@
 //                  display_name sqlLogger
 //                  documentation ```kotlin\npublic abstract val sqlLogger: SqlLogger\n```
 //                   ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#sqlLogger.
+//                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getSqlLogger().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#useNestedTransactions.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getUseNestedTransactions().
       val useNestedTransactions: Boolean
 //        ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getUseNestedTransactions().
 //                              display_name useNestedTransactions
@@ -50,6 +61,10 @@
 //                              display_name useNestedTransactions
 //                              documentation ```kotlin\npublic abstract val useNestedTransactions: Boolean\n```
 //                               ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#useNestedTransactions.
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getUseNestedTransactions().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultFetchSize.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultFetchSize().
       val defaultFetchSize: Int?
 //        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultFetchSize.
 //                         display_name defaultFetchSize
@@ -58,6 +73,10 @@
 //                         display_name defaultFetchSize
 //                         documentation ```kotlin\npublic get(): Int?\n```
 //                          ^^^^ reference semanticdb maven . . kotlin/Int#
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultFetchSize.
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultFetchSize().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultIsolationLevel.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultIsolationLevel().
       val defaultIsolationLevel: Int
 //        ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultIsolationLevel.
 //                              display_name defaultIsolationLevel
@@ -66,6 +85,10 @@
 //                              display_name defaultIsolationLevel
 //                              documentation ```kotlin\npublic get(): Int\n```
 //                               ^^^ reference semanticdb maven . . kotlin/Int#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultIsolationLevel.
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultIsolationLevel().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultMaxAttempts.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultMaxAttempts().
       val defaultMaxAttempts: Int
 //        ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultMaxAttempts.
 //                           display_name defaultMaxAttempts
@@ -74,6 +97,10 @@
 //                           display_name defaultMaxAttempts
 //                           documentation ```kotlin\npublic get(): Int\n```
 //                            ^^^ reference semanticdb maven . . kotlin/Int#
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultMaxAttempts.
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultMaxAttempts().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultMinRetryDelay.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultMinRetryDelay().
       val defaultMinRetryDelay: Long
 //        ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultMinRetryDelay.
 //                             display_name defaultMinRetryDelay
@@ -82,6 +109,10 @@
 //                             display_name defaultMinRetryDelay
 //                             documentation ```kotlin\npublic get(): Long\n```
 //                              ^^^^ reference semanticdb maven . . kotlin/Long#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultMinRetryDelay.
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultMinRetryDelay().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultMaxRetryDelay.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultMaxRetryDelay().
       val defaultMaxRetryDelay: Long
 //        ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultMaxRetryDelay.
 //                             display_name defaultMaxRetryDelay
@@ -90,6 +121,10 @@
 //                             display_name defaultMaxRetryDelay
 //                             documentation ```kotlin\npublic get(): Long\n```
 //                              ^^^^ reference semanticdb maven . . kotlin/Long#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultMaxRetryDelay.
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultMaxRetryDelay().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultReadOnly.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultReadOnly().
       val defaultReadOnly: Boolean
 //        ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultReadOnly.
 //                        display_name defaultReadOnly
@@ -98,6 +133,10 @@
 //                        display_name defaultReadOnly
 //                        documentation ```kotlin\npublic get(): Boolean\n```
 //                         ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultReadOnly.
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultReadOnly().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#warnLongQueriesDuration.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getWarnLongQueriesDuration().
       val warnLongQueriesDuration: Long?
 //        ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getWarnLongQueriesDuration().
 //                                display_name warnLongQueriesDuration
@@ -106,6 +145,10 @@
 //                                display_name warnLongQueriesDuration
 //                                documentation ```kotlin\npublic abstract val warnLongQueriesDuration: Long?\n```
 //                                 ^^^^^ reference semanticdb maven . . kotlin/Long#
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#warnLongQueriesDuration.
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getWarnLongQueriesDuration().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#maxEntitiesToStoreInCachePerEntity.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getMaxEntitiesToStoreInCachePerEntity().
       val maxEntitiesToStoreInCachePerEntity: Int
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getMaxEntitiesToStoreInCachePerEntity().
 //                                           display_name maxEntitiesToStoreInCachePerEntity
@@ -114,6 +157,10 @@
 //                                           display_name maxEntitiesToStoreInCachePerEntity
 //                                           documentation ```kotlin\npublic abstract val maxEntitiesToStoreInCachePerEntity: Int\n```
 //                                            ^^^ reference semanticdb maven . . kotlin/Int#
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#maxEntitiesToStoreInCachePerEntity.
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getMaxEntitiesToStoreInCachePerEntity().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#keepLoadedReferencesOutOfTransaction.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getKeepLoadedReferencesOutOfTransaction().
       val keepLoadedReferencesOutOfTransaction: Boolean
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getKeepLoadedReferencesOutOfTransaction().
 //                                             display_name keepLoadedReferencesOutOfTransaction
@@ -122,6 +169,10 @@
 //                                             display_name keepLoadedReferencesOutOfTransaction
 //                                             documentation ```kotlin\npublic abstract val keepLoadedReferencesOutOfTransaction: Boolean\n```
 //                                              ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#keepLoadedReferencesOutOfTransaction.
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getKeepLoadedReferencesOutOfTransaction().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#explicitDialect.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getExplicitDialect().
       val explicitDialect: DatabaseDialect?
 //        ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#explicitDialect.
 //                        display_name explicitDialect
@@ -130,6 +181,10 @@
 //                        display_name explicitDialect
 //                        documentation ```kotlin\npublic get(): DatabaseDialect?\n```
 //                         ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#explicitDialect.
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getExplicitDialect().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultSchema.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultSchema().
       val defaultSchema: Schema?
 //        ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultSchema.
 //                      display_name defaultSchema
@@ -138,6 +193,10 @@
 //                      display_name defaultSchema
 //                      documentation ```kotlin\npublic get(): Schema?\n```
 //                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#defaultSchema.
+//                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getDefaultSchema().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#logTooMuchResultSetsThreshold.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getLogTooMuchResultSetsThreshold().
       val logTooMuchResultSetsThreshold: Int
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getLogTooMuchResultSetsThreshold().
 //                                      display_name logTooMuchResultSetsThreshold
@@ -146,6 +205,10 @@
 //                                      display_name logTooMuchResultSetsThreshold
 //                                      documentation ```kotlin\npublic abstract val logTooMuchResultSetsThreshold: Int\n```
 //                                       ^^^ reference semanticdb maven . . kotlin/Int#
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#logTooMuchResultSetsThreshold.
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getLogTooMuchResultSetsThreshold().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#preserveKeywordCasing.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getPreserveKeywordCasing().
       val preserveKeywordCasing: Boolean
 //        ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getPreserveKeywordCasing().
 //                              display_name preserveKeywordCasing
@@ -154,7 +217,11 @@
 //                              display_name preserveKeywordCasing
 //                              documentation ```kotlin\npublic abstract val preserveKeywordCasing: Boolean\n```
 //                               ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#preserveKeywordCasing.
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#getPreserveKeywordCasing().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#`<init>`().
       /**
        * Builder API responsible for constructing a custom [DatabaseApi] configuration parameter state.
        */
@@ -165,6 +232,10 @@
 //               ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#`<init>`().
 //                       display_name Builder
 //                       documentation ```kotlin\npublic constructor(): DatabaseConfig.Builder\n```\n\n----\n\n\n Builder API responsible for constructing a custom [DatabaseApi] configuration parameter state.\n
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#sqlLogger.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getSqlLogger().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setSqlLogger().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setSqlLogger().(value)
           /**
            * SQLLogger to be used to log all SQL statements. [Slf4jSqlDebugLogger] by default.
            */
@@ -182,7 +253,15 @@
 //                      display_name sqlLogger
 //                      documentation ```kotlin\npublic final var sqlLogger: SqlLogger?\n```\n\n----\n\n\n SQLLogger to be used to log all SQL statements. [Slf4jSqlDebugLogger] by default.\n
 //                       ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#sqlLogger.
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getSqlLogger().
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setSqlLogger().
+//                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setSqlLogger().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#useNestedTransactions.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getUseNestedTransactions().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setUseNestedTransactions().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setUseNestedTransactions().(value)
           /**
            * Turn on/off nested transactions support. Is disabled by default
            */
@@ -200,7 +279,15 @@
 //                                  display_name useNestedTransactions
 //                                  documentation ```kotlin\npublic final var useNestedTransactions: Boolean\n```\n\n----\n\n\n Turn on/off nested transactions support. Is disabled by default\n
 //                                   ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#useNestedTransactions.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getUseNestedTransactions().
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setUseNestedTransactions().
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setUseNestedTransactions().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultFetchSize.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultFetchSize().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultFetchSize().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultFetchSize().(value)
           /**
            * How many records will be fetched at once by select queries
            */
@@ -218,7 +305,15 @@
 //                             display_name value
 //                             documentation ```kotlin\nvalue: Int?\n```\n\n----\n\n\n How many records will be fetched at once by select queries\n
 //                              ^^^^ reference semanticdb maven . . kotlin/Int#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultFetchSize.
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultFetchSize().
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultFetchSize().
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultFetchSize().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultIsolationLevel.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultIsolationLevel().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultIsolationLevel().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultIsolationLevel().(value)
           /**
            * Default transaction isolation level. If not specified, the database-specific level will be used.
            * This can be overridden on a per-transaction level by specifying the `transactionIsolation` parameter of
@@ -242,7 +337,15 @@
 //                                       display_name value
 //                                       documentation ```kotlin\nvalue: Int\n```\n\n----\n\n\n Default transaction isolation level. If not specified, the database-specific level will be used.\n This can be overridden on a per-transaction level by specifying the `transactionIsolation` parameter of\n the `transaction` function.\n\n Check `Database.getDefaultIsolationLevel()` for the database defaults.\n\n If using Exposed with an R2DBC driver, `defaultR2dbcIsolationLevel` should be used directly instead.\n
 //                                        ^^^ reference semanticdb maven . . kotlin/Int#
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultIsolationLevel.
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultIsolationLevel().
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultIsolationLevel().
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultIsolationLevel().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultMaxAttempts.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultMaxAttempts().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMaxAttempts().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMaxAttempts().(value)
           /**
            * The maximum amount of attempts that will be made to perform any transaction block.
            * If this value is set to 1 and an SQLException happens, the exception will be thrown without performing a retry.
@@ -268,7 +371,15 @@
 //                                ^^^ reference semanticdb maven . . kotlin/Int#
 //                                      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DEFAULT_MAX_ATTEMPTS.
 //                                      ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/getDEFAULT_MAX_ATTEMPTS().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultMaxAttempts.
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultMaxAttempts().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMaxAttempts().
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMaxAttempts().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultMinRetryDelay.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultMinRetryDelay().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMinRetryDelay().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMinRetryDelay().(value)
           /**
            * The minimum number of milliseconds to wait before retrying a transaction if an SQLException happens.
            * This can be overridden on a per-transaction level by specifying the `minRetryDelay` property in a
@@ -289,7 +400,15 @@
 //                                 display_name value
 //                                 documentation ```kotlin\nvalue: Long\n```\n\n----\n\n\n The minimum number of milliseconds to wait before retrying a transaction if an SQLException happens.\n This can be overridden on a per-transaction level by specifying the `minRetryDelay` property in a\n `transaction` block.\n Default minimum delay is 0.\n
 //                                  ^^^^ reference semanticdb maven . . kotlin/Long#
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultMinRetryDelay.
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultMinRetryDelay().
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMinRetryDelay().
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMinRetryDelay().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultMaxRetryDelay.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultMaxRetryDelay().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMaxRetryDelay().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMaxRetryDelay().(value)
           /**
            * The maximum number of milliseconds to wait before retrying a transaction if an SQLException happens.
            * This can be overridden on a per-transaction level by specifying the `maxRetryDelay` property in a
@@ -310,7 +429,15 @@
 //                                 display_name value
 //                                 documentation ```kotlin\nvalue: Long\n```\n\n----\n\n\n The maximum number of milliseconds to wait before retrying a transaction if an SQLException happens.\n This can be overridden on a per-transaction level by specifying the `maxRetryDelay` property in a\n `transaction` block.\n Default maximum delay is 0.\n
 //                                  ^^^^ reference semanticdb maven . . kotlin/Long#
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultMaxRetryDelay.
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultMaxRetryDelay().
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMaxRetryDelay().
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMaxRetryDelay().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultReadOnly.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultReadOnly().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultReadOnly().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultReadOnly().(value)
           /**
            * Should all connections/transactions be executed in read-only mode by default or not.
            * Default state is false.
@@ -329,7 +456,15 @@
 //                            display_name value
 //                            documentation ```kotlin\nvalue: Boolean\n```\n\n----\n\n\n Should all connections/transactions be executed in read-only mode by default or not.\n Default state is false.\n
 //                             ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultReadOnly.
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultReadOnly().
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultReadOnly().
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultReadOnly().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#warnLongQueriesDuration.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getWarnLongQueriesDuration().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setWarnLongQueriesDuration().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setWarnLongQueriesDuration().(value)
           /**
            * Threshold in milliseconds to log queries which exceed the threshold with WARN level.
            * No tracing enabled by default.
@@ -349,7 +484,15 @@
 //                                    display_name warnLongQueriesDuration
 //                                    documentation ```kotlin\npublic final var warnLongQueriesDuration: Long?\n```\n\n----\n\n\n Threshold in milliseconds to log queries which exceed the threshold with WARN level.\n No tracing enabled by default.\n This can be set on a per-transaction level by setting [Transaction.warnLongQueriesDuration] field.\n
 //                                     ^^^^^ reference semanticdb maven . . kotlin/Long#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#warnLongQueriesDuration.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getWarnLongQueriesDuration().
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setWarnLongQueriesDuration().
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setWarnLongQueriesDuration().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#maxEntitiesToStoreInCachePerEntity.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getMaxEntitiesToStoreInCachePerEntity().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setMaxEntitiesToStoreInCachePerEntity().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setMaxEntitiesToStoreInCachePerEntity().(value)
           /**
            * Amount of entities to keep in an EntityCache per an Entity class.
            * Applicable only when `exposed-dao` module is used.
@@ -372,7 +515,15 @@
 //                                                ^^^ reference semanticdb maven . . kotlin/Int#
 //                                                          ^^^^^^^^^ reference semanticdb maven . . kotlin/Int#Companion#MAX_VALUE.
 //                                                          ^^^^^^^^^ reference semanticdb maven . . kotlin/Int#Companion#getMAX_VALUE().
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#maxEntitiesToStoreInCachePerEntity.
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getMaxEntitiesToStoreInCachePerEntity().
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setMaxEntitiesToStoreInCachePerEntity().
+//                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setMaxEntitiesToStoreInCachePerEntity().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#keepLoadedReferencesOutOfTransaction.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getKeepLoadedReferencesOutOfTransaction().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setKeepLoadedReferencesOutOfTransaction().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setKeepLoadedReferencesOutOfTransaction().(value)
           /**
            * Turns on "mode" for Exposed DAO to store relations (after they were loaded) within the entity that will
            * allow access to them outside the transaction.
@@ -392,7 +543,15 @@
 //                                                 display_name value
 //                                                 documentation ```kotlin\nvalue: Boolean\n```\n\n----\n\n\n Turns on "mode" for Exposed DAO to store relations (after they were loaded) within the entity that will\n allow access to them outside the transaction.\n Useful when [eager loading](https://github.com/JetBrains/Exposed/wiki/DAO#eager-loading) is used.\n
 //                                                  ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#keepLoadedReferencesOutOfTransaction.
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getKeepLoadedReferencesOutOfTransaction().
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setKeepLoadedReferencesOutOfTransaction().
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setKeepLoadedReferencesOutOfTransaction().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#explicitDialect.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getExplicitDialect().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setExplicitDialect().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setExplicitDialect().(value)
           /**
            * Set the explicit dialect for a database.
            * This can be useful when working with unsupported dialects which have the same behavior as the one that
@@ -412,7 +571,15 @@
 //                            display_name value
 //                            documentation ```kotlin\nvalue: DatabaseDialect?\n```\n\n----\n\n\n Set the explicit dialect for a database.\n This can be useful when working with unsupported dialects which have the same behavior as the one that\n Exposed supports.\n
 //                             ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#explicitDialect.
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getExplicitDialect().
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setExplicitDialect().
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setExplicitDialect().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultSchema.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultSchema().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultSchema().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultSchema().(value)
           /**
            * Set the default schema for a database.
            */
@@ -430,7 +597,15 @@
 //                          display_name value
 //                          documentation ```kotlin\nvalue: Schema?\n```\n\n----\n\n\n Set the default schema for a database.\n
 //                           ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultSchema.
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultSchema().
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultSchema().
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultSchema().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#logTooMuchResultSetsThreshold.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getLogTooMuchResultSetsThreshold().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setLogTooMuchResultSetsThreshold().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setLogTooMuchResultSetsThreshold().(value)
           /**
            * Log too much result sets opened in parallel.
            * The error log will contain the stacktrace of the place in the code where a new result set occurs, and it
@@ -451,7 +626,15 @@
 //                                          display_name value
 //                                          documentation ```kotlin\nvalue: Int\n```\n\n----\n\n\n Log too much result sets opened in parallel.\n The error log will contain the stacktrace of the place in the code where a new result set occurs, and it\n exceeds the threshold.\n 0 value means no log needed.\n
 //                                           ^^^ reference semanticdb maven . . kotlin/Int#
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#logTooMuchResultSetsThreshold.
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getLogTooMuchResultSetsThreshold().
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setLogTooMuchResultSetsThreshold().
+//                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setLogTooMuchResultSetsThreshold().(value)
   
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#preserveKeywordCasing.
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getPreserveKeywordCasing().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setPreserveKeywordCasing().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setPreserveKeywordCasing().(value)
           /**
            * Toggle whether table and column identifiers that are also keywords should retain their case sensitivity.
            * Keeping user-defined case sensitivity (value set to `true`) is the default setting.
@@ -471,8 +654,16 @@
 //                                  display_name value
 //                                  documentation ```kotlin\nvalue: Boolean\n```\n\n----\n\n\n Toggle whether table and column identifiers that are also keywords should retain their case sensitivity.\n Keeping user-defined case sensitivity (value set to `true`) is the default setting.\n
 //                                   ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#preserveKeywordCasing.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getPreserveKeywordCasing().
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setPreserveKeywordCasing().
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setPreserveKeywordCasing().(value)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#`<init>`().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Companion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Companion#`<init>`().
       companion object {
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Companion# 42:5
 //                       display_name Companion
@@ -480,7 +671,9 @@
 //    ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Companion#`<init>`(). 42:5
 //                       display_name Companion
 //                       documentation ```kotlin\nprivate constructor(): DatabaseConfig.Companion\n```
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Companion#invoke().
           // TODO make sure R2dbcDatabaseConfig has constructor function so that it is compatible with JDBC
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Companion#invoke().(body)
           operator fun invoke(body: Builder.() -> Unit = {}): DatabaseConfig {
 //                     ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Companion#invoke().
 //                            display_name invoke
@@ -490,6 +683,8 @@
 //                                 documentation ```kotlin\nbody: DatabaseConfig.Builder.() -> Unit = ...\n```
 //                                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Function1#
 //                                                            ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Companion#invoke().(body)
+//            ⌄ enclosing_range_start local 0
               val builder = Builder().apply(body)
 //                ^^^^^^^ definition local 0
 //                        display_name builder
@@ -497,6 +692,7 @@
 //                          ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#`<init>`().
 //                                    ^^^^^ reference semanticdb maven . . kotlin/apply().
 //                                          ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Companion#invoke().(body)
+//                                              ⌃ enclosing_range_end local 0
               require(builder.defaultMaxAttempts > 0) { "defaultMaxAttempts must be set to perform at least 1 attempt." }
 //            ^^^^^^^ reference semanticdb maven . . kotlin/require(+1).
 //                    ^^^^^^^ reference local 0
@@ -506,6 +702,8 @@
 //                                               ^ reference semanticdb maven . . kotlin/Int#compareTo(+2).
   
               // TODO make default implementation to simplify & call constructor func instead
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#`<init>`().
               return object : DatabaseConfig {
 //                   ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#
 //                          display_name <anonymous>
@@ -515,11 +713,13 @@
 //                          display_name <anonymous>
 //                          documentation ```kotlin\nprivate constructor(): <anonymous>\n```
 //                            ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#sqlLogger.
                   override val sqlLogger: SqlLogger
 //                             ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#sqlLogger.
 //                                       display_name sqlLogger
 //                                       documentation ```kotlin\npublic open override val sqlLogger: SqlLogger\n```
 //                                        ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/SqlLogger#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getSqlLogger().
                       get() = builder.sqlLogger ?: Slf4jSqlDebugLogger
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getSqlLogger().
 //                        display_name sqlLogger
@@ -528,11 +728,15 @@
 //                                    ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getSqlLogger().
 //                                    ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setSqlLogger().
 //                                    ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#sqlLogger.
+//                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#sqlLogger.
+//                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getSqlLogger().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#useNestedTransactions.
                   override val useNestedTransactions: Boolean
 //                             ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#useNestedTransactions.
 //                                                   display_name useNestedTransactions
 //                                                   documentation ```kotlin\npublic open override val useNestedTransactions: Boolean\n```
 //                                                    ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getUseNestedTransactions().
                       get() = builder.useNestedTransactions
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getUseNestedTransactions().
 //                        display_name useNestedTransactions
@@ -541,11 +745,15 @@
 //                                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getUseNestedTransactions().
 //                                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setUseNestedTransactions().
 //                                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#useNestedTransactions.
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#useNestedTransactions.
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getUseNestedTransactions().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultFetchSize.
                   override val defaultFetchSize: Int?
 //                             ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultFetchSize.
 //                                              display_name defaultFetchSize
 //                                              documentation ```kotlin\npublic open override val defaultFetchSize: Int?\n```
 //                                               ^^^^ reference semanticdb maven . . kotlin/Int#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultFetchSize().
                       get() = builder.defaultFetchSize
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultFetchSize().
 //                        display_name defaultFetchSize
@@ -554,11 +762,15 @@
 //                                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultFetchSize.
 //                                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultFetchSize().
 //                                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultFetchSize().
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultFetchSize.
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultFetchSize().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultIsolationLevel.
                   override val defaultIsolationLevel: Int
 //                             ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultIsolationLevel.
 //                                                   display_name defaultIsolationLevel
 //                                                   documentation ```kotlin\npublic open override val defaultIsolationLevel: Int\n```
 //                                                    ^^^ reference semanticdb maven . . kotlin/Int#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultIsolationLevel().
                       get() = builder.defaultIsolationLevel
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultIsolationLevel().
 //                        display_name defaultIsolationLevel
@@ -567,11 +779,15 @@
 //                                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultIsolationLevel.
 //                                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultIsolationLevel().
 //                                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultIsolationLevel().
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultIsolationLevel.
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultIsolationLevel().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultMaxAttempts.
                   override val defaultMaxAttempts: Int
 //                             ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultMaxAttempts.
 //                                                display_name defaultMaxAttempts
 //                                                documentation ```kotlin\npublic open override val defaultMaxAttempts: Int\n```
 //                                                 ^^^ reference semanticdb maven . . kotlin/Int#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultMaxAttempts().
                       get() = builder.defaultMaxAttempts
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultMaxAttempts().
 //                        display_name defaultMaxAttempts
@@ -580,11 +796,15 @@
 //                                    ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultMaxAttempts.
 //                                    ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultMaxAttempts().
 //                                    ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMaxAttempts().
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultMaxAttempts.
+//                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultMaxAttempts().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultMinRetryDelay.
                   override val defaultMinRetryDelay: Long
 //                             ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultMinRetryDelay.
 //                                                  display_name defaultMinRetryDelay
 //                                                  documentation ```kotlin\npublic open override val defaultMinRetryDelay: Long\n```
 //                                                   ^^^^ reference semanticdb maven . . kotlin/Long#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultMinRetryDelay().
                       get() = builder.defaultMinRetryDelay
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultMinRetryDelay().
 //                        display_name defaultMinRetryDelay
@@ -593,11 +813,15 @@
 //                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultMinRetryDelay.
 //                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultMinRetryDelay().
 //                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMinRetryDelay().
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultMinRetryDelay.
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultMinRetryDelay().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultMaxRetryDelay.
                   override val defaultMaxRetryDelay: Long
 //                             ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultMaxRetryDelay.
 //                                                  display_name defaultMaxRetryDelay
 //                                                  documentation ```kotlin\npublic open override val defaultMaxRetryDelay: Long\n```
 //                                                   ^^^^ reference semanticdb maven . . kotlin/Long#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultMaxRetryDelay().
                       get() = builder.defaultMaxRetryDelay
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultMaxRetryDelay().
 //                        display_name defaultMaxRetryDelay
@@ -606,11 +830,15 @@
 //                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultMaxRetryDelay.
 //                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultMaxRetryDelay().
 //                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultMaxRetryDelay().
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultMaxRetryDelay.
+//                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultMaxRetryDelay().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultReadOnly.
                   override val defaultReadOnly: Boolean
 //                             ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultReadOnly.
 //                                             display_name defaultReadOnly
 //                                             documentation ```kotlin\npublic open override val defaultReadOnly: Boolean\n```
 //                                              ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultReadOnly().
                       get() = builder.defaultReadOnly
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultReadOnly().
 //                        display_name defaultReadOnly
@@ -619,11 +847,15 @@
 //                                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultReadOnly.
 //                                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultReadOnly().
 //                                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultReadOnly().
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultReadOnly.
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultReadOnly().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#warnLongQueriesDuration.
                   override val warnLongQueriesDuration: Long?
 //                             ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#warnLongQueriesDuration.
 //                                                     display_name warnLongQueriesDuration
 //                                                     documentation ```kotlin\npublic open override val warnLongQueriesDuration: Long?\n```
 //                                                      ^^^^^ reference semanticdb maven . . kotlin/Long#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getWarnLongQueriesDuration().
                       get() = builder.warnLongQueriesDuration
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getWarnLongQueriesDuration().
 //                        display_name warnLongQueriesDuration
@@ -632,11 +864,15 @@
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getWarnLongQueriesDuration().
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setWarnLongQueriesDuration().
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#warnLongQueriesDuration.
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#warnLongQueriesDuration.
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getWarnLongQueriesDuration().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#maxEntitiesToStoreInCachePerEntity.
                   override val maxEntitiesToStoreInCachePerEntity: Int
 //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#maxEntitiesToStoreInCachePerEntity.
 //                                                                display_name maxEntitiesToStoreInCachePerEntity
 //                                                                documentation ```kotlin\npublic open override val maxEntitiesToStoreInCachePerEntity: Int\n```
 //                                                                 ^^^ reference semanticdb maven . . kotlin/Int#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getMaxEntitiesToStoreInCachePerEntity().
                       get() = builder.maxEntitiesToStoreInCachePerEntity
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getMaxEntitiesToStoreInCachePerEntity().
 //                        display_name maxEntitiesToStoreInCachePerEntity
@@ -645,11 +881,15 @@
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getMaxEntitiesToStoreInCachePerEntity().
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#maxEntitiesToStoreInCachePerEntity.
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setMaxEntitiesToStoreInCachePerEntity().
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#maxEntitiesToStoreInCachePerEntity.
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getMaxEntitiesToStoreInCachePerEntity().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#keepLoadedReferencesOutOfTransaction.
                   override val keepLoadedReferencesOutOfTransaction: Boolean
 //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#keepLoadedReferencesOutOfTransaction.
 //                                                                  display_name keepLoadedReferencesOutOfTransaction
 //                                                                  documentation ```kotlin\npublic open override val keepLoadedReferencesOutOfTransaction: Boolean\n```
 //                                                                   ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getKeepLoadedReferencesOutOfTransaction().
                       get() = builder.keepLoadedReferencesOutOfTransaction
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getKeepLoadedReferencesOutOfTransaction().
 //                        display_name keepLoadedReferencesOutOfTransaction
@@ -658,11 +898,15 @@
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getKeepLoadedReferencesOutOfTransaction().
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#keepLoadedReferencesOutOfTransaction.
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setKeepLoadedReferencesOutOfTransaction().
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#keepLoadedReferencesOutOfTransaction.
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getKeepLoadedReferencesOutOfTransaction().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#explicitDialect.
                   override val explicitDialect: DatabaseDialect?
 //                             ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#explicitDialect.
 //                                             display_name explicitDialect
 //                                             documentation ```kotlin\npublic open override val explicitDialect: DatabaseDialect?\n```
 //                                              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getExplicitDialect().
                       get() = builder.explicitDialect
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getExplicitDialect().
 //                        display_name explicitDialect
@@ -671,11 +915,15 @@
 //                                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#explicitDialect.
 //                                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getExplicitDialect().
 //                                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setExplicitDialect().
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#explicitDialect.
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getExplicitDialect().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultSchema.
                   override val defaultSchema: Schema?
 //                             ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultSchema.
 //                                           display_name defaultSchema
 //                                           documentation ```kotlin\npublic open override val defaultSchema: Schema?\n```
 //                                            ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Schema#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultSchema().
                       get() = builder.defaultSchema
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultSchema().
 //                        display_name defaultSchema
@@ -684,11 +932,15 @@
 //                                    ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#defaultSchema.
 //                                    ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getDefaultSchema().
 //                                    ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setDefaultSchema().
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#defaultSchema.
+//                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getDefaultSchema().
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#logTooMuchResultSetsThreshold.
                   override val logTooMuchResultSetsThreshold: Int
 //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#logTooMuchResultSetsThreshold.
 //                                                           display_name logTooMuchResultSetsThreshold
 //                                                           documentation ```kotlin\npublic open override val logTooMuchResultSetsThreshold: Int\n```
 //                                                            ^^^ reference semanticdb maven . . kotlin/Int#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getLogTooMuchResultSetsThreshold().
                       get() = builder.logTooMuchResultSetsThreshold
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getLogTooMuchResultSetsThreshold().
 //                        display_name logTooMuchResultSetsThreshold
@@ -697,13 +949,17 @@
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getLogTooMuchResultSetsThreshold().
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#logTooMuchResultSetsThreshold.
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setLogTooMuchResultSetsThreshold().
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#logTooMuchResultSetsThreshold.
+//                                                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getLogTooMuchResultSetsThreshold().
   
+//                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#preserveKeywordCasing.
                   @OptIn(ExperimentalKeywordApi::class)
                   override val preserveKeywordCasing: Boolean
 //                             ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#preserveKeywordCasing.
 //                                                   display_name preserveKeywordCasing
 //                                                   documentation ```kotlin\n@OptIn(...) public open override val preserveKeywordCasing: Boolean\n```
 //                                                    ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getPreserveKeywordCasing().
                       get() = builder.preserveKeywordCasing
 //                    ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getPreserveKeywordCasing().
 //                        display_name preserveKeywordCasing
@@ -712,7 +968,15 @@
 //                                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#getPreserveKeywordCasing().
 //                                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#preserveKeywordCasing.
 //                                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Builder#setPreserveKeywordCasing().
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#preserveKeywordCasing.
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#getPreserveKeywordCasing().
               }
+//            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#
+//            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/`<anonymous object at 6298>`#`<init>`().
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Companion#invoke().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Companion#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#Companion#`<init>`().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseConfig#

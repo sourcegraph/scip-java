@@ -43,6 +43,8 @@
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/util/
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#`<init>`().
   internal object H2DataTypeProvider : DataTypeProvider() {
 //                ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#
 //                                   display_name H2DataTypeProvider
@@ -52,20 +54,26 @@
 //                                   display_name H2DataTypeProvider
 //                                   documentation ```kotlin\nprivate constructor(): H2DataTypeProvider\n```
 //                                     ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#binaryType().
       override fun binaryType(): String = "VARBINARY"
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#binaryType().
 //                            display_name binaryType
 //                            documentation ```kotlin\npublic open override fun binaryType(): String\n```
 //                            relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#binaryType().
 //                               ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#binaryType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#uuidType().
       override fun uuidType(): String = "UUID"
 //                 ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#uuidType().
 //                          display_name uuidType
 //                          documentation ```kotlin\npublic open override fun uuidType(): String\n```
 //                          relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#uuidType().
 //                             ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#uuidType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#uuidToDB().
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#uuidToDB().(value)
       override fun uuidToDB(value: UUID): Any = value
 //                 ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#uuidToDB().
 //                          display_name uuidToDB
@@ -77,35 +85,47 @@
 //                                 ^^^^ reference semanticdb maven jdk 11 java/util/UUID#
 //                                        ^^^ reference semanticdb maven . . kotlin/Any#
 //                                              ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#uuidToDB().(value)
+//                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#uuidToDB().(value)
+//                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#uuidToDB().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#dateTimeType().
       override fun dateTimeType(): String = "DATETIME(9)"
 //                 ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#dateTimeType().
 //                              display_name dateTimeType
 //                              documentation ```kotlin\npublic open override fun dateTimeType(): String\n```
 //                              relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#dateTimeType().
 //                                 ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#dateTimeType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#timestampType().
       override fun timestampType(): String = "TIMESTAMP(9)"
 //                 ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#timestampType().
 //                               display_name timestampType
 //                               documentation ```kotlin\npublic open override fun timestampType(): String\n```
 //                               relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#timestampType().
 //                                  ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#timestampType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#timestampWithTimeZoneType().
       override fun timestampWithTimeZoneType(): String = "TIMESTAMP(9) WITH TIME ZONE"
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#timestampWithTimeZoneType().
 //                                           display_name timestampWithTimeZoneType
 //                                           documentation ```kotlin\npublic open override fun timestampWithTimeZoneType(): String\n```
 //                                           relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#timestampWithTimeZoneType().
 //                                              ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#timestampWithTimeZoneType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#jsonBType().
       override fun jsonBType(): String = "JSON"
 //                 ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#jsonBType().
 //                           display_name jsonBType
 //                           documentation ```kotlin\npublic open override fun jsonBType(): String\n```
 //                           relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#jsonBType().
 //                              ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#jsonBType().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#hexToDb().
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#hexToDb().(hexString)
       override fun hexToDb(hexString: String): String = "X'$hexString'"
 //                 ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#hexToDb().
 //                         display_name hexToDb
@@ -117,8 +137,14 @@
 //                                    ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                             ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                          ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#hexToDb().(hexString)
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#hexToDb().(hexString)
+//                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#hexToDb().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2DataTypeProvider#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#`<init>`().
   internal object H2FunctionProvider : FunctionProvider() {
 //                ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#
 //                                   display_name H2FunctionProvider
@@ -128,11 +154,13 @@
 //                                   display_name H2FunctionProvider
 //                                   documentation ```kotlin\nprivate constructor(): H2FunctionProvider\n```\n\n----\n\n\n Implementation of [FunctionProvider.locate]\n Note: search is case-sensitive\n
 //                                     ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#isH2Oracle.
       private val DatabaseDialect.isH2Oracle: Boolean
 //                                ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#isH2Oracle.
 //                                           display_name isH2Oracle
 //                                           documentation ```kotlin\nprivate final val DatabaseDialect.isH2Oracle: Boolean\n```
 //                                            ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#getIsH2Oracle().
           get() = h2Mode == H2Dialect.H2CompatibilityMode.Oracle
 //        ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#getIsH2Oracle().
 //            display_name isH2Oracle
@@ -140,7 +168,12 @@
 //                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getH2Mode().
 //                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/h2Mode.
 //                                                        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#Oracle.
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#isH2Oracle.
+//                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#getIsH2Oracle().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#nextVal().
+//                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#nextVal().(seq)
+//                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#nextVal().(builder)
       override fun nextVal(seq: Sequence, builder: QueryBuilder) =
 //                 ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#nextVal().
 //                         display_name nextVal
@@ -154,15 +187,23 @@
 //                                                display_name builder
 //                                                documentation ```kotlin\nbuilder: QueryBuilder\n```
 //                                                 ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
+//                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#nextVal().(seq)
+//                                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#nextVal().(builder)
           @OptIn(InternalApi::class)
+//              ⌄ enclosing_range_start local 0
           when ((CoreTransactionManager.currentTransaction().db.dialect as H2Dialect).majorVersion) {
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 0
+//                                                                                                 display_name <when-subject>
+//                                                                                                 documentation ```kotlin\nlocal val <when-subject>: H2Dialect.H2MajorVersion\n```
 //                                      ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentTransaction().
 //                                                           ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#db.
 //                                                           ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getDb().
 //                                                              ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialect.
 //                                                              ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDialect().
+//                                                                         ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#
 //                                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getMajorVersion().
 //                                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#majorVersion.
+//                                                                                               ⌃ enclosing_range_end local 0
               H2Dialect.H2MajorVersion.One -> super.nextVal(seq, builder)
 //                                     ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#One.
 //                                                  ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#nextVal().
@@ -179,7 +220,14 @@
 //                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Sequence#identifier.
               }
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#nextVal().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().[T]
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().(expression)
+//                                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().(lower)
+//                                                                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().(upper)
+//                                                                                     ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().(queryBuilder)
       override fun <T> arraySlice(expression: Expression<T>, lower: Int?, upper: Int?, queryBuilder: QueryBuilder) {
 //                  ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().[T]
 //                    display_name FirTypeParameterSymbol T
@@ -204,6 +252,11 @@
 //                                                                                                  display_name queryBuilder
 //                                                                                                  documentation ```kotlin\nqueryBuilder: QueryBuilder\n```
 //                                                                                                   ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().[T]
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().(expression)
+//                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().(lower)
+//                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().(upper)
+//                                                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().(queryBuilder)
           queryBuilder {
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().(queryBuilder)
@@ -214,63 +267,82 @@
 //                                                         ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().(upper)
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#arraySlice().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().
       override fun insert(
 //                 ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().
 //                        display_name insert
 //                        documentation ```kotlin\npublic open override fun insert(ignore: Boolean, table: Table, columns: List<Column<*>>, expr: String, transaction: Transaction): String\n```
 //                        relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#insert().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(ignore)
           ignore: Boolean,
 //        ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(ignore)
 //               display_name ignore
 //               documentation ```kotlin\nignore: Boolean\n```
 //                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(ignore)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(table)
           table: Table,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(table)
 //              display_name table
 //              documentation ```kotlin\ntable: Table\n```
 //               ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(table)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(columns)
           columns: List<Column<*>>,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(columns)
 //                display_name columns
 //                documentation ```kotlin\ncolumns: List<Column<*>>\n```
 //                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(columns)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(expr)
           expr: String,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(expr)
 //             display_name expr
 //             documentation ```kotlin\nexpr: String\n```
 //              ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(expr)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(transaction)
           transaction: Transaction
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(transaction)
 //                    display_name transaction
 //                    documentation ```kotlin\ntransaction: Transaction\n```
 //                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(transaction)
       ): String {
 //       ^^^^^^ reference semanticdb maven . . kotlin/String#
+//        ⌄ enclosing_range_start local 1
           val uniqueCols = mutableSetOf<Column<*>>()
-//            ^^^^^^^^^^ definition local 0
+//            ^^^^^^^^^^ definition local 1
 //                       display_name uniqueCols
 //                       documentation ```kotlin\nlocal val uniqueCols: MutableSet<Column<*>>\n```
 //                         ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/mutableSetOf().
+//                                                 ⌃ enclosing_range_end local 1
+//                             ⌄ enclosing_range_start local 2
+//                                                                 ⌄ enclosing_range_start local 3
           table.indices.filter { it.unique }.flatMapTo(uniqueCols) { it.columns }
 //        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(table)
 //              ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#getIndices().
 //              ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#indices.
 //                      ^^^^^^ reference semanticdb maven . . kotlin/collections/filter(+9).
-//                             ^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                             ^^^^^^^^^^^^^ definition local 2
 //                                           display_name it
-//                                           documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                               ^^ reference semanticdb maven . . (it)
+//                                           documentation ```kotlin\nit: Index\n```
+//                               ^^ reference local 2
 //                                  ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#getUnique().
 //                                  ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#unique.
 //                                           ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/flatMapTo(+10).
-//                                                     ^^^^^^^^^^ reference local 0
-//                                                                 ^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                     ^^^^^^^^^^ reference local 1
+//                                                                 ^^^^^^^^^^^^^^ definition local 3
 //                                                                                display_name it
-//                                                                                documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                                                   ^^ reference semanticdb maven . . (it)
+//                                                                                documentation ```kotlin\nit: Index\n```
+//                                                                   ^^ reference local 3
 //                                                                      ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#columns.
 //                                                                      ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#getColumns().
+//                                         ⌃ enclosing_range_end local 2
+//                                                                              ⌃ enclosing_range_end local 3
+//                                         ⌄ enclosing_range_start local 4
           table.primaryKey?.columns?.let { primaryKeys ->
 //        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(table)
 //              ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#getPrimaryKey().
@@ -278,16 +350,18 @@
 //                          ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#PrimaryKey#columns.
 //                          ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#PrimaryKey#getColumns().
 //                                   ^^^ reference semanticdb maven . . kotlin/let().
-//                                         ^^^^^^^^^^^ definition semanticdb maven . . (primaryKeys)
+//                                         ^^^^^^^^^^^ definition local 4
 //                                                     display_name primaryKeys
 //                                                     documentation ```kotlin\nprimaryKeys: Array<Column<*>>\n```
+//                                                   ⌃ enclosing_range_end local 4
               uniqueCols += primaryKeys
-//            ^^^^^^^^^^ reference local 0
+//            ^^^^^^^^^^ reference local 1
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/plusAssign(+2).
-//                          ^^^^^^^^^^^ reference semanticdb maven . . (primaryKeys)
+//                          ^^^^^^^^^^^ reference local 4
           }
+//        ⌄ enclosing_range_start local 5
           val h2Dialect = transaction.db.dialect as H2Dialect
-//            ^^^^^^^^^ definition local 1
+//            ^^^^^^^^^ definition local 5
 //                      display_name h2Dialect
 //                      documentation ```kotlin\nlocal val h2Dialect: H2Dialect\n```
 //                        ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(transaction)
@@ -295,32 +369,39 @@
 //                                    ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getDb().
 //                                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialect.
 //                                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDialect().
+//                                                  ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#
+//                                                          ⌃ enclosing_range_end local 5
+//        ⌄ enclosing_range_start local 6
           val version = h2Dialect.version
-//            ^^^^^^^ definition local 2
+//            ^^^^^^^ definition local 6
 //                    display_name version
 //                    documentation ```kotlin\nlocal val version: String\n```
-//                      ^^^^^^^^^ reference local 1
+//                      ^^^^^^^^^ reference local 5
 //                                ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getVersion().
 //                                ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#version.
+//                                      ⌃ enclosing_range_end local 6
+//        ⌄ enclosing_range_start local 7
           val isMySQLMode = h2Dialect.h2Mode == H2Dialect.H2CompatibilityMode.MySQL
-//            ^^^^^^^^^^^ definition local 3
+//            ^^^^^^^^^^^ definition local 7
 //                        display_name isMySQLMode
 //                        documentation ```kotlin\nlocal val isMySQLMode: Boolean\n```
-//                          ^^^^^^^^^ reference local 1
+//                          ^^^^^^^^^ reference local 5
 //                                    ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getH2Mode().
 //                                    ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#h2Mode.
 //                                                                            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#MySQL.
+//                                                                                ⌃ enclosing_range_end local 7
           return when {
               // INSERT IGNORE support added in H2 version 1.4.197 (2018-03-18)
               ignore && uniqueCols.isNotEmpty() && isMySQLMode && version < "1.4.197" -> {
 //            ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(ignore)
-//                      ^^^^^^^^^^ reference local 0
+//                      ^^^^^^^^^^ reference local 1
 //                                 ^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/isNotEmpty(+9).
-//                                                 ^^^^^^^^^^^ reference local 3
-//                                                                ^^^^^^^ reference local 2
+//                                                 ^^^^^^^^^^^ reference local 7
+//                                                                ^^^^^^^ reference local 6
 //                                                                        ^ reference semanticdb maven . . kotlin/String#compareTo().
+//                ⌄ enclosing_range_start local 8
                   val def = super.insert(false, table, columns, expr, transaction)
-//                    ^^^ definition local 4
+//                    ^^^ definition local 8
 //                        display_name def
 //                        documentation ```kotlin\nlocal val def: String\n```
 //                                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#insert().
@@ -328,27 +409,30 @@
 //                                                     ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(columns)
 //                                                              ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(expr)
 //                                                                    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(transaction)
+//                                                                               ⌃ enclosing_range_end local 8
+//                                                                            ⌄ enclosing_range_start local 9
                   def + " ON DUPLICATE KEY UPDATE " + uniqueCols.joinToString { "${transaction.identity(it)}=VALUES(${transaction.identity(it)})" }
-//                ^^^ reference local 4
+//                ^^^ reference local 8
 //                    ^ reference semanticdb maven . . kotlin/String#plus().
 //                                                  ^ reference semanticdb maven . . kotlin/String#plus().
-//                                                    ^^^^^^^^^^ reference local 0
+//                                                    ^^^^^^^^^^ reference local 1
 //                                                               ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/joinToString(+9).
-//                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 9
 //                                                                                                                                                  display_name it
-//                                                                                                                                                  documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
+//                                                                                                                                                  documentation ```kotlin\nit: Column<*>\n```
 //                                                                                 ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(transaction)
 //                                                                                             ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#identity(+1).
-//                                                                                                      ^^ reference semanticdb maven . . (it)
+//                                                                                                      ^^ reference local 9
 //                                                                                                                    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(transaction)
 //                                                                                                                                ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#identity(+1).
-//                                                                                                                                         ^^ reference semanticdb maven . . (it)
+//                                                                                                                                         ^^ reference local 9
+//                                                                                                                                                ⌃ enclosing_range_end local 9
               }
               ignore && uniqueCols.isNotEmpty() && isMySQLMode -> {
 //            ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(ignore)
-//                      ^^^^^^^^^^ reference local 0
+//                      ^^^^^^^^^^ reference local 1
 //                                 ^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/isNotEmpty(+9).
-//                                                 ^^^^^^^^^^^ reference local 3
+//                                                 ^^^^^^^^^^^ reference local 7
                   super.insert(false, table, columns, expr, transaction).replace("INSERT", "INSERT IGNORE")
 //                      ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#insert().
 //                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(table)
@@ -369,37 +453,49 @@
 //                                                              ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().(transaction)
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#insert().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().
       override fun update(
 //                 ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().
 //                        display_name update
 //                        documentation ```kotlin\npublic open override fun update(targets: Join, columnsAndValues: List<Pair<Column<*>, Any?>>, limit: Int?, where: Op<Boolean>?, transaction: Transaction): String\n```
 //                        relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#update(+1).
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(targets)
           targets: Join,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(targets)
 //                display_name targets
 //                documentation ```kotlin\ntargets: Join\n```
 //                 ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(targets)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(columnsAndValues)
           columnsAndValues: List<Pair<Column<*>, Any?>>,
 //        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(columnsAndValues)
 //                         display_name columnsAndValues
 //                         documentation ```kotlin\ncolumnsAndValues: List<Pair<Column<*>, Any?>>\n```
 //                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(columnsAndValues)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(limit)
           limit: Int?,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(limit)
 //              display_name limit
 //              documentation ```kotlin\nlimit: Int?\n```
 //               ^^^^ reference semanticdb maven . . kotlin/Int#
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(limit)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(where)
           where: Op<Boolean>?,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(where)
 //              display_name where
 //              documentation ```kotlin\nwhere: Op<Boolean>?\n```
 //               ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(where)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(transaction)
           transaction: Transaction
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(transaction)
 //                    display_name transaction
 //                    documentation ```kotlin\ntransaction: Transaction\n```
 //                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(transaction)
       ): String = with(QueryBuilder(true)) {
 //       ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                ^^^^ reference semanticdb maven . . kotlin/with().
@@ -424,29 +520,34 @@
 //            ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(transaction)
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/throwUnsupportedException().
           }
+//        ⌄ enclosing_range_start local 10
+//                                                 ⌄ enclosing_range_start local 11
           val tableToUpdate = columnsAndValues.map { it.first.table }.distinct().singleOrNull()
-//            ^^^^^^^^^^^^^ definition local 5
+//            ^^^^^^^^^^^^^ definition local 10
 //                          display_name tableToUpdate
 //                          documentation ```kotlin\nlocal val tableToUpdate: Table\n```
 //                            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(columnsAndValues)
 //                                             ^^^ reference semanticdb maven . . kotlin/collections/map(+9).
-//                                                 ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                 ^^^^^^^^^^^^^^^^^^ definition local 11
 //                                                                    display_name it
-//                                                                    documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                                   ^^ reference semanticdb maven . . (it)
+//                                                                    documentation ```kotlin\nit: Pair<Column<*>, Any?>\n```
+//                                                   ^^ reference local 11
 //                                                      ^^^^^ reference semanticdb maven . . kotlin/Pair#first.
 //                                                      ^^^^^ reference semanticdb maven . . kotlin/Pair#getFirst().
 //                                                            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getTable().
 //                                                            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#table.
 //                                                                    ^^^^^^^^ reference semanticdb maven . . kotlin/collections/distinct(+9).
 //                                                                               ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/singleOrNull(+19).
+//                                                                  ⌃ enclosing_range_end local 11
               ?: transaction.throwUnsupportedException(
 //               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(transaction)
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/throwUnsupportedException().
                   "H2 doesn't support UPDATE with join clause that uses columns from multiple tables."
               )
+//            ⌃ enclosing_range_end local 10
+//        ⌄ enclosing_range_start local 12
           val joinPart = targets.joinParts.singleOrNull()
-//            ^^^^^^^^ definition local 6
+//            ^^^^^^^^ definition local 12
 //                     display_name joinPart
 //                     documentation ```kotlin\nlocal val joinPart: Join.JoinPart\n```
 //                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(targets)
@@ -458,6 +559,7 @@
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/throwUnsupportedException().
                   "H2 doesn't support UPDATE with join clause that uses multiple tables to join."
               )
+//            ⌃ enclosing_range_end local 12
           targets.checkJoinTypes(StatementType.UPDATE)
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(targets)
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#checkJoinTypes().
@@ -465,79 +567,97 @@
   
           appendMergeIntoUsingJoinClause(tableToUpdate, targets, joinPart, transaction)
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().
-//                                       ^^^^^^^^^^^^^ reference local 5
+//                                       ^^^^^^^^^^^^^ reference local 10
 //                                                      ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(targets)
-//                                                               ^^^^^^^^ reference local 6
+//                                                               ^^^^^^^^ reference local 12
 //                                                                         ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(transaction)
           +" WHEN MATCHED THEN UPDATE SET "
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
+//                                          ⌄ enclosing_range_start local 13
+//                                           ⌄ enclosing_range_start local 14
+//                                                ⌄ enclosing_range_start local 15
           columnsAndValues.appendTo(this) { (col, value) ->
 //        ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(columnsAndValues)
 //                         ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/appendTo().
-//                                          ^^^^^^^^^^^^ definition semanticdb maven . . (`<destruct>`)
+//                                          ^^^^^^^^^^^^ definition local 13
 //                                                       display_name <destruct>
 //                                                       documentation ```kotlin\n<destruct>: Pair<Column<*>, Any?>\n```
-//                                           ^^^ definition local 7
+//                                           ^^^ reference local 13
+//                                           ^^^ definition local 14
 //                                               display_name col
 //                                               documentation ```kotlin\nlocal val col: Column<*>\n```
-//                                           ^^^ reference semanticdb maven . . (`<destruct>`)
 //                                           ^^^ reference semanticdb maven . . kotlin/Pair#component1().
-//                                                ^^^^^ definition local 8
+//                                                ^^^^^ reference local 13
+//                                                ^^^^^ definition local 15
 //                                                      display_name value
 //                                                      documentation ```kotlin\nlocal val value: Any?\n```
-//                                                ^^^^^ reference semanticdb maven . . (`<destruct>`)
 //                                                ^^^^^ reference semanticdb maven . . kotlin/Pair#component2().
+//                                             ⌃ enclosing_range_end local 14
+//                                                    ⌃ enclosing_range_end local 15
+//                                                     ⌃ enclosing_range_end local 13
               append("${transaction.fullIdentity(col)}=")
 //            ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#append(+1).
 //                      ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(transaction)
 //                                  ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#fullIdentity().
-//                                               ^^^ reference local 7
+//                                               ^^^ reference local 14
               registerArgument(col, value)
 //            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#registerArgument().
-//                             ^^^ reference local 7
-//                                  ^^^^^ reference local 8
+//                             ^^^ reference local 14
+//                                  ^^^^^ reference local 15
           }
   
+//                   ⌄ enclosing_range_start local 16
           where?.let {
 //        ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().(where)
 //               ^^^ reference semanticdb maven . . kotlin/let().
-//                   ^ definition semanticdb maven . . (it) 3:9
+//                   ^ definition local 16 3:9
 //                     display_name it
-//                     documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
+//                     documentation ```kotlin\nit: Op<Boolean>\n```
               +" WHERE "
 //            ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
               +it
 //            ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+2).
-//             ^^ reference semanticdb maven . . (it)
+//             ^^ reference local 16
           }
+//        ⌃ enclosing_range_end local 16
           toString()
 //        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#toString().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#update().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().
       private fun QueryBuilder.appendMergeIntoUsingJoinClause(
 //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().
 //                                                            display_name appendMergeIntoUsingJoinClause
 //                                                            documentation ```kotlin\nprivate final fun QueryBuilder.appendMergeIntoUsingJoinClause(target: Table, join: Join, joinPart: Join.JoinPart, transaction: Transaction): Unit\n```
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(target)
           target: Table,
 //        ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(target)
 //               display_name target
 //               documentation ```kotlin\ntarget: Table\n```
 //                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Table#
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(target)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(join)
           join: Join,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(join)
 //             display_name join
 //             documentation ```kotlin\njoin: Join\n```
 //              ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#
+//                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(join)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(joinPart)
           joinPart: Join.JoinPart,
 //        ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(joinPart)
 //                 display_name joinPart
 //                 documentation ```kotlin\njoinPart: Join.JoinPart\n```
 //                  ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#JoinPart#
+//                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(joinPart)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(transaction)
           transaction: Transaction
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(transaction)
 //                    display_name transaction
 //                    documentation ```kotlin\ntransaction: Transaction\n```
 //                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(transaction)
       ) {
           +"MERGE INTO "
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
@@ -547,63 +667,79 @@
 //                        ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(transaction)
           +" USING "
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
+//                                  ⌄ enclosing_range_start local 17
           (joinPart.joinPart.takeIf { it != target } ?: join.table).describe(transaction, this)
 //         ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(joinPart)
 //                  ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#JoinPart#getJoinPart().
 //                  ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#JoinPart#joinPart.
 //                           ^^^^^^ reference semanticdb maven . . kotlin/takeIf().
-//                                  ^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                  ^^^^^^^^^^^^^^^^ definition local 17
 //                                                   display_name it
-//                                                   documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                    ^^ reference semanticdb maven . . (it)
+//                                                   documentation ```kotlin\nit: ColumnSet\n```
+//                                    ^^ reference local 17
 //                                          ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(target)
 //                                                      ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(join)
 //                                                           ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#getTable().
 //                                                           ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#table.
 //                                                                  ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnSet#describe().
 //                                                                           ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(transaction)
+//                                                 ⌃ enclosing_range_end local 17
           +" ON "
 //        ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
           joinPart.appendConditions(this)
 //        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().(joinPart)
 //                 ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#JoinPart#appendConditions().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().
       override fun delete(
 //                 ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().
 //                        display_name delete
 //                        documentation ```kotlin\npublic open override fun delete(ignore: Boolean, targets: Join, targetTables: List<Table>, where: Op<Boolean>?, limit: Int?, transaction: Transaction): String\n```
 //                        relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#delete(+1).
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(ignore)
           ignore: Boolean,
 //        ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(ignore)
 //               display_name ignore
 //               documentation ```kotlin\nignore: Boolean\n```
 //                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(ignore)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(targets)
           targets: Join,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(targets)
 //                display_name targets
 //                documentation ```kotlin\ntargets: Join\n```
 //                 ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Join#
+//                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(targets)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(targetTables)
           targetTables: List<Table>,
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(targetTables)
 //                     display_name targetTables
 //                     documentation ```kotlin\ntargetTables: List<Table>\n```
 //                      ^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(targetTables)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(where)
           where: Op<Boolean>?,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(where)
 //              display_name where
 //              documentation ```kotlin\nwhere: Op<Boolean>?\n```
 //               ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Op#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(where)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(limit)
           limit: Int?,
 //        ^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(limit)
 //              display_name limit
 //              documentation ```kotlin\nlimit: Int?\n```
 //               ^^^^ reference semanticdb maven . . kotlin/Int#
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(limit)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(transaction)
           transaction: Transaction
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(transaction)
 //                    display_name transaction
 //                    documentation ```kotlin\ntransaction: Transaction\n```
 //                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(transaction)
       ): String {
 //       ^^^^^^ reference semanticdb maven . . kotlin/String#
           if (ignore) {
@@ -618,8 +754,9 @@
 //            ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(transaction)
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/throwUnsupportedException().
           }
+//        ⌄ enclosing_range_start local 18
           val tableToDelete = targetTables.singleOrNull()
-//            ^^^^^^^^^^^^^ definition local 9
+//            ^^^^^^^^^^^^^ definition local 18
 //                          display_name tableToDelete
 //                          documentation ```kotlin\nlocal val tableToDelete: Table\n```
 //                            ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(targetTables)
@@ -629,8 +766,10 @@
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/throwUnsupportedException().
                   "H2 doesn't support DELETE from join relation with multiple tables to delete from"
               )
+//            ⌃ enclosing_range_end local 18
+//        ⌄ enclosing_range_start local 19
           val joinPart = targets.joinParts.singleOrNull()
-//            ^^^^^^^^ definition local 10
+//            ^^^^^^^^ definition local 19
 //                     display_name joinPart
 //                     documentation ```kotlin\nlocal val joinPart: Join.JoinPart\n```
 //                       ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(targets)
@@ -642,6 +781,7 @@
 //                           ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/exceptions/throwUnsupportedException().
                   "H2 doesn't support DELETE from join relation that uses multiple tables to join"
               )
+//            ⌃ enclosing_range_end local 19
           targets.checkJoinTypes(StatementType.DELETE)
 //        ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(targets)
 //                ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#checkJoinTypes().
@@ -652,35 +792,40 @@
 //                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#`<init>`().
               appendMergeIntoUsingJoinClause(tableToDelete, targets, joinPart, transaction)
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#appendMergeIntoUsingJoinClause().
-//                                           ^^^^^^^^^^^^^ reference local 9
+//                                           ^^^^^^^^^^^^^ reference local 18
 //                                                          ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(targets)
-//                                                                   ^^^^^^^^ reference local 10
+//                                                                   ^^^^^^^^ reference local 19
 //                                                                             ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(transaction)
               +" WHEN MATCHED"
 //            ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
+//                       ⌄ enclosing_range_start local 20
               where?.let {
 //            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().(where)
 //                   ^^^ reference semanticdb maven . . kotlin/let().
-//                       ^ definition semanticdb maven . . (it) 3:13
+//                       ^ definition local 20 3:13
 //                         display_name it
-//                         documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
+//                         documentation ```kotlin\nit: Op<Boolean>\n```
                   +" AND "
 //                ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
                   +it
 //                ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+2).
-//                 ^^ reference semanticdb maven . . (it)
+//                 ^^ reference local 20
               }
+//            ⌃ enclosing_range_end local 20
               +" THEN DELETE"
 //            ^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#unaryPlus(+1).
               toString()
 //            ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#toString().
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#delete().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().
       /**
        * Implementation of [FunctionProvider.locate]
        * Note: search is case-sensitive
        * */
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().[T]
       override fun <T : String?> locate(
 //                  ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().[T]
 //                    display_name FirTypeParameterSymbol T
@@ -689,21 +834,28 @@
 //                                      display_name locate
 //                                      documentation ```kotlin\npublic open override fun <T : String?> locate(queryBuilder: QueryBuilder, expr: Expression<T>, substring: String): Unit\n```\n\n----\n\n\n Implementation of [FunctionProvider.locate]\n Note: search is case-sensitive\n
 //                                      relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#locate().
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().[T]
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().(queryBuilder)
           queryBuilder: QueryBuilder,
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().(queryBuilder)
 //                     display_name queryBuilder
 //                     documentation ```kotlin\nqueryBuilder: QueryBuilder\n```
 //                      ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
+//                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().(queryBuilder)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().(expr)
           expr: Expression<T>,
 //        ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().(expr)
 //             display_name expr
 //             documentation ```kotlin\nexpr: Expression<T>\n```
 //              ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
+//                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().(expr)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().(substring)
           substring: String
 //        ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().(substring)
 //                  display_name substring
 //                  documentation ```kotlin\nsubstring: String\n```
 //                   ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().(substring)
       ) = queryBuilder {
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //        ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().(queryBuilder)
@@ -712,32 +864,42 @@
 //                            ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().(substring)
 //                                              ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().(expr)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#locate().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().
       override fun explain(
 //                 ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().
 //                         display_name explain
 //                         documentation ```kotlin\npublic open override fun explain(analyze: Boolean, options: String?, internalStatement: String, transaction: Transaction): String\n```
 //                         relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#explain().
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(analyze)
           analyze: Boolean,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(analyze)
 //                display_name analyze
 //                documentation ```kotlin\nanalyze: Boolean\n```
 //                 ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(analyze)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(options)
           options: String?,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(options)
 //                display_name options
 //                documentation ```kotlin\noptions: String?\n```
 //                 ^^^^^^^ reference semanticdb maven . . kotlin/String#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(options)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(internalStatement)
           internalStatement: String,
 //        ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(internalStatement)
 //                          display_name internalStatement
 //                          documentation ```kotlin\ninternalStatement: String\n```
 //                           ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(internalStatement)
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(transaction)
           transaction: Transaction
 //        ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(transaction)
 //                    display_name transaction
 //                    documentation ```kotlin\ntransaction: Transaction\n```
 //                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Transaction#
+//                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(transaction)
       ): String {
 //       ^^^^^^ reference semanticdb maven . . kotlin/String#
           if (options != null) {
@@ -752,7 +914,12 @@
 //                                            ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(internalStatement)
 //                                                               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().(transaction)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#explain().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#date().
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#date().[T]
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#date().(expr)
+//                                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#date().(queryBuilder)
       override fun <T> date(expr: Expression<T>, queryBuilder: QueryBuilder) = queryBuilder {
 //                  ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#date().[T]
 //                    display_name FirTypeParameterSymbol T
@@ -771,11 +938,19 @@
 //                                                             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                                             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //                                                                             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#date().(queryBuilder)
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#date().[T]
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#date().(expr)
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#date().(queryBuilder)
           append("CAST(", expr, " AS DATE)")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#date().(expr)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#date().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#time().
+//                  ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#time().[T]
+//                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#time().(expr)
+//                                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#time().(queryBuilder)
       override fun <T> time(expr: Expression<T>, queryBuilder: QueryBuilder) = queryBuilder {
 //                  ^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#time().[T]
 //                    display_name FirTypeParameterSymbol T
@@ -794,12 +969,20 @@
 //                                                             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#
 //                                                                             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/QueryBuilder#invoke().
 //                                                                             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#time().(queryBuilder)
+//                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#time().[T]
+//                                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#time().(expr)
+//                                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#time().(queryBuilder)
           append("FORMATDATETIME(", expr, ", 'HH:mm:ss.SSSSSSSSS')")
 //        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/append().
 //                                  ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#time().(expr)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#time().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2FunctionProvider#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#`<init>`().
   /**
    * H2 dialect implementation.
    */
@@ -815,6 +998,7 @@
 //                                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VendorDialect#DialectNameProvider#dialectName.
 //                                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VendorDialect#DialectNameProvider#getDialectName().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#toString().
       override fun toString(): String = "H2Dialect[$dialectName, $h2Mode]"
 //                 ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#toString().
 //                          display_name toString
@@ -825,7 +1009,15 @@
 //                                                  ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VendorDialect#DialectNameProvider#getDialectName().
 //                                                                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getH2Mode().
 //                                                                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#h2Mode.
+//                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#toString().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#values().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#valueOf().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#valueOf().(value)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#entries.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getEntries().
       enum class H2MajorVersion {
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Enum# 2:5
 //               ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#
@@ -852,7 +1044,16 @@
 //                              documentation ```kotlin\npublic get(): EnumEntries<H2Dialect.H2CompatibilityMode>\n```\n\n----\n\n H2 database compatibility modes that emulate the behavior of other specific databases.
           One, Two
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#`<init>`().
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#values().
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#valueOf().
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#valueOf().(value)
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#entries.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getEntries().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#version.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getVersion().
       @OptIn(InternalApi::class)
       internal val version by lazy {
 //                 ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getVersion().
@@ -869,7 +1070,11 @@
 //        ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#exactH2Version().
 //                                              ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentTransaction().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#version.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getVersion().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#majorVersion.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getMajorVersion().
       val majorVersion: H2MajorVersion by lazy {
 //        ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getMajorVersion().
 //                     display_name majorVersion
@@ -899,8 +1104,12 @@
 //                                                    ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#version.
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#majorVersion.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getMajorVersion().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#isSecondVersion.
       /** Indicates whether the H2 Database Engine version is greater than or equal to 2.0. */
+//                        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getIsSecondVersion().
       val isSecondVersion get() = majorVersion == H2MajorVersion.Two
 //        ^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#isSecondVersion.
 //                        display_name isSecondVersion
@@ -911,7 +1120,11 @@
 //                                ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getMajorVersion().
 //                                ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#majorVersion.
 //                                                               ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2MajorVersion#Two.
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#isSecondVersion.
+//                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getIsSecondVersion().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#exactH2Version().
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#exactH2Version().(transaction)
       private fun exactH2Version(transaction: Transaction): String = transaction.db.version.toString()
 //                ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#exactH2Version().
 //                               display_name exactH2Version
@@ -927,7 +1140,16 @@
 //                                                                                  ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getVersion().
 //                                                                                  ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#version.
 //                                                                                          ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Version#toString().
+//                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#exactH2Version().(transaction)
+//                                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#exactH2Version().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#values().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#valueOf().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#valueOf().(value)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#entries.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getEntries().
       /** H2 database compatibility modes that emulate the behavior of other specific databases. */
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Enum# 3:5
       enum class H2CompatibilityMode {
@@ -955,7 +1177,16 @@
 //                                   documentation ```kotlin\npublic get(): EnumEntries<H2Dialect.H2CompatibilityMode>\n```\n\n----\n\n H2 database compatibility modes that emulate the behavior of other specific databases.
           MySQL, MariaDB, SQLServer, Oracle, PostgreSQL
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#`<init>`().
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#values().
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#valueOf().
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#valueOf().(value)
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#entries.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getEntries().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#delegatedDialectNameProvider.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getDelegatedDialectNameProvider().
       /** The specific database name that an H2 compatibility mode delegates to. */
       val delegatedDialectNameProvider: DialectNameProvider? by lazy {
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#delegatedDialectNameProvider.
@@ -969,9 +1200,14 @@
 //                                                              ^^^^^^ reference semanticdb maven . . kotlin/getValue(). 9:5
 //                                                              ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#delegatedDialectNameProvider. 9:5
 //                                                              ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getDelegatedDialectNameProvider(). 9:5
+//              ⌄ enclosing_range_start local 21
           when (h2Mode) {
+//              ^^^^^^ definition local 21
+//                     display_name <when-subject>
+//                     documentation ```kotlin\nlocal val <when-subject>: H2Dialect.H2CompatibilityMode?\n```
 //              ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getH2Mode().
 //              ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#h2Mode.
+//                   ⌃ enclosing_range_end local 21
               H2CompatibilityMode.MySQL -> MysqlDialect
 //                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#MySQL.
               H2CompatibilityMode.MariaDB -> MariaDBDialect
@@ -985,7 +1221,13 @@
               else -> null
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#delegatedDialectNameProvider.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getDelegatedDialectNameProvider().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#delegatedDialect.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getDelegatedDialect().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#setDelegatedDialect().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#setDelegatedDialect().(value)
       private var delegatedDialect: DatabaseDialect? = null
 //                ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#delegatedDialect.
 //                                 display_name delegatedDialect
@@ -1000,13 +1242,19 @@
 //                                 display_name value
 //                                 documentation ```kotlin\nvalue: DatabaseDialect?\n```
 //                                  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#delegatedDialect.
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getDelegatedDialect().
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#setDelegatedDialect().
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#setDelegatedDialect().(value)
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#resolveDelegatedDialect().
       @OptIn(InternalApi::class)
       private fun resolveDelegatedDialect(): DatabaseDialect? {
 //                ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#resolveDelegatedDialect().
 //                                        display_name resolveDelegatedDialect
 //                                        documentation ```kotlin\n@OptIn(...) private final fun resolveDelegatedDialect(): DatabaseDialect?\n```
 //                                           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#
+//                                                                                               ⌄ enclosing_range_start local 22
           return delegatedDialect ?: delegatedDialectNameProvider?.dialectName?.lowercase()?.let {
 //               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#delegatedDialect.
 //               ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getDelegatedDialect().
@@ -1017,30 +1265,36 @@
 //                                                                 ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VendorDialect#DialectNameProvider#getDialectName().
 //                                                                              ^^^^^^^^^ reference semanticdb maven . . kotlin/text/lowercase(+2).
 //                                                                                           ^^^ reference semanticdb maven . . kotlin/let().
-//                                                                                               ^ definition semanticdb maven . . (it) 4:9
+//                                                                                               ^ definition local 22 4:9
 //                                                                                                 display_name it
-//                                                                                                 documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
+//                                                                                                 documentation ```kotlin\nit: String\n```
+//            ⌄ enclosing_range_start local 23
               val dialect = DatabaseApi.dialects[it]?.invoke() ?: error("Can't resolve dialect for $it")
-//                ^^^^^^^ definition local 11
+//                ^^^^^^^ definition local 23
 //                        display_name dialect
 //                        documentation ```kotlin\nlocal val dialect: DatabaseDialect\n```
 //                          ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/concurrent/ConcurrentHashMap#get().
 //                                      ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#dialects.
 //                                      ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#Companion#getDialects().
-//                                               ^^ reference semanticdb maven . . (it)
+//                                               ^^ reference local 22
 //                                                    ^^^^^^ reference semanticdb maven . . kotlin/Function0#invoke().
 //                                                                ^^^^^ reference semanticdb maven . . kotlin/error().
-//                                                                                                  ^^ reference semanticdb maven . . (it)
+//                                                                                                  ^^ reference local 22
+//                                                                                                     ⌃ enclosing_range_end local 23
               delegatedDialect = dialect
 //            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#delegatedDialect.
 //            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getDelegatedDialect().
 //            ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#setDelegatedDialect().
-//                               ^^^^^^^ reference local 11
+//                               ^^^^^^^ reference local 23
               dialect
-//            ^^^^^^^ reference local 11
+//            ^^^^^^^ reference local 23
           }
+//        ⌃ enclosing_range_end local 22
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#resolveDelegatedDialect().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#originalFunctionProvider.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getOriginalFunctionProvider().
       /** The regular H2 mode implementation of [FunctionProvider] instead of a delegated mode implementation. */
       val originalFunctionProvider: FunctionProvider = H2FunctionProvider
 //        ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getOriginalFunctionProvider().
@@ -1050,7 +1304,11 @@
 //                                 display_name originalFunctionProvider
 //                                 documentation ```kotlin\npublic final val originalFunctionProvider: FunctionProvider\n```\n\n----\n\n The regular H2 mode implementation of [FunctionProvider] instead of a delegated mode implementation.
 //                                  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/FunctionProvider#
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#originalFunctionProvider.
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getOriginalFunctionProvider().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#functionProvider.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getFunctionProvider().
       override val functionProvider: FunctionProvider by lazy {
 //                 ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#functionProvider.
 //                                  display_name functionProvider
@@ -1063,19 +1321,26 @@
 //                                                       ^^^^^^ reference semanticdb maven . . kotlin/getValue(). 2:5
 //                                                       ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#functionProvider. 2:5
 //                                                       ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getFunctionProvider(). 2:5
+//                                          ⌄ enclosing_range_start local 24
           resolveDelegatedDialect()?.takeIf { it !is MysqlDialect }?.functionProvider ?: originalFunctionProvider
 //        ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#resolveDelegatedDialect().
 //                                   ^^^^^^ reference semanticdb maven . . kotlin/takeIf().
-//                                          ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                          ^^^^^^^^^^^^^^^^^^^^^^^ definition local 24
 //                                                                  display_name it
-//                                                                  documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                            ^^ reference semanticdb maven . . (it)
+//                                                                  documentation ```kotlin\nit: DatabaseDialect\n```
+//                                            ^^ reference local 24
+//                                                   ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#
 //                                                                   ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#functionProvider.
 //                                                                   ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getFunctionProvider().
 //                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getOriginalFunctionProvider().
 //                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#originalFunctionProvider.
+//                                                                ⌃ enclosing_range_end local 24
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#functionProvider.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getFunctionProvider().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#originalDataTypeProvider.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getOriginalDataTypeProvider().
       /** The regular H2 mode implementation of [DataTypeProvider] instead of a delegated mode implementation. */
       val originalDataTypeProvider: DataTypeProvider = H2DataTypeProvider
 //        ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getOriginalDataTypeProvider().
@@ -1085,7 +1350,11 @@
 //                                 display_name originalDataTypeProvider
 //                                 documentation ```kotlin\npublic final val originalDataTypeProvider: DataTypeProvider\n```\n\n----\n\n The regular H2 mode implementation of [DataTypeProvider] instead of a delegated mode implementation.
 //                                  ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DataTypeProvider#
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#originalDataTypeProvider.
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getOriginalDataTypeProvider().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#dataTypeProvider.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getDataTypeProvider().
       override val dataTypeProvider: DataTypeProvider by lazy {
 //                 ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#dataTypeProvider.
 //                                  display_name dataTypeProvider
@@ -1098,19 +1367,26 @@
 //                                                       ^^^^^^ reference semanticdb maven . . kotlin/getValue(). 2:5
 //                                                       ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#dataTypeProvider. 2:5
 //                                                       ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getDataTypeProvider(). 2:5
+//                                          ⌄ enclosing_range_start local 25
           resolveDelegatedDialect()?.takeIf { it !is MysqlDialect }?.dataTypeProvider ?: originalDataTypeProvider
 //        ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#resolveDelegatedDialect().
 //                                   ^^^^^^ reference semanticdb maven . . kotlin/takeIf().
-//                                          ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                          ^^^^^^^^^^^^^^^^^^^^^^^ definition local 25
 //                                                                  display_name it
-//                                                                  documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                            ^^ reference semanticdb maven . . (it)
+//                                                                  documentation ```kotlin\nit: DatabaseDialect\n```
+//                                            ^^ reference local 25
+//                                                   ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/MysqlDialect#
 //                                                                   ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#dataTypeProvider.
 //                                                                   ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getDataTypeProvider().
 //                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getOriginalDataTypeProvider().
 //                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#originalDataTypeProvider.
+//                                                                ⌃ enclosing_range_end local 25
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#dataTypeProvider.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getDataTypeProvider().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#h2Mode.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getH2Mode().
       /** The H2 database compatibility mode retrieved from metadata. */
       val h2Mode: H2CompatibilityMode? by lazy {
 //        ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getH2Mode().
@@ -1124,9 +1400,10 @@
 //                                        ^^^^^^ reference semanticdb maven . . kotlin/getValue(). 12:5
 //                                        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getH2Mode(). 12:5
 //                                        ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#h2Mode. 12:5
+//        ⌄ enclosing_range_start local 26
           @OptIn(InternalApi::class)
           val modeValue = CoreTransactionManager.currentTransaction().db.dialectMode
-//            ^^^^^^^^^ definition local 12
+//            ^^^^^^^^^ definition local 26
 //                      display_name modeValue
 //                      documentation ```kotlin\n@OptIn(...) local val modeValue: String?\n```
 //                                               ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/CoreTransactionManager#currentTransaction().
@@ -1134,33 +1411,38 @@
 //                                                                    ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#getDb().
 //                                                                       ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#dialectMode.
 //                                                                       ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/DatabaseApi#getDialectMode().
+//                                                                                 ⌃ enclosing_range_end local 26
           when {
               modeValue == null -> null
-//            ^^^^^^^^^ reference local 12
+//            ^^^^^^^^^ reference local 26
               modeValue.equals("MySQL", ignoreCase = true) -> H2CompatibilityMode.MySQL
-//            ^^^^^^^^^ reference local 12
+//            ^^^^^^^^^ reference local 26
 //                      ^^^^^^ reference semanticdb maven . . kotlin/text/equals(+1).
 //                                                                                ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#MySQL.
               modeValue.equals("MariaDB", ignoreCase = true) -> H2CompatibilityMode.MariaDB
-//            ^^^^^^^^^ reference local 12
+//            ^^^^^^^^^ reference local 26
 //                      ^^^^^^ reference semanticdb maven . . kotlin/text/equals(+1).
 //                                                                                  ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#MariaDB.
               modeValue.equals("MSSQLServer", ignoreCase = true) -> H2CompatibilityMode.SQLServer
-//            ^^^^^^^^^ reference local 12
+//            ^^^^^^^^^ reference local 26
 //                      ^^^^^^ reference semanticdb maven . . kotlin/text/equals(+1).
 //                                                                                      ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#SQLServer.
               modeValue.equals("Oracle", ignoreCase = true) -> H2CompatibilityMode.Oracle
-//            ^^^^^^^^^ reference local 12
+//            ^^^^^^^^^ reference local 26
 //                      ^^^^^^ reference semanticdb maven . . kotlin/text/equals(+1).
 //                                                                                 ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#Oracle.
               modeValue.equals("PostgreSQL", ignoreCase = true) -> H2CompatibilityMode.PostgreSQL
-//            ^^^^^^^^^ reference local 12
+//            ^^^^^^^^^ reference local 26
 //                      ^^^^^^ reference semanticdb maven . . kotlin/text/equals(+1).
 //                                                                                     ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#PostgreSQL.
               else -> null
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#h2Mode.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getH2Mode().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#name.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getName().
       override val name: String by lazy {
 //                 ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getName().
 //                      display_name name
@@ -1173,9 +1455,14 @@
 //                                 ^^^^^^ reference semanticdb maven . . kotlin/getValue(). 5:5
 //                                 ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getName(). 5:5
 //                                 ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#name. 5:5
+//              ⌄ enclosing_range_start local 27
           when (h2Mode) {
+//              ^^^^^^ definition local 27
+//                     display_name <when-subject>
+//                     documentation ```kotlin\nlocal val <when-subject>: H2Dialect.H2CompatibilityMode?\n```
 //              ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getH2Mode().
 //              ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#h2Mode.
+//                   ⌃ enclosing_range_end local 27
               null -> dialectName
 //                    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VendorDialect#DialectNameProvider#dialectName.
 //                    ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VendorDialect#DialectNameProvider#getDialectName().
@@ -1188,7 +1475,11 @@
 //                                              ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#name.
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#name.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getName().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsMultipleGeneratedKeys.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsMultipleGeneratedKeys().
       override val supportsMultipleGeneratedKeys: Boolean by lazy { resolveDelegatedDialect()?.supportsMultipleGeneratedKeys ?: false }
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsMultipleGeneratedKeys().
 //                                               display_name supportsMultipleGeneratedKeys
@@ -1204,6 +1495,10 @@
 //                                                                  ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#resolveDelegatedDialect().
 //                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsMultipleGeneratedKeys().
 //                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsMultipleGeneratedKeys.
+//                                                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsMultipleGeneratedKeys.
+//                                                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsMultipleGeneratedKeys().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsOnlyIdentifiersInGeneratedKeys.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsOnlyIdentifiersInGeneratedKeys().
       override val supportsOnlyIdentifiersInGeneratedKeys: Boolean by lazy { resolveDelegatedDialect()?.supportsOnlyIdentifiersInGeneratedKeys ?: true }
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsOnlyIdentifiersInGeneratedKeys().
 //                                                        display_name supportsOnlyIdentifiersInGeneratedKeys
@@ -1219,6 +1514,10 @@
 //                                                                           ^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#resolveDelegatedDialect().
 //                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsOnlyIdentifiersInGeneratedKeys().
 //                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsOnlyIdentifiersInGeneratedKeys.
+//                                                                                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsOnlyIdentifiersInGeneratedKeys.
+//                                                                                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsOnlyIdentifiersInGeneratedKeys().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsIfNotExists.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsIfNotExists().
       override val supportsIfNotExists: Boolean by lazy { resolveDelegatedDialect()?.supportsIfNotExists ?: super.supportsIfNotExists }
 //                 ^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsIfNotExists().
 //                                     display_name supportsIfNotExists
@@ -1236,6 +1535,10 @@
 //                                                                                   ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsIfNotExists.
 //                                                                                                                ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsIfNotExists().
 //                                                                                                                ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsIfNotExists.
+//                                                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsIfNotExists.
+//                                                                                                                                    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsIfNotExists().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsCreateSequence.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsCreateSequence().
       override val supportsCreateSequence: Boolean by lazy { resolveDelegatedDialect()?.supportsCreateSequence ?: super.supportsCreateSequence }
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsCreateSequence().
 //                                        display_name supportsCreateSequence
@@ -1253,6 +1556,10 @@
 //                                                                                      ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsCreateSequence.
 //                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsCreateSequence().
 //                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsCreateSequence.
+//                                                                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsCreateSequence.
+//                                                                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsCreateSequence().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#needsSequenceToAutoInc.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getNeedsSequenceToAutoInc().
       override val needsSequenceToAutoInc: Boolean by lazy { resolveDelegatedDialect()?.needsSequenceToAutoInc ?: super.needsSequenceToAutoInc }
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getNeedsSequenceToAutoInc().
 //                                        display_name needsSequenceToAutoInc
@@ -1270,6 +1577,10 @@
 //                                                                                      ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#needsSequenceToAutoInc.
 //                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getNeedsSequenceToAutoInc().
 //                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#needsSequenceToAutoInc.
+//                                                                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#needsSequenceToAutoInc.
+//                                                                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getNeedsSequenceToAutoInc().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#defaultReferenceOption.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getDefaultReferenceOption().
       override val defaultReferenceOption: ReferenceOption by lazy { resolveDelegatedDialect()?.defaultReferenceOption ?: super.defaultReferenceOption }
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#defaultReferenceOption.
 //                                        display_name defaultReferenceOption
@@ -1287,6 +1598,10 @@
 //                                                                                              ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getDefaultReferenceOption().
 //                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#defaultReferenceOption.
 //                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getDefaultReferenceOption().
+//                                                                                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#defaultReferenceOption.
+//                                                                                                                                                     ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getDefaultReferenceOption().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsSequenceAsGeneratedKeys.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsSequenceAsGeneratedKeys().
       override val supportsSequenceAsGeneratedKeys: Boolean by lazy {
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsSequenceAsGeneratedKeys().
 //                                                 display_name supportsSequenceAsGeneratedKeys
@@ -1306,6 +1621,10 @@
 //                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsSequenceAsGeneratedKeys().
 //                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSequenceAsGeneratedKeys.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsSequenceAsGeneratedKeys.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsSequenceAsGeneratedKeys().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsTernaryAffectedRowValues.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsTernaryAffectedRowValues().
       override val supportsTernaryAffectedRowValues: Boolean by lazy {
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsTernaryAffectedRowValues().
 //                                                  display_name supportsTernaryAffectedRowValues
@@ -1325,6 +1644,10 @@
 //                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsTernaryAffectedRowValues().
 //                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsTernaryAffectedRowValues.
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsTernaryAffectedRowValues.
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsTernaryAffectedRowValues().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsCreateSchema.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsCreateSchema().
       override val supportsCreateSchema: Boolean by lazy { resolveDelegatedDialect()?.supportsCreateSchema ?: super.supportsCreateSchema }
 //                 ^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsCreateSchema().
 //                                      display_name supportsCreateSchema
@@ -1342,6 +1665,10 @@
 //                                                                                    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsCreateSchema.
 //                                                                                                                  ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsCreateSchema().
 //                                                                                                                  ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsCreateSchema.
+//                                                                                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsCreateSchema.
+//                                                                                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsCreateSchema().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsSubqueryUnions.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsSubqueryUnions().
       override val supportsSubqueryUnions: Boolean by lazy { resolveDelegatedDialect()?.supportsSubqueryUnions ?: super.supportsSubqueryUnions }
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsSubqueryUnions().
 //                                        display_name supportsSubqueryUnions
@@ -1359,6 +1686,10 @@
 //                                                                                      ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSubqueryUnions.
 //                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsSubqueryUnions().
 //                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsSubqueryUnions.
+//                                                                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsSubqueryUnions.
+//                                                                                                                                             ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsSubqueryUnions().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsDualTableConcept.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsDualTableConcept().
       override val supportsDualTableConcept: Boolean by lazy { resolveDelegatedDialect()?.supportsDualTableConcept ?: super.supportsDualTableConcept }
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsDualTableConcept().
 //                                          display_name supportsDualTableConcept
@@ -1376,6 +1707,10 @@
 //                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsDualTableConcept.
 //                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsDualTableConcept().
 //                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsDualTableConcept.
+//                                                                                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsDualTableConcept.
+//                                                                                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsDualTableConcept().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsOrderByNullsFirstLast.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsOrderByNullsFirstLast().
       override val supportsOrderByNullsFirstLast: Boolean by lazy { resolveDelegatedDialect()?.supportsOrderByNullsFirstLast ?: super.supportsOrderByNullsFirstLast }
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsOrderByNullsFirstLast().
 //                                               display_name supportsOrderByNullsFirstLast
@@ -1393,6 +1728,10 @@
 //                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsOrderByNullsFirstLast.
 //                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsOrderByNullsFirstLast().
 //                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsOrderByNullsFirstLast.
+//                                                                                                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsOrderByNullsFirstLast.
+//                                                                                                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsOrderByNullsFirstLast().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsWindowFrameGroupsMode.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsWindowFrameGroupsMode().
       override val supportsWindowFrameGroupsMode: Boolean by lazy { resolveDelegatedDialect()?.supportsWindowFrameGroupsMode ?: super.supportsWindowFrameGroupsMode }
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsWindowFrameGroupsMode().
 //                                               display_name supportsWindowFrameGroupsMode
@@ -1410,6 +1749,10 @@
 //                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsWindowFrameGroupsMode.
 //                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#getSupportsWindowFrameGroupsMode().
 //                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#supportsWindowFrameGroupsMode.
+//                                                                                                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsWindowFrameGroupsMode.
+//                                                                                                                                                                  ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsWindowFrameGroupsMode().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsColumnTypeChange.
+//                                                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsColumnTypeChange().
       override val supportsColumnTypeChange: Boolean get() = isSecondVersion
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsColumnTypeChange.
 //                                          display_name supportsColumnTypeChange
@@ -1420,7 +1763,11 @@
 //                                                       documentation ```kotlin\npublic get(): Boolean\n```
 //                                                           ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getIsSecondVersion().
 //                                                           ^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#isSecondVersion.
+//                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#supportsColumnTypeChange.
+//                                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getSupportsColumnTypeChange().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#isAllowedAsColumnDefault().
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#isAllowedAsColumnDefault().(e)
       override fun isAllowedAsColumnDefault(e: Expression<*>): Boolean = true
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#isAllowedAsColumnDefault().
 //                                          display_name isAllowedAsColumnDefault
@@ -1431,7 +1778,11 @@
 //                                            documentation ```kotlin\ne: Expression<*>\n```
 //                                             ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Expression#
 //                                                             ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#isAllowedAsColumnDefault().(e)
+//                                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#isAllowedAsColumnDefault().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createIndex().
+//                             ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createIndex().(index)
       override fun createIndex(index: Index): String {
 //                 ^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createIndex().
 //                             display_name createIndex
@@ -1442,6 +1793,7 @@
 //                                   documentation ```kotlin\nindex: Index\n```
 //                                    ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#
 //                                            ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createIndex().(index)
           if (
               (majorVersion == H2MajorVersion.One || h2Mode == H2CompatibilityMode.Oracle) &&
 //             ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getMajorVersion().
@@ -1450,18 +1802,22 @@
 //                                                   ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getH2Mode().
 //                                                   ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#h2Mode.
 //                                                                                 ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#Oracle.
+//                              ⌄ enclosing_range_start local 28
               index.columns.any { it.columnType is TextColumnType }
 //            ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createIndex().(index)
 //                  ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#columns.
 //                  ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#getColumns().
 //                          ^^^ reference semanticdb maven . . kotlin/collections/any(+19).
-//                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 28
 //                                                                  display_name it
-//                                                                  documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                ^^ reference semanticdb maven . . (it)
+//                                                                  documentation ```kotlin\nit: Column<*>\n```
+//                                ^^ reference local 28
 //                                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#columnType.
 //                                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getColumnType().
+//                                                 ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/TextColumnType#
+//                                                                ⌃ enclosing_range_end local 28
           ) {
+//                                                                                                   ⌄ enclosing_range_start local 29
               exposedLogger.warn("Index on ${index.table.tableName} for ${index.columns.joinToString { it.name }} can't be created on CLOB in H2")
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/exposedLogger.
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/getExposedLogger().
@@ -1475,12 +1831,13 @@
 //                                                                              ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#columns.
 //                                                                              ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#getColumns().
 //                                                                                      ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/joinToString(+9).
-//                                                                                                   ^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                                                   ^^^^^^^^^^^ definition local 29
 //                                                                                                               display_name it
-//                                                                                                               documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                                                                                     ^^ reference semanticdb maven . . (it)
+//                                                                                                               documentation ```kotlin\nit: Column<*>\n```
+//                                                                                                     ^^ reference local 29
 //                                                                                                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getName().
 //                                                                                                        ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#name.
+//                                                                                                             ⌃ enclosing_range_end local 29
               return ""
           }
           if (index.indexType != null) {
@@ -1491,6 +1848,7 @@
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/exposedLogger.
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/getExposedLogger().
 //                          ^^^^ reference semanticdb maven . . org/slf4j/Logger#warn().
+//                                                                                                               ⌄ enclosing_range_start local 30
                   "Index of type ${index.indexType} on ${index.table.tableName} for ${index.columns.joinToString { it.name }} can't be created in H2"
 //                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createIndex().(index)
 //                                       ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#getIndexType().
@@ -1504,12 +1862,13 @@
 //                                                                                          ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#columns.
 //                                                                                          ^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#getColumns().
 //                                                                                                  ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/joinToString(+9).
-//                                                                                                               ^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                                                               ^^^^^^^^^^^ definition local 30
 //                                                                                                                           display_name it
-//                                                                                                                           documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                                                                                                 ^^ reference semanticdb maven . . (it)
+//                                                                                                                           documentation ```kotlin\nit: Column<*>\n```
+//                                                                                                                 ^^ reference local 30
 //                                                                                                                    ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#getName().
 //                                                                                                                    ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Column#name.
+//                                                                                                                         ⌃ enclosing_range_end local 30
               )
               return ""
           }
@@ -1521,6 +1880,7 @@
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/exposedLogger.
 //            ^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/getExposedLogger().
 //                          ^^^^ reference semanticdb maven . . org/slf4j/Logger#warn().
+//                                                                                                   ⌄ enclosing_range_start local 31
                   "Functional index on ${index.table.tableName} using ${index.functions.joinToString { it.toString() }} can't be created in H2"
 //                                       ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createIndex().(index)
 //                                             ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#getTable().
@@ -1531,11 +1891,12 @@
 //                                                                            ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#functions.
 //                                                                            ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/Index#getFunctions().
 //                                                                                      ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/joinToString(+9).
-//                                                                                                   ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                                                   ^^^^^^^^^^^^^^^^^ definition local 31
 //                                                                                                                     display_name it
 //                                                                                                                     documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                                                                                     ^^ reference semanticdb maven . . (it)
+//                                                                                                     ^^ reference local 31
 //                                                                                                        ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExpressionWithColumnType#toString().
+//                                                                                                                   ⌃ enclosing_range_end local 31
               )
               return ""
           }
@@ -1543,8 +1904,11 @@
 //                     ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VendorDialect#createIndex().
 //                                 ^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createIndex().(index)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createIndex().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createDatabase().
       @OptIn(InternalApi::class)
+//                                ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createDatabase().(name)
       override fun createDatabase(name: String) = "CREATE SCHEMA IF NOT EXISTS ${name.inProperCase()}"
 //                 ^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createDatabase().
 //                                display_name createDatabase
@@ -1556,14 +1920,21 @@
 //                                      ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                                               ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createDatabase().(name)
 //                                                                                    ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/inProperCase().
+//                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createDatabase().(name)
+//                                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#createDatabase().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#listDatabases().
       override fun listDatabases(): String = "SHOW SCHEMAS"
 //                 ^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#listDatabases().
 //                               display_name listDatabases
 //                               documentation ```kotlin\npublic open override fun listDatabases(): String\n```
 //                               relationship is_reference is_implementation semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#listDatabases().
 //                                  ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#listDatabases().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#modifyColumn().
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#modifyColumn().(column)
+//                                                 ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#modifyColumn().(columnDiff)
       override fun modifyColumn(column: Column<*>, columnDiff: ColumnDiff): List<String> =
 //                 ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#modifyColumn().
 //                              display_name modifyColumn
@@ -1578,18 +1949,25 @@
 //                                                            documentation ```kotlin\ncolumnDiff: ColumnDiff\n```
 //                                                             ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ColumnDiff#
 //                                                                          ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#modifyColumn().(column)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#modifyColumn().(columnDiff)
+//                                                   ⌄ enclosing_range_start local 32
           super.modifyColumn(column, columnDiff).map { it.replace("MODIFY COLUMN", "ALTER COLUMN") }
 //              ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VendorDialect#modifyColumn().
 //                           ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#modifyColumn().(column)
 //                                   ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#modifyColumn().(columnDiff)
 //                                               ^^^ reference semanticdb maven . . kotlin/collections/map(+9).
-//                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 32
 //                                                                                                   display_name it
-//                                                                                                   documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                                     ^^ reference semanticdb maven . . (it)
+//                                                                                                   documentation ```kotlin\nit: String\n```
+//                                                     ^^ reference local 32
 //                                                        ^^^^^^^ reference semanticdb maven . . kotlin/text/replace(+1).
+//                                                                                                 ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#modifyColumn().
+//                                                                                                 ⌃ enclosing_range_end local 32
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#dropDatabase().
       @OptIn(InternalApi::class)
+//                              ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#dropDatabase().(name)
       override fun dropDatabase(name: String) = "DROP SCHEMA IF EXISTS ${name.inProperCase()}"
 //                 ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#dropDatabase().
 //                              display_name dropDatabase
@@ -1601,8 +1979,14 @@
 //                                    ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                                       ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#dropDatabase().(name)
 //                                                                            ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/inProperCase().
+//                                         ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#dropDatabase().(name)
+//                                                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#dropDatabase().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().
       @Suppress("CyclomaticComplexMethod")
+//                                          ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().(columnMetadataSqlType)
+//                                                                         ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().(columnMetadataJdbcType)
+//                                                                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().(columnType)
       override fun areEquivalentColumnTypes(columnMetadataSqlType: String, columnMetadataJdbcType: Int, columnType: String): Boolean {
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().
 //                                          display_name areEquivalentColumnTypes
@@ -1621,6 +2005,9 @@
 //                                                                                                                 documentation ```kotlin\ncolumnType: String\n```
 //                                                                                                                  ^^^^^^ reference semanticdb maven . . kotlin/String#
 //                                                                                                                           ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().(columnMetadataSqlType)
+//                                                                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().(columnMetadataJdbcType)
+//                                                                                                                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().(columnType)
           if (super.areEquivalentColumnTypes(columnMetadataSqlType, columnMetadataJdbcType, columnType)) {
 //                  ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/DatabaseDialect#areEquivalentColumnTypes().
 //                                           ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().(columnMetadataSqlType)
@@ -1629,89 +2016,104 @@
               return true
           }
   
+//        ⌄ enclosing_range_start local 33
           val columnMetadataSqlType = columnMetadataSqlType.uppercase()
-//            ^^^^^^^^^^^^^^^^^^^^^ definition local 13
+//            ^^^^^^^^^^^^^^^^^^^^^ definition local 33
 //                                  display_name columnMetadataSqlType
 //                                  documentation ```kotlin\nlocal val columnMetadataSqlType: String\n```
 //                                    ^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().(columnMetadataSqlType)
 //                                                          ^^^^^^^^^ reference semanticdb maven . . kotlin/text/uppercase(+2).
+//                                                                    ⌃ enclosing_range_end local 33
+//        ⌄ enclosing_range_start local 34
           val columnType = columnType.uppercase()
-//            ^^^^^^^^^^ definition local 14
+//            ^^^^^^^^^^ definition local 34
 //                       display_name columnType
 //                       documentation ```kotlin\nlocal val columnType: String\n```
 //                         ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().(columnType)
 //                                    ^^^^^^^^^ reference semanticdb maven . . kotlin/text/uppercase(+2).
+//                                              ⌃ enclosing_range_end local 34
   
           if (columnMetadataJdbcType == Types.ARRAY) {
 //            ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().(columnMetadataJdbcType)
 //                                            ^^^^^ reference semanticdb maven jdk 11 java/sql/Types#ARRAY.
+//            ⌄ enclosing_range_start local 35
               val baseType = columnMetadataSqlType.substringBefore(" ARRAY")
-//                ^^^^^^^^ definition local 15
+//                ^^^^^^^^ definition local 35
 //                         display_name baseType
 //                         documentation ```kotlin\nlocal val baseType: String\n```
-//                           ^^^^^^^^^^^^^^^^^^^^^ reference local 13
+//                           ^^^^^^^^^^^^^^^^^^^^^ reference local 33
 //                                                 ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/substringBefore(+1).
+//                                                                         ⌃ enclosing_range_end local 35
               return areEquivalentColumnTypes(baseType, Types.OTHER, columnType.substringBefore(" ARRAY")) &&
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().
-//                                            ^^^^^^^^ reference local 15
+//                                            ^^^^^^^^ reference local 35
 //                                                            ^^^^^ reference semanticdb maven jdk 11 java/sql/Types#OTHER.
-//                                                                   ^^^^^^^^^^ reference local 14
+//                                                                   ^^^^^^^^^^ reference local 34
 //                                                                              ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/substringBefore(+1).
                   areEquivalentColumnTypes(columnMetadataSqlType.replaceBefore("ARRAY", ""), Types.OTHER, columnType.replaceBefore("ARRAY", ""))
 //                ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().
-//                                         ^^^^^^^^^^^^^^^^^^^^^ reference local 13
+//                                         ^^^^^^^^^^^^^^^^^^^^^ reference local 33
 //                                                               ^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/replaceBefore(+1).
 //                                                                                                 ^^^^^ reference semanticdb maven jdk 11 java/sql/Types#OTHER.
-//                                                                                                        ^^^^^^^^^^ reference local 14
+//                                                                                                        ^^^^^^^^^^ reference local 34
 //                                                                                                                   ^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/replaceBefore(+1).
           }
   
           if (columnType == "TEXT" && columnMetadataSqlType == "VARCHAR") {
-//            ^^^^^^^^^^ reference local 14
-//                                    ^^^^^^^^^^^^^^^^^^^^^ reference local 13
+//            ^^^^^^^^^^ reference local 34
+//                                    ^^^^^^^^^^^^^^^^^^^^^ reference local 33
               return true
           }
   
+//                                                          ⌄ enclosing_range_start local 36
           if (listOf(columnMetadataSqlType, columnType).all { it.matches(Regex("VARCHAR(?:\\((?:MAX|\\d+)\\))?")) }) {
 //            ^^^^^^ reference semanticdb maven . . kotlin/collections/listOf(+1).
-//                   ^^^^^^^^^^^^^^^^^^^^^ reference local 13
-//                                          ^^^^^^^^^^ reference local 14
+//                   ^^^^^^^^^^^^^^^^^^^^^ reference local 33
+//                                          ^^^^^^^^^^ reference local 34
 //                                                      ^^^ reference semanticdb maven . . kotlin/collections/all(+9).
-//                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 36
 //                                                                                                                  display_name it
-//                                                                                                                  documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                                            ^^ reference semanticdb maven . . (it)
+//                                                                                                                  documentation ```kotlin\nit: String\n```
+//                                                            ^^ reference local 36
 //                                                               ^^^^^^^ reference semanticdb maven . . kotlin/text/matches().
 //                                                                       ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
+//                                                                                                                ⌃ enclosing_range_end local 36
               return true
           }
   
+//                                                          ⌄ enclosing_range_start local 37
           if (listOf(columnMetadataSqlType, columnType).all { it.matches(Regex("VARBINARY(?:\\((?:MAX|\\d+)\\))?")) }) {
 //            ^^^^^^ reference semanticdb maven . . kotlin/collections/listOf(+1).
-//                   ^^^^^^^^^^^^^^^^^^^^^ reference local 13
-//                                          ^^^^^^^^^^ reference local 14
+//                   ^^^^^^^^^^^^^^^^^^^^^ reference local 33
+//                                          ^^^^^^^^^^ reference local 34
 //                                                      ^^^ reference semanticdb maven . . kotlin/collections/all(+9).
-//                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 37
 //                                                                                                                    display_name it
-//                                                                                                                    documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                                            ^^ reference semanticdb maven . . (it)
+//                                                                                                                    documentation ```kotlin\nit: String\n```
+//                                                            ^^ reference local 37
 //                                                               ^^^^^^^ reference semanticdb maven . . kotlin/text/matches().
 //                                                                       ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
+//                                                                                                                  ⌃ enclosing_range_end local 37
               return true
           }
   
+//                     ⌄ enclosing_range_start local 38
           return when (h2Mode) {
+//                     ^^^^^^ definition local 38
+//                            display_name <when-subject>
+//                            documentation ```kotlin\nlocal val <when-subject>: H2Dialect.H2CompatibilityMode?\n```
 //                     ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getH2Mode().
 //                     ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#h2Mode.
+//                          ⌃ enclosing_range_end local 38
               H2CompatibilityMode.PostgreSQL -> {
 //                                ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#PostgreSQL.
                   when {
                       // Auto-increment difference is dealt with elsewhere
                       (columnType == "SERIAL" && columnMetadataSqlType == "INT") || (columnType == "BIGSERIAL" && columnMetadataSqlType == "BIGINT") -> true
-//                     ^^^^^^^^^^ reference local 14
-//                                               ^^^^^^^^^^^^^^^^^^^^^ reference local 13
-//                                                                                   ^^^^^^^^^^ reference local 14
-//                                                                                                                ^^^^^^^^^^^^^^^^^^^^^ reference local 13
+//                     ^^^^^^^^^^ reference local 34
+//                                               ^^^^^^^^^^^^^^^^^^^^^ reference local 33
+//                                                                                   ^^^^^^^^^^ reference local 34
+//                                                                                                                ^^^^^^^^^^^^^^^^^^^^^ reference local 33
                       else -> false
                   }
               }
@@ -1719,56 +2121,66 @@
 //                                ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#Oracle.
                   when {
                       columnType == "DATE" && columnMetadataSqlType == "TIMESTAMP(0)" -> true
-//                    ^^^^^^^^^^ reference local 14
-//                                            ^^^^^^^^^^^^^^^^^^^^^ reference local 13
+//                    ^^^^^^^^^^ reference local 34
+//                                            ^^^^^^^^^^^^^^^^^^^^^ reference local 33
                       // Unlike Oracle, H2 Oracle mode does not distinguish between VARCHAR2(4000) and VARCHAR2(4000 CHAR).
                       // It treats the length as a character count and does not enforce a separate byte limit.
+//                                                                  ⌄ enclosing_range_start local 39
                       listOf(columnMetadataSqlType, columnType).all { it.matches(Regex("VARCHAR2(?:\\((?:MAX|\\d+)(?:\\s+CHAR)?\\))?")) } -> true
 //                    ^^^^^^ reference semanticdb maven . . kotlin/collections/listOf(+1).
-//                           ^^^^^^^^^^^^^^^^^^^^^ reference local 13
-//                                                  ^^^^^^^^^^ reference local 14
+//                           ^^^^^^^^^^^^^^^^^^^^^ reference local 33
+//                                                  ^^^^^^^^^^ reference local 34
 //                                                              ^^^ reference semanticdb maven . . kotlin/collections/all(+9).
-//                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 39
 //                                                                                                                                        display_name it
-//                                                                                                                                        documentation ```kotlin\nit: ExpressionWithColumnType<*>\n```
-//                                                                    ^^ reference semanticdb maven . . (it)
+//                                                                                                                                        documentation ```kotlin\nit: String\n```
+//                                                                    ^^ reference local 39
 //                                                                       ^^^^^^^ reference semanticdb maven . . kotlin/text/matches().
 //                                                                               ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
+//                                                                                                                                      ⌃ enclosing_range_end local 39
                       else -> {
                           // H2 maps NUMBER to NUMERIC
+//                        ⌄ enclosing_range_start local 40
                           val numberRegex = Regex("NUMBER(?:\\((\\d+)(?:,\\s?(\\d+))?\\))?")
-//                            ^^^^^^^^^^^ definition local 16
+//                            ^^^^^^^^^^^ definition local 40
 //                                        display_name numberRegex
 //                                        documentation ```kotlin\nlocal val numberRegex: Regex\n```
 //                                          ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
+//                                                                                         ⌃ enclosing_range_end local 40
+//                        ⌄ enclosing_range_start local 41
                           val numericRegex = Regex("NUMERIC(?:\\((\\d+)(?:,\\s?(\\d+))?\\))?")
-//                            ^^^^^^^^^^^^ definition local 17
+//                            ^^^^^^^^^^^^ definition local 41
 //                                         display_name numericRegex
 //                                         documentation ```kotlin\nlocal val numericRegex: Regex\n```
 //                                           ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
+//                                                                                           ⌃ enclosing_range_end local 41
+//                        ⌄ enclosing_range_start local 42
                           val numberMatch = numberRegex.find(columnType)
-//                            ^^^^^^^^^^^ definition local 18
+//                            ^^^^^^^^^^^ definition local 42
 //                                        display_name numberMatch
 //                                        documentation ```kotlin\nlocal val numberMatch: MatchResult?\n```
-//                                          ^^^^^^^^^^^ reference local 16
+//                                          ^^^^^^^^^^^ reference local 40
 //                                                      ^^^^ reference semanticdb maven . . kotlin/text/Regex#find().
-//                                                           ^^^^^^^^^^ reference local 14
+//                                                           ^^^^^^^^^^ reference local 34
+//                                                                     ⌃ enclosing_range_end local 42
+//                        ⌄ enclosing_range_start local 43
                           val numericMatch = numericRegex.find(columnMetadataSqlType)
-//                            ^^^^^^^^^^^^ definition local 19
+//                            ^^^^^^^^^^^^ definition local 43
 //                                         display_name numericMatch
 //                                         documentation ```kotlin\nlocal val numericMatch: MatchResult?\n```
-//                                           ^^^^^^^^^^^^ reference local 17
+//                                           ^^^^^^^^^^^^ reference local 41
 //                                                        ^^^^ reference semanticdb maven . . kotlin/text/Regex#find().
-//                                                             ^^^^^^^^^^^^^^^^^^^^^ reference local 13
+//                                                             ^^^^^^^^^^^^^^^^^^^^^ reference local 33
+//                                                                                  ⌃ enclosing_range_end local 43
                           if (numberMatch != null && numericMatch != null) {
-//                            ^^^^^^^^^^^ reference local 18
-//                                                   ^^^^^^^^^^^^ reference local 19
+//                            ^^^^^^^^^^^ reference local 42
+//                                                   ^^^^^^^^^^^^ reference local 43
                               numberMatch.groupValues[1] == numericMatch.groupValues[1] // compare precision
-//                            ^^^^^^^^^^^ reference local 18
+//                            ^^^^^^^^^^^ reference local 42
 //                            ^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#get().
 //                                        ^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/MatchResult#getGroupValues().
 //                                        ^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/MatchResult#groupValues.
-//                                                          ^^^^^^^^^^^^ reference local 19
+//                                                          ^^^^^^^^^^^^ reference local 43
 //                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/List#get().
 //                                                                       ^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/MatchResult#getGroupValues().
 //                                                                       ^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/MatchResult#groupValues.
@@ -1782,35 +2194,35 @@
 //                                ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#H2CompatibilityMode#SQLServer.
                   when {
                       columnType.equals("uniqueidentifier", ignoreCase = true) && columnMetadataSqlType == "UUID" -> true
-//                    ^^^^^^^^^^ reference local 14
+//                    ^^^^^^^^^^ reference local 34
 //                               ^^^^^^ reference semanticdb maven . . kotlin/text/equals(+1).
-//                                                                                ^^^^^^^^^^^^^^^^^^^^^ reference local 13
+//                                                                                ^^^^^^^^^^^^^^^^^^^^^ reference local 33
                       // Auto-increment difference is dealt with elsewhere
                       columnType.contains(" IDENTITY") ->
-//                    ^^^^^^^^^^ reference local 14
+//                    ^^^^^^^^^^ reference local 34
 //                               ^^^^^^^^ reference semanticdb maven . . kotlin/text/contains().
                           areEquivalentColumnTypes(columnMetadataSqlType, columnMetadataJdbcType, columnType.substringBefore(" IDENTITY"))
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().
-//                                                 ^^^^^^^^^^^^^^^^^^^^^ reference local 13
+//                                                 ^^^^^^^^^^^^^^^^^^^^^ reference local 33
 //                                                                        ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().(columnMetadataJdbcType)
-//                                                                                                ^^^^^^^^^^ reference local 14
+//                                                                                                ^^^^^^^^^^ reference local 34
 //                                                                                                           ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/substringBefore(+1).
                       // H2 maps DATETIME2 to TIMESTAMP
                       columnType.matches(Regex("DATETIME2(?:\\(\\d+\\))?")) &&
-//                    ^^^^^^^^^^ reference local 14
+//                    ^^^^^^^^^^ reference local 34
 //                               ^^^^^^^ reference semanticdb maven . . kotlin/text/matches().
 //                                       ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
                           columnMetadataSqlType.matches(Regex("TIMESTAMP(?:\\(\\d+\\))?")) -> true
-//                        ^^^^^^^^^^^^^^^^^^^^^ reference local 13
+//                        ^^^^^^^^^^^^^^^^^^^^^ reference local 33
 //                                              ^^^^^^^ reference semanticdb maven . . kotlin/text/matches().
 //                                                      ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
                       // H2 maps NVARCHAR to VARCHAR
                       columnType.matches(Regex("NVARCHAR(?:\\((\\d+|MAX)\\))?")) &&
-//                    ^^^^^^^^^^ reference local 14
+//                    ^^^^^^^^^^ reference local 34
 //                               ^^^^^^^ reference semanticdb maven . . kotlin/text/matches().
 //                                       ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
                           columnMetadataSqlType.matches(Regex("VARCHAR(?:\\((\\d+|MAX)\\))?")) -> true
-//                        ^^^^^^^^^^^^^^^^^^^^^ reference local 13
+//                        ^^^^^^^^^^^^^^^^^^^^^ reference local 33
 //                                              ^^^^^^^ reference semanticdb maven . . kotlin/text/matches().
 //                                                      ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
                       else -> false
@@ -1821,28 +2233,31 @@
                   when {
                       // Auto-increment difference is dealt with elsewhere
                       columnType.contains(" AUTO_INCREMENT") ->
-//                    ^^^^^^^^^^ reference local 14
+//                    ^^^^^^^^^^ reference local 34
 //                               ^^^^^^^^ reference semanticdb maven . . kotlin/text/contains().
                           areEquivalentColumnTypes(columnMetadataSqlType, columnMetadataJdbcType, columnType.substringBefore(" AUTO_INCREMENT"))
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().
-//                                                 ^^^^^^^^^^^^^^^^^^^^^ reference local 13
+//                                                 ^^^^^^^^^^^^^^^^^^^^^ reference local 33
 //                                                                        ^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().(columnMetadataJdbcType)
-//                                                                                                ^^^^^^^^^^ reference local 14
+//                                                                                                ^^^^^^^^^^ reference local 34
 //                                                                                                           ^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/text/substringBefore(+1).
                       // H2 maps DATETIME to TIMESTAMP
                       columnType.matches(Regex("DATETIME(?:\\(\\d+\\))?")) &&
-//                    ^^^^^^^^^^ reference local 14
+//                    ^^^^^^^^^^ reference local 34
 //                               ^^^^^^^ reference semanticdb maven . . kotlin/text/matches().
 //                                       ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
                           columnMetadataSqlType.matches(Regex("TIMESTAMP(?:\\(\\d+\\))?")) -> true
-//                        ^^^^^^^^^^^^^^^^^^^^^ reference local 13
+//                        ^^^^^^^^^^^^^^^^^^^^^ reference local 33
 //                                              ^^^^^^^ reference semanticdb maven . . kotlin/text/matches().
 //                                                      ^^^^^ reference semanticdb maven . . kotlin/text/Regex#`<init>`(+1).
                       else -> false
                   }
           }
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#areEquivalentColumnTypes().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#Companion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#Companion#`<init>`().
       companion object : DialectNameProvider("H2")
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#Companion#
 //                                                 display_name Companion
@@ -1852,9 +2267,15 @@
 //                                                 display_name Companion
 //                                                 documentation ```kotlin\nprivate constructor(): H2Dialect.Companion\n```
 //                       ^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/VendorDialect#DialectNameProvider#
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#Companion#
+//                                               ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#Companion#`<init>`().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#`<init>`().
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/h2Mode.
   /** The current H2 database compatibility mode or `null` if the current database is not H2. */
+//                                                           ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getH2Mode().
   val DatabaseDialect.h2Mode: H2Dialect.H2CompatibilityMode? get() = (this as? H2Dialect)?.h2Mode
 //                    ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/h2Mode.
 //                           display_name h2Mode
@@ -1863,5 +2284,8 @@
 //                                                           ^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getH2Mode().
 //                                                               display_name h2Mode
 //                                                               documentation ```kotlin\npublic get(): H2Dialect.H2CompatibilityMode?\n```
+//                                                                             ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#
 //                                                                                         ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#getH2Mode().
 //                                                                                         ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/H2Dialect#h2Mode.
+//                                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/h2Mode.
+//                                                                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/vendors/getH2Mode().

@@ -40,12 +40,14 @@
 //                                                ^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/
 //                                                    ^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/RowApi#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#
   /**
    * Represents the SQL query that obtains information about a statement execution plan.
    *
    * @param analyze Whether the statement whose execution plan is being queried should actually be executed as well.
    * @param options String of comma-separated parameters to append after the `EXPLAIN` keyword.
    */
+//                       ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#`<init>`().
   open class ExplainQuery(
 //           ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#
 //                        display_name ExplainQuery
@@ -54,6 +56,9 @@
 //           ^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#`<init>`().
 //                        display_name ExplainQuery
 //                        documentation ```kotlin\npublic constructor(analyze: Boolean, options: String?, internalStatement: Statement<*>): ExplainQuery\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#`<init>`().(analyze)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#analyze.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#getAnalyze().
       val analyze: Boolean,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#`<init>`().(analyze)
 //                display_name analyze
@@ -66,6 +71,12 @@
 //                display_name analyze
 //                documentation ```kotlin\npublic get(): Boolean\n```
 //                 ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#`<init>`().(analyze)
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#analyze.
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#getAnalyze().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#`<init>`().(options)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#options.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#getOptions().
       val options: String?,
 //        ^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#`<init>`().(options)
 //                display_name options
@@ -78,6 +89,12 @@
 //                display_name options
 //                documentation ```kotlin\npublic final val options: String?\n```
 //                 ^^^^^^^ reference semanticdb maven . . kotlin/String#
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#`<init>`().(options)
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#options.
+//                       ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#getOptions().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#`<init>`().(internalStatement)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#internalStatement.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#getInternalStatement().
       private val internalStatement: Statement<*>
 //                ^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#`<init>`().(internalStatement)
 //                                  display_name internalStatement
@@ -90,10 +107,15 @@
 //                                  display_name internalStatement
 //                                  documentation ```kotlin\nprivate final val internalStatement: Statement<*>\n```
 //                                   ^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/Statement#
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#`<init>`().(internalStatement)
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#internalStatement.
+//                                              ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#getInternalStatement().
   ) : Statement<ResultApi>(StatementType.SHOW, emptyList()) {
 //    ^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/Statement#
 //                                       ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/StatementType#SHOW.
 //                                             ^^^^^^^^^ reference semanticdb maven . . kotlin/collections/emptyList().
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#arguments().
       override fun arguments(): Iterable<Iterable<Pair<IColumnType<*>, Any?>>> = internalStatement.arguments()
 //                 ^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#arguments().
 //                           display_name arguments
@@ -103,7 +125,11 @@
 //                                                                               ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#getInternalStatement().
 //                                                                               ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#internalStatement.
 //                                                                                                 ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/Statement#arguments().
+//                                                                                                           ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#arguments().
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#prepareSQL().
+//                            ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#prepareSQL().(transaction)
+//                                                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#prepareSQL().(prepared)
       override fun prepareSQL(transaction: Transaction, prepared: Boolean): String {
 //                 ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#prepareSQL().
 //                            display_name prepareSQL
@@ -118,6 +144,9 @@
 //                                                               documentation ```kotlin\nprepared: Boolean\n```
 //                                                                ^^^^^^^ reference semanticdb maven . . kotlin/Boolean#
 //                                                                          ^^^^^^ reference semanticdb maven . . kotlin/String#
+//                                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#prepareSQL().(transaction)
+//                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#prepareSQL().(prepared)
+//        ⌄ enclosing_range_start local 0
           val internalSql = internalStatement.prepareSQL(transaction, prepared)
 //            ^^^^^^^^^^^ definition local 0
 //                        display_name internalSql
@@ -127,6 +156,7 @@
 //                                            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/Statement#prepareSQL().
 //                                                       ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#prepareSQL().(transaction)
 //                                                                    ^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#prepareSQL().(prepared)
+//                                                                            ⌃ enclosing_range_end local 0
           return transaction.db.dialect.functionProvider.explain(analyze, options, internalSql, transaction)
 //               ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#prepareSQL().(transaction)
 //                           ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/transactions/TransactionInterface#db.
@@ -143,13 +173,17 @@
 //                                                                                 ^^^^^^^^^^^ reference local 0
 //                                                                                              ^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#prepareSQL().(transaction)
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#prepareSQL().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainQuery#
   
+//⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#
   /**
    * A row of data representing a single record retrieved from a database result set about a statement execution plan.
    *
    * @param fieldIndex Mapping of the field names stored on this row to their index positions.
    */
+//                      ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#`<init>`().
   class ExplainResultRow(
 //      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#
 //                       display_name ExplainResultRow
@@ -157,6 +191,9 @@
 //      ^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#`<init>`().
 //                       display_name ExplainResultRow
 //                       documentation ```kotlin\npublic constructor(fieldIndex: Map<String, Int>, data: Array<Any?>): ExplainResultRow\n```
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#`<init>`().(fieldIndex)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#fieldIndex.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#getFieldIndex().
       val fieldIndex: Map<String, Int>,
 //        ^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#`<init>`().(fieldIndex)
 //                   display_name fieldIndex
@@ -169,6 +206,12 @@
 //                   display_name fieldIndex
 //                   documentation ```kotlin\npublic get(): Map<String, Int>\n```
 //                    ^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#`<init>`().(fieldIndex)
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#fieldIndex.
+//                                   ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#getFieldIndex().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#`<init>`().(data)
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#data.
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#getData().
       private val data: Array<Any?>
 //                ^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#`<init>`().(data)
 //                     display_name data
@@ -181,7 +224,13 @@
 //                     display_name data
 //                     documentation ```kotlin\nprivate get(): Array<Any?>\n```
 //                      ^^^^^^^^^^^ reference semanticdb maven . . kotlin/Array#
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#`<init>`().(data)
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#data.
+//                                ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#getData().
   ) {
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#`<init>`().
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#toString().
+//                                                                      ⌄ enclosing_range_start local 1
       override fun toString(): String = fieldIndex.entries.joinToString { "${it.key}=${data[it.value]}" }
 //                 ^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#toString().
 //                          display_name toString
@@ -193,19 +242,23 @@
 //                                                 ^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#entries.
 //                                                 ^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#getEntries().
 //                                                         ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/joinToString(+9).
-//                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . (it)
+//                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition local 1
 //                                                                                                        display_name it
 //                                                                                                        documentation ```kotlin\nit: Map.Entry<String, Int>\n```
-//                                                                           ^^ reference semanticdb maven . . (it)
+//                                                                           ^^ reference local 1
 //                                                                              ^^^ reference semanticdb maven . . kotlin/collections/Map#Entry#getKey().
 //                                                                              ^^^ reference semanticdb maven . . kotlin/collections/Map#Entry#key.
 //                                                                                     ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#data.
 //                                                                                     ^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#getData().
 //                                                                                     ^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Array#get().
-//                                                                                          ^^ reference semanticdb maven . . (it)
+//                                                                                          ^^ reference local 1
 //                                                                                             ^^^^^ reference semanticdb maven . . kotlin/collections/Map#Entry#getValue().
 //                                                                                             ^^^^^ reference semanticdb maven . . kotlin/collections/Map#Entry#value.
+//                                                                                                      ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#toString().
+//                                                                                                      ⌃ enclosing_range_end local 1
   
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#
+//    ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#`<init>`().
       @Suppress("SwallowedException")
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion# 10:5
 //                                    display_name Companion
@@ -214,7 +267,10 @@
 //                                    display_name Companion
 //                                    documentation ```kotlin\nprivate constructor(): ExplainResultRow.Companion\n```\n\n----\n\n Creates an [ExplainResultRow] storing all fields in [fieldIndex] with their values retrieved from a [RowApi].
       companion object {
+//        ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#create().
           /** Creates an [ExplainResultRow] storing all fields in [fieldIndex] with their values retrieved from a [RowApi]. */
+//                   ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#create().(rs)
+//                               ⌄ enclosing_range_start semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#create().(fieldIndex)
           fun create(rs: RowApi, fieldIndex: Map<String, Int>): ExplainResultRow {
 //            ^^^^^^ definition semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#create().
 //                   display_name create
@@ -228,36 +284,46 @@
 //                                          documentation ```kotlin\nfieldIndex: Map<String, Int>\n```
 //                                           ^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/collections/Map#
 //                                                              ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#
+//                            ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#create().(rs)
+//                                                          ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#create().(fieldIndex)
+//            ⌄ enclosing_range_start local 2
               val fieldValues = arrayOfNulls<Any?>(fieldIndex.size)
-//                ^^^^^^^^^^^ definition local 1
+//                ^^^^^^^^^^^ definition local 2
 //                            display_name fieldValues
 //                            documentation ```kotlin\nlocal val fieldValues: Array<Any?>\n```
 //                              ^^^^^^^^^^^^ reference semanticdb maven . . kotlin/arrayOfNulls().
 //                                                 ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#create().(fieldIndex)
 //                                                            ^^^^ reference semanticdb maven . . kotlin/collections/Map#getSize().
 //                                                            ^^^^ reference semanticdb maven . . kotlin/collections/Map#size.
+//                                                                ⌃ enclosing_range_end local 2
+//                                        ⌄ enclosing_range_start local 3
               fieldIndex.values.forEach { index ->
 //            ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#create().(fieldIndex)
 //                       ^^^^^^ reference semanticdb maven . . kotlin/collections/Map#getValues().
 //                       ^^^^^^ reference semanticdb maven . . kotlin/collections/Map#values.
 //                              ^^^^^^^ reference semanticdb maven . . kotlin/collections/forEach(+10).
-//                                        ^^^^^ definition semanticdb maven . . (index)
+//                                        ^^^^^ definition local 3
 //                                              display_name index
 //                                              documentation ```kotlin\nindex: Int\n```
+//                                            ⌃ enclosing_range_end local 3
                   fieldValues[index] = rs.getObject(index + 1, null, TextColumnType())
-//                ^^^^^^^^^^^ reference local 1
+//                ^^^^^^^^^^^ reference local 2
 //                ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . kotlin/Array#set().
-//                            ^^^^^ reference semanticdb maven . . (index)
+//                            ^^^^^ reference local 3
 //                                     ^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#create().(rs)
 //                                        ^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/statements/api/RowApi#getObject(+4).
-//                                                  ^^^^^ reference semanticdb maven . . (index)
+//                                                  ^^^^^ reference local 3
 //                                                        ^ reference semanticdb maven . . kotlin/Int#plus(+2).
 //                                                                   ^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/TextColumnType#`<init>`().
               }
               return ExplainResultRow(fieldIndex, fieldValues)
 //                   ^^^^^^^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#`<init>`().
 //                                    ^^^^^^^^^^ reference semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#create().(fieldIndex)
-//                                                ^^^^^^^^^^^ reference local 1
+//                                                ^^^^^^^^^^^ reference local 2
           }
+//        ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#create().
       }
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#
+//    ⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#Companion#`<init>`().
   }
+//⌃ enclosing_range_end semanticdb maven . . org/jetbrains/exposed/v1/core/ExplainResultRow#

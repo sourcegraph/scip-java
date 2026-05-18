@@ -281,7 +281,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     "kotlin2",
     """|/build.gradle
        |plugins {
-       |    id 'org.jetbrains.kotlin.jvm' version '2.1.20'
+       |    id 'org.jetbrains.kotlin.jvm' version '2.2.0'
        |}
        |repositories {
        |    mavenCentral()
@@ -355,7 +355,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
       s"""|/build.gradle
           |plugins {
           |    id 'java'
-          |    id 'org.jetbrains.kotlin.jvm' version '2.1.20'
+          |    id 'org.jetbrains.kotlin.jvm' version '2.2.0'
           |}
           |java {
           |  toolchain {
@@ -383,7 +383,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
   //       s"kotlin-multiplatform-$jvmSettings",
   //       s"""|/build.gradle
   //           |plugins {
-  //           |    id 'org.jetbrains.kotlin.multiplatform' version '2.1.20'
+  //           |    id 'org.jetbrains.kotlin.multiplatform' version '2.2.0'
   //           |}
   //           |repositories {
   //           |    mavenCentral()
