@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: "temurin"
           cache: "sbt"
@@ -44,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v5
         with:
           distribution: "temurin"
           cache: "sbt"
@@ -94,7 +94,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: yarn global add @bazel/bazelisk
 
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v5
         with:
           distribution: "temurin"
           cache: "sbt"
@@ -121,7 +121,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: "temurin"
           cache: "sbt"
@@ -145,7 +145,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v5
         with:
           distribution: "temurin"
           java-version: 11
@@ -169,7 +169,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: "temurin"
           cache: "sbt"
