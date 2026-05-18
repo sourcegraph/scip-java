@@ -2,7 +2,6 @@ import sbt.{Compile, Def, File, _}
 import sbt.Keys._
 import sbt.plugins.JvmPlugin
 
-import java.nio.file.Paths
 import java.util
 import java.util.Collections
 import scala.util.Properties
@@ -46,13 +45,10 @@ object JavaToolchainPlugin extends AutoPlugin {
     javaHomeCache.computeIfAbsent(
       version,
       (v: String) => {
-        val coursier = Paths.get("bin", "coursier")
         val index = jvmIndex
           .toList
           .flatMap(index => "--jvm-index" :: index :: Nil)
-        val arguments =
-          List("java", "-jar", coursier.toString, "java-home", "--jvm", v) ++
-            index
+        val arguments = List("cs", "java-home", "--jvm", v) ++ index
 
         new File(Process(arguments).!!.trim)
       }
