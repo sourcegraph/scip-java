@@ -28,7 +28,9 @@ public class SemanticdbReporter {
     e.printStackTrace(writer);
     writer.println(
         "Please report a bug to https://github.com/sourcegraph/semanticdb-java with the stack trace above.");
-    trees.printMessage(Diagnostic.Kind.ERROR, baos.toString(), tree, root);
+    // Use WARNING so that internal exceptions never fail the compilation.
+    // The full stack trace is preserved for bug reports.
+    trees.printMessage(Diagnostic.Kind.WARNING, baos.toString(), tree, root);
   }
 
   public void exception(Throwable e, TaskEvent task) {
@@ -58,5 +60,15 @@ public class SemanticdbReporter {
     // the reporter API so the message goes to stderr instead for now.
     trees.printMessage(
         Diagnostic.Kind.ERROR, String.format("semanticdb-javac: %s", message), tree, root);
+  }
+
+  /**
+   * Reports a warning diagnostic. Use this for internal plugin failures (e.g. exceptions during
+   * analysis) that should not fail the compilation — the build continues with partial semanticdb
+   * output rather than aborting.
+   */
+  public void warning(String message, Tree tree, CompilationUnitTree root) {
+    trees.printMessage(
+        Diagnostic.Kind.WARNING, String.format("semanticdb-javac: %s", message), tree, root);
   }
 }

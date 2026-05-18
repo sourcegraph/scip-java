@@ -94,17 +94,20 @@ public final class SemanticdbTaskListener implements TaskListener {
     }
   }
 
-  // Uses reporter.error with the full stack trace of the exception instead of
-  // reporter.exception
-  // because reporter.exception doesn't seem to print any meaningful information
-  // about the
-  // exception, it just prints the location with an empty message.
+  // Uses reporter.warning with the full stack trace of the exception instead of
+  // reporter.exception because reporter.exception doesn't seem to print any meaningful
+  // information about the exception, it just prints the location with an empty message.
+  //
+  // WARNING (not ERROR) is intentional: the catch block above says "we don't want to stop
+  // the compilation", but Kind.ERROR was causing javac to exit non-zero and fail the build.
+  // Reporting as a warning preserves the full stack trace for bug reports while allowing
+  // compilation to succeed with partial semanticdb output.
   private void reportException(Throwable exception, TaskEvent e) {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     PrintWriter pw = new PrintWriter(baos);
     exception.printStackTrace(pw);
     pw.close();
-    reporter.error(baos.toString(), e.getCompilationUnit(), e.getCompilationUnit());
+    reporter.warning(baos.toString(), e.getCompilationUnit(), e.getCompilationUnit());
   }
 
   private void onFinishedAnalyze(TaskEvent e) {
