@@ -18,6 +18,25 @@
       system:
       let
         pkgs = import nixpkgs { inherit system; };
+        mkDevShell =
+          jdk:
+          pkgs.mkShellNoCC {
+            buildInputs = with pkgs; [
+              bazelisk
+              (coursier.override ({ jre = jdk; }))
+              docker
+              git
+              (gradle.override ({ java = jdk; }))
+              jdk
+              jq
+              (maven.override ({ jdk_headless = jdk; }))
+              (mill.override ({ jre = jdk; }))
+              nixfmt
+              nodejs
+              (sbt.override ({ jre = jdk; }))
+              yarn
+            ];
+          };
       in
       {
         checks = {
@@ -33,13 +52,9 @@
         };
 
         devShells = {
-          default = pkgs.mkShellNoCC {
-            buildInputs = with pkgs; [
-              jdk11
-              nixfmt
-              (sbt.override ({ jre = jre11_minimal; }))
-            ];
-          };
+          default = mkDevShell pkgs.jdk11;
+          jdk17 = mkDevShell pkgs.jdk17;
+          jdk21 = mkDevShell pkgs.jdk21;
         };
       }
     );
