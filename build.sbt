@@ -10,7 +10,7 @@ import scala.util.control.NoStackTrace
 
 lazy val V =
   new {
-    val protobuf = "3.15.6"
+    val protobuf = "4.35.0"
     val protoc =
       "3.17.3" // the oldest protoc version with Apple M1 support, see https://github.com/scalapb/ScalaPB/issues/1024#issuecomment-860126568
     val coursier = "2.1.9"
