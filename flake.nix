@@ -53,6 +53,7 @@
 
         devShells = {
           default = mkDevShell pkgs.jdk11;
+          jdk11 = mkDevShell pkgs.jdk11;
           jdk17 = mkDevShell pkgs.jdk17;
           jdk21 = mkDevShell pkgs.jdk21;
         };

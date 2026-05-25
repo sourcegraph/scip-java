@@ -5,6 +5,7 @@ import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
 import java.nio.file.Files
 import java.nio.file.Path
+import java.nio.file.Paths
 import java.nio.file.SimpleFileVisitor
 import java.nio.file.StandardOpenOption
 import java.nio.file.attribute.BasicFileAttributes
@@ -30,6 +31,21 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
       List("//...")
     else
       index.buildCommand
+
+  // Prefer `bazelisk` over `bazel` when both are available: bazelisk respects
+  // the project's `.bazelversion`, while `bazel` may be a pinned system version.
+  private def bazelExecutable: String = {
+    val pathDirs = sys
+      .env
+      .getOrElse("PATH", "")
+      .split(java.io.File.pathSeparator)
+      .toList
+    List("bazelisk", "bazel")
+      .find { name =>
+        pathDirs.exists(dir => Files.isExecutable(Paths.get(dir, name)))
+      }
+      .getOrElse("bazel")
+  }
 
   override def generateScip(): Int = {
     val aspectLabel = this.generateAspectFile().getOrElse("")
@@ -60,7 +76,7 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
 
     val buildCommand =
       List(
-        "bazel",
+        bazelExecutable,
         "build",
         "--noshow_progress",
         // The local strategy is required for now because we write SemanticDB and SCIP files
