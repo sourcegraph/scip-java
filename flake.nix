@@ -34,6 +34,7 @@
               nixfmt
               nodejs
               (sbt.override ({ jre = jdk; }))
+              scalafmt
               yarn
             ];
           };

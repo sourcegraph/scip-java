@@ -35,11 +35,8 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
   // Prefer `bazelisk` over `bazel` when both are available: bazelisk respects
   // the project's `.bazelversion`, while `bazel` may be a pinned system version.
   private def bazelExecutable: String = {
-    val pathDirs = sys
-      .env
-      .getOrElse("PATH", "")
-      .split(java.io.File.pathSeparator)
-      .toList
+    val pathDirs =
+      sys.env.getOrElse("PATH", "").split(java.io.File.pathSeparator).toList
     List("bazelisk", "bazel")
       .find { name =>
         pathDirs.exists(dir => Files.isExecutable(Paths.get(dir, name)))
