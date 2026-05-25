@@ -41,6 +41,10 @@
       in
       {
         checks = {
+          actionlint = pkgs.runCommand "check-actionlint" { } ''
+            ${pkgs.actionlint}/bin/actionlint ${./.github/workflows}/*.yml
+            touch $out
+          '';
           nixfmt = pkgs.runCommand "check-nixfmt" { } ''
             ${pkgs.nixfmt}/bin/nixfmt --check ${./flake.nix}
             touch $out
@@ -48,6 +52,18 @@
           renovate = pkgs.runCommand "check-renovate" { } ''
             LOG_LEVEL=warn ${pkgs.renovate}/bin/renovate-config-validator \
               ${./.github/renovate.json}
+            touch $out
+          '';
+          scalafmt = pkgs.runCommand "check-scalafmt" { buildInputs = [ pkgs.git ]; } ''
+            cp -r ${./.}/. .
+            chmod -R u+w .
+            git init -q
+            git add -A
+            HOME=$(mktemp -d) ${pkgs.scalafmt}/bin/scalafmt --check --non-interactive
+            touch $out
+          '';
+          shellcheck = pkgs.runCommand "check-shellcheck" { } ''
+            ${pkgs.shellcheck}/bin/shellcheck ${./bin}/*.sh
             touch $out
           '';
         };

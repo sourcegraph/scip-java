@@ -52,11 +52,11 @@ jobs:
           set -eu
           check_repo() {
             REPO=$1
-            mkdir -p .repos/$REPO
-            git clone https://github.com/$REPO.git .repos/$REPO && cd .repos/$REPO && git submodule update --init
+            mkdir -p ".repos/$REPO"
+            git clone "https://github.com/$REPO.git" ".repos/$REPO" && cd ".repos/$REPO" && git submodule update --init
 
-            docker run -v $PWD/.repos/$REPO:/sources -w /sources sourcegraph/scip-java:latest scip-java index
-            file .repos/$REPO/index.scip || (echo "$REPO SCIP index doesn't exist!"; exit 1)
+            docker run -v "$PWD/.repos/$REPO:/sources" -w /sources sourcegraph/scip-java:latest scip-java index
+            file ".repos/$REPO/index.scip" || (echo "$REPO SCIP index doesn't exist!"; exit 1)
           }
 
           sudo apt install parallel
@@ -97,14 +97,16 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
       - run: nix develop --command sbt build
-      - run: echo "$PWD/out/bin" >> $GITHUB_PATH
+      - run: echo "$PWD/out/bin" >> "$GITHUB_PATH"
       - name: Auto-index scip-java codebase
         run: |
+          # shellcheck disable=SC2016
           nix develop --command bash -c \
             'scip-java index --build-tool=bazel --bazel-scip-java-binary=$(which scip-java)'
       - run: du -h index.scip
       - name: Auto-index example/bazel-workspace
         run: |
+          # shellcheck disable=SC2016
           nix develop "$GITHUB_WORKSPACE" --command bash -c \
             'scip-java index --build-tool=bazel --bazel-scip-java-binary=$(which scip-java)'
         working-directory: examples/bazel-example
@@ -169,21 +171,21 @@ jobs:
 
       - run: |
           nix develop .#jdk${{ matrix.java }} --command sbt build publishM2 publishLocal dumpScipJavaVersion
-          echo "SCIP_JAVA_VERSION=$(cat VERSION)" >> $GITHUB_ENV
-          echo "SCIP_JAVA_CLI=$PWD/out/bin/scip-java" >> $GITHUB_ENV
+          echo "SCIP_JAVA_VERSION=$(cat VERSION)" >> "$GITHUB_ENV"
+          echo "SCIP_JAVA_CLI=$PWD/out/bin/scip-java" >> "$GITHUB_ENV"
 
       - run: |
           nix develop "$GITHUB_WORKSPACE#jdk${{ matrix.java }}" --command \
-            mvn clean verify -DskipTests -Dscip-java.version=$SCIP_JAVA_VERSION sourcegraph:sourcegraphDependencies
+            mvn clean verify -DskipTests "-Dscip-java.version=$SCIP_JAVA_VERSION" sourcegraph:sourcegraphDependencies
         working-directory: examples/maven-example
 
-      - run: nix develop "$GITHUB_WORKSPACE#jdk${{ matrix.java }}" --command $SCIP_JAVA_CLI index-semanticdb target/semanticdb-targetroot
+      - run: nix develop "$GITHUB_WORKSPACE#jdk${{ matrix.java }}" --command "$SCIP_JAVA_CLI" index-semanticdb target/semanticdb-targetroot
         working-directory: examples/maven-example
 
       - run: |
           set -e
           grep org.hamcrest target/semanticdb-targetroot/*dependencies.txt
-          grep $PWD/src/main/java target/semanticdb-targetroot/*dependencies.txt
+          grep "$PWD/src/main/java" target/semanticdb-targetroot/*dependencies.txt
         working-directory: examples/maven-example
 
       - run: du -h index.scip
