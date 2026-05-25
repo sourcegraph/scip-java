@@ -44,7 +44,7 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
       - name: Build Dockerised CLI
-        run: nix develop .#jdk17 --command bash -c "DOCKER_BUILDKIT=0 sbt cli/docker"
+        run: nix develop --command bash -c "DOCKER_BUILDKIT=0 sbt cli/docker"
 
       - name: Test repos
         shell: bash
@@ -96,16 +96,16 @@ jobs:
 
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
-      - run: nix develop .#jdk17 --command sbt build
+      - run: nix develop --command sbt build
       - run: echo "$PWD/out/bin" >> $GITHUB_PATH
       - name: Auto-index scip-java codebase
         run: |
-          nix develop .#jdk17 --command bash -c \
+          nix develop --command bash -c \
             'scip-java index --build-tool=bazel --bazel-scip-java-binary=$(which scip-java)'
       - run: du -h index.scip
       - name: Auto-index example/bazel-workspace
         run: |
-          nix develop .#jdk17 --command bash -c \
+          nix develop "$GITHUB_WORKSPACE" --command bash -c \
             'scip-java index --build-tool=bazel --bazel-scip-java-binary=$(which scip-java)'
         working-directory: examples/bazel-example
       - run: du -h index.scip
