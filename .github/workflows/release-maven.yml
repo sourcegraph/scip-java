@@ -16,7 +16,7 @@ jobs:
           summarize: false
       - uses: DeterminateSystems/magic-nix-cache-action@v13
       - name: Publish ${{ github.ref }}
-        run: nix develop .#jdk11 --command sbt ci-release
+        run: nix develop --command sbt ci-release
         env:
           PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
           PGP_SECRET: ${{ secrets.PGP_SECRET }}

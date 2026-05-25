@@ -124,10 +124,10 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
       - name: semanticdb-kotlinc tests
-        run: nix develop .#jdk11 --command sbt semanticdbKotlinc/test
+        run: nix develop --command sbt semanticdbKotlinc/test
 
       - name: Kotlin snapshots
-        run: nix develop .#jdk11 --command sbt semanticdbKotlincMinimized/kotlincSnapshots
+        run: nix develop --command sbt semanticdbKotlincMinimized/kotlincSnapshots
 
       - name: Check snapshot drift
         run: |
@@ -145,10 +145,10 @@ jobs:
 
       - uses: DeterminateSystems/magic-nix-cache-action@v13
 
-      - run: nix develop .#jdk11 --command sbt --client checkAll
+      - run: nix develop --command sbt --client checkAll
 
       - name: Run sample benchmarks
-        run: nix develop .#jdk11 --command sbt --client 'bench/Jmh/run -i 1 -f1 -t1 -foe true'
+        run: nix develop --command sbt --client 'bench/Jmh/run -i 1 -f1 -t1 -foe true'
 
 
   maven:

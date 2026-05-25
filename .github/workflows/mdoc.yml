@@ -14,6 +14,6 @@ jobs:
         with:
           summarize: false
       - uses: DeterminateSystems/magic-nix-cache-action@v13
-      - run: nix develop .#jdk11 --command sbt docs/docusaurusPublishGhpages
+      - run: nix develop --command sbt docs/docusaurusPublishGhpages
         env:
           GIT_DEPLOY_KEY: ${{ secrets.GIT_DEPLOY_KEY }}
