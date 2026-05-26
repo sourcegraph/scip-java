@@ -76,8 +76,7 @@ commands +=
 commands +=
   Command.command("checkAll") { s =>
     "javafmtCheckAll" :: "scalafmtCheckAll" :: "scalafmtSbtCheck" ::
-      "scalafixAll --check" :: "publishLocal" :: "docs/docusaurusCreateSite" ::
-      s
+      "scalafixAll --check" :: "publishLocal" :: s
   }
 
 lazy val semanticdb = project
@@ -723,25 +722,6 @@ lazy val bench = project
   )
   .dependsOn(unit)
   .enablePlugins(JmhPlugin)
-
-lazy val docs = project
-  .in(file("scip-java-docs"))
-  .settings(
-    publishLocal / skip := true,
-    publish / skip := true,
-    moduleName := "scip-java-docs",
-    mdocOut :=
-      (ThisBuild / baseDirectory).value / "website" / "target" / "docs",
-    fork := false,
-    mdocVariables :=
-      Map[String, String](
-        "VERSION" -> version.value,
-        "SCALA_VERSION" -> scalaVersion.value,
-        "STABLE_VERSION" -> version.value.replaceFirst("\\-.*", "")
-      )
-  )
-  .dependsOn(unit)
-  .enablePlugins(DocusaurusPlugin)
 
 lazy val javaOnlySettings = List[Def.Setting[_]](
   javafmtOnCompile := false,
