@@ -6,14 +6,11 @@ on:
   pull_request:
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     name: Tests
     strategy:
       fail-fast: false
       matrix:
-        # NOTE(olafurpg) Windows is not enabled because it times out due to reasons I don't understand.
-        # os: [windows-latest, ubuntu-latest]
-        os: [ubuntu-latest]
         java: [11, 17, 21]
     steps:
       - uses: actions/checkout@v4
@@ -28,12 +25,8 @@ jobs:
         run: nix develop .#jdk${{ matrix.java }} --command sbt test
 
   docker_test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     name: Docker CLI tests
-    strategy:
-      fail-fast: true
-      matrix:
-        os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
 
