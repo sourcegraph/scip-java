@@ -383,8 +383,7 @@ lazy val semanticdbKotlinc = project
       Seq((Compile / sourceDirectory).value / "proto"),
     Compile / PB.targets :=
       Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
-    libraryDependencies +=
-      "com.google.protobuf" % "protobuf-java" % V.protobuf,
+    libraryDependencies += "com.google.protobuf" % "protobuf-java" % V.protobuf,
     // kotlin-compiler-embeddable is supplied by kotlinc at runtime
     libraryDependencies +=
       "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion %

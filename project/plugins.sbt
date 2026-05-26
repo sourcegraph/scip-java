@@ -10,7 +10,6 @@ addSbtPlugin("com.sourcegraph" % "sbt-sourcegraph" % "0.4.4")
 addSbtPlugin("com.lightbend.sbt" % "sbt-java-formatter" % "0.6.1")
 addSbtPlugin("pl.project13.scala" % "sbt-jmh" % "0.4.3")
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.15.0")
-addSbtPlugin("io.spray" % "sbt-revolver" % "0.9.1")
 addSbtPlugin("org.jetbrains.scala" % "sbt-kotlin-plugin" % "3.1.6")
 addSbtPlugin("com.github.sbt.junit" % "sbt-jupiter-interface" % "0.15.1")
 // sbt-jdi-tools appears to fix an error related to this message:
