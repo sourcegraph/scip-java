@@ -1,12 +1,10 @@
 import _root_.kotlin.Keys._
-import sbtdocker.DockerfileBase
 import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
 import scala.xml.transform.{RewriteRule, RuleTransformer}
 import java.io.File
 import java.nio.file.Files
 import java.util.Properties
 import scala.collection.mutable.ListBuffer
-import scala.util.control.NoStackTrace
 
 lazy val V =
   new {
@@ -36,8 +34,6 @@ lazy val V =
 inThisBuild(
   List(
     scalaVersion := V.scala213,
-    crossScalaVersions := List(V.scala213),
-    scalafixCaching := true,
     scalacOptions ++= List("-Wunused:imports"),
     semanticdbEnabled := true,
     semanticdbVersion := V.scalameta,
@@ -112,7 +108,6 @@ lazy val gradlePlugin = project
   .in(file("semanticdb-gradle-plugin"))
   .settings(
     name := "semanticdb-gradle",
-    scalaVersion := V.scala213,
     buildInfoPackage := "com.sourcegraph.scip_java",
     publish / skip := true,
     scalacOptions ++= Seq("-target:11", "-release", "11"),
