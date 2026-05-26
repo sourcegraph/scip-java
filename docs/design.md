@@ -10,8 +10,6 @@ that generates one
 every `*.java` source file. After compilation completes, the SemanticDB files
 are processed to produce SCIP.
 
-![A three stage pipeline that starts with a list of Java sources, creates a list of SemanticDB files that then become a single SCIP index.](assets/semanticdb-javac-pipeline.svg)
-
 ### Why Java compiler plugin?
 
 There are several benefits to implementing scip-java as a compiler plugin:
