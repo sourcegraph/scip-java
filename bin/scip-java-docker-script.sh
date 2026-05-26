@@ -12,11 +12,9 @@ if test -f "$FILE"; then
 	fi
 fi
 
-JVM_VERSIONS=$(echo $JVM_VERSION | tr "," "\n")
+JVM_VERSIONS=$(echo "$JVM_VERSION" | tr "," "\n")
 
 LAST_CODE="-1"
-
-ARGS=$@
 
 for JVM_VERSION in $JVM_VERSIONS
 do 

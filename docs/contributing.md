@@ -9,6 +9,21 @@ This page documents tips and tricks for contributing to the
 
 ## System dependencies
 
+The recommended way to get a working development environment is via
+[Nix](https://nixos.org/download) and the provided [flake](https://github.com/sourcegraph/scip-java/blob/main/flake.nix):
+
+```sh
+nix develop              # default shell (JDK 11)
+nix develop .#jdk17      # JDK 17
+nix develop .#jdk21      # JDK 21
+```
+
+This drops you into a shell with `sbt`, `cs` (coursier), `maven`, `gradle`,
+`bazelisk`, `scalafmt`, `nodejs`, `yarn`, `git`, `jq`, etc. all pinned to the
+versions used in CI.
+
+If you'd rather install tools manually, you'll need at least:
+
 - `java`: any version should work
 - `git`: any version should work
 - `gradle`: `brew install gradle`, or see
@@ -38,7 +53,7 @@ These are the main components of the project.
 
 | Command                                                             | Where    | Description                                                                         |
 | ------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------- |
-| `./sbt`                                                             | terminal | Start interactive sbt shell with Java 11. Takes a while to load on the first run.   |
+| `sbt`                                                               | terminal | Start interactive sbt shell with Java 11 (run from `nix develop`). Takes a while to load on the first run. |
 | `unit/test`                                                         | sbt      | Run fast unit tests.                                                                |
 | `~unit/test`                                                        | sbt      | Start watch mode to run tests on file save, good for local edit-and-test workflows. |
 | `buildTools/test`                                                   | sbt      | Run slow build tool tests (Gradle, Maven).                                          |

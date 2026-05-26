@@ -8,17 +8,15 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-java@v3
+      - uses: DeterminateSystems/nix-installer-action@v22
         with:
-          distribution: 'temurin'
-          java-version: 11
-          cache: 'sbt'
-      - uses: sbt/setup-sbt@v1
+          summarize: false
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
       - name: Publish ${{ github.ref }}
-        run: sbt ci-release
+        run: nix develop --command sbt ci-release
         env:
           PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
           PGP_SECRET: ${{ secrets.PGP_SECRET }}
