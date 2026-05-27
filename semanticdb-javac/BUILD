@@ -33,5 +33,6 @@ java_library(
     deps = [
         "//semanticdb-java",
         "//semanticdb-java/src/main/protobuf:semanticdb_java_proto",
+        "@maven//:org_scip_code_scip_java_bindings",
     ],
 )

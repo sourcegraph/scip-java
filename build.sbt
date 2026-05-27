@@ -132,6 +132,8 @@ lazy val javacPlugin = project
     fatjarPackageSettings,
     javaOnlySettings,
     moduleName := "semanticdb-javac",
+    libraryDependencies +=
+      "org.scip-code" % "scip-java-bindings" % V.scipBindings,
     // Scoped to compile so doc tasks (which reject -g) are unaffected.
     Compile / compile / javacOptions += "-g",
     // JDK 14+ ServiceLoader-scans the classpath for Plugin providers; our

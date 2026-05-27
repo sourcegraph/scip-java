@@ -117,10 +117,63 @@ public final class SemanticdbTaskListener implements TaskListener {
         Path output = path.getOrThrow();
         if (Files.exists(output)) appendSemanticdb(e, output, textDocument);
         else writeSemanticdb(e, output, textDocument);
+
+        if (options.emitScip) {
+          emitScipShard(e, output, textDocument);
+        }
       } else {
         reporter.error(path.getErrorOrThrow(), e);
       }
     }
+  }
+
+  /**
+   * Mirrors {@link #writeSemanticdb}/{@link #appendSemanticdb} but for the {@code *.scip} shard
+   * layout under {@code META-INF/scip/}. Reuses the in-memory {@link Semanticdb.TextDocument} built
+   * by {@link SemanticdbVisitor} so we do not pay for a second AST walk.
+   */
+  private void emitScipShard(TaskEvent event, Path semanticdbPath, Semanticdb.TextDocument doc) {
+    try {
+      Path shardPath = scipShardPath(semanticdbPath);
+      Index shard = ScipShardFromSemanticdb.buildShard(doc, doc.getUri());
+      ScipShardWriter.writeOrMerge(shardPath, shard);
+    } catch (IOException ex) {
+      this.reportException(ex, event);
+    }
+  }
+
+  /**
+   * Converts a {@code META-INF/semanticdb/<rel>.semanticdb} path into the matching {@code
+   * META-INF/scip/<rel>.scip} path.
+   */
+  static Path scipShardPath(Path semanticdbPath) {
+    Path filename = semanticdbPath.getFileName();
+    String name = filename.toString();
+    if (name.endsWith(".semanticdb")) {
+      name = name.substring(0, name.length() - ".semanticdb".length()) + ".scip";
+    } else {
+      name = name + ".scip";
+    }
+    // Replace the trailing ".../META-INF/semanticdb/<rel>" prefix with ".../META-INF/scip/<rel>"
+    Path withoutFile = semanticdbPath.getParent();
+    Path scipParent = rewriteSemanticdbToScip(withoutFile);
+    return scipParent.resolve(name);
+  }
+
+  private static Path rewriteSemanticdbToScip(Path dir) {
+    // Walk up looking for a `semanticdb` segment immediately under `META-INF` and replace it.
+    Path root = dir.getRoot();
+    java.util.ArrayList<String> parts = new java.util.ArrayList<>();
+    for (Path p : dir) parts.add(p.getFileName().toString());
+    for (int i = parts.size() - 1; i > 0; i--) {
+      if (parts.get(i).equals("semanticdb") && parts.get(i - 1).equals("META-INF")) {
+        parts.set(i, "scip");
+        break;
+      }
+    }
+    Path result = root == null ? Paths.get("") : root;
+    for (String part : parts) result = result.resolve(part);
+    return result;
   }
 
   private void writeSemanticdb(TaskEvent event, Path output, Semanticdb.TextDocument textDocument) {
