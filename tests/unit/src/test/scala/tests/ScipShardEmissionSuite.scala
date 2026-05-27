@@ -103,12 +103,17 @@ class ScipShardEmissionSuite extends FunSuite {
     assert(barText.contains("int bar("), s"unexpected bar signature: $barText")
   }
 
-  test("compiler does not emit SCIP shards when -emit-scip is off") {
+  test("compiler does not emit SCIP shards when -emit-scip:off is set") {
     val targetroot = Files.createTempDirectory("scip-shard-off-")
     val sourceroot = Files.createTempDirectory("scip-shard-off-src-")
     val compiler =
       new TestCompiler(TestCompiler.PROCESSOR_PATH, Nil, targetroot, sourceroot)
-    val result = compiler.compileSemanticdb(Seq(source))
+    val result = compiler.compile(
+      Seq(source),
+      List(
+        s"-Xplugin:semanticdb -emit-scip:off -text:on -sourceroot:$sourceroot -targetroot:$targetroot"
+      )
+    )
     assert(result.isSuccess, s"javac failed:\n${result.stdout}")
 
     val scipPath = targetroot.resolve("META-INF/scip/example/Foo.java.scip")

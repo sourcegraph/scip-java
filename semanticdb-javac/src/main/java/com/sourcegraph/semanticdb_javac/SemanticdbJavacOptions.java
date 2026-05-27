@@ -25,11 +25,13 @@ public class SemanticdbJavacOptions {
   public boolean includeText = false;
   public boolean verboseEnabled = false;
   /**
-   * When {@code true}, the plugin also emits {@code *.scip} shards under {@code META-INF/scip/...}
-   * alongside the existing {@code *.semanticdb} files. Defaults to {@code false} during the
-   * SemanticDB→SCIP transition.
+   * Controls whether the plugin emits {@code *.scip} shards under {@code META-INF/scip/...}
+   * alongside the existing {@code *.semanticdb} files. Defaults to {@code true}: producing the
+   * extra shard is cheap and lets the {@code scip-java index-semanticdb --use-scip-shards}
+   * pipeline run without any additional compiler-side configuration. Legacy users that only
+   * consume {@code .semanticdb} are unaffected. Pass {@code -emit-scip:off} to disable.
    */
-  public boolean emitScip = false;
+  public boolean emitScip = true;
 
   public final ArrayList<String> errors;
   public boolean alreadyReportedErrors = false;
