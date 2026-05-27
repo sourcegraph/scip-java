@@ -29,7 +29,6 @@
               jdk
               jq
               (maven.override ({ jdk_headless = jdk; }))
-              (mill.override ({ jre = jdk; }))
               nixfmt
               nodejs
               (sbt.override ({ jre = jdk; }))

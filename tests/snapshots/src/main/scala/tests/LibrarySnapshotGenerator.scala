@@ -10,13 +10,10 @@ import java.nio.file.Path
 import java.nio.file.SimpleFileVisitor
 import java.nio.file.attribute.BasicFileAttributes
 
-import scala.util.Properties
-
 import com.sourcegraph.scip_java.ScipJava
 import moped.reporters.ConsoleReporter
 
 class LibrarySnapshotGenerator extends SnapshotGenerator {
-  val scalaPattern = FileSystems.getDefault.getPathMatcher("glob:**.scala")
   val javaPattern = FileSystems.getDefault.getPathMatcher("glob:**.java")
   def runScipJava(arguments: List[String]): Unit = {
     val baos = new ByteArrayOutputStream
@@ -40,12 +37,6 @@ class LibrarySnapshotGenerator extends SnapshotGenerator {
   override def run(context: SnapshotContext, handler: SnapshotHandler): Unit = {
     val gen = new Gen(context, handler)
     gen.checkLibrary("org.jetbrains.exposed:exposed-core:1.0.0-beta-4")
-    gen.checkLibrary(
-      "com.lihaoyi:ujson_2.13:1.4.0",
-      provided = List(
-        s"org.scala-lang:scala-library:${Properties.versionNumberString}"
-      )
-    )
   }
 
   private class Gen(context: SnapshotContext, handler: SnapshotHandler) {

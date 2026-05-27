@@ -7,7 +7,6 @@ import scala.collection.mutable.ListBuffer
 import scala.util.Properties
 
 import com.sourcegraph.io.DeleteVisitor
-import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
 import os.CommandResult
@@ -134,15 +133,5 @@ class GradleBuildTool(index: IndexCommand) extends BuildTool("Gradle", index) {
       script.getBytes(StandardCharsets.UTF_8)
     )
   }
-
-  def semanticdbScalacGroovySyntax(): String = BuildInfo
-    .semanticdbScalacVersions
-    .removed(
-      "2.12.3"
-    ) // Not supported because the last semanticdb-scalac_2.12.3 release doesn't support the option -P:semanticdb:targetroot:PATH.
-    .map { case (key, value) =>
-      s"'$key':'$value'"
-    }
-    .mkString("[", ", ", "]")
 
 }

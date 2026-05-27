@@ -25,21 +25,13 @@ class MinimizedSnapshotScipGenerator extends SnapshotGenerator {
     onTargetroot(
       context,
       handler,
-      AbsolutePath(BuildInfo.minimizedJavaTargetroot),
-      AbsolutePath(BuildInfo.minimizedJavaSourceDirectory)
-    )
-    onTargetroot(
-      context,
-      handler,
-      AbsolutePath(BuildInfo.minimizedScalaTargetroot),
-      AbsolutePath(BuildInfo.minimizedScalaSourceDirectory)
+      AbsolutePath(BuildInfo.minimizedJavaTargetroot)
     )
   }
   def onTargetroot(
       context: SnapshotContext,
       handler: SnapshotHandler,
-      targetroot: AbsolutePath,
-      sourceDirectory: AbsolutePath
+      targetroot: AbsolutePath
   ): Unit = {
     val sourceroot = AbsolutePath(BuildInfo.sourceroot)
     val scipOutput = Files

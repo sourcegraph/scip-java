@@ -18,7 +18,6 @@ class JavacClassesDirectorySuite extends FunSuite with TempDirectories {
       new TestCompiler(
         classpath = TestCompiler.PROCESSOR_PATH,
         javacOptions = Nil,
-        scalacOptions = Nil,
         targetroot = sourceroot(),
         sourceroot = sourceroot()
       )

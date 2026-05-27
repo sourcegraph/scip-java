@@ -3,7 +3,6 @@ package com.sourcegraph.scip_java.buildtools
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.net.URLClassLoader
 import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
 import java.nio.file.Files
@@ -11,13 +10,8 @@ import java.nio.file.NoSuchFileException
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.SimpleFileVisitor
-import java.nio.file.StandardOpenOption
 import java.nio.file.attribute.BasicFileAttributes
 import java.util
-import java.util.Collections
-import java.util.Optional
-import java.util.ServiceLoader
-import java.util.concurrent.TimeUnit
 import java.util.jar.JarFile
 
 import scala.collection.mutable.ArrayBuffer
@@ -32,17 +26,12 @@ import scala.util.Success
 import scala.util.Try
 import scala.util.control.NonFatal
 
-import scala.meta.pc.PresentationCompiler
-import scala.meta.pc.PresentationCompilerConfig
-
 import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.Dependencies
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
-import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
-import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocuments
 import coursier.jvm.JvmIndex
 import moped.json.DecodingContext
 import moped.json.ErrorResult
@@ -86,15 +75,12 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   private val javaPattern = FileSystems
     .getDefault
     .getPathMatcher("glob:**.java")
-  private val scalaPattern = FileSystems
-    .getDefault
-    .getPathMatcher("glob:**.scala")
   private val kotlinPattern = FileSystems
     .getDefault
     .getPathMatcher("glob:**.kt")
   private val allPatterns = FileSystems
     .getDefault
-    .getPathMatcher("glob:**.{java,scala,kt}")
+    .getPathMatcher("glob:**.{java,kt}")
   private val moduleInfo = Paths.get("module-info.java")
 
   override def usedInCurrentDirectory(): Boolean = configFiles.exists(path =>
@@ -176,14 +162,13 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     }
     val allSourceFiles = collectAllSourceFiles(config, sourceroot)
     val javaFiles = allSourceFiles.filter(javaPattern.matches)
-    val scalaFiles = allSourceFiles.filter(scalaPattern.matches)
     val kotlinFiles = allSourceFiles.filter(kotlinPattern.matches)
-    if (javaFiles.isEmpty && scalaFiles.isEmpty && kotlinFiles.isEmpty) {
+    if (javaFiles.isEmpty && kotlinFiles.isEmpty) {
       if (config.reportWarningOnEmptyIndex) {
         index
           .app
           .warning(
-            s"doing nothing, no files matching pattern '$sourceroot/**.{java,scala,kt}'"
+            s"doing nothing, no files matching pattern '$sourceroot/**.{java,kt}'"
           )
       }
       return CommandResult(Nil, 0, Nil)
@@ -191,7 +176,6 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
     val compileAttempts = ListBuffer.empty[Try[Unit]]
     compileAttempts += compileJavaFiles(tmp, deps, config, javaFiles)
-    compileAttempts += compileScalaFiles(deps, scalaFiles, tmp)
     compileAttempts += compileKotlinFiles(deps, config, kotlinFiles, tmp)
     val errors = compileAttempts.collect { case Failure(exception) =>
       exception
@@ -361,133 +345,6 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       Success(())
     else
       Failure(new Exception(exit.toString))
-  }
-
-  private def compileScalaFiles(
-      deps: Dependencies,
-      allScalaFiles: List[Path],
-      tmp: Path
-  ): Try[Unit] = Try {
-    if (deps.dependencies.nonEmpty && allScalaFiles.nonEmpty)
-      withScalaPresentationCompiler(deps, tmp) { compiler =>
-        allScalaFiles.foreach { path =>
-          try compileScalaFile(compiler, path)
-          catch {
-            case NonFatal(e) =>
-              // We want to try and index as much as possible so we don't fail the entire
-              // compilation even if a single file fails to compile.
-              index.app.reporter.log(Diagnostic.exception(e))
-          }
-        }
-      }
-  }
-
-  private def compileScalaFile(
-      compiler: PresentationCompiler,
-      path: Path
-  ): Unit = {
-    val input = Input.path(path)
-    val textDocument = TextDocument
-      .parseFrom(compiler.semanticdbTextDocument(path.toUri, input.text).get())
-      .toBuilder
-      .setUri(sourceroot.relativize(path).iterator().asScala.mkString("/"))
-    val textDocuments = TextDocuments
-      .newBuilder()
-      .addDocuments(textDocument)
-      .build()
-    val relpath = sourceroot
-      .relativize(path)
-      .resolveSibling(path.getFileName.toString + ".semanticdb")
-    val out = targetroot
-      .resolve("META-INF")
-      .resolve("semanticdb")
-      .resolve(relpath)
-    Files.createDirectories(out.getParent)
-    Files.write(
-      out,
-      textDocuments.toByteArray,
-      StandardOpenOption.TRUNCATE_EXISTING,
-      StandardOpenOption.CREATE
-    )
-  }
-
-  private def withScalaPresentationCompiler[T](deps: Dependencies, tmp: Path)(
-      fn: PresentationCompiler => T
-  ): T = {
-    val scalaVersion = deps
-      .classpath
-      .iterator
-      .flatMap(jar => ScalaVersion.inferFromJar(jar))
-      .nextOption()
-      .getOrElse {
-        throw new IllegalArgumentException(
-          s"failed to infer the Scala version from the dependencies: " +
-            pprint.PPrinter.BlackWhite.tokenize(deps.classpath).mkString +
-            s"\n\nTo fix this, consider adding 'org.scala-lang:scala-library:${BuildInfo
-                .scalaVersion}' to the list of dependencies."
-        )
-      }
-    val mtags = Dependencies.resolveDependencies(
-      List(s"org.scalameta:mtags_${scalaVersion}:${BuildInfo.mtagsVersion}")
-    )
-    val scalaLibrary = mtags
-      .classpath
-      .filter(_.getFileName.toString.contains("scala-library"))
-    val parent = new ScalaCompilerClassLoader(this.getClass.getClassLoader)
-
-    val jars = mtags.classpath.map(_.toUri.toURL).toArray
-    val classloader = new URLClassLoader(jars, parent)
-    val compilers = ServiceLoader
-      .load(classOf[PresentationCompiler], classloader)
-      .iterator()
-    if (compilers.hasNext) {
-      val classpath = deps.classpath ++ scalaLibrary
-      val argsfile = targetroot.resolve("javacopts.txt")
-      Files.createDirectories(argsfile.getParent)
-      Files.write(
-        argsfile,
-        List("-classpath", classpath.mkString(File.pathSeparator)).asJava,
-        StandardOpenOption.CREATE,
-        StandardOpenOption.TRUNCATE_EXISTING
-      )
-      val compiler = compilers
-        .next()
-        .newInstance("scip-java", classpath.asJava, List[String]().asJava)
-        .withConfiguration(
-          new PresentationCompilerConfig {
-            override def parameterHintsCommand(): Optional[String] = Optional
-              .empty()
-            override def completionCommand(): Optional[String] = Optional
-              .empty()
-            override def symbolPrefixes(): util.Map[String, String] =
-              Collections.emptyMap()
-            override def isDefaultSymbolPrefixes: Boolean = false
-            override def overrideDefFormat()
-                : PresentationCompilerConfig.OverrideDefFormat =
-              PresentationCompilerConfig.OverrideDefFormat.Ascii
-            override def isCompletionItemDetailEnabled: Boolean = false
-            override def isStripMarginOnTypeFormattingEnabled: Boolean = false
-            override def isCompletionItemDocumentationEnabled: Boolean = false
-            override def isHoverDocumentationEnabled: Boolean = false
-            override def snippetAutoIndent(): Boolean = false
-            override def isSignatureHelpDocumentationEnabled: Boolean = false
-            override def isCompletionSnippetsEnabled: Boolean = false
-            override def timeoutDelay(): Long = 0
-            override def timeoutUnit(): TimeUnit = TimeUnit.SECONDS
-            override def semanticdbCompilerOptions(): util.List[String] =
-              Collections.emptyList()
-          }
-        )
-      try {
-        fn(compiler)
-      } finally {
-        compiler.shutdown()
-      }
-    } else {
-      throw new IllegalArgumentException(
-        s"failed to load mtags presentation compiler for Scala version $scalaVersion"
-      )
-    }
   }
 
   private def compileJavaFiles(

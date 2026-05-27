@@ -10,7 +10,6 @@ import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
 import com.sourcegraph.Scip;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.*;
@@ -252,13 +251,7 @@ public class ScipSemanticdb {
                       definitionInfo != null
                           && definitionInfo.getDisplayName().equals(info.getDisplayName())
                           && supportsReferenceRelationship(info)));
-
-          addReferenceRelationships(
-              symtab, info, scipInfo, doc.definitionCliques.get(definitionSymbol), packages);
         }
-
-        addReferenceRelationships(
-            symtab, info, scipInfo, doc.definitionCliques.get(info.getSymbol()), packages);
 
         for (int i = 0; i < info.getOverriddenSymbolsCount(); i++) {
           String overriddenSymbol = info.getOverriddenSymbols(i);
@@ -294,33 +287,6 @@ public class ScipSemanticdb {
         tdoc.addSymbols(scipInfo);
       }
       writer.emitTyped(Scip.Index.newBuilder().addDocuments(tdoc).build());
-    }
-  }
-
-  private void addReferenceRelationships(
-      Symtab symtab,
-      SymbolInformation info,
-      Scip.SymbolInformation.Builder scipInfo,
-      @Nullable ArrayList<String> clique,
-      PackageTable packages) {
-    if (clique == null) {
-      return;
-    }
-    for (String symbol : clique) {
-      if (symbol.equals(info.getSymbol())) {
-        continue;
-      }
-      SymbolInformation otherInfo = symtab.symbols.get(symbol);
-      if (otherInfo == null) {
-        continue;
-      }
-      if (!symbol.endsWith(".apply().")
-          && !otherInfo.getDisplayName().equals(info.getDisplayName())) {
-        continue;
-      }
-      Package pkg = packages.packageForSymbol(symbol).orElse(Package.EMPTY);
-      scipInfo.addRelationships(
-          Scip.Relationship.newBuilder().setSymbol(typedSymbol(symbol, pkg)).setIsReference(true));
     }
   }
 

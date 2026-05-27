@@ -9,7 +9,7 @@ class MissingBuildToolSuite extends BaseBuildToolSuite {
       s"""|error: No build tool detected in workspace '${java
            .io
            .File
-           .separator}workingDirectory'. At the moment, the only supported build tools are: Maven, Gradle, sbt, mill.
+           .separator}workingDirectory'. At the moment, the only supported build tools are: Maven, Gradle.
           |""".stripMargin,
     workingDirectoryLayout = ""
   )

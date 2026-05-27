@@ -14,12 +14,8 @@ lazy val V =
     val moped = "0.2.0"
     val gradle = "7.0"
     val scala213 = "2.13.13"
-    val scala3 = "3.3.3"
-    val metals = "1.2.2"
     val scalameta = "4.9.3"
     val requests = "0.8.0"
-    val minimalMillVersion = "0.10.0"
-    val millScipVersion = "0.3.6"
     val kotlinVersion = "2.2.0"
     val kotest = "4.6.3"
     val kctfork = "0.7.1"
@@ -117,20 +113,8 @@ lazy val gradlePlugin = project
         sbtVersion,
         scalaVersion,
         "javacModuleOptions" -> javacModuleOptions,
-        "semanticdbScalacVersions" ->
-          com
-            .sourcegraph
-            .sbtsourcegraph
-            .Versions
-            .cachedSemanticdbVersionsByScalaVersion,
-        "sbtSourcegraphVersion" ->
-          com.sourcegraph.sbtsourcegraph.BuildInfo.version,
         "semanticdbVersion" -> V.scalameta,
-        "mtagsVersion" -> V.metals,
-        "scala213" -> V.scala213,
-        "scala3" -> V.scala3,
-        "minimalMillVersion" -> V.minimalMillVersion,
-        "millScipVersion" -> V.millScipVersion
+        "scala213" -> V.scala213
       )
   )
   .enablePlugins(BuildInfoPlugin)
@@ -241,31 +225,17 @@ lazy val cli = project
         sbtVersion,
         scalaVersion,
         "javacModuleOptions" -> javacModuleOptions,
-        "semanticdbScalacVersions" ->
-          com
-            .sourcegraph
-            .sbtsourcegraph
-            .Versions
-            .cachedSemanticdbVersionsByScalaVersion,
-        "sbtSourcegraphVersion" ->
-          com.sourcegraph.sbtsourcegraph.BuildInfo.version,
         "semanticdbVersion" -> V.scalameta,
-        "mtagsVersion" -> V.metals,
-        "scala213" -> V.scala213,
-        "scala3" -> V.scala3,
-        "minimalMillVersion" -> V.minimalMillVersion,
-        "millScipVersion" -> V.millScipVersion
+        "scala213" -> V.scala213
       ),
     buildInfoPackage := "com.sourcegraph.scip_java",
     libraryDependencies ++=
       List(
         "io.get-coursier" %% "coursier" % V.coursier,
         "io.get-coursier" %% "coursier-jvm" % V.coursier,
-        "org.scalameta" % "mtags-interfaces" % V.metals,
         "org.scala-lang.modules" %% "scala-xml" % V.scalaXml,
         "com.lihaoyi" %% "requests" % V.requests,
         "org.scalameta" %% "moped" % V.moped,
-        "org.scalameta" %% "ascii-graphs" % "0.1.2",
         "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion,
         "org.jetbrains.kotlin" % "kotlin-scripting-common" % V.kotlinVersion,
         "org.jetbrains.kotlin" % "kotlin-scripting-jvm" % V.kotlinVersion,
@@ -627,15 +597,6 @@ lazy val minimized21 = project
   .dependsOn(agent, javacPlugin)
   .disablePlugins(JavaFormatterPlugin)
 
-lazy val minimizedScala = project
-  .in(file("tests/minimized-scala"))
-  .settings(
-    (publish / skip) := true,
-    semanticdbOptions ++=
-      List("-P:semanticdb:text:on", "-P:semanticdb:synthetics:on")
-  )
-  .dependsOn(minimized)
-
 lazy val unit = project
   .in(file("tests/unit"))
   .settings(
@@ -649,11 +610,7 @@ lazy val unit = project
         "sourceroot" -> (ThisBuild / baseDirectory).value,
         "minimizedJavaSourceDirectory" -> minimizedSourceDirectory,
         "minimizedJavaTargetroot" ->
-          (minimized / Compile / semanticdbTargetRoot).value,
-        "minimizedScalaSourceDirectory" ->
-          (minimizedScala / Compile / sourceDirectory).value / "scala",
-        "minimizedScalaTargetroot" ->
-          (minimizedScala / Compile / semanticdbTargetRoot).value
+          (minimized / Compile / semanticdbTargetRoot).value
       ),
     buildInfoPackage := "tests"
   )
@@ -694,7 +651,7 @@ lazy val snapshots = project
       ),
     buildInfoPackage := "tests.snapshots"
   )
-  .dependsOn(minimizedScala, unit)
+  .dependsOn(unit)
   .enablePlugins(BuildInfoPlugin)
 
 lazy val bench = project
@@ -730,7 +687,6 @@ val testSettings = List(
   libraryDependencies ++=
     List(
       "org.scalameta" %% "munit" % "0.7.29",
-      "org.scalameta" %% "mtags" % V.metals cross CrossVersion.full,
       "org.scalameta" %% "moped-testkit" % V.moped,
       "org.scalameta" %% "scalameta" % V.scalameta,
       "io.get-coursier" %% "coursier" % V.coursier,

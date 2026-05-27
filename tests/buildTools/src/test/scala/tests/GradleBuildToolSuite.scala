@@ -104,7 +104,7 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     expectedPackages = "maven:com.sourcegraph:example-library:1.1"
   )
 
-  // This is the most basic test for Java/Scala support
+  // This is the most basic test for Java support
   // We run it for an extended list of Gradle versions
   checkGradleBuild(
     "basic",
@@ -113,7 +113,6 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |    // Apply the application plugin to add support for building a CLI application in Java.
        |    id 'application'
        |    id 'java'
-       |    id 'scala'
        |}
 
        |repositories {
@@ -124,7 +123,6 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |dependencies {
        |    // This dependency is used by the application.
        |    implementation 'com.google.guava:guava:31.1-jre'
-       |    implementation 'org.scala-lang:scala-library:2.13.8'
        |    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
        |    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
        |}
@@ -153,13 +151,10 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
        |         assertNotNull("app should have a greeting", classUnderTest.getGreeting());
        |     }
        | }
-       |/src/main/scala/Howdy.scala
-       |case class Howdy(a: Int)
        |""".stripMargin,
-    expectedSemanticdbFiles = 3,
+    expectedSemanticdbFiles = 2,
     // Only add this test on Gradle 5 in the gradle 6 suite
-    gradleVersions = List(Gradle8, Gradle7, Gradle6, Gradle5),
-    tools = List(Scala2_13_8)
+    gradleVersions = List(Gradle8, Gradle7, Gradle6, Gradle5)
   )
 
   allJava.foreach { java =>
@@ -248,35 +243,6 @@ abstract class GradleBuildToolSuite(gradle: Tool.Gradle)
     gradleVersions = List(Gradle8, Gradle7, Gradle6)
   )
 
-  checkGradleBuild(
-    s"scala",
-    """|/build.gradle
-       |plugins {
-       |    id 'scala'
-       |}
-       |repositories {
-       |    mavenCentral()
-       |}
-       |dependencies {
-       |  implementation 'org.scala-lang:scala-library:2.13.13'
-       |}
-       |/src/main/java/foo/JExample.java
-       |package foo;
-       |public class JExample {}
-       |/src/main/scala/foo/Example.scala
-       |package foo
-       |object Example {}
-       |/src/test/java/foo/JExampleSuite.java
-       |package foo;
-       |public class JExampleSuite {}
-       |/src/test/scala/foo/ExampleSuite.scala
-       |package foo
-       |class ExampleSuite {}
-       |""".stripMargin,
-    expectedSemanticdbFiles = 4,
-    gradleVersions = List(Gradle8, Gradle7, Gradle6),
-    tools = List(Scala213)
-  )
   checkGradleBuild(
     "kotlin2",
     """|/build.gradle

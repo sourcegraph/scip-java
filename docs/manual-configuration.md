@@ -54,12 +54,6 @@ If you're using Maven.
 </dependency>
 ```
 
-If you're using sbt.
-
-```scala
-libraryDependencies += "com.sourcegraph" % "semanticdb-javac" % "@STABLE_VERSION@"
-```
-
 ## Step 2: Enable `-Xplugin:semanticdb` compiler option
 
 Add `-Xplugin:semanticdb` to your compiler options to enable the SemanticDB
@@ -108,17 +102,6 @@ If you're using Maven.
  </project>
 ```
 
-If you're using sbt.
-
-```scala
-javaHome := Some(...) // Must be configured to fork the compiler.
-Compile / javacOptions += {
-    val sourceroot = (ThisBuild / baseDirectory).value
-    val targetroot = sourceroot / "target" / "semanticdb-targetroot"
-    s"-Xplugin:semanticdb -sourceroot:$sourceroot -targetroot:$targetroot"
-}
-```
-
 ## Step 3: Compile the codebase
 
 Compile all source files in the codebase once the compiler setting has been
@@ -127,7 +110,6 @@ examples:
 
 - Gradle: `./gradlew clean compileJava compileTestJava`
 - Maven: `mvn clean verify -DskipTests`
-- sbt: `sbt clean test:compile`
 - Bazel: `bazel build //...`
 
 If everything went well, you should have a lot of `*.semanticdb` files in the
