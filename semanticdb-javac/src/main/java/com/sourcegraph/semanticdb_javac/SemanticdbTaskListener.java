@@ -119,7 +119,7 @@ public final class SemanticdbTaskListener implements TaskListener {
         else writeSemanticdb(e, output, textDocument);
 
         if (options.emitScip) {
-          emitScipShard(e, output, textDocument);
+          emitScipShard(e, output);
         }
       } else {
         reporter.error(path.getErrorOrThrow(), e);
@@ -128,14 +128,17 @@ public final class SemanticdbTaskListener implements TaskListener {
   }
 
   /**
-   * Mirrors {@link #writeSemanticdb}/{@link #appendSemanticdb} but for the {@code *.scip} shard
-   * layout under {@code META-INF/scip/}. Reuses the in-memory {@link Semanticdb.TextDocument} built
-   * by {@link SemanticdbVisitor} so we do not pay for a second AST walk.
+   * Drives {@link ScipVisitor} over the compilation unit to build a {@code *.scip} shard under the
+   * matching {@code META-INF/scip/} path. During the SemanticDB→SCIP transition this is a second
+   * AST walk; once the legacy {@code *.semanticdb} output is removed the SCIP walk will be the only
+   * one.
    */
-  private void emitScipShard(TaskEvent event, Path semanticdbPath, Semanticdb.TextDocument doc) {
+  private void emitScipShard(TaskEvent event, Path semanticdbPath) {
     try {
       Path shardPath = scipShardPath(semanticdbPath);
-      com.sourcegraph.Scip.Index shard = ScipShardFromSemanticdb.buildShard(doc, doc.getUri());
+      com.sourcegraph.Scip.Index shard =
+          new ScipVisitor(globals, event.getCompilationUnit(), options, types, trees, elements)
+              .buildShard(event.getCompilationUnit());
       ScipShardWriter.writeOrMerge(shardPath, shard);
     } catch (IOException ex) {
       this.reportException(ex, event);
