@@ -654,17 +654,6 @@ lazy val snapshots = project
   .dependsOn(unit)
   .enablePlugins(BuildInfoPlugin)
 
-lazy val bench = project
-  .in(file("tests/benchmarks"))
-  .settings(
-    moduleName := "scip-java-bench",
-    Jmh / bspEnabled := false,
-    (run / fork) := true,
-    (publish / skip) := true
-  )
-  .dependsOn(unit)
-  .enablePlugins(JmhPlugin)
-
 lazy val javaOnlySettings = List[Def.Setting[_]](
   javafmtOnCompile := false,
   autoScalaLibrary := false,
