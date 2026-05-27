@@ -9,7 +9,7 @@ import scala.collection.mutable.ListBuffer
 lazy val V =
   new {
     val protobuf = "4.32.1"
-    val coursier = "2.1.9"
+    val coursier = "2.1.24"
     val scalaXml = "2.1.0"
     val moped = "0.2.0"
     val gradle = "7.0"
