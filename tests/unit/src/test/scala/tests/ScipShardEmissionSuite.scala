@@ -54,7 +54,7 @@ class ScipShardEmissionSuite extends FunSuite {
     assertEquals(shard.getDocumentsCount, 1)
     val doc = shard.getDocuments(0)
     assertEquals(doc.getRelativePath, "example/Foo.java")
-    assertEquals(doc.getLanguage, "Java")
+    assertEquals(doc.getLanguage, "java")
 
     val symbols = doc.getSymbolsList.asScala
     assert(symbols.nonEmpty, "expected at least one symbol")
@@ -79,7 +79,7 @@ class ScipShardEmissionSuite extends FunSuite {
     // At least one definition should carry a Java signature_documentation block.
     val withSignatures = symbols.filter { info =>
       info.hasSignatureDocumentation &&
-      info.getSignatureDocumentation.getLanguage == "Java" &&
+      info.getSignatureDocumentation.getLanguage == "java" &&
       info.getSignatureDocumentation.getText.nonEmpty
     }
     assert(
