@@ -27,8 +27,6 @@ object BuildTool {
     // first detected build tool will be used in `auto` mode
     // Bazel is missing because it isn't supported by auto-indexing
 
-    // first as it indicates user's intent to use SCIP auto-indexing
-    new ScipBuildTool(index),
     // Maven first, then Gradle
     // To match the order indicated in IntelliJ Java developer survey 2022:
     // https://www.jetbrains.com/lp/devecosystem-2022/java/#which-build-systems-do-you-regularly-use-if-any-

@@ -4,13 +4,6 @@
 # `scip-java` binary is already installed at `/app/scip-java/bin/scip-java`.
 set -eu
 JVM_VERSION="${JVM_VERSION:-21,17,11,8}"
-FILE="$PWD/lsif-java.json"
-if test -f "$FILE"; then
-	FROM_CONFIG=$(jq -r '.jvm' "$FILE")
-	if [ "$FROM_CONFIG" != "null" ]; then
-		JVM_VERSION="$FROM_CONFIG"
-	fi
-fi
 
 JVM_VERSIONS=$(echo "$JVM_VERSION" | tr "," "\n")
 

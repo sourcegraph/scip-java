@@ -57,16 +57,27 @@ import os.ProcessOutput.Readlines
 import os.SubprocessException
 
 /**
- * A custom build tool that is specifically made for scip-java.
+ * Internal build-tool worker used exclusively by the Bazel aspect.
  *
- * The purpose of this build tool is to SCIP index the source code inside
- * `*-sources.jar` files of Maven dependencies. Builds are written in a JSON
- * file with the following format:
+ * This tool is no longer part of the user-facing build-tool auto-detection
+ * surface (see [[BuildTool.autoOrdered]]). It is dispatched directly from
+ * [[com.sourcegraph.scip_java.commands.IndexCommand]] when the hidden
+ * `--scip-config` flag is provided, which is how the Bazel aspect
+ * (`scip_java.bzl`) invokes per-target indexing.
+ *
+ * The aspect generates a JSON file per Bazel target with the following
+ * shape and passes its path via `--scip-config`:
  *
  * {{{
  *   {
- *     "dependencies": ["junit:junit:4.13.1"],
- *     "jvm": "11"
+ *     "javaHome": "/path/to/jdk",
+ *     "classpath": [...],
+ *     "sourceFiles": [...],
+ *     "javacOptions": [...],
+ *     "jvmOptions": [...],
+ *     "processors": [...],
+ *     "processorpath": [...],
+ *     "bootclasspath": [...]
  *   }
  * }}}
  */
@@ -83,9 +94,10 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     .getPathMatcher("glob:**.{java,kt}")
   private val moduleInfo = Paths.get("module-info.java")
 
-  override def usedInCurrentDirectory(): Boolean = configFiles.exists(path =>
-    Files.isRegularFile(path)
-  )
+  // ScipBuildTool is dispatched directly from IndexCommand.run() when
+  // --scip-config is provided, so it does not participate in build-tool
+  // auto-detection.
+  override def usedInCurrentDirectory(): Boolean = false
   override def isHidden: Boolean = true
   override def generateScip(): Int = {
     BuildTool.generateScipFromTargetroot(
@@ -97,11 +109,6 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
   private def targetroot: Path = index.finalTargetroot(defaultTargetroot)
   private def defaultTargetroot: Path = Paths.get("target")
-  private def configFiles =
-    index.scipConfig.toList ++
-      ScipBuildTool
-        .ConfigFileNames
-        .map(name => index.workingDirectory.resolve(name))
   private def generateSemanticdb(): CommandResult = {
     parsedConfig match {
       case ValueResult(value) =>
@@ -125,14 +132,13 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     }
   }
 
-  /** Parses the lsif-java.json file into a Config object. */
+  /** Parses the --scip-config file into a Config object. */
   private def parsedConfig: Result[Config] = {
-    configFiles.find(path => Files.isRegularFile(path)) match {
+    index.scipConfig.filter(Files.isRegularFile(_)) match {
       case None =>
         ErrorResult(
           Diagnostic.error(
-            s"no config file found. To fix this problem, create a config file in the path '${configFiles
-                .head}'"
+            s"no --scip-config file found at '${index.scipConfig.map(_.toString).getOrElse("")}'"
           )
         )
       case Some(configFile) =>
@@ -635,7 +641,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   }
 
   /**
-   * Gets parsed from "junit:junit:4.13.1" strings inside lsif-java.json files.
+   * Gets parsed from "junit:junit:4.13.1" strings inside --scip-config files.
    */
   private case class Dependency(
       groupId: String = "",
@@ -682,7 +688,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       }
   }
 
-  /** Gets parsed from lsif-java.json files. */
+  /** Gets parsed from --scip-config files. */
   private case class Config(
       reportWarningOnEmptyIndex: Boolean = true,
       javaHome: Option[String] = None,
@@ -704,14 +710,6 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 }
 
 object ScipBuildTool {
-  // This file is named "lsif-java.json" instead of "scip-java.json" in order to
-  // preserve compatibility with "JVM dependencies" repos
-  // (https://docs.sourcegraph.com/integration/jvm). If we rename to
-  // "scip-java.json" then the git commit SHAs of these repos changes and old
-  // canonical URLs will become 404 links. The lsif-java.json file is not
-  // supposed to be written by end-users anyways. It's mostly an implementation
-  // default for how we support cross-repo navigation with scip-java.
-  val ConfigFileNames = List("scip-java.json", "lsif-java.json")
   val isIgnoredAnnotationProcessor = Set(
     "org.openjdk.jmh.generators.BenchmarkProcessor"
   )
