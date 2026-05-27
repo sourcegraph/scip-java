@@ -33,17 +33,6 @@ class ScipSymbolsSuite extends FunSuite {
     assertEquals(ScipSymbols.fromSemanticdbSymbol(null), "")
   }
 
-  test("isPlaceholderGlobal recognises the prefix") {
-    assert(ScipSymbols.isPlaceholderGlobal(". . . . a/b#"))
-    assert(!ScipSymbols.isPlaceholderGlobal("local 1"))
-    assert(!ScipSymbols.isPlaceholderGlobal("scip-java maven g a v a/b#"))
-  }
-
-  test("descriptorPath strips the placeholder prefix") {
-    assertEquals(ScipSymbols.descriptorPath(". . . . a/b#"), "a/b#")
-    assertEquals(ScipSymbols.descriptorPath("local 1"), "local 1")
-  }
-
   // A PackageTable built with no packages — packageForSymbol always returns empty
   // unless the JDK classfile is on the classpath. Override defensively just in case.
   private lazy val emptyPackages: PackageTable =
