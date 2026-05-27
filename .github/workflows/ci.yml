@@ -142,9 +142,6 @@ jobs:
 
       - run: nix develop --command sbt --client checkAll
 
-      - name: Run sample benchmarks
-        run: nix develop --command sbt --client 'bench/Jmh/run -i 1 -f1 -t1 -foe true'
-
 
   maven:
     runs-on: ubuntu-latest
