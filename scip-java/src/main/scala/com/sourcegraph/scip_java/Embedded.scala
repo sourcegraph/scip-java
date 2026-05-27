@@ -34,8 +34,7 @@ object Embedded {
       sourceroot: Path,
       targetroot: Path,
       tmp: Path,
-      javaAtLeast17: Boolean,
-      emitScip: Boolean = false
+      javaAtLeast17: Boolean
   ): Path = {
     val bin = tmp.resolve("bin")
     val javac = bin.resolve("javac")
@@ -57,11 +56,6 @@ object Embedded {
         BuildInfo.javacModuleOptions.mkString(" ")
       else
         ""
-    val emitScipProp =
-      if (emitScip)
-        s"-Dsemanticdb.emit-scip=true "
-      else
-        ""
     val injectSemanticdbArguments = List[String](
       "java",
       s"-Dsemanticdb.errorpath=$errorpath",
@@ -70,7 +64,7 @@ object Embedded {
       s"-Dsemanticdb.targetroot=$targetroot",
       s"-Dsemanticdb.output=$$NEW_JAVAC_OPTS",
       s"-Dsemanticdb.old-output=$javacopts",
-      s"${emitScipProp}-classpath $pluginpath",
+      s"-classpath $pluginpath",
       "com.sourcegraph.semanticdb_javac.InjectSemanticdbOptions",
       """"$@""""
     ).mkString(" ")

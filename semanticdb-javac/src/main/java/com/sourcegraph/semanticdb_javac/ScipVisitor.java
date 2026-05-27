@@ -1,7 +1,6 @@
 package com.sourcegraph.semanticdb_javac;
 
 import com.sourcegraph.Scip;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 import com.sun.source.tree.AnnotatedTypeTree;
 import com.sun.source.tree.ClassTree;
@@ -53,11 +52,8 @@ import javax.tools.Diagnostic;
  *
  * <p>Structurally this is a fork of {@link SemanticdbVisitor} that emits SCIP types instead of
  * SemanticDB ones. Symbols are produced through {@link GlobalSymbolsCache} and then translated to
- * the placeholder SCIP form via {@link ScipSymbols#fromSemanticdbSymbol(String)}.
- *
- * <p>Signature documentation and SemanticDB-only metadata (access, annotations, full SemanticDB
- * type tree) are not yet emitted; those will be added by {@code ScipSignatureFormatter} in a
- * follow-up milestone.
+ * the placeholder SCIP form via {@link ScipSymbols#fromSemanticdbSymbol(String)}. Signature
+ * documentation is produced by {@link ScipSignatureFormatter} directly from javac's element model.
  */
 public final class ScipVisitor extends TreePathScanner<Void, Void> {
 
@@ -70,7 +66,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
   private final SemanticdbJavacOptions options;
   private final ArrayList<Scip.Occurrence> occurrences;
   private final LinkedHashMap<String, Scip.SymbolInformation> symbols;
-  private String source;
+  private final String source;
   private final String relativePath;
   private final LinkedHashMap<Tree, TreePath> nodes;
 
@@ -90,7 +86,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     this.compUnitTree = compUnitTree;
     this.occurrences = new ArrayList<>();
     this.symbols = new LinkedHashMap<>();
-    this.source = sourceText();
+    this.source = sourceText(compUnitTree);
     this.relativePath = sourceRelativePath(compUnitTree, options);
     this.nodes = new LinkedHashMap<>();
   }
@@ -107,7 +103,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     if (options.includeText) {
       document.setText(source);
     }
-    document.addAllOccurrences(dedupOccurrences(occurrences));
+    document.addAllOccurrences(ScipOccurrences.deduplicate(occurrences));
     document.addAllSymbols(symbols.values());
 
     return Scip.Index.newBuilder().addDocuments(document).build();
@@ -118,58 +114,6 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
    * tooling (see {@link com.sourcegraph.scip_semanticdb.ScipSemanticdb}).
    */
   static final String LANGUAGE_JAVA = "java";
-
-  /**
-   * Some AST patterns (in particular top-level class definitions touched by both the regular
-   * declaration walk and downstream resolvers) can produce two occurrences with the same {@code
-   * (symbol, range, roles)} that differ only by whether {@code enclosing_range} is set. The SCIP
-   * writer treats those as distinct by structural equality, so we collapse them here, preferring
-   * the variant that carries an {@code enclosing_range}.
-   */
-  private static List<Scip.Occurrence> dedupOccurrences(List<Scip.Occurrence> occurrences) {
-    LinkedHashMap<OccurrenceKey, Scip.Occurrence> out = new LinkedHashMap<>();
-    for (Scip.Occurrence occ : occurrences) {
-      OccurrenceKey key = OccurrenceKey.of(occ);
-      Scip.Occurrence existing = out.get(key);
-      if (existing == null) {
-        out.put(key, occ);
-        continue;
-      }
-      // Prefer the variant with a populated enclosing_range.
-      if (existing.getEnclosingRangeCount() == 0 && occ.getEnclosingRangeCount() > 0) {
-        out.put(key, occ);
-      }
-    }
-    return new ArrayList<>(out.values());
-  }
-
-  private static final class OccurrenceKey {
-    final String symbol;
-    final List<Integer> range;
-    final int roles;
-
-    OccurrenceKey(String symbol, List<Integer> range, int roles) {
-      this.symbol = symbol;
-      this.range = range;
-      this.roles = roles;
-    }
-
-    static OccurrenceKey of(Scip.Occurrence occ) {
-      return new OccurrenceKey(occ.getSymbol(), occ.getRangeList(), occ.getSymbolRoles());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-      if (!(o instanceof OccurrenceKey)) return false;
-      OccurrenceKey other = (OccurrenceKey) o;
-      return roles == other.roles && symbol.equals(other.symbol) && range.equals(other.range);
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hash(symbol, range, roles);
-    }
-  }
 
   // ==========================
   // Symbol/occurrence emission
@@ -242,8 +186,6 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     switch (sym.getKind()) {
       case ENUM:
       case CLASS:
-        addParentRelationships(builder, (TypeElement) sym, supportsReferenceRel);
-        break;
       case INTERFACE:
       case ANNOTATION_TYPE:
         addParentRelationships(builder, (TypeElement) sym, supportsReferenceRel);
@@ -332,18 +274,11 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
   }
 
   private static Scip.SymbolInformation.Kind scipKind(Element sym) {
-    int properties = 0;
-    for (Modifier modifier : sym.getModifiers()) {
-      if (modifier == Modifier.STATIC) properties |= Property.STATIC_VALUE;
-      else if (modifier == Modifier.ABSTRACT) properties |= Property.ABSTRACT_VALUE;
-      else if (modifier == Modifier.DEFAULT) properties |= Property.DEFAULT_VALUE;
-    }
-    if (((properties & Property.ABSTRACT_VALUE) > 0)
-        && ((properties & Property.DEFAULT_VALUE) > 0)) {
-      properties ^= Property.ABSTRACT_VALUE;
-    }
-    boolean isStatic = (properties & Property.STATIC_VALUE) > 0;
-    boolean isAbstract = (properties & Property.ABSTRACT_VALUE) > 0;
+    Set<Modifier> modifiers = sym.getModifiers();
+    boolean isStatic = modifiers.contains(Modifier.STATIC);
+    // A `default` interface method has both ABSTRACT and DEFAULT modifiers; treat it as non-abstract.
+    boolean isAbstract =
+        modifiers.contains(Modifier.ABSTRACT) && !modifiers.contains(Modifier.DEFAULT);
 
     switch (sym.getKind()) {
       case ENUM:
@@ -663,14 +598,12 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     return Optional.empty();
   }
 
-  private String sourceText() {
-    if (source != null) return source;
+  private static String sourceText(CompilationUnitTree tree) {
     try {
-      source = compUnitTree.getSourceFile().getCharContent(true).toString();
+      return tree.getSourceFile().getCharContent(true).toString();
     } catch (IOException e) {
-      source = "";
+      return "";
     }
-    return source;
   }
 
   private List<String> semanticdbParentSymbols(TypeElement typeElement) {

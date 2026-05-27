@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Aggregates per-source {@code *.scip} shards into a single {@link Scip.Index}.
@@ -316,14 +314,4 @@ public final class ScipShardAggregator {
     }
   }
 
-  // Make the existing flatten-style call available for callers that already have shards in memory.
-  @SuppressWarnings("unused")
-  Stream<Scip.Document> documentsFromShards(List<Scip.Index> shards) {
-    return shards.stream().flatMap(s -> s.getDocumentsList().stream()).map(this::rewriteDocument);
-  }
-
-  @SuppressWarnings("unused")
-  Stream<Scip.Document> documentsFromShardsCollected(List<Scip.Index> shards) {
-    return documentsFromShards(shards).collect(Collectors.toList()).stream();
-  }
 }

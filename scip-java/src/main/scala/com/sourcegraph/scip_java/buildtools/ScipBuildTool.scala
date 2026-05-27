@@ -383,13 +383,8 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       arguments += "-classpath"
       arguments += actualClasspath.mkString(File.pathSeparator)
     }
-    val emitScipFlag =
-      if (index.indexSemanticdb.useScipShards)
-        " -emit-scip:on"
-      else
-        ""
     arguments +=
-      s"-Xplugin:semanticdb -targetroot:$targetroot -sourceroot:$sourceroot$emitScipFlag"
+      s"-Xplugin:semanticdb -targetroot:$targetroot -sourceroot:$sourceroot"
     if (config.processorpath.nonEmpty) {
       arguments += "-processorpath"
       val processorpath =

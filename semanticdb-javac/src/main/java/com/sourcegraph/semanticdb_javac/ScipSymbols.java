@@ -43,15 +43,4 @@ public final class ScipSymbols {
     }
     return PLACEHOLDER_PREFIX + symbol;
   }
-
-  /** Returns {@code true} if {@code symbol} is a placeholder global symbol. */
-  public static boolean isPlaceholderGlobal(String symbol) {
-    return symbol != null && symbol.startsWith(PLACEHOLDER_PREFIX);
-  }
-
-  /** Strips the placeholder prefix, returning just the SemanticDB descriptor path. */
-  public static String descriptorPath(String placeholderSymbol) {
-    if (!isPlaceholderGlobal(placeholderSymbol)) return placeholderSymbol;
-    return placeholderSymbol.substring(PLACEHOLDER_PREFIX.length());
-  }
 }

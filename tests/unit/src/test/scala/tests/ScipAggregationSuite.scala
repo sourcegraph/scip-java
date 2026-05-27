@@ -16,9 +16,9 @@ import com.sourcegraph.scip_semanticdb.{
 import munit.FunSuite
 
 // End-to-end test for the SCIP shard aggregation pipeline: compile Java with
-// -emit-scip:on, run ScipShardAggregator over the produced META-INF/scip
-// shards, and assert the final index.scip is well-formed and uses the
-// scip-java symbol scheme.
+// the default shard emission, run ScipShardAggregator over the produced
+// META-INF/scip shards, and assert the final index.scip is well-formed and
+// uses the scip-java symbol scheme.
 class ScipAggregationSuite extends FunSuite {
 
   private val source =
@@ -41,7 +41,7 @@ class ScipAggregationSuite extends FunSuite {
       compiler.compile(
         Seq(source),
         Seq(
-          s"-Xplugin:semanticdb -emit-scip:on -text:on -sourceroot:$sourceroot -targetroot:$targetroot"
+          s"-Xplugin:semanticdb -text:on -sourceroot:$sourceroot -targetroot:$targetroot"
         )
       )
     assert(result.isSuccess, s"javac failed:\n${result.stdout}")
