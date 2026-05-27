@@ -169,7 +169,7 @@ lazy val javacPlugin = project
           .inAll
       )
   )
-  .dependsOn(semanticdb)
+  .dependsOn(semanticdb, scipProto)
 
 lazy val scipProto = project
   .in(file("scip-java-proto"))
@@ -694,6 +694,11 @@ lazy val fatjarPackageSettings = List[Def.Setting[_]](
     case PathList("sun", _ @_*) =>
       MergeStrategy.discard
     case PathList("META-INF", "versions", "9", "module-info.class") =>
+      MergeStrategy.discard
+    // Bazel BUILD files live next to *.proto sources in our subprojects; they are
+    // not needed at runtime and would conflict when multiple proto modules are
+    // merged into the same fat jar.
+    case PathList("BUILD") =>
       MergeStrategy.discard
     case x =>
       val oldStrategy = (assembly / assemblyMergeStrategy).value
