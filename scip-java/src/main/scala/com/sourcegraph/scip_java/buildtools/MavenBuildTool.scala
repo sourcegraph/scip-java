@@ -44,7 +44,8 @@ class MavenBuildTool(index: IndexCommand) extends BuildTool("Maven", index) {
         index.workingDirectory,
         index.finalTargetroot(defaultTargetroot),
         tmp,
-        GradleJavaToolchains.isJavaAtLeast(SystemJavaVersion.detect(), "11")
+        GradleJavaToolchains.isJavaAtLeast(SystemJavaVersion.detect(), "11"),
+        emitScip = index.indexSemanticdb.useScipShards
       )
       buildCommand ++=
         List(
