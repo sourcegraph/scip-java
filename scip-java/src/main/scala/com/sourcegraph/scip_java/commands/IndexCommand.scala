@@ -6,6 +6,7 @@ import java.nio.file.Paths
 
 import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.scip_java.buildtools.BuildTool
+import com.sourcegraph.scip_java.buildtools.ScipBuildTool
 import fansi.Color
 import moped.annotations._
 import moped.cli.Application
@@ -55,6 +56,21 @@ case class IndexCommand(
     packagehub: Option[String] = None,
     @Hidden // Hidden because it's only used for testing purposes
     temporaryDirectory: Option[Path] = None,
+    @Section("SCIP Build Tool")
+    @Description(
+      "List of Java compiler option prefixes that should be excluded from compilation during indexing. " +
+        "This flag is only used when indexing via scip-java.json files or Bazel."
+    )
+    scipIgnoredJavacOptionPrefixes: List[String] = Nil,
+    @Description(
+      "List of fully qualified annotation processors that should be ignored when indexing a codebase. " +
+        "This flag is only used when indexing via scip-java.json files or Bazel."
+    )
+    scipIgnoredAnnotationProcessors: List[String] = Nil,
+    @Description(
+      "Path to a scip-java.json file with build configuration. By default, the path scip-java.json is used."
+    )
+    scipConfig: Option[Path] = None,
     @Section("Bazel")
     @Description(
       "Optional path to a `scip-java` binary. Required to index a Bazel codebase."
@@ -155,13 +171,17 @@ case class IndexCommand(
             unknownBuildTool(buildTool, usedBuildTools)
           case tool :: Nil =>
             tool.generateScip()
-          case many =>
-            val names = many.map(_.name).mkString(", ")
-            app.error(
-              s"Multiple build tools detected: $names. " +
-                s"To fix this problem, use the '--build-tool=BUILD_TOOL_NAME' flag to specify which build tool to run."
-            )
-            1
+          case many @ (first :: rest) =>
+            if (first.isInstanceOf[ScipBuildTool] && scipConfig.isDefined) {
+              first.generateScip()
+            } else {
+              val names = many.map(_.name).mkString(", ")
+              app.error(
+                s"Multiple build tools detected: $names. " +
+                  s"To fix this problem, use the '--build-tool=BUILD_TOOL_NAME' flag to specify which build tool to run."
+              )
+              1
+            }
         }
     }
   }
