@@ -23,12 +23,7 @@ class ScipSemanticdbBench {
       List("com.google.guava:guava:30.1-jre")
     )
     val compiler =
-      new TestCompiler(
-        deps.classpathSyntax,
-        javacOptions = Nil,
-        scalacOptions = Nil,
-        targetroot
-      )
+      new TestCompiler(deps.classpathSyntax, javacOptions = Nil, targetroot)
     CompileBench.foreachSource(deps) { inputs =>
       compiler.compileSemanticdb(inputs).byteCode.length
     }

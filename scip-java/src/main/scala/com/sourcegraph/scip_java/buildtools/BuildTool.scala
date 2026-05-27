@@ -29,14 +29,11 @@ object BuildTool {
 
     // first as it indicates user's intent to use SCIP auto-indexing
     new ScipBuildTool(index),
-    // Maven first, then Gradle, then SBT
-    // To match the order indicated in IntelliJ Java and Scala developer surveys 2022:
-    // 1. https://www.jetbrains.com/lp/devecosystem-2022/java/#which-build-systems-do-you-regularly-use-if-any-
-    // 2. https://www.jetbrains.com/lp/devecosystem-2022/scala/#which-build-systems-do-you-regularly-use-if-any-
+    // Maven first, then Gradle
+    // To match the order indicated in IntelliJ Java developer survey 2022:
+    // https://www.jetbrains.com/lp/devecosystem-2022/java/#which-build-systems-do-you-regularly-use-if-any-
     new MavenBuildTool(index),
-    new GradleBuildTool(index),
-    new SbtBuildTool(index),
-    new MillBuildTool(index)
+    new GradleBuildTool(index)
   )
   def allNames: String = all(IndexCommand())
     .filterNot(_.isHidden)

@@ -28,8 +28,8 @@ There are several benefits to implementing scip-java as a compiler plugin:
 ### Why SemanticDB?
 
 SemanticDB is Protobuf schema for information about symbols and types in Java
-programs, Scala programs and other languages. There are several benefits to
-using SemanticDB as an intermediary representation for SCIP:
+programs and other languages. There are several benefits to using SemanticDB as
+an intermediary representation for SCIP:
 
 - **Simplicity**: It's easy to translate a single Java source file into a single
   SemanticDB file inside a compiler plugin. It's more complicated to produce
@@ -39,14 +39,9 @@ using SemanticDB as an intermediary representation for SCIP:
 - **Performance**: SemanticDB is fast to write and read. Each compilation unit
   can be processed independently to keep memory usage low. The final conversion
   from SemanticDB to SCIP can be safely parallelized.
-- **Cross-language**: SemanticDB has a
-  [spec](https://scalameta.org/docs/semanticdb/specification.html) for Java and
-  Scala enabling cross-language navigation in hybrid Java/Scala codebases.
 - **Cross-repository**: Compiler plugins have access to both source code and the
   classpath (compiled bytecode of upstream dependencies). SemanticDB has been
   designed so that it's also possible to generate spec-compliant symbols from
   the classpath alone (no source code) and from the syntax tree of an individual
-  source file (no classpath). This flexibility allows the
-  [Metals](https://scalameta.org/metals/) language server to index codebases
-  from a variety of different inputs, and will be helpful for scip-java in the
-  future to unblock cross-repository navigation.
+  source file (no classpath). This flexibility will be helpful for scip-java in
+  the future to unblock cross-repository navigation.

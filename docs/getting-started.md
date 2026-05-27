@@ -5,7 +5,7 @@ title: Getting started
 
 By following the instructions on this page, you should be able to generate a
 [SCIP](https://github.com/sourcegraph/scip) index of your Java codebase using
-Gradle, Maven, sbt, or Bazel. See
+Gradle, Maven, or Bazel. See
 [Supported build tools](#supported-build-tools) for an overview of other build
 tools that we're planning to support in the future.
 
@@ -136,16 +136,9 @@ If you're using Maven.
 </dependency>
 ```
 
-If you're using sbt.
-
-```scala
-scalaVersion := "@SCALA_VERSION@" // Only Scala 2.13 is supported.
-libraryDependencies += "com.sourcegraph" %% "scip-java" % "@STABLE_VERSION@"
-```
-
 ## Run `scip-java index`
 
-> The `index` command is only supported for Gradle, Maven and sbt. See
+> The `index` command is only supported for Gradle and Maven. See
 > [Supported build tools](#supported-build-tools) for more details about other
 > build tools.
 
@@ -156,18 +149,16 @@ This command should automatically infer the structure of your codebase and
 configure your build tool to generate SCIP.
 
 ```sh
-# At the root of a Gradle, Maven or sbt codebase.
+# At the root of a Gradle or Maven codebase.
 $ scip-java index
 ...
 info: /path/to/index.scip
 ```
 
-| Build tool | Default command                                                                 |
-| ---------- | ------------------------------------------------------------------------------- |
-| Gradle     | `clean compileTestJava compileTestScala compileTestKotlin compileTestKotlinJvm` |
-| Maven      | `--batch-mode clean verify -DskipTests`                                         |
-| sbt        | `sourcegraphEnable sourcegraphScip` (via sbt-sourcegraph plugin)                |
-| Mill       | `io.kipp.mill.scip.Scip/generate` (via mill-scip plugin)                        |
+| Build tool | Default command                                            |
+| ---------- | ---------------------------------------------------------- |
+| Gradle     | `clean compileTestJava compileTestKotlin compileTestKotlinJvm` |
+| Maven      | `--batch-mode clean verify -DskipTests`                    |
 
 Customize the build command by passing additional arguments after
 `scip-java index --`.
@@ -208,11 +199,10 @@ com.sourcegraph.scip_java.ScipJava.printHelp(Console.out)
 
 ## Supported programming languages
 
-| Programming language | Gradle | Maven | sbt | Mill | Tracking issue                                              |
-| -------------------- | ------ | ----- | --- | ---- | ----------------------------------------------------------- |
-| Java                 | ✅     | ✅    | ✅  | ✅   |                                                             |
-| Scala                | ✅     | ❌    | ✅  | ✅   | [#302](https://github.com/sourcegraph/scip-java/issues/302) |
-| Kotlin               | ✅     | ❌    | n/a | n/a  |                                                             |
+| Programming language | Gradle | Maven | Tracking issue |
+| -------------------- | ------ | ----- | -------------- |
+| Java                 | ✅     | ✅    |                |
+| Kotlin               | ✅     | ❌    |                |
 
 ### Java
 
@@ -239,26 +229,11 @@ For Java 17 and newer versions, the following JVM options are required:
 --add-exports jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED
 ```
 
-### Scala
-
-Scala version support should always match the Scala versions that are supported
-by [Metals](https://scalameta.org/metals), the Scala language server.
-
-| Scala version | Goto definition | Find references | Hover |
-| ------------- | --------------- | --------------- | ----- |
-| Scala 2.11.x  | ❌              | ❌              | ❌    |
-| Scala 2.12.x  | ❌              | ❌              | ❌    |
-| Scala 2.13.x  | ✅              | ✅              | ✅    |
-| Scala 3.x     | ✅              | ✅              | ❌    |
-
-> Scala.js and Scala Native have equal support as Scala on the JVM.
-
 ### Kotlin
 
-The Kotlin support in scip-java is less mature compared to the Java and Scala
-support. Don't hesitate to report issues at
-https://github.com/sourcegraph/scip-java if you encounter issues using the
-Kotlin support.
+The Kotlin support in scip-java is less mature compared to the Java support.
+Don't hesitate to report issues at https://github.com/sourcegraph/scip-java if
+you encounter issues using the Kotlin support.
 
 ## Supported build tools
 
@@ -271,15 +246,13 @@ tools may require [manual configuration](manual-configuration.md).
 Please open an issue if your build tool is not listed in the table below. Feel
 free to subscribe to the tracking issues to receive updates on your build tool.
 
-| Build tool | Java | Scala | Kotlin | Tracking issue                                                                   |
-| ---------- | ---- | ----- | ------ | -------------------------------------------------------------------------------- |
-| Maven      | ✅   | ❌    | ❌     |                                                                                  |
-| Gradle     | ✅   | ✅    | ✅     |                                                                                  |
-| sbt        | ✅   | ✅    | n/a    |                                                                                  |
-| Ant        | ❌   | ❌    | ❌     | [sourcegraph/scip-java#305](https://github.com/sourcegraph/scip-java/issues/305) |
-| Bazel      | ✅   | ✅    | ❌     |                                                                                  |
-| Buck       | ❌   | ❌    | ❌     | [sourcegraph/scip-java#99](https://github.com/sourcegraph/scip-java/issues/99)   |
-| Mill       | ✅   | ✅    | ❌     |
+| Build tool | Java | Kotlin | Tracking issue                                                                   |
+| ---------- | ---- | ------ | -------------------------------------------------------------------------------- |
+| Maven      | ✅   | ❌     |                                                                                  |
+| Gradle     | ✅   | ✅     |                                                                                  |
+| Ant        | ❌   | ❌     | [sourcegraph/scip-java#305](https://github.com/sourcegraph/scip-java/issues/305) |
+| Bazel      | ✅   | ❌     |                                                                                  |
+| Buck       | ❌   | ❌     | [sourcegraph/scip-java#99](https://github.com/sourcegraph/scip-java/issues/99)   |
 
 **✅**: automatic indexing is fully supported. Please report a bug if the
 `scip-java index` command does not work on your codebase.
@@ -310,7 +283,6 @@ The following Gradle integrations are not yet supported:
 | ----------- | --------- | -------------------------------------------------------------------------------- |
 | Android     | ❌        | [sourcegraph/scip-java#177](https://github.com/sourcegraph/scip-java/issues/177) |
 | Kotlin      | ✅        |                                                                                  |
-| Scala       | ✅        |                                                                                  |
 
 ### Maven
 
@@ -322,28 +294,7 @@ The following Maven integrations are not yet supported:
 
 | Integration         | Supported | Tracking issue                                                                   |
 | ------------------- | --------- | -------------------------------------------------------------------------------- |
-| scala-maven-plugin  | ❌        | [sourcegraph/scip-java#301](https://github.com/sourcegraph/scip-java/issues/301) |
-| scalor-maven-plugin | ❌        | [sourcegraph/scip-java#301](https://github.com/sourcegraph/scip-java/issues/301) |
 | kotlin-maven-plugin | ❌        | [sourcegraph/scip-java#304](https://github.com/sourcegraph/scip-java/issues/304) |
-
-### sbt
-
-The `scip-java index` build should be able to automatically index most sbt
-projects, with the following caveats:
-
-| Integration   | Supported | Recommendation          |
-| ------------- | --------- | ----------------------- |
-| sbt <v0.13.17 | ❌        | Upgrade to sbt v0.13.17 |
-
-### Mill
-
-The `scip-java index` build should be able to automatically index most Mill
-projects, with the following caveats:
-
-| Integration   | Supported           | Recommendation                              |
-| ------------- | ------------------- | ------------------------------------------- |
-| Mill <v0.10.0 | ❌                  | Upgrade to Mill >= v0.10.0                  |
-| Mill <v0.10.6 | Only supports Scala | Upgrade to Mill >= v0.10.6 for Java support |
 
 ### Bazel
 

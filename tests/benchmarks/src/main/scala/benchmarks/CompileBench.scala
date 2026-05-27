@@ -38,7 +38,6 @@ class CompileBench {
       new TestCompiler(
         deps.classpathSyntax,
         javacOptions = Nil,
-        scalacOptions = Nil,
         targetroot = tmp
       )
   }

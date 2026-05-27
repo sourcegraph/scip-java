@@ -1,6 +1,5 @@
 package tests
 
-import com.sourcegraph.scip_java.{BuildInfo => V}
 import moped.testkit.FileLayout
 
 class ScipBuildToolSuite extends BaseBuildToolSuite {
@@ -171,39 +170,4 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
          |maven:org.hamcrest:hamcrest-core:1.3
          |""".stripMargin
   )
-
-  case class ScalaCombination(
-      binaryVersion: String,
-      fullVersion: String,
-      standardLibraryVersion: String
-  )
-
-  List(
-    ScalaCombination("2.13", V.scala213, V.scala213),
-    // The Scala 2.13 version of the build and the Scala 2.13 version of
-    // Scala 3's standard library are not necessarily aligned
-    ScalaCombination("3", V.scala3, "2.13.12")
-  ).foreach { scala =>
-    checkBuild(
-      s"scala-${scala.fullVersion}",
-      s"""|/lsif-java.json
-          |{"dependencies": ["com.lihaoyi:geny_${scala.binaryVersion}:0.6.10"]}
-          |/foo/Example.scala
-          |package foo
-          |object Example {
-          |  val gen = geny.Generator(1, 2, 3)
-          |}
-          |/foo/JavaExample.java
-          |package foo;
-          |public class JavaExample {
-          |  public static final geny.Generator gen = geny.Generator(1, 2, 3);
-          |}
-          |""".stripMargin,
-      expectedSemanticdbFiles = 2,
-      expectedPackages =
-        s"""|maven:com.lihaoyi:geny_${scala.binaryVersion}:0.6.10
-            |maven:org.scala-lang:scala-library:${scala.standardLibraryVersion}
-            |""".stripMargin
-    )
-  }
 }
