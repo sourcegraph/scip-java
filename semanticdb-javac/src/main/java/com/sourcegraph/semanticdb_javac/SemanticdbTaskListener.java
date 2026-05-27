@@ -54,7 +54,10 @@ public final class SemanticdbTaskListener implements TaskListener {
       Result<Path, String> semanticdbPath = semanticdbOutputPath(options, e);
       if (semanticdbPath.isOk()) {
         try {
-          Files.deleteIfExists(semanticdbPath.getOrThrow());
+          Path sdb = semanticdbPath.getOrThrow();
+          Files.deleteIfExists(sdb);
+          // Also drop any stale SCIP shard so we don't accumulate occurrences across builds.
+          Files.deleteIfExists(scipShardPath(sdb));
         } catch (IOException ex) {
           this.reportException(ex, e);
         }

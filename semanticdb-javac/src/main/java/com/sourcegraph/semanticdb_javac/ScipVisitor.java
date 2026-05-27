@@ -103,14 +103,72 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     Scip.Document.Builder document =
         Scip.Document.newBuilder()
             .setRelativePath(relativePath)
-            .setLanguage(Scip.Language.Java.name());
+            .setLanguage(LANGUAGE_JAVA);
     if (options.includeText) {
       document.setText(source);
     }
-    document.addAllOccurrences(occurrences);
+    document.addAllOccurrences(dedupOccurrences(occurrences));
     document.addAllSymbols(symbols.values());
 
     return Scip.Index.newBuilder().addDocuments(document).build();
+  }
+
+  /**
+   * SCIP `Document.language` value. Lowercased to match the canonical scheme used by other
+   * tooling (see {@link com.sourcegraph.scip_semanticdb.ScipSemanticdb}).
+   */
+  static final String LANGUAGE_JAVA = "java";
+
+  /**
+   * Some AST patterns (in particular top-level class definitions touched by both the regular
+   * declaration walk and downstream resolvers) can produce two occurrences with the same {@code
+   * (symbol, range, roles)} that differ only by whether {@code enclosing_range} is set. The SCIP
+   * writer treats those as distinct by structural equality, so we collapse them here, preferring
+   * the variant that carries an {@code enclosing_range}.
+   */
+  private static List<Scip.Occurrence> dedupOccurrences(List<Scip.Occurrence> occurrences) {
+    LinkedHashMap<OccurrenceKey, Scip.Occurrence> out = new LinkedHashMap<>();
+    for (Scip.Occurrence occ : occurrences) {
+      OccurrenceKey key = OccurrenceKey.of(occ);
+      Scip.Occurrence existing = out.get(key);
+      if (existing == null) {
+        out.put(key, occ);
+        continue;
+      }
+      // Prefer the variant with a populated enclosing_range.
+      if (existing.getEnclosingRangeCount() == 0 && occ.getEnclosingRangeCount() > 0) {
+        out.put(key, occ);
+      }
+    }
+    return new ArrayList<>(out.values());
+  }
+
+  private static final class OccurrenceKey {
+    final String symbol;
+    final List<Integer> range;
+    final int roles;
+
+    OccurrenceKey(String symbol, List<Integer> range, int roles) {
+      this.symbol = symbol;
+      this.range = range;
+      this.roles = roles;
+    }
+
+    static OccurrenceKey of(Scip.Occurrence occ) {
+      return new OccurrenceKey(occ.getSymbol(), occ.getRangeList(), occ.getSymbolRoles());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (!(o instanceof OccurrenceKey)) return false;
+      OccurrenceKey other = (OccurrenceKey) o;
+      return roles == other.roles && symbol.equals(other.symbol) && range.equals(other.range);
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(symbol, range, roles);
+    }
   }
 
   // ==========================
@@ -174,7 +232,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     if (!signature.isEmpty()) {
       builder.setSignatureDocumentation(
           Scip.Document.newBuilder()
-              .setLanguage(Scip.Language.Java.name())
+              .setLanguage(LANGUAGE_JAVA)
               .setRelativePath(relativePath)
               .setText(signature));
     }
@@ -243,6 +301,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
       case INTERFACE:
       case CLASS:
       case ANNOTATION_TYPE:
+      case ENUM:
         return false;
       default:
         return true;
