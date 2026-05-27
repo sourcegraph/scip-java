@@ -20,7 +20,6 @@ class MinimizedSnapshotScipGenerator extends SnapshotGenerator {
     val exit = ScipJava.app.run(args)
     require(exit == 0)
   }
-  def onFinished(context: SnapshotContext): Unit = ()
   override def run(context: SnapshotContext, handler: SnapshotHandler): Unit = {
     onTargetroot(
       context,
