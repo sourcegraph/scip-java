@@ -14,8 +14,5 @@ addSbtPlugin("com.github.sbt.junit" % "sbt-jupiter-interface" % "0.15.1")
 // [error] (plugin / Compile / compileIncremental) java.lang.NoClassDefFoundError: com/sun/tools/javac/code/Symbol
 addSbtPlugin("org.scala-debugger" % "sbt-jdi-tools" % "1.1.1")
 
-libraryDependencies ++=
-  List("com.thesamet.scalapb" %% "compilerplugin" % "0.11.11")
-
 ThisBuild / libraryDependencySchemes ++=
   Seq("org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always)
