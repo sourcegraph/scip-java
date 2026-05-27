@@ -44,6 +44,7 @@ class MinimizedSnapshotScipGenerator {
         sourceroot.toString(),
         "--output",
         scipOutput.toString,
+        "--use-scip-shards",
         "--targetroot",
         targetroot.toString()
       )

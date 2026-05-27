@@ -167,8 +167,75 @@ public final class ScipShardAggregator {
   }
 
   private void mergeInto(Scip.Document.Builder target, Scip.Document fresh) {
-    target.addAllOccurrences(fresh.getOccurrencesList());
-    target.addAllSymbols(fresh.getSymbolsList());
+    // Deduplicate occurrences by (range, symbol, roles) so that shards produced by repeated
+    // compilation rounds (or by multiple targetroots) don't introduce duplicate entries.
+    // Variants that differ only by enclosing_range are collapsed, preferring the one that has it.
+    LinkedHashMap<OccurrenceKey, Scip.Occurrence> occurrences = new LinkedHashMap<>();
+    for (Scip.Occurrence occ : target.getOccurrencesList()) putOccurrence(occurrences, occ);
+    for (Scip.Occurrence occ : fresh.getOccurrencesList()) putOccurrence(occurrences, occ);
+    target.clearOccurrences().addAllOccurrences(occurrences.values());
+
+    // Deduplicate symbols by symbol string; merge relationships of duplicates.
+    LinkedHashMap<String, Scip.SymbolInformation> bySymbol = new LinkedHashMap<>();
+    for (Scip.SymbolInformation info : target.getSymbolsList()) {
+      bySymbol.put(info.getSymbol(), info);
+    }
+    for (Scip.SymbolInformation info : fresh.getSymbolsList()) {
+      Scip.SymbolInformation existing = bySymbol.get(info.getSymbol());
+      bySymbol.put(info.getSymbol(), existing == null ? info : mergeSymbol(existing, info));
+    }
+    target.clearSymbols().addAllSymbols(bySymbol.values());
+  }
+
+  private static void putOccurrence(
+      LinkedHashMap<OccurrenceKey, Scip.Occurrence> out, Scip.Occurrence occ) {
+    OccurrenceKey key = OccurrenceKey.of(occ);
+    Scip.Occurrence existing = out.get(key);
+    if (existing == null) {
+      out.put(key, occ);
+      return;
+    }
+    if (existing.getEnclosingRangeCount() == 0 && occ.getEnclosingRangeCount() > 0) {
+      out.put(key, occ);
+    }
+  }
+
+  private static final class OccurrenceKey {
+    final String symbol;
+    final java.util.List<Integer> range;
+    final int roles;
+
+    OccurrenceKey(String symbol, java.util.List<Integer> range, int roles) {
+      this.symbol = symbol;
+      this.range = range;
+      this.roles = roles;
+    }
+
+    static OccurrenceKey of(Scip.Occurrence occ) {
+      return new OccurrenceKey(occ.getSymbol(), occ.getRangeList(), occ.getSymbolRoles());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (!(o instanceof OccurrenceKey)) return false;
+      OccurrenceKey other = (OccurrenceKey) o;
+      return roles == other.roles && symbol.equals(other.symbol) && range.equals(other.range);
+    }
+
+    @Override
+    public int hashCode() {
+      return java.util.Objects.hash(symbol, range, roles);
+    }
+  }
+
+  private static Scip.SymbolInformation mergeSymbol(
+      Scip.SymbolInformation a, Scip.SymbolInformation b) {
+    Scip.SymbolInformation.Builder builder = b.toBuilder();
+    LinkedHashMap<Scip.Relationship, Scip.Relationship> rels = new LinkedHashMap<>();
+    for (Scip.Relationship r : a.getRelationshipsList()) rels.put(r, r);
+    for (Scip.Relationship r : b.getRelationshipsList()) rels.put(r, r);
+    builder.clearRelationships().addAllRelationships(rels.values());
+    return builder.build();
   }
 
   // --- metadata ------------------------------------------------------------
