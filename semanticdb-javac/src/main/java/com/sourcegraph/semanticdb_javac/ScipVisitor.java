@@ -170,6 +170,15 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
       builder.addDocumentation(documentation);
     }
 
+    String signature = new ScipSignatureFormatter(sym).formatSymbol();
+    if (!signature.isEmpty()) {
+      builder.setSignatureDocumentation(
+          Scip.Document.newBuilder()
+              .setLanguage(Scip.Language.Java.name())
+              .setRelativePath(relativePath)
+              .setText(signature));
+    }
+
     boolean supportsReferenceRel = supportsReferenceRelationship(sym);
 
     switch (sym.getKind()) {
