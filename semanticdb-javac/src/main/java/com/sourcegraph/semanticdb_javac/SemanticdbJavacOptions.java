@@ -24,6 +24,13 @@ public class SemanticdbJavacOptions {
   public Path sourceroot;
   public boolean includeText = false;
   public boolean verboseEnabled = false;
+  /**
+   * When {@code true}, the plugin also emits {@code *.scip} shards under {@code META-INF/scip/...}
+   * alongside the existing {@code *.semanticdb} files. Defaults to {@code false} during the
+   * SemanticDB→SCIP transition.
+   */
+  public boolean emitScip = false;
+
   public final ArrayList<String> errors;
   public boolean alreadyReportedErrors = false;
   public UriScheme uriScheme = UriScheme.DEFAULT;
@@ -97,6 +104,10 @@ public class SemanticdbJavacOptions {
         result.verboseEnabled = true;
       } else if (arg.equals("-verbose:off")) {
         result.verboseEnabled = false;
+      } else if (arg.equals("-emit-scip:on")) {
+        result.emitScip = true;
+      } else if (arg.equals("-emit-scip:off")) {
+        result.emitScip = false;
       } else if (arg.startsWith("-randomtimestamp")) {
       } else {
         result.errors.add(String.format("unknown flag '%s'\n", arg));
