@@ -568,7 +568,6 @@ lazy val minimizedSettings = List[Def.Setting[_]](
       s"-Xplugin:semanticdb",
       s"-text:on",
       s"-verbose",
-      s"-emit-scip:on",
       s"-sourceroot:${(ThisBuild / baseDirectory).value}",
       s"-targetroot:${(Compile / semanticdbTargetRoot).value}",
       s"-randomtimestamp=${System.nanoTime()}"
