@@ -11,7 +11,5 @@ abstract class SnapshotSuite(generator: SnapshotGenerator)
   )
 }
 
-class LibrarySnapshotSuite extends SnapshotSuite(new LibrarySnapshotGenerator)
-
 class MinimizedSnapshotScipSuite
     extends SnapshotSuite(new MinimizedSnapshotScipGenerator)

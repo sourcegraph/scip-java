@@ -3,7 +3,6 @@ package com.sourcegraph.scip_java
 import java.io.PrintStream
 
 import com.sourcegraph.scip_java.commands.IndexCommand
-import com.sourcegraph.scip_java.commands.IndexDependencyCommand
 import com.sourcegraph.scip_java.commands.IndexSemanticdbCommand
 import com.sourcegraph.scip_java.commands.SnapshotCommand
 import moped.cli.Application
@@ -21,7 +20,6 @@ object ScipJava {
       CommandParser[VersionCommand],
       CommandParser[IndexCommand],
       CommandParser[IndexSemanticdbCommand],
-      CommandParser[IndexDependencyCommand],
       CommandParser[SnapshotCommand]
     )
   )

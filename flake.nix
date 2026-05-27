@@ -27,7 +27,6 @@
               git
               (gradle.override ({ java = jdk; }))
               jdk
-              jq
               (maven.override ({ jdk_headless = jdk; }))
               nixfmt
               nodejs
