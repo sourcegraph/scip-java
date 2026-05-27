@@ -1,18 +1,14 @@
 import _root_.kotlin.Keys._
-import sbtdocker.DockerfileBase
 import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
 import scala.xml.transform.{RewriteRule, RuleTransformer}
 import java.io.File
 import java.nio.file.Files
 import java.util.Properties
 import scala.collection.mutable.ListBuffer
-import scala.util.control.NoStackTrace
 
 lazy val V =
   new {
-    val protobuf = "3.15.6"
-    val protoc =
-      "3.17.3" // the oldest protoc version with Apple M1 support, see https://github.com/scalapb/ScalaPB/issues/1024#issuecomment-860126568
+    val protobuf = "4.32.1"
     val coursier = "2.1.9"
     val scalaXml = "2.1.0"
     val moped = "0.2.0"
@@ -25,10 +21,6 @@ lazy val V =
     val minimalMillVersion = "0.10.0"
     val millScipVersion = "0.3.6"
     val kotlinVersion = "2.2.0"
-    // semanticdb-kotlinc has its own (older) protobuf-java codegen pinned to
-    // 3.17.3 to keep the wire format stable for the kotlinc plugin without
-    // perturbing the rest of scip-java.
-    val semanticdbKotlincProtobuf = "3.17.3"
     val kotest = "4.6.3"
     val kctfork = "0.7.1"
   }
@@ -36,15 +28,13 @@ lazy val V =
 inThisBuild(
   List(
     scalaVersion := V.scala213,
-    crossScalaVersions := List(V.scala213),
-    scalafixCaching := true,
     scalacOptions ++= List("-Wunused:imports"),
     semanticdbEnabled := true,
     semanticdbVersion := V.scalameta,
     organization := "com.sourcegraph",
     homepage := Some(url("https://github.com/sourcegraph/scip-java")),
     dynverSeparator := "-",
-    PB.protocVersion := V.protoc,
+    PB.protocVersion := V.protobuf,
     licenses :=
       List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
     developers :=
@@ -111,7 +101,6 @@ lazy val gradlePlugin = project
   .in(file("semanticdb-gradle-plugin"))
   .settings(
     name := "semanticdb-gradle",
-    scalaVersion := V.scala213,
     buildInfoPackage := "com.sourcegraph.scip_java",
     publish / skip := true,
     scalacOptions ++= Seq("-target:11", "-release", "11"),
@@ -392,12 +381,8 @@ lazy val semanticdbKotlinc = project
     Compile / PB.protoSources :=
       Seq((Compile / sourceDirectory).value / "proto"),
     Compile / PB.targets :=
-      Seq(
-        PB.gens.java(V.semanticdbKotlincProtobuf) ->
-          (Compile / sourceManaged).value
-      ),
-    libraryDependencies +=
-      "com.google.protobuf" % "protobuf-java" % V.semanticdbKotlincProtobuf,
+      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
+    libraryDependencies += "com.google.protobuf" % "protobuf-java" % V.protobuf,
     // kotlin-compiler-embeddable is supplied by kotlinc at runtime
     libraryDependencies +=
       "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion %
