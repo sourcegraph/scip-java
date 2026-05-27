@@ -235,14 +235,7 @@ lazy val cli = project
         "io.get-coursier" %% "coursier-jvm" % V.coursier,
         "org.scala-lang.modules" %% "scala-xml" % V.scalaXml,
         "com.lihaoyi" %% "requests" % V.requests,
-        "org.scalameta" %% "moped" % V.moped,
-        "org.jetbrains.kotlin" % "kotlin-compiler-embeddable" % V.kotlinVersion,
-        "org.jetbrains.kotlin" % "kotlin-scripting-common" % V.kotlinVersion,
-        "org.jetbrains.kotlin" % "kotlin-scripting-jvm" % V.kotlinVersion,
-        "org.jetbrains.kotlin" % "kotlin-scripting-dependencies" %
-          V.kotlinVersion,
-        "org.jetbrains.kotlin" % "kotlin-scripting-dependencies-maven" %
-          V.kotlinVersion
+        "org.scalameta" %% "moped" % V.moped
       ),
     (Compile / resourceGenerators) +=
       Def

@@ -57,10 +57,6 @@ case class IndexCommand(
     @Hidden // Hidden because it's only used for testing purposes
     temporaryDirectory: Option[Path] = None,
     @Hidden // Internal flag used by the Bazel aspect to pass per-target build configuration.
-    scipIgnoredJavacOptionPrefixes: List[String] = Nil,
-    @Hidden // Internal flag used by the Bazel aspect to pass per-target build configuration.
-    scipIgnoredAnnotationProcessors: List[String] = Nil,
-    @Hidden // Internal flag used by the Bazel aspect to pass per-target build configuration.
     scipConfig: Option[Path] = None,
     @Section("Bazel")
     @Description(
@@ -77,9 +73,6 @@ case class IndexCommand(
       "If true, automatically tries to extract the printed out sandbox command and re-run the command to reveal the underlying problem."
     )
     bazelAutorunSandboxCommand: Boolean = true,
-    @Hidden
-    @Description("Fail command invocation if compiler produces any errors")
-    strictCompilation: Boolean = false,
     @Description(
       "Optional. The build command to use to compile all sources. " +
         "Defaults to a build-specific command. For example, the default command for Maven command is 'clean verify -DskipTests'." +
@@ -147,7 +140,7 @@ case class IndexCommand(
     // bypass build-tool auto-detection entirely and dispatch directly to
     // the internal ScipBuildTool worker.
     if (scipConfig.isDefined) {
-      return new ScipBuildTool(this).generateScip()
+      return new ScipBuildTool(this).run()
     }
 
     val allBuildTools = BuildTool.all(this)

@@ -1,72 +1,41 @@
 package com.sourcegraph.scip_java.buildtools
 
 import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.nio.file.FileSystems
-import java.nio.file.FileVisitResult
 import java.nio.file.Files
 import java.nio.file.NoSuchFileException
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.nio.file.SimpleFileVisitor
-import java.nio.file.attribute.BasicFileAttributes
-import java.util
-import java.util.jar.JarFile
 
-import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.ListBuffer
-import scala.concurrent.Await
-import scala.concurrent.ExecutionContext
-import scala.concurrent.duration.Duration
 import scala.jdk.CollectionConverters._
-import scala.language.postfixOps
-import scala.util.Failure
-import scala.util.Success
-import scala.util.Try
 import scala.util.control.NonFatal
 
 import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.BuildInfo
-import com.sourcegraph.scip_java.Dependencies
 import com.sourcegraph.scip_java.Embedded
+import com.sourcegraph.scip_java.buildtools.ScipBuildTool.Config
 import com.sourcegraph.scip_java.commands.IndexCommand
-import coursier.jvm.JvmIndex
 import moped.json.DecodingContext
 import moped.json.ErrorResult
-import moped.json.JsonCodec
-import moped.json.JsonElement
-import moped.json.JsonString
 import moped.json.Result
 import moped.json.ValueResult
-import moped.macros.ClassShape
 import moped.parsers.JsonParser
 import moped.reporters.Diagnostic
 import moped.reporters.Input
-import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
-import org.jetbrains.kotlin.cli.common.arguments.ParseCommandLineArgumentsKt.parseCommandLineArguments
-import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
-import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSourceLocation
-import org.jetbrains.kotlin.cli.common.messages.MessageCollector
-import org.jetbrains.kotlin.cli.common.messages.MessageRenderer
-import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler
-import org.jetbrains.kotlin.config.Services
 import os.CommandResult
 import os.ProcessOutput.Readlines
 import os.SubprocessException
 
 /**
- * Internal build-tool worker used exclusively by the Bazel aspect.
+ * Internal worker dispatched by the Bazel aspect (`scip_java.bzl`).
  *
- * This tool is no longer part of the user-facing build-tool auto-detection
- * surface (see [[BuildTool.autoOrdered]]). It is dispatched directly from
- * [[com.sourcegraph.scip_java.commands.IndexCommand]] when the hidden
- * `--scip-config` flag is provided, which is how the Bazel aspect
- * (`scip_java.bzl`) invokes per-target indexing.
+ * The aspect writes one JSON file per Java target and invokes
+ * `scip-java index --scip-config <file>` against each one. That entry-point
+ * is the only caller of this class; it is not part of the user-facing
+ * build-tool surface.
  *
- * The aspect generates a JSON file per Bazel target with the following
- * shape and passes its path via `--scip-config`:
+ * The expected JSON shape is:
  *
  * {{{
  *   {
@@ -77,63 +46,35 @@ import os.SubprocessException
  *     "jvmOptions": [...],
  *     "processors": [...],
  *     "processorpath": [...],
- *     "bootclasspath": [...]
+ *     "bootclasspath": [...],
+ *     "reportWarningOnEmptyIndex": false
  *   }
  * }}}
  */
-class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
+class ScipBuildTool(index: IndexCommand) {
 
-  private val javaPattern = FileSystems
-    .getDefault
-    .getPathMatcher("glob:**.java")
-  private val kotlinPattern = FileSystems
-    .getDefault
-    .getPathMatcher("glob:**.kt")
-  private val allPatterns = FileSystems
-    .getDefault
-    .getPathMatcher("glob:**.{java,kt}")
-  private val moduleInfo = Paths.get("module-info.java")
+  private val targetroot: Path =
+    index.finalTargetroot(Paths.get("target"))
 
-  // ScipBuildTool is dispatched directly from IndexCommand.run() when
-  // --scip-config is provided, so it does not participate in build-tool
-  // auto-detection.
-  override def usedInCurrentDirectory(): Boolean = false
-  override def isHidden: Boolean = true
-  override def generateScip(): Int = {
-    BuildTool.generateScipFromTargetroot(
-      generateSemanticdb(),
-      index.finalTargetroot(defaultTargetroot),
-      index
-    )
+  def run(): Int = {
+    BuildTool.generateScipFromTargetroot(generateSemanticdb(), targetroot, index)
   }
 
-  private def targetroot: Path = index.finalTargetroot(defaultTargetroot)
-  private def defaultTargetroot: Path = Paths.get("target")
-  private def generateSemanticdb(): CommandResult = {
+  private def generateSemanticdb(): CommandResult =
     parsedConfig match {
-      case ValueResult(value) =>
-        if (index.cleanup) {
-          clean()
-        }
-        try {
-          compile(value)
-        } catch {
+      case ValueResult(config) =>
+        try compileJavaFiles(config)
+        catch {
           case NonFatal(e) =>
             e.printStackTrace(index.app.out)
             CommandResult(Nil, 1, Nil)
         }
       case ErrorResult(error) =>
-        error
-          .all
-          .foreach { d =>
-            index.app.error(d.message)
-          }
+        error.all.foreach(d => index.app.error(d.message))
         CommandResult(Nil, 1, Nil)
     }
-  }
 
-  /** Parses the --scip-config file into a Config object. */
-  private def parsedConfig: Result[Config] = {
+  private def parsedConfig: Result[Config] =
     index.scipConfig.filter(Files.isRegularFile(_)) match {
       case None =>
         ErrorResult(
@@ -142,575 +83,184 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
           )
         )
       case Some(configFile) =>
-        val input = Input.path(configFile)
         JsonParser
-          .parse(input)
+          .parse(Input.path(configFile))
           .flatMap(json =>
             Config
               .codec
               .decode(DecodingContext(json).withFatalUnknownFields(true))
           )
     }
-  }
 
-  /**
-   * Resolves dependencies and shells out to "javac" to compile the sources with
-   * the SemanticDB compiler plugin enabled.
-   */
-  private def compile(config: Config): CommandResult = {
-    val tmp = Files.createTempDirectory("scip-java")
-    Files.createDirectories(tmp)
-    Files.createDirectories(targetroot)
-    val deps = Dependencies.resolveDependencies(config.dependencies.map(_.repr))
+  private def compileJavaFiles(config: Config): CommandResult = {
     val sourceroot = index.workingDirectory
     if (!Files.isDirectory(sourceroot)) {
       throw new NoSuchFileException(sourceroot.toString)
     }
-    val allSourceFiles = collectAllSourceFiles(config, sourceroot)
-    val javaFiles = allSourceFiles.filter(javaPattern.matches)
-    val kotlinFiles = allSourceFiles.filter(kotlinPattern.matches)
-    if (javaFiles.isEmpty && kotlinFiles.isEmpty) {
+
+    val javaHome = config.javaHome.getOrElse(
+      throw new IllegalArgumentException(
+        "missing required field `javaHome` in scip-config file"
+      )
+    )
+
+    val javaFiles = config
+      .sourceFiles
+      .map(p => AbsolutePath.of(Paths.get(p), sourceroot))
+      .filter(p => Files.isRegularFile(p) && p.toString.endsWith(".java"))
+
+    if (javaFiles.isEmpty) {
       if (config.reportWarningOnEmptyIndex) {
-        index
-          .app
-          .warning(
-            s"doing nothing, no files matching pattern '$sourceroot/**.{java,kt}'"
-          )
+        index.app.warning("doing nothing, no Java sources found")
       }
       return CommandResult(Nil, 0, Nil)
     }
 
-    val compileAttempts = ListBuffer.empty[Try[Unit]]
-    compileAttempts += compileJavaFiles(tmp, deps, config, javaFiles)
-    compileAttempts += compileKotlinFiles(deps, config, kotlinFiles, tmp)
-    val errors = compileAttempts.collect { case Failure(exception) =>
-      exception
-    }
+    val tmp = Files.createTempDirectory("scip-java")
+    try {
+      Files.createDirectories(targetroot)
+      val semanticdbJar = Embedded.semanticdbJar(tmp)
 
-    if (index.cleanup) {
-      Files.walkFileTree(tmp, new DeleteVisitor)
-    }
-    val isSemanticdbGenerated = Files.isDirectory(
-      targetroot.resolve("META-INF")
-    )
-    if (
-      errors.nonEmpty && (index.strictCompilation || !isSemanticdbGenerated)
-    ) {
-      errors.foreach { error =>
-        index.app.reporter.log(Diagnostic.exception(error))
-      }
-      CommandResult(Nil, 1, Nil)
-    } else {
-      if (errors.nonEmpty && isSemanticdbGenerated) {
-        index
-          .app
-          .reporter
-          .info(
-            "Some SemanticDB files got generated even if there were compile errors. " +
-              "In most cases, this means that scip-java managed to index everything " +
-              "except the locations that had compile errors and you can ignore the compile errors."
-          )
-        errors.foreach { error =>
-          index.app.reporter.info(error.getMessage())
-        }
-      }
-      CommandResult(Nil, 0, Nil)
-    }
-  }
+      val classpath =
+        semanticdbJar.toString +:
+          config.classpath.map(p => AbsolutePath.of(Paths.get(p), sourceroot).toString)
 
-  private def compileKotlinFiles(
-      deps: Dependencies,
-      config: Config,
-      allKotlinFiles: List[Path],
-      tmp: Path
-  ): Try[Unit] = {
-    if (allKotlinFiles.isEmpty || config.dependencies.isEmpty)
-      return Success()
-    val filesPaths = allKotlinFiles.map(_.toString)
-
-    // The semanticdb-kotlinc compiler plugin is now built and shipped together
-    // with the scip-java CLI as an embedded resource (see Embedded.scala and
-    // the cli/resourceGenerators task in build.sbt), so we no longer need to
-    // resolve a separately-published artifact from Maven Central.
-    val plugin = Embedded.semanticdbKotlincJar(tmp)
-
-    val self = config.dependencies.head
-    val commonKotlinFiles: List[Path] =
-      Dependencies.kotlinMPPCommon(
-        self.groupId,
-        self.artifactId,
-        self.version
-      ) match {
-        case Some(common) =>
-          val outdir = Files.createTempDirectory("scipjava-kotlin")
-          val file = common.toFile
-          val basename = file
-            .getName
-            .substring(0, file.getName.lastIndexOf("."))
-          val newFiles = ListBuffer[Path]()
-          val jar = new JarFile(file)
-          val enu = jar.entries
-          while (enu.hasMoreElements) {
-            val entry = enu.nextElement
-            val entryPath =
-              if (entry.getName.startsWith(basename))
-                entry.getName.substring(basename.length)
-              else
-                entry.getName
-
-            if (entry.isDirectory) {
-              new File(outdir.toString, entryPath).mkdirs
-            } else if (entry.getName.endsWith(".kt")) {
-              val newFile = new File(outdir.toString, entryPath)
-              newFiles.addOne(newFile.toPath)
-              val istream = jar.getInputStream(entry)
-              val ostream = new FileOutputStream(newFile)
-              Iterator
-                .continually(istream.read)
-                .takeWhile(-1 !=)
-                .foreach(ostream.write)
-              ostream.close()
-              istream.close()
-            }
-          }
-          newFiles.toList
-        case None =>
-          List[Path]()
-      }
-
-    val kargs: K2JVMCompilerArguments = new K2JVMCompilerArguments()
-    val args = ListBuffer[String](
-      "-nowarn",
-      "-no-reflect",
-      "-no-stdlib",
-      "-Xmulti-platform",
-      "-Xno-check-actual",
-      "-verbose:class",
-      "-opt-in=kotlin.RequiresOptIn",
-      "-opt-in=kotlin.ExperimentalUnsignedTypes",
-      "-opt-in=kotlin.ExperimentalStdlibApi",
-      "-opt-in=kotlin.ExperimentalMultiplatform",
-      "-opt-in=kotlin.contracts.ExperimentalContracts",
-      "-Xallow-kotlin-package",
-      s"-Xplugin=$plugin",
-      "-P",
-      s"plugin:semanticdb-kotlinc:sourceroot=$sourceroot",
-      "-P",
-      s"plugin:semanticdb-kotlinc:targetroot=$targetroot",
-      "-classpath",
-      deps.classpathSyntax
-    )
-
-    if (commonKotlinFiles.nonEmpty) {
-      val commonSources = commonKotlinFiles
-        .map(_.toAbsolutePath.toString)
-        .mkString(",")
-      args += s"-Xcommon-sources=$commonSources"
-    }
-
-    args ++= filesPaths ++ commonKotlinFiles.map(_.toAbsolutePath.toString)
-
-    parseCommandLineArguments(args.asJava, kargs, false)
-
-    val exit = new K2JVMCompiler().exec(
-      new MessageCollector {
-        private val errors = new util.LinkedList[String]
-        override def clear(): Unit = errors.clear()
-
-        override def hasErrors: Boolean = !errors.isEmpty
-
-        override def report(
-            compilerMessageSeverity: CompilerMessageSeverity,
-            s: String,
-            compilerMessageSourceLocation: CompilerMessageSourceLocation
-        ): Unit = {
-          if (
-            s.endsWith("without a body must be abstract") ||
-            s.endsWith("must have a body")
-          )
-            return // we get these when indexing the stdlib, no other solution found yet
-          val msg = MessageRenderer
-            .PLAIN_FULL_PATHS
-            .render(compilerMessageSeverity, s, compilerMessageSourceLocation)
-          index.app.reporter.debug(msg)
-          // Only treat ERROR / EXCEPTION as failures. Kotlin 2.2.0's
-          // K2JVMCompiler emits LOGGING messages at startup (e.g. about the
-          // missing scripting plugin) and INFO/WARNING messages during
-          // normal compilation; pushing those onto `errors` would cause
-          // hasErrors to return true, which makes the compiler return
-          // COMPILATION_ERROR even when nothing is actually wrong.
-          if (compilerMessageSeverity.isError) {
-            errors.push(msg)
-          }
-        }
-      },
-      Services.EMPTY,
-      kargs
-    )
-    if (exit.getCode == 0)
-      Success(())
-    else
-      Failure(new Exception(exit.toString))
-  }
-
-  private def compileJavaFiles(
-      tmp: Path,
-      deps: Dependencies,
-      config: Config,
-      allJavaFiles: List[Path]
-  ): Try[Unit] = {
-    val (moduleInfos, javaFiles) = allJavaFiles.partition(
-      _.endsWith(moduleInfo)
-    )
-    if (javaFiles.isEmpty)
-      return Success(())
-    val semanticdbJar = Embedded.semanticdbJar(tmp)
-    val actualClasspath = ArrayBuffer.empty[String]
-    actualClasspath += semanticdbJar.toString
-    actualClasspath ++=
-      config
-        .classpath
-        .map(path =>
-          AbsolutePath.of(Paths.get(path), index.workingDirectory).toString
-        )
-    actualClasspath ++= deps.classpath.map(_.toString)
-    val argsfile = targetroot.resolve("javacopts.txt")
-    val arguments = ListBuffer.empty[String]
-    arguments += "-encoding"
-    arguments += "utf8"
-    arguments += "-nowarn"
-    arguments += "-d"
-    arguments += generatedDir(tmp, "d")
-    arguments += "-s"
-    arguments += generatedDir(tmp, "s")
-    arguments += "-h"
-    arguments += generatedDir(tmp, "h")
-    if (actualClasspath.nonEmpty) {
+      val arguments = ListBuffer.empty[String]
+      arguments += "-encoding"
+      arguments += "utf8"
+      arguments += "-nowarn"
+      arguments += "-d"
+      arguments += createDir(tmp, "d")
+      arguments += "-s"
+      arguments += createDir(tmp, "s")
+      arguments += "-h"
+      arguments += createDir(tmp, "h")
       arguments += "-classpath"
-      arguments += actualClasspath.mkString(File.pathSeparator)
-    }
-    arguments +=
-      s"-Xplugin:semanticdb -targetroot:$targetroot -sourceroot:$sourceroot"
-    if (config.processorpath.nonEmpty) {
-      arguments += "-processorpath"
-      val processorpath =
-        semanticdbJar.toString ::
-          config
-            .processorpath
-            .flatMap(path => guessBazelJar(path, index.workingDirectory))
-            .map(_.toString)
-      arguments += processorpath.mkString(File.pathSeparator)
-    }
-    val isIgnoredAnnotationProcessor =
-      ScipBuildTool.isIgnoredAnnotationProcessor ++
-        index.scipIgnoredAnnotationProcessors
-    val processors = config.processors.filterNot(isIgnoredAnnotationProcessor)
-    if (processors.nonEmpty) {
-      arguments += "-processor"
-      arguments += processors.mkString(",")
-    }
-    arguments ++= fixJavacOptions(config.javacOptions)
-    if (config.kind == "jdk" && moduleInfos.nonEmpty) {
-      moduleInfos.foreach { module =>
-        arguments += "--module"
-        arguments += module.getParent.getFileName.toString
+      arguments += classpath.mkString(File.pathSeparator)
+      arguments += s"-Xplugin:semanticdb -targetroot:$targetroot -sourceroot:$sourceroot"
+
+      if (config.processorpath.nonEmpty) {
+        val resolved = semanticdbJar.toString ::
+          config.processorpath.flatMap(guessBazelJar).map(_.toString)
+        arguments += "-processorpath"
+        arguments += resolved.mkString(File.pathSeparator)
       }
-      arguments += "--module-source-path"
-      arguments += sourceroot.toString
-    } else {
+
+      val processors = config.processors.filterNot(ScipBuildTool.IgnoredAnnotationProcessors)
+      if (processors.nonEmpty) {
+        arguments += "-processor"
+        arguments += processors.mkString(",")
+      }
+
+      arguments ++= fixJavacOptions(config.javacOptions)
       arguments ++= javaFiles.map(_.toString)
-    }
-    val quotedArguments = arguments.map(a => "\"" + a + "\"")
-    Files.write(argsfile, quotedArguments.asJava)
-    if (javaFiles.size > 1) {
-      index.app.reporter.info(f"Compiling ${javaFiles.size}%,.0f Java sources")
-    }
-    val pipe = Readlines(line => {
-      index.app.reporter.info(line)
-    })
-    val javac = javacPath(config, tmp)
-    index.app.reporter.info(s"$$ $javac @$argsfile")
-    val javacModuleOptions: Seq[String] = BuildInfo.javacModuleOptions
 
-    val jvmOptions = config.jvmOptions.map("-J" + _)
+      val argsfile = targetroot.resolve("javacopts.txt")
+      Files.write(argsfile, arguments.map(a => "\"" + a + "\"").asJava)
 
-    val result = os
-      .proc(javac.toString, s"@$argsfile", javacModuleOptions, jvmOptions)
-      .call(
-        stdout = pipe,
-        stderr = pipe,
-        cwd = os.Path(sourceroot),
-        check = false
-      )
-    if (result.exitCode == 0)
-      Success(())
-    else
-      Failure(SubprocessException(result))
+      if (javaFiles.size > 1) {
+        index.app.reporter.info(f"Compiling ${javaFiles.size}%,.0f Java sources")
+      }
+
+      val javac = Paths.get(javaHome, "bin", "javac")
+      index.app.reporter.info(s"$$ $javac @$argsfile")
+      val pipe = Readlines(line => index.app.reporter.info(line))
+      val result = os
+        .proc(
+          javac.toString,
+          s"@$argsfile",
+          BuildInfo.javacModuleOptions,
+          config.jvmOptions.map("-J" + _)
+        )
+        .call(stdout = pipe, stderr = pipe, cwd = os.Path(sourceroot), check = false)
+
+      val isSemanticdbGenerated = Files.isDirectory(targetroot.resolve("META-INF"))
+      if (result.exitCode != 0 && !isSemanticdbGenerated) {
+        index.app.reporter.log(Diagnostic.exception(SubprocessException(result)))
+        CommandResult(Nil, 1, Nil)
+      } else {
+        if (result.exitCode != 0) {
+          index
+            .app
+            .reporter
+            .info(
+              "Some SemanticDB files got generated even if there were compile errors. " +
+                "In most cases, this means that scip-java managed to index everything " +
+                "except the locations that had compile errors and you can ignore the compile errors."
+            )
+        }
+        CommandResult(Nil, 0, Nil)
+      }
+    } finally {
+      if (index.cleanup) {
+        Files.walkFileTree(tmp, new DeleteVisitor)
+      }
+    }
   }
 
+  /** Strips javac options that would break SemanticDB indexing. */
   private def fixJavacOptions(options: List[String]): List[String] =
     options match {
       case "--release" :: _ :: rest =>
-        // Skip --release because it's not strictly needed for indexing,
-        // and it fails the build if -source/-target are also provided.
-        // In real-world testing, there were some builds that defined
-        // both -source/-target and --release even if javac rejects
-        // this combination of flags (because --release implies -source/-target).
-        // It could be that the Java rules have built-in support to automatically
-        // exclude duplicate -source/-target/--release flags.
+        // --release is incompatible with explicit -source/-target, which
+        // some Bazel targets configure simultaneously. Skip it because it
+        // is not required for indexing.
         fixJavacOptions(rest)
       case option :: rest =>
         val isIgnored =
-          option.startsWith("-Xep") || // ErrorProne flag, which fails the build
+          option.startsWith("-Xep") || // ErrorProne, fails the build
             option.startsWith("-Xplugin:semanticdb") || // Redundant SemanticDB
-            option.startsWith("-XD") || // unsure what this one does
-            index // User-provided flag
-              .scipIgnoredJavacOptionPrefixes
-              .exists(prefix => option.startsWith(prefix))
-
-        if (isIgnored)
-          fixJavacOptions(rest)
-        else
-          option :: fixJavacOptions(rest)
+            option.startsWith("-XD")
+        if (isIgnored) fixJavacOptions(rest) else option :: fixJavacOptions(rest)
       case Nil =>
         Nil
     }
 
-  private def javacPath(config: Config, tmp: Path): Path = {
-    config.javaHome match {
-      case Some(home) =>
-        Paths.get(home, "bin", "javac")
-      case None =>
-        javacPathViaCoursier(config.jvm, tmp)
-    }
-  }
-
-  private def javacPathViaCoursier(jvmVersion: String, tmp: Path): Path = {
-    import _root_.coursier.jvm._
-
-    val jvmChannel = index
-      .app
-      .env
-      .environmentVariables
-      .get("COURSIER_JVM_INDEX")
-      .map { idx =>
-        JvmChannel
-          .parse(idx)
-          .fold(
-            msg =>
-              throw new RuntimeException(
-                s"Malformed COURSIER_JVM_INDEX environment variable variable: $msg"
-              ),
-            identity
-          )
-      }
-
-    val home = JavaHome().withCache(
-      JvmCache()
-        .withIndexChannel(
-          repositories = Seq.empty,
-          indexChannel = jvmChannel.getOrElse(
-            JvmChannel.url(JvmIndex.defaultIndexUrl)
-          )
-        )
-        .withArchitecture(jvmArchitecture(jvmVersion))
-    )
-
-    val javaExecutable = Await.result(
-      home.javaBin(jvmVersion).value(ExecutionContext.global),
-      Duration.Inf
-    )
-
-    javaExecutable
-      .getParent()
-      .resolve {
-        if (scala.util.Properties.isWin)
-          "javac.exe"
-        else
-          "javac"
-      }
-
-  }
-
-  private def jvmArchitecture(jvm: String): String = JvmIndex
-    .defaultArchitecture()
-
-  def defaultCoursierJVMArchitecture: String =
-    sys.props("os.arch") match {
-      case "x86_64" =>
-        "amd64"
-      case x =>
-        x
-    }
-
-  private def clean(): Unit = {
-    Files.walkFileTree(targetroot, new DeleteVisitor)
-  }
-
-  private def collectAllSourceFiles(dir: Path) = {
-    val buf = List.newBuilder[Path]
-    Files.walkFileTree(
-      dir,
-      new SimpleFileVisitor[Path] {
-        override def preVisitDirectory(
-            dir: Path,
-            attrs: BasicFileAttributes
-        ): FileVisitResult = {
-          if (dir == targetroot)
-            FileVisitResult.SKIP_SUBTREE
-          else
-            FileVisitResult.CONTINUE
-        }
-        override def visitFile(
-            file: Path,
-            attrs: BasicFileAttributes
-        ): FileVisitResult = {
-          if (allPatterns.matches(file)) {
-            buf += file
-          }
-          FileVisitResult.CONTINUE
-        }
-        override def visitFileFailed(
-            file: Path,
-            exc: IOException
-        ): FileVisitResult = FileVisitResult.CONTINUE
-      }
-    )
-    buf.result()
-  }
-
-  /** Recursively collects all Java files in the working directory */
-  private def collectAllSourceFiles(config: Config, dir: Path): List[Path] = {
-    if (config.sourceFiles.nonEmpty) {
-      config
-        .sourceFiles
-        .flatMap { relativePath =>
-          val path = AbsolutePath.of(Paths.get(relativePath), dir)
-
-          if (Files.isRegularFile(path) && allPatterns.matches(path))
-            List(path)
-          else if (Files.isDirectory(path))
-            collectAllSourceFiles(path)
-          else
-            Nil
-        }
-    } else
-      collectAllSourceFiles(dir)
-  }
-
-  // HACK(olafurpg): I haven't figured out a reliable way to get annotation processor jars on the processorpath.
-  // The Bazel aspect sometimes says a NAME.jar file is on the processorpath when it doesn't exist but processed_NAME.jar or header_NAME.jar exists.
-  // The long-term solution is figuring out how to get the exact same processorpath as Bazel uses for compilation.
-  private def guessBazelJar(
-      pathString: String,
-      workingDirectory: Path
-  ): Option[Path] = {
+  // HACK(olafurpg): I haven't figured out a reliable way to get annotation processor jars
+  // on the processorpath. The Bazel aspect sometimes says a NAME.jar file is on the
+  // processorpath when it doesn't exist but processed_NAME.jar or header_NAME.jar exists.
+  private def guessBazelJar(pathString: String): Option[Path] = {
+    val workingDirectory = index.workingDirectory
     var path = AbsolutePath.of(Paths.get(pathString), workingDirectory)
-    if (Files.isRegularFile(path))
-      return Some(path)
+    if (Files.isRegularFile(path)) return Some(path)
 
-    // In some cases, the bazel-out/ prefix is missing from the path that Bazel gives us.
-    if (
-      !pathString.startsWith("bazel-bin") && !pathString.startsWith("bazel-out")
-    ) {
-      path = AbsolutePath.of(
-        Paths.get("bazel-bin", pathString),
-        workingDirectory
-      )
-
-      if (Files.isRegularFile(path))
-        return Some(path)
+    if (!pathString.startsWith("bazel-bin") && !pathString.startsWith("bazel-out")) {
+      path = AbsolutePath.of(Paths.get("bazel-bin", pathString), workingDirectory)
+      if (Files.isRegularFile(path)) return Some(path)
     }
 
-    val processed = path.resolveSibling(
-      "processed_" + path.getFileName.toString
-    )
-    if (Files.isRegularFile(processed))
-      return Some(processed)
+    val processed = path.resolveSibling("processed_" + path.getFileName.toString)
+    if (Files.isRegularFile(processed)) return Some(processed)
 
     val header = path.resolveSibling("header_" + path.getFileName.toString)
-    if (Files.isRegularFile(header))
-      return Some(header)
+    if (Files.isRegularFile(header)) return Some(header)
 
     index.app.warning("annotation processor jar does not exist: " + path)
     None
   }
 
-  private def generatedDir(tmp: Path, name: String): String = {
-    Files.createDirectory(tmp.resolve(name)).toString()
-  }
+  private def createDir(tmp: Path, name: String): String =
+    Files.createDirectory(tmp.resolve(name)).toString
+}
 
-  /**
-   * Gets parsed from "junit:junit:4.13.1" strings inside --scip-config files.
-   */
-  private case class Dependency(
-      groupId: String = "",
-      artifactId: String = "",
-      version: String = ""
-  ) {
-    def repr: String = s"$groupId:$artifactId:$version"
-  }
-  private object Dependency {
-    def unapply(syntax: String): Option[Dependency] =
-      syntax match {
-        case s"$groupId:$artifactId:$version" =>
-          Some(
-            Dependency(
-              groupId = groupId,
-              artifactId = artifactId,
-              version = version
-            )
-          )
-        case _ =>
-          None
-      }
-    val automatic = moped.macros.deriveCodec(Dependency())
-    implicit lazy val codec =
-      new JsonCodec[Dependency] {
-        def decode(context: DecodingContext): Result[Dependency] =
-          context.json match {
-            case JsonString(value) =>
-              value match {
-                case Dependency(x) =>
-                  ValueResult(x)
-                case other =>
-                  ErrorResult(
-                    Diagnostic.error(
-                      s"expected format 'GROUP_ID:ARTIFACT_ID:VERSION', obtained $other"
-                    )
-                  )
-              }
-            case _ =>
-              automatic.decode(context)
-          }
-        def encode(value: Dependency): JsonElement = automatic.encode(value)
-        def shape: ClassShape = automatic.shape
-      }
-  }
+object ScipBuildTool {
+  val IgnoredAnnotationProcessors: Set[String] = Set(
+    "org.openjdk.jmh.generators.BenchmarkProcessor"
+  )
 
-  /** Gets parsed from --scip-config files. */
+  /** Gets parsed from --scip-config files written by the Bazel aspect. */
   private case class Config(
       reportWarningOnEmptyIndex: Boolean = true,
       javaHome: Option[String] = None,
-      dependencies: List[Dependency] = Nil,
       sourceFiles: List[String] = Nil,
       classpath: List[String] = Nil,
       bootclasspath: List[String] = Nil,
       processorpath: List[String] = Nil,
       processors: List[String] = Nil,
       javacOptions: List[String] = Nil,
-      jvmOptions: List[String] = Nil,
-      jvm: String = "17",
-      kind: String = ""
+      jvmOptions: List[String] = Nil
   )
   private object Config {
     implicit lazy val codec = moped.macros.deriveCodec(Config())
   }
-
-}
-
-object ScipBuildTool {
-  val isIgnoredAnnotationProcessor = Set(
-    "org.openjdk.jmh.generators.BenchmarkProcessor"
-  )
 }
