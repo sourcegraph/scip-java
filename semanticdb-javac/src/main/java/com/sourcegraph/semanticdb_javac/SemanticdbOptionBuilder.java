@@ -23,6 +23,8 @@ public class SemanticdbOptionBuilder {
   private static final String TARGETROOT = System.getProperty("semanticdb.targetroot", "");
   private static final String OUTPUT = System.getProperty("semanticdb.output", "");
   private static final String OLD_OUTPUT = System.getProperty("semanticdb.old-output", "");
+  private static final boolean EMIT_SCIP =
+      Boolean.parseBoolean(System.getProperty("semanticdb.emit-scip", "false"));
 
   public void processArgument(String arg) {
     oldArgs.add(arg);
@@ -62,8 +64,10 @@ public class SemanticdbOptionBuilder {
   }
 
   private String xpluginOption() {
+    String emitScip = EMIT_SCIP ? " -emit-scip:on" : "";
     return String.format(
-        "\"-Xplugin:semanticdb -sourceroot:%s -targetroot:%s\"", SOURCEROOT, TARGETROOT);
+        "\"-Xplugin:semanticdb -sourceroot:%s -targetroot:%s%s\"",
+        SOURCEROOT, TARGETROOT, emitScip);
   }
 
   public ArrayList<String> finalResult() {
