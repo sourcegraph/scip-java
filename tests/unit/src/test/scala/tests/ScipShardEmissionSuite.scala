@@ -6,6 +6,7 @@ import scala.jdk.CollectionConverters._
 import scala.meta.Input
 
 import org.scip_code.scip.Index
+import org.scip_code.scip.SymbolInformation
 import com.sourcegraph.semanticdb_javac.ScipSymbols
 import munit.FunSuite
 
@@ -74,6 +75,33 @@ class ScipShardEmissionSuite extends FunSuite {
         s.startsWith(ScipSymbols.PLACEHOLDER_PREFIX) || s.startsWith("local ")
       assert(ok, s"unexpected occurrence symbol: $s")
     }
+
+    // At least one definition should carry a Java signature_documentation block.
+    val withSignatures = symbols.filter { info =>
+      info.hasSignatureDocumentation &&
+      info.getSignatureDocumentation.getLanguage == "Java" &&
+      info.getSignatureDocumentation.getText.nonEmpty
+    }
+    assert(
+      withSignatures.nonEmpty,
+      s"expected signature docs; got: ${symbols.mkString("\n")}"
+    )
+
+    val fooClass = symbols.find { info =>
+      info.getKind == SymbolInformation.Kind.Class &&
+      info.getDisplayName == "Foo"
+    }
+    assert(fooClass.isDefined, "expected Foo class symbol")
+    val text = fooClass.get.getSignatureDocumentation.getText
+    assert(text.contains("class Foo"), s"unexpected signature: $text")
+
+    val barMethod = symbols.find { info =>
+      info.getKind == SymbolInformation.Kind.Method &&
+      info.getDisplayName == "bar"
+    }
+    assert(barMethod.isDefined, "expected bar method symbol")
+    val barText = barMethod.get.getSignatureDocumentation.getText
+    assert(barText.contains("int bar("), s"unexpected bar signature: $barText")
   }
 
   test("compiler does not emit SCIP shards when -emit-scip is off") {

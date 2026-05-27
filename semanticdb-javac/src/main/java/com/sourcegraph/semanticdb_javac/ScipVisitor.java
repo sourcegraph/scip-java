@@ -4,6 +4,7 @@ import org.scip_code.scip.Document;
 import org.scip_code.scip.Index;
 import org.scip_code.scip.Occurrence;
 import org.scip_code.scip.Relationship;
+import org.scip_code.scip.Signature;
 import org.scip_code.scip.SymbolInformation;
 import org.scip_code.scip.SymbolRole;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
@@ -174,6 +175,12 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     String documentation = semanticdbDocumentation(tree);
     if (documentation != null && !documentation.isEmpty()) {
       builder.addDocumentation(documentation);
+    }
+
+    String signature = new ScipSignatureFormatter(sym).formatSymbol();
+    if (!signature.isEmpty()) {
+      builder.setSignatureDocumentation(
+          Signature.newBuilder().setLanguage(LANGUAGE_JAVA).setText(signature));
     }
 
     boolean supportsReferenceRel = supportsReferenceRelationship(sym);
