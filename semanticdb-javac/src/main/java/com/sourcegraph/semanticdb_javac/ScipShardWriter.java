@@ -11,18 +11,16 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Writes and merges per-source SCIP shards produced by the compiler plugin.
  *
  * <p>Each source file produces a self-contained {@link Index} shard containing a single {@link
- * Document}. When a shard already exists on disk (e.g. during annotation processing rounds),
- * the new document is merged into the existing one, deduplicating occurrences, symbols and
+ * Document}. When a shard already exists on disk (e.g. during annotation processing rounds), the
+ * new document is merged into the existing one, deduplicating occurrences, symbols and
  * relationships.
  */
 public final class ScipShardWriter {
@@ -87,9 +85,9 @@ public final class ScipShardWriter {
 
     // Deduplicate occurrences by (range, symbol, roles). Variants that differ only in
     // enclosing_range get collapsed, preferring the one that carries the enclosing range.
-    LinkedHashMap<OccurrenceKey, Occurrence> occurrences = new LinkedHashMap<>();
-    for (Occurrence occ : a.getOccurrencesList()) putOccurrence(occurrences, occ);
-    for (Occurrence occ : b.getOccurrencesList()) putOccurrence(occurrences, occ);
+    LinkedHashMap<ScipOccurrences.Key, Occurrence> occurrences = new LinkedHashMap<>();
+    for (Occurrence occ : a.getOccurrencesList()) ScipOccurrences.put(occurrences, occ);
+    for (Occurrence occ : b.getOccurrencesList()) ScipOccurrences.put(occurrences, occ);
     builder.addAllOccurrences(occurrences.values());
 
     // Deduplicate symbols by symbol string; merge relationships and documentation.
@@ -104,11 +102,10 @@ public final class ScipShardWriter {
     return builder.build();
   }
 
-  private static SymbolInformation mergeSymbol(
-      SymbolInformation a, SymbolInformation b) {
+  private static SymbolInformation mergeSymbol(SymbolInformation a, SymbolInformation b) {
     SymbolInformation.Builder builder = b.toBuilder();
-    // Merge relationships, deduplicating by structural equality.
-    Map<Relationship, Relationship> rels = new HashMap<>();
+    // Merge relationships, deduplicating by structural equality with deterministic ordering.
+    Map<Relationship, Relationship> rels = new LinkedHashMap<>();
     for (Relationship r : a.getRelationshipsList()) rels.put(r, r);
     for (Relationship r : b.getRelationshipsList()) rels.put(r, r);
     builder.clearRelationships().addAllRelationships(rels.values());
@@ -121,46 +118,5 @@ public final class ScipShardWriter {
     builder.clearDocumentation().addAllDocumentation(docs);
 
     return builder.build();
-  }
-
-  private static void putOccurrence(
-      LinkedHashMap<OccurrenceKey, Occurrence> out, Occurrence occ) {
-    OccurrenceKey key = OccurrenceKey.of(occ);
-    Occurrence existing = out.get(key);
-    if (existing == null) {
-      out.put(key, occ);
-      return;
-    }
-    if (existing.getEnclosingRangeCount() == 0 && occ.getEnclosingRangeCount() > 0) {
-      out.put(key, occ);
-    }
-  }
-
-  private static final class OccurrenceKey {
-    final String symbol;
-    final List<Integer> range;
-    final int roles;
-
-    OccurrenceKey(String symbol, List<Integer> range, int roles) {
-      this.symbol = symbol;
-      this.range = range;
-      this.roles = roles;
-    }
-
-    static OccurrenceKey of(Occurrence occ) {
-      return new OccurrenceKey(occ.getSymbol(), occ.getRangeList(), occ.getSymbolRoles());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-      if (!(o instanceof OccurrenceKey)) return false;
-      OccurrenceKey other = (OccurrenceKey) o;
-      return roles == other.roles && symbol.equals(other.symbol) && range.equals(other.range);
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hash(symbol, range, roles);
-    }
   }
 }

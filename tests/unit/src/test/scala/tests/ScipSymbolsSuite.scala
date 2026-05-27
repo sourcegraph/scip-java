@@ -1,18 +1,17 @@
 package tests
 
 import java.nio.file.Paths
-import java.util.{Collections, Optional}
+import java.util.Collections
+import java.util.Optional
 
-import org.scip_code.scip.ToolInfo
-import com.sourcegraph.scip_semanticdb.{
-  Package,
-  PackageTable,
-  ScipSemanticdbOptions,
-  ScipSemanticdbReporter,
-  SymbolRewriter
-}
+import com.sourcegraph.scip_semanticdb.Package
+import com.sourcegraph.scip_semanticdb.PackageTable
+import com.sourcegraph.scip_semanticdb.ScipSemanticdbOptions
+import com.sourcegraph.scip_semanticdb.ScipSemanticdbReporter
+import com.sourcegraph.scip_semanticdb.SymbolRewriter
 import com.sourcegraph.semanticdb_javac.ScipSymbols
 import munit.FunSuite
+import org.scip_code.scip.ToolInfo
 
 class ScipSymbolsSuite extends FunSuite {
 
@@ -32,17 +31,6 @@ class ScipSymbolsSuite extends FunSuite {
     assertEquals(ScipSymbols.fromSemanticdbSymbol(null), "")
   }
 
-  test("isPlaceholderGlobal recognises the prefix") {
-    assert(ScipSymbols.isPlaceholderGlobal(". . . . a/b#"))
-    assert(!ScipSymbols.isPlaceholderGlobal("local 1"))
-    assert(!ScipSymbols.isPlaceholderGlobal("scip-java maven g a v a/b#"))
-  }
-
-  test("descriptorPath strips the placeholder prefix") {
-    assertEquals(ScipSymbols.descriptorPath(". . . . a/b#"), "a/b#")
-    assertEquals(ScipSymbols.descriptorPath("local 1"), "local 1")
-  }
-
   // A PackageTable built with no packages — packageForSymbol always returns empty
   // unless the JDK classfile is on the classpath. Override defensively just in case.
   private lazy val emptyPackages: PackageTable =
@@ -52,11 +40,7 @@ class ScipSymbolsSuite extends FunSuite {
         Paths.get("/tmp"),
         Paths.get("/tmp"),
         new ScipSemanticdbReporter() {},
-        ToolInfo
-          .newBuilder()
-          .setName("scip-java")
-          .setVersion("test")
-          .build(),
+        ToolInfo.newBuilder().setName("scip-java").setVersion("test").build(),
         false,
         Collections.emptyList(),
         false,

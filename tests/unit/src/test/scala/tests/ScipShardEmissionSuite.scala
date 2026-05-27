@@ -11,8 +11,8 @@ import com.sourcegraph.semanticdb_javac.ScipSymbols
 import munit.FunSuite
 
 /**
- * Verifies that the `-emit-scip:on` plugin flag produces a parseable `*.scip`
- * shard alongside the existing `*.semanticdb` file.
+ * Verifies that the plugin produces a parseable `*.scip` shard alongside the
+ * existing `*.semanticdb` file by default, and that `-emit-scip:off` disables it.
  */
 class ScipShardEmissionSuite extends FunSuite {
 
@@ -29,7 +29,7 @@ class ScipShardEmissionSuite extends FunSuite {
       |""".stripMargin
   )
 
-  test("compiler emits a parseable SCIP shard when -emit-scip:on is set") {
+  test("compiler emits a parseable SCIP shard by default") {
     val targetroot = Files.createTempDirectory("scip-shard-emission-")
     val sourceroot = Files.createTempDirectory("scip-shard-emission-src-")
     val compiler =
@@ -37,7 +37,7 @@ class ScipShardEmissionSuite extends FunSuite {
     val result = compiler.compile(
       Seq(source),
       Seq(
-        s"-Xplugin:semanticdb -emit-scip:on -text:on -sourceroot:$sourceroot -targetroot:$targetroot"
+        s"-Xplugin:semanticdb -text:on -sourceroot:$sourceroot -targetroot:$targetroot"
       )
     )
     assert(result.isSuccess, s"javac failed:\n${result.stdout}")

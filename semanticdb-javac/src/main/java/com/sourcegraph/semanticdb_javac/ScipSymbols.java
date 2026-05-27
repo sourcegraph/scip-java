@@ -9,7 +9,7 @@ package com.sourcegraph.semanticdb_javac;
  *
  * <pre>
  *   ". . . . " + &lt;semanticdb-style descriptor path&gt;
- *     ->  "scip-java maven &lt;groupId&gt; &lt;artifactId&gt; &lt;version&gt; &lt;descriptor path&gt;"
+ *     -&gt;  "scip-java maven &lt;groupId&gt; &lt;artifactId&gt; &lt;version&gt; &lt;descriptor path&gt;"
  * </pre>
  *
  * <p>Local symbols are emitted using the canonical SCIP {@code "local N"} form (with the space) and
@@ -42,16 +42,5 @@ public final class ScipSymbols {
       return "local " + symbol.substring("local".length());
     }
     return PLACEHOLDER_PREFIX + symbol;
-  }
-
-  /** Returns {@code true} if {@code symbol} is a placeholder global symbol. */
-  public static boolean isPlaceholderGlobal(String symbol) {
-    return symbol != null && symbol.startsWith(PLACEHOLDER_PREFIX);
-  }
-
-  /** Strips the placeholder prefix, returning just the SemanticDB descriptor path. */
-  public static String descriptorPath(String placeholderSymbol) {
-    if (!isPlaceholderGlobal(placeholderSymbol)) return placeholderSymbol;
-    return placeholderSymbol.substring(PLACEHOLDER_PREFIX.length());
   }
 }

@@ -25,8 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Aggregates per-source {@code *.scip} shards into a single {@link Index}.
@@ -195,8 +193,7 @@ public final class ScipShardAggregator {
     target.clearSymbols().addAllSymbols(bySymbol.values());
   }
 
-  private static void putOccurrence(
-      LinkedHashMap<OccurrenceKey, Occurrence> out, Occurrence occ) {
+  private static void putOccurrence(LinkedHashMap<OccurrenceKey, Occurrence> out, Occurrence occ) {
     OccurrenceKey key = OccurrenceKey.of(occ);
     Occurrence existing = out.get(key);
     if (existing == null) {
@@ -236,8 +233,7 @@ public final class ScipShardAggregator {
     }
   }
 
-  private static SymbolInformation mergeSymbol(
-      SymbolInformation a, SymbolInformation b) {
+  private static SymbolInformation mergeSymbol(SymbolInformation a, SymbolInformation b) {
     SymbolInformation.Builder builder = b.toBuilder();
     LinkedHashMap<Relationship, Relationship> rels = new LinkedHashMap<>();
     for (Relationship r : a.getRelationshipsList()) rels.put(r, r);
@@ -322,16 +318,5 @@ public final class ScipShardAggregator {
       default:
         return true;
     }
-  }
-
-  // Make the existing flatten-style call available for callers that already have shards in memory.
-  @SuppressWarnings("unused")
-  Stream<Document> documentsFromShards(List<Index> shards) {
-    return shards.stream().flatMap(s -> s.getDocumentsList().stream()).map(this::rewriteDocument);
-  }
-
-  @SuppressWarnings("unused")
-  Stream<Document> documentsFromShardsCollected(List<Index> shards) {
-    return documentsFromShards(shards).collect(Collectors.toList()).stream();
   }
 }
