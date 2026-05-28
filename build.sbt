@@ -641,6 +641,7 @@ lazy val javaOnlySettings = List[Def.Setting[_]](
 val testSettings = List(
   (publish / skip) := true,
   autoScalaLibrary := true,
+  Test / fork := true,
   testFrameworks := List(TestFrameworks.MUnit),
   testOptions ++= {
     if (!(Test / testForkedParallel).value)
