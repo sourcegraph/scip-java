@@ -63,9 +63,9 @@ import os.SubprocessException
  * }}}
  *
  * Callers are expected to pre-resolve dependencies and pass the resulting
- * classpath via the `classpath` field. The `javaHome` field (or the
- * `JAVA_HOME` environment variable) must point at a JDK installation that
- * provides `bin/javac`. scip-java does not fetch anything from the network.
+ * classpath via the `classpath` field. The `javaHome` field (or the `JAVA_HOME`
+ * environment variable) must point at a JDK installation that provides
+ * `bin/javac`. scip-java does not fetch anything from the network.
  */
 class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
