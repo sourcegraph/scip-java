@@ -10,7 +10,6 @@ import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.buildtools.ClasspathEntry
 import com.sourcegraph.scip_semanticdb.ConsoleScipSemanticdbReporter
-import com.sourcegraph.scip_semanticdb.ScipSemanticdb
 import com.sourcegraph.scip_semanticdb.ScipSemanticdbOptions
 import com.sourcegraph.scip_semanticdb.ScipShardAggregator
 import moped.annotations._
@@ -60,15 +59,6 @@ final case class IndexSemanticdbCommand(
         "Maven->Maven or Gradle->Gradle projects because those build tools compile sources to classfiles inside directories."
     )
     allowExportingGlobalSymbolsFromDirectoryEntries: Boolean = true,
-    @Description(
-      "If true, walk targetroots for *.scip shards (META-INF/scip/...) emitted by the " +
-        "compiler plug-ins instead of *.semanticdb files. The aggregator rewrites placeholder " +
-        "symbols into the final 'scip-java' scheme and merges per-source shards into the " +
-        "output index. Defaults to true now that both the javac and kotlinc plug-ins emit " +
-        "shards. Pass --use-scip-shards=false to fall back to the legacy SemanticDB-based " +
-        "aggregator."
-    )
-    useScipShards: Boolean = true,
     @Inline()
     app: Application = Application.default
 ) extends Command {
@@ -106,10 +96,7 @@ final case class IndexSemanticdbCommand(
         allowEmptyIndex,
         allowExportingGlobalSymbolsFromDirectoryEntries
       )
-    if (useScipShards)
-      ScipShardAggregator.run(options)
-    else
-      ScipSemanticdb.run(options)
+    ScipShardAggregator.run(options)
     postPackages(packages)
     if (!app.reporter.hasErrors()) {
       app.info(options.output.toString)
