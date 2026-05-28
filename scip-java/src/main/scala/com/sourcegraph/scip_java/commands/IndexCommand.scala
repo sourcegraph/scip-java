@@ -29,7 +29,7 @@ case class IndexCommand(
     @Description("The path where to generate the SCIP index.")
     output: Path = Paths.get("index.scip"),
     @Description(
-      "The directory where to generate SemanticDB files. " +
+      "The directory where to generate SCIP shard files. " +
         "Defaults to a build-specific path. " +
         "For example, the default value for Gradle is 'build/semanticdb-targetroot' and for Maven it's 'target/semanticdb-targetroot'"
     )

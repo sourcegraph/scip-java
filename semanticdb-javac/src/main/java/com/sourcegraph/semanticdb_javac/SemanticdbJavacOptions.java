@@ -18,7 +18,7 @@ import static javax.tools.StandardLocation.SOURCE_OUTPUT;
 /** Settings that can be configured alongside the -Xplugin compiler option. */
 public class SemanticdbJavacOptions {
 
-  /** The directory to place META-INF and its .semanticdb files */
+  /** The directory to place META-INF and its SCIP shard files */
   public Path targetroot;
 
   public Path sourceroot;

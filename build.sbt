@@ -443,9 +443,10 @@ lazy val semanticdbKotlinc = project
 // `semanticdbKotlincMinimized` mirrors the (still-present) Gradle build at
 // semanticdb-kotlinc/minimized/build.gradle.kts. It compiles a small set of
 // Kotlin and Java fixtures with the assembled `semanticdbKotlinc` plugin
-// attached to kotlinc/javac, producing *.semanticdb files under
-// target/semanticdb-targetroot/ which are then converted to SCIP and rendered
-// as the human-readable golden snapshots by the `snapshots` task.
+// attached to kotlinc/javac, producing *.scip shard files under
+// target/semanticdb-targetroot/ which are then aggregated into a single SCIP
+// index and rendered as the human-readable golden snapshots by the
+// `snapshots` task.
 lazy val semanticdbKotlincMinimized = project
   .in(file("semanticdb-kotlinc/minimized"))
   .enablePlugins(KotlinPlugin)
@@ -509,7 +510,7 @@ lazy val semanticdbKotlincMinimized = project
     // ----- snapshots regeneration task -----
     // Invokes `com.sourcegraph.scip_java.ScipJava.main` twice in the cli JVM
     // (forked — ScipJava.main calls System.exit on failure). First pass
-    // converts the *.semanticdb files under target/semanticdb-targetroot/
+    // aggregates the *.scip shard files under target/semanticdb-targetroot/
     // into an index.scip; second pass renders that index as the human-readable
     // golden snapshots.
     //
