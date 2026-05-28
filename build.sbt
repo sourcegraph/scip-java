@@ -124,7 +124,22 @@ lazy val javacPlugin = project
     fatjarPackageSettings,
     javaOnlySettings,
     moduleName := "semanticdb-javac",
-    javacOptions += "-g",
+    // Scope -g to the compile task so it doesn't leak into the doc task —
+    // javadoc rejects '-g' as an unknown flag.
+    Compile / compile / javacOptions += "-g",
+    // JDK 14+ javac eagerly enumerates Plugin providers from the processor
+    // path (or, if absent, the compile classpath). During incremental
+    // compilation our own META-INF/services/com.sun.source.util.Plugin
+    // resource is on the classpath but SemanticdbPlugin.class isn't built
+    // yet, which trips ServiceLoader. Force an explicit empty processor
+    // path so javac doesn't scan our own output directory. The resource
+    // must stay in src/main/resources/ so that internal sbt dependents
+    // (e.g. the `minimized` test project) can find the plugin descriptor.
+    Compile / compile / javacOptions ++= {
+      val empty = target.value / "empty-processorpath"
+      IO.createDirectory(empty)
+      Seq("-processorpath", empty.getAbsolutePath)
+    },
     (assembly / assemblyShadeRules) :=
       Seq(
         ShadeRule
@@ -635,7 +650,12 @@ lazy val javaOnlySettings = List[Def.Setting[_]](
   incOptions ~= { old =>
     old.withEnabled(false).withApiDebug(true)
   },
-  crossPaths := false
+  crossPaths := false,
+  // Java 11 is our minimum supported runtime and sbt-assembly's shader uses
+  // an ASM version that can't read newer class files (e.g. class major 61
+  // emitted by JDK 17). Pinning the release target keeps the bytecode at
+  // version 55 regardless of which JDK runs sbt, so shading still works.
+  Compile / javacOptions ++= Seq("--release", "11")
 )
 
 val testSettings = List(
