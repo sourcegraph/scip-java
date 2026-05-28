@@ -440,6 +440,7 @@ lazy val semanticdbKotlinc = project
       Attributed.blank(dir)
     }
   )
+  .dependsOn(scipProto)
 
 // `semanticdbKotlincMinimized` mirrors the (still-present) Gradle build at
 // semanticdb-kotlinc/minimized/build.gradle.kts. It compiles a small set of
