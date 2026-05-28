@@ -2,19 +2,10 @@ package tests
 
 object SaveSnapshots {
   def main(args: Array[String]): Unit = {
-    val expectDirectory = tests.snapshots.BuildInfo.snapshotDirectory.toPath
-    val mapping = Map(
-      "minimized" -> new MinimizedSnapshotScipGenerator()
-    )
-
-    val enabledGenerators =
-      if (args.isEmpty)
-        mapping.values.toList
-      else
-        args.flatMap(mapping.get).toList
-
-    val generator = new AggregateSnapshotGenerator(enabledGenerators)
-
-    generator.run(SnapshotContext(expectDirectory), new SaveSnapshotHandler)
+    val context =
+      SnapshotContext(tests.snapshots.BuildInfo.snapshotDirectory.toPath)
+    val handler = new SaveSnapshotHandler
+    new MinimizedSnapshotScipGenerator().run(context, handler)
+    handler.onFinished(context)
   }
 }
