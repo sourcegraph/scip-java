@@ -34,4 +34,34 @@ class ScipBuildToolSuite extends BaseBuildToolSuite {
        |""".stripMargin,
     expectedSemanticdbFiles = 2
   )
+
+  checkBuild(
+    "compiles-with-classpath",
+    """|/lsif-java.json
+       |{"classpath": ["lib-classes"]}
+       |/foo/Example.java
+       |package foo;
+       |import bar.Greeter;
+       |public class Example {
+       |  public String hello() { return new Greeter().greet(); }
+       |}
+       |""".stripMargin,
+    expectedSemanticdbFiles = 1,
+    prepare = () => {
+      val libSrcDir = os.temp.dir(prefix = "scip-classpath-lib")
+      val libSrc = libSrcDir / "bar" / "Greeter.java"
+      os.write(
+        libSrc,
+        """|package bar;
+           |public class Greeter {
+           |  public String greet() { return "hi"; }
+           |}
+           |""".stripMargin,
+        createFolders = true
+      )
+      val libClasses = os.Path(workingDirectory) / "lib-classes"
+      os.makeDir.all(libClasses)
+      os.proc("javac", "-d", libClasses.toString, libSrc.toString).call()
+    }
+  )
 }

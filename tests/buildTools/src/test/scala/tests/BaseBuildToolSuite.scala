@@ -66,6 +66,7 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
       expectedError: Option[String => Unit] = None,
       expectedPackages: String = "",
       initCommand: => List[String] = Nil,
+      prepare: () => Unit = () => (),
       targetRoot: Option[String] = None,
       tools: List[Tool] = Nil
   ): Unit = {
@@ -96,6 +97,8 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
       }
 
       FileLayout.fromString(original, root = workingDirectory)
+
+      prepare()
 
       val targetroot = workingDirectory.resolve(
         targetRoot.getOrElse("targetroot")
