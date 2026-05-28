@@ -9,7 +9,6 @@ import scala.collection.mutable.ListBuffer
 lazy val V =
   new {
     val protobuf = "4.32.1"
-    val coursier = "2.1.9"
     val scalaXml = "2.1.0"
     val moped = "0.2.0"
     val gradle = "7.0"
@@ -231,8 +230,6 @@ lazy val cli = project
     buildInfoPackage := "com.sourcegraph.scip_java",
     libraryDependencies ++=
       List(
-        "io.get-coursier" %% "coursier" % V.coursier,
-        "io.get-coursier" %% "coursier-jvm" % V.coursier,
         "org.scala-lang.modules" %% "scala-xml" % V.scalaXml,
         "com.lihaoyi" %% "requests" % V.requests,
         "org.scalameta" %% "moped" % V.moped,
@@ -678,7 +675,6 @@ val testSettings = List(
       "org.scalameta" %% "munit" % "0.7.29",
       "org.scalameta" %% "moped-testkit" % V.moped,
       "org.scalameta" %% "scalameta" % V.scalameta,
-      "io.get-coursier" %% "coursier" % V.coursier,
       "com.lihaoyi" %% "pprint" % "0.6.6"
     )
 )
