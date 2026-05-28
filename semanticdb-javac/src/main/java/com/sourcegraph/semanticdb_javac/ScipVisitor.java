@@ -48,9 +48,8 @@ import javax.tools.Diagnostic;
 /**
  * Walks the AST of a typechecked compilation unit and generates a {@link Scip.Document} directly.
  *
- * <p>Structurally this is a fork of {@link SemanticdbVisitor} that emits SCIP types instead of
- * SemanticDB ones. Symbols are produced through {@link GlobalSymbolsCache} and then translated to
- * the placeholder SCIP form via {@link ScipSymbols#fromSemanticdbSymbol(String)}. Signature
+ * <p>Symbols are produced through {@link GlobalSymbolsCache} and then translated to the
+ * placeholder SCIP form via {@link ScipSymbols#fromSemanticdbSymbol(String)}. Signature
  * documentation is produced by {@link ScipSignatureFormatter} directly from javac's element model.
  */
 public final class ScipVisitor extends TreePathScanner<Void, Void> {

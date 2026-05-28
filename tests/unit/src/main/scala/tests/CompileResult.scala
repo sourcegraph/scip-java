@@ -1,28 +1,22 @@
 package tests
 
-import com.sourcegraph.semanticdb_javac.Semanticdb
+import scala.jdk.CollectionConverters._
+
+import com.sourcegraph.Scip
 
 case class CompileResult(
     byteCode: Array[Byte],
     stdout: String,
-    textDocuments: Semanticdb.TextDocuments,
+    documents: List[Scip.Document],
     isSuccess: Boolean
 ) {
-  def textDocument: Option[Semanticdb.TextDocument] = {
-    Option.when(textDocuments.getDocumentsCount() > 0) {
-      textDocuments.getDocuments(0)
-    }
-  }
+  def document: Option[Scip.Document] = documents.headOption
 
   def merge(other: CompileResult): CompileResult = {
     copy(
       byteCode = this.byteCode ++ other.byteCode,
       stdout = this.stdout ++ other.stdout,
-      textDocuments = this
-        .textDocuments
-        .toBuilder
-        .addAllDocuments(other.textDocuments.getDocumentsList)
-        .build(),
+      documents = this.documents ++ other.documents,
       isSuccess = this.isSuccess && other.isSuccess
     )
   }
@@ -32,7 +26,15 @@ object CompileResult {
   val empty: CompileResult = CompileResult(
     Array.emptyByteArray,
     "",
-    Semanticdb.TextDocuments.getDefaultInstance,
+    Nil,
     isSuccess = true
   )
+
+  /**
+   * Parses a `*.scip` shard from disk and returns its documents. Shards always
+   * have a single document per source file, but we expose the list to keep the
+   * call sites uniform when callers compile multiple inputs.
+   */
+  def documentsFromShard(bytes: Array[Byte]): List[Scip.Document] =
+    Scip.Index.parseFrom(bytes).getDocumentsList.asScala.toList
 }
