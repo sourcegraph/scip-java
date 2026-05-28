@@ -572,28 +572,6 @@ def javacModuleOptions = List(
   "-Jjdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
 )
 
-lazy val minimized17 = project
-  .in(file("tests/minimized/.j17"))
-  .settings(
-    javaOnlySettings,
-    minimizedSettings,
-    javaToolchainVersion := "17",
-    javacOptions ++= javacModuleOptions
-  )
-  .dependsOn(agent, javacPlugin)
-  .disablePlugins(JavaFormatterPlugin)
-
-lazy val minimized21 = project
-  .in(file("tests/minimized/.j21"))
-  .settings(
-    javaOnlySettings,
-    minimizedSettings,
-    javaToolchainVersion := "21",
-    javacOptions ++= javacModuleOptions
-  )
-  .dependsOn(agent, javacPlugin)
-  .disablePlugins(JavaFormatterPlugin)
-
 lazy val unit = project
   .in(file("tests/unit"))
   .settings(
