@@ -21,6 +21,13 @@ lazy val V =
     val kctfork = "0.7.1"
   }
 
+// sbt-git's bundled JGit can't read linked worktrees; shell out to
+// git CLI there. See https://github.com/sbt/sbt-git/issues/264.
+if (file(".git").isFile)
+  Seq(useReadableConsoleGit)
+else
+  Nil
+
 inThisBuild(
   List(
     scalaVersion := V.scala213,
