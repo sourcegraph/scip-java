@@ -206,7 +206,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
           .app
           .reporter
           .info(
-            "Some SemanticDB files got generated even if there were compile errors. " +
+            "Some SCIP shard files got generated even if there were compile errors. " +
               "In most cases, this means that scip-java managed to index everything " +
               "except the locations that had compile errors and you can ignore the compile errors."
           )

@@ -12,10 +12,11 @@ fails.
 
 Indexing a codebase consists of two independent phases:
 
-- Compile the codebase with the SemanticDB compiler plugin.
-- Generate SCIP index from SemanticDB files.
+- Compile the codebase with the SemanticDB compiler plugin, which writes one
+  SCIP shard per Java source file.
+- Aggregate the SCIP shards into a single SCIP index.
 
-![A three stage pipeline that starts with a list of Java sources, creates a list of SemanticDB files that then become a single SCIP index.](assets/semanticdb-javac-pipeline.svg)
+![A three stage pipeline that starts with a list of Java sources, creates a list of per-file SCIP shards that then become a single SCIP index.](assets/semanticdb-javac-pipeline.svg)
 
 The first phase can be complicated to configure and it can take a while to run.
 The second phase is quite simple to configure and it usually runs very fast.
@@ -63,7 +64,7 @@ compiler plugin. To do this you need to explicitly configure two directories:
   It's important that all of the source files that should be index live under
   this directory.
 - `-targetroot:PATH`: the absolute path to the directory where to generate
-  SemanticDB file. This directory can be anywhere on your file system.  
+  SCIP shard files. This directory can be anywhere on your file system.  
   Alternatively, pass in `-targetroot:javac-classes-directory` for the plugin to
   automatically use the `javac` output directory.
 
@@ -112,13 +113,13 @@ examples:
 - Maven: `mvn clean verify -DskipTests`
 - Bazel: `bazel build //...`
 
-If everything went well, you should have a lot of `*.semanticdb` files in the
+If everything went well, you should have a lot of `*.scip` shard files in the
 targetroot directory.
 
 ```
 ❯ find $TARGETROOT -type f
-build/semanticdb-targetroot/META-INF/semanticdb/j11/src/test/java/example/ExampleTest.java.semanticdb
-build/semanticdb-targetroot/META-INF/semanticdb/j11/src/main/java/example/Example.java.semanticdb
+build/semanticdb-targetroot/META-INF/scip/j11/src/test/java/example/ExampleTest.java.scip
+build/semanticdb-targetroot/META-INF/scip/j11/src/main/java/example/Example.java.scip
 ...
 ```
 
@@ -198,13 +199,13 @@ Which allows you to invoke it by simply running `mvn sourcegraph:sourcegraphDepe
 Cross-repository navigation is a feature that allows "goto definition" and "find
 references" to show results from multiple repositories.
 
-## Step 5: Generate SCIP index from SemanticDB files
+## Step 5: Aggregate SCIP shards into a single SCIP index
 
 First, install the `scip-java` command-line tool according to the instructions
 in the [getting started guide](getting-started.md).
 
-Next, run the `scip-java index-semanticdb` command to convert SemanticDB files
-into SCIP.
+Next, run the `scip-java index-semanticdb` command to aggregate the per-file
+SCIP shards into a single SCIP index.
 
 ```sh
 ❯ scip-java index-semanticdb $TARGETROOT

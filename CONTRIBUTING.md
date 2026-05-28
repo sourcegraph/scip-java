@@ -31,8 +31,8 @@ If you'd rather install tools manually, you'll need at least:
 
 These are the main components of the project.
 
-- `semanticdb-javac/src/main/java`: the Java compiler plugin that creates
-  SemanticDB files.
+- `semanticdb-javac/src/main/java`: the Java compiler plugin that emits
+  SCIP shard files.
 - `tests/minimized`: minimized Java source files that reproduce interesting test
   cases.
 - `tests/unit`: fast running unit tests that are helpful for local edit-and-test
