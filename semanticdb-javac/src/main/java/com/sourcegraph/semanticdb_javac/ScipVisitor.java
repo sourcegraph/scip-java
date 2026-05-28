@@ -1,7 +1,6 @@
 package com.sourcegraph.semanticdb_javac;
 
 import com.sourcegraph.Scip;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 import com.sun.source.tree.AnnotatedTypeTree;
 import com.sun.source.tree.ClassTree;
 import com.sun.source.tree.CompilationUnitTree;
@@ -24,7 +23,6 @@ import com.sun.source.util.Trees;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -109,21 +107,18 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     return Scip.Index.newBuilder().addDocuments(document).build();
   }
 
-  /**
-   * SCIP `Document.language` value. Lowercased to match the canonical scheme used by other
-   * tooling (see {@link com.sourcegraph.scip_semanticdb.ScipSemanticdb}).
-   */
+  /** SCIP {@code Document.language} value for Java sources. */
   static final String LANGUAGE_JAVA = "java";
 
   // ==========================
   // Symbol/occurrence emission
   // ==========================
 
-  private Optional<Semanticdb.Range> emitSymbolOccurrence(
-      Element sym, Tree tree, Name name, Role role, CompilerRange kind) {
+  private Optional<ScipRange> emitSymbolOccurrence(
+      Element sym, Tree tree, Name name, ScipRole role, CompilerRange kind) {
     if (sym == null || name == null) return Optional.empty();
-    Optional<Semanticdb.Range> range = semanticdbRange(tree, kind, sym, name.toString());
-    if (role == Role.DEFINITION) {
+    Optional<ScipRange> range = scipRangeOf(tree, kind, sym, name.toString());
+    if (role == ScipRole.DEFINITION) {
       emitOccurrence(sym, range, role, computeEnclosingRange(tree));
       emitSymbolInformation(sym, tree);
       return range;
@@ -134,19 +129,19 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
 
   private void emitOccurrence(
       Element sym,
-      Optional<Semanticdb.Range> range,
-      Role role,
-      Optional<Semanticdb.Range> enclosingRange) {
+      Optional<ScipRange> range,
+      ScipRole role,
+      Optional<ScipRange> enclosingRange) {
     if (sym == null || !range.isPresent()) return;
     String semanticdbSymbol = semanticdbSymbol(sym);
     if (semanticdbSymbol.equals(SemanticdbSymbols.NONE)) return;
 
     Scip.Occurrence.Builder occ =
         Scip.Occurrence.newBuilder()
-            .addAllRange(scipRange(range.get()))
+            .addAllRange(range.get().asScipRange())
             .setSymbol(ScipSymbols.fromSemanticdbSymbol(semanticdbSymbol))
             .setSymbolRoles(scipRole(role));
-    enclosingRange.ifPresent(r -> occ.addAllEnclosingRange(scipRange(r)));
+    enclosingRange.ifPresent(r -> occ.addAllEnclosingRange(r.asScipRange()));
     occurrences.add(occ.build());
   }
 
@@ -251,26 +246,14 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
   }
 
   // =================================================
-  // Range / role / kind translation between SemanticDB and SCIP.
+  // Role / kind translation for SCIP emission.
   // =================================================
 
-  private static int scipRole(Role role) {
-    if (role == Role.DEFINITION || role == Role.SYNTHETIC_DEFINITION) {
+  private static int scipRole(ScipRole role) {
+    if (role == ScipRole.DEFINITION || role == ScipRole.SYNTHETIC_DEFINITION) {
       return Scip.SymbolRole.Definition_VALUE;
     }
     return 0;
-  }
-
-  private static List<Integer> scipRange(Semanticdb.Range range) {
-    if (range.getStartLine() == range.getEndLine()) {
-      return Arrays.asList(
-          range.getStartLine(), range.getStartCharacter(), range.getEndCharacter());
-    }
-    return Arrays.asList(
-        range.getStartLine(),
-        range.getStartCharacter(),
-        range.getEndLine(),
-        range.getEndCharacter());
   }
 
   private static Scip.SymbolInformation.Kind scipKind(Element sym) {
@@ -378,7 +361,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
           sym,
           node,
           sym.getSimpleName(),
-          Role.DEFINITION,
+          ScipRole.DEFINITION,
           CompilerRange.FROM_POINT_WITH_TEXT_SEARCH);
     }
   }
@@ -387,7 +370,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     Element sym = trees.getElement(treePath);
     if (sym != null && sym.getSimpleName().length() > 0) {
       emitSymbolOccurrence(
-          sym, node, sym.getSimpleName(), Role.DEFINITION, CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
+          sym, node, sym.getSimpleName(), ScipRole.DEFINITION, CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
     }
   }
 
@@ -401,7 +384,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
         else name = sym.getSimpleName();
 
         emitSymbolOccurrence(
-            sym, node, name, Role.DEFINITION, CompilerRange.FROM_POINT_WITH_TEXT_SEARCH);
+            sym, node, name, ScipRole.DEFINITION, CompilerRange.FROM_POINT_WITH_TEXT_SEARCH);
       }
     }
   }
@@ -409,17 +392,17 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
   private void resolveVariableTree(VariableTree node, TreePath treePath) {
     Element sym = trees.getElement(treePath);
     if (sym != null) {
-      Optional<Semanticdb.Range> range =
+      Optional<ScipRange> range =
           emitSymbolOccurrence(
               sym,
               node,
               sym.getSimpleName(),
-              Role.DEFINITION,
+              ScipRole.DEFINITION,
               CompilerRange.FROM_POINT_WITH_TEXT_SEARCH);
       if (sym.getKind() == ElementKind.ENUM_CONSTANT) {
         TreePath typeTreePath = nodes.get(node.getInitializer());
         Element typeSym = trees.getElement(typeTreePath);
-        if (typeSym != null) emitOccurrence(typeSym, range, Role.REFERENCE, Optional.empty());
+        if (typeSym != null) emitOccurrence(typeSym, range, ScipRole.REFERENCE, Optional.empty());
       }
     }
   }
@@ -436,7 +419,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
           Element parentSym = trees.getElement(parentPath);
           if (parentSym == null || parentSym.getKind() != null) {
             emitSymbolOccurrence(
-                sym, node, sym.getSimpleName(), Role.REFERENCE, CompilerRange.FROM_START_TO_END);
+                sym, node, sym.getSimpleName(), ScipRole.REFERENCE, CompilerRange.FROM_START_TO_END);
           }
         }
       }
@@ -447,7 +430,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     Element sym = trees.getElement(treePath);
     if (sym != null) {
       emitSymbolOccurrence(
-          sym, node, sym.getSimpleName(), Role.REFERENCE, CompilerRange.FROM_END_TO_SYMBOL_NAME);
+          sym, node, sym.getSimpleName(), ScipRole.REFERENCE, CompilerRange.FROM_END_TO_SYMBOL_NAME);
     }
   }
 
@@ -455,7 +438,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     Element sym = trees.getElement(treePath);
     if (sym != null) {
       emitSymbolOccurrence(
-          sym, node, sym.getSimpleName(), Role.REFERENCE, CompilerRange.FROM_END_TO_SYMBOL_NAME);
+          sym, node, sym.getSimpleName(), ScipRole.REFERENCE, CompilerRange.FROM_END_TO_SYMBOL_NAME);
     }
   }
 
@@ -473,7 +456,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
                 sym,
                 node,
                 identifierSym.getSimpleName(),
-                Role.REFERENCE,
+                ScipRole.REFERENCE,
                 CompilerRange.FROM_TEXT_SEARCH);
           } else if (node.getIdentifier().getKind() == Tree.Kind.ANNOTATED_TYPE) {
             AnnotatedTypeTree annotatedTypeTree = (AnnotatedTypeTree) node.getIdentifier();
@@ -481,7 +464,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
                 && annotatedTypeTree.getUnderlyingType().getKind() == Tree.Kind.IDENTIFIER) {
               IdentifierTree ident = (IdentifierTree) annotatedTypeTree.getUnderlyingType();
               emitSymbolOccurrence(
-                  sym, ident, ident.getName(), Role.REFERENCE, CompilerRange.FROM_TEXT_SEARCH);
+                  sym, ident, ident.getName(), ScipRole.REFERENCE, CompilerRange.FROM_TEXT_SEARCH);
             }
           }
         }
@@ -490,14 +473,14 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
   }
 
   // =================================================
-  // Helpers shared with SemanticdbVisitor (range / symbol / parent overrides).
+  // Symbol / range helpers used by the SCIP emission path.
   // =================================================
 
   private String semanticdbSymbol(Element sym) {
     return globals.semanticdbSymbol(sym, locals);
   }
 
-  private Optional<Semanticdb.Range> semanticdbRange(
+  private Optional<ScipRange> scipRangeOf(
       Tree tree, CompilerRange kind, Element sym, String name) {
     if (sym == null) return Optional.empty();
 
@@ -535,13 +518,12 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
 
     if (start != Diagnostic.NOPOS && end != Diagnostic.NOPOS && end > start) {
       LineMap lineMap = compUnitTree.getLineMap();
-      Semanticdb.Range range =
-          Semanticdb.Range.newBuilder()
-              .setStartLine((int) lineMap.getLineNumber(start) - 1)
-              .setStartCharacter((int) lineMap.getColumnNumber(start) - 1)
-              .setEndLine((int) lineMap.getLineNumber(end) - 1)
-              .setEndCharacter((int) lineMap.getColumnNumber(end) - 1)
-              .build();
+      ScipRange range =
+          new ScipRange(
+              (int) lineMap.getLineNumber(start) - 1,
+              (int) lineMap.getColumnNumber(start) - 1,
+              (int) lineMap.getLineNumber(end) - 1,
+              (int) lineMap.getColumnNumber(end) - 1);
 
       range = correctForTabs(range, lineMap, start);
       return Optional.of(range);
@@ -549,22 +531,19 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     return Optional.empty();
   }
 
-  private Semanticdb.Range correctForTabs(Semanticdb.Range range, LineMap lineMap, int start) {
+  private ScipRange correctForTabs(ScipRange range, LineMap lineMap, int start) {
     int startLinePos = (int) lineMap.getPosition(lineMap.getLineNumber(start), 0);
     if (this.source.charAt(startLinePos) == '\t') {
       int count = 1;
       while (this.source.charAt(++startLinePos) == '\t') count++;
       range =
-          range
-              .toBuilder()
-              .setStartCharacter(range.getStartCharacter() - (count * 7))
-              .setEndCharacter(range.getEndCharacter() - (count * 7))
-              .build();
+          range.withCharacters(
+              range.startCharacter - (count * 7), range.endCharacter - (count * 7));
     }
     return range;
   }
 
-  private Optional<Semanticdb.Range> computeEnclosingRange(Tree tree) {
+  private Optional<ScipRange> computeEnclosingRange(Tree tree) {
     if (tree == null) return Optional.empty();
     TreePath path = nodes.get(tree);
     if (path == null) return Optional.empty();
@@ -585,13 +564,12 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
 
     if (start != Diagnostic.NOPOS && end != Diagnostic.NOPOS && end > start) {
       LineMap lineMap = compUnitTree.getLineMap();
-      Semanticdb.Range range =
-          Semanticdb.Range.newBuilder()
-              .setStartLine((int) lineMap.getLineNumber(start) - 1)
-              .setStartCharacter((int) lineMap.getColumnNumber(start) - 1)
-              .setEndLine((int) lineMap.getLineNumber(end) - 1)
-              .setEndCharacter((int) lineMap.getColumnNumber(end) - 1)
-              .build();
+      ScipRange range =
+          new ScipRange(
+              (int) lineMap.getLineNumber(start) - 1,
+              (int) lineMap.getColumnNumber(start) - 1,
+              (int) lineMap.getLineNumber(end) - 1,
+              (int) lineMap.getColumnNumber(end) - 1);
       range = correctForTabs(range, lineMap, start);
       return Optional.of(range);
     }
