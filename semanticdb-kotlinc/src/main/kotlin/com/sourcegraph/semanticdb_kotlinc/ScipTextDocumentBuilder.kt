@@ -7,7 +7,6 @@ import org.scip_code.scip.Relationship
 import org.scip_code.scip.Signature
 import org.scip_code.scip.SymbolInformation
 import org.scip_code.scip.SymbolRole
-import com.sourcegraph.semanticdb_kotlinc.Semanticdb.SymbolOccurrence.Role
 import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.KtSourceElement
 import org.jetbrains.kotlin.KtSourceFile
@@ -25,7 +24,7 @@ import org.jetbrains.kotlin.text
 
 /**
  * Builds a single-document [Index] shard for one Kotlin source file from per-element callbacks
- * fired by [SemanticdbVisitor]. This is the SCIP analogue of [SemanticdbTextDocumentBuilder].
+ * fired by [SemanticdbVisitor].
  *
  * Symbols are emitted using the placeholder scheme [ScipSymbols.PLACEHOLDER_PREFIX]; the
  * `scip-aggregator` rewrites them into final `scip-java maven g a v ...` form once Maven
@@ -61,14 +60,14 @@ class ScipTextDocumentBuilder(
         firBasedSymbol: FirBasedSymbol<*>?,
         symbol: Symbol,
         element: KtSourceElement,
-        role: Role,
+        role: ScipRole,
         context: CheckerContext,
         enclosingSource: KtSourceElement? = null,
     ) {
         if (symbol == Symbol.NONE) return
 
         emitOccurrence(symbol, element, role, enclosingSource)
-        if (role == Role.DEFINITION) {
+        if (role == ScipRole.DEFINITION) {
             emitSymbolInformation(firBasedSymbol, symbol, element, context)
         }
     }
@@ -76,7 +75,7 @@ class ScipTextDocumentBuilder(
     private fun emitOccurrence(
         symbol: Symbol,
         element: KtSourceElement,
-        role: Role,
+        role: ScipRole,
         enclosingSource: KtSourceElement?,
     ) {
         val builder =
@@ -264,9 +263,9 @@ class ScipTextDocumentBuilder(
                 else -> firBasedSymbol.toString()
             }
 
-        private fun scipRole(role: Role): Int =
+        private fun scipRole(role: ScipRole): Int =
             when (role) {
-                Role.DEFINITION -> SymbolRole.Definition_VALUE
+                ScipRole.DEFINITION -> SymbolRole.Definition_VALUE
                 else -> 0
             }
 
