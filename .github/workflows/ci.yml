@@ -13,7 +13,7 @@ jobs:
       matrix:
         java: [11, 17, 21]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Docker CLI tests
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
@@ -60,7 +60,7 @@ jobs:
   bazel:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
@@ -81,7 +81,7 @@ jobs:
   bazel_aspect:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
@@ -110,7 +110,7 @@ jobs:
     runs-on: ubuntu-latest
     name: semanticdb-kotlinc
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
@@ -132,7 +132,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
@@ -151,7 +151,7 @@ jobs:
       matrix:
         java: [11, 17, 21]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: DeterminateSystems/nix-installer-action@v22
         with:
