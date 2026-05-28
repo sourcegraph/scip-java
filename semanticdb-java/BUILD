@@ -7,7 +7,4 @@ package(
 java_library(
     name = "semanticdb-java",
     srcs = glob(["src/main/java/**/*.java"]),
-    deps = [
-        "//semanticdb-java/src/main/protobuf:semanticdb_java_proto",
-    ],
 )

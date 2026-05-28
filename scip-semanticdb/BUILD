@@ -20,7 +20,6 @@ java_library(
     deps = [
         ":all_java_proto",
         "//semanticdb-java",
-        "//semanticdb-java/src/main/protobuf:semanticdb_java_proto",
         "@maven//:com_google_code_findbugs_jsr305",
         "@maven//:com_google_protobuf_protobuf_java",
         "@maven//:com_google_protobuf_protobuf_java_util",
