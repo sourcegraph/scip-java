@@ -55,10 +55,9 @@ import javax.tools.Diagnostic;
 /**
  * Walks the AST of a typechecked compilation unit and generates a {@link Document} directly.
  *
- * <p>Structurally this is a fork of {@link SemanticdbVisitor} that emits SCIP types instead of
- * SemanticDB ones. Symbols are produced through {@link GlobalSymbolsCache} and then translated to
- * the placeholder SCIP form via {@link ScipSymbols#fromSemanticdbSymbol(String)}. Signature
- * documentation is produced by {@link ScipSignatureFormatter} directly from javac's element model.
+ * <p>Symbols are produced through {@link GlobalSymbolsCache} and then translated to the placeholder
+ * SCIP form via {@link ScipSymbols#fromSemanticdbSymbol(String)}. Signature documentation is
+ * produced by {@link ScipSignatureFormatter} directly from javac's element model.
  */
 public final class ScipVisitor extends TreePathScanner<Void, Void> {
 
@@ -102,9 +101,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     resolveNodes();
 
     Document.Builder document =
-        Document.newBuilder()
-            .setRelativePath(relativePath)
-            .setLanguage(LANGUAGE_JAVA);
+        Document.newBuilder().setRelativePath(relativePath).setLanguage(LANGUAGE_JAVA);
     if (options.includeText) {
       document.setText(source);
     }
@@ -135,10 +132,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
   }
 
   private void emitOccurrence(
-      Element sym,
-      Optional<ScipRange> range,
-      ScipRole role,
-      Optional<ScipRange> enclosingRange) {
+      Element sym, Optional<ScipRange> range, ScipRole role, Optional<ScipRange> enclosingRange) {
     if (sym == null || !range.isPresent()) return;
     String semanticdbSymbol = semanticdbSymbol(sym);
     if (semanticdbSymbol.equals(SemanticdbSymbols.NONE)) return;
@@ -263,7 +257,8 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
   private static SymbolInformation.Kind scipKind(Element sym) {
     Set<Modifier> modifiers = sym.getModifiers();
     boolean isStatic = modifiers.contains(Modifier.STATIC);
-    // A `default` interface method has both ABSTRACT and DEFAULT modifiers; treat it as non-abstract.
+    // A `default` interface method has both ABSTRACT and DEFAULT modifiers; treat it as
+    // non-abstract.
     boolean isAbstract =
         modifiers.contains(Modifier.ABSTRACT) && !modifiers.contains(Modifier.DEFAULT);
 
@@ -278,9 +273,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
       case ANNOTATION_TYPE:
         return SymbolInformation.Kind.Interface;
       case FIELD:
-        return isStatic
-            ? SymbolInformation.Kind.StaticField
-            : SymbolInformation.Kind.Field;
+        return isStatic ? SymbolInformation.Kind.StaticField : SymbolInformation.Kind.Field;
       case CONSTRUCTOR:
         return SymbolInformation.Kind.Constructor;
       case METHOD:
@@ -385,7 +378,11 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     Element sym = trees.getElement(treePath);
     if (sym != null && sym.getSimpleName().length() > 0) {
       emitSymbolOccurrence(
-          sym, node, sym.getSimpleName(), ScipRole.DEFINITION, CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
+          sym,
+          node,
+          sym.getSimpleName(),
+          ScipRole.DEFINITION,
+          CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
     }
   }
 
@@ -434,7 +431,11 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
           Element parentSym = trees.getElement(parentPath);
           if (parentSym == null || parentSym.getKind() != null) {
             emitSymbolOccurrence(
-                sym, node, sym.getSimpleName(), ScipRole.REFERENCE, CompilerRange.FROM_START_TO_END);
+                sym,
+                node,
+                sym.getSimpleName(),
+                ScipRole.REFERENCE,
+                CompilerRange.FROM_START_TO_END);
           }
         }
       }
@@ -445,7 +446,11 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     Element sym = trees.getElement(treePath);
     if (sym != null) {
       emitSymbolOccurrence(
-          sym, node, sym.getSimpleName(), ScipRole.REFERENCE, CompilerRange.FROM_END_TO_SYMBOL_NAME);
+          sym,
+          node,
+          sym.getSimpleName(),
+          ScipRole.REFERENCE,
+          CompilerRange.FROM_END_TO_SYMBOL_NAME);
     }
   }
 
@@ -453,7 +458,11 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     Element sym = trees.getElement(treePath);
     if (sym != null) {
       emitSymbolOccurrence(
-          sym, node, sym.getSimpleName(), ScipRole.REFERENCE, CompilerRange.FROM_END_TO_SYMBOL_NAME);
+          sym,
+          node,
+          sym.getSimpleName(),
+          ScipRole.REFERENCE,
+          CompilerRange.FROM_END_TO_SYMBOL_NAME);
     }
   }
 
@@ -495,8 +504,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     return globals.semanticdbSymbol(sym, locals);
   }
 
-  private Optional<ScipRange> scipRangeOf(
-      Tree tree, CompilerRange kind, Element sym, String name) {
+  private Optional<ScipRange> scipRangeOf(Tree tree, CompilerRange kind, Element sym, String name) {
     if (sym == null) return Optional.empty();
 
     SourcePositions sourcePositions = trees.getSourcePositions();

@@ -3,16 +3,17 @@ package tests
 import java.nio.file.Files
 
 import scala.jdk.CollectionConverters._
+
 import scala.meta.Input
 
-import org.scip_code.scip.Index
-import org.scip_code.scip.SymbolInformation
 import com.sourcegraph.semanticdb_javac.ScipSymbols
 import munit.FunSuite
+import org.scip_code.scip.Index
+import org.scip_code.scip.SymbolInformation
 
 /**
- * Verifies that the plugin produces a parseable `*.scip` shard alongside the
- * existing `*.semanticdb` file by default, and that `-emit-scip:off` disables it.
+ * Verifies that the Java compiler plug-in produces a parseable `*.scip` shard
+ * under `META-INF/scip/...` and no longer writes any `*.semanticdb` files.
  */
 class ScipShardEmissionSuite extends FunSuite {
 
@@ -29,7 +30,7 @@ class ScipShardEmissionSuite extends FunSuite {
       |""".stripMargin
   )
 
-  test("compiler emits a parseable SCIP shard by default") {
+  test("compiler emits a parseable SCIP shard and no SemanticDB file") {
     val targetroot = Files.createTempDirectory("scip-shard-emission-")
     val sourceroot = Files.createTempDirectory("scip-shard-emission-src-")
     val compiler =
@@ -47,7 +48,10 @@ class ScipShardEmissionSuite extends FunSuite {
     )
     val scipPath = targetroot.resolve("META-INF/scip/example/Foo.java.scip")
 
-    assert(Files.isRegularFile(semanticdbPath), s"missing $semanticdbPath")
+    assert(
+      !Files.exists(semanticdbPath),
+      s"unexpected semanticdb $semanticdbPath"
+    )
     assert(Files.isRegularFile(scipPath), s"missing $scipPath")
 
     val shard = Index.parseFrom(Files.readAllBytes(scipPath))
@@ -104,7 +108,7 @@ class ScipShardEmissionSuite extends FunSuite {
     assert(barText.contains("int bar("), s"unexpected bar signature: $barText")
   }
 
-  test("compiler does not emit SCIP shards when -emit-scip:off is set") {
+  test("compiler accepts the deprecated -emit-scip:off flag without erroring") {
     val targetroot = Files.createTempDirectory("scip-shard-off-")
     val sourceroot = Files.createTempDirectory("scip-shard-off-src-")
     val compiler =
@@ -116,8 +120,8 @@ class ScipShardEmissionSuite extends FunSuite {
       )
     )
     assert(result.isSuccess, s"javac failed:\n${result.stdout}")
-
+    // The flag is now a deprecated no-op; the shard is still emitted.
     val scipPath = targetroot.resolve("META-INF/scip/example/Foo.java.scip")
-    assert(!Files.exists(scipPath), s"unexpected scip shard at $scipPath")
+    assert(Files.exists(scipPath), s"expected shard at $scipPath")
   }
 }
