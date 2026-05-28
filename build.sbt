@@ -75,9 +75,7 @@ lazy val semanticdb = project
   .in(file("semanticdb-java"))
   .settings(
     moduleName := "semanticdb-java",
-    javaOnlySettings,
-    (Compile / PB.targets) :=
-      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value)
+    javaOnlySettings
   )
 
 lazy val agent = project
