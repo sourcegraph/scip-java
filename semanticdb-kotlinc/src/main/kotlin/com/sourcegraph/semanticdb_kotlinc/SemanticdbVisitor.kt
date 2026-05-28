@@ -1,7 +1,9 @@
 package com.sourcegraph.semanticdb_kotlinc
 
+import com.sourcegraph.Scip
 import com.sourcegraph.semanticdb_kotlinc.Semanticdb.SymbolOccurrence.Role
 import java.nio.file.Path
+import java.nio.file.Paths
 import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.KtSourceElement
 import org.jetbrains.kotlin.KtSourceFile
@@ -22,7 +24,9 @@ class SemanticdbVisitor(
     locals: LocalSymbolsCache = LocalSymbolsCache()
 ) {
     private val cache = SymbolsCache(globals, locals)
+    private val relativePath: String = computeRelativePath(sourceroot, file)
     private val documentBuilder = SemanticdbTextDocumentBuilder(sourceroot, file, lineMap, cache)
+    private val scipBuilder = ScipTextDocumentBuilder(file, lineMap, cache, relativePath)
 
     private data class SymbolDescriptorPair(
         val firBasedSymbol: FirBasedSymbol<*>?,
@@ -33,6 +37,10 @@ class SemanticdbVisitor(
         return documentBuilder.build()
     }
 
+    fun buildScipIndex(): Scip.Index = scipBuilder.buildIndex()
+
+    fun scipRelativePath(): String = relativePath
+
     private fun Sequence<SymbolDescriptorPair>?.emitAll(
         element: KtSourceElement,
         role: Role,
@@ -41,6 +49,7 @@ class SemanticdbVisitor(
     ): List<Symbol>? =
         this?.onEach { (firBasedSymbol, symbol) ->
                 documentBuilder.emitSemanticdbData(firBasedSymbol, symbol, element, role, context, enclosingSource)
+                scipBuilder.emitScipData(firBasedSymbol, symbol, element, role, context, enclosingSource)
             }
             ?.map { it.symbol }
             ?.toList()
@@ -109,6 +118,20 @@ class SemanticdbVisitor(
         cache[firResolvedNamedReference.resolvedSymbol]
             .with(firResolvedNamedReference.resolvedSymbol)
             .emitAll(source, Role.REFERENCE, context)
+    }
+}
+
+/**
+ * Computes the SCIP `Document.relative_path` for [file] relative to [sourceroot]. Falls back to
+ * the raw file path if the file is not under the sourceroot (the PostAnalysisExtension warns and
+ * skips writing in that case, so the value is best-effort here).
+ */
+private fun computeRelativePath(sourceroot: Path, file: KtSourceFile): String {
+    val normalized = Paths.get(file.path ?: "").normalize()
+    return if (normalized.startsWith(sourceroot)) {
+        sourceroot.relativize(normalized).toString().replace('\\', '/')
+    } else {
+        normalized.toString().replace('\\', '/')
     }
 }
 

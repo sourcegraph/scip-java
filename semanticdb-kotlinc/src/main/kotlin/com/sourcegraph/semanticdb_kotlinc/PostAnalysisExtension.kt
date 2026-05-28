@@ -30,6 +30,9 @@ class PostAnalysisExtension(
                     semanticdbOutPathForFile(ktSourceFile)?.apply {
                         Files.write(this, TextDocuments { addDocuments(document) }.toByteArray())
                     }
+                    scipShardOutPathForFile(ktSourceFile)?.apply {
+                        ScipShardWriter.write(this, visitor.buildScipIndex())
+                    }
                     callback(document)
                 } catch (e: Exception) {
                     handleException(e)
@@ -40,23 +43,33 @@ class PostAnalysisExtension(
         }
     }
 
-    private fun semanticdbOutPathForFile(file: KtSourceFile): Path? {
+    private fun semanticdbOutPathForFile(file: KtSourceFile): Path? =
+        outPathForFile(file, subdir = "semanticdb", suffix = ".semanticdb")
+
+    private fun scipShardOutPathForFile(file: KtSourceFile): Path? =
+        outPathForFile(file, subdir = "scip", suffix = ".scip")
+
+    private fun outPathForFile(file: KtSourceFile, subdir: String, suffix: String): Path? {
         val normalizedPath = Paths.get(file.path).normalize()
         if (normalizedPath.startsWith(sourceRoot)) {
             val relative = sourceRoot.relativize(normalizedPath)
-            val filename = relative.fileName.toString() + ".semanticdb"
-            val semanticdbOutPath =
+            val filename = relative.fileName.toString() + suffix
+            val outPath =
                 targetRoot
                     .resolve("META-INF")
-                    .resolve("semanticdb")
+                    .resolve(subdir)
                     .resolve(relative)
                     .resolveSibling(filename)
 
-            Files.createDirectories(semanticdbOutPath.parent)
-            return semanticdbOutPath
+            Files.createDirectories(outPath.parent)
+            return outPath
         }
-        System.err.println(
-            "given file is not under the sourceroot.\n\tSourceroot: $sourceRoot\n\tFile path: ${file.path}\n\tNormalized file path: $normalizedPath")
+        // Only warn once across both files; the SemanticDB path is the canonical pre-existing
+        // emission, so we keep the warning attached to it.
+        if (subdir == "semanticdb") {
+            System.err.println(
+                "given file is not under the sourceroot.\n\tSourceroot: $sourceRoot\n\tFile path: ${file.path}\n\tNormalized file path: $normalizedPath")
+        }
         return null
     }
 
