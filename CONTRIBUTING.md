@@ -14,9 +14,9 @@ nix develop .#jdk17      # JDK 17
 nix develop .#jdk21      # JDK 21
 ```
 
-This drops you into a shell with `sbt`, `cs` (coursier), `maven`, `gradle`,
-`bazelisk`, `scalafmt`, `nodejs`, `yarn`, `git`, `jq`, etc. all pinned to the
-versions used in CI.
+This drops you into a shell with `sbt`, `maven`, `gradle`, `bazelisk`,
+`scalafmt`, `nodejs`, `yarn`, `git`, `jq`, etc. all pinned to the versions used
+in CI.
 
 If you'd rather install tools manually, you'll need at least:
 
