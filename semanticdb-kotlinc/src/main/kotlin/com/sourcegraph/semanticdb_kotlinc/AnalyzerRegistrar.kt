@@ -9,8 +9,7 @@ import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrarAdapter
 
 @OptIn(ExperimentalCompilerApi::class)
 @ExperimentalContracts
-class AnalyzerRegistrar(private val callback: (Semanticdb.TextDocument) -> Unit = {}) :
-    CompilerPluginRegistrar() {
+class AnalyzerRegistrar : CompilerPluginRegistrar() {
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
         FirExtensionRegistrarAdapter.registerExtension(
             AnalyzerFirExtensionRegistrar(sourceroot = configuration[KEY_SOURCES]!!)
@@ -18,8 +17,7 @@ class AnalyzerRegistrar(private val callback: (Semanticdb.TextDocument) -> Unit 
         IrGenerationExtension.registerExtension(
             PostAnalysisExtension(
                 sourceRoot = configuration[KEY_SOURCES]!!,
-                targetRoot = configuration[KEY_TARGET]!!,
-                callback = callback))
+                targetRoot = configuration[KEY_TARGET]!!))
     }
 
     override val supportsK2: Boolean
