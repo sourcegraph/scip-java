@@ -62,11 +62,13 @@ final case class IndexSemanticdbCommand(
     allowExportingGlobalSymbolsFromDirectoryEntries: Boolean = true,
     @Description(
       "If true, walk targetroots for *.scip shards (META-INF/scip/...) emitted by the " +
-        "compiler plugin instead of *.semanticdb files. The aggregator rewrites placeholder " +
+        "compiler plug-ins instead of *.semanticdb files. The aggregator rewrites placeholder " +
         "symbols into the final 'scip-java' scheme and merges per-source shards into the " +
-        "output index."
+        "output index. Defaults to true now that both the javac and kotlinc plug-ins emit " +
+        "shards. Pass --use-scip-shards=false to fall back to the legacy SemanticDB-based " +
+        "aggregator."
     )
-    useScipShards: Boolean = false,
+    useScipShards: Boolean = true,
     @Inline()
     app: Application = Application.default
 ) extends Command {

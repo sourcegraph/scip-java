@@ -519,15 +519,18 @@ lazy val semanticdbKotlincMinimized = project
           val snapDir =
             (baseDirectory.value / "src" / "generatedSnapshots" / "resources")
               .getAbsolutePath
-          val scipOut = s"$tgtRoot/index.scip"
+          // Place the aggregated `index.scip` outside the shard-scanned
+          // targetroot so a subsequent run doesn't re-ingest it as a shard.
+          val scipOut = (target.value / "scip-index" / "index.scip")
+            .getAbsolutePath
           val mainCls = "com.sourcegraph.scip_java.ScipJava"
           Def.sequential(
             Compile / compile,
             (cli / Compile / runMain).toTask(
-              s" $mainCls index-semanticdb --no-emit-inverse-relationships --cwd $srcRoot --output $scipOut $tgtRoot"
+              s" $mainCls index-semanticdb --no-emit-inverse-relationships --use-scip-shards --cwd $srcRoot --output $scipOut $tgtRoot"
             ),
             (cli / Compile / runMain).toTask(
-              s" $mainCls snapshot --cwd $srcRoot --output $snapDir $tgtRoot"
+              s" $mainCls snapshot --cwd $srcRoot --output $snapDir ${file(scipOut).getParentFile.getAbsolutePath}"
             )
           )
         }
