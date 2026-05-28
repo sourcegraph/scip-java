@@ -12,13 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A file visitor that recursively collects all SCIP shard files ({@code *.scip}) under the
- * configured targetroots.
+ * A file visitor that recursively collects per-source SCIP shard files ({@code *.scip}) emitted by
+ * the compiler plug-ins. Only files under a {@code META-INF/scip/} directory are returned so we
+ * don't accidentally re-ingest a previously-written aggregate {@code index.scip} that may live in
+ * the same target tree.
  */
 public class ScipShardWalker extends SimpleFileVisitor<Path> {
   private final ArrayList<Path> result;
   private final ScipSemanticdbOptions options;
-  private final PathMatcher scipPattern = FileSystems.getDefault().getPathMatcher("glob:**.scip");
+  private final PathMatcher scipPattern =
+      FileSystems.getDefault().getPathMatcher("glob:**/META-INF/scip/**.scip");
 
   public ScipShardWalker(ScipSemanticdbOptions options) {
     this.options = options;
