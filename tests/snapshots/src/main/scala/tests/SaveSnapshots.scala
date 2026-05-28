@@ -4,8 +4,7 @@ object SaveSnapshots {
   def main(args: Array[String]): Unit = {
     val expectDirectory = tests.snapshots.BuildInfo.snapshotDirectory.toPath
     val mapping = Map(
-      "minimized" -> new MinimizedSnapshotScipGenerator(),
-      "library" -> new LibrarySnapshotGenerator()
+      "minimized" -> new MinimizedSnapshotScipGenerator()
     )
 
     val enabledGenerators =
