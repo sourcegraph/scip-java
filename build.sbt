@@ -533,7 +533,7 @@ lazy val semanticdbKotlincMinimized = project
           Def.sequential(
             Compile / compile,
             (cli / Compile / runMain).toTask(
-              s" $mainCls index-semanticdb --no-emit-inverse-relationships --use-scip-shards --cwd $srcRoot --output $scipOut $tgtRoot"
+              s" $mainCls index-semanticdb --no-emit-inverse-relationships --cwd $srcRoot --output $scipOut $tgtRoot"
             ),
             (cli / Compile / runMain).toTask(
               s" $mainCls snapshot --cwd $srcRoot --output $snapDir ${file(scipOut).getParentFile.getAbsolutePath}"

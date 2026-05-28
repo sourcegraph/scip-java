@@ -66,7 +66,7 @@ public class BazelBuildTool {
             /* allowEmptyIndex */ true,
             /* indexDirectoryEntries */ false // because Bazel only compiles to jar files.
             );
-    ScipSemanticdb.run(scipOptions);
+    ScipShardAggregator.run(scipOptions);
 
     if (!scipOptions.reporter.hasErrors()) {
       System.out.println("done: " + scipOptions.output);
