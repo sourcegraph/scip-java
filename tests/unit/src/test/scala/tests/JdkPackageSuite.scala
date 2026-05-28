@@ -1,14 +1,14 @@
 package tests
 
-import com.sourcegraph.scip_semanticdb.JavaVersion
+import com.sourcegraph.scip_semanticdb.JdkPackage
 import munit.FunSuite
 import munit.TestOptions
 
-class JavaVersionSuite extends FunSuite {
+class JdkPackageSuite extends FunSuite {
   def checkVersion(original: TestOptions, expected: String): Unit = {
     test(original) {
-      val obtained = new JavaVersion(original.name)
-      assertNoDiff(obtained.pkg.version, expected)
+      val obtained = JdkPackage.parse(original.name)
+      assertNoDiff(obtained.version, expected)
     }
   }
 
