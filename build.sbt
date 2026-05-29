@@ -8,7 +8,7 @@ import scala.collection.mutable.ListBuffer
 
 lazy val V =
   new {
-    val protobuf = "4.32.1"
+    val protobuf = "4.35.0"
     val scalaXml = "2.1.0"
     val moped = "0.2.0"
     val gradle = "7.0"
