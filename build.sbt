@@ -681,7 +681,7 @@ val testSettings = List(
       "org.scalameta" %% "munit" % "0.7.29",
       "org.scalameta" %% "moped-testkit" % V.moped,
       "org.scalameta" %% "scalameta" % V.scalameta,
-      "com.lihaoyi" %% "pprint" % "0.6.6"
+      "com.lihaoyi" %% "pprint" % "0.9.6"
     )
 )
 
