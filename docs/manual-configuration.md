@@ -16,8 +16,6 @@ Indexing a codebase consists of two independent phases:
   SCIP shard per Java source file.
 - Aggregate the SCIP shards into a single SCIP index.
 
-![A three stage pipeline that starts with a list of Java sources, creates a list of per-file SCIP shards that then become a single SCIP index.](assets/semanticdb-javac-pipeline.svg)
-
 The first phase can be complicated to configure and it can take a while to run.
 The second phase is quite simple to configure and it usually runs very fast.
 
