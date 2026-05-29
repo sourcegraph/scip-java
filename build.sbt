@@ -666,9 +666,6 @@ val testSettings = List(
   // javac via reflection (e.g. JavacClassesDirectorySuite, TestCompiler).
   // On JDK 17+ this is required or the reflective access fails.
   Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
-  // Pin the JDK version embedded in stdlib SCIP symbols (e.g. `jdk 11
-  // java/lang/String#`) so snapshots are stable across JDK 11/17/21.
-  Test / javaOptions += "-Dscip.jdk.version=11",
   testFrameworks := List(TestFrameworks.MUnit),
   testOptions ++= {
     if (!(Test / testForkedParallel).value)

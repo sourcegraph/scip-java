@@ -18,6 +18,7 @@ public class ScipSemanticdbOptions {
   public final boolean emitInverseRelationships;
   public final boolean allowEmptyIndex;
   public final boolean allowExportingGlobalSymbolsFromDirectoryEntries;
+  public final JdkPackage jdkPackage;
 
   public ScipSemanticdbOptions(
       List<Path> targetroots,
@@ -30,7 +31,8 @@ public class ScipSemanticdbOptions {
       List<MavenPackage> packages,
       boolean emitInverseRelationships,
       boolean allowEmptyIndex,
-      boolean allowExportingGlobalSymbolsFromDirectoryEntries) {
+      boolean allowExportingGlobalSymbolsFromDirectoryEntries,
+      JdkPackage jdkPackage) {
     this.targetroots = targetroots;
     this.output = output;
     this.sourceroot = sourceroot;
@@ -43,5 +45,6 @@ public class ScipSemanticdbOptions {
     this.allowEmptyIndex = allowEmptyIndex;
     this.allowExportingGlobalSymbolsFromDirectoryEntries =
         allowExportingGlobalSymbolsFromDirectoryEntries;
+    this.jdkPackage = jdkPackage;
   }
 }

@@ -52,6 +52,15 @@ public class BazelBuildTool {
             return this.hasErrors;
           }
         };
+    JdkPackage jdkPackage =
+        options
+            .targetroots
+            .stream()
+            .map(JdkPackage::fromPath)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .findFirst()
+            .orElseGet(JdkPackage::forRuntime);
     ScipSemanticdbOptions scipOptions =
         new ScipSemanticdbOptions(
             options.targetroots,
@@ -64,8 +73,8 @@ public class BazelBuildTool {
             mavenPackages,
             /* emitInverseRelationships */ true,
             /* allowEmptyIndex */ true,
-            /* indexDirectoryEntries */ false // because Bazel only compiles to jar files.
-            );
+            /* indexDirectoryEntries */ false, // because Bazel only compiles to jar files.
+            jdkPackage);
     ScipSemanticdb.run(scipOptions);
 
     if (!scipOptions.reporter.hasErrors()) {

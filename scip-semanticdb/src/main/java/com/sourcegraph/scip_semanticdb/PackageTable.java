@@ -26,7 +26,7 @@ public class PackageTable {
       FileSystems.getDefault().getPathMatcher("glob:**.jar");
 
   public PackageTable(ScipSemanticdbOptions options) throws IOException {
-    this.jdkPackage = JdkPackage.forRuntime();
+    this.jdkPackage = options.jdkPackage;
     this.indexDirectoryEntries = options.allowExportingGlobalSymbolsFromDirectoryEntries;
     // NOTE: it's important that we index the JDK before maven packages. Some maven packages
     // redefine classes from the JDK and we want those maven packages to take precedence over

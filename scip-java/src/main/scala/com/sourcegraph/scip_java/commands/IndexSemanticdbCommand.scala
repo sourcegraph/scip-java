@@ -1,5 +1,6 @@
 package com.sourcegraph.scip_java.commands
 
+import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.concurrent.TimeUnit
@@ -11,6 +12,7 @@ import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.buildtools.ClasspathEntry
 import com.sourcegraph.scip_semanticdb.ConsoleScipSemanticdbReporter
+import com.sourcegraph.scip_semanticdb.JdkPackage
 import com.sourcegraph.scip_semanticdb.ScipOutputFormat
 import com.sourcegraph.scip_semanticdb.ScipSemanticdb
 import com.sourcegraph.scip_semanticdb.ScipSemanticdbOptions
@@ -89,6 +91,7 @@ final case class IndexSemanticdbCommand(
         )
         .distinct
         .toList
+    val resolvedJdkPackage = resolveJdkPackage(packages)
     val options =
       new ScipSemanticdbOptions(
         absoluteTargetroots.asJava,
@@ -106,7 +109,8 @@ final case class IndexSemanticdbCommand(
         packages.map(_.toPackageInformation).asJava,
         emitInverseRelationships,
         allowEmptyIndex,
-        allowExportingGlobalSymbolsFromDirectoryEntries
+        allowExportingGlobalSymbolsFromDirectoryEntries,
+        resolvedJdkPackage
       )
     ScipSemanticdb.run(options)
     postPackages(packages)
@@ -114,6 +118,37 @@ final case class IndexSemanticdbCommand(
       app.info(options.output.toString)
     }
     app.reporter.exitCode()
+  }
+
+  /**
+   * Resolves the JDK version to embed in stdlib SCIP symbols by reading the
+   * bytecode major version of a produced classfile. Tries, in order:
+   *
+   *   1. Any `.class` under a project-owned classes directory (the `-d`
+   *      directory parsed from `javacopts.txt`). This is the path Maven and
+   *      Gradle take when driven by `scip-java index`. Dependency jars on
+   *      the classpath are intentionally skipped — their bytecode target is
+   *      unrelated to the project's.
+   *   2. Any `.class` under a sibling `classes/` directory of the
+   *      targetroot's parent (a common filesystem convention for sbt and
+   *      Maven projects: `target/classes` next to `target/meta` or
+   *      `target/semanticdb-targetroot`).
+   *   3. `JdkPackage.forRuntime()` — the running JVM's version.
+   */
+  private def resolveJdkPackage(
+      packages: List[ClasspathEntry]
+  ): JdkPackage = {
+    val classesDirs =
+      packages.iterator.map(_.entry).filter(Files.isDirectory(_))
+    val siblingClassesDirs =
+      absoluteTargetroots
+        .iterator
+        .flatMap(t => Option(t.getParent).iterator)
+        .map(_.resolve("classes"))
+    (classesDirs ++ siblingClassesDirs)
+      .map(JdkPackage.fromPath)
+      .collectFirst { case opt if opt.isPresent => opt.get }
+      .getOrElse(JdkPackage.forRuntime())
   }
 
   /**
