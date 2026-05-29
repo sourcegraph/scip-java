@@ -51,7 +51,9 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
     )
     assertEquals(snapshotExit, 0, clues(app.capturedOutput))
     assertNoDiff(
-      SnapshotNormalizer.normalizeJdkVersion(FileLayout.asString(generatedpath)),
+      SnapshotNormalizer.normalizeJdkVersion(
+        FileLayout.asString(generatedpath)
+      ),
       """|/main/Sample.java
          |  package main;
          |   /**
