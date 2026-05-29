@@ -88,7 +88,7 @@ lazy val agent = project
     moduleName := "semanticdb-agent",
     libraryDependencies ++=
       List(
-        "net.bytebuddy" % "byte-buddy" % "1.15.11",
+        "net.bytebuddy" % "byte-buddy" % "1.18.8-jdk5",
         "net.bytebuddy" % "byte-buddy-agent" % "1.15.11"
       ),
     Compile / packageBin / packageOptions +=
