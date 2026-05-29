@@ -594,23 +594,23 @@ def javacModuleOptions = List(
 lazy val unit = project
   .in(file("tests/unit"))
   .settings(
-   testSettings,
-   // javaOptions ++= Seq(   "-Xdebug",   "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"),
-   // Pin the JDK version embedded in stdlib SCIP symbols (e.g. `jdk 11
-   // java/lang/String#`) so snapshots stay stable regardless of which JDK
-   // runs the tests.
-   Test / javaOptions += "-Dscip.jdk.version=11",
-   buildInfoKeys :=
-     Seq[BuildInfoKey](
-       version,
-       scalaVersion,
-       "temporaryDirectory" -> target.value / "tmpdir",
-       "sourceroot" -> (ThisBuild / baseDirectory).value,
-       "minimizedJavaSourceDirectory" -> minimizedSourceDirectory,
-       "minimizedJavaTargetroot" ->
-         (minimized / Compile / semanticdbTargetRoot).value
-     ),
-   buildInfoPackage := "tests"
+    testSettings,
+    // javaOptions ++= Seq(   "-Xdebug",   "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"),
+    // Pin the JDK version embedded in stdlib SCIP symbols (e.g. `jdk 11
+    // java/lang/String#`) so snapshots stay stable regardless of which JDK
+    // runs the tests.
+    Test / javaOptions += "-Dscip.jdk.version=11",
+    buildInfoKeys :=
+      Seq[BuildInfoKey](
+        version,
+        scalaVersion,
+        "temporaryDirectory" -> target.value / "tmpdir",
+        "sourceroot" -> (ThisBuild / baseDirectory).value,
+        "minimizedJavaSourceDirectory" -> minimizedSourceDirectory,
+        "minimizedJavaTargetroot" ->
+          (minimized / Compile / semanticdbTargetRoot).value
+      ),
+    buildInfoPackage := "tests"
   )
   .dependsOn(javacPlugin, cli)
   .enablePlugins(BuildInfoPlugin)
