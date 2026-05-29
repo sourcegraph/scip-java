@@ -51,9 +51,7 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
     )
     assertEquals(snapshotExit, 0, clues(app.capturedOutput))
     assertNoDiff(
-      SnapshotNormalizer.normalizeJdkVersion(
-        FileLayout.asString(generatedpath)
-      ),
+      FileLayout.asString(generatedpath),
       """|/main/Sample.java
          |  package main;
          |   /**
@@ -81,7 +79,7 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
          |//                           signature_documentation java public static void main(String[] asdf)
          |//                           kind StaticMethod
          |//                           documentation  Main application entry point\n
-         |//                           ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+         |//                           ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
          |//                                    ^^^^ definition local 0
          |//                                         display_name asdf
          |//                                         signature_documentation java String[] asdf

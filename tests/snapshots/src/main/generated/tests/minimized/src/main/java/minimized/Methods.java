@@ -30,12 +30,12 @@
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/Methods#overload(+1).
 //                          ⌄ enclosing_range_start local 1
     private String overload(String value) {
-//          ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//          ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                 ^^^^^^^^ definition semanticdb maven . . minimized/Methods#overload(+1).
 //                          display_name overload
 //                          signature_documentation java private String overload(String value)
 //                          kind Method
-//                          ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//                          ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                 ^^^^^ definition local 1
 //                                       display_name value
 //                                       signature_documentation java String value
@@ -66,12 +66,12 @@
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/Methods#staticOverload(+1).
 //                                       ⌄ enclosing_range_start local 3
     private static String staticOverload(String value) {
-//                 ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//                 ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                        ^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Methods#staticOverload(+1).
 //                                       display_name staticOverload
 //                                       signature_documentation java private static String staticOverload(String value)
 //                                       kind StaticMethod
-//                                       ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//                                       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                              ^^^^^ definition local 3
 //                                                    display_name value
 //                                                    signature_documentation java String value
@@ -86,7 +86,7 @@
 //                           ⌄ enclosing_range_start local 4
 //                                  ⌄ enclosing_range_start local 5
     public static String app(int n, String m) throws RuntimeException, IndexOutOfBoundsException {
-//                ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//                ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                       ^^^ definition semanticdb maven . . minimized/Methods#app().
 //                           display_name app
 //                           signature_documentation java public static String app(int n, String m) throws RuntimeException, IndexOutOfBoundsException
@@ -95,13 +95,13 @@
 //                                 display_name n
 //                                 signature_documentation java int n
 //                                 enclosing_symbol semanticdb maven . . minimized/Methods#app().
-//                                  ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//                                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                                         ^ definition local 5
 //                                           display_name m
 //                                           signature_documentation java String m
 //                                           enclosing_symbol semanticdb maven . . minimized/Methods#app().
-//                                                   ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk . java/lang/RuntimeException#
-//                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk . java/lang/IndexOutOfBoundsException#
+//                                                   ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/RuntimeException#
+//                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/IndexOutOfBoundsException#
 //                               ⌃ enclosing_range_end local 4
 //                                         ⌃ enclosing_range_end local 5
 //    ⌄ enclosing_range_start local 6
@@ -126,7 +126,7 @@
 //                             ⌃ enclosing_range_end local 7
 //    ⌄ enclosing_range_start local 8
       String b = staticOverload(m);
-//    ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//    ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //           ^ definition local 8
 //             display_name b
 //             signature_documentation java String b
@@ -148,7 +148,7 @@
 //                               ⌃ enclosing_range_end local 9
 //    ⌄ enclosing_range_start local 10
       String d = methods.overload(m);
-//    ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//    ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //           ^ definition local 10
 //             display_name d
 //             signature_documentation java String d

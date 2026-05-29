@@ -19,9 +19,7 @@ class SaveSnapshotHandler extends SnapshotHandler {
     Files.createDirectories(expectFile.getParent)
     Files.write(
       expectFile,
-      SnapshotNormalizer
-        .normalizeJdkVersion(obtainedOutput())
-        .getBytes(StandardCharsets.UTF_8)
+      obtainedOutput().getBytes(StandardCharsets.UTF_8)
     )
     writtenTests.add(expectFile)
   }

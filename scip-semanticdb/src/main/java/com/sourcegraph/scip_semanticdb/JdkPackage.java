@@ -7,8 +7,16 @@ public class JdkPackage extends Package {
     this.version = version;
   }
 
-  /** Returns a {@link JdkPackage} for the currently running JVM. */
+  /**
+   * Returns a {@link JdkPackage} for the currently running JVM, or the value of the {@code
+   * scip.jdk.version} system property if set. The override exists so that tests can produce
+   * JDK-independent snapshots.
+   */
   public static JdkPackage forRuntime() {
+    String override = System.getProperty("scip.jdk.version");
+    if (override != null && !override.isEmpty()) {
+      return new JdkPackage(override);
+    }
     return new JdkPackage(Integer.toString(Runtime.version().feature()));
   }
 

@@ -4,24 +4,24 @@
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/lang/
 //                 ^^^^^^^^^^ reference semanticdb maven . . java/lang/annotation/
-//                            ^^^^^^^^^^^ reference semanticdb maven jdk . java/lang/annotation/ElementType#
+//                            ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/annotation/ElementType#
   import java.lang.annotation.Target;
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/lang/
 //                 ^^^^^^^^^^ reference semanticdb maven . . java/lang/annotation/
-//                            ^^^^^^ reference semanticdb maven jdk . java/lang/annotation/Target#
+//                            ^^^^^^ reference semanticdb maven jdk 11 java/lang/annotation/Target#
   
 //⌄ enclosing_range_start semanticdb maven . . minimized/TypeAnnotation#
   @Target({ ElementType.TYPE_USE })
-// ^^^^^ reference semanticdb maven jdk . java/lang/annotation/Target#
-//          ^^^^^^^^^^^ reference semanticdb maven jdk . java/lang/annotation/ElementType#
-//                      ^^^^^^^^ reference semanticdb maven jdk . java/lang/annotation/ElementType#TYPE_USE.
+// ^^^^^ reference semanticdb maven jdk 11 java/lang/annotation/Target#
+//          ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/annotation/ElementType#
+//                      ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/annotation/ElementType#TYPE_USE.
   @interface TypeAnnotation {
 //           ^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/TypeAnnotation#
 //                          display_name TypeAnnotation
 //                          signature_documentation java @Target({ElementType.TYPE_USE})\n@interface TypeAnnotation
 //                          kind Interface
-//                          relationship is_implementation semanticdb maven jdk . java/lang/annotation/Annotation#
+//                          relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
 //    ⌄ enclosing_range_start semanticdb maven . . minimized/TypeAnnotation#integer().
       int integer() default 1;
 //        ^^^^^^^ definition semanticdb maven . . minimized/TypeAnnotation#integer().
@@ -45,7 +45,7 @@
 //                                                      signature_documentation java T extends Number
 //                                                      kind TypeParameter
 //                      ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/TypeAnnotation#
-//                                               ^^^^^^ reference semanticdb maven jdk . java/lang/Number#
+//                                               ^^^^^^ reference semanticdb maven jdk 11 java/lang/Number#
   
 //    ⌄ enclosing_range_start semanticdb maven . . minimized/ClassProcessed#`<init>`().
       public ClassProcessed() {
@@ -55,15 +55,15 @@
 //                          kind Constructor
 //        ⌄ enclosing_range_start local 0
           String s = new @TypeAnnotation String();
-//        ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //               ^ definition local 0
 //                 display_name s
 //                 signature_documentation java String s
 //                 enclosing_symbol semanticdb maven . . minimized/ClassProcessed#`<init>`().
 //                 kind Variable
 //                        ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/TypeAnnotation#
-//                                       ^^^^^^ reference semanticdb maven jdk . java/lang/String#
-//                                       ^^^^^^ reference semanticdb maven jdk . java/lang/String#`<init>`().
+//                                       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//                                       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#`<init>`().
 //                                               ⌃ enclosing_range_end local 0
       }
 //    ⌃ enclosing_range_end semanticdb maven . . minimized/ClassProcessed#`<init>`().

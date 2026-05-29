@@ -25,10 +25,7 @@ trait AssertSnapshotHandlers {
         if (Files.isRegularFile(expectFile)) {
           val expected =
             new String(Files.readAllBytes(expectFile), StandardCharsets.UTF_8)
-          self.assertNoDiff(
-            SnapshotNormalizer.normalizeJdkVersion(obtainedOutput()),
-            SnapshotNormalizer.normalizeJdkVersion(expected)
-          )
+          self.assertNoDiff(obtainedOutput(), expected)
         } else {
           throw new FailException(
             s"no snapshot file. To fix this problem, execute the command 'sbt snapshots/run'",

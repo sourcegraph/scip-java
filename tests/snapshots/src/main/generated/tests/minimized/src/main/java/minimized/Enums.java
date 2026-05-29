@@ -3,12 +3,12 @@
   import java.util.Arrays;
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/util/
-//                 ^^^^^^ reference semanticdb maven jdk . java/util/Arrays#
+//                 ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#
   import java.util.stream.Collectors;
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/util/
 //                 ^^^^^^ reference semanticdb maven . . java/util/stream/
-//                        ^^^^^^^^^^ reference semanticdb maven jdk . java/util/stream/Collectors#
+//                        ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/stream/Collectors#
   
 //⌄ enclosing_range_start semanticdb maven . . minimized/Enums#
   enum Enums {
@@ -16,9 +16,9 @@
 //           display_name Enums
 //           signature_documentation java enum Enums
 //           kind Enum
-//           relationship is_implementation semanticdb maven jdk . java/io/Serializable#
-//           relationship is_implementation semanticdb maven jdk . java/lang/Comparable#
-//           relationship is_implementation semanticdb maven jdk . java/lang/Enum#
+//           relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
+//           relationship is_implementation semanticdb maven jdk 11 java/lang/Comparable#
+//           relationship is_implementation semanticdb maven jdk 11 java/lang/Enum#
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/Enums#A.
     A("A", 420),
 //  ^ definition semanticdb maven . . minimized/Enums#A.
@@ -42,7 +42,7 @@
 //          ⌃ enclosing_range_end semanticdb maven . . minimized/Enums#C.
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/Enums#value.
     public String value;
-//         ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//         ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                ^^^^^ definition semanticdb maven . . minimized/Enums#value.
 //                      display_name value
 //                      signature_documentation java public String value
@@ -57,7 +57,7 @@
 //        display_name <init>
 //        signature_documentation java private Enums(String value, int a)
 //        kind Constructor
-//        ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//        ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //               ^^^^^ definition local 0
 //                     display_name value
 //                     signature_documentation java String value
@@ -76,7 +76,7 @@
   
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/Enums#app().
     public static String app() {
-//                ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//                ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //                       ^^^ definition semanticdb maven . . minimized/Enums#app().
 //                           display_name app
 //                           signature_documentation java public static String app()
@@ -84,29 +84,29 @@
 //    ⌄ enclosing_range_start local 2
 //                                             ⌄ enclosing_range_start local 3
       String all = Arrays.stream(values()).map(e -> e.value).map(Enums::valueOf).collect(Collectors.toList()).toString();
-//    ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//    ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
 //           ^^^ definition local 2
 //               display_name all
 //               signature_documentation java String all
 //               enclosing_symbol semanticdb maven . . minimized/Enums#app().
 //               kind Variable
-//                 ^^^^^^ reference semanticdb maven jdk . java/util/Arrays#
-//                        ^^^^^^ reference semanticdb maven jdk . java/util/Arrays#stream().
+//                 ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#
+//                        ^^^^^^ reference semanticdb maven jdk 11 java/util/Arrays#stream().
 //                               ^^^^^^ reference semanticdb maven . . minimized/Enums#values().
-//                                         ^^^ reference semanticdb maven jdk . java/util/stream/Stream#map().
+//                                         ^^^ reference semanticdb maven jdk 11 java/util/stream/Stream#map().
 //                                             ^ definition local 3
 //                                               display_name e
 //                                               signature_documentation java Enums e
 //                                               enclosing_symbol semanticdb maven . . minimized/Enums#app().
 //                                                  ^ reference local 3
 //                                                    ^^^^^ reference semanticdb maven . . minimized/Enums#value.
-//                                                           ^^^ reference semanticdb maven jdk . java/util/stream/Stream#map().
+//                                                           ^^^ reference semanticdb maven jdk 11 java/util/stream/Stream#map().
 //                                                               ^^^^^ reference semanticdb maven . . minimized/Enums#
 //                                                                      ^^^^^^^ reference semanticdb maven . . minimized/Enums#valueOf().
-//                                                                               ^^^^^^^ reference semanticdb maven jdk . java/util/stream/Stream#collect(+1).
-//                                                                                       ^^^^^^^^^^ reference semanticdb maven jdk . java/util/stream/Collectors#
-//                                                                                                  ^^^^^^ reference semanticdb maven jdk . java/util/stream/Collectors#toList().
-//                                                                                                            ^^^^^^^^ reference semanticdb maven jdk . java/lang/Object#toString().
+//                                                                               ^^^^^^^ reference semanticdb maven jdk 11 java/util/stream/Stream#collect(+1).
+//                                                                                       ^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/stream/Collectors#
+//                                                                                                  ^^^^^^ reference semanticdb maven jdk 11 java/util/stream/Collectors#toList().
+//                                                                                                            ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#toString().
 //                                             ⌃ enclosing_range_end local 3
 //                                                                                                                      ⌃ enclosing_range_end local 2
       return all + A.value + B.value + C.value;
