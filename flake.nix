@@ -23,7 +23,6 @@
           pkgs.mkShellNoCC {
             buildInputs = with pkgs; [
               bazelisk
-              (coursier.override ({ jre = jdk; }))
               git
               (gradle.override ({ java = jdk; }))
               jdk

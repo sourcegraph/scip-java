@@ -2,20 +2,15 @@ package tests
 
 object SaveSnapshots {
   def main(args: Array[String]): Unit = {
-    val expectDirectory = tests.snapshots.BuildInfo.snapshotDirectory.toPath
-    val mapping = Map(
-      "minimized" -> new MinimizedSnapshotScipGenerator(),
-      "library" -> new LibrarySnapshotGenerator()
+    // Keep regenerated goldens stable across JDK 11/17/21 by pinning the
+    // JDK version embedded in stdlib SCIP symbols. Matches the
+    // `-Dscip.jdk.version=11` set on the test JVM in build.sbt.
+    System.setProperty("scip.jdk.version", "11")
+    val context = SnapshotContext(
+      tests.snapshots.BuildInfo.snapshotDirectory.toPath
     )
-
-    val enabledGenerators =
-      if (args.isEmpty)
-        mapping.values.toList
-      else
-        args.flatMap(mapping.get).toList
-
-    val generator = new AggregateSnapshotGenerator(enabledGenerators)
-
-    generator.run(SnapshotContext(expectDirectory), new SaveSnapshotHandler)
+    val handler = new SaveSnapshotHandler
+    new MinimizedSnapshotScipGenerator().run(context, handler)
+    handler.onFinished(context)
   }
 }

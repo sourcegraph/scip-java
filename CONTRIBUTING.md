@@ -14,9 +14,9 @@ nix develop .#jdk17      # JDK 17
 nix develop .#jdk21      # JDK 21
 ```
 
-This drops you into a shell with `sbt`, `cs` (coursier), `maven`, `gradle`,
-`bazelisk`, `scalafmt`, `nodejs`, `yarn`, `git`, `jq`, etc. all pinned to the
-versions used in CI.
+This drops you into a shell with `sbt`, `maven`, `gradle`, `bazelisk`,
+`scalafmt`, `nodejs`, `yarn`, `git`, `jq`, etc. all pinned to the versions used
+in CI.
 
 If you'd rather install tools manually, you'll need at least:
 
@@ -55,7 +55,6 @@ These are the main components of the project.
 | `buildTools/test`                                                   | sbt      | Run slow build tool tests (Gradle, Maven).                                          |
 | `snapshots/testOnly tests.MinimizedSnapshotSuite`                   | sbt      | Runs fast snapshot tests. Indexes a small set of files under `tests/minimized`.     |
 | `snapshots/testOnly tests.MinimizedSnapshotSuite -- *InnerClasses*` | sbt      | Runs only individual tests cases matching the name "InnerClasses".                  |
-| `snapshots/testOnly tests.LibrarySnapshotSuite`                     | sbt      | Runs slow snapshot tests. Indexes a corpus of external Java libraries.              |
 | `snapshots/test`                                                    | sbt      | Runs all snapshot tests.                                                            |
 | `snapshots/run`                                                     | sbt      | Update snapshot tests. Use this command after you have fixed a bug.                 |
 | `cli/run --cwd DIRECTORY`                                           | sbt      | Run `scip-java` command-line tool against a given Gradle/Maven build.               |

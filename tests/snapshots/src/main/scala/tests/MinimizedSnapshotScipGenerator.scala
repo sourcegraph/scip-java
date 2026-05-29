@@ -15,13 +15,12 @@ import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.ScipJava
 import com.sourcegraph.scip_java.ScipPrinters
 
-class MinimizedSnapshotScipGenerator extends SnapshotGenerator {
+class MinimizedSnapshotScipGenerator {
   def run(args: List[String]): Unit = {
     val exit = ScipJava.app.run(args)
     require(exit == 0)
   }
-  def onFinished(context: SnapshotContext): Unit = ()
-  override def run(context: SnapshotContext, handler: SnapshotHandler): Unit = {
+  def run(context: SnapshotContext, handler: SnapshotHandler): Unit = {
     onTargetroot(
       context,
       handler,

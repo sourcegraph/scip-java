@@ -1,7 +1,6 @@
 package com.sourcegraph.scip_java.buildtools
 
 import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
 import java.nio.file.FileSystems
 import java.nio.file.FileVisitResult
@@ -12,15 +11,10 @@ import java.nio.file.Paths
 import java.nio.file.SimpleFileVisitor
 import java.nio.file.attribute.BasicFileAttributes
 import java.util
-import java.util.jar.JarFile
 
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.ListBuffer
-import scala.concurrent.Await
-import scala.concurrent.ExecutionContext
-import scala.concurrent.duration.Duration
 import scala.jdk.CollectionConverters._
-import scala.language.postfixOps
 import scala.util.Failure
 import scala.util.Success
 import scala.util.Try
@@ -29,10 +23,8 @@ import scala.util.control.NonFatal
 import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.BuildInfo
-import com.sourcegraph.scip_java.Dependencies
 import com.sourcegraph.scip_java.Embedded
 import com.sourcegraph.scip_java.commands.IndexCommand
-import coursier.jvm.JvmIndex
 import moped.json.DecodingContext
 import moped.json.ErrorResult
 import moped.json.JsonCodec
@@ -65,10 +57,15 @@ import os.SubprocessException
  *
  * {{{
  *   {
- *     "dependencies": ["junit:junit:4.13.1"],
- *     "jvm": "11"
+ *     "classpath": ["/abs/path/to/junit-4.13.1.jar"],
+ *     "javaHome": "/path/to/jdk"
  *   }
  * }}}
+ *
+ * Callers are expected to pre-resolve dependencies and pass the resulting
+ * classpath via the `classpath` field. The `javaHome` field (or the `JAVA_HOME`
+ * environment variable) must point at a JDK installation that provides
+ * `bin/javac`. scip-java does not fetch anything from the network.
  */
 class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
@@ -148,14 +145,23 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   }
 
   /**
-   * Resolves dependencies and shells out to "javac" to compile the sources with
-   * the SemanticDB compiler plugin enabled.
+   * Shells out to "javac" to compile the sources with the SemanticDB compiler
+   * plugin enabled.
    */
   private def compile(config: Config): CommandResult = {
+    if (config.dependencies.nonEmpty) {
+      index
+        .app
+        .error(
+          "scip-java no longer resolves Maven coordinates from the 'dependencies' " +
+            "field of scip-java.json. Pre-resolve dependencies and populate the " +
+            "'classpath' field with absolute JAR paths instead."
+        )
+      return CommandResult(Nil, 1, Nil)
+    }
     val tmp = Files.createTempDirectory("scip-java")
     Files.createDirectories(tmp)
     Files.createDirectories(targetroot)
-    val deps = Dependencies.resolveDependencies(config.dependencies.map(_.repr))
     val sourceroot = index.workingDirectory
     if (!Files.isDirectory(sourceroot)) {
       throw new NoSuchFileException(sourceroot.toString)
@@ -175,8 +181,8 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     }
 
     val compileAttempts = ListBuffer.empty[Try[Unit]]
-    compileAttempts += compileJavaFiles(tmp, deps, config, javaFiles)
-    compileAttempts += compileKotlinFiles(deps, config, kotlinFiles, tmp)
+    compileAttempts += compileJavaFiles(tmp, config, javaFiles)
+    compileAttempts += compileKotlinFiles(config, kotlinFiles, tmp)
     val errors = compileAttempts.collect { case Failure(exception) =>
       exception
     }
@@ -213,12 +219,11 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
   }
 
   private def compileKotlinFiles(
-      deps: Dependencies,
       config: Config,
       allKotlinFiles: List[Path],
       tmp: Path
   ): Try[Unit] = {
-    if (allKotlinFiles.isEmpty || config.dependencies.isEmpty)
+    if (allKotlinFiles.isEmpty)
       return Success()
     val filesPaths = allKotlinFiles.map(_.toString)
 
@@ -228,49 +233,12 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     // resolve a separately-published artifact from Maven Central.
     val plugin = Embedded.semanticdbKotlincJar(tmp)
 
-    val self = config.dependencies.head
-    val commonKotlinFiles: List[Path] =
-      Dependencies.kotlinMPPCommon(
-        self.groupId,
-        self.artifactId,
-        self.version
-      ) match {
-        case Some(common) =>
-          val outdir = Files.createTempDirectory("scipjava-kotlin")
-          val file = common.toFile
-          val basename = file
-            .getName
-            .substring(0, file.getName.lastIndexOf("."))
-          val newFiles = ListBuffer[Path]()
-          val jar = new JarFile(file)
-          val enu = jar.entries
-          while (enu.hasMoreElements) {
-            val entry = enu.nextElement
-            val entryPath =
-              if (entry.getName.startsWith(basename))
-                entry.getName.substring(basename.length)
-              else
-                entry.getName
-
-            if (entry.isDirectory) {
-              new File(outdir.toString, entryPath).mkdirs
-            } else if (entry.getName.endsWith(".kt")) {
-              val newFile = new File(outdir.toString, entryPath)
-              newFiles.addOne(newFile.toPath)
-              val istream = jar.getInputStream(entry)
-              val ostream = new FileOutputStream(newFile)
-              Iterator
-                .continually(istream.read)
-                .takeWhile(-1 !=)
-                .foreach(ostream.write)
-              ostream.close()
-              istream.close()
-            }
-          }
-          newFiles.toList
-        case None =>
-          List[Path]()
-      }
+    val classpath = config
+      .classpath
+      .map(path =>
+        AbsolutePath.of(Paths.get(path), index.workingDirectory).toString
+      )
+      .mkString(File.pathSeparator)
 
     val kargs: K2JVMCompilerArguments = new K2JVMCompilerArguments()
     val args = ListBuffer[String](
@@ -292,17 +260,10 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
       "-P",
       s"plugin:semanticdb-kotlinc:targetroot=$targetroot",
       "-classpath",
-      deps.classpathSyntax
+      classpath
     )
 
-    if (commonKotlinFiles.nonEmpty) {
-      val commonSources = commonKotlinFiles
-        .map(_.toAbsolutePath.toString)
-        .mkString(",")
-      args += s"-Xcommon-sources=$commonSources"
-    }
-
-    args ++= filesPaths ++ commonKotlinFiles.map(_.toAbsolutePath.toString)
+    args ++= filesPaths
 
     parseCommandLineArguments(args.asJava, kargs, false)
 
@@ -349,7 +310,6 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
 
   private def compileJavaFiles(
       tmp: Path,
-      deps: Dependencies,
       config: Config,
       allJavaFiles: List[Path]
   ): Try[Unit] = {
@@ -367,7 +327,6 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
         .map(path =>
           AbsolutePath.of(Paths.get(path), index.workingDirectory).toString
         )
-    actualClasspath ++= deps.classpath.map(_.toString)
     val argsfile = targetroot.resolve("javacopts.txt")
     val arguments = ListBuffer.empty[String]
     arguments += "-encoding"
@@ -422,7 +381,7 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
     val pipe = Readlines(line => {
       index.app.reporter.info(line)
     })
-    val javac = javacPath(config, tmp)
+    val javac = javacPath(config)
     index.app.reporter.info(s"$$ $javac @$argsfile")
     val javacModuleOptions: Seq[String] = BuildInfo.javacModuleOptions
 
@@ -470,72 +429,18 @@ class ScipBuildTool(index: IndexCommand) extends BuildTool("SCIP", index) {
         Nil
     }
 
-  private def javacPath(config: Config, tmp: Path): Path = {
-    config.javaHome match {
-      case Some(home) =>
-        Paths.get(home, "bin", "javac")
-      case None =>
-        javacPathViaCoursier(config.jvm, tmp)
-    }
-  }
-
-  private def javacPathViaCoursier(jvmVersion: String, tmp: Path): Path = {
-    import _root_.coursier.jvm._
-
-    val jvmChannel = index
-      .app
-      .env
-      .environmentVariables
-      .get("COURSIER_JVM_INDEX")
-      .map { idx =>
-        JvmChannel
-          .parse(idx)
-          .fold(
-            msg =>
-              throw new RuntimeException(
-                s"Malformed COURSIER_JVM_INDEX environment variable variable: $msg"
-              ),
-            identity
-          )
-      }
-
-    val home = JavaHome().withCache(
-      JvmCache()
-        .withIndexChannel(
-          repositories = Seq.empty,
-          indexChannel = jvmChannel.getOrElse(
-            JvmChannel.url(JvmIndex.defaultIndexUrl)
-          )
+  private def javacPath(config: Config): Path = {
+    val home = config
+      .javaHome
+      .orElse(index.app.env.environmentVariables.get("JAVA_HOME"))
+      .getOrElse {
+        throw new RuntimeException(
+          "scip-java requires either the 'javaHome' field in scip-java.json or " +
+            "the JAVA_HOME environment variable to be set to a JDK installation."
         )
-        .withArchitecture(jvmArchitecture(jvmVersion))
-    )
-
-    val javaExecutable = Await.result(
-      home.javaBin(jvmVersion).value(ExecutionContext.global),
-      Duration.Inf
-    )
-
-    javaExecutable
-      .getParent()
-      .resolve {
-        if (scala.util.Properties.isWin)
-          "javac.exe"
-        else
-          "javac"
       }
-
+    Paths.get(home, "bin", "javac")
   }
-
-  private def jvmArchitecture(jvm: String): String = JvmIndex
-    .defaultArchitecture()
-
-  def defaultCoursierJVMArchitecture: String =
-    sys.props("os.arch") match {
-      case "x86_64" =>
-        "amd64"
-      case x =>
-        x
-    }
 
   private def clean(): Unit = {
     Files.walkFileTree(targetroot, new DeleteVisitor)

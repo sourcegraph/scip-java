@@ -17,7 +17,7 @@ public class PackageTable {
 
   private final Map<String, Package> byClassfile = new HashMap<>();
   private final Set<String> cachedJdkSymbols = new HashSet<>();
-  private final JavaVersion javaVersion;
+  private final JdkPackage jdkPackage;
   private final boolean indexDirectoryEntries;
 
   private static final PathMatcher CLASS_PATTERN =
@@ -26,7 +26,7 @@ public class PackageTable {
       FileSystems.getDefault().getPathMatcher("glob:**.jar");
 
   public PackageTable(ScipSemanticdbOptions options) throws IOException {
-    this.javaVersion = new JavaVersion();
+    this.jdkPackage = JdkPackage.forRuntime();
     this.indexDirectoryEntries = options.allowExportingGlobalSymbolsFromDirectoryEntries;
     // NOTE: it's important that we index the JDK before maven packages. Some maven packages
     // redefine classes from the JDK and we want those maven packages to take precedence over
@@ -50,7 +50,7 @@ public class PackageTable {
 
     Package result = byClassfile.get(classfile);
     if (result != null) return Optional.of(result);
-    if (isJrtClassfile(classfile)) return Optional.of(javaVersion.pkg);
+    if (isJrtClassfile(classfile)) return Optional.of(jdkPackage);
     return Optional.empty();
   }
 

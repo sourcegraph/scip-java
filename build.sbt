@@ -9,7 +9,6 @@ import scala.collection.mutable.ListBuffer
 lazy val V =
   new {
     val protobuf = "4.32.1"
-    val coursier = "2.1.9"
     val scalaXml = "2.1.0"
     val moped = "0.2.0"
     val gradle = "7.0"
@@ -89,8 +88,8 @@ lazy val agent = project
     moduleName := "semanticdb-agent",
     libraryDependencies ++=
       List(
-        "net.bytebuddy" % "byte-buddy" % "1.11.9",
-        "net.bytebuddy" % "byte-buddy-agent" % "1.15.7"
+        "net.bytebuddy" % "byte-buddy" % "1.15.11",
+        "net.bytebuddy" % "byte-buddy-agent" % "1.15.11"
       ),
     Compile / packageBin / packageOptions +=
       Package.ManifestAttributes(
@@ -132,7 +131,16 @@ lazy val javacPlugin = project
     fatjarPackageSettings,
     javaOnlySettings,
     moduleName := "semanticdb-javac",
-    javacOptions += "-g",
+    // Scoped to compile so doc tasks (which reject -g) are unaffected.
+    Compile / compile / javacOptions += "-g",
+    // JDK 14+ ServiceLoader-scans the classpath for Plugin providers; our
+    // own META-INF/services entry points at SemanticdbPlugin before it's
+    // built. Force an empty processor path so javac skips the scan.
+    Compile / compile / javacOptions ++= {
+      val empty = target.value / "empty-processorpath"
+      IO.createDirectory(empty)
+      Seq("-processorpath", empty.getAbsolutePath)
+    },
     (assembly / assemblyShadeRules) :=
       Seq(
         ShadeRule
@@ -238,8 +246,6 @@ lazy val cli = project
     buildInfoPackage := "com.sourcegraph.scip_java",
     libraryDependencies ++=
       List(
-        "io.get-coursier" %% "coursier" % V.coursier,
-        "io.get-coursier" %% "coursier-jvm" % V.coursier,
         "org.scala-lang.modules" %% "scala-xml" % V.scalaXml,
         "com.lihaoyi" %% "requests" % V.requests,
         "org.scalameta" %% "moped" % V.moped,
@@ -342,6 +348,8 @@ lazy val semanticdbKotlinc = project
     description := "A kotlinc plugin to emit SemanticDB information",
     crossPaths := false,
     autoScalaLibrary := false,
+    // Pin bytecode to major 55 so sbt-assembly's older ASM can shade it.
+    Compile / javacOptions ++= Seq("--release", "11"),
     kotlinVersion := V.kotlinVersion,
     kotlincJvmTarget := "1.8",
     kotlincOptions ++= Seq("-Xinline-classes", "-Xcontext-parameters"),
@@ -582,28 +590,6 @@ def javacModuleOptions = List(
   "-Jjdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
 )
 
-lazy val minimized17 = project
-  .in(file("tests/minimized/.j17"))
-  .settings(
-    javaOnlySettings,
-    minimizedSettings,
-    javaToolchainVersion := "17",
-    javacOptions ++= javacModuleOptions
-  )
-  .dependsOn(agent, javacPlugin)
-  .disablePlugins(JavaFormatterPlugin)
-
-lazy val minimized21 = project
-  .in(file("tests/minimized/.j21"))
-  .settings(
-    javaOnlySettings,
-    minimizedSettings,
-    javaToolchainVersion := "21",
-    javacOptions ++= javacModuleOptions
-  )
-  .dependsOn(agent, javacPlugin)
-  .disablePlugins(JavaFormatterPlugin)
-
 lazy val unit = project
   .in(file("tests/unit"))
   .settings(
@@ -667,12 +653,22 @@ lazy val javaOnlySettings = List[Def.Setting[_]](
   incOptions ~= { old =>
     old.withEnabled(false).withApiDebug(true)
   },
-  crossPaths := false
+  crossPaths := false,
+  // Pin bytecode to major 55 so sbt-assembly's older ASM can shade it.
+  Compile / javacOptions ++= Seq("--release", "11")
 )
 
 val testSettings = List(
   (publish / skip) := true,
   autoScalaLibrary := true,
+  Test / fork := true,
+  // Open the JDK-internal javac packages to in-process tests that drive
+  // javac via reflection (e.g. JavacClassesDirectorySuite, TestCompiler).
+  // On JDK 17+ this is required or the reflective access fails.
+  Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
+  // Pin the JDK version embedded in stdlib SCIP symbols (e.g. `jdk 11
+  // java/lang/String#`) so snapshots are stable across JDK 11/17/21.
+  Test / javaOptions += "-Dscip.jdk.version=11",
   testFrameworks := List(TestFrameworks.MUnit),
   testOptions ++= {
     if (!(Test / testForkedParallel).value)
@@ -685,7 +681,6 @@ val testSettings = List(
       "org.scalameta" %% "munit" % "0.7.29",
       "org.scalameta" %% "moped-testkit" % V.moped,
       "org.scalameta" %% "scalameta" % V.scalameta,
-      "io.get-coursier" %% "coursier" % V.coursier,
       "com.lihaoyi" %% "pprint" % "0.6.6"
     )
 )

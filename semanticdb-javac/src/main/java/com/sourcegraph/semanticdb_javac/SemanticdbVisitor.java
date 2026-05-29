@@ -15,6 +15,7 @@ import com.sun.source.tree.LineMap;
 import com.sun.source.tree.ExpressionTree;
 import com.sun.source.tree.NewClassTree;
 import com.sun.source.tree.MemberSelectTree;
+import com.sun.source.tree.PackageTree;
 import com.sun.source.tree.TypeCastTree;
 import com.sun.source.tree.TypeParameterTree;
 import com.sun.source.tree.ParameterizedTypeTree;
@@ -247,6 +248,17 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       nodes.put(tree, path);
     }
     return super.scan(tree, unused);
+  }
+
+  @Override
+  public Void visitPackage(PackageTree node, Void unused) {
+    // Stop traversal at the package declaration. JDK 17+ TreePathScanner
+    // recurses into the package name's identifiers and would emit a
+    // self-reference for `package X.Y;`; JDK 11 does not. Skipping the
+    // whole package subtree keeps semanticdb output stable across JDKs and
+    // matches the long-standing JDK 8/11 behavior of not emitting a
+    // reference for the package declaration itself.
+    return null;
   }
 
   private boolean isAnonymous(Element sym) {
