@@ -23,19 +23,3 @@ There are several benefits to implementing scip-java as a compiler plugin:
   tool, we minimize the risk of diverging from the CI build environment such as
   installed system dependencies, custom compiler options and custom annotation
   processors.
-
-### Why per-file SCIP shards?
-
-The compiler plugin writes a small SCIP shard per compilation unit and a
-separate step aggregates the shards into a single SCIP index. There are several
-benefits to this two-phase pipeline:
-
-- **Simplicity**: It's easy to translate a single Java source file into a single
-  SCIP shard inside a compiler plugin. It would be more complicated to produce
-  a full SCIP index from inside the plugin because compiler plugins don't have
-  access to a project-wide context, which is necessary to produce accurate
-  definitions and hovers in multi-module projects with external library
-  dependencies.
-- **Performance**: Each compilation unit can be processed independently to keep
-  memory usage low. The final aggregation of the shards into a single SCIP
-  index can be safely parallelized.
