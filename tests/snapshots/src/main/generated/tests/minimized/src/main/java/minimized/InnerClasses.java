@@ -17,7 +17,7 @@
   
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/InnerClasses#STRING.
     private static final String STRING = "asdf";
-//                       ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//                       ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //                              ^^^^^^ definition semanticdb maven . . minimized/InnerClasses#STRING.
 //                                     display_name STRING
 //                                     signature_documentation java private static final String STRING
@@ -63,9 +63,9 @@
 //                        display_name InnerEnum
 //                        signature_documentation java public enum InnerEnum
 //                        kind Enum
-//                        relationship is_implementation semanticdb maven jdk 11 java/io/Serializable#
-//                        relationship is_implementation semanticdb maven jdk 11 java/lang/Comparable#
-//                        relationship is_implementation semanticdb maven jdk 11 java/lang/Enum#
+//                        relationship is_implementation semanticdb maven jdk N java/io/Serializable#
+//                        relationship is_implementation semanticdb maven jdk N java/lang/Comparable#
+//                        relationship is_implementation semanticdb maven jdk N java/lang/Enum#
 //              ^^^^^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerEnum#`<init>`().
 //                        display_name <init>
 //                        signature_documentation java private InnerEnum()
@@ -137,7 +137,7 @@
 //                                    display_name InnerAnnotation
 //                                    signature_documentation java public @interface InnerAnnotation
 //                                    kind Interface
-//                                    relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//                                    relationship is_implementation semanticdb maven jdk N java/lang/annotation/Annotation#
 //    ⌄ enclosing_range_start semanticdb maven . . minimized/InnerClasses#InnerAnnotation#value().
       int value();
 //        ^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerAnnotation#value().
@@ -150,7 +150,7 @@
   
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/InnerClasses#InnerStaticClass#
     @SuppressWarnings(STRING + " ")
-//   ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
+//   ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#
 //                    ^^^^^^ reference semanticdb maven . . minimized/InnerClasses#STRING.
     @InnerAnnotation(top / bottom)
 //   ^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerAnnotation#
@@ -184,8 +184,8 @@
 //                          kind Class
 //                          relationship is_implementation semanticdb maven . . minimized/InnerClasses#InnerInterface#
 //                                     ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#
-//                                                    ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
-//                                                             ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
+//                                                    ^^^^^^^ reference semanticdb maven jdk N java/lang/Integer#
+//                                                             ^^^^^^^ reference semanticdb maven jdk N java/lang/Integer#
 //    ⌄ enclosing_range_start semanticdb maven . . minimized/InnerClasses#InnerClass#field.
       private final int field;
 //                      ^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerClass#field.
@@ -219,9 +219,9 @@
 //                            signature_documentation java public void innerMethod()
 //                            kind Method
         System.out.println(field + exampleField);
-//      ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
-//             ^^^ reference semanticdb maven jdk 11 java/lang/System#out.
-//                 ^^^^^^^ reference semanticdb maven jdk 11 java/io/PrintStream#println(+3).
+//      ^^^^^^ reference semanticdb maven jdk N java/lang/System#
+//             ^^^ reference semanticdb maven jdk N java/lang/System#out.
+//                 ^^^^^^^ reference semanticdb maven jdk N java/io/PrintStream#println(+3).
 //                         ^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerClass#field.
 //                                 ^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#exampleField.
       }
@@ -229,16 +229,16 @@
   
 //    ⌄ enclosing_range_start semanticdb maven . . minimized/InnerClasses#InnerClass#apply().
       @Override
-//     ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
+//     ^^^^^^^^ reference semanticdb maven jdk N java/lang/Override#
 //                         ⌄ enclosing_range_start local 3
       public Integer apply(Integer integer) {
-//           ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
+//           ^^^^^^^ reference semanticdb maven jdk N java/lang/Integer#
 //                   ^^^^^ definition semanticdb maven . . minimized/InnerClasses#InnerClass#apply().
 //                         display_name apply
 //                         signature_documentation java @Override\npublic Integer apply(Integer integer)
 //                         kind Method
 //                         relationship is_reference is_implementation semanticdb maven . . minimized/InnerClasses#InnerInterface#apply().
-//                         ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
+//                         ^^^^^^^ reference semanticdb maven jdk N java/lang/Integer#
 //                                 ^^^^^^^ definition local 3
 //                                         display_name integer
 //                                         signature_documentation java Integer integer
@@ -308,10 +308,10 @@
 //                                                  enclosing_symbol semanticdb maven . . minimized/InnerClasses#testEnum().
 //                                                ⌃ enclosing_range_end local 6
       if (System.nanoTime() > System.currentTimeMillis()) {
-//        ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
-//               ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/System#nanoTime().
-//                            ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
-//                                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/System#currentTimeMillis().
+//        ^^^^^^ reference semanticdb maven jdk N java/lang/System#
+//               ^^^^^^^^ reference semanticdb maven jdk N java/lang/System#nanoTime().
+//                            ^^^^^^ reference semanticdb maven jdk N java/lang/System#
+//                                   ^^^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/System#currentTimeMillis().
         magicEnum = InnerEnum.B;
 //      ^^^^^^^^^ reference local 6
 //                  ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#
@@ -322,16 +322,16 @@
         case B:
 //           ^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#B.
           System.out.println("b");
-//        ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
-//               ^^^ reference semanticdb maven jdk 11 java/lang/System#out.
-//                   ^^^^^^^ reference semanticdb maven jdk 11 java/io/PrintStream#println(+8).
+//        ^^^^^^ reference semanticdb maven jdk N java/lang/System#
+//               ^^^ reference semanticdb maven jdk N java/lang/System#out.
+//                   ^^^^^^^ reference semanticdb maven jdk N java/io/PrintStream#println(+8).
           break;
         case A:
 //           ^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#A.
           System.out.println("a");
-//        ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
-//               ^^^ reference semanticdb maven jdk 11 java/lang/System#out.
-//                   ^^^^^^^ reference semanticdb maven jdk 11 java/io/PrintStream#println(+8).
+//        ^^^^^^ reference semanticdb maven jdk N java/lang/System#
+//               ^^^ reference semanticdb maven jdk N java/lang/System#out.
+//                   ^^^^^^^ reference semanticdb maven jdk N java/io/PrintStream#println(+8).
           break;
         default:
           break;
@@ -340,20 +340,20 @@
 //        ^^^^^^^^^ reference local 6
 //                     ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#
 //                               ^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#A.
-//                                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
-//                                         ^^^ reference semanticdb maven jdk 11 java/lang/System#out.
-//                                             ^^^^^^^ reference semanticdb maven jdk 11 java/io/PrintStream#println(+8).
+//                                  ^^^^^^ reference semanticdb maven jdk N java/lang/System#
+//                                         ^^^ reference semanticdb maven jdk N java/lang/System#out.
+//                                             ^^^^^^^ reference semanticdb maven jdk N java/io/PrintStream#println(+8).
       else if (magicEnum == InnerEnum.C) System.out.println("b");
 //             ^^^^^^^^^ reference local 6
 //                          ^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#
 //                                    ^ reference semanticdb maven . . minimized/InnerClasses#InnerEnum#C.
-//                                       ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
-//                                              ^^^ reference semanticdb maven jdk 11 java/lang/System#out.
-//                                                  ^^^^^^^ reference semanticdb maven jdk 11 java/io/PrintStream#println(+8).
+//                                       ^^^^^^ reference semanticdb maven jdk N java/lang/System#
+//                                              ^^^ reference semanticdb maven jdk N java/lang/System#out.
+//                                                  ^^^^^^^ reference semanticdb maven jdk N java/io/PrintStream#println(+8).
       else System.out.println("c");
-//         ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
-//                ^^^ reference semanticdb maven jdk 11 java/lang/System#out.
-//                    ^^^^^^^ reference semanticdb maven jdk 11 java/io/PrintStream#println(+8).
+//         ^^^^^^ reference semanticdb maven jdk N java/lang/System#
+//                ^^^ reference semanticdb maven jdk N java/lang/System#out.
+//                    ^^^^^^^ reference semanticdb maven jdk N java/io/PrintStream#println(+8).
     }
 //  ⌃ enclosing_range_end semanticdb maven . . minimized/InnerClasses#testEnum().
   
@@ -366,8 +366,8 @@
 //    ⌄ enclosing_range_start local 7
       InnerInterface<String, String> fn =
 //    ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#
-//                   ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
-//                           ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//                   ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//                           ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //                                   ^^ definition local 7
 //                                      display_name fn
 //                                      signature_documentation java InnerInterface<String, String> fn
@@ -375,21 +375,21 @@
 //                                      kind Variable
           new InnerInterface<String, String>() {
 //            ^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#
-//                           ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
-//                                   ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//                           ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//                                   ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //          ⌄ enclosing_range_start local 9
             @Override
-//           ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
+//           ^^^^^^^^ reference semanticdb maven jdk N java/lang/Override#
 //                              ⌄ enclosing_range_start local 10
             public String apply(String s) {
-//                 ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//                 ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //                        ^^^^^ definition local 9
 //                              display_name apply
 //                              signature_documentation java @Override\npublic String apply(String s)
 //                              enclosing_symbol local 8
 //                              kind Method
 //                              relationship is_reference is_implementation semanticdb maven . . minimized/InnerClasses#InnerInterface#apply().
-//                              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//                              ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //                                     ^ definition local 10
 //                                       display_name s
 //                                       signature_documentation java String s
@@ -402,9 +402,9 @@
           };
 //         ⌃ enclosing_range_end local 7
       System.out.println(fn.apply("a"));
-//    ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
-//           ^^^ reference semanticdb maven jdk 11 java/lang/System#out.
-//               ^^^^^^^ reference semanticdb maven jdk 11 java/io/PrintStream#println(+8).
+//    ^^^^^^ reference semanticdb maven jdk N java/lang/System#
+//           ^^^ reference semanticdb maven jdk N java/lang/System#out.
+//               ^^^^^^^ reference semanticdb maven jdk N java/io/PrintStream#println(+8).
 //                       ^^ reference local 7
 //                          ^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerInterface#apply().
     }
@@ -412,7 +412,7 @@
   
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/InnerClasses#app().
     public static String app() {
-//                ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//                ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //                       ^^^ definition semanticdb maven . . minimized/InnerClasses#app().
 //                           display_name app
 //                           signature_documentation java public static String app()
@@ -455,9 +455,9 @@
 //    ^^^^^^^^^^ reference local 13
 //               ^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#InnerClass#innerMethod().
       System.out.println(runInnerInterface(innerClass, a));
-//    ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
-//           ^^^ reference semanticdb maven jdk 11 java/lang/System#out.
-//               ^^^^^^^ reference semanticdb maven jdk 11 java/io/PrintStream#println(+9).
+//    ^^^^^^ reference semanticdb maven jdk N java/lang/System#
+//           ^^^ reference semanticdb maven jdk N java/lang/System#out.
+//               ^^^^^^^ reference semanticdb maven jdk N java/io/PrintStream#println(+9).
 //                       ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/InnerClasses#runInnerInterface().
 //                                         ^^^^^^^^^^ reference local 13
 //                                                     ^ reference local 11

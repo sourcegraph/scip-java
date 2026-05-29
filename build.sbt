@@ -347,6 +347,10 @@ lazy val semanticdbKotlinc = project
     description := "A kotlinc plugin to emit SemanticDB information",
     crossPaths := false,
     autoScalaLibrary := false,
+    // Pin Java bytecode to 11 — sbt-assembly's shader can't read class
+    // major 61+ emitted by JDK 17 javac and would silently skip shading,
+    // leaving the fat jar mixing shaded and un-shaded classes.
+    Compile / javacOptions ++= Seq("--release", "11"),
     kotlinVersion := V.kotlinVersion,
     kotlincJvmTarget := "1.8",
     kotlincOptions ++= Seq("-Xinline-classes", "-Xcontext-parameters"),
@@ -662,6 +666,10 @@ val testSettings = List(
   (publish / skip) := true,
   autoScalaLibrary := true,
   Test / fork := true,
+  // Open the JDK-internal javac packages to in-process tests that drive
+  // javac via reflection (e.g. JavacClassesDirectorySuite, TestCompiler).
+  // On JDK 17+ this is required or the reflective access fails.
+  Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
   testFrameworks := List(TestFrameworks.MUnit),
   testOptions ++= {
     if (!(Test / testForkedParallel).value)

@@ -17,7 +17,12 @@ class SaveSnapshotHandler extends SnapshotHandler {
       obtainedOutput: () => String
   ): Unit = {
     Files.createDirectories(expectFile.getParent)
-    Files.write(expectFile, obtainedOutput().getBytes(StandardCharsets.UTF_8))
+    Files.write(
+      expectFile,
+      SnapshotNormalizer
+        .normalizeJdkVersion(obtainedOutput())
+        .getBytes(StandardCharsets.UTF_8)
+    )
     writtenTests.add(expectFile)
   }
 

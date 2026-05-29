@@ -65,14 +65,14 @@
   
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/Docstrings#app().
     public static String app() {
-//                ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//                ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //                       ^^^ definition semanticdb maven . . minimized/Docstrings#app().
 //                           display_name app
 //                           signature_documentation java public static String app()
 //                           kind StaticMethod
       return String.format("%s%s%s", field, method(), methodParameter(42));
-//           ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
-//                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#format().
+//           ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//                  ^^^^^^ reference semanticdb maven jdk N java/lang/String#format().
 //                                   ^^^^^ reference semanticdb maven . . minimized/Docstrings#field.
 //                                          ^^^^^^ reference semanticdb maven . . minimized/Docstrings#method().
 //                                                    ^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/Docstrings#methodParameter().

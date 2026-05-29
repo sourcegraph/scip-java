@@ -12,7 +12,7 @@
 //                                      kind Constructor
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/AbstractClasses#defaultImplementation().
     public String defaultImplementation() {
-//         ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//         ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //                ^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AbstractClasses#defaultImplementation().
 //                                      display_name defaultImplementation
 //                                      signature_documentation java public String defaultImplementation()
@@ -23,7 +23,7 @@
   
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/AbstractClasses#abstractImplementation().
     public abstract String abstractImplementation();
-//                  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//                  ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //                         ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AbstractClasses#abstractImplementation().
 //                                                display_name abstractImplementation
 //                                                signature_documentation java public abstract String abstractImplementation()

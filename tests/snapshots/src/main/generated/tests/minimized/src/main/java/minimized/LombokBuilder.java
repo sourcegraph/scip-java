@@ -43,21 +43,21 @@
 //^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/Hello#HelloBuilder#message.
 //^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/Hello#HelloBuilder#message.
 //^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/Hello#message.
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#value().
-//^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#value().
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/Override#
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#value().
+//^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#value().
 // ^^^^^ reference semanticdb maven . . lombok/
 //        ^^^^^^^ reference semanticdb maven . . lombok/Builder#
 //                definition semanticdb maven . . minimized/Hello#HelloBuilder#build(). 1:4
@@ -72,7 +72,7 @@
 //                display_name toString
 //                signature_documentation java @Override\n@SuppressWarnings("all")\npublic String toString()
 //                kind Method
-//                relationship is_reference is_implementation semanticdb maven jdk 11 java/lang/Object#toString().
+//                relationship is_reference is_implementation semanticdb maven jdk N java/lang/Object#toString().
 //                definition semanticdb maven . . minimized/Hello#HelloBuilder# 1:11
 //                display_name HelloBuilder
 //                signature_documentation java @SuppressWarnings("all")\npublic static class HelloBuilder
@@ -104,7 +104,7 @@
 //      ^^^^^ reference semanticdb maven . . minimized/Hello#`<init>`().
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/Hello#message.
     private String message;
-//          ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//          ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //                 ^^^^^^^ definition local 0
 //                         display_name message
 //                         signature_documentation java final String message

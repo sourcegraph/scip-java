@@ -4,11 +4,11 @@
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/util/
 //                 ^^^^^^^^ reference semanticdb maven . . java/util/function/
-//                          ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
+//                          ^^^^^^^^ reference semanticdb maven jdk N java/util/function/Function#
   
 //⌄ enclosing_range_start semanticdb maven . . minimized/AnonymousClasses#
   @SuppressWarnings("ALL")
-// ^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
+// ^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#
   public class AnonymousClasses {
 //             ^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/AnonymousClasses#
 //                              display_name AnonymousClasses
@@ -32,31 +32,31 @@
 //                            ⌃ enclosing_range_end local 0
 //    ⌄ enclosing_range_start local 1
       Function<Integer, Integer> fn =
-//    ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
-//             ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
-//                      ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
+//    ^^^^^^^^ reference semanticdb maven jdk N java/util/function/Function#
+//             ^^^^^^^ reference semanticdb maven jdk N java/lang/Integer#
+//                      ^^^^^^^ reference semanticdb maven jdk N java/lang/Integer#
 //                               ^^ definition local 1
 //                                  display_name fn
 //                                  signature_documentation java Function<Integer, Integer> fn
 //                                  enclosing_symbol semanticdb maven . . minimized/AnonymousClasses#app().
 //                                  kind Variable
           new Function<Integer, Integer>() {
-//            ^^^^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#
-//                     ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
-//                              ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
+//            ^^^^^^^^ reference semanticdb maven jdk N java/util/function/Function#
+//                     ^^^^^^^ reference semanticdb maven jdk N java/lang/Integer#
+//                              ^^^^^^^ reference semanticdb maven jdk N java/lang/Integer#
 //          ⌄ enclosing_range_start local 3
             @Override
-//           ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Override#
+//           ^^^^^^^^ reference semanticdb maven jdk N java/lang/Override#
 //                               ⌄ enclosing_range_start local 4
             public Integer apply(Integer integer) {
-//                 ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
+//                 ^^^^^^^ reference semanticdb maven jdk N java/lang/Integer#
 //                         ^^^^^ definition local 3
 //                               display_name apply
 //                               signature_documentation java @Override\npublic Integer apply(Integer integer)
 //                               enclosing_symbol local 2
 //                               kind Method
-//                               relationship is_reference is_implementation semanticdb maven jdk 11 java/util/function/Function#apply().
-//                               ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
+//                               relationship is_reference is_implementation semanticdb maven jdk N java/util/function/Function#apply().
+//                               ^^^^^^^ reference semanticdb maven jdk N java/lang/Integer#
 //                                       ^^^^^^^ definition local 4
 //                                               display_name integer
 //                                               signature_documentation java Integer integer
@@ -72,7 +72,7 @@
   
       return fn.apply(n);
 //           ^^ reference local 1
-//              ^^^^^ reference semanticdb maven jdk 11 java/util/function/Function#apply().
+//              ^^^^^ reference semanticdb maven jdk N java/util/function/Function#apply().
 //                    ^ reference local 0
     }
 //  ⌃ enclosing_range_end semanticdb maven . . minimized/AnonymousClasses#app().

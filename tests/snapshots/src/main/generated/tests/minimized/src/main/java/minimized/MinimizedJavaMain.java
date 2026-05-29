@@ -21,7 +21,7 @@
 //                          display_name main
 //                          signature_documentation java public static void main(String[] args)
 //                          kind StaticMethod
-//                          ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//                          ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //                                   ^^^^ definition local 0
 //                                        display_name args
 //                                        signature_documentation java String[] args
@@ -33,9 +33,9 @@
 //                          ^^^^^^^^^^^^^ reference semanticdb maven . . minimized/TypeVariables#
 //                                        ^^ reference semanticdb maven . . minimized/TypeVariables#CT#`<init>`().
       System.out.println(
-//    ^^^^^^ reference semanticdb maven jdk 11 java/lang/System#
-//           ^^^ reference semanticdb maven jdk 11 java/lang/System#out.
-//               ^^^^^^^ reference semanticdb maven jdk 11 java/io/PrintStream#println(+8).
+//    ^^^^^^ reference semanticdb maven jdk N java/lang/System#
+//           ^^^ reference semanticdb maven jdk N java/lang/System#out.
+//               ^^^^^^^ reference semanticdb maven jdk N java/io/PrintStream#println(+8).
           Methods.app(42, "42")
 //        ^^^^^^^ reference semanticdb maven . . minimized/Methods#
 //                ^^^ reference semanticdb maven . . minimized/Methods#app().
@@ -59,13 +59,13 @@
 //                         ^^^ reference semanticdb maven . . minimized/Primitives#app().
               + new ParameterizedTypes<Integer, String>().app(42, "42")
 //                  ^^^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/ParameterizedTypes#`<init>`().
-//                                     ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
-//                                              ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//                                     ^^^^^^^ reference semanticdb maven jdk N java/lang/Integer#
+//                                              ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //                                                        ^^^ reference semanticdb maven . . minimized/ParameterizedTypes#app().
               + RawTypes.x.toString()
 //              ^^^^^^^^ reference semanticdb maven . . minimized/RawTypes#
 //                       ^ reference semanticdb maven . . minimized/RawTypes#x.
-//                         ^^^^^^^^ reference semanticdb maven jdk 11 java/lang/Object#toString().
+//                         ^^^^^^^^ reference semanticdb maven jdk N java/lang/Object#toString().
               + ClassOf.app()
 //              ^^^^^^^ reference semanticdb maven . . minimized/ClassOf#
 //                      ^^^ reference semanticdb maven . . minimized/ClassOf#app().

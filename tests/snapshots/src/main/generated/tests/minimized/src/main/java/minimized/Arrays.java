@@ -12,7 +12,7 @@
 //                    kind Constructor
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/Arrays#app().
     public static String app() {
-//                ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//                ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //                       ^^^ definition semanticdb maven . . minimized/Arrays#app().
 //                           display_name app
 //                           signature_documentation java public static String app()
@@ -27,7 +27,7 @@
 //                       ⌃ enclosing_range_end local 0
 //    ⌄ enclosing_range_start local 1
       String[] b = {"1", "2", "3"};
-//    ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//    ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //             ^ definition local 1
 //               display_name b
 //               signature_documentation java String[] b
@@ -44,7 +44,7 @@
 //                               ⌃ enclosing_range_end local 2
 //    ⌄ enclosing_range_start local 3
       String[][] d = {{"1"}, {"2"}, {"3"}};
-//    ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//    ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //               ^ definition local 3
 //                 display_name d
 //                 signature_documentation java String[][] d

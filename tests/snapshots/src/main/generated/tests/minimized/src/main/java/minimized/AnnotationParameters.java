@@ -6,7 +6,7 @@
 //               display_name Bar
 //               signature_documentation java @interface Bar
 //               kind Interface
-//               relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//               relationship is_implementation semanticdb maven jdk N java/lang/annotation/Annotation#
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/Bar#value().
     double value();
 //         ^^^^^ definition semanticdb maven . . minimized/Bar#value().
@@ -23,7 +23,7 @@
 //                display_name BarB
 //                signature_documentation java @interface BarB
 //                kind Interface
-//                relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//                relationship is_implementation semanticdb maven jdk N java/lang/annotation/Annotation#
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/BarB#value().
     boolean value();
 //          ^^^^^ definition semanticdb maven . . minimized/BarB#value().
@@ -40,10 +40,10 @@
 //                    display_name Nullable
 //                    signature_documentation java @interface Nullable
 //                    kind Interface
-//                    relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//                    relationship is_implementation semanticdb maven jdk N java/lang/annotation/Annotation#
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/Nullable#value().
     String value() default "";
-//  ^^^^^^ reference semanticdb maven jdk 11 java/lang/String#
+//  ^^^^^^ reference semanticdb maven jdk N java/lang/String#
 //         ^^^^^ definition semanticdb maven . . minimized/Nullable#value().
 //               display_name value
 //               signature_documentation java public abstract String value()
@@ -59,10 +59,10 @@
 //                  display_name BarRef
 //                  signature_documentation java @interface BarRef
 //                  kind Interface
-//                  relationship is_implementation semanticdb maven jdk 11 java/lang/annotation/Annotation#
+//                  relationship is_implementation semanticdb maven jdk N java/lang/annotation/Annotation#
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/BarRef#value().
     SuppressWarnings value();
-//  ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
+//  ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#
 //                   ^^^^^ definition semanticdb maven . . minimized/BarRef#value().
 //                         display_name value
 //                         signature_documentation java public abstract SuppressWarnings value()
@@ -91,8 +91,8 @@
     @Bar(~5)
 //   ^^^ reference semanticdb maven . . minimized/Bar#
     @SuppressWarnings(value = "unchecked")
-//   ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
-//                    ^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#value().
+//   ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#
+//                    ^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#value().
     double test2();
 //         ^^^^^ definition semanticdb maven . . minimized/Foo#test2().
 //               display_name test2
@@ -142,8 +142,8 @@
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/TestRef#testCase().
     @BarRef(@SuppressWarnings(value = "unchecked"))
 //   ^^^^^^ reference semanticdb maven . . minimized/BarRef#
-//           ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#
-//                            ^^^^^ reference semanticdb maven jdk 11 java/lang/SuppressWarnings#value().
+//           ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#
+//                            ^^^^^ reference semanticdb maven jdk N java/lang/SuppressWarnings#value().
     abstract double testCase();
 //                  ^^^^^^^^ definition semanticdb maven . . minimized/TestRef#testCase().
 //                           display_name testCase

@@ -3,11 +3,11 @@
   import java.util.Collections;
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/util/
-//                 ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collections#
+//                 ^^^^^^^^^^^ reference semanticdb maven jdk N java/util/Collections#
   import java.util.List;
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/util/
-//                 ^^^^ reference semanticdb maven jdk 11 java/util/List#
+//                 ^^^^ reference semanticdb maven jdk N java/util/List#
   
 //⌄ enclosing_range_start semanticdb maven . . minimized/ForComprehensions#
   public class ForComprehensions {
@@ -33,15 +33,15 @@
 //                            ⌃ enclosing_range_end local 0
 //    ⌄ enclosing_range_start local 1
       List<Integer> integers = Collections.singletonList(n);
-//    ^^^^ reference semanticdb maven jdk 11 java/util/List#
-//         ^^^^^^^ reference semanticdb maven jdk 11 java/lang/Integer#
+//    ^^^^ reference semanticdb maven jdk N java/util/List#
+//         ^^^^^^^ reference semanticdb maven jdk N java/lang/Integer#
 //                  ^^^^^^^^ definition local 1
 //                           display_name integers
 //                           signature_documentation java List<Integer> integers
 //                           enclosing_symbol semanticdb maven . . minimized/ForComprehensions#app().
 //                           kind Variable
-//                             ^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collections#
-//                                         ^^^^^^^^^^^^^ reference semanticdb maven jdk 11 java/util/Collections#singletonList().
+//                             ^^^^^^^^^^^ reference semanticdb maven jdk N java/util/Collections#
+//                                         ^^^^^^^^^^^^^ reference semanticdb maven jdk N java/util/Collections#singletonList().
 //                                                       ^ reference local 0
 //                                                         ⌃ enclosing_range_end local 1
 //    ⌄ enclosing_range_start local 2
