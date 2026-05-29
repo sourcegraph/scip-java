@@ -124,17 +124,11 @@ lazy val javacPlugin = project
     fatjarPackageSettings,
     javaOnlySettings,
     moduleName := "semanticdb-javac",
-    // Scope -g to the compile task so it doesn't leak into the doc task —
-    // javadoc rejects '-g' as an unknown flag.
+    // Scoped to compile so doc tasks (which reject -g) are unaffected.
     Compile / compile / javacOptions += "-g",
-    // JDK 14+ javac eagerly enumerates Plugin providers from the processor
-    // path (or, if absent, the compile classpath). During incremental
-    // compilation our own META-INF/services/com.sun.source.util.Plugin
-    // resource is on the classpath but SemanticdbPlugin.class isn't built
-    // yet, which trips ServiceLoader. Force an explicit empty processor
-    // path so javac doesn't scan our own output directory. The resource
-    // must stay in src/main/resources/ so that internal sbt dependents
-    // (e.g. the `minimized` test project) can find the plugin descriptor.
+    // JDK 14+ ServiceLoader-scans the classpath for Plugin providers; our
+    // own META-INF/services entry points at SemanticdbPlugin before it's
+    // built. Force an empty processor path so javac skips the scan.
     Compile / compile / javacOptions ++= {
       val empty = target.value / "empty-processorpath"
       IO.createDirectory(empty)
@@ -347,9 +341,7 @@ lazy val semanticdbKotlinc = project
     description := "A kotlinc plugin to emit SemanticDB information",
     crossPaths := false,
     autoScalaLibrary := false,
-    // Pin Java bytecode to 11 — sbt-assembly's shader can't read class
-    // major 61+ emitted by JDK 17 javac and would silently skip shading,
-    // leaving the fat jar mixing shaded and un-shaded classes.
+    // Pin bytecode to major 55 so sbt-assembly's older ASM can shade it.
     Compile / javacOptions ++= Seq("--release", "11"),
     kotlinVersion := V.kotlinVersion,
     kotlincJvmTarget := "1.8",
@@ -596,10 +588,6 @@ lazy val unit = project
   .settings(
     testSettings,
     // javaOptions ++= Seq(   "-Xdebug",   "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"),
-    // Pin the JDK version embedded in stdlib SCIP symbols (e.g. `jdk 11
-    // java/lang/String#`) so snapshots stay stable regardless of which JDK
-    // runs the tests.
-    Test / javaOptions += "-Dscip.jdk.version=11",
     buildInfoKeys :=
       Seq[BuildInfoKey](
         version,
@@ -643,12 +631,6 @@ lazy val snapshots = project
   .in(file("tests/snapshots"))
   .settings(
     testSettings,
-    // Pin the JDK version embedded in stdlib SCIP symbols so both the
-    // assert path (`snapshots/test`) and the regenerate path
-    // (`snapshots/run`) produce stable output across JDKs.
-    Test / javaOptions += "-Dscip.jdk.version=11",
-    run / fork := true,
-    run / javaOptions += "-Dscip.jdk.version=11",
     buildInfoKeys :=
       Seq[BuildInfoKey](
         "snapshotDirectory" -> (Compile / sourceDirectory).value / "generated"
@@ -665,10 +647,7 @@ lazy val javaOnlySettings = List[Def.Setting[_]](
     old.withEnabled(false).withApiDebug(true)
   },
   crossPaths := false,
-  // Java 11 is our minimum supported runtime and sbt-assembly's shader uses
-  // an ASM version that can't read newer class files (e.g. class major 61
-  // emitted by JDK 17). Pinning the release target keeps the bytecode at
-  // version 55 regardless of which JDK runs sbt, so shading still works.
+  // Pin bytecode to major 55 so sbt-assembly's older ASM can shade it.
   Compile / javacOptions ++= Seq("--release", "11")
 )
 
@@ -680,6 +659,9 @@ val testSettings = List(
   // javac via reflection (e.g. JavacClassesDirectorySuite, TestCompiler).
   // On JDK 17+ this is required or the reflective access fails.
   Test / javaOptions ++= javacModuleOptions.map(_.stripPrefix("-J")),
+  // Pin the JDK version embedded in stdlib SCIP symbols (e.g. `jdk 11
+  // java/lang/String#`) so snapshots are stable across JDK 11/17/21.
+  Test / javaOptions += "-Dscip.jdk.version=11",
   testFrameworks := List(TestFrameworks.MUnit),
   testOptions ++= {
     if (!(Test / testForkedParallel).value)
