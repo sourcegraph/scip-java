@@ -75,9 +75,7 @@ lazy val semanticdb = project
   .in(file("semanticdb-java"))
   .settings(
     moduleName := "semanticdb-java",
-    javaOnlySettings,
-    (Compile / PB.targets) :=
-      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value)
+    javaOnlySettings
   )
 
 lazy val agent = project
@@ -169,7 +167,7 @@ lazy val javacPlugin = project
           .inAll
       )
   )
-  .dependsOn(semanticdb)
+  .dependsOn(semanticdb, scipProto)
 
 lazy val scipProto = project
   .in(file("scip-java-proto"))
@@ -440,13 +438,15 @@ lazy val semanticdbKotlinc = project
       Attributed.blank(dir)
     }
   )
+  .dependsOn(scipProto)
 
 // `semanticdbKotlincMinimized` mirrors the (still-present) Gradle build at
 // semanticdb-kotlinc/minimized/build.gradle.kts. It compiles a small set of
 // Kotlin and Java fixtures with the assembled `semanticdbKotlinc` plugin
-// attached to kotlinc/javac, producing *.semanticdb files under
-// target/semanticdb-targetroot/ which are then converted to SCIP and rendered
-// as the human-readable golden snapshots by the `snapshots` task.
+// attached to kotlinc/javac, producing *.scip shard files under
+// target/semanticdb-targetroot/ which are then aggregated into a single SCIP
+// index and rendered as the human-readable golden snapshots by the
+// `snapshots` task.
 lazy val semanticdbKotlincMinimized = project
   .in(file("semanticdb-kotlinc/minimized"))
   .enablePlugins(KotlinPlugin)
@@ -510,7 +510,7 @@ lazy val semanticdbKotlincMinimized = project
     // ----- snapshots regeneration task -----
     // Invokes `com.sourcegraph.scip_java.ScipJava.main` twice in the cli JVM
     // (forked — ScipJava.main calls System.exit on failure). First pass
-    // converts the *.semanticdb files under target/semanticdb-targetroot/
+    // aggregates the *.scip shard files under target/semanticdb-targetroot/
     // into an index.scip; second pass renders that index as the human-readable
     // golden snapshots.
     //
@@ -524,7 +524,10 @@ lazy val semanticdbKotlincMinimized = project
           val snapDir =
             (baseDirectory.value / "src" / "generatedSnapshots" / "resources")
               .getAbsolutePath
-          val scipOut = s"$tgtRoot/index.scip"
+          // Place the aggregated `index.scip` outside the shard-scanned
+          // targetroot so a subsequent run doesn't re-ingest it as a shard.
+          val scipOut = (target.value / "scip-index" / "index.scip")
+            .getAbsolutePath
           val mainCls = "com.sourcegraph.scip_java.ScipJava"
           Def.sequential(
             Compile / compile,
@@ -532,7 +535,7 @@ lazy val semanticdbKotlincMinimized = project
               s" $mainCls index-semanticdb --no-emit-inverse-relationships --cwd $srcRoot --output $scipOut $tgtRoot"
             ),
             (cli / Compile / runMain).toTask(
-              s" $mainCls snapshot --cwd $srcRoot --output $snapDir $tgtRoot"
+              s" $mainCls snapshot --cwd $srcRoot --output $snapDir ${file(scipOut).getParentFile.getAbsolutePath}"
             )
           )
         }
@@ -694,6 +697,11 @@ lazy val fatjarPackageSettings = List[Def.Setting[_]](
     case PathList("sun", _ @_*) =>
       MergeStrategy.discard
     case PathList("META-INF", "versions", "9", "module-info.class") =>
+      MergeStrategy.discard
+    // Bazel BUILD files live next to *.proto sources in our subprojects; they are
+    // not needed at runtime and would conflict when multiple proto modules are
+    // merged into the same fat jar.
+    case PathList("BUILD") =>
       MergeStrategy.discard
     case x =>
       val oldStrategy = (assembly / assemblyMergeStrategy).value

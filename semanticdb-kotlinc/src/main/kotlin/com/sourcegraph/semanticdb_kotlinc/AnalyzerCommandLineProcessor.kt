@@ -28,7 +28,7 @@ class AnalyzerCommandLineProcessor : CommandLineProcessor {
             CliOption(
                 VAL_TARGET,
                 "<path>",
-                "the absolute path to the directory where to generate SemanticDB files.",
+                "the absolute path to the directory where to generate SCIP shard files.",
                 required = true))
 
     override fun processOption(

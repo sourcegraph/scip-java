@@ -12,8 +12,8 @@ import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.buildtools.ClasspathEntry
 import com.sourcegraph.scip_semanticdb.ConsoleScipSemanticdbReporter
 import com.sourcegraph.scip_semanticdb.ScipOutputFormat
-import com.sourcegraph.scip_semanticdb.ScipSemanticdb
 import com.sourcegraph.scip_semanticdb.ScipSemanticdbOptions
+import com.sourcegraph.scip_semanticdb.ScipShardAggregator
 import moped.annotations._
 import moped.cli.Application
 import moped.cli.Command
@@ -21,7 +21,7 @@ import moped.cli.CommandParser
 import ujson.Arr
 import ujson.Obj
 
-@Description("Converts SemanticDB files into a single SCIP index file.")
+@Description("Aggregates SCIP shard files into a single SCIP index file.")
 @Usage("scip-java index-semanticdb [OPTIONS ...] [POSITIONAL ARGUMENTS ...]")
 @ExampleUsage(
   "scip-java index-semanticdb --out=myindex.scip my/targetroot1 my/targetroot2"
@@ -30,10 +30,10 @@ import ujson.Obj
 final case class IndexSemanticdbCommand(
     @Description("The name of the output file.")
     output: Path = Paths.get("index.scip"),
-    @Description("Whether to process the SemanticDB files in parallel")
+    @Description("Whether to process the SCIP shard files in parallel")
     parallel: Boolean = true,
     @Description(
-      "Whether to infer the location of SemanticDB files based as produced by Bazel"
+      "Whether to infer the location of SCIP shard files based as produced by Bazel"
     )
     bazel: Boolean = true,
     @Description(
@@ -44,7 +44,7 @@ final case class IndexSemanticdbCommand(
     @Description("URL to a PackageHub instance")
     @Hidden
     packagehub: Option[String] = None,
-    @Description("Directories that contain SemanticDB files.")
+    @Description("Directories that contain SCIP shard files.")
     @PositionalArguments()
     targetroot: List[Path] = Nil,
     @Description(
@@ -108,7 +108,7 @@ final case class IndexSemanticdbCommand(
         allowEmptyIndex,
         allowExportingGlobalSymbolsFromDirectoryEntries
       )
-    ScipSemanticdb.run(options)
+    ScipShardAggregator.run(options)
     postPackages(packages)
     if (!app.reporter.hasErrors()) {
       app.info(options.output.toString)

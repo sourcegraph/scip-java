@@ -18,12 +18,13 @@ import static javax.tools.StandardLocation.SOURCE_OUTPUT;
 /** Settings that can be configured alongside the -Xplugin compiler option. */
 public class SemanticdbJavacOptions {
 
-  /** The directory to place META-INF and its .semanticdb files */
+  /** The directory to place META-INF and its SCIP shard files */
   public Path targetroot;
 
   public Path sourceroot;
   public boolean includeText = false;
   public boolean verboseEnabled = false;
+
   public final ArrayList<String> errors;
   public boolean alreadyReportedErrors = false;
   public UriScheme uriScheme = UriScheme.DEFAULT;
@@ -97,6 +98,9 @@ public class SemanticdbJavacOptions {
         result.verboseEnabled = true;
       } else if (arg.equals("-verbose:off")) {
         result.verboseEnabled = false;
+      } else if (arg.equals("-emit-scip:on") || arg.equals("-emit-scip:off")) {
+        // Deprecated no-op: SCIP shard emission is now unconditional. The flag is still parsed so
+        // older callers / cached compiler options keep working without errors.
       } else if (arg.startsWith("-randomtimestamp")) {
       } else {
         result.errors.add(String.format("unknown flag '%s'\n", arg));

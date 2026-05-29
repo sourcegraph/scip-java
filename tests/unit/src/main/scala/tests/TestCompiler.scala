@@ -13,8 +13,6 @@ import scala.meta.Input
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
-import com.sourcegraph.semanticdb_javac.Semanticdb
-
 object TestCompiler {
   val PROCESSOR_PATH = System.getProperty("java.class.path")
 }
@@ -23,7 +21,7 @@ class TestCompiler(
     val classpath: String,
     val javacOptions: List[String],
     val targetroot: Path,
-    val sourceroot: Path = Files.createTempDirectory("semanticdb-javac")
+    val sourceroot: Path = Files.createTempDirectory("scip-javac")
 ) {
 
   private val compiler = ToolProvider.getSystemJavaCompiler
@@ -37,10 +35,19 @@ class TestCompiler(
     this(TestCompiler.PROCESSOR_PATH, Nil, targetroot)
   }
 
+  /**
+   * Compiles every `*.java` file under [[dir]] with the SCIP shard plugin attached
+   * to javac. The resulting shards are read back from disk and exposed through
+   * [[CompileResult.documents]].
+   */
   def compileSemanticdbDirectory(dir: Path): CompileResult = {
     compileSemanticdb(inputsFromDirectory(dir))
   }
 
+  /**
+   * Compiles the given inputs with the SCIP shard plugin attached to javac and
+   * reads the produced `*.scip` shards back from disk.
+   */
   def compileSemanticdb(inputs: Seq[Input.VirtualFile]): CompileResult = {
     compile(
       inputs,
@@ -94,23 +101,19 @@ class TestCompiler(
     var bytecode = new Array[Byte](0)
     if (!fileManager.compiled.isEmpty)
       bytecode = fileManager.compiled.iterator.next.getCompiledBinaries
-    val textDocuments = Semanticdb.TextDocuments.newBuilder
-    inputs.map { input =>
-      val outputPath = targetroot
+    val documents = ListBuffer.empty[com.sourcegraph.Scip.Document]
+    inputs.foreach { input =>
+      val shardPath = targetroot
         .resolve("META-INF")
-        .resolve("semanticdb")
-        .resolve(input.path + ".semanticdb")
-      if (Files.isRegularFile(outputPath)) {
-        textDocuments.addAllDocuments(
-          Semanticdb
-            .TextDocuments
-            .parseFrom(Files.readAllBytes(outputPath))
-            .getDocumentsList
-        )
+        .resolve("scip")
+        .resolve(input.path + ".scip")
+      if (Files.isRegularFile(shardPath)) {
+        documents ++=
+          CompileResult.documentsFromShard(Files.readAllBytes(shardPath))
       }
     }
     val stdout = output.toString
-    CompileResult(bytecode, stdout, textDocuments.build(), isSuccess)
+    CompileResult(bytecode, stdout, documents.toList, isSuccess)
   }
 
   private def inputsFromDirectory(dir: Path): Seq[Input.VirtualFile] = {

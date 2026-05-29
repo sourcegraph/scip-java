@@ -16,21 +16,22 @@ import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 
+/**
+ * IR generation extension that runs after FIR analysis to write the per-source SCIP shards
+ * collected by [SemanticdbVisitor]. The legacy SemanticDB protobuf output has been removed.
+ */
 class PostAnalysisExtension(
     private val sourceRoot: Path,
     private val targetRoot: Path,
-    private val callback: (Semanticdb.TextDocument) -> Unit
 ) : IrGenerationExtension {
     @OptIn(ExperimentalContracts::class)
     override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
         try {
             for ((ktSourceFile, visitor) in AnalyzerCheckers.visitors) {
                 try {
-                    val document = visitor.build()
-                    semanticdbOutPathForFile(ktSourceFile)?.apply {
-                        Files.write(this, TextDocuments { addDocuments(document) }.toByteArray())
+                    scipShardOutPathForFile(ktSourceFile)?.apply {
+                        ScipShardWriter.write(this, visitor.buildScipIndex())
                     }
-                    callback(document)
                 } catch (e: Exception) {
                     handleException(e)
                 }
@@ -40,20 +41,20 @@ class PostAnalysisExtension(
         }
     }
 
-    private fun semanticdbOutPathForFile(file: KtSourceFile): Path? {
+    private fun scipShardOutPathForFile(file: KtSourceFile): Path? {
         val normalizedPath = Paths.get(file.path).normalize()
         if (normalizedPath.startsWith(sourceRoot)) {
             val relative = sourceRoot.relativize(normalizedPath)
-            val filename = relative.fileName.toString() + ".semanticdb"
-            val semanticdbOutPath =
+            val filename = relative.fileName.toString() + ".scip"
+            val outPath =
                 targetRoot
                     .resolve("META-INF")
-                    .resolve("semanticdb")
+                    .resolve("scip")
                     .resolve(relative)
                     .resolveSibling(filename)
 
-            Files.createDirectories(semanticdbOutPath.parent)
-            return semanticdbOutPath
+            Files.createDirectories(outPath.parent)
+            return outPath
         }
         System.err.println(
             "given file is not under the sourceroot.\n\tSourceroot: $sourceRoot\n\tFile path: ${file.path}\n\tNormalized file path: $normalizedPath")
@@ -83,7 +84,7 @@ class PostAnalysisExtension(
         writer.println("Exception in semanticdb-kotlin compiler plugin:")
         e.printStackTrace(writer)
         writer.println(
-            "Please report a bug to https://github.com/sourcegraph/scip-kotlin with the stack trace above.")
+            "Please report a bug to https://github.com/sourcegraph/scip-java with the stack trace above.")
         writer.close()
     }
 }

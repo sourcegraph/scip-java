@@ -1,60 +1,58 @@
 package com.sourcegraph.semanticdb_javac;
 
-import com.sun.source.util.SourcePositions;
-import com.sun.source.util.Trees;
-import com.sun.source.util.TreePathScanner;
-import com.sun.source.util.TreePath;
-import com.sun.source.tree.CompilationUnitTree;
-import com.sun.source.tree.MemberReferenceTree;
-import com.sun.source.tree.IdentifierTree;
-import com.sun.source.tree.VariableTree;
-import com.sun.source.tree.ClassTree;
-import com.sun.source.tree.Tree;
-import com.sun.source.tree.MethodTree;
-import com.sun.source.tree.LineMap;
-import com.sun.source.tree.ExpressionTree;
-import com.sun.source.tree.NewClassTree;
-import com.sun.source.tree.MemberSelectTree;
-import com.sun.source.tree.PackageTree;
-import com.sun.source.tree.TypeCastTree;
-import com.sun.source.tree.TypeParameterTree;
-import com.sun.source.tree.ParameterizedTypeTree;
+import com.sourcegraph.Scip;
 import com.sun.source.tree.AnnotatedTypeTree;
-
-import javax.tools.Diagnostic;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.Modifier;
-import javax.lang.model.element.Name;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.type.NoType;
-import javax.lang.model.type.TypeMirror;
-import javax.lang.model.type.DeclaredType;
-import javax.lang.model.util.Types;
-import javax.lang.model.util.Elements;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Kind;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
+import com.sun.source.tree.ClassTree;
+import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.ExpressionTree;
+import com.sun.source.tree.IdentifierTree;
+import com.sun.source.tree.LineMap;
+import com.sun.source.tree.MemberReferenceTree;
+import com.sun.source.tree.MemberSelectTree;
+import com.sun.source.tree.MethodTree;
+import com.sun.source.tree.NewClassTree;
+import com.sun.source.tree.ParameterizedTypeTree;
+import com.sun.source.tree.Tree;
+import com.sun.source.tree.TypeParameterTree;
+import com.sun.source.tree.VariableTree;
+import com.sun.source.util.SourcePositions;
+import com.sun.source.util.TreePath;
+import com.sun.source.util.TreePathScanner;
+import com.sun.source.util.Trees;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Iterator;
-import java.security.NoSuchAlgorithmException;
+import java.util.Set;
 import java.util.stream.Collectors;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.Name;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.NoType;
+import javax.lang.model.type.TypeMirror;
+import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
+import javax.tools.Diagnostic;
 
-import static com.sourcegraph.semanticdb_javac.SemanticdbBuilders.*;
-
-/** Walks the AST of a typechecked compilation unit and generates a SemanticDB TextDocument. */
-public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
+/**
+ * Walks the AST of a typechecked compilation unit and generates a {@link Scip.Document} directly.
+ *
+ * <p>Symbols are produced through {@link GlobalSymbolsCache} and then translated to the
+ * placeholder SCIP form via {@link ScipSymbols#fromSemanticdbSymbol(String)}. Signature
+ * documentation is produced by {@link ScipSignatureFormatter} directly from javac's element model.
+ */
+public final class ScipVisitor extends TreePathScanner<Void, Void> {
 
   private final GlobalSymbolsCache globals;
   private final LocalSymbolsCache locals;
@@ -63,146 +61,249 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   private final CompilationUnitTree compUnitTree;
   private final Elements elements;
   private final SemanticdbJavacOptions options;
-  private final ArrayList<Semanticdb.SymbolOccurrence> occurrences;
-  private final ArrayList<Semanticdb.SymbolInformation> symbolInfos;
-  private String source;
-  private String uri;
-
+  private final ArrayList<Scip.Occurrence> occurrences;
+  private final LinkedHashMap<String, Scip.SymbolInformation> symbols;
+  private final String source;
+  private final String relativePath;
   private final LinkedHashMap<Tree, TreePath> nodes;
 
-  public SemanticdbVisitor(
+  public ScipVisitor(
       GlobalSymbolsCache globals,
       CompilationUnitTree compUnitTree,
       SemanticdbJavacOptions options,
       Types types,
       Trees trees,
       Elements elements) {
-    this.globals = globals; // Reused cache between compilation units.
-    this.locals = new LocalSymbolsCache(); // Fresh cache per compilation unit.
+    this.globals = globals;
+    this.locals = new LocalSymbolsCache();
     this.options = options;
     this.types = types;
     this.elements = elements;
     this.trees = trees;
     this.compUnitTree = compUnitTree;
     this.occurrences = new ArrayList<>();
-    this.symbolInfos = new ArrayList<>();
-    this.source = semanticdbText();
-    this.uri = semanticdbUri(compUnitTree, options);
+    this.symbols = new LinkedHashMap<>();
+    this.source = sourceText(compUnitTree);
+    this.relativePath = sourceRelativePath(compUnitTree, options);
     this.nodes = new LinkedHashMap<>();
   }
 
-  public Semanticdb.TextDocument buildTextDocument(CompilationUnitTree tree) {
-    this.scan(tree, null); // Trigger recursive AST traversal to collect SemanticDB information.
-
+  /** Builds a single-document {@link Scip.Index} shard for the given compilation unit. */
+  public Scip.Index buildShard(CompilationUnitTree tree) {
+    this.scan(tree, null);
     resolveNodes();
 
-    return Semanticdb.TextDocument.newBuilder()
-        .setSchema(Semanticdb.Schema.SEMANTICDB4)
-        .setLanguage(Semanticdb.Language.JAVA)
-        .setUri(uri)
-        .setText(options.includeText ? this.source : "")
-        .setMd5(semanticdbMd5())
-        .addAllOccurrences(occurrences)
-        .addAllSymbols(symbolInfos)
-        .build();
+    Scip.Document.Builder document =
+        Scip.Document.newBuilder()
+            .setRelativePath(relativePath)
+            .setLanguage(LANGUAGE_JAVA);
+    if (options.includeText) {
+      document.setText(source);
+    }
+    document.addAllOccurrences(ScipOccurrences.deduplicate(occurrences));
+    document.addAllSymbols(symbols.values());
+
+    return Scip.Index.newBuilder().addDocuments(document).build();
   }
 
-  private Optional<Semanticdb.Range> emitSymbolOccurrence(
-      Element sym, Tree tree, Name name, Role role, CompilerRange kind) {
+  /** SCIP {@code Document.language} value for Java sources. */
+  static final String LANGUAGE_JAVA = "java";
+
+  // ==========================
+  // Symbol/occurrence emission
+  // ==========================
+
+  private Optional<ScipRange> emitSymbolOccurrence(
+      Element sym, Tree tree, Name name, ScipRole role, CompilerRange kind) {
     if (sym == null || name == null) return Optional.empty();
-    Optional<Semanticdb.Range> range = semanticdbRange(tree, kind, sym, name.toString());
-    if (role == Role.DEFINITION) {
-      emitSymbolOccurrence(sym, range, role, computeEnclosingRange(tree));
-      // Only emit SymbolInformation for symbols that are defined in this compilation unit.
+    Optional<ScipRange> range = scipRangeOf(tree, kind, sym, name.toString());
+    if (role == ScipRole.DEFINITION) {
+      emitOccurrence(sym, range, role, computeEnclosingRange(tree));
       emitSymbolInformation(sym, tree);
       return range;
     }
-    emitSymbolOccurrence(sym, range, role, Optional.empty());
+    emitOccurrence(sym, range, role, Optional.empty());
     return range;
   }
 
-  private void emitSymbolOccurrence(
+  private void emitOccurrence(
       Element sym,
-      Optional<Semanticdb.Range> range,
-      Role role,
-      Optional<Semanticdb.Range> enclosingRange) {
-    if (sym == null) return;
-    Optional<Semanticdb.SymbolOccurrence> occ =
-        semanticdbOccurrence(sym, range, role, enclosingRange);
-    occ.ifPresent(occurrences::add);
+      Optional<ScipRange> range,
+      ScipRole role,
+      Optional<ScipRange> enclosingRange) {
+    if (sym == null || !range.isPresent()) return;
+    String semanticdbSymbol = semanticdbSymbol(sym);
+    if (semanticdbSymbol.equals(SemanticdbSymbols.NONE)) return;
+
+    Scip.Occurrence.Builder occ =
+        Scip.Occurrence.newBuilder()
+            .addAllRange(range.get().asScipRange())
+            .setSymbol(ScipSymbols.fromSemanticdbSymbol(semanticdbSymbol))
+            .setSymbolRoles(scipRole(role));
+    enclosingRange.ifPresent(r -> occ.addAllEnclosingRange(r.asScipRange()));
+    occurrences.add(occ.build());
   }
 
   private void emitSymbolInformation(Element sym, Tree tree) {
-    String symbol = semanticdbSymbol(sym);
-    Semanticdb.SymbolInformation.Builder builder = symbolInformation(symbol);
-    Semanticdb.Documentation documentation = semanticdbDocumentation(tree);
-    if (documentation != null) builder.setDocumentation(documentation);
-    Semanticdb.Signature signature = semanticdbSignature(sym);
-    if (signature != null) builder.setSignature(signature);
-    if (SemanticdbSymbols.isLocal(symbol)) {
+    String semanticdbSymbol = semanticdbSymbol(sym);
+    if (semanticdbSymbol.equals(SemanticdbSymbols.NONE)) return;
+
+    Scip.SymbolInformation.Builder builder =
+        Scip.SymbolInformation.newBuilder()
+            .setSymbol(ScipSymbols.fromSemanticdbSymbol(semanticdbSymbol))
+            .setDisplayName(sym.getSimpleName().toString())
+            .setKind(scipKind(sym));
+
+    if (SemanticdbSymbols.isLocal(semanticdbSymbol)) {
       String enclosingSymbol = semanticdbSymbol(sym.getEnclosingElement());
-      if (enclosingSymbol != null) builder.setEnclosingSymbol(enclosingSymbol);
+      if (enclosingSymbol != null && !enclosingSymbol.equals(SemanticdbSymbols.NONE)) {
+        builder.setEnclosingSymbol(ScipSymbols.fromSemanticdbSymbol(enclosingSymbol));
+      }
     }
 
-    List<Semanticdb.AnnotationTree> annotations =
-        new SemanticdbTrees(globals, locals, uri, types, trees, nodes).annotations(tree);
-    if (annotations != null) builder.addAllAnnotations(annotations);
+    String documentation = semanticdbDocumentation(tree);
+    if (documentation != null && !documentation.isEmpty()) {
+      builder.addDocumentation(documentation);
+    }
 
-    builder
-        .setProperties(semanticdbSymbolInfoProperties(sym))
-        .setDisplayName(sym.getSimpleName().toString())
-        .setAccess(semanticdbAccess(sym));
+    String signature = new ScipSignatureFormatter(sym).formatSymbol();
+    if (!signature.isEmpty()) {
+      builder.setSignatureDocumentation(
+          Scip.Document.newBuilder()
+              .setLanguage(LANGUAGE_JAVA)
+              .setRelativePath(relativePath)
+              .setText(signature));
+    }
+
+    boolean supportsReferenceRel = supportsReferenceRelationship(sym);
 
     switch (sym.getKind()) {
       case ENUM:
       case CLASS:
-        builder.setKind(Kind.CLASS);
-        builder.addAllOverriddenSymbols(semanticdbParentSymbols((TypeElement) sym));
-        break;
       case INTERFACE:
       case ANNOTATION_TYPE:
-        builder.setKind(Kind.INTERFACE);
-        builder.addAllOverriddenSymbols(semanticdbParentSymbols((TypeElement) sym));
-        break;
-      case FIELD:
-        builder.setKind(Kind.FIELD);
+        addParentRelationships(builder, (TypeElement) sym, supportsReferenceRel);
         break;
       case METHOD:
-        builder.setKind(Kind.METHOD);
-        builder.addAllOverriddenSymbols(
+        for (String overridden :
             semanticdbOverrides(
-                (ExecutableElement) sym, sym.getEnclosingElement(), new HashSet<>()));
+                (ExecutableElement) sym, sym.getEnclosingElement(), new HashSet<>())) {
+          if (isIgnoredOverriddenSymbol(overridden)) continue;
+          builder.addRelationships(
+              Scip.Relationship.newBuilder()
+                  .setSymbol(ScipSymbols.fromSemanticdbSymbol(overridden))
+                  .setIsImplementation(true)
+                  .setIsReference(supportsReferenceRel));
+        }
         break;
-      case CONSTRUCTOR:
-        builder.setKind(Kind.CONSTRUCTOR);
+      case ENUM_CONSTANT:
+        if (tree instanceof VariableTree && ((VariableTree) tree).getInitializer() != null) {
+          String args =
+              ((NewClassTree) ((VariableTree) tree).getInitializer())
+                  .getArguments().stream()
+                      .map(ExpressionTree::toString)
+                      .collect(Collectors.joining(", "));
+          if (!args.isEmpty()) {
+            builder.setDisplayName(sym.getSimpleName().toString() + "(" + args + ")");
+          }
+        }
         break;
-      case TYPE_PARAMETER:
-        builder.setKind(Kind.TYPE_PARAMETER);
-        break;
-      case ENUM_CONSTANT: // overwrite previous value here
-        String args =
-            ((NewClassTree) ((VariableTree) tree).getInitializer())
-                .getArguments().stream()
-                    .map(ExpressionTree::toString)
-                    .collect(Collectors.joining(", "));
-        if (!args.isEmpty())
-          builder.setDisplayName(sym.getSimpleName().toString() + "(" + args + ")");
-        break;
-      case LOCAL_VARIABLE:
-        builder.setKind(Kind.LOCAL);
+      default:
         break;
     }
 
-    Semanticdb.SymbolInformation info = builder.build();
-
-    symbolInfos.add(info);
+    // Deduplicate by symbol; last write wins so newly discovered metadata takes precedence.
+    symbols.put(builder.getSymbol(), builder.build());
   }
 
+  private void addParentRelationships(
+      Scip.SymbolInformation.Builder builder, TypeElement sym, boolean supportsReferenceRel) {
+    for (String parent : semanticdbParentSymbols(sym)) {
+      if (isIgnoredOverriddenSymbol(parent)) continue;
+      builder.addRelationships(
+          Scip.Relationship.newBuilder()
+              .setSymbol(ScipSymbols.fromSemanticdbSymbol(parent))
+              .setIsImplementation(true)
+              .setIsReference(supportsReferenceRel));
+    }
+  }
+
+  private static boolean isIgnoredOverriddenSymbol(String symbol) {
+    return symbol.equals("java/lang/Object#");
+  }
+
+  private static boolean supportsReferenceRelationship(Element sym) {
+    switch (sym.getKind()) {
+      case INTERFACE:
+      case CLASS:
+      case ANNOTATION_TYPE:
+      case ENUM:
+        return false;
+      default:
+        return true;
+    }
+  }
+
+  // =================================================
+  // Role / kind translation for SCIP emission.
+  // =================================================
+
+  private static int scipRole(ScipRole role) {
+    if (role == ScipRole.DEFINITION || role == ScipRole.SYNTHETIC_DEFINITION) {
+      return Scip.SymbolRole.Definition_VALUE;
+    }
+    return 0;
+  }
+
+  private static Scip.SymbolInformation.Kind scipKind(Element sym) {
+    Set<Modifier> modifiers = sym.getModifiers();
+    boolean isStatic = modifiers.contains(Modifier.STATIC);
+    // A `default` interface method has both ABSTRACT and DEFAULT modifiers; treat it as non-abstract.
+    boolean isAbstract =
+        modifiers.contains(Modifier.ABSTRACT) && !modifiers.contains(Modifier.DEFAULT);
+
+    switch (sym.getKind()) {
+      case ENUM:
+        return Scip.SymbolInformation.Kind.Enum;
+      case ENUM_CONSTANT:
+        return Scip.SymbolInformation.Kind.EnumMember;
+      case CLASS:
+        return Scip.SymbolInformation.Kind.Class;
+      case INTERFACE:
+      case ANNOTATION_TYPE:
+        return Scip.SymbolInformation.Kind.Interface;
+      case FIELD:
+        return isStatic
+            ? Scip.SymbolInformation.Kind.StaticField
+            : Scip.SymbolInformation.Kind.Field;
+      case CONSTRUCTOR:
+        return Scip.SymbolInformation.Kind.Constructor;
+      case METHOD:
+        if (isStatic) return Scip.SymbolInformation.Kind.StaticMethod;
+        if (isAbstract) return Scip.SymbolInformation.Kind.AbstractMethod;
+        return Scip.SymbolInformation.Kind.Method;
+      case TYPE_PARAMETER:
+        return Scip.SymbolInformation.Kind.TypeParameter;
+      case LOCAL_VARIABLE:
+      case EXCEPTION_PARAMETER:
+      case RESOURCE_VARIABLE:
+        return Scip.SymbolInformation.Kind.Variable;
+      case PARAMETER:
+        return Scip.SymbolInformation.Kind.Parameter;
+      case PACKAGE:
+        return Scip.SymbolInformation.Kind.Package;
+      default:
+        return Scip.SymbolInformation.Kind.UnspecifiedKind;
+    }
+  }
+
+  // ===========================================
+  // Node resolution and traversal (unchanged from SemanticdbVisitor)
+  // ===========================================
+
   void resolveNodes() {
-    // ignore parts of NewClassTree.  It would cause references to classes in addition to references
-    // to constructors.  In these cases, the references to classes aren't wanted
     HashSet<Tree> ignoreNodes = new HashSet<>();
-    for (Tree node : nodes.keySet())
+    for (Tree node : nodes.keySet()) {
       if (node instanceof NewClassTree) {
         NewClassTree newClassTree = (NewClassTree) node;
         if (newClassTree.getClassBody() == null) {
@@ -213,6 +314,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
           ignoreNodes.add(newClassTree.getIdentifier());
         }
       }
+    }
 
     for (Map.Entry<Tree, TreePath> entry : nodes.entrySet()) {
       Tree node = entry.getKey();
@@ -238,9 +340,6 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     }
   }
 
-  // =======================================
-  // Overridden methods from TreePathScanner
-  // =======================================
   @Override
   public Void scan(Tree tree, Void unused) {
     if (tree != null) {
@@ -250,23 +349,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     return super.scan(tree, unused);
   }
 
-  @Override
-  public Void visitPackage(PackageTree node, Void unused) {
-    // Stop traversal at the package declaration. JDK 17+ TreePathScanner
-    // recurses into the package name's identifiers and would emit a
-    // self-reference for `package X.Y;`; JDK 11 does not. Skipping the
-    // whole package subtree keeps semanticdb output stable across JDKs and
-    // matches the long-standing JDK 8/11 behavior of not emitting a
-    // reference for the package declaration itself.
-    return null;
-  }
-
   private boolean isAnonymous(Element sym) {
     return sym.getSimpleName().length() == 0;
-  }
-
-  public static <A extends String, B> B bar(A paramA, B paramB) {
-    return paramB;
   }
 
   private void resolveClassTree(ClassTree node, TreePath treePath) {
@@ -276,7 +360,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
           sym,
           node,
           sym.getSimpleName(),
-          Role.DEFINITION,
+          ScipRole.DEFINITION,
           CompilerRange.FROM_POINT_WITH_TEXT_SEARCH);
     }
   }
@@ -285,7 +369,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     Element sym = trees.getElement(treePath);
     if (sym != null && sym.getSimpleName().length() > 0) {
       emitSymbolOccurrence(
-          sym, node, sym.getSimpleName(), Role.DEFINITION, CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
+          sym, node, sym.getSimpleName(), ScipRole.DEFINITION, CompilerRange.FROM_POINT_TO_SYMBOL_NAME);
     }
   }
 
@@ -299,7 +383,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         else name = sym.getSimpleName();
 
         emitSymbolOccurrence(
-            sym, node, name, Role.DEFINITION, CompilerRange.FROM_POINT_WITH_TEXT_SEARCH);
+            sym, node, name, ScipRole.DEFINITION, CompilerRange.FROM_POINT_WITH_TEXT_SEARCH);
       }
     }
   }
@@ -307,17 +391,17 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   private void resolveVariableTree(VariableTree node, TreePath treePath) {
     Element sym = trees.getElement(treePath);
     if (sym != null) {
-      Optional<Semanticdb.Range> range =
+      Optional<ScipRange> range =
           emitSymbolOccurrence(
               sym,
               node,
               sym.getSimpleName(),
-              Role.DEFINITION,
+              ScipRole.DEFINITION,
               CompilerRange.FROM_POINT_WITH_TEXT_SEARCH);
       if (sym.getKind() == ElementKind.ENUM_CONSTANT) {
         TreePath typeTreePath = nodes.get(node.getInitializer());
         Element typeSym = trees.getElement(typeTreePath);
-        if (typeSym != null) emitSymbolOccurrence(typeSym, range, Role.REFERENCE, Optional.empty());
+        if (typeSym != null) emitOccurrence(typeSym, range, ScipRole.REFERENCE, Optional.empty());
       }
     }
   }
@@ -329,13 +413,12 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       if (sym != null) {
         boolean isThis = nodeName.toString().equals("this");
         boolean isSuper = !isThis && nodeName.toString().equals("super");
-        // exclude `this.` references but include `this(` and `super(` references
         if (((sym.getKind() == ElementKind.CONSTRUCTOR) == isThis) || (isSuper)) {
           TreePath parentPath = treePath.getParentPath();
           Element parentSym = trees.getElement(parentPath);
           if (parentSym == null || parentSym.getKind() != null) {
             emitSymbolOccurrence(
-                sym, node, sym.getSimpleName(), Role.REFERENCE, CompilerRange.FROM_START_TO_END);
+                sym, node, sym.getSimpleName(), ScipRole.REFERENCE, CompilerRange.FROM_START_TO_END);
           }
         }
       }
@@ -346,7 +429,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     Element sym = trees.getElement(treePath);
     if (sym != null) {
       emitSymbolOccurrence(
-          sym, node, sym.getSimpleName(), Role.REFERENCE, CompilerRange.FROM_END_TO_SYMBOL_NAME);
+          sym, node, sym.getSimpleName(), ScipRole.REFERENCE, CompilerRange.FROM_END_TO_SYMBOL_NAME);
     }
   }
 
@@ -354,38 +437,33 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     Element sym = trees.getElement(treePath);
     if (sym != null) {
       emitSymbolOccurrence(
-          sym, node, sym.getSimpleName(), Role.REFERENCE, CompilerRange.FROM_END_TO_SYMBOL_NAME);
+          sym, node, sym.getSimpleName(), ScipRole.REFERENCE, CompilerRange.FROM_END_TO_SYMBOL_NAME);
     }
   }
 
   private void resolveNewClassTree(NewClassTree node, TreePath treePath) {
-    // ignore anonymous classes - otherwise there will be a local reference to itself
     if (node.getIdentifier() != null && node.getClassBody() == null) {
       Element sym = trees.getElement(treePath);
       if (sym != null) {
         TreePath parentPath = treePath.getParentPath();
         Element parentSym = trees.getElement(parentPath);
-
         if (parentSym == null || parentSym.getKind() != ElementKind.ENUM_CONSTANT) {
           TreePath identifierTreePath = nodes.get(node.getIdentifier());
           Element identifierSym = trees.getElement(identifierTreePath);
-          // Simplest case, e.g. `new String()`
           if (identifierSym != null) {
             emitSymbolOccurrence(
                 sym,
                 node,
                 identifierSym.getSimpleName(),
-                Role.REFERENCE,
+                ScipRole.REFERENCE,
                 CompilerRange.FROM_TEXT_SEARCH);
-          }
-          // More complex case, where the type is annotated: `new @TypeParameters String()`
-          else if (node.getIdentifier().getKind() == Tree.Kind.ANNOTATED_TYPE) {
+          } else if (node.getIdentifier().getKind() == Tree.Kind.ANNOTATED_TYPE) {
             AnnotatedTypeTree annotatedTypeTree = (AnnotatedTypeTree) node.getIdentifier();
             if (annotatedTypeTree.getUnderlyingType() != null
                 && annotatedTypeTree.getUnderlyingType().getKind() == Tree.Kind.IDENTIFIER) {
               IdentifierTree ident = (IdentifierTree) annotatedTypeTree.getUnderlyingType();
               emitSymbolOccurrence(
-                  sym, ident, ident.getName(), Role.REFERENCE, CompilerRange.FROM_TEXT_SEARCH);
+                  sym, ident, ident.getName(), ScipRole.REFERENCE, CompilerRange.FROM_TEXT_SEARCH);
             }
           }
         }
@@ -394,19 +472,14 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
   }
 
   // =================================================
-  // Utilities to generate SemanticDB data structures.
+  // Symbol / range helpers used by the SCIP emission path.
   // =================================================
-
-  private Semanticdb.Signature semanticdbSignature(Element sym) {
-
-    return new SemanticdbSignatures(globals, locals, types).generateSignature(sym);
-  }
 
   private String semanticdbSymbol(Element sym) {
     return globals.semanticdbSymbol(sym, locals);
   }
 
-  private Optional<Semanticdb.Range> semanticdbRange(
+  private Optional<ScipRange> scipRangeOf(
       Tree tree, CompilerRange kind, Element sym, String name) {
     if (sym == null) return Optional.empty();
 
@@ -425,97 +498,59 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
         }
       } else if (kind.isFromPoint()) {
         if (start != Diagnostic.NOPOS) {
-          // text may not exist or may be out of bounds (e.g. generated source like Lombok)
           int testEnd = start + name.length();
-          if (source.length() > testEnd && source.substring(start, testEnd).equals(name))
+          if (source.length() > testEnd && source.substring(start, testEnd).equals(name)) {
             end = testEnd;
+          }
         }
       } else if (kind.isFromEndPoint()) {
         if (end != Diagnostic.NOPOS) {
-          // text may not exist or may be out of bounds (e.g. generated source like Lombok)
           int testStart = end - name.length();
           if (testStart >= 0
               && source.length() > end
-              && source.substring(testStart, end).equals(name)) start = testStart;
+              && source.substring(testStart, end).equals(name)) {
+            start = testStart;
+          }
         }
       }
     }
 
     if (start != Diagnostic.NOPOS && end != Diagnostic.NOPOS && end > start) {
       LineMap lineMap = compUnitTree.getLineMap();
-      Semanticdb.Range range =
-          Semanticdb.Range.newBuilder()
-              .setStartLine((int) lineMap.getLineNumber(start) - 1)
-              .setStartCharacter((int) lineMap.getColumnNumber(start) - 1)
-              .setEndLine((int) lineMap.getLineNumber(end) - 1)
-              .setEndCharacter((int) lineMap.getColumnNumber(end) - 1)
-              .build();
+      ScipRange range =
+          new ScipRange(
+              (int) lineMap.getLineNumber(start) - 1,
+              (int) lineMap.getColumnNumber(start) - 1,
+              (int) lineMap.getLineNumber(end) - 1,
+              (int) lineMap.getColumnNumber(end) - 1);
 
       range = correctForTabs(range, lineMap, start);
-
       return Optional.of(range);
     }
     return Optional.empty();
   }
 
-  private Semanticdb.Range correctForTabs(Semanticdb.Range range, LineMap lineMap, int start) {
+  private ScipRange correctForTabs(ScipRange range, LineMap lineMap, int start) {
     int startLinePos = (int) lineMap.getPosition(lineMap.getLineNumber(start), 0);
-
-    // javac replaces every tab with 8 spaces in the linemap. As this is potentially inconsistent
-    // with the source file itself, we adjust for that here if the line is actually indented with
-    // tabs.
-    // As for every tab there are 8 spaces, we remove 7 spaces for every tab to get the correct
-    // char offset (note: different to _column_ offset your editor shows)
     if (this.source.charAt(startLinePos) == '\t') {
       int count = 1;
       while (this.source.charAt(++startLinePos) == '\t') count++;
       range =
-          range
-              .toBuilder()
-              .setStartCharacter(range.getStartCharacter() - (count * 7))
-              .setEndCharacter(range.getEndCharacter() - (count * 7))
-              .build();
+          range.withCharacters(
+              range.startCharacter - (count * 7), range.endCharacter - (count * 7));
     }
-
     return range;
   }
 
-  private Optional<Semanticdb.SymbolOccurrence> semanticdbOccurrence(
-      Element sym,
-      Optional<Semanticdb.Range> range,
-      Role role,
-      Optional<Semanticdb.Range> enclosingRange) {
-    if (range.isPresent()) {
-      String ssym = semanticdbSymbol(sym);
-      if (!ssym.equals(SemanticdbSymbols.NONE)) {
-        Semanticdb.SymbolOccurrence occ = symbolOccurrence(ssym, range.get(), role, enclosingRange);
-        return Optional.of(occ);
-      } else {
-        return Optional.empty();
-      }
-    } else {
-      return Optional.empty();
-    }
-  }
-
-  /**
-   * Computes the enclosing range for the given tree node. Returns the range of the nearest
-   * non-trivial enclosing AST node. For definition occurrences, this includes the entire definition
-   * including documentation. For reference occurrences, this includes the parent expression bounds.
-   */
-  private Optional<Semanticdb.Range> computeEnclosingRange(Tree tree) {
+  private Optional<ScipRange> computeEnclosingRange(Tree tree) {
     if (tree == null) return Optional.empty();
-
     TreePath path = nodes.get(tree);
     if (path == null) return Optional.empty();
 
-    // For method, class, and variable definitions, use the tree itself as the enclosing range
-    // since we're processing the definition node
     Tree enclosingTree = tree;
     if (!(tree instanceof MethodTree
         || tree instanceof ClassTree
         || tree instanceof VariableTree)) {
-      // For non-definition nodes (like references), use the parent
       TreePath parentPath = path.getParentPath();
       if (parentPath == null) return Optional.empty();
       enclosingTree = parentPath.getLeaf();
@@ -528,56 +563,24 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
     if (start != Diagnostic.NOPOS && end != Diagnostic.NOPOS && end > start) {
       LineMap lineMap = compUnitTree.getLineMap();
-      Semanticdb.Range range =
-          Semanticdb.Range.newBuilder()
-              .setStartLine((int) lineMap.getLineNumber(start) - 1)
-              .setStartCharacter((int) lineMap.getColumnNumber(start) - 1)
-              .setEndLine((int) lineMap.getLineNumber(end) - 1)
-              .setEndCharacter((int) lineMap.getColumnNumber(end) - 1)
-              .build();
-
+      ScipRange range =
+          new ScipRange(
+              (int) lineMap.getLineNumber(start) - 1,
+              (int) lineMap.getColumnNumber(start) - 1,
+              (int) lineMap.getLineNumber(end) - 1,
+              (int) lineMap.getColumnNumber(end) - 1);
       range = correctForTabs(range, lineMap, start);
-
       return Optional.of(range);
     }
-
     return Optional.empty();
   }
 
-  private String semanticdbText() {
-    if (source != null) return source;
+  private static String sourceText(CompilationUnitTree tree) {
     try {
-      source = compUnitTree.getSourceFile().getCharContent(true).toString();
+      return tree.getSourceFile().getCharContent(true).toString();
     } catch (IOException e) {
-      source = "";
-    }
-    return source;
-  }
-
-  private String semanticdbMd5() {
-    try {
-      return MD5.digest(compUnitTree.getSourceFile().getCharContent(true).toString());
-    } catch (IOException | NoSuchAlgorithmException e) {
       return "";
     }
-  }
-
-  private int semanticdbSymbolInfoProperties(Element sym) {
-    int properties = 0;
-    properties |=
-        sym.getKind() == ElementKind.ENUM || sym.getKind() == ElementKind.ENUM_CONSTANT
-            ? Property.ENUM_VALUE
-            : 0;
-    for (Modifier modifier : sym.getModifiers()) {
-      if (modifier == Modifier.STATIC) properties |= Property.STATIC_VALUE;
-      else if (modifier == Modifier.DEFAULT) properties |= Property.DEFAULT_VALUE;
-      else if (modifier == Modifier.FINAL) properties |= Property.FINAL_VALUE;
-      else if (modifier == Modifier.ABSTRACT) properties |= Property.ABSTRACT_VALUE;
-    }
-    // for default interface methods, Modifier.ABSTRACT is also set...
-    if (((properties & Property.ABSTRACT_VALUE) > 0) && ((properties & Property.DEFAULT_VALUE) > 0))
-      properties ^= Property.ABSTRACT_VALUE;
-    return properties;
   }
 
   private List<String> semanticdbParentSymbols(TypeElement typeElement) {
@@ -599,14 +602,13 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     for (TypeMirror interfaceType : typeElement.getInterfaces()) {
       semanticdbParentSymbol(interfaceType, result);
     }
-
     return result;
   }
 
   private void semanticdbParentSymbol(TypeMirror elementType, Set<TypeElement> result) {
     if (!(elementType instanceof NoType)) {
       Element superElement = types.asElement(elementType);
-      if (superElement != null && superElement instanceof TypeElement) {
+      if (superElement instanceof TypeElement) {
         result.add((TypeElement) superElement);
         semanticdbParentTypeElements((TypeElement) superElement, result);
       }
@@ -617,20 +619,16 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       ExecutableElement sym, Element enclosingElement, HashSet<String> overriddenSymbols) {
     if (enclosingElement instanceof TypeElement) {
       List<? extends TypeMirror> superTypes = types.directSupertypes(enclosingElement.asType());
-      // iterate through all super types
       for (TypeMirror superType : superTypes) {
         if (superType instanceof DeclaredType) {
           Element superElement = ((DeclaredType) superType).asElement();
-          // find all elements of super class
           if (superElement instanceof TypeElement) {
             boolean methodFound = false;
             List<? extends Element> enclosedElements =
                 ((TypeElement) superElement).getEnclosedElements();
             for (Element enclosedElement : enclosedElements) {
-              // check the element is a method
               if (enclosedElement instanceof ExecutableElement) {
                 ExecutableElement enclosedExecutableElement = (ExecutableElement) enclosedElement;
-                // check the method overrides the original method
                 if (elements.overrides(
                     sym, enclosedExecutableElement, (TypeElement) sym.getEnclosingElement())) {
                   String symbol = semanticdbSymbol(enclosedExecutableElement);
@@ -650,16 +648,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     return overriddenSymbols;
   }
 
-  private Semanticdb.Access semanticdbAccess(Element sym) {
-    for (Modifier modifier : sym.getModifiers()) {
-      if (modifier == Modifier.PRIVATE) return privateAccess();
-      if (modifier == Modifier.PUBLIC) return publicAccess();
-      if (modifier == Modifier.PROTECTED) return protectedAccess();
-    }
-    return privateWithinAccess(semanticdbSymbol(sym.getEnclosingElement()));
-  }
-
-  private static String semanticdbUri(
+  private static String sourceRelativePath(
       CompilationUnitTree compUnitTree, SemanticdbJavacOptions options) {
     Path absolutePath =
         SemanticdbTaskListener.absolutePathFromUri(options, compUnitTree.getSourceFile());
@@ -677,24 +666,12 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
     return out.toString();
   }
 
-  private Semanticdb.Documentation semanticdbDocumentation(Tree tree) {
+  private String semanticdbDocumentation(Tree tree) {
     try {
       TreePath treePath = nodes.get(tree);
       String doc = trees.getDocComment(treePath);
-      if (doc == null) return null;
-
-      return Semanticdb.Documentation.newBuilder()
-          .setFormat(Semanticdb.Documentation.Format.JAVADOC)
-          .setMessage(doc)
-          .build();
+      return doc;
     } catch (NullPointerException e) {
-      // Can happen in `getDocComment()`
-      // Caused by: java.lang.NullPointerException
-      //   at com.sun.tools.javac.model.JavacElements.cast(JavacElements.java:605)
-      //   at com.sun.tools.javac.model.JavacElements.getTreeAndTopLevel(JavacElements.java:543)
-      //   at com.sun.tools.javac.model.JavacElements.getDocComment(JavacElements.java:321)
-      //   at
-      // com.sourcegraph.semanticdb_javac.SemanticdbVisitor.semanticdbDocumentation(SemanticdbVisitor.java:233)
       return null;
     }
   }

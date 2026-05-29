@@ -2,7 +2,7 @@ package tests
 
 import scala.meta.inputs.Input
 
-import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
+import com.sourcegraph.Scip
 import munit.FunSuite
 import munit.TestOptions
 
@@ -15,7 +15,7 @@ class GeneratedConstructorSuite extends FunSuite with TempDirectories {
   def doSomething(
       options: TestOptions,
       original: String,
-      fn: (TextDocument, List[String]) => Unit,
+      fn: (Scip.Document, List[String]) => Unit,
       qualifiedClassName: String = "example.Test"
   )(implicit loc: munit.Location): Unit = {
     test(options) {

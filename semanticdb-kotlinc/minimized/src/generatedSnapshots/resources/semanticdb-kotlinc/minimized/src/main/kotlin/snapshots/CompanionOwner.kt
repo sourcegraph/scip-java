@@ -1,44 +1,50 @@
   package snapshots
-//        ^^^^^^^^^ reference semanticdb maven . . snapshots/
+//        ^^^^^^^^^ reference scip-java maven . . snapshots/
   
-//⌄ enclosing_range_start semanticdb maven . . snapshots/CompanionOwner#
-//⌄ enclosing_range_start semanticdb maven . . snapshots/CompanionOwner#`<init>`().
+//⌄ enclosing_range_start scip-java maven . . snapshots/CompanionOwner#
+//⌄ enclosing_range_start scip-java maven . . snapshots/CompanionOwner#`<init>`().
   class CompanionOwner {
-//      ^^^^^^^^^^^^^^ definition semanticdb maven . . snapshots/CompanionOwner#
+//      ^^^^^^^^^^^^^^ definition scip-java maven . . snapshots/CompanionOwner#
 //                     display_name CompanionOwner
-//                     documentation ```kotlin\npublic final class CompanionOwner : Any\n```
-//      ^^^^^^^^^^^^^^ definition semanticdb maven . . snapshots/CompanionOwner#`<init>`().
+//                     signature_documentation kotlin public final class CompanionOwner : Any
+//                     kind Class
+//      ^^^^^^^^^^^^^^ definition scip-java maven . . snapshots/CompanionOwner#`<init>`().
 //                     display_name CompanionOwner
-//                     documentation ```kotlin\npublic constructor(): CompanionOwner\n```
-//  ⌄ enclosing_range_start semanticdb maven . . snapshots/CompanionOwner#Companion#
-//  ⌄ enclosing_range_start semanticdb maven . . snapshots/CompanionOwner#Companion#`<init>`().
+//                     signature_documentation kotlin public constructor(): CompanionOwner
+//                     kind Constructor
+//  ⌄ enclosing_range_start scip-java maven . . snapshots/CompanionOwner#Companion#
+//  ⌄ enclosing_range_start scip-java maven . . snapshots/CompanionOwner#Companion#`<init>`().
     companion object {
-//  ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . snapshots/CompanionOwner#Companion# 2:3
+//  ^^^^^^^^^^^^^^^^^^ definition scip-java maven . . snapshots/CompanionOwner#Companion# 2:3
 //                     display_name Companion
-//                     documentation ```kotlin\npublic final companion object Companion : Any\n```
-//  ^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . snapshots/CompanionOwner#Companion#`<init>`(). 2:3
+//                     signature_documentation kotlin public final companion object Companion : Any
+//                     kind Object
+//  ^^^^^^^^^^^^^^^^^^ definition scip-java maven . . snapshots/CompanionOwner#Companion#`<init>`(). 2:3
 //                     display_name Companion
-//                     documentation ```kotlin\nprivate constructor(): CompanionOwner.Companion\n```
-//    ⌄ enclosing_range_start semanticdb maven . . snapshots/CompanionOwner#Companion#create().
+//                     signature_documentation kotlin private constructor(): CompanionOwner.Companion
+//                     kind Constructor
+//    ⌄ enclosing_range_start scip-java maven . . snapshots/CompanionOwner#Companion#create().
       fun create(): CompanionOwner = CompanionOwner()
-//        ^^^^^^ definition semanticdb maven . . snapshots/CompanionOwner#Companion#create().
+//        ^^^^^^ definition scip-java maven . . snapshots/CompanionOwner#Companion#create().
 //               display_name create
-//               documentation ```kotlin\npublic final fun create(): CompanionOwner\n```
-//                  ^^^^^^^^^^^^^^ reference semanticdb maven . . snapshots/CompanionOwner#
-//                                   ^^^^^^^^^^^^^^ reference semanticdb maven . . snapshots/CompanionOwner#`<init>`().
-//                                                  ⌃ enclosing_range_end semanticdb maven . . snapshots/CompanionOwner#Companion#create().
+//               signature_documentation kotlin public final fun create(): CompanionOwner
+//               kind Method
+//                  ^^^^^^^^^^^^^^ reference scip-java maven . . snapshots/CompanionOwner#
+//                                   ^^^^^^^^^^^^^^ reference scip-java maven . . snapshots/CompanionOwner#`<init>`().
+//                                                  ⌃ enclosing_range_end scip-java maven . . snapshots/CompanionOwner#Companion#create().
     }
-//  ⌃ enclosing_range_end semanticdb maven . . snapshots/CompanionOwner#Companion#
-//  ⌃ enclosing_range_end semanticdb maven . . snapshots/CompanionOwner#Companion#`<init>`().
-//  ⌄ enclosing_range_start semanticdb maven . . snapshots/CompanionOwner#create().
+//  ⌃ enclosing_range_end scip-java maven . . snapshots/CompanionOwner#Companion#
+//  ⌃ enclosing_range_end scip-java maven . . snapshots/CompanionOwner#Companion#`<init>`().
+//  ⌄ enclosing_range_start scip-java maven . . snapshots/CompanionOwner#create().
     fun create(): Int = CompanionOwner.create().hashCode()
-//      ^^^^^^ definition semanticdb maven . . snapshots/CompanionOwner#create().
+//      ^^^^^^ definition scip-java maven . . snapshots/CompanionOwner#create().
 //             display_name create
-//             documentation ```kotlin\npublic final fun create(): Int\n```
-//                ^^^ reference semanticdb maven . . kotlin/Int#
-//                                     ^^^^^^ reference semanticdb maven . . snapshots/CompanionOwner#Companion#create().
-//                                              ^^^^^^^^ reference semanticdb maven . . kotlin/Any#hashCode().
-//                                                       ⌃ enclosing_range_end semanticdb maven . . snapshots/CompanionOwner#create().
+//             signature_documentation kotlin public final fun create(): Int
+//             kind Method
+//                ^^^ reference scip-java maven . . kotlin/Int#
+//                                     ^^^^^^ reference scip-java maven . . snapshots/CompanionOwner#Companion#create().
+//                                              ^^^^^^^^ reference scip-java maven . . kotlin/Any#hashCode().
+//                                                       ⌃ enclosing_range_end scip-java maven . . snapshots/CompanionOwner#create().
   }
-//⌃ enclosing_range_end semanticdb maven . . snapshots/CompanionOwner#
-//⌃ enclosing_range_end semanticdb maven . . snapshots/CompanionOwner#`<init>`().
+//⌃ enclosing_range_end scip-java maven . . snapshots/CompanionOwner#
+//⌃ enclosing_range_end scip-java maven . . snapshots/CompanionOwner#`<init>`().

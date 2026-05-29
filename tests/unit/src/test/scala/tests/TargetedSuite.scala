@@ -7,8 +7,7 @@ import scala.meta.Input
 import scala.meta.Position
 import scala.meta.internal.inputs._
 
-import com.sourcegraph.semanticdb_javac.Semanticdb
-import com.sourcegraph.semanticdb_javac.Semanticdb.TextDocument
+import com.sourcegraph.Scip
 import munit.FunSuite
 import munit.TestOptions
 
@@ -20,10 +19,23 @@ class TargetedSuite extends FunSuite with TempDirectories {
   override def munitFixtures: Seq[Fixture[_]] =
     super.munitFixtures ++ List(targetroot)
 
+  /** Encodes a position the same way SCIP encodes a single-line range. */
+  private def asScipRange(pos: Position): java.util.List[Integer] = {
+    if (pos.startLine == pos.endLine)
+      List[Integer](pos.startLine, pos.startColumn, pos.endColumn).asJava
+    else
+      List[Integer](
+        pos.startLine,
+        pos.startColumn,
+        pos.endLine,
+        pos.endColumn
+      ).asJava
+  }
+
   def checkDoc(
       options: TestOptions,
       original: String,
-      fn: (TextDocument, List[String]) => Unit,
+      fn: (Scip.Document, List[String]) => Unit,
       qualifiedClassName: String = "example.Test"
   )(implicit loc: munit.Location): Unit = {
     test(options) {
@@ -44,18 +56,11 @@ class TargetedSuite extends FunSuite with TempDirectories {
           })
           .toList
       val result = compiler.compileSemanticdb(List(input))
-      val textDocument = result.textDocument.orNull
-      val occurrences = textDocument.getOccurrencesList.asScala.toList
+      val document = result.document.getOrElse(fail("no SCIP document emitted"))
+      val occurrences = document.getOccurrencesList.asScala.toList
       val symbols: List[String] = positions.map { pos =>
-        val posRange = Semanticdb
-          .Range
-          .newBuilder()
-          .setStartLine(pos.startLine)
-          .setStartCharacter(pos.startColumn)
-          .setEndLine(pos.endLine)
-          .setEndCharacter(pos.endColumn)
-          .build()
-        val matchingOccurrences = occurrences.filter(_.getRange == posRange)
+        val expected = asScipRange(pos)
+        val matchingOccurrences = occurrences.filter(_.getRangeList == expected)
         matchingOccurrences match {
           case Nil =>
             fail(
@@ -63,7 +68,7 @@ class TargetedSuite extends FunSuite with TempDirectories {
                 "error",
                 s"no symbol occurrence for this position."
               ),
-              clues(occurrences, posRange)
+              clues(occurrences, expected)
             )
           case sym :: Nil =>
             sym.getSymbol
@@ -73,11 +78,11 @@ class TargetedSuite extends FunSuite with TempDirectories {
                 "error",
                 s"ambiguous symbols for this position"
               ),
-              clues(many, occurrences, posRange)
+              clues(many, occurrences, expected)
             )
         }
       }
-      fn(textDocument, symbols)
+      fn(document, symbols)
     }
   }
 
@@ -98,10 +103,19 @@ class TargetedSuite extends FunSuite with TempDirectories {
       |}
       |""".stripMargin,
     { case (_, List(a, b, c, d)) =>
-      assertNoDiff(a, "java/lang/String#lastIndexOf().")
-      assertNoDiff(b, "java/lang/String#lastIndexOf(+1).")
-      assertNoDiff(c, "java/lang/String#lastIndexOf(+2).")
-      assertNoDiff(d, "java/lang/String#lastIndexOf(+3).")
+      assertNoDiff(stripPlaceholder(a), "java/lang/String#lastIndexOf().")
+      assertNoDiff(stripPlaceholder(b), "java/lang/String#lastIndexOf(+1).")
+      assertNoDiff(stripPlaceholder(c), "java/lang/String#lastIndexOf(+2).")
+      assertNoDiff(stripPlaceholder(d), "java/lang/String#lastIndexOf(+3).")
     }
   )
+
+  /** Strips the placeholder prefix that compiler-emitted shards use for globals. */
+  private def stripPlaceholder(symbol: String): String = {
+    import com.sourcegraph.semanticdb_javac.ScipSymbols.PLACEHOLDER_PREFIX
+    if (symbol.startsWith(PLACEHOLDER_PREFIX))
+      symbol.substring(PLACEHOLDER_PREFIX.length)
+    else
+      symbol
+  }
 }
