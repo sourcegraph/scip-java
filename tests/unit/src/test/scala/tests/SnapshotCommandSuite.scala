@@ -81,7 +81,7 @@ class SnapshotCommandSuite extends MopedSuite(ScipJava.app) {
          |//                           signature_documentation java public static void main(String[] asdf)
          |//                           kind StaticMethod
          |//                           documentation  Main application entry point\n
-         |//                           ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+         |//                           ^^^^^^ reference semanticdb maven jdk . java/lang/String#
          |//                                    ^^^^ definition local 0
          |//                                         display_name asdf
          |//                                         signature_documentation java String[] asdf

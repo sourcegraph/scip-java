@@ -103,7 +103,7 @@
   
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/Fields#app().
     public static String app() {
-//                ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//                ^^^^^^ reference semanticdb maven jdk . java/lang/String#
 //                       ^^^ definition semanticdb maven . . minimized/Fields#app().
 //                           display_name app
 //                           signature_documentation java public static String app()
@@ -140,8 +140,8 @@
 //                                              ^^^^^^^^^^^^^^^^^ reference semanticdb maven . . minimized/Fields#InnerStaticFields#`<init>`().
 //                                                                 ⌃ enclosing_range_end local 2
       return String.valueOf(fields.privateField)
-//           ^^^^^^ reference semanticdb maven jdk N java/lang/String#
-//                  ^^^^^^^ reference semanticdb maven jdk N java/lang/String#valueOf(+5).
+//           ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//                  ^^^^^^^ reference semanticdb maven jdk . java/lang/String#valueOf(+5).
 //                          ^^^^^^ reference local 0
 //                                 ^^^^^^^^^^^^ reference semanticdb maven . . minimized/Fields#privateField.
           + fields.protectedField

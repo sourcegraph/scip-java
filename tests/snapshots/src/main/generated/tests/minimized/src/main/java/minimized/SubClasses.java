@@ -17,9 +17,9 @@
   
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/SubClasses#abstractImplementation().
     @Override
-//   ^^^^^^^^ reference semanticdb maven jdk N java/lang/Override#
+//   ^^^^^^^^ reference semanticdb maven jdk . java/lang/Override#
     public String abstractImplementation() {
-//         ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//         ^^^^^^ reference semanticdb maven jdk . java/lang/String#
 //                ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/SubClasses#abstractImplementation().
 //                                       display_name abstractImplementation
 //                                       signature_documentation java @Override\npublic String abstractImplementation()
@@ -31,9 +31,9 @@
   
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/SubClasses#abstractInterfaceMethod().
     @Override
-//   ^^^^^^^^ reference semanticdb maven jdk N java/lang/Override#
+//   ^^^^^^^^ reference semanticdb maven jdk . java/lang/Override#
     public String abstractInterfaceMethod() {
-//         ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//         ^^^^^^ reference semanticdb maven jdk . java/lang/String#
 //                ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/SubClasses#abstractInterfaceMethod().
 //                                        display_name abstractInterfaceMethod
 //                                        signature_documentation java @Override\npublic String abstractInterfaceMethod()
@@ -45,7 +45,7 @@
   
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/SubClasses#app().
     public static String app() {
-//                ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//                ^^^^^^ reference semanticdb maven jdk . java/lang/String#
 //                       ^^^ definition semanticdb maven . . minimized/SubClasses#app().
 //                           display_name app
 //                           signature_documentation java public static String app()

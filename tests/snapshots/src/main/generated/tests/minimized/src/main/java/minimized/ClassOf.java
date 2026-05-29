@@ -12,7 +12,7 @@
 //                     kind Constructor
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/ClassOf#app().
     public static String app() {
-//                ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//                ^^^^^^ reference semanticdb maven jdk . java/lang/String#
 //                       ^^^ definition semanticdb maven . . minimized/ClassOf#app().
 //                           display_name app
 //                           signature_documentation java public static String app()
@@ -20,7 +20,7 @@
       return ClassOf.class.getName();
 //           ^^^^^^^ reference semanticdb maven . . minimized/ClassOf#
 //                   ^^^^^ reference semanticdb maven . . minimized/ClassOf#class.
-//                         ^^^^^^^ reference semanticdb maven jdk N java/lang/Class#getName().
+//                         ^^^^^^^ reference semanticdb maven jdk . java/lang/Class#getName().
     }
 //  ⌃ enclosing_range_end semanticdb maven . . minimized/ClassOf#app().
   }

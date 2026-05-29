@@ -18,16 +18,16 @@
 //                  kind Method
 //    ⌄ enclosing_range_start local 0
       Object o = new Object() {
-//    ^^^^^^ reference semanticdb maven jdk N java/lang/Object#
+//    ^^^^^^ reference semanticdb maven jdk . java/lang/Object#
 //           ^ definition local 0
 //             display_name o
 //             signature_documentation java Object o
 //             enclosing_symbol semanticdb maven . . minimized/TabIndented#app().
 //             kind Variable
-//                   ^^^^^^ reference semanticdb maven jdk N java/lang/Object#
+//                   ^^^^^^ reference semanticdb maven jdk . java/lang/Object#
 //      ⌄ enclosing_range_start local 2
         @Override
-//       ^^^^^^^^ reference semanticdb maven jdk N java/lang/Override#
+//       ^^^^^^^^ reference semanticdb maven jdk . java/lang/Override#
 //                            ⌄ enclosing_range_start local 3
         public boolean equals(Object other) {
 //                     ^^^^^^ definition local 2
@@ -35,8 +35,8 @@
 //                            signature_documentation java @Override\npublic boolean equals(Object other)
 //                            enclosing_symbol local 1
 //                            kind Method
-//                            relationship is_reference is_implementation semanticdb maven jdk N java/lang/Object#equals().
-//                            ^^^^^^ reference semanticdb maven jdk N java/lang/Object#
+//                            relationship is_reference is_implementation semanticdb maven jdk . java/lang/Object#equals().
+//                            ^^^^^^ reference semanticdb maven jdk . java/lang/Object#
 //                                   ^^^^^ definition local 3
 //                                         display_name other
 //                                         signature_documentation java Object other
@@ -48,31 +48,31 @@
   
 //      ⌄ enclosing_range_start local 4
         @Override
-//       ^^^^^^^^ reference semanticdb maven jdk N java/lang/Override#
+//       ^^^^^^^^ reference semanticdb maven jdk . java/lang/Override#
         public int hashCode() {
 //                 ^^^^^^^^ definition local 4
 //                          display_name hashCode
 //                          signature_documentation java @Override\npublic int hashCode()
 //                          enclosing_symbol local 1
 //                          kind Method
-//                          relationship is_reference is_implementation semanticdb maven jdk N java/lang/Object#hashCode().
+//                          relationship is_reference is_implementation semanticdb maven jdk . java/lang/Object#hashCode().
           return System.identityHashCode(this);
-//               ^^^^^^ reference semanticdb maven jdk N java/lang/System#
-//                      ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk N java/lang/System#identityHashCode().
+//               ^^^^^^ reference semanticdb maven jdk . java/lang/System#
+//                      ^^^^^^^^^^^^^^^^ reference semanticdb maven jdk . java/lang/System#identityHashCode().
         }
 //      ⌃ enclosing_range_end local 4
   
 //      ⌄ enclosing_range_start local 5
         @Override
-//       ^^^^^^^^ reference semanticdb maven jdk N java/lang/Override#
+//       ^^^^^^^^ reference semanticdb maven jdk . java/lang/Override#
         public String toString() {
-//             ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//             ^^^^^^ reference semanticdb maven jdk . java/lang/String#
 //                    ^^^^^^^^ definition local 5
 //                             display_name toString
 //                             signature_documentation java @Override\npublic String toString()
 //                             enclosing_symbol local 1
 //                             kind Method
-//                             relationship is_reference is_implementation semanticdb maven jdk N java/lang/Object#toString().
+//                             relationship is_reference is_implementation semanticdb maven jdk . java/lang/Object#toString().
           return "";
         }
 //      ⌃ enclosing_range_end local 5

@@ -16,7 +16,7 @@
   
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/Interfaces#abstractInterfaceMethod().
     String abstractInterfaceMethod();
-//  ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//  ^^^^^^ reference semanticdb maven jdk . java/lang/String#
 //         ^^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Interfaces#abstractInterfaceMethod().
 //                                 display_name abstractInterfaceMethod
 //                                 signature_documentation java public abstract String abstractInterfaceMethod()
@@ -26,7 +26,7 @@
   
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/Interfaces#defaultInterfaceMethod().
     default String defaultInterfaceMethod() {
-//          ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//          ^^^^^^ reference semanticdb maven jdk . java/lang/String#
 //                 ^^^^^^^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/Interfaces#defaultInterfaceMethod().
 //                                        display_name defaultInterfaceMethod
 //                                        signature_documentation java public default String defaultInterfaceMethod()

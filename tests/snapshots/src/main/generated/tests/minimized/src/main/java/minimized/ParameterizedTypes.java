@@ -3,19 +3,19 @@
   import java.util.HashMap;
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/util/
-//                 ^^^^^^^ reference semanticdb maven jdk N java/util/HashMap#
+//                 ^^^^^^^ reference semanticdb maven jdk . java/util/HashMap#
   import java.util.Iterator;
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/util/
-//                 ^^^^^^^^ reference semanticdb maven jdk N java/util/Iterator#
+//                 ^^^^^^^^ reference semanticdb maven jdk . java/util/Iterator#
   import java.util.List;
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/util/
-//                 ^^^^ reference semanticdb maven jdk N java/util/List#
+//                 ^^^^ reference semanticdb maven jdk . java/util/List#
   import java.util.Map;
 //       ^^^^ reference semanticdb maven . . java/
 //            ^^^^ reference semanticdb maven . . java/util/
-//                 ^^^ reference semanticdb maven jdk N java/util/Map#
+//                 ^^^ reference semanticdb maven jdk . java/util/Map#
   
 //⌄ enclosing_range_start semanticdb maven . . minimized/ParameterizedTypes#
 //⌄ enclosing_range_start semanticdb maven . . minimized/ParameterizedTypes#[A]
@@ -37,7 +37,7 @@
 //                                     display_name B
 //                                     signature_documentation java B extends String
 //                                     kind TypeParameter
-//                                             ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//                                             ^^^^^^ reference semanticdb maven jdk . java/lang/String#
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/ParameterizedTypes#iteratorable().[T]
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/ParameterizedTypes#iteratorable().
 //                                                                 ⌄ enclosing_range_start local 0
@@ -46,15 +46,15 @@
 //            display_name T
 //            signature_documentation java T extends Iterable<A> & Iterator<B>
 //            kind TypeParameter
-//                    ^^^^^^^^ reference semanticdb maven jdk N java/lang/Iterable#
+//                    ^^^^^^^^ reference semanticdb maven jdk . java/lang/Iterable#
 //                             ^ reference semanticdb maven . . minimized/ParameterizedTypes#[A]
-//                                  ^^^^^^^^ reference semanticdb maven jdk N java/util/Iterator#
+//                                  ^^^^^^^^ reference semanticdb maven jdk . java/util/Iterator#
 //                                           ^ reference semanticdb maven . . minimized/ParameterizedTypes#[B]
 //                                                    ^^^^^^^^^^^^ definition semanticdb maven . . minimized/ParameterizedTypes#iteratorable().
 //                                                                 display_name iteratorable
 //                                                                 signature_documentation java public <T extends Iterable<A> & Iterator<B>> void iteratorable(List<T> list)
 //                                                                 kind Method
-//                                                                 ^^^^ reference semanticdb maven jdk N java/util/List#
+//                                                                 ^^^^ reference semanticdb maven jdk . java/util/List#
 //                                                                      ^ reference semanticdb maven . . minimized/ParameterizedTypes#iteratorable().[T]
 //                                                                         ^^^^ definition local 0
 //                                                                              display_name list
@@ -68,7 +68,7 @@
 //                    ⌄ enclosing_range_start local 1
 //                         ⌄ enclosing_range_start local 2
     public String app(A a, B b) {
-//         ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//         ^^^^^^ reference semanticdb maven jdk . java/lang/String#
 //                ^^^ definition semanticdb maven . . minimized/ParameterizedTypes#app().
 //                    display_name app
 //                    signature_documentation java public String app(A a, B b)
@@ -87,15 +87,15 @@
 //                           ⌃ enclosing_range_end local 2
       return a.toString() + b;
 //           ^ reference local 1
-//             ^^^^^^^^ reference semanticdb maven jdk N java/lang/Object#toString().
+//             ^^^^^^^^ reference semanticdb maven jdk . java/lang/Object#toString().
 //                          ^ reference local 2
     }
 //  ⌃ enclosing_range_end semanticdb maven . . minimized/ParameterizedTypes#app().
   
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/ParameterizedTypes#doStuff().
     public Map<? extends String, ?> doStuff() { return null; }
-//         ^^^ reference semanticdb maven jdk N java/util/Map#
-//                       ^^^^^^ reference semanticdb maven jdk N java/lang/String#
+//         ^^^ reference semanticdb maven jdk . java/util/Map#
+//                       ^^^^^^ reference semanticdb maven jdk . java/lang/String#
 //                                  ^^^^^^^ definition semanticdb maven . . minimized/ParameterizedTypes#doStuff().
 //                                          display_name doStuff
 //                                          signature_documentation java public Map<? extends String, ?> doStuff()
@@ -105,9 +105,9 @@
 //  ⌄ enclosing_range_start semanticdb maven . . minimized/ParameterizedTypes#createQuadruplet().
     public Quadruplet<String, ?, Object, ? super Integer> createQuadruplet() { return null; }
 //         ^^^^^^^^^^ reference semanticdb maven . . minimized/ParameterizedTypes#Quadruplet#
-//                    ^^^^^^ reference semanticdb maven jdk N java/lang/String#
-//                               ^^^^^^ reference semanticdb maven jdk N java/lang/Object#
-//                                               ^^^^^^^ reference semanticdb maven jdk N java/lang/Integer#
+//                    ^^^^^^ reference semanticdb maven jdk . java/lang/String#
+//                               ^^^^^^ reference semanticdb maven jdk . java/lang/Object#
+//                                               ^^^^^^^ reference semanticdb maven jdk . java/lang/Integer#
 //                                                        ^^^^^^^^^^^^^^^^ definition semanticdb maven . . minimized/ParameterizedTypes#createQuadruplet().
 //                                                                         display_name createQuadruplet
 //                                                                         signature_documentation java public Quadruplet<String, ?, Object, ? super Integer> createQuadruplet()
