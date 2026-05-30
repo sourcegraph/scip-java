@@ -1,4 +1,4 @@
-addSbtPlugin("org.xerial.sbt" % "sbt-pack" % "0.14")
+addSbtPlugin("org.xerial.sbt" % "sbt-pack" % "0.23")
 addSbtPlugin("se.marcuslonnberg" % "sbt-docker" % "1.11.0")
 addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.11.1")
 addSbtPlugin("com.eed3si9n" % "sbt-buildinfo" % "0.10.0")
