@@ -40,7 +40,7 @@ class ScipTextDocumentBuilder(
     private val cache: SymbolsCache,
     private val relativePath: String,
 ) {
-    private val occurrences = mutableListOf<Occurrence>()
+    private val occurrences = ScipOccurrences()
     // Keyed by symbol string so re-encounters of the same definition (multi-round compilation,
     // synthetic accessors) do not produce duplicate entries.
     private val symbols = LinkedHashMap<String, SymbolInformation>()
@@ -50,7 +50,7 @@ class ScipTextDocumentBuilder(
             .newBuilder()
             .setRelativePath(relativePath)
             .setLanguage(LANGUAGE_KOTLIN)
-            .addAllOccurrences(ScipOccurrences.deduplicate(occurrences))
+            .addAllOccurrences(occurrences.values())
             .addAllSymbols(symbols.values)
             .build()
 
@@ -60,14 +60,14 @@ class ScipTextDocumentBuilder(
         firBasedSymbol: FirBasedSymbol<*>?,
         symbol: Symbol,
         element: KtSourceElement,
-        role: ScipRole,
+        roles: Int,
         context: CheckerContext,
         enclosingSource: KtSourceElement? = null,
     ) {
         if (symbol == Symbol.NONE) return
 
-        emitOccurrence(symbol, element, role, enclosingSource)
-        if (role == ScipRole.DEFINITION) {
+        emitOccurrence(symbol, element, roles, enclosingSource)
+        if (roles == SymbolRole.Definition_VALUE) {
             emitSymbolInformation(firBasedSymbol, symbol, element, context)
         }
     }
@@ -75,7 +75,7 @@ class ScipTextDocumentBuilder(
     private fun emitOccurrence(
         symbol: Symbol,
         element: KtSourceElement,
-        role: ScipRole,
+        roles: Int,
         enclosingSource: KtSourceElement?,
     ) {
         val builder =
@@ -83,7 +83,7 @@ class ScipTextDocumentBuilder(
                 .newBuilder()
                 .addAllRange(scipRange(element))
                 .setSymbol(ScipSymbols.fromSemanticdbSymbol(symbol))
-                .setSymbolRoles(scipRole(role))
+                .setSymbolRoles(roles)
         if (enclosingSource != null) {
             builder.addAllEnclosingRange(scipEnclosingRange(enclosingSource))
         }
@@ -261,12 +261,6 @@ class ScipTextDocumentBuilder(
                 is FirPropertySymbol -> firBasedSymbol.callableId.callableName.asString()
                 is FirVariableSymbol<*> -> firBasedSymbol.name.asString()
                 else -> firBasedSymbol.toString()
-            }
-
-        private fun scipRole(role: ScipRole): Int =
-            when (role) {
-                ScipRole.DEFINITION -> SymbolRole.Definition_VALUE
-                else -> 0
             }
 
         private fun scipKind(firBasedSymbol: FirBasedSymbol<*>?): SymbolInformation.Kind =

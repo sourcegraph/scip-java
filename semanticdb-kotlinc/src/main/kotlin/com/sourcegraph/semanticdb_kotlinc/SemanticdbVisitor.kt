@@ -1,6 +1,7 @@
 package com.sourcegraph.semanticdb_kotlinc
 
 import org.scip_code.scip.Index
+import org.scip_code.scip.SymbolRole
 import java.nio.file.Path
 import java.nio.file.Paths
 import kotlin.contracts.ExperimentalContracts
@@ -42,12 +43,12 @@ class SemanticdbVisitor(
 
     private fun Sequence<SymbolDescriptorPair>?.emitAll(
         element: KtSourceElement,
-        role: ScipRole,
+        roles: Int,
         context: CheckerContext,
         enclosingSource: KtSourceElement? = null,
     ): List<Symbol>? =
         this?.onEach { (firBasedSymbol, symbol) ->
-                scipBuilder.emitScipData(firBasedSymbol, symbol, element, role, context, enclosingSource)
+                scipBuilder.emitScipData(firBasedSymbol, symbol, element, roles, context, enclosingSource)
             }
             ?.map { it.symbol }
             ?.toList()
@@ -56,55 +57,55 @@ class SemanticdbVisitor(
         this.map { SymbolDescriptorPair(firBasedSymbol, it) }
 
     fun visitPackage(pkg: FqName, element: KtSourceElement, context: CheckerContext) {
-        cache[pkg].with(null).emitAll(element, ScipRole.REFERENCE, context)
+        cache[pkg].with(null).emitAll(element, 0, context)
     }
 
     fun visitClassReference(firClassSymbol: FirClassLikeSymbol<*>, element: KtSourceElement, context: CheckerContext) {
-        cache[firClassSymbol].with(firClassSymbol).emitAll(element, ScipRole.REFERENCE, context)
+        cache[firClassSymbol].with(firClassSymbol).emitAll(element, 0, context)
     }
 
     fun visitCallableReference(firClassSymbol: FirCallableSymbol<*>, element: KtSourceElement, context: CheckerContext) {
-        cache[firClassSymbol].with(firClassSymbol).emitAll(element, ScipRole.REFERENCE, context)
+        cache[firClassSymbol].with(firClassSymbol).emitAll(element, 0, context)
     }
 
     fun visitClassOrObject(firClass: FirClassLikeDeclaration, element: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firClass.symbol].with(firClass.symbol).emitAll(element, ScipRole.DEFINITION, context, enclosingSource)
+        cache[firClass.symbol].with(firClass.symbol).emitAll(element, SymbolRole.Definition_VALUE, context, enclosingSource)
     }
 
     fun visitPrimaryConstructor(firConstructor: FirConstructor, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firConstructor.symbol].with(firConstructor.symbol).emitAll(source, ScipRole.DEFINITION, context, enclosingSource)
+        cache[firConstructor.symbol].with(firConstructor.symbol).emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
     }
 
     fun visitSecondaryConstructor(firConstructor: FirConstructor, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firConstructor.symbol].with(firConstructor.symbol).emitAll(source, ScipRole.DEFINITION, context, enclosingSource)
+        cache[firConstructor.symbol].with(firConstructor.symbol).emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
     }
 
     fun visitNamedFunction(firFunction: FirFunction, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firFunction.symbol].with(firFunction.symbol).emitAll(source, ScipRole.DEFINITION, context, enclosingSource)
+        cache[firFunction.symbol].with(firFunction.symbol).emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
     }
 
     fun visitProperty(firProperty: FirProperty, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firProperty.symbol].with(firProperty.symbol).emitAll(source, ScipRole.DEFINITION, context, enclosingSource)
+        cache[firProperty.symbol].with(firProperty.symbol).emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
     }
 
     fun visitParameter(firParameter: FirValueParameter, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firParameter.symbol].with(firParameter.symbol).emitAll(source, ScipRole.DEFINITION, context, enclosingSource)
+        cache[firParameter.symbol].with(firParameter.symbol).emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
     }
 
     fun visitTypeParameter(firTypeParameter: FirTypeParameter, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
         cache[firTypeParameter.symbol]
             .with(firTypeParameter.symbol)
-            .emitAll(source, ScipRole.DEFINITION, context, enclosingSource)
+            .emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
     }
 
     fun visitTypeAlias(firTypeAlias: FirTypeAlias, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
-        cache[firTypeAlias.symbol].with(firTypeAlias.symbol).emitAll(source, ScipRole.DEFINITION, context, enclosingSource)
+        cache[firTypeAlias.symbol].with(firTypeAlias.symbol).emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
     }
 
     fun visitPropertyAccessor(firPropertyAccessor: FirPropertyAccessor, source: KtSourceElement, context: CheckerContext, enclosingSource: KtSourceElement? = null) {
         cache[firPropertyAccessor.symbol]
             .with(firPropertyAccessor.symbol)
-            .emitAll(source, ScipRole.DEFINITION, context, enclosingSource)
+            .emitAll(source, SymbolRole.Definition_VALUE, context, enclosingSource)
     }
 
     fun visitSimpleNameExpression(
@@ -113,7 +114,7 @@ class SemanticdbVisitor(
     ) {
         cache[firResolvedNamedReference.resolvedSymbol]
             .with(firResolvedNamedReference.resolvedSymbol)
-            .emitAll(source, ScipRole.REFERENCE, context)
+            .emitAll(source, 0, context)
     }
 }
 

@@ -3,23 +3,17 @@ package com.sourcegraph.semanticdb_kotlinc
 import org.scip_code.scip.Occurrence
 
 /**
- * Helpers for deduplicating SCIP [Occurrence] entries by their `(symbol, range, roles)` key.
- *
+ * Accumulator that deduplicates SCIP [Occurrence] entries by their `(symbol, range, roles)` key.
  * Variants that differ only in whether `enclosing_range` is set are collapsed, preferring the one
- * that carries the enclosing range. Mirrors the Java `ScipOccurrences` helper used by the javac
- * plug-in.
+ * that carries the enclosing range. Mirrors the Java `ScipOccurrences` accumulator used by the
+ * javac plug-in.
  */
-internal object ScipOccurrences {
+internal class ScipOccurrences {
 
-    /** Returns a new list with duplicate occurrences collapsed in insertion order. */
-    fun deduplicate(occurrences: List<Occurrence>): List<Occurrence> {
-        val out = LinkedHashMap<Key, Occurrence>()
-        for (occ in occurrences) put(out, occ)
-        return out.values.toList()
-    }
+    private val out = LinkedHashMap<Key, Occurrence>()
 
-    /** Inserts [occ] into [out], collapsing duplicates by [Key]. */
-    fun put(out: LinkedHashMap<Key, Occurrence>, occ: Occurrence) {
+    /** Adds [occ], collapsing it into any existing entry with the same [Key]. */
+    fun add(occ: Occurrence) {
         val key = Key.of(occ)
         val existing = out[key]
         if (existing == null) {
@@ -31,7 +25,15 @@ internal object ScipOccurrences {
         }
     }
 
-    data class Key(val symbol: String, val range: List<Int>, val roles: Int) {
+    /** Adds every occurrence in [occs]. */
+    fun addAll(occs: Iterable<Occurrence>) {
+        for (occ in occs) add(occ)
+    }
+
+    /** Returns the deduplicated occurrences in insertion order. */
+    fun values(): Collection<Occurrence> = out.values
+
+    private data class Key(val symbol: String, val range: List<Int>, val roles: Int) {
         companion object {
             fun of(occ: Occurrence): Key =
                 Key(occ.symbol, occ.rangeList.toList(), occ.symbolRoles)
