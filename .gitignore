@@ -71,7 +71,7 @@ bazel-testlogs
 VERSION
 
 semanticdb-gradle-plugin/gradle
-aspects/scip_java.bzl
+/aspects/
 
 tests/snapshots/META-INF/
 
