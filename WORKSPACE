@@ -53,12 +53,8 @@ maven_install(
     repositories = [
          "https://repo1.maven.org/maven2",
     ],
-    # Also create java_import_external-compatible repos such as
-    # @com_google_protobuf_protobuf_java//jar. compat_repositories() below
-    # MUST run before rules_proto_dependencies() so it pre-empts the
-    # 3.20.0 protobuf-java jar rules_proto would otherwise install at the
-    # same label, causing a class-load IllegalAccessError on the
-    # protobuf-4 scip-java-bindings runtime.
+    # Pre-empts rules_proto's bundled protobuf-java 3.20 so the
+    # scip-java-bindings 4.x gencode sees a compatible runtime.
     generate_compat_repositories = True,
 )
 
