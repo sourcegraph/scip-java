@@ -24,8 +24,9 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
 
   override def usedInCurrentDirectory(): Boolean = {
     val cwd = index.workingDirectory
-    List("MODULE.bazel", "WORKSPACE", "WORKSPACE.bazel")
-      .exists(f => Files.isRegularFile(cwd.resolve(f)))
+    List("MODULE.bazel", "WORKSPACE", "WORKSPACE.bazel").exists(f =>
+      Files.isRegularFile(cwd.resolve(f))
+    )
   }
 
   private def targetSpecs =
