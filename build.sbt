@@ -8,7 +8,8 @@ import scala.collection.mutable.ListBuffer
 
 lazy val V =
   new {
-    val protobuf = "4.32.1"
+    val protobuf = "4.34.2"
+    val scipBindings = "0.8.0"
     val scalaXml = "2.1.0"
     val moped = "0.2.0"
     val gradle = "7.0"
@@ -171,29 +172,22 @@ lazy val javacPlugin = project
   )
   .dependsOn(semanticdb)
 
-lazy val scipProto = project
-  .in(file("scip-java-proto"))
-  .settings(
-    moduleName := "scip-java-proto",
-    javaOnlySettings,
-    libraryDependencies +=
-      "com.google.protobuf" % "protobuf-java-util" % V.protobuf,
-    (Compile / PB.targets) :=
-      Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
-    Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
-  )
-
 lazy val scip = project
   .in(file("scip-semanticdb"))
   .settings(
     publishMavenStyle := true,
     moduleName := "scip-semanticdb",
     javaOnlySettings,
+    libraryDependencies ++=
+      Seq(
+        "org.scip-code" % "scip-java-bindings" % V.scipBindings,
+        "com.google.protobuf" % "protobuf-java-util" % V.protobuf
+      ),
     (Compile / PB.targets) :=
       Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
     Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
   )
-  .dependsOn(semanticdb, scipProto)
+  .dependsOn(semanticdb)
 
 lazy val mavenPlugin = project
   .in(file("maven-plugin"))

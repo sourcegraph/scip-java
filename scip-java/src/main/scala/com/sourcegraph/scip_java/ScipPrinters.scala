@@ -4,11 +4,13 @@ import scala.collection.mutable
 import scala.jdk.CollectionConverters.CollectionHasAsScala
 import scala.math.Ordering.Implicits.seqOrdering
 
-import com.sourcegraph.Scip
-import com.sourcegraph.Scip.SymbolRole
 import com.sourcegraph.scip_java.commands.CommentSyntax
 import moped.reporters.Input
 import moped.reporters.Position
+import org.scip_code.scip.Document
+import org.scip_code.scip.Occurrence
+import org.scip_code.scip.SymbolInformation
+import org.scip_code.scip.SymbolRole
 
 object ScipPrinters {
 
@@ -19,7 +21,7 @@ object ScipPrinters {
   val sourceIndent = "  "
 
   def printTextDocument(
-      doc: Scip.Document,
+      doc: Document,
       text: String,
       comments: CommentSyntax = CommentSyntax.default
   ): String = {
@@ -148,7 +150,7 @@ object ScipPrinters {
     out.toString()
   }
 
-  private def mopedPosition(input: Input, occ: Scip.Occurrence): Position = {
+  private def mopedPosition(input: Input, occ: Occurrence): Position = {
     if (occ.getRangeCount == 3)
       Position.range(
         input,
@@ -172,11 +174,11 @@ object ScipPrinters {
   private def formatOccurrence(
       input: Input,
       out: mutable.StringBuilder,
-      occ: Scip.Occurrence,
+      occ: Occurrence,
       line: String,
-      symtab: Map[String, Scip.SymbolInformation],
+      symtab: Map[String, SymbolInformation],
       comment: String,
-      syntheticDefinition: Option[Scip.SymbolInformation] = None
+      syntheticDefinition: Option[SymbolInformation] = None
   ): Unit = {
     val pos = mopedPosition(input, occ)
     val isMultiline = pos.startLine != pos.endLine
@@ -263,7 +265,7 @@ object ScipPrinters {
             .append(info.getEnclosingSymbol)
             .append("\n")
         }
-        if (info.getKind != Scip.SymbolInformation.Kind.UnspecifiedKind) {
+        if (info.getKind != SymbolInformation.Kind.UnspecifiedKind) {
           out.append(prefix).append("kind ").append(info.getKind).append("\n")
         }
         0.until(info.getDocumentationCount)

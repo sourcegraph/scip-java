@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit
 
 import scala.jdk.CollectionConverters._
 
-import com.sourcegraph.Scip
 import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.buildtools.ClasspathEntry
@@ -18,6 +17,7 @@ import moped.annotations._
 import moped.cli.Application
 import moped.cli.Command
 import moped.cli.CommandParser
+import org.scip_code.scip.ToolInfo
 import ujson.Arr
 import ujson.Obj
 
@@ -95,8 +95,7 @@ final case class IndexSemanticdbCommand(
         AbsolutePath.of(output, sourceroot),
         sourceroot,
         reporter,
-        Scip
-          .ToolInfo
+        ToolInfo
           .newBuilder()
           .setName("scip-java")
           .setVersion(BuildInfo.version)

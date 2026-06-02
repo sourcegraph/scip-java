@@ -1,7 +1,7 @@
 package com.sourcegraph.scip_semanticdb;
 
 import com.google.protobuf.util.JsonFormat;
-import com.sourcegraph.Scip;
+import org.scip_code.scip.Index;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class ScipWriter implements AutoCloseable {
     this.jsonPrinter = JsonFormat.printer().omittingInsignificantWhitespace();
   }
 
-  public void emitTyped(Scip.Index index) {
+  public void emitTyped(Index index) {
     try {
       if (options.format.isNewlineDelimitedJSON()) {
         this.output.write(jsonPrinter.print(index).getBytes(StandardCharsets.UTF_8));
