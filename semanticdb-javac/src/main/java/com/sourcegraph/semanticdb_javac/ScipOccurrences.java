@@ -2,29 +2,22 @@ package com.sourcegraph.semanticdb_javac;
 
 import org.scip_code.scip.Occurrence;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Helpers for deduplicating SCIP {@link Occurrence} entries by their {@code (symbol, range, roles)}
- * key. Variants that differ only in whether {@code enclosing_range} is set are collapsed,
+ * Accumulator that deduplicates SCIP {@link Occurrence} entries by their {@code (symbol, range,
+ * roles)} key. Variants that differ only in whether {@code enclosing_range} is set are collapsed,
  * preferring the one that carries the enclosing range.
  */
 final class ScipOccurrences {
 
-  private ScipOccurrences() {}
+  private final LinkedHashMap<Key, Occurrence> out = new LinkedHashMap<>();
 
-  /** Returns a new list with duplicate occurrences collapsed in insertion order. */
-  static List<Occurrence> deduplicate(List<Occurrence> occurrences) {
-    LinkedHashMap<Key, Occurrence> out = new LinkedHashMap<>();
-    for (Occurrence occ : occurrences) put(out, occ);
-    return new ArrayList<>(out.values());
-  }
-
-  /** Inserts {@code occ} into {@code out}, collapsing duplicates by {@link Key}. */
-  static void put(LinkedHashMap<Key, Occurrence> out, Occurrence occ) {
+  /** Adds {@code occ}, collapsing it into any existing entry with the same {@link Key}. */
+  void add(Occurrence occ) {
     Key key = Key.of(occ);
     Occurrence existing = out.get(key);
     if (existing == null) {
@@ -36,7 +29,17 @@ final class ScipOccurrences {
     }
   }
 
-  static final class Key {
+  /** Adds every occurrence in {@code occs}. */
+  void addAll(Iterable<Occurrence> occs) {
+    for (Occurrence occ : occs) add(occ);
+  }
+
+  /** Returns the deduplicated occurrences in insertion order. */
+  Collection<Occurrence> values() {
+    return out.values();
+  }
+
+  private static final class Key {
     final String symbol;
     final List<Integer> range;
     final int roles;

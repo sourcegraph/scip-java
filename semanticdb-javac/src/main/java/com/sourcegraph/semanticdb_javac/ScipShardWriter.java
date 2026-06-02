@@ -85,9 +85,9 @@ public final class ScipShardWriter {
 
     // Deduplicate occurrences by (range, symbol, roles). Variants that differ only in
     // enclosing_range get collapsed, preferring the one that carries the enclosing range.
-    LinkedHashMap<ScipOccurrences.Key, Occurrence> occurrences = new LinkedHashMap<>();
-    for (Occurrence occ : a.getOccurrencesList()) ScipOccurrences.put(occurrences, occ);
-    for (Occurrence occ : b.getOccurrencesList()) ScipOccurrences.put(occurrences, occ);
+    ScipOccurrences occurrences = new ScipOccurrences();
+    occurrences.addAll(a.getOccurrencesList());
+    occurrences.addAll(b.getOccurrencesList());
     builder.addAllOccurrences(occurrences.values());
 
     // Deduplicate symbols by symbol string; merge relationships and documentation.
