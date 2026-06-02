@@ -137,7 +137,10 @@ def _scip_java(target, ctx):
     deps = [javac_action.inputs, annotations.processor_classpath]
 
     ctx.actions.run_shell(
-        command = "\"{}\" index --no-cleanup --index-semanticdb.allow-empty-index --cwd \"{}\" --targetroot {} --scip-config \"{}\" --output \"{}\"".format(
+        # Prefix bazel-out paths with $PWD (the execroot) so they don't depend
+        # on the workspace-level bazel-out convenience symlink, which doesn't
+        # exist on a cold build.
+        command = "\"{}\" index --no-cleanup --index-semanticdb.allow-empty-index --cwd \"{}\" --targetroot \"$PWD/{}\" --scip-config \"$PWD/{}\" --output \"$PWD/{}\"".format(
             ctx.var["scip_java_binary"],
             ctx.var["sourceroot"],
             targetroot.path,
