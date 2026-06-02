@@ -13,7 +13,6 @@ import javax.tools.JavaFileObject;
 import com.sun.source.util.JavacTask;
 
 import static javax.tools.StandardLocation.CLASS_OUTPUT;
-import static javax.tools.StandardLocation.SOURCE_OUTPUT;
 
 /** Settings that can be configured alongside the -Xplugin compiler option. */
 public class SemanticdbJavacOptions {
@@ -29,7 +28,6 @@ public class SemanticdbJavacOptions {
   public boolean alreadyReportedErrors = false;
   public UriScheme uriScheme = UriScheme.DEFAULT;
   public NoRelativePathMode noRelativePath = NoRelativePathMode.INDEX_ANYWAY;
-  public Path generatedTargetRoot;
 
   public SemanticdbJavacOptions() {
     errors = new ArrayList<>();
@@ -53,7 +51,7 @@ public class SemanticdbJavacOptions {
         String argValue = arg.substring("-targetroot:".length());
         if (argValue.equals(JAVAC_CLASSES_DIR_ARG)) {
           useJavacClassesDir = true;
-          result.targetroot = getJavacClassesDir(result, task).classes;
+          result.targetroot = getJavacClassesDir(result, task);
         } else {
           result.targetroot = Paths.get(argValue);
         }
@@ -83,9 +81,7 @@ public class SemanticdbJavacOptions {
       } else if (arg.equals("-build-tool:bazel")) {
         result.uriScheme = UriScheme.BAZEL;
         useJavacClassesDir = true;
-        TargetPaths paths = getJavacClassesDir(result, task);
-        result.targetroot = paths.classes;
-        result.generatedTargetRoot = paths.sources;
+        result.targetroot = getJavacClassesDir(result, task);
       } else if (arg.equals("-text:on")) {
         result.includeText = true;
       } else if (arg.equals("-text:off")) {
@@ -128,28 +124,22 @@ public class SemanticdbJavacOptions {
 
   // warning - use of internal API
   // requires --add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
-  private static TargetPaths getJavacClassesDir(SemanticdbJavacOptions result, JavacTask task) {
+  private static Path getJavacClassesDir(SemanticdbJavacOptions result, JavacTask task) {
     // both Context and BasicJavacTask are internal JDK classes so not exported
     // under >= JDK 17
     // com.sun.tools.javac.util.Context ctx =
     // ((com.sun.tools.javac.api.BasicJavacTask)
     // task).getContext();
     // I'm not aware of a better way to get the class output directory from javac
-    Path classOutputDir = null;
-    Path sourceOutputDir = null;
     try {
       Method getContext = task.getClass().getMethod("getContext");
       Object context = getContext.invoke(task);
       Method get = context.getClass().getMethod("get", Class.class);
       JavaFileManager fm = (JavaFileManager) get.invoke(context, JavaFileManager.class);
-      FileObject sourceOutputDirStub =
-          fm.getJavaFileForOutput(
-              SOURCE_OUTPUT, SemanticdbPlugin.stubClassName, JavaFileObject.Kind.SOURCE, null);
-      FileObject clasSOutputDirStub =
+      FileObject classOutputDirStub =
           fm.getJavaFileForOutput(
               CLASS_OUTPUT, SemanticdbPlugin.stubClassName, JavaFileObject.Kind.CLASS, null);
-      classOutputDir = Paths.get(clasSOutputDirStub.toUri()).toAbsolutePath().getParent();
-      sourceOutputDir = Paths.get(sourceOutputDirStub.toUri()).toAbsolutePath().getParent();
+      return Paths.get(classOutputDirStub.toUri()).toAbsolutePath().getParent();
     } catch (Exception e) {
       ByteArrayOutputStream out = new ByteArrayOutputStream();
       e.printStackTrace(new PrintStream(out));
@@ -158,7 +148,7 @@ public class SemanticdbJavacOptions {
               "exception while processing SemanticDB option '-targetroot:%s'\n%s",
               JAVAC_CLASSES_DIR_ARG, out.toString());
       result.errors.add(errorMsg);
+      return null;
     }
-    return new TargetPaths(classOutputDir, sourceOutputDir);
   }
 }

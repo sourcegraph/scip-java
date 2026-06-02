@@ -2,7 +2,6 @@ package com.sourcegraph.semanticdb_javac;
 
 import org.scip_code.scip.Document;
 import org.scip_code.scip.Index;
-import org.scip_code.scip.Occurrence;
 import org.scip_code.scip.Relationship;
 import org.scip_code.scip.SymbolInformation;
 

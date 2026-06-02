@@ -20,12 +20,9 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.capitalizeAsciiOnly
 
 @ExperimentalContracts
-class GlobalSymbolsCache(testing: Boolean = false) : Iterable<Symbol> {
-    private val globals =
-        if (testing) LinkedHashMap<FirBasedSymbol<*>, Symbol>()
-        else HashMap<FirBasedSymbol<*>, Symbol>()
-    private val packages =
-        if (testing) LinkedHashMap<FqName, Symbol>() else HashMap<FqName, Symbol>()
+class GlobalSymbolsCache {
+    private val globals = HashMap<FirBasedSymbol<*>, Symbol>()
+    private val packages = HashMap<FqName, Symbol>()
 
     operator fun get(symbol: FirBasedSymbol<*>, locals: LocalSymbolsCache): Sequence<Symbol> =
         sequence {
@@ -206,19 +203,11 @@ class GlobalSymbolsCache(testing: Boolean = false) : Iterable<Symbol> {
         if (count == 0 || !found) return "()"
         return "(+${count})"
     }
-
-    override fun iterator(): Iterator<Symbol> = globals.values.iterator()
 }
 
-class LocalSymbolsCache : Iterable<Symbol> {
+class LocalSymbolsCache {
     private val symbols = HashMap<FirBasedSymbol<*>, Symbol>()
     private var localsCounter = 0
-
-    val iterator: Iterable<Map.Entry<FirBasedSymbol<*>, Symbol>>
-        get() = symbols.asIterable()
-
-    val size: Int
-        get() = symbols.size
 
     operator fun get(symbol: FirBasedSymbol<*>): Symbol? = symbols[symbol]
 
@@ -227,8 +216,6 @@ class LocalSymbolsCache : Iterable<Symbol> {
         symbols[symbol] = result
         return result
     }
-
-    override fun iterator(): Iterator<Symbol> = symbols.values.iterator()
 }
 
 @ExperimentalContracts

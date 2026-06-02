@@ -289,7 +289,7 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
   }
 
   // ===========================================
-  // Node resolution and traversal (unchanged from SemanticdbVisitor)
+  // Node resolution and traversal
   // ===========================================
 
   void resolveNodes() {
@@ -490,12 +490,11 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     SourcePositions sourcePositions = trees.getSourcePositions();
     int start = (int) sourcePositions.getStartPosition(compUnitTree, tree);
     int end = (int) sourcePositions.getEndPosition(compUnitTree, tree);
-    if (kind.isPlusOne()) start++;
 
     if (name != null) {
       if (kind.isFromTextSearch() && name.length() > 0) {
         Optional<RangeFinder.StartEndRange> startEndRange =
-            RangeFinder.findRange(sym, name, start, end, this.source, kind.isFromEnd());
+            RangeFinder.findRange(name, start, end, this.source);
         if (startEndRange.isPresent()) {
           start = startEndRange.get().start;
           end = startEndRange.get().end;

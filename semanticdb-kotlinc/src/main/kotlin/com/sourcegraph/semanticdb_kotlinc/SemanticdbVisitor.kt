@@ -26,9 +26,8 @@ class SemanticdbVisitor(
     file: KtSourceFile,
     lineMap: LineMap,
     globals: GlobalSymbolsCache,
-    locals: LocalSymbolsCache = LocalSymbolsCache()
 ) {
-    private val cache = SymbolsCache(globals, locals)
+    private val cache = SymbolsCache(globals, LocalSymbolsCache())
     private val relativePath: String = computeRelativePath(sourceroot, file)
     private val scipBuilder = ScipTextDocumentBuilder(lineMap, cache, relativePath)
 

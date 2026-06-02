@@ -43,16 +43,16 @@ class ScipTextDocumentBuilder(
     // synthetic accessors) do not produce duplicate entries.
     private val symbols = LinkedHashMap<String, SymbolInformation>()
 
-    fun build(): Document =
-        Document
-            .newBuilder()
-            .setRelativePath(relativePath)
-            .setLanguage(LANGUAGE_KOTLIN)
-            .addAllOccurrences(occurrences.values())
-            .addAllSymbols(symbols.values)
+    fun buildIndex(): Index =
+        Index.newBuilder()
+            .addDocuments(
+                Document.newBuilder()
+                    .setRelativePath(relativePath)
+                    .setLanguage(LANGUAGE_KOTLIN)
+                    .addAllOccurrences(occurrences.values())
+                    .addAllSymbols(symbols.values)
+                    .build())
             .build()
-
-    fun buildIndex(): Index = Index.newBuilder().addDocuments(build()).build()
 
     fun emitScipData(
         firBasedSymbol: FirBasedSymbol<*>?,
@@ -286,8 +286,7 @@ class ScipTextDocumentBuilder(
                 else -> SymbolInformation.Kind.UnspecifiedKind
             }
 
-        // Mirrors the renderer used by SemanticdbTextDocumentBuilder for parity. We render the
-        // declaration as Kotlin source text — no markdown fence — and put it into
+        // Renders declarations as Kotlin source text — no markdown fence — and puts them into
         // SymbolInformation.signature_documentation.text.
         private val renderer: FirRenderer
             get() =
