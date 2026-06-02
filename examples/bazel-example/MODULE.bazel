@@ -1,0 +1,27 @@
+"""End-to-end example of consuming scip-java from an external Bazel project."""
+
+module(name = "scip_java_example")
+
+bazel_dep(name = "rules_java", version = "9.3.0")
+bazel_dep(name = "rules_jvm_external", version = "7.0")
+
+bazel_dep(name = "scip_java", version = "")
+local_path_override(
+    module_name = "scip_java",
+    path = "../..",
+)
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    artifacts = [
+        # Guava pin matches what the `protobuf` module contributes to `@maven`.
+        "com.google.auto.value:auto-value:1.5.3",
+        "com.google.guava:guava:32.0.1-jre",
+    ],
+    known_contributing_modules = [
+        "protobuf",
+        "scip_java",
+    ],
+    repositories = ["https://repo1.maven.org/maven2"],
+)
+use_repo(maven, "maven")

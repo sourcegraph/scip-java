@@ -1,2 +1,16 @@
+.direnv/
 examples/
-
+maven-plugin/target/
+project/target/
+scip-java/target/
+scip-semanticdb/target/
+semanticdb-agent/target/
+semanticdb-gradle-plugin/target/
+semanticdb-java/target/
+semanticdb-javac/target/
+semanticdb-kotlinc/target/
+target/
+tests/buildTools/target/
+tests/minimized/target/
+tests/snapshots/target/
+tests/unit/target/

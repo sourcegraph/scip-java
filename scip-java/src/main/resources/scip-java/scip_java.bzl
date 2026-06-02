@@ -97,21 +97,18 @@ def _scip_java(target, ctx):
         processorpath += [j.path for j in annotations.processor_classpath.to_list()]
         processors = annotations.processor_classnames
 
+    # In Bazel 8 compilation.javac_options is a depset of shell-quoted strings;
+    # ctx.tokenize splits each entry into proper individual flags.
+    raw_options = compilation.javac_options
+    if hasattr(raw_options, "to_list"):
+        raw_options = raw_options.to_list()
+
     launcher_javac_flags = []
     compiler_javac_flags = []
-
-    # In different versions of bazel javac options are either a nested set or a depset or a list...
-    javac_options = []
-    if hasattr(compilation, "javac_options_list"):
-        javac_options = compilation.javac_options_list
-    else:
-        javac_options = compilation.javac_options
-
-    for value in javac_options:
-        # NOTE(Anton): for some bizarre reason I see empty string starting the list of
-        # javac options - which then gets propagated into the JSON config, and ends up
-        # crashing the actual javac invokation.
-        if value != "":
+    for raw in raw_options:
+        for value in ctx.tokenize(raw):
+            if not value:
+                continue
             if value.startswith("-J"):
                 launcher_javac_flags.append(value)
             else:
@@ -134,13 +131,16 @@ def _scip_java(target, ctx):
     targetroot = ctx.actions.declare_directory(ctx.label.name + ".semanticdb")
     ctx.actions.write(
         output = build_config_path,
-        content = build_config.to_json(),
+        content = json.encode(build_config),
     )
 
     deps = [javac_action.inputs, annotations.processor_classpath]
 
     ctx.actions.run_shell(
-        command = "\"{}\" index --no-cleanup --index-semanticdb.allow-empty-index --cwd \"{}\" --targetroot {} --scip-config \"{}\" --output \"{}\"".format(
+        # Prefix bazel-out paths with $PWD (the execroot) so they don't depend
+        # on the workspace-level bazel-out convenience symlink, which doesn't
+        # exist on a cold build.
+        command = "\"{}\" index --no-cleanup --index-semanticdb.allow-empty-index --cwd \"{}\" --targetroot \"$PWD/{}\" --scip-config \"$PWD/{}\" --output \"$PWD/{}\"".format(
             ctx.var["scip_java_binary"],
             ctx.var["sourceroot"],
             targetroot.path,
