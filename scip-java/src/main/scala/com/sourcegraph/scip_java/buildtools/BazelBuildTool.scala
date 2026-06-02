@@ -23,7 +23,9 @@ class BazelBuildTool(index: IndexCommand) extends BuildTool("Bazel", index) {
   override def isHidden: Boolean = true
 
   override def usedInCurrentDirectory(): Boolean = {
-    Files.isRegularFile(index.workingDirectory.resolve("WORKSPACE"))
+    val cwd = index.workingDirectory
+    List("MODULE.bazel", "WORKSPACE", "WORKSPACE.bazel")
+      .exists(f => Files.isRegularFile(cwd.resolve(f)))
   }
 
   private def targetSpecs =
