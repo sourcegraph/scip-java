@@ -12,7 +12,6 @@ public class ScipSemanticdbOptions {
   public final Path sourceroot;
   public final ScipSemanticdbReporter reporter;
   public final ToolInfo toolInfo;
-  public final ScipOutputFormat format;
   public final boolean parallel;
   public final List<MavenPackage> packages;
   public final boolean emitInverseRelationships;
@@ -25,7 +24,6 @@ public class ScipSemanticdbOptions {
       Path sourceroot,
       ScipSemanticdbReporter reporter,
       ToolInfo toolInfo,
-      ScipOutputFormat format,
       boolean parallel,
       List<MavenPackage> packages,
       boolean emitInverseRelationships,
@@ -36,7 +34,6 @@ public class ScipSemanticdbOptions {
     this.sourceroot = sourceroot;
     this.reporter = reporter;
     this.toolInfo = toolInfo;
-    this.format = format;
     this.parallel = parallel;
     this.packages = packages;
     this.emitInverseRelationships = emitInverseRelationships;

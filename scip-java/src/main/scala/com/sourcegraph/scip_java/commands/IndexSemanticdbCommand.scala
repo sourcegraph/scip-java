@@ -10,7 +10,6 @@ import com.sourcegraph.io.AbsolutePath
 import com.sourcegraph.scip_java.BuildInfo
 import com.sourcegraph.scip_java.buildtools.ClasspathEntry
 import com.sourcegraph.scip_semanticdb.ConsoleScipSemanticdbReporter
-import com.sourcegraph.scip_semanticdb.ScipOutputFormat
 import com.sourcegraph.scip_semanticdb.ScipSemanticdb
 import com.sourcegraph.scip_semanticdb.ScipSemanticdbOptions
 import moped.annotations._
@@ -72,15 +71,6 @@ final case class IndexSemanticdbCommand(
 
   def run(): Int = {
     val reporter = new ConsoleScipSemanticdbReporter(app)
-    val outputFilename = output.getFileName.toString
-    val format = ScipOutputFormat.fromFilename(outputFilename)
-    if (format == ScipOutputFormat.UNKNOWN) {
-      app.error(
-        s"unknown output format for filename '$outputFilename'. " +
-          s"Supported file extensions are `*.scip` and `*.scip.ndjson`"
-      )
-      return 1
-    }
     val packages =
       absoluteTargetroots
         .iterator
@@ -100,7 +90,6 @@ final case class IndexSemanticdbCommand(
           .setName("scip-java")
           .setVersion(BuildInfo.version)
           .build(),
-        format,
         parallel,
         packages.map(_.toPackageInformation).asJava,
         emitInverseRelationships,

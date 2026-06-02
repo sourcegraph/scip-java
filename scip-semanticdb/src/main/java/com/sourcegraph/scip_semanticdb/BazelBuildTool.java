@@ -59,7 +59,6 @@ public class BazelBuildTool {
             options.sourceroot,
             reporter,
             ToolInfo.newBuilder().setName("scip-java").setVersion("HEAD").build(),
-            ScipOutputFormat.TYPED_PROTOBUF,
             options.parallel,
             mavenPackages,
             /* emitInverseRelationships */ true,
