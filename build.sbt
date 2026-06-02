@@ -179,10 +179,7 @@ lazy val scip = project
     moduleName := "scip-semanticdb",
     javaOnlySettings,
     libraryDependencies ++=
-      Seq(
-        "org.scip-code" % "scip-java-bindings" % V.scipBindings,
-        "com.google.protobuf" % "protobuf-java-util" % V.protobuf
-      ),
+      Seq("org.scip-code" % "scip-java-bindings" % V.scipBindings),
     (Compile / PB.targets) :=
       Seq(PB.gens.java(V.protobuf) -> (Compile / sourceManaged).value),
     Compile / PB.protocOptions := Seq("--experimental_allow_proto3_optional")
