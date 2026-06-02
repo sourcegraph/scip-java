@@ -208,16 +208,7 @@ public final class SemanticdbTaskListener implements TaskListener {
 
   public static Path absolutePathFromUri(SemanticdbJavacOptions options, JavaFileObject file) {
     URI uri = file.toUri();
-    if ((options.uriScheme == UriScheme.SBT || options.uriScheme == UriScheme.ZINC)
-        && uri.getScheme().equals("vf")
-        && uri.toString().startsWith("vf://tmp/")) {
-      String[] parts = uri.toString().split("/", 5);
-      if (parts.length == 5) {
-        return options.sourceroot.resolve(Paths.get(parts[4]));
-      } else {
-        throw new IllegalArgumentException("unsupported URI: " + uri);
-      }
-    } else if (options.uriScheme == UriScheme.BAZEL) {
+    if (options.uriScheme == UriScheme.BAZEL) {
       String toString = file.toString().replace(":", "/");
       // This solution is hacky, and it would be very nice to use a dedicated API
       // instead.

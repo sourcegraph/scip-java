@@ -550,10 +550,20 @@ lazy val minimizedSettings = List[Def.Setting[_]](
   (run / fork) := true,
   (Compile / unmanagedSourceDirectories) += minimizedSourceDirectory,
   libraryDependencies ++= List("org.projectlombok" % "lombok" % "1.18.22"),
+  // Fork javac so it receives real file paths instead of sbt's `vf://` virtual-file URIs
+  // (see the comment on `semanticdbKotlincMinimized` for the long story).
+  javaHome := Some(file(System.getProperty("java.home"))),
+  Compile / javacOptions ++=
+    Seq(
+      "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+      "-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+      "-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+      "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+      "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+    ),
   javacOptions +=
     List(
       s"-Xplugin:semanticdb",
-      s"-build-tool:sbt",
       s"-text:on",
       s"-verbose",
       s"-sourceroot:${(ThisBuild / baseDirectory).value}",
