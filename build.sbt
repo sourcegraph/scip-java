@@ -10,7 +10,7 @@ lazy val V =
   new {
     val protobuf = "4.34.2"
     val scipBindings = "0.8.0"
-    val scalaXml = "2.1.0"
+    val scalaXml = "2.4.0"
     val moped = "0.2.0"
     val gradle = "7.0"
     val scala213 = "2.13.13"
