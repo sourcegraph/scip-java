@@ -61,11 +61,12 @@ index.scip
 ./generated
 /sources
 bazel-bin
-bazel-bindings
-bazel-scip-java
 bazel-out
 bazel-testlogs
-bazel-lsif-java
+/bazel-bindings
+/bazel-scip-java
+/bazel-lsif-java
+/examples/bazel-example/bazel-bazel-example
 
 VERSION
 
