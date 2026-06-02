@@ -8,8 +8,6 @@ bazel_dep(name = "rules_jvm_external", version = "7.0")
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(
     artifacts = [
-        # scip-java-bindings 0.8.0 gencode requires the 4.34.2 runtime.
-        "com.google.protobuf:protobuf-java:4.34.2",
         "com.google.protobuf:protobuf-java-util:4.34.2",
         "org.projectlombok:lombok:1.18.22",
         "org.scip-code:scip-java-bindings:0.8.0",
