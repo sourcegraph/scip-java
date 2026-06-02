@@ -1,7 +1,6 @@
 package com.sourcegraph.semanticdb_javac;
 
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.PackageElement;
@@ -36,12 +35,8 @@ public final class GlobalSymbolsCache {
     return result;
   }
 
-  public boolean isNone(Element sym) {
-    return sym == null;
-  }
-
   private String uncachedSemanticdbSymbol(Element sym, LocalSymbolsCache locals) {
-    if (isNone(sym)) return SemanticdbSymbols.ROOT_PACKAGE;
+    if (sym == null) return SemanticdbSymbols.ROOT_PACKAGE;
 
     if (sym instanceof PackageElement) {
       if (((PackageElement) sym).isUnnamed()) return SemanticdbSymbols.ROOT_PACKAGE;
