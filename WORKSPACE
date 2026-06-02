@@ -26,10 +26,6 @@ http_archive(
         "https://github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0-3.20.0.tar.gz",
     ],
 )
-load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
-rules_proto_dependencies()
-rules_proto_toolchains()
-
 ##############
 # JVM External
 ##############
@@ -57,4 +53,18 @@ maven_install(
     repositories = [
          "https://repo1.maven.org/maven2",
     ],
+    # Also create java_import_external-compatible repos such as
+    # @com_google_protobuf_protobuf_java//jar. compat_repositories() below
+    # MUST run before rules_proto_dependencies() so it pre-empts the
+    # 3.20.0 protobuf-java jar rules_proto would otherwise install at the
+    # same label, causing a class-load IllegalAccessError on the
+    # protobuf-4 scip-java-bindings runtime.
+    generate_compat_repositories = True,
 )
+
+load("@maven//:compat.bzl", "compat_repositories")
+compat_repositories()
+
+load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
+rules_proto_dependencies()
+rules_proto_toolchains()
