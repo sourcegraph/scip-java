@@ -1,8 +1,8 @@
 package com.sourcegraph.scip_semanticdb;
 
-import com.sourcegraph.Scip;
 import java.nio.file.Path;
 import java.util.List;
+import org.scip_code.scip.ToolInfo;
 
 /** Configuration options to tweak the scip-semanticdb command. */
 public class ScipSemanticdbOptions {
@@ -11,7 +11,7 @@ public class ScipSemanticdbOptions {
   public final Path output;
   public final Path sourceroot;
   public final ScipSemanticdbReporter reporter;
-  public final Scip.ToolInfo toolInfo;
+  public final ToolInfo toolInfo;
   public final ScipOutputFormat format;
   public final boolean parallel;
   public final List<MavenPackage> packages;
@@ -24,7 +24,7 @@ public class ScipSemanticdbOptions {
       Path output,
       Path sourceroot,
       ScipSemanticdbReporter reporter,
-      Scip.ToolInfo toolInfo,
+      ToolInfo toolInfo,
       ScipOutputFormat format,
       boolean parallel,
       List<MavenPackage> packages,

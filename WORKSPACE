@@ -26,10 +26,6 @@ http_archive(
         "https://github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0-3.20.0.tar.gz",
     ],
 )
-load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
-rules_proto_dependencies()
-rules_proto_toolchains()
-
 ##############
 # JVM External
 ##############
@@ -49,11 +45,22 @@ rules_jvm_external_setup()
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 maven_install(
     artifacts = [
-        "com.google.protobuf:protobuf-java:3.15.6",
-        "com.google.protobuf:protobuf-java-util:3.15.6",
+        "com.google.protobuf:protobuf-java:4.34.2",
+        "com.google.protobuf:protobuf-java-util:4.34.2",
         "org.projectlombok:lombok:1.18.22",
+        "org.scip-code:scip-java-bindings:0.8.0",
     ],
     repositories = [
          "https://repo1.maven.org/maven2",
     ],
+    # Pre-empts rules_proto's bundled protobuf-java 3.20 so the
+    # scip-java-bindings 4.x gencode sees a compatible runtime.
+    generate_compat_repositories = True,
 )
+
+load("@maven//:compat.bzl", "compat_repositories")
+compat_repositories()
+
+load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
+rules_proto_dependencies()
+rules_proto_toolchains()

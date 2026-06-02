@@ -10,10 +10,10 @@ import scala.jdk.CollectionConverters.CollectionHasAsScala
 import scala.meta.internal.io.FileIO
 import scala.meta.io.AbsolutePath
 
-import com.sourcegraph.Scip.Index
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.ScipJava
 import com.sourcegraph.scip_java.ScipPrinters
+import org.scip_code.scip.Index
 
 class MinimizedSnapshotScipGenerator {
   def run(args: List[String]): Unit = {

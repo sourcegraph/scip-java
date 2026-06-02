@@ -2,13 +2,20 @@ package com.sourcegraph.scip_semanticdb;
 
 import com.google.protobuf.CodedInputStream;
 import com.sourcegraph.semanticdb_javac.Semanticdb;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Kind;
-import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolInformation.Property;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence;
 import com.sourcegraph.semanticdb_javac.Semanticdb.SymbolOccurrence.Role;
 import com.sourcegraph.semanticdb_javac.SemanticdbSymbols;
-import com.sourcegraph.Scip;
+import org.scip_code.scip.Document;
+import org.scip_code.scip.Index;
+import org.scip_code.scip.Metadata;
+import org.scip_code.scip.Occurrence;
+import org.scip_code.scip.ProtocolVersion;
+import org.scip_code.scip.Relationship;
+import org.scip_code.scip.Signature;
+import org.scip_code.scip.SymbolInformation;
+import org.scip_code.scip.SymbolRole;
+import org.scip_code.scip.TextEncoding;
+import org.scip_code.scip.ToolInfo;
 
 import java.io.IOException;
 import java.net.URI;
@@ -73,71 +80,71 @@ public class ScipSemanticdb {
     return "semanticdb maven " + pkg.repoName() + " " + pkg.version() + " " + symbol;
   }
 
-  private static Scip.SymbolInformation.Kind scipKind(SymbolInformation info) {
-    Kind kind = info.getKind();
+  private static SymbolInformation.Kind scipKind(Semanticdb.SymbolInformation info) {
+    Semanticdb.SymbolInformation.Kind kind = info.getKind();
     int properties = info.getProperties();
-    boolean isStatic = (properties & Property.STATIC_VALUE) > 0;
-    boolean isAbstract = (properties & Property.ABSTRACT_VALUE) > 0;
-    boolean isEnum = (properties & Property.ENUM_VALUE) > 0;
+    boolean isStatic = (properties & Semanticdb.SymbolInformation.Property.STATIC_VALUE) > 0;
+    boolean isAbstract = (properties & Semanticdb.SymbolInformation.Property.ABSTRACT_VALUE) > 0;
+    boolean isEnum = (properties & Semanticdb.SymbolInformation.Property.ENUM_VALUE) > 0;
 
     switch (kind) {
       case CLASS:
         if (isEnum) {
-          return Scip.SymbolInformation.Kind.Enum;
+          return SymbolInformation.Kind.Enum;
         } else {
-          return Scip.SymbolInformation.Kind.Class;
+          return SymbolInformation.Kind.Class;
         }
       case CONSTRUCTOR:
-        return Scip.SymbolInformation.Kind.Constructor;
+        return SymbolInformation.Kind.Constructor;
       case FIELD:
         if (isStatic) {
-          return Scip.SymbolInformation.Kind.StaticField;
+          return SymbolInformation.Kind.StaticField;
         } else {
-          return Scip.SymbolInformation.Kind.Field;
+          return SymbolInformation.Kind.Field;
         }
       case INTERFACE:
-        return Scip.SymbolInformation.Kind.Interface;
+        return SymbolInformation.Kind.Interface;
       case LOCAL:
         if (isStatic) {
-          return Scip.SymbolInformation.Kind.StaticVariable;
+          return SymbolInformation.Kind.StaticVariable;
         } else {
-          return Scip.SymbolInformation.Kind.Variable;
+          return SymbolInformation.Kind.Variable;
         }
       case MACRO:
-        return Scip.SymbolInformation.Kind.Macro;
+        return SymbolInformation.Kind.Macro;
       case METHOD:
         if (isStatic) {
-          return Scip.SymbolInformation.Kind.StaticMethod;
+          return SymbolInformation.Kind.StaticMethod;
         } else if (isAbstract) {
-          return Scip.SymbolInformation.Kind.AbstractMethod;
+          return SymbolInformation.Kind.AbstractMethod;
         } else {
-          return Scip.SymbolInformation.Kind.Method;
+          return SymbolInformation.Kind.Method;
         }
       case OBJECT:
-        return Scip.SymbolInformation.Kind.Object;
+        return SymbolInformation.Kind.Object;
       case PACKAGE:
-        return Scip.SymbolInformation.Kind.Package;
+        return SymbolInformation.Kind.Package;
       case PACKAGE_OBJECT:
-        return Scip.SymbolInformation.Kind.PackageObject;
+        return SymbolInformation.Kind.PackageObject;
       case PARAMETER:
-        return Scip.SymbolInformation.Kind.Parameter;
+        return SymbolInformation.Kind.Parameter;
       case SELF_PARAMETER:
-        return Scip.SymbolInformation.Kind.SelfParameter;
+        return SymbolInformation.Kind.SelfParameter;
       case TRAIT:
-        return Scip.SymbolInformation.Kind.Trait;
+        return SymbolInformation.Kind.Trait;
       case TYPE:
         if (isEnum) {
-          return Scip.SymbolInformation.Kind.Enum;
+          return SymbolInformation.Kind.Enum;
         } else {
-          return Scip.SymbolInformation.Kind.Type;
+          return SymbolInformation.Kind.Type;
         }
       case TYPE_PARAMETER:
-        return Scip.SymbolInformation.Kind.TypeParameter;
+        return SymbolInformation.Kind.TypeParameter;
       case UNKNOWN_KIND:
-        return Scip.SymbolInformation.Kind.UnspecifiedKind;
+        return SymbolInformation.Kind.UnspecifiedKind;
     }
 
-    return Scip.SymbolInformation.Kind.UnspecifiedKind;
+    return SymbolInformation.Kind.UnspecifiedKind;
   }
 
   public static boolean isDefinitionRole(Role role) {
@@ -156,14 +163,14 @@ public class ScipSemanticdb {
           StreamSupport.stream(options.sourceroot.relativize(absolutePath).spliterator(), false)
               .map(p -> p.getFileName().toString())
               .collect(Collectors.joining("/"));
-      Scip.Document.Builder tdoc = Scip.Document.newBuilder().setRelativePath(relativePath);
+      Document.Builder tdoc = Document.newBuilder().setRelativePath(relativePath);
       for (SymbolOccurrence occ : doc.sortedSymbolOccurrences()) {
         if (occ.getSymbol().isEmpty()) {
           continue;
         }
         int role = 0;
         if (isDefinitionRole(occ.getRole())) {
-          role |= Scip.SymbolRole.Definition_VALUE;
+          role |= SymbolRole.Definition_VALUE;
         }
         boolean isSingleLineRange = occ.getRange().getStartLine() == occ.getRange().getEndLine();
         Iterable<Integer> range =
@@ -178,8 +185,8 @@ public class ScipSemanticdb {
                     occ.getRange().getEndLine(),
                     occ.getRange().getEndCharacter());
         Package pkg = packages.packageForSymbol(occ.getSymbol()).orElse(Package.EMPTY);
-        Scip.Occurrence.Builder occBuilder =
-            Scip.Occurrence.newBuilder()
+        Occurrence.Builder occBuilder =
+            Occurrence.newBuilder()
                 .addAllRange(range)
                 .setSymbol(typedSymbol(occ.getSymbol(), pkg))
                 .setSymbolRoles(role);
@@ -204,13 +211,13 @@ public class ScipSemanticdb {
         tdoc.addOccurrences(occBuilder);
       }
       Symtab symtab = new Symtab(doc.semanticdb);
-      for (SymbolInformation info : doc.semanticdb.getSymbolsList()) {
+      for (Semanticdb.SymbolInformation info : doc.semanticdb.getSymbolsList()) {
         if (info.getSymbol().isEmpty()) {
           continue;
         }
         Package pkg = packages.packageForSymbol(info.getSymbol()).orElse(Package.EMPTY);
-        Scip.SymbolInformation.Builder scipInfo =
-            Scip.SymbolInformation.newBuilder().setSymbol(typedSymbol(info.getSymbol(), pkg));
+        SymbolInformation.Builder scipInfo =
+            SymbolInformation.newBuilder().setSymbol(typedSymbol(info.getSymbol(), pkg));
 
         scipInfo.setDisplayName(info.getDisplayName());
         if (!info.getEnclosingSymbol().isEmpty()) {
@@ -227,7 +234,7 @@ public class ScipSemanticdb {
             Package inverseReferencePkg =
                 packages.packageForSymbol(inverseReference).orElse(Package.EMPTY);
             scipInfo.addRelationships(
-                Scip.Relationship.newBuilder()
+                Relationship.newBuilder()
                     .setSymbol(typedSymbol(inverseReference, inverseReferencePkg))
                     .setIsImplementation(true)
                     .setIsReference(true));
@@ -241,10 +248,10 @@ public class ScipSemanticdb {
           }
           Package definitionSymbolPkg =
               packages.packageForSymbol(definitionSymbol).orElse(Package.EMPTY);
-          SymbolInformation definitionInfo = symtab.symbols.get(definitionSymbol);
+          Semanticdb.SymbolInformation definitionInfo = symtab.symbols.get(definitionSymbol);
 
           scipInfo.addRelationships(
-              Scip.Relationship.newBuilder()
+              Relationship.newBuilder()
                   .setSymbol(typedSymbol(definitionSymbol, definitionSymbolPkg))
                   .setIsDefinition(true)
                   .setIsReference(
@@ -264,7 +271,7 @@ public class ScipSemanticdb {
           Package overriddenSymbolPkg =
               packages.packageForSymbol(overriddenSymbol).orElse(Package.EMPTY);
           scipInfo.addRelationships(
-              Scip.Relationship.newBuilder()
+              Relationship.newBuilder()
                   .setSymbol(typedSymbol(overriddenSymbol, overriddenSymbolPkg))
                   .setIsImplementation(true)
                   .setIsReference(supportsReferenceRelationship(info)));
@@ -273,11 +280,8 @@ public class ScipSemanticdb {
           String language =
               doc.semanticdb.getLanguage().toString().toLowerCase(Locale.ROOT).intern();
           String signature = new SignatureFormatter(info, symtab).formatSymbol();
-          Scip.Document.Builder signatureDocumentation =
-              Scip.Document.newBuilder()
-                  .setRelativePath(relativePath)
-                  .setLanguage(language)
-                  .setText(signature);
+          Signature.Builder signatureDocumentation =
+              Signature.newBuilder().setLanguage(language).setText(signature);
           scipInfo.setSignatureDocumentation(signatureDocumentation);
         }
         String documentation = info.getDocumentation().getMessage();
@@ -286,19 +290,19 @@ public class ScipSemanticdb {
         }
         tdoc.addSymbols(scipInfo);
       }
-      writer.emitTyped(Scip.Index.newBuilder().addDocuments(tdoc).build());
+      writer.emitTyped(Index.newBuilder().addDocuments(tdoc).build());
     }
   }
 
-  private Scip.Index typedMetadata() {
-    return Scip.Index.newBuilder()
+  private Index typedMetadata() {
+    return Index.newBuilder()
         .setMetadata(
-            Scip.Metadata.newBuilder()
-                .setVersion(Scip.ProtocolVersion.UnspecifiedProtocolVersion)
+            Metadata.newBuilder()
+                .setVersion(ProtocolVersion.UnspecifiedProtocolVersion)
                 .setProjectRoot(options.sourceroot.toUri().toString())
-                .setTextDocumentEncoding(Scip.TextEncoding.UTF8)
+                .setTextDocumentEncoding(TextEncoding.UTF8)
                 .setToolInfo(
-                    Scip.ToolInfo.newBuilder()
+                    ToolInfo.newBuilder()
                         .setName(options.toolInfo.getName())
                         .setVersion(options.toolInfo.getVersion())
                         .addAllArguments(options.toolInfo.getArgumentsList())))
@@ -335,7 +339,7 @@ public class ScipSemanticdb {
   private Stream<SymbolRelationship> referenceRelationships(ScipTextDocument document) {
     ArrayList<SymbolRelationship> relationships = new ArrayList<>();
     for (int i = 0; i < document.semanticdb.getSymbolsCount(); i++) {
-      SymbolInformation info = document.semanticdb.getSymbols(i);
+      Semanticdb.SymbolInformation info = document.semanticdb.getSymbols(i);
       if (!supportsReferenceRelationship(info)) {
         continue;
       }
@@ -353,7 +357,7 @@ public class ScipSemanticdb {
     return relationships.stream();
   }
 
-  private static boolean supportsReferenceRelationship(SymbolInformation info) {
+  private static boolean supportsReferenceRelationship(Semanticdb.SymbolInformation info) {
     switch (info.getKind()) {
       case INTERFACE:
       case TYPE:

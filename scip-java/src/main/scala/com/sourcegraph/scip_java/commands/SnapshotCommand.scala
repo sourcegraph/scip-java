@@ -7,13 +7,13 @@ import java.nio.file.attribute.BasicFileAttributes
 
 import scala.jdk.CollectionConverters._
 
-import com.sourcegraph.Scip
 import com.sourcegraph.io.DeleteVisitor
 import com.sourcegraph.scip_java.ScipPrinters
 import moped.annotations._
 import moped.cli.Application
 import moped.cli.Command
 import moped.cli.CommandParser
+import org.scip_code.scip.Index
 
 @Description(
   "Generates annotated snapshots for each `*.scip` file in the given target roots."
@@ -52,7 +52,7 @@ case class SnapshotCommand(
           ): FileVisitResult = {
             if (scipPattern.matches(file)) {
               foundScipFile = true
-              val index = Scip.Index.parseFrom(Files.readAllBytes(file))
+              val index = Index.parseFrom(Files.readAllBytes(file))
               val root = URI.create(index.getMetadata.getProjectRoot)
               index
                 .getDocumentsList
