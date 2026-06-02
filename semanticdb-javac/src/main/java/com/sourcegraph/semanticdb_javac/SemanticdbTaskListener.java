@@ -113,7 +113,7 @@ public final class SemanticdbTaskListener implements TaskListener {
     try {
       Index shard =
           new ScipVisitor(globals, e.getCompilationUnit(), options, types, trees, elements)
-              .buildShard(e.getCompilationUnit());
+              .buildShard();
       ScipShardWriter.writeOrMerge(shardPath, shard);
     } catch (IOException ex) {
       this.reportException(ex, e);

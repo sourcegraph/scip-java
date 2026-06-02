@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.jar.JarEntry;
@@ -235,10 +236,9 @@ public final class ScipShardAggregator {
 
   private static SymbolInformation mergeSymbol(SymbolInformation a, SymbolInformation b) {
     SymbolInformation.Builder builder = b.toBuilder();
-    LinkedHashMap<Relationship, Relationship> rels = new LinkedHashMap<>();
-    for (Relationship r : a.getRelationshipsList()) rels.put(r, r);
-    for (Relationship r : b.getRelationshipsList()) rels.put(r, r);
-    builder.clearRelationships().addAllRelationships(rels.values());
+    LinkedHashSet<Relationship> rels = new LinkedHashSet<>(a.getRelationshipsList());
+    rels.addAll(b.getRelationshipsList());
+    builder.clearRelationships().addAllRelationships(rels);
     return builder.build();
   }
 

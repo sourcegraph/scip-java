@@ -29,8 +29,9 @@ class PostAnalysisExtension(
         try {
             for ((ktSourceFile, visitor) in AnalyzerCheckers.visitors) {
                 try {
-                    scipShardOutPathForFile(ktSourceFile)?.apply {
-                        ScipShardWriter.write(this, visitor.buildScipIndex())
+                    scipShardOutPathForFile(ktSourceFile)?.let { outPath ->
+                        Files.createDirectories(outPath.parent)
+                        Files.write(outPath, visitor.buildScipIndex().toByteArray())
                     }
                 } catch (e: Exception) {
                     handleException(e)
@@ -46,15 +47,11 @@ class PostAnalysisExtension(
         if (normalizedPath.startsWith(sourceRoot)) {
             val relative = sourceRoot.relativize(normalizedPath)
             val filename = relative.fileName.toString() + ".scip"
-            val outPath =
-                targetRoot
-                    .resolve("META-INF")
-                    .resolve("scip")
-                    .resolve(relative)
-                    .resolveSibling(filename)
-
-            Files.createDirectories(outPath.parent)
-            return outPath
+            return targetRoot
+                .resolve("META-INF")
+                .resolve("scip")
+                .resolve(relative)
+                .resolveSibling(filename)
         }
         System.err.println(
             "given file is not under the sourceroot.\n\tSourceroot: $sourceRoot\n\tFile path: ${file.path}\n\tNormalized file path: $normalizedPath")

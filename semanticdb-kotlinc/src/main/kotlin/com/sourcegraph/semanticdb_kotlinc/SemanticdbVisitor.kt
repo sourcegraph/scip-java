@@ -30,7 +30,7 @@ class SemanticdbVisitor(
 ) {
     private val cache = SymbolsCache(globals, locals)
     private val relativePath: String = computeRelativePath(sourceroot, file)
-    private val scipBuilder = ScipTextDocumentBuilder(file, lineMap, cache, relativePath)
+    private val scipBuilder = ScipTextDocumentBuilder(lineMap, cache, relativePath)
 
     private data class SymbolDescriptorPair(
         val firBasedSymbol: FirBasedSymbol<*>?,
@@ -39,19 +39,16 @@ class SemanticdbVisitor(
 
     fun buildScipIndex(): Index = scipBuilder.buildIndex()
 
-    fun scipRelativePath(): String = relativePath
-
     private fun Sequence<SymbolDescriptorPair>?.emitAll(
         element: KtSourceElement,
         roles: Int,
         context: CheckerContext,
         enclosingSource: KtSourceElement? = null,
-    ): List<Symbol>? =
-        this?.onEach { (firBasedSymbol, symbol) ->
-                scipBuilder.emitScipData(firBasedSymbol, symbol, element, roles, context, enclosingSource)
-            }
-            ?.map { it.symbol }
-            ?.toList()
+    ) {
+        this?.forEach { (firBasedSymbol, symbol) ->
+            scipBuilder.emitScipData(firBasedSymbol, symbol, element, roles, context, enclosingSource)
+        }
+    }
 
     private fun Sequence<Symbol>.with(firBasedSymbol: FirBasedSymbol<*>?) =
         this.map { SymbolDescriptorPair(firBasedSymbol, it) }

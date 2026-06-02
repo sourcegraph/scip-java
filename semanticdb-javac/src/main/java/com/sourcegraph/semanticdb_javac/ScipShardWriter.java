@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -105,10 +106,9 @@ public final class ScipShardWriter {
   private static SymbolInformation mergeSymbol(SymbolInformation a, SymbolInformation b) {
     SymbolInformation.Builder builder = b.toBuilder();
     // Merge relationships, deduplicating by structural equality with deterministic ordering.
-    Map<Relationship, Relationship> rels = new LinkedHashMap<>();
-    for (Relationship r : a.getRelationshipsList()) rels.put(r, r);
-    for (Relationship r : b.getRelationshipsList()) rels.put(r, r);
-    builder.clearRelationships().addAllRelationships(rels.values());
+    LinkedHashSet<Relationship> rels = new LinkedHashSet<>(a.getRelationshipsList());
+    rels.addAll(b.getRelationshipsList());
+    builder.clearRelationships().addAllRelationships(rels);
 
     // Merge documentation, preserving order and avoiding duplicates.
     List<String> docs = new ArrayList<>(a.getDocumentationList());

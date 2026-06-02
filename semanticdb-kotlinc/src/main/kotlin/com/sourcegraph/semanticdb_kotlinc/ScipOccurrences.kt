@@ -25,11 +25,6 @@ internal class ScipOccurrences {
         }
     }
 
-    /** Adds every occurrence in [occs]. */
-    fun addAll(occs: Iterable<Occurrence>) {
-        for (occ in occs) add(occ)
-    }
-
     /** Returns the deduplicated occurrences in insertion order. */
     fun values(): Collection<Occurrence> = out.values
 

@@ -23,20 +23,18 @@ object ScipSymbols {
     const val PLACEHOLDER_PREFIX: String = ". . . . "
 
     /**
-     * Converts a SemanticDB-style symbol string into the SCIP symbol form expected by the
-     * aggregator.
+     * Converts a SemanticDB-style [Symbol] into the SCIP symbol form expected by the aggregator.
      *
-     *   - Empty strings stay empty.
+     *   - [Symbol.NONE] becomes the empty string.
      *   - Local symbols of the form `local42` become `local 42`.
      *   - Everything else is prefixed with [PLACEHOLDER_PREFIX].
      */
-    fun fromSemanticdbSymbol(symbol: String?): String {
-        if (symbol.isNullOrEmpty()) return ""
-        if (symbol.startsWith("local")) {
-            return "local " + symbol.substring("local".length)
+    fun fromSemanticdbSymbol(symbol: Symbol): String {
+        if (symbol == Symbol.NONE) return ""
+        val raw = symbol.toString()
+        if (symbol.isLocal()) {
+            return "local " + raw.substring("local".length)
         }
-        return PLACEHOLDER_PREFIX + symbol
+        return PLACEHOLDER_PREFIX + raw
     }
-
-    fun fromSemanticdbSymbol(symbol: Symbol): String = fromSemanticdbSymbol(symbol.toString())
 }

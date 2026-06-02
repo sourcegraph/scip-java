@@ -9,7 +9,6 @@ import org.scip_code.scip.SymbolInformation
 import org.scip_code.scip.SymbolRole
 import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.KtSourceElement
-import org.jetbrains.kotlin.KtSourceFile
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.directOverriddenSymbolsSafe
 import org.jetbrains.kotlin.fir.analysis.checkers.toClassLikeSymbol
@@ -35,7 +34,6 @@ import org.jetbrains.kotlin.text
  */
 @ExperimentalContracts
 class ScipTextDocumentBuilder(
-    private val file: KtSourceFile,
     private val lineMap: LineMap,
     private val cache: SymbolsCache,
     private val relativePath: String,
@@ -104,12 +102,6 @@ class ScipTextDocumentBuilder(
                 .setSymbol(scipSymbolStr)
                 .setDisplayName(displayName(firBasedSymbol, element))
                 .setKind(scipKind(firBasedSymbol))
-
-        if (symbol.isLocal()) {
-            // Locals are convenient to navigate from when the enclosing symbol is known.
-            // We don't have direct access to the enclosing FirBasedSymbol here, but the
-            // information is non-essential — leaving enclosing_symbol unset is fine.
-        }
 
         val signature = signatureText(firBasedSymbol)
         if (signature.isNotEmpty()) {

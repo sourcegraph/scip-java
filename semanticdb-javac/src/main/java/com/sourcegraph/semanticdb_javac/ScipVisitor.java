@@ -95,9 +95,9 @@ public final class ScipVisitor extends TreePathScanner<Void, Void> {
     this.nodes = new LinkedHashMap<>();
   }
 
-  /** Builds a single-document {@link Index} shard for the given compilation unit. */
-  public Index buildShard(CompilationUnitTree tree) {
-    this.scan(tree, null);
+  /** Builds a single-document {@link Index} shard for this compilation unit. */
+  public Index buildShard() {
+    this.scan(compUnitTree, null);
     resolveNodes();
 
     Document.Builder document =
