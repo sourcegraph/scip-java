@@ -148,51 +148,29 @@ abstract class BaseBuildToolSuite extends MopedSuite(ScipJava.app) {
 }
 
 object BaseBuildToolSuite {
+  // Major version of the JVM that `java` on PATH resolves to. Compiled and
+  // executed as a subprocess because the test JVM may differ from PATH.
   lazy val externalJavaVersion: Int = {
     val tmpDir = os.temp.dir()
-    var version = Option.empty[String]
     try {
       os.write(tmpDir / "PrintJavaVersion.java", PrintJavaVersion)
-
       os.proc("javac", "PrintJavaVersion.java").call(cwd = tmpDir)
-
-      version = Some(
-        os.proc("java", "PrintJavaVersion").call(cwd = tmpDir).out.text()
-      )
+      os.proc("java", "PrintJavaVersion")
+        .call(cwd = tmpDir)
+        .out
+        .text()
+        .trim
+        .toInt
     } finally {
       os.remove.all(tmpDir)
-    }
-
-    version
-      .map(parseJavaVersion)
-      .getOrElse(sys.error("Failed to detect external JDK version"))
-  }
-
-  private def parseJavaVersion(raw: String) = {
-    val prop = raw.takeWhile(c => c.isDigit || c == '.')
-
-    val segments = prop.split("\\.").toList
-
-    segments match {
-      // Java 17.0.1, 11.0.20.1, ..
-      case modern :: _ :: _ :: rest =>
-        modern.toInt
-      // Java 12
-      case modern :: Nil =>
-        modern.toInt
-      case other =>
-        sys.error(
-          s"Cannot process [java.version] property, unknown format: [$raw]"
-        )
     }
   }
 
   private val PrintJavaVersion = """
       public class PrintJavaVersion {
         public static void main(String[] args) {
-          System.out.print(System.getProperty("java.version"));
+          System.out.print(Runtime.version().feature());
         }
       }
-
   """
 }
