@@ -1,6 +1,7 @@
 package com.sourcegraph.semanticdb_kotlinc
 
 import com.sourcegraph.semanticdb.Semanticdb
+import com.sourcegraph.semanticdb.SemanticdbOptions
 
 import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
@@ -14,13 +15,16 @@ import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrarAdapter
 class AnalyzerRegistrar(private val callback: (Semanticdb.TextDocument) -> Unit = {}) :
     CompilerPluginRegistrar() {
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
-        FirExtensionRegistrarAdapter.registerExtension(
-            AnalyzerFirExtensionRegistrar(sourceroot = configuration[KEY_SOURCES]!!)
-        )
+        val options =
+            SemanticdbOptions().apply {
+                sourceroot = configuration[KEY_SOURCES]!!
+                targetroot = configuration[KEY_TARGET]!!
+            }
+        FirExtensionRegistrarAdapter.registerExtension(AnalyzerFirExtensionRegistrar(options))
         IrGenerationExtension.registerExtension(
             PostAnalysisExtension(
-                sourceRoot = configuration[KEY_SOURCES]!!,
-                targetRoot = configuration[KEY_TARGET]!!,
+                sourceRoot = options.sourceroot,
+                targetRoot = options.targetroot,
                 callback = callback))
     }
 

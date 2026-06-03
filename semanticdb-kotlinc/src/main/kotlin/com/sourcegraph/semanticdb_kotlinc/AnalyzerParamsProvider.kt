@@ -1,5 +1,6 @@
 package com.sourcegraph.semanticdb_kotlinc
 
+import com.sourcegraph.semanticdb.SemanticdbOptions
 import java.nio.file.Path
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.extensions.FirExtensionSessionComponent
@@ -7,11 +8,13 @@ import org.jetbrains.kotlin.fir.extensions.FirExtensionSessionComponent.Factory
 
 open class AnalyzerParamsProvider(
     session: FirSession,
-    val sourceroot: Path,
+    val options: SemanticdbOptions,
 ) : FirExtensionSessionComponent(session) {
+    val sourceroot: Path get() = options.sourceroot
+
     companion object {
-        fun getFactory(sourceroot: Path): Factory {
-            return Factory { AnalyzerParamsProvider(it, sourceroot) }
+        fun getFactory(options: SemanticdbOptions): Factory {
+            return Factory { AnalyzerParamsProvider(it, options) }
         }
     }
 }

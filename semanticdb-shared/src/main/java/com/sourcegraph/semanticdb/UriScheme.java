@@ -1,4 +1,4 @@
-package com.sourcegraph.semanticdb_javac;
+package com.sourcegraph.semanticdb;
 
 public enum UriScheme {
   DEFAULT,

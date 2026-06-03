@@ -1,5 +1,9 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.NoRelativePathMode;
+import com.sourcegraph.semanticdb.SemanticdbOptions;
+import com.sourcegraph.semanticdb.UriScheme;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
@@ -16,23 +20,12 @@ import static javax.tools.StandardLocation.CLASS_OUTPUT;
 import static javax.tools.StandardLocation.SOURCE_OUTPUT;
 
 /** Settings that can be configured alongside the -Xplugin compiler option. */
-public class SemanticdbJavacOptions {
+public class SemanticdbJavacOptions extends SemanticdbOptions {
 
-  /** The directory to place META-INF and its .semanticdb files */
-  public Path targetroot;
-
-  public Path sourceroot;
-  public boolean includeText = false;
   public boolean verboseEnabled = false;
-  public final ArrayList<String> errors;
+  public final ArrayList<String> errors = new ArrayList<>();
   public boolean alreadyReportedErrors = false;
-  public UriScheme uriScheme = UriScheme.DEFAULT;
-  public NoRelativePathMode noRelativePath = NoRelativePathMode.INDEX_ANYWAY;
   public Path generatedTargetRoot;
-
-  public SemanticdbJavacOptions() {
-    errors = new ArrayList<>();
-  }
 
   public static String missingRequiredDirectoryOption(String option) {
     return String.format(

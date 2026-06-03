@@ -1,5 +1,6 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.LocalSymbolsCache;
 import com.sourcegraph.semanticdb.Semanticdb;
 
 import com.sun.source.tree.*;
@@ -22,7 +23,7 @@ import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.ARRAY_SYMBO
 public class SemanticdbTrees {
   public SemanticdbTrees(
       GlobalSymbolsCache globals,
-      LocalSymbolsCache locals,
+      LocalSymbolsCache<Element, String> locals,
       String semanticdbUri,
       Types types,
       Trees trees,
@@ -37,7 +38,7 @@ public class SemanticdbTrees {
   }
 
   private final GlobalSymbolsCache globals;
-  private final LocalSymbolsCache locals;
+  private final LocalSymbolsCache<Element, String> locals;
   private final String semanticdbUri;
   private final Types types;
   private final Trees trees;

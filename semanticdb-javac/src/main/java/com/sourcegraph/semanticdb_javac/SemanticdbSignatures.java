@@ -1,5 +1,6 @@
 package com.sourcegraph.semanticdb_javac;
 
+import com.sourcegraph.semanticdb.LocalSymbolsCache;
 import com.sourcegraph.semanticdb.Semanticdb;
 
 import com.sourcegraph.semanticdb.Semanticdb.*;
@@ -20,10 +21,11 @@ import static com.sourcegraph.semanticdb_javac.SemanticdbTypeVisitor.UNRESOLVED_
 
 public final class SemanticdbSignatures {
   private final GlobalSymbolsCache cache;
-  private final LocalSymbolsCache locals;
+  private final LocalSymbolsCache<Element, String> locals;
   private final Types types;
 
-  public SemanticdbSignatures(GlobalSymbolsCache cache, LocalSymbolsCache locals, Types types) {
+  public SemanticdbSignatures(
+      GlobalSymbolsCache cache, LocalSymbolsCache<Element, String> locals, Types types) {
     this.cache = cache;
     this.locals = locals;
     this.types = types;
