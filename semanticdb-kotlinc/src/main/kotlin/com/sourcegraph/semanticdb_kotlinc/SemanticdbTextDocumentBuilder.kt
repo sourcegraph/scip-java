@@ -3,9 +3,10 @@ package com.sourcegraph.semanticdb_kotlinc
 import com.sourcegraph.semanticdb.Semanticdb
 
 import com.sourcegraph.semanticdb.Semanticdb.SymbolOccurrence.Role
+import com.sourcegraph.semanticdb.SemanticdbMd5
+import com.sourcegraph.semanticdb.SemanticdbPaths
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.security.MessageDigest
 import kotlin.contracts.ExperimentalContracts
 import org.jetbrains.kotlin.KtSourceElement
 import org.jetbrains.kotlin.KtSourceFile
@@ -147,16 +148,11 @@ class SemanticdbTextDocumentBuilder(
         }
     }
 
-    private fun semanticdbURI(): String {
-        // TODO: unix-style only
-        val relative = sourceroot.relativize(Paths.get(file.path))
-        return relative.toString()
-    }
+    private fun semanticdbURI(): String =
+        SemanticdbPaths.semanticdbUri(sourceroot, Paths.get(file.path))
 
     private fun semanticdbMD5(): String =
-        MessageDigest.getInstance("MD5")
-            .digest(file.getContentsAsStream().readBytes())
-            .joinToString("") { "%02X".format(it) }
+        SemanticdbMd5.digest(file.getContentsAsStream().readBytes())
 
     private fun semanticdbDocumentation(element: FirElement): Semanticdb.Documentation = Documentation {
         format = Semanticdb.Documentation.Format.MARKDOWN

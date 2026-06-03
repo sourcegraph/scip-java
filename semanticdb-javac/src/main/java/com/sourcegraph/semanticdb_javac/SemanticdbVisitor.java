@@ -2,6 +2,8 @@ package com.sourcegraph.semanticdb_javac;
 
 import com.sourcegraph.semanticdb.Semanticdb;
 
+import com.sourcegraph.semanticdb.SemanticdbMd5;
+import com.sourcegraph.semanticdb.SemanticdbPaths;
 import com.sourcegraph.semanticdb.SemanticdbSymbols;
 
 import com.sun.source.util.SourcePositions;
@@ -51,8 +53,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Iterator;
-import java.security.NoSuchAlgorithmException;
 import java.util.stream.Collectors;
 
 import static com.sourcegraph.semanticdb.SemanticdbBuilders.*;
@@ -560,8 +560,8 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
 
   private String semanticdbMd5() {
     try {
-      return MD5.digest(compUnitTree.getSourceFile().getCharContent(true).toString());
-    } catch (IOException | NoSuchAlgorithmException e) {
+      return SemanticdbMd5.digest(compUnitTree.getSourceFile().getCharContent(true).toString());
+    } catch (IOException e) {
       return "";
     }
   }
@@ -667,18 +667,7 @@ public class SemanticdbVisitor extends TreePathScanner<Void, Void> {
       CompilationUnitTree compUnitTree, SemanticdbJavacOptions options) {
     Path absolutePath =
         SemanticdbTaskListener.absolutePathFromUri(options, compUnitTree.getSourceFile());
-    Path uriPath =
-        absolutePath.startsWith(options.sourceroot)
-            ? options.sourceroot.relativize(absolutePath)
-            : absolutePath;
-    StringBuilder out = new StringBuilder();
-    Iterator<Path> it = uriPath.iterator();
-    if (it.hasNext()) out.append(it.next().getFileName().toString());
-    while (it.hasNext()) {
-      Path part = it.next();
-      out.append('/').append(part.getFileName().toString());
-    }
-    return out.toString();
+    return SemanticdbPaths.semanticdbUri(options.sourceroot, absolutePath);
   }
 
   private Semanticdb.Documentation semanticdbDocumentation(Tree tree) {
